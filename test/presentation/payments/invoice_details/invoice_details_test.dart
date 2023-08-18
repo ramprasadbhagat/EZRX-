@@ -7,36 +7,27 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
 class CreditAndInvoiceDetailsBlocMock
     extends MockBloc<CreditAndInvoiceDetailsEvent, CreditAndInvoiceDetailsState>
     implements CreditAndInvoiceDetailsBloc {}
 
-// class CustomerCodeBlocMock
-//     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-//     implements CustomerCodeBloc {}
-
-// class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
-
-// class AnnouncementBlocMock
-//     extends MockBloc<AnnouncementEvent, AnnouncementState>
-//     implements AnnouncementBloc {}
-
-// class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-// class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-//     implements EligibilityBloc {}
 
 void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
@@ -44,18 +35,17 @@ void main() {
 
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
-  // late AppRouter autoRouterMock;
+  late AppRouter autoRouterMock;
   final locator = GetIt.instance;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
-  // late CreditAndInvoiceItem fakeInvoice;
-  // late List<CustomerDocumentDetail> fakeCreditAndInvoiceDetails;
+  late CreditAndInvoiceItem fakeInvoice;
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => MixpanelService());
-    // autoRouterMock = locator<AppRouter>();
+    autoRouterMock = locator<AppRouter>();
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
@@ -70,16 +60,12 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
 
-    // fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
-    //   bpCustomerNumber: '0030032223',
-    //   fiscalYear: '2023',
-    //   accountingDocument: '1080005528',
-    //   accountingDocumentItem: '001',
-    //   invoiceProcessingStatus: StatusType('Cleared'),
-    // );
-    // fakeCreditAndInvoiceDetails = <CustomerDocumentDetail>[
-    //   CustomerDocumentDetail.empty(),
-    // ];
+    fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
+      bpCustomerNumber: '0030032223',
+      fiscalYear: '2023',
+      accountingDocumentItem: '001',
+      invoiceProcessingStatus: StatusType('Cleared'),
+    );
 
     when(() => creditAndInvoiceDetailsBlocMock.state)
         .thenReturn(CreditAndInvoiceDetailsState.initial());
@@ -95,51 +81,58 @@ void main() {
         .thenReturn(EligibilityState.initial());
   });
 
-  // Future getWidget(tester) async {
-  //   return tester.pumpWidget(
-  //     WidgetUtils.getScopedWidget(
-  //       autoRouterMock: autoRouterMock,
-  //       providers: [
-  //         BlocProvider<CreditAndInvoiceDetailsBloc>(
-  //           create: (context) => creditAndInvoiceDetailsBlocMock,
-  //         ),
-  //         BlocProvider<CustomerCodeBloc>(
-  //           create: (context) => customerCodeBlocMock,
-  //         ),
-  //         BlocProvider<UserBloc>(
-  //           create: (context) => userBlocMock,
-  //         ),
-  //         BlocProvider<SalesOrgBloc>(
-  //           create: (context) => salesOrgBlocMock,
-  //         ),
-  //         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-  //         BlocProvider<AnnouncementBloc>(
-  //             create: (context) => announcementBlocMock),
-  //         BlocProvider<EligibilityBloc>(
-  //             create: (context) => eligibilityBlocMock),
-  //       ],
-  //       child: InvoiceDetailsPage(
-  //         invoiceItem: fakeInvoice,
-  //       ),
-  //     ),
-  //   );
-  // }
+  Future getWidget(tester) async {
+    return tester.pumpWidget(
+      WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        providers: [
+          BlocProvider<CreditAndInvoiceDetailsBloc>(
+            create: (context) => creditAndInvoiceDetailsBlocMock,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<UserBloc>(
+            create: (context) => userBlocMock,
+          ),
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => salesOrgBlocMock,
+          ),
+          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+          BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+        ],
+        child: InvoiceDetailsPage(
+          invoiceItem: fakeInvoice,
+        ),
+      ),
+    );
+  }
 
-  // group('Invoice Details Screen Test', () {
-  // testWidgets('=> AppBar Test', (tester) async {
-  //   when(() => creditAndInvoiceDetailsBlocMock.state)
-  //       .thenReturn(CreditAndInvoiceDetailsState.initial().copyWith(
-  //     isLoading: true,
-  //   ));
+  group('Invoice Details Screen Test', () {
+    testWidgets('=> LoadingImage  Test', (tester) async {
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
 
-  //   await getWidget(tester);
+      await getWidget(tester);
+      final loaderImage = find.byKey(
+        WidgetKeys.loaderImage,
+      );
+      expect(loaderImage, findsOneWidget);
+      final viewByOrderDetailsPageListView =
+          find.byKey(WidgetKeys.invoiceDetailsPageListView);
+      expect(viewByOrderDetailsPageListView, findsNothing);
 
-  //   await tester.pump(const Duration(milliseconds: 100));
-
-  //   final accountingDocumentText =
-  //       find.text('#${fakeInvoice.accountingDocument}');
-  //   expect(accountingDocumentText, findsOneWidget);
-  // });
+      await tester.pump();
+    });
+  });
 
   // testWidgets('=> BasicInformationSection test', (tester) async {
   //   final expectedState = [

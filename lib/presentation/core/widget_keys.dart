@@ -300,6 +300,9 @@ class WidgetKeys {
   static const Key toDueDateField = Key('toDueDateField');
   static const Key amountValueFrom = Key('amountValueFrom');
   static const Key amountValueTo = Key('amountValueTo');
+  static const Key invoiceDetailsPageListView =
+      Key('invoiceDetailsPageListView');
+
   //============================================================
   //  BundleDetails Keys
   //============================================================
@@ -318,7 +321,6 @@ class WidgetKeys {
   static const Key orderPriceLoading = Key('priceLoading');
   static const Key startBrowsingViewByItem = Key('startBrowsingViewByItem');
   static const Key orderSuccess = Key('orderSuccessKey');
-  
 
   //============================================================
   //  Order History
@@ -326,6 +328,8 @@ class WidgetKeys {
 
   static const Key fromOrderDateField = Key('fromOrderDateField');
   static const Key toOrderDateField = Key('toOrderDateField');
+  static const Key viewByOrderDetailsPageListView =
+      Key('viewByOrderDetailsPageListView');
 
   //============================================================
   //  Material Details
