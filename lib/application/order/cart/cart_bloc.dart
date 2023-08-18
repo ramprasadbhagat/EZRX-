@@ -551,6 +551,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 salesOrgConfig: e.salesOrganisationConfigs,
               );
             }
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: none(),
+                isUpserting: false,
+              ),
+            );
             add(
               _VerifyMaterialDealBonus(
                 item: cartProductListTemp
@@ -566,12 +572,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 salesOrganisation: e.salesOrganisation,
                 customerCodeInfo: e.customerCodeInfo,
                 shipToInfo: e.shipToInfo,
-              ),
-            );
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: none(),
-                isUpserting: false,
               ),
             );
           },
@@ -724,7 +724,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 cartProductList[i].copyWith(price: e.overriddenProductPrice);
           }
         }
-
+        emit(
+          state.copyWith(
+            isMappingPrice: false,
+          ),
+        );
         add(
           _VerifyMaterialDealBonus(
             item: PriceAggregate.empty(),
@@ -733,12 +737,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             salesOrganisation: e.salesOrganisation,
             customerCodeInfo: e.customerCodeInfo,
             shipToInfo: e.shipToInfo,
-          ),
-        );
-        emit(
-          state.copyWith(
-            isMappingPrice: false,
-            // cartProducts: cartProductList,
           ),
         );
       },
