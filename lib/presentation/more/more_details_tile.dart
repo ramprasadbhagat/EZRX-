@@ -162,13 +162,12 @@ class MoreDetailsTile {
       MoreDetailsTile(
         icon: const Icon(
           Icons.campaign_outlined,
-          color: ZPColors.lightGray,
+          color: ZPColors.greenIconColor,
         ),
         label: 'Announcements & articles',
-        labelStyle: Theme.of(context)
-            .textTheme
-            .bodySmall!
-            .copyWith(fontSize: 10, color: ZPColors.lightGray),
+        onTap: () => context.navigateTo(const AnnouncementsPageRoute()),
+        labelStyle:
+            Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10),
       );
 
   factory MoreDetailsTile.profile(BuildContext context) => MoreDetailsTile(
@@ -207,15 +206,14 @@ class MoreDetailsTile {
         label: 'Security',
       );
 
-  factory MoreDetailsTile.notifications() => const MoreDetailsTile(
-        icon: Icon(
+  factory MoreDetailsTile.notifications(BuildContext context) =>
+      MoreDetailsTile(
+        icon: const Icon(
           Icons.notifications_none_outlined,
-          color: ZPColors.lightGray,
+          color: ZPColors.greenIconColor,
         ),
         label: 'Notifications',
-        // onTap: () => context.navigateTo(
-        //   const NotificationSettingsPageRoute(),
-        // ),
+        onTap: () => context.navigateTo(const NotificationTabRoute()),
       );
 
   factory MoreDetailsTile.privacy() => const MoreDetailsTile(

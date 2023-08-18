@@ -49,7 +49,7 @@ class SettingsTile extends StatelessWidget {
   List<MoreDetailsTile> _moreSettingTiles(BuildContext context) => [
         MoreDetailsTile.profile(context),
         MoreDetailsTile.security(),
-        MoreDetailsTile.notifications(),
+        MoreDetailsTile.notifications(context),
         MoreDetailsTile.privacy(),
       ];
 }
