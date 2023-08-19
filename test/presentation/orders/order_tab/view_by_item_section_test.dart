@@ -89,7 +89,7 @@ void main() {
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());
     registerFallbackValue(ShipToInfo.empty());
-    orderHistory = await OrderHistoryLocalDataSource().getOrderHistory();
+    orderHistory = await ViewByItemLocalDataSource().getViewByItems();
 
     autoRouterMock = locator<AppRouter>();
   });

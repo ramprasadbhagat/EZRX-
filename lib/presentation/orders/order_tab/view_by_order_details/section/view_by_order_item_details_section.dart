@@ -13,7 +13,7 @@ class OrderItemDetailsSection extends StatelessWidget {
     Key? key,
     required this.viewByOrderHistoryGroupList,
   }) : super(key: key);
-  final List<ViewByOrderHistoryGroup> viewByOrderHistoryGroupList;
+  final List<ViewByOrdersGroup> viewByOrderHistoryGroupList;
 
   @override
   Widget build(BuildContext context) {

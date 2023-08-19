@@ -61,7 +61,7 @@ void main() {
   late SalesOrganisation mockSalesOrganisation;
   late MixpanelService mixpanelService;
   late CartRemoteDataSource cartRemoteDataSource;
-  late OrderHistoryLocalDataSource orderHistoryLocalDataSource;
+  late ViewByItemLocalDataSource orderHistoryLocalDataSource;
   late OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
 
   final fakeShipToInfo = ShipToInfo.empty().copyWith(
@@ -95,7 +95,7 @@ void main() {
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
       cartRemoteDataSource: cartRemoteDataSource,
-      orderHistoryLocalDataSource: orderHistoryLocalDataSource,
+      viewByItemLocalDataSource: orderHistoryLocalDataSource,
       orderHistoryRemoteDataSource: orderHistoryRemoteDataSource,
     );
     mockSalesOrg = SalesOrg('2601');

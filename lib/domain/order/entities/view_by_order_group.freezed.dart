@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ViewByOrderHistoryGroup {
+mixin _$ViewByOrdersGroup {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   PrincipalName get principalName => throw _privateConstructorUsedError;
   List<OrderHistoryDetailsOrderHeader> get orderHeaders =>
@@ -24,15 +24,15 @@ mixin _$ViewByOrderHistoryGroup {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ViewByOrderHistoryGroupCopyWith<ViewByOrderHistoryGroup> get copyWith =>
+  $ViewByOrdersGroupCopyWith<ViewByOrdersGroup> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ViewByOrderHistoryGroupCopyWith<$Res> {
-  factory $ViewByOrderHistoryGroupCopyWith(ViewByOrderHistoryGroup value,
-          $Res Function(ViewByOrderHistoryGroup) then) =
-      _$ViewByOrderHistoryGroupCopyWithImpl<$Res, ViewByOrderHistoryGroup>;
+abstract class $ViewByOrdersGroupCopyWith<$Res> {
+  factory $ViewByOrdersGroupCopyWith(
+          ViewByOrdersGroup value, $Res Function(ViewByOrdersGroup) then) =
+      _$ViewByOrdersGroupCopyWithImpl<$Res, ViewByOrdersGroup>;
   @useResult
   $Res call(
       {DateTimeStringValue createdDate,
@@ -42,10 +42,9 @@ abstract class $ViewByOrderHistoryGroupCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ViewByOrderHistoryGroupCopyWithImpl<$Res,
-        $Val extends ViewByOrderHistoryGroup>
-    implements $ViewByOrderHistoryGroupCopyWith<$Res> {
-  _$ViewByOrderHistoryGroupCopyWithImpl(this._value, this._then);
+class _$ViewByOrdersGroupCopyWithImpl<$Res, $Val extends ViewByOrdersGroup>
+    implements $ViewByOrdersGroupCopyWith<$Res> {
+  _$ViewByOrdersGroupCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -82,11 +81,11 @@ class _$ViewByOrderHistoryGroupCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ViewByOrderHistoryGroupCopyWith<$Res>
-    implements $ViewByOrderHistoryGroupCopyWith<$Res> {
-  factory _$$_ViewByOrderHistoryGroupCopyWith(_$_ViewByOrderHistoryGroup value,
-          $Res Function(_$_ViewByOrderHistoryGroup) then) =
-      __$$_ViewByOrderHistoryGroupCopyWithImpl<$Res>;
+abstract class _$$_ViewByOrdersGroupCopyWith<$Res>
+    implements $ViewByOrdersGroupCopyWith<$Res> {
+  factory _$$_ViewByOrdersGroupCopyWith(_$_ViewByOrdersGroup value,
+          $Res Function(_$_ViewByOrdersGroup) then) =
+      __$$_ViewByOrdersGroupCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -97,12 +96,11 @@ abstract class _$$_ViewByOrderHistoryGroupCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByOrderHistoryGroupCopyWithImpl<$Res>
-    extends _$ViewByOrderHistoryGroupCopyWithImpl<$Res,
-        _$_ViewByOrderHistoryGroup>
-    implements _$$_ViewByOrderHistoryGroupCopyWith<$Res> {
-  __$$_ViewByOrderHistoryGroupCopyWithImpl(_$_ViewByOrderHistoryGroup _value,
-      $Res Function(_$_ViewByOrderHistoryGroup) _then)
+class __$$_ViewByOrdersGroupCopyWithImpl<$Res>
+    extends _$ViewByOrdersGroupCopyWithImpl<$Res, _$_ViewByOrdersGroup>
+    implements _$$_ViewByOrdersGroupCopyWith<$Res> {
+  __$$_ViewByOrdersGroupCopyWithImpl(
+      _$_ViewByOrdersGroup _value, $Res Function(_$_ViewByOrdersGroup) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -113,7 +111,7 @@ class __$$_ViewByOrderHistoryGroupCopyWithImpl<$Res>
     Object? orderHeaders = null,
     Object? viewByOrderItem = null,
   }) {
-    return _then(_$_ViewByOrderHistoryGroup(
+    return _then(_$_ViewByOrdersGroup(
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -136,8 +134,8 @@ class __$$_ViewByOrderHistoryGroupCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByOrderHistoryGroup implements _ViewByOrderHistoryGroup {
-  _$_ViewByOrderHistoryGroup(
+class _$_ViewByOrdersGroup implements _ViewByOrdersGroup {
+  _$_ViewByOrdersGroup(
       {required this.createdDate,
       required this.principalName,
       required final List<OrderHistoryDetailsOrderHeader> orderHeaders,
@@ -167,14 +165,14 @@ class _$_ViewByOrderHistoryGroup implements _ViewByOrderHistoryGroup {
 
   @override
   String toString() {
-    return 'ViewByOrderHistoryGroup(createdDate: $createdDate, principalName: $principalName, orderHeaders: $orderHeaders, viewByOrderItem: $viewByOrderItem)';
+    return 'ViewByOrdersGroup(createdDate: $createdDate, principalName: $principalName, orderHeaders: $orderHeaders, viewByOrderItem: $viewByOrderItem)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByOrderHistoryGroup &&
+            other is _$_ViewByOrdersGroup &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
             (identical(other.principalName, principalName) ||
@@ -196,19 +194,18 @@ class _$_ViewByOrderHistoryGroup implements _ViewByOrderHistoryGroup {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByOrderHistoryGroupCopyWith<_$_ViewByOrderHistoryGroup>
-      get copyWith =>
-          __$$_ViewByOrderHistoryGroupCopyWithImpl<_$_ViewByOrderHistoryGroup>(
-              this, _$identity);
+  _$$_ViewByOrdersGroupCopyWith<_$_ViewByOrdersGroup> get copyWith =>
+      __$$_ViewByOrdersGroupCopyWithImpl<_$_ViewByOrdersGroup>(
+          this, _$identity);
 }
 
-abstract class _ViewByOrderHistoryGroup implements ViewByOrderHistoryGroup {
-  factory _ViewByOrderHistoryGroup(
+abstract class _ViewByOrdersGroup implements ViewByOrdersGroup {
+  factory _ViewByOrdersGroup(
           {required final DateTimeStringValue createdDate,
           required final PrincipalName principalName,
           required final List<OrderHistoryDetailsOrderHeader> orderHeaders,
           required final List<OrderHistoryDetailsOrderItem> viewByOrderItem}) =
-      _$_ViewByOrderHistoryGroup;
+      _$_ViewByOrdersGroup;
 
   @override
   DateTimeStringValue get createdDate;
@@ -220,6 +217,6 @@ abstract class _ViewByOrderHistoryGroup implements ViewByOrderHistoryGroup {
   List<OrderHistoryDetailsOrderItem> get viewByOrderItem;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByOrderHistoryGroupCopyWith<_$_ViewByOrderHistoryGroup>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_ViewByOrdersGroupCopyWith<_$_ViewByOrdersGroup> get copyWith =>
+      throw _privateConstructorUsedError;
 }

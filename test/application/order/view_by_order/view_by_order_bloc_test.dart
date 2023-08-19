@@ -11,7 +11,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_repository.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +50,8 @@ void main() {
     start: fakeFromDate,
     end: fakeToDate,
   );
-  final viewByOrderHistoryFilter =
-      ViewByOrderHistoryFilter.empty().copyWith(dateRange: dateTimeRange);
+  final viewByOrdersFilter =
+      ViewByOrdersFilter.empty().copyWith(dateRange: dateTimeRange);
 
   const offSet = 0;
   const pageSize = 24;
@@ -59,7 +59,8 @@ void main() {
     setUp(() async {
       viewByOrderRepository = ViewByOrderRepositoryMock();
       viewByOrderMockData =
-          await ViewByOrderLocalDataSource().getViewByOrderHistory();
+          await ViewByOrderLocalDataSource().getViewByOrders();
+
       WidgetsFlutterBinding.ensureInitialized();
     });
 
@@ -78,7 +79,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => viewByOrderRepository.getViewByOrderHistory(
+          () => viewByOrderRepository.getViewByOrders(
             orderBy: 'datetime',
             salesOrgConfig: salesOrgConfig,
             soldTo: customerCodeInfo,
@@ -88,9 +89,8 @@ void main() {
             offset: offSet,
             sort: 'desc',
             searchKey: searchKey,
-            creatingOrderIds: <String>[],
             viewByOrder: ViewByOrder.empty(),
-            viewByOrderHistoryFilter: viewByOrderHistoryFilter,
+            viewByOrdersFilter: viewByOrdersFilter,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -105,7 +105,7 @@ void main() {
           shipToInfo: shipToInfo,
           user: user,
           sortDirection: 'desc',
-          filter: viewByOrderHistoryFilter,
+          filter: viewByOrdersFilter,
           searchKey: SearchKey.searchFilter('fake-key'),
         ),
       ),
@@ -113,7 +113,7 @@ void main() {
         ViewByOrderState.initial().copyWith(
           isFetching: true,
           searchKey: searchKey,
-          appliedFilter: viewByOrderHistoryFilter,
+          appliedFilter: viewByOrdersFilter,
         ),
         ViewByOrderState.initial().copyWith(
           failureOrSuccessOption: optionOf(
@@ -121,7 +121,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-          appliedFilter: viewByOrderHistoryFilter,
+          appliedFilter: viewByOrdersFilter,
           isFetching: false,
           searchKey: searchKey,
         )
@@ -135,7 +135,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => viewByOrderRepository.getViewByOrderHistory(
+          () => viewByOrderRepository.getViewByOrders(
             orderBy: 'datetime',
             salesOrgConfig: salesOrgConfig,
             soldTo: customerCodeInfo,
@@ -145,9 +145,8 @@ void main() {
             offset: offSet,
             sort: 'desc',
             searchKey: searchKey,
-            creatingOrderIds: <String>[],
             viewByOrder: ViewByOrder.empty(),
-            viewByOrderHistoryFilter: viewByOrderHistoryFilter,
+            viewByOrdersFilter: viewByOrdersFilter,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -162,18 +161,18 @@ void main() {
           shipToInfo: shipToInfo,
           user: user,
           sortDirection: 'desc',
-          filter: viewByOrderHistoryFilter,
+          filter: viewByOrdersFilter,
           searchKey: SearchKey.searchFilter('fake-key'),
         ),
       ),
       expect: () => [
         ViewByOrderState.initial().copyWith(
           isFetching: true,
-          appliedFilter: viewByOrderHistoryFilter,
+          appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
         ),
         ViewByOrderState.initial().copyWith(
-          appliedFilter: viewByOrderHistoryFilter,
+          appliedFilter: viewByOrdersFilter,
           isFetching: false,
           nextPageIndex: 0,
           viewByOrderList: viewByOrderMockData,
@@ -181,32 +180,30 @@ void main() {
         ),
       ],
     );
-
     blocTest<ViewByOrderBloc, ViewByOrderState>(
       ' -> Orders view by order loadMore',
       build: () => ViewByOrderBloc(
         viewByOrderRepository: viewByOrderRepository,
       ),
       seed: () => ViewByOrderState.initial().copyWith(
-        appliedFilter: viewByOrderHistoryFilter,
+        appliedFilter: viewByOrdersFilter,
         viewByOrderList: viewByOrderMockData,
         searchKey: searchKey,
       ),
       setUp: () {
         when(
-          () => viewByOrderRepository.getViewByOrderHistory(
-            orderBy: 'datetime',
+          () => viewByOrderRepository.getViewByOrders(
             salesOrgConfig: salesOrgConfig,
             soldTo: customerCodeInfo,
             shipTo: shipToInfo,
             user: user,
             pageSize: pageSize,
-            offset: offSet,
+            offset: viewByOrderMockData.orderHeaders.length,
+            viewByOrdersFilter: viewByOrdersFilter,
+            orderBy: 'datetime',
             sort: 'desc',
             searchKey: searchKey,
-            creatingOrderIds: <String>[],
-            viewByOrder: ViewByOrder.empty(),
-            viewByOrderHistoryFilter: viewByOrderHistoryFilter,
+            viewByOrder: viewByOrderMockData,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -229,49 +226,47 @@ void main() {
           nextPageIndex: 0,
           canLoadMore: true,
           viewByOrderList: viewByOrderMockData,
-          appliedFilter: viewByOrderHistoryFilter,
+          appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
         ),
         ViewByOrderState.initial().copyWith(
-          appliedFilter: viewByOrderHistoryFilter,
+          appliedFilter: viewByOrdersFilter,
           nextPageIndex: 1,
           canLoadMore: false,
           viewByOrderList: viewByOrderMockData.copyWith(
             orderHeaders: [
               ...viewByOrderMockData.orderHeaders,
-              ...viewByOrderMockData.orderHeaders
+             
             ],
           ),
           searchKey: searchKey,
         ),
       ],
     );
-
     blocTest<ViewByOrderBloc, ViewByOrderState>(
       ' -> Orders view by order loadMore failure',
       build: () => ViewByOrderBloc(
         viewByOrderRepository: viewByOrderRepository,
       ),
       seed: () => ViewByOrderState.initial().copyWith(
-        appliedFilter: viewByOrderHistoryFilter,
+        appliedFilter: viewByOrdersFilter,
         viewByOrderList: viewByOrderMockData,
         searchKey: searchKey,
       ),
       setUp: () {
         when(
-          () => viewByOrderRepository.getViewByOrderHistory(
+          () => viewByOrderRepository.getViewByOrders(
             orderBy: 'datetime',
             salesOrgConfig: salesOrgConfig,
             soldTo: customerCodeInfo,
             shipTo: shipToInfo,
             user: user,
             pageSize: pageSize,
-            offset: offSet,
+             offset: viewByOrderMockData.orderHeaders.length,
             sort: 'desc',
             searchKey: searchKey,
-            creatingOrderIds: <String>[],
-            viewByOrder: ViewByOrder.empty(),
-            viewByOrderHistoryFilter: viewByOrderHistoryFilter,
+            viewByOrder: viewByOrderMockData,
+            viewByOrdersFilter: viewByOrdersFilter,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -291,7 +286,7 @@ void main() {
           isFetching: true,
           nextPageIndex: 0,
           viewByOrderList: viewByOrderMockData,
-          appliedFilter: viewByOrderHistoryFilter,
+          appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
         ),
         ViewByOrderState.initial().copyWith(
@@ -301,7 +296,7 @@ void main() {
             ),
           ),
           viewByOrderList: viewByOrderMockData,
-          appliedFilter: viewByOrderHistoryFilter,
+          appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
         )
       ],

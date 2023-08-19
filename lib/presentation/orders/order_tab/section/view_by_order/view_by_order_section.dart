@@ -10,7 +10,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -56,7 +56,7 @@ class ViewByOrdersPage extends StatelessWidget {
           );
         }
 
-        return ScrollList<ViewByOrderHistoryGroup>(
+        return ScrollList<ViewByOrdersGroup>(
           controller: ScrollController(),
           noRecordFoundWidget: const NoRecordFound(title: 'No orders found'),
           onRefresh: () {
@@ -69,7 +69,7 @@ class ViewByOrdersPage extends StatelessWidget {
                         context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
                     sortDirection: 'desc',
-                    filter: ViewByOrderHistoryFilter.empty(),
+                    filter: ViewByOrdersFilter.empty(),
                     searchKey: SearchKey.searchFilter(''),
                   ),
                 );
@@ -86,7 +86,7 @@ class ViewByOrdersPage extends StatelessWidget {
                 ),
               ),
           itemBuilder: (context, index, item) => _ViewByOrderGroup(
-            viewByOrderHistoryItem: item,
+            viewByOrdersItem: item,
             showDivider: index != 0,
             orderHistoryItem: orderHistoryItem,
           ),
@@ -98,13 +98,13 @@ class ViewByOrdersPage extends StatelessWidget {
 }
 
 class _ViewByOrderGroup extends StatelessWidget {
-  final ViewByOrderHistoryGroup viewByOrderHistoryItem;
+  final ViewByOrdersGroup viewByOrdersItem;
   final OrderHistoryItem orderHistoryItem;
 
   final bool showDivider;
   const _ViewByOrderGroup({
     Key? key,
-    required this.viewByOrderHistoryItem,
+    required this.viewByOrdersItem,
     required this.showDivider,
     required this.orderHistoryItem,
   }) : super(key: key);
@@ -128,17 +128,17 @@ class _ViewByOrderGroup extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
-                  'Ordered on ${viewByOrderHistoryItem.createdDate.dateString}',
+                  '${'Ordered on'.tr()} ${viewByOrdersItem.createdDate.dateString}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkerGrey,
                       ),
                 ),
               ),
               Column(
-                children: viewByOrderHistoryItem.orderHeaders
+                children: viewByOrdersItem.orderHeaders
                     .map(
                       (e) => _ViewByOrder(
-                        viewByOrderHistoryItem: e,
+                        viewByOrdersItem: e,
                         orderHistoryItem: orderHistoryItem,
                       ),
                     )
@@ -153,12 +153,12 @@ class _ViewByOrderGroup extends StatelessWidget {
 }
 
 class _ViewByOrder extends StatelessWidget {
-  final OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
+  final OrderHistoryDetailsOrderHeader viewByOrdersItem;
   final OrderHistoryItem orderHistoryItem;
 
   const _ViewByOrder({
     Key? key,
-    required this.viewByOrderHistoryItem,
+    required this.viewByOrdersItem,
     required this.orderHistoryItem,
   }) : super(key: key);
 
@@ -177,12 +177,12 @@ class _ViewByOrder extends StatelessWidget {
                 context.read<ViewByOrderDetailsBloc>().add(
                       ViewByOrderDetailsEvent.fetch(
                         user: context.read<UserBloc>().state.user,
-                        orderHeader: viewByOrderHistoryItem,
+                        orderHeader: viewByOrdersItem,
                       ),
                     );
                 context.router.push(
                   ViewByOrderDetailsPageRoute(
-                    viewByOrderHistoryItem: viewByOrderHistoryItem,
+                    viewByOrdersItem: viewByOrdersItem,
                   ),
                 );
               },
@@ -191,7 +191,7 @@ class _ViewByOrder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Order #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                    '${'Order #'.tr()}${viewByOrdersItem.orderNumber.getOrDefaultValue('')}',
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                   Padding(
@@ -200,12 +200,12 @@ class _ViewByOrder extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${viewByOrderHistoryItem.materialCount} items',
+                          '${viewByOrdersItem.itemCount} ${'items'.tr()}',
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         PriceComponent(
                           salesOrgConfig: salesOrgConfigs,
-                          price: viewByOrderHistoryItem.orderValue.toString(),
+                          price: viewByOrdersItem.orderValue.toString(),
                           title: 'Order total : ',
                           priceLabelStyle:
                               Theme.of(context).textTheme.titleSmall?.copyWith(

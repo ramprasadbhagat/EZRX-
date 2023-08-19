@@ -7,15 +7,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'view_by_order_group.freezed.dart';
 
 @freezed
-class ViewByOrderHistoryGroup with _$ViewByOrderHistoryGroup {
-  factory ViewByOrderHistoryGroup({
+class ViewByOrdersGroup with _$ViewByOrdersGroup {
+  factory ViewByOrdersGroup({
     required DateTimeStringValue createdDate,
     required PrincipalName principalName,
     required List<OrderHistoryDetailsOrderHeader> orderHeaders,
     required List<OrderHistoryDetailsOrderItem> viewByOrderItem,
-  }) = _ViewByOrderHistoryGroup;
+  }) = _ViewByOrdersGroup;
 
-  factory ViewByOrderHistoryGroup.empty() => ViewByOrderHistoryGroup(
+  factory ViewByOrdersGroup.empty() => ViewByOrdersGroup(
         createdDate: DateTimeStringValue(''),
         orderHeaders: <OrderHistoryDetailsOrderHeader>[],
         principalName: PrincipalName(''),

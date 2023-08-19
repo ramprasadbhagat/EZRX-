@@ -172,7 +172,7 @@ void main() {
           ],
           child: Material(
             child: ViewByOrderDetailsPage(
-              viewByOrderHistoryItem: fakeOrderHistoryItem,
+              viewByOrdersItem: fakeOrderHistoryItem,
             ),
           ),
         ),

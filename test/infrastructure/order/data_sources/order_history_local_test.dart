@@ -13,13 +13,13 @@ import 'package:mocktail/mocktail.dart';
 class OrderTemplateMock extends Mock implements OrderTemplate {}
 
 void main() {
-  late OrderHistoryLocalDataSource localDataSource;
+  late ViewByItemLocalDataSource localDataSource;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      localDataSource = OrderHistoryLocalDataSource();
+      localDataSource = ViewByItemLocalDataSource();
     },
   );
 
@@ -30,13 +30,15 @@ void main() {
         'Get Order History',
         () async {
           final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getOrderHistoryV2Response.json'),
+            await rootBundle.loadString(
+              'assets/json/getorderHistoryFetchByItemsResponse.json',
+            ),
           );
 
-          final result = await localDataSource.getOrderHistory();
+          final result = await localDataSource.getViewByItems();
 
-          final finalData = res['data']['orderHistoryV2']['OrderHistory'][0];
+          final finalData =
+              res['data']['orderHistoryFetchByItems']['OrderHistory'][0];
 
           expect(
             result,

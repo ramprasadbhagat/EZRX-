@@ -108,12 +108,12 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
 extension ViewByOrderDetailsListExtension
     on List<OrderHistoryDetailsOrderItem> {
-  List<ViewByOrderHistoryGroup> get getViewByOrderItemDetailsList {
+  List<ViewByOrdersGroup> get getViewByOrderItemDetailsList {
     return List<OrderHistoryDetailsOrderItem>.from(this)
         .groupListsBy((item) => item.principalName)
         .entries
         .map(
-          (entry) => ViewByOrderHistoryGroup(
+          (entry) => ViewByOrdersGroup(
             createdDate: DateTimeStringValue(''),
             viewByOrderItem: entry.value,
             principalName: entry.key,

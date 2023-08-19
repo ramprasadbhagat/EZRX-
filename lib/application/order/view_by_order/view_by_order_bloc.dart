@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_order_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -66,18 +66,17 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
         );
 
         final failureOrSuccess =
-            await viewByOrderRepository.getViewByOrderHistory(
+            await viewByOrderRepository.getViewByOrders(
           salesOrgConfig: e.salesOrgConfigs,
           soldTo: e.customerCodeInfo,
           shipTo: e.shipToInfo,
           user: e.user,
           pageSize: _pageSize,
           offset: 0,
-          viewByOrderHistoryFilter: e.filter,
+          viewByOrdersFilter: e.filter,
           orderBy: 'datetime',
           sort: e.sortDirection,
           searchKey: e.searchKey,
-          creatingOrderIds: <String>[],
           viewByOrder: state.viewByOrderList,
         );
 
@@ -105,18 +104,17 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
       emit(state.copyWith(isFetching: true, failureOrSuccessOption: none()));
 
       final failureOrSuccess =
-          await viewByOrderRepository.getViewByOrderHistory(
+          await viewByOrderRepository.getViewByOrders(
         salesOrgConfig: e.salesOrgConfigs,
         soldTo: e.customerCodeInfo,
         shipTo: e.shipToInfo,
         user: e.user,
         pageSize: _pageSize,
         offset: state.viewByOrderList.orderHeaders.length,
-        viewByOrderHistoryFilter: state.appliedFilter,
+        viewByOrdersFilter: state.appliedFilter,
         orderBy: 'datetime',
         sort: e.sortDirection,
         searchKey: state.searchKey,
-        creatingOrderIds: <String>[],
         viewByOrder: state.viewByOrderList,
       );
 

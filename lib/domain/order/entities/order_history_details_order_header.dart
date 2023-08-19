@@ -28,7 +28,7 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
     required CompanyName companyName,
     required String createdTime,
     required POReference pOReference,
-    required int materialCount,
+    required int itemCount,
     required String itmDescription,
     required bool hasPOAttachment,
   }) = _OrderHistoryDetailsOrderHeader;
@@ -48,7 +48,7 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
         createdTime: '',
         hasPOAttachment: false,
         itmDescription: '',
-        materialCount: 0,
+        itemCount: 0,
         orderNumber: OrderNumber(''),
         pOReference: POReference(''),
         shipTo: '',
@@ -59,12 +59,12 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetailsOrderHeader> {
-  List<ViewByOrderHistoryGroup> get getViewByOrderGroupList {
+  List<ViewByOrdersGroup> get getViewByOrderGroupList {
     return List<OrderHistoryDetailsOrderHeader>.from(this)
         .groupListsBy((item) => item.createdDate)
         .entries
         .map(
-          (entry) => ViewByOrderHistoryGroup(
+          (entry) => ViewByOrdersGroup(
             createdDate: entry.key,
             orderHeaders: entry.value,
             principalName: PrincipalName(''),

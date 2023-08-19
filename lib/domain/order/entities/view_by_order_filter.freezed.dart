@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'view_by_order_history_filter.dart';
+part of 'view_by_order_filter.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,27 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ViewByOrderHistoryFilter {
+mixin _$ViewByOrdersFilter {
   DateTimeRange get dateRange => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ViewByOrderHistoryFilterCopyWith<ViewByOrderHistoryFilter> get copyWith =>
+  $ViewByOrdersFilterCopyWith<ViewByOrdersFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ViewByOrderHistoryFilterCopyWith<$Res> {
-  factory $ViewByOrderHistoryFilterCopyWith(ViewByOrderHistoryFilter value,
-          $Res Function(ViewByOrderHistoryFilter) then) =
-      _$ViewByOrderHistoryFilterCopyWithImpl<$Res, ViewByOrderHistoryFilter>;
+abstract class $ViewByOrdersFilterCopyWith<$Res> {
+  factory $ViewByOrdersFilterCopyWith(
+          ViewByOrdersFilter value, $Res Function(ViewByOrdersFilter) then) =
+      _$ViewByOrdersFilterCopyWithImpl<$Res, ViewByOrdersFilter>;
   @useResult
   $Res call({DateTimeRange dateRange});
 }
 
 /// @nodoc
-class _$ViewByOrderHistoryFilterCopyWithImpl<$Res,
-        $Val extends ViewByOrderHistoryFilter>
-    implements $ViewByOrderHistoryFilterCopyWith<$Res> {
-  _$ViewByOrderHistoryFilterCopyWithImpl(this._value, this._then);
+class _$ViewByOrdersFilterCopyWithImpl<$Res, $Val extends ViewByOrdersFilter>
+    implements $ViewByOrdersFilterCopyWith<$Res> {
+  _$ViewByOrdersFilterCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -59,7 +58,7 @@ class _$ViewByOrderHistoryFilterCopyWithImpl<$Res,
 
 /// @nodoc
 abstract class _$$_ViewByOrderHistoryFilterCopyWith<$Res>
-    implements $ViewByOrderHistoryFilterCopyWith<$Res> {
+    implements $ViewByOrdersFilterCopyWith<$Res> {
   factory _$$_ViewByOrderHistoryFilterCopyWith(
           _$_ViewByOrderHistoryFilter value,
           $Res Function(_$_ViewByOrderHistoryFilter) then) =
@@ -71,8 +70,7 @@ abstract class _$$_ViewByOrderHistoryFilterCopyWith<$Res>
 
 /// @nodoc
 class __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>
-    extends _$ViewByOrderHistoryFilterCopyWithImpl<$Res,
-        _$_ViewByOrderHistoryFilter>
+    extends _$ViewByOrdersFilterCopyWithImpl<$Res, _$_ViewByOrderHistoryFilter>
     implements _$$_ViewByOrderHistoryFilterCopyWith<$Res> {
   __$$_ViewByOrderHistoryFilterCopyWithImpl(_$_ViewByOrderHistoryFilter _value,
       $Res Function(_$_ViewByOrderHistoryFilter) _then)
@@ -102,7 +100,7 @@ class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
 
   @override
   String toString() {
-    return 'ViewByOrderHistoryFilter(dateRange: $dateRange)';
+    return 'ViewByOrdersFilter(dateRange: $dateRange)';
   }
 
   @override
@@ -125,7 +123,7 @@ class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
           _$_ViewByOrderHistoryFilter>(this, _$identity);
 }
 
-abstract class _ViewByOrderHistoryFilter extends ViewByOrderHistoryFilter {
+abstract class _ViewByOrderHistoryFilter extends ViewByOrdersFilter {
   factory _ViewByOrderHistoryFilter({required final DateTimeRange dateRange}) =
       _$_ViewByOrderHistoryFilter;
   _ViewByOrderHistoryFilter._() : super._();

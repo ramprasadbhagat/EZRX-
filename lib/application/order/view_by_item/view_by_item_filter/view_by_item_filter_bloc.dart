@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 part 'view_by_item_filter_event.dart';

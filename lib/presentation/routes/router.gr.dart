@@ -589,7 +589,7 @@ class AppRouter extends _i89.RootStackRouter {
         routeData: routeData,
         child: _i60.ViewByOrderDetailsPage(
           key: args.key,
-          viewByOrderHistoryItem: args.viewByOrderHistoryItem,
+          viewByOrdersItem: args.viewByOrdersItem,
         ),
       );
     },
@@ -2243,13 +2243,13 @@ class ViewByOrderDetailsPageRoute
     extends _i89.PageRouteInfo<ViewByOrderDetailsPageRouteArgs> {
   ViewByOrderDetailsPageRoute({
     _i90.Key? key,
-    required _i97.OrderHistoryDetailsOrderHeader viewByOrderHistoryItem,
+    required _i97.OrderHistoryDetailsOrderHeader viewByOrdersItem,
   }) : super(
           ViewByOrderDetailsPageRoute.name,
           path: 'orders/view_by_order_details_page',
           args: ViewByOrderDetailsPageRouteArgs(
             key: key,
-            viewByOrderHistoryItem: viewByOrderHistoryItem,
+            viewByOrdersItem: viewByOrdersItem,
           ),
         );
 
@@ -2259,16 +2259,16 @@ class ViewByOrderDetailsPageRoute
 class ViewByOrderDetailsPageRouteArgs {
   const ViewByOrderDetailsPageRouteArgs({
     this.key,
-    required this.viewByOrderHistoryItem,
+    required this.viewByOrdersItem,
   });
 
   final _i90.Key? key;
 
-  final _i97.OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
+  final _i97.OrderHistoryDetailsOrderHeader viewByOrdersItem;
 
   @override
   String toString() {
-    return 'ViewByOrderDetailsPageRouteArgs{key: $key, viewByOrderHistoryItem: $viewByOrderHistoryItem}';
+    return 'ViewByOrderDetailsPageRouteArgs{key: $key, viewByOrdersItem: $viewByOrdersItem}';
   }
 }
 

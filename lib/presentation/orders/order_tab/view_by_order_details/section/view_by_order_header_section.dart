@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderHeaderSection extends StatelessWidget {
-  final OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
+  final OrderHistoryDetailsOrderHeader viewByOrdersItem;
 
   const OrderHeaderSection({
     Key? key,
-    required this.viewByOrderHistoryItem,
+    required this.viewByOrdersItem,
   }) : super(key: key);
 
   @override
@@ -34,7 +34,7 @@ class OrderHeaderSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Order #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                'Order #${viewByOrdersItem.orderNumber.getOrDefaultValue('')}',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -44,7 +44,7 @@ class OrderHeaderSection extends StatelessWidget {
               ),
               BalanceTextRow(
                 keyText: 'Order date'.tr(),
-                valueText: viewByOrderHistoryItem.createdDate.dateString,
+                valueText: viewByOrdersItem.createdDate.dateString,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
                     ),

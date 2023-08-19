@@ -4,6 +4,6 @@ part of 'view_by_order_filter_bloc.dart';
 class ViewByOrderFilterEvent with _$ViewByOrderFilterEvent {
   const factory ViewByOrderFilterEvent.initialized() = _Initialized;
   const factory ViewByOrderFilterEvent.setDateRange(
-    ViewByOrderHistoryFilter viewByOrderHistoryFilter,
+    ViewByOrdersFilter viewByOrdersFilter,
   ) = _SetDateRange;
 }

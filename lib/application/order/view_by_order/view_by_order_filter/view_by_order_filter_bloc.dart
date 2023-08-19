@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,7 +21,7 @@ class ViewByOrderFilterBloc
     event.map(
       initialized: (_) => emit(ViewByOrderFilterState.initial()),
       setDateRange: (_SetDateRange e) => emit(
-        state.copyWith(filter: e.viewByOrderHistoryFilter),
+        state.copyWith(filter: e.viewByOrdersFilter),
       ),
     );
   }

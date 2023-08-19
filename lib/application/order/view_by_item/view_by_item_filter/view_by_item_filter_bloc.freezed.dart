@@ -19,7 +19,7 @@ mixin _$ViewByItemFilterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeOrReset,
-    required TResult Function(ViewByItemHistoryFilter lastAppliedFilter)
+    required TResult Function(ViewByItemFilter lastAppliedFilter)
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
@@ -28,7 +28,7 @@ mixin _$ViewByItemFilterEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeOrReset,
-    TResult? Function(ViewByItemHistoryFilter lastAppliedFilter)?
+    TResult? Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
@@ -37,7 +37,7 @@ mixin _$ViewByItemFilterEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeOrReset,
-    TResult Function(ViewByItemHistoryFilter lastAppliedFilter)?
+    TResult Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
@@ -132,7 +132,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeOrReset,
-    required TResult Function(ViewByItemHistoryFilter lastAppliedFilter)
+    required TResult Function(ViewByItemFilter lastAppliedFilter)
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
@@ -144,7 +144,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeOrReset,
-    TResult? Function(ViewByItemHistoryFilter lastAppliedFilter)?
+    TResult? Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
@@ -156,7 +156,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeOrReset,
-    TResult Function(ViewByItemHistoryFilter lastAppliedFilter)?
+    TResult Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
@@ -220,9 +220,9 @@ abstract class _$$_ResetFiltersToLastAppliedCopyWith<$Res> {
           $Res Function(_$_ResetFiltersToLastApplied) then) =
       __$$_ResetFiltersToLastAppliedCopyWithImpl<$Res>;
   @useResult
-  $Res call({ViewByItemHistoryFilter lastAppliedFilter});
+  $Res call({ViewByItemFilter lastAppliedFilter});
 
-  $ViewByItemHistoryFilterCopyWith<$Res> get lastAppliedFilter;
+  $ViewByItemFilterCopyWith<$Res> get lastAppliedFilter;
 }
 
 /// @nodoc
@@ -244,15 +244,14 @@ class __$$_ResetFiltersToLastAppliedCopyWithImpl<$Res>
       lastAppliedFilter: null == lastAppliedFilter
           ? _value.lastAppliedFilter
           : lastAppliedFilter // ignore: cast_nullable_to_non_nullable
-              as ViewByItemHistoryFilter,
+              as ViewByItemFilter,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ViewByItemHistoryFilterCopyWith<$Res> get lastAppliedFilter {
-    return $ViewByItemHistoryFilterCopyWith<$Res>(_value.lastAppliedFilter,
-        (value) {
+  $ViewByItemFilterCopyWith<$Res> get lastAppliedFilter {
+    return $ViewByItemFilterCopyWith<$Res>(_value.lastAppliedFilter, (value) {
       return _then(_value.copyWith(lastAppliedFilter: value));
     });
   }
@@ -264,7 +263,7 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
   const _$_ResetFiltersToLastApplied({required this.lastAppliedFilter});
 
   @override
-  final ViewByItemHistoryFilter lastAppliedFilter;
+  final ViewByItemFilter lastAppliedFilter;
 
   @override
   String toString() {
@@ -294,7 +293,7 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeOrReset,
-    required TResult Function(ViewByItemHistoryFilter lastAppliedFilter)
+    required TResult Function(ViewByItemFilter lastAppliedFilter)
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
@@ -306,7 +305,7 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeOrReset,
-    TResult? Function(ViewByItemHistoryFilter lastAppliedFilter)?
+    TResult? Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
@@ -318,7 +317,7 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeOrReset,
-    TResult Function(ViewByItemHistoryFilter lastAppliedFilter)?
+    TResult Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
@@ -373,10 +372,10 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
 
 abstract class _ResetFiltersToLastApplied implements ViewByItemFilterEvent {
   const factory _ResetFiltersToLastApplied(
-          {required final ViewByItemHistoryFilter lastAppliedFilter}) =
+          {required final ViewByItemFilter lastAppliedFilter}) =
       _$_ResetFiltersToLastApplied;
 
-  ViewByItemHistoryFilter get lastAppliedFilter;
+  ViewByItemFilter get lastAppliedFilter;
   @JsonKey(ignore: true)
   _$$_ResetFiltersToLastAppliedCopyWith<_$_ResetFiltersToLastApplied>
       get copyWith => throw _privateConstructorUsedError;
@@ -448,7 +447,7 @@ class _$_SetOrderDate implements _SetOrderDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeOrReset,
-    required TResult Function(ViewByItemHistoryFilter lastAppliedFilter)
+    required TResult Function(ViewByItemFilter lastAppliedFilter)
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
@@ -460,7 +459,7 @@ class _$_SetOrderDate implements _SetOrderDate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeOrReset,
-    TResult? Function(ViewByItemHistoryFilter lastAppliedFilter)?
+    TResult? Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
@@ -472,7 +471,7 @@ class _$_SetOrderDate implements _SetOrderDate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeOrReset,
-    TResult Function(ViewByItemHistoryFilter lastAppliedFilter)?
+    TResult Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
@@ -608,7 +607,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initializeOrReset,
-    required TResult Function(ViewByItemHistoryFilter lastAppliedFilter)
+    required TResult Function(ViewByItemFilter lastAppliedFilter)
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
@@ -620,7 +619,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initializeOrReset,
-    TResult? Function(ViewByItemHistoryFilter lastAppliedFilter)?
+    TResult? Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
@@ -632,7 +631,7 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initializeOrReset,
-    TResult Function(ViewByItemHistoryFilter lastAppliedFilter)?
+    TResult Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
@@ -699,7 +698,7 @@ abstract class _SetOrderStatus implements ViewByItemFilterEvent {
 
 /// @nodoc
 mixin _$ViewByItemFilterState {
-  ViewByItemHistoryFilter get filter => throw _privateConstructorUsedError;
+  ViewByItemFilter get filter => throw _privateConstructorUsedError;
   List<StatusType> get statusList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -713,9 +712,9 @@ abstract class $ViewByItemFilterStateCopyWith<$Res> {
           $Res Function(ViewByItemFilterState) then) =
       _$ViewByItemFilterStateCopyWithImpl<$Res, ViewByItemFilterState>;
   @useResult
-  $Res call({ViewByItemHistoryFilter filter, List<StatusType> statusList});
+  $Res call({ViewByItemFilter filter, List<StatusType> statusList});
 
-  $ViewByItemHistoryFilterCopyWith<$Res> get filter;
+  $ViewByItemFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -739,7 +738,7 @@ class _$ViewByItemFilterStateCopyWithImpl<$Res,
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
-              as ViewByItemHistoryFilter,
+              as ViewByItemFilter,
       statusList: null == statusList
           ? _value.statusList
           : statusList // ignore: cast_nullable_to_non_nullable
@@ -749,8 +748,8 @@ class _$ViewByItemFilterStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $ViewByItemHistoryFilterCopyWith<$Res> get filter {
-    return $ViewByItemHistoryFilterCopyWith<$Res>(_value.filter, (value) {
+  $ViewByItemFilterCopyWith<$Res> get filter {
+    return $ViewByItemFilterCopyWith<$Res>(_value.filter, (value) {
       return _then(_value.copyWith(filter: value) as $Val);
     });
   }
@@ -764,10 +763,10 @@ abstract class _$$_ViewByItemFilterStateCopyWith<$Res>
       __$$_ViewByItemFilterStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ViewByItemHistoryFilter filter, List<StatusType> statusList});
+  $Res call({ViewByItemFilter filter, List<StatusType> statusList});
 
   @override
-  $ViewByItemHistoryFilterCopyWith<$Res> get filter;
+  $ViewByItemFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -788,7 +787,7 @@ class __$$_ViewByItemFilterStateCopyWithImpl<$Res>
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
-              as ViewByItemHistoryFilter,
+              as ViewByItemFilter,
       statusList: null == statusList
           ? _value._statusList
           : statusList // ignore: cast_nullable_to_non_nullable
@@ -806,7 +805,7 @@ class _$_ViewByItemFilterState extends _ViewByItemFilterState {
         super._();
 
   @override
-  final ViewByItemHistoryFilter filter;
+  final ViewByItemFilter filter;
   final List<StatusType> _statusList;
   @override
   List<StatusType> get statusList {
@@ -844,12 +843,12 @@ class _$_ViewByItemFilterState extends _ViewByItemFilterState {
 
 abstract class _ViewByItemFilterState extends ViewByItemFilterState {
   const factory _ViewByItemFilterState(
-      {required final ViewByItemHistoryFilter filter,
+      {required final ViewByItemFilter filter,
       required final List<StatusType> statusList}) = _$_ViewByItemFilterState;
   const _ViewByItemFilterState._() : super._();
 
   @override
-  ViewByItemHistoryFilter get filter;
+  ViewByItemFilter get filter;
   @override
   List<StatusType> get statusList;
   @override

@@ -4,17 +4,17 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:intl/intl.dart';
-part 'view_by_item_history_filter.freezed.dart';
+part 'view_by_item_filter.freezed.dart';
 
 @freezed
-class ViewByItemHistoryFilter with _$ViewByItemHistoryFilter {
-  const ViewByItemHistoryFilter._();
-  factory ViewByItemHistoryFilter({
+class ViewByItemFilter with _$ViewByItemFilter {
+  const ViewByItemFilter._();
+  factory ViewByItemFilter({
     required DateTimeRange dateRange,
     required List<StatusType> orderStatusList,
-  }) = _ViewByItemHistoryFilter;
+  }) = _ViewByItemFilter;
 
-  factory ViewByItemHistoryFilter.empty() => ViewByItemHistoryFilter(
+  factory ViewByItemFilter.empty() => ViewByItemFilter(
         dateRange: DateTimeRange(
           end: DateTime.parse(
             DateFormat(DateTimeFormatString.apiDateFormat).format(
@@ -38,7 +38,7 @@ class ViewByItemHistoryFilter with _$ViewByItemHistoryFilter {
   DateTimeStringValue get fromDate =>
       DateTimeStringValue(dateRange.start.toIso8601String());
 
-  bool isNotEqual({required ViewByItemHistoryFilter newFilter}) =>
+  bool isNotEqual({required ViewByItemFilter newFilter}) =>
       orderStatusList.length != newFilter.orderStatusList.length ||
       toDate.apiDateTimeString != newFilter.toDate.apiDateTimeString ||
       fromDate.apiDateTimeString != newFilter.fromDate.apiDateTimeString;

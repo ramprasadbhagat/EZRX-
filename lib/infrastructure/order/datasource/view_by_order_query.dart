@@ -1,8 +1,8 @@
 class ViewByOrderQuery {
-  String getOrderHistory() {
+  String getOrderHistoryV3() {
     return '''
 query orderHistoryQuery(
-  \$soldTo: String!, 
+ \$soldTo: String!, 
   \$fromDate: String, 
   \$toDate: String, 
   \$shipTo: [String], 
@@ -12,9 +12,9 @@ query orderHistoryQuery(
   \$sort: String, 
   \$language: String, 
   \$searchKey: String,   
-  \$creatingOrderIds: [String!]) {
-  orderHistory(
-    request: {
+ ) {
+  orderHistoryV3(
+   request: {
       soldTo: \$soldTo, 
       shipTo: \$shipTo, 
       fromDate: \$fromDate, 
@@ -25,11 +25,11 @@ query orderHistoryQuery(
       sort: \$sort, 
       language: \$language, 
       searchKey: \$searchKey,  
-      creatingOrderIds: \$creatingOrderIds}
+     }
   ) {
     orderCount
     creatingOrderIds
-    orderHeaders {
+   orderHeaders {
       Type
       OrderNumber
       EZRXNumber
@@ -43,15 +43,20 @@ query orderHistoryQuery(
       RequestedDeliveryDate
       TotalTax
       POReference
-      MaterialCount
-      ItmDescription
       HasPOAttachment
       ItmCount
-      TelephoneNumber
-      OrderBy
-      
+      ItmDescription
+      PaymentMethod
+      IsGreen
+      OrderItems {
+        MaterialCode
+        MaterialDescription
+        DefaultMaterialDescription
+       
+      }
+     
     }
-   
+  
   }
 }
 ''';

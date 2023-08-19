@@ -12,27 +12,27 @@ void main() {
     setUp(() async {
       data = json.decode(
         await rootBundle
-            .loadString('assets/json/getOrderHistoryV2Response.json'),
+            .loadString('assets/json/getorderHistoryFetchByItemsResponse.json'),
       );
     });
 
     test('Test fromDomain', () {
       final configsDto = OrderHistoryDto.fromDomain(
         OrderHistoryDto.fromJson(
-          data['data']['orderHistoryV2']['OrderHistory'][0],
+          data['data']['orderHistoryFetchByItems']['OrderHistory'][0],
         ).toDomain(),
       );
-      expect(configsDto.orderBasicInformation.shipTo, '0070042688');
+      expect(configsDto.orderBasicInformation.shipTo, '0070149863');
     });
 
     test('Test toJson', () {
       final configsDto = OrderHistoryDto.fromDomain(
         OrderHistoryDto.fromJson(
-          data['data']['orderHistoryV2']['OrderHistory'][0],
+          data['data']['orderHistoryFetchByItems']['OrderHistory'][0],
         ).toDomain(),
       ).toJson();
 
-      expect(configsDto['OrderBasicInformation']['ShipTo'], '0070042688');
+      expect(configsDto['OrderBasicInformation']['ShipTo'], '0070149863');
     });
   });
 }

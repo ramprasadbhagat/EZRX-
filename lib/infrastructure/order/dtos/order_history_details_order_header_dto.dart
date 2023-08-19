@@ -29,7 +29,7 @@ class OrderHistoryDetailsOrderHeadersDto
         required bool hasPOAttachment,
     @JsonKey(name: 'ItmDescription', defaultValue: '')
         required String itmDescription,
-    @JsonKey(name: 'MaterialCount', defaultValue: 0) required int materialCount,
+    @JsonKey(name: 'ItmCount', defaultValue: 0) required int itemCount,
     @JsonKey(name: 'CreatedTime', defaultValue: '') required String createdTime,
     @JsonKey(name: 'OrderNumber', defaultValue: '') required String orderNumber,
     @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
@@ -57,7 +57,7 @@ class OrderHistoryDetailsOrderHeadersDto
       createdTime: orderHistoryDetailsOrderHeader.createdTime,
       hasPOAttachment: orderHistoryDetailsOrderHeader.hasPOAttachment,
       itmDescription: orderHistoryDetailsOrderHeader.itmDescription,
-      materialCount: orderHistoryDetailsOrderHeader.materialCount,
+      itemCount: orderHistoryDetailsOrderHeader.itemCount,
       orderNumber:
           orderHistoryDetailsOrderHeader.orderNumber.getOrDefaultValue(''),
       pOReference:
@@ -83,7 +83,7 @@ class OrderHistoryDetailsOrderHeadersDto
       createdTime: createdTime,
       hasPOAttachment: hasPOAttachment,
       itmDescription: itmDescription,
-      materialCount: materialCount,
+      itemCount: itemCount,
       orderNumber: OrderNumber(orderNumber),
       pOReference: POReference(pOReference),
       shipTo: shipTo,

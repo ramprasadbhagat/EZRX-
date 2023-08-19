@@ -5,12 +5,12 @@ import 'package:flutter/services.dart';
 
 class ViewByOrderLocalDataSource {
   ViewByOrderLocalDataSource();
-  Future<ViewByOrder> getViewByOrderHistory() async {
+  Future<ViewByOrder> getViewByOrders() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getOrderHistoryResponse.json'),
+      await rootBundle.loadString('assets/json/getOrderHistoryV3Response.json'),
     );
 
-    final finalData = data['data']['orderHistory']['orderHeaders'][0];
+    final finalData = data['data']['orderHistoryV3'];
 
     return ViewByOrderDto.fromJson(finalData).toDomain();
   }

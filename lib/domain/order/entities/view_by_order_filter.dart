@@ -2,16 +2,16 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'view_by_order_history_filter.freezed.dart';
+part 'view_by_order_filter.freezed.dart';
 
 @freezed
-class ViewByOrderHistoryFilter with _$ViewByOrderHistoryFilter {
-  const ViewByOrderHistoryFilter._();
-  factory ViewByOrderHistoryFilter({
+class ViewByOrdersFilter with _$ViewByOrdersFilter {
+  const ViewByOrdersFilter._();
+  factory ViewByOrdersFilter({
     required DateTimeRange dateRange,
   }) = _ViewByOrderHistoryFilter;
 
-  factory ViewByOrderHistoryFilter.empty() => ViewByOrderHistoryFilter(
+  factory ViewByOrdersFilter.empty() => ViewByOrdersFilter(
         dateRange: DateTimeRange(
           end: DateTime.now(),
           start: DateTime.now().subtract(

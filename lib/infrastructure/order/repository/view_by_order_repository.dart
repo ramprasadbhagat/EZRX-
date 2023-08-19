@@ -8,11 +8,11 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_order_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_history_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_filter_dto.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
@@ -28,7 +28,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
   });
 
   @override
-  Future<Either<ApiFailure, ViewByOrder>> getViewByOrderHistory({
+  Future<Either<ApiFailure, ViewByOrder>> getViewByOrders({
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo soldTo,
     required ShipToInfo shipTo,
@@ -38,13 +38,12 @@ class ViewByOrderRepository implements IViewByOrderRepository {
     required String orderBy,
     required String sort,
     required SearchKey searchKey,
-    required List<String> creatingOrderIds,
-    required ViewByOrderHistoryFilter viewByOrderHistoryFilter,
+    required ViewByOrdersFilter viewByOrdersFilter,
     required ViewByOrder viewByOrder,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final result = await localDataSource.getViewByOrderHistory();
+        final result = await localDataSource.getViewByOrders();
 
         return Right(result);
       } catch (e) {
@@ -53,7 +52,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
     }
 
     try {
-      final orderHistoryItemList = await remoteDataSource.getViewByOrderHistory(
+      final orderHistoryItemList = await remoteDataSource.getViewByOrders(
         shipTo: shipTo.shipToCustomerCode,
         soldTo: soldTo.customerCodeSoldTo,
         pageSize: pageSize,
@@ -61,9 +60,8 @@ class ViewByOrderRepository implements IViewByOrderRepository {
         language: user.preferredLanguage.getOrCrash(),
         searchKey: searchKey.getOrCrash(),
         orderBy: orderBy,
-        creatingOrderIds: creatingOrderIds,
         filterQuery:
-            ViewByOrderHistoryFilterDto.fromDomain(viewByOrderHistoryFilter)
+            ViewByOrdersFilterDto.fromDomain(viewByOrdersFilter)
                 .toJson(),
         sort: sort,
       );

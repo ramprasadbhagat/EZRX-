@@ -8,17 +8,17 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_local.dart';
 import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_history_filter_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/view_by_item_filter_dto.dart';
 
 class ViewByItemRepository implements IViewByItemRepository {
   final Config config;
-  final OrderHistoryLocalDataSource localDataSource;
+  final ViewByItemLocalDataSource localDataSource;
   final OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
   final ProductImageLocalDataSource productImageLocalDataSource;
   final ProductImageRemoteDataSource productImageRemoteDataSource;
@@ -32,21 +32,21 @@ class ViewByItemRepository implements IViewByItemRepository {
   });
 
   @override
-  Future<Either<ApiFailure, OrderHistory>> getOrderHistory({
+  Future<Either<ApiFailure, OrderHistory>> getViewByItems({
     required SalesOrganisationConfigs salesOrgConfig,
     required CustomerCodeInfo soldTo,
     required ShipToInfo shipTo,
     required User user,
     required int pageSize,
     required int offset,
-    required ViewByItemHistoryFilter viewByItemHistoryFilter,
+    required ViewByItemFilter viewByItemFilter,
     required SearchKey searchKey,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
         final result = user.role.type.isSalesRepRole
             ? await localDataSource.getOrderHistoryForSalesRep()
-            : await localDataSource.getOrderHistory();
+            : await localDataSource.getViewByItems();
 
         return Right(result);
       } catch (e) {
@@ -64,18 +64,18 @@ class ViewByItemRepository implements IViewByItemRepository {
               language: user.preferredLanguage.getOrCrash(),
               userName: user.username.getOrCrash(),
               filterQuery:
-                  ViewByItemHistoryFilterDto.fromDomain(viewByItemHistoryFilter)
+                  ViewByItemFilterDto.fromDomain(viewByItemFilter)
                       .toJson(),
               query: searchKey.getOrCrash(),
             )
-          : await orderHistoryRemoteDataSource.getOrderHistory(
+          : await orderHistoryRemoteDataSource.getViewByItems(
               shipTo: shipTo.shipToCustomerCode,
               soldTo: soldTo.customerCodeSoldTo,
               pageSize: pageSize,
               offset: offset,
               language: user.preferredLanguage.getOrCrash(),
               filterQuery:
-                  ViewByItemHistoryFilterDto.fromDomain(viewByItemHistoryFilter)
+                  ViewByItemFilterDto.fromDomain(viewByItemFilter)
                       .toJson(),
               searchKey: searchKey.getOrCrash(),
             );

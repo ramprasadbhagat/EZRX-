@@ -5,12 +5,12 @@ class ViewByItemFilterState with _$ViewByItemFilterState {
   const ViewByItemFilterState._();
 
   const factory ViewByItemFilterState({
-    required ViewByItemHistoryFilter filter,
+    required ViewByItemFilter filter,
     required List<StatusType> statusList,
   }) = _ViewByItemFilterState;
 
   factory ViewByItemFilterState.initial() => ViewByItemFilterState(
-        filter: ViewByItemHistoryFilter.empty(),
+        filter: ViewByItemFilter.empty(),
         statusList: <StatusType>[
           StatusType('Order created'),
           StatusType('Pending release'),
@@ -22,6 +22,6 @@ class ViewByItemFilterState with _$ViewByItemFilterState {
         ],
       );
 
-  ViewByItemHistoryFilter get emptyViewByItemHistoryFilter =>
-      ViewByItemHistoryFilter.empty();
+  ViewByItemFilter get emptyViewByItemFilter =>
+      ViewByItemFilter.empty();
 }

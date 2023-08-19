@@ -10,7 +10,7 @@ class ViewByOrderState with _$ViewByOrderState {
     required SearchKey searchKey,
     required int nextPageIndex,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-    required ViewByOrderHistoryFilter appliedFilter,
+    required ViewByOrdersFilter appliedFilter,
   }) = _ViewByOrderState;
   factory ViewByOrderState.initial() => ViewByOrderState(
         viewByOrderList: ViewByOrder.empty(),
@@ -19,6 +19,6 @@ class ViewByOrderState with _$ViewByOrderState {
         nextPageIndex: 0,
         searchKey: SearchKey.searchFilter(''),
         failureOrSuccessOption: none(),
-        appliedFilter: ViewByOrderHistoryFilter.empty(),
+        appliedFilter: ViewByOrdersFilter.empty(),
       );
 }

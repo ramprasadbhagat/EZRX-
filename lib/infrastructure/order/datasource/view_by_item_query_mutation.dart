@@ -1,32 +1,20 @@
 class ViewByItemQueryMutation {
-  String getViewByItemForCustomer() {
+  String getViewByItem() {
     return '''
-      query orderHistoryV2(                                                                   
-      \$soldTo: String!,
-      \$shipTo: [String],
-      \$fromDate: String!,
-      \$toDate: String!,
-      \$orderStatus: [String!], 
-      \$language: String,
-      \$query: String,
-      \$first: Int!,
-      \$after: Int!,
-    
-      )
-      {
-      orderHistoryV2(
-        soldTo: \$soldTo, 
-        shipTo:\$shipTo, 
-        fromDate:\$fromDate, 
-        toDate:\$toDate,
-        orderStatus:\$orderStatus,
-        after:\$after,
-        first:\$first,
-        language:\$language,
-        query:\$query,
-        ){
-          OrderCount
-         OrderHistory {
+     query orderHistoryFetchByItems(\$soldTo: String!, \$fromDate: String, \$toDate: String, \$shipTo: [String], \$first: Int, \$after: Int, \$language: String, \$orderStatus: [String!], \$query: String) {
+  orderHistoryFetchByItems(
+    soldTo: \$soldTo
+    fromDate: \$fromDate
+    toDate: \$toDate
+    shipTo: \$shipTo
+    first: \$first
+    after: \$after
+    language: \$language
+    orderStatus: \$orderStatus
+    query: \$query
+  ) {
+    OrderCount
+    OrderHistory {
       OrderBasicInformation {
         SoldTo
         CompanyName
@@ -34,36 +22,51 @@ class ViewByItemQueryMutation {
         PaymentTerm {
           PaymentTermCode
           PaymentTermDescription
-         
+          
         }
-       
+        
       }
       OrderItems {
         MaterialCode
         MaterialDescription
+        DefaultMaterialDescription
+        CreatedTime
         CreatedDate
         Qty
         UnitPrice
         TotalPrice
         Status
+        LineNumber
+        Tax
         DeliveryDate
+        DeliveryTime
+        OrderType
+        EZRXNumber
         OrderNumber
         OrderBy
+        PurchaseOrderType
+        WarehouseStorageCondition
         OrderNumber
+        Available
         Batch
         ExpiryDate
+        IsMarketplace
+        Seller
         POReference
         ManufactureName
         InvoiceNumber
         IsBonusMaterial
+        GovernmentMaterialCode
+        ItemRegistrationNumber
         TelephoneNumber
-        Tax
+        HidePrice
        
       }
-      
+     
     }
-        }
-      }
+   
+  }
+}
       ''';
   }
 

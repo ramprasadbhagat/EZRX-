@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
@@ -56,7 +56,7 @@ void main() {
         ),
         expect: () => [
           ViewByItemFilterState.initial().copyWith(
-            filter: ViewByItemHistoryFilter.empty().copyWith(
+            filter: ViewByItemFilter.empty().copyWith(
               dateRange: DateTimeRange(
                 start: fakeStartDate,
                 end: fakeEndDate,
@@ -85,7 +85,7 @@ void main() {
         },
         expect: () => [
           ViewByItemFilterState.initial().copyWith(
-            filter: ViewByItemHistoryFilter.empty().copyWith(
+            filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
                 StatusType('Order created'),
               ],
@@ -93,7 +93,7 @@ void main() {
             statusList: statusList,
           ),
           ViewByItemFilterState.initial().copyWith(
-            filter: ViewByItemHistoryFilter.empty().copyWith(
+            filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
                 StatusType('Order created'),
                 StatusType('Picking in progress'),
@@ -116,7 +116,7 @@ void main() {
           );
         },
         seed: () => ViewByItemFilterState.initial().copyWith(
-          filter: ViewByItemHistoryFilter.empty().copyWith(
+          filter: ViewByItemFilter.empty().copyWith(
             orderStatusList: <StatusType>[
               StatusType('Order created'),
               StatusType('Picking in progress'),
@@ -126,7 +126,7 @@ void main() {
         ),
         expect: () => [
           ViewByItemFilterState.initial().copyWith(
-            filter: ViewByItemHistoryFilter.empty().copyWith(
+            filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
                 StatusType('Order created'),
               ],
@@ -142,7 +142,7 @@ void main() {
         act: (bloc) {
           bloc.add(
             ViewByItemFilterEvent.resetFiltersToLastApplied(
-              lastAppliedFilter: ViewByItemHistoryFilter.empty().copyWith(
+              lastAppliedFilter: ViewByItemFilter.empty().copyWith(
                 orderStatusList: <StatusType>[
                   StatusType('Order created'),
                   StatusType('Picking in progress'),
@@ -157,7 +157,7 @@ void main() {
         },
         expect: () => [
           ViewByItemFilterState.initial().copyWith(
-            filter: ViewByItemHistoryFilter.empty().copyWith(
+            filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
                 StatusType('Order created'),
                 StatusType('Picking in progress'),
@@ -172,15 +172,15 @@ void main() {
       );
 
       test(
-        'Test emptyViewByItemHistoryFilter',
+        'Test emptyViewByItemFilter',
         () {
           final viewByItemFilterState = ViewByItemFilterState.initial();
 
-          final getemptyViewByItemHistoryFilter =
-              viewByItemFilterState.emptyViewByItemHistoryFilter;
+          final getemptyViewByItemFilter =
+              viewByItemFilterState.emptyViewByItemFilter;
           expect(
-            getemptyViewByItemHistoryFilter,
-            ViewByItemHistoryFilter.empty(),
+            getemptyViewByItemFilter,
+            ViewByItemFilter.empty(),
           );
         },
       );

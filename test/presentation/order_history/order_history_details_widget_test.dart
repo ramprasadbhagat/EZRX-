@@ -192,7 +192,7 @@ void main() {
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
     orderHistoryDetails =
         await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
-    orderHistory = await OrderHistoryLocalDataSource().getOrderHistory();
+    orderHistory = await ViewByItemLocalDataSource().getViewByItems();
     permissionService = PermissionServiceMock();
     autoRouterMock = locator<AppRouter>();
   });

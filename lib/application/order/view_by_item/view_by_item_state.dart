@@ -9,7 +9,7 @@ class ViewByItemsState with _$ViewByItemsState {
     required bool canLoadMore,
     required bool isFetching,
     required int nextPageIndex,
-    required ViewByItemHistoryFilter appliedFilter,
+    required ViewByItemFilter appliedFilter,
     required SearchKey searchKey,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _ViewByItemsState;
@@ -21,6 +21,6 @@ class ViewByItemsState with _$ViewByItemsState {
         nextPageIndex: 0,
         failureOrSuccessOption: none(),
         searchKey: SearchKey.searchFilter(''),
-        appliedFilter: ViewByItemHistoryFilter.empty(),
+        appliedFilter: ViewByItemFilter.empty(),
       );
 }

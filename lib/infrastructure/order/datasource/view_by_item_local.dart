@@ -5,14 +5,14 @@ import 'package:ezrxmobile/infrastructure/order/dtos/order_history_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/product_meta_data_dto.dart';
 import 'package:flutter/services.dart';
 
-class OrderHistoryLocalDataSource {
-  OrderHistoryLocalDataSource();
-  Future<OrderHistory> getOrderHistory() async {
+class ViewByItemLocalDataSource {
+  ViewByItemLocalDataSource();
+  Future<OrderHistory> getViewByItems() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getOrderHistoryV2Response.json'),
+      await rootBundle.loadString('assets/json/getorderHistoryFetchByItemsResponse.json'),
     );
 
-    final finalData = data['data']['orderHistoryV2']['OrderHistory'][0];
+    final finalData = data['data']['orderHistoryFetchByItems']['OrderHistory'][0];
 
     return OrderHistoryDto.fromJson(finalData).toDomain();
   }

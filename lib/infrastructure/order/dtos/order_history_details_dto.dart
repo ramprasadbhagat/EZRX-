@@ -93,7 +93,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         createdTime: orderHistoryDetailsOrderHeader.createdTime,
         hasPOAttachment: orderHistoryDetailsOrderHeader.hasPOAttachment,
         itmDescription: orderHistoryDetailsOrderHeader.itmDescription,
-        materialCount: orderHistoryDetailsOrderHeader.materialCount,
+        itemCount: orderHistoryDetailsOrderHeader.itemCount,
         orderNumber: OrderNumber(orderHistoryDetailsOrderHeader.orderNumber),
         pOReference: POReference(orderHistoryDetailsOrderHeader.pOReference),
         shipTo: orderHistoryDetailsOrderHeader.shipTo,

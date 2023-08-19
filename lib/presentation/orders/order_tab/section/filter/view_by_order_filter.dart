@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -118,7 +118,7 @@ class _FromOrderDateFilter extends StatelessWidget {
             if (documentDateRange == null) return;
             viewByOrderFilterBloc.add(
               ViewByOrderFilterEvent.setDateRange(
-                ViewByOrderHistoryFilter.empty()
+                ViewByOrdersFilter.empty()
                     .copyWith(dateRange: documentDateRange),
               ),
             );
@@ -166,7 +166,7 @@ class _ToOrderDateFilter extends StatelessWidget {
             if (documentDateRange == null) return;
             viewByOrderFilterBloc.add(
               ViewByOrderFilterEvent.setDateRange(
-                ViewByOrderHistoryFilter.empty()
+                ViewByOrdersFilter.empty()
                     .copyWith(dateRange: documentDateRange),
               ),
             );
@@ -201,7 +201,7 @@ class _ResetButton extends StatelessWidget {
     return Expanded(
       child: OutlinedButton(
         onPressed: () => Navigator.of(context).pop(
-          ViewByOrderHistoryFilter.empty(),
+          ViewByOrdersFilter.empty(),
         ),
         child: const Text(
           'Reset',

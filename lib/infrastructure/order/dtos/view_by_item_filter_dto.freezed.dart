@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'view_by_item_history_filter_dto.dart';
+part of 'view_by_item_filter_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ViewByItemHistoryFilterDto _$ViewByItemHistoryFilterDtoFromJson(
-    Map<String, dynamic> json) {
-  return _ViewByItemHistoryFilterDto.fromJson(json);
+ViewByItemFilterDto _$ViewByItemFilterDtoFromJson(Map<String, dynamic> json) {
+  return _ViewByItemFilterDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ViewByItemHistoryFilterDto {
+mixin _$ViewByItemFilterDto {
   @JsonKey(name: 'orderStatus', defaultValue: <String>[])
   List<String> get orderStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'toDate', defaultValue: '')
@@ -30,31 +29,27 @@ mixin _$ViewByItemHistoryFilterDto {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ViewByItemHistoryFilterDtoCopyWith<ViewByItemHistoryFilterDto>
-      get copyWith => throw _privateConstructorUsedError;
+  $ViewByItemFilterDtoCopyWith<ViewByItemFilterDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ViewByItemHistoryFilterDtoCopyWith<$Res> {
-  factory $ViewByItemHistoryFilterDtoCopyWith(ViewByItemHistoryFilterDto value,
-          $Res Function(ViewByItemHistoryFilterDto) then) =
-      _$ViewByItemHistoryFilterDtoCopyWithImpl<$Res,
-          ViewByItemHistoryFilterDto>;
+abstract class $ViewByItemFilterDtoCopyWith<$Res> {
+  factory $ViewByItemFilterDtoCopyWith(
+          ViewByItemFilterDto value, $Res Function(ViewByItemFilterDto) then) =
+      _$ViewByItemFilterDtoCopyWithImpl<$Res, ViewByItemFilterDto>;
   @useResult
   $Res call(
       {@JsonKey(name: 'orderStatus', defaultValue: <String>[])
-          List<String> orderStatus,
-      @JsonKey(name: 'toDate', defaultValue: '')
-          String dateTo,
-      @JsonKey(name: 'fromDate', defaultValue: '')
-          String dateFrom});
+      List<String> orderStatus,
+      @JsonKey(name: 'toDate', defaultValue: '') String dateTo,
+      @JsonKey(name: 'fromDate', defaultValue: '') String dateFrom});
 }
 
 /// @nodoc
-class _$ViewByItemHistoryFilterDtoCopyWithImpl<$Res,
-        $Val extends ViewByItemHistoryFilterDto>
-    implements $ViewByItemHistoryFilterDtoCopyWith<$Res> {
-  _$ViewByItemHistoryFilterDtoCopyWithImpl(this._value, this._then);
+class _$ViewByItemFilterDtoCopyWithImpl<$Res, $Val extends ViewByItemFilterDto>
+    implements $ViewByItemFilterDtoCopyWith<$Res> {
+  _$ViewByItemFilterDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -86,31 +81,26 @@ class _$ViewByItemHistoryFilterDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ViewByItemHistoryFilterDtoCopyWith<$Res>
-    implements $ViewByItemHistoryFilterDtoCopyWith<$Res> {
-  factory _$$_ViewByItemHistoryFilterDtoCopyWith(
-          _$_ViewByItemHistoryFilterDto value,
-          $Res Function(_$_ViewByItemHistoryFilterDto) then) =
-      __$$_ViewByItemHistoryFilterDtoCopyWithImpl<$Res>;
+abstract class _$$_ViewByItemFilterDtoCopyWith<$Res>
+    implements $ViewByItemFilterDtoCopyWith<$Res> {
+  factory _$$_ViewByItemFilterDtoCopyWith(_$_ViewByItemFilterDto value,
+          $Res Function(_$_ViewByItemFilterDto) then) =
+      __$$_ViewByItemFilterDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'orderStatus', defaultValue: <String>[])
-          List<String> orderStatus,
-      @JsonKey(name: 'toDate', defaultValue: '')
-          String dateTo,
-      @JsonKey(name: 'fromDate', defaultValue: '')
-          String dateFrom});
+      List<String> orderStatus,
+      @JsonKey(name: 'toDate', defaultValue: '') String dateTo,
+      @JsonKey(name: 'fromDate', defaultValue: '') String dateFrom});
 }
 
 /// @nodoc
-class __$$_ViewByItemHistoryFilterDtoCopyWithImpl<$Res>
-    extends _$ViewByItemHistoryFilterDtoCopyWithImpl<$Res,
-        _$_ViewByItemHistoryFilterDto>
-    implements _$$_ViewByItemHistoryFilterDtoCopyWith<$Res> {
-  __$$_ViewByItemHistoryFilterDtoCopyWithImpl(
-      _$_ViewByItemHistoryFilterDto _value,
-      $Res Function(_$_ViewByItemHistoryFilterDto) _then)
+class __$$_ViewByItemFilterDtoCopyWithImpl<$Res>
+    extends _$ViewByItemFilterDtoCopyWithImpl<$Res, _$_ViewByItemFilterDto>
+    implements _$$_ViewByItemFilterDtoCopyWith<$Res> {
+  __$$_ViewByItemFilterDtoCopyWithImpl(_$_ViewByItemFilterDto _value,
+      $Res Function(_$_ViewByItemFilterDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -120,7 +110,7 @@ class __$$_ViewByItemHistoryFilterDtoCopyWithImpl<$Res>
     Object? dateTo = null,
     Object? dateFrom = null,
   }) {
-    return _then(_$_ViewByItemHistoryFilterDto(
+    return _then(_$_ViewByItemFilterDto(
       orderStatus: null == orderStatus
           ? _value._orderStatus
           : orderStatus // ignore: cast_nullable_to_non_nullable
@@ -139,19 +129,17 @@ class __$$_ViewByItemHistoryFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ViewByItemHistoryFilterDto extends _ViewByItemHistoryFilterDto {
-  const _$_ViewByItemHistoryFilterDto(
+class _$_ViewByItemFilterDto extends _ViewByItemFilterDto {
+  const _$_ViewByItemFilterDto(
       {@JsonKey(name: 'orderStatus', defaultValue: <String>[])
-          required final List<String> orderStatus,
-      @JsonKey(name: 'toDate', defaultValue: '')
-          required this.dateTo,
-      @JsonKey(name: 'fromDate', defaultValue: '')
-          required this.dateFrom})
+      required final List<String> orderStatus,
+      @JsonKey(name: 'toDate', defaultValue: '') required this.dateTo,
+      @JsonKey(name: 'fromDate', defaultValue: '') required this.dateFrom})
       : _orderStatus = orderStatus,
         super._();
 
-  factory _$_ViewByItemHistoryFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ViewByItemHistoryFilterDtoFromJson(json);
+  factory _$_ViewByItemFilterDto.fromJson(Map<String, dynamic> json) =>
+      _$$_ViewByItemFilterDtoFromJson(json);
 
   final List<String> _orderStatus;
   @override
@@ -171,14 +159,14 @@ class _$_ViewByItemHistoryFilterDto extends _ViewByItemHistoryFilterDto {
 
   @override
   String toString() {
-    return 'ViewByItemHistoryFilterDto(orderStatus: $orderStatus, dateTo: $dateTo, dateFrom: $dateFrom)';
+    return 'ViewByItemFilterDto(orderStatus: $orderStatus, dateTo: $dateTo, dateFrom: $dateFrom)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByItemHistoryFilterDto &&
+            other is _$_ViewByItemFilterDto &&
             const DeepCollectionEquality()
                 .equals(other._orderStatus, _orderStatus) &&
             (identical(other.dateTo, dateTo) || other.dateTo == dateTo) &&
@@ -194,30 +182,29 @@ class _$_ViewByItemHistoryFilterDto extends _ViewByItemHistoryFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByItemHistoryFilterDtoCopyWith<_$_ViewByItemHistoryFilterDto>
-      get copyWith => __$$_ViewByItemHistoryFilterDtoCopyWithImpl<
-          _$_ViewByItemHistoryFilterDto>(this, _$identity);
+  _$$_ViewByItemFilterDtoCopyWith<_$_ViewByItemFilterDto> get copyWith =>
+      __$$_ViewByItemFilterDtoCopyWithImpl<_$_ViewByItemFilterDto>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ViewByItemHistoryFilterDtoToJson(
+    return _$$_ViewByItemFilterDtoToJson(
       this,
     );
   }
 }
 
-abstract class _ViewByItemHistoryFilterDto extends ViewByItemHistoryFilterDto {
-  const factory _ViewByItemHistoryFilterDto(
+abstract class _ViewByItemFilterDto extends ViewByItemFilterDto {
+  const factory _ViewByItemFilterDto(
       {@JsonKey(name: 'orderStatus', defaultValue: <String>[])
-          required final List<String> orderStatus,
-      @JsonKey(name: 'toDate', defaultValue: '')
-          required final String dateTo,
+      required final List<String> orderStatus,
+      @JsonKey(name: 'toDate', defaultValue: '') required final String dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '')
-          required final String dateFrom}) = _$_ViewByItemHistoryFilterDto;
-  const _ViewByItemHistoryFilterDto._() : super._();
+      required final String dateFrom}) = _$_ViewByItemFilterDto;
+  const _ViewByItemFilterDto._() : super._();
 
-  factory _ViewByItemHistoryFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_ViewByItemHistoryFilterDto.fromJson;
+  factory _ViewByItemFilterDto.fromJson(Map<String, dynamic> json) =
+      _$_ViewByItemFilterDto.fromJson;
 
   @override
   @JsonKey(name: 'orderStatus', defaultValue: <String>[])
@@ -230,6 +217,6 @@ abstract class _ViewByItemHistoryFilterDto extends ViewByItemHistoryFilterDto {
   String get dateFrom;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByItemHistoryFilterDtoCopyWith<_$_ViewByItemHistoryFilterDto>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_ViewByItemFilterDtoCopyWith<_$_ViewByItemFilterDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }

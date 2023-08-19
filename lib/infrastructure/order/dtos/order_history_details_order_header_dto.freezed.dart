@@ -47,8 +47,8 @@ mixin _$OrderHistoryDetailsOrderHeadersDto {
   bool get hasPOAttachment => throw _privateConstructorUsedError;
   @JsonKey(name: 'ItmDescription', defaultValue: '')
   String get itmDescription => throw _privateConstructorUsedError;
-  @JsonKey(name: 'MaterialCount', defaultValue: 0)
-  int get materialCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ItmCount', defaultValue: 0)
+  int get itemCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'CreatedTime', defaultValue: '')
   String get createdTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'OrderNumber', defaultValue: '')
@@ -76,44 +76,28 @@ abstract class $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res> {
           OrderHistoryDetailsOrderHeadersDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'TotalTax', defaultValue: 0.0)
-          double totalTax,
+      {@JsonKey(name: 'TotalTax', defaultValue: 0.0) double totalTax,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          String requestedDeliveryDate,
-      @JsonKey(name: 'Type', defaultValue: '')
-          String type,
+      String requestedDeliveryDate,
+      @JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
-          String telephoneNumber,
-      @JsonKey(name: 'OrderValue', defaultValue: 0.0)
-          double orderValue,
-      @JsonKey(name: 'CreatedDate', defaultValue: '')
-          String createdDate,
-      @JsonKey(name: 'EZRXNumber', defaultValue: '')
-          String eZRXNumber,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          String orderBy,
-      @JsonKey(name: 'ReferenceNotes', defaultValue: '')
-          String referenceNotes,
-      @JsonKey(name: 'OrderReason', defaultValue: '')
-          String orderReason,
-      @JsonKey(name: 'CompanyName', defaultValue: '')
-          String companyName,
+      String telephoneNumber,
+      @JsonKey(name: 'OrderValue', defaultValue: 0.0) double orderValue,
+      @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
+      @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
+      @JsonKey(name: 'ReferenceNotes', defaultValue: '') String referenceNotes,
+      @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
+      @JsonKey(name: 'CompanyName', defaultValue: '') String companyName,
       @JsonKey(name: 'HasPOAttachment', defaultValue: false)
-          bool hasPOAttachment,
-      @JsonKey(name: 'ItmDescription', defaultValue: '')
-          String itmDescription,
-      @JsonKey(name: 'MaterialCount', defaultValue: 0)
-          int materialCount,
-      @JsonKey(name: 'CreatedTime', defaultValue: '')
-          String createdTime,
-      @JsonKey(name: 'OrderNumber', defaultValue: '')
-          String orderNumber,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          String pOReference,
-      @JsonKey(name: 'ShipTo', defaultValue: '')
-          String shipTo,
-      @JsonKey(name: 'SoldTo', defaultValue: '')
-          String soldTo});
+      bool hasPOAttachment,
+      @JsonKey(name: 'ItmDescription', defaultValue: '') String itmDescription,
+      @JsonKey(name: 'ItmCount', defaultValue: 0) int itemCount,
+      @JsonKey(name: 'CreatedTime', defaultValue: '') String createdTime,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '') String shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '') String soldTo});
 }
 
 /// @nodoc
@@ -143,7 +127,7 @@ class _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res,
     Object? companyName = null,
     Object? hasPOAttachment = null,
     Object? itmDescription = null,
-    Object? materialCount = null,
+    Object? itemCount = null,
     Object? createdTime = null,
     Object? orderNumber = null,
     Object? pOReference = null,
@@ -203,9 +187,9 @@ class _$OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res,
           ? _value.itmDescription
           : itmDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      materialCount: null == materialCount
-          ? _value.materialCount
-          : materialCount // ignore: cast_nullable_to_non_nullable
+      itemCount: null == itemCount
+          ? _value.itemCount
+          : itemCount // ignore: cast_nullable_to_non_nullable
               as int,
       createdTime: null == createdTime
           ? _value.createdTime
@@ -241,44 +225,28 @@ abstract class _$$_OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'TotalTax', defaultValue: 0.0)
-          double totalTax,
+      {@JsonKey(name: 'TotalTax', defaultValue: 0.0) double totalTax,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          String requestedDeliveryDate,
-      @JsonKey(name: 'Type', defaultValue: '')
-          String type,
+      String requestedDeliveryDate,
+      @JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
-          String telephoneNumber,
-      @JsonKey(name: 'OrderValue', defaultValue: 0.0)
-          double orderValue,
-      @JsonKey(name: 'CreatedDate', defaultValue: '')
-          String createdDate,
-      @JsonKey(name: 'EZRXNumber', defaultValue: '')
-          String eZRXNumber,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          String orderBy,
-      @JsonKey(name: 'ReferenceNotes', defaultValue: '')
-          String referenceNotes,
-      @JsonKey(name: 'OrderReason', defaultValue: '')
-          String orderReason,
-      @JsonKey(name: 'CompanyName', defaultValue: '')
-          String companyName,
+      String telephoneNumber,
+      @JsonKey(name: 'OrderValue', defaultValue: 0.0) double orderValue,
+      @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
+      @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
+      @JsonKey(name: 'ReferenceNotes', defaultValue: '') String referenceNotes,
+      @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
+      @JsonKey(name: 'CompanyName', defaultValue: '') String companyName,
       @JsonKey(name: 'HasPOAttachment', defaultValue: false)
-          bool hasPOAttachment,
-      @JsonKey(name: 'ItmDescription', defaultValue: '')
-          String itmDescription,
-      @JsonKey(name: 'MaterialCount', defaultValue: 0)
-          int materialCount,
-      @JsonKey(name: 'CreatedTime', defaultValue: '')
-          String createdTime,
-      @JsonKey(name: 'OrderNumber', defaultValue: '')
-          String orderNumber,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          String pOReference,
-      @JsonKey(name: 'ShipTo', defaultValue: '')
-          String shipTo,
-      @JsonKey(name: 'SoldTo', defaultValue: '')
-          String soldTo});
+      bool hasPOAttachment,
+      @JsonKey(name: 'ItmDescription', defaultValue: '') String itmDescription,
+      @JsonKey(name: 'ItmCount', defaultValue: 0) int itemCount,
+      @JsonKey(name: 'CreatedTime', defaultValue: '') String createdTime,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '') String shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '') String soldTo});
 }
 
 /// @nodoc
@@ -307,7 +275,7 @@ class __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>
     Object? companyName = null,
     Object? hasPOAttachment = null,
     Object? itmDescription = null,
-    Object? materialCount = null,
+    Object? itemCount = null,
     Object? createdTime = null,
     Object? orderNumber = null,
     Object? pOReference = null,
@@ -367,9 +335,9 @@ class __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>
           ? _value.itmDescription
           : itmDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      materialCount: null == materialCount
-          ? _value.materialCount
-          : materialCount // ignore: cast_nullable_to_non_nullable
+      itemCount: null == itemCount
+          ? _value.itemCount
+          : itemCount // ignore: cast_nullable_to_non_nullable
               as int,
       createdTime: null == createdTime
           ? _value.createdTime
@@ -400,44 +368,30 @@ class __$$_OrderHistoryDetailsOrderHeadersDtoCopyWithImpl<$Res>
 class _$_OrderHistoryDetailsOrderHeadersDto
     extends _OrderHistoryDetailsOrderHeadersDto {
   const _$_OrderHistoryDetailsOrderHeadersDto(
-      {@JsonKey(name: 'TotalTax', defaultValue: 0.0)
-          required this.totalTax,
+      {@JsonKey(name: 'TotalTax', defaultValue: 0.0) required this.totalTax,
       @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-          required this.requestedDeliveryDate,
-      @JsonKey(name: 'Type', defaultValue: '')
-          required this.type,
+      required this.requestedDeliveryDate,
+      @JsonKey(name: 'Type', defaultValue: '') required this.type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
-          required this.telephoneNumber,
-      @JsonKey(name: 'OrderValue', defaultValue: 0.0)
-          required this.orderValue,
-      @JsonKey(name: 'CreatedDate', defaultValue: '')
-          required this.createdDate,
-      @JsonKey(name: 'EZRXNumber', defaultValue: '')
-          required this.eZRXNumber,
-      @JsonKey(name: 'OrderBy', defaultValue: '')
-          required this.orderBy,
+      required this.telephoneNumber,
+      @JsonKey(name: 'OrderValue', defaultValue: 0.0) required this.orderValue,
+      @JsonKey(name: 'CreatedDate', defaultValue: '') required this.createdDate,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') required this.eZRXNumber,
+      @JsonKey(name: 'OrderBy', defaultValue: '') required this.orderBy,
       @JsonKey(name: 'ReferenceNotes', defaultValue: '')
-          required this.referenceNotes,
-      @JsonKey(name: 'OrderReason', defaultValue: '')
-          required this.orderReason,
-      @JsonKey(name: 'CompanyName', defaultValue: '')
-          required this.companyName,
+      required this.referenceNotes,
+      @JsonKey(name: 'OrderReason', defaultValue: '') required this.orderReason,
+      @JsonKey(name: 'CompanyName', defaultValue: '') required this.companyName,
       @JsonKey(name: 'HasPOAttachment', defaultValue: false)
-          required this.hasPOAttachment,
+      required this.hasPOAttachment,
       @JsonKey(name: 'ItmDescription', defaultValue: '')
-          required this.itmDescription,
-      @JsonKey(name: 'MaterialCount', defaultValue: 0)
-          required this.materialCount,
-      @JsonKey(name: 'CreatedTime', defaultValue: '')
-          required this.createdTime,
-      @JsonKey(name: 'OrderNumber', defaultValue: '')
-          required this.orderNumber,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          required this.pOReference,
-      @JsonKey(name: 'ShipTo', defaultValue: '')
-          required this.shipTo,
-      @JsonKey(name: 'SoldTo', defaultValue: '')
-          required this.soldTo})
+      required this.itmDescription,
+      @JsonKey(name: 'ItmCount', defaultValue: 0) required this.itemCount,
+      @JsonKey(name: 'CreatedTime', defaultValue: '') required this.createdTime,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') required this.orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '') required this.pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '') required this.shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '') required this.soldTo})
       : super._();
 
   factory _$_OrderHistoryDetailsOrderHeadersDto.fromJson(
@@ -484,8 +438,8 @@ class _$_OrderHistoryDetailsOrderHeadersDto
   @JsonKey(name: 'ItmDescription', defaultValue: '')
   final String itmDescription;
   @override
-  @JsonKey(name: 'MaterialCount', defaultValue: 0)
-  final int materialCount;
+  @JsonKey(name: 'ItmCount', defaultValue: 0)
+  final int itemCount;
   @override
   @JsonKey(name: 'CreatedTime', defaultValue: '')
   final String createdTime;
@@ -504,7 +458,7 @@ class _$_OrderHistoryDetailsOrderHeadersDto
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderHeadersDto(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderReason: $orderReason, companyName: $companyName, hasPOAttachment: $hasPOAttachment, itmDescription: $itmDescription, materialCount: $materialCount, createdTime: $createdTime, orderNumber: $orderNumber, pOReference: $pOReference, shipTo: $shipTo, soldTo: $soldTo)';
+    return 'OrderHistoryDetailsOrderHeadersDto(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderReason: $orderReason, companyName: $companyName, hasPOAttachment: $hasPOAttachment, itmDescription: $itmDescription, itemCount: $itemCount, createdTime: $createdTime, orderNumber: $orderNumber, pOReference: $pOReference, shipTo: $shipTo, soldTo: $soldTo)';
   }
 
   @override
@@ -536,8 +490,8 @@ class _$_OrderHistoryDetailsOrderHeadersDto
                 other.hasPOAttachment == hasPOAttachment) &&
             (identical(other.itmDescription, itmDescription) ||
                 other.itmDescription == itmDescription) &&
-            (identical(other.materialCount, materialCount) ||
-                other.materialCount == materialCount) &&
+            (identical(other.itemCount, itemCount) ||
+                other.itemCount == itemCount) &&
             (identical(other.createdTime, createdTime) ||
                 other.createdTime == createdTime) &&
             (identical(other.orderNumber, orderNumber) ||
@@ -565,7 +519,7 @@ class _$_OrderHistoryDetailsOrderHeadersDto
         companyName,
         hasPOAttachment,
         itmDescription,
-        materialCount,
+        itemCount,
         createdTime,
         orderNumber,
         pOReference,
@@ -592,45 +546,40 @@ class _$_OrderHistoryDetailsOrderHeadersDto
 abstract class _OrderHistoryDetailsOrderHeadersDto
     extends OrderHistoryDetailsOrderHeadersDto {
   const factory _OrderHistoryDetailsOrderHeadersDto(
-          {@JsonKey(name: 'TotalTax', defaultValue: 0.0)
-              required final double totalTax,
-          @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
-              required final String requestedDeliveryDate,
-          @JsonKey(name: 'Type', defaultValue: '')
-              required final String type,
-          @JsonKey(name: 'TelephoneNumber', defaultValue: '')
-              required final String telephoneNumber,
-          @JsonKey(name: 'OrderValue', defaultValue: 0.0)
-              required final double orderValue,
-          @JsonKey(name: 'CreatedDate', defaultValue: '')
-              required final String createdDate,
-          @JsonKey(name: 'EZRXNumber', defaultValue: '')
-              required final String eZRXNumber,
-          @JsonKey(name: 'OrderBy', defaultValue: '')
-              required final String orderBy,
-          @JsonKey(name: 'ReferenceNotes', defaultValue: '')
-              required final String referenceNotes,
-          @JsonKey(name: 'OrderReason', defaultValue: '')
-              required final String orderReason,
-          @JsonKey(name: 'CompanyName', defaultValue: '')
-              required final String companyName,
-          @JsonKey(name: 'HasPOAttachment', defaultValue: false)
-              required final bool hasPOAttachment,
-          @JsonKey(name: 'ItmDescription', defaultValue: '')
-              required final String itmDescription,
-          @JsonKey(name: 'MaterialCount', defaultValue: 0)
-              required final int materialCount,
-          @JsonKey(name: 'CreatedTime', defaultValue: '')
-              required final String createdTime,
-          @JsonKey(name: 'OrderNumber', defaultValue: '')
-              required final String orderNumber,
-          @JsonKey(name: 'POReference', defaultValue: '')
-              required final String pOReference,
-          @JsonKey(name: 'ShipTo', defaultValue: '')
-              required final String shipTo,
-          @JsonKey(name: 'SoldTo', defaultValue: '')
-              required final String soldTo}) =
-      _$_OrderHistoryDetailsOrderHeadersDto;
+      {@JsonKey(name: 'TotalTax', defaultValue: 0.0)
+      required final double totalTax,
+      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+      required final String requestedDeliveryDate,
+      @JsonKey(name: 'Type', defaultValue: '') required final String type,
+      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+      required final String telephoneNumber,
+      @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+      required final double orderValue,
+      @JsonKey(name: 'CreatedDate', defaultValue: '')
+      required final String createdDate,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '')
+      required final String eZRXNumber,
+      @JsonKey(name: 'OrderBy', defaultValue: '') required final String orderBy,
+      @JsonKey(name: 'ReferenceNotes', defaultValue: '')
+      required final String referenceNotes,
+      @JsonKey(name: 'OrderReason', defaultValue: '')
+      required final String orderReason,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+      required final String companyName,
+      @JsonKey(name: 'HasPOAttachment', defaultValue: false)
+      required final bool hasPOAttachment,
+      @JsonKey(name: 'ItmDescription', defaultValue: '')
+      required final String itmDescription,
+      @JsonKey(name: 'ItmCount', defaultValue: 0) required final int itemCount,
+      @JsonKey(name: 'CreatedTime', defaultValue: '')
+      required final String createdTime,
+      @JsonKey(name: 'OrderNumber', defaultValue: '')
+      required final String orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '')
+      required final String pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '') required final String shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '')
+      required final String soldTo}) = _$_OrderHistoryDetailsOrderHeadersDto;
   const _OrderHistoryDetailsOrderHeadersDto._() : super._();
 
   factory _OrderHistoryDetailsOrderHeadersDto.fromJson(
@@ -677,8 +626,8 @@ abstract class _OrderHistoryDetailsOrderHeadersDto
   @JsonKey(name: 'ItmDescription', defaultValue: '')
   String get itmDescription;
   @override
-  @JsonKey(name: 'MaterialCount', defaultValue: 0)
-  int get materialCount;
+  @JsonKey(name: 'ItmCount', defaultValue: 0)
+  int get itemCount;
   @override
   @JsonKey(name: 'CreatedTime', defaultValue: '')
   String get createdTime;

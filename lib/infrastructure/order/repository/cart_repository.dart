@@ -36,7 +36,7 @@ class CartRepository implements ICartRepository {
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
   final DiscountOverrideRemoteDataSource discountOverrideRemoteDataSource;
-  final OrderHistoryLocalDataSource orderHistoryLocalDataSource;
+  final ViewByItemLocalDataSource viewByItemLocalDataSource;
   final OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
 
   final MixpanelService mixpanelService;
@@ -50,7 +50,7 @@ class CartRepository implements ICartRepository {
     required this.cartLocalDataSource,
     required this.cartRemoteDataSource,
     required this.orderHistoryRemoteDataSource,
-    required this.orderHistoryLocalDataSource,
+    required this.viewByItemLocalDataSource,
   });
 
   @override
@@ -513,7 +513,7 @@ class CartRepository implements ICartRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final products =
-            await orderHistoryLocalDataSource.getItemProductDetails();
+            await viewByItemLocalDataSource.getItemProductDetails();
 
         return Right({
           for (var product in products.productImages)

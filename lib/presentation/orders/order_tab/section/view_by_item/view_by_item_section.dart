@@ -10,7 +10,7 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
@@ -73,7 +73,7 @@ class ViewByItemsPage extends StatelessWidget {
                     shipToInfo:
                         context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
-                    viewByItemHistoryFilter: ViewByItemHistoryFilter.empty(),
+                    viewByItemFilter: ViewByItemFilter.empty(),
                     searchKey: SearchKey(''),
                   ),
                 );

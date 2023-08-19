@@ -11,7 +11,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +46,8 @@ void main() {
     end: DateTime.parse('2023-07-14 18:34:09.177884'),
     start: DateTime.parse('2023-07-07 18:34:09.181722'),
   );
-  final viewByItemHistoryFilter =
-      ViewByItemHistoryFilter.empty().copyWith(dateRange: dateTimeRange);
+  final viewByItemFilter =
+      ViewByItemFilter.empty().copyWith(dateRange: dateTimeRange);
 
   const offSet = 0;
   const pageSize = 24;
@@ -55,7 +55,7 @@ void main() {
     setUp(() async {
       viewByItemRepository = ViewByItemRepositoryMock();
       orderHistoryMockData =
-          await OrderHistoryLocalDataSource().getOrderHistory();
+          await ViewByItemLocalDataSource().getViewByItems();
       WidgetsFlutterBinding.ensureInitialized();
     });
 
@@ -66,7 +66,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => viewByItemRepository.getOrderHistory(
+          () => viewByItemRepository.getViewByItems(
             offset: offSet,
             pageSize: pageSize,
             salesOrgConfig: salesOrgConfig,
@@ -74,7 +74,7 @@ void main() {
             shipTo: shipToInfo,
             soldTo: customerCodeInfo,
             user: user,
-            viewByItemHistoryFilter: viewByItemHistoryFilter,
+            viewByItemFilter: viewByItemFilter,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -88,7 +88,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           user: user,
-          viewByItemHistoryFilter: viewByItemHistoryFilter,
+          viewByItemFilter: viewByItemFilter,
           searchKey: searchKey,
         ),
       ),
@@ -98,7 +98,7 @@ void main() {
           orderHistoryList: OrderHistory.empty(),
           nextPageIndex: 0,
           failureOrSuccessOption: none(),
-          appliedFilter: viewByItemHistoryFilter,
+          appliedFilter: viewByItemFilter,
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
@@ -107,7 +107,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-          appliedFilter: viewByItemHistoryFilter,
+          appliedFilter: viewByItemFilter,
           isFetching: false,
           searchKey: searchKey,
         )
@@ -121,7 +121,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => viewByItemRepository.getOrderHistory(
+          () => viewByItemRepository.getViewByItems(
             offset: offSet,
             pageSize: pageSize,
             salesOrgConfig: salesOrgConfig,
@@ -129,7 +129,7 @@ void main() {
             shipTo: shipToInfo,
             soldTo: customerCodeInfo,
             user: user,
-            viewByItemHistoryFilter: viewByItemHistoryFilter,
+            viewByItemFilter: viewByItemFilter,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -143,7 +143,7 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           user: user,
-          viewByItemHistoryFilter: viewByItemHistoryFilter,
+          viewByItemFilter: viewByItemFilter,
           searchKey: searchKey,
         ),
       ),
@@ -154,7 +154,7 @@ void main() {
           nextPageIndex: 0,
           canLoadMore: true,
           failureOrSuccessOption: none(),
-          appliedFilter: viewByItemHistoryFilter,
+          appliedFilter: viewByItemFilter,
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
@@ -163,7 +163,7 @@ void main() {
               orderHistoryMockData,
             ),
           ),
-          appliedFilter: viewByItemHistoryFilter,
+          appliedFilter: viewByItemFilter,
           isFetching: false,
           nextPageIndex: 1,
           canLoadMore: false,
@@ -179,13 +179,13 @@ void main() {
         viewByItemRepository: viewByItemRepository,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
-        appliedFilter: viewByItemHistoryFilter,
+        appliedFilter: viewByItemFilter,
         orderHistoryList: orderHistoryMockData,
         searchKey: searchKey,
       ),
       setUp: () {
         when(
-          () => viewByItemRepository.getOrderHistory(
+          () => viewByItemRepository.getViewByItems(
             offset: orderHistoryMockData.orderHistoryItems.length,
             pageSize: pageSize,
             salesOrgConfig: salesOrgConfig,
@@ -193,7 +193,7 @@ void main() {
             shipTo: shipToInfo,
             soldTo: customerCodeInfo,
             user: user,
-            viewByItemHistoryFilter: viewByItemHistoryFilter,
+            viewByItemFilter: viewByItemFilter,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -216,7 +216,7 @@ void main() {
           canLoadMore: true,
           orderHistoryList: orderHistoryMockData,
           failureOrSuccessOption: none(),
-          appliedFilter: viewByItemHistoryFilter,
+          appliedFilter: viewByItemFilter,
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
@@ -225,7 +225,7 @@ void main() {
               orderHistoryMockData,
             ),
           ),
-          appliedFilter: viewByItemHistoryFilter,
+          appliedFilter: viewByItemFilter,
           isFetching: false,
           nextPageIndex: 1,
           canLoadMore: false,
@@ -246,13 +246,13 @@ void main() {
         viewByItemRepository: viewByItemRepository,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
-        appliedFilter: viewByItemHistoryFilter,
+        appliedFilter: viewByItemFilter,
         orderHistoryList: orderHistoryMockData,
         searchKey: searchKey,
       ),
       setUp: () {
         when(
-          () => viewByItemRepository.getOrderHistory(
+          () => viewByItemRepository.getViewByItems(
             offset: orderHistoryMockData.orderHistoryItems.length,
             pageSize: pageSize,
             salesOrgConfig: salesOrgConfig,
@@ -260,7 +260,7 @@ void main() {
             shipTo: shipToInfo,
             soldTo: customerCodeInfo,
             user: user,
-            viewByItemHistoryFilter: viewByItemHistoryFilter,
+            viewByItemFilter: viewByItemFilter,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -281,7 +281,7 @@ void main() {
           canLoadMore: true,
           orderHistoryList: orderHistoryMockData,
           failureOrSuccessOption: none(),
-          appliedFilter: viewByItemHistoryFilter,
+          appliedFilter: viewByItemFilter,
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
@@ -291,7 +291,7 @@ void main() {
             ),
           ),
           orderHistoryList: orderHistoryMockData,
-          appliedFilter: viewByItemHistoryFilter,
+          appliedFilter: viewByItemFilter,
           isFetching: false,
           searchKey: searchKey,
         )

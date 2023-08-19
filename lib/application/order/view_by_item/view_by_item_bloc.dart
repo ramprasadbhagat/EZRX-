@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -37,7 +37,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
               salesOrgConfigs: e.salesOrgConfigs,
               shipToInfo: e.shipToInfo,
               user: e.user,
-              viewByItemHistoryFilter: e.viewByItemHistoryFilter,
+              viewByItemFilter: e.viewByItemFilter,
               searchKey: e.searchKey,
             ),
           );
@@ -58,19 +58,19 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
             orderHistoryList: OrderHistory.empty(),
             nextPageIndex: 0,
             failureOrSuccessOption: none(),
-            appliedFilter: e.viewByItemHistoryFilter,
+            appliedFilter: e.viewByItemFilter,
             searchKey: e.searchKey,
           ),
         );
 
-        final failureOrSuccess = await viewByItemRepository.getOrderHistory(
+        final failureOrSuccess = await viewByItemRepository.getViewByItems(
           salesOrgConfig: e.salesOrgConfigs,
           soldTo: e.customerCodeInfo,
           shipTo: e.shipToInfo,
           user: e.user,
           pageSize: _pageSize,
           offset: 0,
-          viewByItemHistoryFilter: e.viewByItemHistoryFilter,
+          viewByItemFilter: e.viewByItemFilter,
           searchKey: e.searchKey,
         );
 
@@ -92,7 +92,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
                 canLoadMore:
                     orderHistoryList.orderHistoryItems.length >= _pageSize,
                 nextPageIndex: 1,
-                appliedFilter: e.viewByItemHistoryFilter,
+                appliedFilter: e.viewByItemFilter,
               ),
             );
           },
@@ -103,14 +103,14 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
       if (state.isFetching || !state.canLoadMore) return;
       emit(state.copyWith(isFetching: true, failureOrSuccessOption: none()));
 
-      final failureOrSuccess = await viewByItemRepository.getOrderHistory(
+      final failureOrSuccess = await viewByItemRepository.getViewByItems(
         salesOrgConfig: e.salesOrgConfigs,
         soldTo: e.customerCodeInfo,
         shipTo: e.shipToInfo,
         user: e.user,
         pageSize: _pageSize,
         offset: state.orderHistoryList.orderHistoryItems.length,
-        viewByItemHistoryFilter: state.appliedFilter,
+        viewByItemFilter: state.appliedFilter,
         searchKey: state.searchKey,
       );
 

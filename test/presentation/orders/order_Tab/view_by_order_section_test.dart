@@ -85,7 +85,7 @@ void main() {
     registerFallbackValue(SalesOrganisation.empty());
     registerFallbackValue(ShipToInfo.empty());
 
-    viewByOrder = await ViewByOrderLocalDataSource().getViewByOrderHistory();
+    viewByOrder = await ViewByOrderLocalDataSource().getViewByOrders();
     autoRouterMock = locator<AppRouter>();
   });
   group('Order History Details', () {
@@ -166,8 +166,11 @@ void main() {
 
     testWidgets('loaderImage  test ', (tester) async {
       when(() => mockViewByOrderBloc.state).thenReturn(
-        ViewByOrderState.initial()
-            .copyWith(isFetching: true, viewByOrderList: viewByOrder),
+        ViewByOrderState.initial().copyWith(
+          isFetching: true,
+          viewByOrderList: viewByOrder
+              .copyWith(orderHeaders: <OrderHistoryDetailsOrderHeader>[]),
+        ),
       );
 
       await tester.pumpWidget(getScopedWidget());
@@ -184,7 +187,7 @@ void main() {
           isFetching: false,
           viewByOrderList: viewByOrder.copyWith(
             orderHeaders: [
-              OrderHistoryDetailsOrderHeader.empty().copyWith(materialCount: 2)
+              OrderHistoryDetailsOrderHeader.empty().copyWith(itemCount: 2)
             ],
           ),
         ),

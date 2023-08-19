@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderSummarySection extends StatelessWidget {
-  final OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
+  final OrderHistoryDetailsOrderHeader viewByOrdersItem;
 
-  const OrderSummarySection({Key? key, required this.viewByOrderHistoryItem})
+  const OrderSummarySection({Key? key, required this.viewByOrdersItem})
       : super(key: key);
 
   @override
@@ -45,7 +45,7 @@ class OrderSummarySection extends StatelessWidget {
             keyText: 'Subtotal (excl. tax)',
             valueText: StringUtils.displayPrice(
               salesOrgConfigs,
-              viewByOrderHistoryItem.orderValue,
+              viewByOrdersItem.orderValue,
             ),
           ),
           /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web

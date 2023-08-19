@@ -24,8 +24,7 @@ class OrderHistoryRemoteDataSource {
     required this.config,
     required this.dataSourceExceptionHandler,
   });
-
-  Future<OrderHistory> getOrderHistory({
+  Future<OrderHistory> getViewByItems({
     required String soldTo,
     required String shipTo,
     required int pageSize,
@@ -35,7 +34,7 @@ class OrderHistoryRemoteDataSource {
     required Map<String, dynamic> filterQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = viewByItemQueryMutation.getViewByItemForCustomer();
+      final queryData = viewByItemQueryMutation.getViewByItem();
 
       final variables = {
         'soldTo': soldTo,
@@ -54,17 +53,18 @@ class OrderHistoryRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'orderHistoryV2',
+        apiEndpoint: 'orderHistoryFetchByItems',
       );
 
       _orderHistoryExceptionChecker(res: res);
 
-      if (res.data['data']['orderHistoryV2']['OrderHistory'].isEmpty) {
+      if (res
+          .data['data']['orderHistoryFetchByItems']['OrderHistory'].isEmpty) {
         return OrderHistory.empty();
       }
 
       return OrderHistoryDto.fromJson(
-        res.data['data']['orderHistoryV2']['OrderHistory'][0],
+        res.data['data']['orderHistoryFetchByItems']['OrderHistory'][0],
       ).toDomain();
     });
   }

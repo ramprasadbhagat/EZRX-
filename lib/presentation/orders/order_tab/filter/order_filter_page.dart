@@ -274,7 +274,7 @@ class _ResetButton extends StatelessWidget {
             context
                 .read<ViewByItemFilterBloc>()
                 .state
-                .emptyViewByItemHistoryFilter,
+                .emptyViewByItemFilter,
           );
         },
         child: Text(

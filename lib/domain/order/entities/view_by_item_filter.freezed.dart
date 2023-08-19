@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'view_by_item_history_filter.dart';
+part of 'view_by_item_filter.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,29 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ViewByItemHistoryFilter {
+mixin _$ViewByItemFilter {
   DateTimeRange get dateRange => throw _privateConstructorUsedError;
   List<StatusType> get orderStatusList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ViewByItemHistoryFilterCopyWith<ViewByItemHistoryFilter> get copyWith =>
+  $ViewByItemFilterCopyWith<ViewByItemFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ViewByItemHistoryFilterCopyWith<$Res> {
-  factory $ViewByItemHistoryFilterCopyWith(ViewByItemHistoryFilter value,
-          $Res Function(ViewByItemHistoryFilter) then) =
-      _$ViewByItemHistoryFilterCopyWithImpl<$Res, ViewByItemHistoryFilter>;
+abstract class $ViewByItemFilterCopyWith<$Res> {
+  factory $ViewByItemFilterCopyWith(
+          ViewByItemFilter value, $Res Function(ViewByItemFilter) then) =
+      _$ViewByItemFilterCopyWithImpl<$Res, ViewByItemFilter>;
   @useResult
   $Res call({DateTimeRange dateRange, List<StatusType> orderStatusList});
 }
 
 /// @nodoc
-class _$ViewByItemHistoryFilterCopyWithImpl<$Res,
-        $Val extends ViewByItemHistoryFilter>
-    implements $ViewByItemHistoryFilterCopyWith<$Res> {
-  _$ViewByItemHistoryFilterCopyWithImpl(this._value, this._then);
+class _$ViewByItemFilterCopyWithImpl<$Res, $Val extends ViewByItemFilter>
+    implements $ViewByItemFilterCopyWith<$Res> {
+  _$ViewByItemFilterCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -64,23 +63,22 @@ class _$ViewByItemHistoryFilterCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ViewByItemHistoryFilterCopyWith<$Res>
-    implements $ViewByItemHistoryFilterCopyWith<$Res> {
-  factory _$$_ViewByItemHistoryFilterCopyWith(_$_ViewByItemHistoryFilter value,
-          $Res Function(_$_ViewByItemHistoryFilter) then) =
-      __$$_ViewByItemHistoryFilterCopyWithImpl<$Res>;
+abstract class _$$_ViewByItemFilterCopyWith<$Res>
+    implements $ViewByItemFilterCopyWith<$Res> {
+  factory _$$_ViewByItemFilterCopyWith(
+          _$_ViewByItemFilter value, $Res Function(_$_ViewByItemFilter) then) =
+      __$$_ViewByItemFilterCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DateTimeRange dateRange, List<StatusType> orderStatusList});
 }
 
 /// @nodoc
-class __$$_ViewByItemHistoryFilterCopyWithImpl<$Res>
-    extends _$ViewByItemHistoryFilterCopyWithImpl<$Res,
-        _$_ViewByItemHistoryFilter>
-    implements _$$_ViewByItemHistoryFilterCopyWith<$Res> {
-  __$$_ViewByItemHistoryFilterCopyWithImpl(_$_ViewByItemHistoryFilter _value,
-      $Res Function(_$_ViewByItemHistoryFilter) _then)
+class __$$_ViewByItemFilterCopyWithImpl<$Res>
+    extends _$ViewByItemFilterCopyWithImpl<$Res, _$_ViewByItemFilter>
+    implements _$$_ViewByItemFilterCopyWith<$Res> {
+  __$$_ViewByItemFilterCopyWithImpl(
+      _$_ViewByItemFilter _value, $Res Function(_$_ViewByItemFilter) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -89,7 +87,7 @@ class __$$_ViewByItemHistoryFilterCopyWithImpl<$Res>
     Object? dateRange = null,
     Object? orderStatusList = null,
   }) {
-    return _then(_$_ViewByItemHistoryFilter(
+    return _then(_$_ViewByItemFilter(
       dateRange: null == dateRange
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
@@ -104,8 +102,8 @@ class __$$_ViewByItemHistoryFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByItemHistoryFilter extends _ViewByItemHistoryFilter {
-  _$_ViewByItemHistoryFilter(
+class _$_ViewByItemFilter extends _ViewByItemFilter {
+  _$_ViewByItemFilter(
       {required this.dateRange,
       required final List<StatusType> orderStatusList})
       : _orderStatusList = orderStatusList,
@@ -123,14 +121,14 @@ class _$_ViewByItemHistoryFilter extends _ViewByItemHistoryFilter {
 
   @override
   String toString() {
-    return 'ViewByItemHistoryFilter(dateRange: $dateRange, orderStatusList: $orderStatusList)';
+    return 'ViewByItemFilter(dateRange: $dateRange, orderStatusList: $orderStatusList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByItemHistoryFilter &&
+            other is _$_ViewByItemFilter &&
             (identical(other.dateRange, dateRange) ||
                 other.dateRange == dateRange) &&
             const DeepCollectionEquality()
@@ -144,18 +142,15 @@ class _$_ViewByItemHistoryFilter extends _ViewByItemHistoryFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByItemHistoryFilterCopyWith<_$_ViewByItemHistoryFilter>
-      get copyWith =>
-          __$$_ViewByItemHistoryFilterCopyWithImpl<_$_ViewByItemHistoryFilter>(
-              this, _$identity);
+  _$$_ViewByItemFilterCopyWith<_$_ViewByItemFilter> get copyWith =>
+      __$$_ViewByItemFilterCopyWithImpl<_$_ViewByItemFilter>(this, _$identity);
 }
 
-abstract class _ViewByItemHistoryFilter extends ViewByItemHistoryFilter {
-  factory _ViewByItemHistoryFilter(
-          {required final DateTimeRange dateRange,
-          required final List<StatusType> orderStatusList}) =
-      _$_ViewByItemHistoryFilter;
-  _ViewByItemHistoryFilter._() : super._();
+abstract class _ViewByItemFilter extends ViewByItemFilter {
+  factory _ViewByItemFilter(
+      {required final DateTimeRange dateRange,
+      required final List<StatusType> orderStatusList}) = _$_ViewByItemFilter;
+  _ViewByItemFilter._() : super._();
 
   @override
   DateTimeRange get dateRange;
@@ -163,6 +158,6 @@ abstract class _ViewByItemHistoryFilter extends ViewByItemHistoryFilter {
   List<StatusType> get orderStatusList;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByItemHistoryFilterCopyWith<_$_ViewByItemHistoryFilter>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_ViewByItemFilterCopyWith<_$_ViewByItemFilter> get copyWith =>
+      throw _privateConstructorUsedError;
 }

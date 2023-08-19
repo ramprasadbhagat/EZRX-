@@ -19,22 +19,20 @@ mixin _$ViewByOrderFilterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ViewByOrderHistoryFilter viewByOrderHistoryFilter)
+    required TResult Function(ViewByOrdersFilter viewByOrdersFilter)
         setDateRange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ViewByOrderHistoryFilter viewByOrderHistoryFilter)?
-        setDateRange,
+    TResult? Function(ViewByOrdersFilter viewByOrdersFilter)? setDateRange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ViewByOrderHistoryFilter viewByOrderHistoryFilter)?
-        setDateRange,
+    TResult Function(ViewByOrdersFilter viewByOrdersFilter)? setDateRange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,7 +115,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ViewByOrderHistoryFilter viewByOrderHistoryFilter)
+    required TResult Function(ViewByOrdersFilter viewByOrdersFilter)
         setDateRange,
   }) {
     return initialized();
@@ -127,8 +125,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ViewByOrderHistoryFilter viewByOrderHistoryFilter)?
-        setDateRange,
+    TResult? Function(ViewByOrdersFilter viewByOrdersFilter)? setDateRange,
   }) {
     return initialized?.call();
   }
@@ -137,8 +134,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ViewByOrderHistoryFilter viewByOrderHistoryFilter)?
-        setDateRange,
+    TResult Function(ViewByOrdersFilter viewByOrdersFilter)? setDateRange,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -189,9 +185,9 @@ abstract class _$$_SetDateRangeCopyWith<$Res> {
           _$_SetDateRange value, $Res Function(_$_SetDateRange) then) =
       __$$_SetDateRangeCopyWithImpl<$Res>;
   @useResult
-  $Res call({ViewByOrderHistoryFilter viewByOrderHistoryFilter});
+  $Res call({ViewByOrdersFilter viewByOrdersFilter});
 
-  $ViewByOrderHistoryFilterCopyWith<$Res> get viewByOrderHistoryFilter;
+  $ViewByOrdersFilterCopyWith<$Res> get viewByOrdersFilter;
 }
 
 /// @nodoc
@@ -205,22 +201,22 @@ class __$$_SetDateRangeCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viewByOrderHistoryFilter = null,
+    Object? viewByOrdersFilter = null,
   }) {
     return _then(_$_SetDateRange(
-      null == viewByOrderHistoryFilter
-          ? _value.viewByOrderHistoryFilter
-          : viewByOrderHistoryFilter // ignore: cast_nullable_to_non_nullable
-              as ViewByOrderHistoryFilter,
+      null == viewByOrdersFilter
+          ? _value.viewByOrdersFilter
+          : viewByOrdersFilter // ignore: cast_nullable_to_non_nullable
+              as ViewByOrdersFilter,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ViewByOrderHistoryFilterCopyWith<$Res> get viewByOrderHistoryFilter {
-    return $ViewByOrderHistoryFilterCopyWith<$Res>(
-        _value.viewByOrderHistoryFilter, (value) {
-      return _then(_value.copyWith(viewByOrderHistoryFilter: value));
+  $ViewByOrdersFilterCopyWith<$Res> get viewByOrdersFilter {
+    return $ViewByOrdersFilterCopyWith<$Res>(_value.viewByOrdersFilter,
+        (value) {
+      return _then(_value.copyWith(viewByOrdersFilter: value));
     });
   }
 }
@@ -228,14 +224,14 @@ class __$$_SetDateRangeCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SetDateRange implements _SetDateRange {
-  const _$_SetDateRange(this.viewByOrderHistoryFilter);
+  const _$_SetDateRange(this.viewByOrdersFilter);
 
   @override
-  final ViewByOrderHistoryFilter viewByOrderHistoryFilter;
+  final ViewByOrdersFilter viewByOrdersFilter;
 
   @override
   String toString() {
-    return 'ViewByOrderFilterEvent.setDateRange(viewByOrderHistoryFilter: $viewByOrderHistoryFilter)';
+    return 'ViewByOrderFilterEvent.setDateRange(viewByOrdersFilter: $viewByOrdersFilter)';
   }
 
   @override
@@ -243,13 +239,12 @@ class _$_SetDateRange implements _SetDateRange {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetDateRange &&
-            (identical(
-                    other.viewByOrderHistoryFilter, viewByOrderHistoryFilter) ||
-                other.viewByOrderHistoryFilter == viewByOrderHistoryFilter));
+            (identical(other.viewByOrdersFilter, viewByOrdersFilter) ||
+                other.viewByOrdersFilter == viewByOrdersFilter));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, viewByOrderHistoryFilter);
+  int get hashCode => Object.hash(runtimeType, viewByOrdersFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -261,32 +256,30 @@ class _$_SetDateRange implements _SetDateRange {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ViewByOrderHistoryFilter viewByOrderHistoryFilter)
+    required TResult Function(ViewByOrdersFilter viewByOrdersFilter)
         setDateRange,
   }) {
-    return setDateRange(viewByOrderHistoryFilter);
+    return setDateRange(viewByOrdersFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ViewByOrderHistoryFilter viewByOrderHistoryFilter)?
-        setDateRange,
+    TResult? Function(ViewByOrdersFilter viewByOrdersFilter)? setDateRange,
   }) {
-    return setDateRange?.call(viewByOrderHistoryFilter);
+    return setDateRange?.call(viewByOrdersFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ViewByOrderHistoryFilter viewByOrderHistoryFilter)?
-        setDateRange,
+    TResult Function(ViewByOrdersFilter viewByOrdersFilter)? setDateRange,
     required TResult orElse(),
   }) {
     if (setDateRange != null) {
-      return setDateRange(viewByOrderHistoryFilter);
+      return setDateRange(viewByOrdersFilter);
     }
     return orElse();
   }
@@ -324,11 +317,10 @@ class _$_SetDateRange implements _SetDateRange {
 }
 
 abstract class _SetDateRange implements ViewByOrderFilterEvent {
-  const factory _SetDateRange(
-          final ViewByOrderHistoryFilter viewByOrderHistoryFilter) =
+  const factory _SetDateRange(final ViewByOrdersFilter viewByOrdersFilter) =
       _$_SetDateRange;
 
-  ViewByOrderHistoryFilter get viewByOrderHistoryFilter;
+  ViewByOrdersFilter get viewByOrdersFilter;
   @JsonKey(ignore: true)
   _$$_SetDateRangeCopyWith<_$_SetDateRange> get copyWith =>
       throw _privateConstructorUsedError;
@@ -336,7 +328,7 @@ abstract class _SetDateRange implements ViewByOrderFilterEvent {
 
 /// @nodoc
 mixin _$ViewByOrderFilterState {
-  ViewByOrderHistoryFilter get filter => throw _privateConstructorUsedError;
+  ViewByOrdersFilter get filter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByOrderFilterStateCopyWith<ViewByOrderFilterState> get copyWith =>
@@ -349,9 +341,9 @@ abstract class $ViewByOrderFilterStateCopyWith<$Res> {
           $Res Function(ViewByOrderFilterState) then) =
       _$ViewByOrderFilterStateCopyWithImpl<$Res, ViewByOrderFilterState>;
   @useResult
-  $Res call({ViewByOrderHistoryFilter filter});
+  $Res call({ViewByOrdersFilter filter});
 
-  $ViewByOrderHistoryFilterCopyWith<$Res> get filter;
+  $ViewByOrdersFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -374,14 +366,14 @@ class _$ViewByOrderFilterStateCopyWithImpl<$Res,
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
-              as ViewByOrderHistoryFilter,
+              as ViewByOrdersFilter,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ViewByOrderHistoryFilterCopyWith<$Res> get filter {
-    return $ViewByOrderHistoryFilterCopyWith<$Res>(_value.filter, (value) {
+  $ViewByOrdersFilterCopyWith<$Res> get filter {
+    return $ViewByOrdersFilterCopyWith<$Res>(_value.filter, (value) {
       return _then(_value.copyWith(filter: value) as $Val);
     });
   }
@@ -395,10 +387,10 @@ abstract class _$$_ViewByOrderFilterStateCopyWith<$Res>
       __$$_ViewByOrderFilterStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ViewByOrderHistoryFilter filter});
+  $Res call({ViewByOrdersFilter filter});
 
   @override
-  $ViewByOrderHistoryFilterCopyWith<$Res> get filter;
+  $ViewByOrdersFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -419,7 +411,7 @@ class __$$_ViewByOrderFilterStateCopyWithImpl<$Res>
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
-              as ViewByOrderHistoryFilter,
+              as ViewByOrdersFilter,
     ));
   }
 }
@@ -430,7 +422,7 @@ class _$_ViewByOrderFilterState implements _ViewByOrderFilterState {
   const _$_ViewByOrderFilterState({required this.filter});
 
   @override
-  final ViewByOrderHistoryFilter filter;
+  final ViewByOrdersFilter filter;
 
   @override
   String toString() {
@@ -458,11 +450,10 @@ class _$_ViewByOrderFilterState implements _ViewByOrderFilterState {
 
 abstract class _ViewByOrderFilterState implements ViewByOrderFilterState {
   const factory _ViewByOrderFilterState(
-          {required final ViewByOrderHistoryFilter filter}) =
-      _$_ViewByOrderFilterState;
+      {required final ViewByOrdersFilter filter}) = _$_ViewByOrderFilterState;
 
   @override
-  ViewByOrderHistoryFilter get filter;
+  ViewByOrdersFilter get filter;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByOrderFilterStateCopyWith<_$_ViewByOrderFilterState> get copyWith =>

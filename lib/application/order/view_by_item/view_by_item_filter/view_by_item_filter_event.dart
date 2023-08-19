@@ -4,7 +4,7 @@ part of 'view_by_item_filter_bloc.dart';
 class ViewByItemFilterEvent with _$ViewByItemFilterEvent {
   const factory ViewByItemFilterEvent.initializeOrReset() = _Initialized;
   const factory ViewByItemFilterEvent.resetFiltersToLastApplied({
-    required ViewByItemHistoryFilter lastAppliedFilter,
+    required ViewByItemFilter lastAppliedFilter,
   }) = _ResetFiltersToLastApplied;
   const factory ViewByItemFilterEvent.setOrderDate({
     required DateTimeRange dateRange,

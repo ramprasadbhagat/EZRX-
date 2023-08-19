@@ -8,8 +8,8 @@ import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/vi
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_item_history_filter.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -227,11 +227,11 @@ class _FilterElement extends StatelessWidget {
         viewByItem
             ? _doFetchViewByItem(
                 context: context,
-                filter: value as ViewByItemHistoryFilter,
+                filter: value as ViewByItemFilter,
               )
             : _doFetchViewByOrder(
                 context: context,
-                filter: value as ViewByOrderHistoryFilter,
+                filter: value as ViewByOrdersFilter,
               );
       },
     );
@@ -239,7 +239,7 @@ class _FilterElement extends StatelessWidget {
 
   void _doFetchViewByItem({
     required BuildContext context,
-    required ViewByItemHistoryFilter filter,
+    required ViewByItemFilter filter,
   }) {
     if (context.read<ViewByItemsBloc>().state.appliedFilter != filter) {
       context.read<ViewByItemsBloc>().add(
@@ -249,7 +249,7 @@ class _FilterElement extends StatelessWidget {
               salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
               shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               user: context.read<UserBloc>().state.user,
-              viewByItemHistoryFilter: filter,
+              viewByItemFilter: filter,
               searchKey: context.read<ViewByItemsBloc>().state.searchKey,
             ),
           );
@@ -258,7 +258,7 @@ class _FilterElement extends StatelessWidget {
 
   void _doFetchViewByOrder({
     required BuildContext context,
-    required ViewByOrderHistoryFilter filter,
+    required ViewByOrdersFilter filter,
   }) {
     if (context.read<ViewByOrderBloc>().state.appliedFilter != filter) {
       context.read<ViewByOrderBloc>().add(
@@ -419,7 +419,7 @@ class _OrderSearchBar extends StatelessWidget {
             salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
             shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
             user: context.read<UserBloc>().state.user,
-            viewByItemHistoryFilter:
+            viewByItemFilter:
                 context.read<ViewByItemsBloc>().state.appliedFilter,
             searchKey: SearchKey.searchFilter(searchKey),
           ),
@@ -457,7 +457,7 @@ class _OrderSearchBar extends StatelessWidget {
               salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
               shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               user: context.read<UserBloc>().state.user,
-              viewByItemHistoryFilter:
+              viewByItemFilter:
                   context.read<ViewByItemsBloc>().state.appliedFilter,
               searchKey: SearchKey.searchFilter(searchKey),
             ),

@@ -25,7 +25,7 @@ mixin _$ViewByOrderEvent {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)
         fetch,
     required TResult Function(
@@ -34,7 +34,7 @@ mixin _$ViewByOrderEvent {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
@@ -55,7 +55,7 @@ mixin _$ViewByOrderEvent {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         fetch,
     TResult? Function(
@@ -64,7 +64,7 @@ mixin _$ViewByOrderEvent {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
@@ -85,7 +85,7 @@ mixin _$ViewByOrderEvent {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         fetch,
     TResult Function(
@@ -94,7 +94,7 @@ mixin _$ViewByOrderEvent {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
@@ -197,7 +197,7 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)
         fetch,
     required TResult Function(
@@ -206,7 +206,7 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
@@ -230,7 +230,7 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         fetch,
     TResult? Function(
@@ -239,7 +239,7 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
@@ -263,7 +263,7 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         fetch,
     TResult Function(
@@ -272,7 +272,7 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
@@ -343,14 +343,14 @@ abstract class _$$_FetchCopyWith<$Res> {
       ShipToInfo shipToInfo,
       User user,
       String sortDirection,
-      ViewByOrderHistoryFilter filter,
+      ViewByOrdersFilter filter,
       SearchKey searchKey});
 
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
-  $ViewByOrderHistoryFilterCopyWith<$Res> get filter;
+  $ViewByOrdersFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -395,7 +395,7 @@ class __$$_FetchCopyWithImpl<$Res>
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
-              as ViewByOrderHistoryFilter,
+              as ViewByOrdersFilter,
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -438,8 +438,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $ViewByOrderHistoryFilterCopyWith<$Res> get filter {
-    return $ViewByOrderHistoryFilterCopyWith<$Res>(_value.filter, (value) {
+  $ViewByOrdersFilterCopyWith<$Res> get filter {
+    return $ViewByOrdersFilterCopyWith<$Res>(_value.filter, (value) {
       return _then(_value.copyWith(filter: value));
     });
   }
@@ -468,7 +468,7 @@ class _$_Fetch implements _Fetch {
   @override
   final String sortDirection;
   @override
-  final ViewByOrderHistoryFilter filter;
+  final ViewByOrdersFilter filter;
   @override
   final SearchKey searchKey;
 
@@ -516,7 +516,7 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)
         fetch,
     required TResult Function(
@@ -525,7 +525,7 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
@@ -550,7 +550,7 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         fetch,
     TResult? Function(
@@ -559,7 +559,7 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
@@ -584,7 +584,7 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         fetch,
     TResult Function(
@@ -593,7 +593,7 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
@@ -657,7 +657,7 @@ abstract class _Fetch implements ViewByOrderEvent {
       required final ShipToInfo shipToInfo,
       required final User user,
       required final String sortDirection,
-      required final ViewByOrderHistoryFilter filter,
+      required final ViewByOrdersFilter filter,
       required final SearchKey searchKey}) = _$_Fetch;
 
   SalesOrganisationConfigs get salesOrgConfigs;
@@ -665,7 +665,7 @@ abstract class _Fetch implements ViewByOrderEvent {
   ShipToInfo get shipToInfo;
   User get user;
   String get sortDirection;
-  ViewByOrderHistoryFilter get filter;
+  ViewByOrdersFilter get filter;
   SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
@@ -684,14 +684,14 @@ abstract class _$$_AutoSearchProductCopyWith<$Res> {
       ShipToInfo shipToInfo,
       User user,
       String sortDirection,
-      ViewByOrderHistoryFilter filter,
+      ViewByOrdersFilter filter,
       SearchKey searchKey});
 
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
-  $ViewByOrderHistoryFilterCopyWith<$Res> get filter;
+  $ViewByOrdersFilterCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -737,7 +737,7 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
-              as ViewByOrderHistoryFilter,
+              as ViewByOrdersFilter,
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -780,8 +780,8 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $ViewByOrderHistoryFilterCopyWith<$Res> get filter {
-    return $ViewByOrderHistoryFilterCopyWith<$Res>(_value.filter, (value) {
+  $ViewByOrdersFilterCopyWith<$Res> get filter {
+    return $ViewByOrdersFilterCopyWith<$Res>(_value.filter, (value) {
       return _then(_value.copyWith(filter: value));
     });
   }
@@ -810,7 +810,7 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
   @override
   final String sortDirection;
   @override
-  final ViewByOrderHistoryFilter filter;
+  final ViewByOrdersFilter filter;
   @override
   final SearchKey searchKey;
 
@@ -859,7 +859,7 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)
         fetch,
     required TResult Function(
@@ -868,7 +868,7 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
@@ -893,7 +893,7 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         fetch,
     TResult? Function(
@@ -902,7 +902,7 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
@@ -927,7 +927,7 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         fetch,
     TResult Function(
@@ -936,7 +936,7 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
@@ -1000,7 +1000,7 @@ abstract class _AutoSearchProduct implements ViewByOrderEvent {
       required final ShipToInfo shipToInfo,
       required final User user,
       required final String sortDirection,
-      required final ViewByOrderHistoryFilter filter,
+      required final ViewByOrdersFilter filter,
       required final SearchKey searchKey}) = _$_AutoSearchProduct;
 
   SalesOrganisationConfigs get salesOrgConfigs;
@@ -1008,7 +1008,7 @@ abstract class _AutoSearchProduct implements ViewByOrderEvent {
   ShipToInfo get shipToInfo;
   User get user;
   String get sortDirection;
-  ViewByOrderHistoryFilter get filter;
+  ViewByOrdersFilter get filter;
   SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
@@ -1171,7 +1171,7 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)
         fetch,
     required TResult Function(
@@ -1180,7 +1180,7 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)
         autoSearchProduct,
     required TResult Function(
@@ -1205,7 +1205,7 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         fetch,
     TResult? Function(
@@ -1214,7 +1214,7 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function(
@@ -1239,7 +1239,7 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         fetch,
     TResult Function(
@@ -1248,7 +1248,7 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             String sortDirection,
-            ViewByOrderHistoryFilter filter,
+            ViewByOrdersFilter filter,
             SearchKey searchKey)?
         autoSearchProduct,
     TResult Function(
@@ -1332,8 +1332,7 @@ mixin _$ViewByOrderState {
   int get nextPageIndex => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  ViewByOrderHistoryFilter get appliedFilter =>
-      throw _privateConstructorUsedError;
+  ViewByOrdersFilter get appliedFilter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByOrderStateCopyWith<ViewByOrderState> get copyWith =>
@@ -1353,10 +1352,10 @@ abstract class $ViewByOrderStateCopyWith<$Res> {
       SearchKey searchKey,
       int nextPageIndex,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      ViewByOrderHistoryFilter appliedFilter});
+      ViewByOrdersFilter appliedFilter});
 
   $ViewByOrderCopyWith<$Res> get viewByOrderList;
-  $ViewByOrderHistoryFilterCopyWith<$Res> get appliedFilter;
+  $ViewByOrdersFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
@@ -1408,7 +1407,7 @@ class _$ViewByOrderStateCopyWithImpl<$Res, $Val extends ViewByOrderState>
       appliedFilter: null == appliedFilter
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
-              as ViewByOrderHistoryFilter,
+              as ViewByOrdersFilter,
     ) as $Val);
   }
 
@@ -1422,9 +1421,8 @@ class _$ViewByOrderStateCopyWithImpl<$Res, $Val extends ViewByOrderState>
 
   @override
   @pragma('vm:prefer-inline')
-  $ViewByOrderHistoryFilterCopyWith<$Res> get appliedFilter {
-    return $ViewByOrderHistoryFilterCopyWith<$Res>(_value.appliedFilter,
-        (value) {
+  $ViewByOrdersFilterCopyWith<$Res> get appliedFilter {
+    return $ViewByOrdersFilterCopyWith<$Res>(_value.appliedFilter, (value) {
       return _then(_value.copyWith(appliedFilter: value) as $Val);
     });
   }
@@ -1445,12 +1443,12 @@ abstract class _$$_ViewByOrderStateCopyWith<$Res>
       SearchKey searchKey,
       int nextPageIndex,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      ViewByOrderHistoryFilter appliedFilter});
+      ViewByOrdersFilter appliedFilter});
 
   @override
   $ViewByOrderCopyWith<$Res> get viewByOrderList;
   @override
-  $ViewByOrderHistoryFilterCopyWith<$Res> get appliedFilter;
+  $ViewByOrdersFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
@@ -1500,7 +1498,7 @@ class __$$_ViewByOrderStateCopyWithImpl<$Res>
       appliedFilter: null == appliedFilter
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
-              as ViewByOrderHistoryFilter,
+              as ViewByOrdersFilter,
     ));
   }
 }
@@ -1531,7 +1529,7 @@ class _$_ViewByOrderState extends _ViewByOrderState {
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
-  final ViewByOrderHistoryFilter appliedFilter;
+  final ViewByOrdersFilter appliedFilter;
 
   @override
   String toString() {
@@ -1585,8 +1583,7 @@ abstract class _ViewByOrderState extends ViewByOrderState {
       required final SearchKey searchKey,
       required final int nextPageIndex,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final ViewByOrderHistoryFilter
-          appliedFilter}) = _$_ViewByOrderState;
+      required final ViewByOrdersFilter appliedFilter}) = _$_ViewByOrderState;
   const _ViewByOrderState._() : super._();
 
   @override
@@ -1602,7 +1599,7 @@ abstract class _ViewByOrderState extends ViewByOrderState {
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
-  ViewByOrderHistoryFilter get appliedFilter;
+  ViewByOrdersFilter get appliedFilter;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByOrderStateCopyWith<_$_ViewByOrderState> get copyWith =>

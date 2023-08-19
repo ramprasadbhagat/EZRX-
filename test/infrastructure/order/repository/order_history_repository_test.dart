@@ -8,7 +8,7 @@ import 'package:mocktail/mocktail.dart';
 class MockConfig extends Mock implements Config {}
 
 class OrderHistoryLocalDataSourceMock extends Mock
-    implements OrderHistoryLocalDataSource {}
+    implements ViewByItemLocalDataSource {}
 
 class OrderHistoryRemoteDataSourceMock extends Mock
     implements OrderHistoryRemoteDataSource {}

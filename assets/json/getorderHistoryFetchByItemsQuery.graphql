@@ -1,0 +1,79 @@
+query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $language: String, $orderStatus: [String!], $searchKey: String, $isGreen: Boolean) {
+  orderHistoryFetchByItems(
+    soldTo: $soldTo
+    fromDate: $fromDate
+    toDate: $toDate
+    shipTo: $shipTo
+    first: $first
+    after: $after
+    language: $language
+    orderStatus: $orderStatus
+    searchKey: $searchKey
+    isGreen: $isGreen
+  ) {
+    OrderCount
+    OrderHistory {
+      OrderBasicInformation {
+        SoldTo
+        CompanyName
+        ShipTo
+       
+      }
+      OrderItems {
+        MaterialCode
+        MaterialDescription
+        DefaultMaterialDescription
+        CreatedTime
+        CreatedDate
+        Qty
+        UnitPrice
+        TotalPrice
+        Status
+        LineNumber
+        Tax
+        DeliveryDate
+        DeliveryTime
+        OrderType
+        EZRXNumber
+        OrderNumber
+        OrderBy
+        PurchaseOrderType
+        WarehouseStorageCondition
+        Available
+        Batch
+        ExpiryDate
+        IsMarketplace
+        Seller
+        POReference
+        ManufactureName
+        InvoiceNumber
+        IsBonusMaterial
+        GovernmentMaterialCode
+        ItemRegistrationNumber
+        TelephoneNumber
+        HidePrice
+        TenderContractNumber
+        TenderOrderReason
+        TenderPrice
+        TenderPriceUnit
+        TenderContractReference
+        isGreen
+        IsBundle
+       
+      }
+     
+    }
+   
+  }
+}
+variables : {
+  "soldTo": "0030082707",
+  "shipTo": [
+    "0070149863"
+  ],
+  "first": 10,
+  "after": 0,
+  "language": "EN",
+  "fromDate": "20230805",
+  "toDate": "20230811"
+}

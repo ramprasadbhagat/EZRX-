@@ -1233,7 +1233,7 @@ void setupLocator() {
   //
   //============================================================
 
-  locator.registerLazySingleton(() => OrderHistoryLocalDataSource());
+  locator.registerLazySingleton(() => ViewByItemLocalDataSource());
   locator.registerLazySingleton(() => ViewByItemQueryMutation());
   locator.registerLazySingleton(
     () => OrderHistoryRemoteDataSource(
@@ -1247,7 +1247,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ViewByItemRepository(
       config: locator<Config>(),
-      localDataSource: locator<OrderHistoryLocalDataSource>(),
+      localDataSource: locator<ViewByItemLocalDataSource>(),
       orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
       productImageLocalDataSource: locator<ProductImageLocalDataSource>(),
       productImageRemoteDataSource: locator<ProductImageRemoteDataSource>(),
@@ -1880,7 +1880,7 @@ void setupLocator() {
           locator<DiscountOverrideRemoteDataSource>(),
       cartLocalDataSource: locator<CartLocalDataSource>(),
       cartRemoteDataSource: locator<CartRemoteDataSource>(),
-      orderHistoryLocalDataSource: locator<OrderHistoryLocalDataSource>(),
+      viewByItemLocalDataSource: locator<ViewByItemLocalDataSource>(),
       orderHistoryRemoteDataSource: locator<OrderHistoryRemoteDataSource>(),
     ),
   );

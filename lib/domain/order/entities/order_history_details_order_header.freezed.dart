@@ -34,7 +34,7 @@ mixin _$OrderHistoryDetailsOrderHeader {
   CompanyName get companyName => throw _privateConstructorUsedError;
   String get createdTime => throw _privateConstructorUsedError;
   POReference get pOReference => throw _privateConstructorUsedError;
-  int get materialCount => throw _privateConstructorUsedError;
+  int get itemCount => throw _privateConstructorUsedError;
   String get itmDescription => throw _privateConstructorUsedError;
   bool get hasPOAttachment => throw _privateConstructorUsedError;
 
@@ -68,7 +68,7 @@ abstract class $OrderHistoryDetailsOrderHeaderCopyWith<$Res> {
       CompanyName companyName,
       String createdTime,
       POReference pOReference,
-      int materialCount,
+      int itemCount,
       String itmDescription,
       bool hasPOAttachment});
 }
@@ -103,7 +103,7 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
     Object? companyName = null,
     Object? createdTime = null,
     Object? pOReference = null,
-    Object? materialCount = null,
+    Object? itemCount = null,
     Object? itmDescription = null,
     Object? hasPOAttachment = null,
   }) {
@@ -172,9 +172,9 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
               as POReference,
-      materialCount: null == materialCount
-          ? _value.materialCount
-          : materialCount // ignore: cast_nullable_to_non_nullable
+      itemCount: null == itemCount
+          ? _value.itemCount
+          : itemCount // ignore: cast_nullable_to_non_nullable
               as int,
       itmDescription: null == itmDescription
           ? _value.itmDescription
@@ -214,7 +214,7 @@ abstract class _$$_OrderHistoryDetailsOrderHeaderCopyWith<$Res>
       CompanyName companyName,
       String createdTime,
       POReference pOReference,
-      int materialCount,
+      int itemCount,
       String itmDescription,
       bool hasPOAttachment});
 }
@@ -248,7 +248,7 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
     Object? companyName = null,
     Object? createdTime = null,
     Object? pOReference = null,
-    Object? materialCount = null,
+    Object? itemCount = null,
     Object? itmDescription = null,
     Object? hasPOAttachment = null,
   }) {
@@ -317,9 +317,9 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
           ? _value.pOReference
           : pOReference // ignore: cast_nullable_to_non_nullable
               as POReference,
-      materialCount: null == materialCount
-          ? _value.materialCount
-          : materialCount // ignore: cast_nullable_to_non_nullable
+      itemCount: null == itemCount
+          ? _value.itemCount
+          : itemCount // ignore: cast_nullable_to_non_nullable
               as int,
       itmDescription: null == itmDescription
           ? _value.itmDescription
@@ -354,7 +354,7 @@ class _$_OrderHistoryDetailsOrderHeader
       required this.companyName,
       required this.createdTime,
       required this.pOReference,
-      required this.materialCount,
+      required this.itemCount,
       required this.itmDescription,
       required this.hasPOAttachment})
       : super._();
@@ -393,7 +393,7 @@ class _$_OrderHistoryDetailsOrderHeader
   @override
   final POReference pOReference;
   @override
-  final int materialCount;
+  final int itemCount;
   @override
   final String itmDescription;
   @override
@@ -401,7 +401,7 @@ class _$_OrderHistoryDetailsOrderHeader
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderHeader(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderReason: $orderReason, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, createdTime: $createdTime, pOReference: $pOReference, materialCount: $materialCount, itmDescription: $itmDescription, hasPOAttachment: $hasPOAttachment)';
+    return 'OrderHistoryDetailsOrderHeader(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderReason: $orderReason, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, createdTime: $createdTime, pOReference: $pOReference, itemCount: $itemCount, itmDescription: $itmDescription, hasPOAttachment: $hasPOAttachment)';
   }
 
   @override
@@ -437,8 +437,8 @@ class _$_OrderHistoryDetailsOrderHeader
                 other.createdTime == createdTime) &&
             (identical(other.pOReference, pOReference) ||
                 other.pOReference == pOReference) &&
-            (identical(other.materialCount, materialCount) ||
-                other.materialCount == materialCount) &&
+            (identical(other.itemCount, itemCount) ||
+                other.itemCount == itemCount) &&
             (identical(other.itmDescription, itmDescription) ||
                 other.itmDescription == itmDescription) &&
             (identical(other.hasPOAttachment, hasPOAttachment) ||
@@ -464,7 +464,7 @@ class _$_OrderHistoryDetailsOrderHeader
         companyName,
         createdTime,
         pOReference,
-        materialCount,
+        itemCount,
         itmDescription,
         hasPOAttachment
       ]);
@@ -496,7 +496,7 @@ abstract class _OrderHistoryDetailsOrderHeader
       required final CompanyName companyName,
       required final String createdTime,
       required final POReference pOReference,
-      required final int materialCount,
+      required final int itemCount,
       required final String itmDescription,
       required final bool hasPOAttachment}) = _$_OrderHistoryDetailsOrderHeader;
   _OrderHistoryDetailsOrderHeader._() : super._();
@@ -534,7 +534,7 @@ abstract class _OrderHistoryDetailsOrderHeader
   @override
   POReference get pOReference;
   @override
-  int get materialCount;
+  int get itemCount;
   @override
   String get itmDescription;
   @override

@@ -45,7 +45,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_hea
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -456,7 +456,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
                     sortDirection: 'desc',
-                    filter: ViewByOrderHistoryFilter.empty(),
+                    filter: ViewByOrdersFilter.empty(),
                     searchKey: SearchKey.searchFilter(''),
                   ),
                 );
@@ -868,7 +868,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 shipToInfo: state.shipToInfo,
                 user: user,
                 customerCodeInfo: customerCodeInfo,
-                viewByItemHistoryFilter:
+                viewByItemFilter:
                     context.read<ViewByItemsBloc>().state.appliedFilter,
                 searchKey: SearchKey(''),
               ),

@@ -1,7 +1,7 @@
 part of '../order_success_page.dart';
 
 class _OrderItems extends StatelessWidget {
-  final List<ViewByOrderHistoryGroup> orderItems;
+  final List<ViewByOrdersGroup> orderItems;
   const _OrderItems({
     Key? key,
     required this.orderItems,

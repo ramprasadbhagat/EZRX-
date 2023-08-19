@@ -17,11 +17,11 @@ import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/s
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ViewByOrderDetailsPage extends StatelessWidget {
-  final OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
+  final OrderHistoryDetailsOrderHeader viewByOrdersItem;
 
   const ViewByOrderDetailsPage({
     Key? key,
-    required this.viewByOrderHistoryItem,
+    required this.viewByOrdersItem,
   }) : super(key: key);
 
   @override
@@ -45,7 +45,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                     key: WidgetKeys.viewByOrderDetailsPageListView,
                     children: <Widget>[
                       OrderHeaderSection(
-                        viewByOrderHistoryItem: viewByOrderHistoryItem,
+                        viewByOrdersItem: viewByOrdersItem,
                       ),
                       const ItemAddressSection(),
                       const Divider(
@@ -56,7 +56,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                         color: ZPColors.lightGray2,
                       ),
                       OrderSummarySection(
-                        viewByOrderHistoryItem: viewByOrderHistoryItem,
+                        viewByOrdersItem: viewByOrdersItem,
                       ),
                       const Divider(
                         indent: 0,

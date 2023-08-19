@@ -8,7 +8,7 @@ class ViewByItemsEvent with _$ViewByItemsEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
-    required ViewByItemHistoryFilter viewByItemHistoryFilter,
+    required ViewByItemFilter viewByItemFilter,
     required SearchKey searchKey,
   }) = _Fetch;
   const factory ViewByItemsEvent.autoSearchProduct({
@@ -16,7 +16,7 @@ class ViewByItemsEvent with _$ViewByItemsEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
-    required ViewByItemHistoryFilter viewByItemHistoryFilter,
+    required ViewByItemFilter viewByItemFilter,
     required SearchKey searchKey,
   }) = _AutoSearchProduct;
   const factory ViewByItemsEvent.loadMore({

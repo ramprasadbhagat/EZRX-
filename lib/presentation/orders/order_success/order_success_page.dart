@@ -20,7 +20,6 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -42,11 +41,7 @@ class OrderSuccessPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            context.router.pushAndPopUntil(
-              const HomeTabRoute(),
-              predicate: (route) =>
-                  route.settings.name == HomeNavigationTabbarRoute.name,
-            );
+            context.router.popUntilRouteWithPath('main');
           },
           icon: const Icon(Icons.close),
         ),

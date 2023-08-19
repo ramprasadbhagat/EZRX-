@@ -1,12 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_history_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  late ViewByOrderHistoryFilter viewByOrderHistoryFilter;
+  late ViewByOrdersFilter viewByOrdersFilter;
   late DateTime fakeStartDate;
   late DateTime fakeEndDate;
   late DateTimeRange dateTimeRange;
@@ -15,7 +15,7 @@ void main() {
   });
 
   setUp(() {
-    viewByOrderHistoryFilter = ViewByOrderHistoryFilter.empty();
+    viewByOrdersFilter = ViewByOrdersFilter.empty();
     fakeEndDate = DateTime.parse(
       DateFormat('yyyyMMdd').format(
         DateTime.now(),
@@ -52,7 +52,7 @@ void main() {
       act: (ViewByOrderFilterBloc bloc) {
         bloc.add(
           ViewByOrderFilterEvent.setDateRange(
-            viewByOrderHistoryFilter.copyWith(
+            viewByOrdersFilter.copyWith(
               dateRange: dateTimeRange,
             ),
           ),
@@ -60,7 +60,7 @@ void main() {
       },
       expect: () => [
         ViewByOrderFilterState.initial().copyWith(
-          filter: viewByOrderHistoryFilter.copyWith(
+          filter: viewByOrdersFilter.copyWith(
             dateRange: dateTimeRange,
           ),
         ),

@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'view_by_item_history_filter_dto.dart';
+part of 'view_by_item_filter_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ViewByItemHistoryFilterDto _$$_ViewByItemHistoryFilterDtoFromJson(
+_$_ViewByItemFilterDto _$$_ViewByItemFilterDtoFromJson(
         Map<String, dynamic> json) =>
-    _$_ViewByItemHistoryFilterDto(
+    _$_ViewByItemFilterDto(
       orderStatus: (json['orderStatus'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -17,8 +17,8 @@ _$_ViewByItemHistoryFilterDto _$$_ViewByItemHistoryFilterDtoFromJson(
       dateFrom: json['fromDate'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ViewByItemHistoryFilterDtoToJson(
-        _$_ViewByItemHistoryFilterDto instance) =>
+Map<String, dynamic> _$$_ViewByItemFilterDtoToJson(
+        _$_ViewByItemFilterDto instance) =>
     <String, dynamic>{
       'orderStatus': instance.orderStatus,
       'toDate': instance.dateTo,

@@ -59,19 +59,23 @@ abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-          OrderHistoryDetailsOrderHeadersDto orderHistoryDetailsOrderHeader,
-      @JsonKey(name: 'ShippingInformation', readValue: shippingInformationOverride)
-          OrderHistoryDetailsShippingInformationDto orderHistoryDetailsShippingInformation,
-      @JsonKey(name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
-          List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
+      OrderHistoryDetailsOrderHeadersDto orderHistoryDetailsOrderHeader,
+      @JsonKey(
+          name: 'ShippingInformation', readValue: shippingInformationOverride)
+      OrderHistoryDetailsShippingInformationDto
+          orderHistoryDetailsShippingInformation,
+      @JsonKey(
+          name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+      List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
       @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
-          OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
+      OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-          String orderHistoryDetailsSpecialInstructions,
+      String orderHistoryDetailsSpecialInstructions,
       @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
-          List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
-      @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-          List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages});
+      List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
+      @JsonKey(
+          name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
+      List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages});
 
   $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>
       get orderHistoryDetailsOrderHeader;
@@ -181,19 +185,23 @@ abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-          OrderHistoryDetailsOrderHeadersDto orderHistoryDetailsOrderHeader,
-      @JsonKey(name: 'ShippingInformation', readValue: shippingInformationOverride)
-          OrderHistoryDetailsShippingInformationDto orderHistoryDetailsShippingInformation,
-      @JsonKey(name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
-          List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
+      OrderHistoryDetailsOrderHeadersDto orderHistoryDetailsOrderHeader,
+      @JsonKey(
+          name: 'ShippingInformation', readValue: shippingInformationOverride)
+      OrderHistoryDetailsShippingInformationDto
+          orderHistoryDetailsShippingInformation,
+      @JsonKey(
+          name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+      List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
       @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
-          OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
+      OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-          String orderHistoryDetailsSpecialInstructions,
+      String orderHistoryDetailsSpecialInstructions,
       @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
-          List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
-      @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-          List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages});
+      List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
+      @JsonKey(
+          name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
+      List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages});
 
   @override
   $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>
@@ -266,19 +274,24 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
 class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   const _$_OrderHistoryDetailsDto(
       {@JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-          required this.orderHistoryDetailsOrderHeader,
-      @JsonKey(name: 'ShippingInformation', readValue: shippingInformationOverride)
-          required this.orderHistoryDetailsShippingInformation,
-      @JsonKey(name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
-          required final List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
+      required this.orderHistoryDetailsOrderHeader,
+      @JsonKey(
+          name: 'ShippingInformation', readValue: shippingInformationOverride)
+      required this.orderHistoryDetailsShippingInformation,
+      @JsonKey(
+          name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+      required final List<OrderHistoryDetailsOrderItemDto>
+          orderHistoryDetailsOrderItem,
       @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
-          required this.orderHistoryDetailsPaymentTerm,
+      required this.orderHistoryDetailsPaymentTerm,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-          required this.orderHistoryDetailsSpecialInstructions,
+      required this.orderHistoryDetailsSpecialInstructions,
       @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
-          required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
-      @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-          required final List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages})
+      required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
+      @JsonKey(
+          name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
+      required final List<OrderHistoryDetailsMessagesDto>
+          orderHistoryDetailsMessages})
       : _orderHistoryDetailsOrderItem = orderHistoryDetailsOrderItem,
         _orderHistoryDetailsPoDocuments = orderHistoryDetailsPoDocuments,
         _orderHistoryDetailsMessages = orderHistoryDetailsMessages,
@@ -398,20 +411,27 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
 abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   const factory _OrderHistoryDetailsDto(
       {@JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-          required final OrderHistoryDetailsOrderHeadersDto
-              orderHistoryDetailsOrderHeader,
-      @JsonKey(name: 'ShippingInformation', readValue: shippingInformationOverride)
-          required final OrderHistoryDetailsShippingInformationDto orderHistoryDetailsShippingInformation,
-      @JsonKey(name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
-          required final List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
+      required final OrderHistoryDetailsOrderHeadersDto
+          orderHistoryDetailsOrderHeader,
+      @JsonKey(
+          name: 'ShippingInformation', readValue: shippingInformationOverride)
+      required final OrderHistoryDetailsShippingInformationDto
+          orderHistoryDetailsShippingInformation,
+      @JsonKey(
+          name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+      required final List<OrderHistoryDetailsOrderItemDto>
+          orderHistoryDetailsOrderItem,
       @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
-          required final OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
+      required final OrderHistoryDetailsPaymentTermDto
+          orderHistoryDetailsPaymentTerm,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-          required final String orderHistoryDetailsSpecialInstructions,
+      required final String orderHistoryDetailsSpecialInstructions,
       @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
-          required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
-      @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-          required final List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages}) = _$_OrderHistoryDetailsDto;
+      required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
+      @JsonKey(
+          name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
+      required final List<OrderHistoryDetailsMessagesDto>
+          orderHistoryDetailsMessages}) = _$_OrderHistoryDetailsDto;
   const _OrderHistoryDetailsDto._() : super._();
 
   factory _OrderHistoryDetailsDto.fromJson(Map<String, dynamic> json) =

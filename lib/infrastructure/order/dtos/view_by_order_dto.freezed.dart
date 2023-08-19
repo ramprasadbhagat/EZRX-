@@ -43,14 +43,13 @@ abstract class $ViewByOrderDtoCopyWith<$Res> {
       _$ViewByOrderDtoCopyWithImpl<$Res, ViewByOrderDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'orderCount', defaultValue: 0)
-          int orderCount,
+      {@JsonKey(name: 'orderCount', defaultValue: 0) int orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
-          List<String> creatingOrderIds,
+      List<String> creatingOrderIds,
       @JsonKey(
-          name: 'orderHeaders', defaultValue: <
-              OrderHistoryDetailsOrderHeadersDto>[])
-          List<OrderHistoryDetailsOrderHeadersDto> orderHeaders});
+          name: 'orderHeaders',
+          defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
+      List<OrderHistoryDetailsOrderHeadersDto> orderHeaders});
 }
 
 /// @nodoc
@@ -96,14 +95,13 @@ abstract class _$$_ViewByOrderDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'orderCount', defaultValue: 0)
-          int orderCount,
+      {@JsonKey(name: 'orderCount', defaultValue: 0) int orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
-          List<String> creatingOrderIds,
+      List<String> creatingOrderIds,
       @JsonKey(
-          name: 'orderHeaders', defaultValue: <
-              OrderHistoryDetailsOrderHeadersDto>[])
-          List<OrderHistoryDetailsOrderHeadersDto> orderHeaders});
+          name: 'orderHeaders',
+          defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
+      List<OrderHistoryDetailsOrderHeadersDto> orderHeaders});
 }
 
 /// @nodoc
@@ -142,14 +140,13 @@ class __$$_ViewByOrderDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ViewByOrderDto extends _ViewByOrderDto {
   const _$_ViewByOrderDto(
-      {@JsonKey(name: 'orderCount', defaultValue: 0)
-          required this.orderCount,
+      {@JsonKey(name: 'orderCount', defaultValue: 0) required this.orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
-          required final List<String> creatingOrderIds,
+      required final List<String> creatingOrderIds,
       @JsonKey(
-          name: 'orderHeaders', defaultValue: <
-              OrderHistoryDetailsOrderHeadersDto>[])
-          required final List<OrderHistoryDetailsOrderHeadersDto> orderHeaders})
+          name: 'orderHeaders',
+          defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
+      required final List<OrderHistoryDetailsOrderHeadersDto> orderHeaders})
       : _creatingOrderIds = creatingOrderIds,
         _orderHeaders = orderHeaders,
         super._();
@@ -224,14 +221,14 @@ class _$_ViewByOrderDto extends _ViewByOrderDto {
 abstract class _ViewByOrderDto extends ViewByOrderDto {
   const factory _ViewByOrderDto(
       {@JsonKey(name: 'orderCount', defaultValue: 0)
-          required final int orderCount,
+      required final int orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
-          required final List<String> creatingOrderIds,
+      required final List<String> creatingOrderIds,
       @JsonKey(
-          name: 'orderHeaders', defaultValue: <
-              OrderHistoryDetailsOrderHeadersDto>[])
-          required final List<OrderHistoryDetailsOrderHeadersDto>
-              orderHeaders}) = _$_ViewByOrderDto;
+          name: 'orderHeaders',
+          defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
+      required final List<OrderHistoryDetailsOrderHeadersDto>
+          orderHeaders}) = _$_ViewByOrderDto;
   const _ViewByOrderDto._() : super._();
 
   factory _ViewByOrderDto.fromJson(Map<String, dynamic> json) =
