@@ -13,11 +13,16 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
@@ -211,6 +216,79 @@ void main() {
         await tester.tap(addToCartButton);
         await tester.pump(const Duration(seconds: 1));
         expect(itemAddedSnackBar, findsOneWidget);
+      });
+
+      testWidgets('Add to Cart is disabled when materialWithoutPrice is false',
+          (tester) async {
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {
+              MaterialNumber('00000111111'): Price.empty().copyWith(
+                finalPrice: MaterialPrice(0.0),
+              ),
+            },
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('00000111111'),
+                quantity: 2,
+              ),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cartButtonFinder =
+            find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+        final addToCartButton = find.byType(ElevatedButton);
+        expect(cartButtonFinder, findsOneWidget);
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        expect(tester.widget<ElevatedButton>(addToCartButton).enabled, isFalse);
+        await tester.pump(const Duration(seconds: 1));
+      });
+
+      testWidgets('Add to Cart is enabled when materialWithoutPrice is true',
+          (tester) async {
+        when(() => mockSalesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+            ),
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {
+              MaterialNumber('00000111111'): Price.empty().copyWith(
+                finalPrice: MaterialPrice(0.0),
+              ),
+            },
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('00000111111'),
+                quantity: 2,
+              ),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cartButtonFinder =
+            find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+        final addToCartButton = find.byType(ElevatedButton);
+        expect(cartButtonFinder, findsOneWidget);
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        expect(tester.widget<ElevatedButton>(addToCartButton).enabled, isTrue);
+        await tester.pump(const Duration(seconds: 1));
       });
     },
   );
