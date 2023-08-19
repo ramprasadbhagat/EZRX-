@@ -288,7 +288,7 @@ class _SSOLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: ColoredBox(
         color: ZPColors.extraLightGrey5,
         child: Row(
