@@ -325,7 +325,7 @@ void main() {
           shipToCode: 'fake-ship-to-code',
           language: '',
           materialNumbers: {
-            'fake-material-2': false,
+            'fake-material-2': true,
             'fake-material-3': true,
           },
         ),
@@ -348,7 +348,7 @@ void main() {
           shipToCode: 'fake-ship-to-code',
           language: '',
           materialNumbers: {
-            'fake-material-2': false,
+            'fake-material-2': true,
             'fake-material-3': true,
           },
         ),
@@ -401,7 +401,7 @@ void main() {
           shipToCode: 'fake-ship-to-code',
           language: '',
           materialNumbers: {
-            'fake-material-2': false,
+            'fake-material-2': true,
             'fake-material-3': true,
           },
         ),
@@ -422,7 +422,7 @@ void main() {
           shipToCode: 'fake-ship-to-code',
           language: '',
           materialNumbers: {
-            'fake-material-2': false,
+            'fake-material-2': true,
             'fake-material-3': true,
           },
         ),

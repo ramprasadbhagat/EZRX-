@@ -215,11 +215,11 @@ class MaterialPriceDetailRepository implements IMaterialPriceDetailRepository {
       final queryMaterialNumbers = materialQueryList.map(
         (materialQueryInfo, materialDetail) => MapEntry(
           materialQueryInfo.value.getOrCrash(),
-          materialQueryInfo.qty.conformZDP5Rule(
-                materialDetail.price.zdp5RemainingQuota.getOrCrash(),
+          materialQueryInfo.isMaterialQtyZDP5RuleApplicable(
+                materialDetail.price.zdp5RemainingQuota.intValue,
               ) ||
-              materialQueryInfo.qty.conformZDP5Rule(
-                materialDetail.price.zdp5MaxQuota.getOrCrash(),
+              materialQueryInfo.isMaterialQtyZDP5RuleApplicable(
+                materialDetail.price.zdp5MaxQuota.intValue,
               ),
         ),
       );

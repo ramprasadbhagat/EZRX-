@@ -145,4 +145,7 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
 
     return data;
   }
+
+  bool isMaterialQtyZDP5RuleApplicable(int zdp5Value) =>
+      qty.intValue >= zdp5Value;
 }

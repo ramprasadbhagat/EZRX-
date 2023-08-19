@@ -248,8 +248,7 @@ class MaterialQty extends ValueObject<int> {
 
   const MaterialQty._(this.value);
 
-  bool conformZDP5Rule(String zdp5Value) =>
-      materialQtyConformZDP5Rule(value.getOrElse(() => 0), zdp5Value);
+  int get intValue => value.getOrElse(() => 0);
 }
 
 class DiscountType extends ValueObject<String> {

@@ -30,16 +30,6 @@ BonusMaterialCalculationEnum getBonusCalculationEnum(String calculation) {
   }
 }
 
-bool materialQtyConformZDP5Rule(int qtyValue, String zdp5Value) {
-  try {
-    final zdp5ValueNumber = int.parse(zdp5Value);
-
-    return qtyValue >= zdp5ValueNumber;
-  } catch (_) {
-    return false;
-  }
-}
-
 String materialGroup4Type(bool isFoc) {
   return isFoc ? 'ZPFC' : 'ZPOR';
 }
