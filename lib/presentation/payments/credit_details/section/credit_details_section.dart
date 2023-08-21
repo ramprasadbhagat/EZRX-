@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
@@ -43,7 +44,7 @@ class CreditDetailsSection extends StatelessWidget {
           subtitle: Column(
             children: [
               BalanceTextRow(
-                keyText: 'Document date',
+                keyText: 'Document date'.tr(),
                 valueText: creditItem.postingDate.dateString,
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -55,7 +56,7 @@ class CreditDetailsSection extends StatelessWidget {
                         ),
               ),
               BalanceTextRow(
-                keyText: 'Document type',
+                keyText: 'Document type'.tr(),
                 valueText: creditItem.accountingDocumentType,
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -67,9 +68,9 @@ class CreditDetailsSection extends StatelessWidget {
                         ),
               ),
               BalanceTextRow(
-                keyText: 'Return number',
+                keyText: 'Return number'.tr(),
                 valueText:
-                    '#${creditItem.invoiceReference.getOrDefaultValue('')}',
+                    creditItem.invoiceReference.getOrDefaultValue('NA'),
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
@@ -80,7 +81,7 @@ class CreditDetailsSection extends StatelessWidget {
                         ),
               ),
               BalanceTextRow(
-                keyText: 'Details',
+                keyText: 'Details'.tr(),
                 valueText: creditItem.postingKeyName,
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -104,7 +105,7 @@ class CreditDetailsSection extends StatelessWidget {
         ListTile(
           minVerticalPadding: 20.0,
           title: Text(
-            'Credit summary',
+            'Credit summary'.tr(),
             style: Theme.of(context).textTheme.labelMedium,
           ),
           subtitle: Padding(
@@ -115,7 +116,7 @@ class CreditDetailsSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Credit total:',
+                  'Credit total:'.tr(),
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 PriceComponent(

@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_details_group.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
@@ -27,6 +30,17 @@ class CreditItemsSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10.0,
+              ),
+              child: Text(
+                '${'Return items'.tr()} (${context.read<CreditAndInvoiceDetailsBloc>().state.details.itemCount})',
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ZPColors.black,
+                    ),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Text(
                 creditItems[index].principalName.getOrDefaultValue(''),
@@ -40,7 +54,7 @@ class CreditItemsSection extends StatelessWidget {
                 (e) {
                   return CommonTileItem(
                     headerText:
-                        'Batch ${e.batchNumber.getOrDefaultValue('')} (EXP:${e.expiryDate.dateString})',
+                        '${'Batch'.tr()} ${e.batchNumber.getOrDefaultValue('')} (EXP:${e.expiryDate.dateString})',
                     materialNumber: e.materialNumber,
                     label: removeLeadingZero(
                       e.materialNumber.getOrDefaultValue(''),
@@ -61,7 +75,7 @@ class CreditItemsSection extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Qty: ${e.billingQuantity.getOrDefaultValue(0)}',
+                          '${'Qty'.tr()}: ${e.billingQuantity.getOrDefaultValue(0)}',
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.black,

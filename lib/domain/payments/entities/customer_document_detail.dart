@@ -58,8 +58,7 @@ class CustomerDocumentDetail with _$CustomerDocumentDetail {
 
 extension CustomerDocumentDetailExtension on List<CustomerDocumentDetail> {
   List<CustomerDocumentDetailGroup> get groupList {
-    return List<CustomerDocumentDetail>.from(this)
-        .groupListsBy((item) => item.principalData.principalName)
+    return groupListsBy((item) => item.principalData.principalName)
         .entries
         .map(
           (entry) => CustomerDocumentDetailGroup(
@@ -69,4 +68,7 @@ extension CustomerDocumentDetailExtension on List<CustomerDocumentDetail> {
         )
         .toList();
   }
+
+  int get itemCount => fold<int>(
+      0, (previous, current) => previous + current.billingQuantity.getValue(),);
 }
