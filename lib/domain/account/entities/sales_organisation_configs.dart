@@ -66,6 +66,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableComboDeals,
     required ComboDealUserRole comboDealsUserRole,
     required bool enableGMN,
+    required bool displayItemTaxBreakdown,
+    required bool displaySubtotalTaxBreakdown,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -124,6 +126,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         greenDeliveryUserRole: GreenDeliveryUserRole(0),
         comboDealsUserRole: ComboDealUserRole(0),
         enableGMN: false,
+        displayItemTaxBreakdown: false,
+        displaySubtotalTaxBreakdown: false,
       );
 
   String get getConfigLanguage {
@@ -210,5 +214,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         (principal) => principal.principalCode.isAllMaterial,
         orElse: () => SalesOrganisationConfigsPrincipal.empty(),
       );
-      
+
+  bool get isMarketEligibleForTaxClassification =>
+      currency.isVN || currency.isMM || currency.isKH || currency.isTH;
 }

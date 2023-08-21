@@ -268,6 +268,21 @@ class Currency extends ValueObject<String> {
     return value.getOrElse(() => '') == 'vnd';
   }
 
+  bool get isTH {
+    return value.getOrElse(() => '') == 'thb';
+  }
+
+  bool get isMM {
+    return value.getOrElse(() => '') == 'mmk' ||
+        value.getOrElse(() => '') == 'usd';
+  }
+
+  bool get isKH {
+    return value.getOrElse(() => '') == 'khr' ||
+        value.getOrElse(() => '') == 'cop' ||
+        value.getOrElse(() => '') == 'usd';
+  }
+
   const Currency._(this.value);
 }
 

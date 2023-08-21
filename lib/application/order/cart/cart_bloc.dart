@@ -457,6 +457,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                   (e) => PriceAggregate.empty().copyWith(
                     materialInfo: e.materialInfo,
                     quantity: e.materialInfo.quantity,
+                    salesOrgConfig: e.salesOrgConfig,
                   ),
                 )
                 .toList();
@@ -709,24 +710,30 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             isMappingPrice: true,
           ),
         );
-        final cartProductList = List<PriceAggregate>.from(state.cartProducts);
-        for (var i = 0; i < cartProductList.length; i++) {
-          if (!cartProductList[i].price.isPriceOverride) {
-            cartProductList[i] = cartProductList[i].copyWith(
-              price: e.priceProducts[
-                      cartProductList[i].materialInfo.materialNumber] ??
-                  Price.empty(),
-            );
-          }
-          if (cartProductList[i].materialInfo.materialNumber ==
-              e.overriddenProductPrice.materialNumber) {
-            cartProductList[i] =
-                cartProductList[i].copyWith(price: e.overriddenProductPrice);
-          }
-        }
+        final cartProductList = state.cartProducts.map((element) {
+          element = element.copyWith(
+            salesOrgConfig: e.salesOrganisationConfigs,
+          );
+          element = !element.price.isPriceOverride
+              ? element.copyWith(
+                  price: e.priceProducts[element.materialInfo.materialNumber] ??
+                      Price.empty(),
+                )
+              : element;
+          element = element.materialInfo.materialNumber ==
+                  e.overriddenProductPrice.materialNumber
+              ? element.copyWith(
+                  price: e.overriddenProductPrice,
+                )
+              : element;
+
+          return element;
+        }).toList();
+
         emit(
           state.copyWith(
             isMappingPrice: false,
+            cartProducts: cartProductList,
           ),
         );
         add(
@@ -746,10 +753,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             isUpdatingStock: true,
           ),
         );
-        final cartProductList = List<PriceAggregate>.from(state.cartProducts);
 
         final failureOrSuccess = await repository.getStockInfoList(
-          items: cartProductList.map((e) => e.materialInfo).toList(),
+          items: state.cartProducts.map((e) => e.materialInfo).toList(),
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisationConfigs: e.salesOrganisationConfigs,
           salesOrganisation: e.salesOrganisation,
@@ -766,7 +772,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (newStockFetched) {
-            final updatedCartStockList = cartProductList.map((cartProduct) {
+            final updatedCartStockList = state.cartProducts.map((cartProduct) {
               return cartProduct.copyWith(
                 stockInfoList:
                     newStockFetched[cartProduct.materialInfo.materialNumber] ??

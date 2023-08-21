@@ -160,6 +160,10 @@ class MaterialInfo with _$MaterialInfo {
   List<String> get images => type.typeBundle
       ? bundle.materials.map((e) => e.productImages.thumbNail).toList()
       : productImages.image;
+
+  double get materialTax => taxes.isNotEmpty && taxes.first.isNotEmpty
+      ? double.parse(taxes.first)
+      : 0.0;
 }
 
 @freezed

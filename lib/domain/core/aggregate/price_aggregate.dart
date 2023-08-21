@@ -228,6 +228,20 @@ class PriceAggregate with _$PriceAggregate {
     return finalPrice * quantity;
   }
 
+  double get finalPriceTotalWithTax => finalPriceTotal + itemTax;
+
+  double get itemTaxPercent => salesOrgConfig.displayItemTaxBreakdown
+      ? materialInfo.taxClassification.isFullTax
+          ? salesOrgConfig.isMarketEligibleForTaxClassification
+              ? materialInfo.materialTax
+              : salesOrgConfig.vatValue.toDouble()
+          : 0.0
+      : 0.0;
+
+  double get itemTax {
+    return (finalPriceTotal * itemTaxPercent) / 100;
+  }
+
   double get totalVatForBundle =>
       salesOrgConfig.shouldShowTax ? salesOrgConfig.vatValue / 100 : 0.0;
 

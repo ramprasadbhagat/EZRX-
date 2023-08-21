@@ -97,6 +97,9 @@ class SalesOrgQueryMutation {
     disableApproverActions
     disableUserRestrictions
     enableTaxAtTotalLevelOnly
+    displayItemTaxBreakdown
+    displaySubtotalTaxBreakdown
+
   }
 }
 

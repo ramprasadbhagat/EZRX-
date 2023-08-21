@@ -15,6 +15,7 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottomsheet.dart';
 import 'package:flutter/material.dart';
 
+import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -130,31 +131,84 @@ class _ItemSubTotalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Item subtotal:'.tr(),
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                  color: ZPColors.darkGray,
+    final txtStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
+          fontWeight: FontWeight.w400,
+          fontSize: 12,
+          color: ZPColors.darkGray,
+        );
+    final salesOrgState = context.read<SalesOrgBloc>().state;
+    final showTaxBreakdown = salesOrgState.configs.displayItemTaxBreakdown;
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+            top: 8,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Item subtotal:'.tr(),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: ZPColors.darkGray,
+                    ),
+              ),
+              _LoadingShimmerWithChild(
+                child: PriceComponent(
+                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  price: cartProduct.finalPriceTotal.toString(),
                 ),
+              ),
+            ],
           ),
-          LoadingShimmer.withChild(
-            enabled: context.read<CartBloc>().state.isMappingPrice ||
-                context.read<CartBloc>().state.isUpserting ||
-                context.read<CartBloc>().state.isUpdatingStock ||
-                context.read<MaterialPriceBloc>().state.isFetching,
-            child: PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-              price: cartProduct.finalPriceTotal.toString(),
-            ),
-          ),
-        ],
-      ),
+        ),
+        showTaxBreakdown
+            ? Padding(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom: 8,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Total with tax:'.tr(),
+                      style: txtStyle,
+                    ),
+                    _LoadingShimmerWithChild(
+                      child: ItemTax(
+                        cartItem: cartProduct,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : const SizedBox(
+                height: 8,
+              ),
+      ],
+    );
+  }
+}
+
+class _LoadingShimmerWithChild extends StatelessWidget {
+  const _LoadingShimmerWithChild({required this.child});
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return LoadingShimmer.withChild(
+      enabled: context.read<CartBloc>().state.isMappingPrice ||
+          context.read<CartBloc>().state.isUpserting ||
+          context.read<CartBloc>().state.isUpdatingStock ||
+          context.read<MaterialPriceBloc>().state.isFetching,
+      child: child,
     );
   }
 }
@@ -225,7 +279,7 @@ class _MaterialDetails extends StatelessWidget {
                         price: cartItem.price.lastPrice
                             .getOrDefaultValue(0)
                             .toString(),
-                      type: PriceStyle.counterOfferPrice,
+                        type: PriceStyle.counterOfferPrice,
                       )
                     : const SizedBox.shrink(),
                 PriceComponent(
@@ -502,4 +556,3 @@ class _OfferTag extends StatelessWidget {
     );
   }
 }
-

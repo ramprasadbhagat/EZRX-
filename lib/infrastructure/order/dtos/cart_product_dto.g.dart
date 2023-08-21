@@ -30,6 +30,9 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
               ?.map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      taxes:
+          (json['taxes'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
@@ -51,6 +54,7 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'BundleDetails': instance.bundleDetails.toJson(),
       'BundleMaterials':
           instance.bundleMaterials.map((e) => e.toJson()).toList(),
+      'taxes': instance.taxes,
     };
 
 _$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>

@@ -46,6 +46,8 @@ class CartProductDto with _$CartProductDto {
         BundleDetailsDto bundleDetails,
     @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
         required List<MaterialDto> bundleMaterials,
+    @JsonKey(name: 'taxes', defaultValue: <String>[])
+        required List<String> taxes,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -61,6 +63,7 @@ class CartProductDto with _$CartProductDto {
       quantity: cartItemDetails.materialInfo.quantity,
       taxClassification:
           cartItemDetails.materialInfo.taxClassification.getOrDefaultValue(''),
+      taxes: cartItemDetails.materialInfo.taxes,
       therapeuticClass: cartItemDetails.materialInfo.therapeuticClass,
       type: cartItemDetails.materialInfo.type.getOrCrash(),
       principalName: cartItemDetails.materialInfo.principalData.principalName
@@ -92,6 +95,7 @@ class CartProductDto with _$CartProductDto {
       parentID: parentID,
       quantity: quantity,
       taxClassification: MaterialTaxClassification(taxClassification),
+      taxes: taxes,
       therapeuticClass: therapeuticClass,
       principalData: PrincipalData.empty().copyWith(
         principalName: PrincipalName(principalName),

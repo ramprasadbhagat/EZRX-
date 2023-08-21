@@ -91,7 +91,15 @@ class PriceComponent extends StatelessWidget {
   }
 }
 
-enum PriceStyle { commonPrice, bundlePice, counterOfferPrice, bonusPrice }
+enum PriceStyle {
+  commonPrice,
+  bundlePice,
+  counterOfferPrice,
+  bonusPrice,
+  taxPrice,
+  totalPrice,
+  summaryPrice,
+}
 
 TextStyle _priceStyle(BuildContext context, PriceStyle type) {
   switch (type) {
@@ -108,12 +116,27 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             color: ZPColors.darkGray,
           );
-
+    case PriceStyle.taxPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            fontWeight: FontWeight.w400,
+            fontSize: 12,
+            color: ZPColors.darkGray,
+          );
+    case PriceStyle.summaryPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            fontSize: 14,
+            color: ZPColors.neutralsBlack,
+          );
+    case PriceStyle.totalPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            fontWeight: FontWeight.w900,
+            fontSize: 14,
+            color: ZPColors.neutralsBlack,
+          );
     default:
-      return Theme.of(context)
-          .textTheme
-          .labelSmall!
-          .copyWith(color: ZPColors.black);
+      return Theme.of(context).textTheme.labelSmall!.copyWith(
+            color: ZPColors.black,
+          );
   }
 }
 
@@ -132,7 +155,16 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             color: ZPColors.darkGray,
           );
-
+    case PriceStyle.taxPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            fontWeight: FontWeight.w400,
+            fontSize: 12,
+            color: ZPColors.darkGray,
+          );
+    case PriceStyle.totalPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: ZPColors.black,
+          );
     default:
       return Theme.of(context)
           .textTheme

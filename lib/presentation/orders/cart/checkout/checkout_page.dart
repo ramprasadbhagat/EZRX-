@@ -100,6 +100,23 @@ class _CheckoutPageState extends State<CheckoutPage> {
           const SliverToBoxAdapter(child: _TotalItems()),
           const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
           _ManufactureScrollList(cartState: cartState),
+          const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
+          const SliverToBoxAdapter(
+            child: Divider(
+              indent: 0,
+              thickness: 1,
+              endIndent: 0,
+              height: 1,
+              color: ZPColors.extraLightGrey2,
+            ),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: _OrderSummary(cartState: cartState),
+            ),
+          ),
           const SliverToBoxAdapter(child: SizedBox(height: 8.0)),
         ],
       ),
@@ -133,7 +150,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.extraLightGrey4,
                           ),
-                 
                 ),
                 const SizedBox(width: 8),
                 const Icon(
@@ -427,6 +443,8 @@ class _OrderSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final salesOrgState = context.read<SalesOrgBloc>().state;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -437,52 +455,55 @@ class _OrderSummary extends StatelessWidget {
               ),
         ),
         const SizedBox(height: 24.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Subtotal (excl.tax):'.tr(),
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.neutralsBlack,
+        if (salesOrgState.configs.displaySubtotalTaxBreakdown) ...[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Subtotal (excl.tax):'.tr(),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
+              ),
+              PriceComponent(
+                salesOrgConfig: salesOrgState.configs,
+                price: cartState.totalPrice.toString(),
+                type: PriceStyle.summaryPrice,
+              ),
+            ],
+          ),
+          const SizedBox(height: 8.0),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${'Tax at '.tr()}${cartState.totalTaxPercent(
+                      salesOrgState.configs,
+                    )}%',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: ZPColors.neutralsBlack,
+                        ),
                   ),
-            ),
-            Text(
-              'MRY ${cartState.totalPrice.toStringAsFixed(2)}',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.neutralsBlack,
+                  PriceComponent(
+                    salesOrgConfig: salesOrgState.configs,
+                    price: cartState.totalTax.toString(),
+                    type: PriceStyle.summaryPrice,
                   ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8.0),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${'Tax at '.tr()}${context.read<SalesOrgBloc>().state.configs.vatValue}%',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
-                ),
-                PriceComponent(
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                  price: cartState.totalTax.toString(),
-                  
-                ),
-              ],
-            ),
-            // Text(
-            //   'Applies to materials with full tax'.tr(),
-            //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            //         color: ZPColors.neutralsBlack,
-            //         fontSize: 10,
-            //       ),
-            // )
-          ],
-        ),
+                ],
+              ),
+              Text(
+                'Applies to materials with full tax'.tr(),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                      fontSize: 10,
+                    ),
+              ),
+            ],
+          ),
+        ],
         const SizedBox(height: 8.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -494,8 +515,9 @@ class _OrderSummary extends StatelessWidget {
                   ),
             ),
             PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              salesOrgConfig: salesOrgState.configs,
               price: 0.toString(),
+              type: PriceStyle.summaryPrice,
             ),
           ],
         ),
@@ -515,8 +537,9 @@ class _OrderSummary extends StatelessWidget {
 
                 ///ToDo: hard code
                 PriceComponent(
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  salesOrgConfig: salesOrgState.configs,
                   price: 0.toString(),
+                  type: PriceStyle.summaryPrice,
                 ),
               ],
             ),
@@ -549,6 +572,7 @@ class _OrderSummary extends StatelessWidget {
             PriceComponent(
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
               price: cartState.totalPriceWithTax.toString(),
+              type: PriceStyle.totalPrice,
             ),
           ],
         ),
@@ -565,6 +589,7 @@ class _OrderSummary extends StatelessWidget {
             PriceComponent(
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
               price: 0.toString(),
+              type: PriceStyle.summaryPrice,
             ),
           ],
         ),

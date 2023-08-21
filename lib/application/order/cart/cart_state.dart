@@ -207,7 +207,7 @@ class CartState with _$CartState {
             previousValue +
             (element.price.finalPrice.getValue() *
                 element.quantity *
-                element.salesOrgConfig.vatValue /
+                element.itemTaxPercent /
                 100),
       );
 
@@ -272,9 +272,9 @@ class CartState with _$CartState {
                 100),
       );
 
-  double get totalBundlePriceWithTax => totalBundlesPrice + taxBundle;
+  double get totalBundlePriceWithTax => totalBundlesPrice;
 
-  double get totalTax => taxMaterial + taxBundle;
+  double get totalTax => taxMaterial;
 
   double get totalPrice => totalMaterialsPrice + totalBundlesPrice;
 
@@ -301,4 +301,26 @@ class CartState with _$CartState {
                 .principalName
                 .getValue();
   }
+
+  double get materialLevelFinalPriceWithTaxForFullTax => cartProducts
+      .where((element) => element.materialInfo.taxClassification.isFullTax)
+      .fold<double>(
+        0.0,
+        (previousValue, element) =>
+            previousValue +
+            (element.finalPrice * element.materialInfo.materialTax),
+      );
+
+  double get materialLevelEligibleTotalFinalPrice => cartProducts
+      .where((element) => element.materialInfo.taxClassification.isFullTax)
+      .fold<double>(
+        0.0,
+        (previousValue, element) => previousValue + element.finalPrice,
+      );
+
+  double totalTaxPercent(SalesOrganisationConfigs config) =>
+      config.isMarketEligibleForTaxClassification
+          ? materialLevelFinalPriceWithTaxForFullTax /
+              materialLevelEligibleTotalFinalPrice
+          : config.vatValue.toDouble();
 }

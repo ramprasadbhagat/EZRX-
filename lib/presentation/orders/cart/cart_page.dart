@@ -410,7 +410,7 @@ class _CheckoutSection extends StatelessWidget {
               ),
               trailing: PriceComponent(
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price: state.totalPrice.toString(),
+                price: state.totalPriceWithTax.toString(),
                 title: 'Grand total: '.tr(),
                 priceLabelStyle:
                     Theme.of(context).textTheme.titleSmall?.copyWith(

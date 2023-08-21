@@ -179,6 +179,12 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'enableGMN', defaultValue: false)
     @HiveField(154, defaultValue: false)
         required bool enableGMN,
+    @JsonKey(name: 'displayItemTaxBreakdown', defaultValue: false)
+    @HiveField(155, defaultValue: false)
+        required bool displayItemTaxBreakdown,
+    @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
+    @HiveField(156, defaultValue: false)
+        required bool displaySubtotalTaxBreakdown,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -242,6 +248,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableComboDeals: configs.enableComboDeals,
       comboDealsUserRole: configs.comboDealsUserRole.getOrDefaultValue(0),
       enableGMN: configs.enableGMN,
+      displayItemTaxBreakdown: configs.displayItemTaxBreakdown,
+      displaySubtotalTaxBreakdown: configs.displaySubtotalTaxBreakdown,
     );
   }
 
@@ -302,6 +310,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableComboDeals: enableComboDeals,
       comboDealsUserRole: ComboDealUserRole(comboDealsUserRole),
       enableGMN: enableGMN,
+      displayItemTaxBreakdown: displayItemTaxBreakdown,
+      displaySubtotalTaxBreakdown: displaySubtotalTaxBreakdown,
     );
   }
 

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -233,6 +234,9 @@ class _QuantityAndPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final showTaxBreakdown =
+        context.read<SalesOrgBloc>().state.configs.displayItemTaxBreakdown;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -244,9 +248,19 @@ class _QuantityAndPrice extends StatelessWidget {
                   color: ZPColors.neutralsBlack,
                 ),
           ),
-          PriceComponent(
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-            price: cartItem.finalPriceTotal.toString(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              PriceComponent(
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                price: cartItem.finalPriceTotal.toString(),
+              ),
+              if (showTaxBreakdown)
+                ItemTax(
+                  cartItem: cartItem,
+                ),
+            ],
           ),
         ],
       ),
