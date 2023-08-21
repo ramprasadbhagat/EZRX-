@@ -39,6 +39,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 
+
 class OrderRepository implements IOrderRepository {
   final Config config;
   final OrderLocalDataSource localDataSource;
@@ -338,6 +339,8 @@ class OrderRepository implements IOrderRepository {
     required SubmitOrderResponse orderResponse,
     required User user,
   }) async {
+    const apiRetryCounter = 15;
+
     if (config.appFlavor == Flavor.mock) {
       try {
         final result = user.role.type.isSalesRepRole
@@ -350,11 +353,11 @@ class OrderRepository implements IOrderRepository {
         return Left(FailureHandler.handleFailure(e));
       }
     }
-    var apiRetryCounter = 15;
-    var orderHistoryDetails = OrderHistoryDetails.empty();
-    do {
+    for (var i = 1; i <= apiRetryCounter; i++) {
+      await Future.delayed(const Duration(seconds: 2));
+  
       try {
-        orderHistoryDetails = user.role.type.isSalesRepRole
+        final orderHistoryDetails = user.role.type.isSalesRepRole
             ? await orderHistoryDetailsRemoteDataSource
                 .getOrderHistoryDetailsForSalesRep(
                 companyName: '',
@@ -366,18 +369,18 @@ class OrderRepository implements IOrderRepository {
                 orderId: orderResponse.salesDocument,
                 language: user.preferredLanguage.getOrCrash(),
               );
+
+        return Right(orderHistoryDetails);
       } catch (e) {
-        apiRetryCounter--;
-        if (apiRetryCounter == 0) {
+        if (i == apiRetryCounter) {
           return Left(
             FailureHandler.handleFailure(e),
           );
         }
       }
-    } while (apiRetryCounter > 0 &&
-        orderHistoryDetails == OrderHistoryDetails.empty());
+    }
 
-    return Right(orderHistoryDetails);
+    return Right(OrderHistoryDetails.empty());
   }
 
   @override
@@ -391,7 +394,7 @@ class OrderRepository implements IOrderRepository {
       try {
         final stockInfoList =
             await stockInfoLocalDataSource.getMaterialStockInfoList();
-            
+
         return Right(stockInfoList);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
