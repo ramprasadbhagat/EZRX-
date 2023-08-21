@@ -366,6 +366,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
         children: [
           context.read<EligibilityBloc>().state.isBonusSampleItemVisible
               ? TextButton.icon(
+                  key: WidgetKeys.bonusSampleItemButtonKey,
                   onPressed: () {},
                   icon: const Icon(
                     Icons.add_circle_outline,
@@ -382,6 +383,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
               : const SizedBox.shrink(),
           context.read<EligibilityBloc>().state.isCounterOfferVisible
               ? TextButton.icon(
+                  key: WidgetKeys.counterOfferPriceButtonKey,
                   onPressed: () {
                     context
                         .read<PriceOverrideBloc>()

@@ -254,6 +254,9 @@ class WidgetKeys {
   static const Key cartButton = Key('cartButton');
   static const Key counterOfferPriceField = Key('counterOfferPriceField');
   static const Key counterOfferRemarksField = Key('counterOfferRemarksField');
+  static const Key bonusSampleItemButtonKey = Key('bonusSampleItemButtonKey');
+  static const Key counterOfferPriceButtonKey =
+      Key('counterOfferPriceButtonKey');
 
   //============================================================
   //  Checkout Page Keys
