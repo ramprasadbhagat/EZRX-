@@ -9,6 +9,7 @@ class SalesOrgState with _$SalesOrgState {
     required List<SalesOrganisation> availableSalesOrg,
     required Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption,
     required bool isLoading,
+    required SearchKey searchKey,
   }) = _SalesOrgState;
 
   factory SalesOrgState.initial() => SalesOrgState(
@@ -17,6 +18,7 @@ class SalesOrgState with _$SalesOrgState {
         availableSalesOrg: <SalesOrganisation>[],
         salesOrgFailureOrSuccessOption: none(),
         isLoading: false,
+        searchKey: SearchKey.search(''),
       );
 
   bool get haveSelectedSalesOrganisation =>

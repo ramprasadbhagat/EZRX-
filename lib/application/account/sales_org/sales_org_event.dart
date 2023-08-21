@@ -13,7 +13,7 @@ class SalesOrgEvent with _$SalesOrgEvent {
     required List<SalesOrganisation> avialableSalesOrgList,
   }) = _FetchAvailableSalesOrg;
   const factory SalesOrgEvent.searchSalesOrg({
-    required String keyWord,
+    required SearchKey searchKey,
     required List<SalesOrganisation> salesOrgList,
   }) = _SearchSalesOrg;
 }

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/repository/i_sales_org_repository.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -91,15 +92,12 @@ class SalesOrgBloc extends Bloc<SalesOrgEvent, SalesOrgState> {
           state.copyWith(
             availableSalesOrg: e.salesOrgList
                 .where(
-                  (element) =>
-                      element.salesOrg.buName
-                          .toLowerCase()
-                          .contains(e.keyWord) ||
-                      element.salesOrg.value
-                          .getOrElse(() => '')
-                          .contains(e.keyWord),
+                  (element) => element.salesOrg.fullName.toLowerCase().contains(
+                        e.searchKey.searchValueOrEmpty.trim().toLowerCase(),
+                      ),
                 )
                 .toList(),
+            searchKey: e.searchKey,
             salesOrgFailureOrSuccessOption: none(),
           ),
         );

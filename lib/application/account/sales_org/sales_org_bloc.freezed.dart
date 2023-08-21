@@ -25,7 +25,7 @@ mixin _$SalesOrgEvent {
     required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
         fetchAvailableSalesOrg,
     required TResult Function(
-            String keyWord, List<SalesOrganisation> salesOrgList)
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)
         searchSalesOrg,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,7 +37,8 @@ mixin _$SalesOrgEvent {
         loadSavedOrganisation,
     TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult? Function(
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,7 +50,7 @@ mixin _$SalesOrgEvent {
         loadSavedOrganisation,
     TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult Function(SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
     required TResult orElse(),
   }) =>
@@ -149,7 +150,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
         fetchAvailableSalesOrg,
     required TResult Function(
-            String keyWord, List<SalesOrganisation> salesOrgList)
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)
         searchSalesOrg,
   }) {
     return initialized();
@@ -164,7 +165,8 @@ class _$_Initialized implements _Initialized {
         loadSavedOrganisation,
     TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult? Function(
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
   }) {
     return initialized?.call();
@@ -179,7 +181,7 @@ class _$_Initialized implements _Initialized {
         loadSavedOrganisation,
     TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult Function(SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
     required TResult orElse(),
   }) {
@@ -318,7 +320,7 @@ class _$_Selected implements _Selected {
     required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
         fetchAvailableSalesOrg,
     required TResult Function(
-            String keyWord, List<SalesOrganisation> salesOrgList)
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)
         searchSalesOrg,
   }) {
     return selected(salesOrganisation);
@@ -333,7 +335,8 @@ class _$_Selected implements _Selected {
         loadSavedOrganisation,
     TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult? Function(
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
   }) {
     return selected?.call(salesOrganisation);
@@ -348,7 +351,7 @@ class _$_Selected implements _Selected {
         loadSavedOrganisation,
     TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult Function(SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
     required TResult orElse(),
   }) {
@@ -493,7 +496,7 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
     required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
         fetchAvailableSalesOrg,
     required TResult Function(
-            String keyWord, List<SalesOrganisation> salesOrgList)
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)
         searchSalesOrg,
   }) {
     return loadSavedOrganisation(salesOrganisations);
@@ -508,7 +511,8 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
         loadSavedOrganisation,
     TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult? Function(
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
   }) {
     return loadSavedOrganisation?.call(salesOrganisations);
@@ -523,7 +527,7 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
         loadSavedOrganisation,
     TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult Function(SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
     required TResult orElse(),
   }) {
@@ -669,7 +673,7 @@ class _$_FetchAvailableSalesOrg implements _FetchAvailableSalesOrg {
     required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
         fetchAvailableSalesOrg,
     required TResult Function(
-            String keyWord, List<SalesOrganisation> salesOrgList)
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)
         searchSalesOrg,
   }) {
     return fetchAvailableSalesOrg(avialableSalesOrgList);
@@ -684,7 +688,8 @@ class _$_FetchAvailableSalesOrg implements _FetchAvailableSalesOrg {
         loadSavedOrganisation,
     TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult? Function(
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
   }) {
     return fetchAvailableSalesOrg?.call(avialableSalesOrgList);
@@ -699,7 +704,7 @@ class _$_FetchAvailableSalesOrg implements _FetchAvailableSalesOrg {
         loadSavedOrganisation,
     TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult Function(SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
     required TResult orElse(),
   }) {
@@ -769,7 +774,7 @@ abstract class _$$_SearchSalesOrgCopyWith<$Res> {
           _$_SearchSalesOrg value, $Res Function(_$_SearchSalesOrg) then) =
       __$$_SearchSalesOrgCopyWithImpl<$Res>;
   @useResult
-  $Res call({String keyWord, List<SalesOrganisation> salesOrgList});
+  $Res call({SearchKey searchKey, List<SalesOrganisation> salesOrgList});
 }
 
 /// @nodoc
@@ -783,14 +788,14 @@ class __$$_SearchSalesOrgCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? keyWord = null,
+    Object? searchKey = null,
     Object? salesOrgList = null,
   }) {
     return _then(_$_SearchSalesOrg(
-      keyWord: null == keyWord
-          ? _value.keyWord
-          : keyWord // ignore: cast_nullable_to_non_nullable
-              as String,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
       salesOrgList: null == salesOrgList
           ? _value._salesOrgList
           : salesOrgList // ignore: cast_nullable_to_non_nullable
@@ -803,12 +808,12 @@ class __$$_SearchSalesOrgCopyWithImpl<$Res>
 
 class _$_SearchSalesOrg implements _SearchSalesOrg {
   const _$_SearchSalesOrg(
-      {required this.keyWord,
+      {required this.searchKey,
       required final List<SalesOrganisation> salesOrgList})
       : _salesOrgList = salesOrgList;
 
   @override
-  final String keyWord;
+  final SearchKey searchKey;
   final List<SalesOrganisation> _salesOrgList;
   @override
   List<SalesOrganisation> get salesOrgList {
@@ -819,7 +824,7 @@ class _$_SearchSalesOrg implements _SearchSalesOrg {
 
   @override
   String toString() {
-    return 'SalesOrgEvent.searchSalesOrg(keyWord: $keyWord, salesOrgList: $salesOrgList)';
+    return 'SalesOrgEvent.searchSalesOrg(searchKey: $searchKey, salesOrgList: $salesOrgList)';
   }
 
   @override
@@ -827,14 +832,15 @@ class _$_SearchSalesOrg implements _SearchSalesOrg {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SearchSalesOrg &&
-            (identical(other.keyWord, keyWord) || other.keyWord == keyWord) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
             const DeepCollectionEquality()
                 .equals(other._salesOrgList, _salesOrgList));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, keyWord, const DeepCollectionEquality().hash(_salesOrgList));
+  int get hashCode => Object.hash(runtimeType, searchKey,
+      const DeepCollectionEquality().hash(_salesOrgList));
 
   @JsonKey(ignore: true)
   @override
@@ -852,10 +858,10 @@ class _$_SearchSalesOrg implements _SearchSalesOrg {
     required TResult Function(List<SalesOrganisation> avialableSalesOrgList)
         fetchAvailableSalesOrg,
     required TResult Function(
-            String keyWord, List<SalesOrganisation> salesOrgList)
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)
         searchSalesOrg,
   }) {
-    return searchSalesOrg(keyWord, salesOrgList);
+    return searchSalesOrg(searchKey, salesOrgList);
   }
 
   @override
@@ -867,10 +873,11 @@ class _$_SearchSalesOrg implements _SearchSalesOrg {
         loadSavedOrganisation,
     TResult? Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult? Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult? Function(
+            SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
   }) {
-    return searchSalesOrg?.call(keyWord, salesOrgList);
+    return searchSalesOrg?.call(searchKey, salesOrgList);
   }
 
   @override
@@ -882,12 +889,12 @@ class _$_SearchSalesOrg implements _SearchSalesOrg {
         loadSavedOrganisation,
     TResult Function(List<SalesOrganisation> avialableSalesOrgList)?
         fetchAvailableSalesOrg,
-    TResult Function(String keyWord, List<SalesOrganisation> salesOrgList)?
+    TResult Function(SearchKey searchKey, List<SalesOrganisation> salesOrgList)?
         searchSalesOrg,
     required TResult orElse(),
   }) {
     if (searchSalesOrg != null) {
-      return searchSalesOrg(keyWord, salesOrgList);
+      return searchSalesOrg(searchKey, salesOrgList);
     }
     return orElse();
   }
@@ -937,10 +944,10 @@ class _$_SearchSalesOrg implements _SearchSalesOrg {
 
 abstract class _SearchSalesOrg implements SalesOrgEvent {
   const factory _SearchSalesOrg(
-      {required final String keyWord,
+      {required final SearchKey searchKey,
       required final List<SalesOrganisation> salesOrgList}) = _$_SearchSalesOrg;
 
-  String get keyWord;
+  SearchKey get searchKey;
   List<SalesOrganisation> get salesOrgList;
   @JsonKey(ignore: true)
   _$$_SearchSalesOrgCopyWith<_$_SearchSalesOrg> get copyWith =>
@@ -956,6 +963,7 @@ mixin _$SalesOrgState {
   Option<Either<ApiFailure, dynamic>> get salesOrgFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SalesOrgStateCopyWith<SalesOrgState> get copyWith =>
@@ -973,7 +981,8 @@ abstract class $SalesOrgStateCopyWith<$Res> {
       SalesOrganisationConfigs configs,
       List<SalesOrganisation> availableSalesOrg,
       Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption,
-      bool isLoading});
+      bool isLoading,
+      SearchKey searchKey});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
@@ -997,6 +1006,7 @@ class _$SalesOrgStateCopyWithImpl<$Res, $Val extends SalesOrgState>
     Object? availableSalesOrg = null,
     Object? salesOrgFailureOrSuccessOption = null,
     Object? isLoading = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       salesOrganisation: null == salesOrganisation
@@ -1019,6 +1029,10 @@ class _$SalesOrgStateCopyWithImpl<$Res, $Val extends SalesOrgState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ) as $Val);
   }
 
@@ -1052,7 +1066,8 @@ abstract class _$$_SalesOrgStateCopyWith<$Res>
       SalesOrganisationConfigs configs,
       List<SalesOrganisation> availableSalesOrg,
       Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption,
-      bool isLoading});
+      bool isLoading,
+      SearchKey searchKey});
 
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -1076,6 +1091,7 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
     Object? availableSalesOrg = null,
     Object? salesOrgFailureOrSuccessOption = null,
     Object? isLoading = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_SalesOrgState(
       salesOrganisation: null == salesOrganisation
@@ -1098,6 +1114,10 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 }
@@ -1110,7 +1130,8 @@ class _$_SalesOrgState extends _SalesOrgState {
       required this.configs,
       required final List<SalesOrganisation> availableSalesOrg,
       required this.salesOrgFailureOrSuccessOption,
-      required this.isLoading})
+      required this.isLoading,
+      required this.searchKey})
       : _availableSalesOrg = availableSalesOrg,
         super._();
 
@@ -1131,10 +1152,12 @@ class _$_SalesOrgState extends _SalesOrgState {
   final Option<Either<ApiFailure, dynamic>> salesOrgFailureOrSuccessOption;
   @override
   final bool isLoading;
+  @override
+  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'SalesOrgState(salesOrganisation: $salesOrganisation, configs: $configs, availableSalesOrg: $availableSalesOrg, salesOrgFailureOrSuccessOption: $salesOrgFailureOrSuccessOption, isLoading: $isLoading)';
+    return 'SalesOrgState(salesOrganisation: $salesOrganisation, configs: $configs, availableSalesOrg: $availableSalesOrg, salesOrgFailureOrSuccessOption: $salesOrgFailureOrSuccessOption, isLoading: $isLoading, searchKey: $searchKey)';
   }
 
   @override
@@ -1152,7 +1175,9 @@ class _$_SalesOrgState extends _SalesOrgState {
                 other.salesOrgFailureOrSuccessOption ==
                     salesOrgFailureOrSuccessOption) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
@@ -1162,7 +1187,8 @@ class _$_SalesOrgState extends _SalesOrgState {
       configs,
       const DeepCollectionEquality().hash(_availableSalesOrg),
       salesOrgFailureOrSuccessOption,
-      isLoading);
+      isLoading,
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -1178,7 +1204,8 @@ abstract class _SalesOrgState extends SalesOrgState {
       required final List<SalesOrganisation> availableSalesOrg,
       required final Option<Either<ApiFailure, dynamic>>
           salesOrgFailureOrSuccessOption,
-      required final bool isLoading}) = _$_SalesOrgState;
+      required final bool isLoading,
+      required final SearchKey searchKey}) = _$_SalesOrgState;
   const _SalesOrgState._() : super._();
 
   @override
@@ -1191,6 +1218,8 @@ abstract class _SalesOrgState extends SalesOrgState {
   Option<Either<ApiFailure, dynamic>> get salesOrgFailureOrSuccessOption;
   @override
   bool get isLoading;
+  @override
+  SearchKey get searchKey;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrgStateCopyWith<_$_SalesOrgState> get copyWith =>

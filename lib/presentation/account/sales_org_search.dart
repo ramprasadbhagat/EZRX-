@@ -2,7 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SalesOrgSearch extends StatelessWidget {
-  SalesOrgSearch({
+  const SalesOrgSearch({
     Key? key,
     required this.avialableSalesOrgList,
   }) : super(key: key);
   final List<SalesOrganisation> avialableSalesOrgList;
-  final TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,11 @@ class SalesOrgSearch extends StatelessWidget {
         centerTitle: false,
       ),
       body: BlocBuilder<SalesOrgBloc, SalesOrgState>(
-        buildWhen: (previous, current) => previous != current,
+        buildWhen: (previous, current) =>
+            previous.isLoading != current.isLoading ||
+            previous.salesOrgFailureOrSuccessOption !=
+                current.salesOrgFailureOrSuccessOption ||
+            previous.searchKey != current.searchKey,
         builder: (context, state) {
           return Column(
             children: [
@@ -35,26 +39,28 @@ class SalesOrgSearch extends StatelessWidget {
                   horizontal: 16,
                   vertical: 16,
                 ),
-                child: SearchBar(
-                  onSearchChanged: (String value) {
-                    context.read<SalesOrgBloc>().add(
-                          SalesOrgEvent.searchSalesOrg(
-                            salesOrgList: avialableSalesOrgList,
-                            keyWord: value,
-                          ),
-                        );
-                  },
+                child: CustomSearchBar(
+                  key: WidgetKeys.genericKey(
+                    key: state.searchKey.searchValueOrEmpty,
+                  ),
+                  autofocus: true,
+                  initialValue: state.searchKey.getOrDefaultValue(''),
+                  enabled: !state.isLoading,
+                  onSearchChanged: (value) => context.read<SalesOrgBloc>().add(
+                        SalesOrgEvent.searchSalesOrg(
+                          salesOrgList: avialableSalesOrgList,
+                          searchKey: SearchKey.search(value),
+                        ),
+                      ),
+                  onClear: () => context.read<SalesOrgBloc>().add(
+                        SalesOrgEvent.searchSalesOrg(
+                          salesOrgList: avialableSalesOrgList,
+                          searchKey: SearchKey.search(''),
+                        ),
+                      ),
                   clearIconKey: WidgetKeys.salesOrgSearch,
-                  controller: _searchController,
-                  onClear: () {
-                    _searchController.clear();
-                    context.read<SalesOrgBloc>().add(
-                          SalesOrgEvent.searchSalesOrg(
-                            salesOrgList: avialableSalesOrgList,
-                            keyWord: '',
-                          ),
-                        );
-                  },
+                  customValidator: (value) => true,
+                  onSearchSubmitted: (value) {},
                 ),
               ),
               Expanded(

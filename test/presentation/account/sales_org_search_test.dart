@@ -151,7 +151,7 @@ void main() {
           () => salesOrgBlocMock.add(
             SalesOrgEvent.searchSalesOrg(
               salesOrgList: availableSalesOrgList,
-              keyWord: 'fake-salesOrg',
+              searchKey: SearchKey('fake-salesOrg'),
             ),
           ),
         );
@@ -203,7 +203,7 @@ void main() {
           () => salesOrgBlocMock.add(
             SalesOrgEvent.searchSalesOrg(
               salesOrgList: availableSalesOrgList,
-              keyWord: 'fake-salesOrg',
+              searchKey: SearchKey('fake-salesOrg'),
             ),
           ),
         );

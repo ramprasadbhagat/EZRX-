@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -284,7 +285,7 @@ void main() {
       ),
       act: (bloc) => bloc.add(
         SalesOrgEvent.searchSalesOrg(
-          keyWord: 'fake-salesOrg',
+          searchKey: SearchKey('fake-salesOrg'),
           salesOrgList: fakeSalesOrgList,
         ),
       ),
@@ -292,6 +293,7 @@ void main() {
         SalesOrgState.initial().copyWith(
           availableSalesOrg: fakeSalesOrgList,
           salesOrgFailureOrSuccessOption: none(),
+          searchKey: SearchKey('fake-salesOrg'),
         ),
       ],
     );
