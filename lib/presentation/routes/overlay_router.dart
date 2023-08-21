@@ -88,7 +88,7 @@ class OverlayRouter<T> extends OverlayRoute<T> {
 
   AnimationController createAnimationController() {
     return AnimationController(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 250),
       vsync: navigator!,
     );
   }
@@ -175,7 +175,7 @@ class OverlayRouter<T> extends OverlayRoute<T> {
     if (_timer != null && _timer!.isActive) {
       _timer!.cancel();
     }
-    _timer = Timer(const Duration(seconds: 3), () {
+    _timer = Timer(const Duration(seconds: 4), () {
       if (isCurrent) {
         navigator!.pop();
       } else if (isActive) {
