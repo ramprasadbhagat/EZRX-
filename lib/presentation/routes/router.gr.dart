@@ -126,9 +126,11 @@ import '../products/product_suggestion_page.dart' as _i30;
 import '../products/products_tab.dart' as _i73;
 import '../returns/add_edit_user_restrictions.dart' as _i37;
 import '../returns/approver_actions/approver_actions.dart' as _i16;
-import '../returns/new_request/new_request.dart' as _i69;
-import '../returns/new_request/tabs/return_details_tab.dart' as _i87;
-import '../returns/new_request/tabs/return_items_tab.dart' as _i86;
+import '../returns/new_request/new_request_page.dart' as _i69;
+import '../returns/new_request/tabs/return_details_tab/return_details_tab.dart'
+    as _i87;
+import '../returns/new_request/tabs/return_items_tab/return_items_tab.dart'
+    as _i86;
 import '../returns/new_request/tabs/return_review_tab.dart' as _i88;
 import '../returns/policy_configuration/add_policy_configuration.dart' as _i19;
 import '../returns/policy_configuration/policy_configuration.dart' as _i18;

@@ -39,6 +39,21 @@ class ReturnItemDetailsDto with _$ReturnItemDetailsDto {
       defaultValue: '',
     )
         required String returnType,
+    @JsonKey(
+      name: 'remarks',
+      defaultValue: '',
+    )
+        required String remarks,
+    @JsonKey(
+      name: 'outsidePolicy',
+      defaultValue: false,
+    )
+        required bool outsidePolicy,
+    @JsonKey(
+      name: 'priceOverride',
+      defaultValue: '',
+    )
+        required String priceOverride,
   }) = _ReturnItemDetailsDto;
 
   factory ReturnItemDetailsDto.fromDomain(ReturnItemDetails returnItemDetail) {
@@ -48,8 +63,12 @@ class ReturnItemDetailsDto with _$ReturnItemDetailsDto {
       materialNumber: returnItemDetail.materialNumber.getOrCrash(),
       returnQuantity: returnItemDetail.returnQuantity.getIntValue,
       returnReason: returnItemDetail.usage.usageCode,
-      url: returnItemDetail.poDocuments,
+      url: returnItemDetail.uploadedFiles.map((e) => e.path).toList(),
       returnType: '500',
+      remarks: returnItemDetail.remarks.getOrDefaultValue(''),
+      outsidePolicy: returnItemDetail.outsidePolicy,
+      priceOverride:
+          returnItemDetail.priceOverride.getOrDefaultValue(0).toString(),
     );
   }
 

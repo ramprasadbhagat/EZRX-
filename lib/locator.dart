@@ -62,6 +62,7 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
@@ -3168,6 +3169,9 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<ReturnRequestLocalDataSource>(),
       remoteDataSource: locator<ReturnRequestRemoteDataSource>(),
+      permissionService: locator<PermissionService>(),
+      deviceInfo: locator<DeviceInfo>(),
+      filePickerService: locator<FilePickerService>(),
     ),
   );
   locator.registerLazySingleton(
@@ -3177,6 +3181,11 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => NewRequestBloc(),
+  );
+  locator.registerLazySingleton(
+    () => ReturnRequestAttachmentBloc(
+      returnRequestRepository: locator<ReturnRequestRepository>(),
+    ),
   );
 
  //============================================================

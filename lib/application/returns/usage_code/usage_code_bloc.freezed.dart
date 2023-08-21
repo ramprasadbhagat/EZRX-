@@ -310,8 +310,8 @@ abstract class _Fetch implements UsageCodeEvent {
 
 /// @nodoc
 mixin _$UsageCodeState {
-  List<Usage> get usage => throw _privateConstructorUsedError;
-  Option<Either<ApiFailure, dynamic>> get usageFailureOrSuccessOption =>
+  List<Usage> get usages => throw _privateConstructorUsedError;
+  Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -326,8 +326,8 @@ abstract class $UsageCodeStateCopyWith<$Res> {
       _$UsageCodeStateCopyWithImpl<$Res, UsageCodeState>;
   @useResult
   $Res call(
-      {List<Usage> usage,
-      Option<Either<ApiFailure, dynamic>> usageFailureOrSuccessOption});
+      {List<Usage> usages,
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 }
 
 /// @nodoc
@@ -343,17 +343,17 @@ class _$UsageCodeStateCopyWithImpl<$Res, $Val extends UsageCodeState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usage = null,
-    Object? usageFailureOrSuccessOption = null,
+    Object? usages = null,
+    Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      usage: null == usage
-          ? _value.usage
-          : usage // ignore: cast_nullable_to_non_nullable
+      usages: null == usages
+          ? _value.usages
+          : usages // ignore: cast_nullable_to_non_nullable
               as List<Usage>,
-      usageFailureOrSuccessOption: null == usageFailureOrSuccessOption
-          ? _value.usageFailureOrSuccessOption
-          : usageFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+      failureOrSuccessOption: null == failureOrSuccessOption
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
   }
@@ -368,8 +368,8 @@ abstract class _$$_UsageCodeStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Usage> usage,
-      Option<Either<ApiFailure, dynamic>> usageFailureOrSuccessOption});
+      {List<Usage> usages,
+      Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 }
 
 /// @nodoc
@@ -383,17 +383,17 @@ class __$$_UsageCodeStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usage = null,
-    Object? usageFailureOrSuccessOption = null,
+    Object? usages = null,
+    Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_UsageCodeState(
-      usage: null == usage
-          ? _value._usage
-          : usage // ignore: cast_nullable_to_non_nullable
+      usages: null == usages
+          ? _value._usages
+          : usages // ignore: cast_nullable_to_non_nullable
               as List<Usage>,
-      usageFailureOrSuccessOption: null == usageFailureOrSuccessOption
-          ? _value.usageFailureOrSuccessOption
-          : usageFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+      failureOrSuccessOption: null == failureOrSuccessOption
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
     ));
   }
@@ -403,25 +403,24 @@ class __$$_UsageCodeStateCopyWithImpl<$Res>
 
 class _$_UsageCodeState extends _UsageCodeState {
   const _$_UsageCodeState(
-      {required final List<Usage> usage,
-      required this.usageFailureOrSuccessOption})
-      : _usage = usage,
+      {required final List<Usage> usages, required this.failureOrSuccessOption})
+      : _usages = usages,
         super._();
 
-  final List<Usage> _usage;
+  final List<Usage> _usages;
   @override
-  List<Usage> get usage {
-    if (_usage is EqualUnmodifiableListView) return _usage;
+  List<Usage> get usages {
+    if (_usages is EqualUnmodifiableListView) return _usages;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_usage);
+    return EqualUnmodifiableListView(_usages);
   }
 
   @override
-  final Option<Either<ApiFailure, dynamic>> usageFailureOrSuccessOption;
+  final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'UsageCodeState(usage: $usage, usageFailureOrSuccessOption: $usageFailureOrSuccessOption)';
+    return 'UsageCodeState(usages: $usages, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -429,16 +428,14 @@ class _$_UsageCodeState extends _UsageCodeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UsageCodeState &&
-            const DeepCollectionEquality().equals(other._usage, _usage) &&
-            (identical(other.usageFailureOrSuccessOption,
-                    usageFailureOrSuccessOption) ||
-                other.usageFailureOrSuccessOption ==
-                    usageFailureOrSuccessOption));
+            const DeepCollectionEquality().equals(other._usages, _usages) &&
+            (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
+                other.failureOrSuccessOption == failureOrSuccessOption));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_usage), usageFailureOrSuccessOption);
+      const DeepCollectionEquality().hash(_usages), failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -449,15 +446,15 @@ class _$_UsageCodeState extends _UsageCodeState {
 
 abstract class _UsageCodeState extends UsageCodeState {
   const factory _UsageCodeState(
-      {required final List<Usage> usage,
+      {required final List<Usage> usages,
       required final Option<Either<ApiFailure, dynamic>>
-          usageFailureOrSuccessOption}) = _$_UsageCodeState;
+          failureOrSuccessOption}) = _$_UsageCodeState;
   const _UsageCodeState._() : super._();
 
   @override
-  List<Usage> get usage;
+  List<Usage> get usages;
   @override
-  Option<Either<ApiFailure, dynamic>> get usageFailureOrSuccessOption;
+  Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$_UsageCodeStateCopyWith<_$_UsageCodeState> get copyWith =>

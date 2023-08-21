@@ -16,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
+import 'package:ezrxmobile/presentation/core/summary_info_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
@@ -479,100 +480,9 @@ class _CheckoutSection extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       enableDrag: false,
-      useSafeArea: true,
-      builder: (_) {
-        return Wrap(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(
-                20,
-              ),
-              child: Column(
-                children: [
-                  const _SummaryInfo(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        context.router.pop();
-                      },
-                      child: Text(
-                        'Close'.tr(),
-                        style:
-                            Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: ZPColors.white,
-                                ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _SummaryInfo extends StatelessWidget {
-  const _SummaryInfo({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Order for ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-        ),
-        const SizedBox(
-          height: 16.0,
-        ),
-        Text(
-          'Customer code: ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo}',
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-        ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          context
-              .read<CustomerCodeBloc>()
-              .state
-              .customerCodeInfo
-              .fullCustomerAddress,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-        ),
-        const SizedBox(
-          height: 16.0,
-        ),
-        Text(
-          'Deliver to: ${context.read<CustomerCodeBloc>().state.shipToInfo.shipToCustomerCode}',
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-        ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          context.read<CustomerCodeBloc>().state.shipToInfo.deliveryAddress,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-        ),
-      ],
+      builder: (_) => const SummaryInfoBottomSheet(
+        actionType: SummaryInfoActionType.order,
+      ),
     );
   }
 }

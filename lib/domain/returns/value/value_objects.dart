@@ -131,3 +131,16 @@ class ReturnQuantity extends ValueObject<String> {
 
   const ReturnQuantity._(this.value);
 }
+
+class FileSize extends ValueObject<int> {
+  @override
+  final Either<ValueFailure<int>, int> value;
+
+  factory FileSize(int input) {
+    return FileSize._(Right(input));
+  }
+
+  String get displayText => getFileSizeString(value.getOrElse(() => 0));
+
+  const FileSize._(this.value);
+}

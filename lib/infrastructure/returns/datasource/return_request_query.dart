@@ -6,19 +6,22 @@ class ReturnRequestQuery {
           assignmentNumber
           material
           materialDescription
-          targetQuantity
+          balanceQuantity
           batch
+          eligibleForReturn
           priceDate
           unitPrice
           totalPrice
           principalCode
           principalName
           expiryDate
+          itemNumber
           bonusItem {
             assignmentNumber
             material
             materialDescription
-            targetQuantity
+            balanceQuantity
+            eligibleForReturn
             batch
             priceDate
             unitPrice
@@ -26,6 +29,7 @@ class ReturnRequestQuery {
             principalCode
             principalName
             expiryDate
+            itemNumber
           }
         }
       }
@@ -47,5 +51,26 @@ class ReturnRequestQuery {
         }
       } 
     ''';
+  }
+
+  String addFileRequest() {
+    return '''
+    mutation AddFileRequest(\$folder: String!, \$req: [UploadFile!]!) {
+      addRequestFileUpload(folder: \$folder, req: \$req) {
+        id
+        path
+      }
+    }
+  ''';
+  }
+
+  String deleteFile() {
+    return '''
+   mutation DeleteFile(\$filePath: String!) {
+      deleteFile(file: \$filePath) {
+        isDeleted
+      }
+    }
+  ''';
   }
 }

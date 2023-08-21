@@ -9,7 +9,7 @@ class UsageCodeLocalDataSource {
 
   Future<List<Usage>> getUsages() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getUsageResponse.json'),
+      await rootBundle.loadString('assets/json/getUsageListResponse.json'),
     );
 
     return List.from(data['data']['usage'])

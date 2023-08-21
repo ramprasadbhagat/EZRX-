@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -31,3 +32,22 @@ String filterLabel(String sort) {
 
 String covertSortToApiDateString(String value) =>
     value.isNotEmpty && value != 'ALL' ? value : '';
+
+String getFileSizeString(int sizeInBytes) {
+  final df = NumberFormat('0.00');
+
+  const sizeKb = 1024.0;
+  const sizeMb = sizeKb * sizeKb;
+  const sizeGb = sizeMb * sizeKb;
+  const sizeTerra = sizeGb * sizeKb;
+
+  if (sizeInBytes < sizeMb) {
+    return '${df.format(sizeInBytes / sizeKb)} Kb';
+  } else if (sizeInBytes < sizeGb) {
+    return '${df.format(sizeInBytes / sizeMb)} Mb';
+  } else if (sizeInBytes < sizeTerra) {
+    return '${df.format(sizeInBytes / sizeGb)} Gb';
+  }
+
+  return '';
+}

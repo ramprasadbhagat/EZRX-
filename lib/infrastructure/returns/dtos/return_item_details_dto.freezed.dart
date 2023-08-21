@@ -34,6 +34,12 @@ mixin _$ReturnItemDetailsDto {
   List<String> get url => throw _privateConstructorUsedError;
   @JsonKey(name: 'returnType', defaultValue: '')
   String get returnType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'remarks', defaultValue: '')
+  String get remarks => throw _privateConstructorUsedError;
+  @JsonKey(name: 'outsidePolicy', defaultValue: false)
+  bool get outsidePolicy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'priceOverride', defaultValue: '')
+  String get priceOverride => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +60,10 @@ abstract class $ReturnItemDetailsDtoCopyWith<$Res> {
       @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'returnReason', defaultValue: '') String returnReason,
       @JsonKey(name: 'url', defaultValue: []) List<String> url,
-      @JsonKey(name: 'returnType', defaultValue: '') String returnType});
+      @JsonKey(name: 'returnType', defaultValue: '') String returnType,
+      @JsonKey(name: 'remarks', defaultValue: '') String remarks,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
+      @JsonKey(name: 'priceOverride', defaultValue: '') String priceOverride});
 }
 
 /// @nodoc
@@ -78,6 +87,9 @@ class _$ReturnItemDetailsDtoCopyWithImpl<$Res,
     Object? returnReason = null,
     Object? url = null,
     Object? returnType = null,
+    Object? remarks = null,
+    Object? outsidePolicy = null,
+    Object? priceOverride = null,
   }) {
     return _then(_value.copyWith(
       returnQuantity: null == returnQuantity
@@ -108,6 +120,18 @@ class _$ReturnItemDetailsDtoCopyWithImpl<$Res,
           ? _value.returnType
           : returnType // ignore: cast_nullable_to_non_nullable
               as String,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as String,
+      outsidePolicy: null == outsidePolicy
+          ? _value.outsidePolicy
+          : outsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
+      priceOverride: null == priceOverride
+          ? _value.priceOverride
+          : priceOverride // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -127,7 +151,10 @@ abstract class _$$_ReturnItemDetailsDtoCopyWith<$Res>
       @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'returnReason', defaultValue: '') String returnReason,
       @JsonKey(name: 'url', defaultValue: []) List<String> url,
-      @JsonKey(name: 'returnType', defaultValue: '') String returnType});
+      @JsonKey(name: 'returnType', defaultValue: '') String returnType,
+      @JsonKey(name: 'remarks', defaultValue: '') String remarks,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
+      @JsonKey(name: 'priceOverride', defaultValue: '') String priceOverride});
 }
 
 /// @nodoc
@@ -148,6 +175,9 @@ class __$$_ReturnItemDetailsDtoCopyWithImpl<$Res>
     Object? returnReason = null,
     Object? url = null,
     Object? returnType = null,
+    Object? remarks = null,
+    Object? outsidePolicy = null,
+    Object? priceOverride = null,
   }) {
     return _then(_$_ReturnItemDetailsDto(
       returnQuantity: null == returnQuantity
@@ -178,6 +208,18 @@ class __$$_ReturnItemDetailsDtoCopyWithImpl<$Res>
           ? _value.returnType
           : returnType // ignore: cast_nullable_to_non_nullable
               as String,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as String,
+      outsidePolicy: null == outsidePolicy
+          ? _value.outsidePolicy
+          : outsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
+      priceOverride: null == priceOverride
+          ? _value.priceOverride
+          : priceOverride // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -187,19 +229,20 @@ class __$$_ReturnItemDetailsDtoCopyWithImpl<$Res>
 class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
   const _$_ReturnItemDetailsDto(
       {@JsonKey(name: 'returnQuantity', defaultValue: 0)
-          required this.returnQuantity,
+      required this.returnQuantity,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber,
-      @JsonKey(name: 'lineNumber', defaultValue: '')
-          required this.lineNumber,
-      @JsonKey(name: 'batch', defaultValue: '')
-          required this.batch,
+      required this.materialNumber,
+      @JsonKey(name: 'lineNumber', defaultValue: '') required this.lineNumber,
+      @JsonKey(name: 'batch', defaultValue: '') required this.batch,
       @JsonKey(name: 'returnReason', defaultValue: '')
-          required this.returnReason,
-      @JsonKey(name: 'url', defaultValue: [])
-          required final List<String> url,
-      @JsonKey(name: 'returnType', defaultValue: '')
-          required this.returnType})
+      required this.returnReason,
+      @JsonKey(name: 'url', defaultValue: []) required final List<String> url,
+      @JsonKey(name: 'returnType', defaultValue: '') required this.returnType,
+      @JsonKey(name: 'remarks', defaultValue: '') required this.remarks,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false)
+      required this.outsidePolicy,
+      @JsonKey(name: 'priceOverride', defaultValue: '')
+      required this.priceOverride})
       : _url = url,
         super._();
 
@@ -233,10 +276,19 @@ class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
   @override
   @JsonKey(name: 'returnType', defaultValue: '')
   final String returnType;
+  @override
+  @JsonKey(name: 'remarks', defaultValue: '')
+  final String remarks;
+  @override
+  @JsonKey(name: 'outsidePolicy', defaultValue: false)
+  final bool outsidePolicy;
+  @override
+  @JsonKey(name: 'priceOverride', defaultValue: '')
+  final String priceOverride;
 
   @override
   String toString() {
-    return 'ReturnItemDetailsDto(returnQuantity: $returnQuantity, materialNumber: $materialNumber, lineNumber: $lineNumber, batch: $batch, returnReason: $returnReason, url: $url, returnType: $returnType)';
+    return 'ReturnItemDetailsDto(returnQuantity: $returnQuantity, materialNumber: $materialNumber, lineNumber: $lineNumber, batch: $batch, returnReason: $returnReason, url: $url, returnType: $returnType, remarks: $remarks, outsidePolicy: $outsidePolicy, priceOverride: $priceOverride)';
   }
 
   @override
@@ -255,7 +307,12 @@ class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
                 other.returnReason == returnReason) &&
             const DeepCollectionEquality().equals(other._url, _url) &&
             (identical(other.returnType, returnType) ||
-                other.returnType == returnType));
+                other.returnType == returnType) &&
+            (identical(other.remarks, remarks) || other.remarks == remarks) &&
+            (identical(other.outsidePolicy, outsidePolicy) ||
+                other.outsidePolicy == outsidePolicy) &&
+            (identical(other.priceOverride, priceOverride) ||
+                other.priceOverride == priceOverride));
   }
 
   @JsonKey(ignore: true)
@@ -268,7 +325,10 @@ class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
       batch,
       returnReason,
       const DeepCollectionEquality().hash(_url),
-      returnType);
+      returnType,
+      remarks,
+      outsidePolicy,
+      priceOverride);
 
   @JsonKey(ignore: true)
   @override
@@ -288,19 +348,22 @@ class _$_ReturnItemDetailsDto extends _ReturnItemDetailsDto {
 abstract class _ReturnItemDetailsDto extends ReturnItemDetailsDto {
   const factory _ReturnItemDetailsDto(
       {@JsonKey(name: 'returnQuantity', defaultValue: 0)
-          required final int returnQuantity,
+      required final int returnQuantity,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'lineNumber', defaultValue: '')
-          required final String lineNumber,
-      @JsonKey(name: 'batch', defaultValue: '')
-          required final String batch,
+      required final String lineNumber,
+      @JsonKey(name: 'batch', defaultValue: '') required final String batch,
       @JsonKey(name: 'returnReason', defaultValue: '')
-          required final String returnReason,
-      @JsonKey(name: 'url', defaultValue: [])
-          required final List<String> url,
+      required final String returnReason,
+      @JsonKey(name: 'url', defaultValue: []) required final List<String> url,
       @JsonKey(name: 'returnType', defaultValue: '')
-          required final String returnType}) = _$_ReturnItemDetailsDto;
+      required final String returnType,
+      @JsonKey(name: 'remarks', defaultValue: '') required final String remarks,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false)
+      required final bool outsidePolicy,
+      @JsonKey(name: 'priceOverride', defaultValue: '')
+      required final String priceOverride}) = _$_ReturnItemDetailsDto;
   const _ReturnItemDetailsDto._() : super._();
 
   factory _ReturnItemDetailsDto.fromJson(Map<String, dynamic> json) =
@@ -327,6 +390,15 @@ abstract class _ReturnItemDetailsDto extends ReturnItemDetailsDto {
   @override
   @JsonKey(name: 'returnType', defaultValue: '')
   String get returnType;
+  @override
+  @JsonKey(name: 'remarks', defaultValue: '')
+  String get remarks;
+  @override
+  @JsonKey(name: 'outsidePolicy', defaultValue: false)
+  bool get outsidePolicy;
+  @override
+  @JsonKey(name: 'priceOverride', defaultValue: '')
+  String get priceOverride;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnItemDetailsDtoCopyWith<_$_ReturnItemDetailsDto> get copyWith =>

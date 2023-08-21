@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 
 import 'package:ezrxmobile/domain/returns/repository/i_submit_request_return_repository.dart';
@@ -119,6 +120,6 @@ class SubmitRequestReturnRepository extends ISubmitRequestReturnRepository {
         materialNumber: returnItem.materialNumber,
         returnQuantity: ReturnQuantity(returnItem.itemQty.toString()),
         usage: Usage.empty(),
-        poDocuments: [],
+        uploadedFiles: <ReturnRequestAttachment>[],
       );
 }

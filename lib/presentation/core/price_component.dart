@@ -91,7 +91,7 @@ class PriceComponent extends StatelessWidget {
   }
 }
 
-enum PriceStyle { commonPrice, bundlePice, counterOfferPrice }
+enum PriceStyle { commonPrice, bundlePice, counterOfferPrice, bonusPrice }
 
 TextStyle _priceStyle(BuildContext context, PriceStyle type) {
   switch (type) {
@@ -103,6 +103,10 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       return Theme.of(context).textTheme.labelSmall!.copyWith(
             color: ZPColors.darkGray,
             decoration: TextDecoration.lineThrough,
+          );
+    case PriceStyle.bonusPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: ZPColors.darkGray,
           );
 
     default:
@@ -123,6 +127,10 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             color: ZPColors.darkGray,
             decoration: TextDecoration.lineThrough,
+          );
+    case PriceStyle.bonusPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: ZPColors.darkGray,
           );
 
     default:

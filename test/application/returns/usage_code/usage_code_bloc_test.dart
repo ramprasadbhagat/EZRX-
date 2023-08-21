@@ -50,7 +50,7 @@ void main() {
             bloc.add(UsageCodeEvent.fetch(salesOrg: mockSalesOrg)),
         expect: () => [
           UsageCodeState.initial().copyWith(
-            usageFailureOrSuccessOption:
+            failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('mock-error'))),
           )
         ],
@@ -69,8 +69,8 @@ void main() {
             bloc.add(UsageCodeEvent.fetch(salesOrg: salesOrg2601)),
         expect: () => [
           UsageCodeState.initial().copyWith(
-            usage: usages,
-            usageFailureOrSuccessOption: none(),
+            usages: usages,
+            failureOrSuccessOption: none(),
           ),
         ],
       );

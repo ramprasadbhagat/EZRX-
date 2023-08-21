@@ -430,7 +430,25 @@ class WidgetKeys {
   //  New Return Request
   //============================================================
   static const Key newRequestPage = Key('newRequestPage');
+  static Key returnBalanceQuantityField(String uuid) =>
+      Key('balanceQuantityField$uuid');
+  static Key returnCommentField(String uuid) => Key('commentField$uuid');
+  static Key returnReasonDropdown(String uuid) => Key('reasonDropdown$uuid');
+  static Key returnQuantityField(String uuid) =>
+      Key('returnQuantityField$uuid');
+  static Key returnValueField(String uuid) => Key('returnValueField$uuid');
+  static const Key returnReferenceField = Key('returnReferenceField');
+  static Key returnActivateBonusButton(String uuid) =>
+      Key('activateBonusButton$uuid');
+  static Key returnUploadAttachmentButton(String uuid) =>
+      Key('uploadAttachmentButton$uuid');
   static const Key submitButton = Key('submitButton');
+  static const Key returnAttachmentFileUploadButton =
+      Key('returnAttachmentFileUploadButton');
+  static const Key returnAttachmentUploadDialog =
+      Key('returnAttachmentUploadDialog');
+  static const Key returnAttachmentPhotoUploadButton =
+      Key('returnAttachmentPhotoUploadButton');
 
   //============================================================
   //  Contact Us Page

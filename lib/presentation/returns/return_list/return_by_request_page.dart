@@ -3,8 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -15,10 +13,10 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/return_list/widgets/new_request_button.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +24,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 
-final _controller = ScrollController();
-
-class ReturnByRequestPage extends StatelessWidget {
+class ReturnByRequestPage extends StatefulWidget {
   const ReturnByRequestPage({Key? key}) : super(key: key);
+
+  @override
+  State<ReturnByRequestPage> createState() => _ReturnByRequestPageState();
+}
+
+class _ReturnByRequestPageState extends State<ReturnByRequestPage> {
+  late ScrollController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,26 +144,7 @@ class ReturnByRequestPage extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: ScaleButton(
-        icon: Icons.add,
-        label: 'New request'.tr(),
-        onPress: () {
-          context.read<ReturnItemsBloc>().add(
-                ReturnItemsEvent.fetch(
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-                ),
-              );
-          context.read<NewRequestBloc>().add(
-                const NewRequestEvent.initialized(),
-              );
-          context.router.pushNamed('returns/new_request');
-        },
-        scrollController: _controller,
-      ),
+      floatingActionButton: NewRequestButton(controller: _controller),
     );
   }
 }

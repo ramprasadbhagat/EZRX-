@@ -10,7 +10,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.controller,
     this.validator,
     required this.onChanged,
-    required this.decoration,
+    this.decoration,
     this.isEnabled = true,
     this.autoCorrect = false,
     this.keyboardType,
@@ -30,7 +30,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final TextEditingController? controller;
   final Function(String?)? validator;
   final Function(String) onChanged;
-  final InputDecoration decoration;
+  final InputDecoration? decoration;
   final bool isEnabled;
   final bool autoCorrect;
   final TextInputType? keyboardType;

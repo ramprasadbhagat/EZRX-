@@ -34,14 +34,14 @@ class UsageCodeBloc extends Bloc<UsageCodeEvent, UsageCodeState> {
           (failure) {
             emit(
               state.copyWith(
-                usageFailureOrSuccessOption: optionOf(failureOrSuccess),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
           },
-          (usage) => emit(
+          (usages) => emit(
             state.copyWith(
-              usage: usage,
-              usageFailureOrSuccessOption: none(),
+              usages: usages,
+              failureOrSuccessOption: none(),
             ),
           ),
         );

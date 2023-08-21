@@ -310,21 +310,6 @@ class MaterialTaxClassification extends ValueObject<String> {
   }
 }
 
-class Remarks extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory Remarks(String input) {
-    return Remarks._(validateStringNotEmpty(input));
-  }
-
-  String get displayRemarks {
-    return naIfEmpty(value.getOrElse(() => ''));
-  }
-
-  const Remarks._(this.value);
-}
-
 class SpecialInstructions extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

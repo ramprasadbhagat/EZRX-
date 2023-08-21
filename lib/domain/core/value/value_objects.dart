@@ -157,7 +157,7 @@ class LanguageValue extends ValueObject<String> {
   }
 
   String get languageString => getLanguageString(value.getOrElse(() => ''));
-  
+
   Locale get toLocal => toLocale(value.getOrElse(() => 'en'));
 
   const LanguageValue._(this.value);
@@ -308,4 +308,17 @@ class MobileNumber extends ValueObject<String> {
   String get displayLabel => naIfEmpty(getTelephone);
 
   const MobileNumber._(this.value);
+}
+
+class Remarks extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory Remarks(String input) {
+    return Remarks._(validateStringNotEmpty(input));
+  }
+
+  String get displayText => value.getOrElse(() => '-');
+
+  const Remarks._(this.value);
 }

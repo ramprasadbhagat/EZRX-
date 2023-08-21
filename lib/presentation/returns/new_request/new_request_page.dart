@@ -3,14 +3,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/summary_info_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+part 'widgets/attention_widget.dart';
+part 'widgets/next_button.dart';
+part 'widgets/previous_button.dart';
+part 'widgets/submit_button.dart';
 
 class NewRequestPage extends StatelessWidget {
   const NewRequestPage({Key? key}) : super(key: key);
@@ -43,7 +49,7 @@ class NewRequestPage extends StatelessWidget {
           key: WidgetKeys.newRequestPage,
           appBar: AppBar(
             centerTitle: false,
-            title: const Text('New return request').tr(),
+            title: Text('New return request'.tr()),
             leading: _PreviousButton(
               tabController: tabController,
               step: step,
@@ -53,7 +59,9 @@ class NewRequestPage extends StatelessWidget {
             currentPath: context.router.currentPath,
             child: BlocBuilder<NewRequestBloc, NewRequestState>(
               buildWhen: (previous, current) =>
-                  previous.selectedItems != current.selectedItems,
+                  previous.selectedItems != current.selectedItems ||
+                  previous.invoiceDetails != current.invoiceDetails ||
+                  previous.showErrorMessages != current.showErrorMessages,
               builder: (context, state) {
                 return Column(
                   children: [
@@ -73,7 +81,7 @@ class NewRequestPage extends StatelessWidget {
                                     vertical: 8.0,
                                   ),
                                   child: Text(
-                                    'Step $step of ${_tabs.length}: $title',
+                                    '${'Step'.tr()} $step ${'of'.tr()} ${_tabs.length}: $title',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall!
@@ -114,30 +122,42 @@ class NewRequestPage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '${'Return for'.tr()} ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName.name1}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                    const Icon(Icons.chevron_right),
-                                  ],
+                              ListTile(
+                                onTap: () => _showSumaryInfo(context),
+                                dense: true,
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                  '${'Return for'.tr()} ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
+                                  style: Theme.of(context).textTheme.labelSmall,
+                                ),
+                                trailing: const Icon(
+                                  Icons.chevron_right,
                                 ),
                               ),
-                              Text(
-                                '${state.selectedItems.length} item(s) selected'
-                                    .tr(),
-                                style: Theme.of(context).textTheme.titleSmall,
+                              _AttentionWidget(
+                                message:
+                                    'Please select at least one material to proceed.'
+                                        .tr(),
+                                visible: step == 1 && state.showErrorMessages,
+                              ),
+                              _AttentionWidget(
+                                message:
+                                    'Please ensure that the items selected for return are from the same Principal.'
+                                        .tr(),
+                                visible:
+                                    step == 1 && !state.isSelectedItemsValid,
+                              ),
+                              if (step == 1)
+                                Text(
+                                  '${state.selectedItems.length} ${'item(s) selected'.tr()}'
+                                      .tr(),
+                                  style: Theme.of(context).textTheme.titleSmall,
+                                ),
+                              _AttentionWidget(
+                                message:
+                                    'Please ensure all required fields are filled.'
+                                        .tr(),
+                                visible: step == 2 && state.showErrorMessages,
                               ),
                               Row(
                                 children: [
@@ -155,31 +175,23 @@ class NewRequestPage extends StatelessWidget {
                                         .read<SalesOrgBloc>()
                                         .state
                                         .configs,
-                                    price: state.selectedItems.amountTotal
-                                        .toString(),
+                                    price: state.returnTotal.toString(),
                                   ),
                                   const Spacer(),
                                   if (step == 1)
                                     _NextButton(
                                       tabController: tabController,
-                                      enabled: state.selectedItems.isNotEmpty,
+                                      nextAllowed:
+                                          state.selectedItems.isNotEmpty &&
+                                              state.isSelectedItemsValid,
                                     ),
                                   if (step == 2)
                                     _NextButton(
                                       tabController: tabController,
-                                      enabled: true,
+                                      nextAllowed: state.isAdditionInfoValid &&
+                                          state.isReturnQuantityValid,
                                     ),
-                                  if (step == 3)
-                                    ElevatedButton(
-                                      key: WidgetKeys.submitButton,
-                                      onPressed: null,
-                                      child: Text(
-                                        'Submit'.tr(),
-                                        style: const TextStyle(
-                                          color: ZPColors.white,
-                                        ),
-                                      ),
-                                    ),
+                                  if (step == 3) const _SubmitButton(),
                                 ],
                               ),
                               const SizedBox(
@@ -199,65 +211,14 @@ class NewRequestPage extends StatelessWidget {
       },
     );
   }
-}
 
-class _PreviousButton extends StatelessWidget {
-  final TabController tabController;
-  final int step;
-
-  const _PreviousButton({
-    Key? key,
-    required this.tabController,
-    required this.step,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return step == 1
-        ? IconButton(
-            key: WidgetKeys.closeButton,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.close),
-          )
-        : IconButton(
-            key: WidgetKeys.backButton,
-            onPressed: () {
-              tabController.animateTo(
-                tabController.index - 1,
-              );
-            },
-            icon: const Icon(Icons.chevron_left),
-          );
-  }
-}
-
-class _NextButton extends StatelessWidget {
-  final TabController tabController;
-  final bool enabled;
-  const _NextButton({
-    Key? key,
-    required this.tabController,
-    required this.enabled,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      key: WidgetKeys.nextButton,
-      onPressed: enabled
-          ? () {
-              tabController.animateTo(
-                tabController.index + 1,
-              );
-            }
-          : null,
-      child: Text(
-        'Next'.tr(),
-        style: const TextStyle(
-          color: ZPColors.white,
-        ),
+  void _showSumaryInfo(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      builder: (_) => const SummaryInfoBottomSheet(
+        actionType: SummaryInfoActionType.returnRequest,
       ),
     );
   }

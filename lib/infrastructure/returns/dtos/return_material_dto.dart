@@ -11,14 +11,17 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
   const ReturnMaterialDto._();
 
   const factory ReturnMaterialDto({
-    @JsonKey(name: 'targetQuantity', defaultValue: '')
-        required String targetQuantity,
+    @JsonKey(name: 'balanceQuantity', defaultValue: '')
+        required String balanceQuantity,
     @JsonKey(name: 'unitPrice', defaultValue: '') required String unitPrice,
     @JsonKey(name: 'totalPrice', defaultValue: '') required String totalPrice,
     @JsonKey(name: 'material', defaultValue: '') required String materialNumber,
     @JsonKey(name: 'materialDescription', defaultValue: '')
         required String materialDescription,
+    @JsonKey(name: 'itemNumber', defaultValue: '') required String itemNumber,
     @JsonKey(name: 'batch', defaultValue: '') required String batch,
+    @JsonKey(name: 'eligibleForReturn', defaultValue: false)
+        required bool eligibleForReturn,
     @JsonKey(name: 'assignmentNumber', defaultValue: '')
         required String assignmentNumber,
     @JsonKey(name: 'principalCode', defaultValue: '')
@@ -35,12 +38,14 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
     ReturnMaterial data,
   ) {
     return ReturnMaterialDto(
-      targetQuantity: data.targetQuantity.toString(),
+      balanceQuantity: data.balanceQuantity.toString(),
       unitPrice: data.unitPrice.apiParameterValue,
       totalPrice: data.totalPrice.apiParameterValue,
       materialNumber: data.materialNumber.getOrCrash(),
       materialDescription: data.materialDescription,
       batch: data.batch,
+      eligibleForReturn: data.eligibleForReturn,
+      itemNumber: data.itemNumber,
       assignmentNumber: data.assignmentNumber,
       principalCode: data.principalCode.getOrCrash(),
       principalName: data.principalName.getOrCrash(),
@@ -54,12 +59,14 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
 
   ReturnMaterial toDomain() {
     return ReturnMaterial(
-      targetQuantity: IntegerValue(targetQuantity),
+      balanceQuantity: IntegerValue(balanceQuantity),
       unitPrice: RangeValue(unitPrice),
       totalPrice: RangeValue(totalPrice),
       materialNumber: MaterialNumber(materialNumber),
       materialDescription: materialDescription,
       batch: batch,
+      eligibleForReturn: eligibleForReturn,
+      itemNumber: itemNumber,
       assignmentNumber: assignmentNumber,
       principalCode: PrincipalCode(principalCode),
       principalName: PrincipalName(principalName),

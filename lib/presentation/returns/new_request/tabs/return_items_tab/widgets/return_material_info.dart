@@ -1,0 +1,50 @@
+part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_tab.dart';
+
+class _ReturnMaterialInfo extends StatelessWidget {
+  const _ReturnMaterialInfo({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  final ReturnMaterial data;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomCard(
+      showBorder: true,
+      showShadow: false,
+      clipBehavior: Clip.antiAlias,
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(0),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ProductImageWithLabel(
+                materialNumber: data.materialNumber,
+              ),
+              Expanded(
+                child: MaterialInfoWidget(data: data),
+              ),
+            ],
+          ),
+          MaterialQuantityAndPrice(
+            quantity: data.balanceQuantity.getOrDefaultValue(0),
+            unitPrice: data.unitPrice.getOrDefaultValue(0),
+          ),
+          _ExpandableSection(
+            children: [
+              MaterialDetailsSection(
+                data: data,
+              ),
+              _BonusItemSection(
+                items: data.bonusItems,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

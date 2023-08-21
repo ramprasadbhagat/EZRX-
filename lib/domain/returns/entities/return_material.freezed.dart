@@ -16,12 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ReturnMaterial {
-  IntegerValue get targetQuantity => throw _privateConstructorUsedError;
+  IntegerValue get balanceQuantity => throw _privateConstructorUsedError;
   RangeValue get unitPrice => throw _privateConstructorUsedError;
   RangeValue get totalPrice => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
+  String get itemNumber => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
+  bool get eligibleForReturn => throw _privateConstructorUsedError;
   String get assignmentNumber => throw _privateConstructorUsedError;
   PrincipalCode get principalCode => throw _privateConstructorUsedError;
   PrincipalName get principalName => throw _privateConstructorUsedError;
@@ -41,12 +43,14 @@ abstract class $ReturnMaterialCopyWith<$Res> {
       _$ReturnMaterialCopyWithImpl<$Res, ReturnMaterial>;
   @useResult
   $Res call(
-      {IntegerValue targetQuantity,
+      {IntegerValue balanceQuantity,
       RangeValue unitPrice,
       RangeValue totalPrice,
       MaterialNumber materialNumber,
       String materialDescription,
+      String itemNumber,
       String batch,
+      bool eligibleForReturn,
       String assignmentNumber,
       PrincipalCode principalCode,
       PrincipalName principalName,
@@ -68,12 +72,14 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? targetQuantity = null,
+    Object? balanceQuantity = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
+    Object? itemNumber = null,
     Object? batch = null,
+    Object? eligibleForReturn = null,
     Object? assignmentNumber = null,
     Object? principalCode = null,
     Object? principalName = null,
@@ -82,9 +88,9 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
     Object? bonusItems = null,
   }) {
     return _then(_value.copyWith(
-      targetQuantity: null == targetQuantity
-          ? _value.targetQuantity
-          : targetQuantity // ignore: cast_nullable_to_non_nullable
+      balanceQuantity: null == balanceQuantity
+          ? _value.balanceQuantity
+          : balanceQuantity // ignore: cast_nullable_to_non_nullable
               as IntegerValue,
       unitPrice: null == unitPrice
           ? _value.unitPrice
@@ -102,10 +108,18 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      itemNumber: null == itemNumber
+          ? _value.itemNumber
+          : itemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
+      eligibleForReturn: null == eligibleForReturn
+          ? _value.eligibleForReturn
+          : eligibleForReturn // ignore: cast_nullable_to_non_nullable
+              as bool,
       assignmentNumber: null == assignmentNumber
           ? _value.assignmentNumber
           : assignmentNumber // ignore: cast_nullable_to_non_nullable
@@ -143,12 +157,14 @@ abstract class _$$_ReturnMaterialCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {IntegerValue targetQuantity,
+      {IntegerValue balanceQuantity,
       RangeValue unitPrice,
       RangeValue totalPrice,
       MaterialNumber materialNumber,
       String materialDescription,
+      String itemNumber,
       String batch,
+      bool eligibleForReturn,
       String assignmentNumber,
       PrincipalCode principalCode,
       PrincipalName principalName,
@@ -168,12 +184,14 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? targetQuantity = null,
+    Object? balanceQuantity = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
+    Object? itemNumber = null,
     Object? batch = null,
+    Object? eligibleForReturn = null,
     Object? assignmentNumber = null,
     Object? principalCode = null,
     Object? principalName = null,
@@ -182,9 +200,9 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
     Object? bonusItems = null,
   }) {
     return _then(_$_ReturnMaterial(
-      targetQuantity: null == targetQuantity
-          ? _value.targetQuantity
-          : targetQuantity // ignore: cast_nullable_to_non_nullable
+      balanceQuantity: null == balanceQuantity
+          ? _value.balanceQuantity
+          : balanceQuantity // ignore: cast_nullable_to_non_nullable
               as IntegerValue,
       unitPrice: null == unitPrice
           ? _value.unitPrice
@@ -202,10 +220,18 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      itemNumber: null == itemNumber
+          ? _value.itemNumber
+          : itemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
+      eligibleForReturn: null == eligibleForReturn
+          ? _value.eligibleForReturn
+          : eligibleForReturn // ignore: cast_nullable_to_non_nullable
+              as bool,
       assignmentNumber: null == assignmentNumber
           ? _value.assignmentNumber
           : assignmentNumber // ignore: cast_nullable_to_non_nullable
@@ -238,12 +264,14 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
 
 class _$_ReturnMaterial extends _ReturnMaterial {
   const _$_ReturnMaterial(
-      {required this.targetQuantity,
+      {required this.balanceQuantity,
       required this.unitPrice,
       required this.totalPrice,
       required this.materialNumber,
       required this.materialDescription,
+      required this.itemNumber,
       required this.batch,
+      required this.eligibleForReturn,
       required this.assignmentNumber,
       required this.principalCode,
       required this.principalName,
@@ -254,7 +282,7 @@ class _$_ReturnMaterial extends _ReturnMaterial {
         super._();
 
   @override
-  final IntegerValue targetQuantity;
+  final IntegerValue balanceQuantity;
   @override
   final RangeValue unitPrice;
   @override
@@ -264,7 +292,11 @@ class _$_ReturnMaterial extends _ReturnMaterial {
   @override
   final String materialDescription;
   @override
+  final String itemNumber;
+  @override
   final String batch;
+  @override
+  final bool eligibleForReturn;
   @override
   final String assignmentNumber;
   @override
@@ -285,7 +317,7 @@ class _$_ReturnMaterial extends _ReturnMaterial {
 
   @override
   String toString() {
-    return 'ReturnMaterial(targetQuantity: $targetQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, bonusItems: $bonusItems)';
+    return 'ReturnMaterial(balanceQuantity: $balanceQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, bonusItems: $bonusItems)';
   }
 
   @override
@@ -293,8 +325,8 @@ class _$_ReturnMaterial extends _ReturnMaterial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReturnMaterial &&
-            (identical(other.targetQuantity, targetQuantity) ||
-                other.targetQuantity == targetQuantity) &&
+            (identical(other.balanceQuantity, balanceQuantity) ||
+                other.balanceQuantity == balanceQuantity) &&
             (identical(other.unitPrice, unitPrice) ||
                 other.unitPrice == unitPrice) &&
             (identical(other.totalPrice, totalPrice) ||
@@ -303,7 +335,11 @@ class _$_ReturnMaterial extends _ReturnMaterial {
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
+            (identical(other.itemNumber, itemNumber) ||
+                other.itemNumber == itemNumber) &&
             (identical(other.batch, batch) || other.batch == batch) &&
+            (identical(other.eligibleForReturn, eligibleForReturn) ||
+                other.eligibleForReturn == eligibleForReturn) &&
             (identical(other.assignmentNumber, assignmentNumber) ||
                 other.assignmentNumber == assignmentNumber) &&
             (identical(other.principalCode, principalCode) ||
@@ -321,12 +357,14 @@ class _$_ReturnMaterial extends _ReturnMaterial {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      targetQuantity,
+      balanceQuantity,
       unitPrice,
       totalPrice,
       materialNumber,
       materialDescription,
+      itemNumber,
       batch,
+      eligibleForReturn,
       assignmentNumber,
       principalCode,
       principalName,
@@ -343,12 +381,14 @@ class _$_ReturnMaterial extends _ReturnMaterial {
 
 abstract class _ReturnMaterial extends ReturnMaterial {
   const factory _ReturnMaterial(
-      {required final IntegerValue targetQuantity,
+      {required final IntegerValue balanceQuantity,
       required final RangeValue unitPrice,
       required final RangeValue totalPrice,
       required final MaterialNumber materialNumber,
       required final String materialDescription,
+      required final String itemNumber,
       required final String batch,
+      required final bool eligibleForReturn,
       required final String assignmentNumber,
       required final PrincipalCode principalCode,
       required final PrincipalName principalName,
@@ -358,7 +398,7 @@ abstract class _ReturnMaterial extends ReturnMaterial {
   const _ReturnMaterial._() : super._();
 
   @override
-  IntegerValue get targetQuantity;
+  IntegerValue get balanceQuantity;
   @override
   RangeValue get unitPrice;
   @override
@@ -368,7 +408,11 @@ abstract class _ReturnMaterial extends ReturnMaterial {
   @override
   String get materialDescription;
   @override
+  String get itemNumber;
+  @override
   String get batch;
+  @override
+  bool get eligibleForReturn;
   @override
   String get assignmentNumber;
   @override

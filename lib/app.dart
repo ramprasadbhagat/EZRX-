@@ -48,6 +48,7 @@ import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
@@ -558,6 +559,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<NewRequestBloc>(
           create: (context) => locator<NewRequestBloc>(),
+        ),
+        BlocProvider<ReturnRequestAttachmentBloc>(
+          create: (context) => locator<ReturnRequestAttachmentBloc>(),
         ),
         BlocProvider<ContactUsBloc>(
           create: (context) => locator<ContactUsBloc>(),

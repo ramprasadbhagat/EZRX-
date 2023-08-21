@@ -4,19 +4,22 @@ fragment MaterialsFields on returnMaterialInformation {
     assignmentNumber
     material
     materialDescription
-    targetQuantity
+    balanceQuantity
     batch
+    eligibleForReturn
     priceDate
     unitPrice
     totalPrice
     principalCode
     principalName
     expiryDate
+    itemNumber
     bonusItem {
       assignmentNumber
       material
       materialDescription
-      targetQuantity
+      balanceQuantity
+      eligibleForReturn
       batch
       priceDate
       unitPrice
@@ -24,6 +27,7 @@ fragment MaterialsFields on returnMaterialInformation {
       principalCode
       principalName
       expiryDate
+      itemNumber
     }
   }
 }

@@ -18,10 +18,16 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ReturnItemDetails {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get itemNumber => throw _privateConstructorUsedError;
+  String get assignmentNumber => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
   ReturnQuantity get returnQuantity => throw _privateConstructorUsedError;
   Usage get usage => throw _privateConstructorUsedError;
-  List<String> get poDocuments => throw _privateConstructorUsedError;
+  List<ReturnRequestAttachment> get uploadedFiles =>
+      throw _privateConstructorUsedError;
+  Remarks get remarks => throw _privateConstructorUsedError;
+  bool get outsidePolicy => throw _privateConstructorUsedError;
+  PriceOverrideValue get priceOverride => throw _privateConstructorUsedError;
+  String get returnReason => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnItemDetailsCopyWith<ReturnItemDetails> get copyWith =>
@@ -37,10 +43,15 @@ abstract class $ReturnItemDetailsCopyWith<$Res> {
   $Res call(
       {MaterialNumber materialNumber,
       String itemNumber,
+      String assignmentNumber,
       String batch,
       ReturnQuantity returnQuantity,
       Usage usage,
-      List<String> poDocuments});
+      List<ReturnRequestAttachment> uploadedFiles,
+      Remarks remarks,
+      bool outsidePolicy,
+      PriceOverrideValue priceOverride,
+      String returnReason});
 
   $UsageCopyWith<$Res> get usage;
 }
@@ -60,10 +71,15 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
   $Res call({
     Object? materialNumber = null,
     Object? itemNumber = null,
+    Object? assignmentNumber = null,
     Object? batch = null,
     Object? returnQuantity = null,
     Object? usage = null,
-    Object? poDocuments = null,
+    Object? uploadedFiles = null,
+    Object? remarks = null,
+    Object? outsidePolicy = null,
+    Object? priceOverride = null,
+    Object? returnReason = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -73,6 +89,10 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
       itemNumber: null == itemNumber
           ? _value.itemNumber
           : itemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      assignmentNumber: null == assignmentNumber
+          ? _value.assignmentNumber
+          : assignmentNumber // ignore: cast_nullable_to_non_nullable
               as String,
       batch: null == batch
           ? _value.batch
@@ -86,10 +106,26 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
               as Usage,
-      poDocuments: null == poDocuments
-          ? _value.poDocuments
-          : poDocuments // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      uploadedFiles: null == uploadedFiles
+          ? _value.uploadedFiles
+          : uploadedFiles // ignore: cast_nullable_to_non_nullable
+              as List<ReturnRequestAttachment>,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as Remarks,
+      outsidePolicy: null == outsidePolicy
+          ? _value.outsidePolicy
+          : outsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
+      priceOverride: null == priceOverride
+          ? _value.priceOverride
+          : priceOverride // ignore: cast_nullable_to_non_nullable
+              as PriceOverrideValue,
+      returnReason: null == returnReason
+          ? _value.returnReason
+          : returnReason // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -113,10 +149,15 @@ abstract class _$$_ReturnItemDetailsCopyWith<$Res>
   $Res call(
       {MaterialNumber materialNumber,
       String itemNumber,
+      String assignmentNumber,
       String batch,
       ReturnQuantity returnQuantity,
       Usage usage,
-      List<String> poDocuments});
+      List<ReturnRequestAttachment> uploadedFiles,
+      Remarks remarks,
+      bool outsidePolicy,
+      PriceOverrideValue priceOverride,
+      String returnReason});
 
   @override
   $UsageCopyWith<$Res> get usage;
@@ -135,10 +176,15 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
   $Res call({
     Object? materialNumber = null,
     Object? itemNumber = null,
+    Object? assignmentNumber = null,
     Object? batch = null,
     Object? returnQuantity = null,
     Object? usage = null,
-    Object? poDocuments = null,
+    Object? uploadedFiles = null,
+    Object? remarks = null,
+    Object? outsidePolicy = null,
+    Object? priceOverride = null,
+    Object? returnReason = null,
   }) {
     return _then(_$_ReturnItemDetails(
       materialNumber: null == materialNumber
@@ -148,6 +194,10 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
       itemNumber: null == itemNumber
           ? _value.itemNumber
           : itemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      assignmentNumber: null == assignmentNumber
+          ? _value.assignmentNumber
+          : assignmentNumber // ignore: cast_nullable_to_non_nullable
               as String,
       batch: null == batch
           ? _value.batch
@@ -161,10 +211,26 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
               as Usage,
-      poDocuments: null == poDocuments
-          ? _value._poDocuments
-          : poDocuments // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      uploadedFiles: null == uploadedFiles
+          ? _value._uploadedFiles
+          : uploadedFiles // ignore: cast_nullable_to_non_nullable
+              as List<ReturnRequestAttachment>,
+      remarks: null == remarks
+          ? _value.remarks
+          : remarks // ignore: cast_nullable_to_non_nullable
+              as Remarks,
+      outsidePolicy: null == outsidePolicy
+          ? _value.outsidePolicy
+          : outsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
+      priceOverride: null == priceOverride
+          ? _value.priceOverride
+          : priceOverride // ignore: cast_nullable_to_non_nullable
+              as PriceOverrideValue,
+      returnReason: null == returnReason
+          ? _value.returnReason
+          : returnReason // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -175,11 +241,16 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
   const _$_ReturnItemDetails(
       {required this.materialNumber,
       required this.itemNumber,
+      required this.assignmentNumber,
       required this.batch,
       required this.returnQuantity,
       required this.usage,
-      required final List<String> poDocuments})
-      : _poDocuments = poDocuments,
+      required final List<ReturnRequestAttachment> uploadedFiles,
+      required this.remarks,
+      required this.outsidePolicy,
+      required this.priceOverride,
+      required this.returnReason})
+      : _uploadedFiles = uploadedFiles,
         super._();
 
   @override
@@ -187,22 +258,33 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
   @override
   final String itemNumber;
   @override
+  final String assignmentNumber;
+  @override
   final String batch;
   @override
   final ReturnQuantity returnQuantity;
   @override
   final Usage usage;
-  final List<String> _poDocuments;
+  final List<ReturnRequestAttachment> _uploadedFiles;
   @override
-  List<String> get poDocuments {
-    if (_poDocuments is EqualUnmodifiableListView) return _poDocuments;
+  List<ReturnRequestAttachment> get uploadedFiles {
+    if (_uploadedFiles is EqualUnmodifiableListView) return _uploadedFiles;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_poDocuments);
+    return EqualUnmodifiableListView(_uploadedFiles);
   }
 
   @override
+  final Remarks remarks;
+  @override
+  final bool outsidePolicy;
+  @override
+  final PriceOverrideValue priceOverride;
+  @override
+  final String returnReason;
+
+  @override
   String toString() {
-    return 'ReturnItemDetails(materialNumber: $materialNumber, itemNumber: $itemNumber, batch: $batch, returnQuantity: $returnQuantity, usage: $usage, poDocuments: $poDocuments)';
+    return 'ReturnItemDetails(materialNumber: $materialNumber, itemNumber: $itemNumber, assignmentNumber: $assignmentNumber, batch: $batch, returnQuantity: $returnQuantity, usage: $usage, uploadedFiles: $uploadedFiles, remarks: $remarks, outsidePolicy: $outsidePolicy, priceOverride: $priceOverride, returnReason: $returnReason)';
   }
 
   @override
@@ -214,12 +296,21 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
                 other.materialNumber == materialNumber) &&
             (identical(other.itemNumber, itemNumber) ||
                 other.itemNumber == itemNumber) &&
+            (identical(other.assignmentNumber, assignmentNumber) ||
+                other.assignmentNumber == assignmentNumber) &&
             (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.returnQuantity, returnQuantity) ||
                 other.returnQuantity == returnQuantity) &&
             (identical(other.usage, usage) || other.usage == usage) &&
             const DeepCollectionEquality()
-                .equals(other._poDocuments, _poDocuments));
+                .equals(other._uploadedFiles, _uploadedFiles) &&
+            (identical(other.remarks, remarks) || other.remarks == remarks) &&
+            (identical(other.outsidePolicy, outsidePolicy) ||
+                other.outsidePolicy == outsidePolicy) &&
+            (identical(other.priceOverride, priceOverride) ||
+                other.priceOverride == priceOverride) &&
+            (identical(other.returnReason, returnReason) ||
+                other.returnReason == returnReason));
   }
 
   @override
@@ -227,10 +318,15 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
       runtimeType,
       materialNumber,
       itemNumber,
+      assignmentNumber,
       batch,
       returnQuantity,
       usage,
-      const DeepCollectionEquality().hash(_poDocuments));
+      const DeepCollectionEquality().hash(_uploadedFiles),
+      remarks,
+      outsidePolicy,
+      priceOverride,
+      returnReason);
 
   @JsonKey(ignore: true)
   @override
@@ -244,10 +340,15 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
   const factory _ReturnItemDetails(
       {required final MaterialNumber materialNumber,
       required final String itemNumber,
+      required final String assignmentNumber,
       required final String batch,
       required final ReturnQuantity returnQuantity,
       required final Usage usage,
-      required final List<String> poDocuments}) = _$_ReturnItemDetails;
+      required final List<ReturnRequestAttachment> uploadedFiles,
+      required final Remarks remarks,
+      required final bool outsidePolicy,
+      required final PriceOverrideValue priceOverride,
+      required final String returnReason}) = _$_ReturnItemDetails;
   const _ReturnItemDetails._() : super._();
 
   @override
@@ -255,13 +356,23 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
   @override
   String get itemNumber;
   @override
+  String get assignmentNumber;
+  @override
   String get batch;
   @override
   ReturnQuantity get returnQuantity;
   @override
   Usage get usage;
   @override
-  List<String> get poDocuments;
+  List<ReturnRequestAttachment> get uploadedFiles;
+  @override
+  Remarks get remarks;
+  @override
+  bool get outsidePolicy;
+  @override
+  PriceOverrideValue get priceOverride;
+  @override
+  String get returnReason;
   @override
   @JsonKey(ignore: true)
   _$$_ReturnItemDetailsCopyWith<_$_ReturnItemDetails> get copyWith =>

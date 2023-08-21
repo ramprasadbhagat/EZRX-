@@ -17,6 +17,9 @@ _$_ReturnItemDetailsDto _$$_ReturnItemDetailsDtoFromJson(
       url: (json['url'] as List<dynamic>?)?.map((e) => e as String).toList() ??
           [],
       returnType: json['returnType'] as String? ?? '',
+      remarks: json['remarks'] as String? ?? '',
+      outsidePolicy: json['outsidePolicy'] as bool? ?? false,
+      priceOverride: json['priceOverride'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ReturnItemDetailsDtoToJson(
@@ -29,4 +32,7 @@ Map<String, dynamic> _$$_ReturnItemDetailsDtoToJson(
       'returnReason': instance.returnReason,
       'url': instance.url,
       'returnType': instance.returnType,
+      'remarks': instance.remarks,
+      'outsidePolicy': instance.outsidePolicy,
+      'priceOverride': instance.priceOverride,
     };

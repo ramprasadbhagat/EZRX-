@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/invoice_details_dto.dart';
@@ -19,7 +20,7 @@ void main() {
           batch: '',
           itemNumber: '',
           materialNumber: MaterialNumber('123'),
-          poDocuments: [],
+          uploadedFiles: <ReturnRequestAttachment>[],
           returnQuantity: ReturnQuantity('1'),
           usage: const Usage(
             usageCode: 'fake-reason',
@@ -45,6 +46,9 @@ void main() {
             'returnReason': 'fake-reason',
             'url': [],
             'returnType': '500',
+            'remarks': '',
+            'outsidePolicy': false,
+            'priceOverride': '0.0'
           }
         ]
       };

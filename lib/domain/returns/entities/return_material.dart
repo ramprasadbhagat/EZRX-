@@ -9,12 +9,14 @@ class ReturnMaterial with _$ReturnMaterial {
   const ReturnMaterial._();
 
   const factory ReturnMaterial({
-    required IntegerValue targetQuantity,
+    required IntegerValue balanceQuantity,
     required RangeValue unitPrice,
     required RangeValue totalPrice,
     required MaterialNumber materialNumber,
     required String materialDescription,
+    required String itemNumber,
     required String batch,
+    required bool eligibleForReturn,
     required String assignmentNumber,
     required PrincipalCode principalCode,
     required PrincipalName principalName,
@@ -24,12 +26,14 @@ class ReturnMaterial with _$ReturnMaterial {
   }) = _ReturnMaterial;
 
   factory ReturnMaterial.empty() => ReturnMaterial(
-        targetQuantity: IntegerValue(''),
+        balanceQuantity: IntegerValue(''),
         unitPrice: RangeValue(''),
         totalPrice: RangeValue(''),
         materialNumber: MaterialNumber(''),
         materialDescription: '',
+        itemNumber: '',
         batch: '',
+        eligibleForReturn: false,
         assignmentNumber: '',
         principalCode: PrincipalCode(''),
         principalName: PrincipalName(''),
@@ -37,11 +41,6 @@ class ReturnMaterial with _$ReturnMaterial {
         priceDate: DateTimeStringValue(''),
         bonusItems: <ReturnMaterial>[],
       );
-}
 
-extension ReturnMaterialListExtension on List<ReturnMaterial> {
-  double get amountTotal => fold<double>(
-        0,
-        (sum, item) => sum + item.totalPrice.getOrDefaultValue(0),
-      );
+  String get uuid => '$assignmentNumber$itemNumber';
 }

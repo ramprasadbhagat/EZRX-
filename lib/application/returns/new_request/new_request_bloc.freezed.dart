@@ -19,20 +19,48 @@ mixin _$NewRequestEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ReturnMaterial item, bool selected)
+    required TResult Function(
+            SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
+    required TResult Function(String assignmentNumber,
+            MaterialNumber materialNumber, String itemNumber, bool included)
+        toggleBonusItem,
+    required TResult Function(ReturnItemDetails additionInfo)
+        additionInfoChanged,
+    required TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)
+        toggleFiles,
+    required TResult Function(int step) validateStep,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult? Function(int step)? validateStep,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
+    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult Function(int step)? validateStep,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +68,30 @@ mixin _$NewRequestEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
+    required TResult Function(_ToggleBonusItem value) toggleBonusItem,
+    required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_ToggleFiles value) toggleFiles,
+    required TResult Function(_ValidateStep value) validateStep,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_ToggleFiles value)? toggleFiles,
+    TResult? Function(_ValidateStep value)? validateStep,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_ToggleFiles value)? toggleFiles,
+    TResult Function(_ValidateStep value)? validateStep,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,8 +154,18 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ReturnMaterial item, bool selected)
+    required TResult Function(
+            SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
+    required TResult Function(String assignmentNumber,
+            MaterialNumber materialNumber, String itemNumber, bool included)
+        toggleBonusItem,
+    required TResult Function(ReturnItemDetails additionInfo)
+        additionInfoChanged,
+    required TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)
+        toggleFiles,
+    required TResult Function(int step) validateStep,
   }) {
     return initialized();
   }
@@ -124,7 +174,16 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult? Function(int step)? validateStep,
   }) {
     return initialized?.call();
   }
@@ -133,7 +192,16 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
+    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult Function(int step)? validateStep,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -147,6 +215,10 @@ class _$_initialized implements _initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
+    required TResult Function(_ToggleBonusItem value) toggleBonusItem,
+    required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_ToggleFiles value) toggleFiles,
+    required TResult Function(_ValidateStep value) validateStep,
   }) {
     return initialized(this);
   }
@@ -156,6 +228,10 @@ class _$_initialized implements _initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_ToggleFiles value)? toggleFiles,
+    TResult? Function(_ValidateStep value)? validateStep,
   }) {
     return initialized?.call(this);
   }
@@ -165,6 +241,10 @@ class _$_initialized implements _initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_ToggleFiles value)? toggleFiles,
+    TResult Function(_ValidateStep value)? validateStep,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -184,7 +264,7 @@ abstract class _$$_ToggleReturnItemCopyWith<$Res> {
           _$_ToggleReturnItem value, $Res Function(_$_ToggleReturnItem) then) =
       __$$_ToggleReturnItemCopyWithImpl<$Res>;
   @useResult
-  $Res call({ReturnMaterial item, bool selected});
+  $Res call({SalesOrg salesOrg, ReturnMaterial item, bool selected});
 
   $ReturnMaterialCopyWith<$Res> get item;
 }
@@ -200,10 +280,15 @@ class __$$_ToggleReturnItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrg = null,
     Object? item = null,
     Object? selected = null,
   }) {
     return _then(_$_ToggleReturnItem(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -227,8 +312,11 @@ class __$$_ToggleReturnItemCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ToggleReturnItem implements _ToggleReturnItem {
-  const _$_ToggleReturnItem({required this.item, required this.selected});
+  const _$_ToggleReturnItem(
+      {required this.salesOrg, required this.item, required this.selected});
 
+  @override
+  final SalesOrg salesOrg;
   @override
   final ReturnMaterial item;
   @override
@@ -236,7 +324,7 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
 
   @override
   String toString() {
-    return 'NewRequestEvent.toggleReturnItem(item: $item, selected: $selected)';
+    return 'NewRequestEvent.toggleReturnItem(salesOrg: $salesOrg, item: $item, selected: $selected)';
   }
 
   @override
@@ -244,13 +332,15 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ToggleReturnItem &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg) &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.selected, selected) ||
                 other.selected == selected));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, item, selected);
+  int get hashCode => Object.hash(runtimeType, salesOrg, item, selected);
 
   @JsonKey(ignore: true)
   @override
@@ -262,30 +352,58 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ReturnMaterial item, bool selected)
+    required TResult Function(
+            SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
+    required TResult Function(String assignmentNumber,
+            MaterialNumber materialNumber, String itemNumber, bool included)
+        toggleBonusItem,
+    required TResult Function(ReturnItemDetails additionInfo)
+        additionInfoChanged,
+    required TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)
+        toggleFiles,
+    required TResult Function(int step) validateStep,
   }) {
-    return toggleReturnItem(item, selected);
+    return toggleReturnItem(salesOrg, item, selected);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult? Function(int step)? validateStep,
   }) {
-    return toggleReturnItem?.call(item, selected);
+    return toggleReturnItem?.call(salesOrg, item, selected);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
+    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult Function(int step)? validateStep,
     required TResult orElse(),
   }) {
     if (toggleReturnItem != null) {
-      return toggleReturnItem(item, selected);
+      return toggleReturnItem(salesOrg, item, selected);
     }
     return orElse();
   }
@@ -295,6 +413,10 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
+    required TResult Function(_ToggleBonusItem value) toggleBonusItem,
+    required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_ToggleFiles value) toggleFiles,
+    required TResult Function(_ValidateStep value) validateStep,
   }) {
     return toggleReturnItem(this);
   }
@@ -304,6 +426,10 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_ToggleFiles value)? toggleFiles,
+    TResult? Function(_ValidateStep value)? validateStep,
   }) {
     return toggleReturnItem?.call(this);
   }
@@ -313,6 +439,10 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_ToggleFiles value)? toggleFiles,
+    TResult Function(_ValidateStep value)? validateStep,
     required TResult orElse(),
   }) {
     if (toggleReturnItem != null) {
@@ -324,9 +454,11 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
 
 abstract class _ToggleReturnItem implements NewRequestEvent {
   const factory _ToggleReturnItem(
-      {required final ReturnMaterial item,
+      {required final SalesOrg salesOrg,
+      required final ReturnMaterial item,
       required final bool selected}) = _$_ToggleReturnItem;
 
+  SalesOrg get salesOrg;
   ReturnMaterial get item;
   bool get selected;
   @JsonKey(ignore: true)
@@ -335,8 +467,799 @@ abstract class _ToggleReturnItem implements NewRequestEvent {
 }
 
 /// @nodoc
+abstract class _$$_ToggleBonusItemCopyWith<$Res> {
+  factory _$$_ToggleBonusItemCopyWith(
+          _$_ToggleBonusItem value, $Res Function(_$_ToggleBonusItem) then) =
+      __$$_ToggleBonusItemCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String assignmentNumber,
+      MaterialNumber materialNumber,
+      String itemNumber,
+      bool included});
+}
+
+/// @nodoc
+class __$$_ToggleBonusItemCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$_ToggleBonusItem>
+    implements _$$_ToggleBonusItemCopyWith<$Res> {
+  __$$_ToggleBonusItemCopyWithImpl(
+      _$_ToggleBonusItem _value, $Res Function(_$_ToggleBonusItem) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? assignmentNumber = null,
+    Object? materialNumber = null,
+    Object? itemNumber = null,
+    Object? included = null,
+  }) {
+    return _then(_$_ToggleBonusItem(
+      assignmentNumber: null == assignmentNumber
+          ? _value.assignmentNumber
+          : assignmentNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      materialNumber: null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
+      itemNumber: null == itemNumber
+          ? _value.itemNumber
+          : itemNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      included: null == included
+          ? _value.included
+          : included // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ToggleBonusItem implements _ToggleBonusItem {
+  const _$_ToggleBonusItem(
+      {required this.assignmentNumber,
+      required this.materialNumber,
+      required this.itemNumber,
+      required this.included});
+
+  @override
+  final String assignmentNumber;
+  @override
+  final MaterialNumber materialNumber;
+  @override
+  final String itemNumber;
+  @override
+  final bool included;
+
+  @override
+  String toString() {
+    return 'NewRequestEvent.toggleBonusItem(assignmentNumber: $assignmentNumber, materialNumber: $materialNumber, itemNumber: $itemNumber, included: $included)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ToggleBonusItem &&
+            (identical(other.assignmentNumber, assignmentNumber) ||
+                other.assignmentNumber == assignmentNumber) &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber) &&
+            (identical(other.itemNumber, itemNumber) ||
+                other.itemNumber == itemNumber) &&
+            (identical(other.included, included) ||
+                other.included == included));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, assignmentNumber, materialNumber, itemNumber, included);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ToggleBonusItemCopyWith<_$_ToggleBonusItem> get copyWith =>
+      __$$_ToggleBonusItemCopyWithImpl<_$_ToggleBonusItem>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+        toggleReturnItem,
+    required TResult Function(String assignmentNumber,
+            MaterialNumber materialNumber, String itemNumber, bool included)
+        toggleBonusItem,
+    required TResult Function(ReturnItemDetails additionInfo)
+        additionInfoChanged,
+    required TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)
+        toggleFiles,
+    required TResult Function(int step) validateStep,
+  }) {
+    return toggleBonusItem(
+        assignmentNumber, materialNumber, itemNumber, included);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult? Function(int step)? validateStep,
+  }) {
+    return toggleBonusItem?.call(
+        assignmentNumber, materialNumber, itemNumber, included);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult Function(int step)? validateStep,
+    required TResult orElse(),
+  }) {
+    if (toggleBonusItem != null) {
+      return toggleBonusItem(
+          assignmentNumber, materialNumber, itemNumber, included);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_ToggleReturnItem value) toggleReturnItem,
+    required TResult Function(_ToggleBonusItem value) toggleBonusItem,
+    required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_ToggleFiles value) toggleFiles,
+    required TResult Function(_ValidateStep value) validateStep,
+  }) {
+    return toggleBonusItem(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_ToggleFiles value)? toggleFiles,
+    TResult? Function(_ValidateStep value)? validateStep,
+  }) {
+    return toggleBonusItem?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_ToggleFiles value)? toggleFiles,
+    TResult Function(_ValidateStep value)? validateStep,
+    required TResult orElse(),
+  }) {
+    if (toggleBonusItem != null) {
+      return toggleBonusItem(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleBonusItem implements NewRequestEvent {
+  const factory _ToggleBonusItem(
+      {required final String assignmentNumber,
+      required final MaterialNumber materialNumber,
+      required final String itemNumber,
+      required final bool included}) = _$_ToggleBonusItem;
+
+  String get assignmentNumber;
+  MaterialNumber get materialNumber;
+  String get itemNumber;
+  bool get included;
+  @JsonKey(ignore: true)
+  _$$_ToggleBonusItemCopyWith<_$_ToggleBonusItem> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AdditionInfoChangedCopyWith<$Res> {
+  factory _$$_AdditionInfoChangedCopyWith(_$_AdditionInfoChanged value,
+          $Res Function(_$_AdditionInfoChanged) then) =
+      __$$_AdditionInfoChangedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ReturnItemDetails additionInfo});
+
+  $ReturnItemDetailsCopyWith<$Res> get additionInfo;
+}
+
+/// @nodoc
+class __$$_AdditionInfoChangedCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$_AdditionInfoChanged>
+    implements _$$_AdditionInfoChangedCopyWith<$Res> {
+  __$$_AdditionInfoChangedCopyWithImpl(_$_AdditionInfoChanged _value,
+      $Res Function(_$_AdditionInfoChanged) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? additionInfo = null,
+  }) {
+    return _then(_$_AdditionInfoChanged(
+      additionInfo: null == additionInfo
+          ? _value.additionInfo
+          : additionInfo // ignore: cast_nullable_to_non_nullable
+              as ReturnItemDetails,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnItemDetailsCopyWith<$Res> get additionInfo {
+    return $ReturnItemDetailsCopyWith<$Res>(_value.additionInfo, (value) {
+      return _then(_value.copyWith(additionInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_AdditionInfoChanged implements _AdditionInfoChanged {
+  const _$_AdditionInfoChanged({required this.additionInfo});
+
+  @override
+  final ReturnItemDetails additionInfo;
+
+  @override
+  String toString() {
+    return 'NewRequestEvent.additionInfoChanged(additionInfo: $additionInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AdditionInfoChanged &&
+            (identical(other.additionInfo, additionInfo) ||
+                other.additionInfo == additionInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, additionInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AdditionInfoChangedCopyWith<_$_AdditionInfoChanged> get copyWith =>
+      __$$_AdditionInfoChangedCopyWithImpl<_$_AdditionInfoChanged>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+        toggleReturnItem,
+    required TResult Function(String assignmentNumber,
+            MaterialNumber materialNumber, String itemNumber, bool included)
+        toggleBonusItem,
+    required TResult Function(ReturnItemDetails additionInfo)
+        additionInfoChanged,
+    required TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)
+        toggleFiles,
+    required TResult Function(int step) validateStep,
+  }) {
+    return additionInfoChanged(additionInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult? Function(int step)? validateStep,
+  }) {
+    return additionInfoChanged?.call(additionInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult Function(int step)? validateStep,
+    required TResult orElse(),
+  }) {
+    if (additionInfoChanged != null) {
+      return additionInfoChanged(additionInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_ToggleReturnItem value) toggleReturnItem,
+    required TResult Function(_ToggleBonusItem value) toggleBonusItem,
+    required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_ToggleFiles value) toggleFiles,
+    required TResult Function(_ValidateStep value) validateStep,
+  }) {
+    return additionInfoChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_ToggleFiles value)? toggleFiles,
+    TResult? Function(_ValidateStep value)? validateStep,
+  }) {
+    return additionInfoChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_ToggleFiles value)? toggleFiles,
+    TResult Function(_ValidateStep value)? validateStep,
+    required TResult orElse(),
+  }) {
+    if (additionInfoChanged != null) {
+      return additionInfoChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AdditionInfoChanged implements NewRequestEvent {
+  const factory _AdditionInfoChanged(
+      {required final ReturnItemDetails additionInfo}) = _$_AdditionInfoChanged;
+
+  ReturnItemDetails get additionInfo;
+  @JsonKey(ignore: true)
+  _$$_AdditionInfoChangedCopyWith<_$_AdditionInfoChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ToggleFilesCopyWith<$Res> {
+  factory _$$_ToggleFilesCopyWith(
+          _$_ToggleFiles value, $Res Function(_$_ToggleFiles) then) =
+      __$$_ToggleFilesCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uuid, List<ReturnRequestAttachment> files, bool included});
+}
+
+/// @nodoc
+class __$$_ToggleFilesCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$_ToggleFiles>
+    implements _$$_ToggleFilesCopyWith<$Res> {
+  __$$_ToggleFilesCopyWithImpl(
+      _$_ToggleFiles _value, $Res Function(_$_ToggleFiles) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uuid = null,
+    Object? files = null,
+    Object? included = null,
+  }) {
+    return _then(_$_ToggleFiles(
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      files: null == files
+          ? _value._files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<ReturnRequestAttachment>,
+      included: null == included
+          ? _value.included
+          : included // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ToggleFiles implements _ToggleFiles {
+  const _$_ToggleFiles(
+      {required this.uuid,
+      required final List<ReturnRequestAttachment> files,
+      required this.included})
+      : _files = files;
+
+  @override
+  final String uuid;
+  final List<ReturnRequestAttachment> _files;
+  @override
+  List<ReturnRequestAttachment> get files {
+    if (_files is EqualUnmodifiableListView) return _files;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_files);
+  }
+
+  @override
+  final bool included;
+
+  @override
+  String toString() {
+    return 'NewRequestEvent.toggleFiles(uuid: $uuid, files: $files, included: $included)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ToggleFiles &&
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            const DeepCollectionEquality().equals(other._files, _files) &&
+            (identical(other.included, included) ||
+                other.included == included));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, uuid, const DeepCollectionEquality().hash(_files), included);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ToggleFilesCopyWith<_$_ToggleFiles> get copyWith =>
+      __$$_ToggleFilesCopyWithImpl<_$_ToggleFiles>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+        toggleReturnItem,
+    required TResult Function(String assignmentNumber,
+            MaterialNumber materialNumber, String itemNumber, bool included)
+        toggleBonusItem,
+    required TResult Function(ReturnItemDetails additionInfo)
+        additionInfoChanged,
+    required TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)
+        toggleFiles,
+    required TResult Function(int step) validateStep,
+  }) {
+    return toggleFiles(uuid, files, included);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult? Function(int step)? validateStep,
+  }) {
+    return toggleFiles?.call(uuid, files, included);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult Function(int step)? validateStep,
+    required TResult orElse(),
+  }) {
+    if (toggleFiles != null) {
+      return toggleFiles(uuid, files, included);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_ToggleReturnItem value) toggleReturnItem,
+    required TResult Function(_ToggleBonusItem value) toggleBonusItem,
+    required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_ToggleFiles value) toggleFiles,
+    required TResult Function(_ValidateStep value) validateStep,
+  }) {
+    return toggleFiles(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_ToggleFiles value)? toggleFiles,
+    TResult? Function(_ValidateStep value)? validateStep,
+  }) {
+    return toggleFiles?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_ToggleFiles value)? toggleFiles,
+    TResult Function(_ValidateStep value)? validateStep,
+    required TResult orElse(),
+  }) {
+    if (toggleFiles != null) {
+      return toggleFiles(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ToggleFiles implements NewRequestEvent {
+  const factory _ToggleFiles(
+      {required final String uuid,
+      required final List<ReturnRequestAttachment> files,
+      required final bool included}) = _$_ToggleFiles;
+
+  String get uuid;
+  List<ReturnRequestAttachment> get files;
+  bool get included;
+  @JsonKey(ignore: true)
+  _$$_ToggleFilesCopyWith<_$_ToggleFiles> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ValidateStepCopyWith<$Res> {
+  factory _$$_ValidateStepCopyWith(
+          _$_ValidateStep value, $Res Function(_$_ValidateStep) then) =
+      __$$_ValidateStepCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int step});
+}
+
+/// @nodoc
+class __$$_ValidateStepCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$_ValidateStep>
+    implements _$$_ValidateStepCopyWith<$Res> {
+  __$$_ValidateStepCopyWithImpl(
+      _$_ValidateStep _value, $Res Function(_$_ValidateStep) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? step = null,
+  }) {
+    return _then(_$_ValidateStep(
+      step: null == step
+          ? _value.step
+          : step // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ValidateStep implements _ValidateStep {
+  const _$_ValidateStep({required this.step});
+
+  @override
+  final int step;
+
+  @override
+  String toString() {
+    return 'NewRequestEvent.validateStep(step: $step)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ValidateStep &&
+            (identical(other.step, step) || other.step == step));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, step);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ValidateStepCopyWith<_$_ValidateStep> get copyWith =>
+      __$$_ValidateStepCopyWithImpl<_$_ValidateStep>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+        toggleReturnItem,
+    required TResult Function(String assignmentNumber,
+            MaterialNumber materialNumber, String itemNumber, bool included)
+        toggleBonusItem,
+    required TResult Function(ReturnItemDetails additionInfo)
+        additionInfoChanged,
+    required TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)
+        toggleFiles,
+    required TResult Function(int step) validateStep,
+  }) {
+    return validateStep(step);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult? Function(int step)? validateStep,
+  }) {
+    return validateStep?.call(step);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
+        toggleReturnItem,
+    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
+            String itemNumber, bool included)?
+        toggleBonusItem,
+    TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult Function(int step)? validateStep,
+    required TResult orElse(),
+  }) {
+    if (validateStep != null) {
+      return validateStep(step);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_ToggleReturnItem value) toggleReturnItem,
+    required TResult Function(_ToggleBonusItem value) toggleBonusItem,
+    required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_ToggleFiles value) toggleFiles,
+    required TResult Function(_ValidateStep value) validateStep,
+  }) {
+    return validateStep(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_ToggleFiles value)? toggleFiles,
+    TResult? Function(_ValidateStep value)? validateStep,
+  }) {
+    return validateStep?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_ToggleFiles value)? toggleFiles,
+    TResult Function(_ValidateStep value)? validateStep,
+    required TResult orElse(),
+  }) {
+    if (validateStep != null) {
+      return validateStep(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ValidateStep implements NewRequestEvent {
+  const factory _ValidateStep({required final int step}) = _$_ValidateStep;
+
+  int get step;
+  @JsonKey(ignore: true)
+  _$$_ValidateStepCopyWith<_$_ValidateStep> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$NewRequestState {
   List<ReturnMaterial> get selectedItems => throw _privateConstructorUsedError;
+  List<InvoiceDetails> get invoiceDetails => throw _privateConstructorUsedError;
+  bool get showErrorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewRequestStateCopyWith<NewRequestState> get copyWith =>
@@ -349,7 +1272,10 @@ abstract class $NewRequestStateCopyWith<$Res> {
           NewRequestState value, $Res Function(NewRequestState) then) =
       _$NewRequestStateCopyWithImpl<$Res, NewRequestState>;
   @useResult
-  $Res call({List<ReturnMaterial> selectedItems});
+  $Res call(
+      {List<ReturnMaterial> selectedItems,
+      List<InvoiceDetails> invoiceDetails,
+      bool showErrorMessages});
 }
 
 /// @nodoc
@@ -366,12 +1292,22 @@ class _$NewRequestStateCopyWithImpl<$Res, $Val extends NewRequestState>
   @override
   $Res call({
     Object? selectedItems = null,
+    Object? invoiceDetails = null,
+    Object? showErrorMessages = null,
   }) {
     return _then(_value.copyWith(
       selectedItems: null == selectedItems
           ? _value.selectedItems
           : selectedItems // ignore: cast_nullable_to_non_nullable
               as List<ReturnMaterial>,
+      invoiceDetails: null == invoiceDetails
+          ? _value.invoiceDetails
+          : invoiceDetails // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceDetails>,
+      showErrorMessages: null == showErrorMessages
+          ? _value.showErrorMessages
+          : showErrorMessages // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -384,7 +1320,10 @@ abstract class _$$_NewRequestStateCopyWith<$Res>
       __$$_NewRequestStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<ReturnMaterial> selectedItems});
+  $Res call(
+      {List<ReturnMaterial> selectedItems,
+      List<InvoiceDetails> invoiceDetails,
+      bool showErrorMessages});
 }
 
 /// @nodoc
@@ -399,12 +1338,22 @@ class __$$_NewRequestStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selectedItems = null,
+    Object? invoiceDetails = null,
+    Object? showErrorMessages = null,
   }) {
     return _then(_$_NewRequestState(
       selectedItems: null == selectedItems
           ? _value._selectedItems
           : selectedItems // ignore: cast_nullable_to_non_nullable
               as List<ReturnMaterial>,
+      invoiceDetails: null == invoiceDetails
+          ? _value._invoiceDetails
+          : invoiceDetails // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceDetails>,
+      showErrorMessages: null == showErrorMessages
+          ? _value.showErrorMessages
+          : showErrorMessages // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -412,8 +1361,12 @@ class __$$_NewRequestStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NewRequestState extends _NewRequestState {
-  const _$_NewRequestState({required final List<ReturnMaterial> selectedItems})
+  const _$_NewRequestState(
+      {required final List<ReturnMaterial> selectedItems,
+      required final List<InvoiceDetails> invoiceDetails,
+      required this.showErrorMessages})
       : _selectedItems = selectedItems,
+        _invoiceDetails = invoiceDetails,
         super._();
 
   final List<ReturnMaterial> _selectedItems;
@@ -424,9 +1377,20 @@ class _$_NewRequestState extends _NewRequestState {
     return EqualUnmodifiableListView(_selectedItems);
   }
 
+  final List<InvoiceDetails> _invoiceDetails;
+  @override
+  List<InvoiceDetails> get invoiceDetails {
+    if (_invoiceDetails is EqualUnmodifiableListView) return _invoiceDetails;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_invoiceDetails);
+  }
+
+  @override
+  final bool showErrorMessages;
+
   @override
   String toString() {
-    return 'NewRequestState(selectedItems: $selectedItems)';
+    return 'NewRequestState(selectedItems: $selectedItems, invoiceDetails: $invoiceDetails, showErrorMessages: $showErrorMessages)';
   }
 
   @override
@@ -435,12 +1399,19 @@ class _$_NewRequestState extends _NewRequestState {
         (other.runtimeType == runtimeType &&
             other is _$_NewRequestState &&
             const DeepCollectionEquality()
-                .equals(other._selectedItems, _selectedItems));
+                .equals(other._selectedItems, _selectedItems) &&
+            const DeepCollectionEquality()
+                .equals(other._invoiceDetails, _invoiceDetails) &&
+            (identical(other.showErrorMessages, showErrorMessages) ||
+                other.showErrorMessages == showErrorMessages));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_selectedItems));
+      runtimeType,
+      const DeepCollectionEquality().hash(_selectedItems),
+      const DeepCollectionEquality().hash(_invoiceDetails),
+      showErrorMessages);
 
   @JsonKey(ignore: true)
   @override
@@ -451,11 +1422,17 @@ class _$_NewRequestState extends _NewRequestState {
 
 abstract class _NewRequestState extends NewRequestState {
   const factory _NewRequestState(
-      {required final List<ReturnMaterial> selectedItems}) = _$_NewRequestState;
+      {required final List<ReturnMaterial> selectedItems,
+      required final List<InvoiceDetails> invoiceDetails,
+      required final bool showErrorMessages}) = _$_NewRequestState;
   const _NewRequestState._() : super._();
 
   @override
   List<ReturnMaterial> get selectedItems;
+  @override
+  List<InvoiceDetails> get invoiceDetails;
+  @override
+  bool get showErrorMessages;
   @override
   @JsonKey(ignore: true)
   _$$_NewRequestStateCopyWith<_$_NewRequestState> get copyWith =>
