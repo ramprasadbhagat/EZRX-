@@ -297,6 +297,58 @@ void main() {
         ),
       ],
     );
+    blocTest<SalesOrgBloc, SalesOrgState>(
+      '=> Test sales org with Philippine market',
+      build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
+      setUp: () {
+        when(
+          () => salesOrgRepositoryMock.getSalesOrganisationConfigs(
+            SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2500'),
+            ),
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            SalesOrganisationConfigs.empty().copyWith(
+              currency: Currency('php'),
+              salesOrg: SalesOrg('2500'),
+            ),
+          ),
+        );
+        when(
+          () => salesOrgRepositoryMock.storeSalesOrg(
+            salesOrg: SalesOrg('2500').fullName,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(unit),
+        );
+      },
+      act: (bloc) => bloc.add(
+        SalesOrgEvent.selected(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2500'),
+          ),
+        ),
+      ),
+      expect: () => [
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2500'),
+          ),
+          isLoading: true,
+        ),
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2500'),
+          ),
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            currency: Currency('php'),
+            salesOrg: SalesOrg('2500'),
+          ),
+          isLoading: false,
+        )
+      ],
+    );
     // blocTest<SalesOrgBloc, SalesOrgState>(
     //   'For "Stream Listener"',
     //   build: () => SalesOrgBloc(
