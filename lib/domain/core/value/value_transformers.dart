@@ -124,6 +124,9 @@ String displayDateTimeString(
   String text,
   String format,
 ) {
+  if (text.isEmpty) {
+    return '-';
+  }
   final parsedDate = tryParseDateTime(text);
   if (parsedDate == null) {
     return text;
