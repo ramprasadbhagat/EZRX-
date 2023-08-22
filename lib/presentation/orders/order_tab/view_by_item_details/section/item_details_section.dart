@@ -17,6 +17,9 @@ class ItemDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final batchNumDisplay =
+        context.read<SalesOrgBloc>().state.configs.batchNumDisplay;
+
     return Padding(
       padding: const EdgeInsets.only(
         top: 20.0,
@@ -41,7 +44,6 @@ class ItemDetailsSection extends StatelessWidget {
             priceComponent: PriceComponent(
               price: orderHistoryItem.totalPrice.totalPrice.toStringAsFixed(2),
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-              
             ),
             statusWidget: StatusLabel(
               status: StatusType(
@@ -52,8 +54,9 @@ class ItemDetailsSection extends StatelessWidget {
             materialNumber: orderHistoryItem.materialNumber,
             isQuantityBelowImage: false,
             statusTag: orderHistoryItem.productTag,
-            headerText:
-                'Batch ${orderHistoryItem.batch}\n(EXP: ${orderHistoryItem.expiryDate.dateString})',
+            headerText: batchNumDisplay
+                ? 'Batch: ${orderHistoryItem.batch.displayNAIfEmpty}\n(EXP: ${orderHistoryItem.expiryDate.dateOrNaString})'
+                : null,
           ),
         ],
       ),

@@ -25,7 +25,7 @@ mixin _$OrderHistoryItem {
   DateTimeStringValue get deliveryDate => throw _privateConstructorUsedError;
   OrderNumber get orderNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
-  String get batch => throw _privateConstructorUsedError;
+  StringValue get batch => throw _privateConstructorUsedError;
   String get orderBy => throw _privateConstructorUsedError;
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   POReference get pOReference => throw _privateConstructorUsedError;
@@ -63,7 +63,7 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       DateTimeStringValue deliveryDate,
       OrderNumber orderNumber,
       DateTimeStringValue createdDate,
-      String batch,
+      StringValue batch,
       String orderBy,
       DateTimeStringValue expiryDate,
       POReference pOReference,
@@ -156,7 +156,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       orderBy: null == orderBy
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
@@ -235,7 +235,7 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       DateTimeStringValue deliveryDate,
       OrderNumber orderNumber,
       DateTimeStringValue createdDate,
-      String batch,
+      StringValue batch,
       String orderBy,
       DateTimeStringValue expiryDate,
       POReference pOReference,
@@ -327,7 +327,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       orderBy: null == orderBy
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
@@ -428,7 +428,7 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @override
   final DateTimeStringValue createdDate;
   @override
-  final String batch;
+  final StringValue batch;
   @override
   final String orderBy;
   @override
@@ -557,7 +557,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final DateTimeStringValue deliveryDate,
       required final OrderNumber orderNumber,
       required final DateTimeStringValue createdDate,
-      required final String batch,
+      required final StringValue batch,
       required final String orderBy,
       required final DateTimeStringValue expiryDate,
       required final POReference pOReference,
@@ -591,7 +591,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   @override
   DateTimeStringValue get createdDate;
   @override
-  String get batch;
+  StringValue get batch;
   @override
   String get orderBy;
   @override

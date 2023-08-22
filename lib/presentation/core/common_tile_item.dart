@@ -71,15 +71,22 @@ class CommonTileItem extends StatelessWidget {
                               label,
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
-                            const SizedBox(
-                              width: 5,
-                            ),
                             if (statusTag != null &&
-                                statusTag!.getOrDefaultValue('').isNotEmpty)
+                                statusTag!
+                                    .getOrDefaultValue('')
+                                    .isNotEmpty) ...[
+                              const SizedBox(
+                                width: 5,
+                              ),
                               StatusLabel(
                                 status: statusTag!,
                                 valueColor: statusTag!.displayStatusTextColor,
                               ),
+                            ],
+                            if (headerText == null && statusWidget != null) ...[
+                              const Spacer(),
+                              statusWidget!,
+                            ],
                           ],
                         ),
                         Padding(
