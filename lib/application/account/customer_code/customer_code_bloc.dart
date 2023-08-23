@@ -146,7 +146,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         hideCustomer: e.hideCustomer,
         user: e.userInfo,
         pageSize: _pageSize,
-        offset: state.customerCodeList.length,
+        offset: 0,
       );
 
       final customerCodeInfoList =

@@ -1040,5 +1040,59 @@ void main() {
         ),
       ],
     );
+
+    blocTest(
+      'loadStoredCustomerCode - Customer Code Storage returns success and offset is sent as 0 to fetch customerCodeList',
+      build: () =>
+          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      setUp: () {
+        when(() => customerCodeMockRepo.getCustomerCodeStorage()).thenAnswer(
+          (_) async => const Right(
+            AccountSelector(
+              salesOrg: 'mockSalesOrg',
+              customerCode: 'mockCustomerCode',
+              shippingAddress: 'mockShippingAddress',
+            ),
+          ),
+        );
+
+        when(
+          () => customerCodeMockRepo.getCustomerCode(
+            salesOrganisation: fakeSaleOrg,
+            customerCodes: ['mockCustomerCode'],
+            hideCustomer: false,
+            offset: 0,
+            user: fakeUser,
+            pageSize: fakePageSize,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right([customerMockData.first]),
+        );
+      },
+      seed: () => CustomerCodeState.initial().copyWith(
+        customerCodeList: [CustomerCodeInfo.empty()],
+      ),
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(
+          CustomerCodeEvent.loadStoredCustomerCode(
+            hideCustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg,
+          ),
+        );
+      },
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+          isSearchActive: true,
+          customerCodeInfo: customerMockData.first,
+          isFetching: false,
+          customerCodeList: [customerMockData.first],
+          searchKey: SearchKey(
+            customerMockData.first.customerCodeSoldTo,
+          ),
+          shipToInfo: customerMockData.first.shipToInfos.first,
+        ),
+      ],
+    );
   });
 }
