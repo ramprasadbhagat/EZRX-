@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
@@ -146,6 +147,53 @@ class ReturnRequestRemoteDataSource {
     });
   }
 
+  Future<String> addRequest({
+    required Map<String, dynamic> requestParams,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = query.addRequest();
+      final variables = {
+        'returnInput': requestParams,
+      };
+      variables['returnInput']!
+          .removeWhere((key, value) => value.toString().isEmpty);
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ereturn',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
+      );
+
+      _exceptionChecker(response: res, property: 'addRequestV2');
+
+      return res.data['data']['addRequestV2']['requestID'] is String
+          ? res.data['data']['addRequestV2']['requestID']
+          : '';
+    });
+  }
+
+  Future<AttachmentFileBuffer> downloadFile(
+    ReturnRequestAttachment file,
+  ) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'GET',
+        url:
+            '${config.urlConstants}ereturn/downloads?encryptedURL=${file.path}',
+        responseType: ResponseType.bytes,
+      );
+      _fileDownloadExceptionChecker(res: res);
+
+      return AttachmentFileBuffer(
+        name: file.name,
+        buffer: res.data,
+      );
+    });
+  }
+
   void _exceptionChecker({
     required String property,
     required Response<dynamic> response,
@@ -160,6 +208,17 @@ class ReturnRequestRemoteDataSource {
       );
     } else if (data['data'] == null || data['data'][property] == null) {
       throw ServerException(message: 'Some thing went wrong');
+    }
+  }
+
+  void _fileDownloadExceptionChecker({required Response<dynamic> res}) {
+    if (res.data is List && res.data.isEmpty) {
+      throw ServerException(message: res.data['errors'][0]['message']);
+    } else if (res.statusCode != 200) {
+      throw ServerException(
+        code: res.statusCode ?? 0,
+        message: res.statusMessage ?? '',
+      );
     }
   }
 }

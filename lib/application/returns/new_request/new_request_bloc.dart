@@ -1,10 +1,16 @@
 import 'package:collection/collection.dart';
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
+import 'package:ezrxmobile/domain/returns/repository/i_return_request_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,7 +19,10 @@ part 'new_request_state.dart';
 part 'new_request_bloc.freezed.dart';
 
 class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
-  NewRequestBloc() : super(NewRequestState.initial()) {
+  final IReturnRequestRepository newRequestRepository;
+
+  NewRequestBloc({required this.newRequestRepository})
+      : super(NewRequestState.initial()) {
     on(_onEvent);
   }
 
@@ -187,6 +196,42 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
             break;
           default:
         }
+      },
+      returnReferenceChanged: (_ReturnReferenceChanged e) async => emit(
+        state.copyWith(
+          returnReference: e.returnReference,
+        ),
+      ),
+      specialInstructionsChanged: (_SpecialInstructionsChanged e) async => emit(
+        state.copyWith(
+          specialInstructions: e.specialInstructions,
+        ),
+      ),
+      submit: (_Submit e) async {
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+            isSubmitting: true,
+          ),
+        );
+
+        final failureOrSuccess = await newRequestRepository.addRequest(
+          requestParams: AddRequestParams.empty().copyWith(
+            invoiceDetails: state.invoiceDetails,
+            orderSource: 'DSS',
+            returnReference: state.returnReference,
+            specialInstruction: state.specialInstructions,
+            soldTo: e.customerCodeInfo.customerCodeSoldTo,
+            userName: e.user.username,
+          ),
+        );
+
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: optionOf(failureOrSuccess),
+            isSubmitting: false,
+          ),
+        );
       },
     );
   }

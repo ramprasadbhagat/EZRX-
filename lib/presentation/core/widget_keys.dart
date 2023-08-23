@@ -452,6 +452,8 @@ class WidgetKeys {
       Key('returnAttachmentUploadDialog');
   static const Key returnAttachmentPhotoUploadButton =
       Key('returnAttachmentPhotoUploadButton');
+  static const Key newRequestSuccessfulPage = Key('newRequestSuccessfulPage');
+  static const Key specialInstructionsField = Key('specialInstructionsField');
 
   //============================================================
   //  Contact Us Page

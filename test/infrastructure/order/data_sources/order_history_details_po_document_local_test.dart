@@ -1,5 +1,5 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -33,7 +33,7 @@ void main() {
 
           expect(
             result,
-            PoDocumentsBuffer(
+            AttachmentFileBuffer(
               name: 'fake-name',
               buffer: res.buffer.asUint8List(),
             ),

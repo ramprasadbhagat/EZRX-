@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_material_list_dto.dart';
 import 'package:flutter/services.dart';
@@ -36,5 +37,22 @@ class ReturnRequestLocalDataSource {
     );
 
     return data['data']['deleteFile']['isDeleted'] as bool;
+  }
+
+  Future<AttachmentFileBuffer> downloadFile() async {
+    final data = await rootBundle.load('assets/images/splash.png');
+
+    return AttachmentFileBuffer(
+      name: 'returnRequestAttachments',
+      buffer: data.buffer.asUint8List(),
+    );
+  }
+
+  Future<String> addRequest() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/addRequestV2Response.json'),
+    );
+
+    return data['data']['addRequestV2']['requestID'] as String;
   }
 }

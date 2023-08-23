@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 
@@ -35,19 +35,19 @@ class DownloadPaymentAttachmentLocalDataSource {
     ).toDomain();
   }
 
-  Future<PoDocumentsBuffer> fileDownload() async {
+  Future<AttachmentFileBuffer> fileDownload() async {
     final data = await rootBundle.load('assets/images/splash.png');
 
-    return PoDocumentsBuffer(
+    return AttachmentFileBuffer(
       name: 'paymentAttachments',
       buffer: data.buffer.asUint8List(),
     );
   }
 
-  Future<PoDocumentsBuffer> soaDownload() async {
+  Future<AttachmentFileBuffer> soaDownload() async {
     final data = await rootBundle.load('assets/images/splash.png');
 
-    return PoDocumentsBuffer(
+    return AttachmentFileBuffer(
       name: 'paymentAttachments',
       buffer: data.buffer.asUint8List(),
     );

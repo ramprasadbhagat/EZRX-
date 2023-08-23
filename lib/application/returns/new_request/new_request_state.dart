@@ -6,13 +6,21 @@ class NewRequestState with _$NewRequestState {
   const factory NewRequestState({
     required List<ReturnMaterial> selectedItems,
     required List<InvoiceDetails> invoiceDetails,
+    required String returnReference,
+    required String specialInstructions,
     required bool showErrorMessages,
+    required bool isSubmitting,
+    required Option<Either<ApiFailure, String>> failureOrSuccessOption,
   }) = _NewRequestState;
 
-  factory NewRequestState.initial() => const NewRequestState(
+  factory NewRequestState.initial() => NewRequestState(
         selectedItems: <ReturnMaterial>[],
         invoiceDetails: <InvoiceDetails>[],
         showErrorMessages: false,
+        isSubmitting: false,
+        returnReference: '',
+        specialInstructions: '',
+        failureOrSuccessOption: none(),
       );
 
   bool get isSelectedItemsValid => selectedItems

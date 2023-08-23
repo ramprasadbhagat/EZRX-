@@ -629,7 +629,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => LoginFormBloc(
       authRepository: locator<AuthRepository>(),
-      deviceRepository: locator<DeviceRepository>(), 
+      deviceRepository: locator<DeviceRepository>(),
     ),
   );
 
@@ -743,7 +743,7 @@ void setupLocator() {
       firebaseCrashlyticsService: locator<FirebaseCrashlyticsService>(),
       tokenStorage: locator<TokenStorage>(),
       mixpanelService: locator<MixpanelService>(),
-      datadogService: locator<DatadogService>(), 
+      datadogService: locator<DatadogService>(),
       languageLocalDataSource: locator<LanguageLocalDataSource>(),
       languageRemoteDataSource: locator<LanguageRemoteDataSource>(),
     ),
@@ -3172,6 +3172,7 @@ void setupLocator() {
       permissionService: locator<PermissionService>(),
       deviceInfo: locator<DeviceInfo>(),
       filePickerService: locator<FilePickerService>(),
+      fileSystemHelper: locator<FileSystemHelper>(),
     ),
   );
   locator.registerLazySingleton(
@@ -3180,7 +3181,9 @@ void setupLocator() {
     ),
   );
   locator.registerLazySingleton(
-    () => NewRequestBloc(),
+    () => NewRequestBloc(
+      newRequestRepository: locator<ReturnRequestRepository>(),
+    ),
   );
   locator.registerLazySingleton(
     () => ReturnRequestAttachmentBloc(
@@ -3188,7 +3191,7 @@ void setupLocator() {
     ),
   );
 
- //============================================================
+  //============================================================
   //  Contact Us
   //============================================================
 
@@ -3312,7 +3315,6 @@ void setupLocator() {
       customerLicenseRepository: locator<CustomerLicenseRepository>(),
     ),
   );
-
 
   //============================================================
   //  Language

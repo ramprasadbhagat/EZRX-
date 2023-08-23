@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -58,41 +59,47 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      color: ZPColors.primary,
-      onRefresh: () async => widget.onRefresh?.call(),
-      child: CustomScrollView(
-        key: WidgetKeys.scrollList,
-        controller: _controller,
-        physics: const AlwaysScrollableScrollPhysics(),
-        slivers: [
-          SliverToBoxAdapter(
-            child: widget.header,
-          ),
-          widget.items.isEmpty && !widget.isLoading
-              ? SliverToBoxAdapter(
-                  child: widget.noRecordFoundWidget,
-                )
-              : SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final item = widget.items[index];
-
-                      return widget.itemBuilder(context, index, item);
-                    },
-                    childCount: widget.items.length,
-                  ),
-                ),
-          if (widget.isLoading)
-            SliverToBoxAdapter(
-              key: WidgetKeys.loadMoreLoader,
-              child: _LoadingMoreIndicator(
-                controller: _controller,
-              ),
+    return widget.isLoading && widget.items.isEmpty
+        ? Center(
+            child: LoadingShimmer.logo(
+              key: WidgetKeys.loaderImage,
             ),
-        ],
-      ),
-    );
+          )
+        : RefreshIndicator(
+            color: ZPColors.primary,
+            onRefresh: () async => widget.onRefresh?.call(),
+            child: CustomScrollView(
+              key: WidgetKeys.scrollList,
+              controller: _controller,
+              physics: const AlwaysScrollableScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(
+                  child: widget.header,
+                ),
+                widget.items.isEmpty && !widget.isLoading
+                    ? SliverToBoxAdapter(
+                        child: widget.noRecordFoundWidget,
+                      )
+                    : SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            final item = widget.items[index];
+
+                            return widget.itemBuilder(context, index, item);
+                          },
+                          childCount: widget.items.length,
+                        ),
+                      ),
+                if (widget.isLoading)
+                  SliverToBoxAdapter(
+                    key: WidgetKeys.loadMoreLoader,
+                    child: _LoadingMoreIndicator(
+                      controller: _controller,
+                    ),
+                  ),
+              ],
+            ),
+          );
   }
 }
 

@@ -46,7 +46,7 @@ class ReturnRequestAttachmentBloc
               isFetching: false,
             ),
           ),
-          (_) async {
+          (success) async {
             final pickFilesFailureOrSuccess =
                 await returnRequestRepository.pickFiles(
               uploadOptionType: e.uploadOptionType,
@@ -116,6 +116,37 @@ class ReturnRequestAttachmentBloc
             fileOperationMode: FileOperationMode.none,
             isFetching: false,
           ),
+        );
+      },
+      downloadFile: (_DownloadFile e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            failureOrSuccessOption: none(),
+            fileOperationMode: FileOperationMode.download,
+          ),
+        );
+        final failureOrSuccessPermission =
+            await returnRequestRepository.getDownloadPermission();
+        await failureOrSuccessPermission.fold(
+          (failure) async => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+              isFetching: false,
+            ),
+          ),
+          (success) async {
+            final failureOrSuccess = await returnRequestRepository.downloadFile(
+              file: e.file,
+            );
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                fileOperationMode: FileOperationMode.none,
+                isFetching: false,
+              ),
+            );
+          },
         );
       },
     );

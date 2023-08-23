@@ -10,7 +10,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
@@ -94,11 +94,11 @@ void main() {
         ),
       ).thenAnswer(
         (invocation) async =>
-            PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+            AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
       );
       when(
         () => fileSystemHelperMock.getDownloadedFile(
-          PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+          AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
         ),
       ).thenAnswer(
         (invocation) async => FileMock(),
@@ -142,12 +142,12 @@ void main() {
         ),
       ).thenAnswer(
         (invocation) async =>
-            PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+            AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
       );
 
       when(
         () => fileSystemHelperMock.getDownloadedFile(
-          PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+          AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
         ),
       ).thenAnswer(
         (invocation) async => FileMock(),
@@ -191,11 +191,11 @@ void main() {
         ),
       ).thenAnswer(
         (invocation) async =>
-            PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+            AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
       );
       when(
         () => fileSystemHelperMock.openFile(
-          PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+          AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
         ),
       ).thenAnswer(
         (invocation) async => OpenResult(),
@@ -221,11 +221,11 @@ void main() {
         ),
       ).thenAnswer(
         (invocation) async =>
-            PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+            AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
       );
       when(
         () => fileSystemHelperMock.openFile(
-          PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+          AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
         ),
       ).thenAnswer(
         (invocation) async => OpenResult(),
@@ -251,7 +251,7 @@ void main() {
       ).thenThrow(MockException());
       when(
         () => fileSystemHelperMock.openFile(
-          PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+          AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
         ),
       ).thenAnswer(
         (invocation) async => OpenResult(),
@@ -278,7 +278,7 @@ void main() {
       ).thenThrow(MockException());
       when(
         () => fileSystemHelperMock.openFile(
-          PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+          AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
         ),
       ).thenAnswer(
         (invocation) async => OpenResult(),
@@ -305,11 +305,11 @@ void main() {
         ),
       ).thenAnswer(
         (invocation) async =>
-            PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+            AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
       );
       when(
         () => fileSystemHelperMock.openFile(
-          PoDocumentsBuffer.empty().copyWith(name: 'fake-name'),
+          AttachmentFileBuffer.empty().copyWith(name: 'fake-name'),
         ),
       ).thenAnswer(
         (invocation) async => OpenResult(type: ResultType.error),

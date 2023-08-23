@@ -25,5 +25,6 @@ class ReturnRequestAttachmentState with _$ReturnRequestAttachmentState {
 enum FileOperationMode {
   delete,
   upload,
+  download,
   none,
 }

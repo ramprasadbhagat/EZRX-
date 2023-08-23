@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:open_file_safe/open_file_safe.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FileSystemHelper {
-  Future<File> getDownloadedFile(PoDocumentsBuffer file) async {
+  Future<File> getDownloadedFile(AttachmentFileBuffer file) async {
     final downloadFile = File(
       '${await _getDownloadedFilePath()}/${file.name}',
     );
@@ -29,7 +29,7 @@ class FileSystemHelper {
     }
   }
 
-  Future<OpenResult> openFile(PoDocumentsBuffer file) async {
+  Future<OpenResult> openFile(AttachmentFileBuffer file) async {
     final appStorage = await getApplicationDocumentsDirectory();
     final openFile = File('${appStorage.path}/${file.name}');
     await openFile.writeAsBytes(file.buffer);

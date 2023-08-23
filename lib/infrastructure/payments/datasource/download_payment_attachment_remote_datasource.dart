@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_query.dart';
 
@@ -84,7 +84,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
     return DownloadPaymentAttachmentDto.fromJson(data).toDomain();
   }
 
-  Future<PoDocumentsBuffer> fileDownload(
+  Future<AttachmentFileBuffer> fileDownload(
     String fileUrl,
   ) async {
     return await dataSourceExceptionHandler.handle(() async {
@@ -96,14 +96,14 @@ class DownloadPaymentAttachmentRemoteDataSource {
       );
       _fileDownloadExceptionChecker(res: res);
 
-      return PoDocumentsBuffer(
+      return AttachmentFileBuffer(
         name: Uri.parse(fileUrl).pathSegments.last,
         buffer: res.data,
       );
     });
   }
 
-  Future<PoDocumentsBuffer> soaDownload(
+  Future<AttachmentFileBuffer> soaDownload(
     String fileUrl,
   ) async {
     return await dataSourceExceptionHandler.handle(() async {
@@ -115,7 +115,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
       );
       _fileDownloadExceptionChecker(res: res);
 
-      return PoDocumentsBuffer(
+      return AttachmentFileBuffer(
         name: Uri.parse(fileUrl).pathSegments.last,
         buffer: res.data,
       );

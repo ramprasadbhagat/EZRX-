@@ -30,4 +30,17 @@ class NewRequestEvent with _$NewRequestEvent {
   const factory NewRequestEvent.validateStep({
     required int step,
   }) = _ValidateStep;
+
+  const factory NewRequestEvent.returnReferenceChanged(
+    String returnReference,
+  ) = _ReturnReferenceChanged;
+
+  const factory NewRequestEvent.specialInstructionsChanged(
+    String specialInstructions,
+  ) = _SpecialInstructionsChanged;
+
+  const factory NewRequestEvent.submit({
+    required CustomerCodeInfo customerCodeInfo,
+    required User user,
+  }) = _Submit;
 }

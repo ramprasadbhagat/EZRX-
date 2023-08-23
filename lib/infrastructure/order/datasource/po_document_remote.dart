@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_document_buffer.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
@@ -21,7 +21,7 @@ class PoDocumentRemoteDataSource {
     required this.httpService,
     required this.dataSourceExceptionHandler,
   });
-  Future<PoDocumentsBuffer> fileDownload(
+  Future<AttachmentFileBuffer> fileDownload(
     String name,
     String imgUrl,
     AttachmentType attachmentType,
@@ -37,7 +37,7 @@ class PoDocumentRemoteDataSource {
       );
       _fileDownloadExceptionChecker(res: res);
 
-      return PoDocumentsBuffer(
+      return AttachmentFileBuffer(
         name: name,
         buffer: res.data,
       );
