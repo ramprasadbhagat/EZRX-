@@ -118,17 +118,7 @@ class _CartPageState extends State<CartPage> {
                   ),
                 );
           }
-          state.apiFailureOrSuccessOption.fold(
-            () {
-              if ((!state.isUpserting || !state.isClearing) &&
-                  context.router.current.path == 'orders/cart') {
-                CustomSnackBar(
-                  messageText: 'Item has been removed from cart.'.tr(),
-                ).show(context);
-              }
-            },
-            (either) => {},
-          );
+         
         },
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
@@ -210,7 +200,7 @@ class _CartScrollList extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.cartProducts.length != current.cartProducts.length,
       listener: (context, state) {
-        if (!state.isUpserting || !state.isClearing) {
+        if (!state.isClearing) {
           CustomSnackBar(
             messageText: 'Item has been removed from cart.'.tr(),
           ).show(context);

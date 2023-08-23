@@ -1,14 +1,17 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -48,7 +51,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -120,6 +122,11 @@ class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
 
+class MockAppRouter extends Mock implements AppRouter {}
+
+class MaterialPageXMock extends Mock implements MaterialPageX {}
+
+final locator = GetIt.instance;
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
@@ -149,7 +156,17 @@ void main() {
   late CartItem mockCartItemWithOutBatch;
   late CartItem mockCartItemWithBatch;
   late List<StockInfo> batchStockInfoMock;
-
+  final routeData = RouteData(
+    route: const RouteMatch(
+      name: 'CartsPageRoute',
+      segments: ['orders', 'cart'],
+      path: 'orders/cart',
+      stringMatch: 'orders/cart',
+      key: ValueKey('CartsPageRoute'),
+    ),
+    router: MockAppRouter(),
+    pendingChildren: [],
+  );
   setUpAll(() async {
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
@@ -182,6 +199,7 @@ void main() {
       orderSummaryBlocMock = OrderSummaryBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
+      autoRouter = MockAppRouter();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -558,6 +576,9 @@ void main() {
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => autoRouter.currentPath).thenReturn('orders/cart');
+      when(() => autoRouter.current).thenReturn(routeData);
+      when(() => autoRouter.stack).thenReturn([MaterialPageXMock()]);
     },
   );
   group(
@@ -728,6 +749,42 @@ void main() {
           'Item has been removed from cart.'.tr(),
         );
         expect(msg, findsOneWidget);
+      });
+      testWidgets('Test SnackBarMessage when delete the item from cart ',
+          (tester) async {
+            when(
+          () => autoRouter.currentPath,
+        ).thenReturn('orders/cart');
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isClearing: true,
+          ),
+        );
+        final expectedStates = [
+          CartState.initial().copyWith(
+            cartProducts: [
+              ...mockCartItemWithDataList2,
+            ],
+          ),
+        ];
+        whenListen(cartBloc, Stream.fromIterable(expectedStates));
+        await tester.pumpWidget(getWidget());
+        await tester.pump(const Duration(seconds: 1));
+        final deleteIcon = find.byIcon(
+          Icons.delete_outlined,
+        );
+        expect(deleteIcon, findsOneWidget);
+
+        await tester.tap(
+          deleteIcon,
+          warnIfMissed: true,
+        );
+
+        final closeIcon = find.widgetWithIcon(
+          CustomSnackBar,
+          Icons.close,
+        );
+        expect(closeIcon, findsOneWidget);
       });
       // testWidgets('Test have cart item list and Refresh', (tester) async {
       //   when(() => cartBloc.state).thenReturn(
