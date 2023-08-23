@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_principal_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -28,8 +31,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'languageFilter', defaultValue: false)
     @HiveField(104, defaultValue: false)
         required bool languageFilter,
-    @JsonKey(name: 'languageValue', defaultValue: '')
-    @HiveField(105, defaultValue: '')
+    @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
+    @HiveField(105, defaultValue: ApiLanguageCode.english)
         required String languageValue,
     @JsonKey(name: 'disablePrincipals', defaultValue: false)
     @HiveField(106, defaultValue: false)
@@ -200,7 +203,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       hideCustomer: configs.hideCustomer,
       enableGimmickMaterial: configs.enableGimmickMaterial,
       languageFilter: configs.languageFilter,
-      languageValue: configs.languageValue.getOrDefaultValue(''),
+      languageValue: configs.languageValue.languageCode,
       disablePrincipals: configs.disablePrincipals,
       principalList: List.from(configs.principalList)
           .map((e) => SalesOrganisationConfigsPrincipalDto.fromDomain(e))
@@ -263,7 +266,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       hideCustomer: hideCustomer,
       enableGimmickMaterial: enableGimmickMaterial,
       languageFilter: languageFilter,
-      languageValue: LanguageValue(languageValue),
+      languageValue: Locale(
+        languageValue,
+      ),
       disablePrincipals: disablePrincipals,
       principalList: principalList.map((e) => e.toDomain()).toList(),
       disableOrderType: disableOrderType,
@@ -348,4 +353,10 @@ class _PrincipalListConverter extends JsonConverter<
           .toList(),
     };
   }
+}
+
+String handleEmptyLanguageValue(Map json, String key) {
+  final String languageValue = json[key] ?? '';
+
+  return languageValue.isNotEmpty ? languageValue : ApiLanguageCode.english;
 }

@@ -1,10 +1,12 @@
+import 'dart:ui';
+
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -30,8 +32,9 @@ void main() {
 
   final orderHistoryDetailsMockList = OrderHistoryDetails.empty();
 
-  final mockUser =
-      User.empty().copyWith(preferredLanguage: LanguageValue('EN'));
+  final mockUser = User.empty().copyWith(
+    preferredLanguage: const Locale(ApiLanguageCode.english),
+  );
 
   final mockOrderHistoryItem = OrderHistoryDetailsOrderHeader.empty();
 
@@ -128,7 +131,7 @@ void main() {
             .getOrderHistoryDetailsForSalesRep(
           companyName: '',
           orderId: '02001949952333',
-          language: '',
+          language: ApiLanguageCode.english,
           userName: 'user_test',
         ),
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
@@ -177,7 +180,9 @@ void main() {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
         () => orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-            orderId: '200012', language: 'EN',),
+          orderId: '200012',
+          language: 'EN',
+        ),
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(

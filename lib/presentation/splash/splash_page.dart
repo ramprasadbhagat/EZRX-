@@ -10,7 +10,6 @@ import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attac
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
-//import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
@@ -144,7 +143,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocListener(
       listeners: [
         BlocListener<AuthBloc, AuthState>(
@@ -212,7 +210,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     languages: state.user.supportedLanguages,
                   ),
                 );
-            context.setLocale(state.user.defaultLanguage.subTag.toLocal);
+            context.setLocale(state.user.defaultLanguage.subTag);
           },
         ),
         BlocListener<UserBloc, UserState>(

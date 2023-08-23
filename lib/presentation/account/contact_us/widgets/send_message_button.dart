@@ -32,7 +32,7 @@ class _SendMessageButton extends StatelessWidget {
                               .state
                               .user
                               .preferredLanguage
-                              .getOrDefaultValue(''),
+                              .languageCode,
                         ),
                       );
                 },

@@ -20,7 +20,8 @@ _$_UpdateSalesOrganisationConfigsDto
           languageFilter: json['languageFilter'] as bool? ?? false,
           enableVat: json['enableVat'] as bool? ?? false,
           enableZDP5: json['enableZDP5'] as bool? ?? false,
-          languageValue: json['languageValue'] as String? ?? '',
+          languageValue:
+              handleEmptyLanguageValue(json, 'languageValue') as String,
           materialWithoutPrice: json['materialWithoutPrice'] as bool? ?? false,
           enableZDP8Override: json['enableZDP8Override'] as bool? ?? false,
           displayOrderDiscount: json['displayOrderDiscount'] as bool? ?? false,

@@ -133,7 +133,8 @@ class UserRepository implements IUserRepository {
     try {
       final user =
           await remoteDataSource.updateUserNotificationAndLanguagePreference(
-        languagePreference: userDetails.settings.languagePreference.getValue(),
+        languagePreference:
+            userDetails.settings.languagePreference.languageCode,
         emailNotification: userDetails.settings.emailNotifications,
         userId: userDetails.id,
       );
@@ -164,7 +165,7 @@ class UserRepository implements IUserRepository {
     }
     try {
       final updateLanguageResponse = await languageRemoteDataSource
-          .changeLanguage(language.subTag.getOrCrash());
+          .changeLanguage(language.subTag.languageCode);
 
       if (updateLanguageResponse.success) {
         return Right(updateLanguageResponse);

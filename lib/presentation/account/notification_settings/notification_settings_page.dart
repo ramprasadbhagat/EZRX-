@@ -86,7 +86,7 @@ class NotificationSettingsPage extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              state.languagePreference.languageString,
+                              state.languagePreference.languageString(),
                             ),
                             const Icon(
                               Icons.arrow_drop_down_outlined,

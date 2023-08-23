@@ -362,12 +362,12 @@ class OrderRepository implements IOrderRepository {
                 .getOrderHistoryDetailsForSalesRep(
                 companyName: '',
                 orderId: orderResponse.salesDocument,
-                language: user.preferredLanguage.getOrCrash(),
+                language: user.preferredLanguage.languageCode,
                 userName: user.username.getOrCrash(),
               )
             : await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
                 orderId: orderResponse.salesDocument,
-                language: user.preferredLanguage.getOrCrash(),
+                language: user.preferredLanguage.languageCode,
               );
 
         return Right(orderHistoryDetails);
@@ -499,7 +499,7 @@ class OrderRepository implements IOrderRepository {
       products: _getMaterialInfoList(cartProducts: cartProducts),
       poDocuments: data.poDocuments,
       orderValue: orderValue,
-      language: user.settings.languagePreference.getValue(),
+      language: user.settings.languagePreference.languageCode,
       paymentMethod: 'Bank Transfer',
     );
   }

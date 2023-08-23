@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
@@ -8,6 +10,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -401,7 +404,7 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: LanguageValue('EN'),
+          preferredLanguage: const Locale(ApiLanguageCode.english),
           mobileNumber: MobileNumber(''),
           supportedLanguages: <Language>[],
         );
@@ -435,7 +438,7 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: LanguageValue('EN'), 
+          preferredLanguage: const Locale(ApiLanguageCode.english),
           mobileNumber: MobileNumber(''),
           supportedLanguages: <Language>[],
         );
@@ -474,7 +477,7 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: LanguageValue('EN'),
+          preferredLanguage: const Locale(ApiLanguageCode.english),
           mobileNumber: MobileNumber(''),
           supportedLanguages: <Language>[],
         );
@@ -513,7 +516,7 @@ void main() {
           disableCreateOrder: false,
           disableReturns: false,
           hasPriceOverride: false,
-          preferredLanguage: LanguageValue('EN'),
+          preferredLanguage: const Locale(ApiLanguageCode.english),
           mobileNumber: MobileNumber(''),
           supportedLanguages: <Language>[],
         );

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Language {
-  LanguageValue get subTag => throw _privateConstructorUsedError;
+  Locale get subTag => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LanguageCopyWith<Language> get copyWith =>
@@ -28,7 +28,7 @@ abstract class $LanguageCopyWith<$Res> {
   factory $LanguageCopyWith(Language value, $Res Function(Language) then) =
       _$LanguageCopyWithImpl<$Res, Language>;
   @useResult
-  $Res call({LanguageValue subTag});
+  $Res call({Locale subTag});
 }
 
 /// @nodoc
@@ -50,7 +50,7 @@ class _$LanguageCopyWithImpl<$Res, $Val extends Language>
       subTag: null == subTag
           ? _value.subTag
           : subTag // ignore: cast_nullable_to_non_nullable
-              as LanguageValue,
+              as Locale,
     ) as $Val);
   }
 }
@@ -62,7 +62,7 @@ abstract class _$$_LanguageCopyWith<$Res> implements $LanguageCopyWith<$Res> {
       __$$_LanguageCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({LanguageValue subTag});
+  $Res call({Locale subTag});
 }
 
 /// @nodoc
@@ -82,7 +82,7 @@ class __$$_LanguageCopyWithImpl<$Res>
       subTag: null == subTag
           ? _value.subTag
           : subTag // ignore: cast_nullable_to_non_nullable
-              as LanguageValue,
+              as Locale,
     ));
   }
 }
@@ -93,7 +93,7 @@ class _$_Language implements _Language {
   _$_Language({required this.subTag});
 
   @override
-  final LanguageValue subTag;
+  final Locale subTag;
 
   @override
   String toString() {
@@ -119,10 +119,10 @@ class _$_Language implements _Language {
 }
 
 abstract class _Language implements Language {
-  factory _Language({required final LanguageValue subTag}) = _$_Language;
+  factory _Language({required final Locale subTag}) = _$_Language;
 
   @override
-  LanguageValue get subTag;
+  Locale get subTag;
   @override
   @JsonKey(ignore: true)
   _$$_LanguageCopyWith<_$_Language> get copyWith =>

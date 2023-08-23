@@ -36,9 +36,10 @@ class _LanguageDropDown extends StatelessWidget {
                   ),
                 ),
                 items: state.languages
-                    .map((e) => DropdownMenuItem<Language>(
-                    value: e,
-                    child: Text(e.subTag.languageString),
+                    .map(
+                      (e) => DropdownMenuItem<Language>(
+                        value: e,
+                        child: Text(e.subTag.languageString()),
                       ),
                     )
                     .toList(),

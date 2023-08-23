@@ -67,7 +67,7 @@ class ChatBotRepository implements IChatBotRepository {
       final payload = <String, Object>{
         'soldTo': customerCodeInfo.customerCodeSoldTo,
         'shipTo': [shipToInfo.shipToCustomerCode],
-        'language': user.preferredLanguage,
+        'language': user.preferredLanguage.languageCode,
         'token': jwt.access,
         'username': user.username.getOrCrash(),
         'customerCode': customerCodeInfo.customerCodeSoldTo,

@@ -24,7 +24,7 @@ class SalesOrganisationConfigsDtoAdapter
       hideCustomer: fields[102] == null ? false : fields[102] as bool,
       enableGimmickMaterial: fields[103] == null ? false : fields[103] as bool,
       languageFilter: fields[104] == null ? false : fields[104] as bool,
-      languageValue: fields[105] == null ? '' : fields[105] as String,
+      languageValue: fields[105] == null ? 'EN' : fields[105] as String,
       disablePrincipals: fields[106] == null ? false : fields[106] as bool,
       principalList: fields[7] == null
           ? []
@@ -231,7 +231,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       hideCustomer: json['hideCustomer'] as bool? ?? false,
       enableGimmickMaterial: json['enableGimmickMaterial'] as bool? ?? false,
       languageFilter: json['languageFilter'] as bool? ?? false,
-      languageValue: json['languageValue'] as String? ?? '',
+      languageValue: handleEmptyLanguageValue(json, 'languageValue') as String,
       disablePrincipals: json['disablePrincipals'] as bool? ?? false,
       principalList: const _PrincipalListConverter()
           .fromJson(json['principalList'] as Map<String, dynamic>),

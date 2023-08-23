@@ -36,8 +36,8 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'languageFilter', defaultValue: false)
   @HiveField(104, defaultValue: false)
   bool get languageFilter => throw _privateConstructorUsedError;
-  @JsonKey(name: 'languageValue', defaultValue: '')
-  @HiveField(105, defaultValue: '')
+  @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
+  @HiveField(105, defaultValue: ApiLanguageCode.english)
   String get languageValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'disablePrincipals', defaultValue: false)
   @HiveField(106, defaultValue: false)
@@ -212,176 +212,176 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'disableProcessingStatus')
       @HiveField(100, defaultValue: false)
-      bool disableProcessingStatus,
+          bool disableProcessingStatus,
       @JsonKey(name: 'currency')
       @HiveField(101, defaultValue: '')
-      String currency,
+          String currency,
       @JsonKey(name: 'hideCustomer', defaultValue: false)
       @HiveField(102, defaultValue: false)
-      bool hideCustomer,
+          bool hideCustomer,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
       @HiveField(103, defaultValue: false)
-      bool enableGimmickMaterial,
+          bool enableGimmickMaterial,
       @JsonKey(name: 'languageFilter', defaultValue: false)
       @HiveField(104, defaultValue: false)
-      bool languageFilter,
-      @JsonKey(name: 'languageValue', defaultValue: '')
-      @HiveField(105, defaultValue: '')
-      String languageValue,
+          bool languageFilter,
+      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
+      @HiveField(105, defaultValue: ApiLanguageCode.english)
+          String languageValue,
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       @HiveField(106, defaultValue: false)
-      bool disablePrincipals,
+          bool disablePrincipals,
       @JsonKey(name: 'principalList')
       @_PrincipalListConverter()
       @HiveField(7, defaultValue: [])
-      List<SalesOrganisationConfigsPrincipalDto> principalList,
+          List<SalesOrganisationConfigsPrincipalDto> principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
       @HiveField(108, defaultValue: false)
-      bool disableOrderType,
+          bool disableOrderType,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
       @HiveField(109, defaultValue: false)
-      bool enableBatchNumber,
+          bool enableBatchNumber,
       @JsonKey(name: 'disableBundles', defaultValue: false)
       @HiveField(110, defaultValue: false)
-      bool disableBundles,
+          bool disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
       @HiveField(111, defaultValue: false)
-      bool enableZDP5,
+          bool enableZDP5,
       @JsonKey(name: 'enableTaxClassification', defaultValue: false)
       @HiveField(112, defaultValue: false)
-      bool enableTaxClassification,
+          bool enableTaxClassification,
       @JsonKey(name: 'enableVat', defaultValue: false)
       @HiveField(113, defaultValue: false)
-      bool enableVat,
+          bool enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
       @HiveField(114, defaultValue: 0)
-      int vatValue,
+          int vatValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
       @HiveField(115, defaultValue: false)
-      bool materialWithoutPrice,
+          bool materialWithoutPrice,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
       @HiveField(116, defaultValue: false)
-      bool enableSpecialInstructions,
+          bool enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
       @HiveField(117, defaultValue: false)
-      bool enableReferenceNote,
+          bool enableReferenceNote,
       @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
       @HiveField(118, defaultValue: false)
-      bool enableCollectiveNumber,
+          bool enableCollectiveNumber,
       @JsonKey(name: 'enableMobileNumber', defaultValue: false)
       @HiveField(119, defaultValue: false)
-      bool enableMobileNumber,
+          bool enableMobileNumber,
       @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
       @HiveField(120, defaultValue: false)
-      bool enableFutureDeliveryDay,
+          bool enableFutureDeliveryDay,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
       @HiveField(121, defaultValue: false)
-      bool enablePaymentTerms,
+          bool enablePaymentTerms,
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
       @HiveField(122, defaultValue: '')
-      String futureDeliveryDay,
+          String futureDeliveryDay,
       @JsonKey(name: 'enableGMC', defaultValue: false)
       @HiveField(123, defaultValue: false)
-      bool enableGMC,
+          bool enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
       @HiveField(124, defaultValue: false)
-      bool enableListPrice,
+          bool enableListPrice,
       @JsonKey(name: 'enableDefaultMD', defaultValue: false)
       @HiveField(125, defaultValue: false)
-      bool enableDefaultMD,
+          bool enableDefaultMD,
       @JsonKey(name: 'priceOverride', defaultValue: false)
       @HiveField(126, defaultValue: false)
-      bool priceOverride,
+          bool priceOverride,
       @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
       @HiveField(127, defaultValue: false)
-      bool disablePaymentTermsDisplay,
+          bool disablePaymentTermsDisplay,
       @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
       @HiveField(128, defaultValue: false)
-      bool disableDeliveryDate,
+          bool disableDeliveryDate,
       @JsonKey(name: 'enableBillTo', defaultValue: false)
       @HiveField(129, defaultValue: false)
-      bool enableBillTo,
+          bool enableBillTo,
       @JsonKey(name: 'showPOAttachment', defaultValue: false)
       @HiveField(130, defaultValue: false)
-      bool showPOAttachment,
+          bool showPOAttachment,
       @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
       @HiveField(131, defaultValue: false)
-      bool expiryDateDisplay,
+          bool expiryDateDisplay,
       @JsonKey(name: 'hideStockDisplay', defaultValue: false)
       @HiveField(132, defaultValue: false)
-      bool hideStockDisplay,
+          bool hideStockDisplay,
       @JsonKey(name: 'addOosMaterials', defaultValue: false)
       @HiveField(133, defaultValue: false)
-      bool addOosMaterials,
+          bool addOosMaterials,
       @JsonKey(name: 'oosValue', defaultValue: 0)
       @HiveField(134, defaultValue: 0)
-      int oosValue,
+          int oosValue,
       @JsonKey(name: 'enableRemarks', defaultValue: false)
       @HiveField(135, defaultValue: false)
-      bool enableRemarks,
+          bool enableRemarks,
       @JsonKey(name: 'enableOHPrice', defaultValue: true)
       @HiveField(136, defaultValue: true)
-      bool enableOHPrice,
+          bool enableOHPrice,
       @JsonKey(name: 'ponRequired', defaultValue: false)
       @HiveField(137, defaultValue: false)
-      bool poNumberRequired,
+          bool poNumberRequired,
       @JsonKey(name: 'enableIRN', defaultValue: false)
       @HiveField(138, defaultValue: false)
-      bool enableIRN,
+          bool enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       @HiveField(139, defaultValue: false)
-      bool enableTaxDisplay,
+          bool enableTaxDisplay,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       @HiveField(140, defaultValue: false)
-      bool enableTaxAtTotalLevelOnly,
+          bool enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
       @HiveField(141, defaultValue: false)
-      bool netPriceOverride,
+          bool netPriceOverride,
       @JsonKey(name: 'batchNumDisplay', defaultValue: false)
       @HiveField(142, defaultValue: false)
-      bool batchNumDisplay,
+          bool batchNumDisplay,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
       @HiveField(143, defaultValue: false)
-      bool displayOrderDiscount,
+          bool displayOrderDiscount,
       @JsonKey(name: 'minOrderAmount', defaultValue: '0')
       @HiveField(144, defaultValue: '0')
-      String minOrderAmount,
+          String minOrderAmount,
       @JsonKey(name: 'salesOrgCode', defaultValue: '0')
       @HiveField(145, defaultValue: '0')
-      String salesOrg,
+          String salesOrg,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
       @HiveField(146, defaultValue: false)
-      bool enableZDP8Override,
+          bool enableZDP8Override,
       @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
       @HiveField(147, defaultValue: false)
-      bool disableReturnsAccessSR,
+          bool disableReturnsAccessSR,
       @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
       @HiveField(148, defaultValue: false)
-      bool disableReturnsAccess,
+          bool disableReturnsAccess,
       @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
       @HiveField(149, defaultValue: false)
-      bool enableGreenDelivery,
+          bool enableGreenDelivery,
       @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
       @HiveField(150, defaultValue: 2)
-      int greenDeliveryDelayInDays,
+          int greenDeliveryDelayInDays,
       @JsonKey(name: 'enableComboDeals', defaultValue: false)
       @HiveField(151, defaultValue: false)
-      bool enableComboDeals,
+          bool enableComboDeals,
       @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
       @HiveField(152, defaultValue: 0)
-      int greenDeliveryUserRole,
+          int greenDeliveryUserRole,
       @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
       @HiveField(153, defaultValue: 0)
-      int comboDealsUserRole,
+          int comboDealsUserRole,
       @JsonKey(name: 'enableGMN', defaultValue: false)
       @HiveField(154, defaultValue: false)
-      bool enableGMN,
+          bool enableGMN,
       @JsonKey(name: 'displayItemTaxBreakdown', defaultValue: false)
       @HiveField(155, defaultValue: false)
-      bool displayItemTaxBreakdown,
+          bool displayItemTaxBreakdown,
       @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
       @HiveField(156, defaultValue: false)
-      bool displaySubtotalTaxBreakdown});
+          bool displaySubtotalTaxBreakdown});
 }
 
 /// @nodoc
@@ -701,176 +701,176 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'disableProcessingStatus')
       @HiveField(100, defaultValue: false)
-      bool disableProcessingStatus,
+          bool disableProcessingStatus,
       @JsonKey(name: 'currency')
       @HiveField(101, defaultValue: '')
-      String currency,
+          String currency,
       @JsonKey(name: 'hideCustomer', defaultValue: false)
       @HiveField(102, defaultValue: false)
-      bool hideCustomer,
+          bool hideCustomer,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
       @HiveField(103, defaultValue: false)
-      bool enableGimmickMaterial,
+          bool enableGimmickMaterial,
       @JsonKey(name: 'languageFilter', defaultValue: false)
       @HiveField(104, defaultValue: false)
-      bool languageFilter,
-      @JsonKey(name: 'languageValue', defaultValue: '')
-      @HiveField(105, defaultValue: '')
-      String languageValue,
+          bool languageFilter,
+      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
+      @HiveField(105, defaultValue: ApiLanguageCode.english)
+          String languageValue,
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       @HiveField(106, defaultValue: false)
-      bool disablePrincipals,
+          bool disablePrincipals,
       @JsonKey(name: 'principalList')
       @_PrincipalListConverter()
       @HiveField(7, defaultValue: [])
-      List<SalesOrganisationConfigsPrincipalDto> principalList,
+          List<SalesOrganisationConfigsPrincipalDto> principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
       @HiveField(108, defaultValue: false)
-      bool disableOrderType,
+          bool disableOrderType,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
       @HiveField(109, defaultValue: false)
-      bool enableBatchNumber,
+          bool enableBatchNumber,
       @JsonKey(name: 'disableBundles', defaultValue: false)
       @HiveField(110, defaultValue: false)
-      bool disableBundles,
+          bool disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
       @HiveField(111, defaultValue: false)
-      bool enableZDP5,
+          bool enableZDP5,
       @JsonKey(name: 'enableTaxClassification', defaultValue: false)
       @HiveField(112, defaultValue: false)
-      bool enableTaxClassification,
+          bool enableTaxClassification,
       @JsonKey(name: 'enableVat', defaultValue: false)
       @HiveField(113, defaultValue: false)
-      bool enableVat,
+          bool enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
       @HiveField(114, defaultValue: 0)
-      int vatValue,
+          int vatValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
       @HiveField(115, defaultValue: false)
-      bool materialWithoutPrice,
+          bool materialWithoutPrice,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
       @HiveField(116, defaultValue: false)
-      bool enableSpecialInstructions,
+          bool enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
       @HiveField(117, defaultValue: false)
-      bool enableReferenceNote,
+          bool enableReferenceNote,
       @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
       @HiveField(118, defaultValue: false)
-      bool enableCollectiveNumber,
+          bool enableCollectiveNumber,
       @JsonKey(name: 'enableMobileNumber', defaultValue: false)
       @HiveField(119, defaultValue: false)
-      bool enableMobileNumber,
+          bool enableMobileNumber,
       @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
       @HiveField(120, defaultValue: false)
-      bool enableFutureDeliveryDay,
+          bool enableFutureDeliveryDay,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
       @HiveField(121, defaultValue: false)
-      bool enablePaymentTerms,
+          bool enablePaymentTerms,
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
       @HiveField(122, defaultValue: '')
-      String futureDeliveryDay,
+          String futureDeliveryDay,
       @JsonKey(name: 'enableGMC', defaultValue: false)
       @HiveField(123, defaultValue: false)
-      bool enableGMC,
+          bool enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
       @HiveField(124, defaultValue: false)
-      bool enableListPrice,
+          bool enableListPrice,
       @JsonKey(name: 'enableDefaultMD', defaultValue: false)
       @HiveField(125, defaultValue: false)
-      bool enableDefaultMD,
+          bool enableDefaultMD,
       @JsonKey(name: 'priceOverride', defaultValue: false)
       @HiveField(126, defaultValue: false)
-      bool priceOverride,
+          bool priceOverride,
       @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
       @HiveField(127, defaultValue: false)
-      bool disablePaymentTermsDisplay,
+          bool disablePaymentTermsDisplay,
       @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
       @HiveField(128, defaultValue: false)
-      bool disableDeliveryDate,
+          bool disableDeliveryDate,
       @JsonKey(name: 'enableBillTo', defaultValue: false)
       @HiveField(129, defaultValue: false)
-      bool enableBillTo,
+          bool enableBillTo,
       @JsonKey(name: 'showPOAttachment', defaultValue: false)
       @HiveField(130, defaultValue: false)
-      bool showPOAttachment,
+          bool showPOAttachment,
       @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
       @HiveField(131, defaultValue: false)
-      bool expiryDateDisplay,
+          bool expiryDateDisplay,
       @JsonKey(name: 'hideStockDisplay', defaultValue: false)
       @HiveField(132, defaultValue: false)
-      bool hideStockDisplay,
+          bool hideStockDisplay,
       @JsonKey(name: 'addOosMaterials', defaultValue: false)
       @HiveField(133, defaultValue: false)
-      bool addOosMaterials,
+          bool addOosMaterials,
       @JsonKey(name: 'oosValue', defaultValue: 0)
       @HiveField(134, defaultValue: 0)
-      int oosValue,
+          int oosValue,
       @JsonKey(name: 'enableRemarks', defaultValue: false)
       @HiveField(135, defaultValue: false)
-      bool enableRemarks,
+          bool enableRemarks,
       @JsonKey(name: 'enableOHPrice', defaultValue: true)
       @HiveField(136, defaultValue: true)
-      bool enableOHPrice,
+          bool enableOHPrice,
       @JsonKey(name: 'ponRequired', defaultValue: false)
       @HiveField(137, defaultValue: false)
-      bool poNumberRequired,
+          bool poNumberRequired,
       @JsonKey(name: 'enableIRN', defaultValue: false)
       @HiveField(138, defaultValue: false)
-      bool enableIRN,
+          bool enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       @HiveField(139, defaultValue: false)
-      bool enableTaxDisplay,
+          bool enableTaxDisplay,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       @HiveField(140, defaultValue: false)
-      bool enableTaxAtTotalLevelOnly,
+          bool enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
       @HiveField(141, defaultValue: false)
-      bool netPriceOverride,
+          bool netPriceOverride,
       @JsonKey(name: 'batchNumDisplay', defaultValue: false)
       @HiveField(142, defaultValue: false)
-      bool batchNumDisplay,
+          bool batchNumDisplay,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
       @HiveField(143, defaultValue: false)
-      bool displayOrderDiscount,
+          bool displayOrderDiscount,
       @JsonKey(name: 'minOrderAmount', defaultValue: '0')
       @HiveField(144, defaultValue: '0')
-      String minOrderAmount,
+          String minOrderAmount,
       @JsonKey(name: 'salesOrgCode', defaultValue: '0')
       @HiveField(145, defaultValue: '0')
-      String salesOrg,
+          String salesOrg,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
       @HiveField(146, defaultValue: false)
-      bool enableZDP8Override,
+          bool enableZDP8Override,
       @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
       @HiveField(147, defaultValue: false)
-      bool disableReturnsAccessSR,
+          bool disableReturnsAccessSR,
       @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
       @HiveField(148, defaultValue: false)
-      bool disableReturnsAccess,
+          bool disableReturnsAccess,
       @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
       @HiveField(149, defaultValue: false)
-      bool enableGreenDelivery,
+          bool enableGreenDelivery,
       @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
       @HiveField(150, defaultValue: 2)
-      int greenDeliveryDelayInDays,
+          int greenDeliveryDelayInDays,
       @JsonKey(name: 'enableComboDeals', defaultValue: false)
       @HiveField(151, defaultValue: false)
-      bool enableComboDeals,
+          bool enableComboDeals,
       @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
       @HiveField(152, defaultValue: 0)
-      int greenDeliveryUserRole,
+          int greenDeliveryUserRole,
       @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
       @HiveField(153, defaultValue: 0)
-      int comboDealsUserRole,
+          int comboDealsUserRole,
       @JsonKey(name: 'enableGMN', defaultValue: false)
       @HiveField(154, defaultValue: false)
-      bool enableGMN,
+          bool enableGMN,
       @JsonKey(name: 'displayItemTaxBreakdown', defaultValue: false)
       @HiveField(155, defaultValue: false)
-      bool displayItemTaxBreakdown,
+          bool displayItemTaxBreakdown,
       @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
       @HiveField(156, defaultValue: false)
-      bool displaySubtotalTaxBreakdown});
+          bool displaySubtotalTaxBreakdown});
 }
 
 /// @nodoc
@@ -1184,176 +1184,177 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   const _$_SalesOrganisationConfigsDto(
       {@JsonKey(name: 'disableProcessingStatus')
       @HiveField(100, defaultValue: false)
-      required this.disableProcessingStatus,
+          required this.disableProcessingStatus,
       @JsonKey(name: 'currency')
       @HiveField(101, defaultValue: '')
-      required this.currency,
+          required this.currency,
       @JsonKey(name: 'hideCustomer', defaultValue: false)
       @HiveField(102, defaultValue: false)
-      required this.hideCustomer,
+          required this.hideCustomer,
       @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
       @HiveField(103, defaultValue: false)
-      required this.enableGimmickMaterial,
+          required this.enableGimmickMaterial,
       @JsonKey(name: 'languageFilter', defaultValue: false)
       @HiveField(104, defaultValue: false)
-      required this.languageFilter,
-      @JsonKey(name: 'languageValue', defaultValue: '')
-      @HiveField(105, defaultValue: '')
-      required this.languageValue,
+          required this.languageFilter,
+      @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
+      @HiveField(105, defaultValue: ApiLanguageCode.english)
+          required this.languageValue,
       @JsonKey(name: 'disablePrincipals', defaultValue: false)
       @HiveField(106, defaultValue: false)
-      required this.disablePrincipals,
+          required this.disablePrincipals,
       @JsonKey(name: 'principalList')
       @_PrincipalListConverter()
       @HiveField(7, defaultValue: [])
-      required final List<SalesOrganisationConfigsPrincipalDto> principalList,
+          required final List<SalesOrganisationConfigsPrincipalDto>
+              principalList,
       @JsonKey(name: 'disableOrderType', defaultValue: false)
       @HiveField(108, defaultValue: false)
-      required this.disableOrderType,
+          required this.disableOrderType,
       @JsonKey(name: 'enableBatchNumber', defaultValue: false)
       @HiveField(109, defaultValue: false)
-      required this.enableBatchNumber,
+          required this.enableBatchNumber,
       @JsonKey(name: 'disableBundles', defaultValue: false)
       @HiveField(110, defaultValue: false)
-      required this.disableBundles,
+          required this.disableBundles,
       @JsonKey(name: 'enableZDP5', defaultValue: false)
       @HiveField(111, defaultValue: false)
-      required this.enableZDP5,
+          required this.enableZDP5,
       @JsonKey(name: 'enableTaxClassification', defaultValue: false)
       @HiveField(112, defaultValue: false)
-      required this.enableTaxClassification,
+          required this.enableTaxClassification,
       @JsonKey(name: 'enableVat', defaultValue: false)
       @HiveField(113, defaultValue: false)
-      required this.enableVat,
+          required this.enableVat,
       @JsonKey(name: 'vatValue', defaultValue: 0)
       @HiveField(114, defaultValue: 0)
-      required this.vatValue,
+          required this.vatValue,
       @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
       @HiveField(115, defaultValue: false)
-      required this.materialWithoutPrice,
+          required this.materialWithoutPrice,
       @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
       @HiveField(116, defaultValue: false)
-      required this.enableSpecialInstructions,
+          required this.enableSpecialInstructions,
       @JsonKey(name: 'enableReferenceNote', defaultValue: false)
       @HiveField(117, defaultValue: false)
-      required this.enableReferenceNote,
+          required this.enableReferenceNote,
       @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
       @HiveField(118, defaultValue: false)
-      required this.enableCollectiveNumber,
+          required this.enableCollectiveNumber,
       @JsonKey(name: 'enableMobileNumber', defaultValue: false)
       @HiveField(119, defaultValue: false)
-      required this.enableMobileNumber,
+          required this.enableMobileNumber,
       @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
       @HiveField(120, defaultValue: false)
-      required this.enableFutureDeliveryDay,
+          required this.enableFutureDeliveryDay,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
       @HiveField(121, defaultValue: false)
-      required this.enablePaymentTerms,
+          required this.enablePaymentTerms,
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
       @HiveField(122, defaultValue: '')
-      required this.futureDeliveryDay,
+          required this.futureDeliveryDay,
       @JsonKey(name: 'enableGMC', defaultValue: false)
       @HiveField(123, defaultValue: false)
-      required this.enableGMC,
+          required this.enableGMC,
       @JsonKey(name: 'enableListPrice', defaultValue: false)
       @HiveField(124, defaultValue: false)
-      required this.enableListPrice,
+          required this.enableListPrice,
       @JsonKey(name: 'enableDefaultMD', defaultValue: false)
       @HiveField(125, defaultValue: false)
-      required this.enableDefaultMD,
+          required this.enableDefaultMD,
       @JsonKey(name: 'priceOverride', defaultValue: false)
       @HiveField(126, defaultValue: false)
-      required this.priceOverride,
+          required this.priceOverride,
       @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
       @HiveField(127, defaultValue: false)
-      required this.disablePaymentTermsDisplay,
+          required this.disablePaymentTermsDisplay,
       @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
       @HiveField(128, defaultValue: false)
-      required this.disableDeliveryDate,
+          required this.disableDeliveryDate,
       @JsonKey(name: 'enableBillTo', defaultValue: false)
       @HiveField(129, defaultValue: false)
-      required this.enableBillTo,
+          required this.enableBillTo,
       @JsonKey(name: 'showPOAttachment', defaultValue: false)
       @HiveField(130, defaultValue: false)
-      required this.showPOAttachment,
+          required this.showPOAttachment,
       @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
       @HiveField(131, defaultValue: false)
-      required this.expiryDateDisplay,
+          required this.expiryDateDisplay,
       @JsonKey(name: 'hideStockDisplay', defaultValue: false)
       @HiveField(132, defaultValue: false)
-      required this.hideStockDisplay,
+          required this.hideStockDisplay,
       @JsonKey(name: 'addOosMaterials', defaultValue: false)
       @HiveField(133, defaultValue: false)
-      required this.addOosMaterials,
+          required this.addOosMaterials,
       @JsonKey(name: 'oosValue', defaultValue: 0)
       @HiveField(134, defaultValue: 0)
-      required this.oosValue,
+          required this.oosValue,
       @JsonKey(name: 'enableRemarks', defaultValue: false)
       @HiveField(135, defaultValue: false)
-      required this.enableRemarks,
+          required this.enableRemarks,
       @JsonKey(name: 'enableOHPrice', defaultValue: true)
       @HiveField(136, defaultValue: true)
-      required this.enableOHPrice,
+          required this.enableOHPrice,
       @JsonKey(name: 'ponRequired', defaultValue: false)
       @HiveField(137, defaultValue: false)
-      required this.poNumberRequired,
+          required this.poNumberRequired,
       @JsonKey(name: 'enableIRN', defaultValue: false)
       @HiveField(138, defaultValue: false)
-      required this.enableIRN,
+          required this.enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       @HiveField(139, defaultValue: false)
-      required this.enableTaxDisplay,
+          required this.enableTaxDisplay,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       @HiveField(140, defaultValue: false)
-      required this.enableTaxAtTotalLevelOnly,
+          required this.enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
       @HiveField(141, defaultValue: false)
-      required this.netPriceOverride,
+          required this.netPriceOverride,
       @JsonKey(name: 'batchNumDisplay', defaultValue: false)
       @HiveField(142, defaultValue: false)
-      required this.batchNumDisplay,
+          required this.batchNumDisplay,
       @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
       @HiveField(143, defaultValue: false)
-      required this.displayOrderDiscount,
+          required this.displayOrderDiscount,
       @JsonKey(name: 'minOrderAmount', defaultValue: '0')
       @HiveField(144, defaultValue: '0')
-      required this.minOrderAmount,
+          required this.minOrderAmount,
       @JsonKey(name: 'salesOrgCode', defaultValue: '0')
       @HiveField(145, defaultValue: '0')
-      required this.salesOrg,
+          required this.salesOrg,
       @JsonKey(name: 'enableZDP8Override', defaultValue: false)
       @HiveField(146, defaultValue: false)
-      required this.enableZDP8Override,
+          required this.enableZDP8Override,
       @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
       @HiveField(147, defaultValue: false)
-      required this.disableReturnsAccessSR,
+          required this.disableReturnsAccessSR,
       @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
       @HiveField(148, defaultValue: false)
-      required this.disableReturnsAccess,
+          required this.disableReturnsAccess,
       @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
       @HiveField(149, defaultValue: false)
-      required this.enableGreenDelivery,
+          required this.enableGreenDelivery,
       @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
       @HiveField(150, defaultValue: 2)
-      required this.greenDeliveryDelayInDays,
+          required this.greenDeliveryDelayInDays,
       @JsonKey(name: 'enableComboDeals', defaultValue: false)
       @HiveField(151, defaultValue: false)
-      required this.enableComboDeals,
+          required this.enableComboDeals,
       @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
       @HiveField(152, defaultValue: 0)
-      required this.greenDeliveryUserRole,
+          required this.greenDeliveryUserRole,
       @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
       @HiveField(153, defaultValue: 0)
-      required this.comboDealsUserRole,
+          required this.comboDealsUserRole,
       @JsonKey(name: 'enableGMN', defaultValue: false)
       @HiveField(154, defaultValue: false)
-      required this.enableGMN,
+          required this.enableGMN,
       @JsonKey(name: 'displayItemTaxBreakdown', defaultValue: false)
       @HiveField(155, defaultValue: false)
-      required this.displayItemTaxBreakdown,
+          required this.displayItemTaxBreakdown,
       @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
       @HiveField(156, defaultValue: false)
-      required this.displaySubtotalTaxBreakdown})
+          required this.displaySubtotalTaxBreakdown})
       : _principalList = principalList,
         super._();
 
@@ -1381,8 +1382,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @HiveField(104, defaultValue: false)
   final bool languageFilter;
   @override
-  @JsonKey(name: 'languageValue', defaultValue: '')
-  @HiveField(105, defaultValue: '')
+  @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
+  @HiveField(105, defaultValue: ApiLanguageCode.english)
   final String languageValue;
   @override
   @JsonKey(name: 'disablePrincipals', defaultValue: false)
@@ -1775,179 +1776,180 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 abstract class _SalesOrganisationConfigsDto
     extends SalesOrganisationConfigsDto {
   const factory _SalesOrganisationConfigsDto(
-      {@JsonKey(name: 'disableProcessingStatus')
-      @HiveField(100, defaultValue: false)
-      required final bool disableProcessingStatus,
-      @JsonKey(name: 'currency')
-      @HiveField(101, defaultValue: '')
-      required final String currency,
-      @JsonKey(name: 'hideCustomer', defaultValue: false)
-      @HiveField(102, defaultValue: false)
-      required final bool hideCustomer,
-      @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
-      @HiveField(103, defaultValue: false)
-      required final bool enableGimmickMaterial,
-      @JsonKey(name: 'languageFilter', defaultValue: false)
-      @HiveField(104, defaultValue: false)
-      required final bool languageFilter,
-      @JsonKey(name: 'languageValue', defaultValue: '')
-      @HiveField(105, defaultValue: '')
-      required final String languageValue,
-      @JsonKey(name: 'disablePrincipals', defaultValue: false)
-      @HiveField(106, defaultValue: false)
-      required final bool disablePrincipals,
-      @JsonKey(name: 'principalList')
-      @_PrincipalListConverter()
-      @HiveField(7, defaultValue: [])
-      required final List<SalesOrganisationConfigsPrincipalDto> principalList,
-      @JsonKey(name: 'disableOrderType', defaultValue: false)
-      @HiveField(108, defaultValue: false)
-      required final bool disableOrderType,
-      @JsonKey(name: 'enableBatchNumber', defaultValue: false)
-      @HiveField(109, defaultValue: false)
-      required final bool enableBatchNumber,
-      @JsonKey(name: 'disableBundles', defaultValue: false)
-      @HiveField(110, defaultValue: false)
-      required final bool disableBundles,
-      @JsonKey(name: 'enableZDP5', defaultValue: false)
-      @HiveField(111, defaultValue: false)
-      required final bool enableZDP5,
-      @JsonKey(name: 'enableTaxClassification', defaultValue: false)
-      @HiveField(112, defaultValue: false)
-      required final bool enableTaxClassification,
-      @JsonKey(name: 'enableVat', defaultValue: false)
-      @HiveField(113, defaultValue: false)
-      required final bool enableVat,
-      @JsonKey(name: 'vatValue', defaultValue: 0)
-      @HiveField(114, defaultValue: 0)
-      required final int vatValue,
-      @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
-      @HiveField(115, defaultValue: false)
-      required final bool materialWithoutPrice,
-      @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
-      @HiveField(116, defaultValue: false)
-      required final bool enableSpecialInstructions,
-      @JsonKey(name: 'enableReferenceNote', defaultValue: false)
-      @HiveField(117, defaultValue: false)
-      required final bool enableReferenceNote,
-      @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
-      @HiveField(118, defaultValue: false)
-      required final bool enableCollectiveNumber,
-      @JsonKey(name: 'enableMobileNumber', defaultValue: false)
-      @HiveField(119, defaultValue: false)
-      required final bool enableMobileNumber,
-      @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
-      @HiveField(120, defaultValue: false)
-      required final bool enableFutureDeliveryDay,
-      @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
-      @HiveField(121, defaultValue: false)
-      required final bool enablePaymentTerms,
-      @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
-      @HiveField(122, defaultValue: '')
-      required final String futureDeliveryDay,
-      @JsonKey(name: 'enableGMC', defaultValue: false)
-      @HiveField(123, defaultValue: false)
-      required final bool enableGMC,
-      @JsonKey(name: 'enableListPrice', defaultValue: false)
-      @HiveField(124, defaultValue: false)
-      required final bool enableListPrice,
-      @JsonKey(name: 'enableDefaultMD', defaultValue: false)
-      @HiveField(125, defaultValue: false)
-      required final bool enableDefaultMD,
-      @JsonKey(name: 'priceOverride', defaultValue: false)
-      @HiveField(126, defaultValue: false)
-      required final bool priceOverride,
-      @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
-      @HiveField(127, defaultValue: false)
-      required final bool disablePaymentTermsDisplay,
-      @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
-      @HiveField(128, defaultValue: false)
-      required final bool disableDeliveryDate,
-      @JsonKey(name: 'enableBillTo', defaultValue: false)
-      @HiveField(129, defaultValue: false)
-      required final bool enableBillTo,
-      @JsonKey(name: 'showPOAttachment', defaultValue: false)
-      @HiveField(130, defaultValue: false)
-      required final bool showPOAttachment,
-      @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
-      @HiveField(131, defaultValue: false)
-      required final bool expiryDateDisplay,
-      @JsonKey(name: 'hideStockDisplay', defaultValue: false)
-      @HiveField(132, defaultValue: false)
-      required final bool hideStockDisplay,
-      @JsonKey(name: 'addOosMaterials', defaultValue: false)
-      @HiveField(133, defaultValue: false)
-      required final bool addOosMaterials,
-      @JsonKey(name: 'oosValue', defaultValue: 0)
-      @HiveField(134, defaultValue: 0)
-      required final int oosValue,
-      @JsonKey(name: 'enableRemarks', defaultValue: false)
-      @HiveField(135, defaultValue: false)
-      required final bool enableRemarks,
-      @JsonKey(name: 'enableOHPrice', defaultValue: true)
-      @HiveField(136, defaultValue: true)
-      required final bool enableOHPrice,
-      @JsonKey(name: 'ponRequired', defaultValue: false)
-      @HiveField(137, defaultValue: false)
-      required final bool poNumberRequired,
-      @JsonKey(name: 'enableIRN', defaultValue: false)
-      @HiveField(138, defaultValue: false)
-      required final bool enableIRN,
-      @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
-      @HiveField(139, defaultValue: false)
-      required final bool enableTaxDisplay,
-      @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
-      @HiveField(140, defaultValue: false)
-      required final bool enableTaxAtTotalLevelOnly,
-      @JsonKey(name: 'netPriceOverride', defaultValue: false)
-      @HiveField(141, defaultValue: false)
-      required final bool netPriceOverride,
-      @JsonKey(name: 'batchNumDisplay', defaultValue: false)
-      @HiveField(142, defaultValue: false)
-      required final bool batchNumDisplay,
-      @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
-      @HiveField(143, defaultValue: false)
-      required final bool displayOrderDiscount,
-      @JsonKey(name: 'minOrderAmount', defaultValue: '0')
-      @HiveField(144, defaultValue: '0')
-      required final String minOrderAmount,
-      @JsonKey(name: 'salesOrgCode', defaultValue: '0')
-      @HiveField(145, defaultValue: '0')
-      required final String salesOrg,
-      @JsonKey(name: 'enableZDP8Override', defaultValue: false)
-      @HiveField(146, defaultValue: false)
-      required final bool enableZDP8Override,
-      @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
-      @HiveField(147, defaultValue: false)
-      required final bool disableReturnsAccessSR,
-      @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
-      @HiveField(148, defaultValue: false)
-      required final bool disableReturnsAccess,
-      @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
-      @HiveField(149, defaultValue: false)
-      required final bool enableGreenDelivery,
-      @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
-      @HiveField(150, defaultValue: 2)
-      required final int greenDeliveryDelayInDays,
-      @JsonKey(name: 'enableComboDeals', defaultValue: false)
-      @HiveField(151, defaultValue: false)
-      required final bool enableComboDeals,
-      @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
-      @HiveField(152, defaultValue: 0)
-      required final int greenDeliveryUserRole,
-      @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
-      @HiveField(153, defaultValue: 0)
-      required final int comboDealsUserRole,
-      @JsonKey(name: 'enableGMN', defaultValue: false)
-      @HiveField(154, defaultValue: false)
-      required final bool enableGMN,
-      @JsonKey(name: 'displayItemTaxBreakdown', defaultValue: false)
-      @HiveField(155, defaultValue: false)
-      required final bool displayItemTaxBreakdown,
-      @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
-      @HiveField(156, defaultValue: false)
-      required final bool
-          displaySubtotalTaxBreakdown}) = _$_SalesOrganisationConfigsDto;
+          {@JsonKey(name: 'disableProcessingStatus')
+          @HiveField(100, defaultValue: false)
+              required final bool disableProcessingStatus,
+          @JsonKey(name: 'currency')
+          @HiveField(101, defaultValue: '')
+              required final String currency,
+          @JsonKey(name: 'hideCustomer', defaultValue: false)
+          @HiveField(102, defaultValue: false)
+              required final bool hideCustomer,
+          @JsonKey(name: 'enableGimmickMaterial', defaultValue: false)
+          @HiveField(103, defaultValue: false)
+              required final bool enableGimmickMaterial,
+          @JsonKey(name: 'languageFilter', defaultValue: false)
+          @HiveField(104, defaultValue: false)
+              required final bool languageFilter,
+          @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
+          @HiveField(105, defaultValue: ApiLanguageCode.english)
+              required final String languageValue,
+          @JsonKey(name: 'disablePrincipals', defaultValue: false)
+          @HiveField(106, defaultValue: false)
+              required final bool disablePrincipals,
+          @JsonKey(name: 'principalList')
+          @_PrincipalListConverter()
+          @HiveField(7, defaultValue: [])
+              required final List<SalesOrganisationConfigsPrincipalDto>
+                  principalList,
+          @JsonKey(name: 'disableOrderType', defaultValue: false)
+          @HiveField(108, defaultValue: false)
+              required final bool disableOrderType,
+          @JsonKey(name: 'enableBatchNumber', defaultValue: false)
+          @HiveField(109, defaultValue: false)
+              required final bool enableBatchNumber,
+          @JsonKey(name: 'disableBundles', defaultValue: false)
+          @HiveField(110, defaultValue: false)
+              required final bool disableBundles,
+          @JsonKey(name: 'enableZDP5', defaultValue: false)
+          @HiveField(111, defaultValue: false)
+              required final bool enableZDP5,
+          @JsonKey(name: 'enableTaxClassification', defaultValue: false)
+          @HiveField(112, defaultValue: false)
+              required final bool enableTaxClassification,
+          @JsonKey(name: 'enableVat', defaultValue: false)
+          @HiveField(113, defaultValue: false)
+              required final bool enableVat,
+          @JsonKey(name: 'vatValue', defaultValue: 0)
+          @HiveField(114, defaultValue: 0)
+              required final int vatValue,
+          @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
+          @HiveField(115, defaultValue: false)
+              required final bool materialWithoutPrice,
+          @JsonKey(name: 'enableSpecialInstructions', defaultValue: false)
+          @HiveField(116, defaultValue: false)
+              required final bool enableSpecialInstructions,
+          @JsonKey(name: 'enableReferenceNote', defaultValue: false)
+          @HiveField(117, defaultValue: false)
+              required final bool enableReferenceNote,
+          @JsonKey(name: 'enableCollectiveNumber', defaultValue: false)
+          @HiveField(118, defaultValue: false)
+              required final bool enableCollectiveNumber,
+          @JsonKey(name: 'enableMobileNumber', defaultValue: false)
+          @HiveField(119, defaultValue: false)
+              required final bool enableMobileNumber,
+          @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
+          @HiveField(120, defaultValue: false)
+              required final bool enableFutureDeliveryDay,
+          @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
+          @HiveField(121, defaultValue: false)
+              required final bool enablePaymentTerms,
+          @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
+          @HiveField(122, defaultValue: '')
+              required final String futureDeliveryDay,
+          @JsonKey(name: 'enableGMC', defaultValue: false)
+          @HiveField(123, defaultValue: false)
+              required final bool enableGMC,
+          @JsonKey(name: 'enableListPrice', defaultValue: false)
+          @HiveField(124, defaultValue: false)
+              required final bool enableListPrice,
+          @JsonKey(name: 'enableDefaultMD', defaultValue: false)
+          @HiveField(125, defaultValue: false)
+              required final bool enableDefaultMD,
+          @JsonKey(name: 'priceOverride', defaultValue: false)
+          @HiveField(126, defaultValue: false)
+              required final bool priceOverride,
+          @JsonKey(name: 'disablePaymentTermsDisplay', defaultValue: false)
+          @HiveField(127, defaultValue: false)
+              required final bool disablePaymentTermsDisplay,
+          @JsonKey(name: 'disableDeliveryDate', defaultValue: false)
+          @HiveField(128, defaultValue: false)
+              required final bool disableDeliveryDate,
+          @JsonKey(name: 'enableBillTo', defaultValue: false)
+          @HiveField(129, defaultValue: false)
+              required final bool enableBillTo,
+          @JsonKey(name: 'showPOAttachment', defaultValue: false)
+          @HiveField(130, defaultValue: false)
+              required final bool showPOAttachment,
+          @JsonKey(name: 'expiryDateDisplay', defaultValue: false)
+          @HiveField(131, defaultValue: false)
+              required final bool expiryDateDisplay,
+          @JsonKey(name: 'hideStockDisplay', defaultValue: false)
+          @HiveField(132, defaultValue: false)
+              required final bool hideStockDisplay,
+          @JsonKey(name: 'addOosMaterials', defaultValue: false)
+          @HiveField(133, defaultValue: false)
+              required final bool addOosMaterials,
+          @JsonKey(name: 'oosValue', defaultValue: 0)
+          @HiveField(134, defaultValue: 0)
+              required final int oosValue,
+          @JsonKey(name: 'enableRemarks', defaultValue: false)
+          @HiveField(135, defaultValue: false)
+              required final bool enableRemarks,
+          @JsonKey(name: 'enableOHPrice', defaultValue: true)
+          @HiveField(136, defaultValue: true)
+              required final bool enableOHPrice,
+          @JsonKey(name: 'ponRequired', defaultValue: false)
+          @HiveField(137, defaultValue: false)
+              required final bool poNumberRequired,
+          @JsonKey(name: 'enableIRN', defaultValue: false)
+          @HiveField(138, defaultValue: false)
+              required final bool enableIRN,
+          @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
+          @HiveField(139, defaultValue: false)
+              required final bool enableTaxDisplay,
+          @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
+          @HiveField(140, defaultValue: false)
+              required final bool enableTaxAtTotalLevelOnly,
+          @JsonKey(name: 'netPriceOverride', defaultValue: false)
+          @HiveField(141, defaultValue: false)
+              required final bool netPriceOverride,
+          @JsonKey(name: 'batchNumDisplay', defaultValue: false)
+          @HiveField(142, defaultValue: false)
+              required final bool batchNumDisplay,
+          @JsonKey(name: 'displayOrderDiscount', defaultValue: false)
+          @HiveField(143, defaultValue: false)
+              required final bool displayOrderDiscount,
+          @JsonKey(name: 'minOrderAmount', defaultValue: '0')
+          @HiveField(144, defaultValue: '0')
+              required final String minOrderAmount,
+          @JsonKey(name: 'salesOrgCode', defaultValue: '0')
+          @HiveField(145, defaultValue: '0')
+              required final String salesOrg,
+          @JsonKey(name: 'enableZDP8Override', defaultValue: false)
+          @HiveField(146, defaultValue: false)
+              required final bool enableZDP8Override,
+          @JsonKey(name: 'disableReturnsAccessSR', defaultValue: false)
+          @HiveField(147, defaultValue: false)
+              required final bool disableReturnsAccessSR,
+          @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
+          @HiveField(148, defaultValue: false)
+              required final bool disableReturnsAccess,
+          @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
+          @HiveField(149, defaultValue: false)
+              required final bool enableGreenDelivery,
+          @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
+          @HiveField(150, defaultValue: 2)
+              required final int greenDeliveryDelayInDays,
+          @JsonKey(name: 'enableComboDeals', defaultValue: false)
+          @HiveField(151, defaultValue: false)
+              required final bool enableComboDeals,
+          @JsonKey(name: 'greenDeliveryUserRole', defaultValue: 0)
+          @HiveField(152, defaultValue: 0)
+              required final int greenDeliveryUserRole,
+          @JsonKey(name: 'comboDealsUserRole', defaultValue: 0)
+          @HiveField(153, defaultValue: 0)
+              required final int comboDealsUserRole,
+          @JsonKey(name: 'enableGMN', defaultValue: false)
+          @HiveField(154, defaultValue: false)
+              required final bool enableGMN,
+          @JsonKey(name: 'displayItemTaxBreakdown', defaultValue: false)
+          @HiveField(155, defaultValue: false)
+              required final bool displayItemTaxBreakdown,
+          @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
+          @HiveField(156, defaultValue: false)
+              required final bool displaySubtotalTaxBreakdown}) =
+      _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -1974,8 +1976,8 @@ abstract class _SalesOrganisationConfigsDto
   @HiveField(104, defaultValue: false)
   bool get languageFilter;
   @override
-  @JsonKey(name: 'languageValue', defaultValue: '')
-  @HiveField(105, defaultValue: '')
+  @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
+  @HiveField(105, defaultValue: ApiLanguageCode.english)
   String get languageValue;
   @override
   @JsonKey(name: 'disablePrincipals', defaultValue: false)

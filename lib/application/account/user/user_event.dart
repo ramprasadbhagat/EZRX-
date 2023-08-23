@@ -8,7 +8,7 @@ class UserEvent with _$UserEvent {
   }) = _Fetch;
   const factory UserEvent.acceptTnc() = _AcceptTnc;
   const factory UserEvent.updateNotificationSettings({
-    required LanguageValue languagePreference,
+    required Locale languagePreference,
     required bool emailNotifications,
   }) = _UpdateNotificationSettings;
   const factory UserEvent.updatePaymentNotificationSettings({

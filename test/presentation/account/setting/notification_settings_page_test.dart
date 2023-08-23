@@ -10,7 +10,6 @@ import 'package:ezrxmobile/domain/account/entities/payment_advice_expiry_notific
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -102,7 +101,7 @@ void main() async {
           isLoginOnBehalf: false,
           user: User.empty().copyWith(
             settings: User.empty().settings.copyWith(
-                  languagePreference: LanguageValue(ApiLanguageCode.english),
+                  languagePreference: const Locale(ApiLanguageCode.english),
                   emailNotifications: false,
                   paymentNotification: PaymentNotification.empty().copyWith(
                     disablePaymentNotification: false,
@@ -185,8 +184,8 @@ void main() async {
         await tester.pump();
         verify(
           () => userBloc.add(
-            UserEvent.updateNotificationSettings(
-              languagePreference: LanguageValue(ApiLanguageCode.thai),
+            const UserEvent.updateNotificationSettings(
+              languagePreference: Locale(ApiLanguageCode.thai),
               emailNotifications: false,
             ),
           ),
@@ -204,8 +203,8 @@ void main() async {
         await tester.pump();
         verify(
           () => userBloc.add(
-            UserEvent.updateNotificationSettings(
-              languagePreference: LanguageValue(ApiLanguageCode.mandarin),
+            const UserEvent.updateNotificationSettings(
+              languagePreference: Locale(ApiLanguageCode.mandarin),
               emailNotifications: false,
             ),
           ),
@@ -223,8 +222,8 @@ void main() async {
         await tester.pump();
         verify(
           () => userBloc.add(
-            UserEvent.updateNotificationSettings(
-              languagePreference: LanguageValue(ApiLanguageCode.burmese),
+            const UserEvent.updateNotificationSettings(
+              languagePreference: Locale(ApiLanguageCode.burmese),
               emailNotifications: false,
             ),
           ),
@@ -242,8 +241,8 @@ void main() async {
         await tester.pump();
         verify(
           () => userBloc.add(
-            UserEvent.updateNotificationSettings(
-              languagePreference: LanguageValue(ApiLanguageCode.vietnamese),
+            const UserEvent.updateNotificationSettings(
+              languagePreference: Locale(ApiLanguageCode.vietnamese),
               emailNotifications: false,
             ),
           ),
@@ -260,8 +259,8 @@ void main() async {
         await tester.pump();
         verify(
           () => userBloc.add(
-            UserEvent.updateNotificationSettings(
-              languagePreference: LanguageValue(ApiLanguageCode.khmer),
+            const UserEvent.updateNotificationSettings(
+              languagePreference: Locale(ApiLanguageCode.khmer),
               emailNotifications: false,
             ),
           ),
@@ -279,8 +278,8 @@ void main() async {
         await tester.pump();
         verify(
           () => userBloc.add(
-            UserEvent.updateNotificationSettings(
-              languagePreference: LanguageValue(ApiLanguageCode.english),
+            const UserEvent.updateNotificationSettings(
+              languagePreference: Locale(ApiLanguageCode.english),
               emailNotifications: false,
             ),
           ),

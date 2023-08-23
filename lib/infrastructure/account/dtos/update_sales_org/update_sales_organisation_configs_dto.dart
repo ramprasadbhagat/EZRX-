@@ -1,6 +1,8 @@
+import 'dart:ui';
+
 import 'package:ezrxmobile/domain/account/entities/update_sales_org/update_sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'update_sales_organisation_configs_dto.freezed.dart';
@@ -30,7 +32,7 @@ class UpdateSalesOrganisationConfigsDto
         required bool languageFilter,
     @JsonKey(name: 'enableVat', defaultValue: false) required bool enableVat,
     @JsonKey(name: 'enableZDP5', defaultValue: false) required bool enableZDP5,
-    @JsonKey(name: 'languageValue', defaultValue: '')
+    @JsonKey(name: 'languageValue', readValue: handleEmptyLanguageValue)
         required String languageValue,
     @JsonKey(name: 'materialWithoutPrice', defaultValue: false)
         required bool materialWithoutPrice,
@@ -113,7 +115,7 @@ class UpdateSalesOrganisationConfigsDto
       hideCustomer: configs.hideCustomer,
       enableGimmickMaterial: configs.enableGimmickMaterial,
       languageFilter: configs.languageFilter,
-      languageValue: configs.languageValue.getOrDefaultValue(''),
+      languageValue: configs.languageValue.languageCode,
       disableOrderType: configs.disableOrderType,
       enableBatchNumber: configs.enableBatchNumber,
       disableBundles: configs.disableBundles,
@@ -164,7 +166,9 @@ class UpdateSalesOrganisationConfigsDto
       hideCustomer: hideCustomer,
       enableGimmickMaterial: enableGimmickMaterial,
       languageFilter: languageFilter,
-      languageValue: LanguageValue(languageValue),
+      languageValue: Locale(
+        languageValue,
+      ),
       disableOrderType: disableOrderType,
       enableBatchNumber: enableBatchNumber,
       disableBundles: disableBundles,
@@ -209,4 +213,10 @@ class UpdateSalesOrganisationConfigsDto
     Map<String, dynamic> json,
   ) =>
       _$UpdateSalesOrganisationConfigsDtoFromJson(json);
+}
+
+String handleEmptyLanguageValue(Map json, String key) {
+  final String languageValue = json[key] ?? '';
+
+  return languageValue.isNotEmpty ? languageValue : ApiLanguageCode.english;
 }

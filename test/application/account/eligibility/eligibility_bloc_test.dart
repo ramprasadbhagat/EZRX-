@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -62,7 +64,7 @@ void main() {
     disablePrincipals: false,
     enableGimmickMaterial: false,
     languageFilter: false,
-    languageValue: LanguageValue(ApiLanguageCode.english),
+    languageValue: const Locale(ApiLanguageCode.english),
     disableBundles: false,
     principalList: [],
     enableBatchNumber: false,

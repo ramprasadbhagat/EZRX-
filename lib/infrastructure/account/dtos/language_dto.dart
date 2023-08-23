@@ -1,5 +1,6 @@
+import 'dart:ui';
+
 import 'package:ezrxmobile/domain/auth/entities/language.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'language_dto.freezed.dart';
@@ -15,9 +16,9 @@ class LanguageDto with _$LanguageDto {
   factory LanguageDto.fromJson(Map<String, dynamic> json) =>
       _$LanguageDtoFromJson(json);
 
-  Language get toDomain => Language(subTag: LanguageValue(subTag));
+  Language get toDomain => Language(subTag: Locale(subTag));
 
   factory LanguageDto.fromDomain(Language language) => LanguageDto(
-        subTag: language.subTag.getOrDefaultValue(''),
+        subTag: language.subTag.languageCode,
       );
 }

@@ -32,7 +32,7 @@ mixin _$User {
   bool get disableCreateOrder => throw _privateConstructorUsedError;
   bool get disableReturns => throw _privateConstructorUsedError;
   bool get hasPriceOverride => throw _privateConstructorUsedError;
-  LanguageValue get preferredLanguage => throw _privateConstructorUsedError;
+  Locale get preferredLanguage => throw _privateConstructorUsedError;
   List<Language> get supportedLanguages => throw _privateConstructorUsedError;
   MobileNumber get mobileNumber => throw _privateConstructorUsedError;
 
@@ -61,7 +61,7 @@ abstract class $UserCopyWith<$Res> {
       bool disableCreateOrder,
       bool disableReturns,
       bool hasPriceOverride,
-      LanguageValue preferredLanguage,
+      Locale preferredLanguage,
       List<Language> supportedLanguages,
       MobileNumber mobileNumber});
 
@@ -167,7 +167,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       preferredLanguage: null == preferredLanguage
           ? _value.preferredLanguage
           : preferredLanguage // ignore: cast_nullable_to_non_nullable
-              as LanguageValue,
+              as Locale,
       supportedLanguages: null == supportedLanguages
           ? _value.supportedLanguages
           : supportedLanguages // ignore: cast_nullable_to_non_nullable
@@ -234,7 +234,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool disableCreateOrder,
       bool disableReturns,
       bool hasPriceOverride,
-      LanguageValue preferredLanguage,
+      Locale preferredLanguage,
       List<Language> supportedLanguages,
       MobileNumber mobileNumber});
 
@@ -340,7 +340,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
       preferredLanguage: null == preferredLanguage
           ? _value.preferredLanguage
           : preferredLanguage // ignore: cast_nullable_to_non_nullable
-              as LanguageValue,
+              as Locale,
       supportedLanguages: null == supportedLanguages
           ? _value._supportedLanguages
           : supportedLanguages // ignore: cast_nullable_to_non_nullable
@@ -417,7 +417,7 @@ class _$_User extends _User {
   @override
   final bool hasPriceOverride;
   @override
-  final LanguageValue preferredLanguage;
+  final Locale preferredLanguage;
   final List<Language> _supportedLanguages;
   @override
   List<Language> get supportedLanguages {
@@ -521,7 +521,7 @@ abstract class _User extends User {
       required final bool disableCreateOrder,
       required final bool disableReturns,
       required final bool hasPriceOverride,
-      required final LanguageValue preferredLanguage,
+      required final Locale preferredLanguage,
       required final List<Language> supportedLanguages,
       required final MobileNumber mobileNumber}) = _$_User;
   const _User._() : super._();
@@ -557,7 +557,7 @@ abstract class _User extends User {
   @override
   bool get hasPriceOverride;
   @override
-  LanguageValue get preferredLanguage;
+  Locale get preferredLanguage;
   @override
   List<Language> get supportedLanguages;
   @override

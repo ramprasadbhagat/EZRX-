@@ -188,7 +188,7 @@ void main() {
         when(
           () =>
               remoteDataSourceMock.updateUserNotificationAndLanguagePreference(
-            languagePreference: '',
+            languagePreference: 'EN',
             emailNotification: false,
             userId: '',
           ),
@@ -222,7 +222,7 @@ void main() {
         when(
           () =>
               remoteDataSourceMock.updateUserNotificationAndLanguagePreference(
-            languagePreference: '',
+            languagePreference: 'EN',
             emailNotification: false,
             userId: '',
           ),

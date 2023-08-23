@@ -22,7 +22,7 @@ mixin _$UserEvent {
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
-            LanguageValue languagePreference, bool emailNotifications)
+            Locale languagePreference, bool emailNotifications)
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
@@ -34,8 +34,7 @@ mixin _$UserEvent {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
-    TResult? Function(
-            LanguageValue languagePreference, bool emailNotifications)?
+    TResult? Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -47,7 +46,7 @@ mixin _$UserEvent {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
-    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
+    TResult Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -153,7 +152,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
-            LanguageValue languagePreference, bool emailNotifications)
+            Locale languagePreference, bool emailNotifications)
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
@@ -168,8 +167,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
-    TResult? Function(
-            LanguageValue languagePreference, bool emailNotifications)?
+    TResult? Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -184,7 +182,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
-    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
+    TResult Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -319,7 +317,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
-            LanguageValue languagePreference, bool emailNotifications)
+            Locale languagePreference, bool emailNotifications)
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
@@ -334,8 +332,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
-    TResult? Function(
-            LanguageValue languagePreference, bool emailNotifications)?
+    TResult? Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -350,7 +347,7 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
-    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
+    TResult Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -464,7 +461,7 @@ class _$_AcceptTnc implements _AcceptTnc {
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
-            LanguageValue languagePreference, bool emailNotifications)
+            Locale languagePreference, bool emailNotifications)
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
@@ -479,8 +476,7 @@ class _$_AcceptTnc implements _AcceptTnc {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
-    TResult? Function(
-            LanguageValue languagePreference, bool emailNotifications)?
+    TResult? Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -495,7 +491,7 @@ class _$_AcceptTnc implements _AcceptTnc {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
-    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
+    TResult Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -569,7 +565,7 @@ abstract class _$$_UpdateNotificationSettingsCopyWith<$Res> {
           $Res Function(_$_UpdateNotificationSettings) then) =
       __$$_UpdateNotificationSettingsCopyWithImpl<$Res>;
   @useResult
-  $Res call({LanguageValue languagePreference, bool emailNotifications});
+  $Res call({Locale languagePreference, bool emailNotifications});
 }
 
 /// @nodoc
@@ -591,7 +587,7 @@ class __$$_UpdateNotificationSettingsCopyWithImpl<$Res>
       languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
-              as LanguageValue,
+              as Locale,
       emailNotifications: null == emailNotifications
           ? _value.emailNotifications
           : emailNotifications // ignore: cast_nullable_to_non_nullable
@@ -607,7 +603,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
       {required this.languagePreference, required this.emailNotifications});
 
   @override
-  final LanguageValue languagePreference;
+  final Locale languagePreference;
   @override
   final bool emailNotifications;
 
@@ -645,7 +641,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
-            LanguageValue languagePreference, bool emailNotifications)
+            Locale languagePreference, bool emailNotifications)
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
@@ -660,8 +656,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
-    TResult? Function(
-            LanguageValue languagePreference, bool emailNotifications)?
+    TResult? Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -677,7 +672,7 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
-    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
+    TResult Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -742,10 +737,10 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
 
 abstract class _UpdateNotificationSettings implements UserEvent {
   const factory _UpdateNotificationSettings(
-      {required final LanguageValue languagePreference,
+      {required final Locale languagePreference,
       required final bool emailNotifications}) = _$_UpdateNotificationSettings;
 
-  LanguageValue get languagePreference;
+  Locale get languagePreference;
   bool get emailNotifications;
   @JsonKey(ignore: true)
   _$$_UpdateNotificationSettingsCopyWith<_$_UpdateNotificationSettings>
@@ -838,7 +833,7 @@ class _$_UpdatePaymentNotificationSettings
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
-            LanguageValue languagePreference, bool emailNotifications)
+            Locale languagePreference, bool emailNotifications)
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
@@ -853,8 +848,7 @@ class _$_UpdatePaymentNotificationSettings
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
-    TResult? Function(
-            LanguageValue languagePreference, bool emailNotifications)?
+    TResult? Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -869,7 +863,7 @@ class _$_UpdatePaymentNotificationSettings
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
-    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
+    TResult Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -1023,7 +1017,7 @@ class _$_UpdateLanguage implements _UpdateLanguage {
     required TResult Function(bool isLoginOnBehalf) fetch,
     required TResult Function() acceptTnc,
     required TResult Function(
-            LanguageValue languagePreference, bool emailNotifications)
+            Locale languagePreference, bool emailNotifications)
         updateNotificationSettings,
     required TResult Function(PaymentNotification paymentNotification)
         updatePaymentNotificationSettings,
@@ -1038,8 +1032,7 @@ class _$_UpdateLanguage implements _UpdateLanguage {
     TResult? Function()? initialized,
     TResult? Function(bool isLoginOnBehalf)? fetch,
     TResult? Function()? acceptTnc,
-    TResult? Function(
-            LanguageValue languagePreference, bool emailNotifications)?
+    TResult? Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult? Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,
@@ -1054,7 +1047,7 @@ class _$_UpdateLanguage implements _UpdateLanguage {
     TResult Function()? initialized,
     TResult Function(bool isLoginOnBehalf)? fetch,
     TResult Function()? acceptTnc,
-    TResult Function(LanguageValue languagePreference, bool emailNotifications)?
+    TResult Function(Locale languagePreference, bool emailNotifications)?
         updateNotificationSettings,
     TResult Function(PaymentNotification paymentNotification)?
         updatePaymentNotificationSettings,

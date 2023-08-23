@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -6,7 +8,6 @@ import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -144,7 +145,7 @@ void main() {
           () => userRepoMock.updateNotificationSettings(
             User.empty().copyWith(
               settings: Settings.empty().copyWith(
-                languagePreference: LanguageValue(ApiLanguageCode.english),
+                languagePreference: const Locale(ApiLanguageCode.english),
                 emailNotifications: true,
               ),
             ),
@@ -154,8 +155,8 @@ void main() {
         );
       },
       act: (UserBloc bloc) => bloc.add(
-        UserEvent.updateNotificationSettings(
-          languagePreference: LanguageValue(ApiLanguageCode.english),
+        const UserEvent.updateNotificationSettings(
+          languagePreference: Locale(ApiLanguageCode.english),
           emailNotifications: true,
         ),
       ),
@@ -177,7 +178,7 @@ void main() {
           () => userRepoMock.updateNotificationSettings(
             User.empty().copyWith(
               settings: Settings.empty().copyWith(
-                languagePreference: LanguageValue(ApiLanguageCode.english),
+                languagePreference: const Locale(ApiLanguageCode.english),
                 emailNotifications: true,
               ),
             ),
@@ -189,8 +190,8 @@ void main() {
         );
       },
       act: (UserBloc bloc) => bloc.add(
-        UserEvent.updateNotificationSettings(
-          languagePreference: LanguageValue(ApiLanguageCode.english),
+        const UserEvent.updateNotificationSettings(
+          languagePreference: Locale(ApiLanguageCode.english),
           emailNotifications: true,
         ),
       ),

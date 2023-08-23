@@ -40,12 +40,12 @@ class ViewByOrderDetailsRepository implements IViewByOrderDetailsRepository {
               .getOrderHistoryDetailsForSalesRep(
               companyName: '',
               orderId: orderHeader.orderNumber.getOrCrash(),
-              language: '',
+              language: user.preferredLanguage.languageCode,
               userName: user.username.getOrCrash(),
             )
           : await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
               orderId: orderHeader.orderNumber.getOrCrash(),
-              language: user.preferredLanguage.getOrCrash(),
+              language: user.preferredLanguage.languageCode,
             );
 
       return Right(orderHistoryDetailsList);

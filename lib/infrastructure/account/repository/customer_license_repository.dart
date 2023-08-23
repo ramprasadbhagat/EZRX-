@@ -44,11 +44,11 @@ class CustomerLicenseRepository implements ICustomerLicenseRepository {
       final customerLicense = await remoteDataSource.getCustomerLicense(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCode.customerCodeSoldTo,
-        language: user.preferredLanguage.getOrCrash(),
+        language: user.preferredLanguage.languageCode,
         offset: offset,
         pageSize: pageSize,
       );
-      
+
       return Right(customerLicense);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));

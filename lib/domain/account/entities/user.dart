@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
@@ -7,6 +9,7 @@ import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -32,7 +35,7 @@ class User with _$User {
     required bool disableCreateOrder,
     required bool disableReturns,
     required bool hasPriceOverride,
-    required LanguageValue preferredLanguage,
+    required Locale preferredLanguage,
     required List<Language> supportedLanguages,
     required MobileNumber mobileNumber,
   }) = _User;
@@ -49,7 +52,7 @@ class User with _$User {
         settings: Settings(
           emailNotifications: false,
           mobileNotifications: false,
-          languagePreference: LanguageValue(''),
+          languagePreference: const Locale(ApiLanguageCode.english),
           paymentNotification: PaymentNotification.empty(),
         ),
         acceptPrivacyPolicy: false,
@@ -58,7 +61,7 @@ class User with _$User {
         disableCreateOrder: false,
         disableReturns: false,
         hasPriceOverride: false,
-        preferredLanguage: LanguageValue(''),
+        preferredLanguage: const Locale(ApiLanguageCode.english),
         supportedLanguages: <Language>[],
         mobileNumber: MobileNumber(''),
       );

@@ -27,7 +27,7 @@ mixin _$UpdateSalesOrganisationConfigs {
   bool get languageFilter => throw _privateConstructorUsedError;
   bool get enableVat => throw _privateConstructorUsedError;
   bool get enableZDP5 => throw _privateConstructorUsedError;
-  LanguageValue get languageValue => throw _privateConstructorUsedError;
+  Locale get languageValue => throw _privateConstructorUsedError;
   bool get materialWithoutPrice => throw _privateConstructorUsedError;
   bool get enableZDP8Override => throw _privateConstructorUsedError;
   bool get displayOrderDiscount => throw _privateConstructorUsedError;
@@ -90,7 +90,7 @@ abstract class $UpdateSalesOrganisationConfigsCopyWith<$Res> {
       bool languageFilter,
       bool enableVat,
       bool enableZDP5,
-      LanguageValue languageValue,
+      Locale languageValue,
       bool materialWithoutPrice,
       bool enableZDP8Override,
       bool displayOrderDiscount,
@@ -238,7 +238,7 @@ class _$UpdateSalesOrganisationConfigsCopyWithImpl<$Res,
       languageValue: null == languageValue
           ? _value.languageValue
           : languageValue // ignore: cast_nullable_to_non_nullable
-              as LanguageValue,
+              as Locale,
       materialWithoutPrice: null == materialWithoutPrice
           ? _value.materialWithoutPrice
           : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
@@ -404,7 +404,7 @@ abstract class _$$_UpdateSalesOrganisationConfigsCopyWith<$Res>
       bool languageFilter,
       bool enableVat,
       bool enableZDP5,
-      LanguageValue languageValue,
+      Locale languageValue,
       bool materialWithoutPrice,
       bool enableZDP8Override,
       bool displayOrderDiscount,
@@ -551,7 +551,7 @@ class __$$_UpdateSalesOrganisationConfigsCopyWithImpl<$Res>
       languageValue: null == languageValue
           ? _value.languageValue
           : languageValue // ignore: cast_nullable_to_non_nullable
-              as LanguageValue,
+              as Locale,
       materialWithoutPrice: null == materialWithoutPrice
           ? _value.materialWithoutPrice
           : materialWithoutPrice // ignore: cast_nullable_to_non_nullable
@@ -773,7 +773,7 @@ class _$_UpdateSalesOrganisationConfigs
   @override
   final bool enableZDP5;
   @override
-  final LanguageValue languageValue;
+  final Locale languageValue;
   @override
   final bool materialWithoutPrice;
   @override
@@ -1013,7 +1013,7 @@ abstract class _UpdateSalesOrganisationConfigs
       required final bool languageFilter,
       required final bool enableVat,
       required final bool enableZDP5,
-      required final LanguageValue languageValue,
+      required final Locale languageValue,
       required final bool materialWithoutPrice,
       required final bool enableZDP8Override,
       required final bool displayOrderDiscount,
@@ -1074,7 +1074,7 @@ abstract class _UpdateSalesOrganisationConfigs
   @override
   bool get enableZDP5;
   @override
-  LanguageValue get languageValue;
+  Locale get languageValue;
   @override
   bool get materialWithoutPrice;
   @override

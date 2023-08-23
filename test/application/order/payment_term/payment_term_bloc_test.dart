@@ -51,7 +51,7 @@ void main() {
     disablePrincipals: false,
     enableGimmickMaterial: false,
     languageFilter: true,
-    languageValue: LanguageValue(ApiLanguageCode.english),
+    languageValue: const Locale(ApiLanguageCode.english),
     disableBundles: false,
     principalList: [],
     enableBatchNumber: false,

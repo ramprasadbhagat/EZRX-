@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -9,7 +11,6 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_filter_remote.dart';
@@ -114,7 +115,7 @@ void main() {
         salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
           salesOrg: SalesOrg('2601'),
           languageFilter: true,
-          languageValue: LanguageValue(ApiLanguageCode.english),
+          languageValue: const Locale(ApiLanguageCode.english),
           currency: Currency('SG'),
         ),
         salesOrganisation: fakeSaleOrg,
@@ -152,7 +153,7 @@ void main() {
         salesOrgConfig: mockSalesOrganisationConfigs.copyWith(
           salesOrg: SalesOrg('2601'),
           languageFilter: true,
-          languageValue: LanguageValue(ApiLanguageCode.english),
+          languageValue: const Locale(ApiLanguageCode.english),
           currency: Currency('SG'),
         ),
         salesOrganisation: fakeSaleOrg,

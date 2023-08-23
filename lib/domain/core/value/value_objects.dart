@@ -148,21 +148,6 @@ class DateTimeStringValue extends ValueObject<String> {
   const DateTimeStringValue._(this.value);
 }
 
-class LanguageValue extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory LanguageValue(String input) {
-    return LanguageValue._(validateStringNotEmpty(input));
-  }
-
-  String get languageString => getLanguageString(value.getOrElse(() => ''));
-
-  Locale get toLocal => toLocale(value.getOrElse(() => 'en'));
-
-  const LanguageValue._(this.value);
-}
-
 class StringValue extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

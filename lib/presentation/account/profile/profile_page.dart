@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/language_picker.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -24,9 +25,6 @@ part 'widgets/header.dart';
 part 'widgets/language_dropdown.dart';
 part 'widgets/user_details.dart';
 part 'widgets/license_tile.dart';
-
-
-
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);

@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -52,7 +51,7 @@ class LanguagePicker extends StatelessWidget {
 
 extension LocaleExtension on Locale {
   String languageString() {
-    switch (languageCode) {
+    switch (languageCode.toLowerCase()) {
       case 'en':
         return 'English';
       case 'th':
@@ -88,5 +87,5 @@ extension LocaleExtension on Locale {
     }
   }
 
-  LanguageValue get languageValue => LanguageValue(apiLanguageCode());
+  Locale get languageValue => Locale(apiLanguageCode());
 }

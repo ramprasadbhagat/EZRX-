@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
@@ -33,14 +34,14 @@ void main() {
     shipToCustomerCode: 'fake-shipto',
   );
   final user = User.empty().copyWith(
-      username: Username('fake-name'),
-      role: Role(
-        description: 'fake-desc',
-        id: 'id',
-        name: 'fake-name',
-        type: RoleType('fake-type'),
-      ),
-    preferredLanguage: LanguageValue('EN'),
+    username: Username('fake-name'),
+    role: Role(
+      description: 'fake-desc',
+      id: 'id',
+      name: 'fake-name',
+      type: RoleType('fake-type'),
+    ),
+    preferredLanguage: const Locale(ApiLanguageCode.english),
     mobileNumber: MobileNumber(''),
   );
   final searchKey = SearchKey('fake-key');

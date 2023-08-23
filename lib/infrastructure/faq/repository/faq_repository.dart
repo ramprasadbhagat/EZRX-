@@ -46,7 +46,7 @@ class FAQInfoRepository extends IFAQInfoRepository {
         template: config.faqTemplate,
         pageSize: pageSize,
         variablePath: salesOrg.faqVariablePath,
-        lang: preferredLanguage.getOrCrash(),
+        lang: preferredLanguage.languageCode,
         after: after,
       );
 

@@ -23,7 +23,7 @@ class UserState with _$UserState {
   FullName get userFullName => user.fullName;
   bool get userCanLoginOnBehalf => user.role.type.canLoginOnBehalf;
   bool get userHasReturnsAdminAccess => user.role.type.hasReturnsAdminAccess;
-  LanguageValue get languagePreference => user.settings.languagePreference;
+  Locale get languagePreference => user.settings.languagePreference;
   bool get emailNotifications => user.settings.emailNotifications;
   List<SalesOrganisation> get userSalesOrganisations =>
       user.userSalesOrganisations;

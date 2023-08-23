@@ -213,39 +213,6 @@ String emptyIfZero(num value) {
 int getDateTimeIntValue(String value) =>
     isNumericOnly(value) ? int.parse(value) : 0;
 
-String getLanguageString(String apiLanguageCode) {
-  switch (apiLanguageCode) {
-    case ApiLanguageCode.thai:
-      return 'ภาษาไทย';
-    case ApiLanguageCode.mandarin:
-      return '繁體中文';
-    case ApiLanguageCode.burmese:
-      return 'ဗမာဘာသာစကား';
-    case ApiLanguageCode.vietnamese:
-      return 'Tiếng Việt';
-    case ApiLanguageCode.khmer:
-      return 'ភាសាខ្មែរ';
-    case ApiLanguageCode.english:
-    default:
-      return 'English';
-  }
-}
-
-Locale toLocale(String apiLanguageCode) {
-  final languageLocal = {
-    'EN': const Locale('en'),
-    'E': const Locale('en'),
-    'TH': const Locale('th'),
-    'TW': const Locale('zh'),
-    'ZH': const Locale('zh'),
-    'MM': const Locale('my'),
-    'VN': const Locale('vi'),
-    'KH': const Locale('kh'),
-  };
-
-  return languageLocal[apiLanguageCode] ?? const Locale('en');
-}
-
 String dashIfEmpty(String text) {
   return text.isEmpty ? '-' : text;
 }
@@ -424,7 +391,6 @@ Color getDisplayStatusTextColor(String status) {
 Color getAdviceExpiryColor(String status) {
   return isSuccessfulOrProcessed(status) ? ZPColors.white : ZPColors.red;
 }
-
 
 bool differenceNGTWeek(DateTime date) {
   final diff = DateTime.now().difference(date).inDays;

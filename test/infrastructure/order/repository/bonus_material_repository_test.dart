@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -10,7 +12,6 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
@@ -41,7 +42,7 @@ void main() {
   final mockSalesOrganisationConfigs =
       SalesOrganisationConfigs.empty().copyWith(
     languageFilter: true,
-    languageValue: LanguageValue(ApiLanguageCode.english),
+    languageValue: const Locale(ApiLanguageCode.english),
     disablePrincipals: true,
     enableGimmickMaterial: true,
     principalList: [
