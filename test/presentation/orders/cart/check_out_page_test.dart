@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -195,7 +196,7 @@ void main() {
         );
       },
     );
-     testWidgets(
+    testWidgets(
       '=> test PO Reference in place Order when  poNumberRequired is false ',
       (tester) async {
         when(() => additionalDetailsBlocMock.state).thenReturn(
@@ -234,8 +235,80 @@ void main() {
           (tester.widget(customerPOReferenceKey) as TextFormField)
               .validator
               ?.call('PO reference is a required field.'),
-         null,
+          null,
         );
+      },
+    );
+
+    testWidgets(
+      '=> test Payment Terms enabled',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              disablePaymentTermsDisplay: false,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPage = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPage, findsOneWidget);
+
+        final paymentTermDropdown =
+            find.byKey(WidgetKeys.paymentTermDropdownKey);
+        expect(paymentTermDropdown, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      '=> test Payment Terms Display enabled',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: true,
+          ),
+        );
+        when(() => orderSummaryBlocMock.state).thenReturn(
+          OrderSummaryState.initial().copyWith(
+            isSubmitting: true,
+          ),
+        );
+        when(() => salesOrgBlocMock.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              disablePaymentTermsDisplay: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        final checkoutPage = find.byKey(WidgetKeys.checkoutPage);
+        expect(checkoutPage, findsOneWidget);
+
+        final paymentTermDropdown =
+            find.byKey(WidgetKeys.paymentTermDropdownKey);
+        expect(paymentTermDropdown, findsNothing);
       },
     );
   });
