@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -34,6 +35,44 @@ class ProductDetailImage extends StatelessWidget {
               bottom: 10,
               right: 10,
               child: _ImageCounter(),
+            ),
+            BlocBuilder<ProductDetailBloc, ProductDetailState>(
+              buildWhen: (previous, current) =>
+                  previous.productDetailAggregate !=
+                      current.productDetailAggregate &&
+                  current.productDetailAggregate !=
+                      ProductDetailAggregate.empty(),
+              builder: (context, state) {
+                final productDetailAggregate = state.productDetailAggregate;
+
+                return productDetailAggregate
+                        .materialInfo.bundle.materials.isNotEmpty
+                    ? Positioned(
+                        bottom: 10,
+                        left: 10,
+                        right: 60,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              productDetailAggregate
+                                  .materialInfo.materialNumber.displayMatNo,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(color: ZPColors.darkGray),
+                            ),
+                            Text(
+                              productDetailAggregate.materialInfo.manufactured,
+                              style: Theme.of(context).textTheme.labelSmall,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      )
+                    : const SizedBox.shrink();
+              },
             ),
           ],
         ),
