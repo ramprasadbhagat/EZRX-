@@ -82,7 +82,9 @@ class AuthInterceptor extends Interceptor {
     try {
       if (response.data['errors'] != null &&
           response.data['errors'].isNotEmpty &&
-          response.data['errors'][0]['message'] == 'authentication failed') {
+          (response.data['errors'][0]['message'] == 'authentication failed' ||
+              response.data['errors'][0]['message'] ==
+                  'status: 401, message: token has either expired or its not valid')) {
         final newJwt = await _refreshToken();
         if (newJwt != null) {
           final newResponse = await _retry(newJwt, response.requestOptions);
