@@ -188,7 +188,8 @@ class _CreditGroup extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
-                  'Documents created on ${data.dueDate.dateString}'.tr(),
+                  '${'Documents created on'.tr()} ${data.dueDate.dateString}'
+                      .tr(),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkerGrey,
                       ),
@@ -240,7 +241,7 @@ class _CreditsItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '${creditItem.accountingDocumentType} #${creditItem.searchKey}',
+              '${creditItem.postingKeyName} #${creditItem.searchKey}',
               style: Theme.of(context).textTheme.labelSmall,
             ),
             StatusLabel(
@@ -254,19 +255,17 @@ class _CreditsItem extends StatelessWidget {
           padding: const EdgeInsets.only(
             top: 8,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                creditItem.postingKeyName,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              PriceComponent(
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
-                    .toString(),
-              ),
-            ],
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: PriceComponent(
+              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
+                  .toString(),
+              priceLabelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: ZPColors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
           ),
         ),
       ),

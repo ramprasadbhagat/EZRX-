@@ -28,7 +28,7 @@ class CreditDetailsSection extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '${creditItem.accountingDocumentType} #${creditItem.searchKey}',
+                  '${creditItem.postingKeyName} #${creditItem.searchKey}',
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                         color: ZPColors.white,
                       ),
@@ -57,7 +57,7 @@ class CreditDetailsSection extends StatelessWidget {
               ),
               BalanceTextRow(
                 keyText: 'Document type'.tr(),
-                valueText: creditItem.accountingDocumentType,
+                valueText: creditItem.postingKeyName,
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
