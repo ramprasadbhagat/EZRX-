@@ -32,7 +32,6 @@ import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
-import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
@@ -44,7 +43,6 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/returns/entities/request_return_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -900,16 +898,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           );
 
-      if (user.role.type.hasReturnsAdminAccess) {
-        context.read<RequestReturnBloc>().add(
-              RequestReturnEvent.fetch(
-                salesOrg: salesOrgState.salesOrganisation,
-                customerCodeInfo: customerCodeInfo,
-                shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-                requestReturnFilter: RequestReturnFilter.empty(),
-              ),
-            );
-      }
       context.read<PaymentSummaryBloc>().add(
             PaymentSummaryEvent.fetchPaymentSummaryList(
               salesOrganization:

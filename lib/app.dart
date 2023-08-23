@@ -51,13 +51,11 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_lis
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
-import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
@@ -128,24 +126,14 @@ import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.da
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
-
 import 'package:ezrxmobile/application/returns/return_price/return_price_bloc.dart';
-
-import 'package:ezrxmobile/application/returns/submit_return/submit_return_bloc.dart';
-
 import 'package:wakelock/wakelock.dart';
-
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
-
 import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
-
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
-
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
-
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
-
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
@@ -373,14 +361,8 @@ class App extends StatelessWidget {
         BlocProvider<ReturnsOverviewBloc>(
           create: (context) => locator<ReturnsOverviewBloc>(),
         ),
-        BlocProvider<RequestReturnBloc>(
-          create: (context) => locator<RequestReturnBloc>(),
-        ),
         BlocProvider<ReturnApproverBloc>(
           create: (context) => locator<ReturnApproverBloc>(),
-        ),
-        BlocProvider<RequestReturnFilterBloc>(
-          create: (context) => locator<RequestReturnFilterBloc>(),
         ),
         BlocProvider<ReturnApproverFilterBloc>(
           create: (context) => locator<ReturnApproverFilterBloc>(),
@@ -421,9 +403,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReturnPriceBloc>(
           create: (context) => locator<ReturnPriceBloc>(),
-        ),
-        BlocProvider<SubmitReturnBloc>(
-          create: (context) => locator<SubmitReturnBloc>(),
         ),
         BlocProvider<DeepLinkingBloc>(
           create: (context) => locator<DeepLinkingBloc>(),

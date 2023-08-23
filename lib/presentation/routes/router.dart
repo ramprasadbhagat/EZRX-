@@ -75,9 +75,6 @@ import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
-import 'package:ezrxmobile/presentation/returns/request_return/request_return_details.dart';
-import 'package:ezrxmobile/presentation/returns/request_return/return_details_summary_page.dart';
-import 'package:ezrxmobile/presentation/returns/request_return/return_request_success.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/add_sales_district_page.dart';
@@ -314,12 +311,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       transitionsBuilder: TransitionsBuilders.slideBottom,
       fullscreenDialog: true,
     ),
-    AutoRoute(path: 'request_return_details', page: RequestReturnDetails),
-    AutoRoute(
-      path: 'request_return_details_summary',
-      page: RequestReturnDetailsSummaryPage,
-    ),
-    AutoRoute(path: 'request_return_success', page: ReturnRequestSuccessPage),
     CustomRoute(
       path: 'orders/add_to_cart',
       page: AddToCart,

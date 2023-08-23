@@ -69,7 +69,6 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_l
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/request_return_filter/request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/view_by_request_filter/view_by_request_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
@@ -118,7 +117,6 @@ import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart'
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
-import 'package:ezrxmobile/application/returns/request_return/request_return_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
@@ -340,14 +338,11 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuratio
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/request_information_query.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/request_return_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/request_return_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_query.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_list_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_remote.dart';
@@ -364,7 +359,6 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_mu
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_invoices_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_repository.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/request_return_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_details_by_request_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_list_repository.dart';
@@ -391,11 +385,6 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_price_reposi
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_price_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_mutation.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_local_datasource.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/submit_return_request_repository.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/submit_return_request_remote_datasource.dart';
-import 'package:ezrxmobile/application/returns/submit_return/submit_return_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_local_datasource.dart';
@@ -407,70 +396,40 @@ import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_remo
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_district_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_district_repository.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/sales_district/sales_district_bloc.dart';
-
 import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
-
 import 'package:ezrxmobile/infrastructure/account/repository/update_payment_notification_repository.dart';
-
 import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_notification_local_datasource.dart';
-
 import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_notification_mutation.dart';
-
 import 'package:ezrxmobile/infrastructure/account/datasource/update_payment_notification_remote_datasource.dart';
-
 import 'package:ezrxmobile/infrastructure/payments/repository/download_payment_attachment_repository.dart';
-
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
-
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_local_datasource.dart';
-
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_remote_datasource.dart';
-
 import 'package:ezrxmobile/infrastructure/payments/datasource/download_payment_attachment_query.dart';
-
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
-
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_remote.dart';
-
 import 'package:ezrxmobile/infrastructure/order/repository/product_search_repository.dart';
-
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
-
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
-
 import 'package:ezrxmobile/infrastructure/announcement_info/repository/announcement_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_remote.dart';
 import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_item_repository.dart';
-
 import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_query_mutation.dart';
-
 import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_local_datasource.dart';
-
 import 'package:ezrxmobile/infrastructure/order/repository/recent_order_repository.dart';
-
 import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_remote_datasource.dart';
-
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
-
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_details_remote.dart';
-
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
-
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_remote.dart';
-
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_query_mutation.dart';
-
 import 'package:ezrxmobile/infrastructure/article_info/repository/article_info_repository.dart';
-
 import 'package:ezrxmobile/infrastructure/article_info/datasource/article_info_local.dart';
-
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_remote.dart';
-
 import 'package:ezrxmobile/infrastructure/faq/datasource/faq_query_mutaion.dart';
 
 GetIt locator = GetIt.instance;
@@ -1802,42 +1761,6 @@ void setupLocator() {
   );
 
   //============================================================
-  //  Return Request List
-  //
-  //============================================================
-
-  locator.registerLazySingleton(() => RequestReturnLocalDatasource());
-
-  locator.registerLazySingleton(() => ReturnRequestListQuery());
-
-  locator.registerLazySingleton(
-    () => RequestReturnRemoteDatasource(
-      httpService: locator<HttpService>(),
-      query: locator<ReturnRequestListQuery>(),
-      config: locator<Config>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => RequestReturnRepository(
-      config: locator<Config>(),
-      localDataSource: locator<RequestReturnLocalDatasource>(),
-      remoteDataSource: locator<RequestReturnRemoteDatasource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => RequestReturnBloc(
-      returnRequestRepository: locator<RequestReturnRepository>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => RequestReturnFilterBloc(),
-  );
-
-  //============================================================
   //  Cart
   //
   //============================================================
@@ -2333,42 +2256,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ReturnPriceBloc(
       returnPriceRepository: locator<ReturnPriceRepository>(),
-    ),
-  );
-
-  //============================================================
-  //  Submit Return
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => SubmitReturnRequestMutation(),
-  );
-
-  locator.registerLazySingleton(
-    () => SubmitReturnRequestLocalDataSource(),
-  );
-
-  locator.registerLazySingleton(
-    () => SubmitRequestReturnRepository(
-      config: locator<Config>(),
-      localDataSource: locator<SubmitReturnRequestLocalDataSource>(),
-      remoteDataSource: locator<SubmitReturnRequestRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => SubmitReturnRequestRemoteDataSource(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      returnRequestMutation: locator<SubmitReturnRequestMutation>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => SubmitReturnBloc(
-      submitRequestRepository: locator<SubmitRequestReturnRepository>(),
     ),
   );
 
