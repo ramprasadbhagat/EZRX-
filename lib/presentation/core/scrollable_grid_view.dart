@@ -111,15 +111,13 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
   }
 
   double _getResponsiveAspectRatio(BuildContext context) {
-    final cardWidth = MediaQuery.of(context).size.width / 3.1;
-    final cardHeight = MediaQuery.of(context).size.height / 4;
     if (Responsive.isLargerThan(context, Breakpoint.xl)) {
       return 1 / 0.9;
     } else if (Responsive.isLargerThan(context, Breakpoint.desktop)) {
-      return 1 / 1.3;
+      return 1 / 1.8;
     }
 
-    return cardWidth / cardHeight;
+    return 1 / 1.7;
   }
 }
 

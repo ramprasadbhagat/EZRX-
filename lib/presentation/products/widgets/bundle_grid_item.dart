@@ -1,19 +1,9 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/product_image.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of '../products_tab.dart';
 
-class BundleGridItem extends StatelessWidget {
+class _BundleGridItem extends StatelessWidget {
   final MaterialInfo materialInfo;
 
-  const BundleGridItem({
+  const _BundleGridItem({
     required this.materialInfo,
     Key? key,
   }) : super(key: key);
@@ -28,38 +18,48 @@ class BundleGridItem extends StatelessWidget {
         padding: const EdgeInsets.all(0),
         child: Column(
           children: [
-            Container(
+            ColoredBox(
               color: ZPColors.blueTagColor,
-              padding: const EdgeInsets.symmetric(
-                vertical: 8.0,
-                horizontal: 10.0,
-              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    materialInfo.materialNumber.displayMatNo,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: ZPColors.darkGray,
-                        ),
-                  ),
+                  const _BundleLabel(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      materialInfo.displayDescription,
-                      style: Theme.of(context).textTheme.labelSmall,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 5.0,
                     ),
-                  ),
-                  Text(
-                    materialInfo.manufactured,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: ZPColors.darkGray,
-                          fontSize: 10,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          materialInfo.materialNumber.displayMatNo,
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: ZPColors.darkGray,
+                                  ),
                         ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                        const SizedBox(height: 2),
+                        Text(
+                          materialInfo.displayDescription,
+                          style: Theme.of(context).textTheme.labelSmall,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          materialInfo.manufactured,
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: ZPColors.darkGray,
+                                    fontSize: 10,
+                                  ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 3),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -70,10 +70,13 @@ class BundleGridItem extends StatelessWidget {
                   .toList(),
             ),
             materialInfo.isMaterialHiddenOnListing
-                ? Text(
-                    '+ ${materialInfo.data.skip(5).length} materials',
-                    style: Theme.of(context).textTheme.bodySmall,
-                    maxLines: 1,
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      '+ ${materialInfo.data.skip(4).length} materials',
+                      style: Theme.of(context).textTheme.bodySmall,
+                      maxLines: 1,
+                    ),
                   )
                 : const SizedBox.shrink(),
           ],
@@ -109,6 +112,7 @@ class _BundleMaterial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       key: WidgetKeys.materialListBundleMaterial(
         materialData.materialNumber.getOrDefaultValue(''),
       ),
@@ -125,11 +129,15 @@ class _BundleMaterial extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: Text(
-            materialData.displayDescription,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 2),
+            child: Text(
+              materialData.displayDescription,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style:
+                  Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 10),
+            ),
           ),
         ),
       ],
