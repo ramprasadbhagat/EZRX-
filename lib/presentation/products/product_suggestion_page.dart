@@ -184,6 +184,7 @@ class _SuggestedProductTile extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          key: WidgetKeys.searchedProduct(product.materialNumber.displayMatNo),
           onTap: () => _onTap(context, product),
           horizontalTitleGap: 0,
           leading: const Icon(
@@ -216,7 +217,13 @@ class _SuggestedProductTile extends StatelessWidget {
             type: product.type,
           ),
         );
-    context.router.pushNamed('orders/material_details');
+    product.type.typeMaterial
+        ? _toProductDetails(context, product)
+        : _toBundleDetails(context);
+  }
+
+  void _toProductDetails(BuildContext context, MaterialInfo product) {
+    final eligibilityBlocState = context.read<EligibilityBloc>().state;
     context.read<MaterialPriceBloc>().add(
           MaterialPriceEvent.fetch(
             salesOrganisation: eligibilityBlocState.salesOrganisation,
@@ -227,7 +234,11 @@ class _SuggestedProductTile extends StatelessWidget {
             materials: [product],
           ),
         );
+    context.router.pushNamed('orders/material_details');
   }
+
+  void _toBundleDetails(BuildContext context) =>
+      context.router.pushNamed('orders/bundle_detail_page');
 }
 
 class _ProductSearchHistorySuggestionSection extends StatelessWidget {

@@ -291,6 +291,9 @@ class WidgetKeys {
   static const Key productScanCameraKey = Key('productScanCameraKey');
   static const Key productSearchPage = Key('productSearchPage');
   static const Key materialFavouriteButton = Key('materialFavouriteButton');
+  static Key searchedProduct(String materialNumber) =>
+      Key('searchedProduct$materialNumber');
+
 
   //============================================================
   //  ALL INVOICES
