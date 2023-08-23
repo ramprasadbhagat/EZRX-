@@ -349,7 +349,7 @@ void main() {
       act: (CustomerCodeBloc bloc) {
         bloc.add(
           CustomerCodeEvent.search(
-            searchValue: 'fake-customer-code',
+            searchValue: SearchKey.searchFilter('fake-customer-code'),
             hideCustomer: false,
             userInfo: fakeUser,
             selectedSalesOrg: fakeSaleOrg,
@@ -406,7 +406,7 @@ void main() {
       act: (CustomerCodeBloc bloc) {
         bloc.add(
           CustomerCodeEvent.search(
-            searchValue: 'fake-customer-code',
+            searchValue: SearchKey.searchFilter('fake-customer-code'),
             hideCustomer: false,
             userInfo: fakeUser,
             selectedSalesOrg: fakeSaleOrg,
@@ -467,13 +467,14 @@ void main() {
       act: (CustomerCodeBloc bloc) {
         bloc.add(
           CustomerCodeEvent.autoSearch(
-            searchValue: 'fake-customer-code',
+            searchValue: SearchKey.searchFilter('fake-customer-code'),
             hideCustomer: false,
             userInfo: fakeUser,
             selectedSalesOrg: fakeSaleOrg,
           ),
         );
       },
+      wait: const Duration(milliseconds: 3000),
       expect: () => [
         CustomerCodeState.initial().copyWith(
           isSearchActive: true,
@@ -522,7 +523,7 @@ void main() {
       act: (CustomerCodeBloc bloc) {
         bloc.add(
           CustomerCodeEvent.search(
-            searchValue: 'fake-customer-code',
+            searchValue: SearchKey.searchFilter('fake-customer-code'),
             hideCustomer: false,
             userInfo: fakeUser,
             selectedSalesOrg: fakeSaleOrg,

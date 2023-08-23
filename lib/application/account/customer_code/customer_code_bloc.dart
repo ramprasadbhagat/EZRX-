@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rxdart/rxdart.dart';
 
 part 'customer_code_bloc.freezed.dart';
 part 'customer_code_event.dart';
@@ -40,7 +41,8 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
     });
     on<_AutoSearch>(
       (event, emit) {
-        if (event.searchValue != state.searchKey.getValue()) {
+        if (event.searchValue == state.searchKey) return;
+        if (event.searchValue.isValid()) {
           add(
             _Search(
               hideCustomer: event.hideCustomer,
@@ -49,13 +51,21 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
               searchValue: event.searchValue,
             ),
           );
+        } else {
+          emit(
+            state.copyWith(
+              searchKey: event.searchValue,
+            ),
+          );
         }
       },
+      transformer: (events, mapper) => events
+          .debounceTime(const Duration(milliseconds: 1500))
+          .asyncExpand(mapper),
     );
     on<_Search>(
       (e, emit) async {
-        if (state.isFetching) return;
-        final previousSearchKey = SearchKey(e.searchValue);
+        final previousSearchKey = e.searchValue;
         final previousCustomerCodeState = state.customerCodeInfo;
         final previousShipToInfo = state.shipToInfo;
         emit(
@@ -83,7 +93,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 canLoadMore: false,
                 isFetching: false,
-                searchKey: SearchKey(e.searchValue),
+                searchKey: e.searchValue,
               ),
             );
           },
@@ -95,7 +105,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
                 canLoadMore: customerCodeList.length >= _pageSize,
-                searchKey: SearchKey(e.searchValue),
+                searchKey: e.searchValue,
               ),
             );
           },

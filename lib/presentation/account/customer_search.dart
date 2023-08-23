@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
@@ -27,8 +28,6 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
@@ -410,38 +409,8 @@ class _TitleSection extends StatelessWidget {
   }
 }
 
-class _DeliveryAddressSearchSection extends StatefulWidget {
+class _DeliveryAddressSearchSection extends StatelessWidget {
   const _DeliveryAddressSearchSection({Key? key}) : super(key: key);
-
-  @override
-  State<_DeliveryAddressSearchSection> createState() =>
-      _DeliveryAddressSearchSectionState();
-}
-
-class _DeliveryAddressSearchSectionState
-    extends State<_DeliveryAddressSearchSection> {
-  final _searchController = TextEditingController();
-
-  @override
-  void initState() {
-    _searchController.value = TextEditingValue(
-      text: context
-          .read<CustomerCodeBloc>()
-          .state
-          .searchKey
-          .getOrDefaultValue(''),
-      selection: TextSelection.collapsed(
-        offset: _searchController.selection.base.offset,
-      ),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -466,19 +435,12 @@ class _DeliveryAddressSearchSectionState
               (_) {},
             ),
           );
-          final searchText = state.searchKey.getValue();
-          _searchController.value = TextEditingValue(
-            text: searchText,
-            selection: TextSelection.collapsed(
-              offset: _searchController.selection.base.offset,
-            ),
-          );
         },
         builder: (context, state) {
-          return SearchBar(
-            key: WidgetKeys.customerCodeSearch,
-            controller: _searchController,
-            enabled: !state.isFetching,
+          return CustomSearchBar(
+            key: WidgetKeys.genericKey(
+              key: state.searchKey.searchValueOrEmpty,
+            ),
             onSearchChanged: (value) {
               context.read<CustomerCodeBloc>().add(
                     CustomerCodeEvent.autoSearch(
@@ -487,28 +449,26 @@ class _DeliveryAddressSearchSectionState
                           context.read<SalesOrgBloc>().state.salesOrganisation,
                       hideCustomer:
                           context.read<SalesOrgBloc>().state.hideCustomer,
-                      searchValue: value,
+                      searchValue: SearchKey.search(value),
                     ),
                   );
             },
             onSearchSubmitted: (value) {
               context.read<CustomerCodeBloc>().add(
-                    CustomerCodeEvent.autoSearch(
+                    CustomerCodeEvent.search(
                       userInfo: context.read<UserBloc>().state.user,
                       selectedSalesOrg:
                           context.read<SalesOrgBloc>().state.salesOrganisation,
                       hideCustomer:
                           context.read<SalesOrgBloc>().state.hideCustomer,
-                      searchValue: value,
+                      searchValue: SearchKey.search(value),
                     ),
                   );
             },
+            customValidator: (value) => SearchKey.search(value).isValid(),
             clearIconKey: WidgetKeys.clearIconKey,
-            customValidator: () =>
-                SearchKey.search(_searchController.text).isValid(),
+            enabled: !state.isFetching,
             onClear: () {
-              if (_searchController.text.isEmpty) return;
-              _searchController.clear();
               context.read<CustomerCodeBloc>().add(
                     CustomerCodeEvent.deletedSearch(
                       userInfo: context.read<UserBloc>().state.user,
@@ -519,7 +479,7 @@ class _DeliveryAddressSearchSectionState
                     ),
                   );
             },
-            border: InputBorder.none,
+            initialValue: state.searchKey.searchValueOrEmpty,
           );
         },
       ),

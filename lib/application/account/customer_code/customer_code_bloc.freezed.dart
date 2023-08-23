@@ -26,7 +26,7 @@ mixin _$CustomerCodeEvent {
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         search,
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -35,7 +35,7 @@ mixin _$CustomerCodeEvent {
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         autoSearch,
     required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
@@ -51,7 +51,7 @@ mixin _$CustomerCodeEvent {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -60,7 +60,7 @@ mixin _$CustomerCodeEvent {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -76,7 +76,7 @@ mixin _$CustomerCodeEvent {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -85,7 +85,7 @@ mixin _$CustomerCodeEvent {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -197,7 +197,7 @@ class _$_Initialized implements _Initialized {
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         search,
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -206,7 +206,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         autoSearch,
     required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
@@ -225,7 +225,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -234,7 +234,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -253,7 +253,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -262,7 +262,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -431,7 +431,7 @@ class _$_Selected implements _Selected {
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         search,
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -440,7 +440,7 @@ class _$_Selected implements _Selected {
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         autoSearch,
     required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
@@ -459,7 +459,7 @@ class _$_Selected implements _Selected {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -468,7 +468,7 @@ class _$_Selected implements _Selected {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -487,7 +487,7 @@ class _$_Selected implements _Selected {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -496,7 +496,7 @@ class _$_Selected implements _Selected {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -699,7 +699,7 @@ class _$_Fetch implements _Fetch {
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         search,
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -708,7 +708,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         autoSearch,
     required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
@@ -727,7 +727,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -736,7 +736,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -755,7 +755,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -764,7 +764,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -853,7 +853,7 @@ abstract class _$$_SearchCopyWith<$Res> {
       {bool hideCustomer,
       User userInfo,
       SalesOrganisation selectedSalesOrg,
-      String searchValue});
+      SearchKey searchValue});
 
   $UserCopyWith<$Res> get userInfo;
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrg;
@@ -890,7 +890,7 @@ class __$$_SearchCopyWithImpl<$Res>
       searchValue: null == searchValue
           ? _value.searchValue
           : searchValue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
     ));
   }
 
@@ -927,7 +927,7 @@ class _$_Search implements _Search {
   @override
   final SalesOrganisation selectedSalesOrg;
   @override
-  final String searchValue;
+  final SearchKey searchValue;
 
   @override
   String toString() {
@@ -970,7 +970,7 @@ class _$_Search implements _Search {
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         search,
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -979,7 +979,7 @@ class _$_Search implements _Search {
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         autoSearch,
     required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
@@ -998,7 +998,7 @@ class _$_Search implements _Search {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1007,7 +1007,7 @@ class _$_Search implements _Search {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1026,7 +1026,7 @@ class _$_Search implements _Search {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1035,7 +1035,7 @@ class _$_Search implements _Search {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1104,12 +1104,12 @@ abstract class _Search implements CustomerCodeEvent {
       {required final bool hideCustomer,
       required final User userInfo,
       required final SalesOrganisation selectedSalesOrg,
-      required final String searchValue}) = _$_Search;
+      required final SearchKey searchValue}) = _$_Search;
 
   bool get hideCustomer;
   User get userInfo;
   SalesOrganisation get selectedSalesOrg;
-  String get searchValue;
+  SearchKey get searchValue;
   @JsonKey(ignore: true)
   _$$_SearchCopyWith<_$_Search> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1230,7 +1230,7 @@ class _$_LoadMore implements _LoadMore {
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         search,
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -1239,7 +1239,7 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         autoSearch,
     required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
@@ -1258,7 +1258,7 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1267,7 +1267,7 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1286,7 +1286,7 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1295,7 +1295,7 @@ class _$_LoadMore implements _LoadMore {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1489,7 +1489,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         search,
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -1498,7 +1498,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         autoSearch,
     required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
@@ -1517,7 +1517,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1526,7 +1526,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1546,7 +1546,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1555,7 +1555,7 @@ class _$_LoadStoredCustomerCode implements _LoadStoredCustomerCode {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1644,7 +1644,7 @@ abstract class _$$_AutoSearchCopyWith<$Res> {
       {bool hideCustomer,
       User userInfo,
       SalesOrganisation selectedSalesOrg,
-      String searchValue});
+      SearchKey searchValue});
 
   $UserCopyWith<$Res> get userInfo;
   $SalesOrganisationCopyWith<$Res> get selectedSalesOrg;
@@ -1682,7 +1682,7 @@ class __$$_AutoSearchCopyWithImpl<$Res>
       searchValue: null == searchValue
           ? _value.searchValue
           : searchValue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
     ));
   }
 
@@ -1719,7 +1719,7 @@ class _$_AutoSearch implements _AutoSearch {
   @override
   final SalesOrganisation selectedSalesOrg;
   @override
-  final String searchValue;
+  final SearchKey searchValue;
 
   @override
   String toString() {
@@ -1762,7 +1762,7 @@ class _$_AutoSearch implements _AutoSearch {
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         search,
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -1771,7 +1771,7 @@ class _$_AutoSearch implements _AutoSearch {
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         autoSearch,
     required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
@@ -1790,7 +1790,7 @@ class _$_AutoSearch implements _AutoSearch {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1799,7 +1799,7 @@ class _$_AutoSearch implements _AutoSearch {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1819,7 +1819,7 @@ class _$_AutoSearch implements _AutoSearch {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1828,7 +1828,7 @@ class _$_AutoSearch implements _AutoSearch {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -1897,12 +1897,12 @@ abstract class _AutoSearch implements CustomerCodeEvent {
       {required final bool hideCustomer,
       required final User userInfo,
       required final SalesOrganisation selectedSalesOrg,
-      required final String searchValue}) = _$_AutoSearch;
+      required final SearchKey searchValue}) = _$_AutoSearch;
 
   bool get hideCustomer;
   User get userInfo;
   SalesOrganisation get selectedSalesOrg;
-  String get searchValue;
+  SearchKey get searchValue;
   @JsonKey(ignore: true)
   _$$_AutoSearchCopyWith<_$_AutoSearch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2037,7 +2037,7 @@ class _$_DeletedSearch implements _DeletedSearch {
             User userInfo, SalesOrganisation selectedSalesOrg)
         fetch,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         search,
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
@@ -2046,7 +2046,7 @@ class _$_DeletedSearch implements _DeletedSearch {
             SalesOrganisation selectedSalesOrg)
         loadStoredCustomerCode,
     required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)
         autoSearch,
     required TResult Function(String searchText, bool hideCustomer,
             User userInfo, SalesOrganisation selectedSalesOrg)
@@ -2065,7 +2065,7 @@ class _$_DeletedSearch implements _DeletedSearch {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -2074,7 +2074,7 @@ class _$_DeletedSearch implements _DeletedSearch {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult? Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -2094,7 +2094,7 @@ class _$_DeletedSearch implements _DeletedSearch {
             SalesOrganisation selectedSalesOrg)?
         fetch,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         search,
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
@@ -2103,7 +2103,7 @@ class _$_DeletedSearch implements _DeletedSearch {
             SalesOrganisation selectedSalesOrg)?
         loadStoredCustomerCode,
     TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg, String searchValue)?
+            SalesOrganisation selectedSalesOrg, SearchKey searchValue)?
         autoSearch,
     TResult Function(String searchText, bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
