@@ -232,8 +232,8 @@ Color getStatusLabelColor(String statusType) {
     'Successful': ZPColors.lightSecondary,
     'Approved for Return': ZPColors.lightSecondary,
     'FAILED': ZPColors.lightSecondary,
-    'APPROVED': ZPColors.lightSecondary,
-    'Preorder': ZPColors.lightYellow,
+    'Approved': ZPColors.lightSecondary,
+    'Reviewed': ZPColors.lightSecondary,
     'Bonus': ZPColors.primary,
     'Active': ZPColors.lightSecondary,
   };
