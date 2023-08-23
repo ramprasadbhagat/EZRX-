@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -80,6 +81,10 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
+
+class PriceOverrideBlocMock
+    extends MockBloc<PriceOverrideEvent, PriceOverrideState>
+    implements PriceOverrideBloc {}
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -206,7 +211,7 @@ class LoginFormMockBloc extends MockBloc<LoginFormEvent, LoginFormState>
 class NotificationMockBloc
     extends MockBloc<NotificationEvent, NotificationState>
     implements NotificationBloc {}
-    
+
 class LanguageBlocMock extends MockBloc<LanguageEvent, LanguageState>
     implements LanguageBloc {}
 
@@ -250,6 +255,7 @@ void main() {
   late DeepLinkingBloc deepLinkingBlocMock;
   late ViewByItemsBloc mockViewByItemsBloc;
   late NotificationBloc mockNotificationBloc;
+  late PriceOverrideBloc mockPriceOverrideBloc;
   final mockOrderHistoryDetailsBloc = OrderHistoryDetailsMockBloc();
   final mockOrderHistoryFilterBloc = OrderHistoryFilterMockBloc();
   final mockViewByOrderBloc = ViewByOrderMockBloc();
@@ -298,6 +304,7 @@ void main() {
     locator.registerLazySingleton(() => mockViewByItemsBloc);
     locator.registerLazySingleton(() => mockMaterialPriceBloc);
     locator.registerLazySingleton(() => mockNotificationBloc);
+    locator.registerLazySingleton(() => mockPriceOverrideBloc);
   });
 
   group('Splash Screen', () {
@@ -339,6 +346,7 @@ void main() {
       creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsMockBloc();
       loginFormBloc = LoginFormMockBloc();
       mockNotificationBloc = NotificationMockBloc();
+      mockPriceOverrideBloc = PriceOverrideBlocMock();
 
       languageBloc = LanguageBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -411,6 +419,8 @@ void main() {
       when(() => loginFormBloc.state).thenReturn(LoginFormState.initial());
       when(() => mockNotificationBloc.state)
           .thenReturn(NotificationState.initial());
+      when(() => mockPriceOverrideBloc.state)
+          .thenReturn(PriceOverrideState.initial());
     });
 
     Future getWidget(tester) async {
@@ -515,6 +525,9 @@ void main() {
             BlocProvider<LoginFormBloc>(create: (context) => loginFormBloc),
             BlocProvider<NotificationBloc>(
               create: (context) => mockNotificationBloc,
+            ),
+            BlocProvider<PriceOverrideBloc>(
+              create: (context) => mockPriceOverrideBloc,
             ),
             BlocProvider<LanguageBloc>(create: (context) => languageBloc),
           ],

@@ -15,6 +15,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
@@ -94,6 +95,8 @@ import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -555,6 +558,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         context.read<EligibilityBloc>().state.comboDealEligible,
                   ),
                 );
+            if (!state.isCounterOfferVisible &&
+                context
+                        .read<PriceOverrideBloc>()
+                        .state
+                        .overriddenMaterialPrice !=
+                    Price.empty()) {
+              context
+                  .read<PriceOverrideBloc>()
+                  .add(const PriceOverrideEvent.initialized());
+            }
             final enableReturn =
                 locator<RemoteConfigService>().getReturnsConfig() &&
                     state.isReturnsEnable;
