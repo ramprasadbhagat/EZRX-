@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,9 +21,20 @@ class ItemAddressSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                state.shipToInfo.shipToName.name1,
-                style: Theme.of(context).textTheme.labelMedium,
+              RichText(
+                text: TextSpan(
+                  text: 'Return for '.tr(),
+                  style: Theme.of(context).textTheme.labelMedium,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: state.shipToInfo.shipToName.name1,
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium
+                          ?.copyWith(color: ZPColors.primary),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),

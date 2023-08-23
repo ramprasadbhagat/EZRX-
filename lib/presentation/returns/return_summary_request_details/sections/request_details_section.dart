@@ -22,6 +22,7 @@ class RequestDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _ReturnDetailsSection(
           requestInformationHeader: requestInformationHeader,
@@ -31,7 +32,7 @@ class RequestDetailsSection extends StatelessWidget {
           createDate: requestInformationHeader.createdDate,
           onTap: () {},
           status: returnItem.status.displayStatusForViewByRequest,
-          title: 'Return status'.tr(),
+          title: 'Return request status'.tr(),
         ),
         const Divider(
           indent: 0,

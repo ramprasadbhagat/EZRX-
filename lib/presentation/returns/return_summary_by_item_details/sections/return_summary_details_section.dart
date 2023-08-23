@@ -33,7 +33,7 @@ class ReturnSummaryDetailsSection extends StatelessWidget {
           createDate: requestInformation.createdDate,
           onTap: () {},
           status: requestInformation.status.displayStatus,
-          title: 'Return status'.tr(),
+          title: 'Return request status'.tr(),
         ),
         const Divider(
           indent: 0,
