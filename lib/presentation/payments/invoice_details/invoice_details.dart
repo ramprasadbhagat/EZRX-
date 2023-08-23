@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+part 'widgets/order_item_count.dart';
 class InvoiceDetailsPage extends StatelessWidget {
   final CreditAndInvoiceItem invoiceItem;
   const InvoiceDetailsPage({
@@ -88,6 +89,7 @@ class InvoiceDetailsPage extends StatelessWidget {
                         color: ZPColors.lightGray2,
                         height: 16,
                       ),
+                      const _OrderItemCount(),
                       InvoiceItemsSection(
                         customerDocumentDetail: state.details,
                       ),

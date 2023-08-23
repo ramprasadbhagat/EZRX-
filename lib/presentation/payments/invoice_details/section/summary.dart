@@ -25,9 +25,9 @@ class InvoiceSummary extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Invoice summary',
+            'Total summary'.tr(),
             style: Theme.of(context).textTheme.labelMedium,
-          ).tr(),
+          ),
           const SizedBox(
             height: 16,
           ),
@@ -51,7 +51,7 @@ class InvoiceSummary extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Grand total').tr(),
+              Text('Grand total'.tr()),
               PriceComponent(
                 salesOrgConfig: salesOrgConfigs,
                 price: invoiceItem.amountInTransactionCurrency.toString(),
