@@ -1,4 +1,4 @@
-part of '../contact_us_page.dart';
+part of 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 
 class _ContactItem extends StatelessWidget {
   const _ContactItem({
@@ -31,11 +31,15 @@ class _ContactItem extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            Text(
-              label,
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: ZPColors.extraDarkGreen,
-                  ),
+            Expanded(
+              child: Text(
+                label,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: ZPColors.extraDarkGreen,
+                    ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),

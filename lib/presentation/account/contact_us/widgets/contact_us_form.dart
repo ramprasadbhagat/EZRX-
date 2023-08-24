@@ -1,4 +1,4 @@
-part of '../contact_us_page.dart';
+part of 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 
 class _ContactUsForm extends StatelessWidget {
   @override
@@ -10,18 +10,20 @@ class _ContactUsForm extends StatelessWidget {
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
           () async {
-            state.responseFlag
-                ? await CustomSnackBar(
-                    messageText: 'Message has been received.',
-                  ).show(context)
-                : await CustomSnackBar(
-                    messageText: 'Message has not been received.',
-                    backgroundColor: ZPColors.error,
-                    icon: const Icon(
-                      Icons.error_outline,
-                      color: ZPColors.black,
-                    ),
-                  ).show(context);
+            if (state.responseFlag) {
+              await CustomSnackBar(
+                messageText: 'Message has been received.',
+              ).show(context);
+            } else {
+              await CustomSnackBar(
+                messageText: 'Message has not been received.',
+                backgroundColor: ZPColors.error,
+                icon: const Icon(
+                  Icons.error_outline,
+                  color: ZPColors.black,
+                ),
+              ).show(context);
+            }
           },
           (either) => either.fold(
             (failure) {

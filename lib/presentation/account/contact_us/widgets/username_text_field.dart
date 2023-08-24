@@ -1,44 +1,21 @@
-part of '../contact_us_page.dart';
+part of 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 
-class _UsernameTextField extends StatefulWidget {
+class _UsernameTextField extends StatelessWidget {
   const _UsernameTextField();
 
-  @override
-  State<_UsernameTextField> createState() => __UsernameTextFieldState();
-}
+  String _initialValue({required BuildContext context}) {
+    final existingName = context.read<ContactUsBloc>().state.contactUs.username;
 
-class __UsernameTextFieldState extends State<_UsernameTextField> {
-  TextEditingController _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _initialValue();
-  }
-
-  void _initialValue() {
-    final displayFullName =
-        context.read<UserBloc>().state.userFullName.displayFullName;
-    _controller = TextEditingController.fromValue(
-      TextEditingValue(
-        text: displayFullName,
-        selection: TextSelection.collapsed(
-          offset: _controller.selection.base.offset,
-        ),
-      ),
-    );
-    if (displayFullName.isNotEmpty) {
+    if (existingName.getOrDefaultValue('').isEmpty) {
+      final displayFullName =
+          context.read<UserBloc>().state.userFullName.displayFullName;
       context.read<ContactUsBloc>().add(
-            ContactUsEvent.onUsernameChange(
-              newValue: displayFullName,
-            ),
+            ContactUsEvent.onUsernameChange(newValue: displayFullName),
           );
+
+      return displayFullName;
+    } else {
+      return existingName.getValue();
     }
   }
 
@@ -51,9 +28,9 @@ class __UsernameTextFieldState extends State<_UsernameTextField> {
       builder: (context, state) {
         return TextFieldWithLabel(
           fieldKey: WidgetKeys.userNameKey,
-          labelText: 'Your Name'.tr(),
+          labelText: 'Name'.tr(),
           mandatory: true,
-          controller: _controller,
+          initValue: _initialValue(context: context),
           validator: (_) =>
               context.read<ContactUsBloc>().state.contactUs.username.value.fold(
                     (f) => f.maybeMap(

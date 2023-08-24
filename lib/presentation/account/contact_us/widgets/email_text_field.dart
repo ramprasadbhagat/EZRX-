@@ -1,44 +1,20 @@
-part of '../contact_us_page.dart';
+part of 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 
-class _EmailTextField extends StatefulWidget {
-  const _EmailTextField({Key? key}) : super(key: key);
+class _EmailTextField extends StatelessWidget {
+  const _EmailTextField();
 
-  @override
-  State<_EmailTextField> createState() => __EmailTextFieldState();
-}
-
-class __EmailTextFieldState extends State<_EmailTextField> {
-  TextEditingController _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _initialValue();
-  }
-
-  void _initialValue() {
-    final email =
-        context.read<UserBloc>().state.user.email.getOrDefaultValue('');
-    _controller = TextEditingController.fromValue(
-      TextEditingValue(
-        text: email,
-        selection: TextSelection.collapsed(
-          offset: _controller.selection.base.offset,
-        ),
-      ),
-    );
-    if (email.isNotEmpty) {
+  String _initialValue({required BuildContext context}) {
+    final existingEmail = context.read<ContactUsBloc>().state.contactUs.email;
+    if (existingEmail.getOrDefaultValue('').isEmpty) {
+      final displayEmail =
+          context.read<UserBloc>().state.user.email.getOrDefaultValue('');
       context.read<ContactUsBloc>().add(
-            ContactUsEvent.onEmailChange(
-              newValue: email,
-            ),
+            ContactUsEvent.onEmailChange(newValue: displayEmail),
           );
+
+      return displayEmail;
+    } else {
+      return existingEmail.getValue();
     }
   }
 
@@ -51,13 +27,14 @@ class __EmailTextFieldState extends State<_EmailTextField> {
       builder: (context, state) {
         return TextFieldWithLabel(
           fieldKey: WidgetKeys.emailKey,
-          labelText: 'E-mail'.tr(),
+          labelText: 'Email Address'.tr(),
           mandatory: true,
-          controller: _controller,
+          initValue: _initialValue(context: context),
           validator: (_) =>
               context.read<ContactUsBloc>().state.contactUs.email.value.fold(
                     (f) => f.maybeMap(
-                      empty: (_) => 'Enter a valid email address.'.tr(),
+                      empty: (_) => 'Email is required.'.tr(),
+                      invalidEmail: (_) => 'Enter a valid email address.'.tr(),
                       orElse: () => null,
                     ),
                     (_) => null,

@@ -1,7 +1,7 @@
-part of '../contact_us_page.dart';
+part of 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 
 class _ContactNumberTextField extends StatelessWidget {
-  const _ContactNumberTextField({Key? key}) : super(key: key);
+  const _ContactNumberTextField();
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +10,6 @@ class _ContactNumberTextField extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting ||
           previous.showErrorMessage != current.showErrorMessage,
       builder: (context, state) {
-        final isLoading = state.isSubmitting;
-        final country = context.read<SalesOrgBloc>().state.salesOrg.country;
-
         return Column(
           key: WidgetKeys.phoneNumberKey,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,13 +33,16 @@ class _ContactNumberTextField extends StatelessWidget {
               height: 8,
             ),
             InternationalPhoneNumberInput(
-              countries: [country],
+              key: WidgetKeys.genericKey(
+                key: state.contactUs.contactNumber.getOrDefaultValue(''),
+              ),
+              countries: [context.read<SalesOrgBloc>().state.salesOrg.country],
               onInputValidated: (bool value) {},
               autoValidateMode: state.showErrorMessage
                   ? AutovalidateMode.always
                   : AutovalidateMode.disabled,
               ignoreBlank: false,
-              onInputChanged: isLoading
+              onInputChanged: state.isSubmitting
                   ? null
                   : (value) {
                       if (value.phoneNumber == value.dialCode) {

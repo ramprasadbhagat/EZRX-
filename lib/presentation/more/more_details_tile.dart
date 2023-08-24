@@ -99,7 +99,7 @@ class MoreDetailsTile {
   factory MoreDetailsTile.contactUs(BuildContext context) => MoreDetailsTile(
         icon: const Icon(
           Icons.mail_outline,
-          color: ZPColors.lightGray,
+          color: ZPColors.greenIconColor,
         ),
         onTap: () {
           context.read<ContactUsBloc>().add(const ContactUsEvent.initialized());

@@ -1,4 +1,4 @@
-part of '../contact_us_page.dart';
+part of 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 
 class _SupportHours extends StatelessWidget {
   @override
@@ -14,20 +14,17 @@ class _SupportHours extends StatelessWidget {
               ),
         ),
         const SizedBox(
-          height: 10,
+          height: 8,
         ),
         Text(
-          'Monday to Friday: 8am - 8pm',
+          'Monday to Friday: 8am - 8pm'.tr(),
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: ZPColors.extraLightGrey4,
                 fontWeight: FontWeight.w400,
               ),
         ),
-        const SizedBox(
-          height: 10,
-        ),
         Text(
-          'Saturday: 8am - 5pm',
+          'Saturday: 8am - 5pm'.tr(),
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: ZPColors.extraLightGrey4,
                 fontWeight: FontWeight.w400,

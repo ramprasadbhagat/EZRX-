@@ -1,4 +1,4 @@
-part of '../contact_us_page.dart';
+part of 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 
 class _ContactDetails extends StatelessWidget {
   const _ContactDetails({

@@ -488,4 +488,7 @@ class WidgetKeys {
   static const Key deleteAdviceButtonKey = Key('deleteAdviceButton');
   static const Key downloadAdviceButtonKey = Key('downloadAdviceButton');
   static const Key buttonRowKey = Key('buttonRow');
+
+  static Key returnContactUsFieldKeyRequest(String key, String msg) =>
+      Key('$key$msg');
 }

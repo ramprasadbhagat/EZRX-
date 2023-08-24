@@ -73,6 +73,7 @@ class ContactUsBloc extends Bloc<ContactUsEvent, ContactUsState> {
           emit(
             state.copyWith(
               isSubmitting: true,
+              showErrorMessage: false,
             ),
           );
           final failureOrSuccess = await contactUsRepository.submit(
@@ -95,6 +96,14 @@ class ContactUsBloc extends Bloc<ContactUsEvent, ContactUsState> {
               emit(
                 state.copyWith(
                   responseFlag: success,
+                  contactUs: state.contactUs.copyWith(
+                    contactNumber: PhoneNumber(
+                      '',
+                    ),
+                    message: StringValue(
+                      '',
+                    ),
+                  ),
                   isSubmitting: false,
                   apiFailureOrSuccessOption: none(),
                 ),
