@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -13,10 +14,10 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottomsheet.dart';
-import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -25,6 +26,13 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+
+import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
+import 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dart';
+
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 
 class CartProductTile extends StatelessWidget {
   final PriceAggregate cartItem;
@@ -421,7 +429,47 @@ class _BonusPriceCounterSection extends StatelessWidget {
           context.read<EligibilityBloc>().state.isBonusSampleItemVisible
               ? TextButton.icon(
                   key: WidgetKeys.bonusSampleItemButtonKey,
-                  onPressed: () {},
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      constraints: BoxConstraints.loose(
+                        Size(
+                          MediaQuery.of(context).size.width,
+                          MediaQuery.of(context).size.height * 0.80,
+                        ),
+                      ), //
+                      builder: (_) {
+                        return BonusItemsSheet(cartProduct: cartItem);
+                      },
+                    );
+                    trackMixpanelEvent(
+                      MixpanelEvents.addBonus,
+                    );
+                    context.read<BonusMaterialBloc>().add(
+                          BonusMaterialEvent.fetch(
+                            salesOrganisation: context
+                                .read<SalesOrgBloc>()
+                                .state
+                                .salesOrganisation,
+                            configs: context.read<SalesOrgBloc>().state.configs,
+                            customerCodeInfo: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .customerCodeInfo,
+                            shipToInfo: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .shipToInfo,
+                            principalData: cartItem.materialInfo.principalData,
+                            user: context.read<UserBloc>().state.user,
+                            isGimmickMaterialEnabled: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .isGimmickMaterialEnabled,
+                          ),
+                        );
+                  },
                   icon: const Icon(
                     Icons.add_circle_outline,
                     color: ZPColors.extraDarkGreen,

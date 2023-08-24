@@ -3,45 +3,53 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/repository/i_additional_bonus_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rxdart/rxdart.dart';
+
+import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
+
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 
 part 'bonus_material_bloc.freezed.dart';
 part 'bonus_material_event.dart';
 part 'bonus_material_state.dart';
 
+const _pageSize = 24;
+
 class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
-  final IBonusMaterialRepository bonusMaterialRepository;
+  final IMaterialListRepository materialListRepository;
 
   BonusMaterialBloc({
-    required this.bonusMaterialRepository,
+    required this.materialListRepository,
   }) : super(BonusMaterialState.initial()) {
-    on<_Initialized>((e, emit) => emit(BonusMaterialState.initial()));
-    on<_Fetch>(
-      (e, emit) async {
+    on<BonusMaterialEvent>(_onEvent);
+  }
+
+  Future<void> _onEvent(
+    BonusMaterialEvent event,
+    Emitter<BonusMaterialState> emit,
+  ) async {
+    await event.map(
+      fetch: (e) async {
         emit(
-          state.copyWith(
-            failureOrSuccessOption: none(),
-            isFetching: true,
-            isStarting: false,
-            searchKey: SearchKey(e.searchKey),
-          ),
+          BonusMaterialState.initial().copyWith(isFetching: true),
         );
 
-        final failureOrSuccess = await bonusMaterialRepository.getMaterialBonus(
-          user: e.user,
-          configs: e.configs,
-          pickAndPack: e.pickAndPack,
+        final failureOrSuccess =
+            await materialListRepository.getMaterialBonusList(
+          customerCodeInfo: e.customerCodeInfo,
+          offset: 0,
+          pageSize: _pageSize,
+          salesOrgConfig: e.configs,
           salesOrganisation: e.salesOrganisation,
-          searchKey: e.searchKey,
-          shipInfo: e.shipInfo,
-          customerInfo: e.customerInfo,
+          shipToInfo: e.shipToInfo,
+          principalData: e.principalData,
+          user: e.user,
+          enableGimmickMaterial: e.isGimmickMaterialEnabled,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -55,36 +63,81 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           (bonus) {
             emit(
               state.copyWith(
-                failureOrSuccessOption: none(),
-                bonus: bonus,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                bonusItemList: bonus.products,
                 isFetching: false,
-                searchKey: SearchKey(e.searchKey),
               ),
             );
           },
         );
       },
-    );
-    on<_AutoSearch>(
-      (e, emit) {
-        if (e.searchKey != state.searchKey.getValue()) {
-          add(
-            _Fetch(
-              user: e.user,
-              salesOrganisation: e.salesOrganisation,
-              configs: e.configs,
-              pickAndPack: e.pickAndPack,
-              customerInfo: e.customerInfo,
-              shipInfo: e.shipInfo,
-              searchKey: e.searchKey,
+      loadMoreBonusItem: (e) async {
+        if (state.isFetching || !state.canLoadMore) return;
+        emit(
+          state.copyWith(
+            isFetching: true,
+          ),
+        );
+        final failureOrSuccess =
+            await materialListRepository.getMaterialBonusList(
+          salesOrganisation: e.salesOrganisation,
+          salesOrgConfig: e.configs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+          pageSize: _pageSize,
+          offset: state.bonusItemList.length,
+          principalData: e.principalData,
+          user: e.user,
+          enableGimmickMaterial: e.isGimmickMaterialEnabled,
+        );
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+              isFetching: false,
             ),
-          );
-        }
+          ),
+          (bonusItems) {
+            emit(
+              state.copyWith(
+                bonusItemList: List<MaterialInfo>.from(state.bonusItemList)
+                  ..addAll(bonusItems.products),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetching: false,
+                canLoadMore: bonusItems.products.length >= _pageSize,
+              ),
+            );
+          },
+        );
       },
-      transformer: (events, mapper) {
-        return events
-            .debounceTime(const Duration(milliseconds: 3000))
-            .asyncExpand(mapper);
+      validateBonusQuantity: (e) {
+        emit(
+          state.copyWith(
+            isBonusQtyValidated: false,
+          ),
+        );
+
+        emit(
+          state.copyWith(
+            isBonusQtyValidated: e.bonusMaterial.quantity > 0,
+            bonusMaterialHashCode: e.bonusMaterial.hashCode,
+          ),
+        );
+      },
+      updateBonusItemQuantity: (e) {
+        final updatedBonusItemList = state.bonusItemList
+            .map(
+              (element) =>
+                  element.materialNumber == e.updatedBonusItem.materialNumber
+                      ? element.copyWith(quantity: e.updatedBonusItem.quantity)
+                      : element,
+            )
+            .toList();
+        emit(
+          state.copyWith(
+            bonusItemList: updatedBonusItemList,
+          ),
+        );
       },
     );
   }

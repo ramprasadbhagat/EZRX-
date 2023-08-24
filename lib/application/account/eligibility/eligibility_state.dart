@@ -183,6 +183,10 @@ class EligibilityState with _$EligibilityState {
     return false;
   }
 
+  bool get isGimmickMaterialEnabled =>
+      (user.role.type.isSalesRepRole && salesOrgConfigs.salesOrg.isTH) ||
+      salesOrgConfigs.enableGimmickMaterial;
+
   bool get isBundleMaterialEnable =>
       !salesOrgConfigs.disableBundles &&
       !selectedOrderType.documentType.isSpecialOrderType;

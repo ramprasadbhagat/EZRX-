@@ -24,7 +24,6 @@ import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_methods/payment_methods_page.dart';
-import 'package:ezrxmobile/presentation/orders/cart/bonus/search_bonus_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
@@ -244,10 +243,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     // TODO:  will remove in future
     // ========
 
-    AutoRoute(
-      path: 'orders/add_bonus',
-      page: BonusAddPage,
-    ),
     AutoRoute(
       path: 'returns/add_edit_user_restriction',
       page: AddEditUserRestrictionPage,

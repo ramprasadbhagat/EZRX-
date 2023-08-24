@@ -249,6 +249,9 @@ class MaterialQty extends ValueObject<int> {
   const MaterialQty._(this.value);
 
   int get intValue => value.getOrElse(() => 0);
+
+  bool get isBonusMaxQuantityExceed =>
+      isBonusMaterialMaxQuantityExceed(value.getOrElse(() => 0));
 }
 
 class DiscountType extends ValueObject<String> {
@@ -858,4 +861,3 @@ class FavouriteResponse extends ValueObject<int> {
 
   bool get isSuccessful => checkIfSuccessful(value.getOrElse(() => 0));
 }
-

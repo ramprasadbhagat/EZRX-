@@ -13,7 +13,7 @@ class MixpanelService {
 
   void trackEvent({
     required String eventName,
-    Map<String, dynamic>? properties,
+    required Map<String, dynamic>? properties,
   }) {
     mixpanel.track(
       eventName,

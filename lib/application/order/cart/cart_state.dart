@@ -16,6 +16,7 @@ class CartState with _$CartState {
     required bool isMappingPrice,
     required bool isUpdatingStock,
     required Map<MaterialNumber, ProductMetaData> additionInfo,
+    required List<int> upsertBonusItemInProgressHashCode,
   }) = _CartState;
 
   factory CartState.initial() => CartState(
@@ -30,6 +31,7 @@ class CartState with _$CartState {
         isMappingPrice: false,
         isUpdatingStock: false,
         additionInfo: <MaterialNumber, ProductMetaData>{},
+        upsertBonusItemInProgressHashCode: [],
       );
 
   double subTotal({
@@ -260,6 +262,9 @@ class CartState with _$CartState {
             previousValue +
             itemBundlePrice(bundleCode: element.bundle.bundleCode),
       );
+
+  PriceAggregate updatedCartProduct(MaterialNumber matNumber) => cartProducts
+      .firstWhere((element) => element.getMaterialNumber == matNumber);
 
   double get taxBundle => cartProducts
       .where((element) => element.materialInfo.type.typeBundle)

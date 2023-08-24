@@ -42,6 +42,8 @@ mixin _$CartProductDto {
   String get genericMaterialName => throw _privateConstructorUsedError;
   @JsonKey(name: 'principalName', defaultValue: '')
   String get principalName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'principalCode', defaultValue: '')
+  String get principalCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
   double get counterOfferPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
@@ -52,6 +54,9 @@ mixin _$CartProductDto {
   BundleDetailsDto get bundleDetails => throw _privateConstructorUsedError;
   @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
   List<MaterialDto> get bundleMaterials => throw _privateConstructorUsedError;
+  @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
+  List<BonusSampleItemDto> get bonusMaterials =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'taxes', defaultValue: <String>[])
   List<String> get taxes => throw _privateConstructorUsedError;
 
@@ -84,6 +89,7 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
       String genericMaterialName,
       @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
       double counterOfferPrice,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
@@ -92,6 +98,8 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(name: 'BundleDetails') BundleDetailsDto bundleDetails,
       @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
       List<MaterialDto> bundleMaterials,
+      @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
+      List<BonusSampleItemDto> bonusMaterials,
       @JsonKey(name: 'taxes', defaultValue: <String>[]) List<String> taxes});
 
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
@@ -121,11 +129,13 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
     Object? principalName = null,
+    Object? principalCode = null,
     Object? counterOfferPrice = null,
     Object? counterOfferCurrency = null,
     Object? remarks = null,
     Object? bundleDetails = null,
     Object? bundleMaterials = null,
+    Object? bonusMaterials = null,
     Object? taxes = null,
   }) {
     return _then(_value.copyWith(
@@ -173,6 +183,10 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
+      principalCode: null == principalCode
+          ? _value.principalCode
+          : principalCode // ignore: cast_nullable_to_non_nullable
+              as String,
       counterOfferPrice: null == counterOfferPrice
           ? _value.counterOfferPrice
           : counterOfferPrice // ignore: cast_nullable_to_non_nullable
@@ -193,6 +207,10 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.bundleMaterials
           : bundleMaterials // ignore: cast_nullable_to_non_nullable
               as List<MaterialDto>,
+      bonusMaterials: null == bonusMaterials
+          ? _value.bonusMaterials
+          : bonusMaterials // ignore: cast_nullable_to_non_nullable
+              as List<BonusSampleItemDto>,
       taxes: null == taxes
           ? _value.taxes
           : taxes // ignore: cast_nullable_to_non_nullable
@@ -234,6 +252,7 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
       String genericMaterialName,
       @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
       double counterOfferPrice,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
@@ -242,6 +261,8 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
       @JsonKey(name: 'BundleDetails') BundleDetailsDto bundleDetails,
       @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
       List<MaterialDto> bundleMaterials,
+      @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
+      List<BonusSampleItemDto> bonusMaterials,
       @JsonKey(name: 'taxes', defaultValue: <String>[]) List<String> taxes});
 
   @override
@@ -270,11 +291,13 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
     Object? principalName = null,
+    Object? principalCode = null,
     Object? counterOfferPrice = null,
     Object? counterOfferCurrency = null,
     Object? remarks = null,
     Object? bundleDetails = null,
     Object? bundleMaterials = null,
+    Object? bonusMaterials = null,
     Object? taxes = null,
   }) {
     return _then(_$_CartProductDto(
@@ -322,6 +345,10 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
+      principalCode: null == principalCode
+          ? _value.principalCode
+          : principalCode // ignore: cast_nullable_to_non_nullable
+              as String,
       counterOfferPrice: null == counterOfferPrice
           ? _value.counterOfferPrice
           : counterOfferPrice // ignore: cast_nullable_to_non_nullable
@@ -342,6 +369,10 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value._bundleMaterials
           : bundleMaterials // ignore: cast_nullable_to_non_nullable
               as List<MaterialDto>,
+      bonusMaterials: null == bonusMaterials
+          ? _value._bonusMaterials
+          : bonusMaterials // ignore: cast_nullable_to_non_nullable
+              as List<BonusSampleItemDto>,
       taxes: null == taxes
           ? _value._taxes
           : taxes // ignore: cast_nullable_to_non_nullable
@@ -372,6 +403,8 @@ class _$_CartProductDto extends _CartProductDto {
       required this.genericMaterialName,
       @JsonKey(name: 'principalName', defaultValue: '')
       required this.principalName,
+      @JsonKey(name: 'principalCode', defaultValue: '')
+      required this.principalCode,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
       required this.counterOfferPrice,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
@@ -381,9 +414,12 @@ class _$_CartProductDto extends _CartProductDto {
       this.bundleDetails = BundleDetailsDto.empty,
       @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
       required final List<MaterialDto> bundleMaterials,
+      @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
+      required final List<BonusSampleItemDto> bonusMaterials,
       @JsonKey(name: 'taxes', defaultValue: <String>[])
       required final List<String> taxes})
       : _bundleMaterials = bundleMaterials,
+        _bonusMaterials = bonusMaterials,
         _taxes = taxes,
         super._();
 
@@ -424,6 +460,9 @@ class _$_CartProductDto extends _CartProductDto {
   @JsonKey(name: 'principalName', defaultValue: '')
   final String principalName;
   @override
+  @JsonKey(name: 'principalCode', defaultValue: '')
+  final String principalCode;
+  @override
   @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
   final double counterOfferPrice;
   @override
@@ -444,6 +483,15 @@ class _$_CartProductDto extends _CartProductDto {
     return EqualUnmodifiableListView(_bundleMaterials);
   }
 
+  final List<BonusSampleItemDto> _bonusMaterials;
+  @override
+  @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
+  List<BonusSampleItemDto> get bonusMaterials {
+    if (_bonusMaterials is EqualUnmodifiableListView) return _bonusMaterials;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bonusMaterials);
+  }
+
   final List<String> _taxes;
   @override
   @JsonKey(name: 'taxes', defaultValue: <String>[])
@@ -455,7 +503,7 @@ class _$_CartProductDto extends _CartProductDto {
 
   @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, counterOfferPrice: $counterOfferPrice, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, taxes: $taxes)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, taxes: $taxes)';
   }
 
   @override
@@ -484,6 +532,8 @@ class _$_CartProductDto extends _CartProductDto {
                 other.genericMaterialName == genericMaterialName) &&
             (identical(other.principalName, principalName) ||
                 other.principalName == principalName) &&
+            (identical(other.principalCode, principalCode) ||
+                other.principalCode == principalCode) &&
             (identical(other.counterOfferPrice, counterOfferPrice) ||
                 other.counterOfferPrice == counterOfferPrice) &&
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
@@ -493,30 +543,35 @@ class _$_CartProductDto extends _CartProductDto {
                 other.bundleDetails == bundleDetails) &&
             const DeepCollectionEquality()
                 .equals(other._bundleMaterials, _bundleMaterials) &&
+            const DeepCollectionEquality()
+                .equals(other._bonusMaterials, _bonusMaterials) &&
             const DeepCollectionEquality().equals(other._taxes, _taxes));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      productID,
-      parentID,
-      type,
-      quantity,
-      materialNumber,
-      materialDescription,
-      therapeuticClass,
-      taxClassification,
-      itemRegistrationNumber,
-      genericMaterialName,
-      principalName,
-      counterOfferPrice,
-      counterOfferCurrency,
-      remarks,
-      bundleDetails,
-      const DeepCollectionEquality().hash(_bundleMaterials),
-      const DeepCollectionEquality().hash(_taxes));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        productID,
+        parentID,
+        type,
+        quantity,
+        materialNumber,
+        materialDescription,
+        therapeuticClass,
+        taxClassification,
+        itemRegistrationNumber,
+        genericMaterialName,
+        principalName,
+        principalCode,
+        counterOfferPrice,
+        counterOfferCurrency,
+        remarks,
+        bundleDetails,
+        const DeepCollectionEquality().hash(_bundleMaterials),
+        const DeepCollectionEquality().hash(_bonusMaterials),
+        const DeepCollectionEquality().hash(_taxes)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -554,6 +609,8 @@ abstract class _CartProductDto extends CartProductDto {
       required final String genericMaterialName,
       @JsonKey(name: 'principalName', defaultValue: '')
       required final String principalName,
+      @JsonKey(name: 'principalCode', defaultValue: '')
+      required final String principalCode,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
       required final double counterOfferPrice,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
@@ -562,6 +619,8 @@ abstract class _CartProductDto extends CartProductDto {
       @JsonKey(name: 'BundleDetails') final BundleDetailsDto bundleDetails,
       @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
       required final List<MaterialDto> bundleMaterials,
+      @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
+      required final List<BonusSampleItemDto> bonusMaterials,
       @JsonKey(name: 'taxes', defaultValue: <String>[])
       required final List<String> taxes}) = _$_CartProductDto;
   const _CartProductDto._() : super._();
@@ -603,6 +662,9 @@ abstract class _CartProductDto extends CartProductDto {
   @JsonKey(name: 'principalName', defaultValue: '')
   String get principalName;
   @override
+  @JsonKey(name: 'principalCode', defaultValue: '')
+  String get principalCode;
+  @override
   @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
   double get counterOfferPrice;
   @override
@@ -617,6 +679,9 @@ abstract class _CartProductDto extends CartProductDto {
   @override
   @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
   List<MaterialDto> get bundleMaterials;
+  @override
+  @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
+  List<BonusSampleItemDto> get bonusMaterials;
   @override
   @JsonKey(name: 'taxes', defaultValue: <String>[])
   List<String> get taxes;

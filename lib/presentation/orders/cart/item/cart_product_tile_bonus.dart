@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -15,13 +15,28 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+
 class CartProductTileBonus extends StatelessWidget {
-  final PriceAggregate cartItem;
-  final int index;
+  final PriceAggregate cartProduct;
+  final BonusSampleItem bonusItem;
+
   const CartProductTileBonus({
     Key? key,
-    required this.cartItem,
-    required this.index,
+    required this.bonusItem,
+    required this.cartProduct,
   }) : super(key: key);
 
   @override
@@ -32,7 +47,26 @@ class CartProductTileBonus extends StatelessWidget {
         CustomSlidableAction(
           label: '',
           icon: Icons.delete_outline,
-          onPressed: (v) {},
+          onPressed: (v) => context.read<CartBloc>().add(
+                CartEvent.addBonusToCartItem(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                  bonusMaterial: MaterialInfo.empty().copyWith(
+                    materialNumber: bonusItem.materialNumber,
+                    parentID: cartProduct.materialInfo.materialNumber
+                        .getOrDefaultValue(''),
+                    quantity: 0,
+                  ),
+                  user: context.read<UserBloc>().state.user,
+                  salesOrganisationConfigs:
+                      context.read<SalesOrgBloc>().state.configs,
+                  counterOfferDetails: RequestCounterOfferDetails.empty(),
+                  bonusItemId: bonusItem.itemId,
+                ),
+              ),
         ),
       ],
       borderRadius: 8,
@@ -41,7 +75,8 @@ class CartProductTileBonus extends StatelessWidget {
         child: Column(
           children: [
             _MaterialDetailsSection(
-              cartItem: cartItem,
+              bonusItem: bonusItem,
+              cartProduct: cartProduct,
             ),
             const _ItemSubTotalSection(),
           ],
@@ -52,9 +87,13 @@ class CartProductTileBonus extends StatelessWidget {
 }
 
 class _MaterialDetailsSection extends StatelessWidget {
-  final PriceAggregate cartItem;
-  const _MaterialDetailsSection({Key? key, required this.cartItem})
-      : super(key: key);
+  final PriceAggregate cartProduct;
+  final BonusSampleItem bonusItem;
+  const _MaterialDetailsSection({
+    Key? key,
+    required this.bonusItem,
+    required this.cartProduct,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +102,16 @@ class _MaterialDetailsSection extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _MaterialImageSection(cartProduct: cartItem),
+          _MaterialImageSection(
+            bonusItem: bonusItem,
+          ),
           const SizedBox(
             width: 8,
           ),
-          _MaterialDetails(cartItem: cartItem),
+          _MaterialDetails(
+            bonusItem: bonusItem,
+            cartProduct: cartProduct,
+          ),
         ],
       ),
     );
@@ -101,8 +145,13 @@ class _ItemSubTotalSection extends StatelessWidget {
 }
 
 class _MaterialDetails extends StatelessWidget {
-  final PriceAggregate cartItem;
-  const _MaterialDetails({Key? key, required this.cartItem}) : super(key: key);
+  final PriceAggregate cartProduct;
+  final BonusSampleItem bonusItem;
+  const _MaterialDetails({
+    Key? key,
+    required this.bonusItem,
+    required this.cartProduct,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +162,7 @@ class _MaterialDetails extends StatelessWidget {
           Row(
             children: [
               Text(
-                cartItem.materialInfo.materialNumber.displayMatNo,
+                bonusItem.materialNumber.displayMatNo,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -129,11 +178,14 @@ class _MaterialDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              cartItem.materialInfo.materialDescription,
+              bonusItem.materialDescription,
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-          _MaterialQuantitySection(cartItem: cartItem),
+          _MaterialQuantitySection(
+            bonusItem: bonusItem,
+            cartProduct: cartProduct,
+          ),
         ],
       ),
     );
@@ -141,9 +193,13 @@ class _MaterialDetails extends StatelessWidget {
 }
 
 class _MaterialQuantitySection extends StatefulWidget {
-  final PriceAggregate cartItem;
-  const _MaterialQuantitySection({Key? key, required this.cartItem})
-      : super(key: key);
+  final PriceAggregate cartProduct;
+  final BonusSampleItem bonusItem;
+  const _MaterialQuantitySection({
+    Key? key,
+    required this.bonusItem,
+    required this.cartProduct,
+  }) : super(key: key);
 
   @override
   State<_MaterialQuantitySection> createState() =>
@@ -156,8 +212,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   @override
   void initState() {
     _controller.value = TextEditingValue(
-      text: (widget.cartItem.addedBonusList.firstOrNull?.qty ?? 0)
-          .toStringAsFixed(0),
+      text: widget.bonusItem.qty.getOrDefaultValue(0).toString(),
       selection: TextSelection.collapsed(
         offset: _controller.selection.base.offset,
       ),
@@ -171,38 +226,76 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
     super.dispose();
   }
 
+  String get _qty => widget.bonusItem.qty.getOrDefaultValue(0).toString();
+
+  @override
+  void didUpdateWidget(covariant _MaterialQuantitySection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_qty != _controller.text) {
+      _controller.text = _qty;
+      _controller.selection = TextSelection.collapsed(offset: _qty.length);
+    }
+  }
+
+  void _upsertCart(BuildContext context, int qty) {
+    if (MaterialQty(qty).isBonusMaxQuantityExceed) {
+      CustomSnackBar(
+        icon: const Icon(
+          Icons.info,
+          color: ZPColors.error,
+        ),
+        backgroundColor: ZPColors.errorSnackBarColor,
+        messageText: 'In cart quantity should not be greater than 999'.tr(),
+      ).show(context);
+
+      return;
+    }
+    context.read<CartBloc>().add(
+          CartEvent.addBonusToCartItem(
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+            bonusMaterial: MaterialInfo.empty().copyWith(
+              materialNumber: widget.bonusItem.materialNumber,
+              parentID: widget.cartProduct.materialInfo.materialNumber
+                  .getOrDefaultValue(''),
+              quantity: qty,
+            ),
+            user: context.read<UserBloc>().state.user,
+            salesOrganisationConfigs:
+                context.read<SalesOrgBloc>().state.configs,
+            counterOfferDetails: RequestCounterOfferDetails.empty(),
+            bonusItemId: widget.bonusItem.itemId,
+          ),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: Focus(
-        child: BlocBuilder<CartBloc, CartState>(
-          builder: (context, state) {
-            _controller.text =
-                widget.cartItem.addedBonusList.firstOrNull?.qty.toString() ??
-                    '0';
-
-            return CartItemQuantityInput(
-              isEnabled: false,
-              quantityAddKey: WidgetKeys.cartItemAddKey,
-              quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
-              quantityTextKey: WidgetKeys.quantityInputTextKey,
-              controller: _controller,
-              onFieldChange: (value) {},
-              minusPressed: (k) {},
-              addPressed: (k) {},
-              onSubmit: (value) {},
-            );
-          },
-        ),
+      child: CartItemQuantityInput(
+        isEnabled: true,
+        quantityAddKey: WidgetKeys.cartItemAddKey,
+        quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
+        quantityTextKey: WidgetKeys.quantityInputTextKey,
+        controller: _controller,
+        isLoading: context.read<CartBloc>().state.isUpserting,
+        onFieldChange: (value) {},
+        minusPressed: (k) => _upsertCart(context, k),
+        addPressed: (k) => _upsertCart(context, k),
+        onSubmit: (value) => _upsertCart(context, value),
+        maximumQty: 999,
       ),
     );
   }
 }
 
 class _MaterialImageSection extends StatelessWidget {
-  final PriceAggregate cartProduct;
-  const _MaterialImageSection({required this.cartProduct, Key? key})
+  final BonusSampleItem bonusItem;
+  const _MaterialImageSection({required this.bonusItem, Key? key})
       : super(key: key);
 
   @override
@@ -216,11 +309,8 @@ class _MaterialImageSection extends StatelessWidget {
               showBorder: true,
               padding: const EdgeInsets.all(12),
               child: CachedNetworkImage(
-                imageUrl: state
-                        .additionInfo[cartProduct.materialInfo.materialNumber]
-                        ?.productImages
-                        .first
-                        .thumbNail ??
+                imageUrl: state.additionInfo[bonusItem.materialNumber]
+                        ?.productImages.first.thumbNail ??
                     '',
                 fit: BoxFit.fitHeight,
                 height: MediaQuery.of(context).size.height * 0.06,

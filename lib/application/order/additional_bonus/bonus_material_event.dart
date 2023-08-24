@@ -2,23 +2,28 @@ part of 'bonus_material_bloc.dart';
 
 @freezed
 class BonusMaterialEvent with _$BonusMaterialEvent {
-  const factory BonusMaterialEvent.initialized() = _Initialized;
   const factory BonusMaterialEvent.fetch({
-    required User user,
-    required SalesOrganisationConfigs configs,
-    required String searchKey,
-    required CustomerCodeInfo customerInfo,
-    required ShipToInfo shipInfo,
     required SalesOrganisation salesOrganisation,
-    required String pickAndPack,
+    required SalesOrganisationConfigs configs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required User user,
+    required bool isGimmickMaterialEnabled,
+    required PrincipalData principalData,
   }) = _Fetch;
-  const factory BonusMaterialEvent.autoSearch({
-    required User user,
-    required SalesOrganisationConfigs configs,
-    required String searchKey,
-    required CustomerCodeInfo customerInfo,
-    required ShipToInfo shipInfo,
+  factory BonusMaterialEvent.loadMoreBonusItem({
     required SalesOrganisation salesOrganisation,
-    required String pickAndPack,
-  }) = _AutoSearch;
+    required SalesOrganisationConfigs configs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required User user,
+    required PrincipalData principalData,
+    required bool isGimmickMaterialEnabled,
+  }) = _LoadMoreBonusItem;
+  factory BonusMaterialEvent.validateBonusQuantity({
+    required MaterialInfo bonusMaterial,
+  }) = _ValidateBonusQuantity;
+  factory BonusMaterialEvent.updateBonusItemQuantity({
+    required MaterialInfo updatedBonusItem,
+  }) = _UpdateBonusItemQuantity;
 }

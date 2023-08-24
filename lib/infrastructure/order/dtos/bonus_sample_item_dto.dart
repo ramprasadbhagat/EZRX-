@@ -1,0 +1,55 @@
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+
+part 'bonus_sample_item_dto.freezed.dart';
+part 'bonus_sample_item_dto.g.dart';
+
+@freezed
+class BonusSampleItemDto with _$BonusSampleItemDto {
+  const BonusSampleItemDto._();
+  const factory BonusSampleItemDto({
+    @JsonKey(name: 'materialNumber', defaultValue: '')
+        required String materialNumber,
+    @JsonKey(name: 'productCount', defaultValue: 0) required int qty,
+    @JsonKey(name: 'principalName', defaultValue: '')
+        required String principalName,
+    @JsonKey(name: 'materialDescription', defaultValue: '')
+        required String materialDescription,
+    @JsonKey(name: 'principalCode', defaultValue: '')
+        required String principalCode,
+    @JsonKey(name: 'ItemId', defaultValue: '') required String itemId,
+  }) = _BonusSampleItemDto;
+
+  BonusSampleItem toDomain() {
+    return BonusSampleItem(
+      qty: MaterialQty(qty),
+      materialDescription: materialDescription,
+      materialNumber: MaterialNumber(materialNumber),
+      principalData: PrincipalData(
+        principalCode: PrincipalCode(principalCode),
+        principalName: PrincipalName(principalName),
+      ),
+      itemId: StringValue(itemId),
+    );
+  }
+
+  factory BonusSampleItemDto.fromDomain(BonusSampleItem bonus) {
+    return BonusSampleItemDto(
+      materialDescription: bonus.materialDescription,
+      materialNumber: bonus.materialNumber.getOrCrash(),
+      qty: bonus.qty.getOrCrash(),
+      principalCode: bonus.principalData.principalCode.getOrCrash(),
+      principalName: bonus.principalData.principalName.getOrCrash(),
+      itemId: bonus.itemId.getOrCrash(),
+    );
+  }
+
+  factory BonusSampleItemDto.fromJson(Map<String, dynamic> json) =>
+      _$BonusSampleItemDtoFromJson(json);
+}

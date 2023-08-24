@@ -1,17 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
@@ -111,36 +105,6 @@ class _UpdateBonusState extends State<UpdateBonus> {
             ElevatedButton(
               key: const Key('addButton'),
               onPressed: () {
-                context.read<CartBloc>().add(
-                      CartEvent.addBonusToCartItem(
-                        item: widget.cartItem,
-                        bonusItem: MaterialItemBonus.empty().copyWith(
-                          materialInfo: widget.materialInfo,
-                          materialDescription:
-                              widget.materialInfo.materialDescription,
-                          additionalBonusFlag: true,
-                          bonusOverrideFlag: true,
-                          qty: int.tryParse(controller.text) ?? 1,
-                        ),
-                        customerCodeInfo: context
-                            .read<CustomerCodeBloc>()
-                            .state
-                            .customerCodeInfo,
-                        doNotallowOutOfStockMaterial: context
-                            .read<EligibilityBloc>()
-                            .state
-                            .doNotAllowOutOfStockMaterials,
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        salesOrganisationConfigs:
-                            context.read<SalesOrgBloc>().state.configs,
-                        shipToInfo:
-                            context.read<CustomerCodeBloc>().state.shipToInfo,
-                      ),
-                    );
-
                 context.router.pop();
                 CustomSnackBar(
                   messageText: 'Bonus item added to the cart'.tr(),

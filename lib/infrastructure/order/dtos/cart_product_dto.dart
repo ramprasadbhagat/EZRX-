@@ -11,6 +11,8 @@ import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/infrastructure/order/dtos/bonus_sample_item_dto.dart';
+
 part 'cart_product_dto.freezed.dart';
 part 'cart_product_dto.g.dart';
 
@@ -36,6 +38,8 @@ class CartProductDto with _$CartProductDto {
         required String genericMaterialName,
     @JsonKey(name: 'principalName', defaultValue: '')
         required String principalName,
+    @JsonKey(name: 'principalCode', defaultValue: '')
+        required String principalCode,
     @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
         required double counterOfferPrice,
     @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
@@ -46,6 +50,8 @@ class CartProductDto with _$CartProductDto {
         BundleDetailsDto bundleDetails,
     @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
         required List<MaterialDto> bundleMaterials,
+    @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
+        required List<BonusSampleItemDto> bonusMaterials,
     @JsonKey(name: 'taxes', defaultValue: <String>[])
         required List<String> taxes,
   }) = _CartProductDto;
@@ -68,6 +74,8 @@ class CartProductDto with _$CartProductDto {
       type: cartItemDetails.materialInfo.type.getOrCrash(),
       principalName: cartItemDetails.materialInfo.principalData.principalName
           .getOrDefaultValue(''),
+      principalCode:
+          cartItemDetails.materialInfo.principalData.principalCode.getOrCrash(),
       remarks: cartItemDetails.materialInfo.remarks,
       counterOfferCurrency: cartItemDetails
           .materialInfo.counterOfferDetails.counterOfferCurrency
@@ -84,6 +92,9 @@ class CartProductDto with _$CartProductDto {
       bundleMaterials: (cartItemDetails.bundle.materials)
           .map((e) => MaterialDto.fromDomain(e))
           .toList(),
+      bonusMaterials: cartItemDetails.bonusSampleItems
+          .map((e) => BonusSampleItemDto.fromDomain(e))
+          .toList(),
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -99,6 +110,7 @@ class CartProductDto with _$CartProductDto {
       therapeuticClass: therapeuticClass,
       principalData: PrincipalData.empty().copyWith(
         principalName: PrincipalName(principalName),
+        principalCode: PrincipalCode(principalCode),
       ),
       counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
         comment: StringValue(remarks),
@@ -121,6 +133,7 @@ class CartProductDto with _$CartProductDto {
         materials: bundleMaterials.map((e) => e.toDomain()).toList(),
       ),
       quantity: quantity,
+      bonusSampleItems: bonusMaterials.map((e) => e.toDomain()).toList(),
     );
   }
 

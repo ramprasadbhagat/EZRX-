@@ -408,6 +408,7 @@ class CartRepository implements ICartRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required String language,
+    required String itemId,
     required int quantity,
     required RequestCounterOfferDetails counterOfferDetails,
   }) async {
@@ -429,12 +430,13 @@ class CartRepository implements ICartRepository {
         productNumber: materialInfo.materialNumber.getOrDefaultValue(''),
         quantity: quantity,
         language: language,
-        parentID: '',
+        parentID: materialInfo.parentID,
         counterOfferPrice:
             counterOfferDetails.counterOfferPrice.counterOfferValue,
         counterOfferCurrency: counterOfferDetails.counterOfferCurrency.code,
         comment: counterOfferDetails.comment.getOrDefaultValue(''),
         type: materialInfo.type.getValue(),
+        itemId: itemId,
       );
 
       final productList = await cartRemoteDataSource.upsertCart(

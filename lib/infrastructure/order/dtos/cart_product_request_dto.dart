@@ -26,6 +26,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
     @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
         required String counterOfferCurrency,
     @JsonKey(name: 'Type', defaultValue: '') required String type,
+    @JsonKey(name: 'ItemId', defaultValue: '') required String itemId,
   }) = _CartProductRequestDto;
 
   factory CartProductRequestDto.fromDomain(
@@ -44,6 +45,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
       comment: cartProductRequest.comment,
       counterOfferCurrency: cartProductRequest.counterOfferCurrency,
       type: cartProductRequest.type,
+      itemId: cartProductRequest.itemId,
     );
   }
 
@@ -60,6 +62,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
       comment: comment,
       counterOfferCurrency: counterOfferCurrency,
       type: type,
+      itemId: itemId,
     );
   }
 
@@ -69,7 +72,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
   Map<String, dynamic> toMap() => toJson()
     ..removeWhere(
       (key, value) =>
-          (key != 'ParentID') &&
+          (key != 'ParentID' && key != 'ItemId') &&
           ((value is String && (value.isEmpty || value == 'NA')) ||
               (value is double && value == 0.0)),
     );

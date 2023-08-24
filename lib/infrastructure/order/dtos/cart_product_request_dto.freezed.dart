@@ -45,6 +45,8 @@ mixin _$CartProductRequestDto {
   String get counterOfferCurrency => throw _privateConstructorUsedError;
   @JsonKey(name: 'Type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ItemId', defaultValue: '')
+  String get itemId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -59,30 +61,21 @@ abstract class $CartProductRequestDtoCopyWith<$Res> {
       _$CartProductRequestDtoCopyWithImpl<$Res, CartProductRequestDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'SalesOrg', defaultValue: '')
-          String salesOrg,
-      @JsonKey(name: 'CustomerCode', defaultValue: '')
-          String customerCode,
-      @JsonKey(name: 'ShipToID', defaultValue: '')
-          String shipTo,
-      @JsonKey(name: 'ProductID', defaultValue: '')
-          String productNumber,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-          int quantity,
-      @JsonKey(name: 'ItemSource', defaultValue: 'EZRX')
-          String itemSource,
-      @JsonKey(name: 'Language', defaultValue: 'EN')
-          String language,
-      @JsonKey(name: 'ParentID', defaultValue: '')
-          String parentID,
+      {@JsonKey(name: 'SalesOrg', defaultValue: '') String salesOrg,
+      @JsonKey(name: 'CustomerCode', defaultValue: '') String customerCode,
+      @JsonKey(name: 'ShipToID', defaultValue: '') String shipTo,
+      @JsonKey(name: 'ProductID', defaultValue: '') String productNumber,
+      @JsonKey(name: 'Quantity', defaultValue: 0) int quantity,
+      @JsonKey(name: 'ItemSource', defaultValue: 'EZRX') String itemSource,
+      @JsonKey(name: 'Language', defaultValue: 'EN') String language,
+      @JsonKey(name: 'ParentID', defaultValue: '') String parentID,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
-          double counterOfferPrice,
-      @JsonKey(name: 'Comment', defaultValue: '')
-          String comment,
+      double counterOfferPrice,
+      @JsonKey(name: 'Comment', defaultValue: '') String comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
-          String counterOfferCurrency,
-      @JsonKey(name: 'Type', defaultValue: '')
-          String type});
+      String counterOfferCurrency,
+      @JsonKey(name: 'Type', defaultValue: '') String type,
+      @JsonKey(name: 'ItemId', defaultValue: '') String itemId});
 }
 
 /// @nodoc
@@ -111,6 +104,7 @@ class _$CartProductRequestDtoCopyWithImpl<$Res,
     Object? comment = null,
     Object? counterOfferCurrency = null,
     Object? type = null,
+    Object? itemId = null,
   }) {
     return _then(_value.copyWith(
       salesOrg: null == salesOrg
@@ -161,6 +155,10 @@ class _$CartProductRequestDtoCopyWithImpl<$Res,
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      itemId: null == itemId
+          ? _value.itemId
+          : itemId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -174,30 +172,21 @@ abstract class _$$_CartProductRequestDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'SalesOrg', defaultValue: '')
-          String salesOrg,
-      @JsonKey(name: 'CustomerCode', defaultValue: '')
-          String customerCode,
-      @JsonKey(name: 'ShipToID', defaultValue: '')
-          String shipTo,
-      @JsonKey(name: 'ProductID', defaultValue: '')
-          String productNumber,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-          int quantity,
-      @JsonKey(name: 'ItemSource', defaultValue: 'EZRX')
-          String itemSource,
-      @JsonKey(name: 'Language', defaultValue: 'EN')
-          String language,
-      @JsonKey(name: 'ParentID', defaultValue: '')
-          String parentID,
+      {@JsonKey(name: 'SalesOrg', defaultValue: '') String salesOrg,
+      @JsonKey(name: 'CustomerCode', defaultValue: '') String customerCode,
+      @JsonKey(name: 'ShipToID', defaultValue: '') String shipTo,
+      @JsonKey(name: 'ProductID', defaultValue: '') String productNumber,
+      @JsonKey(name: 'Quantity', defaultValue: 0) int quantity,
+      @JsonKey(name: 'ItemSource', defaultValue: 'EZRX') String itemSource,
+      @JsonKey(name: 'Language', defaultValue: 'EN') String language,
+      @JsonKey(name: 'ParentID', defaultValue: '') String parentID,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
-          double counterOfferPrice,
-      @JsonKey(name: 'Comment', defaultValue: '')
-          String comment,
+      double counterOfferPrice,
+      @JsonKey(name: 'Comment', defaultValue: '') String comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
-          String counterOfferCurrency,
-      @JsonKey(name: 'Type', defaultValue: '')
-          String type});
+      String counterOfferCurrency,
+      @JsonKey(name: 'Type', defaultValue: '') String type,
+      @JsonKey(name: 'ItemId', defaultValue: '') String itemId});
 }
 
 /// @nodoc
@@ -223,6 +212,7 @@ class __$$_CartProductRequestDtoCopyWithImpl<$Res>
     Object? comment = null,
     Object? counterOfferCurrency = null,
     Object? type = null,
+    Object? itemId = null,
   }) {
     return _then(_$_CartProductRequestDto(
       salesOrg: null == salesOrg
@@ -273,6 +263,10 @@ class __$$_CartProductRequestDtoCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      itemId: null == itemId
+          ? _value.itemId
+          : itemId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -281,30 +275,23 @@ class __$$_CartProductRequestDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CartProductRequestDto extends _CartProductRequestDto {
   const _$_CartProductRequestDto(
-      {@JsonKey(name: 'SalesOrg', defaultValue: '')
-          required this.salesOrg,
+      {@JsonKey(name: 'SalesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'CustomerCode', defaultValue: '')
-          required this.customerCode,
-      @JsonKey(name: 'ShipToID', defaultValue: '')
-          required this.shipTo,
-      @JsonKey(name: 'ProductID', defaultValue: '')
-          required this.productNumber,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-          required this.quantity,
+      required this.customerCode,
+      @JsonKey(name: 'ShipToID', defaultValue: '') required this.shipTo,
+      @JsonKey(name: 'ProductID', defaultValue: '') required this.productNumber,
+      @JsonKey(name: 'Quantity', defaultValue: 0) required this.quantity,
       @JsonKey(name: 'ItemSource', defaultValue: 'EZRX')
-          required this.itemSource,
-      @JsonKey(name: 'Language', defaultValue: 'EN')
-          required this.language,
-      @JsonKey(name: 'ParentID', defaultValue: '')
-          required this.parentID,
+      required this.itemSource,
+      @JsonKey(name: 'Language', defaultValue: 'EN') required this.language,
+      @JsonKey(name: 'ParentID', defaultValue: '') required this.parentID,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
-          required this.counterOfferPrice,
-      @JsonKey(name: 'Comment', defaultValue: '')
-          required this.comment,
+      required this.counterOfferPrice,
+      @JsonKey(name: 'Comment', defaultValue: '') required this.comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
-          required this.counterOfferCurrency,
-      @JsonKey(name: 'Type', defaultValue: '')
-          required this.type})
+      required this.counterOfferCurrency,
+      @JsonKey(name: 'Type', defaultValue: '') required this.type,
+      @JsonKey(name: 'ItemId', defaultValue: '') required this.itemId})
       : super._();
 
   factory _$_CartProductRequestDto.fromJson(Map<String, dynamic> json) =>
@@ -346,10 +333,13 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
   @override
   @JsonKey(name: 'Type', defaultValue: '')
   final String type;
+  @override
+  @JsonKey(name: 'ItemId', defaultValue: '')
+  final String itemId;
 
   @override
   String toString() {
-    return 'CartProductRequestDto(salesOrg: $salesOrg, customerCode: $customerCode, shipTo: $shipTo, productNumber: $productNumber, quantity: $quantity, itemSource: $itemSource, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type)';
+    return 'CartProductRequestDto(salesOrg: $salesOrg, customerCode: $customerCode, shipTo: $shipTo, productNumber: $productNumber, quantity: $quantity, itemSource: $itemSource, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type, itemId: $itemId)';
   }
 
   @override
@@ -377,7 +367,8 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
                 other.counterOfferCurrency == counterOfferCurrency) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.itemId, itemId) || other.itemId == itemId));
   }
 
   @JsonKey(ignore: true)
@@ -395,7 +386,8 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
       counterOfferPrice,
       comment,
       counterOfferCurrency,
-      type);
+      type,
+      itemId);
 
   @JsonKey(ignore: true)
   @override
@@ -415,29 +407,27 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
 abstract class _CartProductRequestDto extends CartProductRequestDto {
   const factory _CartProductRequestDto(
       {@JsonKey(name: 'SalesOrg', defaultValue: '')
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'CustomerCode', defaultValue: '')
-          required final String customerCode,
-      @JsonKey(name: 'ShipToID', defaultValue: '')
-          required final String shipTo,
+      required final String customerCode,
+      @JsonKey(name: 'ShipToID', defaultValue: '') required final String shipTo,
       @JsonKey(name: 'ProductID', defaultValue: '')
-          required final String productNumber,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-          required final int quantity,
+      required final String productNumber,
+      @JsonKey(name: 'Quantity', defaultValue: 0) required final int quantity,
       @JsonKey(name: 'ItemSource', defaultValue: 'EZRX')
-          required final String itemSource,
+      required final String itemSource,
       @JsonKey(name: 'Language', defaultValue: 'EN')
-          required final String language,
+      required final String language,
       @JsonKey(name: 'ParentID', defaultValue: '')
-          required final String parentID,
+      required final String parentID,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
-          required final double counterOfferPrice,
-      @JsonKey(name: 'Comment', defaultValue: '')
-          required final String comment,
+      required final double counterOfferPrice,
+      @JsonKey(name: 'Comment', defaultValue: '') required final String comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
-          required final String counterOfferCurrency,
-      @JsonKey(name: 'Type', defaultValue: '')
-          required final String type}) = _$_CartProductRequestDto;
+      required final String counterOfferCurrency,
+      @JsonKey(name: 'Type', defaultValue: '') required final String type,
+      @JsonKey(name: 'ItemId', defaultValue: '')
+      required final String itemId}) = _$_CartProductRequestDto;
   const _CartProductRequestDto._() : super._();
 
   factory _CartProductRequestDto.fromJson(Map<String, dynamic> json) =
@@ -479,6 +469,9 @@ abstract class _CartProductRequestDto extends CartProductRequestDto {
   @override
   @JsonKey(name: 'Type', defaultValue: '')
   String get type;
+  @override
+  @JsonKey(name: 'ItemId', defaultValue: '')
+  String get itemId;
   @override
   @JsonKey(ignore: true)
   _$$_CartProductRequestDtoCopyWith<_$_CartProductRequestDto> get copyWith =>

@@ -21,6 +21,7 @@ _$_CartProductRequestDto _$$_CartProductRequestDtoFromJson(
       comment: json['Comment'] as String? ?? '',
       counterOfferCurrency: json['CounterOfferCurrency'] as String? ?? '',
       type: json['Type'] as String? ?? '',
+      itemId: json['ItemId'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_CartProductRequestDtoToJson(
@@ -38,4 +39,5 @@ Map<String, dynamic> _$$_CartProductRequestDtoToJson(
       'Comment': instance.comment,
       'CounterOfferCurrency': instance.counterOfferCurrency,
       'Type': instance.type,
+      'ItemId': instance.itemId,
     };

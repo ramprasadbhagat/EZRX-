@@ -246,7 +246,7 @@ class _CartScrollList extends StatelessWidget {
         );
       },
       buildWhen: (previous, current) =>
-          previous.cartProducts.length != current.cartProducts.length ||
+          previous.cartProducts != current.cartProducts ||
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         return Expanded(
@@ -318,12 +318,17 @@ class _CartScrollList extends StatelessWidget {
                               : CartProductTile(
                                   cartItem: item,
                                 ),
-                          state.cartProducts[index].addedBonusList.isNotEmpty
-                              ? CartProductTileBonus(
-                                  cartItem: item,
-                                  index: index,
-                                )
-                              : const SizedBox.shrink(),
+                          if (item.bonusSampleItems.isNotEmpty)
+                            Column(
+                              children: item.bonusSampleItems
+                                  .map(
+                                    (e) => CartProductTileBonus(
+                                      bonusItem: e,
+                                      cartProduct: item,
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
                         ],
                       );
                     },

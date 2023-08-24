@@ -75,7 +75,9 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
   }
 
   int get orderItemsCount => orderHistoryDetailsOrderItem.fold<int>(
-      0, (previous, current) => previous + current.qty,);
+        0,
+        (previous, current) => previous + current.qty,
+      );
 
   OrderHistoryDetails copyWithStock({
     required List<MaterialStockInfo> stockInfoList,
@@ -94,6 +96,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
                     .firstWhere(
                       (element) =>
                           element.getMaterialNumber == e.materialNumber,
+                      orElse: () => PriceAggregate.empty(),
                     )
                     .copyWith(
                       salesOrgConfig: salesOrganisationConfigs,

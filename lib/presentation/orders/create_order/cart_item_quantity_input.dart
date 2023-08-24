@@ -58,9 +58,7 @@ class CartItemQuantityInput extends StatelessWidget {
                       offset: controller.selection.base.offset,
                     ),
                   );
-                  onSubmit(1);
                 }
-                onSubmit(int.parse(controller.text));
               },
               enabled: isEnabled,
               key: quantityTextKey,
@@ -126,7 +124,7 @@ class CartItemQuantityInput extends StatelessWidget {
                   onPressed: () {
                     FocusScope.of(context).unfocus();
                     final value = (int.tryParse(controller.text) ?? 0) + 1;
-                    if (value < maximumQty) {
+                    if (value <= maximumQty) {
                       final text = value.toString();
                       controller.value = TextEditingValue(
                         text: text,

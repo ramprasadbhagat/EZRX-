@@ -36,6 +36,7 @@ class MaterialListRemoteDataSource {
     required String orderByName,
     required List<String> manufactureList,
     required List<String> countryListCode,
+    required String principalCode,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery();
@@ -61,6 +62,10 @@ class MaterialListRemoteDataSource {
       }
       if (countryListCode.isNotEmpty) {
         variables['request']!['CountryCode'] = countryListCode;
+      }
+
+      if (principalCode.isNotEmpty) {
+        variables['request']!['principalCode'] = principalCode;
       }
 
       final res = await httpService.request(

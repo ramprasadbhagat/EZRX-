@@ -8,12 +8,10 @@ class SubmitMaterialItemBonus with _$SubmitMaterialItemBonus {
   factory SubmitMaterialItemBonus({
     required MaterialNumber materialNumber,
     required int qty,
-    required String comment,
   }) = _SubmitMaterialItemBonus;
 
   factory SubmitMaterialItemBonus.empty() => SubmitMaterialItemBonus(
         materialNumber: MaterialNumber(''),
         qty: 0,
-        comment: '',
       );
 }

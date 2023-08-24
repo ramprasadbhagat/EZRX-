@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SubmitMaterialItemBonus {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
-  String get comment => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SubmitMaterialItemBonusCopyWith<SubmitMaterialItemBonus> get copyWith =>
@@ -31,7 +30,7 @@ abstract class $SubmitMaterialItemBonusCopyWith<$Res> {
           $Res Function(SubmitMaterialItemBonus) then) =
       _$SubmitMaterialItemBonusCopyWithImpl<$Res, SubmitMaterialItemBonus>;
   @useResult
-  $Res call({MaterialNumber materialNumber, int qty, String comment});
+  $Res call({MaterialNumber materialNumber, int qty});
 }
 
 /// @nodoc
@@ -50,7 +49,6 @@ class _$SubmitMaterialItemBonusCopyWithImpl<$Res,
   $Res call({
     Object? materialNumber = null,
     Object? qty = null,
-    Object? comment = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -61,10 +59,6 @@ class _$SubmitMaterialItemBonusCopyWithImpl<$Res,
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -77,7 +71,7 @@ abstract class _$$_SubmitMaterialItemBonusCopyWith<$Res>
       __$$_SubmitMaterialItemBonusCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({MaterialNumber materialNumber, int qty, String comment});
+  $Res call({MaterialNumber materialNumber, int qty});
 }
 
 /// @nodoc
@@ -94,7 +88,6 @@ class __$$_SubmitMaterialItemBonusCopyWithImpl<$Res>
   $Res call({
     Object? materialNumber = null,
     Object? qty = null,
-    Object? comment = null,
   }) {
     return _then(_$_SubmitMaterialItemBonus(
       materialNumber: null == materialNumber
@@ -105,10 +98,6 @@ class __$$_SubmitMaterialItemBonusCopyWithImpl<$Res>
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -116,19 +105,16 @@ class __$$_SubmitMaterialItemBonusCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SubmitMaterialItemBonus implements _SubmitMaterialItemBonus {
-  _$_SubmitMaterialItemBonus(
-      {required this.materialNumber, required this.qty, required this.comment});
+  _$_SubmitMaterialItemBonus({required this.materialNumber, required this.qty});
 
   @override
   final MaterialNumber materialNumber;
   @override
   final int qty;
-  @override
-  final String comment;
 
   @override
   String toString() {
-    return 'SubmitMaterialItemBonus(materialNumber: $materialNumber, qty: $qty, comment: $comment)';
+    return 'SubmitMaterialItemBonus(materialNumber: $materialNumber, qty: $qty)';
   }
 
   @override
@@ -138,12 +124,11 @@ class _$_SubmitMaterialItemBonus implements _SubmitMaterialItemBonus {
             other is _$_SubmitMaterialItemBonus &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
-            (identical(other.qty, qty) || other.qty == qty) &&
-            (identical(other.comment, comment) || other.comment == comment));
+            (identical(other.qty, qty) || other.qty == qty));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber, qty, comment);
+  int get hashCode => Object.hash(runtimeType, materialNumber, qty);
 
   @JsonKey(ignore: true)
   @override
@@ -157,15 +142,12 @@ class _$_SubmitMaterialItemBonus implements _SubmitMaterialItemBonus {
 abstract class _SubmitMaterialItemBonus implements SubmitMaterialItemBonus {
   factory _SubmitMaterialItemBonus(
       {required final MaterialNumber materialNumber,
-      required final int qty,
-      required final String comment}) = _$_SubmitMaterialItemBonus;
+      required final int qty}) = _$_SubmitMaterialItemBonus;
 
   @override
   MaterialNumber get materialNumber;
   @override
   int get qty;
-  @override
-  String get comment;
   @override
   @JsonKey(ignore: true)
   _$$_SubmitMaterialItemBonusCopyWith<_$_SubmitMaterialItemBonus>

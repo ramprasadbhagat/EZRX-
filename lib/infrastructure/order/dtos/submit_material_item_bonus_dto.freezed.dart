@@ -25,8 +25,6 @@ mixin _$SubmitMaterialItemBonusDto {
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'qty', defaultValue: 0)
   int get qty => throw _privateConstructorUsedError;
-  @JsonKey(name: 'comment', defaultValue: '')
-  String get comment => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,8 +41,7 @@ abstract class $SubmitMaterialItemBonusDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
-      @JsonKey(name: 'qty', defaultValue: 0) int qty,
-      @JsonKey(name: 'comment', defaultValue: '') String comment});
+      @JsonKey(name: 'qty', defaultValue: 0) int qty});
 }
 
 /// @nodoc
@@ -63,7 +60,6 @@ class _$SubmitMaterialItemBonusDtoCopyWithImpl<$Res,
   $Res call({
     Object? materialNumber = null,
     Object? qty = null,
-    Object? comment = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -74,10 +70,6 @@ class _$SubmitMaterialItemBonusDtoCopyWithImpl<$Res,
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -93,8 +85,7 @@ abstract class _$$_SubmitMaterialItemBonusDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
-      @JsonKey(name: 'qty', defaultValue: 0) int qty,
-      @JsonKey(name: 'comment', defaultValue: '') String comment});
+      @JsonKey(name: 'qty', defaultValue: 0) int qty});
 }
 
 /// @nodoc
@@ -112,7 +103,6 @@ class __$$_SubmitMaterialItemBonusDtoCopyWithImpl<$Res>
   $Res call({
     Object? materialNumber = null,
     Object? qty = null,
-    Object? comment = null,
   }) {
     return _then(_$_SubmitMaterialItemBonusDto(
       materialNumber: null == materialNumber
@@ -123,10 +113,6 @@ class __$$_SubmitMaterialItemBonusDtoCopyWithImpl<$Res>
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
               as int,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -136,11 +122,8 @@ class __$$_SubmitMaterialItemBonusDtoCopyWithImpl<$Res>
 class _$_SubmitMaterialItemBonusDto extends _SubmitMaterialItemBonusDto {
   _$_SubmitMaterialItemBonusDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber,
-      @JsonKey(name: 'qty', defaultValue: 0)
-          required this.qty,
-      @JsonKey(name: 'comment', defaultValue: '')
-          required this.comment})
+      required this.materialNumber,
+      @JsonKey(name: 'qty', defaultValue: 0) required this.qty})
       : super._();
 
   factory _$_SubmitMaterialItemBonusDto.fromJson(Map<String, dynamic> json) =>
@@ -152,13 +135,10 @@ class _$_SubmitMaterialItemBonusDto extends _SubmitMaterialItemBonusDto {
   @override
   @JsonKey(name: 'qty', defaultValue: 0)
   final int qty;
-  @override
-  @JsonKey(name: 'comment', defaultValue: '')
-  final String comment;
 
   @override
   String toString() {
-    return 'SubmitMaterialItemBonusDto(materialNumber: $materialNumber, qty: $qty, comment: $comment)';
+    return 'SubmitMaterialItemBonusDto(materialNumber: $materialNumber, qty: $qty)';
   }
 
   @override
@@ -168,13 +148,12 @@ class _$_SubmitMaterialItemBonusDto extends _SubmitMaterialItemBonusDto {
             other is _$_SubmitMaterialItemBonusDto &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
-            (identical(other.qty, qty) || other.qty == qty) &&
-            (identical(other.comment, comment) || other.comment == comment));
+            (identical(other.qty, qty) || other.qty == qty));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, materialNumber, qty, comment);
+  int get hashCode => Object.hash(runtimeType, materialNumber, qty);
 
   @JsonKey(ignore: true)
   @override
@@ -193,12 +172,10 @@ class _$_SubmitMaterialItemBonusDto extends _SubmitMaterialItemBonusDto {
 
 abstract class _SubmitMaterialItemBonusDto extends SubmitMaterialItemBonusDto {
   factory _SubmitMaterialItemBonusDto(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
+          {@JsonKey(name: 'materialNumber', defaultValue: '')
           required final String materialNumber,
-      @JsonKey(name: 'qty', defaultValue: 0)
-          required final int qty,
-      @JsonKey(name: 'comment', defaultValue: '')
-          required final String comment}) = _$_SubmitMaterialItemBonusDto;
+          @JsonKey(name: 'qty', defaultValue: 0) required final int qty}) =
+      _$_SubmitMaterialItemBonusDto;
   _SubmitMaterialItemBonusDto._() : super._();
 
   factory _SubmitMaterialItemBonusDto.fromJson(Map<String, dynamic> json) =
@@ -210,9 +187,6 @@ abstract class _SubmitMaterialItemBonusDto extends SubmitMaterialItemBonusDto {
   @override
   @JsonKey(name: 'qty', defaultValue: 0)
   int get qty;
-  @override
-  @JsonKey(name: 'comment', defaultValue: '')
-  String get comment;
   @override
   @JsonKey(ignore: true)
   _$$_SubmitMaterialItemBonusDtoCopyWith<_$_SubmitMaterialItemBonusDto>

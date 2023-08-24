@@ -21,6 +21,11 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+
 part 'cart_bloc.freezed.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -115,23 +120,27 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );*/
       },
-      addBonusToCartItem: (e) {
+      addBonusToCartItem: (e) async {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
-            isFetchingBonus: true,
+            upsertBonusItemInProgressHashCode:
+                List.from(state.upsertBonusItemInProgressHashCode)
+                  ..add(e.bonusMaterial.hashCode),
+            isUpserting: true,
           ),
         );
 
-        /*final failureOrSuccess = await repository.addBonusToCartItem(
-          item: e.item,
-          newBonus: e.bonusItem,
-          overrideQty: e.overrideQty,
+        final failureOrSuccess = await repository.upsertCart(
           customerCodeInfo: e.customerCodeInfo,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
           salesOrganisation: e.salesOrganisation,
+          salesOrganisationConfig: e.salesOrganisationConfigs,
           shipToInfo: e.shipToInfo,
-          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
+          materialInfo: e.bonusMaterial,
+          quantity: e.bonusMaterial.quantity,
+          language: e.user.settings.languagePreference.languageCode,
+          counterOfferDetails: e.counterOfferDetails,
+          itemId: e.bonusItemId.getValue(),
         );
 
         failureOrSuccess.fold(
@@ -139,20 +148,59 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetchingBonus: false,
+                upsertBonusItemInProgressHashCode:
+                    List.from(state.upsertBonusItemInProgressHashCode)
+                      ..remove(e.bonusMaterial.hashCode),
+                isUpserting: false,
               ),
             );
           },
-          (cartItemList) {
+          (cartProductList) {
+            final cartProductListTemp = List<PriceAggregate>.from(
+              cartProductList,
+            );
+            for (var i = 0; i < cartProductListTemp.length; i++) {
+              final priceAggregate = state.cartProducts.firstWhere(
+                (element) =>
+                    element.materialInfo.materialNumber ==
+                    cartProductList[i].materialInfo.materialNumber,
+                orElse: () => PriceAggregate.empty(),
+              );
+              cartProductListTemp[i] = cartProductListTemp[i].copyWith(
+                price: priceAggregate.price,
+                addedBonusList: priceAggregate.addedBonusList,
+                bundle: priceAggregate.bundle,
+                salesOrgConfig: e.salesOrganisationConfigs,
+              );
+            }
+            add(
+              _VerifyMaterialDealBonus(
+                item: cartProductListTemp
+                        .where((element) {
+                          return element.materialInfo.materialNumber ==
+                              e.bonusMaterial.materialNumber;
+                        })
+                        .toList()
+                        .firstOrNull ??
+                    PriceAggregate.empty(),
+                items: cartProductListTemp,
+                salesOrganisationConfigs: e.salesOrganisationConfigs,
+                salesOrganisation: e.salesOrganisation,
+                customerCodeInfo: e.customerCodeInfo,
+                shipToInfo: e.shipToInfo,
+              ),
+            );
             emit(
               state.copyWith(
-                cartItems: cartItemList,
                 apiFailureOrSuccessOption: none(),
-                isFetchingBonus: false,
+                isUpserting: false,
+                upsertBonusItemInProgressHashCode:
+                    List.from(state.upsertBonusItemInProgressHashCode)
+                      ..remove(e.bonusMaterial.hashCode),
               ),
             );
           },
-        );*/
+        );
       },
       removeBonusFromCartItem: (e) {
         emit(
@@ -458,6 +506,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                     materialInfo: e.materialInfo,
                     quantity: e.materialInfo.quantity,
                     salesOrgConfig: e.salesOrgConfig,
+                    bonusSampleItems: e.bonusSampleItems,
                   ),
                 )
                 .toList();
@@ -520,6 +569,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           quantity: e.quantity,
           language: 'EN',
           counterOfferDetails: e.counterOfferDetails,
+          itemId: '',
         );
 
         failureOrSuccess.fold(
@@ -668,6 +718,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               .map((e) => e.materialInfo.materialNumber)
               .toList(),
         ];
+
+        for (final element in e.cartProducts) {
+          materialNumberList
+              .addAll(element.bonusSampleItems.map((e) => e.materialNumber));
+        }
 
         final bundleList = e.cartProducts
             .where((element) => element.materialInfo.type.typeBundle)

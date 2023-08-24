@@ -30,6 +30,8 @@ BonusMaterialCalculationEnum getBonusCalculationEnum(String calculation) {
   }
 }
 
+bool isBonusMaterialMaxQuantityExceed(int qty) => qty > 999;
+
 String materialGroup4Type(bool isFoc) {
   return isFoc ? 'ZPFC' : 'ZPOR';
 }
@@ -37,10 +39,10 @@ String materialGroup4Type(bool isFoc) {
 bool checkMaterialType(String type) {
   return type == 'Comm';
 }
+
 bool checkMaterialTypeBonus(String type) {
   return type == 'Bonus';
 }
-
 
 bool contractIs730(String tenderReason) {
   return tenderReason == '730';
@@ -89,5 +91,3 @@ double getDoubleParsedValue(String value) =>
 String getPaymentTermValue(String value) => value.isEmpty
     ? ''
     : value.characters.getRange(0, value.indexOf('-')).string;
-    
-

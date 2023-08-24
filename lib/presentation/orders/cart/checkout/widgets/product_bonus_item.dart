@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -10,10 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+
 class CheckoutProductBonusItem extends StatelessWidget {
-  final PriceAggregate cartItem;
-  const CheckoutProductBonusItem({required this.cartItem, Key? key})
-      : super(key: key);
+  final BonusSampleItem bonusItem;
+  const CheckoutProductBonusItem({
+    Key? key,
+    required this.bonusItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,9 @@ class CheckoutProductBonusItem extends StatelessWidget {
       child: Column(
         children: [
           _ProductDetailsSection(
-            cartItem: cartItem,
+            bonusItem: bonusItem,
           ),
-          _QuantityAndPrice(cartItem: cartItem),
+          _QuantityAndPrice(bonusItem: bonusItem),
         ],
       ),
     );
@@ -33,8 +35,8 @@ class CheckoutProductBonusItem extends StatelessWidget {
 }
 
 class _ProductDetailsSection extends StatelessWidget {
-  final PriceAggregate cartItem;
-  const _ProductDetailsSection({Key? key, required this.cartItem})
+  final BonusSampleItem bonusItem;
+  const _ProductDetailsSection({Key? key, required this.bonusItem})
       : super(key: key);
 
   @override
@@ -45,12 +47,12 @@ class _ProductDetailsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _ProductImageSection(
-            cartProduct: cartItem,
+            bonusItem: bonusItem,
           ),
           const SizedBox(
             width: 8,
           ),
-          _ProductDetails(cartItem: cartItem),
+          _ProductDetails(bonusItem: bonusItem),
         ],
       ),
     );
@@ -58,8 +60,8 @@ class _ProductDetailsSection extends StatelessWidget {
 }
 
 class _ProductImageSection extends StatelessWidget {
-  final PriceAggregate cartProduct;
-  const _ProductImageSection({Key? key, required this.cartProduct})
+  final BonusSampleItem bonusItem;
+  const _ProductImageSection({Key? key, required this.bonusItem})
       : super(key: key);
 
   @override
@@ -71,11 +73,8 @@ class _ProductImageSection extends StatelessWidget {
           showBorder: true,
           padding: const EdgeInsets.all(12),
           child: CachedNetworkImage(
-            imageUrl: state
-                    .additionInfo[cartProduct.materialInfo.materialNumber]
-                    ?.productImages
-                    .first
-                    .thumbNail ??
+            imageUrl: state.additionInfo[bonusItem.materialNumber]
+                    ?.productImages.first.thumbNail ??
                 '',
             fit: BoxFit.fitHeight,
             height: MediaQuery.of(context).size.height * 0.06,
@@ -111,8 +110,8 @@ class _ProductImageSection extends StatelessWidget {
 }
 
 class _ProductDetails extends StatelessWidget {
-  final PriceAggregate cartItem;
-  const _ProductDetails({required this.cartItem, Key? key}) : super(key: key);
+  final BonusSampleItem bonusItem;
+  const _ProductDetails({required this.bonusItem, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +122,7 @@ class _ProductDetails extends StatelessWidget {
           Row(
             children: [
               Text(
-                cartItem.materialInfo.materialNumber.displayMatNo,
+                bonusItem.materialNumber.displayMatNo,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -139,7 +138,7 @@ class _ProductDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
-              cartItem.materialInfo.materialDescription,
+              bonusItem.materialDescription,
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
@@ -179,8 +178,9 @@ class _BonusTag extends StatelessWidget {
 }
 
 class _QuantityAndPrice extends StatelessWidget {
-  final PriceAggregate cartItem;
-  const _QuantityAndPrice({required this.cartItem, Key? key}) : super(key: key);
+  final BonusSampleItem bonusItem;
+  const _QuantityAndPrice({required this.bonusItem, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +190,7 @@ class _QuantityAndPrice extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Qty: ${(cartItem.addedBonusList.firstOrNull?.qty ?? 0).toString()}',
+            'Qty: ${bonusItem.qty.getOrDefaultValue(0).toString()}',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),

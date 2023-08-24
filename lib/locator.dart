@@ -777,7 +777,7 @@ void setupLocator() {
   );
   locator.registerLazySingleton(
     () => BonusMaterialBloc(
-      bonusMaterialRepository: locator<BonusMaterialRepository>(),
+      materialListRepository: locator<MaterialListRepository>(),
     ),
   );
   //============================================================

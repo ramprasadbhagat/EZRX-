@@ -19,6 +19,7 @@ class CartProductRequest with _$CartProductRequest {
     required String comment,
     required String counterOfferCurrency,
     required String type,
+    required String itemId,
   }) = _CartProductRequest;
 
   factory CartProductRequest.empty() => CartProductRequest(
@@ -33,5 +34,6 @@ class CartProductRequest with _$CartProductRequest {
         comment: '',
         counterOfferCurrency: '',
         type: '',
+        itemId: '',
       );
 }

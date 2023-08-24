@@ -54,7 +54,6 @@ class CustomerCodeBlocMock
 
 void main() {
   late BonusMaterialBloc bonusMaterialBloc;
-  late List<MaterialInfo> mockbonusItemWithDataList;
   late PriceAggregate cartItem;
   late TenderContractBloc tenderContractBlocMock;
   //late BonusMaterialRepositoryMock bonusMaterialRepository;
@@ -94,21 +93,20 @@ void main() {
           quantity: 2,
         ),
       );
-      mockbonusItemWithDataList = [
-        MaterialInfo.empty().copyWith(
-          materialNumber: MaterialNumber('0000000000111111'),
-          materialDescription: ' Mosys D',
-          principalData: PrincipalData.empty().copyWith(
-            principalName: PrincipalName('台灣拜耳股份有限公司'),
-          ),
-        ),
-      ];
+      // mockbonusItemWithDataList = [
+      //   MaterialInfo.empty().copyWith(
+      //     materialNumber: MaterialNumber('0000000000111111'),
+      //     materialDescription: ' Mosys D',
+      //     principalData: PrincipalData.empty().copyWith(
+      //       principalName: PrincipalName('台灣拜耳股份有限公司'),
+      //     ),
+      //   ),
+      // ];
       when(() => bonusMaterialBloc.state).thenReturn(
         BonusMaterialState.initial().copyWith(
           failureOrSuccessOption: none(),
-          bonus: mockbonusItemWithDataList,
+          bonusItemList: [],
           isFetching: false,
-          isStarting: true,
         ),
       );
       when(() => userBloc.state).thenReturn(UserState.initial());

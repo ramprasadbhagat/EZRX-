@@ -11,7 +11,6 @@ _$_SubmitMaterialItemBonusDto _$$_SubmitMaterialItemBonusDtoFromJson(
     _$_SubmitMaterialItemBonusDto(
       materialNumber: json['materialNumber'] as String? ?? '',
       qty: json['qty'] as int? ?? 0,
-      comment: json['comment'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_SubmitMaterialItemBonusDtoToJson(
@@ -19,5 +18,4 @@ Map<String, dynamic> _$$_SubmitMaterialItemBonusDtoToJson(
     <String, dynamic>{
       'materialNumber': instance.materialNumber,
       'qty': instance.qty,
-      'comment': instance.comment,
     };

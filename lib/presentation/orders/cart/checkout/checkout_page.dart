@@ -404,11 +404,16 @@ class _ManufactureScrollList extends StatelessWidget {
                   : CheckoutProductItem(
                       cartItem: cartState.cartProducts[index],
                     ),
-              cartState.cartProducts[index].addedBonusList.isNotEmpty
-                  ? CheckoutProductBonusItem(
-                      cartItem: cartState.cartProducts[index],
-                    )
-                  : const SizedBox.shrink(),
+              if (cartState.cartProducts[index].bonusSampleItems.isNotEmpty)
+                Column(
+                  children: cartState.cartProducts[index].bonusSampleItems
+                      .map(
+                        (e) => CheckoutProductBonusItem(
+                          bonusItem: e,
+                        ),
+                      )
+                      .toList(),
+                ),
             ],
           );
         },

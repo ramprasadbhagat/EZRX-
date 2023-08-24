@@ -26,14 +26,14 @@ class CartEvent with _$CartEvent {
     required String message,
   }) = _AddRemarkToCartItem;
   const factory CartEvent.addBonusToCartItem({
-    required CartItem item,
-    required MaterialItemBonus bonusItem,
-    @Default(false) bool overrideQty,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required bool doNotallowOutOfStockMaterial,
+    required MaterialInfo bonusMaterial,
+    required StringValue bonusItemId,
+    required RequestCounterOfferDetails counterOfferDetails,
+    required User user,
   }) = _AddBonusToCartItem;
   const factory CartEvent.removeBonusFromCartItem({
     required CartItem item,

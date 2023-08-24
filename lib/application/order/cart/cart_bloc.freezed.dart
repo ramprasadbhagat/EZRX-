@@ -39,14 +39,14 @@ mixin _$CartEvent {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -130,14 +130,14 @@ mixin _$CartEvent {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -221,14 +221,14 @@ mixin _$CartEvent {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -442,14 +442,14 @@ class _$_Initialized implements _Initialized {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -536,14 +536,14 @@ class _$_Initialized implements _Initialized {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -630,14 +630,14 @@ class _$_Initialized implements _Initialized {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -1007,14 +1007,14 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -1108,14 +1108,14 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -1209,14 +1209,14 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -1605,14 +1605,14 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -1700,14 +1700,14 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -1795,14 +1795,14 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -2082,14 +2082,14 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -2176,14 +2176,14 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -2270,14 +2270,14 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -2450,21 +2450,22 @@ abstract class _$$_AddBonusToCartItemCopyWith<$Res> {
       __$$_AddBonusToCartItemCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {CartItem item,
-      MaterialItemBonus bonusItem,
-      bool overrideQty,
+      {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs salesOrganisationConfigs,
-      SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      bool doNotallowOutOfStockMaterial});
+      MaterialInfo bonusMaterial,
+      StringValue bonusItemId,
+      RequestCounterOfferDetails counterOfferDetails,
+      User user});
 
-  $CartItemCopyWith<$Res> get item;
-  $MaterialItemBonusCopyWith<$Res> get bonusItem;
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrganisationConfigs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $MaterialInfoCopyWith<$Res> get bonusMaterial;
+  $RequestCounterOfferDetailsCopyWith<$Res> get counterOfferDetails;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -2478,36 +2479,24 @@ class __$$_AddBonusToCartItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? item = null,
-    Object? bonusItem = null,
-    Object? overrideQty = null,
-    Object? salesOrganisationConfigs = null,
     Object? salesOrganisation = null,
+    Object? salesOrganisationConfigs = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
-    Object? doNotallowOutOfStockMaterial = null,
+    Object? bonusMaterial = null,
+    Object? bonusItemId = null,
+    Object? counterOfferDetails = null,
+    Object? user = null,
   }) {
     return _then(_$_AddBonusToCartItem(
-      item: null == item
-          ? _value.item
-          : item // ignore: cast_nullable_to_non_nullable
-              as CartItem,
-      bonusItem: null == bonusItem
-          ? _value.bonusItem
-          : bonusItem // ignore: cast_nullable_to_non_nullable
-              as MaterialItemBonus,
-      overrideQty: null == overrideQty
-          ? _value.overrideQty
-          : overrideQty // ignore: cast_nullable_to_non_nullable
-              as bool,
-      salesOrganisationConfigs: null == salesOrganisationConfigs
-          ? _value.salesOrganisationConfigs
-          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
+      salesOrganisationConfigs: null == salesOrganisationConfigs
+          ? _value.salesOrganisationConfigs
+          : salesOrganisationConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -2516,26 +2505,30 @@ class __$$_AddBonusToCartItemCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
-      doNotallowOutOfStockMaterial: null == doNotallowOutOfStockMaterial
-          ? _value.doNotallowOutOfStockMaterial
-          : doNotallowOutOfStockMaterial // ignore: cast_nullable_to_non_nullable
-              as bool,
+      bonusMaterial: null == bonusMaterial
+          ? _value.bonusMaterial
+          : bonusMaterial // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
+      bonusItemId: null == bonusItemId
+          ? _value.bonusItemId
+          : bonusItemId // ignore: cast_nullable_to_non_nullable
+              as StringValue,
+      counterOfferDetails: null == counterOfferDetails
+          ? _value.counterOfferDetails
+          : counterOfferDetails // ignore: cast_nullable_to_non_nullable
+              as RequestCounterOfferDetails,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $CartItemCopyWith<$Res> get item {
-    return $CartItemCopyWith<$Res>(_value.item, (value) {
-      return _then(_value.copyWith(item: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MaterialItemBonusCopyWith<$Res> get bonusItem {
-    return $MaterialItemBonusCopyWith<$Res>(_value.bonusItem, (value) {
-      return _then(_value.copyWith(bonusItem: value));
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
     });
   }
 
@@ -2545,14 +2538,6 @@ class __$$_AddBonusToCartItemCopyWithImpl<$Res>
     return $SalesOrganisationConfigsCopyWith<$Res>(
         _value.salesOrganisationConfigs, (value) {
       return _then(_value.copyWith(salesOrganisationConfigs: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
     });
   }
 
@@ -2571,42 +2556,66 @@ class __$$_AddBonusToCartItemCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialInfoCopyWith<$Res> get bonusMaterial {
+    return $MaterialInfoCopyWith<$Res>(_value.bonusMaterial, (value) {
+      return _then(_value.copyWith(bonusMaterial: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RequestCounterOfferDetailsCopyWith<$Res> get counterOfferDetails {
+    return $RequestCounterOfferDetailsCopyWith<$Res>(_value.counterOfferDetails,
+        (value) {
+      return _then(_value.copyWith(counterOfferDetails: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_AddBonusToCartItem implements _AddBonusToCartItem {
   const _$_AddBonusToCartItem(
-      {required this.item,
-      required this.bonusItem,
-      this.overrideQty = false,
+      {required this.salesOrganisation,
       required this.salesOrganisationConfigs,
-      required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.doNotallowOutOfStockMaterial});
+      required this.bonusMaterial,
+      required this.bonusItemId,
+      required this.counterOfferDetails,
+      required this.user});
 
   @override
-  final CartItem item;
-  @override
-  final MaterialItemBonus bonusItem;
-  @override
-  @JsonKey()
-  final bool overrideQty;
+  final SalesOrganisation salesOrganisation;
   @override
   final SalesOrganisationConfigs salesOrganisationConfigs;
-  @override
-  final SalesOrganisation salesOrganisation;
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
   @override
-  final bool doNotallowOutOfStockMaterial;
+  final MaterialInfo bonusMaterial;
+  @override
+  final StringValue bonusItemId;
+  @override
+  final RequestCounterOfferDetails counterOfferDetails;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'CartEvent.addBonusToCartItem(item: $item, bonusItem: $bonusItem, overrideQty: $overrideQty, salesOrganisationConfigs: $salesOrganisationConfigs, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, doNotallowOutOfStockMaterial: $doNotallowOutOfStockMaterial)';
+    return 'CartEvent.addBonusToCartItem(salesOrganisation: $salesOrganisation, salesOrganisationConfigs: $salesOrganisationConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, bonusMaterial: $bonusMaterial, bonusItemId: $bonusItemId, counterOfferDetails: $counterOfferDetails, user: $user)';
   }
 
   @override
@@ -2614,37 +2623,35 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddBonusToCartItem &&
-            (identical(other.item, item) || other.item == item) &&
-            (identical(other.bonusItem, bonusItem) ||
-                other.bonusItem == bonusItem) &&
-            (identical(other.overrideQty, overrideQty) ||
-                other.overrideQty == overrideQty) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
             (identical(
                     other.salesOrganisationConfigs, salesOrganisationConfigs) ||
                 other.salesOrganisationConfigs == salesOrganisationConfigs) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
-            (identical(other.doNotallowOutOfStockMaterial,
-                    doNotallowOutOfStockMaterial) ||
-                other.doNotallowOutOfStockMaterial ==
-                    doNotallowOutOfStockMaterial));
+            (identical(other.bonusMaterial, bonusMaterial) ||
+                other.bonusMaterial == bonusMaterial) &&
+            (identical(other.bonusItemId, bonusItemId) ||
+                other.bonusItemId == bonusItemId) &&
+            (identical(other.counterOfferDetails, counterOfferDetails) ||
+                other.counterOfferDetails == counterOfferDetails) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      item,
-      bonusItem,
-      overrideQty,
-      salesOrganisationConfigs,
       salesOrganisation,
+      salesOrganisationConfigs,
       customerCodeInfo,
       shipToInfo,
-      doNotallowOutOfStockMaterial);
+      bonusMaterial,
+      bonusItemId,
+      counterOfferDetails,
+      user);
 
   @JsonKey(ignore: true)
   @override
@@ -2677,14 +2684,14 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -2746,14 +2753,14 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         updateProductStock,
   }) {
     return addBonusToCartItem(
-        item,
-        bonusItem,
-        overrideQty,
-        salesOrganisationConfigs,
         salesOrganisation,
+        salesOrganisationConfigs,
         customerCodeInfo,
         shipToInfo,
-        doNotallowOutOfStockMaterial);
+        bonusMaterial,
+        bonusItemId,
+        counterOfferDetails,
+        user);
   }
 
   @override
@@ -2779,14 +2786,14 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -2848,14 +2855,14 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         updateProductStock,
   }) {
     return addBonusToCartItem?.call(
-        item,
-        bonusItem,
-        overrideQty,
-        salesOrganisationConfigs,
         salesOrganisation,
+        salesOrganisationConfigs,
         customerCodeInfo,
         shipToInfo,
-        doNotallowOutOfStockMaterial);
+        bonusMaterial,
+        bonusItemId,
+        counterOfferDetails,
+        user);
   }
 
   @override
@@ -2881,14 +2888,14 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -2951,14 +2958,14 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
   }) {
     if (addBonusToCartItem != null) {
       return addBonusToCartItem(
-          item,
-          bonusItem,
-          overrideQty,
-          salesOrganisationConfigs,
           salesOrganisation,
+          salesOrganisationConfigs,
           customerCodeInfo,
           shipToInfo,
-          doNotallowOutOfStockMaterial);
+          bonusMaterial,
+          bonusItemId,
+          counterOfferDetails,
+          user);
     }
     return orElse();
   }
@@ -3052,24 +3059,23 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
 
 abstract class _AddBonusToCartItem implements CartEvent {
   const factory _AddBonusToCartItem(
-          {required final CartItem item,
-          required final MaterialItemBonus bonusItem,
-          final bool overrideQty,
-          required final SalesOrganisationConfigs salesOrganisationConfigs,
-          required final SalesOrganisation salesOrganisation,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final ShipToInfo shipToInfo,
-          required final bool doNotallowOutOfStockMaterial}) =
-      _$_AddBonusToCartItem;
+      {required final SalesOrganisation salesOrganisation,
+      required final SalesOrganisationConfigs salesOrganisationConfigs,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final MaterialInfo bonusMaterial,
+      required final StringValue bonusItemId,
+      required final RequestCounterOfferDetails counterOfferDetails,
+      required final User user}) = _$_AddBonusToCartItem;
 
-  CartItem get item;
-  MaterialItemBonus get bonusItem;
-  bool get overrideQty;
-  SalesOrganisationConfigs get salesOrganisationConfigs;
   SalesOrganisation get salesOrganisation;
+  SalesOrganisationConfigs get salesOrganisationConfigs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
-  bool get doNotallowOutOfStockMaterial;
+  MaterialInfo get bonusMaterial;
+  StringValue get bonusItemId;
+  RequestCounterOfferDetails get counterOfferDetails;
+  User get user;
   @JsonKey(ignore: true)
   _$$_AddBonusToCartItemCopyWith<_$_AddBonusToCartItem> get copyWith =>
       throw _privateConstructorUsedError;
@@ -3191,14 +3197,14 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -3285,14 +3291,14 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -3379,14 +3385,14 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -3675,14 +3681,14 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -3769,14 +3775,14 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -3863,14 +3869,14 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -4153,14 +4159,14 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -4247,14 +4253,14 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -4341,14 +4347,14 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -4573,14 +4579,14 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -4667,14 +4673,14 @@ class _$_ClearCart implements _ClearCart {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -4761,14 +4767,14 @@ class _$_ClearCart implements _ClearCart {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -5124,14 +5130,14 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -5224,14 +5230,14 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -5324,14 +5330,14 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -5626,14 +5632,14 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -5720,14 +5726,14 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -5814,14 +5820,14 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -6158,14 +6164,14 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -6253,14 +6259,14 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -6348,14 +6354,14 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -6748,14 +6754,14 @@ class _$_UpsertCart implements _UpsertCart {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -6849,14 +6855,14 @@ class _$_UpsertCart implements _UpsertCart {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -6950,14 +6956,14 @@ class _$_UpsertCart implements _UpsertCart {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -7322,14 +7328,14 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -7417,14 +7423,14 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -7512,14 +7518,14 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -7790,14 +7796,14 @@ class _$_GetDetailsProductsAddedToCart
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -7884,14 +7890,14 @@ class _$_GetDetailsProductsAddedToCart
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -7978,14 +7984,14 @@ class _$_GetDetailsProductsAddedToCart
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -8356,14 +8362,14 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -8456,14 +8462,14 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -8556,14 +8562,14 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -8927,14 +8933,14 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     required TResult Function(CartItem item, String message)
         addRemarkToCartItem,
     required TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
         addBonusToCartItem,
     required TResult Function(CartItem item, MaterialItemBonus bonusItem)
         removeBonusFromCartItem,
@@ -9022,14 +9028,14 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         verifyMaterialDealBonus,
     TResult? Function(CartItem item, String message)? addRemarkToCartItem,
     TResult? Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -9117,14 +9123,14 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         verifyMaterialDealBonus,
     TResult Function(CartItem item, String message)? addRemarkToCartItem,
     TResult Function(
-            CartItem item,
-            MaterialItemBonus bonusItem,
-            bool overrideQty,
-            SalesOrganisationConfigs salesOrganisationConfigs,
             SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            bool doNotallowOutOfStockMaterial)?
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)?
         addBonusToCartItem,
     TResult Function(CartItem item, MaterialItemBonus bonusItem)?
         removeBonusFromCartItem,
@@ -9312,6 +9318,8 @@ mixin _$CartState {
   bool get isUpdatingStock => throw _privateConstructorUsedError;
   Map<MaterialNumber, ProductMetaData> get additionInfo =>
       throw _privateConstructorUsedError;
+  List<int> get upsertBonusItemInProgressHashCode =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CartStateCopyWith<CartState> get copyWith =>
@@ -9334,7 +9342,8 @@ abstract class $CartStateCopyWith<$Res> {
       bool isUpserting,
       bool isMappingPrice,
       bool isUpdatingStock,
-      Map<MaterialNumber, ProductMetaData> additionInfo});
+      Map<MaterialNumber, ProductMetaData> additionInfo,
+      List<int> upsertBonusItemInProgressHashCode});
 }
 
 /// @nodoc
@@ -9361,6 +9370,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
     Object? isMappingPrice = null,
     Object? isUpdatingStock = null,
     Object? additionInfo = null,
+    Object? upsertBonusItemInProgressHashCode = null,
   }) {
     return _then(_value.copyWith(
       cartItems: null == cartItems
@@ -9407,6 +9417,11 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
           ? _value.additionInfo
           : additionInfo // ignore: cast_nullable_to_non_nullable
               as Map<MaterialNumber, ProductMetaData>,
+      upsertBonusItemInProgressHashCode: null ==
+              upsertBonusItemInProgressHashCode
+          ? _value.upsertBonusItemInProgressHashCode
+          : upsertBonusItemInProgressHashCode // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 }
@@ -9429,7 +9444,8 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
       bool isUpserting,
       bool isMappingPrice,
       bool isUpdatingStock,
-      Map<MaterialNumber, ProductMetaData> additionInfo});
+      Map<MaterialNumber, ProductMetaData> additionInfo,
+      List<int> upsertBonusItemInProgressHashCode});
 }
 
 /// @nodoc
@@ -9454,6 +9470,7 @@ class __$$_CartStateCopyWithImpl<$Res>
     Object? isMappingPrice = null,
     Object? isUpdatingStock = null,
     Object? additionInfo = null,
+    Object? upsertBonusItemInProgressHashCode = null,
   }) {
     return _then(_$_CartState(
       cartItems: null == cartItems
@@ -9500,6 +9517,11 @@ class __$$_CartStateCopyWithImpl<$Res>
           ? _value._additionInfo
           : additionInfo // ignore: cast_nullable_to_non_nullable
               as Map<MaterialNumber, ProductMetaData>,
+      upsertBonusItemInProgressHashCode: null ==
+              upsertBonusItemInProgressHashCode
+          ? _value._upsertBonusItemInProgressHashCode
+          : upsertBonusItemInProgressHashCode // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -9518,10 +9540,12 @@ class _$_CartState extends _CartState {
       required this.isUpserting,
       required this.isMappingPrice,
       required this.isUpdatingStock,
-      required final Map<MaterialNumber, ProductMetaData> additionInfo})
+      required final Map<MaterialNumber, ProductMetaData> additionInfo,
+      required final List<int> upsertBonusItemInProgressHashCode})
       : _cartItems = cartItems,
         _cartProducts = cartProducts,
         _additionInfo = additionInfo,
+        _upsertBonusItemInProgressHashCode = upsertBonusItemInProgressHashCode,
         super._();
 
   final List<CartItem> _cartItems;
@@ -9564,9 +9588,18 @@ class _$_CartState extends _CartState {
     return EqualUnmodifiableMapView(_additionInfo);
   }
 
+  final List<int> _upsertBonusItemInProgressHashCode;
+  @override
+  List<int> get upsertBonusItemInProgressHashCode {
+    if (_upsertBonusItemInProgressHashCode is EqualUnmodifiableListView)
+      return _upsertBonusItemInProgressHashCode;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_upsertBonusItemInProgressHashCode);
+  }
+
   @override
   String toString() {
-    return 'CartState(cartItems: $cartItems, cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, additionInfo: $additionInfo)';
+    return 'CartState(cartItems: $cartItems, cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode)';
   }
 
   @override
@@ -9598,7 +9631,10 @@ class _$_CartState extends _CartState {
             (identical(other.isUpdatingStock, isUpdatingStock) ||
                 other.isUpdatingStock == isUpdatingStock) &&
             const DeepCollectionEquality()
-                .equals(other._additionInfo, _additionInfo));
+                .equals(other._additionInfo, _additionInfo) &&
+            const DeepCollectionEquality().equals(
+                other._upsertBonusItemInProgressHashCode,
+                _upsertBonusItemInProgressHashCode));
   }
 
   @override
@@ -9614,7 +9650,8 @@ class _$_CartState extends _CartState {
       isUpserting,
       isMappingPrice,
       isUpdatingStock,
-      const DeepCollectionEquality().hash(_additionInfo));
+      const DeepCollectionEquality().hash(_additionInfo),
+      const DeepCollectionEquality().hash(_upsertBonusItemInProgressHashCode));
 
   @JsonKey(ignore: true)
   @override
@@ -9636,7 +9673,8 @@ abstract class _CartState extends CartState {
           required final bool isUpserting,
           required final bool isMappingPrice,
           required final bool isUpdatingStock,
-          required final Map<MaterialNumber, ProductMetaData> additionInfo}) =
+          required final Map<MaterialNumber, ProductMetaData> additionInfo,
+          required final List<int> upsertBonusItemInProgressHashCode}) =
       _$_CartState;
   const _CartState._() : super._();
 
@@ -9662,6 +9700,8 @@ abstract class _CartState extends CartState {
   bool get isUpdatingStock;
   @override
   Map<MaterialNumber, ProductMetaData> get additionInfo;
+  @override
+  List<int> get upsertBonusItemInProgressHashCode;
   @override
   @JsonKey(ignore: true)
   _$$_CartStateCopyWith<_$_CartState> get copyWith =>

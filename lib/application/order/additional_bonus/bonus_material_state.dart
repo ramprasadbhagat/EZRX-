@@ -5,16 +5,18 @@ class BonusMaterialState with _$BonusMaterialState {
   const factory BonusMaterialState({
     required bool isFetching,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-    required List<MaterialInfo> bonus,
-    required bool isStarting,
-    required SearchKey searchKey,
+    required List<MaterialInfo> bonusItemList,
+    required bool canLoadMore,
+    required int bonusMaterialHashCode,
+    required bool isBonusQtyValidated,
   }) = _BonusMaterialState;
 
   factory BonusMaterialState.initial() => BonusMaterialState(
         failureOrSuccessOption: none(),
-        bonus: <MaterialInfo>[],
+        bonusItemList: <MaterialInfo>[],
+        canLoadMore: true,
         isFetching: false,
-        isStarting: true,
-        searchKey: SearchKey(''),
+        bonusMaterialHashCode: 0,
+        isBonusQtyValidated: true,
       );
 }

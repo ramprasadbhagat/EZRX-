@@ -18,93 +18,102 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BonusMaterialEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)
         fetch,
     required TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)
-        autoSearch,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)
+        loadMoreBonusItem,
+    required TResult Function(MaterialInfo bonusMaterial) validateBonusQuantity,
+    required TResult Function(MaterialInfo updatedBonusItem)
+        updateBonusItemQuantity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
         fetch,
     TResult? Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        autoSearch,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult? Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
         fetch,
     TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        autoSearch,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AutoSearch value) autoSearch,
+    required TResult Function(_LoadMoreBonusItem value) loadMoreBonusItem,
+    required TResult Function(_ValidateBonusQuantity value)
+        validateBonusQuantity,
+    required TResult Function(_UpdateBonusItemQuantity value)
+        updateBonusItemQuantity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AutoSearch value)? autoSearch,
+    TResult? Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_AutoSearch value)? autoSearch,
+    TResult Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,180 +138,25 @@ class _$BonusMaterialEventCopyWithImpl<$Res, $Val extends BonusMaterialEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
-
-  @override
-  String toString() {
-    return 'BonusMaterialEvent.initialized()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
-            SalesOrganisation salesOrganisation,
-            String pickAndPack)
-        fetch,
-    required TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
-            SalesOrganisation salesOrganisation,
-            String pickAndPack)
-        autoSearch,
-  }) {
-    return initialized();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
-            SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        fetch,
-    TResult? Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
-            SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        autoSearch,
-  }) {
-    return initialized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
-            SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        fetch,
-    TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
-            SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        autoSearch,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AutoSearch value) autoSearch,
-  }) {
-    return initialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AutoSearch value)? autoSearch,
-  }) {
-    return initialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AutoSearch value)? autoSearch,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initialized implements BonusMaterialEvent {
-  const factory _Initialized() = _$_Initialized;
-}
-
-/// @nodoc
 abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {User user,
+      {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
-      String searchKey,
-      CustomerCodeInfo customerInfo,
-      ShipToInfo shipInfo,
-      SalesOrganisation salesOrganisation,
-      String pickAndPack});
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      bool isGimmickMaterialEnabled,
+      PrincipalData principalData});
 
-  $UserCopyWith<$Res> get user;
-  $SalesOrganisationConfigsCopyWith<$Res> get configs;
-  $CustomerCodeInfoCopyWith<$Res> get customerInfo;
-  $ShipToInfoCopyWith<$Res> get shipInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
+  $PrincipalDataCopyWith<$Res> get principalData;
 }
 
 /// @nodoc
@@ -315,51 +169,51 @@ class __$$_FetchCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
-    Object? configs = null,
-    Object? searchKey = null,
-    Object? customerInfo = null,
-    Object? shipInfo = null,
     Object? salesOrganisation = null,
-    Object? pickAndPack = null,
+    Object? configs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? user = null,
+    Object? isGimmickMaterialEnabled = null,
+    Object? principalData = null,
   }) {
     return _then(_$_Fetch(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-      configs: null == configs
-          ? _value.configs
-          : configs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      customerInfo: null == customerInfo
-          ? _value.customerInfo
-          : customerInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipInfo: null == shipInfo
-          ? _value.shipInfo
-          : shipInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      pickAndPack: null == pickAndPack
-          ? _value.pickAndPack
-          : pickAndPack // ignore: cast_nullable_to_non_nullable
-              as String,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      isGimmickMaterialEnabled: null == isGimmickMaterialEnabled
+          ? _value.isGimmickMaterialEnabled
+          : isGimmickMaterialEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      principalData: null == principalData
+          ? _value.principalData
+          : principalData // ignore: cast_nullable_to_non_nullable
+              as PrincipalData,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
     });
   }
 
@@ -373,25 +227,33 @@ class __$$_FetchCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerInfo, (value) {
-      return _then(_value.copyWith(customerInfo: value));
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipInfo, (value) {
-      return _then(_value.copyWith(shipInfo: value));
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PrincipalDataCopyWith<$Res> get principalData {
+    return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
+      return _then(_value.copyWith(principalData: value));
     });
   }
 }
@@ -400,32 +262,32 @@ class __$$_FetchCopyWithImpl<$Res>
 
 class _$_Fetch implements _Fetch {
   const _$_Fetch(
-      {required this.user,
+      {required this.salesOrganisation,
       required this.configs,
-      required this.searchKey,
-      required this.customerInfo,
-      required this.shipInfo,
-      required this.salesOrganisation,
-      required this.pickAndPack});
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.user,
+      required this.isGimmickMaterialEnabled,
+      required this.principalData});
 
-  @override
-  final User user;
-  @override
-  final SalesOrganisationConfigs configs;
-  @override
-  final String searchKey;
-  @override
-  final CustomerCodeInfo customerInfo;
-  @override
-  final ShipToInfo shipInfo;
   @override
   final SalesOrganisation salesOrganisation;
   @override
-  final String pickAndPack;
+  final SalesOrganisationConfigs configs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final User user;
+  @override
+  final bool isGimmickMaterialEnabled;
+  @override
+  final PrincipalData principalData;
 
   @override
   String toString() {
-    return 'BonusMaterialEvent.fetch(user: $user, configs: $configs, searchKey: $searchKey, customerInfo: $customerInfo, shipInfo: $shipInfo, salesOrganisation: $salesOrganisation, pickAndPack: $pickAndPack)';
+    return 'BonusMaterialEvent.fetch(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, isGimmickMaterialEnabled: $isGimmickMaterialEnabled, principalData: $principalData)';
   }
 
   @override
@@ -433,23 +295,31 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.configs, configs) || other.configs == configs) &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey) &&
-            (identical(other.customerInfo, customerInfo) ||
-                other.customerInfo == customerInfo) &&
-            (identical(other.shipInfo, shipInfo) ||
-                other.shipInfo == shipInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
-            (identical(other.pickAndPack, pickAndPack) ||
-                other.pickAndPack == pickAndPack));
+            (identical(other.configs, configs) || other.configs == configs) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(
+                    other.isGimmickMaterialEnabled, isGimmickMaterialEnabled) ||
+                other.isGimmickMaterialEnabled == isGimmickMaterialEnabled) &&
+            (identical(other.principalData, principalData) ||
+                other.principalData == principalData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, configs, searchKey,
-      customerInfo, shipInfo, salesOrganisation, pickAndPack);
+  int get hashCode => Object.hash(
+      runtimeType,
+      salesOrganisation,
+      configs,
+      customerCodeInfo,
+      shipToInfo,
+      user,
+      isGimmickMaterialEnabled,
+      principalData);
 
   @JsonKey(ignore: true)
   @override
@@ -460,84 +330,88 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)
         fetch,
     required TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)
-        autoSearch,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)
+        loadMoreBonusItem,
+    required TResult Function(MaterialInfo bonusMaterial) validateBonusQuantity,
+    required TResult Function(MaterialInfo updatedBonusItem)
+        updateBonusItemQuantity,
   }) {
-    return fetch(user, configs, searchKey, customerInfo, shipInfo,
-        salesOrganisation, pickAndPack);
+    return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo, user,
+        isGimmickMaterialEnabled, principalData);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
         fetch,
     TResult? Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        autoSearch,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult? Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
   }) {
-    return fetch?.call(user, configs, searchKey, customerInfo, shipInfo,
-        salesOrganisation, pickAndPack);
+    return fetch?.call(salesOrganisation, configs, customerCodeInfo, shipToInfo,
+        user, isGimmickMaterialEnabled, principalData);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
         fetch,
     TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        autoSearch,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(user, configs, searchKey, customerInfo, shipInfo,
-          salesOrganisation, pickAndPack);
+      return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo,
+          user, isGimmickMaterialEnabled, principalData);
     }
     return orElse();
   }
@@ -545,9 +419,12 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AutoSearch value) autoSearch,
+    required TResult Function(_LoadMoreBonusItem value) loadMoreBonusItem,
+    required TResult Function(_ValidateBonusQuantity value)
+        validateBonusQuantity,
+    required TResult Function(_UpdateBonusItemQuantity value)
+        updateBonusItemQuantity,
   }) {
     return fetch(this);
   }
@@ -555,9 +432,10 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AutoSearch value)? autoSearch,
+    TResult? Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
   }) {
     return fetch?.call(this);
   }
@@ -565,9 +443,10 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_AutoSearch value)? autoSearch,
+    TResult Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -579,104 +458,105 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements BonusMaterialEvent {
   const factory _Fetch(
-      {required final User user,
+      {required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs configs,
-      required final String searchKey,
-      required final CustomerCodeInfo customerInfo,
-      required final ShipToInfo shipInfo,
-      required final SalesOrganisation salesOrganisation,
-      required final String pickAndPack}) = _$_Fetch;
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final User user,
+      required final bool isGimmickMaterialEnabled,
+      required final PrincipalData principalData}) = _$_Fetch;
 
-  User get user;
-  SalesOrganisationConfigs get configs;
-  String get searchKey;
-  CustomerCodeInfo get customerInfo;
-  ShipToInfo get shipInfo;
   SalesOrganisation get salesOrganisation;
-  String get pickAndPack;
+  SalesOrganisationConfigs get configs;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  User get user;
+  bool get isGimmickMaterialEnabled;
+  PrincipalData get principalData;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AutoSearchCopyWith<$Res> {
-  factory _$$_AutoSearchCopyWith(
-          _$_AutoSearch value, $Res Function(_$_AutoSearch) then) =
-      __$$_AutoSearchCopyWithImpl<$Res>;
+abstract class _$$_LoadMoreBonusItemCopyWith<$Res> {
+  factory _$$_LoadMoreBonusItemCopyWith(_$_LoadMoreBonusItem value,
+          $Res Function(_$_LoadMoreBonusItem) then) =
+      __$$_LoadMoreBonusItemCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {User user,
+      {SalesOrganisation salesOrganisation,
       SalesOrganisationConfigs configs,
-      String searchKey,
-      CustomerCodeInfo customerInfo,
-      ShipToInfo shipInfo,
-      SalesOrganisation salesOrganisation,
-      String pickAndPack});
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      PrincipalData principalData,
+      bool isGimmickMaterialEnabled});
 
-  $UserCopyWith<$Res> get user;
-  $SalesOrganisationConfigsCopyWith<$Res> get configs;
-  $CustomerCodeInfoCopyWith<$Res> get customerInfo;
-  $ShipToInfoCopyWith<$Res> get shipInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
+  $PrincipalDataCopyWith<$Res> get principalData;
 }
 
 /// @nodoc
-class __$$_AutoSearchCopyWithImpl<$Res>
-    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_AutoSearch>
-    implements _$$_AutoSearchCopyWith<$Res> {
-  __$$_AutoSearchCopyWithImpl(
-      _$_AutoSearch _value, $Res Function(_$_AutoSearch) _then)
+class __$$_LoadMoreBonusItemCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_LoadMoreBonusItem>
+    implements _$$_LoadMoreBonusItemCopyWith<$Res> {
+  __$$_LoadMoreBonusItemCopyWithImpl(
+      _$_LoadMoreBonusItem _value, $Res Function(_$_LoadMoreBonusItem) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
-    Object? configs = null,
-    Object? searchKey = null,
-    Object? customerInfo = null,
-    Object? shipInfo = null,
     Object? salesOrganisation = null,
-    Object? pickAndPack = null,
+    Object? configs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? user = null,
+    Object? principalData = null,
+    Object? isGimmickMaterialEnabled = null,
   }) {
-    return _then(_$_AutoSearch(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-      configs: null == configs
-          ? _value.configs
-          : configs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      customerInfo: null == customerInfo
-          ? _value.customerInfo
-          : customerInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipInfo: null == shipInfo
-          ? _value.shipInfo
-          : shipInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
+    return _then(_$_LoadMoreBonusItem(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
-      pickAndPack: null == pickAndPack
-          ? _value.pickAndPack
-          : pickAndPack // ignore: cast_nullable_to_non_nullable
-              as String,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      principalData: null == principalData
+          ? _value.principalData
+          : principalData // ignore: cast_nullable_to_non_nullable
+              as PrincipalData,
+      isGimmickMaterialEnabled: null == isGimmickMaterialEnabled
+          ? _value.isGimmickMaterialEnabled
+          : isGimmickMaterialEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
     });
   }
 
@@ -690,171 +570,192 @@ class __$$_AutoSearchCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerInfo, (value) {
-      return _then(_value.copyWith(customerInfo: value));
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipInfo, (value) {
-      return _then(_value.copyWith(shipInfo: value));
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PrincipalDataCopyWith<$Res> get principalData {
+    return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
+      return _then(_value.copyWith(principalData: value));
     });
   }
 }
 
 /// @nodoc
 
-class _$_AutoSearch implements _AutoSearch {
-  const _$_AutoSearch(
-      {required this.user,
+class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
+  _$_LoadMoreBonusItem(
+      {required this.salesOrganisation,
       required this.configs,
-      required this.searchKey,
-      required this.customerInfo,
-      required this.shipInfo,
-      required this.salesOrganisation,
-      required this.pickAndPack});
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.user,
+      required this.principalData,
+      required this.isGimmickMaterialEnabled});
 
-  @override
-  final User user;
-  @override
-  final SalesOrganisationConfigs configs;
-  @override
-  final String searchKey;
-  @override
-  final CustomerCodeInfo customerInfo;
-  @override
-  final ShipToInfo shipInfo;
   @override
   final SalesOrganisation salesOrganisation;
   @override
-  final String pickAndPack;
+  final SalesOrganisationConfigs configs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final User user;
+  @override
+  final PrincipalData principalData;
+  @override
+  final bool isGimmickMaterialEnabled;
 
   @override
   String toString() {
-    return 'BonusMaterialEvent.autoSearch(user: $user, configs: $configs, searchKey: $searchKey, customerInfo: $customerInfo, shipInfo: $shipInfo, salesOrganisation: $salesOrganisation, pickAndPack: $pickAndPack)';
+    return 'BonusMaterialEvent.loadMoreBonusItem(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, principalData: $principalData, isGimmickMaterialEnabled: $isGimmickMaterialEnabled)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AutoSearch &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.configs, configs) || other.configs == configs) &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey) &&
-            (identical(other.customerInfo, customerInfo) ||
-                other.customerInfo == customerInfo) &&
-            (identical(other.shipInfo, shipInfo) ||
-                other.shipInfo == shipInfo) &&
+            other is _$_LoadMoreBonusItem &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
-            (identical(other.pickAndPack, pickAndPack) ||
-                other.pickAndPack == pickAndPack));
+            (identical(other.configs, configs) || other.configs == configs) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.principalData, principalData) ||
+                other.principalData == principalData) &&
+            (identical(
+                    other.isGimmickMaterialEnabled, isGimmickMaterialEnabled) ||
+                other.isGimmickMaterialEnabled == isGimmickMaterialEnabled));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, configs, searchKey,
-      customerInfo, shipInfo, salesOrganisation, pickAndPack);
+  int get hashCode => Object.hash(
+      runtimeType,
+      salesOrganisation,
+      configs,
+      customerCodeInfo,
+      shipToInfo,
+      user,
+      principalData,
+      isGimmickMaterialEnabled);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AutoSearchCopyWith<_$_AutoSearch> get copyWith =>
-      __$$_AutoSearchCopyWithImpl<_$_AutoSearch>(this, _$identity);
+  _$$_LoadMoreBonusItemCopyWith<_$_LoadMoreBonusItem> get copyWith =>
+      __$$_LoadMoreBonusItemCopyWithImpl<_$_LoadMoreBonusItem>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)
         fetch,
     required TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)
-        autoSearch,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)
+        loadMoreBonusItem,
+    required TResult Function(MaterialInfo bonusMaterial) validateBonusQuantity,
+    required TResult Function(MaterialInfo updatedBonusItem)
+        updateBonusItemQuantity,
   }) {
-    return autoSearch(user, configs, searchKey, customerInfo, shipInfo,
-        salesOrganisation, pickAndPack);
+    return loadMoreBonusItem(salesOrganisation, configs, customerCodeInfo,
+        shipToInfo, user, principalData, isGimmickMaterialEnabled);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
         fetch,
     TResult? Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        autoSearch,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult? Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
   }) {
-    return autoSearch?.call(user, configs, searchKey, customerInfo, shipInfo,
-        salesOrganisation, pickAndPack);
+    return loadMoreBonusItem?.call(salesOrganisation, configs, customerCodeInfo,
+        shipToInfo, user, principalData, isGimmickMaterialEnabled);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
         fetch,
     TResult Function(
-            User user,
-            SalesOrganisationConfigs configs,
-            String searchKey,
-            CustomerCodeInfo customerInfo,
-            ShipToInfo shipInfo,
             SalesOrganisation salesOrganisation,
-            String pickAndPack)?
-        autoSearch,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
     required TResult orElse(),
   }) {
-    if (autoSearch != null) {
-      return autoSearch(user, configs, searchKey, customerInfo, shipInfo,
-          salesOrganisation, pickAndPack);
+    if (loadMoreBonusItem != null) {
+      return loadMoreBonusItem(salesOrganisation, configs, customerCodeInfo,
+          shipToInfo, user, principalData, isGimmickMaterialEnabled);
     }
     return orElse();
   }
@@ -862,58 +763,483 @@ class _$_AutoSearch implements _AutoSearch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AutoSearch value) autoSearch,
+    required TResult Function(_LoadMoreBonusItem value) loadMoreBonusItem,
+    required TResult Function(_ValidateBonusQuantity value)
+        validateBonusQuantity,
+    required TResult Function(_UpdateBonusItemQuantity value)
+        updateBonusItemQuantity,
   }) {
-    return autoSearch(this);
+    return loadMoreBonusItem(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AutoSearch value)? autoSearch,
+    TResult? Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
   }) {
-    return autoSearch?.call(this);
+    return loadMoreBonusItem?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_AutoSearch value)? autoSearch,
+    TResult Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
     required TResult orElse(),
   }) {
-    if (autoSearch != null) {
-      return autoSearch(this);
+    if (loadMoreBonusItem != null) {
+      return loadMoreBonusItem(this);
     }
     return orElse();
   }
 }
 
-abstract class _AutoSearch implements BonusMaterialEvent {
-  const factory _AutoSearch(
-      {required final User user,
+abstract class _LoadMoreBonusItem implements BonusMaterialEvent {
+  factory _LoadMoreBonusItem(
+      {required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs configs,
-      required final String searchKey,
-      required final CustomerCodeInfo customerInfo,
-      required final ShipToInfo shipInfo,
-      required final SalesOrganisation salesOrganisation,
-      required final String pickAndPack}) = _$_AutoSearch;
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final User user,
+      required final PrincipalData principalData,
+      required final bool isGimmickMaterialEnabled}) = _$_LoadMoreBonusItem;
 
-  User get user;
-  SalesOrganisationConfigs get configs;
-  String get searchKey;
-  CustomerCodeInfo get customerInfo;
-  ShipToInfo get shipInfo;
   SalesOrganisation get salesOrganisation;
-  String get pickAndPack;
+  SalesOrganisationConfigs get configs;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  User get user;
+  PrincipalData get principalData;
+  bool get isGimmickMaterialEnabled;
   @JsonKey(ignore: true)
-  _$$_AutoSearchCopyWith<_$_AutoSearch> get copyWith =>
+  _$$_LoadMoreBonusItemCopyWith<_$_LoadMoreBonusItem> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ValidateBonusQuantityCopyWith<$Res> {
+  factory _$$_ValidateBonusQuantityCopyWith(_$_ValidateBonusQuantity value,
+          $Res Function(_$_ValidateBonusQuantity) then) =
+      __$$_ValidateBonusQuantityCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialInfo bonusMaterial});
+
+  $MaterialInfoCopyWith<$Res> get bonusMaterial;
+}
+
+/// @nodoc
+class __$$_ValidateBonusQuantityCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_ValidateBonusQuantity>
+    implements _$$_ValidateBonusQuantityCopyWith<$Res> {
+  __$$_ValidateBonusQuantityCopyWithImpl(_$_ValidateBonusQuantity _value,
+      $Res Function(_$_ValidateBonusQuantity) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bonusMaterial = null,
+  }) {
+    return _then(_$_ValidateBonusQuantity(
+      bonusMaterial: null == bonusMaterial
+          ? _value.bonusMaterial
+          : bonusMaterial // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialInfoCopyWith<$Res> get bonusMaterial {
+    return $MaterialInfoCopyWith<$Res>(_value.bonusMaterial, (value) {
+      return _then(_value.copyWith(bonusMaterial: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
+  _$_ValidateBonusQuantity({required this.bonusMaterial});
+
+  @override
+  final MaterialInfo bonusMaterial;
+
+  @override
+  String toString() {
+    return 'BonusMaterialEvent.validateBonusQuantity(bonusMaterial: $bonusMaterial)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ValidateBonusQuantity &&
+            (identical(other.bonusMaterial, bonusMaterial) ||
+                other.bonusMaterial == bonusMaterial));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, bonusMaterial);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ValidateBonusQuantityCopyWith<_$_ValidateBonusQuantity> get copyWith =>
+      __$$_ValidateBonusQuantityCopyWithImpl<_$_ValidateBonusQuantity>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)
+        loadMoreBonusItem,
+    required TResult Function(MaterialInfo bonusMaterial) validateBonusQuantity,
+    required TResult Function(MaterialInfo updatedBonusItem)
+        updateBonusItemQuantity,
+  }) {
+    return validateBonusQuantity(bonusMaterial);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult? Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
+  }) {
+    return validateBonusQuantity?.call(bonusMaterial);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
+    required TResult orElse(),
+  }) {
+    if (validateBonusQuantity != null) {
+      return validateBonusQuantity(bonusMaterial);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMoreBonusItem value) loadMoreBonusItem,
+    required TResult Function(_ValidateBonusQuantity value)
+        validateBonusQuantity,
+    required TResult Function(_UpdateBonusItemQuantity value)
+        updateBonusItemQuantity,
+  }) {
+    return validateBonusQuantity(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
+  }) {
+    return validateBonusQuantity?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
+    required TResult orElse(),
+  }) {
+    if (validateBonusQuantity != null) {
+      return validateBonusQuantity(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ValidateBonusQuantity implements BonusMaterialEvent {
+  factory _ValidateBonusQuantity({required final MaterialInfo bonusMaterial}) =
+      _$_ValidateBonusQuantity;
+
+  MaterialInfo get bonusMaterial;
+  @JsonKey(ignore: true)
+  _$$_ValidateBonusQuantityCopyWith<_$_ValidateBonusQuantity> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateBonusItemQuantityCopyWith<$Res> {
+  factory _$$_UpdateBonusItemQuantityCopyWith(_$_UpdateBonusItemQuantity value,
+          $Res Function(_$_UpdateBonusItemQuantity) then) =
+      __$$_UpdateBonusItemQuantityCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MaterialInfo updatedBonusItem});
+
+  $MaterialInfoCopyWith<$Res> get updatedBonusItem;
+}
+
+/// @nodoc
+class __$$_UpdateBonusItemQuantityCopyWithImpl<$Res>
+    extends _$BonusMaterialEventCopyWithImpl<$Res, _$_UpdateBonusItemQuantity>
+    implements _$$_UpdateBonusItemQuantityCopyWith<$Res> {
+  __$$_UpdateBonusItemQuantityCopyWithImpl(_$_UpdateBonusItemQuantity _value,
+      $Res Function(_$_UpdateBonusItemQuantity) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? updatedBonusItem = null,
+  }) {
+    return _then(_$_UpdateBonusItemQuantity(
+      updatedBonusItem: null == updatedBonusItem
+          ? _value.updatedBonusItem
+          : updatedBonusItem // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialInfoCopyWith<$Res> get updatedBonusItem {
+    return $MaterialInfoCopyWith<$Res>(_value.updatedBonusItem, (value) {
+      return _then(_value.copyWith(updatedBonusItem: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
+  _$_UpdateBonusItemQuantity({required this.updatedBonusItem});
+
+  @override
+  final MaterialInfo updatedBonusItem;
+
+  @override
+  String toString() {
+    return 'BonusMaterialEvent.updateBonusItemQuantity(updatedBonusItem: $updatedBonusItem)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateBonusItemQuantity &&
+            (identical(other.updatedBonusItem, updatedBonusItem) ||
+                other.updatedBonusItem == updatedBonusItem));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, updatedBonusItem);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateBonusItemQuantityCopyWith<_$_UpdateBonusItemQuantity>
+      get copyWith =>
+          __$$_UpdateBonusItemQuantityCopyWithImpl<_$_UpdateBonusItemQuantity>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)
+        loadMoreBonusItem,
+    required TResult Function(MaterialInfo bonusMaterial) validateBonusQuantity,
+    required TResult Function(MaterialInfo updatedBonusItem)
+        updateBonusItemQuantity,
+  }) {
+    return updateBonusItemQuantity(updatedBonusItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult? Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult? Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
+  }) {
+    return updateBonusItemQuantity?.call(updatedBonusItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            bool isGimmickMaterialEnabled,
+            PrincipalData principalData)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            PrincipalData principalData,
+            bool isGimmickMaterialEnabled)?
+        loadMoreBonusItem,
+    TResult Function(MaterialInfo bonusMaterial)? validateBonusQuantity,
+    TResult Function(MaterialInfo updatedBonusItem)? updateBonusItemQuantity,
+    required TResult orElse(),
+  }) {
+    if (updateBonusItemQuantity != null) {
+      return updateBonusItemQuantity(updatedBonusItem);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMoreBonusItem value) loadMoreBonusItem,
+    required TResult Function(_ValidateBonusQuantity value)
+        validateBonusQuantity,
+    required TResult Function(_UpdateBonusItemQuantity value)
+        updateBonusItemQuantity,
+  }) {
+    return updateBonusItemQuantity(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult? Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult? Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
+  }) {
+    return updateBonusItemQuantity?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMoreBonusItem value)? loadMoreBonusItem,
+    TResult Function(_ValidateBonusQuantity value)? validateBonusQuantity,
+    TResult Function(_UpdateBonusItemQuantity value)? updateBonusItemQuantity,
+    required TResult orElse(),
+  }) {
+    if (updateBonusItemQuantity != null) {
+      return updateBonusItemQuantity(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateBonusItemQuantity implements BonusMaterialEvent {
+  factory _UpdateBonusItemQuantity(
+          {required final MaterialInfo updatedBonusItem}) =
+      _$_UpdateBonusItemQuantity;
+
+  MaterialInfo get updatedBonusItem;
+  @JsonKey(ignore: true)
+  _$$_UpdateBonusItemQuantityCopyWith<_$_UpdateBonusItemQuantity>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -921,9 +1247,10 @@ mixin _$BonusMaterialState {
   bool get isFetching => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  List<MaterialInfo> get bonus => throw _privateConstructorUsedError;
-  bool get isStarting => throw _privateConstructorUsedError;
-  SearchKey get searchKey => throw _privateConstructorUsedError;
+  List<MaterialInfo> get bonusItemList => throw _privateConstructorUsedError;
+  bool get canLoadMore => throw _privateConstructorUsedError;
+  int get bonusMaterialHashCode => throw _privateConstructorUsedError;
+  bool get isBonusQtyValidated => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BonusMaterialStateCopyWith<BonusMaterialState> get copyWith =>
@@ -939,9 +1266,10 @@ abstract class $BonusMaterialStateCopyWith<$Res> {
   $Res call(
       {bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<MaterialInfo> bonus,
-      bool isStarting,
-      SearchKey searchKey});
+      List<MaterialInfo> bonusItemList,
+      bool canLoadMore,
+      int bonusMaterialHashCode,
+      bool isBonusQtyValidated});
 }
 
 /// @nodoc
@@ -959,9 +1287,10 @@ class _$BonusMaterialStateCopyWithImpl<$Res, $Val extends BonusMaterialState>
   $Res call({
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
-    Object? bonus = null,
-    Object? isStarting = null,
-    Object? searchKey = null,
+    Object? bonusItemList = null,
+    Object? canLoadMore = null,
+    Object? bonusMaterialHashCode = null,
+    Object? isBonusQtyValidated = null,
   }) {
     return _then(_value.copyWith(
       isFetching: null == isFetching
@@ -972,18 +1301,22 @@ class _$BonusMaterialStateCopyWithImpl<$Res, $Val extends BonusMaterialState>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      bonus: null == bonus
-          ? _value.bonus
-          : bonus // ignore: cast_nullable_to_non_nullable
+      bonusItemList: null == bonusItemList
+          ? _value.bonusItemList
+          : bonusItemList // ignore: cast_nullable_to_non_nullable
               as List<MaterialInfo>,
-      isStarting: null == isStarting
-          ? _value.isStarting
-          : isStarting // ignore: cast_nullable_to_non_nullable
+      canLoadMore: null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
+      bonusMaterialHashCode: null == bonusMaterialHashCode
+          ? _value.bonusMaterialHashCode
+          : bonusMaterialHashCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      isBonusQtyValidated: null == isBonusQtyValidated
+          ? _value.isBonusQtyValidated
+          : isBonusQtyValidated // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -999,9 +1332,10 @@ abstract class _$$_BonusMaterialStateCopyWith<$Res>
   $Res call(
       {bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<MaterialInfo> bonus,
-      bool isStarting,
-      SearchKey searchKey});
+      List<MaterialInfo> bonusItemList,
+      bool canLoadMore,
+      int bonusMaterialHashCode,
+      bool isBonusQtyValidated});
 }
 
 /// @nodoc
@@ -1017,9 +1351,10 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
   $Res call({
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
-    Object? bonus = null,
-    Object? isStarting = null,
-    Object? searchKey = null,
+    Object? bonusItemList = null,
+    Object? canLoadMore = null,
+    Object? bonusMaterialHashCode = null,
+    Object? isBonusQtyValidated = null,
   }) {
     return _then(_$_BonusMaterialState(
       isFetching: null == isFetching
@@ -1030,18 +1365,22 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      bonus: null == bonus
-          ? _value._bonus
-          : bonus // ignore: cast_nullable_to_non_nullable
+      bonusItemList: null == bonusItemList
+          ? _value._bonusItemList
+          : bonusItemList // ignore: cast_nullable_to_non_nullable
               as List<MaterialInfo>,
-      isStarting: null == isStarting
-          ? _value.isStarting
-          : isStarting // ignore: cast_nullable_to_non_nullable
+      canLoadMore: null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
+      bonusMaterialHashCode: null == bonusMaterialHashCode
+          ? _value.bonusMaterialHashCode
+          : bonusMaterialHashCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      isBonusQtyValidated: null == isBonusQtyValidated
+          ? _value.isBonusQtyValidated
+          : isBonusQtyValidated // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1052,31 +1391,34 @@ class _$_BonusMaterialState implements _BonusMaterialState {
   const _$_BonusMaterialState(
       {required this.isFetching,
       required this.failureOrSuccessOption,
-      required final List<MaterialInfo> bonus,
-      required this.isStarting,
-      required this.searchKey})
-      : _bonus = bonus;
+      required final List<MaterialInfo> bonusItemList,
+      required this.canLoadMore,
+      required this.bonusMaterialHashCode,
+      required this.isBonusQtyValidated})
+      : _bonusItemList = bonusItemList;
 
   @override
   final bool isFetching;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
-  final List<MaterialInfo> _bonus;
+  final List<MaterialInfo> _bonusItemList;
   @override
-  List<MaterialInfo> get bonus {
-    if (_bonus is EqualUnmodifiableListView) return _bonus;
+  List<MaterialInfo> get bonusItemList {
+    if (_bonusItemList is EqualUnmodifiableListView) return _bonusItemList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bonus);
+    return EqualUnmodifiableListView(_bonusItemList);
   }
 
   @override
-  final bool isStarting;
+  final bool canLoadMore;
   @override
-  final SearchKey searchKey;
+  final int bonusMaterialHashCode;
+  @override
+  final bool isBonusQtyValidated;
 
   @override
   String toString() {
-    return 'BonusMaterialState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, bonus: $bonus, isStarting: $isStarting, searchKey: $searchKey)';
+    return 'BonusMaterialState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, bonusItemList: $bonusItemList, canLoadMore: $canLoadMore, bonusMaterialHashCode: $bonusMaterialHashCode, isBonusQtyValidated: $isBonusQtyValidated)';
   }
 
   @override
@@ -1088,11 +1430,14 @@ class _$_BonusMaterialState implements _BonusMaterialState {
                 other.isFetching == isFetching) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
-            const DeepCollectionEquality().equals(other._bonus, _bonus) &&
-            (identical(other.isStarting, isStarting) ||
-                other.isStarting == isStarting) &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+            const DeepCollectionEquality()
+                .equals(other._bonusItemList, _bonusItemList) &&
+            (identical(other.canLoadMore, canLoadMore) ||
+                other.canLoadMore == canLoadMore) &&
+            (identical(other.bonusMaterialHashCode, bonusMaterialHashCode) ||
+                other.bonusMaterialHashCode == bonusMaterialHashCode) &&
+            (identical(other.isBonusQtyValidated, isBonusQtyValidated) ||
+                other.isBonusQtyValidated == isBonusQtyValidated));
   }
 
   @override
@@ -1100,9 +1445,10 @@ class _$_BonusMaterialState implements _BonusMaterialState {
       runtimeType,
       isFetching,
       failureOrSuccessOption,
-      const DeepCollectionEquality().hash(_bonus),
-      isStarting,
-      searchKey);
+      const DeepCollectionEquality().hash(_bonusItemList),
+      canLoadMore,
+      bonusMaterialHashCode,
+      isBonusQtyValidated);
 
   @JsonKey(ignore: true)
   @override
@@ -1116,20 +1462,23 @@ abstract class _BonusMaterialState implements BonusMaterialState {
   const factory _BonusMaterialState(
       {required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final List<MaterialInfo> bonus,
-      required final bool isStarting,
-      required final SearchKey searchKey}) = _$_BonusMaterialState;
+      required final List<MaterialInfo> bonusItemList,
+      required final bool canLoadMore,
+      required final int bonusMaterialHashCode,
+      required final bool isBonusQtyValidated}) = _$_BonusMaterialState;
 
   @override
   bool get isFetching;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
-  List<MaterialInfo> get bonus;
+  List<MaterialInfo> get bonusItemList;
   @override
-  bool get isStarting;
+  bool get canLoadMore;
   @override
-  SearchKey get searchKey;
+  int get bonusMaterialHashCode;
+  @override
+  bool get isBonusQtyValidated;
   @override
   @JsonKey(ignore: true)
   _$$_BonusMaterialStateCopyWith<_$_BonusMaterialState> get copyWith =>

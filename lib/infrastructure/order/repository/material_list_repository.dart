@@ -19,6 +19,8 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
 
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+
 class MaterialListRepository implements IMaterialListRepository {
   final Config config;
   final MaterialListLocalDataSource materialListLocalDataSource;
@@ -67,6 +69,7 @@ class MaterialListRepository implements IMaterialListRepository {
         isFavourite: selectedMaterialFilter.isFavourite,
         bundleOffers: selectedMaterialFilter.bundleOffers,
         isProductOffer: selectedMaterialFilter.isProductOffer,
+        principalCode: '',
         offset: offset,
         orderByName: selectedMaterialFilter.sortBy.valueRequest,
         manufactureList: selectedMaterialFilter.manufactureListSelected,
@@ -315,6 +318,55 @@ class MaterialListRepository implements IMaterialListRepository {
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, MaterialResponse>> getMaterialBonusList({
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrgConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required int pageSize,
+    required int offset,
+    required PrincipalData principalData,
+    required bool enableGimmickMaterial,
+    required User user,
+  }) async {
+    final preferredLanguage = user.settings.languagePreference.languageCode;
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final materialListData =
+            await materialListLocalDataSource.getProductList();
+
+        return Right(materialListData);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+
+    try {
+      final materialListData =
+          await materialListRemoteDataSource.getProductList(
+        salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        shipToCode: shipToInfo.shipToCustomerCode,
+        pageSize: pageSize,
+        language: preferredLanguage,
+        gimmickMaterial: enableGimmickMaterial,
+        bundleOffers: false,
+        countryListCode: [],
+        isFavourite: false,
+        isProductOffer: false,
+        manufactureList: [principalData.principalName.getOrCrash()],
+        offset: offset,
+        orderByName: 'asc',
+        principalCode: principalData.principalCode.getOrCrash(),
+      );
+
+      return Right(materialListData);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

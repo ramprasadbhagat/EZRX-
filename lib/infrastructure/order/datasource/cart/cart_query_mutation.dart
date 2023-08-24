@@ -55,6 +55,7 @@ class CartQueryMutation {
         materialNumber
         materialDescription
         productCount
+        ItemId
       }
     }
     MarketplaceItems {
@@ -485,6 +486,7 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
       BonusMaterials {
         principalCode
         principalName
+        ItemId
         materialNumber
         materialDescription
         productCount

@@ -22,6 +22,8 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+
 part 'price_aggregate.freezed.dart';
 part 'price_aggregate_extension.dart';
 
@@ -44,6 +46,7 @@ class PriceAggregate with _$PriceAggregate {
     required ComboDeal comboDeal,
     @Default(false) bool isSpecialOrderType,
     @Default(<StockInfo>[]) List<StockInfo> stockInfoList,
+    required List<BonusSampleItem> bonusSampleItems,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -58,6 +61,7 @@ class PriceAggregate with _$PriceAggregate {
         stockInfo: StockInfo.empty(),
         tenderContract: TenderContract.empty(),
         comboDeal: ComboDeal.empty(),
+        bonusSampleItems: <BonusSampleItem>[],
       );
 
   OrderTemplateMaterial toOrderTemplateMaterial() {
@@ -97,7 +101,7 @@ class PriceAggregate with _$PriceAggregate {
     return SubmitMaterialInfo(
       batch:
           salesOrgConfig.enableBatchNumber ? stockInfo.batch : BatchNumber(''),
-      bonuses: addedBonusList
+      bonuses: bonusSampleItems
           .map(
             (e) =>
                 SubmitMaterialItemBonusDto.fromMaterialItemBonus(e).toDomain(),
@@ -493,6 +497,24 @@ class PriceAggregate with _$PriceAggregate {
 
     return false;
   }
+
+  int totalCartProductBonusQty(MaterialInfo bonusItem) =>
+      bonusSampleItems
+          .firstWhere(
+            (element) => element.materialNumber == bonusItem.materialNumber,
+            orElse: () => BonusSampleItem.empty(),
+          )
+          .qty
+          .getValue() +
+      bonusItem.quantity;
+
+  StringValue bonusMaterialItemId(MaterialNumber bonusMatNumber) =>
+      bonusSampleItems
+          .firstWhere(
+            (element) => element.materialNumber == bonusMatNumber,
+            orElse: () => BonusSampleItem.empty(),
+          )
+          .itemId;
 
   bool get isZdp5DiscountEligible =>
       salesOrgConfig.salesOrg.isVN && salesOrgConfig.enableZDP5;

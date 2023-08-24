@@ -32,6 +32,8 @@ mixin _$PriceAggregate {
   ComboDeal get comboDeal => throw _privateConstructorUsedError;
   bool get isSpecialOrderType => throw _privateConstructorUsedError;
   List<StockInfo> get stockInfoList => throw _privateConstructorUsedError;
+  List<BonusSampleItem> get bonusSampleItems =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceAggregateCopyWith<PriceAggregate> get copyWith =>
@@ -58,7 +60,8 @@ abstract class $PriceAggregateCopyWith<$Res> {
       TenderContract tenderContract,
       ComboDeal comboDeal,
       bool isSpecialOrderType,
-      List<StockInfo> stockInfoList});
+      List<StockInfo> stockInfoList,
+      List<BonusSampleItem> bonusSampleItems});
 
   $PriceCopyWith<$Res> get price;
   $MaterialInfoCopyWith<$Res> get materialInfo;
@@ -97,6 +100,7 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
     Object? comboDeal = null,
     Object? isSpecialOrderType = null,
     Object? stockInfoList = null,
+    Object? bonusSampleItems = null,
   }) {
     return _then(_value.copyWith(
       price: null == price
@@ -155,6 +159,10 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
           ? _value.stockInfoList
           : stockInfoList // ignore: cast_nullable_to_non_nullable
               as List<StockInfo>,
+      bonusSampleItems: null == bonusSampleItems
+          ? _value.bonusSampleItems
+          : bonusSampleItems // ignore: cast_nullable_to_non_nullable
+              as List<BonusSampleItem>,
     ) as $Val);
   }
 
@@ -246,7 +254,8 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
       TenderContract tenderContract,
       ComboDeal comboDeal,
       bool isSpecialOrderType,
-      List<StockInfo> stockInfoList});
+      List<StockInfo> stockInfoList,
+      List<BonusSampleItem> bonusSampleItems});
 
   @override
   $PriceCopyWith<$Res> get price;
@@ -291,6 +300,7 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
     Object? comboDeal = null,
     Object? isSpecialOrderType = null,
     Object? stockInfoList = null,
+    Object? bonusSampleItems = null,
   }) {
     return _then(_$_PriceAggregate(
       price: null == price
@@ -349,6 +359,10 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
           ? _value._stockInfoList
           : stockInfoList // ignore: cast_nullable_to_non_nullable
               as List<StockInfo>,
+      bonusSampleItems: null == bonusSampleItems
+          ? _value._bonusSampleItems
+          : bonusSampleItems // ignore: cast_nullable_to_non_nullable
+              as List<BonusSampleItem>,
     ));
   }
 }
@@ -370,9 +384,11 @@ class _$_PriceAggregate extends _PriceAggregate {
       required this.tenderContract,
       required this.comboDeal,
       this.isSpecialOrderType = false,
-      final List<StockInfo> stockInfoList = const <StockInfo>[]})
+      final List<StockInfo> stockInfoList = const <StockInfo>[],
+      required final List<BonusSampleItem> bonusSampleItems})
       : _addedBonusList = addedBonusList,
         _stockInfoList = stockInfoList,
+        _bonusSampleItems = bonusSampleItems,
         super._();
 
   @override
@@ -419,9 +435,18 @@ class _$_PriceAggregate extends _PriceAggregate {
     return EqualUnmodifiableListView(_stockInfoList);
   }
 
+  final List<BonusSampleItem> _bonusSampleItems;
+  @override
+  List<BonusSampleItem> get bonusSampleItems {
+    if (_bonusSampleItems is EqualUnmodifiableListView)
+      return _bonusSampleItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bonusSampleItems);
+  }
+
   @override
   String toString() {
-    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, banner: $banner, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, addedBonusList: $addedBonusList, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList)';
+    return 'PriceAggregate(price: $price, materialInfo: $materialInfo, bundle: $bundle, banner: $banner, salesOrgConfig: $salesOrgConfig, quantity: $quantity, discountedMaterialCount: $discountedMaterialCount, exceedQuantity: $exceedQuantity, addedBonusList: $addedBonusList, stockInfo: $stockInfo, tenderContract: $tenderContract, comboDeal: $comboDeal, isSpecialOrderType: $isSpecialOrderType, stockInfoList: $stockInfoList, bonusSampleItems: $bonusSampleItems)';
   }
 
   @override
@@ -454,7 +479,9 @@ class _$_PriceAggregate extends _PriceAggregate {
             (identical(other.isSpecialOrderType, isSpecialOrderType) ||
                 other.isSpecialOrderType == isSpecialOrderType) &&
             const DeepCollectionEquality()
-                .equals(other._stockInfoList, _stockInfoList));
+                .equals(other._stockInfoList, _stockInfoList) &&
+            const DeepCollectionEquality()
+                .equals(other._bonusSampleItems, _bonusSampleItems));
   }
 
   @override
@@ -473,7 +500,8 @@ class _$_PriceAggregate extends _PriceAggregate {
       tenderContract,
       comboDeal,
       isSpecialOrderType,
-      const DeepCollectionEquality().hash(_stockInfoList));
+      const DeepCollectionEquality().hash(_stockInfoList),
+      const DeepCollectionEquality().hash(_bonusSampleItems));
 
   @JsonKey(ignore: true)
   @override
@@ -484,20 +512,22 @@ class _$_PriceAggregate extends _PriceAggregate {
 
 abstract class _PriceAggregate extends PriceAggregate {
   const factory _PriceAggregate(
-      {required final Price price,
-      required final MaterialInfo materialInfo,
-      required final Bundle bundle,
-      required final BannerItem banner,
-      required final SalesOrganisationConfigs salesOrgConfig,
-      required final int quantity,
-      final int discountedMaterialCount,
-      final bool exceedQuantity,
-      required final List<MaterialItemBonus> addedBonusList,
-      required final StockInfo stockInfo,
-      required final TenderContract tenderContract,
-      required final ComboDeal comboDeal,
-      final bool isSpecialOrderType,
-      final List<StockInfo> stockInfoList}) = _$_PriceAggregate;
+          {required final Price price,
+          required final MaterialInfo materialInfo,
+          required final Bundle bundle,
+          required final BannerItem banner,
+          required final SalesOrganisationConfigs salesOrgConfig,
+          required final int quantity,
+          final int discountedMaterialCount,
+          final bool exceedQuantity,
+          required final List<MaterialItemBonus> addedBonusList,
+          required final StockInfo stockInfo,
+          required final TenderContract tenderContract,
+          required final ComboDeal comboDeal,
+          final bool isSpecialOrderType,
+          final List<StockInfo> stockInfoList,
+          required final List<BonusSampleItem> bonusSampleItems}) =
+      _$_PriceAggregate;
   const _PriceAggregate._() : super._();
 
   @override
@@ -528,6 +558,8 @@ abstract class _PriceAggregate extends PriceAggregate {
   bool get isSpecialOrderType;
   @override
   List<StockInfo> get stockInfoList;
+  @override
+  List<BonusSampleItem> get bonusSampleItems;
   @override
   @JsonKey(ignore: true)
   _$$_PriceAggregateCopyWith<_$_PriceAggregate> get copyWith =>
