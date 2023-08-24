@@ -75,41 +75,44 @@ class _SSOLoginButton extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
-        return ElevatedButton(
-          key: WidgetKeys.ssoLoginButton,
-          onPressed: state.isSubmitting
-              ? null
-              : () {
-                  FocusScope.of(context).unfocus();
-                  context
-                      .read<LoginFormBloc>()
-                      .add(const LoginFormEvent.loginWithOktaButtonPressed());
-                },
-          style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                backgroundColor: const MaterialStatePropertyAll(
-                  ZPColors.accentColor,
-                ),
-                shape: const MaterialStatePropertyAll(
-                  StadiumBorder(),
-                ),
-              ),
-          child: IntrinsicWidth(
-            child: LoadingShimmer.withChild(
-              enabled: state.isSubmitting,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    Icons.lock_person_outlined,
-                    size: 20,
-                    color: ZPColors.black,
+        return FractionallySizedBox(
+          widthFactor: 0.5,
+          child: ElevatedButton(
+            key: WidgetKeys.ssoLoginButton,
+            onPressed: state.isSubmitting
+                ? null
+                : () {
+                    FocusScope.of(context).unfocus();
+                    context
+                        .read<LoginFormBloc>()
+                        .add(const LoginFormEvent.loginWithOktaButtonPressed());
+                  },
+            style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                  backgroundColor: const MaterialStatePropertyAll(
+                    ZPColors.accentColor,
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Log in with SSO'.tr(),
-                    style: Theme.of(context).textTheme.labelSmall,
+                  shape: const MaterialStatePropertyAll(
+                    StadiumBorder(),
                   ),
-                ],
+                ),
+            child: IntrinsicWidth(
+              child: LoadingShimmer.withChild(
+                enabled: state.isSubmitting,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.lock_person_outlined,
+                      size: 20,
+                      color: ZPColors.black,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Log in with SSO'.tr(),
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -161,11 +164,14 @@ class _CreateAccount extends StatelessWidget {
           'Don’t have an account yet?'.tr(),
           style: Theme.of(context).textTheme.titleSmall,
         ),
-        const SizedBox(
-          width: 8.0,
-        ),
         TextButton(
           key: WidgetKeys.createAccountButton,
+          style: Theme.of(context).textButtonTheme.style?.copyWith(
+                minimumSize: MaterialStateProperty.all(const Size(0, 0)),
+                padding: MaterialStateProperty.all(
+                  const EdgeInsets.only(left: 3),
+                ),
+              ),
           child: Text(
             'Sign up'.tr(),
           ),
