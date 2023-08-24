@@ -31,7 +31,10 @@ class AccountSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Account Summary').tr(),
+        title: Text(
+          'Account Summary'.tr(),
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
         centerTitle: false,
       ),
       body: Column(
@@ -53,7 +56,7 @@ class AccountSummary extends StatelessWidget {
                     tabs: [
                       Tab(
                         key: WidgetKeys.invoiceTab,
-                        text: 'Invoice'.tr(),
+                        text: 'Invoices'.tr(),
                       ),
                       Tab(
                         key: WidgetKeys.creditsTab,

@@ -195,7 +195,7 @@ class _InvoiceGroup extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
-                  'Documents created on ${data.dueDate.dateString}',
+                  '${'Created on'.tr()} ${data.dueDate.dateString}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkerGrey,
                       ),
@@ -250,7 +250,7 @@ class _InvoiceItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Invoice #${invoiceItem.searchKey}',
+                  '${'Invoice'.tr()} #${invoiceItem.searchKey}',
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
                 StatusLabel(
@@ -266,11 +266,11 @@ class _InvoiceItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Order #${invoiceItem.orderId.displayNAIfEmpty}',
+                    '${'Order'.tr()} #${invoiceItem.orderId.displayNAIfEmpty}',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(
-                    'Due on ${invoiceItem.netDueDate.simpleDateString}',
+                    '${'Due on'.tr()} ${invoiceItem.netDueDate.simpleDateString}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: invoiceItem
                               .invoiceProcessingStatus.displayDueDateColor,
