@@ -24,6 +24,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -85,6 +86,8 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late CartBloc cartMockBloc;
   late AppRouter autoRouterMock;
+  late MaterialInfo materialInfo;
+  late List<MaterialInfo> similarProducts;
 
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -112,6 +115,8 @@ void main() {
     registerFallbackValue(ShipToInfo.empty());
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    materialInfo = await ProductDetailLocalDataSource().getProductDetails();
+    similarProducts = await ProductDetailLocalDataSource().getSimilarProduct();
   });
 
   group(
@@ -288,6 +293,69 @@ void main() {
         expect(addToCartButton, findsOneWidget);
         await tester.tap(addToCartButton);
         expect(tester.widget<ElevatedButton>(addToCartButton).enabled, isTrue);
+        await tester.pump(const Duration(seconds: 1));
+      });
+
+      testWidgets('Product Details Related Products Visible', (tester) async {
+        final expectedStates = Stream.fromIterable(
+          [
+            ProductDetailState.initial().copyWith(
+              isFetching: true,
+              productDetailAggregate: ProductDetailAggregate.empty(),
+            ),
+            ProductDetailState.initial().copyWith(
+              isFetching: false,
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo,
+                similarProduct: similarProducts,
+              ),
+            ),
+          ],
+        );
+
+        whenListen(productDetailMockBloc, expectedStates);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final similarProductSectionFinder =
+            find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
+        final similarProductItemFinder =
+            find.byKey(WidgetKeys.materialDetailsSimilarProductItem);
+
+        expect(similarProductSectionFinder, findsOneWidget);
+        expect(similarProductItemFinder, findsAtLeastNWidgets(1));
+
+        await tester.pump(const Duration(seconds: 1));
+      });
+
+      testWidgets('Product Details Related Products NotVisible',
+          (tester) async {
+        final expectedStates = Stream.fromIterable(
+          [
+            ProductDetailState.initial().copyWith(
+              isFetching: true,
+              productDetailAggregate: ProductDetailAggregate.empty(),
+            ),
+            ProductDetailState.initial().copyWith(
+              isFetching: false,
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo,
+                similarProduct: <MaterialInfo>[],
+              ),
+            ),
+          ],
+        );
+
+        whenListen(productDetailMockBloc, expectedStates);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final similarProductSectionFinder =
+            find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
+        final similarProductItemFinder =
+            find.byKey(WidgetKeys.materialDetailsSimilarProductItem);
+
+        expect(similarProductSectionFinder, findsNothing);
+        expect(similarProductItemFinder, findsNothing);
+
         await tester.pump(const Duration(seconds: 1));
       });
     },

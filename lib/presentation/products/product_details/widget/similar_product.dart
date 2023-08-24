@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/material_loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +18,16 @@ class SimilarProduct extends StatelessWidget {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
           previous.productDetailAggregate.similarProduct !=
-          current.productDetailAggregate.similarProduct,
+              current.productDetailAggregate.similarProduct ||
+          previous.isFetching != current.isFetching,
       builder: (context, state) {
+        if (!state.isFetching &&
+            state.productDetailAggregate.similarProduct.isEmpty) {
+          return const SizedBox.shrink();
+        }
+
         return Column(
+          key: WidgetKeys.materialDetailsSimilarProductsSection,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
@@ -36,16 +44,14 @@ class SimilarProduct extends StatelessWidget {
               height: 300,
               child: state.isFetching
                   ? const _LoadingShimmerSimilarProduct()
-                  : state.productDetailAggregate.similarProduct.isNotEmpty
-                      ? ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: state.productDetailAggregate.similarProduct
-                              .map(
-                                (e) => _SimilarProductCard(material: e),
-                              )
-                              .toList(),
-                        )
-                      : const SizedBox.shrink(),
+                  : ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: state.productDetailAggregate.similarProduct
+                          .map(
+                            (e) => _SimilarProductCard(material: e),
+                          )
+                          .toList(),
+                    ),
             ),
           ],
         );
@@ -68,6 +74,7 @@ class _SimilarProductCard extends StatelessWidget {
           ? MediaQuery.of(context).size.width * 0.25
           : MediaQuery.of(context).size.width * 0.5,
       child: MaterialGridItem(
+        key: WidgetKeys.materialDetailsSimilarProductItem,
         materialInfo: material,
         onTap: () => _productOnTap(context, material),
         onFavouriteTap: () => context.read<ProductDetailBloc>().add(
