@@ -18,7 +18,10 @@ class ResetPasswordState with _$ResetPasswordState {
 
   factory ResetPasswordState.initial() => ResetPasswordState(
         oldPassword: Password.login(''),
-        newPassword: Password.resetV2('', '', User.empty()),
+        newPassword: Password.resetV2(
+          '',
+          '',
+        ),
         confirmPassword: Password.confirm('', ''),
         passwordResetFailureOrSuccessOption: none(),
         isOldPasswordObscure: true,
@@ -28,7 +31,11 @@ class ResetPasswordState with _$ResetPasswordState {
         showErrorMessages: false,
       );
 
-  bool newPasswordMustNotContainUserNameOrName({
+  bool isNewPasswordValid(User user) =>
+      newPassword.isValid() &&
+      newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName(user: user);
+
+  bool newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName({
     required User user,
   }) {
     final input = newPassword.getValidPassword;
@@ -39,6 +46,18 @@ class ResetPasswordState with _$ResetPasswordState {
         !_checkInLowerCase(input, user.fullName.lastName);
   }
 
-  bool _checkInLowerCase(String input, String value) =>
-      input.toLowerCase().contains(value.toLowerCase());
+  bool showNewPasswordPatternMismatchError(User user) =>
+      !isNewPasswordValid(user) && showErrorMessages;
+
+  bool _checkInLowerCase(String input, String value) {
+    final lowerCaseInput = input.toLowerCase();
+
+    for (var i = 0; i <= value.length - 3; i++) {
+      final substring =
+          value.characters.getRange(i, i + 3).string.toLowerCase();
+      if (lowerCaseInput.contains(substring)) return true;
+    }
+
+    return false;
+  }
 }

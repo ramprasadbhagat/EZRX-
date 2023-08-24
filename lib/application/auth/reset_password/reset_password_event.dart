@@ -17,7 +17,7 @@ class ResetPasswordEvent with _$ResetPasswordEvent {
     required User user,
   }) = _ResetPasswordPressed;
 
-  const factory ResetPasswordEvent.onRestart() = _OnRestart;
+  const factory ResetPasswordEvent.clear() = _Clear;
 }
 
 enum PasswordFieldType {

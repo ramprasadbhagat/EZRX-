@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
@@ -91,15 +90,6 @@ bool isAtLeastOneSpecialCharacter({
   required String input,
 }) =>
     RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(input);
-
-bool isMustNotContainUserNameOrName({
-  required String input,
-  required User user,
-}) =>
-    input.isNotEmpty &&
-    (!input.toLowerCase().contains(user.username.getValue().toLowerCase()) &&
-        !input.toLowerCase().contains(user.fullName.firstName.toLowerCase()) &&
-        !input.toLowerCase().contains(user.fullName.lastName.toLowerCase()));
 
 String getTenderContractNumber(String text) {
   if (text.isEmpty) return text;

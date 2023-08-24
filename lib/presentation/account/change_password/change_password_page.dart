@@ -1,113 +1,71 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/presentation/account/change_password/widgets/change_password_button.dart';
-import 'package:ezrxmobile/presentation/account/change_password/widgets/change_password_validation.dart';
-import 'package:ezrxmobile/presentation/account/change_password/widgets/confirm_password_field.dart';
-import 'package:ezrxmobile/presentation/account/change_password/widgets/new_password_field.dart';
-import 'package:ezrxmobile/presentation/account/change_password/widgets/old_password_field.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
+
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
+import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
+
+part './widgets/change_password_form.dart';
+part './widgets/save_clear_changes_section.dart';
+part './widgets/password_text_field.dart';
+part './widgets/change_password_validation.dart';
 
 class ChangePasswordPage extends StatelessWidget {
   const ChangePasswordPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final userBloc = context.read<UserBloc>();
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Change Password').tr(),
+        title: const Text('Security').tr(),
+        centerTitle: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_sharp),
+          onPressed: () {
+            context
+                .read<ResetPasswordBloc>()
+                .add(const ResetPasswordEvent.clear());
+            context.router.pop();
+          },
+        ),
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
         child: ListView(
           padding: const EdgeInsets.all(15.0),
           children: <Widget>[
-            _ChangePasswordForm(
-              key: const Key('changePasswordFrom'),
-              user: userBloc.state.user,
+            Text(
+              'Change Password'.tr(),
+              style: Theme.of(context).textTheme.labelLarge,
             ),
-            const ResetPasswordValidation(
-              key: Key('resetPasswordValidation'),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 20),
+              child: Text(
+                'We recommend you to change your password every 3 months'.tr(),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: ZPColors.changePasswordRecommendationColor,
+                    ),
+              ),
             ),
-            const _NoteText(
-              key: Key('noteText'),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ResetPasswordButton(
-              key: const Key('resetPasswordButton'),
-              user: userBloc.state.user,
-            ),
+            const _ChangePasswordForm(),
+            const _ResetPasswordValidation(),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _ChangePasswordForm extends StatelessWidget {
-  final User user;
-  const _ChangePasswordForm({
-    Key? key,
-    required this.user,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
-      buildWhen: (previous, current) =>
-          previous.showErrorMessages != current.showErrorMessages,
-      builder: (context, state) {
-        return Form(
-          autovalidateMode: state.showErrorMessages
-              ? AutovalidateMode.always
-              : AutovalidateMode.disabled,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              OldPasswordTextField(user: user),
-              const SizedBox(height: 15),
-              NewPasswordTextField(user: user),
-              const SizedBox(height: 15),
-              ConfirmPasswordTextField(user: user),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _NoteText extends StatelessWidget {
-  const _NoteText({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 20, bottom: 10),
-          child: Text(
-            'Note',
-            style: Theme.of(context).textTheme.titleMedium,
-          ).tr(),
-        ),
-        Text(
-          'Previous eZRx passwords cannot be reused. For security reasons passwords can only be changed a maximum of three times for every 24 hours.',
-          style: Theme.of(context).textTheme.titleSmall?.apply(
-                color: ZPColors.darkGray,
-              ),
-        ).tr(),
-      ],
+      bottomNavigationBar: const _SaveClearChangesSection(),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_change_password_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -32,7 +33,6 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
             emit(
               state.copyWith(
                 isOldPasswordObscure: e.toggleValue,
-                passwordResetFailureOrSuccessOption: none(),
               ),
             );
             break;
@@ -40,7 +40,6 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
             emit(
               state.copyWith(
                 isNewPasswordObscure: e.toggleValue,
-                passwordResetFailureOrSuccessOption: none(),
               ),
             );
             break;
@@ -48,7 +47,6 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
             emit(
               state.copyWith(
                 isConfirmPasswordObscure: e.toggleValue,
-                passwordResetFailureOrSuccessOption: none(),
               ),
             );
             break;
@@ -60,12 +58,6 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
             emit(
               state.copyWith(
                 oldPassword: Password.login(e.newValue),
-                newPassword: Password.resetV2(
-                  state.newPassword.getValue(),
-                  e.newValue,
-                  e.user,
-                ),
-                passwordResetFailureOrSuccessOption: none(),
               ),
             );
             break;
@@ -75,13 +67,11 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
                 newPassword: Password.resetV2(
                   e.newValue,
                   state.oldPassword.getValue(),
-                  e.user,
                 ),
                 confirmPassword: Password.confirm(
                   state.confirmPassword.getValue(),
                   e.newValue,
                 ),
-                passwordResetFailureOrSuccessOption: none(),
               ),
             );
             break;
@@ -92,23 +82,22 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
                   e.newValue,
                   state.newPassword.getValue(),
                 ),
-                passwordResetFailureOrSuccessOption: none(),
               ),
             );
             break;
         }
       },
       resetPasswordPressed: (e) async {
-        final isOldPasswordValid = state.oldPassword.isValid();
-        final isNewPasswordValid = state.newPassword.isValid();
-        final isConfirmPasswordValid = state.confirmPassword.isValid();
-        if (isOldPasswordValid &&
-            isNewPasswordValid &&
-            isConfirmPasswordValid) {
+        final isFormValidated = state.oldPassword.isValid() &&
+            state.isNewPasswordValid(e.user) &&
+            state.confirmPassword.isValid();
+
+        if (isFormValidated) {
           emit(
             state.copyWith(
               isSubmitting: true,
               passwordResetFailureOrSuccessOption: none(),
+              showErrorMessages: false,
             ),
           );
 
@@ -119,34 +108,35 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           );
 
           failureOrSuccess.fold(
-            (l) => emit(
-              state.copyWith(
-                passwordResetFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isSubmitting: false,
-                showErrorMessages: true,
-              ),
-            ),
-            (r) => emit(
-              state.copyWith(
-                passwordResetFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isSubmitting: false,
-                showErrorMessages: true,
-              ),
-            ),
+            (failure) {
+              emit(
+                state.copyWith(
+                  passwordResetFailureOrSuccessOption:
+                      optionOf(failureOrSuccess),
+                  isSubmitting: false,
+                ),
+              );
+            },
+            (success) {
+              emit(
+                state.copyWith(
+                  passwordResetFailureOrSuccessOption:
+                      optionOf(failureOrSuccess),
+                  isSubmitting: false,
+                ),
+              );
+              add(const ResetPasswordEvent.clear());
+            },
           );
         } else {
-          emit(state.copyWith(showErrorMessages: true));
+          emit(
+            state.copyWith(showErrorMessages: true),
+          );
         }
       },
-      onRestart: (e) {
-        emit(ResetPasswordState.initial());
-      },
+      clear: (e) async => emit(
+        ResetPasswordState.initial(),
+      ),
     );
-  }
-
-  @override
-  void onChange(Change<ResetPasswordState> change) {
-    super.onChange(change);
-    // print(change);
   }
 }

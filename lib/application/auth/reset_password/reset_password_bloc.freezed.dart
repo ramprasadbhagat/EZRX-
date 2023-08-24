@@ -24,7 +24,7 @@ mixin _$ResetPasswordEvent {
             PasswordFieldType fieldType, String newValue, User user)
         onTextChange,
     required TResult Function(User user) resetPasswordPressed,
-    required TResult Function() onRestart,
+    required TResult Function() clear,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,7 +34,7 @@ mixin _$ResetPasswordEvent {
     TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
     TResult? Function(User user)? resetPasswordPressed,
-    TResult? Function()? onRestart,
+    TResult? Function()? clear,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,7 +44,7 @@ mixin _$ResetPasswordEvent {
     TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
     TResult Function(User user)? resetPasswordPressed,
-    TResult Function()? onRestart,
+    TResult Function()? clear,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ mixin _$ResetPasswordEvent {
         togglePasswordVisibility,
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ResetPasswordPressed value) resetPasswordPressed,
-    required TResult Function(_OnRestart value) onRestart,
+    required TResult Function(_Clear value) clear,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +62,7 @@ mixin _$ResetPasswordEvent {
     TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult? Function(_OnRestart value)? onRestart,
+    TResult? Function(_Clear value)? clear,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,7 +70,7 @@ mixin _$ResetPasswordEvent {
     TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult Function(_OnRestart value)? onRestart,
+    TResult Function(_Clear value)? clear,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -175,7 +175,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
             PasswordFieldType fieldType, String newValue, User user)
         onTextChange,
     required TResult Function(User user) resetPasswordPressed,
-    required TResult Function() onRestart,
+    required TResult Function() clear,
   }) {
     return togglePasswordVisibility(fieldType, toggleValue);
   }
@@ -188,7 +188,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
     TResult? Function(User user)? resetPasswordPressed,
-    TResult? Function()? onRestart,
+    TResult? Function()? clear,
   }) {
     return togglePasswordVisibility?.call(fieldType, toggleValue);
   }
@@ -201,7 +201,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
     TResult Function(User user)? resetPasswordPressed,
-    TResult Function()? onRestart,
+    TResult Function()? clear,
     required TResult orElse(),
   }) {
     if (togglePasswordVisibility != null) {
@@ -217,7 +217,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
         togglePasswordVisibility,
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ResetPasswordPressed value) resetPasswordPressed,
-    required TResult Function(_OnRestart value) onRestart,
+    required TResult Function(_Clear value) clear,
   }) {
     return togglePasswordVisibility(this);
   }
@@ -228,7 +228,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult? Function(_OnRestart value)? onRestart,
+    TResult? Function(_Clear value)? clear,
   }) {
     return togglePasswordVisibility?.call(this);
   }
@@ -239,7 +239,7 @@ class _$_PasswordVisibility implements _PasswordVisibility {
     TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult Function(_OnRestart value)? onRestart,
+    TResult Function(_Clear value)? clear,
     required TResult orElse(),
   }) {
     if (togglePasswordVisibility != null) {
@@ -360,7 +360,7 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
             PasswordFieldType fieldType, String newValue, User user)
         onTextChange,
     required TResult Function(User user) resetPasswordPressed,
-    required TResult Function() onRestart,
+    required TResult Function() clear,
   }) {
     return onTextChange(fieldType, newValue, user);
   }
@@ -373,7 +373,7 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
     TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
     TResult? Function(User user)? resetPasswordPressed,
-    TResult? Function()? onRestart,
+    TResult? Function()? clear,
   }) {
     return onTextChange?.call(fieldType, newValue, user);
   }
@@ -386,7 +386,7 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
     TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
     TResult Function(User user)? resetPasswordPressed,
-    TResult Function()? onRestart,
+    TResult Function()? clear,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -402,7 +402,7 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
         togglePasswordVisibility,
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ResetPasswordPressed value) resetPasswordPressed,
-    required TResult Function(_OnRestart value) onRestart,
+    required TResult Function(_Clear value) clear,
   }) {
     return onTextChange(this);
   }
@@ -413,7 +413,7 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
     TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult? Function(_OnRestart value)? onRestart,
+    TResult? Function(_Clear value)? clear,
   }) {
     return onTextChange?.call(this);
   }
@@ -424,7 +424,7 @@ class _$_PasswordTextOnChange implements _PasswordTextOnChange {
     TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult Function(_OnRestart value)? onRestart,
+    TResult Function(_Clear value)? clear,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -527,7 +527,7 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
             PasswordFieldType fieldType, String newValue, User user)
         onTextChange,
     required TResult Function(User user) resetPasswordPressed,
-    required TResult Function() onRestart,
+    required TResult Function() clear,
   }) {
     return resetPasswordPressed(user);
   }
@@ -540,7 +540,7 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
     TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
     TResult? Function(User user)? resetPasswordPressed,
-    TResult? Function()? onRestart,
+    TResult? Function()? clear,
   }) {
     return resetPasswordPressed?.call(user);
   }
@@ -553,7 +553,7 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
     TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
     TResult Function(User user)? resetPasswordPressed,
-    TResult Function()? onRestart,
+    TResult Function()? clear,
     required TResult orElse(),
   }) {
     if (resetPasswordPressed != null) {
@@ -569,7 +569,7 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
         togglePasswordVisibility,
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ResetPasswordPressed value) resetPasswordPressed,
-    required TResult Function(_OnRestart value) onRestart,
+    required TResult Function(_Clear value) clear,
   }) {
     return resetPasswordPressed(this);
   }
@@ -580,7 +580,7 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
     TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult? Function(_OnRestart value)? onRestart,
+    TResult? Function(_Clear value)? clear,
   }) {
     return resetPasswordPressed?.call(this);
   }
@@ -591,7 +591,7 @@ class _$_ResetPasswordPressed implements _ResetPasswordPressed {
     TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult Function(_OnRestart value)? onRestart,
+    TResult Function(_Clear value)? clear,
     required TResult orElse(),
   }) {
     if (resetPasswordPressed != null) {
@@ -612,35 +612,33 @@ abstract class _ResetPasswordPressed implements ResetPasswordEvent {
 }
 
 /// @nodoc
-abstract class _$$_OnRestartCopyWith<$Res> {
-  factory _$$_OnRestartCopyWith(
-          _$_OnRestart value, $Res Function(_$_OnRestart) then) =
-      __$$_OnRestartCopyWithImpl<$Res>;
+abstract class _$$_ClearCopyWith<$Res> {
+  factory _$$_ClearCopyWith(_$_Clear value, $Res Function(_$_Clear) then) =
+      __$$_ClearCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_OnRestartCopyWithImpl<$Res>
-    extends _$ResetPasswordEventCopyWithImpl<$Res, _$_OnRestart>
-    implements _$$_OnRestartCopyWith<$Res> {
-  __$$_OnRestartCopyWithImpl(
-      _$_OnRestart _value, $Res Function(_$_OnRestart) _then)
+class __$$_ClearCopyWithImpl<$Res>
+    extends _$ResetPasswordEventCopyWithImpl<$Res, _$_Clear>
+    implements _$$_ClearCopyWith<$Res> {
+  __$$_ClearCopyWithImpl(_$_Clear _value, $Res Function(_$_Clear) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_OnRestart implements _OnRestart {
-  const _$_OnRestart();
+class _$_Clear implements _Clear {
+  const _$_Clear();
 
   @override
   String toString() {
-    return 'ResetPasswordEvent.onRestart()';
+    return 'ResetPasswordEvent.clear()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_OnRestart);
+        (other.runtimeType == runtimeType && other is _$_Clear);
   }
 
   @override
@@ -655,9 +653,9 @@ class _$_OnRestart implements _OnRestart {
             PasswordFieldType fieldType, String newValue, User user)
         onTextChange,
     required TResult Function(User user) resetPasswordPressed,
-    required TResult Function() onRestart,
+    required TResult Function() clear,
   }) {
-    return onRestart();
+    return clear();
   }
 
   @override
@@ -668,9 +666,9 @@ class _$_OnRestart implements _OnRestart {
     TResult? Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
     TResult? Function(User user)? resetPasswordPressed,
-    TResult? Function()? onRestart,
+    TResult? Function()? clear,
   }) {
-    return onRestart?.call();
+    return clear?.call();
   }
 
   @override
@@ -681,11 +679,11 @@ class _$_OnRestart implements _OnRestart {
     TResult Function(PasswordFieldType fieldType, String newValue, User user)?
         onTextChange,
     TResult Function(User user)? resetPasswordPressed,
-    TResult Function()? onRestart,
+    TResult Function()? clear,
     required TResult orElse(),
   }) {
-    if (onRestart != null) {
-      return onRestart();
+    if (clear != null) {
+      return clear();
     }
     return orElse();
   }
@@ -697,9 +695,9 @@ class _$_OnRestart implements _OnRestart {
         togglePasswordVisibility,
     required TResult Function(_PasswordTextOnChange value) onTextChange,
     required TResult Function(_ResetPasswordPressed value) resetPasswordPressed,
-    required TResult Function(_OnRestart value) onRestart,
+    required TResult Function(_Clear value) clear,
   }) {
-    return onRestart(this);
+    return clear(this);
   }
 
   @override
@@ -708,9 +706,9 @@ class _$_OnRestart implements _OnRestart {
     TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
     TResult? Function(_PasswordTextOnChange value)? onTextChange,
     TResult? Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult? Function(_OnRestart value)? onRestart,
+    TResult? Function(_Clear value)? clear,
   }) {
-    return onRestart?.call(this);
+    return clear?.call(this);
   }
 
   @override
@@ -719,18 +717,18 @@ class _$_OnRestart implements _OnRestart {
     TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
     TResult Function(_PasswordTextOnChange value)? onTextChange,
     TResult Function(_ResetPasswordPressed value)? resetPasswordPressed,
-    TResult Function(_OnRestart value)? onRestart,
+    TResult Function(_Clear value)? clear,
     required TResult orElse(),
   }) {
-    if (onRestart != null) {
-      return onRestart(this);
+    if (clear != null) {
+      return clear(this);
     }
     return orElse();
   }
 }
 
-abstract class _OnRestart implements ResetPasswordEvent {
-  const factory _OnRestart() = _$_OnRestart;
+abstract class _Clear implements ResetPasswordEvent {
+  const factory _Clear() = _$_Clear;
 }
 
 /// @nodoc

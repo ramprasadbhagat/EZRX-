@@ -21,6 +21,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.mandatory = false,
     this.readOnly = false,
     this.focusNode,
+    this.obscuringCharacter = '•',
     this.inputFormatters,
     this.onTapOutside,
     this.maxLength,
@@ -28,6 +29,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final Key fieldKey;
   final String labelText;
   final TextEditingController? controller;
+  final String obscuringCharacter;
   final Function(String?)? validator;
   final Function(String) onChanged;
   final InputDecoration? decoration;
@@ -70,6 +72,7 @@ class TextFieldWithLabel extends StatelessWidget {
         TextFormField(
           focusNode: focusNode,
           inputFormatters: inputFormatters,
+          obscuringCharacter: obscuringCharacter,
           key: fieldKey,
           style: Theme.of(context).textTheme.titleMedium,
           autocorrect: autoCorrect,

@@ -1,16 +1,14 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of '../change_password_page.dart';
 
-class ResetPasswordValidation extends StatelessWidget {
-  const ResetPasswordValidation({Key? key}) : super(key: key);
+class _ResetPasswordValidation extends StatelessWidget {
+  const _ResetPasswordValidation({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
+      buildWhen: (previous, current) =>
+          previous.newPassword != current.newPassword ||
+          previous.showErrorMessages != current.showErrorMessages,
       builder: (BuildContext context, ResetPasswordState state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,8 +16,8 @@ class ResetPasswordValidation extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 30, bottom: 10),
               child: Text(
-                'Password must meet the following requirements:'.tr(),
-                style: Theme.of(context).textTheme.titleMedium,
+                'Your new password should have :'.tr(),
+                style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
             _ConditionText(
@@ -43,15 +41,17 @@ class ResetPasswordValidation extends StatelessWidget {
               enableGreenTick:
                   state.newPassword.matchAtLeastOneSpecialCharacter,
               msgText:
-                  'Contain at least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )'
+                  'At least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )'
                       .tr(),
             ),
             _ConditionText(
-              enableGreenTick: state.newPasswordMustNotContainUserNameOrName(
+              enableGreenTick: state
+                  .newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName(
                 user: context.read<UserBloc>().state.user,
               ),
               msgText:
-                  'Must not contain any part of your username and/or name'.tr(),
+                  'New password cannot contain more than 2 consecutive characters from username and/or name of the user'
+                      .tr(),
             ),
           ],
         );
@@ -72,29 +72,44 @@ class _ConditionText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        enableGreenTick
-            ? const Icon(
-                Icons.check_circle_rounded,
-                color: ZPColors.green,
-                size: 15,
-              )
-            : const Icon(
-                Icons.circle_outlined,
-                color: ZPColors.black,
-                size: 15,
-              ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Text(
-            msgText,
-            style: Theme.of(context).textTheme.titleSmall?.apply(
-                  color: ZPColors.darkGray,
+    return Padding(
+      padding: const EdgeInsets.only(top: 5, bottom: 5, left: 8, right: 2),
+      child: Row(
+        children: [
+          enableGreenTick
+              ? const Icon(
+                  Icons.check,
+                  color: ZPColors.green,
+                  size: 15,
+                )
+              : Icon(
+                  Icons.circle,
+                  color: context
+                              .read<ResetPasswordBloc>()
+                              .state
+                              .showErrorMessages &&
+                          !enableGreenTick
+                      ? ZPColors.red
+                      : ZPColors.passwordValidationsColor,
+                  size: 5,
                 ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              msgText,
+              style: Theme.of(context).textTheme.titleSmall?.apply(
+                    color: context
+                                .read<ResetPasswordBloc>()
+                                .state
+                                .showErrorMessages &&
+                            !enableGreenTick
+                        ? ZPColors.red
+                        : ZPColors.passwordValidationsColor,
+                  ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

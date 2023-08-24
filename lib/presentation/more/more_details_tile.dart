@@ -198,12 +198,13 @@ class MoreDetailsTile {
         );
       },);
 
-  factory MoreDetailsTile.security() => const MoreDetailsTile(
-        icon: Icon(
+  factory MoreDetailsTile.security(BuildContext context) => MoreDetailsTile(
+        icon: const Icon(
           Icons.https_outlined,
-          color: ZPColors.lightGray,
+          color: ZPColors.greenIconColor,
         ),
         label: 'Security',
+        onTap: () => context.navigateTo(const ChangePasswordPageRoute()),
       );
 
   factory MoreDetailsTile.notifications(BuildContext context) =>

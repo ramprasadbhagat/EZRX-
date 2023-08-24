@@ -14,6 +14,9 @@ abstract class ZPColors {
   static const Color mustardColor = Color.fromRGBO(245, 219, 181, 1.0);
   static const Color skyBlueColor = Color.fromRGBO(68, 131, 219, 1.0);
   static const Color unselectedLabelColor = Color.fromRGBO(167, 180, 187, 1.0);
+  static const Color changePasswordRecommendationColor =
+      Color.fromRGBO(113, 113, 113, 1);
+  static const Color passwordValidationsColor = Color.fromRGBO(73, 73, 73, 1);
   static const Color inputBorderColor = Color.fromRGBO(207, 210, 210, 1.0);
   static const Color arrowButtonBackgroundColor =
       Color.fromRGBO(138, 177, 180, 1);

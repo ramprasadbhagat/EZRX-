@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -42,9 +41,6 @@ class SettingsPage extends StatelessWidget {
                     ),
                     title: const Text('Change Password').tr(),
                     onTap: () {
-                      context
-                          .read<ResetPasswordBloc>()
-                          .add(const ResetPasswordEvent.onRestart());
                       context.router.pushNamed('change_password');
                     },
                   ),

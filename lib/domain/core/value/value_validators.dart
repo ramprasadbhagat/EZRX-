@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 
@@ -68,15 +67,6 @@ Either<ValueFailure<String>, String> atLeastOneSpecialCharacter(String input) {
   return isAtLeastOneSpecialCharacter(input: input)
       ? right(input)
       : left(ValueFailure.mustOneSpecialCharacter(failedValue: input));
-}
-
-Either<ValueFailure<String>, String> validateContainUserNameOrName(
-  String input,
-  User user,
-) {
-  return isMustNotContainUserNameOrName(input: input, user: user)
-      ? right(input)
-      : left(ValueFailure.mustNotContainUserName(failedValue: input));
 }
 
 Either<ValueFailure<String>, String> validateStringIsEmpty(String input) {

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/auth/value/value_validators.dart';
@@ -68,7 +67,7 @@ class Password extends ValueObject<String> {
     return Password._(validateStringNotEmpty(input).flatMap(validatePassword));
   }
 
-  factory Password.resetV2(String newPassword, String oldPassword, User user) {
+  factory Password.resetV2(String newPassword, String oldPassword) {
     return Password._(
       validateStringNotEmpty(newPassword)
           .flatMap(atLeastOneLowerCharacter)
@@ -76,7 +75,6 @@ class Password extends ValueObject<String> {
           .flatMap(atLeastOneNumericCharacter)
           .flatMap(atLeastOneSpecialCharacter)
           .flatMap((input) => validateMinStringLength(input, 10))
-          .flatMap((input) => validateContainUserNameOrName(input, user))
           .flatMap((input) => validateOldAndNewPassword(input, oldPassword)),
     );
   }
@@ -106,9 +104,8 @@ class Password extends ValueObject<String> {
         input: getValidPassword,
       );
 
-  bool get matchAtLeastOneSpecialCharacter => isAtLeastOneSpecialCharacter(
-        input: getValidPassword,
-      );
+  bool get matchAtLeastOneSpecialCharacter =>
+      isAtLeastOneSpecialCharacter(input: getValidPassword);
 
   String get getValidPassword => value.fold((l) => l.failedValue, (r) => r);
 

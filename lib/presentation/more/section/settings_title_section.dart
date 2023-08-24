@@ -6,7 +6,6 @@ import 'package:easy_localization/easy_localization.dart';
 class SettingsTile extends StatelessWidget {
   const SettingsTile({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -48,7 +47,7 @@ class SettingsTile extends StatelessWidget {
 
   List<MoreDetailsTile> _moreSettingTiles(BuildContext context) => [
         MoreDetailsTile.profile(context),
-        MoreDetailsTile.security(),
+        MoreDetailsTile.security(context),
         MoreDetailsTile.notifications(context),
         MoreDetailsTile.privacy(),
       ];

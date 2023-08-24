@@ -30,7 +30,7 @@ class ChangePasswordRemoteDataSource {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}loginAd',
+        url: '${config.urlConstants}license',
         data: jsonEncode(
           {
             'query': authQueryMutation.changePassword(),

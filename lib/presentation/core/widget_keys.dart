@@ -436,6 +436,17 @@ class WidgetKeys {
   //============================================================
   static const Key salesOrgSearch = Key('SalesOrgSearch');
 
+  //  Change Password
+  //============================================================
+  static const Key currentPasswordField = Key('currentPasswordField');
+  static const Key newPasswordTextField = Key('newPasswordTextField');
+  static const Key confirmPasswordField = Key('confirmPasswordField');
+  static const Key currentPasswordToggle = Key('currentPasswordToggle');
+  static const Key newPasswordToggle = Key('newPasswordToggle');
+  static const Key confirmPasswordToggle = Key('confirmPasswordToggle');
+  static const Key changePasswordButton = Key('changePasswordButton');
+  static const Key changePasswordForm = Key('changePasswordForm');
+
   //============================================================
   //  New Return Request
   //============================================================
