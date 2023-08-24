@@ -1965,6 +1965,7 @@ void setupLocator() {
     () => DatadogService(
       packageInfoService: locator<PackageInfoService>(),
       config: locator<Config>(),
+      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 
