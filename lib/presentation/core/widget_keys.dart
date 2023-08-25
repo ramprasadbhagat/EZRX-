@@ -294,7 +294,6 @@ class WidgetKeys {
   static Key searchedProduct(String materialNumber) =>
       Key('searchedProduct$materialNumber');
 
-
   //============================================================
   //  ALL INVOICES
   //============================================================
@@ -491,4 +490,9 @@ class WidgetKeys {
 
   static Key returnContactUsFieldKeyRequest(String key, String msg) =>
       Key('$key$msg');
+  //============================================================
+  // Notification page
+  //============================================================
+  static const Key notificationNotFoundRecordKey =
+      Key('notificationNotFoundRecordKey');
 }

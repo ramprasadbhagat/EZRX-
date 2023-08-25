@@ -73,11 +73,13 @@ class NotificationTab extends StatelessWidget {
             controller: ScrollController(),
             isLoading: state.isFetching,
             noRecordFoundWidget: const NoRecordFound(
+              key: WidgetKeys.notificationNotFoundRecordKey,
               title: 'No notifications to show',
               subTitle: 'We\'ll notify you when there is something',
               svgImage: SvgImage.notification,
             ),
             itemBuilder: (context, index, item) => _NotificationList(
+              key: WidgetKeys.genericKey(key: item.description),
               notificationData: item,
             ),
             items: state.notificationList.notificationData,
