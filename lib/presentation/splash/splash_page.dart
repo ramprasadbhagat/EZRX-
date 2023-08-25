@@ -211,7 +211,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     languages: state.user.supportedLanguages,
                   ),
                 );
-            context.setLocale(state.user.defaultLanguage.subTag);
+            final locale = Locale(
+              state.user.defaultLanguage.subTag.languageCode.toLowerCase(),
+            );
+            context.setLocale(locale);
           },
         ),
         BlocListener<UserBloc, UserState>(
