@@ -38,8 +38,14 @@ class SoaRepository extends ISoaRepository {
       final soaResponse = await remoteDataSource.getSoa(
         customerCodeInfo.customerCodeSoldTo,
       );
+      final dateSortedSoaResponse = soaResponse
+        ..sort(
+          (a, b) => b.soaData.date.compareTo(a.soaData.date),
+        );
 
-      return Right(soaResponse);
+      return Right(
+        dateSortedSoaResponse,
+      );
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

@@ -908,7 +908,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context
           .read<SoaBloc>()
-          .add(SoaEvent.fetch(customerCodeInfo: customerCodeInfo));
+          .add(
+            SoaEvent.fetch(
+              customerCodeInfo: customerCodeInfo,
+            ),
+          );
 
       context.read<AdditionalDetailsBloc>().add(
             AdditionalDetailsEvent.initialized(

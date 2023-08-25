@@ -39,10 +39,14 @@ class SoaData extends ValueObject<String> {
     return SoaData._(validateStringNotEmpty(input));
   }
 
-  String get toDate => displayDateTimeString(
+  String get simpleDateString => displayDateTimeString(
         findDate(value.getOrElse(() => '')),
         DateTimeFormatString.displaySimpleDateFormat,
       );
+
+  DateTime get date =>
+      tryParseDateTime(findDate(value.getOrElse(() => ''))) ?? DateTime.now();
+
 
   const SoaData._(this.value);
 }

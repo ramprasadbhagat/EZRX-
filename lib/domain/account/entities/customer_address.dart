@@ -42,4 +42,6 @@ class CustomerAddress with _$CustomerAddress {
 
     return '${toString()}$city2Str$city1Str';
   }
+
+  String get addressStreet => ' $street1 $street2';
 }

@@ -20,18 +20,21 @@ mixin _$SoaEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) fetch,
+    required TResult Function(SoaFilter soaFilter) updateFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult? Function(SoaFilter soaFilter)? updateFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult Function(SoaFilter soaFilter)? updateFilter,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$SoaEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateFilter value) updateFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateFilter value)? updateFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateFilter value)? updateFilter,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,6 +119,7 @@ class _$_initialized implements _initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) fetch,
+    required TResult Function(SoaFilter soaFilter) updateFilter,
   }) {
     return initialized();
   }
@@ -122,6 +129,7 @@ class _$_initialized implements _initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult? Function(SoaFilter soaFilter)? updateFilter,
   }) {
     return initialized?.call();
   }
@@ -131,6 +139,7 @@ class _$_initialized implements _initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult Function(SoaFilter soaFilter)? updateFilter,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -144,6 +153,7 @@ class _$_initialized implements _initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateFilter value) updateFilter,
   }) {
     return initialized(this);
   }
@@ -153,6 +163,7 @@ class _$_initialized implements _initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateFilter value)? updateFilter,
   }) {
     return initialized?.call(this);
   }
@@ -162,6 +173,7 @@ class _$_initialized implements _initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateFilter value)? updateFilter,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -250,6 +262,7 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo) fetch,
+    required TResult Function(SoaFilter soaFilter) updateFilter,
   }) {
     return fetch(customerCodeInfo);
   }
@@ -259,6 +272,7 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult? Function(SoaFilter soaFilter)? updateFilter,
   }) {
     return fetch?.call(customerCodeInfo);
   }
@@ -268,6 +282,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult Function(SoaFilter soaFilter)? updateFilter,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -281,6 +296,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateFilter value) updateFilter,
   }) {
     return fetch(this);
   }
@@ -290,6 +306,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateFilter value)? updateFilter,
   }) {
     return fetch?.call(this);
   }
@@ -299,6 +316,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateFilter value)? updateFilter,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -319,11 +337,163 @@ abstract class _Fetch implements SoaEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdateFilterCopyWith<$Res> {
+  factory _$$_UpdateFilterCopyWith(
+          _$_UpdateFilter value, $Res Function(_$_UpdateFilter) then) =
+      __$$_UpdateFilterCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SoaFilter soaFilter});
+
+  $SoaFilterCopyWith<$Res> get soaFilter;
+}
+
+/// @nodoc
+class __$$_UpdateFilterCopyWithImpl<$Res>
+    extends _$SoaEventCopyWithImpl<$Res, _$_UpdateFilter>
+    implements _$$_UpdateFilterCopyWith<$Res> {
+  __$$_UpdateFilterCopyWithImpl(
+      _$_UpdateFilter _value, $Res Function(_$_UpdateFilter) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? soaFilter = null,
+  }) {
+    return _then(_$_UpdateFilter(
+      soaFilter: null == soaFilter
+          ? _value.soaFilter
+          : soaFilter // ignore: cast_nullable_to_non_nullable
+              as SoaFilter,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SoaFilterCopyWith<$Res> get soaFilter {
+    return $SoaFilterCopyWith<$Res>(_value.soaFilter, (value) {
+      return _then(_value.copyWith(soaFilter: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateFilter implements _UpdateFilter {
+  const _$_UpdateFilter({required this.soaFilter});
+
+  @override
+  final SoaFilter soaFilter;
+
+  @override
+  String toString() {
+    return 'SoaEvent.updateFilter(soaFilter: $soaFilter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateFilter &&
+            (identical(other.soaFilter, soaFilter) ||
+                other.soaFilter == soaFilter));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, soaFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateFilterCopyWith<_$_UpdateFilter> get copyWith =>
+      __$$_UpdateFilterCopyWithImpl<_$_UpdateFilter>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(CustomerCodeInfo customerCodeInfo) fetch,
+    required TResult Function(SoaFilter soaFilter) updateFilter,
+  }) {
+    return updateFilter(soaFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult? Function(SoaFilter soaFilter)? updateFilter,
+  }) {
+    return updateFilter?.call(soaFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo)? fetch,
+    TResult Function(SoaFilter soaFilter)? updateFilter,
+    required TResult orElse(),
+  }) {
+    if (updateFilter != null) {
+      return updateFilter(soaFilter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateFilter value) updateFilter,
+  }) {
+    return updateFilter(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateFilter value)? updateFilter,
+  }) {
+    return updateFilter?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateFilter value)? updateFilter,
+    required TResult orElse(),
+  }) {
+    if (updateFilter != null) {
+      return updateFilter(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateFilter implements SoaEvent {
+  const factory _UpdateFilter({required final SoaFilter soaFilter}) =
+      _$_UpdateFilter;
+
+  SoaFilter get soaFilter;
+  @JsonKey(ignore: true)
+  _$$_UpdateFilterCopyWith<_$_UpdateFilter> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$SoaState {
   bool get isFetching => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   List<Soa> get soaList => throw _privateConstructorUsedError;
+  SoaFilter get appliedFilter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SoaStateCopyWith<SoaState> get copyWith =>
@@ -338,7 +508,10 @@ abstract class $SoaStateCopyWith<$Res> {
   $Res call(
       {bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<Soa> soaList});
+      List<Soa> soaList,
+      SoaFilter appliedFilter});
+
+  $SoaFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
@@ -357,6 +530,7 @@ class _$SoaStateCopyWithImpl<$Res, $Val extends SoaState>
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
     Object? soaList = null,
+    Object? appliedFilter = null,
   }) {
     return _then(_value.copyWith(
       isFetching: null == isFetching
@@ -371,7 +545,19 @@ class _$SoaStateCopyWithImpl<$Res, $Val extends SoaState>
           ? _value.soaList
           : soaList // ignore: cast_nullable_to_non_nullable
               as List<Soa>,
+      appliedFilter: null == appliedFilter
+          ? _value.appliedFilter
+          : appliedFilter // ignore: cast_nullable_to_non_nullable
+              as SoaFilter,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SoaFilterCopyWith<$Res> get appliedFilter {
+    return $SoaFilterCopyWith<$Res>(_value.appliedFilter, (value) {
+      return _then(_value.copyWith(appliedFilter: value) as $Val);
+    });
   }
 }
 
@@ -385,7 +571,11 @@ abstract class _$$_SoaStateCopyWith<$Res> implements $SoaStateCopyWith<$Res> {
   $Res call(
       {bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      List<Soa> soaList});
+      List<Soa> soaList,
+      SoaFilter appliedFilter});
+
+  @override
+  $SoaFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
@@ -402,6 +592,7 @@ class __$$_SoaStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
     Object? soaList = null,
+    Object? appliedFilter = null,
   }) {
     return _then(_$_SoaState(
       isFetching: null == isFetching
@@ -416,18 +607,24 @@ class __$$_SoaStateCopyWithImpl<$Res>
           ? _value._soaList
           : soaList // ignore: cast_nullable_to_non_nullable
               as List<Soa>,
+      appliedFilter: null == appliedFilter
+          ? _value.appliedFilter
+          : appliedFilter // ignore: cast_nullable_to_non_nullable
+              as SoaFilter,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SoaState implements _SoaState {
+class _$_SoaState extends _SoaState {
   const _$_SoaState(
       {required this.isFetching,
       required this.failureOrSuccessOption,
-      required final List<Soa> soaList})
-      : _soaList = soaList;
+      required final List<Soa> soaList,
+      required this.appliedFilter})
+      : _soaList = soaList,
+        super._();
 
   @override
   final bool isFetching;
@@ -442,8 +639,11 @@ class _$_SoaState implements _SoaState {
   }
 
   @override
+  final SoaFilter appliedFilter;
+
+  @override
   String toString() {
-    return 'SoaState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, soaList: $soaList)';
+    return 'SoaState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, soaList: $soaList, appliedFilter: $appliedFilter)';
   }
 
   @override
@@ -455,12 +655,18 @@ class _$_SoaState implements _SoaState {
                 other.isFetching == isFetching) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
-            const DeepCollectionEquality().equals(other._soaList, _soaList));
+            const DeepCollectionEquality().equals(other._soaList, _soaList) &&
+            (identical(other.appliedFilter, appliedFilter) ||
+                other.appliedFilter == appliedFilter));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isFetching,
-      failureOrSuccessOption, const DeepCollectionEquality().hash(_soaList));
+  int get hashCode => Object.hash(
+      runtimeType,
+      isFetching,
+      failureOrSuccessOption,
+      const DeepCollectionEquality().hash(_soaList),
+      appliedFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -469,11 +675,13 @@ class _$_SoaState implements _SoaState {
       __$$_SoaStateCopyWithImpl<_$_SoaState>(this, _$identity);
 }
 
-abstract class _SoaState implements SoaState {
+abstract class _SoaState extends SoaState {
   const factory _SoaState(
       {required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final List<Soa> soaList}) = _$_SoaState;
+      required final List<Soa> soaList,
+      required final SoaFilter appliedFilter}) = _$_SoaState;
+  const _SoaState._() : super._();
 
   @override
   bool get isFetching;
@@ -481,6 +689,8 @@ abstract class _SoaState implements SoaState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   List<Soa> get soaList;
+  @override
+  SoaFilter get appliedFilter;
   @override
   @JsonKey(ignore: true)
   _$$_SoaStateCopyWith<_$_SoaState> get copyWith =>

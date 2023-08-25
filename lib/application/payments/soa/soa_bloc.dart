@@ -4,7 +4,9 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
+import 'package:ezrxmobile/domain/payments/entities/soa_filter.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_soa_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,6 +24,12 @@ class SoaBloc extends Bloc<SoaEvent, SoaState> {
     await event.map(
       initialized: (_) async => emit(SoaState.initial()),
       fetch: (_Fetch e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            soaList: <Soa>[],
+          ),
+        );
         final failureOrSuccess = await repository.fetchSoa(
           customerCodeInfo: e.customerCodeInfo,
         );
@@ -37,10 +45,23 @@ class SoaBloc extends Bloc<SoaEvent, SoaState> {
               failureOrSuccessOption: none(),
               isFetching: false,
               soaList: soaList,
+              appliedFilter: SoaFilter(
+                fromDate: soaList.isNotEmpty
+                    ? soaList.last.soaData.date
+                    : SoaFilter.empty().fromDate,
+                toDate: soaList.isNotEmpty
+                    ? soaList.first.soaData.date
+                    : SoaFilter.empty().toDate,
+              ),
             ),
           ),
         );
       },
+      updateFilter: (_UpdateFilter e) async => emit(
+        state.copyWith(
+          appliedFilter: e.soaFilter,
+        ),
+      ),
     );
   }
 }

@@ -1,9 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
+import 'package:ezrxmobile/domain/payments/entities/soa_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/soa_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,12 +15,23 @@ class SoaRepositoryMock extends Mock implements SoaRepository {}
 
 void main() {
   late SoaRepository soaRepositoryMock;
+  final soaFilter = SoaFilter(
+    toDate: DateFormat().add_yMd().parse('12/06/2022'),
+    fromDate: DateFormat().add_yMd().parse('07/05/2023'),
+  );
 
   final mockCustomerCodeInfo =
       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'mockCustomerCode');
   final mockSoaList = <Soa>[
     Soa(
-      soaData: SoaData('mockData'),
+      soaData: SoaData(
+        'ezrx_prod/uploads/MY_QA/20010030082707_1222_20221206_155346.pdf',
+      ),
+    ),
+    Soa(
+      soaData: SoaData(
+        'ezrx_prod/uploads/MY_QA/20010030082707_0723_20230705_155346.pdf',
+      ),
     ),
   ];
 
@@ -32,12 +45,10 @@ void main() {
       build: () => SoaBloc(
         repository: soaRepositoryMock,
       ),
+      seed: () => SoaState.initial().copyWith(appliedFilter: soaFilter),
       act: (SoaBloc bloc) => bloc.add(
         const SoaEvent.initialized(),
       ),
-      expect: () => [
-        SoaState.initial(),
-      ],
     );
 
     blocTest(
@@ -45,6 +56,8 @@ void main() {
       build: () => SoaBloc(
         repository: soaRepositoryMock,
       ),
+      seed: () => SoaState.initial().copyWith(appliedFilter: soaFilter),
+
       setUp: () {
         when(
           () => soaRepositoryMock.fetchSoa(
@@ -57,17 +70,22 @@ void main() {
         );
       },
       act: (SoaBloc bloc) => bloc.add(
-        SoaEvent.fetch(customerCodeInfo: mockCustomerCodeInfo),
+        SoaEvent.fetch(
+          customerCodeInfo: mockCustomerCodeInfo,
+        ),
       ),
       expect: () => [
         SoaState.initial().copyWith(
-          failureOrSuccessOption: none(),
-          isFetching: false,
+          isFetching: true,
+          appliedFilter: soaFilter,
+        ),
+        SoaState.initial().copyWith(
           soaList: mockSoaList,
+          appliedFilter: soaFilter,
         ),
       ],
       verify: (SoaBloc bloc) => [
-        expect(bloc.state.soaList.length, 1),
+        expect(bloc.state.soaList.length, 2),
       ],
     );
 
@@ -76,6 +94,7 @@ void main() {
       build: () => SoaBloc(
         repository: soaRepositoryMock,
       ),
+      seed: () => SoaState.initial().copyWith(appliedFilter: soaFilter),
       setUp: () {
         when(
           () => soaRepositoryMock.fetchSoa(
@@ -88,9 +107,15 @@ void main() {
         );
       },
       act: (SoaBloc bloc) => bloc.add(
-        SoaEvent.fetch(customerCodeInfo: mockCustomerCodeInfo),
+        SoaEvent.fetch(
+          customerCodeInfo: mockCustomerCodeInfo,
+        ),
       ),
       expect: () => [
+        SoaState.initial().copyWith(
+          isFetching: true,
+          appliedFilter: soaFilter,
+        ),
         SoaState.initial().copyWith(
           failureOrSuccessOption: optionOf(
             const Left(
@@ -98,10 +123,26 @@ void main() {
             ),
           ),
           isFetching: false,
+          appliedFilter: soaFilter,
         ),
       ],
       verify: (SoaBloc bloc) => [
         expect(bloc.state.soaList.length, 0),
+      ],
+    );
+
+    blocTest(
+      'Update',
+      build: () => SoaBloc(
+        repository: soaRepositoryMock,
+      ),
+      act: (SoaBloc bloc) => bloc.add(
+        SoaEvent.updateFilter(soaFilter: soaFilter),
+      ),
+      expect: () => [
+        SoaState.initial().copyWith(
+          appliedFilter: soaFilter,
+        ),
       ],
     );
   });

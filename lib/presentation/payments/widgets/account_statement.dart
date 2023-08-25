@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
+import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -45,7 +47,12 @@ class AccountStatement extends StatelessWidget {
             children: [
               SectionTitle(
                 title: 'Statement of accounts',
-                onTapIconButton: () {},
+                onTapIconButton: () {
+                  context
+                      .read<SoaFilterBloc>()
+                      .add(const SoaFilterEvent.initialized());
+                  context.router.pushNamed('payments/statement_accounts');
+                },
               ),
               state.soaList.isNotEmpty
                   ? Column(
@@ -88,9 +95,11 @@ class _SoaCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(soa.soaData.toDate),
+          Text(soa.soaData.simpleDateString),
           BlocBuilder<DownloadPaymentAttachmentsBloc,
               DownloadPaymentAttachmentsState>(
+            buildWhen: (previous, current) =>
+                previous.isDownloadInProgress != current.isDownloadInProgress,
             builder: (context, state) {
               return state.isDownloadInProgress &&
                       SoaData(state.fileUrl.url) == soa.soaData

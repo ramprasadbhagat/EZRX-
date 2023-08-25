@@ -92,4 +92,7 @@ class CustomerCodeInfo with _$CustomerCodeInfo {
 
   String get fullCustomerAddress =>
       '${customerAddress.toAddress()} $postalCode';
+
+  String get shortAddress =>
+      '${customerName.name1} ${customerAddress.addressStreet} $postalCode';
 }

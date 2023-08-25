@@ -91,6 +91,7 @@ abstract class ZPColors {
   static const Color errorSnackBarColor = Color.fromRGBO(250, 196, 196, 1);
   static const Color attachmentColor = Color.fromRGBO(187, 207, 48, 1);
 
+  static const Color paleBlueGray = Color.fromRGBO(230, 238, 239, 1);
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,
     <int, Color>{

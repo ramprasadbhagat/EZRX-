@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -128,7 +129,10 @@ List<_PaymentOptionData> _getPaymentOptionItems(BuildContext context) {
     key: WidgetKeys.statementOfAccountsMenu,
     icon: 'statement_accounts.svg',
     label: 'Statement of accounts',
-    onTap: () {},
+    onTap: () {
+      context.read<SoaFilterBloc>().add(const SoaFilterEvent.initialized());
+      context.router.pushNamed('payments/statement_accounts');
+    },
   );
 
   final claim = _PaymentOptionData(
