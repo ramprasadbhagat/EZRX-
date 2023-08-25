@@ -14,4 +14,5 @@ abstract class SvgImage {
   static const String defaultProductImage =
       '${_basePath}default_product_image.svg';
    static const String faqSearch = '${_basePath}faq_search_icon.svg';
+   static const String downloadIcon = '${_basePath}cloud_download.svg';
 }

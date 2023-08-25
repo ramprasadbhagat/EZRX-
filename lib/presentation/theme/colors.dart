@@ -89,6 +89,8 @@ abstract class ZPColors {
   static const Color whiteBgCard = Color.fromRGBO(255, 255, 255, 1);
   static const Color orangeChipColor = Color.fromRGBO(244, 214, 170, 1);
   static const Color errorSnackBarColor = Color.fromRGBO(250, 196, 196, 1);
+  static const Color attachmentColor = Color.fromRGBO(187, 207, 48, 1);
+
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,
     <int, Color>{

@@ -101,6 +101,14 @@ class ViewByOrderDetailsBloc
           ),
         );
       },
+      expandAttachments: (e) {
+        emit(
+          state.copyWith(
+            isExpanded: !state.isExpanded,
+            orderHistoryDetails: state.orderHistoryDetails,
+          ),
+        );
+      },
     );
   }
 }
