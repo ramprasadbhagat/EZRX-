@@ -377,6 +377,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
+  datadog_tracking_http_client:
+    dependency: "direct main"
+    description:
+      name: datadog_tracking_http_client
+      sha256: "7274fee927d8ec012a6c4fd3e3333616035236875129f83525fa0bbbe2a66bbb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.0"
   dbus:
     dependency: transitive
     description:
