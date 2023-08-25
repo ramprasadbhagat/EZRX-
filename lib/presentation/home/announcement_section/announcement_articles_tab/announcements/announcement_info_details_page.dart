@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
@@ -8,6 +7,7 @@ import 'package:ezrxmobile/domain/announcement_info/entities/announcement_info_d
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
@@ -110,26 +110,15 @@ class _AnnouncementInfoDetailsPageState
                         flexibleSpace: Stack(
                           children: [
                             FlexibleSpaceBar(
-                              background: CachedNetworkImage(
+                              background: CustomImage(
                                 width: MediaQuery.of(context).size.width,
                                 imageUrl:
                                     state.announcementInfoDetails.thumbnail,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) =>
-                                    LoadingShimmer.withChild(
-                                  child: Container(
-                                    color: ZPColors.whiteBgCard,
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 200,
-                                  ),
-                                ),
-                                errorWidget: (context, url, error) {
-                                  return const NoRecordFound(
+                                errorWidget: const NoRecordFound(
                                     svgImage: SvgImage.noImageAvailable,
                                     title: 'Image not available',
                                     subTitle: '',
-                                  );
-                                },
+                                  ),
                               ),
                             ),
                             _isBackButtonEnableForAppbar

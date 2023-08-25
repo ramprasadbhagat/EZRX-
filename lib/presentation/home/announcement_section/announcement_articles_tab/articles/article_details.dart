@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:flutter/material.dart';
@@ -74,24 +73,14 @@ class _ArticleDetailsState extends State<ArticleDetails> {
               flexibleSpace: Stack(
                 children: [
                   FlexibleSpaceBar(
-                    background: CachedNetworkImage(
+                    background: CustomImage(
                       width: MediaQuery.of(context).size.width,
                       imageUrl: widget.article.thumbnail,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => LoadingShimmer.withChild(
-                        child: Container(
-                          color: ZPColors.whiteBgCard,
-                          width: MediaQuery.of(context).size.width,
-                          height: 200,
-                        ),
-                      ),
-                      errorWidget: (context, url, error) {
-                        return const NoRecordFound(
+                      errorWidget: const NoRecordFound(
                           svgImage: SvgImage.noImageAvailable,
                           title: 'Image not available',
                           subTitle: '',
-                        );
-                      },
+                        ),
                     ),
                   ),
                   _isBackButtonEnableForAppbar

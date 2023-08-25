@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
@@ -10,15 +9,14 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CartProductBundle extends StatelessWidget {
   final PriceAggregate cartItem;
@@ -261,36 +259,13 @@ class _MaterialImageSection extends StatelessWidget {
               showShadow: false,
               showBorder: true,
               padding: const EdgeInsets.all(12),
-              child: CachedNetworkImage(
+              child: CustomImage(
                 imageUrl: state.additionInfo[cartProduct.materialNumber]
                         ?.productImages.first.thumbNail ??
                     '',
                 fit: BoxFit.fitHeight,
                 height: MediaQuery.of(context).size.height * 0.06,
                 width: MediaQuery.of(context).size.height * 0.06,
-                placeholder: (context, url) {
-                  return LoadingShimmer.withChild(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(8.0),
-                          topLeft: Radius.circular(8.0),
-                        ),
-                        color: ZPColors.white,
-                      ),
-                      width: MediaQuery.of(context).size.height * 0.06,
-                      height: MediaQuery.of(context).size.height * 0.06,
-                    ),
-                  );
-                },
-                errorWidget: (context, url, error) {
-                  return SvgPicture.asset(
-                    'assets/svg/default_product_image.svg',
-                    key: WidgetKeys.cartProductImage,
-                    height: MediaQuery.of(context).size.height * 0.06,
-                    width: MediaQuery.of(context).size.height * 0.06,
-                  );
-                },
               ),
             );
           },

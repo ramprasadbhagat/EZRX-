@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/custom_image.dart';
 
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 
@@ -18,7 +18,6 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
@@ -184,7 +183,7 @@ class _ArticleImageBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
+    return CustomImage(
       width: MediaQuery.of(context).size.width * 0.35,
       height: 88,
       imageUrl: imageUrl,
@@ -197,14 +196,6 @@ class _ArticleImageBox extends StatelessWidget {
           ),
         ),
       ),
-      errorWidget: (context, url, error) {
-        return SvgPicture.asset(
-          'assets/svg/product_default.svg',
-          height: 88,
-          fit: BoxFit.scaleDown,
-          width: MediaQuery.of(context).size.width * 0.35,
-        );
-      },
     );
   }
 }

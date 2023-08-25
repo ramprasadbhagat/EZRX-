@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
@@ -7,6 +6,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -52,13 +52,12 @@ class CarouselBannerTile extends StatelessWidget {
           }
         }
       },
-      child: CachedNetworkImage(
+      child: CustomImage(
         imageUrl: banner.url,
-        placeholder: (context, url) => LoadingShimmer.logo(),
-        errorWidget: (context, url, error) => banner.url.isEmpty
+        placeholder: LoadingShimmer.logo(),
+        errorWidget: banner.url.isEmpty
             ? LoadingShimmer.logo()
             : const Icon(Icons.error),
-        fit: BoxFit.cover,
         width: MediaQuery.of(context).size.width,
       ),
     );

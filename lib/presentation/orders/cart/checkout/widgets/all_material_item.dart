@@ -60,36 +60,13 @@ class _MaterialImageSection extends StatelessWidget {
               showShadow: false,
               showBorder: true,
               padding: const EdgeInsets.all(12),
-              child: CachedNetworkImage(
+              child: CustomImage(
                 imageUrl: state.additionInfo[cartProduct.materialNumber]
                         ?.productImages.first.thumbNail ??
                     '',
                 fit: BoxFit.fitHeight,
                 height: MediaQuery.of(context).size.height * 0.06,
                 width: MediaQuery.of(context).size.height * 0.06,
-                placeholder: (context, url) {
-                  return LoadingShimmer.withChild(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(8.0),
-                          topLeft: Radius.circular(8.0),
-                        ),
-                        color: ZPColors.white,
-                      ),
-                      width: MediaQuery.of(context).size.height * 0.06,
-                      height: MediaQuery.of(context).size.height * 0.06,
-                    ),
-                  );
-                },
-                errorWidget: (context, url, error) {
-                  return SvgPicture.asset(
-                    'assets/svg/default_product_image.svg',
-                    key: WidgetKeys.cartProductImage,
-                    height: MediaQuery.of(context).size.height * 0.06,
-                    width: MediaQuery.of(context).size.height * 0.06,
-                  );
-                },
               ),
             );
           },
