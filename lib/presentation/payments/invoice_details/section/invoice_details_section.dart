@@ -21,7 +21,7 @@ class InvoiceDetailsSection extends StatelessWidget {
         children: [
           BalanceTextRow(
             keyText:
-                'Invoice #${invoiceItem.referenceDocumentNumber.getOrDefaultValue('')}',
+                '${'Invoice'.tr()} #${invoiceItem.referenceDocumentNumber.getOrDefaultValue('')}',
             isStatus: true,
             valueText:
                 invoiceItem.invoiceProcessingStatus.getOrDefaultValue(''),
@@ -35,7 +35,7 @@ class InvoiceDetailsSection extends StatelessWidget {
             keyFlex: 2,
             valueFlex: 3,
             isStatus: false,
-            keyText: 'Document date:'.tr(),
+            keyText: 'Document date'.tr(),
             valueText: invoiceItem.postingDate.dateString,
             valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
@@ -48,7 +48,7 @@ class InvoiceDetailsSection extends StatelessWidget {
           BalanceTextRow(
             keyFlex: 2,
             valueFlex: 3,
-            keyText: 'Due on:'.tr(),
+            keyText: 'Due on'.tr(),
             valueText: invoiceItem.netDueDate.dateString,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
@@ -61,7 +61,7 @@ class InvoiceDetailsSection extends StatelessWidget {
           BalanceTextRow(
             keyFlex: 2,
             valueFlex: 3,
-            keyText: 'Order number:'.tr(),
+            keyText: 'Order number'.tr(),
             valueText: invoiceItem.orderId.displayNAIfEmpty,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,

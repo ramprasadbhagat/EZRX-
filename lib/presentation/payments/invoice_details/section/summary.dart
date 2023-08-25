@@ -34,7 +34,9 @@ class InvoiceSummary extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Subtotal with tax'.tr()),
+              Text(
+                '${'Subtotal with tax'.tr()}:',
+              ),
               PriceComponent(
                 salesOrgConfig: salesOrgConfigs,
                 price: invoiceItem.amountInTransactionCurrency.toString(),
@@ -51,7 +53,9 @@ class InvoiceSummary extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Grand total'.tr()),
+              Text(
+                '${'Grand total'.tr()}:',
+              ),
               PriceComponent(
                 salesOrgConfig: salesOrgConfigs,
                 price: invoiceItem.amountInTransactionCurrency.toString(),
