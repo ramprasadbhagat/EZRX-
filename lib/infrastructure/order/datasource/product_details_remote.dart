@@ -62,6 +62,7 @@ class ProductDetailRemoteDataSource {
     required String customerCode,
     required String shipToCode,
     required String principalCode,
+    required String salesOrg,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = productDetailQuery.getSimilarProductQuery();
@@ -75,6 +76,7 @@ class ProductDetailRemoteDataSource {
         'resultCount': 1,
         'shipToCode': shipToCode,
         'principalCode': principalCode,
+        'salesOrg': salesOrg,
       };
       final res = await httpService.request(
         method: 'POST',

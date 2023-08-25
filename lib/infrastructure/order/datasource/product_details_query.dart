@@ -46,6 +46,7 @@ class ProductDetailQuery {
       \$resultCount: Int, 
       \$excludeMaterialNumber: String, 
       \$customerCode: String!, 
+      \$salesOrg: String!, 
       \$shipToCode: String!) {
       similarSearches(
         principalCode: \$principalCode
@@ -56,6 +57,7 @@ class ProductDetailQuery {
         excludeMaterialNumber: \$excludeMaterialNumber
         customerCode: \$customerCode
         shipToCode: \$shipToCode
+        salesOrg: \$salesOrg
       ) {
         materials {
           principalName

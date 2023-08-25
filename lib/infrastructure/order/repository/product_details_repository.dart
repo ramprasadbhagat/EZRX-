@@ -198,6 +198,7 @@ class ProductDetailRepository implements IProductDetailRepository {
         language: locale.languageCode,
         materialNumber: materialNumber.getOrCrash(),
         principalCode: principalCode.getOrCrash(),
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
       );
       final stockInfoData = await getStockInfoList(
         customerCodeInfo: customerCodeInfo,
