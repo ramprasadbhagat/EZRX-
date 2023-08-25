@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -49,6 +50,9 @@ class ProductImageMockBloc
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 final locator = GetIt.instance;
@@ -60,6 +64,7 @@ void main() {
   late AppRouter autoRouterMock;
   late CustomerCodeBloc customerCodeBlocMock;
   final mockSalesOrgBloc = SalesOrgMockBloc();
+  late EligibilityBloc eligibilityBlocMock;
   late ProductDetailBloc productDetailBloc;
   final mockCartBloc = CartMocBloc();
   late MaterialPriceBloc materialPriceBlocMock;
@@ -77,7 +82,10 @@ void main() {
       productDetailBloc = ProductDetailMockBloc();
       customerCodeBlocMock = CustomerCodeBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
       when(() => productDetailBloc.state)
           .thenReturn(ProductDetailState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -125,6 +133,9 @@ void main() {
             ),
             BlocProvider<ProductImageBloc>(
               create: (context) => mockProductImageBloc,
+            ),
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock,
             ),
           ],
           child: const Scaffold(

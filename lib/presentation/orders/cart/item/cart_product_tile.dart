@@ -264,10 +264,7 @@ class _MaterialDetails extends StatelessWidget {
                 const SizedBox(
                   width: 4,
                 ),
-                StatusLabel(
-                  status: cartItem.productTag,
-                  valueColor: cartItem.productTag.displayStatusTextColor,
-                ),
+                _OrderTag(cartItem: cartItem),
               ],
             ),
             Padding(
@@ -577,6 +574,39 @@ class _OfferTag extends StatelessWidget {
         Icons.local_offer_outlined,
         color: ZPColors.white,
       ),
+    );
+  }
+}
+
+class _OrderTag extends StatelessWidget {
+  const _OrderTag({
+    Key? key,
+    required this.cartItem,
+  }) : super(key: key);
+  final PriceAggregate cartItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) =>
+          previous.isUpdatingStock != current.isUpdatingStock &&
+          !current.isUpdatingStock,
+      builder: (context, state) {
+        final finalCartItem = state.cartProducts.firstWhere(
+          (element) => element.getMaterialNumber == cartItem.getMaterialNumber,
+          orElse: () => PriceAggregate.empty(),
+        );
+
+        return finalCartItem.inStock ||
+                finalCartItem.stockInfoList.isEmpty ||
+                state.isFetching ||
+                state.isFetchingCartProductDetail
+            ? const SizedBox.shrink()
+            : StatusLabel(
+                status: finalCartItem.productTag,
+                valueColor: finalCartItem.productTag.displayStatusTextColor,
+              );
+      },
     );
   }
 }

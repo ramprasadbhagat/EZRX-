@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
@@ -12,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -290,13 +292,21 @@ class _MaterialDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            cartItem.materialNumber.displayMatNo,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: ZPColors.neutralsBlack,
-                ),
+          Row(
+            children: [
+              Text(
+                cartItem.materialNumber.displayMatNo,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: ZPColors.neutralsBlack,
+                    ),
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              _OrderTag(cartItem: cartItem),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
@@ -321,6 +331,45 @@ class _MaterialDetails extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _OrderTag extends StatelessWidget {
+  const _OrderTag({
+    Key? key,
+    required this.cartItem,
+  }) : super(key: key);
+  final MaterialInfo cartItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) =>
+          previous.isUpdatingStock != current.isUpdatingStock &&
+          !current.isUpdatingStock,
+      builder: (context, state) {
+        final configs = context.read<SalesOrgBloc>().state.configs;
+        final materialInfoList = state.cartProducts
+            .where((element) => element.materialInfo.type.typeBundle)
+            .map((e) => e.bundle.materials)
+            .expand((element) => element)
+            .toList();
+        final materialInfo = materialInfoList.firstWhere(
+          (element) => element.materialNumber == cartItem.materialNumber,
+          orElse: () => MaterialInfo.empty(),
+        );
+
+        return materialInfo.inStock ||
+                state.isFetching ||
+                state.isFetchingCartProductDetail
+            ? const SizedBox.shrink()
+            : StatusLabel(
+                status: StatusType(
+                  configs.addOosMaterials.oosMaterialTag,
+                ),
+              );
+      },
     );
   }
 }

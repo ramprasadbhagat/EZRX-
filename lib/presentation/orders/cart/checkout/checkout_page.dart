@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -251,7 +252,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   },
                   builder: (context, state) => ElevatedButton(
                     key: WidgetKeys.checkoutButton,
-                    onPressed: state.isSubmitting
+                    onPressed: state.isSubmitting ||
+                            !context
+                                .read<CartBloc>()
+                                .state
+                                .isEligibleForCheckout(
+                                  !context
+                                      .read<EligibilityBloc>()
+                                      .state
+                                      .doNotAllowOutOfStockMaterials,
+                                )
                         ? null
                         : () {
                             FocusScope.of(context).requestFocus(FocusNode());
@@ -460,23 +470,24 @@ class _OrderSummary extends StatelessWidget {
               ),
         ),
         const SizedBox(height: 24.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Subtotal (${salesOrgState.configs.displaySubtotalTaxBreakdown ? "excl" : "incl"}.tax):'
+                  .tr(),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ZPColors.neutralsBlack,
+                  ),
+            ),
+            PriceComponent(
+              salesOrgConfig: salesOrgState.configs,
+              price: cartState.totalPrice.toString(),
+              type: PriceStyle.summaryPrice,
+            ),
+          ],
+        ),
         if (salesOrgState.configs.displaySubtotalTaxBreakdown) ...[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Subtotal (excl.tax):'.tr(),
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: ZPColors.neutralsBlack,
-                    ),
-              ),
-              PriceComponent(
-                salesOrgConfig: salesOrgState.configs,
-                price: cartState.totalPrice.toString(),
-                type: PriceStyle.summaryPrice,
-              ),
-            ],
-          ),
           const SizedBox(height: 8.0),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -485,9 +496,7 @@ class _OrderSummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${'Tax at '.tr()}${cartState.totalTaxPercent(
-                      salesOrgState.configs,
-                    )}%',
+                    '${'Tax at '.tr()}${cartState.totalTaxPercent}%',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: ZPColors.neutralsBlack,
                         ),

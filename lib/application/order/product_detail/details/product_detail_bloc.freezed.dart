@@ -37,7 +37,8 @@ mixin _$ProductDetailEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            bool isForBundle)
         fetchMetaData,
     required TResult Function(
             MaterialNumber materialNumber,
@@ -46,6 +47,13 @@ mixin _$ProductDetailEvent {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchStock,
+    required TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -76,7 +84,8 @@ mixin _$ProductDetailEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult? Function(
             MaterialNumber materialNumber,
@@ -85,6 +94,13 @@ mixin _$ProductDetailEvent {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult? Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -113,7 +129,8 @@ mixin _$ProductDetailEvent {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult Function(
             MaterialNumber materialNumber,
@@ -122,6 +139,13 @@ mixin _$ProductDetailEvent {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -137,6 +161,7 @@ mixin _$ProductDetailEvent {
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
     required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
@@ -149,6 +174,7 @@ mixin _$ProductDetailEvent {
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
     TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
@@ -161,6 +187,7 @@ mixin _$ProductDetailEvent {
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
     TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
@@ -244,7 +271,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            bool isForBundle)
         fetchMetaData,
     required TResult Function(
             MaterialNumber materialNumber,
@@ -253,6 +281,13 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchStock,
+    required TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -286,7 +321,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult? Function(
             MaterialNumber materialNumber,
@@ -295,6 +331,13 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult? Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -326,7 +369,8 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult Function(
             MaterialNumber materialNumber,
@@ -335,6 +379,13 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -356,6 +407,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
     required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
@@ -371,6 +423,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
     TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
@@ -386,6 +439,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
     TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
@@ -568,7 +622,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            bool isForBundle)
         fetchMetaData,
     required TResult Function(
             MaterialNumber materialNumber,
@@ -577,6 +632,13 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchStock,
+    required TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -611,7 +673,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult? Function(
             MaterialNumber materialNumber,
@@ -620,6 +683,13 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult? Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -652,7 +722,8 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult Function(
             MaterialNumber materialNumber,
@@ -661,6 +732,13 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -683,6 +761,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
     required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
@@ -698,6 +777,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
     TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
@@ -713,6 +793,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
     TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
@@ -893,7 +974,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            bool isForBundle)
         fetchMetaData,
     required TResult Function(
             MaterialNumber materialNumber,
@@ -902,6 +984,13 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchStock,
+    required TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -936,7 +1025,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult? Function(
             MaterialNumber materialNumber,
@@ -945,6 +1035,13 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult? Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -977,7 +1074,8 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult Function(
             MaterialNumber materialNumber,
@@ -986,6 +1084,13 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1008,6 +1113,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
     required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
@@ -1023,6 +1129,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
     TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
@@ -1038,6 +1145,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
     TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
@@ -1076,7 +1184,8 @@ abstract class _$$_FetchMetaDataCopyWith<$Res> {
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      Locale locale});
+      Locale locale,
+      bool isForBundle});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -1098,6 +1207,7 @@ class __$$_FetchMetaDataCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? locale = null,
+    Object? isForBundle = null,
   }) {
     return _then(_$_FetchMetaData(
       salesOrganisation: null == salesOrganisation
@@ -1116,6 +1226,10 @@ class __$$_FetchMetaDataCopyWithImpl<$Res>
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
               as Locale,
+      isForBundle: null == isForBundle
+          ? _value.isForBundle
+          : isForBundle // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -1151,7 +1265,8 @@ class _$_FetchMetaData implements _FetchMetaData {
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.locale});
+      required this.locale,
+      required this.isForBundle});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -1161,10 +1276,12 @@ class _$_FetchMetaData implements _FetchMetaData {
   final ShipToInfo shipToInfo;
   @override
   final Locale locale;
+  @override
+  final bool isForBundle;
 
   @override
   String toString() {
-    return 'ProductDetailEvent.fetchMetaData(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, locale: $locale)';
+    return 'ProductDetailEvent.fetchMetaData(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, locale: $locale, isForBundle: $isForBundle)';
   }
 
   @override
@@ -1178,12 +1295,14 @@ class _$_FetchMetaData implements _FetchMetaData {
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
-            (identical(other.locale, locale) || other.locale == locale));
+            (identical(other.locale, locale) || other.locale == locale) &&
+            (identical(other.isForBundle, isForBundle) ||
+                other.isForBundle == isForBundle));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, customerCodeInfo, shipToInfo, locale);
+  int get hashCode => Object.hash(runtimeType, salesOrganisation,
+      customerCodeInfo, shipToInfo, locale, isForBundle);
 
   @JsonKey(ignore: true)
   @override
@@ -1213,7 +1332,8 @@ class _$_FetchMetaData implements _FetchMetaData {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            bool isForBundle)
         fetchMetaData,
     required TResult Function(
             MaterialNumber materialNumber,
@@ -1222,6 +1342,13 @@ class _$_FetchMetaData implements _FetchMetaData {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchStock,
+    required TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -1231,7 +1358,7 @@ class _$_FetchMetaData implements _FetchMetaData {
         deleteFavourite,
   }) {
     return fetchMetaData(
-        salesOrganisation, customerCodeInfo, shipToInfo, locale);
+        salesOrganisation, customerCodeInfo, shipToInfo, locale, isForBundle);
   }
 
   @override
@@ -1256,7 +1383,8 @@ class _$_FetchMetaData implements _FetchMetaData {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult? Function(
             MaterialNumber materialNumber,
@@ -1265,6 +1393,13 @@ class _$_FetchMetaData implements _FetchMetaData {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult? Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1272,7 +1407,7 @@ class _$_FetchMetaData implements _FetchMetaData {
         deleteFavourite,
   }) {
     return fetchMetaData?.call(
-        salesOrganisation, customerCodeInfo, shipToInfo, locale);
+        salesOrganisation, customerCodeInfo, shipToInfo, locale, isForBundle);
   }
 
   @override
@@ -1297,7 +1432,8 @@ class _$_FetchMetaData implements _FetchMetaData {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult Function(
             MaterialNumber materialNumber,
@@ -1306,6 +1442,13 @@ class _$_FetchMetaData implements _FetchMetaData {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1315,7 +1458,7 @@ class _$_FetchMetaData implements _FetchMetaData {
   }) {
     if (fetchMetaData != null) {
       return fetchMetaData(
-          salesOrganisation, customerCodeInfo, shipToInfo, locale);
+          salesOrganisation, customerCodeInfo, shipToInfo, locale, isForBundle);
     }
     return orElse();
   }
@@ -1328,6 +1471,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
     required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
@@ -1343,6 +1487,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
     TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
@@ -1358,6 +1503,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
     TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
@@ -1375,12 +1521,14 @@ abstract class _FetchMetaData implements ProductDetailEvent {
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final Locale locale}) = _$_FetchMetaData;
+      required final Locale locale,
+      required final bool isForBundle}) = _$_FetchMetaData;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   Locale get locale;
+  bool get isForBundle;
   @JsonKey(ignore: true)
   _$$_FetchMetaDataCopyWith<_$_FetchMetaData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1544,7 +1692,8 @@ class _$_FetchStock implements _FetchStock {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            bool isForBundle)
         fetchMetaData,
     required TResult Function(
             MaterialNumber materialNumber,
@@ -1553,6 +1702,13 @@ class _$_FetchStock implements _FetchStock {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchStock,
+    required TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -1587,7 +1743,8 @@ class _$_FetchStock implements _FetchStock {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult? Function(
             MaterialNumber materialNumber,
@@ -1596,6 +1753,13 @@ class _$_FetchStock implements _FetchStock {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult? Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1628,7 +1792,8 @@ class _$_FetchStock implements _FetchStock {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult Function(
             MaterialNumber materialNumber,
@@ -1637,6 +1802,13 @@ class _$_FetchStock implements _FetchStock {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1659,6 +1831,7 @@ class _$_FetchStock implements _FetchStock {
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
     required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
@@ -1674,6 +1847,7 @@ class _$_FetchStock implements _FetchStock {
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
     TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
@@ -1689,6 +1863,7 @@ class _$_FetchStock implements _FetchStock {
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
     TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
@@ -1716,6 +1891,379 @@ abstract class _FetchStock implements ProductDetailEvent {
   Locale get locale;
   @JsonKey(ignore: true)
   _$$_FetchStockCopyWith<_$_FetchStock> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchStockForBundleCopyWith<$Res> {
+  factory _$$_FetchStockForBundleCopyWith(_$_FetchStockForBundle value,
+          $Res Function(_$_FetchStockForBundle) then) =
+      __$$_FetchStockForBundleCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<MaterialInfo> materials,
+      SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      Locale locale});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+}
+
+/// @nodoc
+class __$$_FetchStockForBundleCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$_FetchStockForBundle>
+    implements _$$_FetchStockForBundleCopyWith<$Res> {
+  __$$_FetchStockForBundleCopyWithImpl(_$_FetchStockForBundle _value,
+      $Res Function(_$_FetchStockForBundle) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? materials = null,
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? locale = null,
+  }) {
+    return _then(_$_FetchStockForBundle(
+      materials: null == materials
+          ? _value._materials
+          : materials // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      locale: null == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as Locale,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_FetchStockForBundle implements _FetchStockForBundle {
+  _$_FetchStockForBundle(
+      {required final List<MaterialInfo> materials,
+      required this.salesOrganisation,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.locale})
+      : _materials = materials;
+
+  final List<MaterialInfo> _materials;
+  @override
+  List<MaterialInfo> get materials {
+    if (_materials is EqualUnmodifiableListView) return _materials;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_materials);
+  }
+
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final Locale locale;
+
+  @override
+  String toString() {
+    return 'ProductDetailEvent.fetchStockForBundle(materials: $materials, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, locale: $locale)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchStockForBundle &&
+            const DeepCollectionEquality()
+                .equals(other._materials, _materials) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.locale, locale) || other.locale == locale));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_materials),
+      salesOrganisation,
+      customerCodeInfo,
+      shipToInfo,
+      locale);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchStockForBundleCopyWith<_$_FetchStockForBundle> get copyWith =>
+      __$$_FetchStockForBundleCopyWithImpl<_$_FetchStockForBundle>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale,
+            MaterialInfoType type)
+        fetch,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchSimilarProduct,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale,
+            bool isForBundle)
+        fetchMetaData,
+    required TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStock,
+    required TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStockForBundle,
+    required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
+  }) {
+    return fetchStockForBundle(
+        materials, salesOrganisation, customerCodeInfo, shipToInfo, locale);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale,
+            MaterialInfoType type)?
+        fetch,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchSimilarProduct,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale,
+            bool isForBundle)?
+        fetchMetaData,
+    TResult? Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStock,
+    TResult? Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
+    TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+  }) {
+    return fetchStockForBundle?.call(
+        materials, salesOrganisation, customerCodeInfo, shipToInfo, locale);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale,
+            MaterialInfoType type)?
+        fetch,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchSimilarProduct,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale,
+            bool isForBundle)?
+        fetchMetaData,
+    TResult Function(
+            MaterialNumber materialNumber,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStock,
+    TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
+    TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (fetchStockForBundle != null) {
+      return fetchStockForBundle(
+          materials, salesOrganisation, customerCodeInfo, shipToInfo, locale);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
+    required TResult Function(_FetchMetaData value) fetchMetaData,
+    required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
+    required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+  }) {
+    return fetchStockForBundle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult? Function(_FetchMetaData value)? fetchMetaData,
+    TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
+    TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+  }) {
+    return fetchStockForBundle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult Function(_FetchMetaData value)? fetchMetaData,
+    TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
+    TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    required TResult orElse(),
+  }) {
+    if (fetchStockForBundle != null) {
+      return fetchStockForBundle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchStockForBundle implements ProductDetailEvent {
+  factory _FetchStockForBundle(
+      {required final List<MaterialInfo> materials,
+      required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final Locale locale}) = _$_FetchStockForBundle;
+
+  List<MaterialInfo> get materials;
+  SalesOrganisation get salesOrganisation;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  Locale get locale;
+  @JsonKey(ignore: true)
+  _$$_FetchStockForBundleCopyWith<_$_FetchStockForBundle> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1802,7 +2350,8 @@ class _$_ChangeImage implements _ChangeImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            bool isForBundle)
         fetchMetaData,
     required TResult Function(
             MaterialNumber materialNumber,
@@ -1811,6 +2360,13 @@ class _$_ChangeImage implements _ChangeImage {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchStock,
+    required TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -1844,7 +2400,8 @@ class _$_ChangeImage implements _ChangeImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult? Function(
             MaterialNumber materialNumber,
@@ -1853,6 +2410,13 @@ class _$_ChangeImage implements _ChangeImage {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult? Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1884,7 +2448,8 @@ class _$_ChangeImage implements _ChangeImage {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult Function(
             MaterialNumber materialNumber,
@@ -1893,6 +2458,13 @@ class _$_ChangeImage implements _ChangeImage {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -1914,6 +2486,7 @@ class _$_ChangeImage implements _ChangeImage {
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
     required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
@@ -1929,6 +2502,7 @@ class _$_ChangeImage implements _ChangeImage {
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
     TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
@@ -1944,6 +2518,7 @@ class _$_ChangeImage implements _ChangeImage {
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
     TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
@@ -2060,7 +2635,8 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            bool isForBundle)
         fetchMetaData,
     required TResult Function(
             MaterialNumber materialNumber,
@@ -2069,6 +2645,13 @@ class _$_AddFavourite implements _AddFavourite {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchStock,
+    required TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -2102,7 +2685,8 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult? Function(
             MaterialNumber materialNumber,
@@ -2111,6 +2695,13 @@ class _$_AddFavourite implements _AddFavourite {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult? Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2142,7 +2733,8 @@ class _$_AddFavourite implements _AddFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult Function(
             MaterialNumber materialNumber,
@@ -2151,6 +2743,13 @@ class _$_AddFavourite implements _AddFavourite {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2172,6 +2771,7 @@ class _$_AddFavourite implements _AddFavourite {
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
     required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
@@ -2187,6 +2787,7 @@ class _$_AddFavourite implements _AddFavourite {
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
     TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
@@ -2202,6 +2803,7 @@ class _$_AddFavourite implements _AddFavourite {
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
     TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
@@ -2321,7 +2923,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)
+            Locale locale,
+            bool isForBundle)
         fetchMetaData,
     required TResult Function(
             MaterialNumber materialNumber,
@@ -2330,6 +2933,13 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             ShipToInfo shipToInfo,
             Locale locale)
         fetchStock,
+    required TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)
+        fetchStockForBundle,
     required TResult Function(int index) changeImage,
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
@@ -2363,7 +2973,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult? Function(
             MaterialNumber materialNumber,
@@ -2372,6 +2983,13 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult? Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult? Function(int index)? changeImage,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2403,7 +3021,8 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            Locale locale)?
+            Locale locale,
+            bool isForBundle)?
         fetchMetaData,
     TResult Function(
             MaterialNumber materialNumber,
@@ -2412,6 +3031,13 @@ class _$_DeleteFavourite implements _DeleteFavourite {
             ShipToInfo shipToInfo,
             Locale locale)?
         fetchStock,
+    TResult Function(
+            List<MaterialInfo> materials,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            Locale locale)?
+        fetchStockForBundle,
     TResult Function(int index)? changeImage,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         addFavourite,
@@ -2433,6 +3059,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
     required TResult Function(_FetchMetaData value) fetchMetaData,
     required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
@@ -2448,6 +3075,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult? Function(_FetchMetaData value)? fetchMetaData,
     TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
@@ -2463,6 +3091,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
     TResult Function(_FetchMetaData value)? fetchMetaData,
     TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,

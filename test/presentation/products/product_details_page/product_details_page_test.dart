@@ -20,8 +20,10 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
@@ -274,12 +276,24 @@ void main() {
             },
           ),
         );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+              addOosMaterials: OosMaterial(true),
+              oosValue: OosValue(1),
+            ),
+          ),
+        );
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('00000111111'),
                 quantity: 2,
+              ),
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('true'),
               ),
             ),
           ),

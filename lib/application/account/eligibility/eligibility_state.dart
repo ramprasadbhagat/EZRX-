@@ -106,15 +106,13 @@ class EligibilityState with _$EligibilityState {
         !salesOrgConfigs.disablePaymentTermsDisplay;
   }
 
-  bool get validateOutOfStockValue {
-    return user.role.type.isSalesRepRole &&
-        salesOrgConfigs.oosValue.isOosValueZero;
-  }
+  bool get validateOutOfStockValue => salesOrgConfigs.oosValue.isOosValueZero
+      ? user.role.type.isSalesRepRole
+      : true;
 
-  bool get doNotAllowOutOfStockMaterials {
-    return !(salesOrgConfigs.addOosMaterials.getValue() ||
-        (salesOrgConfigs.addOosMaterials.getValue() && validateOutOfStockValue));
-  }
+  bool get doNotAllowOutOfStockMaterials =>
+      !(salesOrgConfigs.addOosMaterials.getOrDefaultValue(false) &&
+          validateOutOfStockValue);
 
   bool get isBonusOverrideEnable => user.role.type.isSalesRepRole
       ? user.hasBonusOverride

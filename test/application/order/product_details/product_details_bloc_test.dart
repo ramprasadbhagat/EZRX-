@@ -33,6 +33,7 @@ void main() {
   late FavouriteRepository favouriteMockRepository;
   late MaterialInfo mockMaterialInfo;
   late StockInfo mockStockInfo;
+  late List<MaterialStockInfo> mockMaterialStockInfo;
   late ProductMetaData mockProductMetaData;
   late List<MaterialInfo> mockSimilarProducts;
   const locale = Locale('en');
@@ -56,6 +57,9 @@ void main() {
     favouriteMockRepository = FavouriteRepositoryMock();
     mockMaterialInfo = await ProductDetailLocalDataSource().getProductDetails();
     mockStockInfo = await StockInfoLocalDataSource().getStockInfo();
+
+    mockMaterialStockInfo =
+        await StockInfoLocalDataSource().getMaterialStockInfoList();
     mockProductMetaData =
         await ProductDetailLocalDataSource().getItemProductMetaData();
     mockSimilarProducts =
@@ -106,6 +110,13 @@ void main() {
             ),
           ).thenAnswer((invocation) async => Right(mockStockInfo));
           when(
+            () => productDetailMockRepository.getStockInfoList(
+              salesOrganisation: mockSalesOrganisation,
+              customerCodeInfo: mockCustomerCodeInfo,
+              materials: [mockMaterialInfo],
+            ),
+          ).thenAnswer((invocation) async => Right(mockMaterialStockInfo));
+          when(
             () => productDetailMockRepository.getItemProductMetaData(
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
                 stockInfo: mockStockInfo,
@@ -151,12 +162,6 @@ void main() {
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
             failureOrSuccessOption: none(),
-          ),
-          ProductDetailState.initial().copyWith(
-            isFetching: false,
-            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: mockMaterialInfo,
-            ),
           ),
           ProductDetailState.initial().copyWith(
             isFetching: true,
@@ -279,6 +284,15 @@ void main() {
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
           );
           when(
+            () => productDetailMockRepository.getStockInfoList(
+              salesOrganisation: mockSalesOrganisation,
+              customerCodeInfo: mockCustomerCodeInfo,
+              materials: [mockMaterialInfo],
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
+          when(
             () => productDetailMockRepository.getItemProductMetaData(
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
                 stockInfo: StockInfo.empty(),
@@ -346,7 +360,6 @@ void main() {
               materialInfo: mockMaterialInfo,
               stockInfo: StockInfo.empty(),
             ),
-            failureOrSuccessOption: none(),
           ),
           ProductDetailState.initial().copyWith(
             isFetching: false,
@@ -419,6 +432,7 @@ void main() {
               customerCodeInfo: mockCustomerCodeInfo,
               shipToInfo: mockShipToInfo,
               locale: locale,
+              isForBundle: false,
             ),
           );
         },

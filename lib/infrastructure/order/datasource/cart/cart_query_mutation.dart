@@ -1,10 +1,74 @@
 class CartQueryMutation {
   String cart() => '''
+  fragment BundleMaterialsFields on Item {
+    Type
+    ProductID
+    ItemSource
+    Quantity
+    CreatedAt
+    UpdatedAt
+    principalCode
+    principalName
+    materialNumber
+    materialDescription
+    therapeuticClass
+    itemBrand
+    governmentMaterialCode
+    defaultMaterialDescription
+    oldMaterialCode
+    materialGroup4
+    materialGroup2
+    taxClassification
+    unitOfMeasurement
+    itemRegistrationNumber
+    genericMaterialName
+    language
+    taxM1
+    taxes
+    isSampleMaterial
+    hidePrice
+    hasValidTenderContract
+    hasMandatoryTenderContract
+    isFOCMaterial
+    isFavourite
+    productCount
+    productAddedAt
+    productUpdatedAt
+    minimumQty
+    maximumQty
+    orderedQty
+    remainingQty
+    mov
+    materialType
+    suspensionStatus
+    principalCutoffStatus
+    warehouseStorageCondition
+    ParentID
+  }
   query Cart(\$language: String) {
   cart(language: \$language) {
     ID
     UserID
     EzRxItems {
+      BundleDetails {
+        BundleName
+        BundleCode
+        BundleInformation {
+          Sequence
+          Quantity
+          Type
+          Rate
+        }
+      }
+      BundleMaterials {
+        ...BundleMaterialsFields
+      }
+      CounterOfferPrice
+      CounterOfferCurrency
+      DiscountOverridePercentage
+      isVaccine
+      TenderContractNumber
+      Comment
       ProductID
       ParentID
       Type
@@ -427,7 +491,6 @@ class CartQueryMutation {
       deleteCart {
         Type
         Message
-        __typename
       }
     }
 ''';
@@ -490,9 +553,7 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
         materialNumber
         materialDescription
         productCount
-        __typename
       }
-      __typename
     }
     MarketplaceItems {
       ProductID
@@ -503,7 +564,6 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
       CounterOfferPrice	
       CounterOfferCurrency	
       Comment
-      __typename
     }
     CustomerCode
     ShipTo {
@@ -519,7 +579,6 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
       Zip
       Country
       Phone
-      __typename
     }
     CreatedAt
     UpdatedAt
@@ -531,7 +590,6 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
         UnhandledErrorBody
         xp
         Succeeded
-        __typename
       }
       OrderCalculateResponse {
         LineItemOverrides
@@ -541,28 +599,24 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
         UnhandledErrorBody
         xp
         Succeeded
-        __typename
       }
       OrderSubmitResponse {
         HttpStatusCode
         UnhandledErrorBody
         xp
         Succeeded
-        __typename
       }
       OrderSubmitForApprovalResponse {
         HttpStatusCode
         UnhandledErrorBody
         xp
         Succeeded
-        __typename
       }
       OrderApprovedResponse {
         HttpStatusCode
         UnhandledErrorBody
         xp
         Succeeded
-        __typename
       }
       OrderPromotions {
         Amount
@@ -599,25 +653,21 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
           Documents {
             Url
             FileName
-            __typename
           }
           Images {
             Url
             ThumbnailUrl
             Tags
-            __typename
           }
           Accessorials
           UnitOfMeasure {
             Qty
             Unit
-            __typename
           }
           Tax {
             Code
             Description
             LongDescription
-            __typename
           }
           Facets {
             greenlabel
@@ -627,7 +677,6 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
             category
             industry
             supplier
-            __typename
           }
           Brand
           CountryOfOrigin
@@ -644,16 +693,12 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
             BatchNumber
             BatchExpirationDate
             BatchStockQuantity
-            __typename
           }
           Workflow {
             RejectionReason
-            __typename
           }
           Promotions
-          __typename
         }
-        __typename
       }
       LineItems {
         ID
@@ -692,7 +737,6 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
           Phone
           AddressName
           xp
-          __typename
         }
         Product {
           ID
@@ -721,25 +765,21 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
             Documents {
               Url
               FileName
-              __typename
             }
             Images {
               Url
               ThumbnailUrl
               Tags
-              __typename
             }
             Accessorials
             UnitOfMeasure {
               Qty
               Unit
-              __typename
             }
             Tax {
               Code
               Description
               LongDescription
-              __typename
             }
             Facets {
               greenlabel
@@ -749,7 +789,6 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
               category
               industry
               supplier
-              __typename
             }
             Brand
             CountryOfOrigin
@@ -766,16 +805,12 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
               BatchNumber
               BatchExpirationDate
               BatchStockQuantity
-              __typename
             }
             Workflow {
               RejectionReason
-              __typename
             }
             Promotions
-            __typename
           }
-          __typename
         }
         xp {
           IntegrationData
@@ -793,25 +828,21 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
           Documents {
             Url
             FileName
-            __typename
           }
           Images {
             Url
             ThumbnailUrl
             Tags
-            __typename
           }
           Accessorials
           UnitOfMeasure {
             Qty
             Unit
-            __typename
           }
           Tax {
             Code
             Description
             LongDescription
-            __typename
           }
           Facets {
             greenlabel
@@ -821,7 +852,6 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
             category
             industry
             supplier
-            __typename
           }
           Brand
           CountryOfOrigin
@@ -838,16 +868,12 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
             BatchNumber
             BatchExpirationDate
             BatchStockQuantity
-            __typename
           }
           Workflow {
             RejectionReason
-            __typename
           }
           Promotions
-          __typename
         }
-        __typename
       }
       Order {
         ID
@@ -889,13 +915,9 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
           Locale
           DateCreated
           PasswordLastSetDate
-          __typename
         }
-        __typename
       }
-      __typename
     }
-    __typename
   }
 }
 ''';
@@ -951,7 +973,6 @@ fragment ezrxItemsFields on Item {
     materialDescription
     productCount
     ProductID
-    __typename
   }
   Type
   BundleDetails {
@@ -962,15 +983,11 @@ fragment ezrxItemsFields on Item {
       Quantity
       Type
       Rate
-      __typename
     }
-    __typename
   }
   BundleMaterials {
     ...BundleMaterialsFields
-    __typename
   }
-  __typename
 }
 
 fragment shipToFields on ShipTo {
@@ -986,7 +1003,6 @@ fragment shipToFields on ShipTo {
   Zip
   Country
   Phone
-  __typename
 }
 
 fragment userAddressFields on CartShippingAddress {
@@ -995,7 +1011,6 @@ fragment userAddressFields on CartShippingAddress {
   city
   addressCode
   country
-  __typename
 }
 
 fragment materialsFields on CartMaterials {
@@ -1035,7 +1050,6 @@ fragment materialsFields on CartMaterials {
   suspensionStatus
   principalCutoffStatus
   warehouseStorageCondition
-  __typename
 }
 
 fragment BundleMaterialsFields on Item {
@@ -1082,7 +1096,6 @@ fragment BundleMaterialsFields on Item {
   principalCutoffStatus
   warehouseStorageCondition
   ParentID
-  __typename
 }
 
 mutation UpsertCartItems(\$itemInput: [ItemInput!]) {
@@ -1091,26 +1104,21 @@ mutation UpsertCartItems(\$itemInput: [ItemInput!]) {
     UserID
     EzRxItems {
       ...ezrxItemsFields
-      __typename
     }
     CustomerCode
     ShipTo {
       ...shipToFields
-      __typename
     }
     CreatedAt
     UpdatedAt
     OrderID
     userAddress {
       ...userAddressFields
-      __typename
     }
     materials {
       ...materialsFields
-      __typename
     }
     SalesOrg
-    __typename
   }
 }
 ''';

@@ -23,4 +23,8 @@ class ProductDetailState with _$ProductDetailState {
         ? StringValue(images.elementAt(selectedImageIndex))
         : StringValue('');
   }
+
+  bool get showRelatedItems =>
+      isFetching ||
+      (!isFetching && productDetailAggregate.similarProduct.isNotEmpty);
 }

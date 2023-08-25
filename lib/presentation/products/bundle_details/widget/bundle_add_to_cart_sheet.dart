@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -15,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -85,6 +87,9 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
 
   @override
   Widget build(BuildContext context) {
+    final addOosMaterials =
+        context.read<SalesOrgBloc>().state.configs.addOosMaterials;
+
     return Row(
       key: WidgetKeys.bundleMaterialListItem,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,9 +111,21 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.materialInfo.materialNumber.displayMatNo,
-                style: Theme.of(context).textTheme.bodySmall,
+              Row(
+                children: [
+                  Text(
+                    widget.materialInfo.materialNumber.displayMatNo,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  if (!widget.materialInfo.inStock) ...[
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    StatusLabel(
+                      status: StatusType(addOosMaterials.oosMaterialTag),
+                    ),
+                  ],
+                ],
               ),
               const SizedBox(height: 5),
               Text(
@@ -117,7 +134,9 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
               ),
               const SizedBox(height: 8),
               CartItemQuantityInput(
-                isEnabled: true,
+                isEnabled: widget.materialInfo.inStock ||
+                    (!widget.materialInfo.inStock &&
+                        addOosMaterials.isOutOfStock),
                 quantityAddKey: WidgetKeys.bundleInputAddKey,
                 quantityDeleteKey: WidgetKeys.bundleInputDeleteKey,
                 quantityTextKey: WidgetKeys.bundleQuantityTextKey,

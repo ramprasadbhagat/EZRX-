@@ -24,6 +24,7 @@ class ProductDetailEvent with _$ProductDetailEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required Locale locale,
+    required bool isForBundle,
   }) = _FetchMetaData;
 
   factory ProductDetailEvent.fetchStock({
@@ -33,6 +34,14 @@ class ProductDetailEvent with _$ProductDetailEvent {
     required ShipToInfo shipToInfo,
     required Locale locale,
   }) = _FetchStock;
+
+  factory ProductDetailEvent.fetchStockForBundle({
+    required List<MaterialInfo> materials,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Locale locale,
+  }) = _FetchStockForBundle;
 
   factory ProductDetailEvent.changeImage(int index) = _ChangeImage;
 

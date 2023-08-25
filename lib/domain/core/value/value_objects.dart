@@ -269,6 +269,8 @@ class OosMaterial extends ValueObject<bool> {
 
   String get oosMaterialTag => getOosMaterialTag(value.getOrElse(() => false));
 
+  bool get isOutOfStock => isOutOfStockTag(value.getOrElse(() => false));
+
   Color get oosMaterialTagColor =>
       getOosMaterialTagColor(value.getOrElse(() => false));
 

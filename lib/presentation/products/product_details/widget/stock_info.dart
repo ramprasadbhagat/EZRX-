@@ -19,7 +19,8 @@ class ProductStockInfo extends StatelessWidget {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
           current.productDetailAggregate.stockInfo !=
-          previous.productDetailAggregate.stockInfo,
+              previous.productDetailAggregate.stockInfo ||
+          current.isFetching != previous.isFetching,
       builder: (context, state) {
         final stockInfo = state.productDetailAggregate.stockInfo;
         if (state.isFetching) {

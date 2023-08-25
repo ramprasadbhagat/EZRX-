@@ -1,18 +1,20 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
@@ -122,13 +124,29 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           : const SizedBox.shrink(),
       body: ListView(
         controller: _scrollController,
-        children: const [
-          ProductDetailImage(),
-          _BodyContent(),
-          SimilarProduct(),
+        children: [
+          const ProductDetailImage(),
+          const _BodyContent(),
+          _SimilarProducts(),
         ],
       ),
       bottomNavigationBar: const _Footer(),
+    );
+  }
+}
+
+class _SimilarProducts extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
+      buildWhen: (previous, current) =>
+          previous.productDetailAggregate.similarProduct !=
+          current.productDetailAggregate.similarProduct,
+      builder: (context, state) {
+        return state.showRelatedItems
+            ? const SimilarProduct()
+            : const SizedBox.shrink();
+      },
     );
   }
 }
@@ -140,11 +158,16 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       buildWhen: (previous, current) =>
-          previous.productDetailAggregate.materialInfo !=
-          current.productDetailAggregate.materialInfo,
+          previous.isFetching != current.isFetching,
       builder: (context, state) {
         final materialNumber =
             state.productDetailAggregate.materialInfo.materialNumber;
+        final config = context.read<SalesOrgBloc>().state.configs;
+        final level = !state.isFetching
+            ? !state.productDetailAggregate.stockInfo.inStock.isMaterialInStock
+                ? config.addOosMaterials.oosMaterialTag
+                : ''
+            : '';
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,13 +177,24 @@ class _BodyContent extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    materialNumber.displayMatNo,
-                    key: WidgetKeys.materialDetailsMaterialNumber,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(color: ZPColors.darkGray),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        materialNumber.displayMatNo,
+                        key: WidgetKeys.materialDetailsMaterialNumber,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(color: ZPColors.darkGray),
+                      ),
+                      if (level.isNotEmpty)
+                        StatusLabel(
+                          status: StatusType(
+                            level,
+                          ),
+                        ),
+                    ],
                   ),
                   _Description(
                     materialInfo: state.productDetailAggregate.materialInfo,
@@ -270,15 +304,18 @@ class _FooterState extends State<_Footer> {
   bool _isEligibleForAddToCart({
     required BuildContext context,
     required Price price,
-  }) {
-    final disableCreateOrder =
-        !context.read<UserBloc>().state.user.userCanCreateOrder;
-    if (disableCreateOrder) return false;
-    final materialWithoutPrice =
-        context.read<SalesOrgBloc>().state.configs.materialWithoutPrice;
-
-    return !(price.finalPrice.isEmpty && !materialWithoutPrice);
-  }
+  }) =>
+      !(price.finalPrice.isEmpty &&
+          !context.read<SalesOrgBloc>().state.configs.materialWithoutPrice) &&
+      (!context
+              .read<ProductDetailBloc>()
+              .state
+              .productDetailAggregate
+              .stockInfo
+              .inStock
+              .isMaterialInStock
+          ? !context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials
+          : true);
 
   @override
   Widget build(BuildContext context) {
@@ -316,6 +353,8 @@ class _FooterState extends State<_Footer> {
                   key: WidgetKeys.materialDetailsAddToCartButton,
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+                    buildWhen: (previous, current) =>
+                        previous.isFetching != current.isFetching,
                     builder: (context, stateDetail) {
                       final price =
                           context.read<MaterialPriceBloc>().state.materialPrice[
@@ -343,64 +382,73 @@ class _FooterState extends State<_Footer> {
                             (either) => {},
                           );
                         },
+                        buildWhen: (previous, current) =>
+                            previous.isUpserting != current.isUpserting ||
+                            previous.isFetching != current.isFetching,
                         builder: (context, stateCart) {
-                          return ElevatedButton(
-                            onPressed: stateCart.isUpserting ||
-                                    !_isEligibleForAddToCart(
-                                      context: context,
-                                      price: price,
-                                    )
-                                ? null
-                                : () {
-                                    context.read<CartBloc>().add(
-                                          CartEvent.upsertCart(
-                                            salesOrganisation: context
-                                                .read<SalesOrgBloc>()
-                                                .state
-                                                .salesOrganisation,
-                                            salesOrganisationConfigs: context
-                                                .read<SalesOrgBloc>()
-                                                .state
-                                                .configs,
-                                            customerCodeInfo: context
-                                                .read<CustomerCodeBloc>()
-                                                .state
-                                                .customerCodeInfo,
-                                            shipToInfo: context
-                                                .read<CustomerCodeBloc>()
-                                                .state
-                                                .shipToInfo,
-                                            priceAggregate:
-                                                PriceAggregate.empty().copyWith(
-                                              materialInfo: stateDetail
-                                                  .productDetailAggregate
-                                                  .materialInfo,
-                                              price: price,
-                                              salesOrgConfig: context
+                          return LoadingShimmer.withChild(
+                            enabled:
+                                stateCart.isUpserting || stateDetail.isFetching,
+                            child: ElevatedButton(
+                              onPressed: !_isEligibleForAddToCart(
+                                context: context,
+                                price: price,
+                              )
+                                  ? null
+                                  : () {
+                                      context.read<CartBloc>().add(
+                                            CartEvent.upsertCart(
+                                              salesOrganisation: context
+                                                  .read<SalesOrgBloc>()
+                                                  .state
+                                                  .salesOrganisation,
+                                              salesOrganisationConfigs: context
                                                   .read<SalesOrgBloc>()
                                                   .state
                                                   .configs,
+                                              customerCodeInfo: context
+                                                  .read<CustomerCodeBloc>()
+                                                  .state
+                                                  .customerCodeInfo,
+                                              shipToInfo: context
+                                                  .read<CustomerCodeBloc>()
+                                                  .state
+                                                  .shipToInfo,
+                                              priceAggregate:
+                                                  PriceAggregate.empty()
+                                                      .copyWith(
+                                                materialInfo: stateDetail
+                                                    .productDetailAggregate
+                                                    .materialInfo,
+                                                price: price,
+                                                salesOrgConfig: context
+                                                    .read<SalesOrgBloc>()
+                                                    .state
+                                                    .configs,
+                                              ),
+                                              quantity: stateCart
+                                                      .getQuantityOfProduct(
+                                                    productNumber: stateDetail
+                                                        .productDetailAggregate
+                                                        .materialInfo
+                                                        .materialNumber,
+                                                  ) +
+                                                  int.parse(
+                                                    _quantityEditingController
+                                                        .text,
+                                                  ),
+                                              counterOfferDetails:
+                                                  RequestCounterOfferDetails
+                                                      .empty(),
                                             ),
-                                            quantity:
-                                                stateCart.getQuantityOfProduct(
-                                                      productNumber: stateDetail
-                                                          .productDetailAggregate
-                                                          .materialInfo
-                                                          .materialNumber,
-                                                    ) +
-                                                    int.parse(
-                                                      _quantityEditingController
-                                                          .text,
-                                                    ),
-                                            counterOfferDetails:
-                                                RequestCounterOfferDetails
-                                                    .empty(),
-                                          ),
-                                        );
-                                  },
-                            child: LoadingShimmer.withChild(
-                              enabled: stateCart.isUpserting,
-                              child: const Text('Add To Cart').tr(),
+                                          );
+                                    },
+                              child: SizedBox(
+                                width: double.maxFinite,
+                                child: Center(
+                                  child: const Text('Add To Cart').tr(),
+                                ),
+                              ),
                             ),
                           );
                         },

@@ -89,7 +89,12 @@ mixin _$CartEvent {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -180,7 +185,12 @@ mixin _$CartEvent {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -270,7 +280,12 @@ mixin _$CartEvent {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -492,7 +507,12 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -586,7 +606,12 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -679,7 +704,12 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -1057,7 +1087,12 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -1158,7 +1193,12 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -1258,7 +1298,12 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -1655,7 +1700,12 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -1750,7 +1800,12 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -1844,7 +1899,12 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -2132,7 +2192,12 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -2226,7 +2291,12 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -2319,7 +2389,12 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -2734,7 +2809,12 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -2836,7 +2916,12 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -2937,7 +3022,12 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -3247,7 +3337,12 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -3341,7 +3436,12 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -3434,7 +3534,12 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -3731,7 +3836,12 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -3825,7 +3935,12 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -3918,7 +4033,12 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -4209,7 +4329,12 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -4303,7 +4428,12 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -4396,7 +4526,12 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -4629,7 +4764,12 @@ class _$_ClearCart implements _ClearCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -4723,7 +4863,12 @@ class _$_ClearCart implements _ClearCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -4816,7 +4961,12 @@ class _$_ClearCart implements _ClearCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -5180,7 +5330,12 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -5280,7 +5435,12 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -5379,7 +5539,12 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -5682,7 +5847,12 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -5776,7 +5946,12 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -5869,7 +6044,12 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -6214,7 +6394,12 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -6309,7 +6494,12 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -6403,7 +6593,12 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -6804,7 +6999,12 @@ class _$_UpsertCart implements _UpsertCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -6905,7 +7105,12 @@ class _$_UpsertCart implements _UpsertCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -7005,7 +7210,12 @@ class _$_UpsertCart implements _UpsertCart {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -7378,7 +7588,12 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -7473,7 +7688,12 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -7567,7 +7787,12 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -7705,7 +7930,17 @@ abstract class _$$_GetDetailsProductsAddedToCartCopyWith<$Res> {
           $Res Function(_$_GetDetailsProductsAddedToCart) then) =
       __$$_GetDetailsProductsAddedToCartCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<PriceAggregate> cartProducts});
+  $Res call(
+      {List<PriceAggregate> cartProducts,
+      SalesOrganisation salesOrg,
+      SalesOrganisationConfigs config,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrg;
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -7721,13 +7956,65 @@ class __$$_GetDetailsProductsAddedToCartCopyWithImpl<$Res>
   @override
   $Res call({
     Object? cartProducts = null,
+    Object? salesOrg = null,
+    Object? config = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
   }) {
     return _then(_$_GetDetailsProductsAddedToCart(
       cartProducts: null == cartProducts
           ? _value._cartProducts
           : cartProducts // ignore: cast_nullable_to_non_nullable
               as List<PriceAggregate>,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrg {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrg, (value) {
+      return _then(_value.copyWith(salesOrg: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get config {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
+      return _then(_value.copyWith(config: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
   }
 }
 
@@ -7736,7 +8023,11 @@ class __$$_GetDetailsProductsAddedToCartCopyWithImpl<$Res>
 class _$_GetDetailsProductsAddedToCart
     implements _GetDetailsProductsAddedToCart {
   const _$_GetDetailsProductsAddedToCart(
-      {required final List<PriceAggregate> cartProducts})
+      {required final List<PriceAggregate> cartProducts,
+      required this.salesOrg,
+      required this.config,
+      required this.customerCodeInfo,
+      required this.shipToInfo})
       : _cartProducts = cartProducts;
 
   final List<PriceAggregate> _cartProducts;
@@ -7748,8 +8039,17 @@ class _$_GetDetailsProductsAddedToCart
   }
 
   @override
+  final SalesOrganisation salesOrg;
+  @override
+  final SalesOrganisationConfigs config;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+
+  @override
   String toString() {
-    return 'CartEvent.getDetailsProductsAddedToCart(cartProducts: $cartProducts)';
+    return 'CartEvent.getDetailsProductsAddedToCart(cartProducts: $cartProducts, salesOrg: $salesOrg, config: $config, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
   }
 
   @override
@@ -7758,12 +8058,24 @@ class _$_GetDetailsProductsAddedToCart
         (other.runtimeType == runtimeType &&
             other is _$_GetDetailsProductsAddedToCart &&
             const DeepCollectionEquality()
-                .equals(other._cartProducts, _cartProducts));
+                .equals(other._cartProducts, _cartProducts) &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg) &&
+            (identical(other.config, config) || other.config == config) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_cartProducts));
+      runtimeType,
+      const DeepCollectionEquality().hash(_cartProducts),
+      salesOrg,
+      config,
+      customerCodeInfo,
+      shipToInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -7846,7 +8158,12 @@ class _$_GetDetailsProductsAddedToCart
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -7864,7 +8181,8 @@ class _$_GetDetailsProductsAddedToCart
             ShipToInfo shipToInfo)
         updateProductStock,
   }) {
-    return getDetailsProductsAddedToCart(cartProducts);
+    return getDetailsProductsAddedToCart(
+        cartProducts, salesOrg, config, customerCodeInfo, shipToInfo);
   }
 
   @override
@@ -7940,7 +8258,12 @@ class _$_GetDetailsProductsAddedToCart
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -7958,7 +8281,8 @@ class _$_GetDetailsProductsAddedToCart
             ShipToInfo shipToInfo)?
         updateProductStock,
   }) {
-    return getDetailsProductsAddedToCart?.call(cartProducts);
+    return getDetailsProductsAddedToCart?.call(
+        cartProducts, salesOrg, config, customerCodeInfo, shipToInfo);
   }
 
   @override
@@ -8033,7 +8357,12 @@ class _$_GetDetailsProductsAddedToCart
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -8053,7 +8382,8 @@ class _$_GetDetailsProductsAddedToCart
     required TResult orElse(),
   }) {
     if (getDetailsProductsAddedToCart != null) {
-      return getDetailsProductsAddedToCart(cartProducts);
+      return getDetailsProductsAddedToCart(
+          cartProducts, salesOrg, config, customerCodeInfo, shipToInfo);
     }
     return orElse();
   }
@@ -8147,10 +8477,17 @@ class _$_GetDetailsProductsAddedToCart
 
 abstract class _GetDetailsProductsAddedToCart implements CartEvent {
   const factory _GetDetailsProductsAddedToCart(
-          {required final List<PriceAggregate> cartProducts}) =
-      _$_GetDetailsProductsAddedToCart;
+      {required final List<PriceAggregate> cartProducts,
+      required final SalesOrganisation salesOrg,
+      required final SalesOrganisationConfigs config,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo}) = _$_GetDetailsProductsAddedToCart;
 
   List<PriceAggregate> get cartProducts;
+  SalesOrganisation get salesOrg;
+  SalesOrganisationConfigs get config;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
   @JsonKey(ignore: true)
   _$$_GetDetailsProductsAddedToCartCopyWith<_$_GetDetailsProductsAddedToCart>
       get copyWith => throw _privateConstructorUsedError;
@@ -8412,7 +8749,12 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -8512,7 +8854,12 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -8611,7 +8958,12 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -8983,7 +9335,12 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)
         upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
         getDetailsProductsAddedToCart,
     required TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -9078,7 +9435,12 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
+    TResult? Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult? Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -9172,7 +9534,12 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             ShipToInfo shipToInfo,
             PriceAggregate priceAggregate)?
         upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
+    TResult Function(
+            List<PriceAggregate> cartProducts,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs config,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
         getDetailsProductsAddedToCart,
     TResult Function(
             Map<MaterialNumber, Price> priceProducts,
@@ -9316,6 +9683,7 @@ mixin _$CartState {
   bool get isUpserting => throw _privateConstructorUsedError;
   bool get isMappingPrice => throw _privateConstructorUsedError;
   bool get isUpdatingStock => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get config => throw _privateConstructorUsedError;
   Map<MaterialNumber, ProductMetaData> get additionInfo =>
       throw _privateConstructorUsedError;
   List<int> get upsertBonusItemInProgressHashCode =>
@@ -9342,8 +9710,11 @@ abstract class $CartStateCopyWith<$Res> {
       bool isUpserting,
       bool isMappingPrice,
       bool isUpdatingStock,
+      SalesOrganisationConfigs config,
       Map<MaterialNumber, ProductMetaData> additionInfo,
       List<int> upsertBonusItemInProgressHashCode});
+
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
 /// @nodoc
@@ -9369,6 +9740,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
     Object? isUpserting = null,
     Object? isMappingPrice = null,
     Object? isUpdatingStock = null,
+    Object? config = null,
     Object? additionInfo = null,
     Object? upsertBonusItemInProgressHashCode = null,
   }) {
@@ -9413,6 +9785,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
           ? _value.isUpdatingStock
           : isUpdatingStock // ignore: cast_nullable_to_non_nullable
               as bool,
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       additionInfo: null == additionInfo
           ? _value.additionInfo
           : additionInfo // ignore: cast_nullable_to_non_nullable
@@ -9423,6 +9799,14 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
           : upsertBonusItemInProgressHashCode // ignore: cast_nullable_to_non_nullable
               as List<int>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get config {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
+      return _then(_value.copyWith(config: value) as $Val);
+    });
   }
 }
 
@@ -9444,8 +9828,12 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
       bool isUpserting,
       bool isMappingPrice,
       bool isUpdatingStock,
+      SalesOrganisationConfigs config,
       Map<MaterialNumber, ProductMetaData> additionInfo,
       List<int> upsertBonusItemInProgressHashCode});
+
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
 /// @nodoc
@@ -9469,6 +9857,7 @@ class __$$_CartStateCopyWithImpl<$Res>
     Object? isUpserting = null,
     Object? isMappingPrice = null,
     Object? isUpdatingStock = null,
+    Object? config = null,
     Object? additionInfo = null,
     Object? upsertBonusItemInProgressHashCode = null,
   }) {
@@ -9513,6 +9902,10 @@ class __$$_CartStateCopyWithImpl<$Res>
           ? _value.isUpdatingStock
           : isUpdatingStock // ignore: cast_nullable_to_non_nullable
               as bool,
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       additionInfo: null == additionInfo
           ? _value._additionInfo
           : additionInfo // ignore: cast_nullable_to_non_nullable
@@ -9540,6 +9933,7 @@ class _$_CartState extends _CartState {
       required this.isUpserting,
       required this.isMappingPrice,
       required this.isUpdatingStock,
+      required this.config,
       required final Map<MaterialNumber, ProductMetaData> additionInfo,
       required final List<int> upsertBonusItemInProgressHashCode})
       : _cartItems = cartItems,
@@ -9580,6 +9974,8 @@ class _$_CartState extends _CartState {
   final bool isMappingPrice;
   @override
   final bool isUpdatingStock;
+  @override
+  final SalesOrganisationConfigs config;
   final Map<MaterialNumber, ProductMetaData> _additionInfo;
   @override
   Map<MaterialNumber, ProductMetaData> get additionInfo {
@@ -9599,7 +9995,7 @@ class _$_CartState extends _CartState {
 
   @override
   String toString() {
-    return 'CartState(cartItems: $cartItems, cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode)';
+    return 'CartState(cartItems: $cartItems, cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, config: $config, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode)';
   }
 
   @override
@@ -9630,6 +10026,7 @@ class _$_CartState extends _CartState {
                 other.isMappingPrice == isMappingPrice) &&
             (identical(other.isUpdatingStock, isUpdatingStock) ||
                 other.isUpdatingStock == isUpdatingStock) &&
+            (identical(other.config, config) || other.config == config) &&
             const DeepCollectionEquality()
                 .equals(other._additionInfo, _additionInfo) &&
             const DeepCollectionEquality().equals(
@@ -9650,6 +10047,7 @@ class _$_CartState extends _CartState {
       isUpserting,
       isMappingPrice,
       isUpdatingStock,
+      config,
       const DeepCollectionEquality().hash(_additionInfo),
       const DeepCollectionEquality().hash(_upsertBonusItemInProgressHashCode));
 
@@ -9673,6 +10071,7 @@ abstract class _CartState extends CartState {
           required final bool isUpserting,
           required final bool isMappingPrice,
           required final bool isUpdatingStock,
+          required final SalesOrganisationConfigs config,
           required final Map<MaterialNumber, ProductMetaData> additionInfo,
           required final List<int> upsertBonusItemInProgressHashCode}) =
       _$_CartState;
@@ -9698,6 +10097,8 @@ abstract class _CartState extends CartState {
   bool get isMappingPrice;
   @override
   bool get isUpdatingStock;
+  @override
+  SalesOrganisationConfigs get config;
   @override
   Map<MaterialNumber, ProductMetaData> get additionInfo;
   @override

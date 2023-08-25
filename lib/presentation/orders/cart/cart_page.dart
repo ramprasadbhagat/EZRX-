@@ -16,7 +16,6 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
-import 'package:ezrxmobile/presentation/core/summary_info_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
@@ -41,6 +40,11 @@ class _CartPageState extends State<CartPage> {
       context.read<CartBloc>().add(
             CartEvent.getDetailsProductsAddedToCart(
               cartProducts: context.read<CartBloc>().state.cartProducts,
+              salesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
+              config: context.read<SalesOrgBloc>().state.configs,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
             ),
           );
       context.read<MaterialPriceBloc>().add(
@@ -60,18 +64,6 @@ class _CartPageState extends State<CartPage> {
                   .where((element) => !element.materialInfo.type.typeBundle)
                   .map((e) => e.materialInfo)
                   .toList(),
-            ),
-          );
-      context.read<CartBloc>().add(
-            CartEvent.updateProductStock(
-              products: context.read<CartBloc>().state.cartProducts,
-              salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-              salesOrganisationConfigs:
-                  context.read<SalesOrgBloc>().state.configs,
             ),
           );
     }
@@ -118,7 +110,6 @@ class _CartPageState extends State<CartPage> {
                   ),
                 );
           }
-         
         },
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
@@ -387,7 +378,7 @@ class _CheckoutSection extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               title: Text(
-                'Order for ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
+                '${"Order for".tr()} ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
                 style: Theme.of(context).textTheme.labelSmall,
               ),
               trailing: const Icon(
@@ -395,6 +386,7 @@ class _CheckoutSection extends StatelessWidget {
                 size: 20,
               ),
             ),
+            _OOSMessage(),
             ListTile(
               dense: true,
               visualDensity: VisualDensity.compact,
@@ -413,27 +405,102 @@ class _CheckoutSection extends StatelessWidget {
                         ),
               ),
             ),
-            SafeArea(
-              child: Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: ElevatedButton(
-                  key: WidgetKeys.checkoutButton,
-                  onPressed: state.isUpdatingStock || state.isUpserting
-                      ? null
-                      : () {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          state.cartProducts.preOrderItemPresentOnCart
-                              ? _showPreOrderModal(context: context)
-                              : context.router
-                                  .pushNamed('orders/cart/checkout');
-                        },
-                  child: const Text('Check out').tr(),
-                ),
+            _CheckoutButton(),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showSumaryInfo(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      useSafeArea: true,
+      builder: (_) {
+        return Wrap(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(
+                20,
+              ),
+              child: Column(
+                children: [
+                  const _SummaryInfo(),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.router.pop();
+                      },
+                      child: Text(
+                        'Close'.tr(),
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  color: ZPColors.white,
+                                ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
+        );
+      },
+    );
+  }
+}
+
+class _CheckoutButton extends StatelessWidget {
+  bool _checkEligibility({
+    required CartState state,
+    required BuildContext context,
+  }) =>
+      state.isEligibleForCheckout(
+        !context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) =>
+          previous.isUpdatingStock != current.isUpdatingStock ||
+          previous.isUpserting != current.isUpserting ||
+          previous.isMappingPrice != current.isMappingPrice ||
+          previous.isFetchingCartProductDetail !=
+              current.isFetchingCartProductDetail,
+      builder: (context, state) {
+        final isFetching = context.read<MaterialPriceBloc>().state.isFetching;
+
+        return SafeArea(
+          child: LoadingShimmer.withChild(
+            enabled: state.isUpdatingStock ||
+                state.isUpserting ||
+                state.isFetchingCartProductDetail ||
+                isFetching ||
+                state.isMappingPrice,
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: ElevatedButton(
+                key: WidgetKeys.checkoutButton,
+                onPressed: !_checkEligibility(state: state, context: context)
+                    ? null
+                    : () {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        state.cartProducts.preOrderItemPresentOnCart
+                            ? _showPreOrderModal(context: context)
+                            : context.router.pushNamed('orders/cart/checkout');
+                      },
+                child: const Text('Check out').tr(),
+              ),
+            ),
+          ),
         );
       },
     );
@@ -469,15 +536,169 @@ class _CheckoutSection extends StatelessWidget {
       },
     );
   }
+}
 
-  void _showSumaryInfo(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      builder: (_) => const SummaryInfoBottomSheet(
-        actionType: SummaryInfoActionType.order,
-      ),
+class _OOSMessage extends StatelessWidget {
+  final message = [
+    'Please remove at items that are out of stock'.tr(),
+    'Please ensure that the order quantity of each item is within order limit'
+        .tr(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) =>
+          (previous.isUpdatingStock != current.isUpdatingStock &&
+              !current.isUpdatingStock) ||
+          (previous.isUpserting != current.isUpserting && !current.isUpserting),
+      builder: (context, state) {
+        final isOOSAllowed = state.isOOSOrderPresent
+            ? !context
+                .read<EligibilityBloc>()
+                .state
+                .doNotAllowOutOfStockMaterials
+            : true;
+
+        return !isOOSAllowed
+            ? Padding(
+                padding: const EdgeInsets.only(
+                  left: 20.0,
+                  right: 20.0,
+                ),
+                child: ListTile(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+                  dense: true,
+                  visualDensity: VisualDensity.compact,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  tileColor: ZPColors.lightRedStatusColor,
+                  title: UnorderedList(
+                    message,
+                  ),
+                ),
+              )
+            : const SizedBox.shrink();
+      },
+    );
+  }
+}
+
+class _SummaryInfo extends StatelessWidget {
+  const _SummaryInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '${"Order for".tr()} ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        Text(
+          '${"Customer code:".tr()} ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo}',
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
+        Text(
+          context
+              .read<CustomerCodeBloc>()
+              .state
+              .customerCodeInfo
+              .fullCustomerAddress,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        Text(
+          '${"Deliver to:".tr()} ${context.read<CustomerCodeBloc>().state.shipToInfo.shipToCustomerCode}',
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
+        Text(
+          context.read<CustomerCodeBloc>().state.shipToInfo.deliveryAddress,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: ZPColors.neutralsBlack,
+              ),
+        ),
+      ],
+    );
+  }
+}
+
+class UnorderedList extends StatelessWidget {
+  const UnorderedList(this.texts, {Key? key}) : super(key: key);
+  final List<String> texts;
+
+  @override
+  Widget build(BuildContext context) {
+    final widgetList = texts
+        .map(
+          (e) => Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              UnorderedListItem(
+                text: e,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+            ],
+          ),
+        )
+        .toList();
+
+    return Column(children: widgetList);
+  }
+}
+
+class UnorderedListItem extends StatelessWidget {
+  const UnorderedListItem({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          '• ',
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        Expanded(
+          child: Text(
+            text,
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall!
+                .copyWith(fontWeight: FontWeight.w400),
+          ),
+        ),
+      ],
     );
   }
 }

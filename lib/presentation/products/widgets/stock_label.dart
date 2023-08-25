@@ -14,7 +14,7 @@ class StockLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final addOosMaterials =
         context.read<SalesOrgBloc>().state.configs.addOosMaterials;
-        
+
     return materialInfo.inStock
         ? const SizedBox.shrink()
         : Container(

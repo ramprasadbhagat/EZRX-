@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -139,7 +140,7 @@ class _ProductDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              const _OrderTag(),
+              _OrderTag(cartItem: cartItem),
             ],
           ),
           Padding(
@@ -181,23 +182,34 @@ class _ProductDetails extends StatelessWidget {
 }
 
 class _OrderTag extends StatelessWidget {
-  const _OrderTag({Key? key}) : super(key: key);
+  const _OrderTag({
+    Key? key,
+    required this.cartItem,
+  }) : super(key: key);
+  final PriceAggregate cartItem;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: const BoxDecoration(
-        color: ZPColors.lightYellow,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Text(
-        'Preorder',
-        style: Theme.of(context)
-            .textTheme
-            .titleSmall
-            ?.copyWith(fontWeight: FontWeight.w500, fontSize: 10),
-      ),
+    return BlocBuilder<CartBloc, CartState>(
+      buildWhen: (previous, current) =>
+          previous.isUpdatingStock != current.isUpdatingStock &&
+          !current.isUpdatingStock,
+      builder: (context, state) {
+        final finalCartItem = state.cartProducts.firstWhere(
+          (element) => element.getMaterialNumber == cartItem.getMaterialNumber,
+          orElse: () => PriceAggregate.empty(),
+        );
+
+        return finalCartItem.inStock ||
+                finalCartItem.stockInfoList.isEmpty ||
+                state.isFetching ||
+                state.isFetchingCartProductDetail
+            ? const SizedBox.shrink()
+            : StatusLabel(
+                status: finalCartItem.productTag,
+                valueColor: finalCartItem.productTag.displayStatusTextColor,
+              );
+      },
     );
   }
 }

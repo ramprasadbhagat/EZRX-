@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -22,7 +23,6 @@ import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
@@ -79,7 +79,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           (cartItemList) {
             emit(
               state.copyWith(
-                cartProducts: cartItemList,
+                cartProducts: cartItemList
+                    .map(
+                      (e) => e.copyWith(
+                        salesOrgConfig: e.salesOrgConfig,
+                      ),
+                    )
+                    .toList(),
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
               ),
@@ -502,14 +508,21 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           (productAddedToCartList) {
             final priceAggregateAddedToCartList = productAddedToCartList
                 .map(
-                  (e) => PriceAggregate.empty().copyWith(
-                    materialInfo: e.materialInfo,
-                    quantity: e.materialInfo.quantity,
-                    salesOrgConfig: e.salesOrgConfig,
-                    bonusSampleItems: e.bonusSampleItems,
-                  ),
+                  (element) => !element.materialInfo.type.typeBundle
+                      ? PriceAggregate.empty().copyWith(
+                          materialInfo: element.materialInfo,
+                          quantity: element.materialInfo.quantity,
+                          salesOrgConfig: element.salesOrgConfig,
+                          bonusSampleItems: element.bonusSampleItems,
+                        )
+                      : PriceAggregate.empty().copyWith(
+                          materialInfo: element.materialInfo,
+                          bundle: element.bundle,
+                          salesOrgConfig: element.salesOrgConfig,
+                        ),
                 )
                 .toList();
+
             emit(
               state.copyWith(
                 cartProducts: priceAggregateAddedToCartList,
@@ -517,20 +530,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 isFetching: false,
               ),
             );
-
-            if (state.cartProducts.isNotEmpty) {
+            if (priceAggregateAddedToCartList.isNotEmpty) {
               add(
                 _GetDetailsProductsAddedToCart(
-                  cartProducts: state.cartProducts,
-                ),
-              );
-
-              add(
-                _UpdateProductStock(
-                  products: state.cartProducts,
-                  salesOrganisationConfigs: e.config,
-                  salesOrganisation: e.salesOrg,
+                  cartProducts: priceAggregateAddedToCartList,
+                  config: e.config,
                   customerCodeInfo: e.customerCodeInfo,
+                  salesOrg: e.salesOrg,
                   shipToInfo: e.shipToInfo,
                 ),
               );
@@ -705,9 +711,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
       getDetailsProductsAddedToCart: (e) async {
+        if (state.isFetchingCartProductDetail) return;
+
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
+            config: e.config,
             isFetchingCartProductDetail: true,
           ),
         );
@@ -749,11 +758,22 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             final newProductInfoMap = Map<MaterialNumber, ProductMetaData>.from(
               state.additionInfo,
             )..addAll(cartProductList);
+
             emit(
               state.copyWith(
                 additionInfo: newProductInfoMap,
                 apiFailureOrSuccessOption: none(),
                 isFetchingCartProductDetail: false,
+              ),
+            );
+
+            add(
+              _UpdateProductStock(
+                products: state.cartProducts,
+                salesOrganisationConfigs: e.config,
+                salesOrganisation: e.salesOrg,
+                customerCodeInfo: e.customerCodeInfo,
+                shipToInfo: e.shipToInfo,
               ),
             );
           },
@@ -765,22 +785,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             isMappingPrice: true,
           ),
         );
+
         final cartProductList = state.cartProducts.map((element) {
+          final productPrice = !element.price.isPriceOverride
+              ? (e.priceProducts[element.materialInfo.materialNumber] ??
+                  Price.empty())
+              : (element.materialInfo.materialNumber ==
+                      e.overriddenProductPrice.materialNumber)
+                  ? e.overriddenProductPrice
+                  : element.price;
+
           element = element.copyWith(
             salesOrgConfig: e.salesOrganisationConfigs,
+            price: productPrice,
           );
-          element = !element.price.isPriceOverride
-              ? element.copyWith(
-                  price: e.priceProducts[element.materialInfo.materialNumber] ??
-                      Price.empty(),
-                )
-              : element;
-          element = element.materialInfo.materialNumber ==
-                  e.overriddenProductPrice.materialNumber
-              ? element.copyWith(
-                  price: e.overriddenProductPrice,
-                )
-              : element;
 
           return element;
         }).toList();
@@ -791,6 +809,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             cartProducts: cartProductList,
           ),
         );
+
         add(
           _VerifyMaterialDealBonus(
             item: PriceAggregate.empty(),
@@ -810,7 +829,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
 
         final failureOrSuccess = await repository.getStockInfoList(
-          items: state.cartProducts.map((e) => e.materialInfo).toList(),
+          items: state.cartProducts
+              .map(
+                (element) => !element.materialInfo.type.typeBundle
+                    ? [element.materialInfo]
+                    : element.bundle.materials,
+              )
+              .expand((element) => element)
+              .toList(),
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisationConfigs: e.salesOrganisationConfigs,
           salesOrganisation: e.salesOrganisation,
@@ -828,11 +854,29 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
           (newStockFetched) {
             final updatedCartStockList = state.cartProducts.map((cartProduct) {
-              return cartProduct.copyWith(
-                stockInfoList:
-                    newStockFetched[cartProduct.materialInfo.materialNumber] ??
-                        <StockInfo>[],
-              );
+              if (!cartProduct.materialInfo.type.typeBundle) {
+                return cartProduct.copyWith(
+                  stockInfoList: newStockFetched[
+                          cartProduct.materialInfo.materialNumber] ??
+                      <StockInfo>[],
+                  salesOrgConfig: e.salesOrganisationConfigs,
+                );
+              } else {
+                final materialInfoList =
+                    List<MaterialInfo>.from(cartProduct.bundle.materials);
+                final updatedMaterialInfoList = materialInfoList.map((info) {
+                  return info.copyWithStock(
+                    stockInfos:
+                        newStockFetched[info.materialNumber] ?? <StockInfo>[],
+                  );
+                }).toList();
+
+                return cartProduct.copyWith(
+                  bundle: cartProduct.bundle.copyWith(
+                    materials: updatedMaterialInfoList,
+                  ),
+                );
+              }
             }).toList();
             emit(
               state.copyWith(

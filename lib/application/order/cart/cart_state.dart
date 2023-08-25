@@ -15,6 +15,7 @@ class CartState with _$CartState {
     required bool isUpserting,
     required bool isMappingPrice,
     required bool isUpdatingStock,
+    required SalesOrganisationConfigs config,
     required Map<MaterialNumber, ProductMetaData> additionInfo,
     required List<int> upsertBonusItemInProgressHashCode,
   }) = _CartState;
@@ -30,6 +31,7 @@ class CartState with _$CartState {
         isUpserting: false,
         isMappingPrice: false,
         isUpdatingStock: false,
+        config: SalesOrganisationConfigs.empty(),
         additionInfo: <MaterialNumber, ProductMetaData>{},
         upsertBonusItemInProgressHashCode: [],
       );
@@ -293,6 +295,20 @@ class CartState with _$CartState {
             : previousValue + element.bundle.materials.length,
       );
 
+  bool get isOOSOrderPresent =>
+      cartProducts.any((element) => element.isAnyOOSItemPresentInCart);
+
+  bool get isBundleQuantitySatisfies => cartProducts
+      .where((element) => element.materialInfo.type.typeBundle)
+      .map((e) => e.bundle)
+      .every(
+        (element) =>
+            getTotalQuantityOfProductBundle(
+              bundleCode: element.bundleCode,
+            ) >=
+            element.minimumQuantityBundleMaterial.quantity,
+      );
+
   bool showManufacturerName(int index) {
     return index == 0 ||
         cartProducts[index]
@@ -323,9 +339,18 @@ class CartState with _$CartState {
         (previousValue, element) => previousValue + element.finalPrice,
       );
 
-  double totalTaxPercent(SalesOrganisationConfigs config) =>
-      config.isMarketEligibleForTaxClassification
-          ? materialLevelFinalPriceWithTaxForFullTax /
-              materialLevelEligibleTotalFinalPrice
-          : config.vatValue.toDouble();
+  String get totalTaxPercent => _totalTaxPercentInDouble
+      .toString()
+      .replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '');
+
+  double get _totalTaxPercentInDouble => config
+          .isMarketEligibleForTaxClassification
+      ? materialLevelFinalPriceWithTaxForFullTax /
+          materialLevelEligibleTotalFinalPrice
+      : config.vatValue.toDouble();
+
+  bool isEligibleForCheckout(bool isOOSOrderEligibleToProceed) =>
+      ((isOOSOrderPresent && isOOSOrderEligibleToProceed) ||
+          !isOOSOrderPresent) &&
+      isBundleQuantitySatisfies;
 }

@@ -91,6 +91,10 @@ class CartEvent with _$CartEvent {
 
   const factory CartEvent.getDetailsProductsAddedToCart({
     required List<PriceAggregate> cartProducts,
+    required SalesOrganisation salesOrg,
+    required SalesOrganisationConfigs config,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
   }) = _GetDetailsProductsAddedToCart;
 
   const factory CartEvent.updatePriceProduct({

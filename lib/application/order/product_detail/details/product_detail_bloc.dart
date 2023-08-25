@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_favourites_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -60,27 +61,92 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (materialInfo) async {
+          (materialInfo) {
             emit(
               state.copyWith(
-                isFetching: false,
                 productDetailAggregate: state.productDetailAggregate.copyWith(
                   materialInfo: materialInfo,
                 ),
               ),
             );
-            if (e.type.typeBundle) return;
-            add(
-              _FetchStock(
-                materialNumber:
-                    state.productDetailAggregate.materialInfo.materialNumber,
-                salesOrganisation: e.salesOrganisation,
-                customerCodeInfo: e.customerCodeInfo,
-                shipToInfo: e.shipToInfo,
-                locale: e.locale,
+            e.type.typeBundle
+                ? add(
+                    _FetchStockForBundle(
+                      materials: materialInfo.bundle.materials,
+                      salesOrganisation: e.salesOrganisation,
+                      customerCodeInfo: e.customerCodeInfo,
+                      shipToInfo: e.shipToInfo,
+                      locale: e.locale,
+                    ),
+                  )
+                : add(
+                    _FetchStock(
+                      materialNumber: state
+                          .productDetailAggregate.materialInfo.materialNumber,
+                      salesOrganisation: e.salesOrganisation,
+                      customerCodeInfo: e.customerCodeInfo,
+                      shipToInfo: e.shipToInfo,
+                      locale: e.locale,
+                    ),
+                  );
+          },
+        );
+      },
+      fetchStockForBundle: (_FetchStockForBundle e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccess = await productDetailRepository.getStockInfoList(
+          materials: e.materials,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+        );
+
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              isFetching: false,
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (stocks) {
+            final materialInfoList =
+                List<MaterialInfo>.from(e.materials).map((material) {
+              final stock = stocks.firstWhere(
+                (element) => element.materialNumber == material.materialNumber,
+                orElse: () => MaterialStockInfo.empty(),
+              );
+
+              return material.copyWithStock(stockInfos: stock.stockInfos);
+            }).toList();
+            emit(
+              state.copyWith(
+                isFetching: false,
+                productDetailAggregate: state.productDetailAggregate.copyWith(
+                  materialInfo:
+                      state.productDetailAggregate.materialInfo.copyWith(
+                    bundle: state.productDetailAggregate.materialInfo.bundle
+                        .copyWith(
+                      materials: materialInfoList,
+                    ),
+                  ),
+                ),
               ),
             );
           },
+        );
+
+        add(
+          _FetchMetaData(
+            salesOrganisation: e.salesOrganisation,
+            customerCodeInfo: e.customerCodeInfo,
+            shipToInfo: e.shipToInfo,
+            locale: e.locale,
+            isForBundle: true,
+          ),
         );
       },
       fetchStock: (_FetchStock e) async {
@@ -113,12 +179,14 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             ),
           ),
         );
+
         add(
           _FetchMetaData(
             salesOrganisation: e.salesOrganisation,
             customerCodeInfo: e.customerCodeInfo,
             shipToInfo: e.shipToInfo,
             locale: e.locale,
+            isForBundle: false,
           ),
         );
       },
@@ -147,14 +215,16 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             ),
           ),
         );
-        add(
-          _FetchSimilarProduct(
-            salesOrganisation: e.salesOrganisation,
-            customerCodeInfo: e.customerCodeInfo,
-            shipToInfo: e.shipToInfo,
-            locale: e.locale,
-          ),
-        );
+        if (!e.isForBundle) {
+          add(
+            _FetchSimilarProduct(
+              salesOrganisation: e.salesOrganisation,
+              customerCodeInfo: e.customerCodeInfo,
+              shipToInfo: e.shipToInfo,
+              locale: e.locale,
+            ),
+          );
+        }
       },
       fetchSimilarProduct: (_FetchSimilarProduct e) async {
         emit(

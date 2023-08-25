@@ -535,16 +535,26 @@ class PriceAggregate with _$PriceAggregate {
       isZdp5DiscountEligible && hasRemainingQuotaReached;
 
   bool get isPreOrder =>
-      stockInfoList.any(
-        (e) => !e.inStock.isMaterialInStock,
-      ) &&
-      salesOrgConfig.addOosMaterials.getOrDefaultValue(false);
+      !inStock && salesOrgConfig.addOosMaterials.getOrDefaultValue(false);
 
   StatusType get productTag => isPreOrder
       ? StatusType('Preorder')
       : !stockInfoList.any((e) => e.inStock.isMaterialInStock)
           ? StatusType('Out of stock')
           : StatusType('');
+
+  bool get inStock =>
+      stockInfoList.any((element) => element.inStock.isMaterialInStock);
+
+  bool get isOOSProduct =>
+      !inStock && !salesOrgConfig.addOosMaterials.getOrDefaultValue(true);
+
+  bool get isAnyOOSItemPresentInCart => materialInfo.type.typeBundle
+      ? bundle.materials.any(
+          (material) => material.stockInfos
+              .any((stock) => !stock.inStock.isMaterialInStock),
+        )
+      : stockInfoList.any((stock) => !stock.inStock.isMaterialInStock);
 }
 
 enum PriceType {
