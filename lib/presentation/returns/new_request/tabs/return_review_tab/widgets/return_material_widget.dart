@@ -33,15 +33,19 @@ class _ReturnMaterialWidget extends StatelessWidget {
                 quantity: detail.returnQuantity.getIntValue,
                 unitPrice: state.returnItemTotal(item.assignmentNumber),
               ),
-              MaterialDetailsSection(
-                data: item,
-                expandable: true,
-              ),
-              _MaterialReturnDetailsSection(
-                detail: detail,
-              ),
-              _BonusItemSection(
-                items: item.bonusItems,
+              ExpandableSection(
+                expanded: true,
+                children: [
+                  MaterialDetailsSection(
+                    data: item,
+                  ),
+                  _MaterialReturnDetailsSection(
+                    detail: detail,
+                  ),
+                  _BonusItemSection(
+                    items: item.bonusItems,
+                  ),
+                ],
               ),
             ],
           ),

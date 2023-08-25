@@ -1,18 +1,29 @@
-part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_tab.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
 
-class _ExpandableSection extends StatefulWidget {
+class ExpandableSection extends StatefulWidget {
   final List<Widget> children;
-  const _ExpandableSection({
+  final bool expanded;
+  const ExpandableSection({
     Key? key,
     required this.children,
+    required this.expanded,
   }) : super(key: key);
 
   @override
-  State<_ExpandableSection> createState() => _ExpandableSectionState();
+  State<ExpandableSection> createState() => _ExpandableSectionState();
 }
 
-class _ExpandableSectionState extends State<_ExpandableSection> {
-  bool _isExpanded = false;
+class _ExpandableSectionState extends State<ExpandableSection> {
+  late bool _isExpanded;
+
+  @override
+  void initState() {
+    super.initState();
+    _isExpanded = widget.expanded;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,11 +56,10 @@ class _ExpandableSectionState extends State<_ExpandableSection> {
             ],
           ),
         ),
-        _isExpanded
-            ? Column(
-                children: widget.children,
-              )
-            : const SizedBox.shrink(),
+        if (_isExpanded)
+          Column(
+            children: widget.children,
+          ),
       ],
     );
   }

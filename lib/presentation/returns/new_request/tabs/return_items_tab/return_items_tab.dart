@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_info.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +24,6 @@ import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_qua
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/product_image_with_label.dart';
 
 part 'widgets/return_material_widget.dart';
-part 'widgets/expandable_section.dart';
 part 'widgets/return_material_info.dart';
 part 'widgets/bonus_item_section.dart';
 

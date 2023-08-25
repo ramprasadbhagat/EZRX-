@@ -51,18 +51,10 @@ class BalanceTextRow extends StatelessWidget {
           Expanded(
             flex: keyFlex,
             child: Text(
-              keyText,
+              isStatus ? keyText : '$keyText: ',
               style: keyStyle,
             ),
           ),
-          if (!isStatus)
-            Text(
-              ': ',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall
-                  ?.copyWith(color: keyTextStyle?.color),
-            ),
           isStatus
               ? Row(
                   mainAxisSize: MainAxisSize.min,

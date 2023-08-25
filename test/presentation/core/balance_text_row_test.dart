@@ -79,20 +79,7 @@ void main() {
           expect(valueTextLoading, findsOneWidget);
         },
       );
-      testWidgets(
-        "Found the colour of ':' in Balance Text Row",
-        (tester) async {
-          await tester.pumpWidget(getWidget());
-          await tester.pump();
-          final semicolon = find.text(
-            ': ',
-          );
-          expect(
-            (tester.widget(semicolon) as Text).style?.color,
-            ZPColors.white,
-          );
-        },
-      );
+
       testWidgets(
         'Found widgets while isStatus is true in Balance Text Row',
         (tester) async {

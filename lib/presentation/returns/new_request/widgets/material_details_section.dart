@@ -22,24 +22,28 @@ class MaterialDetailsSection extends StatelessWidget {
         children: [
           BalanceTextRow(
             keyText: 'Principal code'.tr(),
+            keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,
             valueFlex: 3,
             valueText: data.principalCode.getOrDefaultValue(''),
           ),
           BalanceTextRow(
             keyText: 'Principal name'.tr(),
+            keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,
             valueFlex: 3,
             valueText: data.principalName.name,
           ),
           BalanceTextRow(
             keyText: 'Invoice number'.tr(),
+            keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,
             valueFlex: 3,
             valueText: data.assignmentNumber,
           ),
           BalanceTextRow(
             keyText: 'Invoice date'.tr(),
+            keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,
             valueFlex: 3,
             valueText: data.priceDate.dateString,

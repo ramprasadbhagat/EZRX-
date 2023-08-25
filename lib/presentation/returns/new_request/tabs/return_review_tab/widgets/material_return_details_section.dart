@@ -11,11 +11,11 @@ class _MaterialReturnDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpandableInfo(
       labelText: 'Return details'.tr(),
-      expandable: false,
       child: Column(
         children: [
           BalanceTextRow(
             keyText: 'Reason'.tr(),
+            keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,
             valueFlex: 3,
             valueText: context
@@ -26,6 +26,7 @@ class _MaterialReturnDetailsSection extends StatelessWidget {
           ),
           BalanceTextRow(
             keyText: 'Comments'.tr(),
+            keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,
             valueFlex: 3,
             valueText: detail.remarks.displayText,
@@ -61,6 +62,7 @@ class _UploadedFileList extends StatelessWidget {
           children: [
             BalanceTextRow(
               keyText: 'Attachments'.tr(),
+              keyTextStyle: Theme.of(context).textTheme.titleSmall,
               keyFlex: 2,
               valueFlex: 3,
               valueText: uploadedFiles.isEmpty ? '-' : '',
