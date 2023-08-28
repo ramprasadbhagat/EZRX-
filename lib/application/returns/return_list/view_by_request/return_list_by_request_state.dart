@@ -18,6 +18,6 @@ class ReturnListByRequestState with _$ReturnListByRequestState {
         canLoadMore: true,
         returnItemList: <ReturnItem>[],
         appliedFilter: ReturnFilter.empty(),
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.searchFilter(''),
       );
 }

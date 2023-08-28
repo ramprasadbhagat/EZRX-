@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -10,6 +11,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_list_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rxdart/rxdart.dart';
 
 part 'return_list_by_request_event.dart';
 part 'return_list_by_request_state.dart';
@@ -24,16 +26,31 @@ class ReturnListByRequestBloc
   ReturnListByRequestBloc({
     required this.returnListRepository,
   }) : super(ReturnListByRequestState.initial()) {
-    on<ReturnListByRequestEvent>(_onEvent);
-  }
-
-  Future<void> _onEvent(
-    ReturnListByRequestEvent event,
-    Emitter<ReturnListByRequestState> emit,
-  ) async {
-    await event.map(
-      initialized: (_) async => emit(ReturnListByRequestState.initial()),
-      fetch: (e) async {
+    on<_Initialized>((event, emit) => emit(ReturnListByRequestState.initial()));
+    on<_AutoSearchProduct>(
+      (e, emit) {
+        if (e.searchKey == state.searchKey) return;
+        if (e.searchKey.isValid()) {
+          add(
+            _Fetch(
+              customerCodeInfo: e.customerCodeInfo,
+              salesOrg: e.salesOrg,
+              shipInfo: e.shipInfo,
+              user: e.user,
+              appliedFilter: e.appliedFilter,
+              searchKey: e.searchKey,
+            ),
+          );
+        } else {
+          emit(state.copyWith(searchKey: e.searchKey));
+        }
+      },
+      transformer: (events, mapper) => events
+          .debounceTime(const Duration(milliseconds: 1500))
+          .asyncExpand(mapper),
+    );
+    on<_Fetch>(
+      (e, emit) async {
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
@@ -77,7 +94,10 @@ class ReturnListByRequestBloc
           },
         );
       },
-      loadMore: (e) async {
+      transformer: restartable(),
+    );
+    on<_LoadMore>(
+      (e, emit) async {
         if (state.isFetching || !state.canLoadMore) return;
         emit(
           state.copyWith(
@@ -120,6 +140,7 @@ class ReturnListByRequestBloc
           },
         );
       },
+      transformer: restartable(),
     );
   }
 }

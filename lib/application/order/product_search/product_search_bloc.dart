@@ -33,6 +33,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
       : super(ProductSearchState.initial()) {
     on<_AutoSearchProduct>(
       (e, emit) {
+        if (e.searchKey == state.searchKey) return;
         if (e.searchKey.isValid()) {
           add(
             _SearchProduct(
@@ -54,7 +55,6 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
 
     on<_SearchProduct>(
       (e, emit) async {
-        if (e.searchKey.isNotEmpty && e.searchKey == state.searchKey) return;
         emit(
           state.copyWith(
             searchKey: e.searchKey,

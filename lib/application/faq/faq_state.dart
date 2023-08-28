@@ -30,12 +30,12 @@ class FaqState with _$FaqState {
           .toList();
 
   List<FAQItem> get getSearchedFaqList {
-    if (!searchKey.isNotEmpty) {
+    if (!searchKey.validateNotEmpty) {
       return selectedFaqItem;
     }
 
     final searchTerm = searchKey.getOrDefaultValue('').toLowerCase();
-    
+
     return selectedFaqItem
         .where(
           (element) =>
@@ -46,5 +46,5 @@ class FaqState with _$FaqState {
   }
 
   bool get showCategoryChip =>
-      getSearchedFaqList.isNotEmpty || searchKey.isNotEmpty;
+      getSearchedFaqList.isNotEmpty || searchKey.validateNotEmpty;
 }

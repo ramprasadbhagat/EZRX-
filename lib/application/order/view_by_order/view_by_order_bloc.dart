@@ -29,6 +29,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
     );
     on<_AutoSearchProduct>(
       (e, emit) {
+        if (e.searchKey == state.searchKey) return;
         if (e.searchKey.isValid()) {
           add(
             _Fetch(
@@ -53,7 +54,6 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
     );
     on<_Fetch>(
       (e, emit) async {
-        if (e.searchKey.isNotEmpty && e.searchKey == state.searchKey) return;
         emit(
           state.copyWith(
             isFetching: true,

@@ -27,10 +27,10 @@ class ReturnApproverFilterState with _$ReturnApproverFilterState {
   }
 
   bool get anyFilterApplied =>
-      approverReturnFilter.returnId.isNotEmpty ||
-      approverReturnFilter.createdBy.isNotEmpty ||
-      approverReturnFilter.shipTo.isNotEmpty ||
-      approverReturnFilter.soldTo.isNotEmpty ||
+      approverReturnFilter.returnId.validateNotEmpty ||
+      approverReturnFilter.createdBy.validateNotEmpty ||
+      approverReturnFilter.shipTo.validateNotEmpty ||
+      approverReturnFilter.soldTo.validateNotEmpty ||
       _dateFilterApplied;
 
   List<FilterStatus> get sortParameters =>

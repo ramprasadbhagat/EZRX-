@@ -318,7 +318,7 @@ class _SearchBar extends StatelessWidget {
               return _OrderSearchBar(
                 isFromViewByOrder: isFromViewByOrder,
                 isFetching: state.isFetching,
-                searchText: state.searchKey.getOrDefaultValue(''),
+                searchText: state.searchKey.searchValueOrEmpty,
               );
             },
           )
@@ -329,7 +329,7 @@ class _SearchBar extends StatelessWidget {
               return _OrderSearchBar(
                 isFromViewByOrder: isFromViewByOrder,
                 isFetching: state.isFetching,
-                searchText: state.searchKey.getOrDefaultValue(''),
+                searchText: state.searchKey.searchValueOrEmpty,
               );
             },
           );

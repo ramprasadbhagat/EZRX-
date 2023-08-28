@@ -72,7 +72,7 @@ class FAQPage extends StatelessWidget {
                 state.showCategoryChip
                     ? const _CategoryChip()
                     : const SizedBox.shrink(),
-                state.searchKey.isNotEmpty
+                state.searchKey.validateNotEmpty
                     ? Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 16.0,

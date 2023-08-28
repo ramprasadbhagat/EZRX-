@@ -44,7 +44,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_hea
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
@@ -961,29 +960,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               custCode: customerCodeInfo.customerCodeSoldTo,
               salesOrg:
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
-            ),
-          );
-
-      context.read<ReturnListByItemBloc>().add(
-            ReturnListByItemEvent.fetch(
-              salesOrg:
-                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
-              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-              customerCodeInfo: customerCodeInfo,
-              user: user,
-              appliedFilter: ReturnFilter.empty(),
-              searchKey: SearchKey(''),
-            ),
-          );
-      context.read<ReturnListByRequestBloc>().add(
-            ReturnListByRequestEvent.fetch(
-              salesOrg:
-                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
-              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-              customerCodeInfo: customerCodeInfo,
-              user: user,
-              appliedFilter: ReturnFilter.empty(),
-              searchKey: SearchKey(''),
             ),
           );
     } else {

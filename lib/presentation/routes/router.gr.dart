@@ -137,7 +137,7 @@ import '../returns/policy_configuration/add_policy_configuration.dart' as _i19;
 import '../returns/policy_configuration/policy_configuration.dart' as _i18;
 import '../returns/return_list/return_by_item_page.dart' as _i77;
 import '../returns/return_list/return_by_request_page.dart' as _i78;
-import '../returns/return_list/return_root.dart' as _i37;
+import '../returns/return_list/return_root/return_root.dart' as _i37;
 import '../returns/return_summary_by_item_details/return_summary_by_item_details.dart'
     as _i60;
 import '../returns/return_summary_request_details/return_request_details.dart'

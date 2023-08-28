@@ -45,9 +45,10 @@ class _BodyContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductSearchBloc, ProductSearchState>(
       buildWhen: (previous, current) =>
-          previous.searchKey.isNotEmpty != current.searchKey.isNotEmpty,
+          previous.searchKey.validateNotEmpty !=
+          current.searchKey.validateNotEmpty,
       builder: (context, state) {
-        return state.searchKey.isNotEmpty
+        return state.searchKey.validateNotEmpty
             ? const _ProductSuggestionSection()
             : const _ProductSearchHistorySuggestionSection();
       },
@@ -75,7 +76,7 @@ class _ProductSearchSection extends StatelessWidget {
           child: CustomSearchBar(
             key: WidgetKeys.genericKey(key: state.searchKey.searchValueOrEmpty),
             autofocus: true,
-            initialValue: state.searchKey.getOrDefaultValue(''),
+            initialValue: state.searchKey.searchValueOrEmpty,
             enabled: !state.isSearching,
             onSearchChanged: (value) => context.read<ProductSearchBloc>().add(
                   ProductSearchEvent.autoSearchProduct(

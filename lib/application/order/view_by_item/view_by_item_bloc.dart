@@ -30,6 +30,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
     on<_Initialized>((event, emit) => emit(ViewByItemsState.initial()));
     on<_AutoSearchProduct>(
       (e, emit) {
+        if (e.searchKey == state.searchKey) return;
         if (e.searchKey.isValid()) {
           add(
             _Fetch(
@@ -51,7 +52,6 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
     );
     on<_Fetch>(
       (e, emit) async {
-        if (e.searchKey.isNotEmpty && e.searchKey == state.searchKey) return;
         emit(
           state.copyWith(
             isFetching: true,
