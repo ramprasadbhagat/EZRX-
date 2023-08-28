@@ -256,7 +256,7 @@ void main() {
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
             configs: SalesOrganisationConfigs.empty().copyWith(
-              disablePaymentTermsDisplay: false,
+              enablePaymentTerms: true,
             ),
             salesOrganisation: SalesOrganisation.empty().copyWith(
               salesOrg: SalesOrg('2001'),
@@ -277,7 +277,7 @@ void main() {
     );
 
     testWidgets(
-      '=> test Payment Terms Display enabled',
+      '=> test Payment Terms disabled',
       (tester) async {
         when(() => additionalDetailsBlocMock.state).thenReturn(
           AdditionalDetailsState.initial().copyWith(
@@ -292,7 +292,7 @@ void main() {
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
             configs: SalesOrganisationConfigs.empty().copyWith(
-              disablePaymentTermsDisplay: true,
+              enablePaymentTerms: false,
             ),
             salesOrganisation: SalesOrganisation.empty().copyWith(
               salesOrg: SalesOrg('2001'),

@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/attachment_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -96,21 +97,21 @@ class OrderHeaderSection extends StatelessWidget {
                               ),
                     )
                   : const SizedBox.shrink(),
-              config.enablePaymentTerms
-                  ? BalanceTextRow(
-                      keyText: 'Payment Term'.tr(),
-                      valueText: orderDetails
-                          .orderHistoryDetailsPaymentTerm.displayPaymentTerm,
-                      keyTextStyle:
-                          Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: ZPColors.white,
-                              ),
-                      valueTextStyle:
-                          Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: ZPColors.white,
-                              ),
-                    )
-                  : const SizedBox.shrink(),
+              if (!config.disablePaymentTermsDisplay)
+                BalanceTextRow(
+                  key: WidgetKeys.paymentTermKey,
+                  keyText: 'Payment Term'.tr(),
+                  valueText: orderDetails
+                      .orderHistoryDetailsPaymentTerm.displayPaymentTerm,
+                  keyTextStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                  valueTextStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                ),
               config.enableMobileNumber
                   ? BalanceTextRow(
                       keyText: 'Contact person'.tr(),

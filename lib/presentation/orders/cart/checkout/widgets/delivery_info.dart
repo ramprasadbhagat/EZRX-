@@ -129,14 +129,13 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                               const SizedBox(
                                 height: 16,
                               ),
-                              !config.disablePaymentTermsDisplay
-                                  ? _PaymentTerm(
-                                      deliveryInfoData: state.deliveryInfoData,
-                                      focusNode: widget.focusNodes[
-                                              DeliveryInfoLabel.paymentTerm] ??
-                                          FocusNode(),
-                                    )
-                                  : const SizedBox.shrink(),
+                              if (config.enablePaymentTerms)
+                                _PaymentTerm(
+                                  deliveryInfoData: state.deliveryInfoData,
+                                  focusNode: widget.focusNodes[
+                                          DeliveryInfoLabel.paymentTerm] ??
+                                      FocusNode(),
+                                ),
                               const SizedBox(
                                 height: 16,
                               ),

@@ -12,6 +12,7 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -196,6 +197,63 @@ void main() {
       final viewByOrderDetailsPageListView =
           find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
       expect(viewByOrderDetailsPageListView, findsNothing);
+    });
+
+    testWidgets('test when disablePaymentTermsDisplay enabled', (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+        ),
+      );
+
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            disablePaymentTermsDisplay: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final viewByOrderDetailsPageListView =
+          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      expect(viewByOrderDetailsPageListView, findsOneWidget);
+
+      final paymentTermsSection = find.byKey(
+        WidgetKeys.paymentTermKey,
+      );
+      expect(paymentTermsSection, findsNothing);
+    });
+
+    testWidgets('test when disablePaymentTermsDisplay disabled',
+        (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+        ),
+      );
+
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            disablePaymentTermsDisplay: false,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final viewByOrderDetailsPageListView =
+          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      expect(viewByOrderDetailsPageListView, findsOneWidget);
+
+      final paymentTermsSection = find.byKey(
+        WidgetKeys.paymentTermKey,
+      );
+      expect(paymentTermsSection, findsOneWidget);
     });
   });
 }
