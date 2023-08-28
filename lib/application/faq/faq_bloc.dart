@@ -57,7 +57,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
               isFetching: false,
               apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
               selectedCategory: FAQCategory('All'),
-              searchKey: SearchKey(''),
+              searchKey: SearchKey.searchFilter(''),
               canLoadMore: faqInfo.faqList.length > _pageSize,
             ),
           ),
@@ -87,13 +87,10 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
             ),
           ),
           (faqInfo) {
-            final newFAQList = List<FAQItem>.from(
-              state.faqInfo.faqList,
-            )..addAll(faqInfo.faqList);
             emit(
               state.copyWith(
                 faqInfo: faqInfo.copyWith(
-                  faqList: newFAQList,
+                  faqList: [...state.faqInfo.faqList, ...faqInfo.faqList],
                 ),
                 canLoadMore: faqInfo.faqList.length >= _pageSize,
                 isFetching: false,
@@ -106,14 +103,15 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
       filterByFaqCategory: (e) {
         emit(
           state.copyWith(
-            selectedCategory: FAQCategory(e.selectedCategory.getOrDefaultValue('')),
+            selectedCategory:
+                FAQCategory(e.selectedCategory.getOrDefaultValue('')),
           ),
         );
       },
       updatedSearchFaq: (e) {
         emit(
           state.copyWith(
-            searchKey: SearchKey(e.searchKey),
+            searchKey: SearchKey.searchFilter(e.searchKey),
           ),
         );
       },

@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/faq/entity/faq_item.dart';
 import 'package:ezrxmobile/domain/faq/value/value_object.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/faq/faq_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -48,8 +48,7 @@ class FAQPage extends StatelessWidget {
         body: BlocBuilder<FaqBloc, FaqState>(
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching ||
-              previous.getSearchedFaqList != current.getSearchedFaqList ||
-              previous.searchKey != current.searchKey,
+              previous.getSearchedFaqList != current.getSearchedFaqList,
           builder: (context, state) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,

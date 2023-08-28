@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 //Please note use this widget instead of SearchBar
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({
-    required this.onSearchChanged,
     Key? key,
+    this.onSearchChanged,
     this.searchIconKey,
     required this.clearIconKey,
     required this.enabled,
@@ -26,7 +26,7 @@ class CustomSearchBar extends StatelessWidget {
   final void Function() onClear;
   final Key? searchIconKey;
   final Key clearIconKey;
-  final void Function(String) onSearchChanged;
+  final void Function(String)? onSearchChanged;
   final List<TextInputFormatter>? inputFormatters;
   final String hintText;
   final String initialValue;
@@ -45,7 +45,7 @@ class CustomSearchBar extends StatelessWidget {
       initialValue: initialValue,
       onChanged: (value) {
         valueText = value;
-        onSearchChanged.call(value);
+        onSearchChanged?.call(value);
       },
       onFieldSubmitted: (value) => _onSearch(context, value),
       inputFormatters: inputFormatters,
