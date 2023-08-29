@@ -41,7 +41,7 @@ class CustomerCodeState with _$CustomerCodeState {
 
   String get displayShipTo => customerCodeInfo == CustomerCodeInfo.empty()
       ? 'NA'
-      : defaultShipToInfo.deliveryAddress;
+      : defaultShipToInfo.fullDeliveryAddress;
 
   bool get haveShipTo => shipToInfo != ShipToInfo.empty();
 

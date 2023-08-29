@@ -3,7 +3,9 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -47,6 +49,29 @@ void main() {
     shipToInfos: [
       ShipToInfo.empty().copyWith(
         shipToCustomerCode: '00001235',
+      )
+    ],
+  );
+
+  final fakeCustomerInfo3 = CustomerCodeInfo.empty().copyWith(
+    shipToInfos: [
+      ShipToInfo.empty().copyWith(
+        shipToName: ShipToName.empty().copyWith(
+          name1: 'test-name-1',
+          name2: 'test-name-2',
+          name3: 'test-name-3',
+          name4: 'test-name-4',
+        ),
+        shipToAddress: ShipToAddress.empty().copyWith(
+          city1: 'test-city-1',
+          city2: 'test-city-2',
+          street2: 'test-street-2',
+          street3: 'test-street-3',
+          street4: 'test-street-4',
+          street5: 'test-street-5',
+          street: 'test-street',
+        ),
+        postalCode: 'test-postal-code',
       )
     ],
   );
@@ -210,6 +235,25 @@ void main() {
         locator<AppRouter>().current.route.name,
         CustomerSearchPageRoute.name,
       );
+    });
+
+    testWidgets('Validate if delivery address is displayed in correct format',
+        (tester) async {
+      when(() => mockCustomerCodeBloc.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeInfo: fakeCustomerInfo3,
+        ),
+      );
+
+      await getWidget(tester);
+      await tester.pump();
+
+      final deliveryAddress = find.text(
+        'test-name-1 test-name-2 test-name-3 test-name-4test-street test-street-2 test-street-3 test-street-4 test-street-5, test-city-2, test-city-1 test-postal-code',
+      );
+
+      expect(deliveryAddress, findsOneWidget);
     });
   });
 }
