@@ -99,6 +99,7 @@ enum PriceStyle {
   taxPrice,
   totalPrice,
   summaryPrice,
+  grandTotalPrice,
 }
 
 TextStyle _priceStyle(BuildContext context, PriceStyle type) {
@@ -133,6 +134,10 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
             fontSize: 14,
             color: ZPColors.neutralsBlack,
           );
+    case PriceStyle.grandTotalPrice:
+      return Theme.of(context).textTheme.labelMedium!.copyWith(
+            color: ZPColors.neutralsBlack,
+          );
     default:
       return Theme.of(context).textTheme.labelSmall!.copyWith(
             color: ZPColors.black,
@@ -164,6 +169,10 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.totalPrice:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             color: ZPColors.black,
+          );
+    case PriceStyle.grandTotalPrice:
+      return Theme.of(context).textTheme.titleMedium!.copyWith(
+            color: ZPColors.neutralsBlack,
           );
     default:
       return Theme.of(context)

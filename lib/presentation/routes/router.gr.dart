@@ -126,7 +126,8 @@ import '../products/products_tab.dart' as _i71;
 import '../returns/add_edit_user_restrictions.dart' as _i36;
 import '../returns/approver_actions/approver_actions.dart' as _i16;
 import '../returns/new_request/new_request_page.dart' as _i66;
-import '../returns/new_request/new_request_successful_page.dart' as _i67;
+import '../returns/new_request/new_request_success/new_request_successful_page.dart'
+    as _i67;
 import '../returns/new_request/tabs/return_details_tab/return_details_tab.dart'
     as _i85;
 import '../returns/new_request/tabs/return_items_tab/return_items_tab.dart'

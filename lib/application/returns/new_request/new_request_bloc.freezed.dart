@@ -2064,6 +2064,7 @@ mixin _$NewRequestState {
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, String>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
+  String get returnRequestId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewRequestStateCopyWith<NewRequestState> get copyWith =>
@@ -2083,7 +2084,8 @@ abstract class $NewRequestStateCopyWith<$Res> {
       String specialInstructions,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<ApiFailure, String>> failureOrSuccessOption});
+      Option<Either<ApiFailure, String>> failureOrSuccessOption,
+      String returnRequestId});
 }
 
 /// @nodoc
@@ -2106,6 +2108,7 @@ class _$NewRequestStateCopyWithImpl<$Res, $Val extends NewRequestState>
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? failureOrSuccessOption = null,
+    Object? returnRequestId = null,
   }) {
     return _then(_value.copyWith(
       selectedItems: null == selectedItems
@@ -2136,6 +2139,10 @@ class _$NewRequestStateCopyWithImpl<$Res, $Val extends NewRequestState>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, String>>,
+      returnRequestId: null == returnRequestId
+          ? _value.returnRequestId
+          : returnRequestId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -2155,7 +2162,8 @@ abstract class _$$_NewRequestStateCopyWith<$Res>
       String specialInstructions,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<ApiFailure, String>> failureOrSuccessOption});
+      Option<Either<ApiFailure, String>> failureOrSuccessOption,
+      String returnRequestId});
 }
 
 /// @nodoc
@@ -2176,6 +2184,7 @@ class __$$_NewRequestStateCopyWithImpl<$Res>
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? failureOrSuccessOption = null,
+    Object? returnRequestId = null,
   }) {
     return _then(_$_NewRequestState(
       selectedItems: null == selectedItems
@@ -2206,6 +2215,10 @@ class __$$_NewRequestStateCopyWithImpl<$Res>
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, String>>,
+      returnRequestId: null == returnRequestId
+          ? _value.returnRequestId
+          : returnRequestId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -2220,7 +2233,8 @@ class _$_NewRequestState extends _NewRequestState {
       required this.specialInstructions,
       required this.showErrorMessages,
       required this.isSubmitting,
-      required this.failureOrSuccessOption})
+      required this.failureOrSuccessOption,
+      required this.returnRequestId})
       : _selectedItems = selectedItems,
         _invoiceDetails = invoiceDetails,
         super._();
@@ -2251,10 +2265,12 @@ class _$_NewRequestState extends _NewRequestState {
   final bool isSubmitting;
   @override
   final Option<Either<ApiFailure, String>> failureOrSuccessOption;
+  @override
+  final String returnRequestId;
 
   @override
   String toString() {
-    return 'NewRequestState(selectedItems: $selectedItems, invoiceDetails: $invoiceDetails, returnReference: $returnReference, specialInstructions: $specialInstructions, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'NewRequestState(selectedItems: $selectedItems, invoiceDetails: $invoiceDetails, returnReference: $returnReference, specialInstructions: $specialInstructions, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, failureOrSuccessOption: $failureOrSuccessOption, returnRequestId: $returnRequestId)';
   }
 
   @override
@@ -2275,7 +2291,9 @@ class _$_NewRequestState extends _NewRequestState {
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
-                other.failureOrSuccessOption == failureOrSuccessOption));
+                other.failureOrSuccessOption == failureOrSuccessOption) &&
+            (identical(other.returnRequestId, returnRequestId) ||
+                other.returnRequestId == returnRequestId));
   }
 
   @override
@@ -2287,7 +2305,8 @@ class _$_NewRequestState extends _NewRequestState {
       specialInstructions,
       showErrorMessages,
       isSubmitting,
-      failureOrSuccessOption);
+      failureOrSuccessOption,
+      returnRequestId);
 
   @JsonKey(ignore: true)
   @override
@@ -2304,8 +2323,8 @@ abstract class _NewRequestState extends NewRequestState {
       required final String specialInstructions,
       required final bool showErrorMessages,
       required final bool isSubmitting,
-      required final Option<Either<ApiFailure, String>>
-          failureOrSuccessOption}) = _$_NewRequestState;
+      required final Option<Either<ApiFailure, String>> failureOrSuccessOption,
+      required final String returnRequestId}) = _$_NewRequestState;
   const _NewRequestState._() : super._();
 
   @override
@@ -2322,6 +2341,8 @@ abstract class _NewRequestState extends NewRequestState {
   bool get isSubmitting;
   @override
   Option<Either<ApiFailure, String>> get failureOrSuccessOption;
+  @override
+  String get returnRequestId;
   @override
   @JsonKey(ignore: true)
   _$$_NewRequestStateCopyWith<_$_NewRequestState> get copyWith =>

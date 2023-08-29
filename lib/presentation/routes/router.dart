@@ -59,7 +59,7 @@ import 'package:ezrxmobile/presentation/products/bundle_details/bundle_detail_pa
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/new_request_page.dart';
-import 'package:ezrxmobile/presentation/returns/new_request/new_request_successful_page.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/new_request_success/new_request_successful_page.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/return_details_tab.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_tab.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/return_review_tab.dart';

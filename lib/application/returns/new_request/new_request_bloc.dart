@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -226,10 +227,19 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
           ),
         );
 
-        emit(
-          state.copyWith(
-            failureOrSuccessOption: optionOf(failureOrSuccess),
-            isSubmitting: false,
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+              isSubmitting: false,
+            ),
+          ),
+          (requestID) => emit(
+            state.copyWith(
+              failureOrSuccessOption: none(),
+              isSubmitting: false,
+              returnRequestId: requestID,
+            ),
           ),
         );
       },

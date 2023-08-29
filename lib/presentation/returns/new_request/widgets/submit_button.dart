@@ -9,7 +9,8 @@ class _SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<NewRequestBloc, NewRequestState>(
       listenWhen: (previous, current) =>
-          previous.failureOrSuccessOption != current.failureOrSuccessOption,
+          previous.isSubmitting != current.isSubmitting &&
+          !current.isSubmitting,
       listener: (context, state) {
         state.failureOrSuccessOption.fold(
           () {},

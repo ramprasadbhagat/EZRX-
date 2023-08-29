@@ -124,7 +124,8 @@ dev_dependencies:
 
 
 dependency_overrides:
-  ffi: ^2.0.1
+  #ffi is error with 2.1.0 version
+  ffi: 2.0.1
   flutter_svg: ^1.1.6
 
 

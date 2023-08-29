@@ -11,6 +11,7 @@ class NewRequestState with _$NewRequestState {
     required bool showErrorMessages,
     required bool isSubmitting,
     required Option<Either<ApiFailure, String>> failureOrSuccessOption,
+    required String returnRequestId,
   }) = _NewRequestState;
 
   factory NewRequestState.initial() => NewRequestState(
@@ -21,6 +22,7 @@ class NewRequestState with _$NewRequestState {
         returnReference: '',
         specialInstructions: '',
         failureOrSuccessOption: none(),
+        returnRequestId: '',
       );
 
   bool get isSelectedItemsValid => selectedItems
@@ -91,4 +93,10 @@ class NewRequestState with _$NewRequestState {
               getUnitPrice(item.itemNumber),
             ),
       );
+
+  double _returnTax(SalesOrganisationConfigs config) =>
+      returnTotal * config.vatValue / 100;
+
+  double returnSubtotalWithTax(SalesOrganisationConfigs config) =>
+      returnTotal + _returnTax(config);
 }
