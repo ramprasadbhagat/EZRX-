@@ -31,7 +31,7 @@ mixin _$MaterialFilterEvent {
         updateSelectedMaterialFilter,
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
-    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() search,
     required TResult Function() resetFilter,
   }) =>
@@ -51,7 +51,7 @@ mixin _$MaterialFilterEvent {
         updateSelectedMaterialFilter,
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) =>
@@ -71,7 +71,7 @@ mixin _$MaterialFilterEvent {
         updateSelectedMaterialFilter,
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
@@ -188,7 +188,7 @@ class _$_Initialized implements _Initialized {
         updateSelectedMaterialFilter,
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
-    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
@@ -211,7 +211,7 @@ class _$_Initialized implements _Initialized {
         updateSelectedMaterialFilter,
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
@@ -234,7 +234,7 @@ class _$_Initialized implements _Initialized {
         updateSelectedMaterialFilter,
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
@@ -482,7 +482,7 @@ class _$_fetch implements _fetch {
         updateSelectedMaterialFilter,
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
-    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
@@ -506,7 +506,7 @@ class _$_fetch implements _fetch {
         updateSelectedMaterialFilter,
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
@@ -530,7 +530,7 @@ class _$_fetch implements _fetch {
         updateSelectedMaterialFilter,
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
@@ -703,7 +703,7 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
         updateSelectedMaterialFilter,
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
-    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
@@ -726,7 +726,7 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
         updateSelectedMaterialFilter,
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
@@ -749,7 +749,7 @@ class _$_updateSelectedMaterialFilter implements _updateSelectedMaterialFilter {
         updateSelectedMaterialFilter,
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
@@ -918,7 +918,7 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
         updateSelectedMaterialFilter,
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
-    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
@@ -941,7 +941,7 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
         updateSelectedMaterialFilter,
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
@@ -964,7 +964,7 @@ class _$_initSelectedMaterialFilter implements _initSelectedMaterialFilter {
         updateSelectedMaterialFilter,
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
@@ -1045,7 +1045,7 @@ abstract class _$$_updateSearchKeyCopyWith<$Res> {
           _$_updateSearchKey value, $Res Function(_$_updateSearchKey) then) =
       __$$_updateSearchKeyCopyWithImpl<$Res>;
   @useResult
-  $Res call({String searchkey});
+  $Res call({String searchKey});
 }
 
 /// @nodoc
@@ -1059,12 +1059,12 @@ class __$$_updateSearchKeyCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchkey = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_updateSearchKey(
-      null == searchkey
-          ? _value.searchkey
-          : searchkey // ignore: cast_nullable_to_non_nullable
+      null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1073,14 +1073,14 @@ class __$$_updateSearchKeyCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_updateSearchKey implements _updateSearchKey {
-  const _$_updateSearchKey(this.searchkey);
+  const _$_updateSearchKey(this.searchKey);
 
   @override
-  final String searchkey;
+  final String searchKey;
 
   @override
   String toString() {
-    return 'MaterialFilterEvent.updateSearchKey(searchkey: $searchkey)';
+    return 'MaterialFilterEvent.updateSearchKey(searchKey: $searchKey)';
   }
 
   @override
@@ -1088,12 +1088,12 @@ class _$_updateSearchKey implements _updateSearchKey {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_updateSearchKey &&
-            (identical(other.searchkey, searchkey) ||
-                other.searchkey == searchkey));
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, searchkey);
+  int get hashCode => Object.hash(runtimeType, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -1117,11 +1117,11 @@ class _$_updateSearchKey implements _updateSearchKey {
         updateSelectedMaterialFilter,
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
-    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
-    return updateSearchKey(searchkey);
+    return updateSearchKey(searchKey);
   }
 
   @override
@@ -1140,11 +1140,11 @@ class _$_updateSearchKey implements _updateSearchKey {
         updateSelectedMaterialFilter,
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
-    return updateSearchKey?.call(searchkey);
+    return updateSearchKey?.call(searchKey);
   }
 
   @override
@@ -1163,13 +1163,13 @@ class _$_updateSearchKey implements _updateSearchKey {
         updateSelectedMaterialFilter,
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
     if (updateSearchKey != null) {
-      return updateSearchKey(searchkey);
+      return updateSearchKey(searchKey);
     }
     return orElse();
   }
@@ -1228,9 +1228,9 @@ class _$_updateSearchKey implements _updateSearchKey {
 }
 
 abstract class _updateSearchKey implements MaterialFilterEvent {
-  const factory _updateSearchKey(final String searchkey) = _$_updateSearchKey;
+  const factory _updateSearchKey(final String searchKey) = _$_updateSearchKey;
 
-  String get searchkey;
+  String get searchKey;
   @JsonKey(ignore: true)
   _$$_updateSearchKeyCopyWith<_$_updateSearchKey> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1285,7 +1285,7 @@ class _$_search implements _search {
         updateSelectedMaterialFilter,
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
-    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
@@ -1308,7 +1308,7 @@ class _$_search implements _search {
         updateSelectedMaterialFilter,
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
@@ -1331,7 +1331,7 @@ class _$_search implements _search {
         updateSelectedMaterialFilter,
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),
@@ -1450,7 +1450,7 @@ class _$_resetFilter implements _resetFilter {
         updateSelectedMaterialFilter,
     required TResult Function(MaterialFilter selectedMaterialFilter)
         initSelectedMaterialFilter,
-    required TResult Function(String searchkey) updateSearchKey,
+    required TResult Function(String searchKey) updateSearchKey,
     required TResult Function() search,
     required TResult Function() resetFilter,
   }) {
@@ -1473,7 +1473,7 @@ class _$_resetFilter implements _resetFilter {
         updateSelectedMaterialFilter,
     TResult? Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult? Function(String searchkey)? updateSearchKey,
+    TResult? Function(String searchKey)? updateSearchKey,
     TResult? Function()? search,
     TResult? Function()? resetFilter,
   }) {
@@ -1496,7 +1496,7 @@ class _$_resetFilter implements _resetFilter {
         updateSelectedMaterialFilter,
     TResult Function(MaterialFilter selectedMaterialFilter)?
         initSelectedMaterialFilter,
-    TResult Function(String searchkey)? updateSearchKey,
+    TResult Function(String searchKey)? updateSearchKey,
     TResult Function()? search,
     TResult Function()? resetFilter,
     required TResult orElse(),

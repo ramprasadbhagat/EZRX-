@@ -17,7 +17,7 @@ class MaterialFilterState with _$MaterialFilterState {
           manufactureMapOptions: <String, bool>{},
           brandList: <String>[],
         ),
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.searchFilter(''),
         apiFailureOrSuccessOption: none(),
       );
 

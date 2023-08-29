@@ -150,7 +150,7 @@ class MaterialFilterBloc
       },
       updateSearchKey: (e) async => emit(
         state.copyWith(
-          searchKey: SearchKey(e.searchkey),
+          searchKey: SearchKey.searchFilter(e.searchKey),
         ),
       ),
       initSelectedMaterialFilter: (e) {
@@ -184,7 +184,7 @@ class MaterialFilterBloc
                   e.selectedMaterialFilter.manufactureListSelected,
               countryListSelected: e.selectedMaterialFilter.countryListSelected,
             ),
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.searchFilter(''),
           ),
         );
       },

@@ -18,7 +18,7 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
   const factory MaterialFilterEvent.initSelectedMaterialFilter(
     MaterialFilter selectedMaterialFilter,
   ) = _initSelectedMaterialFilter;
-  const factory MaterialFilterEvent.updateSearchKey(String searchkey) =
+  const factory MaterialFilterEvent.updateSearchKey(String searchKey) =
       _updateSearchKey;
   const factory MaterialFilterEvent.search() = _search;
   const factory MaterialFilterEvent.resetFilter() = _resetFilter;
