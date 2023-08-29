@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
@@ -8,6 +9,7 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rxdart/rxdart.dart';
 
 part 'all_credits_event.dart';
 part 'all_credits_state.dart';
@@ -16,34 +18,55 @@ part 'all_credits_bloc.freezed.dart';
 class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
   final IAllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
   final Config config;
+
   AllCreditsBloc({
     required this.allCreditsAndInvoicesRepository,
     required this.config,
   }) : super(AllCreditsState.initial()) {
-    on(_onEvent);
-  }
-
-  Future<void> _onEvent(
-    AllCreditsEvent event,
-    Emitter<AllCreditsState> emit,
-  ) async {
-    await event.map(
-      initialized: (_) async => emit(AllCreditsState.initial()),
-      fetch: (value) async {
+    on<_initialized>(
+      (event, emit) async => emit(AllCreditsState.initial()),
+    );
+    on<_AutoSearchProduct>(
+      (e, emit) {
+        if (e.searchKey == state.appliedFilter.searchKey) return;
+        if (e.searchKey.isValid()) {
+          add(
+            _Fetch(
+              salesOrganisation: e.salesOrganisation,
+              customerCodeInfo: e.customerCodeInfo,
+              appliedFilter:
+                  state.appliedFilter.copyWith(searchKey: e.searchKey),
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              appliedFilter:
+                  state.appliedFilter.copyWith(searchKey: e.searchKey),
+            ),
+          );
+        }
+      },
+      transformer: (events, mapper) => events
+          .debounceTime(Duration(milliseconds: config.autoSearchTimeout))
+          .asyncExpand(mapper),
+    );
+    on<_Fetch>(
+      (e, emit) async {
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
             items: <CreditAndInvoiceItem>[],
             isLoading: true,
-            appliedFilter: value.appliedFilter,
+            appliedFilter: e.appliedFilter,
           ),
         );
 
         final failureOrSuccess =
             await allCreditsAndInvoicesRepository.filterCredits(
-          salesOrganisation: value.salesOrganisation,
-          customerCodeInfo: value.customerCodeInfo,
-          filter: value.appliedFilter,
+          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: e.customerCodeInfo,
+          filter: e.appliedFilter,
           pageSize: config.pageSize,
           offset: 0,
         );
@@ -69,7 +92,9 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           },
         );
       },
-      loadMore: (value) async {
+    );
+    on<_LoadMore>(
+      (e, emit) async {
         if (state.isLoading || !state.canLoadMore) return;
 
         emit(
@@ -81,8 +106,8 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
 
         final failureOrSuccess =
             await allCreditsAndInvoicesRepository.filterCredits(
-          salesOrganisation: value.salesOrganisation,
-          customerCodeInfo: value.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: e.customerCodeInfo,
           filter: state.appliedFilter,
           pageSize: config.pageSize,
           offset: state.items.length,

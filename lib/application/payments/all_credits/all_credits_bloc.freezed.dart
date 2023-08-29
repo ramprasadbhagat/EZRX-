@@ -20,6 +20,11 @@ mixin _$AllCreditsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        autoSearchProduct,
+    required TResult Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
@@ -32,6 +37,9 @@ mixin _$AllCreditsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        autoSearchProduct,
     TResult? Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
@@ -45,6 +53,9 @@ mixin _$AllCreditsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        autoSearchProduct,
     TResult Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
@@ -59,6 +70,7 @@ mixin _$AllCreditsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
   }) =>
@@ -66,6 +78,7 @@ mixin _$AllCreditsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
   }) =>
@@ -73,6 +86,7 @@ mixin _$AllCreditsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
@@ -138,6 +152,11 @@ class _$_initialized implements _initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        autoSearchProduct,
+    required TResult Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
@@ -153,6 +172,9 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        autoSearchProduct,
     TResult? Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
@@ -169,6 +191,9 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        autoSearchProduct,
     TResult Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
@@ -189,6 +214,7 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
   }) {
@@ -199,6 +225,7 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
   }) {
@@ -209,6 +236,7 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
@@ -222,6 +250,229 @@ class _$_initialized implements _initialized {
 
 abstract class _initialized implements AllCreditsEvent {
   const factory _initialized() = _$_initialized;
+}
+
+/// @nodoc
+abstract class _$$_AutoSearchProductCopyWith<$Res> {
+  factory _$$_AutoSearchProductCopyWith(_$_AutoSearchProduct value,
+          $Res Function(_$_AutoSearchProduct) then) =
+      __$$_AutoSearchProductCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SearchKey searchKey,
+      SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+}
+
+/// @nodoc
+class __$$_AutoSearchProductCopyWithImpl<$Res>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$_AutoSearchProduct>
+    implements _$$_AutoSearchProductCopyWith<$Res> {
+  __$$_AutoSearchProductCopyWithImpl(
+      _$_AutoSearchProduct _value, $Res Function(_$_AutoSearchProduct) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchKey = null,
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
+  }) {
+    return _then(_$_AutoSearchProduct(
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_AutoSearchProduct implements _AutoSearchProduct {
+  const _$_AutoSearchProduct(
+      {required this.searchKey,
+      required this.salesOrganisation,
+      required this.customerCodeInfo});
+
+  @override
+  final SearchKey searchKey;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+
+  @override
+  String toString() {
+    return 'AllCreditsEvent.autoSearchProduct(searchKey: $searchKey, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AutoSearchProduct &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, searchKey, salesOrganisation, customerCodeInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
+      __$$_AutoSearchProductCopyWithImpl<_$_AutoSearchProduct>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        autoSearchProduct,
+    required TResult Function(
+            AllCreditsFilter appliedFilter,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        fetch,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        loadMore,
+  }) {
+    return autoSearchProduct(searchKey, salesOrganisation, customerCodeInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        autoSearchProduct,
+    TResult? Function(
+            AllCreditsFilter appliedFilter,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+  }) {
+    return autoSearchProduct?.call(
+        searchKey, salesOrganisation, customerCodeInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        autoSearchProduct,
+    TResult Function(
+            AllCreditsFilter appliedFilter,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        fetch,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        loadMore,
+    required TResult orElse(),
+  }) {
+    if (autoSearchProduct != null) {
+      return autoSearchProduct(searchKey, salesOrganisation, customerCodeInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+  }) {
+    return autoSearchProduct(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+  }) {
+    return autoSearchProduct?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    required TResult orElse(),
+  }) {
+    if (autoSearchProduct != null) {
+      return autoSearchProduct(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AutoSearchProduct implements AllCreditsEvent {
+  const factory _AutoSearchProduct(
+      {required final SearchKey searchKey,
+      required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_AutoSearchProduct;
+
+  SearchKey get searchKey;
+  SalesOrganisation get salesOrganisation;
+  CustomerCodeInfo get customerCodeInfo;
+  @JsonKey(ignore: true)
+  _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -342,6 +593,11 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        autoSearchProduct,
+    required TResult Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
@@ -357,6 +613,9 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        autoSearchProduct,
     TResult? Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
@@ -373,6 +632,9 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        autoSearchProduct,
     TResult Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
@@ -393,6 +655,7 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
   }) {
@@ -403,6 +666,7 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
   }) {
@@ -413,6 +677,7 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
@@ -536,6 +801,11 @@ class _$_LoadMore implements _LoadMore {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        autoSearchProduct,
+    required TResult Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
@@ -551,6 +821,9 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
+    TResult? Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        autoSearchProduct,
     TResult? Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
@@ -567,6 +840,9 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
+    TResult Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        autoSearchProduct,
     TResult Function(
             AllCreditsFilter appliedFilter,
             SalesOrganisation salesOrganisation,
@@ -587,6 +863,7 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
   }) {
@@ -597,6 +874,7 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
   }) {
@@ -607,6 +885,7 @@ class _$_LoadMore implements _LoadMore {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
+    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
