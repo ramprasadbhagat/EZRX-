@@ -37,7 +37,7 @@ class ItemTax extends StatelessWidget {
               type: PriceStyle.taxPrice,
             ),
             Text(
-              '(${cartItem.itemTaxPercent}% tax)',
+              '(${cartItem.itemTaxPercentPadded}% tax)',
               style: txtStyle,
             ),
           ],

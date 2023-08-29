@@ -217,7 +217,7 @@ class CartState with _$CartState {
             previousValue +
             (element.price.finalPrice.getValue() *
                 element.quantity *
-                element.itemTaxPercent /
+                _totalTaxPercentInDouble /
                 100),
       );
 
