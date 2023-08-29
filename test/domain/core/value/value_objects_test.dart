@@ -84,4 +84,11 @@ void main() {
       expect(isEmpty, false);
     });
   });
+
+  group('Datatime String value check', () {
+    test('returns NA if datestring is 00000', () {
+      final date = DateTimeStringValue('00000000');
+      expect(date.dateOrNaString, 'NA');
+    });
+  });
 }

@@ -134,7 +134,8 @@ DateTime? tryParseDateTime(String input) {
   if (isNotEmpty(input)) {
     try {
       //input with format yyyyddmmhh
-      if (getDateTimeIntValue(input) > 0) {
+      final intVal = getDateTimeIntValue(input);
+      if (intVal > 0) {
         final standardInput = input.padRight(14, '0');
         final year =
             int.parse(standardInput.characters.getRange(0, 4).toString());
@@ -162,7 +163,9 @@ DateTime? tryParseDateTime(String input) {
           return DateFormat.yMd().add_jm().parse(input);
         } catch (_) {
           //input for invoices date string with format yyyy-MM-dd
-          return DateTime.parse(input);
+          return input.replaceAll(RegExp(r'^0+(?=.)'), '') == '0'
+              ? null
+              : DateTime.parse(input);
         }
       }
     } on FormatException {

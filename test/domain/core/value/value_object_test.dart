@@ -209,4 +209,14 @@ void main() {
       },
     );
   });
+
+  group('Return NA if datetime string is all ZEROs(00000000)', () {
+    test(
+      'Return NA if datetime string is all ZEROs(00000000)',
+      () {
+        final dateTimeStringValue = DateTimeStringValue('00000000');
+        expect(dateTimeStringValue.dateOrNaString, 'NA');
+      },
+    );
+  });
 }
