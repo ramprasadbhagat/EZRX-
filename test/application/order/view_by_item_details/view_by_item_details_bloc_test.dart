@@ -4,9 +4,12 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_details_repository.dart';
@@ -26,6 +29,7 @@ void main() {
   late OrderHistory orderHistory;
   late OrderStatusTrackerRepository orderStatusTrackerRepositoryMock;
   late List<OrderStatusTracker> orderStatusTracker;
+  late List<OrderStatusTracker> fakeOrderStatusTracker;
 
   group(
     'ViewByItemDetailsBloc Test => ',
@@ -35,6 +39,8 @@ void main() {
             await ViewByItemDetailsLocalDataSource().getViewByItemDetails();
         orderStatusTracker =
             orderHistory.orderHistoryItems.first.orderStatusTracker;
+        fakeOrderStatusTracker =
+            await OrderStatusTrackerLocalDataSource().getOrderStatusTracker();
       });
 
       setUp(() {
@@ -131,6 +137,100 @@ void main() {
             isLoading: false,
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
+          ),
+        ],
+      );
+
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'For "fetchZyllemStatus" Event  success',
+        build: () => ViewByItemDetailsBloc(
+          viewByItemDetailsRepository: viewByItemDetailsRepositoryMock,
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+        ),
+        setUp: () {
+          when(
+            () => viewByItemDetailsRepositoryMock.getViewByItemDetails(
+              soldTo: CustomerCodeInfo.empty(),
+              orderNumber: OrderNumber(''),
+              user: User.empty(),
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              orderHistory.copyWith(
+                orderHistoryItems: [
+                  OrderHistoryItem.empty().copyWith(
+                    materialNumber: MaterialNumber('000000000021038302'),
+                    status: StatusType('Out for delivery'),
+                  )
+                ],
+              ),
+            ),
+          );
+
+          when(
+            () => orderStatusTrackerRepositoryMock.getOrderStatusTracker(),
+          ).thenAnswer((invocation) async => Right(fakeOrderStatusTracker));
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.fetch(
+            orderNumber: OrderNumber(''),
+            materialNumber: MaterialNumber('000000000021038302'),
+            soldTo: CustomerCodeInfo.empty(),
+            user: User.empty(),
+            disableDeliveryDateForZyllemStatus: false,
+          ),
+        ),
+        expect: () => [
+          ViewByItemDetailsState.initial().copyWith(
+            isLoading: true,
+          ),
+          ViewByItemDetailsState.initial().copyWith(
+            isLoading: false,
+            viewByItemDetails: orderHistory.copyWith(
+              orderHistoryItems: [
+                OrderHistoryItem.empty().copyWith(
+                  materialNumber: MaterialNumber('000000000021038302'),
+                  orderStatusTracker: [],
+                  status: StatusType('Out for delivery'),
+                )
+              ],
+            ),
+            orderHistoryItem: OrderHistoryItem.empty().copyWith(
+              materialNumber: MaterialNumber('000000000021038302'),
+              orderStatusTracker: [],
+              status: StatusType('Out for delivery'),
+            ),
+            failureOrSuccessOption: optionOf(
+              Right(
+                orderHistory.copyWith(
+                  orderHistoryItems: [
+                    OrderHistoryItem.empty().copyWith(
+                      materialNumber: MaterialNumber('000000000021038302'),
+                      orderStatusTracker: [],
+                      status: StatusType('Out for delivery'),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          ViewByItemDetailsState.initial().copyWith(
+            isLoading: false,
+            viewByItemDetails: orderHistory.copyWith(
+              orderHistoryItems: [
+                OrderHistoryItem.empty().copyWith(
+                  materialNumber: MaterialNumber('000000000021038302'),
+                  orderStatusTracker: fakeOrderStatusTracker,
+                  status: StatusType('Out for delivery'),
+                )
+              ],
+            ),
+            orderHistoryItem: OrderHistoryItem.empty().copyWith(
+              materialNumber: MaterialNumber('000000000021038302'),
+              orderStatusTracker: [],
+              status: StatusType('Out for delivery'),
+            ),
+            failureOrSuccessOption: none(),
           ),
         ],
       );
