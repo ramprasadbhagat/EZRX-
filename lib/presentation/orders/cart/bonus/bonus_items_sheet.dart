@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -56,15 +55,6 @@ class BonusItemsSheet extends StatelessWidget {
               context.read<CartBloc>().add(
                     CartEvent.getDetailsProductsAddedToCart(
                       cartProducts: context.read<CartBloc>().state.cartProducts,
-                      config: context.read<CartBloc>().state.config,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrg:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      shipToInfo:
-                          context.read<CustomerCodeBloc>().state.shipToInfo,
                     ),
                   );
             }

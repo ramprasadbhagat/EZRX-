@@ -302,20 +302,8 @@ class _CounterOfferButtons extends StatelessWidget {
                   if (state.showErrorMessages) return;
                   context.read<CartBloc>().add(
                         CartEvent.upsertCart(
-                          salesOrganisation: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<CustomerCodeBloc>().state.shipToInfo,
                           priceAggregate: cartItem,
                           quantity: cartItem.quantity,
-                          salesOrganisationConfigs:
-                              context.read<SalesOrgBloc>().state.configs,
                           counterOfferDetails: context
                               .read<PriceOverrideBloc>()
                               .state

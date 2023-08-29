@@ -4,7 +4,6 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -299,10 +298,6 @@ class _OrderTypeSelectorField extends StatelessWidget {
     cartBloc.add(
       CartEvent.replaceWithOrderItems(
         items: specialItem,
-        customerCodeInfo: eligibilityState.customerCodeInfo,
-        salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
-        salesOrganisation: eligibilityState.salesOrganisation,
-        shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
         doNotallowOutOfStockMaterial:
             eligibilityState.doNotAllowOutOfStockMaterials,
       ),

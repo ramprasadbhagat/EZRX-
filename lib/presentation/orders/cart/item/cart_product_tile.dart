@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -53,18 +52,8 @@ class CartProductTile extends StatelessWidget {
             onPressed: (v) {
               context.read<CartBloc>().add(
                     CartEvent.upsertCart(
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      shipToInfo:
-                          context.read<CustomerCodeBloc>().state.shipToInfo,
                       priceAggregate: cartItem,
                       quantity: 0,
-                      salesOrganisationConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
                       counterOfferDetails: RequestCounterOfferDetails.empty(),
                     ),
                   );
@@ -237,13 +226,6 @@ class _MaterialDetails extends StatelessWidget {
                 priceProducts:
                     context.read<MaterialPriceBloc>().state.materialPrice,
                 overriddenProductPrice: state.overriddenMaterialPrice,
-                salesOrganisationConfigs:
-                    context.read<SalesOrgBloc>().state.configs,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               ),
             );
       },
@@ -355,16 +337,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
           minusPressed: (k) {
             context.read<CartBloc>().add(
                   CartEvent.upsertCart(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     priceAggregate: widget.cartItem,
                     quantity: k,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
                     counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
@@ -372,16 +346,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
           addPressed: (k) {
             context.read<CartBloc>().add(
                   CartEvent.upsertCart(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     priceAggregate: widget.cartItem,
                     quantity: k,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
                     counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
@@ -389,16 +355,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
           onSubmit: (value) {
             context.read<CartBloc>().add(
                   CartEvent.upsertCart(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     priceAggregate: widget.cartItem,
                     quantity: value,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
                     counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );

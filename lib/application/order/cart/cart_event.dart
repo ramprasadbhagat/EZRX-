@@ -2,13 +2,14 @@ part of 'cart_bloc.dart';
 
 @freezed
 class CartEvent with _$CartEvent {
-  const factory CartEvent.initialized() = _Initialized;
-  const factory CartEvent.addComboDealToCart({
-    required List<PriceAggregate> comboDealItems,
+  const factory CartEvent.initialized({
     required SalesOrganisationConfigs salesOrganisationConfigs,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+  }) = _Initialized;
+  const factory CartEvent.addComboDealToCart({
+    required List<PriceAggregate> comboDealItems,
     required bool doNotallowOutOfStockMaterial,
     @Default(false) bool overrideQty,
   }) = _AddComboDealToCart;
@@ -16,20 +17,12 @@ class CartEvent with _$CartEvent {
     ///Todo: consider to remove it
     required PriceAggregate item,
     required List<PriceAggregate> items,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
   }) = _VerifyMaterialDealBonus;
   const factory CartEvent.addRemarkToCartItem({
     required CartItem item,
     required String message,
   }) = _AddRemarkToCartItem;
   const factory CartEvent.addBonusToCartItem({
-    required SalesOrganisation salesOrganisation,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
     required MaterialInfo bonusMaterial,
     required StringValue bonusItemId,
     required RequestCounterOfferDetails counterOfferDetails,
@@ -51,10 +44,6 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.clearCart() = _ClearCart;
   const factory CartEvent.replaceWithOrderItems({
     required List<CartItem> items,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
     required bool doNotallowOutOfStockMaterial,
   }) = _ReplaceWithOrderItems;
 
@@ -64,53 +53,29 @@ class CartEvent with _$CartEvent {
   }) = _UpdateBatchInCartItem;
 
   const factory CartEvent.fetchProductsAddedToCart({
-    required SalesOrganisation salesOrg,
-    required SalesOrganisationConfigs config,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
     required bool comboDealEligible,
   }) = _FetchProductsAddedToCart;
 
   const factory CartEvent.upsertCart({
-    required SalesOrganisation salesOrganisation,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
     required PriceAggregate priceAggregate,
     required int quantity,
     required RequestCounterOfferDetails counterOfferDetails,
   }) = _UpsertCart;
 
   const factory CartEvent.upsertCartItems({
-    required SalesOrganisation salesOrganisation,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
     required PriceAggregate priceAggregate,
   }) = _UpsertCartItems;
 
   const factory CartEvent.getDetailsProductsAddedToCart({
     required List<PriceAggregate> cartProducts,
-    required SalesOrganisation salesOrg,
-    required SalesOrganisationConfigs config,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
   }) = _GetDetailsProductsAddedToCart;
 
   const factory CartEvent.updatePriceProduct({
     required Map<MaterialNumber, Price> priceProducts,
     required Price overriddenProductPrice,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
   }) = _UpdatePriceProduct;
 
   const factory CartEvent.updateProductStock({
     required List<PriceAggregate> products,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
   }) = _UpdateProductStock;
 }

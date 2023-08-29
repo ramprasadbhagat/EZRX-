@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -35,15 +34,7 @@ class CartProductBundle extends StatelessWidget {
           onPressed: (v) {
             context.read<CartBloc>().add(
                   CartEvent.upsertCart(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     priceAggregate: cartItem,
-                    salesOrganisationConfigs:
-                        context.read<SalesOrgBloc>().state.configs,
                     quantity: 0,
                     counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
@@ -498,11 +489,6 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   }) {
     context.read<CartBloc>().add(
           CartEvent.upsertCartItems(
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
             priceAggregate: PriceAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber(
@@ -514,8 +500,6 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                 bundleCode: widget.bundle.bundleCode,
               ),
             ),
-            salesOrganisationConfigs:
-                context.read<SalesOrgBloc>().state.configs,
           ),
         );
   }

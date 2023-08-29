@@ -234,9 +234,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       context.read<SalesOrgBloc>().state.salesOrg,
                     ),
                   );
-              context.read<CartBloc>().add(
-                    const CartEvent.initialized(),
-                  );
             }
             _initializePaymentConfiguration(state);
           },
@@ -547,13 +544,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             _getAdminPoAttachment(state);
             context.read<CartBloc>().add(
                   CartEvent.fetchProductsAddedToCart(
-                    salesOrg:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    config: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     comboDealEligible:
                         context.read<EligibilityBloc>().state.comboDealEligible,
                   ),
@@ -850,13 +840,21 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
     if (state.haveShipTo) {
       final user = context.read<UserBloc>().state.user;
-      final customerCodeInfo =
-          context.read<CustomerCodeBloc>().state.customerCodeInfo;
+      final customerCodeState = context.read<CustomerCodeBloc>().state;
+
+      context.read<CartBloc>().add(
+            CartEvent.initialized(
+              salesOrganisationConfigs: salesOrgState.configs,
+              salesOrganisation: salesOrgState.salesOrganisation,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
+              shipToInfo: customerCodeState.shipToInfo,
+            ),
+          );
 
       locator<MixpanelService>().registerSuperProps(
         username: user.username.getOrDefaultValue(''),
         salesOrg: salesOrgState.salesOrg.getOrDefaultValue(''),
-        customerCode: customerCodeInfo.customerCodeSoldTo,
+        customerCode: customerCodeState.customerCodeInfo.customerCodeSoldTo,
         shipToAddress: state.shipToInfo.shipToCustomerCode,
         userRole: user.role.type.getOrDefaultValue(''),
       );
@@ -866,7 +864,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               user: user,
               salesOrganisation: salesOrgState.salesOrganisation,
               salesOrgConfigs: salesOrgState.configs,
-              customerCodeInfo: customerCodeInfo,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
               shipToInfo: state.shipToInfo,
               selectedOrderType: orderDocumentTypeState.selectedOrderType,
             ),
@@ -878,7 +876,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 salesOrgConfigs: salesOrgState.configs,
                 shipToInfo: state.shipToInfo,
                 user: user,
-                customerCodeInfo: customerCodeInfo,
+                customerCodeInfo: customerCodeState.customerCodeInfo,
                 viewByItemFilter:
                     context.read<ViewByItemsBloc>().state.appliedFilter,
                 searchKey: SearchKey(''),
@@ -890,7 +888,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           );
       context.read<PaymentCustomerInformationBloc>().add(
             PaymentCustomerInformationEvent.fetch(
-              customeCodeInfo: customerCodeInfo,
+              customeCodeInfo: customerCodeState.customerCodeInfo,
               salesOrganisation: salesOrgState.salesOrganisation,
               selectedShipToCode: context
                   .read<CustomerCodeBloc>()
@@ -904,22 +902,20 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             PaymentSummaryEvent.fetchPaymentSummaryList(
               salesOrganization:
                   context.read<SalesOrgBloc>().state.salesOrganisation,
-              customerCodeInfo: customerCodeInfo,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
             ),
           );
 
-      context
-          .read<SoaBloc>()
-          .add(
+      context.read<SoaBloc>().add(
             SoaEvent.fetch(
-              customerCodeInfo: customerCodeInfo,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
             ),
           );
 
       context.read<AdditionalDetailsBloc>().add(
             AdditionalDetailsEvent.initialized(
               config: salesOrgState.configs,
-              customerCodeInfo: customerCodeInfo,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
             ),
           );
 
@@ -943,7 +939,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context.read<AccountSummaryBloc>().add(
             AccountSummaryEvent.fetchInvoiceSummary(
-              custCode: customerCodeInfo.customerCodeSoldTo,
+              custCode: customerCodeState.customerCodeInfo.customerCodeSoldTo,
               salesOrg:
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
             ),
@@ -951,13 +947,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<RecentOrderBloc>().add(
             RecentOrderEvent.fetchRecentlyOrderedProducts(
               configs: salesOrgState.configs,
-              customerCodeInfo: customerCodeInfo,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
               shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
             ),
           );
       context.read<AccountSummaryBloc>().add(
             AccountSummaryEvent.fetchCreditSummary(
-              custCode: customerCodeInfo.customerCodeSoldTo,
+              custCode: customerCodeState.customerCodeInfo.customerCodeSoldTo,
               salesOrg:
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
             ),

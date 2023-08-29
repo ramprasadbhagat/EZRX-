@@ -4,7 +4,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
@@ -696,26 +695,8 @@ void main() {
         verify(
           () => cartBloc.add(
             CartEvent.upsertCart(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('2601')),
-              customerCodeInfo:
-                  CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '1234'),
-              shipToInfo: ShipToInfo.empty(),
               priceAggregate: mockCartItemWithDataList2.first,
               quantity: 0,
-              salesOrganisationConfigs:
-                  SalesOrganisationConfigs.empty().copyWith(
-                enableReferenceNote: true,
-                enableVat: true,
-                enableFutureDeliveryDay: true,
-                enableMobileNumber: true,
-                enableSpecialInstructions: true,
-                disableOrderType: false,
-                enableCollectiveNumber: true,
-                enablePaymentTerms: true,
-                enableRemarks: true,
-                priceOverride: true,
-              ),
               counterOfferDetails: RequestCounterOfferDetails.empty(),
             ),
           ),
@@ -752,7 +733,7 @@ void main() {
       });
       testWidgets('Test SnackBarMessage when delete the item from cart ',
           (tester) async {
-            when(
+        when(
           () => autoRouter.currentPath,
         ).thenReturn('orders/cart');
         when(() => cartBloc.state).thenReturn(

@@ -15,6 +15,9 @@ class CartState with _$CartState {
     required bool isUpserting,
     required bool isMappingPrice,
     required bool isUpdatingStock,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
     required SalesOrganisationConfigs config,
     required Map<MaterialNumber, ProductMetaData> additionInfo,
     required List<int> upsertBonusItemInProgressHashCode,
@@ -34,6 +37,9 @@ class CartState with _$CartState {
         config: SalesOrganisationConfigs.empty(),
         additionInfo: <MaterialNumber, ProductMetaData>{},
         upsertBonusItemInProgressHashCode: [],
+        shipToInfo: ShipToInfo.empty(),
+        salesOrganisation: SalesOrganisation.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
       );
 
   double subTotal({

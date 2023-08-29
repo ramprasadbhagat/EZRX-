@@ -78,4 +78,6 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
     required String language,
   });
+
+  Future<Either<ApiFailure, List<PriceAggregate>>> getAddedToCartProductList();
 }

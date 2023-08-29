@@ -378,6 +378,7 @@ class CartRepository implements ICartRepository {
     }
   }
 
+  @override
   Future<Either<ApiFailure, List<PriceAggregate>>>
       getAddedToCartProductList() async {
     try {

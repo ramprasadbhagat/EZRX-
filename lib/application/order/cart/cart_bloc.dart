@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 
@@ -31,14 +31,21 @@ part 'cart_event.dart';
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  final CartRepository repository;
+  final ICartRepository repository;
   CartBloc(this.repository) : super(CartState.initial()) {
     on<CartEvent>(_onEvent);
   }
 
   Future<void> _onEvent(CartEvent event, Emitter<CartState> emit) async {
     await event.map(
-      initialized: (e) async => emit(CartState.initial()),
+      initialized: (e) async => emit(
+        CartState.initial().copyWith(
+          salesOrganisation: e.salesOrganisation,
+          config: e.salesOrganisationConfigs,
+          customerCodeInfo: e.customerCodeInfo,
+          shipToInfo: e.shipToInfo,
+        ),
+      ),
       verifyMaterialDealBonus: (e) async {
         final material = e.item;
         if (material != PriceAggregate.empty()) {
@@ -61,10 +68,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
         final failureOrSuccess = await repository.updateMaterialDealBonus(
           materials: e.items,
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisationConfigs: state.config,
+          salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
         );
 
         failureOrSuccess.fold(
@@ -138,10 +145,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
 
         final failureOrSuccess = await repository.upsertCart(
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
-          salesOrganisationConfig: e.salesOrganisationConfigs,
-          shipToInfo: e.shipToInfo,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          salesOrganisationConfig: state.config,
+          shipToInfo: state.shipToInfo,
           materialInfo: e.bonusMaterial,
           quantity: e.bonusMaterial.quantity,
           language: e.user.settings.languagePreference.languageCode,
@@ -176,7 +183,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 price: priceAggregate.price,
                 addedBonusList: priceAggregate.addedBonusList,
                 bundle: priceAggregate.bundle,
-                salesOrgConfig: e.salesOrganisationConfigs,
+                salesOrgConfig: state.config,
               );
             }
             add(
@@ -190,10 +197,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                         .firstOrNull ??
                     PriceAggregate.empty(),
                 items: cartProductListTemp,
-                salesOrganisationConfigs: e.salesOrganisationConfigs,
-                salesOrganisation: e.salesOrganisation,
-                customerCodeInfo: e.customerCodeInfo,
-                shipToInfo: e.shipToInfo,
               ),
             );
             emit(
@@ -534,10 +537,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               add(
                 _GetDetailsProductsAddedToCart(
                   cartProducts: priceAggregateAddedToCartList,
-                  config: e.config,
-                  customerCodeInfo: e.customerCodeInfo,
-                  salesOrg: e.salesOrg,
-                  shipToInfo: e.shipToInfo,
                 ),
               );
             }
@@ -567,10 +566,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
 
         final failureOrSuccess = await repository.upsertCart(
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
-          salesOrganisationConfig: e.salesOrganisationConfigs,
-          shipToInfo: e.shipToInfo,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          salesOrganisationConfig: state.config,
+          shipToInfo: state.shipToInfo,
           materialInfo: e.priceAggregate.materialInfo,
           quantity: e.quantity,
           language: 'EN',
@@ -605,7 +604,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 price: priceAggregate.price,
                 addedBonusList: priceAggregate.addedBonusList,
                 bundle: priceAggregate.bundle,
-                salesOrgConfig: e.salesOrganisationConfigs,
+                salesOrgConfig: state.config,
               );
             }
             emit(
@@ -625,10 +624,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                         .firstOrNull ??
                     PriceAggregate.empty(),
                 items: cartProductListTemp,
-                salesOrganisationConfigs: e.salesOrganisationConfigs,
-                salesOrganisation: e.salesOrganisation,
-                customerCodeInfo: e.customerCodeInfo,
-                shipToInfo: e.shipToInfo,
               ),
             );
           },
@@ -665,9 +660,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
 
         final failureOrSuccess = await repository.upsertCartItems(
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
           product: e.priceAggregate,
           language: 'EN',
         );
@@ -697,7 +692,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               cartProductListTemp[i] = cartProductListTemp[i].copyWith(
                 price: priceAggregate.price,
                 addedBonusList: priceAggregate.addedBonusList,
-                salesOrgConfig: e.salesOrganisationConfigs,
+                salesOrgConfig: state.config,
               );
             }
             emit(
@@ -716,7 +711,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
-            config: e.config,
+            config: state.config,
             isFetchingCartProductDetail: true,
           ),
         );
@@ -770,10 +765,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             add(
               _UpdateProductStock(
                 products: state.cartProducts,
-                salesOrganisationConfigs: e.config,
-                salesOrganisation: e.salesOrg,
-                customerCodeInfo: e.customerCodeInfo,
-                shipToInfo: e.shipToInfo,
               ),
             );
           },
@@ -796,7 +787,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                   : element.price;
 
           element = element.copyWith(
-            salesOrgConfig: e.salesOrganisationConfigs,
+            salesOrgConfig: state.config,
             price: productPrice,
           );
 
@@ -814,10 +805,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           _VerifyMaterialDealBonus(
             item: PriceAggregate.empty(),
             items: cartProductList,
-            salesOrganisationConfigs: e.salesOrganisationConfigs,
-            salesOrganisation: e.salesOrganisation,
-            customerCodeInfo: e.customerCodeInfo,
-            shipToInfo: e.shipToInfo,
           ),
         );
       },
@@ -837,10 +824,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               )
               .expand((element) => element)
               .toList(),
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisationConfigs: state.config,
+          salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
         );
 
         failureOrSuccess.fold(
@@ -859,7 +846,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                   stockInfoList: newStockFetched[
                           cartProduct.materialInfo.materialNumber] ??
                       <StockInfo>[],
-                  salesOrgConfig: e.salesOrganisationConfigs,
+                  salesOrgConfig: state.config,
                 );
               } else {
                 final materialInfoList =

@@ -24,9 +24,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 
@@ -244,11 +241,6 @@ class _CartIcon extends StatelessWidget {
 
     context.read<CartBloc>().add(
           CartEvent.addBonusToCartItem(
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
             bonusMaterial: bonusItem.copyWith(
               parentID:
                   cartProduct.materialInfo.materialNumber.getOrDefaultValue(''),
@@ -256,8 +248,6 @@ class _CartIcon extends StatelessWidget {
               type: MaterialInfoType(''),
             ),
             user: context.read<UserBloc>().state.user,
-            salesOrganisationConfigs:
-                context.read<SalesOrgBloc>().state.configs,
             counterOfferDetails: RequestCounterOfferDetails.empty(),
             bonusItemId:
                 cartProduct.bonusMaterialItemId(bonusItem.materialNumber),

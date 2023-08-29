@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -268,18 +267,6 @@ class _BundleSheetFooter extends StatelessWidget {
                               : () {
                                   context.read<CartBloc>().add(
                                         CartEvent.upsertCartItems(
-                                          salesOrganisation: context
-                                              .read<SalesOrgBloc>()
-                                              .state
-                                              .salesOrganisation,
-                                          customerCodeInfo: context
-                                              .read<CustomerCodeBloc>()
-                                              .state
-                                              .customerCodeInfo,
-                                          shipToInfo: context
-                                              .read<CustomerCodeBloc>()
-                                              .state
-                                              .shipToInfo,
                                           priceAggregate:
                                               PriceAggregate.empty().copyWith(
                                             bundle: Bundle.empty().copyWith(
@@ -311,10 +298,6 @@ class _BundleSheetFooter extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          salesOrganisationConfigs: context
-                                              .read<SalesOrgBloc>()
-                                              .state
-                                              .configs,
                                         ),
                                       );
                                 },

@@ -40,11 +40,6 @@ class _CartPageState extends State<CartPage> {
       context.read<CartBloc>().add(
             CartEvent.getDetailsProductsAddedToCart(
               cartProducts: context.read<CartBloc>().state.cartProducts,
-              salesOrg: context.read<SalesOrgBloc>().state.salesOrganisation,
-              config: context.read<SalesOrgBloc>().state.configs,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
             ),
           );
       context.read<MaterialPriceBloc>().add(
@@ -84,13 +79,6 @@ class _CartPageState extends State<CartPage> {
                       .read<PriceOverrideBloc>()
                       .state
                       .overriddenMaterialPrice,
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-                  salesOrganisationConfigs:
-                      context.read<SalesOrgBloc>().state.configs,
                 ),
               );
         }
@@ -272,19 +260,6 @@ class _CartScrollList extends StatelessWidget {
                     controller: ScrollController(),
                     onRefresh: () => context.read<CartBloc>().add(
                           CartEvent.fetchProductsAddedToCart(
-                            salesOrg: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            config: context.read<SalesOrgBloc>().state.configs,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .shipToInfo,
                             comboDealEligible: context
                                 .read<EligibilityBloc>()
                                 .state

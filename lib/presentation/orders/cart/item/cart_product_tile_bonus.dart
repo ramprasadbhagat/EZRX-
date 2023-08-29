@@ -15,10 +15,8 @@ import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_i
 
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -47,11 +45,6 @@ class CartProductTileBonus extends StatelessWidget {
           icon: Icons.delete_outline,
           onPressed: (v) => context.read<CartBloc>().add(
                 CartEvent.addBonusToCartItem(
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
                   bonusMaterial: MaterialInfo.empty().copyWith(
                     materialNumber: bonusItem.materialNumber,
                     parentID: cartProduct.materialInfo.materialNumber
@@ -59,8 +52,6 @@ class CartProductTileBonus extends StatelessWidget {
                     quantity: 0,
                   ),
                   user: context.read<UserBloc>().state.user,
-                  salesOrganisationConfigs:
-                      context.read<SalesOrgBloc>().state.configs,
                   counterOfferDetails: RequestCounterOfferDetails.empty(),
                   bonusItemId: bonusItem.itemId,
                 ),
@@ -250,11 +241,6 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
     }
     context.read<CartBloc>().add(
           CartEvent.addBonusToCartItem(
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
             bonusMaterial: MaterialInfo.empty().copyWith(
               materialNumber: widget.bonusItem.materialNumber,
               parentID: widget.cartProduct.materialInfo.materialNumber
@@ -262,8 +248,6 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
               quantity: qty,
             ),
             user: context.read<UserBloc>().state.user,
-            salesOrganisationConfigs:
-                context.read<SalesOrgBloc>().state.configs,
             counterOfferDetails: RequestCounterOfferDetails.empty(),
             bonusItemId: widget.bonusItem.itemId,
           ),
