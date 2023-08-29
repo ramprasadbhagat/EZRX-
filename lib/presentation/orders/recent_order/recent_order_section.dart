@@ -37,14 +37,7 @@ class RecentOrdersSection extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       builder: (context, state) {
-        return state.isFetching
-            ? Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: LoadingShimmer.logo(
-                  key: WidgetKeys.recentOrderSectionLoaderImage,
-                ),
-              )
-            : const _BodyContent();
+        return const _BodyContent();
       },
     );
   }
@@ -59,25 +52,30 @@ class _BodyContent extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.recentlyOrderedProducts != current.recentlyOrderedProducts,
       builder: (context, state) {
-        return state.recentlyOrderedProducts.isNotEmpty
+        return state.isFetching || state.recentlyOrderedProducts.isNotEmpty
             ? Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: SectionTitle(
                       title: 'Recently ordered',
-                      onTapIconButton: () =>
-                          context.navigateTo(const OrdersTabRoute()),
+                      onTapIconButton: () => state.isFetching
+                          ? null
+                          : context.navigateTo(const OrdersTabRoute()),
                     ),
                   ),
                   SizedBox(
                     height: 150,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: state.recentlyOrderedProducts
-                          .map((e) => _ProductTile(product: e))
-                          .toList(),
-                    ),
+                    child: state.isFetching
+                        ? LoadingShimmer.logo(
+                            key: WidgetKeys.recentOrderSectionLoaderImage,
+                          )
+                        : ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: state.recentlyOrderedProducts
+                                .map((e) => _ProductTile(product: e))
+                                .toList(),
+                          ),
                   ),
                 ],
               )

@@ -25,8 +25,6 @@ class BundleSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ctx = context;
-
     return BlocProvider<MaterialListBloc>(
       create: (context) => locator<MaterialListBloc>(),
       child: BlocListener<EligibilityBloc, EligibilityState>(
@@ -60,19 +58,18 @@ class BundleSection extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 10, top: 5),
                         child: SectionTitle(
                           title: 'Bundles',
-                          onTapIconButton: () => _navigateForMoreBundle(ctx),
+                          onTapIconButton: () => state.isFetching
+                              ? null
+                              : _navigateForMoreBundle(context),
                         ),
                       ),
-                      state.isFetching
-                          ? Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: LoadingShimmer.logo(
+                      SizedBox(
+                        height: 220,
+                        child: state.isFetching
+                            ? LoadingShimmer.logo(
                                 key: WidgetKeys.bundleSectionLoaderImage,
-                              ),
-                            )
-                          : SizedBox(
-                              height: 220,
-                              child: ListView(
+                              )
+                            : ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: state.materialList
                                     .map(
@@ -82,7 +79,7 @@ class BundleSection extends StatelessWidget {
                                     )
                                     .toList(),
                               ),
-                            ),
+                      ),
                     ],
                   )
                 : const SizedBox.shrink();

@@ -48,8 +48,6 @@ class ProductsOnOffer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ctx = context;
-
     return BlocProvider(
       create: (context) => locator<MaterialListBloc>(),
       child: MultiBlocListener(
@@ -130,14 +128,7 @@ class ProductsOnOffer extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching,
           builder: (context, state) {
-            return state.isFetching
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: LoadingShimmer.logo(
-                      key: WidgetKeys.loaderImage,
-                    ),
-                  )
-                : _BodyContent(ctx: ctx);
+            return _BodyContent(ctx: context);
           },
         ),
       ),
@@ -155,25 +146,30 @@ class _BodyContent extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.materialList != current.materialList,
       builder: (context, state) {
-        return state.materialList.isNotEmpty
+        return state.isFetching || state.materialList.isNotEmpty
             ? Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: SectionTitle(
                       title: 'Products on offer',
-                      onTapIconButton: () =>
-                          _navigateForMoreProductWithOffers(ctx),
+                      onTapIconButton: () => state.isFetching
+                          ? null
+                          : _navigateForMoreProductWithOffers(ctx),
                     ),
                   ),
                   SizedBox(
                     height: 150,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: state.materialList
-                          .map((e) => _ProductTile(materialInfo: e))
-                          .toList(),
-                    ),
+                    child: state.isFetching
+                        ? LoadingShimmer.logo(
+                            key: WidgetKeys.productOfferSectionLoaderImage,
+                          )
+                        : ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: state.materialList
+                                .map((e) => _ProductTile(materialInfo: e))
+                                .toList(),
+                          ),
                   ),
                 ],
               )

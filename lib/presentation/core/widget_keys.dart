@@ -220,6 +220,8 @@ class WidgetKeys {
   static const Key noRecordsFoundSearchIcon = Key('noRecordsFoundSearchIcon');
   static const Key loaderImage = Key('loaderImage');
   static const Key bundleSectionLoaderImage = Key('bundleSectionLoaderImage');
+  static const Key productOfferSectionLoaderImage =
+      Key('productOfferSectionLoaderImage');
   static const Key recentOrderSectionLoaderImage =
       Key('recentOrderSectionLoaderImage');
   static const Key loader = Key('loader');
