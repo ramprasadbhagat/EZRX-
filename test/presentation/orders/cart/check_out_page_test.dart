@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -15,6 +16,10 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
@@ -30,6 +35,9 @@ import '../../../utils/widget_utils.dart';
 class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
+
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
 
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
@@ -61,6 +69,7 @@ void main() {
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late PaymentTermBloc paymentTermBlocMock;
   late AppRouter autoRouterMock;
+  late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
   late OrderSummaryBloc orderSummaryBlocMock;
   final userBlocMock = UserMockBloc();
@@ -86,6 +95,7 @@ void main() {
           user: fakeUser,
         ),
       );
+      eligibilityBloc = EligibilityBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       cartBloc = CartBlocMock();
       paymentTermBlocMock = PaymentTermBlocMock();
@@ -112,6 +122,7 @@ void main() {
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => additionalDetailsBlocMock.state)
           .thenReturn(AdditionalDetailsState.initial());
+      when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
     });
     Widget getScopedWidget() {
       return EasyLocalization(
@@ -144,6 +155,7 @@ void main() {
             BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBloc,
             ),
+            BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
             BlocProvider<CartBloc>(create: (context) => cartBloc),
           ],
           child: const Material(
@@ -309,6 +321,219 @@ void main() {
         final paymentTermDropdown =
             find.byKey(WidgetKeys.paymentTermDropdownKey);
         expect(paymentTermDropdown, findsNothing);
+      },
+    );
+
+    testWidgets(
+      'Show tax details on material level when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for vn with material level tax',
+      (tester) async {
+        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+          displayItemTaxBreakdown: true,
+          displaySubtotalTaxBreakdown: true,
+          vatValue: 5,
+          currency: Currency('vnd'),
+        );
+        final salesOrgState = SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('3700'),
+          ),
+          configs: salesOrgConfig,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('123456789'),
+                quantity: 1,
+                taxClassification:
+                    MaterialTaxClassification('Product : Full Tax'),
+                taxes: <String>['10'],
+              ),
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(234.50),
+              ),
+              salesOrgConfig: salesOrgConfig,
+            ),
+          ],
+          config: salesOrgConfig,
+        );
+
+        when(() => salesOrgBlocMock.state).thenReturn(
+          salesOrgState,
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.byWidgetPredicate((w) => w is SliverToBoxAdapter),
+          findsAtLeastNWidgets(3),
+        );
+        final sliverFinder =
+            find.byWidgetPredicate((w) => w is CustomScrollView);
+        await tester.fling(sliverFinder, const Offset(0, -10000), 100);
+        await tester.pump();
+
+        final taxPercentageFinder = find.text('Tax at 10%');
+        expect(taxPercentageFinder, findsOneWidget);
+        final vatPercentageFinder = find.text('Tax at 5%');
+        expect(vatPercentageFinder, findsNothing);
+        final listPriceWithTax = cartState
+            .cartProducts.first.finalPriceTotalWithTax
+            .toStringAsFixed(2);
+        expect(
+          find.text(
+            'VND $listPriceWithTax',
+            findRichText: true,
+          ),
+          findsAtLeastNWidgets(1),
+        );
+        expect(find.text('Subtotal (excl.tax):'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Show tax details when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for my ',
+      (tester) async {
+        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+          displayItemTaxBreakdown: true,
+          displaySubtotalTaxBreakdown: true,
+          vatValue: 5,
+          currency: Currency('myr'),
+        );
+        final salesOrgState = SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2001'),
+          ),
+          configs: salesOrgConfig,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('123456789'),
+                quantity: 1,
+                taxClassification:
+                    MaterialTaxClassification('Product : Full Tax'),
+                taxes: <String>['10'],
+              ),
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(234.50),
+              ),
+              salesOrgConfig: salesOrgConfig,
+            ),
+          ],
+          config: salesOrgConfig,
+        );
+
+        when(() => salesOrgBlocMock.state).thenReturn(
+          salesOrgState,
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.byWidgetPredicate((w) => w is SliverToBoxAdapter),
+          findsAtLeastNWidgets(3),
+        );
+        final sliverFinder =
+            find.byWidgetPredicate((w) => w is CustomScrollView);
+        await tester.fling(sliverFinder, const Offset(0, -10000), 100);
+        await tester.pump();
+
+        final taxPercentageFinder = find.text('Tax at 10%');
+        expect(taxPercentageFinder, findsNothing);
+        final vatPercentageFinder = find.text('Tax at 5%');
+        expect(vatPercentageFinder, findsOneWidget);
+        final listPriceWithTax = cartState
+            .cartProducts.first.finalPriceTotalWithTax
+            .toStringAsFixed(2);
+        expect(
+          find.text(
+            'MYR $listPriceWithTax',
+            findRichText: true,
+          ),
+          findsAtLeastNWidgets(1),
+        );
+        expect(find.text('Subtotal (excl.tax):'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Do not Show tax details on total when displaySubtotalTaxBreakdown is disabled for vn',
+      (tester) async {
+        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+          displayItemTaxBreakdown: true,
+          displaySubtotalTaxBreakdown: false,
+          vatValue: 5,
+          currency: Currency('vnd'),
+        );
+        final salesOrgState = SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('3700'),
+          ),
+          configs: salesOrgConfig,
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('123456789'),
+                quantity: 1,
+                taxClassification:
+                    MaterialTaxClassification('Product : Full Tax'),
+                taxes: <String>['10'],
+              ),
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(234.50),
+              ),
+              salesOrgConfig: salesOrgConfig,
+            ),
+          ],
+          config: salesOrgConfig,
+        );
+
+        when(() => salesOrgBlocMock.state).thenReturn(
+          salesOrgState,
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(
+          find.byWidgetPredicate((w) => w is SliverToBoxAdapter),
+          findsAtLeastNWidgets(3),
+        );
+        final sliverFinder =
+            find.byWidgetPredicate((w) => w is CustomScrollView);
+        await tester.fling(sliverFinder, const Offset(0, -10000), 100);
+        await tester.pump();
+
+        final taxPercentageFinder = find.text('Tax at 10%');
+        expect(taxPercentageFinder, findsNothing);
+        final vatPercentageFinder = find.text('Tax at 5%');
+        expect(vatPercentageFinder, findsNothing);
+        final listPriceWithTax = cartState
+            .cartProducts.first.finalPriceTotalWithTax
+            .toStringAsFixed(2);
+        expect(
+          find.text(
+            'VND $listPriceWithTax',
+            findRichText: true,
+          ),
+          findsAtLeastNWidgets(1),
+        );
+        expect(find.text('Subtotal (incl.tax):'), findsOneWidget);
       },
     );
   });

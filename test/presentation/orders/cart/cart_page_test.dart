@@ -1657,6 +1657,248 @@ void main() {
         expect(accountSuspendedBannerTest, findsOneWidget);
       });
 
+      testWidgets(
+        'Do not Show tax details on material level when displayItemTaxBreakdown is disabled for vn',
+        (tester) async {
+          when(() => salesOrgBloc.state).thenReturn(
+            SalesOrgState.initial().copyWith(
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('3700'),
+              ),
+              configs: SalesOrganisationConfigs.empty().copyWith(
+                displayItemTaxBreakdown: false,
+                vatValue: 5,
+              ),
+            ),
+          );
+
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                    quantity: 1,
+                    taxClassification:
+                        MaterialTaxClassification('Product : Full Tax'),
+                    taxes: <String>['10'],
+                  ),
+                  price: Price.empty().copyWith(
+                    lastPrice: MaterialPrice(234.50),
+                  ),
+                ),
+              ],
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+
+          final taxLevelFinder = find.text('Total with tax:');
+          expect(taxLevelFinder, findsNothing);
+        },
+      );
+
+      testWidgets(
+        'Show tax details on material level when displayItemTaxBreakdown is enabled for vn with material level tax',
+        (tester) async {
+          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+            displayItemTaxBreakdown: true,
+            vatValue: 5,
+            currency: Currency('vnd'),
+          );
+          final salesOrgState = SalesOrgState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('3700'),
+            ),
+            configs: salesOrgConfig,
+          );
+          final cartState = CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('123456789'),
+                  quantity: 1,
+                  taxClassification:
+                      MaterialTaxClassification('Product : Full Tax'),
+                  taxes: <String>['10'],
+                ),
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(234.50),
+                ),
+                salesOrgConfig: salesOrgConfig,
+              ),
+            ],
+          );
+
+          when(() => salesOrgBloc.state).thenReturn(
+            salesOrgState,
+          );
+
+          when(() => cartBloc.state).thenReturn(
+            cartState,
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final taxLevelFinder = find.text('Total with tax:');
+          expect(taxLevelFinder, findsOneWidget);
+          final taxPercentageFinder = find.text('(10% tax)');
+          expect(taxPercentageFinder, findsOneWidget);
+          final vatPercentageFinder = find.text('(5% tax)');
+          expect(vatPercentageFinder, findsNothing);
+          final listPriceWithTax = cartState
+              .cartProducts.first.finalPriceTotalWithTax
+              .toStringAsFixed(2);
+          expect(
+            find.text(
+              'VND $listPriceWithTax',
+              findRichText: true,
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        'Show tax details on material level when displayItemTaxBreakdown is enabled for my with material level tax',
+        (tester) async {
+          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+            displayItemTaxBreakdown: true,
+            vatValue: 5,
+            currency: Currency('myr'),
+          );
+          final salesOrgState = SalesOrgState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+            configs: salesOrgConfig,
+          );
+          final cartState = CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('123456789'),
+                  quantity: 1,
+                  taxClassification:
+                      MaterialTaxClassification('Product : Full Tax'),
+                  taxes: <String>['10'],
+                ),
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(234.50),
+                ),
+                salesOrgConfig: salesOrgConfig,
+              ),
+            ],
+          );
+
+          when(() => salesOrgBloc.state).thenReturn(
+            salesOrgState,
+          );
+
+          when(() => cartBloc.state).thenReturn(
+            cartState,
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final taxLevelFinder = find.text('Total with tax:');
+          expect(taxLevelFinder, findsOneWidget);
+          final taxPercentageFinder = find.text('(10% tax)');
+          expect(taxPercentageFinder, findsNothing);
+          final vatPercentageFinder = find.text('(5% tax)');
+          expect(vatPercentageFinder, findsOneWidget);
+          final listPriceWithTax = cartState
+              .cartProducts.first.finalPriceTotalWithTax
+              .toStringAsFixed(2);
+          expect(
+            find.text(
+              'MYR $listPriceWithTax',
+              findRichText: true,
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        'Show tax details on material level when displayItemTaxBreakdown is enabled for my with material level tax on pre-Ordermodel',
+        (tester) async {
+          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+            displayItemTaxBreakdown: true,
+            vatValue: 5,
+            currency: Currency('myr'),
+            addOosMaterials: OosMaterial(true),
+            oosValue: OosValue(1),
+          );
+          final salesOrgState = SalesOrgState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+            configs: salesOrgConfig,
+          );
+          final cartState = CartState.initial().copyWith(
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('123456789'),
+                  quantity: 1,
+                  taxClassification:
+                      MaterialTaxClassification('Product : Full Tax'),
+                  taxes: <String>['10'],
+                ),
+                stockInfoList: <StockInfo>[
+                  StockInfo.empty().copyWith(
+                    batch: BatchNumber('ABCD'),
+                    inStock: MaterialInStock('No'),
+                  ),
+                ],
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(234.50),
+                ),
+                salesOrgConfig: salesOrgConfig,
+              ),
+            ],
+          );
+
+          when(() => salesOrgBloc.state).thenReturn(
+            salesOrgState,
+          );
+
+          when(() => cartBloc.state).thenReturn(
+            cartState,
+          );
+
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: salesOrgConfig,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final taxLevelFinder = find.text('Total with tax:');
+          expect(taxLevelFinder, findsOneWidget);
+          final taxPercentageFinder = find.text('(10% tax)');
+          expect(taxPercentageFinder, findsNothing);
+          final vatPercentageFinder = find.text('(5% tax)');
+          expect(vatPercentageFinder, findsOneWidget);
+          final listPriceWithTax = cartState
+              .cartProducts.first.finalPriceTotalWithTax
+              .toStringAsFixed(2);
+          expect(
+            find.text(
+              'MYR $listPriceWithTax',
+              findRichText: true,
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+
       //     testWidgets('Test have cart item update cart', (tester) async {
       //       final newList = [
       //         mockCartItemWithDataList.first.copyWith(
