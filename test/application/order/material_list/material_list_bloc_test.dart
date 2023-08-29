@@ -5,18 +5,18 @@ import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class MockMaterialListRepository extends Mock
     implements MaterialListRepository {}
 
 class MockFavouriteRepository extends Mock implements FavouriteRepository {}
 
-// const _defaultPageSize = 20;
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListRepository materialListMockRepository;
   late FavouriteRepository favouriteRepository;
+  late Config config;
   // final mockUser = User.empty();
   // final salesOrg2601 = SalesOrg('2601');
   // final mockSalesOrganisationConfigs = SalesOrganisationConfigs.empty();
@@ -31,6 +31,7 @@ void main() {
   setUpAll(() async {
     materialListMockRepository = MockMaterialListRepository();
     favouriteRepository = MockFavouriteRepository();
+    config = Config()..appFlavor = Flavor.mock;
     // final loadedMaterialListMock =
     //     await MaterialListLocalDataSource().getMaterialList();
     // materialListMock = [
@@ -45,6 +46,7 @@ void main() {
       build: () => MaterialListBloc(
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteRepository,
+        config: config,
       ),
       act: (MaterialListBloc bloc) =>
           bloc.add(const MaterialListEvent.initialized()),
@@ -148,6 +150,7 @@ void main() {
       build: () => MaterialListBloc(
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteRepository,
+        config: config,
       ),
       act: (MaterialListBloc bloc) {
         bloc.add(const MaterialListEvent.updateSearchKey(searchKey: '1234'));
@@ -282,6 +285,7 @@ void main() {
       build: () => MaterialListBloc(
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteRepository,
+        config: config,
       ),
       act: (MaterialListBloc bloc) {
         bloc.add(const MaterialListEvent.updateSearchKey(searchKey: ''));

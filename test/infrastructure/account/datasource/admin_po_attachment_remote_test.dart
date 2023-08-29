@@ -18,12 +18,10 @@ import 'package:mocktail/mocktail.dart';
 
 class OrderHistoryMock extends Mock implements OrderHistory {}
 
-const _pageSize = 20;
-
 void main() {
   late AdminPoAttachmentRemoteDataSource remoteDataSource;
-  locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
-
+  late Config config;
+  late int pageSize;
   final dio = Dio(
     BaseOptions(
       baseUrl: 'https://uat.ezrx.com',
@@ -34,6 +32,9 @@ void main() {
 
   setUpAll(
     () {
+      config = Config()..appFlavor = Flavor.uat;
+      locator.registerSingleton<Config>(config);
+      pageSize = config.pageSize;
       WidgetsFlutterBinding.ensureInitialized();
       remoteDataSource = AdminPoAttachmentRemoteDataSource(
         httpService: service,
@@ -49,7 +50,7 @@ void main() {
     () {
       test('Get OrderHistory', () async {
         final variables = {
-          'first': _pageSize,
+          'first': pageSize,
           'after': 0,
         };
         final res = json.decode(
@@ -74,7 +75,7 @@ void main() {
 
         final result = await remoteDataSource.getAdminPoAttachment(
           offset: 0,
-          pageSize: _pageSize,
+          pageSize: pageSize,
           filterQuery: {},
         );
 
@@ -88,7 +89,7 @@ void main() {
 
       test('status code not equal to 200', () async {
         final variables = {
-          'first': _pageSize,
+          'first': pageSize,
           'after': 0,
         };
         dioAdapter.onPost(
@@ -108,7 +109,7 @@ void main() {
 
         await remoteDataSource.getAdminPoAttachment(
           offset: 0,
-          pageSize: _pageSize,
+          pageSize: pageSize,
           filterQuery: {},
         ).onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -118,7 +119,7 @@ void main() {
 
       test('response with error', () async {
         final variables = {
-          'first': _pageSize,
+          'first': pageSize,
           'after': 0,
         };
         dioAdapter.onPost(
@@ -143,7 +144,7 @@ void main() {
 
         await remoteDataSource.getAdminPoAttachment(
           offset: 0,
-          pageSize: _pageSize,
+          pageSize: pageSize,
           filterQuery: {},
         ).onError((error, _) async {
           expect(error, isA<ServerException>());

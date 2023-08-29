@@ -13,16 +13,16 @@ import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuratio
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class PolicyConfigurationRepositoryMock extends Mock
     implements PolicyConfigurationRepository {}
-
-const _pageSize = 20;
 
 void main() {
   final repository = PolicyConfigurationRepositoryMock();
   final mockSalesOrg = SalesOrganisation.empty();
   late final List<PolicyConfiguration> policyConfigurationListMock;
+  late Config config;
   final fakePolicyConfigurationOne = PolicyConfiguration.empty().copyWith(
     salesOrg: SalesOrg('2601'),
     principalCode: PrincipalCode('1234'),
@@ -52,6 +52,7 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     policyConfigurationListMock =
         await PolicyConfigurationLocalDataSource().getPolicyConfiguration();
+    config = Config()..appFlavor = Flavor.mock;
   });
 
   group(
@@ -61,6 +62,7 @@ void main() {
         'Initialize',
         build: () => PolicyConfigurationBloc(
           policyConfigurationRepository: repository,
+          config: config,
         ),
         act: (PolicyConfigurationBloc bloc) =>
             bloc.add(const PolicyConfigurationEvent.initialized()),
@@ -69,14 +71,16 @@ void main() {
 
       blocTest(
         'Get policy configuration list failure',
-        build: () =>
-            PolicyConfigurationBloc(policyConfigurationRepository: repository),
+        build: () => PolicyConfigurationBloc(
+          policyConfigurationRepository: repository,
+          config: config,
+        ),
         setUp: () {
           when(
             () => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg,
               offset: 0,
-              pageSize: _pageSize,
+              pageSize: config.pageSize,
               searchKey: SearchKey(''),
             ),
           ).thenAnswer(
@@ -107,14 +111,16 @@ void main() {
 
       blocTest(
         'Get policy configuration list success',
-        build: () =>
-            PolicyConfigurationBloc(policyConfigurationRepository: repository),
+        build: () => PolicyConfigurationBloc(
+          policyConfigurationRepository: repository,
+          config: config,
+        ),
         setUp: () {
           when(
             () => repository.getPolicyConfiguration(
               salesOrganisation: mockSalesOrg,
               offset: 0,
-              pageSize: _pageSize,
+              pageSize: config.pageSize,
               searchKey: SearchKey(''),
             ),
           ).thenAnswer(
@@ -141,8 +147,10 @@ void main() {
       );
       blocTest(
         'Get returnsAllowedSwitch  success',
-        build: () =>
-            PolicyConfigurationBloc(policyConfigurationRepository: repository),
+        build: () => PolicyConfigurationBloc(
+          policyConfigurationRepository: repository,
+          config: config,
+        ),
         setUp: () {
           when(
             () => repository.getPolicyConfiguration(
@@ -164,8 +172,10 @@ void main() {
       );
       blocTest(
         'Get add PolicyConfiguration success',
-        build: () =>
-            PolicyConfigurationBloc(policyConfigurationRepository: repository),
+        build: () => PolicyConfigurationBloc(
+          policyConfigurationRepository: repository,
+          config: config,
+        ),
         setUp: () {
           when(
             () => repository.getAddPolicy(
@@ -196,8 +206,10 @@ void main() {
       );
       blocTest(
         'Get add PolicyConfiguration failure',
-        build: () =>
-            PolicyConfigurationBloc(policyConfigurationRepository: repository),
+        build: () => PolicyConfigurationBloc(
+          policyConfigurationRepository: repository,
+          config: config,
+        ),
         setUp: () {
           when(
             () => repository.getAddPolicy(
@@ -236,8 +248,10 @@ void main() {
 
       blocTest(
         'Get delete PolicyConfiguration success',
-        build: () =>
-            PolicyConfigurationBloc(policyConfigurationRepository: repository),
+        build: () => PolicyConfigurationBloc(
+          policyConfigurationRepository: repository,
+          config: config,
+        ),
         act: (PolicyConfigurationBloc bloc) => bloc.add(
           PolicyConfigurationEvent.delete(
             policyConfigurationItem: fakePolicyConfigurationOne,
@@ -262,8 +276,10 @@ void main() {
       );
       blocTest(
         'Get delete PolicyConfiguration failure',
-        build: () =>
-            PolicyConfigurationBloc(policyConfigurationRepository: repository),
+        build: () => PolicyConfigurationBloc(
+          policyConfigurationRepository: repository,
+          config: config,
+        ),
         act: (PolicyConfigurationBloc bloc) => bloc.add(
           PolicyConfigurationEvent.delete(
             policyConfigurationItem: fakePolicyConfigurationOne,

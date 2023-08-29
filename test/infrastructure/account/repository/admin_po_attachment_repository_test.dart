@@ -19,12 +19,12 @@ class AdminPoAttachmentLocalDataSourceMock extends Mock
 class AdminPoAttachmentRemoteDataSourceMock extends Mock
     implements AdminPoAttachmentRemoteDataSource {}
 
-const _pageSize = 20;
 const _kDateFormat = 'yyyyMMdd';
 
 void main() {
   late AdminPoAttachmentRepository adminPoAttachmentRepository;
   late Config mockConfig;
+  late int pageSize;
   late AdminPoAttachmentLocalDataSource adminPoAttachmentLocalDataSource;
   late AdminPoAttachmentRemoteDataSource adminPoAttachmentRemoteDataSource;
   final formDate = DateFormat(_kDateFormat).format(DateTime.now());
@@ -36,7 +36,8 @@ void main() {
 
   setUpAll(
     () {
-      mockConfig = MockConfig();
+      mockConfig = Config()..appFlavor = Flavor.mock;
+      pageSize = mockConfig.pageSize;
       adminPoAttachmentLocalDataSource = AdminPoAttachmentLocalDataSourceMock();
       adminPoAttachmentRemoteDataSource =
           AdminPoAttachmentRemoteDataSourceMock();
@@ -50,13 +51,11 @@ void main() {
 
   group('AdminPoAttachmentRepository tests', () {
     test('get AdminPoAttachment successfully local', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-
       when(() => adminPoAttachmentLocalDataSource.getAdminPoAttachment())
           .thenAnswer((invocation) async => <AdminPoAttachment>[]);
 
       final result = await adminPoAttachmentRepository.getAdminPoAttachment(
-        pageSize: _pageSize,
+        pageSize: pageSize,
         offset: 0,
         adminPoAttachmentFilter: AdminPoAttachmentFilter.empty(),
       );
@@ -66,12 +65,11 @@ void main() {
       );
     });
     test('get AdminPoAttachment fail local', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(() => adminPoAttachmentLocalDataSource.getAdminPoAttachment())
           .thenThrow(MockException());
 
       final result = await adminPoAttachmentRepository.getAdminPoAttachment(
-        pageSize: _pageSize,
+        pageSize: pageSize,
         offset: 0,
         adminPoAttachmentFilter: AdminPoAttachmentFilter.empty(),
       );
@@ -84,11 +82,10 @@ void main() {
     test(
       'get AdminPoAttachment successfully remote ',
       () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-
+        mockConfig.appFlavor = Flavor.dev;
         when(
           () => adminPoAttachmentRemoteDataSource.getAdminPoAttachment(
-            pageSize: _pageSize,
+            pageSize: pageSize,
             offset: 0,
             filterQuery: {
               'orderNumber': null,
@@ -101,7 +98,7 @@ void main() {
           ),
         ).thenAnswer((_) async => <AdminPoAttachment>[]);
         final result = await adminPoAttachmentRepository.getAdminPoAttachment(
-          pageSize: _pageSize,
+          pageSize: pageSize,
           offset: 0,
           adminPoAttachmentFilter: AdminPoAttachmentFilter.empty().copyWith(
             fromDate: DateTimeStringValue(formDate),
@@ -118,17 +115,17 @@ void main() {
     test(
       'get AdminPoAttachment fail remote ',
       () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+         mockConfig.appFlavor = Flavor.dev;
 
         when(
           () => adminPoAttachmentRemoteDataSource.getAdminPoAttachment(
-            pageSize: _pageSize,
+            pageSize: pageSize,
             offset: 0,
             filterQuery: {},
           ),
         ).thenThrow(MockException());
         final result = await adminPoAttachmentRepository.getAdminPoAttachment(
-          pageSize: _pageSize,
+          pageSize: pageSize,
           offset: 0,
           adminPoAttachmentFilter: AdminPoAttachmentFilter.empty().copyWith(),
         );

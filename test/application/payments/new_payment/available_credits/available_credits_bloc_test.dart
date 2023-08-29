@@ -11,6 +11,7 @@ import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_reposi
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class NewPaymentRepositoryMock extends Mock implements NewPaymentRepository {}
 
@@ -18,19 +19,21 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late NewPaymentRepository newPaymentRepositoryMock;
   late List<CustomerOpenItem> openItems;
-
+  late Config config;
   group(
     'Available_Credit_Bloc Test => ',
     () {
       setUp(() async {
         newPaymentRepositoryMock = NewPaymentRepositoryMock();
         openItems = await NewPaymentLocalDataSource().getCustomerOpenItems();
+        config = Config()..appFlavor = Flavor.mock;
       });
 
       blocTest<AvailableCreditsBloc, AvailableCreditsState>(
         'For "initialized" Event',
         build: () => AvailableCreditsBloc(
           newPaymentRepository: newPaymentRepositoryMock,
+          config: config,
         ),
         act: (bloc) => bloc.add(const AvailableCreditsEvent.initialized()),
         expect: () => [AvailableCreditsState.initial()],
@@ -40,13 +43,14 @@ void main() {
         'For "fetch" Event with failure',
         build: () => AvailableCreditsBloc(
           newPaymentRepository: newPaymentRepositoryMock,
+          config: config,
         ),
         setUp: () {
           when(
             () => newPaymentRepositoryMock.getAvailableCreditNotes(
               salesOrganisation: SalesOrganisation.empty(),
               customerCodeInfo: CustomerCodeInfo.empty(),
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: 0,
               appliedFilter: AvailableCreditFilter.empty(),
             ),
@@ -76,13 +80,14 @@ void main() {
         'For "fetch" Event with success',
         build: () => AvailableCreditsBloc(
           newPaymentRepository: newPaymentRepositoryMock,
+          config: config,
         ),
         setUp: () {
           when(
             () => newPaymentRepositoryMock.getAvailableCreditNotes(
               salesOrganisation: SalesOrganisation.empty(),
               customerCodeInfo: CustomerCodeInfo.empty(),
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: 0,
               appliedFilter: AvailableCreditFilter.empty(),
             ),
@@ -110,6 +115,7 @@ void main() {
         'For "loadMore" Event with failure',
         build: () => AvailableCreditsBloc(
           newPaymentRepository: newPaymentRepositoryMock,
+          config: config,
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
           appliedFilter: AvailableCreditFilter.empty(),
@@ -120,7 +126,7 @@ void main() {
             () => newPaymentRepositoryMock.getAvailableCreditNotes(
               salesOrganisation: SalesOrganisation.empty(),
               customerCodeInfo: CustomerCodeInfo.empty(),
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: openItems.length,
               appliedFilter: AvailableCreditFilter.empty(),
             ),
@@ -151,6 +157,7 @@ void main() {
         'For "loadMore" Event with success',
         build: () => AvailableCreditsBloc(
           newPaymentRepository: newPaymentRepositoryMock,
+          config: config,
         ),
         seed: () => AvailableCreditsState.initial().copyWith(
           appliedFilter: AvailableCreditFilter.empty(),
@@ -161,7 +168,7 @@ void main() {
             () => newPaymentRepositoryMock.getAvailableCreditNotes(
               salesOrganisation: SalesOrganisation.empty(),
               customerCodeInfo: CustomerCodeInfo.empty(),
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: openItems.length,
               appliedFilter: AvailableCreditFilter.empty(),
             ),

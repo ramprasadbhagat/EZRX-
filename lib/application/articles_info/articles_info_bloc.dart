@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -18,11 +19,10 @@ part 'articles_info_event.dart';
 part 'articles_info_state.dart';
 part 'articles_info_bloc.freezed.dart';
 
-const _pageSize = 24;
-
 class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
   final IArticleInfoRepository articleInfoRepository;
-  ArticlesInfoBloc({required this.articleInfoRepository})
+  final Config config;
+  ArticlesInfoBloc({required this.articleInfoRepository, required this.config})
       : super(ArticlesInfoState.initial()) {
     on<ArticlesInfoEvent>(_onEvent);
   }
@@ -45,7 +45,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
         final failureOrSuccessOption = await articleInfoRepository.getArticles(
           salesOrg: e.salesOrg,
           user: e.user,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           after: state.articleInfo.endCursor,
         );
 
@@ -77,7 +77,7 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
         final failureOrSuccessOption = await articleInfoRepository.getArticles(
           salesOrg: e.salesOrg,
           user: e.user,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           after: state.articleInfo.endCursor,
         );
 
@@ -97,7 +97,8 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
                 articleInfo: articles.copyWith(
                   announcementList: newArticlesList,
                 ),
-                canLoadMore: articles.announcementList.length >= _pageSize,
+                canLoadMore:
+                    articles.announcementList.length >= config.pageSize,
                 isFetching: false,
                 apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
               ),

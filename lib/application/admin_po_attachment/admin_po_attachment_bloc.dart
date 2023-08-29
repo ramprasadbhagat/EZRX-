@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/repository/i_admin_po_attachment_repository.dart';
@@ -12,13 +13,13 @@ part 'admin_po_attachment_event.dart';
 part 'admin_po_attachment_state.dart';
 part 'admin_po_attachment_bloc.freezed.dart';
 
-const int _pageSize = 20;
-
 class AdminPoAttachmentBloc
     extends Bloc<AdminPoAttachmentEvent, AdminPoAttachmentState> {
   final IAdminPoAttachmentRepository repository;
+  final Config config;
   AdminPoAttachmentBloc({
     required this.repository,
+    required this.config,
   }) : super(AdminPoAttachmentState.initial()) {
     on<AdminPoAttachmentEvent>(_onEvent);
   }
@@ -42,7 +43,7 @@ class AdminPoAttachmentBloc
         );
 
         final failureOrSuccess = await repository.getAdminPoAttachment(
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
           adminPoAttachmentFilter: e.adminPoAttachmentFilter,
         );
@@ -59,7 +60,7 @@ class AdminPoAttachmentBloc
                 adminPoAttachmentList: adminPoAttachmentList,
                 failureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: adminPoAttachmentList.length >= _pageSize,
+                canLoadMore: adminPoAttachmentList.length >= config.pageSize,
                 nextPageIndex: 1,
               ),
             );
@@ -71,7 +72,7 @@ class AdminPoAttachmentBloc
         emit(state.copyWith(isFetching: true, failureOrSuccessOption: none()));
 
         final failureOrSuccess = await repository.getAdminPoAttachment(
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: state.adminPoAttachmentList.length,
           adminPoAttachmentFilter: e.adminPoAttachmentFilter,
         );
@@ -92,7 +93,7 @@ class AdminPoAttachmentBloc
                 adminPoAttachmentList: newOrderHistoryList,
                 failureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: newOrderHistoryList.length >= _pageSize,
+                canLoadMore: newOrderHistoryList.length >= config.pageSize,
                 nextPageIndex: state.nextPageIndex + 1,
               ),
             );

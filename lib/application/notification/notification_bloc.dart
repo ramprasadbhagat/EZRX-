@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/domain/notification/repository/i_notification_repository.dart';
@@ -9,11 +10,10 @@ part 'notification_event.dart';
 part 'notification_state.dart';
 part 'notification_bloc.freezed.dart';
 
-const int _pageSize = 24;
-
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   final INotificationRepository notificationRepository;
-  NotificationBloc({required this.notificationRepository})
+  final Config config;
+  NotificationBloc({required this.notificationRepository, required this.config})
       : super(NotificationState.initial()) {
     on<NotificationEvent>(_onEvent);
   }
@@ -32,7 +32,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
 
         final failureOrSuccess = await notificationRepository.getNotification(
           page: state.nextPageIndex,
-          perPage: _pageSize,
+          perPage: config.pageSize,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -126,7 +126,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
         );
         final failureOrSuccess = await notificationRepository.getNotification(
           page: state.nextPageIndex,
-          perPage: _pageSize,
+          perPage: config.pageSize,
         );
         failureOrSuccess.fold(
           (failure) {

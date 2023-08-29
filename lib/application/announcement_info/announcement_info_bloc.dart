@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/announcement_info/repository/i_announcement_info_repository.dart';
@@ -12,14 +13,13 @@ part 'announcement_info_bloc.freezed.dart';
 part 'announcement_info_event.dart';
 part 'announcement_info_state.dart';
 
-const _pageSize = 24;
-
 class AnnouncementInfoBloc
     extends Bloc<AnnouncementInfoEvent, AnnouncementInfoState> {
   final IAnnouncementInfoRepository announcementInfoRepository;
-
+  final Config config;
   AnnouncementInfoBloc({
     required this.announcementInfoRepository,
+    required this.config,
   }) : super(AnnouncementInfoState.initial()) {
     on<AnnouncementInfoEvent>(_onEvent);
   }
@@ -40,7 +40,7 @@ class AnnouncementInfoBloc
         final failureOrSuccess =
             await announcementInfoRepository.getAnnouncement(
           salesOrg: e.salesOrg,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           after: '',
         );
         failureOrSuccess.fold(
@@ -57,7 +57,7 @@ class AnnouncementInfoBloc
               state.copyWith(
                 isLoading: false,
                 announcementInfo: announcementInfo,
-                canLoadMore: announcementInfo.total > _pageSize,
+                canLoadMore: announcementInfo.total > config.pageSize,
               ),
             );
           },
@@ -78,7 +78,7 @@ class AnnouncementInfoBloc
         final failureOrSuccess =
             await announcementInfoRepository.getAnnouncement(
           salesOrg: e.salesOrg,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           after: state.announcementInfo.endCursor,
         );
 
@@ -102,7 +102,8 @@ class AnnouncementInfoBloc
                 ),
                 apiFailureOrSuccessOption: none(),
                 isLoading: false,
-                canLoadMore: announcement.announcementList.length >= _pageSize,
+                canLoadMore:
+                    announcement.announcementList.length >= config.pageSize,
               ),
             );
           },

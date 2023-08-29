@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -16,11 +17,11 @@ part 'faq_event.dart';
 part 'faq_state.dart';
 part 'faq_bloc.freezed.dart';
 
-const _pageSize = 24;
-
 class FaqBloc extends Bloc<FaqEvent, FaqState> {
   final IFAQInfoRepository faqInfoRepository;
-  FaqBloc({required this.faqInfoRepository}) : super(FaqState.initial()) {
+  final Config config;
+  FaqBloc({required this.faqInfoRepository, required this.config})
+      : super(FaqState.initial()) {
     on<FaqEvent>(_onEvent);
   }
 
@@ -40,7 +41,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
         final failureOrSuccessOption = await faqInfoRepository.getFAQList(
           salesOrg: e.salesOrg,
           user: e.user,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           after: state.faqInfo.endCursor,
         );
 
@@ -58,7 +59,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
               apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
               selectedCategory: FAQCategory('All'),
               searchKey: SearchKey.searchFilter(''),
-              canLoadMore: faqInfo.faqList.length > _pageSize,
+              canLoadMore: faqInfo.faqList.length > config.pageSize,
             ),
           ),
         );
@@ -75,7 +76,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
         final failureOrSuccessOption = await faqInfoRepository.getFAQList(
           salesOrg: e.salesOrg,
           user: e.user,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           after: state.faqInfo.endCursor,
         );
 
@@ -92,7 +93,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
                 faqInfo: faqInfo.copyWith(
                   faqList: [...state.faqInfo.faqList, ...faqInfo.faqList],
                 ),
-                canLoadMore: faqInfo.faqList.length >= _pageSize,
+                canLoadMore: faqInfo.faqList.length >= config.pageSize,
                 isFetching: false,
                 apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
               ),

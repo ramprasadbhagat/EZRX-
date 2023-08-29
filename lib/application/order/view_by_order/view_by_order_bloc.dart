@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -17,13 +18,11 @@ part 'view_by_order_event.dart';
 part 'view_by_order_state.dart';
 part 'view_by_order_bloc.freezed.dart';
 
-const int _pageSize = 24;
-
 class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
   final IViewByOrderRepository viewByOrderRepository;
-  ViewByOrderBloc({
-    required this.viewByOrderRepository,
-  }) : super(ViewByOrderState.initial()) {
+  final Config config;
+  ViewByOrderBloc({required this.viewByOrderRepository, required this.config})
+      : super(ViewByOrderState.initial()) {
     on<_Initialized>(
       (event, emit) => emit(ViewByOrderState.initial()),
     );
@@ -49,7 +48,9 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
         }
       },
       transformer: (events, mapper) => events
-          .debounceTime(const Duration(milliseconds: 3000))
+          .debounceTime(
+            Duration(milliseconds: config.autoSearchTimeout),
+          )
           .asyncExpand(mapper),
     );
     on<_Fetch>(
@@ -65,13 +66,12 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           ),
         );
 
-        final failureOrSuccess =
-            await viewByOrderRepository.getViewByOrders(
+        final failureOrSuccess = await viewByOrderRepository.getViewByOrders(
           salesOrgConfig: e.salesOrgConfigs,
           soldTo: e.customerCodeInfo,
           shipTo: e.shipToInfo,
           user: e.user,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
           viewByOrdersFilter: e.filter,
           orderBy: 'datetime',
@@ -103,13 +103,12 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
       if (state.isFetching || !state.canLoadMore) return;
       emit(state.copyWith(isFetching: true, failureOrSuccessOption: none()));
 
-      final failureOrSuccess =
-          await viewByOrderRepository.getViewByOrders(
+      final failureOrSuccess = await viewByOrderRepository.getViewByOrders(
         salesOrgConfig: e.salesOrgConfigs,
         soldTo: e.customerCodeInfo,
         shipTo: e.shipToInfo,
         user: e.user,
-        pageSize: _pageSize,
+        pageSize: config.pageSize,
         offset: state.viewByOrderList.orderHeaders.length,
         viewByOrdersFilter: state.appliedFilter,
         orderBy: 'datetime',
@@ -130,7 +129,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
             viewByOrderList: viewByOrder,
             failureOrSuccessOption: none(),
             isFetching: false,
-            canLoadMore: viewByOrder.orderHeaders.length >= _pageSize,
+            canLoadMore: viewByOrder.orderHeaders.length >= config.pageSize,
             nextPageIndex: state.nextPageIndex + 1,
           ),
         ),

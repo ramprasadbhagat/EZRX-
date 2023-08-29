@@ -779,6 +779,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => BonusMaterialBloc(
       materialListRepository: locator<MaterialListRepository>(),
+      config: locator<Config>(),
     ),
   );
   //============================================================
@@ -877,6 +878,7 @@ void setupLocator() {
   locator.registerFactory(
     () => CustomerCodeBloc(
       customerCodeRepository: locator<CustomerCodeRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -1035,6 +1037,7 @@ void setupLocator() {
     () => MaterialListBloc(
       materialListRepository: locator<MaterialListRepository>(),
       favouriteRepository: locator<FavouriteRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -1217,6 +1220,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ViewByItemsBloc(
       viewByItemRepository: locator<ViewByItemRepository>(),
+      config: locator<Config>(),
     ),
   );
   //============================================================
@@ -1744,12 +1748,14 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ReturnListByItemBloc(
       returnListRepository: locator<ReturnListRepository>(),
+      config: locator<Config>(),
     ),
   );
 
   locator.registerLazySingleton(
     () => ReturnListByRequestBloc(
       returnListRepository: locator<ReturnListRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -1847,6 +1853,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PolicyConfigurationBloc(
       policyConfigurationRepository: locator<PolicyConfigurationRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -1940,6 +1947,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ReturnApproverBloc(
       returnApproverRepository: locator<ReturnApproverRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -1978,6 +1986,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PaymentSummaryBloc(
       paymentSummaryRepository: locator<PaymentSummaryRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -2116,6 +2125,7 @@ void setupLocator() {
   locator.registerFactory(
     () => ComboDealPrincipleDetailBloc(
       repository: locator<MaterialListRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -2334,6 +2344,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AdminPoAttachmentBloc(
       repository: locator<AdminPoAttachmentRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -2502,6 +2513,7 @@ void setupLocator() {
     () => AllInvoicesBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
+      config: locator<Config>(),
     ),
   );
   locator.registerLazySingleton(
@@ -2530,6 +2542,7 @@ void setupLocator() {
     () => AllCreditsBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
+      config: locator<Config>(),
     ),
   );
   locator.registerLazySingleton(
@@ -2596,6 +2609,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => OutstandingInvoicesBloc(
       newPaymentRepository: locator<NewPaymentRepository>(),
+      config: locator<Config>(),
     ),
   );
   locator.registerLazySingleton(
@@ -2604,6 +2618,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AvailableCreditsBloc(
       newPaymentRepository: locator<NewPaymentRepository>(),
+      config: locator<Config>(),
     ),
   );
   locator.registerLazySingleton(
@@ -2703,6 +2718,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ProductSearchBloc(
       productSearchRepository: locator<ProductSearchRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -2818,6 +2834,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ViewByOrderBloc(
       viewByOrderRepository: locator<ViewByOrderRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -2975,6 +2992,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ArticlesInfoBloc(
       articleInfoRepository: locator<ArticleInfoRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -3006,6 +3024,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => AnnouncementInfoBloc(
       announcementInfoRepository: locator<AnnouncementInfoRepository>(),
+      config: locator<Config>(),
     ),
   );
   locator.registerLazySingleton(
@@ -3071,6 +3090,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ReturnItemsBloc(
       newRequestRepository: locator<ReturnRequestRepository>(),
+      config: locator<Config>(),
     ),
   );
   locator.registerLazySingleton(
@@ -3144,6 +3164,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => NotificationBloc(
       notificationRepository: locator<NotificationRepository>(),
+      config: locator<Config>(),
     ),
   );
   //============================================================
@@ -3173,6 +3194,7 @@ void setupLocator() {
   locator.registerFactory(
     () => FaqBloc(
       faqInfoRepository: locator<FAQInfoRepository>(),
+      config: locator<Config>(),
     ),
   );
 
@@ -3206,6 +3228,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => CustomerLicenseBloc(
       customerLicenseRepository: locator<CustomerLicenseRepository>(),
+      config: locator<Config>(),
     ),
   );
 

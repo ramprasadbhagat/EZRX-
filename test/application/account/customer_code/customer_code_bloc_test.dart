@@ -17,6 +17,7 @@ import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repos
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class CustomerCodeMockRepo extends Mock implements CustomerCodeRepository {}
 
@@ -24,7 +25,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late List<CustomerCodeInfo> customerMockData;
   final CustomerCodeRepository customerCodeMockRepo = CustomerCodeMockRepo();
-
+  late Config config;
   final fakeSalesOrgCustomerInfos = [
     SalesOrgCustomerInfo(
       customerCodeSoldTo: CustomerCode('fake-customer-code'),
@@ -67,13 +68,16 @@ void main() {
 
     customerMockData =
         await CustomerCodeLocalDataSource().getCustomerCodeList();
+    config = Config()..appFlavor = Flavor.mock;
   });
 
   group('Customer Code Bloc', () {
     blocTest(
       'Customer code Initial',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       act: (CustomerCodeBloc bloc) {
         bloc.add(const CustomerCodeEvent.initialized());
       },
@@ -82,8 +86,10 @@ void main() {
 
     blocTest(
       'Customer Code Selected',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.storeCustomerInfo(
@@ -111,8 +117,10 @@ void main() {
 
     blocTest(
       'Customer Code Fetch fail',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.getCustomerCode(
@@ -204,8 +212,10 @@ void main() {
 
     blocTest(
       'Customer Code Validate Offset',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.getCustomerCode(
@@ -321,8 +331,10 @@ void main() {
 
     blocTest(
       'Customer Code Search Success',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       seed: () => CustomerCodeState.initial().copyWith(
         shipToInfo: fakeShipToInfo,
         isFetching: false,
@@ -379,8 +391,10 @@ void main() {
 
     blocTest(
       'Customer Code Search Failure',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       seed: () => CustomerCodeState.initial().copyWith(
         shipToInfo: fakeShipToInfo,
         isFetching: false,
@@ -439,8 +453,10 @@ void main() {
 
     blocTest(
       'Customer Code Auto-Search Success',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       seed: () => CustomerCodeState.initial().copyWith(
         shipToInfo: fakeShipToInfo,
         isFetching: false,
@@ -474,7 +490,7 @@ void main() {
           ),
         );
       },
-      wait: const Duration(milliseconds: 3000),
+      wait: const Duration(milliseconds: 1500),
       expect: () => [
         CustomerCodeState.initial().copyWith(
           isSearchActive: true,
@@ -498,8 +514,10 @@ void main() {
 
     blocTest(
       'Customer Code Auto-Search Failure',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       seed: () => CustomerCodeState.initial().copyWith(
         shipToInfo: fakeShipToInfo,
         isFetching: false,
@@ -556,8 +574,10 @@ void main() {
 
     blocTest(
       'Customer Code On Load More fail',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       seed: () => CustomerCodeState.initial().copyWith(
         isFetching: false,
       ),
@@ -855,8 +875,10 @@ void main() {
 
     blocTest(
       'loadStoredCustomerCode - Customer Code Storage returns success and Get Customer Code returns success with populated list',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.storeCustomerInfo(
@@ -934,6 +956,7 @@ void main() {
       '=> Test if apiSuccess',
       build: () => CustomerCodeBloc(
         customerCodeRepository: customerCodeMockRepo,
+        config: config,
       ),
       act: (bloc) {
         final isApiSuccess = CustomerCodeState.initial().apiSuccess;
@@ -943,8 +966,10 @@ void main() {
 
     blocTest(
       'Customer Code Fetch Success with finalCustomerCodeinfo length greater than one',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.getCustomerCode(
@@ -1000,8 +1025,10 @@ void main() {
 
     blocTest(
       'Customer Code Fetch Success with finalCustomerCodeinfo length is zero',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.getCustomerCode(
@@ -1043,8 +1070,10 @@ void main() {
 
     blocTest(
       'loadStoredCustomerCode - Customer Code Storage returns success and offset is sent as 0 to fetch customerCodeList',
-      build: () =>
-          CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
       setUp: () {
         when(() => customerCodeMockRepo.getCustomerCodeStorage()).thenAnswer(
           (_) async => const Right(

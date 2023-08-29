@@ -9,22 +9,22 @@ import 'package:ezrxmobile/infrastructure/announcement_info/repository/announcem
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class AnnouncementInfoRepositoryRepo extends Mock
     implements AnnouncementInfoRepository {}
-
-const _pageSize = 24;
 
 void main() {
   late AnnouncementInfoRepositoryRepo repository;
   late AnnouncementArticleInfo announcementInfoMock;
   final announcementInfoState = AnnouncementInfoState.initial();
   final salesOrg = SalesOrg('');
+  late Config config;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = AnnouncementInfoRepositoryRepo();
-
+    config = Config()..appFlavor = Flavor.mock;
     announcementInfoMock =
         await AnnouncementInfoLocalDataSource().getAnnouncementInfo();
   });
@@ -32,12 +32,15 @@ void main() {
   group('Announcement Info Bloc', () {
     blocTest(
       'Get announcement info fail',
-      build: () => AnnouncementInfoBloc(announcementInfoRepository: repository),
+      build: () => AnnouncementInfoBloc(
+        announcementInfoRepository: repository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => repository.getAnnouncement(
             salesOrg: salesOrg,
-            pageSize: _pageSize,
+            pageSize: config.pageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -63,12 +66,15 @@ void main() {
 
     blocTest(
       'Get announcement info Success',
-      build: () => AnnouncementInfoBloc(announcementInfoRepository: repository),
+      build: () => AnnouncementInfoBloc(
+        announcementInfoRepository: repository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => repository.getAnnouncement(
             salesOrg: salesOrg,
-            pageSize: _pageSize,
+            pageSize: config.pageSize,
             after: '',
           ),
         ).thenAnswer(

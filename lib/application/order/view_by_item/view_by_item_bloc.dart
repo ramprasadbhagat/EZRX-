@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -19,13 +20,12 @@ part 'view_by_item_event.dart';
 
 part 'view_by_item_state.dart';
 
-const int _pageSize = 24;
-
 class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
   final IViewByItemRepository viewByItemRepository;
-
+  final Config config;
   ViewByItemsBloc({
     required this.viewByItemRepository,
+    required this.config,
   }) : super(ViewByItemsState.initial()) {
     on<_Initialized>((event, emit) => emit(ViewByItemsState.initial()));
     on<_AutoSearchProduct>(
@@ -47,7 +47,9 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
         }
       },
       transformer: (events, mapper) => events
-          .debounceTime(const Duration(milliseconds: 3000))
+          .debounceTime(
+            Duration(milliseconds: config.autoSearchTimeout),
+          )
           .asyncExpand(mapper),
     );
     on<_Fetch>(
@@ -68,7 +70,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
           soldTo: e.customerCodeInfo,
           shipTo: e.shipToInfo,
           user: e.user,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
           viewByItemFilter: e.viewByItemFilter,
           searchKey: e.searchKey,
@@ -89,8 +91,8 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
                 orderHistoryList: orderHistoryList,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
-                canLoadMore:
-                    orderHistoryList.orderHistoryItems.length >= _pageSize,
+                canLoadMore: orderHistoryList.orderHistoryItems.length >=
+                    config.pageSize,
                 nextPageIndex: 1,
                 appliedFilter: e.viewByItemFilter,
               ),
@@ -108,7 +110,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
         soldTo: e.customerCodeInfo,
         shipTo: e.shipToInfo,
         user: e.user,
-        pageSize: _pageSize,
+        pageSize: config.pageSize,
         offset: state.orderHistoryList.orderHistoryItems.length,
         viewByItemFilter: state.appliedFilter,
         searchKey: state.searchKey,
@@ -136,7 +138,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
               failureOrSuccessOption: optionOf(failureOrSuccess),
               isFetching: false,
               canLoadMore:
-                  orderHistoryList.orderHistoryItems.length >= _pageSize,
+                  orderHistoryList.orderHistoryItems.length >= config.pageSize,
               nextPageIndex: state.nextPageIndex + 1,
             ),
           );

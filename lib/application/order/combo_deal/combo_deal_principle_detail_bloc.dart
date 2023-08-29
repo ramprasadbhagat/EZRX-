@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -21,14 +22,13 @@ part 'combo_deal_principle_detail_event.dart';
 part 'combo_deal_principle_detail_state.dart';
 part 'combo_deal_principle_detail_bloc.freezed.dart';
 
-const int _pageSize = 20;
-
 class ComboDealPrincipleDetailBloc
     extends Bloc<ComboDealPrincipleDetailEvent, ComboDealPrincipleDetailState> {
   final IMaterialListRepository repository;
-
+  final Config config;
   ComboDealPrincipleDetailBloc({
     required this.repository,
+    required this.config,
   }) : super(ComboDealPrincipleDetailState.initial()) {
     on<ComboDealPrincipleDetailEvent>(_onEvent);
   }
@@ -63,7 +63,7 @@ class ComboDealPrincipleDetailBloc
           salesOrganisation: e.salesOrganisation,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
           principles: e.principles,
         );
@@ -100,7 +100,7 @@ class ComboDealPrincipleDetailBloc
                 isFetchingMaterials: false,
                 isFetchingComboInfo: true,
                 isFetchingPrice: true,
-                canLoadMore: materialList.length >= _pageSize,
+                canLoadMore: materialList.length >= config.pageSize,
                 itemPageNumber: 1,
                 items: newItems,
               ),
@@ -121,8 +121,8 @@ class ComboDealPrincipleDetailBloc
           salesOrganisation: e.salesOrganisation,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
-          pageSize: _pageSize,
-          offset: state.itemPageNumber * _pageSize,
+          pageSize: config.pageSize,
+          offset: state.itemPageNumber * config.pageSize,
           principles: e.principles,
         );
 
@@ -141,7 +141,7 @@ class ComboDealPrincipleDetailBloc
                 isFetchingMaterials: false,
                 isFetchingComboInfo: true,
                 isFetchingPrice: true,
-                canLoadMore: materialList.length >= _pageSize,
+                canLoadMore: materialList.length >= config.pageSize,
                 itemPageNumber: state.itemPageNumber + 1,
                 items: Map.from(state.items)
                   ..addAll(

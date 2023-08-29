@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -18,13 +19,12 @@ part 'bonus_material_bloc.freezed.dart';
 part 'bonus_material_event.dart';
 part 'bonus_material_state.dart';
 
-const _pageSize = 24;
-
 class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
   final IMaterialListRepository materialListRepository;
-
+  final Config config;
   BonusMaterialBloc({
     required this.materialListRepository,
+    required this.config,
   }) : super(BonusMaterialState.initial()) {
     on<BonusMaterialEvent>(_onEvent);
   }
@@ -43,7 +43,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
             await materialListRepository.getMaterialBonusList(
           customerCodeInfo: e.customerCodeInfo,
           offset: 0,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           salesOrgConfig: e.configs,
           salesOrganisation: e.salesOrganisation,
           shipToInfo: e.shipToInfo,
@@ -84,7 +84,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           salesOrgConfig: e.configs,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: state.bonusItemList.length,
           principalData: e.principalData,
           user: e.user,
@@ -104,7 +104,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
                   ..addAll(bonusItems.products),
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
-                canLoadMore: bonusItems.products.length >= _pageSize,
+                canLoadMore: bonusItems.products.length >= config.pageSize,
               ),
             );
           },

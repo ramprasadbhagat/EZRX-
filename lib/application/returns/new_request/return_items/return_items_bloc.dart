@@ -8,17 +8,15 @@ import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_request_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
+import 'package:ezrxmobile/config.dart';
 part 'return_items_event.dart';
 part 'return_items_state.dart';
 part 'return_items_bloc.freezed.dart';
 
-const int _pageSize = 24;
-
 class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
   final IReturnRequestRepository newRequestRepository;
-
-  ReturnItemsBloc({required this.newRequestRepository})
+  final Config config;
+  ReturnItemsBloc({required this.newRequestRepository, required this.config})
       : super(ReturnItemsState.initial()) {
     on(_onEvent);
   }
@@ -43,7 +41,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           shipToInfo: value.shipToInfo,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
         );
 
@@ -60,7 +58,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
             emit(
               state.copyWith(
                 items: data.items,
-                canLoadMore: data.items.length >= _pageSize,
+                canLoadMore: data.items.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
@@ -83,7 +81,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           shipToInfo: value.shipToInfo,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: state.items.length,
         );
 
@@ -102,7 +100,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
             emit(
               state.copyWith(
                 items: updateItemList,
-                canLoadMore: data.items.length >= _pageSize,
+                canLoadMore: data.items.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),

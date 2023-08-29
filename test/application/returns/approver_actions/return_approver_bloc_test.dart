@@ -12,23 +12,24 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_rep
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class ReturnApproverRepositoryMock extends Mock
     implements ReturnApproverRepository {}
 
-const _pageSize = 20;
 void main() {
   late ReturnApproverRepository repository;
   late List<ReturnRequestsId> approverReturnRequestsIdList;
   late ReturnApproverFilter returnApproverFilter;
   final fakeToDate = DateTime.now();
-
+  late Config config;
   final fakeFromDate = DateTime.now().subtract(
     const Duration(days: 7),
   );
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = ReturnApproverRepositoryMock();
+    config = Config()..appFlavor = Flavor.mock;
   });
 
   setUp(() {
@@ -50,7 +51,10 @@ void main() {
     () {
       blocTest(
         'Initialize',
-        build: () => ReturnApproverBloc(returnApproverRepository: repository),
+        build: () => ReturnApproverBloc(
+          returnApproverRepository: repository,
+          config: config,
+        ),
         act: (ReturnApproverBloc bloc) =>
             bloc.add(const ReturnApproverEvent.initialized()),
         expect: () => [ReturnApproverState.initial()],
@@ -65,6 +69,7 @@ void main() {
         'fetch -> returnIds fetch fail',
         build: () => ReturnApproverBloc(
           returnApproverRepository: repository,
+          config: config,
         ),
         setUp: () {
           when(
@@ -72,7 +77,7 @@ void main() {
               user: User.empty(),
               approverReturnFilter: returnApproverFilter,
               offset: 0,
-              pageSize: 20,
+              pageSize: config.pageSize,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -104,6 +109,7 @@ void main() {
         'fetch -> return details fetch fail',
         build: () => ReturnApproverBloc(
           returnApproverRepository: repository,
+          config: config,
         ),
         setUp: () {
           when(
@@ -111,7 +117,7 @@ void main() {
               user: User.empty(),
               approverReturnFilter: returnApproverFilter,
               offset: 0,
-              pageSize: _pageSize,
+              pageSize: config.pageSize,
             ),
           ).thenAnswer(
             (invocation) async => Right(approverReturnRequestsIdList),
@@ -149,6 +155,7 @@ void main() {
         'fetch -> return details fetch success',
         build: () => ReturnApproverBloc(
           returnApproverRepository: repository,
+          config: config,
         ),
         setUp: () {
           when(
@@ -156,7 +163,7 @@ void main() {
               user: User.empty(),
               approverReturnFilter: returnApproverFilter,
               offset: 0,
-              pageSize: _pageSize,
+              pageSize: config.pageSize,
             ),
           ).thenAnswer(
             (invocation) async => Right(approverReturnRequestsIdList),
@@ -203,11 +210,12 @@ void main() {
         'fetch -> returnIds load more fail',
         build: () => ReturnApproverBloc(
           returnApproverRepository: repository,
+          config: config,
         ),
         seed: () => ReturnApproverState.initial().copyWith(
           isFetching: false,
           approverReturnRequestList: List.filled(
-            _pageSize,
+            config.pageSize,
             RequestInformation.empty(),
           ),
           nextPageIndex: 1,
@@ -217,8 +225,8 @@ void main() {
             () => repository.getReturnRequests(
               user: User.empty(),
               approverReturnFilter: returnApproverFilter,
-              offset: _pageSize,
-              pageSize: _pageSize,
+              offset: config.pageSize,
+              pageSize: config.pageSize,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -235,7 +243,7 @@ void main() {
         expect: () => [
           ReturnApproverState.initial().copyWith(
             approverReturnRequestList: List.filled(
-              _pageSize,
+              config.pageSize,
               RequestInformation.empty(),
             ),
             isFetching: true,
@@ -243,7 +251,7 @@ void main() {
           ),
           ReturnApproverState.initial().copyWith(
             approverReturnRequestList: List.filled(
-              _pageSize,
+              config.pageSize,
               RequestInformation.empty(),
             ),
             failureOrSuccessOption: optionOf(
@@ -260,11 +268,12 @@ void main() {
         'fetch -> return details load more fail',
         build: () => ReturnApproverBloc(
           returnApproverRepository: repository,
+          config: config,
         ),
         seed: () => ReturnApproverState.initial().copyWith(
           isFetching: false,
           approverReturnRequestList: List.filled(
-            _pageSize,
+            config.pageSize,
             RequestInformation.empty(),
           ),
           nextPageIndex: 1,
@@ -274,13 +283,13 @@ void main() {
             () => repository.getReturnRequests(
               user: User.empty(),
               approverReturnFilter: returnApproverFilter,
-              offset: _pageSize,
-              pageSize: _pageSize,
+              offset: config.pageSize,
+              pageSize: config.pageSize,
             ),
           ).thenAnswer(
             (invocation) async => Right(
               List.filled(
-                _pageSize,
+                config.pageSize,
                 approverReturnRequestsIdList.first,
               ),
             ),
@@ -288,7 +297,7 @@ void main() {
           when(
             () => repository.getReturnInformation(
               returnRequestIds: List.filled(
-                _pageSize,
+                config.pageSize,
                 approverReturnRequestsIdList.first,
               ),
             ),
@@ -307,7 +316,7 @@ void main() {
         expect: () => [
           ReturnApproverState.initial().copyWith(
             approverReturnRequestList: List.filled(
-              _pageSize,
+              config.pageSize,
               RequestInformation.empty(),
             ),
             isFetching: true,
@@ -315,7 +324,7 @@ void main() {
           ),
           ReturnApproverState.initial().copyWith(
             approverReturnRequestList: List.filled(
-              _pageSize,
+              config.pageSize,
               RequestInformation.empty(),
             ),
             failureOrSuccessOption: optionOf(
@@ -332,11 +341,12 @@ void main() {
         'fetch -> return details load more success',
         build: () => ReturnApproverBloc(
           returnApproverRepository: repository,
+          config: config,
         ),
         seed: () => ReturnApproverState.initial().copyWith(
           isFetching: false,
           approverReturnRequestList: List.filled(
-            _pageSize,
+            config.pageSize,
             RequestInformation.empty(),
           ),
           nextPageIndex: 1,
@@ -346,13 +356,13 @@ void main() {
             () => repository.getReturnRequests(
               user: User.empty(),
               approverReturnFilter: returnApproverFilter,
-              offset: _pageSize,
-              pageSize: _pageSize,
+              offset: config.pageSize,
+              pageSize: config.pageSize,
             ),
           ).thenAnswer(
             (invocation) async => Right(
               List.filled(
-                _pageSize,
+                config.pageSize,
                 approverReturnRequestsIdList.first,
               ),
             ),
@@ -360,14 +370,14 @@ void main() {
           when(
             () => repository.getReturnInformation(
               returnRequestIds: List.filled(
-                _pageSize,
+                config.pageSize,
                 approverReturnRequestsIdList.first,
               ),
             ),
           ).thenAnswer(
             (invocation) async => Right(
               List.filled(
-                _pageSize,
+                config.pageSize,
                 RequestInformation.empty(),
               ),
             ),
@@ -382,7 +392,7 @@ void main() {
         expect: () => [
           ReturnApproverState.initial().copyWith(
             approverReturnRequestList: List.filled(
-              _pageSize,
+              config.pageSize,
               RequestInformation.empty(),
             ),
             isFetching: true,
@@ -390,7 +400,7 @@ void main() {
           ),
           ReturnApproverState.initial().copyWith(
             approverReturnRequestList: List.filled(
-              _pageSize * 2,
+              config.pageSize * 2,
               RequestInformation.empty(),
             ),
             nextPageIndex: 2,

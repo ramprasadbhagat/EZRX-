@@ -7,21 +7,22 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/admin_po_attachment_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class AdminPoAttachmentRepositoryMock extends Mock
     implements AdminPoAttachmentRepository {}
 
-const _defaultPageSize = 20;
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final adminPoAttachmentRepository = AdminPoAttachmentRepositoryMock();
-
+  final config = Config()..appFlavor = Flavor.mock;
   group('Admin Po Attachment Bloc', () {
     blocTest(
       'Initialize',
-      build: () =>
-          AdminPoAttachmentBloc(repository: adminPoAttachmentRepository),
+      build: () => AdminPoAttachmentBloc(
+        repository: adminPoAttachmentRepository,
+        config: config,
+      ),
       act: (AdminPoAttachmentBloc bloc) =>
           bloc.add(const AdminPoAttachmentEvent.initialized()),
       expect: () => [AdminPoAttachmentState.initial()],
@@ -29,12 +30,14 @@ void main() {
 
     blocTest(
       'Fetch Failure',
-      build: () =>
-          AdminPoAttachmentBloc(repository: adminPoAttachmentRepository),
+      build: () => AdminPoAttachmentBloc(
+        repository: adminPoAttachmentRepository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => adminPoAttachmentRepository.getAdminPoAttachment(
-            pageSize: _defaultPageSize,
+            pageSize: config.pageSize,
             offset: 0,
             adminPoAttachmentFilter: AdminPoAttachmentFilter.empty(),
           ),
@@ -64,12 +67,14 @@ void main() {
 
     blocTest(
       'Fetch Success',
-      build: () =>
-          AdminPoAttachmentBloc(repository: adminPoAttachmentRepository),
+      build: () => AdminPoAttachmentBloc(
+        repository: adminPoAttachmentRepository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => adminPoAttachmentRepository.getAdminPoAttachment(
-            pageSize: _defaultPageSize,
+            pageSize: config.pageSize,
             offset: 0,
             adminPoAttachmentFilter: AdminPoAttachmentFilter.empty(),
           ),
@@ -91,7 +96,7 @@ void main() {
           isFetching: false,
           failureOrSuccessOption: none(),
           adminPoAttachmentList: [],
-          canLoadMore: [].length >= _defaultPageSize,
+          canLoadMore: [].length >= config.pageSize,
           nextPageIndex: 1,
         ),
       ],
@@ -99,12 +104,14 @@ void main() {
 
     blocTest(
       'Load More Failure',
-      build: () =>
-          AdminPoAttachmentBloc(repository: adminPoAttachmentRepository),
+      build: () => AdminPoAttachmentBloc(
+        repository: adminPoAttachmentRepository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => adminPoAttachmentRepository.getAdminPoAttachment(
-            pageSize: _defaultPageSize,
+            pageSize: config.pageSize,
             offset: 0,
             adminPoAttachmentFilter: AdminPoAttachmentFilter.empty(),
           ),
@@ -134,12 +141,14 @@ void main() {
 
     blocTest(
       'Load More Success',
-      build: () =>
-          AdminPoAttachmentBloc(repository: adminPoAttachmentRepository),
+      build: () => AdminPoAttachmentBloc(
+        repository: adminPoAttachmentRepository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => adminPoAttachmentRepository.getAdminPoAttachment(
-            pageSize: _defaultPageSize,
+            pageSize: config.pageSize,
             offset: 0,
             adminPoAttachmentFilter: AdminPoAttachmentFilter.empty(),
           ),
@@ -161,7 +170,7 @@ void main() {
           isFetching: false,
           failureOrSuccessOption: none(),
           adminPoAttachmentList: [],
-          canLoadMore: [].length >= _defaultPageSize,
+          canLoadMore: [].length >= config.pageSize,
           nextPageIndex: 1,
         ),
       ],
@@ -169,8 +178,10 @@ void main() {
 
     blocTest(
       'Select Deselect when adminPoAttachment equal',
-      build: () =>
-          AdminPoAttachmentBloc(repository: adminPoAttachmentRepository),
+      build: () => AdminPoAttachmentBloc(
+        repository: adminPoAttachmentRepository,
+        config: config,
+      ),
       seed: () => AdminPoAttachmentState.initial().copyWith(
         adminPoAttachmentList: [
           AdminPoAttachment(
@@ -232,8 +243,10 @@ void main() {
 
     blocTest(
       'Select Deselect when adminPoAttachment not equal',
-      build: () =>
-          AdminPoAttachmentBloc(repository: adminPoAttachmentRepository),
+      build: () => AdminPoAttachmentBloc(
+        repository: adminPoAttachmentRepository,
+        config: config,
+      ),
       seed: () => AdminPoAttachmentState.initial().copyWith(
         adminPoAttachmentList: [
           AdminPoAttachment(

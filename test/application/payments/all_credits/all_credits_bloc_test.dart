@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -14,14 +15,16 @@ import 'package:mocktail/mocktail.dart';
 class AllCreditsAndInvoicesRepositoryMock extends Mock
     implements AllCreditsAndInvoicesRepository {}
 
-const _pageSize = 24;
 void main() {
   late AllCreditsAndInvoicesRepository repository;
   late List<CreditAndInvoiceItem> fakeResult;
   late AllCreditsFilter allCreditsFilter;
+  late Config config;
+
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = AllCreditsAndInvoicesRepositoryMock();
+    config = Config()..appFlavor = Flavor.mock;
   });
 
   setUp(() {
@@ -36,8 +39,10 @@ void main() {
     () {
       blocTest(
         'Initialize',
-        build: () =>
-            AllCreditsBloc(allCreditsAndInvoicesRepository: repository),
+        build: () => AllCreditsBloc(
+          allCreditsAndInvoicesRepository: repository,
+          config: config,
+        ),
         act: (AllCreditsBloc bloc) =>
             bloc.add(const AllCreditsEvent.initialized()),
         expect: () => [AllCreditsState.initial()],
@@ -52,6 +57,7 @@ void main() {
         'fetch -> credits fetch fail',
         build: () => AllCreditsBloc(
           allCreditsAndInvoicesRepository: repository,
+          config: config,
         ),
         setUp: () {
           when(
@@ -60,7 +66,7 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty(),
               filter: allCreditsFilter,
               offset: 0,
-              pageSize: _pageSize,
+              pageSize: config.pageSize,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -92,6 +98,7 @@ void main() {
         'fetch -> credits fetch success',
         build: () => AllCreditsBloc(
           allCreditsAndInvoicesRepository: repository,
+          config: config,
         ),
         setUp: () {
           when(
@@ -100,7 +107,7 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty(),
               filter: allCreditsFilter,
               offset: 0,
-              pageSize: _pageSize,
+              pageSize: config.pageSize,
             ),
           ).thenAnswer(
             (invocation) async => Right(fakeResult),
@@ -132,11 +139,12 @@ void main() {
       'fetch -> credits load more fail',
       build: () => AllCreditsBloc(
         allCreditsAndInvoicesRepository: repository,
+        config: config,
       ),
       seed: () => AllCreditsState.initial().copyWith(
         isLoading: false,
         items: List.filled(
-          _pageSize,
+          config.pageSize,
           fakeResult.first,
         ),
       ),
@@ -146,8 +154,8 @@ void main() {
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             filter: allCreditsFilter,
-            offset: _pageSize,
-            pageSize: _pageSize,
+            offset: config.pageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -164,14 +172,14 @@ void main() {
       expect: () => [
         AllCreditsState.initial().copyWith(
           items: List.filled(
-            _pageSize,
+            config.pageSize,
             CreditAndInvoiceItem.empty(),
           ),
           isLoading: true,
         ),
         AllCreditsState.initial().copyWith(
           items: List.filled(
-            _pageSize,
+            config.pageSize,
             CreditAndInvoiceItem.empty(),
           ),
           failureOrSuccessOption: optionOf(
@@ -187,11 +195,12 @@ void main() {
       'fetch -> credits load more success',
       build: () => AllCreditsBloc(
         allCreditsAndInvoicesRepository: repository,
+        config: config,
       ),
       seed: () => AllCreditsState.initial().copyWith(
         isLoading: false,
         items: List.filled(
-          _pageSize,
+          config.pageSize,
           fakeResult.first,
         ),
       ),
@@ -201,13 +210,13 @@ void main() {
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             filter: allCreditsFilter,
-            offset: _pageSize,
-            pageSize: _pageSize,
+            offset: config.pageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
             List.filled(
-              _pageSize,
+              config.pageSize,
               fakeResult.first,
             ),
           ),
@@ -222,14 +231,14 @@ void main() {
       expect: () => [
         AllCreditsState.initial().copyWith(
           items: List.filled(
-            _pageSize,
+            config.pageSize,
             fakeResult.first,
           ),
           isLoading: true,
         ),
         AllCreditsState.initial().copyWith(
           items: List.filled(
-            _pageSize * 2,
+            config.pageSize * 2,
             fakeResult.first,
           ),
         ),

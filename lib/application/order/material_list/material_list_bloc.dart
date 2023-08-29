@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -18,15 +19,14 @@ part 'material_list_event.dart';
 
 part 'material_list_state.dart';
 
-int _pageSize = 24;
-
 class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
   final IMaterialListRepository materialListRepository;
   final IFavouriteRepository favouriteRepository;
-
+  final Config config;
   MaterialListBloc({
     required this.materialListRepository,
     required this.favouriteRepository,
+    required this.config,
   }) : super(MaterialListState.initial()) {
     on<_Initialized>((e, emit) {
       emit(MaterialListState.initial());
@@ -66,7 +66,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           salesOrgConfig: e.configs,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
           selectedMaterialFilter: e.selectedMaterialFilter,
         );
@@ -84,7 +84,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
                 materialList: productResponse.products,
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
-                canLoadMore: productResponse.products.length >= _pageSize,
+                canLoadMore: productResponse.products.length >= config.pageSize,
                 nextPageIndex: 1,
               ),
             );
@@ -106,7 +106,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         salesOrgConfig: e.configs,
         customerCodeInfo: e.customerCodeInfo,
         shipToInfo: e.shipToInfo,
-        pageSize: _pageSize,
+        pageSize: config.pageSize,
         offset: state.materialList.length,
         selectedMaterialFilter: state.selectedMaterialFilter,
       );
@@ -126,7 +126,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
               materialList: productList,
               apiFailureOrSuccessOption: none(),
               isFetching: false,
-              canLoadMore: productList.length >= _pageSize,
+              canLoadMore: productList.length >= config.pageSize,
               nextPageIndex: state.nextPageIndex + 1,
             ),
           );

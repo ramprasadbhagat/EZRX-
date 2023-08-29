@@ -18,6 +18,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_reposito
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class ViewByItemRepositoryMock extends Mock implements ViewByItemRepository {}
 
@@ -25,7 +26,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late ViewByItemRepository viewByItemRepository;
   late OrderHistory orderHistoryMockData;
-
+  final config = Config()..appFlavor = Flavor.mock;
   final salesOrgConfig = SalesOrganisationConfigs.empty()
       .copyWith(salesOrg: SalesOrg('fake-salesOrg'));
   final customerCodeInfo = CustomerCodeInfo.empty()
@@ -52,12 +53,10 @@ void main() {
       ViewByItemFilter.empty().copyWith(dateRange: dateTimeRange);
 
   const offSet = 0;
-  const pageSize = 24;
   group('Orders View By Item', () {
     setUp(() async {
       viewByItemRepository = ViewByItemRepositoryMock();
-      orderHistoryMockData =
-          await ViewByItemLocalDataSource().getViewByItems();
+      orderHistoryMockData = await ViewByItemLocalDataSource().getViewByItems();
       WidgetsFlutterBinding.ensureInitialized();
     });
 
@@ -65,12 +64,13 @@ void main() {
       'Orders view by item fetch fail',
       build: () => ViewByItemsBloc(
         viewByItemRepository: viewByItemRepository,
+        config: config,
       ),
       setUp: () {
         when(
           () => viewByItemRepository.getViewByItems(
             offset: offSet,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             salesOrgConfig: salesOrgConfig,
             searchKey: searchKey,
             shipTo: shipToInfo,
@@ -120,12 +120,13 @@ void main() {
       'Orders view by item fetch Success',
       build: () => ViewByItemsBloc(
         viewByItemRepository: viewByItemRepository,
+        config: config,
       ),
       setUp: () {
         when(
           () => viewByItemRepository.getViewByItems(
             offset: offSet,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             salesOrgConfig: salesOrgConfig,
             searchKey: searchKey,
             shipTo: shipToInfo,
@@ -179,6 +180,7 @@ void main() {
       'Orders view by item loadMore',
       build: () => ViewByItemsBloc(
         viewByItemRepository: viewByItemRepository,
+        config: config,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
         appliedFilter: viewByItemFilter,
@@ -189,7 +191,7 @@ void main() {
         when(
           () => viewByItemRepository.getViewByItems(
             offset: orderHistoryMockData.orderHistoryItems.length,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             salesOrgConfig: salesOrgConfig,
             searchKey: searchKey,
             shipTo: shipToInfo,
@@ -246,6 +248,7 @@ void main() {
       'Orders view by item loadMore failure',
       build: () => ViewByItemsBloc(
         viewByItemRepository: viewByItemRepository,
+        config: config,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
         appliedFilter: viewByItemFilter,
@@ -256,7 +259,7 @@ void main() {
         when(
           () => viewByItemRepository.getViewByItems(
             offset: orderHistoryMockData.orderHistoryItems.length,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             salesOrgConfig: salesOrgConfig,
             searchKey: searchKey,
             shipTo: shipToInfo,

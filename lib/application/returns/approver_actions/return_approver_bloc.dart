@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:ezrxmobile/config.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -13,13 +13,13 @@ part 'return_approver_event.dart';
 part 'return_approver_state.dart';
 part 'return_approver_bloc.freezed.dart';
 
-const int _pageSize = 20;
-
 class ReturnApproverBloc
     extends Bloc<ReturnApproverEvent, ReturnApproverState> {
   final IReturnApproverRepository returnApproverRepository;
+  final Config config;
   ReturnApproverBloc({
     required this.returnApproverRepository,
+    required this.config,
   }) : super(ReturnApproverState.initial()) {
     on<ReturnApproverEvent>(_onEvent);
   }
@@ -44,7 +44,7 @@ class ReturnApproverBloc
             await returnApproverRepository.getReturnRequests(
           user: e.user,
           offset: 0,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           approverReturnFilter: e.approverReturnFilter,
         );
         await returnIdsfailureOrSuccess.fold(
@@ -76,7 +76,7 @@ class ReturnApproverBloc
                         approverReturnRequestInformationList,
                     failureOrSuccessOption: none(),
                     canLoadMore: approverReturnRequestInformationList.length >=
-                        _pageSize,
+                        config.pageSize,
                     nextPageIndex: 1,
                   ),
                 );
@@ -98,7 +98,7 @@ class ReturnApproverBloc
             await returnApproverRepository.getReturnRequests(
           user: e.user,
           offset: state.approverReturnRequestList.length,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           approverReturnFilter: e.approverReturnFilter,
         );
         await returnIdsfailureOrSuccess.fold(
@@ -131,7 +131,7 @@ class ReturnApproverBloc
                     )..addAll(approverReturnRequestInformationList),
                     failureOrSuccessOption: none(),
                     canLoadMore: approverReturnRequestInformationList.length >=
-                        _pageSize,
+                        config.pageSize,
                     nextPageIndex: state.nextPageIndex + 1,
                   ),
                 );

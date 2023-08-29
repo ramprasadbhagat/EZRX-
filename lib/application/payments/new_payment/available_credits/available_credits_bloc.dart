@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -12,14 +13,14 @@ part 'available_credits_event.dart';
 part 'available_credits_state.dart';
 part 'available_credits_bloc.freezed.dart';
 
-const int _pageSize = 24;
-
 class AvailableCreditsBloc
     extends Bloc<AvailableCreditsEvent, AvailableCreditsState> {
   final INewPaymentRepository newPaymentRepository;
-
-  AvailableCreditsBloc({required this.newPaymentRepository})
-      : super(AvailableCreditsState.initial()) {
+  final Config config;
+  AvailableCreditsBloc({
+    required this.newPaymentRepository,
+    required this.config,
+  }) : super(AvailableCreditsState.initial()) {
     on(_onEvent);
   }
 
@@ -43,7 +44,7 @@ class AvailableCreditsBloc
             await newPaymentRepository.getAvailableCreditNotes(
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
           appliedFilter: value.appliedFilter,
         );
@@ -61,7 +62,7 @@ class AvailableCreditsBloc
             emit(
               state.copyWith(
                 items: data,
-                canLoadMore: data.length >= _pageSize,
+                canLoadMore: data.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
@@ -83,7 +84,7 @@ class AvailableCreditsBloc
             await newPaymentRepository.getAvailableCreditNotes(
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: state.items.length,
           appliedFilter: state.appliedFilter,
         );
@@ -103,7 +104,7 @@ class AvailableCreditsBloc
             emit(
               state.copyWith(
                 items: updateItemList,
-                canLoadMore: data.length >= _pageSize,
+                canLoadMore: data.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),

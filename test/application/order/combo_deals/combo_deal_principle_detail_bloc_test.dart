@@ -16,7 +16,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
-
+import 'package:ezrxmobile/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -27,6 +27,7 @@ class MockMaterialListRepository extends Mock
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late MaterialListRepository mockRepository;
+  late Config config;
   final fakePriceComboDeal = PriceComboDeal.empty().copyWith(
     category: PriceComboDealCategory.empty().copyWith(
       type: ComboDealCategoryType('ZPRINC'),
@@ -47,6 +48,7 @@ void main() {
 
   setUp(() async {
     mockRepository = MockMaterialListRepository();
+    config = Config()..appFlavor = Flavor.mock;
   });
 
   PriceAggregate newPriceAggregate(String materialNumber) =>
@@ -58,7 +60,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Init',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     act: (bloc) => bloc.add(
       const ComboDealPrincipleDetailEvent.initialize(),
     ),
@@ -72,7 +77,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Init from cart',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     act: (bloc) => bloc.add(
       ComboDealPrincipleDetailEvent.initFromCart(
         items: [
@@ -107,7 +115,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Update quantity',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     act: (bloc) => bloc.add(
       ComboDealPrincipleDetailEvent.updateItemQuantity(
         item: MaterialNumber('fake-2'),
@@ -134,7 +145,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Update selection',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     act: (bloc) => bloc.add(
       ComboDealPrincipleDetailEvent.updateItemSelection(
         item: MaterialNumber('fake-2'),
@@ -158,7 +172,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Set combo deal info',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     act: (bloc) => bloc.add(
       ComboDealPrincipleDetailEvent.setComboDealInfo(
         comboDealInfo: fakeComboDeal,
@@ -189,7 +206,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Set price info',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     act: (bloc) => bloc.add(
       ComboDealPrincipleDetailEvent.setPriceInfo(
         priceMap: {
@@ -234,7 +254,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Fetch success',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     setUp: () {
       when(
         () => mockRepository.getComboDealMaterials(
@@ -242,7 +265,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           shipToInfo: ShipToInfo.empty(),
-          pageSize: 20,
+          pageSize: config.pageSize,
           offset: 0,
           principles: ['fake-principle'],
         ),
@@ -296,7 +319,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Fetch failure',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     setUp: () {
       when(
         () => mockRepository.getComboDealMaterials(
@@ -304,7 +330,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           shipToInfo: ShipToInfo.empty(),
-          pageSize: 20,
+          pageSize: config.pageSize,
           offset: 0,
           principles: ['fake-principle'],
         ),
@@ -354,7 +380,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Fetch success when init from cart',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     setUp: () {
       when(
         () => mockRepository.getComboDealMaterials(
@@ -362,7 +391,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           shipToInfo: ShipToInfo.empty(),
-          pageSize: 20,
+          pageSize: config.pageSize,
           offset: 0,
           principles: ['fake-principle'],
         ),
@@ -421,7 +450,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Prevent loadmore when can not loadmore',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     act: (bloc) => bloc.add(
       ComboDealPrincipleDetailEvent.loadMore(
         customerCodeInfo: CustomerCodeInfo.empty(),
@@ -440,7 +472,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Prevent loadmore when fetching',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     act: (bloc) => bloc.add(
       ComboDealPrincipleDetailEvent.loadMore(
         customerCodeInfo: CustomerCodeInfo.empty(),
@@ -459,7 +494,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Loadmore success',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     setUp: () {
       when(
         () => mockRepository.getComboDealMaterials(
@@ -467,8 +505,8 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           shipToInfo: ShipToInfo.empty(),
-          pageSize: 20,
-          offset: 20,
+          pageSize: config.pageSize,
+          offset: config.pageSize,
           principles: ['fake-principle'],
         ),
       ).thenAnswer(
@@ -529,7 +567,10 @@ void main() {
 
   blocTest<ComboDealPrincipleDetailBloc, ComboDealPrincipleDetailState>(
     'Loadmore failure',
-    build: () => ComboDealPrincipleDetailBloc(repository: mockRepository),
+    build: () => ComboDealPrincipleDetailBloc(
+      repository: mockRepository,
+      config: config,
+    ),
     setUp: () {
       when(
         () => mockRepository.getComboDealMaterials(
@@ -537,8 +578,8 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           shipToInfo: ShipToInfo.empty(),
-          pageSize: 20,
-          offset: 20,
+          pageSize: config.pageSize,
+          offset: config.pageSize,
           principles: ['fake-principle'],
         ),
       ).thenAnswer(

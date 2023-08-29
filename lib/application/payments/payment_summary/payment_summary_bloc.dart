@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -14,14 +15,14 @@ part 'payment_summary_event.dart';
 part 'payment_summary_state.dart';
 part 'payment_summary_bloc.freezed.dart';
 
-int _pageSize = 24;
-
 class PaymentSummaryBloc
     extends Bloc<PaymentSummaryEvent, PaymentSummaryState> {
   final IPaymentSummaryRepository paymentSummaryRepository;
-
-  PaymentSummaryBloc({required this.paymentSummaryRepository})
-      : super(PaymentSummaryState.initial()) {
+  final Config config;
+  PaymentSummaryBloc({
+    required this.paymentSummaryRepository,
+    required this.config,
+  }) : super(PaymentSummaryState.initial()) {
     on<PaymentSummaryEvent>(_onEvent);
   }
 
@@ -46,7 +47,7 @@ class PaymentSummaryBloc
           customerCodeInfo: e.customerCodeInfo,
           salesOrganization: e.salesOrganization,
           offset: state.paymentSummaryDetailsResponse.paymentSummaryList.length,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           paymentSummaryDetails: state.paymentSummaryDetailsResponse,
         );
 
@@ -81,7 +82,7 @@ class PaymentSummaryBloc
           customerCodeInfo: e.customerCodeInfo,
           salesOrganization: e.salesOrganization,
           offset: state.paymentSummaryDetailsResponse.paymentSummaryList.length,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           paymentSummaryDetails: state.paymentSummaryDetailsResponse,
         );
 
@@ -98,7 +99,7 @@ class PaymentSummaryBloc
               isFetching: false,
               canLoadMorePaymentSummary:
                   paymentSummaryDetailsResponse.paymentSummaryList.length >=
-                      _pageSize,
+                      config.pageSize,
               failureOrSuccessOption: none(),
             ),
           ),

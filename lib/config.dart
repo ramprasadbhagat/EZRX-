@@ -10,6 +10,8 @@ class Config {
   int httpConnectTimeout = 150000;
   int httpReceiveTimeout = 150000;
   Duration dateRangePickerDuration = const Duration(days: 1095);
+  int pageSize = 24;
+  int autoSearchTimeout = 1500;
 
   String baseUrl({AppMarket? currentMarket}) {
     final marketDomain = currentMarket?.getOrDefaultValue('my');

@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_reposi
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class NewPaymentRepositoryMock extends Mock implements NewPaymentRepository {}
 
@@ -18,15 +19,17 @@ void main() {
   late OutstandingInvoiceFilter fakeOutstandingInvoiceFilter;
   late List<CustomerOpenItem> fakeCustomerOpenItem;
   late int pageSize;
+  late Config config;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     newPaymentRepository = NewPaymentRepositoryMock();
+    config = Config()..appFlavor = Flavor.mock;
   });
   setUp(() {
     fakeOutstandingInvoiceFilter = OutstandingInvoiceFilter.empty().copyWith();
     fakeCustomerOpenItem = <CustomerOpenItem>[];
-    pageSize = 24;
+    pageSize = config.pageSize;
   });
 
   group(
@@ -36,6 +39,7 @@ void main() {
         'Initialize',
         build: () => OutstandingInvoicesBloc(
           newPaymentRepository: newPaymentRepository,
+          config: config,
         ),
         act: (OutstandingInvoicesBloc bloc) =>
             bloc.add(const OutstandingInvoicesEvent.initialized()),
@@ -47,8 +51,10 @@ void main() {
   group('Outstanding Invoices Bloc Fetch', () {
     blocTest(
       'fetch -> Outstanding Invoices fetch fail',
-      build: () =>
-          OutstandingInvoicesBloc(newPaymentRepository: newPaymentRepository),
+      build: () => OutstandingInvoicesBloc(
+        newPaymentRepository: newPaymentRepository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => newPaymentRepository.getOutstandingInvoices(
@@ -86,8 +92,10 @@ void main() {
     );
     blocTest(
       'fetch -> Outstanding Invoices fetch Success',
-      build: () =>
-          OutstandingInvoicesBloc(newPaymentRepository: newPaymentRepository),
+      build: () => OutstandingInvoicesBloc(
+        newPaymentRepository: newPaymentRepository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => newPaymentRepository.getOutstandingInvoices(
@@ -125,8 +133,10 @@ void main() {
   group('Outstanding Invoices Bloc Load More', () {
     blocTest(
       'fetch -> Outstanding Invoices Load More fail',
-      build: () =>
-          OutstandingInvoicesBloc(newPaymentRepository: newPaymentRepository),
+      build: () => OutstandingInvoicesBloc(
+        newPaymentRepository: newPaymentRepository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => newPaymentRepository.getOutstandingInvoices(
@@ -163,8 +173,10 @@ void main() {
     );
     blocTest(
       'fetch -> Outstanding Invoices Load More Success',
-      build: () =>
-          OutstandingInvoicesBloc(newPaymentRepository: newPaymentRepository),
+      build: () => OutstandingInvoicesBloc(
+        newPaymentRepository: newPaymentRepository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => newPaymentRepository.getOutstandingInvoices(

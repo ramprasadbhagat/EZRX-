@@ -18,7 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
-
+import 'package:ezrxmobile/config.dart';
 import '../../../utils/widget_utils.dart';
 
 class AdminPoAttachmentBlocMock
@@ -33,8 +33,6 @@ class PoAttachmentBlocMock
     extends MockBloc<PoAttachmentEvent, PoAttachmentState>
     implements PoAttachmentBloc {}
 
-const _pageSize = 20;
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late GetIt locator;
@@ -42,6 +40,7 @@ void main() {
   late AdminPoAttachmentBloc mockAdminPoAttachmentBloc;
   late AdminPoAttachmentFilterBloc mockAdminPoAttachmentFilterBloc;
   late PoAttachmentBloc mockPoAttachmentBloc;
+  late Config config;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +50,7 @@ void main() {
     locator.registerLazySingleton(() => mockAdminPoAttachmentBloc);
     locator.registerLazySingleton(() => mockAdminPoAttachmentFilterBloc);
     locator.registerLazySingleton(() => mockPoAttachmentBloc);
+    config = Config()..appFlavor = Flavor.mock;
   });
 
   group('admin po attachment', () {
@@ -154,7 +154,7 @@ void main() {
             const Right('success'),
           ),
           adminPoAttachmentList: List.filled(
-            _pageSize,
+            config.pageSize,
             AdminPoAttachment(
               salesOrderNumber: 'fake-orderNumber',
               ezrxReferenceNumber: 'fake-refNumber',
@@ -266,7 +266,7 @@ void main() {
             const Right('success'),
           ),
           adminPoAttachmentList: List.filled(
-            _pageSize,
+            config.pageSize,
             AdminPoAttachment(
               salesOrderNumber: 'fake-orderNumber',
               ezrxReferenceNumber: 'fake-refNumber',
@@ -365,7 +365,7 @@ void main() {
             const Right('success'),
           ),
           adminPoAttachmentList: List.filled(
-            _pageSize,
+            config.pageSize,
             AdminPoAttachment(
               salesOrderNumber: 'fake-orderNumber',
               ezrxReferenceNumber: 'fake-refNumber',

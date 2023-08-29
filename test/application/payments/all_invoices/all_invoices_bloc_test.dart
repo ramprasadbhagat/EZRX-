@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -14,14 +15,15 @@ import 'package:mocktail/mocktail.dart';
 class AllCreditsAndInvoicesRepositoryMock extends Mock
     implements AllCreditsAndInvoicesRepository {}
 
-const _pageSize = 24;
 void main() {
   late AllCreditsAndInvoicesRepository repository;
   late List<CreditAndInvoiceItem> fakeResult;
   late AllInvoicesFilter allInvoicesFilter;
+  late Config config;
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = AllCreditsAndInvoicesRepositoryMock();
+    config = Config()..appFlavor = Flavor.mock;
   });
 
   setUp(() {
@@ -36,8 +38,10 @@ void main() {
     () {
       blocTest(
         'Initialize',
-        build: () =>
-            AllInvoicesBloc(allCreditsAndInvoicesRepository: repository),
+        build: () => AllInvoicesBloc(
+          allCreditsAndInvoicesRepository: repository,
+          config: config,
+        ),
         act: (AllInvoicesBloc bloc) =>
             bloc.add(const AllInvoicesEvent.initialized()),
         expect: () => [AllInvoicesState.initial()],
@@ -52,6 +56,7 @@ void main() {
         'fetch -> credits fetch fail',
         build: () => AllInvoicesBloc(
           allCreditsAndInvoicesRepository: repository,
+          config: config,
         ),
         setUp: () {
           when(
@@ -60,7 +65,7 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty(),
               filter: allInvoicesFilter,
               offset: 0,
-              pageSize: _pageSize,
+              pageSize: config.pageSize,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -93,6 +98,7 @@ void main() {
         'fetch -> invoices fetch success',
         build: () => AllInvoicesBloc(
           allCreditsAndInvoicesRepository: repository,
+          config: config,
         ),
         setUp: () {
           when(
@@ -101,7 +107,7 @@ void main() {
               customerCodeInfo: CustomerCodeInfo.empty(),
               filter: allInvoicesFilter,
               offset: 0,
-              pageSize: _pageSize,
+              pageSize: config.pageSize,
             ),
           ).thenAnswer(
             (invocation) async => Right(fakeResult),
@@ -133,11 +139,12 @@ void main() {
       'fetch -> invoices load more fail',
       build: () => AllInvoicesBloc(
         allCreditsAndInvoicesRepository: repository,
+        config: config,
       ),
       seed: () => AllInvoicesState.initial().copyWith(
         isLoading: false,
         items: List.filled(
-          _pageSize,
+          config.pageSize,
           fakeResult.first,
         ),
       ),
@@ -147,8 +154,8 @@ void main() {
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             filter: allInvoicesFilter,
-            offset: _pageSize,
-            pageSize: _pageSize,
+            offset: config.pageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -165,14 +172,14 @@ void main() {
       expect: () => [
         AllInvoicesState.initial().copyWith(
           items: List.filled(
-            _pageSize,
+            config.pageSize,
             CreditAndInvoiceItem.empty(),
           ),
           isLoading: true,
         ),
         AllInvoicesState.initial().copyWith(
           items: List.filled(
-            _pageSize,
+            config.pageSize,
             CreditAndInvoiceItem.empty(),
           ),
           failureOrSuccessOption: optionOf(
@@ -188,11 +195,12 @@ void main() {
       'fetch -> invoices load more success',
       build: () => AllInvoicesBloc(
         allCreditsAndInvoicesRepository: repository,
+        config: config,
       ),
       seed: () => AllInvoicesState.initial().copyWith(
         isLoading: false,
         items: List.filled(
-          _pageSize,
+          config.pageSize,
           fakeResult.first,
         ),
       ),
@@ -202,13 +210,13 @@ void main() {
             salesOrganisation: SalesOrganisation.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             filter: allInvoicesFilter,
-            offset: _pageSize,
-            pageSize: _pageSize,
+            offset: config.pageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
             List.filled(
-              _pageSize,
+              config.pageSize,
               fakeResult.first,
             ),
           ),
@@ -223,14 +231,14 @@ void main() {
       expect: () => [
         AllInvoicesState.initial().copyWith(
           items: List.filled(
-            _pageSize,
+            config.pageSize,
             fakeResult.first,
           ),
           isLoading: true,
         ),
         AllInvoicesState.initial().copyWith(
           items: List.filled(
-            _pageSize * 2,
+            config.pageSize * 2,
             fakeResult.first,
           ),
         ),

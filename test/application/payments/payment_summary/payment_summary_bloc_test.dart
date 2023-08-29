@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_re
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class PaymentSummaryRepositoryMock extends Mock
     implements PaymentSummaryRepository {}
@@ -19,6 +20,7 @@ void main() {
   final mockCustomerCodeInfo = CustomerCodeInfo.empty();
   final mockSalesOrganisation = SalesOrganisation.empty();
   late PaymentSummaryDetailsResponse paymentSummaryDetailsResponse;
+  late Config config;
   const offSet = 0;
   const pageSize = 24;
   setUpAll(() async {
@@ -26,12 +28,14 @@ void main() {
     paymentSummaryMockRepository = PaymentSummaryRepositoryMock();
     paymentSummaryDetailsResponse =
         await PaymentSummaryLocalDataSource().getPaymentSummary();
+    config = Config()..appFlavor = Flavor.mock;
   });
   group('Payment Summary Bloc Test', () {
     blocTest<PaymentSummaryBloc, PaymentSummaryState>(
       'Payment Summary "fetchPaymentSummaryList" Event Success',
       build: () => PaymentSummaryBloc(
         paymentSummaryRepository: paymentSummaryMockRepository,
+        config: config,
       ),
       setUp: () {
         when(
@@ -67,6 +71,7 @@ void main() {
       'Payment Summary "fetchPaymentSummaryList" Event failure',
       build: () => PaymentSummaryBloc(
         paymentSummaryRepository: paymentSummaryMockRepository,
+        config: config,
       ),
       setUp: () {
         when(
@@ -103,6 +108,7 @@ void main() {
       'Payment Summary "loadMorePaymentSummary" Event Success',
       build: () => PaymentSummaryBloc(
         paymentSummaryRepository: paymentSummaryMockRepository,
+        config: config,
       ),
       setUp: () {
         when(
@@ -147,6 +153,7 @@ void main() {
       'Payment Summary "loadMorePaymentSummary" Event failure',
       build: () => PaymentSummaryBloc(
         paymentSummaryRepository: paymentSummaryMockRepository,
+        config: config,
       ),
       setUp: () {
         when(

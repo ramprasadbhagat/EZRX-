@@ -13,12 +13,13 @@ import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_list_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class ReturnListRepositoryMock extends Mock implements ReturnListRepository {}
 
 void main() {
   late ReturnListRepository returnListRepositoryMock;
-
+  late Config config;
   final mockSalesOrg = SalesOrg('2001');
   final mockShipInfo =
       ShipToInfo.empty().copyWith(shipToCustomerCode: 'mock-customer-code-1');
@@ -40,6 +41,7 @@ void main() {
 
   setUpAll(() async {
     returnListRepositoryMock = ReturnListRepositoryMock();
+    config = Config()..appFlavor = Flavor.mock;
   });
 
   group('Return List By Request Bloc', () {
@@ -47,6 +49,7 @@ void main() {
       'Initialize',
       build: () => ReturnListByRequestBloc(
         returnListRepository: returnListRepositoryMock,
+        config: config,
       ),
       act: (ReturnListByRequestBloc bloc) => bloc.add(
         const ReturnListByRequestEvent.initialized(),
@@ -60,6 +63,7 @@ void main() {
       'Fetch Success',
       build: () => ReturnListByRequestBloc(
         returnListRepository: returnListRepositoryMock,
+        config: config,
       ),
       setUp: () {
         when(
@@ -114,6 +118,7 @@ void main() {
       'Fetch Failure',
       build: () => ReturnListByRequestBloc(
         returnListRepository: returnListRepositoryMock,
+        config: config,
       ),
       setUp: () {
         when(
@@ -170,6 +175,7 @@ void main() {
       'Load More Success First Time',
       build: () => ReturnListByRequestBloc(
         returnListRepository: returnListRepositoryMock,
+        config: config,
       ),
       setUp: () {
         when(
@@ -218,6 +224,7 @@ void main() {
       'Load More Fail First Time',
       build: () => ReturnListByRequestBloc(
         returnListRepository: returnListRepositoryMock,
+        config: config,
       ),
       setUp: () {
         when(
@@ -268,6 +275,7 @@ void main() {
       'Load More Success Second Time',
       build: () => ReturnListByRequestBloc(
         returnListRepository: returnListRepositoryMock,
+        config: config,
       ),
       setUp: () {
         when(
@@ -328,6 +336,7 @@ void main() {
       'Load More Fail Second Time',
       build: () => ReturnListByRequestBloc(
         returnListRepository: returnListRepositoryMock,
+        config: config,
       ),
       setUp: () {
         when(

@@ -1,5 +1,6 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -17,14 +18,13 @@ part 'return_list_by_request_event.dart';
 part 'return_list_by_request_state.dart';
 part 'return_list_by_request_bloc.freezed.dart';
 
-const int _pageSize = 24;
-
 class ReturnListByRequestBloc
     extends Bloc<ReturnListByRequestEvent, ReturnListByRequestState> {
   final IReturnListRepository returnListRepository;
-
+  final Config config;
   ReturnListByRequestBloc({
     required this.returnListRepository,
+    required this.config,
   }) : super(ReturnListByRequestState.initial()) {
     on<_Initialized>((event, emit) => emit(ReturnListByRequestState.initial()));
     on<_AutoSearchProduct>(
@@ -46,7 +46,9 @@ class ReturnListByRequestBloc
         }
       },
       transformer: (events, mapper) => events
-          .debounceTime(const Duration(milliseconds: 1500))
+          .debounceTime(
+            Duration(milliseconds: config.autoSearchTimeout),
+          )
           .asyncExpand(mapper),
     );
     on<_Fetch>(
@@ -67,7 +69,7 @@ class ReturnListByRequestBloc
           shipToInfo: e.shipInfo,
           customerCode: e.customerCodeInfo,
           user: e.user,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
           appliedFilter: e.appliedFilter,
           searchKey: e.searchKey,
@@ -86,7 +88,7 @@ class ReturnListByRequestBloc
             emit(
               state.copyWith(
                 returnItemList: returnList,
-                canLoadMore: returnList.length >= _pageSize,
+                canLoadMore: returnList.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isFetching: false,
               ),
@@ -112,7 +114,7 @@ class ReturnListByRequestBloc
           shipToInfo: e.shipInfo,
           customerCode: e.customerCodeInfo,
           user: e.user,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: state.returnItemList.length,
           appliedFilter: state.appliedFilter,
           searchKey: state.searchKey,
@@ -134,7 +136,7 @@ class ReturnListByRequestBloc
                 returnItemList: newItemList,
                 failureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: moreItem.length >= _pageSize,
+                canLoadMore: moreItem.length >= config.pageSize,
               ),
             );
           },

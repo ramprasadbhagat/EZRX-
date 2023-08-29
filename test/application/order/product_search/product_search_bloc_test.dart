@@ -15,6 +15,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class MockProductSearchRepository extends Mock
     implements IProductSearchRepository {}
@@ -38,7 +39,7 @@ void main() {
   late MaterialResponse materialResponse;
   late MaterialResponse fakeResponse1;
   late MaterialResponse fakeResponse2;
-
+  late Config config;
   final searchKeys = ProductSuggestionHistory(
     searchKeyList: [
       SearchKey('searchKey1'),
@@ -48,9 +49,11 @@ void main() {
   );
 
   setUp(() async {
+    config = Config()..appFlavor = Flavor.mock;
     productSearchRepository = MockProductSearchRepository();
     productSearchBloc = ProductSearchBloc(
       productSearchRepository: productSearchRepository,
+      config: config,
     );
     materialResponse =
         await ProductSearchLocalDataSource().getSearchedProductList();
@@ -83,7 +86,7 @@ void main() {
               customerCodeInfo: customerCodeInfo,
               shipToInfo: shipToInfo,
               searchKey: SearchKey('diff-search-key'),
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: 0,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
@@ -125,7 +128,7 @@ void main() {
               customerCodeInfo: customerCodeInfo,
               shipToInfo: shipToInfo,
               searchKey: searchKey,
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: 0,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
@@ -168,7 +171,7 @@ void main() {
               customerCodeInfo: customerCodeInfo,
               shipToInfo: shipToInfo,
               searchKey: searchKey,
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: 0,
             ),
           ).thenAnswer(
@@ -221,7 +224,7 @@ void main() {
               customerCodeInfo: customerCodeInfo,
               shipToInfo: shipToInfo,
               searchKey: SearchKey('diff-search-key'),
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: 0,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
@@ -236,7 +239,7 @@ void main() {
             searchKey: SearchKey.search('diff-search-key'),
           ),
         ),
-        wait: const Duration(milliseconds: 3000),
+        wait: const Duration(milliseconds: 1500),
         expect: () => [
           ProductSearchState.initial().copyWith(
             searchKey: SearchKey('diff-search-key'),
@@ -274,7 +277,7 @@ void main() {
               customerCodeInfo: customerCodeInfo,
               shipToInfo: shipToInfo,
               searchKey: searchKey,
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: 24,
             ),
           ).thenAnswer((_) async => Right(fakeResponse2));
@@ -318,7 +321,7 @@ void main() {
               customerCodeInfo: customerCodeInfo,
               shipToInfo: shipToInfo,
               searchKey: searchKey,
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: 0,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
@@ -359,7 +362,7 @@ void main() {
               customerCodeInfo: customerCodeInfo,
               shipToInfo: shipToInfo,
               searchKey: searchKey,
-              pageSize: 24,
+              pageSize: config.pageSize,
               offset: 24,
             ),
           ).thenAnswer(

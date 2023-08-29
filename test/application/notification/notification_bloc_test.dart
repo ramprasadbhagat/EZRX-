@@ -8,6 +8,7 @@ import 'package:ezrxmobile/infrastructure/notification/repository/notification_r
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class MockNotificationRepository extends Mock
     implements NotificationRepository {}
@@ -15,19 +16,23 @@ class MockNotificationRepository extends Mock
 void main() {
   late NotificationRepository repository;
   late Notifications notifications;
+  late Config config;
   final notificationState = NotificationState.initial();
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = MockNotificationRepository();
-
+    config = Config()..appFlavor = Flavor.mock;
     notifications = await NotificationLocalDataSource().getNotificationList();
   });
 
   group('Notification Bloc', () {
     blocTest(
       'Initialize',
-      build: () => NotificationBloc(notificationRepository: repository),
+      build: () => NotificationBloc(
+        notificationRepository: repository,
+        config: config,
+      ),
       act: (NotificationBloc bloc) => bloc.add(
         const NotificationEvent.initialized(),
       ),
@@ -35,12 +40,15 @@ void main() {
     );
     blocTest(
       'Get notification success',
-      build: () => NotificationBloc(notificationRepository: repository),
+      build: () => NotificationBloc(
+        notificationRepository: repository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => repository.getNotification(
             page: 1,
-            perPage: 24,
+            perPage: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -66,9 +74,14 @@ void main() {
     );
     blocTest(
       'Get notification fail',
-      build: () => NotificationBloc(notificationRepository: repository),
+      build: () => NotificationBloc(
+        notificationRepository: repository,
+        config: config,
+      ),
       setUp: () {
-        when(() => repository.getNotification(page: 1, perPage: 24)).thenAnswer(
+        when(
+          () => repository.getNotification(page: 1, perPage: config.pageSize),
+        ).thenAnswer(
           (invocation) async => const Left(
             ApiFailure.other('fake-error'),
           ),
@@ -92,7 +105,10 @@ void main() {
 
     blocTest<NotificationBloc, NotificationState>(
       'notification loadMore',
-      build: () => NotificationBloc(notificationRepository: repository),
+      build: () => NotificationBloc(
+        notificationRepository: repository,
+        config: config,
+      ),
       seed: () => NotificationState.initial().copyWith(
         notificationList: notifications,
         isFetching: false,
@@ -102,7 +118,7 @@ void main() {
         when(
           () => repository.getNotification(
             page: 1,
-            perPage: 24,
+            perPage: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -142,7 +158,10 @@ void main() {
 
     blocTest<NotificationBloc, NotificationState>(
       'notification loadMore fail',
-      build: () => NotificationBloc(notificationRepository: repository),
+      build: () => NotificationBloc(
+        notificationRepository: repository,
+        config: config,
+      ),
       seed: () => NotificationState.initial().copyWith(
         isFetching: false,
         canLoadMore: true,
@@ -151,7 +170,7 @@ void main() {
         when(
           () => repository.getNotification(
             page: 1,
-            perPage: 24,
+            perPage: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -180,7 +199,10 @@ void main() {
     );
     blocTest(
       'Read notification success',
-      build: () => NotificationBloc(notificationRepository: repository),
+      build: () => NotificationBloc(
+        notificationRepository: repository,
+        config: config,
+      ),
       seed: () => NotificationState.initial().copyWith(
         isFetching: false,
         notificationList: notifications,
@@ -215,7 +237,10 @@ void main() {
     );
     blocTest(
       'Read notification fail',
-      build: () => NotificationBloc(notificationRepository: repository),
+      build: () => NotificationBloc(
+        notificationRepository: repository,
+        config: config,
+      ),
       seed: () => NotificationState.initial().copyWith(
         isFetching: false,
         notificationList: notifications,
@@ -251,7 +276,10 @@ void main() {
     );
     blocTest(
       'Delete notification success',
-      build: () => NotificationBloc(notificationRepository: repository),
+      build: () => NotificationBloc(
+        notificationRepository: repository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => repository.deleteAllNotificationList(),
@@ -270,7 +298,10 @@ void main() {
     );
     blocTest(
       'Delete notification failure',
-      build: () => NotificationBloc(notificationRepository: repository),
+      build: () => NotificationBloc(
+        notificationRepository: repository,
+        config: config,
+      ),
       setUp: () {
         when(
           () => repository.deleteAllNotificationList(),

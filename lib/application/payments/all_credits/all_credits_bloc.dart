@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
@@ -12,13 +13,13 @@ part 'all_credits_event.dart';
 part 'all_credits_state.dart';
 part 'all_credits_bloc.freezed.dart';
 
-const int _pageSize = 24;
-
 class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
   final IAllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
-
-  AllCreditsBloc({required this.allCreditsAndInvoicesRepository})
-      : super(AllCreditsState.initial()) {
+  final Config config;
+  AllCreditsBloc({
+    required this.allCreditsAndInvoicesRepository,
+    required this.config,
+  }) : super(AllCreditsState.initial()) {
     on(_onEvent);
   }
 
@@ -43,7 +44,7 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           filter: value.appliedFilter,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
         );
 
@@ -60,7 +61,7 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
             emit(
               state.copyWith(
                 items: responseData,
-                canLoadMore: responseData.length >= _pageSize,
+                canLoadMore: responseData.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
@@ -83,7 +84,7 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           filter: state.appliedFilter,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: state.items.length,
         );
 
@@ -102,7 +103,7 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
             emit(
               state.copyWith(
                 items: updateItemList,
-                canLoadMore: responseData.length >= _pageSize,
+                canLoadMore: responseData.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),

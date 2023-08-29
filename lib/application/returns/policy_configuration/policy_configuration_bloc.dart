@@ -7,20 +7,20 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_policy_configuration_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 part 'policy_configuration_event.dart';
 part 'policy_configuration_state.dart';
 part 'policy_configuration_bloc.freezed.dart';
 
-int _pageSize = 20;
-
 class PolicyConfigurationBloc
     extends Bloc<PolicyConfigurationEvent, PolicyConfigurationState> {
   final IPolicyConfigurationRepository policyConfigurationRepository;
-
-  PolicyConfigurationBloc({required this.policyConfigurationRepository})
-      : super(PolicyConfigurationState.initial()) {
+  final Config config;
+  PolicyConfigurationBloc({
+    required this.policyConfigurationRepository,
+    required this.config,
+  }) : super(PolicyConfigurationState.initial()) {
     on<_Initialized>(
       (_, emit) async => emit(
         PolicyConfigurationState.initial(),
@@ -51,7 +51,7 @@ class PolicyConfigurationBloc
             await policyConfigurationRepository.getPolicyConfiguration(
           salesOrganisation: e.salesOrganisation,
           offset: state.policyConfigurationList.length,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           searchKey: SearchKey(e.searchKey),
         );
         failureOrSuccess.fold(
@@ -94,7 +94,7 @@ class PolicyConfigurationBloc
             await policyConfigurationRepository.getPolicyConfiguration(
           salesOrganisation: e.salesOrganisation,
           offset: state.policyConfigurationList.length,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           searchKey: state.searchKey,
         );
         failureOrSuccess.fold(
@@ -116,7 +116,7 @@ class PolicyConfigurationBloc
                 failureOrSuccessOption: none(),
                 isLoading: false,
                 canLoadMorePolicyConfigurations:
-                    policyConfigurationList.length >= _pageSize,
+                    policyConfigurationList.length >= config.pageSize,
               ),
             );
           },

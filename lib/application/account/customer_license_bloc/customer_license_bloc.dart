@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -14,13 +15,14 @@ part 'customer_license_event.dart';
 part 'customer_license_state.dart';
 part 'customer_license_bloc.freezed.dart';
 
-const _pageSize = 24;
-
 class CustomerLicenseBloc
     extends Bloc<CustomerLicenseEvent, CustomerLicenseState> {
   final CustomerLicenseRepository customerLicenseRepository;
-  CustomerLicenseBloc({required this.customerLicenseRepository})
-      : super(CustomerLicenseState.initial()) {
+  final Config config;
+  CustomerLicenseBloc({
+    required this.customerLicenseRepository,
+    required this.config,
+  }) : super(CustomerLicenseState.initial()) {
     on<CustomerLicenseEvent>(_onEvent);
   }
 
@@ -44,7 +46,7 @@ class CustomerLicenseBloc
           customerCode: e.customerInfo,
           offset: 0,
           salesOrganisation: e.salesOrganisation,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           user: e.user,
         );
 
@@ -60,7 +62,7 @@ class CustomerLicenseBloc
               failureOrSuccessOption: none(),
               isFetching: false,
               customerLicenses: customerLicenses,
-              canLoadMore: customerLicenses.length >= _pageSize,
+              canLoadMore: customerLicenses.length >= config.pageSize,
             ),
           ),
         );
@@ -78,7 +80,7 @@ class CustomerLicenseBloc
           customerCode: e.customerInfo,
           offset: state.customerLicenses.length,
           salesOrganisation: e.salesOrganisation,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           user: e.user,
         );
 
@@ -98,7 +100,7 @@ class CustomerLicenseBloc
                 failureOrSuccessOption: none(),
                 isFetching: false,
                 customerLicenses: updateCustomerLicenses,
-                canLoadMore: updateCustomerLicenses.length >= _pageSize,
+                canLoadMore: updateCustomerLicenses.length >= config.pageSize,
               ),
             );
           },

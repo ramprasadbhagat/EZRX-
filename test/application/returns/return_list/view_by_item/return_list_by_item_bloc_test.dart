@@ -12,22 +12,26 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_list_reposit
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class ReturnListRepositoryMock extends Mock implements ReturnListRepository {}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late ReturnListRepository returnListRepositoryMock;
+  late Config config;
 
   group('Return List BLOC Testing=>', () {
     setUp(() {
       returnListRepositoryMock = ReturnListRepositoryMock();
+      config = Config()..appFlavor = Flavor.mock;
     });
 
     blocTest<ReturnListByItemBloc, ReturnListByItemState>(
       'For "initialized" Event',
       build: () => ReturnListByItemBloc(
         returnListRepository: returnListRepositoryMock,
+        config: config,
       ),
       act: (bloc) => bloc.add(const ReturnListByItemEvent.initialized()),
       expect: () => [ReturnListByItemState.initial()],
@@ -37,6 +41,7 @@ void main() {
       'For "fetch" Event with failure',
       build: () => ReturnListByItemBloc(
         returnListRepository: returnListRepositoryMock,
+        config: config,
       ),
       setUp: () {
         when(
@@ -81,6 +86,7 @@ void main() {
       'For "loadMore" Event with failure',
       build: () => ReturnListByItemBloc(
         returnListRepository: returnListRepositoryMock,
+        config: config,
       ),
       setUp: () {
         when(

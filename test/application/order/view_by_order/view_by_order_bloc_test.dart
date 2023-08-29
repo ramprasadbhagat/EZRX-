@@ -18,6 +18,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_reposit
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
 
 class ViewByOrderRepositoryMock extends Mock implements ViewByOrderRepository {}
 
@@ -25,7 +26,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late ViewByOrderRepository viewByOrderRepository;
   late ViewByOrder viewByOrderMockData;
-
+  late Config config;
   final salesOrgConfig = SalesOrganisationConfigs.empty()
       .copyWith(salesOrg: SalesOrg('fake-salesOrg'));
   final customerCodeInfo = CustomerCodeInfo.empty()
@@ -55,13 +56,12 @@ void main() {
       ViewByOrdersFilter.empty().copyWith(dateRange: dateTimeRange);
 
   const offSet = 0;
-  const pageSize = 24;
   group('Orders View By Order', () {
     setUp(() async {
       viewByOrderRepository = ViewByOrderRepositoryMock();
       viewByOrderMockData =
           await ViewByOrderLocalDataSource().getViewByOrders();
-
+      config = Config()..appFlavor = Flavor.mock;
       WidgetsFlutterBinding.ensureInitialized();
     });
 
@@ -69,6 +69,7 @@ void main() {
       ' -> Initialized Event',
       build: () => ViewByOrderBloc(
         viewByOrderRepository: viewByOrderRepository,
+        config: config,
       ),
       act: (bloc) => bloc.add(const ViewByOrderEvent.initialized()),
     );
@@ -77,6 +78,7 @@ void main() {
       ' -> Orders view by order fetch fail',
       build: () => ViewByOrderBloc(
         viewByOrderRepository: viewByOrderRepository,
+        config: config,
       ),
       setUp: () {
         when(
@@ -86,7 +88,7 @@ void main() {
             soldTo: customerCodeInfo,
             shipTo: shipToInfo,
             user: user,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             offset: offSet,
             sort: 'desc',
             searchKey: searchKey,
@@ -133,6 +135,7 @@ void main() {
       ' -> Orders view by order fetch Success',
       build: () => ViewByOrderBloc(
         viewByOrderRepository: viewByOrderRepository,
+        config: config,
       ),
       setUp: () {
         when(
@@ -142,7 +145,7 @@ void main() {
             soldTo: customerCodeInfo,
             shipTo: shipToInfo,
             user: user,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             offset: offSet,
             sort: 'desc',
             searchKey: searchKey,
@@ -185,6 +188,7 @@ void main() {
       ' -> Orders view by order loadMore',
       build: () => ViewByOrderBloc(
         viewByOrderRepository: viewByOrderRepository,
+        config: config,
       ),
       seed: () => ViewByOrderState.initial().copyWith(
         appliedFilter: viewByOrdersFilter,
@@ -198,7 +202,7 @@ void main() {
             soldTo: customerCodeInfo,
             shipTo: shipToInfo,
             user: user,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             offset: viewByOrderMockData.orderHeaders.length,
             viewByOrdersFilter: viewByOrdersFilter,
             orderBy: 'datetime',
@@ -237,7 +241,6 @@ void main() {
           viewByOrderList: viewByOrderMockData.copyWith(
             orderHeaders: [
               ...viewByOrderMockData.orderHeaders,
-             
             ],
           ),
           searchKey: searchKey,
@@ -248,6 +251,7 @@ void main() {
       ' -> Orders view by order loadMore failure',
       build: () => ViewByOrderBloc(
         viewByOrderRepository: viewByOrderRepository,
+        config: config,
       ),
       seed: () => ViewByOrderState.initial().copyWith(
         appliedFilter: viewByOrdersFilter,
@@ -262,8 +266,8 @@ void main() {
             soldTo: customerCodeInfo,
             shipTo: shipToInfo,
             user: user,
-            pageSize: pageSize,
-             offset: viewByOrderMockData.orderHeaders.length,
+            pageSize: config.pageSize,
+            offset: viewByOrderMockData.orderHeaders.length,
             sort: 'desc',
             searchKey: searchKey,
             viewByOrder: viewByOrderMockData,

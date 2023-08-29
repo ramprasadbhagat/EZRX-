@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
@@ -12,13 +13,13 @@ part 'all_invoices_event.dart';
 part 'all_invoices_state.dart';
 part 'all_invoices_bloc.freezed.dart';
 
-const int _pageSize = 24;
-
 class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
   final IAllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
-
-  AllInvoicesBloc({required this.allCreditsAndInvoicesRepository})
-      : super(AllInvoicesState.initial()) {
+  final Config config;
+  AllInvoicesBloc({
+    required this.allCreditsAndInvoicesRepository,
+    required this.config,
+  }) : super(AllInvoicesState.initial()) {
     on(_onEvent);
   }
 
@@ -43,7 +44,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           filter: value.appliedFilter,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
         );
 
@@ -60,7 +61,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
             emit(
               state.copyWith(
                 items: responseData,
-                canLoadMore: responseData.length >= _pageSize,
+                canLoadMore: responseData.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),
@@ -83,7 +84,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
           salesOrganisation: value.salesOrganisation,
           customerCodeInfo: value.customerCodeInfo,
           filter: state.appliedFilter,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: state.items.length,
         );
 
@@ -102,7 +103,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
             emit(
               state.copyWith(
                 items: updateItemList,
-                canLoadMore: responseData.length >= _pageSize,
+                canLoadMore: responseData.length >= config.pageSize,
                 failureOrSuccessOption: none(),
                 isLoading: false,
               ),

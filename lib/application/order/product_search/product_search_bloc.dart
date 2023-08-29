@@ -1,6 +1,7 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_search_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -25,12 +26,13 @@ part 'product_search_event.dart';
 part 'product_search_state.dart';
 part 'product_search_bloc.freezed.dart';
 
-const _pageSize = 24;
-
 class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
   final IProductSearchRepository productSearchRepository;
-  ProductSearchBloc({required this.productSearchRepository})
-      : super(ProductSearchState.initial()) {
+  final Config config;
+  ProductSearchBloc({
+    required this.productSearchRepository,
+    required this.config,
+  }) : super(ProductSearchState.initial()) {
     on<_AutoSearchProduct>(
       (e, emit) {
         if (e.searchKey == state.searchKey) return;
@@ -49,7 +51,9 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
         }
       },
       transformer: (events, mapper) => events
-          .debounceTime(const Duration(milliseconds: 3000))
+          .debounceTime(
+            Duration(milliseconds: config.autoSearchTimeout),
+          )
           .asyncExpand(mapper),
     );
 
@@ -72,7 +76,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
           searchKey: e.searchKey,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: state.suggestedProductList.length,
         );
 
@@ -117,7 +121,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
           searchKey: state.searchKey,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: state.suggestedProductList.length,
         );
 
@@ -136,7 +140,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 suggestedProductList: finalProductList,
-                canLoadMore: productResponse.products.length >= _pageSize,
+                canLoadMore: productResponse.products.length >= config.pageSize,
                 isSearching: false,
               ),
             );

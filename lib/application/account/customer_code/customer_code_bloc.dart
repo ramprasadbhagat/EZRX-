@@ -1,5 +1,6 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -16,13 +17,13 @@ part 'customer_code_bloc.freezed.dart';
 part 'customer_code_event.dart';
 part 'customer_code_state.dart';
 
-const int _pageSize = 24;
-
 class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
   final ICustomerCodeRepository customerCodeRepository;
+  final Config config;
 
   CustomerCodeBloc({
     required this.customerCodeRepository,
+    required this.config,
   }) : super(CustomerCodeState.initial()) {
     on<_Initialized>(
       (e, emit) => emit(CustomerCodeState.initial()),
@@ -60,7 +61,9 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         }
       },
       transformer: (events, mapper) => events
-          .debounceTime(const Duration(milliseconds: 1500))
+          .debounceTime(
+            Duration(milliseconds: config.autoSearchTimeout),
+          )
           .asyncExpand(mapper),
     );
     on<_Search>(
@@ -82,7 +85,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           customerCodes: [previousSearchKey.getValue()],
           hideCustomer: e.hideCustomer,
           user: e.userInfo,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: state.customerCodeList.length,
         );
         failureOrSuccess.fold(
@@ -104,7 +107,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                 customerCodeList: customerCodeList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
-                canLoadMore: customerCodeList.length >= _pageSize,
+                canLoadMore: customerCodeList.length >= config.pageSize,
                 searchKey: e.searchValue,
               ),
             );
@@ -145,7 +148,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         customerCodes: [lastSavedCustomerInfo.customerCode],
         hideCustomer: e.hideCustomer,
         user: e.userInfo,
-        pageSize: _pageSize,
+        pageSize: config.pageSize,
         offset: 0,
       );
 
@@ -219,7 +222,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
               .toList(),
           hideCustomer: e.hideCustomer,
           user: e.userInfo,
-          pageSize: _pageSize,
+          pageSize: config.pageSize,
           offset: 0,
         );
         failureOrSuccess.fold(
@@ -233,7 +236,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
             );
           },
           (customerCodeList) {
-            if (customerCodeList.length < _pageSize) {
+            if (customerCodeList.length < config.pageSize) {
               canLoadMore = false;
             }
             if (finalCustomerCodeInfo.length == 1) {
@@ -278,7 +281,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         customerCodes: [customerCodeInfo],
         hideCustomer: e.hideCustomer,
         user: e.userInfo,
-        pageSize: _pageSize,
+        pageSize: config.pageSize,
         offset: state.customerCodeList.length,
       );
       failureOrSuccess.fold(
@@ -299,7 +302,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
               customerCodeList: finalCustomerCodeInfoList,
               apiFailureOrSuccessOption: none(),
               isFetching: false,
-              canLoadMore: customerCodeList.length >= _pageSize,
+              canLoadMore: customerCodeList.length >= config.pageSize,
             ),
           );
         },
