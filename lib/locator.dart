@@ -122,7 +122,7 @@ import 'package:ezrxmobile/application/returns/return_request_type_code/return_r
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
-import 'package:ezrxmobile/infrastructure/core/encryption/encryption.dart';
+import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
 import 'package:ezrxmobile/infrastructure/core/http/interceptor/datadog_interceptor.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
@@ -2625,7 +2625,7 @@ void setupLocator() {
     () => AvailableCreditFilterBloc(),
   );
   locator.registerLazySingleton(
-    () => NewPaymentBloc(),
+    () => NewPaymentBloc(newPaymentRepository: locator<NewPaymentRepository>()),
   );
 
   //============================================================

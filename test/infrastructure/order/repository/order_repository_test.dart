@@ -33,7 +33,7 @@ import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/encryption/encryption.dart';
+import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
@@ -177,16 +177,16 @@ void main() {
     encryption = EncryptionMock();
 
     orderRepository = OrderRepository(
-        config: mockConfig,
-        localDataSource: orderLocalDataSource,
-        remoteDataSource: orderRemoteDataSource,
-        mixpanelService: mixpanelService,
-        encryption: encryption,
-        orderDetailLocalDataSource: viewByOrderDetailsLocalDataSource,
-        orderHistoryDetailsRemoteDataSource: viewByOrderDetailsRemoteDataSource,
-        stockInfoRemoteDataSource: stockInfoRemoteDataSource,
-        stockInfoLocalDataSource: stockInfoLocalDataSource,
-        );
+      config: mockConfig,
+      localDataSource: orderLocalDataSource,
+      remoteDataSource: orderRemoteDataSource,
+      mixpanelService: mixpanelService,
+      encryption: encryption,
+      orderDetailLocalDataSource: viewByOrderDetailsLocalDataSource,
+      orderHistoryDetailsRemoteDataSource: viewByOrderDetailsRemoteDataSource,
+      stockInfoRemoteDataSource: stockInfoRemoteDataSource,
+      stockInfoLocalDataSource: stockInfoLocalDataSource,
+    );
   });
 
   group('OrderRepository should - ', () {

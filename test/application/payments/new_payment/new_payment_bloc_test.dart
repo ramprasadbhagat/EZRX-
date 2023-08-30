@@ -1,12 +1,18 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+class NewPaymentRepositoryMock extends Mock implements NewPaymentRepository {}
 
 void main() {
+  late NewPaymentRepository newPaymentRepository;
   late CustomerOpenItem customerOpenItem;
 
   setUpAll(() {
+    newPaymentRepository = NewPaymentRepositoryMock();
     customerOpenItem = CustomerOpenItem.empty().copyWith(
       amountInTransactionCurrency: 100,
     );
@@ -17,7 +23,7 @@ void main() {
     () {
       blocTest(
         'Initialize',
-        build: () => NewPaymentBloc(),
+        build: () => NewPaymentBloc(newPaymentRepository: newPaymentRepository),
         act: (NewPaymentBloc bloc) =>
             bloc.add(const NewPaymentEvent.initialized()),
         expect: () => [NewPaymentState.initial()],
@@ -25,7 +31,7 @@ void main() {
 
       blocTest(
         'UpdateAllInvoices',
-        build: () => NewPaymentBloc(),
+        build: () => NewPaymentBloc(newPaymentRepository: newPaymentRepository),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updateAllInvoices(
             items: [
@@ -42,7 +48,7 @@ void main() {
 
       blocTest(
         'ToggleInvoice selected => deselect',
-        build: () => NewPaymentBloc(),
+        build: () => NewPaymentBloc(newPaymentRepository: newPaymentRepository),
         seed: () => NewPaymentState.initial().copyWith(
           selectedInvoices: [CustomerOpenItem.empty()],
         ),
@@ -57,7 +63,7 @@ void main() {
 
       blocTest(
         'ToggleInvoice deselect => select',
-        build: () => NewPaymentBloc(),
+        build: () => NewPaymentBloc(newPaymentRepository: newPaymentRepository),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.toggleInvoice(
             item: CustomerOpenItem.empty(),
@@ -78,7 +84,7 @@ void main() {
     () {
       blocTest(
         'UpdateAllCredits',
-        build: () => NewPaymentBloc(),
+        build: () => NewPaymentBloc(newPaymentRepository: newPaymentRepository),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updateAllCredits(
             items: [
@@ -95,7 +101,7 @@ void main() {
 
       blocTest(
         'ToggleCredit selected => deselect',
-        build: () => NewPaymentBloc(),
+        build: () => NewPaymentBloc(newPaymentRepository: newPaymentRepository),
         seed: () => NewPaymentState.initial().copyWith(
           selectedCredits: [CustomerOpenItem.empty()],
         ),
@@ -110,7 +116,7 @@ void main() {
 
       blocTest(
         'ToggleCredit deselect => select',
-        build: () => NewPaymentBloc(),
+        build: () => NewPaymentBloc(newPaymentRepository: newPaymentRepository),
         seed: () => NewPaymentState.initial().copyWith(
           selectedInvoices: [
             customerOpenItem,

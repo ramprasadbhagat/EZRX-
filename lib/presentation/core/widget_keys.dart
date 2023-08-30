@@ -399,6 +399,8 @@ class WidgetKeys {
   static const Key paymentSummaryMenu = Key('paymentSummary');
   static const Key statementOfAccountsMenu = Key('statementOfAccounts');
   static const Key claimsMenu = Key('claims');
+  static const Key paymentAdviceCreatedPageBack =
+      Key('paymentAdviceCreatedPageBack');
   //============================================================
   //  Announcement
   //============================================================

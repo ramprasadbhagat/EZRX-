@@ -5,9 +5,11 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_info_dto.dart';
 
 class NewPaymentRemoteDataSource {
   HttpService httpService;
@@ -53,6 +55,67 @@ class NewPaymentRemoteDataSource {
       pageSize: pageSize,
       filterBy: filterBy,
     );
+  }
+
+  Future<PaymentInfo> pay({
+    required String customerCode,
+    required String salesOrg,
+    required List<Map<String, dynamic>> customerInvoices,
+    required String paymentMethod,
+    required String transactionCurrency,
+    required String userName,
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query': newPaymentQuery.payQuery(),
+          'variables': {
+            'input': {
+              'customerCode': customerCode,
+              'customerInvoice': customerInvoices,
+              'paymentMethod': paymentMethod,
+              'salesOrg': salesOrg,
+              'transactionCurrency': transactionCurrency,
+              'userName': userName,
+            },
+          },
+        },
+      ),
+      apiEndpoint: 'addCustomerPayment',
+    );
+    _exceptionChecker(property: 'addCustomerPayment', res: res);
+
+    return PaymentInfoDto.fromJson(res.data['data']['addCustomerPayment'])
+        .toDomain();
+  }
+
+  Future<void> updatePaymentGateway({
+    required String salesOrg,
+    required String txnStatus,
+    required String paymentID,
+    required String transactionRef,
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query': newPaymentQuery.updatePaymentGatewayQuery(),
+          'variables': {
+            'input': {
+              'paymentID': paymentID,
+              'txnStatus': txnStatus,
+              'transactionRef': transactionRef,
+              'salesOrg': salesOrg,
+            },
+          },
+        },
+      ),
+      apiEndpoint: 'updatePaymentGatewayMutation',
+    );
+    _exceptionChecker(property: 'updatePaymentGatewayMutation', res: res);
   }
 
   Future<List<CustomerOpenItem>> getCustomerOpenItems({

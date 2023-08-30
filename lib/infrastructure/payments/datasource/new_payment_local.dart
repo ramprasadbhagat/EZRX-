@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
 import 'package:flutter/services.dart';
 
@@ -21,5 +22,23 @@ class NewPaymentLocalDataSource {
     }
 
     return result;
+  }
+
+  Future<PaymentInfo> pay() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/payResponse.json',
+      ),
+    );
+
+    return data['data']['addCustomerPayment'];
+  }
+
+  Future<void> updatePaymentGateway() async {
+    json.decode(
+      await rootBundle.loadString(
+        'assets/json/updatePaymentGatewayResponse.json',
+      ),
+    );
   }
 }

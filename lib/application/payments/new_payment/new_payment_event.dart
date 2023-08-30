@@ -21,4 +21,16 @@ class NewPaymentEvent with _$NewPaymentEvent {
     required CustomerOpenItem item,
     required bool selected,
   }) = _ToggleCredit;
+
+  const factory NewPaymentEvent.pay({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required String paymentMethod,
+    required User user,
+  }) = _Pay;
+
+  const factory NewPaymentEvent.updatePaymentGateway({
+    required SalesOrganisation salesOrganisation,
+    required Uri paymentUrl,
+  }) = _UpdatePaymentGateway;
 }

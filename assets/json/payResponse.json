@@ -1,0 +1,40 @@
+{
+  "data": {
+    "addCustomerPayment": {
+      "paymentID": "2        4",
+      "valueDate": "2023-08-30",
+      "paymentAmount": 500,
+      "transactionCurrency": "MYR",
+      "paymentDocument": "",
+      "invoiceProcessingStatus": "In Progress",
+      "paymentMethod": "Payment Gateway",
+      "iban": "",
+      "bankIdentification": "",
+      "bankCountryKey": "",
+      "bankKey": "",
+      "bankAccountNumber": "",
+      "bankName": "",
+      "paymentCardID": "",
+      "paymentCardNumber": "",
+      "paymentCardHolderName": "",
+      "paymentCardMaskedNumber": "",
+      "paymentCardTypeName": "",
+      "extensibilityCustomField": "{\"paymentBatchAdditionalInfo\":[{\"businessContext\":\"Y\",\"label\":\"Omni Channel\",\"value\":\"\\u003chtml:script language=\\\"javascript\\\"\\u003e$(\\\"#btn_submit\\\").click(function(){var win = window.open(\\\"\\\" ,\\\"_blank\\\");win.document.body.innerHTML = '\\u003cform id=\\\"pay_form\\\" name=\\\"pay_form\\\" action=\\\"https://pay.e-ghl.com/IPGSG/Payment.aspx\\\" method=\\\"post\\\"\\u003e\\u003cinput name=\\\"TransactionType\\\" type=\\\"hidden\\\" id=\\\"TransactionType\\\" value=\\\"SALE\\\" /\\u003e\\u003cinput name=\\\"PymtMethod\\\" type=\\\"hidden\\\" id=\\\"PymtMethod\\\" value=\\\"ANY\\\" /\\u003e\\u003cinput name=\\\"ServiceID\\\" type=\\\"hidden\\\" id=\\\"ServiceID\\\" value=\\\"ZUE\\\" /\\u003e\\u003cinput name=\\\"PaymentID\\\" type=\\\"hidden\\\" id=\\\"PaymentID\\\" value=\\\"09EZ230000958301\\\" /\\u003e\\u003cinput name=\\\"OrderNumber\\\" type=\\\"hidden\\\" id=\\\"OrderNumber\\\" value=\\\"09EZ230000958301\\\" /\\u003e\\u003cinput name=\\\"PaymentDesc\\\" type=\\\"hidden\\\" id=\\\"PaymentDesc\\\" value=\\\"-\\\" /\\u003e\\u003cinput name=\\\"MerchantName\\\" type=\\\"hidden\\\" id=\\\"MerchantName\\\" value=\\\"Zuellig Pharma\\\" /\\u003e\\u003cinput name=\\\"MerchantReturnURL\\\" type=\\\"hidden\\\" id=\\\"MerchantReturnURL\\\" value=\\\"https://uat-my.ezrx.com/api/thankyou-payment\\\" /\\u003e\\u003cinput name=\\\"MerchantCallBackURL\\\" type=\\\"hidden\\\" id=\\\"MerchantCallBackURL\\\" value=\\\"https://omnicollect-dev.business.hsbc.com/api/callback/my/eGHL/payment\\\" /\\u003e\\u003cinput name=\\\"Amount\\\" type=\\\"hidden\\\" id=\\\"Amount\\\" value=\\\"500.00\\\" /\\u003e\\u003cinput name=\\\"CurrencyCode\\\" type=\\\"hidden\\\" id=\\\"CurrencyCode\\\" value=\\\"MYR\\\" /\\u003e\\u003cinput name=\\\"CustIP\\\" type=\\\"hidden\\\" id=\\\"CustIP\\\" value=\\\"\\\" /\\u003e\\u003cinput name=\\\"CustName\\\" type=\\\"hidden\\\" id=\\\"CustName\\\" value=\\\"Customer Name\\\" /\\u003e\\u003cinput name=\\\"CustEmail\\\" type=\\\"hidden\\\" id=\\\"CustEmail\\\" value=\\\"customer.name@example.com\\\" /\\u003e\\u003cinput name=\\\"CustPhone\\\" type=\\\"hidden\\\" id=\\\"CustPhone\\\" value=\\\"1234567890\\\" /\\u003e\\u003cinput name=\\\"LanguageCode\\\" type=\\\"hidden\\\" id=\\\"LanguageCode\\\" value=\\\"EN\\\" /\\u003e\\u003cinput name=\\\"PageTimeout\\\" type=\\\"hidden\\\" id=\\\"PageTimeout\\\" value=\\\"780\\\" /\\u003e\\u003cinput name=\\\"HashValue\\\" type=\\\"hidden\\\" id=\\\"HashValue\\\" value=\\\"4a9267d913e9c0ff9dcf0f54d5145ef072894c40bc293890d3ef0d1ec8089e0c\\\" /\\u003e\\u003c/form\\u003e';win.document.pay_form.submit();})\\u003c/html:script\\u003e\\u003chtml:button type=\\\"button\\\" onlick=\\\"butonClick\\\" id=\\\"btn_submit\\\"\\u003eOpen Payment Gateway\\u003c/html:button\\u003e\",\"technicalName\":\"ZZHTMCS\"},{\"businessContext\":\"Z\",\"label\":\"QR Code\",\"value\":\"\",\"technicalName\":\"Z_CCP_PAYMENT_QRCODE\"},{\"businessContext\":\"Payment\",\"label\":\"QR Code\",\"value\":\"\",\"technicalName\":\"Z_CCP_PAYMENT_QRCODE\"},{\"businessContext\":\"Payment\",\"label\":\"Payment Advice Number\",\"value\":\"09EZ230000958301\",\"technicalName\":\"ZZADVICE\"}]}",
+      "customId": null,
+      "tmpPaytByDigitalPaytService": null,
+      "payerByPaymentServiceProvider": null,
+      "paymentRefByPaytSrvcProvider": "",
+      "paymentServiceProvider": "",
+      "transactionStatus": null,
+      "customerInvoice": null,
+      "paymentCardData": null,
+      "paytCardVerificatDetResultText": null,
+      "disputeCaseInformationText": null,
+      "userName": null,
+      "paymentBatchAdditionalInfo": "23C29106E513B76",
+      "accountingDocExternalReference": "200120210180000016001",
+      "zCcpPaymentQRCode": "",
+      "zzHtmcs": "\u003chtml:script language=\"javascript\"\u003e$(\"#btn_submit\").click(function(){var win = window.open(\"\" ,\"_blank\");win.document.body.innerHTML = '\u003cform id=\"pay_form\" name=\"pay_form\" action=\"https://pay.e-ghl.com/IPGSG/Payment.aspx\" method=\"post\"\u003e\u003cinput name=\"TransactionType\" type=\"hidden\" id=\"TransactionType\" value=\"SALE\" /\u003e\u003cinput name=\"PymtMethod\" type=\"hidden\" id=\"PymtMethod\" value=\"ANY\" /\u003e\u003cinput name=\"ServiceID\" type=\"hidden\" id=\"ServiceID\" value=\"ZUE\" /\u003e\u003cinput name=\"PaymentID\" type=\"hidden\" id=\"PaymentID\" value=\"09EZ230000958301\" /\u003e\u003cinput name=\"OrderNumber\" type=\"hidden\" id=\"OrderNumber\" value=\"09EZ230000958301\" /\u003e\u003cinput name=\"PaymentDesc\" type=\"hidden\" id=\"PaymentDesc\" value=\"-\" /\u003e\u003cinput name=\"MerchantName\" type=\"hidden\" id=\"MerchantName\" value=\"Zuellig Pharma\" /\u003e\u003cinput name=\"MerchantReturnURL\" type=\"hidden\" id=\"MerchantReturnURL\" value=\"https://uat-my.ezrx.com/api/thankyou-payment\" /\u003e\u003cinput name=\"MerchantCallBackURL\" type=\"hidden\" id=\"MerchantCallBackURL\" value=\"https://omnicollect-dev.business.hsbc.com/api/callback/my/eGHL/payment\" /\u003e\u003cinput name=\"Amount\" type=\"hidden\" id=\"Amount\" value=\"500.00\" /\u003e\u003cinput name=\"CurrencyCode\" type=\"hidden\" id=\"CurrencyCode\" value=\"MYR\" /\u003e\u003cinput name=\"CustIP\" type=\"hidden\" id=\"CustIP\" value=\"\" /\u003e\u003cinput name=\"CustName\" type=\"hidden\" id=\"CustName\" value=\"Customer Name\" /\u003e\u003cinput name=\"CustEmail\" type=\"hidden\" id=\"CustEmail\" value=\"customer.name@example.com\" /\u003e\u003cinput name=\"CustPhone\" type=\"hidden\" id=\"CustPhone\" value=\"1234567890\" /\u003e\u003cinput name=\"LanguageCode\" type=\"hidden\" id=\"LanguageCode\" value=\"EN\" /\u003e\u003cinput name=\"PageTimeout\" type=\"hidden\" id=\"PageTimeout\" value=\"780\" /\u003e\u003cinput name=\"HashValue\" type=\"hidden\" id=\"HashValue\" value=\"4a9267d913e9c0ff9dcf0f54d5145ef072894c40bc293890d3ef0d1ec8089e0c\" /\u003e\u003c/form\u003e';win.document.pay_form.submit();})\u003c/html:script\u003e\u003chtml:button type=\"button\" onlick=\"butonClick\" id=\"btn_submit\"\u003eOpen Payment Gateway\u003c/html:button\u003e"
+    }
+  }
+}

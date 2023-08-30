@@ -1,4 +1,11 @@
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
+import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -7,7 +14,10 @@ part 'new_payment_state.dart';
 part 'new_payment_bloc.freezed.dart';
 
 class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
-  NewPaymentBloc() : super(NewPaymentState.initial()) {
+  final INewPaymentRepository newPaymentRepository;
+
+  NewPaymentBloc({required this.newPaymentRepository})
+      : super(NewPaymentState.initial()) {
     on(_onEvent);
   }
 
@@ -68,6 +78,48 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             ),
           );
         }
+      },
+      pay: (_Pay e) async {
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+            isLoading: true,
+          ),
+        );
+
+        final failureOrSuccess = await newPaymentRepository.pay(
+          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: e.customerCodeInfo,
+          paymentMethod: e.paymentMethod,
+          customerOpenItems: state.selectedInvoices,
+          user: e.user,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isLoading: false,
+              ),
+            );
+          },
+          (paymentInfo) {
+            emit(
+              state.copyWith(
+                paymentInfo: paymentInfo,
+                failureOrSuccessOption: none(),
+                isLoading: false,
+              ),
+            );
+          },
+        );
+      },
+      updatePaymentGateway: (_UpdatePaymentGateway e) async {
+        await newPaymentRepository.updatePaymentGateway(
+          salesOrganisation: e.salesOrganisation,
+          uri: e.paymentUrl,
+        );
       },
     );
   }

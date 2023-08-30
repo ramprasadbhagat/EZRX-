@@ -32,6 +32,39 @@ mixin _$CustomerOpenItemDto {
   String get postingKeyName => throw _privateConstructorUsedError;
   @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
   double get amountInTransactionCurrency => throw _privateConstructorUsedError;
+  @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
+  String get transactionCurrency => throw _privateConstructorUsedError;
+  @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+  String get accountingDocExternalReference =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
+  String get bpCustomerNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'debitCreditCode', defaultValue: '')
+  String get debitCreditCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
+  double get cashDiscountAmountInDspCrcy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
+  String get cashDiscountDueDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
+  double get totalAmountInDisplayCrcy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'displayCurrency', defaultValue: '')
+  String get displayCurrency => throw _privateConstructorUsedError;
+  @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
+  double get openAmountInDisplayCrcy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'fiscalYear', defaultValue: '')
+  String get fiscalYear => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isDisputed', defaultValue: '')
+  String get isDisputed => throw _privateConstructorUsedError;
+  @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
+  String get accountingDocumentItem => throw _privateConstructorUsedError;
+  @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
+  String get accountingDocumentItemRef => throw _privateConstructorUsedError;
+  @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
+  String get partialPaymentHistoryDesc => throw _privateConstructorUsedError;
+  @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
+  double get paymentAmountInDisplayCrcy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'companyCode', defaultValue: '')
+  String get companyCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +90,39 @@ abstract class $CustomerOpenItemDtoCopyWith<$Res> {
       @JsonKey(name: 'postingKeyName', defaultValue: '')
           String postingKeyName,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          double amountInTransactionCurrency});
+          double amountInTransactionCurrency,
+      @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
+          String transactionCurrency,
+      @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+          String accountingDocExternalReference,
+      @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
+          String bpCustomerNumber,
+      @JsonKey(name: 'debitCreditCode', defaultValue: '')
+          String debitCreditCode,
+      @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
+          double cashDiscountAmountInDspCrcy,
+      @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
+          String cashDiscountDueDate,
+      @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
+          double totalAmountInDisplayCrcy,
+      @JsonKey(name: 'displayCurrency', defaultValue: '')
+          String displayCurrency,
+      @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
+          double openAmountInDisplayCrcy,
+      @JsonKey(name: 'fiscalYear', defaultValue: '')
+          String fiscalYear,
+      @JsonKey(name: 'isDisputed', defaultValue: '')
+          String isDisputed,
+      @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
+          String accountingDocumentItem,
+      @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
+          String accountingDocumentItemRef,
+      @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
+          String partialPaymentHistoryDesc,
+      @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
+          double paymentAmountInDisplayCrcy,
+      @JsonKey(name: 'companyCode', defaultValue: '')
+          String companyCode});
 }
 
 /// @nodoc
@@ -79,6 +144,22 @@ class _$CustomerOpenItemDtoCopyWithImpl<$Res, $Val extends CustomerOpenItemDto>
     Object? documentReferenceID = null,
     Object? postingKeyName = null,
     Object? amountInTransactionCurrency = null,
+    Object? transactionCurrency = null,
+    Object? accountingDocExternalReference = null,
+    Object? bpCustomerNumber = null,
+    Object? debitCreditCode = null,
+    Object? cashDiscountAmountInDspCrcy = null,
+    Object? cashDiscountDueDate = null,
+    Object? totalAmountInDisplayCrcy = null,
+    Object? displayCurrency = null,
+    Object? openAmountInDisplayCrcy = null,
+    Object? fiscalYear = null,
+    Object? isDisputed = null,
+    Object? accountingDocumentItem = null,
+    Object? accountingDocumentItemRef = null,
+    Object? partialPaymentHistoryDesc = null,
+    Object? paymentAmountInDisplayCrcy = null,
+    Object? companyCode = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -105,6 +186,70 @@ class _$CustomerOpenItemDtoCopyWithImpl<$Res, $Val extends CustomerOpenItemDto>
           ? _value.amountInTransactionCurrency
           : amountInTransactionCurrency // ignore: cast_nullable_to_non_nullable
               as double,
+      transactionCurrency: null == transactionCurrency
+          ? _value.transactionCurrency
+          : transactionCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountingDocExternalReference: null == accountingDocExternalReference
+          ? _value.accountingDocExternalReference
+          : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      bpCustomerNumber: null == bpCustomerNumber
+          ? _value.bpCustomerNumber
+          : bpCustomerNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      debitCreditCode: null == debitCreditCode
+          ? _value.debitCreditCode
+          : debitCreditCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      cashDiscountAmountInDspCrcy: null == cashDiscountAmountInDspCrcy
+          ? _value.cashDiscountAmountInDspCrcy
+          : cashDiscountAmountInDspCrcy // ignore: cast_nullable_to_non_nullable
+              as double,
+      cashDiscountDueDate: null == cashDiscountDueDate
+          ? _value.cashDiscountDueDate
+          : cashDiscountDueDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalAmountInDisplayCrcy: null == totalAmountInDisplayCrcy
+          ? _value.totalAmountInDisplayCrcy
+          : totalAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
+              as double,
+      displayCurrency: null == displayCurrency
+          ? _value.displayCurrency
+          : displayCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
+      openAmountInDisplayCrcy: null == openAmountInDisplayCrcy
+          ? _value.openAmountInDisplayCrcy
+          : openAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
+              as double,
+      fiscalYear: null == fiscalYear
+          ? _value.fiscalYear
+          : fiscalYear // ignore: cast_nullable_to_non_nullable
+              as String,
+      isDisputed: null == isDisputed
+          ? _value.isDisputed
+          : isDisputed // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountingDocumentItem: null == accountingDocumentItem
+          ? _value.accountingDocumentItem
+          : accountingDocumentItem // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountingDocumentItemRef: null == accountingDocumentItemRef
+          ? _value.accountingDocumentItemRef
+          : accountingDocumentItemRef // ignore: cast_nullable_to_non_nullable
+              as String,
+      partialPaymentHistoryDesc: null == partialPaymentHistoryDesc
+          ? _value.partialPaymentHistoryDesc
+          : partialPaymentHistoryDesc // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentAmountInDisplayCrcy: null == paymentAmountInDisplayCrcy
+          ? _value.paymentAmountInDisplayCrcy
+          : paymentAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
+              as double,
+      companyCode: null == companyCode
+          ? _value.companyCode
+          : companyCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -129,7 +274,39 @@ abstract class _$$_CustomerOpenItemDtoCopyWith<$Res>
       @JsonKey(name: 'postingKeyName', defaultValue: '')
           String postingKeyName,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          double amountInTransactionCurrency});
+          double amountInTransactionCurrency,
+      @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
+          String transactionCurrency,
+      @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+          String accountingDocExternalReference,
+      @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
+          String bpCustomerNumber,
+      @JsonKey(name: 'debitCreditCode', defaultValue: '')
+          String debitCreditCode,
+      @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
+          double cashDiscountAmountInDspCrcy,
+      @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
+          String cashDiscountDueDate,
+      @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
+          double totalAmountInDisplayCrcy,
+      @JsonKey(name: 'displayCurrency', defaultValue: '')
+          String displayCurrency,
+      @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
+          double openAmountInDisplayCrcy,
+      @JsonKey(name: 'fiscalYear', defaultValue: '')
+          String fiscalYear,
+      @JsonKey(name: 'isDisputed', defaultValue: '')
+          String isDisputed,
+      @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
+          String accountingDocumentItem,
+      @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
+          String accountingDocumentItemRef,
+      @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
+          String partialPaymentHistoryDesc,
+      @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
+          double paymentAmountInDisplayCrcy,
+      @JsonKey(name: 'companyCode', defaultValue: '')
+          String companyCode});
 }
 
 /// @nodoc
@@ -149,6 +326,22 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
     Object? documentReferenceID = null,
     Object? postingKeyName = null,
     Object? amountInTransactionCurrency = null,
+    Object? transactionCurrency = null,
+    Object? accountingDocExternalReference = null,
+    Object? bpCustomerNumber = null,
+    Object? debitCreditCode = null,
+    Object? cashDiscountAmountInDspCrcy = null,
+    Object? cashDiscountDueDate = null,
+    Object? totalAmountInDisplayCrcy = null,
+    Object? displayCurrency = null,
+    Object? openAmountInDisplayCrcy = null,
+    Object? fiscalYear = null,
+    Object? isDisputed = null,
+    Object? accountingDocumentItem = null,
+    Object? accountingDocumentItemRef = null,
+    Object? partialPaymentHistoryDesc = null,
+    Object? paymentAmountInDisplayCrcy = null,
+    Object? companyCode = null,
   }) {
     return _then(_$_CustomerOpenItemDto(
       status: null == status
@@ -175,6 +368,70 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
           ? _value.amountInTransactionCurrency
           : amountInTransactionCurrency // ignore: cast_nullable_to_non_nullable
               as double,
+      transactionCurrency: null == transactionCurrency
+          ? _value.transactionCurrency
+          : transactionCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountingDocExternalReference: null == accountingDocExternalReference
+          ? _value.accountingDocExternalReference
+          : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      bpCustomerNumber: null == bpCustomerNumber
+          ? _value.bpCustomerNumber
+          : bpCustomerNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      debitCreditCode: null == debitCreditCode
+          ? _value.debitCreditCode
+          : debitCreditCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      cashDiscountAmountInDspCrcy: null == cashDiscountAmountInDspCrcy
+          ? _value.cashDiscountAmountInDspCrcy
+          : cashDiscountAmountInDspCrcy // ignore: cast_nullable_to_non_nullable
+              as double,
+      cashDiscountDueDate: null == cashDiscountDueDate
+          ? _value.cashDiscountDueDate
+          : cashDiscountDueDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalAmountInDisplayCrcy: null == totalAmountInDisplayCrcy
+          ? _value.totalAmountInDisplayCrcy
+          : totalAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
+              as double,
+      displayCurrency: null == displayCurrency
+          ? _value.displayCurrency
+          : displayCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
+      openAmountInDisplayCrcy: null == openAmountInDisplayCrcy
+          ? _value.openAmountInDisplayCrcy
+          : openAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
+              as double,
+      fiscalYear: null == fiscalYear
+          ? _value.fiscalYear
+          : fiscalYear // ignore: cast_nullable_to_non_nullable
+              as String,
+      isDisputed: null == isDisputed
+          ? _value.isDisputed
+          : isDisputed // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountingDocumentItem: null == accountingDocumentItem
+          ? _value.accountingDocumentItem
+          : accountingDocumentItem // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountingDocumentItemRef: null == accountingDocumentItemRef
+          ? _value.accountingDocumentItemRef
+          : accountingDocumentItemRef // ignore: cast_nullable_to_non_nullable
+              as String,
+      partialPaymentHistoryDesc: null == partialPaymentHistoryDesc
+          ? _value.partialPaymentHistoryDesc
+          : partialPaymentHistoryDesc // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentAmountInDisplayCrcy: null == paymentAmountInDisplayCrcy
+          ? _value.paymentAmountInDisplayCrcy
+          : paymentAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
+              as double,
+      companyCode: null == companyCode
+          ? _value.companyCode
+          : companyCode // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -194,7 +451,39 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
       @JsonKey(name: 'postingKeyName', defaultValue: '')
           required this.postingKeyName,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          required this.amountInTransactionCurrency})
+          required this.amountInTransactionCurrency,
+      @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
+          required this.transactionCurrency,
+      @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+          required this.accountingDocExternalReference,
+      @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
+          required this.bpCustomerNumber,
+      @JsonKey(name: 'debitCreditCode', defaultValue: '')
+          required this.debitCreditCode,
+      @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
+          required this.cashDiscountAmountInDspCrcy,
+      @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
+          required this.cashDiscountDueDate,
+      @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
+          required this.totalAmountInDisplayCrcy,
+      @JsonKey(name: 'displayCurrency', defaultValue: '')
+          required this.displayCurrency,
+      @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
+          required this.openAmountInDisplayCrcy,
+      @JsonKey(name: 'fiscalYear', defaultValue: '')
+          required this.fiscalYear,
+      @JsonKey(name: 'isDisputed', defaultValue: '')
+          required this.isDisputed,
+      @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
+          required this.accountingDocumentItem,
+      @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
+          required this.accountingDocumentItemRef,
+      @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
+          required this.partialPaymentHistoryDesc,
+      @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
+          required this.paymentAmountInDisplayCrcy,
+      @JsonKey(name: 'companyCode', defaultValue: '')
+          required this.companyCode})
       : super._();
 
   factory _$_CustomerOpenItemDto.fromJson(Map<String, dynamic> json) =>
@@ -218,10 +507,58 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
   @override
   @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
   final double amountInTransactionCurrency;
+  @override
+  @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
+  final String transactionCurrency;
+  @override
+  @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+  final String accountingDocExternalReference;
+  @override
+  @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
+  final String bpCustomerNumber;
+  @override
+  @JsonKey(name: 'debitCreditCode', defaultValue: '')
+  final String debitCreditCode;
+  @override
+  @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
+  final double cashDiscountAmountInDspCrcy;
+  @override
+  @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
+  final String cashDiscountDueDate;
+  @override
+  @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
+  final double totalAmountInDisplayCrcy;
+  @override
+  @JsonKey(name: 'displayCurrency', defaultValue: '')
+  final String displayCurrency;
+  @override
+  @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
+  final double openAmountInDisplayCrcy;
+  @override
+  @JsonKey(name: 'fiscalYear', defaultValue: '')
+  final String fiscalYear;
+  @override
+  @JsonKey(name: 'isDisputed', defaultValue: '')
+  final String isDisputed;
+  @override
+  @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
+  final String accountingDocumentItem;
+  @override
+  @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
+  final String accountingDocumentItemRef;
+  @override
+  @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
+  final String partialPaymentHistoryDesc;
+  @override
+  @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
+  final double paymentAmountInDisplayCrcy;
+  @override
+  @JsonKey(name: 'companyCode', defaultValue: '')
+  final String companyCode;
 
   @override
   String toString() {
-    return 'CustomerOpenItemDto(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, amountInTransactionCurrency: $amountInTransactionCurrency)';
+    return 'CustomerOpenItemDto(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, amountInTransactionCurrency: $amountInTransactionCurrency, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, companyCode: $companyCode)';
   }
 
   @override
@@ -238,22 +575,74 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
                 other.documentReferenceID == documentReferenceID) &&
             (identical(other.postingKeyName, postingKeyName) ||
                 other.postingKeyName == postingKeyName) &&
-            (identical(other.amountInTransactionCurrency,
-                    amountInTransactionCurrency) ||
+            (identical(other.amountInTransactionCurrency, amountInTransactionCurrency) ||
                 other.amountInTransactionCurrency ==
-                    amountInTransactionCurrency));
+                    amountInTransactionCurrency) &&
+            (identical(other.transactionCurrency, transactionCurrency) ||
+                other.transactionCurrency == transactionCurrency) &&
+            (identical(other.accountingDocExternalReference, accountingDocExternalReference) ||
+                other.accountingDocExternalReference ==
+                    accountingDocExternalReference) &&
+            (identical(other.bpCustomerNumber, bpCustomerNumber) ||
+                other.bpCustomerNumber == bpCustomerNumber) &&
+            (identical(other.debitCreditCode, debitCreditCode) ||
+                other.debitCreditCode == debitCreditCode) &&
+            (identical(other.cashDiscountAmountInDspCrcy, cashDiscountAmountInDspCrcy) ||
+                other.cashDiscountAmountInDspCrcy ==
+                    cashDiscountAmountInDspCrcy) &&
+            (identical(other.cashDiscountDueDate, cashDiscountDueDate) ||
+                other.cashDiscountDueDate == cashDiscountDueDate) &&
+            (identical(
+                    other.totalAmountInDisplayCrcy, totalAmountInDisplayCrcy) ||
+                other.totalAmountInDisplayCrcy == totalAmountInDisplayCrcy) &&
+            (identical(other.displayCurrency, displayCurrency) ||
+                other.displayCurrency == displayCurrency) &&
+            (identical(other.openAmountInDisplayCrcy, openAmountInDisplayCrcy) ||
+                other.openAmountInDisplayCrcy == openAmountInDisplayCrcy) &&
+            (identical(other.fiscalYear, fiscalYear) ||
+                other.fiscalYear == fiscalYear) &&
+            (identical(other.isDisputed, isDisputed) ||
+                other.isDisputed == isDisputed) &&
+            (identical(other.accountingDocumentItem, accountingDocumentItem) ||
+                other.accountingDocumentItem == accountingDocumentItem) &&
+            (identical(other.accountingDocumentItemRef, accountingDocumentItemRef) ||
+                other.accountingDocumentItemRef == accountingDocumentItemRef) &&
+            (identical(other.partialPaymentHistoryDesc, partialPaymentHistoryDesc) ||
+                other.partialPaymentHistoryDesc == partialPaymentHistoryDesc) &&
+            (identical(other.paymentAmountInDisplayCrcy, paymentAmountInDisplayCrcy) ||
+                other.paymentAmountInDisplayCrcy ==
+                    paymentAmountInDisplayCrcy) &&
+            (identical(other.companyCode, companyCode) ||
+                other.companyCode == companyCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      status,
-      accountingDocument,
-      netDueDate,
-      documentReferenceID,
-      postingKeyName,
-      amountInTransactionCurrency);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        status,
+        accountingDocument,
+        netDueDate,
+        documentReferenceID,
+        postingKeyName,
+        amountInTransactionCurrency,
+        transactionCurrency,
+        accountingDocExternalReference,
+        bpCustomerNumber,
+        debitCreditCode,
+        cashDiscountAmountInDspCrcy,
+        cashDiscountDueDate,
+        totalAmountInDisplayCrcy,
+        displayCurrency,
+        openAmountInDisplayCrcy,
+        fiscalYear,
+        isDisputed,
+        accountingDocumentItem,
+        accountingDocumentItemRef,
+        partialPaymentHistoryDesc,
+        paymentAmountInDisplayCrcy,
+        companyCode
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -272,19 +661,50 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
 
 abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
   factory _CustomerOpenItemDto(
-          {@JsonKey(name: 'status', defaultValue: '')
-              required final String status,
-          @JsonKey(name: 'accountingDocument', defaultValue: '')
-              required final String accountingDocument,
-          @JsonKey(name: 'netDueDate', defaultValue: '')
-              required final String netDueDate,
-          @JsonKey(name: 'documentReferenceID', defaultValue: '')
-              required final String documentReferenceID,
-          @JsonKey(name: 'postingKeyName', defaultValue: '')
-              required final String postingKeyName,
-          @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-              required final double amountInTransactionCurrency}) =
-      _$_CustomerOpenItemDto;
+      {@JsonKey(name: 'status', defaultValue: '')
+          required final String status,
+      @JsonKey(name: 'accountingDocument', defaultValue: '')
+          required final String accountingDocument,
+      @JsonKey(name: 'netDueDate', defaultValue: '')
+          required final String netDueDate,
+      @JsonKey(name: 'documentReferenceID', defaultValue: '')
+          required final String documentReferenceID,
+      @JsonKey(name: 'postingKeyName', defaultValue: '')
+          required final String postingKeyName,
+      @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
+          required final double amountInTransactionCurrency,
+      @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
+          required final String transactionCurrency,
+      @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+          required final String accountingDocExternalReference,
+      @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
+          required final String bpCustomerNumber,
+      @JsonKey(name: 'debitCreditCode', defaultValue: '')
+          required final String debitCreditCode,
+      @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
+          required final double cashDiscountAmountInDspCrcy,
+      @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
+          required final String cashDiscountDueDate,
+      @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
+          required final double totalAmountInDisplayCrcy,
+      @JsonKey(name: 'displayCurrency', defaultValue: '')
+          required final String displayCurrency,
+      @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
+          required final double openAmountInDisplayCrcy,
+      @JsonKey(name: 'fiscalYear', defaultValue: '')
+          required final String fiscalYear,
+      @JsonKey(name: 'isDisputed', defaultValue: '')
+          required final String isDisputed,
+      @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
+          required final String accountingDocumentItem,
+      @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
+          required final String accountingDocumentItemRef,
+      @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
+          required final String partialPaymentHistoryDesc,
+      @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
+          required final double paymentAmountInDisplayCrcy,
+      @JsonKey(name: 'companyCode', defaultValue: '')
+          required final String companyCode}) = _$_CustomerOpenItemDto;
   _CustomerOpenItemDto._() : super._();
 
   factory _CustomerOpenItemDto.fromJson(Map<String, dynamic> json) =
@@ -308,6 +728,54 @@ abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
   @override
   @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
   double get amountInTransactionCurrency;
+  @override
+  @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
+  String get transactionCurrency;
+  @override
+  @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+  String get accountingDocExternalReference;
+  @override
+  @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
+  String get bpCustomerNumber;
+  @override
+  @JsonKey(name: 'debitCreditCode', defaultValue: '')
+  String get debitCreditCode;
+  @override
+  @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
+  double get cashDiscountAmountInDspCrcy;
+  @override
+  @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
+  String get cashDiscountDueDate;
+  @override
+  @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
+  double get totalAmountInDisplayCrcy;
+  @override
+  @JsonKey(name: 'displayCurrency', defaultValue: '')
+  String get displayCurrency;
+  @override
+  @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
+  double get openAmountInDisplayCrcy;
+  @override
+  @JsonKey(name: 'fiscalYear', defaultValue: '')
+  String get fiscalYear;
+  @override
+  @JsonKey(name: 'isDisputed', defaultValue: '')
+  String get isDisputed;
+  @override
+  @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
+  String get accountingDocumentItem;
+  @override
+  @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
+  String get accountingDocumentItemRef;
+  @override
+  @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
+  String get partialPaymentHistoryDesc;
+  @override
+  @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
+  double get paymentAmountInDisplayCrcy;
+  @override
+  @JsonKey(name: 'companyCode', defaultValue: '')
+  String get companyCode;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerOpenItemDtoCopyWith<_$_CustomerOpenItemDto> get copyWith =>

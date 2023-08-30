@@ -1,4 +1,3 @@
-
 bool checkIsInvoice(String documentType) {
   return documentType == 'I';
 }

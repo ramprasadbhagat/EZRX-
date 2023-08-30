@@ -1,13 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -54,10 +58,42 @@ class NewPaymentPage extends StatelessWidget {
           ),
           body: AnnouncementBanner(
             currentPath: context.router.currentPath,
-            child: BlocBuilder<NewPaymentBloc, NewPaymentState>(
+            child: BlocConsumer<NewPaymentBloc, NewPaymentState>(
+              listenWhen: (previous, current) =>
+                  previous.isLoading != current.isLoading,
+              listener: (context, state) {
+                if (!state.isLoading) {
+                  state.failureOrSuccessOption.fold(
+                    () async {
+                      await context.router
+                          .pushNamed('payments/payments_webview')
+                          .then((value) {
+                        context.read<NewPaymentBloc>().add(
+                              NewPaymentEvent.updatePaymentGateway(
+                                salesOrganisation: context
+                                    .read<SalesOrgBloc>()
+                                    .state
+                                    .salesOrganisation,
+                                paymentUrl: value as Uri,
+                              ),
+                            );
+                        context.router
+                            .pushNamed('payments/payment_advice_created');
+                      });
+                    },
+                    (either) => either.fold(
+                      (failure) {
+                        ErrorUtils.handleApiFailure(context, failure);
+                      },
+                      (_) {},
+                    ),
+                  );
+                }
+              },
               buildWhen: (previous, current) =>
                   previous.selectedInvoices != current.selectedInvoices ||
-                  previous.selectedCredits != current.selectedCredits,
+                  previous.selectedCredits != current.selectedCredits ||
+                  previous.isLoading != current.isLoading,
               builder: (context, state) {
                 final configs = context.read<SalesOrgBloc>().state.configs;
 
@@ -178,16 +214,40 @@ class NewPaymentPage extends StatelessWidget {
                                 if (step == 2)
                                   _NextButton(
                                     tabController: tabController,
-                                    enabled: state.selectedCredits.isNotEmpty,
+                                    enabled: true,
                                   ),
                                 if (step == 3)
                                   ElevatedButton(
                                     key: WidgetKeys.payButton,
-                                    onPressed: null,
-                                    child: Text(
-                                      'Pay now'.tr(),
-                                      style: const TextStyle(
-                                        color: ZPColors.white,
+                                    onPressed: state.isLoading
+                                        ? null
+                                        : () => context
+                                            .read<NewPaymentBloc>()
+                                            .add(
+                                              NewPaymentEvent.pay(
+                                                salesOrganisation: context
+                                                    .read<SalesOrgBloc>()
+                                                    .state
+                                                    .salesOrganisation,
+                                                customerCodeInfo: context
+                                                    .read<CustomerCodeBloc>()
+                                                    .state
+                                                    .customerCodeInfo,
+                                                paymentMethod:
+                                                    'Payment Gateway',
+                                                user: context
+                                                    .read<UserBloc>()
+                                                    .state
+                                                    .user,
+                                              ),
+                                            ),
+                                    child: LoadingShimmer.withChild(
+                                      enabled: state.isLoading,
+                                      child: Text(
+                                        'Pay now'.tr(),
+                                        style: const TextStyle(
+                                          color: ZPColors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
