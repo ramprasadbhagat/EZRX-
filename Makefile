@@ -4,8 +4,29 @@ BUILD := $$( echo $(STR) | cut -d '+' -f 2 )
 CLIENTUSER := 'order/client_user.dart'
 EXTERNALSALESREP := 'order/external_sales_rep.dart'
 SALESORGCONFIG := 'reset_sales_org_config.sh'
-LOGIN := 'login/login_screen.dart'
-FORGOTPASSWORD := 'login/forgot_password_screen.dart'
+CLIENT_LOGIN := 'login/client_login_screen.dart'
+MY_CLIENT_CYCLE_ID := 'EZRX-R12'
+MY_EXTERNAL_CYCLE_ID := 'EZRX-R13'
+PH_CLIENT_CYCLE_ID := 'EZRX-R14'
+PH_EXTERNAL_CYCLE_ID := 'EZRX-R24'
+TW_CLIENT_CYCLE_ID := 'EZRX-R15'
+TW_EXTERNAL_CYCLE_ID := 'EZRX-R25'
+TH_CLIENT_CYCLE_ID := 'EZRX-R16'
+TH_EXTERNAL_CYCLE_ID := 'EZRX-R26'
+VN_CLIENT_CYCLE_ID := 'EZRX-R17'
+VN_EXTERNAL_CYCLE_ID := 'EZRX-R27'
+SG_CLIENT_CYCLE_ID := 'EZRX-R18'
+SG_EXTERNAL_CYCLE_ID := 'EZRX-R28'
+KH_CLIENT_CYCLE_ID := 'EZRX-R19'
+KH_EXTERNAL_CYCLE_ID := 'EZRX-R29'
+MM_CLIENT_CYCLE_ID := 'EZRX-R20'
+MM_EXTERNAL_CYCLE_ID := 'EZRX-R30'
+ID_CLIENT_CYCLE_ID := 'EZRX-R21'
+ID_EXTERNAL_CYCLE_ID := 'EZRX-R31'
+KR_CLIENT_CYCLE_ID := 'EZRX-R22'
+KR_EXTERNAL_CYCLE_ID := 'EZRX-R32'
+HK_CLIENT_CYCLE_ID := 'EZRX-R23'
+HK_EXTERNAL_CYCLE_ID := 'EZRX-R33'
 
 clean_ios:
 	@cd ios && rm -rf Pods && rm Podfile.lock && fvm flutter pub get && pod install && cd ..
@@ -96,5 +117,48 @@ run_th_external_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${EXTERNALSALESREP}
 run_login_screen_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${LOGIN}
-run_forgot_password_screen_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${FORGOTPASSWORD}  	
+run_my_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${MY_CLIENT_CYCLE_ID}
+run_my_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${MY_EXTERNAL_CYCLE_ID}
+run_ph_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/ph/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${PH_CLIENT_CYCLE_ID}
+run_ph_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/ph/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${PH_EXTERNAL_CYCLE_ID}
+run_tw_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/tw/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${TW_CLIENT_CYCLE_ID}
+run_tw_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/tw/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${TW_EXTERNAL_CYCLE_ID}
+run_th_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${TH_CLIENT_CYCLE_ID}
+run_th_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${TH_EXTERNAL_CYCLE_ID}
+run_vn_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/vn/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${VN_CLIENT_CYCLE_ID}
+run_vn_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/vn/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${VN_EXTERNAL_CYCLE_ID}
+run_sg_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/sg/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${SG_CLIENT_CYCLE_ID}
+run_sg_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/sg/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${SG_EXTERNAL_CYCLE_ID}
+run_kh_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${KH_CLIENT_CYCLE_ID}
+run_kh_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${KH_EXTERNAL_CYCLE_ID}
+run_mm_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/mm/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${MM_CLIENT_CYCLE_ID}
+run_mm_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/mm/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${MM_EXTERNAL_CYCLE_ID}
+run_id_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${ID_CLIENT_CYCLE_ID}
+run_id_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${ID_EXTERNAL_CYCLE_ID}
+run_kr_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kr/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${KR_CLIENT_CYCLE_ID}
+run_kr_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kr/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${KR_EXTERNAL_CYCLE_ID}
+run_hk_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/hk/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${HK_CLIENT_CYCLE_ID}
+run_hk_external_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/hk/${CLIENT_LOGIN} --dart-define=CYCLE_KEY=${HK_EXTERNAL_CYCLE_ID}
+	  	
