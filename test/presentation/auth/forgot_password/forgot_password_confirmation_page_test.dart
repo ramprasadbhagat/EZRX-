@@ -6,7 +6,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/auth/forgot_password/back_to_login_button.dart';
+import 'package:ezrxmobile/presentation/auth/forgot_password/widgets/back_to_login_button.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_passoword_confirmation_page.dart';
 import 'package:ezrxmobile/presentation/core/logo.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
