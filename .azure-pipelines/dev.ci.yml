@@ -56,6 +56,11 @@ jobs:
   - bash: flutter375 test test/infrastructure/banner
 - job:
   pool: devops-flutter
+  displayName: Test infrastructure -> payments
+  steps: 
+  - bash: flutter375 test test/infrastructure/payments
+- job:
+  pool: devops-flutter
   displayName: Test infrastructure -> order
   steps: 
   - bash: flutter375 test test/infrastructure/order

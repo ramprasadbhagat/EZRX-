@@ -82,7 +82,10 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
 
   Map<String, dynamic> get toMapList {
     final filterMap = <Map<String, String>>[];
-    if (dueDateFrom.isNotEmpty && dueDateTo.isNotEmpty) {
+    if (dueDateFrom.isNotEmpty &&
+        dueDateFrom != '-' &&
+        dueDateTo.isNotEmpty &&
+        dueDateTo != '-') {
       filterMap.add(
         _mapData(
           field: 'netDueDate',
@@ -98,7 +101,10 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
         ),
       );
     }
-    if (documentDateFrom.isNotEmpty && documentDateTo.isNotEmpty) {
+    if (documentDateFrom.isNotEmpty &&
+        documentDateFrom != '-' &&
+        documentDateTo.isNotEmpty &&
+        documentDateTo != '-') {
       filterMap.add(
         _mapData(
           field: 'documentDate',

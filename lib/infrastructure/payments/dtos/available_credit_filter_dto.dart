@@ -63,7 +63,10 @@ class AvailableCreditFilterDto with _$AvailableCreditFilterDto {
 
   Map<String, dynamic> get toMapList {
     final filterMap = <Map<String, String>>[];
-    if (documentDateFrom.isNotEmpty && documentDateTo.isNotEmpty) {
+    if (documentDateFrom.isNotEmpty &&
+        documentDateFrom != '-' &&
+        documentDateTo.isNotEmpty &&
+        documentDateTo != '-') {
       filterMap.add(
         _mapData(
           field: 'documentDate',
