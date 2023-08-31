@@ -128,6 +128,7 @@ dependency_overrides:
   #ffi is error with 2.1.0 version
   ffi: 2.0.1
   flutter_svg: ^1.1.6
+  http: 0.13.5
 
 
 # For information on the generic Dart part of this file, see the
