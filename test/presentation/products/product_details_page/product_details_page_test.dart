@@ -448,6 +448,151 @@ void main() {
         expect(selectedCarouselImageKeyFinder, findsOneWidget);
 
       });
+
+      testWidgets('Add Product As Favourite Test', (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('00000111111'),
+                isFavourite: false,
+              ),
+            ),
+          ),
+        );
+        final expectedStates = Stream.fromIterable(
+          [
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('00000111111'),
+                  isFavourite: true,
+                ),
+              ),
+            ),
+          ],
+        );
+
+        whenListen(productDetailMockBloc, expectedStates);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final favouriteIcon =
+            find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
+        final updatedFavouriteIcon = find.byIcon(Icons.favorite);
+        expect(favouriteIcon, findsOneWidget);
+        await tester.tap(favouriteIcon);
+        await tester.pumpAndSettle();
+        expect(updatedFavouriteIcon, findsOneWidget);
+      });
+
+      testWidgets('Remove Product As Favourite Test', (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('00000111111'),
+                isFavourite: true,
+              ),
+            ),
+          ),
+        );
+        final expectedStates = Stream.fromIterable(
+          [
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('00000111111'),
+                  isFavourite: false,
+                ),
+              ),
+            ),
+          ],
+        );
+
+        whenListen(productDetailMockBloc, expectedStates);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final favouriteIcon =
+            find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
+        final updatedFavouriteIcon =
+            find.byIcon(Icons.favorite_border_outlined);
+        expect(favouriteIcon, findsOneWidget);
+        await tester.tap(favouriteIcon);
+        await tester.pumpAndSettle();
+        expect(updatedFavouriteIcon, findsOneWidget);
+      });
+
+      testWidgets('Find product added as favourite message', (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('00000111111'),
+                isFavourite: false,
+              ),
+            ),
+          ),
+        );
+        final expectedStates = Stream.fromIterable(
+          [
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('00000111111'),
+                  isFavourite: true,
+                ),
+              ),
+            ),
+          ],
+        );
+
+        whenListen(productDetailMockBloc, expectedStates);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final favouriteIcon =
+            find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
+        final favouriteMessage = find.text('Product added as favourite');
+        expect(favouriteIcon, findsOneWidget);
+        await tester.tap(favouriteIcon);
+        await tester.pumpAndSettle();
+        expect(favouriteMessage, findsOneWidget);
+      });
+
+      testWidgets('Find product removed as favourite message', (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('00000111111'),
+                isFavourite: true,
+              ),
+            ),
+          ),
+        );
+        final expectedStates = Stream.fromIterable(
+          [
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('00000111111'),
+                  isFavourite: false,
+                ),
+              ),
+            ),
+          ],
+        );
+
+        whenListen(productDetailMockBloc, expectedStates);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final favouriteIcon =
+            find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
+        final favouriteMessage = find.text('Product removed as favourite');
+        expect(favouriteIcon, findsOneWidget);
+        await tester.tap(favouriteIcon);
+        await tester.pumpAndSettle();
+        expect(favouriteMessage, findsOneWidget);
+      });
     },
   );
 }

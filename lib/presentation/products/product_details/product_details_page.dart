@@ -256,17 +256,34 @@ class _Description extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        BlocBuilder<ProductDetailBloc, ProductDetailState>(
+        BlocConsumer<ProductDetailBloc, ProductDetailState>(
+          listenWhen: (previous, current) =>
+              previous.productDetailAggregate.materialInfo.isFavourite !=
+                  current.productDetailAggregate.materialInfo.isFavourite &&
+              !current.isFetching,
           buildWhen: (previous, current) =>
+              previous.productDetailAggregate.materialInfo.isFavourite !=
+                  current.productDetailAggregate.materialInfo.isFavourite ||
               previous.isFetching != current.isFetching,
+          listener: (context, state) {
+            final toastMessage =
+                state.productDetailAggregate.materialInfo.isFavourite
+                    ? 'Product added as favourite'
+                    : 'Product removed as favourite';
+
+            CustomSnackBar(
+              messageText: toastMessage.tr(),
+            ).show(context);
+          },
           builder: (context, state) {
             return FavouriteIcon(
               enable: state.isFetching,
               key: WidgetKeys.materialDetailsFavouriteIcon,
-              isFavourite: materialInfo.isFavourite,
+              isFavourite:
+                  state.productDetailAggregate.materialInfo.isFavourite,
               constraints: const BoxConstraints(),
               onTap: () => context.read<ProductDetailBloc>().add(
-                    materialInfo.isFavourite
+                    state.productDetailAggregate.materialInfo.isFavourite
                         ? ProductDetailEvent.deleteFavourite(
                             isForSimilarProduct: false,
                             materialNumber: materialInfo.materialNumber,
