@@ -14,6 +14,8 @@ import 'package:ezrxmobile/presentation/more/section/settings_title_section.dart
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+part 'section/login_on_behalf/login_on_behalf.dart';
+
 class MoreTab extends StatelessWidget {
   const MoreTab({Key? key}) : super(key: key);
 
@@ -60,7 +62,7 @@ class MoreTab extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const _LoginOnBehalf(),
+            const LoginOnBehalf(),
             TextButton.icon(
               icon: const Padding(
                 padding: EdgeInsets.only(left: 8.0),
@@ -89,55 +91,6 @@ class MoreTab extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _LoginOnBehalf extends StatelessWidget {
-  const _LoginOnBehalf({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
-      buildWhen: (previous, current) => previous.user != current.user,
-      builder: (context, state) {
-        return state.userCanLoginOnBehalf
-            ? TextButton.icon(
-                icon: const Padding(
-                  padding: EdgeInsets.only(left: 8.0),
-                  child: Icon(
-                    Icons.login_outlined,
-                    color: ZPColors.gradient,
-                  ),
-                ),
-                label: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.start, // to align the icon to left
-                  children: [
-                    Text(
-                      'Log in on behalf',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: ZPColors.gradient,
-                          ),
-                    ).tr(),
-                  ],
-                ),
-                onPressed: () {
-                  context
-                      .read<ProxyLoginFormBloc>()
-                      .add(const ProxyLoginFormEvent.initialized());
-                  showModalBottomSheet(
-                    isDismissible: false,
-                    isScrollControlled: true,
-                    context: context,
-                    builder: (_) {
-                      return const LoginOnBehalfSheet();
-                    },
-                  );
-                },
-              )
-            : const SizedBox.shrink();
-      },
     );
   }
 }
