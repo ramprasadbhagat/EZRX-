@@ -3,14 +3,13 @@ import 'dart:math';
 
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_materials_params.dart';
+import 'package:ezrxmobile/infrastructure/returns/dtos/return_materials_params_dto.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_request_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
@@ -49,11 +48,7 @@ class ReturnRequestRepository extends IReturnRequestRepository {
 
   @override
   Future<Either<ApiFailure, ReturnMaterialList>> searchReturnMaterials({
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-    required CustomerCodeInfo customerCodeInfo,
-    required int pageSize,
-    required int offset,
+    required ReturnMaterialsParams requestParams,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -68,11 +63,8 @@ class ReturnRequestRepository extends IReturnRequestRepository {
     }
     try {
       final returnRequest = await remoteDataSource.searchReturnMaterials(
-        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        shipTo: shipToInfo.shipToCustomerCode,
-        soldTo: customerCodeInfo.customerCodeSoldTo,
-        pageSize: pageSize,
-        offset: offset,
+        requestParams:
+            ReturnMaterialsParamsDto.fromDomain(requestParams).toMap(),
       );
 
       return Right(returnRequest);

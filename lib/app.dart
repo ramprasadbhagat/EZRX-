@@ -52,6 +52,7 @@ import 'package:ezrxmobile/application/returns/approver_actions/filter/return_ap
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
@@ -537,6 +538,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReturnDetailsByRequestBloc>(
           create: (context) => locator<ReturnDetailsByRequestBloc>(),
+        ),
+        BlocProvider<ReturnItemsFilterBloc>(
+          create: (context) => locator<ReturnItemsFilterBloc>(),
         ),
         BlocProvider<ReturnItemsBloc>(
           create: (context) => locator<ReturnItemsBloc>(),

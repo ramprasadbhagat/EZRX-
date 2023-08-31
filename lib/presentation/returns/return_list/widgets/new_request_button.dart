@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ class NewRequestButton extends StatelessWidget {
             );
         context.read<ReturnItemsBloc>().add(
               ReturnItemsEvent.fetch(
+                appliedFilter: ReturnItemsFilter.empty(),
                 salesOrganisation:
                     context.read<SalesOrgBloc>().state.salesOrganisation,
                 customerCodeInfo:

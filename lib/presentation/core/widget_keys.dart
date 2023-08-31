@@ -485,6 +485,8 @@ class WidgetKeys {
       Key('returnAttachmentPhotoUploadButton');
   static const Key newRequestSuccessfulPage = Key('newRequestSuccessfulPage');
   static const Key specialInstructionsField = Key('specialInstructionsField');
+  static const Key fromInvoiceDateField = Key('fromInvoiceDateField');
+  static const Key toInvoiceDateField = Key('toInvoiceDateField');
 
   //============================================================
   //  Contact Us Page

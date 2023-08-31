@@ -66,6 +66,7 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_lis
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
@@ -3092,6 +3093,9 @@ void setupLocator() {
       filePickerService: locator<FilePickerService>(),
       fileSystemHelper: locator<FileSystemHelper>(),
     ),
+  );
+  locator.registerLazySingleton(
+    () => ReturnItemsFilterBloc(),
   );
   locator.registerLazySingleton(
     () => ReturnItemsBloc(

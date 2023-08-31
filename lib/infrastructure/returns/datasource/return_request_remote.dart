@@ -27,25 +27,12 @@ class ReturnRequestRemoteDataSource {
   });
 
   Future<ReturnMaterialList> searchReturnMaterials({
-    required String salesOrg,
-    required String shipTo,
-    required String soldTo,
-    required int pageSize,
-    required int offset,
+    required Map<String, dynamic> requestParams,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = query.searchReturnMaterials();
       final variables = {
-        'searchReturnMaterialsRequestV2': {
-          'soldTo': soldTo,
-          'shipTo': shipTo,
-          'salesOrg': salesOrg,
-          'first': pageSize,
-          'after': offset,
-          //TODO: cover dateFrom & dateTo in filter ticket
-          'dateFrom': '20230125',
-          'dateTo': '20230725',
-        },
+        'searchReturnMaterialsRequestV2': requestParams,
       };
       variables['searchReturnMaterialsRequestV2']!
           .removeWhere((key, value) => value.toString().isEmpty);

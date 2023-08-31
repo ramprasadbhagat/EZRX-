@@ -4,6 +4,7 @@ part of 'return_items_bloc.dart';
 class ReturnItemsState with _$ReturnItemsState {
   const ReturnItemsState._();
   const factory ReturnItemsState({
+    required ReturnItemsFilter appliedFilter,
     required List<ReturnMaterial> items,
     required Option<Either<ApiFailure, ReturnMaterialList>>
         failureOrSuccessOption,
@@ -15,6 +16,7 @@ class ReturnItemsState with _$ReturnItemsState {
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
+        appliedFilter: ReturnItemsFilter.empty(),
         items: <ReturnMaterial>[],
       );
 }

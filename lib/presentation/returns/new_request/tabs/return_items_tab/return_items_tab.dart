@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
@@ -12,6 +14,7 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_info.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -48,9 +51,25 @@ class ReturnItemsTab extends StatelessWidget {
               ),
               CustomBadge(
                 Icons.tune,
-                count: 0,
+                count: 1,
                 badgeColor: ZPColors.orange,
-                onPressed: () {},
+                onPressed: () {
+                  context.read<ReturnItemsFilterBloc>().add(
+                        ReturnItemsFilterEvent.openFilterBottomSheet(
+                          appliedFilter: context
+                              .read<ReturnItemsBloc>()
+                              .state
+                              .appliedFilter,
+                        ),
+                      );
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    enableDrag: false,
+                    isDismissible: false,
+                    builder: (_) => const ReturnItemsFilterBottomSheet(),
+                  );
+                },
               ),
             ],
           ),
@@ -95,6 +114,7 @@ class ReturnItemsTab extends StatelessWidget {
                                 .read<CustomerCodeBloc>()
                                 .state
                                 .shipToInfo,
+                            appliedFilter: ReturnItemsFilter.empty(),
                           ),
                         );
                   },

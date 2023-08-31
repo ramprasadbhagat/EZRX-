@@ -3,8 +3,10 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_materials_params.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_request_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -33,16 +35,20 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
             failureOrSuccessOption: none(),
             items: <ReturnMaterial>[],
             isLoading: true,
+            appliedFilter: value.appliedFilter,
           ),
         );
 
         final failureOrSuccess =
             await newRequestRepository.searchReturnMaterials(
-          salesOrganisation: value.salesOrganisation,
-          customerCodeInfo: value.customerCodeInfo,
-          shipToInfo: value.shipToInfo,
-          pageSize: config.pageSize,
-          offset: 0,
+          requestParams: ReturnMaterialsParams(
+            salesOrg: value.salesOrganisation.salesOrg,
+            soldToInfo: value.customerCodeInfo.customerCodeSoldTo,
+            shipToInfo: value.shipToInfo.shipToCustomerCode,
+            pageSize: config.pageSize,
+            offset: 0,
+            filter: value.appliedFilter,
+          ),
         );
 
         failureOrSuccess.fold(
@@ -78,11 +84,14 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
 
         final failureOrSuccess =
             await newRequestRepository.searchReturnMaterials(
-          salesOrganisation: value.salesOrganisation,
-          customerCodeInfo: value.customerCodeInfo,
-          shipToInfo: value.shipToInfo,
-          pageSize: config.pageSize,
-          offset: state.items.length,
+          requestParams: ReturnMaterialsParams(
+            salesOrg: value.salesOrganisation.salesOrg,
+            soldToInfo: value.customerCodeInfo.customerCodeSoldTo,
+            shipToInfo: value.shipToInfo.shipToCustomerCode,
+            pageSize: config.pageSize,
+            offset: 0,
+            filter: state.appliedFilter,
+          ),
         );
 
         failureOrSuccess.fold(
