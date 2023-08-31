@@ -28,11 +28,11 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductImageBloc, ProductImageState>(
       buildWhen: (previous, current) =>
-          previous.materialUrlMap != current.materialUrlMap,
+          previous.productImageMap != current.productImageMap,
       builder: (context, state) {
         return CustomImage(
           key: WidgetKeys.productImage,
-          imageUrl: state.getMaterialImageUrl(materialNumber),
+          imageUrl: state.getMaterialImage(materialNumber).thumbNail,
           fit: fit,
           height: height,
           width: width,

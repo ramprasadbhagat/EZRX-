@@ -372,6 +372,16 @@ class WidgetKeys {
       Key('materialDetailsSimilarProductItem');
   static const Key materialDetailsSimilarProductsSection =
       Key('materialDetailsSimilarProductsSection');
+  static const Key materialDetailsCarouselImage =
+      Key('materialDetailsCarouselImage');
+
+  //============================================================
+  //  bundle Details
+  //============================================================
+  static const Key bundleImage = Key('bundleImage');
+  static const Key bundleDetailsCarousel = Key('bundleDetailsCarousel');
+
+
   //============================================================
   //  Return
   //============================================================

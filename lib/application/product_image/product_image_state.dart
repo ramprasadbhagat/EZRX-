@@ -5,15 +5,15 @@ class ProductImageState with _$ProductImageState {
   const ProductImageState._();
 
   const factory ProductImageState({
-    required Map<MaterialNumber, String> materialUrlMap,
+    required Map<MaterialNumber, ProductImages> productImageMap,
     required bool isFetching,
   }) = _ProductImageState;
 
   factory ProductImageState.initial() => const ProductImageState(
-        materialUrlMap: <MaterialNumber, String>{},
+        productImageMap: <MaterialNumber, ProductImages>{},
         isFetching: false,
       );
 
-  String getMaterialImageUrl(MaterialNumber materialNumber) =>
-      materialUrlMap[materialNumber] ?? '';
+  ProductImages getMaterialImage(MaterialNumber materialNumber) =>
+      productImageMap[materialNumber] ?? ProductImages.empty();
 }

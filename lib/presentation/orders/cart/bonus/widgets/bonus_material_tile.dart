@@ -99,7 +99,7 @@ class _MaterialImageSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductImageBloc, ProductImageState>(
       buildWhen: (previous, current) =>
-          previous.materialUrlMap != current.materialUrlMap,
+          previous.productImageMap != current.productImageMap,
       builder: (context, state) {
         return CustomCard(
           showShadow: false,

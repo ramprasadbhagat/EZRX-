@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -109,6 +110,20 @@ void main() {
     router: MockAppRouter(),
     pendingChildren: [],
   );
+
+  //////////////////////Finder//////////////////////////////////////////////////
+  final similarProductSectionFinder =
+      find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
+  final similarProductItemFinder =
+      find.byKey(WidgetKeys.materialDetailsSimilarProductItem);
+  final productImageFinder = find.byKey(WidgetKeys.productImage);
+  final materialDetailsCarouselFinder =
+      find.byKey(WidgetKeys.materialDetailsCarousel);
+  final materialDetailsImageCounterFinder =
+      find.byKey(WidgetKeys.materialDetailsImageCounter);
+  final materialDetailsCarouselImageFinder =
+      find.byKey(WidgetKeys.materialDetailsCarouselImage);
+  /////////////////////////////////////////////////////////////////////////////
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -330,10 +345,6 @@ void main() {
         whenListen(productDetailMockBloc, expectedStates);
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final similarProductSectionFinder =
-            find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
-        final similarProductItemFinder =
-            find.byKey(WidgetKeys.materialDetailsSimilarProductItem);
 
         expect(similarProductSectionFinder, findsOneWidget);
         expect(similarProductItemFinder, findsAtLeastNWidgets(1));
@@ -362,15 +373,80 @@ void main() {
         whenListen(productDetailMockBloc, expectedStates);
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final similarProductSectionFinder =
-            find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
-        final similarProductItemFinder =
-            find.byKey(WidgetKeys.materialDetailsSimilarProductItem);
-
         expect(similarProductSectionFinder, findsNothing);
         expect(similarProductItemFinder, findsNothing);
-
         await tester.pump(const Duration(seconds: 1));
+      });
+
+      testWidgets('Product Image  not available', (tester) async {
+        final expectedStates = Stream.fromIterable(
+          [
+            ProductDetailState.initial().copyWith(
+              isFetching: true,
+              productDetailAggregate: ProductDetailAggregate.empty(),
+            ),
+            ProductDetailState.initial().copyWith(
+              isFetching: false,
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo:
+                    materialInfo.copyWith(type: MaterialInfoType('bundle')),
+              ),
+            ),
+          ],
+        );
+
+        whenListen(productDetailMockBloc, expectedStates);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(similarProductSectionFinder, findsNothing);
+        expect(similarProductItemFinder, findsNothing);
+        expect(productImageFinder, findsOneWidget);
+        expect(materialDetailsCarouselFinder, findsNothing);
+        expect(materialDetailsImageCounterFinder, findsNothing);
+      });
+
+      testWidgets('Product Image available', (tester) async {
+        final expectedStates = Stream.fromIterable(
+          [
+            ProductDetailState.initial().copyWith(
+              isFetching: true,
+              productDetailAggregate: ProductDetailAggregate.empty(),
+            ),
+            ProductDetailState.initial().copyWith(
+              isFetching: false,
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo,
+                similarProduct: <MaterialInfo>[],
+              ),
+            ),
+          ],
+        );
+        when(() => mockProductImageBloc.state).thenReturn(
+          ProductImageState.initial().copyWith(
+            productImageMap: <MaterialNumber, ProductImages>{
+              materialInfo.materialNumber: ProductImages.empty().copyWith(
+                materialNumber: materialInfo.materialNumber,
+                image: [
+                  'fake-image-1',
+                  'fake-image-2',
+                ],
+              ),
+            },
+          ),
+        );
+        whenListen(productDetailMockBloc, expectedStates);
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(similarProductSectionFinder, findsNothing);
+        expect(similarProductItemFinder, findsNothing);
+        expect(productImageFinder, findsOneWidget);
+        expect(materialDetailsCarouselFinder, findsOneWidget);
+        expect(materialDetailsCarouselImageFinder, findsNWidgets(2));
+        expect(materialDetailsImageCounterFinder, findsOneWidget);
+        final selectedCarouselImageKeyFinder =
+            find.byKey(const ValueKey('selected0true'));
+        expect(selectedCarouselImageKeyFinder, findsOneWidget);
+
       });
     },
   );

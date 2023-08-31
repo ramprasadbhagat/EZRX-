@@ -5,14 +5,18 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
+import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
@@ -22,12 +26,14 @@ import 'package:ezrxmobile/presentation/products/product_details/widget/material
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/similar_product.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/stock_info.dart';
-import 'package:ezrxmobile/presentation/products/widgets/product_image.dart';
+import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
+part 'widget/product_image_section.dart';
+
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({Key? key}) : super(key: key);
@@ -124,7 +130,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       body: ListView(
         controller: _scrollController,
         children: [
-          const ProductDetailImage(),
+          const _ProductImageSection(),
           const _BodyContent(),
           _SimilarProducts(),
         ],

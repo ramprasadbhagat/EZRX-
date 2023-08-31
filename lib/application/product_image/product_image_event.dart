@@ -7,6 +7,6 @@ class ProductImageEvent with _$ProductImageEvent {
     required List list,
   }) = _Fetch;
   const factory ProductImageEvent.set({
-    required Map<MaterialNumber, String> materialImageUrlMap,
+    required Map<MaterialNumber, ProductImages> productImageMap,
   }) = _Set;
 }

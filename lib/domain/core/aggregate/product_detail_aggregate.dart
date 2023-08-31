@@ -25,4 +25,5 @@ class ProductDetailAggregate with _$ProductDetailAggregate {
   bool get productDetailsAvailable =>
       productItem != ProductItem.empty() ||
       materialInfo.productImages.description.isValid();
+
 }

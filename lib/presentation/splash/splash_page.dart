@@ -341,28 +341,35 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           listenWhen: (previous, current) =>
               previous.failureOrSuccessOption !=
                   current.failureOrSuccessOption ||
-              previous.productDetailAggregate.similarProduct !=
-                  current.productDetailAggregate.similarProduct,
-          listener: (context, state) => state.failureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {
-                if (state.productDetailAggregate.similarProduct.isNotEmpty) {
-                  _fetchMaterialPrice(
-                    context,
-                    state.productDetailAggregate.similarProduct,
-                  );
-                  _fetchProductImage(
-                    context,
-                    state.productDetailAggregate.similarProduct,
-                  );
-                }
-              },
-            ),
-          ),
+              previous.productDetailAggregate != current.productDetailAggregate,
+          listener: (context, state) {
+            state.failureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  ErrorUtils.handleApiFailure(context, failure);
+                },
+                (_) {
+                  if (state.productDetailAggregate.similarProduct.isNotEmpty) {
+                    _fetchMaterialPrice(
+                      context,
+                      state.productDetailAggregate.similarProduct,
+                    );
+                    _fetchProductImage(
+                      context,
+                      state.productDetailAggregate.similarProduct,
+                    );
+                  }
+                },
+              ),
+            );
+            if (state.productDetailAggregate.materialInfo.type.typeBundle) {
+              _fetchProductImage(
+                context,
+                state.productDetailAggregate.materialInfo.bundle.materials,
+              );
+            }
+          },
         ),
         BlocListener<ReturnListByItemBloc, ReturnListByItemState>(
           listenWhen: (previous, current) =>

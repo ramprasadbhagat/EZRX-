@@ -20,7 +20,8 @@ mixin _$ProductImageEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(List<dynamic> list) fetch,
-    required TResult Function(Map<MaterialNumber, String> materialImageUrlMap)
+    required TResult Function(
+            Map<MaterialNumber, ProductImages> productImageMap)
         set,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,14 +29,14 @@ mixin _$ProductImageEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(List<dynamic> list)? fetch,
-    TResult? Function(Map<MaterialNumber, String> materialImageUrlMap)? set,
+    TResult? Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(List<dynamic> list)? fetch,
-    TResult Function(Map<MaterialNumber, String> materialImageUrlMap)? set,
+    TResult Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,7 +122,8 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(List<dynamic> list) fetch,
-    required TResult Function(Map<MaterialNumber, String> materialImageUrlMap)
+    required TResult Function(
+            Map<MaterialNumber, ProductImages> productImageMap)
         set,
   }) {
     return initialized();
@@ -132,7 +134,7 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(List<dynamic> list)? fetch,
-    TResult? Function(Map<MaterialNumber, String> materialImageUrlMap)? set,
+    TResult? Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
   }) {
     return initialized?.call();
   }
@@ -142,7 +144,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(List<dynamic> list)? fetch,
-    TResult Function(Map<MaterialNumber, String> materialImageUrlMap)? set,
+    TResult Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -260,7 +262,8 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(List<dynamic> list) fetch,
-    required TResult Function(Map<MaterialNumber, String> materialImageUrlMap)
+    required TResult Function(
+            Map<MaterialNumber, ProductImages> productImageMap)
         set,
   }) {
     return fetch(list);
@@ -271,7 +274,7 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(List<dynamic> list)? fetch,
-    TResult? Function(Map<MaterialNumber, String> materialImageUrlMap)? set,
+    TResult? Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
   }) {
     return fetch?.call(list);
   }
@@ -281,7 +284,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(List<dynamic> list)? fetch,
-    TResult Function(Map<MaterialNumber, String> materialImageUrlMap)? set,
+    TResult Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -339,7 +342,7 @@ abstract class _$$_SetCopyWith<$Res> {
   factory _$$_SetCopyWith(_$_Set value, $Res Function(_$_Set) then) =
       __$$_SetCopyWithImpl<$Res>;
   @useResult
-  $Res call({Map<MaterialNumber, String> materialImageUrlMap});
+  $Res call({Map<MaterialNumber, ProductImages> productImageMap});
 }
 
 /// @nodoc
@@ -352,13 +355,13 @@ class __$$_SetCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialImageUrlMap = null,
+    Object? productImageMap = null,
   }) {
     return _then(_$_Set(
-      materialImageUrlMap: null == materialImageUrlMap
-          ? _value._materialImageUrlMap
-          : materialImageUrlMap // ignore: cast_nullable_to_non_nullable
-              as Map<MaterialNumber, String>,
+      productImageMap: null == productImageMap
+          ? _value._productImageMap
+          : productImageMap // ignore: cast_nullable_to_non_nullable
+              as Map<MaterialNumber, ProductImages>,
     ));
   }
 }
@@ -366,21 +369,21 @@ class __$$_SetCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Set implements _Set {
-  const _$_Set({required final Map<MaterialNumber, String> materialImageUrlMap})
-      : _materialImageUrlMap = materialImageUrlMap;
+  const _$_Set(
+      {required final Map<MaterialNumber, ProductImages> productImageMap})
+      : _productImageMap = productImageMap;
 
-  final Map<MaterialNumber, String> _materialImageUrlMap;
+  final Map<MaterialNumber, ProductImages> _productImageMap;
   @override
-  Map<MaterialNumber, String> get materialImageUrlMap {
-    if (_materialImageUrlMap is EqualUnmodifiableMapView)
-      return _materialImageUrlMap;
+  Map<MaterialNumber, ProductImages> get productImageMap {
+    if (_productImageMap is EqualUnmodifiableMapView) return _productImageMap;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_materialImageUrlMap);
+    return EqualUnmodifiableMapView(_productImageMap);
   }
 
   @override
   String toString() {
-    return 'ProductImageEvent.set(materialImageUrlMap: $materialImageUrlMap)';
+    return 'ProductImageEvent.set(productImageMap: $productImageMap)';
   }
 
   @override
@@ -389,12 +392,12 @@ class _$_Set implements _Set {
         (other.runtimeType == runtimeType &&
             other is _$_Set &&
             const DeepCollectionEquality()
-                .equals(other._materialImageUrlMap, _materialImageUrlMap));
+                .equals(other._productImageMap, _productImageMap));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_materialImageUrlMap));
+      runtimeType, const DeepCollectionEquality().hash(_productImageMap));
 
   @JsonKey(ignore: true)
   @override
@@ -407,10 +410,11 @@ class _$_Set implements _Set {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(List<dynamic> list) fetch,
-    required TResult Function(Map<MaterialNumber, String> materialImageUrlMap)
+    required TResult Function(
+            Map<MaterialNumber, ProductImages> productImageMap)
         set,
   }) {
-    return set(materialImageUrlMap);
+    return set(productImageMap);
   }
 
   @override
@@ -418,9 +422,9 @@ class _$_Set implements _Set {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(List<dynamic> list)? fetch,
-    TResult? Function(Map<MaterialNumber, String> materialImageUrlMap)? set,
+    TResult? Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
   }) {
-    return set?.call(materialImageUrlMap);
+    return set?.call(productImageMap);
   }
 
   @override
@@ -428,11 +432,11 @@ class _$_Set implements _Set {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(List<dynamic> list)? fetch,
-    TResult Function(Map<MaterialNumber, String> materialImageUrlMap)? set,
+    TResult Function(Map<MaterialNumber, ProductImages> productImageMap)? set,
     required TResult orElse(),
   }) {
     if (set != null) {
-      return set(materialImageUrlMap);
+      return set(productImageMap);
     }
     return orElse();
   }
@@ -474,17 +478,17 @@ class _$_Set implements _Set {
 
 abstract class _Set implements ProductImageEvent {
   const factory _Set(
-          {required final Map<MaterialNumber, String> materialImageUrlMap}) =
+          {required final Map<MaterialNumber, ProductImages> productImageMap}) =
       _$_Set;
 
-  Map<MaterialNumber, String> get materialImageUrlMap;
+  Map<MaterialNumber, ProductImages> get productImageMap;
   @JsonKey(ignore: true)
   _$$_SetCopyWith<_$_Set> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$ProductImageState {
-  Map<MaterialNumber, String> get materialUrlMap =>
+  Map<MaterialNumber, ProductImages> get productImageMap =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
 
@@ -499,7 +503,8 @@ abstract class $ProductImageStateCopyWith<$Res> {
           ProductImageState value, $Res Function(ProductImageState) then) =
       _$ProductImageStateCopyWithImpl<$Res, ProductImageState>;
   @useResult
-  $Res call({Map<MaterialNumber, String> materialUrlMap, bool isFetching});
+  $Res call(
+      {Map<MaterialNumber, ProductImages> productImageMap, bool isFetching});
 }
 
 /// @nodoc
@@ -515,14 +520,14 @@ class _$ProductImageStateCopyWithImpl<$Res, $Val extends ProductImageState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialUrlMap = null,
+    Object? productImageMap = null,
     Object? isFetching = null,
   }) {
     return _then(_value.copyWith(
-      materialUrlMap: null == materialUrlMap
-          ? _value.materialUrlMap
-          : materialUrlMap // ignore: cast_nullable_to_non_nullable
-              as Map<MaterialNumber, String>,
+      productImageMap: null == productImageMap
+          ? _value.productImageMap
+          : productImageMap // ignore: cast_nullable_to_non_nullable
+              as Map<MaterialNumber, ProductImages>,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -539,7 +544,8 @@ abstract class _$$_ProductImageStateCopyWith<$Res>
       __$$_ProductImageStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<MaterialNumber, String> materialUrlMap, bool isFetching});
+  $Res call(
+      {Map<MaterialNumber, ProductImages> productImageMap, bool isFetching});
 }
 
 /// @nodoc
@@ -553,14 +559,14 @@ class __$$_ProductImageStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? materialUrlMap = null,
+    Object? productImageMap = null,
     Object? isFetching = null,
   }) {
     return _then(_$_ProductImageState(
-      materialUrlMap: null == materialUrlMap
-          ? _value._materialUrlMap
-          : materialUrlMap // ignore: cast_nullable_to_non_nullable
-              as Map<MaterialNumber, String>,
+      productImageMap: null == productImageMap
+          ? _value._productImageMap
+          : productImageMap // ignore: cast_nullable_to_non_nullable
+              as Map<MaterialNumber, ProductImages>,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -573,17 +579,17 @@ class __$$_ProductImageStateCopyWithImpl<$Res>
 
 class _$_ProductImageState extends _ProductImageState {
   const _$_ProductImageState(
-      {required final Map<MaterialNumber, String> materialUrlMap,
+      {required final Map<MaterialNumber, ProductImages> productImageMap,
       required this.isFetching})
-      : _materialUrlMap = materialUrlMap,
+      : _productImageMap = productImageMap,
         super._();
 
-  final Map<MaterialNumber, String> _materialUrlMap;
+  final Map<MaterialNumber, ProductImages> _productImageMap;
   @override
-  Map<MaterialNumber, String> get materialUrlMap {
-    if (_materialUrlMap is EqualUnmodifiableMapView) return _materialUrlMap;
+  Map<MaterialNumber, ProductImages> get productImageMap {
+    if (_productImageMap is EqualUnmodifiableMapView) return _productImageMap;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_materialUrlMap);
+    return EqualUnmodifiableMapView(_productImageMap);
   }
 
   @override
@@ -591,7 +597,7 @@ class _$_ProductImageState extends _ProductImageState {
 
   @override
   String toString() {
-    return 'ProductImageState(materialUrlMap: $materialUrlMap, isFetching: $isFetching)';
+    return 'ProductImageState(productImageMap: $productImageMap, isFetching: $isFetching)';
   }
 
   @override
@@ -600,14 +606,14 @@ class _$_ProductImageState extends _ProductImageState {
         (other.runtimeType == runtimeType &&
             other is _$_ProductImageState &&
             const DeepCollectionEquality()
-                .equals(other._materialUrlMap, _materialUrlMap) &&
+                .equals(other._productImageMap, _productImageMap) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_materialUrlMap), isFetching);
+      const DeepCollectionEquality().hash(_productImageMap), isFetching);
 
   @JsonKey(ignore: true)
   @override
@@ -619,12 +625,12 @@ class _$_ProductImageState extends _ProductImageState {
 
 abstract class _ProductImageState extends ProductImageState {
   const factory _ProductImageState(
-      {required final Map<MaterialNumber, String> materialUrlMap,
+      {required final Map<MaterialNumber, ProductImages> productImageMap,
       required final bool isFetching}) = _$_ProductImageState;
   const _ProductImageState._() : super._();
 
   @override
-  Map<MaterialNumber, String> get materialUrlMap;
+  Map<MaterialNumber, ProductImages> get productImageMap;
   @override
   bool get isFetching;
   @override

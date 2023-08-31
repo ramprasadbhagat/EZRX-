@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +24,8 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
     event.map(
       initialized: (e) => emit(ProductImageState.initial()),
       set: (e) {
-        final updatedMap = {...state.materialUrlMap};
-        for (final entry in e.materialImageUrlMap.entries) {
+        final updatedMap = {...state.productImageMap};
+        for (final entry in e.productImageMap.entries) {
           if (!updatedMap.containsKey(entry.key)) {
             updatedMap[entry.key] = entry.value;
           }
@@ -32,7 +33,7 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
         emit(
           state.copyWith(
             isFetching: false,
-            materialUrlMap: updatedMap,
+            productImageMap: updatedMap,
           ),
         );
       },
@@ -45,7 +46,7 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
 
         final materialNumbers = e.list.map((e) => e.materialNumber).toList();
         final queryMaterialNumber = List<MaterialNumber>.from(materialNumbers)
-            .where((element) => !state.materialUrlMap.containsKey(element))
+            .where((element) => !state.productImageMap.containsKey(element))
             .toSet()
             .toList();
 
@@ -69,7 +70,7 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
             ),
           ),
           (productImageMap) =>
-              add(ProductImageEvent.set(materialImageUrlMap: productImageMap)),
+              add(ProductImageEvent.set(productImageMap: productImageMap)),
         );
       },
     );

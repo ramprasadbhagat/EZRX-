@@ -1,19 +1,24 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/curved_rectangle_widget.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/product_image.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_add_to_cart_sheet.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_material_descriptions_sheet.dart';
-import 'package:ezrxmobile/presentation/products/widgets/product_image.dart';
+import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+part 'widget/bundle_image_section.dart';
+part 'widget/outline_text.dart';
 
 class BundleDetailPage extends StatefulWidget {
   const BundleDetailPage({Key? key}) : super(key: key);
@@ -88,7 +93,7 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
       body: ListView(
         controller: _scrollController,
         children: const [
-          ProductDetailImage(),
+          _BundleImageSection(),
           Align(
             alignment: Alignment.topLeft,
             child: _BundleOfferTag(),

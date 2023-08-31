@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/product_images/repository/i_product_images_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/product_images/datasource/product_images_local.dart';
@@ -19,7 +20,7 @@ class ProductImagesRepository implements IProductImagesRepository {
   });
 
   @override
-  Future<Either<ApiFailure, Map<MaterialNumber, String>>>
+  Future<Either<ApiFailure, Map<MaterialNumber, ProductImages>>>
       getImagesForMaterials({
     required List<MaterialNumber> list,
   }) async {
@@ -30,7 +31,7 @@ class ProductImagesRepository implements IProductImagesRepository {
 
         return Right(
           {
-            for (var item in productImages) item.materialNumber: item.thumbNail,
+            for (var item in productImages) item.materialNumber: item,
           },
         );
       } catch (e) {
@@ -47,7 +48,7 @@ class ProductImagesRepository implements IProductImagesRepository {
 
       return Right(
         {
-          for (var item in productImages) item.materialNumber: item.thumbNail,
+          for (var item in productImages) item.materialNumber: item,
         },
       );
     } catch (e) {
