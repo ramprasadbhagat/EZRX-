@@ -8,40 +8,49 @@ class CartEvent with _$CartEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
   }) = _Initialized;
+
   const factory CartEvent.addComboDealToCart({
     required List<PriceAggregate> comboDealItems,
     required bool doNotallowOutOfStockMaterial,
     @Default(false) bool overrideQty,
   }) = _AddComboDealToCart;
+
   const factory CartEvent.verifyMaterialDealBonus({
     ///Todo: consider to remove it
     required PriceAggregate item,
     required List<PriceAggregate> items,
   }) = _VerifyMaterialDealBonus;
+
   const factory CartEvent.addRemarkToCartItem({
     required CartItem item,
     required String message,
   }) = _AddRemarkToCartItem;
+
   const factory CartEvent.addBonusToCartItem({
     required MaterialInfo bonusMaterial,
     required StringValue bonusItemId,
     required RequestCounterOfferDetails counterOfferDetails,
     required User user,
   }) = _AddBonusToCartItem;
+
   const factory CartEvent.removeBonusFromCartItem({
     required CartItem item,
     required MaterialItemBonus bonusItem,
   }) = _RemoveBonusFromCartItem;
+
   const factory CartEvent.addRemarkToBonusItem({
     required CartItem item,
     required MaterialItemBonus bonusItem,
     required String message,
   }) = _AddRemarkToBonusItem;
+
   const factory CartEvent.overrideCartItemPrice({
     required List<Price> overridenPrice,
     required CartItem cartItem,
   }) = _OverrideCartItemPrice;
+
   const factory CartEvent.clearCart() = _ClearCart;
+
   const factory CartEvent.replaceWithOrderItems({
     required List<CartItem> items,
     required bool doNotallowOutOfStockMaterial,
@@ -61,6 +70,13 @@ class CartEvent with _$CartEvent {
     required int quantity,
     required RequestCounterOfferDetails counterOfferDetails,
   }) = _UpsertCart;
+
+  const factory CartEvent.addHistoryItemsToCart({
+    required List<PriceAggregate> priceAggregate,
+    required List<int> quantity,
+    required RequestCounterOfferDetails counterOfferDetails,
+    required User user,
+  }) = _addHistoryItemsToCart;
 
   const factory CartEvent.upsertCartItems({
     required PriceAggregate priceAggregate,

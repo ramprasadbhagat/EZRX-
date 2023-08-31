@@ -44,6 +44,7 @@ class ViewByOrderDetailsQueryMutation {
       UnitPrice
       TotalPrice
       Type
+      ProductType
       LineNumber
       Batch
       ExpiryDate

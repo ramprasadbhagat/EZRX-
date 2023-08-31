@@ -10,6 +10,8 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required Map<MaterialQueryInfo, PriceAggregate> materials,
     required bool isExpanded,
+    required List<ProductDetailAggregate> productDetailAggregateList,
+    required bool isFetchingList,
   }) = _ViewByOrderDetailsState;
 
   factory ViewByOrderDetailsState.initial() => ViewByOrderDetailsState(
@@ -19,6 +21,8 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
         isLoadingTenderContract: {},
         materials: {},
         isExpanded: false,
+        productDetailAggregateList: <ProductDetailAggregate>[],
+        isFetchingList: false,
       );
   int get poDocumentCount =>
       orderHistoryDetails.orderHistoryDetailsPoDocuments.length;

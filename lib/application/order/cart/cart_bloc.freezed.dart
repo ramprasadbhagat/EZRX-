@@ -54,6 +54,12 @@ mixin _$CartEvent {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -96,6 +102,9 @@ mixin _$CartEvent {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -137,6 +146,9 @@ mixin _$CartEvent {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -168,6 +180,8 @@ mixin _$CartEvent {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -191,6 +205,7 @@ mixin _$CartEvent {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -213,6 +228,7 @@ mixin _$CartEvent {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -416,6 +432,12 @@ class _$_Initialized implements _Initialized {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -462,6 +484,9 @@ class _$_Initialized implements _Initialized {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -507,6 +532,9 @@ class _$_Initialized implements _Initialized {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -545,6 +573,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -571,6 +601,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -596,6 +627,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -766,6 +798,12 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -812,6 +850,9 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -857,6 +898,9 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -895,6 +939,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -921,6 +967,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -946,6 +993,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -1103,6 +1151,12 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -1148,6 +1202,9 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -1192,6 +1249,9 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -1229,6 +1289,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -1255,6 +1317,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -1280,6 +1343,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -1426,6 +1490,12 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -1471,6 +1541,9 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -1515,6 +1588,9 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -1552,6 +1628,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -1578,6 +1656,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -1603,6 +1682,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -1795,6 +1875,12 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -1841,6 +1927,9 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -1886,6 +1975,9 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -1924,6 +2016,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -1950,6 +2044,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -1975,6 +2070,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -2136,6 +2232,12 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -2181,6 +2283,9 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -2225,6 +2330,9 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -2262,6 +2370,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -2288,6 +2398,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -2313,6 +2424,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -2477,6 +2589,12 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -2522,6 +2640,9 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -2566,6 +2687,9 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -2603,6 +2727,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -2629,6 +2755,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -2654,6 +2781,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -2812,6 +2940,12 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -2857,6 +2991,9 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -2901,6 +3038,9 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -2938,6 +3078,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -2964,6 +3106,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -2989,6 +3132,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -3089,6 +3233,12 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -3134,6 +3284,9 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -3178,6 +3331,9 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -3215,6 +3371,8 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -3241,6 +3399,7 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -3266,6 +3425,7 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -3408,6 +3568,12 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -3453,6 +3619,9 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -3497,6 +3666,9 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -3534,6 +3706,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -3560,6 +3734,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -3585,6 +3760,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -3741,6 +3917,12 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -3786,6 +3968,9 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -3830,6 +4015,9 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -3867,6 +4055,8 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -3893,6 +4083,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -3918,6 +4109,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -4047,6 +4239,12 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -4092,6 +4290,9 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -4136,6 +4337,9 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -4173,6 +4377,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -4199,6 +4405,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -4224,6 +4431,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -4394,6 +4602,12 @@ class _$_UpsertCart implements _UpsertCart {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -4439,6 +4653,9 @@ class _$_UpsertCart implements _UpsertCart {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -4483,6 +4700,9 @@ class _$_UpsertCart implements _UpsertCart {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -4520,6 +4740,8 @@ class _$_UpsertCart implements _UpsertCart {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -4546,6 +4768,7 @@ class _$_UpsertCart implements _UpsertCart {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -4571,6 +4794,7 @@ class _$_UpsertCart implements _UpsertCart {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -4597,6 +4821,406 @@ abstract class _UpsertCart implements CartEvent {
   RequestCounterOfferDetails get counterOfferDetails;
   @JsonKey(ignore: true)
   _$$_UpsertCartCopyWith<_$_UpsertCart> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_addHistoryItemsToCartCopyWith<$Res> {
+  factory _$$_addHistoryItemsToCartCopyWith(_$_addHistoryItemsToCart value,
+          $Res Function(_$_addHistoryItemsToCart) then) =
+      __$$_addHistoryItemsToCartCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<PriceAggregate> priceAggregate,
+      List<int> quantity,
+      RequestCounterOfferDetails counterOfferDetails,
+      User user});
+
+  $RequestCounterOfferDetailsCopyWith<$Res> get counterOfferDetails;
+  $UserCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class __$$_addHistoryItemsToCartCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_addHistoryItemsToCart>
+    implements _$$_addHistoryItemsToCartCopyWith<$Res> {
+  __$$_addHistoryItemsToCartCopyWithImpl(_$_addHistoryItemsToCart _value,
+      $Res Function(_$_addHistoryItemsToCart) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? priceAggregate = null,
+    Object? quantity = null,
+    Object? counterOfferDetails = null,
+    Object? user = null,
+  }) {
+    return _then(_$_addHistoryItemsToCart(
+      priceAggregate: null == priceAggregate
+          ? _value._priceAggregate
+          : priceAggregate // ignore: cast_nullable_to_non_nullable
+              as List<PriceAggregate>,
+      quantity: null == quantity
+          ? _value._quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      counterOfferDetails: null == counterOfferDetails
+          ? _value.counterOfferDetails
+          : counterOfferDetails // ignore: cast_nullable_to_non_nullable
+              as RequestCounterOfferDetails,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RequestCounterOfferDetailsCopyWith<$Res> get counterOfferDetails {
+    return $RequestCounterOfferDetailsCopyWith<$Res>(_value.counterOfferDetails,
+        (value) {
+      return _then(_value.copyWith(counterOfferDetails: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
+  const _$_addHistoryItemsToCart(
+      {required final List<PriceAggregate> priceAggregate,
+      required final List<int> quantity,
+      required this.counterOfferDetails,
+      required this.user})
+      : _priceAggregate = priceAggregate,
+        _quantity = quantity;
+
+  final List<PriceAggregate> _priceAggregate;
+  @override
+  List<PriceAggregate> get priceAggregate {
+    if (_priceAggregate is EqualUnmodifiableListView) return _priceAggregate;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_priceAggregate);
+  }
+
+  final List<int> _quantity;
+  @override
+  List<int> get quantity {
+    if (_quantity is EqualUnmodifiableListView) return _quantity;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_quantity);
+  }
+
+  @override
+  final RequestCounterOfferDetails counterOfferDetails;
+  @override
+  final User user;
+
+  @override
+  String toString() {
+    return 'CartEvent.addHistoryItemsToCart(priceAggregate: $priceAggregate, quantity: $quantity, counterOfferDetails: $counterOfferDetails, user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_addHistoryItemsToCart &&
+            const DeepCollectionEquality()
+                .equals(other._priceAggregate, _priceAggregate) &&
+            const DeepCollectionEquality().equals(other._quantity, _quantity) &&
+            (identical(other.counterOfferDetails, counterOfferDetails) ||
+                other.counterOfferDetails == counterOfferDetails) &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_priceAggregate),
+      const DeepCollectionEquality().hash(_quantity),
+      counterOfferDetails,
+      user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_addHistoryItemsToCartCopyWith<_$_addHistoryItemsToCart> get copyWith =>
+      __$$_addHistoryItemsToCartCopyWithImpl<_$_addHistoryItemsToCart>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(List<PriceAggregate> comboDealItems,
+            bool doNotallowOutOfStockMaterial, bool overrideQty)
+        addComboDealToCart,
+    required TResult Function(PriceAggregate item, List<PriceAggregate> items)
+        verifyMaterialDealBonus,
+    required TResult Function(CartItem item, String message)
+        addRemarkToCartItem,
+    required TResult Function(
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addBonusToCartItem,
+    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
+        removeBonusFromCartItem,
+    required TResult Function(
+            CartItem item, MaterialItemBonus bonusItem, String message)
+        addRemarkToBonusItem,
+    required TResult Function(List<Price> overridenPrice, CartItem cartItem)
+        overrideCartItemPrice,
+    required TResult Function() clearCart,
+    required TResult Function(
+            List<CartItem> items, bool doNotallowOutOfStockMaterial)
+        replaceWithOrderItems,
+    required TResult Function(CartItem item, StockInfo stockInfo)
+        updateBatchInCartItem,
+    required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
+    required TResult Function(PriceAggregate priceAggregate, int quantity,
+            RequestCounterOfferDetails counterOfferDetails)
+        upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
+    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
+    required TResult Function(List<PriceAggregate> cartProducts)
+        getDetailsProductsAddedToCart,
+    required TResult Function(Map<MaterialNumber, Price> priceProducts,
+            Price overriddenProductPrice)
+        updatePriceProduct,
+    required TResult Function(List<PriceAggregate> products) updateProductStock,
+  }) {
+    return addHistoryItemsToCart(
+        priceAggregate, quantity, counterOfferDetails, user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(List<PriceAggregate> comboDealItems,
+            bool doNotallowOutOfStockMaterial, bool overrideQty)?
+        addComboDealToCart,
+    TResult? Function(PriceAggregate item, List<PriceAggregate> items)?
+        verifyMaterialDealBonus,
+    TResult? Function(CartItem item, String message)? addRemarkToCartItem,
+    TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addBonusToCartItem,
+    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
+        removeBonusFromCartItem,
+    TResult? Function(
+            CartItem item, MaterialItemBonus bonusItem, String message)?
+        addRemarkToBonusItem,
+    TResult? Function(List<Price> overridenPrice, CartItem cartItem)?
+        overrideCartItemPrice,
+    TResult? Function()? clearCart,
+    TResult? Function(List<CartItem> items, bool doNotallowOutOfStockMaterial)?
+        replaceWithOrderItems,
+    TResult? Function(CartItem item, StockInfo stockInfo)?
+        updateBatchInCartItem,
+    TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity,
+            RequestCounterOfferDetails counterOfferDetails)?
+        upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
+    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult? Function(List<PriceAggregate> cartProducts)?
+        getDetailsProductsAddedToCart,
+    TResult? Function(Map<MaterialNumber, Price> priceProducts,
+            Price overriddenProductPrice)?
+        updatePriceProduct,
+    TResult? Function(List<PriceAggregate> products)? updateProductStock,
+  }) {
+    return addHistoryItemsToCart?.call(
+        priceAggregate, quantity, counterOfferDetails, user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(List<PriceAggregate> comboDealItems,
+            bool doNotallowOutOfStockMaterial, bool overrideQty)?
+        addComboDealToCart,
+    TResult Function(PriceAggregate item, List<PriceAggregate> items)?
+        verifyMaterialDealBonus,
+    TResult Function(CartItem item, String message)? addRemarkToCartItem,
+    TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addBonusToCartItem,
+    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
+        removeBonusFromCartItem,
+    TResult Function(
+            CartItem item, MaterialItemBonus bonusItem, String message)?
+        addRemarkToBonusItem,
+    TResult Function(List<Price> overridenPrice, CartItem cartItem)?
+        overrideCartItemPrice,
+    TResult Function()? clearCart,
+    TResult Function(List<CartItem> items, bool doNotallowOutOfStockMaterial)?
+        replaceWithOrderItems,
+    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
+    TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity,
+            RequestCounterOfferDetails counterOfferDetails)?
+        upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
+    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
+    TResult Function(List<PriceAggregate> cartProducts)?
+        getDetailsProductsAddedToCart,
+    TResult Function(Map<MaterialNumber, Price> priceProducts,
+            Price overriddenProductPrice)?
+        updatePriceProduct,
+    TResult Function(List<PriceAggregate> products)? updateProductStock,
+    required TResult orElse(),
+  }) {
+    if (addHistoryItemsToCart != null) {
+      return addHistoryItemsToCart(
+          priceAggregate, quantity, counterOfferDetails, user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_AddComboDealToCart value) addComboDealToCart,
+    required TResult Function(_VerifyMaterialDealBonus value)
+        verifyMaterialDealBonus,
+    required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
+    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
+    required TResult Function(_RemoveBonusFromCartItem value)
+        removeBonusFromCartItem,
+    required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
+    required TResult Function(_OverrideCartItemPrice value)
+        overrideCartItemPrice,
+    required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_ReplaceWithOrderItems value)
+        replaceWithOrderItems,
+    required TResult Function(_UpdateBatchInCartItem value)
+        updateBatchInCartItem,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
+    required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
+    required TResult Function(_UpsertCartItems value) upsertCartItems,
+    required TResult Function(_GetDetailsProductsAddedToCart value)
+        getDetailsProductsAddedToCart,
+    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
+  }) {
+    return addHistoryItemsToCart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_AddComboDealToCart value)? addComboDealToCart,
+    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
+    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
+    TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
+    TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
+    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
+    TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
+    TResult? Function(_UpsertCartItems value)? upsertCartItems,
+    TResult? Function(_GetDetailsProductsAddedToCart value)?
+        getDetailsProductsAddedToCart,
+    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
+  }) {
+    return addHistoryItemsToCart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_AddComboDealToCart value)? addComboDealToCart,
+    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
+    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
+    TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
+    TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_ReplaceWithOrderItems value)? replaceWithOrderItems,
+    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
+    TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
+    TResult Function(_UpsertCartItems value)? upsertCartItems,
+    TResult Function(_GetDetailsProductsAddedToCart value)?
+        getDetailsProductsAddedToCart,
+    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
+    required TResult orElse(),
+  }) {
+    if (addHistoryItemsToCart != null) {
+      return addHistoryItemsToCart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _addHistoryItemsToCart implements CartEvent {
+  const factory _addHistoryItemsToCart(
+      {required final List<PriceAggregate> priceAggregate,
+      required final List<int> quantity,
+      required final RequestCounterOfferDetails counterOfferDetails,
+      required final User user}) = _$_addHistoryItemsToCart;
+
+  List<PriceAggregate> get priceAggregate;
+  List<int> get quantity;
+  RequestCounterOfferDetails get counterOfferDetails;
+  User get user;
+  @JsonKey(ignore: true)
+  _$$_addHistoryItemsToCartCopyWith<_$_addHistoryItemsToCart> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -4711,6 +5335,12 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -4756,6 +5386,9 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -4800,6 +5433,9 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -4837,6 +5473,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -4863,6 +5501,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -4888,6 +5527,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -5025,6 +5665,12 @@ class _$_GetDetailsProductsAddedToCart
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -5070,6 +5716,9 @@ class _$_GetDetailsProductsAddedToCart
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -5114,6 +5763,9 @@ class _$_GetDetailsProductsAddedToCart
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -5151,6 +5803,8 @@ class _$_GetDetailsProductsAddedToCart
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -5177,6 +5831,7 @@ class _$_GetDetailsProductsAddedToCart
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -5202,6 +5857,7 @@ class _$_GetDetailsProductsAddedToCart
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -5361,6 +6017,12 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -5406,6 +6068,9 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -5450,6 +6115,9 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -5487,6 +6155,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -5513,6 +6183,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -5538,6 +6209,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -5672,6 +6344,12 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     required TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)
         upsertCart,
+    required TResult Function(
+            List<PriceAggregate> priceAggregate,
+            List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails,
+            User user)
+        addHistoryItemsToCart,
     required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
     required TResult Function(List<PriceAggregate> cartProducts)
         getDetailsProductsAddedToCart,
@@ -5717,6 +6395,9 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult? Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult? Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -5761,6 +6442,9 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult Function(PriceAggregate priceAggregate, int quantity,
             RequestCounterOfferDetails counterOfferDetails)?
         upsertCart,
+    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
+            RequestCounterOfferDetails counterOfferDetails, User user)?
+        addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
     TResult Function(List<PriceAggregate> cartProducts)?
         getDetailsProductsAddedToCart,
@@ -5798,6 +6482,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
     required TResult Function(_UpsertCartItems value) upsertCartItems,
     required TResult Function(_GetDetailsProductsAddedToCart value)
         getDetailsProductsAddedToCart,
@@ -5824,6 +6510,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult? Function(_UpsertCartItems value)? upsertCartItems,
     TResult? Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,
@@ -5849,6 +6536,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
     TResult Function(_UpsertCartItems value)? upsertCartItems,
     TResult Function(_GetDetailsProductsAddedToCart value)?
         getDetailsProductsAddedToCart,

@@ -1,0 +1,15 @@
+query getMaterialPermissions($for: MaterialPermissonsFor!) {
+    getMaterialPermissions(for: $for) {
+        permissions
+        message
+        success
+    }
+}
+
+variables : {
+    "for": {
+        "material": [
+            "000000000021038302"
+        ]
+    }
+}

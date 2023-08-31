@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,9 +15,13 @@ import 'package:mocktail/mocktail.dart';
 class ViewByOrderDetailsRepositoryMock extends Mock
     implements ViewByOrderDetailsRepository {}
 
+class ProductDetailsRepositoryMock extends Mock
+    implements ProductDetailRepository {}
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late ViewByOrderDetailsRepository viewByOrderDetailsRepositoryMock;
+  late ProductDetailRepository productDetailRepositoryMock;
   late OrderHistoryDetails orderHistoryDetailsMock;
   group(
     'ViewByOrderDetailsBloc Test',
@@ -28,12 +33,14 @@ void main() {
 
       setUp(() {
         viewByOrderDetailsRepositoryMock = ViewByOrderDetailsRepositoryMock();
+        productDetailRepositoryMock = ProductDetailsRepositoryMock();
       });
 
       blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
         'For Initialized Event',
         build: () => ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
         ),
         act: (bloc) => bloc.add(
           const ViewByOrderDetailsEvent.initialized(),
@@ -47,6 +54,7 @@ void main() {
         'For Fetch Event Success',
         build: () => ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
         ),
         setUp: () {
           when(
@@ -115,6 +123,7 @@ void main() {
         'For Fetch Event Failure',
         build: () => ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
         ),
         setUp: () {
           when(

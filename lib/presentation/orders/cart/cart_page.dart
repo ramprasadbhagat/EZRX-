@@ -16,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
@@ -24,7 +25,6 @@ import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.da
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -179,7 +179,8 @@ class _CartScrollList extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.cartProducts.length != current.cartProducts.length,
       listener: (context, state) {
-        if (!state.isClearing) {
+        if ((!state.isUpserting || !state.isClearing) &&
+            context.router.current.path == 'orders/cart') {
           CustomSnackBar(
             messageText: 'Item has been removed from cart.'.tr(),
           ).show(context);
@@ -226,7 +227,8 @@ class _CartScrollList extends StatelessWidget {
       },
       buildWhen: (previous, current) =>
           previous.cartProducts != current.cartProducts ||
-          previous.isFetching != current.isFetching,
+          previous.isFetching != current.isFetching ||
+          previous.isUpserting != current.isUpserting,
       builder: (context, state) {
         return Expanded(
           child: Padding(
@@ -309,6 +311,7 @@ class _CartScrollList extends StatelessWidget {
 
 class _ManufacturerName extends StatelessWidget {
   final MaterialInfo cartProduct;
+
   const _ManufacturerName({
     Key? key,
     required this.cartProduct,

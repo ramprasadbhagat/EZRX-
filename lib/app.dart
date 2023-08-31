@@ -25,6 +25,7 @@ import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_ca
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
@@ -560,6 +561,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<LanguageBloc>(
           create: (context) => locator<LanguageBloc>(),
+        ),
+        BlocProvider<ReOrderPermissionBloc>(
+          create: (context) => locator<ReOrderPermissionBloc>(),
         ),
       ],
       child: MaterialApp.router(

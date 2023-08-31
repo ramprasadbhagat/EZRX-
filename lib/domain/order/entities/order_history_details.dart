@@ -105,4 +105,12 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
             )
             .toList(),
       );
+
+  OrderHistoryDetailsOrderItem getOrderHistoryDetailsOrderItem({
+    required MaterialNumber materialNumber,
+  }) {
+    return orderHistoryDetailsOrderItem
+        .where((element) => element.materialNumber == materialNumber)
+        .first;
+  }
 }

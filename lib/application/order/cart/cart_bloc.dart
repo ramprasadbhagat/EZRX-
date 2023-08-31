@@ -1,37 +1,38 @@
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
-
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 part 'cart_bloc.freezed.dart';
+
 part 'cart_event.dart';
+
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   final ICartRepository repository;
+
   CartBloc(this.repository) : super(CartState.initial()) {
     on<CartEvent>(_onEvent);
   }
@@ -79,7 +80,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: true,
+                isFetching: false,
               ),
             );
           },
@@ -587,43 +588,71 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (cartProductList) {
-            final cartProductListTemp = List<PriceAggregate>.from(
-              cartProductList,
+            final newCartProductList = _mappingPreviousInfo(
+              previousCartProducts: state.cartProducts,
+              currentCartProducts: cartProductList,
+              salesOrganisationConfigs: state.config,
             );
-            for (var i = 0; i < cartProductListTemp.length; i++) {
-              final priceAggregate = state.cartProducts
-                      .where(
-                        (element) =>
-                            element.materialInfo.materialNumber ==
-                            cartProductList[i].materialInfo.materialNumber,
-                      )
-                      .toList()
-                      .firstOrNull ??
-                  PriceAggregate.empty();
-              cartProductListTemp[i] = cartProductListTemp[i].copyWith(
-                price: priceAggregate.price,
-                addedBonusList: priceAggregate.addedBonusList,
-                bundle: priceAggregate.bundle,
-                salesOrgConfig: state.config,
-              );
-            }
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
+                cartProducts: newCartProductList,
                 isUpserting: false,
               ),
             );
             add(
               _VerifyMaterialDealBonus(
-                item: cartProductListTemp
-                        .where((element) {
-                          return element.materialInfo.materialNumber ==
-                              e.priceAggregate.materialInfo.materialNumber;
-                        })
-                        .toList()
-                        .firstOrNull ??
-                    PriceAggregate.empty(),
-                items: cartProductListTemp,
+                item: newCartProductList.firstWhere(
+                  (element) =>
+                      element.materialInfo.materialNumber ==
+                      e.priceAggregate.materialInfo.materialNumber,
+                  orElse: () => PriceAggregate.empty(),
+                ),
+                items: newCartProductList,
+              ),
+            );
+          },
+        );
+      },
+      addHistoryItemsToCart: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isUpserting: true,
+          ),
+        );
+
+        final failureOrSuccess = await repository.addHistoryItemsToCart(
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          salesOrganisationConfig: state.config,
+          shipToInfo: state.shipToInfo,
+          materialInfo: e.priceAggregate.map((e) => e.materialInfo).toList(),
+          quantity: e.quantity,
+          language: e.user.settings.languagePreference.languageCode,
+          counterOfferDetails: e.counterOfferDetails,
+          itemId: '',
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isUpserting: false,
+              ),
+            );
+          },
+          (cartProductList) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: none(),
+                isUpserting: false,
+                cartProducts: _mappingPreviousInfo(
+                  previousCartProducts: state.cartProducts,
+                  currentCartProducts: cartProductList,
+                  salesOrganisationConfigs: state.config,
+                ),
               ),
             );
           },
@@ -876,5 +905,27 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
       },
     );
+  }
+
+  List<PriceAggregate> _mappingPreviousInfo({
+    required List<PriceAggregate> previousCartProducts,
+    required List<PriceAggregate> currentCartProducts,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+  }) {
+    return currentCartProducts.map((cartProduct) {
+      final priceAggregate = previousCartProducts.firstWhere(
+        (element) =>
+            element.materialInfo.materialNumber ==
+            cartProduct.materialInfo.materialNumber,
+        orElse: () => PriceAggregate.empty(),
+      );
+
+      return cartProduct.copyWith(
+        price: priceAggregate.price,
+        addedBonusList: priceAggregate.addedBonusList,
+        bundle: priceAggregate.bundle,
+        salesOrgConfig: salesOrganisationConfigs,
+      );
+    }).toList();
   }
 }

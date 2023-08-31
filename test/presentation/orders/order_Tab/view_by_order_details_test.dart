@@ -7,6 +7,8 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -60,6 +62,12 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
+class ReOrderPermissionBlocMock
+    extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
+    implements ReOrderPermissionBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,11 +75,13 @@ void main() {
   final mockViewByOrderDetailsBloc = ViewByOrderDetailsBlockMock();
   final mockSalesOrgBloc = SalesOrgMockBloc();
   final userBlocMock = UserMockBloc();
+  final reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
   late AuthBloc mockAuthBloc;
   late CustomerCodeBloc customerCodeBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
   late EligibilityBlocMock eligibilityBlocMock;
+  late CartBlocMock cartBlocMock;
 
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -86,9 +96,11 @@ void main() {
   );
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerFactory(() => reOrderPermissionBlocMock);
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());
     registerFallbackValue(ShipToInfo.empty());
+    cartBlocMock = CartBlocMock();
 
     autoRouterMock = locator<AppRouter>();
   });
@@ -114,8 +126,11 @@ void main() {
           .thenReturn(AnnouncementState.initial());
       when(() => mockViewByOrderDetailsBloc.state)
           .thenReturn(ViewByOrderDetailsState.initial());
+      when(() => reOrderPermissionBlocMock.state)
+          .thenReturn(ReOrderPermissionState.initial());
 
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           user: User.empty().copyWith(
@@ -170,10 +185,16 @@ void main() {
             BlocProvider<EligibilityBloc>(
               create: ((context) => eligibilityBlocMock),
             ),
+            BlocProvider<CartBloc>(
+              create: ((context) => cartBlocMock),
+            ),
+            BlocProvider<ReOrderPermissionBloc>(
+              create: ((context) => reOrderPermissionBlocMock),
+            ),
           ],
           child: Material(
             child: ViewByOrderDetailsPage(
-              viewByOrdersItem: fakeOrderHistoryItem,
+              viewByOrderHistoryItem: fakeOrderHistoryItem,
             ),
           ),
         ),

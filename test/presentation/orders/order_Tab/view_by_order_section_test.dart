@@ -5,6 +5,8 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -54,6 +56,12 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
+
+class ReOrderPermissionBlocMock
+    extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
+    implements ReOrderPermissionBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,11 +70,14 @@ void main() {
   final mockSalesOrgBloc = SalesOrgMockBloc();
   final userBlocMock = UserMockBloc();
   late CustomerCodeBloc customerCodeBlocMock;
+  late CartBloc cartBlocMock;
+  late ReOrderPermissionBloc reOrderPermissionBlocMock;
 
   late AppRouter autoRouterMock;
 
   late ViewByOrder viewByOrder;
   late EligibilityBlocMock eligibilityBlocMock;
+  late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
 
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -81,17 +92,23 @@ void main() {
   );
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerFactory(() => viewByOrderDetailsBlocMock);
+    locator.registerFactory(() => reOrderPermissionBlocMock);
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());
     registerFallbackValue(ShipToInfo.empty());
 
     viewByOrder = await ViewByOrderLocalDataSource().getViewByOrders();
     autoRouterMock = locator<AppRouter>();
+    viewByOrderDetailsBlocMock = ViewByOrderDetailsBlockMock();
+    cartBlocMock = CartBlocMock();
   });
   group('Order History Details', () {
     setUp(() {
       customerCodeBlocMock = CustomerCodeBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      cartBlocMock = CartBlocMock();
+      reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
           user: fakeUser,
@@ -99,6 +116,9 @@ void main() {
       );
       when(() => mockViewByOrderBloc.state)
           .thenReturn(ViewByOrderState.initial());
+      when(() => cartBlocMock.state).thenReturn(CartState.initial());
+      when(() => reOrderPermissionBlocMock.state)
+          .thenReturn(ReOrderPermissionState.initial());
 
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
@@ -124,6 +144,8 @@ void main() {
           ),
         ),
       );
+      when(() => viewByOrderDetailsBlocMock.state)
+          .thenReturn(ViewByOrderDetailsState.initial());
     });
 
     Widget getScopedWidget() {
@@ -153,6 +175,12 @@ void main() {
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<EligibilityBloc>(
               create: ((context) => eligibilityBlocMock),
+            ),
+            BlocProvider<CartBloc>(
+              create: ((context) => cartBlocMock),
+            ),
+            BlocProvider<ReOrderPermissionBloc>(
+              create: ((context) => reOrderPermissionBlocMock),
             ),
           ],
           child: Material(

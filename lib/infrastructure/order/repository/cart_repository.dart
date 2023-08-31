@@ -473,6 +473,46 @@ class CartRepository implements ICartRepository {
   }
 
   @override
+  Future<Either<ApiFailure, List<PriceAggregate>>> addHistoryItemsToCart({
+    required List<MaterialInfo> materialInfo,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+    required List<int> quantity,
+    required String itemId,
+    required RequestCounterOfferDetails counterOfferDetails,
+  }) async {
+    try {
+      final productList = <PriceAggregate>[];
+
+      for (var i = 0; i < materialInfo.length; i++) {
+        final cartDetail = await upsertCart(
+          counterOfferDetails: counterOfferDetails,
+          quantity: quantity[i],
+          language: language,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganisationConfig: salesOrganisationConfig,
+          salesOrganisation: salesOrganisation,
+          materialInfo: materialInfo[i],
+          itemId: itemId,
+        );
+
+        cartDetail.fold((l) => {}, (r) {
+          productList.clear();
+          productList.addAll(r);
+        });
+      }
+
+      return Right(productList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
   Future<Either<ApiFailure, List<PriceAggregate>>> upsertCartItems({
     required PriceAggregate product,
     required SalesOrganisation salesOrganisation,

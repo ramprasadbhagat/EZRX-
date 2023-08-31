@@ -19,6 +19,15 @@ abstract class IProductDetailRepository {
     required MaterialInfoType type,
   });
 
+  Future<List<MaterialInfo>> getProductListDetail({
+    required List<MaterialNumber> materialNumber,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Locale locale,
+    required List<MaterialInfoType> types,
+  });
+
   Future<Either<ApiFailure, MaterialInfo>> getMaterialDetail({
     required MaterialNumber materialNumber,
     required SalesOrganisation salesOrganisation,

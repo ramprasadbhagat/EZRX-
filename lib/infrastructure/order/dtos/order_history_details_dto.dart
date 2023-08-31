@@ -98,6 +98,9 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
         pOReference: POReference(orderHistoryDetailsOrderHeader.pOReference),
         shipTo: orderHistoryDetailsOrderHeader.shipTo,
         soldTo: orderHistoryDetailsOrderHeader.soldTo,
+        orderItems: orderHistoryDetailsOrderHeader.orderItems
+            .map((e) => e.toDomain)
+            .toList(),
       ),
       orderHistoryDetailsShippingInformation:
           OrderHistoryDetailsShippingInformation(

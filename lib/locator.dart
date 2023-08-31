@@ -39,6 +39,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_deta
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_principle_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
@@ -156,6 +157,9 @@ import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_query.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_query.dart';
@@ -296,6 +300,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_price_reposi
 import 'package:ezrxmobile/infrastructure/order/repository/order_document_type_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/re_order_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
@@ -1257,9 +1262,10 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => ViewByOrderDetailsBloc(
       viewByOrderDetailsRepository: locator<ViewByOrderDetailsRepository>(),
+      productDetailRepository: locator<ProductDetailRepository>(),
     ),
   );
 
@@ -3167,6 +3173,7 @@ void setupLocator() {
       config: locator<Config>(),
     ),
   );
+
   //============================================================
   //  FAQ
   //
@@ -3239,5 +3246,36 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => LanguageBloc(),
+  );
+
+  //============================================================
+  //  Reorder
+  //
+  //============================================================
+
+  locator.registerLazySingleton(() => ReOrderPermissionLocalDataSource());
+
+  locator.registerLazySingleton(() => ReOrderPermissionQuery());
+
+  locator.registerLazySingleton(
+    () => ReOrderPermissionRemoteDataSource(
+      reOrderPermissionQuery: locator<ReOrderPermissionQuery>(),
+      httpService: locator<HttpService>(),
+      config: locator<Config>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => ReOrderPermissionRepository(
+      config: locator<Config>(),
+      localDataSource: locator<ReOrderPermissionLocalDataSource>(),
+      remoteDataSource: locator<ReOrderPermissionRemoteDataSource>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => ReOrderPermissionBloc(
+      reOrderPermissionRepository: locator<ReOrderPermissionRepository>(),
+    ),
   );
 }

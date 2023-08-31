@@ -40,6 +40,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required String governmentMaterialCode,
     required MaterialStockInfo materialStockInfo,
     required PriceAggregate priceAggregate,
+    required MaterialInfoType productType,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -65,6 +66,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         governmentMaterialCode: '',
         materialStockInfo: MaterialStockInfo.empty(),
         priceAggregate: PriceAggregate.empty(),
+        productType: MaterialInfoType(''),
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(

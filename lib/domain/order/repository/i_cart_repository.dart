@@ -71,6 +71,18 @@ abstract class ICartRepository {
     required RequestCounterOfferDetails counterOfferDetails,
   });
 
+  Future<Either<ApiFailure, List<PriceAggregate>>> addHistoryItemsToCart({
+    required List<MaterialInfo> materialInfo,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+    required List<int> quantity,
+    required String itemId,
+    required RequestCounterOfferDetails counterOfferDetails,
+  });
+
   Future<Either<ApiFailure, List<PriceAggregate>>> upsertCartItems({
     required PriceAggregate product,
     required SalesOrganisation salesOrganisation,

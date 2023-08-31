@@ -4,14 +4,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -45,14 +37,22 @@ import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
@@ -126,6 +126,7 @@ class MockAppRouter extends Mock implements AppRouter {}
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
 final locator = GetIt.instance;
+
 void main() {
   late CartBloc cartBloc;
   late MaterialPriceBloc materialPriceBloc;
@@ -149,7 +150,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   final AddToCartBloc addToCartBlocMock = AddToCartBlocMock();
   late PriceOverrideBloc priceOverrideBloc;
-  late AppRouter autoRouter;
+  late AppRouter autoRouterMock;
   late OrderSummaryBloc orderSummaryBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late CartItem mockCartItemWithOutBatch;
@@ -166,6 +167,7 @@ void main() {
     router: MockAppRouter(),
     pendingChildren: [],
   );
+
   setUpAll(() async {
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
@@ -177,7 +179,7 @@ void main() {
     locator.registerFactory(() => AppRouter());
     locator.registerFactory<AddToCartBloc>(() => addToCartBlocMock);
     locator.registerFactory<TenderContractBloc>(() => tenderContractBlocMock);
-    autoRouter = locator<AppRouter>();
+    autoRouterMock = MockAppRouter();
   });
   setUp(
     () {
@@ -198,7 +200,7 @@ void main() {
       orderSummaryBlocMock = OrderSummaryBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
-      autoRouter = MockAppRouter();
+      autoRouterMock = MockAppRouter();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -575,9 +577,9 @@ void main() {
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-      when(() => autoRouter.currentPath).thenReturn('orders/cart');
-      when(() => autoRouter.current).thenReturn(routeData);
-      when(() => autoRouter.stack).thenReturn([MaterialPageXMock()]);
+      when(() => autoRouterMock.currentPath).thenReturn('orders/cart');
+      when(() => autoRouterMock.current).thenReturn(routeData);
+      when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
     },
   );
   group(
@@ -585,7 +587,7 @@ void main() {
     () {
       Widget getWidget() {
         return WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouter,
+          autoRouterMock: autoRouterMock,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBloc),
             BlocProvider<CartBloc>(create: (context) => cartBloc),
@@ -734,7 +736,7 @@ void main() {
       testWidgets('Test SnackBarMessage when delete the item from cart ',
           (tester) async {
         when(
-          () => autoRouter.currentPath,
+          () => autoRouterMock.currentPath,
         ).thenReturn('orders/cart');
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(

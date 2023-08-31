@@ -36,6 +36,7 @@ _$_OrderHistoryDetailsOrderItemDto _$$_OrderHistoryDetailsOrderItemDtoFromJson(
                   json, 'TenderContractDetails') as Map<String, dynamic>),
       principalName: json['PrincipalName'] as String? ?? '',
       governmentMaterialCode: json['GovernmentMaterialCode'] as String? ?? '',
+      productType: json['ProductType'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
@@ -59,4 +60,5 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
       'TenderContractDetails': instance.tenderContractDetails.toJson(),
       'PrincipalName': instance.principalName,
       'GovernmentMaterialCode': instance.governmentMaterialCode,
+      'ProductType': instance.productType,
     };

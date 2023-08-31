@@ -1,12 +1,20 @@
+import 'dart:ui';
+
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_history_details_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,9 +25,11 @@ part 'view_by_order_details_bloc.freezed.dart';
 class ViewByOrderDetailsBloc
     extends Bloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState> {
   final IViewByOrderDetailsRepository viewByOrderDetailsRepository;
+  final IProductDetailRepository productDetailRepository;
 
   ViewByOrderDetailsBloc({
     required this.viewByOrderDetailsRepository,
+    required this.productDetailRepository,
   }) : super(ViewByOrderDetailsState.initial()) {
     on<ViewByOrderDetailsEvent>(_onEvent);
   }
@@ -106,6 +116,41 @@ class ViewByOrderDetailsBloc
           state.copyWith(
             isExpanded: !state.isExpanded,
             orderHistoryDetails: state.orderHistoryDetails,
+          ),
+        );
+      },
+      fetchDetailItemList: (_FetchDetailItemList e) async {
+        emit(
+          state.copyWith(
+            isFetchingList: true,
+            productDetailAggregateList: <ProductDetailAggregate>[],
+            failureOrSuccessOption: none(),
+          ),
+        );
+        final productDetailAggregateList =
+            await productDetailRepository.getProductListDetail(
+          customerCodeInfo: e.customerCodeInfo,
+          locale: e.locale,
+          materialNumber: e.validOrderHistoryDetailsOrderItems
+              .map((e) => e.materialNumber)
+              .toList(),
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+          types: e.validOrderHistoryDetailsOrderItems
+              .map((e) => e.productType)
+              .toList(),
+        );
+
+        emit(
+          state.copyWith(
+            isFetchingList: false,
+            productDetailAggregateList: productDetailAggregateList
+                .map(
+                  (e) => ProductDetailAggregate.empty().copyWith(
+                    materialInfo: e,
+                  ),
+                )
+                .toList(),
           ),
         );
       },

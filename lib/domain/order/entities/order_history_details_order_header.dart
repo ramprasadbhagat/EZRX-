@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -10,6 +11,7 @@ part 'order_history_details_order_header.freezed.dart';
 @freezed
 class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
   const OrderHistoryDetailsOrderHeader._();
+
   factory OrderHistoryDetailsOrderHeader({
     required double totalTax,
     required DateTimeStringValue requestedDeliveryDate,
@@ -31,7 +33,9 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
     required int itemCount,
     required String itmDescription,
     required bool hasPOAttachment,
+    required List<OrderItem> orderItems,
   }) = _OrderHistoryDetailsOrderHeader;
+
   factory OrderHistoryDetailsOrderHeader.empty() =>
       OrderHistoryDetailsOrderHeader(
         totalTax: 0.0,
@@ -53,6 +57,7 @@ class OrderHistoryDetailsOrderHeader with _$OrderHistoryDetailsOrderHeader {
         pOReference: POReference(''),
         shipTo: '',
         soldTo: '',
+        orderItems: <OrderItem>[],
       );
 
   double get grandTotal => orderValue + totalTax;

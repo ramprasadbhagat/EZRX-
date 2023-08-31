@@ -57,28 +57,18 @@ abstract class $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res> {
       _$OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res,
           OrderHistoryDetailsShippingInformationDto>;
   @useResult
-  $Res
-      call(
-          {@JsonKey(name: 'Address', defaultValue: '')
-              String address,
-          @JsonKey(name: 'POReference', defaultValue: '')
-              String pOReference,
-          @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-              String invoiceNumber,
-          @JsonKey(name: 'InvoiceDate', defaultValue: '')
-              String invoiceDate,
-          @JsonKey(name: 'PostalCode', defaultValue: '')
-              String postalCode,
-          @JsonKey(name: 'Country', defaultValue: '')
-              String country,
-          @JsonKey(name: 'Phone', defaultValue: '')
-              String phone,
-          @JsonKey(name: 'Fax', defaultValue: '')
-              String fax,
-          @JsonKey(
-              name: 'Invoices', defaultValue: <
-                  OrderHistoryDetailsInvoicesDto>[])
-              List<OrderHistoryDetailsInvoicesDto> invoices});
+  $Res call(
+      {@JsonKey(name: 'Address', defaultValue: '') String address,
+      @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
+      @JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'InvoiceDate', defaultValue: '') String invoiceDate,
+      @JsonKey(name: 'PostalCode', defaultValue: '') String postalCode,
+      @JsonKey(name: 'Country', defaultValue: '') String country,
+      @JsonKey(name: 'Phone', defaultValue: '') String phone,
+      @JsonKey(name: 'Fax', defaultValue: '') String fax,
+      @JsonKey(
+          name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
+      List<OrderHistoryDetailsInvoicesDto> invoices});
 }
 
 /// @nodoc
@@ -156,28 +146,18 @@ abstract class _$$_OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>
       __$$_OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res
-      call(
-          {@JsonKey(name: 'Address', defaultValue: '')
-              String address,
-          @JsonKey(name: 'POReference', defaultValue: '')
-              String pOReference,
-          @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-              String invoiceNumber,
-          @JsonKey(name: 'InvoiceDate', defaultValue: '')
-              String invoiceDate,
-          @JsonKey(name: 'PostalCode', defaultValue: '')
-              String postalCode,
-          @JsonKey(name: 'Country', defaultValue: '')
-              String country,
-          @JsonKey(name: 'Phone', defaultValue: '')
-              String phone,
-          @JsonKey(name: 'Fax', defaultValue: '')
-              String fax,
-          @JsonKey(
-              name: 'Invoices', defaultValue: <
-                  OrderHistoryDetailsInvoicesDto>[])
-              List<OrderHistoryDetailsInvoicesDto> invoices});
+  $Res call(
+      {@JsonKey(name: 'Address', defaultValue: '') String address,
+      @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
+      @JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'InvoiceDate', defaultValue: '') String invoiceDate,
+      @JsonKey(name: 'PostalCode', defaultValue: '') String postalCode,
+      @JsonKey(name: 'Country', defaultValue: '') String country,
+      @JsonKey(name: 'Phone', defaultValue: '') String phone,
+      @JsonKey(name: 'Fax', defaultValue: '') String fax,
+      @JsonKey(
+          name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
+      List<OrderHistoryDetailsInvoicesDto> invoices});
 }
 
 /// @nodoc
@@ -249,24 +229,18 @@ class __$$_OrderHistoryDetailsShippingInformationDtoCopyWithImpl<$Res>
 class _$_OrderHistoryDetailsShippingInformationDto
     extends _OrderHistoryDetailsShippingInformationDto {
   const _$_OrderHistoryDetailsShippingInformationDto(
-      {@JsonKey(name: 'Address', defaultValue: '')
-          required this.address,
-      @JsonKey(name: 'POReference', defaultValue: '')
-          required this.pOReference,
+      {@JsonKey(name: 'Address', defaultValue: '') required this.address,
+      @JsonKey(name: 'POReference', defaultValue: '') required this.pOReference,
       @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-          required this.invoiceNumber,
-      @JsonKey(name: 'InvoiceDate', defaultValue: '')
-          required this.invoiceDate,
-      @JsonKey(name: 'PostalCode', defaultValue: '')
-          required this.postalCode,
-      @JsonKey(name: 'Country', defaultValue: '')
-          required this.country,
-      @JsonKey(name: 'Phone', defaultValue: '')
-          required this.phone,
-      @JsonKey(name: 'Fax', defaultValue: '')
-          required this.fax,
-      @JsonKey(name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
-          required final List<OrderHistoryDetailsInvoicesDto> invoices})
+      required this.invoiceNumber,
+      @JsonKey(name: 'InvoiceDate', defaultValue: '') required this.invoiceDate,
+      @JsonKey(name: 'PostalCode', defaultValue: '') required this.postalCode,
+      @JsonKey(name: 'Country', defaultValue: '') required this.country,
+      @JsonKey(name: 'Phone', defaultValue: '') required this.phone,
+      @JsonKey(name: 'Fax', defaultValue: '') required this.fax,
+      @JsonKey(
+          name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
+      required final List<OrderHistoryDetailsInvoicesDto> invoices})
       : _invoices = invoices,
         super._();
 
@@ -367,23 +341,22 @@ abstract class _OrderHistoryDetailsShippingInformationDto
     extends OrderHistoryDetailsShippingInformationDto {
   const factory _OrderHistoryDetailsShippingInformationDto(
       {@JsonKey(name: 'Address', defaultValue: '')
-          required final String address,
+      required final String address,
       @JsonKey(name: 'POReference', defaultValue: '')
-          required final String pOReference,
+      required final String pOReference,
       @JsonKey(name: 'InvoiceNumber', defaultValue: '')
-          required final String invoiceNumber,
+      required final String invoiceNumber,
       @JsonKey(name: 'InvoiceDate', defaultValue: '')
-          required final String invoiceDate,
+      required final String invoiceDate,
       @JsonKey(name: 'PostalCode', defaultValue: '')
-          required final String postalCode,
-      @JsonKey(name: 'Country', defaultValue: '')
-          required final String country,
-      @JsonKey(name: 'Phone', defaultValue: '')
-          required final String phone,
-      @JsonKey(name: 'Fax', defaultValue: '')
-          required final String fax,
-      @JsonKey(name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
-          required final List<OrderHistoryDetailsInvoicesDto> invoices}) = _$_OrderHistoryDetailsShippingInformationDto;
+      required final String postalCode,
+      @JsonKey(name: 'Country', defaultValue: '') required final String country,
+      @JsonKey(name: 'Phone', defaultValue: '') required final String phone,
+      @JsonKey(name: 'Fax', defaultValue: '') required final String fax,
+      @JsonKey(
+          name: 'Invoices', defaultValue: <OrderHistoryDetailsInvoicesDto>[])
+      required final List<OrderHistoryDetailsInvoicesDto>
+          invoices}) = _$_OrderHistoryDetailsShippingInformationDto;
   const _OrderHistoryDetailsShippingInformationDto._() : super._();
 
   factory _OrderHistoryDetailsShippingInformationDto.fromJson(
