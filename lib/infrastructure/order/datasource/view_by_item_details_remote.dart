@@ -25,16 +25,17 @@ class ViewByItemDetailsRemoteDataSource {
   Future<OrderHistory> getViewByItemDetails({
     required String soldTo,
     required String language,
-    required String orderNumber,
+    required String salesOrg,
+   required String orderNumber,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = viewByItemDetailsQueryMutation.getViewByItemDetails();
 
       final variables = {
         'soldTo': soldTo,
+        'salesOrg': [salesOrg],
         'language': language,
-        'orderNumber': orderNumber,
-        'materialSearch': '',
+        'searchKey': orderNumber,
       };
 
       final res = await httpService.request(
@@ -44,17 +45,18 @@ class ViewByItemDetailsRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'itemOrderHistoryV2',
+        apiEndpoint: 'orderHistoryFetchByItems',
       );
 
       _orderHistoryExceptionChecker(res: res);
 
-      if (res.data['data']['orderHistoryV2']['OrderHistory'].isEmpty) {
+      if (res
+          .data['data']['orderHistoryFetchByItems']['OrderHistory'].isEmpty) {
         return OrderHistory.empty();
       }
 
       return OrderHistoryDto.fromJson(
-        res.data['data']['orderHistoryV2']['OrderHistory'][0],
+        res.data['data']['orderHistoryFetchByItems']['OrderHistory'][0],
       ).toDomain();
     });
   }

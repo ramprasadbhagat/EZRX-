@@ -194,7 +194,9 @@ class _ProductTile extends StatelessWidget {
     context.read<ViewByItemDetailsBloc>().add(
           ViewByItemDetailsEvent.fetch(
             user: context.read<UserBloc>().state.user,
-            orderNumber: product.orderNumber,
+             orderNumber: product.orderNumber,
+            salesOrganisation:
+                context.read<EligibilityBloc>().state.salesOrganisation,
             materialNumber: product.materialNumber,
             soldTo: context.read<CustomerCodeBloc>().state.customerCodeInfo,
             disableDeliveryDateForZyllemStatus: context

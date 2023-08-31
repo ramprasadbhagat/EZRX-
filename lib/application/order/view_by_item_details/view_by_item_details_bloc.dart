@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -44,6 +45,7 @@ class ViewByItemDetailsBloc
           soldTo: e.soldTo,
           user: e.user,
           orderNumber: e.orderNumber,
+          salesOrganisation: e.salesOrganisation,
         );
 
         failureOrSuccess.fold(
@@ -58,16 +60,20 @@ class ViewByItemDetailsBloc
           (viewByItemDetails) {
             final orderHistoryItem =
                 viewByItemDetails.orderHistoryItems.isNotEmpty
-                    ? viewByItemDetails.orderHistoryItems
-                        .where(
-                          (element) =>
-                              element.materialNumber == e.materialNumber,
-                        )
-                        .first
+                    ? viewByItemDetails.orderHistoryItems.firstWhere(
+                        (element) => element.materialNumber == e.materialNumber,
+                      )
                     : OrderHistoryItem.empty();
+            final modifiedList = viewByItemDetails.orderHistoryItems
+                .where(
+                  (element) => element.materialNumber != e.materialNumber,
+                )
+                .toList();
             emit(
               state.copyWith(
-                viewByItemDetails: viewByItemDetails,
+                viewByItemDetails: viewByItemDetails.copyWith(
+                  orderHistoryItems: modifiedList,
+                ),
                 orderHistoryItem: orderHistoryItem,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 isLoading: false,

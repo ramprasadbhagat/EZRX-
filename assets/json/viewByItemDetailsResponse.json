@@ -1,0 +1,65 @@
+{
+    "data": {
+        "orderHistoryFetchByItems": {
+            "OrderHistory": [
+                {
+                    "OrderBasicInformation": {
+                        "SoldTo": "0030014136",
+                        "CompanyName": "DYNA DRUG",
+                        "ShipTo": "0070017006",
+                        "PaymentTerm": {
+                            "PaymentTermCode": "",
+                            "PaymentTermDescription": ""
+                        }
+                    },
+                    "OrderItems": [
+                        {
+                            "MaterialCode": "000000000013021342",
+                            "MaterialDescription": "VEET CWS FACE 1'S",
+                            "DefaultMaterialDescription": "",
+                            "CreatedTime": "142230",
+                            "CreatedDate": "20230816",
+                            "Qty": 6,
+                            "UnitPrice": 931.3000000000001,
+                            "TotalPrice": 9610.98,
+                            "Status": "",
+                            "LineNumber": "000010",
+                            "Tax": 670.53,
+                            "DeliveryDate": "",
+                            "DeliveryTime": "",
+                            "OrderType": "ZPOR",
+                            "EZRXNumber": "",
+                            "OrderNumber": "0200251734",
+                            "OrderBy": "",
+                            "PurchaseOrderType": "SOM",
+                            "WarehouseStorageCondition": "NA",
+                            "Batch": "XGZR",
+                            "ExpiryDate": "20300131",
+                            "IsMarketplace": false,
+                            "Seller": "",
+                            "POReference": "",
+                            "ManufactureName": "RECKITT BENCKISER (SINGAPORE) PTE",
+                            "SpecialInstructions": "",
+                            "RequestedDeliveryDate": "20230816",
+                            "IsBonusMaterial": false,
+                            "ParentID": "",
+                            "GovernmentMaterialCode": "",
+                            "ItemRegistrationNumber": "",
+                            "TelephoneNumber": "",
+                            "HidePrice": false,
+                            "TenderContractNumber": "",
+                            "TenderOrderReason": "",
+                            "TenderPrice": "",
+                            "TenderPriceUnit": 0,
+                            "TenderContractReference": "",
+                            "InvoiceNumber": "",
+                            "mrp": 0,
+                            "promotype": "",
+                            "promoStatus": false
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

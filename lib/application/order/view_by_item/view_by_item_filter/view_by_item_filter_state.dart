@@ -13,15 +13,15 @@ class ViewByItemFilterState with _$ViewByItemFilterState {
         filter: ViewByItemFilter.empty(),
         statusList: <StatusType>[
           StatusType('Order created'),
-          StatusType('Pending release'),
-          StatusType('Picking in progress'),
-          StatusType('Out of delivery'),
+          StatusType('Pending'),
+          StatusType('Order packed and ready for delivery'),
+          StatusType('Picking in-progress'),
+          StatusType('Out for delivery'),
           StatusType('Delivered'),
           StatusType('Cancelled'),
           StatusType('Failed'),
         ],
       );
 
-  ViewByItemFilter get emptyViewByItemFilter =>
-      ViewByItemFilter.empty();
+  ViewByItemFilter get emptyViewByItemFilter => ViewByItemFilter.empty();
 }

@@ -2,7 +2,9 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
@@ -68,6 +70,8 @@ void main() {
           when(
             () => viewByItemDetailsRepositoryMock.getViewByItemDetails(
               soldTo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2100')),
               orderNumber: OrderNumber(''),
               user: User.empty(),
             ),
@@ -78,8 +82,10 @@ void main() {
         },
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.fetch(
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
             orderNumber: OrderNumber(''),
-            materialNumber: MaterialNumber('000000000021038302'),
+            materialNumber: MaterialNumber('000000000013021342'),
             soldTo: CustomerCodeInfo.empty(),
             user: User.empty(),
             disableDeliveryDateForZyllemStatus: true,
@@ -91,7 +97,9 @@ void main() {
           ),
           ViewByItemDetailsState.initial().copyWith(
             isLoading: false,
-            viewByItemDetails: orderHistory,
+             viewByItemDetails: orderHistory.copyWith(
+              orderHistoryItems: [],
+            ),
             orderHistoryItem: orderHistory.orderHistoryItems.first,
             failureOrSuccessOption: optionOf(Right(orderHistory)),
           ),
@@ -109,6 +117,7 @@ void main() {
             () => viewByItemDetailsRepositoryMock.getViewByItemDetails(
               soldTo: CustomerCodeInfo.empty(),
               orderNumber: OrderNumber(''),
+              salesOrganisation: SalesOrganisation.empty(),
               user: User.empty(),
             ),
           ).thenAnswer(
@@ -123,6 +132,7 @@ void main() {
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.fetch(
             orderNumber: OrderNumber(''),
+            salesOrganisation: SalesOrganisation.empty(),
             materialNumber: MaterialNumber(''),
             soldTo: CustomerCodeInfo.empty(),
             user: User.empty(),
@@ -152,6 +162,7 @@ void main() {
             () => viewByItemDetailsRepositoryMock.getViewByItemDetails(
               soldTo: CustomerCodeInfo.empty(),
               orderNumber: OrderNumber(''),
+              salesOrganisation: SalesOrganisation.empty(),
               user: User.empty(),
             ),
           ).thenAnswer(
@@ -159,7 +170,7 @@ void main() {
               orderHistory.copyWith(
                 orderHistoryItems: [
                   OrderHistoryItem.empty().copyWith(
-                    materialNumber: MaterialNumber('000000000021038302'),
+                    materialNumber: MaterialNumber('000000000013021342'),
                     status: StatusType('Out for delivery'),
                   )
                 ],
@@ -174,7 +185,8 @@ void main() {
         act: (bloc) => bloc.add(
           ViewByItemDetailsEvent.fetch(
             orderNumber: OrderNumber(''),
-            materialNumber: MaterialNumber('000000000021038302'),
+            salesOrganisation: SalesOrganisation.empty(),
+            materialNumber: MaterialNumber('000000000013021342'),
             soldTo: CustomerCodeInfo.empty(),
             user: User.empty(),
             disableDeliveryDateForZyllemStatus: false,
@@ -187,16 +199,10 @@ void main() {
           ViewByItemDetailsState.initial().copyWith(
             isLoading: false,
             viewByItemDetails: orderHistory.copyWith(
-              orderHistoryItems: [
-                OrderHistoryItem.empty().copyWith(
-                  materialNumber: MaterialNumber('000000000021038302'),
-                  orderStatusTracker: [],
-                  status: StatusType('Out for delivery'),
-                )
-              ],
+              orderHistoryItems: [],
             ),
             orderHistoryItem: OrderHistoryItem.empty().copyWith(
-              materialNumber: MaterialNumber('000000000021038302'),
+              materialNumber: MaterialNumber('000000000013021342'),
               orderStatusTracker: [],
               status: StatusType('Out for delivery'),
             ),
@@ -205,7 +211,7 @@ void main() {
                 orderHistory.copyWith(
                   orderHistoryItems: [
                     OrderHistoryItem.empty().copyWith(
-                      materialNumber: MaterialNumber('000000000021038302'),
+                      materialNumber: MaterialNumber('000000000013021342'),
                       orderStatusTracker: [],
                       status: StatusType('Out for delivery'),
                     )
@@ -217,16 +223,10 @@ void main() {
           ViewByItemDetailsState.initial().copyWith(
             isLoading: false,
             viewByItemDetails: orderHistory.copyWith(
-              orderHistoryItems: [
-                OrderHistoryItem.empty().copyWith(
-                  materialNumber: MaterialNumber('000000000021038302'),
-                  orderStatusTracker: fakeOrderStatusTracker,
-                  status: StatusType('Out for delivery'),
-                )
-              ],
+              orderHistoryItems: [],
             ),
             orderHistoryItem: OrderHistoryItem.empty().copyWith(
-              materialNumber: MaterialNumber('000000000021038302'),
+              materialNumber: MaterialNumber('000000000013021342'),
               orderStatusTracker: [],
               status: StatusType('Out for delivery'),
             ),

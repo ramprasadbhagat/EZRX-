@@ -137,12 +137,16 @@ class ViewByItemQueryMutation {
 
   String getViewByItemDetails() {
     return '''
-    query itemOrderHistoryV2(\$soldTo: String!, \$language: String, \$materialSearch: String, \$orderNumber: String) {
-  orderHistoryV2(
+   query orderHistoryFetchByItems(\$soldTo: String!, \$language: String, \$materialSearch: String, \$searchKey: String, \$fromDate: String, \$toDate: String, \$salesOrg: [String], \$filterBlockCustomer: Boolean) {
+  orderHistoryFetchByItems(
     soldTo: \$soldTo
     language: \$language
     materialSearch: \$materialSearch
-    orderNumber: \$orderNumber
+    searchKey: \$searchKey
+    fromDate: \$fromDate
+    toDate: \$toDate
+    salesOrg: \$salesOrg
+    filterBlockedCustomer: \$filterBlockCustomer
   ) {
     OrderHistory {
       OrderBasicInformation {
@@ -154,29 +158,51 @@ class ViewByItemQueryMutation {
           PaymentTermDescription
           
         }
-       
+        
       }
       OrderItems {
         MaterialCode
         MaterialDescription
+        DefaultMaterialDescription
+        CreatedTime
         CreatedDate
         Qty
         UnitPrice
         TotalPrice
         Status
+        LineNumber
+        Tax
         DeliveryDate
+        DeliveryTime
         OrderType
+        EZRXNumber
         OrderNumber
         OrderBy
+        PurchaseOrderType
+        WarehouseStorageCondition
         Batch
         ExpiryDate
+        IsMarketplace
+        Seller
         POReference
         ManufactureName
         SpecialInstructions
         RequestedDeliveryDate
         IsBonusMaterial
         ParentID
+        GovernmentMaterialCode
+        ItemRegistrationNumber
         TelephoneNumber
+        HidePrice
+        TenderContractNumber
+        TenderOrderReason
+        TenderPrice
+        TenderPriceUnit
+        TenderContractReference
+        InvoiceNumber
+        mrp
+        promotype
+        promoStatus
         
       }
       

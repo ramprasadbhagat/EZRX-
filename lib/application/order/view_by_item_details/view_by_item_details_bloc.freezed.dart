@@ -24,7 +24,8 @@ mixin _$ViewByItemDetailsEvent {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
   }) =>
@@ -37,7 +38,8 @@ mixin _$ViewByItemDetailsEvent {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)?
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
   }) =>
@@ -50,7 +52,8 @@ mixin _$ViewByItemDetailsEvent {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)?
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
     required TResult orElse(),
@@ -143,7 +146,8 @@ class _$_Initialized implements _Initialized {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
   }) {
@@ -159,7 +163,8 @@ class _$_Initialized implements _Initialized {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)?
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
   }) {
@@ -175,7 +180,8 @@ class _$_Initialized implements _Initialized {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)?
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
     required TResult orElse(),
@@ -235,10 +241,12 @@ abstract class _$$_FetchCopyWith<$Res> {
       OrderNumber orderNumber,
       MaterialNumber materialNumber,
       CustomerCodeInfo soldTo,
-      bool disableDeliveryDateForZyllemStatus});
+      bool disableDeliveryDateForZyllemStatus,
+      SalesOrganisation salesOrganisation});
 
   $UserCopyWith<$Res> get user;
   $CustomerCodeInfoCopyWith<$Res> get soldTo;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -256,6 +264,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? materialNumber = null,
     Object? soldTo = null,
     Object? disableDeliveryDateForZyllemStatus = null,
+    Object? salesOrganisation = null,
   }) {
     return _then(_$_Fetch(
       user: null == user
@@ -279,6 +288,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.disableDeliveryDateForZyllemStatus
           : disableDeliveryDateForZyllemStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
     ));
   }
 
@@ -297,6 +310,14 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(soldTo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -307,7 +328,8 @@ class _$_Fetch implements _Fetch {
       required this.orderNumber,
       required this.materialNumber,
       required this.soldTo,
-      required this.disableDeliveryDateForZyllemStatus});
+      required this.disableDeliveryDateForZyllemStatus,
+      required this.salesOrganisation});
 
   @override
   final User user;
@@ -319,10 +341,12 @@ class _$_Fetch implements _Fetch {
   final CustomerCodeInfo soldTo;
   @override
   final bool disableDeliveryDateForZyllemStatus;
+  @override
+  final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'ViewByItemDetailsEvent.fetch(user: $user, orderNumber: $orderNumber, materialNumber: $materialNumber, soldTo: $soldTo, disableDeliveryDateForZyllemStatus: $disableDeliveryDateForZyllemStatus)';
+    return 'ViewByItemDetailsEvent.fetch(user: $user, orderNumber: $orderNumber, materialNumber: $materialNumber, soldTo: $soldTo, disableDeliveryDateForZyllemStatus: $disableDeliveryDateForZyllemStatus, salesOrganisation: $salesOrganisation)';
   }
 
   @override
@@ -339,12 +363,20 @@ class _$_Fetch implements _Fetch {
             (identical(other.disableDeliveryDateForZyllemStatus,
                     disableDeliveryDateForZyllemStatus) ||
                 other.disableDeliveryDateForZyllemStatus ==
-                    disableDeliveryDateForZyllemStatus));
+                    disableDeliveryDateForZyllemStatus) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, orderNumber,
-      materialNumber, soldTo, disableDeliveryDateForZyllemStatus);
+  int get hashCode => Object.hash(
+      runtimeType,
+      user,
+      orderNumber,
+      materialNumber,
+      soldTo,
+      disableDeliveryDateForZyllemStatus,
+      salesOrganisation);
 
   @JsonKey(ignore: true)
   @override
@@ -361,12 +393,13 @@ class _$_Fetch implements _Fetch {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
   }) {
     return fetch(user, orderNumber, materialNumber, soldTo,
-        disableDeliveryDateForZyllemStatus);
+        disableDeliveryDateForZyllemStatus, salesOrganisation);
   }
 
   @override
@@ -378,12 +411,13 @@ class _$_Fetch implements _Fetch {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)?
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
   }) {
     return fetch?.call(user, orderNumber, materialNumber, soldTo,
-        disableDeliveryDateForZyllemStatus);
+        disableDeliveryDateForZyllemStatus, salesOrganisation);
   }
 
   @override
@@ -395,14 +429,15 @@ class _$_Fetch implements _Fetch {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)?
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
     required TResult orElse(),
   }) {
     if (fetch != null) {
       return fetch(user, orderNumber, materialNumber, soldTo,
-          disableDeliveryDateForZyllemStatus);
+          disableDeliveryDateForZyllemStatus, salesOrganisation);
     }
     return orElse();
   }
@@ -448,13 +483,15 @@ abstract class _Fetch implements ViewByItemDetailsEvent {
       required final OrderNumber orderNumber,
       required final MaterialNumber materialNumber,
       required final CustomerCodeInfo soldTo,
-      required final bool disableDeliveryDateForZyllemStatus}) = _$_Fetch;
+      required final bool disableDeliveryDateForZyllemStatus,
+      required final SalesOrganisation salesOrganisation}) = _$_Fetch;
 
   User get user;
   OrderNumber get orderNumber;
   MaterialNumber get materialNumber;
   CustomerCodeInfo get soldTo;
   bool get disableDeliveryDateForZyllemStatus;
+  SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -531,7 +568,8 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
   }) {
@@ -547,7 +585,8 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)?
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
   }) {
@@ -563,7 +602,8 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
             OrderNumber orderNumber,
             MaterialNumber materialNumber,
             CustomerCodeInfo soldTo,
-            bool disableDeliveryDateForZyllemStatus)?
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
     required TResult orElse(),

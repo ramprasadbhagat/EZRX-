@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -24,8 +25,9 @@ class ViewByItemDetailsRepository implements IViewByItemDetailsRepository {
   @override
   Future<Either<ApiFailure, OrderHistory>> getViewByItemDetails({
     required CustomerCodeInfo soldTo,
-    required OrderNumber orderNumber,
+    required SalesOrganisation salesOrganisation,
     required User user,
+    required OrderNumber orderNumber,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -42,7 +44,8 @@ class ViewByItemDetailsRepository implements IViewByItemDetailsRepository {
           await orderHistoryRemoteDataSource.getViewByItemDetails(
         soldTo: soldTo.customerCodeSoldTo,
         language: user.preferredLanguage.languageCode,
-        orderNumber: orderNumber.getOrDefaultValue(''),
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        orderNumber: orderNumber.getOrCrash(),
       );
 
       return Right(viewByItemDetailsList);

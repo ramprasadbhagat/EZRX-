@@ -16,4 +16,5 @@ class OrderHistory with _$OrderHistory {
         orderBasicInformation: OrderHistoryBasicInfo.empty(),
         orderHistoryItems: <OrderHistoryItem>[],
       );
+  bool get isOthersOrderItemsSectionVisible => orderHistoryItems.isNotEmpty;
 }

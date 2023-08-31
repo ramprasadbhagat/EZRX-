@@ -174,8 +174,10 @@ class _ViewByOrderItem extends StatelessWidget {
       onTap: () {
         context.read<ViewByItemDetailsBloc>().add(
               ViewByItemDetailsEvent.fetch(
-                user: context.read<UserBloc>().state.user,
                 orderNumber: orderHistoryItem.orderNumber,
+                salesOrganisation:
+                    context.read<EligibilityBloc>().state.salesOrganisation,
+                user: context.read<UserBloc>().state.user,
                 materialNumber: orderHistoryItem.materialNumber,
                 soldTo: customerCodeInfo,
                 disableDeliveryDateForZyllemStatus: context

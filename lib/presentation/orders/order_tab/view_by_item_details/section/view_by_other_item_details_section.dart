@@ -24,76 +24,82 @@ class OtherItemDetailsSection extends StatelessWidget {
           previous.viewByItemDetails.orderHistoryItems !=
           current.viewByItemDetails.orderHistoryItems,
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20.0,
-          ),
-          child: custom.ExpansionTile(
-            initiallyExpanded: true,
-            title: Text(
-              'Other items in this order'.tr(),
-              style: Theme.of(context).textTheme.labelMedium,
-            ),
-            children: [
-              state.isLoading
-                  ? LoadingShimmer.tile()
-                  : Column(
-                      children: state.viewByItemDetails.orderHistoryItems
-                          .getViewByOrderItemDetailsList
-                          .map(
-                            (e) => Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Text(
-                                  e.manufactureName,
-                                  style:
-                                      Theme.of(context).textTheme.labelMedium,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Column(
-                                  children: e.orderHistoryItem
-                                      .map(
-                                        (e) => CommonTileItem(
-                                          isQuantityRequired: true,
-                                          label: e.materialNumber.displayMatNo,
-                                          title: e.materialDescription,
-                                          priceComponent: PriceComponent(
-                                            price: e.totalPrice.totalPrice
-                                                .toStringAsFixed(2),
-                                            salesOrgConfig: context
-                                                .read<SalesOrgBloc>()
-                                                .state
-                                                .configs,
-                                          ),
-                                          statusWidget: StatusLabel(
-                                            status: StatusType(
-                                              e.status.getOrDefaultValue(''),
-                                            ),
-                                          ),
-                                          quantity: e.qty.toString(),
-                                          materialNumber: e.materialNumber,
-                                          isQuantityBelowImage: false,
-                                          statusTag: e.productTag,
-                                          headerText:
-                                              'Order #${e.orderNumber.getOrDefaultValue('')}',
-                                          subtitle: '',
-                                        ),
-                                      )
-                                      .toList(),
-                                ),
-                              ],
-                            ),
-                          )
-                          .toList(),
-                    ),
-            ],
-          ),
-        );
+        return state.viewByItemDetails.isOthersOrderItemsSectionVisible
+            ? Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                ),
+                child: custom.ExpansionTile(
+                  initiallyExpanded: true,
+                  title: Text(
+                    'Other items in this order'.tr(),
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                  children: [
+                    state.isLoading
+                        ? LoadingShimmer.tile()
+                        : Column(
+                            children: state.viewByItemDetails.orderHistoryItems
+                                .getViewByOrderItemDetailsList
+                                .map(
+                                  (e) => Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      Text(
+                                        e.manufactureName,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium,
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Column(
+                                        children: e.orderHistoryItem
+                                            .map(
+                                              (e) => CommonTileItem(
+                                                isQuantityRequired: true,
+                                                label: e.materialNumber
+                                                    .displayMatNo,
+                                                title: e.materialDescription,
+                                                priceComponent: PriceComponent(
+                                                  price: e.totalPrice.totalPrice
+                                                      .toStringAsFixed(2),
+                                                  salesOrgConfig: context
+                                                      .read<SalesOrgBloc>()
+                                                      .state
+                                                      .configs,
+                                                ),
+                                                statusWidget: StatusLabel(
+                                                  status: StatusType(
+                                                    e.status.displayOrderStatus,
+                                                  ),
+                                                ),
+                                                quantity: e.qty.toString(),
+                                                materialNumber:
+                                                    e.materialNumber,
+                                                isQuantityBelowImage: false,
+                                                statusTag: e.productTag,
+                                                headerText:
+                                                    'Order #${e.orderNumber.getOrDefaultValue('')}',
+                                                subtitle: '',
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                  ],
+                ),
+              )
+            : const SizedBox.shrink();
       },
     );
   }

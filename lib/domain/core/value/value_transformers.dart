@@ -422,11 +422,14 @@ String getOrderStatus(String status) {
     case 'Pending release - on backorder':
     case 'Pending release - seller approval required':
       return 'Pending release';
-
+    case '':
+      return '-';
     default:
       return status;
   }
 }
+
+
 
 IconData getOrderStatusIcon(String status) {
   switch (status) {

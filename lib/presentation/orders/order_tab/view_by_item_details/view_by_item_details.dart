@@ -60,7 +60,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
                         status:
                             state.orderHistoryItem.status.displayOrderStatus,
                         onTap: () {
-                          _showDEtailsPagePage(
+                          _showDetailsPage(
                             context: context,
                           );
                         },
@@ -86,7 +86,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
   }
 }
 
-void _showDEtailsPagePage({
+void _showDetailsPage({
   required BuildContext context,
 }) {
   showModalBottomSheet(
@@ -120,10 +120,6 @@ void _showDEtailsPagePage({
           );
         },
       );
-    },
-  ).then(
-    (value) {
-      if (value == null) return;
     },
   );
 }

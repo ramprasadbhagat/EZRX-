@@ -9,6 +9,7 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
     required MaterialNumber materialNumber,
     required CustomerCodeInfo soldTo,
     required bool disableDeliveryDateForZyllemStatus,
+    required SalesOrganisation salesOrganisation,
   }) = _Fetch;
   const factory ViewByItemDetailsEvent.fetchZyllemStatus({
     required StatusType status,
