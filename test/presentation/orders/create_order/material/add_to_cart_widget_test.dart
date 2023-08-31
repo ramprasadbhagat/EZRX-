@@ -426,7 +426,7 @@ void main() {
       expect(find.byKey(const Key('addMaterialToCart')), findsNothing);
     });
 
-    testWidgets('- hidden when accessRightOrder false', (tester) async {
+    testWidgets('- show when disableCreateOrder false', (tester) async {
       when(
         () => addToCartBlocMock.state,
       ).thenReturn(
@@ -436,9 +436,7 @@ void main() {
       );
 
       final fakeUser = User.empty().copyWith(
-        accessRight: AccessRight.empty().copyWith(
-          orders: false,
-        ),
+        disableCreateOrder: false,
         role: Role.empty().copyWith(type: RoleType('client_user')),
       );
 
@@ -458,7 +456,7 @@ void main() {
 
       final addToCartButton = find.byType(AddToCartButton);
       expect(addToCartButton, findsOneWidget);
-      expect(find.byKey(const Key('addMaterialToCart')), findsNothing);
+      expect(find.byKey(const Key('addMaterialToCart')), findsOneWidget);
     });
 
     testWidgets('- hidden when disableCreateOrder true', (tester) async {

@@ -8,8 +8,8 @@ import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_ba
 import 'package:ezrxmobile/presentation/home/banners/kr_banner/kr_banner.dart';
 import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
-import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
+import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
@@ -27,61 +27,76 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: WidgetKeys.homeScreen,
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        title: const CustomerCodeSelector(
-          key: WidgetKeys.customerCodeSelector,
-        ),
-        backgroundColor: ZPColors.primary,
-        automaticallyImplyLeading: false,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: CartButton(),
+    //BlocBuilder is required here as there is a delay in userbloc
+    //due to delay UI is not updating according to accessright value
+    return BlocBuilder<UserBloc, UserState>(
+      buildWhen: (previous, current) =>
+          //check user role and products as getter depends on both
+          previous.user.accessRight.products !=
+          current.user.accessRight.products||
+          previous.user.role.type !=current.user.role.type,
+      builder: (context, state) {
+        return Scaffold(
+          key: WidgetKeys.homeScreen,
+          appBar: AppBar(
+            elevation: 0,
+            centerTitle: true,
+            title: const CustomerCodeSelector(
+              key: WidgetKeys.customerCodeSelector,
+            ),
+            backgroundColor: ZPColors.primary,
+            automaticallyImplyLeading: false,
+            actions: const [
+              Padding(
+                padding: EdgeInsets.only(right: 16.0),
+                child: CartButton(),
+              ),
+            ],
+            toolbarHeight: kToolbarHeight + 8.0,
+            bottom: state.user.userCanAccessProducts
+                ? const PreferredSize(
+                    preferredSize: Size.fromHeight(kToolbarHeight),
+                    child: HomeProductSearchBar(),
+                  )
+                : null,
           ),
-        ],
-        toolbarHeight: kToolbarHeight + 8.0,
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
-          child: HomeProductSearchBar(),
-        ),
-      ),
-      //SingleChildScrollView and Column is needed
-      //as the ListView is rebuilding the BrowseProduct & BundleSection
-      //and it was recreating the BlocProvider
-      body: RefreshIndicator(
-        onRefresh: () async => context.read<SalesOrgBloc>().add(
-              SalesOrgEvent.loadSavedOrganisation(
-                salesOrganisations:
-                    context.read<UserBloc>().state.userSalesOrganisations,
+          //SingleChildScrollView and Column is needed
+          //as the ListView is rebuilding the BrowseProduct & BundleSection
+          //and it was recreating the BlocProvider
+          body: RefreshIndicator(
+            onRefresh: () async => context.read<SalesOrgBloc>().add(
+                  SalesOrgEvent.loadSavedOrganisation(
+                    salesOrganisations:
+                        context.read<UserBloc>().state.userSalesOrganisations,
+                  ),
+                ),
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                children: [
+                  AnnouncementWidget(
+                    currentPath: const HomeTabRoute().path,
+                    key: WidgetKeys.homeTabAnnouncementWidget,
+                  ),
+                  const EdiUserBanner(),
+                  const AccountSuspendedBanner(),
+                  const QuickAccessMenuPanel(),
+                  const CarouselBanner(),
+                  if (state.user.userCanAccessProducts) ...[
+                    const ProductsOnOffer(),
+                    const BundleSection(),
+                  ],
+                  const RecentOrdersSection(),
+                  if (state.user.userCanAccessProducts) const BrowseProduct(),
+                  const TopAdvertBoxBanner(),
+                  const KRBanners(),
+                  const AnnouncementSection(),
+                ],
               ),
             ),
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Column(
-            children: [
-              AnnouncementWidget(
-                currentPath: const HomeTabRoute().path,
-                key: WidgetKeys.homeTabAnnouncementWidget,
-              ),
-              const EdiUserBanner(),
-              const AccountSuspendedBanner(),
-              const QuickAccessMenuPanel(),
-              const CarouselBanner(),
-              const ProductsOnOffer(),
-              const BundleSection(),
-              const RecentOrdersSection(),
-              const BrowseProduct(),
-              const TopAdvertBoxBanner(),
-              const KRBanners(),
-              const AnnouncementSection(),
-            ],
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

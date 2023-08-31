@@ -78,11 +78,11 @@ class User with _$User {
     // For Client admin/user we check the flags
     // [accessRight.orders] should be true & disableCreateOrder should be false
     if (role.type.isCustomer) {
-      return accessRight.orders && !disableCreateOrder;
+      return !disableCreateOrder;
     }
 
     // For Other user we check only [accessRight.orders]
-    return accessRight.orders;
+    return true;
   }
 
   bool get userCanAccessOrderHistory {
@@ -98,6 +98,21 @@ class User with _$User {
     // For Client admin/user and Other user we only check the flag
     // [accessRight.orders]  should be true
     return accessRight.orders;
+  }
+
+  bool get userCanAccessProducts {
+    // For Root / ZP admin the it will always return true
+    if (role.type.adminOrderAccess) {
+      return true;
+    }
+    // For Return admin/ requestor/ approver it will always return false
+    if (role.type.isReturnRole) {
+      return false;
+    }
+
+    // For Client admin/user and Other user we only check the flag
+    // [accessRight.products]  should be true
+    return accessRight.products;
   }
 
   Language get defaultLanguage => Language(subTag: preferredLanguage);
