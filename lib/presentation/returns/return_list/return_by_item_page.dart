@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -161,7 +162,7 @@ class _ReturnItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
-                    'Requested on ${data.requestDate.dateString}',
+                    '${'Requested on'.tr()} ${data.requestDate.dateString}',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: ZPColors.darkerGrey,
                         ),
@@ -186,7 +187,7 @@ class _ReturnItem extends StatelessWidget {
                     'Batch ${data.batch} (Expires ${data.expiry.dateString})',
                 headerText: 'Return #${data.requestId}',
                 materialNumber: data.materialNumber,
-                quantity: data.itemQty.toString(),
+                quantity: data.itemQty.getOrDefaultValue('0'),
                 isQuantityBelowImage: true,
                 statusWidget: StatusLabel(
                   status: StatusType(

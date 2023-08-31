@@ -75,6 +75,16 @@ class _ReturnRootState extends State<ReturnRoot> {
       appBar: AppBar(
         title: const Text('Returns').tr(),
         centerTitle: false,
+        actions: [
+          IconButton(
+            key: WidgetKeys.headsetMicOutlined,
+            onPressed: () {},
+            icon: const Icon(
+              Icons.headset_mic_outlined,
+              color: ZPColors.primary,
+            ),
+          ),
+        ],
       ),
       body: Column(
         mainAxisSize: MainAxisSize.min,

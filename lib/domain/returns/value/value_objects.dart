@@ -127,6 +127,8 @@ class ReturnQuantity extends ValueObject<String> {
     );
   }
 
+  String get noun => getNoun(value.getOrElse(() => '0'));
+
   int get getIntValue => getIntegerReturnQuantity(value.getOrElse(() => ''));
 
   const ReturnQuantity._(this.value);

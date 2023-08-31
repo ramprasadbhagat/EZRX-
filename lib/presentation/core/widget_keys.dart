@@ -444,6 +444,7 @@ class WidgetKeys {
   //  Return By Request Page
   //============================================================
   static Key returnRequest(String index) => Key('returnRequest$index');
+  static const Key headsetMicOutlined = Key('headsetMicOutlined');
   //============================================================
   //  SalesOrgSelection
   //============================================================

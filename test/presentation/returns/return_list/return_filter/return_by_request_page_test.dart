@@ -10,6 +10,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_request_page.dart';
@@ -53,7 +54,7 @@ void main() {
   late ReturnListByRequestBloc mockReturnListByRequestBloc;
   late AnnouncementBloc mockAnnouncementBloc;
   late AuthBloc mockAuthBloc;
-  late List<ReturnItem> fakeReturhItemList;
+  late List<ReturnItem> fakeReturnItemList;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -71,11 +72,18 @@ void main() {
     mockAnnouncementBloc = MockAnnouncementBloc();
     mockReturnListByRequestBloc = ReturnListByRequestBlocMock();
 
-    fakeReturhItemList = [
+    fakeReturnItemList = [
       ReturnItem.empty().copyWith(
         requestId: '1234567',
         invoiceID: '1234567',
         status: StatusType('PENDING'),
+        itemQty: ReturnQuantity('3'),
+      ),
+      ReturnItem.empty().copyWith(
+        requestId: '1234567',
+        invoiceID: '1234567',
+        status: StatusType('PENDING'),
+        itemQty: ReturnQuantity('1'),
       )
     ];
   });
@@ -168,7 +176,7 @@ void main() {
       );
       final expectedStates = [
         ReturnListByRequestState.initial()
-            .copyWith(isFetching: false, returnItemList: fakeReturhItemList),
+            .copyWith(isFetching: false, returnItemList: fakeReturnItemList),
       ];
       whenListen(
         mockReturnListByRequestBloc,
@@ -185,16 +193,44 @@ void main() {
       );
       expect(
         find.byType(StatusLabel),
-        findsOneWidget,
+        findsAtLeastNWidgets(2),
       );
       expect(
         find.textContaining(
           mockReturnListByRequestBloc
               .state.returnItemList.first.status.displayStatusForViewByRequest,
         ),
-        findsOneWidget,
+        findsAtLeastNWidgets(2),
       );
       await tester.pump();
+    });
+
+    testWidgets('Return By Request Page quantity text validation',
+        (tester) async {
+      when(() => mockReturnListByRequestBloc.state).thenReturn(
+        ReturnListByRequestState.initial().copyWith(
+          returnItemList: fakeReturnItemList,
+        ),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      expect(find.text('3 items'), findsOneWidget);
+    });
+
+    testWidgets('Return By Request Page quantity text validation find 1 item',
+        (tester) async {
+      when(() => mockReturnListByRequestBloc.state).thenReturn(
+        ReturnListByRequestState.initial().copyWith(
+          returnItemList: fakeReturnItemList,
+        ),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      expect(find.text('1 item'), findsOneWidget);
     });
   });
 }

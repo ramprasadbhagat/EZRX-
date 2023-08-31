@@ -4,6 +4,8 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+
 part 'return_item_dto.freezed.dart';
 part 'return_item_dto.g.dart';
 
@@ -14,7 +16,7 @@ class ReturnItemDto with _$ReturnItemDto {
   const factory ReturnItemDto({
     @JsonKey(name: 'requestId', defaultValue: '') required String requestId,
     @JsonKey(name: 'requestDate', defaultValue: '') required String requestDate,
-    @JsonKey(name: 'itemQty', defaultValue: '') required String itemQty,
+    @JsonKey(name: 'itemQty', defaultValue: '0') required String itemQty,
     @JsonKey(name: 'totalPrice', defaultValue: '') required String totalPrice,
     @JsonKey(name: 'status', defaultValue: '') required String status,
     @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -55,7 +57,7 @@ class ReturnItemDto with _$ReturnItemDto {
     return ReturnItem(
       requestId: requestId,
       requestDate: DateTimeStringValue(requestDate),
-      itemQty: int.parse(itemQty),
+      itemQty: ReturnQuantity(itemQty),
       totalPrice: double.parse(totalPrice),
       status: StatusType(status),
       materialNumber: MaterialNumber(materialNumber),

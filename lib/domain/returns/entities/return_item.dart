@@ -3,6 +3,8 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+
 part 'return_item.freezed.dart';
 
 @freezed
@@ -12,7 +14,7 @@ class ReturnItem with _$ReturnItem {
   const factory ReturnItem({
     required String requestId,
     required DateTimeStringValue requestDate,
-    required int itemQty,
+    required ReturnQuantity itemQty,
     required double totalPrice,
     required StatusType status,
     required MaterialNumber materialNumber,
@@ -29,7 +31,7 @@ class ReturnItem with _$ReturnItem {
   factory ReturnItem.empty() => ReturnItem(
         requestId: '',
         requestDate: DateTimeStringValue(''),
-        itemQty: 0,
+        itemQty: ReturnQuantity('0'),
         totalPrice: 0.0,
         status: StatusType(''),
         materialNumber: MaterialNumber(''),

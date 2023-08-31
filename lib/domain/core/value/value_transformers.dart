@@ -213,6 +213,8 @@ String dashIfEmpty(String text) {
 int getIntegerReturnQuantity(String quantity) =>
     quantity.isEmpty ? 0 : int.parse(quantity);
 
+String getNoun(String qty) => int.tryParse(qty) == 1 ? 'item' : 'items';
+
 bool isBundle(String type) => type == 'bundle';
 
 bool isMaterial(String type) => type == 'material';

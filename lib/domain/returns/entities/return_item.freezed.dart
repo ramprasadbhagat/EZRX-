@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ReturnItem {
   String get requestId => throw _privateConstructorUsedError;
   DateTimeStringValue get requestDate => throw _privateConstructorUsedError;
-  int get itemQty => throw _privateConstructorUsedError;
+  ReturnQuantity get itemQty => throw _privateConstructorUsedError;
   double get totalPrice => throw _privateConstructorUsedError;
   StatusType get status => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $ReturnItemCopyWith<$Res> {
   $Res call(
       {String requestId,
       DateTimeStringValue requestDate,
-      int itemQty,
+      ReturnQuantity itemQty,
       double totalPrice,
       StatusType status,
       MaterialNumber materialNumber,
@@ -101,7 +101,7 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
       itemQty: null == itemQty
           ? _value.itemQty
           : itemQty // ignore: cast_nullable_to_non_nullable
-              as int,
+              as ReturnQuantity,
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
@@ -169,7 +169,7 @@ abstract class _$$_ReturnItemCopyWith<$Res>
   $Res call(
       {String requestId,
       DateTimeStringValue requestDate,
-      int itemQty,
+      ReturnQuantity itemQty,
       double totalPrice,
       StatusType status,
       MaterialNumber materialNumber,
@@ -224,7 +224,7 @@ class __$$_ReturnItemCopyWithImpl<$Res>
       itemQty: null == itemQty
           ? _value.itemQty
           : itemQty // ignore: cast_nullable_to_non_nullable
-              as int,
+              as ReturnQuantity,
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
@@ -298,7 +298,7 @@ class _$_ReturnItem extends _ReturnItem {
   @override
   final DateTimeStringValue requestDate;
   @override
-  final int itemQty;
+  final ReturnQuantity itemQty;
   @override
   final double totalPrice;
   @override
@@ -389,7 +389,7 @@ abstract class _ReturnItem extends ReturnItem {
   const factory _ReturnItem(
       {required final String requestId,
       required final DateTimeStringValue requestDate,
-      required final int itemQty,
+      required final ReturnQuantity itemQty,
       required final double totalPrice,
       required final StatusType status,
       required final MaterialNumber materialNumber,
@@ -408,7 +408,7 @@ abstract class _ReturnItem extends ReturnItem {
   @override
   DateTimeStringValue get requestDate;
   @override
-  int get itemQty;
+  ReturnQuantity get itemQty;
   @override
   double get totalPrice;
   @override

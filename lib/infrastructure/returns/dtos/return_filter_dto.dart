@@ -65,6 +65,7 @@ class ReturnFilterDto with _$ReturnFilterDto {
   Map<String, dynamic> toMap() => toJson()
     ..removeWhere(
       (key, value) =>
+          ((key == 'dateFrom' || key == 'dateTo') && value == '-') ||
           (value is String && value.isEmpty) ||
           (value is List && value.isEmpty),
     );
