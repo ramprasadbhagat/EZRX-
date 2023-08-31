@@ -78,8 +78,8 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
           },
           buildWhen: (previous, current) =>
               previous.isLoading != current.isLoading ||
-              previous.announcementInfo.announcementList !=
-                  current.announcementInfo.announcementList,
+              previous.searchedAnnouncementList !=
+                  current.searchedAnnouncementList,
           builder: (context, state) {
             return state.isLoading &&
                     state.announcementInfo.announcementList.isEmpty
@@ -128,7 +128,7 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
                           context.router.pushNamed('announcement_info_details');
                         },
                       ),
-                      items: state.announcementInfo.announcementList,
+                      items: state.searchedAnnouncementList,
                     ),
                   );
           },

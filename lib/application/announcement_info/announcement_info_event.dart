@@ -8,4 +8,7 @@ class AnnouncementInfoEvent with _$AnnouncementInfoEvent {
   const factory AnnouncementInfoEvent.loadMore({
     required SalesOrg salesOrg,
   }) = _LoadMore;
+  const factory AnnouncementInfoEvent.updateSearchKey({
+    required String searchKey,
+  }) = _UpdateSearchKey;
 }

@@ -16,23 +16,25 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AnnouncementInfoEvent {
-  SalesOrg get salesOrg => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrg salesOrg) fetch,
     required TResult Function(SalesOrg salesOrg) loadMore,
+    required TResult Function(String searchKey) updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrg salesOrg)? fetch,
     TResult? Function(SalesOrg salesOrg)? loadMore,
+    TResult? Function(String searchKey)? updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrg salesOrg)? fetch,
     TResult Function(SalesOrg salesOrg)? loadMore,
+    TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,24 +42,23 @@ mixin _$AnnouncementInfoEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $AnnouncementInfoEventCopyWith<AnnouncementInfoEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -66,8 +67,6 @@ abstract class $AnnouncementInfoEventCopyWith<$Res> {
   factory $AnnouncementInfoEventCopyWith(AnnouncementInfoEvent value,
           $Res Function(AnnouncementInfoEvent) then) =
       _$AnnouncementInfoEventCopyWithImpl<$Res, AnnouncementInfoEvent>;
-  @useResult
-  $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -80,27 +79,12 @@ class _$AnnouncementInfoEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrg = null,
-  }) {
-    return _then(_value.copyWith(
-      salesOrg: null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res>
-    implements $AnnouncementInfoEventCopyWith<$Res> {
+abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({SalesOrg salesOrg});
 }
@@ -162,6 +146,7 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrg salesOrg) fetch,
     required TResult Function(SalesOrg salesOrg) loadMore,
+    required TResult Function(String searchKey) updateSearchKey,
   }) {
     return fetch(salesOrg);
   }
@@ -171,6 +156,7 @@ class _$_Fetch implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrg salesOrg)? fetch,
     TResult? Function(SalesOrg salesOrg)? loadMore,
+    TResult? Function(String searchKey)? updateSearchKey,
   }) {
     return fetch?.call(salesOrg);
   }
@@ -180,6 +166,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrg salesOrg)? fetch,
     TResult Function(SalesOrg salesOrg)? loadMore,
+    TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -193,6 +180,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) {
     return fetch(this);
   }
@@ -202,6 +190,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return fetch?.call(this);
   }
@@ -211,6 +200,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -223,21 +213,17 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements AnnouncementInfoEvent {
   const factory _Fetch({required final SalesOrg salesOrg}) = _$_Fetch;
 
-  @override
   SalesOrg get salesOrg;
-  @override
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res>
-    implements $AnnouncementInfoEventCopyWith<$Res> {
+abstract class _$$_LoadMoreCopyWith<$Res> {
   factory _$$_LoadMoreCopyWith(
           _$_LoadMore value, $Res Function(_$_LoadMore) then) =
       __$$_LoadMoreCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({SalesOrg salesOrg});
 }
@@ -300,6 +286,7 @@ class _$_LoadMore implements _LoadMore {
   TResult when<TResult extends Object?>({
     required TResult Function(SalesOrg salesOrg) fetch,
     required TResult Function(SalesOrg salesOrg) loadMore,
+    required TResult Function(String searchKey) updateSearchKey,
   }) {
     return loadMore(salesOrg);
   }
@@ -309,6 +296,7 @@ class _$_LoadMore implements _LoadMore {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(SalesOrg salesOrg)? fetch,
     TResult? Function(SalesOrg salesOrg)? loadMore,
+    TResult? Function(String searchKey)? updateSearchKey,
   }) {
     return loadMore?.call(salesOrg);
   }
@@ -318,6 +306,7 @@ class _$_LoadMore implements _LoadMore {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(SalesOrg salesOrg)? fetch,
     TResult Function(SalesOrg salesOrg)? loadMore,
+    TResult Function(String searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -331,6 +320,7 @@ class _$_LoadMore implements _LoadMore {
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
   }) {
     return loadMore(this);
   }
@@ -340,6 +330,7 @@ class _$_LoadMore implements _LoadMore {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
   }) {
     return loadMore?.call(this);
   }
@@ -349,6 +340,7 @@ class _$_LoadMore implements _LoadMore {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -361,11 +353,150 @@ class _$_LoadMore implements _LoadMore {
 abstract class _LoadMore implements AnnouncementInfoEvent {
   const factory _LoadMore({required final SalesOrg salesOrg}) = _$_LoadMore;
 
-  @override
   SalesOrg get salesOrg;
-  @override
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateSearchKeyCopyWith<$Res> {
+  factory _$$_UpdateSearchKeyCopyWith(
+          _$_UpdateSearchKey value, $Res Function(_$_UpdateSearchKey) then) =
+      __$$_UpdateSearchKeyCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String searchKey});
+}
+
+/// @nodoc
+class __$$_UpdateSearchKeyCopyWithImpl<$Res>
+    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$_UpdateSearchKey>
+    implements _$$_UpdateSearchKeyCopyWith<$Res> {
+  __$$_UpdateSearchKeyCopyWithImpl(
+      _$_UpdateSearchKey _value, $Res Function(_$_UpdateSearchKey) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchKey = null,
+  }) {
+    return _then(_$_UpdateSearchKey(
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateSearchKey implements _UpdateSearchKey {
+  const _$_UpdateSearchKey({required this.searchKey});
+
+  @override
+  final String searchKey;
+
+  @override
+  String toString() {
+    return 'AnnouncementInfoEvent.updateSearchKey(searchKey: $searchKey)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateSearchKey &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, searchKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
+      __$$_UpdateSearchKeyCopyWithImpl<_$_UpdateSearchKey>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrg salesOrg) fetch,
+    required TResult Function(SalesOrg salesOrg) loadMore,
+    required TResult Function(String searchKey) updateSearchKey,
+  }) {
+    return updateSearchKey(searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrg salesOrg)? fetch,
+    TResult? Function(SalesOrg salesOrg)? loadMore,
+    TResult? Function(String searchKey)? updateSearchKey,
+  }) {
+    return updateSearchKey?.call(searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrg salesOrg)? fetch,
+    TResult Function(SalesOrg salesOrg)? loadMore,
+    TResult Function(String searchKey)? updateSearchKey,
+    required TResult orElse(),
+  }) {
+    if (updateSearchKey != null) {
+      return updateSearchKey(searchKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_UpdateSearchKey value) updateSearchKey,
+  }) {
+    return updateSearchKey(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_UpdateSearchKey value)? updateSearchKey,
+  }) {
+    return updateSearchKey?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_UpdateSearchKey value)? updateSearchKey,
+    required TResult orElse(),
+  }) {
+    if (updateSearchKey != null) {
+      return updateSearchKey(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateSearchKey implements AnnouncementInfoEvent {
+  const factory _UpdateSearchKey({required final String searchKey}) =
+      _$_UpdateSearchKey;
+
+  String get searchKey;
+  @JsonKey(ignore: true)
+  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -375,6 +506,7 @@ mixin _$AnnouncementInfoState {
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -393,6 +525,7 @@ abstract class $AnnouncementInfoStateCopyWith<$Res> {
       {AnnouncementArticleInfo announcementInfo,
       bool isLoading,
       bool canLoadMore,
+      SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
   $AnnouncementArticleInfoCopyWith<$Res> get announcementInfo;
@@ -415,6 +548,7 @@ class _$AnnouncementInfoStateCopyWithImpl<$Res,
     Object? announcementInfo = null,
     Object? isLoading = null,
     Object? canLoadMore = null,
+    Object? searchKey = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -430,6 +564,10 @@ class _$AnnouncementInfoStateCopyWithImpl<$Res,
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -459,6 +597,7 @@ abstract class _$$_AnnouncementInfoStateCopyWith<$Res>
       {AnnouncementArticleInfo announcementInfo,
       bool isLoading,
       bool canLoadMore,
+      SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
 
   @override
@@ -479,6 +618,7 @@ class __$$_AnnouncementInfoStateCopyWithImpl<$Res>
     Object? announcementInfo = null,
     Object? isLoading = null,
     Object? canLoadMore = null,
+    Object? searchKey = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_AnnouncementInfoState(
@@ -494,6 +634,10 @@ class __$$_AnnouncementInfoStateCopyWithImpl<$Res>
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -509,6 +653,7 @@ class _$_AnnouncementInfoState extends _AnnouncementInfoState {
       {required this.announcementInfo,
       required this.isLoading,
       required this.canLoadMore,
+      required this.searchKey,
       required this.apiFailureOrSuccessOption})
       : super._();
 
@@ -519,11 +664,13 @@ class _$_AnnouncementInfoState extends _AnnouncementInfoState {
   @override
   final bool canLoadMore;
   @override
+  final SearchKey searchKey;
+  @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'AnnouncementInfoState(announcementInfo: $announcementInfo, isLoading: $isLoading, canLoadMore: $canLoadMore, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'AnnouncementInfoState(announcementInfo: $announcementInfo, isLoading: $isLoading, canLoadMore: $canLoadMore, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -537,6 +684,8 @@ class _$_AnnouncementInfoState extends _AnnouncementInfoState {
                 other.isLoading == isLoading) &&
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption));
@@ -544,7 +693,7 @@ class _$_AnnouncementInfoState extends _AnnouncementInfoState {
 
   @override
   int get hashCode => Object.hash(runtimeType, announcementInfo, isLoading,
-      canLoadMore, apiFailureOrSuccessOption);
+      canLoadMore, searchKey, apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -559,6 +708,7 @@ abstract class _AnnouncementInfoState extends AnnouncementInfoState {
       {required final AnnouncementArticleInfo announcementInfo,
       required final bool isLoading,
       required final bool canLoadMore,
+      required final SearchKey searchKey,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption}) = _$_AnnouncementInfoState;
   const _AnnouncementInfoState._() : super._();
@@ -569,6 +719,8 @@ abstract class _AnnouncementInfoState extends AnnouncementInfoState {
   bool get isLoading;
   @override
   bool get canLoadMore;
+  @override
+  SearchKey get searchKey;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/announcement_info/repository/i_announcement_info_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -35,6 +36,7 @@ class AnnouncementInfoBloc
             isLoading: true,
             apiFailureOrSuccessOption: none(),
             announcementInfo: AnnouncementArticleInfo.empty(),
+            searchKey: SearchKey.searchFilter(''),
           ),
         );
         final failureOrSuccess =
@@ -90,9 +92,10 @@ class AnnouncementInfoBloc
             ),
           ),
           (announcement) {
-            final newList = List<AnnouncementArticleItem>.from(
-              state.announcementInfo.announcementList,
-            )..addAll(announcement.announcementList);
+            final newList = <AnnouncementArticleItem>[
+              ...state.announcementInfo.announcementList,
+              ...announcement.announcementList,
+            ];
 
             emit(
               state.copyWith(
@@ -109,6 +112,11 @@ class AnnouncementInfoBloc
           },
         );
       },
+      updateSearchKey: (_UpdateSearchKey e) async => emit(
+        state.copyWith(
+          searchKey: SearchKey.searchFilter(e.searchKey),
+        ),
+      ),
     );
   }
 }
