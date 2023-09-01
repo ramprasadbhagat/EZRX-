@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -364,6 +365,15 @@ class _CheckoutSection extends StatelessWidget {
                 size: 20,
               ),
             ),
+            if (state.isMWPNotAllowedAndPresentInCart)
+              InfoLabel(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                textValue:
+                    "Can't order material without price. Please remove to continue to check out."
+                        .tr(),
+                mainColor: ZPColors.lightRedStatusColor,
+              ),
             _OOSMessage(),
             ListTile(
               dense: true,

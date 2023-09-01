@@ -558,6 +558,7 @@ class PriceAggregate with _$PriceAggregate {
               .any((stock) => !stock.inStock.isMaterialInStock),
         )
       : stockInfoList.any((stock) => !stock.inStock.isMaterialInStock);
+
 }
 
 enum PriceType {

@@ -358,5 +358,11 @@ class CartState with _$CartState {
   bool isEligibleForCheckout(bool isOOSOrderEligibleToProceed) =>
       ((isOOSOrderPresent && isOOSOrderEligibleToProceed) ||
           !isOOSOrderPresent) &&
-      isBundleQuantitySatisfies;
+      isBundleQuantitySatisfies &&
+      !isMWPNotAllowedAndPresentInCart;
+
+  //MWP: Material Without Price
+  bool get isMWPNotAllowedAndPresentInCart =>
+      cartProducts.any((e) => e.price.finalPrice.isEmpty) &&
+      !config.materialWithoutPrice;
 }
