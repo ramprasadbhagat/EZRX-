@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -77,6 +78,8 @@ void main() {
             soldTo: customerCodeInfo,
             user: user,
             viewByItemFilter: viewByItemFilter,
+              salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -92,6 +95,8 @@ void main() {
           user: user,
           viewByItemFilter: viewByItemFilter,
           searchKey: searchKey,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
         ),
       ),
       expect: () => [
@@ -133,6 +138,8 @@ void main() {
             soldTo: customerCodeInfo,
             user: user,
             viewByItemFilter: viewByItemFilter,
+              salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -148,6 +155,8 @@ void main() {
           user: user,
           viewByItemFilter: viewByItemFilter,
           searchKey: searchKey,
+            salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
         ),
       ),
       expect: () => [
@@ -198,6 +207,8 @@ void main() {
             soldTo: customerCodeInfo,
             user: user,
             viewByItemFilter: viewByItemFilter,
+              salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -211,6 +222,8 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
         ),
       ),
       expect: () => [
@@ -266,6 +279,8 @@ void main() {
             soldTo: customerCodeInfo,
             user: user,
             viewByItemFilter: viewByItemFilter,
+              salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -277,6 +292,8 @@ void main() {
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
         ),
       ),
       expect: () => [

@@ -25,7 +25,8 @@ mixin _$ViewByItemsEvent {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -33,10 +34,15 @@ mixin _$ViewByItemsEvent {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         autoSearchProduct,
-    required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisation salesOrganisation)
         loadMore,
     required TResult Function() fetchProductImage,
   }) =>
@@ -50,7 +56,8 @@ mixin _$ViewByItemsEvent {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -58,13 +65,15 @@ mixin _$ViewByItemsEvent {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult? Function()? fetchProductImage,
   }) =>
@@ -78,7 +87,8 @@ mixin _$ViewByItemsEvent {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -86,13 +96,15 @@ mixin _$ViewByItemsEvent {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
@@ -191,7 +203,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -199,10 +212,15 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         autoSearchProduct,
-    required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisation salesOrganisation)
         loadMore,
     required TResult Function() fetchProductImage,
   }) {
@@ -219,7 +237,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -227,13 +246,15 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult? Function()? fetchProductImage,
   }) {
@@ -250,7 +271,8 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -258,13 +280,15 @@ class _$_Initialized implements _Initialized {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
@@ -331,13 +355,15 @@ abstract class _$$_FetchCopyWith<$Res> {
       ShipToInfo shipToInfo,
       User user,
       ViewByItemFilter viewByItemFilter,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      SalesOrganisation salesOrganisation});
 
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
   $ViewByItemFilterCopyWith<$Res> get viewByItemFilter;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -356,6 +382,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? user = null,
     Object? viewByItemFilter = null,
     Object? searchKey = null,
+    Object? salesOrganisation = null,
   }) {
     return _then(_$_Fetch(
       salesOrgConfigs: null == salesOrgConfigs
@@ -382,6 +409,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
     ));
   }
 
@@ -425,6 +456,14 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(viewByItemFilter: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -436,7 +475,8 @@ class _$_Fetch implements _Fetch {
       required this.shipToInfo,
       required this.user,
       required this.viewByItemFilter,
-      required this.searchKey});
+      required this.searchKey,
+      required this.salesOrganisation});
 
   @override
   final SalesOrganisationConfigs salesOrgConfigs;
@@ -450,10 +490,12 @@ class _$_Fetch implements _Fetch {
   final ViewByItemFilter viewByItemFilter;
   @override
   final SearchKey searchKey;
+  @override
+  final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'ViewByItemsEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, viewByItemFilter: $viewByItemFilter, searchKey: $searchKey)';
+    return 'ViewByItemsEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, viewByItemFilter: $viewByItemFilter, searchKey: $searchKey, salesOrganisation: $salesOrganisation)';
   }
 
   @override
@@ -471,12 +513,21 @@ class _$_Fetch implements _Fetch {
             (identical(other.viewByItemFilter, viewByItemFilter) ||
                 other.viewByItemFilter == viewByItemFilter) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrgConfigs,
-      customerCodeInfo, shipToInfo, user, viewByItemFilter, searchKey);
+  int get hashCode => Object.hash(
+      runtimeType,
+      salesOrgConfigs,
+      customerCodeInfo,
+      shipToInfo,
+      user,
+      viewByItemFilter,
+      searchKey,
+      salesOrganisation);
 
   @JsonKey(ignore: true)
   @override
@@ -494,7 +545,8 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -502,15 +554,20 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         autoSearchProduct,
-    required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisation salesOrganisation)
         loadMore,
     required TResult Function() fetchProductImage,
   }) {
     return fetch(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-        viewByItemFilter, searchKey);
+        viewByItemFilter, searchKey, salesOrganisation);
   }
 
   @override
@@ -523,7 +580,8 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -531,18 +589,20 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult? Function()? fetchProductImage,
   }) {
     return fetch?.call(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-        viewByItemFilter, searchKey);
+        viewByItemFilter, searchKey, salesOrganisation);
   }
 
   @override
@@ -555,7 +615,8 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -563,20 +624,22 @@ class _$_Fetch implements _Fetch {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
       return fetch(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-          viewByItemFilter, searchKey);
+          viewByItemFilter, searchKey, salesOrganisation);
     }
     return orElse();
   }
@@ -629,7 +692,8 @@ abstract class _Fetch implements ViewByItemsEvent {
       required final ShipToInfo shipToInfo,
       required final User user,
       required final ViewByItemFilter viewByItemFilter,
-      required final SearchKey searchKey}) = _$_Fetch;
+      required final SearchKey searchKey,
+      required final SalesOrganisation salesOrganisation}) = _$_Fetch;
 
   SalesOrganisationConfigs get salesOrgConfigs;
   CustomerCodeInfo get customerCodeInfo;
@@ -637,6 +701,7 @@ abstract class _Fetch implements ViewByItemsEvent {
   User get user;
   ViewByItemFilter get viewByItemFilter;
   SearchKey get searchKey;
+  SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -654,13 +719,15 @@ abstract class _$$_AutoSearchProductCopyWith<$Res> {
       ShipToInfo shipToInfo,
       User user,
       ViewByItemFilter viewByItemFilter,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      SalesOrganisation salesOrganisation});
 
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
   $ViewByItemFilterCopyWith<$Res> get viewByItemFilter;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -680,6 +747,7 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
     Object? user = null,
     Object? viewByItemFilter = null,
     Object? searchKey = null,
+    Object? salesOrganisation = null,
   }) {
     return _then(_$_AutoSearchProduct(
       salesOrgConfigs: null == salesOrgConfigs
@@ -706,6 +774,10 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
     ));
   }
 
@@ -749,6 +821,14 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
       return _then(_value.copyWith(viewByItemFilter: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -760,7 +840,8 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
       required this.shipToInfo,
       required this.user,
       required this.viewByItemFilter,
-      required this.searchKey});
+      required this.searchKey,
+      required this.salesOrganisation});
 
   @override
   final SalesOrganisationConfigs salesOrgConfigs;
@@ -774,10 +855,12 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
   final ViewByItemFilter viewByItemFilter;
   @override
   final SearchKey searchKey;
+  @override
+  final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'ViewByItemsEvent.autoSearchProduct(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, viewByItemFilter: $viewByItemFilter, searchKey: $searchKey)';
+    return 'ViewByItemsEvent.autoSearchProduct(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, viewByItemFilter: $viewByItemFilter, searchKey: $searchKey, salesOrganisation: $salesOrganisation)';
   }
 
   @override
@@ -795,12 +878,21 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             (identical(other.viewByItemFilter, viewByItemFilter) ||
                 other.viewByItemFilter == viewByItemFilter) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrgConfigs,
-      customerCodeInfo, shipToInfo, user, viewByItemFilter, searchKey);
+  int get hashCode => Object.hash(
+      runtimeType,
+      salesOrgConfigs,
+      customerCodeInfo,
+      shipToInfo,
+      user,
+      viewByItemFilter,
+      searchKey,
+      salesOrganisation);
 
   @JsonKey(ignore: true)
   @override
@@ -819,7 +911,8 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -827,15 +920,20 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         autoSearchProduct,
-    required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisation salesOrganisation)
         loadMore,
     required TResult Function() fetchProductImage,
   }) {
     return autoSearchProduct(salesOrgConfigs, customerCodeInfo, shipToInfo,
-        user, viewByItemFilter, searchKey);
+        user, viewByItemFilter, searchKey, salesOrganisation);
   }
 
   @override
@@ -848,7 +946,8 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -856,18 +955,20 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult? Function()? fetchProductImage,
   }) {
     return autoSearchProduct?.call(salesOrgConfigs, customerCodeInfo,
-        shipToInfo, user, viewByItemFilter, searchKey);
+        shipToInfo, user, viewByItemFilter, searchKey, salesOrganisation);
   }
 
   @override
@@ -880,7 +981,8 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -888,20 +990,22 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (autoSearchProduct != null) {
       return autoSearchProduct(salesOrgConfigs, customerCodeInfo, shipToInfo,
-          user, viewByItemFilter, searchKey);
+          user, viewByItemFilter, searchKey, salesOrganisation);
     }
     return orElse();
   }
@@ -949,12 +1053,14 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
 
 abstract class _AutoSearchProduct implements ViewByItemsEvent {
   const factory _AutoSearchProduct(
-      {required final SalesOrganisationConfigs salesOrgConfigs,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final User user,
-      required final ViewByItemFilter viewByItemFilter,
-      required final SearchKey searchKey}) = _$_AutoSearchProduct;
+          {required final SalesOrganisationConfigs salesOrgConfigs,
+          required final CustomerCodeInfo customerCodeInfo,
+          required final ShipToInfo shipToInfo,
+          required final User user,
+          required final ViewByItemFilter viewByItemFilter,
+          required final SearchKey searchKey,
+          required final SalesOrganisation salesOrganisation}) =
+      _$_AutoSearchProduct;
 
   SalesOrganisationConfigs get salesOrgConfigs;
   CustomerCodeInfo get customerCodeInfo;
@@ -962,6 +1068,7 @@ abstract class _AutoSearchProduct implements ViewByItemsEvent {
   User get user;
   ViewByItemFilter get viewByItemFilter;
   SearchKey get searchKey;
+  SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
   _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
       throw _privateConstructorUsedError;
@@ -977,12 +1084,14 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
       {SalesOrganisationConfigs salesOrgConfigs,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
-      User user});
+      User user,
+      SalesOrganisation salesOrganisation});
 
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $UserCopyWith<$Res> get user;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -1000,6 +1109,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? user = null,
+    Object? salesOrganisation = null,
   }) {
     return _then(_$_LoadMore(
       salesOrgConfigs: null == salesOrgConfigs
@@ -1018,6 +1128,10 @@ class __$$_LoadMoreCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
     ));
   }
 
@@ -1053,6 +1167,14 @@ class __$$_LoadMoreCopyWithImpl<$Res>
       return _then(_value.copyWith(user: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -1062,7 +1184,8 @@ class _$_LoadMore implements _LoadMore {
       {required this.salesOrgConfigs,
       required this.customerCodeInfo,
       required this.shipToInfo,
-      required this.user});
+      required this.user,
+      required this.salesOrganisation});
 
   @override
   final SalesOrganisationConfigs salesOrgConfigs;
@@ -1072,10 +1195,12 @@ class _$_LoadMore implements _LoadMore {
   final ShipToInfo shipToInfo;
   @override
   final User user;
+  @override
+  final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'ViewByItemsEvent.loadMore(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user)';
+    return 'ViewByItemsEvent.loadMore(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrganisation: $salesOrganisation)';
   }
 
   @override
@@ -1089,12 +1214,14 @@ class _$_LoadMore implements _LoadMore {
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrgConfigs, customerCodeInfo, shipToInfo, user);
+  int get hashCode => Object.hash(runtimeType, salesOrgConfigs,
+      customerCodeInfo, shipToInfo, user, salesOrganisation);
 
   @JsonKey(ignore: true)
   @override
@@ -1112,7 +1239,8 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -1120,14 +1248,20 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         autoSearchProduct,
-    required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisation salesOrganisation)
         loadMore,
     required TResult Function() fetchProductImage,
   }) {
-    return loadMore(salesOrgConfigs, customerCodeInfo, shipToInfo, user);
+    return loadMore(
+        salesOrgConfigs, customerCodeInfo, shipToInfo, user, salesOrganisation);
   }
 
   @override
@@ -1140,7 +1274,8 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -1148,17 +1283,20 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult? Function()? fetchProductImage,
   }) {
-    return loadMore?.call(salesOrgConfigs, customerCodeInfo, shipToInfo, user);
+    return loadMore?.call(
+        salesOrgConfigs, customerCodeInfo, shipToInfo, user, salesOrganisation);
   }
 
   @override
@@ -1171,7 +1309,8 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -1179,19 +1318,22 @@ class _$_LoadMore implements _LoadMore {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(salesOrgConfigs, customerCodeInfo, shipToInfo, user);
+      return loadMore(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
+          salesOrganisation);
     }
     return orElse();
   }
@@ -1242,12 +1384,14 @@ abstract class _LoadMore implements ViewByItemsEvent {
       {required final SalesOrganisationConfigs salesOrgConfigs,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final User user}) = _$_LoadMore;
+      required final User user,
+      required final SalesOrganisation salesOrganisation}) = _$_LoadMore;
 
   SalesOrganisationConfigs get salesOrgConfigs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   User get user;
+  SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
   _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1298,7 +1442,8 @@ class _$_FetchProductImage implements _FetchProductImage {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -1306,10 +1451,15 @@ class _$_FetchProductImage implements _FetchProductImage {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)
         autoSearchProduct,
-    required TResult Function(SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo, User user)
+    required TResult Function(
+            SalesOrganisationConfigs salesOrgConfigs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisation salesOrganisation)
         loadMore,
     required TResult Function() fetchProductImage,
   }) {
@@ -1326,7 +1476,8 @@ class _$_FetchProductImage implements _FetchProductImage {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -1334,13 +1485,15 @@ class _$_FetchProductImage implements _FetchProductImage {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult? Function()? fetchProductImage,
   }) {
@@ -1357,7 +1510,8 @@ class _$_FetchProductImage implements _FetchProductImage {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
@@ -1365,13 +1519,15 @@ class _$_FetchProductImage implements _FetchProductImage {
             ShipToInfo shipToInfo,
             User user,
             ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey)?
+            SearchKey searchKey,
+            SalesOrganisation salesOrganisation)?
         autoSearchProduct,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
-            User user)?
+            User user,
+            SalesOrganisation salesOrganisation)?
         loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),

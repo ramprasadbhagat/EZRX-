@@ -1,7 +1,7 @@
 class ViewByItemQueryMutation {
   String getViewByItem() {
     return '''
-     query orderHistoryFetchByItems(\$soldTo: String!, \$fromDate: String, \$toDate: String, \$shipTo: [String], \$first: Int, \$after: Int, \$language: String, \$orderStatus: [String!], \$query: String) {
+     query orderHistoryFetchByItems(\$soldTo: String!, \$fromDate: String, \$toDate: String, \$shipTo: [String], \$first: Int, \$after: Int, \$language: String, \$orderStatus: [String!], \$searchKey: String, \$salesOrg: [String]) {
   orderHistoryFetchByItems(
     soldTo: \$soldTo
     fromDate: \$fromDate
@@ -11,7 +11,8 @@ class ViewByItemQueryMutation {
     after: \$after
     language: \$language
     orderStatus: \$orderStatus
-    query: \$query
+    searchKey: \$searchKey
+    salesOrg: \$salesOrg
   ) {
     OrderCount
     OrderHistory {

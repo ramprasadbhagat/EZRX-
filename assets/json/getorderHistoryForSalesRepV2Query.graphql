@@ -1,5 +1,5 @@
-query orderHistoryForSalesRepV2($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $language: String, $userName: String!, $orderStatus: [String!]) {
-  orderHistoryForSalesRepV2(
+query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $language: String, $orderStatus: [String!], $searchKey: String, $isGreen: Boolean, $salesOrg: [String], $filterBlockCustomer: Boolean) {
+  orderHistoryFetchByItems(
     soldTo: $soldTo
     fromDate: $fromDate
     toDate: $toDate
@@ -7,8 +7,11 @@ query orderHistoryForSalesRepV2($soldTo: String!, $fromDate: String, $toDate: St
     first: $first
     after: $after
     language: $language
-    userName: $userName
     orderStatus: $orderStatus
+    searchKey: $searchKey
+    isGreen: $isGreen
+    salesOrg: $salesOrg
+    filterBlockedCustomer: $filterBlockCustomer
   ) {
     OrderCount
     OrderHistory {
@@ -16,33 +19,55 @@ query orderHistoryForSalesRepV2($soldTo: String!, $fromDate: String, $toDate: St
         SoldTo
         CompanyName
         ShipTo
-        PaymentTerm {
-          PaymentTermCode
-          PaymentTermDescription
-         
-        }
-       
+      
       }
       OrderItems {
         MaterialCode
         MaterialDescription
+        DefaultMaterialDescription
+        CreatedTime
         CreatedDate
         Qty
         UnitPrice
         TotalPrice
         Status
+        LineNumber
+        Tax
         DeliveryDate
+        DeliveryTime
         OrderType
+        EZRXNumber
         OrderNumber
-        OrderNumber
-        Batch
         OrderBy
+        PurchaseOrderType
+        WarehouseStorageCondition
+        Available
+        Batch
         ExpiryDate
+        IsMarketplace
+        Seller
         POReference
         ManufactureName
         InvoiceNumber
+        IsBonusMaterial
+        GovernmentMaterialCode
+        ItemRegistrationNumber
         TelephoneNumber
-        
+        HidePrice
+        TenderContractNumber
+        TenderOrderReason
+        TenderPrice
+        TenderPriceUnit
+        TenderContractReference
+        isGreen
+        IsBundle
+        CompanyName
+        mrp
+        promotype
+        promoStatus
+        ShipTo
+        SoldTo
+       
       }
      
     }
@@ -52,17 +77,18 @@ query orderHistoryForSalesRepV2($soldTo: String!, $fromDate: String, $toDate: St
 
  variable:
 {
-  "soldTo": "0030068160",
-  "fromDate": "20230607",
-  "toDate": "20230613",
+  "soldTo": "0030082707",
   "shipTo": [
-    "0070132214"
+    "0070149863"
   ],
   "first": 10,
   "after": 0,
   "language": "EN",
-  "userName": "testintsalesrep",
-  "orderStatus": []
+  "salesOrg": [
+    "2001"
+  ],
+  "filterBlockCustomer": false,
+  "searchKey": "41773"
 }
                 
               

@@ -31,6 +31,7 @@ class OrderHistoryRemoteDataSource {
     required int offset,
     required String language,
     required String searchKey,
+     required String salesOrg,
     required Map<String, dynamic> filterQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
@@ -42,7 +43,8 @@ class OrderHistoryRemoteDataSource {
         'first': pageSize,
         'after': offset,
         'language': language,
-        'query': searchKey,
+        'salesOrg': [salesOrg],
+        'searchKey': searchKey,
         ...filterQuery,
       };
 

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -40,6 +41,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
               user: e.user,
               viewByItemFilter: e.viewByItemFilter,
               searchKey: e.searchKey,
+              salesOrganisation: e.salesOrganisation,
             ),
           );
         } else {
@@ -74,6 +76,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
           offset: 0,
           viewByItemFilter: e.viewByItemFilter,
           searchKey: e.searchKey,
+          salesOrganisation: e.salesOrganisation,
         );
 
         failureOrSuccess.fold(
@@ -114,6 +117,7 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
         offset: state.orderHistoryList.orderHistoryItems.length,
         viewByItemFilter: state.appliedFilter,
         searchKey: state.searchKey,
+        salesOrganisation: e.salesOrganisation,
       );
 
       failureOrSuccess.fold(

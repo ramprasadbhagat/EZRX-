@@ -75,6 +75,8 @@ class ViewByItemsPage extends StatelessWidget {
                     user: context.read<UserBloc>().state.user,
                     viewByItemFilter: ViewByItemFilter.empty(),
                     searchKey: SearchKey(''),
+                    salesOrganisation:
+                        context.read<EligibilityBloc>().state.salesOrganisation,
                   ),
                 );
           },
@@ -86,6 +88,8 @@ class ViewByItemsPage extends StatelessWidget {
                   salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
                   shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
                   user: context.read<UserBloc>().state.user,
+                  salesOrganisation:
+                      context.read<EligibilityBloc>().state.salesOrganisation,
                 ),
               ),
           itemBuilder: (context, index, item) => _ViewByOrderItemGroup(

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -41,6 +42,7 @@ class ViewByItemRepository implements IViewByItemRepository {
     required int offset,
     required ViewByItemFilter viewByItemFilter,
     required SearchKey searchKey,
+    required SalesOrganisation salesOrganisation,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -64,8 +66,7 @@ class ViewByItemRepository implements IViewByItemRepository {
               language: user.preferredLanguage.languageCode,
               userName: user.username.getOrCrash(),
               filterQuery:
-                  ViewByItemFilterDto.fromDomain(viewByItemFilter)
-                      .toJson(),
+                  ViewByItemFilterDto.fromDomain(viewByItemFilter).toJson(),
               query: searchKey.getOrCrash(),
             )
           : await orderHistoryRemoteDataSource.getViewByItems(
@@ -74,9 +75,9 @@ class ViewByItemRepository implements IViewByItemRepository {
               pageSize: pageSize,
               offset: offset,
               language: user.preferredLanguage.languageCode,
+              salesOrg: salesOrganisation.salesOrg.getOrCrash(),
               filterQuery:
-                  ViewByItemFilterDto.fromDomain(viewByItemFilter)
-                      .toJson(),
+                  ViewByItemFilterDto.fromDomain(viewByItemFilter).toJson(),
               searchKey: searchKey.getOrCrash(),
             );
 

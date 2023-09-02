@@ -887,6 +887,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 viewByItemFilter:
                     context.read<ViewByItemsBloc>().state.appliedFilter,
                 searchKey: SearchKey(''),
+                salesOrganisation: salesOrgState.salesOrganisation,
               ),
             );
       }

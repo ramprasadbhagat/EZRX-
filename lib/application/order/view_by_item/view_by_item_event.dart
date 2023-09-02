@@ -10,6 +10,7 @@ class ViewByItemsEvent with _$ViewByItemsEvent {
     required User user,
     required ViewByItemFilter viewByItemFilter,
     required SearchKey searchKey,
+    required SalesOrganisation salesOrganisation,
   }) = _Fetch;
   const factory ViewByItemsEvent.autoSearchProduct({
     required SalesOrganisationConfigs salesOrgConfigs,
@@ -18,12 +19,14 @@ class ViewByItemsEvent with _$ViewByItemsEvent {
     required User user,
     required ViewByItemFilter viewByItemFilter,
     required SearchKey searchKey,
+    required SalesOrganisation salesOrganisation,
   }) = _AutoSearchProduct;
   const factory ViewByItemsEvent.loadMore({
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
+    required SalesOrganisation salesOrganisation,
   }) = _LoadMore;
   const factory ViewByItemsEvent.fetchProductImage() = _FetchProductImage;
 }
