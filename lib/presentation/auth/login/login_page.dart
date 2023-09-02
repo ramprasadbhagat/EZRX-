@@ -41,7 +41,8 @@ class LoginPage extends StatelessWidget {
             );
           },
           buildWhen: (previous, current) =>
-              previous.showErrorMessages != current.showErrorMessages,
+              previous.showErrorMessages != current.showErrorMessages ||
+              previous.currentMarket != current.currentMarket,
           builder: (context, state) {
             return Responsive(
               tablet: LoginWeb(

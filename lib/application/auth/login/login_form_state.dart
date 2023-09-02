@@ -2,6 +2,8 @@ part of 'login_form_bloc.dart';
 
 @freezed
 class LoginFormState with _$LoginFormState {
+  const LoginFormState._();
+
   const factory LoginFormState({
     required Username username,
     required Password password,

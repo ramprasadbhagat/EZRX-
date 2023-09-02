@@ -2240,7 +2240,7 @@ class __$$_LoginFormStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoginFormState implements _LoginFormState {
+class _$_LoginFormState extends _LoginFormState {
   const _$_LoginFormState(
       {required this.username,
       required this.password,
@@ -2249,7 +2249,8 @@ class _$_LoginFormState implements _LoginFormState {
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.authFailureOrSuccessOption,
-      required this.currentMarket});
+      required this.currentMarket})
+      : super._();
 
   @override
   final Username username;
@@ -2317,7 +2318,7 @@ class _$_LoginFormState implements _LoginFormState {
       __$$_LoginFormStateCopyWithImpl<_$_LoginFormState>(this, _$identity);
 }
 
-abstract class _LoginFormState implements LoginFormState {
+abstract class _LoginFormState extends LoginFormState {
   const factory _LoginFormState(
       {required final Username username,
       required final Password password,
@@ -2328,6 +2329,7 @@ abstract class _LoginFormState implements LoginFormState {
       required final Option<Either<ApiFailure, dynamic>>
           authFailureOrSuccessOption,
       required final AppMarket currentMarket}) = _$_LoginFormState;
+  const _LoginFormState._() : super._();
 
   @override
   Username get username;
