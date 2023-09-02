@@ -8,6 +8,7 @@ class ArticlesInfoState with _$ArticlesInfoState {
     required AnnouncementArticleInfo articleInfo,
     required bool isFetching,
     required bool canLoadMore,
+    required SearchKey searchKey,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
   }) = _ArticlesInfoState;
 
@@ -15,6 +16,12 @@ class ArticlesInfoState with _$ArticlesInfoState {
         isFetching: false,
         articleInfo: AnnouncementArticleInfo.empty(),
         canLoadMore: true,
+        searchKey: SearchKey(''),
         apiFailureOrSuccessOption: none(),
+      );
+
+  List<AnnouncementArticleItem> get filterAnnouncementListBySearchKey =>
+      articleInfo.filterAnnouncementListBySearchKey(
+        searchKey.searchValueOrEmpty.toLowerCase(),
       );
 }

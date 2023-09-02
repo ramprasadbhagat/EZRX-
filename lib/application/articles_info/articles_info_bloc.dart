@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
@@ -106,6 +107,11 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
           },
         );
       },
+      setSearchKey: (e) async => emit(
+        state.copyWith(
+          searchKey: SearchKey(e.searchKey),
+        ),
+      ),
     );
   }
 }

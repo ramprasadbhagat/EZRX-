@@ -11,4 +11,8 @@ class ArticlesInfoEvent with _$ArticlesInfoEvent {
     required SalesOrg salesOrg,
     required User user,
   }) = _LoadMoreArticles;
+
+  const factory ArticlesInfoEvent.setSearchKey({
+    required String searchKey,
+  }) = _SetSearchKey;
 }

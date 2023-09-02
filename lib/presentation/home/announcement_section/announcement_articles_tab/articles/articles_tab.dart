@@ -68,7 +68,8 @@ class _ArticlesTabState extends State<ArticlesTab> {
     return Scaffold(
       body: BlocBuilder<ArticlesInfoBloc, ArticlesInfoState>(
         buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching,
+            previous.isFetching != current.isFetching ||
+            previous.searchKey != current.searchKey,
         builder: (context, state) {
           return state.isFetching && state.articleInfo.announcementList.isEmpty
               ? LoadingShimmer.logo(
@@ -102,7 +103,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
                     itemBuilder: (context, index, item) => _ArticlesTile(
                       article: item,
                     ),
-                    items: state.articleInfo.announcementList,
+                    items: state.filterAnnouncementListBySearchKey,
                   ),
                 );
         },

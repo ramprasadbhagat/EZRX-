@@ -20,12 +20,6 @@ class AnnouncementInfoState with _$AnnouncementInfoState {
         apiFailureOrSuccessOption: none(),
       );
 
-  List<AnnouncementArticleItem> get searchedAnnouncementList =>
-      announcementInfo.announcementList
-          .where(
-            (element) => element.title
-                .toLowerCase()
-                .contains(searchKey.searchValueOrEmpty.toLowerCase()),
-          )
-          .toList();
+  List<AnnouncementArticleItem> get searchedAnnouncementList => announcementInfo
+      .filterAnnouncementListBySearchKey(searchKey.searchValueOrEmpty);
 }

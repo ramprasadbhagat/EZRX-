@@ -19,6 +19,15 @@ class AnnouncementArticleInfo with _$AnnouncementArticleInfo {
         announcementList: <AnnouncementArticleItem>[],
         endCursor: '',
       );
+
+  List<AnnouncementArticleItem> filterAnnouncementListBySearchKey(
+    String searchKey,
+  ) =>
+      announcementList
+          .where(
+            (element) => element.isSearchKeyMatching(searchKey),
+          )
+          .toList();
 }
 
 @freezed
@@ -41,4 +50,7 @@ class AnnouncementArticleItem with _$AnnouncementArticleItem {
         content: HtmlContent(''),
         publishedDate: DateTimeStringValue(''),
       );
+
+  bool isSearchKeyMatching(String searchKey) =>
+      title.toLowerCase().contains(searchKey);
 }
