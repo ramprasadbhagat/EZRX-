@@ -42,6 +42,9 @@ class _CategoryChip extends StatelessWidget {
                         right: 8.0,
                       ),
                       child: _CustomChip(
+                        key: WidgetKeys.genericKey(
+                          key: 'customChip${e.displayName}',
+                        ),
                         title: e.displayName,
                         isSelected:
                             state.selectedCategory.getOrDefaultValue('') ==

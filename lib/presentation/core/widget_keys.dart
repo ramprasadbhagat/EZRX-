@@ -512,4 +512,10 @@ class WidgetKeys {
   //============================================================
   static const Key notificationNotFoundRecordKey =
       Key('notificationNotFoundRecordKey');
+        //============================================================
+  // FAQ page
+  //============================================================
+  static const Key faqNotFoundRecordKey =
+      Key('faqNotFoundRecordKey');
+
 }

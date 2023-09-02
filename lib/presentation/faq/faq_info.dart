@@ -39,6 +39,7 @@ class FaqInfoPage extends StatelessWidget {
         return ScrollList<FAQCategoryGroup>(
           controller: ScrollController(),
           noRecordFoundWidget: NoRecordFound(
+            key: WidgetKeys.faqNotFoundRecordKey,
             title: "That didn't match anything".tr(),
             subTitle:
                 "Try adjusting your search to find what you're looking for or"
@@ -48,8 +49,11 @@ class FaqInfoPage extends StatelessWidget {
           ),
           isLoading: state.isFetching,
           itemBuilder: (context, index, item) => Column(
+            
             children: [
               _CategoryTile(
+                key: WidgetKeys.genericKey(
+                    key: item.faqItem.first.category.getOrDefaultValue(''),),
                 faqCategoryGroup: item,
               ),
               index == state.getSearchedFaqList.getFAQItemList.length - 1
@@ -64,7 +68,7 @@ class FaqInfoPage extends StatelessWidget {
                   user: context.read<UserBloc>().state.user,
                 ),
               ),
-          onLoadingMore: () => context.read<FaqBloc>().add(
+          onLoadingMore:() => context.read<FaqBloc>().add(
                 FaqEvent.loadMoreAFaq(
                   salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
                   user: context.read<UserBloc>().state.user,

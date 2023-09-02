@@ -36,7 +36,6 @@ class FAQPage extends StatelessWidget {
           ),
           centerTitle: false,
           leading: IconButton(
-            key: WidgetKeys.materialDetailsPageBack,
             onPressed: () => Navigator.pop(context),
             icon: const Icon(
               Icons.chevron_left,
