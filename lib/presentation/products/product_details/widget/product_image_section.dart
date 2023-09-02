@@ -13,7 +13,8 @@ class _ProductImageSection extends StatelessWidget {
           previous.selectedImage != current.selectedImage,
       builder: (context, productDetailState) {
         return BlocBuilder<ProductImageBloc, ProductImageState>(
-          buildWhen: (previous, current) => previous != current,
+          buildWhen: (previous, current) =>
+              previous != current || previous.isFetching != current.isFetching,
           builder: (context, productImageState) {
             final productImage = productImageState.getMaterialImage(
               productDetailState
@@ -50,6 +51,7 @@ class _ProductImageSection extends StatelessWidget {
                 _ProductImages(
                   productImage: productImage,
                   selected: productDetailState.selectedImageIndex,
+                  state: productDetailState,
                 ),
               ],
             );
@@ -63,54 +65,82 @@ class _ProductImageSection extends StatelessWidget {
 class _ProductImages extends StatelessWidget {
   final ProductImages productImage;
   final int selected;
+  final ProductDetailState state;
   const _ProductImages({
     Key? key,
     required this.productImage,
     required this.selected,
+    required this.state,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (productImage.image.isEmpty) return const SizedBox.shrink();
-
-    return Container(
-      key: WidgetKeys.materialDetailsCarousel,
-      margin: const EdgeInsets.all(16),
-      height: MediaQuery.of(context).size.height * 0.05,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: productImage.image.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () => context.read<ProductDetailBloc>().add(
-                  ProductDetailEvent.changeImage(index),
-                ),
-            child: Container(
-              key: WidgetKeys.genericKey(
-                key: 'selected$index${selected == index}',
-              ),
-              margin: const EdgeInsets.symmetric(horizontal: 2),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: selected == index
-                      ? ZPColors.secondaryMustard
-                      : ZPColors.extraLightGrey3,
-                  width: 2.0,
-                ),
-                borderRadius: BorderRadius.circular(6.0),
-              ),
-              child: CustomImage(
-                key: WidgetKeys.materialDetailsCarouselImage,
-                imageUrl: productImage.image.elementAt(index),
-                fit: BoxFit.fill,
-                height: MediaQuery.of(context).size.height * 0.05,
-                width: Responsive.isLargerThan(context, Breakpoint.desktop)
-                    ? MediaQuery.of(context).size.width * 0.08
-                    : MediaQuery.of(context).size.width * 0.1,
-              ),
-            ),
+    return !state.isFetching && productImage.image.isEmpty
+        ? const SizedBox.shrink()
+        : Container(
+            key: WidgetKeys.materialDetailsCarousel,
+            margin: const EdgeInsets.all(16),
+            height: MediaQuery.of(context).size.height * 0.05,
+            child: productImage.image.isNotEmpty
+                ? ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: productImage.image.length,
+                    itemBuilder: (context, index) {
+                      return _ProductThumbnail(
+                        index: index,
+                        productImage: productImage,
+                        selected: selected,
+                      );
+                    },
+                  )
+                : const SizedBox.shrink(),
           );
-        },
+  }
+}
+
+class _ProductThumbnail extends StatelessWidget {
+  const _ProductThumbnail({
+    Key? key,
+    required this.productImage,
+    required this.selected,
+    required this.index,
+  }) : super(key: key);
+  final ProductImages productImage;
+  final int selected;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => context.read<ProductDetailBloc>().add(
+            ProductDetailEvent.changeImage(index),
+          ),
+      child: Container(
+        key: WidgetKeys.genericKey(
+          key: 'selected$index${selected == index}',
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 2),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: selected == index
+                ? ZPColors.secondaryMustard
+                : ZPColors.extraLightGrey3,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(6.0),
+        ),
+        child: CustomImage(
+          key: WidgetKeys.materialDetailsCarouselImage,
+          imageUrl: productImage.image.elementAt(index),
+          fit: BoxFit.fill,
+          height: MediaQuery.of(context).size.height * 0.05,
+          width: Responsive.isLargerThan(
+            context,
+            Breakpoint.desktop,
+          )
+              ? MediaQuery.of(context).size.width * 0.08
+              : MediaQuery.of(context).size.width * 0.1,
+        ),
       ),
     );
   }

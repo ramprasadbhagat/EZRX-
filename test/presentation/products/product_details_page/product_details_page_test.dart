@@ -326,12 +326,14 @@ void main() {
       });
 
       testWidgets('Product Details Related Products Visible', (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            isFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty(),
+          ),
+        );
         final expectedStates = Stream.fromIterable(
           [
-            ProductDetailState.initial().copyWith(
-              isFetching: true,
-              productDetailAggregate: ProductDetailAggregate.empty(),
-            ),
             ProductDetailState.initial().copyWith(
               isFetching: false,
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
@@ -345,6 +347,10 @@ void main() {
         whenListen(productDetailMockBloc, expectedStates);
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
+        final similarProductSectionFinder =
+            find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
+        final similarProductItemFinder =
+            find.byKey(WidgetKeys.materialDetailsSimilarProductItem);
 
         expect(similarProductSectionFinder, findsOneWidget);
         expect(similarProductItemFinder, findsAtLeastNWidgets(1));
@@ -446,7 +452,6 @@ void main() {
         final selectedCarouselImageKeyFinder =
             find.byKey(const ValueKey('selected0true'));
         expect(selectedCarouselImageKeyFinder, findsOneWidget);
-
       });
 
       testWidgets('Add Product As Favourite Test', (tester) async {
