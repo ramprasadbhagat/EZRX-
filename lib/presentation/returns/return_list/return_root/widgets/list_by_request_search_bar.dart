@@ -13,11 +13,6 @@ class _ListByRequestSearchBar extends StatelessWidget {
     if (!onClear && searchKey.isEmpty) return;
     context.read<ReturnListByRequestBloc>().add(
           ReturnListByRequestEvent.fetch(
-            salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-            user: context.read<UserBloc>().state.user,
             appliedFilter:
                 context.read<ReturnListByRequestBloc>().state.appliedFilter,
             searchKey: SearchKey.searchFilter(searchKey),
@@ -38,22 +33,16 @@ class _ListByRequestSearchBar extends StatelessWidget {
           ),
           enabled: !state.isFetching,
           initialValue: state.searchKey.searchValueOrEmpty,
-          onSearchChanged: (value) => context
-              .read<ReturnListByRequestBloc>()
-              .add(
-                ReturnListByRequestEvent.autoSearchProduct(
-                  salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-                  user: context.read<UserBloc>().state.user,
-                  appliedFilter: context
-                      .read<ReturnListByRequestBloc>()
-                      .state
-                      .appliedFilter,
-                  searchKey: SearchKey.searchFilter(value),
-                ),
-              ),
+          onSearchChanged: (value) =>
+              context.read<ReturnListByRequestBloc>().add(
+                    ReturnListByRequestEvent.autoSearchProduct(
+                      appliedFilter: context
+                          .read<ReturnListByRequestBloc>()
+                          .state
+                          .appliedFilter,
+                      searchKey: SearchKey.searchFilter(value),
+                    ),
+                  ),
           onSearchSubmitted: (value) => _search(
             context: context,
             searchKey: value,

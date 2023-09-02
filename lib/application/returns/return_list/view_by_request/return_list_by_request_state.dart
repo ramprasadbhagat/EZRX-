@@ -10,6 +10,10 @@ class ReturnListByRequestState with _$ReturnListByRequestState {
     required bool canLoadMore,
     required ReturnFilter appliedFilter,
     required SearchKey searchKey,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipInfo,
+    required SalesOrg salesOrg,
+    required User user,
   }) = _ReturnListByRequestState;
 
   factory ReturnListByRequestState.initial() => ReturnListByRequestState(
@@ -19,5 +23,9 @@ class ReturnListByRequestState with _$ReturnListByRequestState {
         returnItemList: <ReturnItem>[],
         appliedFilter: ReturnFilter.empty(),
         searchKey: SearchKey.searchFilter(''),
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        salesOrg: SalesOrg(''),
+        shipInfo: ShipToInfo.empty(),
+        user: User.empty(),
       );
 }

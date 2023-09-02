@@ -27,7 +27,7 @@ void main() {
   final mockCustomerCodeInfo =
       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'mockCustomerCode');
   final mockAppliedFilter = ReturnFilter.empty()
-      .copyWith(returnDateFrom: DateTimeStringValue('mockDateTimeFrom'));
+      .copyWith(returnDateFrom: DateTimeStringValue('20233108'));
   final mockSearchKey = SearchKey('searchKey');
   const pageSize = 24;
   final mockReturnItemList = <ReturnItem>[
@@ -52,10 +52,20 @@ void main() {
         config: config,
       ),
       act: (ReturnListByRequestBloc bloc) => bloc.add(
-        const ReturnListByRequestEvent.initialized(),
+        ReturnListByRequestEvent.initialized(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+        ),
       ),
       expect: () => [
-        ReturnListByRequestState.initial(),
+        ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+        ),
       ],
     );
 
@@ -64,6 +74,12 @@ void main() {
       build: () => ReturnListByRequestBloc(
         returnListRepository: returnListRepositoryMock,
         config: config,
+      ),
+      seed: () => ReturnListByRequestState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
       ),
       setUp: () {
         when(
@@ -85,22 +101,26 @@ void main() {
       },
       act: (ReturnListByRequestBloc bloc) => bloc.add(
         ReturnListByRequestEvent.fetch(
-          salesOrg: mockSalesOrg,
-          shipInfo: mockShipInfo,
-          customerCodeInfo: mockCustomerCodeInfo,
-          user: mockUser,
           appliedFilter: mockAppliedFilter,
           searchKey: mockSearchKey,
         ),
       ),
       expect: () => [
         ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           failureOrSuccessOption: none(),
           isFetching: true,
           appliedFilter: mockAppliedFilter,
           searchKey: mockSearchKey,
         ),
         ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           failureOrSuccessOption: none(),
           isFetching: false,
           returnItemList: mockReturnItemList,
@@ -119,6 +139,12 @@ void main() {
       build: () => ReturnListByRequestBloc(
         returnListRepository: returnListRepositoryMock,
         config: config,
+      ),
+      seed: () => ReturnListByRequestState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
       ),
       setUp: () {
         when(
@@ -140,22 +166,26 @@ void main() {
       },
       act: (ReturnListByRequestBloc bloc) => bloc.add(
         ReturnListByRequestEvent.fetch(
-          salesOrg: mockSalesOrg,
-          shipInfo: mockShipInfo,
-          customerCodeInfo: mockCustomerCodeInfo,
-          user: mockUser,
           appliedFilter: mockAppliedFilter,
           searchKey: mockSearchKey,
         ),
       ),
       expect: () => [
         ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           failureOrSuccessOption: none(),
           isFetching: true,
           appliedFilter: mockAppliedFilter,
           searchKey: mockSearchKey,
         ),
         ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('api-failure'),
@@ -177,6 +207,12 @@ void main() {
         returnListRepository: returnListRepositoryMock,
         config: config,
       ),
+      seed: () => ReturnListByRequestState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
+      ),
       setUp: () {
         when(
           () => returnListRepositoryMock.fetchReturnListByRequest(
@@ -196,19 +232,22 @@ void main() {
         );
       },
       act: (ReturnListByRequestBloc bloc) => bloc.add(
-        ReturnListByRequestEvent.loadMore(
+        const ReturnListByRequestEvent.loadMore(),
+      ),
+      expect: () => [
+        ReturnListByRequestState.initial().copyWith(
           salesOrg: mockSalesOrg,
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-        ),
-      ),
-      expect: () => [
-        ReturnListByRequestState.initial().copyWith(
           failureOrSuccessOption: none(),
           isFetching: true,
         ),
         ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           failureOrSuccessOption: none(),
           isFetching: false,
           returnItemList: mockReturnItemList,
@@ -225,6 +264,12 @@ void main() {
       build: () => ReturnListByRequestBloc(
         returnListRepository: returnListRepositoryMock,
         config: config,
+      ),
+      seed: () => ReturnListByRequestState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
       ),
       setUp: () {
         when(
@@ -245,19 +290,22 @@ void main() {
         );
       },
       act: (ReturnListByRequestBloc bloc) => bloc.add(
-        ReturnListByRequestEvent.loadMore(
+        const ReturnListByRequestEvent.loadMore(),
+      ),
+      expect: () => [
+        ReturnListByRequestState.initial().copyWith(
           salesOrg: mockSalesOrg,
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-        ),
-      ),
-      expect: () => [
-        ReturnListByRequestState.initial().copyWith(
           failureOrSuccessOption: none(),
           isFetching: true,
         ),
         ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('api-failure'),
@@ -296,20 +344,23 @@ void main() {
         );
       },
       seed: () => ReturnListByRequestState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
         appliedFilter: mockAppliedFilter,
         searchKey: mockSearchKey,
         returnItemList: List.generate(24, (index) => mockReturnItemList.first),
       ),
       act: (ReturnListByRequestBloc bloc) => bloc.add(
-        ReturnListByRequestEvent.loadMore(
+        const ReturnListByRequestEvent.loadMore(),
+      ),
+      expect: () => [
+        ReturnListByRequestState.initial().copyWith(
           salesOrg: mockSalesOrg,
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-        ),
-      ),
-      expect: () => [
-        ReturnListByRequestState.initial().copyWith(
           failureOrSuccessOption: none(),
           returnItemList:
               List.generate(24, (index) => mockReturnItemList.first),
@@ -318,6 +369,10 @@ void main() {
           searchKey: mockSearchKey,
         ),
         ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           failureOrSuccessOption: none(),
           isFetching: false,
           returnItemList:
@@ -357,20 +412,23 @@ void main() {
         );
       },
       seed: () => ReturnListByRequestState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
         appliedFilter: mockAppliedFilter,
         searchKey: mockSearchKey,
         returnItemList: List.generate(24, (index) => mockReturnItemList.first),
       ),
       act: (ReturnListByRequestBloc bloc) => bloc.add(
-        ReturnListByRequestEvent.loadMore(
+        const ReturnListByRequestEvent.loadMore(),
+      ),
+      expect: () => [
+        ReturnListByRequestState.initial().copyWith(
           salesOrg: mockSalesOrg,
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-        ),
-      ),
-      expect: () => [
-        ReturnListByRequestState.initial().copyWith(
           returnItemList:
               List.generate(24, (index) => mockReturnItemList.first),
           failureOrSuccessOption: none(),
@@ -379,6 +437,10 @@ void main() {
           isFetching: true,
         ),
         ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('api-failure'),

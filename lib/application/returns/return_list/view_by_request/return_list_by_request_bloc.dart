@@ -26,17 +26,22 @@ class ReturnListByRequestBloc
     required this.returnListRepository,
     required this.config,
   }) : super(ReturnListByRequestState.initial()) {
-    on<_Initialized>((event, emit) => emit(ReturnListByRequestState.initial()));
+    on<_Initialized>(
+      (event, emit) => emit(
+        ReturnListByRequestState.initial().copyWith(
+          salesOrg: event.salesOrg,
+          user: event.user,
+          customerCodeInfo: event.customerCodeInfo,
+          shipInfo: event.shipInfo,
+        ),
+      ),
+    );
     on<_AutoSearchProduct>(
       (e, emit) {
         if (e.searchKey == state.searchKey) return;
         if (e.searchKey.isValid()) {
           add(
             _Fetch(
-              customerCodeInfo: e.customerCodeInfo,
-              salesOrg: e.salesOrg,
-              shipInfo: e.shipInfo,
-              user: e.user,
               appliedFilter: e.appliedFilter,
               searchKey: e.searchKey,
             ),
@@ -65,10 +70,10 @@ class ReturnListByRequestBloc
 
         final failureOrSuccess =
             await returnListRepository.fetchReturnListByRequest(
-          salesOrg: e.salesOrg,
-          shipToInfo: e.shipInfo,
-          customerCode: e.customerCodeInfo,
-          user: e.user,
+          salesOrg: state.salesOrg,
+          shipToInfo: state.shipInfo,
+          customerCode: state.customerCodeInfo,
+          user: state.user,
           pageSize: config.pageSize,
           offset: 0,
           appliedFilter: e.appliedFilter,
@@ -110,10 +115,10 @@ class ReturnListByRequestBloc
 
         final failureOrSuccess =
             await returnListRepository.fetchReturnListByRequest(
-          salesOrg: e.salesOrg,
-          shipToInfo: e.shipInfo,
-          customerCode: e.customerCodeInfo,
-          user: e.user,
+          salesOrg: state.salesOrg,
+          shipToInfo: state.shipInfo,
+          customerCode: state.customerCodeInfo,
+          user: state.user,
           pageSize: config.pageSize,
           offset: state.returnItemList.length,
           appliedFilter: state.appliedFilter,

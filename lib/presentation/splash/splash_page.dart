@@ -848,7 +848,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     if (state.haveShipTo) {
       final user = context.read<UserBloc>().state.user;
       final customerCodeState = context.read<CustomerCodeBloc>().state;
-
+      context.read<ReturnListByRequestBloc>().add(
+            ReturnListByRequestEvent.initialized(
+              salesOrg:
+                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: user,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
+            ),
+          );
       context.read<CartBloc>().add(
             CartEvent.initialized(
               salesOrganisationConfigs: salesOrgState.configs,
@@ -967,6 +975,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           );
     } else {
+      final user = context.read<UserBloc>().state.user;
+      final customerCodeState = context.read<CustomerCodeBloc>().state;
       context.read<ViewByItemsBloc>().add(const ViewByItemsEvent.initialized());
 
       context
@@ -982,7 +992,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             const ReturnListByItemEvent.initialized(),
           );
       context.read<ReturnListByRequestBloc>().add(
-            const ReturnListByRequestEvent.initialized(),
+            ReturnListByRequestEvent.initialized(
+              salesOrg:
+                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: user,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
+            ),
           );
     }
   }

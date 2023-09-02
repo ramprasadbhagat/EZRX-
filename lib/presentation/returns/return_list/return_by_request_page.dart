@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -82,42 +80,13 @@ class _ReturnByRequestPageState extends State<ReturnByRequestPage> {
                     onRefresh: () =>
                         context.read<ReturnListByRequestBloc>().add(
                               ReturnListByRequestEvent.fetch(
-                                salesOrg: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation
-                                    .salesOrg,
-                                shipInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .shipToInfo,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                user: context.read<UserBloc>().state.user,
                                 appliedFilter: ReturnFilter.empty(),
                                 searchKey: SearchKey(''),
                               ),
                             ),
                     onLoadingMore: () =>
                         context.read<ReturnListByRequestBloc>().add(
-                              ReturnListByRequestEvent.loadMore(
-                                salesOrg: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation
-                                    .salesOrg,
-                                shipInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .shipToInfo,
-                                customerCodeInfo: context
-                                    .read<CustomerCodeBloc>()
-                                    .state
-                                    .customerCodeInfo,
-                                user: context.read<UserBloc>().state.user,
-                              ),
+                              const ReturnListByRequestEvent.loadMore(),
                             ),
                     isLoading: state.isFetching,
                     itemBuilder: (context, index, item) {

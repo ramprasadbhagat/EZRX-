@@ -58,10 +58,6 @@ class _ReturnRootState extends State<ReturnRoot> {
         );
     context.read<ReturnListByRequestBloc>().add(
           ReturnListByRequestEvent.fetch(
-            salesOrg: salesOrg,
-            shipInfo: shipToInfo,
-            customerCodeInfo: customerCodeInfo,
-            user: user,
             appliedFilter: ReturnFilter.empty(),
             searchKey: SearchKey(''),
           ),
