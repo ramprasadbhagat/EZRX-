@@ -556,14 +556,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   ),
                 );
             if (!state.isCounterOfferVisible &&
-                context
-                        .read<PriceOverrideBloc>()
-                        .state
-                        .overriddenMaterialPrice !=
+                context.read<PriceOverrideBloc>().state.item.price !=
                     Price.empty()) {
-              context
-                  .read<PriceOverrideBloc>()
-                  .add(const PriceOverrideEvent.initialized());
+              context.read<PriceOverrideBloc>().add(
+                    const PriceOverrideEvent.initialized(),
+                  );
             }
             final enableReturn =
                 locator<RemoteConfigService>().getReturnsConfig() &&

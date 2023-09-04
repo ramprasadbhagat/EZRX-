@@ -432,8 +432,9 @@ class CartRepository implements ICartRepository {
         quantity: quantity,
         language: language,
         parentID: materialInfo.parentID,
-        counterOfferPrice:
-            counterOfferDetails.counterOfferPrice.counterOfferValue,
+        counterOfferPrice: counterOfferDetails.counterOfferPrice.doubleValue,
+        discountOverridePercentage:
+            counterOfferDetails.discountOverridePercentage.doubleValue,
         counterOfferCurrency: counterOfferDetails.counterOfferCurrency.code,
         comment: counterOfferDetails.comment.getOrDefaultValue(''),
         type: materialInfo.type.getValue(),

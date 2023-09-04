@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -91,3 +92,9 @@ double getDoubleParsedValue(String value) =>
 String getPaymentTermValue(String value) => value.isEmpty
     ? ''
     : value.characters.getRange(0, value.indexOf('-')).string;
+
+PriceOverrideValue getPriceOverrideValue(double value) =>
+    PriceOverrideValue(value);
+
+Zdp8OverrideValue getZdp8OverrideValue(double value) =>
+    Zdp8OverrideValue(value);

@@ -11,7 +11,6 @@ import 'package:ezrxmobile/domain/core/product_images/entities/product_images.da
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -33,7 +32,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 part 'widget/product_image_section.dart';
-
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({Key? key}) : super(key: key);
@@ -443,9 +441,6 @@ class _FooterState extends State<_Footer> {
                                                     _quantityEditingController
                                                         .text,
                                                   ),
-                                              counterOfferDetails:
-                                                  RequestCounterOfferDetails
-                                                      .empty(),
                                             ),
                                           );
                                     },

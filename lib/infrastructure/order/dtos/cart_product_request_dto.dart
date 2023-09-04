@@ -22,6 +22,8 @@ class CartProductRequestDto with _$CartProductRequestDto {
     @JsonKey(name: 'ParentID', defaultValue: '') required String parentID,
     @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
         required double counterOfferPrice,
+    @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0.0)
+        required double counterOfferDiscount,
     @JsonKey(name: 'Comment', defaultValue: '') required String comment,
     @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
         required String counterOfferCurrency,
@@ -42,6 +44,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
       language: cartProductRequest.language,
       parentID: cartProductRequest.parentID,
       counterOfferPrice: cartProductRequest.counterOfferPrice,
+      counterOfferDiscount: cartProductRequest.discountOverridePercentage,
       comment: cartProductRequest.comment,
       counterOfferCurrency: cartProductRequest.counterOfferCurrency,
       type: cartProductRequest.type,
@@ -59,6 +62,7 @@ class CartProductRequestDto with _$CartProductRequestDto {
       language: language,
       parentID: parentID,
       counterOfferPrice: counterOfferPrice,
+      discountOverridePercentage: counterOfferDiscount,
       comment: comment,
       counterOfferCurrency: counterOfferCurrency,
       type: type,

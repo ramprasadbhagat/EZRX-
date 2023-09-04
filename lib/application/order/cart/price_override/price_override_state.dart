@@ -5,22 +5,38 @@ class PriceOverrideState with _$PriceOverrideState {
   const PriceOverrideState._();
 
   const factory PriceOverrideState({
-    required List<Price> cartItemList,
-    required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
+    required PriceAggregate item,
     required bool isFetching,
-    required PriceOverrideValue priceOverrideValue,
-    required RequestCounterOfferDetails counterOfferDetails,
-    required Price overriddenMaterialPrice,
     required bool showErrorMessages,
+    required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
   }) = _PriceOverrideState;
 
   factory PriceOverrideState.initial() => PriceOverrideState(
-        cartItemList: <Price>[],
-        apiFailureOrSuccessOption: none(),
+        item: PriceAggregate.empty(),
         isFetching: false,
-        priceOverrideValue: PriceOverrideValue(0.0),
-        counterOfferDetails: RequestCounterOfferDetails.empty(),
-        overriddenMaterialPrice: Price.empty(),
         showErrorMessages: false,
+        apiFailureOrSuccessOption: none(),
       );
+
+  bool get isPriceOverride =>
+      item.materialInfo.counterOfferDetails.counterOfferPrice.isValid();
+  bool get isDiscountOverride =>
+      item.materialInfo.counterOfferDetails.discountOverridePercentage
+          .isValid();
+
+  double get newDiscountPrice {
+    final priceValue = isPriceOverride
+        ? item.materialInfo.counterOfferDetails.counterOfferPrice.doubleValue
+        : item.price.priceValueForDiscountOverride;
+    final discountValue = item.materialInfo.counterOfferDetails
+        .discountOverridePercentage.doubleValue;
+
+    return isDiscountOverride
+        ? (priceValue * (1 - discountValue / 100))
+        : priceValue > 0.0
+            ? priceValue
+            : item.price.priceValueForPriceOverride;
+  }
+
+  bool get isInputFieldValid => isPriceOverride || isDiscountOverride;
 }

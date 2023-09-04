@@ -420,7 +420,9 @@ void main() {
         await tester.tap(counterOfferButton);
         verify(
           () => priceOverrideBloc.add(
-            const PriceOverrideEvent.initialized(),
+            PriceOverrideEvent.setProduct(
+              item: cartItem,
+            ),
           ),
         ).called(1);
       });

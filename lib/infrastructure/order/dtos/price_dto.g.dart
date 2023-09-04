@@ -46,13 +46,14 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
       comboDeal: fields[21] == null
           ? PriceComboDealDto.empty
           : fields[21] as PriceComboDealDto,
+      isDiscountOverride: fields[22] == null ? false : fields[22] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_PriceDto obj) {
     writer
-      ..writeByte(22)
+      ..writeByte(23)
       ..writeByte(0)
       ..write(obj.materialNumber)
       ..writeByte(1)
@@ -85,6 +86,8 @@ class PriceDtoAdapter extends TypeAdapter<_$_PriceDto> {
       ..write(obj.priceOverride)
       ..writeByte(21)
       ..write(obj.comboDeal)
+      ..writeByte(22)
+      ..write(obj.isDiscountOverride)
       ..writeByte(5)
       ..write(obj.rules)
       ..writeByte(6)
@@ -161,6 +164,7 @@ _$_PriceDto _$$_PriceDtoFromJson(Map<String, dynamic> json) => _$_PriceDto(
           ? PriceComboDealDto.empty
           : PriceComboDealDto.fromJson(
               json['ComboDeals'] as Map<String, dynamic>),
+      isDiscountOverride: json['isDiscountOverride'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
@@ -188,4 +192,5 @@ Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
       'zdp8Override': instance.zdp8Override,
       'priceOverride': instance.priceOverride,
       'ComboDeals': instance.comboDeal.toJson(),
+      'isDiscountOverride': instance.isDiscountOverride,
     };

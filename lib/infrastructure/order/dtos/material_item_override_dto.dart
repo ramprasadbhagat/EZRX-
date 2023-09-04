@@ -98,7 +98,7 @@ class ValueOverrideDto with _$ValueOverrideDto {
   factory ValueOverrideDto.fromDomain(ValueOverride override) {
     return ValueOverrideDto(
       code: override.code,
-      currency: override.currency.getOrCrash(),
+      currency: override.currency.code,
       price: override.price,
     );
   }

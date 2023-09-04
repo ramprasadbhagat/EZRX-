@@ -37,7 +37,6 @@ import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
-import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -699,7 +698,6 @@ void main() {
             CartEvent.upsertCart(
               priceAggregate: mockCartItemWithDataList2.first,
               quantity: 0,
-              counterOfferDetails: RequestCounterOfferDetails.empty(),
             ),
           ),
         ).called(1);

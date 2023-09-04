@@ -67,11 +67,11 @@ void main() {
     });
 
     test('Test valueOverride toJson', () {
-      const data = {'code': '', 'price': 1, 'currency': 'fake-currency'};
+      const data = {'code': '', 'price': 1, 'currency': 'FAKE-CURRENCY'};
       final configs = ValueOverrideDto.fromDomain(
         ValueOverrideDto.fromJson(data).toDomain(),
       ).toJson();
-      expect(configs['currency'], 'fake-currency');
+      expect(configs['currency'], 'FAKE-CURRENCY');
     });
 
     test('Test percentageOverride toDomain', () {

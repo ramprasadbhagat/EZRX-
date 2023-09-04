@@ -87,6 +87,9 @@ mixin _$PriceDto {
   @HiveField(21, defaultValue: PriceComboDealDto.empty)
   @JsonKey(name: 'ComboDeals')
   PriceComboDealDto get comboDeal => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isDiscountOverride', defaultValue: false)
+  @HiveField(22, defaultValue: false)
+  bool get isDiscountOverride => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -102,70 +105,73 @@ abstract class $PriceDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
-          String materialNumber,
+      String materialNumber,
       @JsonKey(name: 'OldMaterialCode', defaultValue: '')
       @HiveField(1, defaultValue: '')
-          String oldMaterialCode,
+      String oldMaterialCode,
       @JsonKey(name: 'ListPrice', defaultValue: 0)
       @HiveField(2, defaultValue: 0)
-          double listPrice,
+      double listPrice,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0)
       @HiveField(3, defaultValue: 0)
-          double finalIndividualPrice,
+      double finalIndividualPrice,
       @JsonKey(name: 'FinalTotalPrice', defaultValue: 0)
       @HiveField(4, defaultValue: 0)
-          double finalTotalPrice,
+      double finalTotalPrice,
       @JsonKey(name: 'PriceRules', defaultValue: <PriceRuleDto>[])
       @HiveField(5, defaultValue: <PriceRuleDto>[])
-          List<PriceRuleDto> rules,
+      List<PriceRuleDto> rules,
       @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
       @HiveField(6, defaultValue: <PriceBonusDto>[])
-          List<PriceBonusDto> bonuses,
+      List<PriceBonusDto> bonuses,
       @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
       @HiveField(7, defaultValue: <PriceTierDto>[])
-          List<PriceTierDto> tiers,
+      List<PriceTierDto> tiers,
       @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
       @HiveField(8, defaultValue: <PriceBundleDto>[])
-          List<PriceBundleDto> bundles,
+      List<PriceBundleDto> bundles,
       @JsonKey(name: 'Valid', defaultValue: false)
       @HiveField(9, defaultValue: false)
-          bool isValid,
+      bool isValid,
       @JsonKey(name: 'AdditionalBonusEligible', defaultValue: false)
       @HiveField(10, defaultValue: false)
-          bool additionalBonusEligible,
+      bool additionalBonusEligible,
       @JsonKey(name: 'ZMGDiscount', defaultValue: false)
       @HiveField(11, defaultValue: false)
-          bool zmgDiscount,
+      bool zmgDiscount,
       @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
       @HiveField(12, defaultValue: '')
-          String zdp5MaxQuota,
+      String zdp5MaxQuota,
       @JsonKey(name: 'ZDP5RemainingQuota', defaultValue: '')
       @HiveField(13, defaultValue: '')
-          String zdp5RemainingQuota,
+      String zdp5RemainingQuota,
       @JsonKey(name: 'ExceedQty', defaultValue: false)
       @HiveField(14, defaultValue: false)
-          bool exceedQty,
+      bool exceedQty,
       @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
       @HiveField(15, defaultValue: false)
-          bool overrideRulePresent,
+      bool overrideRulePresent,
       @JsonKey(name: 'OverridenRules', defaultValue: [])
       @HiveField(16, defaultValue: [])
-          List<PriceRuleDto> overridenRules,
+      List<PriceRuleDto> overridenRules,
       @JsonKey(name: 'OverridenRuleTier', defaultValue: [])
       @HiveField(17, defaultValue: [])
-          List<OverridenRuleTierDto> overridenRuleTier,
+      List<OverridenRuleTierDto> overridenRuleTier,
       @JsonKey(name: 'isPriceOverride', defaultValue: false)
       @HiveField(18, defaultValue: false)
-          bool isPriceOverride,
+      bool isPriceOverride,
       @HiveField(19, defaultValue: 0)
       @JsonKey(name: 'zdp8Override', defaultValue: 0)
-          double zdp8Override,
+      double zdp8Override,
       @HiveField(20, defaultValue: 0)
       @JsonKey(name: 'priceOverride', defaultValue: 0)
-          double priceOverride,
+      double priceOverride,
       @HiveField(21, defaultValue: PriceComboDealDto.empty)
       @JsonKey(name: 'ComboDeals')
-          PriceComboDealDto comboDeal});
+      PriceComboDealDto comboDeal,
+      @JsonKey(name: 'isDiscountOverride', defaultValue: false)
+      @HiveField(22, defaultValue: false)
+      bool isDiscountOverride});
 
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
 }
@@ -205,6 +211,7 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
     Object? zdp8Override = null,
     Object? priceOverride = null,
     Object? comboDeal = null,
+    Object? isDiscountOverride = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -295,6 +302,10 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
               as PriceComboDealDto,
+      isDiscountOverride: null == isDiscountOverride
+          ? _value.isDiscountOverride
+          : isDiscountOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -317,70 +328,73 @@ abstract class _$$_PriceDtoCopyWith<$Res> implements $PriceDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
-          String materialNumber,
+      String materialNumber,
       @JsonKey(name: 'OldMaterialCode', defaultValue: '')
       @HiveField(1, defaultValue: '')
-          String oldMaterialCode,
+      String oldMaterialCode,
       @JsonKey(name: 'ListPrice', defaultValue: 0)
       @HiveField(2, defaultValue: 0)
-          double listPrice,
+      double listPrice,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0)
       @HiveField(3, defaultValue: 0)
-          double finalIndividualPrice,
+      double finalIndividualPrice,
       @JsonKey(name: 'FinalTotalPrice', defaultValue: 0)
       @HiveField(4, defaultValue: 0)
-          double finalTotalPrice,
+      double finalTotalPrice,
       @JsonKey(name: 'PriceRules', defaultValue: <PriceRuleDto>[])
       @HiveField(5, defaultValue: <PriceRuleDto>[])
-          List<PriceRuleDto> rules,
+      List<PriceRuleDto> rules,
       @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
       @HiveField(6, defaultValue: <PriceBonusDto>[])
-          List<PriceBonusDto> bonuses,
+      List<PriceBonusDto> bonuses,
       @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
       @HiveField(7, defaultValue: <PriceTierDto>[])
-          List<PriceTierDto> tiers,
+      List<PriceTierDto> tiers,
       @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
       @HiveField(8, defaultValue: <PriceBundleDto>[])
-          List<PriceBundleDto> bundles,
+      List<PriceBundleDto> bundles,
       @JsonKey(name: 'Valid', defaultValue: false)
       @HiveField(9, defaultValue: false)
-          bool isValid,
+      bool isValid,
       @JsonKey(name: 'AdditionalBonusEligible', defaultValue: false)
       @HiveField(10, defaultValue: false)
-          bool additionalBonusEligible,
+      bool additionalBonusEligible,
       @JsonKey(name: 'ZMGDiscount', defaultValue: false)
       @HiveField(11, defaultValue: false)
-          bool zmgDiscount,
+      bool zmgDiscount,
       @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
       @HiveField(12, defaultValue: '')
-          String zdp5MaxQuota,
+      String zdp5MaxQuota,
       @JsonKey(name: 'ZDP5RemainingQuota', defaultValue: '')
       @HiveField(13, defaultValue: '')
-          String zdp5RemainingQuota,
+      String zdp5RemainingQuota,
       @JsonKey(name: 'ExceedQty', defaultValue: false)
       @HiveField(14, defaultValue: false)
-          bool exceedQty,
+      bool exceedQty,
       @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
       @HiveField(15, defaultValue: false)
-          bool overrideRulePresent,
+      bool overrideRulePresent,
       @JsonKey(name: 'OverridenRules', defaultValue: [])
       @HiveField(16, defaultValue: [])
-          List<PriceRuleDto> overridenRules,
+      List<PriceRuleDto> overridenRules,
       @JsonKey(name: 'OverridenRuleTier', defaultValue: [])
       @HiveField(17, defaultValue: [])
-          List<OverridenRuleTierDto> overridenRuleTier,
+      List<OverridenRuleTierDto> overridenRuleTier,
       @JsonKey(name: 'isPriceOverride', defaultValue: false)
       @HiveField(18, defaultValue: false)
-          bool isPriceOverride,
+      bool isPriceOverride,
       @HiveField(19, defaultValue: 0)
       @JsonKey(name: 'zdp8Override', defaultValue: 0)
-          double zdp8Override,
+      double zdp8Override,
       @HiveField(20, defaultValue: 0)
       @JsonKey(name: 'priceOverride', defaultValue: 0)
-          double priceOverride,
+      double priceOverride,
       @HiveField(21, defaultValue: PriceComboDealDto.empty)
       @JsonKey(name: 'ComboDeals')
-          PriceComboDealDto comboDeal});
+      PriceComboDealDto comboDeal,
+      @JsonKey(name: 'isDiscountOverride', defaultValue: false)
+      @HiveField(22, defaultValue: false)
+      bool isDiscountOverride});
 
   @override
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
@@ -419,6 +433,7 @@ class __$$_PriceDtoCopyWithImpl<$Res>
     Object? zdp8Override = null,
     Object? priceOverride = null,
     Object? comboDeal = null,
+    Object? isDiscountOverride = null,
   }) {
     return _then(_$_PriceDto(
       materialNumber: null == materialNumber
@@ -509,6 +524,10 @@ class __$$_PriceDtoCopyWithImpl<$Res>
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
               as PriceComboDealDto,
+      isDiscountOverride: null == isDiscountOverride
+          ? _value.isDiscountOverride
+          : isDiscountOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -520,70 +539,73 @@ class _$_PriceDto extends _PriceDto {
   const _$_PriceDto(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
-          required this.materialNumber,
+      required this.materialNumber,
       @JsonKey(name: 'OldMaterialCode', defaultValue: '')
       @HiveField(1, defaultValue: '')
-          required this.oldMaterialCode,
+      required this.oldMaterialCode,
       @JsonKey(name: 'ListPrice', defaultValue: 0)
       @HiveField(2, defaultValue: 0)
-          required this.listPrice,
+      required this.listPrice,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0)
       @HiveField(3, defaultValue: 0)
-          required this.finalIndividualPrice,
+      required this.finalIndividualPrice,
       @JsonKey(name: 'FinalTotalPrice', defaultValue: 0)
       @HiveField(4, defaultValue: 0)
-          required this.finalTotalPrice,
+      required this.finalTotalPrice,
       @JsonKey(name: 'PriceRules', defaultValue: <PriceRuleDto>[])
       @HiveField(5, defaultValue: <PriceRuleDto>[])
-          required final List<PriceRuleDto> rules,
+      required final List<PriceRuleDto> rules,
       @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
       @HiveField(6, defaultValue: <PriceBonusDto>[])
-          required final List<PriceBonusDto> bonuses,
+      required final List<PriceBonusDto> bonuses,
       @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
       @HiveField(7, defaultValue: <PriceTierDto>[])
-          required final List<PriceTierDto> tiers,
+      required final List<PriceTierDto> tiers,
       @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
       @HiveField(8, defaultValue: <PriceBundleDto>[])
-          required final List<PriceBundleDto> bundles,
+      required final List<PriceBundleDto> bundles,
       @JsonKey(name: 'Valid', defaultValue: false)
       @HiveField(9, defaultValue: false)
-          required this.isValid,
+      required this.isValid,
       @JsonKey(name: 'AdditionalBonusEligible', defaultValue: false)
       @HiveField(10, defaultValue: false)
-          required this.additionalBonusEligible,
+      required this.additionalBonusEligible,
       @JsonKey(name: 'ZMGDiscount', defaultValue: false)
       @HiveField(11, defaultValue: false)
-          required this.zmgDiscount,
+      required this.zmgDiscount,
       @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
       @HiveField(12, defaultValue: '')
-          required this.zdp5MaxQuota,
+      required this.zdp5MaxQuota,
       @JsonKey(name: 'ZDP5RemainingQuota', defaultValue: '')
       @HiveField(13, defaultValue: '')
-          required this.zdp5RemainingQuota,
+      required this.zdp5RemainingQuota,
       @JsonKey(name: 'ExceedQty', defaultValue: false)
       @HiveField(14, defaultValue: false)
-          required this.exceedQty,
+      required this.exceedQty,
       @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
       @HiveField(15, defaultValue: false)
-          required this.overrideRulePresent,
+      required this.overrideRulePresent,
       @JsonKey(name: 'OverridenRules', defaultValue: [])
       @HiveField(16, defaultValue: [])
-          required final List<PriceRuleDto> overridenRules,
+      required final List<PriceRuleDto> overridenRules,
       @JsonKey(name: 'OverridenRuleTier', defaultValue: [])
       @HiveField(17, defaultValue: [])
-          required final List<OverridenRuleTierDto> overridenRuleTier,
+      required final List<OverridenRuleTierDto> overridenRuleTier,
       @JsonKey(name: 'isPriceOverride', defaultValue: false)
       @HiveField(18, defaultValue: false)
-          required this.isPriceOverride,
+      required this.isPriceOverride,
       @HiveField(19, defaultValue: 0)
       @JsonKey(name: 'zdp8Override', defaultValue: 0)
-          required this.zdp8Override,
+      required this.zdp8Override,
       @HiveField(20, defaultValue: 0)
       @JsonKey(name: 'priceOverride', defaultValue: 0)
-          required this.priceOverride,
+      required this.priceOverride,
       @HiveField(21, defaultValue: PriceComboDealDto.empty)
       @JsonKey(name: 'ComboDeals')
-          this.comboDeal = PriceComboDealDto.empty})
+      this.comboDeal = PriceComboDealDto.empty,
+      @JsonKey(name: 'isDiscountOverride', defaultValue: false)
+      @HiveField(22, defaultValue: false)
+      required this.isDiscountOverride})
       : _rules = rules,
         _bonuses = bonuses,
         _tiers = tiers,
@@ -720,10 +742,14 @@ class _$_PriceDto extends _PriceDto {
   @HiveField(21, defaultValue: PriceComboDealDto.empty)
   @JsonKey(name: 'ComboDeals')
   final PriceComboDealDto comboDeal;
+  @override
+  @JsonKey(name: 'isDiscountOverride', defaultValue: false)
+  @HiveField(22, defaultValue: false)
+  final bool isDiscountOverride;
 
   @override
   String toString() {
-    return 'PriceDto(materialNumber: $materialNumber, oldMaterialCode: $oldMaterialCode, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, bonuses: $bonuses, tiers: $tiers, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal)';
+    return 'PriceDto(materialNumber: $materialNumber, oldMaterialCode: $oldMaterialCode, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, bonuses: $bonuses, tiers: $tiers, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isDiscountOverride: $isDiscountOverride)';
   }
 
   @override
@@ -770,7 +796,9 @@ class _$_PriceDto extends _PriceDto {
             (identical(other.priceOverride, priceOverride) ||
                 other.priceOverride == priceOverride) &&
             (identical(other.comboDeal, comboDeal) ||
-                other.comboDeal == comboDeal));
+                other.comboDeal == comboDeal) &&
+            (identical(other.isDiscountOverride, isDiscountOverride) ||
+                other.isDiscountOverride == isDiscountOverride));
   }
 
   @JsonKey(ignore: true)
@@ -798,7 +826,8 @@ class _$_PriceDto extends _PriceDto {
         isPriceOverride,
         zdp8Override,
         priceOverride,
-        comboDeal
+        comboDeal,
+        isDiscountOverride
       ]);
 
   @JsonKey(ignore: true)
@@ -819,70 +848,73 @@ abstract class _PriceDto extends PriceDto {
   const factory _PriceDto(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       @HiveField(0, defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'OldMaterialCode', defaultValue: '')
       @HiveField(1, defaultValue: '')
-          required final String oldMaterialCode,
+      required final String oldMaterialCode,
       @JsonKey(name: 'ListPrice', defaultValue: 0)
       @HiveField(2, defaultValue: 0)
-          required final double listPrice,
+      required final double listPrice,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0)
       @HiveField(3, defaultValue: 0)
-          required final double finalIndividualPrice,
+      required final double finalIndividualPrice,
       @JsonKey(name: 'FinalTotalPrice', defaultValue: 0)
       @HiveField(4, defaultValue: 0)
-          required final double finalTotalPrice,
+      required final double finalTotalPrice,
       @JsonKey(name: 'PriceRules', defaultValue: <PriceRuleDto>[])
       @HiveField(5, defaultValue: <PriceRuleDto>[])
-          required final List<PriceRuleDto> rules,
+      required final List<PriceRuleDto> rules,
       @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
       @HiveField(6, defaultValue: <PriceBonusDto>[])
-          required final List<PriceBonusDto> bonuses,
+      required final List<PriceBonusDto> bonuses,
       @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
       @HiveField(7, defaultValue: <PriceTierDto>[])
-          required final List<PriceTierDto> tiers,
+      required final List<PriceTierDto> tiers,
       @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
       @HiveField(8, defaultValue: <PriceBundleDto>[])
-          required final List<PriceBundleDto> bundles,
+      required final List<PriceBundleDto> bundles,
       @JsonKey(name: 'Valid', defaultValue: false)
       @HiveField(9, defaultValue: false)
-          required final bool isValid,
+      required final bool isValid,
       @JsonKey(name: 'AdditionalBonusEligible', defaultValue: false)
       @HiveField(10, defaultValue: false)
-          required final bool additionalBonusEligible,
+      required final bool additionalBonusEligible,
       @JsonKey(name: 'ZMGDiscount', defaultValue: false)
       @HiveField(11, defaultValue: false)
-          required final bool zmgDiscount,
+      required final bool zmgDiscount,
       @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
       @HiveField(12, defaultValue: '')
-          required final String zdp5MaxQuota,
+      required final String zdp5MaxQuota,
       @JsonKey(name: 'ZDP5RemainingQuota', defaultValue: '')
       @HiveField(13, defaultValue: '')
-          required final String zdp5RemainingQuota,
+      required final String zdp5RemainingQuota,
       @JsonKey(name: 'ExceedQty', defaultValue: false)
       @HiveField(14, defaultValue: false)
-          required final bool exceedQty,
+      required final bool exceedQty,
       @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
       @HiveField(15, defaultValue: false)
-          required final bool overrideRulePresent,
+      required final bool overrideRulePresent,
       @JsonKey(name: 'OverridenRules', defaultValue: [])
       @HiveField(16, defaultValue: [])
-          required final List<PriceRuleDto> overridenRules,
+      required final List<PriceRuleDto> overridenRules,
       @JsonKey(name: 'OverridenRuleTier', defaultValue: [])
       @HiveField(17, defaultValue: [])
-          required final List<OverridenRuleTierDto> overridenRuleTier,
+      required final List<OverridenRuleTierDto> overridenRuleTier,
       @JsonKey(name: 'isPriceOverride', defaultValue: false)
       @HiveField(18, defaultValue: false)
-          required final bool isPriceOverride,
+      required final bool isPriceOverride,
       @HiveField(19, defaultValue: 0)
       @JsonKey(name: 'zdp8Override', defaultValue: 0)
-          required final double zdp8Override,
+      required final double zdp8Override,
       @HiveField(20, defaultValue: 0)
       @JsonKey(name: 'priceOverride', defaultValue: 0)
-          required final double priceOverride,
+      required final double priceOverride,
       @HiveField(21, defaultValue: PriceComboDealDto.empty)
       @JsonKey(name: 'ComboDeals')
-          final PriceComboDealDto comboDeal}) = _$_PriceDto;
+      final PriceComboDealDto comboDeal,
+      @JsonKey(name: 'isDiscountOverride', defaultValue: false)
+      @HiveField(22, defaultValue: false)
+      required final bool isDiscountOverride}) = _$_PriceDto;
   const _PriceDto._() : super._();
 
   factory _PriceDto.fromJson(Map<String, dynamic> json) = _$_PriceDto.fromJson;
@@ -975,6 +1007,10 @@ abstract class _PriceDto extends PriceDto {
   @HiveField(21, defaultValue: PriceComboDealDto.empty)
   @JsonKey(name: 'ComboDeals')
   PriceComboDealDto get comboDeal;
+  @override
+  @JsonKey(name: 'isDiscountOverride', defaultValue: false)
+  @HiveField(22, defaultValue: false)
+  bool get isDiscountOverride;
   @override
   @JsonKey(ignore: true)
   _$$_PriceDtoCopyWith<_$_PriceDto> get copyWith =>

@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RequestCounterOfferDetails {
   CounterOfferValue get counterOfferPrice => throw _privateConstructorUsedError;
+  CounterOfferDiscountValue get discountOverridePercentage =>
+      throw _privateConstructorUsedError;
   Currency get counterOfferCurrency => throw _privateConstructorUsedError;
   StringValue get comment => throw _privateConstructorUsedError;
 
@@ -34,6 +36,7 @@ abstract class $RequestCounterOfferDetailsCopyWith<$Res> {
   @useResult
   $Res call(
       {CounterOfferValue counterOfferPrice,
+      CounterOfferDiscountValue discountOverridePercentage,
       Currency counterOfferCurrency,
       StringValue comment});
 }
@@ -53,6 +56,7 @@ class _$RequestCounterOfferDetailsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? counterOfferPrice = null,
+    Object? discountOverridePercentage = null,
     Object? counterOfferCurrency = null,
     Object? comment = null,
   }) {
@@ -61,6 +65,10 @@ class _$RequestCounterOfferDetailsCopyWithImpl<$Res,
           ? _value.counterOfferPrice
           : counterOfferPrice // ignore: cast_nullable_to_non_nullable
               as CounterOfferValue,
+      discountOverridePercentage: null == discountOverridePercentage
+          ? _value.discountOverridePercentage
+          : discountOverridePercentage // ignore: cast_nullable_to_non_nullable
+              as CounterOfferDiscountValue,
       counterOfferCurrency: null == counterOfferCurrency
           ? _value.counterOfferCurrency
           : counterOfferCurrency // ignore: cast_nullable_to_non_nullable
@@ -84,6 +92,7 @@ abstract class _$$_RequestCounterOfferDetailsCopyWith<$Res>
   @useResult
   $Res call(
       {CounterOfferValue counterOfferPrice,
+      CounterOfferDiscountValue discountOverridePercentage,
       Currency counterOfferCurrency,
       StringValue comment});
 }
@@ -102,6 +111,7 @@ class __$$_RequestCounterOfferDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? counterOfferPrice = null,
+    Object? discountOverridePercentage = null,
     Object? counterOfferCurrency = null,
     Object? comment = null,
   }) {
@@ -110,6 +120,10 @@ class __$$_RequestCounterOfferDetailsCopyWithImpl<$Res>
           ? _value.counterOfferPrice
           : counterOfferPrice // ignore: cast_nullable_to_non_nullable
               as CounterOfferValue,
+      discountOverridePercentage: null == discountOverridePercentage
+          ? _value.discountOverridePercentage
+          : discountOverridePercentage // ignore: cast_nullable_to_non_nullable
+              as CounterOfferDiscountValue,
       counterOfferCurrency: null == counterOfferCurrency
           ? _value.counterOfferCurrency
           : counterOfferCurrency // ignore: cast_nullable_to_non_nullable
@@ -127,6 +141,7 @@ class __$$_RequestCounterOfferDetailsCopyWithImpl<$Res>
 class _$_RequestCounterOfferDetails extends _RequestCounterOfferDetails {
   const _$_RequestCounterOfferDetails(
       {required this.counterOfferPrice,
+      required this.discountOverridePercentage,
       required this.counterOfferCurrency,
       required this.comment})
       : super._();
@@ -134,13 +149,15 @@ class _$_RequestCounterOfferDetails extends _RequestCounterOfferDetails {
   @override
   final CounterOfferValue counterOfferPrice;
   @override
+  final CounterOfferDiscountValue discountOverridePercentage;
+  @override
   final Currency counterOfferCurrency;
   @override
   final StringValue comment;
 
   @override
   String toString() {
-    return 'RequestCounterOfferDetails(counterOfferPrice: $counterOfferPrice, counterOfferCurrency: $counterOfferCurrency, comment: $comment)';
+    return 'RequestCounterOfferDetails(counterOfferPrice: $counterOfferPrice, discountOverridePercentage: $discountOverridePercentage, counterOfferCurrency: $counterOfferCurrency, comment: $comment)';
   }
 
   @override
@@ -150,14 +167,18 @@ class _$_RequestCounterOfferDetails extends _RequestCounterOfferDetails {
             other is _$_RequestCounterOfferDetails &&
             (identical(other.counterOfferPrice, counterOfferPrice) ||
                 other.counterOfferPrice == counterOfferPrice) &&
+            (identical(other.discountOverridePercentage,
+                    discountOverridePercentage) ||
+                other.discountOverridePercentage ==
+                    discountOverridePercentage) &&
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
                 other.counterOfferCurrency == counterOfferCurrency) &&
             (identical(other.comment, comment) || other.comment == comment));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, counterOfferPrice, counterOfferCurrency, comment);
+  int get hashCode => Object.hash(runtimeType, counterOfferPrice,
+      discountOverridePercentage, counterOfferCurrency, comment);
 
   @JsonKey(ignore: true)
   @override
@@ -170,12 +191,15 @@ class _$_RequestCounterOfferDetails extends _RequestCounterOfferDetails {
 abstract class _RequestCounterOfferDetails extends RequestCounterOfferDetails {
   const factory _RequestCounterOfferDetails(
       {required final CounterOfferValue counterOfferPrice,
+      required final CounterOfferDiscountValue discountOverridePercentage,
       required final Currency counterOfferCurrency,
       required final StringValue comment}) = _$_RequestCounterOfferDetails;
   const _RequestCounterOfferDetails._() : super._();
 
   @override
   CounterOfferValue get counterOfferPrice;
+  @override
+  CounterOfferDiscountValue get discountOverridePercentage;
   @override
   Currency get counterOfferCurrency;
   @override

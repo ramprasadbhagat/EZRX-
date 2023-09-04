@@ -39,6 +39,8 @@ mixin _$CartProductRequestDto {
   String get parentID => throw _privateConstructorUsedError;
   @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
   double get counterOfferPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0.0)
+  double get counterOfferDiscount => throw _privateConstructorUsedError;
   @JsonKey(name: 'Comment', defaultValue: '')
   String get comment => throw _privateConstructorUsedError;
   @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
@@ -71,6 +73,8 @@ abstract class $CartProductRequestDtoCopyWith<$Res> {
       @JsonKey(name: 'ParentID', defaultValue: '') String parentID,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
       double counterOfferPrice,
+      @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0.0)
+      double counterOfferDiscount,
       @JsonKey(name: 'Comment', defaultValue: '') String comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       String counterOfferCurrency,
@@ -101,6 +105,7 @@ class _$CartProductRequestDtoCopyWithImpl<$Res,
     Object? language = null,
     Object? parentID = null,
     Object? counterOfferPrice = null,
+    Object? counterOfferDiscount = null,
     Object? comment = null,
     Object? counterOfferCurrency = null,
     Object? type = null,
@@ -143,6 +148,10 @@ class _$CartProductRequestDtoCopyWithImpl<$Res,
           ? _value.counterOfferPrice
           : counterOfferPrice // ignore: cast_nullable_to_non_nullable
               as double,
+      counterOfferDiscount: null == counterOfferDiscount
+          ? _value.counterOfferDiscount
+          : counterOfferDiscount // ignore: cast_nullable_to_non_nullable
+              as double,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -182,6 +191,8 @@ abstract class _$$_CartProductRequestDtoCopyWith<$Res>
       @JsonKey(name: 'ParentID', defaultValue: '') String parentID,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
       double counterOfferPrice,
+      @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0.0)
+      double counterOfferDiscount,
       @JsonKey(name: 'Comment', defaultValue: '') String comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       String counterOfferCurrency,
@@ -209,6 +220,7 @@ class __$$_CartProductRequestDtoCopyWithImpl<$Res>
     Object? language = null,
     Object? parentID = null,
     Object? counterOfferPrice = null,
+    Object? counterOfferDiscount = null,
     Object? comment = null,
     Object? counterOfferCurrency = null,
     Object? type = null,
@@ -251,6 +263,10 @@ class __$$_CartProductRequestDtoCopyWithImpl<$Res>
           ? _value.counterOfferPrice
           : counterOfferPrice // ignore: cast_nullable_to_non_nullable
               as double,
+      counterOfferDiscount: null == counterOfferDiscount
+          ? _value.counterOfferDiscount
+          : counterOfferDiscount // ignore: cast_nullable_to_non_nullable
+              as double,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -287,6 +303,8 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
       @JsonKey(name: 'ParentID', defaultValue: '') required this.parentID,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
       required this.counterOfferPrice,
+      @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0.0)
+      required this.counterOfferDiscount,
       @JsonKey(name: 'Comment', defaultValue: '') required this.comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       required this.counterOfferCurrency,
@@ -325,6 +343,9 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
   @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
   final double counterOfferPrice;
   @override
+  @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0.0)
+  final double counterOfferDiscount;
+  @override
   @JsonKey(name: 'Comment', defaultValue: '')
   final String comment;
   @override
@@ -339,7 +360,7 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
 
   @override
   String toString() {
-    return 'CartProductRequestDto(salesOrg: $salesOrg, customerCode: $customerCode, shipTo: $shipTo, productNumber: $productNumber, quantity: $quantity, itemSource: $itemSource, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type, itemId: $itemId)';
+    return 'CartProductRequestDto(salesOrg: $salesOrg, customerCode: $customerCode, shipTo: $shipTo, productNumber: $productNumber, quantity: $quantity, itemSource: $itemSource, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type, itemId: $itemId)';
   }
 
   @override
@@ -364,6 +385,8 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
                 other.parentID == parentID) &&
             (identical(other.counterOfferPrice, counterOfferPrice) ||
                 other.counterOfferPrice == counterOfferPrice) &&
+            (identical(other.counterOfferDiscount, counterOfferDiscount) ||
+                other.counterOfferDiscount == counterOfferDiscount) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
                 other.counterOfferCurrency == counterOfferCurrency) &&
@@ -384,6 +407,7 @@ class _$_CartProductRequestDto extends _CartProductRequestDto {
       language,
       parentID,
       counterOfferPrice,
+      counterOfferDiscount,
       comment,
       counterOfferCurrency,
       type,
@@ -422,6 +446,8 @@ abstract class _CartProductRequestDto extends CartProductRequestDto {
       required final String parentID,
       @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
       required final double counterOfferPrice,
+      @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0.0)
+      required final double counterOfferDiscount,
       @JsonKey(name: 'Comment', defaultValue: '') required final String comment,
       @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
       required final String counterOfferCurrency,
@@ -460,6 +486,9 @@ abstract class _CartProductRequestDto extends CartProductRequestDto {
   @override
   @JsonKey(name: 'CounterOfferPrice', defaultValue: 0.0)
   double get counterOfferPrice;
+  @override
+  @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0.0)
+  double get counterOfferDiscount;
   @override
   @JsonKey(name: 'Comment', defaultValue: '')
   String get comment;

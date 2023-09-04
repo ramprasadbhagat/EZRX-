@@ -9,7 +9,6 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 abstract class IPriceOverrideRepository {
   Future<Either<ApiFailure, Price>> updateItemPrice({
     required PriceAggregate item,
-    required double newPrice,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   });

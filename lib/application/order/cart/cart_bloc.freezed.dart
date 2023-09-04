@@ -51,8 +51,7 @@ mixin _$CartEvent {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -99,9 +98,7 @@ mixin _$CartEvent {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -143,9 +140,7 @@ mixin _$CartEvent {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -429,8 +424,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -481,9 +475,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -529,9 +521,7 @@ class _$_Initialized implements _Initialized {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -795,8 +785,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -847,9 +836,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -895,9 +882,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -1148,8 +1133,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -1199,9 +1183,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -1246,9 +1228,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -1487,8 +1467,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -1538,9 +1517,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -1585,9 +1562,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -1872,8 +1847,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -1924,9 +1898,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -1972,9 +1944,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -2229,8 +2199,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -2280,9 +2249,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -2327,9 +2294,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -2586,8 +2551,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -2637,9 +2601,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -2684,9 +2646,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -2937,8 +2897,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -2988,9 +2947,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -3035,9 +2992,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -3230,8 +3185,7 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -3281,9 +3235,7 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -3328,9 +3280,7 @@ class _$_ClearCart implements _ClearCart {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -3565,8 +3515,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -3616,9 +3565,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -3663,9 +3610,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -3914,8 +3859,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -3965,9 +3909,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -4012,9 +3954,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -4236,8 +4176,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -4287,9 +4226,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -4334,9 +4271,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -4462,13 +4397,9 @@ abstract class _$$_UpsertCartCopyWith<$Res> {
           _$_UpsertCart value, $Res Function(_$_UpsertCart) then) =
       __$$_UpsertCartCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {PriceAggregate priceAggregate,
-      int quantity,
-      RequestCounterOfferDetails counterOfferDetails});
+  $Res call({PriceAggregate priceAggregate, int quantity});
 
   $PriceAggregateCopyWith<$Res> get priceAggregate;
-  $RequestCounterOfferDetailsCopyWith<$Res> get counterOfferDetails;
 }
 
 /// @nodoc
@@ -4484,7 +4415,6 @@ class __$$_UpsertCartCopyWithImpl<$Res>
   $Res call({
     Object? priceAggregate = null,
     Object? quantity = null,
-    Object? counterOfferDetails = null,
   }) {
     return _then(_$_UpsertCart(
       priceAggregate: null == priceAggregate
@@ -4495,10 +4425,6 @@ class __$$_UpsertCartCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
-      counterOfferDetails: null == counterOfferDetails
-          ? _value.counterOfferDetails
-          : counterOfferDetails // ignore: cast_nullable_to_non_nullable
-              as RequestCounterOfferDetails,
     ));
   }
 
@@ -4509,35 +4435,21 @@ class __$$_UpsertCartCopyWithImpl<$Res>
       return _then(_value.copyWith(priceAggregate: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $RequestCounterOfferDetailsCopyWith<$Res> get counterOfferDetails {
-    return $RequestCounterOfferDetailsCopyWith<$Res>(_value.counterOfferDetails,
-        (value) {
-      return _then(_value.copyWith(counterOfferDetails: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_UpsertCart implements _UpsertCart {
-  const _$_UpsertCart(
-      {required this.priceAggregate,
-      required this.quantity,
-      required this.counterOfferDetails});
+  const _$_UpsertCart({required this.priceAggregate, required this.quantity});
 
   @override
   final PriceAggregate priceAggregate;
   @override
   final int quantity;
-  @override
-  final RequestCounterOfferDetails counterOfferDetails;
 
   @override
   String toString() {
-    return 'CartEvent.upsertCart(priceAggregate: $priceAggregate, quantity: $quantity, counterOfferDetails: $counterOfferDetails)';
+    return 'CartEvent.upsertCart(priceAggregate: $priceAggregate, quantity: $quantity)';
   }
 
   @override
@@ -4548,14 +4460,11 @@ class _$_UpsertCart implements _UpsertCart {
             (identical(other.priceAggregate, priceAggregate) ||
                 other.priceAggregate == priceAggregate) &&
             (identical(other.quantity, quantity) ||
-                other.quantity == quantity) &&
-            (identical(other.counterOfferDetails, counterOfferDetails) ||
-                other.counterOfferDetails == counterOfferDetails));
+                other.quantity == quantity));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, priceAggregate, quantity, counterOfferDetails);
+  int get hashCode => Object.hash(runtimeType, priceAggregate, quantity);
 
   @JsonKey(ignore: true)
   @override
@@ -4599,8 +4508,7 @@ class _$_UpsertCart implements _UpsertCart {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -4616,7 +4524,7 @@ class _$_UpsertCart implements _UpsertCart {
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
   }) {
-    return upsertCart(priceAggregate, quantity, counterOfferDetails);
+    return upsertCart(priceAggregate, quantity);
   }
 
   @override
@@ -4650,9 +4558,7 @@ class _$_UpsertCart implements _UpsertCart {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -4664,7 +4570,7 @@ class _$_UpsertCart implements _UpsertCart {
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
   }) {
-    return upsertCart?.call(priceAggregate, quantity, counterOfferDetails);
+    return upsertCart?.call(priceAggregate, quantity);
   }
 
   @override
@@ -4697,9 +4603,7 @@ class _$_UpsertCart implements _UpsertCart {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -4713,7 +4617,7 @@ class _$_UpsertCart implements _UpsertCart {
     required TResult orElse(),
   }) {
     if (upsertCart != null) {
-      return upsertCart(priceAggregate, quantity, counterOfferDetails);
+      return upsertCart(priceAggregate, quantity);
     }
     return orElse();
   }
@@ -4811,14 +4715,11 @@ class _$_UpsertCart implements _UpsertCart {
 
 abstract class _UpsertCart implements CartEvent {
   const factory _UpsertCart(
-          {required final PriceAggregate priceAggregate,
-          required final int quantity,
-          required final RequestCounterOfferDetails counterOfferDetails}) =
-      _$_UpsertCart;
+      {required final PriceAggregate priceAggregate,
+      required final int quantity}) = _$_UpsertCart;
 
   PriceAggregate get priceAggregate;
   int get quantity;
-  RequestCounterOfferDetails get counterOfferDetails;
   @JsonKey(ignore: true)
   _$$_UpsertCartCopyWith<_$_UpsertCart> get copyWith =>
       throw _privateConstructorUsedError;
@@ -4995,8 +4896,7 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -5047,9 +4947,7 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -5095,9 +4993,7 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -5332,8 +5228,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -5383,9 +5278,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -5430,9 +5323,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -5662,8 +5553,7 @@ class _$_GetDetailsProductsAddedToCart
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -5713,9 +5603,7 @@ class _$_GetDetailsProductsAddedToCart
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -5760,9 +5648,7 @@ class _$_GetDetailsProductsAddedToCart
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -6014,8 +5900,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -6065,9 +5950,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -6112,9 +5995,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -6341,8 +6222,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     required TResult Function(CartItem item, StockInfo stockInfo)
         updateBatchInCartItem,
     required TResult Function(bool comboDealEligible) fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
     required TResult Function(
             List<PriceAggregate> priceAggregate,
@@ -6392,9 +6272,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult? Function(CartItem item, StockInfo stockInfo)?
         updateBatchInCartItem,
     TResult? Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,
@@ -6439,9 +6317,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         replaceWithOrderItems,
     TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function(bool comboDealEligible)? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        upsertCart,
+    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addHistoryItemsToCart,

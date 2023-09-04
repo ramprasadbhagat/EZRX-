@@ -694,10 +694,32 @@ class CounterOfferValue extends ValueObject<String> {
     );
   }
 
-  double get counterOfferValue =>
-      getDoubleParsedValue(value.getOrElse(() => ''));
+  double get doubleValue => getDoubleParsedValue(value.getOrElse(() => ''));
+  PriceOverrideValue get toPriceOverrideValue =>
+      getPriceOverrideValue(doubleValue);
 
   const CounterOfferValue._(this.value);
+}
+
+class CounterOfferDiscountValue extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CounterOfferDiscountValue(String input) {
+    return CounterOfferDiscountValue._(
+      validateStringNotEmpty(input)
+          .flatMap(validateStringIsBiggerThanZero)
+          .flatMap(
+            (input) => validateStringInputIsBiggerThanMaxValue(input, 100),
+          ),
+    );
+  }
+
+  double get doubleValue => getDoubleParsedValue(value.getOrElse(() => ''));
+  Zdp8OverrideValue get toZdp8OverrideValue =>
+      getZdp8OverrideValue(doubleValue);
+
+  const CounterOfferDiscountValue._(this.value);
 }
 
 class MaterialItemType extends ValueObject<String> {

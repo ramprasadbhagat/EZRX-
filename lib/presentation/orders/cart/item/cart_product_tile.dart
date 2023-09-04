@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
@@ -54,12 +53,11 @@ class CartProductTile extends StatelessWidget {
                     CartEvent.upsertCart(
                       priceAggregate: cartItem,
                       quantity: 0,
-                      counterOfferDetails: RequestCounterOfferDetails.empty(),
                     ),
                   );
-              context
-                  .read<PriceOverrideBloc>()
-                  .add(const PriceOverrideEvent.initialized());
+              context.read<PriceOverrideBloc>().add(
+                    const PriceOverrideEvent.initialized(),
+                  );
             },
           ),
         ],
@@ -215,78 +213,59 @@ class _MaterialDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isCounterOfferRequested = cartItem.price.isPriceOverride;
-
-    return BlocListener<PriceOverrideBloc, PriceOverrideState>(
-      listenWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
-      listener: (context, state) {
-        context.read<CartBloc>().add(
-              CartEvent.updatePriceProduct(
-                priceProducts:
-                    context.read<MaterialPriceBloc>().state.materialPrice,
-                overriddenProductPrice: state.overriddenMaterialPrice,
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                cartItem.materialInfo.materialNumber.displayMatNo,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: ZPColors.darkGray,
+                    ),
               ),
-            );
-      },
-      child: Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  cartItem.materialInfo.materialNumber.displayMatNo,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.darkGray,
-                      ),
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                _OrderTag(cartItem: cartItem),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Text(
-                cartItem.materialInfo.materialDescription,
-                style: Theme.of(context).textTheme.labelSmall,
+              const SizedBox(
+                width: 4,
               ),
+              _OrderTag(cartItem: cartItem),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Text(
+              cartItem.materialInfo.materialDescription,
+              style: Theme.of(context).textTheme.labelSmall,
             ),
-            Row(
-              children: [
-                isCounterOfferRequested
-                    ? PriceComponent(
-                        salesOrgConfig:
-                            context.read<SalesOrgBloc>().state.configs,
-                        price: cartItem.price.lastPrice
-                            .getOrDefaultValue(0)
-                            .toString(),
-                        type: PriceStyle.counterOfferPrice,
-                      )
-                    : const SizedBox.shrink(),
+          ),
+          Row(
+            children: [
+              if (cartItem.price.isCounterOfferRequested)
                 PriceComponent(
                   salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                   price:
-                      cartItem.price.finalPrice.getOrDefaultValue(0).toString(),
+                      cartItem.price.lastPrice.getOrDefaultValue(0).toString(),
+                  type: PriceStyle.counterOfferPrice,
                 ),
-              ],
+              PriceComponent(
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                price:
+                    cartItem.price.finalPrice.getOrDefaultValue(0).toString(),
+              ),
+            ],
+          ),
+          if (cartItem.price.isCounterOfferRequested)
+            Text(
+              'Requested counter offer'.tr(),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontStyle: FontStyle.italic,
+                    color: ZPColors.extraLightGrey4,
+                  ),
             ),
-            isCounterOfferRequested
-                ? Text(
-                    'Requested counter offer'.tr(),
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontStyle: FontStyle.italic,
-                          color: ZPColors.extraLightGrey4,
-                        ),
-                  )
-                : const SizedBox.shrink(),
-            _MaterialQuantitySection(cartItem: cartItem),
-          ],
-        ),
+          _MaterialQuantitySection(cartItem: cartItem),
+        ],
       ),
     );
   }
@@ -339,7 +318,6 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                   CartEvent.upsertCart(
                     priceAggregate: widget.cartItem,
                     quantity: k,
-                    counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
           },
@@ -348,7 +326,6 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                   CartEvent.upsertCart(
                     priceAggregate: widget.cartItem,
                     quantity: k,
-                    counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
           },
@@ -357,7 +334,6 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                   CartEvent.upsertCart(
                     priceAggregate: widget.cartItem,
                     quantity: value,
-                    counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
           },
@@ -380,94 +356,90 @@ class _BonusPriceCounterSection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          context.read<EligibilityBloc>().state.isBonusSampleItemVisible
-              ? TextButton.icon(
-                  key: WidgetKeys.bonusSampleItemButtonKey,
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      constraints: BoxConstraints.loose(
-                        Size(
-                          MediaQuery.of(context).size.width,
-                          MediaQuery.of(context).size.height * 0.80,
-                        ),
-                      ), //
-                      builder: (_) {
-                        return BonusItemsSheet(cartProduct: cartItem);
-                      },
-                    );
-                    trackMixpanelEvent(
-                      MixpanelEvents.addBonus,
-                    );
-                    context.read<BonusMaterialBloc>().add(
-                          BonusMaterialEvent.fetch(
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            configs: context.read<SalesOrgBloc>().state.configs,
-                            customerCodeInfo: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .shipToInfo,
-                            principalData: cartItem.materialInfo.principalData,
-                            user: context.read<UserBloc>().state.user,
-                            isGimmickMaterialEnabled: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .isGimmickMaterialEnabled,
-                          ),
-                        );
+          if (context.read<EligibilityBloc>().state.isBonusSampleItemVisible)
+            TextButton.icon(
+              key: WidgetKeys.bonusSampleItemButtonKey,
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  constraints: BoxConstraints.loose(
+                    Size(
+                      MediaQuery.of(context).size.width,
+                      MediaQuery.of(context).size.height * 0.80,
+                    ),
+                  ), //
+                  builder: (_) {
+                    return BonusItemsSheet(cartProduct: cartItem);
                   },
-                  icon: const Icon(
-                    Icons.add_circle_outline,
-                    color: ZPColors.extraDarkGreen,
-                  ),
-                  label: Text(
-                    'Bonus/sample item'.tr(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelSmall
-                        ?.copyWith(color: ZPColors.extraDarkGreen),
-                  ),
-                )
-              : const SizedBox.shrink(),
-          context.read<EligibilityBloc>().state.isCounterOfferVisible
-              ? TextButton.icon(
-                  key: WidgetKeys.counterOfferPriceButtonKey,
-                  onPressed: () {
-                    context
-                        .read<PriceOverrideBloc>()
-                        .add(const PriceOverrideEvent.initialized());
-                    showModalBottomSheet(
-                      isDismissible: false,
-                      context: context,
-                      isScrollControlled: true,
-                      builder: (_) {
-                        return RequestCounterOfferSheet(
-                          cartItem: cartItem,
-                        );
-                      },
+                );
+                trackMixpanelEvent(
+                  MixpanelEvents.addBonus,
+                );
+                context.read<BonusMaterialBloc>().add(
+                      BonusMaterialEvent.fetch(
+                        salesOrganisation: context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .salesOrganisation,
+                        configs: context.read<SalesOrgBloc>().state.configs,
+                        customerCodeInfo: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .customerCodeInfo,
+                        shipToInfo:
+                            context.read<EligibilityBloc>().state.shipToInfo,
+                        principalData: cartItem.materialInfo.principalData,
+                        user: context.read<UserBloc>().state.user,
+                        isGimmickMaterialEnabled: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .isGimmickMaterialEnabled,
+                      ),
+                    );
+              },
+              icon: const Icon(
+                Icons.add_circle_outline,
+                color: ZPColors.extraDarkGreen,
+              ),
+              label: Text(
+                'Bonus/sample item'.tr(),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(color: ZPColors.extraDarkGreen),
+              ),
+            ),
+          if (context.read<EligibilityBloc>().state.isCounterOfferVisible)
+            TextButton.icon(
+              key: WidgetKeys.counterOfferPriceButtonKey,
+              onPressed: () {
+                context
+                    .read<PriceOverrideBloc>()
+                    .add(PriceOverrideEvent.setProduct(item: cartItem));
+                showModalBottomSheet(
+                  isDismissible: false,
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (_) {
+                    return RequestCounterOfferSheet(
+                      cartItem: cartItem,
                     );
                   },
-                  icon: const Icon(
-                    Icons.swap_horiz_sharp,
-                    color: ZPColors.extraDarkGreen,
-                  ),
-                  label: Text(
-                    'Counter offer'.tr(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelSmall
-                        ?.copyWith(color: ZPColors.extraDarkGreen),
-                  ),
-                )
-              : const SizedBox.shrink(),
+                );
+              },
+              icon: const Icon(
+                Icons.swap_horiz_sharp,
+                color: ZPColors.extraDarkGreen,
+              ),
+              label: Text(
+                'Counter offer'.tr(),
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(color: ZPColors.extraDarkGreen),
+              ),
+            ),
         ],
       ),
     );
@@ -503,9 +475,7 @@ class _MaterialImageSection extends StatelessWidget {
             );
           },
         ),
-        cartProduct.price.isBonusDealEligible
-            ? const _OfferTag()
-            : const SizedBox.shrink(),
+        if (cartProduct.price.isBonusDealEligible) const _OfferTag(),
       ],
     );
   }

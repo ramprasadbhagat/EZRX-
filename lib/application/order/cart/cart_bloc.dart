@@ -556,7 +556,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               e.priceAggregate.materialInfo.materialNumber,
         );
         final isCounterOfferRequested =
-            e.counterOfferDetails != RequestCounterOfferDetails.empty();
+            e.priceAggregate.materialInfo.counterOfferDetails !=
+                RequestCounterOfferDetails.empty();
         if (index != -1) {
           final previousQuantity = state.cartProducts.elementAtOrNull(index);
           if (previousQuantity?.quantity == e.quantity &&
@@ -579,7 +580,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           materialInfo: e.priceAggregate.materialInfo,
           quantity: e.quantity,
           language: 'EN',
-          counterOfferDetails: e.counterOfferDetails,
+          counterOfferDetails:
+              e.priceAggregate.materialInfo.counterOfferDetails.copyWith(
+            counterOfferCurrency: state.config.currency,
+          ),
           itemId: '',
         );
 
@@ -812,13 +816,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         );
 
         final cartProductList = state.cartProducts.map((element) {
-          final productPrice = !element.price.isPriceOverride
-              ? (e.priceProducts[element.materialInfo.materialNumber] ??
-                  Price.empty())
-              : (element.materialInfo.materialNumber ==
-                      e.overriddenProductPrice.materialNumber)
-                  ? e.overriddenProductPrice
-                  : element.price;
+          final updatedPrice = element.materialInfo.materialNumber ==
+                  e.overriddenProductPrice.materialNumber
+              ? e.overriddenProductPrice
+              : (e.priceProducts[element.materialInfo.materialNumber] ??
+                  Price.empty());
+
+          final productPrice = !element.price.isPriceOverride ||
+                  !element.price.isDiscountOverride
+              ? updatedPrice
+              : element.price;
 
           element = element.copyWith(
             salesOrgConfig: state.config,

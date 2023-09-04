@@ -34,6 +34,7 @@ class Price with _$Price {
     @Default(true) bool isValidMaterial,
     @Default(false) bool isFOC,
     @Default(false) bool isPriceOverride,
+    @Default(false) bool isDiscountOverride,
     required Zdp8OverrideValue zdp8Override,
     required PriceOverrideValue priceOverride,
     required PriceComboDeal comboDeal,
@@ -89,4 +90,15 @@ class Price with _$Price {
 
   bool get isFailurePrice =>
       isValidMaterial && !isFOC && finalPrice == MaterialPrice.unavailable();
+
+  bool get isCounterOfferRequested => isPriceOverride || isDiscountOverride;
+
+  double get priceValueForPriceOverride => isDiscountOverride
+      ? finalPrice.getOrDefaultValue(0)
+      : lastPrice.getOrDefaultValue(0);
+
+  double get priceValueForDiscountOverride =>
+      isPriceOverride && isDiscountOverride
+          ? finalPrice.getOrDefaultValue(0)
+          : lastPrice.getOrDefaultValue(0);
 }

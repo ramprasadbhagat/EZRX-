@@ -76,10 +76,8 @@ class _CartPageState extends State<CartPage> {
           context.read<CartBloc>().add(
                 CartEvent.updatePriceProduct(
                   priceProducts: state.materialPrice,
-                  overriddenProductPrice: context
-                      .read<PriceOverrideBloc>()
-                      .state
-                      .overriddenMaterialPrice,
+                  overriddenProductPrice:
+                      context.read<PriceOverrideBloc>().state.item.price,
                 ),
               );
         }
@@ -136,9 +134,9 @@ class _CartPageState extends State<CartPage> {
                             context.read<CartBloc>().add(
                                   const CartEvent.clearCart(),
                                 );
-                            context
-                                .read<PriceOverrideBloc>()
-                                .add(const PriceOverrideEvent.initialized());
+                            context.read<PriceOverrideBloc>().add(
+                                  const PriceOverrideEvent.initialized(),
+                                );
                           },
                         ),
                       ]

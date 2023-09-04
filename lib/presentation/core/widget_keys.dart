@@ -260,6 +260,7 @@ class WidgetKeys {
   static const Key counterOfferPriceButtonKey =
       Key('counterOfferPriceButtonKey');
 
+  static const Key counterOfferDiscountField = Key('counterOfferDiscountField');
   //============================================================
   //  Checkout Page Keys
   //============================================================

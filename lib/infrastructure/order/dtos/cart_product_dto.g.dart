@@ -21,6 +21,8 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
       principalName: json['principalName'] as String? ?? '',
       principalCode: json['principalCode'] as String? ?? '',
       counterOfferPrice: (json['CounterOfferPrice'] as num?)?.toDouble() ?? 0,
+      counterOfferDiscount:
+          (json['DiscountOverridePercentage'] as num?)?.toDouble() ?? 0,
       counterOfferCurrency: json['CounterOfferCurrency'] as String? ?? '',
       remarks: json['Comment'] as String? ?? '',
       bundleDetails: json['BundleDetails'] == null
@@ -56,6 +58,7 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'principalName': instance.principalName,
       'principalCode': instance.principalCode,
       'CounterOfferPrice': instance.counterOfferPrice,
+      'DiscountOverridePercentage': instance.counterOfferDiscount,
       'CounterOfferCurrency': instance.counterOfferCurrency,
       'Comment': instance.remarks,
       'BundleDetails': instance.bundleDetails.toJson(),

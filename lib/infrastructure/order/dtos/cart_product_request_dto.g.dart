@@ -18,6 +18,8 @@ _$_CartProductRequestDto _$$_CartProductRequestDtoFromJson(
       language: json['Language'] as String? ?? 'EN',
       parentID: json['ParentID'] as String? ?? '',
       counterOfferPrice: (json['CounterOfferPrice'] as num?)?.toDouble() ?? 0.0,
+      counterOfferDiscount:
+          (json['DiscountOverridePercentage'] as num?)?.toDouble() ?? 0.0,
       comment: json['Comment'] as String? ?? '',
       counterOfferCurrency: json['CounterOfferCurrency'] as String? ?? '',
       type: json['Type'] as String? ?? '',
@@ -36,6 +38,7 @@ Map<String, dynamic> _$$_CartProductRequestDtoToJson(
       'Language': instance.language,
       'ParentID': instance.parentID,
       'CounterOfferPrice': instance.counterOfferPrice,
+      'DiscountOverridePercentage': instance.counterOfferDiscount,
       'Comment': instance.comment,
       'CounterOfferCurrency': instance.counterOfferCurrency,
       'Type': instance.type,

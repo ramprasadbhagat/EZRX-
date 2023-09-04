@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -43,15 +44,52 @@ void main() {
         build: () => PriceOverrideBloc(
           priceOverrideRepository: priceOverrideRepositoryMock,
         ),
+        seed: () => PriceOverrideState.initial().copyWith(
+          item: PriceAggregate.empty(),
+        ),
         act: (bloc) => bloc.add(
-          const PriceOverrideEvent.onPriceValueChange(newPrice: '20'),
+          const PriceOverrideEvent.onPriceValueChange(
+            newPrice: '20',
+          ),
         ),
         expect: () => [
           PriceOverrideState.initial().copyWith(
-            counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
-              counterOfferPrice: CounterOfferValue('20'),
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('20'),
+                ),
+              ),
             ),
           )
+        ],
+      );
+
+      blocTest<PriceOverrideBloc, PriceOverrideState>(
+        'Price Override Bloc onChangeDiscountValue',
+        build: () => PriceOverrideBloc(
+          priceOverrideRepository: priceOverrideRepositoryMock,
+        ),
+        seed: () => PriceOverrideState.initial().copyWith(
+          item: PriceAggregate.empty(),
+        ),
+        act: (bloc) => bloc.add(
+          const PriceOverrideEvent.onDiscountValueChanged(
+            newValue: '50',
+          ),
+        ),
+        expect: () => [
+          PriceOverrideState.initial().copyWith(
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  discountOverridePercentage: CounterOfferDiscountValue('50'),
+                ),
+              ),
+            ),
+          ),
         ],
       );
 
@@ -60,6 +98,9 @@ void main() {
         build: () => PriceOverrideBloc(
           priceOverrideRepository: priceOverrideRepositoryMock,
         ),
+        seed: () => PriceOverrideState.initial().copyWith(
+          item: PriceAggregate.empty(),
+        ),
         act: (bloc) => bloc.add(
           const PriceOverrideEvent.onRemarksValueChange(
             newRemarks: 'fake-test',
@@ -67,10 +108,15 @@ void main() {
         ),
         expect: () => [
           PriceOverrideState.initial().copyWith(
-            counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
-              comment: StringValue('fake-test'),
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  comment: StringValue('fake-test'),
+                ),
+              ),
             ),
-          )
+          ),
         ],
       );
 
@@ -83,8 +129,15 @@ void main() {
           when(
             () => priceOverrideRepositoryMock.updateItemPrice(
               customerCodeInfo: CustomerCodeInfo.empty(),
-              item: PriceAggregate.empty(),
-              newPrice: 70.0,
+              item: PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  counterOfferDetails:
+                      RequestCounterOfferDetails.empty().copyWith(
+                    counterOfferPrice: CounterOfferValue('70'),
+                    comment: StringValue('fake-comment'),
+                  ),
+                ),
+              ),
               salesOrganisation: SalesOrganisation.empty(),
             ),
           ).thenAnswer(
@@ -94,41 +147,54 @@ void main() {
           );
         },
         seed: () => PriceOverrideState.initial().copyWith(
-          counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
-            counterOfferPrice: CounterOfferValue('70'),
-            comment: StringValue('fake-comment'),
+          item: PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
+                counterOfferPrice: CounterOfferValue('70'),
+                comment: StringValue('fake-comment'),
+              ),
+            ),
           ),
         ),
         act: (bloc) => bloc.add(
           PriceOverrideEvent.fetch(
             customerCodeInfo: CustomerCodeInfo.empty(),
-            item: PriceAggregate.empty(),
             salesOrganisation: SalesOrganisation.empty(),
           ),
         ),
         expect: () => [
           PriceOverrideState.initial().copyWith(
-            counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
-              counterOfferPrice: CounterOfferValue('70'),
-              comment: StringValue('fake-comment'),
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('70'),
+                  comment: StringValue('fake-comment'),
+                ),
+              ),
             ),
             isFetching: true,
           ),
           PriceOverrideState.initial().copyWith(
             isFetching: false,
-            counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
-              counterOfferPrice: CounterOfferValue('70'),
-              comment: StringValue('fake-comment'),
-            ),
-            apiFailureOrSuccessOption: none(),
-            overriddenMaterialPrice:
-                Price.empty().copyWith(isPriceOverride: true),
-            cartItemList: [
-              Price.empty().copyWith(
-                priceOverride: PriceOverrideValue(0),
-                isPriceOverride: true,
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('70'),
+                  comment: StringValue('fake-comment'),
+                ),
               ),
-            ],
+              price: Price.empty().copyWith(
+                isPriceOverride: true,
+                priceOverride: PriceOverrideValue(70.0),
+              ),
+            ),
+            apiFailureOrSuccessOption: optionOf(
+              Right(
+                Price.empty(),
+              ),
+            ),
           ),
         ],
       );
@@ -142,8 +208,15 @@ void main() {
           when(
             () => priceOverrideRepositoryMock.updateItemPrice(
               customerCodeInfo: CustomerCodeInfo.empty(),
-              item: PriceAggregate.empty(),
-              newPrice: 70.0,
+              item: PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  counterOfferDetails:
+                      RequestCounterOfferDetails.empty().copyWith(
+                    counterOfferPrice: CounterOfferValue('70'),
+                    comment: StringValue('fake-comment'),
+                  ),
+                ),
+              ),
               salesOrganisation: SalesOrganisation.empty(),
             ),
           ).thenAnswer(
@@ -153,23 +226,31 @@ void main() {
           );
         },
         seed: () => PriceOverrideState.initial().copyWith(
-          counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
-            counterOfferPrice: CounterOfferValue('70'),
-            comment: StringValue('fake-comment'),
+          item: PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
+                counterOfferPrice: CounterOfferValue('70'),
+                comment: StringValue('fake-comment'),
+              ),
+            ),
           ),
         ),
         act: (bloc) => bloc.add(
           PriceOverrideEvent.fetch(
             customerCodeInfo: CustomerCodeInfo.empty(),
-            item: PriceAggregate.empty(),
             salesOrganisation: SalesOrganisation.empty(),
           ),
         ),
         expect: () => [
           PriceOverrideState.initial().copyWith(
-            counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
-              counterOfferPrice: CounterOfferValue('70'),
-              comment: StringValue('fake-comment'),
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('70'),
+                  comment: StringValue('fake-comment'),
+                ),
+              ),
             ),
             isFetching: true,
           ),
@@ -179,9 +260,14 @@ void main() {
               const Left(ApiFailure.priceOverrideNotFound()),
             ),
             isFetching: false,
-            counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
-              counterOfferPrice: CounterOfferValue('70'),
-              comment: StringValue('fake-comment'),
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('70'),
+                  comment: StringValue('fake-comment'),
+                ),
+              ),
             ),
           ),
         ],

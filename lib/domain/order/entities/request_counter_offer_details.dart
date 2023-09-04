@@ -11,12 +11,14 @@ class RequestCounterOfferDetails with _$RequestCounterOfferDetails {
 
   const factory RequestCounterOfferDetails({
     required CounterOfferValue counterOfferPrice,
+    required CounterOfferDiscountValue discountOverridePercentage,
     required Currency counterOfferCurrency,
     required StringValue comment,
   }) = _RequestCounterOfferDetails;
 
   factory RequestCounterOfferDetails.empty() => RequestCounterOfferDetails(
         counterOfferPrice: CounterOfferValue(''),
+        discountOverridePercentage: CounterOfferDiscountValue(''),
         counterOfferCurrency: Currency(''),
         comment: StringValue(''),
       );

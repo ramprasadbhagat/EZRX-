@@ -42,6 +42,8 @@ class CartProductDto with _$CartProductDto {
         required String principalCode,
     @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
         required double counterOfferPrice,
+    @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0)
+        required double counterOfferDiscount,
     @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
         required String counterOfferCurrency,
     @JsonKey(name: 'Comment', defaultValue: '') required String remarks,
@@ -81,7 +83,9 @@ class CartProductDto with _$CartProductDto {
           .materialInfo.counterOfferDetails.counterOfferCurrency
           .getOrDefaultValue(''),
       counterOfferPrice: cartItemDetails
-          .materialInfo.counterOfferDetails.counterOfferPrice.counterOfferValue,
+          .materialInfo.counterOfferDetails.counterOfferPrice.doubleValue,
+      counterOfferDiscount: cartItemDetails.materialInfo.counterOfferDetails
+          .discountOverridePercentage.doubleValue,
       bundleDetails: BundleDetailsDto.fromDomain(
         BundleDetails(
           bundleCode: cartItemDetails.bundle.bundleCode,
@@ -116,6 +120,8 @@ class CartProductDto with _$CartProductDto {
         comment: StringValue(remarks),
         counterOfferCurrency: Currency(counterOfferCurrency),
         counterOfferPrice: CounterOfferValue(counterOfferPrice.toString()),
+        discountOverridePercentage:
+            CounterOfferDiscountValue(counterOfferDiscount.toString()),
       ),
       type: MaterialInfoType(type),
       remarks: remarks,

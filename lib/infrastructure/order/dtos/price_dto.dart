@@ -85,6 +85,9 @@ class PriceDto with _$PriceDto {
     @Default(PriceComboDealDto.empty)
     @JsonKey(name: 'ComboDeals')
         PriceComboDealDto comboDeal,
+    @JsonKey(name: 'isDiscountOverride', defaultValue: false)
+    @HiveField(22, defaultValue: false)
+        required bool isDiscountOverride,
   }) = _PriceDto;
 
   Price toDomain() => Price(
@@ -110,6 +113,7 @@ class PriceDto with _$PriceDto {
         zdp8Override: Zdp8OverrideValue(zdp8Override),
         priceOverride: PriceOverrideValue(priceOverride),
         comboDeal: comboDeal.toDomain,
+        isDiscountOverride: isDiscountOverride,
       );
 
   factory PriceDto.fromDomain(Price price) {
@@ -139,6 +143,7 @@ class PriceDto with _$PriceDto {
       zdp8Override: price.zdp8Override.getOrDefaultValue(0),
       priceOverride: price.priceOverride.getOrDefaultValue(0),
       comboDeal: PriceComboDealDto.fromDomain(price.comboDeal),
+      isDiscountOverride: price.isDiscountOverride,
     );
   }
 
@@ -166,11 +171,17 @@ class PriceDto with _$PriceDto {
         'exceedQty': exceedQty,
       };
 
-  Map<String, dynamic> priceOverrideQuery(double overridePrice) {
+  Map<String, dynamic> priceOverrideQuery(
+    double overridePrice,
+    double zdp8Override,
+  ) {
     final data = <String, dynamic>{
       'MaterialNumber': materialNumber,
-      'ZPO1': overridePrice,
     };
+
+    if (overridePrice != 0) {
+      data['ZPO1'] = overridePrice;
+    }
 
     if (zdp8Override != 0) {
       data['ZDP8'] = zdp8Override;

@@ -25,7 +25,6 @@ class PriceOverrideRepository implements IPriceOverrideRepository {
   @override
   Future<Either<ApiFailure, Price>> updateItemPrice({
     required PriceAggregate item,
-    required double newPrice,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   }) async {
@@ -40,13 +39,16 @@ class PriceOverrideRepository implements IPriceOverrideRepository {
         return Left(FailureHandler.handleFailure(e));
       }
     }
-
+    final newPrice =
+        item.materialInfo.counterOfferDetails.counterOfferPrice.doubleValue;
+    final newDiscount = item.materialInfo.counterOfferDetails
+        .discountOverridePercentage.doubleValue;
     try {
       final price = await remoteDataSource.getOverridePrice(
         custCode: customerCodeInfo.customerCodeSoldTo,
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        materialQuery:
-            PriceDto.fromDomain(item.price).priceOverrideQuery(newPrice),
+        materialQuery: PriceDto.fromDomain(item.price)
+            .priceOverrideQuery(newPrice, newDiscount),
       );
 
       return Right(price);

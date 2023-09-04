@@ -24,6 +24,7 @@ mixin _$CartProductRequest {
   String get language => throw _privateConstructorUsedError;
   String get parentID => throw _privateConstructorUsedError;
   double get counterOfferPrice => throw _privateConstructorUsedError;
+  double get discountOverridePercentage => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   String get counterOfferCurrency => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $CartProductRequestCopyWith<$Res> {
       String language,
       String parentID,
       double counterOfferPrice,
+      double discountOverridePercentage,
       String comment,
       String counterOfferCurrency,
       String type,
@@ -76,6 +78,7 @@ class _$CartProductRequestCopyWithImpl<$Res, $Val extends CartProductRequest>
     Object? language = null,
     Object? parentID = null,
     Object? counterOfferPrice = null,
+    Object? discountOverridePercentage = null,
     Object? comment = null,
     Object? counterOfferCurrency = null,
     Object? type = null,
@@ -114,6 +117,10 @@ class _$CartProductRequestCopyWithImpl<$Res, $Val extends CartProductRequest>
           ? _value.counterOfferPrice
           : counterOfferPrice // ignore: cast_nullable_to_non_nullable
               as double,
+      discountOverridePercentage: null == discountOverridePercentage
+          ? _value.discountOverridePercentage
+          : discountOverridePercentage // ignore: cast_nullable_to_non_nullable
+              as double,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -151,6 +158,7 @@ abstract class _$$_CartProductRequestCopyWith<$Res>
       String language,
       String parentID,
       double counterOfferPrice,
+      double discountOverridePercentage,
       String comment,
       String counterOfferCurrency,
       String type,
@@ -176,6 +184,7 @@ class __$$_CartProductRequestCopyWithImpl<$Res>
     Object? language = null,
     Object? parentID = null,
     Object? counterOfferPrice = null,
+    Object? discountOverridePercentage = null,
     Object? comment = null,
     Object? counterOfferCurrency = null,
     Object? type = null,
@@ -214,6 +223,10 @@ class __$$_CartProductRequestCopyWithImpl<$Res>
           ? _value.counterOfferPrice
           : counterOfferPrice // ignore: cast_nullable_to_non_nullable
               as double,
+      discountOverridePercentage: null == discountOverridePercentage
+          ? _value.discountOverridePercentage
+          : discountOverridePercentage // ignore: cast_nullable_to_non_nullable
+              as double,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -246,6 +259,7 @@ class _$_CartProductRequest extends _CartProductRequest {
       required this.language,
       required this.parentID,
       required this.counterOfferPrice,
+      required this.discountOverridePercentage,
       required this.comment,
       required this.counterOfferCurrency,
       required this.type,
@@ -269,6 +283,8 @@ class _$_CartProductRequest extends _CartProductRequest {
   @override
   final double counterOfferPrice;
   @override
+  final double discountOverridePercentage;
+  @override
   final String comment;
   @override
   final String counterOfferCurrency;
@@ -279,7 +295,7 @@ class _$_CartProductRequest extends _CartProductRequest {
 
   @override
   String toString() {
-    return 'CartProductRequest(salesOrg: $salesOrg, customerCode: $customerCode, shipToId: $shipToId, productNumber: $productNumber, quantity: $quantity, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type, itemId: $itemId)';
+    return 'CartProductRequest(salesOrg: $salesOrg, customerCode: $customerCode, shipToId: $shipToId, productNumber: $productNumber, quantity: $quantity, language: $language, parentID: $parentID, counterOfferPrice: $counterOfferPrice, discountOverridePercentage: $discountOverridePercentage, comment: $comment, counterOfferCurrency: $counterOfferCurrency, type: $type, itemId: $itemId)';
   }
 
   @override
@@ -303,6 +319,10 @@ class _$_CartProductRequest extends _CartProductRequest {
                 other.parentID == parentID) &&
             (identical(other.counterOfferPrice, counterOfferPrice) ||
                 other.counterOfferPrice == counterOfferPrice) &&
+            (identical(other.discountOverridePercentage,
+                    discountOverridePercentage) ||
+                other.discountOverridePercentage ==
+                    discountOverridePercentage) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.counterOfferCurrency, counterOfferCurrency) ||
                 other.counterOfferCurrency == counterOfferCurrency) &&
@@ -321,6 +341,7 @@ class _$_CartProductRequest extends _CartProductRequest {
       language,
       parentID,
       counterOfferPrice,
+      discountOverridePercentage,
       comment,
       counterOfferCurrency,
       type,
@@ -344,6 +365,7 @@ abstract class _CartProductRequest extends CartProductRequest {
       required final String language,
       required final String parentID,
       required final double counterOfferPrice,
+      required final double discountOverridePercentage,
       required final String comment,
       required final String counterOfferCurrency,
       required final String type,
@@ -366,6 +388,8 @@ abstract class _CartProductRequest extends CartProductRequest {
   String get parentID;
   @override
   double get counterOfferPrice;
+  @override
+  double get discountOverridePercentage;
   @override
   String get comment;
   @override

@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
@@ -36,7 +35,6 @@ class CartProductBundle extends StatelessWidget {
                   CartEvent.upsertCart(
                     priceAggregate: cartItem,
                     quantity: 0,
-                    counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
           },

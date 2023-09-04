@@ -104,6 +104,19 @@ Either<ValueFailure<String>, String> validateInputIsBiggerThanMaxValue(
         );
 }
 
+Either<ValueFailure<String>, String> validateStringInputIsBiggerThanMaxValue(
+  String input,
+  double maxValue,
+) {
+  return double.parse(input) < maxValue
+      ? right(input)
+      : left(
+          ValueFailure.exceedingMaxValue(
+            failedValue: maxValue.toString(),
+          ),
+        );
+}
+
 Either<ValueFailure<double>, double> validateDoubleValue(
   String input,
 ) {

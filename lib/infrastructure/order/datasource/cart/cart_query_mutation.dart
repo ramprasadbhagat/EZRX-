@@ -544,7 +544,8 @@ mutation UpsertCart(\$itemInput: ItemInput!) {
       principalCutoffStatus
       warehouseStorageCondition
       CounterOfferPrice	
-      CounterOfferCurrency	
+      CounterOfferCurrency
+      DiscountOverridePercentage	
       Comment
       BonusMaterials {
         principalCode

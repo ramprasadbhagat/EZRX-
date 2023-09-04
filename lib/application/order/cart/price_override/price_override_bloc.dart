@@ -4,8 +4,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
-import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,28 +27,56 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
     Emitter<PriceOverrideState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(PriceOverrideState.initial()),
-      onPriceValueChange: (e) async {
-        final newCounterOfferPrice = CounterOfferValue(e.newPrice);
-        if (!newCounterOfferPrice.isValid()) {
-          emit(state.copyWith(showErrorMessages: true));
-
-          return;
-        }
-        emit(
-          state.copyWith(
-            showErrorMessages: false,
-            counterOfferDetails: state.counterOfferDetails.copyWith(
-              counterOfferPrice: newCounterOfferPrice,
+      initialized: (e) async => emit(
+        PriceOverrideState.initial(),
+      ),
+      setProduct: (e) async => emit(
+        PriceOverrideState.initial().copyWith(
+          item: e.item,
+        ),
+      ),
+      onPriceValueChange: (e) async => emit(
+        state.copyWith(
+          showErrorMessages: false,
+          item: state.item.copyWith(
+            materialInfo: state.item.materialInfo.copyWith(
+              counterOfferDetails:
+                  state.item.materialInfo.counterOfferDetails.copyWith(
+                counterOfferPrice: CounterOfferValue(e.newPrice),
+              ),
             ),
           ),
-        );
-      },
+        ),
+      ),
+      onDiscountValueChanged: (e) async => emit(
+        state.copyWith(
+          showErrorMessages: false,
+          item: state.item.copyWith(
+            materialInfo: state.item.materialInfo.copyWith(
+              counterOfferDetails:
+                  state.item.materialInfo.counterOfferDetails.copyWith(
+                discountOverridePercentage:
+                    CounterOfferDiscountValue(e.newValue),
+              ),
+            ),
+          ),
+        ),
+      ),
       onRemarksValueChange: (e) async => emit(
         state.copyWith(
-          counterOfferDetails: state.counterOfferDetails.copyWith(
-            comment: StringValue(e.newRemarks),
+          item: state.item.copyWith(
+            materialInfo: state.item.materialInfo.copyWith(
+              counterOfferDetails:
+                  state.item.materialInfo.counterOfferDetails.copyWith(
+                comment: StringValue(e.newRemarks),
+              ),
+            ),
           ),
+        ),
+      ),
+      validateInputFields: (e) async => emit(
+        state.copyWith(
+          showErrorMessages: !state.isInputFieldValid,
         ),
       ),
       fetch: (_Fetch value) async {
@@ -62,10 +88,8 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
           ),
         );
         final failureOrSuccess = await priceOverrideRepository.updateItemPrice(
-          newPrice:
-              state.counterOfferDetails.counterOfferPrice.counterOfferValue,
           customerCodeInfo: value.customerCodeInfo,
-          item: value.item,
+          item: state.item,
           salesOrganisation: value.salesOrganisation,
         );
 
@@ -82,32 +106,22 @@ class PriceOverrideBloc extends Bloc<PriceOverrideEvent, PriceOverrideState> {
           (itemPrice) {
             emit(
               state.copyWith(
-                apiFailureOrSuccessOption: none(),
+                item: state.item.copyWith(
+                  price: itemPrice.copyWith(
+                    isPriceOverride: state.isPriceOverride,
+                    isDiscountOverride: state.isDiscountOverride,
+                    priceOverride: state.item.materialInfo.counterOfferDetails
+                        .counterOfferPrice.toPriceOverrideValue,
+                    zdp8Override: state.item.materialInfo.counterOfferDetails
+                        .discountOverridePercentage.toZdp8OverrideValue,
+                  ),
+                ),
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
                 showErrorMessages: false,
-                overriddenMaterialPrice: itemPrice.copyWith(
-                  isPriceOverride: true,
-                ),
-                cartItemList: [
-                  itemPrice.copyWith(
-                    zdp8Override: value.item.price.zdp8Override,
-                    priceOverride: state.priceOverrideValue,
-                    isPriceOverride: true,
-                  ),
-                ],
               ),
             );
           },
-        );
-      },
-      priceOverrideValueChanged: (_PriceOverrideValueChanged value) {
-        emit(
-          state.copyWith(
-            priceOverrideValue: PriceOverrideValue(
-              double.parse(value.newPrice),
-            ),
-            showErrorMessages: false,
-          ),
         );
       },
     );

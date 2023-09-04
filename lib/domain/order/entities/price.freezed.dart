@@ -38,6 +38,7 @@ mixin _$Price {
   bool get isValidMaterial => throw _privateConstructorUsedError;
   bool get isFOC => throw _privateConstructorUsedError;
   bool get isPriceOverride => throw _privateConstructorUsedError;
+  bool get isDiscountOverride => throw _privateConstructorUsedError;
   Zdp8OverrideValue get zdp8Override => throw _privateConstructorUsedError;
   PriceOverrideValue get priceOverride => throw _privateConstructorUsedError;
   PriceComboDeal get comboDeal => throw _privateConstructorUsedError;
@@ -73,6 +74,7 @@ abstract class $PriceCopyWith<$Res> {
       bool isValidMaterial,
       bool isFOC,
       bool isPriceOverride,
+      bool isDiscountOverride,
       Zdp8OverrideValue zdp8Override,
       PriceOverrideValue priceOverride,
       PriceComboDeal comboDeal});
@@ -114,6 +116,7 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
     Object? isValidMaterial = null,
     Object? isFOC = null,
     Object? isPriceOverride = null,
+    Object? isDiscountOverride = null,
     Object? zdp8Override = null,
     Object? priceOverride = null,
     Object? comboDeal = null,
@@ -203,6 +206,10 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
           ? _value.isPriceOverride
           : isPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      isDiscountOverride: null == isDiscountOverride
+          ? _value.isDiscountOverride
+          : isDiscountOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
       zdp8Override: null == zdp8Override
           ? _value.zdp8Override
           : zdp8Override // ignore: cast_nullable_to_non_nullable
@@ -255,6 +262,7 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
       bool isValidMaterial,
       bool isFOC,
       bool isPriceOverride,
+      bool isDiscountOverride,
       Zdp8OverrideValue zdp8Override,
       PriceOverrideValue priceOverride,
       PriceComboDeal comboDeal});
@@ -293,6 +301,7 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
     Object? isValidMaterial = null,
     Object? isFOC = null,
     Object? isPriceOverride = null,
+    Object? isDiscountOverride = null,
     Object? zdp8Override = null,
     Object? priceOverride = null,
     Object? comboDeal = null,
@@ -382,6 +391,10 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
           ? _value.isPriceOverride
           : isPriceOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      isDiscountOverride: null == isDiscountOverride
+          ? _value.isDiscountOverride
+          : isDiscountOverride // ignore: cast_nullable_to_non_nullable
+              as bool,
       zdp8Override: null == zdp8Override
           ? _value.zdp8Override
           : zdp8Override // ignore: cast_nullable_to_non_nullable
@@ -423,6 +436,7 @@ class _$_Price extends _Price {
       this.isValidMaterial = true,
       this.isFOC = false,
       this.isPriceOverride = false,
+      this.isDiscountOverride = false,
       required this.zdp8Override,
       required this.priceOverride,
       required this.comboDeal})
@@ -517,6 +531,9 @@ class _$_Price extends _Price {
   @JsonKey()
   final bool isPriceOverride;
   @override
+  @JsonKey()
+  final bool isDiscountOverride;
+  @override
   final Zdp8OverrideValue zdp8Override;
   @override
   final PriceOverrideValue priceOverride;
@@ -525,7 +542,7 @@ class _$_Price extends _Price {
 
   @override
   String toString() {
-    return 'Price(materialNumber: $materialNumber, materialCode: $materialCode, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal)';
+    return 'Price(materialNumber: $materialNumber, materialCode: $materialCode, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride, isDiscountOverride: $isDiscountOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal)';
   }
 
   @override
@@ -570,6 +587,8 @@ class _$_Price extends _Price {
             (identical(other.isFOC, isFOC) || other.isFOC == isFOC) &&
             (identical(other.isPriceOverride, isPriceOverride) ||
                 other.isPriceOverride == isPriceOverride) &&
+            (identical(other.isDiscountOverride, isDiscountOverride) ||
+                other.isDiscountOverride == isDiscountOverride) &&
             (identical(other.zdp8Override, zdp8Override) ||
                 other.zdp8Override == zdp8Override) &&
             (identical(other.priceOverride, priceOverride) ||
@@ -602,6 +621,7 @@ class _$_Price extends _Price {
         isValidMaterial,
         isFOC,
         isPriceOverride,
+        isDiscountOverride,
         zdp8Override,
         priceOverride,
         comboDeal
@@ -637,6 +657,7 @@ abstract class _Price extends Price {
       final bool isValidMaterial,
       final bool isFOC,
       final bool isPriceOverride,
+      final bool isDiscountOverride,
       required final Zdp8OverrideValue zdp8Override,
       required final PriceOverrideValue priceOverride,
       required final PriceComboDeal comboDeal}) = _$_Price;
@@ -684,6 +705,8 @@ abstract class _Price extends Price {
   bool get isFOC;
   @override
   bool get isPriceOverride;
+  @override
+  bool get isDiscountOverride;
   @override
   Zdp8OverrideValue get zdp8Override;
   @override

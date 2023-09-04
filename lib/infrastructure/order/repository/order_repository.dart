@@ -282,14 +282,14 @@ class OrderRepository implements IOrderRepository {
       }
     }
     try {
-      final encription = encryption.encryptionData(
+      final encryptedData = encryption.encryptionData(
         data: SubmitOrderDto.fromDomain(
           submitOrder,
         ).toJson(),
       );
 
       final submitOrderResponse =
-          await remoteDataSource.submitOrder(orderEncryption: encription);
+          await remoteDataSource.submitOrder(orderEncryption: encryptedData);
       _trackOrderSuccessEvent(cartProducts, grandTotal);
 
       return Right(submitOrderResponse);

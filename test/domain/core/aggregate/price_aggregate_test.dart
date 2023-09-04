@@ -1701,7 +1701,7 @@ void main() {
             )
           ],
           salesOrgConfig: SalesOrganisationConfigs.empty()
-              .copyWith(salesOrg: SalesOrg('2001'), currency: Currency('myr')),
+              .copyWith(salesOrg: SalesOrg('2001'), currency: Currency('MYR')),
         );
         expect(
           customPriceAggregate
@@ -1719,7 +1719,7 @@ void main() {
               .valueOverride
               .first
               .currency,
-          Currency('myr'),
+          Currency('MYR'),
         );
       },
     );
@@ -1740,7 +1740,7 @@ void main() {
             )
           ],
           salesOrgConfig: SalesOrganisationConfigs.empty()
-              .copyWith(salesOrg: SalesOrg('2001'), currency: Currency('myr')),
+              .copyWith(salesOrg: SalesOrg('2001'), currency: Currency('MYR')),
         );
         expect(
           customPriceAggregate
@@ -1758,7 +1758,7 @@ void main() {
               .valueOverride
               .first
               .currency,
-          Currency('myr'),
+          Currency('MYR'),
         );
       },
     );

@@ -32,6 +32,7 @@ void main() {
         exceedQty: false,
         overridenRules: [],
         overridenRuleTier: [],
+        isDiscountOverride: false,
       );
     });
     test('Test get overridequery', () {
@@ -45,11 +46,11 @@ void main() {
     });
 
     test('Test get priceOverrideQuery', () {
-      final configs = data.priceOverrideQuery(12);
+      final configs = data.priceOverrideQuery(12, 50);
       final expectedRes = <String, dynamic>{
         'MaterialNumber': '1234',
         'ZPO1': 12,
-        'ZDP8': 12,
+        'ZDP8': 50,
       };
       expect(configs, expectedRes);
     });

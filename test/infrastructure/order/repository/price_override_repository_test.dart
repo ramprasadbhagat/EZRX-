@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_remote.dart';
@@ -60,7 +61,6 @@ void main() {
           price:
               Price.empty().copyWith(priceOverride: PriceOverrideValue(70.0)),
         ),
-        newPrice: 70.0,
         salesOrganisation: mockSalesOrganisation,
         customerCodeInfo: mockCustomerCodeInfo,
       );
@@ -76,7 +76,6 @@ void main() {
 
       final result = await priceOverrideRepository.updateItemPrice(
         item: PriceAggregate.empty(),
-        newPrice: 0.0,
         salesOrganisation: mockSalesOrganisation,
         customerCodeInfo: mockCustomerCodeInfo,
       );
@@ -98,7 +97,7 @@ void main() {
               materialNumber: MaterialNumber('123456'),
               isPriceOverride: true,
             ),
-          ).priceOverrideQuery(70),
+          ).priceOverrideQuery(70, 0.0),
         ),
       ).thenAnswer(
         (invocation) async => Price.empty().copyWith(
@@ -112,15 +111,18 @@ void main() {
       final result = await priceOverrideRepository.updateItemPrice(
         item: PriceAggregate.empty().copyWith(
           discountedMaterialCount: 1,
-          materialInfo: MaterialInfo.empty()
-              .copyWith(materialNumber: MaterialNumber('123456')),
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('123456'),
+            counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
+              counterOfferPrice: CounterOfferValue('70.0'),
+            ),
+          ),
           price: Price.empty().copyWith(
             priceOverride: PriceOverrideValue(70),
             materialNumber: MaterialNumber('123456'),
             zdp8Override: Zdp8OverrideValue(12.0),
           ),
         ),
-        newPrice: 70.0,
         salesOrganisation:
             mockSalesOrganisation.copyWith(salesOrg: SalesOrg('2601')),
         customerCodeInfo:
@@ -139,13 +141,12 @@ void main() {
           custCode: '',
           salesOrg: '',
           materialQuery: PriceDto.fromDomain(PriceAggregate.empty().price)
-              .priceOverrideQuery(0.0),
+              .priceOverrideQuery(0.0, 0.0),
         ),
       ).thenThrow((invocation) async => MockException());
 
       final result = await priceOverrideRepository.updateItemPrice(
         item: PriceAggregate.empty(),
-        newPrice: 0.0,
         salesOrganisation: mockSalesOrganisation,
         customerCodeInfo: mockCustomerCodeInfo,
       );
@@ -169,7 +170,6 @@ void main() {
           price:
               Price.empty().copyWith(priceOverride: PriceOverrideValue(70.0)),
         ),
-        newPrice: 70.0,
         salesOrganisation: mockSalesOrganisation,
         customerCodeInfo: mockCustomerCodeInfo,
       );
