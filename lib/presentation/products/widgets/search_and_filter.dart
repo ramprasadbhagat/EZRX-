@@ -114,7 +114,13 @@ class _SearchAndFilterState extends State<SearchAndFilter> {
                       .state
                       .selectedMaterialFilter
                       .isProductOffer !=
-                  value.isProductOffer) {
+                  value.isProductOffer ||
+              context
+                      .read<MaterialListBloc>()
+                      .state
+                      .selectedMaterialFilter
+                      .sortBy !=
+                  value.sortBy) {
             context.read<MaterialListBloc>().add(
                   MaterialListEvent.fetch(
                     salesOrganisation:
