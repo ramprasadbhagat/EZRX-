@@ -12,8 +12,7 @@ class _OrderDetailHeader extends StatelessWidget {
           contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
           tileColor: ZPColors.primary,
           title: Text(
-            state.orderHistoryDetails.orderHistoryDetailsOrderHeader.orderNumber
-                .getOrDefaultValue(''),
+            '${'Order'.tr()} #${state.orderHistoryDetails.orderHistoryDetailsOrderHeader.orderNumber.getOrDefaultValue('')}',
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: ZPColors.white,
                 ),

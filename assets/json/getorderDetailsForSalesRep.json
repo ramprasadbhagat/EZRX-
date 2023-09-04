@@ -9,7 +9,8 @@
           "Type": "ZPOR",
           "TelephoneNumber": "66726060",
           "EZRXNumber": "EZRX-ba1da3d",
-          "OrderValue": 0
+          "OrderValue": 0,
+          "OrderNumber":"0200262073"
         },
         "ShippingInformation": {
           "Address": "",

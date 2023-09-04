@@ -16,6 +16,7 @@ class ViewByOrderDetailsQueryMutation {
       CreatedDate
       ReferenceNotes
       OrderReason
+      OrderNumber
 
     }
     ShippingInformation {
