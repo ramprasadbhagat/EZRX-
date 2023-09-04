@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
@@ -20,6 +21,12 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late ReturnListRepository returnListRepositoryMock;
   late Config config;
+  final mockSalesOrg = SalesOrg('2001');
+  final mockShipInfo =
+      ShipToInfo.empty().copyWith(shipToCustomerCode: 'mock-customer-code-1');
+  final mockUser = User.empty().copyWith(username: Username('mock-user-name'));
+  final mockCustomerCodeInfo =
+      CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'mockCustomerCode');
 
   group('Return List BLOC Testing=>', () {
     setUp(() {
@@ -33,8 +40,22 @@ void main() {
         returnListRepository: returnListRepositoryMock,
         config: config,
       ),
-      act: (bloc) => bloc.add(const ReturnListByItemEvent.initialized()),
-      expect: () => [ReturnListByItemState.initial()],
+      act: (bloc) => bloc.add(
+        ReturnListByItemEvent.initialized(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+        ),
+      ),
+      expect: () => [
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+        ),
+      ],
     );
 
     blocTest<ReturnListByItemBloc, ReturnListByItemState>(
@@ -43,15 +64,21 @@ void main() {
         returnListRepository: returnListRepositoryMock,
         config: config,
       ),
+      seed: () => ReturnListByItemState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
+      ),
       setUp: () {
         when(
           () => returnListRepositoryMock.fetchReturnListByItem(
             appliedFilter: ReturnFilter.empty(),
-            customerCode: CustomerCodeInfo.empty(),
-            salesOrg: SalesOrg('2001'),
+            salesOrg: mockSalesOrg,
+            shipToInfo: mockShipInfo,
+            customerCode: mockCustomerCodeInfo,
+            user: mockUser,
             searchKey: SearchKey(''),
-            shipToInfo: ShipToInfo.empty(),
-            user: User.empty(),
             offset: 0,
             pageSize: 24,
           ),
@@ -62,18 +89,22 @@ void main() {
       act: (bloc) => bloc.add(
         ReturnListByItemEvent.fetch(
           appliedFilter: ReturnFilter.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          salesOrg: SalesOrg('2001'),
           searchKey: SearchKey(''),
-          shipInfo: ShipToInfo.empty(),
-          user: User.empty(),
         ),
       ),
       expect: () => [
         ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           isFetching: true,
         ),
         ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           isFetching: false,
           canLoadMore: false,
           failureOrSuccessOption:
@@ -88,15 +119,21 @@ void main() {
         returnListRepository: returnListRepositoryMock,
         config: config,
       ),
+      seed: () => ReturnListByItemState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
+      ),
       setUp: () {
         when(
           () => returnListRepositoryMock.fetchReturnListByItem(
             appliedFilter: ReturnFilter.empty(),
-            customerCode: CustomerCodeInfo.empty(),
-            salesOrg: SalesOrg('2001'),
+            salesOrg: mockSalesOrg,
+            shipToInfo: mockShipInfo,
+            customerCode: mockCustomerCodeInfo,
+            user: mockUser,
             searchKey: SearchKey(''),
-            shipToInfo: ShipToInfo.empty(),
-            user: User.empty(),
             offset: 0,
             pageSize: 24,
           ),
@@ -105,18 +142,21 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        ReturnListByItemEvent.loadMore(
-          customerCodeInfo: CustomerCodeInfo.empty(),
-          salesOrg: SalesOrg('2001'),
-          shipInfo: ShipToInfo.empty(),
-          user: User.empty(),
-        ),
+        const ReturnListByItemEvent.loadMore(),
       ),
       expect: () => [
         ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           isFetching: true,
         ),
         ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
           isFetching: false,
           canLoadMore: false,
           failureOrSuccessOption:

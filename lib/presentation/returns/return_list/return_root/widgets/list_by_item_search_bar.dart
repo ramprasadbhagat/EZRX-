@@ -13,11 +13,6 @@ class _ListByItemSearchBar extends StatelessWidget {
     if (!onClear && searchKey.isEmpty) return;
     context.read<ReturnListByItemBloc>().add(
           ReturnListByItemEvent.fetch(
-            salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-            user: context.read<UserBloc>().state.user,
             appliedFilter:
                 context.read<ReturnListByItemBloc>().state.appliedFilter,
             searchKey: SearchKey.searchFilter(searchKey),
@@ -40,11 +35,6 @@ class _ListByItemSearchBar extends StatelessWidget {
           initialValue: state.searchKey.searchValueOrEmpty,
           onSearchChanged: (value) => context.read<ReturnListByItemBloc>().add(
                 ReturnListByItemEvent.autoSearchProduct(
-                  salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-                  user: context.read<UserBloc>().state.user,
                   appliedFilter:
                       context.read<ReturnListByItemBloc>().state.appliedFilter,
                   searchKey: SearchKey.searchFilter(value),

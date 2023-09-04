@@ -26,17 +26,22 @@ class ReturnListByItemBloc
     required this.returnListRepository,
     required this.config,
   }) : super(ReturnListByItemState.initial()) {
-    on<_Initialized>((event, emit) => emit(ReturnListByItemState.initial()));
+    on<_Initialized>(
+      (event, emit) => emit(
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: event.salesOrg,
+          user: event.user,
+          customerCodeInfo: event.customerCodeInfo,
+          shipInfo: event.shipInfo,
+        ),
+      ),
+    );
     on<_AutoSearchProduct>(
       (e, emit) {
         if (e.searchKey == state.searchKey) return;
         if (e.searchKey.isValid()) {
           add(
             _Fetch(
-              customerCodeInfo: e.customerCodeInfo,
-              salesOrg: e.salesOrg,
-              shipInfo: e.shipInfo,
-              user: e.user,
               appliedFilter: e.appliedFilter,
               searchKey: e.searchKey,
             ),
@@ -65,10 +70,10 @@ class ReturnListByItemBloc
 
         final failureOrSuccess =
             await returnListRepository.fetchReturnListByItem(
-          salesOrg: e.salesOrg,
-          shipToInfo: e.shipInfo,
-          customerCode: e.customerCodeInfo,
-          user: e.user,
+          customerCode: state.customerCodeInfo,
+          salesOrg: state.salesOrg,
+          shipToInfo: state.shipInfo,
+          user: state.user,
           pageSize: config.pageSize,
           offset: 0,
           appliedFilter: e.appliedFilter,
@@ -113,10 +118,10 @@ class ReturnListByItemBloc
 
         final failureOrSuccess =
             await returnListRepository.fetchReturnListByItem(
-          salesOrg: e.salesOrg,
-          shipToInfo: e.shipInfo,
-          customerCode: e.customerCodeInfo,
-          user: e.user,
+          customerCode: state.customerCodeInfo,
+          salesOrg: state.salesOrg,
+          shipToInfo: state.shipInfo,
+          user: state.user,
           pageSize: config.pageSize,
           offset: state.returnItemList.length,
           appliedFilter: state.appliedFilter,

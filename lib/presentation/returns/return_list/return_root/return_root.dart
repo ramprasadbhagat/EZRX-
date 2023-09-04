@@ -1,8 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
@@ -40,18 +37,8 @@ class _ReturnRootState extends State<ReturnRoot> {
   }
 
   void _fetchData() {
-    final salesOrg =
-        context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg;
-    final shipToInfo = context.read<CustomerCodeBloc>().state.shipToInfo;
-    final customerCodeInfo =
-        context.read<CustomerCodeBloc>().state.customerCodeInfo;
-    final user = context.read<UserBloc>().state.user;
     context.read<ReturnListByItemBloc>().add(
           ReturnListByItemEvent.fetch(
-            salesOrg: salesOrg,
-            shipInfo: shipToInfo,
-            customerCodeInfo: customerCodeInfo,
-            user: user,
             appliedFilter: ReturnFilter.empty(),
             searchKey: SearchKey(''),
           ),

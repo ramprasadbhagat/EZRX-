@@ -4,6 +4,10 @@ part of 'return_list_by_item_bloc.dart';
 class ReturnListByItemState with _$ReturnListByItemState {
   const ReturnListByItemState._();
   const factory ReturnListByItemState({
+    required SalesOrg salesOrg,
+    required ShipToInfo shipInfo,
+    required CustomerCodeInfo customerCodeInfo,
+    required User user,
     required List<ReturnItem> returnItemList,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isFetching,
@@ -13,6 +17,10 @@ class ReturnListByItemState with _$ReturnListByItemState {
   }) = _ReturnListByItemState;
 
   factory ReturnListByItemState.initial() => ReturnListByItemState(
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        salesOrg: SalesOrg(''),
+        shipInfo: ShipToInfo.empty(),
+        user: User.empty(),
         failureOrSuccessOption: none(),
         isFetching: false,
         canLoadMore: true,

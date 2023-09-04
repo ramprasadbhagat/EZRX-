@@ -974,6 +974,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
             ),
           );
+      context.read<ReturnListByItemBloc>().add(
+            ReturnListByItemEvent.initialized(
+              salesOrg:
+                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: user,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
+            ),
+          );
     } else {
       final user = context.read<UserBloc>().state.user;
       final customerCodeState = context.read<CustomerCodeBloc>().state;
@@ -989,7 +998,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             const AccountSummaryEvent.initialize(),
           );
       context.read<ReturnListByItemBloc>().add(
-            const ReturnListByItemEvent.initialized(),
+            ReturnListByItemEvent.initialized(
+              salesOrg:
+                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: user,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
+            ),
           );
       context.read<ReturnListByRequestBloc>().add(
             ReturnListByRequestEvent.initialized(

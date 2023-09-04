@@ -54,11 +54,6 @@ class _FilterReturnByItem extends StatelessWidget {
       if (value != null && value as ReturnFilter != stateFilter) {
         context.read<ReturnListByItemBloc>().add(
               ReturnListByItemEvent.fetch(
-                salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-                user: context.read<UserBloc>().state.user,
                 appliedFilter: value,
                 searchKey: context.read<ReturnListByItemBloc>().state.searchKey,
               ),
