@@ -330,8 +330,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
           },
-          (cartItemList) => emit(
-            CartState.initial(),
+          (_) => emit(
+            CartState.initial().copyWith(
+              config: state.config,
+              shipToInfo: state.shipToInfo,
+              salesOrganisation: state.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+            ),
           ),
         );
       },
