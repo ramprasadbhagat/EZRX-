@@ -117,7 +117,7 @@ import '../payments/new_payment/tabs/payment_method_tab.dart' as _i83;
 import '../payments/payment_advice_created/payment_advice_created_page.dart'
     as _i46;
 import '../payments/payment_page.dart' as _i31;
-import '../payments/payment_summary/payment_summary.dart' as _i33;
+import '../payments/payment_summary/payment_summary_page.dart' as _i33;
 import '../payments/payment_summary_details/payment_summary_details_screen.dart'
     as _i38;
 import '../payments/payment_webview/payment_webview_page.dart' as _i43;

@@ -1,33 +1,19 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:flutter/material.dart';
+part of 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_page.dart';
 
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
+class _PaymentSummaryGroupItem extends StatelessWidget {
+  final PaymentSummaryGroup paymentSummaryGroup;
+  final bool showDivider;
 
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_group.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-
-class PaymentSummaryGroupSection extends StatelessWidget {
-  const PaymentSummaryGroupSection({
+  const _PaymentSummaryGroupItem({
     Key? key,
     required this.paymentSummaryGroup,
     required this.showDivider,
   }) : super(key: key);
-  final PaymentSummaryGroup paymentSummaryGroup;
-  final bool showDivider;
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (showDivider)
           const Divider(
@@ -36,42 +22,37 @@ class PaymentSummaryGroupSection extends StatelessWidget {
             endIndent: 0,
             color: ZPColors.lightGray2,
           ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 16),
-              child: Text(
-                '${'Created on'.tr()} ${paymentSummaryGroup.createdDate.dateString}',
-                style: Theme.of(context)
-                    .textTheme
-                    .labelSmall
-                    ?.apply(color: ZPColors.lightGray),
-              ),
-            ),
-            Column(
-              children: paymentSummaryGroup.paymentSummaryDetails
-                  .map(
-                    (e) => _PaymentSummaryTiles(
-                      paymentSummaryDetails: e,
-                    ),
-                  )
-                  .toList(),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.only(left: 20, top: 16),
+          child: Text(
+            '${'Created on'.tr()} ${paymentSummaryGroup.createdDate.dateString}',
+            style: Theme.of(context)
+                .textTheme
+                .labelSmall
+                ?.apply(color: ZPColors.lightGray),
+          ),
         ),
+        ...paymentSummaryGroup.paymentSummaryDetails
+            .map(
+              (e) => _PaymentSummaryItem(
+                paymentSummaryDetails: e,
+              ),
+            )
+            .toList(),
+        const SizedBox(height: 20),
       ],
     );
   }
 }
 
-class _PaymentSummaryTiles extends StatelessWidget {
-  const _PaymentSummaryTiles({Key? key, required this.paymentSummaryDetails})
-      : super(key: key);
+class _PaymentSummaryItem extends StatelessWidget {
   final PaymentSummaryDetails paymentSummaryDetails;
+
+  const _PaymentSummaryItem({
+    Key? key,
+    required this.paymentSummaryDetails,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -81,9 +62,9 @@ class _PaymentSummaryTiles extends StatelessWidget {
           context.read<PaymentItemBloc>().add(
                 PaymentItemEvent.fetchPaymentItemList(
                   salesOrganization:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
                   customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
                   paymentID: paymentSummaryDetails.paymentID,
                   paymentBatchAdditionalInfo:
                       paymentSummaryDetails.paymentBatchAdditionalInfo,
@@ -97,8 +78,10 @@ class _PaymentSummaryTiles extends StatelessWidget {
             ),
           );
         },
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 16,
+        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -127,12 +110,11 @@ class _PaymentSummaryTiles extends StatelessWidget {
                           .status.getPaymentDisplayStatusTextColor,
                     ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               PriceComponent(
                 price: paymentSummaryDetails.paymentAmount.toString(),
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
                 priceLabelStyle: Theme.of(context).textTheme.labelMedium,
               ),
             ],

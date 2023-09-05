@@ -77,7 +77,7 @@ import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
-import 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary.dart';
+import 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/add_sales_district_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/edit_sales_district_page.dart';
