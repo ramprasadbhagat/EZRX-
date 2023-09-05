@@ -11,9 +11,11 @@ class _ContactUsForm extends StatelessWidget {
         state.apiFailureOrSuccessOption.fold(
           () async {
             if (state.responseFlag) {
-              await CustomSnackBar(
-                messageText: 'Message has been received.',
-              ).show(context);
+              await context.router.pop().then(
+                    (value) => CustomSnackBar(
+                      messageText: 'Message has been received.',
+                    ).show(context),
+                  );
             } else {
               await CustomSnackBar(
                 messageText: 'Message has not been received.',

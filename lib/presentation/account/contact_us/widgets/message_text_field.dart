@@ -11,9 +11,6 @@ class _MessageTextField extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return TextFieldWithLabel(
-          key: WidgetKeys.genericKey(
-            key: state.contactUs.message.getOrDefaultValue(''),
-          ),
           fieldKey: WidgetKeys.contactMessageKey,
           labelText: 'Message'.tr(),
           mandatory: true,
