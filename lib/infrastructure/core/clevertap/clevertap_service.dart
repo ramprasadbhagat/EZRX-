@@ -14,6 +14,8 @@ class ClevertapService {
   Future<void> init() async {
     await createNotificationChannel();
     await setPushToken();
+    // await CleverTapPlugin.initializeInbox();
+    await CleverTapPlugin.registerForPush();
   }
 
   Future<void> createNotificationChannel() async {

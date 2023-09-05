@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/cart/price_override/price_override_
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -252,7 +253,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           context.router.pushNamed('orders/order_confirmation');
                         }
                       },
-                      (either) => {},
+                      (either) => either.fold(
+                        (failure) {
+                          ErrorUtils.handleApiFailure(context, failure);
+                        },
+                        (_) {},
+                      ),
                     );
                   },
                   builder: (context, state) => ElevatedButton(

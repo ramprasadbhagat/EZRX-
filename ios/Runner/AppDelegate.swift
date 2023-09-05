@@ -12,6 +12,7 @@ import clevertap_plugin
   ) -> Bool {
     FirebaseApp.configure()
     GeneratedPluginRegistrant.register(with: self)
+    CleverTap.autoIntegrate()
     CleverTapPlugin.sharedInstance()?.applicationDidLaunch(options: launchOptions)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
