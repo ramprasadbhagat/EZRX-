@@ -5,8 +5,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
@@ -358,8 +356,6 @@ void main() {
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
             appliedFilter: AllInvoicesFilter.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
           ),
         ),
       ).called(1);

@@ -842,6 +842,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           const MaterialPriceDetailEvent.initialized(),
         );
 
+    context.read<AllInvoicesBloc>().add(
+          AllInvoicesEvent.initialized(
+            salesOrganisation: salesOrgState.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        );
+
     if (state.haveShipTo) {
       final user = context.read<UserBloc>().state.user;
       final customerCodeState = context.read<CustomerCodeBloc>().state;
@@ -935,9 +942,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<AllInvoicesBloc>().add(
             AllInvoicesEvent.fetch(
               appliedFilter: AllInvoicesFilter.empty(),
-              salesOrganisation: salesOrgState.salesOrganisation,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
             ),
           );
       context.read<AllCreditsBloc>().add(

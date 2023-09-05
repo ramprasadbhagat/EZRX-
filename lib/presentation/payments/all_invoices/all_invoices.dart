@@ -95,28 +95,11 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
                                         .appliedFilter
                                         .searchKey,
                                   ),
-                                  salesOrganisation: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
                                 ),
                               ),
                           onLoadingMore: () {
                             context.read<AllInvoicesBloc>().add(
-                                  AllInvoicesEvent.loadMore(
-                                    salesOrganisation: context
-                                        .read<SalesOrgBloc>()
-                                        .state
-                                        .salesOrganisation,
-                                    customerCodeInfo: context
-                                        .read<CustomerCodeBloc>()
-                                        .state
-                                        .customerCodeInfo,
-                                  ),
+                                  const AllInvoicesEvent.loadMore(),
                                 );
                           },
                           isLoading: state.isLoading,

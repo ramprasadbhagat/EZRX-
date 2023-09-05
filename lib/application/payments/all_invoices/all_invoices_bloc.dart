@@ -24,7 +24,12 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
     required this.config,
   }) : super(AllInvoicesState.initial()) {
     on<_initialized>(
-      (event, emit) => emit(AllInvoicesState.initial()),
+      (e, emit) => emit(
+        AllInvoicesState.initial().copyWith(
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+        ),
+      ),
     );
     on<_AutoSearchProduct>(
       (e, emit) {
@@ -32,8 +37,6 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
         if (e.searchKey.isValid()) {
           add(
             _Fetch(
-              salesOrganisation: e.salesOrganisation,
-              customerCodeInfo: e.customerCodeInfo,
               appliedFilter:
                   state.appliedFilter.copyWith(searchKey: e.searchKey),
             ),
@@ -64,8 +67,8 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
 
         final failureOrSuccess =
             await allCreditsAndInvoicesRepository.filterInvoices(
-          salesOrganisation: e.salesOrganisation,
-          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
           filter: e.appliedFilter,
           pageSize: config.pageSize,
           offset: 0,
@@ -106,8 +109,8 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
 
         final failureOrSuccess =
             await allCreditsAndInvoicesRepository.filterInvoices(
-          salesOrganisation: e.salesOrganisation,
-          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
           filter: state.appliedFilter,
           pageSize: config.pageSize,
           offset: state.items.length,

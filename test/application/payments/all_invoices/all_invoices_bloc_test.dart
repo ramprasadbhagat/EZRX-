@@ -42,9 +42,18 @@ void main() {
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
-        act: (AllInvoicesBloc bloc) =>
-            bloc.add(const AllInvoicesEvent.initialized()),
-        expect: () => [AllInvoicesState.initial()],
+        act: (AllInvoicesBloc bloc) => bloc.add(
+          AllInvoicesEvent.initialized(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
+        ),
+        expect: () => [
+          AllInvoicesState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          )
+        ],
       );
     },
   );
@@ -76,8 +85,6 @@ void main() {
         act: (AllInvoicesBloc bloc) => bloc.add(
           AllInvoicesEvent.fetch(
             appliedFilter: AllInvoicesFilter.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
           ),
         ),
         expect: () => [
@@ -116,8 +123,6 @@ void main() {
         act: (AllInvoicesBloc bloc) => bloc.add(
           AllInvoicesEvent.fetch(
             appliedFilter: AllInvoicesFilter.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
           ),
         ),
         expect: () => [
@@ -164,10 +169,7 @@ void main() {
         );
       },
       act: (AllInvoicesBloc bloc) => bloc.add(
-        AllInvoicesEvent.loadMore(
-          salesOrganisation: SalesOrganisation.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
-        ),
+        const AllInvoicesEvent.loadMore(),
       ),
       expect: () => [
         AllInvoicesState.initial().copyWith(
@@ -223,10 +225,7 @@ void main() {
         );
       },
       act: (AllInvoicesBloc bloc) => bloc.add(
-        AllInvoicesEvent.loadMore(
-          salesOrganisation: SalesOrganisation.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
-        ),
+        const AllInvoicesEvent.loadMore(),
       ),
       expect: () => [
         AllInvoicesState.initial().copyWith(

@@ -5,6 +5,8 @@ class AllInvoicesState with _$AllInvoicesState {
   //Constructor created for Getter
   const AllInvoicesState._();
   const factory AllInvoicesState({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
     required AllInvoicesFilter appliedFilter,
     required List<CreditAndInvoiceItem> items,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -13,6 +15,8 @@ class AllInvoicesState with _$AllInvoicesState {
   }) = _AllInvoicesState;
 
   factory AllInvoicesState.initial() => AllInvoicesState(
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        salesOrganisation: SalesOrganisation.empty(),
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
