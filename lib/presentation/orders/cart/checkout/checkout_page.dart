@@ -17,6 +17,7 @@ import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/checkout_bu
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/delivery_info.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bonus_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_item.dart';
+import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_offer_bonus_item.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -418,6 +419,16 @@ class _ManufactureScrollList extends StatelessWidget {
                   : CheckoutProductItem(
                       cartItem: cartState.cartProducts[index],
                     ),
+              if (cartState.cartProducts[index].addedBonusList.isNotEmpty)
+                Column(
+                  children: cartState.cartProducts[index].addedBonusList
+                      .map(
+                        (e) => CheckoutOfferBonusItem(
+                          bonusItem: e,
+                        ),
+                      )
+                      .toList(),
+                ),
               if (cartState.cartProducts[index].bonusSampleItems.isNotEmpty)
                 Column(
                   children: cartState.cartProducts[index].bonusSampleItems

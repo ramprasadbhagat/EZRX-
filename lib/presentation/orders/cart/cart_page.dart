@@ -18,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bonus_offer_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
@@ -285,6 +286,16 @@ class _CartScrollList extends StatelessWidget {
                               : CartProductTile(
                                   cartItem: item,
                                 ),
+                          if (item.addedBonusList.isNotEmpty)
+                            Column(
+                              children: item.addedBonusList
+                                  .map(
+                                    (e) => CartProductOfferBonus(
+                                      bonusItem: e,
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
                           if (item.bonusSampleItems.isNotEmpty)
                             Column(
                               children: item.bonusSampleItems

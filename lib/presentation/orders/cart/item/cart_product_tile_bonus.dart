@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
@@ -122,7 +123,7 @@ class _ItemSubTotalSection extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerRight,
         child: Text(
-          'FREE',
+          'FREE'.tr(),
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: ZPColors.textButtonColor,
                 fontWeight: FontWeight.w700,
@@ -152,8 +153,6 @@ class _MaterialDetails extends StatelessWidget {
             children: [
               Text(
                 bonusItem.materialNumber.displayMatNo,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.darkGray,
                     ),
@@ -161,13 +160,14 @@ class _MaterialDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              const _BonusTag(),
+              const BonusTag(),
             ],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
               bonusItem.materialDescription,
+              maxLines: 2,
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
@@ -302,29 +302,6 @@ class _MaterialImageSection extends StatelessWidget {
           },
         ),
       ],
-    );
-  }
-}
-
-class _BonusTag extends StatelessWidget {
-  const _BonusTag({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: const BoxDecoration(
-        color: ZPColors.primary,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Text(
-        'Bonus',
-        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w500,
-              fontSize: 10,
-              color: ZPColors.white,
-            ),
-      ),
     );
   }
 }

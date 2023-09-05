@@ -260,6 +260,10 @@ class WidgetKeys {
   static const Key counterOfferPriceButtonKey =
       Key('counterOfferPriceButtonKey');
 
+  static const Key bonusOfferItemAddKey = Key('bonusOfferItemAddKey');
+  static const Key bonusOfferItemDeleteKey = Key('bonusOfferItemDeleteKey');
+  static const Key bonusOfferItemInputKey = Key('bonusOfferItemInputKey');
+
   static const Key counterOfferDiscountField = Key('counterOfferDiscountField');
   //============================================================
   //  Checkout Page Keys
@@ -381,7 +385,6 @@ class WidgetKeys {
   //============================================================
   static const Key bundleImage = Key('bundleImage');
   static const Key bundleDetailsCarousel = Key('bundleDetailsCarousel');
-
 
   //============================================================
   //  Return
@@ -514,10 +517,8 @@ class WidgetKeys {
   //============================================================
   static const Key notificationNotFoundRecordKey =
       Key('notificationNotFoundRecordKey');
-        //============================================================
+  //============================================================
   // FAQ page
   //============================================================
-  static const Key faqNotFoundRecordKey =
-      Key('faqNotFoundRecordKey');
-
+  static const Key faqNotFoundRecordKey = Key('faqNotFoundRecordKey');
 }
