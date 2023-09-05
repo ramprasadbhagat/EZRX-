@@ -15,25 +15,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-//TODO: After Dipankar's PR [https://zuelligpharma.atlassian.net/browse/EZRX-8464]
-//is merged need to convert this class to stateless widget and remove the
-// controller from TextField used
+part 'package:ezrxmobile/presentation/more/section/login_on_behalf/cancel_button.dart';
+part 'package:ezrxmobile/presentation/more/section/login_on_behalf/login_button.dart';
 
-class LoginOnBehalfSheet extends StatefulWidget {
+class LoginOnBehalfSheet extends StatelessWidget {
   const LoginOnBehalfSheet({Key? key}) : super(key: key);
-
-  @override
-  State<LoginOnBehalfSheet> createState() => _LoginOnBehalfSheetState();
-}
-
-class _LoginOnBehalfSheetState extends State<LoginOnBehalfSheet> {
-  final TextEditingController _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +90,6 @@ class _LoginOnBehalfSheetState extends State<LoginOnBehalfSheet> {
                   fieldKey: WidgetKeys.proxyLoginUserNameField,
                   mandatory: true,
                   labelText: 'Username'.tr(),
-                  controller: _controller,
                   isEnabled: !state.isSubmitting,
                   inputFormatters: [
                     TextInputFormatter.withFunction(
@@ -146,55 +131,6 @@ class _LoginOnBehalfSheetState extends State<LoginOnBehalfSheet> {
                 ),
               ],
             ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _CancelButton extends StatelessWidget {
-  const _CancelButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: OutlinedButton(
-        onPressed: () {
-          context.router.pop();
-        },
-        child: Text('Cancel'.tr()),
-      ),
-    );
-  }
-}
-
-class _LoginButton extends StatelessWidget {
-  const _LoginButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ProxyLoginFormBloc, ProxyLoginFormState>(
-      buildWhen: (previous, current) =>
-          previous.isSubmitting != current.isSubmitting,
-      builder: (context, state) {
-        return Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              if (state.isSubmitting) return;
-              FocusScope.of(context).unfocus();
-              context.read<ProxyLoginFormBloc>().add(
-                    ProxyLoginFormEvent.loginWithADButtonPressed(
-                      user: context.read<UserBloc>().state.user,
-                      salesOrg: context
-                          .read<SalesOrgBloc>()
-                          .state
-                          .salesOrganisation
-                          .salesOrg,
-                    ),
-                  );
-            },
-            child: Text('Login'.tr()),
           ),
         );
       },
