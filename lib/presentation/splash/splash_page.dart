@@ -26,6 +26,7 @@ import 'package:ezrxmobile/application/payments/account_summary/account_summary_
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
@@ -888,7 +889,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               selectedOrderType: orderDocumentTypeState.selectedOrderType,
             ),
           );
-
+      context.read<DownloadPaymentAttachmentsBloc>().add(
+            DownloadPaymentAttachmentEvent.initialized(
+              salesOrganization:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
+            ),
+          );
       if (user.userCanAccessOrderHistory) {
         context.read<ViewByItemsBloc>().add(
               ViewByItemsEvent.fetch(
@@ -1007,6 +1014,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               customerCodeInfo: customerCodeState.customerCodeInfo,
             ),
           );
+
       context.read<ReturnListByRequestBloc>().add(
             ReturnListByRequestEvent.initialized(
               salesOrg:

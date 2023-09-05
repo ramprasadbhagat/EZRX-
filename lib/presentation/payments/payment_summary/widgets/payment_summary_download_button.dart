@@ -41,16 +41,8 @@ class _PaymentSummaryDownloadButton extends StatelessWidget {
           : IconButton(
               onPressed: () =>
                   context.read<DownloadPaymentAttachmentsBloc>().add(
-                        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
-                          salesOrganization: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .salesOrganisation,
-                          customerCodeInfo: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .customerCodeInfo,
-                        ),
+                        const DownloadPaymentAttachmentEvent
+                            .fetchPaymentSummaryUrl(),
                       ),
               icon: const Icon(Icons.cloud_download_outlined),
             ),

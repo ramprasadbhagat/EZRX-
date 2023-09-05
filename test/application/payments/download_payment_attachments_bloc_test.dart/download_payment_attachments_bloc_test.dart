@@ -45,7 +45,12 @@ void main() {
       'Download all invoice url fail',
       build: () => DownloadPaymentAttachmentsBloc(
         paymentAttachmentRepository: downloadPaymentAttachmentRepository,
-      ),
+      )..add(
+          DownloadPaymentAttachmentEvent.initialized(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ),
       setUp: () {
         when(
           () => downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
@@ -61,17 +66,23 @@ void main() {
       },
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-          customerCodeInfo: customerCodeInfo,
           queryObject: AllInvoicesFilter.empty(),
-          salesOrganization: salesOrganization,
         ),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -86,7 +97,12 @@ void main() {
       'Download all invoice url success',
       build: () => DownloadPaymentAttachmentsBloc(
         paymentAttachmentRepository: downloadPaymentAttachmentRepository,
-      ),
+      )..add(
+          DownloadPaymentAttachmentEvent.initialized(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ),
       setUp: () {
         when(
           () => downloadPaymentAttachmentRepository.fetchAllInvoiceUrl(
@@ -111,17 +127,23 @@ void main() {
       },
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-          customerCodeInfo: customerCodeInfo,
-          salesOrganization: salesOrganization,
           queryObject: AllInvoicesFilter.empty(),
         ),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(Right(file)),
           isDownloadInProgress: false,
         )
@@ -132,7 +154,12 @@ void main() {
       'Download credit url fail',
       build: () => DownloadPaymentAttachmentsBloc(
         paymentAttachmentRepository: downloadPaymentAttachmentRepository,
-      ),
+      )..add(
+          DownloadPaymentAttachmentEvent.initialized(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ),
       setUp: () {
         when(
           () => downloadPaymentAttachmentRepository.fetchAllCreditUrl(
@@ -146,17 +173,23 @@ void main() {
       },
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-          customerCodeInfo: customerCodeInfo,
-          salesOrganization: salesOrganization,
           queryObject: AllCreditsFilter.empty(),
         ),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -171,7 +204,12 @@ void main() {
       'Download credit url success',
       build: () => DownloadPaymentAttachmentsBloc(
         paymentAttachmentRepository: downloadPaymentAttachmentRepository,
-      ),
+      )..add(
+          DownloadPaymentAttachmentEvent.initialized(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ),
       setUp: () {
         when(
           () => downloadPaymentAttachmentRepository.fetchAllCreditUrl(
@@ -196,17 +234,23 @@ void main() {
       },
       act: (bloc) => bloc.add(
         DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-          customerCodeInfo: customerCodeInfo,
-          salesOrganization: salesOrganization,
           queryObject: AllCreditsFilter.empty(),
         ),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(Right(file)),
           isDownloadInProgress: false,
         )
@@ -217,7 +261,12 @@ void main() {
       'Download paymentSummary url fail',
       build: () => DownloadPaymentAttachmentsBloc(
         paymentAttachmentRepository: downloadPaymentAttachmentRepository,
-      ),
+      )..add(
+          DownloadPaymentAttachmentEvent.initialized(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ),
       setUp: () {
         when(
           () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
@@ -231,17 +280,22 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
-          customerCodeInfo: customerCodeInfo,
-          salesOrganization: salesOrganization,
-        ),
+        const DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -256,7 +310,12 @@ void main() {
       'Download paymentSummary url success',
       build: () => DownloadPaymentAttachmentsBloc(
         paymentAttachmentRepository: downloadPaymentAttachmentRepository,
-      ),
+      )..add(
+          DownloadPaymentAttachmentEvent.initialized(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ),
       setUp: () {
         when(
           () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
@@ -279,17 +338,22 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
-          customerCodeInfo: customerCodeInfo,
-          salesOrganization: salesOrganization,
-        ),
+        const DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(Right(file)),
           isDownloadInProgress: false,
         )
@@ -300,7 +364,12 @@ void main() {
       'Download permission failed',
       build: () => DownloadPaymentAttachmentsBloc(
         paymentAttachmentRepository: downloadPaymentAttachmentRepository,
-      ),
+      )..add(
+          DownloadPaymentAttachmentEvent.initialized(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ),
       setUp: () {
         when(
           () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
@@ -318,17 +387,22 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
-          customerCodeInfo: customerCodeInfo,
-          salesOrganization: salesOrganization,
-        ),
+        const DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -343,7 +417,12 @@ void main() {
       'Download file failed',
       build: () => DownloadPaymentAttachmentsBloc(
         paymentAttachmentRepository: downloadPaymentAttachmentRepository,
-      ),
+      )..add(
+          DownloadPaymentAttachmentEvent.initialized(
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+          ),
+        ),
       setUp: () {
         when(
           () => downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
@@ -368,17 +447,22 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(
-          customerCodeInfo: customerCodeInfo,
-          salesOrganization: salesOrganization,
-        ),
+        const DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(),
       ),
       expect: () => [
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+        ),
+        DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           isDownloadInProgress: true,
           failureOrSuccessOption: none(),
         ),
         DownloadPaymentAttachmentsState.initial().copyWith(
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),

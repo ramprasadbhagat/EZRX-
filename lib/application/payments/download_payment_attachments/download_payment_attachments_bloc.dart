@@ -27,15 +27,18 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
 
   DownloadPaymentAttachmentsBloc({required this.paymentAttachmentRepository})
       : super(DownloadPaymentAttachmentsState.initial()) {
-    on<DownloadPaymentAttachmentEvent>(_onEvent);
-  }
-
-  Future<void> _onEvent(
-    DownloadPaymentAttachmentEvent event,
-    Emitter<DownloadPaymentAttachmentsState> emit,
-  ) async {
-    await event.map(
-      fetchAllInvoiceUrl: (e) async {
+    on<_Initialized>(
+      (event, emit) {
+        emit(
+          DownloadPaymentAttachmentsState.initial().copyWith(
+            customerCodeInfo: event.customerCodeInfo,
+            salesOrganization: event.salesOrganization,
+          ),
+        );
+      },
+    );
+    on<_FetchAllInvoiceUrl>(
+      (event, emit) async {
         emit(
           state.copyWith(
             isDownloadInProgress: true,
@@ -44,9 +47,9 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         );
         final failureOrSuccess =
             await paymentAttachmentRepository.fetchAllInvoiceUrl(
-          salesOrganization: e.salesOrganization,
-          customerCodeInfo: e.customerCodeInfo,
-          queryObject: e.queryObject,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganization: state.salesOrganization,
+          queryObject: event.queryObject,
         );
 
         failureOrSuccess.fold(
@@ -65,7 +68,9 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           ),
         );
       },
-      fetchAllCreditUrl: (e) async {
+    );
+    on<_FetchAllCreditUrl>(
+      (event, emit) async {
         emit(
           state.copyWith(
             isDownloadInProgress: true,
@@ -74,9 +79,9 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         );
         final failureOrSuccess =
             await paymentAttachmentRepository.fetchAllCreditUrl(
-          salesOrganization: e.salesOrganization,
-          customerCodeInfo: e.customerCodeInfo,
-          queryObject: e.queryObject,
+          queryObject: event.queryObject,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganization: state.salesOrganization,
         );
 
         failureOrSuccess.fold(
@@ -95,7 +100,9 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           ),
         );
       },
-      fetchPaymentSummaryUrl: (e) async {
+    );
+    on<_FetchPaymentSummaryUrl>(
+      (event, emit) async {
         emit(
           state.copyWith(
             isDownloadInProgress: true,
@@ -104,8 +111,8 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         );
         final failureOrSuccess =
             await paymentAttachmentRepository.fetchPaymentSummaryUrl(
-          salesOrganization: e.salesOrganization,
-          customerCodeInfo: e.customerCodeInfo,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganization: state.salesOrganization,
         );
 
         failureOrSuccess.fold(
@@ -124,7 +131,9 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           ),
         );
       },
-      downloadPaymentAttachment: (e) async {
+    );
+    on<_DownloadPaymentAttachment>(
+      (event, emit) async {
         final failureOrSuccessPermission =
             await paymentAttachmentRepository.downloadPermission();
 
@@ -138,49 +147,7 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           (_) async {
             final failureOrSuccess =
                 await paymentAttachmentRepository.downloadFiles(
-              files: e.files,
-            );
-            failureOrSuccess.fold(
-              (failure) => emit(
-                state.copyWith(
-                  isDownloadInProgress: false,
-                  failureOrSuccessOption: optionOf(failureOrSuccess),
-                ),
-              ),
-              (_) => emit(
-                state.copyWith(
-                  isDownloadInProgress: false,
-                  failureOrSuccessOption: optionOf(failureOrSuccess),
-                ),
-              ),
-            );
-          },
-        );
-      },
-      downloadSOA: (_DownloadSOA e) async {
-        emit(
-          state.copyWith(
-            isDownloadInProgress: true,
-            failureOrSuccessOption: none(),
-            fileUrl: DownloadPaymentAttachment(
-              url: e.soaData.getOrDefaultValue(''),
-            ),
-          ),
-        );
-        final failureOrSuccessPermission =
-            await paymentAttachmentRepository.downloadPermission();
-
-        await failureOrSuccessPermission.fold(
-          (failure) async => emit(
-            state.copyWith(
-              isDownloadInProgress: false,
-              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-            ),
-          ),
-          (_) async {
-            final failureOrSuccess =
-                await paymentAttachmentRepository.soaDownload(
-              soaData: e.soaData,
+              files: event.files,
             );
             failureOrSuccess.fold(
               (failure) => emit(
@@ -200,5 +167,47 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
         );
       },
     );
+    on<_DownloadSOA>((event, emit) async {
+      emit(
+        state.copyWith(
+          isDownloadInProgress: true,
+          failureOrSuccessOption: none(),
+          fileUrl: DownloadPaymentAttachment(
+            url: event.soaData.getOrDefaultValue(''),
+          ),
+        ),
+      );
+      final failureOrSuccessPermission =
+          await paymentAttachmentRepository.downloadPermission();
+
+      await failureOrSuccessPermission.fold(
+        (failure) async => emit(
+          state.copyWith(
+            isDownloadInProgress: false,
+            failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+          ),
+        ),
+        (_) async {
+          final failureOrSuccess =
+              await paymentAttachmentRepository.soaDownload(
+            soaData: event.soaData,
+          );
+          failureOrSuccess.fold(
+            (failure) => emit(
+              state.copyWith(
+                isDownloadInProgress: false,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            ),
+            (_) => emit(
+              state.copyWith(
+                isDownloadInProgress: false,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            ),
+          );
+        },
+      );
+    });
   }
 }

@@ -18,15 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DownloadPaymentAttachmentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)
-        fetchAllInvoiceUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)
-        fetchAllCreditUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)
-        fetchPaymentSummaryUrl,
+    required TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)
+        initialized,
+    required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
+    required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -34,15 +31,12 @@ mixin _$DownloadPaymentAttachmentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult? Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -50,15 +44,12 @@ mixin _$DownloadPaymentAttachmentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -67,6 +58,7 @@ mixin _$DownloadPaymentAttachmentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
@@ -78,6 +70,7 @@ mixin _$DownloadPaymentAttachmentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -88,6 +81,7 @@ mixin _$DownloadPaymentAttachmentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -121,18 +115,218 @@ class _$DownloadPaymentAttachmentEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
+abstract class _$$_InitializedCopyWith<$Res> {
+  factory _$$_InitializedCopyWith(
+          _$_Initialized value, $Res Function(_$_Initialized) then) =
+      __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {CustomerCodeInfo customerCodeInfo, SalesOrganisation salesOrganization});
+
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $SalesOrganisationCopyWith<$Res> get salesOrganization;
+}
+
+/// @nodoc
+class __$$_InitializedCopyWithImpl<$Res>
+    extends _$DownloadPaymentAttachmentEventCopyWithImpl<$Res, _$_Initialized>
+    implements _$$_InitializedCopyWith<$Res> {
+  __$$_InitializedCopyWithImpl(
+      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? customerCodeInfo = null,
+    Object? salesOrganization = null,
+  }) {
+    return _then(_$_Initialized(
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganization: null == salesOrganization
+          ? _value.salesOrganization
+          : salesOrganization // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganization {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganization, (value) {
+      return _then(_value.copyWith(salesOrganization: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Initialized implements _Initialized {
+  const _$_Initialized(
+      {required this.customerCodeInfo, required this.salesOrganization});
+
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final SalesOrganisation salesOrganization;
+
+  @override
+  String toString() {
+    return 'DownloadPaymentAttachmentEvent.initialized(customerCodeInfo: $customerCodeInfo, salesOrganization: $salesOrganization)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.salesOrganization, salesOrganization) ||
+                other.salesOrganization == salesOrganization));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, customerCodeInfo, salesOrganization);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)
+        initialized,
+    required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
+    required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function() fetchPaymentSummaryUrl,
+    required TResult Function(DownloadPaymentAttachment files)
+        downloadPaymentAttachment,
+    required TResult Function(SoaData soaData) downloadSOA,
+  }) {
+    return initialized(customerCodeInfo, salesOrganization);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function()? fetchPaymentSummaryUrl,
+    TResult? Function(DownloadPaymentAttachment files)?
+        downloadPaymentAttachment,
+    TResult? Function(SoaData soaData)? downloadSOA,
+  }) {
+    return initialized?.call(customerCodeInfo, salesOrganization);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function()? fetchPaymentSummaryUrl,
+    TResult Function(DownloadPaymentAttachment files)?
+        downloadPaymentAttachment,
+    TResult Function(SoaData soaData)? downloadSOA,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(customerCodeInfo, salesOrganization);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
+    required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
+    required TResult Function(_FetchPaymentSummaryUrl value)
+        fetchPaymentSummaryUrl,
+    required TResult Function(_DownloadPaymentAttachment value)
+        downloadPaymentAttachment,
+    required TResult Function(_DownloadSOA value) downloadSOA,
+  }) {
+    return initialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
+    TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
+    TResult? Function(_DownloadPaymentAttachment value)?
+        downloadPaymentAttachment,
+    TResult? Function(_DownloadSOA value)? downloadSOA,
+  }) {
+    return initialized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
+    TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
+    TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
+    TResult Function(_DownloadPaymentAttachment value)?
+        downloadPaymentAttachment,
+    TResult Function(_DownloadSOA value)? downloadSOA,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initialized implements DownloadPaymentAttachmentEvent {
+  const factory _Initialized(
+      {required final CustomerCodeInfo customerCodeInfo,
+      required final SalesOrganisation salesOrganization}) = _$_Initialized;
+
+  CustomerCodeInfo get customerCodeInfo;
+  SalesOrganisation get salesOrganization;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$_FetchAllInvoiceUrlCopyWith<$Res> {
   factory _$$_FetchAllInvoiceUrlCopyWith(_$_FetchAllInvoiceUrl value,
           $Res Function(_$_FetchAllInvoiceUrl) then) =
       __$$_FetchAllInvoiceUrlCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {SalesOrganisation salesOrganization,
-      CustomerCodeInfo customerCodeInfo,
-      AllInvoicesFilter queryObject});
+  $Res call({AllInvoicesFilter queryObject});
 
-  $SalesOrganisationCopyWith<$Res> get salesOrganization;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $AllInvoicesFilterCopyWith<$Res> get queryObject;
 }
 
@@ -147,40 +341,14 @@ class __$$_FetchAllInvoiceUrlCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrganization = null,
-    Object? customerCodeInfo = null,
     Object? queryObject = null,
   }) {
     return _then(_$_FetchAllInvoiceUrl(
-      salesOrganization: null == salesOrganization
-          ? _value.salesOrganization
-          : salesOrganization // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
       queryObject: null == queryObject
           ? _value.queryObject
           : queryObject // ignore: cast_nullable_to_non_nullable
               as AllInvoicesFilter,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganization {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganization, (value) {
-      return _then(_value.copyWith(salesOrganization: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
   }
 
   @override
@@ -195,21 +363,14 @@ class __$$_FetchAllInvoiceUrlCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
-  const _$_FetchAllInvoiceUrl(
-      {required this.salesOrganization,
-      required this.customerCodeInfo,
-      required this.queryObject});
+  const _$_FetchAllInvoiceUrl({required this.queryObject});
 
-  @override
-  final SalesOrganisation salesOrganization;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
   @override
   final AllInvoicesFilter queryObject;
 
   @override
   String toString() {
-    return 'DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, queryObject: $queryObject)';
+    return 'DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(queryObject: $queryObject)';
   }
 
   @override
@@ -217,17 +378,12 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FetchAllInvoiceUrl &&
-            (identical(other.salesOrganization, salesOrganization) ||
-                other.salesOrganization == salesOrganization) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.queryObject, queryObject) ||
                 other.queryObject == queryObject));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganization, customerCodeInfo, queryObject);
+  int get hashCode => Object.hash(runtimeType, queryObject);
 
   @JsonKey(ignore: true)
   @override
@@ -239,62 +395,51 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)
-        fetchAllInvoiceUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)
-        fetchAllCreditUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)
-        fetchPaymentSummaryUrl,
+    required TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)
+        initialized,
+    required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
+    required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
   }) {
-    return fetchAllInvoiceUrl(salesOrganization, customerCodeInfo, queryObject);
+    return fetchAllInvoiceUrl(queryObject);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult? Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
   }) {
-    return fetchAllInvoiceUrl?.call(
-        salesOrganization, customerCodeInfo, queryObject);
+    return fetchAllInvoiceUrl?.call(queryObject);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
     required TResult orElse(),
   }) {
     if (fetchAllInvoiceUrl != null) {
-      return fetchAllInvoiceUrl(
-          salesOrganization, customerCodeInfo, queryObject);
+      return fetchAllInvoiceUrl(queryObject);
     }
     return orElse();
   }
@@ -302,6 +447,7 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
@@ -316,6 +462,7 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -329,6 +476,7 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -346,12 +494,8 @@ class _$_FetchAllInvoiceUrl implements _FetchAllInvoiceUrl {
 
 abstract class _FetchAllInvoiceUrl implements DownloadPaymentAttachmentEvent {
   const factory _FetchAllInvoiceUrl(
-      {required final SalesOrganisation salesOrganization,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final AllInvoicesFilter queryObject}) = _$_FetchAllInvoiceUrl;
+      {required final AllInvoicesFilter queryObject}) = _$_FetchAllInvoiceUrl;
 
-  SalesOrganisation get salesOrganization;
-  CustomerCodeInfo get customerCodeInfo;
   AllInvoicesFilter get queryObject;
   @JsonKey(ignore: true)
   _$$_FetchAllInvoiceUrlCopyWith<_$_FetchAllInvoiceUrl> get copyWith =>
@@ -364,13 +508,8 @@ abstract class _$$_FetchAllCreditUrlCopyWith<$Res> {
           $Res Function(_$_FetchAllCreditUrl) then) =
       __$$_FetchAllCreditUrlCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {SalesOrganisation salesOrganization,
-      CustomerCodeInfo customerCodeInfo,
-      AllCreditsFilter queryObject});
+  $Res call({AllCreditsFilter queryObject});
 
-  $SalesOrganisationCopyWith<$Res> get salesOrganization;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $AllCreditsFilterCopyWith<$Res> get queryObject;
 }
 
@@ -385,40 +524,14 @@ class __$$_FetchAllCreditUrlCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrganization = null,
-    Object? customerCodeInfo = null,
     Object? queryObject = null,
   }) {
     return _then(_$_FetchAllCreditUrl(
-      salesOrganization: null == salesOrganization
-          ? _value.salesOrganization
-          : salesOrganization // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
       queryObject: null == queryObject
           ? _value.queryObject
           : queryObject // ignore: cast_nullable_to_non_nullable
               as AllCreditsFilter,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganization {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganization, (value) {
-      return _then(_value.copyWith(salesOrganization: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
   }
 
   @override
@@ -433,21 +546,14 @@ class __$$_FetchAllCreditUrlCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
-  const _$_FetchAllCreditUrl(
-      {required this.salesOrganization,
-      required this.customerCodeInfo,
-      required this.queryObject});
+  const _$_FetchAllCreditUrl({required this.queryObject});
 
-  @override
-  final SalesOrganisation salesOrganization;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
   @override
   final AllCreditsFilter queryObject;
 
   @override
   String toString() {
-    return 'DownloadPaymentAttachmentEvent.fetchAllCreditUrl(salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, queryObject: $queryObject)';
+    return 'DownloadPaymentAttachmentEvent.fetchAllCreditUrl(queryObject: $queryObject)';
   }
 
   @override
@@ -455,17 +561,12 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FetchAllCreditUrl &&
-            (identical(other.salesOrganization, salesOrganization) ||
-                other.salesOrganization == salesOrganization) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.queryObject, queryObject) ||
                 other.queryObject == queryObject));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganization, customerCodeInfo, queryObject);
+  int get hashCode => Object.hash(runtimeType, queryObject);
 
   @JsonKey(ignore: true)
   @override
@@ -477,62 +578,51 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)
-        fetchAllInvoiceUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)
-        fetchAllCreditUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)
-        fetchPaymentSummaryUrl,
+    required TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)
+        initialized,
+    required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
+    required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
   }) {
-    return fetchAllCreditUrl(salesOrganization, customerCodeInfo, queryObject);
+    return fetchAllCreditUrl(queryObject);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult? Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
   }) {
-    return fetchAllCreditUrl?.call(
-        salesOrganization, customerCodeInfo, queryObject);
+    return fetchAllCreditUrl?.call(queryObject);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
     required TResult orElse(),
   }) {
     if (fetchAllCreditUrl != null) {
-      return fetchAllCreditUrl(
-          salesOrganization, customerCodeInfo, queryObject);
+      return fetchAllCreditUrl(queryObject);
     }
     return orElse();
   }
@@ -540,6 +630,7 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
@@ -554,6 +645,7 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -567,6 +659,7 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -584,12 +677,8 @@ class _$_FetchAllCreditUrl implements _FetchAllCreditUrl {
 
 abstract class _FetchAllCreditUrl implements DownloadPaymentAttachmentEvent {
   const factory _FetchAllCreditUrl(
-      {required final SalesOrganisation salesOrganization,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final AllCreditsFilter queryObject}) = _$_FetchAllCreditUrl;
+      {required final AllCreditsFilter queryObject}) = _$_FetchAllCreditUrl;
 
-  SalesOrganisation get salesOrganization;
-  CustomerCodeInfo get customerCodeInfo;
   AllCreditsFilter get queryObject;
   @JsonKey(ignore: true)
   _$$_FetchAllCreditUrlCopyWith<_$_FetchAllCreditUrl> get copyWith =>
@@ -601,12 +690,6 @@ abstract class _$$_FetchPaymentSummaryUrlCopyWith<$Res> {
   factory _$$_FetchPaymentSummaryUrlCopyWith(_$_FetchPaymentSummaryUrl value,
           $Res Function(_$_FetchPaymentSummaryUrl) then) =
       __$$_FetchPaymentSummaryUrlCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisation salesOrganization, CustomerCodeInfo customerCodeInfo});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganization;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -617,137 +700,76 @@ class __$$_FetchPaymentSummaryUrlCopyWithImpl<$Res>
   __$$_FetchPaymentSummaryUrlCopyWithImpl(_$_FetchPaymentSummaryUrl _value,
       $Res Function(_$_FetchPaymentSummaryUrl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrganization = null,
-    Object? customerCodeInfo = null,
-  }) {
-    return _then(_$_FetchPaymentSummaryUrl(
-      salesOrganization: null == salesOrganization
-          ? _value.salesOrganization
-          : salesOrganization // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganization {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganization, (value) {
-      return _then(_value.copyWith(salesOrganization: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
-  const _$_FetchPaymentSummaryUrl(
-      {required this.salesOrganization, required this.customerCodeInfo});
-
-  @override
-  final SalesOrganisation salesOrganization;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
+  const _$_FetchPaymentSummaryUrl();
 
   @override
   String toString() {
-    return 'DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl(salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo)';
+    return 'DownloadPaymentAttachmentEvent.fetchPaymentSummaryUrl()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchPaymentSummaryUrl &&
-            (identical(other.salesOrganization, salesOrganization) ||
-                other.salesOrganization == salesOrganization) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+            other is _$_FetchPaymentSummaryUrl);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrganization, customerCodeInfo);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FetchPaymentSummaryUrlCopyWith<_$_FetchPaymentSummaryUrl> get copyWith =>
-      __$$_FetchPaymentSummaryUrlCopyWithImpl<_$_FetchPaymentSummaryUrl>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)
-        fetchAllInvoiceUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)
-        fetchAllCreditUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)
-        fetchPaymentSummaryUrl,
+    required TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)
+        initialized,
+    required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
+    required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
   }) {
-    return fetchPaymentSummaryUrl(salesOrganization, customerCodeInfo);
+    return fetchPaymentSummaryUrl();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult? Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
   }) {
-    return fetchPaymentSummaryUrl?.call(salesOrganization, customerCodeInfo);
+    return fetchPaymentSummaryUrl?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryUrl != null) {
-      return fetchPaymentSummaryUrl(salesOrganization, customerCodeInfo);
+      return fetchPaymentSummaryUrl();
     }
     return orElse();
   }
@@ -755,6 +777,7 @@ class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
@@ -769,6 +792,7 @@ class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -782,6 +806,7 @@ class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -799,16 +824,7 @@ class _$_FetchPaymentSummaryUrl implements _FetchPaymentSummaryUrl {
 
 abstract class _FetchPaymentSummaryUrl
     implements DownloadPaymentAttachmentEvent {
-  const factory _FetchPaymentSummaryUrl(
-          {required final SalesOrganisation salesOrganization,
-          required final CustomerCodeInfo customerCodeInfo}) =
-      _$_FetchPaymentSummaryUrl;
-
-  SalesOrganisation get salesOrganization;
-  CustomerCodeInfo get customerCodeInfo;
-  @JsonKey(ignore: true)
-  _$$_FetchPaymentSummaryUrlCopyWith<_$_FetchPaymentSummaryUrl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _FetchPaymentSummaryUrl() = _$_FetchPaymentSummaryUrl;
 }
 
 /// @nodoc
@@ -889,15 +905,12 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)
-        fetchAllInvoiceUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)
-        fetchAllCreditUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)
-        fetchPaymentSummaryUrl,
+    required TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)
+        initialized,
+    required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
+    required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -908,15 +921,12 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult? Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -927,15 +937,12 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -950,6 +957,7 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
@@ -964,6 +972,7 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -977,6 +986,7 @@ class _$_DownloadPaymentAttachment implements _DownloadPaymentAttachment {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -1068,15 +1078,12 @@ class _$_DownloadSOA implements _DownloadSOA {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)
-        fetchAllInvoiceUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)
-        fetchAllCreditUrl,
-    required TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)
-        fetchPaymentSummaryUrl,
+    required TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)
+        initialized,
+    required TResult Function(AllInvoicesFilter queryObject) fetchAllInvoiceUrl,
+    required TResult Function(AllCreditsFilter queryObject) fetchAllCreditUrl,
+    required TResult Function() fetchPaymentSummaryUrl,
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
@@ -1087,15 +1094,12 @@ class _$_DownloadSOA implements _DownloadSOA {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult? Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult? Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult? Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult? Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult? Function()? fetchPaymentSummaryUrl,
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
@@ -1106,15 +1110,12 @@ class _$_DownloadSOA implements _DownloadSOA {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllInvoicesFilter queryObject)?
-        fetchAllInvoiceUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo, AllCreditsFilter queryObject)?
-        fetchAllCreditUrl,
-    TResult Function(SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo)?
-        fetchPaymentSummaryUrl,
+    TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganization)?
+        initialized,
+    TResult Function(AllInvoicesFilter queryObject)? fetchAllInvoiceUrl,
+    TResult Function(AllCreditsFilter queryObject)? fetchAllCreditUrl,
+    TResult Function()? fetchPaymentSummaryUrl,
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
@@ -1129,6 +1130,7 @@ class _$_DownloadSOA implements _DownloadSOA {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
     required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
     required TResult Function(_FetchPaymentSummaryUrl value)
@@ -1143,6 +1145,7 @@ class _$_DownloadSOA implements _DownloadSOA {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -1156,6 +1159,7 @@ class _$_DownloadSOA implements _DownloadSOA {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
     TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
     TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
@@ -1184,6 +1188,8 @@ abstract class _DownloadSOA implements DownloadPaymentAttachmentEvent {
 mixin _$DownloadPaymentAttachmentsState {
   DownloadPaymentAttachment get fileUrl => throw _privateConstructorUsedError;
   bool get isDownloadInProgress => throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganization => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -1203,9 +1209,13 @@ abstract class $DownloadPaymentAttachmentsStateCopyWith<$Res> {
   $Res call(
       {DownloadPaymentAttachment fileUrl,
       bool isDownloadInProgress,
+      SalesOrganisation salesOrganization,
+      CustomerCodeInfo customerCodeInfo,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   $DownloadPaymentAttachmentCopyWith<$Res> get fileUrl;
+  $SalesOrganisationCopyWith<$Res> get salesOrganization;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -1224,6 +1234,8 @@ class _$DownloadPaymentAttachmentsStateCopyWithImpl<$Res,
   $Res call({
     Object? fileUrl = null,
     Object? isDownloadInProgress = null,
+    Object? salesOrganization = null,
+    Object? customerCodeInfo = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -1235,6 +1247,14 @@ class _$DownloadPaymentAttachmentsStateCopyWithImpl<$Res,
           ? _value.isDownloadInProgress
           : isDownloadInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
+      salesOrganization: null == salesOrganization
+          ? _value.salesOrganization
+          : salesOrganization // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1247,6 +1267,22 @@ class _$DownloadPaymentAttachmentsStateCopyWithImpl<$Res,
   $DownloadPaymentAttachmentCopyWith<$Res> get fileUrl {
     return $DownloadPaymentAttachmentCopyWith<$Res>(_value.fileUrl, (value) {
       return _then(_value.copyWith(fileUrl: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganization {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganization, (value) {
+      return _then(_value.copyWith(salesOrganization: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
     });
   }
 }
@@ -1263,10 +1299,16 @@ abstract class _$$_DownloadPaymentAttachmentsStateCopyWith<$Res>
   $Res call(
       {DownloadPaymentAttachment fileUrl,
       bool isDownloadInProgress,
+      SalesOrganisation salesOrganization,
+      CustomerCodeInfo customerCodeInfo,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   @override
   $DownloadPaymentAttachmentCopyWith<$Res> get fileUrl;
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganization;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -1284,6 +1326,8 @@ class __$$_DownloadPaymentAttachmentsStateCopyWithImpl<$Res>
   $Res call({
     Object? fileUrl = null,
     Object? isDownloadInProgress = null,
+    Object? salesOrganization = null,
+    Object? customerCodeInfo = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_DownloadPaymentAttachmentsState(
@@ -1295,6 +1339,14 @@ class __$$_DownloadPaymentAttachmentsStateCopyWithImpl<$Res>
           ? _value.isDownloadInProgress
           : isDownloadInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
+      salesOrganization: null == salesOrganization
+          ? _value.salesOrganization
+          : salesOrganization // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1310,6 +1362,8 @@ class _$_DownloadPaymentAttachmentsState
   const _$_DownloadPaymentAttachmentsState(
       {required this.fileUrl,
       required this.isDownloadInProgress,
+      required this.salesOrganization,
+      required this.customerCodeInfo,
       required this.failureOrSuccessOption});
 
   @override
@@ -1317,11 +1371,15 @@ class _$_DownloadPaymentAttachmentsState
   @override
   final bool isDownloadInProgress;
   @override
+  final SalesOrganisation salesOrganization;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'DownloadPaymentAttachmentsState(fileUrl: $fileUrl, isDownloadInProgress: $isDownloadInProgress, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'DownloadPaymentAttachmentsState(fileUrl: $fileUrl, isDownloadInProgress: $isDownloadInProgress, salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -1332,13 +1390,17 @@ class _$_DownloadPaymentAttachmentsState
             (identical(other.fileUrl, fileUrl) || other.fileUrl == fileUrl) &&
             (identical(other.isDownloadInProgress, isDownloadInProgress) ||
                 other.isDownloadInProgress == isDownloadInProgress) &&
+            (identical(other.salesOrganization, salesOrganization) ||
+                other.salesOrganization == salesOrganization) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, fileUrl, isDownloadInProgress, failureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, fileUrl, isDownloadInProgress,
+      salesOrganization, customerCodeInfo, failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -1354,6 +1416,8 @@ abstract class _DownloadPaymentAttachmentsState
   const factory _DownloadPaymentAttachmentsState(
       {required final DownloadPaymentAttachment fileUrl,
       required final bool isDownloadInProgress,
+      required final SalesOrganisation salesOrganization,
+      required final CustomerCodeInfo customerCodeInfo,
       required final Option<Either<ApiFailure, dynamic>>
           failureOrSuccessOption}) = _$_DownloadPaymentAttachmentsState;
 
@@ -1361,6 +1425,10 @@ abstract class _DownloadPaymentAttachmentsState
   DownloadPaymentAttachment get fileUrl;
   @override
   bool get isDownloadInProgress;
+  @override
+  SalesOrganisation get salesOrganization;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
