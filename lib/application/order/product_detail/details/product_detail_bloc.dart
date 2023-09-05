@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -28,16 +27,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     required this.productDetailRepository,
     required this.favouriteRepository,
   }) : super(ProductDetailState.initial()) {
-    on<ProductDetailEvent>(_onEvent);
-  }
-
-  FutureOr<void> _onEvent(
-    ProductDetailEvent event,
-    Emitter<ProductDetailState> emit,
-  ) async {
-    await event.map(
-      initialized: (_Initialized e) async => emit(ProductDetailState.initial()),
-      fetch: (_Fetch e) async {
+    on<_Initialized>((e, emit) async => emit(ProductDetailState.initial()));
+    on<_Fetch>(
+      (e, emit) async {
         emit(
           state.copyWith(
             isFetching: true,
@@ -92,7 +84,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           },
         );
       },
-      fetchStockForBundle: (_FetchStockForBundle e) async {
+      transformer: restartable(),
+    );
+    on<_FetchStockForBundle>(
+      ((e, emit) async {
         emit(
           state.copyWith(
             isFetching: true,
@@ -148,8 +143,12 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             isForBundle: true,
           ),
         );
-      },
-      fetchStock: (_FetchStock e) async {
+      }),
+      transformer: restartable(),
+    );
+
+    on<_FetchStock>(
+      (e, emit) async {
         emit(
           state.copyWith(
             isFetching: true,
@@ -190,7 +189,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           ),
         );
       },
-      fetchMetaData: (_FetchMetaData e) async {
+      transformer: restartable(),
+    );
+    on<_FetchMetaData>(
+      (e, emit) async {
         emit(
           state.copyWith(
             isFetching: true,
@@ -226,7 +228,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           );
         }
       },
-      fetchSimilarProduct: (_FetchSimilarProduct e) async {
+      transformer: restartable(),
+    );
+    on<_FetchSimilarProduct>(
+      (e, emit) async {
         emit(
           state.copyWith(
             isFetching: true,
@@ -264,10 +269,15 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           },
         );
       },
-      changeImage: (_ChangeImage e) async => emit(
+      transformer: restartable(),
+    );
+    on<_ChangeImage>(
+      (e, emit) async => emit(
         state.copyWith(selectedImageIndex: e.index),
       ),
-      addFavourite: (_AddFavourite e) async {
+    );
+    on<_AddFavourite>(
+      (e, emit) async {
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
@@ -303,7 +313,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           },
         );
       },
-      deleteFavourite: (_DeleteFavourite e) async {
+    );
+    on<_DeleteFavourite>(
+      (e, emit) async {
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
