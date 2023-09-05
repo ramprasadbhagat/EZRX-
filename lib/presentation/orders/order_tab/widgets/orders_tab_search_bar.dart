@@ -1,0 +1,182 @@
+part of 'package:ezrxmobile/presentation/orders/order_tab/orders_tab.dart';
+
+class _OrdersTabSearchBar extends StatelessWidget {
+  final bool isFromViewByOrder;
+  const _OrdersTabSearchBar({Key? key, required this.isFromViewByOrder})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return isFromViewByOrder
+        ? BlocBuilder<ViewByOrderBloc, ViewByOrderState>(
+            buildWhen: (previous, current) =>
+                previous.isFetching != current.isFetching,
+            builder: (context, state) {
+              return _OrderSearchBar(
+                isFromViewByOrder: isFromViewByOrder,
+                isFetching: state.isFetching,
+                searchText: state.searchKey.searchValueOrEmpty,
+              );
+            },
+          )
+        : BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
+            buildWhen: (previous, current) =>
+                previous.isFetching != current.isFetching,
+            builder: (context, state) {
+              return _OrderSearchBar(
+                isFromViewByOrder: isFromViewByOrder,
+                isFetching: state.isFetching,
+                searchText: state.searchKey.searchValueOrEmpty,
+              );
+            },
+          );
+  }
+}
+
+class _OrderSearchBar extends StatelessWidget {
+  final bool isFromViewByOrder;
+  final bool isFetching;
+  final String searchText;
+  const _OrderSearchBar({
+    Key? key,
+    required this.isFromViewByOrder,
+    required this.isFetching,
+    required this.searchText,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: CustomSearchBar(
+        key: WidgetKeys.genericKey(
+          key: searchText,
+        ),
+        enabled: !isFetching,
+        initialValue: searchText,
+        onSearchChanged: (value) => _onSearchChanged(
+          context,
+          value,
+        ),
+        onSearchSubmitted: (value) => _onSearch(
+          context,
+          value,
+        ),
+        clearIconKey: WidgetKeys.clearIconKey,
+        //customValidator: we are not taking the value from the state, as there is autosearch.
+        //It take time for 3 sec to emit the state, so we have used from local.
+        customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+        onClear: () => _onClear(context),
+      ),
+    );
+  }
+
+  void _onSearchChanged(BuildContext context, String value) => isFromViewByOrder
+      ? _doViewByOrderAutoSearch(
+          context: context,
+          searchKey: value,
+        )
+      : _doViewByItemAutoSearch(
+          context: context,
+          searchKey: value,
+        );
+
+  void _onSearch(BuildContext context, String value) => isFromViewByOrder
+      ? _doViewByOrderFetch(
+          context: context,
+          searchKey: value,
+        )
+      : _doFetchViewByItemFetch(
+          context: context,
+          searchKey: value,
+        );
+
+  void _onClear(BuildContext context) {
+    isFromViewByOrder
+        ? _doViewByOrderFetch(
+            context: context,
+            onClear: true,
+          )
+        : _doFetchViewByItemFetch(
+            context: context,
+            onClear: true,
+          );
+  }
+
+  void _doFetchViewByItemFetch({
+    required BuildContext context,
+    String searchKey = '',
+    bool onClear = false,
+  }) {
+    if (!onClear && searchKey.isEmpty) return;
+    context.read<ViewByItemsBloc>().add(
+          ViewByItemsEvent.fetch(
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+            user: context.read<UserBloc>().state.user,
+            viewByItemFilter:
+                context.read<ViewByItemsBloc>().state.appliedFilter,
+            searchKey: SearchKey.searchFilter(searchKey),
+            salesOrganisation:
+                context.read<EligibilityBloc>().state.salesOrganisation,
+          ),
+        );
+  }
+
+  void _doViewByOrderFetch({
+    required BuildContext context,
+    String searchKey = '',
+    bool onClear = false,
+  }) {
+    if (!onClear && searchKey.isEmpty) return;
+    context.read<ViewByOrderBloc>().add(
+          ViewByOrderEvent.fetch(
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+            user: context.read<UserBloc>().state.user,
+            sortDirection: 'desc',
+            searchKey: SearchKey.searchFilter(searchKey),
+            filter: context.read<ViewByOrderFilterBloc>().state.filter,
+          ),
+        );
+  }
+
+  void _doViewByItemAutoSearch({
+    required BuildContext context,
+    String searchKey = '',
+  }) =>
+      context.read<ViewByItemsBloc>().add(
+            ViewByItemsEvent.autoSearchProduct(
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: context.read<UserBloc>().state.user,
+              viewByItemFilter:
+                  context.read<ViewByItemsBloc>().state.appliedFilter,
+              searchKey: SearchKey.searchFilter(searchKey),
+              salesOrganisation:
+                  context.read<EligibilityBloc>().state.salesOrganisation,
+            ),
+          );
+
+  void _doViewByOrderAutoSearch({
+    required BuildContext context,
+    String searchKey = '',
+  }) =>
+      context.read<ViewByOrderBloc>().add(
+            ViewByOrderEvent.autoSearchProduct(
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: context.read<UserBloc>().state.user,
+              sortDirection: 'desc',
+              searchKey: SearchKey.searchFilter(searchKey),
+              filter: context.read<ViewByOrderFilterBloc>().state.filter,
+            ),
+          );
+}
