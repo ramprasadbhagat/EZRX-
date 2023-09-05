@@ -10,6 +10,8 @@ class _PreOrderScrollSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final preOrderItems = state.allMaterial.preOrderItems;
+
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -24,10 +26,13 @@ class _PreOrderScrollSection extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 index == 0 ||
-                        state.cartProducts[index].materialInfo.principalData
+                        preOrderItems[index]
+                                .materialInfo
+                                .principalData
                                 .principalName
                                 .getValue() !=
-                            state.cartProducts[index - 1].materialInfo
+                            preOrderItems[index - 1]
+                                .materialInfo
                                 .principalData.principalName
                                 .getValue()
                     ? _ManufacturerName(
@@ -51,7 +56,7 @@ class _PreOrderScrollSection extends StatelessWidget {
               ],
             );
           },
-          items: state.cartProducts.where((e) => e.isPreOrder).toList(),
+          items: preOrderItems,
         ),
       ),
     );

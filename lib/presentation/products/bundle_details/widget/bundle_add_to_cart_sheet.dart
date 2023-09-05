@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -88,7 +89,7 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
   Widget build(BuildContext context) {
     final addOosMaterials =
         context.read<SalesOrgBloc>().state.configs.addOosMaterials;
-
+    
     return Row(
       key: WidgetKeys.bundleMaterialListItem,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,9 +134,15 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
               ),
               const SizedBox(height: 8),
               CartItemQuantityInput(
-                isEnabled: widget.materialInfo.inStock ||
-                    (!widget.materialInfo.inStock &&
-                        addOosMaterials.isOutOfStock),
+                key: WidgetKeys.genericKey(
+                  key:
+                      'bundle${widget.materialInfo.materialNumber.displayMatNo}${_controller.text}quantity',
+                ),
+                isEnabled: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .isOutOfStockMaterialAllowed ||
+                    widget.materialInfo.inStock,
                 quantityAddKey: WidgetKeys.bundleInputAddKey,
                 quantityDeleteKey: WidgetKeys.bundleInputDeleteKey,
                 quantityTextKey: WidgetKeys.bundleQuantityTextKey,

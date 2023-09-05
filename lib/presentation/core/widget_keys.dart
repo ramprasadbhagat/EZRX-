@@ -259,6 +259,7 @@ class WidgetKeys {
   static const Key bonusSampleItemButtonKey = Key('bonusSampleItemButtonKey');
   static const Key counterOfferPriceButtonKey =
       Key('counterOfferPriceButtonKey');
+  static const Key preOrderModel = Key('preOrderModel');
 
   static const Key bonusOfferItemAddKey = Key('bonusOfferItemAddKey');
   static const Key bonusOfferItemDeleteKey = Key('bonusOfferItemDeleteKey');

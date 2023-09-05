@@ -348,12 +348,11 @@ class _OrderTag extends StatelessWidget {
           (element) => element.materialNumber == cartItem.materialNumber,
           orElse: () => MaterialInfo.empty(),
         );
-
-        return materialInfo.inStock ||
-                state.isFetching ||
-                state.isFetchingCartProductDetail
-            ? const SizedBox.shrink()
-            : StatusLabel(
+        if (materialInfo.stockInfos.isEmpty || materialInfo.inStock) {
+          return const SizedBox.shrink();
+        }
+        
+        return StatusLabel(
                 status: StatusType(
                   configs.addOosMaterials.oosMaterialTag,
                 ),

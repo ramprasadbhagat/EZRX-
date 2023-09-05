@@ -879,5 +879,72 @@ void main() {
         expect(eligibilityState.showGreenDeliveryBox, true);
       },
     );
+
+    test(
+      'salesOrgConfigs isOutOfStockMaterialAllowed for all',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            addOosMaterials: OosMaterial(true),
+            oosValue: OosValue(0),
+          ),
+        );
+
+        expect(eligibilityState.isOutOfStockMaterialAllowed, true);
+      },
+    );
+    test(
+      'salesOrgConfigs isOutOfStockMaterialAllowed for all',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            addOosMaterials: OosMaterial(true),
+            oosValue: OosValue(0),
+          ),
+        );
+
+        expect(eligibilityState.isOutOfStockMaterialAllowed, true);
+      },
+    );
+
+    test(
+      'salesOrgConfigs isOutOfStockMaterialAllowed for sales rep',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            addOosMaterials: OosMaterial(true),
+            oosValue: OosValue(1),
+          ),
+        );
+
+        expect(eligibilityState.isOutOfStockMaterialAllowed, true);
+      },
+    );
+
+    test(
+      'salesOrgConfigs isOutOfStockMaterialAllowed not allowed',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          user: fakeUser.copyWith(
+            role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            addOosMaterials: OosMaterial(false),
+            oosValue: OosValue(1),
+          ),
+        );
+
+        expect(eligibilityState.isOutOfStockMaterialAllowed, false);
+      },
+    );
   });
 }

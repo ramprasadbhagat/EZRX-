@@ -34,6 +34,7 @@ class PreOrderModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.preOrderModel,
       mainAxisSize: MainAxisSize.min,
       children: [
         AppBar(
@@ -62,7 +63,8 @@ class PreOrderModal extends StatelessWidget {
         ),
         BlocBuilder<CartBloc, CartState>(
           buildWhen: (previous, current) =>
-              previous.cartProducts.length != current.cartProducts.length,
+              previous.allMaterial.preOrderItems !=
+              current.allMaterial.preOrderItems,
           builder: (context, state) {
             return _PreOrderScrollSection(state: state);
           },

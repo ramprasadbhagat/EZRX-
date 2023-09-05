@@ -4,6 +4,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -42,16 +52,9 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
-import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
@@ -119,6 +122,9 @@ class OrderSummaryBlocMock
 class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
+class ProductImageBlocMock
+    extends MockBloc<ProductImageEvent, ProductImageState>
+    implements ProductImageBloc {}
 
 class MockAppRouter extends Mock implements AppRouter {}
 
@@ -133,6 +139,7 @@ void main() {
   late UserBloc userBloc;
   late SalesOrgBloc salesOrgBloc;
   late CustomerCodeBloc customerCodeBloc;
+  late ProductImageBloc productImageBloc;
   late List<PriceAggregate> mockCartItemWithDataList;
   late List<PriceAggregate> mockCartItemWithDataList2;
   late List<PriceAggregate> mockCartItemBundles;
@@ -200,6 +207,7 @@ void main() {
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       autoRouterMock = MockAppRouter();
+      productImageBloc = ProductImageBlocMock();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -211,133 +219,71 @@ void main() {
 
       mockCartItemBundles2 = [
         PriceAggregate.empty().copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('0000000000111111'),
-                materialDescription: ' Mosys D',
-                principalData: PrincipalData.empty().copyWith(
-                  principalName:
-                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
-                ),
-              ),
-            ),
-          ],
-          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
-            vatValue: 8,
-            enableVat: true,
-            enableTaxClassification: true,
-            enableTaxAtTotalLevelOnly: true,
-          ),
-          quantity: 5,
           bundle: Bundle.empty().copyWith(
             materials: <MaterialInfo>[
               MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('000000000023168451'),
-                materialDescription: ' Triglyceride Mosys D',
-                principalData: PrincipalData.empty().copyWith(
-                  principalName:
-                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
-                ),
-                remarks: '',
-              )
-            ],
-            bundleInformation: [
-              BundleInfo.empty().copyWith(
-                quantity: 1,
-                rate: 20.0,
-                sequence: 1,
-                type: DiscountType('%'),
-              ),
-              BundleInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
                 quantity: 10,
-                rate: 19.0,
-                sequence: 2,
-                type: DiscountType('%'),
+                stockInfos: <StockInfo>[
+                  StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('No'),
+                  )
+                ],
               ),
-              BundleInfo.empty().copyWith(
-                quantity: 100,
-                rate: 15.0,
-                sequence: 3,
-                type: DiscountType('%'),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+                quantity: 10,
+                stockInfos: <StockInfo>[
+                  StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('Yes'),
+                  )
+                ],
               ),
             ],
+            bundleInformation: [],
             bundleCode: '',
             bundleName: BundleName('test'),
-            bonusEligible: false,
           ),
           materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023168451'),
-            materialDescription: ' Triglyceride Mosys D',
-            principalData: PrincipalData.empty().copyWith(
-              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
-            ),
-            remarks: '',
+            materialNumber: MaterialNumber('fake-bundle'),
+            type: MaterialInfoType('bundle'),
           ),
-          stockInfo: StockInfo.empty().copyWith(
-            inStock: MaterialInStock('Yes'),
+          salesOrgConfig: SalesOrganisationConfigs.empty().copyWith(
+            addOosMaterials: OosMaterial(true),
+            oosValue: OosValue(1),
           ),
         ),
       ];
 
       mockCartItemBundles = [
         PriceAggregate.empty().copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('0000000000111111'),
-                materialDescription: ' Mosys D',
-                principalData: PrincipalData.empty().copyWith(
-                  principalName:
-                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
-                ),
-              ),
-            ),
-          ],
           quantity: 10,
           bundle: Bundle.empty().copyWith(
-            materials: <MaterialInfo>[],
+            materials: <MaterialInfo>[
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+                stockInfos: <StockInfo>[
+                  StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('Yes'),
+                  )
+                ],
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+                stockInfos: <StockInfo>[
+                  StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('Yes'),
+                  )
+                ],
+              ),
+            ],
             bundleInformation: [],
             bundleCode: '',
             bundleName: BundleName('test'),
           ),
           materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023168451'),
-            materialDescription: ' Triglyceride Mosys D',
-            principalData: PrincipalData.empty().copyWith(
-              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
-            ),
-            remarks: '',
-          ),
-          stockInfo: StockInfo.empty().copyWith(
-            inStock: MaterialInStock('Yes'),
-          ),
-        ),
-        PriceAggregate.empty().copyWith(
-          addedBonusList: [
-            MaterialItemBonus.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('0000000000111111'),
-                materialDescription: ' Mosys D',
-                principalData: PrincipalData.empty().copyWith(
-                  principalName:
-                      PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
-                ),
-              ),
-            )
-          ],
-          quantity: 1,
-          bundle: Bundle.empty(),
-          materialInfo: MaterialInfo.empty().copyWith(
-            materialNumber: MaterialNumber('000000000023168441'),
-            materialDescription: ' Triglyceride Mosys D',
-            principalData: PrincipalData.empty().copyWith(
-              principalName: PrincipalName('å�°ç�£æ‹œè€³è‚¡ä»½æœ‰é™�å…¬å�¸'),
-            ),
-            remarks: '',
-          ),
-          stockInfo: StockInfo.empty().copyWith(
-            inStock: MaterialInStock('Yes'),
+            materialNumber: MaterialNumber('fake-bundle'),
+            type: MaterialInfoType('bundle'),
           ),
         ),
       ];
@@ -579,6 +525,10 @@ void main() {
       when(() => autoRouterMock.currentPath).thenReturn('orders/cart');
       when(() => autoRouterMock.current).thenReturn(routeData);
       when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
+      when(() => productImageBloc.state).thenReturn(
+        ProductImageState.initial(),
+      );
+      
     },
   );
   group(
@@ -626,6 +576,9 @@ void main() {
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(
               create: (context) => announcementBlocMock,
+            ),
+            BlocProvider<ProductImageBloc>(
+              create: (context) => productImageBloc,
             ),
           ],
           child: const CartPage(),
@@ -767,6 +720,46 @@ void main() {
         );
         expect(closeIcon, findsOneWidget);
       });
+
+
+      testWidgets('Bundle item allowed out of stock material', (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: mockCartItemBundles2,
+            config: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+            ),
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              addOosMaterials: OosMaterial(true),
+              oosValue: OosValue(1),
+            ),
+          ),
+        );
+        when(() => salesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: SalesOrganisationConfigs.empty().copyWith(
+              addOosMaterials: OosMaterial(true),
+              oosValue: OosValue(1),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        expect(find.byType(StatusLabel), findsOneWidget);
+        expect(find.byKey(WidgetKeys.checkoutButton), findsOneWidget);
+        await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+        await tester.pump();
+        expect(find.byKey(WidgetKeys.preOrderModel), findsOneWidget);
+        expect(
+          find.byKey(const ValueKey('preOrderMaterialfake-material-1')),
+          findsOneWidget,
+        );
+      });
+
       // testWidgets('Test have cart item list and Refresh', (tester) async {
       //   when(() => cartBloc.state).thenReturn(
       //     CartState.initial().copyWith(

@@ -7,6 +7,9 @@ class _PreOrderProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.genericKey(
+        key: 'preOrderMaterial${cartProduct.getMaterialNumber.displayMatNo}',
+      ),
       padding: const EdgeInsets.all(8.0),
       margin: const EdgeInsets.only(top: 25.0),
       child: Column(
@@ -34,6 +37,7 @@ class _PreOrderProductTile extends StatelessWidget {
               const SizedBox(
                 width: 8,
               ),
+              if (cartProduct.materialInfo.type.typeMaterial)
               _PriceSection(cartProduct: cartProduct),
             ],
           ),

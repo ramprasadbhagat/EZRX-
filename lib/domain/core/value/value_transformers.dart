@@ -495,10 +495,6 @@ String getOosMaterialTag(bool value) {
   return value ? 'Preorder' : 'Out of stock';
 }
 
-bool isOutOfStockTag(bool value) {
-  return !value;
-}
-
 Color getOosMaterialTagColor(bool value) {
   return value ? ZPColors.orange : ZPColors.lightGray;
 }

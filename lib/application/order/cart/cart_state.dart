@@ -365,4 +365,12 @@ class CartState with _$CartState {
   bool get isMWPNotAllowedAndPresentInCart =>
       cartProducts.any((e) => e.price.finalPrice.isEmpty) &&
       !config.materialWithoutPrice;
+
+  List<PriceAggregate> get allMaterial => cartProducts
+      .expand(
+        (e) => e.materialInfo.type.typeBundle
+            ? e.bundleMaterialsPriceAggregate
+            : [e],
+      )
+      .toList();
 }

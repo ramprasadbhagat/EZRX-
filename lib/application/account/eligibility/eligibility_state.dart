@@ -208,4 +208,17 @@ class EligibilityState with _$EligibilityState {
 
   bool get isCounterOfferVisible =>
       !isOrderTypeEligibleAndSpecialOrderType && isPriceOverrideEnable;
+
+  bool get isOutOfStockMaterialAllowed {
+    if (!salesOrgConfigs.addOosMaterials.isOutOfStockMaterialAllowed) {
+      return false;
+    }
+
+    if (salesOrgConfigs.oosValue.isOosValueZero &&
+        !user.role.type.isSalesRepRole) {
+      return false;
+    }
+
+    return true;
+  }
 }

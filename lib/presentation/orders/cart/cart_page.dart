@@ -490,7 +490,7 @@ class _CheckoutButton extends StatelessWidget {
                     ? null
                     : () {
                         FocusScope.of(context).requestFocus(FocusNode());
-                        state.cartProducts.preOrderItemPresentOnCart
+                        state.allMaterial.preOrderItems.isNotEmpty
                             ? _showPreOrderModal(context: context)
                             : context.router.pushNamed('orders/cart/checkout');
                       },

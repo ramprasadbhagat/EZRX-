@@ -559,6 +559,17 @@ class PriceAggregate with _$PriceAggregate {
         )
       : stockInfoList.any((stock) => !stock.inStock.isMaterialInStock);
 
+  
+  List<PriceAggregate> get bundleMaterialsPriceAggregate => bundle.materials
+      .map(
+        (e) => PriceAggregate.empty().copyWith(
+          materialInfo: e,
+          stockInfoList: e.stockInfos,
+          quantity: e.quantity,
+          salesOrgConfig: salesOrgConfig,
+        ),
+      )
+      .toList();
 }
 
 enum PriceType {
