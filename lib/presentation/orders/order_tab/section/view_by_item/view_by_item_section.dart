@@ -132,7 +132,7 @@ class _ViewByOrderItemGroup extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
-                  'Ordered on ${orderHistoryItem.createdDate.dateString}',
+                  '${'Ordered on'.tr()} ${orderHistoryItem.createdDate.dateString}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkerGrey,
                       ),
@@ -204,7 +204,7 @@ class _ViewByOrderItem extends StatelessWidget {
             title: orderHistoryItem.materialDescription,
             subtitle: orderHistoryItem.manufactureName,
             headerText:
-                'Order #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                '${'Order'.tr()} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
             statusWidget: StatusLabel(
               status: StatusType(
                 orderHistoryItem.status.displayOrderStatus,
@@ -243,7 +243,7 @@ class _InvoiceNumber extends StatelessWidget {
           endIndent: 0,
         ),
         Text(
-          'Invoice #${orderHistoryItem.invoiceNumber}',
+          '${'Invoice'.tr()} #${orderHistoryItem.invoiceNumber}',
           style: Theme.of(context).textTheme.labelSmall,
         ),
       ],

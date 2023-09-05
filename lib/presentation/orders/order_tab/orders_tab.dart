@@ -14,7 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/filter/order_filter_page.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -219,7 +219,7 @@ class _FilterElement extends StatelessWidget {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (_) {
         return viewByItem
-            ? const OrderFilterPage()
+            ? const ViewByItemFilterSheet()
             : const ViewByOrderFilterBottomSheet();
       },
     ).then(
