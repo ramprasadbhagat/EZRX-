@@ -27,7 +27,15 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     required this.productDetailRepository,
     required this.favouriteRepository,
   }) : super(ProductDetailState.initial()) {
-    on<_Initialized>((e, emit) async => emit(ProductDetailState.initial()));
+    on<_Initialized>(
+      (e, emit) async => emit(
+        ProductDetailState.initial().copyWith(
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          shipToInfo: e.shipToInfo,
+        ),
+      ),
+    );
     on<_Fetch>(
       (e, emit) async {
         emit(
@@ -39,11 +47,11 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           ),
         );
         final failureOrSuccess = await productDetailRepository.getProductDetail(
-          customerCodeInfo: e.customerCodeInfo,
+          customerCodeInfo: state.customerCodeInfo,
           locale: e.locale,
           materialNumber: e.materialNumber,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
+          salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
           type: e.type,
         );
         await failureOrSuccess.fold(
@@ -65,9 +73,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 ? add(
                     _FetchStockForBundle(
                       materials: materialInfo.bundle.materials,
-                      salesOrganisation: e.salesOrganisation,
-                      customerCodeInfo: e.customerCodeInfo,
-                      shipToInfo: e.shipToInfo,
                       locale: e.locale,
                     ),
                   )
@@ -75,9 +80,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                     _FetchStock(
                       materialNumber: state
                           .productDetailAggregate.materialInfo.materialNumber,
-                      salesOrganisation: e.salesOrganisation,
-                      customerCodeInfo: e.customerCodeInfo,
-                      shipToInfo: e.shipToInfo,
                       locale: e.locale,
                     ),
                   );
@@ -96,8 +98,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         );
         final failureOrSuccess = await productDetailRepository.getStockInfoList(
           materials: e.materials,
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
         );
 
         failureOrSuccess.fold(
@@ -136,9 +138,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
 
         add(
           _FetchMetaData(
-            salesOrganisation: e.salesOrganisation,
-            customerCodeInfo: e.customerCodeInfo,
-            shipToInfo: e.shipToInfo,
             locale: e.locale,
             isForBundle: true,
           ),
@@ -158,8 +157,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         final failureOrSuccess = await productDetailRepository.getStockInfo(
           materialNumber:
               state.productDetailAggregate.materialInfo.materialNumber,
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
         );
 
         failureOrSuccess.fold(
@@ -181,9 +180,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
 
         add(
           _FetchMetaData(
-            salesOrganisation: e.salesOrganisation,
-            customerCodeInfo: e.customerCodeInfo,
-            shipToInfo: e.shipToInfo,
             locale: e.locale,
             isForBundle: false,
           ),
@@ -220,9 +216,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         if (!e.isForBundle) {
           add(
             _FetchSimilarProduct(
-              salesOrganisation: e.salesOrganisation,
-              customerCodeInfo: e.customerCodeInfo,
-              shipToInfo: e.shipToInfo,
               locale: e.locale,
             ),
           );
@@ -240,12 +233,12 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         );
         final failureOrSuccess =
             await productDetailRepository.getSimilarProduct(
-          customerCodeInfo: e.customerCodeInfo,
+          customerCodeInfo: state.customerCodeInfo,
           locale: e.locale,
           materialNumber:
               state.productDetailAggregate.materialInfo.materialNumber,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
+          salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
           principalCode: state
               .productDetailAggregate.materialInfo.principalData.principalCode,
         );

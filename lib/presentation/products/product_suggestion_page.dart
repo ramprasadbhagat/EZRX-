@@ -207,13 +207,9 @@ class _SuggestedProductTile extends StatelessWidget {
   }
 
   void _onTap(BuildContext context, MaterialInfo product) {
-    final eligibilityBlocState = context.read<EligibilityBloc>().state;
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialNumber: product.materialNumber,
-            salesOrganisation: eligibilityBlocState.salesOrganisation,
-            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
-            shipToInfo: eligibilityBlocState.shipToInfo,
             locale: context.locale,
             type: product.type,
           ),

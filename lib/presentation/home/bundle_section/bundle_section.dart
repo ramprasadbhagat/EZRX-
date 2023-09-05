@@ -211,13 +211,9 @@ class _BundleSectionItem extends StatelessWidget {
   }
 
   void _bundleOnTap(BuildContext context, MaterialInfo materialInfo) {
-    final eligibilityBlocState = context.read<EligibilityBloc>().state;
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialNumber: materialInfo.materialNumber,
-            salesOrganisation: eligibilityBlocState.salesOrganisation,
-            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
-            shipToInfo: eligibilityBlocState.shipToInfo,
             locale: context.locale,
             type: materialInfo.type,
           ),

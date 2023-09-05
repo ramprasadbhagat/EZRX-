@@ -850,6 +850,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
 
+    context.read<ProductDetailBloc>().add(
+          ProductDetailEvent.initialized(
+            salesOrganisation: salesOrgState.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+            shipToInfo: state.shipToInfo,
+          ),
+        );
+
     if (state.haveShipTo) {
       final user = context.read<UserBloc>().state.user;
       final customerCodeState = context.read<CustomerCodeBloc>().state;

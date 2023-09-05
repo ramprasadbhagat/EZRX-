@@ -4,6 +4,9 @@ part of 'product_detail_bloc.dart';
 class ProductDetailState with _$ProductDetailState {
   const ProductDetailState._();
   const factory ProductDetailState({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required ProductDetailAggregate productDetailAggregate,
     required bool isFetching,
@@ -11,6 +14,9 @@ class ProductDetailState with _$ProductDetailState {
   }) = _ProductDetailState;
 
   factory ProductDetailState.initial() => ProductDetailState(
+        salesOrganisation: SalesOrganisation.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        shipToInfo: ShipToInfo.empty(),
         isFetching: false,
         failureOrSuccessOption: none(),
         productDetailAggregate: ProductDetailAggregate.empty(),

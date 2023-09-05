@@ -114,13 +114,9 @@ class _BrowseProductCard extends StatelessWidget {
   }
 
   void _productOnTap(BuildContext context, MaterialInfo materialInfo) {
-    final eligibilityBlocState = context.read<EligibilityBloc>().state;
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialNumber: materialInfo.materialNumber,
-            salesOrganisation: eligibilityBlocState.salesOrganisation,
-            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
-            shipToInfo: eligibilityBlocState.shipToInfo,
             locale: context.locale,
             type: materialInfo.type,
           ),

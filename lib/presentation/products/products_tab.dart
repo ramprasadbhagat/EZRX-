@@ -131,9 +131,6 @@ class ProductsTab extends StatelessWidget {
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialNumber: materialInfo.materialNumber,
-            salesOrganisation: eligibilityBlocState.salesOrganisation,
-            customerCodeInfo: eligibilityBlocState.customerCodeInfo,
-            shipToInfo: eligibilityBlocState.shipToInfo,
             locale: context.locale,
             type: materialInfo.type,
           ),

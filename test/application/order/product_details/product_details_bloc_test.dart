@@ -51,6 +51,11 @@ void main() {
       'https://ezrxdev.blob.core.windows.net/assets/21041773/21041773.png'
     ],
   );
+  final mockInitialState = ProductDetailState.initial().copyWith(
+    customerCodeInfo: mockCustomerCodeInfo,
+    salesOrganisation: mockSalesOrganisation,
+    shipToInfo: mockShipToInfo,
+  );
 
   setUpAll(() async {
     productDetailMockRepository = ProductDetailRepositoryMock();
@@ -76,10 +81,18 @@ void main() {
           favouriteRepository: favouriteMockRepository,
         ),
         act: (ProductDetailBloc bloc) => bloc.add(
-          const ProductDetailEvent.initialized(),
+          ProductDetailEvent.initialized(
+            customerCodeInfo: mockCustomerCodeInfo,
+            salesOrganisation: mockSalesOrganisation,
+            shipToInfo: mockShipToInfo,
+          ),
         ),
         expect: () => [
-          ProductDetailState.initial(),
+          ProductDetailState.initial().copyWith(
+            customerCodeInfo: mockCustomerCodeInfo,
+            salesOrganisation: mockSalesOrganisation,
+            shipToInfo: mockShipToInfo,
+          ),
         ],
       );
 
@@ -148,36 +161,34 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetch(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
               locale: locale,
               materialNumber: mockMaterialInfo.materialNumber,
               type: materialInfoType,
             ),
           );
         },
+        seed: () => mockInitialState,
         expect: () => [
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
             failureOrSuccessOption: none(),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
             ),
             failureOrSuccessOption: none(),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
               stockInfo: mockStockInfo,
             ),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
@@ -185,7 +196,7 @@ void main() {
             ),
             failureOrSuccessOption: none(),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
@@ -195,7 +206,7 @@ void main() {
               productItem: mockProductMetaData.items.first,
             ),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
@@ -206,7 +217,7 @@ void main() {
             ),
             failureOrSuccessOption: none(),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
@@ -244,22 +255,20 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetch(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
               locale: locale,
               materialNumber: mockMaterialInfo.materialNumber,
               type: materialInfoType,
             ),
           );
         },
+        seed: () => mockInitialState,
         expect: () => [
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
             failureOrSuccessOption: none(),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: false,
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
@@ -324,29 +333,26 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetchStock(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
               locale: locale,
               materialNumber: mockMaterialInfo.materialNumber,
             ),
           );
         },
-        seed: () => ProductDetailState.initial().copyWith(
+        seed: () => mockInitialState.copyWith(
           isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             materialInfo: mockMaterialInfo,
           ),
         ),
         expect: () => [
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
             ),
             failureOrSuccessOption: none(),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
@@ -354,14 +360,14 @@ void main() {
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
               stockInfo: StockInfo.empty(),
             ),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: StockInfo.empty(),
@@ -371,7 +377,7 @@ void main() {
               productItem: mockProductMetaData.items.first,
             ),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: StockInfo.empty(),
@@ -382,7 +388,7 @@ void main() {
             ),
             failureOrSuccessOption: none(),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: StockInfo.empty(),
@@ -428,15 +434,12 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetchMetaData(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
               locale: locale,
               isForBundle: false,
             ),
           );
         },
-        seed: () => ProductDetailState.initial().copyWith(
+        seed: () => mockInitialState.copyWith(
           isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             materialInfo: mockMaterialInfo,
@@ -445,7 +448,7 @@ void main() {
           failureOrSuccessOption: none(),
         ),
         expect: () => [
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
@@ -453,7 +456,7 @@ void main() {
             ),
             failureOrSuccessOption: none(),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
@@ -462,7 +465,7 @@ void main() {
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
@@ -470,7 +473,7 @@ void main() {
             ),
             failureOrSuccessOption: none(),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
@@ -505,14 +508,11 @@ void main() {
         act: (ProductDetailBloc bloc) {
           bloc.add(
             ProductDetailEvent.fetchSimilarProduct(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
               locale: locale,
             ),
           );
         },
-        seed: () => ProductDetailState.initial().copyWith(
+        seed: () => mockInitialState.copyWith(
           isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             stockInfo: mockStockInfo,
@@ -523,7 +523,7 @@ void main() {
           ),
         ),
         expect: () => [
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
@@ -534,7 +534,7 @@ void main() {
             ),
             failureOrSuccessOption: none(),
           ),
-          ProductDetailState.initial().copyWith(
+          mockInitialState.copyWith(
             isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,

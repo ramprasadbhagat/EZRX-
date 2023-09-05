@@ -76,7 +76,7 @@ void main() {
     productDetailBloc = ProductDetailBlocMock();
     materialPriceBloc = MaterialPriceBlocMock();
     productSearchBlocMock = ProductSearchBlocMock();
-   
+
     when(() => productSearchBlocMock.state).thenReturn(
       ProductSearchState.initial().copyWith(
         productSuggestionHistory: ProductSuggestionHistory.empty()
@@ -187,10 +187,7 @@ void main() {
         () => productDetailBloc.add(
           ProductDetailEvent.fetch(
             materialNumber: MaterialNumber('fake-material-number'),
-            customerCodeInfo: CustomerCodeInfo.empty(),
             locale: const Locale('en'),
-            salesOrganisation: SalesOrganisation.empty(),
-            shipToInfo: ShipToInfo.empty(),
             type: MaterialInfoType('material'),
           ),
         ),
@@ -246,10 +243,7 @@ void main() {
         () => productDetailBloc.add(
           ProductDetailEvent.fetch(
             materialNumber: MaterialNumber('fake-material-number'),
-            customerCodeInfo: CustomerCodeInfo.empty(),
             locale: const Locale('en'),
-            salesOrganisation: SalesOrganisation.empty(),
-            shipToInfo: ShipToInfo.empty(),
             type: MaterialInfoType('bundle'),
           ),
         ),

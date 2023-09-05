@@ -100,9 +100,6 @@ class _SimilarProductCard extends StatelessWidget {
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialNumber: materialInfo.materialNumber,
-            salesOrganisation: eligibilityState.salesOrganisation,
-            customerCodeInfo: eligibilityState.customerCodeInfo,
-            shipToInfo: eligibilityState.shipToInfo,
             locale: context.locale,
             type: materialInfo.type,
           ),
