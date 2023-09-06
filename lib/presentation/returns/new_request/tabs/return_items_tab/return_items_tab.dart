@@ -4,14 +4,15 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_filter_bottom_sheet.dart';
@@ -29,6 +30,7 @@ import 'package:ezrxmobile/presentation/returns/new_request/widgets/product_imag
 part 'widgets/return_material_widget.dart';
 part 'widgets/return_material_info.dart';
 part 'widgets/bonus_item_section.dart';
+part 'widgets/return_items_search_bar.dart';
 
 class ReturnItemsTab extends StatelessWidget {
   const ReturnItemsTab({Key? key}) : super(key: key);
@@ -41,13 +43,8 @@ class ReturnItemsTab extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
           child: Row(
             children: [
-              Expanded(
-                child: SearchBar(
-                  onSearchChanged: (String value) {},
-                  clearIconKey: WidgetKeys.clearIconKey,
-                  controller: TextEditingController(),
-                  onClear: () {},
-                ),
+              const Expanded(
+                child: _ReturnItemsSearchBar(),
               ),
               CustomBadge(
                 Icons.tune,
@@ -115,6 +112,7 @@ class ReturnItemsTab extends StatelessWidget {
                                 .state
                                 .shipToInfo,
                             appliedFilter: ReturnItemsFilter.empty(),
+                            searchKey: state.searchKey,
                           ),
                         );
                   },

@@ -5,6 +5,7 @@ class ReturnItemsState with _$ReturnItemsState {
   const ReturnItemsState._();
   const factory ReturnItemsState({
     required ReturnItemsFilter appliedFilter,
+    required SearchKey searchKey,
     required List<ReturnMaterial> items,
     required Option<Either<ApiFailure, ReturnMaterialList>>
         failureOrSuccessOption,
@@ -18,5 +19,6 @@ class ReturnItemsState with _$ReturnItemsState {
         canLoadMore: true,
         appliedFilter: ReturnItemsFilter.empty(),
         items: <ReturnMaterial>[],
+        searchKey: SearchKey.search(''),
       );
 }

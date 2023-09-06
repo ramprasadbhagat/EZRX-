@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,6 +16,7 @@ class ReturnMaterialsParams with _$ReturnMaterialsParams {
     required int pageSize,
     required int offset,
     required ReturnItemsFilter filter,
+    required SearchKey searchKey,
   }) = _ReturnMaterialsParams;
 
   factory ReturnMaterialsParams.empty() => ReturnMaterialsParams(
@@ -24,5 +26,6 @@ class ReturnMaterialsParams with _$ReturnMaterialsParams {
         pageSize: 0,
         offset: 0,
         filter: ReturnItemsFilter.empty(),
+        searchKey: SearchKey(''),
       );
 }

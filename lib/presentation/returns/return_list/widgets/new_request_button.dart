@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class NewRequestButton extends StatelessWidget {
                 customerCodeInfo:
                     context.read<CustomerCodeBloc>().state.customerCodeInfo,
                 shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                searchKey: SearchKey.search(''),
               ),
             );
         context.read<NewRequestBloc>().add(

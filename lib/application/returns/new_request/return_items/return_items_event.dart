@@ -9,6 +9,7 @@ class ReturnItemsEvent with _$ReturnItemsEvent {
     required ShipToInfo shipToInfo,
     required CustomerCodeInfo customerCodeInfo,
     required ReturnItemsFilter appliedFilter,
+    required SearchKey searchKey,
   }) = _Fetch;
   const factory ReturnItemsEvent.loadMore({
     required ShipToInfo shipToInfo,

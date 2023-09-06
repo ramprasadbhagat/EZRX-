@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
@@ -36,6 +37,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
             items: <ReturnMaterial>[],
             isLoading: true,
             appliedFilter: value.appliedFilter,
+            searchKey: value.searchKey,
           ),
         );
 
@@ -48,6 +50,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
             pageSize: config.pageSize,
             offset: 0,
             filter: value.appliedFilter,
+            searchKey: value.searchKey,
           ),
         );
 
@@ -91,6 +94,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
             pageSize: config.pageSize,
             offset: 0,
             filter: state.appliedFilter,
+            searchKey: state.searchKey,
           ),
         );
 

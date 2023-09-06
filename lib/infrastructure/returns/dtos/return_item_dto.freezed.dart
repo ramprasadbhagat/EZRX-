@@ -22,45 +22,32 @@ ReturnItemDto _$ReturnItemDtoFromJson(Map<String, dynamic> json) {
 mixin _$ReturnItemDto {
   @JsonKey(name: 'requestId', defaultValue: '')
   String get requestId => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'requestDate', defaultValue: '')
   String get requestDate => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'itemQty', defaultValue: '0')
   String get itemQty => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'totalPrice', defaultValue: '')
   String get totalPrice => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'status', defaultValue: '')
   String get status => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'materialName', defaultValue: '')
   String get materialName => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'orderNumber', defaultValue: '')
   String get orderNumber => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'invoiceID', defaultValue: '')
   String get invoiceID => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'customerName', defaultValue: '')
   String get customerName => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'batch', defaultValue: '')
   String get batch => throw _privateConstructorUsedError;
-
   @JsonKey(name: 'expiry', defaultValue: '')
   String get expiry => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $ReturnItemDtoCopyWith<ReturnItemDto> get copyWith =>
       throw _privateConstructorUsedError;
@@ -71,7 +58,6 @@ abstract class $ReturnItemDtoCopyWith<$Res> {
   factory $ReturnItemDtoCopyWith(
           ReturnItemDto value, $Res Function(ReturnItemDto) then) =
       _$ReturnItemDtoCopyWithImpl<$Res, ReturnItemDto>;
-
   @useResult
   $Res call(
       {@JsonKey(name: 'requestId', defaultValue: '')
@@ -109,7 +95,6 @@ class _$ReturnItemDtoCopyWithImpl<$Res, $Val extends ReturnItemDto>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -193,7 +178,6 @@ abstract class _$$_ReturnItemDtoCopyWith<$Res>
   factory _$$_ReturnItemDtoCopyWith(
           _$_ReturnItemDto value, $Res Function(_$_ReturnItemDto) then) =
       __$$_ReturnItemDtoCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -478,7 +462,6 @@ abstract class _ReturnItemDto extends ReturnItemDto {
           required final String batch,
       @JsonKey(name: 'expiry', defaultValue: '')
           required final String expiry}) = _$_ReturnItemDto;
-
   const _ReturnItemDto._() : super._();
 
   factory _ReturnItemDto.fromJson(Map<String, dynamic> json) =
@@ -487,55 +470,42 @@ abstract class _ReturnItemDto extends ReturnItemDto {
   @override
   @JsonKey(name: 'requestId', defaultValue: '')
   String get requestId;
-
   @override
   @JsonKey(name: 'requestDate', defaultValue: '')
   String get requestDate;
-
   @override
   @JsonKey(name: 'itemQty', defaultValue: '0')
   String get itemQty;
-
   @override
   @JsonKey(name: 'totalPrice', defaultValue: '')
   String get totalPrice;
-
   @override
   @JsonKey(name: 'status', defaultValue: '')
   String get status;
-
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber;
-
   @override
   @JsonKey(name: 'materialName', defaultValue: '')
   String get materialName;
-
   @override
   @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
   String get defaultMaterialDescription;
-
   @override
   @JsonKey(name: 'orderNumber', defaultValue: '')
   String get orderNumber;
-
   @override
   @JsonKey(name: 'invoiceID', defaultValue: '')
   String get invoiceID;
-
   @override
   @JsonKey(name: 'customerName', defaultValue: '')
   String get customerName;
-
   @override
   @JsonKey(name: 'batch', defaultValue: '')
   String get batch;
-
   @override
   @JsonKey(name: 'expiry', defaultValue: '')
   String get expiry;
-
   @override
   @JsonKey(ignore: true)
   _$$_ReturnItemDtoCopyWith<_$_ReturnItemDto> get copyWith =>

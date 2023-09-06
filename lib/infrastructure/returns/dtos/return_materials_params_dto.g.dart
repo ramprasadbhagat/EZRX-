@@ -14,6 +14,7 @@ _$_ReturnMaterialsParamsDto _$$_ReturnMaterialsParamsDtoFromJson(
       shipTo: json['shipTo'] as String? ?? '',
       first: json['first'] as int? ?? 0,
       after: json['after'] as int? ?? 0,
+      searchFilter: json['searchFilter'] as String? ?? '',
       filter:
           ReturnItemsFilterDto.fromJson(json['filter'] as Map<String, dynamic>),
     );
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$_ReturnMaterialsParamsDtoToJson(
       'shipTo': instance.shipTo,
       'first': instance.first,
       'after': instance.after,
+      'searchFilter': instance.searchFilter,
     };

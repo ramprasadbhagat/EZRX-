@@ -31,6 +31,8 @@ mixin _$ReturnMaterialsParamsDto {
   int get first => throw _privateConstructorUsedError;
   @JsonKey(name: 'after', defaultValue: 0)
   int get after => throw _privateConstructorUsedError;
+  @JsonKey(name: 'searchFilter', defaultValue: '')
+  String get searchFilter => throw _privateConstructorUsedError;
   @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
   ReturnItemsFilterDto get filter => throw _privateConstructorUsedError;
 
@@ -52,6 +54,7 @@ abstract class $ReturnMaterialsParamsDtoCopyWith<$Res> {
       @JsonKey(name: 'shipTo', defaultValue: '') String shipTo,
       @JsonKey(name: 'first', defaultValue: 0) int first,
       @JsonKey(name: 'after', defaultValue: 0) int after,
+      @JsonKey(name: 'searchFilter', defaultValue: '') String searchFilter,
       @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
       ReturnItemsFilterDto filter});
 
@@ -77,6 +80,7 @@ class _$ReturnMaterialsParamsDtoCopyWithImpl<$Res,
     Object? shipTo = null,
     Object? first = null,
     Object? after = null,
+    Object? searchFilter = null,
     Object? filter = null,
   }) {
     return _then(_value.copyWith(
@@ -100,6 +104,10 @@ class _$ReturnMaterialsParamsDtoCopyWithImpl<$Res,
           ? _value.after
           : after // ignore: cast_nullable_to_non_nullable
               as int,
+      searchFilter: null == searchFilter
+          ? _value.searchFilter
+          : searchFilter // ignore: cast_nullable_to_non_nullable
+              as String,
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
@@ -131,6 +139,7 @@ abstract class _$$_ReturnMaterialsParamsDtoCopyWith<$Res>
       @JsonKey(name: 'shipTo', defaultValue: '') String shipTo,
       @JsonKey(name: 'first', defaultValue: 0) int first,
       @JsonKey(name: 'after', defaultValue: 0) int after,
+      @JsonKey(name: 'searchFilter', defaultValue: '') String searchFilter,
       @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
       ReturnItemsFilterDto filter});
 
@@ -155,6 +164,7 @@ class __$$_ReturnMaterialsParamsDtoCopyWithImpl<$Res>
     Object? shipTo = null,
     Object? first = null,
     Object? after = null,
+    Object? searchFilter = null,
     Object? filter = null,
   }) {
     return _then(_$_ReturnMaterialsParamsDto(
@@ -178,6 +188,10 @@ class __$$_ReturnMaterialsParamsDtoCopyWithImpl<$Res>
           ? _value.after
           : after // ignore: cast_nullable_to_non_nullable
               as int,
+      searchFilter: null == searchFilter
+          ? _value.searchFilter
+          : searchFilter // ignore: cast_nullable_to_non_nullable
+              as String,
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
@@ -195,6 +209,8 @@ class _$_ReturnMaterialsParamsDto extends _ReturnMaterialsParamsDto {
       @JsonKey(name: 'shipTo', defaultValue: '') required this.shipTo,
       @JsonKey(name: 'first', defaultValue: 0) required this.first,
       @JsonKey(name: 'after', defaultValue: 0) required this.after,
+      @JsonKey(name: 'searchFilter', defaultValue: '')
+      required this.searchFilter,
       @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
       required this.filter})
       : super._();
@@ -218,12 +234,15 @@ class _$_ReturnMaterialsParamsDto extends _ReturnMaterialsParamsDto {
   @JsonKey(name: 'after', defaultValue: 0)
   final int after;
   @override
+  @JsonKey(name: 'searchFilter', defaultValue: '')
+  final String searchFilter;
+  @override
   @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
   final ReturnItemsFilterDto filter;
 
   @override
   String toString() {
-    return 'ReturnMaterialsParamsDto(salesOrg: $salesOrg, soldTo: $soldTo, shipTo: $shipTo, first: $first, after: $after, filter: $filter)';
+    return 'ReturnMaterialsParamsDto(salesOrg: $salesOrg, soldTo: $soldTo, shipTo: $shipTo, first: $first, after: $after, searchFilter: $searchFilter, filter: $filter)';
   }
 
   @override
@@ -237,13 +256,15 @@ class _$_ReturnMaterialsParamsDto extends _ReturnMaterialsParamsDto {
             (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
             (identical(other.first, first) || other.first == first) &&
             (identical(other.after, after) || other.after == after) &&
+            (identical(other.searchFilter, searchFilter) ||
+                other.searchFilter == searchFilter) &&
             (identical(other.filter, filter) || other.filter == filter));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrg, soldTo, shipTo, first, after, filter);
+  int get hashCode => Object.hash(runtimeType, salesOrg, soldTo, shipTo, first,
+      after, searchFilter, filter);
 
   @JsonKey(ignore: true)
   @override
@@ -268,6 +289,8 @@ abstract class _ReturnMaterialsParamsDto extends ReturnMaterialsParamsDto {
       @JsonKey(name: 'shipTo', defaultValue: '') required final String shipTo,
       @JsonKey(name: 'first', defaultValue: 0) required final int first,
       @JsonKey(name: 'after', defaultValue: 0) required final int after,
+      @JsonKey(name: 'searchFilter', defaultValue: '')
+      required final String searchFilter,
       @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
       required final ReturnItemsFilterDto
           filter}) = _$_ReturnMaterialsParamsDto;
@@ -291,6 +314,9 @@ abstract class _ReturnMaterialsParamsDto extends ReturnMaterialsParamsDto {
   @override
   @JsonKey(name: 'after', defaultValue: 0)
   int get after;
+  @override
+  @JsonKey(name: 'searchFilter', defaultValue: '')
+  String get searchFilter;
   @override
   @JsonKey(name: 'filter', defaultValue: null, includeToJson: false)
   ReturnItemsFilterDto get filter;

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_materials_params.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_items_filter_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,6 +21,8 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
         required int first,
     @JsonKey(name: 'after', defaultValue: 0)
         required int after,
+    @JsonKey(name: 'searchFilter', defaultValue: '')
+        required String searchFilter,
     @JsonKey(
       name: 'filter',
       defaultValue: null,
@@ -29,15 +32,16 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
   }) = _ReturnMaterialsParamsDto;
 
   factory ReturnMaterialsParamsDto.fromDomain(
-    ReturnMaterialsParams returnListRequest,
+    ReturnMaterialsParams domain,
   ) {
     return ReturnMaterialsParamsDto(
-      salesOrg: returnListRequest.salesOrg.getOrCrash(),
-      soldTo: returnListRequest.soldToInfo,
-      shipTo: returnListRequest.shipToInfo,
-      first: returnListRequest.pageSize,
-      after: returnListRequest.offset,
-      filter: ReturnItemsFilterDto.fromDomain(returnListRequest.filter),
+      salesOrg: domain.salesOrg.getOrCrash(),
+      soldTo: domain.soldToInfo,
+      shipTo: domain.shipToInfo,
+      first: domain.pageSize,
+      after: domain.offset,
+      filter: ReturnItemsFilterDto.fromDomain(domain.filter),
+      searchFilter: domain.searchKey.searchValueOrEmpty,
     );
   }
 
@@ -49,6 +53,7 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
       pageSize: first,
       offset: after,
       filter: filter.toDomain,
+      searchKey: SearchKey.search(searchFilter),
     );
   }
 
