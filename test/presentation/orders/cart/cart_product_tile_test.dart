@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,10 @@ class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 class CartRepositoryMock extends Mock implements CartRepository {}
 
+class OrderEligibilityBlocMock
+    extends MockBloc<OrderEligibilityEvent, OrderEligibilityState>
+    implements OrderEligibilityBloc {}
+
 class MaterialPriceBlocMock
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
@@ -82,6 +87,7 @@ void main() {
   late PriceAggregate cartItem;
   late SalesOrgBloc salesOrgBloc;
   late CustomerCodeBloc customerCodeBloc;
+  late OrderEligibilityBloc orderEligibilityBloc;
 
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
@@ -113,6 +119,7 @@ void main() {
       eligibilityBloc = EligibilityBlocMock();
       userBloc = UserBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
+      orderEligibilityBloc = OrderEligibilityBlocMock();
       priceOverrideBloc = PriceOverrideBlocMock();
       orderSummaryBlocMock = OrderSummaryBlocMock();
       authBlocMock = AuthBlocMock();
@@ -186,6 +193,9 @@ void main() {
           ),
         ),
       );
+      when(() => orderEligibilityBloc.state).thenReturn(
+        OrderEligibilityState.initial(),
+      );
       when(() => priceOverrideBloc.state)
           .thenReturn(PriceOverrideState.initial());
       when(() => additionalDetailsBlocMock.state)
@@ -218,6 +228,9 @@ void main() {
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
             BlocProvider<OrderDocumentTypeBloc>(
               create: (context) => orderDocumentTypeBlocMock,
+            ),
+            BlocProvider<OrderEligibilityBloc>(
+              create: (context) => orderEligibilityBloc,
             ),
             BlocProvider<PriceOverrideBloc>(
               create: (context) => priceOverrideBloc,

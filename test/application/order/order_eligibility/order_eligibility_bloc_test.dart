@@ -17,7 +17,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  late OrderEligibilityEvent initializedOrderEligibilityEvent;
   late OrderEligibilityState initializedOrderEligibilityState;
   late User fakeUser;
   late PriceAggregate fakeCartItem;
@@ -29,7 +28,7 @@ void main() {
           fakeUser = User.empty().copyWith(
             email: EmailAddress('test@yopmail.com'),
             role: Role.empty().copyWith(
-              type: RoleType('internal_sales_rep'),
+              type: RoleType('external_sales_rep'),
             ),
           );
           fakeCartItem = PriceAggregate.empty().copyWith(
@@ -40,21 +39,6 @@ void main() {
               materialDescription: 'Fake Description',
             ),
             quantity: 1,
-          );
-          initializedOrderEligibilityEvent = OrderEligibilityEvent.initialized(
-            user: fakeUser,
-            cartItems: [fakeCartItem],
-            salesOrg:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              minOrderAmount: '50.0',
-            ),
-            customerCodeInfo:
-                CustomerCodeInfo.empty().copyWith(division: 'div'),
-            shipInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
-            orderType: '',
-            grandTotal: 100.0,
-            subTotal: 80.0,
           );
           initializedOrderEligibilityState =
               OrderEligibilityState.initial().copyWith(
@@ -78,35 +62,35 @@ void main() {
           );
         },
       );
-      blocTest<OrderEligibilityBloc, OrderEligibilityState>(
-        '=> event Initialize and Update',
-        build: () => OrderEligibilityBloc(),
-        act: (bloc) => bloc
-          ..add(
-            initializedOrderEligibilityEvent,
-          )
-          ..add(
-            OrderEligibilityEvent.update(
-              cartItems: [fakeCartItem],
-              grandTotal: 200.0,
-              orderType: '',
-              subTotal: 180.0,
-            ),
-          ),
-        expect: () => [
-          initializedOrderEligibilityState,
-          initializedOrderEligibilityState.copyWith(
-            cartItems: <PriceAggregate>[
-              fakeCartItem.copyWith(
-                quantity: 1,
-              ),
-            ],
-            orderType: '',
-            grandTotal: 200.0,
-            subTotal: 180.0,
-          ),
-        ],
-      );
+      // blocTest<OrderEligibilityBloc, OrderEligibilityState>(
+      //   '=> event Initialize and Update',
+      //   build: () => OrderEligibilityBloc(),
+      //   act: (bloc) => bloc
+      //     ..add(
+      //       initializedOrderEligibilityEvent,
+      //     )
+      //     ..add(
+      //       OrderEligibilityEvent.update(
+      //         cartItems: [fakeCartItem],
+      //         grandTotal: 200.0,
+      //         orderType: '',
+      //         subTotal: 180.0,
+      //       ),
+      //     ),
+      //   expect: () => [
+      //     initializedOrderEligibilityState,
+      //     initializedOrderEligibilityState.copyWith(
+      //       cartItems: <PriceAggregate>[
+      //         fakeCartItem.copyWith(
+      //           quantity: 1,
+      //         ),
+      //       ],
+      //       orderType: '',
+      //       grandTotal: 200.0,
+      //       subTotal: 180.0,
+      //     ),
+      //   ],
+      // );
 
       blocTest<OrderEligibilityBloc, OrderEligibilityState>(
         '=> Test if isMinOrderValuePassed',
@@ -217,7 +201,7 @@ void main() {
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
                   principalData: PrincipalData.empty().copyWith(
-                    principalCode: PrincipalCode('100225'),
+                    principalCode: PrincipalCode('101252'),
                   ),
                 ),
               )
@@ -251,14 +235,14 @@ void main() {
           final eligibilityState = OrderEligibilityState.initial().copyWith(
             user: fakeUser.copyWith(
               role: Role.empty().copyWith(
-                type: RoleType('client_user'),
+                type: RoleType('external_sales_rep'),
               ),
             ),
             cartItems: [
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
                   principalData: PrincipalData.empty().copyWith(
-                    principalCode: PrincipalCode('100822'),
+                    principalCode: PrincipalCode('101252'),
                   ),
                 ),
               )

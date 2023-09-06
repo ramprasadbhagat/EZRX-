@@ -3,13 +3,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
@@ -23,10 +21,21 @@ import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dar
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
-import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
+
+import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
+
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+
+import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
+
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+
+part 'widget/minimum_order_value_message.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -69,20 +78,51 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<MaterialPriceBloc, MaterialPriceState>(
-      listenWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
-      listener: (context, state) {
-        if (!state.isFetching) {
-          context.read<CartBloc>().add(
-                CartEvent.updatePriceProduct(
-                  priceProducts: state.materialPrice,
-                  overriddenProductPrice:
-                      context.read<PriceOverrideBloc>().state.item.price,
-                ),
-              );
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<MaterialPriceBloc, MaterialPriceState>(
+          listenWhen: (previous, current) =>
+              previous.isFetching != current.isFetching,
+          listener: (context, state) {
+            if (!state.isFetching) {
+              context.read<CartBloc>().add(
+                    CartEvent.updatePriceProduct(
+                      priceProducts: state.materialPrice,
+                      overriddenProductPrice:
+                          context.read<PriceOverrideBloc>().state.item.price,
+                    ),
+                  );
+            }
+          },
+        ),
+        BlocListener<CartBloc, CartState>(
+          listenWhen: (previous, current) =>
+              previous.totalPriceWithTax != current.totalPriceWithTax &&
+                  !current.isFetchingCartProductDetail ||
+              previous.isMappingPrice != current.isMappingPrice &&
+                  !current.isMappingPrice,
+          listener: (context, state) {
+            context.read<OrderEligibilityBloc>().add(
+                  OrderEligibilityEvent.update(
+                    cartItems: state.cartProducts,
+                    grandTotal: state.totalPriceWithTax,
+                    orderType: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .selectedOrderType
+                        .documentType
+                        .getOrDefaultValue(''),
+                    subTotal: context.read<CartBloc>().state.subTotal(
+                          isMYMarketSalesRep: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .isMYMarketSalesRep,
+                        ),
+                  ),
+                );
+          },
+        ),
+      ],
       child: BlocConsumer<CartBloc, CartState>(
         listenWhen: (previous, current) =>
             previous.cartProducts.length != current.cartProducts.length &&
@@ -384,6 +424,7 @@ class _CheckoutSection extends StatelessWidget {
                 mainColor: ZPColors.lightRedStatusColor,
               ),
             _OOSMessage(),
+            const _MovCheckMessage(),
             ListTile(
               dense: true,
               visualDensity: VisualDensity.compact,
@@ -488,12 +529,7 @@ class _CheckoutButton extends StatelessWidget {
                 key: WidgetKeys.checkoutButton,
                 onPressed: !_checkEligibility(state: state, context: context)
                     ? null
-                    : () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        state.allMaterial.preOrderItems.isNotEmpty
-                            ? _showPreOrderModal(context: context)
-                            : context.router.pushNamed('orders/cart/checkout');
-                      },
+                    : () => _onCheckOutPressed(context),
                 child: const Text('Check out').tr(),
               ),
             ),
@@ -532,6 +568,20 @@ class _CheckoutButton extends StatelessWidget {
         context.router.pushNamed('orders/cart/checkout');
       },
     );
+  }
+
+  void _onCheckOutPressed(BuildContext context) {
+    if (context.read<OrderEligibilityBloc>().state.isMinOrderValuePassed) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      context.read<CartBloc>().state.allMaterial.preOrderItems.isNotEmpty
+          ? _showPreOrderModal(context: context)
+          : context.router.pushNamed('orders/cart/checkout');
+
+      return;
+    }
+    context.read<OrderEligibilityBloc>().add(
+          const OrderEligibilityEvent.validateOrderEligibility(),
+        );
   }
 }
 

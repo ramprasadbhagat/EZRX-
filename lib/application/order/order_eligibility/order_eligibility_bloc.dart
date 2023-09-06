@@ -23,16 +23,14 @@ class OrderEligibilityBloc
   ) async {
     await event.map(
       initialized: (e) async => emit(
-        state.copyWith(
-          cartItems: e.cartItems,
+        OrderEligibilityState.initial().copyWith(
           configs: e.configs,
           customerCodeInfo: e.customerCodeInfo,
-          grandTotal: e.grandTotal,
           orderType: e.orderType,
           salesOrg: e.salesOrg,
           shipInfo: e.shipInfo,
           user: e.user,
-          subTotal: e.subTotal,
+          showErrorMessage: false,
         ),
       ),
       update: (e) async => emit(
@@ -41,6 +39,11 @@ class OrderEligibilityBloc
           grandTotal: e.grandTotal,
           cartItems: e.cartItems,
           orderType: e.orderType,
+        ),
+      ),
+      validateOrderEligibility: (e) async => emit(
+        state.copyWith(
+          showErrorMessage: !state.isMinOrderValuePassed,
         ),
       ),
     );

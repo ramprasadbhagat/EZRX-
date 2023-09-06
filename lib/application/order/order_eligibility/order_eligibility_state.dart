@@ -14,6 +14,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
     required String orderType,
     required User user,
     required double subTotal,
+    required bool showErrorMessage,
   }) = _OrderEligibilityState;
 
   factory OrderEligibilityState.initial() => OrderEligibilityState(
@@ -26,6 +27,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
         salesOrg: SalesOrganisation.empty(),
         user: User.empty(),
         subTotal: 0.0,
+        showErrorMessage: false,
       );
 
   bool get isMinOrderValuePassed {
@@ -69,9 +71,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
   }
 
   bool get hasPrincipal {
-    return user.role.type.isSalesRepRole
-        ? cartItems.where((element) => element.hasSalesRepPrincipal).isNotEmpty
-        : cartItems.where((element) => element.hasClientPrincipal).isNotEmpty;
+    return user.role.type.isExternalSalesRep &&
+        cartItems.where((element) => element.hasSalesRepPrincipal).isNotEmpty;
   }
 
   bool get containsRegularMaterials => cartItems
@@ -81,4 +82,6 @@ class OrderEligibilityState with _$OrderEligibilityState {
       orderType.contains('ZPOR') && !configs.salesOrg.isTH
           ? containsRegularMaterials
           : true;
+
+  bool get displayMovWarning => !isMinOrderValuePassed && showErrorMessage;
 }

@@ -72,7 +72,7 @@ bool havingSubmitPrincipalForClient(String principalCode) =>
     principalCode == '100822';
 
 bool havingSubmitPrincipalForSalesRep(String principalCode) =>
-    principalCode == '100225';
+    principalCode == '100225' || principalCode == '101252';
 
 bool havingPnGPrincipalCode(String principalCode) =>
     principalCode == '105307' || principalCode == '101308';

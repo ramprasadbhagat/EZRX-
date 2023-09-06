@@ -4,14 +4,11 @@ part of 'order_eligibility_bloc.dart';
 class OrderEligibilityEvent with _$OrderEligibilityEvent {
   const factory OrderEligibilityEvent.initialized({
     required User user,
-    required List<PriceAggregate> cartItems,
     required SalesOrganisation salesOrg,
     required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipInfo,
     required String orderType,
-    required double grandTotal,
-    required double subTotal,
   }) = _Initialized;
   const factory OrderEligibilityEvent.update({
     required List<PriceAggregate> cartItems,
@@ -19,4 +16,7 @@ class OrderEligibilityEvent with _$OrderEligibilityEvent {
     required double grandTotal,
     required double subTotal,
   }) = _Update;
+
+  const factory OrderEligibilityEvent.validateOrderEligibility() =
+      _ValidateOrderEligibility;
 }

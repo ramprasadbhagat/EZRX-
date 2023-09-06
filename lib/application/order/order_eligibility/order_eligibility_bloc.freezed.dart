@@ -16,62 +16,52 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OrderEligibilityEvent {
-  List<PriceAggregate> get cartItems => throw _privateConstructorUsedError;
-  String get orderType => throw _privateConstructorUsedError;
-  double get grandTotal => throw _privateConstructorUsedError;
-  double get subTotal => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
             User user,
-            List<PriceAggregate> cartItems,
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipInfo,
-            String orderType,
-            double grandTotal,
-            double subTotal)
+            String orderType)
         initialized,
     required TResult Function(List<PriceAggregate> cartItems, String orderType,
             double grandTotal, double subTotal)
         update,
+    required TResult Function() validateOrderEligibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             User user,
-            List<PriceAggregate> cartItems,
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipInfo,
-            String orderType,
-            double grandTotal,
-            double subTotal)?
+            String orderType)?
         initialized,
     TResult? Function(List<PriceAggregate> cartItems, String orderType,
             double grandTotal, double subTotal)?
         update,
+    TResult? Function()? validateOrderEligibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             User user,
-            List<PriceAggregate> cartItems,
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipInfo,
-            String orderType,
-            double grandTotal,
-            double subTotal)?
+            String orderType)?
         initialized,
     TResult Function(List<PriceAggregate> cartItems, String orderType,
             double grandTotal, double subTotal)?
         update,
+    TResult Function()? validateOrderEligibility,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,24 +69,25 @@ mixin _$OrderEligibilityEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_ValidateOrderEligibility value)
+        validateOrderEligibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_ValidateOrderEligibility value)?
+        validateOrderEligibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_ValidateOrderEligibility value)? validateOrderEligibility,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $OrderEligibilityEventCopyWith<OrderEligibilityEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -105,12 +96,6 @@ abstract class $OrderEligibilityEventCopyWith<$Res> {
   factory $OrderEligibilityEventCopyWith(OrderEligibilityEvent value,
           $Res Function(OrderEligibilityEvent) then) =
       _$OrderEligibilityEventCopyWithImpl<$Res, OrderEligibilityEvent>;
-  @useResult
-  $Res call(
-      {List<PriceAggregate> cartItems,
-      String orderType,
-      double grandTotal,
-      double subTotal});
 }
 
 /// @nodoc
@@ -123,54 +108,21 @@ class _$OrderEligibilityEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? cartItems = null,
-    Object? orderType = null,
-    Object? grandTotal = null,
-    Object? subTotal = null,
-  }) {
-    return _then(_value.copyWith(
-      cartItems: null == cartItems
-          ? _value.cartItems
-          : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<PriceAggregate>,
-      orderType: null == orderType
-          ? _value.orderType
-          : orderType // ignore: cast_nullable_to_non_nullable
-              as String,
-      grandTotal: null == grandTotal
-          ? _value.grandTotal
-          : grandTotal // ignore: cast_nullable_to_non_nullable
-              as double,
-      subTotal: null == subTotal
-          ? _value.subTotal
-          : subTotal // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res>
-    implements $OrderEligibilityEventCopyWith<$Res> {
+abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
       {User user,
-      List<PriceAggregate> cartItems,
       SalesOrganisation salesOrg,
       SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipInfo,
-      String orderType,
-      double grandTotal,
-      double subTotal});
+      String orderType});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrg;
@@ -191,24 +143,17 @@ class __$$_InitializedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
-    Object? cartItems = null,
     Object? salesOrg = null,
     Object? configs = null,
     Object? customerCodeInfo = null,
     Object? shipInfo = null,
     Object? orderType = null,
-    Object? grandTotal = null,
-    Object? subTotal = null,
   }) {
     return _then(_$_Initialized(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      cartItems: null == cartItems
-          ? _value._cartItems
-          : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<PriceAggregate>,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -229,14 +174,6 @@ class __$$_InitializedCopyWithImpl<$Res>
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
               as String,
-      grandTotal: null == grandTotal
-          ? _value.grandTotal
-          : grandTotal // ignore: cast_nullable_to_non_nullable
-              as double,
-      subTotal: null == subTotal
-          ? _value.subTotal
-          : subTotal // ignore: cast_nullable_to_non_nullable
-              as double,
     ));
   }
 
@@ -286,26 +223,14 @@ class __$$_InitializedCopyWithImpl<$Res>
 class _$_Initialized implements _Initialized {
   const _$_Initialized(
       {required this.user,
-      required final List<PriceAggregate> cartItems,
       required this.salesOrg,
       required this.configs,
       required this.customerCodeInfo,
       required this.shipInfo,
-      required this.orderType,
-      required this.grandTotal,
-      required this.subTotal})
-      : _cartItems = cartItems;
+      required this.orderType});
 
   @override
   final User user;
-  final List<PriceAggregate> _cartItems;
-  @override
-  List<PriceAggregate> get cartItems {
-    if (_cartItems is EqualUnmodifiableListView) return _cartItems;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_cartItems);
-  }
-
   @override
   final SalesOrganisation salesOrg;
   @override
@@ -316,14 +241,10 @@ class _$_Initialized implements _Initialized {
   final ShipToInfo shipInfo;
   @override
   final String orderType;
-  @override
-  final double grandTotal;
-  @override
-  final double subTotal;
 
   @override
   String toString() {
-    return 'OrderEligibilityEvent.initialized(user: $user, cartItems: $cartItems, salesOrg: $salesOrg, configs: $configs, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, orderType: $orderType, grandTotal: $grandTotal, subTotal: $subTotal)';
+    return 'OrderEligibilityEvent.initialized(user: $user, salesOrg: $salesOrg, configs: $configs, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, orderType: $orderType)';
   }
 
   @override
@@ -332,8 +253,6 @@ class _$_Initialized implements _Initialized {
         (other.runtimeType == runtimeType &&
             other is _$_Initialized &&
             (identical(other.user, user) || other.user == user) &&
-            const DeepCollectionEquality()
-                .equals(other._cartItems, _cartItems) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.configs, configs) || other.configs == configs) &&
@@ -342,25 +261,12 @@ class _$_Initialized implements _Initialized {
             (identical(other.shipInfo, shipInfo) ||
                 other.shipInfo == shipInfo) &&
             (identical(other.orderType, orderType) ||
-                other.orderType == orderType) &&
-            (identical(other.grandTotal, grandTotal) ||
-                other.grandTotal == grandTotal) &&
-            (identical(other.subTotal, subTotal) ||
-                other.subTotal == subTotal));
+                other.orderType == orderType));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      user,
-      const DeepCollectionEquality().hash(_cartItems),
-      salesOrg,
-      configs,
-      customerCodeInfo,
-      shipInfo,
-      orderType,
-      grandTotal,
-      subTotal);
+  int get hashCode => Object.hash(runtimeType, user, salesOrg, configs,
+      customerCodeInfo, shipInfo, orderType);
 
   @JsonKey(ignore: true)
   @override
@@ -373,21 +279,19 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function(
             User user,
-            List<PriceAggregate> cartItems,
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipInfo,
-            String orderType,
-            double grandTotal,
-            double subTotal)
+            String orderType)
         initialized,
     required TResult Function(List<PriceAggregate> cartItems, String orderType,
             double grandTotal, double subTotal)
         update,
+    required TResult Function() validateOrderEligibility,
   }) {
-    return initialized(user, cartItems, salesOrg, configs, customerCodeInfo,
-        shipInfo, orderType, grandTotal, subTotal);
+    return initialized(
+        user, salesOrg, configs, customerCodeInfo, shipInfo, orderType);
   }
 
   @override
@@ -395,21 +299,19 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             User user,
-            List<PriceAggregate> cartItems,
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipInfo,
-            String orderType,
-            double grandTotal,
-            double subTotal)?
+            String orderType)?
         initialized,
     TResult? Function(List<PriceAggregate> cartItems, String orderType,
             double grandTotal, double subTotal)?
         update,
+    TResult? Function()? validateOrderEligibility,
   }) {
-    return initialized?.call(user, cartItems, salesOrg, configs,
-        customerCodeInfo, shipInfo, orderType, grandTotal, subTotal);
+    return initialized?.call(
+        user, salesOrg, configs, customerCodeInfo, shipInfo, orderType);
   }
 
   @override
@@ -417,23 +319,21 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             User user,
-            List<PriceAggregate> cartItems,
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipInfo,
-            String orderType,
-            double grandTotal,
-            double subTotal)?
+            String orderType)?
         initialized,
     TResult Function(List<PriceAggregate> cartItems, String orderType,
             double grandTotal, double subTotal)?
         update,
+    TResult Function()? validateOrderEligibility,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(user, cartItems, salesOrg, configs, customerCodeInfo,
-          shipInfo, orderType, grandTotal, subTotal);
+      return initialized(
+          user, salesOrg, configs, customerCodeInfo, shipInfo, orderType);
     }
     return orElse();
   }
@@ -443,6 +343,8 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_ValidateOrderEligibility value)
+        validateOrderEligibility,
   }) {
     return initialized(this);
   }
@@ -452,6 +354,8 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_ValidateOrderEligibility value)?
+        validateOrderEligibility,
   }) {
     return initialized?.call(this);
   }
@@ -461,6 +365,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_ValidateOrderEligibility value)? validateOrderEligibility,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -473,40 +378,27 @@ class _$_Initialized implements _Initialized {
 abstract class _Initialized implements OrderEligibilityEvent {
   const factory _Initialized(
       {required final User user,
-      required final List<PriceAggregate> cartItems,
       required final SalesOrganisation salesOrg,
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipInfo,
-      required final String orderType,
-      required final double grandTotal,
-      required final double subTotal}) = _$_Initialized;
+      required final String orderType}) = _$_Initialized;
 
   User get user;
-  @override
-  List<PriceAggregate> get cartItems;
   SalesOrganisation get salesOrg;
   SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipInfo;
-  @override
   String get orderType;
-  @override
-  double get grandTotal;
-  @override
-  double get subTotal;
-  @override
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateCopyWith<$Res>
-    implements $OrderEligibilityEventCopyWith<$Res> {
+abstract class _$$_UpdateCopyWith<$Res> {
   factory _$$_UpdateCopyWith(_$_Update value, $Res Function(_$_Update) then) =
       __$$_UpdateCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
       {List<PriceAggregate> cartItems,
@@ -615,18 +507,16 @@ class _$_Update implements _Update {
   TResult when<TResult extends Object?>({
     required TResult Function(
             User user,
-            List<PriceAggregate> cartItems,
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipInfo,
-            String orderType,
-            double grandTotal,
-            double subTotal)
+            String orderType)
         initialized,
     required TResult Function(List<PriceAggregate> cartItems, String orderType,
             double grandTotal, double subTotal)
         update,
+    required TResult Function() validateOrderEligibility,
   }) {
     return update(cartItems, orderType, grandTotal, subTotal);
   }
@@ -636,18 +526,16 @@ class _$_Update implements _Update {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             User user,
-            List<PriceAggregate> cartItems,
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipInfo,
-            String orderType,
-            double grandTotal,
-            double subTotal)?
+            String orderType)?
         initialized,
     TResult? Function(List<PriceAggregate> cartItems, String orderType,
             double grandTotal, double subTotal)?
         update,
+    TResult? Function()? validateOrderEligibility,
   }) {
     return update?.call(cartItems, orderType, grandTotal, subTotal);
   }
@@ -657,18 +545,16 @@ class _$_Update implements _Update {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             User user,
-            List<PriceAggregate> cartItems,
             SalesOrganisation salesOrg,
             SalesOrganisationConfigs configs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipInfo,
-            String orderType,
-            double grandTotal,
-            double subTotal)?
+            String orderType)?
         initialized,
     TResult Function(List<PriceAggregate> cartItems, String orderType,
             double grandTotal, double subTotal)?
         update,
+    TResult Function()? validateOrderEligibility,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -682,6 +568,8 @@ class _$_Update implements _Update {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_ValidateOrderEligibility value)
+        validateOrderEligibility,
   }) {
     return update(this);
   }
@@ -691,6 +579,8 @@ class _$_Update implements _Update {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_ValidateOrderEligibility value)?
+        validateOrderEligibility,
   }) {
     return update?.call(this);
   }
@@ -700,6 +590,7 @@ class _$_Update implements _Update {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_ValidateOrderEligibility value)? validateOrderEligibility,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -716,18 +607,153 @@ abstract class _Update implements OrderEligibilityEvent {
       required final double grandTotal,
       required final double subTotal}) = _$_Update;
 
-  @override
   List<PriceAggregate> get cartItems;
-  @override
   String get orderType;
-  @override
   double get grandTotal;
-  @override
   double get subTotal;
-  @override
   @JsonKey(ignore: true)
   _$$_UpdateCopyWith<_$_Update> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ValidateOrderEligibilityCopyWith<$Res> {
+  factory _$$_ValidateOrderEligibilityCopyWith(
+          _$_ValidateOrderEligibility value,
+          $Res Function(_$_ValidateOrderEligibility) then) =
+      __$$_ValidateOrderEligibilityCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ValidateOrderEligibilityCopyWithImpl<$Res>
+    extends _$OrderEligibilityEventCopyWithImpl<$Res,
+        _$_ValidateOrderEligibility>
+    implements _$$_ValidateOrderEligibilityCopyWith<$Res> {
+  __$$_ValidateOrderEligibilityCopyWithImpl(_$_ValidateOrderEligibility _value,
+      $Res Function(_$_ValidateOrderEligibility) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ValidateOrderEligibility implements _ValidateOrderEligibility {
+  const _$_ValidateOrderEligibility();
+
+  @override
+  String toString() {
+    return 'OrderEligibilityEvent.validateOrderEligibility()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ValidateOrderEligibility);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipInfo,
+            String orderType)
+        initialized,
+    required TResult Function(List<PriceAggregate> cartItems, String orderType,
+            double grandTotal, double subTotal)
+        update,
+    required TResult Function() validateOrderEligibility,
+  }) {
+    return validateOrderEligibility();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipInfo,
+            String orderType)?
+        initialized,
+    TResult? Function(List<PriceAggregate> cartItems, String orderType,
+            double grandTotal, double subTotal)?
+        update,
+    TResult? Function()? validateOrderEligibility,
+  }) {
+    return validateOrderEligibility?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipInfo,
+            String orderType)?
+        initialized,
+    TResult Function(List<PriceAggregate> cartItems, String orderType,
+            double grandTotal, double subTotal)?
+        update,
+    TResult Function()? validateOrderEligibility,
+    required TResult orElse(),
+  }) {
+    if (validateOrderEligibility != null) {
+      return validateOrderEligibility();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Update value) update,
+    required TResult Function(_ValidateOrderEligibility value)
+        validateOrderEligibility,
+  }) {
+    return validateOrderEligibility(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_ValidateOrderEligibility value)?
+        validateOrderEligibility,
+  }) {
+    return validateOrderEligibility?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
+    TResult Function(_ValidateOrderEligibility value)? validateOrderEligibility,
+    required TResult orElse(),
+  }) {
+    if (validateOrderEligibility != null) {
+      return validateOrderEligibility(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ValidateOrderEligibility implements OrderEligibilityEvent {
+  const factory _ValidateOrderEligibility() = _$_ValidateOrderEligibility;
 }
 
 /// @nodoc
@@ -741,6 +767,7 @@ mixin _$OrderEligibilityState {
   String get orderType => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
   double get subTotal => throw _privateConstructorUsedError;
+  bool get showErrorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderEligibilityStateCopyWith<OrderEligibilityState> get copyWith =>
@@ -762,7 +789,8 @@ abstract class $OrderEligibilityStateCopyWith<$Res> {
       ShipToInfo shipInfo,
       String orderType,
       User user,
-      double subTotal});
+      double subTotal,
+      bool showErrorMessage});
 
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
   $SalesOrganisationCopyWith<$Res> get salesOrg;
@@ -794,6 +822,7 @@ class _$OrderEligibilityStateCopyWithImpl<$Res,
     Object? orderType = null,
     Object? user = null,
     Object? subTotal = null,
+    Object? showErrorMessage = null,
   }) {
     return _then(_value.copyWith(
       cartItems: null == cartItems
@@ -832,6 +861,10 @@ class _$OrderEligibilityStateCopyWithImpl<$Res,
           ? _value.subTotal
           : subTotal // ignore: cast_nullable_to_non_nullable
               as double,
+      showErrorMessage: null == showErrorMessage
+          ? _value.showErrorMessage
+          : showErrorMessage // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -893,7 +926,8 @@ abstract class _$$_OrderEligibilityStateCopyWith<$Res>
       ShipToInfo shipInfo,
       String orderType,
       User user,
-      double subTotal});
+      double subTotal,
+      bool showErrorMessage});
 
   @override
   $SalesOrganisationConfigsCopyWith<$Res> get configs;
@@ -927,6 +961,7 @@ class __$$_OrderEligibilityStateCopyWithImpl<$Res>
     Object? orderType = null,
     Object? user = null,
     Object? subTotal = null,
+    Object? showErrorMessage = null,
   }) {
     return _then(_$_OrderEligibilityState(
       cartItems: null == cartItems
@@ -965,6 +1000,10 @@ class __$$_OrderEligibilityStateCopyWithImpl<$Res>
           ? _value.subTotal
           : subTotal // ignore: cast_nullable_to_non_nullable
               as double,
+      showErrorMessage: null == showErrorMessage
+          ? _value.showErrorMessage
+          : showErrorMessage // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -981,7 +1020,8 @@ class _$_OrderEligibilityState extends _OrderEligibilityState {
       required this.shipInfo,
       required this.orderType,
       required this.user,
-      required this.subTotal})
+      required this.subTotal,
+      required this.showErrorMessage})
       : _cartItems = cartItems,
         super._();
 
@@ -1009,10 +1049,12 @@ class _$_OrderEligibilityState extends _OrderEligibilityState {
   final User user;
   @override
   final double subTotal;
+  @override
+  final bool showErrorMessage;
 
   @override
   String toString() {
-    return 'OrderEligibilityState(cartItems: $cartItems, configs: $configs, salesOrg: $salesOrg, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, orderType: $orderType, user: $user, subTotal: $subTotal)';
+    return 'OrderEligibilityState(cartItems: $cartItems, configs: $configs, salesOrg: $salesOrg, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, orderType: $orderType, user: $user, subTotal: $subTotal, showErrorMessage: $showErrorMessage)';
   }
 
   @override
@@ -1035,7 +1077,9 @@ class _$_OrderEligibilityState extends _OrderEligibilityState {
                 other.orderType == orderType) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.subTotal, subTotal) ||
-                other.subTotal == subTotal));
+                other.subTotal == subTotal) &&
+            (identical(other.showErrorMessage, showErrorMessage) ||
+                other.showErrorMessage == showErrorMessage));
   }
 
   @override
@@ -1049,7 +1093,8 @@ class _$_OrderEligibilityState extends _OrderEligibilityState {
       shipInfo,
       orderType,
       user,
-      subTotal);
+      subTotal,
+      showErrorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -1069,7 +1114,8 @@ abstract class _OrderEligibilityState extends OrderEligibilityState {
       required final ShipToInfo shipInfo,
       required final String orderType,
       required final User user,
-      required final double subTotal}) = _$_OrderEligibilityState;
+      required final double subTotal,
+      required final bool showErrorMessage}) = _$_OrderEligibilityState;
   const _OrderEligibilityState._() : super._();
 
   @override
@@ -1090,6 +1136,8 @@ abstract class _OrderEligibilityState extends OrderEligibilityState {
   User get user;
   @override
   double get subTotal;
+  @override
+  bool get showErrorMessage;
   @override
   @JsonKey(ignore: true)
   _$$_OrderEligibilityStateCopyWith<_$_OrderEligibilityState> get copyWith =>
