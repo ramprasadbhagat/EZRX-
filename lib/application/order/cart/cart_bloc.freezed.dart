@@ -6439,7 +6439,6 @@ abstract class _UpdateProductStock implements CartEvent {
 
 /// @nodoc
 mixin _$CartState {
-  List<CartItem> get cartItems => throw _privateConstructorUsedError;
   List<PriceAggregate> get cartProducts => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -6470,8 +6469,7 @@ abstract class $CartStateCopyWith<$Res> {
       _$CartStateCopyWithImpl<$Res, CartState>;
   @useResult
   $Res call(
-      {List<CartItem> cartItems,
-      List<PriceAggregate> cartProducts,
+      {List<PriceAggregate> cartProducts,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching,
       bool isClearing,
@@ -6506,7 +6504,6 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cartItems = null,
     Object? cartProducts = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
@@ -6524,10 +6521,6 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
     Object? upsertBonusItemInProgressHashCode = null,
   }) {
     return _then(_value.copyWith(
-      cartItems: null == cartItems
-          ? _value.cartItems
-          : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<CartItem>,
       cartProducts: null == cartProducts
           ? _value.cartProducts
           : cartProducts // ignore: cast_nullable_to_non_nullable
@@ -6633,8 +6626,7 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<CartItem> cartItems,
-      List<PriceAggregate> cartProducts,
+      {List<PriceAggregate> cartProducts,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching,
       bool isClearing,
@@ -6671,7 +6663,6 @@ class __$$_CartStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cartItems = null,
     Object? cartProducts = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
@@ -6689,10 +6680,6 @@ class __$$_CartStateCopyWithImpl<$Res>
     Object? upsertBonusItemInProgressHashCode = null,
   }) {
     return _then(_$_CartState(
-      cartItems: null == cartItems
-          ? _value._cartItems
-          : cartItems // ignore: cast_nullable_to_non_nullable
-              as List<CartItem>,
       cartProducts: null == cartProducts
           ? _value._cartProducts
           : cartProducts // ignore: cast_nullable_to_non_nullable
@@ -6762,8 +6749,7 @@ class __$$_CartStateCopyWithImpl<$Res>
 
 class _$_CartState extends _CartState {
   const _$_CartState(
-      {required final List<CartItem> cartItems,
-      required final List<PriceAggregate> cartProducts,
+      {required final List<PriceAggregate> cartProducts,
       required this.apiFailureOrSuccessOption,
       required this.isFetching,
       required this.isClearing,
@@ -6778,19 +6764,10 @@ class _$_CartState extends _CartState {
       required this.config,
       required final Map<MaterialNumber, ProductMetaData> additionInfo,
       required final List<int> upsertBonusItemInProgressHashCode})
-      : _cartItems = cartItems,
-        _cartProducts = cartProducts,
+      : _cartProducts = cartProducts,
         _additionInfo = additionInfo,
         _upsertBonusItemInProgressHashCode = upsertBonusItemInProgressHashCode,
         super._();
-
-  final List<CartItem> _cartItems;
-  @override
-  List<CartItem> get cartItems {
-    if (_cartItems is EqualUnmodifiableListView) return _cartItems;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_cartItems);
-  }
 
   final List<PriceAggregate> _cartProducts;
   @override
@@ -6843,7 +6820,7 @@ class _$_CartState extends _CartState {
 
   @override
   String toString() {
-    return 'CartState(cartItems: $cartItems, cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode)';
+    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode)';
   }
 
   @override
@@ -6851,8 +6828,6 @@ class _$_CartState extends _CartState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CartState &&
-            const DeepCollectionEquality()
-                .equals(other._cartItems, _cartItems) &&
             const DeepCollectionEquality()
                 .equals(other._cartProducts, _cartProducts) &&
             (identical(other.apiFailureOrSuccessOption,
@@ -6891,7 +6866,6 @@ class _$_CartState extends _CartState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_cartItems),
       const DeepCollectionEquality().hash(_cartProducts),
       apiFailureOrSuccessOption,
       isFetching,
@@ -6917,8 +6891,7 @@ class _$_CartState extends _CartState {
 
 abstract class _CartState extends CartState {
   const factory _CartState(
-          {required final List<CartItem> cartItems,
-          required final List<PriceAggregate> cartProducts,
+          {required final List<PriceAggregate> cartProducts,
           required final Option<Either<ApiFailure, dynamic>>
               apiFailureOrSuccessOption,
           required final bool isFetching,
@@ -6937,8 +6910,6 @@ abstract class _CartState extends CartState {
       _$_CartState;
   const _CartState._() : super._();
 
-  @override
-  List<CartItem> get cartItems;
   @override
   List<PriceAggregate> get cartProducts;
   @override

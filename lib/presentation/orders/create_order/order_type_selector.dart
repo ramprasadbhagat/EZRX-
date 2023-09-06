@@ -4,13 +4,10 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/presentation/core/confirm_clear_cart_dialog.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -215,7 +212,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
             const MaterialListEvent.updateSearchKey(searchKey: ''),
           );
     }
-    if ((context.read<CartBloc>().state.cartItems.isEmpty ||
+    if ((context.read<CartBloc>().state.cartProducts.isEmpty ||
         validationText.isEmpty)) {
       context.read<OrderDocumentTypeBloc>().add(
             OrderDocumentTypeEvent.selectedOrderType(
@@ -280,28 +277,15 @@ class _OrderTypeSelectorField extends StatelessWidget {
     required BuildContext context,
   }) {
     final cartBloc = context.read<CartBloc>();
-    if (cartBloc.state.cartItems.isEmpty) return;
+    if (cartBloc.state.cartProducts.isEmpty) return;
 
-    final materialPriceBloc = context.read<MaterialPriceBloc>();
-    final eligibilityState = context.read<EligibilityBloc>().state;
-    final specialItem = cartBloc.state.cartItems
-        .map(
-          (CartItem element) => element.itemType == CartItemType.material
-              ? element.commercialToSpecial(
-                  price: materialPriceBloc.state.getPriceForMaterial(
-                    element.materials.first.getMaterialNumber,
-                  ),
-                )
-              : element,
-        )
-        .toList();
-    cartBloc.add(
-      CartEvent.replaceWithOrderItems(
-        items: specialItem,
-        doNotallowOutOfStockMaterial:
-            eligibilityState.doNotAllowOutOfStockMaterials,
-      ),
-    );
+    // cartBloc.add(
+    //   CartEvent.replaceWithOrderItems(
+    //     items: specialItem,
+    //     doNotallowOutOfStockMaterial:
+    //         eligibilityState.doNotAllowOutOfStockMaterials,
+    //   ),
+    // );
   }
 }
 

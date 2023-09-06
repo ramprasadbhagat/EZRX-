@@ -140,7 +140,7 @@ void main() {
         AddToCartEvent.updateQuantity(
           quantity: initialItems.quantity,
           cartZmgQtyExcludeCurrent:
-              cartBloc.state.zmgMaterialWithoutMaterial(initialItems),
+              cartBloc.state.zmgMaterialQuantityForGroupDiscount(initialItems),
           customerCode: CustomerCodeInfo.empty(),
           salesOrganisation: SalesOrganisation.empty(),
           shipToCode: ShipToInfo.empty(),

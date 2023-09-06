@@ -25,7 +25,6 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -510,15 +509,11 @@ void main() {
 
       when(() => cartBlocMock.state).thenReturn(
         CartState.initial().copyWith(
-          cartItems: [
-            CartItem.materialEmpty().copyWith(
-              materials: [
-                PriceAggregate.empty().copyWith(
-                  materialInfo: MaterialInfo.empty().copyWith(
-                    isFOCMaterial: false,
-                  ),
-                ),
-              ],
+          cartProducts: [
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                isFOCMaterial: false,
+              ),
             ),
           ],
         ),
@@ -573,15 +568,11 @@ void main() {
 
       when(() => cartBlocMock.state).thenReturn(
         CartState.initial().copyWith(
-          cartItems: [
-            CartItem.materialEmpty().copyWith(
-              materials: [
-                PriceAggregate.empty().copyWith(
-                  materialInfo: priceAggregate.materialInfo.copyWith(
-                    materialGroup4: MaterialGroup.four('6A1'),
-                  ),
-                ),
-              ],
+          cartProducts: [
+            PriceAggregate.empty().copyWith(
+              materialInfo: priceAggregate.materialInfo.copyWith(
+                materialGroup4: MaterialGroup.four('6A1'),
+              ),
             ),
           ],
         ),
@@ -640,16 +631,12 @@ void main() {
 
       when(() => cartBlocMock.state).thenReturn(
         CartState.initial().copyWith(
-          cartItems: [
-            CartItem.materialEmpty().copyWith(
-              materials: [
-                PriceAggregate.empty().copyWith(
-                  materialInfo: MaterialInfo.empty().copyWith(
-                    isSampleMaterial: true,
-                    isFOCMaterial: false,
-                  ),
-                ),
-              ],
+          cartProducts: [
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                isSampleMaterial: true,
+                isFOCMaterial: false,
+              ),
             ),
           ],
         ),
@@ -709,16 +696,12 @@ void main() {
 
       when(() => cartBlocMock.state).thenReturn(
         CartState.initial().copyWith(
-          cartItems: [
-            CartItem.materialEmpty().copyWith(
-              materials: [
-                PriceAggregate.empty().copyWith(
-                  materialInfo: MaterialInfo.empty().copyWith(
-                    isSampleMaterial: false,
-                    isFOCMaterial: true,
-                  ),
-                ),
-              ],
+          cartProducts: [
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                isSampleMaterial: false,
+                isFOCMaterial: true,
+              ),
             ),
           ],
         ),

@@ -58,8 +58,8 @@ class AddToCart extends StatelessWidget implements AutoRouteWrapper {
                   salesOrganisationConfigs: eligibilityState.salesOrgConfigs,
                   shipToCode: eligibilityState.shipToInfo,
                   materialNumber: addToCartItem.getMaterialNumber,
-                  cartZmgQtyExcludeCurrent:
-                      cartState.zmgMaterialWithoutMaterial(addToCartItem),
+                  cartZmgQtyExcludeCurrent: cartState
+                      .zmgMaterialQuantityForGroupDiscount(addToCartItem),
                   isSpecialOrderType: isSpecialOrderType,
                 ),
               );
@@ -71,8 +71,8 @@ class AddToCart extends StatelessWidget implements AutoRouteWrapper {
                 ..add(
                   AddToCartEvent.updateQuantity(
                     quantity: 1,
-                    cartZmgQtyExcludeCurrent:
-                        cartState.zmgMaterialWithoutMaterial(addToCartItem),
+                    cartZmgQtyExcludeCurrent: cartState
+                        .zmgMaterialQuantityForGroupDiscount(addToCartItem),
                     customerCode: eligibilityState.customerCodeInfo,
                     salesOrganisation: eligibilityState.salesOrganisation,
                     shipToCode: eligibilityState.shipToInfo,
@@ -171,7 +171,9 @@ class AddToCart extends StatelessWidget implements AutoRouteWrapper {
                               final eligibilityState =
                                   context.read<EligibilityBloc>().state;
                               final discountedMaterialCount = cartBloc.state
-                                  .zmgMaterialWithoutMaterial(cartItem);
+                                  .zmgMaterialQuantityForGroupDiscount(
+                                cartItem,
+                              );
                               addToCartBloc.add(
                                 AddToCartEvent.updateQuantity(
                                   quantity: value,

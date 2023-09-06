@@ -463,7 +463,7 @@ void main() {
             ),
           ),
         );
-        expect(cartItem.grandTotalPrice(isMYMarketSalesRep: true), 0);
+        expect(cartItem.grandTotalPrice(), 0);
       });
     });
 
@@ -497,7 +497,7 @@ void main() {
             ),
           ),
         );
-        expect(cartItem.subTotalPrice(isMYMarketSalesRep: true), 0);
+        expect(cartItem.subTotalPrice(), 0);
       });
       test('- Bundle type', () {
         final cartItem = CartItem.bundle(

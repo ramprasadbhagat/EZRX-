@@ -183,7 +183,7 @@ class PriceAggregate with _$PriceAggregate {
 
     finalPrice = tenderContract.tenderPrice.tenderPrice != 0
         ? tenderContract.tenderPriceByPricingUnit
-        : isSpecialOrderTypeNotTH
+        : (isSpecialOrderTypeNotTH || materialInfo.hidePrice)
             ? 0.0
             : (price.isDiscountEligible && !isSpecialOrderType)
                 ? discountedListPrice
@@ -559,7 +559,6 @@ class PriceAggregate with _$PriceAggregate {
         )
       : stockInfoList.any((stock) => !stock.inStock.isMaterialInStock);
 
-  
   List<PriceAggregate> get bundleMaterialsPriceAggregate => bundle.materials
       .map(
         (e) => PriceAggregate.empty().copyWith(

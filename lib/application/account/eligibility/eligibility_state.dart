@@ -196,9 +196,6 @@ class EligibilityState with _$EligibilityState {
   bool get isOrderTypeEligible =>
       user.role.type.isSalesRepRole && !salesOrgConfigs.disableOrderType;
 
-  bool get isMYMarketSalesRep =>
-      user.role.type.isSalesRepRole && salesOrganisation.salesOrg.isMY;
-
   bool get isBonusSampleItemVisible =>
       isBonusOverrideEnable &&
       !selectedOrderType.documentType.isSpecialOrderType;

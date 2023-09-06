@@ -44,8 +44,8 @@ class UpdateCart extends StatelessWidget implements AutoRouteWrapper {
             ..add(
               AddToCartEvent.updateQuantity(
                 quantity: material.quantity,
-                cartZmgQtyExcludeCurrent:
-                    cartState.zmgMaterialWithoutMaterial(updateCartItem),
+                cartZmgQtyExcludeCurrent: cartState
+                    .zmgMaterialQuantityForGroupDiscount(updateCartItem),
                 customerCode: eligibilityState.customerCodeInfo,
                 salesOrganisation: eligibilityState.salesOrganisation,
                 shipToCode: eligibilityState.shipToInfo,
@@ -117,8 +117,8 @@ class UpdateCart extends StatelessWidget implements AutoRouteWrapper {
                           onQuantityChanged: (int value) {
                             final eligibilityState =
                                 context.read<EligibilityBloc>().state;
-                            final discountedMaterialCount =
-                                cartBloc.state.zmgMaterialWithoutMaterial(
+                            final discountedMaterialCount = cartBloc.state
+                                .zmgMaterialQuantityForGroupDiscount(
                               state.cartItem,
                             );
                             context.read<AddToCartBloc>().add(

@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +87,7 @@ class UpdateCartButton extends StatelessWidget {
     required BuildContext context,
     required TenderContract selectedContract,
   }) {
-    final cartItems = context.read<CartBloc>().state.cartItems.allMaterials;
+    final cartItems = context.read<CartBloc>().state.cartProducts;
     final tenderContractInCart = cartItems.isEmpty
         ? TenderContract.empty()
         : cartItems

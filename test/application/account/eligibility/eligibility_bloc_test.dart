@@ -503,24 +503,6 @@ void main() {
   );
 
   test(
-    'isMYMarketSalesRep',
-    () {
-      final eligibilityState = EligibilityState.initial().copyWith(
-        user: fakeUser.copyWith(
-          role: Role.empty().copyWith(
-            type: RoleType('external_sales_rep'),
-          ),
-        ),
-        salesOrganisation: SalesOrganisation.empty().copyWith(
-          salesOrg: SalesOrg('2001'),
-        ),
-      );
-
-      expect(eligibilityState.isMYMarketSalesRep, true);
-    },
-  );
-
-  test(
     'isOrderSummaryPPEDisclaimerEnable',
     () {
       final eligibilityState = EligibilityState.initial().copyWith(
@@ -530,24 +512,6 @@ void main() {
       );
 
       expect(eligibilityState.isOrderSummaryPPEDisclaimerEnable, true);
-    },
-  );
-
-  test(
-    'isBundleMaterialEnable',
-    () {
-      final eligibilityState = EligibilityState.initial().copyWith(
-        user: fakeUser.copyWith(
-          role: Role.empty().copyWith(
-            type: RoleType('external_sales_rep'),
-          ),
-        ),
-        salesOrganisation: SalesOrganisation.empty().copyWith(
-          salesOrg: SalesOrg('2001'),
-        ),
-      );
-
-      expect(eligibilityState.isMYMarketSalesRep, true);
     },
   );
 

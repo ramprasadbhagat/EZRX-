@@ -23,6 +23,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 part 'cart_item.freezed.dart';
 part 'cart_item.g.dart';
 
+//We don't need this anymore so we need a ticket for delete the file and it's usages
 @freezed
 class CartItem with _$CartItem {
   const CartItem._();

@@ -38,11 +38,11 @@ class ProductPriceLabel extends StatelessWidget {
             quantity: 1,
             // TODO: will revisit and enhance this
             discountedMaterialCount: itemPrice.zmgDiscount
-                ? context.watch<CartBloc>().state.zmgMaterialCount(
-                      itemMaterialGroup: materialInfo.materialGroup2,
+                ? context.watch<CartBloc>().state.zmgMaterialsQty(
+                      materialInfo.materialGroup2,
                     )
-                : context.read<CartBloc>().state.zmgMaterialCount(
-                      itemMaterialGroup: materialInfo.materialGroup2,
+                : context.read<CartBloc>().state.zmgMaterialsQty(
+                      materialInfo.materialGroup2,
                     ),
             bundle: Bundle.empty(),
             addedBonusList: [],

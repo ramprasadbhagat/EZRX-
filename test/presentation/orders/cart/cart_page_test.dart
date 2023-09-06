@@ -456,7 +456,6 @@ void main() {
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
-          cartItems: [CartItem.material(mockCartItemWithDataList.first)],
           isFetching: false,
         ),
       );

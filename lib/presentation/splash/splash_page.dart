@@ -50,7 +50,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
-import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/cart_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:universal_io/io.dart';
@@ -603,10 +602,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     );
               },
               redirectMaterialDetail: (materialNumber) {
-                CartBottomSheet.showQuickAddToCartBottomSheet(
-                  context: context,
-                  materialNumber: materialNumber,
-                );
+                //Need to visit when deep linking is revised
+
+                // CartBottomSheet.showQuickAddToCartBottomSheet(
+                //   context: context,
+                //   materialNumber: materialNumber,
+                // );
               },
               redirectHistoryDetail: (history) {
                 context.read<ViewByOrderDetailsBloc>().add(
