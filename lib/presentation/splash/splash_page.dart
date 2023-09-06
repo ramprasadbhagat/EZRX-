@@ -454,7 +454,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           listener: (context, state) {
             _initializeProduct();
             context.read<ViewByOrderBloc>().add(
-                  ViewByOrderEvent.fetch(
+                  ViewByOrderEvent.initialized(
                     customerCodeInfo:
                         context.read<CustomerCodeBloc>().state.customerCodeInfo,
                     salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
@@ -462,6 +462,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         context.read<CustomerCodeBloc>().state.shipToInfo,
                     user: context.read<UserBloc>().state.user,
                     sortDirection: 'desc',
+                  ),
+                );
+            context.read<ViewByOrderBloc>().add(
+                  ViewByOrderEvent.fetch(
                     filter: ViewByOrdersFilter.empty(),
                     searchKey: SearchKey.searchFilter(''),
                   ),

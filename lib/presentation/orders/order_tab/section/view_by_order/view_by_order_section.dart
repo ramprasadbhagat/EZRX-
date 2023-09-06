@@ -84,16 +84,6 @@ class ViewByOrdersPage extends StatelessWidget {
             onRefresh: () {
               context.read<ViewByOrderBloc>().add(
                     ViewByOrderEvent.fetch(
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      salesOrgConfigs:
-                          context.read<SalesOrgBloc>().state.configs,
-                      shipToInfo:
-                          context.read<CustomerCodeBloc>().state.shipToInfo,
-                      user: context.read<UserBloc>().state.user,
-                      sortDirection: 'desc',
                       filter: ViewByOrdersFilter.empty(),
                       searchKey: SearchKey.searchFilter(''),
                     ),
@@ -101,15 +91,7 @@ class ViewByOrdersPage extends StatelessWidget {
             },
             isLoading: state.isFetching,
             onLoadingMore: () => context.read<ViewByOrderBloc>().add(
-                  ViewByOrderEvent.loadMore(
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
-                    user: context.read<UserBloc>().state.user,
-                    sortDirection: 'desc',
-                  ),
+                  const ViewByOrderEvent.loadMore(),
                 ),
             itemBuilder: (context, index, item) => _ViewByOrderGroup(
               viewByOrdersItem: item,

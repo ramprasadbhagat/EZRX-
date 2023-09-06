@@ -24,7 +24,15 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
   ViewByOrderBloc({required this.viewByOrderRepository, required this.config})
       : super(ViewByOrderState.initial()) {
     on<_Initialized>(
-      (event, emit) => emit(ViewByOrderState.initial()),
+      (event, emit) => emit(
+        ViewByOrderState.initial().copyWith(
+          salesOrgConfigs: event.salesOrgConfigs,
+          customerCodeInfo: event.customerCodeInfo,
+          shipToInfo: event.shipToInfo,
+          user: event.user,
+          sortDirection: event.sortDirection,
+        ),
+      ),
     );
     on<_AutoSearchProduct>(
       (e, emit) {
@@ -32,13 +40,8 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
         if (e.searchKey.isValid()) {
           add(
             _Fetch(
-              customerCodeInfo: e.customerCodeInfo,
-              salesOrgConfigs: e.salesOrgConfigs,
-              shipToInfo: e.shipToInfo,
-              user: e.user,
               filter: e.filter,
               searchKey: e.searchKey,
-              sortDirection: e.sortDirection,
             ),
           );
         } else {
@@ -67,15 +70,15 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
         );
 
         final failureOrSuccess = await viewByOrderRepository.getViewByOrders(
-          salesOrgConfig: e.salesOrgConfigs,
-          soldTo: e.customerCodeInfo,
-          shipTo: e.shipToInfo,
-          user: e.user,
+          salesOrgConfig: state.salesOrgConfigs,
+          soldTo: state.customerCodeInfo,
+          shipTo: state.shipToInfo,
+          user: state.user,
           pageSize: config.pageSize,
           offset: 0,
           viewByOrdersFilter: e.filter,
           orderBy: 'datetime',
-          sort: e.sortDirection,
+          sort: state.sortDirection,
           searchKey: e.searchKey,
           viewByOrder: state.viewByOrderList,
         );
@@ -104,15 +107,15 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
       emit(state.copyWith(isFetching: true, failureOrSuccessOption: none()));
 
       final failureOrSuccess = await viewByOrderRepository.getViewByOrders(
-        salesOrgConfig: e.salesOrgConfigs,
-        soldTo: e.customerCodeInfo,
-        shipTo: e.shipToInfo,
-        user: e.user,
+        salesOrgConfig: state.salesOrgConfigs,
+        soldTo: state.customerCodeInfo,
+        shipTo: state.shipToInfo,
+        user: state.user,
         pageSize: config.pageSize,
         offset: state.viewByOrderList.orderHeaders.length,
         viewByOrdersFilter: state.appliedFilter,
         orderBy: 'datetime',
-        sort: e.sortDirection,
+        sort: state.sortDirection,
         searchKey: state.searchKey,
         viewByOrder: state.viewByOrderList,
       );

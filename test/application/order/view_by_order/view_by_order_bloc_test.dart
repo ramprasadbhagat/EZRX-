@@ -71,7 +71,16 @@ void main() {
         viewByOrderRepository: viewByOrderRepository,
         config: config,
       ),
-      act: (bloc) => bloc.add(const ViewByOrderEvent.initialized()),
+      act: (bloc) => bloc.add(
+        ViewByOrderEvent.initialized(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          sortDirection: 'desc',
+        ),
+      ),
+      expect: () => [isA<ViewByOrderState>()],
     );
 
     blocTest<ViewByOrderBloc, ViewByOrderState>(
@@ -79,6 +88,13 @@ void main() {
       build: () => ViewByOrderBloc(
         viewByOrderRepository: viewByOrderRepository,
         config: config,
+      ),
+      seed: () => ViewByOrderState.initial().copyWith(
+        salesOrgConfigs: salesOrgConfig,
+        customerCodeInfo: customerCodeInfo,
+        shipToInfo: shipToInfo,
+        user: user,
+        sortDirection: 'desc',
       ),
       setUp: () {
         when(
@@ -103,22 +119,27 @@ void main() {
       },
       act: (bloc) => bloc.add(
         ViewByOrderEvent.fetch(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
           filter: viewByOrdersFilter,
           searchKey: SearchKey.searchFilter('fake-key'),
         ),
       ),
       expect: () => [
         ViewByOrderState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          sortDirection: 'desc',
           isFetching: true,
           searchKey: searchKey,
           appliedFilter: viewByOrdersFilter,
         ),
         ViewByOrderState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          sortDirection: 'desc',
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -136,6 +157,13 @@ void main() {
       build: () => ViewByOrderBloc(
         viewByOrderRepository: viewByOrderRepository,
         config: config,
+      ),
+      seed: () => ViewByOrderState.initial().copyWith(
+        salesOrgConfigs: salesOrgConfig,
+        customerCodeInfo: customerCodeInfo,
+        shipToInfo: shipToInfo,
+        user: user,
+        sortDirection: 'desc',
       ),
       setUp: () {
         when(
@@ -160,22 +188,27 @@ void main() {
       },
       act: (bloc) => bloc.add(
         ViewByOrderEvent.fetch(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
           filter: viewByOrdersFilter,
           searchKey: SearchKey.searchFilter('fake-key'),
         ),
       ),
       expect: () => [
         ViewByOrderState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          sortDirection: 'desc',
           isFetching: true,
           appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
         ),
         ViewByOrderState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          sortDirection: 'desc',
           appliedFilter: viewByOrdersFilter,
           isFetching: false,
           nextPageIndex: 0,
@@ -194,6 +227,11 @@ void main() {
         appliedFilter: viewByOrdersFilter,
         viewByOrderList: viewByOrderMockData,
         searchKey: searchKey,
+        salesOrgConfigs: salesOrgConfig,
+        customerCodeInfo: customerCodeInfo,
+        shipToInfo: shipToInfo,
+        user: user,
+        sortDirection: 'desc',
       ),
       setUp: () {
         when(
@@ -217,16 +255,15 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        ViewByOrderEvent.loadMore(
+        const ViewByOrderEvent.loadMore(),
+      ),
+      expect: () => [
+        ViewByOrderState.initial().copyWith(
           salesOrgConfigs: salesOrgConfig,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           user: user,
           sortDirection: 'desc',
-        ),
-      ),
-      expect: () => [
-        ViewByOrderState.initial().copyWith(
           isFetching: true,
           nextPageIndex: 0,
           canLoadMore: true,
@@ -235,6 +272,11 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByOrderState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          sortDirection: 'desc',
           appliedFilter: viewByOrdersFilter,
           nextPageIndex: 1,
           canLoadMore: false,
@@ -257,6 +299,11 @@ void main() {
         appliedFilter: viewByOrdersFilter,
         viewByOrderList: viewByOrderMockData,
         searchKey: searchKey,
+        salesOrgConfigs: salesOrgConfig,
+        customerCodeInfo: customerCodeInfo,
+        shipToInfo: shipToInfo,
+        user: user,
+        sortDirection: 'desc',
       ),
       setUp: () {
         when(
@@ -278,16 +325,15 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        ViewByOrderEvent.loadMore(
+        const ViewByOrderEvent.loadMore(),
+      ),
+      expect: () => [
+        ViewByOrderState.initial().copyWith(
           salesOrgConfigs: salesOrgConfig,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           user: user,
           sortDirection: 'desc',
-        ),
-      ),
-      expect: () => [
-        ViewByOrderState.initial().copyWith(
           isFetching: true,
           nextPageIndex: 0,
           viewByOrderList: viewByOrderMockData,
@@ -295,6 +341,11 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByOrderState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          sortDirection: 'desc',
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
