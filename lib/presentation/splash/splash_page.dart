@@ -824,7 +824,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   void _addDependentEvents(BuildContext context, CustomerCodeState state) {
     final salesOrgState = context.read<SalesOrgBloc>().state;
     final orderDocumentTypeState = context.read<OrderDocumentTypeBloc>().state;
-
+    final customerCodeState = context.read<CustomerCodeBloc>().state;
+    final user = context.read<UserBloc>().state.user;
+    final shipToInfo = context.read<CustomerCodeBloc>().state.shipToInfo;
     context.read<MaterialFilterBloc>().add(
           const MaterialFilterEvent.resetFilter(),
         );
@@ -840,7 +842,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         );
 
     context.read<MaterialPriceDetailBloc>().add(
-          const MaterialPriceDetailEvent.initialized(),
+          MaterialPriceDetailEvent.initialized(
+            user: user,
+            customerCode: customerCodeState.customerCodeInfo,
+            salesOrganisation: salesOrgState.salesOrganisation,
+            salesOrganisationConfigs: salesOrgState.configs,
+            shipToCode: shipToInfo,
+          ),
         );
 
     context.read<AllInvoicesBloc>().add(
@@ -859,8 +867,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         );
 
     if (state.haveShipTo) {
-      final user = context.read<UserBloc>().state.user;
-      final customerCodeState = context.read<CustomerCodeBloc>().state;
       context.read<ReturnListByRequestBloc>().add(
             ReturnListByRequestEvent.initialized(
               salesOrg:
@@ -925,11 +931,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             PaymentCustomerInformationEvent.fetch(
               customeCodeInfo: customerCodeState.customerCodeInfo,
               salesOrganisation: salesOrgState.salesOrganisation,
-              selectedShipToCode: context
-                  .read<CustomerCodeBloc>()
-                  .state
-                  .shipToInfo
-                  .shipToCustomerCode,
+              selectedShipToCode: shipToInfo.shipToCustomerCode,
             ),
           );
 

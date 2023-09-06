@@ -33,8 +33,14 @@ class MaterialPriceDetailBloc
     Emitter<MaterialPriceDetailState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => emit(
-        MaterialPriceDetailState.initial(),
+      initialized: (e) async => emit(
+        MaterialPriceDetailState.initial().copyWith(
+          user: e.user,
+          customerCode: e.customerCode,
+          salesOrganisation: e.salesOrganisation,
+          salesOrganisationConfigs: e.salesOrganisationConfigs,
+          shipToCode: e.shipToCode,
+        ),
       ),
       refresh: (e) {
         emit(
@@ -47,13 +53,8 @@ class MaterialPriceDetailBloc
         );
         add(
           MaterialPriceDetailEvent.fetch(
-            user: e.user,
-            customerCode: e.customerCode,
-            salesOrganisation: e.salesOrganisation,
-            salesOrganisationConfigs: e.salesOrganisationConfigs,
-            shipToCode: e.shipToCode,
-            materialInfoList: e.materialInfoList,
             pickAndPack: e.pickAndPack,
+            materialInfoList: e.materialInfoList,
           ),
         );
       },
@@ -152,10 +153,10 @@ class MaterialPriceDetailBloc
         }
 
         final failureOrSuccess = await priceRepository.getMaterialDetailList(
-          salesOrganisation: e.salesOrganisation,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
-          customerCodeInfo: e.customerCode,
-          shipToCodeInfo: e.shipToCode,
+          salesOrganisation: state.salesOrganisation,
+          salesOrganisationConfigs: state.salesOrganisationConfigs,
+          customerCodeInfo: state.customerCode,
+          shipToCodeInfo: state.shipToCode,
           materialQueryList: nonFocValidMaterials,
         );
 
@@ -205,10 +206,10 @@ class MaterialPriceDetailBloc
         );
 
         final failureOrSuccess = await priceRepository.getMaterialDetailList(
-          salesOrganisation: e.salesOrganisation,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
-          customerCodeInfo: e.customerCode,
-          shipToCodeInfo: e.shipToCode,
+          salesOrganisation: state.salesOrganisation,
+          salesOrganisationConfigs: state.salesOrganisationConfigs,
+          customerCodeInfo: state.customerCode,
+          shipToCodeInfo: state.shipToCode,
           materialQueryList: queryMaterials,
           isComboDealMaterials: true,
         );
@@ -256,10 +257,10 @@ class MaterialPriceDetailBloc
         .toList();
 
     final failureOrSuccess = await validateRepository.getValidMaterialList(
-      user: event.user,
-      salesOrganisation: event.salesOrganisation,
-      customerCodeInfo: event.customerCode,
-      shipToInfo: event.shipToCode,
+      user: state.user,
+      salesOrganisation: state.salesOrganisation,
+      customerCodeInfo: state.customerCode,
+      shipToInfo: state.shipToCode,
       materialList: nonFocMaterialNumbers,
       focMaterialList: focMaterialNumbers,
       pickAndPack: event.pickAndPack,
