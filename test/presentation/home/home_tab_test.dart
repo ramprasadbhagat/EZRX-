@@ -24,6 +24,7 @@ import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -145,7 +146,7 @@ void main() {
     ),
     enableOrderType: true,
   );
- 
+
   //final fakeMaterialNumber = MaterialNumber('000000000023168451');
   // final fakematerialInfo1 = MaterialInfo.empty().copyWith(
   //   quantity: 0,
@@ -348,6 +349,76 @@ void main() {
       );
     }
 
+    group('HomeQuickAccessPaymentsMenu Test', () {
+      testWidgets(
+        ' -> Hide homeQuickAccessPaymentsMenu when Enable Payment Configuration is off',
+        (WidgetTester tester) async {
+          VisibilityDetectorController.instance.updateInterval = Duration.zero;
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                //Philippine market: ZPC PH
+                salesOrg: SalesOrg('2500'),
+              ),
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                //Enable Payment Configuration is off
+                disablePayment: true,
+              ),
+            ),
+          );
+          when(() => userBlocMock.state).thenReturn(
+            UserState.initial().copyWith(
+              user: User.empty().copyWith(
+                role: Role.empty().copyWith(
+                  type: RoleType('client_user'),
+                ),
+              ),
+            ),
+          );
+
+          await getWidget(tester, const HomeTab());
+          await tester.pump();
+          final homeQuickAccessPaymentsMenu =
+              find.byKey(WidgetKeys.homeQuickAccessPaymentsMenu);
+          expect(homeQuickAccessPaymentsMenu, findsNothing);
+        },
+      );
+
+      testWidgets(
+        ' -> Show homeQuickAccessPaymentsMenu when Enable Payment Configuration is on',
+        (WidgetTester tester) async {
+          VisibilityDetectorController.instance.updateInterval = Duration.zero;
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                //Philippine market: ZPC PH
+                salesOrg: SalesOrg('2500'),
+              ),
+              salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+                //Enable Payment Configuration is on
+                disablePayment: false,
+              ),
+            ),
+          );
+          when(() => userBlocMock.state).thenReturn(
+            UserState.initial().copyWith(
+              user: User.empty().copyWith(
+                role: Role.empty().copyWith(
+                  type: RoleType('client_user'),
+                ),
+              ),
+            ),
+          );
+
+          await getWidget(tester, const HomeTab());
+          await tester.pump();
+          final homeQuickAccessPaymentsMenu =
+              find.byKey(WidgetKeys.homeQuickAccessPaymentsMenu);
+          expect(homeQuickAccessPaymentsMenu, findsOneWidget);
+        },
+      );
+    });
+
     group('Product accessright false', () {
       setUp(() {
         final fakeUser = User.empty().copyWith(
@@ -403,7 +474,7 @@ void main() {
           (tester) async {
         await getWidget(tester, HomeNavigationTabbar());
         await tester.pump();
-      
+
         final productTab = find.byKey(WidgetKeys.productsTab);
         expect(productTab, findsNothing);
       });

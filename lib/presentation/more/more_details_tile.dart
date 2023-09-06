@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MoreDetailsTile {
+  final Key? key;
   final Widget icon;
   final String label;
   final TextStyle? labelStyle;
@@ -22,6 +24,7 @@ class MoreDetailsTile {
   final void Function()? onTap;
 
   const MoreDetailsTile({
+    this.key,
     required this.icon,
     required this.label,
     this.labelStyle,
@@ -134,6 +137,7 @@ class MoreDetailsTile {
       );
 
   factory MoreDetailsTile.paymentsTab(BuildContext context) => MoreDetailsTile(
+        key: WidgetKeys.paymentsTile,
         icon: const Icon(
           Icons.account_balance_wallet_outlined,
           color: ZPColors.greenIconColor,
@@ -171,32 +175,31 @@ class MoreDetailsTile {
       );
 
   factory MoreDetailsTile.profile(BuildContext context) => MoreDetailsTile(
-      icon: const Icon(
-        Icons.perm_identity_outlined,
-        color: ZPColors.greenIconColor,
-      ),
-      label: 'Profile',
-      onTap: () {
-        context
-            .read<CustomerLicenseBloc>()
-            .add(
-              CustomerLicenseEvent.fetch(
-                customerInfo:
-                    context.read<EligibilityBloc>().state.customerCodeInfo,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                user: context.read<EligibilityBloc>().state.user,
-              ),
-            );
-        context.read<LanguageBloc>().add(
+        icon: const Icon(
+          Icons.perm_identity_outlined,
+          color: ZPColors.greenIconColor,
+        ),
+        label: 'Profile',
+        onTap: () {
+          context.read<CustomerLicenseBloc>().add(
+                CustomerLicenseEvent.fetch(
+                  customerInfo:
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  user: context.read<EligibilityBloc>().state.user,
+                ),
+              );
+          context.read<LanguageBloc>().add(
                 LanguageEvent.changeLanguage(
-                context.read<UserBloc>().state.user.defaultLanguage,
-              ),
-            );
-        context.navigateTo(
-          const ProfilePageRoute(),
-        );
-      },);
+                  context.read<UserBloc>().state.user.defaultLanguage,
+                ),
+              );
+          context.navigateTo(
+            const ProfilePageRoute(),
+          );
+        },
+      );
 
   factory MoreDetailsTile.security(BuildContext context) => MoreDetailsTile(
         icon: const Icon(

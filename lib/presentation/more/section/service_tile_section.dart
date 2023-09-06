@@ -25,6 +25,7 @@ class ServiceTile extends StatelessWidget {
         shrinkWrap: true,
         children: _getServiceTabs(context).map((item) {
           return InkWell(
+            key: item.key,
             onTap: item.onTap,
             child: Column(
               children: [
