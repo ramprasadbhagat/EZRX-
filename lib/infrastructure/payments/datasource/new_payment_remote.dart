@@ -29,15 +29,17 @@ class NewPaymentRemoteDataSource {
     required String salesOrg,
     required int offset,
     required int pageSize,
-    required Map<String, dynamic> filterBy,
+    required List<Map<String, String>> filterList,
   }) async {
     return await getCustomerOpenItems(
       customerCode: customerCode,
       salesOrg: salesOrg,
       debitCreditType: 'debit',
+      debitCreditCode: 'S',
+      orderBy: 'netDueDate',
+      filterList: filterList,
       offset: offset,
       pageSize: pageSize,
-      filterBy: filterBy,
     );
   }
 
@@ -46,15 +48,17 @@ class NewPaymentRemoteDataSource {
     required String salesOrg,
     required int offset,
     required int pageSize,
-    required Map<String, dynamic> filterBy,
+    required List<Map<String, String>> filterList,
   }) async {
     return await getCustomerOpenItems(
       customerCode: customerCode,
       salesOrg: salesOrg,
       debitCreditType: 'credit',
+      debitCreditCode: 'H',
+      orderBy: 'postingKeyName',
+      filterList: filterList,
       offset: offset,
       pageSize: pageSize,
-      filterBy: filterBy,
     );
   }
 
@@ -127,11 +131,30 @@ class NewPaymentRemoteDataSource {
     required String customerCode,
     required String salesOrg,
     required String debitCreditType,
-    String sortDirection = 'desc',
+    required String debitCreditCode,
+    required String orderBy,
+    required List<Map<String, String>> filterList,
     required int offset,
     required int pageSize,
-    required Map<String, dynamic> filterBy,
   }) async {
+    final requestParams = <String, dynamic>{
+      'customerCode': customerCode,
+      'salesOrg': salesOrg,
+      'debitCreditType': debitCreditType,
+      'first': pageSize,
+      'after': offset,
+      'orderBy': {
+        'order': 'desc',
+        'field': orderBy,
+      },
+    };
+    filterList.add({
+      'field': 'debitCreditCode',
+      'value': debitCreditCode,
+    });
+
+    requestParams.putIfAbsent('filterBy', () => filterList);
+
     final res = await httpService.request(
       method: 'POST',
       url: '${config.urlConstants}ezpay',
@@ -139,18 +162,7 @@ class NewPaymentRemoteDataSource {
         {
           'query': newPaymentQuery.getCustomerOpenItemsQuery(),
           'variables': {
-            'request': {
-              'customerCode': customerCode,
-              'salesOrg': salesOrg,
-              'debitCreditType': debitCreditType,
-              'first': pageSize,
-              'after': offset,
-              'orderBy': {
-                'order': sortDirection,
-                'field': 'postingKeyName',
-              },
-              ...filterBy,
-            },
+            'request': requestParams,
           },
         },
       ),

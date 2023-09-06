@@ -112,7 +112,8 @@ import '../payments/credit_details/credit_details.dart' as _i42;
 import '../payments/invoice_details/invoice_details.dart' as _i41;
 import '../payments/new_payment/new_payment.dart' as _i44;
 import '../payments/new_payment/tabs/available_credits_tab.dart' as _i82;
-import '../payments/new_payment/tabs/outstanding_invoices_tab.dart' as _i81;
+import '../payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoices_tab.dart'
+    as _i81;
 import '../payments/new_payment/tabs/payment_method_tab.dart' as _i83;
 import '../payments/payment_advice_created/payment_advice_created_page.dart'
     as _i46;
@@ -372,11 +373,9 @@ class AppRouter extends _i89.RootStackRouter {
       );
     },
     PaymentSummaryPageRoute.name: (routeData) {
-      final args = routeData.argsAs<PaymentSummaryPageRouteArgs>(
-          orElse: () => const PaymentSummaryPageRouteArgs());
       return _i89.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i33.PaymentSummaryPage(key: args.key),
+        child: const _i33.PaymentSummaryPage(),
       );
     },
     AccountSummaryRoute.name: (routeData) {
@@ -1681,27 +1680,14 @@ class ProfilePageRoute extends _i89.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i33.PaymentSummaryPage]
-class PaymentSummaryPageRoute
-    extends _i89.PageRouteInfo<PaymentSummaryPageRouteArgs> {
-  PaymentSummaryPageRoute({_i90.Key? key})
+class PaymentSummaryPageRoute extends _i89.PageRouteInfo<void> {
+  const PaymentSummaryPageRoute()
       : super(
           PaymentSummaryPageRoute.name,
           path: 'payments/payment_summary',
-          args: PaymentSummaryPageRouteArgs(key: key),
         );
 
   static const String name = 'PaymentSummaryPageRoute';
-}
-
-class PaymentSummaryPageRouteArgs {
-  const PaymentSummaryPageRouteArgs({this.key});
-
-  final _i90.Key? key;
-
-  @override
-  String toString() {
-    return 'PaymentSummaryPageRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

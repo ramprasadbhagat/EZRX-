@@ -61,7 +61,7 @@ class AvailableCreditFilterDto with _$AvailableCreditFilterDto {
     return dataMap;
   }
 
-  Map<String, dynamic> get toMapList {
+  List<Map<String, String>> get toMapList {
     final filterMap = <Map<String, String>>[];
     if (documentDateFrom.isNotEmpty &&
         documentDateFrom != '-' &&
@@ -100,6 +100,6 @@ class AvailableCreditFilterDto with _$AvailableCreditFilterDto {
       );
     }
 
-    return filterMap.isEmpty ? {} : {'filterBy': filterMap};
+    return filterMap;
   }
 }

@@ -142,6 +142,7 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
             customerCodeInfo:
                 context.read<CustomerCodeBloc>().state.customerCodeInfo,
             appliedFilter: OutstandingInvoiceFilter.empty(),
+            searchKey: SearchKey.search(''),
           ),
         );
     context.read<AvailableCreditsBloc>().add(

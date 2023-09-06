@@ -9,6 +9,7 @@ class OutstandingInvoicesState with _$OutstandingInvoicesState {
     required bool isLoading,
     required bool canLoadMore,
     required OutstandingInvoiceFilter appliedFilter,
+    required SearchKey searchKey,
   }) = _OutstandingInvoicesState;
 
   factory OutstandingInvoicesState.initial() => OutstandingInvoicesState(
@@ -17,5 +18,6 @@ class OutstandingInvoicesState with _$OutstandingInvoicesState {
         canLoadMore: true,
         items: <CustomerOpenItem>[],
         appliedFilter: OutstandingInvoiceFilter.empty(),
+        searchKey: SearchKey.search(''),
       );
 }

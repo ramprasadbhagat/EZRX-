@@ -51,18 +51,20 @@ void main() {
             customerCode: 'fake-customer-code',
             pageSize: 24,
             offset: 0,
-            filterBy: {},
+            filterList: <Map<String, String>>[],
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
         when(
           () => newPaymentRemoteDataSource.getCustomerOpenItems(
             customerCode: 'fake-customer-code',
-            filterBy: {},
+            filterList: <Map<String, String>>[],
             offset: 0,
             pageSize: 24,
             salesOrg: 'fake-salesOrg',
             debitCreditType: 'debit',
+            debitCreditCode: 'S',
+            orderBy: 'netDueDate',
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
@@ -79,6 +81,7 @@ void main() {
           pageSize: 24,
           salesOrganisation: SalesOrganisation.empty()
               .copyWith(salesOrg: SalesOrg('fake-salesOrg')),
+          searchKey: SearchKey(''),
         );
         expect(
           result.isRight(),
@@ -94,18 +97,20 @@ void main() {
             customerCode: 'fake-customer-code',
             pageSize: 24,
             offset: 0,
-            filterBy: {},
+            filterList: <Map<String, String>>[],
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
 
         when(
           () => newPaymentRemoteDataSource.getCustomerOpenItems(
             customerCode: 'fake-customer-code',
-            filterBy: {},
+            filterList: <Map<String, String>>[],
             offset: 0,
             pageSize: 24,
             salesOrg: 'fake-salesOrg',
             debitCreditType: 'debit',
+            debitCreditCode: 'S',
+            orderBy: 'netDueDate',
           ),
         ).thenAnswer((invocation) async => customerOpenItemsList);
 

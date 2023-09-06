@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
@@ -35,6 +36,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required int pageSize,
     required int offset,
     required OutstandingInvoiceFilter appliedFilter,
+    required SearchKey searchKey,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -48,13 +50,21 @@ class NewPaymentRepository extends INewPaymentRepository {
       }
     }
     try {
+      final filterList =
+          OutstandingInvoiceFilterDto.fromDomain(appliedFilter).toMapList;
+
+      if (searchKey.searchValueOrEmpty.isNotEmpty) {
+        final searchMap = <String, String>{};
+        searchMap.putIfAbsent('field', () => 'accountingDocument');
+        searchMap.putIfAbsent('value', () => searchKey.searchValueOrEmpty);
+        filterList.add(searchMap);
+      }
       final response = await remoteDataSource.getOutstandingInvoices(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
         pageSize: pageSize,
         offset: offset,
-        filterBy:
-            OutstandingInvoiceFilterDto.fromDomain(appliedFilter).toMapList,
+        filterList: filterList,
       );
 
       return Right(response);
@@ -90,7 +100,8 @@ class NewPaymentRepository extends INewPaymentRepository {
         customerCode: customerCodeInfo.customerCodeSoldTo,
         pageSize: pageSize,
         offset: offset,
-        filterBy: AvailableCreditFilterDto.fromDomain(appliedFilter).toMapList,
+        filterList:
+            AvailableCreditFilterDto.fromDomain(appliedFilter).toMapList,
       );
 
       return Right(response);

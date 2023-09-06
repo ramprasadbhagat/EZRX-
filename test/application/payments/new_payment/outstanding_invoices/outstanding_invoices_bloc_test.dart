@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
@@ -17,6 +18,7 @@ class NewPaymentRepositoryMock extends Mock implements NewPaymentRepository {}
 void main() {
   late NewPaymentRepository newPaymentRepository;
   late OutstandingInvoiceFilter fakeOutstandingInvoiceFilter;
+  late SearchKey fakeSearchKey;
   late List<CustomerOpenItem> fakeCustomerOpenItem;
   late int pageSize;
   late Config config;
@@ -27,7 +29,8 @@ void main() {
     config = Config()..appFlavor = Flavor.mock;
   });
   setUp(() {
-    fakeOutstandingInvoiceFilter = OutstandingInvoiceFilter.empty().copyWith();
+    fakeOutstandingInvoiceFilter = OutstandingInvoiceFilter.empty();
+    fakeSearchKey = SearchKey.search('');
     fakeCustomerOpenItem = <CustomerOpenItem>[];
     pageSize = config.pageSize;
   });
@@ -62,6 +65,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             pageSize: pageSize,
             appliedFilter: fakeOutstandingInvoiceFilter,
+            searchKey: fakeSearchKey,
             offset: 0,
           ),
         ).thenAnswer(
@@ -75,6 +79,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           appliedFilter: fakeOutstandingInvoiceFilter,
+          searchKey: fakeSearchKey,
         ),
       ),
       expect: () => [
@@ -103,6 +108,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             pageSize: pageSize,
             appliedFilter: fakeOutstandingInvoiceFilter,
+            searchKey: fakeSearchKey,
             offset: 0,
           ),
         ).thenAnswer(
@@ -116,6 +122,7 @@ void main() {
           salesOrganisation: SalesOrganisation.empty(),
           customerCodeInfo: CustomerCodeInfo.empty(),
           appliedFilter: fakeOutstandingInvoiceFilter,
+          searchKey: fakeSearchKey,
         ),
       ),
       expect: () => [
@@ -144,6 +151,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             pageSize: pageSize,
             appliedFilter: fakeOutstandingInvoiceFilter,
+            searchKey: fakeSearchKey,
             offset: 0,
           ),
         ).thenAnswer(
@@ -184,6 +192,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             pageSize: pageSize,
             appliedFilter: fakeOutstandingInvoiceFilter,
+            searchKey: fakeSearchKey,
             offset: 0,
           ),
         ).thenAnswer(

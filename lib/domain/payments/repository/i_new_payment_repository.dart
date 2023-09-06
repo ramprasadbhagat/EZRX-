@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
@@ -15,6 +16,7 @@ abstract class INewPaymentRepository {
     required int pageSize,
     required int offset,
     required OutstandingInvoiceFilter appliedFilter,
+    required SearchKey searchKey,
   });
   Future<Either<ApiFailure, List<CustomerOpenItem>>> getAvailableCreditNotes({
     required SalesOrganisation salesOrganisation,

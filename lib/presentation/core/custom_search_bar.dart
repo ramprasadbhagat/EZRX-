@@ -13,6 +13,7 @@ class CustomSearchBar extends StatelessWidget {
     required this.enabled,
     required this.onSearchSubmitted,
     required this.onClear,
+    this.keyboardType,
     this.inputFormatters,
     this.hintText = 'Search',
     required this.initialValue,
@@ -27,6 +28,7 @@ class CustomSearchBar extends StatelessWidget {
   final Key? searchIconKey;
   final Key clearIconKey;
   final void Function(String)? onSearchChanged;
+  final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final String hintText;
   final String initialValue;
@@ -48,6 +50,7 @@ class CustomSearchBar extends StatelessWidget {
         onSearchChanged?.call(value);
       },
       onFieldSubmitted: (value) => _onSearch(context, value),
+      keyboardType: keyboardType,
       inputFormatters: inputFormatters,
       style: Theme.of(context).textTheme.titleMedium?.copyWith(height: 1.5),
       decoration: InputDecoration(

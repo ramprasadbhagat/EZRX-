@@ -22,7 +22,8 @@ mixin _$OutstandingInvoicesEvent {
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
@@ -35,7 +36,8 @@ mixin _$OutstandingInvoicesEvent {
     TResult? Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)?
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -48,7 +50,8 @@ mixin _$OutstandingInvoicesEvent {
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)?
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -141,7 +144,8 @@ class _$_initialized implements _initialized {
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
@@ -157,7 +161,8 @@ class _$_initialized implements _initialized {
     TResult? Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)?
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -173,7 +178,8 @@ class _$_initialized implements _initialized {
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)?
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -233,7 +239,8 @@ abstract class _$$_FetchCopyWith<$Res> {
   $Res call(
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
-      OutstandingInvoiceFilter appliedFilter});
+      OutstandingInvoiceFilter appliedFilter,
+      SearchKey searchKey});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -253,6 +260,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_Fetch(
       salesOrganisation: null == salesOrganisation
@@ -267,6 +275,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as OutstandingInvoiceFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 
@@ -302,7 +314,8 @@ class _$_Fetch implements _Fetch {
   const _$_Fetch(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
-      required this.appliedFilter});
+      required this.appliedFilter,
+      required this.searchKey});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -310,10 +323,12 @@ class _$_Fetch implements _Fetch {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final OutstandingInvoiceFilter appliedFilter;
+  @override
+  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'OutstandingInvoicesEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, appliedFilter: $appliedFilter)';
+    return 'OutstandingInvoicesEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, appliedFilter: $appliedFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -326,12 +341,14 @@ class _$_Fetch implements _Fetch {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.appliedFilter, appliedFilter) ||
-                other.appliedFilter == appliedFilter));
+                other.appliedFilter == appliedFilter) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, customerCodeInfo, appliedFilter);
+  int get hashCode => Object.hash(runtimeType, salesOrganisation,
+      customerCodeInfo, appliedFilter, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -346,13 +363,14 @@ class _$_Fetch implements _Fetch {
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         loadMore,
   }) {
-    return fetch(salesOrganisation, customerCodeInfo, appliedFilter);
+    return fetch(salesOrganisation, customerCodeInfo, appliedFilter, searchKey);
   }
 
   @override
@@ -362,13 +380,15 @@ class _$_Fetch implements _Fetch {
     TResult? Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)?
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
   }) {
-    return fetch?.call(salesOrganisation, customerCodeInfo, appliedFilter);
+    return fetch?.call(
+        salesOrganisation, customerCodeInfo, appliedFilter, searchKey);
   }
 
   @override
@@ -378,7 +398,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)?
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -386,7 +407,8 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrganisation, customerCodeInfo, appliedFilter);
+      return fetch(
+          salesOrganisation, customerCodeInfo, appliedFilter, searchKey);
     }
     return orElse();
   }
@@ -430,11 +452,13 @@ abstract class _Fetch implements OutstandingInvoicesEvent {
   const factory _Fetch(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final OutstandingInvoiceFilter appliedFilter}) = _$_Fetch;
+      required final OutstandingInvoiceFilter appliedFilter,
+      required final SearchKey searchKey}) = _$_Fetch;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   OutstandingInvoiceFilter get appliedFilter;
+  SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -540,7 +564,8 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
@@ -556,7 +581,8 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)?
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -572,7 +598,8 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter)?
+            OutstandingInvoiceFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -641,6 +668,7 @@ mixin _$OutstandingInvoicesState {
   bool get canLoadMore => throw _privateConstructorUsedError;
   OutstandingInvoiceFilter get appliedFilter =>
       throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OutstandingInvoicesStateCopyWith<OutstandingInvoicesState> get copyWith =>
@@ -658,7 +686,8 @@ abstract class $OutstandingInvoicesStateCopyWith<$Res> {
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore,
-      OutstandingInvoiceFilter appliedFilter});
+      OutstandingInvoiceFilter appliedFilter,
+      SearchKey searchKey});
 
   $OutstandingInvoiceFilterCopyWith<$Res> get appliedFilter;
 }
@@ -682,6 +711,7 @@ class _$OutstandingInvoicesStateCopyWithImpl<$Res,
     Object? isLoading = null,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       items: null == items
@@ -704,6 +734,10 @@ class _$OutstandingInvoicesStateCopyWithImpl<$Res,
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as OutstandingInvoiceFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ) as $Val);
   }
 
@@ -731,7 +765,8 @@ abstract class _$$_OutstandingInvoicesStateCopyWith<$Res>
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore,
-      OutstandingInvoiceFilter appliedFilter});
+      OutstandingInvoiceFilter appliedFilter,
+      SearchKey searchKey});
 
   @override
   $OutstandingInvoiceFilterCopyWith<$Res> get appliedFilter;
@@ -754,6 +789,7 @@ class __$$_OutstandingInvoicesStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_OutstandingInvoicesState(
       items: null == items
@@ -776,6 +812,10 @@ class __$$_OutstandingInvoicesStateCopyWithImpl<$Res>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as OutstandingInvoiceFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 }
@@ -788,7 +828,8 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
       required this.failureOrSuccessOption,
       required this.isLoading,
       required this.canLoadMore,
-      required this.appliedFilter})
+      required this.appliedFilter,
+      required this.searchKey})
       : _items = items,
         super._();
 
@@ -808,10 +849,12 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
   final bool canLoadMore;
   @override
   final OutstandingInvoiceFilter appliedFilter;
+  @override
+  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'OutstandingInvoicesState(items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter)';
+    return 'OutstandingInvoicesState(items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -827,7 +870,9 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
             (identical(other.appliedFilter, appliedFilter) ||
-                other.appliedFilter == appliedFilter));
+                other.appliedFilter == appliedFilter) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
@@ -837,7 +882,8 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
       failureOrSuccessOption,
       isLoading,
       canLoadMore,
-      appliedFilter);
+      appliedFilter,
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -853,8 +899,8 @@ abstract class _OutstandingInvoicesState extends OutstandingInvoicesState {
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
       required final bool canLoadMore,
-      required final OutstandingInvoiceFilter
-          appliedFilter}) = _$_OutstandingInvoicesState;
+      required final OutstandingInvoiceFilter appliedFilter,
+      required final SearchKey searchKey}) = _$_OutstandingInvoicesState;
   const _OutstandingInvoicesState._() : super._();
 
   @override
@@ -867,6 +913,8 @@ abstract class _OutstandingInvoicesState extends OutstandingInvoicesState {
   bool get canLoadMore;
   @override
   OutstandingInvoiceFilter get appliedFilter;
+  @override
+  SearchKey get searchKey;
   @override
   @JsonKey(ignore: true)
   _$$_OutstandingInvoicesStateCopyWith<_$_OutstandingInvoicesState>

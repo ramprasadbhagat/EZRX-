@@ -49,7 +49,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/payment_ad
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab.dart';
+import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoices_tab.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method_tab.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/new_payment.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
@@ -83,15 +83,10 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/edit_sales_district_page.dart';
 import 'package:ezrxmobile/presentation/products/products_tab.dart';
 import 'package:ezrxmobile/presentation/more/more_tab.dart';
-
 import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
-
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements_page.dart';
-
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcements_tab.dart';
-
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/article_details.dart';
-
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/articles_tab.dart';
 
 //ignore: unused-code

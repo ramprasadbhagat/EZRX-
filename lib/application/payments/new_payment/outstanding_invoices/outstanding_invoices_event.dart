@@ -8,6 +8,7 @@ class OutstandingInvoicesEvent with _$OutstandingInvoicesEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required OutstandingInvoiceFilter appliedFilter,
+    required SearchKey searchKey,
   }) = _Fetch;
   const factory OutstandingInvoicesEvent.loadMore({
     required SalesOrganisation salesOrganisation,

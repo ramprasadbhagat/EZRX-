@@ -80,7 +80,7 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
     return dataMap;
   }
 
-  Map<String, dynamic> get toMapList {
+  List<Map<String, String>> get toMapList {
     final filterMap = <Map<String, String>>[];
     if (dueDateFrom.isNotEmpty &&
         dueDateFrom != '-' &&
@@ -145,6 +145,6 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
       filterMap.add(statusMap);
     }
 
-    return filterMap.isEmpty ? {} : {'filterBy': filterMap};
+    return filterMap;
   }
 }
