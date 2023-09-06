@@ -6,10 +6,12 @@ part 'customer_open_item.freezed.dart';
 @freezed
 class CustomerOpenItem with _$CustomerOpenItem {
   const CustomerOpenItem._();
+
   factory CustomerOpenItem({
     required StatusType status,
     required String accountingDocument,
     required DateTimeStringValue netDueDate,
+    required DateTimeStringValue documentDate,
     required double amountInTransactionCurrency,
     required String documentReferenceID,
     required String postingKeyName,
@@ -29,6 +31,8 @@ class CustomerOpenItem with _$CustomerOpenItem {
     required String partialPaymentHistoryDesc,
     required double paymentAmountInDisplayCrcy,
     required String companyCode,
+    @Default(0.0) double g2Tax,
+    @Default(0.0) double g4Tax,
   }) = _CustomerOpenItem;
 
   factory CustomerOpenItem.empty() => CustomerOpenItem(
@@ -38,6 +42,7 @@ class CustomerOpenItem with _$CustomerOpenItem {
         postingKeyName: '',
         transactionCurrency: '',
         netDueDate: DateTimeStringValue(''),
+        documentDate: DateTimeStringValue(''),
         documentReferenceID: '',
         accountingDocExternalReference: '',
         bpCustomerNumber: '',
@@ -54,6 +59,8 @@ class CustomerOpenItem with _$CustomerOpenItem {
         partialPaymentHistoryDesc: '',
         paymentAmountInDisplayCrcy: 0,
         companyCode: '',
+        g2Tax: 0,
+        g4Tax: 0,
       );
 }
 
@@ -66,5 +73,15 @@ extension CustomerOpenItemListExtension on List<CustomerOpenItem> {
     final set2 = Set<CustomerOpenItem>.from(this);
 
     return set1.containsAll(set2) && set2.containsAll(set1);
+  }
+
+  List<CustomerOpenItem> get sortWithDocumentDate {
+    final customerOpenItemsSorted = [...this];
+    customerOpenItemsSorted.sort(
+      (a, b) => DateTime.parse(a.documentDate.getValue())
+          .compareTo(DateTime.parse(b.documentDate.getValue())),
+    );
+
+    return customerOpenItemsSorted;
   }
 }

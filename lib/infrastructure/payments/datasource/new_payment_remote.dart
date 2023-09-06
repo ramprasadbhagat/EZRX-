@@ -16,6 +16,7 @@ class NewPaymentRemoteDataSource {
   NewPaymentQuery newPaymentQuery;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
+
   NewPaymentRemoteDataSource({
     required this.httpService,
     required this.newPaymentQuery,
@@ -64,6 +65,8 @@ class NewPaymentRemoteDataSource {
     required String paymentMethod,
     required String transactionCurrency,
     required String userName,
+    required String fromDate,
+    required String toDate,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -75,6 +78,8 @@ class NewPaymentRemoteDataSource {
             'input': {
               'customerCode': customerCode,
               'customerInvoice': customerInvoices,
+              'fromDate': fromDate,
+              'toDate': toDate,
               'paymentMethod': paymentMethod,
               'salesOrg': salesOrg,
               'transactionCurrency': transactionCurrency,

@@ -26,6 +26,8 @@ mixin _$CustomerOpenItemDto {
   String get accountingDocument => throw _privateConstructorUsedError;
   @JsonKey(name: 'netDueDate', defaultValue: '')
   String get netDueDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'documentDate', defaultValue: '')
+  String get documentDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   String get documentReferenceID => throw _privateConstructorUsedError;
   @JsonKey(name: 'postingKeyName', defaultValue: '')
@@ -79,50 +81,45 @@ abstract class $CustomerOpenItemDtoCopyWith<$Res> {
       _$CustomerOpenItemDtoCopyWithImpl<$Res, CustomerOpenItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'status', defaultValue: '')
-          String status,
+      {@JsonKey(name: 'status', defaultValue: '') String status,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String accountingDocument,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          String netDueDate,
+      String accountingDocument,
+      @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
+      @JsonKey(name: 'documentDate', defaultValue: '') String documentDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-          String documentReferenceID,
-      @JsonKey(name: 'postingKeyName', defaultValue: '')
-          String postingKeyName,
+      String documentReferenceID,
+      @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          double amountInTransactionCurrency,
+      double amountInTransactionCurrency,
       @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
-          String transactionCurrency,
+      String transactionCurrency,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-          String accountingDocExternalReference,
+      String accountingDocExternalReference,
       @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
-          String bpCustomerNumber,
+      String bpCustomerNumber,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
-          String debitCreditCode,
+      String debitCreditCode,
       @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
-          double cashDiscountAmountInDspCrcy,
+      double cashDiscountAmountInDspCrcy,
       @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
-          String cashDiscountDueDate,
+      String cashDiscountDueDate,
       @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
-          double totalAmountInDisplayCrcy,
+      double totalAmountInDisplayCrcy,
       @JsonKey(name: 'displayCurrency', defaultValue: '')
-          String displayCurrency,
+      String displayCurrency,
       @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
-          double openAmountInDisplayCrcy,
-      @JsonKey(name: 'fiscalYear', defaultValue: '')
-          String fiscalYear,
-      @JsonKey(name: 'isDisputed', defaultValue: '')
-          String isDisputed,
+      double openAmountInDisplayCrcy,
+      @JsonKey(name: 'fiscalYear', defaultValue: '') String fiscalYear,
+      @JsonKey(name: 'isDisputed', defaultValue: '') String isDisputed,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          String accountingDocumentItem,
+      String accountingDocumentItem,
       @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
-          String accountingDocumentItemRef,
+      String accountingDocumentItemRef,
       @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
-          String partialPaymentHistoryDesc,
+      String partialPaymentHistoryDesc,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-          double paymentAmountInDisplayCrcy,
-      @JsonKey(name: 'companyCode', defaultValue: '')
-          String companyCode});
+      double paymentAmountInDisplayCrcy,
+      @JsonKey(name: 'companyCode', defaultValue: '') String companyCode});
 }
 
 /// @nodoc
@@ -141,6 +138,7 @@ class _$CustomerOpenItemDtoCopyWithImpl<$Res, $Val extends CustomerOpenItemDto>
     Object? status = null,
     Object? accountingDocument = null,
     Object? netDueDate = null,
+    Object? documentDate = null,
     Object? documentReferenceID = null,
     Object? postingKeyName = null,
     Object? amountInTransactionCurrency = null,
@@ -173,6 +171,10 @@ class _$CustomerOpenItemDtoCopyWithImpl<$Res, $Val extends CustomerOpenItemDto>
       netDueDate: null == netDueDate
           ? _value.netDueDate
           : netDueDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      documentDate: null == documentDate
+          ? _value.documentDate
+          : documentDate // ignore: cast_nullable_to_non_nullable
               as String,
       documentReferenceID: null == documentReferenceID
           ? _value.documentReferenceID
@@ -263,50 +265,45 @@ abstract class _$$_CustomerOpenItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'status', defaultValue: '')
-          String status,
+      {@JsonKey(name: 'status', defaultValue: '') String status,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String accountingDocument,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          String netDueDate,
+      String accountingDocument,
+      @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
+      @JsonKey(name: 'documentDate', defaultValue: '') String documentDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-          String documentReferenceID,
-      @JsonKey(name: 'postingKeyName', defaultValue: '')
-          String postingKeyName,
+      String documentReferenceID,
+      @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          double amountInTransactionCurrency,
+      double amountInTransactionCurrency,
       @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
-          String transactionCurrency,
+      String transactionCurrency,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-          String accountingDocExternalReference,
+      String accountingDocExternalReference,
       @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
-          String bpCustomerNumber,
+      String bpCustomerNumber,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
-          String debitCreditCode,
+      String debitCreditCode,
       @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
-          double cashDiscountAmountInDspCrcy,
+      double cashDiscountAmountInDspCrcy,
       @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
-          String cashDiscountDueDate,
+      String cashDiscountDueDate,
       @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
-          double totalAmountInDisplayCrcy,
+      double totalAmountInDisplayCrcy,
       @JsonKey(name: 'displayCurrency', defaultValue: '')
-          String displayCurrency,
+      String displayCurrency,
       @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
-          double openAmountInDisplayCrcy,
-      @JsonKey(name: 'fiscalYear', defaultValue: '')
-          String fiscalYear,
-      @JsonKey(name: 'isDisputed', defaultValue: '')
-          String isDisputed,
+      double openAmountInDisplayCrcy,
+      @JsonKey(name: 'fiscalYear', defaultValue: '') String fiscalYear,
+      @JsonKey(name: 'isDisputed', defaultValue: '') String isDisputed,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          String accountingDocumentItem,
+      String accountingDocumentItem,
       @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
-          String accountingDocumentItemRef,
+      String accountingDocumentItemRef,
       @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
-          String partialPaymentHistoryDesc,
+      String partialPaymentHistoryDesc,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-          double paymentAmountInDisplayCrcy,
-      @JsonKey(name: 'companyCode', defaultValue: '')
-          String companyCode});
+      double paymentAmountInDisplayCrcy,
+      @JsonKey(name: 'companyCode', defaultValue: '') String companyCode});
 }
 
 /// @nodoc
@@ -323,6 +320,7 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
     Object? status = null,
     Object? accountingDocument = null,
     Object? netDueDate = null,
+    Object? documentDate = null,
     Object? documentReferenceID = null,
     Object? postingKeyName = null,
     Object? amountInTransactionCurrency = null,
@@ -355,6 +353,10 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
       netDueDate: null == netDueDate
           ? _value.netDueDate
           : netDueDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      documentDate: null == documentDate
+          ? _value.documentDate
+          : documentDate // ignore: cast_nullable_to_non_nullable
               as String,
       documentReferenceID: null == documentReferenceID
           ? _value.documentReferenceID
@@ -440,50 +442,48 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
   _$_CustomerOpenItemDto(
-      {@JsonKey(name: 'status', defaultValue: '')
-          required this.status,
+      {@JsonKey(name: 'status', defaultValue: '') required this.status,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required this.accountingDocument,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          required this.netDueDate,
+      required this.accountingDocument,
+      @JsonKey(name: 'netDueDate', defaultValue: '') required this.netDueDate,
+      @JsonKey(name: 'documentDate', defaultValue: '')
+      required this.documentDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-          required this.documentReferenceID,
+      required this.documentReferenceID,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
-          required this.postingKeyName,
+      required this.postingKeyName,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          required this.amountInTransactionCurrency,
+      required this.amountInTransactionCurrency,
       @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
-          required this.transactionCurrency,
+      required this.transactionCurrency,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-          required this.accountingDocExternalReference,
+      required this.accountingDocExternalReference,
       @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
-          required this.bpCustomerNumber,
+      required this.bpCustomerNumber,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
-          required this.debitCreditCode,
+      required this.debitCreditCode,
       @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
-          required this.cashDiscountAmountInDspCrcy,
+      required this.cashDiscountAmountInDspCrcy,
       @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
-          required this.cashDiscountDueDate,
+      required this.cashDiscountDueDate,
       @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
-          required this.totalAmountInDisplayCrcy,
+      required this.totalAmountInDisplayCrcy,
       @JsonKey(name: 'displayCurrency', defaultValue: '')
-          required this.displayCurrency,
+      required this.displayCurrency,
       @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
-          required this.openAmountInDisplayCrcy,
-      @JsonKey(name: 'fiscalYear', defaultValue: '')
-          required this.fiscalYear,
-      @JsonKey(name: 'isDisputed', defaultValue: '')
-          required this.isDisputed,
+      required this.openAmountInDisplayCrcy,
+      @JsonKey(name: 'fiscalYear', defaultValue: '') required this.fiscalYear,
+      @JsonKey(name: 'isDisputed', defaultValue: '') required this.isDisputed,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          required this.accountingDocumentItem,
+      required this.accountingDocumentItem,
       @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
-          required this.accountingDocumentItemRef,
+      required this.accountingDocumentItemRef,
       @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
-          required this.partialPaymentHistoryDesc,
+      required this.partialPaymentHistoryDesc,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-          required this.paymentAmountInDisplayCrcy,
+      required this.paymentAmountInDisplayCrcy,
       @JsonKey(name: 'companyCode', defaultValue: '')
-          required this.companyCode})
+      required this.companyCode})
       : super._();
 
   factory _$_CustomerOpenItemDto.fromJson(Map<String, dynamic> json) =>
@@ -498,6 +498,9 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
   @override
   @JsonKey(name: 'netDueDate', defaultValue: '')
   final String netDueDate;
+  @override
+  @JsonKey(name: 'documentDate', defaultValue: '')
+  final String documentDate;
   @override
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   final String documentReferenceID;
@@ -558,7 +561,7 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
 
   @override
   String toString() {
-    return 'CustomerOpenItemDto(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, amountInTransactionCurrency: $amountInTransactionCurrency, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, companyCode: $companyCode)';
+    return 'CustomerOpenItemDto(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentDate: $documentDate, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, amountInTransactionCurrency: $amountInTransactionCurrency, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, companyCode: $companyCode)';
   }
 
   @override
@@ -571,6 +574,8 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
                 other.accountingDocument == accountingDocument) &&
             (identical(other.netDueDate, netDueDate) ||
                 other.netDueDate == netDueDate) &&
+            (identical(other.documentDate, documentDate) ||
+                other.documentDate == documentDate) &&
             (identical(other.documentReferenceID, documentReferenceID) ||
                 other.documentReferenceID == documentReferenceID) &&
             (identical(other.postingKeyName, postingKeyName) ||
@@ -623,6 +628,7 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
         status,
         accountingDocument,
         netDueDate,
+        documentDate,
         documentReferenceID,
         postingKeyName,
         amountInTransactionCurrency,
@@ -661,50 +667,51 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
 
 abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
   factory _CustomerOpenItemDto(
-      {@JsonKey(name: 'status', defaultValue: '')
-          required final String status,
+      {@JsonKey(name: 'status', defaultValue: '') required final String status,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required final String accountingDocument,
+      required final String accountingDocument,
       @JsonKey(name: 'netDueDate', defaultValue: '')
-          required final String netDueDate,
+      required final String netDueDate,
+      @JsonKey(name: 'documentDate', defaultValue: '')
+      required final String documentDate,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
-          required final String documentReferenceID,
+      required final String documentReferenceID,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
-          required final String postingKeyName,
+      required final String postingKeyName,
       @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
-          required final double amountInTransactionCurrency,
+      required final double amountInTransactionCurrency,
       @JsonKey(name: 'transactionCurrency', defaultValue: 'MYR')
-          required final String transactionCurrency,
+      required final String transactionCurrency,
       @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-          required final String accountingDocExternalReference,
+      required final String accountingDocExternalReference,
       @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
-          required final String bpCustomerNumber,
+      required final String bpCustomerNumber,
       @JsonKey(name: 'debitCreditCode', defaultValue: '')
-          required final String debitCreditCode,
+      required final String debitCreditCode,
       @JsonKey(name: 'cashDiscountAmountInDspCrcy', defaultValue: 0)
-          required final double cashDiscountAmountInDspCrcy,
+      required final double cashDiscountAmountInDspCrcy,
       @JsonKey(name: 'cashDiscountDueDate', defaultValue: '')
-          required final String cashDiscountDueDate,
+      required final String cashDiscountDueDate,
       @JsonKey(name: 'totalAmountInDisplayCrcy', defaultValue: 0)
-          required final double totalAmountInDisplayCrcy,
+      required final double totalAmountInDisplayCrcy,
       @JsonKey(name: 'displayCurrency', defaultValue: '')
-          required final String displayCurrency,
+      required final String displayCurrency,
       @JsonKey(name: 'openAmountInDisplayCrcy', defaultValue: 0)
-          required final double openAmountInDisplayCrcy,
+      required final double openAmountInDisplayCrcy,
       @JsonKey(name: 'fiscalYear', defaultValue: '')
-          required final String fiscalYear,
+      required final String fiscalYear,
       @JsonKey(name: 'isDisputed', defaultValue: '')
-          required final String isDisputed,
+      required final String isDisputed,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          required final String accountingDocumentItem,
+      required final String accountingDocumentItem,
       @JsonKey(name: 'accountingDocumentItemRef', defaultValue: '')
-          required final String accountingDocumentItemRef,
+      required final String accountingDocumentItemRef,
       @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
-          required final String partialPaymentHistoryDesc,
+      required final String partialPaymentHistoryDesc,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-          required final double paymentAmountInDisplayCrcy,
+      required final double paymentAmountInDisplayCrcy,
       @JsonKey(name: 'companyCode', defaultValue: '')
-          required final String companyCode}) = _$_CustomerOpenItemDto;
+      required final String companyCode}) = _$_CustomerOpenItemDto;
   _CustomerOpenItemDto._() : super._();
 
   factory _CustomerOpenItemDto.fromJson(Map<String, dynamic> json) =
@@ -719,6 +726,9 @@ abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
   @override
   @JsonKey(name: 'netDueDate', defaultValue: '')
   String get netDueDate;
+  @override
+  @JsonKey(name: 'documentDate', defaultValue: '')
+  String get documentDate;
   @override
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   String get documentReferenceID;

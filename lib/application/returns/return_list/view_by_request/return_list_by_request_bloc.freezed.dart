@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ReturnListByRequestEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo, SalesOrg salesOrg, User user)
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)
         initialized,
     required TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)
         fetch,
@@ -30,8 +30,8 @@ mixin _$ReturnListByRequestEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipInfo,
-            SalesOrg salesOrg, User user)?
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
         initialized,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)?
@@ -41,8 +41,8 @@ mixin _$ReturnListByRequestEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipInfo,
-            SalesOrg salesOrg, User user)?
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
         initialized,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)?
@@ -104,13 +104,13 @@ abstract class _$$_InitializedCopyWith<$Res> {
       __$$_InitializedCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {CustomerCodeInfo customerCodeInfo,
+      {SalesOrg salesOrg,
       ShipToInfo shipInfo,
-      SalesOrg salesOrg,
+      CustomerCodeInfo customerCodeInfo,
       User user});
 
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipInfo;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $UserCopyWith<$Res> get user;
 }
 
@@ -125,24 +125,24 @@ class __$$_InitializedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? customerCodeInfo = null,
-    Object? shipInfo = null,
     Object? salesOrg = null,
+    Object? shipInfo = null,
+    Object? customerCodeInfo = null,
     Object? user = null,
   }) {
     return _then(_$_Initialized(
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipInfo: null == shipInfo
-          ? _value.shipInfo
-          : shipInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
+      shipInfo: null == shipInfo
+          ? _value.shipInfo
+          : shipInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -152,17 +152,17 @@ class __$$_InitializedCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
+  $ShipToInfoCopyWith<$Res> get shipInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipInfo, (value) {
+      return _then(_value.copyWith(shipInfo: value));
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipInfo, (value) {
-      return _then(_value.copyWith(shipInfo: value));
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
     });
   }
 
@@ -179,23 +179,23 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 class _$_Initialized implements _Initialized {
   const _$_Initialized(
-      {required this.customerCodeInfo,
+      {required this.salesOrg,
       required this.shipInfo,
-      required this.salesOrg,
+      required this.customerCodeInfo,
       required this.user});
 
   @override
-  final CustomerCodeInfo customerCodeInfo;
+  final SalesOrg salesOrg;
   @override
   final ShipToInfo shipInfo;
   @override
-  final SalesOrg salesOrg;
+  final CustomerCodeInfo customerCodeInfo;
   @override
   final User user;
 
   @override
   String toString() {
-    return 'ReturnListByRequestEvent.initialized(customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, salesOrg: $salesOrg, user: $user)';
+    return 'ReturnListByRequestEvent.initialized(salesOrg: $salesOrg, shipInfo: $shipInfo, customerCodeInfo: $customerCodeInfo, user: $user)';
   }
 
   @override
@@ -203,18 +203,18 @@ class _$_Initialized implements _Initialized {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initialized &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipInfo, shipInfo) ||
-                other.shipInfo == shipInfo) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
+            (identical(other.shipInfo, shipInfo) ||
+                other.shipInfo == shipInfo) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, customerCodeInfo, shipInfo, salesOrg, user);
+      Object.hash(runtimeType, salesOrg, shipInfo, customerCodeInfo, user);
 
   @JsonKey(ignore: true)
   @override
@@ -225,8 +225,8 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo, SalesOrg salesOrg, User user)
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)
         initialized,
     required TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)
         fetch,
@@ -234,28 +234,28 @@ class _$_Initialized implements _Initialized {
         autoSearchProduct,
     required TResult Function() loadMore,
   }) {
-    return initialized(customerCodeInfo, shipInfo, salesOrg, user);
+    return initialized(salesOrg, shipInfo, customerCodeInfo, user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipInfo,
-            SalesOrg salesOrg, User user)?
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
         initialized,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)?
         autoSearchProduct,
     TResult? Function()? loadMore,
   }) {
-    return initialized?.call(customerCodeInfo, shipInfo, salesOrg, user);
+    return initialized?.call(salesOrg, shipInfo, customerCodeInfo, user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipInfo,
-            SalesOrg salesOrg, User user)?
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
         initialized,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)?
@@ -264,7 +264,7 @@ class _$_Initialized implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(customerCodeInfo, shipInfo, salesOrg, user);
+      return initialized(salesOrg, shipInfo, customerCodeInfo, user);
     }
     return orElse();
   }
@@ -309,14 +309,14 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements ReturnListByRequestEvent {
   const factory _Initialized(
-      {required final CustomerCodeInfo customerCodeInfo,
+      {required final SalesOrg salesOrg,
       required final ShipToInfo shipInfo,
-      required final SalesOrg salesOrg,
+      required final CustomerCodeInfo customerCodeInfo,
       required final User user}) = _$_Initialized;
 
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipInfo;
   SalesOrg get salesOrg;
+  ShipToInfo get shipInfo;
+  CustomerCodeInfo get customerCodeInfo;
   User get user;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
@@ -405,8 +405,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo, SalesOrg salesOrg, User user)
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)
         initialized,
     required TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)
         fetch,
@@ -420,8 +420,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipInfo,
-            SalesOrg salesOrg, User user)?
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
         initialized,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)?
@@ -434,8 +434,8 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipInfo,
-            SalesOrg salesOrg, User user)?
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
         initialized,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)?
@@ -585,8 +585,8 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo, SalesOrg salesOrg, User user)
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)
         initialized,
     required TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)
         fetch,
@@ -600,8 +600,8 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipInfo,
-            SalesOrg salesOrg, User user)?
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
         initialized,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)?
@@ -614,8 +614,8 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipInfo,
-            SalesOrg salesOrg, User user)?
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
         initialized,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)?
@@ -717,8 +717,8 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipInfo, SalesOrg salesOrg, User user)
+    required TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)
         initialized,
     required TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)
         fetch,
@@ -732,8 +732,8 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipInfo,
-            SalesOrg salesOrg, User user)?
+    TResult? Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
         initialized,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult? Function(ReturnFilter appliedFilter, SearchKey searchKey)?
@@ -746,8 +746,8 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipInfo,
-            SalesOrg salesOrg, User user)?
+    TResult Function(SalesOrg salesOrg, ShipToInfo shipInfo,
+            CustomerCodeInfo customerCodeInfo, User user)?
         initialized,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)? fetch,
     TResult Function(ReturnFilter appliedFilter, SearchKey searchKey)?

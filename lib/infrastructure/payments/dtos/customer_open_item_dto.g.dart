@@ -12,6 +12,7 @@ _$_CustomerOpenItemDto _$$_CustomerOpenItemDtoFromJson(
       status: json['status'] as String? ?? '',
       accountingDocument: json['accountingDocument'] as String? ?? '',
       netDueDate: json['netDueDate'] as String? ?? '',
+      documentDate: json['documentDate'] as String? ?? '',
       documentReferenceID: json['documentReferenceID'] as String? ?? '',
       postingKeyName: json['postingKeyName'] as String? ?? '',
       amountInTransactionCurrency:
@@ -47,6 +48,7 @@ Map<String, dynamic> _$$_CustomerOpenItemDtoToJson(
       'status': instance.status,
       'accountingDocument': instance.accountingDocument,
       'netDueDate': instance.netDueDate,
+      'documentDate': instance.documentDate,
       'documentReferenceID': instance.documentReferenceID,
       'postingKeyName': instance.postingKeyName,
       'amountInTransactionCurrency': instance.amountInTransactionCurrency,

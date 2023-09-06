@@ -106,6 +106,8 @@ class NewPaymentRepository extends INewPaymentRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required List<CustomerOpenItem> customerOpenItems,
+    required String fromDate,
+    required String toDate,
     required String paymentMethod,
     required User user,
   }) async {
@@ -136,6 +138,8 @@ class NewPaymentRepository extends INewPaymentRepository {
         paymentMethod: paymentMethod,
         transactionCurrency: customerOpenItems.first.transactionCurrency,
         userName: user.username.getValue(),
+        fromDate: fromDate,
+        toDate: toDate,
       );
 
       return Right(response);

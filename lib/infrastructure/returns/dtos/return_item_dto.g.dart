@@ -10,7 +10,7 @@ _$_ReturnItemDto _$$_ReturnItemDtoFromJson(Map<String, dynamic> json) =>
     _$_ReturnItemDto(
       requestId: json['requestId'] as String? ?? '',
       requestDate: json['requestDate'] as String? ?? '',
-      itemQty: json['itemQty'] as String? ?? '',
+      itemQty: json['itemQty'] as String? ?? '0',
       totalPrice: json['totalPrice'] as String? ?? '',
       status: json['status'] as String? ?? '',
       materialNumber: json['materialNumber'] as String? ?? '',

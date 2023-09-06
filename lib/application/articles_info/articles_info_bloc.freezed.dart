@@ -589,7 +589,7 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
     Object? articleInfo = null,
     Object? isFetching = null,
     Object? canLoadMore = null,
-    Object? searchKey = freezed,
+    Object? searchKey = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -605,7 +605,7 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchKey: freezed == searchKey
+      searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
@@ -658,7 +658,7 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
     Object? articleInfo = null,
     Object? isFetching = null,
     Object? canLoadMore = null,
-    Object? searchKey = freezed,
+    Object? searchKey = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
     return _then(_$_ArticlesInfoState(
@@ -674,7 +674,7 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchKey: freezed == searchKey
+      searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
@@ -724,20 +724,16 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
                 other.isFetching == isFetching) &&
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
-            const DeepCollectionEquality().equals(other.searchKey, searchKey) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      articleInfo,
-      isFetching,
-      canLoadMore,
-      const DeepCollectionEquality().hash(searchKey),
-      apiFailureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, articleInfo, isFetching,
+      canLoadMore, searchKey, apiFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override

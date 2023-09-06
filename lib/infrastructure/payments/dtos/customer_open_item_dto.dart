@@ -8,11 +8,14 @@ part 'customer_open_item_dto.g.dart';
 @freezed
 class CustomerOpenItemDto with _$CustomerOpenItemDto {
   const CustomerOpenItemDto._();
+
   factory CustomerOpenItemDto({
     @JsonKey(name: 'status', defaultValue: '') required String status,
     @JsonKey(name: 'accountingDocument', defaultValue: '')
         required String accountingDocument,
     @JsonKey(name: 'netDueDate', defaultValue: '') required String netDueDate,
+    @JsonKey(name: 'documentDate', defaultValue: '')
+        required String documentDate,
     @JsonKey(name: 'documentReferenceID', defaultValue: '')
         required String documentReferenceID,
     @JsonKey(name: 'postingKeyName', defaultValue: '')
@@ -57,6 +60,7 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
       accountingDocument: accountingDocument,
       postingKeyName: postingKeyName,
       netDueDate: DateTimeStringValue(netDueDate),
+      documentDate: DateTimeStringValue(documentDate),
       documentReferenceID: documentReferenceID,
       transactionCurrency: transactionCurrency,
       accountingDocExternalReference: accountingDocExternalReference,
@@ -74,6 +78,14 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
       partialPaymentHistoryDesc: partialPaymentHistoryDesc,
       paymentAmountInDisplayCrcy: paymentAmountInDisplayCrcy,
       companyCode: companyCode,
+      g2Tax: double.tryParse(
+            (openAmountInDisplayCrcy * 5 / 100).toStringAsFixed(2),
+          ) ??
+          0,
+      g4Tax: double.tryParse(
+            (openAmountInDisplayCrcy * 1 / 100).toStringAsFixed(2),
+          ) ??
+          0,
     );
   }
 
