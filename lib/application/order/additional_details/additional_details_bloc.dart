@@ -46,8 +46,7 @@ class AdditionalDetailsBloc
       addPoDocument: (value) async => emit(
         state.copyWith(
           deliveryInfoData: state.deliveryInfoData.copyWith(
-            poDocuments: List.from(state.deliveryInfoData.poDocuments)
-              ..addAll(value.poDocuments),
+            poDocuments: value.poDocuments,
           ),
         ),
       ),

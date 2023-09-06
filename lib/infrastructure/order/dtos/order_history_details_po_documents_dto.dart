@@ -10,9 +10,11 @@ class PoDocumentsDto with _$PoDocumentsDto {
   const PoDocumentsDto._();
   const factory PoDocumentsDto({
     @JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
-        required String url,
+    required String url,
     @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
-        required String name,
+    required String name,
+    @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+    required String path,
   }) = _PoDocumentsDto;
   factory PoDocumentsDto.fromDomain(
     PoDocuments orderHistoryDetailsPODocuments,
@@ -20,6 +22,7 @@ class PoDocumentsDto with _$PoDocumentsDto {
     return PoDocumentsDto(
       url: orderHistoryDetailsPODocuments.url,
       name: orderHistoryDetailsPODocuments.name,
+      path: orderHistoryDetailsPODocuments.path,
     );
   }
 
@@ -27,6 +30,7 @@ class PoDocumentsDto with _$PoDocumentsDto {
     return PoDocuments(
       url: url,
       name: name,
+      path: path,
     );
   }
 

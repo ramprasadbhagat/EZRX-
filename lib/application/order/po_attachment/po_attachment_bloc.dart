@@ -1,8 +1,4 @@
 import 'dart:async';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/repository/i_po_attachment_repository.dart';
@@ -115,7 +111,7 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
             isFetching: true,
             failureOrSuccessOption: none(),
             fileUrl: [],
-            fileOperationMode: FileOperationMode.upload,
+            fileOperationMode: FileOperationMode.none,
           ),
         );
         final failureOrSuccessPermission =
@@ -133,9 +129,6 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
             final pickFilesFailureOrSuccess =
                 await poAttachmentRepository.pickFiles(
               uploadOptionType: e.uploadOptionType,
-              user: e.user,
-              customerCodeInfo: e.customerCodeInfo,
-              shipToInfo: e.shipToInfo,
             );
             await pickFilesFailureOrSuccess.fold(
               (failure) async => emit(
@@ -154,25 +147,10 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
 
                   return;
                 }
-                emit(
-                  state.copyWith(
-                    fileUrl: files
-                        .map(
-                          (element) => PoDocuments.empty().copyWith(
-                            name: element.name,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                );
+
                 final uploadFilesFailureOrSuccess =
                     await poAttachmentRepository.uploadFiles(
-                  salesOrg: e.salesOrg,
                   files: files,
-                  shipToInfo: e.shipToInfo,
-                  customerCodeInfo: e.customerCodeInfo,
-                  user: e.user,
-                  uploadedPODocument: e.uploadedPODocument,
                 );
                 uploadFilesFailureOrSuccess.fold(
                   (l) => emit(
@@ -188,12 +166,50 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
                       failureOrSuccessOption: none(),
                       fileUrl: r,
                       isFetching: false,
+                      fileOperationMode: FileOperationMode.upload,
                     ),
                   ),
                 );
               },
             );
           },
+        );
+      },
+      deleteFile: (_DeleteFile e) async {
+        emit(
+          state.copyWith(
+            isFetching: true,
+            failureOrSuccessOption: none(),
+            fileOperationMode: FileOperationMode.none,
+          ),
+        );
+        final deleteFilesFailureOrSuccess =
+            await poAttachmentRepository.deleteFile(
+          filePath: e.file.path,
+        );
+
+        final newFileList = List<PoDocuments>.of(state.fileUrl);
+
+        newFileList.removeWhere(
+          (element) => element.path == e.file.path,
+        );
+
+        deleteFilesFailureOrSuccess.fold(
+          (l) => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(deleteFilesFailureOrSuccess),
+              isFetching: false,
+              fileUrl: [],
+            ),
+          ),
+          (r) => emit(
+            state.copyWith(
+              failureOrSuccessOption: none(),
+              fileUrl: newFileList,
+              isFetching: false,
+              fileOperationMode: FileOperationMode.delete,
+            ),
+          ),
         );
       },
     );

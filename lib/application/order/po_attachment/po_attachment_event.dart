@@ -12,13 +12,12 @@ class PoAttachmentEvent with _$PoAttachmentEvent {
     @Default(AttachmentType.downloadPOAttachment) AttachmentType attachmentType,
   }) = _OpenFile;
   const factory PoAttachmentEvent.uploadFile({
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required SalesOrg salesOrg,
-    required User user,
     required List<PoDocuments> uploadedPODocument,
     required UploadOptionType uploadOptionType,
   }) = _UpLoadFile;
+   const factory PoAttachmentEvent.deleteFile({
+    required PoDocuments file,
+  }) = _DeleteFile;
 }
 
 enum UploadOptionType { file, gallery }

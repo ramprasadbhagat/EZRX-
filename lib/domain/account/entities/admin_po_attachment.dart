@@ -23,5 +23,6 @@ class AdminPoAttachment with _$AdminPoAttachment {
   PoDocuments get pooDocuments => PoDocuments(
         name: documentName,
         url: documentUrl,
+        path: '',
       );
 }

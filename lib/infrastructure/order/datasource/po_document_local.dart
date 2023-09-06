@@ -26,4 +26,11 @@ class PoDocumentLocalDataSource {
 
     return PoDocumentsDto.fromJson(data).toDomain();
   }
+   Future<bool> deleteFile() async {
+    final data = json.decode(
+      await rootBundle.loadString('assets/json/deleteFileQueryResponse.json'),
+    );
+
+    return data['data']['deleteFile']['isDeleted'] as bool;
+  }
 }

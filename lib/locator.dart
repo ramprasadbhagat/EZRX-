@@ -155,6 +155,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/favourite_remote.dart
 import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/po_document_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_remote.dart';
@@ -1562,10 +1563,13 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PoDocumentLocalDataSource(),
   );
+  locator.registerLazySingleton(() => PoDocumentQuery());
   locator.registerLazySingleton(
     () => PoDocumentRemoteDataSource(
       httpService: locator<HttpService>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      config: locator<Config>(),
+      queryMutation: locator<PoDocumentQuery>(),
     ),
   );
 

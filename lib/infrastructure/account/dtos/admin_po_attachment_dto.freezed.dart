@@ -55,26 +55,29 @@ abstract class $AdminPoAttachmentDtoCopyWith<$Res> {
       _$AdminPoAttachmentDtoCopyWithImpl<$Res, AdminPoAttachmentDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
-          String salesOrderNumber,
-      @JsonKey(name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
-          String ezrxReferenceNumber,
+      {@JsonKey(
+          name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+      String salesOrderNumber,
+      @JsonKey(
+          name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+      String ezrxReferenceNumber,
       @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
-          String createdBy,
+      String createdBy,
       @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
-          String createdTime,
+      String createdTime,
       @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
-          String documentUrl,
+      String documentUrl,
       @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
-          String documentName,
+      String documentName,
       @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
-          String salesOrg,
+      String salesOrg,
       @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
-          String soldToCode,
+      String soldToCode,
       @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
-          String shipToCode,
-      @JsonKey(name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
-          String tempOrderNumber});
+      String shipToCode,
+      @JsonKey(
+          name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+      String tempOrderNumber});
 }
 
 /// @nodoc
@@ -156,26 +159,29 @@ abstract class _$$_AdminPoAttachmentDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
-          String salesOrderNumber,
-      @JsonKey(name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
-          String ezrxReferenceNumber,
+      {@JsonKey(
+          name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+      String salesOrderNumber,
+      @JsonKey(
+          name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+      String ezrxReferenceNumber,
       @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
-          String createdBy,
+      String createdBy,
       @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
-          String createdTime,
+      String createdTime,
       @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
-          String documentUrl,
+      String documentUrl,
       @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
-          String documentName,
+      String documentName,
       @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
-          String salesOrg,
+      String salesOrg,
       @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
-          String soldToCode,
+      String soldToCode,
       @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
-          String shipToCode,
-      @JsonKey(name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
-          String tempOrderNumber});
+      String shipToCode,
+      @JsonKey(
+          name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+      String tempOrderNumber});
 }
 
 /// @nodoc
@@ -249,26 +255,29 @@ class __$$_AdminPoAttachmentDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AdminPoAttachmentDto extends _AdminPoAttachmentDto {
   const _$_AdminPoAttachmentDto(
-      {@JsonKey(name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
-          required this.salesOrderNumber,
-      @JsonKey(name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
-          required this.ezrxReferenceNumber,
+      {@JsonKey(
+          name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+      required this.salesOrderNumber,
+      @JsonKey(
+          name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+      required this.ezrxReferenceNumber,
       @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
-          required this.createdBy,
+      required this.createdBy,
       @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
-          required this.createdTime,
+      required this.createdTime,
       @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
-          required this.documentUrl,
+      required this.documentUrl,
       @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
-          required this.documentName,
+      required this.documentName,
       @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
-          required this.salesOrg,
+      required this.salesOrg,
       @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
-          required this.soldToCode,
+      required this.soldToCode,
       @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
-          required this.shipToCode,
-      @JsonKey(name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
-          required this.tempOrderNumber})
+      required this.shipToCode,
+      @JsonKey(
+          name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+      required this.tempOrderNumber})
       : super._();
 
   factory _$_AdminPoAttachmentDto.fromJson(Map<String, dynamic> json) =>
@@ -370,26 +379,29 @@ class _$_AdminPoAttachmentDto extends _AdminPoAttachmentDto {
 
 abstract class _AdminPoAttachmentDto extends AdminPoAttachmentDto {
   const factory _AdminPoAttachmentDto(
-      {@JsonKey(name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
-          required final String salesOrderNumber,
-      @JsonKey(name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
-          required final String ezrxReferenceNumber,
+      {@JsonKey(
+          name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+      required final String salesOrderNumber,
+      @JsonKey(
+          name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+      required final String ezrxReferenceNumber,
       @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
-          required final String createdBy,
+      required final String createdBy,
       @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
-          required final String createdTime,
+      required final String createdTime,
       @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
-          required final String documentUrl,
+      required final String documentUrl,
       @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
-          required final String documentName,
+      required final String documentName,
       @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
-          required final String soldToCode,
+      required final String soldToCode,
       @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
-          required final String shipToCode,
-      @JsonKey(name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
-          required final String tempOrderNumber}) = _$_AdminPoAttachmentDto;
+      required final String shipToCode,
+      @JsonKey(
+          name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+      required final String tempOrderNumber}) = _$_AdminPoAttachmentDto;
   const _AdminPoAttachmentDto._() : super._();
 
   factory _AdminPoAttachmentDto.fromJson(Map<String, dynamic> json) =

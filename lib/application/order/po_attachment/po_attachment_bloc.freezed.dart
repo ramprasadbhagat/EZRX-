@@ -24,14 +24,10 @@ mixin _$PoAttachmentEvent {
         downloadFile,
     required TResult Function(PoDocuments files, AttachmentType attachmentType)
         openFile,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)
         uploadFile,
+    required TResult Function(PoDocuments file) deleteFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,14 +37,10 @@ mixin _$PoAttachmentEvent {
         downloadFile,
     TResult? Function(PoDocuments files, AttachmentType attachmentType)?
         openFile,
-    TResult? Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)?
         uploadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,14 +50,10 @@ mixin _$PoAttachmentEvent {
         downloadFile,
     TResult Function(PoDocuments files, AttachmentType attachmentType)?
         openFile,
-    TResult Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)?
         uploadFile,
+    TResult Function(PoDocuments file)? deleteFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -75,6 +63,7 @@ mixin _$PoAttachmentEvent {
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
     required TResult Function(_UpLoadFile value) uploadFile,
+    required TResult Function(_DeleteFile value) deleteFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -83,6 +72,7 @@ mixin _$PoAttachmentEvent {
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
+    TResult? Function(_DeleteFile value)? deleteFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -91,6 +81,7 @@ mixin _$PoAttachmentEvent {
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
     TResult Function(_UpLoadFile value)? uploadFile,
+    TResult Function(_DeleteFile value)? deleteFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -158,14 +149,10 @@ class _$_Initialized implements _Initialized {
         downloadFile,
     required TResult Function(PoDocuments files, AttachmentType attachmentType)
         openFile,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)
         uploadFile,
+    required TResult Function(PoDocuments file) deleteFile,
   }) {
     return initialized();
   }
@@ -178,14 +165,10 @@ class _$_Initialized implements _Initialized {
         downloadFile,
     TResult? Function(PoDocuments files, AttachmentType attachmentType)?
         openFile,
-    TResult? Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)?
         uploadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
   }) {
     return initialized?.call();
   }
@@ -198,14 +181,10 @@ class _$_Initialized implements _Initialized {
         downloadFile,
     TResult Function(PoDocuments files, AttachmentType attachmentType)?
         openFile,
-    TResult Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)?
         uploadFile,
+    TResult Function(PoDocuments file)? deleteFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -221,6 +200,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
     required TResult Function(_UpLoadFile value) uploadFile,
+    required TResult Function(_DeleteFile value) deleteFile,
   }) {
     return initialized(this);
   }
@@ -232,6 +212,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
+    TResult? Function(_DeleteFile value)? deleteFile,
   }) {
     return initialized?.call(this);
   }
@@ -243,6 +224,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
     TResult Function(_UpLoadFile value)? uploadFile,
+    TResult Function(_DeleteFile value)? deleteFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -346,14 +328,10 @@ class _$_DownloadFile implements _DownloadFile {
         downloadFile,
     required TResult Function(PoDocuments files, AttachmentType attachmentType)
         openFile,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)
         uploadFile,
+    required TResult Function(PoDocuments file) deleteFile,
   }) {
     return downloadFile(files, attachmentType);
   }
@@ -366,14 +344,10 @@ class _$_DownloadFile implements _DownloadFile {
         downloadFile,
     TResult? Function(PoDocuments files, AttachmentType attachmentType)?
         openFile,
-    TResult? Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)?
         uploadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
   }) {
     return downloadFile?.call(files, attachmentType);
   }
@@ -386,14 +360,10 @@ class _$_DownloadFile implements _DownloadFile {
         downloadFile,
     TResult Function(PoDocuments files, AttachmentType attachmentType)?
         openFile,
-    TResult Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)?
         uploadFile,
+    TResult Function(PoDocuments file)? deleteFile,
     required TResult orElse(),
   }) {
     if (downloadFile != null) {
@@ -409,6 +379,7 @@ class _$_DownloadFile implements _DownloadFile {
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
     required TResult Function(_UpLoadFile value) uploadFile,
+    required TResult Function(_DeleteFile value) deleteFile,
   }) {
     return downloadFile(this);
   }
@@ -420,6 +391,7 @@ class _$_DownloadFile implements _DownloadFile {
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
+    TResult? Function(_DeleteFile value)? deleteFile,
   }) {
     return downloadFile?.call(this);
   }
@@ -431,6 +403,7 @@ class _$_DownloadFile implements _DownloadFile {
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
     TResult Function(_UpLoadFile value)? uploadFile,
+    TResult Function(_DeleteFile value)? deleteFile,
     required TResult orElse(),
   }) {
     if (downloadFile != null) {
@@ -544,14 +517,10 @@ class _$_OpenFile implements _OpenFile {
         downloadFile,
     required TResult Function(PoDocuments files, AttachmentType attachmentType)
         openFile,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)
         uploadFile,
+    required TResult Function(PoDocuments file) deleteFile,
   }) {
     return openFile(files, attachmentType);
   }
@@ -564,14 +533,10 @@ class _$_OpenFile implements _OpenFile {
         downloadFile,
     TResult? Function(PoDocuments files, AttachmentType attachmentType)?
         openFile,
-    TResult? Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)?
         uploadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
   }) {
     return openFile?.call(files, attachmentType);
   }
@@ -584,14 +549,10 @@ class _$_OpenFile implements _OpenFile {
         downloadFile,
     TResult Function(PoDocuments files, AttachmentType attachmentType)?
         openFile,
-    TResult Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)?
         uploadFile,
+    TResult Function(PoDocuments file)? deleteFile,
     required TResult orElse(),
   }) {
     if (openFile != null) {
@@ -607,6 +568,7 @@ class _$_OpenFile implements _OpenFile {
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
     required TResult Function(_UpLoadFile value) uploadFile,
+    required TResult Function(_DeleteFile value) deleteFile,
   }) {
     return openFile(this);
   }
@@ -618,6 +580,7 @@ class _$_OpenFile implements _OpenFile {
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
+    TResult? Function(_DeleteFile value)? deleteFile,
   }) {
     return openFile?.call(this);
   }
@@ -629,6 +592,7 @@ class _$_OpenFile implements _OpenFile {
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
     TResult Function(_UpLoadFile value)? uploadFile,
+    TResult Function(_DeleteFile value)? deleteFile,
     required TResult orElse(),
   }) {
     if (openFile != null) {
@@ -657,16 +621,8 @@ abstract class _$$_UpLoadFileCopyWith<$Res> {
       __$$_UpLoadFileCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      SalesOrg salesOrg,
-      User user,
-      List<PoDocuments> uploadedPODocument,
+      {List<PoDocuments> uploadedPODocument,
       UploadOptionType uploadOptionType});
-
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -680,30 +636,10 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
-    Object? salesOrg = null,
-    Object? user = null,
     Object? uploadedPODocument = null,
     Object? uploadOptionType = null,
   }) {
     return _then(_$_UpLoadFile(
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
-      salesOrg: null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
       uploadedPODocument: null == uploadedPODocument
           ? _value._uploadedPODocument
           : uploadedPODocument // ignore: cast_nullable_to_non_nullable
@@ -714,52 +650,16 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
               as UploadOptionType,
     ));
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_UpLoadFile implements _UpLoadFile {
   const _$_UpLoadFile(
-      {required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.salesOrg,
-      required this.user,
-      required final List<PoDocuments> uploadedPODocument,
+      {required final List<PoDocuments> uploadedPODocument,
       required this.uploadOptionType})
       : _uploadedPODocument = uploadedPODocument;
 
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
-  final SalesOrg salesOrg;
-  @override
-  final User user;
   final List<PoDocuments> _uploadedPODocument;
   @override
   List<PoDocuments> get uploadedPODocument {
@@ -774,7 +674,7 @@ class _$_UpLoadFile implements _UpLoadFile {
 
   @override
   String toString() {
-    return 'PoAttachmentEvent.uploadFile(customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrg: $salesOrg, user: $user, uploadedPODocument: $uploadedPODocument, uploadOptionType: $uploadOptionType)';
+    return 'PoAttachmentEvent.uploadFile(uploadedPODocument: $uploadedPODocument, uploadOptionType: $uploadOptionType)';
   }
 
   @override
@@ -782,13 +682,6 @@ class _$_UpLoadFile implements _UpLoadFile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpLoadFile &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.user, user) || other.user == user) &&
             const DeepCollectionEquality()
                 .equals(other._uploadedPODocument, _uploadedPODocument) &&
             (identical(other.uploadOptionType, uploadOptionType) ||
@@ -798,10 +691,6 @@ class _$_UpLoadFile implements _UpLoadFile {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      customerCodeInfo,
-      shipToInfo,
-      salesOrg,
-      user,
       const DeepCollectionEquality().hash(_uploadedPODocument),
       uploadOptionType);
 
@@ -820,17 +709,12 @@ class _$_UpLoadFile implements _UpLoadFile {
         downloadFile,
     required TResult Function(PoDocuments files, AttachmentType attachmentType)
         openFile,
-    required TResult Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)
         uploadFile,
+    required TResult Function(PoDocuments file) deleteFile,
   }) {
-    return uploadFile(customerCodeInfo, shipToInfo, salesOrg, user,
-        uploadedPODocument, uploadOptionType);
+    return uploadFile(uploadedPODocument, uploadOptionType);
   }
 
   @override
@@ -841,17 +725,12 @@ class _$_UpLoadFile implements _UpLoadFile {
         downloadFile,
     TResult? Function(PoDocuments files, AttachmentType attachmentType)?
         openFile,
-    TResult? Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)?
         uploadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
   }) {
-    return uploadFile?.call(customerCodeInfo, shipToInfo, salesOrg, user,
-        uploadedPODocument, uploadOptionType);
+    return uploadFile?.call(uploadedPODocument, uploadOptionType);
   }
 
   @override
@@ -862,19 +741,14 @@ class _$_UpLoadFile implements _UpLoadFile {
         downloadFile,
     TResult Function(PoDocuments files, AttachmentType attachmentType)?
         openFile,
-    TResult Function(
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            SalesOrg salesOrg,
-            User user,
-            List<PoDocuments> uploadedPODocument,
+    TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType)?
         uploadFile,
+    TResult Function(PoDocuments file)? deleteFile,
     required TResult orElse(),
   }) {
     if (uploadFile != null) {
-      return uploadFile(customerCodeInfo, shipToInfo, salesOrg, user,
-          uploadedPODocument, uploadOptionType);
+      return uploadFile(uploadedPODocument, uploadOptionType);
     }
     return orElse();
   }
@@ -886,6 +760,7 @@ class _$_UpLoadFile implements _UpLoadFile {
     required TResult Function(_DownloadFile value) downloadFile,
     required TResult Function(_OpenFile value) openFile,
     required TResult Function(_UpLoadFile value) uploadFile,
+    required TResult Function(_DeleteFile value) deleteFile,
   }) {
     return uploadFile(this);
   }
@@ -897,6 +772,7 @@ class _$_UpLoadFile implements _UpLoadFile {
     TResult? Function(_DownloadFile value)? downloadFile,
     TResult? Function(_OpenFile value)? openFile,
     TResult? Function(_UpLoadFile value)? uploadFile,
+    TResult? Function(_DeleteFile value)? deleteFile,
   }) {
     return uploadFile?.call(this);
   }
@@ -908,6 +784,7 @@ class _$_UpLoadFile implements _UpLoadFile {
     TResult Function(_DownloadFile value)? downloadFile,
     TResult Function(_OpenFile value)? openFile,
     TResult Function(_UpLoadFile value)? uploadFile,
+    TResult Function(_DeleteFile value)? deleteFile,
     required TResult orElse(),
   }) {
     if (uploadFile != null) {
@@ -919,21 +796,187 @@ class _$_UpLoadFile implements _UpLoadFile {
 
 abstract class _UpLoadFile implements PoAttachmentEvent {
   const factory _UpLoadFile(
-      {required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final SalesOrg salesOrg,
-      required final User user,
-      required final List<PoDocuments> uploadedPODocument,
+      {required final List<PoDocuments> uploadedPODocument,
       required final UploadOptionType uploadOptionType}) = _$_UpLoadFile;
 
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
-  SalesOrg get salesOrg;
-  User get user;
   List<PoDocuments> get uploadedPODocument;
   UploadOptionType get uploadOptionType;
   @JsonKey(ignore: true)
   _$$_UpLoadFileCopyWith<_$_UpLoadFile> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteFileCopyWith<$Res> {
+  factory _$$_DeleteFileCopyWith(
+          _$_DeleteFile value, $Res Function(_$_DeleteFile) then) =
+      __$$_DeleteFileCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PoDocuments file});
+
+  $PoDocumentsCopyWith<$Res> get file;
+}
+
+/// @nodoc
+class __$$_DeleteFileCopyWithImpl<$Res>
+    extends _$PoAttachmentEventCopyWithImpl<$Res, _$_DeleteFile>
+    implements _$$_DeleteFileCopyWith<$Res> {
+  __$$_DeleteFileCopyWithImpl(
+      _$_DeleteFile _value, $Res Function(_$_DeleteFile) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? file = null,
+  }) {
+    return _then(_$_DeleteFile(
+      file: null == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as PoDocuments,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PoDocumentsCopyWith<$Res> get file {
+    return $PoDocumentsCopyWith<$Res>(_value.file, (value) {
+      return _then(_value.copyWith(file: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteFile implements _DeleteFile {
+  const _$_DeleteFile({required this.file});
+
+  @override
+  final PoDocuments file;
+
+  @override
+  String toString() {
+    return 'PoAttachmentEvent.deleteFile(file: $file)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteFile &&
+            (identical(other.file, file) || other.file == file));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, file);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteFileCopyWith<_$_DeleteFile> get copyWith =>
+      __$$_DeleteFileCopyWithImpl<_$_DeleteFile>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            List<PoDocuments> files, AttachmentType attachmentType)
+        downloadFile,
+    required TResult Function(PoDocuments files, AttachmentType attachmentType)
+        openFile,
+    required TResult Function(List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)
+        uploadFile,
+    required TResult Function(PoDocuments file) deleteFile,
+  }) {
+    return deleteFile(file);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(List<PoDocuments> files, AttachmentType attachmentType)?
+        downloadFile,
+    TResult? Function(PoDocuments files, AttachmentType attachmentType)?
+        openFile,
+    TResult? Function(List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)?
+        uploadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
+  }) {
+    return deleteFile?.call(file);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(List<PoDocuments> files, AttachmentType attachmentType)?
+        downloadFile,
+    TResult Function(PoDocuments files, AttachmentType attachmentType)?
+        openFile,
+    TResult Function(List<PoDocuments> uploadedPODocument,
+            UploadOptionType uploadOptionType)?
+        uploadFile,
+    TResult Function(PoDocuments file)? deleteFile,
+    required TResult orElse(),
+  }) {
+    if (deleteFile != null) {
+      return deleteFile(file);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_DownloadFile value) downloadFile,
+    required TResult Function(_OpenFile value) openFile,
+    required TResult Function(_UpLoadFile value) uploadFile,
+    required TResult Function(_DeleteFile value) deleteFile,
+  }) {
+    return deleteFile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_DownloadFile value)? downloadFile,
+    TResult? Function(_OpenFile value)? openFile,
+    TResult? Function(_UpLoadFile value)? uploadFile,
+    TResult? Function(_DeleteFile value)? deleteFile,
+  }) {
+    return deleteFile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_DownloadFile value)? downloadFile,
+    TResult Function(_OpenFile value)? openFile,
+    TResult Function(_UpLoadFile value)? uploadFile,
+    TResult Function(_DeleteFile value)? deleteFile,
+    required TResult orElse(),
+  }) {
+    if (deleteFile != null) {
+      return deleteFile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteFile implements PoAttachmentEvent {
+  const factory _DeleteFile({required final PoDocuments file}) = _$_DeleteFile;
+
+  PoDocuments get file;
+  @JsonKey(ignore: true)
+  _$$_DeleteFileCopyWith<_$_DeleteFile> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

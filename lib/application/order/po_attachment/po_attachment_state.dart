@@ -37,11 +37,8 @@ class PoAttachmentState with _$PoAttachmentState {
 
   bool get isDownloadOperation =>
       fileOperationMode == FileOperationMode.download;
+      bool get isAttachmentUploaded =>isFetching &&
+                       fileOperationMode == FileOperationMode.upload;
 }
 
-enum FileOperationMode {
-  view,
-  download,
-  upload,
-  none,
-}
+enum FileOperationMode { view, download, upload, none, delete }

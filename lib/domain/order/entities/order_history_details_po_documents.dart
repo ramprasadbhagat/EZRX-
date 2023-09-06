@@ -7,10 +7,12 @@ class PoDocuments with _$PoDocuments {
   factory PoDocuments({
     required String url,
     required String name,
+    required String path,
   }) = _PoDocuments;
   factory PoDocuments.empty() => PoDocuments(
         url: '',
         name: '',
+        path: '',
       );
 }
 

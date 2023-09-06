@@ -3,10 +3,6 @@ import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
@@ -27,6 +23,7 @@ void main() {
     PoDocuments(
       name: 'fake-file-1',
       url: 'fake-url-1',
+      path: 'fake-path-1',
     )
   ];
 
@@ -289,22 +286,18 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
-          PoAttachmentEvent.uploadFile(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrg: SalesOrg(''),
-            shipToInfo: ShipToInfo.empty(),
+          const PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
-            user: User.empty(),
             uploadOptionType: UploadOptionType.file,
           ),
         ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             isFetching: true,
-            fileOperationMode: FileOperationMode.upload,
+            fileOperationMode: FileOperationMode.none,
           ),
           PoAttachmentState.initial().copyWith(
-            fileOperationMode: FileOperationMode.upload,
+            fileOperationMode: FileOperationMode.none,
             failureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.storagePermissionFailed(),
@@ -320,9 +313,6 @@ void main() {
           when(
             () => poAttachmentRepository.pickFiles(
               uploadOptionType: UploadOptionType.file,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              shipToInfo: ShipToInfo.empty(),
-              user: User.empty(),
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -342,22 +332,18 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
-          PoAttachmentEvent.uploadFile(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrg: SalesOrg(''),
-            shipToInfo: ShipToInfo.empty(),
+          const PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
-            user: User.empty(),
             uploadOptionType: UploadOptionType.file,
           ),
         ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             isFetching: true,
-            fileOperationMode: FileOperationMode.upload,
+            fileOperationMode: FileOperationMode.none,
           ),
           PoAttachmentState.initial().copyWith(
-            fileOperationMode: FileOperationMode.upload,
+            fileOperationMode: FileOperationMode.none,
             failureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.invalidFileFormat(),
@@ -373,9 +359,6 @@ void main() {
           when(
             () => poAttachmentRepository.pickFiles(
               uploadOptionType: UploadOptionType.file,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              shipToInfo: ShipToInfo.empty(),
-              user: User.empty(),
             ),
           ).thenAnswer(
             (invocation) async => const Right([]),
@@ -393,22 +376,18 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
-          PoAttachmentEvent.uploadFile(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrg: SalesOrg(''),
-            shipToInfo: ShipToInfo.empty(),
+          const PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
-            user: User.empty(),
             uploadOptionType: UploadOptionType.file,
           ),
         ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             isFetching: true,
-            fileOperationMode: FileOperationMode.upload,
+            fileOperationMode: FileOperationMode.none,
           ),
           PoAttachmentState.initial().copyWith(
-            fileOperationMode: FileOperationMode.upload,
+            fileOperationMode: FileOperationMode.none,
           ),
         ],
       );
@@ -418,17 +397,12 @@ void main() {
         setUp: () {
           when(
             () => poAttachmentRepository.uploadFiles(
-              customerCodeInfo: CustomerCodeInfo.empty(),
               files: [
                 PlatformFile(
                   name: 'fake-file',
                   size: 0,
                 ),
               ],
-              salesOrg: SalesOrg(''),
-              shipToInfo: ShipToInfo.empty(),
-              uploadedPODocument: [],
-              user: User.empty(),
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -438,9 +412,6 @@ void main() {
           when(
             () => poAttachmentRepository.pickFiles(
               uploadOptionType: UploadOptionType.file,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              shipToInfo: ShipToInfo.empty(),
-              user: User.empty(),
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -465,29 +436,18 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
-          PoAttachmentEvent.uploadFile(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrg: SalesOrg(''),
-            shipToInfo: ShipToInfo.empty(),
+          const PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
-            user: User.empty(),
             uploadOptionType: UploadOptionType.file,
           ),
         ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             isFetching: true,
-            fileOperationMode: FileOperationMode.upload,
+            fileOperationMode: FileOperationMode.none,
           ),
           PoAttachmentState.initial().copyWith(
-            isFetching: true,
-            fileOperationMode: FileOperationMode.upload,
-            fileUrl: [
-              PoDocuments.empty().copyWith(name: 'fake-file'),
-            ],
-          ),
-          PoAttachmentState.initial().copyWith(
-            fileOperationMode: FileOperationMode.upload,
+            fileOperationMode: FileOperationMode.none,
             failureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('Fake-error'),
@@ -502,17 +462,12 @@ void main() {
         setUp: () {
           when(
             () => poAttachmentRepository.uploadFiles(
-              customerCodeInfo: CustomerCodeInfo.empty(),
               files: [
                 PlatformFile(
                   name: 'fake-file',
                   size: 0,
                 ),
               ],
-              salesOrg: SalesOrg(''),
-              shipToInfo: ShipToInfo.empty(),
-              uploadedPODocument: [],
-              user: User.empty(),
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -527,9 +482,6 @@ void main() {
           when(
             () => poAttachmentRepository.pickFiles(
               uploadOptionType: UploadOptionType.file,
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              shipToInfo: ShipToInfo.empty(),
-              user: User.empty(),
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -554,26 +506,15 @@ void main() {
         build: () =>
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
-          PoAttachmentEvent.uploadFile(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrg: SalesOrg(''),
-            shipToInfo: ShipToInfo.empty(),
+          const PoAttachmentEvent.uploadFile(
             uploadedPODocument: [],
-            user: User.empty(),
             uploadOptionType: UploadOptionType.file,
           ),
         ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
             isFetching: true,
-            fileOperationMode: FileOperationMode.upload,
-          ),
-          PoAttachmentState.initial().copyWith(
-            isFetching: true,
-            fileOperationMode: FileOperationMode.upload,
-            fileUrl: [
-              PoDocuments.empty().copyWith(name: 'fake-file'),
-            ],
+            fileOperationMode: FileOperationMode.none,
           ),
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.upload,

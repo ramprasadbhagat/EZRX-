@@ -24,6 +24,8 @@ mixin _$PoDocumentsDto {
   String get url => throw _privateConstructorUsedError;
   @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+  String get path => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,10 +40,11 @@ abstract class $PoDocumentsDtoCopyWith<$Res> {
       _$PoDocumentsDtoCopyWithImpl<$Res, PoDocumentsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
-          String url,
+      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl) String url,
       @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
-          String name});
+      String name,
+      @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+      String path});
 }
 
 /// @nodoc
@@ -59,6 +62,7 @@ class _$PoDocumentsDtoCopyWithImpl<$Res, $Val extends PoDocumentsDto>
   $Res call({
     Object? url = null,
     Object? name = null,
+    Object? path = null,
   }) {
     return _then(_value.copyWith(
       url: null == url
@@ -68,6 +72,10 @@ class _$PoDocumentsDtoCopyWithImpl<$Res, $Val extends PoDocumentsDto>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -82,10 +90,11 @@ abstract class _$$_PoDocumentsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
-          String url,
+      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl) String url,
       @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
-          String name});
+      String name,
+      @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+      String path});
 }
 
 /// @nodoc
@@ -101,6 +110,7 @@ class __$$_PoDocumentsDtoCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
     Object? name = null,
+    Object? path = null,
   }) {
     return _then(_$_PoDocumentsDto(
       url: null == url
@@ -111,6 +121,10 @@ class __$$_PoDocumentsDtoCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -120,9 +134,11 @@ class __$$_PoDocumentsDtoCopyWithImpl<$Res>
 class _$_PoDocumentsDto extends _PoDocumentsDto {
   const _$_PoDocumentsDto(
       {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
-          required this.url,
+      required this.url,
       @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
-          required this.name})
+      required this.name,
+      @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+      required this.path})
       : super._();
 
   factory _$_PoDocumentsDto.fromJson(Map<String, dynamic> json) =>
@@ -134,10 +150,13 @@ class _$_PoDocumentsDto extends _PoDocumentsDto {
   @override
   @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
   final String name;
+  @override
+  @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+  final String path;
 
   @override
   String toString() {
-    return 'PoDocumentsDto(url: $url, name: $name)';
+    return 'PoDocumentsDto(url: $url, name: $name, path: $path)';
   }
 
   @override
@@ -146,12 +165,13 @@ class _$_PoDocumentsDto extends _PoDocumentsDto {
         (other.runtimeType == runtimeType &&
             other is _$_PoDocumentsDto &&
             (identical(other.url, url) || other.url == url) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.path, path) || other.path == path));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, url, name);
+  int get hashCode => Object.hash(runtimeType, url, name, path);
 
   @JsonKey(ignore: true)
   @override
@@ -170,9 +190,11 @@ class _$_PoDocumentsDto extends _PoDocumentsDto {
 abstract class _PoDocumentsDto extends PoDocumentsDto {
   const factory _PoDocumentsDto(
       {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
-          required final String url,
+      required final String url,
       @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
-          required final String name}) = _$_PoDocumentsDto;
+      required final String name,
+      @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+      required final String path}) = _$_PoDocumentsDto;
   const _PoDocumentsDto._() : super._();
 
   factory _PoDocumentsDto.fromJson(Map<String, dynamic> json) =
@@ -184,6 +206,9 @@ abstract class _PoDocumentsDto extends PoDocumentsDto {
   @override
   @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
   String get name;
+  @override
+  @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+  String get path;
   @override
   @JsonKey(ignore: true)
   _$$_PoDocumentsDtoCopyWith<_$_PoDocumentsDto> get copyWith =>

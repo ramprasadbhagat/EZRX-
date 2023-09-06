@@ -278,6 +278,11 @@ class WidgetKeys {
   static const Key selectDate = Key('selectDate');
   static const Key additionalDetailsForm = Key('additionalDetailsForm');
   static const Key mobileNumber = Key('mobileNumberKey');
+  static const Key poAttachmentFileUploadButton =
+      Key('poAttachmentFileUploadButton');
+  static const Key poAttachmentPhotoUploadButton =
+      Key('poAttachmentPhotoUploadButton');
+  static const Key poAttachmentUploadDialog = Key('poAttachmentUploadDialog');
 
   //============================================================
   //  Material List

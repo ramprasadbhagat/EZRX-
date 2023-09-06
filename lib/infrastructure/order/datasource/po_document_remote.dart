@@ -1,25 +1,31 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/po_document_query.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
+import 'package:file_picker/file_picker.dart';
 
 class PoDocumentRemoteDataSource {
   final HttpService httpService;
   final DataSourceExceptionHandler dataSourceExceptionHandler;
+  final Config config;
+  PoDocumentQuery queryMutation;
 
   static const _pODownloadUrl = '/api/downloadPOAttachment';
   static const _returnSummaryAttachmentUrl = '/api/downloadAttachment';
-
-  static const _uploadUrl = '/api/po-upload';
-
   static const _method = 'POST';
 
   PoDocumentRemoteDataSource({
     required this.httpService,
     required this.dataSourceExceptionHandler,
+    required this.config,
+    required this.queryMutation,
   });
   Future<AttachmentFileBuffer> fileDownload(
     String name,
@@ -56,25 +62,77 @@ class PoDocumentRemoteDataSource {
   }
 
   Future<PoDocuments> fileUpload({
-    required String countryName,
-    required MultipartFile file,
-    required String userName,
-    required String currentYear,
+    required String folder,
+    required PlatformFile file,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
+      final queryData = queryMutation.getAddFileRequest();
+      final variables = {
+        'folder': folder,
+        'req': [
+          {
+            'id': 10,
+            'file': null,
+          },
+        ],
+      };
+      final operations = {
+        'query': queryData,
+        'variables': variables,
+      };
+
+      final map = {
+        '0': ['variables.req.0.file'],
+      };
+
+      final fileFieldKeys = map.keys.toList();
+      final fileName = file.path!.split('/').last;
+      final data = {
+        fileFieldKeys.first: await MultipartFile.fromFile(
+          file.path!,
+          filename: fileName,
+        ),
+        'operations': jsonEncode(operations),
+        'map': jsonEncode(map),
+      };
+      final response = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ereturn',
+        data: FormData.fromMap(data),
+      );
+      _fileUploadExceptionChecker(
+        res: response,
+      );
+      final uploadedFiles = response.data['data']['addRequestFileUpload'];
+      final newUploadedFiles =
+          PoDocumentsDto.fromJson(uploadedFiles[0]).toDomain();
+
+      return newUploadedFiles.copyWith(name: fileName);
+    });
+  }
+
+  Future<bool> deleteFile({
+    required String filePath,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = queryMutation.deleteFile();
+      final variables = {
+        'filePath': filePath,
+      };
+
       final res = await httpService.request(
-        method: _method,
-        url: _uploadUrl,
-        data: FormData.fromMap({
-          'excel': file,
-          'countryName': countryName,
-          'userName': userName,
-          'currentYear': currentYear,
+        method: 'POST',
+        url: '${config.urlConstants}ereturn',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
         }),
       );
-      _fileUploadExceptionChecker(res: res);
+      _fileUploadExceptionChecker(
+        res: res,
+      );
 
-      return PoDocumentsDto.fromJson(res.data).toDomain();
+      return res.data['data']['deleteFile']['isDeleted'] as bool;
     });
   }
 

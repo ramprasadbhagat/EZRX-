@@ -3,11 +3,6 @@ import 'dart:math';
 
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
@@ -63,9 +58,6 @@ void main() {
   late PermissionService permissionServiceMock;
   late FileSystemHelperMock fileSystemHelperMock;
 
-  final user = User.empty().copyWith(
-    username: Username('fake-username'),
-  );
   setUp(() {
     mockConfig = MockConfig();
     poDocumentLocalDataSourceMock = PoDocumentLocalDataSourceMock();
@@ -430,9 +422,6 @@ void main() {
       );
       final result = await poAttachmentRepository.pickFiles(
         uploadOptionType: UploadOptionType.gallery,
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        user: user,
       );
       expect(
         result.isLeft(),
@@ -446,9 +435,6 @@ void main() {
       );
       final result = await poAttachmentRepository.pickFiles(
         uploadOptionType: UploadOptionType.gallery,
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        user: user,
       );
       expect(
         result.isRight(),
@@ -463,9 +449,6 @@ void main() {
       );
       final result = await poAttachmentRepository.pickFiles(
         uploadOptionType: UploadOptionType.gallery,
-        customerCodeInfo: CustomerCodeInfo.empty(),
-        shipToInfo: ShipToInfo.empty(),
-        user: user,
       );
       expect(
         result.isRight(),
@@ -483,14 +466,9 @@ void main() {
         (invocation) async => PoDocuments.empty(),
       );
       final result = await poAttachmentRepository.uploadFiles(
-        customerCodeInfo: CustomerCodeInfo.empty(),
         files: [
           PlatformFile(name: 'fake-name', size: 0),
         ],
-        salesOrg: SalesOrg(''),
-        shipToInfo: ShipToInfo.empty(),
-        uploadedPODocument: [],
-        user: user,
       );
       expect(
         result.isRight(),
@@ -506,14 +484,9 @@ void main() {
         (invocation) async => const ApiFailure.other('fake-error'),
       );
       final result = await poAttachmentRepository.uploadFiles(
-        customerCodeInfo: CustomerCodeInfo.empty(),
         files: [
           PlatformFile(name: 'fake-name', size: 0),
         ],
-        salesOrg: SalesOrg(''),
-        shipToInfo: ShipToInfo.empty(),
-        uploadedPODocument: [],
-        user: user,
       );
       expect(
         result.isLeft(),
@@ -529,12 +502,7 @@ void main() {
         (invocation) async => PoDocuments.empty(),
       );
       final result = await poAttachmentRepository.uploadFiles(
-        customerCodeInfo: CustomerCodeInfo.empty(),
         files: [],
-        salesOrg: SalesOrg(''),
-        shipToInfo: ShipToInfo.empty(),
-        uploadedPODocument: [],
-        user: user,
       );
       expect(
         result.isRight(),
@@ -545,14 +513,9 @@ void main() {
     test('uploadFiles remote fail', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       final result = await poAttachmentRepository.uploadFiles(
-        customerCodeInfo: CustomerCodeInfo.empty(),
         files: [
           PlatformFile(name: 'fake-name', size: 0),
         ],
-        salesOrg: SalesOrg(''),
-        shipToInfo: ShipToInfo.empty(),
-        uploadedPODocument: List.filled(10, PoDocuments.empty()),
-        user: user,
       );
       expect(
         result.isLeft(),
@@ -563,14 +526,9 @@ void main() {
     test('uploadFiles remote try upload bigger file', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       final result = await poAttachmentRepository.uploadFiles(
-        customerCodeInfo: CustomerCodeInfo.empty(),
         files: [
           PlatformFile(name: 'fake-name', size: (10 * pow(1024, 2)).toInt()),
         ],
-        salesOrg: SalesOrg(''),
-        shipToInfo: ShipToInfo.empty(),
-        uploadedPODocument: [],
-        user: user,
       );
       expect(
         result.isLeft(),

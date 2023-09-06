@@ -2,13 +2,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
@@ -26,7 +21,7 @@ import 'package:open_file_safe/open_file_safe.dart' as ofs;
 import 'package:open_file_safe/open_file_safe.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-const int _fileSizeLimitMB = 5;
+const int _fileSizeLimitMB = 20;
 const int _maxUpload = 10;
 
 class PoAttachmentRepository implements IpoAttachmentRepository {
@@ -135,12 +130,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
 
   @override
   Future<Either<ApiFailure, List<PoDocuments>>> uploadFiles({
-    required SalesOrg salesOrg,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
     required List<PlatformFile> files,
-    required User user,
-    required List<PoDocuments> uploadedPODocument,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -152,7 +142,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       }
     }
     try {
-      if ((uploadedPODocument.length + files.length) > _maxUpload) {
+      if ((files.length) > _maxUpload) {
         return const Left(
           ApiFailure.uploadCountExcideLimit(),
         );
@@ -164,22 +154,20 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       if (biggerFile.isNotEmpty) {
         return Left(
           ApiFailure.other(
-            'The file ${biggerFile.first.name} uploaded is greater than 5 MB',
+            'The file ${biggerFile.first.name} uploaded is greater than $_fileSizeLimitMB  MB',
           ),
         );
       }
+
       final upLoadedFiles = Future.wait(
-        files.map(
-          (e) async => await remoteDataSource.fileUpload(
-            countryName: salesOrg.country,
-            currentYear: DateTime.now().year.toString(),
-            file: MultipartFile.fromFileSync(
-              e.path ?? '',
-              filename: e.name,
-            ),
-            userName: user.username.getOrCrash(),
-          ),
-        ),
+        files
+            .map(
+              (file) async => await remoteDataSource.fileUpload(
+                folder: '',
+                file: file,
+              ),
+            )
+            .toList(),
       );
 
       return Right(await upLoadedFiles);
@@ -224,9 +212,6 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   @override
   Future<Either<ApiFailure, List<PlatformFile>>> pickFiles({
     required UploadOptionType uploadOptionType,
-    required User user,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
   }) async {
     try {
       final result = await filePickerService.pickFiles(
@@ -245,8 +230,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
           .map(
             (element) => PlatformFile(
               path: element.path,
-              name:
-                  '${user.username.getOrCrash()}_${customerCodeInfo.customerCodeSoldTo}_${shipToInfo.shipToCustomerCode}_${DateTime.now().toUtc().millisecondsSinceEpoch}_${element.name}',
+              name: element.name,
               size: element.size,
               bytes: element.bytes,
               readStream: element.readStream,
@@ -259,6 +243,34 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
     } catch (e) {
       return const Left(
         ApiFailure.invalidFileFormat(),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, bool>> deleteFile({
+    required String filePath,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.deleteFile();
+
+        return Right(response);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final response = await remoteDataSource.deleteFile(
+        filePath: filePath,
+      );
+
+      return Right(response);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
       );
     }
   }
