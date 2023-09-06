@@ -41,6 +41,7 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
       taxes:
           (json['taxes'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
+      hidePrice: json['hidePrice'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
@@ -66,6 +67,7 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
           instance.bundleMaterials.map((e) => e.toJson()).toList(),
       'BonusMaterials': instance.bonusMaterials.map((e) => e.toJson()).toList(),
       'taxes': instance.taxes,
+      'hidePrice': instance.hidePrice,
     };
 
 _$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>

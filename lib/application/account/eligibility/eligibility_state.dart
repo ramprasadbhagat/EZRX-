@@ -218,4 +218,7 @@ class EligibilityState with _$EligibilityState {
 
     return true;
   }
+
+  bool get isMYExternalSalesRepUser =>
+      salesOrganisation.salesOrg.isMY && user.role.type.isExternalSalesRep;
 }

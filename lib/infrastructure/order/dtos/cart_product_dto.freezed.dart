@@ -61,6 +61,8 @@ mixin _$CartProductDto {
       throw _privateConstructorUsedError;
   @JsonKey(name: 'taxes', defaultValue: <String>[])
   List<String> get taxes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hidePrice', defaultValue: false)
+  bool get hidePrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -114,7 +116,9 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
           List<BonusSampleItemDto> bonusMaterials,
       @JsonKey(name: 'taxes', defaultValue: <String>[])
-          List<String> taxes});
+          List<String> taxes,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          bool hidePrice});
 
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
 }
@@ -152,6 +156,7 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? bundleMaterials = null,
     Object? bonusMaterials = null,
     Object? taxes = null,
+    Object? hidePrice = null,
   }) {
     return _then(_value.copyWith(
       productID: null == productID
@@ -234,6 +239,10 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.taxes
           : taxes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      hidePrice: null == hidePrice
+          ? _value.hidePrice
+          : hidePrice // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -294,7 +303,9 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
       @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
           List<BonusSampleItemDto> bonusMaterials,
       @JsonKey(name: 'taxes', defaultValue: <String>[])
-          List<String> taxes});
+          List<String> taxes,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          bool hidePrice});
 
   @override
   $BundleDetailsDtoCopyWith<$Res> get bundleDetails;
@@ -331,6 +342,7 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
     Object? bundleMaterials = null,
     Object? bonusMaterials = null,
     Object? taxes = null,
+    Object? hidePrice = null,
   }) {
     return _then(_$_CartProductDto(
       productID: null == productID
@@ -413,6 +425,10 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value._taxes
           : taxes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      hidePrice: null == hidePrice
+          ? _value.hidePrice
+          : hidePrice // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -460,7 +476,9 @@ class _$_CartProductDto extends _CartProductDto {
       @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
           required final List<BonusSampleItemDto> bonusMaterials,
       @JsonKey(name: 'taxes', defaultValue: <String>[])
-          required final List<String> taxes})
+          required final List<String> taxes,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          required this.hidePrice})
       : _bundleMaterials = bundleMaterials,
         _bonusMaterials = bonusMaterials,
         _taxes = taxes,
@@ -548,8 +566,12 @@ class _$_CartProductDto extends _CartProductDto {
   }
 
   @override
+  @JsonKey(name: 'hidePrice', defaultValue: false)
+  final bool hidePrice;
+
+  @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, taxes: $taxes)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, taxes: $taxes, hidePrice: $hidePrice)';
   }
 
   @override
@@ -593,7 +615,9 @@ class _$_CartProductDto extends _CartProductDto {
                 .equals(other._bundleMaterials, _bundleMaterials) &&
             const DeepCollectionEquality()
                 .equals(other._bonusMaterials, _bonusMaterials) &&
-            const DeepCollectionEquality().equals(other._taxes, _taxes));
+            const DeepCollectionEquality().equals(other._taxes, _taxes) &&
+            (identical(other.hidePrice, hidePrice) ||
+                other.hidePrice == hidePrice));
   }
 
   @JsonKey(ignore: true)
@@ -619,7 +643,8 @@ class _$_CartProductDto extends _CartProductDto {
         bundleDetails,
         const DeepCollectionEquality().hash(_bundleMaterials),
         const DeepCollectionEquality().hash(_bonusMaterials),
-        const DeepCollectionEquality().hash(_taxes)
+        const DeepCollectionEquality().hash(_taxes),
+        hidePrice
       ]);
 
   @JsonKey(ignore: true)
@@ -677,7 +702,9 @@ abstract class _CartProductDto extends CartProductDto {
       @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
           required final List<BonusSampleItemDto> bonusMaterials,
       @JsonKey(name: 'taxes', defaultValue: <String>[])
-          required final List<String> taxes}) = _$_CartProductDto;
+          required final List<String> taxes,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          required final bool hidePrice}) = _$_CartProductDto;
   const _CartProductDto._() : super._();
 
   factory _CartProductDto.fromJson(Map<String, dynamic> json) =
@@ -743,6 +770,9 @@ abstract class _CartProductDto extends CartProductDto {
   @override
   @JsonKey(name: 'taxes', defaultValue: <String>[])
   List<String> get taxes;
+  @override
+  @JsonKey(name: 'hidePrice', defaultValue: false)
+  bool get hidePrice;
   @override
   @JsonKey(ignore: true)
   _$$_CartProductDtoCopyWith<_$_CartProductDto> get copyWith =>

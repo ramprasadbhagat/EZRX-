@@ -68,7 +68,7 @@ class _AvailableOfferScrollList extends StatelessWidget {
               width: size.width * 0.4,
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,
-                vertical: 15,
+                vertical: 14,
               ),
             ),
           );

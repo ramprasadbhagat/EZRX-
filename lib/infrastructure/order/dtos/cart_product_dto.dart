@@ -56,6 +56,7 @@ class CartProductDto with _$CartProductDto {
         required List<BonusSampleItemDto> bonusMaterials,
     @JsonKey(name: 'taxes', defaultValue: <String>[])
         required List<String> taxes,
+    @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -99,6 +100,7 @@ class CartProductDto with _$CartProductDto {
       bonusMaterials: cartItemDetails.bonusSampleItems
           .map((e) => BonusSampleItemDto.fromDomain(e))
           .toList(),
+      hidePrice: cartItemDetails.materialInfo.hidePrice,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -111,6 +113,7 @@ class CartProductDto with _$CartProductDto {
       quantity: quantity,
       taxClassification: MaterialTaxClassification(taxClassification),
       taxes: taxes,
+      hidePrice: hidePrice,
       therapeuticClass: therapeuticClass,
       principalData: PrincipalData.empty().copyWith(
         principalName: PrincipalName(principalName),

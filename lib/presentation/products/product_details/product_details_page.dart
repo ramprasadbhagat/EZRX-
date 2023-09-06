@@ -171,6 +171,12 @@ class _BodyContent extends StatelessWidget {
                 ? config.addOosMaterials.oosMaterialTag
                 : ''
             : '';
+        final isHidePrice = state.productDetailAggregate.materialInfo.hidePrice;
+        final isMYPnGSalesRep =
+            context.read<EligibilityBloc>().state.isMYExternalSalesRepUser &&
+                state.productDetailAggregate.materialInfo.isPnGPrinciple;
+
+        final displayOffers = !isHidePrice || isMYPnGSalesRep;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,7 +222,7 @@ class _BodyContent extends StatelessWidget {
               indent: 0,
               thickness: 0.5,
             ),
-            AvailableOffer(materialNumber: materialNumber),
+            if (displayOffers) AvailableOffer(materialNumber: materialNumber),
             const MaterialInformation(),
             const MaterialDetailsToggle(),
             const SizedBox(height: 20),

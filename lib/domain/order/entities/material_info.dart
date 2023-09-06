@@ -164,6 +164,8 @@ class MaterialInfo with _$MaterialInfo {
   double get materialTax => taxes.isNotEmpty && taxes.first.isNotEmpty
       ? double.parse(taxes.first)
       : 0.0;
+
+  bool get isPnGPrinciple => principalData.principalCode.isPnG;
 }
 
 @freezed

@@ -254,15 +254,16 @@ class CartItem with _$CartItem {
 
   double subTotalPrice({
     bool isSpecialOrderType = false,
-    bool isMYMarketSalesRep = false,
   }) {
     if (materials.isEmpty) return 0;
     switch (itemType) {
       case CartItemType.material:
         final material = materials.first;
-        final isPnG = isMYMarketSalesRep && material.materialInfo.hidePrice;
+        final isPnGORHidePrice = material.materialInfo.hidePrice;
 
-        return (isSpecialOrderType || isPnG) ? 0 : material.finalPriceTotal;
+        return (isSpecialOrderType || isPnGORHidePrice)
+            ? 0
+            : material.finalPriceTotal;
       case CartItemType.bundle:
         return _bundleRate * totalQty;
       case CartItemType.comboDeal:
@@ -272,15 +273,16 @@ class CartItem with _$CartItem {
 
   double grandTotalPrice({
     bool isSpecialOrderType = false,
-    bool isMYMarketSalesRep = false,
   }) {
     if (materials.isEmpty) return 0;
     switch (itemType) {
       case CartItemType.material:
         final material = materials.first;
-        final isPnG = isMYMarketSalesRep && material.materialInfo.hidePrice;
+        final isPnGORHidePrice = material.materialInfo.hidePrice;
 
-        return (isSpecialOrderType || isPnG) ? 0 : material.unitPriceTotal;
+        return (isSpecialOrderType || isPnGORHidePrice)
+            ? 0
+            : material.unitPriceTotal;
       case CartItemType.bundle:
         var totalWithoutVat = _bundleRate * totalQty;
         totalWithoutVat += materials.first.totalVatForBundle * totalWithoutVat;

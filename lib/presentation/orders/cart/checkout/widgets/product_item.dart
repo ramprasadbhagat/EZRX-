@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -150,31 +151,29 @@ class _ProductDetails extends StatelessWidget {
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
-          RichText(
-            text: TextSpan(
-              text: 'MYR 11,200.00 ',
+          Row(
+            children: [
+              if (cartItem.price.isCounterOfferRequested)
+                PriceComponent(
+                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  price:
+                      cartItem.price.lastPrice.getOrDefaultValue(0).toString(),
+                  type: PriceStyle.counterOfferPrice,
+                ),
+              PriceComponent(
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                price: cartItem.display(PriceType.finalPrice),
+              ),
+            ],
+          ),
+          if (cartItem.price.isCounterOfferRequested)
+            Text(
+              'Requested counter offer'.tr(),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ZPColors.darkGray,
-                    decoration: TextDecoration.lineThrough,
+                    fontStyle: FontStyle.italic,
+                    color: ZPColors.extraLightGrey4,
                   ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: 'MYR 11,000.00',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: ZPColors.extraLightGrey4,
-                        decoration: TextDecoration.none,
-                      ),
-                ),
-              ],
             ),
-          ),
-          Text(
-            'Requested counter offer',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontStyle: FontStyle.italic,
-                  color: ZPColors.extraLightGrey4,
-                ),
-          ),
         ],
       ),
     );
@@ -240,7 +239,7 @@ class _QuantityAndPrice extends StatelessWidget {
             children: [
               PriceComponent(
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price: cartItem.finalPriceTotal.toString(),
+                price: cartItem.display(PriceType.finalPriceTotal),
               ),
               if (showTaxBreakdown)
                 ItemTax(

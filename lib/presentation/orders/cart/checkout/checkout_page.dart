@@ -148,7 +148,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               children: [
                 PriceComponent(
                   salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                  price: cartState.totalPriceWithTax.toString(),
+                  price: cartState.grandTotal.toString(),
                   title: 'Grand Total: '.tr(),
                   priceLabelStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -501,7 +501,7 @@ class _OrderSummary extends StatelessWidget {
             ),
             PriceComponent(
               salesOrgConfig: salesOrgState.configs,
-              price: cartState.totalPrice.toString(),
+              price: cartState.subTotal.toString(),
               type: PriceStyle.summaryPrice,
             ),
           ],
@@ -604,7 +604,7 @@ class _OrderSummary extends StatelessWidget {
             ),
             PriceComponent(
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-              price: cartState.totalPriceWithTax.toString(),
+              price: cartState.grandTotal.toString(),
               type: PriceStyle.totalPrice,
             ),
           ],

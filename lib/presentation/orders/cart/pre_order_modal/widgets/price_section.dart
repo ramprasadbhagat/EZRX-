@@ -14,7 +14,7 @@ class _PriceSection extends StatelessWidget {
       children: [
         PriceComponent(
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-          price: cartProduct.finalPriceTotal.toString(),
+          price: cartProduct.display(PriceType.finalPriceTotal),
         ),
         if (showTaxBreakdown)
           ItemTax(

@@ -183,7 +183,7 @@ class PriceAggregate with _$PriceAggregate {
 
     finalPrice = tenderContract.tenderPrice.tenderPrice != 0
         ? tenderContract.tenderPriceByPricingUnit
-        : (isSpecialOrderTypeNotTH || materialInfo.hidePrice)
+        : isSpecialOrderTypeNotTH
             ? 0.0
             : (price.isDiscountEligible && !isSpecialOrderType)
                 ? discountedListPrice
@@ -569,6 +569,8 @@ class PriceAggregate with _$PriceAggregate {
         ),
       )
       .toList();
+  bool get displayOfferBonus =>
+      addedBonusList.isNotEmpty && !materialInfo.hidePrice;
 }
 
 enum PriceType {

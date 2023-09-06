@@ -155,7 +155,7 @@ class _ItemSubTotalSection extends StatelessWidget {
               _LoadingShimmerWithChild(
                 child: PriceComponent(
                   salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                  price: cartProduct.finalPriceTotal.toString(),
+                  price: cartProduct.display(PriceType.finalPriceTotal),
                 ),
               ),
             ],
@@ -251,8 +251,7 @@ class _MaterialDetails extends StatelessWidget {
                 ),
               PriceComponent(
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price:
-                    cartItem.price.finalPrice.getOrDefaultValue(0).toString(),
+                price: cartItem.display(PriceType.finalPrice),
               ),
             ],
           ),
@@ -351,12 +350,21 @@ class _BonusPriceCounterSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final isMYPnGSalesRep = eligibilityState.isMYExternalSalesRepUser &&
+        cartItem.materialInfo.isPnGPrinciple;
+    final isBonusOverrideEnable = (eligibilityState.isBonusSampleItemVisible &&
+            !cartItem.materialInfo.hidePrice) ||
+        isMYPnGSalesRep;
+    final isCounterOfferEnable = eligibilityState.isCounterOfferVisible &&
+        !cartItem.materialInfo.hidePrice;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if (context.read<EligibilityBloc>().state.isBonusSampleItemVisible)
+          if (isBonusOverrideEnable)
             TextButton.icon(
               key: WidgetKeys.bonusSampleItemButtonKey,
               onPressed: () {
@@ -410,7 +418,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
                     ?.copyWith(color: ZPColors.extraDarkGreen),
               ),
             ),
-          if (context.read<EligibilityBloc>().state.isCounterOfferVisible)
+          if (isCounterOfferEnable)
             TextButton.icon(
               key: WidgetKeys.counterOfferPriceButtonKey,
               onPressed: () {

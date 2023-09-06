@@ -306,6 +306,12 @@ class _CartScrollList extends StatelessWidget {
                     isLoading: state.isFetching && state.cartProducts.isEmpty ||
                         state.isClearing,
                     itemBuilder: (context, index, item) {
+                      final isMYPnGSalesRep = context
+                              .read<EligibilityBloc>()
+                              .state
+                              .isMYExternalSalesRepUser &&
+                          item.materialInfo.isPnGPrinciple;
+
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -321,7 +327,7 @@ class _CartScrollList extends StatelessWidget {
                               : CartProductTile(
                                   cartItem: item,
                                 ),
-                          if (item.addedBonusList.isNotEmpty)
+                          if (item.displayOfferBonus || isMYPnGSalesRep)
                             Column(
                               children: item.addedBonusList
                                   .map(
@@ -377,7 +383,9 @@ class _ManufacturerName extends StatelessWidget {
 }
 
 class _CheckoutSection extends StatelessWidget {
-  const _CheckoutSection({Key? key}) : super(key: key);
+  const _CheckoutSection({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -430,7 +438,7 @@ class _CheckoutSection extends StatelessWidget {
               ),
               trailing: PriceComponent(
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price: state.totalPriceWithTax.toString(),
+                price: state.grandTotal.toString(),
                 title: 'Grand total: '.tr(),
                 priceLabelStyle:
                     Theme.of(context).textTheme.titleSmall?.copyWith(

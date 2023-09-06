@@ -110,15 +110,21 @@ class CartState with _$CartState {
                 : false;
   }
 
-  double get grandTotal => cartProducts.fold<double>(
-        0,
-        (sum, item) => sum + item.unitPriceTotal,
-      );
+  double get grandTotal => cartProducts.fold<double>(0, (sum, item) {
+        return item.materialInfo.type.typeBundle
+            ? totalBundlePriceWithTax
+            : item.materialInfo.hidePrice
+                ? 0
+                : sum + (item.unitPriceTotal + taxMaterial);
+      });
 
-  double get subTotal => cartProducts.fold<double>(
-        0,
-        (sum, item) => sum + item.finalPriceTotal,
-      );
+  double get subTotal => cartProducts.fold<double>(0, (sum, item) {
+        return item.materialInfo.type.typeBundle
+            ? totalBundlesPrice
+            : item.materialInfo.hidePrice
+                ? 0
+                : sum + item.finalPriceTotal;
+      });
 
   int getQuantityOfProduct({required MaterialNumber productNumber}) {
     return cartProducts
