@@ -188,6 +188,9 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
     @HiveField(156, defaultValue: false)
         required bool displaySubtotalTaxBreakdown,
+    @JsonKey(name: 'disablePayment', defaultValue: false)
+    @HiveField(157, defaultValue: false)
+        required bool disablePayment,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -253,6 +256,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableGMN: configs.enableGMN,
       displayItemTaxBreakdown: configs.displayItemTaxBreakdown,
       displaySubtotalTaxBreakdown: configs.displaySubtotalTaxBreakdown,
+      disablePayment: configs.disablePayment,
     );
   }
 
@@ -317,6 +321,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableGMN: enableGMN,
       displayItemTaxBreakdown: displayItemTaxBreakdown,
       displaySubtotalTaxBreakdown: displaySubtotalTaxBreakdown,
+      disablePayment: disablePayment,
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -15,23 +15,29 @@ class QuickAccessMenuPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final quickAccessItems = _getQuickAccessItems(context);
+    return BlocBuilder<EligibilityBloc, EligibilityState>(
+      buildWhen: (previous, current) =>
+          previous.salesOrgConfigs != current.salesOrgConfigs,
+      builder: (context, state) {
+        final quickAccessItems = _getQuickAccessItems(context);
 
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: kToolbarHeight * 1.58,
-      child: ListView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 11,
-          vertical: 5,
-        ),
-        scrollDirection: Axis.horizontal,
-        children: quickAccessItems.map((quickAccessItem) {
-          return _QuickAccessMenu(
-            quickAccessMenuData: quickAccessItem,
-          );
-        }).toList(),
-      ),
+        return SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: kToolbarHeight * 1.58,
+          child: ListView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 11,
+              vertical: 5,
+            ),
+            scrollDirection: Axis.horizontal,
+            children: quickAccessItems.map((quickAccessItem) {
+              return _QuickAccessMenu(
+                quickAccessMenuData: quickAccessItem,
+              );
+            }).toList(),
+          ),
+        );
+      },
     );
   }
 }
@@ -143,20 +149,16 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
         context.read<ChatBotBloc>().add(const ChatBotEvent.startChatbot()),
   );
 
-  return context.read<UserBloc>().state.user.userCanAccessOrderHistory
-      ? [
-          // homeQuickAccessWebLoginMenu,
-          homeQuickAccessOrdersMenu,
-          homeQuickAccessReturnsMenu,
-          homeQuickAccessPaymentsMenu,
-          // homeQuickAccessLoyaltyMenu,
-          homeQuickAccessChatSupportMenu,
-        ]
-      : [
-          // homeQuickAccessWebLoginMenu,
-          homeQuickAccessReturnsMenu,
-          homeQuickAccessPaymentsMenu,
-          // homeQuickAccessLoyaltyMenu,
-          homeQuickAccessChatSupportMenu,
-        ];
+  final eligibilityState = context.read<EligibilityBloc>().state;
+
+  return <_QuickAccessMenuData>[
+    // homeQuickAccessWebLoginMenu,
+    if (eligibilityState.user.userCanAccessOrderHistory)
+      homeQuickAccessOrdersMenu,
+    homeQuickAccessReturnsMenu,
+    if (!eligibilityState.salesOrgConfigs.disablePayment)
+      homeQuickAccessPaymentsMenu,
+    // homeQuickAccessLoyaltyMenu,
+    homeQuickAccessChatSupportMenu,
+  ];
 }

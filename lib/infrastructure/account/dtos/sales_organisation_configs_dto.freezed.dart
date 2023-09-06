@@ -194,6 +194,9 @@ mixin _$SalesOrganisationConfigsDto {
   @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
   @HiveField(156, defaultValue: false)
   bool get displaySubtotalTaxBreakdown => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disablePayment', defaultValue: false)
+  @HiveField(157, defaultValue: false)
+  bool get disablePayment => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -381,7 +384,10 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       bool displayItemTaxBreakdown,
       @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
       @HiveField(156, defaultValue: false)
-      bool displaySubtotalTaxBreakdown});
+      bool displaySubtotalTaxBreakdown,
+      @JsonKey(name: 'disablePayment', defaultValue: false)
+      @HiveField(157, defaultValue: false)
+      bool disablePayment});
 }
 
 /// @nodoc
@@ -455,6 +461,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? enableGMN = null,
     Object? displayItemTaxBreakdown = null,
     Object? displaySubtotalTaxBreakdown = null,
+    Object? disablePayment = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -685,6 +692,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.displaySubtotalTaxBreakdown
           : displaySubtotalTaxBreakdown // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePayment: null == disablePayment
+          ? _value.disablePayment
+          : disablePayment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -870,7 +881,10 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       bool displayItemTaxBreakdown,
       @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
       @HiveField(156, defaultValue: false)
-      bool displaySubtotalTaxBreakdown});
+      bool displaySubtotalTaxBreakdown,
+      @JsonKey(name: 'disablePayment', defaultValue: false)
+      @HiveField(157, defaultValue: false)
+      bool disablePayment});
 }
 
 /// @nodoc
@@ -943,6 +957,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableGMN = null,
     Object? displayItemTaxBreakdown = null,
     Object? displaySubtotalTaxBreakdown = null,
+    Object? disablePayment = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -1173,6 +1188,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.displaySubtotalTaxBreakdown
           : displaySubtotalTaxBreakdown // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePayment: null == disablePayment
+          ? _value.disablePayment
+          : disablePayment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1353,7 +1372,10 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       required this.displayItemTaxBreakdown,
       @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
       @HiveField(156, defaultValue: false)
-      required this.displaySubtotalTaxBreakdown})
+      required this.displaySubtotalTaxBreakdown,
+      @JsonKey(name: 'disablePayment', defaultValue: false)
+      @HiveField(157, defaultValue: false)
+      required this.disablePayment})
       : _principalList = principalList,
         super._();
 
@@ -1595,10 +1617,14 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
   @HiveField(156, defaultValue: false)
   final bool displaySubtotalTaxBreakdown;
+  @override
+  @JsonKey(name: 'disablePayment', defaultValue: false)
+  @HiveField(157, defaultValue: false)
+  final bool disablePayment;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment)';
   }
 
   @override
@@ -1691,7 +1717,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.comboDealsUserRole, comboDealsUserRole) || other.comboDealsUserRole == comboDealsUserRole) &&
             (identical(other.enableGMN, enableGMN) || other.enableGMN == enableGMN) &&
             (identical(other.displayItemTaxBreakdown, displayItemTaxBreakdown) || other.displayItemTaxBreakdown == displayItemTaxBreakdown) &&
-            (identical(other.displaySubtotalTaxBreakdown, displaySubtotalTaxBreakdown) || other.displaySubtotalTaxBreakdown == displaySubtotalTaxBreakdown));
+            (identical(other.displaySubtotalTaxBreakdown, displaySubtotalTaxBreakdown) || other.displaySubtotalTaxBreakdown == displaySubtotalTaxBreakdown) &&
+            (identical(other.disablePayment, disablePayment) || other.disablePayment == disablePayment));
   }
 
   @JsonKey(ignore: true)
@@ -1754,7 +1781,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         comboDealsUserRole,
         enableGMN,
         displayItemTaxBreakdown,
-        displaySubtotalTaxBreakdown
+        displaySubtotalTaxBreakdown,
+        disablePayment
       ]);
 
   @JsonKey(ignore: true)
@@ -1946,8 +1974,10 @@ abstract class _SalesOrganisationConfigsDto
       required final bool displayItemTaxBreakdown,
       @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
       @HiveField(156, defaultValue: false)
-      required final bool
-          displaySubtotalTaxBreakdown}) = _$_SalesOrganisationConfigsDto;
+      required final bool displaySubtotalTaxBreakdown,
+      @JsonKey(name: 'disablePayment', defaultValue: false)
+      @HiveField(157, defaultValue: false)
+      required final bool disablePayment}) = _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -2182,6 +2212,10 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'displaySubtotalTaxBreakdown', defaultValue: false)
   @HiveField(156, defaultValue: false)
   bool get displaySubtotalTaxBreakdown;
+  @override
+  @JsonKey(name: 'disablePayment', defaultValue: false)
+  @HiveField(157, defaultValue: false)
+  bool get disablePayment;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

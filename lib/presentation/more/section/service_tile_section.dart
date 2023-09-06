@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/more/more_details_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -51,21 +51,17 @@ class ServiceTile extends StatelessWidget {
   }
 
   List<MoreDetailsTile> _getServiceTabs(BuildContext context) {
-    return context.read<UserBloc>().state.user.userCanAccessOrderHistory
-        ? [
-            MoreDetailsTile.orderTab(context),
-            MoreDetailsTile.returnsTab(context),
-            MoreDetailsTile.paymentsTab(context),
-            MoreDetailsTile.loyaltyTab(),
-            MoreDetailsTile.webLoginTab(),
-            MoreDetailsTile.announcementAndArticleTab(context),
-          ]
-        : [
-            MoreDetailsTile.returnsTab(context),
-            MoreDetailsTile.paymentsTab(context),
-            MoreDetailsTile.loyaltyTab(),
-            MoreDetailsTile.webLoginTab(),
-            MoreDetailsTile.announcementAndArticleTab(context),
-          ];
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
+    return <MoreDetailsTile>[
+      if (eligibilityState.user.userCanAccessOrderHistory)
+        MoreDetailsTile.orderTab(context),
+      MoreDetailsTile.returnsTab(context),
+      if (!eligibilityState.salesOrgConfigs.disablePayment)
+        MoreDetailsTile.paymentsTab(context),
+      MoreDetailsTile.loyaltyTab(),
+      MoreDetailsTile.webLoginTab(),
+      MoreDetailsTile.announcementAndArticleTab(context),
+    ];
   }
 }

@@ -72,6 +72,7 @@ void main() {
     enableListPrice: false,
     priceOverride: false,
     disablePaymentTermsDisplay: false,
+    disablePayment: false,
     disableDeliveryDate: false,
     enableBillTo: false,
     showPOAttachment: false,

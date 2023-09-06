@@ -85,13 +85,14 @@ class SalesOrganisationConfigsDtoAdapter
           fields[155] == null ? false : fields[155] as bool,
       displaySubtotalTaxBreakdown:
           fields[156] == null ? false : fields[156] as bool,
+      disablePayment: fields[157] == null ? false : fields[157] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_SalesOrganisationConfigsDto obj) {
     writer
-      ..writeByte(57)
+      ..writeByte(58)
       ..writeByte(100)
       ..write(obj.disableProcessingStatus)
       ..writeByte(101)
@@ -204,6 +205,8 @@ class SalesOrganisationConfigsDtoAdapter
       ..write(obj.displayItemTaxBreakdown)
       ..writeByte(156)
       ..write(obj.displaySubtotalTaxBreakdown)
+      ..writeByte(157)
+      ..write(obj.disablePayment)
       ..writeByte(7)
       ..write(obj.principalList);
   }
@@ -291,6 +294,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
           json['displayItemTaxBreakdown'] as bool? ?? false,
       displaySubtotalTaxBreakdown:
           json['displaySubtotalTaxBreakdown'] as bool? ?? false,
+      disablePayment: json['disablePayment'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -354,4 +358,5 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableGMN': instance.enableGMN,
       'displayItemTaxBreakdown': instance.displayItemTaxBreakdown,
       'displaySubtotalTaxBreakdown': instance.displaySubtotalTaxBreakdown,
+      'disablePayment': instance.disablePayment,
     };
