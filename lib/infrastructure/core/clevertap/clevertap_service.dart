@@ -1,6 +1,7 @@
 import 'package:clevertap_plugin/clevertap_plugin.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
+import 'package:universal_io/io.dart';
 
 class ClevertapService {
   final Config config;
@@ -14,8 +15,9 @@ class ClevertapService {
   Future<void> init() async {
     await createNotificationChannel();
     await setPushToken();
-    // await CleverTapPlugin.initializeInbox();
-    await CleverTapPlugin.registerForPush();
+    if (Platform.isIOS) {
+      await CleverTapPlugin.registerForPush();
+    }
   }
 
   Future<void> createNotificationChannel() async {
