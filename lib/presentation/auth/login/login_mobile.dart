@@ -79,7 +79,7 @@ class _SSOLoginButton extends StatelessWidget {
       builder: (context, state) {
         return FractionallySizedBox(
           widthFactor: 0.5,
-          child: ElevatedButton(
+          child: ElevatedButton.icon(
             key: WidgetKeys.ssoLoginButton,
             onPressed: state.isSubmitting
                 ? null
@@ -97,24 +97,16 @@ class _SSOLoginButton extends StatelessWidget {
                     StadiumBorder(),
                   ),
                 ),
-            child: IntrinsicWidth(
-              child: LoadingShimmer.withChild(
-                enabled: state.isSubmitting,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(
-                      Icons.lock_person_outlined,
-                      size: 20,
-                      color: ZPColors.black,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      'Log in with SSO'.tr(),
-                      style: Theme.of(context).textTheme.labelSmall,
-                    ),
-                  ],
-                ),
+            icon: const Icon(
+              Icons.lock_person_outlined,
+              size: 20,
+              color: ZPColors.black,
+            ),
+            label: LoadingShimmer.withChild(
+              enabled: state.isSubmitting,
+              child: Text(
+                'Log in with SSO'.tr(),
+                style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
           ),
