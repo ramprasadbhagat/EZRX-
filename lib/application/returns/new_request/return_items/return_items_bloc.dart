@@ -92,7 +92,7 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
             soldToInfo: value.customerCodeInfo.customerCodeSoldTo,
             shipToInfo: value.shipToInfo.shipToCustomerCode,
             pageSize: config.pageSize,
-            offset: 0,
+            offset: state.items.length,
             filter: state.appliedFilter,
             searchKey: state.searchKey,
           ),
