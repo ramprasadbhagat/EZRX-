@@ -112,12 +112,7 @@ class _CartPageState extends State<CartPage> {
                         .selectedOrderType
                         .documentType
                         .getOrDefaultValue(''),
-                    subTotal: context.read<CartBloc>().state.subTotal(
-                          isMYMarketSalesRep: context
-                              .read<EligibilityBloc>()
-                              .state
-                              .isMYMarketSalesRep,
-                        ),
+                    subTotal: state.subTotal,
                   ),
                 );
           },

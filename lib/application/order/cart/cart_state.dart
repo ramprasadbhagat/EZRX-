@@ -110,9 +110,14 @@ class CartState with _$CartState {
                 : false;
   }
 
-  double grandTotal() => cartProducts.fold<double>(
+  double get grandTotal => cartProducts.fold<double>(
         0,
         (sum, item) => sum + item.unitPriceTotal,
+      );
+
+  double get subTotal => cartProducts.fold<double>(
+        0,
+        (sum, item) => sum + item.finalPriceTotal,
       );
 
   int getQuantityOfProduct({required MaterialNumber productNumber}) {

@@ -186,7 +186,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             cartProducts:
                                 context.read<CartBloc>().state.cartProducts,
                             grandTotal:
-                                context.read<CartBloc>().state.grandTotal(),
+                                context.read<CartBloc>().state.grandTotal,
                             orderValue: context
                                 .read<CartBloc>()
                                 .state
