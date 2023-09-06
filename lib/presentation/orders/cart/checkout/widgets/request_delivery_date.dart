@@ -47,58 +47,61 @@ class _RequestDeliveryDateState extends State<RequestDeliveryDate> {
               current.deliveryInfoData.greenDeliveryEnabled ||
           previous.isLoading != current.isLoading,
       builder: (context, state) {
-        return TextFieldWithLabel(
-          readOnly: true,
-          fieldKey: WidgetKeys.deliveryDate,
-          labelText: 'Request delivery date'.tr(),
-          controller: _deliveryDateText,
-          validator: (_) {
-            return context
-                .read<AdditionalDetailsBloc>()
-                .state
-                .deliveryInfoData
-                .deliveryDate
-                .value
-                .fold(
-                  (f) => f.maybeMap(
-                    empty: (_) =>
-                        'Request delivery date is a required field.'.tr(),
-                    orElse: () => null,
-                  ),
-                  (_) => null,
-                );
-          },
-          onChanged: (value) {},
-          decoration: InputDecoration(
-            hintText: 'Select date'.tr(),
-            suffixIconConstraints:
-                const BoxConstraints(maxHeight: 22, minHeight: 22),
-            suffixIcon: IconButton(
-              splashRadius: 22,
-              padding: EdgeInsets.zero,
-              key: WidgetKeys.selectDate,
-              icon: const Icon(
-                Icons.date_range_outlined,
-                size: 22,
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: TextFieldWithLabel(
+            readOnly: true,
+            fieldKey: WidgetKeys.deliveryDate,
+            labelText: 'Request delivery date'.tr(),
+            controller: _deliveryDateText,
+            validator: (_) {
+              return context
+                  .read<AdditionalDetailsBloc>()
+                  .state
+                  .deliveryInfoData
+                  .deliveryDate
+                  .value
+                  .fold(
+                    (f) => f.maybeMap(
+                      empty: (_) =>
+                          'Request delivery date is a required field.'.tr(),
+                      orElse: () => null,
+                    ),
+                    (_) => null,
+                  );
+            },
+            onChanged: (value) {},
+            decoration: InputDecoration(
+              hintText: 'Select date'.tr(),
+              suffixIconConstraints:
+                  const BoxConstraints(maxHeight: 22, minHeight: 22),
+              suffixIcon: IconButton(
+                splashRadius: 22,
+                padding: EdgeInsets.zero,
+                key: WidgetKeys.selectDate,
+                icon: const Icon(
+                  Icons.date_range_outlined,
+                  size: 22,
+                ),
+                onPressed: state.deliveryInfoData.greenDeliveryEnabled ||
+                        state.isLoading
+                    ? null
+                    : ([bool mounted = true]) async {
+                        final dateTime = await getDateFromDatePicker(
+                          context,
+                        );
+                        _deliveryDateText.text =
+                            DateFormat('yyyy-MM-dd').format(dateTime);
+                        if (!mounted) return;
+                        context.read<AdditionalDetailsBloc>().add(
+                              AdditionalDetailsEvent.onTextChange(
+                                label: DeliveryInfoLabel.deliveryDate,
+                                newValue:
+                                    DateFormat('yyyy-MM-dd').format(dateTime),
+                              ),
+                            );
+                      },
               ),
-              onPressed:
-                  state.deliveryInfoData.greenDeliveryEnabled || state.isLoading
-                      ? null
-                      : ([bool mounted = true]) async {
-                          final dateTime = await getDateFromDatePicker(
-                            context,
-                          );
-                          _deliveryDateText.text =
-                              DateFormat('yyyy-MM-dd').format(dateTime);
-                          if (!mounted) return;
-                          context.read<AdditionalDetailsBloc>().add(
-                                AdditionalDetailsEvent.onTextChange(
-                                  label: DeliveryInfoLabel.deliveryDate,
-                                  newValue:
-                                      DateFormat('yyyy-MM-dd').format(dateTime),
-                                ),
-                              );
-                        },
             ),
           ),
         );

@@ -97,9 +97,6 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                         DeliveryInfoLabel.poReference] ??
                                     FocusNode(),
                               ),
-                              const SizedBox(
-                                height: 16,
-                              ),
                               if (config.enableFutureDeliveryDay)
                                 RequestDeliveryDate(
                                   deliveryInfoData: state.deliveryInfoData,
@@ -110,9 +107,6 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                       .futureDeliveryDay
                                       .validatedFutureDeliveryDate,
                                 ),
-                              const SizedBox(
-                                height: 16,
-                              ),
                               if (config.enableReferenceNote)
                                 _TextFormField(
                                   labelText: 'Reference Note',
@@ -124,9 +118,6 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                           DeliveryInfoLabel.referenceNote] ??
                                       FocusNode(),
                                 ),
-                              const SizedBox(
-                                height: 16,
-                              ),
                               if (config.enablePaymentTerms)
                                 _PaymentTerm(
                                   deliveryInfoData: state.deliveryInfoData,
@@ -134,9 +125,6 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                           DeliveryInfoLabel.paymentTerm] ??
                                       FocusNode(),
                                 ),
-                              const SizedBox(
-                                height: 16,
-                              ),
                               if (config.enableMobileNumber)
                                 _TextFormField(
                                   labelText: 'Contact Person',
@@ -148,18 +136,12 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                           DeliveryInfoLabel.contactPerson] ??
                                       FocusNode(),
                                 ),
-                              const SizedBox(
-                                height: 16,
-                              ),
                               if (config.enableMobileNumber)
                                 _MobileNumber(
                                   focusNode: widget.focusNodes[
                                           DeliveryInfoLabel.mobileNumber] ??
                                       FocusNode(),
                                 ),
-                              const SizedBox(
-                                height: 16,
-                              ),
                               if (config.enableSpecialInstructions)
                                 _TextFormField(
                                   labelText: 'Delivery instructions',
@@ -172,9 +154,6 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                           .deliveryInstruction] ??
                                       FocusNode(),
                                 ),
-                              const SizedBox(
-                                height: 16,
-                              ),
                               if (config.showPOAttachment)
                                 const PoAttachmentUpload(),
                             ],
@@ -275,48 +254,46 @@ class _TextFormFieldState extends State<_TextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
-          buildWhen: (previous, current) =>
-              previous.isLoading != current.isLoading,
-          builder: (context, state) {
-            return TextFieldWithLabel(
-              focusNode: widget.focusNode,
-              fieldKey: Key(widget.keyText),
-              labelText: widget.labelText.tr(),
-              controller: _controller,
-              validator: (_) => _validateForm(
-                label: widget.label,
-                context: context,
-              ),
-              maxLines: widget.keyboardType == TextInputType.multiline ? 3 : 1,
-              keyboardType: widget.keyboardType,
-              onChanged: (value) {
-                context.read<AdditionalDetailsBloc>().add(
-                      AdditionalDetailsEvent.onTextChange(
-                        label: widget.label,
-                        newValue: value,
+    return BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: TextFieldWithLabel(
+            focusNode: widget.focusNode,
+            fieldKey: Key(widget.keyText),
+            labelText: widget.labelText.tr(),
+            controller: _controller,
+            validator: (_) => _validateForm(
+              label: widget.label,
+              context: context,
+            ),
+            maxLines: widget.keyboardType == TextInputType.multiline ? 3 : 1,
+            keyboardType: widget.keyboardType,
+            onChanged: (value) {
+              context.read<AdditionalDetailsBloc>().add(
+                    AdditionalDetailsEvent.onTextChange(
+                      label: widget.label,
+                      newValue: value,
+                    ),
+                  );
+            },
+            decoration: InputDecoration(
+              hintText: widget.hintText.tr(),
+              suffixIcon: state.isLoading
+                  ? const Padding(
+                      padding: EdgeInsetsDirectional.only(end: 10),
+                      child: SizedBox(
+                        height: 15,
+                        width: 15,
+                        child: CircularProgressIndicator(strokeWidth: 2),
                       ),
-                    );
-              },
-              decoration: InputDecoration(
-                hintText: widget.hintText.tr(),
-                suffixIcon: state.isLoading
-                    ? const Padding(
-                        padding: EdgeInsetsDirectional.only(end: 10),
-                        child: SizedBox(
-                          height: 15,
-                          width: 15,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      )
-                    : null,
-              ),
-            );
-          },
-        ),
-      ],
+                    )
+                  : null,
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -413,68 +390,71 @@ class _PaymentTerm extends StatelessWidget {
           builder: (context, state) {
             final paymentTerm = deliveryInfoData.paymentTerm;
 
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Payment term'.tr(),
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-                const SizedBox(height: 8),
-                DropdownButtonFormField<String>(
-                  focusNode: focusNode,
-                  key: WidgetKeys.paymentTermDropdownKey,
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    hintText: 'Select one'.tr(),
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Payment term'.tr(),
+                    style: Theme.of(context).textTheme.labelSmall,
                   ),
-                  icon: isLoading
-                      ? const SizedBox(
-                          height: 15,
-                          width: 15,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Icon(
-                          Icons.expand_more_outlined,
-                          size: 22,
-                          color: ZPColors.primary,
-                        ),
-                  value: state.paymentTerms.displaySelected(paymentTerm),
-                  items: state.paymentTerms.display.map(
-                    (String val) {
-                      return DropdownMenuItem<String>(
-                        value: val,
-                        child: Text(val),
-                      );
-                    },
-                  ).toList(),
-                  onChanged: isLoading
-                      ? null
-                      : (value) {
-                          context.read<AdditionalDetailsBloc>().add(
-                                AdditionalDetailsEvent.onTextChange(
-                                  label: DeliveryInfoLabel.paymentTerm,
-                                  newValue: value!,
-                                ),
-                              );
-                        },
-                  validator: (_) {
-                    return context
-                        .read<AdditionalDetailsBloc>()
-                        .state
-                        .deliveryInfoData
-                        .paymentTerm
-                        .value
-                        .fold(
-                          (f) => f.maybeMap(
-                            empty: (_) => 'Please Select Payment Term.'.tr(),
-                            orElse: () => null,
+                  const SizedBox(height: 8),
+                  DropdownButtonFormField<String>(
+                    focusNode: focusNode,
+                    key: WidgetKeys.paymentTermDropdownKey,
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      hintText: 'Select one'.tr(),
+                    ),
+                    icon: isLoading
+                        ? const SizedBox(
+                            height: 15,
+                            width: 15,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(
+                            Icons.expand_more_outlined,
+                            size: 22,
+                            color: ZPColors.primary,
                           ),
-                          (_) => null,
+                    value: state.paymentTerms.displaySelected(paymentTerm),
+                    items: state.paymentTerms.display.map(
+                      (String val) {
+                        return DropdownMenuItem<String>(
+                          value: val,
+                          child: Text(val),
                         );
-                  },
-                ),
-              ],
+                      },
+                    ).toList(),
+                    onChanged: isLoading
+                        ? null
+                        : (value) {
+                            context.read<AdditionalDetailsBloc>().add(
+                                  AdditionalDetailsEvent.onTextChange(
+                                    label: DeliveryInfoLabel.paymentTerm,
+                                    newValue: value!,
+                                  ),
+                                );
+                          },
+                    validator: (_) {
+                      return context
+                          .read<AdditionalDetailsBloc>()
+                          .state
+                          .deliveryInfoData
+                          .paymentTerm
+                          .value
+                          .fold(
+                            (f) => f.maybeMap(
+                              empty: (_) => 'Please Select Payment Term.'.tr(),
+                              orElse: () => null,
+                            ),
+                            (_) => null,
+                          );
+                    },
+                  ),
+                ],
+              ),
             );
           },
         );
@@ -496,72 +476,76 @@ class _MobileNumber extends StatelessWidget {
       builder: (context, additionalDetailsState) {
         final isLoading = additionalDetailsState.isLoading;
 
-        return Column(
-          key: WidgetKeys.mobileNumber,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Mobile number'.tr(),
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            InternationalPhoneNumberInput(
-              focusNode: focusNode,
-              countries: const ['MY'],
-              onInputValidated: (bool value) {},
-              autoValidateMode: additionalDetailsState.showErrorMessages
-                  ? AutovalidateMode.always
-                  : AutovalidateMode.disabled,
-              ignoreBlank: false,
-              onInputChanged: isLoading
-                  ? null
-                  : (value) {
-                      if (value.phoneNumber == value.dialCode) {
-                        context.read<AdditionalDetailsBloc>().add(
-                              AdditionalDetailsEvent.onTextChange(
-                                label: DeliveryInfoLabel.mobileNumber,
-                                newValue: value.phoneNumber!
-                                    .replaceAll(value.dialCode ?? '', ''),
-                              ),
-                            );
-                      } else {
-                        context.read<AdditionalDetailsBloc>().add(
-                              AdditionalDetailsEvent.onTextChange(
-                                label: DeliveryInfoLabel.mobileNumber,
-                                newValue: value.phoneNumber!,
-                              ),
-                            );
-                      }
-                    },
-              formatInput: false,
-              selectorConfig: const SelectorConfig(
-                selectorType: PhoneInputSelectorType.DROPDOWN,
-                leadingPadding: 16,
-                showFlags: true,
-                setSelectorButtonAsPrefixIcon: true,
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: Column(
+            key: WidgetKeys.mobileNumber,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Mobile number'.tr(),
+                style: Theme.of(context).textTheme.labelSmall,
               ),
-              inputDecoration: InputDecoration(
-                hintText: 'Enter contact person number'.tr(),
+              const SizedBox(
+                height: 8,
               ),
-              validator: (_) {
-                return context
-                    .read<AdditionalDetailsBloc>()
-                    .state
-                    .deliveryInfoData
-                    .mobileNumber
-                    .value
-                    .fold(
-                      (f) => f.maybeMap(
-                        empty: (_) => 'Mobile number is a required field'.tr(),
-                        orElse: () => null,
-                      ),
-                      (_) => null,
-                    );
-              },
-            ),
-          ],
+              InternationalPhoneNumberInput(
+                focusNode: focusNode,
+                countries: const ['MY'],
+                onInputValidated: (bool value) {},
+                autoValidateMode: additionalDetailsState.showErrorMessages
+                    ? AutovalidateMode.always
+                    : AutovalidateMode.disabled,
+                ignoreBlank: false,
+                onInputChanged: isLoading
+                    ? null
+                    : (value) {
+                        if (value.phoneNumber == value.dialCode) {
+                          context.read<AdditionalDetailsBloc>().add(
+                                AdditionalDetailsEvent.onTextChange(
+                                  label: DeliveryInfoLabel.mobileNumber,
+                                  newValue: value.phoneNumber!
+                                      .replaceAll(value.dialCode ?? '', ''),
+                                ),
+                              );
+                        } else {
+                          context.read<AdditionalDetailsBloc>().add(
+                                AdditionalDetailsEvent.onTextChange(
+                                  label: DeliveryInfoLabel.mobileNumber,
+                                  newValue: value.phoneNumber!,
+                                ),
+                              );
+                        }
+                      },
+                formatInput: false,
+                selectorConfig: const SelectorConfig(
+                  selectorType: PhoneInputSelectorType.DROPDOWN,
+                  leadingPadding: 16,
+                  showFlags: true,
+                  setSelectorButtonAsPrefixIcon: true,
+                ),
+                inputDecoration: InputDecoration(
+                  hintText: 'Enter contact person number'.tr(),
+                ),
+                validator: (_) {
+                  return context
+                      .read<AdditionalDetailsBloc>()
+                      .state
+                      .deliveryInfoData
+                      .mobileNumber
+                      .value
+                      .fold(
+                        (f) => f.maybeMap(
+                          empty: (_) =>
+                              'Mobile number is a required field'.tr(),
+                          orElse: () => null,
+                        ),
+                        (_) => null,
+                      );
+                },
+              ),
+            ],
+          ),
         );
       },
     );
