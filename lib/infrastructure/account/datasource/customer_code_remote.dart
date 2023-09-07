@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_search_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
 class CustomerCodeRemoteDataSource {
@@ -60,25 +61,14 @@ class CustomerCodeRemoteDataSource {
   }
 
   Future<List<CustomerCodeInfo>> getSalesRepCustomerCodeList({
-    required String customerCode,
-    required String salesOrg,
-    required String userName,
-    required int pageSize,
-    required int offset,
+    required CustomerCodeSearchDto request,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = customerCodeQueryMutation.getCustomerListForSalesRep();
 
       final variables = {
-        'salesOrganisation': salesOrg,
-        'first': pageSize,
-        'after': offset,
-        'username': userName,
+        'customerInformationSalesRepInput': {...request.toJson()},
       };
-
-      if (customerCode.isNotEmpty) {
-        variables.putIfAbsent('searchKey', () => customerCode);
-      }
 
       final res = await httpService.request(
         method: 'POST',
@@ -87,11 +77,11 @@ class CustomerCodeRemoteDataSource {
           'query': queryData,
           'variables': variables,
         }),
-        apiEndpoint: 'customerListForSalesRep',
+        apiEndpoint: 'customerInformationSalesRep',
       );
       _customerCodeExceptionChecker(res: res);
 
-      final finalData = res.data['data']['customerListForSalesRep'];
+      final finalData = res.data['data']['customerInformationSalesRep'];
 
       return List.from(finalData)
           .map((e) => CustomerCodeDto.fromJson(e).toDomain())

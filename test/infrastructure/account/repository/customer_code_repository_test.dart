@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_st
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_search_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -165,11 +166,13 @@ void main() {
 
       when(
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: mockCustomerCode,
-          offset: offset,
-          userName: mockSalesRepUser.username.getOrCrash(),
-          pageSize: pageSize,
+          request: CustomerCodeSearchDto(
+            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+            first: pageSize,
+            filterBlockCustomer: false,
+            after: offset,
+            searchKey: mockCustomerCode,
+          ),
         ),
       ).thenAnswer(
         (invocation) async => <CustomerCodeInfo>[
@@ -180,11 +183,13 @@ void main() {
 
       when(
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: '${mockCustomerCode}1',
-          offset: offset,
-          userName: mockSalesRepUser.username.getOrCrash(),
-          pageSize: pageSize,
+          request: CustomerCodeSearchDto(
+            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+            first: pageSize,
+            filterBlockCustomer: false,
+            after: offset,
+            searchKey: '${mockCustomerCode}1',
+          ),
         ),
       ).thenAnswer(
         (invocation) async => <CustomerCodeInfo>[
@@ -195,11 +200,13 @@ void main() {
 
       when(
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: '${mockCustomerCode}2',
-          userName: mockSalesRepUser.username.getOrCrash(),
-          offset: offset,
-          pageSize: pageSize,
+          request: CustomerCodeSearchDto(
+            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+            first: pageSize,
+            filterBlockCustomer: false,
+            after: offset,
+            searchKey: '${mockCustomerCode}2',
+          ),
         ),
       ).thenAnswer(
         (invocation) async => <CustomerCodeInfo>[
@@ -231,11 +238,13 @@ void main() {
 
       when(
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: mockCustomerCode,
-          userName: mockSalesRepUser.username.getOrCrash(),
-          offset: offset,
-          pageSize: pageSize,
+          request: CustomerCodeSearchDto(
+            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+            first: pageSize,
+            filterBlockCustomer: false,
+            after: offset,
+            searchKey: mockCustomerCode,
+          ),
         ),
       ).thenAnswer(
         (invocation) async => <CustomerCodeInfo>[
@@ -246,21 +255,25 @@ void main() {
 
       when(
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: '${mockCustomerCode}1',
-          userName: mockSalesRepUser.username.getOrCrash(),
-          offset: offset,
-          pageSize: pageSize,
+          request: CustomerCodeSearchDto(
+            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+            first: pageSize,
+            filterBlockCustomer: false,
+            after: offset,
+            searchKey: '${mockCustomerCode}1',
+          ),
         ),
       ).thenThrow((invocation) async => MockException());
 
       when(
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: '${mockCustomerCode}2',
-          userName: mockSalesRepUser.username.getOrCrash(),
-          offset: offset,
-          pageSize: pageSize,
+          request: CustomerCodeSearchDto(
+            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+            first: pageSize,
+            filterBlockCustomer: false,
+            after: offset,
+            searchKey: '${mockCustomerCode}2',
+          ),
         ),
       ).thenAnswer(
         (invocation) async => <CustomerCodeInfo>[
@@ -293,31 +306,37 @@ void main() {
 
       when(
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: mockCustomerCode,
-          userName: mockSalesRepUser.username.getOrCrash(),
-          offset: offset,
-          pageSize: pageSize,
+          request: CustomerCodeSearchDto(
+            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+            first: pageSize,
+            filterBlockCustomer: false,
+            after: offset,
+            searchKey: mockCustomerCode,
+          ),
         ),
       ).thenThrow((invocation) async => MockException());
 
       when(
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: '${mockCustomerCode}1',
-          userName: mockSalesRepUser.username.getOrCrash(),
-          offset: offset,
-          pageSize: pageSize,
+          request: CustomerCodeSearchDto(
+            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+            first: pageSize,
+            filterBlockCustomer: false,
+            after: offset,
+            searchKey: '${mockCustomerCode}1',
+          ),
         ),
       ).thenThrow((invocation) async => MockException());
 
       when(
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: '${mockCustomerCode}2',
-          userName: mockSalesRepUser.username.getOrCrash(),
-          offset: offset,
-          pageSize: pageSize,
+          request: CustomerCodeSearchDto(
+            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+            first: pageSize,
+            filterBlockCustomer: false,
+            after: offset,
+            searchKey: '${mockCustomerCode}2',
+          ),
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -532,11 +551,13 @@ void main() {
 
       when(
         () => customerCodeRemoteDataSourceMock.getSalesRepCustomerCodeList(
-          salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: mockCustomerCode,
-          offset: offset,
-          userName: mockSalesRepUser.username.getOrCrash(),
-          pageSize: pageSize,
+          request: CustomerCodeSearchDto(
+            salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
+            first: pageSize,
+            filterBlockCustomer: false,
+            after: offset,
+            searchKey: mockCustomerCode,
+          ),
         ),
       ).thenThrow((invocation) async => MockException());
 

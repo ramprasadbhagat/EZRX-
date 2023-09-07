@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_search_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,10 @@ void main() {
       baseUrl: 'https://ezrx.com',
     ),
   );
-  final dioAdapter = DioAdapter(dio: dio);
+  final dioAdapter = DioAdapter(
+    dio: dio,
+    matcher: const UrlRequestMatcher(),
+  );
   final service = HttpService.mockDio(dio);
 
   setUpAll(
@@ -188,11 +192,13 @@ void main() {
           );
 
           final data = {
-            'salesOrganisation': '2203',
-            'first': 20,
-            'after': 0,
-            'username': mockCustomerCode,
-            'searchKey': mockCustomerCode,
+            'customerInformationSalesRepInput': {
+              'salesOrganisation': '2203',
+              'searchKey': mockCustomerCode,
+              'filterBlockCustomer': false,
+              'first': 24,
+              'after': 0,
+            }
           };
 
           dioAdapter.onPost(
@@ -211,15 +217,17 @@ void main() {
           );
 
           final result = await remoteDataSource.getSalesRepCustomerCodeList(
-            customerCode: mockCustomerCode,
-            salesOrg: '2203',
-            pageSize: pageSize,
-            userName: mockCustomerCode,
-            offset: 0,
+            request: CustomerCodeSearchDto(
+              salesOrg: '2203',
+              first: 24,
+              filterBlockCustomer: false,
+              after: 0,
+              searchKey: mockCustomerCode,
+            ),
           );
           expect(
             result.length,
-            res['data']['customerListForSalesRep'].length,
+            res['data']['customerInformationSalesRep'].length,
           );
         },
       );

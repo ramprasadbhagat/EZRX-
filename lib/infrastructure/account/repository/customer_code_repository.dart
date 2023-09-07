@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_st
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_search_dto.dart';
 
 class CustomerCodeRepository implements ICustomerCodeRepository {
   final Config config;
@@ -56,11 +57,13 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
           try {
             final response = user.role.type.isSalesRepRole
                 ? await remoteDataSource.getSalesRepCustomerCodeList(
-                    salesOrg: salesOrg,
-                    customerCode: customerCode,
-                    userName: user.username.getOrCrash(),
-                    pageSize: pageSize,
-                    offset: offset,
+                    request: CustomerCodeSearchDto(
+                      salesOrg: salesOrg,
+                      first: pageSize,
+                      filterBlockCustomer: false,
+                      after: offset,
+                      searchKey: customerCode,
+                    ),
                   )
                 : await remoteDataSource.getCustomerCodeList(
                     salesOrg: salesOrg,
