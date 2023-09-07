@@ -49,7 +49,7 @@ class BundleSection extends StatelessWidget {
         child: BlocBuilder<MaterialListBloc, MaterialListState>(
           buildWhen: (previous, current) =>
               previous.materialList != current.materialList,
-          builder: (context, state) {
+          builder: (_, state) {
             return state.isFetching || state.materialList.isNotEmpty
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

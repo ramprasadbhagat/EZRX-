@@ -25,9 +25,11 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -514,11 +516,25 @@ void main() {
 
       testWidgets('BundleSection Visible when product accessright is true',
           (tester) async {
+        final materialListBloc = locator<MaterialListBloc>();
         await getWidget(tester, const HomeTab());
         await tester.pump();
 
         final bundleSection = find.byType(BundleSection);
         expect(bundleSection, findsOneWidget);
+        verify(
+          () => materialListBloc.add(
+            MaterialListEvent.fetch(
+              salesOrganisation: SalesOrganisation.empty(),
+              configs: eligibilityBlocMock.state.salesOrgConfigs,
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              selectedMaterialFilter: MaterialFilter.empty().copyWith(
+                bundleOffers: true,
+              ),
+            ),
+          ),
+        ).called(10);
       });
 
       testWidgets('BrowseProduct Visible when product accessright is true',

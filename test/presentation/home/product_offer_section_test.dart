@@ -8,6 +8,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section.dart/product_offer_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +66,44 @@ void main() {
       );
     }
 
+    testWidgets('ProductsOnOffer test - click ProductOnOffer', (tester) async {
+      final materialListBloc = locator<MaterialListBloc>();
+      final materialExpectState = [
+        MaterialListState.initial().copyWith(
+          materialCount: 2,
+          materialList: <MaterialInfo>[
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('bundle-material-1'),
+            ),
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('bundle-material-2'),
+            ),
+          ],
+          canLoadMore: true,
+          isFetching: false,
+        ),
+      ];
+      whenListen(
+        materialListBlocMock,
+        Stream.fromIterable(materialExpectState),
+      );
+      await tester.pumpWidget(getWUT());
+
+      verify(
+        () => materialListBloc.add(
+          MaterialListEvent.fetch(
+            salesOrganisation: SalesOrganisation.empty(),
+            configs: eligibilityBlocMock.state.salesOrgConfigs,
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            selectedMaterialFilter: MaterialFilter.empty().copyWith(
+              bundleOffers: false,
+              isProductOffer: true,
+            ),
+          ),
+        ),
+      ).called(1);
+    });
     testWidgets('ProductsOnOffer test - when Salesorg  changed - Success',
         (tester) async {
       final materialListBloc = locator<MaterialListBloc>();

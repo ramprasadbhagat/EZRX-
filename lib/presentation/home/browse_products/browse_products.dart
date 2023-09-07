@@ -41,7 +41,7 @@ class BrowseProduct extends StatelessWidget {
         child: BlocBuilder<MaterialListBloc, MaterialListState>(
           buildWhen: (previous, current) =>
               previous.materialList != current.materialList,
-          builder: (context, state) {
+          builder: (_, state) {
             return state.isFetching || state.materialList.isNotEmpty
                 ? Column(
                     children: [

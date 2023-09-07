@@ -128,13 +128,7 @@ class ProductsOnOffer extends StatelessWidget {
             },
           ),
         ],
-        child: BlocBuilder<MaterialListBloc, MaterialListState>(
-          buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching,
-          builder: (context, state) {
-            return _ProductOfferBodyContent(ctx: context);
-          },
-        ),
+        child: _ProductOfferBodyContent(ctx: context),
       ),
     );
   }
