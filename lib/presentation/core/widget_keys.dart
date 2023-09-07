@@ -414,15 +414,7 @@ class WidgetKeys {
   //============================================================
   static const Key newPaymentPage = Key('newPaymentPage');
   static const Key payButton = Key('payButton');
-  //============================================================
-  //  Payment
-  //============================================================
-  static const Key accountSummaryMenu = Key('accountSummary');
-  static const Key paymentSummaryMenu = Key('paymentSummary');
-  static const Key statementOfAccountsMenu = Key('statementOfAccounts');
-  static const Key claimsMenu = Key('claims');
-  static const Key paymentAdviceCreatedPageBack =
-      Key('paymentAdviceCreatedPageBack');
+  
   //============================================================
   //  Announcement
   //============================================================
@@ -524,8 +516,34 @@ class WidgetKeys {
   //============================================================
   static const Key notificationNotFoundRecordKey =
       Key('notificationNotFoundRecordKey');
+
   //============================================================
   // FAQ page
   //============================================================
   static const Key faqNotFoundRecordKey = Key('faqNotFoundRecordKey');
+  //===========================================================
+  //  Payment Home
+  //============================================================
+  static const Key paymentHome = Key('paymentHome');
+  static const Key paymentHomeAppBar = Key('paymentHomeAppBar');
+  static const Key paymentHomeOptionMenu = Key('paymentHomeOptionMenu');
+  static const Key accountSummaryMenu = Key('accountSummary');
+  static const Key paymentSummaryMenu = Key('paymentSummary');
+  static const Key statementOfAccountsMenu = Key('statementOfAccounts');
+  static const Key claimsMenu = Key('claims');
+  static const Key paymentHomeInvoiceCard = Key('paymentHomeInvoiceCard');
+  static const Key totalOutstanding = Key('totalOutstanding');
+  static const Key totalOverdue = Key('totalOverdue');
+  static const Key totalCreditLimit = Key('totalCreditLimit');
+  static const Key paymentHomeCreditCard = Key('paymentHomeCreditCard');
+  static const Key creditLimitUtilized = Key('creditLimitUtilized');
+  static const Key creditLimitRemaining = Key('CreditLimitRemaining');
+  static const Key paymentHomeInProgressCard = Key('paymentHomeInProgressCard');
+  static const Key inProgressAmount = Key('inProgress');
+  static const Key paymentHomeObscuredAmount = Key('paymentHomeObscuredAmount');
+  static const Key paymentHomeSoa = Key('paymentHomeSoa');
+  static const Key paymentAdviceCreatedPageBack =
+      Key('paymentAdviceCreatedPageBack');
+
+
 }

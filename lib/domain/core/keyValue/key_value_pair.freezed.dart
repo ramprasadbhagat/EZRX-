@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$KeyValuePair {
   String get key => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
+  Key get widgetKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $KeyValuePairCopyWith<KeyValuePair> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $KeyValuePairCopyWith<$Res> {
           KeyValuePair value, $Res Function(KeyValuePair) then) =
       _$KeyValuePairCopyWithImpl<$Res, KeyValuePair>;
   @useResult
-  $Res call({String key, String value});
+  $Res call({String key, String value, Key widgetKey});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$KeyValuePairCopyWithImpl<$Res, $Val extends KeyValuePair>
   $Res call({
     Object? key = null,
     Object? value = null,
+    Object? widgetKey = null,
   }) {
     return _then(_value.copyWith(
       key: null == key
@@ -58,6 +60,10 @@ class _$KeyValuePairCopyWithImpl<$Res, $Val extends KeyValuePair>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
+      widgetKey: null == widgetKey
+          ? _value.widgetKey
+          : widgetKey // ignore: cast_nullable_to_non_nullable
+              as Key,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$_KeyValuePairCopyWith<$Res>
       __$$_KeyValuePairCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String key, String value});
+  $Res call({String key, String value, Key widgetKey});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$_KeyValuePairCopyWithImpl<$Res>
   $Res call({
     Object? key = null,
     Object? value = null,
+    Object? widgetKey = null,
   }) {
     return _then(_$_KeyValuePair(
       key: null == key
@@ -96,23 +103,41 @@ class __$$_KeyValuePairCopyWithImpl<$Res>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
+      widgetKey: null == widgetKey
+          ? _value.widgetKey
+          : widgetKey // ignore: cast_nullable_to_non_nullable
+              as Key,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_KeyValuePair extends _KeyValuePair {
-  _$_KeyValuePair({required this.key, required this.value}) : super._();
+class _$_KeyValuePair extends _KeyValuePair with DiagnosticableTreeMixin {
+  _$_KeyValuePair(
+      {required this.key, required this.value, required this.widgetKey})
+      : super._();
 
   @override
   final String key;
   @override
   final String value;
+  @override
+  final Key widgetKey;
 
   @override
-  String toString() {
-    return 'KeyValuePair(key: $key, value: $value)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'KeyValuePair(key: $key, value: $value, widgetKey: $widgetKey)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'KeyValuePair'))
+      ..add(DiagnosticsProperty('key', key))
+      ..add(DiagnosticsProperty('value', value))
+      ..add(DiagnosticsProperty('widgetKey', widgetKey));
   }
 
   @override
@@ -121,11 +146,13 @@ class _$_KeyValuePair extends _KeyValuePair {
         (other.runtimeType == runtimeType &&
             other is _$_KeyValuePair &&
             (identical(other.key, key) || other.key == key) &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.widgetKey, widgetKey) ||
+                other.widgetKey == widgetKey));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, key, value);
+  int get hashCode => Object.hash(runtimeType, key, value, widgetKey);
 
   @JsonKey(ignore: true)
   @override
@@ -137,13 +164,16 @@ class _$_KeyValuePair extends _KeyValuePair {
 abstract class _KeyValuePair extends KeyValuePair {
   factory _KeyValuePair(
       {required final String key,
-      required final String value}) = _$_KeyValuePair;
+      required final String value,
+      required final Key widgetKey}) = _$_KeyValuePair;
   _KeyValuePair._() : super._();
 
   @override
   String get key;
   @override
   String get value;
+  @override
+  Key get widgetKey;
   @override
   @JsonKey(ignore: true)
   _$$_KeyValuePairCopyWith<_$_KeyValuePair> get copyWith =>

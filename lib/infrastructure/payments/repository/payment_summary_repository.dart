@@ -4,10 +4,10 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details_response.dart';
 
 import 'package:ezrxmobile/domain/payments/repository/i_payment_summary_repository.dart';
+
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 
@@ -27,42 +27,33 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
   });
 
   @override
-  Future<Either<ApiFailure, PaymentSummaryDetailsResponse>>
+  Future<Either<ApiFailure, List<PaymentSummaryDetails>>>
       fetchPaymentSummaryList({
-    required PaymentSummaryDetailsResponse paymentSummaryDetails,
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
     required int offset,
     required int pageSize,
   }) async {
+    final salesOrgCode = salesOrganization.salesOrg.getOrCrash();
+    final customerCode = customerCodeInfo.customerCodeSoldTo;
     if (config.appFlavor == Flavor.mock) {
       try {
-        final paymentSummaryDetailsResponse =
-            await localDataSource.getPaymentSummary();
+        final paymentSummaryDetails = await localDataSource.getPaymentSummary();
 
-        return Right(paymentSummaryDetailsResponse);
+        return Right(paymentSummaryDetails);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
-      final paymentSummaryDetailsResponse =
-          await remoteDataSource.getPaymentSummary(
-        customerCode: customerCodeInfo.customerCodeSoldTo,
-        salesOrg: salesOrganization.salesOrg.getOrCrash(),
+      final paymentSummaryList = await remoteDataSource.getPaymentSummary(
+        customerCode: customerCode,
+        salesOrg: salesOrgCode,
         offset: offset,
         pageSize: pageSize,
       );
-      final paymentSummaryList = List<PaymentSummaryDetails>.from(
-        paymentSummaryDetailsResponse.paymentSummaryList,
-      );
 
-      return Right(
-        paymentSummaryDetailsResponse.copyWith(
-          paymentSummaryList: paymentSummaryList
-            ..addAll(paymentSummaryDetails.paymentSummaryList),
-        ),
-      );
+      return Right(paymentSummaryList);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

@@ -5,16 +5,13 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/soa_dto.dart';
 
 class SoaRemoteDataSource {
   HttpService httpService;
-  PaymentSummaryQuery paymentSummaryQuery;
   Config config;
   SoaRemoteDataSource({
     required this.httpService,
-    required this.paymentSummaryQuery,
     required this.config,
   });
 

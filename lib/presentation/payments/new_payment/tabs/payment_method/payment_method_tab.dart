@@ -1,13 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/item_address_section.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/widgets/credit_item_card.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/widgets/invoice_item_card.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/widgets/selectable_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+part 'widgets/item_tile.dart';
 
 class PaymentMethodTab extends StatelessWidget {
   const PaymentMethodTab({Key? key}) : super(key: key);
@@ -35,30 +38,10 @@ class PaymentMethodTab extends StatelessWidget {
               ),
             ),
             const ItemAddressSection(),
-            ...state.selectedInvoices
-                .map(
-                  (e) => CustomCard(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0),
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 10,
-                    ),
-                    child: InvoiceItemCard(customerOpenItem: e),
-                  ),
-                )
-                .toList(),
-            ...state.selectedCredits
-                .map(
-                  (e) => CustomCard(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0),
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 10,
-                    ),
-                    child: CreditItemCard(customerOpenItem: e),
-                  ),
-                )
-                .toList(),
+            const SizedBox(height: 20),
+            ...state.allSelectedItems.map(
+              (e) => _InvoiceCreditItemTile(customerOpenItem: e),
+            ),
           ],
         );
       },

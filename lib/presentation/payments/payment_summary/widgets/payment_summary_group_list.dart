@@ -47,7 +47,7 @@ class _PaymentSummaryGroupList extends StatelessWidget {
           paymentSummaryGroup: itemInfo,
           showDivider: index != 0,
         ),
-        items: state.paymentSummaryDetailsResponse.paymentSummaryList
+        items: state.paymentSummaryList
             .getPaymentSummaryGroupList,
       ),
     );

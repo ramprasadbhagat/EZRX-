@@ -1,21 +1,8 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
-import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
-import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
-import 'package:ezrxmobile/domain/payments/entities/soa.dart';
-import 'package:ezrxmobile/domain/payments/value/value_object.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/presentation/core/section_tile.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+part of '../payment_page.dart';
 
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
-class AccountStatement extends StatelessWidget {
-  const AccountStatement({Key? key}) : super(key: key);
+class _AccountStatement extends StatelessWidget {
+  const _AccountStatement({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +30,7 @@ class AccountStatement extends StatelessWidget {
         buildWhen: (previous, current) => previous.soaList != current.soaList,
         builder: (context, state) {
           return Column(
+            key: WidgetKeys.paymentHomeSoa,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SectionTitle(

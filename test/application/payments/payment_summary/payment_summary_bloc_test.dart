@@ -4,8 +4,7 @@ import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details_response.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_local_datasource.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,15 +18,14 @@ void main() {
   late PaymentSummaryRepository paymentSummaryMockRepository;
   final mockCustomerCodeInfo = CustomerCodeInfo.empty();
   final mockSalesOrganisation = SalesOrganisation.empty();
-  late PaymentSummaryDetailsResponse paymentSummaryDetailsResponse;
+  late List<PaymentSummaryDetails> paymentSummaryList;
   late Config config;
   const offSet = 0;
   const pageSize = 24;
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     paymentSummaryMockRepository = PaymentSummaryRepositoryMock();
-    paymentSummaryDetailsResponse =
-        await PaymentSummaryLocalDataSource().getPaymentSummary();
+    paymentSummaryList = <PaymentSummaryDetails>[];
     config = Config()..appFlavor = Flavor.mock;
   });
   group('Payment Summary Bloc Test', () {
@@ -44,10 +42,9 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             offset: offSet,
             pageSize: pageSize,
-            paymentSummaryDetails: PaymentSummaryDetailsResponse.empty(),
           ),
         ).thenAnswer(
-          (invocation) async => Right(paymentSummaryDetailsResponse),
+          (invocation) async => Right(paymentSummaryList),
         );
       },
       act: (PaymentSummaryBloc bloc) => bloc.add(
@@ -62,8 +59,8 @@ void main() {
           failureOrSuccessOption: none(),
         ),
         PaymentSummaryState.initial().copyWith(
-          paymentSummaryDetailsResponse: paymentSummaryDetailsResponse,
-          isFetching: false,
+          paymentSummaryList: paymentSummaryList,
+          canLoadMorePaymentSummary: false,
         ),
       ],
     );
@@ -80,7 +77,6 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             offset: offSet,
             pageSize: pageSize,
-            paymentSummaryDetails: PaymentSummaryDetailsResponse.empty(),
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -117,10 +113,9 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             offset: offSet,
             pageSize: pageSize,
-            paymentSummaryDetails: PaymentSummaryDetailsResponse.empty(),
           ),
         ).thenAnswer(
-          (invocation) async => Right(paymentSummaryDetailsResponse),
+          (invocation) async => Right(paymentSummaryList),
         );
       },
       act: (PaymentSummaryBloc bloc) => bloc.add(
@@ -134,18 +129,13 @@ void main() {
           isFetching: true,
           failureOrSuccessOption: none(),
           canLoadMorePaymentSummary: true,
-          paymentSummaryDetailsResponse: paymentSummaryDetailsResponse,
         ),
         PaymentSummaryState.initial().copyWith(
           failureOrSuccessOption: none(),
           isFetching: false,
           canLoadMorePaymentSummary: false,
-          paymentSummaryDetailsResponse: paymentSummaryDetailsResponse.copyWith(
-            paymentSummaryList: [
-              ...paymentSummaryDetailsResponse.paymentSummaryList,
-              ...paymentSummaryDetailsResponse.paymentSummaryList
-            ],
-          ),
+          paymentSummaryList: [...paymentSummaryList, ...paymentSummaryList],
+
         ),
       ],
     );
@@ -162,7 +152,6 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             offset: offSet,
             pageSize: pageSize,
-            paymentSummaryDetails: PaymentSummaryDetailsResponse.empty(),
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -179,13 +168,11 @@ void main() {
           isFetching: true,
           failureOrSuccessOption: none(),
           canLoadMorePaymentSummary: true,
-          paymentSummaryDetailsResponse: paymentSummaryDetailsResponse,
         ),
         PaymentSummaryState.initial().copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
           isFetching: false,
-          paymentSummaryDetailsResponse: paymentSummaryDetailsResponse,
         ),
       ],
     );

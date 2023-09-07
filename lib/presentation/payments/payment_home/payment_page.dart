@@ -3,26 +3,39 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
+import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
+import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/keyValue/key_value_pair.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_limit.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_balance.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/soa.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/payments/widgets/payment_option.dart';
-import 'package:ezrxmobile/presentation/payments/widgets/account_statement.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+part 'widgets/account_statement.dart';
+part 'widgets/payment_option.dart';
+part 'widgets/payment_summary.dart';
 
 class PaymentPage extends StatelessWidget {
   const PaymentPage({Key? key}) : super(key: key);
@@ -32,27 +45,72 @@ class PaymentPage extends StatelessWidget {
     return Scaffold(
       key: WidgetKeys.paymentsTabPage,
       appBar: AppBar(
+        key: WidgetKeys.paymentHomeAppBar,
         title: const Text('Payments').tr(),
         centerTitle: false,
       ),
       bottomNavigationBar: const _NewPaymentButton(),
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: [
-          AnnouncementWidget(currentPath: context.router.currentPath),
-          const PaymentOptionMenu(),
-          const SizedBox(height: 20),
-          const _Invoice(),
-          const SizedBox(height: 20),
-          const _Credit(),
-          const SizedBox(height: 20),
-          const _PaymentSummary(),
-          const SizedBox(height: 20),
-          const AccountStatement(),
-          const SizedBox(height: 20),
-        ],
+      body: RefreshIndicator(
+        onRefresh: () async => _refreshPayment(context),
+        child: ListView(
+          key: WidgetKeys.paymentHome,
+          padding: const EdgeInsets.all(16.0),
+          children: [
+            AnnouncementWidget(currentPath: context.router.currentPath),
+            const _PaymentOptionMenu(),
+            const SizedBox(height: 20),
+            const _Invoice(),
+            const SizedBox(height: 20),
+            const _Credit(),
+            const SizedBox(height: 20),
+            const _PaymentSummary(),
+            const SizedBox(height: 20),
+            const _AccountStatement(),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
+  }
+
+  void _refreshPayment(BuildContext context) {
+    context.read<PaymentInProgressBloc>().add(
+          PaymentInProgressEvent.fetch(
+            salesOrganization:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+          ),
+        );
+    context.read<AccountSummaryBloc>().add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: context
+                .read<CustomerCodeBloc>()
+                .state
+                .customerCodeInfo
+                .customerCodeSoldTo,
+            salesOrg:
+                context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+          ),
+        );
+
+    context.read<AccountSummaryBloc>().add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: context
+                .read<CustomerCodeBloc>()
+                .state
+                .customerCodeInfo
+                .customerCodeSoldTo,
+            salesOrg:
+                context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+          ),
+        );
+    context.read<SoaBloc>().add(
+          SoaEvent.fetch(
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+          ),
+        );
   }
 }
 
@@ -127,6 +185,7 @@ class _Invoice extends StatelessWidget {
           current.isFetchingOutstandingBalance,
       builder: (context, state) {
         return _ItemCard(
+          key: WidgetKeys.paymentHomeInvoiceCard,
           keyVal: _getInvoices(outstandingBalance: state.outstandingBalance),
           isFetching: state.isFetchingOutstandingBalance,
         );
@@ -139,12 +198,14 @@ class _Invoice extends StatelessWidget {
   }) =>
       [
         KeyValuePair(
-          key: 'Total Outstanding'.tr(),
-          value: outstandingBalance.amount,
+          key: 'Total Outstanding',
+          value: outstandingBalance.amount.displayNAIfEmpty,
+          widgetKey: WidgetKeys.totalOutstanding,
         ),
         KeyValuePair(
-          key: 'Total Overdue'.tr(),
-          value: outstandingBalance.overdue,
+          key: 'Total Overdue',
+          value: outstandingBalance.overdue.displayNAIfEmpty,
+          widgetKey: WidgetKeys.totalOverdue,
         ),
       ];
 }
@@ -159,6 +220,7 @@ class _Credit extends StatelessWidget {
           previous.isFetchingCreditLimit != current.isFetchingCreditLimit,
       builder: (context, state) {
         return _ItemCard(
+          key: WidgetKeys.paymentHomeCreditCard,
           keyVal: _getCredits(creditLimit: state.creditLimit),
           isFetching: state.isFetchingCreditLimit,
         );
@@ -171,59 +233,29 @@ class _Credit extends StatelessWidget {
   }) =>
       [
         KeyValuePair(
-          key: 'Current remaining'.tr(),
-          value: creditLimit.creditBalance.displayAmount,
+          key: 'Total credit limit',
+          value: creditLimit.creditLimit.displayNAIfEmpty,
+          widgetKey: WidgetKeys.totalCreditLimit,
         ),
         KeyValuePair(
-          key: 'Total used'.tr(),
-          value: creditLimit.creditExposure.getOrDefaultValue('0'),
+          key: 'Credit limit utilized',
+          value: creditLimit.creditExposure.displayNAIfEmpty,
+          widgetKey: WidgetKeys.creditLimitUtilized,
         ),
         KeyValuePair(
-          key: 'Total credit limit'.tr(),
-          value: creditLimit.creditLimit.getOrDefaultValue('0'),
+          key: 'Credit limit remaining',
+          value: creditLimit.creditBalance.displayNAIfEmpty,
+          widgetKey: WidgetKeys.creditLimitRemaining,
         ),
       ];
-}
-
-class _PaymentSummary extends StatelessWidget {
-  const _PaymentSummary({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PaymentSummaryBloc, PaymentSummaryState>(
-      buildWhen: (previous, current) =>
-          previous.paymentSummaryDetailsResponse.totalPaymentInProgress !=
-          current.paymentSummaryDetailsResponse.totalPaymentInProgress,
-      builder: (context, state) {
-        return Column(
-          children: [
-            SectionTitle(
-              title: 'Payment summary',
-              onTapIconButton: () =>
-                  context.router.pushNamed('payments/payment_summary'),
-            ),
-            _ItemCard(
-              keyVal: [
-                KeyValuePair(
-                  key: 'In progress',
-                  value: state.paymentSummaryDetailsResponse
-                      .totalPaymentInProgress.displayAmount,
-                ),
-              ],
-              isFetching: state.isFetching,
-            ),
-          ],
-        );
-      },
-    );
-  }
 }
 
 class _ItemCard extends StatefulWidget {
   const _ItemCard({
     required this.keyVal,
     required this.isFetching,
-  });
+    Key? key,
+  }) : super(key: key);
   final List<KeyValuePair> keyVal;
   final bool isFetching;
 
@@ -239,7 +271,7 @@ class _ItemCardState extends State<_ItemCard> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
-        color: ZPColors.accentColor,
+        color: ZPColors.lightSilver,
         borderRadius: BorderRadius.all(
           Radius.circular(8),
         ),
@@ -257,21 +289,25 @@ class _ItemCardState extends State<_ItemCard> {
                   (e) => Padding(
                     padding: const EdgeInsets.only(bottom: 5),
                     child: Column(
+                      key: e.value.widgetKey,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          e.value.key,
+                          e.value.key.tr(),
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
-                        LoadingShimmer.withChild(
-                          enabled: widget.isFetching,
-                          child: PriceComponent(
-                            salesOrgConfig:
-                                context.read<SalesOrgBloc>().state.configs,
-                            price: e.value.value,
-                            obscured: obscured,
-                          ),
-                        ),
+                        const SizedBox(height: 2),
+                        widget.isFetching
+                            ? SizedBox(
+                                width: 100,
+                                child: LoadingShimmer.tile(),
+                              )
+                            : PriceComponent(
+                                salesOrgConfig:
+                                    context.read<SalesOrgBloc>().state.configs,
+                                price: e.value.value,
+                                obscured: obscured,
+                              ),
                       ],
                     ),
                   ),
@@ -279,6 +315,7 @@ class _ItemCardState extends State<_ItemCard> {
                 .toList(),
           ),
           IconButton(
+            key: WidgetKeys.paymentHomeObscuredAmount,
             padding: const EdgeInsets.all(0),
             alignment: Alignment.topRight,
             color: ZPColors.shadesGray,

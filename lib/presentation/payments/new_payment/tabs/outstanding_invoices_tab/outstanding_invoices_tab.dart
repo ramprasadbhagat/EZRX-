@@ -69,8 +69,8 @@ class OutstandingInvoicesTab extends StatelessWidget {
                 price: context
                     .read<AccountSummaryBloc>()
                     .state
-                    .outstandingBalance
-                    .amount,
+                    .outstandingBalance.amount.getOrDefaultValue('0')
+                    ,
               ),
             ],
           ),

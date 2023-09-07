@@ -51,21 +51,17 @@ abstract class $PaymentItemDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'accountingDocument', defaultValue: '')
-          String accountingDocument,
+      String accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          String accountingDocumentItem,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          String netDueDate,
-      @JsonKey(name: 'postingDate', defaultValue: '')
-          String postingDate,
-      @JsonKey(name: 'documentDate', defaultValue: '')
-          String documentDate,
+      String accountingDocumentItem,
+      @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
+      @JsonKey(name: 'postingDate', defaultValue: '') String postingDate,
+      @JsonKey(name: 'documentDate', defaultValue: '') String documentDate,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-          double paymentAmountInDisplayCrcy,
-      @JsonKey(name: 'postingKeyName', defaultValue: '')
-          String postingKeyName,
+      double paymentAmountInDisplayCrcy,
+      @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-          String accountingDocumentType});
+      String accountingDocumentType});
 }
 
 /// @nodoc
@@ -137,21 +133,17 @@ abstract class _$$_PaymentItemDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'accountingDocument', defaultValue: '')
-          String accountingDocument,
+      String accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          String accountingDocumentItem,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          String netDueDate,
-      @JsonKey(name: 'postingDate', defaultValue: '')
-          String postingDate,
-      @JsonKey(name: 'documentDate', defaultValue: '')
-          String documentDate,
+      String accountingDocumentItem,
+      @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
+      @JsonKey(name: 'postingDate', defaultValue: '') String postingDate,
+      @JsonKey(name: 'documentDate', defaultValue: '') String documentDate,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-          double paymentAmountInDisplayCrcy,
-      @JsonKey(name: 'postingKeyName', defaultValue: '')
-          String postingKeyName,
+      double paymentAmountInDisplayCrcy,
+      @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-          String accountingDocumentType});
+      String accountingDocumentType});
 }
 
 /// @nodoc
@@ -216,21 +208,19 @@ class __$$_PaymentItemDtoCopyWithImpl<$Res>
 class _$_PaymentItemDto extends _PaymentItemDto {
   const _$_PaymentItemDto(
       {@JsonKey(name: 'accountingDocument', defaultValue: '')
-          required this.accountingDocument,
+      required this.accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          required this.accountingDocumentItem,
-      @JsonKey(name: 'netDueDate', defaultValue: '')
-          required this.netDueDate,
-      @JsonKey(name: 'postingDate', defaultValue: '')
-          required this.postingDate,
+      required this.accountingDocumentItem,
+      @JsonKey(name: 'netDueDate', defaultValue: '') required this.netDueDate,
+      @JsonKey(name: 'postingDate', defaultValue: '') required this.postingDate,
       @JsonKey(name: 'documentDate', defaultValue: '')
-          required this.documentDate,
+      required this.documentDate,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-          required this.paymentAmountInDisplayCrcy,
+      required this.paymentAmountInDisplayCrcy,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
-          required this.postingKeyName,
+      required this.postingKeyName,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-          required this.accountingDocumentType})
+      required this.accountingDocumentType})
       : super._();
 
   factory _$_PaymentItemDto.fromJson(Map<String, dynamic> json) =>
@@ -321,21 +311,21 @@ class _$_PaymentItemDto extends _PaymentItemDto {
 abstract class _PaymentItemDto extends PaymentItemDto {
   const factory _PaymentItemDto(
       {@JsonKey(name: 'accountingDocument', defaultValue: '')
-          required final String accountingDocument,
+      required final String accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-          required final String accountingDocumentItem,
+      required final String accountingDocumentItem,
       @JsonKey(name: 'netDueDate', defaultValue: '')
-          required final String netDueDate,
+      required final String netDueDate,
       @JsonKey(name: 'postingDate', defaultValue: '')
-          required final String postingDate,
+      required final String postingDate,
       @JsonKey(name: 'documentDate', defaultValue: '')
-          required final String documentDate,
+      required final String documentDate,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-          required final double paymentAmountInDisplayCrcy,
+      required final double paymentAmountInDisplayCrcy,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
-          required final String postingKeyName,
+      required final String postingKeyName,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-          required final String accountingDocumentType}) = _$_PaymentItemDto;
+      required final String accountingDocumentType}) = _$_PaymentItemDto;
   const _PaymentItemDto._() : super._();
 
   factory _PaymentItemDto.fromJson(Map<String, dynamic> json) =

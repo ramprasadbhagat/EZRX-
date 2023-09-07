@@ -20,16 +20,6 @@ class AmountDocumentType extends ValueObject<String> {
   bool get isCredit => checkIsCredit(value.getOrElse(() => ''));
 }
 
-class Amount extends ValueObject<double> {
-  @override
-  final Either<ValueFailure<double>, double> value;
-
-  factory Amount(double value) => Amount._(Right(value));
-
-  String get displayAmount => value.getOrElse(() => 0).toString();
-
-  const Amount._(this.value);
-}
 
 class SoaData extends ValueObject<String> {
   @override
@@ -51,16 +41,4 @@ class SoaData extends ValueObject<String> {
   const SoaData._(this.value);
 }
 
-class CreditLimitValue extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
 
-  factory CreditLimitValue(String input) {
-    return CreditLimitValue._(validateStringNotEmpty(input));
-  }
-
-  double get _toUnsigned => toUnsignedDouble(value.getOrElse(() => ''));
-
-  String get displayAmount => _toUnsigned.toString();
-  const CreditLimitValue._(this.value);
-}

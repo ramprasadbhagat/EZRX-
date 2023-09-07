@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_balance.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -30,8 +31,8 @@ class OutstandingBalanceDto with _$OutstandingBalanceDto {
     return OutstandingBalanceDto(
       customerCode: outstandingBalance.customerCode.getOrCrash(),
       currency: outstandingBalance.currency.getOrCrash(),
-      amount: outstandingBalance.amount,
-      overdue: outstandingBalance.overdue,
+      amount: outstandingBalance.amount.getOrDefaultValue(''),
+      overdue: outstandingBalance.overdue.getOrDefaultValue(''),
       checkDate: outstandingBalance.checkDate,
     );
   }
@@ -40,8 +41,8 @@ class OutstandingBalanceDto with _$OutstandingBalanceDto {
     return OutstandingBalance(
       customerCode: CustomerCode(customerCode),
       currency: Currency(currency),
-      amount: amount,
-      overdue: overdue,
+      amount: StringValue(amount),
+      overdue: StringValue(overdue),
       checkDate: checkDate,
     );
   }

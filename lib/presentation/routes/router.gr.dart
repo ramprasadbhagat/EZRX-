@@ -114,10 +114,11 @@ import '../payments/new_payment/new_payment.dart' as _i44;
 import '../payments/new_payment/tabs/available_credits_tab.dart' as _i82;
 import '../payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoices_tab.dart'
     as _i81;
-import '../payments/new_payment/tabs/payment_method_tab.dart' as _i83;
+import '../payments/new_payment/tabs/payment_method/payment_method_tab.dart'
+    as _i83;
 import '../payments/payment_advice_created/payment_advice_created_page.dart'
     as _i46;
-import '../payments/payment_page.dart' as _i31;
+import '../payments/payment_home/payment_page.dart' as _i31;
 import '../payments/payment_summary/payment_summary_page.dart' as _i33;
 import '../payments/payment_summary_details/payment_summary_details_screen.dart'
     as _i38;

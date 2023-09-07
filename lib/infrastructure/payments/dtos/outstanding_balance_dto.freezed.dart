@@ -160,15 +160,11 @@ class __$$_OutstandingBalanceDtoCopyWithImpl<$Res>
 class _$_OutstandingBalanceDto extends _OutstandingBalanceDto {
   const _$_OutstandingBalanceDto(
       {@JsonKey(name: 'customerCode', defaultValue: '')
-          required this.customerCode,
-      @JsonKey(name: 'currency', defaultValue: '')
-          required this.currency,
-      @JsonKey(name: 'amount', defaultValue: '')
-          required this.amount,
-      @JsonKey(name: 'overdue', defaultValue: '')
-          required this.overdue,
-      @JsonKey(name: 'checkDate', defaultValue: '')
-          required this.checkDate})
+      required this.customerCode,
+      @JsonKey(name: 'currency', defaultValue: '') required this.currency,
+      @JsonKey(name: 'amount', defaultValue: '') required this.amount,
+      @JsonKey(name: 'overdue', defaultValue: '') required this.overdue,
+      @JsonKey(name: 'checkDate', defaultValue: '') required this.checkDate})
       : super._();
 
   factory _$_OutstandingBalanceDto.fromJson(Map<String, dynamic> json) =>
@@ -233,15 +229,13 @@ class _$_OutstandingBalanceDto extends _OutstandingBalanceDto {
 abstract class _OutstandingBalanceDto extends OutstandingBalanceDto {
   const factory _OutstandingBalanceDto(
       {@JsonKey(name: 'customerCode', defaultValue: '')
-          required final String customerCode,
+      required final String customerCode,
       @JsonKey(name: 'currency', defaultValue: '')
-          required final String currency,
-      @JsonKey(name: 'amount', defaultValue: '')
-          required final String amount,
-      @JsonKey(name: 'overdue', defaultValue: '')
-          required final String overdue,
+      required final String currency,
+      @JsonKey(name: 'amount', defaultValue: '') required final String amount,
+      @JsonKey(name: 'overdue', defaultValue: '') required final String overdue,
       @JsonKey(name: 'checkDate', defaultValue: '')
-          required final String checkDate}) = _$_OutstandingBalanceDto;
+      required final String checkDate}) = _$_OutstandingBalanceDto;
   const _OutstandingBalanceDto._() : super._();
 
   factory _OutstandingBalanceDto.fromJson(Map<String, dynamic> json) =

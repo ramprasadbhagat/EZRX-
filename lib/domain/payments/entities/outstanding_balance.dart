@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'outstanding_balance.freezed.dart';
@@ -10,16 +11,16 @@ class OutstandingBalance with _$OutstandingBalance {
   const factory OutstandingBalance({
     required CustomerCode customerCode,
     required Currency currency,
-    required String amount,
-    required String overdue,
+    required StringValue amount,
+    required StringValue overdue,
     required String checkDate,
   }) = _OutstandingBalance;
 
   factory OutstandingBalance.empty() => OutstandingBalance(
         customerCode: CustomerCode(''),
         currency: Currency(''),
-        amount: '0',
-        overdue: '0',
+        amount: StringValue(''),
+        overdue: StringValue(''),
         checkDate: '',
       );
 }

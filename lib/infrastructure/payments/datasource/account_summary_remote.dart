@@ -80,7 +80,7 @@ class AccountSummaryRemoteDataSource {
     if (data.isNotEmpty) {
       final result = <CreditLimit>[];
       for (final dynamic element in data) {
-        result.add(CreditLimitDto.fromJson(element).toDomain());
+        result.add(CreditLimitDto.fromJson(element).toDomain);
       }
 
       return result.first;

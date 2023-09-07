@@ -4,11 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_summary_details_response.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
-
-import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_response_dto.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_dto.dart';
 
 class PaymentSummaryRemoteDataSource {
   HttpService httpService;
@@ -22,7 +21,7 @@ class PaymentSummaryRemoteDataSource {
     required this.config,
   });
 
-  Future<PaymentSummaryDetailsResponse> getPaymentSummary({
+  Future<List<PaymentSummaryDetails>> getPaymentSummary({
     required String customerCode,
     required String salesOrg,
     required int offset,
@@ -52,9 +51,11 @@ class PaymentSummaryRemoteDataSource {
       ),
     );
     _approverReturnRequestInformationExceptionChecker(res: res);
-    final data = res.data['data']['customerPayment'];
+    final data = res.data['data']['customerPayment']['customerPaymentResponse'];
 
-    return PaymentSummaryDetailsResponseDto.fromJson(data).toDomain();
+    return List.from(data)
+        .map((e) => PaymentSummaryDetailsDto.fromJson(e).toDomain())
+        .toList();
   }
 
   void _approverReturnRequestInformationExceptionChecker({

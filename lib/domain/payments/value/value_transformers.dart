@@ -12,4 +12,3 @@ String findDate(String input) {
   return dateFinderRgx.allMatches(input).last.group(0) ?? '';
 }
 
-double toUnsignedDouble(String input) => (double.tryParse(input) ?? 0).abs();

@@ -35,7 +35,7 @@ class AccountSummaryLocalDataSource {
     final details = data['data']['creditLimit']['results'];
     final result = <CreditLimit>[];
     for (final dynamic detail in details) {
-      result.add(CreditLimitDto.fromJson(detail).toDomain());
+      result.add(CreditLimitDto.fromJson(detail).toDomain);
     }
 
     return result.first;

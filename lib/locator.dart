@@ -58,6 +58,7 @@ import 'package:ezrxmobile/application/payments/new_payment/available_credits/fi
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -325,6 +326,9 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/account_summary_query.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_in_progress_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_in_progress_query.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_in_progress_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/soa_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/soa_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
@@ -336,6 +340,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_query
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/account_summary_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/credit_and_invoice_details_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/payment_in_progress_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/soa_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
@@ -2038,7 +2043,6 @@ void setupLocator() {
     () => SoaRemoteDataSource(
       config: locator<Config>(),
       httpService: locator<HttpService>(),
-      paymentSummaryQuery: locator<PaymentSummaryQuery>(),
     ),
   );
 
@@ -2057,6 +2061,38 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => SoaFilterBloc(),
+  );
+
+  //============================================================
+  //  Payment In Progress
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => PaymentInProgressQuery(),
+  );
+  locator.registerLazySingleton(
+    () => PaymentInProgressLocalDataSource(),
+  );
+  locator.registerLazySingleton(
+    () => PaymentInProgressRemoteDataSource(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      paymentInProgressQuery: locator<PaymentInProgressQuery>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => PaymentInProgressRepository(
+      config: locator<Config>(),
+      localDataSource: locator<PaymentInProgressLocalDataSource>(),
+      remoteDataSource: locator<PaymentInProgressRemoteDataSource>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => PaymentInProgressBloc(
+      repository: locator<PaymentInProgressRepository>(),
+    ),
   );
 
   //============================================================

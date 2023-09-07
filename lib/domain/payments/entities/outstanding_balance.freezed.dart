@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OutstandingBalance {
   CustomerCode get customerCode => throw _privateConstructorUsedError;
   Currency get currency => throw _privateConstructorUsedError;
-  String get amount => throw _privateConstructorUsedError;
-  String get overdue => throw _privateConstructorUsedError;
+  StringValue get amount => throw _privateConstructorUsedError;
+  StringValue get overdue => throw _privateConstructorUsedError;
   String get checkDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,8 +36,8 @@ abstract class $OutstandingBalanceCopyWith<$Res> {
   $Res call(
       {CustomerCode customerCode,
       Currency currency,
-      String amount,
-      String overdue,
+      StringValue amount,
+      StringValue overdue,
       String checkDate});
 }
 
@@ -72,11 +72,11 @@ class _$OutstandingBalanceCopyWithImpl<$Res, $Val extends OutstandingBalance>
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       overdue: null == overdue
           ? _value.overdue
           : overdue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       checkDate: null == checkDate
           ? _value.checkDate
           : checkDate // ignore: cast_nullable_to_non_nullable
@@ -96,8 +96,8 @@ abstract class _$$_OutstandingBalanceCopyWith<$Res>
   $Res call(
       {CustomerCode customerCode,
       Currency currency,
-      String amount,
-      String overdue,
+      StringValue amount,
+      StringValue overdue,
       String checkDate});
 }
 
@@ -130,11 +130,11 @@ class __$$_OutstandingBalanceCopyWithImpl<$Res>
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       overdue: null == overdue
           ? _value.overdue
           : overdue // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       checkDate: null == checkDate
           ? _value.checkDate
           : checkDate // ignore: cast_nullable_to_non_nullable
@@ -159,9 +159,9 @@ class _$_OutstandingBalance extends _OutstandingBalance {
   @override
   final Currency currency;
   @override
-  final String amount;
+  final StringValue amount;
   @override
-  final String overdue;
+  final StringValue overdue;
   @override
   final String checkDate;
 
@@ -201,8 +201,8 @@ abstract class _OutstandingBalance extends OutstandingBalance {
   const factory _OutstandingBalance(
       {required final CustomerCode customerCode,
       required final Currency currency,
-      required final String amount,
-      required final String overdue,
+      required final StringValue amount,
+      required final StringValue overdue,
       required final String checkDate}) = _$_OutstandingBalance;
   const _OutstandingBalance._() : super._();
 
@@ -211,9 +211,9 @@ abstract class _OutstandingBalance extends OutstandingBalance {
   @override
   Currency get currency;
   @override
-  String get amount;
+  StringValue get amount;
   @override
-  String get overdue;
+  StringValue get overdue;
   @override
   String get checkDate;
   @override

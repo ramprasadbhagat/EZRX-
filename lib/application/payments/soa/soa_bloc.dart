@@ -28,6 +28,7 @@ class SoaBloc extends Bloc<SoaEvent, SoaState> {
           state.copyWith(
             isFetching: true,
             soaList: <Soa>[],
+            failureOrSuccessOption: none(),
           ),
         );
         final failureOrSuccess = await repository.fetchSoa(

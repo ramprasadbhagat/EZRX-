@@ -50,11 +50,11 @@ import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.d
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoices_tab.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method_tab.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/new_payment.dart';
+import 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
+import 'package:ezrxmobile/presentation/payments/payment_home/payment_page.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
-import 'package:ezrxmobile/presentation/payments/payment_page.dart';
 import 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 import 'package:ezrxmobile/presentation/payments/payment_webview/payment_webview_page.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/bundle_detail_page.dart';

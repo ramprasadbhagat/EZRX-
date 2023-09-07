@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'key_value_pair.freezed.dart';
@@ -9,10 +10,12 @@ class KeyValuePair with _$KeyValuePair {
   factory KeyValuePair({
     required String key,
     required String value,
+    required Key widgetKey,
   }) = _KeyValuePair;
 
   factory KeyValuePair.empty() => KeyValuePair(
         key: '',
         value: '',
+        widgetKey: const ValueKey(''),
       );
 }

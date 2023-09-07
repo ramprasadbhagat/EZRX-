@@ -1,37 +1,21 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/responsive.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+part of '../payment_page.dart';
 
-class PaymentOptionMenu extends StatelessWidget {
-  const PaymentOptionMenu({Key? key}) : super(key: key);
+class _PaymentOptionMenu extends StatelessWidget {
+  const _PaymentOptionMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final paymentOptionData = _getPaymentOptionItems(context);
-
-    final isClaimActive = paymentOptionData.any(
-      (element) => element.label == 'Claims',
-    );
-
     return Wrap(
+      key: WidgetKeys.paymentHomeOptionMenu,
       alignment: Responsive.isMobile(context)
           ? WrapAlignment.spaceBetween
           : WrapAlignment.start,
       runSpacing: MediaQuery.of(context).size.height * 0.02,
       spacing: Responsive.isMobile(context) ? 0 : 10,
-      children: paymentOptionData
+      children: _getPaymentOptionItems(context)
           .map(
             (paymentOptionData) => _PaymentOption(
               paymentOptionData: paymentOptionData,
-              isClaimActive: isClaimActive,
             ),
           )
           .toList(),
@@ -41,18 +25,16 @@ class PaymentOptionMenu extends StatelessWidget {
 
 class _PaymentOption extends StatelessWidget {
   final _PaymentOptionData paymentOptionData;
-  final bool isClaimActive;
   const _PaymentOption({
     Key? key,
     required this.paymentOptionData,
-    required this.isClaimActive,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: Responsive.isMobile(context)
-          ? isClaimActive
+          ? context.read<SalesOrgBloc>().state.salesOrg.isPaymentClaimEnabled
               ? MediaQuery.of(context).size.width * 0.45
               : MediaQuery.of(context).size.width * 0.28
           : MediaQuery.of(context).size.width * 0.22,
