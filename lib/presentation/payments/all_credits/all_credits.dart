@@ -14,20 +14,24 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
 
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+part 'package:ezrxmobile/presentation/payments/all_credits/widgets/credit_group.dart';
+part 'package:ezrxmobile/presentation/payments/all_credits/widgets/credit_item.dart';
+
+final GlobalKey _allCreditScaffold = GlobalKey<ScaffoldState>();
 
 class AllCreditsPage extends StatefulWidget {
   const AllCreditsPage({Key? key}) : super(key: key);
@@ -38,19 +42,16 @@ class AllCreditsPage extends StatefulWidget {
 
 class _AllCreditsPageState extends State<AllCreditsPage> {
   final _controller = ScrollController();
-
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
+    _controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final scaffoldKey = GlobalKey<ScaffoldState>();
-
     return Scaffold(
-      key: scaffoldKey,
+      key: _allCreditScaffold,
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
         child: Column(
@@ -59,7 +60,7 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
               listenWhen: (previous, current) =>
                   previous.failureOrSuccessOption !=
                   current.failureOrSuccessOption,
-              listener: (context, state) {
+              listener: (BuildContext context, state) {
                 state.failureOrSuccessOption.fold(
                   () {},
                   (either) => either.fold(
@@ -79,8 +80,8 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
                           key: WidgetKeys.loaderImage,
                         )
                       : ScrollList<CreditAndInvoiceGroup>(
-                          noRecordFoundWidget: NoRecordFound(
-                            title: 'No credit found'.tr(),
+                          noRecordFoundWidget: const NoRecordFound(
+                            title: 'No credit found',
                           ),
                           controller: _controller,
                           onRefresh: () {
@@ -141,118 +142,5 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
           const NewPaymentEvent.initialized(),
         );
     context.router.pushNamed('payments/new_payment');
-  }
-}
-
-class _CreditGroup extends StatelessWidget {
-  final CreditAndInvoiceGroup data;
-  final bool showDivider;
-  const _CreditGroup({
-    Key? key,
-    required this.data,
-    required this.showDivider,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (showDivider)
-          const Divider(
-            indent: 0,
-            height: 20,
-            endIndent: 0,
-            color: ZPColors.lightGray2,
-          ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: Text(
-                  '${'Documents created on'.tr()} ${data.dueDate.dateString}'
-                      .tr(),
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: ZPColors.darkerGrey,
-                      ),
-                ),
-              ),
-              Column(
-                children: data.items
-                    .map(
-                      (e) => _CreditsItem(creditItem: e),
-                    )
-                    .toList(),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _CreditsItem extends StatelessWidget {
-  const _CreditsItem({
-    Key? key,
-    required this.creditItem,
-  }) : super(key: key);
-
-  final CreditAndInvoiceItem creditItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomCard(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10,
-      ),
-      child: ListTile(
-        onTap: () {
-          context.read<CreditAndInvoiceDetailsBloc>().add(
-                CreditAndInvoiceDetailsEvent.fetch(
-                  creditAndInvoiceItem: creditItem,
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                ),
-              );
-          context.router.push(CreditDetailsPageRoute(creditItem: creditItem));
-        },
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              '${creditItem.postingKeyName} #${creditItem.searchKey}',
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-            StatusLabel(
-              status: StatusType(
-                creditItem.invoiceProcessingStatus.getOrDefaultValue(''),
-              ),
-            ),
-          ],
-        ),
-        subtitle: Padding(
-          padding: const EdgeInsets.only(
-            top: 8,
-          ),
-          child: Align(
-            alignment: Alignment.bottomRight,
-            child: PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-              price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
-                  .toString(),
-              priceLabelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ZPColors.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
