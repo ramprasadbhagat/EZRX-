@@ -35,7 +35,17 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
   ) async {
     await event.map(
       initialized: (value) {
-        emit(OrderSummaryState.initial());
+        emit(
+          OrderSummaryState.initial().copyWith(
+            user: value.user,
+            shipToInfo: value.shipToInfo,
+            salesOrg: value.salesOrg,
+            customerCodeInfo: value.customerCodeInfo,
+            salesOrgConfig: value.salesOrgConfig,
+            orderDocumentType: value.orderDocumentType,
+            salesOrganisation: value.salesOrganisation,
+          ),
+        );
       },
       submitOrder: (value) async {
         if (state.isSubmitting) return;
@@ -46,16 +56,16 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           ),
         );
         final failureOrSuccess = await repository.submitOrder(
-          shipToInfo: value.shipToInfo,
-          user: value.user,
+          shipToInfo: state.shipToInfo,
+          user: state.user,
           cartProducts: value.cartProducts,
           grandTotal: value.grandTotal,
           orderValue: value.orderValue,
-          customerCodeInfo: value.customerCodeInfo,
-          salesOrganisation: value.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
           data: value.data,
-          orderDocumentType: value.orderDocumentType,
-          configs: value.config,
+          orderDocumentType: state.orderDocumentType,
+          configs: state.salesOrgConfig,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -89,7 +99,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
 
         final failureOrSuccess = await repository.getOrderConfirmationDetail(
           orderResponse: state.submitOrderResponse,
-          user: e.user,
+          user: state.user,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -111,9 +121,6 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
             add(
               OrderSummaryEvent.confirmedOrderStockInfo(
                 orderHistoryDetails: orderConfirmationDetail,
-                salesOrg: e.salesOrg,
-                customerCodeInfo: e.customerCodeInfo,
-                salesOrgConfig: e.salesOrgConfig,
                 priceAggregate: e.priceAggregate,
               ),
             );
@@ -121,11 +128,10 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
         );
       },
       confirmedOrderStockInfo: (e) async {
-        
         final failureOrSuccess = await repository.getConfirmedOrderStockInfo(
-          customerCodeInfo: e.customerCodeInfo,
+          customerCodeInfo: state.customerCodeInfo,
           orderHistoryDetails: e.orderHistoryDetails,
-          salesOrg: e.salesOrg,
+          salesOrg: state.salesOrg,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -146,7 +152,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
                   orderHistoryDetailsOrderItem:
                       e.orderHistoryDetails.orderHistoryDetailsOrderItem,
                   priceAggregate: e.priceAggregate,
-                  salesOrganisationConfigs: e.salesOrgConfig,
+                  salesOrganisationConfigs: state.salesOrgConfig,
                 ),
               ),
             );

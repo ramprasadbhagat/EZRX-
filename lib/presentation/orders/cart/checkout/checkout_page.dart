@@ -3,11 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
-import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -177,12 +175,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   if (state.isValidated) {
                     context.read<OrderSummaryBloc>().add(
                           OrderSummaryEvent.submitOrder(
-                            shipToInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .shipToInfo,
-                            user: context.read<UserBloc>().state.user,
-                            // cartItems: cartItems,
                             cartProducts:
                                 context.read<CartBloc>().state.cartProducts,
                             grandTotal:
@@ -191,23 +183,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 .read<CartBloc>()
                                 .state
                                 .totalPriceWithTax,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
                             data: context
                                 .read<AdditionalDetailsBloc>()
                                 .state
                                 .deliveryInfoData,
-                            orderDocumentType: context
-                                .read<OrderDocumentTypeBloc>()
-                                .state
-                                .selectedOrderType,
-                            config: context.read<SalesOrgBloc>().state.configs,
                           ),
                         );
                   } else {
@@ -226,19 +205,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         if (!state.isSubmitting) {
                           context.read<OrderSummaryBloc>().add(
                                 OrderSummaryEvent.orderConfirmationDetail(
-                                  user: context.read<UserBloc>().state.user,
-                                  salesOrg: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrg,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
-                                  salesOrgConfig: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .configs,
                                   priceAggregate: context
                                       .read<CartBloc>()
                                       .state

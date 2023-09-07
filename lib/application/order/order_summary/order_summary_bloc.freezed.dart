@@ -18,93 +18,63 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OrderSummaryEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
     required TResult Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)
+        initialized,
+    required TResult Function(List<PriceAggregate> cartProducts,
+            double grandTotal, double orderValue, DeliveryInfoData data)
         submitOrder,
-    required TResult Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)
+    required TResult Function(List<PriceAggregate> priceAggregate)
         orderConfirmationDetail,
-    required TResult Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)
         confirmedOrderStockInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
     TResult? Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, DeliveryInfoData data)?
         submitOrder,
-    TResult? Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)?
+    TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
-    TResult? Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
     TResult Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, DeliveryInfoData data)?
         submitOrder,
-    TResult Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)?
+    TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
-    TResult Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
     required TResult orElse(),
@@ -163,9 +133,21 @@ abstract class _$$_InitializedCopyWith<$Res> {
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
   @useResult
-  $Res call({SalesOrganisationConfigs config});
+  $Res call(
+      {User user,
+      ShipToInfo shipToInfo,
+      CustomerCodeInfo customerCodeInfo,
+      OrderDocumentType orderDocumentType,
+      SalesOrganisationConfigs salesOrgConfig,
+      SalesOrganisation salesOrganisation,
+      SalesOrg salesOrg});
 
-  $SalesOrganisationConfigsCopyWith<$Res> get config;
+  $UserCopyWith<$Res> get user;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -179,21 +161,92 @@ class __$$_InitializedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? config = null,
+    Object? user = null,
+    Object? shipToInfo = null,
+    Object? customerCodeInfo = null,
+    Object? orderDocumentType = null,
+    Object? salesOrgConfig = null,
+    Object? salesOrganisation = null,
+    Object? salesOrg = null,
   }) {
     return _then(_$_Initialized(
-      config: null == config
-          ? _value.config
-          : config // ignore: cast_nullable_to_non_nullable
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      orderDocumentType: null == orderDocumentType
+          ? _value.orderDocumentType
+          : orderDocumentType // ignore: cast_nullable_to_non_nullable
+              as OrderDocumentType,
+      salesOrgConfig: null == salesOrgConfig
+          ? _value.salesOrgConfig
+          : salesOrgConfig // ignore: cast_nullable_to_non_nullable
               as SalesOrganisationConfigs,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get config {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
-      return _then(_value.copyWith(config: value));
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType {
+    return $OrderDocumentTypeCopyWith<$Res>(_value.orderDocumentType, (value) {
+      return _then(_value.copyWith(orderDocumentType: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
+        (value) {
+      return _then(_value.copyWith(salesOrgConfig: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
     });
   }
 }
@@ -201,14 +254,33 @@ class __$$_InitializedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initialized implements _Initialized {
-  const _$_Initialized({required this.config});
+  const _$_Initialized(
+      {required this.user,
+      required this.shipToInfo,
+      required this.customerCodeInfo,
+      required this.orderDocumentType,
+      required this.salesOrgConfig,
+      required this.salesOrganisation,
+      required this.salesOrg});
 
   @override
-  final SalesOrganisationConfigs config;
+  final User user;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final OrderDocumentType orderDocumentType;
+  @override
+  final SalesOrganisationConfigs salesOrgConfig;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.initialized(config: $config)';
+    return 'OrderSummaryEvent.initialized(user: $user, shipToInfo: $shipToInfo, customerCodeInfo: $customerCodeInfo, orderDocumentType: $orderDocumentType, salesOrgConfig: $salesOrgConfig, salesOrganisation: $salesOrganisation, salesOrg: $salesOrg)';
   }
 
   @override
@@ -216,11 +288,31 @@ class _$_Initialized implements _Initialized {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initialized &&
-            (identical(other.config, config) || other.config == config));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.orderDocumentType, orderDocumentType) ||
+                other.orderDocumentType == orderDocumentType) &&
+            (identical(other.salesOrgConfig, salesOrgConfig) ||
+                other.salesOrgConfig == salesOrgConfig) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, config);
+  int get hashCode => Object.hash(
+      runtimeType,
+      user,
+      shipToInfo,
+      customerCodeInfo,
+      orderDocumentType,
+      salesOrgConfig,
+      salesOrganisation,
+      salesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -231,105 +323,78 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
     required TResult Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)
+        initialized,
+    required TResult Function(List<PriceAggregate> cartProducts,
+            double grandTotal, double orderValue, DeliveryInfoData data)
         submitOrder,
-    required TResult Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)
+    required TResult Function(List<PriceAggregate> priceAggregate)
         orderConfirmationDetail,
-    required TResult Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)
         confirmedOrderStockInfo,
   }) {
-    return initialized(config);
+    return initialized(user, shipToInfo, customerCodeInfo, orderDocumentType,
+        salesOrgConfig, salesOrganisation, salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
     TResult? Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, DeliveryInfoData data)?
         submitOrder,
-    TResult? Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)?
+    TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
-    TResult? Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
   }) {
-    return initialized?.call(config);
+    return initialized?.call(user, shipToInfo, customerCodeInfo,
+        orderDocumentType, salesOrgConfig, salesOrganisation, salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
     TResult Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, DeliveryInfoData data)?
         submitOrder,
-    TResult Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)?
+    TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
-    TResult Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(config);
+      return initialized(user, shipToInfo, customerCodeInfo, orderDocumentType,
+          salesOrgConfig, salesOrganisation, salesOrg);
     }
     return orElse();
   }
@@ -375,10 +440,22 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements OrderSummaryEvent {
-  const factory _Initialized({required final SalesOrganisationConfigs config}) =
-      _$_Initialized;
+  const factory _Initialized(
+      {required final User user,
+      required final ShipToInfo shipToInfo,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final OrderDocumentType orderDocumentType,
+      required final SalesOrganisationConfigs salesOrgConfig,
+      required final SalesOrganisation salesOrganisation,
+      required final SalesOrg salesOrg}) = _$_Initialized;
 
-  SalesOrganisationConfigs get config;
+  User get user;
+  ShipToInfo get shipToInfo;
+  CustomerCodeInfo get customerCodeInfo;
+  OrderDocumentType get orderDocumentType;
+  SalesOrganisationConfigs get salesOrgConfig;
+  SalesOrganisation get salesOrganisation;
+  SalesOrg get salesOrg;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
@@ -391,24 +468,12 @@ abstract class _$$_SubmitOrderCopyWith<$Res> {
       __$$_SubmitOrderCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {ShipToInfo shipToInfo,
-      User user,
-      List<PriceAggregate> cartProducts,
+      {List<PriceAggregate> cartProducts,
       double grandTotal,
       double orderValue,
-      CustomerCodeInfo customerCodeInfo,
-      SalesOrganisation salesOrganisation,
-      DeliveryInfoData data,
-      OrderDocumentType orderDocumentType,
-      SalesOrganisationConfigs config});
+      DeliveryInfoData data});
 
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
-  $UserCopyWith<$Res> get user;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $DeliveryInfoDataCopyWith<$Res> get data;
-  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType;
-  $SalesOrganisationConfigsCopyWith<$Res> get config;
 }
 
 /// @nodoc
@@ -422,26 +487,12 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? shipToInfo = null,
-    Object? user = null,
     Object? cartProducts = null,
     Object? grandTotal = null,
     Object? orderValue = null,
-    Object? customerCodeInfo = null,
-    Object? salesOrganisation = null,
     Object? data = null,
-    Object? orderDocumentType = null,
-    Object? config = null,
   }) {
     return _then(_$_SubmitOrder(
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
       cartProducts: null == cartProducts
           ? _value._cartProducts
           : cartProducts // ignore: cast_nullable_to_non_nullable
@@ -454,59 +505,11 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
               as double,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as DeliveryInfoData,
-      orderDocumentType: null == orderDocumentType
-          ? _value.orderDocumentType
-          : orderDocumentType // ignore: cast_nullable_to_non_nullable
-              as OrderDocumentType,
-      config: null == config
-          ? _value.config
-          : config // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
   }
 
   @override
@@ -516,44 +519,18 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
       return _then(_value.copyWith(data: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType {
-    return $OrderDocumentTypeCopyWith<$Res>(_value.orderDocumentType, (value) {
-      return _then(_value.copyWith(orderDocumentType: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get config {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
-      return _then(_value.copyWith(config: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_SubmitOrder implements _SubmitOrder {
   const _$_SubmitOrder(
-      {required this.shipToInfo,
-      required this.user,
-      required final List<PriceAggregate> cartProducts,
+      {required final List<PriceAggregate> cartProducts,
       required this.grandTotal,
       required this.orderValue,
-      required this.customerCodeInfo,
-      required this.salesOrganisation,
-      required this.data,
-      required this.orderDocumentType,
-      required this.config})
+      required this.data})
       : _cartProducts = cartProducts;
 
-  @override
-  final ShipToInfo shipToInfo;
-  @override
-  final User user;
   final List<PriceAggregate> _cartProducts;
   @override
   List<PriceAggregate> get cartProducts {
@@ -567,19 +544,11 @@ class _$_SubmitOrder implements _SubmitOrder {
   @override
   final double orderValue;
   @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
   final DeliveryInfoData data;
-  @override
-  final OrderDocumentType orderDocumentType;
-  @override
-  final SalesOrganisationConfigs config;
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.submitOrder(shipToInfo: $shipToInfo, user: $user, cartProducts: $cartProducts, grandTotal: $grandTotal, orderValue: $orderValue, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, data: $data, orderDocumentType: $orderDocumentType, config: $config)';
+    return 'OrderSummaryEvent.submitOrder(cartProducts: $cartProducts, grandTotal: $grandTotal, orderValue: $orderValue, data: $data)';
   }
 
   @override
@@ -587,38 +556,22 @@ class _$_SubmitOrder implements _SubmitOrder {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SubmitOrder &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.user, user) || other.user == user) &&
             const DeepCollectionEquality()
                 .equals(other._cartProducts, _cartProducts) &&
             (identical(other.grandTotal, grandTotal) ||
                 other.grandTotal == grandTotal) &&
             (identical(other.orderValue, orderValue) ||
                 other.orderValue == orderValue) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.data, data) || other.data == data) &&
-            (identical(other.orderDocumentType, orderDocumentType) ||
-                other.orderDocumentType == orderDocumentType) &&
-            (identical(other.config, config) || other.config == config));
+            (identical(other.data, data) || other.data == data));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      shipToInfo,
-      user,
       const DeepCollectionEquality().hash(_cartProducts),
       grandTotal,
       orderValue,
-      customerCodeInfo,
-      salesOrganisation,
-      data,
-      orderDocumentType,
-      config);
+      data);
 
   @JsonKey(ignore: true)
   @override
@@ -629,117 +582,75 @@ class _$_SubmitOrder implements _SubmitOrder {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
     required TResult Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)
+        initialized,
+    required TResult Function(List<PriceAggregate> cartProducts,
+            double grandTotal, double orderValue, DeliveryInfoData data)
         submitOrder,
-    required TResult Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)
+    required TResult Function(List<PriceAggregate> priceAggregate)
         orderConfirmationDetail,
-    required TResult Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)
         confirmedOrderStockInfo,
   }) {
-    return submitOrder(shipToInfo, user, cartProducts, grandTotal, orderValue,
-        customerCodeInfo, salesOrganisation, data, orderDocumentType, config);
+    return submitOrder(cartProducts, grandTotal, orderValue, data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
     TResult? Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, DeliveryInfoData data)?
         submitOrder,
-    TResult? Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)?
+    TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
-    TResult? Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
   }) {
-    return submitOrder?.call(
-        shipToInfo,
-        user,
-        cartProducts,
-        grandTotal,
-        orderValue,
-        customerCodeInfo,
-        salesOrganisation,
-        data,
-        orderDocumentType,
-        config);
+    return submitOrder?.call(cartProducts, grandTotal, orderValue, data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
     TResult Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, DeliveryInfoData data)?
         submitOrder,
-    TResult Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)?
+    TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
-    TResult Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
     required TResult orElse(),
   }) {
     if (submitOrder != null) {
-      return submitOrder(shipToInfo, user, cartProducts, grandTotal, orderValue,
-          customerCodeInfo, salesOrganisation, data, orderDocumentType, config);
+      return submitOrder(cartProducts, grandTotal, orderValue, data);
     }
     return orElse();
   }
@@ -786,27 +697,15 @@ class _$_SubmitOrder implements _SubmitOrder {
 
 abstract class _SubmitOrder implements OrderSummaryEvent {
   const factory _SubmitOrder(
-      {required final ShipToInfo shipToInfo,
-      required final User user,
-      required final List<PriceAggregate> cartProducts,
+      {required final List<PriceAggregate> cartProducts,
       required final double grandTotal,
       required final double orderValue,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final SalesOrganisation salesOrganisation,
-      required final DeliveryInfoData data,
-      required final OrderDocumentType orderDocumentType,
-      required final SalesOrganisationConfigs config}) = _$_SubmitOrder;
+      required final DeliveryInfoData data}) = _$_SubmitOrder;
 
-  ShipToInfo get shipToInfo;
-  User get user;
   List<PriceAggregate> get cartProducts;
   double get grandTotal;
   double get orderValue;
-  CustomerCodeInfo get customerCodeInfo;
-  SalesOrganisation get salesOrganisation;
   DeliveryInfoData get data;
-  OrderDocumentType get orderDocumentType;
-  SalesOrganisationConfigs get config;
   @JsonKey(ignore: true)
   _$$_SubmitOrderCopyWith<_$_SubmitOrder> get copyWith =>
       throw _privateConstructorUsedError;
@@ -818,16 +717,7 @@ abstract class _$$_OrderConfirmationDetailCopyWith<$Res> {
           $Res Function(_$_OrderConfirmationDetail) then) =
       __$$_OrderConfirmationDetailCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {User user,
-      SalesOrg salesOrg,
-      CustomerCodeInfo customerCodeInfo,
-      SalesOrganisationConfigs salesOrgConfig,
-      List<PriceAggregate> priceAggregate});
-
-  $UserCopyWith<$Res> get user;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
+  $Res call({List<PriceAggregate> priceAggregate});
 }
 
 /// @nodoc
@@ -841,59 +731,14 @@ class __$$_OrderConfirmationDetailCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
-    Object? salesOrg = null,
-    Object? customerCodeInfo = null,
-    Object? salesOrgConfig = null,
     Object? priceAggregate = null,
   }) {
     return _then(_$_OrderConfirmationDetail(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-      salesOrg: null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      salesOrgConfig: null == salesOrgConfig
-          ? _value.salesOrgConfig
-          : salesOrgConfig // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
       priceAggregate: null == priceAggregate
           ? _value._priceAggregate
           : priceAggregate // ignore: cast_nullable_to_non_nullable
               as List<PriceAggregate>,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
-        (value) {
-      return _then(_value.copyWith(salesOrgConfig: value));
-    });
   }
 }
 
@@ -901,21 +746,9 @@ class __$$_OrderConfirmationDetailCopyWithImpl<$Res>
 
 class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
   const _$_OrderConfirmationDetail(
-      {required this.user,
-      required this.salesOrg,
-      required this.customerCodeInfo,
-      required this.salesOrgConfig,
-      required final List<PriceAggregate> priceAggregate})
+      {required final List<PriceAggregate> priceAggregate})
       : _priceAggregate = priceAggregate;
 
-  @override
-  final User user;
-  @override
-  final SalesOrg salesOrg;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final SalesOrganisationConfigs salesOrgConfig;
   final List<PriceAggregate> _priceAggregate;
   @override
   List<PriceAggregate> get priceAggregate {
@@ -926,7 +759,7 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.orderConfirmationDetail(user: $user, salesOrg: $salesOrg, customerCodeInfo: $customerCodeInfo, salesOrgConfig: $salesOrgConfig, priceAggregate: $priceAggregate)';
+    return 'OrderSummaryEvent.orderConfirmationDetail(priceAggregate: $priceAggregate)';
   }
 
   @override
@@ -934,20 +767,13 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderConfirmationDetail &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.salesOrgConfig, salesOrgConfig) ||
-                other.salesOrgConfig == salesOrgConfig) &&
             const DeepCollectionEquality()
                 .equals(other._priceAggregate, _priceAggregate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, salesOrg, customerCodeInfo,
-      salesOrgConfig, const DeepCollectionEquality().hash(_priceAggregate));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_priceAggregate));
 
   @JsonKey(ignore: true)
   @override
@@ -960,108 +786,75 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
     required TResult Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)
+        initialized,
+    required TResult Function(List<PriceAggregate> cartProducts,
+            double grandTotal, double orderValue, DeliveryInfoData data)
         submitOrder,
-    required TResult Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)
+    required TResult Function(List<PriceAggregate> priceAggregate)
         orderConfirmationDetail,
-    required TResult Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)
         confirmedOrderStockInfo,
   }) {
-    return orderConfirmationDetail(
-        user, salesOrg, customerCodeInfo, salesOrgConfig, priceAggregate);
+    return orderConfirmationDetail(priceAggregate);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
     TResult? Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, DeliveryInfoData data)?
         submitOrder,
-    TResult? Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)?
+    TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
-    TResult? Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
   }) {
-    return orderConfirmationDetail?.call(
-        user, salesOrg, customerCodeInfo, salesOrgConfig, priceAggregate);
+    return orderConfirmationDetail?.call(priceAggregate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
     TResult Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, DeliveryInfoData data)?
         submitOrder,
-    TResult Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)?
+    TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
-    TResult Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
     required TResult orElse(),
   }) {
     if (orderConfirmationDetail != null) {
-      return orderConfirmationDetail(
-          user, salesOrg, customerCodeInfo, salesOrgConfig, priceAggregate);
+      return orderConfirmationDetail(priceAggregate);
     }
     return orElse();
   }
@@ -1108,17 +901,9 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
 
 abstract class _OrderConfirmationDetail implements OrderSummaryEvent {
   const factory _OrderConfirmationDetail(
-          {required final User user,
-          required final SalesOrg salesOrg,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final SalesOrganisationConfigs salesOrgConfig,
-          required final List<PriceAggregate> priceAggregate}) =
+          {required final List<PriceAggregate> priceAggregate}) =
       _$_OrderConfirmationDetail;
 
-  User get user;
-  SalesOrg get salesOrg;
-  CustomerCodeInfo get customerCodeInfo;
-  SalesOrganisationConfigs get salesOrgConfig;
   List<PriceAggregate> get priceAggregate;
   @JsonKey(ignore: true)
   _$$_OrderConfirmationDetailCopyWith<_$_OrderConfirmationDetail>
@@ -1133,14 +918,9 @@ abstract class _$$_ConfirmedOrderStockInfoCopyWith<$Res> {
   @useResult
   $Res call(
       {OrderHistoryDetails orderHistoryDetails,
-      SalesOrg salesOrg,
-      CustomerCodeInfo customerCodeInfo,
-      SalesOrganisationConfigs salesOrgConfig,
       List<PriceAggregate> priceAggregate});
 
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
 }
 
 /// @nodoc
@@ -1155,9 +935,6 @@ class __$$_ConfirmedOrderStockInfoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? orderHistoryDetails = null,
-    Object? salesOrg = null,
-    Object? customerCodeInfo = null,
-    Object? salesOrgConfig = null,
     Object? priceAggregate = null,
   }) {
     return _then(_$_ConfirmedOrderStockInfo(
@@ -1165,18 +942,6 @@ class __$$_ConfirmedOrderStockInfoCopyWithImpl<$Res>
           ? _value.orderHistoryDetails
           : orderHistoryDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetails,
-      salesOrg: null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      salesOrgConfig: null == salesOrgConfig
-          ? _value.salesOrgConfig
-          : salesOrgConfig // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
       priceAggregate: null == priceAggregate
           ? _value._priceAggregate
           : priceAggregate // ignore: cast_nullable_to_non_nullable
@@ -1192,23 +957,6 @@ class __$$_ConfirmedOrderStockInfoCopyWithImpl<$Res>
       return _then(_value.copyWith(orderHistoryDetails: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
-        (value) {
-      return _then(_value.copyWith(salesOrgConfig: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -1216,20 +964,11 @@ class __$$_ConfirmedOrderStockInfoCopyWithImpl<$Res>
 class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
   const _$_ConfirmedOrderStockInfo(
       {required this.orderHistoryDetails,
-      required this.salesOrg,
-      required this.customerCodeInfo,
-      required this.salesOrgConfig,
       required final List<PriceAggregate> priceAggregate})
       : _priceAggregate = priceAggregate;
 
   @override
   final OrderHistoryDetails orderHistoryDetails;
-  @override
-  final SalesOrg salesOrg;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final SalesOrganisationConfigs salesOrgConfig;
   final List<PriceAggregate> _priceAggregate;
   @override
   List<PriceAggregate> get priceAggregate {
@@ -1240,7 +979,7 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.confirmedOrderStockInfo(orderHistoryDetails: $orderHistoryDetails, salesOrg: $salesOrg, customerCodeInfo: $customerCodeInfo, salesOrgConfig: $salesOrgConfig, priceAggregate: $priceAggregate)';
+    return 'OrderSummaryEvent.confirmedOrderStockInfo(orderHistoryDetails: $orderHistoryDetails, priceAggregate: $priceAggregate)';
   }
 
   @override
@@ -1250,23 +989,12 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
             other is _$_ConfirmedOrderStockInfo &&
             (identical(other.orderHistoryDetails, orderHistoryDetails) ||
                 other.orderHistoryDetails == orderHistoryDetails) &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.salesOrgConfig, salesOrgConfig) ||
-                other.salesOrgConfig == salesOrgConfig) &&
             const DeepCollectionEquality()
                 .equals(other._priceAggregate, _priceAggregate));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      orderHistoryDetails,
-      salesOrg,
-      customerCodeInfo,
-      salesOrgConfig,
+  int get hashCode => Object.hash(runtimeType, orderHistoryDetails,
       const DeepCollectionEquality().hash(_priceAggregate));
 
   @JsonKey(ignore: true)
@@ -1280,108 +1008,75 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisationConfigs config) initialized,
     required TResult Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)
+        initialized,
+    required TResult Function(List<PriceAggregate> cartProducts,
+            double grandTotal, double orderValue, DeliveryInfoData data)
         submitOrder,
-    required TResult Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)
+    required TResult Function(List<PriceAggregate> priceAggregate)
         orderConfirmationDetail,
-    required TResult Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)
         confirmedOrderStockInfo,
   }) {
-    return confirmedOrderStockInfo(orderHistoryDetails, salesOrg,
-        customerCodeInfo, salesOrgConfig, priceAggregate);
+    return confirmedOrderStockInfo(orderHistoryDetails, priceAggregate);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisationConfigs config)? initialized,
     TResult? Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, DeliveryInfoData data)?
         submitOrder,
-    TResult? Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)?
+    TResult? Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
-    TResult? Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
   }) {
-    return confirmedOrderStockInfo?.call(orderHistoryDetails, salesOrg,
-        customerCodeInfo, salesOrgConfig, priceAggregate);
+    return confirmedOrderStockInfo?.call(orderHistoryDetails, priceAggregate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisationConfigs config)? initialized,
     TResult Function(
+            User user,
             ShipToInfo shipToInfo,
-            User user,
-            List<PriceAggregate> cartProducts,
-            double grandTotal,
-            double orderValue,
             CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation,
-            DeliveryInfoData data,
             OrderDocumentType orderDocumentType,
-            SalesOrganisationConfigs config)?
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, DeliveryInfoData data)?
         submitOrder,
-    TResult Function(
-            User user,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
-            List<PriceAggregate> priceAggregate)?
+    TResult Function(List<PriceAggregate> priceAggregate)?
         orderConfirmationDetail,
-    TResult Function(
-            OrderHistoryDetails orderHistoryDetails,
-            SalesOrg salesOrg,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisationConfigs salesOrgConfig,
+    TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
     required TResult orElse(),
   }) {
     if (confirmedOrderStockInfo != null) {
-      return confirmedOrderStockInfo(orderHistoryDetails, salesOrg,
-          customerCodeInfo, salesOrgConfig, priceAggregate);
+      return confirmedOrderStockInfo(orderHistoryDetails, priceAggregate);
     }
     return orElse();
   }
@@ -1429,16 +1124,10 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
 abstract class _ConfirmedOrderStockInfo implements OrderSummaryEvent {
   const factory _ConfirmedOrderStockInfo(
           {required final OrderHistoryDetails orderHistoryDetails,
-          required final SalesOrg salesOrg,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final SalesOrganisationConfigs salesOrgConfig,
           required final List<PriceAggregate> priceAggregate}) =
       _$_ConfirmedOrderStockInfo;
 
   OrderHistoryDetails get orderHistoryDetails;
-  SalesOrg get salesOrg;
-  CustomerCodeInfo get customerCodeInfo;
-  SalesOrganisationConfigs get salesOrgConfig;
   List<PriceAggregate> get priceAggregate;
   @JsonKey(ignore: true)
   _$$_ConfirmedOrderStockInfoCopyWith<_$_ConfirmedOrderStockInfo>
@@ -1455,6 +1144,14 @@ mixin _$OrderSummaryState {
       throw _privateConstructorUsedError;
   OrderHistoryDetails get orderHistoryDetails =>
       throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
+  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
+  OrderDocumentType get orderDocumentType => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get salesOrgConfig =>
+      throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
+  SalesOrg get salesOrg => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderSummaryStateCopyWith<OrderSummaryState> get copyWith =>
@@ -1472,10 +1169,23 @@ abstract class $OrderSummaryStateCopyWith<$Res> {
       bool isSubmitting,
       bool isConfirming,
       SubmitOrderResponse submitOrderResponse,
-      OrderHistoryDetails orderHistoryDetails});
+      OrderHistoryDetails orderHistoryDetails,
+      User user,
+      ShipToInfo shipToInfo,
+      CustomerCodeInfo customerCodeInfo,
+      OrderDocumentType orderDocumentType,
+      SalesOrganisationConfigs salesOrgConfig,
+      SalesOrganisation salesOrganisation,
+      SalesOrg salesOrg});
 
   $SubmitOrderResponseCopyWith<$Res> get submitOrderResponse;
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
+  $UserCopyWith<$Res> get user;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -1496,6 +1206,13 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
     Object? isConfirming = null,
     Object? submitOrderResponse = null,
     Object? orderHistoryDetails = null,
+    Object? user = null,
+    Object? shipToInfo = null,
+    Object? customerCodeInfo = null,
+    Object? orderDocumentType = null,
+    Object? salesOrgConfig = null,
+    Object? salesOrganisation = null,
+    Object? salesOrg = null,
   }) {
     return _then(_value.copyWith(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
@@ -1518,6 +1235,34 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
           ? _value.orderHistoryDetails
           : orderHistoryDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetails,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      orderDocumentType: null == orderDocumentType
+          ? _value.orderDocumentType
+          : orderDocumentType // ignore: cast_nullable_to_non_nullable
+              as OrderDocumentType,
+      salesOrgConfig: null == salesOrgConfig
+          ? _value.salesOrgConfig
+          : salesOrgConfig // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
     ) as $Val);
   }
 
@@ -1538,6 +1283,55 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
       return _then(_value.copyWith(orderHistoryDetails: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType {
+    return $OrderDocumentTypeCopyWith<$Res>(_value.orderDocumentType, (value) {
+      return _then(_value.copyWith(orderDocumentType: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
+        (value) {
+      return _then(_value.copyWith(salesOrgConfig: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1553,12 +1347,31 @@ abstract class _$$_OrderSummaryStateCopyWith<$Res>
       bool isSubmitting,
       bool isConfirming,
       SubmitOrderResponse submitOrderResponse,
-      OrderHistoryDetails orderHistoryDetails});
+      OrderHistoryDetails orderHistoryDetails,
+      User user,
+      ShipToInfo shipToInfo,
+      CustomerCodeInfo customerCodeInfo,
+      OrderDocumentType orderDocumentType,
+      SalesOrganisationConfigs salesOrgConfig,
+      SalesOrganisation salesOrganisation,
+      SalesOrg salesOrg});
 
   @override
   $SubmitOrderResponseCopyWith<$Res> get submitOrderResponse;
   @override
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
+  @override
+  $UserCopyWith<$Res> get user;
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  @override
+  $OrderDocumentTypeCopyWith<$Res> get orderDocumentType;
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -1577,6 +1390,13 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
     Object? isConfirming = null,
     Object? submitOrderResponse = null,
     Object? orderHistoryDetails = null,
+    Object? user = null,
+    Object? shipToInfo = null,
+    Object? customerCodeInfo = null,
+    Object? orderDocumentType = null,
+    Object? salesOrgConfig = null,
+    Object? salesOrganisation = null,
+    Object? salesOrg = null,
   }) {
     return _then(_$_OrderSummaryState(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
@@ -1599,6 +1419,34 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
           ? _value.orderHistoryDetails
           : orderHistoryDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetails,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      orderDocumentType: null == orderDocumentType
+          ? _value.orderDocumentType
+          : orderDocumentType // ignore: cast_nullable_to_non_nullable
+              as OrderDocumentType,
+      salesOrgConfig: null == salesOrgConfig
+          ? _value.salesOrgConfig
+          : salesOrgConfig // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
     ));
   }
 }
@@ -1611,7 +1459,14 @@ class _$_OrderSummaryState extends _OrderSummaryState {
       required this.isSubmitting,
       required this.isConfirming,
       required this.submitOrderResponse,
-      required this.orderHistoryDetails})
+      required this.orderHistoryDetails,
+      required this.user,
+      required this.shipToInfo,
+      required this.customerCodeInfo,
+      required this.orderDocumentType,
+      required this.salesOrgConfig,
+      required this.salesOrganisation,
+      required this.salesOrg})
       : super._();
 
   @override
@@ -1624,10 +1479,24 @@ class _$_OrderSummaryState extends _OrderSummaryState {
   final SubmitOrderResponse submitOrderResponse;
   @override
   final OrderHistoryDetails orderHistoryDetails;
+  @override
+  final User user;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final OrderDocumentType orderDocumentType;
+  @override
+  final SalesOrganisationConfigs salesOrgConfig;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isSubmitting: $isSubmitting, isConfirming: $isConfirming, submitOrderResponse: $submitOrderResponse, orderHistoryDetails: $orderHistoryDetails)';
+    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isSubmitting: $isSubmitting, isConfirming: $isConfirming, submitOrderResponse: $submitOrderResponse, orderHistoryDetails: $orderHistoryDetails, user: $user, shipToInfo: $shipToInfo, customerCodeInfo: $customerCodeInfo, orderDocumentType: $orderDocumentType, salesOrgConfig: $salesOrgConfig, salesOrganisation: $salesOrganisation, salesOrg: $salesOrg)';
   }
 
   @override
@@ -1645,12 +1514,37 @@ class _$_OrderSummaryState extends _OrderSummaryState {
             (identical(other.submitOrderResponse, submitOrderResponse) ||
                 other.submitOrderResponse == submitOrderResponse) &&
             (identical(other.orderHistoryDetails, orderHistoryDetails) ||
-                other.orderHistoryDetails == orderHistoryDetails));
+                other.orderHistoryDetails == orderHistoryDetails) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.orderDocumentType, orderDocumentType) ||
+                other.orderDocumentType == orderDocumentType) &&
+            (identical(other.salesOrgConfig, salesOrgConfig) ||
+                other.salesOrgConfig == salesOrgConfig) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, apiFailureOrSuccessOption,
-      isSubmitting, isConfirming, submitOrderResponse, orderHistoryDetails);
+  int get hashCode => Object.hash(
+      runtimeType,
+      apiFailureOrSuccessOption,
+      isSubmitting,
+      isConfirming,
+      submitOrderResponse,
+      orderHistoryDetails,
+      user,
+      shipToInfo,
+      customerCodeInfo,
+      orderDocumentType,
+      salesOrgConfig,
+      salesOrganisation,
+      salesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -1662,13 +1556,19 @@ class _$_OrderSummaryState extends _OrderSummaryState {
 
 abstract class _OrderSummaryState extends OrderSummaryState {
   const factory _OrderSummaryState(
-          {required final Option<Either<ApiFailure, dynamic>>
-              apiFailureOrSuccessOption,
-          required final bool isSubmitting,
-          required final bool isConfirming,
-          required final SubmitOrderResponse submitOrderResponse,
-          required final OrderHistoryDetails orderHistoryDetails}) =
-      _$_OrderSummaryState;
+      {required final Option<Either<ApiFailure, dynamic>>
+          apiFailureOrSuccessOption,
+      required final bool isSubmitting,
+      required final bool isConfirming,
+      required final SubmitOrderResponse submitOrderResponse,
+      required final OrderHistoryDetails orderHistoryDetails,
+      required final User user,
+      required final ShipToInfo shipToInfo,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final OrderDocumentType orderDocumentType,
+      required final SalesOrganisationConfigs salesOrgConfig,
+      required final SalesOrganisation salesOrganisation,
+      required final SalesOrg salesOrg}) = _$_OrderSummaryState;
   const _OrderSummaryState._() : super._();
 
   @override
@@ -1681,6 +1581,20 @@ abstract class _OrderSummaryState extends OrderSummaryState {
   SubmitOrderResponse get submitOrderResponse;
   @override
   OrderHistoryDetails get orderHistoryDetails;
+  @override
+  User get user;
+  @override
+  ShipToInfo get shipToInfo;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
+  @override
+  OrderDocumentType get orderDocumentType;
+  @override
+  SalesOrganisationConfigs get salesOrgConfig;
+  @override
+  SalesOrganisation get salesOrganisation;
+  @override
+  SalesOrg get salesOrg;
   @override
   @JsonKey(ignore: true)
   _$$_OrderSummaryStateCopyWith<_$_OrderSummaryState> get copyWith =>

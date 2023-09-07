@@ -42,7 +42,13 @@ void main() {
       act: (OrderSummaryBloc bloc) {
         bloc.add(
           OrderSummaryEvent.initialized(
-            config: SalesOrganisationConfigs.empty(),
+            user: User.empty(),
+            shipToInfo: ShipToInfo.empty(),
+            salesOrg: SalesOrg(''),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrgConfig: SalesOrganisationConfigs.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            orderDocumentType: OrderDocumentType.empty(),
           ),
         );
       },
@@ -142,27 +148,28 @@ void main() {
           (value) async => const Left(ApiFailure.other('Some Error')),
         );
       },
+      seed: () => OrderSummaryState.initial().copyWith(
+        user: User.empty().copyWith(email: EmailAddress('awsib@gmail.com')),
+        customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
+        shipToInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
+        salesOrgConfig: SalesOrganisationConfigs.empty()
+            .copyWith(currency: Currency('PHP')),
+        salesOrganisation:
+            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType(''), orderReason: ''),
+      ),
       build: () => OrderSummaryBloc(repository: orderRepositoryMock),
       act: (OrderSummaryBloc bloc) {
         bloc.add(
           OrderSummaryEvent.submitOrder(
-            shipToInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
-            user: User.empty().copyWith(email: EmailAddress('awsib@gmail.com')),
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 quantity: 2,
               )
             ],
             grandTotal: 100.0,
-            customerCodeInfo:
-                CustomerCodeInfo.empty().copyWith(division: 'div'),
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
             data: DeliveryInfoData.empty(),
-            orderDocumentType: OrderDocumentType.empty()
-                .copyWith(documentType: DocumentType(''), orderReason: ''),
-            config: SalesOrganisationConfigs.empty()
-                .copyWith(currency: Currency('PHP')),
             orderValue: 100.0,
           ),
         );
@@ -171,11 +178,29 @@ void main() {
         OrderSummaryState.initial().copyWith(
           apiFailureOrSuccessOption: none(),
           isSubmitting: true,
+          user: User.empty().copyWith(email: EmailAddress('awsib@gmail.com')),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
+          shipToInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
+          salesOrgConfig: SalesOrganisationConfigs.empty()
+              .copyWith(currency: Currency('PHP')),
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          orderDocumentType: OrderDocumentType.empty()
+              .copyWith(documentType: DocumentType(''), orderReason: ''),
         ),
         OrderSummaryState.initial().copyWith(
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Some Error'))),
           isSubmitting: false,
+          user: User.empty().copyWith(email: EmailAddress('awsib@gmail.com')),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(division: 'div'),
+          shipToInfo: ShipToInfo.empty().copyWith(city1: 'Kol'),
+          salesOrgConfig: SalesOrganisationConfigs.empty()
+              .copyWith(currency: Currency('PHP')),
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          orderDocumentType: OrderDocumentType.empty()
+              .copyWith(documentType: DocumentType(''), orderReason: ''),
         ),
       ],
     );

@@ -10,6 +10,13 @@ class OrderSummaryState with _$OrderSummaryState {
     required bool isConfirming,
     required SubmitOrderResponse submitOrderResponse,
     required OrderHistoryDetails orderHistoryDetails,
+    required User user,
+    required ShipToInfo shipToInfo,
+    required CustomerCodeInfo customerCodeInfo,
+    required OrderDocumentType orderDocumentType,
+    required SalesOrganisationConfigs salesOrgConfig,
+    required SalesOrganisation salesOrganisation,
+    required SalesOrg salesOrg,
   }) = _OrderSummaryState;
 
   factory OrderSummaryState.initial() => OrderSummaryState(
@@ -18,6 +25,13 @@ class OrderSummaryState with _$OrderSummaryState {
         isConfirming: false,
         submitOrderResponse: SubmitOrderResponse.empty(),
         orderHistoryDetails: OrderHistoryDetails.empty(),
+        user: User.empty(),
+        shipToInfo: ShipToInfo.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        orderDocumentType: OrderDocumentType.empty(),
+        salesOrgConfig: SalesOrganisationConfigs.empty(),
+        salesOrganisation: SalesOrganisation.empty(),
+        salesOrg: SalesOrg(''),
       );
 
   bool get isOrderHistoryDetailsEmpty =>

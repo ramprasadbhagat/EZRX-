@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
@@ -852,7 +853,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     //so that when EligibilityBloc update event is call bloc listner will
     //execute CartBloc fetch event
     context.read<EligibilityBloc>().add(const EligibilityEvent.initialized());
-    
+
     context.read<MaterialFilterBloc>().add(
           const MaterialFilterEvent.resetFilter(),
         );
@@ -896,6 +897,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           AllCreditsEvent.initialized(
             salesOrganisation: salesOrgState.salesOrganisation,
             customerCodeInfo: state.customerCodeInfo,
+          ),
+        );
+
+    context.read<OrderSummaryBloc>().add(
+          OrderSummaryEvent.initialized(
+            shipToInfo: shipToInfo,
+            user: user,
+            orderDocumentType: orderDocumentTypeState.selectedOrderType,
+            customerCodeInfo: customerCodeState.customerCodeInfo,
+            salesOrganisation: salesOrgState.salesOrganisation,
+            salesOrg: salesOrgState.salesOrg,
+            salesOrgConfig: salesOrgState.configs,
           ),
         );
 
@@ -1031,7 +1044,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context.read<CustomerCodeBloc>().state.customerCodeInfo,
             ),
           );
-
     } else {
       final user = context.read<UserBloc>().state.user;
       final customerCodeState = context.read<CustomerCodeBloc>().state;
