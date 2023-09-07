@@ -2,20 +2,15 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-import 'package:ezrxmobile/presentation/products/material_filter_page.dart';
+import 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
 import 'package:ezrxmobile/presentation/products/product_search_entry.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SearchAndFilter extends StatefulWidget {
+class SearchAndFilter extends StatelessWidget {
   const SearchAndFilter({Key? key}) : super(key: key);
 
-  @override
-  State<SearchAndFilter> createState() => _SearchAndFilterState();
-}
-
-class _SearchAndFilterState extends State<SearchAndFilter> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,9 +29,7 @@ class _SearchAndFilterState extends State<SearchAndFilter> {
                 current.selectedMaterialFilter,
             builder: (context, state) {
               return IconButton(
-                onPressed: () {
-                  _showFilterPage();
-                },
+                onPressed: () => _showFilterPage(context),
                 icon: state.selectedMaterialFilter == MaterialFilter.empty()
                     ? const Icon(
                         Icons.tune_outlined,
@@ -72,68 +65,63 @@ class _SearchAndFilterState extends State<SearchAndFilter> {
     );
   }
 
-  void _showFilterPage() {
+  void _showFilterPage(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       enableDrag: false,
       isDismissible: false,
       useSafeArea: true,
-      builder: (_) {
-        return const MaterialFilterSheet();
-      },
+      builder: (_) => const ProductFilterPage(),
     ).then((value) {
-      if (value != null) {
-        if (value is MaterialFilter) {
-          if (context
-                      .read<MaterialListBloc>()
-                      .state
-                      .selectedMaterialFilter
-                      .isFavourite !=
-                  value.isFavourite ||
-              context
-                      .read<MaterialListBloc>()
-                      .state
-                      .selectedMaterialFilter
-                      .bundleOffers !=
-                  value.bundleOffers ||
-              context
-                      .read<MaterialListBloc>()
-                      .state
-                      .selectedMaterialFilter
-                      .manufactureListSelected !=
-                  value.manufactureListSelected ||
-              context
-                      .read<MaterialListBloc>()
-                      .state
-                      .selectedMaterialFilter
-                      .countryListSelected !=
-                  value.countryListSelected ||
-              context
-                      .read<MaterialListBloc>()
-                      .state
-                      .selectedMaterialFilter
-                      .isProductOffer !=
-                  value.isProductOffer ||
-              context
-                      .read<MaterialListBloc>()
-                      .state
-                      .selectedMaterialFilter
-                      .sortBy !=
-                  value.sortBy) {
-            context.read<MaterialListBloc>().add(
-                  MaterialListEvent.fetch(
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    configs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
-                    selectedMaterialFilter: value,
-                  ),
-                );
-          }
+      if (value is MaterialFilter) {
+        if (context
+                    .read<MaterialListBloc>()
+                    .state
+                    .selectedMaterialFilter
+                    .isFavourite !=
+                value.isFavourite ||
+            context
+                    .read<MaterialListBloc>()
+                    .state
+                    .selectedMaterialFilter
+                    .bundleOffers !=
+                value.bundleOffers ||
+            context
+                    .read<MaterialListBloc>()
+                    .state
+                    .selectedMaterialFilter
+                    .manufactureListSelected !=
+                value.manufactureListSelected ||
+            context
+                    .read<MaterialListBloc>()
+                    .state
+                    .selectedMaterialFilter
+                    .countryListSelected !=
+                value.countryListSelected ||
+            context
+                    .read<MaterialListBloc>()
+                    .state
+                    .selectedMaterialFilter
+                    .isProductOffer !=
+                value.isProductOffer ||
+            context
+                    .read<MaterialListBloc>()
+                    .state
+                    .selectedMaterialFilter
+                    .sortBy !=
+                value.sortBy) {
+          context.read<MaterialListBloc>().add(
+                MaterialListEvent.fetch(
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                  configs: context.read<SalesOrgBloc>().state.configs,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                  selectedMaterialFilter: value,
+                ),
+              );
         }
       }
     });
