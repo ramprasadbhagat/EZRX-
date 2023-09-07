@@ -10,6 +10,8 @@ class AllCreditsState with _$AllCreditsState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
     required bool canLoadMore,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
   }) = _AllCreditsState;
 
   factory AllCreditsState.initial() => AllCreditsState(
@@ -18,5 +20,7 @@ class AllCreditsState with _$AllCreditsState {
         canLoadMore: true,
         appliedFilter: AllCreditsFilter.empty(),
         items: <CreditAndInvoiceItem>[],
+        salesOrganisation: SalesOrganisation.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
       );
 }

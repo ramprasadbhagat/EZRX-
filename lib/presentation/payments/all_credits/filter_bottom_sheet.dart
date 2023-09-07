@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -407,10 +405,6 @@ class _ResetButton extends StatelessWidget {
                           .appliedFilter
                           .searchKey,
                     ),
-                    salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
                   ),
                 );
           }
@@ -444,12 +438,6 @@ class _ApplyButton extends StatelessWidget {
               context.read<AllCreditsBloc>().add(
                     AllCreditsEvent.fetch(
                       appliedFilter: filterBloc.state.filter,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
                     ),
                   );
             }

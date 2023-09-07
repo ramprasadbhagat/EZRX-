@@ -87,29 +87,12 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
                             context.read<AllCreditsBloc>().add(
                                   AllCreditsEvent.fetch(
                                     appliedFilter: state.appliedFilter,
-                                    salesOrganisation: context
-                                        .read<SalesOrgBloc>()
-                                        .state
-                                        .salesOrganisation,
-                                    customerCodeInfo: context
-                                        .read<CustomerCodeBloc>()
-                                        .state
-                                        .customerCodeInfo,
                                   ),
                                 );
                           },
                           onLoadingMore: () {
                             context.read<AllCreditsBloc>().add(
-                                  AllCreditsEvent.loadMore(
-                                    salesOrganisation: context
-                                        .read<SalesOrgBloc>()
-                                        .state
-                                        .salesOrganisation,
-                                    customerCodeInfo: context
-                                        .read<CustomerCodeBloc>()
-                                        .state
-                                        .customerCodeInfo,
-                                  ),
+                                  const AllCreditsEvent.loadMore(),
                                 );
                           },
                           isLoading: state.isLoading,

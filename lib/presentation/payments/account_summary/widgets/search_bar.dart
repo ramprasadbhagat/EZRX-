@@ -86,10 +86,6 @@ class _SummarySearchBar extends StatelessWidget {
           : context.read<AllCreditsBloc>().add(
                 AllCreditsEvent.autoSearchProduct(
                   searchKey: SearchKey.searchFilter(searchKey),
-                  salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
                 ),
               );
 
@@ -117,10 +113,6 @@ class _SummarySearchBar extends StatelessWidget {
                     context.read<AllCreditsBloc>().state.appliedFilter.copyWith(
                           searchKey: SearchKey(searchKey),
                         ),
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
               ),
             );
   }

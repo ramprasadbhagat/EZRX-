@@ -43,8 +43,12 @@ void main() {
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
-        act: (AllCreditsBloc bloc) =>
-            bloc.add(const AllCreditsEvent.initialized()),
+        act: (AllCreditsBloc bloc) => bloc.add(
+          AllCreditsEvent.initialized(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
+        ),
         expect: () => [AllCreditsState.initial()],
       );
     },
@@ -59,6 +63,7 @@ void main() {
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
+        seed: () => AllCreditsState.initial(),
         setUp: () {
           when(
             () => repository.filterCredits(
@@ -74,13 +79,13 @@ void main() {
             ),
           );
         },
-        act: (AllCreditsBloc bloc) => bloc.add(
-          AllCreditsEvent.fetch(
-            appliedFilter: AllCreditsFilter.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-          ),
-        ),
+        act: (AllCreditsBloc bloc) {
+          bloc.add(
+            AllCreditsEvent.fetch(
+              appliedFilter: AllCreditsFilter.empty(),
+            ),
+          );
+        },
         expect: () => [
           AllCreditsState.initial().copyWith(
             isLoading: true,
@@ -100,6 +105,7 @@ void main() {
           allCreditsAndInvoicesRepository: repository,
           config: config,
         ),
+        seed: () => AllCreditsState.initial(),
         setUp: () {
           when(
             () => repository.filterCredits(
@@ -116,8 +122,6 @@ void main() {
         act: (AllCreditsBloc bloc) => bloc.add(
           AllCreditsEvent.fetch(
             appliedFilter: AllCreditsFilter.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
           ),
         ),
         expect: () => [
@@ -164,10 +168,7 @@ void main() {
         );
       },
       act: (AllCreditsBloc bloc) => bloc.add(
-        AllCreditsEvent.loadMore(
-          salesOrganisation: SalesOrganisation.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
-        ),
+        const AllCreditsEvent.loadMore(),
       ),
       expect: () => [
         AllCreditsState.initial().copyWith(
@@ -223,10 +224,7 @@ void main() {
         );
       },
       act: (AllCreditsBloc bloc) => bloc.add(
-        AllCreditsEvent.loadMore(
-          salesOrganisation: SalesOrganisation.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
-        ),
+        const AllCreditsEvent.loadMore(),
       ),
       expect: () => [
         AllCreditsState.initial().copyWith(

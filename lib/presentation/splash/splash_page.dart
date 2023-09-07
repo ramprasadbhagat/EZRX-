@@ -891,6 +891,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
 
+    context.read<AllCreditsBloc>().add(
+          AllCreditsEvent.initialized(
+            salesOrganisation: salesOrgState.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        );
+
     if (state.haveShipTo) {
       context.read<ReturnListByRequestBloc>().add(
             ReturnListByRequestEvent.initialized(
@@ -987,13 +994,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               appliedFilter: AllInvoicesFilter.empty(),
             ),
           );
+
       context.read<AllCreditsBloc>().add(
             AllCreditsEvent.fetch(
               appliedFilter: AllCreditsFilter.empty(),
-              salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
             ),
           );
 

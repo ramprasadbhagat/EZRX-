@@ -24,7 +24,12 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
     required this.config,
   }) : super(AllCreditsState.initial()) {
     on<_initialized>(
-      (event, emit) async => emit(AllCreditsState.initial()),
+      (event, emit) async => emit(
+        AllCreditsState.initial().copyWith(
+          salesOrganisation: event.salesOrganisation,
+          customerCodeInfo: event.customerCodeInfo,
+        ),
+      ),
     );
     on<_AutoSearchProduct>(
       (e, emit) {
@@ -32,8 +37,6 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
         if (e.searchKey.isValid()) {
           add(
             _Fetch(
-              salesOrganisation: e.salesOrganisation,
-              customerCodeInfo: e.customerCodeInfo,
               appliedFilter:
                   state.appliedFilter.copyWith(searchKey: e.searchKey),
             ),
@@ -64,8 +67,8 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
 
         final failureOrSuccess =
             await allCreditsAndInvoicesRepository.filterCredits(
-          salesOrganisation: e.salesOrganisation,
-          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
           filter: e.appliedFilter,
           pageSize: config.pageSize,
           offset: 0,
@@ -106,8 +109,8 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
 
         final failureOrSuccess =
             await allCreditsAndInvoicesRepository.filterCredits(
-          salesOrganisation: e.salesOrganisation,
-          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
           filter: state.appliedFilter,
           pageSize: config.pageSize,
           offset: state.items.length,

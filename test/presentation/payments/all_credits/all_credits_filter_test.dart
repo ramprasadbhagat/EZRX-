@@ -5,8 +5,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -283,13 +281,13 @@ void main() {
       await tester.tap(filterResetButton);
       await tester.pump();
       verify(
-        () => allCreditsBlocMock.add(
-          AllCreditsEvent.fetch(
-            appliedFilter: AllCreditsFilter.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-          ),
-        ),
+        () {
+          allCreditsBlocMock.add(
+            AllCreditsEvent.fetch(
+              appliedFilter: AllCreditsFilter.empty(),
+            ),
+          );
+        },
       ).called(1);
     });
 

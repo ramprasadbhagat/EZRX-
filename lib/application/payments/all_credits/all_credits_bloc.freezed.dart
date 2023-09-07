@@ -18,52 +18,32 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AllCreditsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        autoSearchProduct,
-    required TResult Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
-        loadMore,
+        initialized,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
+    required TResult Function(AllCreditsFilter appliedFilter) fetch,
+    required TResult Function() loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        autoSearchProduct,
-    TResult? Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
+    TResult? Function(AllCreditsFilter appliedFilter)? fetch,
+    TResult? Function()? loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        autoSearchProduct,
-    TResult Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
+    TResult Function(AllCreditsFilter appliedFilter)? fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,6 +97,12 @@ abstract class _$$_initializedCopyWith<$Res> {
   factory _$$_initializedCopyWith(
           _$_initialized value, $Res Function(_$_initialized) then) =
       __$$_initializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -126,86 +112,118 @@ class __$$_initializedCopyWithImpl<$Res>
   __$$_initializedCopyWithImpl(
       _$_initialized _value, $Res Function(_$_initialized) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
+  }) {
+    return _then(_$_initialized(
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_initialized implements _initialized {
-  const _$_initialized();
+  const _$_initialized(
+      {required this.salesOrganisation, required this.customerCodeInfo});
+
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
 
   @override
   String toString() {
-    return 'AllCreditsEvent.initialized()';
+    return 'AllCreditsEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_initialized);
+        (other.runtimeType == runtimeType &&
+            other is _$_initialized &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrganisation, customerCodeInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_initializedCopyWith<_$_initialized> get copyWith =>
+      __$$_initializedCopyWithImpl<_$_initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        autoSearchProduct,
-    required TResult Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
-        loadMore,
+        initialized,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
+    required TResult Function(AllCreditsFilter appliedFilter) fetch,
+    required TResult Function() loadMore,
   }) {
-    return initialized();
+    return initialized(salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        autoSearchProduct,
-    TResult? Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
+    TResult? Function(AllCreditsFilter appliedFilter)? fetch,
+    TResult? Function()? loadMore,
   }) {
-    return initialized?.call();
+    return initialized?.call(salesOrganisation, customerCodeInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        autoSearchProduct,
-    TResult Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
+    TResult Function(AllCreditsFilter appliedFilter)? fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized();
+      return initialized(salesOrganisation, customerCodeInfo);
     }
     return orElse();
   }
@@ -249,7 +267,15 @@ class _$_initialized implements _initialized {
 }
 
 abstract class _initialized implements AllCreditsEvent {
-  const factory _initialized() = _$_initialized;
+  const factory _initialized(
+      {required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_initialized;
+
+  SalesOrganisation get salesOrganisation;
+  CustomerCodeInfo get customerCodeInfo;
+  @JsonKey(ignore: true)
+  _$$_initializedCopyWith<_$_initialized> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -258,13 +284,7 @@ abstract class _$$_AutoSearchProductCopyWith<$Res> {
           $Res Function(_$_AutoSearchProduct) then) =
       __$$_AutoSearchProductCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {SearchKey searchKey,
-      SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerCodeInfo});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $Res call({SearchKey searchKey});
 }
 
 /// @nodoc
@@ -279,60 +299,27 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
   @override
   $Res call({
     Object? searchKey = null,
-    Object? salesOrganisation = null,
-    Object? customerCodeInfo = null,
   }) {
     return _then(_$_AutoSearchProduct(
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_AutoSearchProduct implements _AutoSearchProduct {
-  const _$_AutoSearchProduct(
-      {required this.searchKey,
-      required this.salesOrganisation,
-      required this.customerCodeInfo});
+  const _$_AutoSearchProduct({required this.searchKey});
 
   @override
   final SearchKey searchKey;
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
 
   @override
   String toString() {
-    return 'AllCreditsEvent.autoSearchProduct(searchKey: $searchKey, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
+    return 'AllCreditsEvent.autoSearchProduct(searchKey: $searchKey)';
   }
 
   @override
@@ -341,16 +328,11 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
         (other.runtimeType == runtimeType &&
             other is _$_AutoSearchProduct &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+                other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, searchKey, salesOrganisation, customerCodeInfo);
+  int get hashCode => Object.hash(runtimeType, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -362,63 +344,42 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        autoSearchProduct,
-    required TResult Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
-        loadMore,
+        initialized,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
+    required TResult Function(AllCreditsFilter appliedFilter) fetch,
+    required TResult Function() loadMore,
   }) {
-    return autoSearchProduct(searchKey, salesOrganisation, customerCodeInfo);
+    return autoSearchProduct(searchKey);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        autoSearchProduct,
-    TResult? Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
+    TResult? Function(AllCreditsFilter appliedFilter)? fetch,
+    TResult? Function()? loadMore,
   }) {
-    return autoSearchProduct?.call(
-        searchKey, salesOrganisation, customerCodeInfo);
+    return autoSearchProduct?.call(searchKey);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        autoSearchProduct,
-    TResult Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
+    TResult Function(AllCreditsFilter appliedFilter)? fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (autoSearchProduct != null) {
-      return autoSearchProduct(searchKey, salesOrganisation, customerCodeInfo);
+      return autoSearchProduct(searchKey);
     }
     return orElse();
   }
@@ -462,14 +423,10 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
 }
 
 abstract class _AutoSearchProduct implements AllCreditsEvent {
-  const factory _AutoSearchProduct(
-      {required final SearchKey searchKey,
-      required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_AutoSearchProduct;
+  const factory _AutoSearchProduct({required final SearchKey searchKey}) =
+      _$_AutoSearchProduct;
 
   SearchKey get searchKey;
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
   _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
       throw _privateConstructorUsedError;
@@ -480,14 +437,9 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {AllCreditsFilter appliedFilter,
-      SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerCodeInfo});
+  $Res call({AllCreditsFilter appliedFilter});
 
   $AllCreditsFilterCopyWith<$Res> get appliedFilter;
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -501,22 +453,12 @@ class __$$_FetchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? appliedFilter = null,
-    Object? salesOrganisation = null,
-    Object? customerCodeInfo = null,
   }) {
     return _then(_$_Fetch(
       appliedFilter: null == appliedFilter
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as AllCreditsFilter,
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
     ));
   }
 
@@ -527,42 +469,19 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(appliedFilter: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch(
-      {required this.appliedFilter,
-      required this.salesOrganisation,
-      required this.customerCodeInfo});
+  const _$_Fetch({required this.appliedFilter});
 
   @override
   final AllCreditsFilter appliedFilter;
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
 
   @override
   String toString() {
-    return 'AllCreditsEvent.fetch(appliedFilter: $appliedFilter, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
+    return 'AllCreditsEvent.fetch(appliedFilter: $appliedFilter)';
   }
 
   @override
@@ -571,16 +490,11 @@ class _$_Fetch implements _Fetch {
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
             (identical(other.appliedFilter, appliedFilter) ||
-                other.appliedFilter == appliedFilter) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+                other.appliedFilter == appliedFilter));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, appliedFilter, salesOrganisation, customerCodeInfo);
+  int get hashCode => Object.hash(runtimeType, appliedFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -591,62 +505,42 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        autoSearchProduct,
-    required TResult Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
-        loadMore,
+        initialized,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
+    required TResult Function(AllCreditsFilter appliedFilter) fetch,
+    required TResult Function() loadMore,
   }) {
-    return fetch(appliedFilter, salesOrganisation, customerCodeInfo);
+    return fetch(appliedFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        autoSearchProduct,
-    TResult? Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
+    TResult? Function(AllCreditsFilter appliedFilter)? fetch,
+    TResult? Function()? loadMore,
   }) {
-    return fetch?.call(appliedFilter, salesOrganisation, customerCodeInfo);
+    return fetch?.call(appliedFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        autoSearchProduct,
-    TResult Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
+    TResult Function(AllCreditsFilter appliedFilter)? fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(appliedFilter, salesOrganisation, customerCodeInfo);
+      return fetch(appliedFilter);
     }
     return orElse();
   }
@@ -690,14 +584,10 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements AllCreditsEvent {
-  const factory _Fetch(
-      {required final AllCreditsFilter appliedFilter,
-      required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_Fetch;
+  const factory _Fetch({required final AllCreditsFilter appliedFilter}) =
+      _$_Fetch;
 
   AllCreditsFilter get appliedFilter;
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -708,12 +598,6 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   factory _$$_LoadMoreCopyWith(
           _$_LoadMore value, $Res Function(_$_LoadMore) then) =
       __$$_LoadMoreCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -723,138 +607,66 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrganisation = null,
-    Object? customerCodeInfo = null,
-  }) {
-    return _then(_$_LoadMore(
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore(
-      {required this.salesOrganisation, required this.customerCodeInfo});
-
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
+  const _$_LoadMore();
 
   @override
   String toString() {
-    return 'AllCreditsEvent.loadMore(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
+    return 'AllCreditsEvent.loadMore()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_LoadMore &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+        (other.runtimeType == runtimeType && other is _$_LoadMore);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrganisation, customerCodeInfo);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        autoSearchProduct,
-    required TResult Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
-        loadMore,
+        initialized,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
+    required TResult Function(AllCreditsFilter appliedFilter) fetch,
+    required TResult Function() loadMore,
   }) {
-    return loadMore(salesOrganisation, customerCodeInfo);
+    return loadMore();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        autoSearchProduct,
-    TResult? Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
+    TResult? Function(AllCreditsFilter appliedFilter)? fetch,
+    TResult? Function()? loadMore,
   }) {
-    return loadMore?.call(salesOrganisation, customerCodeInfo);
+    return loadMore?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SearchKey searchKey, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        autoSearchProduct,
-    TResult Function(
-            AllCreditsFilter appliedFilter,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
+    TResult Function(AllCreditsFilter appliedFilter)? fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(salesOrganisation, customerCodeInfo);
+      return loadMore();
     }
     return orElse();
   }
@@ -898,15 +710,7 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements AllCreditsEvent {
-  const factory _LoadMore(
-      {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_LoadMore;
-
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerCodeInfo;
-  @JsonKey(ignore: true)
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _LoadMore() = _$_LoadMore;
 }
 
 /// @nodoc
@@ -917,6 +721,8 @@ mixin _$AllCreditsState {
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AllCreditsStateCopyWith<AllCreditsState> get copyWith =>
@@ -934,9 +740,13 @@ abstract class $AllCreditsStateCopyWith<$Res> {
       List<CreditAndInvoiceItem> items,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
-      bool canLoadMore});
+      bool canLoadMore,
+      SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo});
 
   $AllCreditsFilterCopyWith<$Res> get appliedFilter;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -957,6 +767,8 @@ class _$AllCreditsStateCopyWithImpl<$Res, $Val extends AllCreditsState>
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
     Object? canLoadMore = null,
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
   }) {
     return _then(_value.copyWith(
       appliedFilter: null == appliedFilter
@@ -979,6 +791,14 @@ class _$AllCreditsStateCopyWithImpl<$Res, $Val extends AllCreditsState>
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
     ) as $Val);
   }
 
@@ -987,6 +807,22 @@ class _$AllCreditsStateCopyWithImpl<$Res, $Val extends AllCreditsState>
   $AllCreditsFilterCopyWith<$Res> get appliedFilter {
     return $AllCreditsFilterCopyWith<$Res>(_value.appliedFilter, (value) {
       return _then(_value.copyWith(appliedFilter: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
     });
   }
 }
@@ -1004,10 +840,16 @@ abstract class _$$_AllCreditsStateCopyWith<$Res>
       List<CreditAndInvoiceItem> items,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
-      bool canLoadMore});
+      bool canLoadMore,
+      SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo});
 
   @override
   $AllCreditsFilterCopyWith<$Res> get appliedFilter;
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -1026,6 +868,8 @@ class __$$_AllCreditsStateCopyWithImpl<$Res>
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
     Object? canLoadMore = null,
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
   }) {
     return _then(_$_AllCreditsState(
       appliedFilter: null == appliedFilter
@@ -1048,6 +892,14 @@ class __$$_AllCreditsStateCopyWithImpl<$Res>
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
     ));
   }
 }
@@ -1060,7 +912,9 @@ class _$_AllCreditsState extends _AllCreditsState {
       required final List<CreditAndInvoiceItem> items,
       required this.failureOrSuccessOption,
       required this.isLoading,
-      required this.canLoadMore})
+      required this.canLoadMore,
+      required this.salesOrganisation,
+      required this.customerCodeInfo})
       : _items = items,
         super._();
 
@@ -1080,10 +934,14 @@ class _$_AllCreditsState extends _AllCreditsState {
   final bool isLoading;
   @override
   final bool canLoadMore;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
 
   @override
   String toString() {
-    return 'AllCreditsState(appliedFilter: $appliedFilter, items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore)';
+    return 'AllCreditsState(appliedFilter: $appliedFilter, items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
   }
 
   @override
@@ -1099,7 +957,11 @@ class _$_AllCreditsState extends _AllCreditsState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.canLoadMore, canLoadMore) ||
-                other.canLoadMore == canLoadMore));
+                other.canLoadMore == canLoadMore) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo));
   }
 
   @override
@@ -1109,7 +971,9 @@ class _$_AllCreditsState extends _AllCreditsState {
       const DeepCollectionEquality().hash(_items),
       failureOrSuccessOption,
       isLoading,
-      canLoadMore);
+      canLoadMore,
+      salesOrganisation,
+      customerCodeInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -1124,7 +988,9 @@ abstract class _AllCreditsState extends AllCreditsState {
       required final List<CreditAndInvoiceItem> items,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
-      required final bool canLoadMore}) = _$_AllCreditsState;
+      required final bool canLoadMore,
+      required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_AllCreditsState;
   const _AllCreditsState._() : super._();
 
   @override
@@ -1137,6 +1003,10 @@ abstract class _AllCreditsState extends AllCreditsState {
   bool get isLoading;
   @override
   bool get canLoadMore;
+  @override
+  SalesOrganisation get salesOrganisation;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
   @override
   @JsonKey(ignore: true)
   _$$_AllCreditsStateCopyWith<_$_AllCreditsState> get copyWith =>
