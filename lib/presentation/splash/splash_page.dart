@@ -40,6 +40,7 @@ import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.da
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -583,6 +584,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             context.read<DeepLinkingBloc>().add(
                   const DeepLinkingEvent.initialize(),
                 );
+            context.read<MaterialListBloc>().add(
+                  MaterialListEvent.fetch(
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                    configs: context.read<SalesOrgBloc>().state.configs,
+                    customerCodeInfo:
+                        context.read<EligibilityBloc>().state.customerCodeInfo,
+                    shipToInfo:
+                        context.read<EligibilityBloc>().state.shipToInfo,
+                    selectedMaterialFilter: MaterialFilter.empty(),
+                  ),
+                );
           },
         ),
         BlocListener<DeepLinkingBloc, DeepLinkingState>(
@@ -669,6 +682,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         userInfo: context.read<UserBloc>().state.user,
                       ),
                     );
+
                 context.read<ProductSearchBloc>().add(
                       const ProductSearchEvent
                           .fetchProductSearchSuggestionHistory(),
@@ -832,6 +846,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     final customerCodeState = context.read<CustomerCodeBloc>().state;
     final user = context.read<UserBloc>().state.user;
     final shipToInfo = context.read<CustomerCodeBloc>().state.shipToInfo;
+
+    //need to initialize the eligibity bloc
+    //so that when EligibilityBloc update event is call bloc listner will
+    //execute CartBloc fetch event
+    context.read<EligibilityBloc>().add(const EligibilityEvent.initialized());
+    
     context.read<MaterialFilterBloc>().add(
           const MaterialFilterEvent.resetFilter(),
         );
@@ -881,6 +901,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               customerCodeInfo: customerCodeState.customerCodeInfo,
             ),
           );
+
       context.read<CartBloc>().add(
             CartEvent.initialized(
               salesOrganisationConfigs: salesOrgState.configs,

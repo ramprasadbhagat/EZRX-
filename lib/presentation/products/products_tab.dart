@@ -81,7 +81,8 @@ class ProductsTab extends StatelessWidget {
                               item.type.typeMaterial
                                   ? MaterialGridItem(
                                       materialInfo: item,
-                                      onTap: () => _productOnTap(context, item),
+                                      onTap: () =>
+                                          _productOnTap(context, item),
                                       onFavouriteTap: () =>
                                           onFavouriteTap(context, item),
                                     )
