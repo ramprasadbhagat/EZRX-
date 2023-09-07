@@ -25,6 +25,10 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/widgets/view_by_order_item_group.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/widgets/view_by_order_item.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/widgets/invoice_number.dart';
+
 class ViewByItemsPage extends StatelessWidget {
   const ViewByItemsPage({
     Key? key,
@@ -100,153 +104,6 @@ class ViewByItemsPage extends StatelessWidget {
               state.orderHistoryList.orderHistoryItems.getViewByOrderItemList,
         );
       },
-    );
-  }
-}
-
-class _ViewByOrderItemGroup extends StatelessWidget {
-  final ViewByItemGroup orderHistoryItem;
-  final bool showDivider;
-  const _ViewByOrderItemGroup({
-    Key? key,
-    required this.orderHistoryItem,
-    required this.showDivider,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (showDivider)
-          const Divider(
-            indent: 0,
-            height: 20,
-            endIndent: 0,
-            color: ZPColors.lightGray2,
-          ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: Text(
-                  '${'Ordered on'.tr()} ${orderHistoryItem.createdDate.dateString}',
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: ZPColors.darkerGrey,
-                      ),
-                ),
-              ),
-              Column(
-                children: orderHistoryItem.orderHistoryItem.map((e) {
-                  return _ViewByOrderItem(
-                    orderHistoryItem: e,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    orderHistoryBasicInfo: context
-                        .read<ViewByItemsBloc>()
-                        .state
-                        .orderHistoryList
-                        .orderBasicInformation,
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _ViewByOrderItem extends StatelessWidget {
-  final OrderHistoryItem orderHistoryItem;
-  final CustomerCodeInfo customerCodeInfo;
-  final OrderHistoryBasicInfo orderHistoryBasicInfo;
-
-  const _ViewByOrderItem({
-    Key? key,
-    required this.orderHistoryItem,
-    required this.customerCodeInfo,
-    required this.orderHistoryBasicInfo,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.read<ViewByItemDetailsBloc>().add(
-              ViewByItemDetailsEvent.fetch(
-                orderNumber: orderHistoryItem.orderNumber,
-                salesOrganisation:
-                    context.read<EligibilityBloc>().state.salesOrganisation,
-                user: context.read<UserBloc>().state.user,
-                materialNumber: orderHistoryItem.materialNumber,
-                soldTo: customerCodeInfo,
-                disableDeliveryDateForZyllemStatus: context
-                    .read<EligibilityBloc>()
-                    .state
-                    .salesOrgConfigs
-                    .disableDeliveryDate,
-              ),
-            );
-
-        context.router.push(
-          const ViewByItemDetailsPageRoute(),
-        );
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CommonTileItem(
-            label: orderHistoryItem.materialNumber.displayMatNo,
-            title: orderHistoryItem.materialDescription,
-            subtitle: orderHistoryItem.manufactureName,
-            headerText:
-                '${'Order'.tr()} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
-            statusWidget: StatusLabel(
-              status: StatusType(
-                orderHistoryItem.status.displayOrderStatus,
-              ),
-            ),
-            quantity: orderHistoryItem.qty.toString(),
-            footerWidget: orderHistoryItem.invoiceNumber.isNotEmpty
-                ? _InvoiceNumber(
-                    orderHistoryItem: orderHistoryItem,
-                  )
-                : null,
-            materialNumber: orderHistoryItem.materialNumber,
-            isQuantityBelowImage: false,
-            isQuantityRequired: true,
-            statusTag: orderHistoryItem.productTag,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _InvoiceNumber extends StatelessWidget {
-  final OrderHistoryItem orderHistoryItem;
-  const _InvoiceNumber({Key? key, required this.orderHistoryItem})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Divider(
-          color: ZPColors.accentColor,
-          height: 15,
-          indent: 0,
-          endIndent: 0,
-        ),
-        Text(
-          '${'Invoice'.tr()} #${orderHistoryItem.invoiceNumber}',
-          style: Theme.of(context).textTheme.labelSmall,
-        ),
-      ],
     );
   }
 }
