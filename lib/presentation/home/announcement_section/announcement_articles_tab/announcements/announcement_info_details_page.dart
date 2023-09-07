@@ -17,6 +17,9 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
+part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_bottom_sheet.dart';
+part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_item_description.dart';
+part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_title_section.dart';
 
 const offSet = 60.0;
 
@@ -115,29 +118,27 @@ class _AnnouncementInfoDetailsPageState
                                 imageUrl:
                                     state.announcementInfoDetails.thumbnail,
                                 errorWidget: const NoRecordFound(
-                                    svgImage: SvgImage.noImageAvailable,
-                                    title: 'Image not available',
-                                    subTitle: '',
-                                  ),
+                                  svgImage: SvgImage.noImageAvailable,
+                                  title: 'Image not available',
+                                  subTitle: '',
+                                ),
                               ),
                             ),
-                            _isBackButtonEnableForAppbar
-                                ? const SizedBox.shrink()
-                                : IconButton(
-                                    key: WidgetKeys
-                                        .announcementDetailsBackButton,
-                                    onPressed: () => context.router.pop(),
-                                    icon: const CircleAvatar(
-                                      maxRadius: 13,
-                                      backgroundColor: ZPColors
-                                          .defaultReturnSummaryStatusColor,
-                                      child: Icon(
-                                        Icons.arrow_back_ios_new_rounded,
-                                        size: 15,
-                                        color: ZPColors.white,
-                                      ),
-                                    ),
+                            if (!_isBackButtonEnableForAppbar)
+                              IconButton(
+                                key: WidgetKeys.announcementDetailsBackButton,
+                                onPressed: () => context.router.pop(),
+                                icon: const CircleAvatar(
+                                  maxRadius: 13,
+                                  backgroundColor:
+                                      ZPColors.defaultReturnSummaryStatusColor,
+                                  child: Icon(
+                                    Icons.arrow_back_ios_new_rounded,
+                                    size: 15,
+                                    color: ZPColors.white,
                                   ),
+                                ),
+                              ),
                           ],
                         ),
                         centerTitle: false,
@@ -156,7 +157,7 @@ class _AnnouncementInfoDetailsPageState
                                 : const SizedBox.shrink(),
                             centerTitle: false,
                             leadingWidth: _isBackButtonEnableForAppbar ? 20 : 0,
-                            title: _TitleSection(
+                            title: _AnnouncementInfoTitleSection(
                               details: state.announcementInfoDetails,
                             ),
                           ),
@@ -190,7 +191,7 @@ class _AnnouncementInfoDetailsPageState
                                 ],
                               ),
                             ),
-                            _BottomSheet(
+                            _AnnouncementInfoBottomSheet(
                               isLoading: state.isLoading,
                               changeState: _changeStateOnMovingToNewDetails,
                             ),
@@ -212,245 +213,6 @@ class _AnnouncementInfoDetailsPageState
                   ),
                 )
               : const SizedBox.shrink(),
-        );
-      },
-    );
-  }
-}
-
-class _TitleSection extends StatelessWidget {
-  const _TitleSection({
-    Key? key,
-    required this.details,
-  }) : super(key: key);
-
-  final AnnouncementInfoDetails details;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    FittedBox(
-                      child: Text(
-                        details.publishedDate.dateOrDashString,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: ZPColors.neutralsGrey1,
-                              fontSize: 10,
-                            ),
-                      ),
-                    ),
-                    details.title.isNotEmpty
-                        ? FittedBox(
-                            child: Text(
-                              details.title,
-                              style: Theme.of(context).textTheme.labelSmall,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.left,
-                            ),
-                          )
-                        : const SizedBox.shrink(),
-                    details.sourceAndOrAuthorLabel.isNotEmpty
-                        ? FittedBox(
-                            child: Text(
-                              details.sourceAndOrAuthorLabel,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    color: ZPColors.neutralsGrey1,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                            ),
-                          )
-                        : const SizedBox.shrink(),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 2,
-                ),
-                decoration: const BoxDecoration(
-                  color: ZPColors.skyBlueColor,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                child: Text(
-                  'New'.tr(),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.whiteBgCard,
-                        fontSize: 10,
-                      ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ItemDescription extends StatelessWidget {
-  final String title;
-  final String description;
-  final DateTimeStringValue publishedDate;
-  const _ItemDescription({
-    Key? key,
-    required this.title,
-    required this.publishedDate,
-    required this.description,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            publishedDate.dateOrDashString,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall
-                ?.copyWith(color: ZPColors.extraLightGrey4, fontSize: 10),
-          ),
-          Text(
-            title,
-            maxLines: Responsive.isMobile(context) ? 2 : 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: ZPColors.neutralsBlack,
-                ),
-          ),
-          Text(
-            description,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: ZPColors.extraLightGrey4,
-                ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _BottomSheet extends StatelessWidget {
-  const _BottomSheet({
-    Key? key,
-    required this.isLoading,
-    required this.changeState,
-  }) : super(key: key);
-
-  final bool isLoading;
-  final Function changeState;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AnnouncementInfoBloc, AnnouncementInfoState>(
-      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
-      builder: (context, state) {
-        return Container(
-          height: 175,
-          color: ZPColors.whiteBgCard,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Text(
-                  'Other Announcements'.tr(),
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: ZPColors.neutralsBlack,
-                      ),
-                ),
-              ),
-              SizedBox(
-                height: 140,
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: state.announcementInfo.announcementList.length,
-                  itemBuilder: (context, index) {
-                    final currentAnnouncement =
-                        state.announcementInfo.announcementList[index];
-
-                    return currentAnnouncement.id ==
-                            context
-                                .read<AnnouncementInfoDetailsBloc>()
-                                .state
-                                .announcementInfoDetails
-                                .id
-                        ? const SizedBox.shrink()
-                        : LoadingShimmer.withChild(
-                            enabled: isLoading,
-                            child: GestureDetector(
-                              key: WidgetKeys.announcementDetailsItem(
-                                index.toString(),
-                              ),
-                              onTap: () {
-                                changeState();
-                                context.read<AnnouncementInfoDetailsBloc>().add(
-                                      AnnouncementInfoDetailsEvent.fetch(
-                                        itemId: currentAnnouncement.id,
-                                        salesOrg: context
-                                            .read<SalesOrgBloc>()
-                                            .state
-                                            .salesOrg,
-                                      ),
-                                    );
-                              },
-                              child: CustomCard(
-                                showBorder: true,
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                margin: const EdgeInsets.all(8),
-                                clipBehavior: Clip.antiAlias,
-                                child: _ItemDescription(
-                                  title: currentAnnouncement.title,
-                                  description: currentAnnouncement.summary,
-                                  publishedDate:
-                                      currentAnnouncement.publishedDate,
-                                ),
-                              ),
-                            ),
-                          );
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-            ],
-          ),
         );
       },
     );

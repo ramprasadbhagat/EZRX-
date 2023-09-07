@@ -28,6 +28,15 @@ class AnnouncementArticleInfo with _$AnnouncementArticleInfo {
             (element) => element.isSearchKeyMatching(searchKey),
           )
           .toList();
+
+  List<AnnouncementArticleItem> filterAnnouncementListWithoutId(
+    String announcementInfoId,
+  ) =>
+      announcementList
+          .where(
+            (element) => element.id != announcementInfoId,
+          )
+          .toList();
 }
 
 @freezed
