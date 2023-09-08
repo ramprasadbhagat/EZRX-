@@ -139,15 +139,8 @@ class _FilterElement extends StatelessWidget {
     if (context.read<ViewByItemsBloc>().state.appliedFilter != filter) {
       context.read<ViewByItemsBloc>().add(
             ViewByItemsEvent.fetch(
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-              user: context.read<UserBloc>().state.user,
               viewByItemFilter: filter,
               searchKey: context.read<ViewByItemsBloc>().state.searchKey,
-              salesOrganisation:
-                  context.read<EligibilityBloc>().state.salesOrganisation,
             ),
           );
     }

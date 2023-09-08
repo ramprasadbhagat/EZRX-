@@ -28,20 +28,25 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
     required this.viewByItemRepository,
     required this.config,
   }) : super(ViewByItemsState.initial()) {
-    on<_Initialized>((event, emit) => emit(ViewByItemsState.initial()));
+    on<_Initialized>(
+      (e, emit) => emit(
+        ViewByItemsState.initial().copyWith(
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrgConfigs: e.salesOrgConfigs,
+          shipToInfo: e.shipToInfo,
+          user: e.user,
+          salesOrganisation: e.salesOrganisation,
+        ),
+      ),
+    );
     on<_AutoSearchProduct>(
       (e, emit) {
         if (e.searchKey == state.searchKey) return;
         if (e.searchKey.isValid()) {
           add(
             _Fetch(
-              customerCodeInfo: e.customerCodeInfo,
-              salesOrgConfigs: e.salesOrgConfigs,
-              shipToInfo: e.shipToInfo,
-              user: e.user,
               viewByItemFilter: e.viewByItemFilter,
               searchKey: e.searchKey,
-              salesOrganisation: e.salesOrganisation,
             ),
           );
         } else {
@@ -68,15 +73,15 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
         );
 
         final failureOrSuccess = await viewByItemRepository.getViewByItems(
-          salesOrgConfig: e.salesOrgConfigs,
-          soldTo: e.customerCodeInfo,
-          shipTo: e.shipToInfo,
-          user: e.user,
+          salesOrgConfig: state.salesOrgConfigs,
+          soldTo: state.customerCodeInfo,
+          shipTo: state.shipToInfo,
+          user: state.user,
           pageSize: config.pageSize,
           offset: 0,
           viewByItemFilter: e.viewByItemFilter,
           searchKey: e.searchKey,
-          salesOrganisation: e.salesOrganisation,
+          salesOrganisation: state.salesOrganisation,
         );
 
         failureOrSuccess.fold(
@@ -109,15 +114,15 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
       emit(state.copyWith(isFetching: true, failureOrSuccessOption: none()));
 
       final failureOrSuccess = await viewByItemRepository.getViewByItems(
-        salesOrgConfig: e.salesOrgConfigs,
-        soldTo: e.customerCodeInfo,
-        shipTo: e.shipToInfo,
-        user: e.user,
+        salesOrgConfig: state.salesOrgConfigs,
+        soldTo: state.customerCodeInfo,
+        shipTo: state.shipToInfo,
+        user: state.user,
         pageSize: config.pageSize,
         offset: state.orderHistoryList.orderHistoryItems.length,
         viewByItemFilter: state.appliedFilter,
         searchKey: state.searchKey,
-        salesOrganisation: e.salesOrganisation,
+        salesOrganisation: state.salesOrganisation,
       );
 
       failureOrSuccess.fold(

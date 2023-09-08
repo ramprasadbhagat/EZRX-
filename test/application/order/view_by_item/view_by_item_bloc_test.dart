@@ -67,6 +67,14 @@ void main() {
         viewByItemRepository: viewByItemRepository,
         config: config,
       ),
+      seed: () => ViewByItemsState.initial().copyWith(
+        salesOrgConfigs: salesOrgConfig,
+        customerCodeInfo: customerCodeInfo,
+        shipToInfo: shipToInfo,
+        user: user,
+        salesOrganisation:
+            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+      ),
       setUp: () {
         when(
           () => viewByItemRepository.getViewByItems(
@@ -78,7 +86,7 @@ void main() {
             soldTo: customerCodeInfo,
             user: user,
             viewByItemFilter: viewByItemFilter,
-              salesOrganisation:
+            salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           ),
         ).thenAnswer(
@@ -89,18 +97,18 @@ void main() {
       },
       act: (bloc) => bloc.add(
         ViewByItemsEvent.fetch(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
           viewByItemFilter: viewByItemFilter,
           searchKey: searchKey,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
         ),
       ),
       expect: () => [
         ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           isFetching: true,
           orderHistoryList: OrderHistory.empty(),
           nextPageIndex: 0,
@@ -109,6 +117,12 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -127,6 +141,14 @@ void main() {
         viewByItemRepository: viewByItemRepository,
         config: config,
       ),
+      seed: () => ViewByItemsState.initial().copyWith(
+        salesOrgConfigs: salesOrgConfig,
+        customerCodeInfo: customerCodeInfo,
+        shipToInfo: shipToInfo,
+        user: user,
+        salesOrganisation:
+            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+      ),
       setUp: () {
         when(
           () => viewByItemRepository.getViewByItems(
@@ -138,7 +160,7 @@ void main() {
             soldTo: customerCodeInfo,
             user: user,
             viewByItemFilter: viewByItemFilter,
-              salesOrganisation:
+            salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           ),
         ).thenAnswer(
@@ -149,18 +171,18 @@ void main() {
       },
       act: (bloc) => bloc.add(
         ViewByItemsEvent.fetch(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
           viewByItemFilter: viewByItemFilter,
           searchKey: searchKey,
-            salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
         ),
       ),
       expect: () => [
         ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           isFetching: true,
           orderHistoryList: OrderHistory.empty(),
           nextPageIndex: 0,
@@ -170,6 +192,12 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           failureOrSuccessOption: optionOf(
             Right(
               orderHistoryMockData,
@@ -195,6 +223,12 @@ void main() {
         appliedFilter: viewByItemFilter,
         orderHistoryList: orderHistoryMockData,
         searchKey: searchKey,
+        salesOrgConfigs: salesOrgConfig,
+        customerCodeInfo: customerCodeInfo,
+        shipToInfo: shipToInfo,
+        user: user,
+        salesOrganisation:
+            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
       ),
       setUp: () {
         when(
@@ -207,7 +241,7 @@ void main() {
             soldTo: customerCodeInfo,
             user: user,
             viewByItemFilter: viewByItemFilter,
-              salesOrganisation:
+            salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           ),
         ).thenAnswer(
@@ -217,17 +251,16 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        ViewByItemsEvent.loadMore(
+        const ViewByItemsEvent.loadMore(),
+      ),
+      expect: () => [
+        ViewByItemsState.initial().copyWith(
           salesOrgConfigs: salesOrgConfig,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           user: user,
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-        ),
-      ),
-      expect: () => [
-        ViewByItemsState.initial().copyWith(
           isFetching: true,
           nextPageIndex: 0,
           canLoadMore: true,
@@ -237,6 +270,12 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           failureOrSuccessOption: optionOf(
             Right(
               orderHistoryMockData,
@@ -264,6 +303,12 @@ void main() {
         config: config,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
+        salesOrgConfigs: salesOrgConfig,
+        customerCodeInfo: customerCodeInfo,
+        shipToInfo: shipToInfo,
+        user: user,
+        salesOrganisation:
+            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
         appliedFilter: viewByItemFilter,
         orderHistoryList: orderHistoryMockData,
         searchKey: searchKey,
@@ -279,7 +324,7 @@ void main() {
             soldTo: customerCodeInfo,
             user: user,
             viewByItemFilter: viewByItemFilter,
-              salesOrganisation:
+            salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           ),
         ).thenAnswer(
@@ -287,17 +332,16 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        ViewByItemsEvent.loadMore(
+        const ViewByItemsEvent.loadMore(),
+      ),
+      expect: () => [
+        ViewByItemsState.initial().copyWith(
           salesOrgConfigs: salesOrgConfig,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           user: user,
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-        ),
-      ),
-      expect: () => [
-        ViewByItemsState.initial().copyWith(
           isFetching: true,
           nextPageIndex: 0,
           canLoadMore: true,
@@ -307,6 +351,12 @@ void main() {
           searchKey: searchKey,
         ),
         ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),

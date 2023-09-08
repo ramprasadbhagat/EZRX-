@@ -18,94 +18,54 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ViewByItemsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)
+        initialized,
+    required TResult Function(
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         autoSearchProduct,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) =>
@@ -163,6 +123,19 @@ abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisationConfigs salesOrgConfigs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      SalesOrganisation salesOrganisation});
+
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -172,129 +145,199 @@ class __$$_InitializedCopyWithImpl<$Res>
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrgConfigs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? user = null,
+    Object? salesOrganisation = null,
+  }) {
+    return _then(_$_Initialized(
+      salesOrgConfigs: null == salesOrgConfigs
+          ? _value.salesOrgConfigs
+          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
+        (value) {
+      return _then(_value.copyWith(salesOrgConfigs: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+  const _$_Initialized(
+      {required this.salesOrgConfigs,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.user,
+      required this.salesOrganisation});
+
+  @override
+  final SalesOrganisationConfigs salesOrgConfigs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final User user;
+  @override
+  final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'ViewByItemsEvent.initialized()';
+    return 'ViewByItemsEvent.initialized(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrganisation: $salesOrganisation)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
+                other.salesOrgConfigs == salesOrgConfigs) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, salesOrgConfigs,
+      customerCodeInfo, shipToInfo, user, salesOrganisation);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)
+        initialized,
+    required TResult Function(
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         autoSearchProduct,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) {
-    return initialized();
+    return initialized(
+        salesOrgConfigs, customerCodeInfo, shipToInfo, user, salesOrganisation);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) {
-    return initialized?.call();
+    return initialized?.call(
+        salesOrgConfigs, customerCodeInfo, shipToInfo, user, salesOrganisation);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized();
+      return initialized(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
+          salesOrganisation);
     }
     return orElse();
   }
@@ -341,7 +384,21 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements ViewByItemsEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized(
+      {required final SalesOrganisationConfigs salesOrgConfigs,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final User user,
+      required final SalesOrganisation salesOrganisation}) = _$_Initialized;
+
+  SalesOrganisationConfigs get salesOrgConfigs;
+  CustomerCodeInfo get customerCodeInfo;
+  ShipToInfo get shipToInfo;
+  User get user;
+  SalesOrganisation get salesOrganisation;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -349,21 +406,9 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {SalesOrganisationConfigs salesOrgConfigs,
-      CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      User user,
-      ViewByItemFilter viewByItemFilter,
-      SearchKey searchKey,
-      SalesOrganisation salesOrganisation});
+  $Res call({ViewByItemFilter viewByItemFilter, SearchKey searchKey});
 
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
-  $UserCopyWith<$Res> get user;
   $ViewByItemFilterCopyWith<$Res> get viewByItemFilter;
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -376,31 +421,10 @@ class __$$_FetchCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrgConfigs = null,
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
-    Object? user = null,
     Object? viewByItemFilter = null,
     Object? searchKey = null,
-    Object? salesOrganisation = null,
   }) {
     return _then(_$_Fetch(
-      salesOrgConfigs: null == salesOrgConfigs
-          ? _value.salesOrgConfigs
-          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
       viewByItemFilter: null == viewByItemFilter
           ? _value.viewByItemFilter
           : viewByItemFilter // ignore: cast_nullable_to_non_nullable
@@ -409,44 +433,7 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
-        (value) {
-      return _then(_value.copyWith(salesOrgConfigs: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
   }
 
   @override
@@ -456,46 +443,21 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(viewByItemFilter: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch(
-      {required this.salesOrgConfigs,
-      required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.user,
-      required this.viewByItemFilter,
-      required this.searchKey,
-      required this.salesOrganisation});
+  const _$_Fetch({required this.viewByItemFilter, required this.searchKey});
 
-  @override
-  final SalesOrganisationConfigs salesOrgConfigs;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
-  final User user;
   @override
   final ViewByItemFilter viewByItemFilter;
   @override
   final SearchKey searchKey;
-  @override
-  final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'ViewByItemsEvent.fetch(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, viewByItemFilter: $viewByItemFilter, searchKey: $searchKey, salesOrganisation: $salesOrganisation)';
+    return 'ViewByItemsEvent.fetch(viewByItemFilter: $viewByItemFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -503,31 +465,14 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
-                other.salesOrgConfigs == salesOrgConfigs) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.user, user) || other.user == user) &&
             (identical(other.viewByItemFilter, viewByItemFilter) ||
                 other.viewByItemFilter == viewByItemFilter) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation));
+                other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      salesOrgConfigs,
-      customerCodeInfo,
-      shipToInfo,
-      user,
-      viewByItemFilter,
-      searchKey,
-      salesOrganisation);
+  int get hashCode => Object.hash(runtimeType, viewByItemFilter, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -538,108 +483,65 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)
+        initialized,
+    required TResult Function(
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         autoSearchProduct,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) {
-    return fetch(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-        viewByItemFilter, searchKey, salesOrganisation);
+    return fetch(viewByItemFilter, searchKey);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) {
-    return fetch?.call(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-        viewByItemFilter, searchKey, salesOrganisation);
+    return fetch?.call(viewByItemFilter, searchKey);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-          viewByItemFilter, searchKey, salesOrganisation);
+      return fetch(viewByItemFilter, searchKey);
     }
     return orElse();
   }
@@ -687,21 +589,11 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements ViewByItemsEvent {
   const factory _Fetch(
-      {required final SalesOrganisationConfigs salesOrgConfigs,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final User user,
-      required final ViewByItemFilter viewByItemFilter,
-      required final SearchKey searchKey,
-      required final SalesOrganisation salesOrganisation}) = _$_Fetch;
+      {required final ViewByItemFilter viewByItemFilter,
+      required final SearchKey searchKey}) = _$_Fetch;
 
-  SalesOrganisationConfigs get salesOrgConfigs;
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
-  User get user;
   ViewByItemFilter get viewByItemFilter;
   SearchKey get searchKey;
-  SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -713,21 +605,9 @@ abstract class _$$_AutoSearchProductCopyWith<$Res> {
           $Res Function(_$_AutoSearchProduct) then) =
       __$$_AutoSearchProductCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {SalesOrganisationConfigs salesOrgConfigs,
-      CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      User user,
-      ViewByItemFilter viewByItemFilter,
-      SearchKey searchKey,
-      SalesOrganisation salesOrganisation});
+  $Res call({ViewByItemFilter viewByItemFilter, SearchKey searchKey});
 
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
-  $UserCopyWith<$Res> get user;
   $ViewByItemFilterCopyWith<$Res> get viewByItemFilter;
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -741,31 +621,10 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrgConfigs = null,
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
-    Object? user = null,
     Object? viewByItemFilter = null,
     Object? searchKey = null,
-    Object? salesOrganisation = null,
   }) {
     return _then(_$_AutoSearchProduct(
-      salesOrgConfigs: null == salesOrgConfigs
-          ? _value.salesOrgConfigs
-          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
       viewByItemFilter: null == viewByItemFilter
           ? _value.viewByItemFilter
           : viewByItemFilter // ignore: cast_nullable_to_non_nullable
@@ -774,44 +633,7 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
-        (value) {
-      return _then(_value.copyWith(salesOrgConfigs: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
   }
 
   @override
@@ -821,46 +643,22 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
       return _then(_value.copyWith(viewByItemFilter: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_AutoSearchProduct implements _AutoSearchProduct {
   const _$_AutoSearchProduct(
-      {required this.salesOrgConfigs,
-      required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.user,
-      required this.viewByItemFilter,
-      required this.searchKey,
-      required this.salesOrganisation});
+      {required this.viewByItemFilter, required this.searchKey});
 
-  @override
-  final SalesOrganisationConfigs salesOrgConfigs;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
-  final User user;
   @override
   final ViewByItemFilter viewByItemFilter;
   @override
   final SearchKey searchKey;
-  @override
-  final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'ViewByItemsEvent.autoSearchProduct(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, viewByItemFilter: $viewByItemFilter, searchKey: $searchKey, salesOrganisation: $salesOrganisation)';
+    return 'ViewByItemsEvent.autoSearchProduct(viewByItemFilter: $viewByItemFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -868,31 +666,14 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AutoSearchProduct &&
-            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
-                other.salesOrgConfigs == salesOrgConfigs) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.user, user) || other.user == user) &&
             (identical(other.viewByItemFilter, viewByItemFilter) ||
                 other.viewByItemFilter == viewByItemFilter) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation));
+                other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      salesOrgConfigs,
-      customerCodeInfo,
-      shipToInfo,
-      user,
-      viewByItemFilter,
-      searchKey,
-      salesOrganisation);
+  int get hashCode => Object.hash(runtimeType, viewByItemFilter, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -904,108 +685,65 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)
+        initialized,
+    required TResult Function(
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         autoSearchProduct,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) {
-    return autoSearchProduct(salesOrgConfigs, customerCodeInfo, shipToInfo,
-        user, viewByItemFilter, searchKey, salesOrganisation);
+    return autoSearchProduct(viewByItemFilter, searchKey);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) {
-    return autoSearchProduct?.call(salesOrgConfigs, customerCodeInfo,
-        shipToInfo, user, viewByItemFilter, searchKey, salesOrganisation);
+    return autoSearchProduct?.call(viewByItemFilter, searchKey);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (autoSearchProduct != null) {
-      return autoSearchProduct(salesOrgConfigs, customerCodeInfo, shipToInfo,
-          user, viewByItemFilter, searchKey, salesOrganisation);
+      return autoSearchProduct(viewByItemFilter, searchKey);
     }
     return orElse();
   }
@@ -1053,22 +791,11 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
 
 abstract class _AutoSearchProduct implements ViewByItemsEvent {
   const factory _AutoSearchProduct(
-          {required final SalesOrganisationConfigs salesOrgConfigs,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final ShipToInfo shipToInfo,
-          required final User user,
-          required final ViewByItemFilter viewByItemFilter,
-          required final SearchKey searchKey,
-          required final SalesOrganisation salesOrganisation}) =
-      _$_AutoSearchProduct;
+      {required final ViewByItemFilter viewByItemFilter,
+      required final SearchKey searchKey}) = _$_AutoSearchProduct;
 
-  SalesOrganisationConfigs get salesOrgConfigs;
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
-  User get user;
   ViewByItemFilter get viewByItemFilter;
   SearchKey get searchKey;
-  SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
   _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1079,19 +806,6 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   factory _$$_LoadMoreCopyWith(
           _$_LoadMore value, $Res Function(_$_LoadMore) then) =
       __$$_LoadMoreCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisationConfigs salesOrgConfigs,
-      CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo,
-      User user,
-      SalesOrganisation salesOrganisation});
-
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $ShipToInfoCopyWith<$Res> get shipToInfo;
-  $UserCopyWith<$Res> get user;
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -1101,239 +815,89 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrgConfigs = null,
-    Object? customerCodeInfo = null,
-    Object? shipToInfo = null,
-    Object? user = null,
-    Object? salesOrganisation = null,
-  }) {
-    return _then(_$_LoadMore(
-      salesOrgConfigs: null == salesOrgConfigs
-          ? _value.salesOrgConfigs
-          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      shipToInfo: null == shipToInfo
-          ? _value.shipToInfo
-          : shipToInfo // ignore: cast_nullable_to_non_nullable
-              as ShipToInfo,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
-        (value) {
-      return _then(_value.copyWith(salesOrgConfigs: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ShipToInfoCopyWith<$Res> get shipToInfo {
-    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
-      return _then(_value.copyWith(shipToInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore(
-      {required this.salesOrgConfigs,
-      required this.customerCodeInfo,
-      required this.shipToInfo,
-      required this.user,
-      required this.salesOrganisation});
-
-  @override
-  final SalesOrganisationConfigs salesOrgConfigs;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final ShipToInfo shipToInfo;
-  @override
-  final User user;
-  @override
-  final SalesOrganisation salesOrganisation;
+  const _$_LoadMore();
 
   @override
   String toString() {
-    return 'ViewByItemsEvent.loadMore(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrganisation: $salesOrganisation)';
+    return 'ViewByItemsEvent.loadMore()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_LoadMore &&
-            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
-                other.salesOrgConfigs == salesOrgConfigs) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo) &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation));
+        (other.runtimeType == runtimeType && other is _$_LoadMore);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrgConfigs,
-      customerCodeInfo, shipToInfo, user, salesOrganisation);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)
+        initialized,
+    required TResult Function(
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         autoSearchProduct,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) {
-    return loadMore(
-        salesOrgConfigs, customerCodeInfo, shipToInfo, user, salesOrganisation);
+    return loadMore();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) {
-    return loadMore?.call(
-        salesOrgConfigs, customerCodeInfo, shipToInfo, user, salesOrganisation);
+    return loadMore?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(salesOrgConfigs, customerCodeInfo, shipToInfo, user,
-          salesOrganisation);
+      return loadMore();
     }
     return orElse();
   }
@@ -1380,21 +944,7 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements ViewByItemsEvent {
-  const factory _LoadMore(
-      {required final SalesOrganisationConfigs salesOrgConfigs,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo,
-      required final User user,
-      required final SalesOrganisation salesOrganisation}) = _$_LoadMore;
-
-  SalesOrganisationConfigs get salesOrgConfigs;
-  CustomerCodeInfo get customerCodeInfo;
-  ShipToInfo get shipToInfo;
-  User get user;
-  SalesOrganisation get salesOrganisation;
-  @JsonKey(ignore: true)
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _LoadMore() = _$_LoadMore;
 }
 
 /// @nodoc
@@ -1435,32 +985,20 @@ class _$_FetchProductImage implements _FetchProductImage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
     required TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)
+        initialized,
+    required TResult Function(
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)
+            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         autoSearchProduct,
-    required TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)
-        loadMore,
+    required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) {
     return fetchProductImage();
@@ -1469,32 +1007,18 @@ class _$_FetchProductImage implements _FetchProductImage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult? Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) {
     return fetchProductImage?.call();
@@ -1503,32 +1027,18 @@ class _$_FetchProductImage implements _FetchProductImage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
             SalesOrganisationConfigs salesOrgConfigs,
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
             SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            ViewByItemFilter viewByItemFilter,
-            SearchKey searchKey,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         autoSearchProduct,
-    TResult Function(
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            SalesOrganisation salesOrganisation)?
-        loadMore,
+    TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
@@ -1585,6 +1095,12 @@ abstract class _FetchProductImage implements ViewByItemsEvent {
 
 /// @nodoc
 mixin _$ViewByItemsState {
+  SalesOrganisationConfigs get salesOrgConfigs =>
+      throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
+  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   OrderHistory get orderHistoryList => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
@@ -1606,7 +1122,12 @@ abstract class $ViewByItemsStateCopyWith<$Res> {
       _$ViewByItemsStateCopyWithImpl<$Res, ViewByItemsState>;
   @useResult
   $Res call(
-      {OrderHistory orderHistoryList,
+      {SalesOrganisationConfigs salesOrgConfigs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      SalesOrganisation salesOrganisation,
+      OrderHistory orderHistoryList,
       bool canLoadMore,
       bool isFetching,
       int nextPageIndex,
@@ -1614,6 +1135,11 @@ abstract class $ViewByItemsStateCopyWith<$Res> {
       SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $OrderHistoryCopyWith<$Res> get orderHistoryList;
   $ViewByItemFilterCopyWith<$Res> get appliedFilter;
 }
@@ -1631,6 +1157,11 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrgConfigs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? user = null,
+    Object? salesOrganisation = null,
     Object? orderHistoryList = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
@@ -1640,6 +1171,26 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
+      salesOrgConfigs: null == salesOrgConfigs
+          ? _value.salesOrgConfigs
+          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
       orderHistoryList: null == orderHistoryList
           ? _value.orderHistoryList
           : orderHistoryList // ignore: cast_nullable_to_non_nullable
@@ -1673,6 +1224,47 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
 
   @override
   @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
+        (value) {
+      return _then(_value.copyWith(salesOrgConfigs: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $OrderHistoryCopyWith<$Res> get orderHistoryList {
     return $OrderHistoryCopyWith<$Res>(_value.orderHistoryList, (value) {
       return _then(_value.copyWith(orderHistoryList: value) as $Val);
@@ -1697,7 +1289,12 @@ abstract class _$$_ViewByItemsStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {OrderHistory orderHistoryList,
+      {SalesOrganisationConfigs salesOrgConfigs,
+      CustomerCodeInfo customerCodeInfo,
+      ShipToInfo shipToInfo,
+      User user,
+      SalesOrganisation salesOrganisation,
+      OrderHistory orderHistoryList,
       bool canLoadMore,
       bool isFetching,
       int nextPageIndex,
@@ -1705,6 +1302,16 @@ abstract class _$$_ViewByItemsStateCopyWith<$Res>
       SearchKey searchKey,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
+  $UserCopyWith<$Res> get user;
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
   $OrderHistoryCopyWith<$Res> get orderHistoryList;
   @override
@@ -1722,6 +1329,11 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrgConfigs = null,
+    Object? customerCodeInfo = null,
+    Object? shipToInfo = null,
+    Object? user = null,
+    Object? salesOrganisation = null,
     Object? orderHistoryList = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
@@ -1731,6 +1343,26 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_ViewByItemsState(
+      salesOrgConfigs: null == salesOrgConfigs
+          ? _value.salesOrgConfigs
+          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
       orderHistoryList: null == orderHistoryList
           ? _value.orderHistoryList
           : orderHistoryList // ignore: cast_nullable_to_non_nullable
@@ -1767,7 +1399,12 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
 
 class _$_ViewByItemsState extends _ViewByItemsState {
   const _$_ViewByItemsState(
-      {required this.orderHistoryList,
+      {required this.salesOrgConfigs,
+      required this.customerCodeInfo,
+      required this.shipToInfo,
+      required this.user,
+      required this.salesOrganisation,
+      required this.orderHistoryList,
       required this.canLoadMore,
       required this.isFetching,
       required this.nextPageIndex,
@@ -1776,6 +1413,16 @@ class _$_ViewByItemsState extends _ViewByItemsState {
       required this.failureOrSuccessOption})
       : super._();
 
+  @override
+  final SalesOrganisationConfigs salesOrgConfigs;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final User user;
+  @override
+  final SalesOrganisation salesOrganisation;
   @override
   final OrderHistory orderHistoryList;
   @override
@@ -1793,7 +1440,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
 
   @override
   String toString() {
-    return 'ViewByItemsState(orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, appliedFilter: $appliedFilter, searchKey: $searchKey, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByItemsState(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrganisation: $salesOrganisation, orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, appliedFilter: $appliedFilter, searchKey: $searchKey, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -1801,6 +1448,15 @@ class _$_ViewByItemsState extends _ViewByItemsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ViewByItemsState &&
+            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
+                other.salesOrgConfigs == salesOrgConfigs) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
             (identical(other.orderHistoryList, orderHistoryList) ||
                 other.orderHistoryList == orderHistoryList) &&
             (identical(other.canLoadMore, canLoadMore) ||
@@ -1820,6 +1476,11 @@ class _$_ViewByItemsState extends _ViewByItemsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      salesOrgConfigs,
+      customerCodeInfo,
+      shipToInfo,
+      user,
+      salesOrganisation,
       orderHistoryList,
       canLoadMore,
       isFetching,
@@ -1837,7 +1498,12 @@ class _$_ViewByItemsState extends _ViewByItemsState {
 
 abstract class _ViewByItemsState extends ViewByItemsState {
   const factory _ViewByItemsState(
-      {required final OrderHistory orderHistoryList,
+      {required final SalesOrganisationConfigs salesOrgConfigs,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final ShipToInfo shipToInfo,
+      required final User user,
+      required final SalesOrganisation salesOrganisation,
+      required final OrderHistory orderHistoryList,
       required final bool canLoadMore,
       required final bool isFetching,
       required final int nextPageIndex,
@@ -1847,6 +1513,16 @@ abstract class _ViewByItemsState extends ViewByItemsState {
           failureOrSuccessOption}) = _$_ViewByItemsState;
   const _ViewByItemsState._() : super._();
 
+  @override
+  SalesOrganisationConfigs get salesOrgConfigs;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
+  @override
+  ShipToInfo get shipToInfo;
+  @override
+  User get user;
+  @override
+  SalesOrganisation get salesOrganisation;
   @override
   OrderHistory get orderHistoryList;
   @override

@@ -110,16 +110,9 @@ class _OrderSearchBar extends StatelessWidget {
     if (!onClear && searchKey.isEmpty) return;
     context.read<ViewByItemsBloc>().add(
           ViewByItemsEvent.fetch(
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-            shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-            user: context.read<UserBloc>().state.user,
             viewByItemFilter:
                 context.read<ViewByItemsBloc>().state.appliedFilter,
             searchKey: SearchKey.searchFilter(searchKey),
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
           ),
         );
   }
@@ -144,16 +137,9 @@ class _OrderSearchBar extends StatelessWidget {
   }) =>
       context.read<ViewByItemsBloc>().add(
             ViewByItemsEvent.autoSearchProduct(
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-              user: context.read<UserBloc>().state.user,
               viewByItemFilter:
                   context.read<ViewByItemsBloc>().state.appliedFilter,
               searchKey: SearchKey.searchFilter(searchKey),
-              salesOrganisation:
-                  context.read<EligibilityBloc>().state.salesOrganisation,
             ),
           );
 

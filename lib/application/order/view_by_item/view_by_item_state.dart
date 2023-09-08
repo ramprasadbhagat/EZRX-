@@ -5,6 +5,11 @@ class ViewByItemsState with _$ViewByItemsState {
   const ViewByItemsState._();
 
   const factory ViewByItemsState({
+    required SalesOrganisationConfigs salesOrgConfigs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required User user,
+    required SalesOrganisation salesOrganisation,
     required OrderHistory orderHistoryList,
     required bool canLoadMore,
     required bool isFetching,
@@ -15,6 +20,11 @@ class ViewByItemsState with _$ViewByItemsState {
   }) = _ViewByItemsState;
 
   factory ViewByItemsState.initial() => ViewByItemsState(
+        salesOrgConfigs: SalesOrganisationConfigs.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        user: User.empty(),
+        salesOrganisation: SalesOrganisation.empty(),
+        shipToInfo: ShipToInfo.empty(),
         orderHistoryList: OrderHistory.empty(),
         canLoadMore: true,
         isFetching: false,

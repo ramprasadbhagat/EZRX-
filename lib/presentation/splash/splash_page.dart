@@ -923,6 +923,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
 
+    context.read<ViewByItemsBloc>().add(
+          ViewByItemsEvent.initialized(
+            customerCodeInfo: customerCodeState.customerCodeInfo,
+            salesOrgConfigs: salesOrgState.configs,
+            shipToInfo: state.shipToInfo,
+            user: user,
+            salesOrganisation: salesOrgState.salesOrganisation,
+          ),
+        );
+
     if (state.haveShipTo) {
       context.read<ReturnListByRequestBloc>().add(
             ReturnListByRequestEvent.initialized(
@@ -971,14 +981,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       if (user.userCanAccessOrderHistory) {
         context.read<ViewByItemsBloc>().add(
               ViewByItemsEvent.fetch(
-                salesOrgConfigs: salesOrgState.configs,
-                shipToInfo: state.shipToInfo,
-                user: user,
-                customerCodeInfo: customerCodeState.customerCodeInfo,
                 viewByItemFilter:
                     context.read<ViewByItemsBloc>().state.appliedFilter,
                 searchKey: SearchKey(''),
-                salesOrganisation: salesOrgState.salesOrganisation,
               ),
             );
       }
@@ -1058,7 +1063,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     } else {
       final user = context.read<UserBloc>().state.user;
       final customerCodeState = context.read<CustomerCodeBloc>().state;
-      context.read<ViewByItemsBloc>().add(const ViewByItemsEvent.initialized());
 
       context
           .read<ViewByItemFilterBloc>()
