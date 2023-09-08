@@ -2,7 +2,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_pr
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 part 'sales_organisation_configs_principal_dto.freezed.dart';
 part 'sales_organisation_configs_principal_dto.g.dart';
@@ -12,20 +11,13 @@ class SalesOrganisationConfigsPrincipalDto
     with _$SalesOrganisationConfigsPrincipalDto {
   const SalesOrganisationConfigsPrincipalDto._();
 
-  @HiveType(
-    typeId: 33,
-    adapterName: 'SalesOrganisationConfigsPrincipalDtoAdapter',
-  )
   const factory SalesOrganisationConfigsPrincipalDto({
     //The date is not been used anywhere and
     //it is not in proper format
     //e.g - YYYYMMDD00 (extra two zero at the end)
-    @HiveField(1, defaultValue: 0)
-    @JsonKey(name: 'date', defaultValue: 0)
-        required int date,
-    @HiveField(2, defaultValue: '')
-    @JsonKey(name: 'principal')
-        required String principalCode,
+
+    @JsonKey(name: 'date', defaultValue: 0) required int date,
+    @JsonKey(name: 'principal') required String principalCode,
   }) = _SalesOrganisationConfigsPrincipalDto;
   factory SalesOrganisationConfigsPrincipalDto.fromDomain(
     SalesOrganisationConfigsPrincipal salesOrganisationConfigsPrincipal,

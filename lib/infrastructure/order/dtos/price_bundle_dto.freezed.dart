@@ -21,19 +21,14 @@ PriceBundleDto _$PriceBundleDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PriceBundleDto {
   @JsonKey(name: 'BundleName', defaultValue: '')
-  @HiveField(35, defaultValue: '')
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'BundleCode', defaultValue: '')
-  @HiveField(36, defaultValue: '')
   String get code => throw _privateConstructorUsedError;
   @JsonKey(name: 'Conditions', defaultValue: '')
-  @HiveField(37, defaultValue: '')
   String get conditions => throw _privateConstructorUsedError;
   @JsonKey(name: 'BonusEligible', defaultValue: false)
-  @HiveField(38, defaultValue: false)
   bool get bonusEligible => throw _privateConstructorUsedError;
   @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-  @HiveField(39, defaultValue: <PriceBundleItemDto>[])
   List<PriceBundleItemDto> get information =>
       throw _privateConstructorUsedError;
 
@@ -50,21 +45,12 @@ abstract class $PriceBundleDtoCopyWith<$Res> {
       _$PriceBundleDtoCopyWithImpl<$Res, PriceBundleDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'BundleName', defaultValue: '')
-      @HiveField(35, defaultValue: '')
-          String name,
-      @JsonKey(name: 'BundleCode', defaultValue: '')
-      @HiveField(36, defaultValue: '')
-          String code,
-      @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(37, defaultValue: '')
-          String conditions,
-      @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(38, defaultValue: false)
-          bool bonusEligible,
+      {@JsonKey(name: 'BundleName', defaultValue: '') String name,
+      @JsonKey(name: 'BundleCode', defaultValue: '') String code,
+      @JsonKey(name: 'Conditions', defaultValue: '') String conditions,
+      @JsonKey(name: 'BonusEligible', defaultValue: false) bool bonusEligible,
       @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-      @HiveField(39, defaultValue: <PriceBundleItemDto>[])
-          List<PriceBundleItemDto> information});
+      List<PriceBundleItemDto> information});
 }
 
 /// @nodoc
@@ -120,21 +106,12 @@ abstract class _$$_PriceBundleDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'BundleName', defaultValue: '')
-      @HiveField(35, defaultValue: '')
-          String name,
-      @JsonKey(name: 'BundleCode', defaultValue: '')
-      @HiveField(36, defaultValue: '')
-          String code,
-      @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(37, defaultValue: '')
-          String conditions,
-      @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(38, defaultValue: false)
-          bool bonusEligible,
+      {@JsonKey(name: 'BundleName', defaultValue: '') String name,
+      @JsonKey(name: 'BundleCode', defaultValue: '') String code,
+      @JsonKey(name: 'Conditions', defaultValue: '') String conditions,
+      @JsonKey(name: 'BonusEligible', defaultValue: false) bool bonusEligible,
       @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-      @HiveField(39, defaultValue: <PriceBundleItemDto>[])
-          List<PriceBundleItemDto> information});
+      List<PriceBundleItemDto> information});
 }
 
 /// @nodoc
@@ -181,24 +158,15 @@ class __$$_PriceBundleDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 13, adapterName: 'PriceBundleDtoAdapter')
 class _$_PriceBundleDto extends _PriceBundleDto {
   const _$_PriceBundleDto(
-      {@JsonKey(name: 'BundleName', defaultValue: '')
-      @HiveField(35, defaultValue: '')
-          required this.name,
-      @JsonKey(name: 'BundleCode', defaultValue: '')
-      @HiveField(36, defaultValue: '')
-          required this.code,
-      @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(37, defaultValue: '')
-          required this.conditions,
+      {@JsonKey(name: 'BundleName', defaultValue: '') required this.name,
+      @JsonKey(name: 'BundleCode', defaultValue: '') required this.code,
+      @JsonKey(name: 'Conditions', defaultValue: '') required this.conditions,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(38, defaultValue: false)
-          required this.bonusEligible,
+      required this.bonusEligible,
       @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-      @HiveField(39, defaultValue: <PriceBundleItemDto>[])
-          required final List<PriceBundleItemDto> information})
+      required final List<PriceBundleItemDto> information})
       : _information = information,
         super._();
 
@@ -207,24 +175,19 @@ class _$_PriceBundleDto extends _PriceBundleDto {
 
   @override
   @JsonKey(name: 'BundleName', defaultValue: '')
-  @HiveField(35, defaultValue: '')
   final String name;
   @override
   @JsonKey(name: 'BundleCode', defaultValue: '')
-  @HiveField(36, defaultValue: '')
   final String code;
   @override
   @JsonKey(name: 'Conditions', defaultValue: '')
-  @HiveField(37, defaultValue: '')
   final String conditions;
   @override
   @JsonKey(name: 'BonusEligible', defaultValue: false)
-  @HiveField(38, defaultValue: false)
   final bool bonusEligible;
   final List<PriceBundleItemDto> _information;
   @override
   @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-  @HiveField(39, defaultValue: <PriceBundleItemDto>[])
   List<PriceBundleItemDto> get information {
     if (_information is EqualUnmodifiableListView) return _information;
     // ignore: implicit_dynamic_type
@@ -273,21 +236,14 @@ class _$_PriceBundleDto extends _PriceBundleDto {
 abstract class _PriceBundleDto extends PriceBundleDto {
   const factory _PriceBundleDto(
       {@JsonKey(name: 'BundleName', defaultValue: '')
-      @HiveField(35, defaultValue: '')
-          required final String name,
-      @JsonKey(name: 'BundleCode', defaultValue: '')
-      @HiveField(36, defaultValue: '')
-          required final String code,
+      required final String name,
+      @JsonKey(name: 'BundleCode', defaultValue: '') required final String code,
       @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(37, defaultValue: '')
-          required final String conditions,
+      required final String conditions,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(38, defaultValue: false)
-          required final bool bonusEligible,
+      required final bool bonusEligible,
       @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-      @HiveField(39, defaultValue: <PriceBundleItemDto>[])
-          required final List<PriceBundleItemDto>
-              information}) = _$_PriceBundleDto;
+      required final List<PriceBundleItemDto> information}) = _$_PriceBundleDto;
   const _PriceBundleDto._() : super._();
 
   factory _PriceBundleDto.fromJson(Map<String, dynamic> json) =
@@ -295,23 +251,18 @@ abstract class _PriceBundleDto extends PriceBundleDto {
 
   @override
   @JsonKey(name: 'BundleName', defaultValue: '')
-  @HiveField(35, defaultValue: '')
   String get name;
   @override
   @JsonKey(name: 'BundleCode', defaultValue: '')
-  @HiveField(36, defaultValue: '')
   String get code;
   @override
   @JsonKey(name: 'Conditions', defaultValue: '')
-  @HiveField(37, defaultValue: '')
   String get conditions;
   @override
   @JsonKey(name: 'BonusEligible', defaultValue: false)
-  @HiveField(38, defaultValue: false)
   bool get bonusEligible;
   @override
   @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-  @HiveField(39, defaultValue: <PriceBundleItemDto>[])
   List<PriceBundleItemDto> get information;
   @override
   @JsonKey(ignore: true)
@@ -326,16 +277,12 @@ PriceBundleItemDto _$PriceBundleItemDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PriceBundleItemDto {
   @JsonKey(name: 'Type', defaultValue: '')
-  @HiveField(38, defaultValue: '')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'Sequence', defaultValue: 0)
-  @HiveField(39, defaultValue: 0)
   int get sequence => throw _privateConstructorUsedError;
   @JsonKey(name: 'Quantity', defaultValue: 0)
-  @HiveField(40, defaultValue: 0)
   int get quantity => throw _privateConstructorUsedError;
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(41, defaultValue: 0)
   double get rate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -351,18 +298,10 @@ abstract class $PriceBundleItemDtoCopyWith<$Res> {
       _$PriceBundleItemDtoCopyWithImpl<$Res, PriceBundleItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(38, defaultValue: '')
-          String type,
-      @JsonKey(name: 'Sequence', defaultValue: 0)
-      @HiveField(39, defaultValue: 0)
-          int sequence,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-      @HiveField(40, defaultValue: 0)
-          int quantity,
-      @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(41, defaultValue: 0)
-          double rate});
+      {@JsonKey(name: 'Type', defaultValue: '') String type,
+      @JsonKey(name: 'Sequence', defaultValue: 0) int sequence,
+      @JsonKey(name: 'Quantity', defaultValue: 0) int quantity,
+      @JsonKey(name: 'Rate', defaultValue: 0) double rate});
 }
 
 /// @nodoc
@@ -413,18 +352,10 @@ abstract class _$$_PriceBundleItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(38, defaultValue: '')
-          String type,
-      @JsonKey(name: 'Sequence', defaultValue: 0)
-      @HiveField(39, defaultValue: 0)
-          int sequence,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-      @HiveField(40, defaultValue: 0)
-          int quantity,
-      @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(41, defaultValue: 0)
-          double rate});
+      {@JsonKey(name: 'Type', defaultValue: '') String type,
+      @JsonKey(name: 'Sequence', defaultValue: 0) int sequence,
+      @JsonKey(name: 'Quantity', defaultValue: 0) int quantity,
+      @JsonKey(name: 'Rate', defaultValue: 0) double rate});
 }
 
 /// @nodoc
@@ -466,21 +397,12 @@ class __$$_PriceBundleItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 14, adapterName: 'PriceBundleItemDtoAdapter')
 class _$_PriceBundleItemDto extends _PriceBundleItemDto {
   const _$_PriceBundleItemDto(
-      {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(38, defaultValue: '')
-          required this.type,
-      @JsonKey(name: 'Sequence', defaultValue: 0)
-      @HiveField(39, defaultValue: 0)
-          required this.sequence,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-      @HiveField(40, defaultValue: 0)
-          required this.quantity,
-      @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(41, defaultValue: 0)
-          required this.rate})
+      {@JsonKey(name: 'Type', defaultValue: '') required this.type,
+      @JsonKey(name: 'Sequence', defaultValue: 0) required this.sequence,
+      @JsonKey(name: 'Quantity', defaultValue: 0) required this.quantity,
+      @JsonKey(name: 'Rate', defaultValue: 0) required this.rate})
       : super._();
 
   factory _$_PriceBundleItemDto.fromJson(Map<String, dynamic> json) =>
@@ -488,19 +410,15 @@ class _$_PriceBundleItemDto extends _PriceBundleItemDto {
 
   @override
   @JsonKey(name: 'Type', defaultValue: '')
-  @HiveField(38, defaultValue: '')
   final String type;
   @override
   @JsonKey(name: 'Sequence', defaultValue: 0)
-  @HiveField(39, defaultValue: 0)
   final int sequence;
   @override
   @JsonKey(name: 'Quantity', defaultValue: 0)
-  @HiveField(40, defaultValue: 0)
   final int quantity;
   @override
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(41, defaultValue: 0)
   final double rate;
 
   @override
@@ -542,18 +460,11 @@ class _$_PriceBundleItemDto extends _PriceBundleItemDto {
 
 abstract class _PriceBundleItemDto extends PriceBundleItemDto {
   const factory _PriceBundleItemDto(
-      {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(38, defaultValue: '')
-          required final String type,
-      @JsonKey(name: 'Sequence', defaultValue: 0)
-      @HiveField(39, defaultValue: 0)
-          required final int sequence,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-      @HiveField(40, defaultValue: 0)
-          required final int quantity,
+      {@JsonKey(name: 'Type', defaultValue: '') required final String type,
+      @JsonKey(name: 'Sequence', defaultValue: 0) required final int sequence,
+      @JsonKey(name: 'Quantity', defaultValue: 0) required final int quantity,
       @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(41, defaultValue: 0)
-          required final double rate}) = _$_PriceBundleItemDto;
+      required final double rate}) = _$_PriceBundleItemDto;
   const _PriceBundleItemDto._() : super._();
 
   factory _PriceBundleItemDto.fromJson(Map<String, dynamic> json) =
@@ -561,19 +472,15 @@ abstract class _PriceBundleItemDto extends PriceBundleItemDto {
 
   @override
   @JsonKey(name: 'Type', defaultValue: '')
-  @HiveField(38, defaultValue: '')
   String get type;
   @override
   @JsonKey(name: 'Sequence', defaultValue: 0)
-  @HiveField(39, defaultValue: 0)
   int get sequence;
   @override
   @JsonKey(name: 'Quantity', defaultValue: 0)
-  @HiveField(40, defaultValue: 0)
   int get quantity;
   @override
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(41, defaultValue: 0)
   double get rate;
   @override
   @JsonKey(ignore: true)

@@ -6,7 +6,6 @@ import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_tier_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/overriden_rule_tier_dto.dart';
 
 part 'price_dto.freezed.dart';
@@ -16,77 +15,50 @@ part 'price_dto.g.dart';
 class PriceDto with _$PriceDto {
   const PriceDto._();
 
-  @HiveType(typeId: 6, adapterName: 'PriceDtoAdapter')
   const factory PriceDto({
     @JsonKey(name: 'MaterialNumber', defaultValue: '')
-    @HiveField(0, defaultValue: '')
         required String materialNumber,
     @JsonKey(name: 'OldMaterialCode', defaultValue: '')
-    @HiveField(1, defaultValue: '')
         required String oldMaterialCode,
-    @JsonKey(name: 'ListPrice', defaultValue: 0)
-    @HiveField(2, defaultValue: 0)
-        required double listPrice,
+    @JsonKey(name: 'ListPrice', defaultValue: 0) required double listPrice,
     @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0)
-    @HiveField(3, defaultValue: 0)
         required double finalIndividualPrice,
     @JsonKey(name: 'FinalTotalPrice', defaultValue: 0)
-    @HiveField(4, defaultValue: 0)
         required double finalTotalPrice,
     @JsonKey(name: 'PriceRules', defaultValue: <PriceRuleDto>[])
-    @HiveField(5, defaultValue: <PriceRuleDto>[])
         required List<PriceRuleDto> rules,
     @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
-    @HiveField(6, defaultValue: <PriceBonusDto>[])
         required List<PriceBonusDto> bonuses,
     @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
-    @HiveField(7, defaultValue: <PriceTierDto>[])
         required List<PriceTierDto> tiers,
     @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
-    @HiveField(8, defaultValue: <PriceBundleDto>[])
         required List<PriceBundleDto> bundles,
-    @JsonKey(name: 'Valid', defaultValue: false)
-    @HiveField(9, defaultValue: false)
-        required bool isValid,
+    @JsonKey(name: 'Valid', defaultValue: false) required bool isValid,
     @JsonKey(name: 'AdditionalBonusEligible', defaultValue: false)
-    @HiveField(10, defaultValue: false)
         required bool additionalBonusEligible,
     @JsonKey(name: 'ZMGDiscount', defaultValue: false)
-    @HiveField(11, defaultValue: false)
         required bool zmgDiscount,
     @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
-    @HiveField(12, defaultValue: '')
         required String zdp5MaxQuota,
     @JsonKey(name: 'ZDP5RemainingQuota', defaultValue: '')
-    @HiveField(13, defaultValue: '')
         required String zdp5RemainingQuota,
-    @JsonKey(name: 'ExceedQty', defaultValue: false)
-    @HiveField(14, defaultValue: false)
-        required bool exceedQty,
+    @JsonKey(name: 'ExceedQty', defaultValue: false) required bool exceedQty,
     @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
-    @HiveField(15, defaultValue: false)
         required bool overrideRulePresent,
     @JsonKey(name: 'OverridenRules', defaultValue: [])
-    @HiveField(16, defaultValue: [])
         required List<PriceRuleDto> overridenRules,
     @JsonKey(name: 'OverridenRuleTier', defaultValue: [])
-    @HiveField(17, defaultValue: [])
         required List<OverridenRuleTierDto> overridenRuleTier,
     @JsonKey(name: 'isPriceOverride', defaultValue: false)
-    @HiveField(18, defaultValue: false)
         required bool isPriceOverride,
-    @HiveField(19, defaultValue: 0)
     @JsonKey(name: 'zdp8Override', defaultValue: 0)
         required double zdp8Override,
-    @HiveField(20, defaultValue: 0)
     @JsonKey(name: 'priceOverride', defaultValue: 0)
         required double priceOverride,
-    @HiveField(21, defaultValue: PriceComboDealDto.empty)
     @Default(PriceComboDealDto.empty)
     @JsonKey(name: 'ComboDeals')
         PriceComboDealDto comboDeal,
     @JsonKey(name: 'isDiscountOverride', defaultValue: false)
-    @HiveField(22, defaultValue: false)
         required bool isDiscountOverride,
   }) = _PriceDto;
 

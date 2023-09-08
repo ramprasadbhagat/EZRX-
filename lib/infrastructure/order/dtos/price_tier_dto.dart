@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 part 'price_tier_dto.freezed.dart';
 part 'price_tier_dto.g.dart';
@@ -8,13 +7,10 @@ part 'price_tier_dto.g.dart';
 @freezed
 class PriceTierDto with _$PriceTierDto {
   const PriceTierDto._();
-  @HiveType(typeId: 8, adapterName: 'PriceTierDtoAdapter')
+
   const factory PriceTierDto({
-    @JsonKey(name: 'Tier', defaultValue: '')
-    @HiveField(19, defaultValue: '')
-        required String tier,
+    @JsonKey(name: 'Tier', defaultValue: '') required String tier,
     @JsonKey(name: 'PriceTier', defaultValue: <PriceTierItemDto>[])
-    @HiveField(20, defaultValue: <PriceTierItemDto>[])
         required List<PriceTierItemDto> items,
   }) = _PriceTierDto;
 
@@ -43,23 +39,13 @@ class PriceTierDto with _$PriceTierDto {
 @freezed
 class PriceTierItemDto with _$PriceTierItemDto {
   const PriceTierItemDto._();
-  @HiveType(typeId: 9, adapterName: 'PriceTierItemDtoAdapter')
+
   const factory PriceTierItemDto({
-    @JsonKey(name: 'Type', defaultValue: '')
-    @HiveField(21, defaultValue: '')
-        required String type,
-    @JsonKey(name: 'ApplyBonus', defaultValue: false)
-    @HiveField(22, defaultValue: false)
-        required bool applyBonus,
-    @JsonKey(name: 'Sequence', defaultValue: 0)
-    @HiveField(23, defaultValue: 0)
-        required int sequence,
-    @JsonKey(name: 'Quantity', defaultValue: 0)
-    @HiveField(24, defaultValue: 0)
-        required int quantity,
-    @JsonKey(name: 'Rate', defaultValue: 0)
-    @HiveField(6, defaultValue: 0)
-        required double rate,
+    @JsonKey(name: 'Type', defaultValue: '') required String type,
+    @JsonKey(name: 'ApplyBonus', defaultValue: false) required bool applyBonus,
+    @JsonKey(name: 'Sequence', defaultValue: 0) required int sequence,
+    @JsonKey(name: 'Quantity', defaultValue: 0) required int quantity,
+    @JsonKey(name: 'Rate', defaultValue: 0) required double rate,
   }) = _PriceTierItemDto;
 
   factory PriceTierItemDto.fromDomain(PriceTierItem priceTierItem) {

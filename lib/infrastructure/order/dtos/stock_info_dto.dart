@@ -2,7 +2,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
 
 part 'stock_info_dto.freezed.dart';
 part 'stock_info_dto.g.dart';
@@ -31,22 +30,13 @@ class MaterialStockInfoDto with _$MaterialStockInfoDto {
 class StockInfoDto with _$StockInfoDto {
   const StockInfoDto._();
 
-  @HiveType(typeId: 18, adapterName: 'StockInfoDtoAdapter')
   const factory StockInfoDto({
     @JsonKey(name: 'MaterialNumber', defaultValue: '')
-    @HiveField(0, defaultValue: '')
         required String materialNumber,
-    @JsonKey(name: 'ExpiryDate', defaultValue: '')
-    @HiveField(1, defaultValue: '')
-        required String expiryDate,
-    @JsonKey(name: 'Batch', defaultValue: '')
-    @HiveField(2, defaultValue: '')
-        required String batch,
-    @JsonKey(name: 'InStock', defaultValue: '')
-    @HiveField(3, defaultValue: '')
-        required String inStock,
+    @JsonKey(name: 'ExpiryDate', defaultValue: '') required String expiryDate,
+    @JsonKey(name: 'Batch', defaultValue: '') required String batch,
+    @JsonKey(name: 'InStock', defaultValue: '') required String inStock,
     @JsonKey(name: 'SalesDistrict', defaultValue: '')
-    @HiveField(4, defaultValue: '')
         required String salesDistrict,
   }) = _StockInfoDto;
 

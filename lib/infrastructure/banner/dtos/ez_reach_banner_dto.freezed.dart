@@ -20,56 +20,39 @@ EZReachBannerDto _$EZReachBannerDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EZReachBannerDto {
-  @HiveField(0, defaultValue: '')
   @JsonKey(name: 'bannerId', defaultValue: '')
   String get bannerId => throw _privateConstructorUsedError;
-  @HiveField(1, defaultValue: '')
   @JsonKey(name: 'bannerCampaignName', defaultValue: '')
   String get bannerCampaignName => throw _privateConstructorUsedError;
-  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'startDate', defaultValue: '')
   String get startDate => throw _privateConstructorUsedError;
-  @HiveField(3, defaultValue: '')
   @JsonKey(name: 'bannerUrl', defaultValue: '')
   String get bannerUrl => throw _privateConstructorUsedError;
-  @HiveField(4, defaultValue: '')
   @JsonKey(name: 'endDate', defaultValue: '')
   String get endDate => throw _privateConstructorUsedError;
-  @HiveField(5, defaultValue: '')
   @JsonKey(name: 'websiteUrl', defaultValue: '')
   String get websiteUrl => throw _privateConstructorUsedError;
-  @HiveField(6, defaultValue: 0)
   @JsonKey(name: 'bannerCountId', defaultValue: 0)
   int get bannerCountId => throw _privateConstructorUsedError;
-  @HiveField(7, defaultValue: false)
   @JsonKey(name: 'salesRep', defaultValue: false)
   bool get salesRep => throw _privateConstructorUsedError;
-  @HiveField(8, defaultValue: '')
   @JsonKey(name: 'status', defaultValue: '')
   String get status => throw _privateConstructorUsedError;
-  @HiveField(9, defaultValue: false)
   @JsonKey(name: 'customers', defaultValue: false)
   bool get customers => throw _privateConstructorUsedError;
-  @HiveField(10, defaultValue: '')
   @JsonKey(name: 'companyName', defaultValue: '')
   String get companyName => throw _privateConstructorUsedError;
-  @HiveField(11, defaultValue: '')
   @JsonKey(name: 'targetProduct', defaultValue: '')
   String get targetProduct => throw _privateConstructorUsedError;
-  @HiveField(12, defaultValue: '')
   @JsonKey(name: 'keyWord', defaultValue: '')
   String get keyWord => throw _privateConstructorUsedError;
-  @HiveField(13, defaultValue: <String>[])
   @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
   List<String> get bannerCampaignLocations =>
       throw _privateConstructorUsedError;
-  @HiveField(14, defaultValue: <String>[])
   @JsonKey(name: 'salesOrg', defaultValue: <String>[])
   List<String> get salesOrg => throw _privateConstructorUsedError;
-  @HiveField(15, defaultValue: <String>[])
   @JsonKey(name: 'countryCode', defaultValue: <String>[])
   List<String> get countryCode => throw _privateConstructorUsedError;
-  @HiveField(16, defaultValue: '')
   @JsonKey(name: 'mobileBannerImg', defaultValue: '')
   String get mobileBannerImg => throw _privateConstructorUsedError;
 
@@ -86,57 +69,28 @@ abstract class $EZReachBannerDtoCopyWith<$Res> {
       _$EZReachBannerDtoCopyWithImpl<$Res, EZReachBannerDto>;
   @useResult
   $Res call(
-      {@HiveField(0, defaultValue: '')
-      @JsonKey(name: 'bannerId', defaultValue: '')
-          String bannerId,
-      @HiveField(1, defaultValue: '')
+      {@JsonKey(name: 'bannerId', defaultValue: '') String bannerId,
       @JsonKey(name: 'bannerCampaignName', defaultValue: '')
-          String bannerCampaignName,
-      @HiveField(2, defaultValue: '')
-      @JsonKey(name: 'startDate', defaultValue: '')
-          String startDate,
-      @HiveField(3, defaultValue: '')
-      @JsonKey(name: 'bannerUrl', defaultValue: '')
-          String bannerUrl,
-      @HiveField(4, defaultValue: '')
-      @JsonKey(name: 'endDate', defaultValue: '')
-          String endDate,
-      @HiveField(5, defaultValue: '')
-      @JsonKey(name: 'websiteUrl', defaultValue: '')
-          String websiteUrl,
-      @HiveField(6, defaultValue: 0)
-      @JsonKey(name: 'bannerCountId', defaultValue: 0)
-          int bannerCountId,
-      @HiveField(7, defaultValue: false)
-      @JsonKey(name: 'salesRep', defaultValue: false)
-          bool salesRep,
-      @HiveField(8, defaultValue: '')
-      @JsonKey(name: 'status', defaultValue: '')
-          String status,
-      @HiveField(9, defaultValue: false)
-      @JsonKey(name: 'customers', defaultValue: false)
-          bool customers,
-      @HiveField(10, defaultValue: '')
-      @JsonKey(name: 'companyName', defaultValue: '')
-          String companyName,
-      @HiveField(11, defaultValue: '')
-      @JsonKey(name: 'targetProduct', defaultValue: '')
-          String targetProduct,
-      @HiveField(12, defaultValue: '')
-      @JsonKey(name: 'keyWord', defaultValue: '')
-          String keyWord,
-      @HiveField(13, defaultValue: <String>[])
+      String bannerCampaignName,
+      @JsonKey(name: 'startDate', defaultValue: '') String startDate,
+      @JsonKey(name: 'bannerUrl', defaultValue: '') String bannerUrl,
+      @JsonKey(name: 'endDate', defaultValue: '') String endDate,
+      @JsonKey(name: 'websiteUrl', defaultValue: '') String websiteUrl,
+      @JsonKey(name: 'bannerCountId', defaultValue: 0) int bannerCountId,
+      @JsonKey(name: 'salesRep', defaultValue: false) bool salesRep,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'customers', defaultValue: false) bool customers,
+      @JsonKey(name: 'companyName', defaultValue: '') String companyName,
+      @JsonKey(name: 'targetProduct', defaultValue: '') String targetProduct,
+      @JsonKey(name: 'keyWord', defaultValue: '') String keyWord,
       @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
-          List<String> bannerCampaignLocations,
-      @HiveField(14, defaultValue: <String>[])
+      List<String> bannerCampaignLocations,
       @JsonKey(name: 'salesOrg', defaultValue: <String>[])
-          List<String> salesOrg,
-      @HiveField(15, defaultValue: <String>[])
+      List<String> salesOrg,
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-          List<String> countryCode,
-      @HiveField(16, defaultValue: '')
+      List<String> countryCode,
       @JsonKey(name: 'mobileBannerImg', defaultValue: '')
-          String mobileBannerImg});
+      String mobileBannerImg});
 }
 
 /// @nodoc
@@ -252,57 +206,28 @@ abstract class _$$_EZReachBannerDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@HiveField(0, defaultValue: '')
-      @JsonKey(name: 'bannerId', defaultValue: '')
-          String bannerId,
-      @HiveField(1, defaultValue: '')
+      {@JsonKey(name: 'bannerId', defaultValue: '') String bannerId,
       @JsonKey(name: 'bannerCampaignName', defaultValue: '')
-          String bannerCampaignName,
-      @HiveField(2, defaultValue: '')
-      @JsonKey(name: 'startDate', defaultValue: '')
-          String startDate,
-      @HiveField(3, defaultValue: '')
-      @JsonKey(name: 'bannerUrl', defaultValue: '')
-          String bannerUrl,
-      @HiveField(4, defaultValue: '')
-      @JsonKey(name: 'endDate', defaultValue: '')
-          String endDate,
-      @HiveField(5, defaultValue: '')
-      @JsonKey(name: 'websiteUrl', defaultValue: '')
-          String websiteUrl,
-      @HiveField(6, defaultValue: 0)
-      @JsonKey(name: 'bannerCountId', defaultValue: 0)
-          int bannerCountId,
-      @HiveField(7, defaultValue: false)
-      @JsonKey(name: 'salesRep', defaultValue: false)
-          bool salesRep,
-      @HiveField(8, defaultValue: '')
-      @JsonKey(name: 'status', defaultValue: '')
-          String status,
-      @HiveField(9, defaultValue: false)
-      @JsonKey(name: 'customers', defaultValue: false)
-          bool customers,
-      @HiveField(10, defaultValue: '')
-      @JsonKey(name: 'companyName', defaultValue: '')
-          String companyName,
-      @HiveField(11, defaultValue: '')
-      @JsonKey(name: 'targetProduct', defaultValue: '')
-          String targetProduct,
-      @HiveField(12, defaultValue: '')
-      @JsonKey(name: 'keyWord', defaultValue: '')
-          String keyWord,
-      @HiveField(13, defaultValue: <String>[])
+      String bannerCampaignName,
+      @JsonKey(name: 'startDate', defaultValue: '') String startDate,
+      @JsonKey(name: 'bannerUrl', defaultValue: '') String bannerUrl,
+      @JsonKey(name: 'endDate', defaultValue: '') String endDate,
+      @JsonKey(name: 'websiteUrl', defaultValue: '') String websiteUrl,
+      @JsonKey(name: 'bannerCountId', defaultValue: 0) int bannerCountId,
+      @JsonKey(name: 'salesRep', defaultValue: false) bool salesRep,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'customers', defaultValue: false) bool customers,
+      @JsonKey(name: 'companyName', defaultValue: '') String companyName,
+      @JsonKey(name: 'targetProduct', defaultValue: '') String targetProduct,
+      @JsonKey(name: 'keyWord', defaultValue: '') String keyWord,
       @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
-          List<String> bannerCampaignLocations,
-      @HiveField(14, defaultValue: <String>[])
+      List<String> bannerCampaignLocations,
       @JsonKey(name: 'salesOrg', defaultValue: <String>[])
-          List<String> salesOrg,
-      @HiveField(15, defaultValue: <String>[])
+      List<String> salesOrg,
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-          List<String> countryCode,
-      @HiveField(16, defaultValue: '')
+      List<String> countryCode,
       @JsonKey(name: 'mobileBannerImg', defaultValue: '')
-          String mobileBannerImg});
+      String mobileBannerImg});
 }
 
 /// @nodoc
@@ -409,60 +334,32 @@ class __$$_EZReachBannerDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 35, adapterName: 'EZReachBannerDtoAdapter')
 class _$_EZReachBannerDto extends _EZReachBannerDto {
   const _$_EZReachBannerDto(
-      {@HiveField(0, defaultValue: '')
-      @JsonKey(name: 'bannerId', defaultValue: '')
-          required this.bannerId,
-      @HiveField(1, defaultValue: '')
+      {@JsonKey(name: 'bannerId', defaultValue: '') required this.bannerId,
       @JsonKey(name: 'bannerCampaignName', defaultValue: '')
-          required this.bannerCampaignName,
-      @HiveField(2, defaultValue: '')
-      @JsonKey(name: 'startDate', defaultValue: '')
-          required this.startDate,
-      @HiveField(3, defaultValue: '')
-      @JsonKey(name: 'bannerUrl', defaultValue: '')
-          required this.bannerUrl,
-      @HiveField(4, defaultValue: '')
-      @JsonKey(name: 'endDate', defaultValue: '')
-          required this.endDate,
-      @HiveField(5, defaultValue: '')
-      @JsonKey(name: 'websiteUrl', defaultValue: '')
-          required this.websiteUrl,
-      @HiveField(6, defaultValue: 0)
+      required this.bannerCampaignName,
+      @JsonKey(name: 'startDate', defaultValue: '') required this.startDate,
+      @JsonKey(name: 'bannerUrl', defaultValue: '') required this.bannerUrl,
+      @JsonKey(name: 'endDate', defaultValue: '') required this.endDate,
+      @JsonKey(name: 'websiteUrl', defaultValue: '') required this.websiteUrl,
       @JsonKey(name: 'bannerCountId', defaultValue: 0)
-          required this.bannerCountId,
-      @HiveField(7, defaultValue: false)
-      @JsonKey(name: 'salesRep', defaultValue: false)
-          required this.salesRep,
-      @HiveField(8, defaultValue: '')
-      @JsonKey(name: 'status', defaultValue: '')
-          required this.status,
-      @HiveField(9, defaultValue: false)
-      @JsonKey(name: 'customers', defaultValue: false)
-          required this.customers,
-      @HiveField(10, defaultValue: '')
-      @JsonKey(name: 'companyName', defaultValue: '')
-          required this.companyName,
-      @HiveField(11, defaultValue: '')
+      required this.bannerCountId,
+      @JsonKey(name: 'salesRep', defaultValue: false) required this.salesRep,
+      @JsonKey(name: 'status', defaultValue: '') required this.status,
+      @JsonKey(name: 'customers', defaultValue: false) required this.customers,
+      @JsonKey(name: 'companyName', defaultValue: '') required this.companyName,
       @JsonKey(name: 'targetProduct', defaultValue: '')
-          required this.targetProduct,
-      @HiveField(12, defaultValue: '')
-      @JsonKey(name: 'keyWord', defaultValue: '')
-          required this.keyWord,
-      @HiveField(13, defaultValue: <String>[])
+      required this.targetProduct,
+      @JsonKey(name: 'keyWord', defaultValue: '') required this.keyWord,
       @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
-          required final List<String> bannerCampaignLocations,
-      @HiveField(14, defaultValue: <String>[])
+      required final List<String> bannerCampaignLocations,
       @JsonKey(name: 'salesOrg', defaultValue: <String>[])
-          required final List<String> salesOrg,
-      @HiveField(15, defaultValue: <String>[])
+      required final List<String> salesOrg,
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-          required final List<String> countryCode,
-      @HiveField(16, defaultValue: '')
+      required final List<String> countryCode,
       @JsonKey(name: 'mobileBannerImg', defaultValue: '')
-          required this.mobileBannerImg})
+      required this.mobileBannerImg})
       : _bannerCampaignLocations = bannerCampaignLocations,
         _salesOrg = salesOrg,
         _countryCode = countryCode,
@@ -472,60 +369,46 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
       _$$_EZReachBannerDtoFromJson(json);
 
   @override
-  @HiveField(0, defaultValue: '')
   @JsonKey(name: 'bannerId', defaultValue: '')
   final String bannerId;
   @override
-  @HiveField(1, defaultValue: '')
   @JsonKey(name: 'bannerCampaignName', defaultValue: '')
   final String bannerCampaignName;
   @override
-  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'startDate', defaultValue: '')
   final String startDate;
   @override
-  @HiveField(3, defaultValue: '')
   @JsonKey(name: 'bannerUrl', defaultValue: '')
   final String bannerUrl;
   @override
-  @HiveField(4, defaultValue: '')
   @JsonKey(name: 'endDate', defaultValue: '')
   final String endDate;
   @override
-  @HiveField(5, defaultValue: '')
   @JsonKey(name: 'websiteUrl', defaultValue: '')
   final String websiteUrl;
   @override
-  @HiveField(6, defaultValue: 0)
   @JsonKey(name: 'bannerCountId', defaultValue: 0)
   final int bannerCountId;
   @override
-  @HiveField(7, defaultValue: false)
   @JsonKey(name: 'salesRep', defaultValue: false)
   final bool salesRep;
   @override
-  @HiveField(8, defaultValue: '')
   @JsonKey(name: 'status', defaultValue: '')
   final String status;
   @override
-  @HiveField(9, defaultValue: false)
   @JsonKey(name: 'customers', defaultValue: false)
   final bool customers;
   @override
-  @HiveField(10, defaultValue: '')
   @JsonKey(name: 'companyName', defaultValue: '')
   final String companyName;
   @override
-  @HiveField(11, defaultValue: '')
   @JsonKey(name: 'targetProduct', defaultValue: '')
   final String targetProduct;
   @override
-  @HiveField(12, defaultValue: '')
   @JsonKey(name: 'keyWord', defaultValue: '')
   final String keyWord;
   final List<String> _bannerCampaignLocations;
   @override
-  @HiveField(13, defaultValue: <String>[])
   @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
   List<String> get bannerCampaignLocations {
     if (_bannerCampaignLocations is EqualUnmodifiableListView)
@@ -536,7 +419,6 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
 
   final List<String> _salesOrg;
   @override
-  @HiveField(14, defaultValue: <String>[])
   @JsonKey(name: 'salesOrg', defaultValue: <String>[])
   List<String> get salesOrg {
     if (_salesOrg is EqualUnmodifiableListView) return _salesOrg;
@@ -546,7 +428,6 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
 
   final List<String> _countryCode;
   @override
-  @HiveField(15, defaultValue: <String>[])
   @JsonKey(name: 'countryCode', defaultValue: <String>[])
   List<String> get countryCode {
     if (_countryCode is EqualUnmodifiableListView) return _countryCode;
@@ -555,7 +436,6 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
   }
 
   @override
-  @HiveField(16, defaultValue: '')
   @JsonKey(name: 'mobileBannerImg', defaultValue: '')
   final String mobileBannerImg;
 
@@ -639,128 +519,91 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
 
 abstract class _EZReachBannerDto extends EZReachBannerDto {
   const factory _EZReachBannerDto(
-      {@HiveField(0, defaultValue: '')
-      @JsonKey(name: 'bannerId', defaultValue: '')
-          required final String bannerId,
-      @HiveField(1, defaultValue: '')
+      {@JsonKey(name: 'bannerId', defaultValue: '')
+      required final String bannerId,
       @JsonKey(name: 'bannerCampaignName', defaultValue: '')
-          required final String bannerCampaignName,
-      @HiveField(2, defaultValue: '')
+      required final String bannerCampaignName,
       @JsonKey(name: 'startDate', defaultValue: '')
-          required final String startDate,
-      @HiveField(3, defaultValue: '')
+      required final String startDate,
       @JsonKey(name: 'bannerUrl', defaultValue: '')
-          required final String bannerUrl,
-      @HiveField(4, defaultValue: '')
-      @JsonKey(name: 'endDate', defaultValue: '')
-          required final String endDate,
-      @HiveField(5, defaultValue: '')
+      required final String bannerUrl,
+      @JsonKey(name: 'endDate', defaultValue: '') required final String endDate,
       @JsonKey(name: 'websiteUrl', defaultValue: '')
-          required final String websiteUrl,
-      @HiveField(6, defaultValue: 0)
+      required final String websiteUrl,
       @JsonKey(name: 'bannerCountId', defaultValue: 0)
-          required final int bannerCountId,
-      @HiveField(7, defaultValue: false)
+      required final int bannerCountId,
       @JsonKey(name: 'salesRep', defaultValue: false)
-          required final bool salesRep,
-      @HiveField(8, defaultValue: '')
-      @JsonKey(name: 'status', defaultValue: '')
-          required final String status,
-      @HiveField(9, defaultValue: false)
+      required final bool salesRep,
+      @JsonKey(name: 'status', defaultValue: '') required final String status,
       @JsonKey(name: 'customers', defaultValue: false)
-          required final bool customers,
-      @HiveField(10, defaultValue: '')
+      required final bool customers,
       @JsonKey(name: 'companyName', defaultValue: '')
-          required final String companyName,
-      @HiveField(11, defaultValue: '')
+      required final String companyName,
       @JsonKey(name: 'targetProduct', defaultValue: '')
-          required final String targetProduct,
-      @HiveField(12, defaultValue: '')
-      @JsonKey(name: 'keyWord', defaultValue: '')
-          required final String keyWord,
-      @HiveField(13, defaultValue: <String>[])
+      required final String targetProduct,
+      @JsonKey(name: 'keyWord', defaultValue: '') required final String keyWord,
       @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
-          required final List<String> bannerCampaignLocations,
-      @HiveField(14, defaultValue: <String>[])
+      required final List<String> bannerCampaignLocations,
       @JsonKey(name: 'salesOrg', defaultValue: <String>[])
-          required final List<String> salesOrg,
-      @HiveField(15, defaultValue: <String>[])
+      required final List<String> salesOrg,
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-          required final List<String> countryCode,
-      @HiveField(16, defaultValue: '')
+      required final List<String> countryCode,
       @JsonKey(name: 'mobileBannerImg', defaultValue: '')
-          required final String mobileBannerImg}) = _$_EZReachBannerDto;
+      required final String mobileBannerImg}) = _$_EZReachBannerDto;
   const _EZReachBannerDto._() : super._();
 
   factory _EZReachBannerDto.fromJson(Map<String, dynamic> json) =
       _$_EZReachBannerDto.fromJson;
 
   @override
-  @HiveField(0, defaultValue: '')
   @JsonKey(name: 'bannerId', defaultValue: '')
   String get bannerId;
   @override
-  @HiveField(1, defaultValue: '')
   @JsonKey(name: 'bannerCampaignName', defaultValue: '')
   String get bannerCampaignName;
   @override
-  @HiveField(2, defaultValue: '')
   @JsonKey(name: 'startDate', defaultValue: '')
   String get startDate;
   @override
-  @HiveField(3, defaultValue: '')
   @JsonKey(name: 'bannerUrl', defaultValue: '')
   String get bannerUrl;
   @override
-  @HiveField(4, defaultValue: '')
   @JsonKey(name: 'endDate', defaultValue: '')
   String get endDate;
   @override
-  @HiveField(5, defaultValue: '')
   @JsonKey(name: 'websiteUrl', defaultValue: '')
   String get websiteUrl;
   @override
-  @HiveField(6, defaultValue: 0)
   @JsonKey(name: 'bannerCountId', defaultValue: 0)
   int get bannerCountId;
   @override
-  @HiveField(7, defaultValue: false)
   @JsonKey(name: 'salesRep', defaultValue: false)
   bool get salesRep;
   @override
-  @HiveField(8, defaultValue: '')
   @JsonKey(name: 'status', defaultValue: '')
   String get status;
   @override
-  @HiveField(9, defaultValue: false)
   @JsonKey(name: 'customers', defaultValue: false)
   bool get customers;
   @override
-  @HiveField(10, defaultValue: '')
   @JsonKey(name: 'companyName', defaultValue: '')
   String get companyName;
   @override
-  @HiveField(11, defaultValue: '')
   @JsonKey(name: 'targetProduct', defaultValue: '')
   String get targetProduct;
   @override
-  @HiveField(12, defaultValue: '')
   @JsonKey(name: 'keyWord', defaultValue: '')
   String get keyWord;
   @override
-  @HiveField(13, defaultValue: <String>[])
   @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
   List<String> get bannerCampaignLocations;
   @override
-  @HiveField(14, defaultValue: <String>[])
   @JsonKey(name: 'salesOrg', defaultValue: <String>[])
   List<String> get salesOrg;
   @override
-  @HiveField(15, defaultValue: <String>[])
   @JsonKey(name: 'countryCode', defaultValue: <String>[])
   List<String> get countryCode;
   @override
-  @HiveField(16, defaultValue: '')
   @JsonKey(name: 'mobileBannerImg', defaultValue: '')
   String get mobileBannerImg;
   @override

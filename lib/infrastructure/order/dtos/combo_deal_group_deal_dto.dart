@@ -2,7 +2,6 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 part 'combo_deal_group_deal_dto.freezed.dart';
 part 'combo_deal_group_deal_dto.g.dart';
@@ -10,29 +9,21 @@ part 'combo_deal_group_deal_dto.g.dart';
 @freezed
 class ComboDealGroupDealDto with _$ComboDealGroupDealDto {
   const ComboDealGroupDealDto._();
-  @HiveType(typeId: 27, adapterName: 'ComboDealGroupDealDtoAdapter')
   const factory ComboDealGroupDealDto({
     @StringToDoubleConverter()
     @JsonKey(name: 'minTotalAmount', defaultValue: 0)
-    @HiveField(0, defaultValue: 0)
         required double minTotalAmount,
     @StringToDoubleConverter()
     @JsonKey(name: 'maxTotalAmount', defaultValue: 0)
-    @HiveField(1, defaultValue: 0)
         required double maxTotalAmount,
     @StringToIntConverter()
     @JsonKey(name: 'minTotalQuantity', defaultValue: 0)
-    @HiveField(2, defaultValue: 0)
         required int minTotalQuantity,
     @StringToDoubleConverter()
     @JsonKey(name: 'rate', defaultValue: 0)
-    @HiveField(3, defaultValue: 0)
         required double rate,
-    @JsonKey(name: 'type', defaultValue: '')
-    @HiveField(4, defaultValue: '')
-        required String type,
+    @JsonKey(name: 'type', defaultValue: '') required String type,
     @JsonKey(name: 'conditionNumber', defaultValue: '')
-    @HiveField(5, defaultValue: '')
         required String conditionNumber,
   }) = _ComboDealGroupDealDto;
 

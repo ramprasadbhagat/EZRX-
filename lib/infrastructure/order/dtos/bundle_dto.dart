@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 part 'bundle_dto.freezed.dart';
 part 'bundle_dto.g.dart';
@@ -11,25 +10,16 @@ part 'bundle_dto.g.dart';
 @freezed
 class BundleDto with _$BundleDto {
   const BundleDto._();
-  @HiveType(typeId: 15, adapterName: 'BundleDtoAdapter')
+
   const factory BundleDto({
-    @JsonKey(name: 'BundleName', defaultValue: '')
-    @HiveField(18, defaultValue: '')
-        required String bundleName,
-    @JsonKey(name: 'BundleCode', defaultValue: '')
-    @HiveField(19, defaultValue: '')
-        required String bundleCode,
+    @JsonKey(name: 'BundleName', defaultValue: '') required String bundleName,
+    @JsonKey(name: 'BundleCode', defaultValue: '') required String bundleCode,
     @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
-    @HiveField(20, defaultValue: <BundleInfoDto>[])
         required List<BundleInfoDto> bundleInformation,
     @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
-    @HiveField(21, defaultValue: <MaterialDto>[])
         required List<MaterialDto> materials,
-    @JsonKey(name: 'Conditions', defaultValue: '')
-    @HiveField(22, defaultValue: '')
-        required String conditions,
+    @JsonKey(name: 'Conditions', defaultValue: '') required String conditions,
     @JsonKey(name: 'BonusEligible', defaultValue: false)
-    @HiveField(23, defaultValue: false)
         required bool bonusEligible,
   }) = _BundleDto;
 

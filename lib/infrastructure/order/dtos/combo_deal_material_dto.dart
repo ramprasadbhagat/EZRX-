@@ -2,7 +2,6 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 part 'combo_deal_material_dto.freezed.dart';
 part 'combo_deal_material_dto.g.dart';
@@ -10,13 +9,10 @@ part 'combo_deal_material_dto.g.dart';
 @freezed
 class ComboDealMaterialSetDto with _$ComboDealMaterialSetDto {
   const ComboDealMaterialSetDto._();
-  @HiveType(typeId: 25, adapterName: 'ComboDealMaterialSetDtoAdapter')
+
   const factory ComboDealMaterialSetDto({
-    @JsonKey(name: 'setNo', defaultValue: '')
-    @HiveField(0, defaultValue: '')
-        required String setNo,
+    @JsonKey(name: 'setNo', defaultValue: '') required String setNo,
     @JsonKey(name: 'materials', defaultValue: [])
-    @HiveField(1, defaultValue: [])
         required List<ComboDealMaterialDto> materials,
   }) = _ComboDealMaterialSetDto;
 
@@ -42,31 +38,21 @@ class ComboDealMaterialSetDto with _$ComboDealMaterialSetDto {
 @freezed
 class ComboDealMaterialDto with _$ComboDealMaterialDto {
   const ComboDealMaterialDto._();
-  @HiveType(typeId: 26, adapterName: 'ComboDealMaterialDtoAdapter')
+
   const factory ComboDealMaterialDto({
     @StringToIntConverter()
     @JsonKey(name: 'minQty', defaultValue: 0)
-    @HiveField(0, defaultValue: 0)
         required int minQty,
     @JsonKey(name: 'materialNumber', defaultValue: '')
-    @HiveField(1, defaultValue: '')
         required String materialNumber,
     @StringToDoubleConverter()
     @JsonKey(name: 'rate', defaultValue: 0)
-    @HiveField(2, defaultValue: 0)
         required double rate,
-    @JsonKey(name: 'type', defaultValue: '')
-    @HiveField(3, defaultValue: '')
-        required String type,
+    @JsonKey(name: 'type', defaultValue: '') required String type,
     @JsonKey(name: 'conditionNumber', defaultValue: '')
-    @HiveField(4, defaultValue: '')
         required String conditionNumber,
-    @JsonKey(name: 'mandatory', defaultValue: false)
-    @HiveField(5, defaultValue: false)
-        required bool mandatory,
-    @JsonKey(name: 'suffix', defaultValue: '')
-    @HiveField(6, defaultValue: '')
-        required String suffix,
+    @JsonKey(name: 'mandatory', defaultValue: false) required bool mandatory,
+    @JsonKey(name: 'suffix', defaultValue: '') required String suffix,
   }) = _ComboDealMaterialDto;
 
   factory ComboDealMaterialDto.fromJson(Map<String, dynamic> json) =>

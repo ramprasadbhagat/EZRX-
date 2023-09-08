@@ -3,56 +3,6 @@
 part of 'combo_deal_qty_tier_dto.dart';
 
 // **************************************************************************
-// TypeAdapterGenerator
-// **************************************************************************
-
-class ComboDealQtyTierDtoAdapter extends TypeAdapter<_$_ComboDealQtyTierDto> {
-  @override
-  final int typeId = 29;
-
-  @override
-  _$_ComboDealQtyTierDto read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return _$_ComboDealQtyTierDto(
-      rate: fields[0] == null ? 0 : fields[0] as double,
-      conditionNumber: fields[1] == null ? '' : fields[1] as String,
-      minQty: fields[2] == null ? 0 : fields[2] as int,
-      type: fields[3] == null ? '' : fields[3] as String,
-      suffix: fields[4] == null ? '' : fields[4] as String,
-    );
-  }
-
-  @override
-  void write(BinaryWriter writer, _$_ComboDealQtyTierDto obj) {
-    writer
-      ..writeByte(5)
-      ..writeByte(0)
-      ..write(obj.rate)
-      ..writeByte(1)
-      ..write(obj.conditionNumber)
-      ..writeByte(2)
-      ..write(obj.minQty)
-      ..writeByte(3)
-      ..write(obj.type)
-      ..writeByte(4)
-      ..write(obj.suffix);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ComboDealQtyTierDtoAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
-// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

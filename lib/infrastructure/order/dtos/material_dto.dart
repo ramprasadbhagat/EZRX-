@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.d
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
 
 part 'material_dto.freezed.dart';
 
@@ -17,121 +16,84 @@ part 'material_dto.g.dart';
 class MaterialDto with _$MaterialDto {
   const MaterialDto._();
 
-  @HiveType(typeId: 3, adapterName: 'MaterialDtoAdapter')
   const factory MaterialDto({
     @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-    @HiveField(2, defaultValue: '')
         required String governmentMaterialCode,
     @JsonKey(name: 'therapeuticClass', defaultValue: '')
-    @HiveField(3, defaultValue: '')
         required String therapeuticClass,
     @JsonKey(name: 'itemBrand', defaultValue: '')
-    @HiveField(4, defaultValue: '')
         required String itemBrand,
     @JsonKey(name: 'principalName', defaultValue: '')
-    @HiveField(5, defaultValue: '')
         required String principalName,
     @JsonKey(name: 'taxClassification', defaultValue: '')
-    @HiveField(7, defaultValue: '')
         required String taxClassification,
     @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-    @HiveField(8, defaultValue: '')
         required String itemRegistrationNumber,
     @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-    @HiveField(9, defaultValue: '')
         required String unitOfMeasurement,
     @JsonKey(name: 'materialGroup2', defaultValue: '')
-    @HiveField(10, defaultValue: '')
         required String materialGroup2,
     @JsonKey(name: 'materialGroup4', defaultValue: '')
-    @HiveField(11, defaultValue: '')
         required String materialGroup4,
     @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-    @HiveField(12, defaultValue: false)
         required bool isSampleMaterial,
     @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-    @HiveField(14, defaultValue: false)
         required bool hasValidTenderContract,
     @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-    @HiveField(15, defaultValue: false)
         required bool hasMandatoryTenderContract,
     @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-    @HiveField(16, defaultValue: ['0'])
         required List<String> taxes,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-    @HiveField(18, defaultValue: '')
         required String defaultMaterialDescription,
     @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-    @HiveField(19, defaultValue: false)
         required bool isFOCMaterial,
     @JsonKey(name: 'Quantity', defaultValue: 0, readValue: _validateQantity)
-    @HiveField(20, defaultValue: 0)
         required int quantity,
     @JsonKey(name: 'remarks', defaultValue: '')
-    @HiveField(21, defaultValue: '')
         required String remarks,
     @JsonKey(name: 'genericMaterialName', defaultValue: '')
-    @HiveField(22, defaultValue: '')
         required String genericMaterialName,
     @JsonKey(name: 'ean', defaultValue: '')
-    @HiveField(23, defaultValue: '')
         required String ean,
     @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
-    @HiveField(39, defaultValue: _emptyConstBundleDto)
         required BundleDto bundle,
 
     // new field from v3
     @JsonKey(name: 'Code', defaultValue: '')
-    @HiveField(24, defaultValue: '')
         required String code,
     @JsonKey(name: 'Name', defaultValue: '')
-    @HiveField(25, defaultValue: '')
-    @HiveField(26, defaultValue: '')
         required String name,
     @JsonKey(
       name: 'PrincipalCode',
       defaultValue: '',
       readValue: _principalCodeReadValue,
     )
-    @HiveField(27, defaultValue: '')
         required String principalCode,
     @JsonKey(
       name: 'MaterialNumber',
       defaultValue: '',
       readValue: _materialNumberReadValue,
     )
-    @HiveField(28, defaultValue: '')
         required String materialNumber,
-    @HiveField(29, defaultValue: '')
     @JsonKey(name: 'materialDescription', defaultValue: '')
-    @HiveField(30, defaultValue: '')
         required String materialDescription,
     @JsonKey(name: 'Manufactured', defaultValue: '')
-    @HiveField(31, defaultValue: '')
         required String manufactured,
     @JsonKey(name: 'IsFavourite', defaultValue: false)
-    @HiveField(32, defaultValue: false)
         required bool isFavourite,
     @JsonKey(name: 'Type', defaultValue: '')
-    @HiveField(33, defaultValue: '')
         required String type,
     @JsonKey(name: 'HidePrice', defaultValue: false)
-    @HiveField(34, defaultValue: false)
         required bool hidePrice,
     @JsonKey(name: 'DataTotalCount', defaultValue: 0)
-    @HiveField(35, defaultValue: 0)
         required int dataTotalCount,
     @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
-    @HiveField(36, defaultValue: 0)
         required int dataTotalHidden,
     @JsonKey(name: 'IsGimmick', defaultValue: false)
-    @HiveField(37, defaultValue: false)
         required bool isGimmick,
     @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
-    @HiveField(38, defaultValue: [])
         required List<MaterialDataDto> data,
     @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-    @HiveField(17, defaultValue: <BundleDto>[])
         required List<BundleDto> bundles,
   }) = _MaterialDto;
 
@@ -258,25 +220,19 @@ String _principalCodeReadValue(Map json, String key) =>
 @freezed
 class MaterialDataDto with _$MaterialDataDto {
   const MaterialDataDto._();
-  @HiveType(typeId: 3, adapterName: 'MaterialDataDtoAdapter')
+
   factory MaterialDataDto({
     @JsonKey(name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
-    @HiveField(1, defaultValue: '')
         required String code,
     @JsonKey(name: 'Manufactured', defaultValue: '')
-    @HiveField(2, defaultValue: '')
         required String manufactured,
     @JsonKey(name: 'MaterialDescription', defaultValue: '')
-    @HiveField(3, defaultValue: '')
         required String materialDescription,
     @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-    @HiveField(4, defaultValue: '')
         required String defaultMaterialDescription,
     @JsonKey(name: 'GenericMaterialName', defaultValue: '')
-    @HiveField(5, defaultValue: '')
         required String genericMaterialName,
     @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
-    @HiveField(7, defaultValue: '')
         required String governmentMaterialCode,
   }) = _MaterialDataDto;
 
@@ -325,12 +281,3 @@ class MaterialResponseDto with _$MaterialResponseDto {
         products: products.map((e) => e.toDomain()).toList(),
       );
 }
-
-const _emptyConstBundleDto = BundleDto(
-  bonusEligible: false,
-  bundleCode: '',
-  bundleInformation: [],
-  bundleName: '',
-  conditions: '',
-  materials: [],
-);

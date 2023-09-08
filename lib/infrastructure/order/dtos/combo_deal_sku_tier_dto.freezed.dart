@@ -22,18 +22,14 @@ ComboDealSKUTierDto _$ComboDealSKUTierDtoFromJson(Map<String, dynamic> json) {
 mixin _$ComboDealSKUTierDto {
   @StringToDoubleConverter()
   @JsonKey(name: 'rate', defaultValue: 0)
-  @HiveField(0, defaultValue: 0)
   double get rate => throw _privateConstructorUsedError;
   @StringToDoubleConverter()
   @JsonKey(name: 'conditionNumber', defaultValue: '')
-  @HiveField(1, defaultValue: '')
   String get conditionNumber => throw _privateConstructorUsedError;
   @StringToIntConverter()
   @JsonKey(name: 'minQty', defaultValue: 0)
-  @HiveField(2, defaultValue: 0)
   int get minQty => throw _privateConstructorUsedError;
   @JsonKey(name: 'type', defaultValue: '')
-  @HiveField(3, defaultValue: '')
   String get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,19 +47,14 @@ abstract class $ComboDealSKUTierDtoCopyWith<$Res> {
   $Res call(
       {@StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
-      @HiveField(0, defaultValue: 0)
-          double rate,
+      double rate,
       @StringToDoubleConverter()
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          String conditionNumber,
+      String conditionNumber,
       @StringToIntConverter()
       @JsonKey(name: 'minQty', defaultValue: 0)
-      @HiveField(2, defaultValue: 0)
-          int minQty,
-      @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          String type});
+      int minQty,
+      @JsonKey(name: 'type', defaultValue: '') String type});
 }
 
 /// @nodoc
@@ -116,19 +107,14 @@ abstract class _$$_ComboDealSKUTierDtoCopyWith<$Res>
   $Res call(
       {@StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
-      @HiveField(0, defaultValue: 0)
-          double rate,
+      double rate,
       @StringToDoubleConverter()
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          String conditionNumber,
+      String conditionNumber,
       @StringToIntConverter()
       @JsonKey(name: 'minQty', defaultValue: 0)
-      @HiveField(2, defaultValue: 0)
-          int minQty,
-      @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          String type});
+      int minQty,
+      @JsonKey(name: 'type', defaultValue: '') String type});
 }
 
 /// @nodoc
@@ -170,24 +156,18 @@ class __$$_ComboDealSKUTierDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 28, adapterName: 'ComboDealSKUTierDtoAdapter')
 class _$_ComboDealSKUTierDto extends _ComboDealSKUTierDto {
   const _$_ComboDealSKUTierDto(
       {@StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
-      @HiveField(0, defaultValue: 0)
-          required this.rate,
+      required this.rate,
       @StringToDoubleConverter()
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          required this.conditionNumber,
+      required this.conditionNumber,
       @StringToIntConverter()
       @JsonKey(name: 'minQty', defaultValue: 0)
-      @HiveField(2, defaultValue: 0)
-          required this.minQty,
-      @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          required this.type})
+      required this.minQty,
+      @JsonKey(name: 'type', defaultValue: '') required this.type})
       : super._();
 
   factory _$_ComboDealSKUTierDto.fromJson(Map<String, dynamic> json) =>
@@ -196,21 +176,17 @@ class _$_ComboDealSKUTierDto extends _ComboDealSKUTierDto {
   @override
   @StringToDoubleConverter()
   @JsonKey(name: 'rate', defaultValue: 0)
-  @HiveField(0, defaultValue: 0)
   final double rate;
   @override
   @StringToDoubleConverter()
   @JsonKey(name: 'conditionNumber', defaultValue: '')
-  @HiveField(1, defaultValue: '')
   final String conditionNumber;
   @override
   @StringToIntConverter()
   @JsonKey(name: 'minQty', defaultValue: 0)
-  @HiveField(2, defaultValue: 0)
   final int minQty;
   @override
   @JsonKey(name: 'type', defaultValue: '')
-  @HiveField(3, defaultValue: '')
   final String type;
 
   @override
@@ -254,19 +230,15 @@ abstract class _ComboDealSKUTierDto extends ComboDealSKUTierDto {
   const factory _ComboDealSKUTierDto(
       {@StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
-      @HiveField(0, defaultValue: 0)
-          required final double rate,
+      required final double rate,
       @StringToDoubleConverter()
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          required final String conditionNumber,
+      required final String conditionNumber,
       @StringToIntConverter()
       @JsonKey(name: 'minQty', defaultValue: 0)
-      @HiveField(2, defaultValue: 0)
-          required final int minQty,
+      required final int minQty,
       @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          required final String type}) = _$_ComboDealSKUTierDto;
+      required final String type}) = _$_ComboDealSKUTierDto;
   const _ComboDealSKUTierDto._() : super._();
 
   factory _ComboDealSKUTierDto.fromJson(Map<String, dynamic> json) =
@@ -275,21 +247,17 @@ abstract class _ComboDealSKUTierDto extends ComboDealSKUTierDto {
   @override
   @StringToDoubleConverter()
   @JsonKey(name: 'rate', defaultValue: 0)
-  @HiveField(0, defaultValue: 0)
   double get rate;
   @override
   @StringToDoubleConverter()
   @JsonKey(name: 'conditionNumber', defaultValue: '')
-  @HiveField(1, defaultValue: '')
   String get conditionNumber;
   @override
   @StringToIntConverter()
   @JsonKey(name: 'minQty', defaultValue: 0)
-  @HiveField(2, defaultValue: 0)
   int get minQty;
   @override
   @JsonKey(name: 'type', defaultValue: '')
-  @HiveField(3, defaultValue: '')
   String get type;
   @override
   @JsonKey(ignore: true)

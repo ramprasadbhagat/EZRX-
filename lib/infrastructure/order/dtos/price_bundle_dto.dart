@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/price_bundle.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 part 'price_bundle_dto.freezed.dart';
 part 'price_bundle_dto.g.dart';
@@ -8,22 +7,14 @@ part 'price_bundle_dto.g.dart';
 @freezed
 class PriceBundleDto with _$PriceBundleDto {
   const PriceBundleDto._();
-  @HiveType(typeId: 13, adapterName: 'PriceBundleDtoAdapter')
+
   const factory PriceBundleDto({
-    @JsonKey(name: 'BundleName', defaultValue: '')
-    @HiveField(35, defaultValue: '')
-        required String name,
-    @JsonKey(name: 'BundleCode', defaultValue: '')
-    @HiveField(36, defaultValue: '')
-        required String code,
-    @JsonKey(name: 'Conditions', defaultValue: '')
-    @HiveField(37, defaultValue: '')
-        required String conditions,
+    @JsonKey(name: 'BundleName', defaultValue: '') required String name,
+    @JsonKey(name: 'BundleCode', defaultValue: '') required String code,
+    @JsonKey(name: 'Conditions', defaultValue: '') required String conditions,
     @JsonKey(name: 'BonusEligible', defaultValue: false)
-    @HiveField(38, defaultValue: false)
         required bool bonusEligible,
     @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
-    @HiveField(39, defaultValue: <PriceBundleItemDto>[])
         required List<PriceBundleItemDto> information,
   }) = _PriceBundleDto;
 
@@ -54,20 +45,12 @@ class PriceBundleDto with _$PriceBundleDto {
 @freezed
 class PriceBundleItemDto with _$PriceBundleItemDto {
   const PriceBundleItemDto._();
-  @HiveType(typeId: 14, adapterName: 'PriceBundleItemDtoAdapter')
+
   const factory PriceBundleItemDto({
-    @JsonKey(name: 'Type', defaultValue: '')
-    @HiveField(38, defaultValue: '')
-        required String type,
-    @JsonKey(name: 'Sequence', defaultValue: 0)
-    @HiveField(39, defaultValue: 0)
-        required int sequence,
-    @JsonKey(name: 'Quantity', defaultValue: 0)
-    @HiveField(40, defaultValue: 0)
-        required int quantity,
-    @JsonKey(name: 'Rate', defaultValue: 0)
-    @HiveField(41, defaultValue: 0)
-        required double rate,
+    @JsonKey(name: 'Type', defaultValue: '') required String type,
+    @JsonKey(name: 'Sequence', defaultValue: 0) required int sequence,
+    @JsonKey(name: 'Quantity', defaultValue: 0) required int quantity,
+    @JsonKey(name: 'Rate', defaultValue: 0) required double rate,
   }) = _PriceBundleItemDto;
 
   factory PriceBundleItemDto.fromDomain(PriceBundleItem priceBundleItem) {

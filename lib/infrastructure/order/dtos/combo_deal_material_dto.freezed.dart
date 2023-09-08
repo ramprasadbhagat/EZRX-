@@ -22,10 +22,8 @@ ComboDealMaterialSetDto _$ComboDealMaterialSetDtoFromJson(
 /// @nodoc
 mixin _$ComboDealMaterialSetDto {
   @JsonKey(name: 'setNo', defaultValue: '')
-  @HiveField(0, defaultValue: '')
   String get setNo => throw _privateConstructorUsedError;
   @JsonKey(name: 'materials', defaultValue: [])
-  @HiveField(1, defaultValue: [])
   List<ComboDealMaterialDto> get materials =>
       throw _privateConstructorUsedError;
 
@@ -42,12 +40,9 @@ abstract class $ComboDealMaterialSetDtoCopyWith<$Res> {
       _$ComboDealMaterialSetDtoCopyWithImpl<$Res, ComboDealMaterialSetDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'setNo', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          String setNo,
+      {@JsonKey(name: 'setNo', defaultValue: '') String setNo,
       @JsonKey(name: 'materials', defaultValue: [])
-      @HiveField(1, defaultValue: [])
-          List<ComboDealMaterialDto> materials});
+      List<ComboDealMaterialDto> materials});
 }
 
 /// @nodoc
@@ -89,12 +84,9 @@ abstract class _$$_ComboDealMaterialSetDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'setNo', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          String setNo,
+      {@JsonKey(name: 'setNo', defaultValue: '') String setNo,
       @JsonKey(name: 'materials', defaultValue: [])
-      @HiveField(1, defaultValue: [])
-          List<ComboDealMaterialDto> materials});
+      List<ComboDealMaterialDto> materials});
 }
 
 /// @nodoc
@@ -127,15 +119,11 @@ class __$$_ComboDealMaterialSetDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 25, adapterName: 'ComboDealMaterialSetDtoAdapter')
 class _$_ComboDealMaterialSetDto extends _ComboDealMaterialSetDto {
   const _$_ComboDealMaterialSetDto(
-      {@JsonKey(name: 'setNo', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          required this.setNo,
+      {@JsonKey(name: 'setNo', defaultValue: '') required this.setNo,
       @JsonKey(name: 'materials', defaultValue: [])
-      @HiveField(1, defaultValue: [])
-          required final List<ComboDealMaterialDto> materials})
+      required final List<ComboDealMaterialDto> materials})
       : _materials = materials,
         super._();
 
@@ -144,12 +132,10 @@ class _$_ComboDealMaterialSetDto extends _ComboDealMaterialSetDto {
 
   @override
   @JsonKey(name: 'setNo', defaultValue: '')
-  @HiveField(0, defaultValue: '')
   final String setNo;
   final List<ComboDealMaterialDto> _materials;
   @override
   @JsonKey(name: 'materials', defaultValue: [])
-  @HiveField(1, defaultValue: [])
   List<ComboDealMaterialDto> get materials {
     if (_materials is EqualUnmodifiableListView) return _materials;
     // ignore: implicit_dynamic_type
@@ -194,13 +180,10 @@ class _$_ComboDealMaterialSetDto extends _ComboDealMaterialSetDto {
 
 abstract class _ComboDealMaterialSetDto extends ComboDealMaterialSetDto {
   const factory _ComboDealMaterialSetDto(
-          {@JsonKey(name: 'setNo', defaultValue: '')
-          @HiveField(0, defaultValue: '')
-              required final String setNo,
-          @JsonKey(name: 'materials', defaultValue: [])
-          @HiveField(1, defaultValue: [])
-              required final List<ComboDealMaterialDto> materials}) =
-      _$_ComboDealMaterialSetDto;
+      {@JsonKey(name: 'setNo', defaultValue: '') required final String setNo,
+      @JsonKey(name: 'materials', defaultValue: [])
+      required final List<ComboDealMaterialDto>
+          materials}) = _$_ComboDealMaterialSetDto;
   const _ComboDealMaterialSetDto._() : super._();
 
   factory _ComboDealMaterialSetDto.fromJson(Map<String, dynamic> json) =
@@ -208,11 +191,9 @@ abstract class _ComboDealMaterialSetDto extends ComboDealMaterialSetDto {
 
   @override
   @JsonKey(name: 'setNo', defaultValue: '')
-  @HiveField(0, defaultValue: '')
   String get setNo;
   @override
   @JsonKey(name: 'materials', defaultValue: [])
-  @HiveField(1, defaultValue: [])
   List<ComboDealMaterialDto> get materials;
   @override
   @JsonKey(ignore: true)
@@ -228,26 +209,19 @@ ComboDealMaterialDto _$ComboDealMaterialDtoFromJson(Map<String, dynamic> json) {
 mixin _$ComboDealMaterialDto {
   @StringToIntConverter()
   @JsonKey(name: 'minQty', defaultValue: 0)
-  @HiveField(0, defaultValue: 0)
   int get minQty => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialNumber', defaultValue: '')
-  @HiveField(1, defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
   @StringToDoubleConverter()
   @JsonKey(name: 'rate', defaultValue: 0)
-  @HiveField(2, defaultValue: 0)
   double get rate => throw _privateConstructorUsedError;
   @JsonKey(name: 'type', defaultValue: '')
-  @HiveField(3, defaultValue: '')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'conditionNumber', defaultValue: '')
-  @HiveField(4, defaultValue: '')
   String get conditionNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'mandatory', defaultValue: false)
-  @HiveField(5, defaultValue: false)
   bool get mandatory => throw _privateConstructorUsedError;
   @JsonKey(name: 'suffix', defaultValue: '')
-  @HiveField(6, defaultValue: '')
   String get suffix => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -265,27 +239,16 @@ abstract class $ComboDealMaterialDtoCopyWith<$Res> {
   $Res call(
       {@StringToIntConverter()
       @JsonKey(name: 'minQty', defaultValue: 0)
-      @HiveField(0, defaultValue: 0)
-          int minQty,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          String materialNumber,
+      int minQty,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
       @StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
-      @HiveField(2, defaultValue: 0)
-          double rate,
-      @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          String type,
+      double rate,
+      @JsonKey(name: 'type', defaultValue: '') String type,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(4, defaultValue: '')
-          String conditionNumber,
-      @JsonKey(name: 'mandatory', defaultValue: false)
-      @HiveField(5, defaultValue: false)
-          bool mandatory,
-      @JsonKey(name: 'suffix', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          String suffix});
+      String conditionNumber,
+      @JsonKey(name: 'mandatory', defaultValue: false) bool mandatory,
+      @JsonKey(name: 'suffix', defaultValue: '') String suffix});
 }
 
 /// @nodoc
@@ -354,27 +317,16 @@ abstract class _$$_ComboDealMaterialDtoCopyWith<$Res>
   $Res call(
       {@StringToIntConverter()
       @JsonKey(name: 'minQty', defaultValue: 0)
-      @HiveField(0, defaultValue: 0)
-          int minQty,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          String materialNumber,
+      int minQty,
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
       @StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
-      @HiveField(2, defaultValue: 0)
-          double rate,
-      @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          String type,
+      double rate,
+      @JsonKey(name: 'type', defaultValue: '') String type,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(4, defaultValue: '')
-          String conditionNumber,
-      @JsonKey(name: 'mandatory', defaultValue: false)
-      @HiveField(5, defaultValue: false)
-          bool mandatory,
-      @JsonKey(name: 'suffix', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          String suffix});
+      String conditionNumber,
+      @JsonKey(name: 'mandatory', defaultValue: false) bool mandatory,
+      @JsonKey(name: 'suffix', defaultValue: '') String suffix});
 }
 
 /// @nodoc
@@ -431,32 +383,21 @@ class __$$_ComboDealMaterialDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 26, adapterName: 'ComboDealMaterialDtoAdapter')
 class _$_ComboDealMaterialDto extends _ComboDealMaterialDto {
   const _$_ComboDealMaterialDto(
       {@StringToIntConverter()
       @JsonKey(name: 'minQty', defaultValue: 0)
-      @HiveField(0, defaultValue: 0)
-          required this.minQty,
+      required this.minQty,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          required this.materialNumber,
+      required this.materialNumber,
       @StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
-      @HiveField(2, defaultValue: 0)
-          required this.rate,
-      @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          required this.type,
+      required this.rate,
+      @JsonKey(name: 'type', defaultValue: '') required this.type,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(4, defaultValue: '')
-          required this.conditionNumber,
-      @JsonKey(name: 'mandatory', defaultValue: false)
-      @HiveField(5, defaultValue: false)
-          required this.mandatory,
-      @JsonKey(name: 'suffix', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          required this.suffix})
+      required this.conditionNumber,
+      @JsonKey(name: 'mandatory', defaultValue: false) required this.mandatory,
+      @JsonKey(name: 'suffix', defaultValue: '') required this.suffix})
       : super._();
 
   factory _$_ComboDealMaterialDto.fromJson(Map<String, dynamic> json) =>
@@ -465,32 +406,25 @@ class _$_ComboDealMaterialDto extends _ComboDealMaterialDto {
   @override
   @StringToIntConverter()
   @JsonKey(name: 'minQty', defaultValue: 0)
-  @HiveField(0, defaultValue: 0)
   final int minQty;
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
-  @HiveField(1, defaultValue: '')
   final String materialNumber;
   @override
   @StringToDoubleConverter()
   @JsonKey(name: 'rate', defaultValue: 0)
-  @HiveField(2, defaultValue: 0)
   final double rate;
   @override
   @JsonKey(name: 'type', defaultValue: '')
-  @HiveField(3, defaultValue: '')
   final String type;
   @override
   @JsonKey(name: 'conditionNumber', defaultValue: '')
-  @HiveField(4, defaultValue: '')
   final String conditionNumber;
   @override
   @JsonKey(name: 'mandatory', defaultValue: false)
-  @HiveField(5, defaultValue: false)
   final bool mandatory;
   @override
   @JsonKey(name: 'suffix', defaultValue: '')
-  @HiveField(6, defaultValue: '')
   final String suffix;
 
   @override
@@ -539,27 +473,19 @@ abstract class _ComboDealMaterialDto extends ComboDealMaterialDto {
   const factory _ComboDealMaterialDto(
       {@StringToIntConverter()
       @JsonKey(name: 'minQty', defaultValue: 0)
-      @HiveField(0, defaultValue: 0)
-          required final int minQty,
+      required final int minQty,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
-      @HiveField(2, defaultValue: 0)
-          required final double rate,
-      @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          required final String type,
+      required final double rate,
+      @JsonKey(name: 'type', defaultValue: '') required final String type,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(4, defaultValue: '')
-          required final String conditionNumber,
+      required final String conditionNumber,
       @JsonKey(name: 'mandatory', defaultValue: false)
-      @HiveField(5, defaultValue: false)
-          required final bool mandatory,
+      required final bool mandatory,
       @JsonKey(name: 'suffix', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          required final String suffix}) = _$_ComboDealMaterialDto;
+      required final String suffix}) = _$_ComboDealMaterialDto;
   const _ComboDealMaterialDto._() : super._();
 
   factory _ComboDealMaterialDto.fromJson(Map<String, dynamic> json) =
@@ -568,32 +494,25 @@ abstract class _ComboDealMaterialDto extends ComboDealMaterialDto {
   @override
   @StringToIntConverter()
   @JsonKey(name: 'minQty', defaultValue: 0)
-  @HiveField(0, defaultValue: 0)
   int get minQty;
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
-  @HiveField(1, defaultValue: '')
   String get materialNumber;
   @override
   @StringToDoubleConverter()
   @JsonKey(name: 'rate', defaultValue: 0)
-  @HiveField(2, defaultValue: 0)
   double get rate;
   @override
   @JsonKey(name: 'type', defaultValue: '')
-  @HiveField(3, defaultValue: '')
   String get type;
   @override
   @JsonKey(name: 'conditionNumber', defaultValue: '')
-  @HiveField(4, defaultValue: '')
   String get conditionNumber;
   @override
   @JsonKey(name: 'mandatory', defaultValue: false)
-  @HiveField(5, defaultValue: false)
   bool get mandatory;
   @override
   @JsonKey(name: 'suffix', defaultValue: '')
-  @HiveField(6, defaultValue: '')
   String get suffix;
   @override
   @JsonKey(ignore: true)

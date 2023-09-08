@@ -2,7 +2,6 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 part 'price_combo_deal_dto.freezed.dart';
 part 'price_combo_deal_dto.g.dart';
@@ -10,20 +9,14 @@ part 'price_combo_deal_dto.g.dart';
 @freezed
 class PriceComboDealDto with _$PriceComboDealDto {
   const PriceComboDealDto._();
-  @HiveType(typeId: 17, adapterName: 'PriceComboDealDtoAdapter')
+
   const factory PriceComboDealDto({
-    @JsonKey(name: 'Eligible', defaultValue: false)
-    @HiveField(0, defaultValue: false)
-        required bool isEligible,
+    @JsonKey(name: 'Eligible', defaultValue: false) required bool isEligible,
     @JsonKey(name: 'FlexibleGroup', defaultValue: '')
-    @HiveField(1, defaultValue: '')
         required String flexibleGroup,
-    @JsonKey(name: 'SalesDeal', defaultValue: '')
-    @HiveField(2, defaultValue: '')
-        required String salesDeal,
+    @JsonKey(name: 'SalesDeal', defaultValue: '') required String salesDeal,
     @Default(PriceComboDealCategoryDto.empty)
     @JsonKey(name: 'Category')
-    @HiveField(3, defaultValue: PriceComboDealCategoryDto.empty)
         PriceComboDealCategoryDto category,
   }) = _PriceComboDealDto;
 
@@ -57,14 +50,10 @@ class PriceComboDealDto with _$PriceComboDealDto {
 @freezed
 class PriceComboDealCategoryDto with _$PriceComboDealCategoryDto {
   const PriceComboDealCategoryDto._();
-  @HiveType(typeId: 23, adapterName: 'PriceComboDealCategoryDtoAdapter')
+
   const factory PriceComboDealCategoryDto({
-    @JsonKey(name: 'Type', defaultValue: '')
-    @HiveField(0, defaultValue: '')
-        required String type,
-    @JsonKey(name: 'Value', defaultValue: [])
-    @HiveField(1, defaultValue: [])
-        required List<String> value,
+    @JsonKey(name: 'Type', defaultValue: '') required String type,
+    @JsonKey(name: 'Value', defaultValue: []) required List<String> value,
   }) = _PriceComboDealCategoryDto;
 
   factory PriceComboDealCategoryDto.fromDomain(PriceComboDealCategory domain) =>

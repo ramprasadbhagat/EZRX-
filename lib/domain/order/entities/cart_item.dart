@@ -18,10 +18,8 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 part 'cart_item.freezed.dart';
-part 'cart_item.g.dart';
 
 //We don't need this anymore so we need a ticket for delete the file and it's usages
 @freezed
@@ -446,13 +444,9 @@ class CartItem with _$CartItem {
   }
 }
 
-@HiveType(typeId: 22)
 enum CartItemType {
-  @HiveField(0)
   material,
-  @HiveField(1)
   bundle,
-  @HiveField(3)
   comboDeal,
 }
 

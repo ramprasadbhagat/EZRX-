@@ -21,31 +21,22 @@ PriceRuleDto _$PriceRuleDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PriceRuleDto {
   @JsonKey(name: 'Type', defaultValue: '')
-  @HiveField(14, defaultValue: '')
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(15, defaultValue: 0)
   double get rate => throw _privateConstructorUsedError;
   @JsonKey(name: 'Conditions', defaultValue: '')
-  @HiveField(16, defaultValue: '')
   String get condition => throw _privateConstructorUsedError;
   @JsonKey(name: 'TieredRules')
-  @HiveField(17, defaultValue: TieredRulesDto.empty)
   TieredRulesDto get tieredRules => throw _privateConstructorUsedError;
   @JsonKey(name: 'BonusEligible', defaultValue: false)
-  @HiveField(18, defaultValue: false)
   bool get bonusEligible => throw _privateConstructorUsedError;
   @JsonKey(name: 'ConditionNumber', defaultValue: '')
-  @HiveField(19, defaultValue: '')
   String get conditionNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'OverriddenBy', defaultValue: '')
-  @HiveField(20, defaultValue: '')
   String get overriddenBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'MaxQuota', defaultValue: '')
-  @HiveField(21, defaultValue: '')
   String get maxQuota => throw _privateConstructorUsedError;
   @JsonKey(name: 'RemainingQuota', defaultValue: '')
-  @HiveField(22, defaultValue: '')
   String get remainingQuota => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -61,33 +52,17 @@ abstract class $PriceRuleDtoCopyWith<$Res> {
       _$PriceRuleDtoCopyWithImpl<$Res, PriceRuleDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(14, defaultValue: '')
-          String type,
-      @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(15, defaultValue: 0)
-          double rate,
-      @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(16, defaultValue: '')
-          String condition,
-      @JsonKey(name: 'TieredRules')
-      @HiveField(17, defaultValue: TieredRulesDto.empty)
-          TieredRulesDto tieredRules,
-      @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(18, defaultValue: false)
-          bool bonusEligible,
+      {@JsonKey(name: 'Type', defaultValue: '') String type,
+      @JsonKey(name: 'Rate', defaultValue: 0) double rate,
+      @JsonKey(name: 'Conditions', defaultValue: '') String condition,
+      @JsonKey(name: 'TieredRules') TieredRulesDto tieredRules,
+      @JsonKey(name: 'BonusEligible', defaultValue: false) bool bonusEligible,
       @JsonKey(name: 'ConditionNumber', defaultValue: '')
-      @HiveField(19, defaultValue: '')
-          String conditionNumber,
-      @JsonKey(name: 'OverriddenBy', defaultValue: '')
-      @HiveField(20, defaultValue: '')
-          String overriddenBy,
-      @JsonKey(name: 'MaxQuota', defaultValue: '')
-      @HiveField(21, defaultValue: '')
-          String maxQuota,
+      String conditionNumber,
+      @JsonKey(name: 'OverriddenBy', defaultValue: '') String overriddenBy,
+      @JsonKey(name: 'MaxQuota', defaultValue: '') String maxQuota,
       @JsonKey(name: 'RemainingQuota', defaultValue: '')
-      @HiveField(22, defaultValue: '')
-          String remainingQuota});
+      String remainingQuota});
 
   $TieredRulesDtoCopyWith<$Res> get tieredRules;
 }
@@ -173,33 +148,17 @@ abstract class _$$_PriceRuleDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(14, defaultValue: '')
-          String type,
-      @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(15, defaultValue: 0)
-          double rate,
-      @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(16, defaultValue: '')
-          String condition,
-      @JsonKey(name: 'TieredRules')
-      @HiveField(17, defaultValue: TieredRulesDto.empty)
-          TieredRulesDto tieredRules,
-      @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(18, defaultValue: false)
-          bool bonusEligible,
+      {@JsonKey(name: 'Type', defaultValue: '') String type,
+      @JsonKey(name: 'Rate', defaultValue: 0) double rate,
+      @JsonKey(name: 'Conditions', defaultValue: '') String condition,
+      @JsonKey(name: 'TieredRules') TieredRulesDto tieredRules,
+      @JsonKey(name: 'BonusEligible', defaultValue: false) bool bonusEligible,
       @JsonKey(name: 'ConditionNumber', defaultValue: '')
-      @HiveField(19, defaultValue: '')
-          String conditionNumber,
-      @JsonKey(name: 'OverriddenBy', defaultValue: '')
-      @HiveField(20, defaultValue: '')
-          String overriddenBy,
-      @JsonKey(name: 'MaxQuota', defaultValue: '')
-      @HiveField(21, defaultValue: '')
-          String maxQuota,
+      String conditionNumber,
+      @JsonKey(name: 'OverriddenBy', defaultValue: '') String overriddenBy,
+      @JsonKey(name: 'MaxQuota', defaultValue: '') String maxQuota,
       @JsonKey(name: 'RemainingQuota', defaultValue: '')
-      @HiveField(22, defaultValue: '')
-          String remainingQuota});
+      String remainingQuota});
 
   @override
   $TieredRulesDtoCopyWith<$Res> get tieredRules;
@@ -269,36 +228,21 @@ class __$$_PriceRuleDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 7, adapterName: 'PriceRuleDtoAdapter')
 class _$_PriceRuleDto extends _PriceRuleDto {
   const _$_PriceRuleDto(
-      {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(14, defaultValue: '')
-          required this.type,
-      @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(15, defaultValue: 0)
-          required this.rate,
-      @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(16, defaultValue: '')
-          required this.condition,
-      @JsonKey(name: 'TieredRules')
-      @HiveField(17, defaultValue: TieredRulesDto.empty)
-          this.tieredRules = TieredRulesDto.empty,
+      {@JsonKey(name: 'Type', defaultValue: '') required this.type,
+      @JsonKey(name: 'Rate', defaultValue: 0) required this.rate,
+      @JsonKey(name: 'Conditions', defaultValue: '') required this.condition,
+      @JsonKey(name: 'TieredRules') this.tieredRules = TieredRulesDto.empty,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(18, defaultValue: false)
-          required this.bonusEligible,
+      required this.bonusEligible,
       @JsonKey(name: 'ConditionNumber', defaultValue: '')
-      @HiveField(19, defaultValue: '')
-          required this.conditionNumber,
+      required this.conditionNumber,
       @JsonKey(name: 'OverriddenBy', defaultValue: '')
-      @HiveField(20, defaultValue: '')
-          required this.overriddenBy,
-      @JsonKey(name: 'MaxQuota', defaultValue: '')
-      @HiveField(21, defaultValue: '')
-          required this.maxQuota,
+      required this.overriddenBy,
+      @JsonKey(name: 'MaxQuota', defaultValue: '') required this.maxQuota,
       @JsonKey(name: 'RemainingQuota', defaultValue: '')
-      @HiveField(22, defaultValue: '')
-          required this.remainingQuota})
+      required this.remainingQuota})
       : super._();
 
   factory _$_PriceRuleDto.fromJson(Map<String, dynamic> json) =>
@@ -306,39 +250,30 @@ class _$_PriceRuleDto extends _PriceRuleDto {
 
   @override
   @JsonKey(name: 'Type', defaultValue: '')
-  @HiveField(14, defaultValue: '')
   final String type;
   @override
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(15, defaultValue: 0)
   final double rate;
   @override
   @JsonKey(name: 'Conditions', defaultValue: '')
-  @HiveField(16, defaultValue: '')
   final String condition;
   @override
   @JsonKey(name: 'TieredRules')
-  @HiveField(17, defaultValue: TieredRulesDto.empty)
   final TieredRulesDto tieredRules;
   @override
   @JsonKey(name: 'BonusEligible', defaultValue: false)
-  @HiveField(18, defaultValue: false)
   final bool bonusEligible;
   @override
   @JsonKey(name: 'ConditionNumber', defaultValue: '')
-  @HiveField(19, defaultValue: '')
   final String conditionNumber;
   @override
   @JsonKey(name: 'OverriddenBy', defaultValue: '')
-  @HiveField(20, defaultValue: '')
   final String overriddenBy;
   @override
   @JsonKey(name: 'MaxQuota', defaultValue: '')
-  @HiveField(21, defaultValue: '')
   final String maxQuota;
   @override
   @JsonKey(name: 'RemainingQuota', defaultValue: '')
-  @HiveField(22, defaultValue: '')
   final String remainingQuota;
 
   @override
@@ -399,33 +334,21 @@ class _$_PriceRuleDto extends _PriceRuleDto {
 
 abstract class _PriceRuleDto extends PriceRuleDto {
   const factory _PriceRuleDto(
-      {@JsonKey(name: 'Type', defaultValue: '')
-      @HiveField(14, defaultValue: '')
-          required final String type,
-      @JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(15, defaultValue: 0)
-          required final double rate,
+      {@JsonKey(name: 'Type', defaultValue: '') required final String type,
+      @JsonKey(name: 'Rate', defaultValue: 0) required final double rate,
       @JsonKey(name: 'Conditions', defaultValue: '')
-      @HiveField(16, defaultValue: '')
-          required final String condition,
-      @JsonKey(name: 'TieredRules')
-      @HiveField(17, defaultValue: TieredRulesDto.empty)
-          final TieredRulesDto tieredRules,
+      required final String condition,
+      @JsonKey(name: 'TieredRules') final TieredRulesDto tieredRules,
       @JsonKey(name: 'BonusEligible', defaultValue: false)
-      @HiveField(18, defaultValue: false)
-          required final bool bonusEligible,
+      required final bool bonusEligible,
       @JsonKey(name: 'ConditionNumber', defaultValue: '')
-      @HiveField(19, defaultValue: '')
-          required final String conditionNumber,
+      required final String conditionNumber,
       @JsonKey(name: 'OverriddenBy', defaultValue: '')
-      @HiveField(20, defaultValue: '')
-          required final String overriddenBy,
+      required final String overriddenBy,
       @JsonKey(name: 'MaxQuota', defaultValue: '')
-      @HiveField(21, defaultValue: '')
-          required final String maxQuota,
+      required final String maxQuota,
       @JsonKey(name: 'RemainingQuota', defaultValue: '')
-      @HiveField(22, defaultValue: '')
-          required final String remainingQuota}) = _$_PriceRuleDto;
+      required final String remainingQuota}) = _$_PriceRuleDto;
   const _PriceRuleDto._() : super._();
 
   factory _PriceRuleDto.fromJson(Map<String, dynamic> json) =
@@ -433,39 +356,30 @@ abstract class _PriceRuleDto extends PriceRuleDto {
 
   @override
   @JsonKey(name: 'Type', defaultValue: '')
-  @HiveField(14, defaultValue: '')
   String get type;
   @override
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(15, defaultValue: 0)
   double get rate;
   @override
   @JsonKey(name: 'Conditions', defaultValue: '')
-  @HiveField(16, defaultValue: '')
   String get condition;
   @override
   @JsonKey(name: 'TieredRules')
-  @HiveField(17, defaultValue: TieredRulesDto.empty)
   TieredRulesDto get tieredRules;
   @override
   @JsonKey(name: 'BonusEligible', defaultValue: false)
-  @HiveField(18, defaultValue: false)
   bool get bonusEligible;
   @override
   @JsonKey(name: 'ConditionNumber', defaultValue: '')
-  @HiveField(19, defaultValue: '')
   String get conditionNumber;
   @override
   @JsonKey(name: 'OverriddenBy', defaultValue: '')
-  @HiveField(20, defaultValue: '')
   String get overriddenBy;
   @override
   @JsonKey(name: 'MaxQuota', defaultValue: '')
-  @HiveField(21, defaultValue: '')
   String get maxQuota;
   @override
   @JsonKey(name: 'RemainingQuota', defaultValue: '')
-  @HiveField(22, defaultValue: '')
   String get remainingQuota;
   @override
   @JsonKey(ignore: true)
@@ -480,10 +394,8 @@ TieredRulesDto _$TieredRulesDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TieredRulesDto {
   @JsonKey(name: 'Tier', defaultValue: '')
-  @HiveField(14, defaultValue: '')
   String get tier => throw _privateConstructorUsedError;
   @JsonKey(name: 'RuleTier', defaultValue: [])
-  @HiveField(15, defaultValue: [])
   List<RuleTierDto> get ruleTier => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -499,12 +411,8 @@ abstract class $TieredRulesDtoCopyWith<$Res> {
       _$TieredRulesDtoCopyWithImpl<$Res, TieredRulesDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Tier', defaultValue: '')
-      @HiveField(14, defaultValue: '')
-          String tier,
-      @JsonKey(name: 'RuleTier', defaultValue: [])
-      @HiveField(15, defaultValue: [])
-          List<RuleTierDto> ruleTier});
+      {@JsonKey(name: 'Tier', defaultValue: '') String tier,
+      @JsonKey(name: 'RuleTier', defaultValue: []) List<RuleTierDto> ruleTier});
 }
 
 /// @nodoc
@@ -545,12 +453,8 @@ abstract class _$$_TieredRulesDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Tier', defaultValue: '')
-      @HiveField(14, defaultValue: '')
-          String tier,
-      @JsonKey(name: 'RuleTier', defaultValue: [])
-      @HiveField(15, defaultValue: [])
-          List<RuleTierDto> ruleTier});
+      {@JsonKey(name: 'Tier', defaultValue: '') String tier,
+      @JsonKey(name: 'RuleTier', defaultValue: []) List<RuleTierDto> ruleTier});
 }
 
 /// @nodoc
@@ -582,15 +486,11 @@ class __$$_TieredRulesDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 36, adapterName: 'TieredRulesDtoAdapter')
 class _$_TieredRulesDto extends _TieredRulesDto {
   const _$_TieredRulesDto(
-      {@JsonKey(name: 'Tier', defaultValue: '')
-      @HiveField(14, defaultValue: '')
-          required this.tier,
+      {@JsonKey(name: 'Tier', defaultValue: '') required this.tier,
       @JsonKey(name: 'RuleTier', defaultValue: [])
-      @HiveField(15, defaultValue: [])
-          required final List<RuleTierDto> ruleTier})
+      required final List<RuleTierDto> ruleTier})
       : _ruleTier = ruleTier,
         super._();
 
@@ -599,12 +499,10 @@ class _$_TieredRulesDto extends _TieredRulesDto {
 
   @override
   @JsonKey(name: 'Tier', defaultValue: '')
-  @HiveField(14, defaultValue: '')
   final String tier;
   final List<RuleTierDto> _ruleTier;
   @override
   @JsonKey(name: 'RuleTier', defaultValue: [])
-  @HiveField(15, defaultValue: [])
   List<RuleTierDto> get ruleTier {
     if (_ruleTier is EqualUnmodifiableListView) return _ruleTier;
     // ignore: implicit_dynamic_type
@@ -646,12 +544,9 @@ class _$_TieredRulesDto extends _TieredRulesDto {
 
 abstract class _TieredRulesDto extends TieredRulesDto {
   const factory _TieredRulesDto(
-      {@JsonKey(name: 'Tier', defaultValue: '')
-      @HiveField(14, defaultValue: '')
-          required final String tier,
+      {@JsonKey(name: 'Tier', defaultValue: '') required final String tier,
       @JsonKey(name: 'RuleTier', defaultValue: [])
-      @HiveField(15, defaultValue: [])
-          required final List<RuleTierDto> ruleTier}) = _$_TieredRulesDto;
+      required final List<RuleTierDto> ruleTier}) = _$_TieredRulesDto;
   const _TieredRulesDto._() : super._();
 
   factory _TieredRulesDto.fromJson(Map<String, dynamic> json) =
@@ -659,11 +554,9 @@ abstract class _TieredRulesDto extends TieredRulesDto {
 
   @override
   @JsonKey(name: 'Tier', defaultValue: '')
-  @HiveField(14, defaultValue: '')
   String get tier;
   @override
   @JsonKey(name: 'RuleTier', defaultValue: [])
-  @HiveField(15, defaultValue: [])
   List<RuleTierDto> get ruleTier;
   @override
   @JsonKey(ignore: true)
@@ -678,10 +571,8 @@ RuleTierDto _$RuleTierDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RuleTierDto {
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(14, defaultValue: 0)
   double get rate => throw _privateConstructorUsedError;
   @JsonKey(name: 'Quantity', defaultValue: 0)
-  @HiveField(15, defaultValue: 0)
   double get quantity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -697,12 +588,8 @@ abstract class $RuleTierDtoCopyWith<$Res> {
       _$RuleTierDtoCopyWithImpl<$Res, RuleTierDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(14, defaultValue: 0)
-          double rate,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-      @HiveField(15, defaultValue: 0)
-          double quantity});
+      {@JsonKey(name: 'Rate', defaultValue: 0) double rate,
+      @JsonKey(name: 'Quantity', defaultValue: 0) double quantity});
 }
 
 /// @nodoc
@@ -743,12 +630,8 @@ abstract class _$$_RuleTierDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(14, defaultValue: 0)
-          double rate,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-      @HiveField(15, defaultValue: 0)
-          double quantity});
+      {@JsonKey(name: 'Rate', defaultValue: 0) double rate,
+      @JsonKey(name: 'Quantity', defaultValue: 0) double quantity});
 }
 
 /// @nodoc
@@ -780,15 +663,10 @@ class __$$_RuleTierDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 37, adapterName: 'RuleTierDtoAdapter')
 class _$_RuleTierDto extends _RuleTierDto {
   const _$_RuleTierDto(
-      {@JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(14, defaultValue: 0)
-          required this.rate,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-      @HiveField(15, defaultValue: 0)
-          required this.quantity})
+      {@JsonKey(name: 'Rate', defaultValue: 0) required this.rate,
+      @JsonKey(name: 'Quantity', defaultValue: 0) required this.quantity})
       : super._();
 
   factory _$_RuleTierDto.fromJson(Map<String, dynamic> json) =>
@@ -796,11 +674,9 @@ class _$_RuleTierDto extends _RuleTierDto {
 
   @override
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(14, defaultValue: 0)
   final double rate;
   @override
   @JsonKey(name: 'Quantity', defaultValue: 0)
-  @HiveField(15, defaultValue: 0)
   final double quantity;
 
   @override
@@ -838,12 +714,9 @@ class _$_RuleTierDto extends _RuleTierDto {
 
 abstract class _RuleTierDto extends RuleTierDto {
   const factory _RuleTierDto(
-      {@JsonKey(name: 'Rate', defaultValue: 0)
-      @HiveField(14, defaultValue: 0)
-          required final double rate,
+      {@JsonKey(name: 'Rate', defaultValue: 0) required final double rate,
       @JsonKey(name: 'Quantity', defaultValue: 0)
-      @HiveField(15, defaultValue: 0)
-          required final double quantity}) = _$_RuleTierDto;
+      required final double quantity}) = _$_RuleTierDto;
   const _RuleTierDto._() : super._();
 
   factory _RuleTierDto.fromJson(Map<String, dynamic> json) =
@@ -851,11 +724,9 @@ abstract class _RuleTierDto extends RuleTierDto {
 
   @override
   @JsonKey(name: 'Rate', defaultValue: 0)
-  @HiveField(14, defaultValue: 0)
   double get rate;
   @override
   @JsonKey(name: 'Quantity', defaultValue: 0)
-  @HiveField(15, defaultValue: 0)
   double get quantity;
   @override
   @JsonKey(ignore: true)

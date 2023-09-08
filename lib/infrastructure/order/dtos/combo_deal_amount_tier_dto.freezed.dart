@@ -22,25 +22,18 @@ ComboDealAmountTierDto _$ComboDealAmountTierDtoFromJson(
 /// @nodoc
 mixin _$ComboDealAmountTierDto {
   @JsonKey(name: 'rate', defaultValue: '')
-  @HiveField(0, defaultValue: '')
   String get rate => throw _privateConstructorUsedError;
   @JsonKey(name: 'conditionNumber', defaultValue: '')
-  @HiveField(1, defaultValue: '')
   String get conditionNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'minTotalAmount', defaultValue: '')
-  @HiveField(2, defaultValue: '')
   String get minTotalAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'minTotalCurrency', defaultValue: '')
-  @HiveField(3, defaultValue: '')
   String get minTotalCurrency => throw _privateConstructorUsedError;
   @JsonKey(name: 'maxTotalAmount', defaultValue: '')
-  @HiveField(4, defaultValue: '')
   String get maxTotalAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'maxTotalCurrency', defaultValue: '')
-  @HiveField(5, defaultValue: '')
   String get maxTotalCurrency => throw _privateConstructorUsedError;
   @JsonKey(name: 'type', defaultValue: '')
-  @HiveField(6, defaultValue: '')
   String get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -56,27 +49,16 @@ abstract class $ComboDealAmountTierDtoCopyWith<$Res> {
       _$ComboDealAmountTierDtoCopyWithImpl<$Res, ComboDealAmountTierDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'rate', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          String rate,
+      {@JsonKey(name: 'rate', defaultValue: '') String rate,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          String conditionNumber,
-      @JsonKey(name: 'minTotalAmount', defaultValue: '')
-      @HiveField(2, defaultValue: '')
-          String minTotalAmount,
+      String conditionNumber,
+      @JsonKey(name: 'minTotalAmount', defaultValue: '') String minTotalAmount,
       @JsonKey(name: 'minTotalCurrency', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          String minTotalCurrency,
-      @JsonKey(name: 'maxTotalAmount', defaultValue: '')
-      @HiveField(4, defaultValue: '')
-          String maxTotalAmount,
+      String minTotalCurrency,
+      @JsonKey(name: 'maxTotalAmount', defaultValue: '') String maxTotalAmount,
       @JsonKey(name: 'maxTotalCurrency', defaultValue: '')
-      @HiveField(5, defaultValue: '')
-          String maxTotalCurrency,
-      @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          String type});
+      String maxTotalCurrency,
+      @JsonKey(name: 'type', defaultValue: '') String type});
 }
 
 /// @nodoc
@@ -143,27 +125,16 @@ abstract class _$$_ComboDealAmountTierDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'rate', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          String rate,
+      {@JsonKey(name: 'rate', defaultValue: '') String rate,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          String conditionNumber,
-      @JsonKey(name: 'minTotalAmount', defaultValue: '')
-      @HiveField(2, defaultValue: '')
-          String minTotalAmount,
+      String conditionNumber,
+      @JsonKey(name: 'minTotalAmount', defaultValue: '') String minTotalAmount,
       @JsonKey(name: 'minTotalCurrency', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          String minTotalCurrency,
-      @JsonKey(name: 'maxTotalAmount', defaultValue: '')
-      @HiveField(4, defaultValue: '')
-          String maxTotalAmount,
+      String minTotalCurrency,
+      @JsonKey(name: 'maxTotalAmount', defaultValue: '') String maxTotalAmount,
       @JsonKey(name: 'maxTotalCurrency', defaultValue: '')
-      @HiveField(5, defaultValue: '')
-          String maxTotalCurrency,
-      @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          String type});
+      String maxTotalCurrency,
+      @JsonKey(name: 'type', defaultValue: '') String type});
 }
 
 /// @nodoc
@@ -221,30 +192,20 @@ class __$$_ComboDealAmountTierDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 30, adapterName: 'ComboDealAmountTierDtoAdapter')
 class _$_ComboDealAmountTierDto extends _ComboDealAmountTierDto {
   const _$_ComboDealAmountTierDto(
-      {@JsonKey(name: 'rate', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          required this.rate,
+      {@JsonKey(name: 'rate', defaultValue: '') required this.rate,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          required this.conditionNumber,
+      required this.conditionNumber,
       @JsonKey(name: 'minTotalAmount', defaultValue: '')
-      @HiveField(2, defaultValue: '')
-          required this.minTotalAmount,
+      required this.minTotalAmount,
       @JsonKey(name: 'minTotalCurrency', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          required this.minTotalCurrency,
+      required this.minTotalCurrency,
       @JsonKey(name: 'maxTotalAmount', defaultValue: '')
-      @HiveField(4, defaultValue: '')
-          required this.maxTotalAmount,
+      required this.maxTotalAmount,
       @JsonKey(name: 'maxTotalCurrency', defaultValue: '')
-      @HiveField(5, defaultValue: '')
-          required this.maxTotalCurrency,
-      @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          required this.type})
+      required this.maxTotalCurrency,
+      @JsonKey(name: 'type', defaultValue: '') required this.type})
       : super._();
 
   factory _$_ComboDealAmountTierDto.fromJson(Map<String, dynamic> json) =>
@@ -252,31 +213,24 @@ class _$_ComboDealAmountTierDto extends _ComboDealAmountTierDto {
 
   @override
   @JsonKey(name: 'rate', defaultValue: '')
-  @HiveField(0, defaultValue: '')
   final String rate;
   @override
   @JsonKey(name: 'conditionNumber', defaultValue: '')
-  @HiveField(1, defaultValue: '')
   final String conditionNumber;
   @override
   @JsonKey(name: 'minTotalAmount', defaultValue: '')
-  @HiveField(2, defaultValue: '')
   final String minTotalAmount;
   @override
   @JsonKey(name: 'minTotalCurrency', defaultValue: '')
-  @HiveField(3, defaultValue: '')
   final String minTotalCurrency;
   @override
   @JsonKey(name: 'maxTotalAmount', defaultValue: '')
-  @HiveField(4, defaultValue: '')
   final String maxTotalAmount;
   @override
   @JsonKey(name: 'maxTotalCurrency', defaultValue: '')
-  @HiveField(5, defaultValue: '')
   final String maxTotalCurrency;
   @override
   @JsonKey(name: 'type', defaultValue: '')
-  @HiveField(6, defaultValue: '')
   final String type;
 
   @override
@@ -325,27 +279,19 @@ class _$_ComboDealAmountTierDto extends _ComboDealAmountTierDto {
 
 abstract class _ComboDealAmountTierDto extends ComboDealAmountTierDto {
   const factory _ComboDealAmountTierDto(
-      {@JsonKey(name: 'rate', defaultValue: '')
-      @HiveField(0, defaultValue: '')
-          required final String rate,
+      {@JsonKey(name: 'rate', defaultValue: '') required final String rate,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      @HiveField(1, defaultValue: '')
-          required final String conditionNumber,
+      required final String conditionNumber,
       @JsonKey(name: 'minTotalAmount', defaultValue: '')
-      @HiveField(2, defaultValue: '')
-          required final String minTotalAmount,
+      required final String minTotalAmount,
       @JsonKey(name: 'minTotalCurrency', defaultValue: '')
-      @HiveField(3, defaultValue: '')
-          required final String minTotalCurrency,
+      required final String minTotalCurrency,
       @JsonKey(name: 'maxTotalAmount', defaultValue: '')
-      @HiveField(4, defaultValue: '')
-          required final String maxTotalAmount,
+      required final String maxTotalAmount,
       @JsonKey(name: 'maxTotalCurrency', defaultValue: '')
-      @HiveField(5, defaultValue: '')
-          required final String maxTotalCurrency,
+      required final String maxTotalCurrency,
       @JsonKey(name: 'type', defaultValue: '')
-      @HiveField(6, defaultValue: '')
-          required final String type}) = _$_ComboDealAmountTierDto;
+      required final String type}) = _$_ComboDealAmountTierDto;
   const _ComboDealAmountTierDto._() : super._();
 
   factory _ComboDealAmountTierDto.fromJson(Map<String, dynamic> json) =
@@ -353,31 +299,24 @@ abstract class _ComboDealAmountTierDto extends ComboDealAmountTierDto {
 
   @override
   @JsonKey(name: 'rate', defaultValue: '')
-  @HiveField(0, defaultValue: '')
   String get rate;
   @override
   @JsonKey(name: 'conditionNumber', defaultValue: '')
-  @HiveField(1, defaultValue: '')
   String get conditionNumber;
   @override
   @JsonKey(name: 'minTotalAmount', defaultValue: '')
-  @HiveField(2, defaultValue: '')
   String get minTotalAmount;
   @override
   @JsonKey(name: 'minTotalCurrency', defaultValue: '')
-  @HiveField(3, defaultValue: '')
   String get minTotalCurrency;
   @override
   @JsonKey(name: 'maxTotalAmount', defaultValue: '')
-  @HiveField(4, defaultValue: '')
   String get maxTotalAmount;
   @override
   @JsonKey(name: 'maxTotalCurrency', defaultValue: '')
-  @HiveField(5, defaultValue: '')
   String get maxTotalCurrency;
   @override
   @JsonKey(name: 'type', defaultValue: '')
-  @HiveField(6, defaultValue: '')
   String get type;
   @override
   @JsonKey(ignore: true)
