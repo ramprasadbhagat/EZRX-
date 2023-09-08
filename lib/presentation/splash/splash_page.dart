@@ -888,7 +888,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             customerCodeInfo: state.customerCodeInfo,
           ),
         );
-
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.initialized(
             salesOrganisation: salesOrgState.salesOrganisation,
@@ -913,6 +912,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             salesOrganisation: salesOrgState.salesOrganisation,
             salesOrg: salesOrgState.salesOrg,
             salesOrgConfig: salesOrgState.configs,
+          ),
+        );
+    context.read<ProductSearchBloc>().add(
+          ProductSearchEvent.initialized(
+            configs: salesOrgState.configs,
+            salesOrganization: salesOrgState.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+            shipToInfo: shipToInfo,
           ),
         );
 

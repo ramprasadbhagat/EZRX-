@@ -12,8 +12,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/products/clear_product_search_suggestion_history.dart';
 
@@ -80,25 +78,11 @@ class _ProductSearchSection extends StatelessWidget {
             enabled: !state.isSearching,
             onSearchChanged: (value) => context.read<ProductSearchBloc>().add(
                   ProductSearchEvent.autoSearchProduct(
-                    salesOrganization:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    configs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     searchKey: SearchKey.search(value),
                   ),
                 ),
             onSearchSubmitted: (value) => context.read<ProductSearchBloc>().add(
                   ProductSearchEvent.searchProduct(
-                    salesOrganization:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    configs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     searchKey: SearchKey.search(value),
                   ),
                 ),
@@ -148,19 +132,7 @@ class _ProductSuggestionSection extends StatelessWidget {
                 },
                 onLoadingMore: () {
                   context.read<ProductSearchBloc>().add(
-                        ProductSearchEvent.loadMoreProductList(
-                          salesOrganization: context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
-                          customerCodeInfo: context
-                              .read<CustomerCodeBloc>()
-                              .state
-                              .customerCodeInfo,
-                          shipToInfo:
-                              context.read<CustomerCodeBloc>().state.shipToInfo,
-                        ),
+                        const ProductSearchEvent.loadMoreProductList(),
                       );
                 },
                 isLoading: state.isSearching,
@@ -322,13 +294,6 @@ class _HistoryTile extends StatelessWidget {
           onTap: () {
             context.read<ProductSearchBloc>().add(
                   ProductSearchEvent.searchProduct(
-                    salesOrganization:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    configs: context.read<SalesOrgBloc>().state.configs,
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
                     searchKey: SearchKey.search(
                       productSearchObject.getOrDefaultValue(''),
                     ),

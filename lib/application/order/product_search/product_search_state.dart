@@ -9,6 +9,10 @@ class ProductSearchState with _$ProductSearchState {
     required ProductSuggestionHistory productSuggestionHistory,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required SearchKey searchKey,
+    required SalesOrganisation salesOrganization,
+    required SalesOrganisationConfigs configs,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
   }) = _ProductSearchState;
 
   factory ProductSearchState.initial() => ProductSearchState(
@@ -18,5 +22,9 @@ class ProductSearchState with _$ProductSearchState {
         productSuggestionHistory: ProductSuggestionHistory.empty(),
         suggestedProductList: <MaterialInfo>[],
         searchKey: SearchKey.search(''),
+        configs: SalesOrganisationConfigs.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        salesOrganization: SalesOrganisation.empty(),
+        shipToInfo: ShipToInfo.empty(),
       );
 }

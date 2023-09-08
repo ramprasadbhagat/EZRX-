@@ -54,7 +54,14 @@ void main() {
     productSearchBloc = ProductSearchBloc(
       productSearchRepository: productSearchRepository,
       config: config,
-    );
+    )..add(
+        ProductSearchEvent.initialized(
+          salesOrganization: salesOrganization,
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+        ),
+      );
     materialResponse =
         await ProductSearchLocalDataSource().getSearchedProductList();
     fakeResponse1 = MaterialResponse(
@@ -69,7 +76,17 @@ void main() {
 
   group('ProductSearchBloc', () {
     test(' -> Initial state is correct', () {
-      expect(productSearchBloc.state, equals(ProductSearchState.initial()));
+      expect(
+        productSearchBloc.state,
+        equals(
+          ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
+          ),
+        ),
+      );
     });
 
     group(' -> SearchProduct', () {
@@ -77,6 +94,10 @@ void main() {
         ' -> Search with different searchKey',
         seed: () => ProductSearchState.initial().copyWith(
           searchKey: searchKey,
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          shipToInfo: shipToInfo,
         ),
         build: () {
           when(
@@ -92,17 +113,18 @@ void main() {
           ).thenAnswer((_) async => Right(materialResponse));
           return productSearchBloc;
         },
-        act: (bloc) => bloc.add(
-          ProductSearchEvent.searchProduct(
+        act: (bloc) => bloc
+          ..add(
+            ProductSearchEvent.searchProduct(
+              searchKey: SearchKey.search('diff-search-key'),
+            ),
+          ),
+        expect: () => [
+          ProductSearchState.initial().copyWith(
             configs: salesOrgConfigs,
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             shipToInfo: shipToInfo,
-            searchKey: SearchKey.search('diff-search-key'),
-          ),
-        ),
-        expect: () => [
-          ProductSearchState.initial().copyWith(
             searchKey: SearchKey.search('diff-search-key'),
             suggestedProductList: <MaterialInfo>[],
             isSearching: true,
@@ -110,6 +132,10 @@ void main() {
             apiFailureOrSuccessOption: none(),
           ),
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             apiFailureOrSuccessOption: optionOf(Right(materialResponse)),
             suggestedProductList: materialResponse.products,
             isSearching: false,
@@ -136,15 +162,15 @@ void main() {
         },
         act: (bloc) => bloc.add(
           ProductSearchEvent.searchProduct(
-            configs: salesOrgConfigs,
-            customerCodeInfo: customerCodeInfo,
-            salesOrganization: salesOrganization,
-            shipToInfo: shipToInfo,
             searchKey: SearchKey.search(searchKey.getValue()),
           ),
         ),
         expect: () => [
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             searchKey: searchKey,
             suggestedProductList: <MaterialInfo>[],
             isSearching: true,
@@ -152,6 +178,10 @@ void main() {
             apiFailureOrSuccessOption: none(),
           ),
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             apiFailureOrSuccessOption: optionOf(Right(materialResponse)),
             suggestedProductList: materialResponse.products,
             isSearching: false,
@@ -181,15 +211,15 @@ void main() {
         },
         act: (bloc) => bloc.add(
           ProductSearchEvent.searchProduct(
-            configs: salesOrgConfigs,
-            customerCodeInfo: customerCodeInfo,
-            salesOrganization: salesOrganization,
-            shipToInfo: shipToInfo,
             searchKey: SearchKey.search(searchKey.getValue()),
           ),
         ),
         expect: () => [
           ProductSearchState.initial().copyWith(
+            salesOrganization: salesOrganization,
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            shipToInfo: shipToInfo,
             searchKey: searchKey,
             suggestedProductList: <MaterialInfo>[],
             isSearching: true,
@@ -197,6 +227,10 @@ void main() {
             apiFailureOrSuccessOption: none(),
           ),
           ProductSearchState.initial().copyWith(
+            salesOrganization: salesOrganization,
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            shipToInfo: shipToInfo,
             canLoadMore: true,
             searchKey: searchKey,
             apiFailureOrSuccessOption: optionOf(
@@ -214,6 +248,10 @@ void main() {
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Search with different searchKey',
         seed: () => ProductSearchState.initial().copyWith(
+          salesOrganization: salesOrganization,
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
           searchKey: searchKey,
         ),
         build: () {
@@ -232,16 +270,16 @@ void main() {
         },
         act: (bloc) => bloc.add(
           ProductSearchEvent.autoSearchProduct(
-            configs: salesOrgConfigs,
-            customerCodeInfo: customerCodeInfo,
-            salesOrganization: salesOrganization,
-            shipToInfo: shipToInfo,
             searchKey: SearchKey.search('diff-search-key'),
           ),
         ),
         wait: const Duration(milliseconds: 1500),
         expect: () => [
           ProductSearchState.initial().copyWith(
+            salesOrganization: salesOrganization,
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            shipToInfo: shipToInfo,
             searchKey: SearchKey('diff-search-key'),
             suggestedProductList: <MaterialInfo>[],
             isSearching: true,
@@ -249,6 +287,10 @@ void main() {
             apiFailureOrSuccessOption: none(),
           ),
           ProductSearchState.initial().copyWith(
+            salesOrganization: salesOrganization,
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            shipToInfo: shipToInfo,
             apiFailureOrSuccessOption: optionOf(Right(materialResponse)),
             suggestedProductList: materialResponse.products,
             isSearching: false,
@@ -268,6 +310,10 @@ void main() {
           isSearching: false,
           canLoadMore: true,
           searchKey: searchKey,
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          shipToInfo: shipToInfo,
         ),
         build: () {
           when(
@@ -284,15 +330,14 @@ void main() {
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
-          ProductSearchEvent.loadMoreProductList(
+          const ProductSearchEvent.loadMoreProductList(),
+        ),
+        expect: () => [
+          ProductSearchState.initial().copyWith(
             configs: salesOrgConfigs,
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             shipToInfo: shipToInfo,
-          ),
-        ),
-        expect: () => [
-          ProductSearchState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(Right(fakeResponse1)),
             suggestedProductList: fakeResponse1.products,
             isSearching: true,
@@ -300,6 +345,10 @@ void main() {
             searchKey: searchKey,
           ),
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             apiFailureOrSuccessOption: optionOf(Right(fakeResponse2)),
             suggestedProductList:
                 List<MaterialInfo>.from(fakeResponse1.products)
@@ -328,6 +377,10 @@ void main() {
           return productSearchBloc;
         },
         seed: () => ProductSearchState.initial().copyWith(
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          shipToInfo: shipToInfo,
           apiFailureOrSuccessOption: optionOf(Right(materialResponse)),
           suggestedProductList: materialResponse.products,
           isSearching: true,
@@ -335,12 +388,7 @@ void main() {
           searchKey: searchKey,
         ),
         act: (bloc) => bloc.add(
-          ProductSearchEvent.loadMoreProductList(
-            configs: salesOrgConfigs,
-            customerCodeInfo: customerCodeInfo,
-            salesOrganization: salesOrganization,
-            shipToInfo: shipToInfo,
-          ),
+          const ProductSearchEvent.loadMoreProductList(),
         ),
         expect: () => [],
       );
@@ -348,6 +396,10 @@ void main() {
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> LoadMoreProductList with error',
         seed: () => ProductSearchState.initial().copyWith(
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          shipToInfo: shipToInfo,
           apiFailureOrSuccessOption: optionOf(Right(fakeResponse1)),
           suggestedProductList: fakeResponse1.products,
           isSearching: false,
@@ -373,15 +425,14 @@ void main() {
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
-          ProductSearchEvent.loadMoreProductList(
+          const ProductSearchEvent.loadMoreProductList(),
+        ),
+        expect: () => [
+          ProductSearchState.initial().copyWith(
             configs: salesOrgConfigs,
             customerCodeInfo: customerCodeInfo,
             salesOrganization: salesOrganization,
             shipToInfo: shipToInfo,
-          ),
-        ),
-        expect: () => [
-          ProductSearchState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(Right(fakeResponse1)),
             suggestedProductList: fakeResponse1.products,
             isSearching: true,
@@ -389,6 +440,10 @@ void main() {
             searchKey: searchKey,
           ),
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             suggestedProductList: fakeResponse1.products,
             canLoadMore: true,
             searchKey: searchKey,
@@ -411,6 +466,10 @@ void main() {
           return productSearchBloc;
         },
         seed: () => ProductSearchState.initial().copyWith(
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          shipToInfo: shipToInfo,
           searchKey: searchKey,
           suggestedProductList: materialResponse.products,
           apiFailureOrSuccessOption: optionOf(
@@ -423,12 +482,20 @@ void main() {
         act: (bloc) => bloc.add(const ProductSearchEvent.clearSearch()),
         expect: () => [
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             searchKey: SearchKey.search(''),
             apiFailureOrSuccessOption: none(),
             canLoadMore: false,
             suggestedProductList: <MaterialInfo>[],
           ),
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             searchKey: SearchKey.search(''),
             apiFailureOrSuccessOption: none(),
             canLoadMore: false,
@@ -452,6 +519,10 @@ void main() {
         ),
         expect: () => [
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             productSuggestionHistory: searchKeys,
           ),
         ],
@@ -472,6 +543,10 @@ void main() {
         ),
         expect: () => [
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             apiFailureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('fake-error'),
@@ -485,6 +560,17 @@ void main() {
     group(' -> ClearSearchHistory', () {
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Clear search history successfully',
+        seed: () => ProductSearchState.initial().copyWith(
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          shipToInfo: shipToInfo,
+          apiFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+        ),
         build: () {
           when(() => productSearchRepository.clearSearchHistory())
               .thenAnswer((_) async => const Right(null));
@@ -495,6 +581,10 @@ void main() {
         ),
         expect: () => [
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             apiFailureOrSuccessOption: none(),
             productSuggestionHistory: ProductSuggestionHistory.empty(),
           ),
@@ -516,6 +606,10 @@ void main() {
         ),
         expect: () => [
           ProductSearchState.initial().copyWith(
+            configs: salesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: salesOrganization,
+            shipToInfo: shipToInfo,
             apiFailureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('fake-error'),

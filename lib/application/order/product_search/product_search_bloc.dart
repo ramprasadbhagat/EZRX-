@@ -33,21 +33,27 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
     required this.productSearchRepository,
     required this.config,
   }) : super(ProductSearchState.initial()) {
+    on<_Initialized>((event, emit) {
+      emit(
+        state.copyWith(
+          salesOrganization: event.salesOrganization,
+          configs: event.configs,
+          customerCodeInfo: event.customerCodeInfo,
+          shipToInfo: event.shipToInfo,
+        ),
+      );
+    });
     on<_AutoSearchProduct>(
-      (e, emit) {
-        if (e.searchKey == state.searchKey) return;
-        if (e.searchKey.isValid()) {
+      (event, emit) {
+        if (event.searchKey == state.searchKey) return;
+        if (event.searchKey.isValid()) {
           add(
             _SearchProduct(
-              configs: e.configs,
-              customerCodeInfo: e.customerCodeInfo,
-              salesOrganization: e.salesOrganization,
-              shipToInfo: e.shipToInfo,
-              searchKey: e.searchKey,
+              searchKey: event.searchKey,
             ),
           );
         } else {
-          emit(state.copyWith(searchKey: e.searchKey));
+          emit(state.copyWith(searchKey: event.searchKey));
         }
       },
       transformer: (events, mapper) => events
@@ -58,10 +64,10 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
     );
 
     on<_SearchProduct>(
-      (e, emit) async {
+      (event, emit) async {
         emit(
           state.copyWith(
-            searchKey: e.searchKey,
+            searchKey: event.searchKey,
             suggestedProductList: <MaterialInfo>[],
             isSearching: true,
             canLoadMore: true,
@@ -71,11 +77,11 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
 
         final failureOrSuccess =
             await productSearchRepository.searchProductList(
-          salesOrganization: e.salesOrganization,
-          salesOrgConfig: e.configs,
-          customerCodeInfo: e.customerCodeInfo,
-          shipToInfo: e.shipToInfo,
-          searchKey: e.searchKey,
+          salesOrganization: state.salesOrganization,
+          salesOrgConfig: state.configs,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          searchKey: event.searchKey,
           pageSize: config.pageSize,
           offset: state.suggestedProductList.length,
         );
@@ -106,7 +112,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
     );
 
     on<_LoadMoreProductList>(
-      (e, emit) async {
+      (event, emit) async {
         if (state.isSearching || !state.canLoadMore) return;
         emit(
           state.copyWith(
@@ -116,10 +122,10 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
 
         final failureOrSuccess =
             await productSearchRepository.searchProductList(
-          salesOrganization: e.salesOrganization,
-          salesOrgConfig: e.configs,
-          customerCodeInfo: e.customerCodeInfo,
-          shipToInfo: e.shipToInfo,
+          salesOrganization: state.salesOrganization,
+          salesOrgConfig: state.configs,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
           searchKey: state.searchKey,
           pageSize: config.pageSize,
           offset: state.suggestedProductList.length,
@@ -150,7 +156,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
     );
 
     on<_ClearSearch>(
-      (e, emit) {
+      (event, emit) {
         emit(
           state.copyWith(
             searchKey: SearchKey.search(''),
@@ -189,6 +195,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
       (e, emit) async {
         final failureOrSuccess =
             await productSearchRepository.clearSearchHistory();
+
         failureOrSuccess.fold(
           (failure) => emit(
             state.copyWith(
