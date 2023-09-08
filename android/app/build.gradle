@@ -83,7 +83,7 @@ android {
     productFlavors {
         mock {
             dimension "env"
-            versionNameSuffix "-mock"
+            // versionNameSuffix "-mock"
             applicationIdSuffix ".mock"
             resValue "string", "clevertap_account_id", "TEST-464-R68-876Z"
             resValue "string", "clevertap_token", "TEST-b62-464"
@@ -93,7 +93,7 @@ android {
 
         dev {
             dimension "env"
-            versionNameSuffix "-dev"
+            // versionNameSuffix "-dev"
             applicationIdSuffix ".dev"
             resValue "string", "clevertap_account_id", "TEST-464-R68-876Z"
             resValue "string", "clevertap_token", "TEST-b62-464"
@@ -103,7 +103,7 @@ android {
 
         uat {
             dimension "env"
-            versionNameSuffix "-uat"
+            // versionNameSuffix "-uat"
             applicationIdSuffix ".uat"
             resValue "string", "clevertap_account_id", "TEST-798-WW8-476Z"
             resValue "string", "clevertap_token", "TEST-b00-bca"

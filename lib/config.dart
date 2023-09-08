@@ -16,10 +16,14 @@ class Config {
   String baseUrl({AppMarket? currentMarket}) {
     final marketDomain = currentMarket?.getOrDefaultValue('my');
     switch (appFlavor) {
+      // https://my.ezrxplus.com/
       case Flavor.prod:
-        return '$schema$marketDomain.ezrx.com$urlConstants';
-      case Flavor.mock:
+        return '$schema$marketDomain.ezrxplus.com';
+      // https://ezrxplus-dev.ezrx.com/
       case Flavor.dev:
+        return '${schema}ezrxplus-$env.ezrx.com';
+      // https://my.ezrx.com/
+      case Flavor.mock:
       case Flavor.uat:
       default:
         return '$schema$env-$marketDomain.ezrx.com';
