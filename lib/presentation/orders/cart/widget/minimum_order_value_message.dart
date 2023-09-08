@@ -12,7 +12,7 @@ class _MovCheckMessage extends StatelessWidget {
         return state.displayMovWarning
             ? InfoLabel(
                 margin:
-                    const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                 mainColor: ZPColors.lightRedStatusColor,
                 textValue:
                     '${'Please ensure that the order value satisfies the minimum order value of'.tr()} ${StringUtils.displayPrice(

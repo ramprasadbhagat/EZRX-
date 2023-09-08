@@ -294,13 +294,8 @@ class CartState with _$CartState {
   bool isEligibleForCheckout(bool isOOSOrderEligibleToProceed) =>
       ((isOOSOrderPresent && isOOSOrderEligibleToProceed) ||
           !isOOSOrderPresent) &&
-      isBundleQuantitySatisfies &&
-      !isMWPNotAllowedAndPresentInCart;
+      isBundleQuantitySatisfies;
 
-  //MWP: Material Without Price
-  bool get isMWPNotAllowedAndPresentInCart =>
-      cartProducts.any((e) => e.price.finalPrice.isEmpty) &&
-      !config.materialWithoutPrice;
 
   List<PriceAggregate> get allMaterial => cartProducts
       .expand(

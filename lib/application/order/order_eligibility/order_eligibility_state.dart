@@ -45,7 +45,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
   }
 
   bool get eligibleForOrderSubmit =>
-      isMinOrderValuePassed && validateRegularOrderType;
+      isMinOrderValuePassed && !isMWPNotAllowedAndPresentInCart;
 
   bool get isTotalGreaterThanMinOrderAmount {
     if (salesOrg.salesOrg.isTH) {
@@ -84,4 +84,13 @@ class OrderEligibilityState with _$OrderEligibilityState {
           : true;
 
   bool get displayMovWarning => !isMinOrderValuePassed && showErrorMessage;
+
+  /*MWP: Material Without Price*/
+  bool get isMWPNotAllowedAndPresentInCart =>
+      cartItems.any((e) =>
+          e.materialInfo.type.typeMaterial && e.price.finalPrice.isEmpty,) &&
+      !configs.materialWithoutPrice;
+
+  bool get displayMWPNotAllowedWarning =>
+      isMWPNotAllowedAndPresentInCart && showErrorMessage;
 }

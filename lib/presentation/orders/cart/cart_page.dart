@@ -35,7 +35,8 @@ import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.da
 
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 
-part 'widget/minimum_order_value_message.dart';
+part 'package:ezrxmobile/presentation/orders/cart/widget/minimum_order_value_message.dart';
+part 'package:ezrxmobile/presentation/orders/cart/widget/material_without_price_message.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -417,15 +418,7 @@ class _CheckoutSection extends StatelessWidget {
                 size: 20,
               ),
             ),
-            if (state.isMWPNotAllowedAndPresentInCart)
-              InfoLabel(
-                margin:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                textValue:
-                    "Can't order material without price. Please remove to continue to check out."
-                        .tr(),
-                mainColor: ZPColors.lightRedStatusColor,
-              ),
+            const _MWPCheckMessage(),
             _OOSMessage(),
             const _MovCheckMessage(),
             ListTile(
@@ -574,7 +567,7 @@ class _CheckoutButton extends StatelessWidget {
   }
 
   void _onCheckOutPressed(BuildContext context) {
-    if (context.read<OrderEligibilityBloc>().state.isMinOrderValuePassed) {
+    if (context.read<OrderEligibilityBloc>().state.eligibleForOrderSubmit) {
       FocusScope.of(context).requestFocus(FocusNode());
       context.read<CartBloc>().state.allMaterial.preOrderItems.isNotEmpty
           ? _showPreOrderModal(context: context)
