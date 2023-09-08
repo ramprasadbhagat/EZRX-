@@ -5,6 +5,9 @@ class CustomerCodeState with _$CustomerCodeState {
   const CustomerCodeState._();
 
   const factory CustomerCodeState({
+    required bool hideCustomer,
+    required User userInfo,
+    required SalesOrganisation selectedSalesOrg,
     required CustomerCodeInfo customerCodeInfo,
     required List<CustomerCodeInfo> customerCodeList,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
@@ -16,6 +19,9 @@ class CustomerCodeState with _$CustomerCodeState {
   }) = _CustomerCodeState;
 
   factory CustomerCodeState.initial() => CustomerCodeState(
+        hideCustomer: false,
+        userInfo: User.empty(),
+        selectedSalesOrg: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         customerCodeList: [],
         apiFailureOrSuccessOption: none(),

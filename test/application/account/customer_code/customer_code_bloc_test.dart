@@ -79,9 +79,21 @@ void main() {
         config: config,
       ),
       act: (CustomerCodeBloc bloc) {
-        bloc.add(const CustomerCodeEvent.initialized());
+        bloc.add(
+          CustomerCodeEvent.initialized(
+            hideCustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: fakeSaleOrg,
+          ),
+        );
       },
-      expect: () => [CustomerCodeState.initial()],
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
+        )
+      ],
     );
 
     blocTest(
@@ -121,6 +133,11 @@ void main() {
         customerCodeRepository: customerCodeMockRepo,
         config: config,
       ),
+      seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.getCustomerCode(
@@ -141,16 +158,14 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.fetch(
-            hideCustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrg,
-          ),
+          const CustomerCodeEvent.fetch(),
         );
       },
       expect: () => [
-        CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           apiFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -216,6 +231,19 @@ void main() {
         customerCodeRepository: customerCodeMockRepo,
         config: config,
       ),
+      seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: SalesOrganisation(
+          salesOrg: SalesOrg('2902'),
+          customerInfos: [
+            ...fakeSalesOrgCustomerInfos,
+            ...fakeSalesOrgCustomerInfos,
+            ...fakeSalesOrgCustomerInfos,
+            ...fakeSalesOrgCustomerInfos,
+          ],
+        ),
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.getCustomerCode(
@@ -252,7 +280,12 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.fetch(
+          const CustomerCodeEvent.fetch(),
+        );
+      },
+      expect: () {
+        return [
+          CustomerCodeState.initial().copyWith(
             hideCustomer: false,
             userInfo: fakeUser,
             selectedSalesOrg: SalesOrganisation(
@@ -264,13 +297,6 @@ void main() {
                 ...fakeSalesOrgCustomerInfos,
               ],
             ),
-          ),
-        );
-      },
-      expect: () {
-        return [
-          CustomerCodeState.initial(),
-          CustomerCodeState.initial().copyWith(
             isFetching: false,
             customerCodeInfo: customerMockData.first,
             shipToInfo: customerMockData.first.shipToInfos.first,
@@ -336,6 +362,9 @@ void main() {
         config: config,
       ),
       seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
         shipToInfo: fakeShipToInfo,
         isFetching: false,
       ),
@@ -362,20 +391,23 @@ void main() {
         bloc.add(
           CustomerCodeEvent.search(
             searchValue: SearchKey.searchFilter('fake-customer-code'),
-            hideCustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrg,
           ),
         );
       },
       expect: () => [
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           isSearchActive: true,
           isFetching: true,
           shipToInfo: fakeShipToInfo,
           searchKey: SearchKey('fake-customer-code'),
         ),
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           customerCodeList: [
             CustomerCodeInfo.empty()
                 .copyWith(customerCodeSoldTo: 'fake-customer-code')
@@ -396,6 +428,9 @@ void main() {
         config: config,
       ),
       seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
         shipToInfo: fakeShipToInfo,
         isFetching: false,
       ),
@@ -421,20 +456,23 @@ void main() {
         bloc.add(
           CustomerCodeEvent.search(
             searchValue: SearchKey.searchFilter('fake-customer-code'),
-            hideCustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrg,
           ),
         );
       },
       expect: () => [
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           isSearchActive: true,
           isFetching: true,
           shipToInfo: fakeShipToInfo,
           searchKey: SearchKey('fake-customer-code'),
         ),
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           customerCodeList: [],
           customerCodeInfo: CustomerCodeInfo.empty(),
           apiFailureOrSuccessOption: optionOf(
@@ -458,6 +496,9 @@ void main() {
         config: config,
       ),
       seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
         shipToInfo: fakeShipToInfo,
         isFetching: false,
       ),
@@ -484,21 +525,24 @@ void main() {
         bloc.add(
           CustomerCodeEvent.autoSearch(
             searchValue: SearchKey.searchFilter('fake-customer-code'),
-            hideCustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrg,
           ),
         );
       },
       wait: const Duration(milliseconds: 1500),
       expect: () => [
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           isSearchActive: true,
           isFetching: true,
           shipToInfo: fakeShipToInfo,
           searchKey: SearchKey('fake-customer-code'),
         ),
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           customerCodeList: [
             CustomerCodeInfo.empty()
                 .copyWith(customerCodeSoldTo: 'fake-customer-code')
@@ -519,6 +563,9 @@ void main() {
         config: config,
       ),
       seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
         shipToInfo: fakeShipToInfo,
         isFetching: false,
       ),
@@ -542,20 +589,23 @@ void main() {
         bloc.add(
           CustomerCodeEvent.search(
             searchValue: SearchKey.searchFilter('fake-customer-code'),
-            hideCustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrg,
           ),
         );
       },
       expect: () => [
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           isSearchActive: true,
           isFetching: true,
           shipToInfo: fakeShipToInfo,
           searchKey: SearchKey('fake-customer-code'),
         ),
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           customerCodeList: [],
           customerCodeInfo: CustomerCodeInfo.empty(),
           apiFailureOrSuccessOption: optionOf(
@@ -579,6 +629,9 @@ void main() {
         config: config,
       ),
       seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
         isFetching: false,
       ),
       setUp: () {
@@ -602,16 +655,19 @@ void main() {
       // ),
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.loadMore(
-            hideCustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrg,
-          ),
+          const CustomerCodeEvent.loadMore(),
         );
       },
       expect: () => [
-        CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
+        ),
+        CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           isFetching: false,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
@@ -879,6 +935,11 @@ void main() {
         customerCodeRepository: customerCodeMockRepo,
         config: config,
       ),
+      seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.storeCustomerInfo(
@@ -930,16 +991,14 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.loadStoredCustomerCode(
-            hideCustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrg,
-          ),
+          const CustomerCodeEvent.loadStoredCustomerCode(),
         );
       },
       expect: () => [
-        CustomerCodeState.initial().copyWith(isFetching: true),
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           isSearchActive: true,
           customerCodeInfo: customerMockData.first,
           isFetching: false,
@@ -970,6 +1029,11 @@ void main() {
         customerCodeRepository: customerCodeMockRepo,
         config: config,
       ),
+      seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrgWithMultipleCustomerInfo,
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.getCustomerCode(
@@ -996,16 +1060,14 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.fetch(
-            hideCustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrgWithMultipleCustomerInfo,
-          ),
+          const CustomerCodeEvent.fetch(),
         );
       },
       expect: () => [
-        CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrgWithMultipleCustomerInfo,
           isFetching: false,
           customerCodeInfo: customerMockData.first,
           customerCodeList: [
@@ -1029,6 +1091,11 @@ void main() {
         customerCodeRepository: customerCodeMockRepo,
         config: config,
       ),
+      seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
+      ),
       setUp: () {
         when(
           () => customerCodeMockRepo.getCustomerCode(
@@ -1049,16 +1116,14 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.fetch(
-            hideCustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrg,
-          ),
+          const CustomerCodeEvent.fetch(),
         );
       },
       expect: () => [
-        CustomerCodeState.initial(),
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           isFetching: false,
           customerCodeInfo: CustomerCodeInfo.empty(),
           customerCodeList: [],
@@ -1099,19 +1164,21 @@ void main() {
         );
       },
       seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
         customerCodeList: [CustomerCodeInfo.empty()],
       ),
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.loadStoredCustomerCode(
-            hideCustomer: false,
-            userInfo: fakeUser,
-            selectedSalesOrg: fakeSaleOrg,
-          ),
+          const CustomerCodeEvent.loadStoredCustomerCode(),
         );
       },
       expect: () => [
         CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
           isSearchActive: true,
           customerCodeInfo: customerMockData.first,
           isFetching: false,

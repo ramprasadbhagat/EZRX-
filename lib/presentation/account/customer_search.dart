@@ -138,9 +138,6 @@ class _BodyContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final salesOrgBloc = context.read<SalesOrgBloc>();
-    final userBloc = context.read<UserBloc>();
-
     return Expanded(
       child: state.isFetching && state.customerCodeList.isEmpty
           ? LoadingShimmer.logo(
@@ -151,20 +148,12 @@ class _BodyContent extends StatelessWidget {
               key: WidgetKeys.customerCodeSelect,
               onRefresh: () {
                 context.read<CustomerCodeBloc>().add(
-                      CustomerCodeEvent.fetch(
-                        userInfo: userBloc.state.user,
-                        selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
-                        hideCustomer: false,
-                      ),
+                      const CustomerCodeEvent.fetch(),
                     );
               },
               onLoadingMore: () {
                 context.read<CustomerCodeBloc>().add(
-                      CustomerCodeEvent.loadMore(
-                        userInfo: userBloc.state.user,
-                        selectedSalesOrg: salesOrgBloc.state.salesOrganisation,
-                        hideCustomer: salesOrgBloc.state.configs.hideCustomer,
-                      ),
+                      const CustomerCodeEvent.loadMore(),
                     );
               },
               isLoading: state.isFetching,
@@ -444,11 +433,6 @@ class _DeliveryAddressSearchSection extends StatelessWidget {
             onSearchChanged: (value) {
               context.read<CustomerCodeBloc>().add(
                     CustomerCodeEvent.autoSearch(
-                      userInfo: context.read<UserBloc>().state.user,
-                      selectedSalesOrg:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      hideCustomer:
-                          context.read<SalesOrgBloc>().state.hideCustomer,
                       searchValue: SearchKey.search(value),
                     ),
                   );
@@ -456,11 +440,6 @@ class _DeliveryAddressSearchSection extends StatelessWidget {
             onSearchSubmitted: (value) {
               context.read<CustomerCodeBloc>().add(
                     CustomerCodeEvent.search(
-                      userInfo: context.read<UserBloc>().state.user,
-                      selectedSalesOrg:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      hideCustomer:
-                          context.read<SalesOrgBloc>().state.hideCustomer,
                       searchValue: SearchKey.search(value),
                     ),
                   );
@@ -470,13 +449,7 @@ class _DeliveryAddressSearchSection extends StatelessWidget {
             enabled: !state.isFetching,
             onClear: () {
               context.read<CustomerCodeBloc>().add(
-                    CustomerCodeEvent.deletedSearch(
-                      userInfo: context.read<UserBloc>().state.user,
-                      selectedSalesOrg:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      hideCustomer:
-                          context.read<SalesOrgBloc>().state.hideCustomer,
-                    ),
+                    const CustomerCodeEvent.deletedSearch(),
                   );
             },
             initialValue: state.searchKey.searchValueOrEmpty,

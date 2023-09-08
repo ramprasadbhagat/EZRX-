@@ -26,7 +26,13 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
     required this.config,
   }) : super(CustomerCodeState.initial()) {
     on<_Initialized>(
-      (e, emit) => emit(CustomerCodeState.initial()),
+      (e, emit) => emit(
+        CustomerCodeState.initial().copyWith(
+          hideCustomer: e.hideCustomer,
+          userInfo: e.userInfo,
+          selectedSalesOrg: e.selectedSalesOrg,
+        ),
+      ),
     );
     on<_Selected>((e, emit) async {
       await customerCodeRepository.storeCustomerInfo(
@@ -46,9 +52,6 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         if (event.searchValue.isValid()) {
           add(
             _Search(
-              hideCustomer: event.hideCustomer,
-              userInfo: event.userInfo,
-              selectedSalesOrg: event.selectedSalesOrg,
               searchValue: event.searchValue,
             ),
           );
@@ -73,6 +76,9 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         final previousShipToInfo = state.shipToInfo;
         emit(
           CustomerCodeState.initial().copyWith(
+            selectedSalesOrg: state.selectedSalesOrg,
+            hideCustomer: state.hideCustomer,
+            userInfo: state.userInfo,
             searchKey: previousSearchKey,
             customerCodeInfo: previousCustomerCodeState,
             shipToInfo: previousShipToInfo,
@@ -81,10 +87,10 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           ),
         );
         final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-          salesOrganisation: e.selectedSalesOrg,
+          salesOrganisation: state.selectedSalesOrg,
           customerCodes: [previousSearchKey.getValue()],
-          hideCustomer: e.hideCustomer,
-          user: e.userInfo,
+          hideCustomer: state.hideCustomer,
+          user: state.userInfo,
           pageSize: config.pageSize,
           offset: state.customerCodeList.length,
         );
@@ -133,21 +139,17 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
 
       if (lastSavedCustomerInfo.customerCode.isEmpty) {
         add(
-          CustomerCodeEvent.fetch(
-            hideCustomer: e.hideCustomer,
-            userInfo: e.userInfo,
-            selectedSalesOrg: e.selectedSalesOrg,
-          ),
+          const CustomerCodeEvent.fetch(),
         );
 
         return;
       }
 
       final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-        salesOrganisation: e.selectedSalesOrg,
+        salesOrganisation: state.selectedSalesOrg,
         customerCodes: [lastSavedCustomerInfo.customerCode],
-        hideCustomer: e.hideCustomer,
-        user: e.userInfo,
+        hideCustomer: state.hideCustomer,
+        user: state.userInfo,
         pageSize: config.pageSize,
         offset: 0,
       );
@@ -160,11 +162,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
 
       if (customerCodeInfoList.isEmpty) {
         add(
-          CustomerCodeEvent.fetch(
-            hideCustomer: e.hideCustomer,
-            userInfo: e.userInfo,
-            selectedSalesOrg: e.selectedSalesOrg,
-          ),
+          const CustomerCodeEvent.fetch(),
         );
 
         return;
@@ -203,8 +201,14 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         // https://dev.azure.com/zuelligpharmadevops/eZRx%20Overall/_wiki/wikis/eZRx-Overall.wiki/3513/Enhance-customerInformationSearch-customerListForSalesRep
         var canLoadMore = true;
         var finalCustomerCodeInfoList = <CustomerCodeInfo>[];
-        final finalCustomerCodeInfo = e.selectedSalesOrg.customerInfos;
-        emit(CustomerCodeState.initial());
+        final finalCustomerCodeInfo = state.selectedSalesOrg.customerInfos;
+        emit(
+          CustomerCodeState.initial().copyWith(
+            selectedSalesOrg: state.selectedSalesOrg,
+            hideCustomer: state.hideCustomer,
+            userInfo: state.userInfo,
+          ),
+        );
         emit(
           state.copyWith(
             isFetching: true,
@@ -213,15 +217,15 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         );
 
         final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-          salesOrganisation: e.selectedSalesOrg,
+          salesOrganisation: state.selectedSalesOrg,
           customerCodes: finalCustomerCodeInfo
               .map(
                 (customerItem) =>
                     customerItem.customerCodeSoldTo.checkAllOrCustomerCode,
               )
               .toList(),
-          hideCustomer: e.hideCustomer,
-          user: e.userInfo,
+          hideCustomer: state.hideCustomer,
+          user: state.userInfo,
           pageSize: config.pageSize,
           offset: 0,
         );
@@ -272,15 +276,15 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
       emit(state.copyWith(isFetching: true));
       final customerCodeInfo = state.searchKey.isValid()
           ? state.searchKey.getValue()
-          : e.selectedSalesOrg.customerInfos.isNotEmpty
-              ? e.selectedSalesOrg.customerInfos.first.customerCodeSoldTo
+          : state.selectedSalesOrg.customerInfos.isNotEmpty
+              ? state.selectedSalesOrg.customerInfos.first.customerCodeSoldTo
                   .checkAllOrCustomerCode
               : '';
       final failureOrSuccess = await customerCodeRepository.getCustomerCode(
-        salesOrganisation: e.selectedSalesOrg,
+        salesOrganisation: state.selectedSalesOrg,
         customerCodes: [customerCodeInfo],
-        hideCustomer: e.hideCustomer,
-        user: e.userInfo,
+        hideCustomer: state.hideCustomer,
+        user: state.userInfo,
         pageSize: config.pageSize,
         offset: state.customerCodeList.length,
       );
@@ -313,9 +317,6 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         if (event.searchText != state.searchKey.getValue()) {
           add(
             _Fetch(
-              hideCustomer: event.hideCustomer,
-              userInfo: event.userInfo,
-              selectedSalesOrg: event.selectedSalesOrg,
               searchText: event.searchText,
             ),
           );

@@ -665,6 +665,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               }
               if (state.haveSelectedSalesOrganisation &&
                   state.configs != SalesOrganisationConfigs.empty()) {
+                context.read<CustomerCodeBloc>().add(
+                      CustomerCodeEvent.initialized(
+                        userInfo: context.read<UserBloc>().state.user,
+                        selectedSalesOrg: state.salesOrganisation,
+                        hideCustomer: state.configs.hideCustomer,
+                      ),
+                    );
+
                 context.read<AnnouncementInfoBloc>().add(
                       AnnouncementInfoEvent.fetch(
                         salesOrg: state.salesOrg,
@@ -678,11 +686,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     );
 
                 context.read<CustomerCodeBloc>().add(
-                      CustomerCodeEvent.loadStoredCustomerCode(
-                        hideCustomer: state.hideCustomer,
-                        selectedSalesOrg: state.salesOrganisation,
-                        userInfo: context.read<UserBloc>().state.user,
-                      ),
+                      const CustomerCodeEvent.loadStoredCustomerCode(),
                     );
 
                 context.read<ProductSearchBloc>().add(
@@ -1227,7 +1231,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     context
         .read<OrderDocumentTypeBloc>()
         .add(const OrderDocumentTypeEvent.initialized());
-    context.read<CustomerCodeBloc>().add(const CustomerCodeEvent.initialized());
+    context.read<CustomerCodeBloc>().add(
+          CustomerCodeEvent.initialized(
+            userInfo: context.read<UserBloc>().state.user,
+            selectedSalesOrg:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            hideCustomer: context.read<SalesOrgBloc>().state.hideCustomer,
+          ),
+        );
   }
 }
 

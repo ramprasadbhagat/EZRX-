@@ -26,7 +26,7 @@ class AdminPoAttachmentFilterDrawer extends StatelessWidget {
       child: BlocProvider<CustomerCodeBloc>(
         create: (_) => locator<CustomerCodeBloc>()
           ..add(
-            CustomerCodeEvent.fetch(
+            CustomerCodeEvent.initialized(
               userInfo: context.read<EligibilityBloc>().state.user,
               selectedSalesOrg: SalesOrganisation.empty().copyWith(
                 salesOrg: context
@@ -40,6 +40,9 @@ class AdminPoAttachmentFilterDrawer extends StatelessWidget {
               ),
               hideCustomer: false,
             ),
+          )
+          ..add(
+            const CustomerCodeEvent.fetch(),
           ),
         child: BlocConsumer<AdminPoAttachmentFilterBloc,
             AdminPoAttachmentFilterState>(
@@ -216,16 +219,7 @@ class _SalesOrgByFilter extends StatelessWidget {
               current.adminPoAttachmentFilter.salesOrg &&
           current.adminPoAttachmentFilter.salesOrg.isValid(),
       listener: (context, state) => context.read<CustomerCodeBloc>().add(
-            CustomerCodeEvent.fetch(
-              userInfo: context.read<EligibilityBloc>().state.user,
-              selectedSalesOrg: SalesOrganisation.empty().copyWith(
-                salesOrg: state.adminPoAttachmentFilter.salesOrg,
-                customerInfos: [
-                  SalesOrgCustomerInfo.all(),
-                ],
-              ),
-              hideCustomer: false,
-            ),
+            const CustomerCodeEvent.fetch(),
           ),
       buildWhen: (previous, current) =>
           previous.adminPoAttachmentFilter.salesOrg !=
