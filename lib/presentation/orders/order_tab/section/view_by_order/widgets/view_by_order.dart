@@ -45,7 +45,7 @@ class _ViewByOrderState extends State<_ViewByOrder> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${'Order #'.tr()}${widget.viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+              '${'Order'.tr()} #${widget.viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
               style: Theme.of(context).textTheme.labelSmall,
             ),
             Padding(

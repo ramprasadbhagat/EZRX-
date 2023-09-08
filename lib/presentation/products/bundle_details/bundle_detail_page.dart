@@ -256,8 +256,8 @@ class _BundleOfferDetails extends StatelessWidget {
                   'Material information'.tr(),
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
-                subtitle: const Text(
-                  'Bundle code, Manufacturer',
+                subtitle: Text(
+                  '${'Bundle code'.tr()}, ${'Manufacturer'.tr()}',
                   overflow: TextOverflow.ellipsis,
                 ),
                 trailing: const Icon(Icons.chevron_right),

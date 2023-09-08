@@ -85,7 +85,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                 isQuantityBelowImage: false,
                                                 statusTag: e.productTag,
                                                 headerText:
-                                                    'Order #${e.orderNumber.getOrDefaultValue('')}',
+                                                    '${'Order'.tr()} #${e.orderNumber.getOrDefaultValue('')}',
                                                 subtitle: '',
                                               ),
                                             )

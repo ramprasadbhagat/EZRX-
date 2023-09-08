@@ -19,7 +19,7 @@ class MaterialInformation extends StatelessWidget {
         style: Theme.of(context).textTheme.labelSmall,
       ).tr(),
       subtitle: Text(
-        'Material number, Manufacturer, Country of origin , Unit of measure',
+        '${'Material number'.tr()}, ${'Manufacturer'.tr()}, ${'Country of origin'.tr()}, ${'Unit of measurement'.tr()}',
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: Theme.of(context)

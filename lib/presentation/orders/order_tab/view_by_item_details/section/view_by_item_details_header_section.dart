@@ -31,7 +31,7 @@ class ItemHeaderSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Order #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                '${'Order'.tr()} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.white,
                     ),

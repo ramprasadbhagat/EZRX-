@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
@@ -39,7 +40,7 @@ class InvoiceItemCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Order #${customerOpenItem.documentReferenceID}',
+                  '${'Order'.tr()} #${customerOpenItem.documentReferenceID}',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 Text(
