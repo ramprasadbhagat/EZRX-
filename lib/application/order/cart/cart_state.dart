@@ -304,4 +304,6 @@ class CartState with _$CartState {
             : [e],
       )
       .toList();
+  bool get isHavingMoreThanOnePreOrderInCart =>
+      cartProducts.where((e) => e.isPreOrder).toList().length > 1;
 }
