@@ -252,8 +252,8 @@ class WidgetKeys {
   static const Key orderSummaryButton = Key('orderSummaryButton');
   static const Key checkoutButton = Key('checkoutButton');
   static const Key selectAllButton = Key('selectAllButton');
-  static Key cartMaterialItemTile(String cartMaterialItemTileKey) =>
-      Key(cartMaterialItemTileKey);
+  static Key cartMaterialItemTile(String cartMaterialItemNo) =>
+      Key('cartItemTile$cartMaterialItemNo');
   static const Key cartButton = Key('cartButton');
   static const Key counterOfferPriceField = Key('counterOfferPriceField');
   static const Key counterOfferRemarksField = Key('counterOfferRemarksField');
@@ -267,6 +267,13 @@ class WidgetKeys {
   static const Key bonusOfferItemInputKey = Key('bonusOfferItemInputKey');
 
   static const Key counterOfferDiscountField = Key('counterOfferDiscountField');
+  static const Key counterOfferBottomSheet = Key('counterOfferBottomSheet');
+  static const Key counterOfferConfirmButton = Key('counterOfferConfirmButton');
+  static const Key counterOfferCancelButton = Key('counterOfferCancelButton');
+  static const Key counterOfferEmptyFieldErrorMessage =
+      Key('counterOfferEmptyFieldErrorMessage');
+  static const Key counterOfferDiscountedPriceWidget =
+      Key('counterDiscountedPriceWidget');
   //============================================================
   //  Checkout Page Keys
   //============================================================
@@ -414,7 +421,7 @@ class WidgetKeys {
   //============================================================
   static const Key newPaymentPage = Key('newPaymentPage');
   static const Key payButton = Key('payButton');
-  
+
   //============================================================
   //  Announcement
   //============================================================
@@ -544,6 +551,4 @@ class WidgetKeys {
   static const Key paymentHomeSoa = Key('paymentHomeSoa');
   static const Key paymentAdviceCreatedPageBack =
       Key('paymentAdviceCreatedPageBack');
-
-
 }

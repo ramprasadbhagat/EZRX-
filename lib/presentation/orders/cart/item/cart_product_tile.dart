@@ -41,6 +41,9 @@ class CartProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.cartMaterialItemTile(
+        cartItem.materialInfo.materialNumber.getValue(),
+      ),
       padding: const EdgeInsets.only(top: 25.0),
       child: CustomSlidable(
         extentRatio: 0.24,

@@ -204,7 +204,8 @@ class EligibilityState with _$EligibilityState {
       isOrderTypeEligible && selectedOrderType.documentType.isSpecialOrderType;
 
   bool get isCounterOfferVisible =>
-      !isOrderTypeEligibleAndSpecialOrderType && isPriceOverrideEnable;
+      !isOrderTypeEligibleAndSpecialOrderType &&
+      (isPriceOverrideEnable || isZDP8Override);
 
   bool get isOutOfStockMaterialAllowed {
     if (!salesOrgConfigs.addOosMaterials.isOutOfStockMaterialAllowed) {

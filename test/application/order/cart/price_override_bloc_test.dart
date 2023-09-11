@@ -10,7 +10,9 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/price_override_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -19,15 +21,17 @@ class PriceOverrideRepositoryMock extends Mock
 
 void main() {
   late PriceOverrideRepository priceOverrideRepositoryMock;
+  late List<PriceAggregate> cartItems;
+
+  setUpAll(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    cartItems = await CartLocalDataSource().upsertCart();
+    priceOverrideRepositoryMock = PriceOverrideRepositoryMock();
+  });
 
   group(
     'Testing price override bloc',
     () {
-      setUp(
-        () {
-          priceOverrideRepositoryMock = PriceOverrideRepositoryMock();
-        },
-      );
       blocTest<PriceOverrideBloc, PriceOverrideState>(
         'Price Override Bloc Initial',
         build: () => PriceOverrideBloc(
@@ -37,6 +41,23 @@ void main() {
           const PriceOverrideEvent.initialized(),
         ),
         expect: () => [PriceOverrideState.initial()],
+      );
+
+      blocTest<PriceOverrideBloc, PriceOverrideState>(
+        'Price Override Bloc Set Product',
+        build: () => PriceOverrideBloc(
+          priceOverrideRepository: priceOverrideRepositoryMock,
+        ),
+        act: (bloc) => bloc.add(
+          PriceOverrideEvent.setProduct(
+            item: cartItems.first,
+          ),
+        ),
+        expect: () => [
+          PriceOverrideState.initial().copyWith(
+            item: cartItems.first,
+          )
+        ],
       );
 
       blocTest<PriceOverrideBloc, PriceOverrideState>(
@@ -94,6 +115,61 @@ void main() {
       );
 
       blocTest<PriceOverrideBloc, PriceOverrideState>(
+        'Price Override Bloc Validate Input Fields showErrorMessage --> true',
+        build: () => PriceOverrideBloc(
+          priceOverrideRepository: priceOverrideRepositoryMock,
+        ),
+        seed: () => PriceOverrideState.initial().copyWith(
+          item: PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
+                counterOfferPrice: CounterOfferValue('0'),
+                discountOverridePercentage: CounterOfferDiscountValue('100'),
+              ),
+            ),
+          ),
+        ),
+        act: (bloc) => bloc.add(
+          const PriceOverrideEvent.validateInputFields(),
+        ),
+        expect: () => [
+          PriceOverrideState.initial().copyWith(
+            showErrorMessages: true,
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('0'),
+                  discountOverridePercentage: CounterOfferDiscountValue('100'),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+
+      blocTest<PriceOverrideBloc, PriceOverrideState>(
+        'Price Override Bloc Validate Input Fields showErrorMessage --> false',
+        build: () => PriceOverrideBloc(
+          priceOverrideRepository: priceOverrideRepositoryMock,
+        ),
+        seed: () => PriceOverrideState.initial().copyWith(
+          item: PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
+                counterOfferPrice: CounterOfferValue('100'),
+                discountOverridePercentage: CounterOfferDiscountValue('10'),
+              ),
+            ),
+          ),
+        ),
+        act: (bloc) => bloc.add(
+          const PriceOverrideEvent.validateInputFields(),
+        ),
+        expect: () => [],
+      );
+
+      blocTest<PriceOverrideBloc, PriceOverrideState>(
         'Price Override Bloc onRemarksValueChange',
         build: () => PriceOverrideBloc(
           priceOverrideRepository: priceOverrideRepositoryMock,
@@ -133,7 +209,8 @@ void main() {
                 materialInfo: MaterialInfo.empty().copyWith(
                   counterOfferDetails:
                       RequestCounterOfferDetails.empty().copyWith(
-                    counterOfferPrice: CounterOfferValue('70'),
+                    counterOfferPrice: CounterOfferValue('100'),
+                    discountOverridePercentage: CounterOfferDiscountValue('10'),
                     comment: StringValue('fake-comment'),
                   ),
                 ),
@@ -142,7 +219,10 @@ void main() {
             ),
           ).thenAnswer(
             (invocation) async => Right(
-              Price.empty(),
+              Price.empty().copyWith(
+                finalPrice: MaterialPrice(90),
+                lastPrice: MaterialPrice(250),
+              ),
             ),
           );
         },
@@ -150,7 +230,8 @@ void main() {
           item: PriceAggregate.empty().copyWith(
             materialInfo: MaterialInfo.empty().copyWith(
               counterOfferDetails: RequestCounterOfferDetails.empty().copyWith(
-                counterOfferPrice: CounterOfferValue('70'),
+                counterOfferPrice: CounterOfferValue('100'),
+                discountOverridePercentage: CounterOfferDiscountValue('10'),
                 comment: StringValue('fake-comment'),
               ),
             ),
@@ -168,7 +249,8 @@ void main() {
               materialInfo: MaterialInfo.empty().copyWith(
                 counterOfferDetails:
                     RequestCounterOfferDetails.empty().copyWith(
-                  counterOfferPrice: CounterOfferValue('70'),
+                  counterOfferPrice: CounterOfferValue('100'),
+                  discountOverridePercentage: CounterOfferDiscountValue('10'),
                   comment: StringValue('fake-comment'),
                 ),
               ),
@@ -181,18 +263,26 @@ void main() {
               materialInfo: MaterialInfo.empty().copyWith(
                 counterOfferDetails:
                     RequestCounterOfferDetails.empty().copyWith(
-                  counterOfferPrice: CounterOfferValue('70'),
+                  counterOfferPrice: CounterOfferValue('100'),
+                  discountOverridePercentage: CounterOfferDiscountValue('10'),
                   comment: StringValue('fake-comment'),
                 ),
               ),
               price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(90),
+                lastPrice: MaterialPrice(250),
                 isPriceOverride: true,
-                priceOverride: PriceOverrideValue(70.0),
+                isDiscountOverride: true,
+                priceOverride: PriceOverrideValue(100),
+                zdp8Override: Zdp8OverrideValue(10),
               ),
             ),
             apiFailureOrSuccessOption: optionOf(
               Right(
-                Price.empty(),
+                Price.empty().copyWith(
+                  finalPrice: MaterialPrice(90),
+                  lastPrice: MaterialPrice(250),
+                ),
               ),
             ),
           ),
@@ -271,6 +361,113 @@ void main() {
             ),
           ),
         ],
+      );
+
+      test(
+        'Check IsPriceOverrideValue and IsDiscountOverrideValue Valid ',
+        () {
+          final priceOverrideState = PriceOverrideState.initial().copyWith(
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('100'),
+                  discountOverridePercentage: CounterOfferDiscountValue('10'),
+                  comment: StringValue('fake-comment'),
+                ),
+              ),
+            ),
+          );
+          final isPriceOverrideValid = priceOverrideState.isPriceOverride;
+          final isDiscountOverrideValid = priceOverrideState.isDiscountOverride;
+          expect(isPriceOverrideValid, true);
+          expect(isDiscountOverrideValid, true);
+        },
+      );
+
+      test(
+        'Check IsPriceOverrideValue and IsDiscountOverrideValue NotValid ',
+        () {
+          final priceOverrideState = PriceOverrideState.initial().copyWith(
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue(''),
+                  discountOverridePercentage: CounterOfferDiscountValue(''),
+                  comment: StringValue('fake-comment'),
+                ),
+              ),
+            ),
+          );
+          final isPriceOverrideValid = priceOverrideState.isPriceOverride;
+          final isDiscountOverrideValid = priceOverrideState.isDiscountOverride;
+          expect(isPriceOverrideValid, false);
+          expect(isDiscountOverrideValid, false);
+        },
+      );
+
+      test(
+        'Check isInputFieldValid ',
+        () {
+          final priceOverrideState = PriceOverrideState.initial().copyWith(
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('100'),
+                  discountOverridePercentage: CounterOfferDiscountValue('10'),
+                  comment: StringValue('fake-comment'),
+                ),
+              ),
+            ),
+          );
+          final isInputFieldValid = priceOverrideState.isInputFieldValid;
+          expect(isInputFieldValid, true);
+        },
+      );
+
+      test(
+        'Check Not isInputFieldValid ',
+        () {
+          final priceOverrideState = PriceOverrideState.initial().copyWith(
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue(''),
+                  discountOverridePercentage: CounterOfferDiscountValue(''),
+                  comment: StringValue('fake-comment'),
+                ),
+              ),
+            ),
+          );
+          final isInputFieldValid = priceOverrideState.isInputFieldValid;
+          expect(isInputFieldValid, false);
+        },
+      );
+
+      test(
+        'Check newDiscountPrice ',
+        () {
+          final priceOverrideState = PriceOverrideState.initial().copyWith(
+            item: PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                counterOfferDetails:
+                    RequestCounterOfferDetails.empty().copyWith(
+                  counterOfferPrice: CounterOfferValue('100'),
+                  discountOverridePercentage: CounterOfferDiscountValue('10'),
+                  comment: StringValue('fake-comment'),
+                ),
+              ),
+            ),
+          );
+          final newDiscountPrice = priceOverrideState.newDiscountPrice;
+          expect(
+            newDiscountPrice,
+            90,
+          );
+        },
       );
     },
   );

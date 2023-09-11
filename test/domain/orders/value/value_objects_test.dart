@@ -317,4 +317,87 @@ void main() {
       },
     );
   });
+
+  group('Counter Offer Value Object', () {
+    test('Counter Offer Value is not Valid', () {
+      final emptyValue = CounterOfferValue('');
+      final valueObj = CounterOfferValue('0');
+      expect(
+        emptyValue.isValid(),
+        false,
+      );
+      expect(
+        valueObj.isValid(),
+        false,
+      );
+    });
+
+    test('Counter Offer Value is Valid', () {
+      final valueObj = CounterOfferValue('100');
+      expect(
+        valueObj.isValid(),
+        true,
+      );
+    });
+
+    test('Counter Offer Value double value', () {
+      final valueObj = CounterOfferValue('100');
+      expect(
+        valueObj.doubleValue,
+        100,
+      );
+    });
+
+    test('Counter Offer toPriceOverrideValue', () {
+      final valueObj = CounterOfferValue('100');
+      expect(
+        valueObj.toPriceOverrideValue,
+        PriceOverrideValue(100),
+      );
+    });
+  });
+
+  group('Counter Offer Discount Value Object', () {
+    test('Counter Offer Discount Value is not Valid', () {
+      final emptyValue = CounterOfferDiscountValue('');
+      final valueObj = CounterOfferDiscountValue('0');
+      final wrongValue = CounterOfferDiscountValue('100');
+      expect(
+        emptyValue.isValid(),
+        false,
+      );
+      expect(
+        valueObj.isValid(),
+        false,
+      );
+      expect(
+        wrongValue.isValid(),
+        false,
+      );
+    });
+
+    test('Counter Offer Discount Value is Valid', () {
+      final valueObj = CounterOfferDiscountValue('10');
+      expect(
+        valueObj.isValid(),
+        true,
+      );
+    });
+
+    test('Counter Offer Discount double value', () {
+      final valueObj = CounterOfferDiscountValue('10');
+      expect(
+        valueObj.doubleValue,
+        10,
+      );
+    });
+
+    test('Counter Offer Discount toZdp8OverrideValue', () {
+      final valueObj = CounterOfferDiscountValue('10');
+      expect(
+        valueObj.toZdp8OverrideValue,
+        Zdp8OverrideValue(10),
+      );
+    });
+  });
 }

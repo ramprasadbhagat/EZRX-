@@ -93,6 +93,7 @@ class RequestCounterOfferSheet extends StatelessWidget {
               context.read<EligibilityBloc>().state.isPriceOverrideEnable;
 
           return Padding(
+            key: WidgetKeys.counterOfferBottomSheet,
             padding: EdgeInsets.only(
               left: 20,
               right: 20,
@@ -158,7 +159,9 @@ class RequestCounterOfferSheet extends StatelessWidget {
                 if (state.showErrorMessages &&
                     isPriceOverrideEnable &&
                     isDiscountOverrideEnable)
-                  const _CounterOfferEmptyFieldsErrorMessage(),
+                  const _CounterOfferEmptyFieldsErrorMessage(
+                    key: WidgetKeys.counterOfferEmptyFieldErrorMessage,
+                  ),
                 _CounterOfferButtons(
                   cartItem: cartItem,
                 ),

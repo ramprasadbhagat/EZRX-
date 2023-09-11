@@ -12,6 +12,7 @@ class _DiscountedPriceField extends StatelessWidget {
           previous.newDiscountPrice != current.newDiscountPrice,
       builder: (context, state) {
         return Padding(
+          key: WidgetKeys.counterOfferDiscountedPriceWidget,
           padding: const EdgeInsets.only(top: 10, bottom: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -21,6 +21,7 @@ class _CounterOfferButtons extends StatelessWidget {
           children: [
             Expanded(
               child: OutlinedButton(
+                key: WidgetKeys.counterOfferCancelButton,
                 onPressed: () {
                   context.router.pop();
                 },
@@ -32,6 +33,7 @@ class _CounterOfferButtons extends StatelessWidget {
             ),
             Expanded(
               child: ElevatedButton(
+                key: WidgetKeys.counterOfferConfirmButton,
                 onPressed: () {
                   context
                       .read<PriceOverrideBloc>()
