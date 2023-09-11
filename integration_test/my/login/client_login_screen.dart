@@ -2,6 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
+import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+import '../../core/test_locator.dart';
 import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
 
@@ -20,7 +23,7 @@ void main() {
   const emptyString = '';
 
   group('Login (MY Market)', () {
-    testWidgets('Verify UI of Login screen', (tester) async {
+    testWidgets('EZRX-T6 | Verify GUI of Login screen', (tester) async {
       //initialize necessary robots
       loginRobot = LoginRobot(tester);
 
@@ -38,8 +41,9 @@ void main() {
       loginRobot.findLoginWithSSOButton();
     });
 
-    testWidgets('Verify Default value fields (MY Market)', (tester) async {
-      //initialize neccessary robots
+    testWidgets('EZRX-T7 | Verify Default value fields (MY Market)',
+        (tester) async {
+      //initialize necessary robots
       loginRobot = LoginRobot(tester);
 
       //init app
@@ -54,8 +58,9 @@ void main() {
       loginRobot.verifyDefaultPasswordField();
     });
 
-    testWidgets('Verify mandatory fields (MY Market)', (tester) async {
-      //initialize neccessary robots
+    testWidgets('EZRX-T8 | Verify mandatory fields (MY Market)',
+        (tester) async {
+      //initialize necessary robots
       loginRobot = LoginRobot(tester);
 
       //init app
@@ -82,9 +87,9 @@ void main() {
     });
 
     testWidgets(
-        'Verify login unsuccessfully with incorrect Username (MY Market)',
+        'EZRX-T9 | Verify login unsuccessfully with incorrect Username (MY Market)',
         (tester) async {
-      //initialize neccessary robots
+      //initialize necessary robots
       loginRobot = LoginRobot(tester);
 
       //init app
@@ -102,9 +107,9 @@ void main() {
     });
 
     testWidgets(
-        'Verify login unsuccessfully with incorrect Password (MY Market)',
+        'EZRX-T10 | Verify login unsuccessfully with incorrect Password (MY Market)',
         (tester) async {
-      //initialize neccessary robots
+      //initialize necessary robots
       loginRobot = LoginRobot(tester);
 
       //init app
@@ -122,9 +127,9 @@ void main() {
     });
 
     testWidgets(
-        'Verify login unsuccessfully with incorrect Username/Password (MY Market)',
+        'EZRX-T11 | Verify login unsuccessfully with incorrect Username/Password (MY Market)',
         (tester) async {
-      //initialize neccessary robots
+      //initialize necessary robots
       loginRobot = LoginRobot(tester);
 
       //init app
@@ -143,8 +148,9 @@ void main() {
   });
 
   group('Forgot password (MY Market)', () {
-    testWidgets('Verify Forgot password screen (MY Market)', (tester) async {
-      //initialize neccessary robots
+    testWidgets('EZRX-T14 | Verify Forgot password screen (MY Market)',
+        (tester) async {
+      //initialize necessary robots
       loginRobot = LoginRobot(tester);
 
       //init app
@@ -174,8 +180,9 @@ void main() {
       loginRobot.verifyErrorMessageWithInvalidUsername();
     });
 
-    testWidgets('Verify Forgot password fucntion (MY Market)', (tester) async {
-      //initialize neccessary robots
+    testWidgets('EZRX-T15 | Verify Forgot password function (MY Market)',
+        (tester) async {
+      //initialize necessary robots
       loginRobot = LoginRobot(tester);
 
       //init app
@@ -193,9 +200,10 @@ void main() {
   });
 
   group('Login successfully (MY Market)', () {
-    testWidgets('Verify login successfully with check :Remember me (MY Market)',
+    testWidgets(
+        'EZRX-T12 | Verify login successfully with check :Remember me (MY Market)',
         (tester) async {
-      //initialize neccessary robots
+      //initialize necessary robots
       loginRobot = LoginRobot(tester);
       homeRobot = HomeRobot(tester);
 
@@ -231,9 +239,9 @@ void main() {
     });
 
     testWidgets(
-        'Verify login successfully with uncheck :Remember me (MY Market)',
+        'EZRX-T13 | Verify login successfully with uncheck :Remember me (MY Market)',
         (tester) async {
-      //initialize neccessary robots
+      //initialize necessary robots
       loginRobot = LoginRobot(tester);
 
       //init app
@@ -256,4 +264,10 @@ void main() {
       homeRobot.verify();
     });
   });
+
+  tearDown(() => locator<ZephyrService>().setNameAndStatus());
+  tearDownAll(
+    () async =>
+        await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient),
+  );
 }

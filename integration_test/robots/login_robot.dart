@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -14,7 +15,7 @@ class LoginRobot {
   final backToLoginButton = find.text('Back To login'.tr());
   final nextButton = find.text('Next'.tr());
   final forgotUsernameField = find.byKey(const Key('forgotUsernameField'));
-  final marketSelector = find.byKey(const Key('appMarketSelector'));
+  final marketSelector = find.byKey(WidgetKeys.appMarketSelector);
   final loginUsernameField = find.byKey(const Key('loginUsernameField'));
   final loginPasswordField = find.byKey(const Key('loginPasswordField'));
   final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
