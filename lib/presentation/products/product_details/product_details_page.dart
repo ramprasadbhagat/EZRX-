@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -330,18 +331,26 @@ class _FooterState extends State<_Footer> {
   bool _isEligibleForAddToCart({
     required BuildContext context,
     required Price price,
-  }) =>
-      !(price.finalPrice.isEmpty &&
-          !context.read<SalesOrgBloc>().state.configs.materialWithoutPrice) &&
-      (!context
-              .read<ProductDetailBloc>()
-              .state
-              .productDetailAggregate
-              .stockInfo
-              .inStock
-              .isMaterialInStock
-          ? !context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials
-          : true);
+  }) {
+    final disableCreateOrder =
+        !context.read<UserBloc>().state.user.userCanCreateOrder;
+    if (disableCreateOrder) return false;
+
+    return !(price.finalPrice.isEmpty &&
+            !context.read<SalesOrgBloc>().state.configs.materialWithoutPrice) &&
+        (!context
+                .read<ProductDetailBloc>()
+                .state
+                .productDetailAggregate
+                .stockInfo
+                .inStock
+                .isMaterialInStock
+            ? !context
+                .read<EligibilityBloc>()
+                .state
+                .doNotAllowOutOfStockMaterials
+            : true);
+  }
 
   @override
   Widget build(BuildContext context) {
