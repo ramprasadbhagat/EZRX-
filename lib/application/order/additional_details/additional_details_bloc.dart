@@ -237,7 +237,7 @@ class AdditionalDetailsBloc
         _emitAfterOnTextChange(
           emit: emit,
           deliveryInfoData: state.deliveryInfoData.copyWith(
-            deliveryDate: DeliveryDate(newValue),
+            deliveryDate: DateTimeStringValue(newValue),
           ),
         );
         break;

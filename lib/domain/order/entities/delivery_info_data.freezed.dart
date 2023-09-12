@@ -23,7 +23,7 @@ mixin _$DeliveryInfoData {
   ContactPerson get contactPerson => throw _privateConstructorUsedError;
   MobileNumber get mobileNumber => throw _privateConstructorUsedError;
   PaymentTerm get paymentTerm => throw _privateConstructorUsedError;
-  DeliveryDate get deliveryDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get deliveryDate => throw _privateConstructorUsedError;
   List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
   bool get greenDeliveryEnabled => throw _privateConstructorUsedError;
 
@@ -45,7 +45,7 @@ abstract class $DeliveryInfoDataCopyWith<$Res> {
       ContactPerson contactPerson,
       MobileNumber mobileNumber,
       PaymentTerm paymentTerm,
-      DeliveryDate deliveryDate,
+      DateTimeStringValue deliveryDate,
       List<PoDocuments> poDocuments,
       bool greenDeliveryEnabled});
 }
@@ -101,7 +101,7 @@ class _$DeliveryInfoDataCopyWithImpl<$Res, $Val extends DeliveryInfoData>
       deliveryDate: null == deliveryDate
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
-              as DeliveryDate,
+              as DateTimeStringValue,
       poDocuments: null == poDocuments
           ? _value.poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
@@ -129,7 +129,7 @@ abstract class _$$_DeliveryInfoDataCopyWith<$Res>
       ContactPerson contactPerson,
       MobileNumber mobileNumber,
       PaymentTerm paymentTerm,
-      DeliveryDate deliveryDate,
+      DateTimeStringValue deliveryDate,
       List<PoDocuments> poDocuments,
       bool greenDeliveryEnabled});
 }
@@ -183,7 +183,7 @@ class __$$_DeliveryInfoDataCopyWithImpl<$Res>
       deliveryDate: null == deliveryDate
           ? _value.deliveryDate
           : deliveryDate // ignore: cast_nullable_to_non_nullable
-              as DeliveryDate,
+              as DateTimeStringValue,
       poDocuments: null == poDocuments
           ? _value._poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
@@ -225,7 +225,7 @@ class _$_DeliveryInfoData extends _DeliveryInfoData {
   @override
   final PaymentTerm paymentTerm;
   @override
-  final DeliveryDate deliveryDate;
+  final DateTimeStringValue deliveryDate;
   final List<PoDocuments> _poDocuments;
   @override
   List<PoDocuments> get poDocuments {
@@ -295,7 +295,7 @@ abstract class _DeliveryInfoData extends DeliveryInfoData {
       required final ContactPerson contactPerson,
       required final MobileNumber mobileNumber,
       required final PaymentTerm paymentTerm,
-      required final DeliveryDate deliveryDate,
+      required final DateTimeStringValue deliveryDate,
       required final List<PoDocuments> poDocuments,
       required final bool greenDeliveryEnabled}) = _$_DeliveryInfoData;
   const _DeliveryInfoData._() : super._();
@@ -313,7 +313,7 @@ abstract class _DeliveryInfoData extends DeliveryInfoData {
   @override
   PaymentTerm get paymentTerm;
   @override
-  DeliveryDate get deliveryDate;
+  DateTimeStringValue get deliveryDate;
   @override
   List<PoDocuments> get poDocuments;
   @override

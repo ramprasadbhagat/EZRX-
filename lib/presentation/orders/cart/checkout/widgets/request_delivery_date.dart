@@ -120,6 +120,6 @@ class _RequestDeliveryDateState extends State<RequestDeliveryDate> {
       initialDate: DateTime.now().add(const Duration(days: 1)),
     );
 
-    return orderDate ?? widget.deliveryInfoData.deliveryDate.toDateTime;
+    return orderDate ?? widget.deliveryInfoData.deliveryDate.dateTime;
   }
 }

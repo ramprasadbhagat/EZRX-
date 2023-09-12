@@ -15,7 +15,6 @@ import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart'
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:intl/intl.dart';
 import 'package:mocktail/mocktail.dart';
 
 class SavedOrderRepositoryMock extends Mock implements OrderRepository {}
@@ -65,15 +64,7 @@ void main() {
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              deliveryDate: DeliveryDate(
-                DateFormat('yyyy-MM-dd').format(
-                  DateTime.now().add(
-                    const Duration(
-                      days: 1,
-                    ),
-                  ),
-                ),
-              ),
+              deliveryDate: DeliveryInfoData.defaultDeliveryDate,
               mobileNumber: MobileNumber(''),
             ),
             isValidated: false,
@@ -98,15 +89,7 @@ void main() {
         expect: () => [
           AdditionalDetailsState.initial().copyWith(
             deliveryInfoData: data.copyWith(
-              deliveryDate: DeliveryDate(
-                DateFormat('yyyy-MM-dd').format(
-                  DateTime.now().add(
-                    Duration(
-                      days: int.parse('1'),
-                    ),
-                  ),
-                ),
-              ),
+              deliveryDate: DeliveryInfoData.defaultDeliveryDate,
               mobileNumber: MobileNumber(''),
             ),
             isValidated: false,

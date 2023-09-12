@@ -19,7 +19,7 @@ class DeliveryInfoData with _$DeliveryInfoData {
     required ContactPerson contactPerson,
     required MobileNumber mobileNumber,
     required PaymentTerm paymentTerm,
-    required DeliveryDate deliveryDate,
+    required DateTimeStringValue deliveryDate,
     required List<PoDocuments> poDocuments,
     required bool greenDeliveryEnabled,
   }) = _DeliveryInfoData;
@@ -45,7 +45,7 @@ class DeliveryInfoData with _$DeliveryInfoData {
       poDocuments: orderDetail.poAttachent,
       deliveryDate: orderDeliveryDate.isEmpty
           ? defaultDeliveryDate
-          : DeliveryDate(orderDeliveryDate),
+          : DateTimeStringValue(orderDeliveryDate),
       greenDeliveryEnabled: orderDetail.shippingCondition.isGreenDelivery,
     );
   }
@@ -93,7 +93,7 @@ class DeliveryInfoData with _$DeliveryInfoData {
         greenDeliveryEnabled: false,
       );
 
-  static DeliveryDate get defaultDeliveryDate => DeliveryDate(
+  static DateTimeStringValue get defaultDeliveryDate => DateTimeStringValue(
         DateFormat('yyyy-MM-dd').format(
           DateTime.now().add(
             const Duration(days: 1),

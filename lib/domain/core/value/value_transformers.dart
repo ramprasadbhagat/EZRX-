@@ -99,17 +99,6 @@ String getTenderContractNumber(String text) {
       : 'Contract: $text';
 }
 
-DateTime getDeliveryDateTime(String input) {
-  final deliveryDate = DateTime.tryParse(input);
-  final defaultDeliveryDate = DateTime.now().add(const Duration(days: 1));
-
-  if (deliveryDate == null || deliveryDate.isBefore(defaultDeliveryDate)) {
-    return defaultDeliveryDate;
-  }
-
-  return deliveryDate;
-}
-
 String displayDateTimeString(
   String text,
   String format,
@@ -430,8 +419,6 @@ String getOrderStatus(String status) {
       return status;
   }
 }
-
-
 
 IconData getOrderStatusIcon(String status) {
   switch (status) {

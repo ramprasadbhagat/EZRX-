@@ -639,20 +639,6 @@ class PaymentTerm extends ValueObject<String> {
   const PaymentTerm._(this.value);
 }
 
-class DeliveryDate extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory DeliveryDate(String input) {
-    return DeliveryDate._(validateStringNotEmpty(input));
-  }
-
-  DateTime get toDateTime => getDeliveryDateTime(
-        value.getOrElse(() => ''),
-      );
-  const DeliveryDate._(this.value);
-}
-
 class Zdp8OverrideValue extends ValueObject<double> {
   @override
   final Either<ValueFailure<double>, double> value;
