@@ -509,6 +509,11 @@ class WidgetKeys {
   static const Key phoneNumberKey = Key('phoneNumberKey');
   static const Key contactMessageKey = Key('contactMessageKey');
   static const Key sendMessageButtonKey = Key('sendMessageButtonKey');
+  static const Key messageReceivedKey = Key('messageReceived');
+  static const Key messageNotReceivedKey = Key('messageNotReceived');
+  static const Key internationalPhoneNumberInputKey =
+      Key('internationalPhoneNumberInput');
+  static const Key contactDetailsKey = Key('contactDetails');
 
   //============================================================
   //  Payment summary details page

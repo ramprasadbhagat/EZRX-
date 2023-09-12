@@ -24,6 +24,7 @@ class _ContactDetails extends StatelessWidget {
               ),
         ),
         _ContactItem(
+          key: WidgetKeys.genericKey(key: salesOrg.contactEmail),
           label: salesOrg.contactEmail,
           icon: Icons.mail_outline,
           onTap: () =>
@@ -32,6 +33,7 @@ class _ContactDetails extends StatelessWidget {
         ...salesOrg.contact.phoneNumbers
             .map(
               (e) => _ContactItem(
+                key: WidgetKeys.genericKey(key: e.displayTelephoneNumber),
                 label: e.displayTelephoneNumber,
                 icon: Icons.call_outlined,
                 onTap: () => _makeCall('tel://${e.displayTelephoneNumber}'),

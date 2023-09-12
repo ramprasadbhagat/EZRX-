@@ -63,6 +63,7 @@ class ContactUsPage extends StatelessWidget {
                   height: 20,
                 ),
                 _ContactDetails(
+                  key: WidgetKeys.contactDetailsKey,
                   salesOrg: state.salesOrg,
                 ),
                 const SizedBox(
