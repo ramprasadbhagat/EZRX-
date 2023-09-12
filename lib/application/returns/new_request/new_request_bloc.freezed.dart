@@ -22,8 +22,7 @@ mixin _$NewRequestEvent {
     required TResult Function(
             SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
-    required TResult Function(String assignmentNumber,
-            MaterialNumber materialNumber, String itemNumber, bool included)
+    required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
@@ -43,9 +42,7 @@ mixin _$NewRequestEvent {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -61,9 +58,7 @@ mixin _$NewRequestEvent {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -181,8 +176,7 @@ class _$_initialized implements _initialized {
     required TResult Function(
             SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
-    required TResult Function(String assignmentNumber,
-            MaterialNumber materialNumber, String itemNumber, bool included)
+    required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
@@ -205,9 +199,7 @@ class _$_initialized implements _initialized {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -226,9 +218,7 @@ class _$_initialized implements _initialized {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -403,8 +393,7 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     required TResult Function(
             SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
-    required TResult Function(String assignmentNumber,
-            MaterialNumber materialNumber, String itemNumber, bool included)
+    required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
@@ -427,9 +416,7 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -448,9 +435,7 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -544,11 +529,9 @@ abstract class _$$_ToggleBonusItemCopyWith<$Res> {
           _$_ToggleBonusItem value, $Res Function(_$_ToggleBonusItem) then) =
       __$$_ToggleBonusItemCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {String assignmentNumber,
-      MaterialNumber materialNumber,
-      String itemNumber,
-      bool included});
+  $Res call({ReturnMaterial item, bool included});
+
+  $ReturnMaterialCopyWith<$Res> get item;
 }
 
 /// @nodoc
@@ -562,53 +545,43 @@ class __$$_ToggleBonusItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? assignmentNumber = null,
-    Object? materialNumber = null,
-    Object? itemNumber = null,
+    Object? item = null,
     Object? included = null,
   }) {
     return _then(_$_ToggleBonusItem(
-      assignmentNumber: null == assignmentNumber
-          ? _value.assignmentNumber
-          : assignmentNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      materialNumber: null == materialNumber
-          ? _value.materialNumber
-          : materialNumber // ignore: cast_nullable_to_non_nullable
-              as MaterialNumber,
-      itemNumber: null == itemNumber
-          ? _value.itemNumber
-          : itemNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as ReturnMaterial,
       included: null == included
           ? _value.included
           : included // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnMaterialCopyWith<$Res> get item {
+    return $ReturnMaterialCopyWith<$Res>(_value.item, (value) {
+      return _then(_value.copyWith(item: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_ToggleBonusItem implements _ToggleBonusItem {
-  const _$_ToggleBonusItem(
-      {required this.assignmentNumber,
-      required this.materialNumber,
-      required this.itemNumber,
-      required this.included});
+  const _$_ToggleBonusItem({required this.item, required this.included});
 
   @override
-  final String assignmentNumber;
-  @override
-  final MaterialNumber materialNumber;
-  @override
-  final String itemNumber;
+  final ReturnMaterial item;
   @override
   final bool included;
 
   @override
   String toString() {
-    return 'NewRequestEvent.toggleBonusItem(assignmentNumber: $assignmentNumber, materialNumber: $materialNumber, itemNumber: $itemNumber, included: $included)';
+    return 'NewRequestEvent.toggleBonusItem(item: $item, included: $included)';
   }
 
   @override
@@ -616,19 +589,13 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ToggleBonusItem &&
-            (identical(other.assignmentNumber, assignmentNumber) ||
-                other.assignmentNumber == assignmentNumber) &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
-            (identical(other.itemNumber, itemNumber) ||
-                other.itemNumber == itemNumber) &&
+            (identical(other.item, item) || other.item == item) &&
             (identical(other.included, included) ||
                 other.included == included));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, assignmentNumber, materialNumber, itemNumber, included);
+  int get hashCode => Object.hash(runtimeType, item, included);
 
   @JsonKey(ignore: true)
   @override
@@ -643,8 +610,7 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     required TResult Function(
             SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
-    required TResult Function(String assignmentNumber,
-            MaterialNumber materialNumber, String itemNumber, bool included)
+    required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
@@ -658,8 +624,7 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
   }) {
-    return toggleBonusItem(
-        assignmentNumber, materialNumber, itemNumber, included);
+    return toggleBonusItem(item, included);
   }
 
   @override
@@ -668,9 +633,7 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -680,8 +643,7 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
   }) {
-    return toggleBonusItem?.call(
-        assignmentNumber, materialNumber, itemNumber, included);
+    return toggleBonusItem?.call(item, included);
   }
 
   @override
@@ -690,9 +652,7 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -704,8 +664,7 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     required TResult orElse(),
   }) {
     if (toggleBonusItem != null) {
-      return toggleBonusItem(
-          assignmentNumber, materialNumber, itemNumber, included);
+      return toggleBonusItem(item, included);
     }
     return orElse();
   }
@@ -769,14 +728,10 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
 
 abstract class _ToggleBonusItem implements NewRequestEvent {
   const factory _ToggleBonusItem(
-      {required final String assignmentNumber,
-      required final MaterialNumber materialNumber,
-      required final String itemNumber,
+      {required final ReturnMaterial item,
       required final bool included}) = _$_ToggleBonusItem;
 
-  String get assignmentNumber;
-  MaterialNumber get materialNumber;
-  String get itemNumber;
+  ReturnMaterial get item;
   bool get included;
   @JsonKey(ignore: true)
   _$$_ToggleBonusItemCopyWith<_$_ToggleBonusItem> get copyWith =>
@@ -863,8 +818,7 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
     required TResult Function(
             SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
-    required TResult Function(String assignmentNumber,
-            MaterialNumber materialNumber, String itemNumber, bool included)
+    required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
@@ -887,9 +841,7 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -908,9 +860,7 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -1090,8 +1040,7 @@ class _$_ToggleFiles implements _ToggleFiles {
     required TResult Function(
             SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
-    required TResult Function(String assignmentNumber,
-            MaterialNumber materialNumber, String itemNumber, bool included)
+    required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
@@ -1114,9 +1063,7 @@ class _$_ToggleFiles implements _ToggleFiles {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -1135,9 +1082,7 @@ class _$_ToggleFiles implements _ToggleFiles {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -1293,8 +1238,7 @@ class _$_ValidateStep implements _ValidateStep {
     required TResult Function(
             SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
-    required TResult Function(String assignmentNumber,
-            MaterialNumber materialNumber, String itemNumber, bool included)
+    required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
@@ -1317,9 +1261,7 @@ class _$_ValidateStep implements _ValidateStep {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -1338,9 +1280,7 @@ class _$_ValidateStep implements _ValidateStep {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -1493,8 +1433,7 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
     required TResult Function(
             SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
-    required TResult Function(String assignmentNumber,
-            MaterialNumber materialNumber, String itemNumber, bool included)
+    required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
@@ -1517,9 +1456,7 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -1538,9 +1475,7 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -1696,8 +1631,7 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
     required TResult Function(
             SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
-    required TResult Function(String assignmentNumber,
-            MaterialNumber materialNumber, String itemNumber, bool included)
+    required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
@@ -1720,9 +1654,7 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -1741,9 +1673,7 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -1921,8 +1851,7 @@ class _$_Submit implements _Submit {
     required TResult Function(
             SalesOrg salesOrg, ReturnMaterial item, bool selected)
         toggleReturnItem,
-    required TResult Function(String assignmentNumber,
-            MaterialNumber materialNumber, String itemNumber, bool included)
+    required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
@@ -1945,9 +1874,7 @@ class _$_Submit implements _Submit {
     TResult? Function()? initialized,
     TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult? Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
@@ -1966,9 +1893,7 @@ class _$_Submit implements _Submit {
     TResult Function()? initialized,
     TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
         toggleReturnItem,
-    TResult Function(String assignmentNumber, MaterialNumber materialNumber,
-            String itemNumber, bool included)?
-        toggleBonusItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?

@@ -67,9 +67,7 @@ class _ActiveBonusButton extends StatelessWidget {
         onPressed: () {
           context.read<NewRequestBloc>().add(
                 NewRequestEvent.toggleBonusItem(
-                  assignmentNumber: data.assignmentNumber,
-                  itemNumber: data.itemNumber,
-                  materialNumber: data.materialNumber,
+                  item: data,
                   included: !included,
                 ),
               );

@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_material.freezed.dart';
@@ -43,4 +44,12 @@ class ReturnMaterial with _$ReturnMaterial {
       );
 
   String get uuid => '$assignmentNumber$itemNumber';
+
+  ReturnItemDetails get validatedItemDetails =>
+      ReturnItemDetails.empty().copyWith(
+        materialNumber: materialNumber,
+        itemNumber: itemNumber,
+        assignmentNumber: assignmentNumber,
+        batch: batch,
+      );
 }

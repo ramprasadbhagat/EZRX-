@@ -11,9 +11,7 @@ class NewRequestEvent with _$NewRequestEvent {
   }) = _ToggleReturnItem;
 
   const factory NewRequestEvent.toggleBonusItem({
-    required String assignmentNumber,
-    required MaterialNumber materialNumber,
-    required String itemNumber,
+    required ReturnMaterial item,
     required bool included,
   }) = _ToggleBonusItem;
 

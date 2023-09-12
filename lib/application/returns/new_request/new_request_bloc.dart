@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
@@ -40,17 +39,9 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
             invoiceNumber: e.item.assignmentNumber,
             salesOrg: e.salesOrg,
             returnItemDetailsList: [
-              ReturnItemDetails.empty().copyWith(
-                materialNumber: e.item.materialNumber,
-                itemNumber: e.item.itemNumber,
-                assignmentNumber: e.item.assignmentNumber,
-              ),
+              e.item.validatedItemDetails,
               ...e.item.bonusItems.map(
-                (bonusItem) => ReturnItemDetails.empty().copyWith(
-                  materialNumber: bonusItem.materialNumber,
-                  itemNumber: bonusItem.itemNumber,
-                  assignmentNumber: bonusItem.assignmentNumber,
-                ),
+                (bonusItem) => bonusItem.validatedItemDetails,
               ),
             ],
           );
@@ -76,21 +67,17 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
       },
       toggleBonusItem: (_ToggleBonusItem e) {
         final updatedInvoiceDetails = state.invoiceDetails.map((invoiceDetail) {
-          if (invoiceDetail.invoiceNumber == e.assignmentNumber) {
+          if (invoiceDetail.invoiceNumber == e.item.assignmentNumber) {
             final returnItemDetailsList = [
               ...invoiceDetail.returnItemDetailsList,
             ];
 
             e.included
                 ? returnItemDetailsList.add(
-                    ReturnItemDetails.empty().copyWith(
-                      materialNumber: e.materialNumber,
-                      itemNumber: e.itemNumber,
-                      assignmentNumber: e.assignmentNumber,
-                    ),
+                    e.item.validatedItemDetails,
                   )
                 : returnItemDetailsList.removeWhere(
-                    (element) => element.itemNumber == e.itemNumber,
+                    (element) => element.itemNumber == e.item.itemNumber,
                   );
 
             return invoiceDetail.copyWith(
