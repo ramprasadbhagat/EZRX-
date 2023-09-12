@@ -21,23 +21,22 @@ class SoaState with _$SoaState {
       .where(
         (element) => (DateUtils.isSameMonth(
               element.soaData.date,
-              appliedFilter.fromDate,
+              appliedFilter.fromDate.dateTime,
             ) ||
             DateUtils.isSameMonth(
               element.soaData.date,
-              appliedFilter.toDate,
+              appliedFilter.toDate.dateTime,
             ) ||
-            (element.soaData.date.isAfter(appliedFilter.fromDate) &&
-                element.soaData.date.isBefore(appliedFilter.toDate))),
+            (element.soaData.date.isAfter(appliedFilter.fromDate.dateTime) &&
+                element.soaData.date.isBefore(appliedFilter.toDate.dateTime))),
       )
       .toList();
 
-  DateTime get initialFilterFormDate => soaList.isNotEmpty
-      ? soaList.last.soaData.date
+  DateTimeStringValue get initialFilterFormDate => soaList.isNotEmpty
+      ? soaList.last.soaData.simpleDateStringValue
       : SoaFilter.empty().fromDate;
 
-  DateTime get initialFilterToDate =>
-      soaList.isNotEmpty
-      ? soaList.first.soaData.date
+  DateTimeStringValue get initialFilterToDate => soaList.isNotEmpty
+      ? soaList.first.soaData.simpleDateStringValue
       : SoaFilter.empty().toDate;
 }

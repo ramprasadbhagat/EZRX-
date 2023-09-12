@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
@@ -16,8 +18,12 @@ class SoaRepositoryMock extends Mock implements SoaRepository {}
 void main() {
   late SoaRepository soaRepositoryMock;
   final soaFilter = SoaFilter(
-    toDate: DateFormat().add_yMd().parse('12/06/2022'),
-    fromDate: DateFormat().add_yMd().parse('07/05/2023'),
+    toDate: DateTimeStringValue(
+      getDateStringByDateTime(DateFormat().add_yMd().parse('12/06/2022')),
+    ),
+    fromDate: DateTimeStringValue(
+      getDateStringByDateTime(DateFormat().add_yMd().parse('07/05/2023')),
+    ),
   );
 
   final mockCustomerCodeInfo =
@@ -57,7 +63,6 @@ void main() {
         repository: soaRepositoryMock,
       ),
       seed: () => SoaState.initial().copyWith(appliedFilter: soaFilter),
-
       setUp: () {
         when(
           () => soaRepositoryMock.fetchSoa(

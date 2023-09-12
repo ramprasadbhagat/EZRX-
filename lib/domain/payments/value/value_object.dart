@@ -20,7 +20,6 @@ class AmountDocumentType extends ValueObject<String> {
   bool get isCredit => checkIsCredit(value.getOrElse(() => ''));
 }
 
-
 class SoaData extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -28,6 +27,10 @@ class SoaData extends ValueObject<String> {
   factory SoaData(String input) {
     return SoaData._(validateStringNotEmpty(input));
   }
+
+  DateTimeStringValue get simpleDateStringValue => DateTimeStringValue(
+        findDate(value.getOrElse(() => '')),
+      );
 
   String get simpleDateString => displayDateTimeString(
         findDate(value.getOrElse(() => '')),
@@ -37,8 +40,5 @@ class SoaData extends ValueObject<String> {
   DateTime get date =>
       tryParseDateTime(findDate(value.getOrElse(() => ''))) ?? DateTime.now();
 
-
   const SoaData._(this.value);
 }
-
-

@@ -80,7 +80,7 @@ class _FromDateField extends StatelessWidget {
           onTap: () => _selectDate(context),
           readOnly: true,
           controller: TextEditingController(
-            text: state.filter.fromDateDisplay.simpleDateString,
+            text: state.filter.fromDate.simpleDateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(
@@ -103,13 +103,17 @@ class _FromDateField extends StatelessWidget {
     final soaFilterBloc = context.read<SoaFilterBloc>();
     final formDate = await showMonthPicker(
       context: context,
-      initialDate: soaFilterBloc.state.filter.fromDate,
-      firstDate: context.read<SoaBloc>().state.initialFilterFormDate,
-      lastDate: soaFilterBloc.state.filter.toDate,
+      initialDate: soaFilterBloc.state.filter.fromDate.dateTime,
+      firstDate: context.read<SoaBloc>().state.initialFilterFormDate.dateTime,
+      lastDate: soaFilterBloc.state.filter.toDate.dateTime,
     );
     if (formDate == null) return;
     if (context.mounted) {
-      soaFilterBloc.add(SoaFilterEvent.changeFormDate(formDate));
+      soaFilterBloc.add(
+        SoaFilterEvent.changeFormDate(
+          DateTimeStringValue(getDateStringByDateTime(formDate)),
+        ),
+      );
     }
   }
 }
@@ -127,7 +131,7 @@ class _ToDateField extends StatelessWidget {
           onTap: () => _selectDate(context),
           readOnly: true,
           controller: TextEditingController(
-            text: state.filter.toDateDisplay.simpleDateString,
+            text: state.filter.toDate.simpleDateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(
@@ -150,13 +154,17 @@ class _ToDateField extends StatelessWidget {
     final soaFilterBloc = context.read<SoaFilterBloc>();
     final toDate = await showMonthPicker(
       context: context,
-      initialDate: soaFilterBloc.state.filter.toDate,
-      firstDate: soaFilterBloc.state.filter.fromDate,
-      lastDate: context.read<SoaBloc>().state.initialFilterToDate,
+      initialDate: soaFilterBloc.state.filter.toDate.dateTime,
+      firstDate: soaFilterBloc.state.filter.fromDate.dateTime,
+      lastDate: context.read<SoaBloc>().state.initialFilterToDate.dateTime,
     );
     if (toDate == null) return;
     if (context.mounted) {
-      soaFilterBloc.add(SoaFilterEvent.changeToDate(toDate));
+      soaFilterBloc.add(
+        SoaFilterEvent.changeToDate(
+          DateTimeStringValue(getDateStringByDateTime(toDate)),
+        ),
+      );
     }
   }
 }

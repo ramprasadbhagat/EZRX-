@@ -7,9 +7,9 @@ class SoaFilterEvent with _$SoaFilterEvent {
     SoaFilter soaFilter,
   ) = _SetFilter;
   const factory SoaFilterEvent.changeToDate(
-    DateTime toDate,
+    DateTimeStringValue toDate,
   ) = _ChangeToDate;
   const factory SoaFilterEvent.changeFormDate(
-    DateTime formDate,
+    DateTimeStringValue formDate,
   ) = _changeFormDate;
 }

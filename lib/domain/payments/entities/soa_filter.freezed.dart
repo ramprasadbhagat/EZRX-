@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SoaFilter {
-  DateTime get toDate => throw _privateConstructorUsedError;
-  DateTime get fromDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get toDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get fromDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SoaFilterCopyWith<SoaFilter> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $SoaFilterCopyWith<$Res> {
   factory $SoaFilterCopyWith(SoaFilter value, $Res Function(SoaFilter) then) =
       _$SoaFilterCopyWithImpl<$Res, SoaFilter>;
   @useResult
-  $Res call({DateTime toDate, DateTime fromDate});
+  $Res call({DateTimeStringValue toDate, DateTimeStringValue fromDate});
 }
 
 /// @nodoc
@@ -52,11 +52,11 @@ class _$SoaFilterCopyWithImpl<$Res, $Val extends SoaFilter>
       toDate: null == toDate
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
       fromDate: null == fromDate
           ? _value.fromDate
           : fromDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
     ) as $Val);
   }
 }
@@ -68,7 +68,7 @@ abstract class _$$_SoaFilterCopyWith<$Res> implements $SoaFilterCopyWith<$Res> {
       __$$_SoaFilterCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({DateTime toDate, DateTime fromDate});
+  $Res call({DateTimeStringValue toDate, DateTimeStringValue fromDate});
 }
 
 /// @nodoc
@@ -89,11 +89,11 @@ class __$$_SoaFilterCopyWithImpl<$Res>
       toDate: null == toDate
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
       fromDate: null == fromDate
           ? _value.fromDate
           : fromDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
     ));
   }
 }
@@ -104,9 +104,9 @@ class _$_SoaFilter extends _SoaFilter {
   _$_SoaFilter({required this.toDate, required this.fromDate}) : super._();
 
   @override
-  final DateTime toDate;
+  final DateTimeStringValue toDate;
   @override
-  final DateTime fromDate;
+  final DateTimeStringValue fromDate;
 
   @override
   String toString() {
@@ -135,14 +135,14 @@ class _$_SoaFilter extends _SoaFilter {
 
 abstract class _SoaFilter extends SoaFilter {
   factory _SoaFilter(
-      {required final DateTime toDate,
-      required final DateTime fromDate}) = _$_SoaFilter;
+      {required final DateTimeStringValue toDate,
+      required final DateTimeStringValue fromDate}) = _$_SoaFilter;
   _SoaFilter._() : super._();
 
   @override
-  DateTime get toDate;
+  DateTimeStringValue get toDate;
   @override
-  DateTime get fromDate;
+  DateTimeStringValue get fromDate;
   @override
   @JsonKey(ignore: true)
   _$$_SoaFilterCopyWith<_$_SoaFilter> get copyWith =>

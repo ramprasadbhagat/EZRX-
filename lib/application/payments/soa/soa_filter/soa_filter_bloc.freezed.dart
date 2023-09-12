@@ -20,24 +20,24 @@ mixin _$SoaFilterEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SoaFilter soaFilter) setFilter,
-    required TResult Function(DateTime toDate) changeToDate,
-    required TResult Function(DateTime formDate) changeFormDate,
+    required TResult Function(DateTimeStringValue toDate) changeToDate,
+    required TResult Function(DateTimeStringValue formDate) changeFormDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SoaFilter soaFilter)? setFilter,
-    TResult? Function(DateTime toDate)? changeToDate,
-    TResult? Function(DateTime formDate)? changeFormDate,
+    TResult? Function(DateTimeStringValue toDate)? changeToDate,
+    TResult? Function(DateTimeStringValue formDate)? changeFormDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SoaFilter soaFilter)? setFilter,
-    TResult Function(DateTime toDate)? changeToDate,
-    TResult Function(DateTime formDate)? changeFormDate,
+    TResult Function(DateTimeStringValue toDate)? changeToDate,
+    TResult Function(DateTimeStringValue formDate)? changeFormDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,8 +126,8 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SoaFilter soaFilter) setFilter,
-    required TResult Function(DateTime toDate) changeToDate,
-    required TResult Function(DateTime formDate) changeFormDate,
+    required TResult Function(DateTimeStringValue toDate) changeToDate,
+    required TResult Function(DateTimeStringValue formDate) changeFormDate,
   }) {
     return initialized();
   }
@@ -137,8 +137,8 @@ class _$_Initialized implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SoaFilter soaFilter)? setFilter,
-    TResult? Function(DateTime toDate)? changeToDate,
-    TResult? Function(DateTime formDate)? changeFormDate,
+    TResult? Function(DateTimeStringValue toDate)? changeToDate,
+    TResult? Function(DateTimeStringValue formDate)? changeFormDate,
   }) {
     return initialized?.call();
   }
@@ -148,8 +148,8 @@ class _$_Initialized implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SoaFilter soaFilter)? setFilter,
-    TResult Function(DateTime toDate)? changeToDate,
-    TResult Function(DateTime formDate)? changeFormDate,
+    TResult Function(DateTimeStringValue toDate)? changeToDate,
+    TResult Function(DateTimeStringValue formDate)? changeFormDate,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -277,8 +277,8 @@ class _$_SetFilter implements _SetFilter {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SoaFilter soaFilter) setFilter,
-    required TResult Function(DateTime toDate) changeToDate,
-    required TResult Function(DateTime formDate) changeFormDate,
+    required TResult Function(DateTimeStringValue toDate) changeToDate,
+    required TResult Function(DateTimeStringValue formDate) changeFormDate,
   }) {
     return setFilter(soaFilter);
   }
@@ -288,8 +288,8 @@ class _$_SetFilter implements _SetFilter {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SoaFilter soaFilter)? setFilter,
-    TResult? Function(DateTime toDate)? changeToDate,
-    TResult? Function(DateTime formDate)? changeFormDate,
+    TResult? Function(DateTimeStringValue toDate)? changeToDate,
+    TResult? Function(DateTimeStringValue formDate)? changeFormDate,
   }) {
     return setFilter?.call(soaFilter);
   }
@@ -299,8 +299,8 @@ class _$_SetFilter implements _SetFilter {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SoaFilter soaFilter)? setFilter,
-    TResult Function(DateTime toDate)? changeToDate,
-    TResult Function(DateTime formDate)? changeFormDate,
+    TResult Function(DateTimeStringValue toDate)? changeToDate,
+    TResult Function(DateTimeStringValue formDate)? changeFormDate,
     required TResult orElse(),
   }) {
     if (setFilter != null) {
@@ -362,7 +362,7 @@ abstract class _$$_ChangeToDateCopyWith<$Res> {
           _$_ChangeToDate value, $Res Function(_$_ChangeToDate) then) =
       __$$_ChangeToDateCopyWithImpl<$Res>;
   @useResult
-  $Res call({DateTime toDate});
+  $Res call({DateTimeStringValue toDate});
 }
 
 /// @nodoc
@@ -382,7 +382,7 @@ class __$$_ChangeToDateCopyWithImpl<$Res>
       null == toDate
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
     ));
   }
 }
@@ -393,7 +393,7 @@ class _$_ChangeToDate implements _ChangeToDate {
   const _$_ChangeToDate(this.toDate);
 
   @override
-  final DateTime toDate;
+  final DateTimeStringValue toDate;
 
   @override
   String toString() {
@@ -422,8 +422,8 @@ class _$_ChangeToDate implements _ChangeToDate {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SoaFilter soaFilter) setFilter,
-    required TResult Function(DateTime toDate) changeToDate,
-    required TResult Function(DateTime formDate) changeFormDate,
+    required TResult Function(DateTimeStringValue toDate) changeToDate,
+    required TResult Function(DateTimeStringValue formDate) changeFormDate,
   }) {
     return changeToDate(toDate);
   }
@@ -433,8 +433,8 @@ class _$_ChangeToDate implements _ChangeToDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SoaFilter soaFilter)? setFilter,
-    TResult? Function(DateTime toDate)? changeToDate,
-    TResult? Function(DateTime formDate)? changeFormDate,
+    TResult? Function(DateTimeStringValue toDate)? changeToDate,
+    TResult? Function(DateTimeStringValue formDate)? changeFormDate,
   }) {
     return changeToDate?.call(toDate);
   }
@@ -444,8 +444,8 @@ class _$_ChangeToDate implements _ChangeToDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SoaFilter soaFilter)? setFilter,
-    TResult Function(DateTime toDate)? changeToDate,
-    TResult Function(DateTime formDate)? changeFormDate,
+    TResult Function(DateTimeStringValue toDate)? changeToDate,
+    TResult Function(DateTimeStringValue formDate)? changeFormDate,
     required TResult orElse(),
   }) {
     if (changeToDate != null) {
@@ -493,9 +493,10 @@ class _$_ChangeToDate implements _ChangeToDate {
 }
 
 abstract class _ChangeToDate implements SoaFilterEvent {
-  const factory _ChangeToDate(final DateTime toDate) = _$_ChangeToDate;
+  const factory _ChangeToDate(final DateTimeStringValue toDate) =
+      _$_ChangeToDate;
 
-  DateTime get toDate;
+  DateTimeStringValue get toDate;
   @JsonKey(ignore: true)
   _$$_ChangeToDateCopyWith<_$_ChangeToDate> get copyWith =>
       throw _privateConstructorUsedError;
@@ -507,7 +508,7 @@ abstract class _$$_changeFormDateCopyWith<$Res> {
           _$_changeFormDate value, $Res Function(_$_changeFormDate) then) =
       __$$_changeFormDateCopyWithImpl<$Res>;
   @useResult
-  $Res call({DateTime formDate});
+  $Res call({DateTimeStringValue formDate});
 }
 
 /// @nodoc
@@ -527,7 +528,7 @@ class __$$_changeFormDateCopyWithImpl<$Res>
       null == formDate
           ? _value.formDate
           : formDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTimeStringValue,
     ));
   }
 }
@@ -538,7 +539,7 @@ class _$_changeFormDate implements _changeFormDate {
   const _$_changeFormDate(this.formDate);
 
   @override
-  final DateTime formDate;
+  final DateTimeStringValue formDate;
 
   @override
   String toString() {
@@ -568,8 +569,8 @@ class _$_changeFormDate implements _changeFormDate {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(SoaFilter soaFilter) setFilter,
-    required TResult Function(DateTime toDate) changeToDate,
-    required TResult Function(DateTime formDate) changeFormDate,
+    required TResult Function(DateTimeStringValue toDate) changeToDate,
+    required TResult Function(DateTimeStringValue formDate) changeFormDate,
   }) {
     return changeFormDate(formDate);
   }
@@ -579,8 +580,8 @@ class _$_changeFormDate implements _changeFormDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(SoaFilter soaFilter)? setFilter,
-    TResult? Function(DateTime toDate)? changeToDate,
-    TResult? Function(DateTime formDate)? changeFormDate,
+    TResult? Function(DateTimeStringValue toDate)? changeToDate,
+    TResult? Function(DateTimeStringValue formDate)? changeFormDate,
   }) {
     return changeFormDate?.call(formDate);
   }
@@ -590,8 +591,8 @@ class _$_changeFormDate implements _changeFormDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(SoaFilter soaFilter)? setFilter,
-    TResult Function(DateTime toDate)? changeToDate,
-    TResult Function(DateTime formDate)? changeFormDate,
+    TResult Function(DateTimeStringValue toDate)? changeToDate,
+    TResult Function(DateTimeStringValue formDate)? changeFormDate,
     required TResult orElse(),
   }) {
     if (changeFormDate != null) {
@@ -639,9 +640,10 @@ class _$_changeFormDate implements _changeFormDate {
 }
 
 abstract class _changeFormDate implements SoaFilterEvent {
-  const factory _changeFormDate(final DateTime formDate) = _$_changeFormDate;
+  const factory _changeFormDate(final DateTimeStringValue formDate) =
+      _$_changeFormDate;
 
-  DateTime get formDate;
+  DateTimeStringValue get formDate;
   @JsonKey(ignore: true)
   _$$_changeFormDateCopyWith<_$_changeFormDate> get copyWith =>
       throw _privateConstructorUsedError;
