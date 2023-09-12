@@ -7,6 +7,11 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+part 'package:ezrxmobile/presentation/orders/order_tab/section/filter/widgets/from_order_date_filter.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/section/filter/widgets/to_order_date_filter.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/section/filter/widgets/reset_button.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/section/filter/widgets/apply_button.dart';
+
 class ViewByOrderFilterBottomSheet extends StatefulWidget {
   const ViewByOrderFilterBottomSheet({Key? key}) : super(key: key);
 
@@ -92,140 +97,6 @@ class _ViewByOrderFilterBottomSheetState
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _FromOrderDateFilter extends StatelessWidget {
-  const _FromOrderDateFilter({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ViewByOrderFilterBloc, ViewByOrderFilterState>(
-      buildWhen: (previous, current) => previous.filter != current.filter,
-      builder: (context, state) => Expanded(
-        child: TextFormField(
-          autocorrect: false,
-          onTap: () async {
-            final viewByOrderFilterBloc = context.read<ViewByOrderFilterBloc>();
-            final documentDateRange = await showDateRangePicker(
-              context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
-              lastDate: DateTime.now(),
-              initialDateRange: state.filter.dateRange,
-            );
-            if (documentDateRange == null) return;
-            viewByOrderFilterBloc.add(
-              ViewByOrderFilterEvent.setDateRange(
-                ViewByOrdersFilter.empty()
-                    .copyWith(dateRange: documentDateRange),
-              ),
-            );
-          },
-          readOnly: true,
-          controller: TextEditingController(
-            text: state.filter.fromDate.dateString,
-          ),
-          decoration: InputDecoration(
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-            focusedBorder:
-                Theme.of(context).inputDecorationTheme.disabledBorder,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ToOrderDateFilter extends StatelessWidget {
-  const _ToOrderDateFilter({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ViewByOrderFilterBloc, ViewByOrderFilterState>(
-      buildWhen: (previous, current) => previous.filter != current.filter,
-      builder: (context, state) => Expanded(
-        child: TextFormField(
-          autocorrect: false,
-          onTap: () async {
-            final viewByOrderFilterBloc = context.read<ViewByOrderFilterBloc>();
-            final documentDateRange = await showDateRangePicker(
-              context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
-              lastDate: DateTime.now(),
-              initialDateRange: state.filter.dateRange,
-            );
-            if (documentDateRange == null) return;
-            viewByOrderFilterBloc.add(
-              ViewByOrderFilterEvent.setDateRange(
-                ViewByOrdersFilter.empty()
-                    .copyWith(dateRange: documentDateRange),
-              ),
-            );
-          },
-          readOnly: true,
-          controller: TextEditingController(
-            text: state.filter.toDate.dateString,
-          ),
-          decoration: InputDecoration(
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-            focusedBorder:
-                Theme.of(context).inputDecorationTheme.disabledBorder,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ResetButton extends StatelessWidget {
-  const _ResetButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: OutlinedButton(
-        onPressed: () => Navigator.of(context).pop(
-          ViewByOrdersFilter.empty(),
-        ),
-        child: const Text(
-          'Reset',
-          style: TextStyle(color: ZPColors.primary),
-        ).tr(),
-      ),
-    );
-  }
-}
-
-class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: ElevatedButton(
-        onPressed: () => Navigator.of(context).pop(
-          context.read<ViewByOrderFilterBloc>().state.filter,
-        ),
-        child: const Text(
-          'Apply',
-          style: TextStyle(color: ZPColors.white),
-        ).tr(),
       ),
     );
   }
