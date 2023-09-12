@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -16,8 +17,18 @@ class AvailableCreditFilter with _$AvailableCreditFilter {
   }) = _AvailableCreditFilter;
 
   factory AvailableCreditFilter.empty() => AvailableCreditFilter(
-        documentDateFrom: DateTimeStringValue(''),
-        documentDateTo: DateTimeStringValue(''),
+        documentDateFrom: DateTimeStringValue(
+          getDateStringByDateTime(
+            DateTime.now().subtract(
+              const Duration(days: 30),
+            ),
+          ),
+        ),
+        documentDateTo: DateTimeStringValue(
+          getDateStringByDateTime(
+            DateTime.now(),
+          ),
+        ),
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
       );
@@ -33,7 +44,7 @@ class AvailableCreditFilter with _$AvailableCreditFilter {
 
   int get appliedFilterCount {
     var count = 0;
-    if (documentDateFrom.isNotEmpty && documentDateTo.isNotEmpty) {
+    if (documentDateFrom.isValid() || documentDateTo.isValid()) {
       count += 1;
     }
     if (amountValueFrom != RangeValue('') && amountValueTo != RangeValue('')) {

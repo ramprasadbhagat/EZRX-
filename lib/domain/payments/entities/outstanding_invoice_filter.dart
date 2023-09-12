@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -19,8 +20,18 @@ class OutstandingInvoiceFilter with _$OutstandingInvoiceFilter {
   }) = _OutstandingInvoiceFilter;
 
   factory OutstandingInvoiceFilter.empty() => OutstandingInvoiceFilter(
-        documentDateFrom: DateTimeStringValue(''),
-        documentDateTo: DateTimeStringValue(''),
+        documentDateFrom: DateTimeStringValue(
+          getDateStringByDateTime(
+            DateTime.now().subtract(
+              const Duration(days: 30),
+            ),
+          ),
+        ),
+        documentDateTo: DateTimeStringValue(
+          getDateStringByDateTime(
+            DateTime.now(),
+          ),
+        ),
         dueDateFrom: DateTimeStringValue(''),
         dueDateTo: DateTimeStringValue(''),
         amountValueFrom: RangeValue(''),
@@ -44,7 +55,7 @@ class OutstandingInvoiceFilter with _$OutstandingInvoiceFilter {
 
   int get appliedFilterCount {
     var count = 0;
-    if (documentDateFrom.isNotEmpty && documentDateTo.isNotEmpty) {
+    if (documentDateFrom.isValid() && documentDateTo.isValid()) {
       count += 1;
     }
     if (dueDateFrom.isNotEmpty && dueDateTo.isNotEmpty) {
