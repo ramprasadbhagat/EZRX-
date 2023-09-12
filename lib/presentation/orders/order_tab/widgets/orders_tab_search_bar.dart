@@ -7,29 +7,33 @@ class _OrdersTabSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isFromViewByOrder
-        ? BlocBuilder<ViewByOrderBloc, ViewByOrderState>(
-            buildWhen: (previous, current) =>
-                previous.isFetching != current.isFetching,
-            builder: (context, state) {
-              return _OrderSearchBar(
-                isFromViewByOrder: isFromViewByOrder,
-                isFetching: state.isFetching,
-                searchText: state.searchKey.searchValueOrEmpty,
-              );
-            },
-          )
-        : BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
-            buildWhen: (previous, current) =>
-                previous.isFetching != current.isFetching,
-            builder: (context, state) {
-              return _OrderSearchBar(
-                isFromViewByOrder: isFromViewByOrder,
-                isFetching: state.isFetching,
-                searchText: state.searchKey.searchValueOrEmpty,
-              );
-            },
-          );
+    return Expanded(
+      child: isFromViewByOrder
+          ? BlocBuilder<ViewByOrderBloc, ViewByOrderState>(
+              buildWhen: (previous, current) =>
+                  previous.isFetching != current.isFetching ||
+                  current.searchKey.isValueEmpty,
+              builder: (context, state) {
+                return _OrderSearchBar(
+                  isFromViewByOrder: isFromViewByOrder,
+                  isFetching: state.isFetching,
+                  searchText: state.searchKey.searchValueOrEmpty,
+                );
+              },
+            )
+          : BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
+              buildWhen: (previous, current) =>
+                  previous.isFetching != current.isFetching ||
+                  current.searchKey.isValueEmpty,
+              builder: (context, state) {
+                return _OrderSearchBar(
+                  isFromViewByOrder: isFromViewByOrder,
+                  isFetching: state.isFetching,
+                  searchText: state.searchKey.searchValueOrEmpty,
+                );
+              },
+            ),
+    );
   }
 }
 
@@ -46,26 +50,28 @@ class _OrderSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: CustomSearchBar(
-        key: WidgetKeys.genericKey(
-          key: searchText,
-        ),
-        enabled: !isFetching,
-        initialValue: searchText,
-        onSearchChanged: (value) => _onSearchChanged(
-          context,
-          value,
-        ),
-        onSearchSubmitted: (value) => _onSearch(
-          context,
-          value,
-        ),
-        clearIconKey: WidgetKeys.clearIconKey,
-        //customValidator: we are not taking the value from the state, as there is autosearch.
-        //It take time for 3 sec to emit the state, so we have used from local.
-        customValidator: (value) => SearchKey.searchFilter(value).isValid(),
-        onClear: () => _onClear(context),
+    return CustomSearchBar(
+      key: WidgetKeys.genericKey(
+        key: searchText,
+      ),
+      enabled: !isFetching,
+      initialValue: searchText,
+      onSearchChanged: (value) => _onSearchChanged(
+        context,
+        value,
+      ),
+      onSearchSubmitted: (value) => _onSearch(
+        context,
+        value,
+      ),
+      clearIconKey: WidgetKeys.clearIconKey,
+      //customValidator: we are not taking the value from the state, as there is autosearch.
+      //It take time for 3 sec to emit the state, so we have used from local.
+      customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+      onClear: () => _onSearch(
+        context,
+        '',
+        onClear: true,
       ),
     );
   }
@@ -80,27 +86,18 @@ class _OrderSearchBar extends StatelessWidget {
           searchKey: value,
         );
 
-  void _onSearch(BuildContext context, String value) => isFromViewByOrder
-      ? _doViewByOrderFetch(
-          context: context,
-          searchKey: value,
-        )
-      : _doFetchViewByItemFetch(
-          context: context,
-          searchKey: value,
-        );
-
-  void _onClear(BuildContext context) {
-    isFromViewByOrder
-        ? _doViewByOrderFetch(
-            context: context,
-            onClear: true,
-          )
-        : _doFetchViewByItemFetch(
-            context: context,
-            onClear: true,
-          );
-  }
+  void _onSearch(BuildContext context, String value, {bool onClear = false}) =>
+      isFromViewByOrder
+          ? _doViewByOrderFetch(
+              context: context,
+              searchKey: value,
+              onClear: onClear,
+            )
+          : _doFetchViewByItemFetch(
+              context: context,
+              searchKey: value,
+              onClear: onClear,
+            );
 
   void _doFetchViewByItemFetch({
     required BuildContext context,
@@ -137,8 +134,6 @@ class _OrderSearchBar extends StatelessWidget {
   }) =>
       context.read<ViewByItemsBloc>().add(
             ViewByItemsEvent.autoSearchProduct(
-              viewByItemFilter:
-                  context.read<ViewByItemsBloc>().state.appliedFilter,
               searchKey: SearchKey.searchFilter(searchKey),
             ),
           );
@@ -150,7 +145,6 @@ class _OrderSearchBar extends StatelessWidget {
       context.read<ViewByOrderBloc>().add(
             ViewByOrderEvent.autoSearchProduct(
               searchKey: SearchKey.searchFilter(searchKey),
-              filter: context.read<ViewByOrderFilterBloc>().state.filter,
             ),
           );
 }

@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
@@ -41,13 +42,11 @@ import 'package:ezrxmobile/application/returns/returns_overview/returns_overview
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
@@ -86,7 +85,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upgrader/upgrader.dart';
 
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 
@@ -455,24 +453,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   previous.shipToInfo != current.shipToInfo),
           listener: (context, state) {
             _initializeProduct();
-            context.read<ViewByOrderBloc>().add(
-                  ViewByOrderEvent.initialized(
-                    customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                    salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                    shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
-                    user: context.read<UserBloc>().state.user,
-                    sortDirection: 'desc',
-                  ),
-                );
-            context.read<ViewByOrderBloc>().add(
-                  ViewByOrderEvent.fetch(
-                    filter: ViewByOrdersFilter.empty(),
-                    searchKey: SearchKey.searchFilter(''),
-                  ),
-                );
-
             if (state.isOrderTypeEnable) {
               context.read<OrderDocumentTypeBloc>().add(
                     OrderDocumentTypeEvent.fetch(
@@ -853,8 +833,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     final user = context.read<UserBloc>().state.user;
     final shipToInfo = context.read<CustomerCodeBloc>().state.shipToInfo;
 
-    //need to initialize the eligibity bloc
-    //so that when EligibilityBloc update event is call bloc listner will
+    //need to initialize the eligibility bloc
+    //so that when EligibilityBloc update event is call bloc listener will
     //execute CartBloc fetch event
     context.read<EligibilityBloc>().add(const EligibilityEvent.initialized());
 
@@ -872,27 +852,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           const MaterialPriceEvent.initialized(),
         );
 
-    context.read<MaterialPriceDetailBloc>().add(
-          MaterialPriceDetailEvent.initialized(
-            user: user,
-            customerCode: customerCodeState.customerCodeInfo,
-            salesOrganisation: salesOrgState.salesOrganisation,
-            salesOrganisationConfigs: salesOrgState.configs,
-            shipToCode: shipToInfo,
-          ),
-        );
-
     context.read<AllInvoicesBloc>().add(
           AllInvoicesEvent.initialized(
             salesOrganisation: salesOrgState.salesOrganisation,
             customerCodeInfo: state.customerCodeInfo,
-          ),
-        );
-    context.read<ProductDetailBloc>().add(
-          ProductDetailEvent.initialized(
-            salesOrganisation: salesOrgState.salesOrganisation,
-            customerCodeInfo: state.customerCodeInfo,
-            shipToInfo: state.shipToInfo,
           ),
         );
 
@@ -903,37 +866,59 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           ),
         );
 
-    context.read<OrderSummaryBloc>().add(
-          OrderSummaryEvent.initialized(
-            shipToInfo: shipToInfo,
-            user: user,
-            orderDocumentType: orderDocumentTypeState.selectedOrderType,
-            customerCodeInfo: customerCodeState.customerCodeInfo,
-            salesOrganisation: salesOrgState.salesOrganisation,
-            salesOrg: salesOrgState.salesOrg,
-            salesOrgConfig: salesOrgState.configs,
-          ),
+    context
+        .read<ViewByItemFilterBloc>()
+        .add(const ViewByItemFilterEvent.initializeOrReset());
+    context
+        .read<OrderHistoryFilterByStatusBloc>()
+        .add(const OrderHistoryFilterByStatusEvent.initialized());
+    context.read<AccountSummaryBloc>().add(
+          const AccountSummaryEvent.initialize(),
         );
-    context.read<ProductSearchBloc>().add(
-          ProductSearchEvent.initialized(
-            configs: salesOrgState.configs,
-            salesOrganization: salesOrgState.salesOrganisation,
-            customerCodeInfo: state.customerCodeInfo,
-            shipToInfo: shipToInfo,
-          ),
-        );
-
-    context.read<ViewByItemsBloc>().add(
-          ViewByItemsEvent.initialized(
-            customerCodeInfo: customerCodeState.customerCodeInfo,
-            salesOrgConfigs: salesOrgState.configs,
-            shipToInfo: state.shipToInfo,
-            user: user,
-            salesOrganisation: salesOrgState.salesOrganisation,
-          ),
-        );
-
+    /**
+     * Need to add all the initialized event which have dependency in ship here
+     * inside state.haveShipTo
+     */
     if (state.haveShipTo) {
+      context.read<MaterialPriceDetailBloc>().add(
+            MaterialPriceDetailEvent.initialized(
+              user: user,
+              customerCode: customerCodeState.customerCodeInfo,
+              salesOrganisation: salesOrgState.salesOrganisation,
+              salesOrganisationConfigs: salesOrgState.configs,
+              shipToCode: shipToInfo,
+            ),
+          );
+
+      context.read<ProductDetailBloc>().add(
+            ProductDetailEvent.initialized(
+              salesOrganisation: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              shipToInfo: state.shipToInfo,
+            ),
+          );
+
+      context.read<OrderSummaryBloc>().add(
+            OrderSummaryEvent.initialized(
+              shipToInfo: shipToInfo,
+              user: user,
+              orderDocumentType: orderDocumentTypeState.selectedOrderType,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
+              salesOrganisation: salesOrgState.salesOrganisation,
+              salesOrg: salesOrgState.salesOrg,
+              salesOrgConfig: salesOrgState.configs,
+            ),
+          );
+
+      context.read<ProductSearchBloc>().add(
+            ProductSearchEvent.initialized(
+              configs: salesOrgState.configs,
+              salesOrganization: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              shipToInfo: shipToInfo,
+            ),
+          );
+
       context.read<ReturnListByRequestBloc>().add(
             ReturnListByRequestEvent.initialized(
               salesOrg:
@@ -978,15 +963,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               customerCodeInfo: customerCodeState.customerCodeInfo,
             ),
           );
-      if (user.userCanAccessOrderHistory) {
-        context.read<ViewByItemsBloc>().add(
-              ViewByItemsEvent.fetch(
-                viewByItemFilter:
-                    context.read<ViewByItemsBloc>().state.appliedFilter,
-                searchKey: SearchKey(''),
-              ),
-            );
-      }
       context.read<NotificationBloc>().add(
             const NotificationEvent.fetch(),
           );
@@ -1060,19 +1036,46 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context.read<CustomerCodeBloc>().state.customerCodeInfo,
             ),
           );
-    } else {
-      final user = context.read<UserBloc>().state.user;
-      final customerCodeState = context.read<CustomerCodeBloc>().state;
 
-      context
-          .read<ViewByItemFilterBloc>()
-          .add(const ViewByItemFilterEvent.initializeOrReset());
-      context
-          .read<OrderHistoryFilterByStatusBloc>()
-          .add(const OrderHistoryFilterByStatusEvent.initialized());
-      context.read<AccountSummaryBloc>().add(
-            const AccountSummaryEvent.initialize(),
+      context.read<MaterialPriceDetailBloc>().add(
+            MaterialPriceDetailEvent.initialized(
+              user: user,
+              customerCode: customerCodeState.customerCodeInfo,
+              salesOrganisation: salesOrgState.salesOrganisation,
+              salesOrganisationConfigs: salesOrgState.configs,
+              shipToCode: shipToInfo,
+            ),
           );
+
+      context.read<ProductDetailBloc>().add(
+            ProductDetailEvent.initialized(
+              salesOrganisation: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              shipToInfo: state.shipToInfo,
+            ),
+          );
+
+      context.read<OrderSummaryBloc>().add(
+            OrderSummaryEvent.initialized(
+              shipToInfo: shipToInfo,
+              user: user,
+              orderDocumentType: orderDocumentTypeState.selectedOrderType,
+              customerCodeInfo: customerCodeState.customerCodeInfo,
+              salesOrganisation: salesOrgState.salesOrganisation,
+              salesOrg: salesOrgState.salesOrg,
+              salesOrgConfig: salesOrgState.configs,
+            ),
+          );
+
+      context.read<ProductSearchBloc>().add(
+            ProductSearchEvent.initialized(
+              configs: salesOrgState.configs,
+              salesOrganization: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              shipToInfo: shipToInfo,
+            ),
+          );
+
       context.read<ReturnListByItemBloc>().add(
             ReturnListByItemEvent.initialized(
               salesOrg:
@@ -1090,6 +1093,32 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               user: user,
               customerCodeInfo: customerCodeState.customerCodeInfo,
+            ),
+          );
+      if (user.userCanAccessOrderHistory) {
+        context.read<ViewByItemsBloc>().add(
+              ViewByItemsEvent.initialized(
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                user: context.read<UserBloc>().state.user,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+              ),
+            );
+      }
+
+      context.read<ViewByOrderBloc>().add(
+            ViewByOrderEvent.initialized(
+              salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: context.read<UserBloc>().state.user,
+              sortDirection: 'desc',
             ),
           );
     }

@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_list_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,6 +28,14 @@ void main() {
   final mockUser = User.empty().copyWith(username: Username('mock-user-name'));
   final mockCustomerCodeInfo =
       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'mockCustomerCode');
+  final mockReturnItemList = <ReturnItem>[
+    ReturnItem.empty().copyWith(
+      requestId: '01',
+    ),
+    ReturnItem.empty().copyWith(
+      requestId: '02',
+    ),
+  ];
 
   group('Return List BLOC Testing=>', () {
     setUp(() {
@@ -40,7 +49,23 @@ void main() {
         returnListRepository: returnListRepositoryMock,
         config: config,
       ),
-      act: (bloc) => bloc.add(
+      setUp: () {
+        when(
+          () => returnListRepositoryMock.fetchReturnListByItem(
+            appliedFilter: ReturnFilter.empty(),
+            salesOrg: mockSalesOrg,
+            shipToInfo: mockShipInfo,
+            customerCode: mockCustomerCodeInfo,
+            user: mockUser,
+            searchKey: SearchKey(''),
+            offset: 0,
+            pageSize: 24,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(mockReturnItemList),
+        );
+      },
+      act: (ReturnListByItemBloc bloc) => bloc.add(
         ReturnListByItemEvent.initialized(
           salesOrg: mockSalesOrg,
           shipInfo: mockShipInfo,
@@ -54,6 +79,28 @@ void main() {
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
+        ),
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          failureOrSuccessOption: none(),
+          isFetching: true,
+        ),
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          failureOrSuccessOption: optionOf(
+            Right(
+              mockReturnItemList,
+            ),
+          ),
+          isFetching: false,
+          returnItemList: mockReturnItemList,
+          canLoadMore: false,
         ),
       ],
     );

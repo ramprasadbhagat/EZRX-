@@ -12,6 +12,7 @@ query orderHistoryQuery(
   \$sort: String, 
   \$language: String, 
   \$searchKey: String,   
+  \$salesOrg: [String],
  ) {
   orderHistoryV3(
    request: {
@@ -25,6 +26,7 @@ query orderHistoryQuery(
       sort: \$sort, 
       language: \$language, 
       searchKey: \$searchKey,  
+      salesOrg: \$salesOrg,
      }
   ) {
     orderCount

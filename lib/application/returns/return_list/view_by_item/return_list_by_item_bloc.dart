@@ -26,20 +26,26 @@ class ReturnListByItemBloc
     required this.returnListRepository,
     required this.config,
   }) : super(ReturnListByItemState.initial()) {
-    on<_Initialized>(
-      (event, emit) => emit(
+    on<_Initialized>((event, emit) {
+      emit(
         ReturnListByItemState.initial().copyWith(
           salesOrg: event.salesOrg,
           user: event.user,
           customerCodeInfo: event.customerCodeInfo,
           shipInfo: event.shipInfo,
         ),
-      ),
-    );
+      );
+      add(
+        _Fetch(
+          appliedFilter: ReturnFilter.empty(),
+          searchKey: SearchKey(''),
+        ),
+      );
+    });
     on<_AutoSearchProduct>(
       (e, emit) {
         if (e.searchKey == state.searchKey) return;
-        if (e.searchKey.isValid()) {
+        if (state.searchKey.validateNotEmpty) {
           add(
             _Fetch(
               appliedFilter: e.appliedFilter,

@@ -4,6 +4,7 @@ part of 'view_by_order_bloc.dart';
 class ViewByOrderState with _$ViewByOrderState {
   const ViewByOrderState._();
   const factory ViewByOrderState({
+    required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
@@ -19,6 +20,7 @@ class ViewByOrderState with _$ViewByOrderState {
   }) = _ViewByOrderState;
   factory ViewByOrderState.initial() => ViewByOrderState(
         salesOrgConfigs: SalesOrganisationConfigs.empty(),
+        salesOrganisation: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         shipToInfo: ShipToInfo.empty(),
         user: User.empty(),

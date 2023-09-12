@@ -28,9 +28,7 @@ mixin _$ViewByItemsEvent {
     required TResult Function(
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
-    required TResult Function(
-            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
-        autoSearchProduct,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) =>
@@ -46,8 +44,7 @@ mixin _$ViewByItemsEvent {
         initialized,
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) =>
@@ -63,8 +60,7 @@ mixin _$ViewByItemsEvent {
         initialized,
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
@@ -286,9 +282,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
-    required TResult Function(
-            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
-        autoSearchProduct,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) {
@@ -308,8 +302,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) {
@@ -329,8 +322,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
@@ -493,9 +485,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
-    required TResult Function(
-            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
-        autoSearchProduct,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) {
@@ -514,8 +504,7 @@ class _$_Fetch implements _Fetch {
         initialized,
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) {
@@ -534,8 +523,7 @@ class _$_Fetch implements _Fetch {
         initialized,
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
@@ -605,9 +593,7 @@ abstract class _$$_AutoSearchProductCopyWith<$Res> {
           $Res Function(_$_AutoSearchProduct) then) =
       __$$_AutoSearchProductCopyWithImpl<$Res>;
   @useResult
-  $Res call({ViewByItemFilter viewByItemFilter, SearchKey searchKey});
-
-  $ViewByItemFilterCopyWith<$Res> get viewByItemFilter;
+  $Res call({SearchKey searchKey});
 }
 
 /// @nodoc
@@ -621,44 +607,28 @@ class __$$_AutoSearchProductCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viewByItemFilter = null,
     Object? searchKey = null,
   }) {
     return _then(_$_AutoSearchProduct(
-      viewByItemFilter: null == viewByItemFilter
-          ? _value.viewByItemFilter
-          : viewByItemFilter // ignore: cast_nullable_to_non_nullable
-              as ViewByItemFilter,
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
     ));
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ViewByItemFilterCopyWith<$Res> get viewByItemFilter {
-    return $ViewByItemFilterCopyWith<$Res>(_value.viewByItemFilter, (value) {
-      return _then(_value.copyWith(viewByItemFilter: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_AutoSearchProduct implements _AutoSearchProduct {
-  const _$_AutoSearchProduct(
-      {required this.viewByItemFilter, required this.searchKey});
+  const _$_AutoSearchProduct({required this.searchKey});
 
-  @override
-  final ViewByItemFilter viewByItemFilter;
   @override
   final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'ViewByItemsEvent.autoSearchProduct(viewByItemFilter: $viewByItemFilter, searchKey: $searchKey)';
+    return 'ViewByItemsEvent.autoSearchProduct(searchKey: $searchKey)';
   }
 
   @override
@@ -666,14 +636,12 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AutoSearchProduct &&
-            (identical(other.viewByItemFilter, viewByItemFilter) ||
-                other.viewByItemFilter == viewByItemFilter) &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, viewByItemFilter, searchKey);
+  int get hashCode => Object.hash(runtimeType, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -695,13 +663,11 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
     required TResult Function(
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
-    required TResult Function(
-            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
-        autoSearchProduct,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) {
-    return autoSearchProduct(viewByItemFilter, searchKey);
+    return autoSearchProduct(searchKey);
   }
 
   @override
@@ -716,12 +682,11 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
         initialized,
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) {
-    return autoSearchProduct?.call(viewByItemFilter, searchKey);
+    return autoSearchProduct?.call(searchKey);
   }
 
   @override
@@ -736,14 +701,13 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
         initialized,
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
   }) {
     if (autoSearchProduct != null) {
-      return autoSearchProduct(viewByItemFilter, searchKey);
+      return autoSearchProduct(searchKey);
     }
     return orElse();
   }
@@ -790,11 +754,9 @@ class _$_AutoSearchProduct implements _AutoSearchProduct {
 }
 
 abstract class _AutoSearchProduct implements ViewByItemsEvent {
-  const factory _AutoSearchProduct(
-      {required final ViewByItemFilter viewByItemFilter,
-      required final SearchKey searchKey}) = _$_AutoSearchProduct;
+  const factory _AutoSearchProduct({required final SearchKey searchKey}) =
+      _$_AutoSearchProduct;
 
-  ViewByItemFilter get viewByItemFilter;
   SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
@@ -849,9 +811,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
-    required TResult Function(
-            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
-        autoSearchProduct,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) {
@@ -870,8 +830,7 @@ class _$_LoadMore implements _LoadMore {
         initialized,
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) {
@@ -890,8 +849,7 @@ class _$_LoadMore implements _LoadMore {
         initialized,
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),
@@ -995,9 +953,7 @@ class _$_FetchProductImage implements _FetchProductImage {
     required TResult Function(
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
-    required TResult Function(
-            ViewByItemFilter viewByItemFilter, SearchKey searchKey)
-        autoSearchProduct,
+    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function() loadMore,
     required TResult Function() fetchProductImage,
   }) {
@@ -1016,8 +972,7 @@ class _$_FetchProductImage implements _FetchProductImage {
         initialized,
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function()? loadMore,
     TResult? Function()? fetchProductImage,
   }) {
@@ -1036,8 +991,7 @@ class _$_FetchProductImage implements _FetchProductImage {
         initialized,
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
-    TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
-        autoSearchProduct,
+    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function()? loadMore,
     TResult Function()? fetchProductImage,
     required TResult orElse(),

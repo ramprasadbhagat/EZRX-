@@ -14,7 +14,6 @@ class ViewByItemsEvent with _$ViewByItemsEvent {
     required SearchKey searchKey,
   }) = _Fetch;
   const factory ViewByItemsEvent.autoSearchProduct({
-    required ViewByItemFilter viewByItemFilter,
     required SearchKey searchKey,
   }) = _AutoSearchProduct;
   const factory ViewByItemsEvent.loadMore() = _LoadMore;

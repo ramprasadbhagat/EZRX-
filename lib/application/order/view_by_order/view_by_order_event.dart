@@ -3,6 +3,7 @@ part of 'view_by_order_bloc.dart';
 @freezed
 class ViewByOrderEvent with _$ViewByOrderEvent {
   const factory ViewByOrderEvent.initialized({
+    required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs salesOrgConfigs,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
@@ -14,7 +15,6 @@ class ViewByOrderEvent with _$ViewByOrderEvent {
     required SearchKey searchKey,
   }) = _Fetch;
   const factory ViewByOrderEvent.autoSearchProduct({
-    required ViewByOrdersFilter filter,
     required SearchKey searchKey,
   }) = _AutoSearchProduct;
   const factory ViewByOrderEvent.loadMore() = _LoadMore;

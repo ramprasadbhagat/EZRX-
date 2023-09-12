@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -27,6 +28,8 @@ void main() {
   late ViewByOrderRepository viewByOrderRepository;
   late ViewByOrder viewByOrderMockData;
   late Config config;
+  final mockSalesOrg =
+      SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100'));
   final salesOrgConfig = SalesOrganisationConfigs.empty()
       .copyWith(salesOrg: SalesOrg('fake-salesOrg'));
   final customerCodeInfo = CustomerCodeInfo.empty()
@@ -66,24 +69,6 @@ void main() {
     });
 
     blocTest<ViewByOrderBloc, ViewByOrderState>(
-      ' -> Initialized Event',
-      build: () => ViewByOrderBloc(
-        viewByOrderRepository: viewByOrderRepository,
-        config: config,
-      ),
-      act: (bloc) => bloc.add(
-        ViewByOrderEvent.initialized(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
-        ),
-      ),
-      expect: () => [isA<ViewByOrderState>()],
-    );
-
-    blocTest<ViewByOrderBloc, ViewByOrderState>(
       ' -> Orders view by order fetch fail',
       build: () => ViewByOrderBloc(
         viewByOrderRepository: viewByOrderRepository,
@@ -95,6 +80,7 @@ void main() {
         shipToInfo: shipToInfo,
         user: user,
         sortDirection: 'desc',
+        salesOrganisation: mockSalesOrg,
       ),
       setUp: () {
         when(
@@ -110,6 +96,7 @@ void main() {
             searchKey: searchKey,
             viewByOrder: ViewByOrder.empty(),
             viewByOrdersFilter: viewByOrdersFilter,
+            salesOrganisation: mockSalesOrg,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -133,6 +120,7 @@ void main() {
           isFetching: true,
           searchKey: searchKey,
           appliedFilter: viewByOrdersFilter,
+          salesOrganisation: mockSalesOrg,
         ),
         ViewByOrderState.initial().copyWith(
           salesOrgConfigs: salesOrgConfig,
@@ -148,6 +136,7 @@ void main() {
           appliedFilter: viewByOrdersFilter,
           isFetching: false,
           searchKey: searchKey,
+          salesOrganisation: mockSalesOrg,
         )
       ],
     );
@@ -164,6 +153,7 @@ void main() {
         shipToInfo: shipToInfo,
         user: user,
         sortDirection: 'desc',
+        salesOrganisation: mockSalesOrg,
       ),
       setUp: () {
         when(
@@ -179,6 +169,7 @@ void main() {
             searchKey: searchKey,
             viewByOrder: ViewByOrder.empty(),
             viewByOrdersFilter: viewByOrdersFilter,
+            salesOrganisation: mockSalesOrg,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -202,6 +193,7 @@ void main() {
           isFetching: true,
           appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
+          salesOrganisation: mockSalesOrg,
         ),
         ViewByOrderState.initial().copyWith(
           salesOrgConfigs: salesOrgConfig,
@@ -214,6 +206,7 @@ void main() {
           nextPageIndex: 0,
           viewByOrderList: viewByOrderMockData,
           searchKey: searchKey,
+          salesOrganisation: mockSalesOrg,
         ),
       ],
     );
@@ -232,6 +225,7 @@ void main() {
         shipToInfo: shipToInfo,
         user: user,
         sortDirection: 'desc',
+        salesOrganisation: mockSalesOrg,
       ),
       setUp: () {
         when(
@@ -247,6 +241,7 @@ void main() {
             sort: 'desc',
             searchKey: searchKey,
             viewByOrder: viewByOrderMockData,
+            salesOrganisation: mockSalesOrg,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -270,6 +265,7 @@ void main() {
           viewByOrderList: viewByOrderMockData,
           appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
+          salesOrganisation: mockSalesOrg,
         ),
         ViewByOrderState.initial().copyWith(
           salesOrgConfigs: salesOrgConfig,
@@ -280,6 +276,7 @@ void main() {
           appliedFilter: viewByOrdersFilter,
           nextPageIndex: 1,
           canLoadMore: false,
+          salesOrganisation: mockSalesOrg,
           viewByOrderList: viewByOrderMockData.copyWith(
             orderHeaders: [
               ...viewByOrderMockData.orderHeaders,
@@ -304,6 +301,7 @@ void main() {
         shipToInfo: shipToInfo,
         user: user,
         sortDirection: 'desc',
+        salesOrganisation: mockSalesOrg,
       ),
       setUp: () {
         when(
@@ -319,6 +317,7 @@ void main() {
             searchKey: searchKey,
             viewByOrder: viewByOrderMockData,
             viewByOrdersFilter: viewByOrdersFilter,
+            salesOrganisation: mockSalesOrg,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -339,6 +338,7 @@ void main() {
           viewByOrderList: viewByOrderMockData,
           appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
+          salesOrganisation: mockSalesOrg,
         ),
         ViewByOrderState.initial().copyWith(
           salesOrgConfigs: salesOrgConfig,
@@ -354,6 +354,7 @@ void main() {
           viewByOrderList: viewByOrderMockData,
           appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
+          salesOrganisation: mockSalesOrg,
         )
       ],
     );
