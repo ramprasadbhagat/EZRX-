@@ -1,121 +1,116 @@
 # Test all the test cases when commit happend
-# 
-
 trigger: none
-
 resources:
-- repo: self
-
+  - repo: self
 pool:
-  vmImage: 'macos-latest'
-
+  vmImage: macos-latest
 jobs:
-- job: Analyse
-  pool: devops-flutter
-  displayName: Analyze flutter. Reject error, warning, info code
-  steps: 
-  - bash: flutter375 analyze --fatal-infos --fatal-warnings
-  - bash: flutter375 pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings
-  - bash: flutter375 pub run dart_code_metrics:metrics check-unnecessary-nullable lib --fatal-found
-  - bash: flutter375 pub run dart_code_metrics:metrics check-unused-code lib --fatal-unused
-  - bash: flutter375 pub run dart_code_metrics:metrics check-unused-files lib --fatal-unused  
-- job:
-  pool: devops-flutter
-  displayName: Test application
-  steps: 
-  - bash: flutter375 test test/application
-- job:
-  pool: devops-flutter
-  displayName: Test domain
-  steps: 
-  - bash: flutter375 test test/domain
-- job:
-  pool: devops-flutter
-  displayName: Test infrastructure -> account
-  steps: 
-  - bash: flutter375 test test/infrastructure/account
-- job:
-  pool: devops-flutter
-  displayName: Test infrastructure -> announcement
-  steps: 
-  - bash: flutter375 test test/infrastructure/announcement
-- job:
-  pool: devops-flutter
-  displayName: Test infrastructure -> aup_tc
-  steps: 
-  - bash: flutter375 test test/infrastructure/aup_tc
-- job:
-  pool: devops-flutter
-  displayName: Test infrastructure -> auth
-  steps: 
-  - bash: flutter375 test test/infrastructure/auth
-- job:
-  pool: devops-flutter
-  displayName: Test infrastructure -> banner
-  steps: 
-  - bash: flutter375 test test/infrastructure/banner
-- job:
-  pool: devops-flutter
-  displayName: Test infrastructure -> payments
-  steps: 
-  - bash: flutter375 test test/infrastructure/payments
-- job:
-  pool: devops-flutter
-  displayName: Test infrastructure -> order
-  steps: 
-  - bash: flutter375 test test/infrastructure/order
-- job:
-  pool: devops-flutter
-  displayName: Test infrastructure -> returns
-  steps: 
-  - bash: flutter375 test test/infrastructure/returns
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> account
-  steps: 
-  - bash: flutter375 test test/presentation/account
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> announcement
-  steps: 
-  - bash: flutter375 test test/presentation/announcement
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> aup_tc_test
-  steps: 
-  - bash: flutter375 test test/presentation/aup_tc_test
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> auth
-  steps: 
-  - bash: flutter375 test test/presentation/auth
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> home
-  steps: 
-  - bash: flutter375 test test/presentation/home
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> order-history
-  steps: 
-  - bash: flutter375 test test/presentation/order_history
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> orders
-  steps: 
-  - bash: flutter375 test test/presentation/orders
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> returns
-  steps: 
-  - bash: flutter375 test test/presentation/returns
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> payments
-  steps: 
-  - bash: flutter375 test test/presentation/payments
-- job:
-  pool: devops-flutter
-  displayName: Test presentation -> products
-  steps: 
-  - bash: flutter375 test test/presentation/products
+  - job: Analyse
+    pool: devops-flutter
+    displayName: 'Analyze flutter. Reject error, warning, info code'
+    steps:
+      - bash: flutter375 analyze --fatal-infos --fatal-warnings
+      - bash: flutter375 pub run dart_code_metrics:metrics analyze lib --fatal-style --fatal-performance --fatal-warnings
+      - bash: flutter375 pub run dart_code_metrics:metrics check-unnecessary-nullable lib --fatal-found
+      - bash: flutter375 pub run dart_code_metrics:metrics check-unused-code lib --fatal-unused
+      - bash: flutter375 pub run dart_code_metrics:metrics check-unused-files lib --fatal-unused
+  - job: TestApplication
+    pool: devops-flutter
+    displayName: Test application
+    steps:
+      - bash: flutter375 test test/application
+  - job: TestDomain
+    pool: devops-flutter
+    displayName: Test domain
+    steps:
+      - bash: flutter375 test test/domain
+  - job: TestInfrastructureAccount
+    pool: devops-flutter
+    displayName: Test infrastructure -> account
+    steps:
+      - bash: flutter375 test test/infrastructure/account
+  - job: TestInfrastructureAnnouncement
+    pool: devops-flutter
+    displayName: Test infrastructure -> announcement
+    steps:
+      - bash: flutter375 test test/infrastructure/announcement
+  - job: TestInfrastructureAupTc
+    pool: devops-flutter
+    displayName: Test infrastructure -> aup_tc
+    steps:
+      - bash: flutter375 test test/infrastructure/aup_tc
+  - job: TestInfrastructureAuth
+    pool: devops-flutter
+    displayName: Test infrastructure -> auth
+    steps:
+      - bash: flutter375 test test/infrastructure/auth
+  - job: TestInfrastructureBanner
+    pool: devops-flutter
+    displayName: Test infrastructure -> banner
+    steps:
+      - bash: flutter375 test test/infrastructure/banner
+  - job: TestInfrastructurePayments
+    pool: devops-flutter
+    displayName: Test infrastructure -> payments
+    steps:
+      - bash: flutter375 test test/infrastructure/payments
+  - job: TestInfrastructureOrder
+    pool: devops-flutter
+    displayName: Test infrastructure -> order
+    steps:
+      - bash: flutter375 test test/infrastructure/order
+  - job: TestInfrastructureReturns
+    pool: devops-flutter
+    displayName: Test infrastructure -> returns
+    steps:
+      - bash: flutter375 test test/infrastructure/returns
+  - job: TestPresentationAccount
+    pool: devops-flutter
+    displayName: Test presentation -> account
+    steps:
+      - bash: flutter375 test test/presentation/account
+  - job: TestPresentationAnnouncement
+    pool: devops-flutter
+    displayName: Test presentation -> announcement
+    steps:
+      - bash: flutter375 test test/presentation/announcement
+  - job: TestPresentationAupTc
+    pool: devops-flutter
+    displayName: Test presentation -> aup_tc_test
+    steps:
+      - bash: flutter375 test test/presentation/aup_tc_test
+  - job: TestPresentationAuth
+    pool: devops-flutter
+    displayName: Test presentation -> auth
+    steps:
+      - bash: flutter375 test test/presentation/auth
+  - job: TestPresentationHome
+    pool: devops-flutter
+    displayName: Test presentation -> home
+    steps:
+      - bash: flutter375 test test/presentation/home
+  - job: TestPresentationOrderHistory
+    pool: devops-flutter
+    displayName: Test presentation -> order-history
+    steps:
+      - bash: flutter375 test test/presentation/order_history
+  - job: TestPresentationOrders
+    pool: devops-flutter
+    displayName: Test presentation -> orders
+    steps:
+      - bash: flutter375 test test/presentation/orders
+  - job: TestPresentationReturns
+    pool: devops-flutter
+    displayName: Test presentation -> returns
+    steps:
+      - bash: flutter375 test test/presentation/returns
+  - job: TestPresentationPayments
+    pool: devops-flutter
+    displayName: Test presentation -> payments
+    steps:
+      - bash: flutter375 test test/presentation/payments
+  - job: TestPresentationProducts
+    pool: devops-flutter
+    displayName: Test presentation -> products
+    steps:
+      - bash: flutter375 test test/presentation/products

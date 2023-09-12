@@ -30,11 +30,11 @@ https://resocoder.com/2020/03/09/flutter-firebase-ddd-course-1-domain-driven-des
 - [Edit csv](https://marketplace.visualstudio.com/items?itemName=janisdd.vscode-edit-csv) edit your csv easily
 - Ensure the csv file is using CRLF to works. ref:https://stackoverflow.com/a/39532890
 
-### SonarCube
+### Sonarqube
 1. [Read this](https://medium.com/@rajeswari3699/sonarqube-with-flutter-e294e48018f2)
 2. Follow the guide download Sonarqube, SonarScanner, Sonar-Flutter Plugin and put to the correct directory.
 3. ```nano /etc/paths``` add ```/Applications/SonarScanner/bin``` and ```/Applications/SonarScanner/bin``` 
-4. Start SonarCube local server ```sh /Applications/SonarQube/bin/macosx-universal-64/sonar.sh console```
+4. Start Sonarqube local server ```sh /Applications/SonarQube/bin/macosx-universal-64/sonar.sh console```
 5. http://localhost:9000/about > Wait for a while until Login screen appear > Login and create project 
 6. Config sonar-project.properties
 7. ```fvm flutter test --machine --coverage > tests.output```
