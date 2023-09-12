@@ -53,7 +53,7 @@ class NewPaymentRepository extends INewPaymentRepository {
       final filterList =
           OutstandingInvoiceFilterDto.fromDomain(appliedFilter).toMapList;
 
-      if (searchKey.searchValueOrEmpty.isNotEmpty) {
+      if (searchKey.validateNotEmpty) {
         final searchMap = <String, String>{};
         searchMap.putIfAbsent('field', () => 'accountingDocument');
         searchMap.putIfAbsent('value', () => searchKey.searchValueOrEmpty);
@@ -82,6 +82,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required int pageSize,
     required int offset,
     required AvailableCreditFilter appliedFilter,
+    required SearchKey searchKey,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -95,6 +96,15 @@ class NewPaymentRepository extends INewPaymentRepository {
       }
     }
     try {
+      final filterList =
+          AvailableCreditFilterDto.fromDomain(appliedFilter).toMapList;
+
+      if (searchKey.validateNotEmpty) {
+        final searchMap = <String, String>{};
+        searchMap.putIfAbsent('field', () => 'accountingDocument');
+        searchMap.putIfAbsent('value', () => searchKey.searchValueOrEmpty);
+        filterList.add(searchMap);
+      }
       final response = await remoteDataSource.getAvailableCreditNotes(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         customerCode: customerCodeInfo.customerCodeSoldTo,

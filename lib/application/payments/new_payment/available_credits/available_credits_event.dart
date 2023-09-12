@@ -8,6 +8,7 @@ class AvailableCreditsEvent with _$AvailableCreditsEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required AvailableCreditFilter appliedFilter,
+    required SearchKey searchKey,
   }) = _Fetch;
   const factory AvailableCreditsEvent.loadMore({
     required SalesOrganisation salesOrganisation,

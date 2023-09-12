@@ -24,6 +24,7 @@ abstract class INewPaymentRepository {
     required int pageSize,
     required int offset,
     required AvailableCreditFilter appliedFilter,
+    required SearchKey searchKey,
   });
 
   Future<Either<ApiFailure, PaymentInfo>> pay({

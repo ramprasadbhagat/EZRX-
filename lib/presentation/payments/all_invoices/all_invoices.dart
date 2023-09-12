@@ -142,6 +142,7 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
             customerCodeInfo:
                 context.read<CustomerCodeBloc>().state.customerCodeInfo,
             appliedFilter: AvailableCreditFilter.empty(),
+            searchKey: SearchKey.search(''),
           ),
         );
     context.read<NewPaymentBloc>().add(

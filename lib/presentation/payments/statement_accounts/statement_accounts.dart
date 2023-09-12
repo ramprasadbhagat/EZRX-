@@ -127,6 +127,7 @@ class StatementAccountsPage extends StatelessWidget {
             customerCodeInfo:
                 context.read<CustomerCodeBloc>().state.customerCodeInfo,
             appliedFilter: AvailableCreditFilter.empty(),
+            searchKey: SearchKey.search(''),
           ),
         );
     context.read<NewPaymentBloc>().add(

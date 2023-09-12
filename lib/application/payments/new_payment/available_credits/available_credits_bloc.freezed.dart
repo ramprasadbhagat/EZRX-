@@ -22,7 +22,8 @@ mixin _$AvailableCreditsEvent {
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
@@ -35,7 +36,8 @@ mixin _$AvailableCreditsEvent {
     TResult? Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)?
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -48,7 +50,8 @@ mixin _$AvailableCreditsEvent {
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)?
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -141,7 +144,8 @@ class _$_initialized implements _initialized {
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
@@ -157,7 +161,8 @@ class _$_initialized implements _initialized {
     TResult? Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)?
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -173,7 +178,8 @@ class _$_initialized implements _initialized {
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)?
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -233,7 +239,8 @@ abstract class _$$_FetchCopyWith<$Res> {
   $Res call(
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
-      AvailableCreditFilter appliedFilter});
+      AvailableCreditFilter appliedFilter,
+      SearchKey searchKey});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
@@ -253,6 +260,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_Fetch(
       salesOrganisation: null == salesOrganisation
@@ -267,6 +275,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as AvailableCreditFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 
@@ -301,7 +313,8 @@ class _$_Fetch implements _Fetch {
   const _$_Fetch(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
-      required this.appliedFilter});
+      required this.appliedFilter,
+      required this.searchKey});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -309,10 +322,12 @@ class _$_Fetch implements _Fetch {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final AvailableCreditFilter appliedFilter;
+  @override
+  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'AvailableCreditsEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, appliedFilter: $appliedFilter)';
+    return 'AvailableCreditsEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, appliedFilter: $appliedFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -325,12 +340,14 @@ class _$_Fetch implements _Fetch {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.appliedFilter, appliedFilter) ||
-                other.appliedFilter == appliedFilter));
+                other.appliedFilter == appliedFilter) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, customerCodeInfo, appliedFilter);
+  int get hashCode => Object.hash(runtimeType, salesOrganisation,
+      customerCodeInfo, appliedFilter, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -345,13 +362,14 @@ class _$_Fetch implements _Fetch {
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
         loadMore,
   }) {
-    return fetch(salesOrganisation, customerCodeInfo, appliedFilter);
+    return fetch(salesOrganisation, customerCodeInfo, appliedFilter, searchKey);
   }
 
   @override
@@ -361,13 +379,15 @@ class _$_Fetch implements _Fetch {
     TResult? Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)?
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
         loadMore,
   }) {
-    return fetch?.call(salesOrganisation, customerCodeInfo, appliedFilter);
+    return fetch?.call(
+        salesOrganisation, customerCodeInfo, appliedFilter, searchKey);
   }
 
   @override
@@ -377,7 +397,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)?
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -385,7 +406,8 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(salesOrganisation, customerCodeInfo, appliedFilter);
+      return fetch(
+          salesOrganisation, customerCodeInfo, appliedFilter, searchKey);
     }
     return orElse();
   }
@@ -429,11 +451,13 @@ abstract class _Fetch implements AvailableCreditsEvent {
   const factory _Fetch(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final AvailableCreditFilter appliedFilter}) = _$_Fetch;
+      required final AvailableCreditFilter appliedFilter,
+      required final SearchKey searchKey}) = _$_Fetch;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   AvailableCreditFilter get appliedFilter;
+  SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -539,7 +563,8 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)
         fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
@@ -555,7 +580,8 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)?
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -571,7 +597,8 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(
             SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo,
-            AvailableCreditFilter appliedFilter)?
+            AvailableCreditFilter appliedFilter,
+            SearchKey searchKey)?
         fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
@@ -639,6 +666,7 @@ mixin _$AvailableCreditsState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   AvailableCreditFilter get appliedFilter => throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AvailableCreditsStateCopyWith<AvailableCreditsState> get copyWith =>
@@ -656,7 +684,8 @@ abstract class $AvailableCreditsStateCopyWith<$Res> {
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore,
-      AvailableCreditFilter appliedFilter});
+      AvailableCreditFilter appliedFilter,
+      SearchKey searchKey});
 
   $AvailableCreditFilterCopyWith<$Res> get appliedFilter;
 }
@@ -680,6 +709,7 @@ class _$AvailableCreditsStateCopyWithImpl<$Res,
     Object? isLoading = null,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
       items: null == items
@@ -702,6 +732,10 @@ class _$AvailableCreditsStateCopyWithImpl<$Res,
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as AvailableCreditFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ) as $Val);
   }
 
@@ -727,7 +761,8 @@ abstract class _$$_AvailableCreditsStateCopyWith<$Res>
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore,
-      AvailableCreditFilter appliedFilter});
+      AvailableCreditFilter appliedFilter,
+      SearchKey searchKey});
 
   @override
   $AvailableCreditFilterCopyWith<$Res> get appliedFilter;
@@ -749,6 +784,7 @@ class __$$_AvailableCreditsStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? canLoadMore = null,
     Object? appliedFilter = null,
+    Object? searchKey = null,
   }) {
     return _then(_$_AvailableCreditsState(
       items: null == items
@@ -771,6 +807,10 @@ class __$$_AvailableCreditsStateCopyWithImpl<$Res>
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
               as AvailableCreditFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
     ));
   }
 }
@@ -783,7 +823,8 @@ class _$_AvailableCreditsState extends _AvailableCreditsState {
       required this.failureOrSuccessOption,
       required this.isLoading,
       required this.canLoadMore,
-      required this.appliedFilter})
+      required this.appliedFilter,
+      required this.searchKey})
       : _items = items,
         super._();
 
@@ -803,10 +844,12 @@ class _$_AvailableCreditsState extends _AvailableCreditsState {
   final bool canLoadMore;
   @override
   final AvailableCreditFilter appliedFilter;
+  @override
+  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'AvailableCreditsState(items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter)';
+    return 'AvailableCreditsState(items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -822,7 +865,9 @@ class _$_AvailableCreditsState extends _AvailableCreditsState {
             (identical(other.canLoadMore, canLoadMore) ||
                 other.canLoadMore == canLoadMore) &&
             (identical(other.appliedFilter, appliedFilter) ||
-                other.appliedFilter == appliedFilter));
+                other.appliedFilter == appliedFilter) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
   }
 
   @override
@@ -832,7 +877,8 @@ class _$_AvailableCreditsState extends _AvailableCreditsState {
       failureOrSuccessOption,
       isLoading,
       canLoadMore,
-      appliedFilter);
+      appliedFilter,
+      searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -848,8 +894,8 @@ abstract class _AvailableCreditsState extends AvailableCreditsState {
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
       required final bool canLoadMore,
-      required final AvailableCreditFilter
-          appliedFilter}) = _$_AvailableCreditsState;
+      required final AvailableCreditFilter appliedFilter,
+      required final SearchKey searchKey}) = _$_AvailableCreditsState;
   const _AvailableCreditsState._() : super._();
 
   @override
@@ -862,6 +908,8 @@ abstract class _AvailableCreditsState extends AvailableCreditsState {
   bool get canLoadMore;
   @override
   AvailableCreditFilter get appliedFilter;
+  @override
+  SearchKey get searchKey;
   @override
   @JsonKey(ignore: true)
   _$$_AvailableCreditsStateCopyWith<_$_AvailableCreditsState> get copyWith =>

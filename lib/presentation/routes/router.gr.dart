@@ -111,7 +111,8 @@ import '../payments/all_invoices/all_invoices.dart' as _i70;
 import '../payments/credit_details/credit_details.dart' as _i42;
 import '../payments/invoice_details/invoice_details.dart' as _i41;
 import '../payments/new_payment/new_payment.dart' as _i44;
-import '../payments/new_payment/tabs/available_credits_tab.dart' as _i82;
+import '../payments/new_payment/tabs/available_credits_tab/available_credits_tab.dart'
+    as _i82;
 import '../payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoices_tab.dart'
     as _i81;
 import '../payments/new_payment/tabs/payment_method/payment_method_tab.dart'

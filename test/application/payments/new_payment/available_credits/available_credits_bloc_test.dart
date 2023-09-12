@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/payments/new_payment/available_credits/av
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
@@ -53,6 +54,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               appliedFilter: AvailableCreditFilter.empty(),
+              searchKey: SearchKey.search(''),
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -63,6 +65,7 @@ void main() {
             appliedFilter: AvailableCreditFilter.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganisation: SalesOrganisation.empty(),
+            searchKey: SearchKey.search(''),
           ),
         ),
         expect: () => [
@@ -90,6 +93,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               appliedFilter: AvailableCreditFilter.empty(),
+              searchKey: SearchKey.search(''),
             ),
           ).thenAnswer((invocation) async => Right(openItems));
         },
@@ -98,6 +102,7 @@ void main() {
             appliedFilter: AvailableCreditFilter.empty(),
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganisation: SalesOrganisation.empty(),
+            searchKey: SearchKey.search(''),
           ),
         ),
         expect: () => [
@@ -129,6 +134,7 @@ void main() {
               pageSize: config.pageSize,
               offset: openItems.length,
               appliedFilter: AvailableCreditFilter.empty(),
+              searchKey: SearchKey.search(''),
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -171,6 +177,7 @@ void main() {
               pageSize: config.pageSize,
               offset: openItems.length,
               appliedFilter: AvailableCreditFilter.empty(),
+              searchKey: SearchKey.search(''),
             ),
           ).thenAnswer((invocation) async => Right(openItems));
         },

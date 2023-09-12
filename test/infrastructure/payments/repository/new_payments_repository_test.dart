@@ -125,6 +125,7 @@ void main() {
           pageSize: 24,
           salesOrganisation: SalesOrganisation.empty()
               .copyWith(salesOrg: SalesOrg('fake-salesOrg')),
+          searchKey: SearchKey(''),
         );
         expect(
           result.isRight(),

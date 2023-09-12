@@ -5,24 +5,27 @@ import 'package:ezrxmobile/application/payments/account_summary/account_summary_
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/filter/available_credit_payment_filter_page.dart';
+import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credit_payment_filter_page.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/widgets/credit_item_card.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+
+part 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/widgets/available_credits_search_bar.dart';
 
 class AvailableCreditsTab extends StatelessWidget {
   const AvailableCreditsTab({Key? key}) : super(key: key);
@@ -35,13 +38,8 @@ class AvailableCreditsTab extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
           child: Row(
             children: [
-              Expanded(
-                child: SearchBar(
-                  onSearchChanged: (String value) {},
-                  clearIconKey: WidgetKeys.clearIconKey,
-                  controller: TextEditingController(),
-                  onClear: () {},
-                ),
+              const Expanded(
+                child: _AvailableCreditsSearchBar(),
               ),
               _FilterTune(),
             ],
@@ -118,6 +116,7 @@ class AvailableCreditsTab extends StatelessWidget {
                                       .state
                                       .customerCodeInfo,
                                   appliedFilter: AvailableCreditFilter.empty(),
+                                  searchKey: state.searchKey,
                                 ),
                               );
                         },
@@ -233,6 +232,8 @@ class _FilterTune extends StatelessWidget {
                   customerCodeInfo:
                       context.read<CustomerCodeBloc>().state.customerCodeInfo,
                   appliedFilter: newFilter,
+                  searchKey:
+                      context.read<AvailableCreditsBloc>().state.searchKey,
                 ),
               );
         }

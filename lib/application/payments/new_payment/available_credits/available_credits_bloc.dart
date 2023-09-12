@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:dartz/dartz.dart';
@@ -37,6 +38,7 @@ class AvailableCreditsBloc
             items: <CustomerOpenItem>[],
             isLoading: true,
             appliedFilter: value.appliedFilter,
+            searchKey: value.searchKey,
           ),
         );
 
@@ -47,6 +49,7 @@ class AvailableCreditsBloc
           pageSize: config.pageSize,
           offset: 0,
           appliedFilter: value.appliedFilter,
+          searchKey: value.searchKey,
         );
 
         failureOrSuccess.fold(
@@ -87,6 +90,7 @@ class AvailableCreditsBloc
           pageSize: config.pageSize,
           offset: state.items.length,
           appliedFilter: state.appliedFilter,
+          searchKey: state.searchKey,
         );
 
         failureOrSuccess.fold(

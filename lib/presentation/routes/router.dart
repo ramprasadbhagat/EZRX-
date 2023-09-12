@@ -48,7 +48,7 @@ import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/payment_advice_footer/payment_advice_footer_page.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab.dart';
+import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credits_tab.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoices_tab.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/new_payment.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';

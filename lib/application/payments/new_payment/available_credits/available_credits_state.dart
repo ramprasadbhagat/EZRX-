@@ -9,6 +9,7 @@ class AvailableCreditsState with _$AvailableCreditsState {
     required bool isLoading,
     required bool canLoadMore,
     required AvailableCreditFilter appliedFilter,
+    required SearchKey searchKey,
   }) = _AvailableCreditsState;
 
   factory AvailableCreditsState.initial() => AvailableCreditsState(
@@ -17,5 +18,6 @@ class AvailableCreditsState with _$AvailableCreditsState {
         canLoadMore: true,
         items: <CustomerOpenItem>[],
         appliedFilter: AvailableCreditFilter.empty(),
+        searchKey: SearchKey.search(''),
       );
 }

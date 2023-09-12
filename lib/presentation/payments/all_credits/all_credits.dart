@@ -136,6 +136,7 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
             customerCodeInfo:
                 context.read<CustomerCodeBloc>().state.customerCodeInfo,
             appliedFilter: AvailableCreditFilter.empty(),
+            searchKey: SearchKey.search(''),
           ),
         );
     context.read<NewPaymentBloc>().add(
