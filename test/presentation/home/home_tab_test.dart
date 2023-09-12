@@ -351,6 +351,88 @@ void main() {
       );
     }
 
+    testWidgets(
+      ' -> Find HomeScreen',
+      (WidgetTester tester) async {
+        final expectedState = [
+          UserState.initial().copyWith(
+            user: User.empty().copyWith(
+              accessRight: AccessRight.empty().copyWith(products: false),
+              role: Role.empty().copyWith(
+                type: RoleType('root_admin'),
+              ),
+            ),
+          ),
+          UserState.initial().copyWith(
+            user: User.empty().copyWith(
+              accessRight: AccessRight.empty().copyWith(products: true),
+              role: Role.empty().copyWith(
+                type: RoleType('client_user'),
+              ),
+            ),
+          ),
+        ];
+        whenListen(userBlocMock, Stream.fromIterable(expectedState));
+        await getWidget(tester, const HomeTab());
+        await tester.pump();
+        final homeScreen = find.byKey(
+          WidgetKeys.homeScreen,
+        );
+        expect(homeScreen, findsOneWidget);
+        expect(find.byType(ProductsOnOffer), findsOneWidget);
+        expect(find.byType(BundleSection), findsOneWidget);
+        expect(find.byType(BrowseProduct), findsOneWidget);
+      },
+    );
+    testWidgets(
+      ' -> HomeScreen on refresh',
+      (WidgetTester tester) async {
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: User.empty().copyWith(
+              accessRight: AccessRight.empty().copyWith(products: true),
+              role: Role.empty().copyWith(
+                type: RoleType('client_user'),
+              ),
+              userSalesOrganisations: [
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001'))
+              ],
+            ),
+          ),
+        );
+        await getWidget(tester, const HomeTab());
+        await tester.pump(const Duration(milliseconds: 100));
+        final handle = tester.ensureSemantics();
+
+        final homeScreen = find.byKey(
+          WidgetKeys.homeScreen,
+        );
+        expect(homeScreen, findsOneWidget);
+        await tester.drag(
+          find.byType(
+            RefreshIndicator,
+          ),
+          const Offset(0.0, 100.0),
+        );
+        await tester.pump(const Duration(seconds: 1));
+        expect(
+          find.byType(RefreshProgressIndicator),
+          findsOneWidget,
+        );
+        await tester.pump();
+        verify(
+          () => salesOrgBlocMock.add(
+            SalesOrgEvent.loadSavedOrganisation(
+              salesOrganisations: [
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001'))
+              ],
+            ),
+          ),
+        ).called(1);
+        handle.dispose();
+      },
+    );
+
     group('HomeQuickAccessPaymentsMenu Test', () {
       testWidgets(
         ' -> Hide homeQuickAccessPaymentsMenu when Enable Payment Configuration is off',
