@@ -6,9 +6,6 @@ class _PriceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final showTaxBreakdown =
-        context.read<SalesOrgBloc>().state.configs.displayItemTaxBreakdown;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -16,7 +13,7 @@ class _PriceSection extends StatelessWidget {
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
           price: cartProduct.display(PriceType.finalPriceTotal),
         ),
-        if (showTaxBreakdown)
+        if (cartProduct.showTaxBreakDown)
           ItemTax(
             cartItem: cartProduct,
           ),

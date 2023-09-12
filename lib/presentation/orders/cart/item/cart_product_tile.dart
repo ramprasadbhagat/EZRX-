@@ -133,8 +133,6 @@ class _ItemSubTotalSection extends StatelessWidget {
           fontSize: 12,
           color: ZPColors.darkGray,
         );
-    final salesOrgState = context.read<SalesOrgBloc>().state;
-    final showTaxBreakdown = salesOrgState.configs.displayItemTaxBreakdown;
 
     return Column(
       children: [
@@ -164,32 +162,29 @@ class _ItemSubTotalSection extends StatelessWidget {
             ],
           ),
         ),
-        showTaxBreakdown
-            ? Padding(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                  bottom: 8,
+        if (cartProduct.showTaxBreakDown)
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              bottom: 8,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'Total with tax:'.tr(),
+                  style: txtStyle,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Total with tax:'.tr(),
-                      style: txtStyle,
-                    ),
-                    _LoadingShimmerWithChild(
-                      child: ItemTax(
-                        cartItem: cartProduct,
-                      ),
-                    ),
-                  ],
+                _LoadingShimmerWithChild(
+                  child: ItemTax(
+                    cartItem: cartProduct,
+                  ),
                 ),
-              )
-            : const SizedBox(
-                height: 8,
-              ),
+              ],
+            ),
+          ),
       ],
     );
   }

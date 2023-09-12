@@ -219,10 +219,7 @@ class _QuantityAndPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final showTaxBreakdown =
-        context.read<SalesOrgBloc>().state.configs.displayItemTaxBreakdown;
-
-    return Padding(
+      return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -241,7 +238,7 @@ class _QuantityAndPrice extends StatelessWidget {
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 price: cartItem.display(PriceType.finalPriceTotal),
               ),
-              if (showTaxBreakdown)
+              if (cartItem.showTaxBreakDown)
                 ItemTax(
                   cartItem: cartItem,
                 ),

@@ -45,6 +45,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               trailing: PriceComponent(
+                key: WidgetKeys.grandTotalKey,
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 price: state.grandTotal.toString(),
                 title: 'Grand total: '.tr(),

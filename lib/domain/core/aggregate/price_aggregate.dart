@@ -580,6 +580,8 @@ class PriceAggregate with _$PriceAggregate {
       .toList();
   bool get displayOfferBonus =>
       addedBonusList.isNotEmpty && !materialInfo.hidePrice;
+
+  bool get showTaxBreakDown => salesOrgConfig.displayItemTaxBreakdown && !materialInfo.hidePrice;
 }
 
 enum PriceType {

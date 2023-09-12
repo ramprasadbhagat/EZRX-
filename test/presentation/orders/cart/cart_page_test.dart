@@ -56,6 +56,7 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
+
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
@@ -122,6 +123,7 @@ class OrderSummaryBlocMock
 class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
+
 class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
@@ -173,7 +175,7 @@ void main() {
     router: MockAppRouter(),
     pendingChildren: [],
   );
-
+  
   setUpAll(() async {
     locator.registerLazySingleton(() => MixpanelService());
     locator<MixpanelService>().init(mixpanel: MixpanelMock());
@@ -527,7 +529,6 @@ void main() {
       when(() => productImageBloc.state).thenReturn(
         ProductImageState.initial(),
       );
-      
     },
   );
   group(
@@ -719,7 +720,6 @@ void main() {
         );
         expect(closeIcon, findsOneWidget);
       });
-
 
       testWidgets('Bundle item allowed out of stock material', (tester) async {
         when(() => cartBloc.state).thenReturn(
@@ -2262,6 +2262,105 @@ void main() {
       //           'batchNumber_${mockCartItemWithBatch.materials.first.materialNumberString}'));
       //       expect(batchNumber, findsOneWidget);
       //     });
+
+      testWidgets('Grand total check', (tester) async {
+        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+          currency: Currency('myr'),
+          
+        );
+       
+        final salesOrgState = SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2001'),
+          ),
+          configs: salesOrgConfig,
+        );
+
+        final mockCartProductList = [
+          PriceAggregate.empty().copyWith(
+            quantity: 1,
+            price: Price.empty().copyWith(finalPrice: MaterialPrice(100.00)),
+            materialInfo: MaterialInfo.empty().copyWith(
+              hidePrice: false,
+              type: MaterialInfoType('material'),
+              materialNumber: MaterialNumber('000000000023168451'),
+              materialDescription: ' Triglyceride Mosys D',
+              principalData: PrincipalData.empty().copyWith(
+                principalName: PrincipalName('台灣拜耳股份有限公司'),
+              ),
+              remarks: '',
+            ),
+            stockInfo: StockInfo.empty().copyWith(
+              inStock: MaterialInStock('Yes'),
+            ),
+          ),
+          PriceAggregate.empty().copyWith(
+            bundle: Bundle.empty().copyWith(
+              materials: <MaterialInfo>[
+                MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-material-1'),
+                  quantity: 10,
+                  stockInfos: <StockInfo>[
+                    StockInfo.empty().copyWith(
+                      inStock: MaterialInStock('yes'),
+                    )
+                  ],
+                ),
+                MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-material-2'),
+                  quantity: 10,
+                  stockInfos: <StockInfo>[
+                    StockInfo.empty().copyWith(
+                      inStock: MaterialInStock('Yes'),
+                    )
+                  ],
+                ),
+              ],
+              bundleInformation: [BundleInfo.empty().copyWith(rate: 10)],
+              bundleCode: '1234',
+              bundleName: BundleName('test'),
+            ),
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('fake-bundle'),
+              type: MaterialInfoType('bundle'),
+            ),
+            salesOrgConfig: salesOrgConfig,
+          ),
+        ];
+        
+        final cartState = CartState.initial().copyWith(
+          cartProducts: mockCartProductList,
+        );
+
+
+        when(() => salesOrgBloc.state).thenReturn(
+          salesOrgState,
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: salesOrgConfig,
+            ),
+          );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+        
+        
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+        final grandTotal = find.byKey(WidgetKeys.grandTotalKey);
+        expect(grandTotal, findsOneWidget);
+        expect(
+          find.text(
+            'Grand total: MYR 300.00',
+            findRichText: true,
+          ),
+          findsOneWidget,
+        );
+      });
     },
   );
 }

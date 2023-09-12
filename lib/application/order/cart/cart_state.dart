@@ -110,21 +110,27 @@ class CartState with _$CartState {
                 : false;
   }
 
-  double get grandTotal => cartProducts.fold<double>(0, (sum, item) {
-        return item.materialInfo.type.typeBundle
-            ? totalBundlePriceWithTax
-            : item.materialInfo.hidePrice
-                ? 0
-                : sum + (item.unitPriceTotal + taxMaterial);
-      });
+  double get grandTotal =>
+      totalBundlePriceWithTax +
+      cartProducts
+          .where((item) =>
+              !item.materialInfo.hidePrice &&
+              !item.materialInfo.type.typeBundle,)
+          .fold<double>(
+            0,
+            (sum, item) => sum + item.unitPriceTotal + taxMaterial,
+          );
 
-  double get subTotal => cartProducts.fold<double>(0, (sum, item) {
-        return item.materialInfo.type.typeBundle
-            ? totalBundlesPrice
-            : item.materialInfo.hidePrice
-                ? 0
-                : sum + item.finalPriceTotal;
-      });
+  double get subTotal =>
+      totalBundlesPrice +
+      cartProducts
+          .where((item) =>
+              !item.materialInfo.hidePrice &&
+              !item.materialInfo.type.typeBundle,)
+          .fold<double>(
+            0,
+            (sum, item) => sum + item.finalPriceTotal,
+          );
 
   int getQuantityOfProduct({required MaterialNumber productNumber}) {
     return cartProducts
@@ -146,15 +152,17 @@ class CartState with _$CartState {
 
   double get totalMaterialPriceWithTax => totalMaterialsPrice + taxMaterial;
 
-  double get taxMaterial => cartProducts.fold(
+  double get taxMaterial => cartProducts
+      .where((item) =>
+          !item.materialInfo.hidePrice && !item.materialInfo.type.typeBundle,)
+      .fold<double>(
         0,
-        (previousValue, element) => element.materialInfo.type.typeBundle
-            ? previousValue
-            : previousValue +
-                (element.price.finalPrice.getValue() *
-                    element.quantity *
-                    _totalTaxPercentInDouble /
-                    100),
+        (sum, item) =>
+            sum +
+            (item.price.finalPrice.getValue() *
+                item.quantity *
+                _totalTaxPercentInDouble /
+                100),
       );
 
   double itemPrice({required int index}) {
@@ -220,7 +228,10 @@ class CartState with _$CartState {
                 element.salesOrgConfig.vatValue /
                 100),
       );
-
+/*
+    It's there just as a placeholder but for now we don't have much clarity 
+    that we have any tax calculation for bundle materials
+  */
   double get totalBundlePriceWithTax => totalBundlesPrice;
 
   double get totalTax => taxMaterial;
@@ -295,7 +306,6 @@ class CartState with _$CartState {
       ((isOOSOrderPresent && isOOSOrderEligibleToProceed) ||
           !isOOSOrderPresent) &&
       isBundleQuantitySatisfies;
-
 
   List<PriceAggregate> get allMaterial => cartProducts
       .expand(
