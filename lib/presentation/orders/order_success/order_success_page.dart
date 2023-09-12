@@ -15,7 +15,7 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
-import 'package:ezrxmobile/presentation/core/item_address_section.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -25,11 +25,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'widgets/order_success_message.dart';
-part 'widgets/order_detail_header.dart';
-part 'widgets/payer_information.dart';
-part 'widgets/order_summary.dart';
-part 'widgets/order_items.dart';
+part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_message.dart';
+part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_detail_header.dart';
+part 'package:ezrxmobile/presentation/orders/order_success/widgets/payer_information.dart';
+part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_summary.dart';
+part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_items.dart';
 
 class OrderSuccessPage extends StatelessWidget {
   const OrderSuccessPage({Key? key}) : super(key: key);
@@ -92,7 +92,7 @@ class _BodyContent extends StatelessWidget {
                           height: 20.0,
                         ),
                         _OrderDetailHeader(),
-                        const ItemAddressSection(),
+                        AddressInfoSection.order(),
                         const Divider(
                           indent: 0,
                           endIndent: 0,

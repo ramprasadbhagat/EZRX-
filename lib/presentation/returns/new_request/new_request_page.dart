@@ -7,20 +7,20 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/summary_info_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'widgets/attention_widget.dart';
-part 'widgets/next_button.dart';
-part 'widgets/previous_button.dart';
-part 'widgets/submit_button.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/widgets/attention_widget.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/widgets/next_button.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/widgets/previous_button.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/widgets/submit_button.dart';
 
 class NewRequestPage extends StatelessWidget {
   const NewRequestPage({Key? key}) : super(key: key);
@@ -221,8 +221,35 @@ class NewRequestPage extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       enableDrag: false,
-      builder: (_) => const SummaryInfoBottomSheet(
-        actionType: SummaryInfoActionType.returnRequest,
+      builder: (_) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(
+            20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AddressInfoSection.returnRequest(),
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    context.router.pop();
+                  },
+                  child: Text(
+                    'Close'.tr(),
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: ZPColors.white,
+                        ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/item_address_section.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class ReturnSummaryDetailsSection extends StatelessWidget {
           endIndent: 0,
           color: ZPColors.lightGray2,
         ),
-        const ItemAddressSection(),
+        AddressInfoSection.returnRequest(),
       ],
     );
   }

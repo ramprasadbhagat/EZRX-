@@ -15,7 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/item_address_section.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_header_section.dart';
@@ -72,7 +72,7 @@ class _ViewByOrderDetailsPageState extends State<ViewByOrderDetailsPage> {
                       OrderHeaderSection(
                         viewByOrdersItem: widget.viewByOrderHistoryItem,
                       ),
-                      const ItemAddressSection(),
+                      AddressInfoSection.order(),
                       const Divider(
                         indent: 0,
                         height: 20,

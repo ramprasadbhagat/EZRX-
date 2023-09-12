@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/item_address_section.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -151,7 +151,7 @@ class _PaymentInfoSection extends StatelessWidget {
             style: Theme.of(context).textTheme.labelLarge,
           ),
         ),
-        const ItemAddressSection(),
+        AddressInfoSection.payment(),
       ],
     );
   }

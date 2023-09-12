@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/item_address_section.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_details_section.dart';
@@ -13,7 +13,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'widgets/order_item_count.dart';
+part 'package:ezrxmobile/presentation/payments/invoice_details/widgets/order_item_count.dart';
+
 class InvoiceDetailsPage extends StatelessWidget {
   final CreditAndInvoiceItem invoiceItem;
   const InvoiceDetailsPage({
@@ -73,7 +74,7 @@ class InvoiceDetailsPage extends StatelessWidget {
                       InvoiceDetailsSection(
                         invoiceItem: invoiceItem,
                       ),
-                      const ItemAddressSection(),
+                      AddressInfoSection.payment(),
                       const Divider(
                         endIndent: 0,
                         indent: 0,

@@ -5,8 +5,8 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/custom_status_stepper.dart';
-import 'package:ezrxmobile/presentation/core/item_address_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -65,7 +65,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
                           );
                         },
                       ),
-                      const ItemAddressSection(),
+                      AddressInfoSection.order(),
                       const Divider(
                         indent: 0,
                         height: 20,

@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
@@ -9,6 +8,7 @@ import 'package:ezrxmobile/application/order/cart/price_override/price_override_
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -85,7 +85,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       ),
       body: CustomScrollView(
         slivers: [
-          const _SummaryInfo(),
+          SliverToBoxAdapter(child: AddressInfoSection.noAction()),
           const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
           DeliveryInfo(focusNodes: _focusNodes),
           const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
@@ -299,65 +299,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ],
         );
       },
-    );
-  }
-}
-
-class _SummaryInfo extends StatelessWidget {
-  const _SummaryInfo({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
-        color: ZPColors.primary,
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            const SizedBox(height: 16.0),
-            Text(
-              'Customer Code: ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo}'
-                  .tr(),
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              context
-                  .read<CustomerCodeBloc>()
-                  .state
-                  .customerCodeInfo
-                  .fullCustomerAddress,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            const SizedBox(height: 16.0),
-            Text(
-              'Deliver to: ${context.read<CustomerCodeBloc>().state.shipToInfo.shipToCustomerCode}',
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              context.read<CustomerCodeBloc>().state.shipToInfo.deliveryAddress,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

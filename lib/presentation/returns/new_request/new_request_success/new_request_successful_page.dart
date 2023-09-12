@@ -11,7 +11,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/item_address_section.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -23,15 +23,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'widgets/return_request_success_message.dart';
-part 'widgets/addition_info_summary.dart';
-part 'widgets/return_summary.dart';
-part 'widgets/return_item_list.dart';
-part 'widgets/return_item.dart';
-part 'widgets/return_expandable_section.dart';
-part 'widgets/return_material_exp_and_status.dart';
-part 'widgets/expandable_material_details.dart';
-part 'widgets/expandable_return_details.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/return_request_success_message.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/addition_info_summary.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/return_summary.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/return_item_list.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/return_item.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/return_expandable_section.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/return_material_exp_and_status.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/expandable_material_details.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/expandable_return_details.dart';
 
 class NewRequestSuccessfulPage extends StatelessWidget {
   const NewRequestSuccessfulPage({Key? key}) : super(key: key);
@@ -60,30 +60,30 @@ class _BodyContent extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            _ReturnRequestSuccessMessage(),
-            _AdditionInfoSummary(),
-            ItemAddressSection(),
-            SizedBox(height: 16),
-            Divider(
+          children: [
+            const _ReturnRequestSuccessMessage(),
+            const _AdditionInfoSummary(),
+            AddressInfoSection.returnRequest(),
+            const SizedBox(height: 16),
+            const Divider(
               indent: 0,
               thickness: 1,
               endIndent: 0,
               height: 1,
               color: ZPColors.extraLightGrey2,
             ),
-            SizedBox(height: 16),
-            _ReturnSummary(),
-            SizedBox(height: 16),
-            Divider(
+            const SizedBox(height: 16),
+            const _ReturnSummary(),
+            const SizedBox(height: 16),
+            const Divider(
               indent: 0,
               thickness: 1,
               endIndent: 0,
               height: 1,
               color: ZPColors.extraLightGrey2,
             ),
-            SizedBox(height: 16),
-            _ReturnItemList(),
+            const SizedBox(height: 16),
+            const _ReturnItemList(),
           ],
         ),
       ),

@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/item_address_section.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/widgets/selectable_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -37,7 +37,7 @@ class PaymentMethodTab extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
-            const ItemAddressSection(),
+            AddressInfoSection.payment(),
             const SizedBox(height: 20),
             ...state.allSelectedItems.map(
               (e) => _InvoiceCreditItemTile(customerOpenItem: e),
