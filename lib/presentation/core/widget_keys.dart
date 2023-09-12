@@ -499,6 +499,7 @@ class WidgetKeys {
   static const Key specialInstructionsField = Key('specialInstructionsField');
   static const Key fromInvoiceDateField = Key('fromInvoiceDateField');
   static const Key toInvoiceDateField = Key('toInvoiceDateField');
+  static const Key returnDetailsListView = Key('returnDetailsListView');
 
   //============================================================
   //  Contact Us Page

@@ -44,24 +44,23 @@ class ReturnDetailsTab extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.selectedItems != current.selectedItems,
       builder: (context, state) {
-        return Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
-            itemCount: state.selectedItems.length,
-            itemBuilder: (
-              context,
-              index,
-            ) {
-              final item = state.selectedItems[index];
-
-              return _ReturnMaterialWidget(
-                item: item,
-                detail: state.getReturnItemDetails(item.uuid),
-              );
-            },
+        return ListView.builder(
+          key: WidgetKeys.returnDetailsListView,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
           ),
+          itemCount: state.selectedItems.length,
+          itemBuilder: (
+            context,
+            index,
+          ) {
+            final item = state.selectedItems[index];
+
+            return _ReturnMaterialWidget(
+              item: item,
+              detail: state.getReturnItemDetails(item.uuid),
+            );
+          },
         );
       },
     );
