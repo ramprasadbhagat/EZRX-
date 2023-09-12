@@ -9,15 +9,12 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/access_right.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
+import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -148,43 +145,9 @@ void main() {
     testWidgets(
       ' Add To cart button disable test when order toggle is disable ',
       (tester) async {
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: User.empty().copyWith(
-              username: Username('fakeUser'),
-              role: Role(
-                type: RoleType('client_user'),
-                description: '',
-                id: '',
-                name: '',
-              ),
-              disableCreateOrder: true,
-              accessRight: AccessRight.empty().copyWith(
-                orders: true,
-              ),
-            ),
-          ),
-        );
-        when(() => productDetailBloc.state).thenReturn(
-          ProductDetailState.initial().copyWith(
-            isFetching: false,
-          ),
-        );
-        when(() => mockCartBloc.state).thenReturn(
-          CartState.initial().copyWith(
-            isUpserting: false,
-          ),
-        );
         when(() => materialPriceBlocMock.state).thenReturn(
           MaterialPriceState.initial().copyWith(
             materialPrice: mockPriceList,
-          ),
-        );
-        when(() => mockSalesOrgBloc.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              materialWithoutPrice: true,
-            ),
           ),
         );
 
@@ -201,6 +164,29 @@ void main() {
         expect(
           (tester.widget(addToCartButton) as ElevatedButton).enabled,
           false,
+        );
+      },
+    );
+
+    testWidgets(
+      ' Product details page offer tag',
+      (tester) async {
+        when(() => productDetailBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material'),
+              ),
+            ),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final offerLabel = find.byType(OfferLabel);
+
+        expect(
+          offerLabel,
+          findsOneWidget,
         );
       },
     );

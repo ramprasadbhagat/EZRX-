@@ -219,4 +219,22 @@ void main() {
       },
     );
   });
+
+  group('OosMaterial test', () {
+    test(
+      'OosMaterial true oosMaterialTag OSS-Preorder',
+      () {
+        final oosMaterial = OosMaterial(true);
+        expect(oosMaterial.oosMaterialTag, 'OSS-Preorder');
+      },
+    );
+
+    test(
+      'OosMaterial false oosMaterialTag Out of stock',
+      () {
+        final oosMaterial = OosMaterial(false);
+        expect(oosMaterial.oosMaterialTag, 'Out of stock');
+      },
+    );
+  });
 }

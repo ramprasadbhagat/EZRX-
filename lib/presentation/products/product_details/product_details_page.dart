@@ -27,6 +27,7 @@ import 'package:ezrxmobile/presentation/products/product_details/widget/material
 import 'package:ezrxmobile/presentation/products/product_details/widget/similar_product.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/stock_info.dart';
 import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
+import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -182,8 +183,20 @@ class _BodyContent extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (displayOffers)
+              OfferLabel(
+                materialInfo: state.productDetailAggregate.materialInfo,
+                textStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ZPColors.white,
+                    ),
+                iconSize: 20,
+              ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.only(
+                left: 16,
+                top: 5,
+                bottom: 20,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

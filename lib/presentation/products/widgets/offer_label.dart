@@ -9,11 +9,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OfferLabel extends StatelessWidget {
   final MaterialInfo materialInfo;
-
-  const OfferLabel({required this.materialInfo, Key? key}) : super(key: key);
+  final TextStyle? textStyle;
+  final double iconSize;
+  const OfferLabel({
+    required this.materialInfo,
+    this.textStyle,
+    this.iconSize = 15,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final style = textStyle ??
+        Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: ZPColors.white,
+            );
+
     return context
                 .read<MaterialPriceBloc>()
                 .state
@@ -40,7 +52,7 @@ class OfferLabel extends StatelessWidget {
               top: 10,
             ),
             decoration: const BoxDecoration(
-              color: ZPColors.warning,
+              color: ZPColors.orange,
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(20.0),
                 bottomRight: Radius.circular(20.0),
@@ -49,9 +61,9 @@ class OfferLabel extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
+                Icon(
                   Icons.local_offer_outlined,
-                  size: 15,
+                  size: iconSize,
                   color: ZPColors.white,
                 ),
                 const SizedBox(
@@ -59,10 +71,7 @@ class OfferLabel extends StatelessWidget {
                 ),
                 Text(
                   'On offer'.tr(),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: ZPColors.white,
-                      ),
+                  style: style,
                 ),
               ],
             ),

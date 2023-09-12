@@ -478,13 +478,10 @@ String getCountryFlag(String country) {
   return 'assets/svg/flags/${country.toLowerCase()}.svg';
 }
 
-String getOosMaterialTag(bool value) {
-  return value ? 'Preorder' : 'Out of stock';
-}
+String getOosMaterialTag(bool value) => value ? 'OSS-Preorder' : 'Out of stock';
 
-Color getOosMaterialTagColor(bool value) {
-  return value ? ZPColors.orange : ZPColors.lightGray;
-}
+Color getOosMaterialTagColor(bool value) =>
+    value ? ZPColors.warning : ZPColors.lightGray;
 
 Color getOosMaterialTagLabelColor(bool value) {
   return value ? ZPColors.darkerGrey : ZPColors.black;
