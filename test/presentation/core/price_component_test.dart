@@ -48,10 +48,10 @@ void main() {
       );
       expect(priceComponentWidget, findsOneWidget);
       expect(
-          find.text(
-            '${salesOrgConfig.currency.code} 50.99',
-            findRichText: true,
-          ),
+        find.text(
+          '${salesOrgConfig.currency.code} 50.99',
+          findRichText: true,
+        ),
         findsOneWidget,
       );
     });
@@ -67,10 +67,10 @@ void main() {
       await tester.pumpWidget(getWidget());
       expect(priceComponentWidget, findsOneWidget);
       expect(
-          find.text(
-            '- ${salesOrgConfig.currency.code} 25.50',
-            findRichText: true,
-          ),
+        find.text(
+          '${salesOrgConfig.currency.code} 25.50',
+          findRichText: true,
+        ),
         findsOneWidget,
       );
     });
@@ -86,10 +86,10 @@ void main() {
       );
       expect(priceComponentWidget, findsOneWidget);
       expect(
-          find.text(
-            '${salesOrgConfig.currency.code} ****.**',
-            findRichText: true,
-          ),
+        find.text(
+          '${salesOrgConfig.currency.code} *,***.**',
+          findRichText: true,
+        ),
         findsOneWidget,
       );
     });
@@ -105,10 +105,48 @@ void main() {
       );
       expect(priceComponentWidget, findsOneWidget);
       expect(
-          find.text(
-            '$label${salesOrgConfig.currency.code} 75.00',
-            findRichText: true,
-          ),
+        find.text(
+          '$label${salesOrgConfig.currency.code} 75.00',
+          findRichText: true,
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('PriceComponent displays negative price correctly',
+        (WidgetTester tester) async {
+      price = '-50.00';
+      label = 'Total Price: ';
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final priceComponentWidget = find.byKey(
+        WidgetKeys.priceComponent,
+      );
+      expect(priceComponentWidget, findsOneWidget);
+      expect(
+        find.text(
+          '$label${salesOrgConfig.currency.code} -50.00',
+          findRichText: true,
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('PriceComponent obscures negative price when obscured is true',
+        (WidgetTester tester) async {
+      price = '-50.00';
+      obscured = true;
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final priceComponentWidget = find.byKey(
+        WidgetKeys.priceComponent,
+      );
+      expect(priceComponentWidget, findsOneWidget);
+      expect(
+        find.text(
+          '${salesOrgConfig.currency.code} **.**',
+          findRichText: true,
+        ),
         findsOneWidget,
       );
     });

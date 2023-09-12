@@ -37,8 +37,11 @@ class PriceComponent extends StatelessWidget {
 
     final priceValue = notPrice
         ? price.tr()
-        : StringUtils.displayPrice(salesOrgConfig, double.parse(price));
-    final obscuredValue = price.replaceAll(RegExp(r'[0-9]'), '*');
+        : StringUtils.priceComponentDisplayPrice(
+            salesOrgConfig,
+            double.parse(price),
+            obscured,
+          );
 
     if (title.isNotEmpty) {
       textSpans.add(
@@ -51,7 +54,7 @@ class PriceComponent extends StatelessWidget {
     if (notPrice) {
       textSpans.add(
         TextSpan(
-          text: obscured ? obscuredValue : priceValue,
+          text: priceValue,
           style: priceTextStyle,
         ),
       );
@@ -67,6 +70,7 @@ class PriceComponent extends StatelessWidget {
       ),
     );
     //amount
+    final obscuredValue = amount.replaceAll(RegExp(r'[0-9]'), '*');
     textSpans.add(
       TextSpan(
         text: obscured ? obscuredValue : amount,
@@ -82,9 +86,7 @@ class PriceComponent extends StatelessWidget {
     return RichText(
       key: WidgetKeys.priceComponent,
       text: TextSpan(
-        children: [
-          ..._getTextSpan(context),
-        ],
+        children: _getTextSpan(context),
       ),
       overflow: TextOverflow.ellipsis,
     );

@@ -9,8 +9,24 @@ class StringUtils {
     SalesOrganisationConfigs salesOrgConfig,
     double price,
   ) {
+    // Format the price, if price is negative applicable place a '-' sign leading sales org,
+    // used where need to display price value on positive manner.
     if (price.isNegative) {
       return '- ${salesOrgConfig.currency.code} ${formatter.format(price * -1)}';
+    }
+
+    return '${salesOrgConfig.currency.code} ${formatter.format(price)}';
+  }
+
+  static String priceComponentDisplayPrice(
+    SalesOrganisationConfigs salesOrgConfig,
+    double price,
+    bool signedPositive,
+  ) {
+    // Format the price, format the price base on signed parameter,
+    // only use for PriceComponent.
+    if (signedPositive && price.isNegative) {
+      return '${salesOrgConfig.currency.code} ${formatter.format(price * -1)}';
     }
 
     return '${salesOrgConfig.currency.code} ${formatter.format(price)}';
