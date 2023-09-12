@@ -39,7 +39,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details
 import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 
-
 class OrderRepository implements IOrderRepository {
   final Config config;
   final OrderLocalDataSource localDataSource;
@@ -253,6 +252,7 @@ class OrderRepository implements IOrderRepository {
     required List<PriceAggregate> cartProducts,
     required double grandTotal,
     required double orderValue,
+    required double totalTax,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required DeliveryInfoData data,
@@ -265,6 +265,7 @@ class OrderRepository implements IOrderRepository {
       data: data,
       cartProducts: cartProducts,
       orderValue: orderValue,
+      totalTax: totalTax,
       customerCodeInfo: customerCodeInfo,
       salesOrganisation: salesOrganisation,
       configs: configs,
@@ -355,7 +356,7 @@ class OrderRepository implements IOrderRepository {
     }
     for (var i = 1; i <= apiRetryCounter; i++) {
       await Future.delayed(const Duration(seconds: 2));
-  
+
       try {
         final orderHistoryDetails = user.role.type.isSalesRepRole
             ? await orderHistoryDetailsRemoteDataSource
@@ -472,6 +473,7 @@ class OrderRepository implements IOrderRepository {
     required DeliveryInfoData data,
     required List<PriceAggregate> cartProducts,
     required double orderValue,
+    required double totalTax,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs configs,
@@ -499,6 +501,7 @@ class OrderRepository implements IOrderRepository {
       products: _getMaterialInfoList(cartProducts: cartProducts),
       poDocuments: data.poDocuments,
       orderValue: orderValue,
+      totalTax: totalTax,
       language: user.settings.languagePreference.languageCode,
       paymentMethod: 'Bank Transfer',
     );

@@ -44,6 +44,8 @@ class MaterialInfo with _$MaterialInfo {
     required String itemRegistrationNumber,
     required String genericMaterialName,
     required String remarks,
+    required bool promoStatus,
+    required String promoType,
 
     //TODO: remove field from v2
     required String itemBrand,
@@ -100,6 +102,8 @@ class MaterialInfo with _$MaterialInfo {
         countryData: CountryData.empty(),
         parentID: '',
         counterOfferDetails: RequestCounterOfferDetails.empty(),
+        promoStatus: false,
+        promoType: '',
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(

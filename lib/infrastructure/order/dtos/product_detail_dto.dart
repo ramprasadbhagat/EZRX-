@@ -44,6 +44,9 @@ class ProductDetailDto with _$ProductDetailDto {
         required String governmentMaterialCode,
     @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
         required String itemRegistrationNumber,
+    @JsonKey(name: 'promoType', defaultValue: '') required String promoType,
+    @JsonKey(name: 'promoStatus', defaultValue: false)
+        required bool promoStatus,
   }) = _ProductDetailDto;
 
   MaterialInfo toDomain() => MaterialInfo(
@@ -90,6 +93,8 @@ class ProductDetailDto with _$ProductDetailDto {
         taxes: [],
         parentID: '',
         counterOfferDetails: RequestCounterOfferDetails.empty(),
+        promoStatus: promoStatus,
+        promoType: promoType,
       );
 
   factory ProductDetailDto.fromJson(Map<String, dynamic> json) =>

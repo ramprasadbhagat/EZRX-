@@ -52,6 +52,10 @@ mixin _$ProductDetailDto {
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'promoType', defaultValue: '')
+  String get promoType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'promoStatus', defaultValue: false)
+  bool get promoStatus => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,29 +70,42 @@ abstract class $ProductDetailDtoCopyWith<$Res> {
       _$ProductDetailDtoCopyWithImpl<$Res, ProductDetailDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      {@JsonKey(name: 'materialNumber', defaultValue: '')
+          String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
-      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+          String materialDescription,
+      @JsonKey(name: 'principalCode', defaultValue: '')
+          String principalCode,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          String principalName,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      String unitOfMeasurement,
+          String unitOfMeasurement,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      String therapeuticClass,
+          String therapeuticClass,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-      String genericMaterialName,
-      @JsonKey(name: 'itemBrand', defaultValue: '') String itemBrand,
-      @JsonKey(name: 'materialBrand', defaultValue: '') String materialBrand,
-      @JsonKey(name: 'isFavourite', defaultValue: false) bool isFavourite,
+          String genericMaterialName,
+      @JsonKey(name: 'itemBrand', defaultValue: '')
+          String itemBrand,
+      @JsonKey(name: 'materialBrand', defaultValue: '')
+          String materialBrand,
+      @JsonKey(name: 'isFavourite', defaultValue: false)
+          bool isFavourite,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      String defaultMaterialDescription,
-      @JsonKey(name: 'country', defaultValue: '') String country,
-      @JsonKey(name: 'countryName', defaultValue: '') String countryName,
-      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
+          String defaultMaterialDescription,
+      @JsonKey(name: 'country', defaultValue: '')
+          String country,
+      @JsonKey(name: 'countryName', defaultValue: '')
+          String countryName,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          bool hidePrice,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      String governmentMaterialCode,
+          String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      String itemRegistrationNumber});
+          String itemRegistrationNumber,
+      @JsonKey(name: 'promoType', defaultValue: '')
+          String promoType,
+      @JsonKey(name: 'promoStatus', defaultValue: false)
+          bool promoStatus});
 }
 
 /// @nodoc
@@ -120,6 +137,8 @@ class _$ProductDetailDtoCopyWithImpl<$Res, $Val extends ProductDetailDto>
     Object? hidePrice = null,
     Object? governmentMaterialCode = null,
     Object? itemRegistrationNumber = null,
+    Object? promoType = null,
+    Object? promoStatus = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -186,6 +205,14 @@ class _$ProductDetailDtoCopyWithImpl<$Res, $Val extends ProductDetailDto>
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      promoType: null == promoType
+          ? _value.promoType
+          : promoType // ignore: cast_nullable_to_non_nullable
+              as String,
+      promoStatus: null == promoStatus
+          ? _value.promoStatus
+          : promoStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -199,29 +226,42 @@ abstract class _$$_ProductDetailDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      {@JsonKey(name: 'materialNumber', defaultValue: '')
+          String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
-      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+          String materialDescription,
+      @JsonKey(name: 'principalCode', defaultValue: '')
+          String principalCode,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          String principalName,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      String unitOfMeasurement,
+          String unitOfMeasurement,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      String therapeuticClass,
+          String therapeuticClass,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-      String genericMaterialName,
-      @JsonKey(name: 'itemBrand', defaultValue: '') String itemBrand,
-      @JsonKey(name: 'materialBrand', defaultValue: '') String materialBrand,
-      @JsonKey(name: 'isFavourite', defaultValue: false) bool isFavourite,
+          String genericMaterialName,
+      @JsonKey(name: 'itemBrand', defaultValue: '')
+          String itemBrand,
+      @JsonKey(name: 'materialBrand', defaultValue: '')
+          String materialBrand,
+      @JsonKey(name: 'isFavourite', defaultValue: false)
+          bool isFavourite,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      String defaultMaterialDescription,
-      @JsonKey(name: 'country', defaultValue: '') String country,
-      @JsonKey(name: 'countryName', defaultValue: '') String countryName,
-      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
+          String defaultMaterialDescription,
+      @JsonKey(name: 'country', defaultValue: '')
+          String country,
+      @JsonKey(name: 'countryName', defaultValue: '')
+          String countryName,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          bool hidePrice,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      String governmentMaterialCode,
+          String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      String itemRegistrationNumber});
+          String itemRegistrationNumber,
+      @JsonKey(name: 'promoType', defaultValue: '')
+          String promoType,
+      @JsonKey(name: 'promoStatus', defaultValue: false)
+          bool promoStatus});
 }
 
 /// @nodoc
@@ -251,6 +291,8 @@ class __$$_ProductDetailDtoCopyWithImpl<$Res>
     Object? hidePrice = null,
     Object? governmentMaterialCode = null,
     Object? itemRegistrationNumber = null,
+    Object? promoType = null,
+    Object? promoStatus = null,
   }) {
     return _then(_$_ProductDetailDto(
       materialNumber: null == materialNumber
@@ -317,6 +359,14 @@ class __$$_ProductDetailDtoCopyWithImpl<$Res>
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      promoType: null == promoType
+          ? _value.promoType
+          : promoType // ignore: cast_nullable_to_non_nullable
+              as String,
+      promoStatus: null == promoStatus
+          ? _value.promoStatus
+          : promoStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -326,33 +376,41 @@ class __$$_ProductDetailDtoCopyWithImpl<$Res>
 class _$_ProductDetailDto extends _ProductDetailDto {
   _$_ProductDetailDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-      required this.materialNumber,
+          required this.materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      required this.materialDescription,
+          required this.materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
-      required this.principalCode,
+          required this.principalCode,
       @JsonKey(name: 'principalName', defaultValue: '')
-      required this.principalName,
+          required this.principalName,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      required this.unitOfMeasurement,
+          required this.unitOfMeasurement,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      required this.therapeuticClass,
+          required this.therapeuticClass,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-      required this.genericMaterialName,
-      @JsonKey(name: 'itemBrand', defaultValue: '') required this.itemBrand,
+          required this.genericMaterialName,
+      @JsonKey(name: 'itemBrand', defaultValue: '')
+          required this.itemBrand,
       @JsonKey(name: 'materialBrand', defaultValue: '')
-      required this.materialBrand,
+          required this.materialBrand,
       @JsonKey(name: 'isFavourite', defaultValue: false)
-      required this.isFavourite,
+          required this.isFavourite,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      required this.defaultMaterialDescription,
-      @JsonKey(name: 'country', defaultValue: '') required this.country,
-      @JsonKey(name: 'countryName', defaultValue: '') required this.countryName,
-      @JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
+          required this.defaultMaterialDescription,
+      @JsonKey(name: 'country', defaultValue: '')
+          required this.country,
+      @JsonKey(name: 'countryName', defaultValue: '')
+          required this.countryName,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+          required this.hidePrice,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      required this.governmentMaterialCode,
+          required this.governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      required this.itemRegistrationNumber})
+          required this.itemRegistrationNumber,
+      @JsonKey(name: 'promoType', defaultValue: '')
+          required this.promoType,
+      @JsonKey(name: 'promoStatus', defaultValue: false)
+          required this.promoStatus})
       : super._();
 
   factory _$_ProductDetailDto.fromJson(Map<String, dynamic> json) =>
@@ -406,10 +464,16 @@ class _$_ProductDetailDto extends _ProductDetailDto {
   @override
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   final String itemRegistrationNumber;
+  @override
+  @JsonKey(name: 'promoType', defaultValue: '')
+  final String promoType;
+  @override
+  @JsonKey(name: 'promoStatus', defaultValue: false)
+  final bool promoStatus;
 
   @override
   String toString() {
-    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber)';
+    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, promoType: $promoType, promoStatus: $promoStatus)';
   }
 
   @override
@@ -449,7 +513,11 @@ class _$_ProductDetailDto extends _ProductDetailDto {
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode) &&
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
-                other.itemRegistrationNumber == itemRegistrationNumber));
+                other.itemRegistrationNumber == itemRegistrationNumber) &&
+            (identical(other.promoType, promoType) ||
+                other.promoType == promoType) &&
+            (identical(other.promoStatus, promoStatus) ||
+                other.promoStatus == promoStatus));
   }
 
   @JsonKey(ignore: true)
@@ -471,7 +539,9 @@ class _$_ProductDetailDto extends _ProductDetailDto {
       countryName,
       hidePrice,
       governmentMaterialCode,
-      itemRegistrationNumber);
+      itemRegistrationNumber,
+      promoType,
+      promoStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -490,36 +560,41 @@ class _$_ProductDetailDto extends _ProductDetailDto {
 abstract class _ProductDetailDto extends ProductDetailDto {
   factory _ProductDetailDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-      required final String materialNumber,
+          required final String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      required final String materialDescription,
+          required final String materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
-      required final String principalCode,
+          required final String principalCode,
       @JsonKey(name: 'principalName', defaultValue: '')
-      required final String principalName,
+          required final String principalName,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      required final String unitOfMeasurement,
+          required final String unitOfMeasurement,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      required final String therapeuticClass,
+          required final String therapeuticClass,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-      required final String genericMaterialName,
+          required final String genericMaterialName,
       @JsonKey(name: 'itemBrand', defaultValue: '')
-      required final String itemBrand,
+          required final String itemBrand,
       @JsonKey(name: 'materialBrand', defaultValue: '')
-      required final String materialBrand,
+          required final String materialBrand,
       @JsonKey(name: 'isFavourite', defaultValue: false)
-      required final bool isFavourite,
+          required final bool isFavourite,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      required final String defaultMaterialDescription,
-      @JsonKey(name: 'country', defaultValue: '') required final String country,
+          required final String defaultMaterialDescription,
+      @JsonKey(name: 'country', defaultValue: '')
+          required final String country,
       @JsonKey(name: 'countryName', defaultValue: '')
-      required final String countryName,
+          required final String countryName,
       @JsonKey(name: 'hidePrice', defaultValue: false)
-      required final bool hidePrice,
+          required final bool hidePrice,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      required final String governmentMaterialCode,
+          required final String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      required final String itemRegistrationNumber}) = _$_ProductDetailDto;
+          required final String itemRegistrationNumber,
+      @JsonKey(name: 'promoType', defaultValue: '')
+          required final String promoType,
+      @JsonKey(name: 'promoStatus', defaultValue: false)
+          required final bool promoStatus}) = _$_ProductDetailDto;
   _ProductDetailDto._() : super._();
 
   factory _ProductDetailDto.fromJson(Map<String, dynamic> json) =
@@ -573,6 +648,12 @@ abstract class _ProductDetailDto extends ProductDetailDto {
   @override
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber;
+  @override
+  @JsonKey(name: 'promoType', defaultValue: '')
+  String get promoType;
+  @override
+  @JsonKey(name: 'promoStatus', defaultValue: false)
+  bool get promoStatus;
   @override
   @JsonKey(ignore: true)
   _$$_ProductDetailDtoCopyWith<_$_ProductDetailDto> get copyWith =>

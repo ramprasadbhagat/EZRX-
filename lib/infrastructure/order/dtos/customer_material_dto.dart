@@ -102,6 +102,8 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         countryData: CountryData.empty(),
         parentID: '',
         counterOfferDetails: RequestCounterOfferDetails.empty(),
+        promoStatus: false,
+        promoType: '',
       );
 
   factory CustomerMaterialDto.fromJson(Map<String, dynamic> json) =>

@@ -25,6 +25,7 @@ mixin _$SubmitOrder {
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
   String get specialInstructions => throw _privateConstructorUsedError;
   double get orderValue => throw _privateConstructorUsedError;
+  double get totalTax => throw _privateConstructorUsedError;
   String get telephone => throw _privateConstructorUsedError;
   String get referenceNotes => throw _privateConstructorUsedError;
   String get paymentTerms => throw _privateConstructorUsedError;
@@ -55,6 +56,7 @@ abstract class $SubmitOrderCopyWith<$Res> {
       String requestedDeliveryDate,
       String specialInstructions,
       double orderValue,
+      double totalTax,
       String telephone,
       String referenceNotes,
       String paymentTerms,
@@ -89,6 +91,7 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
     Object? requestedDeliveryDate = null,
     Object? specialInstructions = null,
     Object? orderValue = null,
+    Object? totalTax = null,
     Object? telephone = null,
     Object? referenceNotes = null,
     Object? paymentTerms = null,
@@ -134,6 +137,10 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
       orderValue: null == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
       telephone: null == telephone
           ? _value.telephone
@@ -197,6 +204,7 @@ abstract class _$$_SubmitOrderCustomerCopyWith<$Res>
       String requestedDeliveryDate,
       String specialInstructions,
       double orderValue,
+      double totalTax,
       String telephone,
       String referenceNotes,
       String paymentTerms,
@@ -230,6 +238,7 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
     Object? requestedDeliveryDate = null,
     Object? specialInstructions = null,
     Object? orderValue = null,
+    Object? totalTax = null,
     Object? telephone = null,
     Object? referenceNotes = null,
     Object? paymentTerms = null,
@@ -275,6 +284,10 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
       orderValue: null == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
       telephone: null == telephone
           ? _value.telephone
@@ -325,6 +338,7 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
       required this.requestedDeliveryDate,
       required this.specialInstructions,
       required this.orderValue,
+      required this.totalTax,
       required this.telephone,
       required this.referenceNotes,
       required this.paymentTerms,
@@ -362,6 +376,8 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   @override
   final double orderValue;
   @override
+  final double totalTax;
+  @override
   final String telephone;
   @override
   final String referenceNotes;
@@ -386,7 +402,7 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
 
   @override
   String toString() {
-    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod)';
+    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod)';
   }
 
   @override
@@ -410,6 +426,8 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
                 other.specialInstructions == specialInstructions) &&
             (identical(other.orderValue, orderValue) ||
                 other.orderValue == orderValue) &&
+            (identical(other.totalTax, totalTax) ||
+                other.totalTax == totalTax) &&
             (identical(other.telephone, telephone) ||
                 other.telephone == telephone) &&
             (identical(other.referenceNotes, referenceNotes) ||
@@ -440,6 +458,7 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
       requestedDeliveryDate,
       specialInstructions,
       orderValue,
+      totalTax,
       telephone,
       referenceNotes,
       paymentTerms,
@@ -468,6 +487,7 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
       required final String requestedDeliveryDate,
       required final String specialInstructions,
       required final double orderValue,
+      required final double totalTax,
       required final String telephone,
       required final String referenceNotes,
       required final String paymentTerms,
@@ -496,6 +516,8 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
   String get specialInstructions;
   @override
   double get orderValue;
+  @override
+  double get totalTax;
   @override
   String get telephone;
   @override

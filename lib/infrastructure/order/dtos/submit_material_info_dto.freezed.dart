@@ -43,6 +43,14 @@ mixin _$SubmitMaterialInfoDto {
   String get productType => throw _privateConstructorUsedError;
   @JsonKey(name: 'price', defaultValue: 0)
   double get price => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tax', defaultValue: 0)
+  double get tax => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Mrp', defaultValue: 0)
+  double get mrp => throw _privateConstructorUsedError;
+  @JsonKey(name: 'PromoStatus', defaultValue: false)
+  bool get promoStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'PromoType', defaultValue: '')
+  String get promoType => throw _privateConstructorUsedError;
 
   ///Todo: consider to delete it
   @JsonKey(
@@ -65,24 +73,30 @@ abstract class $SubmitMaterialInfoDtoCopyWith<$Res> {
       _$SubmitMaterialInfoDtoCopyWithImpl<$Res, SubmitMaterialInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
-      @JsonKey(name: 'qty', defaultValue: 0)
-          int qty,
+      {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'qty', defaultValue: 0) int qty,
       @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
-          List<SubmitMaterialItemBonusDto> bonuses,
-      @JsonKey(name: 'Comment', defaultValue: '')
-          String comment,
-      @JsonKey(name: 'ParentID', defaultValue: '')
-          String parentId,
-      @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
-          MaterialItemOverrideDto materialItemOverride,
-      @JsonKey(name: 'ProductType', defaultValue: '')
-          String productType,
-      @JsonKey(name: 'price', defaultValue: 0)
-          double price,
-      @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
-          String batch});
+      List<SubmitMaterialItemBonusDto> bonuses,
+      @JsonKey(name: 'Comment', defaultValue: '') String comment,
+      @JsonKey(name: 'ParentID', defaultValue: '') String parentId,
+      @JsonKey(
+          name: 'override',
+          toJson: overrideTojson,
+          readValue: materialItemOverrideread,
+          includeIfNull: false)
+      MaterialItemOverrideDto materialItemOverride,
+      @JsonKey(name: 'ProductType', defaultValue: '') String productType,
+      @JsonKey(name: 'price', defaultValue: 0) double price,
+      @JsonKey(name: 'tax', defaultValue: 0) double tax,
+      @JsonKey(name: 'Mrp', defaultValue: 0) double mrp,
+      @JsonKey(name: 'PromoStatus', defaultValue: false) bool promoStatus,
+      @JsonKey(name: 'PromoType', defaultValue: '') String promoType,
+      @JsonKey(
+          name: 'batch',
+          defaultValue: '',
+          toJson: overrideBatchJson,
+          includeIfNull: false)
+      String batch});
 
   $MaterialItemOverrideDtoCopyWith<$Res> get materialItemOverride;
 }
@@ -109,6 +123,10 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
     Object? materialItemOverride = null,
     Object? productType = null,
     Object? price = null,
+    Object? tax = null,
+    Object? mrp = null,
+    Object? promoStatus = null,
+    Object? promoType = null,
     Object? batch = null,
   }) {
     return _then(_value.copyWith(
@@ -144,6 +162,22 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
+      mrp: null == mrp
+          ? _value.mrp
+          : mrp // ignore: cast_nullable_to_non_nullable
+              as double,
+      promoStatus: null == promoStatus
+          ? _value.promoStatus
+          : promoStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      promoType: null == promoType
+          ? _value.promoType
+          : promoType // ignore: cast_nullable_to_non_nullable
+              as String,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -170,24 +204,30 @@ abstract class _$$_SubmitMaterialInfoDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
-      @JsonKey(name: 'qty', defaultValue: 0)
-          int qty,
+      {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'qty', defaultValue: 0) int qty,
       @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
-          List<SubmitMaterialItemBonusDto> bonuses,
-      @JsonKey(name: 'Comment', defaultValue: '')
-          String comment,
-      @JsonKey(name: 'ParentID', defaultValue: '')
-          String parentId,
-      @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
-          MaterialItemOverrideDto materialItemOverride,
-      @JsonKey(name: 'ProductType', defaultValue: '')
-          String productType,
-      @JsonKey(name: 'price', defaultValue: 0)
-          double price,
-      @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
-          String batch});
+      List<SubmitMaterialItemBonusDto> bonuses,
+      @JsonKey(name: 'Comment', defaultValue: '') String comment,
+      @JsonKey(name: 'ParentID', defaultValue: '') String parentId,
+      @JsonKey(
+          name: 'override',
+          toJson: overrideTojson,
+          readValue: materialItemOverrideread,
+          includeIfNull: false)
+      MaterialItemOverrideDto materialItemOverride,
+      @JsonKey(name: 'ProductType', defaultValue: '') String productType,
+      @JsonKey(name: 'price', defaultValue: 0) double price,
+      @JsonKey(name: 'tax', defaultValue: 0) double tax,
+      @JsonKey(name: 'Mrp', defaultValue: 0) double mrp,
+      @JsonKey(name: 'PromoStatus', defaultValue: false) bool promoStatus,
+      @JsonKey(name: 'PromoType', defaultValue: '') String promoType,
+      @JsonKey(
+          name: 'batch',
+          defaultValue: '',
+          toJson: overrideBatchJson,
+          includeIfNull: false)
+      String batch});
 
   @override
   $MaterialItemOverrideDtoCopyWith<$Res> get materialItemOverride;
@@ -212,6 +252,10 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
     Object? materialItemOverride = null,
     Object? productType = null,
     Object? price = null,
+    Object? tax = null,
+    Object? mrp = null,
+    Object? promoStatus = null,
+    Object? promoType = null,
     Object? batch = null,
   }) {
     return _then(_$_SubmitMaterialInfoDto(
@@ -247,6 +291,22 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
+      mrp: null == mrp
+          ? _value.mrp
+          : mrp // ignore: cast_nullable_to_non_nullable
+              as double,
+      promoStatus: null == promoStatus
+          ? _value.promoStatus
+          : promoStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      promoType: null == promoType
+          ? _value.promoType
+          : promoType // ignore: cast_nullable_to_non_nullable
+              as String,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -260,23 +320,31 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
 class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
   const _$_SubmitMaterialInfoDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber,
-      @JsonKey(name: 'qty', defaultValue: 0)
-          required this.qty,
+      required this.materialNumber,
+      @JsonKey(name: 'qty', defaultValue: 0) required this.qty,
       @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
-          required final List<SubmitMaterialItemBonusDto> bonuses,
-      @JsonKey(name: 'Comment', defaultValue: '')
-          required this.comment,
-      @JsonKey(name: 'ParentID', defaultValue: '')
-          required this.parentId,
-      @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
-          required this.materialItemOverride,
-      @JsonKey(name: 'ProductType', defaultValue: '')
-          required this.productType,
-      @JsonKey(name: 'price', defaultValue: 0)
-          required this.price,
-      @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
-          required this.batch})
+      required final List<SubmitMaterialItemBonusDto> bonuses,
+      @JsonKey(name: 'Comment', defaultValue: '') required this.comment,
+      @JsonKey(name: 'ParentID', defaultValue: '') required this.parentId,
+      @JsonKey(
+          name: 'override',
+          toJson: overrideTojson,
+          readValue: materialItemOverrideread,
+          includeIfNull: false)
+      required this.materialItemOverride,
+      @JsonKey(name: 'ProductType', defaultValue: '') required this.productType,
+      @JsonKey(name: 'price', defaultValue: 0) required this.price,
+      @JsonKey(name: 'tax', defaultValue: 0) required this.tax,
+      @JsonKey(name: 'Mrp', defaultValue: 0) required this.mrp,
+      @JsonKey(name: 'PromoStatus', defaultValue: false)
+      required this.promoStatus,
+      @JsonKey(name: 'PromoType', defaultValue: '') required this.promoType,
+      @JsonKey(
+          name: 'batch',
+          defaultValue: '',
+          toJson: overrideBatchJson,
+          includeIfNull: false)
+      required this.batch})
       : _bonuses = bonuses,
         super._();
 
@@ -317,6 +385,18 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
   @override
   @JsonKey(name: 'price', defaultValue: 0)
   final double price;
+  @override
+  @JsonKey(name: 'tax', defaultValue: 0)
+  final double tax;
+  @override
+  @JsonKey(name: 'Mrp', defaultValue: 0)
+  final double mrp;
+  @override
+  @JsonKey(name: 'PromoStatus', defaultValue: false)
+  final bool promoStatus;
+  @override
+  @JsonKey(name: 'PromoType', defaultValue: '')
+  final String promoType;
 
   ///Todo: consider to delete it
   @override
@@ -329,7 +409,7 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
 
   @override
   String toString() {
-    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, parentId: $parentId, materialItemOverride: $materialItemOverride, productType: $productType, price: $price, batch: $batch)';
+    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, parentId: $parentId, materialItemOverride: $materialItemOverride, productType: $productType, price: $price, tax: $tax, mrp: $mrp, promoStatus: $promoStatus, promoType: $promoType, batch: $batch)';
   }
 
   @override
@@ -349,6 +429,12 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
             (identical(other.productType, productType) ||
                 other.productType == productType) &&
             (identical(other.price, price) || other.price == price) &&
+            (identical(other.tax, tax) || other.tax == tax) &&
+            (identical(other.mrp, mrp) || other.mrp == mrp) &&
+            (identical(other.promoStatus, promoStatus) ||
+                other.promoStatus == promoStatus) &&
+            (identical(other.promoType, promoType) ||
+                other.promoType == promoType) &&
             (identical(other.batch, batch) || other.batch == batch));
   }
 
@@ -364,6 +450,10 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
       materialItemOverride,
       productType,
       price,
+      tax,
+      mrp,
+      promoStatus,
+      promoType,
       batch);
 
   @JsonKey(ignore: true)
@@ -384,23 +474,34 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
 abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
   const factory _SubmitMaterialInfoDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber,
-      @JsonKey(name: 'qty', defaultValue: 0)
-          required final int qty,
+      required final String materialNumber,
+      @JsonKey(name: 'qty', defaultValue: 0) required final int qty,
       @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
-          required final List<SubmitMaterialItemBonusDto> bonuses,
-      @JsonKey(name: 'Comment', defaultValue: '')
-          required final String comment,
+      required final List<SubmitMaterialItemBonusDto> bonuses,
+      @JsonKey(name: 'Comment', defaultValue: '') required final String comment,
       @JsonKey(name: 'ParentID', defaultValue: '')
-          required final String parentId,
-      @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
-          required final MaterialItemOverrideDto materialItemOverride,
+      required final String parentId,
+      @JsonKey(
+          name: 'override',
+          toJson: overrideTojson,
+          readValue: materialItemOverrideread,
+          includeIfNull: false)
+      required final MaterialItemOverrideDto materialItemOverride,
       @JsonKey(name: 'ProductType', defaultValue: '')
-          required final String productType,
-      @JsonKey(name: 'price', defaultValue: 0)
-          required final double price,
-      @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
-          required final String batch}) = _$_SubmitMaterialInfoDto;
+      required final String productType,
+      @JsonKey(name: 'price', defaultValue: 0) required final double price,
+      @JsonKey(name: 'tax', defaultValue: 0) required final double tax,
+      @JsonKey(name: 'Mrp', defaultValue: 0) required final double mrp,
+      @JsonKey(name: 'PromoStatus', defaultValue: false)
+      required final bool promoStatus,
+      @JsonKey(name: 'PromoType', defaultValue: '')
+      required final String promoType,
+      @JsonKey(
+          name: 'batch',
+          defaultValue: '',
+          toJson: overrideBatchJson,
+          includeIfNull: false)
+      required final String batch}) = _$_SubmitMaterialInfoDto;
   const _SubmitMaterialInfoDto._() : super._();
 
   factory _SubmitMaterialInfoDto.fromJson(Map<String, dynamic> json) =
@@ -434,6 +535,18 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
   @override
   @JsonKey(name: 'price', defaultValue: 0)
   double get price;
+  @override
+  @JsonKey(name: 'tax', defaultValue: 0)
+  double get tax;
+  @override
+  @JsonKey(name: 'Mrp', defaultValue: 0)
+  double get mrp;
+  @override
+  @JsonKey(name: 'PromoStatus', defaultValue: false)
+  bool get promoStatus;
+  @override
+  @JsonKey(name: 'PromoType', defaultValue: '')
+  String get promoType;
   @override
 
   ///Todo: consider to delete it

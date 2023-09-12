@@ -66,6 +66,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           data: value.data,
           orderDocumentType: state.orderDocumentType,
           configs: state.salesOrgConfig,
+          totalTax: value.totalTax,
         );
         failureOrSuccess.fold(
           (failure) {

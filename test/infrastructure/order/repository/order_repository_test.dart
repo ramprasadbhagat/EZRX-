@@ -442,6 +442,7 @@ void main() {
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: salesOrganisationConfigs,
         orderValue: 100.0,
+        totalTax: 100,
       );
       expect(
         result.isRight(),
@@ -577,6 +578,7 @@ void main() {
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: salesOrganisationConfigs,
         orderValue: 100.0,
+        totalTax: 100,
       );
       expect(
         result.isRight(),
@@ -647,6 +649,7 @@ void main() {
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: salesOrganisationConfigs,
         orderValue: 100.0,
+        totalTax: 100,
       );
       expect(
         result.isLeft(),

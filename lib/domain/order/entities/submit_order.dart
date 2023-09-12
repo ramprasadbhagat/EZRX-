@@ -19,6 +19,7 @@ class SubmitOrder with _$SubmitOrder {
     required String requestedDeliveryDate,
     required String specialInstructions,
     required double orderValue,
+    required double totalTax,
     required String telephone,
     required String referenceNotes,
     required String paymentTerms,
@@ -47,5 +48,6 @@ class SubmitOrder with _$SubmitOrder {
         language: '',
         paymentMethod: '',
         orderValue: 0,
+        totalTax: 0,
       );
 }

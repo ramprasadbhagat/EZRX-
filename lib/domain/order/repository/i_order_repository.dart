@@ -46,6 +46,7 @@ abstract class IOrderRepository {
     required List<PriceAggregate> cartProducts,
     required double grandTotal,
     required double orderValue,
+    required double totalTax,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required DeliveryInfoData data,
@@ -73,11 +74,10 @@ abstract class IOrderRepository {
     required User user,
   });
 
-  Future<Either<ApiFailure, List<MaterialStockInfo>>> getConfirmedOrderStockInfo({
+  Future<Either<ApiFailure, List<MaterialStockInfo>>>
+      getConfirmedOrderStockInfo({
     required OrderHistoryDetails orderHistoryDetails,
     required SalesOrg salesOrg,
     required CustomerCodeInfo customerCodeInfo,
   });
-
-
 }

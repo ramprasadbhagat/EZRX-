@@ -143,6 +143,7 @@ void main() {
             configs: SalesOrganisationConfigs.empty()
                 .copyWith(currency: Currency('PHP')),
             orderValue: 100.0,
+            totalTax: 100,
           ),
         ).thenAnswer(
           (value) async => const Left(ApiFailure.other('Some Error')),
@@ -171,6 +172,7 @@ void main() {
             grandTotal: 100.0,
             data: DeliveryInfoData.empty(),
             orderValue: 100.0,
+            totalTax: 100,
           ),
         );
       },

@@ -23,6 +23,8 @@ class ProductDetailQuery {
         therapeuticClass
         genericMaterialName
         itemBrand
+        promoStatus
+        promoType
         materialBrand
         isFavourite
         defaultMaterialDescription

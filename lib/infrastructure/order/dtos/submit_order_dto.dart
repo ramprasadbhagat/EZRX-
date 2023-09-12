@@ -36,6 +36,8 @@ class SubmitOrderDto with _$SubmitOrderDto {
         required String specialInstructions,
     @JsonKey(name: 'orderValue', defaultValue: 0)
         required double orderValue,
+    @JsonKey(name: 'totalTax', defaultValue: 0)
+        required double totalTax,
     @JsonKey(name: 'Telephone', defaultValue: '')
         required String telephone,
     @JsonKey(name: 'referenceNotes', defaultValue: '')
@@ -68,6 +70,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
       requestedDeliveryDate: requestedDeliveryDate,
       specialInstructions: specialInstructions,
       orderValue: orderValue,
+      totalTax: totalTax,
       telephone: telephone,
       referenceNotes: referenceNotes,
       paymentTerms: paymentTerms,
@@ -94,6 +97,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
       requestedDeliveryDate: submitOrder.requestedDeliveryDate,
       specialInstructions: submitOrder.specialInstructions,
       orderValue: submitOrder.orderValue,
+      totalTax: submitOrder.totalTax,
       telephone: submitOrder.telephone,
       referenceNotes: submitOrder.referenceNotes,
       paymentTerms: submitOrder.paymentTerms,

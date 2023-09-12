@@ -17,6 +17,10 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
     required String comment,
     required MaterialItemOverride materialItemOverride,
     required double price,
+    required double tax,
+    required double mrp,
+    required String promoType,
+    required bool promoStatus,
 
     ///Todo: consider to delete it
     required BatchNumber batch,
@@ -32,5 +36,9 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
         batch: BatchNumber(''),
         materialItemOverride: MaterialItemOverride.empty(),
         price: 0,
+        tax: 0,
+        mrp: 0,
+        promoStatus: false,
+        promoType: '',
       );
 }

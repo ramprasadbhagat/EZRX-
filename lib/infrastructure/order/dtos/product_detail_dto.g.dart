@@ -25,6 +25,8 @@ _$_ProductDetailDto _$$_ProductDetailDtoFromJson(Map<String, dynamic> json) =>
       hidePrice: json['hidePrice'] as bool? ?? false,
       governmentMaterialCode: json['governmentMaterialCode'] as String? ?? '',
       itemRegistrationNumber: json['itemRegistrationNumber'] as String? ?? '',
+      promoType: json['promoType'] as String? ?? '',
+      promoStatus: json['promoStatus'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_ProductDetailDtoToJson(_$_ProductDetailDto instance) =>
@@ -45,4 +47,6 @@ Map<String, dynamic> _$$_ProductDetailDtoToJson(_$_ProductDetailDto instance) =>
       'hidePrice': instance.hidePrice,
       'governmentMaterialCode': instance.governmentMaterialCode,
       'itemRegistrationNumber': instance.itemRegistrationNumber,
+      'promoType': instance.promoType,
+      'promoStatus': instance.promoStatus,
     };

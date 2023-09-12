@@ -22,6 +22,10 @@ _$_SubmitMaterialInfoDto _$$_SubmitMaterialInfoDtoFromJson(
           materialItemOverrideread(json, 'override') as Map<String, dynamic>),
       productType: json['ProductType'] as String? ?? '',
       price: (json['price'] as num?)?.toDouble() ?? 0,
+      tax: (json['tax'] as num?)?.toDouble() ?? 0,
+      mrp: (json['Mrp'] as num?)?.toDouble() ?? 0,
+      promoStatus: json['PromoStatus'] as bool? ?? false,
+      promoType: json['PromoType'] as String? ?? '',
       batch: json['batch'] as String? ?? '',
     );
 
@@ -44,6 +48,10 @@ Map<String, dynamic> _$$_SubmitMaterialInfoDtoToJson(
   writeNotNull('override', overrideTojson(instance.materialItemOverride));
   val['ProductType'] = instance.productType;
   val['price'] = instance.price;
+  val['tax'] = instance.tax;
+  val['Mrp'] = instance.mrp;
+  val['PromoStatus'] = instance.promoStatus;
+  val['PromoType'] = instance.promoType;
   writeNotNull('batch', overrideBatchJson(instance.batch));
   return val;
 }

@@ -25,6 +25,11 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
         required MaterialItemOverrideDto materialItemOverride,
     @JsonKey(name: 'ProductType', defaultValue: '') required String productType,
     @JsonKey(name: 'price', defaultValue: 0) required double price,
+    @JsonKey(name: 'tax', defaultValue: 0) required double tax,
+    @JsonKey(name: 'Mrp', defaultValue: 0) required double mrp,
+    @JsonKey(name: 'PromoStatus', defaultValue: false)
+        required bool promoStatus,
+    @JsonKey(name: 'PromoType', defaultValue: '') required String promoType,
 
     ///Todo: consider to delete it
     @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
@@ -42,6 +47,10 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
       parentID: parentId,
       productType: '',
       price: price,
+      tax: tax,
+      mrp: mrp,
+      promoStatus: promoStatus,
+      promoType: promoType,
     );
   }
 
@@ -64,6 +73,10 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
       parentId: submitMaterialInfo.parentID,
       productType: submitMaterialInfo.productType,
       price: submitMaterialInfo.price,
+      tax: submitMaterialInfo.tax,
+      mrp: submitMaterialInfo.mrp,
+      promoStatus: submitMaterialInfo.promoStatus,
+      promoType: submitMaterialInfo.promoType,
     );
   }
 

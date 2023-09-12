@@ -26,6 +26,10 @@ mixin _$SubmitMaterialInfo {
   MaterialItemOverride get materialItemOverride =>
       throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
+  double get tax => throw _privateConstructorUsedError;
+  double get mrp => throw _privateConstructorUsedError;
+  String get promoType => throw _privateConstructorUsedError;
+  bool get promoStatus => throw _privateConstructorUsedError;
 
   ///Todo: consider to delete it
   BatchNumber get batch => throw _privateConstructorUsedError;
@@ -50,6 +54,10 @@ abstract class $SubmitMaterialInfoCopyWith<$Res> {
       String comment,
       MaterialItemOverride materialItemOverride,
       double price,
+      double tax,
+      double mrp,
+      String promoType,
+      bool promoStatus,
       BatchNumber batch});
 
   $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
@@ -76,6 +84,10 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
     Object? comment = null,
     Object? materialItemOverride = null,
     Object? price = null,
+    Object? tax = null,
+    Object? mrp = null,
+    Object? promoType = null,
+    Object? promoStatus = null,
     Object? batch = null,
   }) {
     return _then(_value.copyWith(
@@ -111,6 +123,22 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
+      mrp: null == mrp
+          ? _value.mrp
+          : mrp // ignore: cast_nullable_to_non_nullable
+              as double,
+      promoType: null == promoType
+          ? _value.promoType
+          : promoType // ignore: cast_nullable_to_non_nullable
+              as String,
+      promoStatus: null == promoStatus
+          ? _value.promoStatus
+          : promoStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -145,6 +173,10 @@ abstract class _$$_SubmitMaterialInfoCopyWith<$Res>
       String comment,
       MaterialItemOverride materialItemOverride,
       double price,
+      double tax,
+      double mrp,
+      String promoType,
+      bool promoStatus,
       BatchNumber batch});
 
   @override
@@ -170,6 +202,10 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
     Object? comment = null,
     Object? materialItemOverride = null,
     Object? price = null,
+    Object? tax = null,
+    Object? mrp = null,
+    Object? promoType = null,
+    Object? promoStatus = null,
     Object? batch = null,
   }) {
     return _then(_$_SubmitMaterialInfo(
@@ -205,6 +241,22 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
+      mrp: null == mrp
+          ? _value.mrp
+          : mrp // ignore: cast_nullable_to_non_nullable
+              as double,
+      promoType: null == promoType
+          ? _value.promoType
+          : promoType // ignore: cast_nullable_to_non_nullable
+              as String,
+      promoStatus: null == promoStatus
+          ? _value.promoStatus
+          : promoStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -225,6 +277,10 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
       required this.comment,
       required this.materialItemOverride,
       required this.price,
+      required this.tax,
+      required this.mrp,
+      required this.promoType,
+      required this.promoStatus,
       required this.batch})
       : _bonuses = bonuses,
         super._();
@@ -251,6 +307,14 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   final MaterialItemOverride materialItemOverride;
   @override
   final double price;
+  @override
+  final double tax;
+  @override
+  final double mrp;
+  @override
+  final String promoType;
+  @override
+  final bool promoStatus;
 
   ///Todo: consider to delete it
   @override
@@ -258,7 +322,7 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
 
   @override
   String toString() {
-    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, productType: $productType, parentID: $parentID, comment: $comment, materialItemOverride: $materialItemOverride, price: $price, batch: $batch)';
+    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, productType: $productType, parentID: $parentID, comment: $comment, materialItemOverride: $materialItemOverride, price: $price, tax: $tax, mrp: $mrp, promoType: $promoType, promoStatus: $promoStatus, batch: $batch)';
   }
 
   @override
@@ -279,6 +343,12 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
             (identical(other.materialItemOverride, materialItemOverride) ||
                 other.materialItemOverride == materialItemOverride) &&
             (identical(other.price, price) || other.price == price) &&
+            (identical(other.tax, tax) || other.tax == tax) &&
+            (identical(other.mrp, mrp) || other.mrp == mrp) &&
+            (identical(other.promoType, promoType) ||
+                other.promoType == promoType) &&
+            (identical(other.promoStatus, promoStatus) ||
+                other.promoStatus == promoStatus) &&
             (identical(other.batch, batch) || other.batch == batch));
   }
 
@@ -293,6 +363,10 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
       comment,
       materialItemOverride,
       price,
+      tax,
+      mrp,
+      promoType,
+      promoStatus,
       batch);
 
   @JsonKey(ignore: true)
@@ -313,6 +387,10 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
       required final String comment,
       required final MaterialItemOverride materialItemOverride,
       required final double price,
+      required final double tax,
+      required final double mrp,
+      required final String promoType,
+      required final bool promoStatus,
       required final BatchNumber batch}) = _$_SubmitMaterialInfo;
   const _SubmitMaterialInfo._() : super._();
 
@@ -332,6 +410,14 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   MaterialItemOverride get materialItemOverride;
   @override
   double get price;
+  @override
+  double get tax;
+  @override
+  double get mrp;
+  @override
+  String get promoType;
+  @override
+  bool get promoStatus;
   @override
 
   ///Todo: consider to delete it

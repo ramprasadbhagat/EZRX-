@@ -124,6 +124,10 @@ class PriceAggregate with _$PriceAggregate {
       parentID: materialInfo.type.typeBundle
           ? bundle.bundleCode
           : materialInfo.parentID,
+      mrp: price.lastPrice.getValue(),
+      tax: itemTax,
+      promoStatus: promoStatus,
+      promoType: materialInfo.promoType,
     );
   }
 
@@ -167,6 +171,11 @@ class PriceAggregate with _$PriceAggregate {
 
     return value;
   }
+
+  bool get promoStatus =>
+      materialInfo.promoStatus ||
+      price.tiers.isNotEmpty ||
+      price.bonuses.isNotEmpty;
 
   double get listPrice {
     return NumUtils.roundToPlaces(vatCalculation(price.lastPrice.getOrCrash()));

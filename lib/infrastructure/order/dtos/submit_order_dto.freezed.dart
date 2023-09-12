@@ -39,6 +39,8 @@ mixin _$SubmitOrderDto {
   String get specialInstructions => throw _privateConstructorUsedError;
   @JsonKey(name: 'orderValue', defaultValue: 0)
   double get orderValue => throw _privateConstructorUsedError;
+  @JsonKey(name: 'totalTax', defaultValue: 0)
+  double get totalTax => throw _privateConstructorUsedError;
   @JsonKey(name: 'Telephone', defaultValue: '')
   String get telephone => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNotes', defaultValue: '')
@@ -87,6 +89,8 @@ abstract class $SubmitOrderDtoCopyWith<$Res> {
           String specialInstructions,
       @JsonKey(name: 'orderValue', defaultValue: 0)
           double orderValue,
+      @JsonKey(name: 'totalTax', defaultValue: 0)
+          double totalTax,
       @JsonKey(name: 'Telephone', defaultValue: '')
           String telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
@@ -129,6 +133,7 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
     Object? requestedDeliveryDate = null,
     Object? specialInstructions = null,
     Object? orderValue = null,
+    Object? totalTax = null,
     Object? telephone = null,
     Object? referenceNotes = null,
     Object? paymentTerms = null,
@@ -174,6 +179,10 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
       orderValue: null == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
       telephone: null == telephone
           ? _value.telephone
@@ -246,6 +255,8 @@ abstract class _$$_SubmitOrderDtoCopyWith<$Res>
           String specialInstructions,
       @JsonKey(name: 'orderValue', defaultValue: 0)
           double orderValue,
+      @JsonKey(name: 'totalTax', defaultValue: 0)
+          double totalTax,
       @JsonKey(name: 'Telephone', defaultValue: '')
           String telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
@@ -287,6 +298,7 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
     Object? requestedDeliveryDate = null,
     Object? specialInstructions = null,
     Object? orderValue = null,
+    Object? totalTax = null,
     Object? telephone = null,
     Object? referenceNotes = null,
     Object? paymentTerms = null,
@@ -332,6 +344,10 @@ class __$$_SubmitOrderDtoCopyWithImpl<$Res>
       orderValue: null == orderValue
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
               as double,
       telephone: null == telephone
           ? _value.telephone
@@ -391,6 +407,8 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
           required this.specialInstructions,
       @JsonKey(name: 'orderValue', defaultValue: 0)
           required this.orderValue,
+      @JsonKey(name: 'totalTax', defaultValue: 0)
+          required this.totalTax,
       @JsonKey(name: 'Telephone', defaultValue: '')
           required this.telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
@@ -448,6 +466,9 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
   @JsonKey(name: 'orderValue', defaultValue: 0)
   final double orderValue;
   @override
+  @JsonKey(name: 'totalTax', defaultValue: 0)
+  final double totalTax;
+  @override
   @JsonKey(name: 'Telephone', defaultValue: '')
   final String telephone;
   @override
@@ -479,7 +500,7 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
 
   @override
   String toString() {
-    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, language: $language, paymentMethod: $paymentMethod, poDocuments: $poDocuments)';
+    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, language: $language, paymentMethod: $paymentMethod, poDocuments: $poDocuments)';
   }
 
   @override
@@ -504,6 +525,8 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
                 other.specialInstructions == specialInstructions) &&
             (identical(other.orderValue, orderValue) ||
                 other.orderValue == orderValue) &&
+            (identical(other.totalTax, totalTax) ||
+                other.totalTax == totalTax) &&
             (identical(other.telephone, telephone) ||
                 other.telephone == telephone) &&
             (identical(other.referenceNotes, referenceNotes) ||
@@ -535,6 +558,7 @@ class _$_SubmitOrderDto extends _SubmitOrderDto {
       requestedDeliveryDate,
       specialInstructions,
       orderValue,
+      totalTax,
       telephone,
       referenceNotes,
       paymentTerms,
@@ -578,6 +602,8 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
           required final String specialInstructions,
       @JsonKey(name: 'orderValue', defaultValue: 0)
           required final double orderValue,
+      @JsonKey(name: 'totalTax', defaultValue: 0)
+          required final double totalTax,
       @JsonKey(name: 'Telephone', defaultValue: '')
           required final String telephone,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
@@ -626,6 +652,9 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
   @override
   @JsonKey(name: 'orderValue', defaultValue: 0)
   double get orderValue;
+  @override
+  @JsonKey(name: 'totalTax', defaultValue: 0)
+  double get totalTax;
   @override
   @JsonKey(name: 'Telephone', defaultValue: '')
   String get telephone;

@@ -183,6 +183,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 .read<CartBloc>()
                                 .state
                                 .totalPriceWithTax,
+                            totalTax:
+                                context.read<CartBloc>().state.taxMaterial,
                             data: context
                                 .read<AdditionalDetailsBloc>()
                                 .state

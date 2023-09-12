@@ -183,6 +183,8 @@ class MaterialDto with _$MaterialDto {
       countryData: CountryData.empty(),
       parentID: '',
       counterOfferDetails: RequestCounterOfferDetails.empty(),
+      promoStatus: false,
+      promoType: '',
     );
   }
 

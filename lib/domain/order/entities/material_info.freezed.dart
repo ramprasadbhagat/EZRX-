@@ -42,7 +42,9 @@ mixin _$MaterialInfo {
       throw _privateConstructorUsedError;
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
-  String get remarks =>
+  String get remarks => throw _privateConstructorUsedError;
+  bool get promoStatus => throw _privateConstructorUsedError;
+  String get promoType =>
       throw _privateConstructorUsedError; //TODO: remove field from v2
   String get itemBrand => throw _privateConstructorUsedError;
   MaterialGroup get materialGroup2 => throw _privateConstructorUsedError;
@@ -95,6 +97,8 @@ abstract class $MaterialInfoCopyWith<$Res> {
       String itemRegistrationNumber,
       String genericMaterialName,
       String remarks,
+      bool promoStatus,
+      String promoType,
       String itemBrand,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
@@ -153,6 +157,8 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
     Object? remarks = null,
+    Object? promoStatus = null,
+    Object? promoType = null,
     Object? itemBrand = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
@@ -269,6 +275,14 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
       remarks: null == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
+              as String,
+      promoStatus: null == promoStatus
+          ? _value.promoStatus
+          : promoStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      promoType: null == promoType
+          ? _value.promoType
+          : promoType // ignore: cast_nullable_to_non_nullable
               as String,
       itemBrand: null == itemBrand
           ? _value.itemBrand
@@ -394,6 +408,8 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       String itemRegistrationNumber,
       String genericMaterialName,
       String remarks,
+      bool promoStatus,
+      String promoType,
       String itemBrand,
       MaterialGroup materialGroup2,
       MaterialGroup materialGroup4,
@@ -455,6 +471,8 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
     Object? remarks = null,
+    Object? promoStatus = null,
+    Object? promoType = null,
     Object? itemBrand = null,
     Object? materialGroup2 = null,
     Object? materialGroup4 = null,
@@ -572,6 +590,14 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String,
+      promoStatus: null == promoStatus
+          ? _value.promoStatus
+          : promoStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      promoType: null == promoType
+          ? _value.promoType
+          : promoType // ignore: cast_nullable_to_non_nullable
+              as String,
       itemBrand: null == itemBrand
           ? _value.itemBrand
           : itemBrand // ignore: cast_nullable_to_non_nullable
@@ -650,6 +676,8 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.itemRegistrationNumber,
       required this.genericMaterialName,
       required this.remarks,
+      required this.promoStatus,
+      required this.promoType,
       required this.itemBrand,
       required this.materialGroup2,
       required this.materialGroup4,
@@ -731,6 +759,10 @@ class _$_MaterialInfo extends _MaterialInfo {
   final String genericMaterialName;
   @override
   final String remarks;
+  @override
+  final bool promoStatus;
+  @override
+  final String promoType;
 //TODO: remove field from v2
   @override
   final String itemBrand;
@@ -769,7 +801,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, promoStatus: $promoStatus, promoType: $promoType, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails)';
   }
 
   @override
@@ -807,8 +839,7 @@ class _$_MaterialInfo extends _MaterialInfo {
                 other.countryData == countryData) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
-            (identical(other.defaultMaterialDescription,
-                    defaultMaterialDescription) ||
+            (identical(other.defaultMaterialDescription, defaultMaterialDescription) ||
                 other.defaultMaterialDescription ==
                     defaultMaterialDescription) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
@@ -826,6 +857,10 @@ class _$_MaterialInfo extends _MaterialInfo {
             (identical(other.genericMaterialName, genericMaterialName) ||
                 other.genericMaterialName == genericMaterialName) &&
             (identical(other.remarks, remarks) || other.remarks == remarks) &&
+            (identical(other.promoStatus, promoStatus) ||
+                other.promoStatus == promoStatus) &&
+            (identical(other.promoType, promoType) ||
+                other.promoType == promoType) &&
             (identical(other.itemBrand, itemBrand) ||
                 other.itemBrand == itemBrand) &&
             (identical(other.materialGroup2, materialGroup2) ||
@@ -878,6 +913,8 @@ class _$_MaterialInfo extends _MaterialInfo {
         itemRegistrationNumber,
         genericMaterialName,
         remarks,
+        promoStatus,
+        promoType,
         itemBrand,
         materialGroup2,
         materialGroup4,
@@ -926,6 +963,8 @@ abstract class _MaterialInfo extends MaterialInfo {
           required final String itemRegistrationNumber,
           required final String genericMaterialName,
           required final String remarks,
+          required final bool promoStatus,
+          required final String promoType,
           required final String itemBrand,
           required final MaterialGroup materialGroup2,
           required final MaterialGroup materialGroup4,
@@ -992,6 +1031,10 @@ abstract class _MaterialInfo extends MaterialInfo {
   String get genericMaterialName;
   @override
   String get remarks;
+  @override
+  bool get promoStatus;
+  @override
+  String get promoType;
   @override //TODO: remove field from v2
   String get itemBrand;
   @override

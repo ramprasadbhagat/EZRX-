@@ -218,6 +218,7 @@ void main() {
             poReference: '',
             materials: [],
             poDate: '',
+            totalTax: 0,
             requestedDeliveryDate: '',
             specialInstructions: '',
             telephone: '',
