@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,7 @@ class IntroStep extends StatelessWidget {
                 ),
                 const Spacer(),
                 OutlinedButton(
-                  key: const Key('getStarted'),
+                  key: WidgetKeys.introGetStartedButton,
                   style: Theme.of(context).outlinedButtonTheme.style!.copyWith(
                         backgroundColor: MaterialStateProperty.all(
                           introObject.buttonBGColor,

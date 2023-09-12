@@ -552,4 +552,8 @@ class WidgetKeys {
   static const Key paymentHomeSoa = Key('paymentHomeSoa');
   static const Key paymentAdviceCreatedPageBack =
       Key('paymentAdviceCreatedPageBack');
+  //===========================================================
+  //  Intro Page
+  //============================================================
+  static const Key introGetStartedButton = Key('getStarted');
 }
