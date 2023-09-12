@@ -5,7 +5,6 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section.dart/product_offer_section.dart';
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner.dart';
-import 'package:ezrxmobile/presentation/home/banners/kr_banner/kr_banner.dart';
 import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
@@ -33,8 +32,8 @@ class HomeTab extends StatelessWidget {
       buildWhen: (previous, current) =>
           //check user role and products as getter depends on both
           previous.user.accessRight.products !=
-          current.user.accessRight.products||
-          previous.user.role.type !=current.user.role.type,
+              current.user.accessRight.products ||
+          previous.user.role.type != current.user.role.type,
       builder: (context, state) {
         return Scaffold(
           key: WidgetKeys.homeScreen,
@@ -89,7 +88,6 @@ class HomeTab extends StatelessWidget {
                   const RecentOrdersSection(),
                   if (state.user.userCanAccessProducts) const BrowseProduct(),
                   const TopAdvertBoxBanner(),
-                  const KRBanners(),
                   const AnnouncementSection(),
                 ],
               ),
