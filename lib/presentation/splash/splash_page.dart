@@ -668,11 +668,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 context.read<CustomerCodeBloc>().add(
                       const CustomerCodeEvent.loadStoredCustomerCode(),
                     );
-
-                context.read<ProductSearchBloc>().add(
-                      const ProductSearchEvent
-                          .fetchProductSearchSuggestionHistory(),
-                    );
                 // context.read<HomePageBloc>().add(const HomePageEvent.refresh());
               }
             }

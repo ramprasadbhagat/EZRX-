@@ -54,14 +54,7 @@ void main() {
     productSearchBloc = ProductSearchBloc(
       productSearchRepository: productSearchRepository,
       config: config,
-    )..add(
-        ProductSearchEvent.initialized(
-          salesOrganization: salesOrganization,
-          configs: salesOrgConfigs,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-        ),
-      );
+    );
     materialResponse =
         await ProductSearchLocalDataSource().getSearchedProductList();
     fakeResponse1 = MaterialResponse(
@@ -75,19 +68,37 @@ void main() {
   });
 
   group('ProductSearchBloc', () {
-    test(' -> Initial state is correct', () {
-      expect(
-        productSearchBloc.state,
-        equals(
-          ProductSearchState.initial().copyWith(
-            configs: salesOrgConfigs,
-            customerCodeInfo: customerCodeInfo,
-            salesOrganization: salesOrganization,
-            shipToInfo: shipToInfo,
-          ),
+    blocTest<ProductSearchBloc, ProductSearchState>(
+      ' -> Initial state is correct',
+      build: () {
+        when(() => productSearchRepository.getSearchKeys())
+            .thenAnswer((_) async => Right(searchKeys));
+        return productSearchBloc;
+      },
+      act: (bloc) => bloc.add(
+        ProductSearchEvent.initialized(
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          shipToInfo: shipToInfo,
         ),
-      );
-    });
+      ),
+      expect: () => [
+        ProductSearchState.initial().copyWith(
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          shipToInfo: shipToInfo,
+        ),
+        ProductSearchState.initial().copyWith(
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          salesOrganization: salesOrganization,
+          shipToInfo: shipToInfo,
+          productSuggestionHistory: searchKeys,
+        ),
+      ],
+    );
 
     group(' -> SearchProduct', () {
       blocTest<ProductSearchBloc, ProductSearchState>(
@@ -146,6 +157,13 @@ void main() {
       );
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Emits correct states and responses',
+        seed: () => ProductSearchState.initial().copyWith(
+          salesOrganization: salesOrganization,
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          searchKey: searchKey,
+        ),
         build: () {
           when(
             () => productSearchRepository.searchProductList(
@@ -193,6 +211,13 @@ void main() {
 
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Emits failure state when repository returns a failure',
+        seed: () => ProductSearchState.initial().copyWith(
+          salesOrganization: salesOrganization,
+          configs: salesOrgConfigs,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          searchKey: searchKey,
+        ),
         build: () {
           when(
             () => productSearchRepository.searchProductList(
@@ -506,57 +531,6 @@ void main() {
       );
     });
 
-    group(' -> FetchProductSuggestionHistory', () {
-      blocTest<ProductSearchBloc, ProductSearchState>(
-        ' -> Emits correct state and response',
-        build: () {
-          when(() => productSearchRepository.getSearchKeys())
-              .thenAnswer((_) async => Right(searchKeys));
-          return productSearchBloc;
-        },
-        act: (bloc) => bloc.add(
-          const ProductSearchEvent.fetchProductSearchSuggestionHistory(),
-        ),
-        expect: () => [
-          ProductSearchState.initial().copyWith(
-            configs: salesOrgConfigs,
-            customerCodeInfo: customerCodeInfo,
-            salesOrganization: salesOrganization,
-            shipToInfo: shipToInfo,
-            productSuggestionHistory: searchKeys,
-          ),
-        ],
-      );
-
-      blocTest<ProductSearchBloc, ProductSearchState>(
-        ' -> FetchProductSuggestionHistory with error',
-        build: () {
-          when(() => productSearchRepository.getSearchKeys()).thenAnswer(
-            (_) async => const Left(
-              ApiFailure.other('fake-error'),
-            ),
-          );
-          return productSearchBloc;
-        },
-        act: (bloc) => bloc.add(
-          const ProductSearchEvent.fetchProductSearchSuggestionHistory(),
-        ),
-        expect: () => [
-          ProductSearchState.initial().copyWith(
-            configs: salesOrgConfigs,
-            customerCodeInfo: customerCodeInfo,
-            salesOrganization: salesOrganization,
-            shipToInfo: shipToInfo,
-            apiFailureOrSuccessOption: optionOf(
-              const Left(
-                ApiFailure.other('fake-error'),
-              ),
-            ),
-          ),
-        ],
-      );
-    });
-
     group(' -> ClearSearchHistory', () {
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Clear search history successfully',
@@ -606,10 +580,6 @@ void main() {
         ),
         expect: () => [
           ProductSearchState.initial().copyWith(
-            configs: salesOrgConfigs,
-            customerCodeInfo: customerCodeInfo,
-            salesOrganization: salesOrganization,
-            shipToInfo: shipToInfo,
             apiFailureOrSuccessOption: optionOf(
               const Left(
                 ApiFailure.other('fake-error'),

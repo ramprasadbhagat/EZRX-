@@ -33,13 +33,27 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
     required this.productSearchRepository,
     required this.config,
   }) : super(ProductSearchState.initial()) {
-    on<_Initialized>((event, emit) {
+    on<_Initialized>((event, emit) async {
       emit(
         state.copyWith(
           salesOrganization: event.salesOrganization,
           configs: event.configs,
           customerCodeInfo: event.customerCodeInfo,
           shipToInfo: event.shipToInfo,
+        ),
+      );
+      final failureOrSuccess = await productSearchRepository.getSearchKeys();
+      failureOrSuccess.fold(
+        (failure) => emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+          ),
+        ),
+        (searchKeyList) => emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            productSuggestionHistory: searchKeyList,
+          ),
         ),
       );
     });
@@ -165,27 +179,12 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
             suggestedProductList: <MaterialInfo>[],
           ),
         );
-
         add(
-          const ProductSearchEvent.fetchProductSearchSuggestionHistory(),
-        );
-      },
-    );
-
-    on<_FetchProductSearchSuggestionHistory>(
-      (e, emit) async {
-        final failureOrSuccess = await productSearchRepository.getSearchKeys();
-        failureOrSuccess.fold(
-          (failure) => emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          ),
-          (searchKeyList) => emit(
-            state.copyWith(
-              apiFailureOrSuccessOption: none(),
-              productSuggestionHistory: searchKeyList,
-            ),
+          ProductSearchEvent.initialized(
+            salesOrganization: state.salesOrganization,
+            configs: state.configs,
+            customerCodeInfo: state.customerCodeInfo,
+            shipToInfo: state.shipToInfo,
           ),
         );
       },
