@@ -177,53 +177,73 @@ void main() {
       ],
     );
 
-    // blocTest(
-    //   'Customer Code Fetch Success',
-    //   build: () =>
-    //       CustomerCodeBloc(customerCodeRepository: customerCodeMockRepo),
-    //   setUp: () {
-    //     when(
-    //       () => customerCodeMockRepo.storeCustomerCode(
-    //         customerCode: customerMockData.first.customerCodeSoldTo,
-    //       ),
-    //     ).thenAnswer((invocation) async => const Right(unit));
-
-    //     when(() => customerCodeMockRepo.getCustomerCode(
-    //           salesOrganisation: fakeSaleOrg,
-    //           customerCode: fakeSalesOrgCustomerInfos.first.customerCodeSoldTo
-    //               .getOrCrash(),
-    //           hideCustomer: false,
-    //           offset: 0,
-    //           user: fakeUser,
-    //           pageSize: fakePageSize,
-    //         )).thenAnswer(
-    //       (invocation) async => Right(
-    //         customerMockData,
-    //       ),
-    //     );
-    //   },
-    //   act: (CustomerCodeBloc bloc) {
-    //     bloc.add(CustomerCodeEvent.fetch(
-    //         hidecustomer: false,
-    //         userInfo: fakeUser,
-    //         selectedSalesOrg: fakeSaleOrg));
-    //   },
-    //   expect: () => [
-    //     CustomerCodeState.initial(),
-    //     CustomerCodeState.initial().copyWith(isFetching: true),
-    //     CustomerCodeState.initial().copyWith(
-    //       isFetching: false,
-    //       customerCodeInfo: customerMockData.first,
-    //       customerCodeList: customerMockData,
-    //       apiFailureOrSuccessOption: none(),
-    //       canLoadMore: true,
-    //     ),
-    //   ],
-    //   verify: (CustomerCodeBloc bloc) => expect(
-    //     bloc.state.customerCodeList,
-    //     customerMockData,
-    //   ),
-    // );
+    blocTest(
+      'Customer Code Fetch Success',
+      build: () => CustomerCodeBloc(
+        config: config,
+        customerCodeRepository: customerCodeMockRepo,
+      ),
+      seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: SalesOrganisation(
+          salesOrg: SalesOrg('2001'),
+          customerInfos: [
+            ...fakeSalesOrgCustomerInfos,
+          ],
+        ),
+      ),
+      setUp: () {
+        when(
+          () => customerCodeMockRepo.getCustomerCode(
+            salesOrganisation: SalesOrganisation(
+              salesOrg: SalesOrg('2001'),
+              customerInfos: [
+                ...fakeSalesOrgCustomerInfos,
+              ],
+            ),
+            customerCodes: [
+              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+            ],
+            hideCustomer: false,
+            offset: 0,
+            user: fakeUser,
+            pageSize: fakePageSize,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            customerMockData,
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(
+          const CustomerCodeEvent.fetch(),
+        );
+      },
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: SalesOrganisation(
+            salesOrg: SalesOrg('2001'),
+            customerInfos: [
+              ...fakeSalesOrgCustomerInfos,
+            ],
+          ),
+          isFetching: false,
+          customerCodeInfo: customerMockData.first,
+          customerCodeList: customerMockData,
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: false,
+          shipToInfo: customerMockData.first.shipToInfos.first,
+        ),
+      ],
+      verify: (CustomerCodeBloc bloc) => expect(
+        bloc.state.customerCodeList,
+        customerMockData,
+      ),
+    );
 
     blocTest(
       'Customer Code Validate Offset',
@@ -414,6 +434,66 @@ void main() {
           ],
           shipToInfo: fakeShipToInfo,
           searchKey: SearchKey('fake-customer-code'),
+          canLoadMore: false,
+          isSearchActive: true,
+          isFetching: false,
+        )
+      ],
+    );
+
+    blocTest(
+      'Customer Code Search Success when hide block customer is true',
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
+      seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: true,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
+        shipToInfo: fakeShipToInfo,
+        isFetching: false,
+      ),
+      setUp: () {
+        when(
+          () => customerCodeMockRepo.getCustomerCode(
+            salesOrganisation: fakeSaleOrg,
+            customerCodes: ['block-customer-code'],
+            hideCustomer: true,
+            offset: 0,
+            user: fakeUser,
+            pageSize: fakePageSize,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(
+            [],
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(
+          CustomerCodeEvent.search(
+            searchValue: SearchKey.searchFilter('block-customer-code'),
+          ),
+        );
+      },
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+          hideCustomer: true,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
+          isSearchActive: true,
+          isFetching: true,
+          shipToInfo: fakeShipToInfo,
+          searchKey: SearchKey('block-customer-code'),
+        ),
+        CustomerCodeState.initial().copyWith(
+          hideCustomer: true,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
+          customerCodeList: [],
+          shipToInfo: fakeShipToInfo,
+          searchKey: SearchKey('block-customer-code'),
           canLoadMore: false,
           isSearchActive: true,
           isFetching: false,
