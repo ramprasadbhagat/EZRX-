@@ -62,7 +62,7 @@ class ReturnItemDetailsDto with _$ReturnItemDetailsDto {
       lineNumber: returnItemDetail.itemNumber,
       materialNumber: returnItemDetail.materialNumber.getOrCrash(),
       returnQuantity: returnItemDetail.returnQuantity.getIntValue,
-      returnReason: returnItemDetail.usage.usageCode,
+      returnReason: returnItemDetail.returnReason,
       url: returnItemDetail.uploadedFiles.map((e) => e.path).toList(),
       returnType: '500',
       remarks: returnItemDetail.remarks.getOrDefaultValue(''),
