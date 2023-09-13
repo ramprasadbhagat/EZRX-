@@ -500,6 +500,7 @@ class WidgetKeys {
   static const Key fromInvoiceDateField = Key('fromInvoiceDateField');
   static const Key toInvoiceDateField = Key('toInvoiceDateField');
   static const Key returnDetailsListView = Key('returnDetailsListView');
+  static const Key returnItemsFilter = Key('returnItemsFilter');
 
   //============================================================
   //  Contact Us Page
