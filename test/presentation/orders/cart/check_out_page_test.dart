@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -181,7 +182,7 @@ void main() {
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
             configs: SalesOrganisationConfigs.empty().copyWith(
-              poNumberRequired: true,
+              poNumberRequired: PoNumberRequired(true),
             ),
             salesOrganisation: SalesOrganisation.empty().copyWith(
               salesOrg: SalesOrg('2001'),
@@ -224,7 +225,7 @@ void main() {
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
             configs: SalesOrganisationConfigs.empty().copyWith(
-              poNumberRequired: false,
+              poNumberRequired: PoNumberRequired(false),
             ),
             salesOrganisation: SalesOrganisation.empty().copyWith(
               salesOrg: SalesOrg('2001'),

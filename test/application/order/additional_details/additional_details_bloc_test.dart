@@ -39,7 +39,7 @@ void main() {
         () {
           config = SalesOrganisationConfigs.empty().copyWith(
             enableMobileNumber: true,
-            poNumberRequired: true,
+            poNumberRequired: PoNumberRequired(true),
             enablePaymentTerms: true,
             enableFutureDeliveryDay: true,
             futureDeliveryDay: FutureDeliveryDay('4'),

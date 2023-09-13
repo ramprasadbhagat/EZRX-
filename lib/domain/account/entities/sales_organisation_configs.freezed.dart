@@ -62,7 +62,7 @@ mixin _$SalesOrganisationConfigs {
   OosValue get oosValue => throw _privateConstructorUsedError;
   bool get enableRemarks => throw _privateConstructorUsedError;
   bool get enableOHPrice => throw _privateConstructorUsedError;
-  bool get poNumberRequired => throw _privateConstructorUsedError;
+  PoNumberRequired get poNumberRequired => throw _privateConstructorUsedError;
   bool get enableTaxDisplay => throw _privateConstructorUsedError;
   bool get netPriceOverride => throw _privateConstructorUsedError;
   bool get displayOrderDiscount => throw _privateConstructorUsedError;
@@ -134,7 +134,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       OosValue oosValue,
       bool enableRemarks,
       bool enableOHPrice,
-      bool poNumberRequired,
+      PoNumberRequired poNumberRequired,
       bool enableTaxDisplay,
       bool netPriceOverride,
       bool displayOrderDiscount,
@@ -403,7 +403,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
       poNumberRequired: null == poNumberRequired
           ? _value.poNumberRequired
           : poNumberRequired // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as PoNumberRequired,
       enableTaxDisplay: null == enableTaxDisplay
           ? _value.enableTaxDisplay
           : enableTaxDisplay // ignore: cast_nullable_to_non_nullable
@@ -514,7 +514,7 @@ abstract class _$$_SalesOrganisationConfigsCopyWith<$Res>
       OosValue oosValue,
       bool enableRemarks,
       bool enableOHPrice,
-      bool poNumberRequired,
+      PoNumberRequired poNumberRequired,
       bool enableTaxDisplay,
       bool netPriceOverride,
       bool displayOrderDiscount,
@@ -781,7 +781,7 @@ class __$$_SalesOrganisationConfigsCopyWithImpl<$Res>
       poNumberRequired: null == poNumberRequired
           ? _value.poNumberRequired
           : poNumberRequired // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as PoNumberRequired,
       enableTaxDisplay: null == enableTaxDisplay
           ? _value.enableTaxDisplay
           : enableTaxDisplay // ignore: cast_nullable_to_non_nullable
@@ -998,7 +998,7 @@ class _$_SalesOrganisationConfigs extends _SalesOrganisationConfigs {
   @override
   final bool enableOHPrice;
   @override
-  final bool poNumberRequired;
+  final PoNumberRequired poNumberRequired;
   @override
   final bool enableTaxDisplay;
   @override
@@ -1242,7 +1242,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
           required final OosValue oosValue,
           required final bool enableRemarks,
           required final bool enableOHPrice,
-          required final bool poNumberRequired,
+          required final PoNumberRequired poNumberRequired,
           required final bool enableTaxDisplay,
           required final bool netPriceOverride,
           required final bool displayOrderDiscount,
@@ -1348,7 +1348,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   @override
   bool get enableOHPrice;
   @override
-  bool get poNumberRequired;
+  PoNumberRequired get poNumberRequired;
   @override
   bool get enableTaxDisplay;
   @override

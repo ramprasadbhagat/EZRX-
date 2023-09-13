@@ -82,7 +82,7 @@ void main() {
     oosValue: OosValue(0),
     enableRemarks: false,
     enableOHPrice: true,
-    poNumberRequired: false,
+    poNumberRequired: PoNumberRequired(false),
     enableTaxDisplay: false,
     netPriceOverride: false,
     batchNumDisplay: false,

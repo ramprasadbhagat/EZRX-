@@ -90,7 +90,8 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                               _TextFormField(
                                 labelText: 'PO reference',
                                 keyText: 'pOReferenceKey',
-                                hintText: 'Enter your PO reference',
+                                hintText:
+                                    'Enter your PO reference ${config.poNumberRequired.optionalText}',
                                 label: DeliveryInfoLabel.poReference,
                                 deliveryInfoData: state.deliveryInfoData,
                                 focusNode: widget.focusNodes[
@@ -301,9 +302,10 @@ class _TextFormFieldState extends State<_TextFormField> {
     required DeliveryInfoLabel label,
     required BuildContext context,
   }) {
+    final config = context.read<SalesOrgBloc>().state.configs;
     switch (label) {
       case DeliveryInfoLabel.poReference:
-        return context.read<SalesOrgBloc>().state.configs.poNumberRequired
+        return config.poNumberRequired.getOrDefaultValue(false)
             ? context
                 .read<AdditionalDetailsBloc>()
                 .state
@@ -318,7 +320,6 @@ class _TextFormFieldState extends State<_TextFormField> {
                   (_) => null,
                 )
             : null;
-
       case DeliveryInfoLabel.contactPerson:
         return context
             .read<AdditionalDetailsBloc>()

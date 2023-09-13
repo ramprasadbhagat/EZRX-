@@ -145,7 +145,7 @@ class AdditionalDetailsBloc
         showErrorMessages: false,
       ),
     );
-    final isCustomerPoReferenceValid = config.poNumberRequired
+    final isCustomerPoReferenceValid = config.poNumberRequired.getValue()
         ? state.deliveryInfoData.poReference.isValid()
         : true;
 

@@ -282,6 +282,17 @@ class OosMaterial extends ValueObject<bool> {
   const OosMaterial._(this.value);
 }
 
+class PoNumberRequired extends ValueObject<bool> {
+  @override
+  final Either<ValueFailure<bool>, bool> value;
+
+  factory PoNumberRequired(bool input) => PoNumberRequired._(Right(input));
+
+  String get optionalText => getOptionalText(value.getOrElse(() => false));
+
+  const PoNumberRequired._(this.value);
+}
+
 class MobileNumber extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
