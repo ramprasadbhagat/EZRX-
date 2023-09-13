@@ -11,6 +11,11 @@ class PaymentInfoDto with _$PaymentInfoDto {
 
   const factory PaymentInfoDto({
     @JsonKey(name: 'zzHtmcs', defaultValue: '') required String zzHtmcs,
+    @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+        required String accountingDocExternalReference,
+    @JsonKey(name: 'paymentID', defaultValue: '') required String paymentID,
+    @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
+        required String paymentBatchAdditionalInfo,
   }) = _PaymentInfoDto;
 
   PaymentInfo toDomain() {
@@ -31,6 +36,9 @@ class PaymentInfoDto with _$PaymentInfoDto {
 
     return PaymentInfo(
       zzHtmcs: '$jsLib$buttonHtml$htmlFormat$autoClick',
+      paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
+      paymentID: paymentID,
+      accountingDocExternalReference: accountingDocExternalReference,
     );
   }
 

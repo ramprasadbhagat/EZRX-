@@ -1,32 +1,39 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
-import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/available_credit_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_invoice_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/outstanding_invoice_filter_dto.dart';
+import 'package:flutter/foundation.dart';
 
 class NewPaymentRepository extends INewPaymentRepository {
   final Config config;
   final NewPaymentLocalDataSource localDataSource;
   final NewPaymentRemoteDataSource remoteDataSource;
+  final FileSystemHelper fileSystemHelper;
+
   NewPaymentRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
+    required this.fileSystemHelper,
   });
 
   @override
@@ -203,6 +210,61 @@ class NewPaymentRepository extends INewPaymentRepository {
       return Left(
         FailureHandler.handleFailure(e),
       );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, PaymentInvoiceInfoPdf>> getPaymentInvoiceInfoPdf({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required User user,
+    required PaymentInfo paymentInfo,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.getPaymentInvoiceInfoPdf();
+
+        return Right(response);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final invoiceInfoPdf = await remoteDataSource.getPaymentInvoiceInfoPdf(
+        customerName: user.username.getValue(),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        salesOrg: salesOrganisation.salesOrg.getValue(),
+        accountingDocExternalReference:
+            paymentInfo.subAccountingDocExternalReference,
+        paymentBatchAdditionalInfo: paymentInfo.paymentBatchAdditionalInfo,
+        paymentId: paymentInfo.paymentID,
+      );
+
+      return Right(invoiceInfoPdf);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> saveFile({
+    required Uint8List pdfData,
+  }) async {
+    try {
+      await fileSystemHelper.getDownloadedFile(
+        AttachmentFileBuffer(
+          buffer: pdfData,
+          name: 'invoice_${DateTime.now().millisecondsSinceEpoch}.pdf',
+        ),
+      );
+
+      return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

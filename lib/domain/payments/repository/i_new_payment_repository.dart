@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -8,6 +10,7 @@ import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 
 abstract class INewPaymentRepository {
   Future<Either<ApiFailure, List<CustomerOpenItem>>> getOutstandingInvoices({
@@ -18,6 +21,7 @@ abstract class INewPaymentRepository {
     required OutstandingInvoiceFilter appliedFilter,
     required SearchKey searchKey,
   });
+
   Future<Either<ApiFailure, List<CustomerOpenItem>>> getAvailableCreditNotes({
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -41,4 +45,13 @@ abstract class INewPaymentRepository {
     required SalesOrganisation salesOrganisation,
     required Uri uri,
   });
+
+  Future<Either<ApiFailure, PaymentInvoiceInfoPdf>> getPaymentInvoiceInfoPdf({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required User user,
+    required PaymentInfo paymentInfo,
+  });
+
+  Future<Either<ApiFailure, Unit>> saveFile({required Uint8List pdfData});
 }

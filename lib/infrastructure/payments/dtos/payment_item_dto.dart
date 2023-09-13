@@ -1,9 +1,7 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-
-import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 
 part 'payment_item_dto.freezed.dart';
 part 'payment_item_dto.g.dart';
@@ -17,25 +15,18 @@ class PaymentItemDto with _$PaymentItemDto {
         required String accountingDocument,
     @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
         required String accountingDocumentItem,
-    @JsonKey(
-      name: 'netDueDate',
-      defaultValue: '',
-    )
-        required String netDueDate,
-    @JsonKey(
-      name: 'postingDate',
-      defaultValue: '',
-    )
-        required String postingDate,
-    @JsonKey(
-      name: 'documentDate',
-      defaultValue: '',
-    )
+    @JsonKey(name: 'netDueDate', defaultValue: '') required String netDueDate,
+    @JsonKey(name: 'postingDate', defaultValue: '') required String postingDate,
+    @JsonKey(name: 'documentDate', defaultValue: '')
         required String documentDate,
+    @JsonKey(name: 'transactionCurrency', defaultValue: '')
+        required String transactionCurrency,
     @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
         required double paymentAmountInDisplayCrcy,
     @JsonKey(name: 'postingKeyName', defaultValue: '')
         required String postingKeyName,
+    @JsonKey(name: 'documentReferenceID', defaultValue: '')
+        required String documentReferenceID,
     @JsonKey(name: 'accountingDocumentType', defaultValue: '')
         required String accountingDocumentType,
   }) = _PaymentItemDto;
@@ -51,6 +42,8 @@ class PaymentItemDto with _$PaymentItemDto {
           double.parse(paymentAmountInDisplayCrcy.toString()),
       postingKeyName: postingKeyName,
       accountingDocumentType: AmountDocumentType(accountingDocumentType),
+      documentReferenceID: documentReferenceID,
+      transactionCurrency: transactionCurrency,
     );
   }
 

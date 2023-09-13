@@ -21,8 +21,10 @@ mixin _$PaymentItem {
   DateTimeStringValue get netDueDate => throw _privateConstructorUsedError;
   DateTimeStringValue get postingDate => throw _privateConstructorUsedError;
   DateTimeStringValue get documentDate => throw _privateConstructorUsedError;
+  String get transactionCurrency => throw _privateConstructorUsedError;
   double get paymentAmountInDisplayCrcy => throw _privateConstructorUsedError;
   String get postingKeyName => throw _privateConstructorUsedError;
+  String get documentReferenceID => throw _privateConstructorUsedError;
   AmountDocumentType get accountingDocumentType =>
       throw _privateConstructorUsedError;
 
@@ -43,8 +45,10 @@ abstract class $PaymentItemCopyWith<$Res> {
       DateTimeStringValue netDueDate,
       DateTimeStringValue postingDate,
       DateTimeStringValue documentDate,
+      String transactionCurrency,
       double paymentAmountInDisplayCrcy,
       String postingKeyName,
+      String documentReferenceID,
       AmountDocumentType accountingDocumentType});
 }
 
@@ -66,8 +70,10 @@ class _$PaymentItemCopyWithImpl<$Res, $Val extends PaymentItem>
     Object? netDueDate = null,
     Object? postingDate = null,
     Object? documentDate = null,
+    Object? transactionCurrency = null,
     Object? paymentAmountInDisplayCrcy = null,
     Object? postingKeyName = null,
+    Object? documentReferenceID = null,
     Object? accountingDocumentType = null,
   }) {
     return _then(_value.copyWith(
@@ -91,6 +97,10 @@ class _$PaymentItemCopyWithImpl<$Res, $Val extends PaymentItem>
           ? _value.documentDate
           : documentDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      transactionCurrency: null == transactionCurrency
+          ? _value.transactionCurrency
+          : transactionCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
       paymentAmountInDisplayCrcy: null == paymentAmountInDisplayCrcy
           ? _value.paymentAmountInDisplayCrcy
           : paymentAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
@@ -98,6 +108,10 @@ class _$PaymentItemCopyWithImpl<$Res, $Val extends PaymentItem>
       postingKeyName: null == postingKeyName
           ? _value.postingKeyName
           : postingKeyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      documentReferenceID: null == documentReferenceID
+          ? _value.documentReferenceID
+          : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as String,
       accountingDocumentType: null == accountingDocumentType
           ? _value.accountingDocumentType
@@ -121,8 +135,10 @@ abstract class _$$_PaymentItemCopyWith<$Res>
       DateTimeStringValue netDueDate,
       DateTimeStringValue postingDate,
       DateTimeStringValue documentDate,
+      String transactionCurrency,
       double paymentAmountInDisplayCrcy,
       String postingKeyName,
+      String documentReferenceID,
       AmountDocumentType accountingDocumentType});
 }
 
@@ -142,8 +158,10 @@ class __$$_PaymentItemCopyWithImpl<$Res>
     Object? netDueDate = null,
     Object? postingDate = null,
     Object? documentDate = null,
+    Object? transactionCurrency = null,
     Object? paymentAmountInDisplayCrcy = null,
     Object? postingKeyName = null,
+    Object? documentReferenceID = null,
     Object? accountingDocumentType = null,
   }) {
     return _then(_$_PaymentItem(
@@ -167,6 +185,10 @@ class __$$_PaymentItemCopyWithImpl<$Res>
           ? _value.documentDate
           : documentDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      transactionCurrency: null == transactionCurrency
+          ? _value.transactionCurrency
+          : transactionCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
       paymentAmountInDisplayCrcy: null == paymentAmountInDisplayCrcy
           ? _value.paymentAmountInDisplayCrcy
           : paymentAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
@@ -174,6 +196,10 @@ class __$$_PaymentItemCopyWithImpl<$Res>
       postingKeyName: null == postingKeyName
           ? _value.postingKeyName
           : postingKeyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      documentReferenceID: null == documentReferenceID
+          ? _value.documentReferenceID
+          : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as String,
       accountingDocumentType: null == accountingDocumentType
           ? _value.accountingDocumentType
@@ -192,8 +218,10 @@ class _$_PaymentItem extends _PaymentItem {
       required this.netDueDate,
       required this.postingDate,
       required this.documentDate,
+      required this.transactionCurrency,
       required this.paymentAmountInDisplayCrcy,
       required this.postingKeyName,
+      required this.documentReferenceID,
       required this.accountingDocumentType})
       : super._();
 
@@ -208,15 +236,19 @@ class _$_PaymentItem extends _PaymentItem {
   @override
   final DateTimeStringValue documentDate;
   @override
+  final String transactionCurrency;
+  @override
   final double paymentAmountInDisplayCrcy;
   @override
   final String postingKeyName;
+  @override
+  final String documentReferenceID;
   @override
   final AmountDocumentType accountingDocumentType;
 
   @override
   String toString() {
-    return 'PaymentItem(searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, netDueDate: $netDueDate, postingDate: $postingDate, documentDate: $documentDate, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, postingKeyName: $postingKeyName, accountingDocumentType: $accountingDocumentType)';
+    return 'PaymentItem(searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, netDueDate: $netDueDate, postingDate: $postingDate, documentDate: $documentDate, transactionCurrency: $transactionCurrency, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, postingKeyName: $postingKeyName, documentReferenceID: $documentReferenceID, accountingDocumentType: $accountingDocumentType)';
   }
 
   @override
@@ -234,12 +266,16 @@ class _$_PaymentItem extends _PaymentItem {
                 other.postingDate == postingDate) &&
             (identical(other.documentDate, documentDate) ||
                 other.documentDate == documentDate) &&
+            (identical(other.transactionCurrency, transactionCurrency) ||
+                other.transactionCurrency == transactionCurrency) &&
             (identical(other.paymentAmountInDisplayCrcy,
                     paymentAmountInDisplayCrcy) ||
                 other.paymentAmountInDisplayCrcy ==
                     paymentAmountInDisplayCrcy) &&
             (identical(other.postingKeyName, postingKeyName) ||
                 other.postingKeyName == postingKeyName) &&
+            (identical(other.documentReferenceID, documentReferenceID) ||
+                other.documentReferenceID == documentReferenceID) &&
             (identical(other.accountingDocumentType, accountingDocumentType) ||
                 other.accountingDocumentType == accountingDocumentType));
   }
@@ -252,8 +288,10 @@ class _$_PaymentItem extends _PaymentItem {
       netDueDate,
       postingDate,
       documentDate,
+      transactionCurrency,
       paymentAmountInDisplayCrcy,
       postingKeyName,
+      documentReferenceID,
       accountingDocumentType);
 
   @JsonKey(ignore: true)
@@ -270,8 +308,10 @@ abstract class _PaymentItem extends PaymentItem {
           required final DateTimeStringValue netDueDate,
           required final DateTimeStringValue postingDate,
           required final DateTimeStringValue documentDate,
+          required final String transactionCurrency,
           required final double paymentAmountInDisplayCrcy,
           required final String postingKeyName,
+          required final String documentReferenceID,
           required final AmountDocumentType accountingDocumentType}) =
       _$_PaymentItem;
   const _PaymentItem._() : super._();
@@ -287,9 +327,13 @@ abstract class _PaymentItem extends PaymentItem {
   @override
   DateTimeStringValue get documentDate;
   @override
+  String get transactionCurrency;
+  @override
   double get paymentAmountInDisplayCrcy;
   @override
   String get postingKeyName;
+  @override
+  String get documentReferenceID;
   @override
   AmountDocumentType get accountingDocumentType;
   @override

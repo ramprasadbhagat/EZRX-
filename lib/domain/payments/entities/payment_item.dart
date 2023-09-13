@@ -14,8 +14,10 @@ class PaymentItem with _$PaymentItem {
     required DateTimeStringValue netDueDate,
     required DateTimeStringValue postingDate,
     required DateTimeStringValue documentDate,
+    required String transactionCurrency,
     required double paymentAmountInDisplayCrcy,
     required String postingKeyName,
+    required String documentReferenceID,
     required AmountDocumentType accountingDocumentType,
   }) = _PaymentItem;
 
@@ -25,8 +27,10 @@ class PaymentItem with _$PaymentItem {
         netDueDate: DateTimeStringValue(''),
         postingDate: DateTimeStringValue(''),
         documentDate: DateTimeStringValue(''),
+        transactionCurrency: '',
         paymentAmountInDisplayCrcy: 0.0,
         postingKeyName: '',
+        documentReferenceID: '',
         accountingDocumentType: AmountDocumentType(''),
       );
 }
@@ -45,4 +49,10 @@ extension PaymentItemListExtension on List<PaymentItem> {
         .map((item) => item.paymentAmountInDisplayCrcy)
         .fold(0.0, (result, amount) => result + amount);
   }
+
+  double get totalInInvoice => List<PaymentItem>.from(this).fold(
+        0,
+        (previousValue, element) =>
+            previousValue + element.paymentAmountInDisplayCrcy,
+      );
 }

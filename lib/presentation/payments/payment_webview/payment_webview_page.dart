@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +37,7 @@ class _PaymentWebviewPageState extends State<PaymentWebviewPage> {
             final uri = await controller.getUrl();
             if (uri != null && (uri.path).contains('my-account/thankyou')) {
               if (mounted) {
-                Navigator.of(context).pop(
+                await context.router.pop(
                   uri,
                 );
               }

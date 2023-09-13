@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
@@ -20,11 +21,14 @@ class NewPaymentLocalDataSourceMock extends Mock
 class NewPaymentRemoteDataSourceMock extends Mock
     implements NewPaymentRemoteDataSource {}
 
+class FileSystemHelperMock extends Mock implements FileSystemHelper {}
+
 void main() {
   late NewPaymentRepository nawPaymentsRepository;
   late Config mockConfig;
   late NewPaymentLocalDataSource newPaymentLocalDataSource;
   late NewPaymentRemoteDataSource newPaymentRemoteDataSource;
+  late FileSystemHelper fileSystemHelper;
 
   final customerOpenItemsList = [CustomerOpenItem.empty()];
 
@@ -32,11 +36,13 @@ void main() {
     mockConfig = MockConfig();
     newPaymentLocalDataSource = NewPaymentLocalDataSourceMock();
     newPaymentRemoteDataSource = NewPaymentRemoteDataSourceMock();
+    fileSystemHelper = FileSystemHelperMock();
 
     nawPaymentsRepository = NewPaymentRepository(
       config: mockConfig,
       localDataSource: newPaymentLocalDataSource,
       remoteDataSource: newPaymentRemoteDataSource,
+      fileSystemHelper: fileSystemHelper,
     );
   });
 

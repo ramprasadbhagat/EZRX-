@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
 import 'package:flutter/services.dart';
 
@@ -40,5 +41,15 @@ class NewPaymentLocalDataSource {
         'assets/json/updatePaymentGatewayResponse.json',
       ),
     );
+  }
+
+  Future<PaymentInvoiceInfoPdf> getPaymentInvoiceInfoPdf() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/paymentInvoiceInfoPdf.json',
+      ),
+    );
+
+    return data['data']['paymentInvoicePdf'];
   }
 }

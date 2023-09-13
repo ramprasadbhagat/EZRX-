@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 abstract class IDeviceRepository {
   Future<Either<ApiFailure, bool>> getDeviceData();
@@ -15,4 +16,6 @@ abstract class IDeviceRepository {
   Future<Either<ApiFailure, Unit>> setCurrentMarket({
     required String currentMarket,
   });
+
+  Future<Either<ApiFailure, PermissionStatus>> getSavePermission();
 }

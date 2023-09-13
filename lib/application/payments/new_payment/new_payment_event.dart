@@ -33,4 +33,14 @@ class NewPaymentEvent with _$NewPaymentEvent {
     required SalesOrganisation salesOrganisation,
     required Uri paymentUrl,
   }) = _UpdatePaymentGateway;
+
+  const factory NewPaymentEvent.fetchInvoiceInfoPdf({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required User user,
+  }) = _FetchInvoiceInfoPdf;
+
+  const factory NewPaymentEvent.saveInvoicePdf({
+    required Uint8List dataInvoicePdf,
+  }) = _SaveInvoicePdf;
 }

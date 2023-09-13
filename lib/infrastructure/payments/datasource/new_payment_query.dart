@@ -81,7 +81,46 @@ class NewPaymentQuery {
     return '''
     mutation updatePaymentGatewayMutation(\$input: updatePaymentGatewayInput!) {
       updatePaymentGateway(input: \$input) {
-      message
+        message
+      }
+    }''';
+  }
+
+  String getPaymentInvoiceInfoPdf() {
+    return '''
+    query paymentInvoicePdf(\$request: paymentInvoiceRequest!) {
+      paymentInvoicePdf(request: \$request) {
+        valueDate
+        paymentID
+        zzAdvice
+        paymentDue
+        paymentMethod
+        customerName
+        payer
+        beneficiaryName
+        bankName
+        branch
+        bankCode
+        bankAccount
+        hdbcSwiftCode
+        bankAddress
+        payNowUen
+        emailId
+        qrCode
+        paymentBatchAdditionalInfo
+        paymentItems {
+          postingKeyName
+          accountingDocument
+          documentDate
+          transactionCurrency
+          paymentAmountInDisplayCrcy
+          documentReferenceID
+        }
+        salesDistrict
+        footer
+        headerLogoPath
+        pleaseNote
+        header
       }
     }
     ''';

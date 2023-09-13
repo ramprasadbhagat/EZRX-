@@ -30,10 +30,14 @@ mixin _$PaymentItemDto {
   String get postingDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentDate', defaultValue: '')
   String get documentDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'transactionCurrency', defaultValue: '')
+  String get transactionCurrency => throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
   double get paymentAmountInDisplayCrcy => throw _privateConstructorUsedError;
   @JsonKey(name: 'postingKeyName', defaultValue: '')
   String get postingKeyName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'documentReferenceID', defaultValue: '')
+  String get documentReferenceID => throw _privateConstructorUsedError;
   @JsonKey(name: 'accountingDocumentType', defaultValue: '')
   String get accountingDocumentType => throw _privateConstructorUsedError;
 
@@ -51,17 +55,25 @@ abstract class $PaymentItemDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'accountingDocument', defaultValue: '')
-      String accountingDocument,
+          String accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-      String accountingDocumentItem,
-      @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
-      @JsonKey(name: 'postingDate', defaultValue: '') String postingDate,
-      @JsonKey(name: 'documentDate', defaultValue: '') String documentDate,
+          String accountingDocumentItem,
+      @JsonKey(name: 'netDueDate', defaultValue: '')
+          String netDueDate,
+      @JsonKey(name: 'postingDate', defaultValue: '')
+          String postingDate,
+      @JsonKey(name: 'documentDate', defaultValue: '')
+          String documentDate,
+      @JsonKey(name: 'transactionCurrency', defaultValue: '')
+          String transactionCurrency,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-      double paymentAmountInDisplayCrcy,
-      @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
+          double paymentAmountInDisplayCrcy,
+      @JsonKey(name: 'postingKeyName', defaultValue: '')
+          String postingKeyName,
+      @JsonKey(name: 'documentReferenceID', defaultValue: '')
+          String documentReferenceID,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-      String accountingDocumentType});
+          String accountingDocumentType});
 }
 
 /// @nodoc
@@ -82,8 +94,10 @@ class _$PaymentItemDtoCopyWithImpl<$Res, $Val extends PaymentItemDto>
     Object? netDueDate = null,
     Object? postingDate = null,
     Object? documentDate = null,
+    Object? transactionCurrency = null,
     Object? paymentAmountInDisplayCrcy = null,
     Object? postingKeyName = null,
+    Object? documentReferenceID = null,
     Object? accountingDocumentType = null,
   }) {
     return _then(_value.copyWith(
@@ -107,6 +121,10 @@ class _$PaymentItemDtoCopyWithImpl<$Res, $Val extends PaymentItemDto>
           ? _value.documentDate
           : documentDate // ignore: cast_nullable_to_non_nullable
               as String,
+      transactionCurrency: null == transactionCurrency
+          ? _value.transactionCurrency
+          : transactionCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
       paymentAmountInDisplayCrcy: null == paymentAmountInDisplayCrcy
           ? _value.paymentAmountInDisplayCrcy
           : paymentAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
@@ -114,6 +132,10 @@ class _$PaymentItemDtoCopyWithImpl<$Res, $Val extends PaymentItemDto>
       postingKeyName: null == postingKeyName
           ? _value.postingKeyName
           : postingKeyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      documentReferenceID: null == documentReferenceID
+          ? _value.documentReferenceID
+          : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as String,
       accountingDocumentType: null == accountingDocumentType
           ? _value.accountingDocumentType
@@ -133,17 +155,25 @@ abstract class _$$_PaymentItemDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'accountingDocument', defaultValue: '')
-      String accountingDocument,
+          String accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-      String accountingDocumentItem,
-      @JsonKey(name: 'netDueDate', defaultValue: '') String netDueDate,
-      @JsonKey(name: 'postingDate', defaultValue: '') String postingDate,
-      @JsonKey(name: 'documentDate', defaultValue: '') String documentDate,
+          String accountingDocumentItem,
+      @JsonKey(name: 'netDueDate', defaultValue: '')
+          String netDueDate,
+      @JsonKey(name: 'postingDate', defaultValue: '')
+          String postingDate,
+      @JsonKey(name: 'documentDate', defaultValue: '')
+          String documentDate,
+      @JsonKey(name: 'transactionCurrency', defaultValue: '')
+          String transactionCurrency,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-      double paymentAmountInDisplayCrcy,
-      @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
+          double paymentAmountInDisplayCrcy,
+      @JsonKey(name: 'postingKeyName', defaultValue: '')
+          String postingKeyName,
+      @JsonKey(name: 'documentReferenceID', defaultValue: '')
+          String documentReferenceID,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-      String accountingDocumentType});
+          String accountingDocumentType});
 }
 
 /// @nodoc
@@ -162,8 +192,10 @@ class __$$_PaymentItemDtoCopyWithImpl<$Res>
     Object? netDueDate = null,
     Object? postingDate = null,
     Object? documentDate = null,
+    Object? transactionCurrency = null,
     Object? paymentAmountInDisplayCrcy = null,
     Object? postingKeyName = null,
+    Object? documentReferenceID = null,
     Object? accountingDocumentType = null,
   }) {
     return _then(_$_PaymentItemDto(
@@ -187,6 +219,10 @@ class __$$_PaymentItemDtoCopyWithImpl<$Res>
           ? _value.documentDate
           : documentDate // ignore: cast_nullable_to_non_nullable
               as String,
+      transactionCurrency: null == transactionCurrency
+          ? _value.transactionCurrency
+          : transactionCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
       paymentAmountInDisplayCrcy: null == paymentAmountInDisplayCrcy
           ? _value.paymentAmountInDisplayCrcy
           : paymentAmountInDisplayCrcy // ignore: cast_nullable_to_non_nullable
@@ -194,6 +230,10 @@ class __$$_PaymentItemDtoCopyWithImpl<$Res>
       postingKeyName: null == postingKeyName
           ? _value.postingKeyName
           : postingKeyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      documentReferenceID: null == documentReferenceID
+          ? _value.documentReferenceID
+          : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as String,
       accountingDocumentType: null == accountingDocumentType
           ? _value.accountingDocumentType
@@ -208,19 +248,25 @@ class __$$_PaymentItemDtoCopyWithImpl<$Res>
 class _$_PaymentItemDto extends _PaymentItemDto {
   const _$_PaymentItemDto(
       {@JsonKey(name: 'accountingDocument', defaultValue: '')
-      required this.accountingDocument,
+          required this.accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-      required this.accountingDocumentItem,
-      @JsonKey(name: 'netDueDate', defaultValue: '') required this.netDueDate,
-      @JsonKey(name: 'postingDate', defaultValue: '') required this.postingDate,
+          required this.accountingDocumentItem,
+      @JsonKey(name: 'netDueDate', defaultValue: '')
+          required this.netDueDate,
+      @JsonKey(name: 'postingDate', defaultValue: '')
+          required this.postingDate,
       @JsonKey(name: 'documentDate', defaultValue: '')
-      required this.documentDate,
+          required this.documentDate,
+      @JsonKey(name: 'transactionCurrency', defaultValue: '')
+          required this.transactionCurrency,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-      required this.paymentAmountInDisplayCrcy,
+          required this.paymentAmountInDisplayCrcy,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
-      required this.postingKeyName,
+          required this.postingKeyName,
+      @JsonKey(name: 'documentReferenceID', defaultValue: '')
+          required this.documentReferenceID,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-      required this.accountingDocumentType})
+          required this.accountingDocumentType})
       : super._();
 
   factory _$_PaymentItemDto.fromJson(Map<String, dynamic> json) =>
@@ -242,18 +288,24 @@ class _$_PaymentItemDto extends _PaymentItemDto {
   @JsonKey(name: 'documentDate', defaultValue: '')
   final String documentDate;
   @override
+  @JsonKey(name: 'transactionCurrency', defaultValue: '')
+  final String transactionCurrency;
+  @override
   @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
   final double paymentAmountInDisplayCrcy;
   @override
   @JsonKey(name: 'postingKeyName', defaultValue: '')
   final String postingKeyName;
   @override
+  @JsonKey(name: 'documentReferenceID', defaultValue: '')
+  final String documentReferenceID;
+  @override
   @JsonKey(name: 'accountingDocumentType', defaultValue: '')
   final String accountingDocumentType;
 
   @override
   String toString() {
-    return 'PaymentItemDto(accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, netDueDate: $netDueDate, postingDate: $postingDate, documentDate: $documentDate, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, postingKeyName: $postingKeyName, accountingDocumentType: $accountingDocumentType)';
+    return 'PaymentItemDto(accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, netDueDate: $netDueDate, postingDate: $postingDate, documentDate: $documentDate, transactionCurrency: $transactionCurrency, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, postingKeyName: $postingKeyName, documentReferenceID: $documentReferenceID, accountingDocumentType: $accountingDocumentType)';
   }
 
   @override
@@ -271,12 +323,16 @@ class _$_PaymentItemDto extends _PaymentItemDto {
                 other.postingDate == postingDate) &&
             (identical(other.documentDate, documentDate) ||
                 other.documentDate == documentDate) &&
+            (identical(other.transactionCurrency, transactionCurrency) ||
+                other.transactionCurrency == transactionCurrency) &&
             (identical(other.paymentAmountInDisplayCrcy,
                     paymentAmountInDisplayCrcy) ||
                 other.paymentAmountInDisplayCrcy ==
                     paymentAmountInDisplayCrcy) &&
             (identical(other.postingKeyName, postingKeyName) ||
                 other.postingKeyName == postingKeyName) &&
+            (identical(other.documentReferenceID, documentReferenceID) ||
+                other.documentReferenceID == documentReferenceID) &&
             (identical(other.accountingDocumentType, accountingDocumentType) ||
                 other.accountingDocumentType == accountingDocumentType));
   }
@@ -290,8 +346,10 @@ class _$_PaymentItemDto extends _PaymentItemDto {
       netDueDate,
       postingDate,
       documentDate,
+      transactionCurrency,
       paymentAmountInDisplayCrcy,
       postingKeyName,
+      documentReferenceID,
       accountingDocumentType);
 
   @JsonKey(ignore: true)
@@ -311,21 +369,25 @@ class _$_PaymentItemDto extends _PaymentItemDto {
 abstract class _PaymentItemDto extends PaymentItemDto {
   const factory _PaymentItemDto(
       {@JsonKey(name: 'accountingDocument', defaultValue: '')
-      required final String accountingDocument,
+          required final String accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
-      required final String accountingDocumentItem,
+          required final String accountingDocumentItem,
       @JsonKey(name: 'netDueDate', defaultValue: '')
-      required final String netDueDate,
+          required final String netDueDate,
       @JsonKey(name: 'postingDate', defaultValue: '')
-      required final String postingDate,
+          required final String postingDate,
       @JsonKey(name: 'documentDate', defaultValue: '')
-      required final String documentDate,
+          required final String documentDate,
+      @JsonKey(name: 'transactionCurrency', defaultValue: '')
+          required final String transactionCurrency,
       @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
-      required final double paymentAmountInDisplayCrcy,
+          required final double paymentAmountInDisplayCrcy,
       @JsonKey(name: 'postingKeyName', defaultValue: '')
-      required final String postingKeyName,
+          required final String postingKeyName,
+      @JsonKey(name: 'documentReferenceID', defaultValue: '')
+          required final String documentReferenceID,
       @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-      required final String accountingDocumentType}) = _$_PaymentItemDto;
+          required final String accountingDocumentType}) = _$_PaymentItemDto;
   const _PaymentItemDto._() : super._();
 
   factory _PaymentItemDto.fromJson(Map<String, dynamic> json) =
@@ -347,11 +409,17 @@ abstract class _PaymentItemDto extends PaymentItemDto {
   @JsonKey(name: 'documentDate', defaultValue: '')
   String get documentDate;
   @override
+  @JsonKey(name: 'transactionCurrency', defaultValue: '')
+  String get transactionCurrency;
+  @override
   @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
   double get paymentAmountInDisplayCrcy;
   @override
   @JsonKey(name: 'postingKeyName', defaultValue: '')
   String get postingKeyName;
+  @override
+  @JsonKey(name: 'documentReferenceID', defaultValue: '')
+  String get documentReferenceID;
   @override
   @JsonKey(name: 'accountingDocumentType', defaultValue: '')
   String get accountingDocumentType;

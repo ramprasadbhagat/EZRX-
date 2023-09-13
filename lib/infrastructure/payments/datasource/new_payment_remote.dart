@@ -6,10 +6,12 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_info_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_invoice_info_pdf_dto.dart';
 
 class NewPaymentRemoteDataSource {
   HttpService httpService;
@@ -177,6 +179,40 @@ class NewPaymentRemoteDataSource {
     }
 
     return result;
+  }
+
+  Future<PaymentInvoiceInfoPdf> getPaymentInvoiceInfoPdf({
+    required String customerCode,
+    required String customerName,
+    required String salesOrg,
+    required String accountingDocExternalReference,
+    required String paymentBatchAdditionalInfo,
+    required String paymentId,
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query': newPaymentQuery.getPaymentInvoiceInfoPdf(),
+          'variables': {
+            'request': {
+              'accountingDocExternalReference': accountingDocExternalReference,
+              'customerCode': customerCode,
+              'customerName': customerName,
+              'payer': customerCode,
+              'paymentBatchAdditionalInfo': paymentBatchAdditionalInfo,
+              'paymentId': paymentId,
+              'salesOrg': salesOrg,
+            },
+          },
+        },
+      ),
+    );
+    _exceptionChecker(property: 'paymentInvoicePdf', res: res);
+    final data = res.data['data']['paymentInvoicePdf'];
+
+    return PaymentInvoiceInfoPdfDto.fromJson(data).toDomain();
   }
 
   void _exceptionChecker({

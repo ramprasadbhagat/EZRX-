@@ -1,24 +1,31 @@
+import 'dart:typed_data';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
+part 'new_payment_bloc.freezed.dart';
 part 'new_payment_event.dart';
 part 'new_payment_state.dart';
-part 'new_payment_bloc.freezed.dart';
 
 class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
   final INewPaymentRepository newPaymentRepository;
+  final IDeviceRepository deviceRepository;
 
-  NewPaymentBloc({required this.newPaymentRepository})
-      : super(NewPaymentState.initial()) {
+  NewPaymentBloc({
+    required this.newPaymentRepository,
+    required this.deviceRepository,
+  }) : super(NewPaymentState.initial()) {
     on(_onEvent);
   }
 
@@ -122,6 +129,82 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
         await newPaymentRepository.updatePaymentGateway(
           salesOrganisation: e.salesOrganisation,
           uri: e.paymentUrl,
+        );
+      },
+      fetchInvoiceInfoPdf: (_FetchInvoiceInfoPdf e) async {
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+            isFetchingInvoiceInfoPdf: true,
+          ),
+        );
+        final failureOrSuccess =
+            await newPaymentRepository.getPaymentInvoiceInfoPdf(
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          user: e.user,
+          paymentInfo: state.paymentInfo,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetchingInvoiceInfoPdf: false,
+              ),
+            );
+          },
+          (invoiceInfoPdf) {
+            emit(
+              state.copyWith(
+                paymentInvoiceInfoPdf: invoiceInfoPdf,
+                isFetchingInvoiceInfoPdf: false,
+              ),
+            );
+          },
+        );
+      },
+      saveInvoicePdf: (_SaveInvoicePdf e) async {
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+            isSavingInvoicePdf: true,
+          ),
+        );
+        final failureOrSuccessPermission =
+            await deviceRepository.getSavePermission();
+        await failureOrSuccessPermission.fold(
+          (failure) async => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
+              isSavingInvoicePdf: false,
+            ),
+          ),
+          (success) async {
+            final failureOrSuccessSave = await newPaymentRepository.saveFile(
+              pdfData: e.dataInvoicePdf,
+            );
+
+            failureOrSuccessSave.fold(
+              (failure) {
+                emit(
+                  state.copyWith(
+                    failureOrSuccessOption: optionOf(failureOrSuccessSave),
+                    isSavingInvoicePdf: false,
+                  ),
+                );
+              },
+              (success) {
+                emit(
+                  state.copyWith(
+                    failureOrSuccessOption: none(),
+                    isSavingInvoicePdf: false,
+                  ),
+                );
+              },
+            );
+          },
         );
       },
     );

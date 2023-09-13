@@ -8,8 +8,10 @@ class PaymentItemQuery {
     netDueDate
     postingDate
     documentDate
+    transactionCurrency
     paymentAmountInDisplayCrcy
     postingKeyName
+    documentReferenceID
     accountingDocumentType
   }
 } 

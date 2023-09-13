@@ -9,9 +9,17 @@ part of 'payment_info_dto.dart';
 _$_PaymentInfoDto _$$_PaymentInfoDtoFromJson(Map<String, dynamic> json) =>
     _$_PaymentInfoDto(
       zzHtmcs: json['zzHtmcs'] as String? ?? '',
+      accountingDocExternalReference:
+          json['accountingDocExternalReference'] as String? ?? '',
+      paymentID: json['paymentID'] as String? ?? '',
+      paymentBatchAdditionalInfo:
+          json['paymentBatchAdditionalInfo'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_PaymentInfoDtoToJson(_$_PaymentInfoDto instance) =>
     <String, dynamic>{
       'zzHtmcs': instance.zzHtmcs,
+      'accountingDocExternalReference': instance.accountingDocExternalReference,
+      'paymentID': instance.paymentID,
+      'paymentBatchAdditionalInfo': instance.paymentBatchAdditionalInfo,
     };

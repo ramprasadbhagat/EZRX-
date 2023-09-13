@@ -46,13 +46,18 @@ abstract class $BonusSampleItemDtoCopyWith<$Res> {
       _$BonusSampleItemDtoCopyWithImpl<$Res, BonusSampleItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
-      @JsonKey(name: 'productCount', defaultValue: 0) int qty,
-      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+      {@JsonKey(name: 'materialNumber', defaultValue: '')
+          String materialNumber,
+      @JsonKey(name: 'productCount', defaultValue: 0)
+          int qty,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          String principalName,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
-      @JsonKey(name: 'ItemId', defaultValue: '') String itemId});
+          String materialDescription,
+      @JsonKey(name: 'principalCode', defaultValue: '')
+          String principalCode,
+      @JsonKey(name: 'ItemId', defaultValue: '')
+          String itemId});
 }
 
 /// @nodoc
@@ -113,13 +118,18 @@ abstract class _$$_BonusSampleItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
-      @JsonKey(name: 'productCount', defaultValue: 0) int qty,
-      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+      {@JsonKey(name: 'materialNumber', defaultValue: '')
+          String materialNumber,
+      @JsonKey(name: 'productCount', defaultValue: 0)
+          int qty,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          String principalName,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
-      @JsonKey(name: 'ItemId', defaultValue: '') String itemId});
+          String materialDescription,
+      @JsonKey(name: 'principalCode', defaultValue: '')
+          String principalCode,
+      @JsonKey(name: 'ItemId', defaultValue: '')
+          String itemId});
 }
 
 /// @nodoc
@@ -174,15 +184,17 @@ class __$$_BonusSampleItemDtoCopyWithImpl<$Res>
 class _$_BonusSampleItemDto extends _BonusSampleItemDto {
   const _$_BonusSampleItemDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-      required this.materialNumber,
-      @JsonKey(name: 'productCount', defaultValue: 0) required this.qty,
+          required this.materialNumber,
+      @JsonKey(name: 'productCount', defaultValue: 0)
+          required this.qty,
       @JsonKey(name: 'principalName', defaultValue: '')
-      required this.principalName,
+          required this.principalName,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      required this.materialDescription,
+          required this.materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
-      required this.principalCode,
-      @JsonKey(name: 'ItemId', defaultValue: '') required this.itemId})
+          required this.principalCode,
+      @JsonKey(name: 'ItemId', defaultValue: '')
+          required this.itemId})
       : super._();
 
   factory _$_BonusSampleItemDto.fromJson(Map<String, dynamic> json) =>
@@ -252,16 +264,17 @@ class _$_BonusSampleItemDto extends _BonusSampleItemDto {
 abstract class _BonusSampleItemDto extends BonusSampleItemDto {
   const factory _BonusSampleItemDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-      required final String materialNumber,
-      @JsonKey(name: 'productCount', defaultValue: 0) required final int qty,
+          required final String materialNumber,
+      @JsonKey(name: 'productCount', defaultValue: 0)
+          required final int qty,
       @JsonKey(name: 'principalName', defaultValue: '')
-      required final String principalName,
+          required final String principalName,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      required final String materialDescription,
+          required final String materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
-      required final String principalCode,
+          required final String principalCode,
       @JsonKey(name: 'ItemId', defaultValue: '')
-      required final String itemId}) = _$_BonusSampleItemDto;
+          required final String itemId}) = _$_BonusSampleItemDto;
   const _BonusSampleItemDto._() : super._();
 
   factory _BonusSampleItemDto.fromJson(Map<String, dynamic> json) =
