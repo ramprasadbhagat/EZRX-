@@ -24,7 +24,7 @@ mixin _$ReturnRequestInformationHeader {
   String get soldTo => throw _privateConstructorUsedError;
   String get createdBy => throw _privateConstructorUsedError;
   RefundTotal get refundTotal => throw _privateConstructorUsedError;
-  DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
+  DateTimeStringValue get createdDateTime => throw _privateConstructorUsedError;
   StatusType get bapiStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -48,7 +48,7 @@ abstract class $ReturnRequestInformationHeaderCopyWith<$Res> {
       String soldTo,
       String createdBy,
       RefundTotal refundTotal,
-      DateTimeStringValue createdDate,
+      DateTimeStringValue createdDateTime,
       StatusType bapiStatus});
 }
 
@@ -73,7 +73,7 @@ class _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
     Object? soldTo = null,
     Object? createdBy = null,
     Object? refundTotal = null,
-    Object? createdDate = null,
+    Object? createdDateTime = null,
     Object? bapiStatus = null,
   }) {
     return _then(_value.copyWith(
@@ -105,9 +105,9 @@ class _$ReturnRequestInformationHeaderCopyWithImpl<$Res,
           ? _value.refundTotal
           : refundTotal // ignore: cast_nullable_to_non_nullable
               as RefundTotal,
-      createdDate: null == createdDate
-          ? _value.createdDate
-          : createdDate // ignore: cast_nullable_to_non_nullable
+      createdDateTime: null == createdDateTime
+          ? _value.createdDateTime
+          : createdDateTime // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
       bapiStatus: null == bapiStatus
           ? _value.bapiStatus
@@ -134,7 +134,7 @@ abstract class _$$_ReturnRequestInformationHeaderCopyWith<$Res>
       String soldTo,
       String createdBy,
       RefundTotal refundTotal,
-      DateTimeStringValue createdDate,
+      DateTimeStringValue createdDateTime,
       StatusType bapiStatus});
 }
 
@@ -158,7 +158,7 @@ class __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>
     Object? soldTo = null,
     Object? createdBy = null,
     Object? refundTotal = null,
-    Object? createdDate = null,
+    Object? createdDateTime = null,
     Object? bapiStatus = null,
   }) {
     return _then(_$_ReturnRequestInformationHeader(
@@ -190,9 +190,9 @@ class __$$_ReturnRequestInformationHeaderCopyWithImpl<$Res>
           ? _value.refundTotal
           : refundTotal // ignore: cast_nullable_to_non_nullable
               as RefundTotal,
-      createdDate: null == createdDate
-          ? _value.createdDate
-          : createdDate // ignore: cast_nullable_to_non_nullable
+      createdDateTime: null == createdDateTime
+          ? _value.createdDateTime
+          : createdDateTime // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
       bapiStatus: null == bapiStatus
           ? _value.bapiStatus
@@ -214,7 +214,7 @@ class _$_ReturnRequestInformationHeader
       required this.soldTo,
       required this.createdBy,
       required this.refundTotal,
-      required this.createdDate,
+      required this.createdDateTime,
       required this.bapiStatus});
 
   @override
@@ -232,13 +232,13 @@ class _$_ReturnRequestInformationHeader
   @override
   final RefundTotal refundTotal;
   @override
-  final DateTimeStringValue createdDate;
+  final DateTimeStringValue createdDateTime;
   @override
   final StatusType bapiStatus;
 
   @override
   String toString() {
-    return 'ReturnRequestInformationHeader(returnReference: $returnReference, specialInstructions: $specialInstructions, requestID: $requestID, cName1: $cName1, soldTo: $soldTo, createdBy: $createdBy, refundTotal: $refundTotal, createdDate: $createdDate, bapiStatus: $bapiStatus)';
+    return 'ReturnRequestInformationHeader(returnReference: $returnReference, specialInstructions: $specialInstructions, requestID: $requestID, cName1: $cName1, soldTo: $soldTo, createdBy: $createdBy, refundTotal: $refundTotal, createdDateTime: $createdDateTime, bapiStatus: $bapiStatus)';
   }
 
   @override
@@ -258,8 +258,8 @@ class _$_ReturnRequestInformationHeader
                 other.createdBy == createdBy) &&
             (identical(other.refundTotal, refundTotal) ||
                 other.refundTotal == refundTotal) &&
-            (identical(other.createdDate, createdDate) ||
-                other.createdDate == createdDate) &&
+            (identical(other.createdDateTime, createdDateTime) ||
+                other.createdDateTime == createdDateTime) &&
             (identical(other.bapiStatus, bapiStatus) ||
                 other.bapiStatus == bapiStatus));
   }
@@ -274,7 +274,7 @@ class _$_ReturnRequestInformationHeader
       soldTo,
       createdBy,
       refundTotal,
-      createdDate,
+      createdDateTime,
       bapiStatus);
 
   @JsonKey(ignore: true)
@@ -295,7 +295,7 @@ abstract class _ReturnRequestInformationHeader
           required final String soldTo,
           required final String createdBy,
           required final RefundTotal refundTotal,
-          required final DateTimeStringValue createdDate,
+          required final DateTimeStringValue createdDateTime,
           required final StatusType bapiStatus}) =
       _$_ReturnRequestInformationHeader;
 
@@ -314,7 +314,7 @@ abstract class _ReturnRequestInformationHeader
   @override
   RefundTotal get refundTotal;
   @override
-  DateTimeStringValue get createdDate;
+  DateTimeStringValue get createdDateTime;
   @override
   StatusType get bapiStatus;
   @override

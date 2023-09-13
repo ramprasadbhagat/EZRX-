@@ -27,6 +27,8 @@ mixin _$RequestInformationHeaderDto {
   String get specialInstructions => throw _privateConstructorUsedError;
   @JsonKey(name: 'createdDate', defaultValue: '')
   String get createdDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'createdTime', defaultValue: '')
+  String get createdTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'cName1', defaultValue: '')
   String get cName1 => throw _privateConstructorUsedError;
   @JsonKey(name: 'refundTotal', defaultValue: '')
@@ -56,23 +58,17 @@ abstract class $RequestInformationHeaderDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'returnReference', defaultValue: '')
-          String returnReference,
+      String returnReference,
       @JsonKey(name: 'specialInstructions', defaultValue: '')
-          String specialInstructions,
-      @JsonKey(name: 'createdDate', defaultValue: '')
-          String createdDate,
-      @JsonKey(name: 'cName1', defaultValue: '')
-          String cName1,
-      @JsonKey(name: 'refundTotal', defaultValue: '')
-          String refundTotal,
-      @JsonKey(name: 'soldTo', defaultValue: '')
-          String soldTo,
-      @JsonKey(name: 'requestID', defaultValue: '')
-          String requestID,
-      @JsonKey(name: 'createdBy', defaultValue: '')
-          String createdBy,
-      @JsonKey(name: 'bapiStatus', defaultValue: '')
-          String bapiStatus});
+      String specialInstructions,
+      @JsonKey(name: 'createdDate', defaultValue: '') String createdDate,
+      @JsonKey(name: 'createdTime', defaultValue: '') String createdTime,
+      @JsonKey(name: 'cName1', defaultValue: '') String cName1,
+      @JsonKey(name: 'refundTotal', defaultValue: '') String refundTotal,
+      @JsonKey(name: 'soldTo', defaultValue: '') String soldTo,
+      @JsonKey(name: 'requestID', defaultValue: '') String requestID,
+      @JsonKey(name: 'createdBy', defaultValue: '') String createdBy,
+      @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus});
 }
 
 /// @nodoc
@@ -92,6 +88,7 @@ class _$RequestInformationHeaderDtoCopyWithImpl<$Res,
     Object? returnReference = null,
     Object? specialInstructions = null,
     Object? createdDate = null,
+    Object? createdTime = null,
     Object? cName1 = null,
     Object? refundTotal = null,
     Object? soldTo = null,
@@ -111,6 +108,10 @@ class _$RequestInformationHeaderDtoCopyWithImpl<$Res,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdTime: null == createdTime
+          ? _value.createdTime
+          : createdTime // ignore: cast_nullable_to_non_nullable
               as String,
       cName1: null == cName1
           ? _value.cName1
@@ -151,23 +152,17 @@ abstract class _$$_RequestInformationHeaderDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'returnReference', defaultValue: '')
-          String returnReference,
+      String returnReference,
       @JsonKey(name: 'specialInstructions', defaultValue: '')
-          String specialInstructions,
-      @JsonKey(name: 'createdDate', defaultValue: '')
-          String createdDate,
-      @JsonKey(name: 'cName1', defaultValue: '')
-          String cName1,
-      @JsonKey(name: 'refundTotal', defaultValue: '')
-          String refundTotal,
-      @JsonKey(name: 'soldTo', defaultValue: '')
-          String soldTo,
-      @JsonKey(name: 'requestID', defaultValue: '')
-          String requestID,
-      @JsonKey(name: 'createdBy', defaultValue: '')
-          String createdBy,
-      @JsonKey(name: 'bapiStatus', defaultValue: '')
-          String bapiStatus});
+      String specialInstructions,
+      @JsonKey(name: 'createdDate', defaultValue: '') String createdDate,
+      @JsonKey(name: 'createdTime', defaultValue: '') String createdTime,
+      @JsonKey(name: 'cName1', defaultValue: '') String cName1,
+      @JsonKey(name: 'refundTotal', defaultValue: '') String refundTotal,
+      @JsonKey(name: 'soldTo', defaultValue: '') String soldTo,
+      @JsonKey(name: 'requestID', defaultValue: '') String requestID,
+      @JsonKey(name: 'createdBy', defaultValue: '') String createdBy,
+      @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus});
 }
 
 /// @nodoc
@@ -186,6 +181,7 @@ class __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>
     Object? returnReference = null,
     Object? specialInstructions = null,
     Object? createdDate = null,
+    Object? createdTime = null,
     Object? cName1 = null,
     Object? refundTotal = null,
     Object? soldTo = null,
@@ -205,6 +201,10 @@ class __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdTime: null == createdTime
+          ? _value.createdTime
+          : createdTime // ignore: cast_nullable_to_non_nullable
               as String,
       cName1: null == cName1
           ? _value.cName1
@@ -239,23 +239,17 @@ class __$$_RequestInformationHeaderDtoCopyWithImpl<$Res>
 class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
   _$_RequestInformationHeaderDto(
       {@JsonKey(name: 'returnReference', defaultValue: '')
-          required this.returnReference,
+      required this.returnReference,
       @JsonKey(name: 'specialInstructions', defaultValue: '')
-          required this.specialInstructions,
-      @JsonKey(name: 'createdDate', defaultValue: '')
-          required this.createdDate,
-      @JsonKey(name: 'cName1', defaultValue: '')
-          required this.cName1,
-      @JsonKey(name: 'refundTotal', defaultValue: '')
-          required this.refundTotal,
-      @JsonKey(name: 'soldTo', defaultValue: '')
-          required this.soldTo,
-      @JsonKey(name: 'requestID', defaultValue: '')
-          required this.requestID,
-      @JsonKey(name: 'createdBy', defaultValue: '')
-          required this.createdBy,
-      @JsonKey(name: 'bapiStatus', defaultValue: '')
-          required this.bapiStatus})
+      required this.specialInstructions,
+      @JsonKey(name: 'createdDate', defaultValue: '') required this.createdDate,
+      @JsonKey(name: 'createdTime', defaultValue: '') required this.createdTime,
+      @JsonKey(name: 'cName1', defaultValue: '') required this.cName1,
+      @JsonKey(name: 'refundTotal', defaultValue: '') required this.refundTotal,
+      @JsonKey(name: 'soldTo', defaultValue: '') required this.soldTo,
+      @JsonKey(name: 'requestID', defaultValue: '') required this.requestID,
+      @JsonKey(name: 'createdBy', defaultValue: '') required this.createdBy,
+      @JsonKey(name: 'bapiStatus', defaultValue: '') required this.bapiStatus})
       : super._();
 
   factory _$_RequestInformationHeaderDto.fromJson(Map<String, dynamic> json) =>
@@ -270,6 +264,9 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
   @override
   @JsonKey(name: 'createdDate', defaultValue: '')
   final String createdDate;
+  @override
+  @JsonKey(name: 'createdTime', defaultValue: '')
+  final String createdTime;
   @override
   @JsonKey(name: 'cName1', defaultValue: '')
   final String cName1;
@@ -291,7 +288,7 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
 
   @override
   String toString() {
-    return 'RequestInformationHeaderDto(returnReference: $returnReference, specialInstructions: $specialInstructions, createdDate: $createdDate, cName1: $cName1, refundTotal: $refundTotal, soldTo: $soldTo, requestID: $requestID, createdBy: $createdBy, bapiStatus: $bapiStatus)';
+    return 'RequestInformationHeaderDto(returnReference: $returnReference, specialInstructions: $specialInstructions, createdDate: $createdDate, createdTime: $createdTime, cName1: $cName1, refundTotal: $refundTotal, soldTo: $soldTo, requestID: $requestID, createdBy: $createdBy, bapiStatus: $bapiStatus)';
   }
 
   @override
@@ -305,6 +302,8 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
                 other.specialInstructions == specialInstructions) &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
+            (identical(other.createdTime, createdTime) ||
+                other.createdTime == createdTime) &&
             (identical(other.cName1, cName1) || other.cName1 == cName1) &&
             (identical(other.refundTotal, refundTotal) ||
                 other.refundTotal == refundTotal) &&
@@ -324,6 +323,7 @@ class _$_RequestInformationHeaderDto extends _RequestInformationHeaderDto {
       returnReference,
       specialInstructions,
       createdDate,
+      createdTime,
       cName1,
       refundTotal,
       soldTo,
@@ -350,23 +350,23 @@ abstract class _RequestInformationHeaderDto
     extends RequestInformationHeaderDto {
   factory _RequestInformationHeaderDto(
       {@JsonKey(name: 'returnReference', defaultValue: '')
-          required final String returnReference,
+      required final String returnReference,
       @JsonKey(name: 'specialInstructions', defaultValue: '')
-          required final String specialInstructions,
+      required final String specialInstructions,
       @JsonKey(name: 'createdDate', defaultValue: '')
-          required final String createdDate,
-      @JsonKey(name: 'cName1', defaultValue: '')
-          required final String cName1,
+      required final String createdDate,
+      @JsonKey(name: 'createdTime', defaultValue: '')
+      required final String createdTime,
+      @JsonKey(name: 'cName1', defaultValue: '') required final String cName1,
       @JsonKey(name: 'refundTotal', defaultValue: '')
-          required final String refundTotal,
-      @JsonKey(name: 'soldTo', defaultValue: '')
-          required final String soldTo,
+      required final String refundTotal,
+      @JsonKey(name: 'soldTo', defaultValue: '') required final String soldTo,
       @JsonKey(name: 'requestID', defaultValue: '')
-          required final String requestID,
+      required final String requestID,
       @JsonKey(name: 'createdBy', defaultValue: '')
-          required final String createdBy,
+      required final String createdBy,
       @JsonKey(name: 'bapiStatus', defaultValue: '')
-          required final String bapiStatus}) = _$_RequestInformationHeaderDto;
+      required final String bapiStatus}) = _$_RequestInformationHeaderDto;
   _RequestInformationHeaderDto._() : super._();
 
   factory _RequestInformationHeaderDto.fromJson(Map<String, dynamic> json) =
@@ -381,6 +381,9 @@ abstract class _RequestInformationHeaderDto
   @override
   @JsonKey(name: 'createdDate', defaultValue: '')
   String get createdDate;
+  @override
+  @JsonKey(name: 'createdTime', defaultValue: '')
+  String get createdTime;
   @override
   @JsonKey(name: 'cName1', defaultValue: '')
   String get cName1;

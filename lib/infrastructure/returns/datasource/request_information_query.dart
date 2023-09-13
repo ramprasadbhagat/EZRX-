@@ -11,6 +11,7 @@ class RequestInformationQuery {
       cName1
       requestID
       createdDate
+      createdTime
       createdBy
       bapiStatus
     }

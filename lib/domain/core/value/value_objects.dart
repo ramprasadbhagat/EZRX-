@@ -127,6 +127,14 @@ class DateTimeStringValue extends ValueObject<String> {
         DateTimeFormatString.displaySimpleDateFormat,
       );
 
+  String get dateTime12HoursString => displayDateTimeString(
+        _valueOrEmpty,
+        DateTimeFormatString.displayDateTime12HoursFormat,
+      );
+
+  String get dateTimeWithTimeZone =>
+      '$dateTime12HoursString ${getTimeZoneAbbreviation(dateTime.timeZoneOffset)}';
+
   String get apiDateTimeString => displayDateTimeString(
         _valueOrEmpty,
         DateTimeFormatString.apiDateFormat,

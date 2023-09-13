@@ -15,6 +15,7 @@ class RequestInformationHeaderDto with _$RequestInformationHeaderDto {
     @JsonKey(name: 'specialInstructions', defaultValue: '')
         required String specialInstructions,
     @JsonKey(name: 'createdDate', defaultValue: '') required String createdDate,
+    @JsonKey(name: 'createdTime', defaultValue: '') required String createdTime,
     @JsonKey(name: 'cName1', defaultValue: '') required String cName1,
     @JsonKey(name: 'refundTotal', defaultValue: '') required String refundTotal,
     @JsonKey(name: 'soldTo', defaultValue: '') required String soldTo,
@@ -29,7 +30,7 @@ class RequestInformationHeaderDto with _$RequestInformationHeaderDto {
       specialInstructions: SpecialInstructions(specialInstructions),
       cName1: cName1,
       createdBy: createdBy,
-      createdDate: DateTimeStringValue(createdDate),
+      createdDateTime: DateTimeStringValue('$createdDate|$createdTime'),
       refundTotal: RefundTotal(refundTotal),
       requestID: requestID,
       soldTo: soldTo,

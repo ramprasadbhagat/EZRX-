@@ -18,7 +18,8 @@ class RequestInformation with _$RequestInformation {
       );
   String get returnId => requestInformationHeader.requestID;
   String get customerName => requestInformationHeader.cName1;
-  String get submittedDate => requestInformationHeader.createdDate.dateString;
+  String get submittedDate =>
+      requestInformationHeader.createdDateTime.dateString;
   double get refundTotal => requestInformationHeader.refundTotal.refundTotal;
   String get createdBy => requestInformationHeader.createdBy;
   String get soldTo => requestInformationHeader.soldTo;

@@ -30,7 +30,7 @@ class ReturnSummaryDetailsSection extends StatelessWidget {
           requestInformationHeader: requestInformationHeader,
         ),
         StatusTrackerSection(
-          createDate: requestInformation.createdDate,
+          createDateTime: requestInformationHeader.createdDateTime,
           onTap: () {},
           status: requestInformation.status.displayStatus,
           title: 'Return request status'.tr(),

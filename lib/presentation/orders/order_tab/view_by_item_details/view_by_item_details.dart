@@ -85,7 +85,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
                         orderHistoryItem: state.orderHistoryItem,
                       ),
                       StatusTrackerSection(
-                        createDate: state.orderHistoryItem.createdDate,
+                        createDateTime: state.orderHistoryItem.createdDate,
                         title: 'Order status'.tr(),
                         status:
                             state.orderHistoryItem.status.displayOrderStatus,

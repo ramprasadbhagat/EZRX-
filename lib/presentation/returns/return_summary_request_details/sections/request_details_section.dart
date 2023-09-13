@@ -29,7 +29,7 @@ class RequestDetailsSection extends StatelessWidget {
           returnItem: returnItem,
         ),
         StatusTrackerSection(
-          createDate: requestInformationHeader.createdDate,
+          createDateTime: requestInformationHeader.createdDateTime,
           onTap: () {},
           status: returnItem.status.displayStatusForViewByRequest,
           title: 'Return request status'.tr(),
@@ -84,7 +84,7 @@ class _ReturnDetailsSection extends StatelessWidget {
           BalanceTextRow(
             keyText: 'Request date'.tr(),
             keyFlex: 2,
-            valueText: requestInformationHeader.createdDate.dateString,
+            valueText: requestInformationHeader.createdDateTime.dateString,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
                 ),

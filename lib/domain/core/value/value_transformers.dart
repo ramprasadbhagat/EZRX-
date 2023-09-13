@@ -2,7 +2,6 @@ import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 String stringCapitalize(String text) {
@@ -122,6 +121,34 @@ bool isNumericOnly(String text) => RegExp(r'^\d+$').hasMatch(text);
 DateTime? tryParseDateTime(String input) {
   if (isNotEmpty(input)) {
     try {
+      //Case 'date|time' example: '20230905|1693894295'
+      if (RegExp(r'^\d{8}\|\d*$').hasMatch(input)) {
+        final parts = input.split('|');
+        final dateStr = parts.first;
+        final date = DateTime.parse(dateStr);
+
+        final timeStr = parts[1];
+        if (timeStr.isEmpty) {
+          return DateTime.utc(
+            date.year,
+            date.month,
+            date.day,
+          ).toLocal();
+        } else {
+          final timestamp = int.parse(timeStr);
+          final time = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+
+          return DateTime.utc(
+            date.year,
+            date.month,
+            date.day,
+            time.hour,
+            time.minute,
+            time.second,
+          ).toLocal();
+        }
+      }
+
       //input with format yyyyddmmhh
       final intVal = getDateTimeIntValue(input);
       if (intVal > 0) {
@@ -194,6 +221,23 @@ String emptyIfZero(num value) {
 
 int getDateTimeIntValue(String value) =>
     isNumericOnly(value) ? int.parse(value) : 0;
+
+String getTimeZoneAbbreviation(Duration timeZoneOffset) {
+  final abbreviationMap = {
+    -8: 'PST',
+    -7: 'MST',
+    -6: 'CST',
+    -5: 'EST',
+    -4: 'AST',
+    -3: 'ADT',
+    0: 'GMT',
+    1: 'CET',
+    7: 'ICT',
+    8: 'SGT',
+  };
+
+  return abbreviationMap[timeZoneOffset.inHours] ?? '';
+}
 
 String dashIfEmpty(String text) {
   return text.isEmpty ? '-' : text;

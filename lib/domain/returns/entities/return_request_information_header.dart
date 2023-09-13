@@ -14,7 +14,7 @@ class ReturnRequestInformationHeader with _$ReturnRequestInformationHeader {
     required String soldTo,
     required String createdBy,
     required RefundTotal refundTotal,
-    required DateTimeStringValue createdDate,
+    required DateTimeStringValue createdDateTime,
     required StatusType bapiStatus,
   }) = _ReturnRequestInformationHeader;
   factory ReturnRequestInformationHeader.empty() =>
@@ -26,7 +26,7 @@ class ReturnRequestInformationHeader with _$ReturnRequestInformationHeader {
         soldTo: '',
         createdBy: '',
         requestID: '',
-        createdDate: DateTimeStringValue(''),
+        createdDateTime: DateTimeStringValue(''),
         bapiStatus: StatusType(''),
       );
 }
