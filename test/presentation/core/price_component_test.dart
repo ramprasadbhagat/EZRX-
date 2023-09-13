@@ -68,7 +68,7 @@ void main() {
       expect(priceComponentWidget, findsOneWidget);
       expect(
         find.text(
-          '${salesOrgConfig.currency.code} 25.50',
+          '${salesOrgConfig.currency.code} -25.50',
           findRichText: true,
         ),
         findsOneWidget,
