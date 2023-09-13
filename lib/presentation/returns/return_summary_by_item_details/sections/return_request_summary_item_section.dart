@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -24,12 +23,9 @@ class ReturnSummaryItemSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PoAttachmentBloc, PoAttachmentState>(
-      listener: (context, state) {},
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: ReturnItemSection(requestInformation: requestInformation),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: ReturnItemSection(requestInformation: requestInformation),
     );
   }
 }

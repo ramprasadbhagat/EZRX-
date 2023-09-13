@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -70,29 +71,36 @@ class AddPolicyConfigurationState extends State<AddPolicyConfiguration> {
                 const SizedBox(
                   height: 16,
                 ),
-                BlocListener<PolicyConfigurationBloc, PolicyConfigurationState>(
-                  listener: (context, state) {},
+                BlocConsumer<PolicyConfigurationBloc, PolicyConfigurationState>(
                   listenWhen: (previous, current) =>
                       previous.returnsAllowed != current.returnsAllowed,
-                  child: BlocBuilder<PolicyConfigurationBloc,
-                      PolicyConfigurationState>(
-                    builder: (context, state) {
-                      return state.returnsAllowed.getOrCrash()
-                          ? Column(
-                              children: const [
-                                _MonthsBeforeExpiryField(),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                _MonthsAfterExpiryField(),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                              ],
-                            )
-                          : const SizedBox.shrink();
-                    },
-                  ),
+                  listener: (context, state) {
+                    state.failureOrSuccessOption.fold(
+                      () {},
+                      (either) => either.fold(
+                        (failure) {
+                          ErrorUtils.handleApiFailure(context, failure);
+                        },
+                        (_) {},
+                      ),
+                    );
+                  },
+                  builder: (context, state) {
+                    return state.returnsAllowed.getOrCrash()
+                        ? Column(
+                            children: const [
+                              _MonthsBeforeExpiryField(),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              _MonthsAfterExpiryField(),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          )
+                        : const SizedBox.shrink();
+                  },
                 ),
                 const _SubmitButton(),
               ],
