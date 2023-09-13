@@ -46,6 +46,21 @@ class _ProductImageSection extends StatelessWidget {
                             ),
                           )
                         : const SizedBox.shrink(),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: CovidLabel(
+                        materialInfo: productDetailState
+                            .productDetailAggregate.materialInfo,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 _ProductImages(

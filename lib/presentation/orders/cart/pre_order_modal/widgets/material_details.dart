@@ -1,4 +1,4 @@
-part of '../pre_order_modal.dart';
+part of 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 
 class _MaterialDetails extends StatelessWidget {
   final PriceAggregate cartItem;
@@ -36,10 +36,10 @@ class _MaterialDetails extends StatelessWidget {
             ),
           ),
           if (cartItem.materialInfo.type.typeMaterial)
-          PriceComponent(
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-            price: cartItem.display(PriceType.finalPrice),
-          ),
+            PriceComponent(
+              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              price: cartItem.finalPriceTotalForAllMaterial,
+            ),
         ],
       ),
     );

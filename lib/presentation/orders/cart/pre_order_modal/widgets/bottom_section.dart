@@ -1,4 +1,4 @@
-part of '../pre_order_modal.dart';
+part of 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 
 class _BottomSection extends StatelessWidget {
   @override

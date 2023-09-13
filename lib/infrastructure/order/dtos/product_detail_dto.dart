@@ -35,6 +35,8 @@ class ProductDetailDto with _$ProductDetailDto {
         required String materialBrand,
     @JsonKey(name: 'isFavourite', defaultValue: false)
         required bool isFavourite,
+    @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+        required bool isFOCMaterial,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
         required String defaultMaterialDescription,
     @JsonKey(name: 'country', defaultValue: '') required String country,
@@ -77,7 +79,7 @@ class ProductDetailDto with _$ProductDetailDto {
         hasMandatoryTenderContract: false,
         taxClassification: MaterialTaxClassification(''),
         bundles: [],
-        isFOCMaterial: false,
+        isFOCMaterial: isFOCMaterial,
         quantity: 0,
         remarks: '',
         data: <MaterialData>[],

@@ -40,6 +40,7 @@ class _ViewByOrderItem extends StatelessWidget {
         label: orderHistoryItem.materialNumber.displayMatNo,
         title: orderHistoryItem.materialDescription,
         subtitle: orderHistoryItem.manufactureName,
+        isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
         headerText:
             '${'Order'.tr()} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
         statusWidget: StatusLabel(

@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MaterialFilter {
   bool get isFavourite => throw _privateConstructorUsedError;
+  bool get isFOCMaterial => throw _privateConstructorUsedError;
   bool get bundleOffers => throw _privateConstructorUsedError;
   bool get isProductOffer => throw _privateConstructorUsedError;
   Sort get sortBy => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $MaterialFilterCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isFavourite,
+      bool isFOCMaterial,
       bool bundleOffers,
       bool isProductOffer,
       Sort sortBy,
@@ -67,6 +69,7 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
   @override
   $Res call({
     Object? isFavourite = null,
+    Object? isFOCMaterial = null,
     Object? bundleOffers = null,
     Object? isProductOffer = null,
     Object? sortBy = null,
@@ -80,6 +83,10 @@ class _$MaterialFilterCopyWithImpl<$Res, $Val extends MaterialFilter>
       isFavourite: null == isFavourite
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFOCMaterial: null == isFOCMaterial
+          ? _value.isFOCMaterial
+          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
       bundleOffers: null == bundleOffers
           ? _value.bundleOffers
@@ -127,6 +134,7 @@ abstract class _$$_MaterialFilterCopyWith<$Res>
   @useResult
   $Res call(
       {bool isFavourite,
+      bool isFOCMaterial,
       bool bundleOffers,
       bool isProductOffer,
       Sort sortBy,
@@ -149,6 +157,7 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isFavourite = null,
+    Object? isFOCMaterial = null,
     Object? bundleOffers = null,
     Object? isProductOffer = null,
     Object? sortBy = null,
@@ -162,6 +171,10 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
       isFavourite: null == isFavourite
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFOCMaterial: null == isFOCMaterial
+          ? _value.isFOCMaterial
+          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
       bundleOffers: null == bundleOffers
           ? _value.bundleOffers
@@ -204,6 +217,7 @@ class __$$_MaterialFilterCopyWithImpl<$Res>
 class _$_MaterialFilter extends _MaterialFilter {
   const _$_MaterialFilter(
       {this.isFavourite = false,
+      this.isFOCMaterial = false,
       this.bundleOffers = false,
       this.isProductOffer = false,
       this.sortBy = Sort.az,
@@ -223,6 +237,9 @@ class _$_MaterialFilter extends _MaterialFilter {
   @override
   @JsonKey()
   final bool isFavourite;
+  @override
+  @JsonKey()
+  final bool isFOCMaterial;
   @override
   @JsonKey()
   final bool bundleOffers;
@@ -280,7 +297,7 @@ class _$_MaterialFilter extends _MaterialFilter {
 
   @override
   String toString() {
-    return 'MaterialFilter(isFavourite: $isFavourite, bundleOffers: $bundleOffers, isProductOffer: $isProductOffer, sortBy: $sortBy, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
+    return 'MaterialFilter(isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, bundleOffers: $bundleOffers, isProductOffer: $isProductOffer, sortBy: $sortBy, manufactureMapOptions: $manufactureMapOptions, countryMapOptions: $countryMapOptions, brandList: $brandList, manufactureListSelected: $manufactureListSelected, countryListSelected: $countryListSelected)';
   }
 
   @override
@@ -290,6 +307,8 @@ class _$_MaterialFilter extends _MaterialFilter {
             other is _$_MaterialFilter &&
             (identical(other.isFavourite, isFavourite) ||
                 other.isFavourite == isFavourite) &&
+            (identical(other.isFOCMaterial, isFOCMaterial) ||
+                other.isFOCMaterial == isFOCMaterial) &&
             (identical(other.bundleOffers, bundleOffers) ||
                 other.bundleOffers == bundleOffers) &&
             (identical(other.isProductOffer, isProductOffer) ||
@@ -311,6 +330,7 @@ class _$_MaterialFilter extends _MaterialFilter {
   int get hashCode => Object.hash(
       runtimeType,
       isFavourite,
+      isFOCMaterial,
       bundleOffers,
       isProductOffer,
       sortBy,
@@ -330,6 +350,7 @@ class _$_MaterialFilter extends _MaterialFilter {
 abstract class _MaterialFilter extends MaterialFilter {
   const factory _MaterialFilter(
           {final bool isFavourite,
+          final bool isFOCMaterial,
           final bool bundleOffers,
           final bool isProductOffer,
           final Sort sortBy,
@@ -343,6 +364,8 @@ abstract class _MaterialFilter extends MaterialFilter {
 
   @override
   bool get isFavourite;
+  @override
+  bool get isFOCMaterial;
   @override
   bool get bundleOffers;
   @override

@@ -18,6 +18,7 @@ _$_ProductDetailDto _$$_ProductDetailDtoFromJson(Map<String, dynamic> json) =>
       itemBrand: json['itemBrand'] as String? ?? '',
       materialBrand: json['materialBrand'] as String? ?? '',
       isFavourite: json['isFavourite'] as bool? ?? false,
+      isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
       country: json['country'] as String? ?? '',
@@ -41,6 +42,7 @@ Map<String, dynamic> _$$_ProductDetailDtoToJson(_$_ProductDetailDto instance) =>
       'itemBrand': instance.itemBrand,
       'materialBrand': instance.materialBrand,
       'isFavourite': instance.isFavourite,
+      'isFOCMaterial': instance.isFOCMaterial,
       'defaultMaterialDescription': instance.defaultMaterialDescription,
       'country': instance.country,
       'countryName': instance.countryName,

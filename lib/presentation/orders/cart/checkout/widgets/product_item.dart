@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -88,6 +89,11 @@ class _ProductImageSection extends StatelessWidget {
         cartProduct.price.isBonusDealEligible
             ? const _OfferTag()
             : const SizedBox.shrink(),
+        if (cartProduct.materialInfo.isFOCMaterial)
+          const Positioned(
+            bottom: 20,
+            child: CovidTag(),
+          ),
       ],
     );
   }
@@ -219,7 +225,7 @@ class _QuantityAndPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return Padding(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -236,9 +242,10 @@ class _QuantityAndPrice extends StatelessWidget {
             children: [
               PriceComponent(
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price: cartItem.display(PriceType.finalPriceTotal),
+                price: cartItem.finalPriceTotalForAllMaterial,
               ),
-              if (cartItem.showTaxBreakDown)
+              if (cartItem.showTaxBreakDown &&
+                  !cartItem.materialInfo.isFOCMaterial)
                 ItemTax(
                   cartItem: cartItem,
                 ),

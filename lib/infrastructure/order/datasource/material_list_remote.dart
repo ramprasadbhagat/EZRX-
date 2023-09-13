@@ -31,6 +31,7 @@ class MaterialListRemoteDataSource {
     required bool gimmickMaterial,
     required String language,
     required bool isFavourite,
+    required bool isFOCMaterial,
     required bool bundleOffers,
     required bool isProductOffer,
     required String orderByName,
@@ -55,6 +56,7 @@ class MaterialListRemoteDataSource {
       };
 
       if (isFavourite) variables['request']!['IsFavourite'] = isFavourite;
+      if (isFOCMaterial) variables['request']!['isFOCMaterial'] = isFOCMaterial;
       if (bundleOffers) variables['request']!['Type'] = 'bundle';
       if (isProductOffer) variables['request']!['isOffer'] = isProductOffer;
       if (manufactureList.isNotEmpty) {

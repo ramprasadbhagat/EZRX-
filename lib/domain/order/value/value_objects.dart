@@ -729,8 +729,11 @@ class DocumentType extends ValueObject<String> {
   bool get isZPFC => value.getOrElse(() => '').contains('ZPFC');
 
   bool get isZPOR => value.getOrElse(() => '').contains('ZPOR');
+  bool get isZPVF => value.getOrElse(() => '').contains('ZPVF');
+  bool get isZPFV => value.getOrElse(() => '').contains('ZPFV');
 
   bool get isSpecialOrderType => isZPFB || isZPFC;
+  bool get isCovidOrderType => isZPVF || isZPFV;
 
   factory DocumentType(String input) =>
       DocumentType._(validateStringNotEmpty(input));

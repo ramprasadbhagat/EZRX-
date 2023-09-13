@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section_for_covid.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -118,18 +119,21 @@ class AddToCartButton extends StatelessWidget {
 
   void _addToCart(BuildContext context, PriceAggregate selectedCartItem) {
     final cartState = context.read<CartBloc>().state;
-    if (selectedCartItem.materialInfo.materialGroup4.isFOC &&
-        cartState.containNonCovidMaterial) {
-      CustomSnackBar(
-        messageText:
-            'Covid material cannot be combined with commercial material.'.tr(),
-      ).show(context);
-    } else if (!selectedCartItem.materialInfo.materialGroup4.isFOC &&
-        cartState.containCovidMaterial) {
-      CustomSnackBar(
-        messageText:
-            'Commercial material cannot be combined with covid material.'.tr(),
-      ).show(context);
+    final isFocMaterialInCart = cartState.containFocMaterialInCartProduct;
+    final isFocMaterial = selectedCartItem.materialInfo.isFOCMaterial;
+
+    if ((isFocMaterial && !isFocMaterialInCart) ||
+        (!isFocMaterial && isFocMaterialInCart)) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        enableDrag: false,
+        isDismissible: false,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        builder: (_) {
+          return const AddToCartErrorSection();
+        },
+      );
     } else if (selectedCartItem.isSpecialOrderType &&
         selectedCartItem.materialInfo.isFOCMaterial &&
         cartState.containSampleMaterial &&

@@ -1,4 +1,4 @@
-part of '../order_success_page.dart';
+part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 
 class _PayerInformation extends StatelessWidget {
   const _PayerInformation({Key? key}) : super(key: key);

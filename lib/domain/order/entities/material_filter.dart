@@ -9,6 +9,7 @@ class MaterialFilter with _$MaterialFilter {
 
   const factory MaterialFilter({
     @Default(false) bool isFavourite,
+    @Default(false) bool isFOCMaterial,
     @Default(false) bool bundleOffers,
     @Default(false) bool isProductOffer,
     @Default(Sort.az) Sort sortBy,
@@ -21,8 +22,6 @@ class MaterialFilter with _$MaterialFilter {
   }) = _MaterialFilter;
 
   factory MaterialFilter.empty() => const MaterialFilter(
-        isFavourite: false,
-        bundleOffers: false,
         sortBy: Sort.az,
         manufactureMapOptions: <String, bool>{},
         countryMapOptions: <MaterialFilterCountry, bool>{},

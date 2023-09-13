@@ -40,6 +40,8 @@ mixin _$ProductDetailDto {
   String get materialBrand => throw _privateConstructorUsedError;
   @JsonKey(name: 'isFavourite', defaultValue: false)
   bool get isFavourite => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+  bool get isFOCMaterial => throw _privateConstructorUsedError;
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'country', defaultValue: '')
@@ -90,6 +92,8 @@ abstract class $ProductDetailDtoCopyWith<$Res> {
           String materialBrand,
       @JsonKey(name: 'isFavourite', defaultValue: false)
           bool isFavourite,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          bool isFOCMaterial,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
           String defaultMaterialDescription,
       @JsonKey(name: 'country', defaultValue: '')
@@ -131,6 +135,7 @@ class _$ProductDetailDtoCopyWithImpl<$Res, $Val extends ProductDetailDto>
     Object? itemBrand = null,
     Object? materialBrand = null,
     Object? isFavourite = null,
+    Object? isFOCMaterial = null,
     Object? defaultMaterialDescription = null,
     Object? country = null,
     Object? countryName = null,
@@ -180,6 +185,10 @@ class _$ProductDetailDtoCopyWithImpl<$Res, $Val extends ProductDetailDto>
       isFavourite: null == isFavourite
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFOCMaterial: null == isFOCMaterial
+          ? _value.isFOCMaterial
+          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
@@ -246,6 +255,8 @@ abstract class _$$_ProductDetailDtoCopyWith<$Res>
           String materialBrand,
       @JsonKey(name: 'isFavourite', defaultValue: false)
           bool isFavourite,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          bool isFOCMaterial,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
           String defaultMaterialDescription,
       @JsonKey(name: 'country', defaultValue: '')
@@ -285,6 +296,7 @@ class __$$_ProductDetailDtoCopyWithImpl<$Res>
     Object? itemBrand = null,
     Object? materialBrand = null,
     Object? isFavourite = null,
+    Object? isFOCMaterial = null,
     Object? defaultMaterialDescription = null,
     Object? country = null,
     Object? countryName = null,
@@ -334,6 +346,10 @@ class __$$_ProductDetailDtoCopyWithImpl<$Res>
       isFavourite: null == isFavourite
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFOCMaterial: null == isFOCMaterial
+          ? _value.isFOCMaterial
+          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
@@ -395,6 +411,8 @@ class _$_ProductDetailDto extends _ProductDetailDto {
           required this.materialBrand,
       @JsonKey(name: 'isFavourite', defaultValue: false)
           required this.isFavourite,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          required this.isFOCMaterial,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
           required this.defaultMaterialDescription,
       @JsonKey(name: 'country', defaultValue: '')
@@ -447,6 +465,9 @@ class _$_ProductDetailDto extends _ProductDetailDto {
   @JsonKey(name: 'isFavourite', defaultValue: false)
   final bool isFavourite;
   @override
+  @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+  final bool isFOCMaterial;
+  @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   final String defaultMaterialDescription;
   @override
@@ -473,7 +494,7 @@ class _$_ProductDetailDto extends _ProductDetailDto {
 
   @override
   String toString() {
-    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, promoType: $promoType, promoStatus: $promoStatus)';
+    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber)';
   }
 
   @override
@@ -501,6 +522,8 @@ class _$_ProductDetailDto extends _ProductDetailDto {
                 other.materialBrand == materialBrand) &&
             (identical(other.isFavourite, isFavourite) ||
                 other.isFavourite == isFavourite) &&
+            (identical(other.isFOCMaterial, isFOCMaterial) ||
+                other.isFOCMaterial == isFOCMaterial) &&
             (identical(other.defaultMaterialDescription,
                     defaultMaterialDescription) ||
                 other.defaultMaterialDescription ==
@@ -534,6 +557,7 @@ class _$_ProductDetailDto extends _ProductDetailDto {
       itemBrand,
       materialBrand,
       isFavourite,
+      isFOCMaterial,
       defaultMaterialDescription,
       country,
       countryName,
@@ -579,6 +603,8 @@ abstract class _ProductDetailDto extends ProductDetailDto {
           required final String materialBrand,
       @JsonKey(name: 'isFavourite', defaultValue: false)
           required final bool isFavourite,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          required final bool isFOCMaterial,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
           required final String defaultMaterialDescription,
       @JsonKey(name: 'country', defaultValue: '')
@@ -630,6 +656,9 @@ abstract class _ProductDetailDto extends ProductDetailDto {
   @override
   @JsonKey(name: 'isFavourite', defaultValue: false)
   bool get isFavourite;
+  @override
+  @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+  bool get isFOCMaterial;
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   String get defaultMaterialDescription;

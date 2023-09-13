@@ -1,4 +1,4 @@
-part of '../products_tab.dart';
+part of 'package:ezrxmobile/presentation/products/products_tab.dart';
 
 class _BundleGridItem extends StatelessWidget {
   final MaterialInfo materialInfo;

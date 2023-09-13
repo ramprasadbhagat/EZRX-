@@ -25,6 +25,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'OrderNumber', defaultValue: '') required String orderNumber,
     @JsonKey(name: 'CreatedDate', defaultValue: '') required String createdDate,
     @JsonKey(name: 'OrderBy', defaultValue: '') required String orderBy,
+    @JsonKey(name: 'OrderType', defaultValue: '') required String orderType,
     @JsonKey(name: 'Batch', defaultValue: '') required String batch,
     @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
         required bool isBonusMaterial,
@@ -56,6 +57,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       tax: orderHistoryItem.tax,
       batch: orderHistoryItem.batch.getOrCrash(),
       orderBy: orderHistoryItem.orderBy,
+      orderType: orderHistoryItem.orderType.getOrCrash(),
       isBonusMaterial: orderHistoryItem.isBonusMaterial,
       telephoneNumber: orderHistoryItem.telephoneNumber.displayTelephoneNumber,
       invoiceNumber: orderHistoryItem.invoiceNumber,
@@ -81,6 +83,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       tax: tax,
       batch: StringValue(batch),
       orderBy: orderBy,
+      orderType: DocumentType(orderType),
       expiryDate: DateTimeStringValue(expiryDate),
       invoiceNumber: invoiceNumber,
       isBonusMaterial: isBonusMaterial,

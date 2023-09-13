@@ -57,6 +57,7 @@ class ItemDetailsSection extends StatelessWidget {
             headerText: batchNumDisplay
                 ? 'Batch: ${orderHistoryItem.batch.displayNAIfEmpty}\n(EXP: ${orderHistoryItem.expiryDate.dateOrNaString})'
                 : null,
+            isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
           ),
         ],
       ),

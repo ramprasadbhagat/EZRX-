@@ -91,9 +91,23 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
             isFetching: true,
           ),
         );
-
+        _filterFOCMaterial(e.products, emit);
         final materialNumbers =
             e.products.map((e) => e.materialNumber).toList();
+        final queryMaterialNumber = materialNumbers
+            .where(
+              (element) => !state.materialPrice.containsKey(element),
+            )
+            .toList();
+        if (queryMaterialNumber.isEmpty) {
+          emit(
+            state.copyWith(
+              isFetching: false,
+            ),
+          );
+
+          return;
+        }
 
         final failureOrSuccess = await repository.getMaterialPrice(
           customerCodeInfo: e.customerCodeInfo,
@@ -128,12 +142,13 @@ class MaterialPriceBloc extends Bloc<MaterialPriceEvent, MaterialPriceState> {
   ) {
     final focMaterialDetails = <MaterialNumber, Price>{};
     for (final material in materials) {
-      if (material.materialGroup4.isFOC) {
+      if (material.isFOCMaterial) {
         final materialNumber = material.materialNumber;
         focMaterialDetails.addEntries(
           {
             materialNumber: Price.empty().copyWith(
               materialNumber: materialNumber,
+              isValid: false,
             ),
           }.entries,
         );

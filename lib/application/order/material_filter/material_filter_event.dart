@@ -26,6 +26,7 @@ class MaterialFilterEvent with _$MaterialFilterEvent {
 
 enum MaterialFilterType {
   isFavourite,
+  isFOCMaterial,
   productOffers,
   bundleOffers,
   sortBy,

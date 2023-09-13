@@ -19,6 +19,7 @@ import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section_for_covid.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/available_offer.dart';
@@ -26,6 +27,7 @@ import 'package:ezrxmobile/presentation/products/product_details/widget/material
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/similar_product.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/stock_info.dart';
+import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -344,25 +346,27 @@ class _FooterState extends State<_Footer> {
   bool _isEligibleForAddToCart({
     required BuildContext context,
     required Price price,
+    required bool isFoc,
   }) {
     final disableCreateOrder =
         !context.read<UserBloc>().state.user.userCanCreateOrder;
     if (disableCreateOrder) return false;
+    final materialWithoutPrice =
+        context.read<SalesOrgBloc>().state.configs.materialWithoutPrice;
+    final materialInStock = (!context
+            .read<ProductDetailBloc>()
+            .state
+            .productDetailAggregate
+            .stockInfo
+            .inStock
+            .isMaterialInStock
+        ? !context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials
+        : true);
 
-    return !(price.finalPrice.isEmpty &&
-            !context.read<SalesOrgBloc>().state.configs.materialWithoutPrice) &&
-        (!context
-                .read<ProductDetailBloc>()
-                .state
-                .productDetailAggregate
-                .stockInfo
-                .inStock
-                .isMaterialInStock
-            ? !context
-                .read<EligibilityBloc>()
-                .state
-                .doNotAllowOutOfStockMaterials
-            : true);
+    return isFoc
+        ? (materialWithoutPrice && materialInStock)
+        : !(price.finalPrice.isEmpty && !materialWithoutPrice) &&
+            materialInStock;
   }
 
   @override
@@ -432,45 +436,99 @@ class _FooterState extends State<_Footer> {
                         },
                         buildWhen: (previous, current) =>
                             previous.isUpserting != current.isUpserting ||
-                            previous.isFetching != current.isFetching,
+                            previous.isFetching != current.isFetching ||
+                            previous.isClearing != current.isClearing,
                         builder: (context, stateCart) {
                           return LoadingShimmer.withChild(
                             enabled:
                                 stateCart.isUpserting || stateDetail.isFetching,
                             child: ElevatedButton(
-                              onPressed: !_isEligibleForAddToCart(
-                                context: context,
-                                price: price,
-                              )
+                              onPressed: stateCart.isUpserting ||
+                                      !_isEligibleForAddToCart(
+                                        context: context,
+                                        price: price,
+                                        isFoc: stateDetail
+                                            .productDetailAggregate
+                                            .materialInfo
+                                            .isFOCMaterial,
+                                      )
                                   ? null
                                   : () {
-                                      context.read<CartBloc>().add(
-                                            CartEvent.upsertCart(
-                                              priceAggregate:
-                                                  PriceAggregate.empty()
-                                                      .copyWith(
-                                                materialInfo: stateDetail
-                                                    .productDetailAggregate
-                                                    .materialInfo,
-                                                price: price,
-                                                salesOrgConfig: context
-                                                    .read<SalesOrgBloc>()
-                                                    .state
-                                                    .configs,
-                                              ),
-                                              quantity: stateCart
-                                                      .getQuantityOfProduct(
-                                                    productNumber: stateDetail
-                                                        .productDetailAggregate
-                                                        .materialInfo
-                                                        .materialNumber,
-                                                  ) +
-                                                  int.parse(
-                                                    _quantityEditingController
-                                                        .text,
-                                                  ),
-                                            ),
+                                      if (stateCart.cartProducts.isNotEmpty) {
+                                        if (stateDetail.productDetailAggregate
+                                                .materialInfo.isFOCMaterial &&
+                                            !stateCart
+                                                .containFocMaterialInCartProduct) {
+                                          _showDEtailsPagePage(
+                                            context: context,
                                           );
+                                        } else if (!stateDetail
+                                                .productDetailAggregate
+                                                .materialInfo
+                                                .isFOCMaterial &&
+                                            stateCart
+                                                .containFocMaterialInCartProduct) {
+                                          _showDEtailsPagePage(
+                                            context: context,
+                                          );
+                                        } else {
+                                          context.read<CartBloc>().add(
+                                                CartEvent.upsertCart(
+                                                  priceAggregate:
+                                                      PriceAggregate.empty()
+                                                          .copyWith(
+                                                    materialInfo: stateDetail
+                                                        .productDetailAggregate
+                                                        .materialInfo,
+                                                    price: price,
+                                                    salesOrgConfig: context
+                                                        .read<SalesOrgBloc>()
+                                                        .state
+                                                        .configs,
+                                                  ),
+                                                  quantity: stateCart
+                                                          .getQuantityOfProduct(
+                                                        productNumber: stateDetail
+                                                            .productDetailAggregate
+                                                            .materialInfo
+                                                            .materialNumber,
+                                                      ) +
+                                                      int.parse(
+                                                        _quantityEditingController
+                                                            .text,
+                                                      ),
+                                                ),
+                                              );
+                                        }
+                                      } else {
+                                        context.read<CartBloc>().add(
+                                              CartEvent.upsertCart(
+                                                priceAggregate:
+                                                    PriceAggregate.empty()
+                                                        .copyWith(
+                                                  materialInfo: stateDetail
+                                                      .productDetailAggregate
+                                                      .materialInfo,
+                                                  price: price,
+                                                  salesOrgConfig: context
+                                                      .read<SalesOrgBloc>()
+                                                      .state
+                                                      .configs,
+                                                ),
+                                                quantity: stateCart
+                                                        .getQuantityOfProduct(
+                                                      productNumber: stateDetail
+                                                          .productDetailAggregate
+                                                          .materialInfo
+                                                          .materialNumber,
+                                                    ) +
+                                                    int.parse(
+                                                      _quantityEditingController
+                                                          .text,
+                                                    ),
+                                              ),
+                                            );
+                                      }
                                     },
                               child: SizedBox(
                                 width: double.maxFinite,
@@ -492,4 +550,19 @@ class _FooterState extends State<_Footer> {
       ),
     );
   }
+}
+
+void _showDEtailsPagePage({
+  required BuildContext context,
+}) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    enableDrag: false,
+    isDismissible: false,
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    builder: (_) {
+      return const AddToCartErrorSection();
+    },
+  );
 }

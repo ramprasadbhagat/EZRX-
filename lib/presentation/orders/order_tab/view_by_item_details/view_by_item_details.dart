@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -25,11 +26,40 @@ class ViewByItemDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final viewByItemDetailsState = context.read<ViewByItemDetailsBloc>().state;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Item Details'.tr()),
         centerTitle: false,
       ),
+      bottomNavigationBar: (viewByItemDetailsState
+                  .orderHistoryItem.orderType.isCovidOrderType &&
+              eligibilityState.isCovidMaterialEnable)
+          ? SafeArea(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                child: OutlinedButton(
+                  key: WidgetKeys.deleteAdviceButtonKey,
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(
+                      color: ZPColors.primary,
+                    ),
+                  ),
+                  child: Text(
+                    'Buy again'.tr(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelMedium
+                        ?.copyWith(color: ZPColors.primary),
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            )
+          : null,
       body: BlocConsumer<ViewByItemDetailsBloc, ViewByItemDetailsState>(
         listener: (context, state) {
           state.failureOrSuccessOption.fold(

@@ -1,4 +1,4 @@
-part of '../pre_order_modal.dart';
+part of 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 
 class _PriceSection extends StatelessWidget {
   final PriceAggregate cartProduct;
@@ -11,9 +11,10 @@ class _PriceSection extends StatelessWidget {
       children: [
         PriceComponent(
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-          price: cartProduct.display(PriceType.finalPriceTotal),
+          price: cartProduct.finalPriceTotalForAllMaterial,
         ),
-        if (cartProduct.showTaxBreakDown)
+        if (cartProduct.showTaxBreakDown &&
+            !cartProduct.materialInfo.isFOCMaterial)
           ItemTax(
             cartItem: cartProduct,
           ),

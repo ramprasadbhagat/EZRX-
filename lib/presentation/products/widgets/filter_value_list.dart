@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -47,11 +48,7 @@ class _FilterValueListState extends State<FilterValueList> {
                         context.read<MaterialFilterBloc>().add(
                               MaterialFilterEvent.updateSelectedMaterialFilter(
                                 MaterialFilterType.isFavourite,
-                                !context
-                                    .read<MaterialListBloc>()
-                                    .state
-                                    .selectedMaterialFilter
-                                    .isFavourite,
+                                !state.selectedMaterialFilter.isFavourite,
                               ),
                             );
                         context.read<MaterialListBloc>().add(
@@ -70,21 +67,78 @@ class _FilterValueListState extends State<FilterValueList> {
                                     .read<CustomerCodeBloc>()
                                     .state
                                     .shipToInfo,
-                                selectedMaterialFilter: context
-                                    .read<MaterialListBloc>()
-                                    .state
-                                    .selectedMaterialFilter
-                                    .copyWith(
-                                      isFavourite: !context
-                                          .read<MaterialListBloc>()
-                                          .state
-                                          .selectedMaterialFilter
-                                          .isFavourite,
-                                    ),
+                                selectedMaterialFilter:
+                                    state.selectedMaterialFilter.copyWith(
+                                  isFavourite:
+                                      !state.selectedMaterialFilter.isFavourite,
+                                ),
                               ),
                             );
                       },
               );
+            },
+          ),
+          BlocBuilder<MaterialListBloc, MaterialListState>(
+            buildWhen: (previous, current) =>
+                previous.selectedMaterialFilter.isFOCMaterial !=
+                current.selectedMaterialFilter.isFOCMaterial,
+            builder: (context, state) {
+              return context.read<EligibilityBloc>().state.isCovidMaterialEnable
+                  ? ChoiceChip(
+                      label: Text(
+                        'Covid-19'.tr(),
+                      ),
+                      selected: state.selectedMaterialFilter.isFOCMaterial,
+                      backgroundColor: ZPColors.secondaryEmerald10,
+                      selectedColor: ZPColors.primary,
+                      labelStyle: Theme.of(context)
+                          .chipTheme
+                          .labelStyle
+                          ?.copyWith(
+                            color: state.selectedMaterialFilter.isFOCMaterial
+                                ? ZPColors.white
+                                : ZPColors.shadesBlack,
+                          ),
+                      onSelected: widget.isFetching
+                          ? null
+                          : (value) {
+                              context.read<MaterialFilterBloc>().add(
+                                    MaterialFilterEvent
+                                        .updateSelectedMaterialFilter(
+                                      MaterialFilterType.isFOCMaterial,
+                                      !state
+                                          .selectedMaterialFilter.isFOCMaterial,
+                                    ),
+                                  );
+                              context.read<MaterialListBloc>().add(
+                                    MaterialListEvent.fetch(
+                                      salesOrganisation: context
+                                          .read<SalesOrgBloc>()
+                                          .state
+                                          .salesOrganisation,
+                                      configs: context
+                                          .read<SalesOrgBloc>()
+                                          .state
+                                          .configs,
+                                      customerCodeInfo: context
+                                          .read<CustomerCodeBloc>()
+                                          .state
+                                          .customerCodeInfo,
+                                      shipToInfo: context
+                                          .read<CustomerCodeBloc>()
+                                          .state
+                                          .shipToInfo,
+                                      selectedMaterialFilter:
+                                          state.selectedMaterialFilter.copyWith(
+                                        isFOCMaterial: !state
+                                            .selectedMaterialFilter
+                                            .isFOCMaterial,
+                                      ),
+                                    ),
+                                  );
+                            },
+                    )
+                  : const SizedBox.shrink();
             },
           ),
         ],

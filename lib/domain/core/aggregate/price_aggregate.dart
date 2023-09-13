@@ -241,6 +241,12 @@ class PriceAggregate with _$PriceAggregate {
     return finalPrice * quantity;
   }
 
+  String get finalPriceTotalForAllMaterial {
+    return materialInfo.isFOCMaterial
+        ? 'Price not available'
+        : display(PriceType.finalPriceTotal);
+  }
+
   double get finalPriceTotalWithTax => finalPriceTotal + itemTax;
 
   double get itemTaxPercent => salesOrgConfig.displayItemTaxBreakdown

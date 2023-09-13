@@ -49,7 +49,9 @@ class EligibilityState with _$EligibilityState {
         // 2. Sample item
         customerCodeInfo.customerGrp4.canOrderCovidMaterial ||
         // 3. PH Covid tab
-        (user.role.type.isSalesRepRole && salesOrganisation.salesOrg.isPH);
+        (!user.role.type.isSalesRepRole &&
+            customerCodeInfo.customerGrp4.canOrderCovidMaterial &&
+            salesOrganisation.salesOrg.isPH);
   }
 
   bool get isOrderTypeEnable {

@@ -120,6 +120,14 @@ class MaterialFilterBloc
               ),
             );
             break;
+          case MaterialFilterType.isFOCMaterial:
+            emit(
+              state.copyWith(
+                materialFilter:
+                    state.materialFilter.copyWith(isFOCMaterial: e.key as bool),
+              ),
+            );
+            break;
           case MaterialFilterType.bundleOffers:
             emit(
               state.copyWith(

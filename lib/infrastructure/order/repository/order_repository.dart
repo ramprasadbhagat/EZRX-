@@ -504,6 +504,10 @@ class OrderRepository implements IOrderRepository {
       totalTax: totalTax,
       language: user.settings.languagePreference.languageCode,
       paymentMethod: 'Bank Transfer',
+      orderType: getOrderType(
+        cartItems: cartProducts,
+        customerCodeInfo: customerCodeInfo,
+      ),
     );
   }
 
@@ -595,3 +599,21 @@ List<SubmitMaterialInfo> _getMaterialInfoList({
                 ),
         )
         .toList();
+
+String getOrderType({
+  required List<PriceAggregate> cartItems,
+  required CustomerCodeInfo customerCodeInfo,
+}) {
+  final hasFocMaterial =
+      cartItems.any((element) => element.materialInfo.isFOCMaterial);
+
+  if (hasFocMaterial) {
+    if (customerCodeInfo.customerGrp4.isVP) {
+      return 'ZPFV';
+    } else if (customerCodeInfo.customerGrp4.isVR) {
+      return 'ZPVF';
+    }
+  }
+
+  return 'ZPOR';
+}

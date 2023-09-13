@@ -30,6 +30,7 @@ mixin _$SubmitOrder {
   String get referenceNotes => throw _privateConstructorUsedError;
   String get paymentTerms => throw _privateConstructorUsedError;
   String get collectiveNumber => throw _privateConstructorUsedError;
+  String get orderType => throw _privateConstructorUsedError;
   bool get blockOrder => throw _privateConstructorUsedError;
   List<PoDocuments> get poDocuments => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
@@ -61,6 +62,7 @@ abstract class $SubmitOrderCopyWith<$Res> {
       String referenceNotes,
       String paymentTerms,
       String collectiveNumber,
+      String orderType,
       bool blockOrder,
       List<PoDocuments> poDocuments,
       String language,
@@ -96,6 +98,7 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
     Object? referenceNotes = null,
     Object? paymentTerms = null,
     Object? collectiveNumber = null,
+    Object? orderType = null,
     Object? blockOrder = null,
     Object? poDocuments = null,
     Object? language = null,
@@ -158,6 +161,10 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
           ? _value.collectiveNumber
           : collectiveNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      orderType: null == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as String,
       blockOrder: null == blockOrder
           ? _value.blockOrder
           : blockOrder // ignore: cast_nullable_to_non_nullable
@@ -209,6 +216,7 @@ abstract class _$$_SubmitOrderCustomerCopyWith<$Res>
       String referenceNotes,
       String paymentTerms,
       String collectiveNumber,
+      String orderType,
       bool blockOrder,
       List<PoDocuments> poDocuments,
       String language,
@@ -243,6 +251,7 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
     Object? referenceNotes = null,
     Object? paymentTerms = null,
     Object? collectiveNumber = null,
+    Object? orderType = null,
     Object? blockOrder = null,
     Object? poDocuments = null,
     Object? language = null,
@@ -305,6 +314,10 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
           ? _value.collectiveNumber
           : collectiveNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      orderType: null == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as String,
       blockOrder: null == blockOrder
           ? _value.blockOrder
           : blockOrder // ignore: cast_nullable_to_non_nullable
@@ -343,6 +356,7 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
       required this.referenceNotes,
       required this.paymentTerms,
       required this.collectiveNumber,
+      required this.orderType,
       required this.blockOrder,
       required final List<PoDocuments> poDocuments,
       required this.language,
@@ -386,6 +400,8 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   @override
   final String collectiveNumber;
   @override
+  final String orderType;
+  @override
   final bool blockOrder;
   final List<PoDocuments> _poDocuments;
   @override
@@ -402,7 +418,7 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
 
   @override
   String toString() {
-    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod)';
+    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, orderType: $orderType, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod)';
   }
 
   @override
@@ -436,6 +452,8 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
                 other.paymentTerms == paymentTerms) &&
             (identical(other.collectiveNumber, collectiveNumber) ||
                 other.collectiveNumber == collectiveNumber) &&
+            (identical(other.orderType, orderType) ||
+                other.orderType == orderType) &&
             (identical(other.blockOrder, blockOrder) ||
                 other.blockOrder == blockOrder) &&
             const DeepCollectionEquality()
@@ -447,26 +465,28 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      userName,
-      companyName,
-      customer,
-      poReference,
-      const DeepCollectionEquality().hash(_products),
-      poDate,
-      requestedDeliveryDate,
-      specialInstructions,
-      orderValue,
-      totalTax,
-      telephone,
-      referenceNotes,
-      paymentTerms,
-      collectiveNumber,
-      blockOrder,
-      const DeepCollectionEquality().hash(_poDocuments),
-      language,
-      paymentMethod);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        userName,
+        companyName,
+        customer,
+        poReference,
+        const DeepCollectionEquality().hash(_products),
+        poDate,
+        requestedDeliveryDate,
+        specialInstructions,
+        orderValue,
+        totalTax,
+        telephone,
+        referenceNotes,
+        paymentTerms,
+        collectiveNumber,
+        orderType,
+        blockOrder,
+        const DeepCollectionEquality().hash(_poDocuments),
+        language,
+        paymentMethod
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -492,6 +512,7 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
       required final String referenceNotes,
       required final String paymentTerms,
       required final String collectiveNumber,
+      required final String orderType,
       required final bool blockOrder,
       required final List<PoDocuments> poDocuments,
       required final String language,
@@ -526,6 +547,8 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
   String get paymentTerms;
   @override
   String get collectiveNumber;
+  @override
+  String get orderType;
   @override
   bool get blockOrder;
   @override

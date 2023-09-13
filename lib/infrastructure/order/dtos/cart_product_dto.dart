@@ -32,6 +32,8 @@ class CartProductDto with _$CartProductDto {
         required String therapeuticClass,
     @JsonKey(name: 'taxClassification', defaultValue: '')
         required String taxClassification,
+    @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+        required bool isFOCMaterial,
     @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
         required String itemRegistrationNumber,
     @JsonKey(name: 'genericMaterialName', defaultValue: '')
@@ -72,6 +74,7 @@ class CartProductDto with _$CartProductDto {
       quantity: cartItemDetails.materialInfo.quantity,
       taxClassification:
           cartItemDetails.materialInfo.taxClassification.getOrDefaultValue(''),
+      isFOCMaterial: cartItemDetails.materialInfo.isFOCMaterial,
       taxes: cartItemDetails.materialInfo.taxes,
       therapeuticClass: cartItemDetails.materialInfo.therapeuticClass,
       type: cartItemDetails.materialInfo.type.getOrCrash(),
@@ -112,6 +115,7 @@ class CartProductDto with _$CartProductDto {
       parentID: parentID,
       quantity: quantity,
       taxClassification: MaterialTaxClassification(taxClassification),
+      isFOCMaterial: isFOCMaterial,
       taxes: taxes,
       hidePrice: hidePrice,
       therapeuticClass: therapeuticClass,

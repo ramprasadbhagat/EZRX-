@@ -24,6 +24,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required DateTimeStringValue createdDate,
     required StringValue batch,
     required String orderBy,
+    required DocumentType orderType,
     required DateTimeStringValue expiryDate,
     required POReference pOReference,
     required String manufactureName,
@@ -59,6 +60,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         specialInstructions: SpecialInstructions(''),
         tax: 0.0,
         orderBy: '',
+        orderType: DocumentType(''),
         orderStatusTracker: <OrderStatusTracker>[],
       );
 

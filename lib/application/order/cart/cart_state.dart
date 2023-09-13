@@ -46,6 +46,9 @@ class CartState with _$CartState {
   bool get containFocMaterial =>
       cartProducts.any((e) => e.materialInfo.isFOCMaterial);
 
+  bool get containFocMaterialInCartProduct =>
+      cartProducts.any((e) => e.materialInfo.isFOCMaterial);
+
   bool get containNonFocMaterial =>
       cartProducts.any((e) => !e.materialInfo.isFOCMaterial);
 

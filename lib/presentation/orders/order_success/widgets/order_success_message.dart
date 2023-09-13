@@ -1,4 +1,4 @@
-part of '../order_success_page.dart';
+part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 
 class _OrderSuccessMessage extends StatelessWidget {
   const _OrderSuccessMessage({Key? key}) : super(key: key);

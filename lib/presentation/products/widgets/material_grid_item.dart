@@ -5,6 +5,7 @@ import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -63,6 +64,12 @@ class MaterialGridItem extends StatelessWidget {
                           materialInfo: materialInfo,
                         ),
                       ],
+                    ),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: CovidLabel(
+                        materialInfo: materialInfo,
+                      ),
                     ),
                     Align(
                       alignment: Alignment.bottomRight,

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section_for_covid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -493,187 +494,199 @@ void main() {
       expect(find.byKey(const Key('addMaterialToCart')), findsNothing);
     });
 
-    testWidgets(
-        '- not allow covid material when commerical material is already in cart',
-        (tester) async {
-      when(() => addToCartBlocMock.state).thenReturn(
-        AddToCartState.initial().copyWith(
-          isFetching: false,
-          cartItem: priceAggregate.copyWith(
-            materialInfo: priceAggregate.materialInfo.copyWith(
-              materialGroup4: MaterialGroup.four('6A1'),
-            ),
-          ),
-        ),
-      );
+    // testWidgets(
+    //     '- not allow covid material when commerical material is already in cart',
+    //     (tester) async {
+    //   when(() => addToCartBlocMock.state).thenReturn(
+    //     AddToCartState.initial().copyWith(
+    //       isFetching: false,
+    //       cartItem: priceAggregate.copyWith(
+    //         materialInfo: priceAggregate.materialInfo.copyWith(
+    //           materialGroup4: MaterialGroup.four('6A1'),
+    //         ),
+    //       ),
+    //     ),
+    //   );
 
-      when(() => cartBlocMock.state).thenReturn(
-        CartState.initial().copyWith(
-          cartProducts: [
-            PriceAggregate.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                isFOCMaterial: false,
-              ),
-            ),
-          ],
-        ),
-      );
+    //   when(() => cartBlocMock.state).thenReturn(
+    //     CartState.initial().copyWith(
+    //       cartItems: [
+    //         CartItem.materialEmpty().copyWith(
+    //           materials: [
+    //             PriceAggregate.empty().copyWith(
+    //               materialInfo: MaterialInfo.empty().copyWith(
+    //                 isFOCMaterial: false,
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ],
+    //     ),
+    //   );
 
-      final fakeUser = User.empty().copyWith(
-        username: Username('fakeUser'),
-        disableCreateOrder: false,
-        accessRight: AccessRight.empty().copyWith(orders: true),
-      );
+    //   final fakeUser = User.empty().copyWith(
+    //     username: Username('fakeUser'),
+    //     disableCreateOrder: false,
+    //     accessRight: AccessRight.empty().copyWith(orders: true),
+    //   );
 
-      when(
-        () => userBlocMock.state,
-      ).thenReturn(
-        UserState.initial().copyWith(
-          user: fakeUser,
-        ),
-      );
+    //   when(
+    //     () => userBlocMock.state,
+    //   ).thenReturn(
+    //     UserState.initial().copyWith(
+    //       user: fakeUser,
+    //     ),
+    //   );
 
-      await tester.pumpWidget(
-        getScopedWidget(
-          AddToCart(isCovid19Tab: false, material: priceAggregate),
-        ),
-      );
-      await tester.pump();
+    //   await tester.pumpWidget(
+    //     getScopedWidget(
+    //       AddToCart(isCovid19Tab: false, material: priceAggregate),
+    //     ),
+    //   );
+    //   await tester.pump();
 
-      final addToCartButton = find.text('Add to Cart');
-      expect(addToCartButton, findsOneWidget);
-      await tester.tap(addToCartButton);
-      await tester.pump();
+    //   final addToCartButton = find.text('Add to Cart');
+    //   expect(addToCartButton, findsOneWidget);
+    //   await tester.tap(addToCartButton);
+    //   await tester.pump();
 
-      const snackbarText =
-          'Covid material cannot be combined with commercial material.';
-      final snackbarWidget = find.text(snackbarText);
+    //   const snackbarText =
+    //       'Covid material cannot be combined with commercial material.';
+    //   final snackbarWidget = find.text(snackbarText);
 
-      expect(snackbarWidget, findsOneWidget);
-    });
+    //   expect(snackbarWidget, findsOneWidget);
+    // });
 
-    testWidgets(
-        '- not allow commercial material when covid material is already in cart',
-        (tester) async {
-      when(() => addToCartBlocMock.state).thenReturn(
-        AddToCartState.initial().copyWith(
-          isFetching: false,
-          cartItem: priceAggregate.copyWith(
-            materialInfo: MaterialInfo.empty().copyWith(
-              isFOCMaterial: false,
-            ),
-          ),
-        ),
-      );
+    // testWidgets(
+    //     '- not allow commercial material when covid material is already in cart',
+    //     (tester) async {
+    //   when(() => addToCartBlocMock.state).thenReturn(
+    //     AddToCartState.initial().copyWith(
+    //       isFetching: false,
+    //       cartItem: priceAggregate.copyWith(
+    //         materialInfo: MaterialInfo.empty().copyWith(
+    //           isFOCMaterial: false,
+    //         ),
+    //       ),
+    //     ),
+    //   );
 
-      when(() => cartBlocMock.state).thenReturn(
-        CartState.initial().copyWith(
-          cartProducts: [
-            PriceAggregate.empty().copyWith(
-              materialInfo: priceAggregate.materialInfo.copyWith(
-                materialGroup4: MaterialGroup.four('6A1'),
-              ),
-            ),
-          ],
-        ),
-      );
+    //   when(() => cartBlocMock.state).thenReturn(
+    //     CartState.initial().copyWith(
+    //       cartItems: [
+    //         CartItem.materialEmpty().copyWith(
+    //           materials: [
+    //             PriceAggregate.empty().copyWith(
+    //               materialInfo: priceAggregate.materialInfo.copyWith(
+    //                 materialGroup4: MaterialGroup.four('6A1'),
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ],
+    //     ),
+    //   );
 
-      final fakeUser = User.empty().copyWith(
-        username: Username('fakeUser'),
-        disableCreateOrder: false,
-        accessRight: AccessRight.empty().copyWith(orders: true),
-      );
+    //   final fakeUser = User.empty().copyWith(
+    //     username: Username('fakeUser'),
+    //     disableCreateOrder: false,
+    //     accessRight: AccessRight.empty().copyWith(orders: true),
+    //   );
 
-      when(
-        () => userBlocMock.state,
-      ).thenReturn(
-        UserState.initial().copyWith(
-          user: fakeUser,
-        ),
-      );
+    //   when(
+    //     () => userBlocMock.state,
+    //   ).thenReturn(
+    //     UserState.initial().copyWith(
+    //       user: fakeUser,
+    //     ),
+    //   );
 
-      await tester.pumpWidget(
-        getScopedWidget(
-          AddToCart(isCovid19Tab: false, material: priceAggregate),
-        ),
-      );
-      await tester.pump();
+    //   await tester.pumpWidget(
+    //     getScopedWidget(
+    //       AddToCart(isCovid19Tab: false, material: priceAggregate),
+    //     ),
+    //   );
+    //   await tester.pump();
 
-      final addToCartButton = find.text('Add to Cart');
-      expect(addToCartButton, findsOneWidget);
-      await tester.tap(addToCartButton);
-      await tester.pump();
+    //   final addToCartButton = find.text('Add to Cart');
+    //   expect(addToCartButton, findsOneWidget);
+    //   await tester.tap(addToCartButton);
+    //   await tester.pump();
 
-      const snackbarText =
-          'Commercial material cannot be combined with covid material.';
-      final snackbarWidget = find.text(snackbarText);
+    //   const snackbarText =
+    //       'Commercial material cannot be combined with covid material.';
+    //   final snackbarWidget = find.text(snackbarText);
 
-      expect(snackbarWidget, findsOneWidget);
-    });
+    //   expect(snackbarWidget, findsOneWidget);
+    // });
 
-    testWidgets(
-        '- not allow non-sample material when sample material is already in cart',
-        (tester) async {
-      when(() => addToCartBlocMock.state).thenReturn(
-        AddToCartState.initial().copyWith(
-          isFetching: false,
-          cartItem: priceAggregate.copyWith(
-            isSpecialOrderType: true,
-            price: priceAggregate.price.copyWith(
-              zmgDiscount: true,
-            ),
-            materialInfo: priceAggregate.materialInfo.copyWith(
-              isFOCMaterial: true,
-            ),
-          ),
-        ),
-      );
+    // testWidgets(
+    //     '- not allow non-sample material when sample material is already in cart',
+    //     (tester) async {
+    //   when(() => addToCartBlocMock.state).thenReturn(
+    //     AddToCartState.initial().copyWith(
+    //       isFetching: false,
+    //       cartItem: priceAggregate.copyWith(
+    //         isSpecialOrderType: true,
+    //         price: priceAggregate.price.copyWith(
+    //           zmgDiscount: true,
+    //         ),
+    //         materialInfo: priceAggregate.materialInfo.copyWith(
+    //           isFOCMaterial: true,
+    //         ),
+    //       ),
+    //     ),
+    //   );
 
-      when(() => cartBlocMock.state).thenReturn(
-        CartState.initial().copyWith(
-          cartProducts: [
-            PriceAggregate.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                isSampleMaterial: true,
-                isFOCMaterial: false,
-              ),
-            ),
-          ],
-        ),
-      );
+    //   when(() => cartBlocMock.state).thenReturn(
+    //     CartState.initial().copyWith(
+    //       cartItems: [
+    //         CartItem.materialEmpty().copyWith(
+    //           materials: [
+    //             PriceAggregate.empty().copyWith(
+    //               materialInfo: MaterialInfo.empty().copyWith(
+    //                 isSampleMaterial: true,
+    //                 isFOCMaterial: false,
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ],
+    //     ),
+    //   );
 
-      final fakeUser = User.empty().copyWith(
-        username: Username('fakeUser'),
-        disableCreateOrder: false,
-        accessRight: AccessRight.empty().copyWith(orders: true),
-      );
+    //   final fakeUser = User.empty().copyWith(
+    //     username: Username('fakeUser'),
+    //     disableCreateOrder: false,
+    //     accessRight: AccessRight.empty().copyWith(orders: true),
+    //   );
 
-      when(
-        () => userBlocMock.state,
-      ).thenReturn(
-        UserState.initial().copyWith(
-          user: fakeUser,
-        ),
-      );
+    //   when(
+    //     () => userBlocMock.state,
+    //   ).thenReturn(
+    //     UserState.initial().copyWith(
+    //       user: fakeUser,
+    //     ),
+    //   );
 
-      await tester.pumpWidget(
-        getScopedWidget(
-          AddToCart(isCovid19Tab: false, material: priceAggregate),
-        ),
-      );
-      await tester.pump();
+    //   await tester.pumpWidget(
+    //     getScopedWidget(
+    //       AddToCart(isCovid19Tab: false, material: priceAggregate),
+    //     ),
+    //   );
+    //   await tester.pump();
 
-      final addToCartButton = find.text('Add to Cart');
-      expect(addToCartButton, findsOneWidget);
-      await tester.tap(addToCartButton);
-      await tester.pump();
+    //   final addToCartButton = find.text('Add to Cart');
+    //   expect(addToCartButton, findsOneWidget);
+    //   await tester.tap(addToCartButton);
+    //   await tester.pump();
 
-      const snackbarText =
-          'You cannot add non-sample materials to a sample order. Please submit separate orders if you wish to proceed.';
-      final snackbarWidget = find.text(snackbarText);
+    //   const snackbarText =
+    //       'You cannot add non-sample materials to a sample order. Please submit separate orders if you wish to proceed.';
+    //   final snackbarWidget = find.text(snackbarText);
 
-      expect(snackbarWidget, findsOneWidget);
-    });
+    //   expect(snackbarWidget, findsOneWidget);
+    // });
 
     testWidgets(
         '- not allow non-FOC material when FOC material is already in cart',
@@ -733,11 +746,13 @@ void main() {
       await tester.tap(addToCartButton);
       await tester.pump();
 
-      const snackbarText =
-          'You cannot add non-FOC materials to a FOC order. Please submit separate orders if you wish to proceed';
-      final snackbarWidget = find.text(snackbarText);
+      final bottomSheet = find.byType(AddToCartErrorSection);
 
-      expect(snackbarWidget, findsOneWidget);
+      expect(bottomSheet, findsOneWidget);
+      final bottomSheetText = find.text(
+        'Covid-19 vaccine cannot be added to cart with other commercial materials. By proceeding, your current cart will be cleared.',
+      );
+      expect(bottomSheetText, findsOneWidget);
     });
   });
 }

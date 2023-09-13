@@ -260,6 +260,8 @@ class MaterialsWithMetaQuery {
             materialDescription
             Manufactured
             IsFavourite
+            isFOCMaterial
+            materialGroup4
             Type
             HidePrice
             BundleInformation {

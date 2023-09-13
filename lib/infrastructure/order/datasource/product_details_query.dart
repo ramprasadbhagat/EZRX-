@@ -27,6 +27,7 @@ class ProductDetailQuery {
         promoType
         materialBrand
         isFavourite
+        isFOCMaterial
         defaultMaterialDescription
         country
         countryName

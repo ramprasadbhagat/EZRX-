@@ -51,6 +51,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
             isScanFromBarcode: false,
             selectedMaterialFilter: state.selectedMaterialFilter.copyWith(
               isFavourite: e.selectedMaterialFilter.isFavourite,
+              isFOCMaterial: e.selectedMaterialFilter.isFOCMaterial,
               bundleOffers: e.selectedMaterialFilter.bundleOffers,
               isProductOffer: e.selectedMaterialFilter.isProductOffer,
               sortBy: e.selectedMaterialFilter.sortBy,

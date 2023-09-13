@@ -36,6 +36,8 @@ mixin _$CartProductDto {
   String get therapeuticClass => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxClassification', defaultValue: '')
   String get taxClassification => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+  bool get isFOCMaterial => throw _privateConstructorUsedError;
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'genericMaterialName', defaultValue: '')
@@ -93,6 +95,8 @@ abstract class $CartProductDtoCopyWith<$Res> {
           String therapeuticClass,
       @JsonKey(name: 'taxClassification', defaultValue: '')
           String taxClassification,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          bool isFOCMaterial,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           String itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
@@ -144,6 +148,7 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
     Object? materialDescription = null,
     Object? therapeuticClass = null,
     Object? taxClassification = null,
+    Object? isFOCMaterial = null,
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
     Object? principalName = null,
@@ -191,6 +196,10 @@ class _$CartProductDtoCopyWithImpl<$Res, $Val extends CartProductDto>
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
               as String,
+      isFOCMaterial: null == isFOCMaterial
+          ? _value.isFOCMaterial
+          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
       itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
@@ -280,6 +289,8 @@ abstract class _$$_CartProductDtoCopyWith<$Res>
           String therapeuticClass,
       @JsonKey(name: 'taxClassification', defaultValue: '')
           String taxClassification,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          bool isFOCMaterial,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           String itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
@@ -330,6 +341,7 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
     Object? materialDescription = null,
     Object? therapeuticClass = null,
     Object? taxClassification = null,
+    Object? isFOCMaterial = null,
     Object? itemRegistrationNumber = null,
     Object? genericMaterialName = null,
     Object? principalName = null,
@@ -377,6 +389,10 @@ class __$$_CartProductDtoCopyWithImpl<$Res>
           ? _value.taxClassification
           : taxClassification // ignore: cast_nullable_to_non_nullable
               as String,
+      isFOCMaterial: null == isFOCMaterial
+          ? _value.isFOCMaterial
+          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
       itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
@@ -453,6 +469,8 @@ class _$_CartProductDto extends _CartProductDto {
           required this.therapeuticClass,
       @JsonKey(name: 'taxClassification', defaultValue: '')
           required this.taxClassification,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          required this.isFOCMaterial,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           required this.itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
@@ -511,6 +529,9 @@ class _$_CartProductDto extends _CartProductDto {
   @override
   @JsonKey(name: 'taxClassification', defaultValue: '')
   final String taxClassification;
+  @override
+  @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+  final bool isFOCMaterial;
   @override
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   final String itemRegistrationNumber;
@@ -571,7 +592,7 @@ class _$_CartProductDto extends _CartProductDto {
 
   @override
   String toString() {
-    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, principalCode: $principalCode, counterOfferPrice: $counterOfferPrice, counterOfferDiscount: $counterOfferDiscount, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, bonusMaterials: $bonusMaterials, taxes: $taxes, hidePrice: $hidePrice)';
+    return 'CartProductDto(productID: $productID, parentID: $parentID, type: $type, quantity: $quantity, materialNumber: $materialNumber, materialDescription: $materialDescription, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, isFOCMaterial: $isFOCMaterial, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, principalName: $principalName, counterOfferPrice: $counterOfferPrice, counterOfferCurrency: $counterOfferCurrency, remarks: $remarks, bundleDetails: $bundleDetails, bundleMaterials: $bundleMaterials, taxes: $taxes)';
   }
 
   @override
@@ -594,6 +615,8 @@ class _$_CartProductDto extends _CartProductDto {
                 other.therapeuticClass == therapeuticClass) &&
             (identical(other.taxClassification, taxClassification) ||
                 other.taxClassification == taxClassification) &&
+            (identical(other.isFOCMaterial, isFOCMaterial) ||
+                other.isFOCMaterial == isFOCMaterial) &&
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.genericMaterialName, genericMaterialName) ||
@@ -679,6 +702,8 @@ abstract class _CartProductDto extends CartProductDto {
           required final String therapeuticClass,
       @JsonKey(name: 'taxClassification', defaultValue: '')
           required final String taxClassification,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          required final bool isFOCMaterial,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
           required final String itemRegistrationNumber,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
@@ -734,6 +759,9 @@ abstract class _CartProductDto extends CartProductDto {
   @override
   @JsonKey(name: 'taxClassification', defaultValue: '')
   String get taxClassification;
+  @override
+  @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+  bool get isFOCMaterial;
   @override
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber;

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
@@ -156,13 +157,14 @@ class _ItemSubTotalSection extends StatelessWidget {
               _LoadingShimmerWithChild(
                 child: PriceComponent(
                   salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                  price: cartProduct.display(PriceType.finalPriceTotal),
+                  price: cartProduct.finalPriceTotalForAllMaterial,
                 ),
               ),
             ],
           ),
         ),
-        if (cartProduct.showTaxBreakDown)
+        if (cartProduct.showTaxBreakDown &&
+            !cartProduct.materialInfo.isFOCMaterial)
           Padding(
             padding: const EdgeInsets.only(
               left: 16,
@@ -466,7 +468,6 @@ class _MaterialImageSection extends StatelessWidget {
             return CustomCard(
               showShadow: false,
               showBorder: true,
-              padding: const EdgeInsets.all(12),
               child: CustomImage(
                 imageUrl: state
                         .additionInfo[cartProduct.materialInfo.materialNumber]
@@ -475,13 +476,20 @@ class _MaterialImageSection extends StatelessWidget {
                         .thumbNail ??
                     '',
                 fit: BoxFit.fitHeight,
-                height: MediaQuery.of(context).size.height * 0.06,
-                width: MediaQuery.of(context).size.height * 0.06,
+                height: MediaQuery.of(context).size.height * 0.08,
+                width: MediaQuery.of(context).size.height * 0.08,
               ),
             );
           },
         ),
-        if (cartProduct.price.isBonusDealEligible) const _OfferTag(),
+        cartProduct.price.isBonusDealEligible
+            ? const _OfferTag()
+            : const SizedBox.shrink(),
+        if (cartProduct.materialInfo.isFOCMaterial)
+          const Positioned(
+            bottom: 20,
+            child: CovidTag(),
+          ),
       ],
     );
   }

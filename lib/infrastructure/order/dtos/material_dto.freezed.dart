@@ -110,64 +110,73 @@ abstract class $MaterialDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      String governmentMaterialCode,
+          String governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      String therapeuticClass,
-      @JsonKey(name: 'itemBrand', defaultValue: '') String itemBrand,
-      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+          String therapeuticClass,
+      @JsonKey(name: 'itemBrand', defaultValue: '')
+          String itemBrand,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          String principalName,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-      String taxClassification,
+          String taxClassification,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      String itemRegistrationNumber,
+          String itemRegistrationNumber,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      String unitOfMeasurement,
-      @JsonKey(name: 'materialGroup2', defaultValue: '') String materialGroup2,
-      @JsonKey(name: 'materialGroup4', defaultValue: '') String materialGroup4,
+          String unitOfMeasurement,
+      @JsonKey(name: 'materialGroup2', defaultValue: '')
+          String materialGroup2,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          String materialGroup4,
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-      bool isSampleMaterial,
+          bool isSampleMaterial,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      bool hasValidTenderContract,
+          bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      bool hasMandatoryTenderContract,
-      @JsonKey(
-          name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-      List<String> taxes,
+          bool hasMandatoryTenderContract,
+      @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
+          List<String> taxes,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      String defaultMaterialDescription,
-      @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
+          String defaultMaterialDescription,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          bool isFOCMaterial,
       @JsonKey(name: 'Quantity', defaultValue: 0, readValue: _validateQantity)
-      int quantity,
-      @JsonKey(name: 'remarks', defaultValue: '') String remarks,
+          int quantity,
+      @JsonKey(name: 'remarks', defaultValue: '')
+          String remarks,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-      String genericMaterialName,
-      @JsonKey(name: 'ean', defaultValue: '') String ean,
+          String genericMaterialName,
+      @JsonKey(name: 'ean', defaultValue: '')
+          String ean,
       @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
-      BundleDto bundle,
-      @JsonKey(name: 'Code', defaultValue: '') String code,
-      @JsonKey(name: 'Name', defaultValue: '') String name,
-      @JsonKey(
-          name: 'PrincipalCode',
-          defaultValue: '',
-          readValue: _principalCodeReadValue)
-      String principalCode,
-      @JsonKey(
-          name: 'MaterialNumber',
-          defaultValue: '',
-          readValue: _materialNumberReadValue)
-      String materialNumber,
+          BundleDto bundle,
+      @JsonKey(name: 'Code', defaultValue: '')
+          String code,
+      @JsonKey(name: 'Name', defaultValue: '')
+          String name,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '', readValue: _principalCodeReadValue)
+          String principalCode,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '', readValue: _materialNumberReadValue)
+          String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'Manufactured', defaultValue: '') String manufactured,
-      @JsonKey(name: 'IsFavourite', defaultValue: false) bool isFavourite,
-      @JsonKey(name: 'Type', defaultValue: '') String type,
-      @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
-      @JsonKey(name: 'DataTotalCount', defaultValue: 0) int dataTotalCount,
-      @JsonKey(name: 'DataTotalHidden', defaultValue: 0) int dataTotalHidden,
-      @JsonKey(name: 'IsGimmick', defaultValue: false) bool isGimmick,
+          String materialDescription,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+          String manufactured,
+      @JsonKey(name: 'IsFavourite', defaultValue: false)
+          bool isFavourite,
+      @JsonKey(name: 'Type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+          bool hidePrice,
+      @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+          int dataTotalCount,
+      @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+          int dataTotalHidden,
+      @JsonKey(name: 'IsGimmick', defaultValue: false)
+          bool isGimmick,
       @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
-      List<MaterialDataDto> data,
+          List<MaterialDataDto> data,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      List<BundleDto> bundles});
+          List<BundleDto> bundles});
 
   $BundleDtoCopyWith<$Res> get bundle;
 }
@@ -379,64 +388,73 @@ abstract class _$$_MaterialDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      String governmentMaterialCode,
+          String governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      String therapeuticClass,
-      @JsonKey(name: 'itemBrand', defaultValue: '') String itemBrand,
-      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
+          String therapeuticClass,
+      @JsonKey(name: 'itemBrand', defaultValue: '')
+          String itemBrand,
+      @JsonKey(name: 'principalName', defaultValue: '')
+          String principalName,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-      String taxClassification,
+          String taxClassification,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      String itemRegistrationNumber,
+          String itemRegistrationNumber,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      String unitOfMeasurement,
-      @JsonKey(name: 'materialGroup2', defaultValue: '') String materialGroup2,
-      @JsonKey(name: 'materialGroup4', defaultValue: '') String materialGroup4,
+          String unitOfMeasurement,
+      @JsonKey(name: 'materialGroup2', defaultValue: '')
+          String materialGroup2,
+      @JsonKey(name: 'materialGroup4', defaultValue: '')
+          String materialGroup4,
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-      bool isSampleMaterial,
+          bool isSampleMaterial,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      bool hasValidTenderContract,
+          bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      bool hasMandatoryTenderContract,
-      @JsonKey(
-          name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-      List<String> taxes,
+          bool hasMandatoryTenderContract,
+      @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
+          List<String> taxes,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      String defaultMaterialDescription,
-      @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
+          String defaultMaterialDescription,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+          bool isFOCMaterial,
       @JsonKey(name: 'Quantity', defaultValue: 0, readValue: _validateQantity)
-      int quantity,
-      @JsonKey(name: 'remarks', defaultValue: '') String remarks,
+          int quantity,
+      @JsonKey(name: 'remarks', defaultValue: '')
+          String remarks,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-      String genericMaterialName,
-      @JsonKey(name: 'ean', defaultValue: '') String ean,
+          String genericMaterialName,
+      @JsonKey(name: 'ean', defaultValue: '')
+          String ean,
       @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
-      BundleDto bundle,
-      @JsonKey(name: 'Code', defaultValue: '') String code,
-      @JsonKey(name: 'Name', defaultValue: '') String name,
-      @JsonKey(
-          name: 'PrincipalCode',
-          defaultValue: '',
-          readValue: _principalCodeReadValue)
-      String principalCode,
-      @JsonKey(
-          name: 'MaterialNumber',
-          defaultValue: '',
-          readValue: _materialNumberReadValue)
-      String materialNumber,
+          BundleDto bundle,
+      @JsonKey(name: 'Code', defaultValue: '')
+          String code,
+      @JsonKey(name: 'Name', defaultValue: '')
+          String name,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '', readValue: _principalCodeReadValue)
+          String principalCode,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '', readValue: _materialNumberReadValue)
+          String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'Manufactured', defaultValue: '') String manufactured,
-      @JsonKey(name: 'IsFavourite', defaultValue: false) bool isFavourite,
-      @JsonKey(name: 'Type', defaultValue: '') String type,
-      @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
-      @JsonKey(name: 'DataTotalCount', defaultValue: 0) int dataTotalCount,
-      @JsonKey(name: 'DataTotalHidden', defaultValue: 0) int dataTotalHidden,
-      @JsonKey(name: 'IsGimmick', defaultValue: false) bool isGimmick,
+          String materialDescription,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+          String manufactured,
+      @JsonKey(name: 'IsFavourite', defaultValue: false)
+          bool isFavourite,
+      @JsonKey(name: 'Type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+          bool hidePrice,
+      @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+          int dataTotalCount,
+      @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+          int dataTotalHidden,
+      @JsonKey(name: 'IsGimmick', defaultValue: false)
+          bool isGimmick,
       @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
-      List<MaterialDataDto> data,
+          List<MaterialDataDto> data,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      List<BundleDto> bundles});
+          List<BundleDto> bundles});
 
   @override
   $BundleDtoCopyWith<$Res> get bundle;
@@ -634,73 +652,73 @@ class __$$_MaterialDtoCopyWithImpl<$Res>
 class _$_MaterialDto extends _MaterialDto {
   const _$_MaterialDto(
       {@JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      required this.governmentMaterialCode,
+          required this.governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      required this.therapeuticClass,
-      @JsonKey(name: 'itemBrand', defaultValue: '') required this.itemBrand,
+          required this.therapeuticClass,
+      @JsonKey(name: 'itemBrand', defaultValue: '')
+          required this.itemBrand,
       @JsonKey(name: 'principalName', defaultValue: '')
-      required this.principalName,
+          required this.principalName,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-      required this.taxClassification,
+          required this.taxClassification,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      required this.itemRegistrationNumber,
+          required this.itemRegistrationNumber,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      required this.unitOfMeasurement,
+          required this.unitOfMeasurement,
       @JsonKey(name: 'materialGroup2', defaultValue: '')
-      required this.materialGroup2,
+          required this.materialGroup2,
       @JsonKey(name: 'materialGroup4', defaultValue: '')
-      required this.materialGroup4,
+          required this.materialGroup4,
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-      required this.isSampleMaterial,
+          required this.isSampleMaterial,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      required this.hasValidTenderContract,
+          required this.hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      required this.hasMandatoryTenderContract,
-      @JsonKey(
-          name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-      required final List<String> taxes,
+          required this.hasMandatoryTenderContract,
+      @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
+          required final List<String> taxes,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      required this.defaultMaterialDescription,
+          required this.defaultMaterialDescription,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-      required this.isFOCMaterial,
+          required this.isFOCMaterial,
       @JsonKey(name: 'Quantity', defaultValue: 0, readValue: _validateQantity)
-      required this.quantity,
-      @JsonKey(name: 'remarks', defaultValue: '') required this.remarks,
+          required this.quantity,
+      @JsonKey(name: 'remarks', defaultValue: '')
+          required this.remarks,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-      required this.genericMaterialName,
-      @JsonKey(name: 'ean', defaultValue: '') required this.ean,
+          required this.genericMaterialName,
+      @JsonKey(name: 'ean', defaultValue: '')
+          required this.ean,
       @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
-      required this.bundle,
-      @JsonKey(name: 'Code', defaultValue: '') required this.code,
-      @JsonKey(name: 'Name', defaultValue: '') required this.name,
-      @JsonKey(
-          name: 'PrincipalCode',
-          defaultValue: '',
-          readValue: _principalCodeReadValue)
-      required this.principalCode,
-      @JsonKey(
-          name: 'MaterialNumber',
-          defaultValue: '',
-          readValue: _materialNumberReadValue)
-      required this.materialNumber,
+          required this.bundle,
+      @JsonKey(name: 'Code', defaultValue: '')
+          required this.code,
+      @JsonKey(name: 'Name', defaultValue: '')
+          required this.name,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '', readValue: _principalCodeReadValue)
+          required this.principalCode,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '', readValue: _materialNumberReadValue)
+          required this.materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      required this.materialDescription,
+          required this.materialDescription,
       @JsonKey(name: 'Manufactured', defaultValue: '')
-      required this.manufactured,
-      @JsonKey(
-          name: 'IsFavourite', defaultValue: false)
-      required this.isFavourite,
-      @JsonKey(name: 'Type', defaultValue: '') required this.type,
-      @JsonKey(name: 'HidePrice', defaultValue: false) required this.hidePrice,
+          required this.manufactured,
+      @JsonKey(name: 'IsFavourite', defaultValue: false)
+          required this.isFavourite,
+      @JsonKey(name: 'Type', defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'HidePrice', defaultValue: false)
+          required this.hidePrice,
       @JsonKey(name: 'DataTotalCount', defaultValue: 0)
-      required this.dataTotalCount,
+          required this.dataTotalCount,
       @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
-      required this.dataTotalHidden,
-      @JsonKey(name: 'IsGimmick', defaultValue: false) required this.isGimmick,
+          required this.dataTotalHidden,
+      @JsonKey(name: 'IsGimmick', defaultValue: false)
+          required this.isGimmick,
       @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
-      required final List<MaterialDataDto> data,
+          required final List<MaterialDataDto> data,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      required final List<BundleDto> bundles})
+          required final List<BundleDto> bundles})
       : _taxes = taxes,
         _data = data,
         _bundles = bundles,
@@ -968,75 +986,73 @@ class _$_MaterialDto extends _MaterialDto {
 abstract class _MaterialDto extends MaterialDto {
   const factory _MaterialDto(
       {@JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-      required final String governmentMaterialCode,
+          required final String governmentMaterialCode,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-      required final String therapeuticClass,
+          required final String therapeuticClass,
       @JsonKey(name: 'itemBrand', defaultValue: '')
-      required final String itemBrand,
+          required final String itemBrand,
       @JsonKey(name: 'principalName', defaultValue: '')
-      required final String principalName,
+          required final String principalName,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-      required final String taxClassification,
+          required final String taxClassification,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-      required final String itemRegistrationNumber,
+          required final String itemRegistrationNumber,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-      required final String unitOfMeasurement,
+          required final String unitOfMeasurement,
       @JsonKey(name: 'materialGroup2', defaultValue: '')
-      required final String materialGroup2,
+          required final String materialGroup2,
       @JsonKey(name: 'materialGroup4', defaultValue: '')
-      required final String materialGroup4,
+          required final String materialGroup4,
       @JsonKey(name: 'isSampleMaterial', defaultValue: false)
-      required final bool isSampleMaterial,
+          required final bool isSampleMaterial,
       @JsonKey(name: 'hasValidTenderContract', defaultValue: false)
-      required final bool hasValidTenderContract,
+          required final bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
-      required final bool hasMandatoryTenderContract,
-      @JsonKey(
-          name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-      required final List<String> taxes,
+          required final bool hasMandatoryTenderContract,
+      @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
+          required final List<String> taxes,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-      required final String defaultMaterialDescription,
+          required final String defaultMaterialDescription,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-      required final bool isFOCMaterial,
+          required final bool isFOCMaterial,
       @JsonKey(name: 'Quantity', defaultValue: 0, readValue: _validateQantity)
-      required final int quantity,
-      @JsonKey(name: 'remarks', defaultValue: '') required final String remarks,
+          required final int quantity,
+      @JsonKey(name: 'remarks', defaultValue: '')
+          required final String remarks,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-      required final String genericMaterialName,
-      @JsonKey(name: 'ean', defaultValue: '') required final String ean,
+          required final String genericMaterialName,
+      @JsonKey(name: 'ean', defaultValue: '')
+          required final String ean,
       @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
-      required final BundleDto bundle,
-      @JsonKey(name: 'Code', defaultValue: '') required final String code,
-      @JsonKey(name: 'Name', defaultValue: '') required final String name,
-      @JsonKey(
-          name: 'PrincipalCode',
-          defaultValue: '',
-          readValue: _principalCodeReadValue)
-      required final String principalCode,
-      @JsonKey(
-          name: 'MaterialNumber',
-          defaultValue: '',
-          readValue: _materialNumberReadValue)
-      required final String materialNumber,
+          required final BundleDto bundle,
+      @JsonKey(name: 'Code', defaultValue: '')
+          required final String code,
+      @JsonKey(name: 'Name', defaultValue: '')
+          required final String name,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '', readValue: _principalCodeReadValue)
+          required final String principalCode,
+      @JsonKey(name: 'MaterialNumber', defaultValue: '', readValue: _materialNumberReadValue)
+          required final String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-      required final String materialDescription,
+          required final String materialDescription,
       @JsonKey(name: 'Manufactured', defaultValue: '')
-      required final String manufactured,
+          required final String manufactured,
       @JsonKey(name: 'IsFavourite', defaultValue: false)
-      required final bool isFavourite,
-      @JsonKey(name: 'Type', defaultValue: '') required final String type,
+          required final bool isFavourite,
+      @JsonKey(name: 'Type', defaultValue: '')
+          required final String type,
       @JsonKey(name: 'HidePrice', defaultValue: false)
-      required final bool hidePrice,
+          required final bool hidePrice,
       @JsonKey(name: 'DataTotalCount', defaultValue: 0)
-      required final int dataTotalCount,
+          required final int dataTotalCount,
       @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
-      required final int dataTotalHidden,
+          required final int dataTotalHidden,
       @JsonKey(name: 'IsGimmick', defaultValue: false)
-      required final bool isGimmick,
+          required final bool isGimmick,
       @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
-      required final List<MaterialDataDto> data,
+          required final List<MaterialDataDto> data,
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
-      required final List<BundleDto> bundles}) = _$_MaterialDto;
+          required final List<BundleDto> bundles}) = _$_MaterialDto;
   const _MaterialDto._() : super._();
 
   factory _MaterialDto.fromJson(Map<String, dynamic> json) =
@@ -1188,18 +1204,18 @@ abstract class $MaterialDataDtoCopyWith<$Res> {
       _$MaterialDataDtoCopyWithImpl<$Res, MaterialDataDto>;
   @useResult
   $Res call(
-      {@JsonKey(
-          name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
-      String code,
-      @JsonKey(name: 'Manufactured', defaultValue: '') String manufactured,
+      {@JsonKey(name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
+          String code,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+          String manufactured,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      String materialDescription,
+          String materialDescription,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-      String defaultMaterialDescription,
+          String defaultMaterialDescription,
       @JsonKey(name: 'GenericMaterialName', defaultValue: '')
-      String genericMaterialName,
+          String genericMaterialName,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
-      String governmentMaterialCode});
+          String governmentMaterialCode});
 }
 
 /// @nodoc
@@ -1260,18 +1276,18 @@ abstract class _$$_MaterialDataDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(
-          name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
-      String code,
-      @JsonKey(name: 'Manufactured', defaultValue: '') String manufactured,
+      {@JsonKey(name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
+          String code,
+      @JsonKey(name: 'Manufactured', defaultValue: '')
+          String manufactured,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      String materialDescription,
+          String materialDescription,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-      String defaultMaterialDescription,
+          String defaultMaterialDescription,
       @JsonKey(name: 'GenericMaterialName', defaultValue: '')
-      String genericMaterialName,
+          String genericMaterialName,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
-      String governmentMaterialCode});
+          String governmentMaterialCode});
 }
 
 /// @nodoc
@@ -1325,19 +1341,18 @@ class __$$_MaterialDataDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MaterialDataDto extends _MaterialDataDto {
   _$_MaterialDataDto(
-      {@JsonKey(
-          name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
-      required this.code,
+      {@JsonKey(name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
+          required this.code,
       @JsonKey(name: 'Manufactured', defaultValue: '')
-      required this.manufactured,
+          required this.manufactured,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      required this.materialDescription,
+          required this.materialDescription,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-      required this.defaultMaterialDescription,
+          required this.defaultMaterialDescription,
       @JsonKey(name: 'GenericMaterialName', defaultValue: '')
-      required this.genericMaterialName,
+          required this.genericMaterialName,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
-      required this.governmentMaterialCode})
+          required this.governmentMaterialCode})
       : super._();
 
   factory _$_MaterialDataDto.fromJson(Map<String, dynamic> json) =>
@@ -1414,19 +1429,18 @@ class _$_MaterialDataDto extends _MaterialDataDto {
 
 abstract class _MaterialDataDto extends MaterialDataDto {
   factory _MaterialDataDto(
-      {@JsonKey(
-          name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
-      required final String code,
+      {@JsonKey(name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
+          required final String code,
       @JsonKey(name: 'Manufactured', defaultValue: '')
-      required final String manufactured,
+          required final String manufactured,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      required final String materialDescription,
+          required final String materialDescription,
       @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
-      required final String defaultMaterialDescription,
+          required final String defaultMaterialDescription,
       @JsonKey(name: 'GenericMaterialName', defaultValue: '')
-      required final String genericMaterialName,
+          required final String genericMaterialName,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
-      required final String governmentMaterialCode}) = _$_MaterialDataDto;
+          required final String governmentMaterialCode}) = _$_MaterialDataDto;
   _MaterialDataDto._() : super._();
 
   factory _MaterialDataDto.fromJson(Map<String, dynamic> json) =
@@ -1480,9 +1494,10 @@ abstract class $MaterialResponseDtoCopyWith<$Res> {
       _$MaterialResponseDtoCopyWithImpl<$Res, MaterialResponseDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Count', defaultValue: 0) int count,
+      {@JsonKey(name: 'Count', defaultValue: 0)
+          int count,
       @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
-      List<MaterialDto> products});
+          List<MaterialDto> products});
 }
 
 /// @nodoc
@@ -1523,9 +1538,10 @@ abstract class _$$_MaterialResponseDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Count', defaultValue: 0) int count,
+      {@JsonKey(name: 'Count', defaultValue: 0)
+          int count,
       @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
-      List<MaterialDto> products});
+          List<MaterialDto> products});
 }
 
 /// @nodoc
@@ -1559,9 +1575,10 @@ class __$$_MaterialResponseDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MaterialResponseDto extends _MaterialResponseDto {
   _$_MaterialResponseDto(
-      {@JsonKey(name: 'Count', defaultValue: 0) required this.count,
+      {@JsonKey(name: 'Count', defaultValue: 0)
+          required this.count,
       @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
-      required final List<MaterialDto> products})
+          required final List<MaterialDto> products})
       : _products = products,
         super._();
 
@@ -1616,9 +1633,10 @@ class _$_MaterialResponseDto extends _MaterialResponseDto {
 
 abstract class _MaterialResponseDto extends MaterialResponseDto {
   factory _MaterialResponseDto(
-      {@JsonKey(name: 'Count', defaultValue: 0) required final int count,
+      {@JsonKey(name: 'Count', defaultValue: 0)
+          required final int count,
       @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
-      required final List<MaterialDto> products}) = _$_MaterialResponseDto;
+          required final List<MaterialDto> products}) = _$_MaterialResponseDto;
   _MaterialResponseDto._() : super._();
 
   factory _MaterialResponseDto.fromJson(Map<String, dynamic> json) =

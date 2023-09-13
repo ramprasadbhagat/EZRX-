@@ -27,6 +27,7 @@ mixin _$OrderHistoryItem {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   StringValue get batch => throw _privateConstructorUsedError;
   String get orderBy => throw _privateConstructorUsedError;
+  DocumentType get orderType => throw _privateConstructorUsedError;
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   POReference get pOReference => throw _privateConstructorUsedError;
   String get manufactureName => throw _privateConstructorUsedError;
@@ -65,6 +66,7 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       DateTimeStringValue createdDate,
       StringValue batch,
       String orderBy,
+      DocumentType orderType,
       DateTimeStringValue expiryDate,
       POReference pOReference,
       String manufactureName,
@@ -104,6 +106,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
     Object? createdDate = null,
     Object? batch = null,
     Object? orderBy = null,
+    Object? orderType = null,
     Object? expiryDate = null,
     Object? pOReference = null,
     Object? manufactureName = null,
@@ -161,6 +164,10 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as String,
+      orderType: null == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as DocumentType,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
@@ -237,6 +244,7 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       DateTimeStringValue createdDate,
       StringValue batch,
       String orderBy,
+      DocumentType orderType,
       DateTimeStringValue expiryDate,
       POReference pOReference,
       String manufactureName,
@@ -275,6 +283,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
     Object? createdDate = null,
     Object? batch = null,
     Object? orderBy = null,
+    Object? orderType = null,
     Object? expiryDate = null,
     Object? pOReference = null,
     Object? manufactureName = null,
@@ -332,6 +341,10 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
           ? _value.orderBy
           : orderBy // ignore: cast_nullable_to_non_nullable
               as String,
+      orderType: null == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as DocumentType,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
@@ -395,6 +408,7 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
       required this.createdDate,
       required this.batch,
       required this.orderBy,
+      required this.orderType,
       required this.expiryDate,
       required this.pOReference,
       required this.manufactureName,
@@ -432,6 +446,8 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @override
   final String orderBy;
   @override
+  final DocumentType orderType;
+  @override
   final DateTimeStringValue expiryDate;
   @override
   final POReference pOReference;
@@ -463,7 +479,7 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
 
   @override
   String toString() {
-    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, expiryDate: $expiryDate, pOReference: $pOReference, manufactureName: $manufactureName, invoiceNumber: $invoiceNumber, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderStatusTracker: $orderStatusTracker, tax: $tax)';
+    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, manufactureName: $manufactureName, invoiceNumber: $invoiceNumber, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderStatusTracker: $orderStatusTracker, tax: $tax)';
   }
 
   @override
@@ -489,6 +505,8 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
                 other.createdDate == createdDate) &&
             (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
+            (identical(other.orderType, orderType) ||
+                other.orderType == orderType) &&
             (identical(other.expiryDate, expiryDate) ||
                 other.expiryDate == expiryDate) &&
             (identical(other.pOReference, pOReference) ||
@@ -526,6 +544,7 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
         createdDate,
         batch,
         orderBy,
+        orderType,
         expiryDate,
         pOReference,
         manufactureName,
@@ -559,6 +578,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final DateTimeStringValue createdDate,
       required final StringValue batch,
       required final String orderBy,
+      required final DocumentType orderType,
       required final DateTimeStringValue expiryDate,
       required final POReference pOReference,
       required final String manufactureName,
@@ -594,6 +614,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   StringValue get batch;
   @override
   String get orderBy;
+  @override
+  DocumentType get orderType;
   @override
   DateTimeStringValue get expiryDate;
   @override
