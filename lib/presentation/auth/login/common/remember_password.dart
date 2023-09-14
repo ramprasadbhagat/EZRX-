@@ -49,6 +49,9 @@ class RememberPassword extends StatelessWidget {
             TextButton(
               child: Text(
                 'Forgot password?'.tr(),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: ZPColors.extraDarkGreen,
+                    ),
               ),
               onPressed: () {
                 context.read<ForgotPasswordBloc>().add(

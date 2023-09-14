@@ -97,16 +97,19 @@ class _SSOLoginButton extends StatelessWidget {
                     StadiumBorder(),
                   ),
                 ),
-            icon: const Icon(
+            icon: Icon(
               Icons.lock_person_outlined,
               size: 20,
-              color: ZPColors.black,
+              color: Theme.of(context).primaryColor,
             ),
             label: LoadingShimmer.withChild(
               enabled: state.isSubmitting,
               child: Text(
                 'Log in with SSO'.tr(),
-                style: Theme.of(context).textTheme.labelSmall,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: ZPColors.shadesBlack,
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
             ),
           ),
@@ -168,6 +171,9 @@ class _CreateAccount extends StatelessWidget {
               ),
           child: Text(
             'Sign up'.tr(),
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: ZPColors.extraDarkGreen,
+                ),
           ),
           onPressed: () {
             context.router.push(
