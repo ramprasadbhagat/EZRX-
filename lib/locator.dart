@@ -2150,12 +2150,14 @@ void setupLocator() {
       mixpanelService: locator<MixpanelService>(),
       materialInfoScanner: locator<MaterialInfoScanner>(),
       filePickerService: locator<FilePickerService>(),
+      permissionService: locator<PermissionService>(),
+      deviceInfo: locator<DeviceInfo>(),
     ),
   );
   locator.registerLazySingleton(
     () => ScanMaterialInfoBloc(
       scanInfoRepository: locator<ScanMaterialInfoRepository>(),
-      materialListRepository: locator<MaterialListRepository>(),
+      productSearchRepository: locator<ProductSearchRepository>(),
     ),
   );
 

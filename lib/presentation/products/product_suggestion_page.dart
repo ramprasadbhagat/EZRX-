@@ -17,6 +17,12 @@ import 'package:ezrxmobile/presentation/products/clear_product_search_suggestion
 
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+
 class ProductSuggestionPage extends StatelessWidget {
   const ProductSuggestionPage({
     Key? key,
@@ -99,7 +105,31 @@ class _ProductSearchSection extends StatelessWidget {
               icon: const Icon(
                 Icons.camera_alt_outlined,
               ),
-              onPressed: () => {},
+              onPressed: () => {
+                trackMixpanelEvent(
+                  MixpanelEvents.scannerClicked,
+                ),
+                context.router.pushNamed('orders/scan_material_info'),
+                context.read<ScanMaterialInfoBloc>().add(
+                      ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
+                        customerCodeInfo: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .customerCodeInfo,
+                        salesOrganisation: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .salesOrganisation,
+                        shipToInfo:
+                            context.read<EligibilityBloc>().state.shipToInfo,
+                        user: context.read<EligibilityBloc>().state.user,
+                        salesOrgConfigs: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .salesOrgConfigs,
+                      ),
+                    ),
+              },
             ),
           ),
         );

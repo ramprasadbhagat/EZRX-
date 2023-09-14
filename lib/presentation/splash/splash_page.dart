@@ -94,6 +94,10 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+
+import 'package:ezrxmobile/presentation/orders/create_order/camera_files_permission_bottomsheet.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -331,6 +335,72 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     _fetchMaterialPrice(context, state.toMaterialInfo);
                     _fetchProductImage(context, state.recentlyOrderedProducts);
                   }
+                },
+              ),
+            );
+          },
+        ),
+        BlocListener<ScanMaterialInfoBloc, ScanMaterialInfoState>(
+          listenWhen: (previous, current) =>
+              previous.apiFailureOrSuccessOption !=
+              current.apiFailureOrSuccessOption,
+          listener: (context, state) {
+            state.apiFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  failure.maybeMap(
+                    cameraPermissionFailed: (_) => showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      isDismissible: false,
+                      builder: (_) => const CameraFilesPermission(
+                        type: PermissionType.camera,
+                      ),
+                    ),
+                    storagePermissionFailed: (_) => showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      isDismissible: false,
+                      builder: (_) => const CameraFilesPermission(
+                        type: PermissionType.files,
+                      ),
+                    ),
+                    orElse: () => ErrorUtils.handleApiFailure(context, failure),
+                  );
+                },
+                (_) {
+                  context.read<ProductDetailBloc>().add(
+                        ProductDetailEvent.fetch(
+                          materialNumber: state.material.materialNumber,
+                          locale: context.locale,
+                          type: state.material.type,
+                        ),
+                      );
+                  context.router.pushNamed('orders/material_details');
+                  context.read<MaterialPriceBloc>().add(
+                        MaterialPriceEvent.fetch(
+                          salesOrganisation: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrganisation,
+                          salesConfigs: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrgConfigs,
+                          customerCodeInfo: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .customerCodeInfo,
+                          shipToInfo:
+                              context.read<EligibilityBloc>().state.shipToInfo,
+                          comboDealEligible: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .comboDealEligible,
+                          materials: [state.material],
+                        ),
+                      );
                 },
               ),
             );

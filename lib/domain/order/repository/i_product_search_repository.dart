@@ -11,6 +11,10 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+
 abstract class IProductSearchRepository {
   Future<Either<ApiFailure, MaterialResponse>> searchProductList({
     required SalesOrganisation salesOrganization,
@@ -24,4 +28,13 @@ abstract class IProductSearchRepository {
 
   Future<Either<ApiFailure, ProductSuggestionHistory>> getSearchKeys();
   Future<Either<ApiFailure, void>> clearSearchHistory();
+
+  Future<Either<ApiFailure, MaterialInfo>> getScanProduct({
+    required SalesOrganisation salesOrganization,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Ean eanNumber,
+    required SalesOrganisationConfigs salesOrgConfig,
+    required User user,
+  });
 }

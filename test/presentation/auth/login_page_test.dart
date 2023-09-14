@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
@@ -108,6 +109,10 @@ class ViewByItemDetailsMockBloc
     extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
     implements ViewByItemDetailsBloc {}
 
+class ScanMaterialInfoBlocMock
+    extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
+    implements ScanMaterialInfoBloc {}
+
 class ViewByOrderDetailsMockBloc
     extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
     implements ViewByOrderDetailsBloc {}
@@ -124,6 +129,7 @@ void main() {
   late GetIt locator;
   late LoginFormBloc loginBlocMock;
   late AuthBloc authBlocMock;
+  late ScanMaterialInfoBloc scanMaterialInfoBlocMock;
   late AccountSummaryBloc accountSummaryMock;
   late AnnouncementBloc announcementBlocMock;
   late DeepLinkingBloc deepLinkingBlocMock;
@@ -161,6 +167,7 @@ void main() {
       loginBlocMock = LoginFormBlocMock();
       autoRouterMock = locator<AppRouter>();
       authBlocMock = AuthBlocMock();
+      scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
       accountSummaryMock = AccountSummaryBlocMock();
       announcementBlocMock = AnnnouncementBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeMockBloc();
@@ -191,6 +198,8 @@ void main() {
       when(() => orderDocumentTypeBlocMock.state)
           .thenReturn(OrderDocumentTypeState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => scanMaterialInfoBlocMock.state)
+          .thenReturn(ScanMaterialInfoState.initial());
       when(() => deepLinkingBlocMock.state)
           .thenReturn(const DeepLinkingState.initial());
       when(() => materialListBloc.state)
@@ -237,6 +246,9 @@ void main() {
               ),
               BlocProvider<AuthBloc>(
                 create: (context) => authBlocMock,
+              ),
+              BlocProvider<ScanMaterialInfoBloc>(
+                create: (context) => scanMaterialInfoBlocMock,
               ),
               BlocProvider<AccountSummaryBloc>(
                 create: (context) => accountSummaryMock,
@@ -316,7 +328,8 @@ void main() {
       final expectedStates = [
         LoginFormState.initial().copyWith(
           authFailureOrSuccessOption: optionOf(
-            Right(Login(
+            Right(
+              Login(
                 access: JWT('fake-success'),
                 refresh: JWT('fake-refresh'),
               ),
@@ -356,6 +369,9 @@ void main() {
               ),
               BlocProvider<CustomerCodeBloc>(
                 create: (context) => customerCodeBlocMock,
+              ),
+              BlocProvider<ScanMaterialInfoBloc>(
+                create: (context) => scanMaterialInfoBlocMock,
               ),
               BlocProvider<PaymentCustomerInformationBloc>(
                 create: (context) => paymentCustomerInformationBlocMock,

@@ -8,6 +8,7 @@ class ScanMaterialInfoEvent with _$ScanMaterialInfoEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required SalesOrganisationConfigs salesOrgConfigs,
   }) = _scanMaterialNumberFromCamera;
   const factory ScanMaterialInfoEvent.disableScan() = _disableScan;
   const factory ScanMaterialInfoEvent.scanImageFromDeviceStorage({
@@ -15,8 +16,17 @@ class ScanMaterialInfoEvent with _$ScanMaterialInfoEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required SalesOrganisationConfigs salesOrgConfigs,
   }) = _scanImageFromDeviceStorage;
   const factory ScanMaterialInfoEvent.emitScannedData({
-    required String scannedRes,
+    required Ean scannedRes,
   }) = _emitScannedData;
+  const factory ScanMaterialInfoEvent.updateTorchState({
+    required bool torchState,
+  }) = _UpdateTorchState;
+}
+
+enum PermissionType {
+  camera,
+  files,
 }

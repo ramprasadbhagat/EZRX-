@@ -52,7 +52,9 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.historyDetailRoute() = _HistoryDetailRoute;
 
   const factory ApiFailure.languageChangeFail() = _LanguageChangeFail;
-  
+  const factory ApiFailure.scannedProductNotFound(String productNumber) =
+      _ScannedProductNotFound;
+  const factory ApiFailure.cameraPermissionFailed() = _CameraPermissionFailed;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -93,5 +95,8 @@ extension ApiFailureExt on ApiFailure {
             'This order history is not available on your account',
         passwordResetFail: (_) => 'Unable to reset password',
         languageChangeFail: (_) => 'Unable to change language',
+        scannedProductNotFound: (scannedProduct) =>
+            'Unable to fetch Material ${scannedProduct.productNumber}',
+        cameraPermissionFailed: (_) => 'Camera Permission Denied',
       );
 }

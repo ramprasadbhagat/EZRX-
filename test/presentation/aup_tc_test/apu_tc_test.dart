@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
@@ -78,6 +79,10 @@ class ResetPasswordMockBloc
     extends MockBloc<ResetPasswordEvent, ResetPasswordState>
     implements ResetPasswordBloc {}
 
+class ScanMaterialInfoBlocMock
+    extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
+    implements ScanMaterialInfoBloc {}
+
 class OrderDocumentTypeMockBloc
     extends MockBloc<OrderDocumentTypeEvent, OrderDocumentTypeState>
     implements OrderDocumentTypeBloc {}
@@ -133,6 +138,7 @@ void main() {
   late UserBloc userBlocMock;
   late CartBloc cartBlocMock;
   late SettingBloc settingBlocMock;
+  late ScanMaterialInfoBloc scanMaterialInfoBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late ResetPasswordBloc resetPasswordBlocMock;
@@ -159,6 +165,7 @@ void main() {
     accountSummaryMock = AccountSummaryBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     mockAupTcBloc = MockAupTcBloc();
+    scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     materialListBloc = MaterialListMockBloc();
     materialPriceBloc = MaterialPriceMockBloc();
@@ -206,6 +213,8 @@ void main() {
         .thenReturn(PaymentCustomerInformationState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    when(() => scanMaterialInfoBlocMock.state)
+        .thenReturn(ScanMaterialInfoState.initial());
     when(() => resetPasswordBlocMock.state)
         .thenReturn(ResetPasswordState.initial());
     when(() => orderDocumentTypeBlocMock.state)
@@ -269,6 +278,9 @@ void main() {
               ),
               BlocProvider<ReturnListByItemBloc>(
                 create: (context) => returnListByItemBloc,
+              ),
+              BlocProvider<ScanMaterialInfoBloc>(
+                create: (context) => scanMaterialInfoBlocMock,
               ),
               BlocProvider<RecentOrderBloc>(
                 create: (context) => recentOrderBloc,
@@ -364,6 +376,9 @@ void main() {
             ),
             BlocProvider<ResetPasswordBloc>(
               create: (context) => resetPasswordBlocMock,
+            ),
+            BlocProvider<ScanMaterialInfoBloc>(
+              create: (context) => scanMaterialInfoBlocMock,
             ),
             BlocProvider<OrderDocumentTypeBloc>(
               create: (context) => orderDocumentTypeBlocMock,

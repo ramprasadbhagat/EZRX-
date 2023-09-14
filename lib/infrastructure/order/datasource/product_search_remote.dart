@@ -33,6 +33,7 @@ class ProductSearchRemoteDataSource {
     required bool gimmickMaterial,
     required String language,
     required String searchKey,
+    required String eanNumber,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery();
@@ -50,6 +51,8 @@ class ProductSearchRemoteDataSource {
           'SearchKey': searchKey,
         },
       };
+      if (eanNumber.isNotEmpty) variables['request']!['ean'] = eanNumber;
+
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}price',

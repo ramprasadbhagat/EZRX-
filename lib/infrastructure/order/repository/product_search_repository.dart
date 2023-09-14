@@ -26,6 +26,10 @@ import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart
 
 import 'package:ezrxmobile/infrastructure/order/dtos/product_suggestion_history_dto.dart';
 
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+
 class ProductSearchRepository implements IProductSearchRepository {
   final Config config;
   final ProductSearchLocalDataSource localDataSource;
@@ -81,6 +85,7 @@ class ProductSearchRepository implements IProductSearchRepository {
         searchKey: searchKey.getOrCrash(),
         offset: offset,
         pageSize: pageSize,
+        eanNumber: '',
       );
 
       return Right(materialList);
@@ -123,6 +128,52 @@ class ProductSearchRepository implements IProductSearchRepository {
       await productSuggestionHistoryStorage.clear();
 
       return const Right(unit);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, MaterialInfo>> getScanProduct({
+    required SalesOrganisation salesOrganization,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Ean eanNumber,
+    required SalesOrganisationConfigs salesOrgConfig,
+    required User user,
+  }) async {
+    final customerCode = customerCodeInfo.customerCodeSoldTo;
+    final salesOrg = salesOrganization.salesOrg.getOrCrash();
+    final shipToCode = shipToInfo.shipToCustomerCode;
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final productList = await localDataSource.getSearchedProductList();
+
+        return Right(productList.products.first);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final materialList = await remoteDataSource.getSearchedMaterialList(
+        customerCode: customerCode,
+        salesOrgCode: salesOrg,
+        gimmickMaterial: salesOrgConfig.enableGimmickMaterial,
+        language: user.settings.languagePreference.languageCode,
+        shipToCode: shipToCode,
+        searchKey: '',
+        offset: 0,
+        pageSize: 24,
+        eanNumber: eanNumber.getOrCrash(),
+      );
+
+      if (materialList.products.isEmpty) {
+        return Left(
+          ApiFailure.scannedProductNotFound(eanNumber.getOrCrash()),
+        );
+      }
+
+      return Right(materialList.products.first);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

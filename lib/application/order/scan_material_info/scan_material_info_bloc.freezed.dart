@@ -19,40 +19,67 @@ mixin _$ScanMaterialInfoEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanImageFromDeviceStorage,
-    required TResult Function(String scannedRes) emitScannedData,
+    required TResult Function(Ean scannedRes) emitScannedData,
+    required TResult Function(bool torchState) updateTorchState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult? Function(String scannedRes)? emitScannedData,
+    TResult? Function(Ean scannedRes)? emitScannedData,
+    TResult? Function(bool torchState)? updateTorchState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult Function(String scannedRes)? emitScannedData,
+    TResult Function(Ean scannedRes)? emitScannedData,
+    TResult Function(bool torchState)? updateTorchState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,6 +92,7 @@ mixin _$ScanMaterialInfoEvent {
     required TResult Function(_scanImageFromDeviceStorage value)
         scanImageFromDeviceStorage,
     required TResult Function(_emitScannedData value) emitScannedData,
+    required TResult Function(_UpdateTorchState value) updateTorchState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,6 +104,7 @@ mixin _$ScanMaterialInfoEvent {
     TResult? Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult? Function(_emitScannedData value)? emitScannedData,
+    TResult? Function(_UpdateTorchState value)? updateTorchState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +116,7 @@ mixin _$ScanMaterialInfoEvent {
     TResult Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult Function(_emitScannedData value)? emitScannedData,
+    TResult Function(_UpdateTorchState value)? updateTorchState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -150,14 +180,23 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanImageFromDeviceStorage,
-    required TResult Function(String scannedRes) emitScannedData,
+    required TResult Function(Ean scannedRes) emitScannedData,
+    required TResult Function(bool torchState) updateTorchState,
   }) {
     return initialized();
   }
@@ -166,14 +205,23 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult? Function(String scannedRes)? emitScannedData,
+    TResult? Function(Ean scannedRes)? emitScannedData,
+    TResult? Function(bool torchState)? updateTorchState,
   }) {
     return initialized?.call();
   }
@@ -182,14 +230,23 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult Function(String scannedRes)? emitScannedData,
+    TResult Function(Ean scannedRes)? emitScannedData,
+    TResult Function(bool torchState)? updateTorchState,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -208,6 +265,7 @@ class _$_initialized implements _initialized {
     required TResult Function(_scanImageFromDeviceStorage value)
         scanImageFromDeviceStorage,
     required TResult Function(_emitScannedData value) emitScannedData,
+    required TResult Function(_UpdateTorchState value) updateTorchState,
   }) {
     return initialized(this);
   }
@@ -222,6 +280,7 @@ class _$_initialized implements _initialized {
     TResult? Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult? Function(_emitScannedData value)? emitScannedData,
+    TResult? Function(_UpdateTorchState value)? updateTorchState,
   }) {
     return initialized?.call(this);
   }
@@ -236,6 +295,7 @@ class _$_initialized implements _initialized {
     TResult Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult Function(_emitScannedData value)? emitScannedData,
+    TResult Function(_UpdateTorchState value)? updateTorchState,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -260,12 +320,14 @@ abstract class _$$_scanMaterialNumberFromCameraCopyWith<$Res> {
       {User user,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      SalesOrganisationConfigs salesOrgConfigs});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
 }
 
 /// @nodoc
@@ -285,6 +347,7 @@ class __$$_scanMaterialNumberFromCameraCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? salesOrgConfigs = null,
   }) {
     return _then(_$_scanMaterialNumberFromCamera(
       user: null == user
@@ -303,6 +366,10 @@ class __$$_scanMaterialNumberFromCameraCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      salesOrgConfigs: null == salesOrgConfigs
+          ? _value.salesOrgConfigs
+          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
     ));
   }
 
@@ -337,6 +404,15 @@ class __$$_scanMaterialNumberFromCameraCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
+        (value) {
+      return _then(_value.copyWith(salesOrgConfigs: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -346,7 +422,8 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
       {required this.user,
       required this.salesOrganisation,
       required this.customerCodeInfo,
-      required this.shipToInfo});
+      required this.shipToInfo,
+      required this.salesOrgConfigs});
 
   @override
   final User user;
@@ -356,10 +433,12 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
+  @override
+  final SalesOrganisationConfigs salesOrgConfigs;
 
   @override
   String toString() {
-    return 'ScanMaterialInfoEvent.scanMaterialNumberFromCamera(user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'ScanMaterialInfoEvent.scanMaterialNumberFromCamera(user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrgConfigs: $salesOrgConfigs)';
   }
 
   @override
@@ -373,12 +452,14 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
+                other.salesOrgConfigs == salesOrgConfigs));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, user, salesOrganisation, customerCodeInfo, shipToInfo);
+  int get hashCode => Object.hash(runtimeType, user, salesOrganisation,
+      customerCodeInfo, shipToInfo, salesOrgConfigs);
 
   @JsonKey(ignore: true)
   @override
@@ -391,53 +472,80 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanImageFromDeviceStorage,
-    required TResult Function(String scannedRes) emitScannedData,
+    required TResult Function(Ean scannedRes) emitScannedData,
+    required TResult Function(bool torchState) updateTorchState,
   }) {
     return scanMaterialNumberFromCamera(
-        user, salesOrganisation, customerCodeInfo, shipToInfo);
+        user, salesOrganisation, customerCodeInfo, shipToInfo, salesOrgConfigs);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult? Function(String scannedRes)? emitScannedData,
+    TResult? Function(Ean scannedRes)? emitScannedData,
+    TResult? Function(bool torchState)? updateTorchState,
   }) {
     return scanMaterialNumberFromCamera?.call(
-        user, salesOrganisation, customerCodeInfo, shipToInfo);
+        user, salesOrganisation, customerCodeInfo, shipToInfo, salesOrgConfigs);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult Function(String scannedRes)? emitScannedData,
+    TResult Function(Ean scannedRes)? emitScannedData,
+    TResult Function(bool torchState)? updateTorchState,
     required TResult orElse(),
   }) {
     if (scanMaterialNumberFromCamera != null) {
-      return scanMaterialNumberFromCamera(
-          user, salesOrganisation, customerCodeInfo, shipToInfo);
+      return scanMaterialNumberFromCamera(user, salesOrganisation,
+          customerCodeInfo, shipToInfo, salesOrgConfigs);
     }
     return orElse();
   }
@@ -452,6 +560,7 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
     required TResult Function(_scanImageFromDeviceStorage value)
         scanImageFromDeviceStorage,
     required TResult Function(_emitScannedData value) emitScannedData,
+    required TResult Function(_UpdateTorchState value) updateTorchState,
   }) {
     return scanMaterialNumberFromCamera(this);
   }
@@ -466,6 +575,7 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
     TResult? Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult? Function(_emitScannedData value)? emitScannedData,
+    TResult? Function(_UpdateTorchState value)? updateTorchState,
   }) {
     return scanMaterialNumberFromCamera?.call(this);
   }
@@ -480,6 +590,7 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
     TResult Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult Function(_emitScannedData value)? emitScannedData,
+    TResult Function(_UpdateTorchState value)? updateTorchState,
     required TResult orElse(),
   }) {
     if (scanMaterialNumberFromCamera != null) {
@@ -491,15 +602,18 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
 
 abstract class _scanMaterialNumberFromCamera implements ScanMaterialInfoEvent {
   const factory _scanMaterialNumberFromCamera(
-      {required final User user,
-      required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_scanMaterialNumberFromCamera;
+          {required final User user,
+          required final SalesOrganisation salesOrganisation,
+          required final CustomerCodeInfo customerCodeInfo,
+          required final ShipToInfo shipToInfo,
+          required final SalesOrganisationConfigs salesOrgConfigs}) =
+      _$_scanMaterialNumberFromCamera;
 
   User get user;
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
+  SalesOrganisationConfigs get salesOrgConfigs;
   @JsonKey(ignore: true)
   _$$_scanMaterialNumberFromCameraCopyWith<_$_scanMaterialNumberFromCamera>
       get copyWith => throw _privateConstructorUsedError;
@@ -544,14 +658,23 @@ class _$_disableScan implements _disableScan {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanImageFromDeviceStorage,
-    required TResult Function(String scannedRes) emitScannedData,
+    required TResult Function(Ean scannedRes) emitScannedData,
+    required TResult Function(bool torchState) updateTorchState,
   }) {
     return disableScan();
   }
@@ -560,14 +683,23 @@ class _$_disableScan implements _disableScan {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult? Function(String scannedRes)? emitScannedData,
+    TResult? Function(Ean scannedRes)? emitScannedData,
+    TResult? Function(bool torchState)? updateTorchState,
   }) {
     return disableScan?.call();
   }
@@ -576,14 +708,23 @@ class _$_disableScan implements _disableScan {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult Function(String scannedRes)? emitScannedData,
+    TResult Function(Ean scannedRes)? emitScannedData,
+    TResult Function(bool torchState)? updateTorchState,
     required TResult orElse(),
   }) {
     if (disableScan != null) {
@@ -602,6 +743,7 @@ class _$_disableScan implements _disableScan {
     required TResult Function(_scanImageFromDeviceStorage value)
         scanImageFromDeviceStorage,
     required TResult Function(_emitScannedData value) emitScannedData,
+    required TResult Function(_UpdateTorchState value) updateTorchState,
   }) {
     return disableScan(this);
   }
@@ -616,6 +758,7 @@ class _$_disableScan implements _disableScan {
     TResult? Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult? Function(_emitScannedData value)? emitScannedData,
+    TResult? Function(_UpdateTorchState value)? updateTorchState,
   }) {
     return disableScan?.call(this);
   }
@@ -630,6 +773,7 @@ class _$_disableScan implements _disableScan {
     TResult Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult Function(_emitScannedData value)? emitScannedData,
+    TResult Function(_UpdateTorchState value)? updateTorchState,
     required TResult orElse(),
   }) {
     if (disableScan != null) {
@@ -654,12 +798,14 @@ abstract class _$$_scanImageFromDeviceStorageCopyWith<$Res> {
       {User user,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      SalesOrganisationConfigs salesOrgConfigs});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
 }
 
 /// @nodoc
@@ -679,6 +825,7 @@ class __$$_scanImageFromDeviceStorageCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? salesOrgConfigs = null,
   }) {
     return _then(_$_scanImageFromDeviceStorage(
       user: null == user
@@ -697,6 +844,10 @@ class __$$_scanImageFromDeviceStorageCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      salesOrgConfigs: null == salesOrgConfigs
+          ? _value.salesOrgConfigs
+          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
     ));
   }
 
@@ -731,6 +882,15 @@ class __$$_scanImageFromDeviceStorageCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
+        (value) {
+      return _then(_value.copyWith(salesOrgConfigs: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -740,7 +900,8 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
       {required this.user,
       required this.salesOrganisation,
       required this.customerCodeInfo,
-      required this.shipToInfo});
+      required this.shipToInfo,
+      required this.salesOrgConfigs});
 
   @override
   final User user;
@@ -750,10 +911,12 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
+  @override
+  final SalesOrganisationConfigs salesOrgConfigs;
 
   @override
   String toString() {
-    return 'ScanMaterialInfoEvent.scanImageFromDeviceStorage(user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'ScanMaterialInfoEvent.scanImageFromDeviceStorage(user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, salesOrgConfigs: $salesOrgConfigs)';
   }
 
   @override
@@ -767,12 +930,14 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
+                other.salesOrgConfigs == salesOrgConfigs));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, user, salesOrganisation, customerCodeInfo, shipToInfo);
+  int get hashCode => Object.hash(runtimeType, user, salesOrganisation,
+      customerCodeInfo, shipToInfo, salesOrgConfigs);
 
   @JsonKey(ignore: true)
   @override
@@ -785,53 +950,80 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanImageFromDeviceStorage,
-    required TResult Function(String scannedRes) emitScannedData,
+    required TResult Function(Ean scannedRes) emitScannedData,
+    required TResult Function(bool torchState) updateTorchState,
   }) {
     return scanImageFromDeviceStorage(
-        user, salesOrganisation, customerCodeInfo, shipToInfo);
+        user, salesOrganisation, customerCodeInfo, shipToInfo, salesOrgConfigs);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult? Function(String scannedRes)? emitScannedData,
+    TResult? Function(Ean scannedRes)? emitScannedData,
+    TResult? Function(bool torchState)? updateTorchState,
   }) {
     return scanImageFromDeviceStorage?.call(
-        user, salesOrganisation, customerCodeInfo, shipToInfo);
+        user, salesOrganisation, customerCodeInfo, shipToInfo, salesOrgConfigs);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult Function(String scannedRes)? emitScannedData,
+    TResult Function(Ean scannedRes)? emitScannedData,
+    TResult Function(bool torchState)? updateTorchState,
     required TResult orElse(),
   }) {
     if (scanImageFromDeviceStorage != null) {
-      return scanImageFromDeviceStorage(
-          user, salesOrganisation, customerCodeInfo, shipToInfo);
+      return scanImageFromDeviceStorage(user, salesOrganisation,
+          customerCodeInfo, shipToInfo, salesOrgConfigs);
     }
     return orElse();
   }
@@ -846,6 +1038,7 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
     required TResult Function(_scanImageFromDeviceStorage value)
         scanImageFromDeviceStorage,
     required TResult Function(_emitScannedData value) emitScannedData,
+    required TResult Function(_UpdateTorchState value) updateTorchState,
   }) {
     return scanImageFromDeviceStorage(this);
   }
@@ -860,6 +1053,7 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
     TResult? Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult? Function(_emitScannedData value)? emitScannedData,
+    TResult? Function(_UpdateTorchState value)? updateTorchState,
   }) {
     return scanImageFromDeviceStorage?.call(this);
   }
@@ -874,6 +1068,7 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
     TResult Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult Function(_emitScannedData value)? emitScannedData,
+    TResult Function(_UpdateTorchState value)? updateTorchState,
     required TResult orElse(),
   }) {
     if (scanImageFromDeviceStorage != null) {
@@ -885,15 +1080,18 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
 
 abstract class _scanImageFromDeviceStorage implements ScanMaterialInfoEvent {
   const factory _scanImageFromDeviceStorage(
-      {required final User user,
-      required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_scanImageFromDeviceStorage;
+          {required final User user,
+          required final SalesOrganisation salesOrganisation,
+          required final CustomerCodeInfo customerCodeInfo,
+          required final ShipToInfo shipToInfo,
+          required final SalesOrganisationConfigs salesOrgConfigs}) =
+      _$_scanImageFromDeviceStorage;
 
   User get user;
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
+  SalesOrganisationConfigs get salesOrgConfigs;
   @JsonKey(ignore: true)
   _$$_scanImageFromDeviceStorageCopyWith<_$_scanImageFromDeviceStorage>
       get copyWith => throw _privateConstructorUsedError;
@@ -905,7 +1103,7 @@ abstract class _$$_emitScannedDataCopyWith<$Res> {
           _$_emitScannedData value, $Res Function(_$_emitScannedData) then) =
       __$$_emitScannedDataCopyWithImpl<$Res>;
   @useResult
-  $Res call({String scannedRes});
+  $Res call({Ean scannedRes});
 }
 
 /// @nodoc
@@ -925,7 +1123,7 @@ class __$$_emitScannedDataCopyWithImpl<$Res>
       scannedRes: null == scannedRes
           ? _value.scannedRes
           : scannedRes // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Ean,
     ));
   }
 }
@@ -936,7 +1134,7 @@ class _$_emitScannedData implements _emitScannedData {
   const _$_emitScannedData({required this.scannedRes});
 
   @override
-  final String scannedRes;
+  final Ean scannedRes;
 
   @override
   String toString() {
@@ -965,14 +1163,23 @@ class _$_emitScannedData implements _emitScannedData {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanMaterialNumberFromCamera,
     required TResult Function() disableScan,
-    required TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
         scanImageFromDeviceStorage,
-    required TResult Function(String scannedRes) emitScannedData,
+    required TResult Function(Ean scannedRes) emitScannedData,
+    required TResult Function(bool torchState) updateTorchState,
   }) {
     return emitScannedData(scannedRes);
   }
@@ -981,14 +1188,23 @@ class _$_emitScannedData implements _emitScannedData {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult? Function()? disableScan,
-    TResult? Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult? Function(String scannedRes)? emitScannedData,
+    TResult? Function(Ean scannedRes)? emitScannedData,
+    TResult? Function(bool torchState)? updateTorchState,
   }) {
     return emitScannedData?.call(scannedRes);
   }
@@ -997,14 +1213,23 @@ class _$_emitScannedData implements _emitScannedData {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanMaterialNumberFromCamera,
     TResult Function()? disableScan,
-    TResult Function(User user, SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
         scanImageFromDeviceStorage,
-    TResult Function(String scannedRes)? emitScannedData,
+    TResult Function(Ean scannedRes)? emitScannedData,
+    TResult Function(bool torchState)? updateTorchState,
     required TResult orElse(),
   }) {
     if (emitScannedData != null) {
@@ -1023,6 +1248,7 @@ class _$_emitScannedData implements _emitScannedData {
     required TResult Function(_scanImageFromDeviceStorage value)
         scanImageFromDeviceStorage,
     required TResult Function(_emitScannedData value) emitScannedData,
+    required TResult Function(_UpdateTorchState value) updateTorchState,
   }) {
     return emitScannedData(this);
   }
@@ -1037,6 +1263,7 @@ class _$_emitScannedData implements _emitScannedData {
     TResult? Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult? Function(_emitScannedData value)? emitScannedData,
+    TResult? Function(_UpdateTorchState value)? updateTorchState,
   }) {
     return emitScannedData?.call(this);
   }
@@ -1051,6 +1278,7 @@ class _$_emitScannedData implements _emitScannedData {
     TResult Function(_scanImageFromDeviceStorage value)?
         scanImageFromDeviceStorage,
     TResult Function(_emitScannedData value)? emitScannedData,
+    TResult Function(_UpdateTorchState value)? updateTorchState,
     required TResult orElse(),
   }) {
     if (emitScannedData != null) {
@@ -1061,12 +1289,213 @@ class _$_emitScannedData implements _emitScannedData {
 }
 
 abstract class _emitScannedData implements ScanMaterialInfoEvent {
-  const factory _emitScannedData({required final String scannedRes}) =
+  const factory _emitScannedData({required final Ean scannedRes}) =
       _$_emitScannedData;
 
-  String get scannedRes;
+  Ean get scannedRes;
   @JsonKey(ignore: true)
   _$$_emitScannedDataCopyWith<_$_emitScannedData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateTorchStateCopyWith<$Res> {
+  factory _$$_UpdateTorchStateCopyWith(
+          _$_UpdateTorchState value, $Res Function(_$_UpdateTorchState) then) =
+      __$$_UpdateTorchStateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool torchState});
+}
+
+/// @nodoc
+class __$$_UpdateTorchStateCopyWithImpl<$Res>
+    extends _$ScanMaterialInfoEventCopyWithImpl<$Res, _$_UpdateTorchState>
+    implements _$$_UpdateTorchStateCopyWith<$Res> {
+  __$$_UpdateTorchStateCopyWithImpl(
+      _$_UpdateTorchState _value, $Res Function(_$_UpdateTorchState) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? torchState = null,
+  }) {
+    return _then(_$_UpdateTorchState(
+      torchState: null == torchState
+          ? _value.torchState
+          : torchState // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateTorchState implements _UpdateTorchState {
+  const _$_UpdateTorchState({required this.torchState});
+
+  @override
+  final bool torchState;
+
+  @override
+  String toString() {
+    return 'ScanMaterialInfoEvent.updateTorchState(torchState: $torchState)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateTorchState &&
+            (identical(other.torchState, torchState) ||
+                other.torchState == torchState));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, torchState);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateTorchStateCopyWith<_$_UpdateTorchState> get copyWith =>
+      __$$_UpdateTorchStateCopyWithImpl<_$_UpdateTorchState>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
+        scanMaterialNumberFromCamera,
+    required TResult Function() disableScan,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)
+        scanImageFromDeviceStorage,
+    required TResult Function(Ean scannedRes) emitScannedData,
+    required TResult Function(bool torchState) updateTorchState,
+  }) {
+    return updateTorchState(torchState);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
+        scanMaterialNumberFromCamera,
+    TResult? Function()? disableScan,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
+        scanImageFromDeviceStorage,
+    TResult? Function(Ean scannedRes)? emitScannedData,
+    TResult? Function(bool torchState)? updateTorchState,
+  }) {
+    return updateTorchState?.call(torchState);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
+        scanMaterialNumberFromCamera,
+    TResult Function()? disableScan,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisationConfigs salesOrgConfigs)?
+        scanImageFromDeviceStorage,
+    TResult Function(Ean scannedRes)? emitScannedData,
+    TResult Function(bool torchState)? updateTorchState,
+    required TResult orElse(),
+  }) {
+    if (updateTorchState != null) {
+      return updateTorchState(torchState);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_scanMaterialNumberFromCamera value)
+        scanMaterialNumberFromCamera,
+    required TResult Function(_disableScan value) disableScan,
+    required TResult Function(_scanImageFromDeviceStorage value)
+        scanImageFromDeviceStorage,
+    required TResult Function(_emitScannedData value) emitScannedData,
+    required TResult Function(_UpdateTorchState value) updateTorchState,
+  }) {
+    return updateTorchState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_scanMaterialNumberFromCamera value)?
+        scanMaterialNumberFromCamera,
+    TResult? Function(_disableScan value)? disableScan,
+    TResult? Function(_scanImageFromDeviceStorage value)?
+        scanImageFromDeviceStorage,
+    TResult? Function(_emitScannedData value)? emitScannedData,
+    TResult? Function(_UpdateTorchState value)? updateTorchState,
+  }) {
+    return updateTorchState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_scanMaterialNumberFromCamera value)?
+        scanMaterialNumberFromCamera,
+    TResult Function(_disableScan value)? disableScan,
+    TResult Function(_scanImageFromDeviceStorage value)?
+        scanImageFromDeviceStorage,
+    TResult Function(_emitScannedData value)? emitScannedData,
+    TResult Function(_UpdateTorchState value)? updateTorchState,
+    required TResult orElse(),
+  }) {
+    if (updateTorchState != null) {
+      return updateTorchState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateTorchState implements ScanMaterialInfoEvent {
+  const factory _UpdateTorchState({required final bool torchState}) =
+      _$_UpdateTorchState;
+
+  bool get torchState;
+  @JsonKey(ignore: true)
+  _$$_UpdateTorchStateCopyWith<_$_UpdateTorchState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1076,10 +1505,13 @@ mixin _$ScanMaterialInfoState {
   User get user => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get salesOrgConfigs =>
+      throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  bool get isFetching => throw _privateConstructorUsedError;
+  bool get isScanInProgress => throw _privateConstructorUsedError;
+  bool get isTorchStateEnabled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ScanMaterialInfoStateCopyWith<ScanMaterialInfoState> get copyWith =>
@@ -1097,14 +1529,17 @@ abstract class $ScanMaterialInfoStateCopyWith<$Res> {
       User user,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
+      SalesOrganisationConfigs salesOrgConfigs,
       ShipToInfo shipToInfo,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isFetching});
+      bool isScanInProgress,
+      bool isTorchStateEnabled});
 
   $MaterialInfoCopyWith<$Res> get material;
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
@@ -1126,9 +1561,11 @@ class _$ScanMaterialInfoStateCopyWithImpl<$Res,
     Object? user = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
+    Object? salesOrgConfigs = null,
     Object? shipToInfo = null,
     Object? apiFailureOrSuccessOption = null,
-    Object? isFetching = null,
+    Object? isScanInProgress = null,
+    Object? isTorchStateEnabled = null,
   }) {
     return _then(_value.copyWith(
       material: null == material
@@ -1147,6 +1584,10 @@ class _$ScanMaterialInfoStateCopyWithImpl<$Res,
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
+      salesOrgConfigs: null == salesOrgConfigs
+          ? _value.salesOrgConfigs
+          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       shipToInfo: null == shipToInfo
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
@@ -1155,9 +1596,13 @@ class _$ScanMaterialInfoStateCopyWithImpl<$Res,
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
+      isScanInProgress: null == isScanInProgress
+          ? _value.isScanInProgress
+          : isScanInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isTorchStateEnabled: null == isTorchStateEnabled
+          ? _value.isTorchStateEnabled
+          : isTorchStateEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -1196,6 +1641,15 @@ class _$ScanMaterialInfoStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfigs,
+        (value) {
+      return _then(_value.copyWith(salesOrgConfigs: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $ShipToInfoCopyWith<$Res> get shipToInfo {
     return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
       return _then(_value.copyWith(shipToInfo: value) as $Val);
@@ -1216,9 +1670,11 @@ abstract class _$$_ScanMaterialInfoStateCopyWith<$Res>
       User user,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
+      SalesOrganisationConfigs salesOrgConfigs,
       ShipToInfo shipToInfo,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      bool isFetching});
+      bool isScanInProgress,
+      bool isTorchStateEnabled});
 
   @override
   $MaterialInfoCopyWith<$Res> get material;
@@ -1228,6 +1684,8 @@ abstract class _$$_ScanMaterialInfoStateCopyWith<$Res>
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfigs;
   @override
   $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
@@ -1247,9 +1705,11 @@ class __$$_ScanMaterialInfoStateCopyWithImpl<$Res>
     Object? user = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
+    Object? salesOrgConfigs = null,
     Object? shipToInfo = null,
     Object? apiFailureOrSuccessOption = null,
-    Object? isFetching = null,
+    Object? isScanInProgress = null,
+    Object? isTorchStateEnabled = null,
   }) {
     return _then(_$_ScanMaterialInfoState(
       material: null == material
@@ -1268,6 +1728,10 @@ class __$$_ScanMaterialInfoStateCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
+      salesOrgConfigs: null == salesOrgConfigs
+          ? _value.salesOrgConfigs
+          : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       shipToInfo: null == shipToInfo
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
@@ -1276,9 +1740,13 @@ class __$$_ScanMaterialInfoStateCopyWithImpl<$Res>
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
+      isScanInProgress: null == isScanInProgress
+          ? _value.isScanInProgress
+          : isScanInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isTorchStateEnabled: null == isTorchStateEnabled
+          ? _value.isTorchStateEnabled
+          : isTorchStateEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -1292,9 +1760,11 @@ class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
       required this.user,
       required this.salesOrganisation,
       required this.customerCodeInfo,
+      required this.salesOrgConfigs,
       required this.shipToInfo,
       required this.apiFailureOrSuccessOption,
-      required this.isFetching})
+      required this.isScanInProgress,
+      required this.isTorchStateEnabled})
       : super._();
 
   @override
@@ -1306,15 +1776,19 @@ class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
+  final SalesOrganisationConfigs salesOrgConfigs;
+  @override
   final ShipToInfo shipToInfo;
   @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
-  final bool isFetching;
+  final bool isScanInProgress;
+  @override
+  final bool isTorchStateEnabled;
 
   @override
   String toString() {
-    return 'ScanMaterialInfoState(material: $material, user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching)';
+    return 'ScanMaterialInfoState(material: $material, user: $user, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, salesOrgConfigs: $salesOrgConfigs, shipToInfo: $shipToInfo, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isScanInProgress: $isScanInProgress, isTorchStateEnabled: $isTorchStateEnabled)';
   }
 
   @override
@@ -1329,13 +1803,17 @@ class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.salesOrgConfigs, salesOrgConfigs) ||
+                other.salesOrgConfigs == salesOrgConfigs) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
-            (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching));
+            (identical(other.isScanInProgress, isScanInProgress) ||
+                other.isScanInProgress == isScanInProgress) &&
+            (identical(other.isTorchStateEnabled, isTorchStateEnabled) ||
+                other.isTorchStateEnabled == isTorchStateEnabled));
   }
 
   @override
@@ -1345,9 +1823,11 @@ class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
       user,
       salesOrganisation,
       customerCodeInfo,
+      salesOrgConfigs,
       shipToInfo,
       apiFailureOrSuccessOption,
-      isFetching);
+      isScanInProgress,
+      isTorchStateEnabled);
 
   @JsonKey(ignore: true)
   @override
@@ -1363,10 +1843,12 @@ abstract class _ScanMaterialInfoState extends ScanMaterialInfoState {
       required final User user,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
+      required final SalesOrganisationConfigs salesOrgConfigs,
       required final ShipToInfo shipToInfo,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
-      required final bool isFetching}) = _$_ScanMaterialInfoState;
+      required final bool isScanInProgress,
+      required final bool isTorchStateEnabled}) = _$_ScanMaterialInfoState;
   const _ScanMaterialInfoState._() : super._();
 
   @override
@@ -1378,11 +1860,15 @@ abstract class _ScanMaterialInfoState extends ScanMaterialInfoState {
   @override
   CustomerCodeInfo get customerCodeInfo;
   @override
+  SalesOrganisationConfigs get salesOrgConfigs;
+  @override
   ShipToInfo get shipToInfo;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
-  bool get isFetching;
+  bool get isScanInProgress;
+  @override
+  bool get isTorchStateEnabled;
   @override
   @JsonKey(ignore: true)
   _$$_ScanMaterialInfoStateCopyWith<_$_ScanMaterialInfoState> get copyWith =>

@@ -178,53 +178,6 @@ class MaterialListRepository implements IMaterialListRepository {
   }
 
   @override
-  Future<Either<ApiFailure, MaterialInfo>> getScanMaterial({
-    required User user,
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required Ean ean,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final materialListData = user.role.type.isSalesRepRole
-            ? await materialListLocalDataSource.searchMaterialListSalesRep()
-            : await materialListLocalDataSource.searchMaterialList();
-
-        return Right(materialListData.first);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    }
-
-    try {
-      final materialListData = user.role.type.isSalesRepRole
-          ? await materialListRemoteDataSource.getScanMaterialSalesRep(
-              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
-              customerCode: customerCodeInfo.customerCodeSoldTo,
-              shipToCode: shipToInfo.shipToCustomerCode,
-              ean: ean.getOrCrash(),
-              userName: user.username.getOrCrash(),
-            )
-          : await materialListRemoteDataSource.getScanMaterial(
-              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
-              customerCode: customerCodeInfo.customerCodeSoldTo,
-              shipToCode: shipToInfo.shipToCustomerCode,
-              ean: ean.getOrCrash(),
-            );
-      if (materialListData.isEmpty) {
-        return const Left(
-          ApiFailure.other('Unable to fetch Material'),
-        );
-      }
-
-      return Right(materialListData.first);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
   Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfoList({
     required List<MaterialInfo> materials,
     required CustomerCodeInfo customerCodeInfo,

@@ -6,4 +6,7 @@ class PermissionService {
 
   Future<PermissionStatus> requestStoragePermission() async =>
       await Permission.storage.request();
+
+  Future<PermissionStatus> requestCameraPermission() async =>
+      await Permission.camera.request();
 }

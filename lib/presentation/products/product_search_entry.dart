@@ -3,6 +3,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+
+import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+
 class ProductSearchEntry extends StatelessWidget {
   const ProductSearchEntry({Key? key}) : super(key: key);
 
@@ -26,7 +35,25 @@ class ProductSearchEntry extends StatelessWidget {
           icon: const Icon(
             Icons.camera_alt_outlined,
           ),
-          onPressed: () => {},
+          onPressed: () => {
+            trackMixpanelEvent(
+              MixpanelEvents.scannerClicked,
+            ),
+            context.router.pushNamed('orders/scan_material_info'),
+            context.read<ScanMaterialInfoBloc>().add(
+                  ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
+                    customerCodeInfo:
+                        context.read<EligibilityBloc>().state.customerCodeInfo,
+                    salesOrganisation:
+                        context.read<EligibilityBloc>().state.salesOrganisation,
+                    shipToInfo:
+                        context.read<EligibilityBloc>().state.shipToInfo,
+                    user: context.read<EligibilityBloc>().state.user,
+                    salesOrgConfigs:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  ),
+                ),
+          },
         ),
       ),
     );

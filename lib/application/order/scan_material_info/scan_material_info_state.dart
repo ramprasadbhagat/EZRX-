@@ -8,9 +8,11 @@ class ScanMaterialInfoState with _$ScanMaterialInfoState {
     required User user,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisationConfigs salesOrgConfigs,
     required ShipToInfo shipToInfo,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-    required bool isFetching,
+    required bool isScanInProgress,
+    required bool isTorchStateEnabled,
   }) = _ScanMaterialInfoState;
 
   factory ScanMaterialInfoState.initial() => ScanMaterialInfoState(
@@ -19,7 +21,9 @@ class ScanMaterialInfoState with _$ScanMaterialInfoState {
         salesOrganisation: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         shipToInfo: ShipToInfo.empty(),
+        salesOrgConfigs: SalesOrganisationConfigs.empty(),
         apiFailureOrSuccessOption: none(),
-        isFetching: false,
+        isScanInProgress: false,
+        isTorchStateEnabled: false,
       );
 }

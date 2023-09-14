@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode_capture.dart';
 // ignore: depend_on_referenced_packages
@@ -33,6 +34,14 @@ class MaterialInfoScanner {
     return _dataCaptureView;
   }
 
+  RectangularViewfinder get _rectangularViewfinder =>
+      _overlay.viewfinder as RectangularViewfinder;
+
+  SizeWithUnit get _scanArea => SizeWithUnit(
+        DoubleWithUnit(0.9, MeasureUnit.fraction),
+        DoubleWithUnit(0.1, MeasureUnit.fraction),
+      );
+
   void switchCameraOff() {
     _camera?.switchToDesiredState(FrameSourceState.off);
   }
@@ -62,12 +71,7 @@ class MaterialInfoScanner {
 
     enableSymbologies(config.enabledSymbologies);
     _barcodeCaptureSettings.locationSelection =
-        RectangularLocationSelection.withSize(
-      SizeWithUnit(
-        DoubleWithUnit(0.9, MeasureUnit.fraction),
-        DoubleWithUnit(0.1, MeasureUnit.fraction),
-      ),
-    );
+        RectangularLocationSelection.withSize(_scanArea);
     _barcodeCapture =
         BarcodeCapture.forContext(_dataCaptureContext, _barcodeCaptureSettings);
 
@@ -78,7 +82,11 @@ class MaterialInfoScanner {
       _dataCaptureView,
       BarcodeCaptureOverlayStyle.frame,
     );
-    _overlay.shouldShowScanAreaGuides = true;
+    _overlay.viewfinder =
+        RectangularViewfinder.withStyle(RectangularViewfinderStyle.rounded);
+
+    _rectangularViewfinder.setSize(_scanArea);
+    _rectangularViewfinder.color = ZPColors.kPrimaryColor;
   }
 
   Future<void> scanMaterialNumberfromDeviceStorage(

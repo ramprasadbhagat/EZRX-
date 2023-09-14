@@ -2,15 +2,14 @@ import 'dart:async';
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode_capture.dart';
 // ignore: depend_on_referenced_packages
 import 'package:scandit_flutter_datacapture_core/scandit_flutter_datacapture_core.dart';
@@ -18,6 +17,8 @@ import 'package:scandit_flutter_datacapture_core/scandit_flutter_datacapture_cor
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 import 'package:ezrxmobile/domain/order/repository/i_scan_material_info_repository.dart';
+
+import 'package:ezrxmobile/domain/order/repository/i_product_search_repository.dart';
 
 part 'scan_material_info_event.dart';
 part 'scan_material_info_state.dart';
@@ -27,16 +28,16 @@ class ScanMaterialInfoBloc
     extends Bloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
     implements BarcodeCaptureListener {
   final IScanMaterialInfoRepository scanInfoRepository;
-  final IMaterialListRepository materialListRepository;
+  final IProductSearchRepository productSearchRepository;
   late StreamController scanResultController;
   ScanMaterialInfoBloc({
     required this.scanInfoRepository,
-    required this.materialListRepository,
+    required this.productSearchRepository,
   }) : super(ScanMaterialInfoState.initial()) {
     on<ScanMaterialInfoEvent>(_onEvent);
     scanResultController = StreamController<String>();
     scanResultController.stream.listen((scannedData) {
-      add(ScanMaterialInfoEvent.emitScannedData(scannedRes: scannedData));
+      add(ScanMaterialInfoEvent.emitScannedData(scannedRes: Ean(scannedData)));
     });
   }
 
@@ -56,23 +57,35 @@ class ScanMaterialInfoBloc
             customerCodeInfo: e.customerCodeInfo,
             shipToInfo: e.shipToInfo,
             user: e.user,
+            isScanInProgress: true,
+            salesOrgConfigs: e.salesOrgConfigs,
           ),
         );
-        final permissionsResult = await Permission.camera.request();
-        if (permissionsResult.isGranted) {
-          final failureOrSuccess =
-              await scanInfoRepository.scanMaterialNumberFromDeviceCamera();
-          failureOrSuccess.fold(
-            (failure) {
-              emit(
-                state.copyWith(
-                  apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                ),
-              );
-            },
-            (scanMaterialNumberFromCamera) {},
-          );
-        }
+        final permissionsResult = await scanInfoRepository.getPermission(
+          type: PermissionType.camera,
+        );
+        permissionsResult.fold(
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(permissionsResult),
+            ),
+          ),
+          (permissionStatus) async {
+            final failureOrSuccess =
+                await scanInfoRepository.scanMaterialNumberFromDeviceCamera();
+            failureOrSuccess.fold(
+              (failure) {
+                emit(
+                  state.copyWith(
+                    apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                    isScanInProgress: false,
+                  ),
+                );
+              },
+              (scanMaterialNumberFromCamera) {},
+            );
+          },
+        );
       },
       scanImageFromDeviceStorage: (e) async {
         emit(
@@ -81,21 +94,38 @@ class ScanMaterialInfoBloc
             customerCodeInfo: e.customerCodeInfo,
             shipToInfo: e.shipToInfo,
             user: e.user,
+            isScanInProgress: true,
+            salesOrgConfigs: e.salesOrgConfigs,
           ),
         );
-        final failureOrSuccess =
-            await scanInfoRepository.scanImageFromDeviceStorage();
-        failureOrSuccess.fold(
-          (failure) {
+        final permissionsResult = await scanInfoRepository.getPermission(
+          type: PermissionType.files,
+        );
+        permissionsResult.fold(
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(permissionsResult),
+            ),
+          ),
+          (permissionResult) async {
             emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(
-                  failureOrSuccess,
-                ),
-              ),
+              state.copyWith(isScanInProgress: false),
+            );
+            final failureOrSuccess =
+                await scanInfoRepository.scanImageFromDeviceStorage();
+            failureOrSuccess.fold(
+              (failure) {
+                emit(
+                  state.copyWith(
+                    apiFailureOrSuccessOption: optionOf(
+                      failureOrSuccess,
+                    ),
+                  ),
+                );
+              },
+              (scanImageFromDeviceStorage) {},
             );
           },
-          (scanImageFromDeviceStorage) {},
         );
       },
       disableScan: (e) async {
@@ -116,16 +146,17 @@ class ScanMaterialInfoBloc
       emitScannedData: (e) async {
         emit(
           state.copyWith(
-            isFetching: true,
+            isScanInProgress: false,
             apiFailureOrSuccessOption: none(),
           ),
         );
-        final failureOrSuccess = await materialListRepository.getScanMaterial(
-          salesOrganisation: state.salesOrganisation,
+        final failureOrSuccess = await productSearchRepository.getScanProduct(
+          salesOrganization: state.salesOrganisation,
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
-          ean: Ean(e.scannedRes),
+          eanNumber: e.scannedRes,
           user: state.user,
+          salesOrgConfig: state.salesOrgConfigs,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -133,17 +164,35 @@ class ScanMaterialInfoBloc
               apiFailureOrSuccessOption: optionOf(
                 failureOrSuccess,
               ),
-              isFetching: false,
             ),
           ),
           (material) => emit(
             state.copyWith(
               material: material,
-              isFetching: false,
+              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
         );
         await scanInfoRepository.disableMaterialScan();
+      },
+      updateTorchState: (e) async {
+        final failureOrSuccess =
+            await scanInfoRepository.updateTorchState(torchState: e.torchState);
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: optionOf(
+                failureOrSuccess,
+              ),
+            ),
+          ),
+          (updatedTorchState) => emit(
+            state.copyWith(
+              apiFailureOrSuccessOption: none(),
+              isTorchStateEnabled: updatedTorchState,
+            ),
+          ),
+        );
       },
     );
   }

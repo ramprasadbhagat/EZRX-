@@ -34,14 +34,6 @@ abstract class IMaterialListRepository {
     required List<String> principles,
   });
 
-  Future<Either<ApiFailure, MaterialInfo>> getScanMaterial({
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required Ean ean,
-    required User user,
-  });
-
   Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfoList({
     required List<MaterialInfo> materials,
     required CustomerCodeInfo customerCodeInfo,
