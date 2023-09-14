@@ -96,7 +96,7 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
             'value': dueDateTo,
             'type': 'le',
           },
-        
+          
         if (amountValueFrom.isNotEmpty)
           {
             'field': 'amountInTransactionCurrency',

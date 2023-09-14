@@ -34,7 +34,7 @@ void main() {
 
   final fakeToDate = DateTime.now();
   final fakeFromDate = DateTime.now().subtract(
-    const Duration(days: 28),
+    const Duration(days: 30),
   );
 
   setUpAll(() async {

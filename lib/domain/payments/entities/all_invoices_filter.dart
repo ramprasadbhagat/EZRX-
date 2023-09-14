@@ -19,22 +19,11 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
     required SearchKey searchKey,
   }) = _AllInvoicesFilter;
 
-  factory AllInvoicesFilter.fullyEmpty() => AllInvoicesFilter(
-        dueDateFrom: DateTimeStringValue(''),
-        dueDateTo: DateTimeStringValue(''),
-        documentDateFrom: DateTimeStringValue(''),
-        documentDateTo: DateTimeStringValue(''),
-        amountValueFrom: RangeValue(''),
-        amountValueTo: RangeValue(''),
-        filterStatuses: <String>[],
-        searchKey: SearchKey(''),
-      );
-
   factory AllInvoicesFilter.empty() => AllInvoicesFilter(
         dueDateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(
-              const Duration(days: 28),
+              const Duration(days: 30),
             ),
           ),
         ),
@@ -46,7 +35,7 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
         documentDateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(
-              const Duration(days: 28),
+              const Duration(days: 30),
             ),
           ),
         ),

@@ -17,20 +17,11 @@ class AllCreditsFilter with _$AllCreditsFilter {
     required SearchKey searchKey,
   }) = _AllCreditsFilter;
 
-  factory AllCreditsFilter.fullyEmpty() => AllCreditsFilter(
-        documentDateFrom: DateTimeStringValue(''),
-        documentDateTo: DateTimeStringValue(''),
-        amountValueFrom: RangeValue(''),
-        amountValueTo: RangeValue(''),
-        filterStatuses: <String>[],
-        searchKey: SearchKey(''),
-      );
-
   factory AllCreditsFilter.empty() => AllCreditsFilter(
         documentDateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(
-              const Duration(days: 28),
+              const Duration(days: 30),
             ),
           ),
         ),
