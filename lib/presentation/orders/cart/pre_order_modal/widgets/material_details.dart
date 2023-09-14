@@ -24,7 +24,7 @@ class _MaterialDetails extends StatelessWidget {
                 width: 4,
               ),
               StatusLabel(
-                status: StatusType('Preorder'.tr()),
+                status: StatusType('OOS-Preorder'),
               ),
             ],
           ),

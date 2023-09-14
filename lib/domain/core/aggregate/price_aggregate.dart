@@ -556,7 +556,7 @@ class PriceAggregate with _$PriceAggregate {
       !inStock && salesOrgConfig.addOosMaterials.getOrDefaultValue(false);
 
   StatusType get productTag => isPreOrder
-      ? StatusType('Preorder')
+      ? StatusType('OOS-Preorder')
       : !stockInfoList.any((e) => e.inStock.isMaterialInStock)
           ? StatusType('Out of stock')
           : StatusType('');

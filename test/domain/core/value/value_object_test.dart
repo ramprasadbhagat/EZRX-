@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -222,10 +223,10 @@ void main() {
 
   group('OosMaterial test', () {
     test(
-      'OosMaterial true oosMaterialTag OSS-Preorder',
+      'OosMaterial true oosMaterialTag OOS-Preorder',
       () {
         final oosMaterial = OosMaterial(true);
-        expect(oosMaterial.oosMaterialTag, 'OSS-Preorder');
+        expect(oosMaterial.oosMaterialTag, 'OOS-Preorder');
       },
     );
 
@@ -234,6 +235,19 @@ void main() {
       () {
         final oosMaterial = OosMaterial(false);
         expect(oosMaterial.oosMaterialTag, 'Out of stock');
+      },
+    );
+  });
+
+  group('StatusType OOS-Preorder test', () {
+    test(
+      'StatusType OOS-Preorder ',
+      () {
+        final statusType = StatusType('OOS-Preorder');
+        expect(statusType.getValue(), 'OOS-Preorder');
+        expect(statusType.getValue(), 'OOS-Preorder');
+        expect(statusType.displayStatusTextColor, ZPColors.black);
+        expect(statusType.displayStatusLabelColor, ZPColors.lightYellow);
       },
     );
   });

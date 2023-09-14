@@ -57,10 +57,6 @@ bool getInStock(String text) {
   return text == 'Yes';
 }
 
-String getMaterialInStockText(bool inStock) {
-  return inStock ? 'Preorder' : 'Out of Stock';
-}
-
 String getTelephoneNotGreaterThan16(String text) {
   return hasLengthGreaterThanN(text, 16)
       ? text.characters.getRange(0, 16).toString()
@@ -281,7 +277,7 @@ Color getStatusLabelColor(String statusType) {
 
   final lightYellow = {
     'Pending': ZPColors.lightYellow,
-    'Preorder': ZPColors.lightYellow,
+    'OOS-Preorder': ZPColors.lightYellow,
     'Picking in-progress': ZPColors.lightYellow,
     'Order Created': ZPColors.lightYellow,
     'Out for delivery': ZPColors.lightYellow,
@@ -339,7 +335,7 @@ Color getStatusTextColor(String statusType) {
       return ZPColors.returnSummaryStatusTextColor;
     case 'REJECTED':
       return ZPColors.darkGray;
-    case 'Preorder':
+    case 'OOS-Preorder':
       return ZPColors.black;
     case 'Bonus':
       return ZPColors.white;
@@ -522,7 +518,7 @@ String getCountryFlag(String country) {
   return 'assets/svg/flags/${country.toLowerCase()}.svg';
 }
 
-String getOosMaterialTag(bool value) => value ? 'OSS-Preorder' : 'Out of stock';
+String getOosMaterialTag(bool value) => value ? 'OOS-Preorder' : 'Out of stock';
 
 Color getOosMaterialTagColor(bool value) =>
     value ? ZPColors.warning : ZPColors.lightGray;
