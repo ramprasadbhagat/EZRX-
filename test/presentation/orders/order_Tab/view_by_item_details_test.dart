@@ -297,5 +297,33 @@ void main() {
       final expectedDelivery = find.textContaining('Expected delivery');
       expect(expectedDelivery, findsNothing);
     });
+
+    testWidgets('Find Order Created Status', (tester) async {
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            status: StatusType('Order Creating'),
+            orderStatusTracker: [],
+          ),
+          viewByItemDetails: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final statusTrackerSection = find.byType(
+        StatusTrackerSection,
+      );
+
+      expect(statusTrackerSection, findsOneWidget);
+      await tester.tap(statusTrackerSection);
+      await tester.pump();
+      final expectedDelivery = find.textContaining('Order Created');
+      expect(expectedDelivery, findsWidgets);
+    });
   });
 }

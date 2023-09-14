@@ -453,6 +453,8 @@ String getOrderStatus(String status) {
     case 'Pending release - on backorder':
     case 'Pending release - seller approval required':
       return 'Pending release';
+    case 'Order Creating':
+      return 'Order Created';
     case '':
       return '-';
     default:
