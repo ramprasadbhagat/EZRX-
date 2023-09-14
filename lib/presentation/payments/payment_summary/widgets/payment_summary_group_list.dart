@@ -1,7 +1,11 @@
 part of 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_page.dart';
 
 class _PaymentSummaryGroupList extends StatelessWidget {
-  const _PaymentSummaryGroupList({Key? key}) : super(key: key);
+  final ScrollController scrollController;
+  const _PaymentSummaryGroupList({
+    Key? key,
+    required this.scrollController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class _PaymentSummaryGroupList extends StatelessWidget {
         noRecordFoundWidget: const NoRecordFound(
           title: 'No Payment Summary Found',
         ),
-        controller: ScrollController(),
+        controller: scrollController,
         onRefresh: () => context.read<PaymentSummaryBloc>().add(
               PaymentSummaryEvent.fetchPaymentSummaryList(
                 salesOrganization:
@@ -47,8 +51,7 @@ class _PaymentSummaryGroupList extends StatelessWidget {
           paymentSummaryGroup: itemInfo,
           showDivider: index != 0,
         ),
-        items: state.paymentSummaryList
-            .getPaymentSummaryGroupList,
+        items: state.paymentSummaryList.getPaymentSummaryGroupList,
       ),
     );
   }

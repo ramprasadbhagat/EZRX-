@@ -1,10 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
@@ -28,17 +35,37 @@ part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_s
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_group_item.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_group_list.dart';
 
-class PaymentSummaryPage extends StatelessWidget {
+class PaymentSummaryPage extends StatefulWidget {
   const PaymentSummaryPage({Key? key}) : super(key: key);
+
+  @override
+  State<PaymentSummaryPage> createState() => _PaymentSummaryPageState();
+}
+
+class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: WidgetKeys.paymentSummaryPage,
       appBar: AppBar(
         key: WidgetKeys.paymentSummaryAppBar,
         title: Text('Payment Summary'.tr()),
         centerTitle: false,
         actions: const [_PaymentSummaryDownloadButton()],
+      ),
+      floatingActionButton: ScaleButton(
+        icon: Icons.add,
+        label: 'New payment'.tr(),
+        onPress: () => _toNewPayment(context),
+        scrollController: _scrollController,
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
@@ -67,12 +94,41 @@ class PaymentSummaryPage extends StatelessWidget {
                 ],
               ),
             ),
-            const Expanded(
-              child: _PaymentSummaryGroupList(),
+            Expanded(
+              child: _PaymentSummaryGroupList(
+                scrollController: _scrollController,
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _toNewPayment(BuildContext context) {
+    context.read<OutstandingInvoicesBloc>().add(
+          OutstandingInvoicesEvent.fetch(
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            appliedFilter: OutstandingInvoiceFilter.empty(),
+            searchKey: SearchKey.search(''),
+          ),
+        );
+    context.read<AvailableCreditsBloc>().add(
+          AvailableCreditsEvent.fetch(
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            appliedFilter: AvailableCreditFilter.empty(),
+            searchKey: SearchKey.search(''),
+          ),
+        );
+    context.read<NewPaymentBloc>().add(
+          const NewPaymentEvent.initialized(),
+        );
+    context.router.pushNamed('payments/new_payment');
   }
 }
