@@ -17,7 +17,7 @@ class ReturnItemsFilter with _$ReturnItemsFilter {
         invoiceDateFrom: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(
-              const Duration(days: 28),
+              const Duration(days: 30),
             ),
           ),
         ),
