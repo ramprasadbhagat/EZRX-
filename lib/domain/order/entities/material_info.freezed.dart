@@ -52,7 +52,7 @@ mixin _$MaterialInfo {
   bool get isSampleMaterial => throw _privateConstructorUsedError;
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
-  List<String> get taxes => throw _privateConstructorUsedError;
+  double get tax => throw _privateConstructorUsedError;
   List<Bundle> get bundles => throw _privateConstructorUsedError;
   bool get isFOCMaterial => throw _privateConstructorUsedError;
   String get ean => throw _privateConstructorUsedError;
@@ -105,7 +105,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       bool isSampleMaterial,
       bool hasValidTenderContract,
       bool hasMandatoryTenderContract,
-      List<String> taxes,
+      double tax,
       List<Bundle> bundles,
       bool isFOCMaterial,
       String ean,
@@ -165,7 +165,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? isSampleMaterial = null,
     Object? hasValidTenderContract = null,
     Object? hasMandatoryTenderContract = null,
-    Object? taxes = null,
+    Object? tax = null,
     Object? bundles = null,
     Object? isFOCMaterial = null,
     Object? ean = null,
@@ -308,10 +308,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.hasMandatoryTenderContract
           : hasMandatoryTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
-      taxes: null == taxes
-          ? _value.taxes
-          : taxes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
       bundles: null == bundles
           ? _value.bundles
           : bundles // ignore: cast_nullable_to_non_nullable
@@ -416,7 +416,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       bool isSampleMaterial,
       bool hasValidTenderContract,
       bool hasMandatoryTenderContract,
-      List<String> taxes,
+      double tax,
       List<Bundle> bundles,
       bool isFOCMaterial,
       String ean,
@@ -479,7 +479,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? isSampleMaterial = null,
     Object? hasValidTenderContract = null,
     Object? hasMandatoryTenderContract = null,
-    Object? taxes = null,
+    Object? tax = null,
     Object? bundles = null,
     Object? isFOCMaterial = null,
     Object? ean = null,
@@ -622,10 +622,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.hasMandatoryTenderContract
           : hasMandatoryTenderContract // ignore: cast_nullable_to_non_nullable
               as bool,
-      taxes: null == taxes
-          ? _value._taxes
-          : taxes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
       bundles: null == bundles
           ? _value._bundles
           : bundles // ignore: cast_nullable_to_non_nullable
@@ -684,14 +684,13 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.isSampleMaterial,
       required this.hasValidTenderContract,
       required this.hasMandatoryTenderContract,
-      required final List<String> taxes,
+      required this.tax,
       required final List<Bundle> bundles,
       required this.isFOCMaterial,
       required this.ean,
       required this.counterOfferDetails})
       : _data = data,
         _stockInfos = stockInfos,
-        _taxes = taxes,
         _bundles = bundles,
         super._();
 
@@ -776,14 +775,8 @@ class _$_MaterialInfo extends _MaterialInfo {
   final bool hasValidTenderContract;
   @override
   final bool hasMandatoryTenderContract;
-  final List<String> _taxes;
   @override
-  List<String> get taxes {
-    if (_taxes is EqualUnmodifiableListView) return _taxes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_taxes);
-  }
-
+  final double tax;
   final List<Bundle> _bundles;
   @override
   List<Bundle> get bundles {
@@ -801,7 +794,7 @@ class _$_MaterialInfo extends _MaterialInfo {
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, promoStatus: $promoStatus, promoType: $promoType, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, taxes: $taxes, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, promoStatus: $promoStatus, promoType: $promoType, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, tax: $tax, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails)';
   }
 
   @override
@@ -875,7 +868,7 @@ class _$_MaterialInfo extends _MaterialInfo {
                     hasMandatoryTenderContract) ||
                 other.hasMandatoryTenderContract ==
                     hasMandatoryTenderContract) &&
-            const DeepCollectionEquality().equals(other._taxes, _taxes) &&
+            (identical(other.tax, tax) || other.tax == tax) &&
             const DeepCollectionEquality().equals(other._bundles, _bundles) &&
             (identical(other.isFOCMaterial, isFOCMaterial) ||
                 other.isFOCMaterial == isFOCMaterial) &&
@@ -921,7 +914,7 @@ class _$_MaterialInfo extends _MaterialInfo {
         isSampleMaterial,
         hasValidTenderContract,
         hasMandatoryTenderContract,
-        const DeepCollectionEquality().hash(_taxes),
+        tax,
         const DeepCollectionEquality().hash(_bundles),
         isFOCMaterial,
         ean,
@@ -971,7 +964,7 @@ abstract class _MaterialInfo extends MaterialInfo {
           required final bool isSampleMaterial,
           required final bool hasValidTenderContract,
           required final bool hasMandatoryTenderContract,
-          required final List<String> taxes,
+          required final double tax,
           required final List<Bundle> bundles,
           required final bool isFOCMaterial,
           required final String ean,
@@ -1048,7 +1041,7 @@ abstract class _MaterialInfo extends MaterialInfo {
   @override
   bool get hasMandatoryTenderContract;
   @override
-  List<String> get taxes;
+  double get tax;
   @override
   List<Bundle> get bundles;
   @override

@@ -21,10 +21,7 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
       hasValidTenderContract: json['hasValidTenderContract'] as bool? ?? false,
       hasMandatoryTenderContract:
           json['hasMandatoryTenderContract'] as bool? ?? false,
-      taxes: (handleEmptyTaxList(json, 'taxes') as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          ['0'],
+      taxes: (handleTax(json, 'taxes') as num).toDouble(),
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
       isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,

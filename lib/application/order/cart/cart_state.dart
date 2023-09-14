@@ -284,8 +284,7 @@ class CartState with _$CartState {
       .fold<double>(
         0.0,
         (previousValue, element) =>
-            previousValue +
-            (element.finalPrice * element.materialInfo.materialTax),
+            previousValue + (element.finalPrice * element.materialInfo.tax),
       );
 
   double get materialLevelEligibleTotalFinalPrice => cartProducts

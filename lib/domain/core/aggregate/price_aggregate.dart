@@ -159,7 +159,7 @@ class PriceAggregate with _$PriceAggregate {
     if (salesOrgConfig.enableVat &&
         salesOrgConfig.enableTaxClassification &&
         salesOrgConfig.currency.isVN) {
-      return value + (value * (double.parse(materialInfo.taxes.first) / 100));
+      return value + (value * (materialInfo.tax / 100));
     }
 
     // Non VN VAT
@@ -212,13 +212,13 @@ class PriceAggregate with _$PriceAggregate {
     if (salesOrgConfig.enableVat &&
         salesOrgConfig.enableTaxClassification &&
         salesOrgConfig.currency.isVN) {
-      return value + (value * (double.parse(materialInfo.taxes.first) / 100));
+      return value + (value * (materialInfo.tax / 100));
     }
 
     // VN Tax total
     if (salesOrgConfig.enableTaxAtTotalLevelOnly &&
         salesOrgConfig.currency.isVN) {
-      return value + (value * (double.parse(materialInfo.taxes.first) / 100));
+      return value + (value * (materialInfo.tax / 100));
     }
 
     // Non VN VAT
@@ -252,7 +252,7 @@ class PriceAggregate with _$PriceAggregate {
   double get itemTaxPercent => salesOrgConfig.displayItemTaxBreakdown
       ? materialInfo.taxClassification.isFullTax
           ? salesOrgConfig.isMarketEligibleForTaxClassification
-              ? materialInfo.materialTax
+              ? materialInfo.tax
               : salesOrgConfig.vatValue.toDouble()
           : 0.0
       : 0.0;

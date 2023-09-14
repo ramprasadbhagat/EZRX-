@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -56,8 +57,7 @@ class CartProductDto with _$CartProductDto {
         required List<MaterialDto> bundleMaterials,
     @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
         required List<BonusSampleItemDto> bonusMaterials,
-    @JsonKey(name: 'taxes', defaultValue: <String>[])
-        required List<String> taxes,
+    @JsonKey(name: 'taxes', readValue: handleTax) required double tax,
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
@@ -75,7 +75,7 @@ class CartProductDto with _$CartProductDto {
       taxClassification:
           cartItemDetails.materialInfo.taxClassification.getOrDefaultValue(''),
       isFOCMaterial: cartItemDetails.materialInfo.isFOCMaterial,
-      taxes: cartItemDetails.materialInfo.taxes,
+      tax: cartItemDetails.materialInfo.tax,
       therapeuticClass: cartItemDetails.materialInfo.therapeuticClass,
       type: cartItemDetails.materialInfo.type.getOrCrash(),
       principalName: cartItemDetails.materialInfo.principalData.principalName
@@ -116,7 +116,7 @@ class CartProductDto with _$CartProductDto {
       quantity: quantity,
       taxClassification: MaterialTaxClassification(taxClassification),
       isFOCMaterial: isFOCMaterial,
-      taxes: taxes,
+      tax: tax,
       hidePrice: hidePrice,
       therapeuticClass: therapeuticClass,
       principalData: PrincipalData.empty().copyWith(

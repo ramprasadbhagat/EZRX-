@@ -92,7 +92,7 @@ class ProductDetailDto with _$ProductDetailDto {
         stockInfos: <StockInfo>[],
         bundle: Bundle.empty(),
         productImages: ProductImages.empty(),
-        taxes: [],
+        tax: 0.0,
         parentID: '',
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         promoStatus: promoStatus,

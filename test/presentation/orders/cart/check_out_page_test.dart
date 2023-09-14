@@ -348,7 +348,7 @@ void main() {
                 quantity: 1,
                 taxClassification:
                     MaterialTaxClassification('Product : Full Tax'),
-                taxes: <String>['10'],
+                tax: 10,
               ),
               price: Price.empty().copyWith(
                 finalPrice: MaterialPrice(234.50),
@@ -419,7 +419,7 @@ void main() {
                 quantity: 1,
                 taxClassification:
                     MaterialTaxClassification('Product : Full Tax'),
-                taxes: <String>['10'],
+                tax: 10,
               ),
               price: Price.empty().copyWith(
                 finalPrice: MaterialPrice(234.50),
@@ -490,7 +490,7 @@ void main() {
                 quantity: 1,
                 taxClassification:
                     MaterialTaxClassification('Product : Full Tax'),
-                taxes: <String>['10'],
+                tax: 10,
               ),
               price: Price.empty().copyWith(
                 finalPrice: MaterialPrice(234.50),

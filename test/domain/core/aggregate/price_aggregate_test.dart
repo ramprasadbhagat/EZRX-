@@ -234,7 +234,7 @@ void main() {
             currency: Currency('vnd'),
           ),
           materialInfo: emptyPriceAggregate.materialInfo.copyWith(
-            taxes: ['15'],
+            tax: 15,
           ),
         );
         expect(customPriceAggregate.vatCalculation(10), 11.5);
@@ -388,7 +388,7 @@ void main() {
             currency: Currency('vnd'),
           ),
           materialInfo: emptyMaterialInfo.copyWith(
-            taxes: ['5'],
+            tax: 5,
           ),
         );
         expect(customPriceAggregate.unitPriceForTotal, 21.0);
@@ -414,7 +414,7 @@ void main() {
             currency: Currency('vnd'),
           ),
           materialInfo: emptyMaterialInfo.copyWith(
-            taxes: ['5'],
+            tax: 5,
           ),
         );
         expect(customPriceAggregate.unitPriceForTotal, 21.0);

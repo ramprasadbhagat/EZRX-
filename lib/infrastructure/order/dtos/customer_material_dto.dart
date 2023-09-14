@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'customer_material_dto.freezed.dart';
@@ -16,7 +17,7 @@ part 'customer_material_dto.g.dart';
 class CustomerMaterialDto with _$CustomerMaterialDto {
   const CustomerMaterialDto._();
   const factory CustomerMaterialDto({
-    @JsonKey(name: 'Taxes', defaultValue: []) required List<String> taxes,
+    @JsonKey(name: 'Taxes', readValue: handleTax) required double tax,
     @JsonKey(name: 'Taxm1', defaultValue: '') required String taxm1,
     @JsonKey(name: 'TaxClassification', defaultValue: '')
         required String taxClassification,
@@ -82,7 +83,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         hasValidTenderContract: hasValidTenderContract,
         hasMandatoryTenderContract: hasMandatoryTenderContract,
         taxClassification: MaterialTaxClassification(taxClassification),
-        taxes: taxes,
+        tax: tax,
         bundles: [],
         isFOCMaterial: isFOCMaterial,
         quantity: 0,

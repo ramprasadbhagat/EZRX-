@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -41,8 +42,8 @@ class MaterialDto with _$MaterialDto {
         required bool hasValidTenderContract,
     @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
         required bool hasMandatoryTenderContract,
-    @JsonKey(name: 'taxes', defaultValue: ['0'], readValue: handleEmptyTaxList)
-        required List<String> taxes,
+    @JsonKey(name: 'taxes', readValue: handleTax)
+        required double taxes,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
         required String defaultMaterialDescription,
     @JsonKey(name: 'isFOCMaterial', defaultValue: false)
@@ -119,7 +120,7 @@ class MaterialDto with _$MaterialDto {
       hidePrice: materialInfo.hidePrice,
       hasValidTenderContract: materialInfo.hasValidTenderContract,
       hasMandatoryTenderContract: materialInfo.hasMandatoryTenderContract,
-      taxes: materialInfo.taxes.map((e) => e.toString()).toList(),
+      taxes: materialInfo.tax,
       bundles:
           materialInfo.bundles.map((e) => BundleDto.fromDomain(e)).toList(),
       isFOCMaterial: materialInfo.isFOCMaterial,
@@ -160,7 +161,7 @@ class MaterialDto with _$MaterialDto {
       hidePrice: hidePrice,
       hasValidTenderContract: hasValidTenderContract,
       hasMandatoryTenderContract: hasMandatoryTenderContract,
-      taxes: taxes.map((e) => e).toList(),
+      tax: taxes,
       bundles: bundles.map((e) => e.toDomain()).toList(),
       defaultMaterialDescription: defaultMaterialDescription,
       isFOCMaterial: isFOCMaterial,
@@ -194,14 +195,6 @@ class MaterialDto with _$MaterialDto {
 
   factory MaterialDto.fromJson(Map<String, dynamic> json) =>
       _$MaterialDtoFromJson(json);
-}
-
-List handleEmptyTaxList(Map json, String key) {
-  if (json[key] == null || json[key].isEmpty) {
-    return ['0'];
-  }
-
-  return json[key];
 }
 
 int _validateQantity(Map json, String key) {

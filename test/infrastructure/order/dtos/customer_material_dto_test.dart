@@ -25,7 +25,7 @@ void main() {
         principalName: '',
         remarks: '',
         taxClassification: '',
-        taxes: [],
+        tax: 0.0,
         taxm1: '',
         therapeuticClass: '',
         unitOfMeasurement: '',

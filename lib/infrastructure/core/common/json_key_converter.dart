@@ -19,6 +19,16 @@ dynamic makeResponseCamelCase(String resp) {
   return jsonDecode(camelCaseJsonKeys);
 }
 
+double handleTax(Map json, String key) {
+  final taxList = json[key] ?? [];
+
+  if (taxList.isEmpty) {
+    return 0.0;
+  }
+
+  return double.tryParse(taxList.first) ?? 0.0;
+}
+
 class StringToDoubleConverter extends JsonConverter<double, String> {
   const StringToDoubleConverter();
 

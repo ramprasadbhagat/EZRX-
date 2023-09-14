@@ -54,7 +54,7 @@ class MaterialInfo with _$MaterialInfo {
     required bool isSampleMaterial,
     required bool hasValidTenderContract,
     required bool hasMandatoryTenderContract,
-    required List<String> taxes,
+    required double tax,
     required List<Bundle> bundles,
     required bool isFOCMaterial,
     required String ean,
@@ -80,7 +80,7 @@ class MaterialInfo with _$MaterialInfo {
         hidePrice: false,
         hasValidTenderContract: false,
         hasMandatoryTenderContract: false,
-        taxes: ['0'],
+        tax: 0,
         defaultMaterialDescription: '',
         bundles: [],
         isFOCMaterial: false,
@@ -110,10 +110,6 @@ class MaterialInfo with _$MaterialInfo {
         materialInfo: this,
       );
 
-  String get _displayTaxes {
-    return taxes.isNotEmpty ? '${taxes.join('% , ')}%' : '0%';
-  }
-
   factory MaterialInfo.fromRecentOrder(
     RecentOrderItem recentOrder,
   ) =>
@@ -129,7 +125,7 @@ class MaterialInfo with _$MaterialInfo {
   }
 
   String getTotalTax(bool enableTaxDisplay) {
-    return enableTaxDisplay ? '${'Total Tax: '.tr()}$_displayTaxes' : '';
+    return enableTaxDisplay ? '${'Total Tax: '.tr()}$tax%' : '';
   }
 
   String get displayDescription => materialDescription.isNotEmpty
@@ -164,10 +160,6 @@ class MaterialInfo with _$MaterialInfo {
   List<String> get images => type.typeBundle
       ? bundle.materials.map((e) => e.productImages.thumbNail).toList()
       : productImages.image;
-
-  double get materialTax => taxes.isNotEmpty && taxes.first.isNotEmpty
-      ? double.parse(taxes.first)
-      : 0.0;
 
   bool get isPnGPrinciple => principalData.principalCode.isPnG;
 }

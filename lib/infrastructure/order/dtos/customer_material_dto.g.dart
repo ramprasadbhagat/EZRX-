@@ -9,9 +9,7 @@ part of 'customer_material_dto.dart';
 _$_CustomerMaterialDto _$$_CustomerMaterialDtoFromJson(
         Map<String, dynamic> json) =>
     _$_CustomerMaterialDto(
-      taxes:
-          (json['Taxes'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
+      tax: (handleTax(json, 'Taxes') as num).toDouble(),
       taxm1: json['Taxm1'] as String? ?? '',
       taxClassification: json['TaxClassification'] as String? ?? '',
       materialNumber: json['MaterialNumber'] as String? ?? '',
@@ -40,7 +38,7 @@ _$_CustomerMaterialDto _$$_CustomerMaterialDtoFromJson(
 Map<String, dynamic> _$$_CustomerMaterialDtoToJson(
         _$_CustomerMaterialDto instance) =>
     <String, dynamic>{
-      'Taxes': instance.taxes,
+      'Taxes': instance.tax,
       'Taxm1': instance.taxm1,
       'TaxClassification': instance.taxClassification,
       'MaterialNumber': instance.materialNumber,
