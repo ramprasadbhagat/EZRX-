@@ -17,7 +17,7 @@ import 'package:flutter/material.dart' as _i90;
 import '../../domain/account/entities/sales_organisation.dart' as _i99;
 import '../../domain/account/value/value_objects.dart' as _i91;
 import '../../domain/announcement_info/entities/announcement_article_info.dart'
-    as _i98;
+    as _i97;
 import '../../domain/core/aggregate/bundle_aggregate.dart' as _i94;
 import '../../domain/core/aggregate/price_aggregate.dart' as _i95;
 import '../../domain/order/entities/order_history_details_order_header.dart'
@@ -25,7 +25,7 @@ import '../../domain/order/entities/order_history_details_order_header.dart'
 import '../../domain/order/entities/order_history_item.dart' as _i100;
 import '../../domain/payments/entities/credit_and_invoice_item.dart' as _i93;
 import '../../domain/payments/entities/payment_summary_details.dart' as _i92;
-import '../../domain/returns/entities/return_item.dart' as _i97;
+import '../../domain/returns/entities/return_item.dart' as _i98;
 import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i50;
 import '../account/change_password/change_password_page.dart' as _i22;
 import '../account/contact_us/contact_us_page.dart' as _i23;
@@ -603,14 +603,9 @@ class AppRouter extends _i89.RootStackRouter {
       );
     },
     ReturnRequestSummaryByItemDetailsRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<ReturnRequestSummaryByItemDetailsRouteArgs>();
       return _i89.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i62.ReturnRequestSummaryByItemDetails(
-          key: args.key,
-          returnItem: args.returnItem,
-        ),
+        child: const _i62.ReturnRequestSummaryByItemDetails(),
       );
     },
     AnnouncementsPageRoute.name: (routeData) {
@@ -2267,37 +2262,14 @@ class ProductDetailsPageRoute extends _i89.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i62.ReturnRequestSummaryByItemDetails]
-class ReturnRequestSummaryByItemDetailsRoute
-    extends _i89.PageRouteInfo<ReturnRequestSummaryByItemDetailsRouteArgs> {
-  ReturnRequestSummaryByItemDetailsRoute({
-    _i90.Key? key,
-    required _i97.ReturnItem returnItem,
-  }) : super(
+class ReturnRequestSummaryByItemDetailsRoute extends _i89.PageRouteInfo<void> {
+  const ReturnRequestSummaryByItemDetailsRoute()
+      : super(
           ReturnRequestSummaryByItemDetailsRoute.name,
           path: 'returns/return_summary_details_v3',
-          args: ReturnRequestSummaryByItemDetailsRouteArgs(
-            key: key,
-            returnItem: returnItem,
-          ),
         );
 
   static const String name = 'ReturnRequestSummaryByItemDetailsRoute';
-}
-
-class ReturnRequestSummaryByItemDetailsRouteArgs {
-  const ReturnRequestSummaryByItemDetailsRouteArgs({
-    this.key,
-    required this.returnItem,
-  });
-
-  final _i90.Key? key;
-
-  final _i97.ReturnItem returnItem;
-
-  @override
-  String toString() {
-    return 'ReturnRequestSummaryByItemDetailsRouteArgs{key: $key, returnItem: $returnItem}';
-  }
 }
 
 /// generated route for
@@ -2318,7 +2290,7 @@ class AnnouncementsPageRoute extends _i89.PageRouteInfo<void> {
 class ArticleDetailsRoute extends _i89.PageRouteInfo<ArticleDetailsRouteArgs> {
   ArticleDetailsRoute({
     _i90.Key? key,
-    required _i98.AnnouncementArticleItem article,
+    required _i97.AnnouncementArticleItem article,
   }) : super(
           ArticleDetailsRoute.name,
           path: 'article_details',
@@ -2339,7 +2311,7 @@ class ArticleDetailsRouteArgs {
 
   final _i90.Key? key;
 
-  final _i98.AnnouncementArticleItem article;
+  final _i97.AnnouncementArticleItem article;
 
   @override
   String toString() {
@@ -2353,7 +2325,7 @@ class ReturnRequestDetailsRoute
     extends _i89.PageRouteInfo<ReturnRequestDetailsRouteArgs> {
   ReturnRequestDetailsRoute({
     _i90.Key? key,
-    required _i97.ReturnItem returnItem,
+    required _i98.ReturnItem returnItem,
   }) : super(
           ReturnRequestDetailsRoute.name,
           path: 'returns/return_summary_details_by_request',
@@ -2374,7 +2346,7 @@ class ReturnRequestDetailsRouteArgs {
 
   final _i90.Key? key;
 
-  final _i97.ReturnItem returnItem;
+  final _i98.ReturnItem returnItem;
 
   @override
   String toString() {

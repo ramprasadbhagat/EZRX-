@@ -19,3 +19,19 @@ class NotificationTitle extends ValueObject<String> {
   Color get iconColor => getIconColor(value.getOrElse(() => ''));
   const NotificationTitle._(this.value);
 }
+
+class NotificationType extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory NotificationType(String input) {
+    return NotificationType._(validateStringNotEmpty(input));
+  }
+
+  String get getDetailPageRoute => detailPageRoute(value.getOrElse(() => ''));
+
+  bool get navigateToReturnDetailPage =>
+      isReturnDetailPage(value.getOrElse(() => ''));
+
+  const NotificationType._(this.value);
+}

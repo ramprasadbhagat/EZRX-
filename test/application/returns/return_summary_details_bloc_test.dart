@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_summary_requests.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_details_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -43,7 +42,6 @@ void main() {
         when(
           () => mockReturnSummaryDetailsRepository.getReturnInformation(
             returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
-            invoiceId: 'mock_id',
           ),
         ).thenAnswer(
           (invocation) async => Right(RequestInformation.empty()),
@@ -51,10 +49,7 @@ void main() {
       },
       act: (ReturnSummaryDetailsBloc bloc) => bloc.add(
         ReturnSummaryDetailsEvent.fetch(
-          returnId: ReturnSummaryRequest.empty()
-              .copyWith(returnId: 'mock_id')
-              .returnId,
-          invoiceId: 'mock_id',
+          returnId: ReturnRequestsId(requestId: 'mock_id'),
         ),
       ),
       expect: () => [
@@ -78,7 +73,6 @@ void main() {
         when(
           () => mockReturnSummaryDetailsRepository.getReturnInformation(
             returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
-            invoiceId: 'mock_id',
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -88,10 +82,7 @@ void main() {
       },
       act: (ReturnSummaryDetailsBloc bloc) => bloc.add(
         ReturnSummaryDetailsEvent.fetch(
-          returnId: ReturnSummaryRequest.empty()
-              .copyWith(returnId: 'mock_id')
-              .returnId,
-          invoiceId: 'mock_id',
+          returnId: ReturnRequestsId(requestId: 'mock_id'),
         ),
       ),
       expect: () => [

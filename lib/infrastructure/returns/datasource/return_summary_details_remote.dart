@@ -22,7 +22,6 @@ class ReturnSummaryDetailsRequestInformationRemote {
 
   Future<RequestInformation> getRequestInformation({
     required String returnRequestId,
-    required String invoiceId,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -32,7 +31,6 @@ class ReturnSummaryDetailsRequestInformationRemote {
           'query': requestInformationQuery.getReturnInformationQuery(),
           'variables': {
             'request': {
-              'invoiceID': invoiceId,
               'requestID': returnRequestId,
             },
           },

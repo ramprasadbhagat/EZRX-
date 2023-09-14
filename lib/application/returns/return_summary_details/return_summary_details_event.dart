@@ -5,7 +5,6 @@ class ReturnSummaryDetailsEvent with _$ReturnSummaryDetailsEvent {
   const factory ReturnSummaryDetailsEvent.initialized() = _Initialized;
 
   const factory ReturnSummaryDetailsEvent.fetch({
-    required String returnId,
-    required String invoiceId,
+    required ReturnRequestsId returnId,
   }) = _Fetch;
 }

@@ -52,7 +52,6 @@ void main() {
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
         returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
-        invoiceId: 'mock_id',
       );
       expect(result.isRight(), true);
     });
@@ -66,7 +65,6 @@ void main() {
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
         returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
-        invoiceId: 'mock_id',
       );
       expect(result.isLeft(), true);
     });
@@ -77,7 +75,6 @@ void main() {
         () =>
             returnSummaryDetailsRequestInformationRemote.getRequestInformation(
           returnRequestId: 'mock_id',
-          invoiceId: 'mock_id',
         ),
       ).thenAnswer(
         (invocation) async => RequestInformation.empty(),
@@ -85,7 +82,6 @@ void main() {
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
         returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
-        invoiceId: 'mock_id',
       );
       expect(result.isRight(), true);
     });
@@ -96,13 +92,11 @@ void main() {
         () =>
             returnSummaryDetailsRequestInformationRemote.getRequestInformation(
           returnRequestId: 'mock_id',
-          invoiceId: 'mock_id',
         ),
       ).thenThrow((invocation) async => MockException());
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
         returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
-        invoiceId: 'mock_id',
       );
       expect(result.isLeft(), true);
     });

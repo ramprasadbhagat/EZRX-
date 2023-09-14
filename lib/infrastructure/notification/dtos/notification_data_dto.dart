@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification_data.dart';
 import 'package:ezrxmobile/domain/notification/value/value_object.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'notification_data_dto.freezed.dart';
 part 'notification_data_dto.g.dart';
@@ -18,16 +19,19 @@ class NotificationDataDto with _$NotificationDataDto {
       name: 'isRead',
     )
     required bool isRead,
+    @JsonKey(name: 'returnRequestNumber', defaultValue: '')
+        required String returnRequestId,
   }) = _NotificationDataDto;
 
   NotificationData toDomain() {
     return NotificationData(
       id: id,
-      type: type,
+      type: NotificationType(type),
       title: NotificationTitle(title),
       description: description,
       createdAt: DateTimeStringValue(createdAt),
       isRead: isRead,
+      returnRequestId: ReturnRequestsId(requestId: returnRequestId),
     );
   }
 

@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_request_summary_item_section.dart';
@@ -17,9 +16,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 class ReturnRequestSummaryByItemDetails extends StatefulWidget {
   const ReturnRequestSummaryByItemDetails({
     Key? key,
-    required this.returnItem,
   }) : super(key: key);
-  final ReturnItem returnItem;
 
   @override
   State<ReturnRequestSummaryByItemDetails> createState() =>
@@ -66,7 +63,6 @@ class _ReturnRequestSummaryByItemDetails
                 : ListView(
                     children: [
                       ReturnSummaryDetailsSection(
-                        returnItem: widget.returnItem,
                         requestInformation: state.requestInformation,
                         requestInformationHeader:
                             state.requestInformationHeader,

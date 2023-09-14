@@ -32,6 +32,8 @@ mixin _$NotificationDataDto {
   String get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'isRead')
   bool get isRead => throw _privateConstructorUsedError;
+  @JsonKey(name: 'returnRequestNumber', defaultValue: '')
+  String get returnRequestId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +53,9 @@ abstract class $NotificationDataDtoCopyWith<$Res> {
       @JsonKey(name: 'title', defaultValue: '') String title,
       @JsonKey(name: 'description', defaultValue: '') String description,
       @JsonKey(name: 'createdAt', defaultValue: '') String createdAt,
-      @JsonKey(name: 'isRead') bool isRead});
+      @JsonKey(name: 'isRead') bool isRead,
+      @JsonKey(name: 'returnRequestNumber', defaultValue: '')
+      String returnRequestId});
 }
 
 /// @nodoc
@@ -73,6 +77,7 @@ class _$NotificationDataDtoCopyWithImpl<$Res, $Val extends NotificationDataDto>
     Object? description = null,
     Object? createdAt = null,
     Object? isRead = null,
+    Object? returnRequestId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -99,6 +104,10 @@ class _$NotificationDataDtoCopyWithImpl<$Res, $Val extends NotificationDataDto>
           ? _value.isRead
           : isRead // ignore: cast_nullable_to_non_nullable
               as bool,
+      returnRequestId: null == returnRequestId
+          ? _value.returnRequestId
+          : returnRequestId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -117,7 +126,9 @@ abstract class _$$_NotificationDataDtoCopyWith<$Res>
       @JsonKey(name: 'title', defaultValue: '') String title,
       @JsonKey(name: 'description', defaultValue: '') String description,
       @JsonKey(name: 'createdAt', defaultValue: '') String createdAt,
-      @JsonKey(name: 'isRead') bool isRead});
+      @JsonKey(name: 'isRead') bool isRead,
+      @JsonKey(name: 'returnRequestNumber', defaultValue: '')
+      String returnRequestId});
 }
 
 /// @nodoc
@@ -137,6 +148,7 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
     Object? description = null,
     Object? createdAt = null,
     Object? isRead = null,
+    Object? returnRequestId = null,
   }) {
     return _then(_$_NotificationDataDto(
       id: null == id
@@ -163,6 +175,10 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
           ? _value.isRead
           : isRead // ignore: cast_nullable_to_non_nullable
               as bool,
+      returnRequestId: null == returnRequestId
+          ? _value.returnRequestId
+          : returnRequestId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -176,7 +192,9 @@ class _$_NotificationDataDto extends _NotificationDataDto {
       @JsonKey(name: 'title', defaultValue: '') required this.title,
       @JsonKey(name: 'description', defaultValue: '') required this.description,
       @JsonKey(name: 'createdAt', defaultValue: '') required this.createdAt,
-      @JsonKey(name: 'isRead') required this.isRead})
+      @JsonKey(name: 'isRead') required this.isRead,
+      @JsonKey(name: 'returnRequestNumber', defaultValue: '')
+      required this.returnRequestId})
       : super._();
 
   factory _$_NotificationDataDto.fromJson(Map<String, dynamic> json) =>
@@ -200,10 +218,13 @@ class _$_NotificationDataDto extends _NotificationDataDto {
   @override
   @JsonKey(name: 'isRead')
   final bool isRead;
+  @override
+  @JsonKey(name: 'returnRequestNumber', defaultValue: '')
+  final String returnRequestId;
 
   @override
   String toString() {
-    return 'NotificationDataDto(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead)';
+    return 'NotificationDataDto(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId)';
   }
 
   @override
@@ -218,13 +239,15 @@ class _$_NotificationDataDto extends _NotificationDataDto {
                 other.description == description) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.isRead, isRead) || other.isRead == isRead));
+            (identical(other.isRead, isRead) || other.isRead == isRead) &&
+            (identical(other.returnRequestId, returnRequestId) ||
+                other.returnRequestId == returnRequestId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, type, title, description, createdAt, isRead);
+  int get hashCode => Object.hash(runtimeType, id, type, title, description,
+      createdAt, isRead, returnRequestId);
 
   @JsonKey(ignore: true)
   @override
@@ -243,15 +266,16 @@ class _$_NotificationDataDto extends _NotificationDataDto {
 
 abstract class _NotificationDataDto extends NotificationDataDto {
   const factory _NotificationDataDto(
-          {@JsonKey(name: 'id', defaultValue: 0) required final int id,
-          @JsonKey(name: 'type', defaultValue: '') required final String type,
-          @JsonKey(name: 'title', defaultValue: '') required final String title,
-          @JsonKey(name: 'description', defaultValue: '')
-          required final String description,
-          @JsonKey(name: 'createdAt', defaultValue: '')
-          required final String createdAt,
-          @JsonKey(name: 'isRead') required final bool isRead}) =
-      _$_NotificationDataDto;
+      {@JsonKey(name: 'id', defaultValue: 0) required final int id,
+      @JsonKey(name: 'type', defaultValue: '') required final String type,
+      @JsonKey(name: 'title', defaultValue: '') required final String title,
+      @JsonKey(name: 'description', defaultValue: '')
+      required final String description,
+      @JsonKey(name: 'createdAt', defaultValue: '')
+      required final String createdAt,
+      @JsonKey(name: 'isRead') required final bool isRead,
+      @JsonKey(name: 'returnRequestNumber', defaultValue: '')
+      required final String returnRequestId}) = _$_NotificationDataDto;
   const _NotificationDataDto._() : super._();
 
   factory _NotificationDataDto.fromJson(Map<String, dynamic> json) =
@@ -275,6 +299,9 @@ abstract class _NotificationDataDto extends NotificationDataDto {
   @override
   @JsonKey(name: 'isRead')
   bool get isRead;
+  @override
+  @JsonKey(name: 'returnRequestNumber', defaultValue: '')
+  String get returnRequestId;
   @override
   @JsonKey(ignore: true)
   _$$_NotificationDataDtoCopyWith<_$_NotificationDataDto> get copyWith =>

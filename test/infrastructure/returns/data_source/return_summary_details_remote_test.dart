@@ -51,7 +51,6 @@ void main() {
               .getReturnInformationQuery(),
           'variables': {
             'request': {
-              'invoiceID': 'mock_id',
               'requestID': 'mock_id',
             },
           },
@@ -70,7 +69,6 @@ void main() {
 
         final result = await remoteDataSource.getRequestInformation(
           returnRequestId: 'mock_id',
-          invoiceId: 'mock_id',
         );
 
         expect(
@@ -106,7 +104,6 @@ void main() {
         await remoteDataSource
             .getRequestInformation(
           returnRequestId: 'mock_id',
-          invoiceId: 'mock_id',
         )
             .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
@@ -145,7 +142,6 @@ void main() {
         await remoteDataSource
             .getRequestInformation(
           returnRequestId: 'mock_id',
-          invoiceId: 'mock_id',
         )
             .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
@@ -181,7 +177,6 @@ void main() {
         await remoteDataSource
             .getRequestInformation(
           returnRequestId: 'mock_id',
-          invoiceId: 'mock_id',
         )
             .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());
@@ -219,7 +214,6 @@ void main() {
         await remoteDataSource
             .getRequestInformation(
           returnRequestId: 'mock_id',
-          invoiceId: 'mock_id',
         )
             .onError((error, stackTrace) async {
           expect(error, isA<ServerException>());

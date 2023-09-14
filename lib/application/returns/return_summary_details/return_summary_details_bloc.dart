@@ -38,17 +38,16 @@ class ReturnSummaryDetailsBloc
           ),
         );
 
-        final returnInformationfailureOrSuccess =
+        final returnInformationFailureOrSuccess =
             await returnSummaryDetailsRepository.getReturnInformation(
-          returnRequestId: ReturnRequestsId(requestId: e.returnId),
-          invoiceId: e.invoiceId,
+          returnRequestId: e.returnId,
         );
-        await returnInformationfailureOrSuccess.fold(
+        await returnInformationFailureOrSuccess.fold(
           (failure) async => emit(
             state.copyWith(
               isLoading: false,
               failureOrSuccessOption:
-                  optionOf(returnInformationfailureOrSuccess),
+                  optionOf(returnInformationFailureOrSuccess),
             ),
           ),
           (returnSummaryDetails) {

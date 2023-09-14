@@ -8,11 +8,14 @@ class _NotificationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => context.read<NotificationBloc>().add(
-            NotificationEvent.readNotifications(
-              notificationId: notificationData.id,
-            ),
-          ),
+      onTap: () {
+        context.read<NotificationBloc>().add(
+              NotificationEvent.readNotifications(
+                notificationId: notificationData.id,
+              ),
+            );
+        _navigateToDetailPage(context);
+      },
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
 
       ///TODO: will revisit later
@@ -60,6 +63,22 @@ class _NotificationList extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _navigateToDetailPage(
+    BuildContext context,
+  ) {
+    //Call event for Return Detail Page
+    final notificationType = notificationData.type;
+    if (notificationType.navigateToReturnDetailPage) {
+      context.read<ReturnSummaryDetailsBloc>().add(
+            ReturnSummaryDetailsEvent.fetch(
+              returnId: notificationData.returnRequestId,
+            ),
+          );
+    }
+    //Navigate to respective Detail Page
+    context.router.pushNamed(notificationType.getDetailPageRoute);
   }
 }
 

@@ -17,11 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NotificationData {
   int get id => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
+  NotificationType get type => throw _privateConstructorUsedError;
   NotificationTitle get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTimeStringValue get createdAt => throw _privateConstructorUsedError;
   bool get isRead => throw _privateConstructorUsedError;
+  ReturnRequestsId get returnRequestId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NotificationDataCopyWith<NotificationData> get copyWith =>
@@ -36,11 +37,14 @@ abstract class $NotificationDataCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      String type,
+      NotificationType type,
       NotificationTitle title,
       String description,
       DateTimeStringValue createdAt,
-      bool isRead});
+      bool isRead,
+      ReturnRequestsId returnRequestId});
+
+  $ReturnRequestsIdCopyWith<$Res> get returnRequestId;
 }
 
 /// @nodoc
@@ -62,6 +66,7 @@ class _$NotificationDataCopyWithImpl<$Res, $Val extends NotificationData>
     Object? description = null,
     Object? createdAt = null,
     Object? isRead = null,
+    Object? returnRequestId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -71,7 +76,7 @@ class _$NotificationDataCopyWithImpl<$Res, $Val extends NotificationData>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as NotificationType,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -88,7 +93,19 @@ class _$NotificationDataCopyWithImpl<$Res, $Val extends NotificationData>
           ? _value.isRead
           : isRead // ignore: cast_nullable_to_non_nullable
               as bool,
+      returnRequestId: null == returnRequestId
+          ? _value.returnRequestId
+          : returnRequestId // ignore: cast_nullable_to_non_nullable
+              as ReturnRequestsId,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnRequestsIdCopyWith<$Res> get returnRequestId {
+    return $ReturnRequestsIdCopyWith<$Res>(_value.returnRequestId, (value) {
+      return _then(_value.copyWith(returnRequestId: value) as $Val);
+    });
   }
 }
 
@@ -102,11 +119,15 @@ abstract class _$$_NotificationDataCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      String type,
+      NotificationType type,
       NotificationTitle title,
       String description,
       DateTimeStringValue createdAt,
-      bool isRead});
+      bool isRead,
+      ReturnRequestsId returnRequestId});
+
+  @override
+  $ReturnRequestsIdCopyWith<$Res> get returnRequestId;
 }
 
 /// @nodoc
@@ -126,6 +147,7 @@ class __$$_NotificationDataCopyWithImpl<$Res>
     Object? description = null,
     Object? createdAt = null,
     Object? isRead = null,
+    Object? returnRequestId = null,
   }) {
     return _then(_$_NotificationData(
       id: null == id
@@ -135,7 +157,7 @@ class __$$_NotificationDataCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as NotificationType,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -152,6 +174,10 @@ class __$$_NotificationDataCopyWithImpl<$Res>
           ? _value.isRead
           : isRead // ignore: cast_nullable_to_non_nullable
               as bool,
+      returnRequestId: null == returnRequestId
+          ? _value.returnRequestId
+          : returnRequestId // ignore: cast_nullable_to_non_nullable
+              as ReturnRequestsId,
     ));
   }
 }
@@ -165,13 +191,14 @@ class _$_NotificationData extends _NotificationData {
       required this.title,
       required this.description,
       required this.createdAt,
-      required this.isRead})
+      required this.isRead,
+      required this.returnRequestId})
       : super._();
 
   @override
   final int id;
   @override
-  final String type;
+  final NotificationType type;
   @override
   final NotificationTitle title;
   @override
@@ -180,10 +207,12 @@ class _$_NotificationData extends _NotificationData {
   final DateTimeStringValue createdAt;
   @override
   final bool isRead;
+  @override
+  final ReturnRequestsId returnRequestId;
 
   @override
   String toString() {
-    return 'NotificationData(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead)';
+    return 'NotificationData(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId)';
   }
 
   @override
@@ -198,12 +227,14 @@ class _$_NotificationData extends _NotificationData {
                 other.description == description) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.isRead, isRead) || other.isRead == isRead));
+            (identical(other.isRead, isRead) || other.isRead == isRead) &&
+            (identical(other.returnRequestId, returnRequestId) ||
+                other.returnRequestId == returnRequestId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, type, title, description, createdAt, isRead);
+  int get hashCode => Object.hash(runtimeType, id, type, title, description,
+      createdAt, isRead, returnRequestId);
 
   @JsonKey(ignore: true)
   @override
@@ -215,17 +246,18 @@ class _$_NotificationData extends _NotificationData {
 abstract class _NotificationData extends NotificationData {
   factory _NotificationData(
       {required final int id,
-      required final String type,
+      required final NotificationType type,
       required final NotificationTitle title,
       required final String description,
       required final DateTimeStringValue createdAt,
-      required final bool isRead}) = _$_NotificationData;
+      required final bool isRead,
+      required final ReturnRequestsId returnRequestId}) = _$_NotificationData;
   _NotificationData._() : super._();
 
   @override
   int get id;
   @override
-  String get type;
+  NotificationType get type;
   @override
   NotificationTitle get title;
   @override
@@ -234,6 +266,8 @@ abstract class _NotificationData extends NotificationData {
   DateTimeStringValue get createdAt;
   @override
   bool get isRead;
+  @override
+  ReturnRequestsId get returnRequestId;
   @override
   @JsonKey(ignore: true)
   _$$_NotificationDataCopyWith<_$_NotificationData> get copyWith =>

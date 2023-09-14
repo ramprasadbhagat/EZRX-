@@ -6,6 +6,5 @@ import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 abstract class IReturnSummaryDetailsRepository {
   Future<Either<ApiFailure, RequestInformation>> getReturnInformation({
     required ReturnRequestsId returnRequestId,
-    required String invoiceId,
   });
 }

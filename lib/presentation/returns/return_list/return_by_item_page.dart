@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/returns/return_summary_details/return_sum
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -141,12 +142,11 @@ class _ReturnItem extends StatelessWidget {
                 onTap: () {
                   context.read<ReturnSummaryDetailsBloc>().add(
                         ReturnSummaryDetailsEvent.fetch(
-                          returnId: data.requestId,
-                          invoiceId: data.invoiceID,
+                          returnId: ReturnRequestsId(requestId: data.requestId),
                         ),
                       );
                   context.router.push(
-                    ReturnRequestSummaryByItemDetailsRoute(returnItem: data),
+                    const ReturnRequestSummaryByItemDetailsRoute(),
                   );
                 },
                 label: data.materialNumber.displayMatNo,

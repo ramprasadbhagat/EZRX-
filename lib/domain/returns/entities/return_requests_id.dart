@@ -10,4 +10,8 @@ class ReturnRequestsId with _$ReturnRequestsId {
   }) = _ReturnRequestsId;
 
   bool get isValidRequestId => requestId.isNotEmpty;
+
+  factory ReturnRequestsId.empty() => ReturnRequestsId(
+        requestId: '',
+      );
 }

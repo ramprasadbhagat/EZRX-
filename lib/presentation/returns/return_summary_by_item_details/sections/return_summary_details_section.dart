@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -12,11 +11,9 @@ import 'package:flutter/services.dart';
 class ReturnSummaryDetailsSection extends StatelessWidget {
   const ReturnSummaryDetailsSection({
     Key? key,
-    required this.returnItem,
     required this.requestInformation,
     required this.requestInformationHeader,
   }) : super(key: key);
-  final ReturnItem returnItem;
   final ReturnRequestInformation requestInformation;
   final ReturnRequestInformationHeader requestInformationHeader;
 
@@ -25,7 +22,6 @@ class ReturnSummaryDetailsSection extends StatelessWidget {
     return Column(
       children: [
         _ReturnDetailsSection(
-          returnItem: returnItem,
           requestInformation: requestInformation,
           requestInformationHeader: requestInformationHeader,
         ),
@@ -50,11 +46,9 @@ class ReturnSummaryDetailsSection extends StatelessWidget {
 class _ReturnDetailsSection extends StatefulWidget {
   const _ReturnDetailsSection({
     Key? key,
-    required this.returnItem,
     required this.requestInformation,
     required this.requestInformationHeader,
   }) : super(key: key);
-  final ReturnItem returnItem;
   final ReturnRequestInformation requestInformation;
   final ReturnRequestInformationHeader requestInformationHeader;
 
@@ -76,7 +70,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
             children: [
               Expanded(
                 child: Text(
-                  'Return #${widget.returnItem.requestId}'.tr(),
+                  '${'Return'.tr()} #${widget.requestInformationHeader.requestID}',
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium
@@ -87,7 +81,9 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
                 onPressed: () async {
                   if (!isCopied) {
                     await Clipboard.setData(
-                      ClipboardData(text: widget.returnItem.requestId),
+                      ClipboardData(
+                        text: widget.requestInformationHeader.requestID,
+                      ),
                     ).then((value) {
                       setState(() {
                         isCopied = !isCopied;

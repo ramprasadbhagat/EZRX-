@@ -19,19 +19,19 @@ mixin _$ReturnSummaryDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(String returnId, String invoiceId) fetch,
+    required TResult Function(ReturnRequestsId returnId) fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(String returnId, String invoiceId)? fetch,
+    TResult? Function(ReturnRequestsId returnId)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(String returnId, String invoiceId)? fetch,
+    TResult Function(ReturnRequestsId returnId)? fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,7 +114,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(String returnId, String invoiceId) fetch,
+    required TResult Function(ReturnRequestsId returnId) fetch,
   }) {
     return initialized();
   }
@@ -123,7 +123,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(String returnId, String invoiceId)? fetch,
+    TResult? Function(ReturnRequestsId returnId)? fetch,
   }) {
     return initialized?.call();
   }
@@ -132,7 +132,7 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(String returnId, String invoiceId)? fetch,
+    TResult Function(ReturnRequestsId returnId)? fetch,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -182,7 +182,9 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call({String returnId, String invoiceId});
+  $Res call({ReturnRequestsId returnId});
+
+  $ReturnRequestsIdCopyWith<$Res> get returnId;
 }
 
 /// @nodoc
@@ -196,34 +198,35 @@ class __$$_FetchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? returnId = null,
-    Object? invoiceId = null,
   }) {
     return _then(_$_Fetch(
       returnId: null == returnId
           ? _value.returnId
           : returnId // ignore: cast_nullable_to_non_nullable
-              as String,
-      invoiceId: null == invoiceId
-          ? _value.invoiceId
-          : invoiceId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ReturnRequestsId,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReturnRequestsIdCopyWith<$Res> get returnId {
+    return $ReturnRequestsIdCopyWith<$Res>(_value.returnId, (value) {
+      return _then(_value.copyWith(returnId: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.returnId, required this.invoiceId});
+  const _$_Fetch({required this.returnId});
 
   @override
-  final String returnId;
-  @override
-  final String invoiceId;
+  final ReturnRequestsId returnId;
 
   @override
   String toString() {
-    return 'ReturnSummaryDetailsEvent.fetch(returnId: $returnId, invoiceId: $invoiceId)';
+    return 'ReturnSummaryDetailsEvent.fetch(returnId: $returnId)';
   }
 
   @override
@@ -232,13 +235,11 @@ class _$_Fetch implements _Fetch {
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
             (identical(other.returnId, returnId) ||
-                other.returnId == returnId) &&
-            (identical(other.invoiceId, invoiceId) ||
-                other.invoiceId == invoiceId));
+                other.returnId == returnId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, returnId, invoiceId);
+  int get hashCode => Object.hash(runtimeType, returnId);
 
   @JsonKey(ignore: true)
   @override
@@ -250,29 +251,29 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(String returnId, String invoiceId) fetch,
+    required TResult Function(ReturnRequestsId returnId) fetch,
   }) {
-    return fetch(returnId, invoiceId);
+    return fetch(returnId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(String returnId, String invoiceId)? fetch,
+    TResult? Function(ReturnRequestsId returnId)? fetch,
   }) {
-    return fetch?.call(returnId, invoiceId);
+    return fetch?.call(returnId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(String returnId, String invoiceId)? fetch,
+    TResult Function(ReturnRequestsId returnId)? fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(returnId, invoiceId);
+      return fetch(returnId);
     }
     return orElse();
   }
@@ -310,12 +311,9 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements ReturnSummaryDetailsEvent {
-  const factory _Fetch(
-      {required final String returnId,
-      required final String invoiceId}) = _$_Fetch;
+  const factory _Fetch({required final ReturnRequestsId returnId}) = _$_Fetch;
 
-  String get returnId;
-  String get invoiceId;
+  ReturnRequestsId get returnId;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;

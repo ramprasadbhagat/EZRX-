@@ -62,3 +62,15 @@ Color getIconColor(
 
   return titleMap[title] ?? ZPColors.primary;
 }
+
+String detailPageRoute(String val) {
+  final map = {
+    'ReturnRequestReminder': 'returns/return_summary_details_v3',
+    'ReturnRequestCreatedForApprover': 'returns/return_summary_details_v3',
+  };
+
+  return map[val] ?? '';
+}
+
+bool isReturnDetailPage(String val) =>
+    val == 'ReturnRequestReminder' || val == 'ReturnRequestCreatedForApprover';
