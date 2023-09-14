@@ -38,7 +38,6 @@ import 'package:ezrxmobile/application/returns/approver_actions/filter/return_ap
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -49,7 +48,6 @@ import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -484,10 +482,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   previous.user.role.type.hasReturnsAdminAccess !=
                       current.user.role.type.hasReturnsAdminAccess),
           listener: (context, state) {
-            final enableReturn =
-                locator<RemoteConfigService>().getReturnsConfig() &&
-                    state.isReturnsEnable;
-
+            final enableReturn = state.isReturnsEnable;
             if (!enableReturn) return;
 
             if (state.user.role.type.isReturnApproverAccount) {
@@ -547,20 +542,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     Price.empty()) {
               context.read<PriceOverrideBloc>().add(
                     const PriceOverrideEvent.initialized(),
-                  );
-            }
-            final enableReturn =
-                locator<RemoteConfigService>().getReturnsConfig() &&
-                    state.isReturnsEnable;
-
-            if (enableReturn) {
-              context.read<ReturnsOverviewBloc>().add(
-                    ReturnsOverviewEvent.fetch(
-                      salesOrganisation: state.salesOrganisation,
-                      user: state.user,
-                      customerCodeInfo: state.customerCodeInfo,
-                      shipToInfo: state.shipToInfo,
-                    ),
                   );
             }
             context.read<DeepLinkingBloc>().add(

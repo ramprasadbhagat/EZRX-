@@ -285,7 +285,6 @@ void main() {
   setUpAll(() async {
     remoteConfigServiceMock = RemoteConfigServiceMock();
     pushNotificationServiceMock = PushNotificationServiceMock();
-    when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
     when(() => remoteConfigServiceMock.getScanToOrderConfig()).thenReturn(true);
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
@@ -835,7 +834,6 @@ void main() {
 
     testWidgets('DeepLinkingBloc initializes correctly',
         (WidgetTester tester) async {
-      when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(false);
       whenListen(
         eligibilityBlocMock,
         Stream.fromIterable([

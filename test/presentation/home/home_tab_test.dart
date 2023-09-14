@@ -18,7 +18,6 @@ import 'package:ezrxmobile/application/order/product_search/product_search_bloc.
 import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/application/returns/returns_overview/returns_overview_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -102,10 +101,6 @@ class ProductSearchBlocMock
     extends MockBloc<ProductSearchEvent, ProductSearchState>
     implements ProductSearchBloc {}
 
-class ReturnsOverviewBlocMock
-    extends MockBloc<ReturnsOverviewEvent, ReturnsOverviewState>
-    implements ReturnsOverviewBloc {}
-
 class MockHTTPService extends Mock implements HttpService {}
 
 class AutoRouterMock extends Mock implements AppRouter {}
@@ -133,7 +128,6 @@ void main() {
   late MockIntroBloc mockIntroBloc;
   late AnnouncementBloc announcementBlocMock;
   late UserBlocMock userBlocMock;
-  late ReturnsOverviewBlocMock returnsOverviewBlocMock;
   late HttpService mockHTTPService;
   late AppRouter autoRouterMock;
   late RemoteConfigService remoteConfigServiceMock;
@@ -210,7 +204,6 @@ void main() {
       materialPriceBlocMock = MaterialPriceBlocMock();
       mockBannerBloc = BannerBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
-      returnsOverviewBlocMock = ReturnsOverviewBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       userBlocMock = UserBlocMock();
@@ -267,14 +260,10 @@ void main() {
           user: fakeUser,
         ),
       );
-      when(() => remoteConfigServiceMock.getReturnsConfig()).thenReturn(true);
       when(() => remoteConfigServiceMock.getPaymentsConfig()).thenReturn(true);
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
-      when(() => returnsOverviewBlocMock.state).thenReturn(
-        ReturnsOverviewState.initial(),
-      );
       when(() => productSearchBlocMock.state).thenReturn(
         ProductSearchState.initial(),
       );
@@ -330,9 +319,6 @@ void main() {
               BlocProvider<AuthBloc>(create: (context) => authBlocMock),
               BlocProvider<AnnouncementBloc>(
                 create: (context) => announcementBlocMock,
-              ),
-              BlocProvider<ReturnsOverviewBloc>(
-                create: (context) => returnsOverviewBlocMock,
               ),
               BlocProvider<ProductSearchBloc>(
                 create: (context) => productSearchBlocMock,
