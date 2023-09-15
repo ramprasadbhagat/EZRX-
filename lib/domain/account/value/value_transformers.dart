@@ -241,6 +241,25 @@ String salesOrgLanguageCode(String country) {
   return salesOrgCountryMap[country] ?? 'en';
 }
 
+String announcementLanguageCode(String country) {
+  switch (country) {
+    case 'TW':
+      return 'zh-TW';
+    case 'ID':
+      return 'id-ID';
+    case 'KH':
+      return 'km-KH';
+    case 'KR':
+      return 'ko-KR';
+    case 'TH':
+      return 'th-TH';
+    case 'VN':
+      return 'vi-VN';
+    default:
+      return salesOrgLanguageCode(country);
+  }
+}
+
 //  Possible role
 //  'internal_sales_rep'
 //  'external_sales_rep'

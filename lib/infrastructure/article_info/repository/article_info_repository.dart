@@ -32,7 +32,7 @@ class ArticleInfoRepository extends IArticleInfoRepository {
     required int pageSize,
     required String after,
   }) async {
-    final preferredLanguage = user.settings.languagePreference.languageCode;
+    final preferredLanguage = user.preferredLanguage.languageCode;
 
     if (config.appFlavor == Flavor.mock) {
       try {

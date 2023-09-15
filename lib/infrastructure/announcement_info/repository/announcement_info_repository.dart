@@ -69,7 +69,7 @@ class AnnouncementInfoRepository extends IAnnouncementInfoRepository {
       final announcementInfoDetails =
           await remoteDataSource.getAnnouncementInfoDetails(
         announcementUrlPath: config.announcementApiUrlPath,
-        lang: salesOrg.locale.languageCode,
+        lang: salesOrg.announcementLocale.languageCode,
         announcementId: announcementId,
       );
 

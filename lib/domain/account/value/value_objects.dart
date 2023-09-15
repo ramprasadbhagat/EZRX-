@@ -42,6 +42,10 @@ class SalesOrg extends ValueObject<String> {
     return salesOrgLanguageCode(country);
   }
 
+  String get languageCodeForAnnouncement {
+    return announcementLanguageCode(country);
+  }
+
   String get country {
     return salesOrgCountry(value.getOrElse(() => ''));
   }
@@ -97,6 +101,7 @@ class SalesOrg extends ValueObject<String> {
   int get countWhenValid => isValid() ? 1 : 0;
 
   Locale get locale => Locale(languageCode, country);
+  Locale get announcementLocale => Locale(languageCodeForAnnouncement, country);
 
   String get announcementVariablePath => countryAnnouncementPath(country);
 
