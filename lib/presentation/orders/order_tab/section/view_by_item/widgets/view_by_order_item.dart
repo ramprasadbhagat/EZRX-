@@ -37,6 +37,7 @@ class _ViewByOrderItem extends StatelessWidget {
         );
       },
       child: CommonTileItem(
+        key: WidgetKeys.viewByItemsOrderItemKey,
         label: orderHistoryItem.materialNumber.displayMatNo,
         title: orderHistoryItem.materialDescription,
         subtitle: orderHistoryItem.manufactureName,
@@ -44,6 +45,7 @@ class _ViewByOrderItem extends StatelessWidget {
         headerText:
             '${'Order'.tr()} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
         statusWidget: StatusLabel(
+          key: WidgetKeys.orderItemStatusKey,
           status: StatusType(
             orderHistoryItem.status.displayOrderStatus,
           ),

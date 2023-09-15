@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,9 +32,11 @@ class AddressInfoSection extends StatelessWidget {
             actionText.isEmpty
                 ? Text(
                     state.customerCodeInfo.customerName.name1,
+                    key: WidgetKeys.addressInfoSectionActionLabel,
                     style: Theme.of(context).textTheme.labelMedium,
                   )
                 : RichText(
+                    key: WidgetKeys.addressInfoSectionActionLabel,
                     text: TextSpan(
                       text: '${actionText.tr()} ',
                       style: Theme.of(context).textTheme.labelMedium,
@@ -52,6 +55,7 @@ class AddressInfoSection extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 '${'Customer code'.tr()}: ${state.customerCodeInfo.customerCodeSoldTo}',
+                key: WidgetKeys.addressInfoSectionCustomerCodeLabel,
                 style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
@@ -64,6 +68,7 @@ class AddressInfoSection extends StatelessWidget {
             ),
             Text(
               '${'Delivery to'.tr()}: ${state.shipToInfo.shipToCustomerCode}',
+              key: WidgetKeys.addressInfoSectionDeliveryToLabel,
               style: Theme.of(context).textTheme.labelSmall,
             ),
             const SizedBox(

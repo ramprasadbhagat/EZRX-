@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class ItemDetailsSection extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
@@ -46,6 +47,7 @@ class ItemDetailsSection extends StatelessWidget {
               salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
             ),
             statusWidget: StatusLabel(
+              key: WidgetKeys.orderItemStatusKey,
               status: StatusType(
                 orderHistoryItem.status.displayOrderStatus,
               ),

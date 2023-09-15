@@ -18,6 +18,17 @@ class WidgetKeys {
   static const Key scrollToTopArrowIcon = Key('scrollToTopArrowIconKey');
   static const Key nextButton = Key('nextButton');
   static const Key backButton = Key('backButton');
+    static const Key commonTileItemHeader = Key('commonTileItemHeader');
+        static const Key commonTileItemQty = Key('commonTileItemQty');
+  static const Key commonTileItemLabel = Key('commonTileItemLabel');
+  static const Key commonTileItemStatusLabel = Key('commonTileItemStatusLabel');
+  static const Key commonTileItemTitle = Key('commonTileItemTitle');
+  static const Key addressInfoSectionActionLabel =
+      Key('addressInfoSectionActionLabel');
+  static const Key addressInfoSectionCustomerCodeLabel =
+      Key('addressInfoSectionCustomerCodeLabel');
+  static const Key addressInfoSectionDeliveryToLabel =
+      Key('addressInfoSectionDeliveryToLabel');
 
   //============================================================
   //  PRE-ORDER-MODAL
@@ -566,4 +577,42 @@ class WidgetKeys {
   //  Intro Page
   //============================================================
   static const Key introGetStartedButton = Key('getStarted');
+
+  //============================================================
+  // Orders tab
+  //============================================================
+  static const Key ordersTabSearchBarKey = Key('ordersTabSearchBarKey');
+  static const Key ordersTabFilterButtonKey = Key('orderTabFilterButtonKey');
+  //============================================================
+  // View By Items
+  //============================================================
+  static const Key viewByItemsTabKey = Key('view by items');
+  static Key viewByItemsOrderGroupKey = const Key('viewByItemsOrderGroupKey');
+  static Key viewByItemsOrderItemKey = const Key('viewByItemsOrderItemKey');
+  static Key orderItemStatusKey = const Key('orderItemStatusKey');
+  //============================================================
+  // View By Items filter bottom sheet
+  //============================================================
+  static const Key viewByItemsFilterFromDateKey =
+      Key('viewByItemsFilterFromDate');
+  static const Key viewByItemsFilterToDateKey = Key('viewByItemsFilterToDate');
+  static Key viewByItemsFilterStatusKey(String name, bool value) =>
+      Key('viewByItemsFilterStatus$name$value');
+  //============================================================
+  // View By Item Detail
+  //============================================================
+  static Key viewByItemsOrderDetailPage =
+      const Key('viewByItemsOrderDetailPage');
+  static Key viewByItemsOrderDetailOrderCode =
+      const Key('viewByItemsOrderDetailOrderCode');
+  static Key viewByItemsOrderDetailOrderDate =
+      const Key('viewByItemsOrderDetailOrderDate');
+  static Key viewByItemsOrderDetailInvoiceNumber =
+      const Key('viewByItemsOrderDetailInvoiceNumber');
+  static Key viewByItemsOrderDetailPoReference =
+      const Key('viewByItemsOrderDetailPoReference');
+  //============================================================
+  // View By Orders
+  //============================================================
+  static const Key viewByOrdersTabKey = Key('view by orders');
 }

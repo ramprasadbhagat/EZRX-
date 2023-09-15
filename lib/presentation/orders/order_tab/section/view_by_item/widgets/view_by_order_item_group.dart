@@ -12,6 +12,7 @@ class _ViewByOrderItemGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.viewByItemsOrderGroupKey,
       children: [
         if (showDivider)
           const Divider(

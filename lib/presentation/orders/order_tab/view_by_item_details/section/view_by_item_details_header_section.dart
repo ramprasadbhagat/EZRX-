@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,7 @@ class ItemHeaderSection extends StatelessWidget {
             children: [
               Text(
                 '${'Order'.tr()} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                key: WidgetKeys.viewByItemsOrderDetailOrderCode,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -40,6 +42,7 @@ class ItemHeaderSection extends StatelessWidget {
                 height: 10,
               ),
               BalanceTextRow(
+                key: WidgetKeys.viewByItemsOrderDetailOrderDate,
                 keyText: 'Order date'.tr(),
                 valueText: orderHistoryItem.createdDate.dateString,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -51,6 +54,7 @@ class ItemHeaderSection extends StatelessWidget {
                         ),
               ),
               BalanceTextRow(
+                key: WidgetKeys.viewByItemsOrderDetailInvoiceNumber,
                 keyText: 'Invoice number'.tr(),
                 valueText: orderHistoryItem.invoiceNumber,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -62,6 +66,7 @@ class ItemHeaderSection extends StatelessWidget {
                         ),
               ),
               BalanceTextRow(
+                key: WidgetKeys.viewByItemsOrderDetailPoReference,
                 keyText: 'PO reference'.tr(),
                 valueText: orderHistoryItem.pOReference.displayPOReference,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(

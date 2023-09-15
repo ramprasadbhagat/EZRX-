@@ -12,6 +12,7 @@ class _ViewByItemFilterDateRangePicker extends StatelessWidget {
               previous.filter.fromDate != current.filter.fromDate,
           builder: (context, state) => Expanded(
             child: _DateField(
+              key: WidgetKeys.viewByItemsFilterFromDateKey,
               displayDate: state.filter.fromDate.dateString,
             ),
           ),
@@ -28,6 +29,7 @@ class _ViewByItemFilterDateRangePicker extends StatelessWidget {
               previous.filter.toDate != current.filter.toDate,
           builder: (context, state) => Expanded(
             child: _DateField(
+              key: WidgetKeys.viewByItemsFilterToDateKey,
               displayDate: state.filter.toDate.dateString,
             ),
           ),

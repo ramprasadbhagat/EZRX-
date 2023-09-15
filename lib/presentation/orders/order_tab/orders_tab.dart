@@ -82,10 +82,12 @@ class OrdersTab extends StatelessWidget {
                     child: Row(
                       children: [
                         _OrdersTabSearchBar(
+                          key: WidgetKeys.ordersTabSearchBarKey,
                           isFromViewByOrder: context.tabsRouter.current.name ==
                               ViewByOrdersPageRoute.name,
                         ),
                         _OrdersTabFilter(
+                          key: WidgetKeys.ordersTabFilterButtonKey,
                           viewByItem: context.tabsRouter.current.name ==
                               ViewByItemsPageRoute.name,
                         ),

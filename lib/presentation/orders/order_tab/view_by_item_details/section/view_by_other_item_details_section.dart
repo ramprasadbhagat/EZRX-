@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class OtherItemDetailsSection extends StatelessWidget {
   const OtherItemDetailsSection({
@@ -75,6 +76,8 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                       .configs,
                                                 ),
                                                 statusWidget: StatusLabel(
+                                                  key: WidgetKeys
+                                                      .orderItemStatusKey,
                                                   status: StatusType(
                                                     e.status.displayOrderStatus,
                                                   ),

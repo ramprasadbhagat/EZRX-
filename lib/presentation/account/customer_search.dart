@@ -226,6 +226,7 @@ class _ShipToAddressSection extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          key: WidgetKeys.shipToAddressOption(shipToInfo.shipToCustomerCode),
           minLeadingWidth: 0,
           horizontalTitleGap: 9,
           contentPadding: const EdgeInsets.symmetric(horizontal: 20),

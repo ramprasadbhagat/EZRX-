@@ -4,6 +4,7 @@ import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -73,6 +74,7 @@ class CommonTileItem extends StatelessWidget {
                           children: [
                             Text(
                               label,
+                              key: WidgetKeys.commonTileItemLabel,
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                             if (statusTag != null &&
@@ -83,6 +85,7 @@ class CommonTileItem extends StatelessWidget {
                                 width: 5,
                               ),
                               StatusLabel(
+                                key: WidgetKeys.commonTileItemStatusLabel,
                                 status: statusTag!,
                                 valueColor: statusTag!.displayStatusTextColor,
                               ),
@@ -97,6 +100,7 @@ class CommonTileItem extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 5.0),
                           child: Text(
                             title,
+                            key: WidgetKeys.commonTileItemTitle,
                             style: Theme.of(context).textTheme.labelMedium,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -176,6 +180,7 @@ class _Subtitle extends StatelessWidget {
               ),
               Text(
                 'Qty: $quantity',
+                key: WidgetKeys.commonTileItemQty,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.black,
                     ),
@@ -206,6 +211,7 @@ class _HeaderItem extends StatelessWidget {
             children: [
               Text(
                 header,
+                key: WidgetKeys.commonTileItemHeader,
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: ZPColors.darkerGrey,
                     ),

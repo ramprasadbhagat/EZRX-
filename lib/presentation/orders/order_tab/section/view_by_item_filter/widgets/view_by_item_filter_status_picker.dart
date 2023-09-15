@@ -9,28 +9,32 @@ class _ViewByItemFilterStatusPicker extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.filter.orderStatusList != current.filter.orderStatusList,
       builder: (context, state) => Column(
-        children: state.statusList
-            .map(
-              (StatusType status) => CheckboxListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text(
-                  status.getOrDefaultValue(''),
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                controlAffinity: ListTileControlAffinity.leading,
-                dense: true,
-                visualDensity: VisualDensity.compact,
-                onChanged: (bool? value) =>
-                    context.read<ViewByItemFilterBloc>().add(
-                          ViewByItemFilterEvent.setOrderStatus(
-                            status: status,
-                            value: value ?? false,
-                          ),
-                        ),
-                value: state.filter.orderStatusList.contains(status),
+        children: state.statusList.map(
+          (StatusType status) {
+            final name = status.getOrDefaultValue('');
+            final value = state.filter.orderStatusList.contains(status);
+
+            return CheckboxListTile(
+              key: WidgetKeys.viewByItemsFilterStatusKey(name, value),
+              contentPadding: EdgeInsets.zero,
+              title: Text(
+                name,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
-            )
-            .toList(),
+              controlAffinity: ListTileControlAffinity.leading,
+              dense: true,
+              visualDensity: VisualDensity.compact,
+              onChanged: (bool? value) =>
+                  context.read<ViewByItemFilterBloc>().add(
+                        ViewByItemFilterEvent.setOrderStatus(
+                          status: status,
+                          value: value ?? false,
+                        ),
+                      ),
+              value: value,
+            );
+          },
+        ).toList(),
       ),
     );
   }
