@@ -83,7 +83,7 @@ import 'package:ezrxmobile/presentation/account/payment_configuration/sales_dist
 import 'package:ezrxmobile/presentation/account/payment_configuration/sales_district/edit_sales_district_page.dart';
 import 'package:ezrxmobile/presentation/products/products_tab.dart';
 import 'package:ezrxmobile/presentation/more/more_tab.dart';
-import 'package:ezrxmobile/presentation/products/product_suggestion_page.dart';
+import 'package:ezrxmobile/presentation/products/product_suggestion/product_suggestion_page.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements_page.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcements_tab.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/article_details.dart';

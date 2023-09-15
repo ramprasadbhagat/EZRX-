@@ -127,7 +127,7 @@ import '../payments/payment_webview/payment_webview_page.dart' as _i43;
 import '../payments/statement_accounts/statement_accounts.dart' as _i45;
 import '../products/bundle_details/bundle_detail_page.dart' as _i60;
 import '../products/product_details/product_details_page.dart' as _i61;
-import '../products/product_suggestion_page.dart' as _i30;
+import '../products/product_suggestion/product_suggestion_page.dart' as _i30;
 import '../products/products_tab.dart' as _i73;
 import '../returns/add_edit_user_restrictions.dart' as _i36;
 import '../returns/approver_actions/approver_actions.dart' as _i16;
