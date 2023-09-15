@@ -25,27 +25,25 @@ _$_MaterialDto _$$_MaterialDtoFromJson(Map<String, dynamic> json) =>
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
       isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,
-      quantity: _validateQantity(json, 'Quantity') as int? ?? 0,
+      quantity: _validateQantity(json, 'quantity') as int? ?? 0,
       remarks: json['remarks'] as String? ?? '',
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
       ean: json['ean'] as String? ?? '',
       bundle: BundleDto.fromJson(
-          _nullCheck(json, 'BundleInformation') as Map<String, dynamic>),
-      code: json['Code'] as String? ?? '',
-      name: json['Name'] as String? ?? '',
-      principalCode:
-          _principalCodeReadValue(json, 'PrincipalCode') as String? ?? '',
-      materialNumber:
-          _materialNumberReadValue(json, 'MaterialNumber') as String? ?? '',
+          _nullCheck(json, 'bundleInformation') as Map<String, dynamic>),
+      code: json['code'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      principalCode: json['principalCode'] as String? ?? '',
+      materialNumber: json['materialNumber'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
-      manufactured: json['Manufactured'] as String? ?? '',
-      isFavourite: json['IsFavourite'] as bool? ?? false,
-      type: json['Type'] as String? ?? '',
-      hidePrice: json['HidePrice'] as bool? ?? false,
-      dataTotalCount: json['DataTotalCount'] as int? ?? 0,
-      dataTotalHidden: json['DataTotalHidden'] as int? ?? 0,
-      isGimmick: json['IsGimmick'] as bool? ?? false,
-      data: (json['Data'] as List<dynamic>?)
+      manufactured: json['manufactured'] as String? ?? '',
+      isFavourite: json['isFavourite'] as bool? ?? false,
+      type: json['type'] as String? ?? '',
+      hidePrice: json['hidePrice'] as bool? ?? false,
+      dataTotalCount: json['dataTotalCount'] as int? ?? 0,
+      dataTotalHidden: json['dataTotalHidden'] as int? ?? 0,
+      isGimmick: json['isGimmick'] as bool? ?? false,
+      data: (json['data'] as List<dynamic>?)
               ?.map((e) => MaterialDataDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
@@ -72,53 +70,53 @@ Map<String, dynamic> _$$_MaterialDtoToJson(_$_MaterialDto instance) =>
       'taxes': instance.taxes,
       'defaultMaterialDescription': instance.defaultMaterialDescription,
       'isFOCMaterial': instance.isFOCMaterial,
-      'Quantity': instance.quantity,
+      'quantity': instance.quantity,
       'remarks': instance.remarks,
       'genericMaterialName': instance.genericMaterialName,
       'ean': instance.ean,
-      'BundleInformation': instance.bundle.toJson(),
-      'Code': instance.code,
-      'Name': instance.name,
-      'PrincipalCode': instance.principalCode,
-      'MaterialNumber': instance.materialNumber,
+      'bundleInformation': instance.bundle.toJson(),
+      'code': instance.code,
+      'name': instance.name,
+      'principalCode': instance.principalCode,
+      'materialNumber': instance.materialNumber,
       'materialDescription': instance.materialDescription,
-      'Manufactured': instance.manufactured,
-      'IsFavourite': instance.isFavourite,
-      'Type': instance.type,
-      'HidePrice': instance.hidePrice,
-      'DataTotalCount': instance.dataTotalCount,
-      'DataTotalHidden': instance.dataTotalHidden,
-      'IsGimmick': instance.isGimmick,
-      'Data': instance.data.map((e) => e.toJson()).toList(),
+      'manufactured': instance.manufactured,
+      'isFavourite': instance.isFavourite,
+      'type': instance.type,
+      'hidePrice': instance.hidePrice,
+      'dataTotalCount': instance.dataTotalCount,
+      'dataTotalHidden': instance.dataTotalHidden,
+      'isGimmick': instance.isGimmick,
+      'data': instance.data.map((e) => e.toJson()).toList(),
       'bundles': instance.bundles.map((e) => e.toJson()).toList(),
     };
 
 _$_MaterialDataDto _$$_MaterialDataDtoFromJson(Map<String, dynamic> json) =>
     _$_MaterialDataDto(
-      code: materialNumberReadValue(json, 'Code') as String? ?? '',
-      manufactured: json['Manufactured'] as String? ?? '',
-      materialDescription: json['MaterialDescription'] as String? ?? '',
+      code: materialNumberReadValue(json, 'code') as String? ?? '',
+      manufactured: json['manufactured'] as String? ?? '',
+      materialDescription: json['materialDescription'] as String? ?? '',
       defaultMaterialDescription:
-          json['DefaultMaterialDescription'] as String? ?? '',
-      genericMaterialName: json['GenericMaterialName'] as String? ?? '',
-      governmentMaterialCode: json['GovernmentMaterialCode'] as String? ?? '',
+          json['defaultMaterialDescription'] as String? ?? '',
+      genericMaterialName: json['genericMaterialName'] as String? ?? '',
+      governmentMaterialCode: json['governmentMaterialCode'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_MaterialDataDtoToJson(_$_MaterialDataDto instance) =>
     <String, dynamic>{
-      'Code': instance.code,
-      'Manufactured': instance.manufactured,
-      'MaterialDescription': instance.materialDescription,
-      'DefaultMaterialDescription': instance.defaultMaterialDescription,
-      'GenericMaterialName': instance.genericMaterialName,
-      'GovernmentMaterialCode': instance.governmentMaterialCode,
+      'code': instance.code,
+      'manufactured': instance.manufactured,
+      'materialDescription': instance.materialDescription,
+      'defaultMaterialDescription': instance.defaultMaterialDescription,
+      'genericMaterialName': instance.genericMaterialName,
+      'governmentMaterialCode': instance.governmentMaterialCode,
     };
 
 _$_MaterialResponseDto _$$_MaterialResponseDtoFromJson(
         Map<String, dynamic> json) =>
     _$_MaterialResponseDto(
-      count: json['Count'] as int? ?? 0,
-      products: (json['Products'] as List<dynamic>?)
+      count: json['count'] as int? ?? 0,
+      products: (json['products'] as List<dynamic>?)
               ?.map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
@@ -127,6 +125,6 @@ _$_MaterialResponseDto _$$_MaterialResponseDtoFromJson(
 Map<String, dynamic> _$$_MaterialResponseDtoToJson(
         _$_MaterialResponseDto instance) =>
     <String, dynamic>{
-      'Count': instance.count,
-      'Products': instance.products.map((e) => e.toJson()).toList(),
+      'count': instance.count,
+      'products': instance.products.map((e) => e.toJson()).toList(),
     };

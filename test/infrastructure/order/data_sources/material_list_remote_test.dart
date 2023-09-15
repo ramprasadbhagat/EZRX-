@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 // import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
@@ -181,67 +182,62 @@ void main() {
   //               .toList());
   //     });
   //
-  //     test('Get Material List', () async {
-  //       final variables = {
-  //         'salesOrganisation': 'fake-sales-org',
-  //         'customerCode': 'fake-customer-code',
-  //         'shipToCustomer': 'fake-shipto-code',
-  //         'excludePrincipal': [],
-  //         'plants': [],
-  //         'searchKey': '',
-  //         'first': 10,
-  //         'after': 0,
-  //         'cached': true,
-  //         'orderBy': '',
-  //         'language': 'fake-language',
-  //         'principalNameList': [],
-  //         'therapeuticClassList': [],
-  //         'itemBrandList': [],
-  //         'isForFOC': false,
-  //       };
-  //       final res = json.decode(
-  //         await rootBundle
-  //             .loadString('assets/json/getMaterialsWithMetaResponse.json'),
-  //       );
-  //
-  //       dioAdapter.onPost(
-  //         '/api/license',
-  //         (server) => server.reply(
-  //           200,
-  //           res,
-  //           delay: const Duration(seconds: 1),
-  //         ),
-  //         headers: {'Content-Type': 'application/json; charset=utf-8'},
-  //         data: jsonEncode({
-  //           'query':
-  //               remoteDataSource.materialListQuery.getCustomerMaterialList(),
-  //           'variables': variables
-  //         }),
-  //       );
-  //
-  //       final result = await remoteDataSource.getMaterialList(
-  //         language: 'fake-language',
-  //         customerCode: 'fake-customer-code',
-  //         excludePrincipal: [],
-  //         isForFOC: false,
-  //         itemBrandList: [],
-  //         offset: 0,
-  //         orderBy: '',
-  //         pageSize: 10,
-  //         principalNameList: [],
-  //         salesOrgCode: 'fake-sales-org',
-  //         searchKey: '',
-  //         shipToCode: 'fake-shipto-code',
-  //         therapeuticClassList: [],
-  //       );
-  //       final finalData = res['data']['materialsWithMeta']['materials'];
-  //
-  //       expect(
-  //           result,
-  //           List.from(finalData)
-  //               .map((e) => MaterialDto.fromJson(e).toDomain())
-  //               .toList());
-  //     });
+  test('Get Product List', () async {
+    final variables = {
+      'request': {
+        'After': 0,
+        'Customer': 'fake-customer-code',
+        'First': 24,
+        'Language': 'fake-language',
+        'OrderByName': '',
+        'SalesOrg': 'fake-sales-org',
+        'ShipTo': 'fake-shipto-code',
+        'isGimmick': false,
+      },
+    };
+    final res = json.decode(
+      await rootBundle.loadString('assets/json/getAllProductsResponse.json'),
+    );
+
+    dioAdapter.onPost(
+      '/api/price',
+      (server) => server.reply(
+        200,
+        res,
+        delay: const Duration(seconds: 1),
+      ),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      data: jsonEncode({
+        'query': remoteDataSource.materialListQuery.getProductQuery(),
+        'variables': variables
+      }),
+    );
+
+    final result = await remoteDataSource.getProductList(
+      gimmickMaterial: false,
+      isFavourite: false,
+      bundleOffers: false,
+      isProductOffer: false,
+      isFOCMaterial: false,
+      orderByName: '',
+      manufactureList: <String>[],
+      countryListCode: <String>[],
+      principalCode: '',
+      language: 'fake-language',
+      customerCode: 'fake-customer-code',
+      offset: 0,
+      pageSize: 24,
+      salesOrgCode: 'fake-sales-org',
+      shipToCode: 'fake-shipto-code',
+    );
+
+    final finalData =
+        makeResponseCamelCase(jsonEncode(res['data']['GetAllProducts']));
+    expect(
+      result,
+      MaterialResponseDto.fromJson(finalData).toDomain(),
+    );
+  });
   //
   //     test('Get Material List for sales rep', () async {
   //       final variables = {

@@ -48,7 +48,7 @@ class MaterialDto with _$MaterialDto {
         required String defaultMaterialDescription,
     @JsonKey(name: 'isFOCMaterial', defaultValue: false)
         required bool isFOCMaterial,
-    @JsonKey(name: 'Quantity', defaultValue: 0, readValue: _validateQantity)
+    @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
         required int quantity,
     @JsonKey(name: 'remarks', defaultValue: '')
         required String remarks,
@@ -56,43 +56,44 @@ class MaterialDto with _$MaterialDto {
         required String genericMaterialName,
     @JsonKey(name: 'ean', defaultValue: '')
         required String ean,
-    @JsonKey(name: 'BundleInformation', readValue: _nullCheck)
+    @JsonKey(name: 'bundleInformation', readValue: _nullCheck)
         required BundleDto bundle,
 
     // new field from v3
-    @JsonKey(name: 'Code', defaultValue: '')
+    @JsonKey(name: 'code', defaultValue: '')
         required String code,
-    @JsonKey(name: 'Name', defaultValue: '')
+    @JsonKey(name: 'name', defaultValue: '')
         required String name,
     @JsonKey(
-      name: 'PrincipalCode',
+      name: 'principalCode',
       defaultValue: '',
-      readValue: _principalCodeReadValue,
     )
         required String principalCode,
     @JsonKey(
-      name: 'MaterialNumber',
+      name: 'materialNumber',
       defaultValue: '',
-      readValue: _materialNumberReadValue,
     )
         required String materialNumber,
     @JsonKey(name: 'materialDescription', defaultValue: '')
         required String materialDescription,
-    @JsonKey(name: 'Manufactured', defaultValue: '')
+    @JsonKey(name: 'manufactured', defaultValue: '')
         required String manufactured,
-    @JsonKey(name: 'IsFavourite', defaultValue: false)
+    @JsonKey(name: 'isFavourite', defaultValue: false)
         required bool isFavourite,
-    @JsonKey(name: 'Type', defaultValue: '')
+    @JsonKey(name: 'type', defaultValue: '')
         required String type,
-    @JsonKey(name: 'HidePrice', defaultValue: false)
+    @JsonKey(
+      name: 'hidePrice',
+      defaultValue: false,
+    )
         required bool hidePrice,
-    @JsonKey(name: 'DataTotalCount', defaultValue: 0)
+    @JsonKey(name: 'dataTotalCount', defaultValue: 0)
         required int dataTotalCount,
-    @JsonKey(name: 'DataTotalHidden', defaultValue: 0)
+    @JsonKey(name: 'dataTotalHidden', defaultValue: 0)
         required int dataTotalHidden,
-    @JsonKey(name: 'IsGimmick', defaultValue: false)
+    @JsonKey(name: 'isGimmick', defaultValue: false)
         required bool isGimmick,
-    @JsonKey(name: 'Data', defaultValue: <MaterialDataDto>[])
+    @JsonKey(name: 'data', defaultValue: <MaterialDataDto>[])
         required List<MaterialDataDto> data,
     @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
         required List<BundleDto> bundles,
@@ -206,28 +207,23 @@ int _validateQantity(Map json, String key) {
 }
 
 Map<String, dynamic> _nullCheck(Map json, String key) => json[key] ?? {};
-String _materialNumberReadValue(Map json, String key) =>
-    json[key] ?? json['materialNumber'] ?? '';
-
-String _principalCodeReadValue(Map json, String key) =>
-    json[key] ?? json['principalCode'] ?? '';
 
 @freezed
 class MaterialDataDto with _$MaterialDataDto {
   const MaterialDataDto._();
 
   factory MaterialDataDto({
-    @JsonKey(name: 'Code', defaultValue: '', readValue: materialNumberReadValue)
+    @JsonKey(name: 'code', defaultValue: '', readValue: materialNumberReadValue)
         required String code,
-    @JsonKey(name: 'Manufactured', defaultValue: '')
+    @JsonKey(name: 'manufactured', defaultValue: '')
         required String manufactured,
-    @JsonKey(name: 'MaterialDescription', defaultValue: '')
+    @JsonKey(name: 'materialDescription', defaultValue: '')
         required String materialDescription,
-    @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+    @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
         required String defaultMaterialDescription,
-    @JsonKey(name: 'GenericMaterialName', defaultValue: '')
+    @JsonKey(name: 'genericMaterialName', defaultValue: '')
         required String genericMaterialName,
-    @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+    @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
         required String governmentMaterialCode,
   }) = _MaterialDataDto;
 
@@ -257,14 +253,14 @@ class MaterialDataDto with _$MaterialDataDto {
 }
 
 String materialNumberReadValue(Map json, String key) =>
-    json[key] ?? json['MaterialCode'];
+    json[key] ?? json['materialCode'];
 
 @freezed
 class MaterialResponseDto with _$MaterialResponseDto {
   const MaterialResponseDto._();
   factory MaterialResponseDto({
-    @JsonKey(name: 'Count', defaultValue: 0) required int count,
-    @JsonKey(name: 'Products', defaultValue: <MaterialDto>[])
+    @JsonKey(name: 'count', defaultValue: 0) required int count,
+    @JsonKey(name: 'products', defaultValue: <MaterialDto>[])
         required List<MaterialDto> products,
   }) = _MaterialResponseDto;
 

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/materials_query.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
@@ -80,7 +81,8 @@ class MaterialListRemoteDataSource {
         apiEndpoint: 'GetAllProductsRequest',
       );
       _materialListExceptionChecker(res: res);
-      final finalData = res.data['data']['GetAllProducts'];
+      final finalData =
+          makeResponseCamelCase(jsonEncode(res.data['data']['GetAllProducts']));
 
       return MaterialResponseDto.fromJson(finalData).toDomain();
     });

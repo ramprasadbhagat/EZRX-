@@ -20,13 +20,13 @@ BundleInfoDto _$BundleInfoDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BundleInfoDto {
-  @JsonKey(name: 'Sequence')
+  @JsonKey(name: 'sequence')
   int get sequence => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Quantity')
+  @JsonKey(name: 'quantity')
   int get quantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Type')
+  @JsonKey(name: 'type')
   String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Rate')
+  @JsonKey(name: 'rate')
   double get rate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,10 +42,10 @@ abstract class $BundleInfoDtoCopyWith<$Res> {
       _$BundleInfoDtoCopyWithImpl<$Res, BundleInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Sequence') int sequence,
-      @JsonKey(name: 'Quantity') int quantity,
-      @JsonKey(name: 'Type') String type,
-      @JsonKey(name: 'Rate') double rate});
+      {@JsonKey(name: 'sequence') int sequence,
+      @JsonKey(name: 'quantity') int quantity,
+      @JsonKey(name: 'type') String type,
+      @JsonKey(name: 'rate') double rate});
 }
 
 /// @nodoc
@@ -96,10 +96,10 @@ abstract class _$$_BundleInfoDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Sequence') int sequence,
-      @JsonKey(name: 'Quantity') int quantity,
-      @JsonKey(name: 'Type') String type,
-      @JsonKey(name: 'Rate') double rate});
+      {@JsonKey(name: 'sequence') int sequence,
+      @JsonKey(name: 'quantity') int quantity,
+      @JsonKey(name: 'type') String type,
+      @JsonKey(name: 'rate') double rate});
 }
 
 /// @nodoc
@@ -143,26 +143,26 @@ class __$$_BundleInfoDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BundleInfoDto extends _BundleInfoDto {
   const _$_BundleInfoDto(
-      {@JsonKey(name: 'Sequence') required this.sequence,
-      @JsonKey(name: 'Quantity') required this.quantity,
-      @JsonKey(name: 'Type') required this.type,
-      @JsonKey(name: 'Rate') required this.rate})
+      {@JsonKey(name: 'sequence') required this.sequence,
+      @JsonKey(name: 'quantity') required this.quantity,
+      @JsonKey(name: 'type') required this.type,
+      @JsonKey(name: 'rate') required this.rate})
       : super._();
 
   factory _$_BundleInfoDto.fromJson(Map<String, dynamic> json) =>
       _$$_BundleInfoDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'Sequence')
+  @JsonKey(name: 'sequence')
   final int sequence;
   @override
-  @JsonKey(name: 'Quantity')
+  @JsonKey(name: 'quantity')
   final int quantity;
   @override
-  @JsonKey(name: 'Type')
+  @JsonKey(name: 'type')
   final String type;
   @override
-  @JsonKey(name: 'Rate')
+  @JsonKey(name: 'rate')
   final double rate;
 
   @override
@@ -203,26 +203,26 @@ class _$_BundleInfoDto extends _BundleInfoDto {
 
 abstract class _BundleInfoDto extends BundleInfoDto {
   const factory _BundleInfoDto(
-      {@JsonKey(name: 'Sequence') required final int sequence,
-      @JsonKey(name: 'Quantity') required final int quantity,
-      @JsonKey(name: 'Type') required final String type,
-      @JsonKey(name: 'Rate') required final double rate}) = _$_BundleInfoDto;
+      {@JsonKey(name: 'sequence') required final int sequence,
+      @JsonKey(name: 'quantity') required final int quantity,
+      @JsonKey(name: 'type') required final String type,
+      @JsonKey(name: 'rate') required final double rate}) = _$_BundleInfoDto;
   const _BundleInfoDto._() : super._();
 
   factory _BundleInfoDto.fromJson(Map<String, dynamic> json) =
       _$_BundleInfoDto.fromJson;
 
   @override
-  @JsonKey(name: 'Sequence')
+  @JsonKey(name: 'sequence')
   int get sequence;
   @override
-  @JsonKey(name: 'Quantity')
+  @JsonKey(name: 'quantity')
   int get quantity;
   @override
-  @JsonKey(name: 'Type')
+  @JsonKey(name: 'type')
   String get type;
   @override
-  @JsonKey(name: 'Rate')
+  @JsonKey(name: 'rate')
   double get rate;
   @override
   @JsonKey(ignore: true)

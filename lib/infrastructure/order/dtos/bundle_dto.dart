@@ -12,14 +12,14 @@ class BundleDto with _$BundleDto {
   const BundleDto._();
 
   const factory BundleDto({
-    @JsonKey(name: 'BundleName', defaultValue: '') required String bundleName,
-    @JsonKey(name: 'BundleCode', defaultValue: '') required String bundleCode,
-    @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+    @JsonKey(name: 'bundleName', defaultValue: '') required String bundleName,
+    @JsonKey(name: 'bundleCode', defaultValue: '') required String bundleCode,
+    @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
         required List<BundleInfoDto> bundleInformation,
     @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
         required List<MaterialDto> materials,
-    @JsonKey(name: 'Conditions', defaultValue: '') required String conditions,
-    @JsonKey(name: 'BonusEligible', defaultValue: false)
+    @JsonKey(name: 'conditions', defaultValue: '') required String conditions,
+    @JsonKey(name: 'bonusEligible', defaultValue: false)
         required bool bonusEligible,
   }) = _BundleDto;
 

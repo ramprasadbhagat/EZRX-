@@ -20,18 +20,18 @@ BundleDto _$BundleDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BundleDto {
-  @JsonKey(name: 'BundleName', defaultValue: '')
+  @JsonKey(name: 'bundleName', defaultValue: '')
   String get bundleName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BundleCode', defaultValue: '')
+  @JsonKey(name: 'bundleCode', defaultValue: '')
   String get bundleCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+  @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
   List<BundleInfoDto> get bundleInformation =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
   List<MaterialDto> get materials => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Conditions', defaultValue: '')
+  @JsonKey(name: 'conditions', defaultValue: '')
   String get conditions => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BonusEligible', defaultValue: false)
+  @JsonKey(name: 'bonusEligible', defaultValue: false)
   bool get bonusEligible => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,14 +46,14 @@ abstract class $BundleDtoCopyWith<$Res> {
       _$BundleDtoCopyWithImpl<$Res, BundleDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'BundleName', defaultValue: '') String bundleName,
-      @JsonKey(name: 'BundleCode', defaultValue: '') String bundleCode,
-      @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+      {@JsonKey(name: 'bundleName', defaultValue: '') String bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '') String bundleCode,
+      @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
       List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
       List<MaterialDto> materials,
-      @JsonKey(name: 'Conditions', defaultValue: '') String conditions,
-      @JsonKey(name: 'BonusEligible', defaultValue: false) bool bonusEligible});
+      @JsonKey(name: 'conditions', defaultValue: '') String conditions,
+      @JsonKey(name: 'bonusEligible', defaultValue: false) bool bonusEligible});
 }
 
 /// @nodoc
@@ -113,14 +113,14 @@ abstract class _$$_BundleDtoCopyWith<$Res> implements $BundleDtoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'BundleName', defaultValue: '') String bundleName,
-      @JsonKey(name: 'BundleCode', defaultValue: '') String bundleCode,
-      @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+      {@JsonKey(name: 'bundleName', defaultValue: '') String bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '') String bundleCode,
+      @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
       List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
       List<MaterialDto> materials,
-      @JsonKey(name: 'Conditions', defaultValue: '') String conditions,
-      @JsonKey(name: 'BonusEligible', defaultValue: false) bool bonusEligible});
+      @JsonKey(name: 'conditions', defaultValue: '') String conditions,
+      @JsonKey(name: 'bonusEligible', defaultValue: false) bool bonusEligible});
 }
 
 /// @nodoc
@@ -174,14 +174,14 @@ class __$$_BundleDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BundleDto extends _BundleDto {
   const _$_BundleDto(
-      {@JsonKey(name: 'BundleName', defaultValue: '') required this.bundleName,
-      @JsonKey(name: 'BundleCode', defaultValue: '') required this.bundleCode,
-      @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+      {@JsonKey(name: 'bundleName', defaultValue: '') required this.bundleName,
+      @JsonKey(name: 'bundleCode', defaultValue: '') required this.bundleCode,
+      @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
       required final List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
       required final List<MaterialDto> materials,
-      @JsonKey(name: 'Conditions', defaultValue: '') required this.conditions,
-      @JsonKey(name: 'BonusEligible', defaultValue: false)
+      @JsonKey(name: 'conditions', defaultValue: '') required this.conditions,
+      @JsonKey(name: 'bonusEligible', defaultValue: false)
       required this.bonusEligible})
       : _bundleInformation = bundleInformation,
         _materials = materials,
@@ -191,14 +191,14 @@ class _$_BundleDto extends _BundleDto {
       _$$_BundleDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'BundleName', defaultValue: '')
+  @JsonKey(name: 'bundleName', defaultValue: '')
   final String bundleName;
   @override
-  @JsonKey(name: 'BundleCode', defaultValue: '')
+  @JsonKey(name: 'bundleCode', defaultValue: '')
   final String bundleCode;
   final List<BundleInfoDto> _bundleInformation;
   @override
-  @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+  @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
   List<BundleInfoDto> get bundleInformation {
     if (_bundleInformation is EqualUnmodifiableListView)
       return _bundleInformation;
@@ -216,10 +216,10 @@ class _$_BundleDto extends _BundleDto {
   }
 
   @override
-  @JsonKey(name: 'Conditions', defaultValue: '')
+  @JsonKey(name: 'conditions', defaultValue: '')
   final String conditions;
   @override
-  @JsonKey(name: 'BonusEligible', defaultValue: false)
+  @JsonKey(name: 'bonusEligible', defaultValue: false)
   final bool bonusEligible;
 
   @override
@@ -273,17 +273,17 @@ class _$_BundleDto extends _BundleDto {
 
 abstract class _BundleDto extends BundleDto {
   const factory _BundleDto(
-      {@JsonKey(name: 'BundleName', defaultValue: '')
+      {@JsonKey(name: 'bundleName', defaultValue: '')
       required final String bundleName,
-      @JsonKey(name: 'BundleCode', defaultValue: '')
+      @JsonKey(name: 'bundleCode', defaultValue: '')
       required final String bundleCode,
-      @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+      @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
       required final List<BundleInfoDto> bundleInformation,
       @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
       required final List<MaterialDto> materials,
-      @JsonKey(name: 'Conditions', defaultValue: '')
+      @JsonKey(name: 'conditions', defaultValue: '')
       required final String conditions,
-      @JsonKey(name: 'BonusEligible', defaultValue: false)
+      @JsonKey(name: 'bonusEligible', defaultValue: false)
       required final bool bonusEligible}) = _$_BundleDto;
   const _BundleDto._() : super._();
 
@@ -291,22 +291,22 @@ abstract class _BundleDto extends BundleDto {
       _$_BundleDto.fromJson;
 
   @override
-  @JsonKey(name: 'BundleName', defaultValue: '')
+  @JsonKey(name: 'bundleName', defaultValue: '')
   String get bundleName;
   @override
-  @JsonKey(name: 'BundleCode', defaultValue: '')
+  @JsonKey(name: 'bundleCode', defaultValue: '')
   String get bundleCode;
   @override
-  @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+  @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
   List<BundleInfoDto> get bundleInformation;
   @override
   @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
   List<MaterialDto> get materials;
   @override
-  @JsonKey(name: 'Conditions', defaultValue: '')
+  @JsonKey(name: 'conditions', defaultValue: '')
   String get conditions;
   @override
-  @JsonKey(name: 'BonusEligible', defaultValue: false)
+  @JsonKey(name: 'bonusEligible', defaultValue: false)
   bool get bonusEligible;
   @override
   @JsonKey(ignore: true)

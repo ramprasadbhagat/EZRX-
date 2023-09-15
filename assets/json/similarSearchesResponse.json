@@ -14,7 +14,7 @@
                     "suspensionStatus": false,
                     "promoType": "",
                     "promoStatus": false,
-                    "hidePrice": false
+                    "hidePrice": true
                 },
                 {
                     "principalName": "GLAXOSMITHKLINE CONSUMER",

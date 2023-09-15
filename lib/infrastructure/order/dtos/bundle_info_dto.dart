@@ -10,10 +10,10 @@ class BundleInfoDto with _$BundleInfoDto {
   const BundleInfoDto._();
 
   const factory BundleInfoDto({
-    @JsonKey(name: 'Sequence') required int sequence,
-    @JsonKey(name: 'Quantity') required int quantity,
-    @JsonKey(name: 'Type') required String type,
-    @JsonKey(name: 'Rate') required double rate,
+    @JsonKey(name: 'sequence') required int sequence,
+    @JsonKey(name: 'quantity') required int quantity,
+    @JsonKey(name: 'type') required String type,
+    @JsonKey(name: 'rate') required double rate,
   }) = _BundleInfoDto;
 
   BundleInfo toDomain() {
