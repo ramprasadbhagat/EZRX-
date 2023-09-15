@@ -76,12 +76,12 @@ class _CustomStepWithIcon extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: customStep[index].state == CustomStepState.disabled
                       ? ZPColors.transparent
-                      : ZPColors.kPrimaryColor,
+                      : ZPColors.extraDarkGreen,
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: customStep[index].state == CustomStepState.disabled
                         ? ZPColors.lightGray
-                        : ZPColors.kPrimaryColor,
+                        : ZPColors.extraDarkGreen,
                   ),
                 ),
                 child: Icon(
@@ -195,13 +195,13 @@ enum CustomStepState {
 TextStyle _titleStyle(BuildContext context, CustomStep customStep) {
   switch (customStep.state) {
     case CustomStepState.disabled:
-      return Theme.of(context).textTheme.bodyLarge!.copyWith(
+      return Theme.of(context).textTheme.labelMedium!.copyWith(
             color: ZPColors.lightGray,
           );
     default:
       return Theme.of(context)
           .textTheme
-          .bodyLarge!
+          .labelMedium!
           .copyWith(color: ZPColors.black);
   }
 }

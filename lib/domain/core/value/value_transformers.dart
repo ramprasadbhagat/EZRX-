@@ -465,19 +465,19 @@ String getOrderStatus(String status) {
 IconData getOrderStatusIcon(String status) {
   switch (status) {
     case 'Order Created':
-      return Icons.inventory;
+      return Icons.inventory_outlined;
     case 'Pending release':
       return Icons.query_builder;
     case 'Picking in progress':
-      return Icons.inventory_2;
+      return Icons.inventory_2_outlined;
     case 'Out for delivery':
-      return Icons.electric_rickshaw;
+      return Icons.local_shipping_outlined;
     case 'Delivered':
       return Icons.check;
     case 'Cancelled':
       return Icons.cancel;
     default:
-      return Icons.inventory;
+      return Icons.inventory_outlined;
   }
 }
 

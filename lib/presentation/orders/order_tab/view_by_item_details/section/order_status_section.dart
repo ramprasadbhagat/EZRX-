@@ -26,7 +26,10 @@ class OrderStatusSection extends StatelessWidget {
             contentPadding: const EdgeInsets.fromLTRB(16.0, 16.0, 0, 0),
             title: Text(
               'Order Status'.tr(),
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(color: ZPColors.primary),
             ),
             subtitle: !context
                     .read<EligibilityBloc>()
@@ -34,7 +37,8 @@ class OrderStatusSection extends StatelessWidget {
                     .salesOrgConfigs
                     .disableDeliveryDate
                 ? Text(
-                    'Expected delivery: ${orderHistoryItem.deliveryDate.dateString}',
+                    '${'Expected delivery'.tr()}: ${orderHistoryItem.deliveryDate.dateString}',
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )
                 : const SizedBox.shrink(),
           ),
