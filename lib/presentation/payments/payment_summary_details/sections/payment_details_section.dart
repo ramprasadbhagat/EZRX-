@@ -151,7 +151,10 @@ class _PaymentInfoSection extends StatelessWidget {
             style: Theme.of(context).textTheme.labelLarge,
           ),
         ),
-        AddressInfoSection.payment(),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: AddressInfoSection.noAction(),
+        ),
       ],
     );
   }

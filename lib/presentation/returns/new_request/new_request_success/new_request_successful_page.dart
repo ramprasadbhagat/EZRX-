@@ -63,8 +63,13 @@ class _BodyContent extends StatelessWidget {
           children: [
             const _ReturnRequestSuccessMessage(),
             const _AdditionInfoSummary(),
-            AddressInfoSection.returnRequest(),
-            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 16.0,
+              ),
+              child: AddressInfoSection.returnRequest(),
+            ),
             const Divider(
               indent: 0,
               thickness: 1,

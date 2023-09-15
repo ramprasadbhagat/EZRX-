@@ -40,7 +40,10 @@ class RequestDetailsSection extends StatelessWidget {
           endIndent: 0,
           color: ZPColors.lightGray2,
         ),
-        AddressInfoSection.returnRequest(),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: AddressInfoSection.returnRequest(),
+        ),
         const Divider(
           indent: 0,
           height: 20,

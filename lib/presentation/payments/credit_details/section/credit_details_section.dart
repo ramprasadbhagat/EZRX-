@@ -94,7 +94,10 @@ class CreditDetailsSection extends StatelessWidget {
             ],
           ),
         ),
-        AddressInfoSection.payment(),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: AddressInfoSection.order(),
+        ),
         const Divider(
           indent: 0,
           height: 20,

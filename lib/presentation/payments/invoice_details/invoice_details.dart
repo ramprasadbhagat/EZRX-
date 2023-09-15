@@ -74,7 +74,13 @@ class InvoiceDetailsPage extends StatelessWidget {
                       InvoiceDetailsSection(
                         invoiceItem: invoiceItem,
                       ),
-                      AddressInfoSection.payment(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 16.0,
+                        ),
+                        child: AddressInfoSection.order(),
+                      ),
                       const Divider(
                         endIndent: 0,
                         indent: 0,

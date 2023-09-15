@@ -37,7 +37,10 @@ class ReturnSummaryDetailsSection extends StatelessWidget {
           endIndent: 0,
           color: ZPColors.lightGray2,
         ),
-        AddressInfoSection.returnRequest(),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: AddressInfoSection.returnRequest(),
+        ),
       ],
     );
   }

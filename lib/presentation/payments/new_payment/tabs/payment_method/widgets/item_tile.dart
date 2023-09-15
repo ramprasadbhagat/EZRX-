@@ -1,4 +1,4 @@
-part of '../payment_method_tab.dart';
+part of 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';
 
 class _InvoiceCreditItemTile extends StatelessWidget {
   final CustomerOpenItem customerOpenItem;
@@ -11,7 +11,7 @@ class _InvoiceCreditItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

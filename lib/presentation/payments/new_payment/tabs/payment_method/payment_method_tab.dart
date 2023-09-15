@@ -10,7 +10,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'widgets/item_tile.dart';
+part 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/widgets/item_tile.dart';
 
 class PaymentMethodTab extends StatelessWidget {
   const PaymentMethodTab({Key? key}) : super(key: key);
@@ -37,7 +37,13 @@ class PaymentMethodTab extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
-            AddressInfoSection.payment(),
+            const SizedBox(height: 16.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+              ),
+              child: AddressInfoSection.noAction(),
+            ),
             const SizedBox(height: 20),
             ...state.allSelectedItems.map(
               (e) => _InvoiceCreditItemTile(customerOpenItem: e),

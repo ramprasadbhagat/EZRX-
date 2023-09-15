@@ -73,7 +73,13 @@ class _ViewByOrderDetailsPageState extends State<ViewByOrderDetailsPage> {
                       OrderHeaderSection(
                         viewByOrdersItem: widget.viewByOrderHistoryItem,
                       ),
-                      AddressInfoSection.order(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 16.0,
+                        ),
+                        child: AddressInfoSection.order(),
+                      ),
                       const Divider(
                         indent: 0,
                         height: 20,

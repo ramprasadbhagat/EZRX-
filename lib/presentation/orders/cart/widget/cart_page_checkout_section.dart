@@ -67,19 +67,17 @@ class _CartPageCheckoutSection extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       enableDrag: false,
-      useSafeArea: true,
-      builder: (_) {
-        return Padding(
+      builder: (_) => SafeArea(
+        child: Padding(
           padding: const EdgeInsets.all(
             20,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const _CartPageSummaryInfo(),
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
+              AddressInfoSection.order(),
+              const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -96,67 +94,8 @@ class _CartPageCheckoutSection extends StatelessWidget {
               ),
             ],
           ),
-        );
-      },
-    );
-  }
-}
-
-class _CartPageSummaryInfo extends StatelessWidget {
-  const _CartPageSummaryInfo({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          '${"Order for".tr()} ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
         ),
-        const SizedBox(
-          height: 16.0,
-        ),
-        Text(
-          '${"Customer code:".tr()} ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerCodeSoldTo}',
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-        ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          context
-              .read<CustomerCodeBloc>()
-              .state
-              .customerCodeInfo
-              .fullCustomerAddress,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-        ),
-        const SizedBox(
-          height: 16.0,
-        ),
-        Text(
-          '${"Deliver to:".tr()} ${context.read<CustomerCodeBloc>().state.shipToInfo.shipToCustomerCode}',
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-        ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          context.read<CustomerCodeBloc>().state.shipToInfo.deliveryAddress,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-        ),
-      ],
+      ),
     );
   }
 }

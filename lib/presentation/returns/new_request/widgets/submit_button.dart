@@ -1,4 +1,4 @@
-part of '../new_request_page.dart';
+part of 'package:ezrxmobile/presentation/returns/new_request/new_request_page.dart';
 
 class _SubmitButton extends StatelessWidget {
   const _SubmitButton({
@@ -13,11 +13,11 @@ class _SubmitButton extends StatelessWidget {
           !current.isSubmitting,
       listener: (context, state) {
         state.failureOrSuccessOption.fold(
-          () {},
+          () =>
+              context.router.popAndPush(const NewRequestSuccessfulPageRoute()),
           (either) => either.fold(
             (failure) => ErrorUtils.handleApiFailure(context, failure),
-            (_) => context.router
-                .popAndPush(const NewRequestSuccessfulPageRoute()),
+            (_) {},
           ),
         );
       },

@@ -92,7 +92,13 @@ class _BodyContent extends StatelessWidget {
                           height: 20.0,
                         ),
                         _OrderDetailHeader(),
-                        AddressInfoSection.order(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0,
+                            vertical: 16,
+                          ),
+                          child: AddressInfoSection.order(),
+                        ),
                         const Divider(
                           indent: 0,
                           endIndent: 0,

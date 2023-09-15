@@ -229,10 +229,9 @@ class NewRequestPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              const SizedBox(height: 16),
               AddressInfoSection.returnRequest(),
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(

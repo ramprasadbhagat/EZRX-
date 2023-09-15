@@ -85,7 +85,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
       ),
       body: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(child: AddressInfoSection.noAction()),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+              ),
+              child: AddressInfoSection.noAction(),
+            ),
+          ),
           const SliverToBoxAdapter(child: SizedBox(height: 32.0)),
           DeliveryInfo(focusNodes: _focusNodes),
           const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
