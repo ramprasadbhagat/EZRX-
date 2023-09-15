@@ -60,7 +60,7 @@ class BonusMaterialTile extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Text(
                     bonusMaterial.displayDescription,
-                    style: Theme.of(context).textTheme.titleSmall,
+                    style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ),
                 Row(

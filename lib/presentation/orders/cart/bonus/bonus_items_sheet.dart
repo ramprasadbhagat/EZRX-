@@ -76,7 +76,9 @@ class BonusItemsSheet extends StatelessWidget {
               padding: const EdgeInsets.only(top: 25),
               child: Text(
                 'Add bonus/sample item'.tr(),
-                style: Theme.of(context).textTheme.labelLarge,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: ZPColors.primary,
+                    ),
               ),
             ),
             Padding(
