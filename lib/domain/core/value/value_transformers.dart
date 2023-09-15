@@ -317,7 +317,7 @@ Color getStatusLabelColor(String statusType) {
     // 'In Progress': ZPColors.lightGray,
     'PENDING': ZPColors.lightRed,
     'REJECTED': ZPColors.darkGray,
-    'Out of stock': ZPColors.lightGray2,
+    'Out of stock': ZPColors.lightGray,
   };
 
   return statusTypeMap[statusType] ?? ZPColors.lightYellow;
@@ -530,3 +530,9 @@ Color getOosMaterialTagLabelColor(bool value) {
 }
 
 String getOptionalText(bool value) => value ? '' : '(Optional)';
+
+String getOosTag() => 'Out of stock';
+
+Color getOosTagColor() => getStatusLabelColor(getOosTag());
+
+Color getOosTagLabelColor() => ZPColors.black;

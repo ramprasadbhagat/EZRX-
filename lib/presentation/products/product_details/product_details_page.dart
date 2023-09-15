@@ -170,9 +170,11 @@ class _BodyContent extends StatelessWidget {
         final materialNumber =
             state.productDetailAggregate.materialInfo.materialNumber;
         final config = context.read<SalesOrgBloc>().state.configs;
+        final validateOutOfStockValue =
+            context.read<EligibilityBloc>().state.validateOutOfStockValue;
         final level = !state.isFetching
             ? !state.productDetailAggregate.stockInfo.inStock.isMaterialInStock
-                ? config.addOosMaterials.oosMaterialTag
+                ? config.addOosMaterials.productTag(validateOutOfStockValue)
                 : ''
             : '';
         final isHidePrice = state.productDetailAggregate.materialInfo.hidePrice;

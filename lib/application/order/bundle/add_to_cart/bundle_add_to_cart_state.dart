@@ -24,4 +24,24 @@ class BundleAddToCartState with _$BundleAddToCartState {
 
   List<MaterialInfo> get bundleMaterialsSelected =>
       bundleMaterials.where((element) => element.quantity > 0).toList();
+
+  bool get isBundleCountSatisfied =>
+      totalCount >= bundle.bundle.minimumQuantityBundleMaterial.quantity;
+
+  int _materialInCart(PriceAggregate materialInCart, MaterialInfo info) =>
+      materialInCart.bundle.materials
+          .firstWhere(
+            (element) => element.materialNumber == info.materialNumber,
+            orElse: () => MaterialInfo.empty(),
+          )
+          .quantity;
+
+  List<MaterialInfo> selectedMaterialInfo(PriceAggregate materialInCart) =>
+      bundleMaterialsSelected
+          .map(
+            (e) => e.copyWith(
+              quantity: e.quantity + _materialInCart(materialInCart, e),
+            ),
+          )
+          .toList();
 }

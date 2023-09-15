@@ -45,7 +45,10 @@ class OrderEligibilityState with _$OrderEligibilityState {
   }
 
   bool get eligibleForOrderSubmit =>
-      isMinOrderValuePassed && !isMWPNotAllowedAndPresentInCart;
+      isMinOrderValuePassed &&
+      !isMWPNotAllowedAndPresentInCart &&
+      isOOSAllowedIfPresentInCart &&
+      isBundleQuantitySatisfies;
 
   bool get isTotalGreaterThanMinOrderAmount {
     if (salesOrg.salesOrg.isTH) {
@@ -85,11 +88,53 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   bool get displayMovWarning => !isMinOrderValuePassed && showErrorMessage;
 
+  bool get displayOOSWarning =>
+      !isOOSAllowedIfPresentInCart && showErrorMessage;
+
   /*MWP: Material Without Price*/
   bool get isMWPNotAllowedAndPresentInCart =>
-      cartItems.any((e) =>
-          e.materialInfo.type.typeMaterial && e.price.finalPrice.isEmpty,) &&
+      cartItems.any(
+        (e) => e.materialInfo.type.typeMaterial && e.price.finalPrice.isEmpty,
+      ) &&
       !configs.materialWithoutPrice;
+
+  bool get isOOSAllowedIfPresentInCart =>
+      ((_isOOSOrderPresent && _isOOSOrderAllowedToSubmit) ||
+          !_isOOSOrderPresent);
+
+  bool get isBundleQuantitySatisfies => cartItems
+      .where((element) => element.materialInfo.type.typeBundle)
+      .map((e) => e.bundle)
+      .every(
+        (element) =>
+            getTotalQuantityOfProductBundle(
+              bundleCode: element.bundleCode,
+            ) >=
+            element.minimumQuantityBundleMaterial.quantity,
+      );
+
+  int getTotalQuantityOfProductBundle({required String bundleCode}) {
+    return cartItems
+            .firstWhere(
+              (element) => element.bundle.bundleCode == bundleCode,
+              orElse: () => PriceAggregate.empty(),
+            )
+            .bundle
+            .materials
+            .fold(
+              0,
+              (previousValue, element) =>
+                  (previousValue ?? 0) + element.quantity,
+            ) ??
+        0;
+  }
+
+  bool get _isOOSOrderAllowedToSubmit => (configs.addOosMaterials
+          .getOrDefaultValue(false) &&
+      (configs.oosValue.isOosValueZero ? user.role.type.isSalesRepRole : true));
+
+  bool get _isOOSOrderPresent =>
+      cartItems.any((element) => element.isAnyOOSItemPresentInCart);
 
   bool get displayMWPNotAllowedWarning =>
       isMWPNotAllowedAndPresentInCart && showErrorMessage;

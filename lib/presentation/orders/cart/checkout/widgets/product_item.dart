@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -204,6 +205,9 @@ class _OrderTag extends StatelessWidget {
           (element) => element.getMaterialNumber == cartItem.getMaterialNumber,
           orElse: () => PriceAggregate.empty(),
         );
+        final statusType = finalCartItem.productTag(
+          context.read<EligibilityBloc>().state.validateOutOfStockValue,
+        );
 
         return finalCartItem.inStock ||
                 finalCartItem.stockInfoList.isEmpty ||
@@ -211,8 +215,8 @@ class _OrderTag extends StatelessWidget {
                 state.isFetchingCartProductDetail
             ? const SizedBox.shrink()
             : StatusLabel(
-                status: finalCartItem.productTag,
-                valueColor: finalCartItem.productTag.displayStatusTextColor,
+                status: statusType,
+                valueColor: statusType.displayStatusTextColor,
               );
       },
     );

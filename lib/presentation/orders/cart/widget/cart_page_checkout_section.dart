@@ -160,20 +160,11 @@ class _CartPageUnorderedListItem extends StatelessWidget {
 class _CartPageOOSMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
+    return BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
       buildWhen: (previous, current) =>
-          (previous.isUpdatingStock != current.isUpdatingStock &&
-              !current.isUpdatingStock) ||
-          (previous.isUpserting != current.isUpserting && !current.isUpserting),
+          previous.displayOOSWarning != current.displayOOSWarning,
       builder: (context, state) {
-        final isOOSAllowed = state.isOOSOrderPresent
-            ? !context
-                .read<EligibilityBloc>()
-                .state
-                .doNotAllowOutOfStockMaterials
-            : true;
-
-        return !isOOSAllowed
+        return state.displayOOSWarning
             ? Padding(
                 padding: const EdgeInsets.only(
                   left: 20.0,
@@ -205,14 +196,6 @@ class _CartPageOOSMessage extends StatelessWidget {
 }
 
 class _CartPageCheckoutButton extends StatelessWidget {
-  bool _checkEligibility({
-    required CartState state,
-    required BuildContext context,
-  }) =>
-      state.isEligibleForCheckout(
-        !context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials,
-      );
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
@@ -237,9 +220,9 @@ class _CartPageCheckoutButton extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: ElevatedButton(
                 key: WidgetKeys.checkoutButton,
-                onPressed: !_checkEligibility(state: state, context: context)
-                    ? null
-                    : () => _onCheckOutPressed(context),
+                onPressed: () {
+                  _onCheckOutPressed(context);
+                },
                 child: const Text('Check out').tr(),
               ),
             ),

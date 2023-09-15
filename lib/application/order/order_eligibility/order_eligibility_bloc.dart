@@ -43,7 +43,9 @@ class OrderEligibilityBloc
       ),
       validateOrderEligibility: (e) async => emit(
         state.copyWith(
-          showErrorMessage: !state.isMinOrderValuePassed || state.isMWPNotAllowedAndPresentInCart,
+          showErrorMessage: !state.isMinOrderValuePassed ||
+              state.isMWPNotAllowedAndPresentInCart ||
+              !state._isOOSOrderAllowedToSubmit,
         ),
       ),
     );

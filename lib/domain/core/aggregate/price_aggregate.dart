@@ -555,10 +555,11 @@ class PriceAggregate with _$PriceAggregate {
   bool get isPreOrder =>
       !inStock && salesOrgConfig.addOosMaterials.getOrDefaultValue(false);
 
-  StatusType get productTag => isPreOrder
-      ? StatusType('OOS-Preorder')
-      : !stockInfoList.any((e) => e.inStock.isMaterialInStock)
-          ? StatusType('Out of stock')
+  StatusType productTag(bool isUserValidToProcess) =>
+      !stockInfoList.any((e) => e.inStock.isMaterialInStock)
+          ? isUserValidToProcess
+              ? StatusType(salesOrgConfig.addOosMaterials.oosMaterialTag)
+              : StatusType(salesOrgConfig.addOosMaterials.oosTag)
           : StatusType('');
 
   bool get inStock =>
@@ -587,7 +588,8 @@ class PriceAggregate with _$PriceAggregate {
   bool get displayOfferBonus =>
       addedBonusList.isNotEmpty && !materialInfo.hidePrice;
 
-  bool get showTaxBreakDown => salesOrgConfig.displayItemTaxBreakdown && !materialInfo.hidePrice;
+  bool get showTaxBreakDown =>
+      salesOrgConfig.displayItemTaxBreakdown && !materialInfo.hidePrice;
 }
 
 enum PriceType {

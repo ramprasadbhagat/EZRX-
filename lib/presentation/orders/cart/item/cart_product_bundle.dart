@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -351,10 +352,15 @@ class _OrderTag extends StatelessWidget {
         if (materialInfo.stockInfos.isEmpty || materialInfo.inStock) {
           return const SizedBox.shrink();
         }
-        
-        return StatusLabel(
+
+        final validateOutOfStockValue =
+            context.read<EligibilityBloc>().state.validateOutOfStockValue;
+
+        return state.isFetching || state.isFetchingCartProductDetail
+            ? const SizedBox.shrink()
+            : StatusLabel(
                 status: StatusType(
-                  configs.addOosMaterials.oosMaterialTag,
+                  configs.addOosMaterials.productTag(validateOutOfStockValue),
                 ),
               );
       },

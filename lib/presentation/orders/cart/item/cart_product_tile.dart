@@ -539,14 +539,18 @@ class _OrderTag extends StatelessWidget {
           orElse: () => PriceAggregate.empty(),
         );
 
+        final statusType = finalCartItem.productTag(
+          context.read<EligibilityBloc>().state.validateOutOfStockValue,
+        );
+
         return finalCartItem.inStock ||
                 finalCartItem.stockInfoList.isEmpty ||
                 state.isFetching ||
                 state.isFetchingCartProductDetail
             ? const SizedBox.shrink()
             : StatusLabel(
-                status: finalCartItem.productTag,
-                valueColor: finalCartItem.productTag.displayStatusTextColor,
+                status: statusType,
+                valueColor: statusType.displayStatusTextColor,
               );
       },
     );

@@ -89,7 +89,9 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
   Widget build(BuildContext context) {
     final addOosMaterials =
         context.read<SalesOrgBloc>().state.configs.addOosMaterials;
-    
+    final validateOutOfStockValue =
+        context.read<EligibilityBloc>().state.validateOutOfStockValue;
+
     return Row(
       key: WidgetKeys.bundleMaterialListItem,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +124,9 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
                       width: 5,
                     ),
                     StatusLabel(
-                      status: StatusType(addOosMaterials.oosMaterialTag),
+                      status: StatusType(
+                        addOosMaterials.productTag(validateOutOfStockValue),
+                      ),
                     ),
                   ],
                 ],
@@ -138,11 +142,8 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
                   key:
                       'bundle${widget.materialInfo.materialNumber.displayMatNo}${_controller.text}quantity',
                 ),
-                isEnabled: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .isOutOfStockMaterialAllowed ||
-                    widget.materialInfo.inStock,
+                isEnabled: widget.materialInfo.inStock ||
+                    (!widget.materialInfo.inStock && validateOutOfStockValue),
                 quantityAddKey: WidgetKeys.bundleInputAddKey,
                 quantityDeleteKey: WidgetKeys.bundleInputDeleteKey,
                 quantityTextKey: WidgetKeys.bundleQuantityTextKey,
@@ -263,51 +264,29 @@ class _BundleSheetFooter extends StatelessWidget {
                             PriceAggregate.empty();
 
                         return ElevatedButton(
-                          onPressed: state.totalCount <
-                                      state
-                                          .bundle
-                                          .bundle
-                                          .minimumQuantityBundleMaterial
-                                          .quantity ||
-                                  stateCart.isUpserting
-                              ? null
-                              : () {
-                                  context.read<CartBloc>().add(
-                                        CartEvent.upsertCartItems(
-                                          priceAggregate:
-                                              PriceAggregate.empty().copyWith(
-                                            bundle: Bundle.empty().copyWith(
-                                              materials:
-                                                  state.bundleMaterialsSelected
-                                                      .map(
-                                                        (e) => e.copyWith(
-                                                          quantity: e.quantity +
-                                                              (materialInCart
-                                                                      .bundle
-                                                                      .materials
-                                                                      .where(
-                                                                        (element) =>
-                                                                            element.materialNumber ==
-                                                                            e.materialNumber,
-                                                                      )
-                                                                      .firstOrNull
-                                                                      ?.quantity ??
-                                                                  0),
-                                                        ),
-                                                      )
-                                                      .toList(),
-                                              bundleCode: state
-                                                  .bundle.materialNumber
-                                                  .getValue(),
-                                              bundleName: BundleName(
-                                                state
-                                                    .bundle.materialDescription,
-                                              ),
-                                            ),
+                          onPressed: () {
+                            if (state.isBundleCountSatisfied &&
+                                !stateCart.isUpserting) {
+                              context.read<CartBloc>().add(
+                                    CartEvent.upsertCartItems(
+                                      priceAggregate:
+                                          PriceAggregate.empty().copyWith(
+                                        bundle: Bundle.empty().copyWith(
+                                          materials: state.selectedMaterialInfo(
+                                            materialInCart,
+                                          ),
+                                          bundleCode: state
+                                              .bundle.materialNumber
+                                              .getValue(),
+                                          bundleName: BundleName(
+                                            state.bundle.materialDescription,
                                           ),
                                         ),
-                                      );
-                                },
+                                      ),
+                                    ),
+                                  );
+                            }
+                          },
                           child: LoadingShimmer.withChild(
                             enabled: stateCart.isUpserting,
                             child: const Text('Add To Cart').tr(),

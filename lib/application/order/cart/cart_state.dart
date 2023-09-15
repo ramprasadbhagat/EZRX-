@@ -116,9 +116,11 @@ class CartState with _$CartState {
   double get grandTotal =>
       totalBundlePriceWithTax +
       cartProducts
-          .where((item) =>
-              !item.materialInfo.hidePrice &&
-              !item.materialInfo.type.typeBundle,)
+          .where(
+            (item) =>
+                !item.materialInfo.hidePrice &&
+                !item.materialInfo.type.typeBundle,
+          )
           .fold<double>(
             0,
             (sum, item) => sum + item.unitPriceTotal + taxMaterial,
@@ -127,9 +129,11 @@ class CartState with _$CartState {
   double get subTotal =>
       totalBundlesPrice +
       cartProducts
-          .where((item) =>
-              !item.materialInfo.hidePrice &&
-              !item.materialInfo.type.typeBundle,)
+          .where(
+            (item) =>
+                !item.materialInfo.hidePrice &&
+                !item.materialInfo.type.typeBundle,
+          )
           .fold<double>(
             0,
             (sum, item) => sum + item.finalPriceTotal,
@@ -156,8 +160,10 @@ class CartState with _$CartState {
   double get totalMaterialPriceWithTax => totalMaterialsPrice + taxMaterial;
 
   double get taxMaterial => cartProducts
-      .where((item) =>
-          !item.materialInfo.hidePrice && !item.materialInfo.type.typeBundle,)
+      .where(
+        (item) =>
+            !item.materialInfo.hidePrice && !item.materialInfo.type.typeBundle,
+      )
       .fold<double>(
         0,
         (sum, item) =>
