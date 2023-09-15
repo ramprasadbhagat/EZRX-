@@ -97,6 +97,7 @@ class ProductDetailDto with _$ProductDetailDto {
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         promoStatus: promoStatus,
         promoType: promoType,
+        sampleBonusItemId: '',
       );
 
   factory ProductDetailDto.fromJson(Map<String, dynamic> json) =>

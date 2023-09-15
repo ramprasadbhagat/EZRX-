@@ -1,4 +1,4 @@
-part of 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottomsheet.dart';
+part of 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 
 class _CounterOfferButtons extends StatelessWidget {
   final PriceAggregate cartItem;

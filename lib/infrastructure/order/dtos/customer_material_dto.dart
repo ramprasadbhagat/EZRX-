@@ -105,6 +105,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         promoStatus: false,
         promoType: '',
+        sampleBonusItemId: '',
       );
 
   factory CustomerMaterialDto.fromJson(Map<String, dynamic> json) =>

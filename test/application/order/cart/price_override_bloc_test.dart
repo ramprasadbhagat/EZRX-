@@ -50,12 +50,20 @@ void main() {
         ),
         act: (bloc) => bloc.add(
           PriceOverrideEvent.setProduct(
-            item: cartItems.first,
+            item: cartItems.first.copyWith(
+              materialInfo: cartItems.first.materialInfo.copyWith(
+                counterOfferDetails: RequestCounterOfferDetails.empty(),
+              ),
+            ),
           ),
         ),
         expect: () => [
           PriceOverrideState.initial().copyWith(
-            item: cartItems.first,
+            item: cartItems.first.copyWith(
+              materialInfo: cartItems.first.materialInfo.copyWith(
+                counterOfferDetails: RequestCounterOfferDetails.empty(),
+              ),
+            ),
           )
         ],
       );

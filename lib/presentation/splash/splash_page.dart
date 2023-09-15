@@ -247,7 +247,17 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.isUpserting != current.isUpserting,
           listener: (context, state) {
             state.apiFailureOrSuccessOption.fold(
-              () {},
+              () {
+                if (!state.isUpserting &&
+                    !context
+                        .read<EligibilityBloc>()
+                        .state
+                        .isBonusOverrideEnable) {
+                  context.read<CartBloc>().add(
+                        const CartEvent.removeSelectedProducts(),
+                      );
+                }
+              },
               (either) => either.fold(
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);

@@ -907,6 +907,49 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
+      removeSelectedProducts: (e) async {
+        if (state.cartProducts.isEmpty || !state.containsSampleBonus) return;
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isUpserting: true,
+          ),
+        );
+        final productList = state.cartProducts
+            .expand(
+              (item) => item.convertedSampleBonusList.map((e) => e).toList(),
+            )
+            .toList();
+
+        final failureOrSuccess = await repository.removeSelectedProducts(
+          salesOrganisation: state.salesOrganisation,
+          salesOrganisationConfig: state.config,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          language: state.config.languageValue.languageCode,
+          products: productList,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isUpserting: false,
+              ),
+            );
+          },
+          (products) {
+            emit(
+              state.copyWith(
+                cartProducts: products,
+                apiFailureOrSuccessOption: none(),
+                isUpserting: false,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 

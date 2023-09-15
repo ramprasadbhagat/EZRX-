@@ -1,4 +1,4 @@
-part of 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottomsheet.dart';
+part of 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 
 class _CounterOfferPriceTextField extends StatefulWidget {
   final bool isDiscountOverrideEnable;
@@ -41,7 +41,8 @@ class _CounterOfferPriceTextFieldState
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: BlocBuilder<PriceOverrideBloc, PriceOverrideState>(
         buildWhen: (previous, current) =>
-            previous.showErrorMessages != current.showErrorMessages,
+            previous.showErrorMessages != current.showErrorMessages ||
+            previous.isDiscountOverride != current.isDiscountOverride,
         builder: (context, state) {
           final currency = context.read<SalesOrgBloc>().state.configs.currency;
 
@@ -75,10 +76,7 @@ class _CounterOfferPriceTextFieldState
                       ),
                     );
               },
-              validator: (value) => context
-                          .read<PriceOverrideBloc>()
-                          .state
-                          .isDiscountOverride &&
+              validator: (value) => state.isDiscountOverride &&
                       _priceController.text.isEmpty
                   ? null
                   : CounterOfferValue(value ?? '').value.fold(

@@ -92,4 +92,13 @@ abstract class ICartRepository {
   });
 
   Future<Either<ApiFailure, List<PriceAggregate>>> getAddedToCartProductList();
+
+  Future<Either<ApiFailure, List<PriceAggregate>>> removeSelectedProducts({
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+    required List<MaterialInfo> products,
+  });
 }

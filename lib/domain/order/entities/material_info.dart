@@ -59,6 +59,7 @@ class MaterialInfo with _$MaterialInfo {
     required bool isFOCMaterial,
     required String ean,
     required RequestCounterOfferDetails counterOfferDetails,
+    required String sampleBonusItemId,
   }) = _MaterialInfo;
 
   factory MaterialInfo.empty() => MaterialInfo(
@@ -104,6 +105,7 @@ class MaterialInfo with _$MaterialInfo {
         counterOfferDetails: RequestCounterOfferDetails.empty(),
         promoStatus: false,
         promoType: '',
+        sampleBonusItemId: '',
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(

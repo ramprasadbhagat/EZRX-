@@ -187,6 +187,7 @@ class MaterialDto with _$MaterialDto {
       counterOfferDetails: RequestCounterOfferDetails.empty(),
       promoStatus: false,
       promoType: '',
+      sampleBonusItemId: '',
     );
   }
 

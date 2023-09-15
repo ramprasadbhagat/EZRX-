@@ -93,4 +93,6 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.updateProductStock({
     required List<PriceAggregate> products,
   }) = _UpdateProductStock;
+
+  const factory CartEvent.removeSelectedProducts() = _RemoveSelectedProducts;
 }

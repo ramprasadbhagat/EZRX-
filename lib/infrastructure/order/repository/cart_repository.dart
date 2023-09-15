@@ -593,4 +593,45 @@ class CartRepository implements ICartRepository {
       );
     }
   }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>> removeSelectedProducts({
+    required SalesOrganisation salesOrganisation,
+    required SalesOrganisationConfigs salesOrganisationConfig,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+    required List<MaterialInfo> products,
+  }) async {
+    try {
+      final productList = <PriceAggregate>[];
+
+      await Future.wait(
+        products.map((product) async {
+          final cartProducts = await upsertCart(
+            materialInfo: product,
+            salesOrganisation: salesOrganisation,
+            salesOrganisationConfig: salesOrganisationConfig,
+            customerCodeInfo: customerCodeInfo,
+            shipToInfo: shipToInfo,
+            language: language,
+            itemId: product.sampleBonusItemId,
+            quantity: product.quantity,
+            counterOfferDetails: product.counterOfferDetails,
+          );
+
+          cartProducts.fold((l) => {}, (r) {
+            productList.clear();
+            productList.addAll(r);
+          });
+        }),
+      );
+
+      return Right(productList);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
 }

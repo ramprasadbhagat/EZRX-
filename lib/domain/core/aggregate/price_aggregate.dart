@@ -590,6 +590,19 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get showTaxBreakDown =>
       salesOrgConfig.displayItemTaxBreakdown && !materialInfo.hidePrice;
+
+  List<MaterialInfo> get convertedSampleBonusList {
+    return bonusSampleItems
+        .map(
+          (e) => MaterialInfo.empty().copyWith(
+            materialNumber: e.materialNumber,
+            parentID: materialInfo.materialNumber.getValue(),
+            quantity: 0,
+            sampleBonusItemId: bonusMaterialItemId(e.materialNumber).getValue(),
+          ),
+        )
+        .toList();
+  }
 }
 
 enum PriceType {

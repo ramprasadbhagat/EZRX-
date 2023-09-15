@@ -19,15 +19,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'request_counter_offer_widgets/discount_override_section.dart';
-part 'request_counter_offer_widgets/price_override_section.dart';
+part 'request_counter_offer_widgets/counter_offer_discount_text_field.dart';
+part 'request_counter_offer_widgets/counter_offer_price_text_field.dart';
 part 'request_counter_offer_widgets/counter_offer_buttons.dart';
-part 'request_counter_offer_widgets/remarks_section.dart';
-part 'request_counter_offer_widgets/discounted_price_section.dart';
+part 'request_counter_offer_widgets/counter_offer_remarks_text_field.dart';
+part 'request_counter_offer_widgets/counter_offer_discounted_price_field.dart';
 
-class RequestCounterOfferSheet extends StatelessWidget {
+class RequestCounterOfferBottomSheet extends StatelessWidget {
   final PriceAggregate cartItem;
-  const RequestCounterOfferSheet({
+  const RequestCounterOfferBottomSheet({
     Key? key,
     required this.cartItem,
   }) : super(key: key);
@@ -140,20 +140,21 @@ class RequestCounterOfferSheet extends StatelessWidget {
                 if (isPriceOverrideEnable)
                   _CounterOfferPriceTextField(
                     isDiscountOverrideEnable: isDiscountOverrideEnable,
-                    cartItem: cartItem,
+                    cartItem: state.item,
                   ),
                 if (isDiscountOverrideEnable)
                   _CounterOfferDiscountTextField(
-                    cartItem: cartItem,
+                    cartItem: state.item,
+                    isPriceOverrideEnable: isPriceOverrideEnable,
                   ),
-                const _DiscountedPriceField(),
+                const _CounterOfferDiscountedPriceField(),
                 const Divider(
                   indent: 0,
                   endIndent: 0,
                   color: ZPColors.extraLightGrey3,
                 ),
                 _CounterOfferRemarksTextField(
-                  remarks: cartItem.materialInfo.counterOfferDetails.comment
+                  remarks: state.item.materialInfo.counterOfferDetails.comment
                       .getOrDefaultValue(''),
                 ),
                 if (state.showErrorMessages &&

@@ -32,7 +32,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
-import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottomsheet.dart';
+import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -514,7 +514,7 @@ void main() {
         getWidget(
           Scaffold(
             appBar: null,
-            body: RequestCounterOfferSheet(
+            body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
@@ -654,7 +654,7 @@ void main() {
         getWidget(
           Scaffold(
             appBar: null,
-            body: RequestCounterOfferSheet(
+            body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
@@ -765,7 +765,7 @@ void main() {
         getWidget(
           Scaffold(
             appBar: null,
-            body: RequestCounterOfferSheet(
+            body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
@@ -874,7 +874,7 @@ void main() {
         getWidget(
           Scaffold(
             appBar: null,
-            body: RequestCounterOfferSheet(
+            body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
@@ -989,7 +989,7 @@ void main() {
         getWidget(
           Scaffold(
             appBar: null,
-            body: RequestCounterOfferSheet(
+            body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
@@ -1077,7 +1077,7 @@ void main() {
         getWidget(
           Scaffold(
             appBar: null,
-            body: RequestCounterOfferSheet(
+            body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
@@ -1143,7 +1143,7 @@ void main() {
         getWidget(
           Scaffold(
             appBar: null,
-            body: RequestCounterOfferSheet(
+            body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
@@ -1202,7 +1202,7 @@ void main() {
         getWidget(
           Scaffold(
             appBar: null,
-            body: RequestCounterOfferSheet(
+            body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),

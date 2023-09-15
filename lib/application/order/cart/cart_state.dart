@@ -64,6 +64,9 @@ class CartState with _$CartState {
   bool get containNonSampleMaterial =>
       cartProducts.any((element) => !element.materialInfo.isSampleMaterial);
 
+  bool get containsSampleBonus =>
+      cartProducts.any((element) => element.bonusSampleItems.isNotEmpty);
+
   bool get containNonRegularMaterial => cartProducts.any(
         (element) =>
             !element.materialInfo.isFOCMaterial ||
