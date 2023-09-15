@@ -1,0 +1,40 @@
+{
+  "data":{
+    "addCustomerPayment":{
+      "paymentID":"2       30",
+      "valueDate":"2023-09-11",
+      "paymentAmount":0.01,
+      "transactionCurrency":"PHP",
+      "paymentDocument":"",
+      "invoiceProcessingStatus":"In Progress",
+      "paymentMethod":"Payment Gateway",
+      "iban":"",
+      "bankIdentification":"",
+      "bankCountryKey":"",
+      "bankKey":"",
+      "bankAccountNumber":"",
+      "bankName":"",
+      "paymentCardID":"",
+      "paymentCardNumber":"",
+      "paymentCardHolderName":"",
+      "paymentCardMaskedNumber":"",
+      "paymentCardTypeName":"",
+      "extensibilityCustomField":"{\"paymentBatchAdditionalInfo\":[{\"businessContext\":\"Y\",\"label\":\"Omni Channel\",\"value\":\"\\u003chtml:script language=\\\"javascript\\\"\\u003e$(document).ready(function(){$(\\\"#btn_submit\\\").click(function (){var win=window.open(\\\"https://ubotpsentry-tst1.outsystemsenterprise.com/UPAY/WhiteLabel/73352865-5C06-AB2A-16A0-7E63A173AD0B?s=av6aZa%2FjQwXKlMgZfEH8SA%3D%3D301D6e3uZggts9ZP%2F9S3KBob6RXTmYaRUrVdYZUKIJJjG7VoTXuJB3MZwPhB959LJ1zl9lyiKF0W%2FzAFB%2F0HG4SggqaltMbxoJGt8yRPl%2FvrDXWG4uk4duuOQRz6nu%2Bp%2FB0H%2FobcSH3zloSprouSFgEWYpk35apgrKULbSU6z6RNs1kzhJiMZQYniPyeEqaW8jDIv0RMc%2B0QCoqhcn4K1pQIfJUc8fvkt5zFqhTR98WrIBNp8JbNd5ZgwzhDkIcaEZzETpQznMR7gMfMdI21Ne3jKN09AVYF8KHfEZPaoLJQVoxPGWJmbbFHy1XoMKFDZAaq6QIbP7oxjwPNpTtDo7Wt8i7tWH%2BSGxiAorupbw9Jc1q4%2FEyM8ZszBZswVrefrfbT2mD%2BuB50pJNCdRVi%2FiCr3w8TTIycukctN2uziqw%3D\\\" ,\\\"_blank\\\" );})})\\u003c/html:script\\u003e\\u003chtml:button type=\\\"button\\\" onlick=\\\"butonClick\\\" id=\\\"btn_submit\\\"\\u003eOpen Payment Gateway\\u003c/html:button\\u003e\",\"technicalName\":\"ZZHTMCS\"},{\"businessContext\":\"Z\",\"label\":\"QR Code\",\"value\":\"\",\"technicalName\":\"Z_CCP_PAYMENT_QRCODE\"},{\"businessContext\":\"Payment\",\"label\":\"QR Code\",\"value\":\"\",\"technicalName\":\"Z_CCP_PAYMENT_QRCODE\"},{\"businessContext\":\"Payment\",\"label\":\"Payment Advice Number\",\"value\":\"09EZ230001026601\",\"technicalName\":\"ZZADVICE\"}]}",
+      "customId":null,
+      "tmpPaytByDigitalPaytService":null,
+      "payerByPaymentServiceProvider":null,
+      "paymentRefByPaytSrvcProvider":"",
+      "paymentServiceProvider":"",
+      "transactionStatus":null,
+      "customerInvoice":null,
+      "paymentCardData":null,
+      "paytCardVerificatDetResultText":null,
+      "disputeCaseInformationText":null,
+      "userName":null,
+      "paymentBatchAdditionalInfo":"23C32AE74078514",
+      "accountingDocExternalReference":"250020131030126639001SD 1030126639",
+      "zCcpPaymentQRCode":"",
+      "zzHtmcs":"\u003chtml:script language=\"javascript\"\u003e$(document).ready(function(){$(\"#btn_submit\").click(function (){var win=window.open(\"https://ubotpsentry-tst1.outsystemsenterprise.com/UPAY/WhiteLabel/73352865-5C06-AB2A-16A0-7E63A173AD0B?s=av6aZa%2FjQwXKlMgZfEH8SA%3D%3D301D6e3uZggts9ZP%2F9S3KBob6RXTmYaRUrVdYZUKIJJjG7VoTXuJB3MZwPhB959LJ1zl9lyiKF0W%2FzAFB%2F0HG4SggqaltMbxoJGt8yRPl%2FvrDXWG4uk4duuOQRz6nu%2Bp%2FB0H%2FobcSH3zloSprouSFgEWYpk35apgrKULbSU6z6RNs1kzhJiMZQYniPyeEqaW8jDIv0RMc%2B0QCoqhcn4K1pQIfJUc8fvkt5zFqhTR98WrIBNp8JbNd5ZgwzhDkIcaEZzETpQznMR7gMfMdI21Ne3jKN09AVYF8KHfEZPaoLJQVoxPGWJmbbFHy1XoMKFDZAaq6QIbP7oxjwPNpTtDo7Wt8i7tWH%2BSGxiAorupbw9Jc1q4%2FEyM8ZszBZswVrefrfbT2mD%2BuB50pJNCdRVi%2FiCr3w8TTIycukctN2uziqw%3D\" ,\"_blank\" );})})\u003c/html:script\u003e\u003chtml:button type=\"button\" onlick=\"butonClick\" id=\"btn_submit\"\u003eOpen Payment Gateway\u003c/html:button\u003e"
+    }
+  }
+}

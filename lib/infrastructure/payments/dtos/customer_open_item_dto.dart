@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -51,6 +52,8 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
     @JsonKey(name: 'paymentAmountInDisplayCrcy', defaultValue: 0)
         required double paymentAmountInDisplayCrcy,
     @JsonKey(name: 'companyCode', defaultValue: '') required String companyCode,
+    @JsonKey(name: 'openAmountInTransCrcy', defaultValue: 0)
+        required double openAmountInTransCrcy,
   }) = _CustomerOpenItemDto;
 
   CustomerOpenItem toDomain() {
@@ -62,7 +65,7 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
       netDueDate: DateTimeStringValue(netDueDate),
       documentDate: DateTimeStringValue(documentDate),
       documentReferenceID: documentReferenceID,
-      transactionCurrency: transactionCurrency,
+      transactionCurrency: Currency(transactionCurrency),
       accountingDocExternalReference: accountingDocExternalReference,
       bpCustomerNumber: bpCustomerNumber,
       debitCreditCode: debitCreditCode,
@@ -79,13 +82,14 @@ class CustomerOpenItemDto with _$CustomerOpenItemDto {
       paymentAmountInDisplayCrcy: paymentAmountInDisplayCrcy,
       companyCode: companyCode,
       g2Tax: double.tryParse(
-            (openAmountInDisplayCrcy * 5 / 100).toStringAsFixed(2),
+            (openAmountInTransCrcy * 5 / 100).toStringAsFixed(2),
           ) ??
           0,
       g4Tax: double.tryParse(
-            (openAmountInDisplayCrcy * 1 / 100).toStringAsFixed(2),
+            (openAmountInTransCrcy * 1 / 100).toStringAsFixed(2),
           ) ??
           0,
+      openAmountInTransCrcy: openAmountInTransCrcy,
     );
   }
 

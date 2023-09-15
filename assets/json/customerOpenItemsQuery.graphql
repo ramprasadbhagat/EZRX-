@@ -1,62 +1,60 @@
 query customerOpenItems($request: customerOpenItemsRequest!) {
-  customerOpenItems(request: $request) {
-    total
-    customerOpenItemsResponse {
-        status
-        accountingDocument
-        netDueDate
-        amountInTransactionCurrency
-        documentReferenceID
-        postingKeyName
+    customerOpenItems(request: $request) {
+        total
+        customerOpenItemsResponse {
+            status
+            accountingDocument
+            netDueDate
+            documentDate
+            amountInTransactionCurrency
+            documentReferenceID
+            postingKeyName
+            transactionCurrency
+            accountingDocExternalReference
+            bpCustomerNumber
+            debitCreditCode
+            cashDiscountAmountInDspCrcy
+            cashDiscountDueDate
+            totalAmountInDisplayCrcy
+            displayCurrency
+            openAmountInDisplayCrcy
+            fiscalYear
+            isDisputed
+            accountingDocumentItem
+            accountingDocumentItemRef
+            partialPaymentHistoryDesc
+            paymentAmountInDisplayCrcy
+            companyCode
+            openAmountInTransCrcy
+        }
     }
-  }
 }
 
-variables: {
+"variables": {
     "request": {
-        "customerCode": "0000100120",
-        "salesOrg": "2001",
-        "debitCreditType": "debit",
-        "first": 10,
-        "after": 0,
-        "orderBy": {
-            "order": "desc",
-            "field": "netDueDate"
+        "customerCode":"0030082707",
+        "salesOrg":"2001",
+        "debitCreditType":"debit",
+        "first":24,
+        "after":0,
+        "orderBy":{
+            "order":"desc",
+            "field":"netDueDate"
         },
-        "filterBy": [
+        "filterBy":[
             {
-                "field": "documentDate",
-                "value": "2023-05-19",
-                "type": "ge"
+                "field":"documentDate",
+                "value":"2023-06-01",
+                "type":"ge"
             },
             {
-                "field": "documentDate",
-                "value": "2023-06-27",
-                "type": "le"
+                "field":"documentDate",
+                "value":"2023-06-30",
+                "type":"le"
             },
             {
-                "field": "netDueDate",
-                "value": "2023-06-14",
-                "type": "ge"
-            },
-            {
-                "field": "netDueDate",
-                "value": "2023-06-21",
-                "type": "le"
-            },
-            {
-                "field": "amountInTransactionCurrency",
-                "value": "1.00",
-                "type": "ge"
-            },
-            {
-                "field": "amountInTransactionCurrency",
-                "value": "10.00",
-                "type": "le"
-            },
-            {
-                "field": "status",
-                "value": "Open,Overdue"
+                "field":"debitCreditCode",
+                "value":"S"
             }
         ]
     }

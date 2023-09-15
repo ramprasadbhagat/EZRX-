@@ -25,12 +25,32 @@ class NewPaymentLocalDataSource {
     return result;
   }
 
-  Future<PaymentInfo> pay() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/payResponse.json',
-      ),
-    );
+  Future<PaymentInfo> pay({required String currentMarket}) async {
+    var data = {};
+    switch (currentMarket) {
+      case 'PH':
+        data = json.decode(
+          await rootBundle.loadString(
+            'assets/json/payResponsePH.json',
+          ),
+        );
+        break;
+      case 'MY':
+        data = json.decode(
+          await rootBundle.loadString(
+            'assets/json/payResponseMY.json',
+          ),
+        );
+        break;
+      case 'VN':
+      default:
+        data = json.decode(
+          await rootBundle.loadString(
+            'assets/json/payResponseVN.json',
+          ),
+        );
+        break;
+    }
 
     return data['data']['addCustomerPayment'];
   }

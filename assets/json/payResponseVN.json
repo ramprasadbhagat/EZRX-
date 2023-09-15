@@ -1,0 +1,40 @@
+{
+  "data":{
+    "addCustomerPayment":{
+      "paymentID":"2        1",
+      "valueDate":"2023-09-11",
+      "paymentAmount":1.44336e+07,
+      "transactionCurrency":"VND",
+      "paymentDocument":"",
+      "invoiceProcessingStatus":"In Progress",
+      "paymentMethod":"Payment Gateway",
+      "iban":"",
+      "bankIdentification":"",
+      "bankCountryKey":"",
+      "bankKey":"",
+      "bankAccountNumber":"",
+      "bankName":"",
+      "paymentCardID":"",
+      "paymentCardNumber":"",
+      "paymentCardHolderName":"",
+      "paymentCardMaskedNumber":"",
+      "paymentCardTypeName":"",
+      "extensibilityCustomField":"{\"paymentBatchAdditionalInfo\":[{\"businessContext\":\"Y\",\"label\":\"Omni Channel\",\"value\":\"\\u003chtml:script language=\\\"javascript\\\"\\u003e$(document).ready(function(){$(\\\"#btn_submit\\\").click(function (){var win=window.open(\\\"https://newsandbox.payoo.com.vn/v2/paynow/prepare?_token=1gNzvdkA1FE\\\" ,\\\"_blank\\\" );})})\\u003c/html:script\\u003e\\u003chtml:button type=\\\"button\\\" onlick=\\\"butonClick\\\" id=\\\"btn_submit\\\"\\u003eOpen Payment Gateway\\u003c/html:button\\u003e\",\"technicalName\":\"ZZHTMCS\"},{\"businessContext\":\"Z\",\"label\":\"QR Code\",\"value\":\"\",\"technicalName\":\"Z_CCP_PAYMENT_QRCODE\"},{\"businessContext\":\"Payment\",\"label\":\"QR Code\",\"value\":\"\",\"technicalName\":\"Z_CCP_PAYMENT_QRCODE\"},{\"businessContext\":\"Payment\",\"label\":\"Payment Advice Number\",\"value\":\"09EZ230001026701\",\"technicalName\":\"ZZADVICE\"}]}",
+      "customId":null,
+      "tmpPaytByDigitalPaytService":null,
+      "payerByPaymentServiceProvider":null,
+      "paymentRefByPaytSrvcProvider":"",
+      "paymentServiceProvider":"",
+      "transactionStatus":null,
+      "customerInvoice":null,
+      "paymentCardData":null,
+      "paytCardVerificatDetResultText":null,
+      "disputeCaseInformationText":null,
+      "userName":null,
+      "paymentBatchAdditionalInfo":"23C32AFAFA8363A",
+      "accountingDocExternalReference":"307020181220018918001SD 1220018918",
+      "zCcpPaymentQRCode":"",
+      "zzHtmcs":"\u003chtml:script language=\"javascript\"\u003e$(document).ready(function(){$(\"#btn_submit\").click(function (){var win=window.open(\"https://newsandbox.payoo.com.vn/v2/paynow/prepare?_token=1gNzvdkA1FE\" ,\"_blank\" );})})\u003c/html:script\u003e\u003chtml:button type=\"button\" onlick=\"butonClick\" id=\"btn_submit\"\u003eOpen Payment Gateway\u003c/html:button\u003e"
+    }
+  }
+}

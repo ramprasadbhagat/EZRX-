@@ -126,10 +126,12 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
         );
       },
       updatePaymentGateway: (_UpdatePaymentGateway e) async {
-        await newPaymentRepository.updatePaymentGateway(
-          salesOrganisation: e.salesOrganisation,
-          uri: e.paymentUrl,
-        );
+        if (e.salesOrganisation.salesOrg.needUpdatePaymentGateway) {
+          await newPaymentRepository.updatePaymentGateway(
+            salesOrganisation: e.salesOrganisation,
+            uri: e.paymentUrl,
+          );
+        }
       },
       fetchInvoiceInfoPdf: (_FetchInvoiceInfoPdf e) async {
         emit(

@@ -55,6 +55,9 @@ mixin _$CustomerInvoiceDto {
   String get paymentAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'salesOrg', defaultValue: '')
   String get salesOrg => throw _privateConstructorUsedError;
+  @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
+  List<PaymentDeductionDto> get zzDeductCode =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -91,7 +94,9 @@ abstract class $CustomerInvoiceDtoCopyWith<$Res> {
       @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
       String partialPaymentHistoryDesc,
       @JsonKey(name: 'paymentAmount', defaultValue: '') String paymentAmount,
-      @JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg});
+      @JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+      @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
+      List<PaymentDeductionDto> zzDeductCode});
 }
 
 /// @nodoc
@@ -124,6 +129,7 @@ class _$CustomerInvoiceDtoCopyWithImpl<$Res, $Val extends CustomerInvoiceDto>
     Object? partialPaymentHistoryDesc = null,
     Object? paymentAmount = null,
     Object? salesOrg = null,
+    Object? zzDeductCode = null,
   }) {
     return _then(_value.copyWith(
       accountingDocExternalReference: null == accountingDocExternalReference
@@ -194,6 +200,10 @@ class _$CustomerInvoiceDtoCopyWithImpl<$Res, $Val extends CustomerInvoiceDto>
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
+      zzDeductCode: null == zzDeductCode
+          ? _value.zzDeductCode
+          : zzDeductCode // ignore: cast_nullable_to_non_nullable
+              as List<PaymentDeductionDto>,
     ) as $Val);
   }
 }
@@ -229,7 +239,9 @@ abstract class _$$_CustomerInvoiceDtoCopyWith<$Res>
       @JsonKey(name: 'partialPaymentHistoryDesc', defaultValue: '')
       String partialPaymentHistoryDesc,
       @JsonKey(name: 'paymentAmount', defaultValue: '') String paymentAmount,
-      @JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg});
+      @JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
+      @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
+      List<PaymentDeductionDto> zzDeductCode});
 }
 
 /// @nodoc
@@ -260,6 +272,7 @@ class __$$_CustomerInvoiceDtoCopyWithImpl<$Res>
     Object? partialPaymentHistoryDesc = null,
     Object? paymentAmount = null,
     Object? salesOrg = null,
+    Object? zzDeductCode = null,
   }) {
     return _then(_$_CustomerInvoiceDto(
       accountingDocExternalReference: null == accountingDocExternalReference
@@ -330,6 +343,10 @@ class __$$_CustomerInvoiceDtoCopyWithImpl<$Res>
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as String,
+      zzDeductCode: null == zzDeductCode
+          ? _value._zzDeductCode
+          : zzDeductCode // ignore: cast_nullable_to_non_nullable
+              as List<PaymentDeductionDto>,
     ));
   }
 }
@@ -365,8 +382,11 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
       required this.partialPaymentHistoryDesc,
       @JsonKey(name: 'paymentAmount', defaultValue: '')
       required this.paymentAmount,
-      @JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg})
-      : super._();
+      @JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
+      @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
+      required final List<PaymentDeductionDto> zzDeductCode})
+      : _zzDeductCode = zzDeductCode,
+        super._();
 
   factory _$_CustomerInvoiceDto.fromJson(Map<String, dynamic> json) =>
       _$$_CustomerInvoiceDtoFromJson(json);
@@ -422,10 +442,18 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
   final String salesOrg;
+  final List<PaymentDeductionDto> _zzDeductCode;
+  @override
+  @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
+  List<PaymentDeductionDto> get zzDeductCode {
+    if (_zzDeductCode is EqualUnmodifiableListView) return _zzDeductCode;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_zzDeductCode);
+  }
 
   @override
   String toString() {
-    return 'CustomerInvoiceDto(accountingDocExternalReference: $accountingDocExternalReference, accountingDocument: $accountingDocument, bpCustomerNumber: $bpCustomerNumber, debitCreditFlag: $debitCreditFlag, discountAmount: $discountAmount, discountDate: $discountDate, displayAmount: $displayAmount, displayCurrency: $displayCurrency, displayOpenAmount: $displayOpenAmount, dueDate: $dueDate, fiscalYear: $fiscalYear, isDisputed: $isDisputed, lineItemNumber: $lineItemNumber, lineNumber: $lineNumber, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmount: $paymentAmount, salesOrg: $salesOrg)';
+    return 'CustomerInvoiceDto(accountingDocExternalReference: $accountingDocExternalReference, accountingDocument: $accountingDocument, bpCustomerNumber: $bpCustomerNumber, debitCreditFlag: $debitCreditFlag, discountAmount: $discountAmount, discountDate: $discountDate, displayAmount: $displayAmount, displayCurrency: $displayCurrency, displayOpenAmount: $displayOpenAmount, dueDate: $dueDate, fiscalYear: $fiscalYear, isDisputed: $isDisputed, lineItemNumber: $lineItemNumber, lineNumber: $lineNumber, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmount: $paymentAmount, salesOrg: $salesOrg, zzDeductCode: $zzDeductCode)';
   }
 
   @override
@@ -468,7 +496,9 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
             (identical(other.paymentAmount, paymentAmount) ||
                 other.paymentAmount == paymentAmount) &&
             (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg));
+                other.salesOrg == salesOrg) &&
+            const DeepCollectionEquality()
+                .equals(other._zzDeductCode, _zzDeductCode));
   }
 
   @JsonKey(ignore: true)
@@ -491,7 +521,8 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
       lineNumber,
       partialPaymentHistoryDesc,
       paymentAmount,
-      salesOrg);
+      salesOrg,
+      const DeepCollectionEquality().hash(_zzDeductCode));
 
   @JsonKey(ignore: true)
   @override
@@ -541,7 +572,10 @@ abstract class _CustomerInvoiceDto extends CustomerInvoiceDto {
       @JsonKey(name: 'paymentAmount', defaultValue: '')
       required final String paymentAmount,
       @JsonKey(name: 'salesOrg', defaultValue: '')
-      required final String salesOrg}) = _$_CustomerInvoiceDto;
+      required final String salesOrg,
+      @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
+      required final List<PaymentDeductionDto>
+          zzDeductCode}) = _$_CustomerInvoiceDto;
   const _CustomerInvoiceDto._() : super._();
 
   factory _CustomerInvoiceDto.fromJson(Map<String, dynamic> json) =
@@ -599,7 +633,190 @@ abstract class _CustomerInvoiceDto extends CustomerInvoiceDto {
   @JsonKey(name: 'salesOrg', defaultValue: '')
   String get salesOrg;
   @override
+  @JsonKey(name: 'zzDeductCode', defaultValue: <PaymentDeductionDto>[])
+  List<PaymentDeductionDto> get zzDeductCode;
+  @override
   @JsonKey(ignore: true)
   _$$_CustomerInvoiceDtoCopyWith<_$_CustomerInvoiceDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+PaymentDeductionDto _$PaymentDeductionDtoFromJson(Map<String, dynamic> json) {
+  return _PaymentDeductionDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PaymentDeductionDto {
+  @JsonKey(name: 'deductCode', defaultValue: '')
+  String get deductCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
+  double get amountInTransactionCurrency => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PaymentDeductionDtoCopyWith<PaymentDeductionDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PaymentDeductionDtoCopyWith<$Res> {
+  factory $PaymentDeductionDtoCopyWith(
+          PaymentDeductionDto value, $Res Function(PaymentDeductionDto) then) =
+      _$PaymentDeductionDtoCopyWithImpl<$Res, PaymentDeductionDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'deductCode', defaultValue: '') String deductCode,
+      @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
+      double amountInTransactionCurrency});
+}
+
+/// @nodoc
+class _$PaymentDeductionDtoCopyWithImpl<$Res, $Val extends PaymentDeductionDto>
+    implements $PaymentDeductionDtoCopyWith<$Res> {
+  _$PaymentDeductionDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? deductCode = null,
+    Object? amountInTransactionCurrency = null,
+  }) {
+    return _then(_value.copyWith(
+      deductCode: null == deductCode
+          ? _value.deductCode
+          : deductCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      amountInTransactionCurrency: null == amountInTransactionCurrency
+          ? _value.amountInTransactionCurrency
+          : amountInTransactionCurrency // ignore: cast_nullable_to_non_nullable
+              as double,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_PaymentDeductionDtoCopyWith<$Res>
+    implements $PaymentDeductionDtoCopyWith<$Res> {
+  factory _$$_PaymentDeductionDtoCopyWith(_$_PaymentDeductionDto value,
+          $Res Function(_$_PaymentDeductionDto) then) =
+      __$$_PaymentDeductionDtoCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'deductCode', defaultValue: '') String deductCode,
+      @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
+      double amountInTransactionCurrency});
+}
+
+/// @nodoc
+class __$$_PaymentDeductionDtoCopyWithImpl<$Res>
+    extends _$PaymentDeductionDtoCopyWithImpl<$Res, _$_PaymentDeductionDto>
+    implements _$$_PaymentDeductionDtoCopyWith<$Res> {
+  __$$_PaymentDeductionDtoCopyWithImpl(_$_PaymentDeductionDto _value,
+      $Res Function(_$_PaymentDeductionDto) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? deductCode = null,
+    Object? amountInTransactionCurrency = null,
+  }) {
+    return _then(_$_PaymentDeductionDto(
+      deductCode: null == deductCode
+          ? _value.deductCode
+          : deductCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      amountInTransactionCurrency: null == amountInTransactionCurrency
+          ? _value.amountInTransactionCurrency
+          : amountInTransactionCurrency // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PaymentDeductionDto extends _PaymentDeductionDto {
+  const _$_PaymentDeductionDto(
+      {@JsonKey(name: 'deductCode', defaultValue: '') required this.deductCode,
+      @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
+      required this.amountInTransactionCurrency})
+      : super._();
+
+  factory _$_PaymentDeductionDto.fromJson(Map<String, dynamic> json) =>
+      _$$_PaymentDeductionDtoFromJson(json);
+
+  @override
+  @JsonKey(name: 'deductCode', defaultValue: '')
+  final String deductCode;
+  @override
+  @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
+  final double amountInTransactionCurrency;
+
+  @override
+  String toString() {
+    return 'PaymentDeductionDto(deductCode: $deductCode, amountInTransactionCurrency: $amountInTransactionCurrency)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PaymentDeductionDto &&
+            (identical(other.deductCode, deductCode) ||
+                other.deductCode == deductCode) &&
+            (identical(other.amountInTransactionCurrency,
+                    amountInTransactionCurrency) ||
+                other.amountInTransactionCurrency ==
+                    amountInTransactionCurrency));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, deductCode, amountInTransactionCurrency);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PaymentDeductionDtoCopyWith<_$_PaymentDeductionDto> get copyWith =>
+      __$$_PaymentDeductionDtoCopyWithImpl<_$_PaymentDeductionDto>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PaymentDeductionDtoToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PaymentDeductionDto extends PaymentDeductionDto {
+  const factory _PaymentDeductionDto(
+          {@JsonKey(name: 'deductCode', defaultValue: '')
+          required final String deductCode,
+          @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
+          required final double amountInTransactionCurrency}) =
+      _$_PaymentDeductionDto;
+  const _PaymentDeductionDto._() : super._();
+
+  factory _PaymentDeductionDto.fromJson(Map<String, dynamic> json) =
+      _$_PaymentDeductionDto.fromJson;
+
+  @override
+  @JsonKey(name: 'deductCode', defaultValue: '')
+  String get deductCode;
+  @override
+  @JsonKey(name: 'amountInTransactionCurrency', defaultValue: 0)
+  double get amountInTransactionCurrency;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PaymentDeductionDtoCopyWith<_$_PaymentDeductionDto> get copyWith =>
       throw _privateConstructorUsedError;
 }

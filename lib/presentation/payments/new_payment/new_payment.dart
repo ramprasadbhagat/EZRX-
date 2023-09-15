@@ -67,18 +67,47 @@ class NewPaymentPage extends StatelessWidget {
                     () async {
                       await context.router
                           .pushNamed('payments/payments_webview')
-                          .then((value) {
-                        context.read<NewPaymentBloc>().add(
-                              NewPaymentEvent.updatePaymentGateway(
-                                salesOrganisation: context
-                                    .read<SalesOrgBloc>()
-                                    .state
-                                    .salesOrganisation,
-                                paymentUrl: value as Uri,
-                              ),
+                          .then((uri) {
+                        /// * Document: https://zuelligpharma.atlassian.net/wiki/spaces/EZRX/pages/293306636/MB+-+UPDATE+PAYMENT+GATEWAY+LOGIC
+                        /// If payment is successful (Received redirect url with
+                        /// path payment/thank-you): Update payment gateway,
+                        /// back to the payment overview page and navigate to
+                        /// the payment advice created page
+                        if (uri != null) {
+                          context.read<NewPaymentBloc>().add(
+                                NewPaymentEvent.updatePaymentGateway(
+                                  salesOrganisation: context
+                                      .read<SalesOrgBloc>()
+                                      .state
+                                      .salesOrganisation,
+                                  paymentUrl: uri as Uri,
+                                ),
+                              );
+                          context.router.pushAndPopUntil(
+                            const PaymentAdviceCreatedPageRoute(),
+                            predicate: (Route route) =>
+                                route.settings.name == PaymentPageRoute.name,
+                          );
+                        } else {
+                          /// If payment is fails (No received redirect url with
+                          /// path payment/thank-you):
+                          /// * If on TH market: Back to the payment overview
+                          /// page and navigate to the payment advice created page
+                          /// * If on other market: Back to the payment overview page
+                          if (context
+                              .read<SalesOrgBloc>()
+                              .state
+                              .salesOrg
+                              .isTH) {
+                            context.router.pushAndPopUntil(
+                              const PaymentAdviceCreatedPageRoute(),
+                              predicate: (Route route) =>
+                                  route.settings.name == PaymentPageRoute.name,
                             );
-                        context.router
-                            .pushNamed('payments/payment_advice_created');
+                          } else {
+                            context.router.popUntilRouteWithPath('payments');
+                          }
+                        }
                       });
                     },
                     (either) => either.fold(
@@ -306,6 +335,7 @@ class _PreviousButton extends StatelessWidget {
 class _NextButton extends StatelessWidget {
   final TabController tabController;
   final bool enabled;
+
   const _NextButton({
     Key? key,
     required this.tabController,
@@ -335,6 +365,7 @@ class _NextButton extends StatelessWidget {
 
 class _CheckAllCreditsWidget extends StatelessWidget {
   final List<CustomerOpenItem> selectedCredits;
+
   const _CheckAllCreditsWidget({
     Key? key,
     required this.selectedCredits,
@@ -361,6 +392,7 @@ class _CheckAllCreditsWidget extends StatelessWidget {
 
 class _CheckAllInvoicesWidget extends StatelessWidget {
   final List<CustomerOpenItem> selectedInvoices;
+
   const _CheckAllInvoicesWidget({
     Key? key,
     required this.selectedInvoices,
@@ -388,6 +420,7 @@ class _CheckAllInvoicesWidget extends StatelessWidget {
 class _CheckAllWidget extends StatelessWidget {
   final bool value;
   final ValueChanged<bool?> onChanged;
+
   const _CheckAllWidget({
     Key? key,
     required this.value,
@@ -424,6 +457,7 @@ class _PriceText extends StatelessWidget {
   final String data;
   final String title;
   final SalesOrganisationConfigs salesOrgConfig;
+
   const _PriceText({
     Key? key,
     required this.data,

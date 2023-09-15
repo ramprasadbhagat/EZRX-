@@ -28,6 +28,7 @@ class NewPaymentQuery {
           partialPaymentHistoryDesc
           paymentAmountInDisplayCrcy
           companyCode
+          openAmountInTransCrcy
         }
       }
     }

@@ -19,7 +19,7 @@ void main() {
     newPaymentRepository = NewPaymentRepositoryMock();
     deviceRepository = DeviceRepositoryMock();
     customerOpenItem = CustomerOpenItem.empty().copyWith(
-      amountInTransactionCurrency: 100,
+      openAmountInTransCrcy: 100,
     );
   });
 
@@ -167,7 +167,7 @@ void main() {
         verify: (NewPaymentBloc bloc) {
           expect(
             bloc.state.amountTotal,
-            customerOpenItem.amountInTransactionCurrency * 2,
+            customerOpenItem.openAmountInTransCrcy * 2,
           );
         },
       );

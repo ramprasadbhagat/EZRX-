@@ -86,6 +86,8 @@ class SalesOrg extends ValueObject<String> {
     return country == 'TW';
   }
 
+  bool get needUpdatePaymentGateway => isMY || isVN;
+
   bool get isValidCountryOrderTypeEligible {
     return countrySupportOrderType(country);
   }
@@ -265,22 +267,26 @@ class Currency extends ValueObject<String> {
   }
 
   bool get isVN {
-    return value.getOrElse(() => '') == 'vnd';
+    return value.getOrElse(() => '').toLowerCase() == 'vnd';
   }
 
   bool get isTH {
-    return value.getOrElse(() => '') == 'thb';
+    return value.getOrElse(() => '').toLowerCase() == 'thb';
   }
 
   bool get isMM {
-    return value.getOrElse(() => '') == 'mmk' ||
-        value.getOrElse(() => '') == 'usd';
+    return value.getOrElse(() => '').toLowerCase() == 'mmk' ||
+        value.getOrElse(() => '').toLowerCase() == 'usd';
   }
 
   bool get isKH {
-    return value.getOrElse(() => '') == 'khr' ||
-        value.getOrElse(() => '') == 'cop' ||
-        value.getOrElse(() => '') == 'usd';
+    return value.getOrElse(() => '').toLowerCase() == 'khr' ||
+        value.getOrElse(() => '').toLowerCase() == 'cop' ||
+        value.getOrElse(() => '').toLowerCase() == 'usd';
+  }
+
+  bool get isPH {
+    return value.getOrElse(() => '').toLowerCase() == 'php';
   }
 
   const Currency._(this.value);

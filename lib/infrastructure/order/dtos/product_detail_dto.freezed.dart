@@ -494,7 +494,7 @@ class _$_ProductDetailDto extends _ProductDetailDto {
 
   @override
   String toString() {
-    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber)';
+    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, promoType: $promoType, promoStatus: $promoStatus)';
   }
 
   @override
@@ -545,27 +545,28 @@ class _$_ProductDetailDto extends _ProductDetailDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      materialNumber,
-      materialDescription,
-      principalCode,
-      principalName,
-      unitOfMeasurement,
-      therapeuticClass,
-      genericMaterialName,
-      itemBrand,
-      materialBrand,
-      isFavourite,
-      isFOCMaterial,
-      defaultMaterialDescription,
-      country,
-      countryName,
-      hidePrice,
-      governmentMaterialCode,
-      itemRegistrationNumber,
-      promoType,
-      promoStatus);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        materialNumber,
+        materialDescription,
+        principalCode,
+        principalName,
+        unitOfMeasurement,
+        therapeuticClass,
+        genericMaterialName,
+        itemBrand,
+        materialBrand,
+        isFavourite,
+        isFOCMaterial,
+        defaultMaterialDescription,
+        country,
+        countryName,
+        hidePrice,
+        governmentMaterialCode,
+        itemRegistrationNumber,
+        promoType,
+        promoStatus
+      ]);
 
   @JsonKey(ignore: true)
   @override

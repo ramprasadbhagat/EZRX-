@@ -13,6 +13,7 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -89,7 +90,7 @@ void main() {
       amountInTransactionCurrency: 100,
       documentReferenceID: 'fake-DRI',
       postingKeyName: 'fake-PN',
-      transactionCurrency: 'fake-TC',
+      transactionCurrency: Currency('fake-TC'),
       companyCode: 'fake-CC',
       paymentAmountInDisplayCrcy: 50,
       partialPaymentHistoryDesc: 'fake-PPHD',
@@ -105,6 +106,7 @@ void main() {
       debitCreditCode: 'S',
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
+      openAmountInTransCrcy: 50,
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
@@ -114,7 +116,7 @@ void main() {
       amountInTransactionCurrency: 100,
       documentReferenceID: 'fake-DRI',
       postingKeyName: 'fake-PN',
-      transactionCurrency: 'fake-TC',
+      transactionCurrency: Currency('fake-TC'),
       companyCode: 'fake-CC',
       paymentAmountInDisplayCrcy: 50,
       partialPaymentHistoryDesc: 'fake-PPHD',
@@ -130,6 +132,7 @@ void main() {
       debitCreditCode: 'S',
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
+      openAmountInTransCrcy: 50,
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
@@ -139,7 +142,7 @@ void main() {
       amountInTransactionCurrency: 100,
       documentReferenceID: 'fake-DRI',
       postingKeyName: 'fake-PN',
-      transactionCurrency: 'fake-TC',
+      transactionCurrency: Currency('fake-TC'),
       companyCode: 'fake-CC',
       paymentAmountInDisplayCrcy: 50,
       partialPaymentHistoryDesc: 'fake-PPHD',
@@ -155,6 +158,7 @@ void main() {
       debitCreditCode: 'S',
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
+      openAmountInTransCrcy: 50,
     ),
   ];
 
@@ -167,7 +171,7 @@ void main() {
       amountInTransactionCurrency: 100,
       documentReferenceID: 'fake-DRI',
       postingKeyName: 'fake-PN',
-      transactionCurrency: 'fake-TC',
+      transactionCurrency: Currency('fake-TC'),
       companyCode: 'fake-CC',
       paymentAmountInDisplayCrcy: 50,
       partialPaymentHistoryDesc: 'fake-PPHD',
@@ -183,6 +187,7 @@ void main() {
       debitCreditCode: 'S',
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
+      openAmountInTransCrcy: 50,
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
@@ -192,7 +197,7 @@ void main() {
       amountInTransactionCurrency: 100,
       documentReferenceID: 'fake-DRI',
       postingKeyName: 'fake-PN',
-      transactionCurrency: 'fake-TC',
+      transactionCurrency: Currency('fake-TC'),
       companyCode: 'fake-CC',
       paymentAmountInDisplayCrcy: 50,
       partialPaymentHistoryDesc: 'fake-PPHD',
@@ -208,6 +213,7 @@ void main() {
       debitCreditCode: 'S',
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
+      openAmountInTransCrcy: 50,
     ),
     CustomerOpenItem(
       status: StatusType('Overdue'),
@@ -217,7 +223,7 @@ void main() {
       amountInTransactionCurrency: 100,
       documentReferenceID: 'fake-DRI',
       postingKeyName: 'fake-PN',
-      transactionCurrency: 'fake-TC',
+      transactionCurrency: Currency('fake-TC'),
       companyCode: 'fake-CC',
       paymentAmountInDisplayCrcy: 50,
       partialPaymentHistoryDesc: 'fake-PPHD',
@@ -233,6 +239,7 @@ void main() {
       debitCreditCode: 'S',
       bpCustomerNumber: 'fake-BPN',
       accountingDocExternalReference: 'fake-ADER',
+      openAmountInTransCrcy: 50,
     ),
   ];
 

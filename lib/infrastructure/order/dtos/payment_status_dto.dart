@@ -10,6 +10,7 @@ enum TxnStatusEnum { success, failed, pending }
 @freezed
 class PaymentStatusDto with _$PaymentStatusDto {
   const PaymentStatusDto._();
+
   const factory PaymentStatusDto({
     @JsonKey(name: 'paymentID', defaultValue: '') required String paymentID,
     @JsonKey(name: 'txnStatus', defaultValue: '') required String txnStatus,

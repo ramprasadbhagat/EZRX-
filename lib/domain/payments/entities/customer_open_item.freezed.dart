@@ -23,7 +23,7 @@ mixin _$CustomerOpenItem {
   double get amountInTransactionCurrency => throw _privateConstructorUsedError;
   String get documentReferenceID => throw _privateConstructorUsedError;
   String get postingKeyName => throw _privateConstructorUsedError;
-  String get transactionCurrency => throw _privateConstructorUsedError;
+  Currency get transactionCurrency => throw _privateConstructorUsedError;
   String get accountingDocExternalReference =>
       throw _privateConstructorUsedError;
   String get bpCustomerNumber => throw _privateConstructorUsedError;
@@ -43,6 +43,7 @@ mixin _$CustomerOpenItem {
   String get companyCode => throw _privateConstructorUsedError;
   double get g2Tax => throw _privateConstructorUsedError;
   double get g4Tax => throw _privateConstructorUsedError;
+  double get openAmountInTransCrcy => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CustomerOpenItemCopyWith<CustomerOpenItem> get copyWith =>
@@ -63,7 +64,7 @@ abstract class $CustomerOpenItemCopyWith<$Res> {
       double amountInTransactionCurrency,
       String documentReferenceID,
       String postingKeyName,
-      String transactionCurrency,
+      Currency transactionCurrency,
       String accountingDocExternalReference,
       String bpCustomerNumber,
       String debitCreditCode,
@@ -80,7 +81,8 @@ abstract class $CustomerOpenItemCopyWith<$Res> {
       double paymentAmountInDisplayCrcy,
       String companyCode,
       double g2Tax,
-      double g4Tax});
+      double g4Tax,
+      double openAmountInTransCrcy});
 }
 
 /// @nodoc
@@ -121,6 +123,7 @@ class _$CustomerOpenItemCopyWithImpl<$Res, $Val extends CustomerOpenItem>
     Object? companyCode = null,
     Object? g2Tax = null,
     Object? g4Tax = null,
+    Object? openAmountInTransCrcy = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -154,7 +157,7 @@ class _$CustomerOpenItemCopyWithImpl<$Res, $Val extends CustomerOpenItem>
       transactionCurrency: null == transactionCurrency
           ? _value.transactionCurrency
           : transactionCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Currency,
       accountingDocExternalReference: null == accountingDocExternalReference
           ? _value.accountingDocExternalReference
           : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
@@ -223,6 +226,10 @@ class _$CustomerOpenItemCopyWithImpl<$Res, $Val extends CustomerOpenItem>
           ? _value.g4Tax
           : g4Tax // ignore: cast_nullable_to_non_nullable
               as double,
+      openAmountInTransCrcy: null == openAmountInTransCrcy
+          ? _value.openAmountInTransCrcy
+          : openAmountInTransCrcy // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -243,7 +250,7 @@ abstract class _$$_CustomerOpenItemCopyWith<$Res>
       double amountInTransactionCurrency,
       String documentReferenceID,
       String postingKeyName,
-      String transactionCurrency,
+      Currency transactionCurrency,
       String accountingDocExternalReference,
       String bpCustomerNumber,
       String debitCreditCode,
@@ -260,7 +267,8 @@ abstract class _$$_CustomerOpenItemCopyWith<$Res>
       double paymentAmountInDisplayCrcy,
       String companyCode,
       double g2Tax,
-      double g4Tax});
+      double g4Tax,
+      double openAmountInTransCrcy});
 }
 
 /// @nodoc
@@ -299,6 +307,7 @@ class __$$_CustomerOpenItemCopyWithImpl<$Res>
     Object? companyCode = null,
     Object? g2Tax = null,
     Object? g4Tax = null,
+    Object? openAmountInTransCrcy = null,
   }) {
     return _then(_$_CustomerOpenItem(
       status: null == status
@@ -332,7 +341,7 @@ class __$$_CustomerOpenItemCopyWithImpl<$Res>
       transactionCurrency: null == transactionCurrency
           ? _value.transactionCurrency
           : transactionCurrency // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Currency,
       accountingDocExternalReference: null == accountingDocExternalReference
           ? _value.accountingDocExternalReference
           : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
@@ -401,6 +410,10 @@ class __$$_CustomerOpenItemCopyWithImpl<$Res>
           ? _value.g4Tax
           : g4Tax // ignore: cast_nullable_to_non_nullable
               as double,
+      openAmountInTransCrcy: null == openAmountInTransCrcy
+          ? _value.openAmountInTransCrcy
+          : openAmountInTransCrcy // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -433,7 +446,8 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
       required this.paymentAmountInDisplayCrcy,
       required this.companyCode,
       this.g2Tax = 0.0,
-      this.g4Tax = 0.0})
+      this.g4Tax = 0.0,
+      required this.openAmountInTransCrcy})
       : super._();
 
   @override
@@ -451,7 +465,7 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
   @override
   final String postingKeyName;
   @override
-  final String transactionCurrency;
+  final Currency transactionCurrency;
   @override
   final String accountingDocExternalReference;
   @override
@@ -488,10 +502,12 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
   @override
   @JsonKey()
   final double g4Tax;
+  @override
+  final double openAmountInTransCrcy;
 
   @override
   String toString() {
-    return 'CustomerOpenItem(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, companyCode: $companyCode, g2Tax: $g2Tax, g4Tax: $g4Tax)';
+    return 'CustomerOpenItem(status: $status, accountingDocument: $accountingDocument, netDueDate: $netDueDate, documentDate: $documentDate, amountInTransactionCurrency: $amountInTransactionCurrency, documentReferenceID: $documentReferenceID, postingKeyName: $postingKeyName, transactionCurrency: $transactionCurrency, accountingDocExternalReference: $accountingDocExternalReference, bpCustomerNumber: $bpCustomerNumber, debitCreditCode: $debitCreditCode, cashDiscountAmountInDspCrcy: $cashDiscountAmountInDspCrcy, cashDiscountDueDate: $cashDiscountDueDate, totalAmountInDisplayCrcy: $totalAmountInDisplayCrcy, displayCurrency: $displayCurrency, openAmountInDisplayCrcy: $openAmountInDisplayCrcy, fiscalYear: $fiscalYear, isDisputed: $isDisputed, accountingDocumentItem: $accountingDocumentItem, accountingDocumentItemRef: $accountingDocumentItemRef, partialPaymentHistoryDesc: $partialPaymentHistoryDesc, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, companyCode: $companyCode, g2Tax: $g2Tax, g4Tax: $g4Tax, openAmountInTransCrcy: $openAmountInTransCrcy)';
   }
 
   @override
@@ -527,8 +543,7 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
                     cashDiscountAmountInDspCrcy) &&
             (identical(other.cashDiscountDueDate, cashDiscountDueDate) ||
                 other.cashDiscountDueDate == cashDiscountDueDate) &&
-            (identical(
-                    other.totalAmountInDisplayCrcy, totalAmountInDisplayCrcy) ||
+            (identical(other.totalAmountInDisplayCrcy, totalAmountInDisplayCrcy) ||
                 other.totalAmountInDisplayCrcy == totalAmountInDisplayCrcy) &&
             (identical(other.displayCurrency, displayCurrency) ||
                 other.displayCurrency == displayCurrency) &&
@@ -550,7 +565,9 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
             (identical(other.companyCode, companyCode) ||
                 other.companyCode == companyCode) &&
             (identical(other.g2Tax, g2Tax) || other.g2Tax == g2Tax) &&
-            (identical(other.g4Tax, g4Tax) || other.g4Tax == g4Tax));
+            (identical(other.g4Tax, g4Tax) || other.g4Tax == g4Tax) &&
+            (identical(other.openAmountInTransCrcy, openAmountInTransCrcy) ||
+                other.openAmountInTransCrcy == openAmountInTransCrcy));
   }
 
   @override
@@ -580,7 +597,8 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
         paymentAmountInDisplayCrcy,
         companyCode,
         g2Tax,
-        g4Tax
+        g4Tax,
+        openAmountInTransCrcy
       ]);
 
   @JsonKey(ignore: true)
@@ -599,7 +617,7 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
       required final double amountInTransactionCurrency,
       required final String documentReferenceID,
       required final String postingKeyName,
-      required final String transactionCurrency,
+      required final Currency transactionCurrency,
       required final String accountingDocExternalReference,
       required final String bpCustomerNumber,
       required final String debitCreditCode,
@@ -616,7 +634,8 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
       required final double paymentAmountInDisplayCrcy,
       required final String companyCode,
       final double g2Tax,
-      final double g4Tax}) = _$_CustomerOpenItem;
+      final double g4Tax,
+      required final double openAmountInTransCrcy}) = _$_CustomerOpenItem;
   _CustomerOpenItem._() : super._();
 
   @override
@@ -634,7 +653,7 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
   @override
   String get postingKeyName;
   @override
-  String get transactionCurrency;
+  Currency get transactionCurrency;
   @override
   String get accountingDocExternalReference;
   @override
@@ -669,6 +688,8 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
   double get g2Tax;
   @override
   double get g4Tax;
+  @override
+  double get openAmountInTransCrcy;
   @override
   @JsonKey(ignore: true)
   _$$_CustomerOpenItemCopyWith<_$_CustomerOpenItem> get copyWith =>

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,7 +16,7 @@ class CustomerOpenItem with _$CustomerOpenItem {
     required double amountInTransactionCurrency,
     required String documentReferenceID,
     required String postingKeyName,
-    required String transactionCurrency,
+    required Currency transactionCurrency,
     required String accountingDocExternalReference,
     required String bpCustomerNumber,
     required String debitCreditCode,
@@ -33,6 +34,7 @@ class CustomerOpenItem with _$CustomerOpenItem {
     required String companyCode,
     @Default(0.0) double g2Tax,
     @Default(0.0) double g4Tax,
+    required double openAmountInTransCrcy,
   }) = _CustomerOpenItem;
 
   factory CustomerOpenItem.empty() => CustomerOpenItem(
@@ -40,7 +42,7 @@ class CustomerOpenItem with _$CustomerOpenItem {
         amountInTransactionCurrency: 0.0,
         accountingDocument: '',
         postingKeyName: '',
-        transactionCurrency: '',
+        transactionCurrency: Currency(''),
         netDueDate: DateTimeStringValue(''),
         documentDate: DateTimeStringValue(''),
         documentReferenceID: '',
@@ -61,12 +63,17 @@ class CustomerOpenItem with _$CustomerOpenItem {
         companyCode: '',
         g2Tax: 0,
         g4Tax: 0,
+        openAmountInTransCrcy: 0,
       );
 }
 
 extension CustomerOpenItemListExtension on List<CustomerOpenItem> {
-  double get amountTotal =>
-      fold<double>(0, (sum, item) => sum + item.amountInTransactionCurrency);
+  double get amountTotal => fold<double>(
+        0,
+        (sum, item) => item.transactionCurrency.isPH
+            ? sum + item.openAmountInTransCrcy - item.g2Tax - item.g4Tax
+            : sum + item.openAmountInTransCrcy,
+      );
 
   bool isEqual(List<CustomerOpenItem> list) {
     final set1 = Set<CustomerOpenItem>.from(list);
