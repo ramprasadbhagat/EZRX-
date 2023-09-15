@@ -7,15 +7,11 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/account/sales_org_search.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,6 +45,10 @@ void main() {
       salesOrg: SalesOrg('2504'),
     )
   ];
+  final salesOrgState = SalesOrgState.initial().copyWith(
+    searchKey: SearchKey(''),
+    availableSalesOrg: availableSalesOrgList,
+  );
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   late UserBloc userBlocMock;
@@ -66,7 +66,7 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
   });
 
-  group('Customer Search Screen', () {
+  group('Test "Sales Org Search"', () {
     setUp(() async {
       userBlocMock = UserBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
@@ -104,117 +104,98 @@ void main() {
           ),
         ],
         child: SalesOrgSearch(
+          key: const Key('salesOrgSearchPage'),
           avialableSalesOrgList: availableSalesOrgList,
         ),
       );
     }
 
-    testWidgets(
-      'Test delivery address search',
-      (tester) async {
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-            customerCodeList: [
-              CustomerCodeInfo.empty().copyWith(
-                telephoneNumber: PhoneNumber('1234567890'),
-                customerCodeSoldTo: '123456789',
-                shipToInfos: <ShipToInfo>[
-                  ShipToInfo.empty().copyWith(
-                    shipToCustomerCode: '12345678',
-                    defaultShipToAddress: true,
-                  ),
-                ],
-                paymentTermDescription: '30 days',
-              ),
-            ],
-            shipToInfo: ShipToInfo.empty().copyWith(
-              shipToCustomerCode: '12345678',
-            ),
-            searchKey: SearchKey('fake-key'),
+    testWidgets('Content Display When User Can Search Sales Org',
+        (tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(
+        salesOrgState,
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      final salesOrgSearchPage = find.byKey(const Key('salesOrgSearchPage'));
+      expect(salesOrgSearchPage, findsOneWidget);
+
+      final salesOrgSearchField = find.byType(TextFormField);
+      expect(salesOrgSearchField, findsOneWidget);
+
+      final salesOrgSearchListView = find.byType(ListView);
+      expect(salesOrgSearchListView, findsOneWidget);
+    });
+
+    testWidgets('User Search Sales Org', (tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(
+        salesOrgState,
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextFormField), '2501');
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.searchSalesOrg(
+            searchKey: SearchKey('2501'),
+            salesOrgList: availableSalesOrgList,
           ),
-        );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
+        ),
+      ).called(1);
+
+      final firstSaleOrgItem = find.byType(ListView).first;
+      expect(firstSaleOrgItem, findsOneWidget);
+    });
+
+    testWidgets('User Search Error Sales Org', (tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(
+        salesOrgState,
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(TextFormField), '2502');
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.searchSalesOrg(
+            searchKey: SearchKey('2502'),
+            salesOrgList: availableSalesOrgList,
+          ),
+        ),
+      ).called(1);
+
+      final firstSaleOrgItem = find.widgetWithText(Text, '2502');
+      expect(firstSaleOrgItem, findsNothing);
+    });
+
+    testWidgets('Tap on SaleOrgItem', (tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(
+        salesOrgState,
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextFormField), '2501');
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      final firstSaleOrgItem = find.byType(ListTile).first;
+      expect(firstSaleOrgItem, findsOneWidget);
+
+      await tester.tap(firstSaleOrgItem);
+      verify(
+        () => salesOrgBlocMock.add(
+          SalesOrgEvent.selected(
             salesOrganisation:
                 SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
           ),
-        );
-
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
-        final salesOrgText = find.text('Select sales org');
-        expect(salesOrgText, findsOneWidget);
-        final searchField = find.byType(TextFormField);
-
-        await tester.enterText(searchField, 'fake-salesOrg');
-        await tester.pump(const Duration(seconds: 5));
-        verify(
-          () => salesOrgBlocMock.add(
-            SalesOrgEvent.searchSalesOrg(
-              salesOrgList: availableSalesOrgList,
-              searchKey: SearchKey('fake-salesOrg'),
-            ),
-          ),
-        );
-        await tester.pump();
-      },
-    );
-
-    testWidgets(
-      'Test select sales org',
-      (tester) async {
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-            customerCodeList: [
-              CustomerCodeInfo.empty().copyWith(
-                telephoneNumber: PhoneNumber('1234567890'),
-                customerCodeSoldTo: '123456789',
-                shipToInfos: <ShipToInfo>[
-                  ShipToInfo.empty().copyWith(
-                    shipToCustomerCode: '12345678',
-                    defaultShipToAddress: true,
-                  ),
-                ],
-                paymentTermDescription: '30 days',
-              ),
-            ],
-            shipToInfo: ShipToInfo.empty().copyWith(
-              shipToCustomerCode: '12345678',
-            ),
-            searchKey: SearchKey('fake-key'),
-          ),
-        );
-        when(() => salesOrgBlocMock.state).thenReturn(
-          SalesOrgState.initial().copyWith(
-            availableSalesOrg: availableSalesOrgList,
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
-          ),
-        );
-
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
-        final salesOrgText = find.text('Select sales org');
-        expect(salesOrgText, findsOneWidget);
-        final searchField = find.byType(TextFormField);
-
-        await tester.enterText(searchField, 'fake-salesOrg');
-        await tester.pump(const Duration(seconds: 5));
-        verify(
-          () => salesOrgBlocMock.add(
-            SalesOrgEvent.searchSalesOrg(
-              salesOrgList: availableSalesOrgList,
-              searchKey: SearchKey('fake-salesOrg'),
-            ),
-          ),
-        );
-        await tester.pump(const Duration(seconds: 5));
-        final salesOrgTile = find.byKey(WidgetKeys.genericKey(key: '2501'));
-
-        await tester.tap(salesOrgTile);
-
-        await tester.pump();
-      },
-    );
+        ),
+      ).called(1);
+      await tester.pumpAndSettle();
+    });
   });
 }
