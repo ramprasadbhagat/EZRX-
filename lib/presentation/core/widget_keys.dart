@@ -97,6 +97,11 @@ class WidgetKeys {
   static const Key proxyLoginUserNameField = Key('proxyLoginUserNameField');
   static const Key proxyLoginButton = Key('proxyLoginButton');
   static const Key proxyLoginSheet = Key('proxyLoginSheet');
+  static const Key loginOnBehalfButtonKey = Key('loginOnBehalfButtonKey');
+  static const Key loginOnBehalfLoginButtonKey =
+      Key('loginOnBehalfLoginButtonKey');
+  static const Key loginOnBehalfCancelButtonKey =
+      Key('loginOnBehalfCancelButtonKey');
 
   //  Change Delivery Address BottomSheet
   //============================================================

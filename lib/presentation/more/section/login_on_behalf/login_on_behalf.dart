@@ -10,6 +10,7 @@ class LoginOnBehalf extends StatelessWidget {
       builder: (context, state) {
         return state.userCanLoginOnBehalf
             ? TextButton.icon(
+                key: WidgetKeys.loginOnBehalfButtonKey,
                 icon: const Padding(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Icon(

@@ -11,6 +11,7 @@ class _LoginButton extends StatelessWidget {
       builder: (context, state) {
         return Expanded(
           child: ElevatedButton(
+            key: WidgetKeys.loginOnBehalfLoginButtonKey,
             onPressed: () {
               if (state.isSubmitting) return;
               FocusScope.of(context).unfocus();
