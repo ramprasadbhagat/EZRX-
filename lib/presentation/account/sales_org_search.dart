@@ -61,6 +61,7 @@ class SalesOrgSearch extends StatelessWidget {
                   clearIconKey: WidgetKeys.salesOrgSearch,
                   customValidator: (value) => true,
                   onSearchSubmitted: (value) {},
+                  hintText: 'Search sales org name or code',
                 ),
               ),
               Expanded(
