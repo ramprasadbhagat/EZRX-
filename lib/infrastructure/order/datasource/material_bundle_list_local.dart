@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class MaterialBundleListLocalDatasource {
@@ -34,19 +34,5 @@ class MaterialBundleListLocalDatasource {
         jsonEncode(data['data']['GetBundlesForSalesRep']),
       ),
     ).map((e) => MaterialDto.fromJson(e).toDomain()).toList();
-  }
-
-  dynamic makeResponseCamelCase(String resp) {
-    final camelCaseJsonKeys = resp.replaceAllMapped(
-      RegExp(
-        '(?<key>[\\w\\d]+)(?:\\"|\')(?:\\:\\s*)',
-      ),
-      (Match m) {
-        return m.group(0)![0].toLowerCase() +
-            m.group(0)!.characters.getRange(1).toString();
-      },
-    );
-
-    return jsonDecode(camelCaseJsonKeys);
   }
 }

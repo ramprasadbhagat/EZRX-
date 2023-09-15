@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -33,18 +34,6 @@ void main() {
             await rootBundle
                 .loadString('assets/json/getMaterialBundleListResponse.json'),
           );
-          dynamic makeResponseCamelCase(String resp) {
-            final camelCaseJsonKeys = resp.replaceAllMapped(
-              RegExp(
-                '(?<key>[\\w\\d]+)(?:\\"|\')(?:\\:\\s*)',
-              ),
-              (Match m) {
-                return m.group(0)![0].toLowerCase() + m.group(0)!.substring(1);
-              },
-            );
-
-            return jsonDecode(camelCaseJsonKeys);
-          }
 
           final result = await localDataSource.getMaterialBundleList();
 
@@ -67,18 +56,6 @@ void main() {
               'assets/json/getMaterialBundleListForSalesRepResponse.json',
             ),
           );
-          dynamic makeResponseCamelCase(String resp) {
-            final camelCaseJsonKeys = resp.replaceAllMapped(
-              RegExp(
-                '(?<key>[\\w\\d]+)(?:\\"|\')(?:\\:\\s*)',
-              ),
-              (Match m) {
-                return m.group(0)![0].toLowerCase() + m.group(0)!.substring(1);
-              },
-            );
-
-            return jsonDecode(camelCaseJsonKeys);
-          }
 
           final result =
               await localDataSource.getMaterialBundleListForSalesRep();
