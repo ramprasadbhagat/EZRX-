@@ -23,7 +23,6 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
-import '../order_history/order_history_details_widget_test.dart';
 
 class MockPolicyConfigurationListBloc
     extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
@@ -48,8 +47,9 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
-    locator.registerLazySingleton(() => MixpanelService());
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     policyConfigurationListMock =

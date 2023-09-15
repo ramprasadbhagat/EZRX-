@@ -26,7 +26,6 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
 
 class AccountSummaryBlocMock
     extends MockBloc<AccountSummaryEvent, AccountSummaryState>
@@ -241,9 +240,10 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => MixpanelService());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     autoRouterMock = locator<AppRouter>();
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   setUp(() async {

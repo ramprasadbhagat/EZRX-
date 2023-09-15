@@ -70,7 +70,6 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dar
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
 import 'package:universal_io/io.dart';
@@ -183,12 +182,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
   await locator<OrderStorage>().init();
   await locator<DeviceStorage>().init();
   await locator<ProductSuggestionHistoryStorage>().init();
-  locator<MixpanelService>().init(
-    mixpanel: await Mixpanel.init(
-      config.mixpanelKey,
-      trackAutomaticEvents: true,
-    ),
-  );
+  await locator<MixpanelService>().init();
   await locator<DatadogService>().init();
 
   if (!kIsWeb) {

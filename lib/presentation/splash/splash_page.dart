@@ -984,14 +984,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           );
 
-      locator<MixpanelService>().registerSuperProps(
-        username: user.username.getOrDefaultValue(''),
-        salesOrg: salesOrgState.salesOrg.getOrDefaultValue(''),
-        customerCode: customerCodeState.customerCodeInfo.customerCodeSoldTo,
-        shipToAddress: state.shipToInfo.shipToCustomerCode,
-        userRole: user.role.type.getOrDefaultValue(''),
-      );
-
       context.read<EligibilityBloc>().add(
             EligibilityEvent.update(
               user: user,

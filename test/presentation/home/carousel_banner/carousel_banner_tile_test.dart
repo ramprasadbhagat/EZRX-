@@ -19,8 +19,6 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
-import '../../order_history/order_history_details_widget_test.dart';
-
 class MockHTTPService extends Mock implements HttpService {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -62,8 +60,10 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     WidgetsFlutterBinding.ensureInitialized();
     locator = GetIt.instance;
-    locator.registerLazySingleton(() => MixpanelService());
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
+
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     mockHTTPService = MockHTTPService();

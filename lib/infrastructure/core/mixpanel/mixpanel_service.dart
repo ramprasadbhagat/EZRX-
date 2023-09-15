@@ -1,14 +1,24 @@
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
 class MixpanelService {
   late Mixpanel mixpanel;
+  late Config config;
+
   BannerItem banner = BannerItem.empty();
   String activeNavBarRoute = 'Home Page';
 
-  void init({required Mixpanel mixpanel}) {
-    this.mixpanel = mixpanel;
+  MixpanelService({
+    required this.config,
+  });
+
+  Future<void> init() async {
+    mixpanel = await Mixpanel.init(
+      config.mixpanelKey,
+      trackAutomaticEvents: true,
+    );
   }
 
   void trackEvent({

@@ -18,7 +18,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -30,8 +29,9 @@ void main() {
   late CustomerCodeBlocMock mockCustomerCodeBloc;
 
   setUpAll(() async {
-    locator.registerLazySingleton(() => MixpanelService());
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
   });

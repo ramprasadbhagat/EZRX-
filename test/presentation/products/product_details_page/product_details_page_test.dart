@@ -38,7 +38,6 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -130,8 +129,9 @@ void main() {
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());
     registerFallbackValue(ShipToInfo.empty());
-    locator.registerLazySingleton(() => MixpanelService());
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     materialInfo = await ProductDetailLocalDataSource().getProductDetails();
     similarProducts = await ProductDetailLocalDataSource().getSimilarProduct();
   });

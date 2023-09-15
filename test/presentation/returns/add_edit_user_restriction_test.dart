@@ -25,7 +25,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
-import '../order_history/order_history_details_widget_test.dart';
 
 class UserRestrictionDetailsBlocMock
     extends MockBloc<UserRestrictionDetailsEvent, UserRestrictionDetailsState>
@@ -57,8 +56,9 @@ void main() {
 
   setUpAll(
     () {
-      locator.registerLazySingleton(() => MixpanelService());
-      locator<MixpanelService>().init(mixpanel: MixpanelMock());
+      locator.registerLazySingleton(
+        () => MixpanelService(config: locator<Config>()),
+      );
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
       locator.registerLazySingleton(() => AppRouter());
     },

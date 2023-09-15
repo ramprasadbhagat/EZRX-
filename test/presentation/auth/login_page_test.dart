@@ -42,7 +42,6 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../utils/material_frame_wrapper.dart';
 import '../../utils/widget_utils.dart';
-import '../order_history/order_history_details_widget_test.dart';
 
 class LoginFormBlocMock extends MockBloc<LoginFormEvent, LoginFormState>
     implements LoginFormBloc {}
@@ -156,9 +155,10 @@ void main() {
   setUpAll(() async {
     locator = GetIt.instance;
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(() => MixpanelService());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     locator.registerLazySingleton(() => AppRouter());
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   group('Login Screen', () {

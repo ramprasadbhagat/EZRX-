@@ -225,6 +225,7 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dar
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/repository/mixpanel_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_local.dart';
@@ -867,6 +868,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => EligibilityBloc(
       chatBotRepository: locator<ChatBotRepository>(),
+      mixpanelRepository: locator<MixpanelRepository>(),
     ),
   );
 
@@ -1947,7 +1949,15 @@ void setupLocator() {
   //Mixpanel
 
   locator.registerLazySingleton(
-    () => MixpanelService(),
+    () => MixpanelService(
+      config: locator<Config>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => MixpanelRepository(
+      mixpanelService: locator<MixpanelService>(),
+    ),
   );
 
   //Datadog

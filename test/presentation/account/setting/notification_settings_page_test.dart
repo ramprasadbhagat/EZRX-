@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/payment_notification/payment_noti
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_advice_expiry_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -22,7 +23,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
@@ -50,10 +50,11 @@ void main() async {
   late AnnouncementBloc announcementBlocMock;
   setUpAll(() async {
     //setupLocator();
-    locator.registerLazySingleton(() => MixpanelService());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     locator.registerLazySingleton(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     locator.registerLazySingleton(() => UserBlocMock());
     locator.registerLazySingleton(() => AnnouncementBlocMock());
     locator.registerLazySingleton(() => AuthBlocMock());

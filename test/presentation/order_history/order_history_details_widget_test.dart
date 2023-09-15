@@ -18,6 +18,7 @@ import 'package:ezrxmobile/application/order/tender_contract/tender_contract_blo
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/bill_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -186,10 +187,11 @@ void main() {
         .registerFactory<TenderContractRepository>(() => tenderRepositoryMock);
 
     locator.registerLazySingleton(() => permissionService);
-    locator.registerLazySingleton(() => MixpanelService());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     locator.registerFactory<AddToCartBloc>(() => addToCartBlocMock);
     locator.registerFactory<TenderContractBloc>(() => tenderContractBlocMock);
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     orderHistoryDetails =
         await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
     orderHistory = await ViewByItemLocalDataSource().getViewByItems();

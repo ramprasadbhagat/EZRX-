@@ -23,7 +23,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
 
@@ -67,8 +66,9 @@ void main() {
     locator.registerFactory(() => mockBannerBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
-    locator.registerLazySingleton(() => MixpanelService());
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     autoRouterMock = locator<AppRouter>();
     mockHTTPService = MockHTTPService();
     mockUserBloc = MockUserBloc();

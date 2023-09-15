@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/chatbot/repository/i_chatbot_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/mixpanel/repository/i_mixpanel_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,8 +18,11 @@ part 'eligibility_bloc.freezed.dart';
 
 class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
   final IChatBotRepository chatBotRepository;
-  EligibilityBloc({required this.chatBotRepository})
-      : super(EligibilityState.initial()) {
+  final IMixpanelRepository mixpanelRepository;
+  EligibilityBloc({
+    required this.chatBotRepository,
+    required this.mixpanelRepository,
+  }) : super(EligibilityState.initial()) {
     on<EligibilityEvent>(_onEvent);
   }
 
@@ -39,6 +43,13 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
             selectedOrderType: e.selectedOrderType,
             isLoading: true,
           ),
+        );
+        mixpanelRepository.registerSuperProps(
+          username: e.user.username.getOrDefaultValue(''),
+          salesOrg: e.salesOrganisation.salesOrg.getOrDefaultValue(''),
+          customerCode: e.customerCodeInfo.customerCodeSoldTo,
+          shipToAddress: e.shipToInfo.shipToCustomerCode,
+          userRole: e.user.role.type.getOrDefaultValue(''),
         );
         final failureOrSuccess = await chatBotRepository.passPayloadToChatbot(
           salesOrganisation: state.salesOrganisation,

@@ -15,7 +15,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 //import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
@@ -42,8 +41,9 @@ void main() {
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
       locator.registerLazySingleton(() => AppRouter());
-      locator.registerLazySingleton(() => MixpanelService());
-      locator<MixpanelService>().init(mixpanel: MixpanelMock());
+      locator.registerLazySingleton(
+        () => MixpanelService(config: locator<Config>()),
+      );
     },
   );
   setUp(
@@ -81,58 +81,58 @@ void main() {
   //       );
   //     }
 
-      // testWidgets(
-      //   'Load Order Success',
-      //   (tester) async {
-      //     await tester.pumpWidget(getWidget());
-      //     await tester.pump();
-      //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
-      //     expect(orderSuccessPage, findsOneWidget);
-      //   },
-      // );
+  // testWidgets(
+  //   'Load Order Success',
+  //   (tester) async {
+  //     await tester.pumpWidget(getWidget());
+  //     await tester.pump();
+  //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
+  //     expect(orderSuccessPage, findsOneWidget);
+  //   },
+  // );
 
-      // testWidgets(
-      //   '=> Tap Create New Order',
-      //   (tester) async {
-      //     await tester.pumpWidget(getWidget());
-      //     await tester.pump();
-      //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
-      //     expect(orderSuccessPage, findsOneWidget);
-      //     final newOrderButton = find.text('Create New Order');
-      //     expect(newOrderButton, findsOneWidget);
-      //     await tester.tap(newOrderButton);
-      //     await tester.pump();
-      //   },
-      // );
+  // testWidgets(
+  //   '=> Tap Create New Order',
+  //   (tester) async {
+  //     await tester.pumpWidget(getWidget());
+  //     await tester.pump();
+  //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
+  //     expect(orderSuccessPage, findsOneWidget);
+  //     final newOrderButton = find.text('Create New Order');
+  //     expect(newOrderButton, findsOneWidget);
+  //     await tester.tap(newOrderButton);
+  //     await tester.pump();
+  //   },
+  // );
 
-      //TODO: Redirect not available currently. Change in layout
-      // testWidgets(
-      //   '=> Tap Go To Order History',
-      //   (tester) async {
-      //     await tester.pumpWidget(getWidget());
-      //     await tester.pump();
-      //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
-      //     expect(orderSuccessPage, findsOneWidget);
-      //     final goToOrderHistory = find.text('Go To Order History');
-      //     expect(goToOrderHistory, findsOneWidget);
-      //     await tester.tap(goToOrderHistory);
-      //     await tester.pump();
-      //   },
-      // );
+  //TODO: Redirect not available currently. Change in layout
+  // testWidgets(
+  //   '=> Tap Go To Order History',
+  //   (tester) async {
+  //     await tester.pumpWidget(getWidget());
+  //     await tester.pump();
+  //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
+  //     expect(orderSuccessPage, findsOneWidget);
+  //     final goToOrderHistory = find.text('Go To Order History');
+  //     expect(goToOrderHistory, findsOneWidget);
+  //     await tester.tap(goToOrderHistory);
+  //     await tester.pump();
+  //   },
+  // );
 
-      // testWidgets(
-      //   '=> Tap Back Button',
-      //   (tester) async {
-      //     await tester.pumpWidget(getWidget());
-      //     await tester.pump();
-      //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
-      //     expect(orderSuccessPage, findsOneWidget);
-      //     final backButton = find.byIcon(Icons.arrow_back);
-      //     expect(backButton, findsOneWidget);
-      //     await tester.tap(backButton);
-      //     await tester.pump();
-      //   },
-      // );
-   // },
+  // testWidgets(
+  //   '=> Tap Back Button',
+  //   (tester) async {
+  //     await tester.pumpWidget(getWidget());
+  //     await tester.pump();
+  //     final orderSuccessPage = find.byKey(const Key('orderSuccessKey'));
+  //     expect(orderSuccessPage, findsOneWidget);
+  //     final backButton = find.byIcon(Icons.arrow_back);
+  //     expect(backButton, findsOneWidget);
+  //     await tester.tap(backButton);
+  //     await tester.pump();
+  //   },
+  // );
+  // },
   //);
 }

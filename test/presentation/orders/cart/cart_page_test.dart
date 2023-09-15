@@ -56,9 +56,7 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
-
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -175,10 +173,11 @@ void main() {
     router: MockAppRouter(),
     pendingChildren: [],
   );
-  
+
   setUpAll(() async {
-    locator.registerLazySingleton(() => MixpanelService());
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => DiscountOverrideRepositoryMock());
     locator.registerFactory(
@@ -2266,9 +2265,8 @@ void main() {
       testWidgets('Grand total check', (tester) async {
         final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
           currency: Currency('myr'),
-          
         );
-       
+
         final salesOrgState = SalesOrgState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty().copyWith(
             salesOrg: SalesOrg('2001'),
@@ -2327,27 +2325,24 @@ void main() {
             salesOrgConfig: salesOrgConfig,
           ),
         ];
-        
+
         final cartState = CartState.initial().copyWith(
           cartProducts: mockCartProductList,
         );
-
 
         when(() => salesOrgBloc.state).thenReturn(
           salesOrgState,
         );
 
         when(() => eligibilityBloc.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              salesOrgConfigs: salesOrgConfig,
-            ),
-          );
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: salesOrgConfig,
+          ),
+        );
 
         when(() => cartBloc.state).thenReturn(
           cartState,
         );
-        
-        
 
         await tester.pumpWidget(getWidget());
         await tester.pump();

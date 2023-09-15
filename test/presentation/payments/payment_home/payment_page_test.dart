@@ -30,8 +30,6 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
-
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -48,6 +46,7 @@ class AccountSummaryBlocMock
 class AvailableCreditsBlocMock
     extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
     implements AvailableCreditsBloc {}
+
 class PaymentInProgressBlocMock
     extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
     implements PaymentInProgressBloc {}
@@ -58,6 +57,7 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 class DownloadPaymentAttachmentsBlocMock extends MockBloc<
         DownloadPaymentAttachmentEvent, DownloadPaymentAttachmentsState>
     implements DownloadPaymentAttachmentsBloc {}
+
 class OutstandingInvoicesBlocMock
     extends MockBloc<OutstandingInvoicesEvent, OutstandingInvoicesState>
     implements OutstandingInvoicesBloc {}
@@ -87,7 +87,7 @@ void main() {
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBloc;
 
   //////////////////////Finder/////////////////////////////
-  
+
   final statementOfAccountsMenu =
       find.byKey(WidgetKeys.statementOfAccountsMenu);
   final paymentHomeInProgressCard =
@@ -112,14 +112,15 @@ void main() {
 
   ////////////////////////////////////////////////////////
 
-
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => MixpanelService());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     autoRouterMock = locator<AppRouter>();
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+
     accountSummaryState = AccountSummaryState.initial().copyWith(
       creditLimit: CreditLimit.empty().copyWith(
         creditLimit: StringValue('101'),
@@ -219,7 +220,6 @@ void main() {
             create: (context) => downloadPaymentAttachmentsBloc,
           ),
           BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-          
         ],
         child: const PaymentPage(),
       ),
@@ -414,17 +414,15 @@ void main() {
         ),
       ).called(1);
     });
-    
   });
   group('Payment Home Statement of account', () {
-    testWidgets('Check statement of account',
-          (WidgetTester tester) async {
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
+    testWidgets('Check statement of account', (WidgetTester tester) async {
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
       expect(paymentHome, findsOneWidget);
       expect(appBar, findsOneWidget);
       await tester.fling(paymentHome, const Offset(0.0, -300.0), 800.0);
-        await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
       expect(paymentHomeSoa, findsOneWidget);
     });
 

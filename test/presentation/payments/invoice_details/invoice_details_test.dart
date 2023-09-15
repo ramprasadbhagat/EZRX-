@@ -44,9 +44,10 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => MixpanelService());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
     autoRouterMock = locator<AppRouter>();
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
   });
 
   setUp(() async {

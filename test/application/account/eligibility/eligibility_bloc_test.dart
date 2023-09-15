@@ -18,10 +18,13 @@ import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/repository/mixpanel_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class ChatBotRepositoryMock extends Mock implements ChatBotRepository {}
+
+class MixpanelRepoMock extends Mock implements MixpanelRepository {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -114,11 +117,15 @@ void main() {
     displaySubtotalTaxBreakdown: false,
   );
   final chatBotRepositoryMock = ChatBotRepositoryMock();
+  final mixpanelRepositoryMock = MixpanelRepoMock();
 
   group('Eligibility Bloc', () {
     blocTest(
       'Eligibility Bloc Initial',
-      build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
+      build: () => EligibilityBloc(
+        chatBotRepository: chatBotRepositoryMock,
+        mixpanelRepository: mixpanelRepositoryMock,
+      ),
       act: (EligibilityBloc bloc) {
         bloc.add(const EligibilityEvent.initialized());
       },
@@ -127,7 +134,10 @@ void main() {
 
     blocTest(
       'Eligibility Update fail',
-      build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
+      build: () => EligibilityBloc(
+        chatBotRepository: chatBotRepositoryMock,
+        mixpanelRepository: mixpanelRepositoryMock,
+      ),
       setUp: () {
         when(
           () => chatBotRepositoryMock.passPayloadToChatbot(
@@ -176,7 +186,10 @@ void main() {
 
     blocTest(
       'Eligibility Update',
-      build: () => EligibilityBloc(chatBotRepository: chatBotRepositoryMock),
+      build: () => EligibilityBloc(
+        chatBotRepository: chatBotRepositoryMock,
+        mixpanelRepository: mixpanelRepositoryMock,
+      ),
       setUp: () {
         when(
           () => chatBotRepositoryMock.passPayloadToChatbot(

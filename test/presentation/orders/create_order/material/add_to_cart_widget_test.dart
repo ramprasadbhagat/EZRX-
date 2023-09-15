@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section_for_covid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +43,6 @@ import 'package:ezrxmobile/presentation/orders/create_order/select_contract.dart
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../../utils/widget_utils.dart';
-import '../../../order_history/order_history_details_widget_test.dart';
 
 class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
@@ -122,8 +122,9 @@ void main() {
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => MixpanelService());
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
   });
 
   setUp(() {

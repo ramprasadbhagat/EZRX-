@@ -92,8 +92,10 @@ void main() {
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(() => MixpanelService());
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
+    locator.registerLazySingleton(
+      () => MixpanelService(config: locator<Config>()),
+    );
+
     bundle = MaterialInfo.empty().copyWith(
       materialNumber: MaterialNumber('fake-bundle'),
       type: MaterialInfoType('bundle'),

@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/returns/user_restriction_details/user_res
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
@@ -19,7 +18,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/widget_utils.dart';
-import '../order_history/order_history_details_widget_test.dart';
 
 class UserRestrictionListBlocMock
     extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
@@ -54,7 +52,6 @@ void main() {
   setUpAll(() async {
     setupLocator();
 
-    locator<MixpanelService>().init(mixpanel: MixpanelMock());
     mockSearchKey = 'Person';
     mockSalesOrg = SalesOrg('2601');
     salesOrgBlocMock = SalesOrgBlocMock();
