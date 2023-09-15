@@ -9,40 +9,61 @@ part of 'order_history_details_dto.dart';
 _$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
         Map<String, dynamic> json) =>
     _$_OrderHistoryDetailsDto(
-      orderHistoryDetailsOrderHeader:
-          OrderHistoryDetailsOrderHeadersDto.fromJson(
-              orderHeaderOverride(json, 'OrderHeader') as Map<String, dynamic>),
-      orderHistoryDetailsShippingInformation:
-          OrderHistoryDetailsShippingInformationDto.fromJson(
-              shippingInformationOverride(json, 'ShippingInformation')
-                  as Map<String, dynamic>),
-      orderHistoryDetailsOrderItem: (json['OrderItems'] as List<dynamic>?)
-              ?.map((e) => OrderHistoryDetailsOrderItemDto.fromJson(
+      totalTax: (json['TotalTax'] as num?)?.toDouble() ?? 0,
+      requestedDeliveryDate: json['RequestedDeliveryDate'] as String? ?? '',
+      type: json['Type'] as String? ?? '',
+      telephoneNumber: json['TelephoneNumber'] as String? ?? '',
+      orderValue: (json['OrderValue'] as num?)?.toDouble() ?? 0.0,
+      createdDate: json['CreatedDate'] as String? ?? '',
+      eZRXNumber: json['EZRXNumber'] as String? ?? '',
+      orderBy: json['OrderBy'] as String? ?? '',
+      referenceNotes: json['ReferenceNotes'] as String? ?? '',
+      companyName: json['CompanyName'] as String? ?? '',
+      orderNumber: json['OrderNumber'] as String? ?? '',
+      pOReference: json['POReference'] as String? ?? '',
+      shipTo: json['ShipTo'] as String? ?? '',
+      soldTo: json['SoldTo'] as String? ?? '',
+      shipToAddress: json['ShipToAddres'] as String? ?? '',
+      soldToAddress: json['SoldToAddress'] as String? ?? '',
+      invoiceNumber: json['InvoiceNumber'] as String? ?? '',
+      orderReason: json['OrderReason'] as String? ?? '',
+      orderHistoryDetailsOrderItem:
+          (orderItemOverride(json, 'OrderItems') as List<dynamic>)
+              .map((e) => OrderHistoryDetailsOrderItemDto.fromJson(
                   e as Map<String, dynamic>))
-              .toList() ??
-          [],
+              .toList(),
       orderHistoryDetailsPaymentTerm:
           OrderHistoryDetailsPaymentTermDto.fromJson(
               paymentTermOverride(json, 'PaymentTerm') as Map<String, dynamic>),
       orderHistoryDetailsSpecialInstructions:
-          json['SpecialInstructions'] as String? ?? '',
-      orderHistoryDetailsPoDocuments: (json['PODocuments'] as List<dynamic>?)
-              ?.map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-      orderHistoryDetailsMessages: (json['Messages'] as List<dynamic>?)
-              ?.map((e) => OrderHistoryDetailsMessagesDto.fromJson(
-                  e as Map<String, dynamic>))
-              .toList() ??
-          [],
+          specialInstructionOverride(json, 'SpecialInstructions') as String,
+      orderHistoryDetailsPoDocuments:
+          (poDocumentOverride(json, 'PODocuments') as List<dynamic>)
+              .map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
+              .toList(),
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(
         _$_OrderHistoryDetailsDto instance) =>
     <String, dynamic>{
-      'OrderHeader': instance.orderHistoryDetailsOrderHeader.toJson(),
-      'ShippingInformation':
-          instance.orderHistoryDetailsShippingInformation.toJson(),
+      'TotalTax': instance.totalTax,
+      'RequestedDeliveryDate': instance.requestedDeliveryDate,
+      'Type': instance.type,
+      'TelephoneNumber': instance.telephoneNumber,
+      'OrderValue': instance.orderValue,
+      'CreatedDate': instance.createdDate,
+      'EZRXNumber': instance.eZRXNumber,
+      'OrderBy': instance.orderBy,
+      'ReferenceNotes': instance.referenceNotes,
+      'CompanyName': instance.companyName,
+      'OrderNumber': instance.orderNumber,
+      'POReference': instance.pOReference,
+      'ShipTo': instance.shipTo,
+      'SoldTo': instance.soldTo,
+      'ShipToAddres': instance.shipToAddress,
+      'SoldToAddress': instance.soldToAddress,
+      'InvoiceNumber': instance.invoiceNumber,
+      'OrderReason': instance.orderReason,
       'OrderItems':
           instance.orderHistoryDetailsOrderItem.map((e) => e.toJson()).toList(),
       'PaymentTerm': instance.orderHistoryDetailsPaymentTerm.toJson(),
@@ -50,6 +71,4 @@ Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(
       'PODocuments': instance.orderHistoryDetailsPoDocuments
           .map((e) => e.toJson())
           .toList(),
-      'Messages':
-          instance.orderHistoryDetailsMessages.map((e) => e.toJson()).toList(),
     };

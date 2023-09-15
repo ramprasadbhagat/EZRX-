@@ -21,28 +21,53 @@ OrderHistoryDetailsDto _$OrderHistoryDetailsDtoFromJson(
 
 /// @nodoc
 mixin _$OrderHistoryDetailsDto {
-  @JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-  OrderHistoryDetailsOrderHeadersDto get orderHistoryDetailsOrderHeader =>
-      throw _privateConstructorUsedError;
-  @JsonKey(name: 'ShippingInformation', readValue: shippingInformationOverride)
-  OrderHistoryDetailsShippingInformationDto
-      get orderHistoryDetailsShippingInformation =>
-          throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+  @JsonKey(name: 'TotalTax', defaultValue: 0)
+  double get totalTax => throw _privateConstructorUsedError;
+  @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+  String get requestedDeliveryDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'Type', defaultValue: '')
+  String get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+  String get telephoneNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+  double get orderValue => throw _privateConstructorUsedError;
+  @JsonKey(name: 'CreatedDate', defaultValue: '')
+  String get createdDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'EZRXNumber', defaultValue: '')
+  String get eZRXNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'OrderBy', defaultValue: '')
+  String get orderBy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ReferenceNotes', defaultValue: '')
+  String get referenceNotes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'CompanyName', defaultValue: '')
+  String get companyName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'OrderNumber', defaultValue: '')
+  String get orderNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'POReference', defaultValue: '')
+  String get pOReference => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ShipTo', defaultValue: '')
+  String get shipTo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'SoldTo', defaultValue: '')
+  String get soldTo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ShipToAddres', defaultValue: '')
+  String get shipToAddress => throw _privateConstructorUsedError;
+  @JsonKey(name: 'SoldToAddress', defaultValue: '')
+  String get soldToAddress => throw _privateConstructorUsedError;
+  @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+  String get invoiceNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'OrderReason', defaultValue: '')
+  String get orderReason => throw _privateConstructorUsedError;
+  @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
   List<OrderHistoryDetailsOrderItemDto> get orderHistoryDetailsOrderItem =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
   OrderHistoryDetailsPaymentTermDto get orderHistoryDetailsPaymentTerm =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+  @JsonKey(name: 'SpecialInstructions', readValue: specialInstructionOverride)
   String get orderHistoryDetailsSpecialInstructions =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
+  @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
   List<PoDocumentsDto> get orderHistoryDetailsPoDocuments =>
-      throw _privateConstructorUsedError;
-  @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-  List<OrderHistoryDetailsMessagesDto> get orderHistoryDetailsMessages =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,29 +83,36 @@ abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
       _$OrderHistoryDetailsDtoCopyWithImpl<$Res, OrderHistoryDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-      OrderHistoryDetailsOrderHeadersDto orderHistoryDetailsOrderHeader,
-      @JsonKey(
-          name: 'ShippingInformation', readValue: shippingInformationOverride)
-      OrderHistoryDetailsShippingInformationDto
-          orderHistoryDetailsShippingInformation,
-      @JsonKey(
-          name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+      {@JsonKey(name: 'TotalTax', defaultValue: 0) double totalTax,
+      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+      String requestedDeliveryDate,
+      @JsonKey(name: 'Type', defaultValue: '') String type,
+      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+      String telephoneNumber,
+      @JsonKey(name: 'OrderValue', defaultValue: 0.0) double orderValue,
+      @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
+      @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
+      @JsonKey(name: 'ReferenceNotes', defaultValue: '') String referenceNotes,
+      @JsonKey(name: 'CompanyName', defaultValue: '') String companyName,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '') String shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '') String soldTo,
+      @JsonKey(name: 'ShipToAddres', defaultValue: '') String shipToAddress,
+      @JsonKey(name: 'SoldToAddress', defaultValue: '') String soldToAddress,
+      @JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
+      @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
       List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
       @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
       OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
-      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-      String orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
-      List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(
-          name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-      List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages});
+          name: 'SpecialInstructions', readValue: specialInstructionOverride)
+      String orderHistoryDetailsSpecialInstructions,
+      @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+      List<PoDocumentsDto> orderHistoryDetailsPoDocuments});
 
-  $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>
-      get orderHistoryDetailsOrderHeader;
-  $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>
-      get orderHistoryDetailsShippingInformation;
   $OrderHistoryDetailsPaymentTermDtoCopyWith<$Res>
       get orderHistoryDetailsPaymentTerm;
 }
@@ -99,24 +131,102 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryDetailsOrderHeader = null,
-    Object? orderHistoryDetailsShippingInformation = null,
+    Object? totalTax = null,
+    Object? requestedDeliveryDate = null,
+    Object? type = null,
+    Object? telephoneNumber = null,
+    Object? orderValue = null,
+    Object? createdDate = null,
+    Object? eZRXNumber = null,
+    Object? orderBy = null,
+    Object? referenceNotes = null,
+    Object? companyName = null,
+    Object? orderNumber = null,
+    Object? pOReference = null,
+    Object? shipTo = null,
+    Object? soldTo = null,
+    Object? shipToAddress = null,
+    Object? soldToAddress = null,
+    Object? invoiceNumber = null,
+    Object? orderReason = null,
     Object? orderHistoryDetailsOrderItem = null,
     Object? orderHistoryDetailsPaymentTerm = null,
     Object? orderHistoryDetailsSpecialInstructions = null,
     Object? orderHistoryDetailsPoDocuments = null,
-    Object? orderHistoryDetailsMessages = null,
   }) {
     return _then(_value.copyWith(
-      orderHistoryDetailsOrderHeader: null == orderHistoryDetailsOrderHeader
-          ? _value.orderHistoryDetailsOrderHeader
-          : orderHistoryDetailsOrderHeader // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsOrderHeadersDto,
-      orderHistoryDetailsShippingInformation: null ==
-              orderHistoryDetailsShippingInformation
-          ? _value.orderHistoryDetailsShippingInformation
-          : orderHistoryDetailsShippingInformation // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsShippingInformationDto,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
+              as double,
+      requestedDeliveryDate: null == requestedDeliveryDate
+          ? _value.requestedDeliveryDate
+          : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      telephoneNumber: null == telephoneNumber
+          ? _value.telephoneNumber
+          : telephoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      createdDate: null == createdDate
+          ? _value.createdDate
+          : createdDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      eZRXNumber: null == eZRXNumber
+          ? _value.eZRXNumber
+          : eZRXNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderBy: null == orderBy
+          ? _value.orderBy
+          : orderBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      referenceNotes: null == referenceNotes
+          ? _value.referenceNotes
+          : referenceNotes // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      pOReference: null == pOReference
+          ? _value.pOReference
+          : pOReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipTo: null == shipTo
+          ? _value.shipTo
+          : shipTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      soldTo: null == soldTo
+          ? _value.soldTo
+          : soldTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipToAddress: null == shipToAddress
+          ? _value.shipToAddress
+          : shipToAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      soldToAddress: null == soldToAddress
+          ? _value.soldToAddress
+          : soldToAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      invoiceNumber: null == invoiceNumber
+          ? _value.invoiceNumber
+          : invoiceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as String,
       orderHistoryDetailsOrderItem: null == orderHistoryDetailsOrderItem
           ? _value.orderHistoryDetailsOrderItem
           : orderHistoryDetailsOrderItem // ignore: cast_nullable_to_non_nullable
@@ -134,33 +244,7 @@ class _$OrderHistoryDetailsDtoCopyWithImpl<$Res,
           ? _value.orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
               as List<PoDocumentsDto>,
-      orderHistoryDetailsMessages: null == orderHistoryDetailsMessages
-          ? _value.orderHistoryDetailsMessages
-          : orderHistoryDetailsMessages // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsMessagesDto>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>
-      get orderHistoryDetailsOrderHeader {
-    return $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>(
-        _value.orderHistoryDetailsOrderHeader, (value) {
-      return _then(
-          _value.copyWith(orderHistoryDetailsOrderHeader: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>
-      get orderHistoryDetailsShippingInformation {
-    return $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>(
-        _value.orderHistoryDetailsShippingInformation, (value) {
-      return _then(_value.copyWith(
-          orderHistoryDetailsShippingInformation: value) as $Val);
-    });
   }
 
   @override
@@ -184,31 +268,36 @@ abstract class _$$_OrderHistoryDetailsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-      OrderHistoryDetailsOrderHeadersDto orderHistoryDetailsOrderHeader,
-      @JsonKey(
-          name: 'ShippingInformation', readValue: shippingInformationOverride)
-      OrderHistoryDetailsShippingInformationDto
-          orderHistoryDetailsShippingInformation,
-      @JsonKey(
-          name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+      {@JsonKey(name: 'TotalTax', defaultValue: 0) double totalTax,
+      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+      String requestedDeliveryDate,
+      @JsonKey(name: 'Type', defaultValue: '') String type,
+      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+      String telephoneNumber,
+      @JsonKey(name: 'OrderValue', defaultValue: 0.0) double orderValue,
+      @JsonKey(name: 'CreatedDate', defaultValue: '') String createdDate,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
+      @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
+      @JsonKey(name: 'ReferenceNotes', defaultValue: '') String referenceNotes,
+      @JsonKey(name: 'CompanyName', defaultValue: '') String companyName,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '') String shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '') String soldTo,
+      @JsonKey(name: 'ShipToAddres', defaultValue: '') String shipToAddress,
+      @JsonKey(name: 'SoldToAddress', defaultValue: '') String soldToAddress,
+      @JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
+      @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
       List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
       @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
       OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
-      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-      String orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
-      List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(
-          name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-      List<OrderHistoryDetailsMessagesDto> orderHistoryDetailsMessages});
+          name: 'SpecialInstructions', readValue: specialInstructionOverride)
+      String orderHistoryDetailsSpecialInstructions,
+      @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+      List<PoDocumentsDto> orderHistoryDetailsPoDocuments});
 
-  @override
-  $OrderHistoryDetailsOrderHeadersDtoCopyWith<$Res>
-      get orderHistoryDetailsOrderHeader;
-  @override
-  $OrderHistoryDetailsShippingInformationDtoCopyWith<$Res>
-      get orderHistoryDetailsShippingInformation;
   @override
   $OrderHistoryDetailsPaymentTermDtoCopyWith<$Res>
       get orderHistoryDetailsPaymentTerm;
@@ -226,24 +315,102 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryDetailsOrderHeader = null,
-    Object? orderHistoryDetailsShippingInformation = null,
+    Object? totalTax = null,
+    Object? requestedDeliveryDate = null,
+    Object? type = null,
+    Object? telephoneNumber = null,
+    Object? orderValue = null,
+    Object? createdDate = null,
+    Object? eZRXNumber = null,
+    Object? orderBy = null,
+    Object? referenceNotes = null,
+    Object? companyName = null,
+    Object? orderNumber = null,
+    Object? pOReference = null,
+    Object? shipTo = null,
+    Object? soldTo = null,
+    Object? shipToAddress = null,
+    Object? soldToAddress = null,
+    Object? invoiceNumber = null,
+    Object? orderReason = null,
     Object? orderHistoryDetailsOrderItem = null,
     Object? orderHistoryDetailsPaymentTerm = null,
     Object? orderHistoryDetailsSpecialInstructions = null,
     Object? orderHistoryDetailsPoDocuments = null,
-    Object? orderHistoryDetailsMessages = null,
   }) {
     return _then(_$_OrderHistoryDetailsDto(
-      orderHistoryDetailsOrderHeader: null == orderHistoryDetailsOrderHeader
-          ? _value.orderHistoryDetailsOrderHeader
-          : orderHistoryDetailsOrderHeader // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsOrderHeadersDto,
-      orderHistoryDetailsShippingInformation: null ==
-              orderHistoryDetailsShippingInformation
-          ? _value.orderHistoryDetailsShippingInformation
-          : orderHistoryDetailsShippingInformation // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsShippingInformationDto,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
+              as double,
+      requestedDeliveryDate: null == requestedDeliveryDate
+          ? _value.requestedDeliveryDate
+          : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      telephoneNumber: null == telephoneNumber
+          ? _value.telephoneNumber
+          : telephoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      createdDate: null == createdDate
+          ? _value.createdDate
+          : createdDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      eZRXNumber: null == eZRXNumber
+          ? _value.eZRXNumber
+          : eZRXNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderBy: null == orderBy
+          ? _value.orderBy
+          : orderBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      referenceNotes: null == referenceNotes
+          ? _value.referenceNotes
+          : referenceNotes // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      pOReference: null == pOReference
+          ? _value.pOReference
+          : pOReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipTo: null == shipTo
+          ? _value.shipTo
+          : shipTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      soldTo: null == soldTo
+          ? _value.soldTo
+          : soldTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipToAddress: null == shipToAddress
+          ? _value.shipToAddress
+          : shipToAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      soldToAddress: null == soldToAddress
+          ? _value.soldToAddress
+          : soldToAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      invoiceNumber: null == invoiceNumber
+          ? _value.invoiceNumber
+          : invoiceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as String,
       orderHistoryDetailsOrderItem: null == orderHistoryDetailsOrderItem
           ? _value._orderHistoryDetailsOrderItem
           : orderHistoryDetailsOrderItem // ignore: cast_nullable_to_non_nullable
@@ -261,10 +428,6 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
           ? _value._orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
               as List<PoDocumentsDto>,
-      orderHistoryDetailsMessages: null == orderHistoryDetailsMessages
-          ? _value._orderHistoryDetailsMessages
-          : orderHistoryDetailsMessages // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsMessagesDto>,
     ));
   }
 }
@@ -273,44 +436,104 @@ class __$$_OrderHistoryDetailsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   const _$_OrderHistoryDetailsDto(
-      {@JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-      required this.orderHistoryDetailsOrderHeader,
-      @JsonKey(
-          name: 'ShippingInformation', readValue: shippingInformationOverride)
-      required this.orderHistoryDetailsShippingInformation,
-      @JsonKey(
-          name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+      {@JsonKey(name: 'TotalTax', defaultValue: 0) required this.totalTax,
+      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+      required this.requestedDeliveryDate,
+      @JsonKey(name: 'Type', defaultValue: '') required this.type,
+      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+      required this.telephoneNumber,
+      @JsonKey(name: 'OrderValue', defaultValue: 0.0) required this.orderValue,
+      @JsonKey(name: 'CreatedDate', defaultValue: '') required this.createdDate,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') required this.eZRXNumber,
+      @JsonKey(name: 'OrderBy', defaultValue: '') required this.orderBy,
+      @JsonKey(name: 'ReferenceNotes', defaultValue: '')
+      required this.referenceNotes,
+      @JsonKey(name: 'CompanyName', defaultValue: '') required this.companyName,
+      @JsonKey(name: 'OrderNumber', defaultValue: '') required this.orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '') required this.pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '') required this.shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '') required this.soldTo,
+      @JsonKey(name: 'ShipToAddres', defaultValue: '')
+      required this.shipToAddress,
+      @JsonKey(name: 'SoldToAddress', defaultValue: '')
+      required this.soldToAddress,
+      @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+      required this.invoiceNumber,
+      @JsonKey(name: 'OrderReason', defaultValue: '') required this.orderReason,
+      @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
       required final List<OrderHistoryDetailsOrderItemDto>
           orderHistoryDetailsOrderItem,
       @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
       required this.orderHistoryDetailsPaymentTerm,
-      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-      required this.orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
-      required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(
-          name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-      required final List<OrderHistoryDetailsMessagesDto>
-          orderHistoryDetailsMessages})
+          name: 'SpecialInstructions', readValue: specialInstructionOverride)
+      required this.orderHistoryDetailsSpecialInstructions,
+      @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+      required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments})
       : _orderHistoryDetailsOrderItem = orderHistoryDetailsOrderItem,
         _orderHistoryDetailsPoDocuments = orderHistoryDetailsPoDocuments,
-        _orderHistoryDetailsMessages = orderHistoryDetailsMessages,
         super._();
 
   factory _$_OrderHistoryDetailsDto.fromJson(Map<String, dynamic> json) =>
       _$$_OrderHistoryDetailsDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-  final OrderHistoryDetailsOrderHeadersDto orderHistoryDetailsOrderHeader;
+  @JsonKey(name: 'TotalTax', defaultValue: 0)
+  final double totalTax;
   @override
-  @JsonKey(name: 'ShippingInformation', readValue: shippingInformationOverride)
-  final OrderHistoryDetailsShippingInformationDto
-      orderHistoryDetailsShippingInformation;
+  @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+  final String requestedDeliveryDate;
+  @override
+  @JsonKey(name: 'Type', defaultValue: '')
+  final String type;
+  @override
+  @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+  final String telephoneNumber;
+  @override
+  @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+  final double orderValue;
+  @override
+  @JsonKey(name: 'CreatedDate', defaultValue: '')
+  final String createdDate;
+  @override
+  @JsonKey(name: 'EZRXNumber', defaultValue: '')
+  final String eZRXNumber;
+  @override
+  @JsonKey(name: 'OrderBy', defaultValue: '')
+  final String orderBy;
+  @override
+  @JsonKey(name: 'ReferenceNotes', defaultValue: '')
+  final String referenceNotes;
+  @override
+  @JsonKey(name: 'CompanyName', defaultValue: '')
+  final String companyName;
+  @override
+  @JsonKey(name: 'OrderNumber', defaultValue: '')
+  final String orderNumber;
+  @override
+  @JsonKey(name: 'POReference', defaultValue: '')
+  final String pOReference;
+  @override
+  @JsonKey(name: 'ShipTo', defaultValue: '')
+  final String shipTo;
+  @override
+  @JsonKey(name: 'SoldTo', defaultValue: '')
+  final String soldTo;
+  @override
+  @JsonKey(name: 'ShipToAddres', defaultValue: '')
+  final String shipToAddress;
+  @override
+  @JsonKey(name: 'SoldToAddress', defaultValue: '')
+  final String soldToAddress;
+  @override
+  @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+  final String invoiceNumber;
+  @override
+  @JsonKey(name: 'OrderReason', defaultValue: '')
+  final String orderReason;
   final List<OrderHistoryDetailsOrderItemDto> _orderHistoryDetailsOrderItem;
   @override
-  @JsonKey(
-      name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+  @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
   List<OrderHistoryDetailsOrderItemDto> get orderHistoryDetailsOrderItem {
     if (_orderHistoryDetailsOrderItem is EqualUnmodifiableListView)
       return _orderHistoryDetailsOrderItem;
@@ -322,11 +545,11 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
   @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
   final OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm;
   @override
-  @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+  @JsonKey(name: 'SpecialInstructions', readValue: specialInstructionOverride)
   final String orderHistoryDetailsSpecialInstructions;
   final List<PoDocumentsDto> _orderHistoryDetailsPoDocuments;
   @override
-  @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
+  @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
   List<PoDocumentsDto> get orderHistoryDetailsPoDocuments {
     if (_orderHistoryDetailsPoDocuments is EqualUnmodifiableListView)
       return _orderHistoryDetailsPoDocuments;
@@ -334,19 +557,9 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
     return EqualUnmodifiableListView(_orderHistoryDetailsPoDocuments);
   }
 
-  final List<OrderHistoryDetailsMessagesDto> _orderHistoryDetailsMessages;
-  @override
-  @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-  List<OrderHistoryDetailsMessagesDto> get orderHistoryDetailsMessages {
-    if (_orderHistoryDetailsMessages is EqualUnmodifiableListView)
-      return _orderHistoryDetailsMessages;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_orderHistoryDetailsMessages);
-  }
-
   @override
   String toString() {
-    return 'OrderHistoryDetailsDto(orderHistoryDetailsOrderHeader: $orderHistoryDetailsOrderHeader, orderHistoryDetailsShippingInformation: $orderHistoryDetailsShippingInformation, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, orderHistoryDetailsMessages: $orderHistoryDetailsMessages)';
+    return 'OrderHistoryDetailsDto(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, companyName: $companyName, orderNumber: $orderNumber, pOReference: $pOReference, shipTo: $shipTo, soldTo: $soldTo, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments)';
   }
 
   @override
@@ -354,14 +567,38 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetailsDto &&
-            (identical(other.orderHistoryDetailsOrderHeader,
-                    orderHistoryDetailsOrderHeader) ||
-                other.orderHistoryDetailsOrderHeader ==
-                    orderHistoryDetailsOrderHeader) &&
-            (identical(other.orderHistoryDetailsShippingInformation,
-                    orderHistoryDetailsShippingInformation) ||
-                other.orderHistoryDetailsShippingInformation ==
-                    orderHistoryDetailsShippingInformation) &&
+            (identical(other.totalTax, totalTax) ||
+                other.totalTax == totalTax) &&
+            (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
+                other.requestedDeliveryDate == requestedDeliveryDate) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.telephoneNumber, telephoneNumber) ||
+                other.telephoneNumber == telephoneNumber) &&
+            (identical(other.orderValue, orderValue) ||
+                other.orderValue == orderValue) &&
+            (identical(other.createdDate, createdDate) ||
+                other.createdDate == createdDate) &&
+            (identical(other.eZRXNumber, eZRXNumber) ||
+                other.eZRXNumber == eZRXNumber) &&
+            (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
+            (identical(other.referenceNotes, referenceNotes) ||
+                other.referenceNotes == referenceNotes) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.orderNumber, orderNumber) ||
+                other.orderNumber == orderNumber) &&
+            (identical(other.pOReference, pOReference) ||
+                other.pOReference == pOReference) &&
+            (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
+            (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
+            (identical(other.shipToAddress, shipToAddress) ||
+                other.shipToAddress == shipToAddress) &&
+            (identical(other.soldToAddress, soldToAddress) ||
+                other.soldToAddress == soldToAddress) &&
+            (identical(other.invoiceNumber, invoiceNumber) ||
+                other.invoiceNumber == invoiceNumber) &&
+            (identical(other.orderReason, orderReason) ||
+                other.orderReason == orderReason) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryDetailsOrderItem,
                 _orderHistoryDetailsOrderItem) &&
@@ -375,23 +612,36 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
                     orderHistoryDetailsSpecialInstructions) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryDetailsPoDocuments,
-                _orderHistoryDetailsPoDocuments) &&
-            const DeepCollectionEquality().equals(
-                other._orderHistoryDetailsMessages,
-                _orderHistoryDetailsMessages));
+                _orderHistoryDetailsPoDocuments));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      orderHistoryDetailsOrderHeader,
-      orderHistoryDetailsShippingInformation,
-      const DeepCollectionEquality().hash(_orderHistoryDetailsOrderItem),
-      orderHistoryDetailsPaymentTerm,
-      orderHistoryDetailsSpecialInstructions,
-      const DeepCollectionEquality().hash(_orderHistoryDetailsPoDocuments),
-      const DeepCollectionEquality().hash(_orderHistoryDetailsMessages));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        totalTax,
+        requestedDeliveryDate,
+        type,
+        telephoneNumber,
+        orderValue,
+        createdDate,
+        eZRXNumber,
+        orderBy,
+        referenceNotes,
+        companyName,
+        orderNumber,
+        pOReference,
+        shipTo,
+        soldTo,
+        shipToAddress,
+        soldToAddress,
+        invoiceNumber,
+        orderReason,
+        const DeepCollectionEquality().hash(_orderHistoryDetailsOrderItem),
+        orderHistoryDetailsPaymentTerm,
+        orderHistoryDetailsSpecialInstructions,
+        const DeepCollectionEquality().hash(_orderHistoryDetailsPoDocuments)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -410,56 +660,121 @@ class _$_OrderHistoryDetailsDto extends _OrderHistoryDetailsDto {
 
 abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   const factory _OrderHistoryDetailsDto(
-      {@JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-      required final OrderHistoryDetailsOrderHeadersDto
-          orderHistoryDetailsOrderHeader,
-      @JsonKey(
-          name: 'ShippingInformation', readValue: shippingInformationOverride)
-      required final OrderHistoryDetailsShippingInformationDto
-          orderHistoryDetailsShippingInformation,
-      @JsonKey(
-          name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+      {@JsonKey(name: 'TotalTax', defaultValue: 0)
+      required final double totalTax,
+      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+      required final String requestedDeliveryDate,
+      @JsonKey(name: 'Type', defaultValue: '') required final String type,
+      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+      required final String telephoneNumber,
+      @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+      required final double orderValue,
+      @JsonKey(name: 'CreatedDate', defaultValue: '')
+      required final String createdDate,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '')
+      required final String eZRXNumber,
+      @JsonKey(name: 'OrderBy', defaultValue: '') required final String orderBy,
+      @JsonKey(name: 'ReferenceNotes', defaultValue: '')
+      required final String referenceNotes,
+      @JsonKey(name: 'CompanyName', defaultValue: '')
+      required final String companyName,
+      @JsonKey(name: 'OrderNumber', defaultValue: '')
+      required final String orderNumber,
+      @JsonKey(name: 'POReference', defaultValue: '')
+      required final String pOReference,
+      @JsonKey(name: 'ShipTo', defaultValue: '') required final String shipTo,
+      @JsonKey(name: 'SoldTo', defaultValue: '') required final String soldTo,
+      @JsonKey(name: 'ShipToAddres', defaultValue: '')
+      required final String shipToAddress,
+      @JsonKey(name: 'SoldToAddress', defaultValue: '')
+      required final String soldToAddress,
+      @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+      required final String invoiceNumber,
+      @JsonKey(name: 'OrderReason', defaultValue: '')
+      required final String orderReason,
+      @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
       required final List<OrderHistoryDetailsOrderItemDto>
           orderHistoryDetailsOrderItem,
       @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
       required final OrderHistoryDetailsPaymentTermDto
           orderHistoryDetailsPaymentTerm,
-      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
-      required final String orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
-      required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(
-          name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-      required final List<OrderHistoryDetailsMessagesDto>
-          orderHistoryDetailsMessages}) = _$_OrderHistoryDetailsDto;
+          name: 'SpecialInstructions', readValue: specialInstructionOverride)
+      required final String orderHistoryDetailsSpecialInstructions,
+      @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+      required final List<PoDocumentsDto>
+          orderHistoryDetailsPoDocuments}) = _$_OrderHistoryDetailsDto;
   const _OrderHistoryDetailsDto._() : super._();
 
   factory _OrderHistoryDetailsDto.fromJson(Map<String, dynamic> json) =
       _$_OrderHistoryDetailsDto.fromJson;
 
   @override
-  @JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-  OrderHistoryDetailsOrderHeadersDto get orderHistoryDetailsOrderHeader;
+  @JsonKey(name: 'TotalTax', defaultValue: 0)
+  double get totalTax;
   @override
-  @JsonKey(name: 'ShippingInformation', readValue: shippingInformationOverride)
-  OrderHistoryDetailsShippingInformationDto
-      get orderHistoryDetailsShippingInformation;
+  @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+  String get requestedDeliveryDate;
   @override
-  @JsonKey(
-      name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
+  @JsonKey(name: 'Type', defaultValue: '')
+  String get type;
+  @override
+  @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+  String get telephoneNumber;
+  @override
+  @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+  double get orderValue;
+  @override
+  @JsonKey(name: 'CreatedDate', defaultValue: '')
+  String get createdDate;
+  @override
+  @JsonKey(name: 'EZRXNumber', defaultValue: '')
+  String get eZRXNumber;
+  @override
+  @JsonKey(name: 'OrderBy', defaultValue: '')
+  String get orderBy;
+  @override
+  @JsonKey(name: 'ReferenceNotes', defaultValue: '')
+  String get referenceNotes;
+  @override
+  @JsonKey(name: 'CompanyName', defaultValue: '')
+  String get companyName;
+  @override
+  @JsonKey(name: 'OrderNumber', defaultValue: '')
+  String get orderNumber;
+  @override
+  @JsonKey(name: 'POReference', defaultValue: '')
+  String get pOReference;
+  @override
+  @JsonKey(name: 'ShipTo', defaultValue: '')
+  String get shipTo;
+  @override
+  @JsonKey(name: 'SoldTo', defaultValue: '')
+  String get soldTo;
+  @override
+  @JsonKey(name: 'ShipToAddres', defaultValue: '')
+  String get shipToAddress;
+  @override
+  @JsonKey(name: 'SoldToAddress', defaultValue: '')
+  String get soldToAddress;
+  @override
+  @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+  String get invoiceNumber;
+  @override
+  @JsonKey(name: 'OrderReason', defaultValue: '')
+  String get orderReason;
+  @override
+  @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
   List<OrderHistoryDetailsOrderItemDto> get orderHistoryDetailsOrderItem;
   @override
   @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
   OrderHistoryDetailsPaymentTermDto get orderHistoryDetailsPaymentTerm;
   @override
-  @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+  @JsonKey(name: 'SpecialInstructions', readValue: specialInstructionOverride)
   String get orderHistoryDetailsSpecialInstructions;
   @override
-  @JsonKey(name: 'PODocuments', defaultValue: <PoDocumentsDto>[])
+  @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
   List<PoDocumentsDto> get orderHistoryDetailsPoDocuments;
-  @override
-  @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-  List<OrderHistoryDetailsMessagesDto> get orderHistoryDetailsMessages;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsDtoCopyWith<_$_OrderHistoryDetailsDto> get copyWith =>

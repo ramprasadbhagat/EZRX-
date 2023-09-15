@@ -6,6 +6,8 @@ class ViewByOrderDetailsEvent with _$ViewByOrderDetailsEvent {
   const factory ViewByOrderDetailsEvent.fetch({
     required User user,
     required OrderHistoryDetailsOrderHeader orderHeader,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
   }) = _Fetch;
   const factory ViewByOrderDetailsEvent.updateMaterialTenderContract({
     required TenderContract selectedTenderContract,

@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -22,12 +24,12 @@ class ViewByOrderDetailsRepository implements IViewByOrderDetailsRepository {
   Future<Either<ApiFailure, OrderHistoryDetails>> getViewByOrderDetails({
     required User user,
     required OrderHistoryDetailsOrderHeader orderHeader,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final result = user.role.type.isSalesRepRole
-            ? await localDataSource.getOrderHistoryDetailsForSalesRep()
-            : await localDataSource.getOrderHistoryDetails();
+        final result = await localDataSource.getOrderHistoryDetails();
 
         return Right(result);
       } catch (e) {
@@ -35,18 +37,13 @@ class ViewByOrderDetailsRepository implements IViewByOrderDetailsRepository {
       }
     }
     try {
-      final orderHistoryDetailsList = user.role.type.isSalesRepRole
-          ? await orderHistoryDetailsRemoteDataSource
-              .getOrderHistoryDetailsForSalesRep(
-              companyName: '',
-              orderId: orderHeader.orderNumber.getOrCrash(),
-              language: user.preferredLanguage.languageCode,
-              userName: user.username.getOrCrash(),
-            )
-          : await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-              orderId: orderHeader.orderNumber.getOrCrash(),
-              language: user.preferredLanguage.languageCode,
-            );
+      final orderHistoryDetailsList =
+          await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
+        searchKey: orderHeader.orderNumber.getOrCrash(),
+        language: user.preferredLanguage.languageCode,
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        soldTo: customerCodeInfo.customerCodeSoldTo,
+      );
 
       return Right(orderHistoryDetailsList);
     } catch (e) {

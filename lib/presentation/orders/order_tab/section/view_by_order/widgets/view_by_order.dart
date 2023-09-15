@@ -1,6 +1,6 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/view_by_order_section.dart';
 
-class _ViewByOrder extends StatefulWidget {
+class _ViewByOrder extends StatelessWidget {
   final OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
   final OrderHistoryItem orderHistoryItem;
 
@@ -9,22 +9,6 @@ class _ViewByOrder extends StatefulWidget {
     required this.viewByOrderHistoryItem,
     required this.orderHistoryItem,
   }) : super(key: key);
-
-  @override
-  State<_ViewByOrder> createState() => _ViewByOrderState();
-}
-
-class _ViewByOrderState extends State<_ViewByOrder> {
-  @override
-  void initState() {
-    context.read<ViewByOrderDetailsBloc>().add(
-          ViewByOrderDetailsEvent.fetch(
-            user: context.read<UserBloc>().state.user,
-            orderHeader: widget.viewByOrderHistoryItem,
-          ),
-        );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +20,7 @@ class _ViewByOrderState extends State<_ViewByOrder> {
         onTap: () {
           context.router.push(
             ViewByOrderDetailsPageRoute(
-              viewByOrderHistoryItem: widget.viewByOrderHistoryItem,
+              viewByOrderHistoryItem: viewByOrderHistoryItem,
             ),
           );
         },
@@ -45,7 +29,7 @@ class _ViewByOrderState extends State<_ViewByOrder> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${'Order'.tr()} #${widget.viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+              '${'Order'.tr()} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
               style: Theme.of(context).textTheme.labelSmall,
             ),
             Padding(
@@ -54,12 +38,12 @@ class _ViewByOrderState extends State<_ViewByOrder> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${widget.viewByOrderHistoryItem.itemCount} ${'items'.tr()}',
+                    '${viewByOrderHistoryItem.itemCount} ${'items'.tr()}',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   PriceComponent(
                     salesOrgConfig: salesOrgConfigs,
-                    price: widget.viewByOrderHistoryItem.orderValue.toString(),
+                    price: viewByOrderHistoryItem.orderValue.toString(),
                     title: 'Order total : ',
                     priceLabelStyle:
                         Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -70,7 +54,7 @@ class _ViewByOrderState extends State<_ViewByOrder> {
               ),
             ),
             _BuyAgainButton(
-              viewByOrderHistoryItem: widget.viewByOrderHistoryItem,
+              viewByOrderHistoryItem: viewByOrderHistoryItem,
             ),
           ],
         ),

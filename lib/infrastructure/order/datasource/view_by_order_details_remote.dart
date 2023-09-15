@@ -22,16 +22,20 @@ class ViewByOrderDetailsRemoteDataSource {
   });
 
   Future<OrderHistoryDetails> getOrderHistoryDetails({
-    required String orderId,
     required String language,
+    required String soldTo,
+    required String searchKey,
+    required String salesOrg,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData =
           viewByOrderDetailsQueryMutation.getOrderHistoryDetails();
 
       final variables = {
-        'salesDocument': orderId,
+        'searchKey': searchKey,
         'language': language,
+        'soldTo': soldTo,
+        'salesOrg': [salesOrg],
       };
 
       final res = await httpService.request(
@@ -46,51 +50,12 @@ class ViewByOrderDetailsRemoteDataSource {
 
       _orderHistoryDetailsExceptionChecker(res: res);
 
-      if (res.data['data']['orderDetails'].isEmpty) {
+      if (res.data['data']['orderHistoryV3'].isEmpty) {
         return OrderHistoryDetails.empty();
       }
 
       return OrderHistoryDetailsDto.fromJson(
-        res.data['data']['orderDetails'],
-      ).toDomain();
-    });
-  }
-
-  Future<OrderHistoryDetails> getOrderHistoryDetailsForSalesRep({
-    required String companyName,
-    required String orderId,
-    required String language,
-    required String userName,
-  }) async {
-    return await dataSourceExceptionHandler.handle(() async {
-      final queryData =
-          viewByOrderDetailsQueryMutation.getOrderHistoryDetailsForSalesRep();
-
-      final variables = {
-        'salesDocument': orderId,
-        'companyName': companyName,
-        'language': language,
-        'userName': userName,
-      };
-
-      final res = await httpService.request(
-        method: 'POST',
-        url: '${config.urlConstants}order',
-        data: jsonEncode({
-          'query': queryData,
-          'variables': variables,
-        }),
-        apiEndpoint: 'orderDetailsForSalesRep',
-      );
-
-      _orderHistoryDetailsExceptionChecker(res: res);
-
-      if (res.data['data']['orderDetailsForSalesRep'].isEmpty) {
-        return OrderHistoryDetails.empty();
-      }
-
-      return OrderHistoryDetailsDto.fromJson(
-        res.data['data']['orderDetailsForSalesRep'],
+        res.data['data']['orderHistoryV3']['orderHeaders'][0],
       ).toDomain();
     });
   }

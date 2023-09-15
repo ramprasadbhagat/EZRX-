@@ -18,21 +18,21 @@ void main() {
     test('Test fromDomain', () {
       final configs = OrderHistoryDetailsDto.fromDomain(
         OrderHistoryDetailsDto.fromJson(
-          data['data']['orderDetails'],
+          data['data']['orderHistoryV3']['orderHeaders'][0],
         ).toDomain(),
       );
 
-      expect(configs.orderHistoryDetailsOrderHeader.type, 'ZPOR');
+      expect(configs.type, 'ZPOR');
     });
 
     test('Test tojson', () {
       final configs = OrderHistoryDetailsDto.fromDomain(
         OrderHistoryDetailsDto.fromJson(
-          data['data']['orderDetails'],
+          data['data']['orderHistoryV3']['orderHeaders'][0],
         ).toDomain(),
       ).toJson();
 
-      expect(configs['OrderHeader']['EZRXNumber'], 'EZRX-dc70b03');
+      expect(configs['EZRXNumber'], 'EZRX-1720e3e');
     });
   });
 }

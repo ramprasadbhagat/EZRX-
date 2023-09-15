@@ -101,6 +101,8 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
         final failureOrSuccess = await repository.getOrderConfirmationDetail(
           orderResponse: state.submitOrderResponse,
           user: state.user,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
         );
         failureOrSuccess.fold(
           (failure) {

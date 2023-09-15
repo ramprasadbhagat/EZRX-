@@ -55,14 +55,14 @@ class DeliveryInfoData with _$DeliveryInfoData {
   }) {
     return DeliveryInfoData.empty().copyWith(
       poReference: PoReference(
-        orderHistoryDetails.orderHistoryDetailsShippingInformation.pOReference
+        orderHistoryDetails.pOReference
             .displayPOReference,
       ),
       contactPerson: ContactPerson(
-        orderHistoryDetails.orderHistoryDetailsOrderHeader.orderBy,
+        orderHistoryDetails.orderBy,
       ),
       mobileNumber: MobileNumber(
-        orderHistoryDetails.orderHistoryDetailsOrderHeader.telephoneNumber
+        orderHistoryDetails.telephoneNumber
             .getOrDefaultValue(''),
       ),
       deliveryInstruction: DeliveryInstruction(
@@ -70,7 +70,7 @@ class DeliveryInfoData with _$DeliveryInfoData {
             .getOrDefaultValue(''),
       ),
       referenceNote: ReferenceNote(
-        orderHistoryDetails.orderHistoryDetailsOrderHeader.referenceNotes,
+        orderHistoryDetails.referenceNotes,
       ),
       // collectiveNumber: CollectiveNumber(''),
       paymentTerm: PaymentTerm(

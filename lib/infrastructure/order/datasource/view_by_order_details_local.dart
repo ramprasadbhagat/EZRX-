@@ -10,18 +10,7 @@ class ViewByOrderDetailsLocalDataSource {
       await rootBundle.loadString('assets/json/getOrderDetailsResponse.json'),
     );
 
-    final finalData = data['data']['orderDetails'];
-
-    return OrderHistoryDetailsDto.fromJson(finalData).toDomain();
-  }
-
-  Future<OrderHistoryDetails> getOrderHistoryDetailsForSalesRep() async {
-    final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getorderDetailsForSalesRep.json'),
-    );
-
-    final finalData = data['data']['orderDetailsForSalesRep'];
+    final finalData = data['data']['orderHistoryV3']['orderHeaders'][0];
 
     return OrderHistoryDetailsDto.fromJson(finalData).toDomain();
   }

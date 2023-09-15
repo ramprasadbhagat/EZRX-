@@ -20,7 +20,10 @@ mixin _$ViewByOrderDetailsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            User user, OrderHistoryDetailsOrderHeader orderHeader)
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
@@ -39,7 +42,11 @@ mixin _$ViewByOrderDetailsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult? Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -58,7 +65,11 @@ mixin _$ViewByOrderDetailsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -167,7 +178,10 @@ class _$_Initialized implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            User user, OrderHistoryDetailsOrderHeader orderHeader)
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
@@ -189,7 +203,11 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult? Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -211,7 +229,11 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -286,10 +308,16 @@ abstract class _$$_FetchCopyWith<$Res> {
   factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
       __$$_FetchCopyWithImpl<$Res>;
   @useResult
-  $Res call({User user, OrderHistoryDetailsOrderHeader orderHeader});
+  $Res call(
+      {User user,
+      OrderHistoryDetailsOrderHeader orderHeader,
+      CustomerCodeInfo customerCodeInfo,
+      SalesOrganisation salesOrganisation});
 
   $UserCopyWith<$Res> get user;
   $OrderHistoryDetailsOrderHeaderCopyWith<$Res> get orderHeader;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -304,6 +332,8 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
     Object? orderHeader = null,
+    Object? customerCodeInfo = null,
+    Object? salesOrganisation = null,
   }) {
     return _then(_$_Fetch(
       user: null == user
@@ -314,6 +344,14 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.orderHeader
           : orderHeader // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsOrderHeader,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
     ));
   }
 
@@ -333,21 +371,45 @@ class __$$_FetchCopyWithImpl<$Res>
       return _then(_value.copyWith(orderHeader: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.user, required this.orderHeader});
+  const _$_Fetch(
+      {required this.user,
+      required this.orderHeader,
+      required this.customerCodeInfo,
+      required this.salesOrganisation});
 
   @override
   final User user;
   @override
   final OrderHistoryDetailsOrderHeader orderHeader;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final SalesOrganisation salesOrganisation;
 
   @override
   String toString() {
-    return 'ViewByOrderDetailsEvent.fetch(user: $user, orderHeader: $orderHeader)';
+    return 'ViewByOrderDetailsEvent.fetch(user: $user, orderHeader: $orderHeader, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation)';
   }
 
   @override
@@ -357,11 +419,16 @@ class _$_Fetch implements _Fetch {
             other is _$_Fetch &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.orderHeader, orderHeader) ||
-                other.orderHeader == orderHeader));
+                other.orderHeader == orderHeader) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, orderHeader);
+  int get hashCode => Object.hash(
+      runtimeType, user, orderHeader, customerCodeInfo, salesOrganisation);
 
   @JsonKey(ignore: true)
   @override
@@ -374,7 +441,10 @@ class _$_Fetch implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            User user, OrderHistoryDetailsOrderHeader orderHeader)
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
@@ -389,14 +459,18 @@ class _$_Fetch implements _Fetch {
             Locale locale)
         fetchDetailItemList,
   }) {
-    return fetch(user, orderHeader);
+    return fetch(user, orderHeader, customerCodeInfo, salesOrganisation);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult? Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -411,14 +485,18 @@ class _$_Fetch implements _Fetch {
             Locale locale)?
         fetchDetailItemList,
   }) {
-    return fetch?.call(user, orderHeader);
+    return fetch?.call(user, orderHeader, customerCodeInfo, salesOrganisation);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -435,7 +513,7 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(user, orderHeader);
+      return fetch(user, orderHeader, customerCodeInfo, salesOrganisation);
     }
     return orElse();
   }
@@ -487,10 +565,14 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements ViewByOrderDetailsEvent {
   const factory _Fetch(
       {required final User user,
-      required final OrderHistoryDetailsOrderHeader orderHeader}) = _$_Fetch;
+      required final OrderHistoryDetailsOrderHeader orderHeader,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final SalesOrganisation salesOrganisation}) = _$_Fetch;
 
   User get user;
   OrderHistoryDetailsOrderHeader get orderHeader;
+  CustomerCodeInfo get customerCodeInfo;
+  SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
       throw _privateConstructorUsedError;
@@ -599,7 +681,10 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            User user, OrderHistoryDetailsOrderHeader orderHeader)
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
@@ -621,7 +706,11 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult? Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -644,7 +733,11 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -764,7 +857,10 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            User user, OrderHistoryDetailsOrderHeader orderHeader)
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
@@ -786,7 +882,11 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult? Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -808,7 +908,11 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -1037,7 +1141,10 @@ class _$_FetchDetailItemList implements _FetchDetailItemList {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(
-            User user, OrderHistoryDetailsOrderHeader orderHeader)
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
@@ -1060,7 +1167,11 @@ class _$_FetchDetailItemList implements _FetchDetailItemList {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult? Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
@@ -1083,7 +1194,11 @@ class _$_FetchDetailItemList implements _FetchDetailItemList {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(User user, OrderHistoryDetailsOrderHeader orderHeader)?
+    TResult Function(
+            User user,
+            OrderHistoryDetailsOrderHeader orderHeader,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?

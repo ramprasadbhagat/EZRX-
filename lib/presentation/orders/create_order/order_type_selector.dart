@@ -186,7 +186,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
 
   String get displayReasonText {
     final orderReason = orderHistoryDetailsState
-        .orderHistoryDetails.orderHistoryDetailsOrderHeader.orderReason;
+        .orderHistoryDetails.orderReason;
     final reasonList = orderDocumentTypeState.reasonList.firstWhere(
       (element) => element.orderReason == orderReason,
       orElse: () => orderDocumentTypeState.reasonList.first,

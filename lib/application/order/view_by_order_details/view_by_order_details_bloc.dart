@@ -51,6 +51,8 @@ class ViewByOrderDetailsBloc
             await viewByOrderDetailsRepository.getViewByOrderDetails(
           user: e.user,
           orderHeader: e.orderHeader,
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
         );
 
         failureOrSuccess.fold(
@@ -77,6 +79,16 @@ class ViewByOrderDetailsBloc
                     if (item.orderItem.isTenderContractMaterial)
                       item.orderItem.queryInfo: true,
                 },
+              ),
+            );
+            add(
+              ViewByOrderDetailsEvent.fetchDetailItemList(
+                validOrderHistoryDetailsOrderItems:
+                    state.orderHistoryDetails.orderHistoryDetailsOrderItem,
+                salesOrganisation: e.salesOrganisation,
+                customerCodeInfo: e.customerCodeInfo,
+                shipToInfo: e.customerCodeInfo.shipToInfos.first,
+                locale: e.user.preferredLanguage,
               ),
             );
           },

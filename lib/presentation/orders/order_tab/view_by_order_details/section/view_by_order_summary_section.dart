@@ -72,8 +72,8 @@ class OrderSummarySection extends StatelessWidget {
             valueText: StringUtils.displayPrice(
               context.read<SalesOrgBloc>().state.configs,
               taxDisplayForOrderHistoryAndDetails
-                  ? orderDetails.orderHistoryDetailsOrderHeader.grandTotal
-                  : orderDetails.orderHistoryDetailsOrderHeader.orderValue,
+                  ? orderDetails.grandTotal
+                  : orderDetails.orderValue,
             ),
           ),
           // const BalanceTextRow(

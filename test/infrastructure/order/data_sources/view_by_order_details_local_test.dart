@@ -36,26 +36,8 @@ void main() {
 
           final result = await localDataSource.getOrderHistoryDetails();
 
-          final finalData = res['data']['orderDetails'];
+          final finalData = res['data']['orderHistoryV3']['orderHeaders'][0];
 
-          expect(
-            result,
-            OrderHistoryDetailsDto.fromJson(finalData).toDomain(),
-          );
-        },
-      );
-
-      test(
-        'Ge order history for sales rep',
-        () async {
-          final res = json.decode(
-            await rootBundle
-                .loadString('assets/json/getorderDetailsForSalesRep.json'),
-          );
-
-          final result =
-              await localDataSource.getOrderHistoryDetailsForSalesRep();
-          final finalData = res['data']['orderDetailsForSalesRep'];
           expect(
             result,
             OrderHistoryDetailsDto.fromJson(finalData).toDomain(),

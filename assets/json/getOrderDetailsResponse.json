@@ -1,94 +1,155 @@
 {
   "data": {
-      "orderDetails": {
-          "OrderHeader": {
-            "TotalTax": 0.0,
-            "RequestedDeliveryDate": "2022-10-31",
-            "POReference": "Test1",
-            "OrderBy": "Siddique Md Faizan",
-            "Type": "ZPOR",
-            "TelephoneNumber": "",
-            "EZRXNumber": "EZRX-dc70b03",
-            "OrderValue": 0.0,
-            "OrderNumber":"0200262073",
-            "CreatedDate":"2022-10-30",
-              "ReferenceNotes": ""
-          },
-          "ShippingInformation": {
-            "Address": "",
-            "POReference": "Test1",
-            "InvoiceNumber": "",
-            "InvoiceDate": "",
-            "Invoices": [
-              {
-                "InvoiceNumber":"123",
-                "InvoiceDate":"2022-10-30",
-                "InvoicePrice":"0.0"
-              },
-              {
-                "InvoiceNumber":"124",
-                "InvoiceDate":"2022-10-30",
-                "InvoicePrice":"1.0"
-              }
-            ],
-  
-            "PostalCode":"117406",
-            "Country":"",
-            "Phone":"",
-            "Fax":""
-  
+    "orderHistoryV3": {
+      "orderHeaders": [
+        {
+          "Type": "ZPOR",
+          "OrderNumber": "0200267147",
+          "EZRXNumber": "EZRX-1720e3e",
+          "SoldTo": "0030082707",
+          "ShipTo": "0070149863",
+          "ShipToAddres": "t/a SUBANG JAYA MEDICAL CENTRENO 1 JALAN SS 12/1A47500 SUBANGJAYA, PETALING 47500",
+          "SoldToAddress": "t/a SUBANG JAYA MEDICAL CENTRENO 1 JALAN SS 12/1A47500 SUBANG JAYA SELANGOR, PETALINGx 47500",
+          "CompanyName": "RSD HOSPITALS SDN BHD (SJMC)",
+          "OrderValue": 658.8,
+          "DeliveryFee": 0,
+          "ManualFee": 0,
+          "ProcessingStatus": "Order Pending",
+          "CreatedDate": "20230911",
+          "RequestedDeliveryDate": "2023-09-11",
+          "OrderBy": "rootadmin",
+          "TelephoneNumber": "",
+          "POReference": "",
+          "TotalTax": 26.350000000000023,
+          "ReferenceNotes": "",
+          "TotalValue": 685.15,
+          "SpecialInstructions": null,
+          "PaymentMethod": "Bank Transfer",
+          "InvoiceNumber": null,
+          "PaymentTerm": null,
+          "PODocuments": null,
+          "CustomerHolidays": {
+            "Monday": false,
+            "Tuesday": false,
+            "Wednesday": false,
+            "Thursday": false,
+            "Friday": false,
+            "Saturday": false,
+            "Sunday": false
           },
           "OrderItems": [
             {
-              "MaterialCode": "000000000021211474",
-              "MaterialDescription": "?Genotropin GQ 5.3MG SFDPO 1xPTCC DEMO",
-              "TotalPrice": 0.0,
-              "Tax": 0,
-              "SAPStatus": "testOrderStatus",
-              "PlannedDeliveryDate": "",
+              "Type": "Comm",
+              "MaterialCode": "000000000021038302",
+              "MaterialDescription": "0.9% SODIUM CHLORIDEBP 96X50ML",
+              "DefaultMaterialDescription": "",
               "Qty": 1,
               "PickedQuantity": 0,
-              "UnitPrice": 0,
-              "Type": "Comm",
-              "LineNumber": "000010",
+              "UnitPrice": 364.8,
+              "TotalPrice": 379.392,
+              "LineReferenceNotes": "",
               "Batch": "",
               "ExpiryDate": "",
-              "LineReferenceNotes": "",
-              "Details": [
-               { "DiscountCode":"100",
-               "DiscountDescription":"test",
-               "Rate":"100"
-              }
-              ],
+              "SAPStatus": "Order Creating",
+              "Tax": 14.592,
+              "taxClassification": "Product : Full Tax",
+              "ParentID": "000000000021038302",
+              "PlannedDeliveryDate": "",
+              "PrincipalName": "BAXTER HEALTHCARE -M",
+              "PrincipalCode": "0000101246",
+              "ProductType": "material",
+              "ItemBrand": "Sodium chloride solutions",
+              "HidePrice": false,
+              "mrp": 379.392,
+              "promotype": "",
+              "promoStatus": false,
+              "Batches": null,
+              "Details": [],
+              "WarehouseStorageCondition": "AC",
+              "GovernmentMaterialCode": null,
+              "ItemRegistrationNumber": null,
               "IsTenderContractMaterial": false,
-              "TenderContractDetails": {
-                "TenderContractNumber":"",
-          "TenderContractReference":"",
-          "TenderPackageDescription":""
-              }
-            }
-          ],
-          "PaymentTerm": {
-            "PaymentTermCode": "100",
-            "PaymentTermDescription": "testing"
-          },
-          "SpecialInstructions": "",
-          "PODocuments": [
-            {
-              "Url":" https://ezrxpostorage.blob.core.windows.net/ezrx-sg/po-bucket/2022/ezrxtest05_0000100728_0070048890_1668437253_Screenshot from 2022-11-10 22-07-20.png", 
-              "Name": "2022-11-10 22-07-20.png"
-            }
-          ],
-          "Messages": [
-            {
-              "Type": "E",
-              "Message": "No pricing procedure could be determined"
+              "TenderContractDetails": null
             },
             {
-              "Type": "E",
-              "Message": "Sales document  was not changed"
+              "Type": "Comm",
+              "MaterialCode": "000000000021038305",
+              "MaterialDescription": "0.9% SODIUM CHLORIDEBP100ML1x72'S",
+              "DefaultMaterialDescription": "",
+              "Qty": 1,
+              "PickedQuantity": 0,
+              "UnitPrice": 273.6,
+              "TotalPrice": 284.54400000000004,
+              "LineReferenceNotes": "",
+              "Batch": "",
+              "ExpiryDate": "",
+              "SAPStatus": "Order Creating",
+              "Tax": 10.944,
+              "taxClassification": "Product : Full Tax",
+              "ParentID": "000000000021038305",
+              "PlannedDeliveryDate": "",
+              "PrincipalName": "BAXTER HEALTHCARE -M",
+              "PrincipalCode": "0000101246",
+              "ProductType": "material",
+              "ItemBrand": "Sodium chloride solutions",
+              "HidePrice": false,
+              "mrp": 284.54400000000004,
+              "promotype": "",
+              "promoStatus": false,
+              "Batches": null,
+              "Details": [],
+              "WarehouseStorageCondition": "AC",
+              "GovernmentMaterialCode": null,
+              "ItemRegistrationNumber": null,
+              "IsTenderContractMaterial": false,
+              "TenderContractDetails": null
+            },
+            {
+              "Type": "Comm",
+              "MaterialCode": "000000000021041773",
+              "MaterialDescription": "190 BIOTENE D/MOUTHT/PASTE FM ORI 4.5OZ",
+              "DefaultMaterialDescription": "",
+              "Qty": 1,
+              "PickedQuantity": 0,
+              "UnitPrice": 20.4,
+              "TotalPrice": 21.215999999999998,
+              "LineReferenceNotes": "",
+              "Batch": "",
+              "ExpiryDate": "",
+              "SAPStatus": "Order Creating",
+              "Tax": 0.816,
+              "taxClassification": "Product : Full Tax",
+              "ParentID": "000000000021041773",
+              "PlannedDeliveryDate": "",
+              "PrincipalName": "GLAXOSMITHKLINE CONSUMER",
+              "PrincipalCode": "0000101334",
+              "ProductType": "material",
+              "ItemBrand": "Toothpastes",
+              "HidePrice": false,
+              "mrp": 21.215999999999998,
+              "promotype": "",
+              "promoStatus": true,
+              "Batches": null,
+              "Details": [],
+              "WarehouseStorageCondition": "AC",
+              "GovernmentMaterialCode": null,
+              "ItemRegistrationNumber": null,
+              "IsTenderContractMaterial": false,
+              "TenderContractDetails": null
             }
-          ]
-      }
+          ],
+          "OrderHolidays": {
+            "Monday": false,
+            "Tuesday": false,
+            "Wednesday": false,
+            "Thursday": false,
+            "Friday": false,
+            "Saturday": false,
+            "Sunday": false
+          },
+          "IsGreen": false
+        }
+      ]
+    }
   }
 }

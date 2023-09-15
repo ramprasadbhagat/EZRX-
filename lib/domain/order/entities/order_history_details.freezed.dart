@@ -16,11 +16,26 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OrderHistoryDetails {
-  OrderHistoryDetailsOrderHeader get orderHistoryDetailsOrderHeader =>
+  double get totalTax => throw _privateConstructorUsedError;
+  DateTimeStringValue get requestedDeliveryDate =>
       throw _privateConstructorUsedError;
-  OrderHistoryDetailsShippingInformation
-      get orderHistoryDetailsShippingInformation =>
-          throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
+  PhoneNumber get telephoneNumber => throw _privateConstructorUsedError;
+  double get orderValue => throw _privateConstructorUsedError;
+  DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
+  String get eZRXNumber => throw _privateConstructorUsedError;
+  String get orderBy => throw _privateConstructorUsedError;
+  String get referenceNotes => throw _privateConstructorUsedError;
+  OrderNumber get orderNumber =>
+      throw _privateConstructorUsedError; //used for orderHistory api in view vy order section
+  String get soldTo => throw _privateConstructorUsedError;
+  String get shipTo => throw _privateConstructorUsedError;
+  CompanyName get companyName => throw _privateConstructorUsedError;
+  POReference get pOReference => throw _privateConstructorUsedError;
+  String get shipToAddress => throw _privateConstructorUsedError;
+  String get soldToAddress => throw _privateConstructorUsedError;
+  String get invoiceNumber => throw _privateConstructorUsedError;
+  String get orderReason => throw _privateConstructorUsedError;
   List<OrderHistoryDetailsOrderItem> get orderHistoryDetailsOrderItem =>
       throw _privateConstructorUsedError;
   OrderHistoryDetailsPaymentTerm get orderHistoryDetailsPaymentTerm =>
@@ -28,8 +43,6 @@ mixin _$OrderHistoryDetails {
   SpecialInstructions get orderHistoryDetailsSpecialInstructions =>
       throw _privateConstructorUsedError;
   List<PoDocuments> get orderHistoryDetailsPoDocuments =>
-      throw _privateConstructorUsedError;
-  List<OrderHistoryDetailsMessages> get orderHistoryDetailsMessages =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -44,19 +57,29 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       _$OrderHistoryDetailsCopyWithImpl<$Res, OrderHistoryDetails>;
   @useResult
   $Res call(
-      {OrderHistoryDetailsOrderHeader orderHistoryDetailsOrderHeader,
-      OrderHistoryDetailsShippingInformation
-          orderHistoryDetailsShippingInformation,
+      {double totalTax,
+      DateTimeStringValue requestedDeliveryDate,
+      String type,
+      PhoneNumber telephoneNumber,
+      double orderValue,
+      DateTimeStringValue createdDate,
+      String eZRXNumber,
+      String orderBy,
+      String referenceNotes,
+      OrderNumber orderNumber,
+      String soldTo,
+      String shipTo,
+      CompanyName companyName,
+      POReference pOReference,
+      String shipToAddress,
+      String soldToAddress,
+      String invoiceNumber,
+      String orderReason,
       List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
       OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
       SpecialInstructions orderHistoryDetailsSpecialInstructions,
-      List<PoDocuments> orderHistoryDetailsPoDocuments,
-      List<OrderHistoryDetailsMessages> orderHistoryDetailsMessages});
+      List<PoDocuments> orderHistoryDetailsPoDocuments});
 
-  $OrderHistoryDetailsOrderHeaderCopyWith<$Res>
-      get orderHistoryDetailsOrderHeader;
-  $OrderHistoryDetailsShippingInformationCopyWith<$Res>
-      get orderHistoryDetailsShippingInformation;
   $OrderHistoryDetailsPaymentTermCopyWith<$Res>
       get orderHistoryDetailsPaymentTerm;
 }
@@ -74,24 +97,102 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryDetailsOrderHeader = null,
-    Object? orderHistoryDetailsShippingInformation = null,
+    Object? totalTax = null,
+    Object? requestedDeliveryDate = null,
+    Object? type = null,
+    Object? telephoneNumber = null,
+    Object? orderValue = null,
+    Object? createdDate = null,
+    Object? eZRXNumber = null,
+    Object? orderBy = null,
+    Object? referenceNotes = null,
+    Object? orderNumber = null,
+    Object? soldTo = null,
+    Object? shipTo = null,
+    Object? companyName = null,
+    Object? pOReference = null,
+    Object? shipToAddress = null,
+    Object? soldToAddress = null,
+    Object? invoiceNumber = null,
+    Object? orderReason = null,
     Object? orderHistoryDetailsOrderItem = null,
     Object? orderHistoryDetailsPaymentTerm = null,
     Object? orderHistoryDetailsSpecialInstructions = null,
     Object? orderHistoryDetailsPoDocuments = null,
-    Object? orderHistoryDetailsMessages = null,
   }) {
     return _then(_value.copyWith(
-      orderHistoryDetailsOrderHeader: null == orderHistoryDetailsOrderHeader
-          ? _value.orderHistoryDetailsOrderHeader
-          : orderHistoryDetailsOrderHeader // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsOrderHeader,
-      orderHistoryDetailsShippingInformation: null ==
-              orderHistoryDetailsShippingInformation
-          ? _value.orderHistoryDetailsShippingInformation
-          : orderHistoryDetailsShippingInformation // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsShippingInformation,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
+              as double,
+      requestedDeliveryDate: null == requestedDeliveryDate
+          ? _value.requestedDeliveryDate
+          : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      telephoneNumber: null == telephoneNumber
+          ? _value.telephoneNumber
+          : telephoneNumber // ignore: cast_nullable_to_non_nullable
+              as PhoneNumber,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      createdDate: null == createdDate
+          ? _value.createdDate
+          : createdDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      eZRXNumber: null == eZRXNumber
+          ? _value.eZRXNumber
+          : eZRXNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderBy: null == orderBy
+          ? _value.orderBy
+          : orderBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      referenceNotes: null == referenceNotes
+          ? _value.referenceNotes
+          : referenceNotes // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as OrderNumber,
+      soldTo: null == soldTo
+          ? _value.soldTo
+          : soldTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipTo: null == shipTo
+          ? _value.shipTo
+          : shipTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as CompanyName,
+      pOReference: null == pOReference
+          ? _value.pOReference
+          : pOReference // ignore: cast_nullable_to_non_nullable
+              as POReference,
+      shipToAddress: null == shipToAddress
+          ? _value.shipToAddress
+          : shipToAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      soldToAddress: null == soldToAddress
+          ? _value.soldToAddress
+          : soldToAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      invoiceNumber: null == invoiceNumber
+          ? _value.invoiceNumber
+          : invoiceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as String,
       orderHistoryDetailsOrderItem: null == orderHistoryDetailsOrderItem
           ? _value.orderHistoryDetailsOrderItem
           : orderHistoryDetailsOrderItem // ignore: cast_nullable_to_non_nullable
@@ -109,33 +210,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
           ? _value.orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
-      orderHistoryDetailsMessages: null == orderHistoryDetailsMessages
-          ? _value.orderHistoryDetailsMessages
-          : orderHistoryDetailsMessages // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsMessages>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $OrderHistoryDetailsOrderHeaderCopyWith<$Res>
-      get orderHistoryDetailsOrderHeader {
-    return $OrderHistoryDetailsOrderHeaderCopyWith<$Res>(
-        _value.orderHistoryDetailsOrderHeader, (value) {
-      return _then(
-          _value.copyWith(orderHistoryDetailsOrderHeader: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $OrderHistoryDetailsShippingInformationCopyWith<$Res>
-      get orderHistoryDetailsShippingInformation {
-    return $OrderHistoryDetailsShippingInformationCopyWith<$Res>(
-        _value.orderHistoryDetailsShippingInformation, (value) {
-      return _then(_value.copyWith(
-          orderHistoryDetailsShippingInformation: value) as $Val);
-    });
   }
 
   @override
@@ -159,21 +234,29 @@ abstract class _$$_OrderHistoryDetailsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {OrderHistoryDetailsOrderHeader orderHistoryDetailsOrderHeader,
-      OrderHistoryDetailsShippingInformation
-          orderHistoryDetailsShippingInformation,
+      {double totalTax,
+      DateTimeStringValue requestedDeliveryDate,
+      String type,
+      PhoneNumber telephoneNumber,
+      double orderValue,
+      DateTimeStringValue createdDate,
+      String eZRXNumber,
+      String orderBy,
+      String referenceNotes,
+      OrderNumber orderNumber,
+      String soldTo,
+      String shipTo,
+      CompanyName companyName,
+      POReference pOReference,
+      String shipToAddress,
+      String soldToAddress,
+      String invoiceNumber,
+      String orderReason,
       List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
       OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
       SpecialInstructions orderHistoryDetailsSpecialInstructions,
-      List<PoDocuments> orderHistoryDetailsPoDocuments,
-      List<OrderHistoryDetailsMessages> orderHistoryDetailsMessages});
+      List<PoDocuments> orderHistoryDetailsPoDocuments});
 
-  @override
-  $OrderHistoryDetailsOrderHeaderCopyWith<$Res>
-      get orderHistoryDetailsOrderHeader;
-  @override
-  $OrderHistoryDetailsShippingInformationCopyWith<$Res>
-      get orderHistoryDetailsShippingInformation;
   @override
   $OrderHistoryDetailsPaymentTermCopyWith<$Res>
       get orderHistoryDetailsPaymentTerm;
@@ -190,24 +273,102 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? orderHistoryDetailsOrderHeader = null,
-    Object? orderHistoryDetailsShippingInformation = null,
+    Object? totalTax = null,
+    Object? requestedDeliveryDate = null,
+    Object? type = null,
+    Object? telephoneNumber = null,
+    Object? orderValue = null,
+    Object? createdDate = null,
+    Object? eZRXNumber = null,
+    Object? orderBy = null,
+    Object? referenceNotes = null,
+    Object? orderNumber = null,
+    Object? soldTo = null,
+    Object? shipTo = null,
+    Object? companyName = null,
+    Object? pOReference = null,
+    Object? shipToAddress = null,
+    Object? soldToAddress = null,
+    Object? invoiceNumber = null,
+    Object? orderReason = null,
     Object? orderHistoryDetailsOrderItem = null,
     Object? orderHistoryDetailsPaymentTerm = null,
     Object? orderHistoryDetailsSpecialInstructions = null,
     Object? orderHistoryDetailsPoDocuments = null,
-    Object? orderHistoryDetailsMessages = null,
   }) {
     return _then(_$_OrderHistoryDetails(
-      orderHistoryDetailsOrderHeader: null == orderHistoryDetailsOrderHeader
-          ? _value.orderHistoryDetailsOrderHeader
-          : orderHistoryDetailsOrderHeader // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsOrderHeader,
-      orderHistoryDetailsShippingInformation: null ==
-              orderHistoryDetailsShippingInformation
-          ? _value.orderHistoryDetailsShippingInformation
-          : orderHistoryDetailsShippingInformation // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsShippingInformation,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
+              as double,
+      requestedDeliveryDate: null == requestedDeliveryDate
+          ? _value.requestedDeliveryDate
+          : requestedDeliveryDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      telephoneNumber: null == telephoneNumber
+          ? _value.telephoneNumber
+          : telephoneNumber // ignore: cast_nullable_to_non_nullable
+              as PhoneNumber,
+      orderValue: null == orderValue
+          ? _value.orderValue
+          : orderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      createdDate: null == createdDate
+          ? _value.createdDate
+          : createdDate // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      eZRXNumber: null == eZRXNumber
+          ? _value.eZRXNumber
+          : eZRXNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderBy: null == orderBy
+          ? _value.orderBy
+          : orderBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      referenceNotes: null == referenceNotes
+          ? _value.referenceNotes
+          : referenceNotes // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as OrderNumber,
+      soldTo: null == soldTo
+          ? _value.soldTo
+          : soldTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      shipTo: null == shipTo
+          ? _value.shipTo
+          : shipTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as CompanyName,
+      pOReference: null == pOReference
+          ? _value.pOReference
+          : pOReference // ignore: cast_nullable_to_non_nullable
+              as POReference,
+      shipToAddress: null == shipToAddress
+          ? _value.shipToAddress
+          : shipToAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      soldToAddress: null == soldToAddress
+          ? _value.soldToAddress
+          : soldToAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      invoiceNumber: null == invoiceNumber
+          ? _value.invoiceNumber
+          : invoiceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as String,
       orderHistoryDetailsOrderItem: null == orderHistoryDetailsOrderItem
           ? _value._orderHistoryDetailsOrderItem
           : orderHistoryDetailsOrderItem // ignore: cast_nullable_to_non_nullable
@@ -225,10 +386,6 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
           ? _value._orderHistoryDetailsPoDocuments
           : orderHistoryDetailsPoDocuments // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
-      orderHistoryDetailsMessages: null == orderHistoryDetailsMessages
-          ? _value._orderHistoryDetailsMessages
-          : orderHistoryDetailsMessages // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsMessages>,
     ));
   }
 }
@@ -237,25 +394,70 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
 
 class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   _$_OrderHistoryDetails(
-      {required this.orderHistoryDetailsOrderHeader,
-      required this.orderHistoryDetailsShippingInformation,
+      {required this.totalTax,
+      required this.requestedDeliveryDate,
+      required this.type,
+      required this.telephoneNumber,
+      required this.orderValue,
+      required this.createdDate,
+      required this.eZRXNumber,
+      required this.orderBy,
+      required this.referenceNotes,
+      required this.orderNumber,
+      required this.soldTo,
+      required this.shipTo,
+      required this.companyName,
+      required this.pOReference,
+      required this.shipToAddress,
+      required this.soldToAddress,
+      required this.invoiceNumber,
+      required this.orderReason,
       required final List<OrderHistoryDetailsOrderItem>
           orderHistoryDetailsOrderItem,
       required this.orderHistoryDetailsPaymentTerm,
       required this.orderHistoryDetailsSpecialInstructions,
-      required final List<PoDocuments> orderHistoryDetailsPoDocuments,
-      required final List<OrderHistoryDetailsMessages>
-          orderHistoryDetailsMessages})
+      required final List<PoDocuments> orderHistoryDetailsPoDocuments})
       : _orderHistoryDetailsOrderItem = orderHistoryDetailsOrderItem,
         _orderHistoryDetailsPoDocuments = orderHistoryDetailsPoDocuments,
-        _orderHistoryDetailsMessages = orderHistoryDetailsMessages,
         super._();
 
   @override
-  final OrderHistoryDetailsOrderHeader orderHistoryDetailsOrderHeader;
+  final double totalTax;
   @override
-  final OrderHistoryDetailsShippingInformation
-      orderHistoryDetailsShippingInformation;
+  final DateTimeStringValue requestedDeliveryDate;
+  @override
+  final String type;
+  @override
+  final PhoneNumber telephoneNumber;
+  @override
+  final double orderValue;
+  @override
+  final DateTimeStringValue createdDate;
+  @override
+  final String eZRXNumber;
+  @override
+  final String orderBy;
+  @override
+  final String referenceNotes;
+  @override
+  final OrderNumber orderNumber;
+//used for orderHistory api in view vy order section
+  @override
+  final String soldTo;
+  @override
+  final String shipTo;
+  @override
+  final CompanyName companyName;
+  @override
+  final POReference pOReference;
+  @override
+  final String shipToAddress;
+  @override
+  final String soldToAddress;
+  @override
+  final String invoiceNumber;
+  @override
+  final String orderReason;
   final List<OrderHistoryDetailsOrderItem> _orderHistoryDetailsOrderItem;
   @override
   List<OrderHistoryDetailsOrderItem> get orderHistoryDetailsOrderItem {
@@ -278,18 +480,9 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
     return EqualUnmodifiableListView(_orderHistoryDetailsPoDocuments);
   }
 
-  final List<OrderHistoryDetailsMessages> _orderHistoryDetailsMessages;
-  @override
-  List<OrderHistoryDetailsMessages> get orderHistoryDetailsMessages {
-    if (_orderHistoryDetailsMessages is EqualUnmodifiableListView)
-      return _orderHistoryDetailsMessages;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_orderHistoryDetailsMessages);
-  }
-
   @override
   String toString() {
-    return 'OrderHistoryDetails(orderHistoryDetailsOrderHeader: $orderHistoryDetailsOrderHeader, orderHistoryDetailsShippingInformation: $orderHistoryDetailsShippingInformation, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, orderHistoryDetailsMessages: $orderHistoryDetailsMessages)';
+    return 'OrderHistoryDetails(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, pOReference: $pOReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments)';
   }
 
   @override
@@ -297,14 +490,38 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OrderHistoryDetails &&
-            (identical(other.orderHistoryDetailsOrderHeader,
-                    orderHistoryDetailsOrderHeader) ||
-                other.orderHistoryDetailsOrderHeader ==
-                    orderHistoryDetailsOrderHeader) &&
-            (identical(other.orderHistoryDetailsShippingInformation,
-                    orderHistoryDetailsShippingInformation) ||
-                other.orderHistoryDetailsShippingInformation ==
-                    orderHistoryDetailsShippingInformation) &&
+            (identical(other.totalTax, totalTax) ||
+                other.totalTax == totalTax) &&
+            (identical(other.requestedDeliveryDate, requestedDeliveryDate) ||
+                other.requestedDeliveryDate == requestedDeliveryDate) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.telephoneNumber, telephoneNumber) ||
+                other.telephoneNumber == telephoneNumber) &&
+            (identical(other.orderValue, orderValue) ||
+                other.orderValue == orderValue) &&
+            (identical(other.createdDate, createdDate) ||
+                other.createdDate == createdDate) &&
+            (identical(other.eZRXNumber, eZRXNumber) ||
+                other.eZRXNumber == eZRXNumber) &&
+            (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
+            (identical(other.referenceNotes, referenceNotes) ||
+                other.referenceNotes == referenceNotes) &&
+            (identical(other.orderNumber, orderNumber) ||
+                other.orderNumber == orderNumber) &&
+            (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
+            (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.pOReference, pOReference) ||
+                other.pOReference == pOReference) &&
+            (identical(other.shipToAddress, shipToAddress) ||
+                other.shipToAddress == shipToAddress) &&
+            (identical(other.soldToAddress, soldToAddress) ||
+                other.soldToAddress == soldToAddress) &&
+            (identical(other.invoiceNumber, invoiceNumber) ||
+                other.invoiceNumber == invoiceNumber) &&
+            (identical(other.orderReason, orderReason) ||
+                other.orderReason == orderReason) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryDetailsOrderItem,
                 _orderHistoryDetailsOrderItem) &&
@@ -318,22 +535,35 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
                     orderHistoryDetailsSpecialInstructions) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryDetailsPoDocuments,
-                _orderHistoryDetailsPoDocuments) &&
-            const DeepCollectionEquality().equals(
-                other._orderHistoryDetailsMessages,
-                _orderHistoryDetailsMessages));
+                _orderHistoryDetailsPoDocuments));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      orderHistoryDetailsOrderHeader,
-      orderHistoryDetailsShippingInformation,
-      const DeepCollectionEquality().hash(_orderHistoryDetailsOrderItem),
-      orderHistoryDetailsPaymentTerm,
-      orderHistoryDetailsSpecialInstructions,
-      const DeepCollectionEquality().hash(_orderHistoryDetailsPoDocuments),
-      const DeepCollectionEquality().hash(_orderHistoryDetailsMessages));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        totalTax,
+        requestedDeliveryDate,
+        type,
+        telephoneNumber,
+        orderValue,
+        createdDate,
+        eZRXNumber,
+        orderBy,
+        referenceNotes,
+        orderNumber,
+        soldTo,
+        shipTo,
+        companyName,
+        pOReference,
+        shipToAddress,
+        soldToAddress,
+        invoiceNumber,
+        orderReason,
+        const DeepCollectionEquality().hash(_orderHistoryDetailsOrderItem),
+        orderHistoryDetailsPaymentTerm,
+        orderHistoryDetailsSpecialInstructions,
+        const DeepCollectionEquality().hash(_orderHistoryDetailsPoDocuments)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -345,25 +575,69 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
 
 abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   factory _OrderHistoryDetails(
-      {required final OrderHistoryDetailsOrderHeader
-          orderHistoryDetailsOrderHeader,
-      required final OrderHistoryDetailsShippingInformation
-          orderHistoryDetailsShippingInformation,
+      {required final double totalTax,
+      required final DateTimeStringValue requestedDeliveryDate,
+      required final String type,
+      required final PhoneNumber telephoneNumber,
+      required final double orderValue,
+      required final DateTimeStringValue createdDate,
+      required final String eZRXNumber,
+      required final String orderBy,
+      required final String referenceNotes,
+      required final OrderNumber orderNumber,
+      required final String soldTo,
+      required final String shipTo,
+      required final CompanyName companyName,
+      required final POReference pOReference,
+      required final String shipToAddress,
+      required final String soldToAddress,
+      required final String invoiceNumber,
+      required final String orderReason,
       required final List<OrderHistoryDetailsOrderItem>
           orderHistoryDetailsOrderItem,
       required final OrderHistoryDetailsPaymentTerm
           orderHistoryDetailsPaymentTerm,
       required final SpecialInstructions orderHistoryDetailsSpecialInstructions,
-      required final List<PoDocuments> orderHistoryDetailsPoDocuments,
-      required final List<OrderHistoryDetailsMessages>
-          orderHistoryDetailsMessages}) = _$_OrderHistoryDetails;
+      required final List<PoDocuments>
+          orderHistoryDetailsPoDocuments}) = _$_OrderHistoryDetails;
   _OrderHistoryDetails._() : super._();
 
   @override
-  OrderHistoryDetailsOrderHeader get orderHistoryDetailsOrderHeader;
+  double get totalTax;
   @override
-  OrderHistoryDetailsShippingInformation
-      get orderHistoryDetailsShippingInformation;
+  DateTimeStringValue get requestedDeliveryDate;
+  @override
+  String get type;
+  @override
+  PhoneNumber get telephoneNumber;
+  @override
+  double get orderValue;
+  @override
+  DateTimeStringValue get createdDate;
+  @override
+  String get eZRXNumber;
+  @override
+  String get orderBy;
+  @override
+  String get referenceNotes;
+  @override
+  OrderNumber get orderNumber;
+  @override //used for orderHistory api in view vy order section
+  String get soldTo;
+  @override
+  String get shipTo;
+  @override
+  CompanyName get companyName;
+  @override
+  POReference get pOReference;
+  @override
+  String get shipToAddress;
+  @override
+  String get soldToAddress;
+  @override
+  String get invoiceNumber;
+  @override
+  String get orderReason;
   @override
   List<OrderHistoryDetailsOrderItem> get orderHistoryDetailsOrderItem;
   @override
@@ -372,8 +646,6 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   SpecialInstructions get orderHistoryDetailsSpecialInstructions;
   @override
   List<PoDocuments> get orderHistoryDetailsPoDocuments;
-  @override
-  List<OrderHistoryDetailsMessages> get orderHistoryDetailsMessages;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsCopyWith<_$_OrderHistoryDetails> get copyWith =>

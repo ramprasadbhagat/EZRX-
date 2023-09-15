@@ -339,15 +339,15 @@ class OrderRepository implements IOrderRepository {
   Future<Either<ApiFailure, OrderHistoryDetails>> getOrderConfirmationDetail({
     required SubmitOrderResponse orderResponse,
     required User user,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
   }) async {
     const apiRetryCounter = 15;
 
     if (config.appFlavor == Flavor.mock) {
       try {
-        final result = user.role.type.isSalesRepRole
-            ? await orderDetailLocalDataSource
-                .getOrderHistoryDetailsForSalesRep()
-            : await orderDetailLocalDataSource.getOrderHistoryDetails();
+        final result =
+            await orderDetailLocalDataSource.getOrderHistoryDetails();
 
         return Right(result);
       } catch (e) {
@@ -358,18 +358,13 @@ class OrderRepository implements IOrderRepository {
       await Future.delayed(const Duration(seconds: 2));
 
       try {
-        final orderHistoryDetails = user.role.type.isSalesRepRole
-            ? await orderHistoryDetailsRemoteDataSource
-                .getOrderHistoryDetailsForSalesRep(
-                companyName: '',
-                orderId: orderResponse.salesDocument,
-                language: user.preferredLanguage.languageCode,
-                userName: user.username.getOrCrash(),
-              )
-            : await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-                orderId: orderResponse.salesDocument,
-                language: user.preferredLanguage.languageCode,
-              );
+        final orderHistoryDetails =
+            await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
+          searchKey: orderResponse.salesDocument,
+          language: user.preferredLanguage.languageCode,
+          soldTo: customerCodeInfo.customerCodeSoldTo,
+          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        );
 
         return Right(orderHistoryDetails);
       } catch (e) {

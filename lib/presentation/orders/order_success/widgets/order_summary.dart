@@ -30,7 +30,7 @@ class _OrderSummaary extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 price:
-                    '${orderHistoryDetails.orderHistoryDetailsOrderHeader.orderValue}',
+                    '${orderHistoryDetails.orderValue}',
               ),
             ],
           ),
@@ -50,7 +50,7 @@ class _OrderSummaary extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                 price:
-                    '${orderHistoryDetails.orderHistoryDetailsOrderHeader.grandTotal}',
+                    '${orderHistoryDetails.grandTotal}',
               ),
             ],
           ),

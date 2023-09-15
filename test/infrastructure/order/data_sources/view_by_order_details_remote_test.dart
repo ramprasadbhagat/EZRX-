@@ -47,8 +47,10 @@ void main() {
     () {
       test('Get OrderHistory Details', () async {
         final variables = {
-          'salesDocument': 'fake-order',
+          'searchKey': 'fake-searchKey',
           'language': 'fake-language',
+          'soldTo': 'fake-soldTo',
+          'salesOrg': ['fake-salesOrg'],
         };
         final res = json.decode(
           await rootBundle
@@ -71,66 +73,26 @@ void main() {
         );
 
         final result = await remoteDataSource.getOrderHistoryDetails(
+          salesOrg: 'fake-salesOrg',
+          searchKey: 'fake-searchKey',
+          soldTo: 'fake-soldTo',
           language: 'fake-language',
-          orderId: 'fake-order',
         );
 
         expect(
           result,
           OrderHistoryDetailsDto.fromJson(
-            res['data']['orderDetails'],
-          ).toDomain(),
-        );
-      });
-
-      test('Get OrderHistory Details For SalesRep', () async {
-        final variables = {
-          'salesDocument': 'fake-order',
-          'companyName': 'fake-companyname',
-          'language': 'fake-language',
-          'userName': 'fake-username',
-        };
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/getorderDetailsForSalesRep.json'),
-        );
-
-        dioAdapter.onPost(
-          '/api/order',
-          (server) => server.reply(
-            200,
-            res,
-            delay: const Duration(seconds: 1),
-          ),
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
-          data: jsonEncode({
-            'query': remoteDataSource.viewByOrderDetailsQueryMutation
-                .getOrderHistoryDetailsForSalesRep(),
-            'variables': variables
-          }),
-        );
-
-        final result = await remoteDataSource.getOrderHistoryDetailsForSalesRep(
-          companyName: 'fake-companyname',
-          language: 'fake-language',
-          orderId: 'fake-order',
-          userName: 'fake-username',
-        );
-
-        expect(
-          result,
-          OrderHistoryDetailsDto.fromJson(
-            res['data']['orderDetailsForSalesRep'],
+            res['data']['orderHistoryV3']['orderHeaders'][0],
           ).toDomain(),
         );
       });
 
       test('status code not equal to 200', () async {
         final variables = {
-          'salesDocument': 'fake-order',
-          'companyName': 'fake-companyname',
+          'searchKey': 'fake-searchKey',
           'language': 'fake-language',
-          'userName': 'fake-username',
+          'soldTo': 'fake-soldTo',
+          'salesOrg': ['fake-salesOrg'],
         };
 
         dioAdapter.onPost(
@@ -143,17 +105,17 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderDetailsQueryMutation
-                .getOrderHistoryDetailsForSalesRep(),
+                .getOrderHistoryDetails(),
             'variables': variables
           }),
         );
 
         await remoteDataSource
-            .getOrderHistoryDetailsForSalesRep(
-          companyName: 'fake-companyname',
+            .getOrderHistoryDetails(
+          salesOrg: 'fake-salesOrg',
+          searchKey: 'fake-searchKey',
+          soldTo: 'fake-soldTo',
           language: 'fake-language',
-          orderId: 'fake-order',
-          userName: 'fake-username',
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -163,10 +125,10 @@ void main() {
 
       test('response with error', () async {
         final variables = {
-          'salesDocument': 'fake-order',
-          'companyName': 'fake-companyname',
+          'searchKey': 'fake-searchKey',
           'language': 'fake-language',
-          'userName': 'fake-username',
+          'soldTo': 'fake-soldTo',
+          'salesOrg': ['fake-salesOrg'],
         };
 
         dioAdapter.onPost(
@@ -184,17 +146,17 @@ void main() {
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: jsonEncode({
             'query': remoteDataSource.viewByOrderDetailsQueryMutation
-                .getOrderHistoryDetailsForSalesRep(),
+                .getOrderHistoryDetails(),
             'variables': variables
           }),
         );
 
         await remoteDataSource
-            .getOrderHistoryDetailsForSalesRep(
-          companyName: 'fake-companyname',
+            .getOrderHistoryDetails(
+          salesOrg: 'fake-salesOrg',
+          searchKey: 'fake-searchKey',
+          soldTo: 'fake-soldTo',
           language: 'fake-language',
-          orderId: 'fake-order',
-          userName: 'fake-username',
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());

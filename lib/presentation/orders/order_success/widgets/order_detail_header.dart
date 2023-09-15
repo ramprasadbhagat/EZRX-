@@ -12,7 +12,7 @@ class _OrderDetailHeader extends StatelessWidget {
           contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
           tileColor: ZPColors.primary,
           title: Text(
-            '${'Order'.tr()} #${state.orderHistoryDetails.orderHistoryDetailsOrderHeader.orderNumber.getOrDefaultValue('')}',
+            '${'Order'.tr()} #${state.orderHistoryDetails.orderNumber.getOrDefaultValue('')}',
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: ZPColors.white,
                 ),
@@ -26,8 +26,7 @@ class _OrderDetailHeader extends StatelessWidget {
                 keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),
-                valueText: state.orderHistoryDetails
-                    .orderHistoryDetailsOrderHeader.createdDate.dateString,
+                valueText: state.orderHistoryDetails.createdDate.dateString,
                 valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -39,9 +38,8 @@ class _OrderDetailHeader extends StatelessWidget {
                 keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),
-                valueText: state.orderHistoryDetails
-                    .orderHistoryDetailsOrderHeader.pOReference
-                    .getOrDefaultValue(''),
+                valueText:
+                    state.orderHistoryDetails.pOReference.getOrDefaultValue(''),
                 valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -53,11 +51,8 @@ class _OrderDetailHeader extends StatelessWidget {
                 keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),
-                valueText: state
-                    .orderHistoryDetails
-                    .orderHistoryDetailsOrderHeader
-                    .requestedDeliveryDate
-                    .dateString,
+                valueText:
+                    state.orderHistoryDetails.requestedDeliveryDate.dateString,
                 valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -69,8 +64,7 @@ class _OrderDetailHeader extends StatelessWidget {
                 keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),
-                valueText: state.orderHistoryDetails
-                    .orderHistoryDetailsOrderHeader.referenceNotes,
+                valueText: state.orderHistoryDetails.referenceNotes,
                 valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -113,10 +107,7 @@ class _OrderDetailHeader extends StatelessWidget {
                       color: ZPColors.white,
                     ),
                 valueText: state
-                    .orderHistoryDetails
-                    .orderHistoryDetailsOrderHeader
-                    .telephoneNumber
-                    .displayTelephoneNumber,
+                    .orderHistoryDetails.telephoneNumber.displayTelephoneNumber,
                 valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),

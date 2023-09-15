@@ -72,6 +72,8 @@ abstract class IOrderRepository {
   Future<Either<ApiFailure, OrderHistoryDetails>> getOrderConfirmationDetail({
     required SubmitOrderResponse orderResponse,
     required User user,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
   });
 
   Future<Either<ApiFailure, List<MaterialStockInfo>>>

@@ -31,7 +31,6 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_messages.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -418,33 +417,36 @@ void main() {
 
     //   expect(systemMessage, findsOneWidget);
     // });
-    testWidgets('Message empty', (tester) async {
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
-        ViewByOrderDetailsState.initial().copyWith(
-          orderHistoryDetails: orderHistoryDetails,
-          failureOrSuccessOption: none(),
-          isLoading: false,
-        ),
-      );
-      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
-        ViewByOrderDetailsState.initial().copyWith(
-          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            orderHistoryDetailsMessages: <OrderHistoryDetailsMessages>[
-              OrderHistoryDetailsMessages.empty().copyWith(message: '')
-            ],
-          ),
-        ),
-      );
-      await tester.pumpWidget(getWUT());
-      await tester.pump();
 
-      final message = find.textContaining('messageEmpty ');
-      expect(message, findsNothing);
-      if (mockViewByOrderDetailsBloc
-          .state.orderHistoryDetails.orderHistoryDetailsMessages.isEmpty) {
-        expect(message, findsOneWidget);
-      }
-    });
+/* messages are no more part of order details api response*/
+
+    // testWidgets('Message empty', (tester) async {
+    //   when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+    //     ViewByOrderDetailsState.initial().copyWith(
+    //       orderHistoryDetails: orderHistoryDetails,
+    //       failureOrSuccessOption: none(),
+    //       isLoading: false,
+    //     ),
+    //   );
+    //   when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+    //     ViewByOrderDetailsState.initial().copyWith(
+    //       orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+    //         orderHistoryDetailsMessages: <OrderHistoryDetailsMessages>[
+    //           OrderHistoryDetailsMessages.empty().copyWith(message: '')
+    //         ],
+    //       ),
+    //     ),
+    //   );
+    //   await tester.pumpWidget(getWUT());
+    //   await tester.pump();
+
+    //   final message = find.textContaining('messageEmpty ');
+    //   expect(message, findsNothing);
+    //   if (mockViewByOrderDetailsBloc
+    //       .state.orderHistoryDetails.orderHistoryDetailsMessages.isEmpty) {
+    //     expect(message, findsOneWidget);
+    //   }
+    // });
 
     testWidgets('Bill to address  not visible test ', (tester) async {
       when(() => mockViewByOrderDetailsBloc.state).thenReturn(

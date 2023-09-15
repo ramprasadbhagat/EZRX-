@@ -1,169 +1,110 @@
 class ViewByOrderDetailsQueryMutation {
   String getOrderHistoryDetails() {
     return '''
-      query orderDetails(\$salesDocument: String!, \$language: String,) {
-  orderDetails(salesDocument: \$salesDocument, language: \$language,) {
-    OrderHeader {
-      TotalTax
-      RequestedDeliveryDate
-      POReference
-      OrderBy
-      Type
-      TelephoneNumber
-      EZRXNumber
-      OrderBy
-      OrderValue
-      CreatedDate
-      ReferenceNotes
-      OrderReason
-      OrderNumber
-
-    }
-    ShippingInformation {
-      Address
-      POReference
-      InvoiceNumber
-      InvoiceDate
-      Invoices {
-        InvoiceNumber
-        InvoiceDate
-        InvoicePrice
-      }
-      Country
-      Phone
-      Fax
-    }
-    OrderItems {
-      MaterialCode
-      MaterialDescription
-      TotalPrice
-      Tax
-      SAPStatus
-      PlannedDeliveryDate
-      Qty
-      PickedQuantity
-      UnitPrice
-      TotalPrice
-      Type
-      ProductType
-      LineNumber
-      Batch
-      ExpiryDate
-      LineReferenceNotes
-      PrincipalName
-      GovernmentMaterialCode
-      Details {
-        DiscountCode
-        DiscountDescription
-        Rate
-      }
-      IsTenderContractMaterial
-      TenderContractDetails {
-        ContractNumber
-        ContractReference
-      }
-    }
-    PaymentTerm {
-      PaymentTermCode
-      PaymentTermDescription
-    }
-    SpecialInstructions
-    PODocuments {
-      Url
-      Name
-    }
-    Messages {
-      Type
-      Message
-    }
-  }
-}
-      ''';
-  }
-
-  String getOrderHistoryDetailsForSalesRep() {
-    return '''
-     query orderDetailsForSalesRep(
-  \$salesDocument: String!
-  \$companyName: String!
-  \$language: String!
-  \$userName: String!
-) {
-  orderDetailsForSalesRep(
-    salesDocument: \$salesDocument
-    companyName: \$companyName
-    language: \$language
-    userName: \$userName
+      query orderHistoryQuery(\$soldTo: String!, \$language: String, \$searchKey: String, \$salesOrg: [String]) {
+  orderHistoryV3(
+    request: {soldTo: \$soldTo, language: \$language, searchKey: \$searchKey, salesOrg: \$salesOrg}
   ) {
-    OrderHeader {
-      TotalTax
-      RequestedDeliveryDate
-      POReference
-      OrderBy
+    orderHeaders {
       Type
-      TelephoneNumber
+      OrderNumber
       EZRXNumber
-      OrderBy
+      SoldTo
+      ShipTo
+      ShipToAddres
+      SoldToAddress
+      CompanyName
       OrderValue
+      DeliveryFee
+      ManualFee
+      ProcessingStatus
       CreatedDate
-      OrderReason
-      ReferenceNotes
-    }
-    ShippingInformation {
-      Address
+      RequestedDeliveryDate
+      OrderBy
+      TelephoneNumber
       POReference
+      TotalTax
+      ReferenceNotes
+      TotalValue
+      SpecialInstructions
+      PaymentMethod
       InvoiceNumber
-      InvoiceDate
-      Invoices {
-        InvoiceNumber
-        InvoiceDate
-        InvoicePrice
+      PaymentTerm
+      PODocuments {
+        Url
+        Name
       }
-      Country
-      Phone
-      Fax
-    }
-    OrderItems {
-      MaterialCode
-      MaterialDescription
-      TotalPrice
-      Tax
-      SAPStatus
-      PlannedDeliveryDate
-      Qty
-      PickedQuantity
-      UnitPrice
-      TotalPrice
-      Type
-      LineNumber
-      Batch
-      ExpiryDate
-      LineReferenceNotes
-      PrincipalName
-      GovernmentMaterialCode
-      Details {
-        DiscountCode
-        DiscountDescription
-        Rate
+      CustomerHolidays {
+        Monday
+        Tuesday
+        Wednesday
+        Thursday
+        Friday
+        Saturday
+        Sunday
       }
-      IsTenderContractMaterial
-      TenderContractDetails {
-        ContractNumber
-        ContractReference
+      OrderItems {
+        Type
+        MaterialCode
+        MaterialDescription
+        DefaultMaterialDescription
+        Qty
+        PickedQuantity
+        UnitPrice
+        TotalPrice
+        LineReferenceNotes
+        Batch
+        ExpiryDate
+        SAPStatus
+        Tax
+        taxClassification
+        ParentID
+        PlannedDeliveryDate
+        PrincipalName
+        PrincipalCode
+        ProductType
+        ItemBrand
+        HidePrice
+        mrp
+        promotype
+        promoStatus
+        Batches {
+          BatchNumber
+          ExpiryDate
+        }
+        Details {
+          DiscountCode
+          DiscountDescription
+          Rate
+        }
+        WarehouseStorageCondition
+        GovernmentMaterialCode
+        ItemRegistrationNumber
+        IsTenderContractMaterial
+        TenderContractDetails {
+          ContractNumber
+          OrderReason
+          Price
+          PriceUnit
+          ContractQuantity
+          RemainingQuantity
+          ExpiryDate
+          ContractReference
+          VisaNumber
+          SalesDistrict
+          AnnouncementLetterNumber
+        }
       }
-    }
-    PaymentTerm {
-      PaymentTermCode
-      PaymentTermDescription
-    }
-    SpecialInstructions
-    PODocuments {
-      Url
-      Name
-    }
-    Messages {
-      Type
-      Message
+      OrderHolidays {
+        Monday
+        Tuesday
+        Wednesday
+        Thursday
+        Friday
+        Saturday
+        Sunday
+      }
+      IsGreen
     }
   }
 }''';

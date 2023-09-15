@@ -43,11 +43,9 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -655,17 +653,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 //   materialNumber: materialNumber,
                 // );
               },
-              redirectHistoryDetail: (history) {
-                context.read<ViewByOrderDetailsBloc>().add(
-                      ViewByOrderDetailsEvent.fetch(
-                        user: context.read<UserBloc>().state.user,
-                        orderHeader:
-                            OrderHistoryDetailsOrderHeader.empty().copyWith(
-                          orderNumber: OrderNumber(history),
-                        ),
-                      ),
-                    );
-              },
+              redirectHistoryDetail: (history) {},
               error: (error) {
                 ErrorUtils.handleApiFailure(context, error);
               },

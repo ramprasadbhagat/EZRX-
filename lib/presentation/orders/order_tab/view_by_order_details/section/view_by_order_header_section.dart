@@ -57,7 +57,7 @@ class OrderHeaderSection extends StatelessWidget {
               ),
               BalanceTextRow(
                 keyText: 'PO reference'.tr(),
-                valueText: orderDetails.orderHistoryDetailsOrderHeader
+                valueText: orderDetails
                     .pOReference.displayPOReference,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
@@ -70,7 +70,7 @@ class OrderHeaderSection extends StatelessWidget {
               config.enableFutureDeliveryDay
                   ? BalanceTextRow(
                       keyText: 'Requested Delivery Date'.tr(),
-                      valueText: orderDetails.orderHistoryDetailsOrderHeader
+                      valueText: orderDetails
                           .requestedDeliveryDate.dateString,
                       keyTextStyle:
                           Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -86,7 +86,7 @@ class OrderHeaderSection extends StatelessWidget {
                   ? BalanceTextRow(
                       keyText: 'Reference Note'.tr(),
                       valueText: orderDetails
-                          .orderHistoryDetailsOrderHeader.referenceNotes,
+                          .referenceNotes,
                       keyTextStyle:
                           Theme.of(context).textTheme.titleSmall?.copyWith(
                                 color: ZPColors.white,
@@ -116,7 +116,7 @@ class OrderHeaderSection extends StatelessWidget {
                   ? BalanceTextRow(
                       keyText: 'Contact person'.tr(),
                       valueText:
-                          orderDetails.orderHistoryDetailsOrderHeader.orderBy,
+                          orderDetails.orderBy,
                       keyTextStyle:
                           Theme.of(context).textTheme.titleSmall?.copyWith(
                                 color: ZPColors.white,
@@ -130,7 +130,7 @@ class OrderHeaderSection extends StatelessWidget {
               config.enableMobileNumber
                   ? BalanceTextRow(
                       keyText: 'Contact number'.tr(),
-                      valueText: orderDetails.orderHistoryDetailsOrderHeader
+                      valueText: orderDetails
                           .telephoneNumber.displayTelephoneNumber,
                       keyTextStyle:
                           Theme.of(context).textTheme.titleSmall?.copyWith(

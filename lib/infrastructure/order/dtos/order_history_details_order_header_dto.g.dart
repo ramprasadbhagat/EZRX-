@@ -28,10 +28,6 @@ _$_OrderHistoryDetailsOrderHeadersDto
           pOReference: json['POReference'] as String? ?? '',
           shipTo: json['ShipTo'] as String? ?? '',
           soldTo: json['SoldTo'] as String? ?? '',
-          orderItems: (json['OrderItems'] as List<dynamic>?)
-                  ?.map((e) => OrderItemDto.fromJson(e as Map<String, dynamic>))
-                  .toList() ??
-              [],
         );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderHeadersDtoToJson(
@@ -56,5 +52,4 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderHeadersDtoToJson(
       'POReference': instance.pOReference,
       'ShipTo': instance.shipTo,
       'SoldTo': instance.soldTo,
-      'OrderItems': instance.orderItems.map((e) => e.toJson()).toList(),
     };

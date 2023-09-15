@@ -1,15 +1,9 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_shipping_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_messages_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_header_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_payment_term_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_shipping_information_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_history_details_dto.freezed.dart';
@@ -19,39 +13,81 @@ part 'order_history_details_dto.g.dart';
 class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
   const OrderHistoryDetailsDto._();
   const factory OrderHistoryDetailsDto({
-    @JsonKey(name: 'OrderHeader', readValue: orderHeaderOverride)
-        required OrderHistoryDetailsOrderHeadersDto
-            orderHistoryDetailsOrderHeader,
-    @JsonKey(name: 'ShippingInformation', readValue: shippingInformationOverride)
-        required OrderHistoryDetailsShippingInformationDto orderHistoryDetailsShippingInformation,
-    @JsonKey(name: 'OrderItems', defaultValue: <OrderHistoryDetailsOrderItemDto>[])
-        required List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
+    @JsonKey(name: 'TotalTax', defaultValue: 0)
+        required double totalTax,
+    @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+        required String requestedDeliveryDate,
+    @JsonKey(name: 'Type', defaultValue: '')
+        required String type,
+    @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+        required String telephoneNumber,
+    @JsonKey(name: 'OrderValue', defaultValue: 0.0)
+        required double orderValue,
+    @JsonKey(name: 'CreatedDate', defaultValue: '')
+        required String createdDate,
+    @JsonKey(name: 'EZRXNumber', defaultValue: '')
+        required String eZRXNumber,
+    @JsonKey(name: 'OrderBy', defaultValue: '')
+        required String orderBy,
+    @JsonKey(name: 'ReferenceNotes', defaultValue: '')
+        required String referenceNotes,
+    @JsonKey(name: 'CompanyName', defaultValue: '')
+        required String companyName,
+    @JsonKey(name: 'OrderNumber', defaultValue: '')
+        required String orderNumber,
+    @JsonKey(name: 'POReference', defaultValue: '')
+        required String pOReference,
+    @JsonKey(name: 'ShipTo', defaultValue: '')
+        required String shipTo,
+    @JsonKey(name: 'SoldTo', defaultValue: '')
+        required String soldTo,
+    @JsonKey(name: 'ShipToAddres', defaultValue: '')
+        required String shipToAddress,
+    @JsonKey(name: 'SoldToAddress', defaultValue: '')
+        required String soldToAddress,
+    @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+        required String invoiceNumber,
+    @JsonKey(name: 'OrderReason', defaultValue: '')
+        required String orderReason,
+    @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
+        required List<OrderHistoryDetailsOrderItemDto>
+            orderHistoryDetailsOrderItem,
     @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
         required OrderHistoryDetailsPaymentTermDto
             orderHistoryDetailsPaymentTerm,
-    @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+    @JsonKey(name: 'SpecialInstructions', readValue: specialInstructionOverride)
         required String orderHistoryDetailsSpecialInstructions,
     @JsonKey(
       name: 'PODocuments',
-      defaultValue: <PoDocumentsDto>[],
+      readValue: poDocumentOverride,
     )
         required List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
-    @JsonKey(name: 'Messages', defaultValue: <OrderHistoryDetailsMessagesDto>[])
-        required List<OrderHistoryDetailsMessagesDto>
-            orderHistoryDetailsMessages,
   }) = _OrderHistoryDetailsDto;
+
   factory OrderHistoryDetailsDto.fromDomain(
     OrderHistoryDetails orderHistoryDetails,
   ) {
     return OrderHistoryDetailsDto(
-      orderHistoryDetailsOrderHeader:
-          OrderHistoryDetailsOrderHeadersDto.fromDomain(
-        orderHistoryDetails.orderHistoryDetailsOrderHeader,
-      ),
-      orderHistoryDetailsShippingInformation:
-          OrderHistoryDetailsShippingInformationDto.fromDomain(
-        orderHistoryDetails.orderHistoryDetailsShippingInformation,
-      ),
+      totalTax: orderHistoryDetails.totalTax,
+      requestedDeliveryDate:
+          orderHistoryDetails.requestedDeliveryDate.dateString,
+      type: orderHistoryDetails.type,
+      telephoneNumber:
+          orderHistoryDetails.telephoneNumber.displayTelephoneNumber,
+      orderValue: orderHistoryDetails.orderValue,
+      createdDate: orderHistoryDetails.createdDate.getValue(),
+      eZRXNumber: orderHistoryDetails.eZRXNumber,
+      orderBy: orderHistoryDetails.orderBy,
+      referenceNotes: orderHistoryDetails.referenceNotes,
+      companyName: orderHistoryDetails.companyName.getValue(),
+      orderNumber: orderHistoryDetails.orderNumber.getValue(),
+      pOReference: orderHistoryDetails.pOReference.displayPOReference,
+      shipTo: orderHistoryDetails.shipTo,
+      soldTo: orderHistoryDetails.soldTo,
+      shipToAddress: orderHistoryDetails.shipToAddress,
+      soldToAddress: orderHistoryDetails.soldToAddress,
+      invoiceNumber: orderHistoryDetails.invoiceNumber,
+      orderReason: orderHistoryDetails.orderReason,
       orderHistoryDetailsOrderItem:
           List.from(orderHistoryDetails.orderHistoryDetailsOrderItem)
               .map((e) => OrderHistoryDetailsOrderItemDto.fromDomain(e))
@@ -66,73 +102,36 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
           List.from(orderHistoryDetails.orderHistoryDetailsPoDocuments)
               .map((e) => PoDocumentsDto.fromDomain(e))
               .toList(),
-      orderHistoryDetailsMessages:
-          List.from(orderHistoryDetails.orderHistoryDetailsMessages)
-              .map((e) => OrderHistoryDetailsMessagesDto.fromDomain(e))
-              .toList(),
     );
   }
+
   OrderHistoryDetails toDomain() {
     return OrderHistoryDetails(
-      orderHistoryDetailsOrderHeader: OrderHistoryDetailsOrderHeader(
-        totalTax: orderHistoryDetailsOrderHeader.totalTax,
-        orderValue: orderHistoryDetailsOrderHeader.orderValue,
-        requestedDeliveryDate: DateTimeStringValue(
-          orderHistoryDetailsOrderHeader.requestedDeliveryDate,
-        ),
-        telephoneNumber:
-            PhoneNumber(orderHistoryDetailsOrderHeader.telephoneNumber),
-        type: orderHistoryDetailsOrderHeader.type,
-        createdDate:
-            DateTimeStringValue(orderHistoryDetailsOrderHeader.createdDate),
-        eZRXNumber: orderHistoryDetailsOrderHeader.eZRXNumber,
-        orderBy: orderHistoryDetailsOrderHeader.orderBy,
-        referenceNotes: orderHistoryDetailsOrderHeader.referenceNotes,
-        orderReason: orderHistoryDetailsOrderHeader.orderReason,
-        companyName: CompanyName(orderHistoryDetailsOrderHeader.companyName),
-        createdTime: orderHistoryDetailsOrderHeader.createdTime,
-        hasPOAttachment: orderHistoryDetailsOrderHeader.hasPOAttachment,
-        itmDescription: orderHistoryDetailsOrderHeader.itmDescription,
-        itemCount: orderHistoryDetailsOrderHeader.itemCount,
-        orderNumber: OrderNumber(orderHistoryDetailsOrderHeader.orderNumber),
-        pOReference: POReference(orderHistoryDetailsOrderHeader.pOReference),
-        shipTo: orderHistoryDetailsOrderHeader.shipTo,
-        soldTo: orderHistoryDetailsOrderHeader.soldTo,
-        orderItems: orderHistoryDetailsOrderHeader.orderItems
-            .map((e) => e.toDomain)
-            .toList(),
-      ),
-      orderHistoryDetailsShippingInformation:
-          OrderHistoryDetailsShippingInformation(
-        address: orderHistoryDetailsShippingInformation.address,
-        country: orderHistoryDetailsShippingInformation.country,
-        fax: orderHistoryDetailsShippingInformation.fax,
-        invoiceDate: orderHistoryDetailsShippingInformation.invoiceDate,
-        invoiceNumber: orderHistoryDetailsShippingInformation.invoiceNumber,
-        invoices: orderHistoryDetailsShippingInformation.invoices
-            .map((e) => e.toDomain())
-            .toList(),
-        pOReference:
-            POReference(orderHistoryDetailsShippingInformation.pOReference),
-        phone: orderHistoryDetailsShippingInformation.phone,
-        postalCode: orderHistoryDetailsShippingInformation.postalCode,
-      ),
+      totalTax: totalTax,
+      requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),
+      type: type,
+      telephoneNumber: PhoneNumber(telephoneNumber),
+      orderValue: orderValue,
+      createdDate: DateTimeStringValue(createdDate),
+      eZRXNumber: eZRXNumber,
+      orderBy: orderBy,
+      referenceNotes: referenceNotes,
+      companyName: CompanyName(companyName),
+      orderNumber: OrderNumber(orderNumber),
+      pOReference: POReference(pOReference),
+      shipTo: shipTo,
+      soldTo: soldTo,
+      shipToAddress: shipToAddress,
+      soldToAddress: soldToAddress,
+      invoiceNumber: invoiceNumber,
+      orderReason: orderReason,
       orderHistoryDetailsOrderItem:
-          orderHistoryDetailsOrderItem.map((e) => e.toDomain()).toList(),
-      orderHistoryDetailsPaymentTerm: OrderHistoryDetailsPaymentTerm(
-        paymentTermCode: PaymentTermCode(
-          orderHistoryDetailsPaymentTerm.paymentTermCode,
-        ),
-        paymentTermDescription: PaymentTermDescription(
-          orderHistoryDetailsPaymentTerm.paymentTermDescription,
-        ),
-      ),
-      orderHistoryDetailsPoDocuments:
-          orderHistoryDetailsPoDocuments.map((e) => e.toDomain()).toList(),
+          orderHistoryDetailsOrderItem.map((dto) => dto.toDomain()).toList(),
+      orderHistoryDetailsPaymentTerm: orderHistoryDetailsPaymentTerm.toDomain(),
       orderHistoryDetailsSpecialInstructions:
           SpecialInstructions(orderHistoryDetailsSpecialInstructions),
-      orderHistoryDetailsMessages:
-          orderHistoryDetailsMessages.map((e) => e.toDomain()).toList(),
+      orderHistoryDetailsPoDocuments:
+          orderHistoryDetailsPoDocuments.map((dto) => dto.toDomain()).toList(),
     );
   }
 
@@ -140,9 +139,8 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       _$OrderHistoryDetailsDtoFromJson(json);
 }
 
-Map<String, dynamic> orderHeaderOverride(Map json, String key) =>
-    json[key] ?? {};
-Map<String, dynamic> shippingInformationOverride(Map json, String key) =>
-    json[key] ?? {};
+List poDocumentOverride(Map json, String key) => json[key] ?? [];
 Map<String, dynamic> paymentTermOverride(Map json, String key) =>
     json[key] ?? {};
+String specialInstructionOverride(Map json, String key) => json[key] ?? '';
+List orderItemOverride(Map json, String key) => json[key] ?? [];

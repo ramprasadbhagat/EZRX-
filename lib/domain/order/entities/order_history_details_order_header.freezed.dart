@@ -37,7 +37,6 @@ mixin _$OrderHistoryDetailsOrderHeader {
   int get itemCount => throw _privateConstructorUsedError;
   String get itmDescription => throw _privateConstructorUsedError;
   bool get hasPOAttachment => throw _privateConstructorUsedError;
-  List<OrderItem> get orderItems => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsOrderHeaderCopyWith<OrderHistoryDetailsOrderHeader>
@@ -71,8 +70,7 @@ abstract class $OrderHistoryDetailsOrderHeaderCopyWith<$Res> {
       POReference pOReference,
       int itemCount,
       String itmDescription,
-      bool hasPOAttachment,
-      List<OrderItem> orderItems});
+      bool hasPOAttachment});
 }
 
 /// @nodoc
@@ -108,7 +106,6 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
     Object? itemCount = null,
     Object? itmDescription = null,
     Object? hasPOAttachment = null,
-    Object? orderItems = null,
   }) {
     return _then(_value.copyWith(
       totalTax: null == totalTax
@@ -187,10 +184,6 @@ class _$OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res,
           ? _value.hasPOAttachment
           : hasPOAttachment // ignore: cast_nullable_to_non_nullable
               as bool,
-      orderItems: null == orderItems
-          ? _value.orderItems
-          : orderItems // ignore: cast_nullable_to_non_nullable
-              as List<OrderItem>,
     ) as $Val);
   }
 }
@@ -223,8 +216,7 @@ abstract class _$$_OrderHistoryDetailsOrderHeaderCopyWith<$Res>
       POReference pOReference,
       int itemCount,
       String itmDescription,
-      bool hasPOAttachment,
-      List<OrderItem> orderItems});
+      bool hasPOAttachment});
 }
 
 /// @nodoc
@@ -259,7 +251,6 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
     Object? itemCount = null,
     Object? itmDescription = null,
     Object? hasPOAttachment = null,
-    Object? orderItems = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderHeader(
       totalTax: null == totalTax
@@ -338,10 +329,6 @@ class __$$_OrderHistoryDetailsOrderHeaderCopyWithImpl<$Res>
           ? _value.hasPOAttachment
           : hasPOAttachment // ignore: cast_nullable_to_non_nullable
               as bool,
-      orderItems: null == orderItems
-          ? _value._orderItems
-          : orderItems // ignore: cast_nullable_to_non_nullable
-              as List<OrderItem>,
     ));
   }
 }
@@ -369,10 +356,8 @@ class _$_OrderHistoryDetailsOrderHeader
       required this.pOReference,
       required this.itemCount,
       required this.itmDescription,
-      required this.hasPOAttachment,
-      required final List<OrderItem> orderItems})
-      : _orderItems = orderItems,
-        super._();
+      required this.hasPOAttachment})
+      : super._();
 
   @override
   final double totalTax;
@@ -413,17 +398,10 @@ class _$_OrderHistoryDetailsOrderHeader
   final String itmDescription;
   @override
   final bool hasPOAttachment;
-  final List<OrderItem> _orderItems;
-  @override
-  List<OrderItem> get orderItems {
-    if (_orderItems is EqualUnmodifiableListView) return _orderItems;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_orderItems);
-  }
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderHeader(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderReason: $orderReason, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, createdTime: $createdTime, pOReference: $pOReference, itemCount: $itemCount, itmDescription: $itmDescription, hasPOAttachment: $hasPOAttachment, orderItems: $orderItems)';
+    return 'OrderHistoryDetailsOrderHeader(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderReason: $orderReason, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, createdTime: $createdTime, pOReference: $pOReference, itemCount: $itemCount, itmDescription: $itmDescription, hasPOAttachment: $hasPOAttachment)';
   }
 
   @override
@@ -464,9 +442,7 @@ class _$_OrderHistoryDetailsOrderHeader
             (identical(other.itmDescription, itmDescription) ||
                 other.itmDescription == itmDescription) &&
             (identical(other.hasPOAttachment, hasPOAttachment) ||
-                other.hasPOAttachment == hasPOAttachment) &&
-            const DeepCollectionEquality()
-                .equals(other._orderItems, _orderItems));
+                other.hasPOAttachment == hasPOAttachment));
   }
 
   @override
@@ -490,8 +466,7 @@ class _$_OrderHistoryDetailsOrderHeader
         pOReference,
         itemCount,
         itmDescription,
-        hasPOAttachment,
-        const DeepCollectionEquality().hash(_orderItems)
+        hasPOAttachment
       ]);
 
   @JsonKey(ignore: true)
@@ -505,27 +480,25 @@ class _$_OrderHistoryDetailsOrderHeader
 abstract class _OrderHistoryDetailsOrderHeader
     extends OrderHistoryDetailsOrderHeader {
   factory _OrderHistoryDetailsOrderHeader(
-          {required final double totalTax,
-          required final DateTimeStringValue requestedDeliveryDate,
-          required final String type,
-          required final PhoneNumber telephoneNumber,
-          required final double orderValue,
-          required final DateTimeStringValue createdDate,
-          required final String eZRXNumber,
-          required final String orderBy,
-          required final String referenceNotes,
-          required final String orderReason,
-          required final OrderNumber orderNumber,
-          required final String soldTo,
-          required final String shipTo,
-          required final CompanyName companyName,
-          required final String createdTime,
-          required final POReference pOReference,
-          required final int itemCount,
-          required final String itmDescription,
-          required final bool hasPOAttachment,
-          required final List<OrderItem> orderItems}) =
-      _$_OrderHistoryDetailsOrderHeader;
+      {required final double totalTax,
+      required final DateTimeStringValue requestedDeliveryDate,
+      required final String type,
+      required final PhoneNumber telephoneNumber,
+      required final double orderValue,
+      required final DateTimeStringValue createdDate,
+      required final String eZRXNumber,
+      required final String orderBy,
+      required final String referenceNotes,
+      required final String orderReason,
+      required final OrderNumber orderNumber,
+      required final String soldTo,
+      required final String shipTo,
+      required final CompanyName companyName,
+      required final String createdTime,
+      required final POReference pOReference,
+      required final int itemCount,
+      required final String itmDescription,
+      required final bool hasPOAttachment}) = _$_OrderHistoryDetailsOrderHeader;
   _OrderHistoryDetailsOrderHeader._() : super._();
 
   @override
@@ -566,8 +539,6 @@ abstract class _OrderHistoryDetailsOrderHeader
   String get itmDescription;
   @override
   bool get hasPOAttachment;
-  @override
-  List<OrderItem> get orderItems;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderHeaderCopyWith<_$_OrderHistoryDetailsOrderHeader>
