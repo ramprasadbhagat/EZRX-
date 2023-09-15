@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
@@ -10,7 +9,6 @@ import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialGridItem extends StatelessWidget {
   final MaterialInfo materialInfo;
@@ -26,12 +24,6 @@ class MaterialGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isHidePrice = materialInfo.hidePrice;
-    final isMYPnGSalesRep =
-        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser &&
-            materialInfo.isPnGPrinciple;
-    final displayOffers = !isHidePrice || isMYPnGSalesRep;
-
     return GestureDetector(
       onTap: onTap,
       child: CustomCard(
@@ -56,10 +48,9 @@ class MaterialGridItem extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (displayOffers)
-                          OfferLabel(
-                            materialInfo: materialInfo,
-                          ),
+                        OfferLabel(
+                          materialInfo: materialInfo,
+                        ),
                         StockLabel(
                           materialInfo: materialInfo,
                         ),

@@ -177,24 +177,17 @@ class _BodyContent extends StatelessWidget {
                 ? config.addOosMaterials.productTag(validateOutOfStockValue)
                 : ''
             : '';
-        final isHidePrice = state.productDetailAggregate.materialInfo.hidePrice;
-        final isMYPnGSalesRep =
-            context.read<EligibilityBloc>().state.isMYExternalSalesRepUser &&
-                state.productDetailAggregate.materialInfo.isPnGPrinciple;
-
-        final displayOffers = !isHidePrice || isMYPnGSalesRep;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (displayOffers)
-              OfferLabel(
-                materialInfo: state.productDetailAggregate.materialInfo,
-                textStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.white,
-                    ),
-                iconSize: 20,
-              ),
+            OfferLabel(
+              materialInfo: state.productDetailAggregate.materialInfo,
+              textStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: ZPColors.white,
+                  ),
+              iconSize: 20,
+            ),
             Padding(
               padding: const EdgeInsets.only(
                 left: 16,
@@ -240,7 +233,7 @@ class _BodyContent extends StatelessWidget {
               indent: 0,
               thickness: 0.5,
             ),
-            if (displayOffers) AvailableOffer(materialNumber: materialNumber),
+            AvailableOffer(materialNumber: materialNumber),
             const MaterialInformation(),
             const MaterialDetailsToggle(),
             const SizedBox(height: 20),

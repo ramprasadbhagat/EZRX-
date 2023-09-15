@@ -49,14 +49,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       verifyMaterialDealBonus: (e) async {
         final material = e.item;
         if (material != PriceAggregate.empty()) {
+          emit(
+            state.copyWith(
+              cartProducts: e.items.priceAggregateWithDiscountedCount,
+            ),
+          );
           if (!material.refreshAddedBonus) {
-            emit(
-              state.copyWith(
-                cartProducts: e.items,
-                apiFailureOrSuccessOption: none(),
-              ),
-            );
-
             return;
           }
         }
@@ -86,13 +84,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           (cartItemList) {
             emit(
               state.copyWith(
-                cartProducts: cartItemList
-                    .map(
-                      (e) => e.copyWith(
-                        salesOrgConfig: e.salesOrgConfig,
-                      ),
-                    )
-                    .toList(),
+                cartProducts: cartItemList.priceAggregateWithDiscountedCount,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
               ),

@@ -33,4 +33,21 @@ class ProductDetailState with _$ProductDetailState {
   bool get showRelatedItems =>
       isFetching ||
       (!isFetching && productDetailAggregate.similarProduct.isNotEmpty);
+
+  bool get _isHidePrice => productDetailAggregate.materialInfo.hidePrice;
+  bool _isPnGPrinciple({required bool isMYExternalSalesRepUser}) =>
+      productDetailAggregate.materialInfo.isPnGPrinciple &&
+      isMYExternalSalesRepUser;
+
+  bool showTierPrice({required bool isMYExternalSalesRepUser}) =>
+      !_isHidePrice ||
+      !_isPnGPrinciple(isMYExternalSalesRepUser: isMYExternalSalesRepUser);
+
+  bool displayOffers({
+    required bool isMYExternalSalesRepUser,
+    required List<BonusMaterial> bonusMaterialList,
+  }) =>
+      !_isHidePrice ||
+      (_isPnGPrinciple(isMYExternalSalesRepUser: isMYExternalSalesRepUser) &&
+          bonusMaterialList.isNotEmpty);
 }

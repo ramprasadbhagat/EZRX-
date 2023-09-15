@@ -66,4 +66,12 @@ extension PriceAggregateExtension on List<PriceAggregate> {
   List<PriceAggregate> get preOrderItems => where(
         (element) => element.isPreOrder,
       ).toList();
+
+  List<PriceAggregate> get priceAggregateWithDiscountedCount => map(
+        (item) => item.price.isTireDiscountEligible
+            ? item.copyWith(
+                discountedMaterialCount: item.quantity,
+              )
+            : item,
+      ).toList();
 }

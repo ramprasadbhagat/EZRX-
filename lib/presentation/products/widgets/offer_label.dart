@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -26,25 +27,32 @@ class OfferLabel extends StatelessWidget {
               color: ZPColors.white,
             );
 
-    return context
-                .read<MaterialPriceBloc>()
-                .state
-                .getPriceForMaterial(materialInfo.materialNumber)
-                .tiers
-                .isNotEmpty ||
-            context
-                    .read<MaterialPriceBloc>()
-                    .state
+    final materialPriceState = context.read<MaterialPriceBloc>().state;
+    final isHidePrice = materialInfo.hidePrice;
+    final isMYPnGSalesRep =
+        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser &&
+            materialInfo.isPnGPrinciple;
+
+    final displayOffers = !isHidePrice || isMYPnGSalesRep;
+
+    return displayOffers &&
+                (materialPriceState
+                        .getPriceForMaterial(materialInfo.materialNumber)
+                        .tiers
+                        .isNotEmpty &&
+                    !isMYPnGSalesRep) ||
+            (materialPriceState
                     .getPriceForMaterial(materialInfo.materialNumber)
                     .bonuses
                     .isNotEmpty &&
-                !materialInfo.inStock &&
-                context
-                    .read<SalesOrgBloc>()
-                    .state
-                    .configs
-                    .addOosMaterials
-                    .getOrDefaultValue(false)
+                (materialInfo.inStock ||
+                    (!materialInfo.inStock &&
+                        context
+                            .read<SalesOrgBloc>()
+                            .state
+                            .configs
+                            .addOosMaterials
+                            .getOrDefaultValue(false))))
         ? Container(
             key: WidgetKeys.materialListStockLabel,
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),

@@ -213,6 +213,8 @@ class _MaterialDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartState = context.read<CartBloc>().state;
+
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,9 +251,13 @@ class _MaterialDetails extends StatelessWidget {
                       cartItem.price.lastPrice.getOrDefaultValue(0).toString(),
                   type: PriceStyle.counterOfferPrice,
                 ),
-              PriceComponent(
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price: cartItem.display(PriceType.finalPrice),
+              LoadingShimmer.withChild(
+                enabled: cartState.priceUnderLoadingShimmer ||
+                    context.read<MaterialPriceBloc>().state.isFetching,
+                child: PriceComponent(
+                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  price: cartItem.display(PriceType.finalPrice),
+                ),
               ),
             ],
           ),
