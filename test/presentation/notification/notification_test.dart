@@ -4,6 +4,7 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -29,6 +30,10 @@ class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
 
+class ReturnSummaryDetailsBlocMock
+    extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
+    implements ReturnSummaryDetailsBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 class MockNotificationBloc
@@ -45,6 +50,7 @@ void main() {
   late NotificationBloc notificationBlocMock;
   late Notifications notifications;
   late List<CustomerCodeInfo> customerCodeListMock;
+  late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
 
   setUpAll(() {
     locator.registerLazySingleton(() => AppRouter());
@@ -55,6 +61,7 @@ void main() {
       autoRouterMock = locator<AppRouter>();
       customerCodeBlocMock = CustomerCodeBlocMock();
       notificationBlocMock = MockNotificationBloc();
+      returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
@@ -84,6 +91,9 @@ void main() {
             ),
             BlocProvider<NotificationBloc>(
               create: (context) => notificationBlocMock,
+            ),
+             BlocProvider<ReturnSummaryDetailsBloc>(
+              create: (context) => returnSummaryDetailsBlocMock,
             ),
           ],
           child: const Material(child: NotificationTab()),
