@@ -9,10 +9,6 @@ class ProductSearchEvent with _$ProductSearchEvent {
     required ShipToInfo shipToInfo,
   }) = _Initialized;
 
-  const factory ProductSearchEvent.autoSearchProduct({
-    required SearchKey searchKey,
-  }) = _AutoSearchProduct;
-
   const factory ProductSearchEvent.searchProduct({
     required SearchKey searchKey,
   }) = _SearchProduct;

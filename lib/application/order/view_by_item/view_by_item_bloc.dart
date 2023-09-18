@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
@@ -26,8 +24,6 @@ part 'view_by_item_state.dart';
 class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
   final IViewByItemRepository viewByItemRepository;
   final Config config;
-  // Define a Timer to manage the debounce
-  Timer? _debounceTimer;
 
   ViewByItemsBloc({
     required this.viewByItemRepository,
@@ -55,33 +51,25 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
     );
     on<_AutoSearchProduct>(
       (e, emit) async {
-        // Cancel any existing timer (if it exists)
-        _debounceTimer?.cancel();
-
-        // Create a new timer for the debounce
-        _debounceTimer =
-            Timer(Duration(milliseconds: config.autoSearchTimeout), () {
-          // Call the actual search logic for auto search
-          if (e.searchKey == state.searchKey) return;
-          if (e.searchKey.validateNotEmpty) {
-            add(
-              _Fetch(
-                viewByItemFilter: state.appliedFilter,
-                searchKey: e.searchKey,
-              ),
-            );
-          } else {
-            if (emit.isDone) return;
-            emit(state.copyWith(searchKey: e.searchKey));
-          }
-        });
+        if (e.searchKey == state.searchKey) return;
+        if (e.searchKey.validateNotEmpty) {
+          add(
+            _Fetch(
+              viewByItemFilter: state.appliedFilter,
+              searchKey: e.searchKey,
+            ),
+          );
+        } else {
+          if (emit.isDone) return;
+          emit(state.copyWith(searchKey: e.searchKey));
+        }
       },
     );
     on<_Fetch>(
       (e, emit) async {
-        // Cancel the debounce timer (if it exists)
-        _debounceTimer?.cancel();
-
+        if (e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) {
+          return;
+        }
         emit(
           state.copyWith(
             isFetching: true,
@@ -178,13 +166,5 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
         );
       },
     );
-  }
-
-  @override
-  Future<void> close() {
-    // Dispose of the timer when BLoC is closed
-    _debounceTimer?.cancel();
-
-    return super.close();
   }
 }

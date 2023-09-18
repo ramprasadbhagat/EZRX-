@@ -162,7 +162,7 @@ void main() {
           configs: salesOrgConfigs,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
-          searchKey: searchKey,
+          searchKey: SearchKey(''),
         ),
         build: () {
           when(
@@ -216,7 +216,7 @@ void main() {
           configs: salesOrgConfigs,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
-          searchKey: searchKey,
+          searchKey: SearchKey(''),
         ),
         build: () {
           when(
@@ -294,7 +294,7 @@ void main() {
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
-          ProductSearchEvent.autoSearchProduct(
+          ProductSearchEvent.searchProduct(
             searchKey: SearchKey.search('diff-search-key'),
           ),
         ),

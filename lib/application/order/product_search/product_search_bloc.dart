@@ -20,7 +20,6 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
-import 'package:rxdart/rxdart.dart';
 
 part 'product_search_event.dart';
 part 'product_search_state.dart';
@@ -57,28 +56,14 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
         ),
       );
     });
-    on<_AutoSearchProduct>(
-      (event, emit) {
-        if (event.searchKey == state.searchKey) return;
-        if (event.searchKey.isValid()) {
-          add(
-            _SearchProduct(
-              searchKey: event.searchKey,
-            ),
-          );
-        } else {
-          emit(state.copyWith(searchKey: event.searchKey));
-        }
-      },
-      transformer: (events, mapper) => events
-          .debounceTime(
-            Duration(milliseconds: config.autoSearchTimeout),
-          )
-          .asyncExpand(mapper),
-    );
-
     on<_SearchProduct>(
       (event, emit) async {
+        if (event.searchKey == state.searchKey) return;
+        if (!event.searchKey.isValid()) {
+          emit(state.copyWith(searchKey: event.searchKey));
+
+          return;
+        }
         emit(
           state.copyWith(
             searchKey: event.searchKey,

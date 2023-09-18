@@ -24,7 +24,6 @@ mixin _$ProductSearchEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function(SearchKey searchKey) searchProduct,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
@@ -39,7 +38,6 @@ mixin _$ProductSearchEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function(SearchKey searchKey)? searchProduct,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
@@ -54,7 +52,6 @@ mixin _$ProductSearchEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function(SearchKey searchKey)? searchProduct,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
@@ -65,7 +62,6 @@ mixin _$ProductSearchEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
@@ -76,7 +72,6 @@ mixin _$ProductSearchEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
@@ -87,7 +82,6 @@ mixin _$ProductSearchEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
@@ -259,7 +253,6 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function(SearchKey searchKey) searchProduct,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
@@ -278,7 +271,6 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function(SearchKey searchKey)? searchProduct,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
@@ -297,7 +289,6 @@ class _$_Initialized implements _Initialized {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function(SearchKey searchKey)? searchProduct,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
@@ -315,7 +306,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
@@ -329,7 +319,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
@@ -343,7 +332,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
@@ -371,184 +359,6 @@ abstract class _Initialized implements ProductSearchEvent {
   ShipToInfo get shipToInfo;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_AutoSearchProductCopyWith<$Res> {
-  factory _$$_AutoSearchProductCopyWith(_$_AutoSearchProduct value,
-          $Res Function(_$_AutoSearchProduct) then) =
-      __$$_AutoSearchProductCopyWithImpl<$Res>;
-  @useResult
-  $Res call({SearchKey searchKey});
-}
-
-/// @nodoc
-class __$$_AutoSearchProductCopyWithImpl<$Res>
-    extends _$ProductSearchEventCopyWithImpl<$Res, _$_AutoSearchProduct>
-    implements _$$_AutoSearchProductCopyWith<$Res> {
-  __$$_AutoSearchProductCopyWithImpl(
-      _$_AutoSearchProduct _value, $Res Function(_$_AutoSearchProduct) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? searchKey = null,
-  }) {
-    return _then(_$_AutoSearchProduct(
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_AutoSearchProduct implements _AutoSearchProduct {
-  const _$_AutoSearchProduct({required this.searchKey});
-
-  @override
-  final SearchKey searchKey;
-
-  @override
-  String toString() {
-    return 'ProductSearchEvent.autoSearchProduct(searchKey: $searchKey)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_AutoSearchProduct &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, searchKey);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
-      __$$_AutoSearchProductCopyWithImpl<_$_AutoSearchProduct>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganization,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)
-        initialized,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
-    required TResult Function(SearchKey searchKey) searchProduct,
-    required TResult Function() loadMoreProductList,
-    required TResult Function() clearSearch,
-    required TResult Function() clearProductSearchSuggestionHistory,
-  }) {
-    return autoSearchProduct(searchKey);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            SalesOrganisation salesOrganization,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        initialized,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
-    TResult? Function(SearchKey searchKey)? searchProduct,
-    TResult? Function()? loadMoreProductList,
-    TResult? Function()? clearSearch,
-    TResult? Function()? clearProductSearchSuggestionHistory,
-  }) {
-    return autoSearchProduct?.call(searchKey);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            SalesOrganisation salesOrganization,
-            SalesOrganisationConfigs configs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo)?
-        initialized,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
-    TResult Function(SearchKey searchKey)? searchProduct,
-    TResult Function()? loadMoreProductList,
-    TResult Function()? clearSearch,
-    TResult Function()? clearProductSearchSuggestionHistory,
-    required TResult orElse(),
-  }) {
-    if (autoSearchProduct != null) {
-      return autoSearchProduct(searchKey);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
-    required TResult Function(_SearchProduct value) searchProduct,
-    required TResult Function(_LoadMoreProductList value) loadMoreProductList,
-    required TResult Function(_ClearSearch value) clearSearch,
-    required TResult Function(_ClearProductSearchSuggestionHistory value)
-        clearProductSearchSuggestionHistory,
-  }) {
-    return autoSearchProduct(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
-    TResult? Function(_SearchProduct value)? searchProduct,
-    TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
-    TResult? Function(_ClearSearch value)? clearSearch,
-    TResult? Function(_ClearProductSearchSuggestionHistory value)?
-        clearProductSearchSuggestionHistory,
-  }) {
-    return autoSearchProduct?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
-    TResult Function(_SearchProduct value)? searchProduct,
-    TResult Function(_LoadMoreProductList value)? loadMoreProductList,
-    TResult Function(_ClearSearch value)? clearSearch,
-    TResult Function(_ClearProductSearchSuggestionHistory value)?
-        clearProductSearchSuggestionHistory,
-    required TResult orElse(),
-  }) {
-    if (autoSearchProduct != null) {
-      return autoSearchProduct(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AutoSearchProduct implements ProductSearchEvent {
-  const factory _AutoSearchProduct({required final SearchKey searchKey}) =
-      _$_AutoSearchProduct;
-
-  SearchKey get searchKey;
-  @JsonKey(ignore: true)
-  _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -623,7 +433,6 @@ class _$_SearchProduct implements _SearchProduct {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function(SearchKey searchKey) searchProduct,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
@@ -641,7 +450,6 @@ class _$_SearchProduct implements _SearchProduct {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function(SearchKey searchKey)? searchProduct,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
@@ -659,7 +467,6 @@ class _$_SearchProduct implements _SearchProduct {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function(SearchKey searchKey)? searchProduct,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
@@ -676,7 +483,6 @@ class _$_SearchProduct implements _SearchProduct {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
@@ -690,7 +496,6 @@ class _$_SearchProduct implements _SearchProduct {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
@@ -704,7 +509,6 @@ class _$_SearchProduct implements _SearchProduct {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
@@ -773,7 +577,6 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function(SearchKey searchKey) searchProduct,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
@@ -791,7 +594,6 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function(SearchKey searchKey)? searchProduct,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
@@ -809,7 +611,6 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function(SearchKey searchKey)? searchProduct,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
@@ -826,7 +627,6 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
@@ -840,7 +640,6 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
@@ -854,7 +653,6 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
@@ -917,7 +715,6 @@ class _$_ClearSearch implements _ClearSearch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function(SearchKey searchKey) searchProduct,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
@@ -935,7 +732,6 @@ class _$_ClearSearch implements _ClearSearch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function(SearchKey searchKey)? searchProduct,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
@@ -953,7 +749,6 @@ class _$_ClearSearch implements _ClearSearch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function(SearchKey searchKey)? searchProduct,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
@@ -970,7 +765,6 @@ class _$_ClearSearch implements _ClearSearch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
@@ -984,7 +778,6 @@ class _$_ClearSearch implements _ClearSearch {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
@@ -998,7 +791,6 @@ class _$_ClearSearch implements _ClearSearch {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
@@ -1066,7 +858,6 @@ class _$_ClearProductSearchSuggestionHistory
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)
         initialized,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function(SearchKey searchKey) searchProduct,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
@@ -1084,7 +875,6 @@ class _$_ClearProductSearchSuggestionHistory
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function(SearchKey searchKey)? searchProduct,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
@@ -1102,7 +892,6 @@ class _$_ClearProductSearchSuggestionHistory
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo)?
         initialized,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function(SearchKey searchKey)? searchProduct,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
@@ -1119,7 +908,6 @@ class _$_ClearProductSearchSuggestionHistory
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_SearchProduct value) searchProduct,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
@@ -1133,7 +921,6 @@ class _$_ClearProductSearchSuggestionHistory
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_SearchProduct value)? searchProduct,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
@@ -1147,7 +934,6 @@ class _$_ClearProductSearchSuggestionHistory
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_SearchProduct value)? searchProduct,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,

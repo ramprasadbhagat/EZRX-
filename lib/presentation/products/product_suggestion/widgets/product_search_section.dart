@@ -22,7 +22,7 @@ class _ProductSearchSection extends StatelessWidget {
           initialValue: state.searchKey.searchValueOrEmpty,
           enabled: !state.isSearching,
           onSearchChanged: (value) => context.read<ProductSearchBloc>().add(
-                ProductSearchEvent.autoSearchProduct(
+                ProductSearchEvent.searchProduct(
                   searchKey: SearchKey.search(value),
                 ),
               ),
