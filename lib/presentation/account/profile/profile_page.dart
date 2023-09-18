@@ -16,15 +16,15 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-part 'widgets/footer.dart';
-part 'widgets/header.dart';
-part 'widgets/language_dropdown.dart';
-part 'widgets/user_details.dart';
-part 'widgets/license_tile.dart';
+part 'package:ezrxmobile/presentation/account/profile/widgets/footer.dart';
+part 'package:ezrxmobile/presentation/account/profile/widgets/header.dart';
+part 'package:ezrxmobile/presentation/account/profile/widgets/language_dropdown.dart';
+part 'package:ezrxmobile/presentation/account/profile/widgets/user_details.dart';
+part 'package:ezrxmobile/presentation/account/profile/widgets/license_tile.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'.tr()),
+        title: Text(context.tr('Profile')),
         centerTitle: false,
       ),
       body: Padding(

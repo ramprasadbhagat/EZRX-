@@ -1,4 +1,4 @@
-part of '../profile_page.dart';
+part of 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 
 class _LanguageDropDown extends StatelessWidget {
   const _LanguageDropDown({Key? key}) : super(key: key);
@@ -26,6 +26,7 @@ class _LanguageDropDown extends StatelessWidget {
                 current.activeLanguage != previous.activeLanguage,
             builder: (context, state) {
               return DropdownButtonFormField2<Language>(
+                key: WidgetKeys.profilePageLanguageDropdown,
                 decoration: const InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(0, 10, 12, 10),
                 ),
@@ -38,6 +39,9 @@ class _LanguageDropDown extends StatelessWidget {
                 items: state.languages
                     .map(
                       (e) => DropdownMenuItem<Language>(
+                        key: WidgetKeys.genericKey(
+                          key: 'language_${e.subTag.languageString()}',
+                        ),
                         value: e,
                         child: Text(e.subTag.languageString()),
                       ),

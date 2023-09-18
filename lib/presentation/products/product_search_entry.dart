@@ -24,7 +24,7 @@ class ProductSearchEntry extends StatelessWidget {
         context.router.pushNamed('product_suggestion_page');
       },
       decoration: InputDecoration(
-        hintText: 'Search by product name or code'.tr(),
+        hintText: context.tr('Search by product name or code'),
         prefixIcon: const Icon(
           Icons.search,
           size: 20,

@@ -1,4 +1,4 @@
-part of '../profile_page.dart';
+part of 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 
 class _Header extends StatelessWidget {
   const _Header({Key? key}) : super(key: key);

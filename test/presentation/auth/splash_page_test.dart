@@ -1,5 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/language/language_bloc.dart';
@@ -43,9 +45,15 @@ import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/full_name.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/entities/language.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
@@ -263,22 +271,26 @@ void main() {
   late MaterialPriceBloc mockMaterialPriceBloc;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
 
-  // final fakeSalesOrganisation =
-  //     SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
+  final fakeSalesOrganisation =
+      SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
-  // final fakeUser = User.empty().copyWith(
-  //     id: 'fake-id',
-  //     username: Username('fake-username'),
-  //     fullName: const FullName(firstName: 'first name', lastName: 'last name'),
-  //     userSalesOrganisations: [fakeSalesOrganisation],
-  //     customerCode: CustomerCode('130046'),
-  //     email: EmailAddress('a@abc.com'),
-  //     role: Role.empty().copyWith(
-  //       type: RoleType('internal_sales_rep'),
-  //       id: 'fake-id',
-  //       name: 'fake-name',
-  //       description: 'fake-description',
-  //     ));
+  final fakeUser = User.empty().copyWith(
+    id: 'fake-id',
+    username: Username('fake-username'),
+    fullName: const FullName(firstName: 'first name', lastName: 'last name'),
+    userSalesOrganisations: [fakeSalesOrganisation],
+    customerCode: CustomerCode('130046'),
+    email: EmailAddress('a@abc.com'),
+    role: Role.empty().copyWith(
+      type: RoleType('internal_sales_rep'),
+      id: 'fake-id',
+      name: 'fake-name',
+      description: 'fake-description',
+    ),
+    settings: Settings.empty().copyWith(
+      languagePreference: const Locale('zh'),
+    ),
+  );
 
   // late AppRouter router;
   setUpAll(() async {
@@ -428,113 +440,127 @@ void main() {
 
     Future getWidget(tester) async {
       return await tester.pumpWidget(
-        WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<UserRestrictionListBloc>(
-              create: (context) => userRestrictionListBlocMock,
-            ),
-            BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),
-            BlocProvider<AupTcBloc>(create: (context) => aupTcBlocMock),
-            BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-            BlocProvider<PaymentCustomerInformationBloc>(
-              create: (context) => paymentCustomerInformationBlocMock,
-            ),
-            BlocProvider<PaymentTermBloc>(
-              create: (context) => paymentTermBlocMock,
-            ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-            BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeMock,
-            ),
-            BlocProvider<UsageCodeBloc>(create: (context) => usageCodeBlocMock),
-            BlocProvider<ReturnRequestTypeCodeBloc>(
-              create: (context) => returnRequestTypeCodeBlocMock,
-            ),
-            BlocProvider<PolicyConfigurationBloc>(
-              create: (context) => policyConfigurationListBlocMock,
-            ),
-            BlocProvider<MaterialListBloc>(
-              create: (context) => materialListBlocMock,
-            ),
-            BlocProvider<MaterialFilterBloc>(
-              create: (context) => materialFilterBlocMock,
-            ),
-            BlocProvider<ReturnApproverBloc>(
-              create: (context) => returnApproverBlocMock,
-            ),
-            BlocProvider<ReturnApproverFilterBloc>(
-              create: (context) => returnApproverFilterBlocMock,
-            ),
-            BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock,
-            ),
-            BlocProvider<DeepLinkingBloc>(
-              create: (context) => deepLinkingBlocMock,
-            ),
-            BlocProvider<ViewByItemsBloc>(
-              create: (context) => mockViewByItemsBloc,
-            ),
-            BlocProvider<ViewByOrderDetailsBloc>(
-              create: (context) => mockOrderHistoryDetailsBloc,
-            ),
-            BlocProvider<ScanMaterialInfoBloc>(
-              create: (context) => scanMaterialInfoMockBloc,
-            ),
-            BlocProvider<SettingBloc>(
-              create: (context) => settingBlocMock,
-            ),
-            BlocProvider<AccountSummaryBloc>(
-              create: (context) => accountSummaryMock,
-            ),
-            BlocProvider<ViewByItemFilterBloc>(
-              create: (context) => mockOrderHistoryFilterBloc,
-            ),
-            BlocProvider<ViewByOrderBloc>(
-              create: (context) => mockViewByOrderBloc,
-            ),
-            BlocProvider<ChatBotBloc>(
-              create: (context) => chatBotBloc,
-            ),
-            BlocProvider<AnnouncementInfoBloc>(
-              create: (context) => announcementInfoBlocMock,
-            ),
-            BlocProvider<MaterialPriceBloc>(
-              create: (context) => mockMaterialPriceBloc,
-            ),
-            BlocProvider<IntroBloc>(create: (context) => introBlocMock),
-            BlocProvider<ReturnListByItemBloc>(
-              create: (context) => returnListByItemBlocMock,
-            ),
-            BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
-            BlocProvider<ViewByItemDetailsBloc>(
-              create: (context) => viewByItemDetailsBlocMock,
-            ),
-            BlocProvider<RecentOrderBloc>(create: (context) => recentOrderBloc),
-            BlocProvider<ProductDetailBloc>(
-              create: (context) => productDetailBloc,
-            ),
-            BlocProvider<CreditAndInvoiceDetailsBloc>(
-              create: (context) => creditAndInvoiceDetailsBloc,
-            ),
-            BlocProvider<LoginFormBloc>(create: (context) => loginFormBloc),
-            BlocProvider<NotificationBloc>(
-              create: (context) => mockNotificationBloc,
-            ),
-            BlocProvider<PriceOverrideBloc>(
-              create: (context) => mockPriceOverrideBloc,
-            ),
-            BlocProvider<LanguageBloc>(create: (context) => languageBloc),
+        EasyLocalization(
+          supportedLocales: const [
+            Locale('en'),
           ],
-          child: const SplashPage(),
+          path: 'assets/langs/langs.csv',
+          startLocale: const Locale('en'),
+          fallbackLocale: const Locale('en'),
+          saveLocale: true,
+          useOnlyLangCode: true,
+          assetLoader: CsvAssetLoader(),
+          child: WidgetUtils.getScopedWidget(
+            autoRouterMock: autoRouterMock,
+            providers: [
+              BlocProvider<CustomerCodeBloc>(
+                create: (context) => customerCodeBlocMock,
+              ),
+              BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+              BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+              BlocProvider<UserBloc>(create: (context) => userBlocMock),
+              BlocProvider<UserRestrictionListBloc>(
+                create: (context) => userRestrictionListBlocMock,
+              ),
+              BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),
+              BlocProvider<AupTcBloc>(create: (context) => aupTcBlocMock),
+              BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+              BlocProvider<PaymentCustomerInformationBloc>(
+                create: (context) => paymentCustomerInformationBlocMock,
+              ),
+              BlocProvider<PaymentTermBloc>(
+                create: (context) => paymentTermBlocMock,
+              ),
+              BlocProvider<EligibilityBloc>(
+                create: (context) => eligibilityBlocMock,
+              ),
+              BlocProvider<OrderDocumentTypeBloc>(
+                create: (context) => orderDocumentTypeMock,
+              ),
+              BlocProvider<UsageCodeBloc>(
+                create: (context) => usageCodeBlocMock,
+              ),
+              BlocProvider<ReturnRequestTypeCodeBloc>(
+                create: (context) => returnRequestTypeCodeBlocMock,
+              ),
+              BlocProvider<PolicyConfigurationBloc>(
+                create: (context) => policyConfigurationListBlocMock,
+              ),
+              BlocProvider<MaterialListBloc>(
+                create: (context) => materialListBlocMock,
+              ),
+              BlocProvider<MaterialFilterBloc>(
+                create: (context) => materialFilterBlocMock,
+              ),
+              BlocProvider<ReturnApproverBloc>(
+                create: (context) => returnApproverBlocMock,
+              ),
+              BlocProvider<ReturnApproverFilterBloc>(
+                create: (context) => returnApproverFilterBlocMock,
+              ),
+              BlocProvider<AnnouncementBloc>(
+                create: (context) => announcementBlocMock,
+              ),
+              BlocProvider<DeepLinkingBloc>(
+                create: (context) => deepLinkingBlocMock,
+              ),
+              BlocProvider<ViewByItemsBloc>(
+                create: (context) => mockViewByItemsBloc,
+              ),
+              BlocProvider<ViewByOrderDetailsBloc>(
+                create: (context) => mockOrderHistoryDetailsBloc,
+              ),
+              BlocProvider<ScanMaterialInfoBloc>(
+                create: (context) => scanMaterialInfoMockBloc,
+              ),
+              BlocProvider<SettingBloc>(
+                create: (context) => settingBlocMock,
+              ),
+              BlocProvider<AccountSummaryBloc>(
+                create: (context) => accountSummaryMock,
+              ),
+              BlocProvider<ViewByItemFilterBloc>(
+                create: (context) => mockOrderHistoryFilterBloc,
+              ),
+              BlocProvider<ViewByOrderBloc>(
+                create: (context) => mockViewByOrderBloc,
+              ),
+              BlocProvider<ChatBotBloc>(
+                create: (context) => chatBotBloc,
+              ),
+              BlocProvider<AnnouncementInfoBloc>(
+                create: (context) => announcementInfoBlocMock,
+              ),
+              BlocProvider<MaterialPriceBloc>(
+                create: (context) => mockMaterialPriceBloc,
+              ),
+              BlocProvider<IntroBloc>(create: (context) => introBlocMock),
+              BlocProvider<ReturnListByItemBloc>(
+                create: (context) => returnListByItemBlocMock,
+              ),
+              BlocProvider<RecentOrderBloc>(
+                create: (context) => recentOrderBloc,
+              ),
+              BlocProvider<ViewByItemDetailsBloc>(
+                create: (context) => viewByItemDetailsBlocMock,
+              ),
+              BlocProvider<ProductDetailBloc>(
+                create: (context) => productDetailBloc,
+              ),
+              BlocProvider<CreditAndInvoiceDetailsBloc>(
+                create: (context) => creditAndInvoiceDetailsBloc,
+              ),
+              BlocProvider<LoginFormBloc>(create: (context) => loginFormBloc),
+              BlocProvider<NotificationBloc>(
+                create: (context) => mockNotificationBloc,
+              ),
+              BlocProvider<PriceOverrideBloc>(
+                create: (context) => mockPriceOverrideBloc,
+              ),
+              BlocProvider<LanguageBloc>(create: (context) => languageBloc),
+            ],
+            child: const SplashPage(),
+          ),
         ),
       );
     }
@@ -902,6 +928,35 @@ void main() {
       expect(
         find.text('This order history is not available on your account'),
         findsOneWidget,
+      );
+    });
+    testWidgets('When user Language Change', (tester) async {
+      final expectedUserListStates = [
+        UserState.initial().copyWith(
+          user: fakeUser,
+        ),
+      ];
+      whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
+
+      await getWidget(tester);
+      verify(
+        () => aupTcBlocMock
+            .add(AupTcEvent.show(fakeUser, salesOrgBlocMock.state.salesOrg)),
+      ).called(2);
+      verify(
+        () => languageBloc.add(
+          LanguageEvent.setLanguages(
+            defaultLanguage: Language(
+              subTag: const Locale('EN'),
+            ),
+            languages: [],
+          ),
+        ),
+      ).called(1);
+      await tester.pumpAndSettle();
+      expect(
+        EasyLocalization.of(tester.element(find.byType(Scaffold)))?.locale,
+        const Locale('en'),
       );
     });
   });

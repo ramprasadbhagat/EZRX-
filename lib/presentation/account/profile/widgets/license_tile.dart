@@ -1,4 +1,4 @@
-part of '../profile_page.dart';
+part of 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 
 class _LicenseTile extends StatelessWidget {
   const _LicenseTile({
@@ -42,8 +42,7 @@ class _LicenseTile extends StatelessWidget {
                   children: <TextSpan>[
                     const TextSpan(text: ' - '),
                     TextSpan(
-                      text:
-                          customerLicense.licenseDescription.displayNAIfEmpty,
+                      text: customerLicense.licenseDescription.displayNAIfEmpty,
                     ),
                   ],
                 ),

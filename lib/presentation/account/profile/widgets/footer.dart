@@ -1,4 +1,4 @@
-part of '../profile_page.dart';
+part of 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 
 class _Footer extends StatelessWidget {
   const _Footer({Key? key}) : super(key: key);

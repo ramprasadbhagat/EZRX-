@@ -1,4 +1,4 @@
-part of '../profile_page.dart';
+part of 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 
 class _UserDetails extends StatelessWidget {
   const _UserDetails({Key? key}) : super(key: key);

@@ -185,7 +185,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 context.read<LoginFormBloc>().add(
                       const LoginFormEvent.loadLastSavedCred(),
                     );
-
+                context.resetLocale();
                 context.router.replaceAll(
                   [
                     const SplashPageRoute(),
@@ -203,19 +203,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<UserBloc, UserState>(
           listenWhen: (previous, current) =>
               previous.user.id != current.user.id,
-          listener: (context, state) {
-            _welcomeUserMessage(state);
-            context.read<LanguageBloc>().add(
-                  LanguageEvent.setLanguages(
-                    defaultLanguage: state.user.defaultLanguage,
-                    languages: state.user.supportedLanguages,
-                  ),
-                );
-            final locale = Locale(
-              state.user.defaultLanguage.subTag.languageCode.toLowerCase(),
-            );
-            context.setLocale(locale);
-          },
+          listener: (context, state) => _welcomeUserMessage(state),
         ),
         BlocListener<UserBloc, UserState>(
           listenWhen: (previous, current) => previous.user != current.user,
@@ -235,6 +223,16 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       context.read<SalesOrgBloc>().state.salesOrg,
                     ),
                   );
+              context.read<LanguageBloc>().add(
+                    LanguageEvent.setLanguages(
+                      defaultLanguage: state.user.defaultLanguage,
+                      languages: state.user.supportedLanguages,
+                    ),
+                  );
+              final locale = Locale(
+                state.user.defaultLanguage.subTag.languageCode.toLowerCase(),
+              );
+              context.setLocale(locale);
             }
             _initializePaymentConfiguration(state);
           },
