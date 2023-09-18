@@ -126,7 +126,7 @@ class CartState with _$CartState {
           )
           .fold<double>(
             0,
-            (sum, item) => sum + item.unitPriceTotal + taxMaterial,
+            (sum, item) => sum + item.finalPriceTotalWithTax,
           );
 
   double get subTotal =>
