@@ -533,6 +533,4 @@ String getOptionalText(bool value) => value ? '' : '(Optional)';
 
 String getOosTag() => 'Out of stock';
 
-Color getOosTagColor() => getStatusLabelColor(getOosTag());
-
 Color getOosTagLabelColor() => ZPColors.black;

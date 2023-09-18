@@ -37,7 +37,7 @@ class StockLabel extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w600,
                     color: addOosMaterials
-                        .productTagColor(validateOutOfStockValue),
+                        .productTagLabelColor(validateOutOfStockValue),
                   ),
             ).tr(),
           );

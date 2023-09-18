@@ -290,11 +290,14 @@ class OosMaterial extends ValueObject<bool> {
   String productTag(bool isValidated) => isValidated ? oosMaterialTag : oosTag;
 
   Color productTagColor(bool isValidated) =>
+      isValidated ? oosMaterialTagColor : oosTagColor;
+
+  Color productTagLabelColor(bool isValidated) =>
       isValidated ? oosMaterialTagLabelColor : oosTagLabelColor;
 
   String get oosTag => getOosTag();
 
-  Color get oosTagColor => getOosTagColor();
+  Color get oosTagColor => getStatusLabelColor(getOosTag());
 
   Color get oosTagLabelColor => getOosTagLabelColor();
 
