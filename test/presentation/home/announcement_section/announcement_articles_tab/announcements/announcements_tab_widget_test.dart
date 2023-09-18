@@ -367,8 +367,6 @@ void main() {
             itemKey2,
             const Offset(0, -2000),
           );
-          //final loadMoreIcon = find.byKey(WidgetKeys.loadMoreLoader);
-          //expect(loadMoreIcon, findsOneWidget);
           await tester.pumpAndSettle();
 
           expect(itemKey, findsNothing);

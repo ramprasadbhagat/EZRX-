@@ -148,6 +148,8 @@ class _AnnouncementInfoDetailsPageState
                             automaticallyImplyLeading: false,
                             leading: _isBackButtonEnableForAppbar
                                 ? IconButton(
+                                    key: WidgetKeys
+                                        .announcementDetailsBottomBackButtonKey,
                                     onPressed: () => context.router.pop(),
                                     icon: const Icon(
                                       Icons.arrow_back_ios_rounded,

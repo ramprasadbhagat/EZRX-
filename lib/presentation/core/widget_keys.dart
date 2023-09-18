@@ -454,6 +454,8 @@ class WidgetKeys {
       Key('announcementDetailsBackButton');
   static Key announcementDetailsItem(String index) =>
       Key('announcementDetailsItem$index');
+  static const Key announcementDetailsBottomBackButtonKey =
+      Key('announcementDetailsBottomBackButtonKey');
 
   //============================================================
   //  Article

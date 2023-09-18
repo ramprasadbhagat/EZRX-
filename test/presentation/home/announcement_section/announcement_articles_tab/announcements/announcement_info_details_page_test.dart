@@ -1,9 +1,12 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_info_details.dart';
 import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcement_info_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -11,6 +14,7 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:universal_io/io.dart';
@@ -24,6 +28,7 @@ void main() {
 
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
+  late AnnouncementInfoDetails moclAnnouncementInfoDetails;
 
   final mockAnnouncementInfoDetailsState =
       AnnouncementInfoDetailsState.initial().copyWith(
@@ -50,6 +55,8 @@ void main() {
     announcementInfoDetailsBlocMock = AnnouncementInfoDetailsBlocMock();
     announcementInfoBlocMock = AnnouncementInfoBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
+    moclAnnouncementInfoDetails =
+        await AnnouncementInfoLocalDataSource().getAnnouncementInfoDetails();
 
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => announcementInfoDetailsBlocMock.state)
@@ -122,6 +129,48 @@ void main() {
         });
       },
     );
+    testWidgets(
+      'Tap scrollToTopArrowIcon button',
+      (tester) async {
+        await tester.runAsync(() async {
+          when(() => announcementInfoDetailsBlocMock.state).thenReturn(
+            AnnouncementInfoDetailsState.initial().copyWith(
+              isLoading: false,
+              announcementInfoDetails: moclAnnouncementInfoDetails,
+            ),
+          );
+          final mockAnnouncementInfo =
+              await AnnouncementInfoLocalDataSource().getAnnouncementInfo();
+          when(() => announcementInfoBlocMock.state).thenReturn(
+            AnnouncementInfoState.initial().copyWith(
+              announcementInfo: mockAnnouncementInfo,
+            ),
+          );
+          await tester.pumpFrames(
+            getAnnouncementInfoDetailsPage(),
+            const Duration(seconds: 5),
+          );
+          final announcementInfoDetailsPage =
+              find.byKey(WidgetKeys.announcementDetailsPageKey);
+          expect(announcementInfoDetailsPage, findsOneWidget);
+          await tester.pump();
+          final scrollToTopArrowIcon =
+              find.byKey(WidgetKeys.materialDetailsFloatingButton);
+          final htmlBodyFinder = find.byType(Html);
+          await tester.drag(
+            htmlBodyFinder,
+            const Offset(0, -1000),
+            warnIfMissed: false,
+          );
+          await tester.pump(const Duration(seconds: 1));
+          await tester.pump(const Duration(seconds: 1));
+          await tester.pump(const Duration(seconds: 1));
+          await tester.pump(const Duration(seconds: 1));
+          expect(scrollToTopArrowIcon, findsOneWidget);
+          await tester.tap(scrollToTopArrowIcon);
+        });
+      },
+    );
 
     testWidgets(
       'tap announcement item',
@@ -180,6 +229,79 @@ void main() {
           expect(backButton, findsOneWidget);
           await tester.ensureVisible(backButton);
           await tester.tap(backButton);
+        });
+      },
+    );
+
+    testWidgets(
+      'tap announcement Details Bottom Back Button',
+      (tester) async {
+        await tester.runAsync(() async {
+          final content =
+              moclAnnouncementInfoDetails.content.value.getOrElse(() => '');
+          when(() => announcementInfoDetailsBlocMock.state).thenReturn(
+            AnnouncementInfoDetailsState.initial().copyWith(
+              isLoading: false,
+              announcementInfoDetails: moclAnnouncementInfoDetails.copyWith(
+                content: HtmlContent(content * 10),
+              ),
+            ),
+          );
+          await tester.pumpFrames(
+            getAnnouncementInfoDetailsPage(),
+            const Duration(seconds: 5),
+          );
+          final announcementInfoDetailsPage =
+              find.byKey(WidgetKeys.announcementDetailsPageKey);
+          expect(announcementInfoDetailsPage, findsOneWidget);
+          await tester.dragFrom(
+            const Offset(100, 400),
+            const Offset(100, -221),
+          );
+          await tester.pump(const Duration(seconds: 4));
+          final backButton =
+              find.byKey(WidgetKeys.announcementDetailsBottomBackButtonKey);
+          expect(backButton, findsOneWidget);
+          await tester.ensureVisible(backButton);
+          await tester.tap(backButton);
+        });
+      },
+    );
+    testWidgets(
+      'test error section while faceing some error in data fatching',
+      (tester) async {
+        await tester.runAsync(() async {
+          when(() => announcementInfoDetailsBlocMock.state).thenReturn(
+            AnnouncementInfoDetailsState.initial().copyWith(
+              isLoading: false,
+              apiFailureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other('Some Error'))),
+            ),
+          );
+          final expectedState = [
+            AnnouncementInfoDetailsState.initial().copyWith(
+              isLoading: true,
+              apiFailureOrSuccessOption: none(),
+            ),
+            AnnouncementInfoDetailsState.initial().copyWith(
+              isLoading: false,
+              apiFailureOrSuccessOption:
+                  optionOf(const Left(ApiFailure.other('Some Error'))),
+            ),
+          ];
+          whenListen(
+            announcementInfoDetailsBlocMock,
+            Stream.fromIterable(expectedState),
+          );
+          await tester.pumpFrames(
+            getAnnouncementInfoDetailsPage(),
+            const Duration(seconds: 5),
+          );
+          final announcementInfoDetailsPage =
+              find.byKey(WidgetKeys.announcementDetailsPageKey);
+          expect(announcementInfoDetailsPage, findsOneWidget);
+          final errorSnackBar = find.byKey(WidgetKeys.customSnackBar);
+          expect(errorSnackBar, findsOneWidget);
         });
       },
     );

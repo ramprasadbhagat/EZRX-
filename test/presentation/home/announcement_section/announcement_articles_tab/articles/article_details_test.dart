@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/article_details.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 
@@ -51,7 +52,8 @@ void main() {
           thumbnail: 'invalid_image',
         );
         await tester.pumpWidget(
-            getArticleDetailsPage(article: articleItemInvalidImage),);
+          getArticleDetailsPage(article: articleItemInvalidImage),
+        );
         final articleDetailsPage = find.byKey(WidgetKeys.articleDetailsPageKey);
         expect(articleDetailsPage, findsOneWidget);
         final BuildContext context = tester.element(articleDetailsPage);
@@ -75,11 +77,19 @@ void main() {
         expect(articleDetailsPage, findsOneWidget);
         await tester.dragFrom(const Offset(100, 500), const Offset(100, -10));
         await tester.pump(const Duration(seconds: 4));
-        final floatingButton =
+        final scrollToTopArrowIcon =
             find.byKey(WidgetKeys.materialDetailsFloatingButton);
-        expect(floatingButton, findsOneWidget,);
-        await tester.ensureVisible(floatingButton);
-        await tester.tap(floatingButton, warnIfMissed: false);
+        final htmlBodyFinder = find.byType(Html);
+        expect(htmlBodyFinder, findsOneWidget);
+        await tester.drag(
+          htmlBodyFinder,
+          const Offset(0, -1000),
+          warnIfMissed: false,
+        );
+        await tester.pump(const Duration(seconds: 1));
+        await tester.pump(const Duration(seconds: 1));
+        expect(scrollToTopArrowIcon, findsOneWidget);
+        await tester.tap(scrollToTopArrowIcon);
       },
     );
 

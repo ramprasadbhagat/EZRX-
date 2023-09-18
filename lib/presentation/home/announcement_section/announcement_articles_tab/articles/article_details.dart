@@ -77,10 +77,10 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                       width: MediaQuery.of(context).size.width,
                       imageUrl: widget.article.thumbnail,
                       errorWidget: const NoRecordFound(
-                          svgImage: SvgImage.noImageAvailable,
-                          title: 'Image not available',
-                          subTitle: '',
-                        ),
+                        svgImage: SvgImage.noImageAvailable,
+                        title: 'Image not available',
+                        subTitle: '',
+                      ),
                     ),
                   ),
                   _isBackButtonEnableForAppbar
