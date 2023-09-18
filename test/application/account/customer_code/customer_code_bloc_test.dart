@@ -603,7 +603,7 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.autoSearch(
+          CustomerCodeEvent.search(
             searchValue: SearchKey.searchFilter('fake-customer-code'),
           ),
         );

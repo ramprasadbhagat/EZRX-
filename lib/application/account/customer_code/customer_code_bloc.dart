@@ -11,7 +11,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rxdart/rxdart.dart';
 
 part 'customer_code_bloc.freezed.dart';
 part 'customer_code_event.dart';
@@ -46,31 +45,18 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         ),
       );
     });
-    on<_AutoSearch>(
-      (event, emit) {
-        if (event.searchValue == state.searchKey) return;
-        if (event.searchValue.isValid()) {
-          add(
-            _Search(
-              searchValue: event.searchValue,
-            ),
-          );
-        } else {
-          emit(
-            state.copyWith(
-              searchKey: event.searchValue,
-            ),
-          );
-        }
-      },
-      transformer: (events, mapper) => events
-          .debounceTime(
-            Duration(milliseconds: config.autoSearchTimeout),
-          )
-          .asyncExpand(mapper),
-    );
     on<_Search>(
       (e, emit) async {
+        if (e.searchValue == state.searchKey) return;
+        if (!e.searchValue.isValid()) {
+          emit(
+            state.copyWith(
+              searchKey: e.searchValue,
+            ),
+          );
+
+          return;
+        }
         final previousSearchKey = e.searchValue;
         final previousCustomerCodeState = state.customerCodeInfo;
         final previousShipToInfo = state.shipToInfo;
@@ -314,13 +300,13 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
     });
     on<_DeletedSearch>(
       (event, emit) {
-        if (event.searchText != state.searchKey.getValue()) {
-          add(
-            _Fetch(
-              searchText: event.searchText,
-            ),
-          );
-        }
+        if (event.searchText == state.searchKey.getValue() &&
+            event.searchText.isNotEmpty) return;
+        add(
+          _Fetch(
+            searchText: event.searchText,
+          ),
+        );
       },
     );
   }

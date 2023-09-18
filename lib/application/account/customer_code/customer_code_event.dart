@@ -25,10 +25,6 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
   const factory CustomerCodeEvent.loadStoredCustomerCode() =
       _LoadStoredCustomerCode;
 
-  const factory CustomerCodeEvent.autoSearch({
-    required SearchKey searchValue,
-  }) = _AutoSearch;
-
   const factory CustomerCodeEvent.deletedSearch({
     @Default('') String searchText,
   }) = _DeletedSearch;

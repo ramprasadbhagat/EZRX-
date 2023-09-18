@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 //Please note use this widget instead of SearchBar
-class CustomSearchBar extends StatelessWidget {
+class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({
     Key? key,
     this.onSearchChanged,
@@ -37,27 +41,45 @@ class CustomSearchBar extends StatelessWidget {
   final Widget? searchSuffixIcon;
 
   @override
+  State<CustomSearchBar> createState() => _CustomSearchBarState();
+}
+
+class _CustomSearchBarState extends State<CustomSearchBar> {
+  Timer? _debounce;
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var valueText = initialValue;
+    var valueText = widget.initialValue;
 
     return TextFormField(
       autocorrect: false,
-      autofocus: autofocus,
-      enabled: enabled,
-      initialValue: initialValue,
+      autofocus: widget.autofocus,
+      enabled: widget.enabled,
+      initialValue: widget.initialValue,
       onChanged: (value) {
         valueText = value;
-        onSearchChanged?.call(value);
+        if (_debounce?.isActive ?? false) _debounce?.cancel();
+        _debounce = Timer(
+          Duration(
+            milliseconds: locator<Config>().autoSearchTimeout,
+          ),
+          () => widget.onSearchChanged?.call(value),
+        );
       },
       onFieldSubmitted: (value) => _onSearch(context, value),
-      keyboardType: keyboardType,
-      inputFormatters: inputFormatters,
+      keyboardType: widget.keyboardType,
+      inputFormatters: widget.inputFormatters,
       style: Theme.of(context).textTheme.titleMedium?.copyWith(height: 1.5),
       decoration: InputDecoration(
-        suffixIcon: initialValue.isEmpty
-            ? searchSuffixIcon ??
+        suffixIcon: widget.initialValue.isEmpty
+            ? widget.searchSuffixIcon ??
                 IconButton(
-                  key: searchIconKey,
+                  key: widget.searchIconKey,
                   icon: const Icon(
                     Icons.search,
                     size: 22,
@@ -71,13 +93,13 @@ class CustomSearchBar extends StatelessWidget {
                   ),
                 )
             : IconButton(
-                key: clearIconKey,
+                key: widget.clearIconKey,
                 icon: const Icon(
                   Icons.clear,
                 ),
-                onPressed: () => onClear.call(),
+                onPressed: () => widget.onClear.call(),
               ),
-        hintText: hintText.tr(),
+        hintText: widget.hintText.tr(),
       ),
     );
   }
@@ -90,7 +112,7 @@ class CustomSearchBar extends StatelessWidget {
     BuildContext context,
     String value,
   ) =>
-      customValidator(value)
-          ? onSearchSubmitted.call(value)
+      widget.customValidator(value)
+          ? widget.onSearchSubmitted.call(value)
           : _showSnackbar(context);
 }

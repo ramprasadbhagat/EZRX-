@@ -433,7 +433,7 @@ class _DeliveryAddressSearchSection extends StatelessWidget {
             ),
             onSearchChanged: (value) {
               context.read<CustomerCodeBloc>().add(
-                    CustomerCodeEvent.autoSearch(
+                    CustomerCodeEvent.search(
                       searchValue: SearchKey.search(value),
                     ),
                   );
