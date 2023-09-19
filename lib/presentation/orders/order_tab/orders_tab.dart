@@ -27,7 +27,10 @@ class OrdersTab extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         key: WidgetKeys.ordersTab,
-        title: const Text('Orders').tr(),
+        title: Text(
+          'Orders',
+          style: Theme.of(context).textTheme.labelLarge,
+        ).tr(),
         automaticallyImplyLeading: false,
         centerTitle: false,
         actions: [

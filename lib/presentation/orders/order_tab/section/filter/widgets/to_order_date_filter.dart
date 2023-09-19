@@ -14,7 +14,7 @@ class _ToOrderDateFilter extends StatelessWidget {
             final viewByOrderFilterBloc = context.read<ViewByOrderFilterBloc>();
             final documentDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime.now().subtract(const Duration(days: 180)),
               lastDate: DateTime.now(),
               initialDateRange: state.filter.dateRange,
             );

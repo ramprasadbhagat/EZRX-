@@ -94,6 +94,7 @@ abstract class ZPColors {
 
   static const Color paleBlueGray = Color.fromRGBO(230, 238, 239, 1);
   static const Color lightSilver = Color.fromRGBO(233, 236, 238, 1);
+  static const Color blueAccent = Color.fromRGBO(197, 217, 244, 1);
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,
     <int, Color>{

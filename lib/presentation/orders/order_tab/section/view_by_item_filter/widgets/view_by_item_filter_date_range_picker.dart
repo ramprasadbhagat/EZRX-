@@ -55,7 +55,7 @@ class _DateField extends StatelessWidget {
         final orderHistoryFilterBloc = context.read<ViewByItemFilterBloc>();
         final orderDateRange = await showDateRangePicker(
           context: context,
-          firstDate: DateTime.now().subtract(const Duration(days: 364)),
+          firstDate: DateTime.now().subtract(const Duration(days: 180)),
           lastDate: DateTime.now(),
           initialDateRange: orderHistoryFilterBloc.state.filter.dateRange,
         );

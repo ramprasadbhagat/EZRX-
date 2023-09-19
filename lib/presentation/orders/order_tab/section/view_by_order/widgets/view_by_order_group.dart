@@ -5,11 +5,13 @@ class _ViewByOrderGroup extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
 
   final bool showDivider;
+  final bool showBanner;
 
   const _ViewByOrderGroup({
     Key? key,
     required this.viewByOrdersItem,
     required this.showDivider,
+    required this.showBanner,
     required this.orderHistoryItem,
   }) : super(key: key);
 
@@ -17,6 +19,14 @@ class _ViewByOrderGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        if (showBanner)
+          InfoLabel(
+            textValue:
+                'Order history is limited to the last 6 months from today'.tr(),
+            mainColor: ZPColors.blueAccent,
+            margin: const EdgeInsets.symmetric(horizontal: 20.0)
+                .copyWith(top: 16.0),
+          ),
         if (showDivider)
           const Divider(
             indent: 0,

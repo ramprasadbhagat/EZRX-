@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -82,6 +83,7 @@ class ViewByItemsPage extends StatelessWidget {
           itemBuilder: (context, index, item) => _ViewByOrderItemGroup(
             orderHistoryItem: item,
             showDivider: index != 0,
+            showBanner: index == 0,
           ),
           items:
               state.orderHistoryList.orderHistoryItems.getViewByOrderItemList,

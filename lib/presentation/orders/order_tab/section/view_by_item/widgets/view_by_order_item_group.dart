@@ -3,17 +3,28 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/v
 class _ViewByOrderItemGroup extends StatelessWidget {
   final ViewByItemGroup orderHistoryItem;
   final bool showDivider;
+  final bool showBanner;
   const _ViewByOrderItemGroup({
     Key? key,
     required this.orderHistoryItem,
     required this.showDivider,
+    required this.showBanner,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       key: WidgetKeys.viewByItemsOrderGroupKey,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (showBanner)
+          InfoLabel(
+            textValue:
+                'Order history is limited to the last 6 months from today'.tr(),
+            mainColor: ZPColors.blueAccent,
+            margin: const EdgeInsets.symmetric(horizontal: 20.0)
+                .copyWith(top: 16.0),
+          ),
         if (showDivider)
           const Divider(
             indent: 0,

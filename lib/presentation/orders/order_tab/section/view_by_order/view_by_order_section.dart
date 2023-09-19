@@ -20,6 +20,7 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -96,6 +97,7 @@ class ViewByOrdersPage extends StatelessWidget {
             itemBuilder: (context, index, item) => _ViewByOrderGroup(
               viewByOrdersItem: item,
               showDivider: index != 0,
+              showBanner: index == 0,
               orderHistoryItem: orderHistoryItem,
             ),
             items: state.viewByOrderList.orderHeaders.getViewByOrderGroupList,
