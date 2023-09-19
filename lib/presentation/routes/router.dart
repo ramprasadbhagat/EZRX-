@@ -20,6 +20,7 @@ import 'package:ezrxmobile/presentation/faq/faq.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcement_info_details_page.dart';
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
+import 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/update_cart.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
@@ -425,6 +426,10 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(
       page: NewRequestSuccessfulPage,
       path: 'returns/new_request_successful',
+    ),
+    AutoRoute(
+      page: AboutUsPage,
+      path: 'about_us',
     ),
   ],
 )

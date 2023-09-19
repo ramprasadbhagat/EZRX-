@@ -47,6 +47,7 @@ mixin _$ApiFailure {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,6 +81,7 @@ mixin _$ApiFailure {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -113,6 +115,7 @@ mixin _$ApiFailure {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -160,6 +163,7 @@ mixin _$ApiFailure {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -198,6 +202,7 @@ mixin _$ApiFailure {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -236,6 +241,7 @@ mixin _$ApiFailure {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -350,6 +356,7 @@ class _$_Other implements _Other {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return other(message);
   }
@@ -386,6 +393,7 @@ class _$_Other implements _Other {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return other?.call(message);
   }
@@ -422,6 +430,7 @@ class _$_Other implements _Other {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -475,6 +484,7 @@ class _$_Other implements _Other {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return other(this);
   }
@@ -516,6 +526,7 @@ class _$_Other implements _Other {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return other?.call(this);
   }
@@ -557,6 +568,7 @@ class _$_Other implements _Other {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -668,6 +680,7 @@ class _$_ServerError implements _ServerError {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return serverError(message);
   }
@@ -704,6 +717,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return serverError?.call(message);
   }
@@ -740,6 +754,7 @@ class _$_ServerError implements _ServerError {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -793,6 +808,7 @@ class _$_ServerError implements _ServerError {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return serverError(this);
   }
@@ -834,6 +850,7 @@ class _$_ServerError implements _ServerError {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return serverError?.call(this);
   }
@@ -875,6 +892,7 @@ class _$_ServerError implements _ServerError {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -960,6 +978,7 @@ class _$_PoorConnection implements _PoorConnection {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return poorConnection();
   }
@@ -996,6 +1015,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return poorConnection?.call();
   }
@@ -1032,6 +1052,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1085,6 +1106,7 @@ class _$_PoorConnection implements _PoorConnection {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return poorConnection(this);
   }
@@ -1126,6 +1148,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return poorConnection?.call(this);
   }
@@ -1167,6 +1190,7 @@ class _$_PoorConnection implements _PoorConnection {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1247,6 +1271,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return serverTimeout();
   }
@@ -1283,6 +1308,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return serverTimeout?.call();
   }
@@ -1319,6 +1345,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1372,6 +1399,7 @@ class _$_ServerTimeout implements _ServerTimeout {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return serverTimeout(this);
   }
@@ -1413,6 +1441,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return serverTimeout?.call(this);
   }
@@ -1454,6 +1483,7 @@ class _$_ServerTimeout implements _ServerTimeout {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1534,6 +1564,7 @@ class _$_UserNotFound implements _UserNotFound {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return userNotFound();
   }
@@ -1570,6 +1601,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return userNotFound?.call();
   }
@@ -1606,6 +1638,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1659,6 +1692,7 @@ class _$_UserNotFound implements _UserNotFound {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return userNotFound(this);
   }
@@ -1700,6 +1734,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return userNotFound?.call(this);
   }
@@ -1741,6 +1776,7 @@ class _$_UserNotFound implements _UserNotFound {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -1826,6 +1862,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -1862,6 +1899,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -1898,6 +1936,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -1951,6 +1990,7 @@ class _$_InvalidEmailAndPasswordCombination
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -1992,6 +2032,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -2033,6 +2074,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -2114,6 +2156,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return accountLocked();
   }
@@ -2150,6 +2193,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return accountLocked?.call();
   }
@@ -2186,6 +2230,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -2239,6 +2284,7 @@ class _$_AccountLocked implements _AccountLocked {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return accountLocked(this);
   }
@@ -2280,6 +2326,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return accountLocked?.call(this);
   }
@@ -2321,6 +2368,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -2401,6 +2449,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return accountExpired();
   }
@@ -2437,6 +2486,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return accountExpired?.call();
   }
@@ -2473,6 +2523,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -2526,6 +2577,7 @@ class _$_AccountExpired implements _AccountExpired {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return accountExpired(this);
   }
@@ -2567,6 +2619,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return accountExpired?.call(this);
   }
@@ -2608,6 +2661,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -2688,6 +2742,7 @@ class _$_TokenExpired implements _TokenExpired {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return tokenExpired();
   }
@@ -2724,6 +2779,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return tokenExpired?.call();
   }
@@ -2760,6 +2816,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -2813,6 +2870,7 @@ class _$_TokenExpired implements _TokenExpired {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return tokenExpired(this);
   }
@@ -2854,6 +2912,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return tokenExpired?.call(this);
   }
@@ -2895,6 +2954,7 @@ class _$_TokenExpired implements _TokenExpired {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -2975,6 +3035,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return authenticationFailed();
   }
@@ -3011,6 +3072,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return authenticationFailed?.call();
   }
@@ -3047,6 +3109,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -3100,6 +3163,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return authenticationFailed(this);
   }
@@ -3141,6 +3205,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return authenticationFailed?.call(this);
   }
@@ -3182,6 +3247,7 @@ class _$_AuthenticationFailed implements _AuthenticationFailed {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -3266,6 +3332,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return proxyLoginRolePermissionNotMatch();
   }
@@ -3302,6 +3369,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return proxyLoginRolePermissionNotMatch?.call();
   }
@@ -3338,6 +3406,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -3391,6 +3460,7 @@ class _$_ProxyLoginRolePermissionNotMatch
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return proxyLoginRolePermissionNotMatch(this);
   }
@@ -3432,6 +3502,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return proxyLoginRolePermissionNotMatch?.call(this);
   }
@@ -3473,6 +3544,7 @@ class _$_ProxyLoginRolePermissionNotMatch
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -3558,6 +3630,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return proxyLoginZPTargetRoleNotMatch();
   }
@@ -3594,6 +3667,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call();
   }
@@ -3630,6 +3704,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -3683,6 +3758,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return proxyLoginZPTargetRoleNotMatch(this);
   }
@@ -3724,6 +3800,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call(this);
   }
@@ -3765,6 +3842,7 @@ class _$_ProxyLoginZPTargetRoleNotMatch
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -3849,6 +3927,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return proxyLoginZPSalesOrgNotMatch();
   }
@@ -3885,6 +3964,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call();
   }
@@ -3921,6 +4001,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -3974,6 +4055,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return proxyLoginZPSalesOrgNotMatch(this);
   }
@@ -4015,6 +4097,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call(this);
   }
@@ -4056,6 +4139,7 @@ class _$_ProxyLoginZPSalesOrgNotMatch implements _ProxyLoginZPSalesOrgNotMatch {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -4137,6 +4221,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return passwordResetFail();
   }
@@ -4173,6 +4258,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return passwordResetFail?.call();
   }
@@ -4209,6 +4295,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -4262,6 +4349,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return passwordResetFail(this);
   }
@@ -4303,6 +4391,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return passwordResetFail?.call(this);
   }
@@ -4344,6 +4433,7 @@ class _$_PasswordResetFail implements _PasswordResetFail {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -4427,6 +4517,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return deviceNotSupportBiometric();
   }
@@ -4463,6 +4554,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return deviceNotSupportBiometric?.call();
   }
@@ -4499,6 +4591,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -4552,6 +4645,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return deviceNotSupportBiometric(this);
   }
@@ -4593,6 +4687,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return deviceNotSupportBiometric?.call(this);
   }
@@ -4634,6 +4729,7 @@ class _$_DeviceNotSupportBiometric implements _DeviceNotSupportBiometric {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -4714,6 +4810,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return cannotCheckBiometrics();
   }
@@ -4750,6 +4847,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -4786,6 +4884,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -4839,6 +4938,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return cannotCheckBiometrics(this);
   }
@@ -4880,6 +4980,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -4921,6 +5022,7 @@ class _$_CannotCheckBiometrics implements _CannotCheckBiometrics {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -5001,6 +5103,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return noSupportedBiometrics();
   }
@@ -5037,6 +5140,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -5073,6 +5177,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -5126,6 +5231,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return noSupportedBiometrics(this);
   }
@@ -5167,6 +5273,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -5208,6 +5315,7 @@ class _$_NoSupportedBiometrics implements _NoSupportedBiometrics {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -5288,6 +5396,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return invalidBiometric();
   }
@@ -5324,6 +5433,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return invalidBiometric?.call();
   }
@@ -5360,6 +5470,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -5413,6 +5524,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return invalidBiometric(this);
   }
@@ -5454,6 +5566,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return invalidBiometric?.call(this);
   }
@@ -5495,6 +5608,7 @@ class _$_InvalidBiometric implements _InvalidBiometric {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -5575,6 +5689,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return priceOverrideNotFound();
   }
@@ -5611,6 +5726,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return priceOverrideNotFound?.call();
   }
@@ -5647,6 +5763,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -5700,6 +5817,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return priceOverrideNotFound(this);
   }
@@ -5741,6 +5859,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return priceOverrideNotFound?.call(this);
   }
@@ -5782,6 +5901,7 @@ class _$_PriceOverrideNotFound implements _PriceOverrideNotFound {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -5862,6 +5982,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return productOutOfStock();
   }
@@ -5898,6 +6019,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return productOutOfStock?.call();
   }
@@ -5934,6 +6056,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -5987,6 +6110,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return productOutOfStock(this);
   }
@@ -6028,6 +6152,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return productOutOfStock?.call(this);
   }
@@ -6069,6 +6194,7 @@ class _$_ProductOutOfStock implements _ProductOutOfStock {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -6149,6 +6275,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return photoPermissionFailed();
   }
@@ -6185,6 +6312,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return photoPermissionFailed?.call();
   }
@@ -6221,6 +6349,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -6274,6 +6403,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return photoPermissionFailed(this);
   }
@@ -6315,6 +6445,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return photoPermissionFailed?.call(this);
   }
@@ -6356,6 +6487,7 @@ class _$_PhotoPermissionFailed implements _PhotoPermissionFailed {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -6437,6 +6569,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return storagePermissionFailed();
   }
@@ -6473,6 +6606,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return storagePermissionFailed?.call();
   }
@@ -6509,6 +6643,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -6562,6 +6697,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return storagePermissionFailed(this);
   }
@@ -6603,6 +6739,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return storagePermissionFailed?.call(this);
   }
@@ -6644,6 +6781,7 @@ class _$_StoragePermissionFailed implements _StoragePermissionFailed {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -6724,6 +6862,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return invalidFileFormat();
   }
@@ -6760,6 +6899,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return invalidFileFormat?.call();
   }
@@ -6796,6 +6936,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -6849,6 +6990,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return invalidFileFormat(this);
   }
@@ -6890,6 +7032,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return invalidFileFormat?.call(this);
   }
@@ -6931,6 +7074,7 @@ class _$_InvalidFileFormat implements _InvalidFileFormat {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -7012,6 +7156,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return uploadCountExcideLimit();
   }
@@ -7048,6 +7193,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return uploadCountExcideLimit?.call();
   }
@@ -7084,6 +7230,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -7137,6 +7284,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return uploadCountExcideLimit(this);
   }
@@ -7178,6 +7326,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return uploadCountExcideLimit?.call(this);
   }
@@ -7219,6 +7368,7 @@ class _$_UploadCountExcideLimit implements _UploadCountExcideLimit {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -7299,6 +7449,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return materialDetailRoute();
   }
@@ -7335,6 +7486,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return materialDetailRoute?.call();
   }
@@ -7371,6 +7523,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (materialDetailRoute != null) {
@@ -7424,6 +7577,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return materialDetailRoute(this);
   }
@@ -7465,6 +7619,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return materialDetailRoute?.call(this);
   }
@@ -7506,6 +7661,7 @@ class _$_MaterialDetailRoute implements _MaterialDetailRoute {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (materialDetailRoute != null) {
@@ -7586,6 +7742,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return historyDetailRoute();
   }
@@ -7622,6 +7779,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return historyDetailRoute?.call();
   }
@@ -7658,6 +7816,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (historyDetailRoute != null) {
@@ -7711,6 +7870,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return historyDetailRoute(this);
   }
@@ -7752,6 +7912,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return historyDetailRoute?.call(this);
   }
@@ -7793,6 +7954,7 @@ class _$_HistoryDetailRoute implements _HistoryDetailRoute {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (historyDetailRoute != null) {
@@ -7873,6 +8035,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return languageChangeFail();
   }
@@ -7909,6 +8072,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return languageChangeFail?.call();
   }
@@ -7945,6 +8109,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (languageChangeFail != null) {
@@ -7998,6 +8163,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return languageChangeFail(this);
   }
@@ -8039,6 +8205,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return languageChangeFail?.call(this);
   }
@@ -8080,6 +8247,7 @@ class _$_LanguageChangeFail implements _LanguageChangeFail {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (languageChangeFail != null) {
@@ -8188,6 +8356,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return scannedProductNotFound(productNumber);
   }
@@ -8224,6 +8393,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return scannedProductNotFound?.call(productNumber);
   }
@@ -8260,6 +8430,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (scannedProductNotFound != null) {
@@ -8313,6 +8484,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return scannedProductNotFound(this);
   }
@@ -8354,6 +8526,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return scannedProductNotFound?.call(this);
   }
@@ -8395,6 +8568,7 @@ class _$_ScannedProductNotFound implements _ScannedProductNotFound {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (scannedProductNotFound != null) {
@@ -8482,6 +8656,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     required TResult Function() languageChangeFail,
     required TResult Function(String productNumber) scannedProductNotFound,
     required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
   }) {
     return cameraPermissionFailed();
   }
@@ -8518,6 +8693,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult? Function()? languageChangeFail,
     TResult? Function(String productNumber)? scannedProductNotFound,
     TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
   }) {
     return cameraPermissionFailed?.call();
   }
@@ -8554,6 +8730,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult Function()? languageChangeFail,
     TResult Function(String productNumber)? scannedProductNotFound,
     TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
     required TResult orElse(),
   }) {
     if (cameraPermissionFailed != null) {
@@ -8607,6 +8784,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
         scannedProductNotFound,
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
   }) {
     return cameraPermissionFailed(this);
   }
@@ -8648,6 +8826,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult? Function(_LanguageChangeFail value)? languageChangeFail,
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
   }) {
     return cameraPermissionFailed?.call(this);
   }
@@ -8689,6 +8868,7 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
     TResult Function(_LanguageChangeFail value)? languageChangeFail,
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
     required TResult orElse(),
   }) {
     if (cameraPermissionFailed != null) {
@@ -8700,4 +8880,297 @@ class _$_CameraPermissionFailed implements _CameraPermissionFailed {
 
 abstract class _CameraPermissionFailed implements ApiFailure {
   const factory _CameraPermissionFailed() = _$_CameraPermissionFailed;
+}
+
+/// @nodoc
+abstract class _$$_AboutUsFailCopyWith<$Res> {
+  factory _$$_AboutUsFailCopyWith(
+          _$_AboutUsFail value, $Res Function(_$_AboutUsFail) then) =
+      __$$_AboutUsFailCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AboutUsFailCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$_AboutUsFail>
+    implements _$$_AboutUsFailCopyWith<$Res> {
+  __$$_AboutUsFailCopyWithImpl(
+      _$_AboutUsFail _value, $Res Function(_$_AboutUsFail) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_AboutUsFail implements _AboutUsFail {
+  const _$_AboutUsFail();
+
+  @override
+  String toString() {
+    return 'ApiFailure.aboutUsFail()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_AboutUsFail);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() passwordResetFail,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() materialDetailRoute,
+    required TResult Function() historyDetailRoute,
+    required TResult Function() languageChangeFail,
+    required TResult Function(String productNumber) scannedProductNotFound,
+    required TResult Function() cameraPermissionFailed,
+    required TResult Function() aboutUsFail,
+  }) {
+    return aboutUsFail();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? materialDetailRoute,
+    TResult? Function()? historyDetailRoute,
+    TResult? Function()? languageChangeFail,
+    TResult? Function(String productNumber)? scannedProductNotFound,
+    TResult? Function()? cameraPermissionFailed,
+    TResult? Function()? aboutUsFail,
+  }) {
+    return aboutUsFail?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? passwordResetFail,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? materialDetailRoute,
+    TResult Function()? historyDetailRoute,
+    TResult Function()? languageChangeFail,
+    TResult Function(String productNumber)? scannedProductNotFound,
+    TResult Function()? cameraPermissionFailed,
+    TResult Function()? aboutUsFail,
+    required TResult orElse(),
+  }) {
+    if (aboutUsFail != null) {
+      return aboutUsFail();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_MaterialDetailRoute value) materialDetailRoute,
+    required TResult Function(_HistoryDetailRoute value) historyDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+    required TResult Function(_ScannedProductNotFound value)
+        scannedProductNotFound,
+    required TResult Function(_CameraPermissionFailed value)
+        cameraPermissionFailed,
+    required TResult Function(_AboutUsFail value) aboutUsFail,
+  }) {
+    return aboutUsFail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult? Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_AboutUsFail value)? aboutUsFail,
+  }) {
+    return aboutUsFail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_MaterialDetailRoute value)? materialDetailRoute,
+    TResult Function(_HistoryDetailRoute value)? historyDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_AboutUsFail value)? aboutUsFail,
+    required TResult orElse(),
+  }) {
+    if (aboutUsFail != null) {
+      return aboutUsFail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AboutUsFail implements ApiFailure {
+  const factory _AboutUsFail() = _$_AboutUsFail;
 }

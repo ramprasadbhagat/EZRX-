@@ -107,6 +107,8 @@ class SalesOrg extends ValueObject<String> {
 
   String get articleVariablePath => countryArticlePath(country);
 
+  String get aboutUsVariablePath => countryAboutUsPath(country);
+
   String get countryFlag => getCountryFlag(country);
   String get faqVariablePath => countryFaqPath(country);
   const SalesOrg._(this.value);

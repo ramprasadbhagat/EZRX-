@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
@@ -108,6 +109,10 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/repository/i_combo_deal_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
+import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_local.dart';
+import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_query_mutation.dart';
+import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_remote.dart';
+import 'package:ezrxmobile/infrastructure/about_us/repository/about_us_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_remote.dart';
@@ -3301,6 +3306,40 @@ void setupLocator() {
   locator.registerFactory(
     () => ReOrderPermissionBloc(
       reOrderPermissionRepository: locator<ReOrderPermissionRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  About Us
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => AboutUsQueryMutation(),
+  );
+
+  locator.registerLazySingleton(
+    () => AboutUsLocalDataSource(),
+  );
+
+  locator.registerLazySingleton(
+    () => AboutUsRemoteDataSource(
+      exceptionHandler: locator<DataSourceExceptionHandler>(),
+      httpService: locator<HttpService>(),
+      queryMutation: locator<AboutUsQueryMutation>(),
+    ),
+  );
+
+  locator.registerLazySingleton(
+    () => AboutUsRepository(
+      localDataSource: locator<AboutUsLocalDataSource>(),
+      remoteDataSource: locator<AboutUsRemoteDataSource>(),
+      config: locator<Config>(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => AboutUsBloc(
+      repository: locator<AboutUsRepository>(),
     ),
   );
 }

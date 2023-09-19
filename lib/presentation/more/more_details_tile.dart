@@ -50,12 +50,13 @@ class MoreDetailsTile {
         label: 'User guide',
       );
 
-  factory MoreDetailsTile.aboutUs() => const MoreDetailsTile(
-        icon: Icon(
+  factory MoreDetailsTile.aboutUs(BuildContext context) => MoreDetailsTile(
+        icon: const Icon(
           Icons.info_outlined,
-          color: ZPColors.lightGray,
+          color: ZPColors.greenIconColor,
         ),
         label: 'About us',
+        onTap: () => context.navigateTo(const AboutUsPageRoute()),
       );
 
   factory MoreDetailsTile.chatSupport(BuildContext context) => MoreDetailsTile(

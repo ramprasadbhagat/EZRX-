@@ -102,6 +102,7 @@ class WidgetKeys {
       Key('loginOnBehalfLoginButtonKey');
   static const Key loginOnBehalfCancelButtonKey =
       Key('loginOnBehalfCancelButtonKey');
+  static const Key aboutUsFloatingButton = Key('aboutUsFloatingButton');
 
   //  Change Delivery Address BottomSheet
   //============================================================
