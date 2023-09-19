@@ -408,12 +408,18 @@ String getReturnSummaryStatusInList(String statusType) {
 bool isSuccessfulOrProcessed(String status) =>
     status == 'Successful' || status == 'Processed';
 
+bool isFailed(String status) => status == 'Failed';
+
 Color getDisplayStatusTextColor(String status) {
   return isSuccessfulOrProcessed(status) ? ZPColors.black : ZPColors.red;
 }
 
 Color getAdviceExpiryColor(String status) {
   return isSuccessfulOrProcessed(status) ? ZPColors.white : ZPColors.red;
+}
+
+Color getAdviceExpiryColorFailed(String status) {
+  return isFailed(status) ? ZPColors.red : ZPColors.white;
 }
 
 bool differenceNGTWeek(DateTime date) {

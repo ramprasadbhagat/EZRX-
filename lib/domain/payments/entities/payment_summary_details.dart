@@ -66,7 +66,9 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
 
   String get adviceExpiryText => status.getIsSuccessfulOrProcessed
       ? 'NA'.tr()
-      : 'in ${adviceExpiry.displayDashIfEmpty}'.tr();
+      : status.getIsFailed
+          ? 'Expires in ${adviceExpiry.displayDashIfEmpty}'.tr()
+          : 'in ${adviceExpiry.displayDashIfEmpty}'.tr();
 
   String get paymentDate =>
       status.getIsSuccessfulOrProcessed ? valueDate.dateString.tr() : '-'.tr();

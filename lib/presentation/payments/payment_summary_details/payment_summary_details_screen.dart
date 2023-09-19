@@ -36,6 +36,7 @@ class _PaymentSummaryDetailsPageState extends State<PaymentSummaryDetailsPage> {
       appBar: AppBar(
         title: Text(
           'Payment details'.tr(),
+          style: Theme.of(context).textTheme.labelLarge,
         ),
         centerTitle: false,
       ),

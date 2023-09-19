@@ -114,8 +114,8 @@ class _PaymentDetailsSection extends StatelessWidget {
                       color: ZPColors.white,
                     ),
                 valueTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color:
-                          paymentSummaryDetails.status.getAdviceExpiryTextColor,
+                      color: paymentSummaryDetails
+                          .status.getAdviceExpiryTextColorForFailed,
                     ),
               ),
               BalanceTextRow(
@@ -186,10 +186,21 @@ class _InvoiceSummarySection extends StatelessWidget {
           _PriceWidget(
             title: 'Invoice total:',
             price: paymentItemState.paymentItemList.invoiceTotal.toString(),
+            type: PriceStyle.totalPrice,
           ),
-          _PriceWidget(
-            title: 'Credits applied:',
-            price: paymentItemState.paymentItemList.creditTotal.toString(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Credits applied:'.tr(),
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              PriceComponent(
+                type: PriceStyle.credits,
+                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                price: paymentItemState.paymentItemList.creditTotal.toString(),
+              ),
+            ],
           ),
           const Divider(
             indent: 0,
@@ -200,10 +211,7 @@ class _InvoiceSummarySection extends StatelessWidget {
           _PriceWidget(
             title: 'Total:',
             price: total.toString(),
-            priceStyle: Theme.of(context)
-                .textTheme
-                .labelSmall
-                ?.copyWith(fontWeight: FontWeight.w700),
+            type: PriceStyle.grandTotalPrice,
           ),
         ],
       ),
@@ -216,11 +224,11 @@ class _PriceWidget extends StatelessWidget {
     Key? key,
     required this.title,
     required this.price,
-    this.priceStyle,
+    this.type = PriceStyle.commonPrice,
   }) : super(key: key);
   final String title;
   final String price;
-  final TextStyle? priceStyle;
+  final PriceStyle type;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -233,6 +241,7 @@ class _PriceWidget extends StatelessWidget {
         PriceComponent(
           salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
           price: price,
+          type: type,
         ),
       ],
     );

@@ -61,6 +61,9 @@ class PriceComponent extends StatelessWidget {
 
       return textSpans;
     }
+    if (type == PriceStyle.credits) {
+      textSpans.add(TextSpan(text: '(', style: currencyCodeTextStyle));
+    }
     final amount = priceValue.split(' ').last;
     //currency
     textSpans.add(
@@ -69,6 +72,7 @@ class PriceComponent extends StatelessWidget {
         style: currencyCodeTextStyle,
       ),
     );
+
     //amount
     final obscuredValue = amount.replaceAll(RegExp(r'[0-9]'), '*');
     textSpans.add(
@@ -77,6 +81,9 @@ class PriceComponent extends StatelessWidget {
         style: priceTextStyle,
       ),
     );
+    if (type == PriceStyle.credits) {
+      textSpans.add(TextSpan(text: ')', style: currencyCodeTextStyle));
+    }
 
     return textSpans;
   }
@@ -102,6 +109,7 @@ enum PriceStyle {
   totalPrice,
   summaryPrice,
   grandTotalPrice,
+  credits,
 }
 
 TextStyle _priceStyle(BuildContext context, PriceStyle type) {
@@ -131,6 +139,12 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
             color: ZPColors.neutralsBlack,
           );
     case PriceStyle.totalPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            fontWeight: FontWeight.w900,
+            fontSize: 14,
+            color: ZPColors.neutralsBlack,
+          );
+    case PriceStyle.credits:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             fontWeight: FontWeight.w900,
             fontSize: 14,
@@ -169,6 +183,10 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
             color: ZPColors.darkGray,
           );
     case PriceStyle.totalPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: ZPColors.black,
+          );
+    case PriceStyle.credits:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             color: ZPColors.black,
           );

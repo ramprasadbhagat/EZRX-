@@ -244,11 +244,14 @@ class StatusType extends ValueObject<String> {
       getDisplayStatusTextColor(value.getOrElse(() => ''));
   Color get getAdviceExpiryTextColor =>
       getAdviceExpiryColor(value.getOrElse(() => ''));
+  Color get getAdviceExpiryTextColorForFailed =>
+      getAdviceExpiryColorFailed(value.getOrElse(() => ''));
 
   bool get isApprovedStatus => isApproved(value.getOrElse(() => ''));
 
   bool get getIsSuccessfulOrProcessed =>
       isSuccessfulOrProcessed(value.getOrElse(() => ''));
+  bool get getIsFailed => isFailed(value.getOrElse(() => ''));
   bool get getIsBapiStatusFailed =>
       isBapiStatusFailed(value.getOrElse(() => ''));
 

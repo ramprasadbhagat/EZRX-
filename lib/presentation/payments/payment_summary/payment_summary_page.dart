@@ -57,7 +57,10 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
       key: WidgetKeys.paymentSummaryPage,
       appBar: AppBar(
         key: WidgetKeys.paymentSummaryAppBar,
-        title: Text('Payment Summary'.tr()),
+        title: Text(
+          'Payment Summary'.tr(),
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
         centerTitle: false,
         actions: const [_PaymentSummaryDownloadButton()],
       ),
