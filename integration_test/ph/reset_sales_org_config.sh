@@ -3,9 +3,173 @@
 echo -e "\n"
 echo "Presetting sales org config for PH."
 
-updateSalesorgconfigMutationReq=$(curl --location 'https://uat.ezrx.com/api/strapiEngineMutation' \
+updateSalesorgconfigMutationReq=$(curl --location 'https://uat-ph.ezrx.com/api/license' \
 --header 'Content-Type: application/json' \
---data '{"query":"   mutation updateSalesorgconfigMutation($input: UpdateSalesOrgConfigInput!) {       updateSalesOrgConfig(input: $input) {      salesOrgConfig {        salesOrgCode        ponRequired        priceOverride        expiryDateDisplay        enableBatchNumber        currency        netPriceOverride        languageFilter        enableVat        enableZDP5        languageValue        materialWithoutPrice        enableZDP8Override        displayOrderDiscount        enableIRN        enableTaxClassification        disableBundles        disableProcessingStatus        enableCollectiveNumber        enableGimmickMaterial        hideStockDisplay        showPOAttachment        disableDeliveryDate        enableTaxAtTotalLevelOnly        enableGreenDelivery        greenDeliveryDelayInDays        greenDeliveryUserRole        minOrderAmount        hideCustomer        disableOrderType        vatValue        enableSpecialInstructions        enableReferenceNote        enableMobileNumber        enablePaymentTerms        enableGMC        enableListPrice        enableDefaultMD        disablePaymentTermsDisplay        enableBillTo        enableOHPrice        addOosMaterials        oosValue        enableRemarks        enableTaxDisplay        enableGMN        }       }     }   ","variables":{"input":{"where":{"id":13},"data":{"salesOrgCode":"2500","ponRequired":true,"priceOverride":true,"expiryDateDisplay":false,"batchNumDisplay":false,"enableBatchNumber":false,"currency":"php","netPriceOverride":false,"languageFilter":false,"enableVat":false,"enableZDP5":false,"languageValue":"","materialWithoutPrice":true,"enableZDP8Override":true,"displayOrderDiscount":false,"enableIRN":false,"enableTaxClassification":false,"disableBundles":false,"disableProcessingStatus":false,"enableCollectiveNumber":false,"enableGimmickMaterial":false,"hideStockDisplay":false,"showPOAttachment":false,"disableDeliveryDate":false,"enableTaxAtTotalLevelOnly":false,"enableGreenDelivery":false,"greenDeliveryDelayInDays":0,"greenDeliveryUserRole":0,"minOrderAmount":"0","hideCustomer":false,"disableOrderType":true,"vatValue":0,"enableSpecialInstructions":true,"enableReferenceNote":false,"enableMobileNumber":false,"enablePaymentTerms":false,"enableGMC":false,"enableListPrice":true,"enableDefaultMD":false,"disablePaymentTermsDisplay":true,"enableBillTo":false,"enableOHPrice":true,"addOosMaterials":true,"oosValue":1,"enableRemarks":true,"enableTaxDisplay":true,"enableGMN":false}}}}')
+--data '{"query":"   mutation updateSalesorgconfigMutation($input: UpdateSalesOrgConfigInput!) {
+  updateSalesOrgConfig(input: $input) {
+    salesOrgConfig {
+      salesOrgCode
+      ponRequired
+      priceOverride
+      expiryDateDisplay
+      batchNumDisplay
+      enableBatchNumber
+      currency
+      netPriceOverride
+      languageFilter
+      enableVat
+      enableZDP5
+      languageValue
+      materialWithoutPrice
+      enableZDP8Override
+      displayOrderDiscount
+      enableIRN
+      enableTaxClassification
+      disableBundles
+      disableProcessingStatus
+      enableCollectiveNumber
+      enableGimmickMaterial
+      hideStockDisplay
+      showPOAttachment
+      disableDeliveryDate
+      enableTaxAtTotalLevelOnly
+      enableGreenDelivery
+      greenDeliveryDelayInDays
+      greenDeliveryUserRole
+      minOrderAmount
+      hideCustomer
+      disableOrderType
+      vatValue
+      enableSpecialInstructions
+      enableReferenceNote
+      enableMobileNumber
+      enablePaymentTerms
+      enableGMC
+      enableListPrice
+      enableDefaultMD
+      disablePaymentTermsDisplay
+      enableBillTo
+      enableOHPrice
+      addOosMaterials
+      oosValue
+      enableRemarks
+      enableTaxDisplay
+      enableGMN
+      allowReturnsOutsidePolicy
+      disableApproverActions
+      disableDeals
+      disableOverrideApprovalCustomer
+      disableOverrideApprovalSR
+      disableOverrideFieldCustomer
+      disableOverrideFieldSR
+      disablePayment
+      disablePrincipals
+      disableReturnsAccess
+      disableReturnsAccessSR
+      disableUserRestrictions
+      displayItemTaxBreakdown
+      displaySubtotalTaxBreakdown
+      enable2FA
+      enableAnalytics
+      enableComboDeals
+      enableFutureDeliveryDay
+      enableLoyaltyScheme
+      enablePOAttachmentRequired
+      enablePartialPayment
+      enablePaymentTerms
+      enableUnreferencedReturn
+      enableUploadAd
+      futureDeliveryDay
+      hideCredit
+      plantNumber
+    }
+  }
+}
+
+
+variable:
+{
+  "input": {
+    "where": {
+      "id": 3
+    },
+    "data": {
+      "ponRequired": true,
+      "priceOverride": true,
+      "expiryDateDisplay": false,
+      "batchNumDisplay": false,
+      "currency": "php",
+      "minOrderAmount": "0",
+      "vatValue": 0,
+      "netPriceOverride": false,
+      "languageFilter": false,
+      "languageValue": "",
+      "materialWithoutPrice": true,
+      "enablePaymentTerms": false,
+      "enableMobileNumber": false,
+      "enableRemarks": false,
+      "enableListPrice": false,
+      "enableTaxDisplay": false,
+      "addOosMaterials": true,
+      "oosValue": 1,
+      "enableDefaultMD": false,
+      "enableZDP5": false,
+      "enableZDP8Override": true,
+      "enableGMC": false,
+      "enableGMN": false,
+      "enableBatchNumber": false,
+      "enableOHPrice": true,
+      "enableSpecialInstructions": true,
+      "enableReferenceNote": false,
+      "displayOrderDiscount": false,
+      "enableIRN": false,
+      "enableTaxClassification": false,
+      "disableBundles": false,
+      "disableProcessingStatus": false,
+      "disableOrderType": false,
+      "enableCollectiveNumber": false,
+      "enableGimmickMaterial": false,
+      "enableVat": false,
+      "hideCustomer": false,
+      "enableBillTo": true,
+      "disablePaymentTermsDisplay": false,
+      "hideStockDisplay": false,
+      "showPOAttachment": false,
+      "disableDeliveryDate": true,
+      "enableTaxAtTotalLevelOnly": false,
+      "enableGreenDelivery": false,
+      "greenDeliveryDelayInDays" : 0,
+      "greenDeliveryUserRole" : 0,
+      "allowReturnsOutsidePolicy": false,
+      "disableApproverActions": false,
+      "disableDeals" : false,
+      "disableOverrideApprovalCustomer" : false,
+      "disableOverrideApprovalSR" : false,
+      "disableOverrideFieldCustomer" : false,
+      "disableOverrideFieldSR" : true,
+      "disablePayment" : false,
+      "disablePrincipals" : true,
+      "disableReturnsAccess" : false,
+      "disableReturnsAccessSR" : false,
+      "disableUserRestrictions" : false,
+      "displayItemTaxBreakdown" : false,
+      "displaySubtotalTaxBreakdown" : false,
+      "enable2FA" : false,
+      "enableAnalytics" : false,
+      "enableComboDeals" : false,
+      "enableFutureDeliveryDay" : false,
+      "enableLoyaltyScheme" : false,
+      "enablePOAttachmentRequired" : false,
+      "enablePartialPayment" : false,
+      "enablePaymentTerms" : false,
+      "enableUnreferencedReturn" : false,
+      "enableUploadAd" : false,
+      "futureDeliveryDay" : "7",
+      "hideCredit" : false,
+      "plantNumber" : "",
+    }
+  }
+}')
 
 response=$(echo $updateSalesorgconfigMutationReq)
 echo "Response is : "  $response
