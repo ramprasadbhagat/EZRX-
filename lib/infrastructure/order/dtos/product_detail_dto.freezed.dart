@@ -74,46 +74,34 @@ abstract class $ProductDetailDtoCopyWith<$Res> {
       _$ProductDetailDtoCopyWithImpl<$Res, ProductDetailDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
+      {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-          String principalCode,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
+      String materialDescription,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-          String unitOfMeasurement,
+      String unitOfMeasurement,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-          String therapeuticClass,
+      String therapeuticClass,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          String genericMaterialName,
-      @JsonKey(name: 'itemBrand', defaultValue: '')
-          String itemBrand,
-      @JsonKey(name: 'materialBrand', defaultValue: '')
-          String materialBrand,
-      @JsonKey(name: 'isFavourite', defaultValue: false)
-          bool isFavourite,
-      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-          bool isFOCMaterial,
+      String genericMaterialName,
+      @JsonKey(name: 'itemBrand', defaultValue: '') String itemBrand,
+      @JsonKey(name: 'materialBrand', defaultValue: '') String materialBrand,
+      @JsonKey(name: 'isFavourite', defaultValue: false) bool isFavourite,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription,
-      @JsonKey(name: 'country', defaultValue: '')
-          String country,
-      @JsonKey(name: 'countryName', defaultValue: '')
-          String countryName,
-      @JsonKey(name: 'hidePrice', defaultValue: false)
-          bool hidePrice,
+      String defaultMaterialDescription,
+      @JsonKey(name: 'country', defaultValue: '') String country,
+      @JsonKey(name: 'countryName', defaultValue: '') String countryName,
+      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-          String governmentMaterialCode,
+      String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-          String itemRegistrationNumber,
-      @JsonKey(name: 'promoType', defaultValue: '')
-          String promoType,
-      @JsonKey(name: 'promoStatus', defaultValue: false)
-          bool promoStatus,
+      String itemRegistrationNumber,
+      @JsonKey(name: 'promoType', defaultValue: '') String promoType,
+      @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
-          bool isSuspended});
+      bool isSuspended});
 }
 
 /// @nodoc
@@ -244,46 +232,34 @@ abstract class _$$_ProductDetailDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber,
+      {@JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          String materialDescription,
-      @JsonKey(name: 'principalCode', defaultValue: '')
-          String principalCode,
-      @JsonKey(name: 'principalName', defaultValue: '')
-          String principalName,
+      String materialDescription,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-          String unitOfMeasurement,
+      String unitOfMeasurement,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-          String therapeuticClass,
+      String therapeuticClass,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          String genericMaterialName,
-      @JsonKey(name: 'itemBrand', defaultValue: '')
-          String itemBrand,
-      @JsonKey(name: 'materialBrand', defaultValue: '')
-          String materialBrand,
-      @JsonKey(name: 'isFavourite', defaultValue: false)
-          bool isFavourite,
-      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-          bool isFOCMaterial,
+      String genericMaterialName,
+      @JsonKey(name: 'itemBrand', defaultValue: '') String itemBrand,
+      @JsonKey(name: 'materialBrand', defaultValue: '') String materialBrand,
+      @JsonKey(name: 'isFavourite', defaultValue: false) bool isFavourite,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          String defaultMaterialDescription,
-      @JsonKey(name: 'country', defaultValue: '')
-          String country,
-      @JsonKey(name: 'countryName', defaultValue: '')
-          String countryName,
-      @JsonKey(name: 'hidePrice', defaultValue: false)
-          bool hidePrice,
+      String defaultMaterialDescription,
+      @JsonKey(name: 'country', defaultValue: '') String country,
+      @JsonKey(name: 'countryName', defaultValue: '') String countryName,
+      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-          String governmentMaterialCode,
+      String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-          String itemRegistrationNumber,
-      @JsonKey(name: 'promoType', defaultValue: '')
-          String promoType,
-      @JsonKey(name: 'promoStatus', defaultValue: false)
-          bool promoStatus,
+      String itemRegistrationNumber,
+      @JsonKey(name: 'promoType', defaultValue: '') String promoType,
+      @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
-          bool isSuspended});
+      bool isSuspended});
 }
 
 /// @nodoc
@@ -408,45 +384,40 @@ class __$$_ProductDetailDtoCopyWithImpl<$Res>
 class _$_ProductDetailDto extends _ProductDetailDto {
   _$_ProductDetailDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber,
+      required this.materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          required this.materialDescription,
+      required this.materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
-          required this.principalCode,
+      required this.principalCode,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required this.principalName,
+      required this.principalName,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-          required this.unitOfMeasurement,
+      required this.unitOfMeasurement,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-          required this.therapeuticClass,
+      required this.therapeuticClass,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          required this.genericMaterialName,
-      @JsonKey(name: 'itemBrand', defaultValue: '')
-          required this.itemBrand,
+      required this.genericMaterialName,
+      @JsonKey(name: 'itemBrand', defaultValue: '') required this.itemBrand,
       @JsonKey(name: 'materialBrand', defaultValue: '')
-          required this.materialBrand,
+      required this.materialBrand,
       @JsonKey(name: 'isFavourite', defaultValue: false)
-          required this.isFavourite,
+      required this.isFavourite,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-          required this.isFOCMaterial,
+      required this.isFOCMaterial,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          required this.defaultMaterialDescription,
-      @JsonKey(name: 'country', defaultValue: '')
-          required this.country,
-      @JsonKey(name: 'countryName', defaultValue: '')
-          required this.countryName,
-      @JsonKey(name: 'hidePrice', defaultValue: false)
-          required this.hidePrice,
+      required this.defaultMaterialDescription,
+      @JsonKey(name: 'country', defaultValue: '') required this.country,
+      @JsonKey(name: 'countryName', defaultValue: '') required this.countryName,
+      @JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-          required this.governmentMaterialCode,
+      required this.governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-          required this.itemRegistrationNumber,
-      @JsonKey(name: 'promoType', defaultValue: '')
-          required this.promoType,
+      required this.itemRegistrationNumber,
+      @JsonKey(name: 'promoType', defaultValue: '') required this.promoType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
-          required this.promoStatus,
+      required this.promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
-          required this.isSuspended})
+      required this.isSuspended})
       : super._();
 
   factory _$_ProductDetailDto.fromJson(Map<String, dynamic> json) =>
@@ -609,45 +580,44 @@ class _$_ProductDetailDto extends _ProductDetailDto {
 abstract class _ProductDetailDto extends ProductDetailDto {
   factory _ProductDetailDto(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
-          required final String materialDescription,
+      required final String materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
-          required final String principalCode,
+      required final String principalCode,
       @JsonKey(name: 'principalName', defaultValue: '')
-          required final String principalName,
+      required final String principalName,
       @JsonKey(name: 'unitOfMeasurement', defaultValue: '')
-          required final String unitOfMeasurement,
+      required final String unitOfMeasurement,
       @JsonKey(name: 'therapeuticClass', defaultValue: '')
-          required final String therapeuticClass,
+      required final String therapeuticClass,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
-          required final String genericMaterialName,
+      required final String genericMaterialName,
       @JsonKey(name: 'itemBrand', defaultValue: '')
-          required final String itemBrand,
+      required final String itemBrand,
       @JsonKey(name: 'materialBrand', defaultValue: '')
-          required final String materialBrand,
+      required final String materialBrand,
       @JsonKey(name: 'isFavourite', defaultValue: false)
-          required final bool isFavourite,
+      required final bool isFavourite,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-          required final bool isFOCMaterial,
+      required final bool isFOCMaterial,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
-          required final String defaultMaterialDescription,
-      @JsonKey(name: 'country', defaultValue: '')
-          required final String country,
+      required final String defaultMaterialDescription,
+      @JsonKey(name: 'country', defaultValue: '') required final String country,
       @JsonKey(name: 'countryName', defaultValue: '')
-          required final String countryName,
+      required final String countryName,
       @JsonKey(name: 'hidePrice', defaultValue: false)
-          required final bool hidePrice,
+      required final bool hidePrice,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
-          required final String governmentMaterialCode,
+      required final String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
-          required final String itemRegistrationNumber,
+      required final String itemRegistrationNumber,
       @JsonKey(name: 'promoType', defaultValue: '')
-          required final String promoType,
+      required final String promoType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
-          required final bool promoStatus,
+      required final bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
-          required final bool isSuspended}) = _$_ProductDetailDto;
+      required final bool isSuspended}) = _$_ProductDetailDto;
   _ProductDetailDto._() : super._();
 
   factory _ProductDetailDto.fromJson(Map<String, dynamic> json) =

@@ -742,7 +742,7 @@ void main() {
           AddToCart(isCovid19Tab: false, material: priceAggregate),
         ),
       );
-      final addToCartButton = find.text('Add to Cart');
+      final addToCartButton = find.text('Add to cart');
       expect(addToCartButton, findsOneWidget);
       await tester.tap(addToCartButton);
       await tester.pump();

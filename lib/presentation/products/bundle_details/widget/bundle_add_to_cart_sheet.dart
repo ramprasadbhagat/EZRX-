@@ -289,7 +289,7 @@ class _BundleSheetFooter extends StatelessWidget {
                           },
                           child: LoadingShimmer.withChild(
                             enabled: stateCart.isUpserting,
-                            child: const Text('Add To Cart').tr(),
+                            child: const Text('Add to cart').tr(),
                           ),
                         );
                       },

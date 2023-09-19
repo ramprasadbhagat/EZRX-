@@ -62,7 +62,7 @@ class AddToCartButton extends StatelessWidget {
                   )
                       ? _addToCart(context, cartItem)
                       : null,
-                  child: const Text('Add to Cart').tr(),
+                  child: const Text('Add to cart').tr(),
                 ),
               ),
           ],

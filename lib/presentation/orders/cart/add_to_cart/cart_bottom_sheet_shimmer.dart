@@ -78,7 +78,7 @@ class CartBottomSheetShimmer extends StatelessWidget {
             onPressed: null,
             child: isEdit
                 ? const Text('Update Cart').tr()
-                : const Text('Add to Cart').tr(),
+                : const Text('Add to cart').tr(),
           ),
         ),
       ],

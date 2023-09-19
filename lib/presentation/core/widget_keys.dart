@@ -413,6 +413,12 @@ class WidgetKeys {
       Key('materialDetailsSimilarProductsSection');
   static const Key materialDetailsCarouselImage =
       Key('materialDetailsCarouselImage');
+  static const Key productDetailQuantityAddKey =
+      Key('productDetailQuantityAddKey');
+  static const Key productDetailQuantityDeleteKey =
+      Key('productDetailQuantityDeleteKey');
+  static const Key productDetailQuantityTextKey =
+      Key('productDetailQuantityTextKey');
 
   //============================================================
   //  bundle Details

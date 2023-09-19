@@ -132,7 +132,7 @@ class BundleItemDetailPage extends StatelessWidget {
                             context,
                           );
                         },
-                        child: const Text('Add to Cart').tr(),
+                        child: const Text('Add to cart').tr(),
                       );
                     },
                   ),

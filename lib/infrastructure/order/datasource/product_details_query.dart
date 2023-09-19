@@ -34,6 +34,7 @@ class ProductDetailQuery {
         hidePrice
         governmentMaterialCode
         itemRegistrationNumber
+        suspensionStatus
       }
     }
      ''';

@@ -154,7 +154,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final addToCartButton =
-            find.widgetWithText(ElevatedButton, 'Add To Cart');
+            find.widgetWithText(ElevatedButton, 'Add to cart');
 
         expect(
           addToCartButton,

@@ -53,6 +53,8 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         required String materialGroup4,
     @JsonKey(name: 'IsFOCMaterial', defaultValue: false)
         required bool isFOCMaterial,
+    @JsonKey(name: 'suspensionStatus', defaultValue: false)
+        required bool isSuspended,
     @JsonKey(name: 'remarks', defaultValue: '') required String remarks,
     @JsonKey(name: 'genericMaterialName', defaultValue: '')
         required String genericMaterialName,
@@ -106,7 +108,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         promoStatus: false,
         promoType: '',
         sampleBonusItemId: '',
-        isSuspended: false,
+        isSuspended: isSuspended,
       );
 
   factory CustomerMaterialDto.fromJson(Map<String, dynamic> json) =>

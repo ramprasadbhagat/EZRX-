@@ -46,6 +46,7 @@ class MaterialInfo with _$MaterialInfo {
     required String remarks,
     required bool promoStatus,
     required String promoType,
+    required bool isSuspended,
 
     //TODO: remove field from v2
     required String itemBrand,
@@ -60,7 +61,6 @@ class MaterialInfo with _$MaterialInfo {
     required String ean,
     required RequestCounterOfferDetails counterOfferDetails,
     required String sampleBonusItemId,
-    required bool isSuspended,
   }) = _MaterialInfo;
 
   factory MaterialInfo.empty() => MaterialInfo(

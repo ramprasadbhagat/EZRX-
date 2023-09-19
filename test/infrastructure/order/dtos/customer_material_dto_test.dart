@@ -30,6 +30,7 @@ void main() {
         therapeuticClass: '',
         unitOfMeasurement: '',
         genericMaterialName: '',
+        isSuspended: false,
       );
     });
 

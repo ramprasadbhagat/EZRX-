@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
@@ -167,8 +168,7 @@ class _BodyContent extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching,
       builder: (context, state) {
-        final materialNumber =
-            state.productDetailAggregate.materialInfo.materialNumber;
+        final materialInfo = state.productDetailAggregate.materialInfo;
         final config = context.read<SalesOrgBloc>().state.configs;
         final validateOutOfStockValue =
             context.read<EligibilityBloc>().state.validateOutOfStockValue;
@@ -191,6 +191,7 @@ class _BodyContent extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(
                 left: 16,
+                right: 16,
                 top: 5,
                 bottom: 20,
               ),
@@ -201,7 +202,7 @@ class _BodyContent extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        materialNumber.displayMatNo,
+                        materialInfo.materialNumber.displayMatNo,
                         key: WidgetKeys.materialDetailsMaterialNumber,
                         style: Theme.of(context)
                             .textTheme
@@ -220,7 +221,7 @@ class _BodyContent extends StatelessWidget {
                     materialInfo: state.productDetailAggregate.materialInfo,
                   ),
                   ProductStockInfo(
-                    materialNumber: materialNumber,
+                    materialNumber: materialInfo.materialNumber,
                   ),
                   ProductPriceLabel(
                     materialInfo: state.productDetailAggregate.materialInfo,
@@ -233,7 +234,7 @@ class _BodyContent extends StatelessWidget {
               indent: 0,
               thickness: 0.5,
             ),
-            AvailableOffer(materialNumber: materialNumber),
+            AvailableOffer(materialNumber: materialInfo.materialNumber),
             const MaterialInformation(),
             const MaterialDetailsToggle(),
             const SizedBox(height: 20),
@@ -341,7 +342,7 @@ class _FooterState extends State<_Footer> {
   bool _isEligibleForAddToCart({
     required BuildContext context,
     required Price price,
-    required bool isFoc,
+    required MaterialInfo materialInfo,
   }) {
     final disableCreateOrder =
         !context.read<UserBloc>().state.user.userCanCreateOrder;
@@ -358,58 +359,63 @@ class _FooterState extends State<_Footer> {
         ? !context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials
         : true);
 
-    return isFoc
-        ? (materialWithoutPrice && materialInStock)
-        : !(price.finalPrice.isEmpty && !materialWithoutPrice) &&
-            materialInStock;
+    return !materialInfo.isSuspended &&
+        (materialInfo.isFOCMaterial
+            ? (materialWithoutPrice && materialInStock)
+            : !(price.finalPrice.isEmpty && !materialWithoutPrice) &&
+                materialInStock);
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: MediaQuery.of(context)
-            .viewInsets
-            .copyWith(top: MediaQuery.of(context).size.height * 0.01),
-        child: Wrap(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: CartItemQuantityInput(
-                    key: WidgetKeys.materialDetailsQuantityInput,
-                    addPressed: (value) {},
-                    controller: _quantityEditingController,
-                    isEnabled: true,
-                    onFieldChange: (value) {},
-                    onSubmit: (value) {},
-                    quantityAddKey: const ValueKey('quantityAddKey'),
-                    quantityDeleteKey: const ValueKey('quantityDeleteKey'),
-                    quantityTextKey: const ValueKey('quantityTextKey'),
-                    minusPressed: (value) {},
-                    height: MediaQuery.of(context).size.height * 0.055,
-                  ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.05,
-                ),
-                SizedBox(
-                  key: WidgetKeys.materialDetailsAddToCartButton,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-                    buildWhen: (previous, current) =>
-                        previous.isFetching != current.isFetching,
-                    builder: (context, stateDetail) {
-                      final price =
-                          context.read<MaterialPriceBloc>().state.materialPrice[
-                                  stateDetail.productDetailAggregate
-                                      .materialInfo.materialNumber] ??
-                              Price.empty();
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+          buildWhen: (previous, current) =>
+              previous.isFetching != current.isFetching,
+          builder: (context, state) {
+            final materialInfo = state.productDetailAggregate.materialInfo;
 
-                      return BlocConsumer<CartBloc, CartState>(
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (materialInfo.isSuspended)
+                  const InfoLabel(
+                    textValue: 'This material is currently suspended',
+                    margin: EdgeInsets.only(
+                      top: 16,
+                      bottom: 8,
+                    ),
+                  ),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: CartItemQuantityInput(
+                        key: WidgetKeys.materialDetailsQuantityInput,
+                        addPressed: (value) {},
+                        controller: _quantityEditingController,
+                        isEnabled: !materialInfo.isSuspended,
+                        onFieldChange: (value) {},
+                        onSubmit: (value) {},
+                        quantityAddKey: WidgetKeys.productDetailQuantityAddKey,
+                        quantityDeleteKey:
+                            WidgetKeys.productDetailQuantityDeleteKey,
+                        quantityTextKey:
+                            WidgetKeys.productDetailQuantityTextKey,
+                        minusPressed: (value) {},
+                        height: MediaQuery.of(context).size.height * 0.055,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      flex: 4,
+                      key: WidgetKeys.materialDetailsAddToCartButton,
+                      child: BlocConsumer<CartBloc, CartState>(
                         listenWhen: (previous, current) =>
                             previous.isUpserting != current.isUpserting,
                         listener: (context, state) {
@@ -434,45 +440,78 @@ class _FooterState extends State<_Footer> {
                             previous.isFetching != current.isFetching ||
                             previous.isClearing != current.isClearing,
                         builder: (context, stateCart) {
+                          final price = context
+                                  .read<MaterialPriceBloc>()
+                                  .state
+                                  .materialPrice[materialInfo.materialNumber] ??
+                              Price.empty();
+
                           return LoadingShimmer.withChild(
-                            enabled:
-                                stateCart.isUpserting || stateDetail.isFetching,
-                            child: ElevatedButton(
-                              onPressed: stateCart.isUpserting ||
-                                      !_isEligibleForAddToCart(
-                                        context: context,
-                                        price: price,
-                                        isFoc: stateDetail
-                                            .productDetailAggregate
-                                            .materialInfo
-                                            .isFOCMaterial,
-                                      )
-                                  ? null
-                                  : () {
-                                      if (stateCart.cartProducts.isNotEmpty) {
-                                        if (stateDetail.productDetailAggregate
-                                                .materialInfo.isFOCMaterial &&
-                                            !stateCart
-                                                .containFocMaterialInCartProduct) {
-                                          _showDEtailsPagePage(
-                                            context: context,
-                                          );
-                                        } else if (!stateDetail
-                                                .productDetailAggregate
-                                                .materialInfo
-                                                .isFOCMaterial &&
-                                            stateCart
-                                                .containFocMaterialInCartProduct) {
-                                          _showDEtailsPagePage(
-                                            context: context,
-                                          );
+                            enabled: stateCart.isUpserting || state.isFetching,
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: stateCart.isUpserting ||
+                                        !_isEligibleForAddToCart(
+                                          context: context,
+                                          price: price,
+                                          materialInfo: materialInfo,
+                                        )
+                                    ? null
+                                    : () {
+                                        if (stateCart.cartProducts.isNotEmpty) {
+                                          if (state.productDetailAggregate
+                                                  .materialInfo.isFOCMaterial &&
+                                              !stateCart
+                                                  .containFocMaterialInCartProduct) {
+                                            _showDEtailsPagePage(
+                                              context: context,
+                                            );
+                                          } else if (!state
+                                                  .productDetailAggregate
+                                                  .materialInfo
+                                                  .isFOCMaterial &&
+                                              stateCart
+                                                  .containFocMaterialInCartProduct) {
+                                            _showDEtailsPagePage(
+                                              context: context,
+                                            );
+                                          } else {
+                                            context.read<CartBloc>().add(
+                                                  CartEvent.upsertCart(
+                                                    priceAggregate:
+                                                        PriceAggregate.empty()
+                                                            .copyWith(
+                                                      materialInfo: state
+                                                          .productDetailAggregate
+                                                          .materialInfo,
+                                                      price: price,
+                                                      salesOrgConfig: context
+                                                          .read<SalesOrgBloc>()
+                                                          .state
+                                                          .configs,
+                                                    ),
+                                                    quantity: stateCart
+                                                            .getQuantityOfProduct(
+                                                          productNumber: state
+                                                              .productDetailAggregate
+                                                              .materialInfo
+                                                              .materialNumber,
+                                                        ) +
+                                                        int.parse(
+                                                          _quantityEditingController
+                                                              .text,
+                                                        ),
+                                                  ),
+                                                );
+                                          }
                                         } else {
                                           context.read<CartBloc>().add(
                                                 CartEvent.upsertCart(
                                                   priceAggregate:
                                                       PriceAggregate.empty()
                                                           .copyWith(
-                                                    materialInfo: stateDetail
+                                                    materialInfo: state
                                                         .productDetailAggregate
                                                         .materialInfo,
                                                     price: price,
@@ -483,7 +522,7 @@ class _FooterState extends State<_Footer> {
                                                   ),
                                                   quantity: stateCart
                                                           .getQuantityOfProduct(
-                                                        productNumber: stateDetail
+                                                        productNumber: state
                                                             .productDetailAggregate
                                                             .materialInfo
                                                             .materialNumber,
@@ -495,52 +534,24 @@ class _FooterState extends State<_Footer> {
                                                 ),
                                               );
                                         }
-                                      } else {
-                                        context.read<CartBloc>().add(
-                                              CartEvent.upsertCart(
-                                                priceAggregate:
-                                                    PriceAggregate.empty()
-                                                        .copyWith(
-                                                  materialInfo: stateDetail
-                                                      .productDetailAggregate
-                                                      .materialInfo,
-                                                  price: price,
-                                                  salesOrgConfig: context
-                                                      .read<SalesOrgBloc>()
-                                                      .state
-                                                      .configs,
-                                                ),
-                                                quantity: stateCart
-                                                        .getQuantityOfProduct(
-                                                      productNumber: stateDetail
-                                                          .productDetailAggregate
-                                                          .materialInfo
-                                                          .materialNumber,
-                                                    ) +
-                                                    int.parse(
-                                                      _quantityEditingController
-                                                          .text,
-                                                    ),
-                                              ),
-                                            );
-                                      }
-                                    },
-                              child: SizedBox(
-                                width: double.maxFinite,
-                                child: Center(
-                                  child: const Text('Add To Cart').tr(),
+                                      },
+                                child: Text(
+                                  'Add to cart'.tr(),
+                                  style: const TextStyle(
+                                    color: ZPColors.white,
+                                  ),
                                 ),
                               ),
                             ),
                           );
                         },
-                      );
-                    },
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
