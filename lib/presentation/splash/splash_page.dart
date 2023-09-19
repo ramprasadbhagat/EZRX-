@@ -17,7 +17,6 @@ import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
@@ -912,9 +911,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     context
         .read<ViewByItemFilterBloc>()
         .add(const ViewByItemFilterEvent.initializeOrReset());
-    context
-        .read<OrderHistoryFilterByStatusBloc>()
-        .add(const OrderHistoryFilterByStatusEvent.initialized());
     context.read<AccountSummaryBloc>().add(
           const AccountSummaryEvent.initialize(),
         );

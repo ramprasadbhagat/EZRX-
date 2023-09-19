@@ -50,7 +50,6 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/order_history_filter_by_status/order_history_filter_by_status_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
@@ -1215,14 +1214,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ViewByItemFilterBloc(),
   );
-  //============================================================
-  //  Order History Filter By Status
-  //
-  //============================================================
 
-  locator.registerLazySingleton(
-    () => OrderHistoryFilterByStatusBloc(),
-  );
   //============================================================
   // View by Order  Details
   //
