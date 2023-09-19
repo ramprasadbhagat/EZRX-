@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/banner/entities/banner.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_material_item_bonus.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -101,12 +102,7 @@ class PriceAggregate with _$PriceAggregate {
     return SubmitMaterialInfo(
       batch:
           salesOrgConfig.enableBatchNumber ? stockInfo.batch : BatchNumber(''),
-      bonuses: bonusSampleItems
-          .map(
-            (e) =>
-                SubmitMaterialItemBonusDto.fromMaterialItemBonus(e).toDomain(),
-          )
-          .toList(),
+      bonuses: bonuses,
       comment: materialInfo.remarks,
       materialNumber: materialInfo.materialNumber,
       quantity: quantity,
@@ -602,6 +598,19 @@ class PriceAggregate with _$PriceAggregate {
           ),
         )
         .toList();
+  }
+
+  List<SubmitMaterialItemBonus> get bonuses {
+    return <SubmitMaterialItemBonus>[
+      ...bonusSampleItems
+          .map(
+            (e) => SubmitMaterialItemBonusDto.fromBonusOvveride(e).toDomain(),
+          )
+          .toList(),
+      ...addedBonusList
+          .map((e) => SubmitMaterialItemBonusDto.fromOfferBonus(e).toDomain())
+          .toList(),
+    ];
   }
 }
 

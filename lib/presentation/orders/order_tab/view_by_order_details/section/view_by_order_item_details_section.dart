@@ -63,6 +63,7 @@ class OrderItemDetailsSection extends StatelessWidget {
                             materialNumber: e.materialNumber,
                             isQuantityBelowImage: true,
                             isQuantityRequired: false,
+                            statusTag: e.orderDetailBonusTag,
                             headerText:
                                 'Batch ${e.batch}\n(EXP: ${e.expiryDate.dateString})',
                             subtitle: '',

@@ -87,6 +87,8 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
             ? ZpPrice('${unitPrice.zpPrice + tax / qty}')
             : unitPrice,
       );
+
+  /*ProductTag is used for displaying tag in OrderSuccess detail page */
   StatusType get productTag {
     if (type.isMaterialTypeBonus && unitPrice.isZPPriceZero) {
       return StatusType('Bonus');
@@ -103,7 +105,16 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         (materialStockInfo.stockInfos.isEmpty ||
             !materialStockInfo.stockInfos
                 .any((element) => element.inStock.isMaterialInStock))) {
-      return StatusType('Out of Stock');
+      return StatusType('Out of stock');
+    }
+
+    return StatusType('');
+  }
+
+  /*For ViewByOrderDetails only bonus tag is displayed align with web */
+  StatusType get orderDetailBonusTag {
+    if (type.isMaterialTypeBonus && unitPrice.isZPPriceZero) {
+      return StatusType('Bonus');
     }
 
     return StatusType('');
