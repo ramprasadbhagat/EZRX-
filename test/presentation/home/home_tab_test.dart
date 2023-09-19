@@ -30,6 +30,7 @@
 // import 'package:ezrxmobile/domain/account/entities/user.dart';
 // import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 // import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+// import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 // import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 // import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 // import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -255,7 +256,11 @@ void main() {
 //         ),
 //       );
 //       when(() => cartBlocMock.state).thenReturn(CartState.initial());
-//       when(() => mockBannerBloc.state).thenReturn(BannerState.initial());
+//       when(() => mockBannerBloc.state).thenReturn(
+//         BannerState.initial().copyWith(
+//           banner: [EZReachBanner.empty()],
+//         ),
+//       );
 //       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
 //       when(() => userBlocMock.state).thenReturn(
 //         UserState.initial().copyWith(

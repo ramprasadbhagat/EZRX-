@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart'
 import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_local.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/dtos/ez_reach_banner_dto.dart';
@@ -26,7 +26,7 @@ void main() {
   late BannerRemoteDataSource remoteDataSourceMock;
   late Config configMock;
   late BannerLocalDataSource localDataSourceMock;
-  late List<BannerItem> eZReachBannerListMock;
+  late List<EZReachBanner> eZReachBannerListMock;
   final salesOrg2601 = SalesOrg('2601');
   final mockSalesOrganisation = SalesOrganisation(
     salesOrg: salesOrg2601,

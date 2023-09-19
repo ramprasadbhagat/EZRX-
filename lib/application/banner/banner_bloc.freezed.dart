@@ -405,7 +405,7 @@ abstract class _Fetch implements BannerEvent {
 
 /// @nodoc
 mixin _$BannerState {
-  List<BannerItem> get banner => throw _privateConstructorUsedError;
+  List<EZReachBanner> get banner => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get bannerFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -422,7 +422,7 @@ abstract class $BannerStateCopyWith<$Res> {
       _$BannerStateCopyWithImpl<$Res, BannerState>;
   @useResult
   $Res call(
-      {List<BannerItem> banner,
+      {List<EZReachBanner> banner,
       Option<Either<ApiFailure, dynamic>> bannerFailureOrSuccessOption,
       bool isLoading});
 }
@@ -448,7 +448,7 @@ class _$BannerStateCopyWithImpl<$Res, $Val extends BannerState>
       banner: null == banner
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
-              as List<BannerItem>,
+              as List<EZReachBanner>,
       bannerFailureOrSuccessOption: null == bannerFailureOrSuccessOption
           ? _value.bannerFailureOrSuccessOption
           : bannerFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -470,7 +470,7 @@ abstract class _$$_BannerStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<BannerItem> banner,
+      {List<EZReachBanner> banner,
       Option<Either<ApiFailure, dynamic>> bannerFailureOrSuccessOption,
       bool isLoading});
 }
@@ -494,7 +494,7 @@ class __$$_BannerStateCopyWithImpl<$Res>
       banner: null == banner
           ? _value._banner
           : banner // ignore: cast_nullable_to_non_nullable
-              as List<BannerItem>,
+              as List<EZReachBanner>,
       bannerFailureOrSuccessOption: null == bannerFailureOrSuccessOption
           ? _value.bannerFailureOrSuccessOption
           : bannerFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -511,14 +511,14 @@ class __$$_BannerStateCopyWithImpl<$Res>
 
 class _$_BannerState implements _BannerState {
   const _$_BannerState(
-      {required final List<BannerItem> banner,
+      {required final List<EZReachBanner> banner,
       required this.bannerFailureOrSuccessOption,
       required this.isLoading})
       : _banner = banner;
 
-  final List<BannerItem> _banner;
+  final List<EZReachBanner> _banner;
   @override
-  List<BannerItem> get banner {
+  List<EZReachBanner> get banner {
     if (_banner is EqualUnmodifiableListView) return _banner;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_banner);
@@ -564,13 +564,13 @@ class _$_BannerState implements _BannerState {
 
 abstract class _BannerState implements BannerState {
   const factory _BannerState(
-      {required final List<BannerItem> banner,
+      {required final List<EZReachBanner> banner,
       required final Option<Either<ApiFailure, dynamic>>
           bannerFailureOrSuccessOption,
       required final bool isLoading}) = _$_BannerState;
 
   @override
-  List<BannerItem> get banner;
+  List<EZReachBanner> get banner;
   @override
   Option<Either<ApiFailure, dynamic>> get bannerFailureOrSuccessOption;
   @override

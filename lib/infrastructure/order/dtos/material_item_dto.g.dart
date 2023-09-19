@@ -47,7 +47,7 @@ _$_MaterialItemDto _$$_MaterialItemDtoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       totalQuantity: json['totalQuantity'] as int? ?? 0,
-      banner: BannerDto.fromJson(
+      banner: EZReachBannerDto.fromJson(
           bannerOverride(json, 'banner') as Map<String, dynamic>),
     );
 

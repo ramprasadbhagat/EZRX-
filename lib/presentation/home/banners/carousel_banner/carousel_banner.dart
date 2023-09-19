@@ -4,7 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -102,7 +102,7 @@ class _CarouselBannerState extends State<CarouselBanner> {
                               final banner =
                                   state.banner[index % state.banner.length];
                               if (isBannerVisible &&
-                                  banner != BannerItem.empty() &&
+                                  banner != EZReachBanner.empty() &&
                                   index > 1) {
                                 trackMixpanelEvent(
                                   MixpanelEvents.bannerImpression,

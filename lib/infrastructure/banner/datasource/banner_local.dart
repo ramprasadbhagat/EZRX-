@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/infrastructure/banner/dtos/ez_reach_banner_dto.dart';
 import 'package:flutter/services.dart';
 
 class BannerLocalDataSource {
   BannerLocalDataSource();
 
-  Future<List<BannerItem>> getEZReachBanners({
+  Future<List<EZReachBanner>> getEZReachBanners({
     required String bannerType,
   }) async {
     final data = json.decode(

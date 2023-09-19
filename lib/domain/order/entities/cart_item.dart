@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -119,7 +119,7 @@ class CartItem with _$CartItem {
               priceDetailMap[material.queryInfo] ?? MaterialPriceDetail.empty();
 
           return PriceAggregate(
-            banner: BannerItem.empty(),
+            banner: EZReachBanner.empty(),
             price: priceDetail.price,
             materialInfo: priceDetail.info,
             bundle: bundle,

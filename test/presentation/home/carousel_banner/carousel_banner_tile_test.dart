@@ -7,7 +7,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -96,7 +96,7 @@ void main() {
     });
 
     Widget getWUT() {
-      final banner = BannerItem.empty().copyWith(
+      final banner = EZReachBanner.empty().copyWith(
         id: 1,
         title: 'Test Banner',
         url: 'https://test.com/banner.jpg',
@@ -125,7 +125,7 @@ void main() {
 
     testWidgets('BannerTile renders correctly with given banner item',
         (WidgetTester tester) async {
-      final banner = BannerItem.empty().copyWith(
+      final banner = EZReachBanner.empty().copyWith(
         id: 1,
         title: 'Test Banner',
         url: 'https://example.com/banner.jpg',

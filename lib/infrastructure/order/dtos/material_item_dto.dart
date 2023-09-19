@@ -1,15 +1,13 @@
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/banner/dtos/banner_dto.dart';
+import 'package:ezrxmobile/infrastructure/banner/dtos/ez_reach_banner_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/tender_contract_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
-
 part 'material_item_dto.freezed.dart';
 part 'material_item_dto.g.dart';
 
@@ -77,7 +75,7 @@ class MaterialItemDto with _$MaterialItemDto {
     @JsonKey(name: 'totalQuantity', defaultValue: 0)
         required int totalQuantity,
     @JsonKey(name: 'banner', readValue: bannerOverride)
-        required BannerDto banner,
+        required EZReachBannerDto banner,
   }) = _MaterialItemDto;
 
   MaterialItem toDomain() {
@@ -112,7 +110,7 @@ class MaterialItemDto with _$MaterialItemDto {
 
   factory MaterialItemDto.fromDomain(MaterialItem materialItem) {
     return MaterialItemDto(
-      banner: BannerDto.fromDomain(materialItem.banner),
+      banner: EZReachBannerDto.fromDomain(materialItem.banner),
       bundleCode: materialItem.bundleCode,
       bundleName: materialItem.bundleName,
       materials:
@@ -160,4 +158,4 @@ dynamic overrideTojson(double priceOverride) =>
     priceOverride != 0 ? priceOverride : null;
 
 Map<String, dynamic> bannerOverride(Map json, String key) =>
-    json[key] ?? BannerDto.fromDomain(BannerItem.empty()).toJson();
+    json[key] ?? EZReachBannerDto.fromDomain(EZReachBanner.empty()).toJson();

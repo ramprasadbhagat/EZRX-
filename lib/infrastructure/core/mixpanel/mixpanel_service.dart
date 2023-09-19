@@ -1,5 +1,5 @@
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 
@@ -7,7 +7,7 @@ class MixpanelService {
   late Mixpanel mixpanel;
   late Config config;
 
-  BannerItem banner = BannerItem.empty();
+  EZReachBanner banner = EZReachBanner.empty();
   String activeNavBarRoute = 'Home Page';
 
   MixpanelService({
@@ -82,12 +82,12 @@ class MixpanelService {
         );
   }
 
-  void setBannerOrderFlow(BannerItem banner) {
+  void setBannerOrderFlow(EZReachBanner banner) {
     this.banner = banner;
   }
 
   void resetBannerOrderFlow() {
-    banner = BannerItem.empty();
+    banner = EZReachBanner.empty();
   }
 
   void trackNavBarEvent(String currentPage, String previousPage) {

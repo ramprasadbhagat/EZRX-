@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'ez_reach_banner_dto.freezed.dart';
@@ -37,8 +37,8 @@ class EZReachBannerDto with _$EZReachBannerDto {
   factory EZReachBannerDto.fromJson(Map<String, dynamic> json) =>
       _$EZReachBannerDtoFromJson(json);
 
-  BannerItem toDomain() {
-    return BannerItem.empty().copyWith(
+  EZReachBanner toDomain() {
+    return EZReachBanner.empty().copyWith(
       url: mobileBannerImg.isEmpty ? bannerUrl : mobileBannerImg,
       title: bannerCampaignName,
       description: targetProduct,
@@ -47,6 +47,28 @@ class EZReachBannerDto with _$EZReachBannerDto {
       isCustomer: customers,
       keyword: keyWord,
       isEZRXBanner: false,
+    );
+  }
+
+  factory EZReachBannerDto.fromDomain(EZReachBanner banner) {
+    return EZReachBannerDto(
+      bannerId: banner.id.toString(),
+      bannerUrl: banner.url,
+      bannerCampaignName: banner.title,
+      targetProduct: banner.description,
+      websiteUrl: banner.urlLink,
+      bannerCountId: banner.serial,
+      customers: banner.isCustomer,
+      keyWord: banner.keyword,
+      salesOrg: [banner.salesOrg],
+      mobileBannerImg: banner.url,
+      startDate: '',
+      endDate: '',
+      salesRep: banner.isPreSalesOrg,
+      status: '',
+      companyName: '',
+      bannerCampaignLocations: [],
+      countryCode: [],
     );
   }
 }

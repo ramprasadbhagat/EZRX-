@@ -41,7 +41,7 @@ mixin _$MaterialItem {
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   TenderContractReason get tenderOrderReason =>
       throw _privateConstructorUsedError;
-  BannerItem get banner => throw _privateConstructorUsedError;
+  EZReachBanner get banner => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialItemCopyWith<MaterialItem> get copyWith =>
@@ -79,10 +79,10 @@ abstract class $MaterialItemCopyWith<$Res> {
       TenderContract tenderContract,
       bool hasValidTenderContract,
       TenderContractReason tenderOrderReason,
-      BannerItem banner});
+      EZReachBanner banner});
 
   $TenderContractCopyWith<$Res> get tenderContract;
-  $BannerItemCopyWith<$Res> get banner;
+  $EZReachBannerCopyWith<$Res> get banner;
 }
 
 /// @nodoc
@@ -224,7 +224,7 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
       banner: null == banner
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
-              as BannerItem,
+              as EZReachBanner,
     ) as $Val);
   }
 
@@ -238,8 +238,8 @@ class _$MaterialItemCopyWithImpl<$Res, $Val extends MaterialItem>
 
   @override
   @pragma('vm:prefer-inline')
-  $BannerItemCopyWith<$Res> get banner {
-    return $BannerItemCopyWith<$Res>(_value.banner, (value) {
+  $EZReachBannerCopyWith<$Res> get banner {
+    return $EZReachBannerCopyWith<$Res>(_value.banner, (value) {
       return _then(_value.copyWith(banner: value) as $Val);
     });
   }
@@ -278,12 +278,12 @@ abstract class _$$_MaterialItemCopyWith<$Res>
       TenderContract tenderContract,
       bool hasValidTenderContract,
       TenderContractReason tenderOrderReason,
-      BannerItem banner});
+      EZReachBanner banner});
 
   @override
   $TenderContractCopyWith<$Res> get tenderContract;
   @override
-  $BannerItemCopyWith<$Res> get banner;
+  $EZReachBannerCopyWith<$Res> get banner;
 }
 
 /// @nodoc
@@ -423,7 +423,7 @@ class __$$_MaterialItemCopyWithImpl<$Res>
       banner: null == banner
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
-              as BannerItem,
+              as EZReachBanner,
     ));
   }
 }
@@ -530,7 +530,7 @@ class _$_MaterialItem extends _MaterialItem {
   @override
   final TenderContractReason tenderOrderReason;
   @override
-  final BannerItem banner;
+  final EZReachBanner banner;
 
   @override
   String toString() {
@@ -653,7 +653,7 @@ abstract class _MaterialItem extends MaterialItem {
       required final TenderContract tenderContract,
       required final bool hasValidTenderContract,
       required final TenderContractReason tenderOrderReason,
-      required final BannerItem banner}) = _$_MaterialItem;
+      required final EZReachBanner banner}) = _$_MaterialItem;
   const _MaterialItem._() : super._();
 
   @override
@@ -705,7 +705,7 @@ abstract class _MaterialItem extends MaterialItem {
   @override
   TenderContractReason get tenderOrderReason;
   @override
-  BannerItem get banner;
+  EZReachBanner get banner;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialItemCopyWith<_$_MaterialItem> get copyWith =>

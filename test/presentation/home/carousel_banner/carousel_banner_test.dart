@@ -9,7 +9,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
@@ -59,13 +59,13 @@ void main() {
 
   const mockUrl = 'mock-image-urls';
   // const mockUrlLink = 'www.google.com';
-  // final mockBanner1 = BannerItem.empty().copyWith(
+  // final mockBanner1 = EZReachBanner.empty().copyWith(
   //   id: 1,
   //   title: 'Banner Title 1',
   //   url: mockUrl,
   //   urlLink: mockUrlLink,
   // );
-  // final mockBanner2 = BannerItem.empty().copyWith(
+  // final mockBanner2 = EZReachBanner.empty().copyWith(
   //   id: 2,
   //   title: 'Banner Title 2',
   //   url: mockUrl,
@@ -253,8 +253,8 @@ void main() {
           BannerState.initial(),
           BannerState.initial().copyWith(
             banner: [
-              BannerItem.empty(),
-              BannerItem.empty(),
+              EZReachBanner.empty(),
+              EZReachBanner.empty(),
             ],
             bannerFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake Error'))),
@@ -280,8 +280,8 @@ void main() {
           BannerState.initial(),
           BannerState.initial().copyWith(
             banner: [
-              BannerItem.empty(),
-              BannerItem.empty(),
+              EZReachBanner.empty(),
+              EZReachBanner.empty(),
             ],
             bannerFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('authentication failed'))),
@@ -306,8 +306,8 @@ void main() {
           BannerState.initial(),
           BannerState.initial().copyWith(
             banner: [
-              BannerItem.empty(),
-              BannerItem.empty(),
+              EZReachBanner.empty(),
+              EZReachBanner.empty(),
             ],
             bannerFailureOrSuccessOption: optionOf(const Right('No API error')),
           ),

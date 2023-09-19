@@ -5,7 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
 
@@ -100,12 +100,10 @@ void main() {
       },
       expect: () => [
         BannerState.initial().copyWith(
-          banner: [BannerItem.empty()],
           bannerFailureOrSuccessOption: none(),
           isLoading: true,
         ),
         BannerState.initial().copyWith(
-          banner: [BannerItem.empty()],
           bannerFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
         )
@@ -126,7 +124,7 @@ void main() {
             bannerType: 'banner_carousel',
           ),
         ).thenAnswer(
-          (invocation) async => Right([BannerItem.empty()]),
+          (invocation) async => Right([EZReachBanner.empty()]),
         );
       },
       act: (bloc) {
@@ -142,15 +140,12 @@ void main() {
       },
       expect: () => [
         BannerState.initial().copyWith(
-          banner: [
-            BannerItem.empty(),
-          ],
           bannerFailureOrSuccessOption: none(),
           isLoading: true,
         ),
         BannerState.initial().copyWith(
           banner: [
-            BannerItem.empty(),
+            EZReachBanner.empty(),
           ],
           bannerFailureOrSuccessOption: none(),
         )
@@ -171,7 +166,7 @@ void main() {
             bannerType: 'banner_carousel',
           ),
         ).thenAnswer(
-          (invocation) async => Right([BannerItem.empty()]),
+          (invocation) async => Right([EZReachBanner.empty()]),
         );
       },
       act: (bloc) {
@@ -187,14 +182,11 @@ void main() {
       },
       expect: () => [
         BannerState.initial().copyWith(
-          banner: [
-            BannerItem.empty(),
-          ],
           isLoading: true,
         ),
         BannerState.initial().copyWith(
           banner: [
-            BannerItem.empty(),
+            EZReachBanner.empty(),
           ],
         )
       ],

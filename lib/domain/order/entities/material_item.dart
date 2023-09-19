@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
@@ -37,11 +37,11 @@ class MaterialItem with _$MaterialItem {
     required TenderContract tenderContract,
     required bool hasValidTenderContract,
     required TenderContractReason tenderOrderReason,
-    required BannerItem banner,
+    required EZReachBanner banner,
   }) = _MaterialItem;
 
   factory MaterialItem.empty() => MaterialItem(
-        banner: BannerItem.empty(),
+        banner: EZReachBanner.empty(),
         bundleCode: '',
         bundleName: '',
         materials: <MaterialInfo>[],

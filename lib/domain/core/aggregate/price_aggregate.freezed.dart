@@ -19,7 +19,7 @@ mixin _$PriceAggregate {
   Price get price => throw _privateConstructorUsedError;
   MaterialInfo get materialInfo => throw _privateConstructorUsedError;
   Bundle get bundle => throw _privateConstructorUsedError;
-  BannerItem get banner => throw _privateConstructorUsedError;
+  EZReachBanner get banner => throw _privateConstructorUsedError;
   SalesOrganisationConfigs get salesOrgConfig =>
       throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $PriceAggregateCopyWith<$Res> {
       {Price price,
       MaterialInfo materialInfo,
       Bundle bundle,
-      BannerItem banner,
+      EZReachBanner banner,
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
       int discountedMaterialCount,
@@ -66,7 +66,7 @@ abstract class $PriceAggregateCopyWith<$Res> {
   $PriceCopyWith<$Res> get price;
   $MaterialInfoCopyWith<$Res> get materialInfo;
   $BundleCopyWith<$Res> get bundle;
-  $BannerItemCopyWith<$Res> get banner;
+  $EZReachBannerCopyWith<$Res> get banner;
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
   $StockInfoCopyWith<$Res> get stockInfo;
   $TenderContractCopyWith<$Res> get tenderContract;
@@ -118,7 +118,7 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
       banner: null == banner
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
-              as BannerItem,
+              as EZReachBanner,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -192,8 +192,8 @@ class _$PriceAggregateCopyWithImpl<$Res, $Val extends PriceAggregate>
 
   @override
   @pragma('vm:prefer-inline')
-  $BannerItemCopyWith<$Res> get banner {
-    return $BannerItemCopyWith<$Res>(_value.banner, (value) {
+  $EZReachBannerCopyWith<$Res> get banner {
+    return $EZReachBannerCopyWith<$Res>(_value.banner, (value) {
       return _then(_value.copyWith(banner: value) as $Val);
     });
   }
@@ -244,7 +244,7 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
       {Price price,
       MaterialInfo materialInfo,
       Bundle bundle,
-      BannerItem banner,
+      EZReachBanner banner,
       SalesOrganisationConfigs salesOrgConfig,
       int quantity,
       int discountedMaterialCount,
@@ -264,7 +264,7 @@ abstract class _$$_PriceAggregateCopyWith<$Res>
   @override
   $BundleCopyWith<$Res> get bundle;
   @override
-  $BannerItemCopyWith<$Res> get banner;
+  $EZReachBannerCopyWith<$Res> get banner;
   @override
   $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
   @override
@@ -318,7 +318,7 @@ class __$$_PriceAggregateCopyWithImpl<$Res>
       banner: null == banner
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
-              as BannerItem,
+              as EZReachBanner,
       salesOrgConfig: null == salesOrgConfig
           ? _value.salesOrgConfig
           : salesOrgConfig // ignore: cast_nullable_to_non_nullable
@@ -398,7 +398,7 @@ class _$_PriceAggregate extends _PriceAggregate {
   @override
   final Bundle bundle;
   @override
-  final BannerItem banner;
+  final EZReachBanner banner;
   @override
   final SalesOrganisationConfigs salesOrgConfig;
   @override
@@ -515,7 +515,7 @@ abstract class _PriceAggregate extends PriceAggregate {
           {required final Price price,
           required final MaterialInfo materialInfo,
           required final Bundle bundle,
-          required final BannerItem banner,
+          required final EZReachBanner banner,
           required final SalesOrganisationConfigs salesOrgConfig,
           required final int quantity,
           final int discountedMaterialCount,
@@ -537,7 +537,7 @@ abstract class _PriceAggregate extends PriceAggregate {
   @override
   Bundle get bundle;
   @override
-  BannerItem get banner;
+  EZReachBanner get banner;
   @override
   SalesOrganisationConfigs get salesOrgConfig;
   @override

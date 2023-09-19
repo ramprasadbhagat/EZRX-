@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
@@ -23,7 +23,7 @@ class BannerRemoteDataSource {
     required this.dataSourceExceptionHandler,
   });
 
-  Future<List<BannerItem>> getEZReachBanners({
+  Future<List<EZReachBanner>> getEZReachBanners({
     required String salesOrg,
     required String country,
     required String role,

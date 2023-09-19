@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/banner/repository/i_banner_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +35,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
           //eZReach Banner failed
           (failure) => emit(
             state.copyWith(
-              banner: [BannerItem.empty()],
+              banner: <EZReachBanner>[],
               bannerFailureOrSuccessOption: optionOf(eZReachFailureOrSuccess),
               isLoading: false,
             ),

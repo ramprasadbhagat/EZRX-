@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'banner.dart';
+part of 'ez_reach_banner.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$BannerItem {
+mixin _$EZReachBanner {
   int get id => throw _privateConstructorUsedError;
   int get serial => throw _privateConstructorUsedError;
   bool get isPreSalesOrg => throw _privateConstructorUsedError;
@@ -32,15 +32,15 @@ mixin _$BannerItem {
   bool get isEZRXBanner => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $BannerItemCopyWith<BannerItem> get copyWith =>
+  $EZReachBannerCopyWith<EZReachBanner> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BannerItemCopyWith<$Res> {
-  factory $BannerItemCopyWith(
-          BannerItem value, $Res Function(BannerItem) then) =
-      _$BannerItemCopyWithImpl<$Res, BannerItem>;
+abstract class $EZReachBannerCopyWith<$Res> {
+  factory $EZReachBannerCopyWith(
+          EZReachBanner value, $Res Function(EZReachBanner) then) =
+      _$EZReachBannerCopyWithImpl<$Res, EZReachBanner>;
   @useResult
   $Res call(
       {int id,
@@ -60,9 +60,9 @@ abstract class $BannerItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BannerItemCopyWithImpl<$Res, $Val extends BannerItem>
-    implements $BannerItemCopyWith<$Res> {
-  _$BannerItemCopyWithImpl(this._value, this._then);
+class _$EZReachBannerCopyWithImpl<$Res, $Val extends EZReachBanner>
+    implements $EZReachBannerCopyWith<$Res> {
+  _$EZReachBannerCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -149,11 +149,11 @@ class _$BannerItemCopyWithImpl<$Res, $Val extends BannerItem>
 }
 
 /// @nodoc
-abstract class _$$_BannerItemCopyWith<$Res>
-    implements $BannerItemCopyWith<$Res> {
-  factory _$$_BannerItemCopyWith(
-          _$_BannerItem value, $Res Function(_$_BannerItem) then) =
-      __$$_BannerItemCopyWithImpl<$Res>;
+abstract class _$$_EZReachBannerCopyWith<$Res>
+    implements $EZReachBannerCopyWith<$Res> {
+  factory _$$_EZReachBannerCopyWith(
+          _$_EZReachBanner value, $Res Function(_$_EZReachBanner) then) =
+      __$$_EZReachBannerCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -174,11 +174,11 @@ abstract class _$$_BannerItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BannerItemCopyWithImpl<$Res>
-    extends _$BannerItemCopyWithImpl<$Res, _$_BannerItem>
-    implements _$$_BannerItemCopyWith<$Res> {
-  __$$_BannerItemCopyWithImpl(
-      _$_BannerItem _value, $Res Function(_$_BannerItem) _then)
+class __$$_EZReachBannerCopyWithImpl<$Res>
+    extends _$EZReachBannerCopyWithImpl<$Res, _$_EZReachBanner>
+    implements _$$_EZReachBannerCopyWith<$Res> {
+  __$$_EZReachBannerCopyWithImpl(
+      _$_EZReachBanner _value, $Res Function(_$_EZReachBanner) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -199,7 +199,7 @@ class __$$_BannerItemCopyWithImpl<$Res>
     Object? category = null,
     Object? isEZRXBanner = null,
   }) {
-    return _then(_$_BannerItem(
+    return _then(_$_EZReachBanner(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -262,8 +262,8 @@ class __$$_BannerItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BannerItem extends _BannerItem {
-  const _$_BannerItem(
+class _$_EZReachBanner extends _EZReachBanner {
+  const _$_EZReachBanner(
       {required this.id,
       required this.serial,
       required this.isPreSalesOrg,
@@ -311,14 +311,14 @@ class _$_BannerItem extends _BannerItem {
 
   @override
   String toString() {
-    return 'BannerItem(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, salesOrg: $salesOrg, isKeyword: $isKeyword, keyword: $keyword, category: $category, isEZRXBanner: $isEZRXBanner)';
+    return 'EZReachBanner(id: $id, serial: $serial, isPreSalesOrg: $isPreSalesOrg, isCustomer: $isCustomer, url: $url, title: $title, description: $description, buttonLabel: $buttonLabel, urlLink: $urlLink, salesOrg: $salesOrg, isKeyword: $isKeyword, keyword: $keyword, category: $category, isEZRXBanner: $isEZRXBanner)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BannerItem &&
+            other is _$_EZReachBanner &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.serial, serial) || other.serial == serial) &&
             (identical(other.isPreSalesOrg, isPreSalesOrg) ||
@@ -364,12 +364,12 @@ class _$_BannerItem extends _BannerItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BannerItemCopyWith<_$_BannerItem> get copyWith =>
-      __$$_BannerItemCopyWithImpl<_$_BannerItem>(this, _$identity);
+  _$$_EZReachBannerCopyWith<_$_EZReachBanner> get copyWith =>
+      __$$_EZReachBannerCopyWithImpl<_$_EZReachBanner>(this, _$identity);
 }
 
-abstract class _BannerItem extends BannerItem {
-  const factory _BannerItem(
+abstract class _EZReachBanner extends EZReachBanner {
+  const factory _EZReachBanner(
       {required final int id,
       required final int serial,
       required final bool isPreSalesOrg,
@@ -383,8 +383,8 @@ abstract class _BannerItem extends BannerItem {
       required final bool isKeyword,
       required final String keyword,
       required final String category,
-      required final bool isEZRXBanner}) = _$_BannerItem;
-  const _BannerItem._() : super._();
+      required final bool isEZRXBanner}) = _$_EZReachBanner;
+  const _EZReachBanner._() : super._();
 
   @override
   int get id;
@@ -416,6 +416,6 @@ abstract class _BannerItem extends BannerItem {
   bool get isEZRXBanner;
   @override
   @JsonKey(ignore: true)
-  _$$_BannerItemCopyWith<_$_BannerItem> get copyWith =>
+  _$$_EZReachBannerCopyWith<_$_EZReachBanner> get copyWith =>
       throw _privateConstructorUsedError;
 }

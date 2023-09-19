@@ -69,28 +69,40 @@ abstract class $EZReachBannerDtoCopyWith<$Res> {
       _$EZReachBannerDtoCopyWithImpl<$Res, EZReachBannerDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'bannerId', defaultValue: '') String bannerId,
+      {@JsonKey(name: 'bannerId', defaultValue: '')
+          String bannerId,
       @JsonKey(name: 'bannerCampaignName', defaultValue: '')
-      String bannerCampaignName,
-      @JsonKey(name: 'startDate', defaultValue: '') String startDate,
-      @JsonKey(name: 'bannerUrl', defaultValue: '') String bannerUrl,
-      @JsonKey(name: 'endDate', defaultValue: '') String endDate,
-      @JsonKey(name: 'websiteUrl', defaultValue: '') String websiteUrl,
-      @JsonKey(name: 'bannerCountId', defaultValue: 0) int bannerCountId,
-      @JsonKey(name: 'salesRep', defaultValue: false) bool salesRep,
-      @JsonKey(name: 'status', defaultValue: '') String status,
-      @JsonKey(name: 'customers', defaultValue: false) bool customers,
-      @JsonKey(name: 'companyName', defaultValue: '') String companyName,
-      @JsonKey(name: 'targetProduct', defaultValue: '') String targetProduct,
-      @JsonKey(name: 'keyWord', defaultValue: '') String keyWord,
+          String bannerCampaignName,
+      @JsonKey(name: 'startDate', defaultValue: '')
+          String startDate,
+      @JsonKey(name: 'bannerUrl', defaultValue: '')
+          String bannerUrl,
+      @JsonKey(name: 'endDate', defaultValue: '')
+          String endDate,
+      @JsonKey(name: 'websiteUrl', defaultValue: '')
+          String websiteUrl,
+      @JsonKey(name: 'bannerCountId', defaultValue: 0)
+          int bannerCountId,
+      @JsonKey(name: 'salesRep', defaultValue: false)
+          bool salesRep,
+      @JsonKey(name: 'status', defaultValue: '')
+          String status,
+      @JsonKey(name: 'customers', defaultValue: false)
+          bool customers,
+      @JsonKey(name: 'companyName', defaultValue: '')
+          String companyName,
+      @JsonKey(name: 'targetProduct', defaultValue: '')
+          String targetProduct,
+      @JsonKey(name: 'keyWord', defaultValue: '')
+          String keyWord,
       @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
-      List<String> bannerCampaignLocations,
+          List<String> bannerCampaignLocations,
       @JsonKey(name: 'salesOrg', defaultValue: <String>[])
-      List<String> salesOrg,
+          List<String> salesOrg,
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-      List<String> countryCode,
+          List<String> countryCode,
       @JsonKey(name: 'mobileBannerImg', defaultValue: '')
-      String mobileBannerImg});
+          String mobileBannerImg});
 }
 
 /// @nodoc
@@ -206,28 +218,40 @@ abstract class _$$_EZReachBannerDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'bannerId', defaultValue: '') String bannerId,
+      {@JsonKey(name: 'bannerId', defaultValue: '')
+          String bannerId,
       @JsonKey(name: 'bannerCampaignName', defaultValue: '')
-      String bannerCampaignName,
-      @JsonKey(name: 'startDate', defaultValue: '') String startDate,
-      @JsonKey(name: 'bannerUrl', defaultValue: '') String bannerUrl,
-      @JsonKey(name: 'endDate', defaultValue: '') String endDate,
-      @JsonKey(name: 'websiteUrl', defaultValue: '') String websiteUrl,
-      @JsonKey(name: 'bannerCountId', defaultValue: 0) int bannerCountId,
-      @JsonKey(name: 'salesRep', defaultValue: false) bool salesRep,
-      @JsonKey(name: 'status', defaultValue: '') String status,
-      @JsonKey(name: 'customers', defaultValue: false) bool customers,
-      @JsonKey(name: 'companyName', defaultValue: '') String companyName,
-      @JsonKey(name: 'targetProduct', defaultValue: '') String targetProduct,
-      @JsonKey(name: 'keyWord', defaultValue: '') String keyWord,
+          String bannerCampaignName,
+      @JsonKey(name: 'startDate', defaultValue: '')
+          String startDate,
+      @JsonKey(name: 'bannerUrl', defaultValue: '')
+          String bannerUrl,
+      @JsonKey(name: 'endDate', defaultValue: '')
+          String endDate,
+      @JsonKey(name: 'websiteUrl', defaultValue: '')
+          String websiteUrl,
+      @JsonKey(name: 'bannerCountId', defaultValue: 0)
+          int bannerCountId,
+      @JsonKey(name: 'salesRep', defaultValue: false)
+          bool salesRep,
+      @JsonKey(name: 'status', defaultValue: '')
+          String status,
+      @JsonKey(name: 'customers', defaultValue: false)
+          bool customers,
+      @JsonKey(name: 'companyName', defaultValue: '')
+          String companyName,
+      @JsonKey(name: 'targetProduct', defaultValue: '')
+          String targetProduct,
+      @JsonKey(name: 'keyWord', defaultValue: '')
+          String keyWord,
       @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
-      List<String> bannerCampaignLocations,
+          List<String> bannerCampaignLocations,
       @JsonKey(name: 'salesOrg', defaultValue: <String>[])
-      List<String> salesOrg,
+          List<String> salesOrg,
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-      List<String> countryCode,
+          List<String> countryCode,
       @JsonKey(name: 'mobileBannerImg', defaultValue: '')
-      String mobileBannerImg});
+          String mobileBannerImg});
 }
 
 /// @nodoc
@@ -336,30 +360,40 @@ class __$$_EZReachBannerDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_EZReachBannerDto extends _EZReachBannerDto {
   const _$_EZReachBannerDto(
-      {@JsonKey(name: 'bannerId', defaultValue: '') required this.bannerId,
+      {@JsonKey(name: 'bannerId', defaultValue: '')
+          required this.bannerId,
       @JsonKey(name: 'bannerCampaignName', defaultValue: '')
-      required this.bannerCampaignName,
-      @JsonKey(name: 'startDate', defaultValue: '') required this.startDate,
-      @JsonKey(name: 'bannerUrl', defaultValue: '') required this.bannerUrl,
-      @JsonKey(name: 'endDate', defaultValue: '') required this.endDate,
-      @JsonKey(name: 'websiteUrl', defaultValue: '') required this.websiteUrl,
+          required this.bannerCampaignName,
+      @JsonKey(name: 'startDate', defaultValue: '')
+          required this.startDate,
+      @JsonKey(name: 'bannerUrl', defaultValue: '')
+          required this.bannerUrl,
+      @JsonKey(name: 'endDate', defaultValue: '')
+          required this.endDate,
+      @JsonKey(name: 'websiteUrl', defaultValue: '')
+          required this.websiteUrl,
       @JsonKey(name: 'bannerCountId', defaultValue: 0)
-      required this.bannerCountId,
-      @JsonKey(name: 'salesRep', defaultValue: false) required this.salesRep,
-      @JsonKey(name: 'status', defaultValue: '') required this.status,
-      @JsonKey(name: 'customers', defaultValue: false) required this.customers,
-      @JsonKey(name: 'companyName', defaultValue: '') required this.companyName,
+          required this.bannerCountId,
+      @JsonKey(name: 'salesRep', defaultValue: false)
+          required this.salesRep,
+      @JsonKey(name: 'status', defaultValue: '')
+          required this.status,
+      @JsonKey(name: 'customers', defaultValue: false)
+          required this.customers,
+      @JsonKey(name: 'companyName', defaultValue: '')
+          required this.companyName,
       @JsonKey(name: 'targetProduct', defaultValue: '')
-      required this.targetProduct,
-      @JsonKey(name: 'keyWord', defaultValue: '') required this.keyWord,
+          required this.targetProduct,
+      @JsonKey(name: 'keyWord', defaultValue: '')
+          required this.keyWord,
       @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
-      required final List<String> bannerCampaignLocations,
+          required final List<String> bannerCampaignLocations,
       @JsonKey(name: 'salesOrg', defaultValue: <String>[])
-      required final List<String> salesOrg,
+          required final List<String> salesOrg,
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-      required final List<String> countryCode,
+          required final List<String> countryCode,
       @JsonKey(name: 'mobileBannerImg', defaultValue: '')
-      required this.mobileBannerImg})
+          required this.mobileBannerImg})
       : _bannerCampaignLocations = bannerCampaignLocations,
         _salesOrg = salesOrg,
         _countryCode = countryCode,
@@ -520,36 +554,39 @@ class _$_EZReachBannerDto extends _EZReachBannerDto {
 abstract class _EZReachBannerDto extends EZReachBannerDto {
   const factory _EZReachBannerDto(
       {@JsonKey(name: 'bannerId', defaultValue: '')
-      required final String bannerId,
+          required final String bannerId,
       @JsonKey(name: 'bannerCampaignName', defaultValue: '')
-      required final String bannerCampaignName,
+          required final String bannerCampaignName,
       @JsonKey(name: 'startDate', defaultValue: '')
-      required final String startDate,
+          required final String startDate,
       @JsonKey(name: 'bannerUrl', defaultValue: '')
-      required final String bannerUrl,
-      @JsonKey(name: 'endDate', defaultValue: '') required final String endDate,
+          required final String bannerUrl,
+      @JsonKey(name: 'endDate', defaultValue: '')
+          required final String endDate,
       @JsonKey(name: 'websiteUrl', defaultValue: '')
-      required final String websiteUrl,
+          required final String websiteUrl,
       @JsonKey(name: 'bannerCountId', defaultValue: 0)
-      required final int bannerCountId,
+          required final int bannerCountId,
       @JsonKey(name: 'salesRep', defaultValue: false)
-      required final bool salesRep,
-      @JsonKey(name: 'status', defaultValue: '') required final String status,
+          required final bool salesRep,
+      @JsonKey(name: 'status', defaultValue: '')
+          required final String status,
       @JsonKey(name: 'customers', defaultValue: false)
-      required final bool customers,
+          required final bool customers,
       @JsonKey(name: 'companyName', defaultValue: '')
-      required final String companyName,
+          required final String companyName,
       @JsonKey(name: 'targetProduct', defaultValue: '')
-      required final String targetProduct,
-      @JsonKey(name: 'keyWord', defaultValue: '') required final String keyWord,
+          required final String targetProduct,
+      @JsonKey(name: 'keyWord', defaultValue: '')
+          required final String keyWord,
       @JsonKey(name: 'bannerCampaignLocations', defaultValue: <String>[])
-      required final List<String> bannerCampaignLocations,
+          required final List<String> bannerCampaignLocations,
       @JsonKey(name: 'salesOrg', defaultValue: <String>[])
-      required final List<String> salesOrg,
+          required final List<String> salesOrg,
       @JsonKey(name: 'countryCode', defaultValue: <String>[])
-      required final List<String> countryCode,
+          required final List<String> countryCode,
       @JsonKey(name: 'mobileBannerImg', defaultValue: '')
-      required final String mobileBannerImg}) = _$_EZReachBannerDto;
+          required final String mobileBannerImg}) = _$_EZReachBannerDto;
   const _EZReachBannerDto._() : super._();
 
   factory _EZReachBannerDto.fromJson(Map<String, dynamic> json) =

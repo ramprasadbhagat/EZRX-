@@ -8,7 +8,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -512,7 +512,7 @@ class OrderRepository implements IOrderRepository {
   ) {
     final isBannerClicked = cartItems
         .map(
-          (e) => e.banner != BannerItem.empty(),
+          (e) => e.banner != EZReachBanner.empty(),
         )
         .toList();
     final props = {

@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'banner.freezed.dart';
+part 'ez_reach_banner.freezed.dart';
 
 @freezed
-class BannerItem with _$BannerItem {
-  const BannerItem._();
+class EZReachBanner with _$EZReachBanner {
+  const EZReachBanner._();
 
-  const factory BannerItem({
+  const factory EZReachBanner({
     required int id,
     required int serial,
     required bool isPreSalesOrg,
@@ -21,9 +21,9 @@ class BannerItem with _$BannerItem {
     required String keyword,
     required String category,
     required bool isEZRXBanner,
-  }) = _BannerItem;
+  }) = _EZReachBanner;
 
-  factory BannerItem.empty() => const BannerItem(
+  factory EZReachBanner.empty() => const EZReachBanner(
         id: 0,
         serial: 0,
         isPreSalesOrg: false,

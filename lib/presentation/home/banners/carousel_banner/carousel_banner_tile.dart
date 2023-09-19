@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 // aware issue :
 // https://dev.azure.com/zuelligpharmadevops/eZRx%20Overall/_wiki/wikis/eZRx-Overall.wiki/3443/eZRx-banner-workflow-doubt
 class CarouselBannerTile extends StatelessWidget {
-  final BannerItem banner;
+  final EZReachBanner banner;
   final int bannerPosition;
 
   const CarouselBannerTile({

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/banner/entities/banner.dart';
+import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
@@ -65,7 +65,7 @@ void main() {
   group('Price Aggregate Test', () {
     test('should return correct price aggregate object', () {
       final priceAggregate = PriceAggregate(
-        banner: BannerItem.empty(),
+        banner: EZReachBanner.empty(),
         price: emptyPrice,
         materialInfo: emptyMaterialInfo,
         bundle: emptyBundle,
