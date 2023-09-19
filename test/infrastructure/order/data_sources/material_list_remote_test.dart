@@ -238,6 +238,49 @@ void main() {
       MaterialResponseDto.fromJson(finalData).toDomain(),
     );
   });
+  test('Get Product Details', () async {
+    final variables = {
+      'request': {
+        'Code': 'fake_code',
+        'Customer': 'fake-customer-code',
+        'SalesOrg': 'fake-sales-org',
+        'ShipTo': 'fake-shipto-code',
+        'Type': 'bundle',
+      },
+    };
+    final res = json.decode(
+      await rootBundle.loadString('assets/json/getProductDetailsResponse.json'),
+    );
+
+    dioAdapter.onPost(
+      '/api/price',
+      (server) => server.reply(
+        200,
+        res,
+        delay: const Duration(seconds: 1),
+      ),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      data: jsonEncode({
+        'query': remoteDataSource.materialListQuery.getProductDetailsQuery(),
+        'variables': variables
+      }),
+    );
+
+    final result = await remoteDataSource.getProductDetails(
+      customerCode: 'fake-customer-code',
+      salesOrg: 'fake-sales-org',
+      shipToCode: 'fake-shipto-code',
+      type: 'bundle',
+      code: 'fake_code',
+    );
+
+    final finalData =
+        makeResponseCamelCase(jsonEncode(res['data']['GetProductDetails']));
+    expect(
+      result,
+      MaterialDto.fromJson(finalData).toDomain(),
+    );
+  });
   //
   //     test('Get Material List for sales rep', () async {
   //       final variables = {

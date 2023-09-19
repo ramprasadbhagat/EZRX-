@@ -193,7 +193,9 @@ class MaterialListRemoteDataSource {
         apiEndpoint: 'GetProductDetails',
       );
       _materialListExceptionChecker(res: res);
-      final finalData = res.data['data']['GetProductDetails'];
+      final finalData = makeResponseCamelCase(
+        jsonEncode(res.data['data']['GetProductDetails']),
+      );
 
       return MaterialDto.fromJson(finalData).toDomain();
     });
