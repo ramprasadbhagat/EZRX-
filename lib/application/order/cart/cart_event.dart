@@ -33,10 +33,8 @@ class CartEvent with _$CartEvent {
     required User user,
   }) = _AddBonusToCartItem;
 
-  const factory CartEvent.removeBonusFromCartItem({
-    required CartItem item,
-    required MaterialItemBonus bonusItem,
-  }) = _RemoveBonusFromCartItem;
+  const factory CartEvent.removeSampleBonusFromCartConfig() =
+      _RemoveSampleBonusFromCartConfig;
 
   const factory CartEvent.addRemarkToBonusItem({
     required CartItem item,
@@ -94,5 +92,7 @@ class CartEvent with _$CartEvent {
     required List<PriceAggregate> products,
   }) = _UpdateProductStock;
 
-  const factory CartEvent.removeSelectedProducts() = _RemoveSelectedProducts;
+  const factory CartEvent.removeInvalidProducts({
+    required List<MaterialInfo> invalidCartItems,
+  }) = _RemoveInvalidProducts;
 }

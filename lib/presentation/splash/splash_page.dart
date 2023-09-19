@@ -246,12 +246,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             state.apiFailureOrSuccessOption.fold(
               () {
                 if (!state.isUpserting &&
+                    state.containsSampleBonus &&
                     !context
                         .read<EligibilityBloc>()
                         .state
                         .isBonusOverrideEnable) {
                   context.read<CartBloc>().add(
-                        const CartEvent.removeSelectedProducts(),
+                        const CartEvent.removeSampleBonusFromCartConfig(),
                       );
                 }
               },

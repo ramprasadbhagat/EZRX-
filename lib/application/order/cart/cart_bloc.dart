@@ -203,17 +203,21 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
-      removeBonusFromCartItem: (e) {
+      removeSampleBonusFromCartConfig: (e) async {
         emit(
           state.copyWith(
-            isFetching: true,
+            isClearing: true,
             apiFailureOrSuccessOption: none(),
           ),
         );
 
-        /*final failureOrSuccess = await repository.deleteBonusFromCartItem(
-          item: e.item,
-          deletedBonus: e.bonusItem,
+        final failureOrSuccess = await repository.removeSelectedProducts(
+          salesOrganisation: state.salesOrganisation,
+          salesOrganisationConfig: state.config,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          language: state.config.languageValue.languageCode,
+          products: state.invalidSampleBonusList,
         );
 
         failureOrSuccess.fold(
@@ -221,20 +225,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
+                isClearing: false,
               ),
             );
           },
-          (cartItemList) {
+          (products) {
             emit(
               state.copyWith(
-                cartItems: cartItemList,
+                cartProducts: products,
                 apiFailureOrSuccessOption: none(),
-                isFetching: false,
+                isClearing: false,
               ),
             );
           },
-        );*/
+        );
       },
       addRemarkToBonusItem: (e) {
         emit(
@@ -907,19 +911,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
-      removeSelectedProducts: (e) async {
-        if (state.cartProducts.isEmpty || !state.containsSampleBonus) return;
+      removeInvalidProducts: (e) async {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
-            isUpserting: true,
+            isClearing: true,
           ),
         );
-        final productList = state.cartProducts
-            .expand(
-              (item) => item.convertedSampleBonusList.map((e) => e).toList(),
-            )
-            .toList();
 
         final failureOrSuccess = await repository.removeSelectedProducts(
           salesOrganisation: state.salesOrganisation,
@@ -927,7 +925,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
           language: state.config.languageValue.languageCode,
-          products: productList,
+          products: e.invalidCartItems,
         );
 
         failureOrSuccess.fold(
@@ -935,7 +933,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isUpserting: false,
+                isClearing: false,
               ),
             );
           },
@@ -944,7 +942,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               state.copyWith(
                 cartProducts: products,
                 apiFailureOrSuccessOption: none(),
-                isUpserting: false,
+                isClearing: false,
               ),
             );
           },

@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
@@ -36,6 +37,7 @@ part 'package:ezrxmobile/presentation/orders/cart/widget/material_without_price_
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list_item.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_checkout_section.dart';
+part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items_banner.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -180,6 +182,7 @@ class _CartPageState extends State<CartPage> {
                     currentPath: context.router.currentPath,
                   ),
                   const AccountSuspendedBanner(),
+                  const _CartPageInvalidItemsBanner(),
                   _CartPageCartScrollList(state: state, taxCode: taxCode),
                   if (state.cartProducts.isNotEmpty)
                     const _CartPageCheckoutSection(),

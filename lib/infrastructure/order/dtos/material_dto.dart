@@ -97,6 +97,8 @@ class MaterialDto with _$MaterialDto {
         required List<MaterialDataDto> data,
     @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
         required List<BundleDto> bundles,
+    @JsonKey(name: 'suspensionStatus', defaultValue: false)
+        required bool isSuspended,
   }) = _MaterialDto;
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
@@ -139,6 +141,7 @@ class MaterialDto with _$MaterialDto {
       name: '',
       type: '',
       bundle: BundleDto.fromDomain(materialInfo.bundle),
+      isSuspended: materialInfo.isSuspended,
     );
   }
 
@@ -188,6 +191,7 @@ class MaterialDto with _$MaterialDto {
       promoStatus: false,
       promoType: '',
       sampleBonusItemId: '',
+      isSuspended: isSuspended,
     );
   }
 

@@ -59,6 +59,8 @@ class CartProductDto with _$CartProductDto {
         required List<BonusSampleItemDto> bonusMaterials,
     @JsonKey(name: 'taxes', readValue: handleTax) required double tax,
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
+    @JsonKey(name: 'suspensionStatus', defaultValue: false)
+        required bool isSuspended,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -104,6 +106,7 @@ class CartProductDto with _$CartProductDto {
           .map((e) => BonusSampleItemDto.fromDomain(e))
           .toList(),
       hidePrice: cartItemDetails.materialInfo.hidePrice,
+      isSuspended: cartItemDetails.materialInfo.isSuspended,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -132,6 +135,7 @@ class CartProductDto with _$CartProductDto {
       ),
       type: MaterialInfoType(type),
       remarks: remarks,
+      isSuspended: isSuspended,
     );
   }
 

@@ -28,6 +28,7 @@ _$_ProductDetailDto _$$_ProductDetailDtoFromJson(Map<String, dynamic> json) =>
       itemRegistrationNumber: json['itemRegistrationNumber'] as String? ?? '',
       promoType: json['promoType'] as String? ?? '',
       promoStatus: json['promoStatus'] as bool? ?? false,
+      isSuspended: json['suspensionStatus'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_ProductDetailDtoToJson(_$_ProductDetailDto instance) =>
@@ -51,4 +52,5 @@ Map<String, dynamic> _$$_ProductDetailDtoToJson(_$_ProductDetailDto instance) =>
       'itemRegistrationNumber': instance.itemRegistrationNumber,
       'promoType': instance.promoType,
       'promoStatus': instance.promoStatus,
+      'suspensionStatus': instance.isSuspended,
     };

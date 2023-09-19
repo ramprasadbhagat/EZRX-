@@ -64,8 +64,8 @@ class CartState with _$CartState {
   bool get containNonSampleMaterial =>
       cartProducts.any((element) => !element.materialInfo.isSampleMaterial);
 
-  bool get containsSampleBonus =>
-      cartProducts.any((element) => element.bonusSampleItems.isNotEmpty);
+  bool get containsSampleBonus => cartProducts
+      .any((element) => element.convertedSampleBonusList.isNotEmpty);
 
   bool get containNonRegularMaterial => cartProducts.any(
         (element) =>
@@ -334,4 +334,7 @@ class CartState with _$CartState {
       isUpserting ||
       isUpdatingStock ||
       isMappingPrice;
+
+  List<MaterialInfo> get invalidSampleBonusList =>
+      cartProducts.expand((item) => item.convertedSampleBonusList).toList();
 }

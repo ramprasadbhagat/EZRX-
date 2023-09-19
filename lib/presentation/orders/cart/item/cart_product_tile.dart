@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
+import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -31,6 +32,8 @@ import 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dart
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+
+part 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/invalid_material_message.dart';
 
 class CartProductTile extends StatelessWidget {
   final PriceAggregate cartItem;
@@ -310,40 +313,48 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: Focus(
-        child: CartItemQuantityInput(
-          isEnabled: true,
-          quantityAddKey: WidgetKeys.cartItemAddKey,
-          quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
-          quantityTextKey: WidgetKeys.quantityInputTextKey,
-          controller: _controller,
-          onFieldChange: (value) {},
-          minusPressed: (k) {
-            context.read<CartBloc>().add(
-                  CartEvent.upsertCart(
-                    priceAggregate: widget.cartItem,
-                    quantity: k,
-                  ),
-                );
-          },
-          addPressed: (k) {
-            context.read<CartBloc>().add(
-                  CartEvent.upsertCart(
-                    priceAggregate: widget.cartItem,
-                    quantity: k,
-                  ),
-                );
-          },
-          onSubmit: (value) {
-            context.read<CartBloc>().add(
-                  CartEvent.upsertCart(
-                    priceAggregate: widget.cartItem,
-                    quantity: value,
-                  ),
-                );
-          },
-          isLoading: context.read<CartBloc>().state.isUpserting,
-        ),
+      child: Column(
+        children: [
+          Focus(
+            child: CartItemQuantityInput(
+              isEnabled: !widget.cartItem.materialInfo.isSuspended,
+              quantityAddKey: WidgetKeys.cartItemAddKey,
+              quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
+              quantityTextKey: WidgetKeys.quantityInputTextKey,
+              controller: _controller,
+              onFieldChange: (value) {},
+              minusPressed: (k) {
+                context.read<CartBloc>().add(
+                      CartEvent.upsertCart(
+                        priceAggregate: widget.cartItem,
+                        quantity: k,
+                      ),
+                    );
+              },
+              addPressed: (k) {
+                context.read<CartBloc>().add(
+                      CartEvent.upsertCart(
+                        priceAggregate: widget.cartItem,
+                        quantity: k,
+                      ),
+                    );
+              },
+              onSubmit: (value) {
+                context.read<CartBloc>().add(
+                      CartEvent.upsertCart(
+                        priceAggregate: widget.cartItem,
+                        quantity: value,
+                      ),
+                    );
+              },
+              isLoading: context.read<CartBloc>().state.isUpserting &&
+                  !widget.cartItem.materialInfo.isSuspended,
+            ),
+          ),
+          _InvalidMaterialMessage(
+            cartItem: widget.cartItem,
+          ),
+        ],
       ),
     );
   }

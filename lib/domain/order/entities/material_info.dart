@@ -60,6 +60,7 @@ class MaterialInfo with _$MaterialInfo {
     required String ean,
     required RequestCounterOfferDetails counterOfferDetails,
     required String sampleBonusItemId,
+    required bool isSuspended,
   }) = _MaterialInfo;
 
   factory MaterialInfo.empty() => MaterialInfo(
@@ -106,6 +107,7 @@ class MaterialInfo with _$MaterialInfo {
         promoStatus: false,
         promoType: '',
         sampleBonusItemId: '',
+        isSuspended: false,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(

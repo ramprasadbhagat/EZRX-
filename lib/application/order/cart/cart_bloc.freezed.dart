@@ -37,8 +37,7 @@ mixin _$CartEvent {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -66,7 +65,8 @@ mixin _$CartEvent {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -86,8 +86,7 @@ mixin _$CartEvent {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -110,7 +109,8 @@ mixin _$CartEvent {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -130,8 +130,7 @@ mixin _$CartEvent {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -153,7 +152,8 @@ mixin _$CartEvent {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -165,8 +165,8 @@ mixin _$CartEvent {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -185,8 +185,8 @@ mixin _$CartEvent {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -196,7 +196,8 @@ mixin _$CartEvent {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -211,7 +212,7 @@ mixin _$CartEvent {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -221,7 +222,8 @@ mixin _$CartEvent {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -235,7 +237,7 @@ mixin _$CartEvent {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -417,8 +419,7 @@ class _$_Initialized implements _Initialized {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -446,7 +447,8 @@ class _$_Initialized implements _Initialized {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return initialized(salesOrganisationConfigs, salesOrganisation,
         customerCodeInfo, shipToInfo);
@@ -470,8 +472,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -494,7 +495,8 @@ class _$_Initialized implements _Initialized {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return initialized?.call(salesOrganisationConfigs, salesOrganisation,
         customerCodeInfo, shipToInfo);
@@ -518,8 +520,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -541,7 +542,8 @@ class _$_Initialized implements _Initialized {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -560,8 +562,8 @@ class _$_Initialized implements _Initialized {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -580,8 +582,8 @@ class _$_Initialized implements _Initialized {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return initialized(this);
   }
@@ -594,7 +596,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -609,7 +612,7 @@ class _$_Initialized implements _Initialized {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return initialized?.call(this);
   }
@@ -622,7 +625,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -636,7 +640,7 @@ class _$_Initialized implements _Initialized {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -785,8 +789,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -814,7 +817,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return addComboDealToCart(
         comboDealItems, doNotallowOutOfStockMaterial, overrideQty);
@@ -838,8 +842,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -862,7 +865,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return addComboDealToCart?.call(
         comboDealItems, doNotallowOutOfStockMaterial, overrideQty);
@@ -886,8 +890,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -909,7 +912,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (addComboDealToCart != null) {
@@ -928,8 +932,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -948,8 +952,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return addComboDealToCart(this);
   }
@@ -962,7 +966,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -977,7 +982,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return addComboDealToCart?.call(this);
   }
@@ -990,7 +995,8 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -1004,7 +1010,7 @@ class _$_AddComboDealToCart implements _AddComboDealToCart {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (addComboDealToCart != null) {
@@ -1140,8 +1146,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -1169,7 +1174,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return verifyMaterialDealBonus(item, items);
   }
@@ -1192,8 +1198,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -1216,7 +1221,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return verifyMaterialDealBonus?.call(item, items);
   }
@@ -1239,8 +1245,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -1262,7 +1267,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (verifyMaterialDealBonus != null) {
@@ -1280,8 +1286,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -1300,8 +1306,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return verifyMaterialDealBonus(this);
   }
@@ -1314,7 +1320,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -1329,7 +1336,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return verifyMaterialDealBonus?.call(this);
   }
@@ -1342,7 +1349,8 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -1356,7 +1364,7 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (verifyMaterialDealBonus != null) {
@@ -1481,8 +1489,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -1510,7 +1517,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return addRemarkToCartItem(item, message);
   }
@@ -1533,8 +1541,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -1557,7 +1564,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return addRemarkToCartItem?.call(item, message);
   }
@@ -1580,8 +1588,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -1603,7 +1610,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (addRemarkToCartItem != null) {
@@ -1621,8 +1629,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -1641,8 +1649,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return addRemarkToCartItem(this);
   }
@@ -1655,7 +1663,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -1670,7 +1679,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return addRemarkToCartItem?.call(this);
   }
@@ -1683,7 +1692,8 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -1697,7 +1707,7 @@ class _$_AddRemarkToCartItem implements _AddRemarkToCartItem {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (addRemarkToCartItem != null) {
@@ -1868,8 +1878,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -1897,7 +1906,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return addBonusToCartItem(
         bonusMaterial, bonusItemId, counterOfferDetails, user);
@@ -1921,8 +1931,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -1945,7 +1954,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return addBonusToCartItem?.call(
         bonusMaterial, bonusItemId, counterOfferDetails, user);
@@ -1969,8 +1979,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -1992,7 +2001,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (addBonusToCartItem != null) {
@@ -2011,8 +2021,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -2031,8 +2041,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return addBonusToCartItem(this);
   }
@@ -2045,7 +2055,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -2060,7 +2071,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return addBonusToCartItem?.call(this);
   }
@@ -2073,7 +2084,8 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -2087,7 +2099,7 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (addBonusToCartItem != null) {
@@ -2114,96 +2126,43 @@ abstract class _AddBonusToCartItem implements CartEvent {
 }
 
 /// @nodoc
-abstract class _$$_RemoveBonusFromCartItemCopyWith<$Res> {
-  factory _$$_RemoveBonusFromCartItemCopyWith(_$_RemoveBonusFromCartItem value,
-          $Res Function(_$_RemoveBonusFromCartItem) then) =
-      __$$_RemoveBonusFromCartItemCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CartItem item, MaterialItemBonus bonusItem});
-
-  $CartItemCopyWith<$Res> get item;
-  $MaterialItemBonusCopyWith<$Res> get bonusItem;
+abstract class _$$_RemoveSampleBonusFromCartConfigCopyWith<$Res> {
+  factory _$$_RemoveSampleBonusFromCartConfigCopyWith(
+          _$_RemoveSampleBonusFromCartConfig value,
+          $Res Function(_$_RemoveSampleBonusFromCartConfig) then) =
+      __$$_RemoveSampleBonusFromCartConfigCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_RemoveBonusFromCartItemCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_RemoveBonusFromCartItem>
-    implements _$$_RemoveBonusFromCartItemCopyWith<$Res> {
-  __$$_RemoveBonusFromCartItemCopyWithImpl(_$_RemoveBonusFromCartItem _value,
-      $Res Function(_$_RemoveBonusFromCartItem) _then)
+class __$$_RemoveSampleBonusFromCartConfigCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_RemoveSampleBonusFromCartConfig>
+    implements _$$_RemoveSampleBonusFromCartConfigCopyWith<$Res> {
+  __$$_RemoveSampleBonusFromCartConfigCopyWithImpl(
+      _$_RemoveSampleBonusFromCartConfig _value,
+      $Res Function(_$_RemoveSampleBonusFromCartConfig) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? item = null,
-    Object? bonusItem = null,
-  }) {
-    return _then(_$_RemoveBonusFromCartItem(
-      item: null == item
-          ? _value.item
-          : item // ignore: cast_nullable_to_non_nullable
-              as CartItem,
-      bonusItem: null == bonusItem
-          ? _value.bonusItem
-          : bonusItem // ignore: cast_nullable_to_non_nullable
-              as MaterialItemBonus,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CartItemCopyWith<$Res> get item {
-    return $CartItemCopyWith<$Res>(_value.item, (value) {
-      return _then(_value.copyWith(item: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MaterialItemBonusCopyWith<$Res> get bonusItem {
-    return $MaterialItemBonusCopyWith<$Res>(_value.bonusItem, (value) {
-      return _then(_value.copyWith(bonusItem: value));
-    });
-  }
 }
 
 /// @nodoc
 
-class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
-  const _$_RemoveBonusFromCartItem(
-      {required this.item, required this.bonusItem});
-
-  @override
-  final CartItem item;
-  @override
-  final MaterialItemBonus bonusItem;
+class _$_RemoveSampleBonusFromCartConfig
+    implements _RemoveSampleBonusFromCartConfig {
+  const _$_RemoveSampleBonusFromCartConfig();
 
   @override
   String toString() {
-    return 'CartEvent.removeBonusFromCartItem(item: $item, bonusItem: $bonusItem)';
+    return 'CartEvent.removeSampleBonusFromCartConfig()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoveBonusFromCartItem &&
-            (identical(other.item, item) || other.item == item) &&
-            (identical(other.bonusItem, bonusItem) ||
-                other.bonusItem == bonusItem));
+            other is _$_RemoveSampleBonusFromCartConfig);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, item, bonusItem);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_RemoveBonusFromCartItemCopyWith<_$_RemoveBonusFromCartItem>
-      get copyWith =>
-          __$$_RemoveBonusFromCartItemCopyWithImpl<_$_RemoveBonusFromCartItem>(
-              this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -2227,8 +2186,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -2256,9 +2214,10 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
-    return removeBonusFromCartItem(item, bonusItem);
+    return removeSampleBonusFromCartConfig();
   }
 
   @override
@@ -2279,8 +2238,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -2303,9 +2261,10 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
-    return removeBonusFromCartItem?.call(item, bonusItem);
+    return removeSampleBonusFromCartConfig?.call();
   }
 
   @override
@@ -2326,8 +2285,7 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -2349,11 +2307,12 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
-    if (removeBonusFromCartItem != null) {
-      return removeBonusFromCartItem(item, bonusItem);
+    if (removeSampleBonusFromCartConfig != null) {
+      return removeSampleBonusFromCartConfig();
     }
     return orElse();
   }
@@ -2367,8 +2326,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -2387,10 +2346,10 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
-    return removeBonusFromCartItem(this);
+    return removeSampleBonusFromCartConfig(this);
   }
 
   @override
@@ -2401,7 +2360,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -2416,9 +2376,9 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
-    return removeBonusFromCartItem?.call(this);
+    return removeSampleBonusFromCartConfig?.call(this);
   }
 
   @override
@@ -2429,7 +2389,8 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -2443,26 +2404,19 @@ class _$_RemoveBonusFromCartItem implements _RemoveBonusFromCartItem {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
-    if (removeBonusFromCartItem != null) {
-      return removeBonusFromCartItem(this);
+    if (removeSampleBonusFromCartConfig != null) {
+      return removeSampleBonusFromCartConfig(this);
     }
     return orElse();
   }
 }
 
-abstract class _RemoveBonusFromCartItem implements CartEvent {
-  const factory _RemoveBonusFromCartItem(
-      {required final CartItem item,
-      required final MaterialItemBonus bonusItem}) = _$_RemoveBonusFromCartItem;
-
-  CartItem get item;
-  MaterialItemBonus get bonusItem;
-  @JsonKey(ignore: true)
-  _$$_RemoveBonusFromCartItemCopyWith<_$_RemoveBonusFromCartItem>
-      get copyWith => throw _privateConstructorUsedError;
+abstract class _RemoveSampleBonusFromCartConfig implements CartEvent {
+  const factory _RemoveSampleBonusFromCartConfig() =
+      _$_RemoveSampleBonusFromCartConfig;
 }
 
 /// @nodoc
@@ -2586,8 +2540,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -2615,7 +2568,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return addRemarkToBonusItem(item, bonusItem, message);
   }
@@ -2638,8 +2592,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -2662,7 +2615,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return addRemarkToBonusItem?.call(item, bonusItem, message);
   }
@@ -2685,8 +2639,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -2708,7 +2661,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (addRemarkToBonusItem != null) {
@@ -2726,8 +2680,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -2746,8 +2700,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return addRemarkToBonusItem(this);
   }
@@ -2760,7 +2714,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -2775,7 +2730,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return addRemarkToBonusItem?.call(this);
   }
@@ -2788,7 +2743,8 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -2802,7 +2758,7 @@ class _$_AddRemarkToBonusItem implements _AddRemarkToBonusItem {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (addRemarkToBonusItem != null) {
@@ -2939,8 +2895,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -2968,7 +2923,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return overrideCartItemPrice(overridenPrice, cartItem);
   }
@@ -2991,8 +2947,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -3015,7 +2970,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return overrideCartItemPrice?.call(overridenPrice, cartItem);
   }
@@ -3038,8 +2994,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -3061,7 +3016,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (overrideCartItemPrice != null) {
@@ -3079,8 +3035,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -3099,8 +3055,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return overrideCartItemPrice(this);
   }
@@ -3113,7 +3069,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -3128,7 +3085,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return overrideCartItemPrice?.call(this);
   }
@@ -3141,7 +3098,8 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -3155,7 +3113,7 @@ class _$_OverrideCartItemPrice implements _OverrideCartItemPrice {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (overrideCartItemPrice != null) {
@@ -3234,8 +3192,7 @@ class _$_ClearCart implements _ClearCart {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -3263,7 +3220,8 @@ class _$_ClearCart implements _ClearCart {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return clearCart();
   }
@@ -3286,8 +3244,7 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -3310,7 +3267,8 @@ class _$_ClearCart implements _ClearCart {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return clearCart?.call();
   }
@@ -3333,8 +3291,7 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -3356,7 +3313,8 @@ class _$_ClearCart implements _ClearCart {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -3374,8 +3332,8 @@ class _$_ClearCart implements _ClearCart {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -3394,8 +3352,8 @@ class _$_ClearCart implements _ClearCart {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return clearCart(this);
   }
@@ -3408,7 +3366,8 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -3423,7 +3382,7 @@ class _$_ClearCart implements _ClearCart {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return clearCart?.call(this);
   }
@@ -3436,7 +3395,8 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -3450,7 +3410,7 @@ class _$_ClearCart implements _ClearCart {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -3571,8 +3531,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -3600,7 +3559,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return replaceWithOrderItems(items, doNotallowOutOfStockMaterial);
   }
@@ -3623,8 +3583,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -3647,7 +3606,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return replaceWithOrderItems?.call(items, doNotallowOutOfStockMaterial);
   }
@@ -3670,8 +3630,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -3693,7 +3652,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (replaceWithOrderItems != null) {
@@ -3711,8 +3671,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -3731,8 +3691,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return replaceWithOrderItems(this);
   }
@@ -3745,7 +3705,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -3760,7 +3721,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return replaceWithOrderItems?.call(this);
   }
@@ -3773,7 +3734,8 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -3787,7 +3749,7 @@ class _$_ReplaceWithOrderItems implements _ReplaceWithOrderItems {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (replaceWithOrderItems != null) {
@@ -3922,8 +3884,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -3951,7 +3912,8 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return updateBatchInCartItem(item, stockInfo);
   }
@@ -3974,8 +3936,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -3998,7 +3959,8 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return updateBatchInCartItem?.call(item, stockInfo);
   }
@@ -4021,8 +3983,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -4044,7 +4005,8 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (updateBatchInCartItem != null) {
@@ -4062,8 +4024,8 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -4082,8 +4044,8 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return updateBatchInCartItem(this);
   }
@@ -4096,7 +4058,8 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -4111,7 +4074,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return updateBatchInCartItem?.call(this);
   }
@@ -4124,7 +4087,8 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -4138,7 +4102,7 @@ class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (updateBatchInCartItem != null) {
@@ -4246,8 +4210,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -4275,7 +4238,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return fetchProductsAddedToCart(comboDealEligible);
   }
@@ -4298,8 +4262,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -4322,7 +4285,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return fetchProductsAddedToCart?.call(comboDealEligible);
   }
@@ -4345,8 +4309,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -4368,7 +4331,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (fetchProductsAddedToCart != null) {
@@ -4386,8 +4350,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -4406,8 +4370,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return fetchProductsAddedToCart(this);
   }
@@ -4420,7 +4384,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -4435,7 +4400,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return fetchProductsAddedToCart?.call(this);
   }
@@ -4448,7 +4413,8 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -4462,7 +4428,7 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (fetchProductsAddedToCart != null) {
@@ -4585,8 +4551,7 @@ class _$_UpsertCart implements _UpsertCart {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -4614,7 +4579,8 @@ class _$_UpsertCart implements _UpsertCart {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return upsertCart(priceAggregate, quantity);
   }
@@ -4637,8 +4603,7 @@ class _$_UpsertCart implements _UpsertCart {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -4661,7 +4626,8 @@ class _$_UpsertCart implements _UpsertCart {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return upsertCart?.call(priceAggregate, quantity);
   }
@@ -4684,8 +4650,7 @@ class _$_UpsertCart implements _UpsertCart {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -4707,7 +4672,8 @@ class _$_UpsertCart implements _UpsertCart {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (upsertCart != null) {
@@ -4725,8 +4691,8 @@ class _$_UpsertCart implements _UpsertCart {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -4745,8 +4711,8 @@ class _$_UpsertCart implements _UpsertCart {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return upsertCart(this);
   }
@@ -4759,7 +4725,8 @@ class _$_UpsertCart implements _UpsertCart {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -4774,7 +4741,7 @@ class _$_UpsertCart implements _UpsertCart {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return upsertCart?.call(this);
   }
@@ -4787,7 +4754,8 @@ class _$_UpsertCart implements _UpsertCart {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -4801,7 +4769,7 @@ class _$_UpsertCart implements _UpsertCart {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (upsertCart != null) {
@@ -4980,8 +4948,7 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -5009,7 +4976,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return addHistoryItemsToCart(
         priceAggregate, quantity, counterOfferDetails, user);
@@ -5033,8 +5001,7 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -5057,7 +5024,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return addHistoryItemsToCart?.call(
         priceAggregate, quantity, counterOfferDetails, user);
@@ -5081,8 +5049,7 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -5104,7 +5071,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (addHistoryItemsToCart != null) {
@@ -5123,8 +5091,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -5143,8 +5111,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return addHistoryItemsToCart(this);
   }
@@ -5157,7 +5125,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -5172,7 +5141,7 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return addHistoryItemsToCart?.call(this);
   }
@@ -5185,7 +5154,8 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -5199,7 +5169,7 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (addHistoryItemsToCart != null) {
@@ -5319,8 +5289,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -5348,7 +5317,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return upsertCartItems(priceAggregate);
   }
@@ -5371,8 +5341,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -5395,7 +5364,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return upsertCartItems?.call(priceAggregate);
   }
@@ -5418,8 +5388,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -5441,7 +5410,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (upsertCartItems != null) {
@@ -5459,8 +5429,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -5479,8 +5449,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return upsertCartItems(this);
   }
@@ -5493,7 +5463,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -5508,7 +5479,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return upsertCartItems?.call(this);
   }
@@ -5521,7 +5492,8 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -5535,7 +5507,7 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (upsertCartItems != null) {
@@ -5651,8 +5623,7 @@ class _$_GetDetailsProductsAddedToCart
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -5680,7 +5651,8 @@ class _$_GetDetailsProductsAddedToCart
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return getDetailsProductsAddedToCart(cartProducts);
   }
@@ -5703,8 +5675,7 @@ class _$_GetDetailsProductsAddedToCart
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -5727,7 +5698,8 @@ class _$_GetDetailsProductsAddedToCart
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return getDetailsProductsAddedToCart?.call(cartProducts);
   }
@@ -5750,8 +5722,7 @@ class _$_GetDetailsProductsAddedToCart
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -5773,7 +5744,8 @@ class _$_GetDetailsProductsAddedToCart
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (getDetailsProductsAddedToCart != null) {
@@ -5791,8 +5763,8 @@ class _$_GetDetailsProductsAddedToCart
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -5811,8 +5783,8 @@ class _$_GetDetailsProductsAddedToCart
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return getDetailsProductsAddedToCart(this);
   }
@@ -5825,7 +5797,8 @@ class _$_GetDetailsProductsAddedToCart
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -5840,7 +5813,7 @@ class _$_GetDetailsProductsAddedToCart
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return getDetailsProductsAddedToCart?.call(this);
   }
@@ -5853,7 +5826,8 @@ class _$_GetDetailsProductsAddedToCart
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -5867,7 +5841,7 @@ class _$_GetDetailsProductsAddedToCart
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (getDetailsProductsAddedToCart != null) {
@@ -6005,8 +5979,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -6034,7 +6007,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return updatePriceProduct(priceProducts, overriddenProductPrice);
   }
@@ -6057,8 +6031,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -6081,7 +6054,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return updatePriceProduct?.call(priceProducts, overriddenProductPrice);
   }
@@ -6104,8 +6078,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -6127,7 +6100,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (updatePriceProduct != null) {
@@ -6145,8 +6119,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -6165,8 +6139,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return updatePriceProduct(this);
   }
@@ -6179,7 +6153,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -6194,7 +6169,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return updatePriceProduct?.call(this);
   }
@@ -6207,7 +6182,8 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -6221,7 +6197,7 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (updatePriceProduct != null) {
@@ -6334,8 +6310,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -6363,7 +6338,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
     return updateProductStock(products);
   }
@@ -6386,8 +6362,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -6410,7 +6385,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
     return updateProductStock?.call(products);
   }
@@ -6433,8 +6409,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -6456,7 +6431,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (updateProductStock != null) {
@@ -6474,8 +6450,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -6494,8 +6470,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
     return updateProductStock(this);
   }
@@ -6508,7 +6484,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -6523,7 +6500,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
     return updateProductStock?.call(this);
   }
@@ -6536,7 +6513,8 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -6550,7 +6528,7 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
     if (updateProductStock != null) {
@@ -6571,40 +6549,76 @@ abstract class _UpdateProductStock implements CartEvent {
 }
 
 /// @nodoc
-abstract class _$$_RemoveSelectedProductsCopyWith<$Res> {
-  factory _$$_RemoveSelectedProductsCopyWith(_$_RemoveSelectedProducts value,
-          $Res Function(_$_RemoveSelectedProducts) then) =
-      __$$_RemoveSelectedProductsCopyWithImpl<$Res>;
+abstract class _$$_RemoveInvalidProductsCopyWith<$Res> {
+  factory _$$_RemoveInvalidProductsCopyWith(_$_RemoveInvalidProducts value,
+          $Res Function(_$_RemoveInvalidProducts) then) =
+      __$$_RemoveInvalidProductsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<MaterialInfo> invalidCartItems});
 }
 
 /// @nodoc
-class __$$_RemoveSelectedProductsCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_RemoveSelectedProducts>
-    implements _$$_RemoveSelectedProductsCopyWith<$Res> {
-  __$$_RemoveSelectedProductsCopyWithImpl(_$_RemoveSelectedProducts _value,
-      $Res Function(_$_RemoveSelectedProducts) _then)
+class __$$_RemoveInvalidProductsCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$_RemoveInvalidProducts>
+    implements _$$_RemoveInvalidProductsCopyWith<$Res> {
+  __$$_RemoveInvalidProductsCopyWithImpl(_$_RemoveInvalidProducts _value,
+      $Res Function(_$_RemoveInvalidProducts) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? invalidCartItems = null,
+  }) {
+    return _then(_$_RemoveInvalidProducts(
+      invalidCartItems: null == invalidCartItems
+          ? _value._invalidCartItems
+          : invalidCartItems // ignore: cast_nullable_to_non_nullable
+              as List<MaterialInfo>,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
-  const _$_RemoveSelectedProducts();
+class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
+  const _$_RemoveInvalidProducts(
+      {required final List<MaterialInfo> invalidCartItems})
+      : _invalidCartItems = invalidCartItems;
+
+  final List<MaterialInfo> _invalidCartItems;
+  @override
+  List<MaterialInfo> get invalidCartItems {
+    if (_invalidCartItems is EqualUnmodifiableListView)
+      return _invalidCartItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_invalidCartItems);
+  }
 
   @override
   String toString() {
-    return 'CartEvent.removeSelectedProducts()';
+    return 'CartEvent.removeInvalidProducts(invalidCartItems: $invalidCartItems)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoveSelectedProducts);
+            other is _$_RemoveInvalidProducts &&
+            const DeepCollectionEquality()
+                .equals(other._invalidCartItems, _invalidCartItems));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_invalidCartItems));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RemoveInvalidProductsCopyWith<_$_RemoveInvalidProducts> get copyWith =>
+      __$$_RemoveInvalidProductsCopyWithImpl<_$_RemoveInvalidProducts>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -6628,8 +6642,7 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
             RequestCounterOfferDetails counterOfferDetails,
             User user)
         addBonusToCartItem,
-    required TResult Function(CartItem item, MaterialItemBonus bonusItem)
-        removeBonusFromCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)
         addRemarkToBonusItem,
@@ -6657,9 +6670,10 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
             Price overriddenProductPrice)
         updatePriceProduct,
     required TResult Function(List<PriceAggregate> products) updateProductStock,
-    required TResult Function() removeSelectedProducts,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
   }) {
-    return removeSelectedProducts();
+    return removeInvalidProducts(invalidCartItems);
   }
 
   @override
@@ -6680,8 +6694,7 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
     TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult? Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -6704,9 +6717,10 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult? Function(List<PriceAggregate> products)? updateProductStock,
-    TResult? Function()? removeSelectedProducts,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
   }) {
-    return removeSelectedProducts?.call();
+    return removeInvalidProducts?.call(invalidCartItems);
   }
 
   @override
@@ -6727,8 +6741,7 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
     TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
             RequestCounterOfferDetails counterOfferDetails, User user)?
         addBonusToCartItem,
-    TResult Function(CartItem item, MaterialItemBonus bonusItem)?
-        removeBonusFromCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function(
             CartItem item, MaterialItemBonus bonusItem, String message)?
         addRemarkToBonusItem,
@@ -6750,11 +6763,12 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
             Price overriddenProductPrice)?
         updatePriceProduct,
     TResult Function(List<PriceAggregate> products)? updateProductStock,
-    TResult Function()? removeSelectedProducts,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
     required TResult orElse(),
   }) {
-    if (removeSelectedProducts != null) {
-      return removeSelectedProducts();
+    if (removeInvalidProducts != null) {
+      return removeInvalidProducts(invalidCartItems);
     }
     return orElse();
   }
@@ -6768,8 +6782,8 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
         verifyMaterialDealBonus,
     required TResult Function(_AddRemarkToCartItem value) addRemarkToCartItem,
     required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveBonusFromCartItem value)
-        removeBonusFromCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
     required TResult Function(_AddRemarkToBonusItem value) addRemarkToBonusItem,
     required TResult Function(_OverrideCartItemPrice value)
         overrideCartItemPrice,
@@ -6788,10 +6802,10 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
         getDetailsProductsAddedToCart,
     required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
     required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveSelectedProducts value)
-        removeSelectedProducts,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
   }) {
-    return removeSelectedProducts(this);
+    return removeInvalidProducts(this);
   }
 
   @override
@@ -6802,7 +6816,8 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
     TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult? Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult? Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult? Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult? Function(_ClearCart value)? clearCart,
@@ -6817,9 +6832,9 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
         getDetailsProductsAddedToCart,
     TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
   }) {
-    return removeSelectedProducts?.call(this);
+    return removeInvalidProducts?.call(this);
   }
 
   @override
@@ -6830,7 +6845,8 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
     TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
     TResult Function(_AddRemarkToCartItem value)? addRemarkToCartItem,
     TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveBonusFromCartItem value)? removeBonusFromCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
     TResult Function(_AddRemarkToBonusItem value)? addRemarkToBonusItem,
     TResult Function(_OverrideCartItemPrice value)? overrideCartItemPrice,
     TResult Function(_ClearCart value)? clearCart,
@@ -6844,18 +6860,25 @@ class _$_RemoveSelectedProducts implements _RemoveSelectedProducts {
         getDetailsProductsAddedToCart,
     TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
     TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveSelectedProducts value)? removeSelectedProducts,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
     required TResult orElse(),
   }) {
-    if (removeSelectedProducts != null) {
-      return removeSelectedProducts(this);
+    if (removeInvalidProducts != null) {
+      return removeInvalidProducts(this);
     }
     return orElse();
   }
 }
 
-abstract class _RemoveSelectedProducts implements CartEvent {
-  const factory _RemoveSelectedProducts() = _$_RemoveSelectedProducts;
+abstract class _RemoveInvalidProducts implements CartEvent {
+  const factory _RemoveInvalidProducts(
+          {required final List<MaterialInfo> invalidCartItems}) =
+      _$_RemoveInvalidProducts;
+
+  List<MaterialInfo> get invalidCartItems;
+  @JsonKey(ignore: true)
+  _$$_RemoveInvalidProductsCopyWith<_$_RemoveInvalidProducts> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

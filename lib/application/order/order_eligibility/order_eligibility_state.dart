@@ -48,7 +48,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
       isMinOrderValuePassed &&
       !isMWPNotAllowedAndPresentInCart &&
       isOOSAllowedIfPresentInCart &&
-      isBundleQuantitySatisfies;
+      isBundleQuantitySatisfies &&
+      !cartContainsSuspendedMaterials;
 
   bool get isTotalGreaterThanMinOrderAmount {
     if (salesOrg.salesOrg.isTH) {
@@ -138,4 +139,14 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   bool get displayMWPNotAllowedWarning =>
       isMWPNotAllowedAndPresentInCart && showErrorMessage;
+
+  bool get cartContainsSuspendedMaterials =>
+      cartItems.any((product) => product.materialInfo.isSuspended);
+
+  List<MaterialInfo> get invalidCartItems => cartItems
+      .where(
+        (item) => item.materialInfo.isSuspended,
+      )
+      .map((item) => item.materialInfo.copyWith(quantity: 0))
+      .toList();
 }

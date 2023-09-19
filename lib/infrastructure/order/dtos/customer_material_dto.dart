@@ -106,6 +106,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         promoStatus: false,
         promoType: '',
         sampleBonusItemId: '',
+        isSuspended: false,
       );
 
   factory CustomerMaterialDto.fromJson(Map<String, dynamic> json) =>

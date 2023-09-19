@@ -59,6 +59,7 @@ mixin _$MaterialInfo {
   RequestCounterOfferDetails get counterOfferDetails =>
       throw _privateConstructorUsedError;
   String get sampleBonusItemId => throw _privateConstructorUsedError;
+  bool get isSuspended => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MaterialInfoCopyWith<MaterialInfo> get copyWith =>
@@ -111,7 +112,8 @@ abstract class $MaterialInfoCopyWith<$Res> {
       bool isFOCMaterial,
       String ean,
       RequestCounterOfferDetails counterOfferDetails,
-      String sampleBonusItemId});
+      String sampleBonusItemId,
+      bool isSuspended});
 
   $PrincipalDataCopyWith<$Res> get principalData;
   $BundleCopyWith<$Res> get bundle;
@@ -173,6 +175,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
     Object? ean = null,
     Object? counterOfferDetails = null,
     Object? sampleBonusItemId = null,
+    Object? isSuspended = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -335,6 +338,10 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
           ? _value.sampleBonusItemId
           : sampleBonusItemId // ignore: cast_nullable_to_non_nullable
               as String,
+      isSuspended: null == isSuspended
+          ? _value.isSuspended
+          : isSuspended // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -428,7 +435,8 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       bool isFOCMaterial,
       String ean,
       RequestCounterOfferDetails counterOfferDetails,
-      String sampleBonusItemId});
+      String sampleBonusItemId,
+      bool isSuspended});
 
   @override
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -493,6 +501,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
     Object? ean = null,
     Object? counterOfferDetails = null,
     Object? sampleBonusItemId = null,
+    Object? isSuspended = null,
   }) {
     return _then(_$_MaterialInfo(
       name: null == name
@@ -655,6 +664,10 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
           ? _value.sampleBonusItemId
           : sampleBonusItemId // ignore: cast_nullable_to_non_nullable
               as String,
+      isSuspended: null == isSuspended
+          ? _value.isSuspended
+          : isSuspended // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -702,7 +715,8 @@ class _$_MaterialInfo extends _MaterialInfo {
       required this.isFOCMaterial,
       required this.ean,
       required this.counterOfferDetails,
-      required this.sampleBonusItemId})
+      required this.sampleBonusItemId,
+      required this.isSuspended})
       : _data = data,
         _stockInfos = stockInfos,
         _bundles = bundles,
@@ -807,10 +821,12 @@ class _$_MaterialInfo extends _MaterialInfo {
   final RequestCounterOfferDetails counterOfferDetails;
   @override
   final String sampleBonusItemId;
+  @override
+  final bool isSuspended;
 
   @override
   String toString() {
-    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, promoStatus: $promoStatus, promoType: $promoType, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, tax: $tax, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails, sampleBonusItemId: $sampleBonusItemId)';
+    return 'MaterialInfo(name: $name, principalData: $principalData, materialNumber: $materialNumber, materialDescription: $materialDescription, manufactured: $manufactured, isFavourite: $isFavourite, type: $type, hidePrice: $hidePrice, data: $data, dataTotalCount: $dataTotalCount, dataTotalHidden: $dataTotalHidden, isGimmick: $isGimmick, stockInfos: $stockInfos, bundle: $bundle, productImages: $productImages, countryData: $countryData, quantity: $quantity, defaultMaterialDescription: $defaultMaterialDescription, governmentMaterialCode: $governmentMaterialCode, unitOfMeasurement: $unitOfMeasurement, parentID: $parentID, therapeuticClass: $therapeuticClass, taxClassification: $taxClassification, itemRegistrationNumber: $itemRegistrationNumber, genericMaterialName: $genericMaterialName, remarks: $remarks, promoStatus: $promoStatus, promoType: $promoType, itemBrand: $itemBrand, materialGroup2: $materialGroup2, materialGroup4: $materialGroup4, isSampleMaterial: $isSampleMaterial, hasValidTenderContract: $hasValidTenderContract, hasMandatoryTenderContract: $hasMandatoryTenderContract, tax: $tax, bundles: $bundles, isFOCMaterial: $isFOCMaterial, ean: $ean, counterOfferDetails: $counterOfferDetails, sampleBonusItemId: $sampleBonusItemId, isSuspended: $isSuspended)';
   }
 
   @override
@@ -892,7 +908,9 @@ class _$_MaterialInfo extends _MaterialInfo {
             (identical(other.counterOfferDetails, counterOfferDetails) ||
                 other.counterOfferDetails == counterOfferDetails) &&
             (identical(other.sampleBonusItemId, sampleBonusItemId) ||
-                other.sampleBonusItemId == sampleBonusItemId));
+                other.sampleBonusItemId == sampleBonusItemId) &&
+            (identical(other.isSuspended, isSuspended) ||
+                other.isSuspended == isSuspended));
   }
 
   @override
@@ -937,7 +955,8 @@ class _$_MaterialInfo extends _MaterialInfo {
         isFOCMaterial,
         ean,
         counterOfferDetails,
-        sampleBonusItemId
+        sampleBonusItemId,
+        isSuspended
       ]);
 
   @JsonKey(ignore: true)
@@ -988,7 +1007,8 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final bool isFOCMaterial,
       required final String ean,
       required final RequestCounterOfferDetails counterOfferDetails,
-      required final String sampleBonusItemId}) = _$_MaterialInfo;
+      required final String sampleBonusItemId,
+      required final bool isSuspended}) = _$_MaterialInfo;
   const _MaterialInfo._() : super._();
 
   @override
@@ -1071,6 +1091,8 @@ abstract class _MaterialInfo extends MaterialInfo {
   RequestCounterOfferDetails get counterOfferDetails;
   @override
   String get sampleBonusItemId;
+  @override
+  bool get isSuspended;
   @override
   @JsonKey(ignore: true)
   _$$_MaterialInfoCopyWith<_$_MaterialInfo> get copyWith =>

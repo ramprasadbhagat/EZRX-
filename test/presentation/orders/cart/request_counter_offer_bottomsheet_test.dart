@@ -276,9 +276,9 @@ void main() {
           find.byKey(WidgetKeys.counterOfferBottomSheet);
       expect(cartPageFinder, findsOneWidget);
       expect(cartItemFinder, findsOneWidget);
-      expect(counterOfferPriceButtonFinder, findsOneWidget);
+      expect(counterOfferPriceButtonFinder.first, findsOneWidget);
 
-      await tester.tap(counterOfferPriceButtonFinder);
+      await tester.tap(counterOfferPriceButtonFinder.first);
       await tester.pump();
       verify(
         () => priceOverrideBloc.add(
@@ -319,9 +319,9 @@ void main() {
           find.byKey(WidgetKeys.counterOfferBottomSheet);
       expect(cartPageFinder, findsOneWidget);
       expect(cartItemFinder, findsOneWidget);
-      expect(counterOfferPriceButtonFinder, findsOneWidget);
+      expect(counterOfferPriceButtonFinder.first, findsOneWidget);
 
-      await tester.tap(counterOfferPriceButtonFinder);
+      await tester.tap(counterOfferPriceButtonFinder.first);
       await tester.pump();
       verify(
         () => priceOverrideBloc.add(
@@ -397,9 +397,9 @@ void main() {
           find.byKey(WidgetKeys.counterOfferBottomSheet);
       expect(cartPageFinder, findsOneWidget);
       expect(cartItemFinder, findsOneWidget);
-      expect(counterOfferPriceButtonFinder, findsOneWidget);
+      expect(counterOfferPriceButtonFinder.first, findsOneWidget);
 
-      await tester.tap(counterOfferPriceButtonFinder);
+      await tester.tap(counterOfferPriceButtonFinder.first);
       await tester.pump();
       verify(
         () => priceOverrideBloc.add(

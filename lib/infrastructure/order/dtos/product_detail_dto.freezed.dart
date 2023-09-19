@@ -58,6 +58,8 @@ mixin _$ProductDetailDto {
   String get promoType => throw _privateConstructorUsedError;
   @JsonKey(name: 'promoStatus', defaultValue: false)
   bool get promoStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'suspensionStatus', defaultValue: false)
+  bool get isSuspended => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -109,7 +111,9 @@ abstract class $ProductDetailDtoCopyWith<$Res> {
       @JsonKey(name: 'promoType', defaultValue: '')
           String promoType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
-          bool promoStatus});
+          bool promoStatus,
+      @JsonKey(name: 'suspensionStatus', defaultValue: false)
+          bool isSuspended});
 }
 
 /// @nodoc
@@ -144,6 +148,7 @@ class _$ProductDetailDtoCopyWithImpl<$Res, $Val extends ProductDetailDto>
     Object? itemRegistrationNumber = null,
     Object? promoType = null,
     Object? promoStatus = null,
+    Object? isSuspended = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -222,6 +227,10 @@ class _$ProductDetailDtoCopyWithImpl<$Res, $Val extends ProductDetailDto>
           ? _value.promoStatus
           : promoStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSuspended: null == isSuspended
+          ? _value.isSuspended
+          : isSuspended // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -272,7 +281,9 @@ abstract class _$$_ProductDetailDtoCopyWith<$Res>
       @JsonKey(name: 'promoType', defaultValue: '')
           String promoType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
-          bool promoStatus});
+          bool promoStatus,
+      @JsonKey(name: 'suspensionStatus', defaultValue: false)
+          bool isSuspended});
 }
 
 /// @nodoc
@@ -305,6 +316,7 @@ class __$$_ProductDetailDtoCopyWithImpl<$Res>
     Object? itemRegistrationNumber = null,
     Object? promoType = null,
     Object? promoStatus = null,
+    Object? isSuspended = null,
   }) {
     return _then(_$_ProductDetailDto(
       materialNumber: null == materialNumber
@@ -383,6 +395,10 @@ class __$$_ProductDetailDtoCopyWithImpl<$Res>
           ? _value.promoStatus
           : promoStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSuspended: null == isSuspended
+          ? _value.isSuspended
+          : isSuspended // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -428,7 +444,9 @@ class _$_ProductDetailDto extends _ProductDetailDto {
       @JsonKey(name: 'promoType', defaultValue: '')
           required this.promoType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
-          required this.promoStatus})
+          required this.promoStatus,
+      @JsonKey(name: 'suspensionStatus', defaultValue: false)
+          required this.isSuspended})
       : super._();
 
   factory _$_ProductDetailDto.fromJson(Map<String, dynamic> json) =>
@@ -491,10 +509,13 @@ class _$_ProductDetailDto extends _ProductDetailDto {
   @override
   @JsonKey(name: 'promoStatus', defaultValue: false)
   final bool promoStatus;
+  @override
+  @JsonKey(name: 'suspensionStatus', defaultValue: false)
+  final bool isSuspended;
 
   @override
   String toString() {
-    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, promoType: $promoType, promoStatus: $promoStatus)';
+    return 'ProductDetailDto(materialNumber: $materialNumber, materialDescription: $materialDescription, principalCode: $principalCode, principalName: $principalName, unitOfMeasurement: $unitOfMeasurement, therapeuticClass: $therapeuticClass, genericMaterialName: $genericMaterialName, itemBrand: $itemBrand, materialBrand: $materialBrand, isFavourite: $isFavourite, isFOCMaterial: $isFOCMaterial, defaultMaterialDescription: $defaultMaterialDescription, country: $country, countryName: $countryName, hidePrice: $hidePrice, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, promoType: $promoType, promoStatus: $promoStatus, isSuspended: $isSuspended)';
   }
 
   @override
@@ -540,7 +561,9 @@ class _$_ProductDetailDto extends _ProductDetailDto {
             (identical(other.promoType, promoType) ||
                 other.promoType == promoType) &&
             (identical(other.promoStatus, promoStatus) ||
-                other.promoStatus == promoStatus));
+                other.promoStatus == promoStatus) &&
+            (identical(other.isSuspended, isSuspended) ||
+                other.isSuspended == isSuspended));
   }
 
   @JsonKey(ignore: true)
@@ -565,7 +588,8 @@ class _$_ProductDetailDto extends _ProductDetailDto {
         governmentMaterialCode,
         itemRegistrationNumber,
         promoType,
-        promoStatus
+        promoStatus,
+        isSuspended
       ]);
 
   @JsonKey(ignore: true)
@@ -621,7 +645,9 @@ abstract class _ProductDetailDto extends ProductDetailDto {
       @JsonKey(name: 'promoType', defaultValue: '')
           required final String promoType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
-          required final bool promoStatus}) = _$_ProductDetailDto;
+          required final bool promoStatus,
+      @JsonKey(name: 'suspensionStatus', defaultValue: false)
+          required final bool isSuspended}) = _$_ProductDetailDto;
   _ProductDetailDto._() : super._();
 
   factory _ProductDetailDto.fromJson(Map<String, dynamic> json) =
@@ -684,6 +710,9 @@ abstract class _ProductDetailDto extends ProductDetailDto {
   @override
   @JsonKey(name: 'promoStatus', defaultValue: false)
   bool get promoStatus;
+  @override
+  @JsonKey(name: 'suspensionStatus', defaultValue: false)
+  bool get isSuspended;
   @override
   @JsonKey(ignore: true)
   _$$_ProductDetailDtoCopyWith<_$_ProductDetailDto> get copyWith =>
