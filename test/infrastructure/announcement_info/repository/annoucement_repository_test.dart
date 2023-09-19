@@ -187,6 +187,8 @@ void main() {
       when(() => mockSalesOrg.announcementVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
       when(() => mockSalesOrg.locale).thenReturn((const Locale('EN')));
+      when(() => mockSalesOrg.announcementLocale)
+          .thenReturn((const Locale('EN')));
       when(() => mockAnnouncementArticleInfo.announcementList).thenReturn(
         ([AnnouncementArticleItem.empty().copyWith(id: 'fake_id')]),
       );
