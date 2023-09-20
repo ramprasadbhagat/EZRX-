@@ -1,19 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
-import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
-import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
+import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 
 class AnnouncementsTab extends StatefulWidget {
   const AnnouncementsTab({Key? key}) : super(key: key);
@@ -192,7 +192,7 @@ class _AnnouncementItem extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'New'.tr(),
+                    context.tr('New'),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: ZPColors.whiteBgCard,
                         ),

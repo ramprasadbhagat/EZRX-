@@ -1,51 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
-import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/icon_label.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
-import 'package:ezrxmobile/presentation/core/section_tile.dart';
-import 'package:flutter/material.dart';
-
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
-
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-
-import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-
-import 'package:ezrxmobile/locator.dart';
-
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
-
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 
-import 'package:ezrxmobile/presentation/core/icon_label.dart';
-
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-
-import 'package:ezrxmobile/presentation/core/responsive.dart';
-
-part 'widgets/product_offer_body_content.dart';
-part 'widgets/product_title.dart';
-part 'widgets/price_label.dart';
+part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/product_offer_body_content.dart';
+part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/product_title.dart';
+part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/price_label.dart';
 
 class ProductsOnOffer extends StatelessWidget {
   const ProductsOnOffer({Key? key}) : super(key: key);

@@ -12,6 +12,7 @@ class WidgetUtils {
     required AppRouter autoRouterMock,
     required Widget child,
     final bool useMediaQuery = true,
+    final bool usingLocalization = false,
     List<BlocProvider> providers = const <BlocProvider>[],
     String? routeName,
   }) {
@@ -41,11 +42,13 @@ class WidgetUtils {
           child: providers.isNotEmpty
               ? MultiBlocProviderFrameWrapper(
                   useMediaQuery: useMediaQuery,
+                  usingLocalization: usingLocalization,
                   providers: providers,
                   child: child,
                 )
               : MaterialFrameWrapper(
                   useMediaQuery: useMediaQuery,
+                  usingLocalization: usingLocalization,
                   child: child,
                 ),
         ),

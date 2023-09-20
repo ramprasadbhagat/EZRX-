@@ -7,11 +7,13 @@ class MultiBlocProviderFrameWrapper extends StatelessWidget {
   final List<BlocProvider> providers;
   final Widget child;
   final bool useMediaQuery;
+  final bool usingLocalization;
   const MultiBlocProviderFrameWrapper({
     Key? key,
     required this.providers,
     required this.child,
     this.useMediaQuery = true,
+    this.usingLocalization = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class MultiBlocProviderFrameWrapper extends StatelessWidget {
       providers: providers,
       child: MaterialFrameWrapper(
         useMediaQuery: useMediaQuery,
+        usingLocalization: usingLocalization,
         child: child,
       ),
     );

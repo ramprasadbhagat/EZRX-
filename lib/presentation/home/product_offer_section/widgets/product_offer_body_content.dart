@@ -1,4 +1,4 @@
-part of 'package:ezrxmobile/presentation/home/product_offer_section.dart/product_offer_section.dart';
+part of 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
 
 class _ProductOfferBodyContent extends StatelessWidget {
   final BuildContext ctx;

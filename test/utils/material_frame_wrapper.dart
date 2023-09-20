@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -17,22 +18,30 @@ class MaterialFrameWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return usingLocalization
-            ? MaterialApp(
-                theme: appThemeData[AppTheme.light],
+    return usingLocalization
+        ? EasyLocalization(
+            supportedLocales: const [Locale('en')],
+            path: 'assets/langs/langs.csv',
+            startLocale: const Locale('en'),
+            fallbackLocale: const Locale('en'),
+            saveLocale: true,
+            useOnlyLangCode: true,
+            assetLoader: CsvAssetLoader(),
+            child: Sizer(
+              builder: (context, orientation, deviceType) => MaterialApp(
                 localizationsDelegates: context.localizationDelegates,
                 supportedLocales: context.supportedLocales,
                 locale: context.locale,
-                home: _buildHome(),
-              )
-            : MaterialApp(
-                theme: appThemeData[AppTheme.light],
                 home: useMediaQuery ? _buildHome() : child,
-              );
-      },
-    );
+              ),
+            ),
+          )
+        : Sizer(
+            builder: (context, orientation, deviceType) => MaterialApp(
+              theme: appThemeData[AppTheme.light],
+              home: useMediaQuery ? _buildHome() : child,
+            ),
+          );
   }
 
   Widget _buildHome() {

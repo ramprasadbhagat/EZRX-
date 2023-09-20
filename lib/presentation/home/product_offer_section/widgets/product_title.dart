@@ -1,4 +1,4 @@
-part of 'package:ezrxmobile/presentation/home/product_offer_section.dart/product_offer_section.dart';
+part of 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
 
 class _ProductTile extends StatelessWidget {
   final MaterialInfo materialInfo;

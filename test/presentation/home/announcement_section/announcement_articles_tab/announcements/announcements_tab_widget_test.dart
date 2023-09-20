@@ -19,6 +19,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../utils/tester_utils.dart';
 import '../../../../../utils/widget_utils.dart';
 
 class AnnouncementInfoBlocMock
@@ -57,6 +58,7 @@ void main() {
   Widget getAnnouncementListPage() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<AnnouncementInfoBloc>(
           create: (context) => announcementInfoBlocMock,
@@ -115,7 +117,10 @@ void main() {
       testWidgets(
         'Load announcement_tab with no data',
         (tester) async {
-          await tester.pumpWidget(getAnnouncementListPage());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getAnnouncementListPage(),
+            tester: tester,
+          );
           await tester.pump();
           verifyAnnouncementTabPage();
           verifyNoRecordFoundWidget();
@@ -126,7 +131,10 @@ void main() {
         'Load announcement_tab with no data and then pull to refresh',
         (tester) async {
           final handle = tester.ensureSemantics();
-          await tester.pumpWidget(getAnnouncementListPage());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getAnnouncementListPage(),
+            tester: tester,
+          );
           await tester.pump();
           verifyAnnouncementTabPage();
           verifyNoRecordFoundWidget();
@@ -173,7 +181,10 @@ void main() {
             ],
           );
           whenListen(announcementInfoBlocMock, expectedState);
-          await tester.pumpWidget(getAnnouncementListPage());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getAnnouncementListPage(),
+            tester: tester,
+          );
           await tester.pump();
           verifyAnnouncementTabPage();
           final loaderImage = find.byKey(WidgetKeys.loaderImage);
@@ -194,7 +205,10 @@ void main() {
             ],
           );
           whenListen(announcementInfoBlocMock, expectedState);
-          await tester.pumpWidget(getAnnouncementListPage());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getAnnouncementListPage(),
+            tester: tester,
+          );
           await tester.pump();
           verifyAnnouncementTabPage();
           final loaderImage = find.byKey(WidgetKeys.loaderImage);
@@ -219,7 +233,10 @@ void main() {
             ],
           );
           whenListen(announcementInfoBlocMock, expectedState);
-          await tester.pumpWidget(getAnnouncementListPage());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getAnnouncementListPage(),
+            tester: tester,
+          );
           await tester.pump();
           verifyAnnouncementTabPage();
           expect(find.text('BE Error'), findsOneWidget);
@@ -234,7 +251,10 @@ void main() {
               announcementInfo: announcementInfo,
             ),
           );
-          await tester.pumpWidget(getAnnouncementListPage());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getAnnouncementListPage(),
+            tester: tester,
+          );
           await tester.pump();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =
@@ -258,7 +278,10 @@ void main() {
               announcementInfo: announcementInfo,
             ),
           );
-          await tester.pumpWidget(getAnnouncementListPage());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getAnnouncementListPage(),
+            tester: tester,
+          );
           await tester.pump();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =
@@ -307,7 +330,10 @@ void main() {
               announcementInfo: announcementInfo,
             ),
           );
-          await tester.pumpWidget(getAnnouncementListPage());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getAnnouncementListPage(),
+            tester: tester,
+          );
           await tester.pump();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =
@@ -348,7 +374,10 @@ void main() {
               canLoadMore: true,
             ),
           );
-          await tester.pumpWidget(getAnnouncementListPage());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getAnnouncementListPage(),
+            tester: tester,
+          );
           await tester.pump();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =
@@ -390,7 +419,10 @@ void main() {
               announcementInfo: announcementInfo,
             ),
           );
-          await tester.pumpWidget(getAnnouncementListPage());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getAnnouncementListPage(),
+            tester: tester,
+          );
           await tester.pump();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =

@@ -1,4 +1,4 @@
-part of 'package:ezrxmobile/presentation/home/product_offer_section.dart/product_offer_section.dart';
+part of 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
 
 class _PriceLabel extends StatelessWidget {
   final MaterialInfo product;
@@ -27,7 +27,7 @@ class _PriceLabel extends StatelessWidget {
         }
 
         return Text(
-          'Price Not Available'.tr(),
+          context.tr('Price Not Available'),
           style: Theme.of(context).textTheme.labelMedium,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,

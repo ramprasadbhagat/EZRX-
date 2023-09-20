@@ -1,27 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
-
-import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-
-import 'package:ezrxmobile/presentation/core/no_record.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-
-import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
-
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 
 class ArticlesTab extends StatefulWidget {
   const ArticlesTab({Key? key}) : super(key: key);
@@ -80,8 +71,8 @@ class _ArticlesTabState extends State<ArticlesTab> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: ScrollList<AnnouncementArticleItem>(
                     controller: _scrollController,
-                    noRecordFoundWidget: NoRecordFound(
-                      title: 'No articles to show'.tr(),
+                    noRecordFoundWidget: const NoRecordFound(
+                      title: 'No articles to show',
                     ),
                     onRefresh: () {
                       context.read<ArticlesInfoBloc>().add(

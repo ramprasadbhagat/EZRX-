@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 
 class QuickAccessMenuPanel extends StatelessWidget {
   const QuickAccessMenuPanel({Key? key}) : super(key: key);
@@ -75,11 +75,11 @@ class _QuickAccessMenu extends StatelessWidget {
                   horizontal: 10.0,
                 ),
                 child: Text(
-                  quickAccessMenuData.label,
+                  context.tr(quickAccessMenuData.label),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: ZPColors.darkTeal,
                       ),
-                ).tr(),
+                ),
               ),
             ),
           ),

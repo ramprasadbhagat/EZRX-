@@ -1,22 +1,21 @@
+import 'package:flutter/material.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
+import 'package:ezrxmobile/presentation/core/icon_label.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/core/section_tile.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/icon_label.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/responsive.dart';
-import 'package:ezrxmobile/presentation/core/section_tile.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class BundleSection extends StatelessWidget {
   const BundleSection({
@@ -133,7 +132,7 @@ class _BundleSectionItem extends StatelessWidget {
                   IconLabel(
                     icon: Icons.discount_outlined,
                     iconSize: 12,
-                    labelText: 'Bundle offer'.tr(),
+                    labelText: context.tr('Bundle offer'),
                     labelStyle: Theme.of(context)
                         .textTheme
                         .bodySmall
@@ -197,7 +196,7 @@ class _BundleSectionItem extends StatelessWidget {
                       bottom: 10,
                     ),
                     child: Text(
-                      '+ ${materialInfo.listingVisibleMaterial.skip(2).length} materials',
+                      '+ ${materialInfo.listingVisibleMaterial.skip(2).length} ${context.tr('materials')}',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: ZPColors.darkerGrey,
                           ),

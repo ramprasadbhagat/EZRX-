@@ -17,6 +17,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class CustomerCodeBlocMock
@@ -86,10 +87,10 @@ void main() {
       );
     });
 
-    Future getWidget(tester) async {
-      return await tester.pumpWidget(
+    Widget getWidget({usingLocalization = false}) =>
         WidgetUtils.getScopedWidget(
           autoRouterMock: locator<AppRouter>(),
+          usingLocalization: usingLocalization,
           child: MultiBlocProvider(
             providers: [
               BlocProvider<CustomerCodeBloc>(
@@ -102,9 +103,7 @@ void main() {
               ),
             ),
           ),
-        ),
-      );
-    }
+        );
 
     testWidgets('When customerCodeInfo is empty', (tester) async {
       when(() => mockCustomerCodeBloc.state).thenReturn(
@@ -113,7 +112,11 @@ void main() {
           customerCodeList: [CustomerCodeInfo.empty()],
         ),
       );
-      await getWidget(tester);
+      await TesterUtils.setUpLocalizationWrapper(
+        widget: getWidget(usingLocalization: true),
+        tester: tester,
+      );
+      await tester.pump();
       final selectedCustomerCodeText = find.text('NA');
       expect(selectedCustomerCodeText, findsNWidgets(2));
     });
@@ -126,8 +129,7 @@ void main() {
           shipToInfo: fakeCustomerInfo.shipToInfos.first,
         ),
       );
-
-      await getWidget(tester);
+      await tester.pumpWidget(getWidget());
       final selectedCustomerCodeText =
           find.text(fakeCustomerInfo.shipToInfos.first.shipToCustomerCode);
       expect(selectedCustomerCodeText, findsOneWidget);
@@ -136,7 +138,7 @@ void main() {
     testWidgets('When customerCodeInfo is getting fetched', (tester) async {
       when(() => mockCustomerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial());
-      await getWidget(tester);
+      await tester.pumpWidget(getWidget());
       final shimmer = find.byType(Shimmer);
       expect(shimmer, findsNWidgets(2));
     });
@@ -163,7 +165,7 @@ void main() {
         Stream.fromIterable(expectedCustomerCodeListStates),
       );
 
-      await getWidget(tester);
+      await tester.pumpWidget(getWidget());
       final selectedCustomerCodeText = find.text('00001234');
       expect(selectedCustomerCodeText, findsNothing);
     });
@@ -186,7 +188,7 @@ void main() {
         Stream.fromIterable(expectedCustomerCodeListStates),
       );
 
-      await getWidget(tester);
+      await tester.pumpWidget(getWidget());
 
       await tester.pumpAndSettle(const Duration(seconds: 3));
 
@@ -219,7 +221,7 @@ void main() {
         Stream.fromIterable(expectedCustomerCodeListStates),
       );
 
-      await getWidget(tester);
+      await tester.pumpWidget(getWidget());
 
       await tester.pumpAndSettle(const Duration(seconds: 3));
 
@@ -246,7 +248,10 @@ void main() {
         ),
       );
 
-      await getWidget(tester);
+      await TesterUtils.setUpLocalizationWrapper(
+        widget: getWidget(usingLocalization: true),
+        tester: tester,
+      );
       await tester.pump();
 
       final deliveryAddress = find.text(
