@@ -1,6 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -149,44 +147,34 @@ void main() {
     });
 
     Widget getScopedWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          BlocProvider<ViewByOrderBloc>(
+            create: (context) => mockViewByOrderBloc,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<ViewByOrderDetailsBloc>(
+            create: (context) => mockViewByOrderDetailsBloc,
+          ),
+          BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
+          BlocProvider<EligibilityBloc>(
+            create: ((context) => eligibilityBlocMock),
+          ),
+          BlocProvider<CartBloc>(
+            create: ((context) => cartBlocMock),
+          ),
+          BlocProvider<ReOrderPermissionBloc>(
+            create: ((context) => reOrderPermissionBlocMock),
+          ),
         ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<ViewByOrderBloc>(
-              create: (context) => mockViewByOrderBloc,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<ViewByOrderDetailsBloc>(
-              create: (context) => mockViewByOrderDetailsBloc,
-            ),
-            BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
-            BlocProvider<EligibilityBloc>(
-              create: ((context) => eligibilityBlocMock),
-            ),
-            BlocProvider<CartBloc>(
-              create: ((context) => cartBlocMock),
-            ),
-            BlocProvider<ReOrderPermissionBloc>(
-              create: ((context) => reOrderPermissionBlocMock),
-            ),
-          ],
-          child: Material(
-            child: ViewByOrdersPage(
-              orderHistoryItem: fakeOrderHistoryItem,
-            ),
+        child: Material(
+          child: ViewByOrdersPage(
+            orderHistoryItem: fakeOrderHistoryItem,
           ),
         ),
       );

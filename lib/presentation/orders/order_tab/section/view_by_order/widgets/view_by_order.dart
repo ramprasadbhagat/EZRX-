@@ -35,7 +35,7 @@ class _ViewByOrder extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${'Order'.tr()} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+              '${context.tr('Order')} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
               style: Theme.of(context).textTheme.labelSmall,
             ),
             Padding(
@@ -44,7 +44,7 @@ class _ViewByOrder extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${viewByOrderHistoryItem.itemCount} ${'items'.tr()}',
+                    '${viewByOrderHistoryItem.itemCount} ${context.tr('items')}',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   PriceComponent(

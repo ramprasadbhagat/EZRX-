@@ -25,7 +25,7 @@ class OrderStatusSection extends StatelessWidget {
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(16.0, 16.0, 0, 0),
             title: Text(
-              'Order Status'.tr(),
+              context.tr('Order Status'),
               style: Theme.of(context)
                   .textTheme
                   .labelLarge
@@ -37,7 +37,7 @@ class OrderStatusSection extends StatelessWidget {
                     .salesOrgConfigs
                     .disableDeliveryDate
                 ? Text(
-                    '${'Expected delivery'.tr()}: ${orderHistoryItem.deliveryDate.dateString}',
+                    '${context.tr('Expected delivery')}: ${orderHistoryItem.deliveryDate.dateString}',
                     style: Theme.of(context).textTheme.bodyMedium,
                   )
                 : const SizedBox.shrink(),
@@ -67,7 +67,7 @@ class _CloseButton extends StatelessWidget {
           Navigator.of(context).pop();
         },
         child: Text(
-          'Close'.tr(),
+          context.tr('Close'),
           style: const TextStyle(color: ZPColors.white),
         ),
       ),

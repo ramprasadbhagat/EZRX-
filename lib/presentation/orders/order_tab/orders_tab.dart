@@ -28,9 +28,9 @@ class OrdersTab extends StatelessWidget {
       appBar: AppBar(
         key: WidgetKeys.ordersTab,
         title: Text(
-          'Orders',
+          context.tr('Orders'),
           style: Theme.of(context).textTheme.labelLarge,
-        ).tr(),
+        ),
         automaticallyImplyLeading: false,
         centerTitle: false,
         actions: [
@@ -70,7 +70,7 @@ class OrdersTab extends StatelessWidget {
                         .map(
                           (e) => Tab(
                             key: Key(e.toLowerCase()),
-                            text: e.tr(),
+                            text: context.tr(e),
                           ),
                         )
                         .toList(),

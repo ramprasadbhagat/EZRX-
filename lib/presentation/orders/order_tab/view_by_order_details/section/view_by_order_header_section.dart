@@ -32,7 +32,7 @@ class OrderHeaderSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${'Order'.tr()} #${orderDetails.orderNumber.getOrDefaultValue('')}',
+                '${context.tr('Order')} #${orderDetails.orderNumber.getOrDefaultValue('')}',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -41,7 +41,7 @@ class OrderHeaderSection extends StatelessWidget {
                 height: 10,
               ),
               BalanceTextRow(
-                keyText: 'Order date'.tr(),
+                keyText: context.tr('Order date'),
                 valueText: orderDetails.createdDate.dateString,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
@@ -52,7 +52,7 @@ class OrderHeaderSection extends StatelessWidget {
                         ),
               ),
               BalanceTextRow(
-                keyText: 'PO reference'.tr(),
+                keyText: context.tr('PO reference'),
                 valueText: orderDetails.pOReference.displayPOReference,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
@@ -64,7 +64,7 @@ class OrderHeaderSection extends StatelessWidget {
               ),
               if (config.enableFutureDeliveryDay)
                 BalanceTextRow(
-                  keyText: 'Requested Delivery Date'.tr(),
+                  keyText: context.tr('Requested Delivery Date'),
                   valueText: orderDetails.requestedDeliveryDate.dateString,
                   keyTextStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -77,7 +77,7 @@ class OrderHeaderSection extends StatelessWidget {
                 ),
               if (config.enableReferenceNote)
                 BalanceTextRow(
-                  keyText: 'Reference Note'.tr(),
+                  keyText: context.tr('Reference Note'),
                   valueText: orderDetails.referenceNotes,
                   keyTextStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -91,7 +91,7 @@ class OrderHeaderSection extends StatelessWidget {
               if (!config.disablePaymentTermsDisplay)
                 BalanceTextRow(
                   key: WidgetKeys.paymentTermKey,
-                  keyText: 'Payment Term'.tr(),
+                  keyText: context.tr('Payment Term'),
                   valueText: orderDetails
                       .orderHistoryDetailsPaymentTerm.displayPaymentTerm,
                   keyTextStyle:
@@ -105,7 +105,7 @@ class OrderHeaderSection extends StatelessWidget {
                 ),
               if (config.enableMobileNumber)
                 BalanceTextRow(
-                  keyText: 'Contact person'.tr(),
+                  keyText: context.tr('Contact person'),
                   valueText: orderDetails.orderBy,
                   keyTextStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -118,7 +118,7 @@ class OrderHeaderSection extends StatelessWidget {
                 ),
               if (config.enableMobileNumber)
                 BalanceTextRow(
-                  keyText: 'Contact number'.tr(),
+                  keyText: context.tr('Contact number'),
                   valueText:
                       orderDetails.telephoneNumber.displayTelephoneNumber,
                   keyTextStyle:
@@ -132,7 +132,7 @@ class OrderHeaderSection extends StatelessWidget {
                 ),
               if (config.enableSpecialInstructions)
                 BalanceTextRow(
-                  keyText: 'Delivery instructions'.tr(),
+                  keyText: context.tr('Delivery instructions'),
                   valueText: orderDetails.orderHistoryDetailsSpecialInstructions
                       .displaySpecialInstructions,
                   keyTextStyle:

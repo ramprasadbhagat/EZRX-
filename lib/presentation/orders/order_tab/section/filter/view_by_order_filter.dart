@@ -39,9 +39,9 @@ class _ViewByOrderFilterBottomSheetState
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           AppBar(
-            title: const Text(
-              'Filter',
-            ).tr(),
+            title: Text(
+              context.tr('Filter'),
+            ),
             backgroundColor: ZPColors.transparent,
             automaticallyImplyLeading: false,
             centerTitle: false,
@@ -68,9 +68,9 @@ class _ViewByOrderFilterBottomSheetState
                 Padding(
                   padding: const EdgeInsets.only(bottom: 12.0),
                   child: Text(
-                    'Order Date',
+                    context.tr('Order Date'),
                     style: Theme.of(context).textTheme.labelSmall,
-                  ).tr(),
+                  ),
                 ),
                 Row(
                   children: [

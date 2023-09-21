@@ -10,10 +10,10 @@ class _ResetButton extends StatelessWidget {
         onPressed: () => Navigator.of(context).pop(
           ViewByOrdersFilter.empty(),
         ),
-        child: const Text(
-          'Reset',
-          style: TextStyle(color: ZPColors.primary),
-        ).tr(),
+        child: Text(
+          context.tr('Reset'),
+          style: const TextStyle(color: ZPColors.primary),
+        ),
       ),
     );
   }

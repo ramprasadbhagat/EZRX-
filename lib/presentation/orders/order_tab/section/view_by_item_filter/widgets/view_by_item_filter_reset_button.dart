@@ -16,7 +16,7 @@ class _ViewByItemFilterResetButton extends StatelessWidget {
         );
       },
       child: Text(
-        'Reset'.tr(),
+        context.tr('Reset'),
         style: const TextStyle(color: ZPColors.primary),
       ),
     );

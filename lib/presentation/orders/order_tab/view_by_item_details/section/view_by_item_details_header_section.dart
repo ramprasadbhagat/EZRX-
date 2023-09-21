@@ -32,7 +32,7 @@ class ItemHeaderSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${'Order'.tr()} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+                '${context.tr('Order')} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
                 key: WidgetKeys.viewByItemsOrderDetailOrderCode,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.white,
@@ -43,7 +43,7 @@ class ItemHeaderSection extends StatelessWidget {
               ),
               BalanceTextRow(
                 key: WidgetKeys.viewByItemsOrderDetailOrderDate,
-                keyText: 'Order date'.tr(),
+                keyText: context.tr('Order date'),
                 valueText: orderHistoryItem.createdDate.dateString,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
@@ -55,7 +55,7 @@ class ItemHeaderSection extends StatelessWidget {
               ),
               BalanceTextRow(
                 key: WidgetKeys.viewByItemsOrderDetailInvoiceNumber,
-                keyText: 'Invoice number'.tr(),
+                keyText: context.tr('Invoice number'),
                 valueText: orderHistoryItem.invoiceNumber,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
@@ -67,7 +67,7 @@ class ItemHeaderSection extends StatelessWidget {
               ),
               BalanceTextRow(
                 key: WidgetKeys.viewByItemsOrderDetailPoReference,
-                keyText: 'PO reference'.tr(),
+                keyText: context.tr('PO reference'),
                 valueText: orderHistoryItem.pOReference.displayPOReference,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
@@ -79,7 +79,7 @@ class ItemHeaderSection extends StatelessWidget {
               ),
               config.enableFutureDeliveryDay
                   ? BalanceTextRow(
-                      keyText: 'Requested Delivery Date'.tr(),
+                      keyText: context.tr('Requested Delivery Date'),
                       valueText:
                           orderHistoryItem.requestedDeliveryDate.dateString,
                       keyTextStyle:
@@ -105,7 +105,7 @@ class ItemHeaderSection extends StatelessWidget {
               // ): const SizedBox.shrink(),
               config.enableMobileNumber
                   ? BalanceTextRow(
-                      keyText: 'Contact person'.tr(),
+                      keyText: context.tr('Contact person'),
                       valueText: orderHistoryItem.orderBy,
                       keyTextStyle:
                           Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -119,7 +119,7 @@ class ItemHeaderSection extends StatelessWidget {
                   : const SizedBox.shrink(),
               config.enableMobileNumber
                   ? BalanceTextRow(
-                      keyText: 'Contact number'.tr(),
+                      keyText: context.tr('Contact number'),
                       valueText: orderHistoryItem
                           .telephoneNumber.displayTelephoneNumber,
                       keyTextStyle:
@@ -134,7 +134,7 @@ class ItemHeaderSection extends StatelessWidget {
                   : const SizedBox.shrink(),
               if (config.enableSpecialInstructions)
                 BalanceTextRow(
-                  keyText: 'Delivery instructions'.tr(),
+                  keyText: context.tr('Delivery instructions'),
                   valueText: orderHistoryItem
                       .specialInstructions.displaySpecialInstructions,
                   valueTextStyle:

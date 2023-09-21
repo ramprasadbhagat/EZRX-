@@ -21,7 +21,7 @@ class AttachmentSection extends StatelessWidget {
       builder: (context, state) {
         if (!state.orderHistoryDetails.poDocumentsAvailable) {
           return BalanceTextRow(
-            keyText: 'Attachments',
+            keyText: context.tr('Attachments'),
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
                 ),
@@ -38,7 +38,7 @@ class AttachmentSection extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Text(
-                'Attachments'.tr(),
+                context.tr('Attachments'),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -95,7 +95,7 @@ class _AttachmentsWithIcon extends StatelessWidget {
           () {
             if (state.isDownloadOperation) {
               CustomSnackBar(
-                messageText: 'The attachments downloaded successfully.'.tr(),
+                messageText: 'The attachments downloaded successfully.',
               ).show(context);
             }
           },
@@ -164,8 +164,8 @@ class _AttachmentsWithIcon extends StatelessWidget {
                               children: [
                                 Text(
                                   state.isExpanded
-                                      ? 'Show less'.tr()
-                                      : 'Show more'.tr(),
+                                      ? context.tr('Show less')
+                                      : context.tr('Show more'),
                                   style: Theme.of(context)
                                       .textTheme
                                       .labelMedium

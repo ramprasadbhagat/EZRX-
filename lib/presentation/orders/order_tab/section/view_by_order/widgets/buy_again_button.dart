@@ -100,7 +100,7 @@ class _BuyAgainButton extends StatelessWidget {
                     state.isFetchingList ||
                     stateCart.isUpserting,
                 child: Text(
-                  'Buy again'.tr(),
+                  context.tr('Buy again'),
                 ),
               ),
             );

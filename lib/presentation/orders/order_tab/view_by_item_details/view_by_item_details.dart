@@ -31,7 +31,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Item Details'.tr()),
+        title: Text(context.tr('Item Details')),
         centerTitle: false,
       ),
       bottomNavigationBar: (viewByItemDetailsState
@@ -49,7 +49,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'Buy again'.tr(),
+                    context.tr('Buy again'),
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium
@@ -87,7 +87,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
                       ),
                       StatusTrackerSection(
                         createDateTime: state.orderHistoryItem.createdDate,
-                        title: 'Order status'.tr(),
+                        title: context.tr('Order status'),
                         status:
                             state.orderHistoryItem.status.displayOrderStatus,
                         onTap: () {

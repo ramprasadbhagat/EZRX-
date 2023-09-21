@@ -8,7 +8,7 @@ class _ViewByItemFilterAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('Filter'.tr()),
+      title: Text(context.tr('Filter')),
       automaticallyImplyLeading: false,
       centerTitle: false,
       elevation: 0,

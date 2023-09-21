@@ -32,7 +32,7 @@ class ViewByItemFilterSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Order date'.tr(),
+                  context.tr('Order date'),
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                         color: ZPColors.neutralsBlack,
                       ),
@@ -41,7 +41,7 @@ class ViewByItemFilterSheet extends StatelessWidget {
                 const _ViewByItemFilterDateRangePicker(),
                 const SizedBox(height: 20),
                 Text(
-                  'Status'.tr(),
+                  context.tr('Status'),
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
                 const SizedBox(height: 12),

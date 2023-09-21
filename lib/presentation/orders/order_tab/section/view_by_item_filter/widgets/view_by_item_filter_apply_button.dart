@@ -13,7 +13,7 @@ class _ViewByItemFilterApplyButton extends StatelessWidget {
         );
       },
       child: Text(
-        'Apply'.tr(),
+        context.tr('Apply'),
         style: const TextStyle(color: ZPColors.white),
       ),
     );

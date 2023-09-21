@@ -19,8 +19,8 @@ class _ViewByOrderItemGroup extends StatelessWidget {
       children: [
         if (showBanner)
           InfoLabel(
-            textValue:
-                'Order history is limited to the last 6 months from today'.tr(),
+            textValue: context
+                .tr('Order history is limited to the last 6 months from today'),
             mainColor: ZPColors.blueAccent,
             margin: const EdgeInsets.symmetric(horizontal: 20.0)
                 .copyWith(top: 16.0),
@@ -40,7 +40,7 @@ class _ViewByOrderItemGroup extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
-                  '${'Ordered on'.tr()} ${orderHistoryItem.createdDate.dateString}',
+                  '${context.tr('Ordered on')} ${orderHistoryItem.createdDate.dateString}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkerGrey,
                       ),

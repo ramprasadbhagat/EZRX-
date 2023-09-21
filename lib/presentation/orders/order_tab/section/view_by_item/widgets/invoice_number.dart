@@ -16,7 +16,7 @@ class _InvoiceNumber extends StatelessWidget {
           endIndent: 0,
         ),
         Text(
-          '${'Invoice'.tr()} #${orderHistoryItem.invoiceNumber}',
+          '${context.tr('Invoice')} #${orderHistoryItem.invoiceNumber}',
           style: Theme.of(context).textTheme.labelSmall,
         ),
       ],

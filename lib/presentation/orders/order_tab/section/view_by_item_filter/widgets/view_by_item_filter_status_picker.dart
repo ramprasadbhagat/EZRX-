@@ -11,7 +11,7 @@ class _ViewByItemFilterStatusPicker extends StatelessWidget {
       builder: (context, state) => Column(
         children: state.statusList.map(
           (StatusType status) {
-            final name = status.getOrDefaultValue('');
+            final name = context.tr(status.getOrDefaultValue(''));
             final value = state.filter.orderStatusList.contains(status);
 
             return CheckboxListTile(

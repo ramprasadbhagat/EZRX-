@@ -240,7 +240,7 @@ class _PriceLabel extends StatelessWidget {
         }
 
         return Text(
-          'Price Not Available'.tr(),
+          context.tr('Price Not Available'),
           style: Theme.of(context).textTheme.labelMedium,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,

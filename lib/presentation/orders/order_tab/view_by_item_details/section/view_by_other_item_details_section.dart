@@ -33,7 +33,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                 child: custom.ExpansionTile(
                   initiallyExpanded: true,
                   title: Text(
-                    'Other items in this order'.tr(),
+                    context.tr('Other items in this order'),
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   children: [
@@ -88,7 +88,7 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                 isQuantityBelowImage: false,
                                                 statusTag: e.productTag,
                                                 headerText:
-                                                    '${'Order'.tr()} #${e.orderNumber.getOrDefaultValue('')}',
+                                                    '${context.tr('Order')} #${e.orderNumber.getOrDefaultValue('')}',
                                                 subtitle: '',
                                               ),
                                             )

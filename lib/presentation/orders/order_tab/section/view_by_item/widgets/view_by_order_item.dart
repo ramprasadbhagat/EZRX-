@@ -43,11 +43,11 @@ class _ViewByOrderItem extends StatelessWidget {
         subtitle: orderHistoryItem.manufactureName,
         isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
         headerText:
-            '${'Order'.tr()} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
+            '${context.tr('Order')} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
         statusWidget: StatusLabel(
           key: WidgetKeys.orderItemStatusKey,
           status: StatusType(
-            orderHistoryItem.status.displayOrderStatus,
+            context.tr(orderHistoryItem.status.displayOrderStatus),
           ),
         ),
         quantity: orderHistoryItem.qty.toString(),

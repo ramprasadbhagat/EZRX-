@@ -21,7 +21,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ViewByOrderDetailsPage extends StatelessWidget {
-
   const ViewByOrderDetailsPage({
     Key? key,
   }) : super(key: key);
@@ -30,7 +29,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order Details'.tr()),
+        title: Text(context.tr('Order Details')),
         centerTitle: false,
       ),
       body: AnnouncementBanner(
@@ -176,7 +175,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                                   state.isFetchingList ||
                                   stateCart.isUpserting,
                               child: Text(
-                                'Buy again'.tr(),
+                                context.tr('Buy again'),
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelMedium

@@ -34,20 +34,20 @@ class OrderSummarySection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Order Summary',
+            context.tr('Order Summary'),
             style: Theme.of(context).textTheme.labelMedium,
           ),
           const SizedBox(
             height: 10,
           ),
           BalanceTextRow(
-            keyText: 'Subtotal (excl. tax)',
+            keyText: context.tr('Subtotal (excl. tax)'),
             valueText: orderDetails.orderNumber.isValid()
                 ? StringUtils.displayPrice(
                     salesOrgConfigs,
                     orderDetails.orderValue,
                   )
-                : 'NA'.tr(),
+                : context.tr('NA'),
           ),
           /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web
           keyText: 'Tax at x%',
@@ -69,7 +69,7 @@ class OrderSummarySection extends StatelessWidget {
             color: ZPColors.lightGray2,
           ),
           BalanceTextRow(
-            keyText: 'Grand total',
+            keyText: context.tr('Grand total'),
             valueText: orderDetails.orderNumber.isValid()
                 ? StringUtils.displayPrice(
                     context.read<SalesOrgBloc>().state.configs,
@@ -77,7 +77,7 @@ class OrderSummarySection extends StatelessWidget {
                         ? orderDetails.grandTotal
                         : orderDetails.orderValue,
                   )
-                : 'NA'.tr(),
+                : context.tr('NA'),
           ),
           // const BalanceTextRow(
           //   keyText: 'Total savings', // TODO: after getting information will enhance and allign with web

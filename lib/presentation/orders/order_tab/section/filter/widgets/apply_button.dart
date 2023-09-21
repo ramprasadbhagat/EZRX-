@@ -10,10 +10,10 @@ class _ApplyButton extends StatelessWidget {
         onPressed: () => Navigator.of(context).pop(
           context.read<ViewByOrderFilterBloc>().state.filter,
         ),
-        child: const Text(
-          'Apply',
-          style: TextStyle(color: ZPColors.white),
-        ).tr(),
+        child: Text(
+          context.tr('Apply'),
+          style: const TextStyle(color: ZPColors.white),
+        ),
       ),
     );
   }

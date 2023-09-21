@@ -62,7 +62,7 @@ class ViewByItemsPage extends StatelessWidget {
                 ),
               ),
               onPressed: () => context.navigateTo(const ProductsTabRoute()),
-              child: const Text('Start browsing').tr(),
+              child: Text(context.tr('Start browsing')),
             ),
           ),
           onRefresh: () {
