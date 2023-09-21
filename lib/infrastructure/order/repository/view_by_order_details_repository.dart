@@ -6,8 +6,8 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_history_details_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 
@@ -23,7 +23,7 @@ class ViewByOrderDetailsRepository implements IViewByOrderDetailsRepository {
   @override
   Future<Either<ApiFailure, OrderHistoryDetails>> getViewByOrderDetails({
     required User user,
-    required OrderHistoryDetailsOrderHeader orderHeader,
+    required OrderNumber orderNumber,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
   }) async {
@@ -39,7 +39,7 @@ class ViewByOrderDetailsRepository implements IViewByOrderDetailsRepository {
     try {
       final orderHistoryDetailsList =
           await orderHistoryDetailsRemoteDataSource.getOrderHistoryDetails(
-        searchKey: orderHeader.orderNumber.getOrCrash(),
+        searchKey: orderNumber.getOrCrash(),
         language: user.preferredLanguage.languageCode,
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         soldTo: customerCodeInfo.customerCodeSoldTo,

@@ -48,27 +48,11 @@ class _ViewByOrderGroup extends StatelessWidget {
                       ),
                 ),
               ),
-              Column(
-                children: viewByOrdersItem.orderHeaders
-                    .map(
-                      (e) => MultiBlocProvider(
-                        providers: [
-                          BlocProvider(
-                            create: (context) =>
-                                locator<ViewByOrderDetailsBloc>(),
-                          ),
-                          BlocProvider(
-                            create: (context) =>
-                                locator<ReOrderPermissionBloc>(),
-                          ),
-                        ],
-                        child: _ViewByOrder(
-                          viewByOrderHistoryItem: e,
-                          orderHistoryItem: orderHistoryItem,
-                        ),
-                      ),
-                    )
-                    .toList(),
+              ...viewByOrdersItem.orderHeaders.map(
+                (e) => _ViewByOrder(
+                  viewByOrderHistoryItem: e,
+                  orderHistoryItem: orderHistoryItem,
+                ),
               ),
             ],
           ),

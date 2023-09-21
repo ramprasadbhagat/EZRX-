@@ -64,13 +64,21 @@ Color getIconColor(
 }
 
 String detailPageRoute(String val) {
-  final map = {
-    'ReturnRequestReminder': 'returns/return_summary_details_v3',
-    'ReturnRequestCreatedForApprover': 'returns/return_summary_details_v3',
-  };
-
-  return map[val] ?? '';
+  switch (val) {
+    case 'ReturnRequestCreated':
+    case 'ReturnRequestReminder':
+    case 'ReturnRequestCreatedForApprover':
+      return 'returns/return_summary_details_v3';
+    case 'OrderCreated':
+      return 'orders/view_by_order_details_page';
+    default:
+      return '';
+  }
 }
 
 bool isReturnDetailPage(String val) =>
-    val == 'ReturnRequestReminder' || val == 'ReturnRequestCreatedForApprover';
+    val == 'ReturnRequestReminder' ||
+    val == 'ReturnRequestCreatedForApprover' ||
+    val == 'ReturnRequestCreated';
+
+bool isOrderDetailPage(String val) => val == 'OrderCreated';

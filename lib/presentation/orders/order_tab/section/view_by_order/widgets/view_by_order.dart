@@ -18,11 +18,17 @@ class _ViewByOrder extends StatelessWidget {
     return CustomCard(
       child: ListTile(
         onTap: () {
-          context.router.push(
-            ViewByOrderDetailsPageRoute(
-              viewByOrderHistoryItem: viewByOrderHistoryItem,
-            ),
-          );
+          context.read<ViewByOrderDetailsBloc>().add(
+                ViewByOrderDetailsEvent.fetch(
+                  user: context.read<UserBloc>().state.user,
+                  orderNumber: viewByOrderHistoryItem.orderNumber,
+                  customerCodeInfo:
+                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                  salesOrganisation:
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                ),
+              );
+          context.router.push(const ViewByOrderDetailsPageRoute(),);
         },
         contentPadding: const EdgeInsets.all(10),
         title: Column(
@@ -53,8 +59,18 @@ class _ViewByOrder extends StatelessWidget {
                 ],
               ),
             ),
-            _BuyAgainButton(
-              viewByOrderHistoryItem: viewByOrderHistoryItem,
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => locator<ViewByOrderDetailsBloc>(),
+                ),
+                BlocProvider(
+                  create: (context) => locator<ReOrderPermissionBloc>(),
+                ),
+              ],
+              child: _BuyAgainButton(
+                          viewByOrderHistoryItem: viewByOrderHistoryItem,
+                        ),
             ),
           ],
         ),

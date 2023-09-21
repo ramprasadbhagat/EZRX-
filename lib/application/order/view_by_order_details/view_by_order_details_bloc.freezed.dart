@@ -21,7 +21,7 @@ mixin _$ViewByOrderDetailsEvent {
     required TResult Function() initialized,
     required TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)
         fetch,
@@ -44,7 +44,7 @@ mixin _$ViewByOrderDetailsEvent {
     TResult? Function()? initialized,
     TResult? Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -67,7 +67,7 @@ mixin _$ViewByOrderDetailsEvent {
     TResult Function()? initialized,
     TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -179,7 +179,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function() initialized,
     required TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)
         fetch,
@@ -205,7 +205,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function()? initialized,
     TResult? Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -231,7 +231,7 @@ class _$_Initialized implements _Initialized {
     TResult Function()? initialized,
     TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -310,12 +310,11 @@ abstract class _$$_FetchCopyWith<$Res> {
   @useResult
   $Res call(
       {User user,
-      OrderHistoryDetailsOrderHeader orderHeader,
+      OrderNumber orderNumber,
       CustomerCodeInfo customerCodeInfo,
       SalesOrganisation salesOrganisation});
 
   $UserCopyWith<$Res> get user;
-  $OrderHistoryDetailsOrderHeaderCopyWith<$Res> get orderHeader;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
@@ -331,7 +330,7 @@ class __$$_FetchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
-    Object? orderHeader = null,
+    Object? orderNumber = null,
     Object? customerCodeInfo = null,
     Object? salesOrganisation = null,
   }) {
@@ -340,10 +339,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      orderHeader: null == orderHeader
-          ? _value.orderHeader
-          : orderHeader // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsOrderHeader,
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as OrderNumber,
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -360,15 +359,6 @@ class __$$_FetchCopyWithImpl<$Res>
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $OrderHistoryDetailsOrderHeaderCopyWith<$Res> get orderHeader {
-    return $OrderHistoryDetailsOrderHeaderCopyWith<$Res>(_value.orderHeader,
-        (value) {
-      return _then(_value.copyWith(orderHeader: value));
     });
   }
 
@@ -394,14 +384,14 @@ class __$$_FetchCopyWithImpl<$Res>
 class _$_Fetch implements _Fetch {
   const _$_Fetch(
       {required this.user,
-      required this.orderHeader,
+      required this.orderNumber,
       required this.customerCodeInfo,
       required this.salesOrganisation});
 
   @override
   final User user;
   @override
-  final OrderHistoryDetailsOrderHeader orderHeader;
+  final OrderNumber orderNumber;
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
@@ -409,7 +399,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'ViewByOrderDetailsEvent.fetch(user: $user, orderHeader: $orderHeader, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation)';
+    return 'ViewByOrderDetailsEvent.fetch(user: $user, orderNumber: $orderNumber, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation)';
   }
 
   @override
@@ -418,8 +408,8 @@ class _$_Fetch implements _Fetch {
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.orderHeader, orderHeader) ||
-                other.orderHeader == orderHeader) &&
+            (identical(other.orderNumber, orderNumber) ||
+                other.orderNumber == orderNumber) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -428,7 +418,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, user, orderHeader, customerCodeInfo, salesOrganisation);
+      runtimeType, user, orderNumber, customerCodeInfo, salesOrganisation);
 
   @JsonKey(ignore: true)
   @override
@@ -442,7 +432,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)
         fetch,
@@ -459,7 +449,7 @@ class _$_Fetch implements _Fetch {
             Locale locale)
         fetchDetailItemList,
   }) {
-    return fetch(user, orderHeader, customerCodeInfo, salesOrganisation);
+    return fetch(user, orderNumber, customerCodeInfo, salesOrganisation);
   }
 
   @override
@@ -468,7 +458,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -485,7 +475,7 @@ class _$_Fetch implements _Fetch {
             Locale locale)?
         fetchDetailItemList,
   }) {
-    return fetch?.call(user, orderHeader, customerCodeInfo, salesOrganisation);
+    return fetch?.call(user, orderNumber, customerCodeInfo, salesOrganisation);
   }
 
   @override
@@ -494,7 +484,7 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -513,7 +503,7 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(user, orderHeader, customerCodeInfo, salesOrganisation);
+      return fetch(user, orderNumber, customerCodeInfo, salesOrganisation);
     }
     return orElse();
   }
@@ -565,12 +555,12 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements ViewByOrderDetailsEvent {
   const factory _Fetch(
       {required final User user,
-      required final OrderHistoryDetailsOrderHeader orderHeader,
+      required final OrderNumber orderNumber,
       required final CustomerCodeInfo customerCodeInfo,
       required final SalesOrganisation salesOrganisation}) = _$_Fetch;
 
   User get user;
-  OrderHistoryDetailsOrderHeader get orderHeader;
+  OrderNumber get orderNumber;
   CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
@@ -682,7 +672,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
     required TResult Function() initialized,
     required TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)
         fetch,
@@ -708,7 +698,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
     TResult? Function()? initialized,
     TResult? Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -735,7 +725,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
     TResult Function()? initialized,
     TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -858,7 +848,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
     required TResult Function() initialized,
     required TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)
         fetch,
@@ -884,7 +874,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
     TResult? Function()? initialized,
     TResult? Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -910,7 +900,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
     TResult Function()? initialized,
     TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -1142,7 +1132,7 @@ class _$_FetchDetailItemList implements _FetchDetailItemList {
     required TResult Function() initialized,
     required TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)
         fetch,
@@ -1169,7 +1159,7 @@ class _$_FetchDetailItemList implements _FetchDetailItemList {
     TResult? Function()? initialized,
     TResult? Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,
@@ -1196,7 +1186,7 @@ class _$_FetchDetailItemList implements _FetchDetailItemList {
     TResult Function()? initialized,
     TResult Function(
             User user,
-            OrderHistoryDetailsOrderHeader orderHeader,
+            OrderNumber orderNumber,
             CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
         fetch,

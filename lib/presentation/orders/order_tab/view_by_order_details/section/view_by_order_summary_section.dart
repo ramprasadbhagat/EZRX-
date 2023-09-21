@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -9,10 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderSummarySection extends StatelessWidget {
-  final OrderHistoryDetailsOrderHeader viewByOrdersItem;
-
-  const OrderSummarySection({Key? key, required this.viewByOrdersItem})
-      : super(key: key);
+  const OrderSummarySection({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +42,12 @@ class OrderSummarySection extends StatelessWidget {
           ),
           BalanceTextRow(
             keyText: 'Subtotal (excl. tax)',
-            valueText: StringUtils.displayPrice(
-              salesOrgConfigs,
-              viewByOrdersItem.orderValue,
-            ),
+            valueText: orderDetails.orderNumber.isValid()
+                ? StringUtils.displayPrice(
+                    salesOrgConfigs,
+                    orderDetails.orderValue,
+                  )
+                : 'NA'.tr(),
           ),
           /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web
           keyText: 'Tax at x%',
@@ -69,12 +70,14 @@ class OrderSummarySection extends StatelessWidget {
           ),
           BalanceTextRow(
             keyText: 'Grand total',
-            valueText: StringUtils.displayPrice(
-              context.read<SalesOrgBloc>().state.configs,
-              taxDisplayForOrderHistoryAndDetails
-                  ? orderDetails.grandTotal
-                  : orderDetails.orderValue,
-            ),
+            valueText: orderDetails.orderNumber.isValid()
+                ? StringUtils.displayPrice(
+                    context.read<SalesOrgBloc>().state.configs,
+                    taxDisplayForOrderHistoryAndDetails
+                        ? orderDetails.grandTotal
+                        : orderDetails.orderValue,
+                  )
+                : 'NA'.tr(),
           ),
           // const BalanceTextRow(
           //   keyText: 'Total savings', // TODO: after getting information will enhance and allign with web

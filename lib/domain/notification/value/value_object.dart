@@ -33,5 +33,8 @@ class NotificationType extends ValueObject<String> {
   bool get navigateToReturnDetailPage =>
       isReturnDetailPage(value.getOrElse(() => ''));
 
+  bool get navigateToOrderDetailPage =>
+      isOrderDetailPage(value.getOrElse(() => ''));
+
   const NotificationType._(this.value);
 }

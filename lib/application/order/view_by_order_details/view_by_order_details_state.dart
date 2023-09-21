@@ -29,6 +29,8 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
   int get displayedPoDocumentCount => isExpanded ? poDocumentCount : 1;
   int get additionalItemCount => poDocumentCount > 1 ? 1 : 0;
   int get totalItemCount => displayedPoDocumentCount + additionalItemCount;
+  bool get isOrderHistoryDetailsEmpty =>
+      orderHistoryDetails == OrderHistoryDetails.empty();
 
   //TODO:Need To Revisit when tender contract is implemented for V3
   // bool get loadingTenderContractSuccess => isLoadingTenderContract.values.every(

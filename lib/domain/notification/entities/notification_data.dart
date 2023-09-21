@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/value/value_object.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,6 +18,7 @@ class NotificationData with _$NotificationData {
     required DateTimeStringValue createdAt,
     required bool isRead,
     required ReturnRequestsId returnRequestId,
+    required OrderNumber orderNumber,
   }) = _NotificationData;
 
   factory NotificationData.empty() => NotificationData(
@@ -27,5 +29,6 @@ class NotificationData with _$NotificationData {
         createdAt: DateTimeStringValue(''),
         isRead: false,
         returnRequestId: ReturnRequestsId.empty(),
+        orderNumber: OrderNumber(''),
       );
 }

@@ -50,7 +50,7 @@ class ViewByOrderDetailsRemoteDataSource {
 
       _orderHistoryDetailsExceptionChecker(res: res);
 
-      if (res.data['data']['orderHistoryV3'].isEmpty) {
+      if (res.data['data']['orderHistoryV3']['orderHeaders'].isEmpty) {
         return OrderHistoryDetails.empty();
       }
 

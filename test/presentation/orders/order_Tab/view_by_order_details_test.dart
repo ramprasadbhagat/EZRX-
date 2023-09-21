@@ -19,8 +19,6 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -89,10 +87,6 @@ void main() {
       type: RoleType('client'),
     ),
     enableOrderType: true,
-  );
-  const fakeCreatedDate = '20230412';
-  final fakeOrderHistoryItem = OrderHistoryDetailsOrderHeader.empty().copyWith(
-    createdDate: DateTimeStringValue(fakeCreatedDate),
   );
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
@@ -192,10 +186,8 @@ void main() {
               create: ((context) => reOrderPermissionBlocMock),
             ),
           ],
-          child: Material(
-            child: ViewByOrderDetailsPage(
-              viewByOrderHistoryItem: fakeOrderHistoryItem,
-            ),
+          child: const Material(
+            child: ViewByOrderDetailsPage(),
           ),
         ),
       );

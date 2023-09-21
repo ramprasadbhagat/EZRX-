@@ -83,7 +83,7 @@ class _BuyAgainButton extends StatelessWidget {
                       context.read<ViewByOrderDetailsBloc>().add(
                             ViewByOrderDetailsEvent.fetch(
                               user: context.read<UserBloc>().state.user,
-                              orderHeader: viewByOrderHistoryItem,
+                              orderNumber: viewByOrderHistoryItem.orderNumber,
                               customerCodeInfo: context
                                   .read<CustomerCodeBloc>()
                                   .state

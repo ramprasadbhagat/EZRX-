@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
 import 'package:flutter/material.dart';
@@ -145,7 +145,7 @@ void main() {
           when(
             () => viewByOrderDetailsRepositoryMock.getViewByOrderDetails(
               user: User.empty(),
-              orderHeader: OrderHistoryDetailsOrderHeader.empty(),
+              orderNumber: OrderNumber(''),
               customerCodeInfo: customerCodeInfo,
               salesOrganisation: salesOrganisation,
             ),
@@ -155,7 +155,7 @@ void main() {
         },
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.fetch(
-            orderHeader: OrderHistoryDetailsOrderHeader.empty(),
+            orderNumber: OrderNumber(''),
             user: User.empty(),
             customerCodeInfo: customerCodeInfo,
             salesOrganisation: salesOrganisation,

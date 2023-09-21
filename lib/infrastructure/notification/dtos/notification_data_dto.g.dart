@@ -16,6 +16,7 @@ _$_NotificationDataDto _$$_NotificationDataDtoFromJson(
       createdAt: json['createdAt'] as String? ?? '',
       isRead: json['isRead'] as bool,
       returnRequestId: json['returnRequestNumber'] as String? ?? '',
+      orderNumber: json['orderNumber'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_NotificationDataDtoToJson(
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$_NotificationDataDtoToJson(
       'createdAt': instance.createdAt,
       'isRead': instance.isRead,
       'returnRequestNumber': instance.returnRequestId,
+      'orderNumber': instance.orderNumber,
     };

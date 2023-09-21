@@ -1,13 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
@@ -22,33 +20,11 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ViewByOrderDetailsPage extends StatefulWidget {
-  final OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
+class ViewByOrderDetailsPage extends StatelessWidget {
 
   const ViewByOrderDetailsPage({
     Key? key,
-    required this.viewByOrderHistoryItem,
   }) : super(key: key);
-
-  @override
-  State<ViewByOrderDetailsPage> createState() => _ViewByOrderDetailsPageState();
-}
-
-class _ViewByOrderDetailsPageState extends State<ViewByOrderDetailsPage> {
-  @override
-  void initState() {
-    context.read<ViewByOrderDetailsBloc>().add(
-          ViewByOrderDetailsEvent.fetch(
-            user: context.read<UserBloc>().state.user,
-            orderHeader: widget.viewByOrderHistoryItem,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-          ),
-        );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +37,7 @@ class _ViewByOrderDetailsPageState extends State<ViewByOrderDetailsPage> {
         currentPath: context.router.currentPath,
         child: BlocBuilder<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
           buildWhen: (previous, current) =>
-              previous.orderHistoryDetails != current.orderHistoryDetails,
+              previous.isLoading != current.isLoading,
           builder: (context, state) {
             return state.isLoading
                 ? LoadingShimmer.logo(
@@ -70,9 +46,7 @@ class _ViewByOrderDetailsPageState extends State<ViewByOrderDetailsPage> {
                 : ListView(
                     key: WidgetKeys.viewByOrderDetailsPageListView,
                     children: <Widget>[
-                      OrderHeaderSection(
-                        viewByOrdersItem: widget.viewByOrderHistoryItem,
-                      ),
+                      const OrderHeaderSection(),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20.0,
@@ -87,9 +61,7 @@ class _ViewByOrderDetailsPageState extends State<ViewByOrderDetailsPage> {
                         thickness: 2.5,
                         color: ZPColors.lightGray2,
                       ),
-                      OrderSummarySection(
-                        viewByOrdersItem: widget.viewByOrderHistoryItem,
-                      ),
+                      const OrderSummarySection(),
                       const Divider(
                         indent: 0,
                         height: 20,
@@ -97,12 +69,13 @@ class _ViewByOrderDetailsPageState extends State<ViewByOrderDetailsPage> {
                         thickness: 2.5,
                         color: ZPColors.lightGray2,
                       ),
-                      OrderItemDetailsSection(
-                        viewByOrderHistoryGroupList: state
-                            .orderHistoryDetails
-                            .orderHistoryDetailsOrderItem
-                            .getViewByOrderItemDetailsList,
-                      ),
+                      if (!state.isOrderHistoryDetailsEmpty)
+                        OrderItemDetailsSection(
+                          viewByOrderHistoryGroupList: state
+                              .orderHistoryDetails
+                              .orderHistoryDetailsOrderItem
+                              .getViewByOrderItemDetailsList,
+                        ),
                     ],
                   );
           },
@@ -130,84 +103,90 @@ class _ViewByOrderDetailsPageState extends State<ViewByOrderDetailsPage> {
                   previous.isLoading != current.isLoading ||
                   previous.isFetchingList != current.isFetchingList,
               builder: (context, state) {
-                return ElevatedButton(
-                  onPressed: () {
-                    context.read<CartBloc>().add(
-                          CartEvent.addHistoryItemsToCart(
-                            priceAggregate: state.productDetailAggregateList
-                                .map(
-                                  (e) => PriceAggregate.empty().copyWith(
-                                    materialInfo: e.materialInfo,
-                                    price: context
-                                                .read<MaterialPriceBloc>()
-                                                .state
-                                                .materialPrice[
-                                            e.materialInfo.materialNumber] ??
-                                        Price.empty(),
-                                    salesOrgConfig: context
-                                        .read<SalesOrgBloc>()
-                                        .state
-                                        .configs,
-                                  ),
-                                )
-                                .toList(),
-                            quantity: state.productDetailAggregateList
-                                .map(
-                                  (e) =>
-                                      context
-                                          .read<CartBloc>()
-                                          .state
-                                          .getQuantityOfProduct(
-                                            productNumber:
-                                                e.materialInfo.materialNumber,
-                                          ) +
-                                      context
-                                          .read<ViewByOrderDetailsBloc>()
-                                          .state
-                                          .orderHistoryDetails
-                                          .getOrderHistoryDetailsOrderItem(
-                                            materialNumber:
-                                                e.materialInfo.materialNumber,
-                                          )
-                                          .qty,
-                                )
-                                .toList(),
-                            user: context.read<UserBloc>().state.user,
-                            counterOfferDetails:
-                                RequestCounterOfferDetails.empty(),
-                          ),
-                        );
-                  },
-                  style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                        backgroundColor: const MaterialStatePropertyAll(
-                          ZPColors.white,
-                        ),
-                        shape: const MaterialStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(8),
+                return state.isOrderHistoryDetailsEmpty
+                    ? const SizedBox.shrink()
+                    : ElevatedButton(
+                        onPressed: () => context.read<CartBloc>().add(
+                              CartEvent.addHistoryItemsToCart(
+                                priceAggregate: state.productDetailAggregateList
+                                    .map(
+                                      (e) => PriceAggregate.empty().copyWith(
+                                        materialInfo: e.materialInfo,
+                                        price: context
+                                                    .read<MaterialPriceBloc>()
+                                                    .state
+                                                    .materialPrice[
+                                                e.materialInfo
+                                                    .materialNumber] ??
+                                            Price.empty(),
+                                        salesOrgConfig: context
+                                            .read<SalesOrgBloc>()
+                                            .state
+                                            .configs,
+                                      ),
+                                    )
+                                    .toList(),
+                                quantity: state.productDetailAggregateList
+                                    .map(
+                                      (e) =>
+                                          context
+                                              .read<CartBloc>()
+                                              .state
+                                              .getQuantityOfProduct(
+                                                productNumber: e.materialInfo
+                                                    .materialNumber,
+                                              ) +
+                                          context
+                                              .read<ViewByOrderDetailsBloc>()
+                                              .state
+                                              .orderHistoryDetails
+                                              .getOrderHistoryDetailsOrderItem(
+                                                materialNumber: e.materialInfo
+                                                    .materialNumber,
+                                              )
+                                              .qty,
+                                    )
+                                    .toList(),
+                                user: context.read<UserBloc>().state.user,
+                                counterOfferDetails:
+                                    RequestCounterOfferDetails.empty(),
+                              ),
                             ),
-                            side: BorderSide(color: ZPColors.primary),
-                          ),
-                        ),
-                      ),
-                  child: Wrap(
-                    children: [
-                      LoadingShimmer.withChild(
-                        enabled: state.isLoading ||
-                            state.isFetchingList ||
-                            stateCart.isUpserting,
-                        child: Text(
-                          'Buy again'.tr(),
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: ZPColors.primary,
+                        style: Theme.of(context)
+                            .elevatedButtonTheme
+                            .style!
+                            .copyWith(
+                              backgroundColor: const MaterialStatePropertyAll(
+                                ZPColors.white,
+                              ),
+                              shape: const MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8),
                                   ),
+                                  side: BorderSide(color: ZPColors.primary),
+                                ),
+                              ),
+                            ),
+                        child: Wrap(
+                          children: [
+                            LoadingShimmer.withChild(
+                              enabled: state.isLoading ||
+                                  state.isFetchingList ||
+                                  stateCart.isUpserting,
+                              child: Text(
+                                'Buy again'.tr(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelMedium
+                                    ?.copyWith(
+                                      color: ZPColors.primary,
+                                    ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                );
+                      );
               },
             );
           },

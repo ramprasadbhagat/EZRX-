@@ -5,7 +5,7 @@ class ViewByOrderDetailsEvent with _$ViewByOrderDetailsEvent {
   const factory ViewByOrderDetailsEvent.initialized() = _Initialized;
   const factory ViewByOrderDetailsEvent.fetch({
     required User user,
-    required OrderHistoryDetailsOrderHeader orderHeader,
+    required OrderNumber orderNumber,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
   }) = _Fetch;

@@ -69,7 +69,7 @@ void main() {
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-        orderHeader: mockOrderHistoryItem,
+        orderNumber: mockOrderHistoryItem.orderNumber,
         user: mockUser.copyWith(
           role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
           username: Username('mock_user'),
@@ -89,7 +89,7 @@ void main() {
       ).thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-        orderHeader: mockOrderHistoryItem,
+        orderNumber: mockOrderHistoryItem.orderNumber,
         user: mockUser.copyWith(
           role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
           username: Username('mock_user'),
@@ -109,7 +109,7 @@ void main() {
           .thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-        orderHeader: mockOrderHistoryItem,
+        orderNumber: mockOrderHistoryItem.orderNumber,
         user: mockUser,
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
@@ -126,7 +126,7 @@ void main() {
           .thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-        orderHeader: mockOrderHistoryItem,
+        orderNumber: mockOrderHistoryItem.orderNumber,
         user: mockUser,
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
@@ -150,9 +150,7 @@ void main() {
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-        orderHeader: mockOrderHistoryItem.copyWith(
-          orderNumber: OrderNumber('0200268014'),
-        ),
+        orderNumber: OrderNumber('0200268014'),
         user: mockUser.copyWith(
           role: Role.empty().copyWith(
             type: RoleType('external_sales_rep'),
@@ -179,7 +177,7 @@ void main() {
       ).thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-        orderHeader: mockOrderHistoryItem,
+        orderNumber: mockOrderHistoryItem.orderNumber,
         user: mockUser.copyWith(
           role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
           username: Username('mock_user'),
@@ -204,9 +202,7 @@ void main() {
       ).thenAnswer((invocation) async => orderHistoryDetailsMockList);
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-        orderHeader: mockOrderHistoryItem.copyWith(
-          orderNumber: OrderNumber('0200268014'),
-        ),
+        orderNumber: OrderNumber('0200268014'),
         user: mockUser,
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
@@ -228,7 +224,7 @@ void main() {
       ).thenThrow((invocation) async => MockException());
 
       final result = await orderHistoryDetailsRepository.getViewByOrderDetails(
-        orderHeader: mockOrderHistoryItem,
+        orderNumber: mockOrderHistoryItem.orderNumber,
         user: mockUser,
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
