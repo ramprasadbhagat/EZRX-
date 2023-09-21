@@ -62,7 +62,6 @@ class _SummarySearchBar extends StatelessWidget {
           context: context,
           searchKey: value,
         ),
-        clearIconKey: WidgetKeys.clearIconKey,
         customValidator: (value) => SearchKey.searchFilter(value).isValid(),
         onClear: () => _fetch(
           context: context,

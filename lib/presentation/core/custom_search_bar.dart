@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,8 +13,6 @@ class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({
     Key? key,
     this.onSearchChanged,
-    this.searchIconKey,
-    required this.clearIconKey,
     required this.enabled,
     required this.onSearchSubmitted,
     required this.onClear,
@@ -29,8 +28,6 @@ class CustomSearchBar extends StatefulWidget {
   final bool enabled;
   final void Function(String) onSearchSubmitted;
   final void Function() onClear;
-  final Key? searchIconKey;
-  final Key clearIconKey;
   final void Function(String)? onSearchChanged;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
@@ -79,7 +76,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         suffixIcon: widget.initialValue.isEmpty
             ? widget.searchSuffixIcon ??
                 IconButton(
-                  key: widget.searchIconKey,
+                  key: WidgetKeys.searchIconKey,
                   icon: const Icon(
                     Icons.search,
                     size: 22,
@@ -93,7 +90,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                   ),
                 )
             : IconButton(
-                key: widget.clearIconKey,
+                key: WidgetKeys.clearIconKey,
                 icon: const Icon(
                   Icons.clear,
                 ),

@@ -44,7 +44,6 @@ class _ListByItemSearchBar extends StatelessWidget {
             context: context,
             searchKey: value,
           ),
-          clearIconKey: WidgetKeys.clearIconKey,
           customValidator: (value) => SearchKey.searchFilter(value).isValid(),
           onClear: () => _search(
             context: context,

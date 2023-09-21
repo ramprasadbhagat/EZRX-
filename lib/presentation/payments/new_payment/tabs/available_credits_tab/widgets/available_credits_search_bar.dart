@@ -46,7 +46,6 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
             FilteringTextInputFormatter.allow(RegExp('[0-9]')),
           ],
           customValidator: (value) => SearchKey.search(value).isValid(),
-          clearIconKey: WidgetKeys.clearIconKey,
           enabled: !state.isLoading,
           onClear: () => context.read<AvailableCreditsBloc>().add(
                 AvailableCreditsEvent.fetch(

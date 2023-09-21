@@ -446,7 +446,6 @@ class _DeliveryAddressSearchSection extends StatelessWidget {
                   );
             },
             customValidator: (value) => SearchKey.search(value).isValid(),
-            clearIconKey: WidgetKeys.clearIconKey,
             enabled: !state.isFetching,
             onClear: () {
               context.read<CustomerCodeBloc>().add(

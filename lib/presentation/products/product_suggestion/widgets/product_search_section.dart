@@ -37,7 +37,6 @@ class _ProductSearchSection extends StatelessWidget {
           onClear: () => context.read<ProductSearchBloc>().add(
                 const ProductSearchEvent.clearSearch(),
               ),
-          clearIconKey: WidgetKeys.productSearchClearKey,
           searchSuffixIcon: IconButton(
             splashRadius: 1,
             key: WidgetKeys.productScanCameraKey,

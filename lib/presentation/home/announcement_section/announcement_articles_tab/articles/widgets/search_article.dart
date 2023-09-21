@@ -22,7 +22,6 @@ class _SearchArticle extends StatelessWidget {
                   ArticlesInfoEvent.setSearchKey(searchKey: value),
                 );
           },
-          clearIconKey: WidgetKeys.clearIconKey,
           customValidator: (value) => SearchKey.searchFilter(value).isValid(),
           onClear: () => context.read<ArticlesInfoBloc>().add(
                 const ArticlesInfoEvent.setSearchKey(searchKey: ''),

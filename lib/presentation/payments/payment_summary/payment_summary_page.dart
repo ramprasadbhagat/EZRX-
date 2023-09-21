@@ -82,7 +82,6 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
                     child: CustomSearchBar(
                       enabled: true,
                       onSearchChanged: (String value) {},
-                      clearIconKey: WidgetKeys.clearIconKey,
                       onClear: () {},
                       hintText: 'Search by payment advice / voucher no.',
                       customValidator: (text) => true,

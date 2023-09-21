@@ -13,7 +13,6 @@ class _SearchBar extends StatelessWidget {
           key: WidgetKeys.genericKey(key: state.searchKey.searchValueOrEmpty),
           initialValue: state.searchKey.searchValueOrEmpty,
           enabled: !state.isFetching,
-          clearIconKey: WidgetKeys.clearSearchFilter,
           onClear: () => context.read<MaterialFilterBloc>().add(
                 const MaterialFilterEvent.updateSearchKey(''),
               ),

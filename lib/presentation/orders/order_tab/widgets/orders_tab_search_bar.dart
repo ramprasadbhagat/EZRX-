@@ -64,7 +64,6 @@ class _OrderSearchBar extends StatelessWidget {
         context,
         value,
       ),
-      clearIconKey: WidgetKeys.clearIconKey,
       //customValidator: we are not taking the value from the state, as there is autosearch.
       //It take time for 3 sec to emit the state, so we have used from local.
       customValidator: (value) => SearchKey.searchFilter(value).isValid(),

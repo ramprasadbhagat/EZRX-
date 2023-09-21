@@ -46,7 +46,6 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
             FilteringTextInputFormatter.allow(RegExp('[0-9]')),
           ],
           customValidator: (value) => SearchKey.search(value).isValid(),
-          clearIconKey: WidgetKeys.clearIconKey,
           enabled: !state.isLoading,
           onClear: () => context.read<OutstandingInvoicesBloc>().add(
                 OutstandingInvoicesEvent.fetch(

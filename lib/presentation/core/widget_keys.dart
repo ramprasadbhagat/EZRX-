@@ -155,7 +155,6 @@ class WidgetKeys {
   //============================================================
 
   static const Key materialFilterSearchField = Key('materialFilterSearchField');
-  static const Key clearSearchFilter = Key('clearSearchFilter');
   static const Key materialFilterPage = Key('materialFilterPage');
   static const Key applyMaterialFilter = Key('applyMaterialFilter');
 
@@ -325,7 +324,6 @@ class WidgetKeys {
   //============================================================
   //  ProductSearch Keys
   //============================================================
-  static const Key productSearchClearKey = Key('productClearIcon');
   static const Key productScanCameraKey = Key('productScanCameraKey');
   static const Key productSearchPage = Key('productSearchPage');
   static const Key materialFavouriteButton = Key('materialFavouriteButton');
@@ -485,10 +483,6 @@ class WidgetKeys {
   //============================================================
   static Key returnRequest(String index) => Key('returnRequest$index');
   static const Key headsetMicOutlined = Key('headsetMicOutlined');
-  //============================================================
-  //  SalesOrgSelection
-  //============================================================
-  static const Key salesOrgSearch = Key('SalesOrgSearch');
 
   //  Change Password
   //============================================================

@@ -23,7 +23,6 @@ class _FAQSearchBar extends StatelessWidget {
             onSearchSubmitted: (value) => context.read<FaqBloc>().add(
                   FaqEvent.updatedSearchFaq(searchKey: value),
                 ),
-            clearIconKey: WidgetKeys.clearIconKey,
             customValidator: (value) => SearchKey.searchFilter(value).isValid(),
             onClear: () => context.read<FaqBloc>().add(
                   const FaqEvent.updatedSearchFaq(searchKey: ''),

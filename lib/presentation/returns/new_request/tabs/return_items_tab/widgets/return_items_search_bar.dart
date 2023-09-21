@@ -42,7 +42,6 @@ class _ReturnItemsSearchBar extends StatelessWidget {
                 );
           },
           customValidator: (value) => SearchKey.search(value).isValid(),
-          clearIconKey: WidgetKeys.clearIconKey,
           enabled: !state.isLoading,
           onClear: () {
             final customerCodeState = context.read<CustomerCodeBloc>().state;

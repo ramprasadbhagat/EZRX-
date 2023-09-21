@@ -24,7 +24,6 @@ class _SearchAnnouncement extends StatelessWidget {
                       searchKey: value,
                     ),
                   ),
-          clearIconKey: WidgetKeys.clearIconKey,
           customValidator: (value) => SearchKey.searchFilter(value).isValid(),
           onClear: () => context.read<AnnouncementInfoBloc>().add(
                 const AnnouncementInfoEvent.updateSearchKey(searchKey: ''),
