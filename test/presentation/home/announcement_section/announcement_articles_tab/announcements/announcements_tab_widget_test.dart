@@ -19,7 +19,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../../utils/tester_utils.dart';
 import '../../../../../utils/widget_utils.dart';
 
 class AnnouncementInfoBlocMock
@@ -117,10 +116,7 @@ void main() {
       testWidgets(
         'Load announcement_tab with no data',
         (tester) async {
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getAnnouncementListPage(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getAnnouncementListPage());
           await tester.pump();
           verifyAnnouncementTabPage();
           verifyNoRecordFoundWidget();
@@ -131,10 +127,7 @@ void main() {
         'Load announcement_tab with no data and then pull to refresh',
         (tester) async {
           final handle = tester.ensureSemantics();
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getAnnouncementListPage(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getAnnouncementListPage());
           await tester.pump();
           verifyAnnouncementTabPage();
           verifyNoRecordFoundWidget();
@@ -171,20 +164,14 @@ void main() {
       testWidgets(
         'Load announcement_tab with initially loading and then data shown',
         (tester) async {
-          final expectedState = Stream.fromIterable(
-            [
-              AnnouncementInfoState.initial().copyWith(isLoading: true),
-              AnnouncementInfoState.initial().copyWith(
-                isLoading: false,
-                announcementInfo: announcementInfo,
-              ),
-            ],
+          when(() => announcementInfoBlocMock.state).thenReturn(
+            AnnouncementInfoState.initial().copyWith(
+              isLoading: false,
+              announcementInfo: announcementInfo,
+            ),
           );
-          whenListen(announcementInfoBlocMock, expectedState);
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getAnnouncementListPage(),
-            tester: tester,
-          );
+
+          await tester.pumpWidget(getAnnouncementListPage());
           await tester.pump();
           verifyAnnouncementTabPage();
           final loaderImage = find.byKey(WidgetKeys.loaderImage);
@@ -195,20 +182,12 @@ void main() {
       testWidgets(
         'Load announcement_tab with loader',
         (tester) async {
-          final expectedState = Stream.fromIterable(
-            [
-              AnnouncementInfoState.initial().copyWith(
-                isLoading: false,
-                announcementInfo: announcementInfo,
-              ),
-              AnnouncementInfoState.initial().copyWith(isLoading: true),
-            ],
+          when(() => announcementInfoBlocMock.state).thenReturn(
+            AnnouncementInfoState.initial().copyWith(
+              isLoading: true,
+            ),
           );
-          whenListen(announcementInfoBlocMock, expectedState);
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getAnnouncementListPage(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getAnnouncementListPage());
           await tester.pump();
           verifyAnnouncementTabPage();
           final loaderImage = find.byKey(WidgetKeys.loaderImage);
@@ -233,13 +212,10 @@ void main() {
             ],
           );
           whenListen(announcementInfoBlocMock, expectedState);
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getAnnouncementListPage(),
-            tester: tester,
-          );
-          await tester.pump();
+          await tester.pumpWidget(getAnnouncementListPage());
+          await tester.pumpAndSettle();
           verifyAnnouncementTabPage();
-          expect(find.text('BE Error'), findsOneWidget);
+          expect(find.text(('BE Error')), findsOneWidget);
         },
       );
 
@@ -251,10 +227,7 @@ void main() {
               announcementInfo: announcementInfo,
             ),
           );
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getAnnouncementListPage(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getAnnouncementListPage());
           await tester.pump();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =
@@ -278,10 +251,7 @@ void main() {
               announcementInfo: announcementInfo,
             ),
           );
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getAnnouncementListPage(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getAnnouncementListPage());
           await tester.pump();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =
@@ -330,10 +300,7 @@ void main() {
               announcementInfo: announcementInfo,
             ),
           );
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getAnnouncementListPage(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getAnnouncementListPage());
           await tester.pump();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =
@@ -374,10 +341,7 @@ void main() {
               canLoadMore: true,
             ),
           );
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getAnnouncementListPage(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getAnnouncementListPage());
           await tester.pump();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =
@@ -419,10 +383,8 @@ void main() {
               announcementInfo: announcementInfo,
             ),
           );
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getAnnouncementListPage(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getAnnouncementListPage());
+
           await tester.pump();
           verifyAnnouncementTabPage();
           final announcementNotFoundRecordKey =

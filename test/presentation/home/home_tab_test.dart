@@ -47,7 +47,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import '../../utils/tester_utils.dart';
 import '../../utils/widget_utils.dart';
 
 class MaterialListBlocMock
@@ -334,15 +333,7 @@ void main() {
     testWidgets(
       ' -> Find HomeScreen',
       (WidgetTester tester) async {
-        final expectedState = [
-          UserState.initial().copyWith(
-            user: User.empty().copyWith(
-              accessRight: AccessRight.empty().copyWith(products: false),
-              role: Role.empty().copyWith(
-                type: RoleType('root_admin'),
-              ),
-            ),
-          ),
+        when(() => userBlocMock.state).thenReturn(
           UserState.initial().copyWith(
             user: User.empty().copyWith(
               accessRight: AccessRight.empty().copyWith(products: true),
@@ -351,12 +342,8 @@ void main() {
               ),
             ),
           ),
-        ];
-        whenListen(userBlocMock, Stream.fromIterable(expectedState));
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
         );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
         final homeScreen = find.byKey(
           WidgetKeys.homeScreen,
@@ -383,10 +370,7 @@ void main() {
             ),
           ),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         await tester.pump(const Duration(milliseconds: 100));
@@ -448,10 +432,7 @@ void main() {
             ),
           );
 
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getWidget(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getWidget());
           await tester.pump();
           final homeQuickAccessPaymentsMenu =
               find.byKey(WidgetKeys.homeQuickAccessPaymentsMenu);
@@ -485,10 +466,7 @@ void main() {
             ),
           );
 
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getWidget(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getWidget());
           await tester.pump();
           final homeQuickAccessPaymentsMenu =
               find.byKey(WidgetKeys.homeQuickAccessPaymentsMenu);
@@ -514,10 +492,7 @@ void main() {
 
       testWidgets('Product SearchBar Hidden when product accessright is false',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final productSearchBar = find.byType(HomeProductSearchBar);
@@ -526,10 +501,7 @@ void main() {
 
       testWidgets('ProductsOnOffer Hidden when product accessright is false',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final productsOnOffer = find.byType(ProductsOnOffer);
@@ -538,10 +510,7 @@ void main() {
 
       testWidgets('BundleSection Hidden when product accessright is false',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final bundleSection = find.byType(BundleSection);
@@ -550,10 +519,7 @@ void main() {
 
       testWidgets('BrowseProduct Hidden when product accessright is false',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final browseProduct = find.byType(BrowseProduct);
@@ -562,10 +528,7 @@ void main() {
 
       testWidgets('ProductTab Hidden when product accessright is false',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final productTab = find.byKey(WidgetKeys.productsTab);
@@ -589,10 +552,7 @@ void main() {
       });
       testWidgets('Product SearchBar Visible when product accessright is true',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final productSearchBar = find.byType(HomeProductSearchBar);
@@ -601,10 +561,7 @@ void main() {
 
       testWidgets('ProductsOnOffer Visible when product accessright is true',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final productsOnOffer = find.byType(ProductsOnOffer);
@@ -614,10 +571,7 @@ void main() {
       testWidgets('BundleSection Visible when product accessright is true',
           (tester) async {
         final materialListBloc = locator<MaterialListBloc>();
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final bundleSection = find.byType(BundleSection);
@@ -639,10 +593,7 @@ void main() {
 
       testWidgets('BrowseProduct Visible when product accessright is true',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final browseProduct = find.byType(BrowseProduct);
@@ -651,9 +602,8 @@ void main() {
 
       testWidgets('ProductTab Visible when product accessright is true',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(widget: HomeNavigationTabbar()),
-          tester: tester,
+        await tester.pumpWidget(
+          getWidget(widget: HomeNavigationTabbar()),
         );
         await tester.pump();
 
@@ -680,10 +630,7 @@ void main() {
       testWidgets(
           'Product SearchBar Visible when user role has AdminOrderAccess',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final productSearchBar = find.byType(HomeProductSearchBar);
@@ -692,10 +639,7 @@ void main() {
 
       testWidgets('ProductsOnOffer Visible when user role has AdminOrderAccess',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final productsOnOffer = find.byType(ProductsOnOffer);
@@ -704,10 +648,7 @@ void main() {
 
       testWidgets('BundleSection Visible when user role has AdminOrderAccess',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final bundleSection = find.byType(BundleSection);
@@ -716,10 +657,7 @@ void main() {
 
       testWidgets('BrowseProduct Visible when user role has AdminOrderAccess',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final browseProduct = find.byType(BrowseProduct);
@@ -728,9 +666,8 @@ void main() {
 
       testWidgets('ProductTab Visible when user role has AdminOrderAccess',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(widget: HomeNavigationTabbar()),
-          tester: tester,
+        await tester.pumpWidget(
+          getWidget(widget: HomeNavigationTabbar()),
         );
         await tester.pump();
 
@@ -757,10 +694,7 @@ void main() {
       testWidgets(
           'Product SearchBar Hidden when product accessright is true and user role is return',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final productSearchBar = find.byType(HomeProductSearchBar);
@@ -770,10 +704,7 @@ void main() {
       testWidgets(
           'ProductsOnOffer Hidden when product accessright is true and user role is return',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final productsOnOffer = find.byType(ProductsOnOffer);
@@ -783,10 +714,7 @@ void main() {
       testWidgets(
           'BundleSection Hidden when product accessright is true and user role is return',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final bundleSection = find.byType(BundleSection);
@@ -796,10 +724,7 @@ void main() {
       testWidgets(
           'BrowseProduct Hidden when product accessright is true and user role is return',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final browseProduct = find.byType(BrowseProduct);
@@ -809,10 +734,7 @@ void main() {
       testWidgets(
           'ProductTab Hidden when product accessright is true and user role is return',
           (tester) async {
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
 
         final productTab = find.byKey(WidgetKeys.productsTab);

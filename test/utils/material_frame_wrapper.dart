@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -23,12 +22,14 @@ class MaterialFrameWrapper extends StatelessWidget {
             supportedLocales: const [Locale('en')],
             path: 'assets/langs/langs.csv',
             startLocale: const Locale('en'),
+            useFallbackTranslations: true,
             fallbackLocale: const Locale('en'),
             saveLocale: true,
             useOnlyLangCode: true,
-            assetLoader: CsvAssetLoader(),
+            assetLoader: _CustomCsvAssetLoader(),
             child: Sizer(
               builder: (context, orientation, deviceType) => MaterialApp(
+                theme: appThemeData[AppTheme.light],
                 localizationsDelegates: context.localizationDelegates,
                 supportedLocales: context.supportedLocales,
                 locale: context.locale,
@@ -50,5 +51,14 @@ class MaterialFrameWrapper extends StatelessWidget {
       data: const MediaQueryData(size: Size(480, 900)),
       child: child,
     );
+  }
+}
+
+class _CustomCsvAssetLoader extends AssetLoader {
+  _CustomCsvAssetLoader? csvParser;
+
+  @override
+  Future<Map<String, dynamic>> load(String path, Locale locale) async {
+    return {};
   }
 }

@@ -27,7 +27,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -140,20 +139,11 @@ void main() {
     }
 
     testWidgets('should show loading for the first time', (tester) async {
-      WidgetsFlutterBinding.ensureInitialized();
-      final customerLicenseState = [
-        CustomerLicenseState.initial().copyWith(isFetching: true)
-      ];
-
-      whenListen(
-        customerLicenseBlocMock,
-        Stream.fromIterable(customerLicenseState),
-      );
       whenListen(userBlockMock, userStateMock);
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(),
-        tester: tester,
+      when(() => customerLicenseBlocMock.state).thenReturn(
+        CustomerLicenseState.initial().copyWith(isFetching: true),
       );
+      await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(find.byKey(WidgetKeys.loaderImage), findsOneWidget);
     });
@@ -175,10 +165,8 @@ void main() {
         Stream.fromIterable(customerLicenseState),
       );
       whenListen(userBlockMock, userStateMock);
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWidget());
+
       await tester.pumpAndSettle();
       expect(find.byType(CustomSnackBar), findsOneWidget);
     });
@@ -194,10 +182,7 @@ void main() {
         Stream.fromIterable(customerLicenseState),
       );
       whenListen(userBlockMock, userStateMock);
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
       expect(find.text('fakeUser'), findsOneWidget);
     });
@@ -218,10 +203,7 @@ void main() {
         Stream.fromIterable(customerLicenseState),
       );
       whenListen(userBlockMock, userStateMock);
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(find.textContaining('License information'), findsOneWidget);
     });
@@ -244,10 +226,8 @@ void main() {
         Stream.fromIterable(customerLicenseState),
       );
       whenListen(userBlockMock, userStateMock);
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWidget());
+
       await tester.pump();
       await tester.fling(
         find.textContaining('License information'),
@@ -282,10 +262,7 @@ void main() {
         ),
       );
       whenListen(userBlockMock, userStateMock);
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWidget());
       await tester.pump();
       await tester.drag(
         find.byType(CustomScrollView),
@@ -314,10 +291,8 @@ void main() {
           activeLanguage: Language(subTag: const Locale('zh')),
         ),
       );
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
       final profilePageLanguageDropdown =
           find.byKey(WidgetKeys.profilePageLanguageDropdown);
       expect(profilePageLanguageDropdown, findsOneWidget);

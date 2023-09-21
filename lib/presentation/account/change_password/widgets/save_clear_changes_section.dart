@@ -1,4 +1,4 @@
-part of '../change_password_page.dart';
+part of 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 
 class _SaveClearChangesSection extends StatelessWidget {
   const _SaveClearChangesSection({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class _SaveClearChangesSection extends StatelessWidget {
                               .add(const ResetPasswordEvent.clear());
                         },
                         child: Text(
-                          'Clear Changes'.tr(),
+                          context.tr('Clear Changes'),
                         ),
                       ),
                     ),
@@ -59,7 +59,7 @@ class _SaveClearChangesSection extends StatelessWidget {
                         },
                         child: LoadingShimmer.withChild(
                           enabled: state.isSubmitting,
-                          child: const Text('Save').tr(),
+                          child: Text(context.tr('Save')),
                         ),
                       ),
                     ),
@@ -90,7 +90,9 @@ class _ValidationsFailedWarning extends StatelessWidget {
         color: ZPColors.lightRedStatusColor,
       ),
       child: Text(
-        'Please ensure all requirements are met for your new password.'.tr(),
+        context.tr(
+          'Please ensure all requirements are met for your new password.',
+        ),
         style: Theme.of(context).textTheme.titleSmall,
       ),
     );

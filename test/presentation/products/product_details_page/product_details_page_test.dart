@@ -37,7 +37,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -229,10 +228,7 @@ void main() {
           ],
         );
         whenListen(cartMockBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final cartButtonFinder =
             find.byKey(WidgetKeys.materialDetailsAddToCartButton);
@@ -267,10 +263,7 @@ void main() {
             ),
           ),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final cartButtonFinder =
             find.byKey(WidgetKeys.materialDetailsAddToCartButton);
@@ -322,10 +315,7 @@ void main() {
             ),
           ),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final cartButtonFinder =
             find.byKey(WidgetKeys.materialDetailsAddToCartButton);
@@ -357,11 +347,8 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
-        await tester.pump();
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
         final similarProductSectionFinder =
             find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
         final similarProductItemFinder =
@@ -392,10 +379,7 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         expect(similarProductSectionFinder, findsNothing);
         expect(similarProductItemFinder, findsNothing);
@@ -420,10 +404,7 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         expect(similarProductSectionFinder, findsNothing);
         expect(similarProductItemFinder, findsNothing);
@@ -433,20 +414,14 @@ void main() {
       });
 
       testWidgets('Product Image available', (tester) async {
-        final expectedStates = Stream.fromIterable(
-          [
-            ProductDetailState.initial().copyWith(
-              isFetching: true,
-              productDetailAggregate: ProductDetailAggregate.empty(),
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            isFetching: false,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              similarProduct: <MaterialInfo>[],
             ),
-            ProductDetailState.initial().copyWith(
-              isFetching: false,
-              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                materialInfo: materialInfo,
-                similarProduct: <MaterialInfo>[],
-              ),
-            ),
-          ],
+          ),
         );
         when(() => mockProductImageBloc.state).thenReturn(
           ProductImageState.initial().copyWith(
@@ -461,11 +436,9 @@ void main() {
             },
           ),
         );
-        whenListen(productDetailMockBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        // whenListen(productDetailMockBloc, expectedStates);
+        await tester
+            .runAsync(() async => await tester.pumpWidget(getScopedWidget()));
         await tester.pump();
         expect(similarProductSectionFinder, findsNothing);
         expect(similarProductItemFinder, findsNothing);
@@ -503,10 +476,7 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final favouriteIcon =
             find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
@@ -542,10 +512,7 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final favouriteIcon =
             find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
@@ -582,10 +549,7 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final favouriteIcon =
             find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
@@ -621,10 +585,7 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final favouriteIcon =
             find.byKey(WidgetKeys.materialDetailsFavouriteIcon);

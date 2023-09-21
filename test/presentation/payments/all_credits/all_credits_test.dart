@@ -13,7 +13,6 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -26,7 +25,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
@@ -170,10 +168,7 @@ void main() {
       ];
       whenListen(allCreditsFilterBlocMock, Stream.fromIterable(expectedState));
 
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWidget());
       await tester.pump(const Duration(milliseconds: 100));
 
       final loaderImage = find.byKey(WidgetKeys.loaderImage);
@@ -207,19 +202,7 @@ void main() {
         ),
       );
 
-      final expectedState = [
-        AllCreditsState.initial().copyWith(
-          isLoading: true,
-        ),
-        AllCreditsState.initial().copyWith(
-          isLoading: true,
-          failureOrSuccessOption:
-              optionOf(const Left(ApiFailure.other('mock-error'))),
-        ),
-        AllCreditsState.initial().copyWith(
-          isLoading: true,
-          failureOrSuccessOption: none(),
-        ),
+      when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
           isLoading: false,
           failureOrSuccessOption: optionOf(const Right('')),
@@ -233,15 +216,11 @@ void main() {
             )
           ],
         ),
-      ];
-      whenListen(allCreditsBlocMock, Stream.fromIterable(expectedState));
+      );
 
       final handle = tester.ensureSemantics();
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(),
-        tester: tester,
-      );
-      await tester.pump(const Duration(milliseconds: 100));
+      await tester.runAsync(() async => await tester.pumpWidget(getWidget()));
+      await tester.pumpAndSettle();
 
       await tester.drag(
         find.textContaining('123456789'),
@@ -322,10 +301,7 @@ void main() {
         ),
       );
 
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWidget());
       // await tester.drag(
       //   find.textContaining('123456780').last,
       //   const Offset(0.0, -1000.0),

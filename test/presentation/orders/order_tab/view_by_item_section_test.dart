@@ -26,7 +26,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
@@ -170,10 +169,7 @@ void main() {
           orderHistoryList: OrderHistory.empty(),
         ),
       );
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getScopedWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       final loaderImage = find.byKey(
         WidgetKeys.loaderImage,
@@ -192,10 +188,7 @@ void main() {
           ),
         ),
       );
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getScopedWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       final manufactureName = find.text('fake_manufactureName');
       expect(manufactureName, findsOneWidget);

@@ -17,7 +17,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class CustomerCodeBlocMock
@@ -112,10 +111,8 @@ void main() {
           customerCodeList: [CustomerCodeInfo.empty()],
         ),
       );
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(usingLocalization: true),
-        tester: tester,
-      );
+
+      await tester.pumpWidget(getWidget(usingLocalization: true));
       await tester.pump();
       final selectedCustomerCodeText = find.text('NA');
       expect(selectedCustomerCodeText, findsNWidgets(2));
@@ -248,10 +245,7 @@ void main() {
         ),
       );
 
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWidget(usingLocalization: true),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWidget(usingLocalization: true));
       await tester.pump();
 
       final deliveryAddress = find.text(

@@ -32,7 +32,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
@@ -196,10 +195,7 @@ void main() {
         ),
       );
 
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getScopedWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getScopedWidget());
       await tester.pump();
 
       final loaderImage = find.byKey(
@@ -237,11 +233,8 @@ void main() {
         mockViewByItemDetailsBloc,
         Stream.fromIterable(expectedStates),
       );
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getScopedWidget(),
-        tester: tester,
-      );
-      await tester.pump();
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
 
       final statusTrackerSection = find.byType(
         StatusTrackerSection,
@@ -279,11 +272,8 @@ void main() {
         mockViewByItemDetailsBloc,
         Stream.fromIterable(expectedStates),
       );
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getScopedWidget(),
-        tester: tester,
-      );
-      await tester.pump();
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
 
       final statusTrackerSection = find.byType(
         StatusTrackerSection,
@@ -310,10 +300,7 @@ void main() {
         ),
       );
 
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getScopedWidget(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getScopedWidget());
       await tester.pump();
 
       final statusTrackerSection = find.byType(

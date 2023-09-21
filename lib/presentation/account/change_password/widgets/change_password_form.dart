@@ -1,4 +1,4 @@
-part of '../change_password_page.dart';
+part of 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -21,7 +21,7 @@ class _ChangePasswordForm extends StatelessWidget {
             (_) {
               Navigator.of(context).pop();
               CustomSnackBar(
-                messageText: 'Password changed successfully'.tr(),
+                messageText: context.tr('Password changed successfully'),
               ).show(context);
             },
           ),

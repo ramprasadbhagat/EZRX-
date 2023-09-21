@@ -57,7 +57,6 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
-import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
@@ -590,10 +589,8 @@ void main() {
       testWidgets(
         'Load Cart Page',
         (tester) async {
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getWidget(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getWidget());
+
           await tester.pump();
           final cartPage = find.byKey(const Key('cartpage'));
           expect(cartPage, findsOneWidget);
@@ -620,10 +617,8 @@ void main() {
 
         whenListen(cartBloc, Stream.fromIterable(expectedStates));
 
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
+
         // verify(() => authBlocMock.add(const AuthEvent.authCheck()));
       });
 
@@ -637,10 +632,8 @@ void main() {
           ),
         );
 
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
+
         await tester.pump();
         final listWidget = find.byType(CartProductTile);
         expect(listWidget, findsOneWidget);
@@ -685,10 +678,8 @@ void main() {
           ),
         ];
         whenListen(cartBloc, Stream.fromIterable(expectedStates));
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
+
         await tester.pump();
         await tester.pump(const Duration(seconds: 1));
         final msg = find.textContaining(
@@ -714,11 +705,9 @@ void main() {
           ),
         ];
         whenListen(cartBloc, Stream.fromIterable(expectedStates));
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
-        await tester.pump(const Duration(seconds: 1));
+        await tester.pumpWidget(getWidget());
+
+        await tester.pumpAndSettle();
         final deleteIcon = find.byIcon(
           Icons.delete_outlined,
         );
@@ -761,10 +750,8 @@ void main() {
             ),
           ),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
+
         await tester.pump();
         expect(find.byType(StatusLabel), findsOneWidget);
         expect(find.byKey(WidgetKeys.checkoutButton), findsOneWidget);
@@ -1636,10 +1623,7 @@ void main() {
             ),
           ),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
 
         await tester.pump();
         final accountSuspendedBanner = find.byType(AccountSuspendedBanner);
@@ -1659,10 +1643,7 @@ void main() {
             ),
           ),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
 
         await tester.pump();
         final accountSuspendedBanner = find.byType(AccountSuspendedBanner);
@@ -1707,10 +1688,8 @@ void main() {
             ),
           );
 
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getWidget(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getWidget());
+
           await tester.pump();
 
           final taxLevelFinder = find.text('Total with tax:');
@@ -1758,10 +1737,8 @@ void main() {
             cartState,
           );
 
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getWidget(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getWidget());
+
           await tester.pumpAndSettle();
 
           final taxLevelFinder = find.text('Total with tax:');
@@ -1823,10 +1800,8 @@ void main() {
             cartState,
           );
 
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getWidget(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getWidget());
+
           await tester.pumpAndSettle();
 
           final taxLevelFinder = find.text('Total with tax:');
@@ -1902,10 +1877,7 @@ void main() {
             ),
           );
 
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getWidget(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
 
           final taxLevelFinder = find.text('Total with tax:');
@@ -1987,10 +1959,7 @@ void main() {
             eligibilityState,
           );
 
-          await TesterUtils.setUpLocalizationWrapper(
-            widget: getWidget(),
-            tester: tester,
-          );
+          await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
 
           final preOrderTag = find.text('Preorder');
@@ -2466,10 +2435,7 @@ void main() {
           cartState,
         );
 
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pump();
         final grandTotal = find.byKey(WidgetKeys.grandTotalKey);
         expect(grandTotal, findsOneWidget);

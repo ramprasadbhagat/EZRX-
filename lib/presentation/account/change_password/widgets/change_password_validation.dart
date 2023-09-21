@@ -1,4 +1,4 @@
-part of '../change_password_page.dart';
+part of 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 
 class _ResetPasswordValidation extends StatelessWidget {
   const _ResetPasswordValidation({Key? key}) : super(key: key);
@@ -16,33 +16,32 @@ class _ResetPasswordValidation extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 30, bottom: 10),
               child: Text(
-                'Your new password should have :'.tr(),
+                context.tr('Your new password should have :'),
                 style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
             _ConditionText(
               enableGreenTick: state.newPassword.matchMinCharacter,
-              msgText: 'Minimum length of 10 characters'.tr(),
+              msgText: 'Minimum length of 10 characters',
             ),
             _ConditionText(
               enableGreenTick: state.newPassword.matchAtLeastOneUpperCharacter,
-              msgText: 'Contain at least 1 Upper case character (A to Z)'.tr(),
+              msgText: 'Contain at least 1 Upper case character (A to Z)',
             ),
             _ConditionText(
               enableGreenTick: state.newPassword.matchAtLeastOneLowerCharacter,
-              msgText: 'Contain at least 1 Lower case character (a to z)'.tr(),
+              msgText: 'Contain at least 1 Lower case character (a to z)',
             ),
             _ConditionText(
               enableGreenTick:
                   state.newPassword.matchAtLeastOneNumericCharacter,
-              msgText: 'Contain at least a numeric character (0 to 9)'.tr(),
+              msgText: 'Contain at least a numeric character (0 to 9)',
             ),
             _ConditionText(
               enableGreenTick:
                   state.newPassword.matchAtLeastOneSpecialCharacter,
               msgText:
-                  'At least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )'
-                      .tr(),
+                  'At least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )',
             ),
             _ConditionText(
               enableGreenTick: state
@@ -50,8 +49,7 @@ class _ResetPasswordValidation extends StatelessWidget {
                 user: context.read<UserBloc>().state.user,
               ),
               msgText:
-                  'New password cannot contain more than 2 consecutive characters from username and/or name of the user'
-                      .tr(),
+                  'New password cannot contain more than 2 consecutive characters from username and/or name of the user',
             ),
           ],
         );
@@ -96,7 +94,7 @@ class _ConditionText extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              msgText,
+              context.tr(msgText),
               style: Theme.of(context).textTheme.titleSmall?.apply(
                     color: context
                                 .read<ResetPasswordBloc>()

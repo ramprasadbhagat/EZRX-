@@ -29,7 +29,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 import '../../order_history/order_history_details_widget_test.dart';
 
@@ -204,10 +203,7 @@ void main() {
         );
 
         whenListen(bundleAddToCartBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final bundleAddToCartSheet = find.byKey(
           WidgetKeys.bundleAddToCartSheet,
@@ -292,10 +288,7 @@ void main() {
         );
 
         whenListen(bundleAddToCartBloc, expectedStates);
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getScopedWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final bundleAddToCartSheet = find.byKey(
           WidgetKeys.bundleAddToCartSheet,

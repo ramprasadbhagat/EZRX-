@@ -1,4 +1,4 @@
-part of '../change_password_page.dart';
+part of 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 
 class _PasswordTextField extends StatelessWidget {
   final PasswordFieldType passwordFieldType;
@@ -46,16 +46,16 @@ class _PasswordTextField extends StatelessWidget {
       case PasswordFieldType.oldPassword:
         return context.read<ResetPasswordBloc>().state.oldPassword.value.fold(
               (f) => f.mapOrNull(
-                empty: (_) => 'Current password cannot be empty'.tr(),
+                empty: (_) => context.tr('Current password cannot be empty'),
               ),
               (_) => null,
             );
       case PasswordFieldType.newPassword:
         return context.read<ResetPasswordBloc>().state.newPassword.value.fold(
               (f) => f.mapOrNull(
-                empty: (_) => 'New Password Cannot be Empty.'.tr(),
+                empty: (_) => context.tr('New Password Cannot be Empty.'),
                 mustNotMatchOldPassword: (_) =>
-                    'New password cannot be same as old password'.tr(),
+                    context.tr('New password cannot be same as old password'),
               ),
               (_) => null,
             );
@@ -67,8 +67,8 @@ class _PasswordTextField extends StatelessWidget {
             .value
             .fold(
               (f) => f.mapOrNull(
-                empty: (_) => 'Confirm Password Cannot be Empty.'.tr(),
-                mustMatchNewPassword: (_) => 'Password mismatch'.tr(),
+                empty: (_) => context.tr('Confirm Password Cannot be Empty.'),
+                mustMatchNewPassword: (_) => context.tr('Password mismatch'),
               ),
               (_) => null,
             );
@@ -81,7 +81,7 @@ class _PasswordTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldWithLabel(
       fieldKey: WidgetKeys.genericKey(key: _getInitialValue(context)),
-      labelText: labelText.tr(),
+      labelText: context.tr(labelText),
       mandatory: true,
       initValue: _getInitialValue(context),
       obscuringCharacter: '*',
@@ -95,7 +95,7 @@ class _PasswordTextField extends StatelessWidget {
       obscureText: isPasswordVisible,
       validator: (_) => _validateForm(context),
       decoration: InputDecoration(
-        hintText: hintText.tr(),
+        hintText: tr(hintText),
         suffixIcon: IconButton(
           icon: Icon(
             isPasswordVisible ? Icons.visibility_off : Icons.visibility,

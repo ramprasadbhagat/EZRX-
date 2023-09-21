@@ -24,7 +24,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class AccountSummaryBlocMock
@@ -346,10 +345,7 @@ void main() {
           newPaymentBlocMock,
           Stream.fromIterable([NewPaymentState.initial()]),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
         final checkAllInvoices = find.byType(CheckboxListTile);
@@ -372,10 +368,7 @@ void main() {
             NewPaymentState.initial().copyWith(selectedInvoices: fakeInvoices)
           ]),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
         final checkAllInvoices = find.byType(CheckboxListTile);
@@ -395,10 +388,7 @@ void main() {
           newPaymentBlocMock,
           Stream.fromIterable([NewPaymentState.initial()]),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
         final nextButton1 = find.byKey(WidgetKeys.nextButton);
@@ -425,10 +415,7 @@ void main() {
             )
           ]),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
         final nextButton1 = find.byKey(WidgetKeys.nextButton);
@@ -455,10 +442,7 @@ void main() {
           newPaymentBlocMock,
           Stream.fromIterable([NewPaymentState.initial()]),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
         final nextButton1 = find.byKey(WidgetKeys.nextButton);
@@ -495,10 +479,7 @@ void main() {
             )
           ]),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
         final nextButton = find.byKey(WidgetKeys.nextButton);
@@ -526,10 +507,7 @@ void main() {
           newPaymentBlocMock,
           Stream.fromIterable([NewPaymentState.initial()]),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
         final nextButton1 = find.byKey(WidgetKeys.nextButton);
@@ -566,10 +544,7 @@ void main() {
             )
           ]),
         );
-        await TesterUtils.setUpLocalizationWrapper(
-          widget: getWidget(),
-          tester: tester,
-        );
+        await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
         final nextButton1 = find.byKey(WidgetKeys.nextButton);

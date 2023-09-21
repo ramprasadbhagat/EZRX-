@@ -25,7 +25,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../utils/tester_utils.dart';
 import '../../../../utils/widget_utils.dart';
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -168,10 +167,7 @@ void main() {
         Stream.fromIterable(expectedStates),
       );
 
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWUT(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWUT());
       await tester.pump();
 
       await tester.pump(const Duration(seconds: 2));
@@ -202,10 +198,7 @@ void main() {
         Stream.fromIterable(expectedStates),
       );
 
-      await TesterUtils.setUpLocalizationWrapper(
-        widget: getWUT(),
-        tester: tester,
-      );
+      await tester.pumpWidget(getWUT());
       await tester.pump();
 
       await tester.pump(const Duration(seconds: 2));
