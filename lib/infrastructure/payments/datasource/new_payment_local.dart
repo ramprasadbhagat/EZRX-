@@ -35,6 +35,13 @@ class NewPaymentLocalDataSource {
           ),
         );
         break;
+      case 'TH':
+        data = json.decode(
+          await rootBundle.loadString(
+            'assets/json/payResponseTH.json',
+          ),
+        );
+        break;
       case 'MY':
         data = json.decode(
           await rootBundle.loadString(

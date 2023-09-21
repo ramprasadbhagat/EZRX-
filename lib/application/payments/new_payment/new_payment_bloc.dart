@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dar
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 part 'new_payment_bloc.freezed.dart';
 part 'new_payment_event.dart';
@@ -101,8 +100,6 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
           paymentMethod: e.paymentMethod,
           customerOpenItems: state.selectedInvoices,
           user: e.user,
-          fromDate: state.fromDate,
-          toDate: state.toDate,
         );
 
         failureOrSuccess.fold(

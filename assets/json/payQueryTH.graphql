@@ -1,0 +1,69 @@
+mutation addCustomerPayment($input: addCustomerPaymentInput!) {
+    addCustomerPayment(input: $input) {
+        paymentID
+        valueDate
+        paymentAmount
+        transactionCurrency
+        paymentDocument
+        invoiceProcessingStatus
+        paymentMethod
+        iban
+        bankIdentification
+        bankCountryKey
+        bankKey
+        bankAccountNumber
+        bankName
+        paymentCardID
+        paymentCardNumber
+        paymentCardHolderName
+        paymentCardMaskedNumber
+        paymentCardTypeName
+        extensibilityCustomField
+        customId
+        tmpPaytByDigitalPaytService
+        payerByPaymentServiceProvider
+        paymentRefByPaytSrvcProvider
+        paymentServiceProvider
+        transactionStatus
+        customerInvoice
+        paymentCardData
+        paytCardVerificatDetResultText
+        disputeCaseInformationText
+        userName
+        paymentBatchAdditionalInfo
+        accountingDocExternalReference
+        zCcpPaymentQRCode
+        zzHtmcs
+    }
+}
+
+variables: {
+    "input":{
+    "customerCode":"0030224907",
+    "customerInvoice":[
+        {
+            "accountingDocExternalReference":"290220171160020377001SD 1160020377",
+            "accountingDocument":"1160020377",
+            "bpCustomerNumber":"30224907",
+            "debitCreditFlag":"S",
+            "discountAmount":"0",
+            "discountDate":"2017-03-23",
+            "displayAmount":"1605",
+            "displayCurrency":"THB",
+            "displayOpenAmount":"1605",
+            "dueDate":"2017-07-21",
+            "fiscalYear":"2017",
+            "isDisputed":"",
+            "lineItemNumber":"001",
+            "lineNumber":"000573",
+            "partialPaymentHistoryDesc":"290220171160020377001:",
+            "paymentAmount":"1605",
+            "salesOrg":"2902"
+        }
+    ],
+    "paymentMethod":"Payment Gateway",
+    "salesOrg":"2902",
+    "transactionCurrency":"THB",
+    "userName":"rootadmin"
+    }
+}

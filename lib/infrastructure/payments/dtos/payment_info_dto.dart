@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,9 +17,27 @@ class PaymentInfoDto with _$PaymentInfoDto {
     @JsonKey(name: 'paymentID', defaultValue: '') required String paymentID,
     @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
         required String paymentBatchAdditionalInfo,
+    @JsonKey(name: 'transactionCurrency', defaultValue: '')
+        required String transactionCurrency,
   }) = _PaymentInfoDto;
 
   PaymentInfo toDomain() {
+    if (Currency(transactionCurrency).isTH) {
+      final htmlFormat = zzHtmcs.characters
+          .getRange(
+            zzHtmcs.indexOf('<html>'),
+            zzHtmcs.indexOf('</html>') + '</html>'.length,
+          )
+          .string;
+
+      return PaymentInfo(
+        zzHtmcs: htmlFormat,
+        paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
+        paymentID: paymentID,
+        accountingDocExternalReference: accountingDocExternalReference,
+      );
+    }
+
     var htmlFormat = zzHtmcs
         .replaceAll(RegExp(r'html:\s*'), '')
         .replaceAll(RegExp(r'_blank\s*'), '_self');

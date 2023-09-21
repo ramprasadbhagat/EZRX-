@@ -29,13 +29,6 @@ class NewPaymentState with _$NewPaymentState {
   double get amountTotal =>
       selectedInvoices.amountTotal + selectedCredits.amountTotal;
 
-  String get fromDate =>
-      selectedInvoices.sortWithDocumentDate.first.documentDate.getValue();
-
-  String get toDate => selectedInvoices.length == 1
-      ? DateFormat('yyyy-MM-dd').format(DateTime.now())
-      : selectedInvoices.sortWithDocumentDate.last.documentDate.getValue();
-
   List<CustomerOpenItem> get allSelectedItems =>
       selectedInvoices + selectedCredits;
 }

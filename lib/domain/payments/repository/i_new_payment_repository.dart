@@ -35,8 +35,6 @@ abstract class INewPaymentRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required List<CustomerOpenItem> customerOpenItems,
-    required String fromDate,
-    required String toDate,
     required String paymentMethod,
     required User user,
   });

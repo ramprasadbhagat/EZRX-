@@ -29,6 +29,8 @@ mixin _$PaymentInfoDto {
   String get paymentID => throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   String get paymentBatchAdditionalInfo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'transactionCurrency', defaultValue: '')
+  String get transactionCurrency => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +52,9 @@ abstract class $PaymentInfoDtoCopyWith<$Res> {
       @JsonKey(name: 'paymentID', defaultValue: '')
           String paymentID,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-          String paymentBatchAdditionalInfo});
+          String paymentBatchAdditionalInfo,
+      @JsonKey(name: 'transactionCurrency', defaultValue: '')
+          String transactionCurrency});
 }
 
 /// @nodoc
@@ -70,6 +74,7 @@ class _$PaymentInfoDtoCopyWithImpl<$Res, $Val extends PaymentInfoDto>
     Object? accountingDocExternalReference = null,
     Object? paymentID = null,
     Object? paymentBatchAdditionalInfo = null,
+    Object? transactionCurrency = null,
   }) {
     return _then(_value.copyWith(
       zzHtmcs: null == zzHtmcs
@@ -87,6 +92,10 @@ class _$PaymentInfoDtoCopyWithImpl<$Res, $Val extends PaymentInfoDto>
       paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
+              as String,
+      transactionCurrency: null == transactionCurrency
+          ? _value.transactionCurrency
+          : transactionCurrency // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -108,7 +117,9 @@ abstract class _$$_PaymentInfoDtoCopyWith<$Res>
       @JsonKey(name: 'paymentID', defaultValue: '')
           String paymentID,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-          String paymentBatchAdditionalInfo});
+          String paymentBatchAdditionalInfo,
+      @JsonKey(name: 'transactionCurrency', defaultValue: '')
+          String transactionCurrency});
 }
 
 /// @nodoc
@@ -126,6 +137,7 @@ class __$$_PaymentInfoDtoCopyWithImpl<$Res>
     Object? accountingDocExternalReference = null,
     Object? paymentID = null,
     Object? paymentBatchAdditionalInfo = null,
+    Object? transactionCurrency = null,
   }) {
     return _then(_$_PaymentInfoDto(
       zzHtmcs: null == zzHtmcs
@@ -144,6 +156,10 @@ class __$$_PaymentInfoDtoCopyWithImpl<$Res>
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
               as String,
+      transactionCurrency: null == transactionCurrency
+          ? _value.transactionCurrency
+          : transactionCurrency // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -159,7 +175,9 @@ class _$_PaymentInfoDto extends _PaymentInfoDto {
       @JsonKey(name: 'paymentID', defaultValue: '')
           required this.paymentID,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-          required this.paymentBatchAdditionalInfo})
+          required this.paymentBatchAdditionalInfo,
+      @JsonKey(name: 'transactionCurrency', defaultValue: '')
+          required this.transactionCurrency})
       : super._();
 
   factory _$_PaymentInfoDto.fromJson(Map<String, dynamic> json) =>
@@ -177,10 +195,13 @@ class _$_PaymentInfoDto extends _PaymentInfoDto {
   @override
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   final String paymentBatchAdditionalInfo;
+  @override
+  @JsonKey(name: 'transactionCurrency', defaultValue: '')
+  final String transactionCurrency;
 
   @override
   String toString() {
-    return 'PaymentInfoDto(zzHtmcs: $zzHtmcs, accountingDocExternalReference: $accountingDocExternalReference, paymentID: $paymentID, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo)';
+    return 'PaymentInfoDto(zzHtmcs: $zzHtmcs, accountingDocExternalReference: $accountingDocExternalReference, paymentID: $paymentID, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, transactionCurrency: $transactionCurrency)';
   }
 
   @override
@@ -198,13 +219,20 @@ class _$_PaymentInfoDto extends _PaymentInfoDto {
             (identical(other.paymentBatchAdditionalInfo,
                     paymentBatchAdditionalInfo) ||
                 other.paymentBatchAdditionalInfo ==
-                    paymentBatchAdditionalInfo));
+                    paymentBatchAdditionalInfo) &&
+            (identical(other.transactionCurrency, transactionCurrency) ||
+                other.transactionCurrency == transactionCurrency));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, zzHtmcs,
-      accountingDocExternalReference, paymentID, paymentBatchAdditionalInfo);
+  int get hashCode => Object.hash(
+      runtimeType,
+      zzHtmcs,
+      accountingDocExternalReference,
+      paymentID,
+      paymentBatchAdditionalInfo,
+      transactionCurrency);
 
   @JsonKey(ignore: true)
   @override
@@ -222,15 +250,16 @@ class _$_PaymentInfoDto extends _PaymentInfoDto {
 
 abstract class _PaymentInfoDto extends PaymentInfoDto {
   const factory _PaymentInfoDto(
-          {@JsonKey(name: 'zzHtmcs', defaultValue: '')
-              required final String zzHtmcs,
-          @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
-              required final String accountingDocExternalReference,
-          @JsonKey(name: 'paymentID', defaultValue: '')
-              required final String paymentID,
-          @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-              required final String paymentBatchAdditionalInfo}) =
-      _$_PaymentInfoDto;
+      {@JsonKey(name: 'zzHtmcs', defaultValue: '')
+          required final String zzHtmcs,
+      @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
+          required final String accountingDocExternalReference,
+      @JsonKey(name: 'paymentID', defaultValue: '')
+          required final String paymentID,
+      @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
+          required final String paymentBatchAdditionalInfo,
+      @JsonKey(name: 'transactionCurrency', defaultValue: '')
+          required final String transactionCurrency}) = _$_PaymentInfoDto;
   const _PaymentInfoDto._() : super._();
 
   factory _PaymentInfoDto.fromJson(Map<String, dynamic> json) =
@@ -248,6 +277,9 @@ abstract class _PaymentInfoDto extends PaymentInfoDto {
   @override
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   String get paymentBatchAdditionalInfo;
+  @override
+  @JsonKey(name: 'transactionCurrency', defaultValue: '')
+  String get transactionCurrency;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentInfoDtoCopyWith<_$_PaymentInfoDto> get copyWith =>

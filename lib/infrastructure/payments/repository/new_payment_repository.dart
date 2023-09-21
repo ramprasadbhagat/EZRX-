@@ -5,8 +5,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
@@ -134,8 +134,6 @@ class NewPaymentRepository extends INewPaymentRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required List<CustomerOpenItem> customerOpenItems,
-    required String fromDate,
-    required String toDate,
     required String paymentMethod,
     required User user,
   }) async {
@@ -169,8 +167,6 @@ class NewPaymentRepository extends INewPaymentRepository {
         transactionCurrency:
             customerOpenItems.first.transactionCurrency.getValue(),
         userName: user.username.getValue(),
-        fromDate: fromDate,
-        toDate: toDate,
       );
 
       return Right(response);

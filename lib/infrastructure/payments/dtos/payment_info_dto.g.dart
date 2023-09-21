@@ -14,6 +14,7 @@ _$_PaymentInfoDto _$$_PaymentInfoDtoFromJson(Map<String, dynamic> json) =>
       paymentID: json['paymentID'] as String? ?? '',
       paymentBatchAdditionalInfo:
           json['paymentBatchAdditionalInfo'] as String? ?? '',
+      transactionCurrency: json['transactionCurrency'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_PaymentInfoDtoToJson(_$_PaymentInfoDto instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$_PaymentInfoDtoToJson(_$_PaymentInfoDto instance) =>
       'accountingDocExternalReference': instance.accountingDocExternalReference,
       'paymentID': instance.paymentID,
       'paymentBatchAdditionalInfo': instance.paymentBatchAdditionalInfo,
+      'transactionCurrency': instance.transactionCurrency,
     };

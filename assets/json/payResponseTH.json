@@ -1,0 +1,40 @@
+{
+  "data":{
+    "addCustomerPayment":{
+      "paymentID":"2       20",
+      "valueDate":"2023-09-14",
+      "paymentAmount":1605,
+      "transactionCurrency":"THB",
+      "paymentDocument":"",
+      "invoiceProcessingStatus":"In Progress",
+      "paymentMethod":"Payment Gateway",
+      "iban":"",
+      "bankIdentification":"",
+      "bankCountryKey":"",
+      "bankKey":"",
+      "bankAccountNumber":"",
+      "bankName":"",
+      "paymentCardID":"",
+      "paymentCardNumber":"",
+      "paymentCardHolderName":"",
+      "paymentCardMaskedNumber":"",
+      "paymentCardTypeName":"",
+      "extensibilityCustomField":"{\"paymentBatchAdditionalInfo\":[{\"businessContext\":\"Y\",\"label\":\"Omni Channel\",\"value\":\"\\u003chtml:button id=\\\"btn_submit\\\"\\u003ePay Now\\u003c/html:button\\u003e\\u003chtml:script language=\\\"javascript\\\"\\u003e$(\\\"#btn_submit\\\").click(function(){var win, doc;win = window.open(\\\"\\\",\\\"_blank\\\");doc = win.document;doc.write('\\u003chtml\\u003e\\u003chead\\u003e\\u003c/head\\u003e\\u003cbody\\u003e\\u003cscript type=\\\"text/javascript\\\" src=\\\"https://dev-kpaymentgateway.kasikornbank.com/ui/v2/kpayment.min.js\\\" data-apikey=\\\"pkey_test_21102hvZyafqGFFzN0G3NjphkJZ2NPFbRBMRq\\\" data-amount=\\\"1605.00\\\" data-currency=\\\"THB\\\" data-payment-methods=\\\"qr\\\" data-order-id=\\\"order_test_21102ceb1295b54154623b77b762d7c391acb\\\"\\u003e\\u003c/script\\u003e\\u003c/body\\u003e\\u003c/html\\u003e');doc.close();})\\u003c/html:script\\u003e\",\"technicalName\":\"ZZHTMCS\"},{\"businessContext\":\"Z\",\"label\":\"QR Code\",\"value\":\"\",\"technicalName\":\"Z_CCP_PAYMENT_QRCODE\"},{\"businessContext\":\"Payment\",\"label\":\"QR Code\",\"value\":\"\",\"technicalName\":\"Z_CCP_PAYMENT_QRCODE\"},{\"businessContext\":\"Payment\",\"label\":\"Payment Advice Number\",\"value\":\"09EZ230001050801\",\"technicalName\":\"ZZADVICE\"}]}",
+      "customId":null,
+      "tmpPaytByDigitalPaytService":null,
+      "payerByPaymentServiceProvider":null,
+      "paymentRefByPaytSrvcProvider":"",
+      "paymentServiceProvider":"",
+      "transactionStatus":null,
+      "customerInvoice":null,
+      "paymentCardData":null,
+      "paytCardVerificatDetResultText":null,
+      "disputeCaseInformationText":null,
+      "userName":null,
+      "paymentBatchAdditionalInfo":"23C34D45D065584",
+      "accountingDocExternalReference":"290220171160020377001SD 1160020377",
+      "zCcpPaymentQRCode":"",
+      "zzHtmcs":"\u003chtml:button id=\"btn_submit\"\u003ePay Now\u003c/html:button\u003e\u003chtml:script language=\"javascript\"\u003e$(\"#btn_submit\").click(function(){var win, doc;win = window.open(\"\",\"_blank\");doc = win.document;doc.write('\u003chtml\u003e\u003chead\u003e\u003c/head\u003e\u003cbody\u003e\u003cscript type=\"text/javascript\" src=\"https://dev-kpaymentgateway.kasikornbank.com/ui/v2/kpayment.min.js\" data-apikey=\"pkey_test_21102hvZyafqGFFzN0G3NjphkJZ2NPFbRBMRq\" data-amount=\"1605.00\" data-currency=\"THB\" data-payment-methods=\"qr\" data-order-id=\"order_test_21102ceb1295b54154623b77b762d7c391acb\"\u003e\u003c/script\u003e\u003c/body\u003e\u003c/html\u003e');doc.close();})\u003c/html:script\u003e"
+    }
+  }
+}
