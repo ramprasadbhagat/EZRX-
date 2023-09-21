@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
@@ -26,6 +27,9 @@ import 'package:mocktail/mocktail.dart';
 import '../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
+class EligibityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -56,6 +60,7 @@ void main() {
   late Notifications notifications;
   late List<CustomerCodeInfo> customerCodeListMock;
   late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
+  late EligibilityBloc eligibilityBlockMock;
 
   setUpAll(() {
     locator.registerLazySingleton(() => AppRouter());
@@ -68,6 +73,9 @@ void main() {
       eligibilityBlocMock = EligibilityBlocMock();
       notificationBlocMock = MockNotificationBloc();
       returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
+      eligibilityBlockMock = EligibityBlocMock();
+      when(() => eligibilityBlockMock.state)
+          .thenReturn(EligibilityState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
@@ -103,6 +111,9 @@ void main() {
             ),
             BlocProvider<ReturnSummaryDetailsBloc>(
               create: (context) => returnSummaryDetailsBlocMock,
+            ),
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlockMock,
             ),
           ],
           child: const Material(child: NotificationTab()),
@@ -310,6 +321,107 @@ void main() {
             const NotificationEvent.loadMore(),
           ),
         ).called(1);
+      },
+    );
+
+    testWidgets(
+      'Stop Navigate to Return page when disableReturn true',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fake-user'),
+          role: Role.empty().copyWith(
+            type: RoleType('client_user'),
+          ),
+          disableReturns: true,
+        );
+
+        when(() => eligibilityBlockMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+        when(() => notificationBlocMock.state).thenReturn(
+          NotificationState.initial().copyWith(
+            notificationList: notifications,
+            isFetching: false,
+            isReadNotification: true,
+          ),
+        );
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: customerCodeListMock.first,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final itemKey =
+            find.byKey(Key(notifications.notificationData.first.description));
+        expect(itemKey, findsOneWidget);
+        await tester.tap(
+          itemKey,
+          warnIfMissed: true,
+        );
+        await tester.pump(const Duration(seconds: 1));
+        expect(
+          autoRouterMock.current.name ==
+              'ReturnRequestSummaryByItemDetailsRoute',
+          false,
+        );
+      },
+    );
+
+    testWidgets(
+      'Stop Navigate to ViewbyOrderDetails page when userCanAccessOrderHistory false',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fake-user'),
+          role: Role.empty().copyWith(
+            type: RoleType('root_admin'),
+          ),
+          disableReturns: true,
+        );
+
+        when(() => eligibilityBlockMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeUser.copyWith(),
+          ),
+        );
+        when(() => notificationBlocMock.state).thenReturn(
+          NotificationState.initial().copyWith(
+            notificationList: notifications,
+            isFetching: false,
+            isReadNotification: true,
+          ),
+        );
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: customerCodeListMock.first,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final itemKey =
+            find.byKey(Key(notifications.notificationData.first.description));
+        expect(itemKey, findsOneWidget);
+        await tester.tap(
+          itemKey,
+          warnIfMissed: true,
+        );
+        await tester.pump(const Duration(seconds: 1));
+        expect(
+          autoRouterMock.current.name == 'view_by_order_details_page',
+          false,
+        );
       },
     );
   });

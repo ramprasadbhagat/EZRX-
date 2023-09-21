@@ -57,7 +57,7 @@ class ServiceTile extends StatelessWidget {
     return <MoreDetailsTile>[
       if (eligibilityState.user.userCanAccessOrderHistory)
         MoreDetailsTile.orderTab(context),
-      MoreDetailsTile.returnsTab(context),
+      if (eligibilityState.isReturnsEnable) MoreDetailsTile.returnsTab(context),
       if (!eligibilityState.salesOrgConfigs.disablePayment)
         MoreDetailsTile.paymentsTab(context),
       MoreDetailsTile.loyaltyTab(),

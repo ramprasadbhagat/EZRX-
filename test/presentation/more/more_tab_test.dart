@@ -175,6 +175,39 @@ void main() {
 
   group('More Tab Test', () {
     testWidgets(
+      ' -> Hide returnsTile when disableReturn true',
+      (WidgetTester tester) async {
+        VisibilityDetectorController.instance.updateInterval = Duration.zero;
+
+        final fakeUser = User.empty().copyWith(
+          disableReturns: true,
+          role: Role.empty().copyWith(
+            type: RoleType('client_user'),
+          ),
+          fullName: const FullName(firstName: 'test', lastName: 'test'),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+          ),
+        );
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        final paymentsTile = find.byKey(WidgetKeys.returnsTile);
+        expect(paymentsTile, findsNothing);
+      },
+    );
+    testWidgets(
       ' -> Hide paymentsTile when Enable Payment Configuration is off',
       (WidgetTester tester) async {
         VisibilityDetectorController.instance.updateInterval = Duration.zero;

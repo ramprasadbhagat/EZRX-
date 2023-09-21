@@ -69,20 +69,25 @@ class _NotificationList extends StatelessWidget {
     BuildContext context,
   ) {
     final notificationType = notificationData.type;
+
     //No Navigation for incorrect data
     if (notificationType.isValid() &&
         notificationType.getDetailPageRoute.isEmpty) return;
     final eligibilityState = context.read<EligibilityBloc>().state;
     //Event call for Return Detail Page
-    if (notificationType.navigateToReturnDetailPage) {
+    if (notificationType.navigateToReturnDetailPage &&
+        eligibilityState.isReturnsEnable) {
       context.read<ReturnSummaryDetailsBloc>().add(
             ReturnSummaryDetailsEvent.fetch(
               returnId: notificationData.returnRequestId,
             ),
           );
+      //Navigate to return Detail Page
+      context.router.pushNamed(notificationType.getDetailPageRoute);
     }
     //Event call for Order Detail Page
-    else if (notificationType.navigateToOrderDetailPage) {
+    else if (notificationType.navigateToOrderDetailPage &&
+        eligibilityState.user.userCanAccessOrderHistory) {
       context.read<ViewByOrderDetailsBloc>().add(
             ViewByOrderDetailsEvent.fetch(
               user: eligibilityState.user,
@@ -91,9 +96,9 @@ class _NotificationList extends StatelessWidget {
               salesOrganisation: eligibilityState.salesOrganisation,
             ),
           );
+      //Navigate to respective Detail Page
+      context.router.pushNamed(notificationType.getDetailPageRoute);
     }
-    //Navigate to respective Detail Page
-    context.router.pushNamed(notificationType.getDetailPageRoute);
   }
 }
 

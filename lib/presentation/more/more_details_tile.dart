@@ -126,6 +126,7 @@ class MoreDetailsTile {
       );
 
   factory MoreDetailsTile.returnsTab(BuildContext context) => MoreDetailsTile(
+        key: WidgetKeys.returnsTile,
         icon: SvgPicture.asset(
           'assets/svg/more_return.svg',
           height: 24,

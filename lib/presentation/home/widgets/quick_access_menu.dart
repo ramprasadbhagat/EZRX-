@@ -155,7 +155,7 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     // homeQuickAccessWebLoginMenu,
     if (eligibilityState.user.userCanAccessOrderHistory)
       homeQuickAccessOrdersMenu,
-    homeQuickAccessReturnsMenu,
+    if (eligibilityState.isReturnsEnable) homeQuickAccessReturnsMenu,
     if (!eligibilityState.salesOrgConfigs.disablePayment)
       homeQuickAccessPaymentsMenu,
     // homeQuickAccessLoyaltyMenu,
