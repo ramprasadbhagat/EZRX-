@@ -12,11 +12,13 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -27,6 +29,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -469,5 +472,106 @@ void main() {
       material: fakeCartItem.materials.first.materialInfo,
     );
     expect(result.isRight(), true);
+  });
+
+  group('addHistoryItemsToCart test', () {
+    test('addHistoryItemsToCart test right', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+      final upsertCartRequest = CartProductRequest.empty().copyWith(
+        salesOrg: SalesOrg('2601'),
+        customerCode: '100000345',
+        shipToId: '1234567',
+        quantity: 1,
+        type: 'material',
+        itemId: 'fake-item-Id',
+        language: 'en',
+        productNumber: 'fake-material-number',
+        parentID: 'fake-parent-Id',
+      );
+      when(
+        () => cartRemoteDataSource.upsertCart(
+          requestParams:
+              CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+        ),
+      ).thenAnswer(
+        (invocation) async => [
+          PriceAggregate.empty().copyWith(
+            materialInfo: MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('fake-material-number'),
+              type: MaterialInfoType('material'),
+              parentID: 'fake-parent-Id',
+              quantity: 1,
+            ),
+          )
+        ],
+      );
+
+      final result = await cartRepository.addHistoryItemsToCart(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+        shipToInfo: fakeShipToInfo,
+        itemId: 'fake-item-Id',
+        counterOfferDetails: RequestCounterOfferDetails.empty(),
+        language: 'en',
+        materialInfo: <MaterialInfo>[
+          MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-material-number'),
+            type: MaterialInfoType('material'),
+            parentID: 'fake-parent-Id',
+          )
+        ],
+        quantity: [1],
+        salesOrganisationConfig: SalesOrganisationConfigs.empty().copyWith(
+          salesOrg: SalesOrg('2601'),
+        ),
+      );
+      expect(result.isRight(), true);
+    });
+
+    test('addHistoryItemsToCart test left', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+      final upsertCartRequest = CartProductRequest.empty().copyWith(
+        salesOrg: SalesOrg('2601'),
+        customerCode: '100000345',
+        shipToId: '1234567',
+        quantity: 1,
+        type: 'material',
+        itemId: 'fake-item-Id',
+        language: 'en',
+        productNumber: 'fake-material-number',
+        parentID: 'fake-parent-Id',
+      );
+      when(
+        () => cartRemoteDataSource.upsertCart(
+          requestParams:
+              CartProductRequestDto.fromDomain(upsertCartRequest).toMap(),
+        ),
+      ).thenThrow(
+        (invocation) async => MockException(),
+      );
+
+      final result = await cartRepository.addHistoryItemsToCart(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: mockSalesOrganisation,
+        shipToInfo: fakeShipToInfo,
+        itemId: 'fake-item-Id',
+        counterOfferDetails: RequestCounterOfferDetails.empty(),
+        language: 'en',
+        materialInfo: <MaterialInfo>[
+          MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-material-number'),
+            type: MaterialInfoType('material'),
+            parentID: 'fake-parent-Id',
+          )
+        ],
+        quantity: [1],
+        salesOrganisationConfig: SalesOrganisationConfigs.empty().copyWith(
+          salesOrg: SalesOrg('2601'),
+        ),
+      );
+      expect(result.isLeft(), true);
+    });
   });
 }

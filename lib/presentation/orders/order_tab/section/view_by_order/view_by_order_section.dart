@@ -49,15 +49,10 @@ class ViewByOrdersPage extends StatelessWidget {
           previous.isUpserting != current.isUpserting &&
           !current.isUpserting &&
           context.router.current.path == 'main',
-      listener: (context, state) {
-        state.apiFailureOrSuccessOption.fold(
-          () => context.router.pushNamed('orders/cart'),
-          (option) => option.fold(
-            (failure) => ErrorUtils.handleApiFailure(context, failure),
-            (_) {},
-          ),
-        );
-      },
+      listener: (context, state) => state.apiFailureOrSuccessOption.fold(
+        () => context.router.pushNamed('orders/cart'),
+        (_) => {},
+      ),
       child: BlocConsumer<ViewByOrderBloc, ViewByOrderState>(
         listenWhen: (previous, current) =>
             previous.failureOrSuccessOption != current.failureOrSuccessOption,

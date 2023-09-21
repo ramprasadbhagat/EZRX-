@@ -87,9 +87,10 @@ class ViewByOrderDetailsPage extends StatelessWidget {
           listenWhen: (previous, current) =>
               previous.isUpserting != current.isUpserting &&
               !current.isUpserting,
-          listener: (context, state) {
-            context.router.pushNamed('orders/cart');
-          },
+          listener: (context, state) => state.apiFailureOrSuccessOption.fold(
+            () => context.router.pushNamed('orders/cart'),
+            (_) => {},
+          ),
           buildWhen: (previous, current) =>
               previous.isUpserting != current.isUpserting,
           builder: (context, stateCart) {

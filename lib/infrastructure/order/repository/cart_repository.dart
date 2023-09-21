@@ -500,7 +500,9 @@ class CartRepository implements ICartRepository {
           materialInfo: materialInfo[i],
           itemId: itemId,
         );
-
+        if (cartDetail.isLeft()) {
+          return cartDetail;
+        }
         cartDetail.fold((l) => {}, (r) {
           productList.clear();
           productList.addAll(r);
