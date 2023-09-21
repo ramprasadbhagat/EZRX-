@@ -38,7 +38,6 @@ import 'package:ezrxmobile/presentation/core/webview_page.dart';
 import 'package:ezrxmobile/presentation/home/home_tab.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/bundle_item_detail_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/orders_tab.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/view_by_item_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/view_by_order_section.dart';
@@ -310,12 +309,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(
       path: 'payments/payment_advice_created',
       page: PaymentAdviceCreatedPage,
-    ),
-    CustomRoute(
-      path: 'orders/bundle_item_detail',
-      page: BundleItemDetailPage,
-      transitionsBuilder: TransitionsBuilders.slideBottom,
-      fullscreenDialog: true,
     ),
     CustomRoute(
       path: 'orders/add_to_cart',
