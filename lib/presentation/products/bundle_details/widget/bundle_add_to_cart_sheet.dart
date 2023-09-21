@@ -239,13 +239,13 @@ class _BundleSheetFooter extends StatelessWidget {
                           () {
                             if (!state.isUpserting &&
                                 state.cartProducts.isNotEmpty) {
-                              Navigator.pop(context);
+                              context.router.popForced();
                               CustomSnackBar(
                                 messageText: 'Item has been added to cart'.tr(),
                               ).show(context);
                             }
                           },
-                          (either) => Navigator.pop(context),
+                          (either) => context.router.pop(),
                         );
                       },
                       builder: (context, stateCart) {

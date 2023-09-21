@@ -242,7 +242,7 @@ void main() {
       );
 
       expect(cartPageFinder, findsOneWidget);
-      expect(cartItemFinder, findsOneWidget);
+      expect(cartItemFinder, findsNWidgets(2));
     });
 
     testWidgets('Open counter offer sheet from cart', (tester) async {
@@ -275,7 +275,7 @@ void main() {
       final counterOfferBottomSheetFinder =
           find.byKey(WidgetKeys.counterOfferBottomSheet);
       expect(cartPageFinder, findsOneWidget);
-      expect(cartItemFinder, findsOneWidget);
+      expect(cartItemFinder, findsNWidgets(2));
       expect(counterOfferPriceButtonFinder.first, findsOneWidget);
 
       await tester.tap(counterOfferPriceButtonFinder.first);
@@ -318,7 +318,7 @@ void main() {
       final counterOfferBottomSheetFinder =
           find.byKey(WidgetKeys.counterOfferBottomSheet);
       expect(cartPageFinder, findsOneWidget);
-      expect(cartItemFinder, findsOneWidget);
+      expect(cartItemFinder, findsNWidgets(2));
       expect(counterOfferPriceButtonFinder.first, findsOneWidget);
 
       await tester.tap(counterOfferPriceButtonFinder.first);
@@ -396,7 +396,7 @@ void main() {
       final counterOfferBottomSheetFinder =
           find.byKey(WidgetKeys.counterOfferBottomSheet);
       expect(cartPageFinder, findsOneWidget);
-      expect(cartItemFinder, findsOneWidget);
+      expect(cartItemFinder, findsNWidgets(2));
       expect(counterOfferPriceButtonFinder.first, findsOneWidget);
 
       await tester.tap(counterOfferPriceButtonFinder.first);

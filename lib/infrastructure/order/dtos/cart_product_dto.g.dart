@@ -8,10 +8,10 @@ part of 'cart_product_dto.dart';
 
 _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
     _$_CartProductDto(
-      productID: json['ProductID'] as String? ?? '',
-      parentID: json['ParentID'] as String? ?? '',
-      type: json['Type'] as String? ?? '',
-      quantity: json['Quantity'] as int? ?? 0,
+      productID: json['productID'] as String? ?? '',
+      parentID: json['parentID'] as String? ?? '',
+      type: json['type'] as String? ?? '',
+      quantity: json['quantity'] as int? ?? 0,
       materialNumber: json['materialNumber'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
       therapeuticClass: json['therapeuticClass'] as String? ?? '',
@@ -21,20 +21,20 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
       principalName: json['principalName'] as String? ?? '',
       principalCode: json['principalCode'] as String? ?? '',
-      counterOfferPrice: (json['CounterOfferPrice'] as num?)?.toDouble() ?? 0,
+      counterOfferPrice: (json['counterOfferPrice'] as num?)?.toDouble() ?? 0,
       counterOfferDiscount:
-          (json['DiscountOverridePercentage'] as num?)?.toDouble() ?? 0,
-      counterOfferCurrency: json['CounterOfferCurrency'] as String? ?? '',
-      remarks: json['Comment'] as String? ?? '',
-      bundleDetails: json['BundleDetails'] == null
+          (json['discountOverridePercentage'] as num?)?.toDouble() ?? 0,
+      counterOfferCurrency: json['counterOfferCurrency'] as String? ?? '',
+      remarks: json['comment'] as String? ?? '',
+      bundleDetails: json['bundleDetails'] == null
           ? BundleDetailsDto.empty
           : BundleDetailsDto.fromJson(
-              json['BundleDetails'] as Map<String, dynamic>),
-      bundleMaterials: (json['BundleMaterials'] as List<dynamic>?)
+              json['bundleDetails'] as Map<String, dynamic>),
+      bundleMaterials: (json['bundleMaterials'] as List<dynamic>?)
               ?.map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      bonusMaterials: (json['BonusMaterials'] as List<dynamic>?)
+      bonusMaterials: (json['bonusMaterials'] as List<dynamic>?)
               ?.map(
                   (e) => BonusSampleItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -46,10 +46,10 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
     <String, dynamic>{
-      'ProductID': instance.productID,
-      'ParentID': instance.parentID,
-      'Type': instance.type,
-      'Quantity': instance.quantity,
+      'productID': instance.productID,
+      'parentID': instance.parentID,
+      'type': instance.type,
+      'quantity': instance.quantity,
       'materialNumber': instance.materialNumber,
       'materialDescription': instance.materialDescription,
       'therapeuticClass': instance.therapeuticClass,
@@ -59,14 +59,14 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'genericMaterialName': instance.genericMaterialName,
       'principalName': instance.principalName,
       'principalCode': instance.principalCode,
-      'CounterOfferPrice': instance.counterOfferPrice,
-      'DiscountOverridePercentage': instance.counterOfferDiscount,
-      'CounterOfferCurrency': instance.counterOfferCurrency,
-      'Comment': instance.remarks,
-      'BundleDetails': instance.bundleDetails.toJson(),
-      'BundleMaterials':
+      'counterOfferPrice': instance.counterOfferPrice,
+      'discountOverridePercentage': instance.counterOfferDiscount,
+      'counterOfferCurrency': instance.counterOfferCurrency,
+      'comment': instance.remarks,
+      'bundleDetails': instance.bundleDetails.toJson(),
+      'bundleMaterials':
           instance.bundleMaterials.map((e) => e.toJson()).toList(),
-      'BonusMaterials': instance.bonusMaterials.map((e) => e.toJson()).toList(),
+      'bonusMaterials': instance.bonusMaterials.map((e) => e.toJson()).toList(),
       'taxes': instance.tax,
       'hidePrice': instance.hidePrice,
       'suspensionStatus': instance.isSuspended,
@@ -74,9 +74,9 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
 
 _$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>
     _$_BundleDetailsDto(
-      bundleName: json['BundleName'] as String? ?? '',
-      bundleCode: json['BundleCode'] as String? ?? '',
-      bundleInfo: (json['BundleInformation'] as List<dynamic>?)
+      bundleName: json['bundleName'] as String? ?? '',
+      bundleCode: json['bundleCode'] as String? ?? '',
+      bundleInfo: (json['bundleInformation'] as List<dynamic>?)
               ?.map((e) => BundleInfoDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
@@ -84,7 +84,7 @@ _$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_BundleDetailsDtoToJson(_$_BundleDetailsDto instance) =>
     <String, dynamic>{
-      'BundleName': instance.bundleName,
-      'BundleCode': instance.bundleCode,
-      'BundleInformation': instance.bundleInfo.map((e) => e.toJson()).toList(),
+      'bundleName': instance.bundleName,
+      'bundleCode': instance.bundleCode,
+      'bundleInformation': instance.bundleInfo.map((e) => e.toJson()).toList(),
     };

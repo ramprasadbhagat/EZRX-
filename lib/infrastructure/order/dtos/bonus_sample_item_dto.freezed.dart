@@ -30,7 +30,7 @@ mixin _$BonusSampleItemDto {
   String get materialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'principalCode', defaultValue: '')
   String get principalCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ItemId', defaultValue: '')
+  @JsonKey(name: 'itemId', defaultValue: '')
   String get itemId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -56,7 +56,7 @@ abstract class $BonusSampleItemDtoCopyWith<$Res> {
           String materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
           String principalCode,
-      @JsonKey(name: 'ItemId', defaultValue: '')
+      @JsonKey(name: 'itemId', defaultValue: '')
           String itemId});
 }
 
@@ -128,7 +128,7 @@ abstract class _$$_BonusSampleItemDtoCopyWith<$Res>
           String materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
           String principalCode,
-      @JsonKey(name: 'ItemId', defaultValue: '')
+      @JsonKey(name: 'itemId', defaultValue: '')
           String itemId});
 }
 
@@ -193,7 +193,7 @@ class _$_BonusSampleItemDto extends _BonusSampleItemDto {
           required this.materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
           required this.principalCode,
-      @JsonKey(name: 'ItemId', defaultValue: '')
+      @JsonKey(name: 'itemId', defaultValue: '')
           required this.itemId})
       : super._();
 
@@ -216,7 +216,7 @@ class _$_BonusSampleItemDto extends _BonusSampleItemDto {
   @JsonKey(name: 'principalCode', defaultValue: '')
   final String principalCode;
   @override
-  @JsonKey(name: 'ItemId', defaultValue: '')
+  @JsonKey(name: 'itemId', defaultValue: '')
   final String itemId;
 
   @override
@@ -273,7 +273,7 @@ abstract class _BonusSampleItemDto extends BonusSampleItemDto {
           required final String materialDescription,
       @JsonKey(name: 'principalCode', defaultValue: '')
           required final String principalCode,
-      @JsonKey(name: 'ItemId', defaultValue: '')
+      @JsonKey(name: 'itemId', defaultValue: '')
           required final String itemId}) = _$_BonusSampleItemDto;
   const _BonusSampleItemDto._() : super._();
 
@@ -296,7 +296,7 @@ abstract class _BonusSampleItemDto extends BonusSampleItemDto {
   @JsonKey(name: 'principalCode', defaultValue: '')
   String get principalCode;
   @override
-  @JsonKey(name: 'ItemId', defaultValue: '')
+  @JsonKey(name: 'itemId', defaultValue: '')
   String get itemId;
   @override
   @JsonKey(ignore: true)

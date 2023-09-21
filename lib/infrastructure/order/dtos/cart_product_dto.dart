@@ -21,10 +21,10 @@ part 'cart_product_dto.g.dart';
 class CartProductDto with _$CartProductDto {
   const CartProductDto._();
   const factory CartProductDto({
-    @JsonKey(name: 'ProductID', defaultValue: '') required String productID,
-    @JsonKey(name: 'ParentID', defaultValue: '') required String parentID,
-    @JsonKey(name: 'Type', defaultValue: '') required String type,
-    @JsonKey(name: 'Quantity', defaultValue: 0) required int quantity,
+    @JsonKey(name: 'productID', defaultValue: '') required String productID,
+    @JsonKey(name: 'parentID', defaultValue: '') required String parentID,
+    @JsonKey(name: 'type', defaultValue: '') required String type,
+    @JsonKey(name: 'quantity', defaultValue: 0) required int quantity,
     @JsonKey(name: 'materialNumber', defaultValue: '')
         required String materialNumber,
     @JsonKey(name: 'materialDescription', defaultValue: '')
@@ -43,19 +43,19 @@ class CartProductDto with _$CartProductDto {
         required String principalName,
     @JsonKey(name: 'principalCode', defaultValue: '')
         required String principalCode,
-    @JsonKey(name: 'CounterOfferPrice', defaultValue: 0)
+    @JsonKey(name: 'counterOfferPrice', defaultValue: 0)
         required double counterOfferPrice,
-    @JsonKey(name: 'DiscountOverridePercentage', defaultValue: 0)
+    @JsonKey(name: 'discountOverridePercentage', defaultValue: 0)
         required double counterOfferDiscount,
-    @JsonKey(name: 'CounterOfferCurrency', defaultValue: '')
+    @JsonKey(name: 'counterOfferCurrency', defaultValue: '')
         required String counterOfferCurrency,
-    @JsonKey(name: 'Comment', defaultValue: '') required String remarks,
+    @JsonKey(name: 'comment', defaultValue: '') required String remarks,
     @Default(BundleDetailsDto.empty)
-    @JsonKey(name: 'BundleDetails')
+    @JsonKey(name: 'bundleDetails')
         BundleDetailsDto bundleDetails,
-    @JsonKey(name: 'BundleMaterials', defaultValue: <MaterialDto>[])
+    @JsonKey(name: 'bundleMaterials', defaultValue: <MaterialDto>[])
         required List<MaterialDto> bundleMaterials,
-    @JsonKey(name: 'BonusMaterials', defaultValue: <BonusSampleItemDto>[])
+    @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
         required List<BonusSampleItemDto> bonusMaterials,
     @JsonKey(name: 'taxes', readValue: handleTax) required double tax,
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
@@ -162,9 +162,9 @@ class CartProductDto with _$CartProductDto {
 class BundleDetailsDto with _$BundleDetailsDto {
   const BundleDetailsDto._();
   const factory BundleDetailsDto({
-    @JsonKey(name: 'BundleName', defaultValue: '') required String bundleName,
-    @JsonKey(name: 'BundleCode', defaultValue: '') required String bundleCode,
-    @JsonKey(name: 'BundleInformation', defaultValue: <BundleInfoDto>[])
+    @JsonKey(name: 'bundleName', defaultValue: '') required String bundleName,
+    @JsonKey(name: 'bundleCode', defaultValue: '') required String bundleCode,
+    @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
         required List<BundleInfoDto> bundleInfo,
   }) = _BundleDetailsDto;
   factory BundleDetailsDto.fromDomain(

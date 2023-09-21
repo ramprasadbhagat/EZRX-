@@ -23,7 +23,7 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
         required String materialDescription,
     @JsonKey(name: 'principalCode', defaultValue: '')
         required String principalCode,
-    @JsonKey(name: 'ItemId', defaultValue: '') required String itemId,
+    @JsonKey(name: 'itemId', defaultValue: '') required String itemId,
   }) = _BonusSampleItemDto;
 
   BonusSampleItem toDomain() {

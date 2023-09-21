@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
@@ -69,7 +70,7 @@ void main() async {
 
           expect(
             result,
-            List.from(finalData)
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
                 .map((e) => CartProductDto.fromJson(e).toDomain)
                 .toList(),
           );
@@ -104,7 +105,7 @@ void main() async {
 
           expect(
             result,
-            List.from(finalData)
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
                 .map((e) => CartProductDto.fromJson(e).toDomain)
                 .toList(),
           );
@@ -198,7 +199,7 @@ void main() async {
 
           expect(
             result,
-            List.from(finalData)
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
                 .map((e) => CartProductDto.fromJson(e).toDomain)
                 .toList(),
           );
