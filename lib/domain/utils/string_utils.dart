@@ -2,6 +2,8 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+
 class StringUtils {
   static final formatter = NumberFormat('###,###,###,###,###.00');
 
@@ -61,5 +63,18 @@ class StringUtils {
         .join();
 
     return '${semiCamel.characters.getRange(0, 1).toLowerCase()}${semiCamel.characters.getRange(1)}';
+  }
+
+  static String displayPriceByMaterialType(
+    SalesOrganisationConfigs salesOrgConfig,
+    double price,
+    OrderItemType type,
+  ) {
+    if (type.isMaterialTypeBonus) return 'FREE';
+    if (price.isNegative) {
+      return '- ${salesOrgConfig.currency.code} ${formatter.format(price * -1)}';
+    }
+
+    return '${salesOrgConfig.currency.code} ${formatter.format(price)}';
   }
 }

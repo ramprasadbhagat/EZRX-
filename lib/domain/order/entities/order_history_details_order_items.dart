@@ -119,6 +119,9 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
     return StatusType('');
   }
+
+  String get priceByMaterialType =>
+      type.isMaterialTypeBonus ? 'FREE' : totalPrice.getValue();
 }
 
 extension ViewByOrderDetailsListExtension

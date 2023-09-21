@@ -47,9 +47,10 @@ class _OrderItems extends StatelessWidget {
                               label: removeLeadingZero(
                                 e.materialNumber.getOrDefaultValue(''),
                               ),
-                              subtitle: StringUtils.displayPrice(
+                              subtitle: StringUtils.displayPriceByMaterialType(
                                 context.read<SalesOrgBloc>().state.configs,
                                 e.unitPrice.zpPrice,
+                                e.type,
                               ),
                               title: e.materialDescription,
                               quantity: '${e.qty}',
@@ -74,7 +75,7 @@ class _OrderItems extends StatelessWidget {
                                         .read<SalesOrgBloc>()
                                         .state
                                         .configs,
-                                    price: e.totalPrice.getOrDefaultValue(''),
+                                    price: e.priceByMaterialType,
                                   ),
                                 ],
                               ),
