@@ -18,7 +18,7 @@ void main() {
       );
     });
     test('Test toDomain', () {
-      final configs = MaterialDetailDto.fromJson(
+      final configs = MaterialPriceDetailDto.fromJson(
         data['data']['customerMaterialPriceDetails'][0],
       ).toDomain();
       expect(configs.price.materialNumber.getOrCrash(), '000000000021038305');

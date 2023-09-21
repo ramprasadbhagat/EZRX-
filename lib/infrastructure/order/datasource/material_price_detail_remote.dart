@@ -61,7 +61,7 @@ class MaterialPriceDetailRemoteDataSource {
           res.data['data']['customerMaterialPriceDetails'];
 
       return List.from(materialDetailData)
-          .map((e) => MaterialDetailDto.fromJson(e).toDomain())
+          .map((e) => MaterialPriceDetailDto.fromJson(e).toDomain())
           .toList();
     });
   }
@@ -106,7 +106,7 @@ class MaterialPriceDetailRemoteDataSource {
           res.data['data']['customerMaterialPriceDetails'];
 
       return List.from(materialDetailData)
-          .map((e) => MaterialDetailDto.fromJson(e).toDomain())
+          .map((e) => MaterialPriceDetailDto.fromJson(e).toDomain())
           .toList();
     });
   }

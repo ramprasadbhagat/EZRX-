@@ -501,7 +501,7 @@ void main() {
               materialNumber: MaterialNumber('fake-material-number'),
               type: MaterialInfoType('material'),
               parentID: 'fake-parent-Id',
-              quantity: 1,
+              quantity: MaterialQty(1),
             ),
           )
         ],

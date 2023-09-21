@@ -17,7 +17,7 @@ class MaterialPriceDetailLocalDataSource {
     final finalData = data['data']['customerMaterialPriceDetails'];
 
     return List.from(finalData)
-        .map((e) => MaterialDetailDto.fromJson(e).toDomain())
+        .map((e) => MaterialPriceDetailDto.fromJson(e).toDomain())
         .toList();
   }
 }

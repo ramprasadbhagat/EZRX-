@@ -87,7 +87,7 @@ void main() {
         expect(
           result,
           List.from(materialDetailData)
-              .map((e) => MaterialDetailDto.fromJson(e).toDomain())
+              .map((e) => MaterialPriceDetailDto.fromJson(e).toDomain())
               .toList(),
         );
       });
@@ -132,7 +132,7 @@ void main() {
         expect(
           result,
           List.from(materialDetailData)
-              .map((e) => MaterialDetailDto.fromJson(e).toDomain())
+              .map((e) => MaterialPriceDetailDto.fromJson(e).toDomain())
               .toList(),
         );
       });
