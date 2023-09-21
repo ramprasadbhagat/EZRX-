@@ -17,7 +17,7 @@ class SoaState with _$SoaState {
         appliedFilter: SoaFilter.empty(),
       );
 
-  List<Soa> get filterList => soaList
+  List<Soa> get filterList => soaList.getSoaListRespectMonth
       .where(
         (element) => (DateUtils.isSameMonth(
               element.soaData.date,
