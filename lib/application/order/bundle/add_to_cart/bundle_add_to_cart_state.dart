@@ -13,8 +13,10 @@ class BundleAddToCartState with _$BundleAddToCartState {
         bundleMaterials: <MaterialInfo>[],
       );
 
-  int get totalCount =>
-      bundleMaterials.fold<int>(0, (sum, element) => sum + element.quantity);
+  int get totalCount => bundleMaterials.fold<int>(
+        0,
+        (sum, element) => sum + element.quantity.intValue,
+      );
 
   BundleInfo get bundleOffer =>
       bundle.bundle.sortedBundleInformation.reversed.firstWhere(
@@ -22,8 +24,9 @@ class BundleAddToCartState with _$BundleAddToCartState {
         orElse: () => bundle.bundle.sortedBundleInformation.first,
       );
 
-  List<MaterialInfo> get bundleMaterialsSelected =>
-      bundleMaterials.where((element) => element.quantity > 0).toList();
+  List<MaterialInfo> get bundleMaterialsSelected => bundleMaterials
+      .where((element) => element.quantity.intValue > 0)
+      .toList();
 
   bool get isBundleCountSatisfied =>
       totalCount >= bundle.bundle.minimumQuantityBundleMaterial.quantity;
@@ -34,13 +37,16 @@ class BundleAddToCartState with _$BundleAddToCartState {
             (element) => element.materialNumber == info.materialNumber,
             orElse: () => MaterialInfo.empty(),
           )
-          .quantity;
+          .quantity
+          .intValue;
 
   List<MaterialInfo> selectedMaterialInfo(PriceAggregate materialInCart) =>
       bundleMaterialsSelected
           .map(
             (e) => e.copyWith(
-              quantity: e.quantity + _materialInCart(materialInCart, e),
+              quantity: MaterialQty(
+                e.quantity.intValue + _materialInCart(materialInCart, e),
+              ),
             ),
           )
           .toList();

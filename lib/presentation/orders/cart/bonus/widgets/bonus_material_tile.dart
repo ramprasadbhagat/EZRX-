@@ -27,13 +27,17 @@ import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_blo
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+
 class BonusMaterialTile extends StatelessWidget {
   final MaterialInfo bonusMaterial;
   final PriceAggregate cartProduct;
+  final List<BonusSampleItem> oldBonusList;
   const BonusMaterialTile({
     Key? key,
     required this.bonusMaterial,
     required this.cartProduct,
+    required this.oldBonusList,
   }) : super(key: key);
 
   @override
@@ -76,6 +80,7 @@ class BonusMaterialTile extends StatelessWidget {
                     _CartIcon(
                       bonusItem: bonusMaterial,
                       cartProduct: cartProduct,
+                      oldBonusList: oldBonusList,
                     ),
                   ],
                 ),
@@ -137,7 +142,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   @override
   void initState() {
     _controller.value = TextEditingValue(
-      text: widget.bonusItem.quantity.toString(),
+      text: '0',
       selection: TextSelection.collapsed(
         offset: _controller.selection.base.offset,
       ),
@@ -164,8 +169,13 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
               .copyWith(
                 parentID: widget.cartProduct.materialInfo.materialNumber
                     .getOrDefaultValue(''),
-                quantity: widget.cartProduct
-                    .totalCartProductBonusQty(widget.bonusItem),
+                quantity: widget.cartProduct.totalCartProductBonusQty(
+                  context
+                      .read<BonusMaterialBloc>()
+                      .state
+                      .bonusItemID(widget.bonusItem.materialNumber),
+                  widget.bonusItem.quantity,
+                ),
                 type: MaterialInfoType(''),
               )
               .hashCode,
@@ -183,28 +193,28 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
             onFieldChange: (value) => context.read<BonusMaterialBloc>().add(
                   BonusMaterialEvent.updateBonusItemQuantity(
                     updatedBonusItem: widget.bonusItem.copyWith(
-                      quantity: value,
+                      quantity: MaterialQty(value),
                     ),
                   ),
                 ),
             minusPressed: (k) => context.read<BonusMaterialBloc>().add(
                   BonusMaterialEvent.updateBonusItemQuantity(
                     updatedBonusItem: widget.bonusItem.copyWith(
-                      quantity: k,
+                      quantity: MaterialQty(k),
                     ),
                   ),
                 ),
             addPressed: (k) => context.read<BonusMaterialBloc>().add(
                   BonusMaterialEvent.updateBonusItemQuantity(
                     updatedBonusItem: widget.bonusItem.copyWith(
-                      quantity: k,
+                      quantity: MaterialQty(k),
                     ),
                   ),
                 ),
             onSubmit: (value) => context.read<BonusMaterialBloc>().add(
                   BonusMaterialEvent.updateBonusItemQuantity(
                     updatedBonusItem: widget.bonusItem.copyWith(
-                      quantity: value,
+                      quantity: MaterialQty(value),
                     ),
                   ),
                 ),
@@ -219,14 +229,16 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
 class _CartIcon extends StatelessWidget {
   final MaterialInfo bonusItem;
   final PriceAggregate cartProduct;
+  final List<BonusSampleItem> oldBonusList;
   const _CartIcon({
     Key? key,
     required this.bonusItem,
     required this.cartProduct,
+    required this.oldBonusList,
   }) : super(key: key);
 
   void _addBonusMaterial(BuildContext context) {
-    if (MaterialQty(bonusItem.quantity).isBonusMaxQuantityExceed) {
+    if (bonusItem.quantity.isBonusMaxQuantityExceed) {
       CustomSnackBar(
         icon: const Icon(
           Icons.info,
@@ -239,83 +251,98 @@ class _CartIcon extends StatelessWidget {
       return;
     }
 
+    final bonusItemId = context
+        .read<BonusMaterialBloc>()
+        .state
+        .bonusItemID(bonusItem.materialNumber);
+
     context.read<CartBloc>().add(
           CartEvent.addBonusToCartItem(
             bonusMaterial: bonusItem.copyWith(
               parentID:
                   cartProduct.materialInfo.materialNumber.getOrDefaultValue(''),
-              quantity: cartProduct.totalCartProductBonusQty(bonusItem),
+              quantity: cartProduct.totalCartProductBonusQty(
+                bonusItemId,
+                bonusItem.quantity,
+              ),
               type: MaterialInfoType(''),
             ),
             user: context.read<UserBloc>().state.user,
             counterOfferDetails: RequestCounterOfferDetails.empty(),
-            bonusItemId:
-                cartProduct.bonusMaterialItemId(bonusItem.materialNumber),
+            bonusItemId: bonusItemId,
           ),
         );
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<BonusMaterialBloc, BonusMaterialState>(
+    return BlocConsumer<CartBloc, CartState>(
       listenWhen: (previous, current) =>
-          previous.isBonusQtyValidated != current.isBonusQtyValidated &&
-          current.isBonusQtyValidated,
-      listener: (context, state) {
-        if (state.bonusMaterialHashCode == bonusItem.hashCode) {
-          _addBonusMaterial(context);
-        }
-      },
-      child: BlocBuilder<CartBloc, CartState>(
-        buildWhen: (previous, current) =>
-            previous.upsertBonusItemInProgressHashCode !=
-            current.upsertBonusItemInProgressHashCode,
-        builder: (context, state) {
-          final isBonusMaterialLoading =
-              state.upsertBonusItemInProgressHashCode.contains(
-            bonusItem
-                .copyWith(
-                  parentID: cartProduct.materialInfo.materialNumber
-                      .getOrDefaultValue(''),
-                  quantity: cartProduct.totalCartProductBonusQty(bonusItem),
-                  type: MaterialInfoType(''),
-                )
-                .hashCode,
-          );
-
-          return Container(
-            height: 40,
-            width: 40,
-            padding: isBonusMaterialLoading
-                ? const EdgeInsets.all(8)
-                : EdgeInsets.zero,
-            decoration: BoxDecoration(
-              color: isBonusMaterialLoading
-                  ? ZPColors.lightPrimary
-                  : ZPColors.primary,
-              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+          previous.cartProducts != current.cartProducts,
+      listener: (context, state) => context.read<BonusMaterialBloc>().add(
+            BonusMaterialEvent.updateAddedBonusItems(
+              addedBonusItemList: cartProduct.getNewlyAddedItems(oldBonusList),
             ),
-            child: isBonusMaterialLoading
-                ? const CircularProgressIndicator(
-                    strokeWidth: 2,
+          ),
+      buildWhen: (previous, current) =>
+          previous.upsertBonusItemInProgressHashCode !=
+          current.upsertBonusItemInProgressHashCode,
+      builder: (context, state) {
+        final isBonusMaterialLoading =
+            state.upsertBonusItemInProgressHashCode.contains(
+          bonusItem
+              .copyWith(
+                parentID: cartProduct.materialInfo.materialNumber
+                    .getOrDefaultValue(''),
+                quantity: cartProduct.totalCartProductBonusQty(
+                  context
+                      .read<BonusMaterialBloc>()
+                      .state
+                      .bonusItemID(bonusItem.materialNumber),
+                  bonusItem.quantity,
+                ),
+                type: MaterialInfoType(''),
+              )
+              .hashCode,
+        );
+
+        return Container(
+          height: 40,
+          width: 40,
+          padding: isBonusMaterialLoading
+              ? const EdgeInsets.all(8)
+              : EdgeInsets.zero,
+          decoration: BoxDecoration(
+            color: isBonusMaterialLoading
+                ? ZPColors.lightPrimary
+                : ZPColors.primary,
+            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+          ),
+          child: isBonusMaterialLoading
+              ? const CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: ZPColors.white,
+                )
+              : IconButton(
+                  visualDensity: VisualDensity.compact,
+                  key: WidgetKeys.cartButton,
+                  icon: const Icon(
+                    Icons.shopping_cart_outlined,
                     color: ZPColors.white,
-                  )
-                : IconButton(
-                    visualDensity: VisualDensity.compact,
-                    key: WidgetKeys.cartButton,
-                    icon: const Icon(
-                      Icons.shopping_cart_outlined,
-                      color: ZPColors.white,
-                    ),
-                    onPressed: () => context.read<BonusMaterialBloc>().add(
+                  ),
+                  onPressed: () {
+                    if (bonusItem.quantity.isQtyGreaterThanZero) {
+                      _addBonusMaterial(context);
+                    }
+                    context.read<BonusMaterialBloc>().add(
                           BonusMaterialEvent.validateBonusQuantity(
                             bonusMaterial: bonusItem,
                           ),
-                        ),
-                  ),
-          );
-        },
-      ),
+                        );
+                  },
+                ),
+        );
+      },
     );
   }
 }

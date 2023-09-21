@@ -26,4 +26,7 @@ class BonusMaterialEvent with _$BonusMaterialEvent {
   factory BonusMaterialEvent.updateBonusItemQuantity({
     required MaterialInfo updatedBonusItem,
   }) = _UpdateBonusItemQuantity;
+  factory BonusMaterialEvent.updateAddedBonusItems({
+    required List<BonusSampleItem> addedBonusItemList,
+  }) = _UpdateAddedBonusItems;
 }

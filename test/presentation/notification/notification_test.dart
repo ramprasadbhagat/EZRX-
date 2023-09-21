@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
@@ -34,6 +35,9 @@ class ReturnSummaryDetailsBlocMock
     extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
     implements ReturnSummaryDetailsBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 class MockNotificationBloc
@@ -47,6 +51,7 @@ void main() {
   late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
   late CustomerCodeBloc customerCodeBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late NotificationBloc notificationBlocMock;
   late Notifications notifications;
   late List<CustomerCodeInfo> customerCodeListMock;
@@ -60,6 +65,7 @@ void main() {
       userBlocMock = UserBlocMock();
       autoRouterMock = locator<AppRouter>();
       customerCodeBlocMock = CustomerCodeBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
       notificationBlocMock = MockNotificationBloc();
       returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
       when(() => userBlocMock.state).thenReturn(UserState.initial());
@@ -89,10 +95,13 @@ void main() {
             BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock,
             ),
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock,
+            ),
             BlocProvider<NotificationBloc>(
               create: (context) => notificationBlocMock,
             ),
-             BlocProvider<ReturnSummaryDetailsBloc>(
+            BlocProvider<ReturnSummaryDetailsBloc>(
               create: (context) => returnSummaryDetailsBlocMock,
             ),
           ],
@@ -211,6 +220,9 @@ void main() {
           CustomerCodeState.initial().copyWith(
             customerCodeInfo: customerCodeListMock.first,
           ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial(),
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();

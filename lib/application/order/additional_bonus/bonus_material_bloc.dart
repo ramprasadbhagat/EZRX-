@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,6 +15,10 @@ import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.da
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 
 part 'bonus_material_bloc.freezed.dart';
 part 'bonus_material_event.dart';
@@ -110,20 +115,11 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           },
         );
       },
-      validateBonusQuantity: (e) {
-        emit(
-          state.copyWith(
-            isBonusQtyValidated: false,
-          ),
-        );
-
-        emit(
-          state.copyWith(
-            isBonusQtyValidated: e.bonusMaterial.quantity > 0,
-            bonusMaterialHashCode: e.bonusMaterial.hashCode,
-          ),
-        );
-      },
+      validateBonusQuantity: (e) async => emit(
+        state.copyWith(
+          isBonusQtyValidated: e.bonusMaterial.quantity.intValue > 0,
+        ),
+      ),
       updateBonusItemQuantity: (e) {
         final updatedBonusItemList = state.bonusItemList
             .map(
@@ -139,6 +135,14 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           ),
         );
       },
+      updateAddedBonusItems: (e) async => emit(
+        state.copyWith(
+          addedBonusItemsList: [
+            ...state.addedBonusItemsList,
+            ...e.addedBonusItemList,
+          ],
+        ),
+      ),
     );
   }
 }

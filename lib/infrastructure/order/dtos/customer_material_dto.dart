@@ -88,7 +88,7 @@ class CustomerMaterialDto with _$CustomerMaterialDto {
         tax: tax,
         bundles: [],
         isFOCMaterial: isFOCMaterial,
-        quantity: 0,
+        quantity: MaterialQty(0),
         remarks: remarks,
         genericMaterialName: genericMaterialName,
         data: <MaterialData>[],

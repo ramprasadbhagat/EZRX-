@@ -2,13 +2,14 @@ part of 'bonus_material_bloc.dart';
 
 @freezed
 class BonusMaterialState with _$BonusMaterialState {
+  const BonusMaterialState._();
   const factory BonusMaterialState({
     required bool isFetching,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required List<MaterialInfo> bonusItemList,
     required bool canLoadMore,
-    required int bonusMaterialHashCode,
     required bool isBonusQtyValidated,
+    required List<BonusSampleItem> addedBonusItemsList,
   }) = _BonusMaterialState;
 
   factory BonusMaterialState.initial() => BonusMaterialState(
@@ -16,7 +17,14 @@ class BonusMaterialState with _$BonusMaterialState {
         bonusItemList: <MaterialInfo>[],
         canLoadMore: true,
         isFetching: false,
-        bonusMaterialHashCode: 0,
         isBonusQtyValidated: true,
+        addedBonusItemsList: <BonusSampleItem>[],
       );
+
+  StringValue bonusItemID(MaterialNumber matNumber) => addedBonusItemsList
+      .firstWhere(
+        (element) => element.materialNumber == matNumber,
+        orElse: () => BonusSampleItem.empty(),
+      )
+      .itemId;
 }

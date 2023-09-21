@@ -586,7 +586,7 @@ List<SubmitMaterialInfo> _getMaterialInfoList({
                   (el) => PriceAggregate.empty()
                       .copyWith(
                         materialInfo: el,
-                        quantity: el.quantity,
+                        quantity: el.quantity.intValue,
                         salesOrgConfig: element.salesOrgConfig,
                         bundle: element.bundle,
                       )

@@ -50,7 +50,7 @@ class CartProductTileBonus extends StatelessWidget {
                     materialNumber: bonusItem.materialNumber,
                     parentID: cartProduct.materialInfo.materialNumber
                         .getOrDefaultValue(''),
-                    quantity: 0,
+                    quantity: MaterialQty(0),
                   ),
                   user: context.read<UserBloc>().state.user,
                   counterOfferDetails: RequestCounterOfferDetails.empty(),
@@ -245,7 +245,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
               materialNumber: widget.bonusItem.materialNumber,
               parentID: widget.cartProduct.materialInfo.materialNumber
                   .getOrDefaultValue(''),
-              quantity: qty,
+              quantity: MaterialQty(qty),
             ),
             user: context.read<UserBloc>().state.user,
             counterOfferDetails: RequestCounterOfferDetails.empty(),

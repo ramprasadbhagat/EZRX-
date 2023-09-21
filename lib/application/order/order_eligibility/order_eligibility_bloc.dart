@@ -8,6 +8,8 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+
 part 'order_eligibility_event.dart';
 part 'order_eligibility_state.dart';
 part 'order_eligibility_bloc.freezed.dart';

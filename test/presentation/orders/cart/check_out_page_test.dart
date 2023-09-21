@@ -345,7 +345,7 @@ void main() {
             PriceAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('123456789'),
-                quantity: 1,
+                quantity: MaterialQty(1),
                 taxClassification:
                     MaterialTaxClassification('Product : Full Tax'),
                 tax: 10,
@@ -416,7 +416,7 @@ void main() {
             PriceAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('123456789'),
-                quantity: 1,
+                quantity: MaterialQty(1),
                 taxClassification:
                     MaterialTaxClassification('Product : Full Tax'),
                 tax: 10,
@@ -487,7 +487,7 @@ void main() {
             PriceAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('123456789'),
-                quantity: 1,
+                quantity: MaterialQty(1),
                 taxClassification:
                     MaterialTaxClassification('Product : Full Tax'),
                 tax: 10,

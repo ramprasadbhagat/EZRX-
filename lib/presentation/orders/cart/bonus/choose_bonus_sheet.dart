@@ -36,9 +36,9 @@ class _UpdateBonusState extends State<UpdateBonus> {
   void initState() {
     controller = TextEditingController();
 
-    controller.text = widget.materialInfo.quantity == 0
+    controller.text = widget.materialInfo.quantity.intValue == 0
         ? '1'
-        : widget.materialInfo.quantity.toString();
+        : widget.materialInfo.quantity.intValue.toString();
     super.initState();
   }
 

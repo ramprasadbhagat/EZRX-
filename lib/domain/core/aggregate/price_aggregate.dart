@@ -512,15 +512,21 @@ class PriceAggregate with _$PriceAggregate {
     return false;
   }
 
-  int totalCartProductBonusQty(MaterialInfo bonusItem) =>
-      bonusSampleItems
-          .firstWhere(
-            (element) => element.materialNumber == bonusItem.materialNumber,
-            orElse: () => BonusSampleItem.empty(),
-          )
-          .qty
-          .getValue() +
-      bonusItem.quantity;
+  MaterialQty totalCartProductBonusQty(
+    StringValue bonusItemId,
+    MaterialQty qty,
+  ) {
+    final totalQuantity = bonusSampleItems
+            .firstWhere(
+              (element) => element.itemId == bonusItemId,
+              orElse: () => BonusSampleItem.empty(),
+            )
+            .qty
+            .intValue +
+        qty.intValue;
+
+    return MaterialQty(totalQuantity);
+  }
 
   StringValue bonusMaterialItemId(MaterialNumber bonusMatNumber) =>
       bonusSampleItems
@@ -576,13 +582,18 @@ class PriceAggregate with _$PriceAggregate {
         (e) => PriceAggregate.empty().copyWith(
           materialInfo: e,
           stockInfoList: e.stockInfos,
-          quantity: e.quantity,
+          quantity: e.quantity.intValue,
           salesOrgConfig: salesOrgConfig,
         ),
       )
       .toList();
   bool get displayOfferBonus =>
       addedBonusList.isNotEmpty && !materialInfo.hidePrice;
+
+  List<BonusSampleItem> getNewlyAddedItems(
+    List<BonusSampleItem> oldBonusList,
+  ) =>
+      bonusSampleItems.toSet().difference(oldBonusList.toSet()).toList();
 
   bool get showTaxBreakDown =>
       salesOrgConfig.displayItemTaxBreakdown && !materialInfo.hidePrice;
@@ -593,7 +604,7 @@ class PriceAggregate with _$PriceAggregate {
           (e) => MaterialInfo.empty().copyWith(
             materialNumber: e.materialNumber,
             parentID: materialInfo.materialNumber.getValue(),
-            quantity: 0,
+            quantity: MaterialQty(0),
             sampleBonusItemId: bonusMaterialItemId(e.materialNumber).getValue(),
           ),
         )

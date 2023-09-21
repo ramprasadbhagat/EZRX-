@@ -262,7 +262,7 @@ void main() {
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('00000111111'),
-                quantity: 2,
+                quantity: MaterialQty(2),
               ),
             ),
           ),
@@ -314,7 +314,7 @@ void main() {
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('00000111111'),
-                quantity: 2,
+                quantity: MaterialQty(2),
               ),
               stockInfo: StockInfo.empty().copyWith(
                 inStock: MaterialInStock('true'),

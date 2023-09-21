@@ -226,7 +226,7 @@ void main() {
             materials: <MaterialInfo>[
               MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('fake-material-1'),
-                quantity: 10,
+                quantity: MaterialQty(10),
                 stockInfos: <StockInfo>[
                   StockInfo.empty().copyWith(
                     inStock: MaterialInStock('No'),
@@ -235,7 +235,7 @@ void main() {
               ),
               MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('fake-material-2'),
-                quantity: 10,
+                quantity: MaterialQty(10),
                 stockInfos: <StockInfo>[
                   StockInfo.empty().copyWith(
                     inStock: MaterialInStock('Yes'),
@@ -1694,7 +1694,7 @@ void main() {
                 PriceAggregate.empty().copyWith(
                   materialInfo: MaterialInfo.empty().copyWith(
                     materialNumber: MaterialNumber('123456789'),
-                    quantity: 1,
+                    quantity: MaterialQty(1),
                     taxClassification:
                         MaterialTaxClassification('Product : Full Tax'),
                     tax: 10,
@@ -1737,7 +1737,7 @@ void main() {
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('123456789'),
-                  quantity: 1,
+                  quantity: MaterialQty(1),
                   taxClassification:
                       MaterialTaxClassification('Product : Full Tax'),
                   tax: 10,
@@ -1802,7 +1802,7 @@ void main() {
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('123456789'),
-                  quantity: 1,
+                  quantity: MaterialQty(1),
                   taxClassification:
                       MaterialTaxClassification('Product : Full Tax'),
                   tax: 10,
@@ -1869,7 +1869,7 @@ void main() {
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('123456789'),
-                  quantity: 1,
+                  quantity: MaterialQty(1),
                   taxClassification:
                       MaterialTaxClassification('Product : Full Tax'),
                   tax: 10,
@@ -1949,7 +1949,7 @@ void main() {
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('123456789'),
                   stockInfos: <StockInfo>[],
-                  quantity: 1,
+                  quantity: MaterialQty(1),
                   taxClassification:
                       MaterialTaxClassification('Product : Full Tax'),
                 ),
@@ -2419,7 +2419,7 @@ void main() {
               materials: <MaterialInfo>[
                 MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material-1'),
-                  quantity: 10,
+                  quantity: MaterialQty(10),
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('yes'),
@@ -2428,7 +2428,7 @@ void main() {
                 ),
                 MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material-2'),
-                  quantity: 10,
+                  quantity: MaterialQty(10),
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('Yes'),

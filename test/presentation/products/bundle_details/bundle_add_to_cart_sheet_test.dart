@@ -182,7 +182,7 @@ void main() {
               bundleMaterials: <MaterialInfo>[
                 MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material-1'),
-                  quantity: 6,
+                  quantity: MaterialQty(6),
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('No'),
@@ -191,7 +191,7 @@ void main() {
                 ),
                 MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material-2'),
-                  quantity: 16,
+                  quantity: MaterialQty(16),
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('No'),
@@ -270,7 +270,7 @@ void main() {
               bundleMaterials: <MaterialInfo>[
                 MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material-1'),
-                  quantity: 6,
+                  quantity: MaterialQty(6),
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('No'),
@@ -279,7 +279,7 @@ void main() {
                 ),
                 MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material-2'),
-                  quantity: 16,
+                  quantity: MaterialQty(16),
                   stockInfos: <StockInfo>[
                     StockInfo.empty().copyWith(
                       inStock: MaterialInStock('No'),

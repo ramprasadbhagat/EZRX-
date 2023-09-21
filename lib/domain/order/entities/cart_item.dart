@@ -124,7 +124,7 @@ class CartItem with _$CartItem {
             materialInfo: priceDetail.info,
             bundle: bundle,
             salesOrgConfig: salesConfigs,
-            quantity: material.quantity,
+            quantity: material.quantity.intValue,
             discountedMaterialCount: 0,
             addedBonusList: savedItem.bonuses,
             stockInfo: StockInfo.empty().copyWith(
@@ -415,7 +415,7 @@ class CartItem with _$CartItem {
       final bundleItems = materials
           .map(
             (cartItemData) => cartItemData.materialInfo.copyWith(
-              quantity: cartItemData.quantity,
+              quantity: MaterialQty(cartItemData.quantity),
             ),
           )
           .toList();

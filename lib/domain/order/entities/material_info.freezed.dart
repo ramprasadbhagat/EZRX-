@@ -32,7 +32,7 @@ mixin _$MaterialInfo {
   Bundle get bundle => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
   CountryData get countryData => throw _privateConstructorUsedError;
-  int get quantity => throw _privateConstructorUsedError;
+  MaterialQty get quantity => throw _privateConstructorUsedError;
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   StringValue get unitOfMeasurement => throw _privateConstructorUsedError;
@@ -89,7 +89,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       Bundle bundle,
       ProductImages productImages,
       CountryData countryData,
-      int quantity,
+      MaterialQty quantity,
       String defaultMaterialDescription,
       String governmentMaterialCode,
       StringValue unitOfMeasurement,
@@ -245,7 +245,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
       quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
+              as MaterialQty,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -412,7 +412,7 @@ abstract class _$$_MaterialInfoCopyWith<$Res>
       Bundle bundle,
       ProductImages productImages,
       CountryData countryData,
-      int quantity,
+      MaterialQty quantity,
       String defaultMaterialDescription,
       String governmentMaterialCode,
       StringValue unitOfMeasurement,
@@ -571,7 +571,7 @@ class __$$_MaterialInfoCopyWithImpl<$Res>
       quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
+              as MaterialQty,
       defaultMaterialDescription: null == defaultMaterialDescription
           ? _value.defaultMaterialDescription
           : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
@@ -767,7 +767,7 @@ class _$_MaterialInfo extends _MaterialInfo {
   @override
   final CountryData countryData;
   @override
-  final int quantity;
+  final MaterialQty quantity;
   @override
   final String defaultMaterialDescription;
   @override
@@ -984,7 +984,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final Bundle bundle,
       required final ProductImages productImages,
       required final CountryData countryData,
-      required final int quantity,
+      required final MaterialQty quantity,
       required final String defaultMaterialDescription,
       required final String governmentMaterialCode,
       required final StringValue unitOfMeasurement,
@@ -1044,7 +1044,7 @@ abstract class _MaterialInfo extends MaterialInfo {
   @override
   CountryData get countryData;
   @override
-  int get quantity;
+  MaterialQty get quantity;
   @override
   String get defaultMaterialDescription;
   @override

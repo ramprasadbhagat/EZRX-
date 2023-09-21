@@ -82,7 +82,7 @@ void main() {
           principalData: PrincipalData.empty().copyWith(
             principalName: PrincipalName('台灣拜耳股份有限公司'),
           ),
-          quantity: 2,
+          quantity: MaterialQty(2),
         ),
       );
       when(() => salesOrgBloc.state).thenReturn(SalesOrgState.initial());

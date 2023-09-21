@@ -125,7 +125,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
             .fold(
               0,
               (previousValue, element) =>
-                  (previousValue ?? 0) + element.quantity,
+                  (previousValue ?? 0) + element.quantity.intValue,
             ) ??
         0;
   }
@@ -147,6 +147,6 @@ class OrderEligibilityState with _$OrderEligibilityState {
       .where(
         (item) => item.materialInfo.isSuspended,
       )
-      .map((item) => item.materialInfo.copyWith(quantity: 0))
+      .map((item) => item.materialInfo.copyWith(quantity: MaterialQty(0)))
       .toList();
 }

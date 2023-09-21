@@ -73,7 +73,7 @@ class CartProductDto with _$CartProductDto {
       materialNumber: cartItemDetails.materialInfo.materialNumber.getOrCrash(),
       parentID: cartItemDetails.materialInfo.parentID,
       productID: cartItemDetails.materialInfo.materialNumber.getOrCrash(),
-      quantity: cartItemDetails.materialInfo.quantity,
+      quantity: cartItemDetails.materialInfo.quantity.intValue,
       taxClassification:
           cartItemDetails.materialInfo.taxClassification.getOrDefaultValue(''),
       isFOCMaterial: cartItemDetails.materialInfo.isFOCMaterial,
@@ -116,7 +116,7 @@ class CartProductDto with _$CartProductDto {
       materialDescription: materialDescription,
       materialNumber: MaterialNumber(productID),
       parentID: parentID,
-      quantity: quantity,
+      quantity: MaterialQty(quantity),
       taxClassification: MaterialTaxClassification(taxClassification),
       isFOCMaterial: isFOCMaterial,
       tax: tax,

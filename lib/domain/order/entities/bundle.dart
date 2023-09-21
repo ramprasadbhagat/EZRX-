@@ -49,7 +49,7 @@ class Bundle with _$Bundle {
   BundleInfo get currentBundleInfo {
     final totalMaterial = materials.fold(
       0,
-      (int previousValue, element) => previousValue + element.quantity,
+      (int previousValue, element) => previousValue + element.quantity.intValue,
     );
 
     return sortedBundleInformation.lastWhere(

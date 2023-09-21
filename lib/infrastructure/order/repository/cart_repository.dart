@@ -616,7 +616,7 @@ class CartRepository implements ICartRepository {
             shipToInfo: shipToInfo,
             language: language,
             itemId: product.sampleBonusItemId,
-            quantity: product.quantity,
+            quantity: product.quantity.intValue,
             counterOfferDetails: product.counterOfferDetails,
           );
 

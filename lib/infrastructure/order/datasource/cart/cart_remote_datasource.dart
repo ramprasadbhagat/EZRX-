@@ -107,7 +107,7 @@ class CartRemoteDataSource {
             .map(
               (e) => {
                 'ProductID': e.materialNumber.getValue(),
-                'Quantity': e.quantity,
+                'Quantity': e.quantity.getOrCrash(),
                 'ItemSource': 'EZRX',
                 'CustomerCode': customerCode,
                 'ShipToID': shipToCode,

@@ -103,7 +103,7 @@ class MaterialDto with _$MaterialDto {
 
   factory MaterialDto.fromDomain(MaterialInfo materialInfo) {
     return MaterialDto(
-      quantity: materialInfo.quantity,
+      quantity: materialInfo.quantity.intValue,
       defaultMaterialDescription: materialInfo.defaultMaterialDescription,
       materialNumber: materialInfo.materialNumber.getOrDefaultValue(''),
       materialDescription: materialInfo.materialDescription,
@@ -169,7 +169,7 @@ class MaterialDto with _$MaterialDto {
       bundles: bundles.map((e) => e.toDomain()).toList(),
       defaultMaterialDescription: defaultMaterialDescription,
       isFOCMaterial: isFOCMaterial,
-      quantity: quantity,
+      quantity: MaterialQty(quantity),
       remarks: remarks,
       genericMaterialName: genericMaterialName,
       ean: ean,

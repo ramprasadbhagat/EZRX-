@@ -33,6 +33,8 @@ import 'package:ezrxmobile/presentation/orders/cart/bonus/widgets/bonus_material
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
+import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
+
 class BonusItemsSheet extends StatelessWidget {
   final PriceAggregate cartProduct;
   const BonusItemsSheet({
@@ -98,6 +100,7 @@ class BonusItemsSheet extends StatelessWidget {
                 return _BodyContent(
                   cartProduct:
                       state.updatedCartProduct(cartProduct.getMaterialNumber),
+                  oldBonusList: cartProduct.bonusSampleItems,
                 );
               },
             ),
@@ -111,7 +114,12 @@ class BonusItemsSheet extends StatelessWidget {
 
 class _BodyContent extends StatelessWidget {
   final PriceAggregate cartProduct;
-  const _BodyContent({Key? key, required this.cartProduct}) : super(key: key);
+  final List<BonusSampleItem> oldBonusList;
+  const _BodyContent({
+    Key? key,
+    required this.cartProduct,
+    required this.oldBonusList,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -195,6 +203,7 @@ class _BodyContent extends StatelessWidget {
                   itemBuilder: (context, index, item) => BonusMaterialTile(
                     bonusMaterial: item,
                     cartProduct: cartProduct,
+                    oldBonusList: oldBonusList,
                   ),
                   items: state.bonusItemList,
                 ),

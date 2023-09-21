@@ -34,7 +34,7 @@ class BundleAddToCartBloc
           bundleMaterials: state.bundleMaterials
               .map(
                 (element) => element.materialNumber == e.materialNumber
-                    ? element.copyWith(quantity: e.quantity)
+                    ? element.copyWith(quantity: MaterialQty(e.quantity))
                     : element,
               )
               .toList(),

@@ -142,7 +142,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisationConfig: state.config,
           shipToInfo: state.shipToInfo,
           materialInfo: e.bonusMaterial,
-          quantity: e.bonusMaterial.quantity,
+          quantity: e.bonusMaterial.quantity.intValue,
           language: e.user.settings.languagePreference.languageCode,
           counterOfferDetails: e.counterOfferDetails,
           itemId: e.bonusItemId.getValue(),
@@ -515,7 +515,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                   (element) => !element.materialInfo.type.typeBundle
                       ? PriceAggregate.empty().copyWith(
                           materialInfo: element.materialInfo,
-                          quantity: element.materialInfo.quantity,
+                          quantity: element.materialInfo.quantity.intValue,
                           salesOrgConfig: element.salesOrgConfig,
                           bonusSampleItems: element.bonusSampleItems,
                         )

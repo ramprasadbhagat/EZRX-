@@ -193,7 +193,7 @@ class CartState with _$CartState {
             .fold(
               0,
               (previousValue, element) =>
-                  (previousValue ?? 0) + element.quantity,
+                  (previousValue ?? 0) + element.quantity.intValue,
             ) ??
         0;
   }

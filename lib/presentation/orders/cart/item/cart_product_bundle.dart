@@ -388,7 +388,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   @override
   void initState() {
     _controller.value = TextEditingValue(
-      text: widget.cartItem.quantity.toString(),
+      text: widget.cartItem.quantity.intValue.toString(),
       selection: TextSelection.collapsed(
         offset: _controller.selection.base.offset,
       ),
@@ -425,7 +425,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
               addPressed: (k) => _callCartUpsertItemsEvent(quantity: k),
               onSubmit: (value) => _callCartUpsertItemsEvent(quantity: value),
               isLoading: context.read<CartBloc>().state.isUpserting &&
-                  widget.cartItem.quantity.toString() != _controller.text,
+                  widget.cartItem.quantity.intValue.toString() !=
+                      _controller.text,
               minimumQty: totalQuantityOfProductBundle >
                       (widget.bundle.bundleInformation.firstOrNull?.quantity ??
                           1)
@@ -499,7 +500,9 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                 ),
               ),
               bundle: Bundle.empty().copyWith(
-                materials: [widget.cartItem.copyWith(quantity: quantity)],
+                materials: [
+                  widget.cartItem.copyWith(quantity: MaterialQty(quantity)),
+                ],
                 bundleCode: widget.bundle.bundleCode,
               ),
             ),

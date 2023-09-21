@@ -82,7 +82,7 @@ class ProductDetailDto with _$ProductDetailDto {
         taxClassification: MaterialTaxClassification(''),
         bundles: [],
         isFOCMaterial: isFOCMaterial,
-        quantity: 0,
+        quantity: MaterialQty(0),
         remarks: '',
         data: <MaterialData>[],
         dataTotalCount: 0,
