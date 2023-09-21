@@ -44,7 +44,7 @@ class ProductStockInfo extends StatelessWidget {
                       stockInfo.batch.isValid()
                           ? TextSpan(
                               text:
-                                  '${'Batch'.tr()} ${stockInfo.batch.getOrDefaultValue('')} ',
+                                  '${context.tr('Batch')} ${stockInfo.batch.getOrDefaultValue('')} ',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall
@@ -54,7 +54,7 @@ class ProductStockInfo extends StatelessWidget {
                       stockInfo.expiryDate.isValid()
                           ? TextSpan(
                               text:
-                                  '(${'EXP'.tr()}: ${stockInfo.expiryDate.dateString})',
+                                  '(${context.tr('EXP')}: ${stockInfo.expiryDate.dateString})',
                             )
                           : const WidgetSpan(child: SizedBox.shrink()),
                     ],

@@ -19,6 +19,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -88,6 +89,7 @@ void main() {
     RouteDataScope getWUT() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => mockAuthBloc,
@@ -129,7 +131,10 @@ void main() {
         Stream.fromIterable(expectedStates),
       );
 
-      await tester.pumpWidget(getWUT());
+      await TesterUtils.setUpLocalizationWrapper(
+        widget: getWUT(),
+        tester: tester,
+      );
       await tester.pump();
 
       expect(
@@ -160,7 +165,10 @@ void main() {
         Stream.fromIterable(expectedStates),
       );
 
-      await tester.pumpWidget(getWUT());
+      await TesterUtils.setUpLocalizationWrapper(
+        widget: getWUT(),
+        tester: tester,
+      );
       await tester.pumpAndSettle();
       final findRow = find.byKey(WidgetKeys.buttonRowKey);
       expect(findRow, findsOneWidget);

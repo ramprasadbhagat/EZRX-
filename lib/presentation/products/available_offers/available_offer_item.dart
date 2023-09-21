@@ -71,7 +71,7 @@ class _BonusItem extends StatelessWidget {
               ),
         ),
         Text(
-          '${'Purchase quantity'.tr()}: ${bonusMaterial.qualifyingQuantity}',
+          '${context.tr('Purchase quantity')}: ${bonusMaterial.qualifyingQuantity}',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: ZPColors.black,
               ),
@@ -100,7 +100,7 @@ class _TierItem extends StatelessWidget {
           price: priceTier.rate.toStringAsFixed(2),
         ),
         Text(
-          '${'Purchase quantity'.tr()}: ${priceTier.quantity}',
+          '${context.tr('Purchase quantity')}: ${priceTier.quantity}',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: ZPColors.black,
               ),

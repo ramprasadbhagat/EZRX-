@@ -26,6 +26,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class AllCreditsBlocMock extends MockBloc<AllCreditsEvent, AllCreditsState>
@@ -93,33 +94,32 @@ void main() {
         .thenReturn(AnnouncementState.initial());
   });
 
-  Future getWidget(tester) async {
-    return tester.pumpWidget(
-      WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        providers: [
-          BlocProvider<AllCreditsBloc>(
-            create: (context) => allCreditsBlocMock,
-          ),
-          BlocProvider<AllCreditsFilterBloc>(
-            create: (context) => allCreditsFilterBlocMock,
-          ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<UserBloc>(
-            create: (context) => userBlocMock,
-          ),
-          BlocProvider<SalesOrgBloc>(
-            create: (context) => salesOrgBlocMock,
-          ),
-          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-          BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-          ),
-        ],
-        child: const AllCreditsPage(),
-      ),
+  Widget getWidget() {
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      usingLocalization: true,
+      providers: [
+        BlocProvider<AllCreditsBloc>(
+          create: (context) => allCreditsBlocMock,
+        ),
+        BlocProvider<AllCreditsFilterBloc>(
+          create: (context) => allCreditsFilterBlocMock,
+        ),
+        BlocProvider<CustomerCodeBloc>(
+          create: (context) => customerCodeBlocMock,
+        ),
+        BlocProvider<UserBloc>(
+          create: (context) => userBlocMock,
+        ),
+        BlocProvider<SalesOrgBloc>(
+          create: (context) => salesOrgBlocMock,
+        ),
+        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+        BlocProvider<AnnouncementBloc>(
+          create: (context) => announcementBlocMock,
+        ),
+      ],
+      child: const AllCreditsPage(),
     );
   }
 
@@ -170,7 +170,10 @@ void main() {
       ];
       whenListen(allCreditsFilterBlocMock, Stream.fromIterable(expectedState));
 
-      await getWidget(tester);
+      await TesterUtils.setUpLocalizationWrapper(
+        widget: getWidget(),
+        tester: tester,
+      );
       await tester.pump(const Duration(milliseconds: 100));
 
       final loaderImage = find.byKey(WidgetKeys.loaderImage);
@@ -234,7 +237,10 @@ void main() {
       whenListen(allCreditsBlocMock, Stream.fromIterable(expectedState));
 
       final handle = tester.ensureSemantics();
-      await getWidget(tester);
+      await TesterUtils.setUpLocalizationWrapper(
+        widget: getWidget(),
+        tester: tester,
+      );
       await tester.pump(const Duration(milliseconds: 100));
 
       await tester.drag(
@@ -316,7 +322,10 @@ void main() {
         ),
       );
 
-      await getWidget(tester);
+      await TesterUtils.setUpLocalizationWrapper(
+        widget: getWidget(),
+        tester: tester,
+      );
       // await tester.drag(
       //   find.textContaining('123456780').last,
       //   const Offset(0.0, -1000.0),

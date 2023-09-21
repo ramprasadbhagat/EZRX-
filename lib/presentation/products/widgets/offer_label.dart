@@ -78,7 +78,7 @@ class OfferLabel extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  'On offer'.tr(),
+                  context.tr('On offer'),
                   style: style,
                 ),
               ],

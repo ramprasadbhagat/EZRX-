@@ -76,8 +76,10 @@ class _MaterialDetailsToggleState extends State<MaterialDetailsToggle> {
                         expanded ? Icons.expand_less : Icons.expand_more,
                       ),
                       icon: Text(
-                        expanded ? 'See less' : 'See more',
-                      ).tr(),
+                        context.tr(
+                          expanded ? 'See less' : 'See more',
+                        ),
+                      ),
                       style: TextButton.styleFrom(
                         visualDensity: VisualDensity.compact,
                         iconColor: ZPColors.extraDarkGreen,
@@ -155,9 +157,9 @@ class _MaterialMetaData extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title.tr(),
+                context.tr(title),
                 style: Theme.of(context).textTheme.labelSmall,
-              ).tr(),
+              ),
               const SizedBox(height: 8.0),
               Text(
                 content.getOrDefaultValue(''),
@@ -187,9 +189,9 @@ class _HtmlContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              title.tr(),
+              context.tr(title),
               style: Theme.of(context).textTheme.labelSmall,
-            ).tr(),
+            ),
             Html(
               key: WidgetKeys.materialDetailsPromo,
               data: data.getOrDefaultValue(''),

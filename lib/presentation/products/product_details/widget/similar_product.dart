@@ -38,9 +38,9 @@ class SimilarProduct extends StatelessWidget {
                 vertical: 10,
               ),
               child: Text(
-                'Related products',
+                context.tr('Related products'),
                 style: Theme.of(context).textTheme.labelLarge,
-              ).tr(),
+              ),
             ),
             SizedBox(
               height: 300,

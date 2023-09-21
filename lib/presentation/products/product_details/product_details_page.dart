@@ -288,7 +288,7 @@ class _Description extends StatelessWidget {
                     : 'Product removed as favourite';
 
             CustomSnackBar(
-              messageText: toastMessage.tr(),
+              messageText: context.tr(toastMessage),
             ).show(context);
           },
           builder: (context, state) {
@@ -381,9 +381,10 @@ class _FooterState extends State<_Footer> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (materialInfo.isSuspended)
-                  const InfoLabel(
-                    textValue: 'This material is currently suspended',
-                    margin: EdgeInsets.only(
+                  InfoLabel(
+                    textValue:
+                        context.tr('This material is currently suspended'),
+                    margin: const EdgeInsets.only(
                       top: 16,
                       bottom: 8,
                     ),
@@ -428,7 +429,7 @@ class _FooterState extends State<_Footer> {
                                   key: WidgetKeys
                                       .materialDetailsAddToCartSnackBar,
                                   messageText:
-                                      'Item has been added to cart'.tr(),
+                                      context.tr('Item has been added to cart'),
                                 ).show(context);
                               }
                             },
@@ -536,7 +537,7 @@ class _FooterState extends State<_Footer> {
                                         }
                                       },
                                 child: Text(
-                                  'Add to cart'.tr(),
+                                  context.tr('Add to cart'),
                                   style: const TextStyle(
                                     color: ZPColors.white,
                                   ),

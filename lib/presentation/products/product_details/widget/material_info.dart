@@ -15,18 +15,18 @@ class MaterialInformation extends StatelessWidget {
     return ListTile(
       key: WidgetKeys.materialDetailsInfoTile,
       title: Text(
-        'Material information',
+        context.tr('Material information'),
         style: Theme.of(context).textTheme.labelSmall,
-      ).tr(),
+      ),
       subtitle: Text(
-        '${'Material number'.tr()}, ${'Manufacturer'.tr()}, ${'Country of origin'.tr()}, ${'Unit of measurement'.tr()}',
+        '${context.tr('Material number')}, ${context.tr('Manufacturer')}, ${context.tr('Country of origin')}, ${context.tr('Unit of measurement')}',
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: Theme.of(context)
             .textTheme
             .bodyMedium
             ?.copyWith(color: ZPColors.extraLightGrey4),
-      ).tr(),
+      ),
       trailing: const Icon(
         Icons.chevron_right,
       ),
@@ -57,14 +57,14 @@ class _MaterialInfoDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Material Information',
+            context.tr('Material Information'),
             style: Theme.of(context).textTheme.labelLarge,
-          ).tr(),
+          ),
           const SizedBox(
             height: 20,
           ),
           BalanceTextRow(
-            keyText: 'Material Number'.tr(),
+            keyText: context.tr('Material Number'),
             valueText: materialInfo.materialNumber.displayMatNo,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -76,7 +76,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
-            keyText: 'Manufacturer'.tr(),
+            keyText: context.tr('Manufacturer'),
             valueText: materialInfo.principalData.principalName.name,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -88,7 +88,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
-            keyText: 'Unit of measurement'.tr(),
+            keyText: context.tr('Unit of measurement'),
             valueText: materialInfo.unitOfMeasurement.displayNAIfEmpty,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -100,7 +100,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
-            keyText: 'Country of origin'.tr(),
+            keyText: context.tr('Country of origin'),
             valueText: materialInfo.countryData.countryName.displayNAIfEmpty,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -112,7 +112,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
-            keyText: 'Batch'.tr(),
+            keyText: context.tr('Batch'),
             valueText: productDetailAggregate.stockInfo.batch.displayLabel,
             valueFlex: 1,
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -124,7 +124,7 @@ class _MaterialInfoDialog extends StatelessWidget {
           ),
           const SizedBox(height: 7),
           BalanceTextRow(
-            keyText: 'Expiry'.tr(),
+            keyText: context.tr('Expiry'),
             valueText:
                 productDetailAggregate.stockInfo.expiryDate.dateOrNaString,
             valueFlex: 1,
@@ -140,12 +140,14 @@ class _MaterialInfoDialog extends StatelessWidget {
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.43,
               child: Text(
-                'Expiry date displayed is for reference, actual product may very',
+                context.tr(
+                  'Expiry date displayed is for reference, actual product may very',
+                ),
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontSize: 10,
                       color: ZPColors.darkGray,
                     ),
-              ).tr(),
+              ),
             ),
           ),
           const SizedBox(height: 20),
@@ -154,7 +156,7 @@ class _MaterialInfoDialog extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () => context.router.pop(),
-                  child: const Text('Close').tr(),
+                  child: Text(context.tr('Close')),
                 ),
               ),
             ],

@@ -57,7 +57,7 @@ class _CloseButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: () => Navigator.pop(context),
-        child: const Text('Close').tr(),
+        child: Text(context.tr('Close')),
       ),
     );
   }
@@ -150,13 +150,13 @@ class _AvailableOfferHeader extends StatelessWidget {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
       title: Text(
-        'Available offers'.tr(),
+        context.tr('Available offers'),
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
               color: ZPColors.primary,
             ),
       ),
       subtitle: Text(
-        'Offers are auto-applied based on quantity purchased.'.tr(),
+        context.tr('Offers are auto-applied based on quantity purchased.'),
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: ZPColors.extraLightGrey4,
             ),

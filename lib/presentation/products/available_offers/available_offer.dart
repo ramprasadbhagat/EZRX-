@@ -194,7 +194,7 @@ class _AvailableOfferLabel extends StatelessWidget {
       visualDensity: VisualDensity.compact,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
       title: Text(
-        'Available offers'.tr(),
+        context.tr('Available offers'),
         style: Theme.of(context).textTheme.labelMedium,
       ),
       trailing: const Icon(

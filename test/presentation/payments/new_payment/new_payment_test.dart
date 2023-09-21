@@ -1,6 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -26,6 +24,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class AccountSummaryBlocMock
@@ -292,54 +291,44 @@ void main() {
   });
 
   Widget getWidget() {
-    return EasyLocalization(
-      supportedLocales: const [
-        Locale('en'),
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      usingLocalization: true,
+      routeName: NewPaymentPageRoute.name,
+      providers: [
+        BlocProvider<AccountSummaryBloc>(
+          create: (context) => accountSummaryBlocMock,
+        ),
+        BlocProvider<OutstandingInvoicesBloc>(
+          create: (context) => outstandingInvoicesBlocMock,
+        ),
+        BlocProvider<OutstandingInvoiceFilterBloc>(
+          create: (context) => outstandingInvoiceFilterBlocMock,
+        ),
+        BlocProvider<AvailableCreditsBloc>(
+          create: (context) => availableCreditsBlocMock,
+        ),
+        BlocProvider<AvailableCreditFilterBloc>(
+          create: (context) => availableCreditFilterBlocMock,
+        ),
+        BlocProvider<NewPaymentBloc>(
+          create: (context) => newPaymentBlocMock,
+        ),
+        BlocProvider<CustomerCodeBloc>(
+          create: (context) => customerCodeBlocMock,
+        ),
+        BlocProvider<UserBloc>(
+          create: (context) => userBlocMock,
+        ),
+        BlocProvider<SalesOrgBloc>(
+          create: (context) => salesOrgBlocMock,
+        ),
+        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+        BlocProvider<AnnouncementBloc>(
+          create: (context) => announcementBlocMock,
+        ),
       ],
-      path: 'assets/langs/langs.csv',
-      startLocale: const Locale('en'),
-      fallbackLocale: const Locale('en'),
-      saveLocale: true,
-      useOnlyLangCode: true,
-      assetLoader: CsvAssetLoader(),
-      child: WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        routeName: NewPaymentPageRoute.name,
-        providers: [
-          BlocProvider<AccountSummaryBloc>(
-            create: (context) => accountSummaryBlocMock,
-          ),
-          BlocProvider<OutstandingInvoicesBloc>(
-            create: (context) => outstandingInvoicesBlocMock,
-          ),
-          BlocProvider<OutstandingInvoiceFilterBloc>(
-            create: (context) => outstandingInvoiceFilterBlocMock,
-          ),
-          BlocProvider<AvailableCreditsBloc>(
-            create: (context) => availableCreditsBlocMock,
-          ),
-          BlocProvider<AvailableCreditFilterBloc>(
-            create: (context) => availableCreditFilterBlocMock,
-          ),
-          BlocProvider<NewPaymentBloc>(
-            create: (context) => newPaymentBlocMock,
-          ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<UserBloc>(
-            create: (context) => userBlocMock,
-          ),
-          BlocProvider<SalesOrgBloc>(
-            create: (context) => salesOrgBlocMock,
-          ),
-          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-          BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-          ),
-        ],
-        child: const NewPaymentPage(),
-      ),
+      child: const NewPaymentPage(),
     );
   }
 
@@ -357,7 +346,10 @@ void main() {
           newPaymentBlocMock,
           Stream.fromIterable([NewPaymentState.initial()]),
         );
-        await tester.pumpWidget(getWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getWidget(),
+          tester: tester,
+        );
         await tester.pumpAndSettle();
 
         final checkAllInvoices = find.byType(CheckboxListTile);
@@ -380,7 +372,10 @@ void main() {
             NewPaymentState.initial().copyWith(selectedInvoices: fakeInvoices)
           ]),
         );
-        await tester.pumpWidget(getWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getWidget(),
+          tester: tester,
+        );
         await tester.pumpAndSettle();
 
         final checkAllInvoices = find.byType(CheckboxListTile);
@@ -400,7 +395,10 @@ void main() {
           newPaymentBlocMock,
           Stream.fromIterable([NewPaymentState.initial()]),
         );
-        await tester.pumpWidget(getWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getWidget(),
+          tester: tester,
+        );
         await tester.pumpAndSettle();
 
         final nextButton1 = find.byKey(WidgetKeys.nextButton);
@@ -427,7 +425,10 @@ void main() {
             )
           ]),
         );
-        await tester.pumpWidget(getWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getWidget(),
+          tester: tester,
+        );
         await tester.pumpAndSettle();
 
         final nextButton1 = find.byKey(WidgetKeys.nextButton);
@@ -454,7 +455,10 @@ void main() {
           newPaymentBlocMock,
           Stream.fromIterable([NewPaymentState.initial()]),
         );
-        await tester.pumpWidget(getWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getWidget(),
+          tester: tester,
+        );
         await tester.pumpAndSettle();
 
         final nextButton1 = find.byKey(WidgetKeys.nextButton);
@@ -491,7 +495,10 @@ void main() {
             )
           ]),
         );
-        await tester.pumpWidget(getWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getWidget(),
+          tester: tester,
+        );
         await tester.pumpAndSettle();
 
         final nextButton = find.byKey(WidgetKeys.nextButton);
@@ -519,7 +526,10 @@ void main() {
           newPaymentBlocMock,
           Stream.fromIterable([NewPaymentState.initial()]),
         );
-        await tester.pumpWidget(getWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getWidget(),
+          tester: tester,
+        );
         await tester.pumpAndSettle();
 
         final nextButton1 = find.byKey(WidgetKeys.nextButton);
@@ -556,7 +566,10 @@ void main() {
             )
           ]),
         );
-        await tester.pumpWidget(getWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getWidget(),
+          tester: tester,
+        );
         await tester.pumpAndSettle();
 
         final nextButton1 = find.byKey(WidgetKeys.nextButton);

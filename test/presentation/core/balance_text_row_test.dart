@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../utils/tester_utils.dart';
 import '../../utils/widget_utils.dart';
 
 void main() {
@@ -39,6 +40,7 @@ void main() {
       Widget getWidget({bool isStatus = false, bool valueTextLoading = false}) {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
+          usingLocalization: true,
           child: BalanceTextRow(
             isStatus: isStatus,
             valueTextLoading: valueTextLoading,
@@ -53,7 +55,10 @@ void main() {
       testWidgets(
         'Found key text and value text in Balance Text Row',
         (tester) async {
-          await tester.pumpWidget(getWidget());
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getWidget(),
+            tester: tester,
+          );
           await tester.pump();
           final keyAndValueTextWidget = find.byKey(
             WidgetKeys.balanceTextRow(keyText, valueText),
@@ -64,7 +69,10 @@ void main() {
       testWidgets(
         'Found StatusLabel in Balance Text Row',
         (tester) async {
-          await tester.pumpWidget(getWidget(isStatus: true));
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getWidget(isStatus: true),
+            tester: tester,
+          );
           await tester.pump();
           final statusWidget = find.byType(StatusLabel);
           expect(statusWidget, findsOneWidget);
@@ -73,7 +81,11 @@ void main() {
       testWidgets(
         'Found value Text Loading in Balance Text Row',
         (tester) async {
-          await tester.pumpWidget(getWidget(valueTextLoading: true));
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getWidget(valueTextLoading: true),
+            tester: tester,
+          );
+
           await tester.pump();
           final valueTextLoading = find.byType(LoadingShimmer);
           expect(valueTextLoading, findsOneWidget);
@@ -83,7 +95,10 @@ void main() {
       testWidgets(
         'Found widgets while isStatus is true in Balance Text Row',
         (tester) async {
-          await tester.pumpWidget(getWidget(isStatus: true));
+          await TesterUtils.setUpLocalizationWrapper(
+            widget: getWidget(isStatus: true),
+            tester: tester,
+          );
           await tester.pump();
           final keyTextWidget = find.byKey(
             WidgetKeys.balanceTextRow(keyText, valueText),

@@ -37,6 +37,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -178,6 +179,8 @@ void main() {
       RouteDataScope getScopedWidget() {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
+          usingLocalization: true,
+          useMediaQuery: false,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<CustomerCodeBloc>(
@@ -226,7 +229,10 @@ void main() {
           ],
         );
         whenListen(cartMockBloc, expectedStates);
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         final cartButtonFinder =
             find.byKey(WidgetKeys.materialDetailsAddToCartButton);
@@ -261,7 +267,10 @@ void main() {
             ),
           ),
         );
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         final cartButtonFinder =
             find.byKey(WidgetKeys.materialDetailsAddToCartButton);
@@ -313,7 +322,10 @@ void main() {
             ),
           ),
         );
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         final cartButtonFinder =
             find.byKey(WidgetKeys.materialDetailsAddToCartButton);
@@ -345,7 +357,10 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         final similarProductSectionFinder =
             find.byKey(WidgetKeys.materialDetailsSimilarProductsSection);
@@ -377,7 +392,10 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         expect(similarProductSectionFinder, findsNothing);
         expect(similarProductItemFinder, findsNothing);
@@ -402,7 +420,10 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         expect(similarProductSectionFinder, findsNothing);
         expect(similarProductItemFinder, findsNothing);
@@ -441,7 +462,10 @@ void main() {
           ),
         );
         whenListen(productDetailMockBloc, expectedStates);
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         expect(similarProductSectionFinder, findsNothing);
         expect(similarProductItemFinder, findsNothing);
@@ -479,7 +503,10 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         final favouriteIcon =
             find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
@@ -515,7 +542,10 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         final favouriteIcon =
             find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
@@ -552,7 +582,10 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         final favouriteIcon =
             find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
@@ -588,7 +621,10 @@ void main() {
         );
 
         whenListen(productDetailMockBloc, expectedStates);
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         final favouriteIcon =
             find.byKey(WidgetKeys.materialDetailsFavouriteIcon);

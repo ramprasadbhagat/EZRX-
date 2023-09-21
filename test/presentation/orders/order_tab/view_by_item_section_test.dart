@@ -1,6 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -28,6 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import '../../../utils/tester_utils.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
@@ -133,43 +132,33 @@ void main() {
           .thenReturn(ProductImageState.initial());
     });
     Widget getScopedWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<ViewByItemsBloc>(
-              create: (context) => mockViewByItemsBloc,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<ViewByOrderDetailsBloc>(
-              create: (context) => mockViewByOrderDetailsBloc,
-            ),
-            BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
-            BlocProvider<EligibilityBloc>(
-              create: ((context) => eligibilityBlocMock),
-            ),
-            BlocProvider<ViewByItemFilterBloc>(
-              create: (context) => mockViewByItemFilterBloc,
-            ),
-            BlocProvider<ProductImageBloc>(
-              create: (context) => mockProductImageBloc,
-            ),
-          ],
-          child: const Material(
-            child: ViewByItemsPage(),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          BlocProvider<ViewByItemsBloc>(
+            create: (context) => mockViewByItemsBloc,
           ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<ViewByOrderDetailsBloc>(
+            create: (context) => mockViewByOrderDetailsBloc,
+          ),
+          BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
+          BlocProvider<EligibilityBloc>(
+            create: ((context) => eligibilityBlocMock),
+          ),
+          BlocProvider<ViewByItemFilterBloc>(
+            create: (context) => mockViewByItemFilterBloc,
+          ),
+          BlocProvider<ProductImageBloc>(
+            create: (context) => mockProductImageBloc,
+          ),
+        ],
+        child: const Material(
+          child: ViewByItemsPage(),
         ),
       );
     }
@@ -181,7 +170,10 @@ void main() {
           orderHistoryList: OrderHistory.empty(),
         ),
       );
-      await tester.pumpWidget(getScopedWidget());
+      await TesterUtils.setUpLocalizationWrapper(
+        widget: getScopedWidget(),
+        tester: tester,
+      );
       await tester.pump();
       final loaderImage = find.byKey(
         WidgetKeys.loaderImage,
@@ -200,7 +192,10 @@ void main() {
           ),
         ),
       );
-      await tester.pumpWidget(getScopedWidget());
+      await TesterUtils.setUpLocalizationWrapper(
+        widget: getScopedWidget(),
+        tester: tester,
+      );
       await tester.pump();
       final manufactureName = find.text('fake_manufactureName');
       expect(manufactureName, findsOneWidget);

@@ -22,6 +22,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../utils/tester_utils.dart';
 import '../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -115,6 +116,7 @@ void main() {
         assetLoader: CsvAssetLoader(),
         child: WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
+          usingLocalization: true,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
@@ -151,7 +153,10 @@ void main() {
           ),
         );
 
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         final addToCartButton =
             find.widgetWithText(ElevatedButton, 'Add to cart');
@@ -180,7 +185,10 @@ void main() {
             ),
           ),
         );
-        await tester.pumpWidget(getScopedWidget());
+        await TesterUtils.setUpLocalizationWrapper(
+          widget: getScopedWidget(),
+          tester: tester,
+        );
         await tester.pump();
         final offerLabel = find.byType(OfferLabel);
 
