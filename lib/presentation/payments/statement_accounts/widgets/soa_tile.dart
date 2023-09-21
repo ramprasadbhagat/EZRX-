@@ -1,4 +1,4 @@
-part of '../statement_accounts.dart';
+part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 
 class _SoaTile extends StatelessWidget {
   const _SoaTile({
@@ -31,6 +31,7 @@ class _SoaTile extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
                 TextButton.icon(
+                  key: WidgetKeys.soaDownloadButtonKey,
                   onPressed: state.isDownloadInProgress
                       ? null
                       : () =>
@@ -49,6 +50,7 @@ class _SoaTile extends StatelessWidget {
                   icon: state.isDownloadInProgress &&
                           SoaData(state.fileUrl.url) == soa.soaData
                       ? LoadingAnimationWidget.discreteCircle(
+                          key: WidgetKeys.soaLoadingAnimationWidgetKey,
                           color: ZPColors.primary,
                           secondRingColor: ZPColors.secondary,
                           thirdRingColor: ZPColors.orange,

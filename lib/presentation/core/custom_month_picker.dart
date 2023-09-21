@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -19,6 +20,7 @@ Future<DateTime?> showMonthPicker({
     context: context,
     builder: (context) {
       return _MonthPicker(
+        key: WidgetKeys.monthPickerKey,
         initialDate: initialDate,
         firstDate: firstDate,
         lastDate: lastDate,
@@ -164,7 +166,6 @@ class __MonthPickerState extends State<_MonthPicker> {
       ),
     );
   }
-
 
   TextButton _getYearButton(int year, ColorScheme colorScheme) {
     final isSelected = year == _selectedDate.year;

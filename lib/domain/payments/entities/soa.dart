@@ -10,6 +10,9 @@ class Soa with _$Soa {
   factory Soa({
     required SoaData soaData,
   }) = _Soa;
+  factory Soa.empty() => Soa(
+        soaData: SoaData(''),
+      );
 }
 
 extension SoaListExtension on List<Soa> {

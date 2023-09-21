@@ -1,4 +1,4 @@
-part of '../statement_accounts.dart';
+part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 
 class _Filter extends StatelessWidget {
   const _Filter({Key? key}) : super(key: key);
@@ -123,7 +123,9 @@ class _FilterButton extends StatelessWidget {
         ),
       ),
       builder: (_) {
-        return const _SOAFilterBottomSheet();
+        return const _SOAFilterBottomSheet(
+          key: WidgetKeys.soaFilterbottomSheetKey,
+        );
       },
     ).then(
       (value) {

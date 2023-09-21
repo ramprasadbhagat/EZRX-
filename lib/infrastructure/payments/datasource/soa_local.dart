@@ -13,7 +13,7 @@ class SoaLocalDataSource {
         'assets/json/listSoaResponse.json',
       ),
     );
-    final data = res.data['data'];
+    final data = res['data'];
 
     return List.from(data).map((e) => SoaDto.fromJson(e).toDomain()).toList();
   }

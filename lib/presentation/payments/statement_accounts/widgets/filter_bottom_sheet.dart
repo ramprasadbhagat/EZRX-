@@ -1,4 +1,4 @@
-part of '../statement_accounts.dart';
+part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 
 class _SOAFilterBottomSheet extends StatelessWidget {
   const _SOAFilterBottomSheet({Key? key}) : super(key: key);
@@ -76,6 +76,7 @@ class _FromDateField extends StatelessWidget {
       buildWhen: (previous, current) => previous.filter != current.filter,
       builder: (context, state) => Expanded(
         child: TextFormField(
+          key: WidgetKeys.soaFromDateFieldKey,
           autocorrect: false,
           onTap: () => _selectDate(context),
           readOnly: true,
@@ -127,6 +128,7 @@ class _ToDateField extends StatelessWidget {
       buildWhen: (previous, current) => previous.filter != current.filter,
       builder: (context, state) => Expanded(
         child: TextFormField(
+          key: WidgetKeys.soaToDateFieldKey,
           autocorrect: false,
           onTap: () => _selectDate(context),
           readOnly: true,
@@ -176,6 +178,7 @@ class _ResetButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: OutlinedButton(
+        key: WidgetKeys.soaFilterResetButtonKey,
         onPressed: () => Navigator.of(context).pop(
           SoaFilter(
             toDate: context.read<SoaBloc>().state.initialFilterToDate,
@@ -198,6 +201,7 @@ class _ApplyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ElevatedButton(
+        key: WidgetKeys.soaFilterApplyButtonKey,
         onPressed: () => Navigator.of(context).pop(
           context.read<SoaFilterBloc>().state.filter,
         ),

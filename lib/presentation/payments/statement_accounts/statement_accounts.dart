@@ -49,6 +49,7 @@ class StatementAccountsPage extends StatelessWidget {
         centerTitle: false,
       ),
       floatingActionButton: ScaleButton(
+        key: WidgetKeys.soaNewpaymentButtonKey,
         icon: Icons.add,
         label: 'New payment'.tr(),
         onPress: () => _toNewPayment(context),
@@ -82,6 +83,7 @@ class StatementAccountsPage extends StatelessWidget {
                 ],
               ),
               noRecordFoundWidget: const NoRecordFound(
+                key: WidgetKeys.soaNotFoundRecordKey,
                 title: 'No statements available',
                 subTitle: '',
                 svgImage: SvgImage.emptyOrder,
@@ -95,10 +97,12 @@ class StatementAccountsPage extends StatelessWidget {
                           .customerCodeInfo,
                     ),
                   ),
-              onLoadingMore: () {},
+              onLoadingMore:
+                  () {}, // Need to remove this as thisSoaBloc has no onLoadingMore function
               isLoading: state.isFetching,
               itemBuilder: (context, index, itemInfo) {
                 return _SoaTile(
+                  key: WidgetKeys.genericKey(key: 'SoaItem#$index'),
                   soa: itemInfo,
                 );
               },

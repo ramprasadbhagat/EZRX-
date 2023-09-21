@@ -629,4 +629,20 @@ class WidgetKeys {
   //============================================================
   static const Key profilePageLanguageDropdown =
       Key('profilePageLanguageDropdown');
+  // SOA page
+  //============================================================
+  static const Key soaNotFoundRecordKey = Key('soaNotFoundRecordKey');
+  static const Key soaNewpaymentButtonKey = Key('soaNewpaymentButton');
+  static const Key soaToDateFieldKey = Key('toDateField');
+  static const Key soaFromDateFieldKey = Key('fromDateField');
+  static const Key soaLoadingAnimationWidgetKey = Key('loadingAnimationWidget');
+  static const Key soaHeaderCustomerCodeKey = Key('soaHeaderCustomerCode');
+  static const Key soaFilterbottomSheetKey = Key('soaFilterbottomSheet');
+  static const Key soaFilterApplyButtonKey = Key('soaFilterApplyButton');
+  static const Key soaFilterResetButtonKey = Key('soaFilterResetButton');
+  static const Key soaDownloadButtonKey = Key('soaDownloadButton');
+  //===========================================================
+  //  Month Picker
+  //============================================================
+  static const Key monthPickerKey = Key('monthPicker');
 }

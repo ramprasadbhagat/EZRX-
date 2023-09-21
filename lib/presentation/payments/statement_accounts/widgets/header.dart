@@ -1,4 +1,4 @@
-part of '../statement_accounts.dart';
+part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 
 class _Header extends StatelessWidget {
   const _Header({Key? key}) : super(key: key);
@@ -25,6 +25,7 @@ class _Header extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               RichText(
+                key: WidgetKeys.soaHeaderCustomerCodeKey,
                 text: TextSpan(
                   text: 'Customer Code : '.tr(),
                   style: Theme.of(context)
