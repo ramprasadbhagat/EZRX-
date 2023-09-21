@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_list_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rxdart/rxdart.dart';
 
 part 'return_list_by_item_event.dart';
 part 'return_list_by_item_state.dart';
@@ -22,6 +21,7 @@ class ReturnListByItemBloc
     extends Bloc<ReturnListByItemEvent, ReturnListByItemState> {
   final IReturnListRepository returnListRepository;
   final Config config;
+
   ReturnListByItemBloc({
     required this.returnListRepository,
     required this.config,
@@ -42,28 +42,13 @@ class ReturnListByItemBloc
         ),
       );
     });
-    on<_AutoSearchProduct>(
-      (e, emit) {
-        if (e.searchKey == state.searchKey) return;
-        if (state.searchKey.validateNotEmpty) {
-          add(
-            _Fetch(
-              appliedFilter: e.appliedFilter,
-              searchKey: e.searchKey,
-            ),
-          );
-        } else {
-          emit(state.copyWith(searchKey: e.searchKey));
-        }
-      },
-      transformer: (events, mapper) => events
-          .debounceTime(
-            Duration(milliseconds: config.autoSearchTimeout),
-          )
-          .asyncExpand(mapper),
-    );
     on<_Fetch>(
       (e, emit) async {
+        if (e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) {
+          return;
+        }
+        if (!e.searchKey.isValid()) return;
+
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),

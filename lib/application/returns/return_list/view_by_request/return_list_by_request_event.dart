@@ -13,9 +13,5 @@ class ReturnListByRequestEvent with _$ReturnListByRequestEvent {
     required ReturnFilter appliedFilter,
     required SearchKey searchKey,
   }) = _Fetch;
-  const factory ReturnListByRequestEvent.autoSearchProduct({
-    required ReturnFilter appliedFilter,
-    required SearchKey searchKey,
-  }) = _AutoSearchProduct;
   const factory ReturnListByRequestEvent.loadMore() = _LoadMore;
 }

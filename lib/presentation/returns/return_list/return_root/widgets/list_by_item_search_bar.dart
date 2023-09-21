@@ -1,24 +1,9 @@
-part of '../return_root.dart';
+part of 'package:ezrxmobile/presentation/returns/return_list/return_root/return_root.dart';
 
 class _ListByItemSearchBar extends StatelessWidget {
   const _ListByItemSearchBar({
     Key? key,
   }) : super(key: key);
-
-  void _search({
-    required BuildContext context,
-    required String searchKey,
-    bool onClear = false,
-  }) {
-    if (!onClear && searchKey.isEmpty) return;
-    context.read<ReturnListByItemBloc>().add(
-          ReturnListByItemEvent.fetch(
-            appliedFilter:
-                context.read<ReturnListByItemBloc>().state.appliedFilter,
-            searchKey: SearchKey.searchFilter(searchKey),
-          ),
-        );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +12,9 @@ class _ListByItemSearchBar extends StatelessWidget {
           previous.isFetching != current.isFetching ||
           current.searchKey.isValueEmpty,
       builder: (context, state) {
+        final appliedFilter =
+            context.read<ReturnListByItemBloc>().state.appliedFilter;
+
         return CustomSearchBar(
           key: WidgetKeys.genericKey(
             key: state.searchKey.searchValueOrEmpty,
@@ -34,22 +22,25 @@ class _ListByItemSearchBar extends StatelessWidget {
           enabled: !state.isFetching,
           initialValue: state.searchKey.searchValueOrEmpty,
           onSearchChanged: (value) => context.read<ReturnListByItemBloc>().add(
-                ReturnListByItemEvent.autoSearchProduct(
-                  appliedFilter:
-                      context.read<ReturnListByItemBloc>().state.appliedFilter,
+                ReturnListByItemEvent.fetch(
+                  appliedFilter: appliedFilter,
                   searchKey: SearchKey.searchFilter(value),
                 ),
               ),
-          onSearchSubmitted: (value) => _search(
-            context: context,
-            searchKey: value,
-          ),
+          onSearchSubmitted: (value) =>
+              context.read<ReturnListByItemBloc>().add(
+                    ReturnListByItemEvent.fetch(
+                      appliedFilter: appliedFilter,
+                      searchKey: SearchKey.searchFilter(value),
+                    ),
+                  ),
           customValidator: (value) => SearchKey.searchFilter(value).isValid(),
-          onClear: () => _search(
-            context: context,
-            searchKey: '',
-            onClear: true,
-          ),
+          onClear: () => context.read<ReturnListByItemBloc>().add(
+                ReturnListByItemEvent.fetch(
+                  appliedFilter: appliedFilter,
+                  searchKey: SearchKey.searchFilter(''),
+                ),
+              ),
         );
       },
     );
