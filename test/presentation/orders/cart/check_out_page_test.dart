@@ -537,5 +537,56 @@ void main() {
         expect(find.text('Subtotal (incl.tax):'), findsOneWidget);
       },
     );
+
+    testWidgets(
+      'Do not Show delivery Instruction textfield  when displaySubtotalTaxBreakdown is false',
+      (tester) async {
+        final salesOrgConfig = SalesOrganisationConfigs.empty();
+        final salesOrgState = SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('3050'),
+          ),
+          configs: salesOrgConfig,
+        );
+
+        when(() => salesOrgBlocMock.state).thenReturn(
+          salesOrgState,
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey')),
+          findsNothing,
+        );
+      },
+    );
+
+    testWidgets(
+      'Do not Show delivery Instruction textfield  when displaySubtotalTaxBreakdown is true',
+      (tester) async {
+        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+          enableSpecialInstructions: true,
+        );
+        final salesOrgState = SalesOrgState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('3050'),
+          ),
+          configs: salesOrgConfig,
+        );
+
+        when(() => salesOrgBlocMock.state).thenReturn(
+          salesOrgState,
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(WidgetKeys.genericKey(key: 'deliveryInstructionKey')),
+          findsOneWidget,
+        );
+      },
+    );
   });
 }

@@ -112,21 +112,27 @@ class _OrderDetailHeader extends StatelessWidget {
                       color: ZPColors.white,
                     ),
               ),
-              BalanceTextRow(
-                keyFlex: 2,
-                valueFlex: 3,
-                keyText: 'Delivery instructions'.tr(),
-                keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-                valueText: state
-                    .orderHistoryDetails
-                    .orderHistoryDetailsSpecialInstructions
-                    .displaySpecialInstructions,
-                valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-              ),
+              if (context
+                  .read<SalesOrgBloc>()
+                  .state
+                  .configs
+                  .enableSpecialInstructions)
+                BalanceTextRow(
+                  keyFlex: 2,
+                  valueFlex: 3,
+                  keyText: 'Delivery instructions'.tr(),
+                  keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.white,
+                      ),
+                  valueText: state
+                      .orderHistoryDetails
+                      .orderHistoryDetailsSpecialInstructions
+                      .displaySpecialInstructions,
+                  valueTextStyle:
+                      Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                ),
               BalanceTextRow(
                 keyFlex: 2,
                 valueFlex: 3,

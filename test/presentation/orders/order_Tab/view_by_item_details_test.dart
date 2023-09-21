@@ -285,7 +285,65 @@ void main() {
       final expectedDelivery = find.textContaining('Expected delivery');
       expect(expectedDelivery, findsNothing);
     });
+    testWidgets('When enableSpecialInstructions is false', (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty()
+              .copyWith(enableSpecialInstructions: false),
+        ),
+      );
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
+      final expectedStates = [
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryItem: fakeOrderHistoryItem,
+          viewByItemDetails: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      ];
+      whenListen(
+        mockViewByItemDetailsBloc,
+        Stream.fromIterable(expectedStates),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final expectedDelivery = find.textContaining('Delivery instruction');
+      expect(expectedDelivery, findsNothing);
+    });
 
+    testWidgets('When enableSpecialInstructions is true', (tester) async {
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty()
+              .copyWith(enableSpecialInstructions: true),
+        ),
+      );
+      final expectedStates = [
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: true,
+        ),
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryItem: fakeOrderHistoryItem,
+          viewByItemDetails: OrderHistory.empty().copyWith(
+            orderHistoryItems: [fakeOrderHistoryItem],
+          ),
+        ),
+      ];
+      whenListen(
+        mockViewByItemDetailsBloc,
+        Stream.fromIterable(expectedStates),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final expectedDelivery = find.textContaining('Delivery instruction');
+      expect(expectedDelivery, findsOneWidget);
+    });
     testWidgets('Find Order Created Status', (tester) async {
       when(() => mockViewByItemDetailsBloc.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(

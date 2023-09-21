@@ -132,21 +132,20 @@ class ItemHeaderSection extends StatelessWidget {
                               ),
                     )
                   : const SizedBox.shrink(),
-              config.enableSpecialInstructions
-                  ? BalanceTextRow(
-                      keyText: 'Delivery instructions'.tr(),
-                      valueText: orderHistoryItem
-                          .specialInstructions.displaySpecialInstructions,
-                      valueTextStyle:
-                          Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: ZPColors.white,
-                              ),
-                      keyTextStyle:
-                          Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: ZPColors.white,
-                              ),
-                    )
-                  : const SizedBox.shrink(),
+              if (config.enableSpecialInstructions)
+                BalanceTextRow(
+                  keyText: 'Delivery instructions'.tr(),
+                  valueText: orderHistoryItem
+                      .specialInstructions.displaySpecialInstructions,
+                  valueTextStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                  keyTextStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                ),
             ],
           ),
         );

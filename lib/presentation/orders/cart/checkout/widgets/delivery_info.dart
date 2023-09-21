@@ -262,7 +262,7 @@ class _TextFormFieldState extends State<_TextFormField> {
           padding: const EdgeInsets.only(bottom: 16.0),
           child: TextFieldWithLabel(
             focusNode: widget.focusNode,
-            fieldKey: Key(widget.keyText),
+            fieldKey: WidgetKeys.genericKey(key: widget.keyText),
             labelText: widget.labelText.tr(),
             controller: _controller,
             validator: (_) => _validateForm(

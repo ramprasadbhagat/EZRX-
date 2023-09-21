@@ -300,5 +300,47 @@ void main() {
       );
       expect(paymentTermsSection, findsOneWidget);
     });
+
+    testWidgets('test when enableSpecialInstructions is false', (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+        ),
+      );
+
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableSpecialInstructions: false,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final expectedDelivery = find.textContaining('Delivery instruction');
+      expect(expectedDelivery, findsNothing);
+    });
+
+    testWidgets('test when enableSpecialInstructions is true', (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+        ),
+      );
+
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            enableSpecialInstructions: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final expectedDelivery = find.textContaining('Delivery instruction');
+      expect(expectedDelivery, findsOneWidget);
+    });
   });
 }
