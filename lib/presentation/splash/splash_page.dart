@@ -208,6 +208,17 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           listenWhen: (previous, current) => previous.user != current.user,
           listener: (context, state) {
             _initializeSalesOrg(state);
+            final eligibilityState = context.read<EligibilityBloc>().state;
+            context.read<EligibilityBloc>().add(
+                  EligibilityEvent.update(
+                    user: state.user,
+                    salesOrganisation: eligibilityState.salesOrganisation,
+                    salesOrgConfigs: eligibilityState.salesOrgConfigs,
+                    customerCodeInfo: eligibilityState.customerCodeInfo,
+                    shipToInfo: eligibilityState.shipToInfo,
+                    selectedOrderType: eligibilityState.selectedOrderType,
+                  ),
+                );
             if (state.isSalesRep) {
               context.read<SalesRepBloc>().add(
                     SalesRepEvent.fetch(
@@ -693,6 +704,17 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               }
               if (state.haveSelectedSalesOrganisation &&
                   state.configs != SalesOrganisationConfigs.empty()) {
+                final eligibilityState = context.read<EligibilityBloc>().state;
+                context.read<EligibilityBloc>().add(
+                      EligibilityEvent.update(
+                        salesOrganisation: state.salesOrganisation,
+                        salesOrgConfigs: state.configs,
+                        user: eligibilityState.user,
+                        customerCodeInfo: eligibilityState.customerCodeInfo,
+                        shipToInfo: eligibilityState.shipToInfo,
+                        selectedOrderType: eligibilityState.selectedOrderType,
+                      ),
+                    );
                 context.read<CustomerCodeBloc>().add(
                       CustomerCodeEvent.initialized(
                         userInfo: context.read<UserBloc>().state.user,
@@ -872,14 +894,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   void _addDependentEvents(BuildContext context, CustomerCodeState state) {
     final salesOrgState = context.read<SalesOrgBloc>().state;
     final orderDocumentTypeState = context.read<OrderDocumentTypeBloc>().state;
-    final customerCodeState = context.read<CustomerCodeBloc>().state;
     final user = context.read<UserBloc>().state.user;
-    final shipToInfo = context.read<CustomerCodeBloc>().state.shipToInfo;
-
     //need to initialize the eligibility bloc
     //so that when EligibilityBloc update event is call bloc listener will
     //execute CartBloc fetch event
-    context.read<EligibilityBloc>().add(const EligibilityEvent.initialized());
 
     context.read<MaterialFilterBloc>().add(
           const MaterialFilterEvent.resetFilter(),
@@ -923,10 +941,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<MaterialPriceDetailBloc>().add(
             MaterialPriceDetailEvent.initialized(
               user: user,
-              customerCode: customerCodeState.customerCodeInfo,
+              customerCode: state.customerCodeInfo,
               salesOrganisation: salesOrgState.salesOrganisation,
               salesOrganisationConfigs: salesOrgState.configs,
-              shipToCode: shipToInfo,
+              shipToCode: state.shipToInfo,
             ),
           );
 
@@ -940,10 +958,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context.read<OrderSummaryBloc>().add(
             OrderSummaryEvent.initialized(
-              shipToInfo: shipToInfo,
+              shipToInfo: state.shipToInfo,
               user: user,
               orderDocumentType: orderDocumentTypeState.selectedOrderType,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
+              customerCodeInfo: state.customerCodeInfo,
               salesOrganisation: salesOrgState.salesOrganisation,
               salesOrg: salesOrgState.salesOrg,
               salesOrgConfig: salesOrgState.configs,
@@ -955,7 +973,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               configs: salesOrgState.configs,
               salesOrganization: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: shipToInfo,
+              shipToInfo: state.shipToInfo,
             ),
           );
 
@@ -963,9 +981,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ReturnListByRequestEvent.initialized(
               salesOrg:
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
-              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              shipInfo: state.shipToInfo,
               user: user,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
+              customerCodeInfo: state.customerCodeInfo,
             ),
           );
 
@@ -973,18 +991,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             CartEvent.initialized(
               salesOrganisationConfigs: salesOrgState.configs,
               salesOrganisation: salesOrgState.salesOrganisation,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
-              shipToInfo: customerCodeState.shipToInfo,
+              customerCodeInfo: state.customerCodeInfo,
+              shipToInfo: state.shipToInfo,
             ),
           );
 
       context.read<EligibilityBloc>().add(
             EligibilityEvent.update(
-              user: user,
+              customerCodeInfo: state.customerCodeInfo,
+              shipToInfo: state.shipToInfo,
               salesOrganisation: salesOrgState.salesOrganisation,
               salesOrgConfigs: salesOrgState.configs,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
-              shipToInfo: state.shipToInfo,
+              user: user,
               selectedOrderType: orderDocumentTypeState.selectedOrderType,
             ),
           );
@@ -992,7 +1010,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             DownloadPaymentAttachmentEvent.initialized(
               salesOrganization:
                   context.read<SalesOrgBloc>().state.salesOrganisation,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
+              customerCodeInfo: state.customerCodeInfo,
             ),
           );
       context.read<NotificationBloc>().add(
@@ -1000,9 +1018,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           );
       context.read<PaymentCustomerInformationBloc>().add(
             PaymentCustomerInformationEvent.fetch(
-              customeCodeInfo: customerCodeState.customerCodeInfo,
+              customeCodeInfo: state.customerCodeInfo,
               salesOrganisation: salesOrgState.salesOrganisation,
-              selectedShipToCode: shipToInfo.shipToCustomerCode,
+              selectedShipToCode: state.shipToInfo.shipToCustomerCode,
             ),
           );
 
@@ -1010,20 +1028,20 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             PaymentSummaryEvent.fetchPaymentSummaryList(
               salesOrganization:
                   context.read<SalesOrgBloc>().state.salesOrganisation,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
+              customerCodeInfo: state.customerCodeInfo,
             ),
           );
 
       context.read<SoaBloc>().add(
             SoaEvent.fetch(
-              customerCodeInfo: customerCodeState.customerCodeInfo,
+              customerCodeInfo: state.customerCodeInfo,
             ),
           );
 
       context.read<AdditionalDetailsBloc>().add(
             AdditionalDetailsEvent.initialized(
               config: salesOrgState.configs,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
+              customerCodeInfo: state.customerCodeInfo,
             ),
           );
 
@@ -1041,7 +1059,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context.read<AccountSummaryBloc>().add(
             AccountSummaryEvent.fetchInvoiceSummary(
-              custCode: customerCodeState.customerCodeInfo.customerCodeSoldTo,
+              custCode: state.customerCodeInfo.customerCodeSoldTo,
               salesOrg:
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
             ),
@@ -1049,13 +1067,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<RecentOrderBloc>().add(
             RecentOrderEvent.fetchRecentlyOrderedProducts(
               configs: salesOrgState.configs,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
+              customerCodeInfo: state.customerCodeInfo,
               shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
             ),
           );
       context.read<AccountSummaryBloc>().add(
             AccountSummaryEvent.fetchCreditSummary(
-              custCode: customerCodeState.customerCodeInfo.customerCodeSoldTo,
+              custCode: state.customerCodeInfo.customerCodeSoldTo,
               salesOrg:
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
             ),
@@ -1072,10 +1090,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<MaterialPriceDetailBloc>().add(
             MaterialPriceDetailEvent.initialized(
               user: user,
-              customerCode: customerCodeState.customerCodeInfo,
+              customerCode: state.customerCodeInfo,
               salesOrganisation: salesOrgState.salesOrganisation,
               salesOrganisationConfigs: salesOrgState.configs,
-              shipToCode: shipToInfo,
+              shipToCode: state.shipToInfo,
             ),
           );
 
@@ -1089,10 +1107,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context.read<OrderSummaryBloc>().add(
             OrderSummaryEvent.initialized(
-              shipToInfo: shipToInfo,
+              shipToInfo: state.shipToInfo,
               user: user,
               orderDocumentType: orderDocumentTypeState.selectedOrderType,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
+              customerCodeInfo: state.customerCodeInfo,
               salesOrganisation: salesOrgState.salesOrganisation,
               salesOrg: salesOrgState.salesOrg,
               salesOrgConfig: salesOrgState.configs,
@@ -1104,7 +1122,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               configs: salesOrgState.configs,
               salesOrganization: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: shipToInfo,
+              shipToInfo: state.shipToInfo,
             ),
           );
 
@@ -1114,7 +1132,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
               shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               user: user,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
+              customerCodeInfo: state.customerCodeInfo,
             ),
           );
 
@@ -1124,7 +1142,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
               shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               user: user,
-              customerCodeInfo: customerCodeState.customerCodeInfo,
+              customerCodeInfo: state.customerCodeInfo,
             ),
           );
       if (user.userCanAccessOrderHistory) {
