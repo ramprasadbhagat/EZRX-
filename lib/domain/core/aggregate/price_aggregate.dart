@@ -572,10 +572,14 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get isAnyOOSItemPresentInCart => materialInfo.type.typeBundle
       ? bundle.materials.any(
-          (material) => material.stockInfos
-              .any((stock) => !stock.inStock.isMaterialInStock),
+          (material) =>
+              material.stockInfos.isEmpty ||
+              material.stockInfos.any(
+                (stock) => !stock.inStock.isMaterialInStock,
+              ),
         )
-      : stockInfoList.any((stock) => !stock.inStock.isMaterialInStock);
+      : stockInfoList.isEmpty ||
+          stockInfoList.any((stock) => !stock.inStock.isMaterialInStock);
 
   List<PriceAggregate> get bundleMaterialsPriceAggregate => bundle.materials
       .map(

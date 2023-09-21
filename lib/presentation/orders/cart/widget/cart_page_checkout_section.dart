@@ -33,8 +33,6 @@ class _CartPageCheckoutSection extends StatelessWidget {
                 size: 20,
               ),
             ),
-            const _MWPCheckMessage(),
-            _CartPageOOSMessage(),
             const _MovCheckMessage(),
             ListTile(
               dense: true,
@@ -96,101 +94,6 @@ class _CartPageCheckoutSection extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _CartPageUnorderedList extends StatelessWidget {
-  const _CartPageUnorderedList(this.texts, {Key? key}) : super(key: key);
-  final List<String> texts;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: texts
-          .map(
-            (e) => Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _CartPageUnorderedListItem(
-                  text: e,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-          )
-          .toList(),
-    );
-  }
-}
-
-class _CartPageUnorderedListItem extends StatelessWidget {
-  const _CartPageUnorderedListItem({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          '• ',
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
-        Expanded(
-          child: Text(
-            text,
-            style: Theme.of(context)
-                .textTheme
-                .titleSmall!
-                .copyWith(fontWeight: FontWeight.w400),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _CartPageOOSMessage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
-      buildWhen: (previous, current) =>
-          previous.displayOOSWarning != current.displayOOSWarning,
-      builder: (context, state) {
-        return state.displayOOSWarning
-            ? Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  right: 20.0,
-                ),
-                child: ListTile(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4),
-                    ),
-                  ),
-                  dense: true,
-                  visualDensity: VisualDensity.compact,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  tileColor: ZPColors.lightRedStatusColor,
-                  title: _CartPageUnorderedList(
-                    [
-                      'Please remove at items that are out of stock'.tr(),
-                      'Please ensure that the order quantity of each item is within order limit'
-                          .tr(),
-                    ],
-                  ),
-                ),
-              )
-            : const SizedBox.shrink();
-      },
     );
   }
 }

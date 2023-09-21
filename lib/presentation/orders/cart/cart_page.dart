@@ -33,7 +33,6 @@ import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.da
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 
 part 'package:ezrxmobile/presentation/orders/cart/widget/minimum_order_value_message.dart';
-part 'package:ezrxmobile/presentation/orders/cart/widget/material_without_price_message.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list_item.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_checkout_section.dart';
@@ -102,7 +101,10 @@ class _CartPageState extends State<CartPage> {
               previous.totalPriceWithTax != current.totalPriceWithTax &&
                   !current.isFetchingCartProductDetail ||
               previous.isMappingPrice != current.isMappingPrice &&
-                  !current.isMappingPrice,
+                  !current.isMappingPrice ||
+              (previous.isUpserting != current.isUpserting ||
+                  previous.isClearing != current.isClearing ||
+                  previous.isUpdatingStock != current.isUpdatingStock),
           listener: (context, state) {
             context.read<OrderEligibilityBloc>().add(
                   OrderEligibilityEvent.update(
@@ -188,7 +190,8 @@ class _CartPageState extends State<CartPage> {
                     currentPath: context.router.currentPath,
                   ),
                   const AccountSuspendedBanner(),
-                  const _CartPageInvalidItemsBanner(),
+                  if (!state.priceUnderLoadingShimmer)
+                    const _CartPageInvalidItemsBanner(),
                   _CartPageCartScrollList(state: state, taxCode: taxCode),
                   if (state.cartProducts.isNotEmpty)
                     const _CartPageCheckoutSection(),

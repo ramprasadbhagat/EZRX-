@@ -212,6 +212,8 @@ void main() {
       Widget getWidget() {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouter,
+          useMediaQuery: false,
+          usingLocalization: true,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBloc),
             BlocProvider<CartBloc>(create: (context) => cartBloc),
@@ -268,8 +270,8 @@ void main() {
                 SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
           ),
         );
-
         await tester.pumpWidget(getWidget());
+
         await tester.pump();
 
         final bonusSampleItemButton =

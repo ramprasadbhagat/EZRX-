@@ -181,10 +181,10 @@ void main() {
       },
     );
 
-    Widget getWidget(Widget child) {
+    Widget getWidget({required Widget child, required bool usingLocalization}) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouter,
-        useMediaQuery: false,
+        usingLocalization: usingLocalization,
         providers: [
           BlocProvider<UserBloc>(create: (context) => userBloc),
           BlocProvider<CartBloc>(create: (context) => cartBloc),
@@ -230,8 +230,12 @@ void main() {
               SalesOrganisationConfigs.empty().copyWith(priceOverride: false),
         ),
       );
-
-      await tester.pumpWidget(getWidget(const CartPage()));
+      await tester.pumpWidget(
+        getWidget(
+          child: const CartPage(),
+          usingLocalization: true,
+        ),
+      );
       await tester.pump();
 
       final cartPageFinder = find.byKey(WidgetKeys.cartPage);
@@ -261,7 +265,12 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(getWidget(const CartPage()));
+      await tester.pumpWidget(
+        getWidget(
+          child: const CartPage(),
+          usingLocalization: true,
+        ),
+      );
       await tester.pump();
 
       final cartPageFinder = find.byKey(WidgetKeys.cartPage);
@@ -304,7 +313,12 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(getWidget(const CartPage()));
+      await tester.pumpWidget(
+        getWidget(
+          child: const CartPage(),
+          usingLocalization: true,
+        ),
+      );
       await tester.pump();
 
       final cartPageFinder = find.byKey(WidgetKeys.cartPage);
@@ -382,7 +396,12 @@ void main() {
         ),
       );
 
-      await tester.pumpWidget(getWidget(const CartPage()));
+      await tester.pumpWidget(
+        getWidget(
+          child: const CartPage(),
+          usingLocalization: true,
+        ),
+      );
       await tester.pump();
 
       final cartPageFinder = find.byKey(WidgetKeys.cartPage);
@@ -512,12 +531,13 @@ void main() {
       );
       await tester.pumpWidget(
         getWidget(
-          Scaffold(
+          child: Scaffold(
             appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
+          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -650,14 +670,16 @@ void main() {
         expectedPriceOverrideState,
         initialState: confirmedPriceOverrideState,
       );
+
       await tester.pumpWidget(
         getWidget(
-          Scaffold(
+          child: Scaffold(
             appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
+          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -763,12 +785,13 @@ void main() {
       );
       await tester.pumpWidget(
         getWidget(
-          Scaffold(
+          child: Scaffold(
             appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
+          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -872,12 +895,13 @@ void main() {
       );
       await tester.pumpWidget(
         getWidget(
-          Scaffold(
+          child: Scaffold(
             appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
+          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -987,12 +1011,13 @@ void main() {
       );
       await tester.pumpWidget(
         getWidget(
-          Scaffold(
+          child: Scaffold(
             appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
+          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -1075,12 +1100,13 @@ void main() {
 
       await tester.pumpWidget(
         getWidget(
-          Scaffold(
+          child: Scaffold(
             appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
+          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -1141,12 +1167,13 @@ void main() {
 
       await tester.pumpWidget(
         getWidget(
-          Scaffold(
+          child: Scaffold(
             appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
+          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -1200,12 +1227,13 @@ void main() {
 
       await tester.pumpWidget(
         getWidget(
-          Scaffold(
+          child: Scaffold(
             appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
+          usingLocalization: false,
         ),
       );
       await tester.pump();

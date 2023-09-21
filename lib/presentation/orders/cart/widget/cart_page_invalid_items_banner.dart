@@ -8,9 +8,15 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
     return BlocBuilder<OrderEligibilityBloc, OrderEligibilityState>(
       buildWhen: (previous, current) =>
           previous.cartContainsSuspendedMaterials !=
-          current.cartContainsSuspendedMaterials,
+              current.cartContainsSuspendedMaterials ||
+          previous.isMWPNotAllowedAndPresentInCart !=
+              current.isMWPNotAllowedAndPresentInCart ||
+          previous.isOOSAllowedIfPresentInCart !=
+              current.isOOSAllowedIfPresentInCart ||
+          previous.displayInvalidItemsBanner !=
+              current.displayInvalidItemsBanner,
       builder: (context, state) {
-        if (!state.cartContainsSuspendedMaterials) {
+        if (!state.displayInvalidItemsBanner) {
           return const SizedBox.shrink();
         }
 
@@ -31,6 +37,22 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 5),
                     content: Text(
                       'Suspended material'.tr(),
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
+                if (!state.isOOSAllowedIfPresentInCart)
+                  BulletWidget(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    content: Text(
+                      'Out of stock material'.tr(),
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
+                if (state.isMWPNotAllowedAndPresentInCart)
+                  BulletWidget(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    content: Text(
+                      'Material without price'.tr(),
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),

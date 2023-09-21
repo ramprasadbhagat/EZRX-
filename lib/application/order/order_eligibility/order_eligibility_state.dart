@@ -100,7 +100,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       !configs.materialWithoutPrice;
 
   bool get isOOSAllowedIfPresentInCart =>
-      ((_isOOSOrderPresent && _isOOSOrderAllowedToSubmit) ||
+      ((_isOOSOrderPresent && isOOSOrderAllowedToSubmit) ||
           !_isOOSOrderPresent);
 
   bool get isBundleQuantitySatisfies => cartItems
@@ -130,7 +130,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
         0;
   }
 
-  bool get _isOOSOrderAllowedToSubmit => (configs.addOosMaterials
+  bool get isOOSOrderAllowedToSubmit => (configs.addOosMaterials
           .getOrDefaultValue(false) &&
       (configs.oosValue.isOosValueZero ? user.role.type.isSalesRepRole : true));
 
@@ -143,9 +143,17 @@ class OrderEligibilityState with _$OrderEligibilityState {
   bool get cartContainsSuspendedMaterials =>
       cartItems.any((product) => product.materialInfo.isSuspended);
 
+  bool get displayInvalidItemsBanner =>
+      cartContainsSuspendedMaterials ||
+      isMWPNotAllowedAndPresentInCart ||
+      !isOOSAllowedIfPresentInCart;
+
   List<MaterialInfo> get invalidCartItems => cartItems
       .where(
-        (item) => item.materialInfo.isSuspended,
+        (item) =>
+            item.materialInfo.isSuspended ||
+            item.price.finalPrice.isEmpty && isMWPNotAllowedAndPresentInCart ||
+            !item.inStock && !isOOSAllowedIfPresentInCart,
       )
       .map((item) => item.materialInfo.copyWith(quantity: MaterialQty(0)))
       .toList();

@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
@@ -44,6 +45,14 @@ class CartProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
+    final isOOSNotAllowed =
+        !cartItem.inStock && !orderEligibilityState.isOOSAllowedIfPresentInCart;
+    final isMWPNotAllowed = cartItem.price.finalPrice.isEmpty &&
+        orderEligibilityState.isMWPNotAllowedAndPresentInCart;
+    final isSuspended = cartItem.materialInfo.isSuspended;
+    final isInvalidCartItem = isSuspended || isOOSNotAllowed || isMWPNotAllowed;
+
     return Padding(
       key: WidgetKeys.cartMaterialItemTile(
         cartItem.materialInfo.materialNumber.getValue(),
@@ -75,6 +84,7 @@ class CartProductTile extends StatelessWidget {
             children: [
               _MaterialDetailsSection(
                 cartItem: cartItem,
+                isInvalidCartItem: isInvalidCartItem,
               ),
               const Divider(
                 indent: 0,
@@ -89,9 +99,10 @@ class CartProductTile extends StatelessWidget {
                 endIndent: 0,
                 color: ZPColors.accentColor,
               ),
-              _BonusPriceCounterSection(
-                cartItem: cartItem,
-              ),
+              if (!isInvalidCartItem)
+                _BonusPriceCounterSection(
+                  cartItem: cartItem,
+                ),
             ],
           ),
         ),
@@ -102,8 +113,12 @@ class CartProductTile extends StatelessWidget {
 
 class _MaterialDetailsSection extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _MaterialDetailsSection({Key? key, required this.cartItem})
-      : super(key: key);
+  final bool isInvalidCartItem;
+  const _MaterialDetailsSection({
+    Key? key,
+    required this.cartItem,
+    required this.isInvalidCartItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +131,10 @@ class _MaterialDetailsSection extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-          _MaterialDetails(cartItem: cartItem),
+          _MaterialDetails(
+            cartItem: cartItem,
+            isInvalidCartItem: isInvalidCartItem,
+          ),
         ],
       ),
     );
@@ -145,6 +163,7 @@ class _ItemSubTotalSection extends StatelessWidget {
             left: 16,
             right: 16,
             top: 8,
+            bottom: 8,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -212,7 +231,12 @@ class _LoadingShimmerWithChild extends StatelessWidget {
 
 class _MaterialDetails extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _MaterialDetails({Key? key, required this.cartItem}) : super(key: key);
+  final bool isInvalidCartItem;
+  const _MaterialDetails({
+    Key? key,
+    required this.cartItem,
+    required this.isInvalidCartItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +296,10 @@ class _MaterialDetails extends StatelessWidget {
                     color: ZPColors.extraLightGrey4,
                   ),
             ),
-          _MaterialQuantitySection(cartItem: cartItem),
+          _MaterialQuantitySection(
+            cartItem: cartItem,
+            isInvalidCartItem: isInvalidCartItem,
+          ),
         ],
       ),
     );
@@ -281,8 +308,12 @@ class _MaterialDetails extends StatelessWidget {
 
 class _MaterialQuantitySection extends StatefulWidget {
   final PriceAggregate cartItem;
-  const _MaterialQuantitySection({Key? key, required this.cartItem})
-      : super(key: key);
+  final bool isInvalidCartItem;
+  const _MaterialQuantitySection({
+    Key? key,
+    required this.cartItem,
+    required this.isInvalidCartItem,
+  }) : super(key: key);
 
   @override
   State<_MaterialQuantitySection> createState() =>
@@ -317,7 +348,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
         children: [
           Focus(
             child: CartItemQuantityInput(
-              isEnabled: !widget.cartItem.materialInfo.isSuspended,
+              isEnabled: !widget.isInvalidCartItem,
               quantityAddKey: WidgetKeys.cartItemAddKey,
               quantityDeleteKey: WidgetKeys.cartItemDeleteKey,
               quantityTextKey: WidgetKeys.quantityInputTextKey,
@@ -348,12 +379,13 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                     );
               },
               isLoading: context.read<CartBloc>().state.isUpserting &&
-                  !widget.cartItem.materialInfo.isSuspended,
+                  !widget.isInvalidCartItem,
             ),
           ),
-          _InvalidMaterialMessage(
-            cartItem: widget.cartItem,
-          ),
+          if (!context.read<CartBloc>().state.priceUnderLoadingShimmer)
+            _InvalidMaterialMessage(
+              cartItem: widget.cartItem,
+            ),
         ],
       ),
     );
@@ -561,7 +593,6 @@ class _OrderTag extends StatelessWidget {
         );
 
         return finalCartItem.inStock ||
-                finalCartItem.stockInfoList.isEmpty ||
                 state.isFetching ||
                 state.isFetchingCartProductDetail
             ? const SizedBox.shrink()

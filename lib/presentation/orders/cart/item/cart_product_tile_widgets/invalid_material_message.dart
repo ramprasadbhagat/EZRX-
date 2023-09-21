@@ -10,12 +10,18 @@ class _InvalidMaterialMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // We need this Column as we will be adding more [ErrorTextWithIcon]
-      // for out of stock and material without price
       children: [
         if (cartItem.materialInfo.isSuspended)
           ErrorTextWithIcon(
             valueText: 'Material Suspended'.tr(),
+          ),
+        if (!cartItem.inStock &&
+            !context
+                .read<OrderEligibilityBloc>()
+                .state
+                .isOOSOrderAllowedToSubmit)
+          ErrorTextWithIcon(
+            valueText: 'Material out of stock'.tr(),
           ),
       ],
     );
