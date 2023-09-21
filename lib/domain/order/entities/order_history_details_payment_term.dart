@@ -15,6 +15,17 @@ class OrderHistoryDetailsPaymentTerm with _$OrderHistoryDetailsPaymentTerm {
         paymentTermDescription: PaymentTermDescription(''),
       );
 
-  String get displayPaymentTerm =>
-      '${paymentTermCode.displayPaymentTermCode} - ${paymentTermDescription.displayPaymentTermDescription}';
+  String get displayPaymentTerm {
+    if (paymentTermCode.isValid() && paymentTermDescription.isValid()) {
+      return '${paymentTermCode.displayPaymentTermCode} - ${paymentTermDescription.displayPaymentTermDescription}';
+    }
+    if (paymentTermCode.isValid() && !paymentTermDescription.isValid()) {
+      return paymentTermCode.displayPaymentTermCode;
+    }
+    if (!paymentTermCode.isValid() && paymentTermDescription.isValid()) {
+      return paymentTermDescription.displayPaymentTermDescription;
+    }
+
+    return 'NA';
+  }
 }

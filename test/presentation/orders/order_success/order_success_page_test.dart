@@ -1,18 +1,31 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 //import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:visibility_detector/visibility_detector.dart';
+
+import '../../../utils/widget_utils.dart';
 
 //import '../../../utils/widget_utils.dart';
 
@@ -31,12 +44,29 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class OrderSummaryBlocMock
+    extends MockBloc<OrderSummaryEvent, OrderSummaryState>
+    implements OrderSummaryBloc {}
+
+class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
+class AdditionalDetailsBlocMock
+    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
+    implements AdditionalDetailsBloc {}
+
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
-  //late AppRouter autoRouterMock;
+  late AppRouter autoRouterMock;
   late SalesOrgBloc mockSalesOrgBloc;
   late CustomerCodeBloc customerCodeBlocMock;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late OrderSummaryBloc orderSummaryBlocMock;
+  late UserBloc userBlocMock;
+  late AdditionalDetailsBloc additionalDetailsBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -49,20 +79,89 @@ void main() {
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      //autoRouterMock = locator<AppRouter>();
+      autoRouterMock = locator<AppRouter>();
       mockSalesOrgBloc = MockSalesOrgBloc();
       customerCodeBlocMock = CustomerCodeBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
+      orderSummaryBlocMock = OrderSummaryBlocMock();
+      userBlocMock = UserBlocMock();
+      additionalDetailsBlocMock = AdditionalDetailsBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
 
+      when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
+      when(() => additionalDetailsBlocMock.state)
+          .thenReturn(AdditionalDetailsState.initial());
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial(),
+      );
     },
   );
+
+  Widget getWidget() {
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      child: const OrderSuccessPage(),
+      providers: [
+        BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
+        BlocProvider<CustomerCodeBloc>(
+          create: (context) => customerCodeBlocMock,
+        ),
+        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+        BlocProvider<AnnouncementBloc>(
+          create: (context) => announcementBlocMock,
+        ),
+        BlocProvider<AdditionalDetailsBloc>(
+          create: (context) => additionalDetailsBlocMock,
+        ),
+        BlocProvider<OrderSummaryBloc>(
+          create: (context) => orderSummaryBlocMock,
+        ),
+        BlocProvider<UserBloc>(
+          create: (context) => userBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
+        ),
+      ],
+    );
+  }
+
+  testWidgets(
+    'Payment Term',
+    (tester) async {
+      VisibilityDetectorController.instance.updateInterval = Duration.zero;
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial().copyWith(
+          isConfirming: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            invoiceNumber: 'fake-number',
+            orderHistoryDetailsPaymentTerm:
+                OrderHistoryDetailsPaymentTerm.empty().copyWith(
+              paymentTermCode: PaymentTermCode(''),
+              paymentTermDescription: PaymentTermDescription(''),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      final orderSuccessPage = find.byKey(WidgetKeys.orderSuccess);
+      expect(orderSuccessPage, findsOneWidget);
+      final paymentTermWidget =
+          find.byKey(WidgetKeys.balanceTextRow('Payment term', 'NA'));
+      expect(paymentTermWidget, findsOneWidget);
+    },
+  );
+
   // group(
   //   'Test Order Success Page',
   //   () {

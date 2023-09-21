@@ -19,6 +19,9 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -123,7 +126,13 @@ void main() {
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
 
-      when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            disablePaymentTermsDisplay: false,
+          ),
+        ),
+      );
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -135,8 +144,9 @@ void main() {
               type: RoleType('client'),
             ),
           ),
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('SG')),
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('SG'),
+          ),
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerAttr7: CustomerAttr7('ZEV'),
             customerGrp4: CustomerGrp4('VR'),
@@ -192,6 +202,28 @@ void main() {
         ),
       );
     }
+
+    testWidgets('Payment Term if empty', (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsPaymentTerm:
+                OrderHistoryDetailsPaymentTerm.empty().copyWith(
+              paymentTermCode: PaymentTermCode(''),
+              paymentTermDescription: PaymentTermDescription(''),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final paymentTermWidget =
+          find.byKey(WidgetKeys.balanceTextRow('Payment Term', 'NA'));
+      expect(paymentTermWidget, findsOneWidget);
+    });
 
     testWidgets('loaderImage  test ', (tester) async {
       when(() => mockViewByOrderDetailsBloc.state).thenReturn(

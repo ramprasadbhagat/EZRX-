@@ -76,8 +76,8 @@ class _OrderDetailHeader extends StatelessWidget {
                 keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),
-                valueText:
-                    '${state.orderHistoryDetails.orderHistoryDetailsPaymentTerm.paymentTermCode.getOrDefaultValue('')} ${state.orderHistoryDetails.orderHistoryDetailsPaymentTerm.paymentTermDescription.getOrDefaultValue('')}',
+                valueText: state.orderHistoryDetails
+                    .orderHistoryDetailsPaymentTerm.displayPaymentTerm,
                 valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.white,
                     ),
