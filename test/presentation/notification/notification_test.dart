@@ -28,9 +28,6 @@ import '../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
-class EligibityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
     implements CustomerCodeBloc {}
@@ -60,7 +57,6 @@ void main() {
   late Notifications notifications;
   late List<CustomerCodeInfo> customerCodeListMock;
   late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
-  late EligibilityBloc eligibilityBlockMock;
 
   setUpAll(() {
     locator.registerLazySingleton(() => AppRouter());
@@ -70,11 +66,10 @@ void main() {
       userBlocMock = UserBlocMock();
       autoRouterMock = locator<AppRouter>();
       customerCodeBlocMock = CustomerCodeBlocMock();
-      eligibilityBlocMock = EligibilityBlocMock();
       notificationBlocMock = MockNotificationBloc();
       returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
-      eligibilityBlockMock = EligibityBlocMock();
-      when(() => eligibilityBlockMock.state)
+      eligibilityBlocMock = EligibilityBlocMock();
+      when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => customerCodeBlocMock.state)
@@ -103,9 +98,6 @@ void main() {
             BlocProvider<CustomerCodeBloc>(
               create: (context) => customerCodeBlocMock,
             ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
             BlocProvider<NotificationBloc>(
               create: (context) => notificationBlocMock,
             ),
@@ -113,7 +105,7 @@ void main() {
               create: (context) => returnSummaryDetailsBlocMock,
             ),
             BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlockMock,
+              create: (context) => eligibilityBlocMock,
             ),
           ],
           child: const Material(child: NotificationTab()),
@@ -133,11 +125,8 @@ void main() {
       );
       expect(deleteIcon, findsOneWidget);
 
-      await tester.tap(
-        deleteIcon,
-        warnIfMissed: true,
-      );
-      await tester.pump(const Duration(seconds: 1));
+      await tester.tap(deleteIcon);
+      await tester.pumpAndSettle();
       verify(
         () => notificationBlocMock.add(
           const NotificationEvent.deleteAllNotifications(),
@@ -198,9 +187,7 @@ void main() {
         ),
       );
 
-      await tester.pump(const Duration(seconds: 1));
-      await tester.pump(const Duration(seconds: 1));
-      await tester.pump(const Duration(seconds: 1));
+      await tester.pumpAndSettle();
       verify(
         () => notificationBlocMock.add(
           const NotificationEvent.fetch(),
@@ -208,56 +195,6 @@ void main() {
       ).called(1);
       handle.dispose();
     });
-    testWidgets(
-      'Load notification_tab with  data ',
-      (tester) async {
-        when(() => notificationBlocMock.state).thenReturn(
-          NotificationState.initial().copyWith(
-            notificationList: notifications,
-            isFetching: false,
-            isReadNotification: true,
-          ),
-        );
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: User.empty().copyWith(
-              role: Role.empty().copyWith(
-                type: RoleType('external_sales_rep'),
-              ),
-            ),
-          ),
-        );
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-            customerCodeInfo: customerCodeListMock.first,
-          ),
-        );
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial(),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
-        final customerDetails = find.text(
-          '${customerCodeListMock.first.customerName}(${customerCodeListMock.first.customerCodeSoldTo})',
-        );
-        expect(customerDetails, findsNWidgets(5));
-        final itemKey =
-            find.byKey(Key(notifications.notificationData.first.description));
-        expect(itemKey, findsOneWidget);
-        await tester.tap(
-          itemKey,
-          warnIfMissed: true,
-        );
-        await tester.pump(const Duration(seconds: 1));
-        verify(
-          () => notificationBlocMock.add(
-            NotificationEvent.readNotifications(
-              notificationId: notifications.notificationData.first.id,
-            ),
-          ),
-        ).called(1);
-      },
-    );
     testWidgets('Test SnackBarMessage when delete the notification ',
         (tester) async {
       when(() => notificationBlocMock.state).thenReturn(
@@ -302,12 +239,18 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
 
-        final itemKey =
-            find.byKey(Key(notifications.notificationData.first.description));
+        final itemKey = find.byKey(
+          WidgetKeys.genericKey(
+            key: notifications.notificationData.first.description,
+          ),
+        );
         expect(itemKey, findsWidgets);
 
-        final itemKey2 =
-            find.byKey(Key(notifications.notificationData[4].description));
+        final itemKey2 = find.byKey(
+          WidgetKeys.genericKey(
+            key: notifications.notificationData[4].description,
+          ),
+        );
         expect(itemKey2, findsOneWidget);
         await tester.drag(
           itemKey2,
@@ -334,12 +277,6 @@ void main() {
           ),
           disableReturns: true,
         );
-
-        when(() => eligibilityBlockMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            user: fakeUser,
-          ),
-        );
         when(() => notificationBlocMock.state).thenReturn(
           NotificationState.initial().copyWith(
             notificationList: notifications,
@@ -355,18 +292,25 @@ void main() {
         when(() => customerCodeBlocMock.state).thenReturn(
           CustomerCodeState.initial().copyWith(
             customerCodeInfo: customerCodeListMock.first,
+            userInfo: fakeUser,
           ),
         );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final itemKey =
-            find.byKey(Key(notifications.notificationData.first.description));
-        expect(itemKey, findsOneWidget);
-        await tester.tap(
-          itemKey,
-          warnIfMissed: true,
+        final itemKey = find.byKey(
+          WidgetKeys.genericKey(
+            key: notifications.notificationData.first.description,
+          ),
         );
-        await tester.pump(const Duration(seconds: 1));
+        expect(itemKey, findsOneWidget);
+        await tester.tap(itemKey);
+        await tester.pumpAndSettle();
         expect(
           autoRouterMock.current.name ==
               'ReturnRequestSummaryByItemDetailsRoute',
@@ -385,12 +329,6 @@ void main() {
           ),
           disableReturns: true,
         );
-
-        when(() => eligibilityBlockMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            user: fakeUser.copyWith(),
-          ),
-        );
         when(() => notificationBlocMock.state).thenReturn(
           NotificationState.initial().copyWith(
             notificationList: notifications,
@@ -408,20 +346,73 @@ void main() {
             customerCodeInfo: customerCodeListMock.first,
           ),
         );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final itemKey =
-            find.byKey(Key(notifications.notificationData.first.description));
-        expect(itemKey, findsOneWidget);
-        await tester.tap(
-          itemKey,
-          warnIfMissed: true,
+        final itemKey = find.byKey(
+          WidgetKeys.genericKey(
+            key: notifications.notificationData.first.description,
+          ),
         );
-        await tester.pump(const Duration(seconds: 1));
+        expect(itemKey, findsOneWidget);
+        await tester.tap(itemKey);
+        await tester.pumpAndSettle();
         expect(
           autoRouterMock.current.name == 'view_by_order_details_page',
           false,
         );
+      },
+    );
+
+    testWidgets(
+      'Load notification_tab with  data ',
+      (tester) async {
+        when(() => notificationBlocMock.state).thenReturn(
+          NotificationState.initial().copyWith(
+            notificationList: notifications,
+            isFetching: false,
+            isReadNotification: true,
+          ),
+        );
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('external_sales_rep'),
+              ),
+            ),
+          ),
+        );
+        when(() => customerCodeBlocMock.state).thenReturn(
+          CustomerCodeState.initial().copyWith(
+            customerCodeInfo: customerCodeListMock.first,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final customerDetails = find.text(
+          '${customerCodeListMock.first.customerName}(${customerCodeListMock.first.customerCodeSoldTo})',
+        );
+        expect(customerDetails, findsNWidgets(5));
+        final itemKey = find.byKey(
+          WidgetKeys.genericKey(
+            key: notifications.notificationData.first.description,
+          ),
+        );
+        expect(itemKey, findsOneWidget);
+        await tester.tap(itemKey);
+        await tester.pumpAndSettle();
+        verify(
+          () => notificationBlocMock.add(
+            NotificationEvent.readNotifications(
+              notificationId: notifications.notificationData.first.id,
+            ),
+          ),
+        ).called(1);
       },
     );
   });
