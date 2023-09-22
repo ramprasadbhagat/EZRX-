@@ -188,11 +188,15 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         var canLoadMore = true;
         var finalCustomerCodeInfoList = <CustomerCodeInfo>[];
         final finalCustomerCodeInfo = state.selectedSalesOrg.customerInfos;
+        final lastSelectedCustomerCodeInfo = state.customerCodeInfo;
+        final lastSelectedShipToInfo = state.shipToInfo;
         emit(
           CustomerCodeState.initial().copyWith(
             selectedSalesOrg: state.selectedSalesOrg,
             hideCustomer: state.hideCustomer,
             userInfo: state.userInfo,
+            shipToInfo: lastSelectedShipToInfo,
+            customerCodeInfo: lastSelectedCustomerCodeInfo,
           ),
         );
         emit(
@@ -243,12 +247,17 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                   apiFailureOrSuccessOption: none(),
                   isFetching: false,
                   canLoadMore: canLoadMore,
-                  customerCodeInfo: finalCustomerCodeInfoList.isNotEmpty
-                      ? finalCustomerCodeInfoList.first
-                      : CustomerCodeInfo.empty(),
-                  shipToInfo: finalCustomerCodeInfoList.isNotEmpty
-                      ? finalCustomerCodeInfoList.first.shipToInfos.first
-                      : ShipToInfo.empty(),
+                  customerCodeInfo:
+                      lastSelectedCustomerCodeInfo != CustomerCodeInfo.empty()
+                          ? lastSelectedCustomerCodeInfo
+                          : finalCustomerCodeInfoList.isNotEmpty
+                              ? finalCustomerCodeInfoList.first
+                              : CustomerCodeInfo.empty(),
+                  shipToInfo: lastSelectedShipToInfo != ShipToInfo.empty()
+                      ? lastSelectedShipToInfo
+                      : finalCustomerCodeInfoList.isNotEmpty
+                          ? finalCustomerCodeInfoList.first.shipToInfos.first
+                          : ShipToInfo.empty(),
                 ),
               );
             }
@@ -300,8 +309,6 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
     });
     on<_DeletedSearch>(
       (event, emit) {
-        if (event.searchText == state.searchKey.getValue() &&
-            event.searchText.isNotEmpty) return;
         add(
           _Fetch(
             searchText: event.searchText,

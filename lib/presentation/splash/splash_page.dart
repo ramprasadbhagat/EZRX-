@@ -747,10 +747,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           listenWhen: (previous, current) =>
               previous.apiFailureOrSuccessOption !=
                   current.apiFailureOrSuccessOption ||
-              previous.customerCodeInfo != current.customerCodeInfo ||
               previous.shipToInfo != current.shipToInfo ||
               (previous.isFetching != current.isFetching &&
-                  !current.isFetching),
+                  !current.isFetching &&
+                  previous.customerCodeInfo.customerCodeSoldTo !=
+                      current.customerCodeInfo.customerCodeSoldTo),
           listener: (context, state) {
             state.apiFailureOrSuccessOption.fold(
               () {},
