@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -10,6 +11,7 @@ import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -33,7 +35,41 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
     Emitter<NewPaymentState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => emit(NewPaymentState.initial()),
+      initialized: (_initialized e) async {
+        emit(
+          NewPaymentState.initial().copyWith(
+            user: e.user,
+            customerCodeInfo: e.customerCodeInfo,
+            salesOrganisation: e.salesOrganisation,
+            isFetchingPaymentMethod: true,
+          ),
+        );
+
+        final failureOrSuccess = await newPaymentRepository.fetchPaymentMethods(
+          salesOrganisation: state.salesOrganisation,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetchingPaymentMethod: false,
+              ),
+            );
+          },
+          (paymentMethods) {
+            emit(
+              state.copyWith(
+                paymentMethods: paymentMethods,
+                isFetchingPaymentMethod: false,
+                selectedPaymentMethod:
+                    paymentMethods.firstOrNull ?? PaymentMethodValue(''),
+              ),
+            );
+          },
+        );
+      },
       updateAllInvoices: (_SelectAllInvoices e) {
         emit(
           state.copyWith(
@@ -95,11 +131,11 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
         );
 
         final failureOrSuccess = await newPaymentRepository.pay(
-          salesOrganisation: e.salesOrganisation,
-          customerCodeInfo: e.customerCodeInfo,
-          paymentMethod: e.paymentMethod,
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+          paymentMethod: state.selectedPaymentMethod.getValue(),
           customerOpenItems: state.selectedInvoices,
-          user: e.user,
+          user: state.user,
         );
 
         failureOrSuccess.fold(
@@ -123,9 +159,9 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
         );
       },
       updatePaymentGateway: (_UpdatePaymentGateway e) async {
-        if (e.salesOrganisation.salesOrg.needUpdatePaymentGateway) {
+        if (state.salesOrganisation.salesOrg.needUpdatePaymentGateway) {
           await newPaymentRepository.updatePaymentGateway(
-            salesOrganisation: e.salesOrganisation,
+            salesOrganisation: state.salesOrganisation,
             uri: e.paymentUrl,
           );
         }
@@ -139,9 +175,9 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
         );
         final failureOrSuccess =
             await newPaymentRepository.getPaymentInvoiceInfoPdf(
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
-          user: e.user,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          user: state.user,
           paymentInfo: state.paymentInfo,
         );
 
@@ -204,6 +240,13 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
               },
             );
           },
+        );
+      },
+      updatePaymentMethodSelected: (_UpdatePaymentMethodSelected e) {
+        emit(
+          state.copyWith(
+            selectedPaymentMethod: e.paymentMethodSelected,
+          ),
         );
       },
     );

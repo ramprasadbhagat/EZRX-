@@ -32,8 +32,7 @@ class _PaymentWebviewPageState extends State<PaymentWebviewPage> {
               mimeType: 'text/html',
             ),
           ),
-          onLoadStart: (controller, url) {},
-          onLoadStop: (controller, url) async {
+          onLoadStart: (controller, url) async {
             final uri = await controller.getUrl();
             if (uri != null && (uri.path).contains('my-account/thankyou')) {
               if (mounted) {

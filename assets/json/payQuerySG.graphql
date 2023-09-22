@@ -1,0 +1,70 @@
+mutation addCustomerPayment($input: addCustomerPaymentInput!) {
+    addCustomerPayment(input: $input) {
+        paymentID
+        valueDate
+        paymentAmount
+        transactionCurrency
+        paymentDocument
+        invoiceProcessingStatus
+        paymentMethod
+        iban
+        bankIdentification
+        bankCountryKey
+        bankKey
+        bankAccountNumber
+        bankName
+        paymentCardID
+        paymentCardNumber
+        paymentCardHolderName
+        paymentCardMaskedNumber
+        paymentCardTypeName
+        extensibilityCustomField
+        customId
+        tmpPaytByDigitalPaytService
+        payerByPaymentServiceProvider
+        paymentRefByPaytSrvcProvider
+        paymentServiceProvider
+        transactionStatus
+        customerInvoice
+        paymentCardData
+        paytCardVerificatDetResultText
+        disputeCaseInformationText
+        userName
+        paymentBatchAdditionalInfo
+        accountingDocExternalReference
+        zCcpPaymentQRCode
+        zzHtmcs
+    }
+}
+
+"variables": {
+    "input": {
+    "customerCode":"0000100727",
+    "customerInvoice":[
+        {
+            "accountingDocExternalReference":"260120232080000486001SD 2080000486",
+            "accountingDocument":"2080000486",
+            "bpCustomerNumber":"100727",
+            "debitCreditFlag":"S",
+            "discountAmount":"0.00",
+            "discountDate":"2023-04-25",
+            "displayAmount":"378.00",
+            "displayCurrency":"SGD",
+            "displayOpenAmount":"378.00",
+            "dueDate":"2023-04-25",
+            "fiscalYear":"2023",
+            "isDisputed":"",
+            "lineItemNumber":"001",
+            "lineNumber":"000160",
+            "partialPaymentHistoryDesc":"260120232080000486001:",
+            "paymentAmount":"378.00",
+            "salesOrg":"2601",
+            "zzDeductCode": []
+        }
+    ],
+    "paymentMethod":"QR Code",
+    "salesOrg":"2601",
+    "transactionCurrency":"SGD",
+    "userName":"rootadmin"
+    }
+}

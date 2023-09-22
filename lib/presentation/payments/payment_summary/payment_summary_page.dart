@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -129,7 +130,13 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
           ),
         );
     context.read<NewPaymentBloc>().add(
-          const NewPaymentEvent.initialized(),
+          NewPaymentEvent.initialized(
+            user: context.read<UserBloc>().state.user,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+          ),
         );
     context.router.pushNamed('payments/new_payment');
   }

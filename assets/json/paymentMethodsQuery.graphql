@@ -1,0 +1,11 @@
+query availablePaymentMethods($request: availablePaymentMethodsRequest!) {
+    availablePaymentMethods(request: $request) {
+        paymentMethods
+    }
+}
+
+"variables": {
+    "request": {
+        "salesOrg": "2001"
+    }
+}

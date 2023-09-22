@@ -23,6 +23,15 @@ mixin _$PaymentInvoiceInfoPdf {
   String get paymentMethod => throw _privateConstructorUsedError;
   String get customerName => throw _privateConstructorUsedError;
   String get payer => throw _privateConstructorUsedError;
+  String get beneficiaryName => throw _privateConstructorUsedError;
+  String get bankName => throw _privateConstructorUsedError;
+  String get branch => throw _privateConstructorUsedError;
+  String get bankCode => throw _privateConstructorUsedError;
+  String get bankAccount => throw _privateConstructorUsedError;
+  String get hdbcSwiftCode => throw _privateConstructorUsedError;
+  String get bankAddress => throw _privateConstructorUsedError;
+  String get payNowUen => throw _privateConstructorUsedError;
+  String get emailId => throw _privateConstructorUsedError;
   String get qrCode => throw _privateConstructorUsedError;
   String get paymentBatchAdditionalInfo => throw _privateConstructorUsedError;
   List<PaymentItem> get paymentItems => throw _privateConstructorUsedError;
@@ -51,6 +60,15 @@ abstract class $PaymentInvoiceInfoPdfCopyWith<$Res> {
       String paymentMethod,
       String customerName,
       String payer,
+      String beneficiaryName,
+      String bankName,
+      String branch,
+      String bankCode,
+      String bankAccount,
+      String hdbcSwiftCode,
+      String bankAddress,
+      String payNowUen,
+      String emailId,
       String qrCode,
       String paymentBatchAdditionalInfo,
       List<PaymentItem> paymentItems,
@@ -82,6 +100,15 @@ class _$PaymentInvoiceInfoPdfCopyWithImpl<$Res,
     Object? paymentMethod = null,
     Object? customerName = null,
     Object? payer = null,
+    Object? beneficiaryName = null,
+    Object? bankName = null,
+    Object? branch = null,
+    Object? bankCode = null,
+    Object? bankAccount = null,
+    Object? hdbcSwiftCode = null,
+    Object? bankAddress = null,
+    Object? payNowUen = null,
+    Object? emailId = null,
     Object? qrCode = null,
     Object? paymentBatchAdditionalInfo = null,
     Object? paymentItems = null,
@@ -119,6 +146,42 @@ class _$PaymentInvoiceInfoPdfCopyWithImpl<$Res,
       payer: null == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
+              as String,
+      beneficiaryName: null == beneficiaryName
+          ? _value.beneficiaryName
+          : beneficiaryName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankName: null == bankName
+          ? _value.bankName
+          : bankName // ignore: cast_nullable_to_non_nullable
+              as String,
+      branch: null == branch
+          ? _value.branch
+          : branch // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankCode: null == bankCode
+          ? _value.bankCode
+          : bankCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankAccount: null == bankAccount
+          ? _value.bankAccount
+          : bankAccount // ignore: cast_nullable_to_non_nullable
+              as String,
+      hdbcSwiftCode: null == hdbcSwiftCode
+          ? _value.hdbcSwiftCode
+          : hdbcSwiftCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankAddress: null == bankAddress
+          ? _value.bankAddress
+          : bankAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      payNowUen: null == payNowUen
+          ? _value.payNowUen
+          : payNowUen // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailId: null == emailId
+          ? _value.emailId
+          : emailId // ignore: cast_nullable_to_non_nullable
               as String,
       qrCode: null == qrCode
           ? _value.qrCode
@@ -172,6 +235,15 @@ abstract class _$$_PaymentInvoiceInfoPdfCopyWith<$Res>
       String paymentMethod,
       String customerName,
       String payer,
+      String beneficiaryName,
+      String bankName,
+      String branch,
+      String bankCode,
+      String bankAccount,
+      String hdbcSwiftCode,
+      String bankAddress,
+      String payNowUen,
+      String emailId,
       String qrCode,
       String paymentBatchAdditionalInfo,
       List<PaymentItem> paymentItems,
@@ -200,6 +272,15 @@ class __$$_PaymentInvoiceInfoPdfCopyWithImpl<$Res>
     Object? paymentMethod = null,
     Object? customerName = null,
     Object? payer = null,
+    Object? beneficiaryName = null,
+    Object? bankName = null,
+    Object? branch = null,
+    Object? bankCode = null,
+    Object? bankAccount = null,
+    Object? hdbcSwiftCode = null,
+    Object? bankAddress = null,
+    Object? payNowUen = null,
+    Object? emailId = null,
     Object? qrCode = null,
     Object? paymentBatchAdditionalInfo = null,
     Object? paymentItems = null,
@@ -237,6 +318,42 @@ class __$$_PaymentInvoiceInfoPdfCopyWithImpl<$Res>
       payer: null == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
+              as String,
+      beneficiaryName: null == beneficiaryName
+          ? _value.beneficiaryName
+          : beneficiaryName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankName: null == bankName
+          ? _value.bankName
+          : bankName // ignore: cast_nullable_to_non_nullable
+              as String,
+      branch: null == branch
+          ? _value.branch
+          : branch // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankCode: null == bankCode
+          ? _value.bankCode
+          : bankCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankAccount: null == bankAccount
+          ? _value.bankAccount
+          : bankAccount // ignore: cast_nullable_to_non_nullable
+              as String,
+      hdbcSwiftCode: null == hdbcSwiftCode
+          ? _value.hdbcSwiftCode
+          : hdbcSwiftCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankAddress: null == bankAddress
+          ? _value.bankAddress
+          : bankAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      payNowUen: null == payNowUen
+          ? _value.payNowUen
+          : payNowUen // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailId: null == emailId
+          ? _value.emailId
+          : emailId // ignore: cast_nullable_to_non_nullable
               as String,
       qrCode: null == qrCode
           ? _value.qrCode
@@ -285,6 +402,15 @@ class _$_PaymentInvoiceInfoPdf extends _PaymentInvoiceInfoPdf {
       required this.paymentMethod,
       required this.customerName,
       required this.payer,
+      required this.beneficiaryName,
+      required this.bankName,
+      required this.branch,
+      required this.bankCode,
+      required this.bankAccount,
+      required this.hdbcSwiftCode,
+      required this.bankAddress,
+      required this.payNowUen,
+      required this.emailId,
       required this.qrCode,
       required this.paymentBatchAdditionalInfo,
       required final List<PaymentItem> paymentItems,
@@ -311,6 +437,24 @@ class _$_PaymentInvoiceInfoPdf extends _PaymentInvoiceInfoPdf {
   @override
   final String payer;
   @override
+  final String beneficiaryName;
+  @override
+  final String bankName;
+  @override
+  final String branch;
+  @override
+  final String bankCode;
+  @override
+  final String bankAccount;
+  @override
+  final String hdbcSwiftCode;
+  @override
+  final String bankAddress;
+  @override
+  final String payNowUen;
+  @override
+  final String emailId;
+  @override
   final String qrCode;
   @override
   final String paymentBatchAdditionalInfo;
@@ -335,7 +479,7 @@ class _$_PaymentInvoiceInfoPdf extends _PaymentInvoiceInfoPdf {
 
   @override
   String toString() {
-    return 'PaymentInvoiceInfoPdf(valueDate: $valueDate, paymentID: $paymentID, zzAdvice: $zzAdvice, paymentDue: $paymentDue, paymentMethod: $paymentMethod, customerName: $customerName, payer: $payer, qrCode: $qrCode, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, paymentItems: $paymentItems, salesDistrict: $salesDistrict, footer: $footer, headerLogoPath: $headerLogoPath, pleaseNote: $pleaseNote, header: $header)';
+    return 'PaymentInvoiceInfoPdf(valueDate: $valueDate, paymentID: $paymentID, zzAdvice: $zzAdvice, paymentDue: $paymentDue, paymentMethod: $paymentMethod, customerName: $customerName, payer: $payer, beneficiaryName: $beneficiaryName, bankName: $bankName, branch: $branch, bankCode: $bankCode, bankAccount: $bankAccount, hdbcSwiftCode: $hdbcSwiftCode, bankAddress: $bankAddress, payNowUen: $payNowUen, emailId: $emailId, qrCode: $qrCode, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, paymentItems: $paymentItems, salesDistrict: $salesDistrict, footer: $footer, headerLogoPath: $headerLogoPath, pleaseNote: $pleaseNote, header: $header)';
   }
 
   @override
@@ -356,6 +500,22 @@ class _$_PaymentInvoiceInfoPdf extends _PaymentInvoiceInfoPdf {
             (identical(other.customerName, customerName) ||
                 other.customerName == customerName) &&
             (identical(other.payer, payer) || other.payer == payer) &&
+            (identical(other.beneficiaryName, beneficiaryName) ||
+                other.beneficiaryName == beneficiaryName) &&
+            (identical(other.bankName, bankName) ||
+                other.bankName == bankName) &&
+            (identical(other.branch, branch) || other.branch == branch) &&
+            (identical(other.bankCode, bankCode) ||
+                other.bankCode == bankCode) &&
+            (identical(other.bankAccount, bankAccount) ||
+                other.bankAccount == bankAccount) &&
+            (identical(other.hdbcSwiftCode, hdbcSwiftCode) ||
+                other.hdbcSwiftCode == hdbcSwiftCode) &&
+            (identical(other.bankAddress, bankAddress) ||
+                other.bankAddress == bankAddress) &&
+            (identical(other.payNowUen, payNowUen) ||
+                other.payNowUen == payNowUen) &&
+            (identical(other.emailId, emailId) || other.emailId == emailId) &&
             (identical(other.qrCode, qrCode) || other.qrCode == qrCode) &&
             (identical(other.paymentBatchAdditionalInfo,
                     paymentBatchAdditionalInfo) ||
@@ -374,23 +534,33 @@ class _$_PaymentInvoiceInfoPdf extends _PaymentInvoiceInfoPdf {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      valueDate,
-      paymentID,
-      zzAdvice,
-      paymentDue,
-      paymentMethod,
-      customerName,
-      payer,
-      qrCode,
-      paymentBatchAdditionalInfo,
-      const DeepCollectionEquality().hash(_paymentItems),
-      salesDistrict,
-      footer,
-      headerLogoPath,
-      pleaseNote,
-      header);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        valueDate,
+        paymentID,
+        zzAdvice,
+        paymentDue,
+        paymentMethod,
+        customerName,
+        payer,
+        beneficiaryName,
+        bankName,
+        branch,
+        bankCode,
+        bankAccount,
+        hdbcSwiftCode,
+        bankAddress,
+        payNowUen,
+        emailId,
+        qrCode,
+        paymentBatchAdditionalInfo,
+        const DeepCollectionEquality().hash(_paymentItems),
+        salesDistrict,
+        footer,
+        headerLogoPath,
+        pleaseNote,
+        header
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -409,6 +579,15 @@ abstract class _PaymentInvoiceInfoPdf extends PaymentInvoiceInfoPdf {
       required final String paymentMethod,
       required final String customerName,
       required final String payer,
+      required final String beneficiaryName,
+      required final String bankName,
+      required final String branch,
+      required final String bankCode,
+      required final String bankAccount,
+      required final String hdbcSwiftCode,
+      required final String bankAddress,
+      required final String payNowUen,
+      required final String emailId,
       required final String qrCode,
       required final String paymentBatchAdditionalInfo,
       required final List<PaymentItem> paymentItems,
@@ -433,6 +612,24 @@ abstract class _PaymentInvoiceInfoPdf extends PaymentInvoiceInfoPdf {
   String get customerName;
   @override
   String get payer;
+  @override
+  String get beneficiaryName;
+  @override
+  String get bankName;
+  @override
+  String get branch;
+  @override
+  String get bankCode;
+  @override
+  String get bankAccount;
+  @override
+  String get hdbcSwiftCode;
+  @override
+  String get bankAddress;
+  @override
+  String get payNowUen;
+  @override
+  String get emailId;
   @override
   String get qrCode;
   @override

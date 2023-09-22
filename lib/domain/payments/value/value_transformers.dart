@@ -12,3 +12,8 @@ String findDate(String input) {
   return dateFinderRgx.allMatches(input).last.group(0) ?? '';
 }
 
+bool checkIsQrCode(String paymentMethodValue) =>
+    paymentMethodValue == 'QR Code';
+
+bool checkIsPaymentGateway(String paymentMethodValue) =>
+    paymentMethodValue == 'Payment Gateway';

@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 
 abstract class INewPaymentRepository {
   Future<Either<ApiFailure, List<CustomerOpenItem>>> getOutstandingInvoices({
@@ -52,4 +53,8 @@ abstract class INewPaymentRepository {
   });
 
   Future<Either<ApiFailure, Unit>> saveFile({required Uint8List pdfData});
+
+  Future<Either<ApiFailure, List<PaymentMethodValue>>> fetchPaymentMethods({
+    required SalesOrganisation salesOrganisation,
+  });
 }

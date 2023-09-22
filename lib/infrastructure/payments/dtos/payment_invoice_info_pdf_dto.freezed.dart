@@ -35,6 +35,24 @@ mixin _$PaymentInvoiceInfoPdfDto {
   String get customerName => throw _privateConstructorUsedError;
   @JsonKey(name: 'payer', defaultValue: '')
   String get payer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'beneficiaryName', defaultValue: '')
+  String get beneficiaryName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bankName', defaultValue: '')
+  String get bankName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'branch', defaultValue: '')
+  String get branch => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bankCode', defaultValue: '')
+  String get bankCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bankAccount', defaultValue: '')
+  String get bankAccount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hdbcSwiftCode', defaultValue: '')
+  String get hdbcSwiftCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bankAddress', defaultValue: '')
+  String get bankAddress => throw _privateConstructorUsedError;
+  @JsonKey(name: 'payNowUen', defaultValue: '')
+  String get payNowUen => throw _privateConstructorUsedError;
+  @JsonKey(name: 'emailId', defaultValue: '')
+  String get emailId => throw _privateConstructorUsedError;
   @JsonKey(name: 'qrCode', defaultValue: '')
   String get qrCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
@@ -65,23 +83,54 @@ abstract class $PaymentInvoiceInfoPdfDtoCopyWith<$Res> {
       _$PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res, PaymentInvoiceInfoPdfDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'valueDate', defaultValue: '') String valueDate,
-      @JsonKey(name: 'paymentID', defaultValue: '') String paymentID,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
-      @JsonKey(name: 'paymentDue', defaultValue: '') String paymentDue,
-      @JsonKey(name: 'paymentMethod', defaultValue: '') String paymentMethod,
-      @JsonKey(name: 'customerName', defaultValue: '') String customerName,
-      @JsonKey(name: 'payer', defaultValue: '') String payer,
-      @JsonKey(name: 'qrCode', defaultValue: '') String qrCode,
+      {@JsonKey(name: 'valueDate', defaultValue: '')
+          String valueDate,
+      @JsonKey(name: 'paymentID', defaultValue: '')
+          String paymentID,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          String zzAdvice,
+      @JsonKey(name: 'paymentDue', defaultValue: '')
+          String paymentDue,
+      @JsonKey(name: 'paymentMethod', defaultValue: '')
+          String paymentMethod,
+      @JsonKey(name: 'customerName', defaultValue: '')
+          String customerName,
+      @JsonKey(name: 'payer', defaultValue: '')
+          String payer,
+      @JsonKey(name: 'beneficiaryName', defaultValue: '')
+          String beneficiaryName,
+      @JsonKey(name: 'bankName', defaultValue: '')
+          String bankName,
+      @JsonKey(name: 'branch', defaultValue: '')
+          String branch,
+      @JsonKey(name: 'bankCode', defaultValue: '')
+          String bankCode,
+      @JsonKey(name: 'bankAccount', defaultValue: '')
+          String bankAccount,
+      @JsonKey(name: 'hdbcSwiftCode', defaultValue: '')
+          String hdbcSwiftCode,
+      @JsonKey(name: 'bankAddress', defaultValue: '')
+          String bankAddress,
+      @JsonKey(name: 'payNowUen', defaultValue: '')
+          String payNowUen,
+      @JsonKey(name: 'emailId', defaultValue: '')
+          String emailId,
+      @JsonKey(name: 'qrCode', defaultValue: '')
+          String qrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      String paymentBatchAdditionalInfo,
+          String paymentBatchAdditionalInfo,
       @JsonKey(name: 'paymentItems', defaultValue: <PaymentItemDto>[])
-      List<PaymentItemDto> paymentItems,
-      @JsonKey(name: 'salesDistrict', defaultValue: '') String salesDistrict,
-      @JsonKey(name: 'footer', defaultValue: '') String footer,
-      @JsonKey(name: 'headerLogoPath', defaultValue: '') String headerLogoPath,
-      @JsonKey(name: 'pleaseNote', defaultValue: '') String pleaseNote,
-      @JsonKey(name: 'header', defaultValue: '') String header});
+          List<PaymentItemDto> paymentItems,
+      @JsonKey(name: 'salesDistrict', defaultValue: '')
+          String salesDistrict,
+      @JsonKey(name: 'footer', defaultValue: '')
+          String footer,
+      @JsonKey(name: 'headerLogoPath', defaultValue: '')
+          String headerLogoPath,
+      @JsonKey(name: 'pleaseNote', defaultValue: '')
+          String pleaseNote,
+      @JsonKey(name: 'header', defaultValue: '')
+          String header});
 }
 
 /// @nodoc
@@ -105,6 +154,15 @@ class _$PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res,
     Object? paymentMethod = null,
     Object? customerName = null,
     Object? payer = null,
+    Object? beneficiaryName = null,
+    Object? bankName = null,
+    Object? branch = null,
+    Object? bankCode = null,
+    Object? bankAccount = null,
+    Object? hdbcSwiftCode = null,
+    Object? bankAddress = null,
+    Object? payNowUen = null,
+    Object? emailId = null,
     Object? qrCode = null,
     Object? paymentBatchAdditionalInfo = null,
     Object? paymentItems = null,
@@ -142,6 +200,42 @@ class _$PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res,
       payer: null == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
+              as String,
+      beneficiaryName: null == beneficiaryName
+          ? _value.beneficiaryName
+          : beneficiaryName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankName: null == bankName
+          ? _value.bankName
+          : bankName // ignore: cast_nullable_to_non_nullable
+              as String,
+      branch: null == branch
+          ? _value.branch
+          : branch // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankCode: null == bankCode
+          ? _value.bankCode
+          : bankCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankAccount: null == bankAccount
+          ? _value.bankAccount
+          : bankAccount // ignore: cast_nullable_to_non_nullable
+              as String,
+      hdbcSwiftCode: null == hdbcSwiftCode
+          ? _value.hdbcSwiftCode
+          : hdbcSwiftCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankAddress: null == bankAddress
+          ? _value.bankAddress
+          : bankAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      payNowUen: null == payNowUen
+          ? _value.payNowUen
+          : payNowUen // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailId: null == emailId
+          ? _value.emailId
+          : emailId // ignore: cast_nullable_to_non_nullable
               as String,
       qrCode: null == qrCode
           ? _value.qrCode
@@ -189,23 +283,54 @@ abstract class _$$_PaymentInvoiceInfoPdfDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'valueDate', defaultValue: '') String valueDate,
-      @JsonKey(name: 'paymentID', defaultValue: '') String paymentID,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
-      @JsonKey(name: 'paymentDue', defaultValue: '') String paymentDue,
-      @JsonKey(name: 'paymentMethod', defaultValue: '') String paymentMethod,
-      @JsonKey(name: 'customerName', defaultValue: '') String customerName,
-      @JsonKey(name: 'payer', defaultValue: '') String payer,
-      @JsonKey(name: 'qrCode', defaultValue: '') String qrCode,
+      {@JsonKey(name: 'valueDate', defaultValue: '')
+          String valueDate,
+      @JsonKey(name: 'paymentID', defaultValue: '')
+          String paymentID,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          String zzAdvice,
+      @JsonKey(name: 'paymentDue', defaultValue: '')
+          String paymentDue,
+      @JsonKey(name: 'paymentMethod', defaultValue: '')
+          String paymentMethod,
+      @JsonKey(name: 'customerName', defaultValue: '')
+          String customerName,
+      @JsonKey(name: 'payer', defaultValue: '')
+          String payer,
+      @JsonKey(name: 'beneficiaryName', defaultValue: '')
+          String beneficiaryName,
+      @JsonKey(name: 'bankName', defaultValue: '')
+          String bankName,
+      @JsonKey(name: 'branch', defaultValue: '')
+          String branch,
+      @JsonKey(name: 'bankCode', defaultValue: '')
+          String bankCode,
+      @JsonKey(name: 'bankAccount', defaultValue: '')
+          String bankAccount,
+      @JsonKey(name: 'hdbcSwiftCode', defaultValue: '')
+          String hdbcSwiftCode,
+      @JsonKey(name: 'bankAddress', defaultValue: '')
+          String bankAddress,
+      @JsonKey(name: 'payNowUen', defaultValue: '')
+          String payNowUen,
+      @JsonKey(name: 'emailId', defaultValue: '')
+          String emailId,
+      @JsonKey(name: 'qrCode', defaultValue: '')
+          String qrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      String paymentBatchAdditionalInfo,
+          String paymentBatchAdditionalInfo,
       @JsonKey(name: 'paymentItems', defaultValue: <PaymentItemDto>[])
-      List<PaymentItemDto> paymentItems,
-      @JsonKey(name: 'salesDistrict', defaultValue: '') String salesDistrict,
-      @JsonKey(name: 'footer', defaultValue: '') String footer,
-      @JsonKey(name: 'headerLogoPath', defaultValue: '') String headerLogoPath,
-      @JsonKey(name: 'pleaseNote', defaultValue: '') String pleaseNote,
-      @JsonKey(name: 'header', defaultValue: '') String header});
+          List<PaymentItemDto> paymentItems,
+      @JsonKey(name: 'salesDistrict', defaultValue: '')
+          String salesDistrict,
+      @JsonKey(name: 'footer', defaultValue: '')
+          String footer,
+      @JsonKey(name: 'headerLogoPath', defaultValue: '')
+          String headerLogoPath,
+      @JsonKey(name: 'pleaseNote', defaultValue: '')
+          String pleaseNote,
+      @JsonKey(name: 'header', defaultValue: '')
+          String header});
 }
 
 /// @nodoc
@@ -227,6 +352,15 @@ class __$$_PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res>
     Object? paymentMethod = null,
     Object? customerName = null,
     Object? payer = null,
+    Object? beneficiaryName = null,
+    Object? bankName = null,
+    Object? branch = null,
+    Object? bankCode = null,
+    Object? bankAccount = null,
+    Object? hdbcSwiftCode = null,
+    Object? bankAddress = null,
+    Object? payNowUen = null,
+    Object? emailId = null,
     Object? qrCode = null,
     Object? paymentBatchAdditionalInfo = null,
     Object? paymentItems = null,
@@ -264,6 +398,42 @@ class __$$_PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res>
       payer: null == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
+              as String,
+      beneficiaryName: null == beneficiaryName
+          ? _value.beneficiaryName
+          : beneficiaryName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankName: null == bankName
+          ? _value.bankName
+          : bankName // ignore: cast_nullable_to_non_nullable
+              as String,
+      branch: null == branch
+          ? _value.branch
+          : branch // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankCode: null == bankCode
+          ? _value.bankCode
+          : bankCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankAccount: null == bankAccount
+          ? _value.bankAccount
+          : bankAccount // ignore: cast_nullable_to_non_nullable
+              as String,
+      hdbcSwiftCode: null == hdbcSwiftCode
+          ? _value.hdbcSwiftCode
+          : hdbcSwiftCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      bankAddress: null == bankAddress
+          ? _value.bankAddress
+          : bankAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      payNowUen: null == payNowUen
+          ? _value.payNowUen
+          : payNowUen // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailId: null == emailId
+          ? _value.emailId
+          : emailId // ignore: cast_nullable_to_non_nullable
               as String,
       qrCode: null == qrCode
           ? _value.qrCode
@@ -305,27 +475,54 @@ class __$$_PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
   const _$_PaymentInvoiceInfoPdfDto(
-      {@JsonKey(name: 'valueDate', defaultValue: '') required this.valueDate,
-      @JsonKey(name: 'paymentID', defaultValue: '') required this.paymentID,
-      @JsonKey(name: 'zzAdvice', defaultValue: '') required this.zzAdvice,
-      @JsonKey(name: 'paymentDue', defaultValue: '') required this.paymentDue,
+      {@JsonKey(name: 'valueDate', defaultValue: '')
+          required this.valueDate,
+      @JsonKey(name: 'paymentID', defaultValue: '')
+          required this.paymentID,
+      @JsonKey(name: 'zzAdvice', defaultValue: '')
+          required this.zzAdvice,
+      @JsonKey(name: 'paymentDue', defaultValue: '')
+          required this.paymentDue,
       @JsonKey(name: 'paymentMethod', defaultValue: '')
-      required this.paymentMethod,
+          required this.paymentMethod,
       @JsonKey(name: 'customerName', defaultValue: '')
-      required this.customerName,
-      @JsonKey(name: 'payer', defaultValue: '') required this.payer,
-      @JsonKey(name: 'qrCode', defaultValue: '') required this.qrCode,
+          required this.customerName,
+      @JsonKey(name: 'payer', defaultValue: '')
+          required this.payer,
+      @JsonKey(name: 'beneficiaryName', defaultValue: '')
+          required this.beneficiaryName,
+      @JsonKey(name: 'bankName', defaultValue: '')
+          required this.bankName,
+      @JsonKey(name: 'branch', defaultValue: '')
+          required this.branch,
+      @JsonKey(name: 'bankCode', defaultValue: '')
+          required this.bankCode,
+      @JsonKey(name: 'bankAccount', defaultValue: '')
+          required this.bankAccount,
+      @JsonKey(name: 'hdbcSwiftCode', defaultValue: '')
+          required this.hdbcSwiftCode,
+      @JsonKey(name: 'bankAddress', defaultValue: '')
+          required this.bankAddress,
+      @JsonKey(name: 'payNowUen', defaultValue: '')
+          required this.payNowUen,
+      @JsonKey(name: 'emailId', defaultValue: '')
+          required this.emailId,
+      @JsonKey(name: 'qrCode', defaultValue: '')
+          required this.qrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      required this.paymentBatchAdditionalInfo,
+          required this.paymentBatchAdditionalInfo,
       @JsonKey(name: 'paymentItems', defaultValue: <PaymentItemDto>[])
-      required final List<PaymentItemDto> paymentItems,
+          required final List<PaymentItemDto> paymentItems,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-      required this.salesDistrict,
-      @JsonKey(name: 'footer', defaultValue: '') required this.footer,
+          required this.salesDistrict,
+      @JsonKey(name: 'footer', defaultValue: '')
+          required this.footer,
       @JsonKey(name: 'headerLogoPath', defaultValue: '')
-      required this.headerLogoPath,
-      @JsonKey(name: 'pleaseNote', defaultValue: '') required this.pleaseNote,
-      @JsonKey(name: 'header', defaultValue: '') required this.header})
+          required this.headerLogoPath,
+      @JsonKey(name: 'pleaseNote', defaultValue: '')
+          required this.pleaseNote,
+      @JsonKey(name: 'header', defaultValue: '')
+          required this.header})
       : _paymentItems = paymentItems,
         super._();
 
@@ -353,6 +550,33 @@ class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
   @override
   @JsonKey(name: 'payer', defaultValue: '')
   final String payer;
+  @override
+  @JsonKey(name: 'beneficiaryName', defaultValue: '')
+  final String beneficiaryName;
+  @override
+  @JsonKey(name: 'bankName', defaultValue: '')
+  final String bankName;
+  @override
+  @JsonKey(name: 'branch', defaultValue: '')
+  final String branch;
+  @override
+  @JsonKey(name: 'bankCode', defaultValue: '')
+  final String bankCode;
+  @override
+  @JsonKey(name: 'bankAccount', defaultValue: '')
+  final String bankAccount;
+  @override
+  @JsonKey(name: 'hdbcSwiftCode', defaultValue: '')
+  final String hdbcSwiftCode;
+  @override
+  @JsonKey(name: 'bankAddress', defaultValue: '')
+  final String bankAddress;
+  @override
+  @JsonKey(name: 'payNowUen', defaultValue: '')
+  final String payNowUen;
+  @override
+  @JsonKey(name: 'emailId', defaultValue: '')
+  final String emailId;
   @override
   @JsonKey(name: 'qrCode', defaultValue: '')
   final String qrCode;
@@ -386,7 +610,7 @@ class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
 
   @override
   String toString() {
-    return 'PaymentInvoiceInfoPdfDto(valueDate: $valueDate, paymentID: $paymentID, zzAdvice: $zzAdvice, paymentDue: $paymentDue, paymentMethod: $paymentMethod, customerName: $customerName, payer: $payer, qrCode: $qrCode, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, paymentItems: $paymentItems, salesDistrict: $salesDistrict, footer: $footer, headerLogoPath: $headerLogoPath, pleaseNote: $pleaseNote, header: $header)';
+    return 'PaymentInvoiceInfoPdfDto(valueDate: $valueDate, paymentID: $paymentID, zzAdvice: $zzAdvice, paymentDue: $paymentDue, paymentMethod: $paymentMethod, customerName: $customerName, payer: $payer, beneficiaryName: $beneficiaryName, bankName: $bankName, branch: $branch, bankCode: $bankCode, bankAccount: $bankAccount, hdbcSwiftCode: $hdbcSwiftCode, bankAddress: $bankAddress, payNowUen: $payNowUen, emailId: $emailId, qrCode: $qrCode, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, paymentItems: $paymentItems, salesDistrict: $salesDistrict, footer: $footer, headerLogoPath: $headerLogoPath, pleaseNote: $pleaseNote, header: $header)';
   }
 
   @override
@@ -407,6 +631,22 @@ class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
             (identical(other.customerName, customerName) ||
                 other.customerName == customerName) &&
             (identical(other.payer, payer) || other.payer == payer) &&
+            (identical(other.beneficiaryName, beneficiaryName) ||
+                other.beneficiaryName == beneficiaryName) &&
+            (identical(other.bankName, bankName) ||
+                other.bankName == bankName) &&
+            (identical(other.branch, branch) || other.branch == branch) &&
+            (identical(other.bankCode, bankCode) ||
+                other.bankCode == bankCode) &&
+            (identical(other.bankAccount, bankAccount) ||
+                other.bankAccount == bankAccount) &&
+            (identical(other.hdbcSwiftCode, hdbcSwiftCode) ||
+                other.hdbcSwiftCode == hdbcSwiftCode) &&
+            (identical(other.bankAddress, bankAddress) ||
+                other.bankAddress == bankAddress) &&
+            (identical(other.payNowUen, payNowUen) ||
+                other.payNowUen == payNowUen) &&
+            (identical(other.emailId, emailId) || other.emailId == emailId) &&
             (identical(other.qrCode, qrCode) || other.qrCode == qrCode) &&
             (identical(other.paymentBatchAdditionalInfo,
                     paymentBatchAdditionalInfo) ||
@@ -426,23 +666,33 @@ class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      valueDate,
-      paymentID,
-      zzAdvice,
-      paymentDue,
-      paymentMethod,
-      customerName,
-      payer,
-      qrCode,
-      paymentBatchAdditionalInfo,
-      const DeepCollectionEquality().hash(_paymentItems),
-      salesDistrict,
-      footer,
-      headerLogoPath,
-      pleaseNote,
-      header);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        valueDate,
+        paymentID,
+        zzAdvice,
+        paymentDue,
+        paymentMethod,
+        customerName,
+        payer,
+        beneficiaryName,
+        bankName,
+        branch,
+        bankCode,
+        bankAccount,
+        hdbcSwiftCode,
+        bankAddress,
+        payNowUen,
+        emailId,
+        qrCode,
+        paymentBatchAdditionalInfo,
+        const DeepCollectionEquality().hash(_paymentItems),
+        salesDistrict,
+        footer,
+        headerLogoPath,
+        pleaseNote,
+        header
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -462,32 +712,53 @@ class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
 abstract class _PaymentInvoiceInfoPdfDto extends PaymentInvoiceInfoPdfDto {
   const factory _PaymentInvoiceInfoPdfDto(
       {@JsonKey(name: 'valueDate', defaultValue: '')
-      required final String valueDate,
+          required final String valueDate,
       @JsonKey(name: 'paymentID', defaultValue: '')
-      required final String paymentID,
+          required final String paymentID,
       @JsonKey(name: 'zzAdvice', defaultValue: '')
-      required final String zzAdvice,
+          required final String zzAdvice,
       @JsonKey(name: 'paymentDue', defaultValue: '')
-      required final String paymentDue,
+          required final String paymentDue,
       @JsonKey(name: 'paymentMethod', defaultValue: '')
-      required final String paymentMethod,
+          required final String paymentMethod,
       @JsonKey(name: 'customerName', defaultValue: '')
-      required final String customerName,
-      @JsonKey(name: 'payer', defaultValue: '') required final String payer,
-      @JsonKey(name: 'qrCode', defaultValue: '') required final String qrCode,
+          required final String customerName,
+      @JsonKey(name: 'payer', defaultValue: '')
+          required final String payer,
+      @JsonKey(name: 'beneficiaryName', defaultValue: '')
+          required final String beneficiaryName,
+      @JsonKey(name: 'bankName', defaultValue: '')
+          required final String bankName,
+      @JsonKey(name: 'branch', defaultValue: '')
+          required final String branch,
+      @JsonKey(name: 'bankCode', defaultValue: '')
+          required final String bankCode,
+      @JsonKey(name: 'bankAccount', defaultValue: '')
+          required final String bankAccount,
+      @JsonKey(name: 'hdbcSwiftCode', defaultValue: '')
+          required final String hdbcSwiftCode,
+      @JsonKey(name: 'bankAddress', defaultValue: '')
+          required final String bankAddress,
+      @JsonKey(name: 'payNowUen', defaultValue: '')
+          required final String payNowUen,
+      @JsonKey(name: 'emailId', defaultValue: '')
+          required final String emailId,
+      @JsonKey(name: 'qrCode', defaultValue: '')
+          required final String qrCode,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
-      required final String paymentBatchAdditionalInfo,
+          required final String paymentBatchAdditionalInfo,
       @JsonKey(name: 'paymentItems', defaultValue: <PaymentItemDto>[])
-      required final List<PaymentItemDto> paymentItems,
+          required final List<PaymentItemDto> paymentItems,
       @JsonKey(name: 'salesDistrict', defaultValue: '')
-      required final String salesDistrict,
-      @JsonKey(name: 'footer', defaultValue: '') required final String footer,
+          required final String salesDistrict,
+      @JsonKey(name: 'footer', defaultValue: '')
+          required final String footer,
       @JsonKey(name: 'headerLogoPath', defaultValue: '')
-      required final String headerLogoPath,
+          required final String headerLogoPath,
       @JsonKey(name: 'pleaseNote', defaultValue: '')
-      required final String pleaseNote,
+          required final String pleaseNote,
       @JsonKey(name: 'header', defaultValue: '')
-      required final String header}) = _$_PaymentInvoiceInfoPdfDto;
+          required final String header}) = _$_PaymentInvoiceInfoPdfDto;
   const _PaymentInvoiceInfoPdfDto._() : super._();
 
   factory _PaymentInvoiceInfoPdfDto.fromJson(Map<String, dynamic> json) =
@@ -514,6 +785,33 @@ abstract class _PaymentInvoiceInfoPdfDto extends PaymentInvoiceInfoPdfDto {
   @override
   @JsonKey(name: 'payer', defaultValue: '')
   String get payer;
+  @override
+  @JsonKey(name: 'beneficiaryName', defaultValue: '')
+  String get beneficiaryName;
+  @override
+  @JsonKey(name: 'bankName', defaultValue: '')
+  String get bankName;
+  @override
+  @JsonKey(name: 'branch', defaultValue: '')
+  String get branch;
+  @override
+  @JsonKey(name: 'bankCode', defaultValue: '')
+  String get bankCode;
+  @override
+  @JsonKey(name: 'bankAccount', defaultValue: '')
+  String get bankAccount;
+  @override
+  @JsonKey(name: 'hdbcSwiftCode', defaultValue: '')
+  String get hdbcSwiftCode;
+  @override
+  @JsonKey(name: 'bankAddress', defaultValue: '')
+  String get bankAddress;
+  @override
+  @JsonKey(name: 'payNowUen', defaultValue: '')
+  String get payNowUen;
+  @override
+  @JsonKey(name: 'emailId', defaultValue: '')
+  String get emailId;
   @override
   @JsonKey(name: 'qrCode', defaultValue: '')
   String get qrCode;

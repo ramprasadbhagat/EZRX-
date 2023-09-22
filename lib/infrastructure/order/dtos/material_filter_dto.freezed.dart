@@ -42,11 +42,11 @@ abstract class $MaterialFilterDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'ManufactureList', defaultValue: <String>[])
-      List<String> manufactureList,
+          List<String> manufactureList,
       @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
-      List<MaterialFilterCountryDto> countryList,
+          List<MaterialFilterCountryDto> countryList,
       @JsonKey(name: 'BrandList', defaultValue: <String>[])
-      List<String> brandList});
+          List<String> brandList});
 }
 
 /// @nodoc
@@ -93,11 +93,11 @@ abstract class _$$_MaterialFilterDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'ManufactureList', defaultValue: <String>[])
-      List<String> manufactureList,
+          List<String> manufactureList,
       @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
-      List<MaterialFilterCountryDto> countryList,
+          List<MaterialFilterCountryDto> countryList,
       @JsonKey(name: 'BrandList', defaultValue: <String>[])
-      List<String> brandList});
+          List<String> brandList});
 }
 
 /// @nodoc
@@ -137,11 +137,11 @@ class __$$_MaterialFilterDtoCopyWithImpl<$Res>
 class _$_MaterialFilterDto extends _MaterialFilterDto {
   const _$_MaterialFilterDto(
       {@JsonKey(name: 'ManufactureList', defaultValue: <String>[])
-      required final List<String> manufactureList,
+          required final List<String> manufactureList,
       @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
-      required final List<MaterialFilterCountryDto> countryList,
+          required final List<MaterialFilterCountryDto> countryList,
       @JsonKey(name: 'BrandList', defaultValue: <String>[])
-      required final List<String> brandList})
+          required final List<String> brandList})
       : _manufactureList = manufactureList,
         _countryList = countryList,
         _brandList = brandList,
@@ -221,11 +221,11 @@ class _$_MaterialFilterDto extends _MaterialFilterDto {
 abstract class _MaterialFilterDto extends MaterialFilterDto {
   const factory _MaterialFilterDto(
       {@JsonKey(name: 'ManufactureList', defaultValue: <String>[])
-      required final List<String> manufactureList,
+          required final List<String> manufactureList,
       @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
-      required final List<MaterialFilterCountryDto> countryList,
+          required final List<MaterialFilterCountryDto> countryList,
       @JsonKey(name: 'BrandList', defaultValue: <String>[])
-      required final List<String> brandList}) = _$_MaterialFilterDto;
+          required final List<String> brandList}) = _$_MaterialFilterDto;
   const _MaterialFilterDto._() : super._();
 
   factory _MaterialFilterDto.fromJson(Map<String, dynamic> json) =
@@ -400,9 +400,10 @@ class _$_MaterialFilterCountryDto extends _MaterialFilterCountryDto {
 
 abstract class _MaterialFilterCountryDto extends MaterialFilterCountryDto {
   const factory _MaterialFilterCountryDto(
-      {@JsonKey(name: 'Code', defaultValue: '') required final String code,
+      {@JsonKey(name: 'Code', defaultValue: '')
+          required final String code,
       @JsonKey(name: 'Name', defaultValue: '')
-      required final String name}) = _$_MaterialFilterCountryDto;
+          required final String name}) = _$_MaterialFilterCountryDto;
   const _MaterialFilterCountryDto._() : super._();
 
   factory _MaterialFilterCountryDto.fromJson(Map<String, dynamic> json) =

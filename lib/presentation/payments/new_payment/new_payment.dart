@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
@@ -64,52 +62,50 @@ class NewPaymentPage extends StatelessWidget {
               listener: (context, state) {
                 if (!state.isLoading) {
                   state.failureOrSuccessOption.fold(
-                    () async {
-                      await context.router
-                          .pushNamed('payments/payments_webview')
-                          .then((uri) {
-                        /// * Document: https://zuelligpharma.atlassian.net/wiki/spaces/EZRX/pages/293306636/MB+-+UPDATE+PAYMENT+GATEWAY+LOGIC
-                        /// If payment is successful (Received redirect url with
-                        /// path payment/thank-you): Update payment gateway,
-                        /// back to the payment overview page and navigate to
-                        /// the payment advice created page
-                        if (uri != null) {
-                          context.read<NewPaymentBloc>().add(
-                                NewPaymentEvent.updatePaymentGateway(
-                                  salesOrganisation: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  paymentUrl: uri as Uri,
-                                ),
+                    () async => state
+                            .salesOrganisation.salesOrg.isPaymentNeedOpenWebView
+                        ? await context.router
+                            .pushNamed('payments/payments_webview')
+                            .then((uri) {
+                            /// * Document: https://zuelligpharma.atlassian.net/wiki/spaces/EZRX/pages/293306636/MB+-+UPDATE+PAYMENT+GATEWAY+LOGIC
+                            /// If payment is successful (Received redirect url with
+                            /// path payment/thank-you): Update payment gateway,
+                            /// back to the payment overview page and navigate to
+                            /// the payment advice created page
+                            if (uri != null) {
+                              context.read<NewPaymentBloc>().add(
+                                    NewPaymentEvent.updatePaymentGateway(
+                                      paymentUrl: uri as Uri,
+                                    ),
+                                  );
+                              context.router.pushAndPopUntil(
+                                const PaymentAdviceCreatedPageRoute(),
+                                predicate: (Route route) =>
+                                    route.settings.name ==
+                                    PaymentPageRoute.name,
                               );
-                          context.router.pushAndPopUntil(
+                            } else {
+                              /// If payment is fails (No received redirect url with
+                              /// path payment/thank-you):
+                              /// * If on TH market: Back to the payment overview
+                              /// page and navigate to the payment advice created page
+                              /// * If on other market: Back to the payment overview page
+                              context.read<SalesOrgBloc>().state.salesOrg.isTH
+                                  ? context.router.pushAndPopUntil(
+                                      const PaymentAdviceCreatedPageRoute(),
+                                      predicate: (Route route) =>
+                                          route.settings.name ==
+                                          PaymentPageRoute.name,
+                                    )
+                                  : context.router
+                                      .popUntilRouteWithPath('payments');
+                            }
+                          })
+                        : await context.router.pushAndPopUntil(
                             const PaymentAdviceCreatedPageRoute(),
                             predicate: (Route route) =>
                                 route.settings.name == PaymentPageRoute.name,
-                          );
-                        } else {
-                          /// If payment is fails (No received redirect url with
-                          /// path payment/thank-you):
-                          /// * If on TH market: Back to the payment overview
-                          /// page and navigate to the payment advice created page
-                          /// * If on other market: Back to the payment overview page
-                          if (context
-                              .read<SalesOrgBloc>()
-                              .state
-                              .salesOrg
-                              .isTH) {
-                            context.router.pushAndPopUntil(
-                              const PaymentAdviceCreatedPageRoute(),
-                              predicate: (Route route) =>
-                                  route.settings.name == PaymentPageRoute.name,
-                            );
-                          } else {
-                            context.router.popUntilRouteWithPath('payments');
-                          }
-                        }
-                      });
-                    },
+                          ),
                     (either) => either.fold(
                       (failure) {
                         ErrorUtils.handleApiFailure(context, failure);
@@ -250,26 +246,10 @@ class NewPaymentPage extends StatelessWidget {
                                     key: WidgetKeys.payButton,
                                     onPressed: state.isLoading
                                         ? null
-                                        : () => context
-                                            .read<NewPaymentBloc>()
-                                            .add(
-                                              NewPaymentEvent.pay(
-                                                salesOrganisation: context
-                                                    .read<SalesOrgBloc>()
-                                                    .state
-                                                    .salesOrganisation,
-                                                customerCodeInfo: context
-                                                    .read<CustomerCodeBloc>()
-                                                    .state
-                                                    .customerCodeInfo,
-                                                paymentMethod:
-                                                    'Payment Gateway',
-                                                user: context
-                                                    .read<UserBloc>()
-                                                    .state
-                                                    .user,
-                                              ),
-                                            ),
+                                        : () =>
+                                            context.read<NewPaymentBloc>().add(
+                                                  const NewPaymentEvent.pay(),
+                                                ),
                                     child: LoadingShimmer.withChild(
                                       enabled: state.isLoading,
                                       child: Text(

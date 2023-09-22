@@ -92,6 +92,8 @@ class SalesOrg extends ValueObject<String> {
 
   bool get needUpdatePaymentGateway => isMY || isVN;
 
+  bool get isPaymentNeedOpenWebView => !isSg;
+
   bool get isValidCountryOrderTypeEligible {
     return countrySupportOrderType(country);
   }

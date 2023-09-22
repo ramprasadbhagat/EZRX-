@@ -34,14 +34,14 @@ query paymentInvoicePdf($request: paymentInvoiceRequest!) {
    }
 }
 
-   "variables":{
-      "request":{
-         "accountingDocExternalReference":"2",
-         "customerCode":"0000101216",
-         "customerName":"hnguyen",
-         "payer":"0000101216",
-         "paymentBatchAdditionalInfo":"23C29EA092BC376",
-         "paymentId":"2        4",
-         "salesOrg":"2001"
-      }
+"variables": {
+   "request": {
+      "accountingDocExternalReference":"200120210180000087001",
+      "customerCode":"0000101215",
+      "customerName":"rootadmin",
+      "payer":"0000101215",
+      "paymentBatchAdditionalInfo":"23C3A52470CA05C",
+      "paymentId":"2        3",
+      "salesOrg":"2001"
    }
+}

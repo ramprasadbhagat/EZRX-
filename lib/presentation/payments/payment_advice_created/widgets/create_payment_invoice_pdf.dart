@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
@@ -27,9 +30,7 @@ class CreatePaymentInvoicePdf {
     final imageData = await ScreenshotController().captureFromWidget(
       MediaQuery(
         data: MediaQueryData.fromWindow(WidgetsBinding.instance.window),
-        child: Html(
-          data: pleaseNote,
-        ),
+        child: Html(data: pleaseNote),
       ),
     );
 
@@ -49,28 +50,30 @@ class CreatePaymentInvoicePdf {
             ),
           ),
         ),
-        children: cells.map((cell) {
-          return pw.Padding(
-            padding: const pw.EdgeInsets.symmetric(vertical: 8.0),
-            child: pw.Text(
-              cell,
-              style: isHeader
-                  ? pw.TextStyle(
-                      fontSize: 16,
-                      color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
-                      fontWeight: pw.FontWeight.bold,
-                      letterSpacing: 0.25,
-                    )
-                  : pw.TextStyle(
-                      fontSize: 14,
-                      color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
-                      letterSpacing: 0.25,
-                    ),
-              maxLines: 1,
-              overflow: pw.TextOverflow.clip,
-            ),
-          );
-        }).toList(),
+        children: cells
+            .map(
+              (cell) => pw.Padding(
+                padding: const pw.EdgeInsets.symmetric(vertical: 8.0),
+                child: pw.Text(
+                  cell,
+                  style: isHeader
+                      ? pw.TextStyle(
+                          fontSize: 16,
+                          color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
+                          fontWeight: pw.FontWeight.bold,
+                          letterSpacing: 0.25,
+                        )
+                      : pw.TextStyle(
+                          fontSize: 14,
+                          color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
+                          letterSpacing: 0.25,
+                        ),
+                  maxLines: 1,
+                  overflow: pw.TextOverflow.clip,
+                ),
+              ),
+            )
+            .toList(),
       );
 
   Future<pw.Widget> _headerInvoice({
@@ -150,9 +153,8 @@ class CreatePaymentInvoicePdf {
                 pw.BoxShadow(
                   spreadRadius: 5,
                   blurRadius: 7,
-                  color: PdfColor.fromInt(
-                    ZPColors.black.withOpacity(0.5).value,
-                  ),
+                  color:
+                      PdfColor.fromInt(ZPColors.black.withOpacity(0.5).value),
                 ),
               ],
             ),
@@ -286,10 +288,7 @@ class CreatePaymentInvoicePdf {
     required DateTimeStringValue valueDate,
   }) =>
       pw.Padding(
-        padding: const pw.EdgeInsets.symmetric(
-          vertical: 8.0,
-          horizontal: 8.0,
-        ),
+        padding: const pw.EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
         child: pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
@@ -322,10 +321,7 @@ class CreatePaymentInvoicePdf {
     required DateTimeStringValue expiryDate,
   }) =>
       pw.Padding(
-        padding: const pw.EdgeInsets.symmetric(
-          vertical: 8.0,
-          horizontal: 8.0,
-        ),
+        padding: const pw.EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
         child: pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
@@ -355,10 +351,7 @@ class CreatePaymentInvoicePdf {
       );
 
   pw.Widget _paymentMethod({required String paymentMethod}) => pw.Padding(
-        padding: const pw.EdgeInsets.symmetric(
-          vertical: 8.0,
-          horizontal: 8.0,
-        ),
+        padding: const pw.EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
         child: pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
@@ -417,25 +410,17 @@ class CreatePaymentInvoicePdf {
     return pw.Container(
       width: double.infinity,
       color: PdfColor.fromInt(ZPColors.extraLightGrey2.value),
-      padding: const pw.EdgeInsets.symmetric(
-        horizontal: 20.0,
-        vertical: 16.0,
-      ),
-      child: pw.Image(
-        image,
-      ),
+      padding: const pw.EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+      child: pw.Image(image),
     );
   }
 
   pw.Widget _footerInvoice({required String footer}) => pw.Container(
-        padding: const pw.EdgeInsets.symmetric(
-          horizontal: 20.0,
-          vertical: 16.0,
-        ),
+        padding:
+            const pw.EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
         decoration: pw.BoxDecoration(
-          borderRadius: const pw.BorderRadius.vertical(
-            bottom: pw.Radius.circular(16.0),
-          ),
+          borderRadius:
+              const pw.BorderRadius.vertical(bottom: pw.Radius.circular(16.0)),
           color: PdfColor.fromInt(ZPColors.extraLightGrey4.value),
         ),
         child: pw.Center(
@@ -450,11 +435,155 @@ class CreatePaymentInvoicePdf {
         ),
       );
 
+  pw.Widget get _paymentStepsQrCode => pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Text(
+            'For QR Code payment'.tr(),
+            style: pw.TextStyle(
+              fontSize: 16,
+              color: PdfColor.fromInt(ZPColors.primary.value),
+              fontWeight: pw.FontWeight.bold,
+              letterSpacing: 0.25,
+            ),
+          ),
+          pw.Text(
+            '1. Log in to Banking App'.tr(),
+            style: pw.TextStyle(
+              fontSize: 14,
+              color: PdfColor.fromInt(ZPColors.primary.value),
+              letterSpacing: 0.25,
+            ),
+          ),
+          pw.Text(
+            '2. Scan below & Pay'.tr(),
+            style: pw.TextStyle(
+              fontSize: 14,
+              color: PdfColor.fromInt(ZPColors.primary.value),
+              letterSpacing: 0.25,
+            ),
+          ),
+        ],
+      );
+
+  pw.Widget get _paymentStepsBankTransfer => pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Text(
+            'For Bank Transfer or UEN Payment'.tr(),
+            style: pw.TextStyle(
+              fontSize: 16,
+              color: PdfColor.fromInt(ZPColors.primary.value),
+              fontWeight: pw.FontWeight.bold,
+              letterSpacing: 0.25,
+            ),
+          ),
+          pw.Text(
+            '1. Log in to Banking App or Online banking'.tr(),
+            style: pw.TextStyle(
+              fontSize: 14,
+              color: PdfColor.fromInt(ZPColors.primary.value),
+              letterSpacing: 0.25,
+            ),
+          ),
+          pw.Text(
+            '2. Select Bank Account Transfer or UEN payment'.tr(),
+            style: pw.TextStyle(
+              fontSize: 14,
+              color: PdfColor.fromInt(ZPColors.primary.value),
+              letterSpacing: 0.25,
+            ),
+          ),
+        ],
+      );
+
+  pw.Widget get _paymentSteps => pw.Row(
+        children: [
+          pw.Flexible(child: _paymentStepsQrCode, flex: 1),
+          pw.SizedBox(width: 24),
+          pw.Flexible(child: _paymentStepsBankTransfer, flex: 2),
+        ],
+      );
+
+  pw.Widget _balanceRowText({required String key, required String value}) =>
+      pw.Row(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.SizedBox(
+            width: 135,
+            child: pw.Text(
+              key,
+              style: pw.TextStyle(
+                fontSize: 14,
+                color: PdfColor.fromInt(ZPColors.neutralsGrey1.value),
+                letterSpacing: 0.25,
+              ),
+            ),
+          ),
+          pw.Expanded(
+            child: pw.Text(
+              value,
+              style: pw.TextStyle(
+                fontSize: 14,
+                color: PdfColor.fromInt(ZPColors.neutralsBlack.value),
+                letterSpacing: 0.25,
+              ),
+              maxLines: 2,
+            ),
+          ),
+        ],
+      );
+
+  pw.Widget _qrCodeAndBankInfo({
+    required String qrCode,
+    required String beneficiaryName,
+    required String bankName,
+    required String branch,
+    required String bankCode,
+    required String bankAccount,
+    required String hdbcSwiftCode,
+    required String bankAddress,
+    required String payNowUen,
+  }) =>
+      pw.Row(
+        children: [
+          pw.Flexible(
+            child:
+                pw.Image(pw.MemoryImage(const Base64Decoder().convert(qrCode))),
+            flex: 1,
+          ),
+          pw.SizedBox(width: 24),
+          pw.Flexible(
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                _balanceRowText(
+                  key: 'Beneficiary\'s Name'.tr(),
+                  value: beneficiaryName,
+                ),
+                _balanceRowText(key: 'Bank name'.tr(), value: bankName),
+                _balanceRowText(key: 'Branch #'.tr(), value: branch),
+                _balanceRowText(key: 'Bank Code'.tr(), value: bankCode),
+                _balanceRowText(key: 'Bank Account'.tr(), value: bankAccount),
+                _balanceRowText(
+                  key: 'HSBC Swift Code'.tr(),
+                  value: hdbcSwiftCode,
+                ),
+                _balanceRowText(key: 'Bank Address'.tr(), value: bankAddress),
+                _balanceRowText(key: 'PayNow UEN'.tr(), value: payNowUen),
+              ],
+            ),
+            flex: 2,
+          ),
+        ],
+      );
+
   Future<Uint8List> createInvoicePdf({
     required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
     required ShipToInfo shipToInfo,
+    required SalesOrganisation salesOrganisation,
   }) async {
-    final pdf = pw.Document(version: PdfVersion.pdf_1_5);
+    final pdf = pw.Document();
     final headerInvoice = await _headerInvoice(
       headerLogoPath: paymentInvoiceInfoPdf.headerLogoPath,
       zzAdvice: paymentInvoiceInfoPdf.zzAdvice,
@@ -484,6 +613,22 @@ class CreatePaymentInvoicePdf {
                 ),
                 valueDate: paymentInvoiceInfoPdf.valueDate,
               ),
+              salesOrganisation.salesOrg.isSg
+                  ? _paymentSteps
+                  : pw.SizedBox.shrink(),
+              salesOrganisation.salesOrg.isSg
+                  ? _qrCodeAndBankInfo(
+                      qrCode: paymentInvoiceInfoPdf.qrCode,
+                      beneficiaryName: paymentInvoiceInfoPdf.beneficiaryName,
+                      bankName: paymentInvoiceInfoPdf.bankName,
+                      branch: paymentInvoiceInfoPdf.branch,
+                      bankCode: paymentInvoiceInfoPdf.bankCode,
+                      bankAccount: paymentInvoiceInfoPdf.bankAccount,
+                      hdbcSwiftCode: paymentInvoiceInfoPdf.hdbcSwiftCode,
+                      bankAddress: paymentInvoiceInfoPdf.bankAddress,
+                      payNowUen: paymentInvoiceInfoPdf.payNowUen,
+                    )
+                  : pw.SizedBox.shrink(),
               _item(paymentItems: paymentInvoiceInfoPdf.paymentItems),
               pw.Spacer(),
               description,

@@ -1,13 +1,13 @@
 {
   "data":{
     "paymentInvoicePdf":{
-      "valueDate":"2023-08-31",
-      "paymentID":"2        4",
-      "zzAdvice":"09EZ230000967601",
-      "paymentDue":"MYR 500.000000",
+      "valueDate":"2023-09-21",
+      "paymentID":"2        3",
+      "zzAdvice":"09EZ230000977801",
+      "paymentDue":"MYR 480.900000",
       "paymentMethod":"Payment Gateway",
-      "customerName":"hnguyen",
-      "payer":"0000101216",
+      "customerName":"rootadmin",
+      "payer":"0000101215",
       "beneficiaryName":null,
       "bankName":null,
       "branch":null,
@@ -18,15 +18,15 @@
       "payNowUen":null,
       "emailId":null,
       "qrCode":"",
-      "paymentBatchAdditionalInfo":"23C29EA092BC376",
+      "paymentBatchAdditionalInfo":"23C2DF54DCD7876",
       "paymentItems":[
         {
-          "postingKeyName":"Other receivables",
-          "accountingDocument":"0040209208",
-          "documentDate":"2014-01-29T00:00:00Z",
+          "postingKeyName":"Invoice",
+          "accountingDocument":"0180000087",
+          "documentDate":"2021-09-03T00:00:00Z",
           "transactionCurrency":"MYR",
-          "paymentAmountInDisplayCrcy":500,
-          "documentReferenceID":"13082930"
+          "paymentAmountInDisplayCrcy":24845.34,
+          "documentReferenceID":"JUS DC 20210903"
         }
       ],
       "salesDistrict":"",

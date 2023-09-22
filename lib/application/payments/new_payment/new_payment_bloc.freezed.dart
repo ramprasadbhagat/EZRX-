@@ -18,59 +18,55 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NewPaymentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
     required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleCredit,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)
-        pay,
-    required TResult Function(
-            SalesOrganisation salesOrganisation, Uri paymentUrl)
-        updatePaymentGateway,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
-        fetchInvoiceInfoPdf,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult? Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -85,6 +81,8 @@ mixin _$NewPaymentEvent {
     required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
     required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -98,6 +96,8 @@ mixin _$NewPaymentEvent {
     TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -111,6 +111,8 @@ mixin _$NewPaymentEvent {
     TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,6 +141,15 @@ abstract class _$$_initializedCopyWith<$Res> {
   factory _$$_initializedCopyWith(
           _$_initialized value, $Res Function(_$_initialized) then) =
       __$$_initializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo,
+      User user});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -148,93 +159,159 @@ class __$$_initializedCopyWithImpl<$Res>
   __$$_initializedCopyWithImpl(
       _$_initialized _value, $Res Function(_$_initialized) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
+    Object? user = null,
+  }) {
+    return _then(_$_initialized(
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_initialized implements _initialized {
-  const _$_initialized();
+  const _$_initialized(
+      {required this.salesOrganisation,
+      required this.customerCodeInfo,
+      required this.user});
+
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'NewPaymentEvent.initialized()';
+    return 'NewPaymentEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_initialized);
+        (other.runtimeType == runtimeType &&
+            other is _$_initialized &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrganisation, customerCodeInfo, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_initializedCopyWith<_$_initialized> get copyWith =>
+      __$$_initializedCopyWithImpl<_$_initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
     required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleCredit,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)
-        pay,
-    required TResult Function(
-            SalesOrganisation salesOrganisation, Uri paymentUrl)
-        updatePaymentGateway,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
-        fetchInvoiceInfoPdf,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
   }) {
-    return initialized();
+    return initialized(salesOrganisation, customerCodeInfo, user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult? Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
   }) {
-    return initialized?.call();
+    return initialized?.call(salesOrganisation, customerCodeInfo, user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized();
+      return initialized(salesOrganisation, customerCodeInfo, user);
     }
     return orElse();
   }
@@ -251,6 +328,8 @@ class _$_initialized implements _initialized {
     required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
     required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
   }) {
     return initialized(this);
   }
@@ -267,6 +346,8 @@ class _$_initialized implements _initialized {
     TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
   }) {
     return initialized?.call(this);
   }
@@ -283,6 +364,8 @@ class _$_initialized implements _initialized {
     TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -293,7 +376,17 @@ class _$_initialized implements _initialized {
 }
 
 abstract class _initialized implements NewPaymentEvent {
-  const factory _initialized() = _$_initialized;
+  const factory _initialized(
+      {required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final User user}) = _$_initialized;
+
+  SalesOrganisation get salesOrganisation;
+  CustomerCodeInfo get customerCodeInfo;
+  User get user;
+  @JsonKey(ignore: true)
+  _$$_initializedCopyWith<_$_initialized> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -368,23 +461,21 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
     required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleCredit,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)
-        pay,
-    required TResult Function(
-            SalesOrganisation salesOrganisation, Uri paymentUrl)
-        updatePaymentGateway,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
-        fetchInvoiceInfoPdf,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
   }) {
     return updateAllInvoices(items);
   }
@@ -392,20 +483,19 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult? Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
   }) {
     return updateAllInvoices?.call(items);
   }
@@ -413,20 +503,19 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (updateAllInvoices != null) {
@@ -447,6 +536,8 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
     required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
   }) {
     return updateAllInvoices(this);
   }
@@ -463,6 +554,8 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
   }) {
     return updateAllInvoices?.call(this);
   }
@@ -479,6 +572,8 @@ class _$_SelectAllInvoices implements _SelectAllInvoices {
     TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (updateAllInvoices != null) {
@@ -581,23 +676,21 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
     required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleCredit,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)
-        pay,
-    required TResult Function(
-            SalesOrganisation salesOrganisation, Uri paymentUrl)
-        updatePaymentGateway,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
-        fetchInvoiceInfoPdf,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
   }) {
     return toggleInvoice(item, selected);
   }
@@ -605,20 +698,19 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult? Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
   }) {
     return toggleInvoice?.call(item, selected);
   }
@@ -626,20 +718,19 @@ class _$_ToggleInvoice implements _ToggleInvoice {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (toggleInvoice != null) {
@@ -660,6 +751,8 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
     required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
   }) {
     return toggleInvoice(this);
   }
@@ -676,6 +769,8 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
   }) {
     return toggleInvoice?.call(this);
   }
@@ -692,6 +787,8 @@ class _$_ToggleInvoice implements _ToggleInvoice {
     TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (toggleInvoice != null) {
@@ -784,23 +881,21 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
     required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleCredit,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)
-        pay,
-    required TResult Function(
-            SalesOrganisation salesOrganisation, Uri paymentUrl)
-        updatePaymentGateway,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
-        fetchInvoiceInfoPdf,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
   }) {
     return updateAllCredits(items);
   }
@@ -808,20 +903,19 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult? Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
   }) {
     return updateAllCredits?.call(items);
   }
@@ -829,20 +923,19 @@ class _$_SelectAllCredits implements _SelectAllCredits {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (updateAllCredits != null) {
@@ -863,6 +956,8 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
     required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
   }) {
     return updateAllCredits(this);
   }
@@ -879,6 +974,8 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
   }) {
     return updateAllCredits?.call(this);
   }
@@ -895,6 +992,8 @@ class _$_SelectAllCredits implements _SelectAllCredits {
     TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (updateAllCredits != null) {
@@ -997,23 +1096,21 @@ class _$_ToggleCredit implements _ToggleCredit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
     required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleCredit,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)
-        pay,
-    required TResult Function(
-            SalesOrganisation salesOrganisation, Uri paymentUrl)
-        updatePaymentGateway,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
-        fetchInvoiceInfoPdf,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
   }) {
     return toggleCredit(item, selected);
   }
@@ -1021,20 +1118,19 @@ class _$_ToggleCredit implements _ToggleCredit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult? Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
   }) {
     return toggleCredit?.call(item, selected);
   }
@@ -1042,20 +1138,19 @@ class _$_ToggleCredit implements _ToggleCredit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (toggleCredit != null) {
@@ -1076,6 +1171,8 @@ class _$_ToggleCredit implements _ToggleCredit {
     required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
     required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
   }) {
     return toggleCredit(this);
   }
@@ -1092,6 +1189,8 @@ class _$_ToggleCredit implements _ToggleCredit {
     TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
   }) {
     return toggleCredit?.call(this);
   }
@@ -1108,6 +1207,8 @@ class _$_ToggleCredit implements _ToggleCredit {
     TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (toggleCredit != null) {
@@ -1133,16 +1234,6 @@ abstract class _ToggleCredit implements NewPaymentEvent {
 abstract class _$$_PayCopyWith<$Res> {
   factory _$$_PayCopyWith(_$_Pay value, $Res Function(_$_Pay) then) =
       __$$_PayCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerCodeInfo,
-      String paymentMethod,
-      User user});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -1151,173 +1242,89 @@ class __$$_PayCopyWithImpl<$Res>
     implements _$$_PayCopyWith<$Res> {
   __$$_PayCopyWithImpl(_$_Pay _value, $Res Function(_$_Pay) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrganisation = null,
-    Object? customerCodeInfo = null,
-    Object? paymentMethod = null,
-    Object? user = null,
-  }) {
-    return _then(_$_Pay(
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      paymentMethod: null == paymentMethod
-          ? _value.paymentMethod
-          : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_Pay implements _Pay {
-  const _$_Pay(
-      {required this.salesOrganisation,
-      required this.customerCodeInfo,
-      required this.paymentMethod,
-      required this.user});
-
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final String paymentMethod;
-  @override
-  final User user;
+  const _$_Pay();
 
   @override
   String toString() {
-    return 'NewPaymentEvent.pay(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, paymentMethod: $paymentMethod, user: $user)';
+    return 'NewPaymentEvent.pay()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Pay &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.paymentMethod, paymentMethod) ||
-                other.paymentMethod == paymentMethod) &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_Pay);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganisation, customerCodeInfo, paymentMethod, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_PayCopyWith<_$_Pay> get copyWith =>
-      __$$_PayCopyWithImpl<_$_Pay>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
     required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleCredit,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)
-        pay,
-    required TResult Function(
-            SalesOrganisation salesOrganisation, Uri paymentUrl)
-        updatePaymentGateway,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
-        fetchInvoiceInfoPdf,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
   }) {
-    return pay(salesOrganisation, customerCodeInfo, paymentMethod, user);
+    return pay();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult? Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
   }) {
-    return pay?.call(salesOrganisation, customerCodeInfo, paymentMethod, user);
+    return pay?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (pay != null) {
-      return pay(salesOrganisation, customerCodeInfo, paymentMethod, user);
+      return pay();
     }
     return orElse();
   }
@@ -1334,6 +1341,8 @@ class _$_Pay implements _Pay {
     required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
     required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
   }) {
     return pay(this);
   }
@@ -1350,6 +1359,8 @@ class _$_Pay implements _Pay {
     TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
   }) {
     return pay?.call(this);
   }
@@ -1366,6 +1377,8 @@ class _$_Pay implements _Pay {
     TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (pay != null) {
@@ -1376,18 +1389,7 @@ class _$_Pay implements _Pay {
 }
 
 abstract class _Pay implements NewPaymentEvent {
-  const factory _Pay(
-      {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final String paymentMethod,
-      required final User user}) = _$_Pay;
-
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerCodeInfo;
-  String get paymentMethod;
-  User get user;
-  @JsonKey(ignore: true)
-  _$$_PayCopyWith<_$_Pay> get copyWith => throw _privateConstructorUsedError;
+  const factory _Pay() = _$_Pay;
 }
 
 /// @nodoc
@@ -1396,9 +1398,7 @@ abstract class _$$_UpdatePaymentGatewayCopyWith<$Res> {
           $Res Function(_$_UpdatePaymentGateway) then) =
       __$$_UpdatePaymentGatewayCopyWithImpl<$Res>;
   @useResult
-  $Res call({SalesOrganisation salesOrganisation, Uri paymentUrl});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $Res call({Uri paymentUrl});
 }
 
 /// @nodoc
@@ -1412,44 +1412,28 @@ class __$$_UpdatePaymentGatewayCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrganisation = null,
     Object? paymentUrl = null,
   }) {
     return _then(_$_UpdatePaymentGateway(
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
       paymentUrl: null == paymentUrl
           ? _value.paymentUrl
           : paymentUrl // ignore: cast_nullable_to_non_nullable
               as Uri,
     ));
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
-  const _$_UpdatePaymentGateway(
-      {required this.salesOrganisation, required this.paymentUrl});
+  const _$_UpdatePaymentGateway({required this.paymentUrl});
 
-  @override
-  final SalesOrganisation salesOrganisation;
   @override
   final Uri paymentUrl;
 
   @override
   String toString() {
-    return 'NewPaymentEvent.updatePaymentGateway(salesOrganisation: $salesOrganisation, paymentUrl: $paymentUrl)';
+    return 'NewPaymentEvent.updatePaymentGateway(paymentUrl: $paymentUrl)';
   }
 
   @override
@@ -1457,14 +1441,12 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdatePaymentGateway &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
             (identical(other.paymentUrl, paymentUrl) ||
                 other.paymentUrl == paymentUrl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrganisation, paymentUrl);
+  int get hashCode => Object.hash(runtimeType, paymentUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -1476,69 +1458,65 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
     required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleCredit,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)
-        pay,
-    required TResult Function(
-            SalesOrganisation salesOrganisation, Uri paymentUrl)
-        updatePaymentGateway,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
-        fetchInvoiceInfoPdf,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
   }) {
-    return updatePaymentGateway(salesOrganisation, paymentUrl);
+    return updatePaymentGateway(paymentUrl);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult? Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
   }) {
-    return updatePaymentGateway?.call(salesOrganisation, paymentUrl);
+    return updatePaymentGateway?.call(paymentUrl);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (updatePaymentGateway != null) {
-      return updatePaymentGateway(salesOrganisation, paymentUrl);
+      return updatePaymentGateway(paymentUrl);
     }
     return orElse();
   }
@@ -1555,6 +1533,8 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
     required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
   }) {
     return updatePaymentGateway(this);
   }
@@ -1571,6 +1551,8 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
   }) {
     return updatePaymentGateway?.call(this);
   }
@@ -1587,6 +1569,8 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
     TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (updatePaymentGateway != null) {
@@ -1597,11 +1581,9 @@ class _$_UpdatePaymentGateway implements _UpdatePaymentGateway {
 }
 
 abstract class _UpdatePaymentGateway implements NewPaymentEvent {
-  const factory _UpdatePaymentGateway(
-      {required final SalesOrganisation salesOrganisation,
-      required final Uri paymentUrl}) = _$_UpdatePaymentGateway;
+  const factory _UpdatePaymentGateway({required final Uri paymentUrl}) =
+      _$_UpdatePaymentGateway;
 
-  SalesOrganisation get salesOrganisation;
   Uri get paymentUrl;
   @JsonKey(ignore: true)
   _$$_UpdatePaymentGatewayCopyWith<_$_UpdatePaymentGateway> get copyWith =>
@@ -1613,15 +1595,6 @@ abstract class _$$_FetchInvoiceInfoPdfCopyWith<$Res> {
   factory _$$_FetchInvoiceInfoPdfCopyWith(_$_FetchInvoiceInfoPdf value,
           $Res Function(_$_FetchInvoiceInfoPdf) then) =
       __$$_FetchInvoiceInfoPdfCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerCodeInfo,
-      User user});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -1631,164 +1604,89 @@ class __$$_FetchInvoiceInfoPdfCopyWithImpl<$Res>
   __$$_FetchInvoiceInfoPdfCopyWithImpl(_$_FetchInvoiceInfoPdf _value,
       $Res Function(_$_FetchInvoiceInfoPdf) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrganisation = null,
-    Object? customerCodeInfo = null,
-    Object? user = null,
-  }) {
-    return _then(_$_FetchInvoiceInfoPdf(
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
-  const _$_FetchInvoiceInfoPdf(
-      {required this.salesOrganisation,
-      required this.customerCodeInfo,
-      required this.user});
-
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final User user;
+  const _$_FetchInvoiceInfoPdf();
 
   @override
   String toString() {
-    return 'NewPaymentEvent.fetchInvoiceInfoPdf(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, user: $user)';
+    return 'NewPaymentEvent.fetchInvoiceInfoPdf()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_FetchInvoiceInfoPdf &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_FetchInvoiceInfoPdf);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrganisation, customerCodeInfo, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FetchInvoiceInfoPdfCopyWith<_$_FetchInvoiceInfoPdf> get copyWith =>
-      __$$_FetchInvoiceInfoPdfCopyWithImpl<_$_FetchInvoiceInfoPdf>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
     required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleCredit,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)
-        pay,
-    required TResult Function(
-            SalesOrganisation salesOrganisation, Uri paymentUrl)
-        updatePaymentGateway,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
-        fetchInvoiceInfoPdf,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
   }) {
-    return fetchInvoiceInfoPdf(salesOrganisation, customerCodeInfo, user);
+    return fetchInvoiceInfoPdf();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult? Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
   }) {
-    return fetchInvoiceInfoPdf?.call(salesOrganisation, customerCodeInfo, user);
+    return fetchInvoiceInfoPdf?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (fetchInvoiceInfoPdf != null) {
-      return fetchInvoiceInfoPdf(salesOrganisation, customerCodeInfo, user);
+      return fetchInvoiceInfoPdf();
     }
     return orElse();
   }
@@ -1805,6 +1703,8 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
     required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
   }) {
     return fetchInvoiceInfoPdf(this);
   }
@@ -1821,6 +1721,8 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
   }) {
     return fetchInvoiceInfoPdf?.call(this);
   }
@@ -1837,6 +1739,8 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
     TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (fetchInvoiceInfoPdf != null) {
@@ -1847,17 +1751,7 @@ class _$_FetchInvoiceInfoPdf implements _FetchInvoiceInfoPdf {
 }
 
 abstract class _FetchInvoiceInfoPdf implements NewPaymentEvent {
-  const factory _FetchInvoiceInfoPdf(
-      {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final User user}) = _$_FetchInvoiceInfoPdf;
-
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerCodeInfo;
-  User get user;
-  @JsonKey(ignore: true)
-  _$$_FetchInvoiceInfoPdfCopyWith<_$_FetchInvoiceInfoPdf> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _FetchInvoiceInfoPdf() = _$_FetchInvoiceInfoPdf;
 }
 
 /// @nodoc
@@ -1926,23 +1820,21 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
     required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleInvoice,
     required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
     required TResult Function(CustomerOpenItem item, bool selected)
         toggleCredit,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)
-        pay,
-    required TResult Function(
-            SalesOrganisation salesOrganisation, Uri paymentUrl)
-        updatePaymentGateway,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)
-        fetchInvoiceInfoPdf,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
     required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
   }) {
     return saveInvoicePdf(dataInvoicePdf);
   }
@@ -1950,20 +1842,19 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult? Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
     TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
   }) {
     return saveInvoicePdf?.call(dataInvoicePdf);
   }
@@ -1971,20 +1862,19 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
     TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
     TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
     TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
     TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, String paymentMethod, User user)?
-        pay,
-    TResult Function(SalesOrganisation salesOrganisation, Uri paymentUrl)?
-        updatePaymentGateway,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, User user)?
-        fetchInvoiceInfoPdf,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
     TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (saveInvoicePdf != null) {
@@ -2005,6 +1895,8 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
     required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
     required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
   }) {
     return saveInvoicePdf(this);
   }
@@ -2021,6 +1913,8 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
   }) {
     return saveInvoicePdf?.call(this);
   }
@@ -2037,6 +1931,8 @@ class _$_SaveInvoicePdf implements _SaveInvoicePdf {
     TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
     TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
     TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
     required TResult orElse(),
   }) {
     if (saveInvoicePdf != null) {
@@ -2057,6 +1953,207 @@ abstract class _SaveInvoicePdf implements NewPaymentEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdatePaymentMethodSelectedCopyWith<$Res> {
+  factory _$$_UpdatePaymentMethodSelectedCopyWith(
+          _$_UpdatePaymentMethodSelected value,
+          $Res Function(_$_UpdatePaymentMethodSelected) then) =
+      __$$_UpdatePaymentMethodSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PaymentMethodValue paymentMethodSelected});
+}
+
+/// @nodoc
+class __$$_UpdatePaymentMethodSelectedCopyWithImpl<$Res>
+    extends _$NewPaymentEventCopyWithImpl<$Res, _$_UpdatePaymentMethodSelected>
+    implements _$$_UpdatePaymentMethodSelectedCopyWith<$Res> {
+  __$$_UpdatePaymentMethodSelectedCopyWithImpl(
+      _$_UpdatePaymentMethodSelected _value,
+      $Res Function(_$_UpdatePaymentMethodSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? paymentMethodSelected = null,
+  }) {
+    return _then(_$_UpdatePaymentMethodSelected(
+      paymentMethodSelected: null == paymentMethodSelected
+          ? _value.paymentMethodSelected
+          : paymentMethodSelected // ignore: cast_nullable_to_non_nullable
+              as PaymentMethodValue,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdatePaymentMethodSelected implements _UpdatePaymentMethodSelected {
+  const _$_UpdatePaymentMethodSelected({required this.paymentMethodSelected});
+
+  @override
+  final PaymentMethodValue paymentMethodSelected;
+
+  @override
+  String toString() {
+    return 'NewPaymentEvent.updatePaymentMethodSelected(paymentMethodSelected: $paymentMethodSelected)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdatePaymentMethodSelected &&
+            (identical(other.paymentMethodSelected, paymentMethodSelected) ||
+                other.paymentMethodSelected == paymentMethodSelected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, paymentMethodSelected);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdatePaymentMethodSelectedCopyWith<_$_UpdatePaymentMethodSelected>
+      get copyWith => __$$_UpdatePaymentMethodSelectedCopyWithImpl<
+          _$_UpdatePaymentMethodSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)
+        initialized,
+    required TResult Function(List<CustomerOpenItem> items) updateAllInvoices,
+    required TResult Function(CustomerOpenItem item, bool selected)
+        toggleInvoice,
+    required TResult Function(List<CustomerOpenItem> items) updateAllCredits,
+    required TResult Function(CustomerOpenItem item, bool selected)
+        toggleCredit,
+    required TResult Function() pay,
+    required TResult Function(Uri paymentUrl) updatePaymentGateway,
+    required TResult Function() fetchInvoiceInfoPdf,
+    required TResult Function(Uint8List dataInvoicePdf) saveInvoicePdf,
+    required TResult Function(PaymentMethodValue paymentMethodSelected)
+        updatePaymentMethodSelected,
+  }) {
+    return updatePaymentMethodSelected(paymentMethodSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
+    TResult? Function(List<CustomerOpenItem> items)? updateAllInvoices,
+    TResult? Function(CustomerOpenItem item, bool selected)? toggleInvoice,
+    TResult? Function(List<CustomerOpenItem> items)? updateAllCredits,
+    TResult? Function(CustomerOpenItem item, bool selected)? toggleCredit,
+    TResult? Function()? pay,
+    TResult? Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult? Function()? fetchInvoiceInfoPdf,
+    TResult? Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult? Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
+  }) {
+    return updatePaymentMethodSelected?.call(paymentMethodSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, User user)?
+        initialized,
+    TResult Function(List<CustomerOpenItem> items)? updateAllInvoices,
+    TResult Function(CustomerOpenItem item, bool selected)? toggleInvoice,
+    TResult Function(List<CustomerOpenItem> items)? updateAllCredits,
+    TResult Function(CustomerOpenItem item, bool selected)? toggleCredit,
+    TResult Function()? pay,
+    TResult Function(Uri paymentUrl)? updatePaymentGateway,
+    TResult Function()? fetchInvoiceInfoPdf,
+    TResult Function(Uint8List dataInvoicePdf)? saveInvoicePdf,
+    TResult Function(PaymentMethodValue paymentMethodSelected)?
+        updatePaymentMethodSelected,
+    required TResult orElse(),
+  }) {
+    if (updatePaymentMethodSelected != null) {
+      return updatePaymentMethodSelected(paymentMethodSelected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_SelectAllInvoices value) updateAllInvoices,
+    required TResult Function(_ToggleInvoice value) toggleInvoice,
+    required TResult Function(_SelectAllCredits value) updateAllCredits,
+    required TResult Function(_ToggleCredit value) toggleCredit,
+    required TResult Function(_Pay value) pay,
+    required TResult Function(_UpdatePaymentGateway value) updatePaymentGateway,
+    required TResult Function(_FetchInvoiceInfoPdf value) fetchInvoiceInfoPdf,
+    required TResult Function(_SaveInvoicePdf value) saveInvoicePdf,
+    required TResult Function(_UpdatePaymentMethodSelected value)
+        updatePaymentMethodSelected,
+  }) {
+    return updatePaymentMethodSelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_SelectAllInvoices value)? updateAllInvoices,
+    TResult? Function(_ToggleInvoice value)? toggleInvoice,
+    TResult? Function(_SelectAllCredits value)? updateAllCredits,
+    TResult? Function(_ToggleCredit value)? toggleCredit,
+    TResult? Function(_Pay value)? pay,
+    TResult? Function(_UpdatePaymentGateway value)? updatePaymentGateway,
+    TResult? Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
+    TResult? Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult? Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
+  }) {
+    return updatePaymentMethodSelected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_SelectAllInvoices value)? updateAllInvoices,
+    TResult Function(_ToggleInvoice value)? toggleInvoice,
+    TResult Function(_SelectAllCredits value)? updateAllCredits,
+    TResult Function(_ToggleCredit value)? toggleCredit,
+    TResult Function(_Pay value)? pay,
+    TResult Function(_UpdatePaymentGateway value)? updatePaymentGateway,
+    TResult Function(_FetchInvoiceInfoPdf value)? fetchInvoiceInfoPdf,
+    TResult Function(_SaveInvoicePdf value)? saveInvoicePdf,
+    TResult Function(_UpdatePaymentMethodSelected value)?
+        updatePaymentMethodSelected,
+    required TResult orElse(),
+  }) {
+    if (updatePaymentMethodSelected != null) {
+      return updatePaymentMethodSelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdatePaymentMethodSelected implements NewPaymentEvent {
+  const factory _UpdatePaymentMethodSelected(
+          {required final PaymentMethodValue paymentMethodSelected}) =
+      _$_UpdatePaymentMethodSelected;
+
+  PaymentMethodValue get paymentMethodSelected;
+  @JsonKey(ignore: true)
+  _$$_UpdatePaymentMethodSelectedCopyWith<_$_UpdatePaymentMethodSelected>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$NewPaymentState {
   PaymentInfo get paymentInfo => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
@@ -2070,6 +2167,14 @@ mixin _$NewPaymentState {
   PaymentInvoiceInfoPdf get paymentInvoiceInfoPdf =>
       throw _privateConstructorUsedError;
   bool get isSavingInvoicePdf => throw _privateConstructorUsedError;
+  bool get isFetchingPaymentMethod => throw _privateConstructorUsedError;
+  List<PaymentMethodValue> get paymentMethods =>
+      throw _privateConstructorUsedError;
+  PaymentMethodValue get selectedPaymentMethod =>
+      throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewPaymentStateCopyWith<NewPaymentState> get copyWith =>
@@ -2090,10 +2195,19 @@ abstract class $NewPaymentStateCopyWith<$Res> {
       List<CustomerOpenItem> selectedCredits,
       bool isFetchingInvoiceInfoPdf,
       PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
-      bool isSavingInvoicePdf});
+      bool isSavingInvoicePdf,
+      bool isFetchingPaymentMethod,
+      List<PaymentMethodValue> paymentMethods,
+      PaymentMethodValue selectedPaymentMethod,
+      SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo,
+      User user});
 
   $PaymentInfoCopyWith<$Res> get paymentInfo;
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -2117,6 +2231,12 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
     Object? isFetchingInvoiceInfoPdf = null,
     Object? paymentInvoiceInfoPdf = null,
     Object? isSavingInvoicePdf = null,
+    Object? isFetchingPaymentMethod = null,
+    Object? paymentMethods = null,
+    Object? selectedPaymentMethod = null,
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       paymentInfo: null == paymentInfo
@@ -2151,6 +2271,30 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
           ? _value.isSavingInvoicePdf
           : isSavingInvoicePdf // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFetchingPaymentMethod: null == isFetchingPaymentMethod
+          ? _value.isFetchingPaymentMethod
+          : isFetchingPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as bool,
+      paymentMethods: null == paymentMethods
+          ? _value.paymentMethods
+          : paymentMethods // ignore: cast_nullable_to_non_nullable
+              as List<PaymentMethodValue>,
+      selectedPaymentMethod: null == selectedPaymentMethod
+          ? _value.selectedPaymentMethod
+          : selectedPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as PaymentMethodValue,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ) as $Val);
   }
 
@@ -2168,6 +2312,30 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
     return $PaymentInvoiceInfoPdfCopyWith<$Res>(_value.paymentInvoiceInfoPdf,
         (value) {
       return _then(_value.copyWith(paymentInvoiceInfoPdf: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
@@ -2188,12 +2356,24 @@ abstract class _$$_NewPaymentStateCopyWith<$Res>
       List<CustomerOpenItem> selectedCredits,
       bool isFetchingInvoiceInfoPdf,
       PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
-      bool isSavingInvoicePdf});
+      bool isSavingInvoicePdf,
+      bool isFetchingPaymentMethod,
+      List<PaymentMethodValue> paymentMethods,
+      PaymentMethodValue selectedPaymentMethod,
+      SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo,
+      User user});
 
   @override
   $PaymentInfoCopyWith<$Res> get paymentInfo;
   @override
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -2215,6 +2395,12 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
     Object? isFetchingInvoiceInfoPdf = null,
     Object? paymentInvoiceInfoPdf = null,
     Object? isSavingInvoicePdf = null,
+    Object? isFetchingPaymentMethod = null,
+    Object? paymentMethods = null,
+    Object? selectedPaymentMethod = null,
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
+    Object? user = null,
   }) {
     return _then(_$_NewPaymentState(
       paymentInfo: null == paymentInfo
@@ -2249,6 +2435,30 @@ class __$$_NewPaymentStateCopyWithImpl<$Res>
           ? _value.isSavingInvoicePdf
           : isSavingInvoicePdf // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFetchingPaymentMethod: null == isFetchingPaymentMethod
+          ? _value.isFetchingPaymentMethod
+          : isFetchingPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as bool,
+      paymentMethods: null == paymentMethods
+          ? _value._paymentMethods
+          : paymentMethods // ignore: cast_nullable_to_non_nullable
+              as List<PaymentMethodValue>,
+      selectedPaymentMethod: null == selectedPaymentMethod
+          ? _value.selectedPaymentMethod
+          : selectedPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as PaymentMethodValue,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 }
@@ -2264,9 +2474,16 @@ class _$_NewPaymentState extends _NewPaymentState {
       required final List<CustomerOpenItem> selectedCredits,
       required this.isFetchingInvoiceInfoPdf,
       required this.paymentInvoiceInfoPdf,
-      required this.isSavingInvoicePdf})
+      required this.isSavingInvoicePdf,
+      required this.isFetchingPaymentMethod,
+      required final List<PaymentMethodValue> paymentMethods,
+      required this.selectedPaymentMethod,
+      required this.salesOrganisation,
+      required this.customerCodeInfo,
+      required this.user})
       : _selectedInvoices = selectedInvoices,
         _selectedCredits = selectedCredits,
+        _paymentMethods = paymentMethods,
         super._();
 
   @override
@@ -2298,10 +2515,28 @@ class _$_NewPaymentState extends _NewPaymentState {
   final PaymentInvoiceInfoPdf paymentInvoiceInfoPdf;
   @override
   final bool isSavingInvoicePdf;
+  @override
+  final bool isFetchingPaymentMethod;
+  final List<PaymentMethodValue> _paymentMethods;
+  @override
+  List<PaymentMethodValue> get paymentMethods {
+    if (_paymentMethods is EqualUnmodifiableListView) return _paymentMethods;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_paymentMethods);
+  }
+
+  @override
+  final PaymentMethodValue selectedPaymentMethod;
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final User user;
 
   @override
   String toString() {
-    return 'NewPaymentState(paymentInfo: $paymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf)';
+    return 'NewPaymentState(paymentInfo: $paymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, user: $user)';
   }
 
   @override
@@ -2325,7 +2560,19 @@ class _$_NewPaymentState extends _NewPaymentState {
             (identical(other.paymentInvoiceInfoPdf, paymentInvoiceInfoPdf) ||
                 other.paymentInvoiceInfoPdf == paymentInvoiceInfoPdf) &&
             (identical(other.isSavingInvoicePdf, isSavingInvoicePdf) ||
-                other.isSavingInvoicePdf == isSavingInvoicePdf));
+                other.isSavingInvoicePdf == isSavingInvoicePdf) &&
+            (identical(
+                    other.isFetchingPaymentMethod, isFetchingPaymentMethod) ||
+                other.isFetchingPaymentMethod == isFetchingPaymentMethod) &&
+            const DeepCollectionEquality()
+                .equals(other._paymentMethods, _paymentMethods) &&
+            (identical(other.selectedPaymentMethod, selectedPaymentMethod) ||
+                other.selectedPaymentMethod == selectedPaymentMethod) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
@@ -2338,7 +2585,13 @@ class _$_NewPaymentState extends _NewPaymentState {
       const DeepCollectionEquality().hash(_selectedCredits),
       isFetchingInvoiceInfoPdf,
       paymentInvoiceInfoPdf,
-      isSavingInvoicePdf);
+      isSavingInvoicePdf,
+      isFetchingPaymentMethod,
+      const DeepCollectionEquality().hash(_paymentMethods),
+      selectedPaymentMethod,
+      salesOrganisation,
+      customerCodeInfo,
+      user);
 
   @JsonKey(ignore: true)
   @override
@@ -2356,7 +2609,13 @@ abstract class _NewPaymentState extends NewPaymentState {
       required final List<CustomerOpenItem> selectedCredits,
       required final bool isFetchingInvoiceInfoPdf,
       required final PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
-      required final bool isSavingInvoicePdf}) = _$_NewPaymentState;
+      required final bool isSavingInvoicePdf,
+      required final bool isFetchingPaymentMethod,
+      required final List<PaymentMethodValue> paymentMethods,
+      required final PaymentMethodValue selectedPaymentMethod,
+      required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final User user}) = _$_NewPaymentState;
   const _NewPaymentState._() : super._();
 
   @override
@@ -2375,6 +2634,18 @@ abstract class _NewPaymentState extends NewPaymentState {
   PaymentInvoiceInfoPdf get paymentInvoiceInfoPdf;
   @override
   bool get isSavingInvoicePdf;
+  @override
+  bool get isFetchingPaymentMethod;
+  @override
+  List<PaymentMethodValue> get paymentMethods;
+  @override
+  PaymentMethodValue get selectedPaymentMethod;
+  @override
+  SalesOrganisation get salesOrganisation;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
+  @override
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_NewPaymentStateCopyWith<_$_NewPaymentState> get copyWith =>

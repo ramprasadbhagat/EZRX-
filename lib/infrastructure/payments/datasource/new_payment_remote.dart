@@ -7,11 +7,13 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_invoice_info_pdf_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_method_dto.dart';
 
 class NewPaymentRemoteDataSource {
   HttpService httpService;
@@ -209,6 +211,33 @@ class NewPaymentRemoteDataSource {
     final data = res.data['data']['paymentInvoicePdf'];
 
     return PaymentInvoiceInfoPdfDto.fromJson(data).toDomain();
+  }
+
+  Future<List<PaymentMethodValue>> fetchPaymentMethods({
+    required String salesOrg,
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query': newPaymentQuery.fetchPaymentMethodQuery(),
+          'variables': {
+            'request': {
+              'salesOrg': salesOrg,
+            },
+          },
+        },
+      ),
+      apiEndpoint: 'availablePaymentMethods',
+    );
+    _exceptionChecker(property: 'availablePaymentMethods', res: res);
+
+    final paymentMethodList = res.data['data']['availablePaymentMethods'] ?? [];
+
+    return List.from(paymentMethodList)
+        .map((e) => PaymentMethodDto.fromJson(e).toDomain())
+        .toList();
   }
 
   void _exceptionChecker({

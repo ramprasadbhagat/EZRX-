@@ -11,13 +11,7 @@ class _PaymentInvoicePdfState extends State<_PaymentInvoicePdf> {
   @override
   void initState() {
     context.read<NewPaymentBloc>().add(
-          NewPaymentEvent.fetchInvoiceInfoPdf(
-            user: context.read<UserBloc>().state.user,
-            salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
-            customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
-          ),
+          const NewPaymentEvent.fetchInvoiceInfoPdf(),
         );
     super.initState();
   }
@@ -65,6 +59,8 @@ class _PaymentInvoicePdfState extends State<_PaymentInvoicePdf> {
                     shipToInfo:
                         context.read<CustomerCodeBloc>().state.shipToInfo,
                     paymentInvoiceInfoPdf: state.paymentInvoiceInfoPdf,
+                    salesOrganisation:
+                        context.read<SalesOrgBloc>().state.salesOrganisation,
                   ),
                 ),
               );

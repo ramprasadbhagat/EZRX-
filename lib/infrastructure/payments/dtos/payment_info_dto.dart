@@ -22,6 +22,15 @@ class PaymentInfoDto with _$PaymentInfoDto {
   }) = _PaymentInfoDto;
 
   PaymentInfo toDomain() {
+    if (zzHtmcs.isEmpty) {
+      return PaymentInfo(
+        zzHtmcs: zzHtmcs,
+        paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
+        paymentID: paymentID,
+        accountingDocExternalReference: accountingDocExternalReference,
+      );
+    }
+
     if (Currency(transactionCurrency).isTH) {
       final htmlFormat = zzHtmcs.characters
           .getRange(

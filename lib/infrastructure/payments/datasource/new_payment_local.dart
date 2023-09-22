@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_method_dto.dart';
 import 'package:flutter/services.dart';
 
 class NewPaymentLocalDataSource {
@@ -49,6 +51,13 @@ class NewPaymentLocalDataSource {
           ),
         );
         break;
+      case 'SG':
+        data = json.decode(
+          await rootBundle.loadString(
+            'assets/json/payResponseSG.json',
+          ),
+        );
+        break;
       case 'VN':
       default:
         data = json.decode(
@@ -73,10 +82,24 @@ class NewPaymentLocalDataSource {
   Future<PaymentInvoiceInfoPdf> getPaymentInvoiceInfoPdf() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/paymentInvoiceInfoPdf.json',
+        'assets/json/paymentInvoiceInfoPdfResponse.json',
       ),
     );
 
     return data['data']['paymentInvoicePdf'];
+  }
+
+  Future<List<PaymentMethodValue>> fetchPaymentMethods() async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/paymentMethodsResponse.json',
+      ),
+    );
+
+    final finalData = data['data']['availablePaymentMethods'];
+
+    return List.from(finalData)
+        .map((e) => PaymentMethodDto.fromJson(e).toDomain())
+        .toList();
   }
 }

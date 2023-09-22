@@ -1,6 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -32,9 +37,34 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           deviceRepository: deviceRepository,
         ),
-        act: (NewPaymentBloc bloc) =>
-            bloc.add(const NewPaymentEvent.initialized()),
-        expect: () => [NewPaymentState.initial()],
+        setUp: () {
+          when(
+            () => newPaymentRepository.fetchPaymentMethods(
+              salesOrganisation: SalesOrganisation.empty(),
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              [PaymentMethodValue('')],
+            ),
+          );
+        },
+        act: (NewPaymentBloc bloc) => bloc.add(
+          NewPaymentEvent.initialized(
+            salesOrganisation: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            user: User.empty(),
+          ),
+        ),
+        expect: () => [
+          NewPaymentState.initial().copyWith(
+            isFetchingPaymentMethod: true,
+          ),
+          NewPaymentState.initial().copyWith(
+            isFetchingPaymentMethod: false,
+            paymentMethods: [PaymentMethodValue('')],
+            selectedPaymentMethod: PaymentMethodValue(''),
+          ),
+        ],
       );
 
       blocTest(

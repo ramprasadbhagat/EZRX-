@@ -2,7 +2,11 @@ part of 'new_payment_bloc.dart';
 
 @freezed
 class NewPaymentEvent with _$NewPaymentEvent {
-  const factory NewPaymentEvent.initialized() = _initialized;
+  const factory NewPaymentEvent.initialized({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required User user,
+  }) = _initialized;
 
   const factory NewPaymentEvent.updateAllInvoices({
     required List<CustomerOpenItem> items,
@@ -22,25 +26,19 @@ class NewPaymentEvent with _$NewPaymentEvent {
     required bool selected,
   }) = _ToggleCredit;
 
-  const factory NewPaymentEvent.pay({
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required String paymentMethod,
-    required User user,
-  }) = _Pay;
+  const factory NewPaymentEvent.pay() = _Pay;
 
   const factory NewPaymentEvent.updatePaymentGateway({
-    required SalesOrganisation salesOrganisation,
     required Uri paymentUrl,
   }) = _UpdatePaymentGateway;
 
-  const factory NewPaymentEvent.fetchInvoiceInfoPdf({
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required User user,
-  }) = _FetchInvoiceInfoPdf;
+  const factory NewPaymentEvent.fetchInvoiceInfoPdf() = _FetchInvoiceInfoPdf;
 
   const factory NewPaymentEvent.saveInvoicePdf({
     required Uint8List dataInvoicePdf,
   }) = _SaveInvoicePdf;
+
+  const factory NewPaymentEvent.updatePaymentMethodSelected({
+    required PaymentMethodValue paymentMethodSelected,
+  }) = _UpdatePaymentMethodSelected;
 }

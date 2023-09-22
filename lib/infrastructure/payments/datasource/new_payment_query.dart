@@ -126,4 +126,14 @@ class NewPaymentQuery {
     }
     ''';
   }
+
+  String fetchPaymentMethodQuery() {
+    return '''
+    query availablePaymentMethods(\$request: availablePaymentMethodsRequest!) {
+      availablePaymentMethods(request: \$request) {
+        paymentMethods
+      }
+    }
+    ''';
+  }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'payment_info.freezed.dart';
@@ -20,7 +19,4 @@ class PaymentInfo with _$PaymentInfo {
         paymentID: '',
         paymentBatchAdditionalInfo: '',
       );
-
-  String get subAccountingDocExternalReference =>
-      accountingDocExternalReference.characters.getRange(0, 1).string;
 }

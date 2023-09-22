@@ -2,8 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/widgets/selectable_expansion_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -17,109 +19,116 @@ class PaymentMethodTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewPaymentBloc, NewPaymentState>(
-      buildWhen: (previous, current) => previous != current,
-      builder: (context, state) {
-        return ListView(
-          children: [
-            const _PaymentMethodSelector(),
-            const Divider(
-              height: 40,
-              endIndent: 0,
-              indent: 0,
-              color: ZPColors.lightGray2,
-              thickness: 0.5,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                'Payment Info'.tr(),
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-              ),
-              child: AddressInfoSection.noAction(),
-            ),
-            const SizedBox(height: 20),
-            ...state.allSelectedItems.map(
-              (e) => _InvoiceCreditItemTile(customerOpenItem: e),
-            ),
-          ],
-        );
-      },
+    return ListView(
+      children: [
+        const _PaymentMethodSelector(),
+        const Divider(
+          height: 40,
+          endIndent: 0,
+          indent: 0,
+          color: ZPColors.lightGray2,
+          thickness: 0.5,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            'Payment Info'.tr(),
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+        ),
+        const SizedBox(height: 16.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+          ),
+          child: AddressInfoSection.noAction(),
+        ),
+        const SizedBox(height: 20),
+        BlocBuilder<NewPaymentBloc, NewPaymentState>(
+          buildWhen: (previous, current) =>
+              previous.selectedInvoices != current.selectedInvoices ||
+              previous.selectedCredits != current.selectedCredits,
+          builder: (context, state) {
+            return Column(
+              children: [
+                ...state.allSelectedItems.map(
+                  (e) => _InvoiceCreditItemTile(customerOpenItem: e),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }
 
-enum _PaymentMethod {
-  paymentGateway,
-  bankTransfer,
-}
-
-class _PaymentMethodSelector extends StatefulWidget {
+class _PaymentMethodSelector extends StatelessWidget {
   const _PaymentMethodSelector({Key? key}) : super(key: key);
 
   @override
-  State<_PaymentMethodSelector> createState() => _PaymentMethodSelectorState();
-}
-
-class _PaymentMethodSelectorState extends State<_PaymentMethodSelector> {
-  _PaymentMethod selectedPaymentMethod = _PaymentMethod.paymentGateway;
-  @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      margin: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          SelectableExpansionTileList(
-            expansionTileList: [
-              SelectableExpansionTile(
-                header: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                  horizontalTitleGap: 1,
-                  leading: Radio(
-                    value: _PaymentMethod.paymentGateway,
-                    groupValue: selectedPaymentMethod,
-                    onChanged: null,
-                  ),
-                  title: Text(
-                    'Payment Gateway'.tr(),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ),
-                body: const _PaymentGateWayDescription(),
-                onPress: () => setState(
-                  () => selectedPaymentMethod = _PaymentMethod.paymentGateway,
-                ),
-                expanded: true,
-              ),
-              SelectableExpansionTile(
-                header: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                  leading: Radio(
-                    value: _PaymentMethod.bankTransfer,
-                    groupValue: selectedPaymentMethod,
-                    onChanged: null,
-                  ),
-                  horizontalTitleGap: 1,
-                  title: Text(
-                    'Bank Transfer'.tr(),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ),
-                body: const _BankTransferDescription(),
-                onPress: () => setState(
-                  () => selectedPaymentMethod = _PaymentMethod.bankTransfer,
-                ),
-              ),
-            ],
+    return BlocConsumer<NewPaymentBloc, NewPaymentState>(
+      listenWhen: (previous, current) =>
+          previous.isFetchingPaymentMethod != current.isFetchingPaymentMethod &&
+          !current.isFetchingPaymentMethod,
+      listener: (context, state) {
+        state.failureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) => ErrorUtils.handleApiFailure(context, failure),
+            (_) {},
           ),
-        ],
-      ),
+        );
+      },
+      buildWhen: (previous, current) =>
+          previous.isFetchingPaymentMethod != current.isFetchingPaymentMethod ||
+          previous.selectedPaymentMethod != current.selectedPaymentMethod,
+      builder: (context, state) {
+        return state.isFetchingPaymentMethod
+            ? LoadingShimmer.logo()
+            : CustomCard(
+                margin: const EdgeInsets.all(20),
+                child: state.paymentMethods.isNotEmpty
+                    ? SelectableExpansionTileList(
+                        expansionTileList: state.paymentMethods
+                            .map(
+                              (paymentMethod) => SelectableExpansionTile(
+                                header: ListTile(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                  ),
+                                  horizontalTitleGap: 1,
+                                  leading: Radio(
+                                    value: paymentMethod,
+                                    groupValue: state.selectedPaymentMethod,
+                                    onChanged: null,
+                                  ),
+                                  title: Text(
+                                    paymentMethod.getValue(),
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                ),
+                                body: paymentMethod.isPaymentGateway
+                                    ? const _PaymentGateWayDescription()
+                                    : const SizedBox.shrink(),
+                                onPress: () {
+                                  context.read<NewPaymentBloc>().add(
+                                        NewPaymentEvent
+                                            .updatePaymentMethodSelected(
+                                          paymentMethodSelected: paymentMethod,
+                                        ),
+                                      );
+                                },
+                                expanded: true,
+                              ),
+                            )
+                            .toList(),
+                      )
+                    : const SizedBox.shrink(),
+              );
+      },
     );
   }
 }
@@ -202,60 +211,10 @@ class _PaymentGateWayDescription extends StatelessWidget {
   }
 }
 
-class _BankTransferDescription extends StatelessWidget {
-  const _BankTransferDescription({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-      decoration: const BoxDecoration(
-        color: ZPColors.inputBorderColor,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Account Information'.tr(),
-            style: Theme.of(context)
-                .textTheme
-                .labelMedium
-                ?.copyWith(color: ZPColors.primary),
-          ),
-          Text(
-            'SC Bank 461-10-012622 Account Holder : Zuellig Pharma Korea'.tr(),
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-          const SizedBox(height: 20),
-          Text(
-            'The sender must be the name of the representative/hospital.'.tr(),
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-          Text(
-            '(Ex.) Hong Gil-dong / Hong Gil-dong Internal Medicine Department'
-                .tr(),
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-          Text(
-            'Deposit confirmation may be delayed if it is not during banking hours'
-                .tr(),
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-          Text(
-            'Note: If payment is not received within 2 days of placing an order, the order will be automatically canceled.'
-                .tr(),
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-          const SizedBox(height: 20),
-        ],
-      ),
-    );
-  }
-}
-
 class _BulletedText extends StatelessWidget {
   final String text;
   final TextStyle? style;
+
   const _BulletedText(
     this.text, {
     Key? key,

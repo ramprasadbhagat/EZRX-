@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
@@ -136,7 +137,13 @@ class StatementAccountsPage extends StatelessWidget {
           ),
         );
     context.read<NewPaymentBloc>().add(
-          const NewPaymentEvent.initialized(),
+          NewPaymentEvent.initialized(
+            user: context.read<UserBloc>().state.user,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+          ),
         );
     context.router.pushNamed('payments/new_payment');
   }

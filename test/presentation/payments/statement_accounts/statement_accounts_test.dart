@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.d
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -421,7 +422,15 @@ void main() {
       await tester.pumpAndSettle();
       verify(
         () => mockNewPaymentBloc.add(
-          const NewPaymentEvent.initialized(),
+          NewPaymentEvent.initialized(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: salesOrg,
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'mock-customerCodeSoldTo',
+            ),
+            user: User.empty(),
+          ),
         ),
       ).called(1);
     });

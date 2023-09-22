@@ -20,6 +20,17 @@ class PaymentInvoiceInfoPdfDto with _$PaymentInvoiceInfoPdfDto {
     @JsonKey(name: 'customerName', defaultValue: '')
         required String customerName,
     @JsonKey(name: 'payer', defaultValue: '') required String payer,
+    @JsonKey(name: 'beneficiaryName', defaultValue: '')
+        required String beneficiaryName,
+    @JsonKey(name: 'bankName', defaultValue: '') required String bankName,
+    @JsonKey(name: 'branch', defaultValue: '') required String branch,
+    @JsonKey(name: 'bankCode', defaultValue: '') required String bankCode,
+    @JsonKey(name: 'bankAccount', defaultValue: '') required String bankAccount,
+    @JsonKey(name: 'hdbcSwiftCode', defaultValue: '')
+        required String hdbcSwiftCode,
+    @JsonKey(name: 'bankAddress', defaultValue: '') required String bankAddress,
+    @JsonKey(name: 'payNowUen', defaultValue: '') required String payNowUen,
+    @JsonKey(name: 'emailId', defaultValue: '') required String emailId,
     @JsonKey(name: 'qrCode', defaultValue: '') required String qrCode,
     @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
         required String paymentBatchAdditionalInfo,
@@ -43,6 +54,15 @@ class PaymentInvoiceInfoPdfDto with _$PaymentInvoiceInfoPdfDto {
       paymentMethod: paymentMethod,
       customerName: customerName,
       payer: payer,
+      beneficiaryName: beneficiaryName,
+      bankName: bankName,
+      branch: branch,
+      bankCode: bankCode,
+      bankAccount: bankAccount,
+      hdbcSwiftCode: hdbcSwiftCode,
+      bankAddress: bankAddress,
+      payNowUen: payNowUen,
+      emailId: emailId,
       qrCode: qrCode,
       paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
       paymentItems: paymentItems.map((e) => e.toDomain()).toList(),

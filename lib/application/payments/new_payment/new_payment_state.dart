@@ -13,6 +13,12 @@ class NewPaymentState with _$NewPaymentState {
     required bool isFetchingInvoiceInfoPdf,
     required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
     required bool isSavingInvoicePdf,
+    required bool isFetchingPaymentMethod,
+    required List<PaymentMethodValue> paymentMethods,
+    required PaymentMethodValue selectedPaymentMethod,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required User user,
   }) = _NewPaymentState;
 
   factory NewPaymentState.initial() => NewPaymentState(
@@ -24,6 +30,12 @@ class NewPaymentState with _$NewPaymentState {
         isFetchingInvoiceInfoPdf: false,
         paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
         isSavingInvoicePdf: false,
+        isFetchingPaymentMethod: false,
+        paymentMethods: <PaymentMethodValue>[],
+        selectedPaymentMethod: PaymentMethodValue(''),
+        salesOrganisation: SalesOrganisation.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        user: User.empty(),
       );
 
   double get amountTotal =>

@@ -42,6 +42,10 @@ class PaymentSavePdfButton extends StatelessWidget {
                                   .read<CustomerCodeBloc>()
                                   .state
                                   .shipToInfo,
+                              salesOrganisation: context
+                                  .read<SalesOrgBloc>()
+                                  .state
+                                  .salesOrganisation,
                             ),
                           ),
                         );

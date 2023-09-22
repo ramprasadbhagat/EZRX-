@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
@@ -140,7 +141,13 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
           ),
         );
     context.read<NewPaymentBloc>().add(
-          const NewPaymentEvent.initialized(),
+          NewPaymentEvent.initialized(
+            user: context.read<UserBloc>().state.user,
+            customerCodeInfo:
+                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            salesOrganisation:
+                context.read<SalesOrgBloc>().state.salesOrganisation,
+          ),
         );
     context.router.pushNamed('payments/new_payment');
   }

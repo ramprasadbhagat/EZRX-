@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.dart';
+import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
@@ -236,12 +237,40 @@ class NewPaymentRepository extends INewPaymentRepository {
         customerCode: customerCodeInfo.customerCodeSoldTo,
         salesOrg: salesOrganisation.salesOrg.getValue(),
         accountingDocExternalReference:
-            paymentInfo.subAccountingDocExternalReference,
+            paymentInfo.accountingDocExternalReference,
         paymentBatchAdditionalInfo: paymentInfo.paymentBatchAdditionalInfo,
         paymentId: paymentInfo.paymentID,
       );
 
       return Right(invoiceInfoPdf);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<PaymentMethodValue>>> fetchPaymentMethods({
+    required SalesOrganisation salesOrganisation,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.fetchPaymentMethods();
+
+        return Right(response);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final response = await remoteDataSource.fetchPaymentMethods(
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+      );
+
+      return Right(response);
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),
