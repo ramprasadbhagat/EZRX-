@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,10 @@ class InvoiceItemCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 Text(
-                  'Due on ${customerOpenItem.netDueDate.simpleDateString}',
+                  'Due on ${StringUtils.getDueDateString(
+                    customerOpenItem.netDueDate.dateTimeOrNull,
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                  )}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: customerOpenItem.status.displayDueDateColor,
                       ),

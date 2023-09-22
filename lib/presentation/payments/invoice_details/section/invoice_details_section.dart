@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InvoiceDetailsSection extends StatelessWidget {
   final CreditAndInvoiceItem invoiceItem;
@@ -49,7 +52,10 @@ class InvoiceDetailsSection extends StatelessWidget {
             keyFlex: 2,
             valueFlex: 3,
             keyText: 'Due on'.tr(),
-            valueText: invoiceItem.netDueDate.dateString,
+            valueText: StringUtils.getDueDateString(
+              invoiceItem.netDueDate.dateTimeOrNull,
+              context.read<SalesOrgBloc>().state.salesOrganisation,
+            ),
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
                 ),

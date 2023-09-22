@@ -1,4 +1,6 @@
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -77,4 +79,32 @@ class StringUtils {
 
     return '${salesOrgConfig.currency.code} ${formatter.format(price)}';
   }
+
+  static String _getDueDateFormat(String country) {
+    final dateTimeFormatMap = {
+      'TH': DateTimeFormatString.displayDateFormat,
+      //TODO: uncomment when covering correspond market's due date
+      // 'MY': DateTimeFormatString.displaySimpleDateFormat,
+      // 'PH': DateTimeFormatString.displaySimpleDateFormat,
+      // 'SG': DateTimeFormatString.displaySimpleDateFormat,
+      // 'ID': DateTimeFormatString.displaySimpleDateFormat,
+      // 'KH': DateTimeFormatString.displaySimpleDateFormat,
+      // 'KR': DateTimeFormatString.displaySimpleDateFormat,
+      // 'MM': DateTimeFormatString.displaySimpleDateFormat,
+      // 'TW': DateTimeFormatString.displaySimpleDateFormat,
+      // 'VN': DateTimeFormatString.displaySimpleDateFormat,
+    };
+
+    return dateTimeFormatMap[country] ??
+        DateTimeFormatString.displaySimpleDateFormat;
+  }
+
+  static String getDueDateString(
+    DateTime? dueDate,
+    SalesOrganisation salesOrganisation,
+  ) =>
+      dueDate == null
+          ? ''
+          : DateFormat(_getDueDateFormat(salesOrganisation.salesOrg.country))
+              .format(dueDate);
 }

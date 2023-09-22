@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dar
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
@@ -262,7 +263,10 @@ class _InvoiceItem extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(
-                    '${'Due on'.tr()} ${invoiceItem.netDueDate.simpleDateString}',
+                    '${'Due on'.tr()} ${StringUtils.getDueDateString(
+                      invoiceItem.netDueDate.dateTimeOrNull,
+                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                    )}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: invoiceItem
                               .invoiceProcessingStatus.displayDueDateColor,
