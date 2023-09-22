@@ -57,24 +57,19 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
 
           return;
         }
-        final previousSearchKey = e.searchValue;
-        final previousCustomerCodeState = state.customerCodeInfo;
-        final previousShipToInfo = state.shipToInfo;
         emit(
-          CustomerCodeState.initial().copyWith(
-            selectedSalesOrg: state.selectedSalesOrg,
-            hideCustomer: state.hideCustomer,
-            userInfo: state.userInfo,
-            searchKey: previousSearchKey,
-            customerCodeInfo: previousCustomerCodeState,
-            shipToInfo: previousShipToInfo,
-            isSearchActive: true,
+          state.copyWith(
             isFetching: true,
+            searchKey: e.searchValue,
+            isSearchActive: true,
+            canLoadMore: false,
+            customerCodeList: <CustomerCodeInfo>[],
+            apiFailureOrSuccessOption: none(),
           ),
         );
         final failureOrSuccess = await customerCodeRepository.getCustomerCode(
           salesOrganisation: state.selectedSalesOrg,
-          customerCodes: [previousSearchKey.getValue()],
+          customerCodes: [e.searchValue.getValue()],
           hideCustomer: state.hideCustomer,
           user: state.userInfo,
           pageSize: config.pageSize,
@@ -142,7 +137,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
 
       final customerCodeInfoList =
           failureOrSuccess.fold<List<CustomerCodeInfo>>(
-        (_) => [],
+        (_) => <CustomerCodeInfo>[],
         (customerCodeList) => customerCodeList,
       );
 
@@ -169,6 +164,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           customerCodeList: customerCodeInfoList,
           isFetching: false,
           isSearchActive: true,
+          canLoadMore: customerCodeInfoList.length >= config.pageSize,
           searchKey:
               SearchKey.search(customerCodeInfoList.first.customerCodeSoldTo),
           customerCodeInfo: customerCodeInfoList.first,
@@ -185,24 +181,15 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         // https://dev.azure.com/zuelligpharmadevops/eZRx%20Overall/_wiki/wikis/eZRx-Overall.wiki/3442/Enhance-customerInformationSearch-API
         // and
         // https://dev.azure.com/zuelligpharmadevops/eZRx%20Overall/_wiki/wikis/eZRx-Overall.wiki/3513/Enhance-customerInformationSearch-customerListForSalesRep
-        var canLoadMore = true;
         var finalCustomerCodeInfoList = <CustomerCodeInfo>[];
         final finalCustomerCodeInfo = state.selectedSalesOrg.customerInfos;
-        final lastSelectedCustomerCodeInfo = state.customerCodeInfo;
-        final lastSelectedShipToInfo = state.shipToInfo;
-        emit(
-          CustomerCodeState.initial().copyWith(
-            selectedSalesOrg: state.selectedSalesOrg,
-            hideCustomer: state.hideCustomer,
-            userInfo: state.userInfo,
-            shipToInfo: lastSelectedShipToInfo,
-            customerCodeInfo: lastSelectedCustomerCodeInfo,
-          ),
-        );
         emit(
           state.copyWith(
             isFetching: true,
+            isSearchActive: false,
             searchKey: SearchKey(e.searchText),
+            customerCodeList: <CustomerCodeInfo>[],
+            apiFailureOrSuccessOption: none(),
           ),
         );
 
@@ -230,9 +217,6 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
             );
           },
           (customerCodeList) {
-            if (customerCodeList.length < config.pageSize) {
-              canLoadMore = false;
-            }
             if (finalCustomerCodeInfo.length == 1) {
               finalCustomerCodeInfoList = customerCodeList;
             } else {
@@ -246,15 +230,15 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
                   customerCodeList: finalCustomerCodeInfoList,
                   apiFailureOrSuccessOption: none(),
                   isFetching: false,
-                  canLoadMore: canLoadMore,
+                  canLoadMore: customerCodeList.length >= config.pageSize,
                   customerCodeInfo:
-                      lastSelectedCustomerCodeInfo != CustomerCodeInfo.empty()
-                          ? lastSelectedCustomerCodeInfo
+                      state.customerCodeInfo != CustomerCodeInfo.empty()
+                          ? state.customerCodeInfo
                           : finalCustomerCodeInfoList.isNotEmpty
                               ? finalCustomerCodeInfoList.first
                               : CustomerCodeInfo.empty(),
-                  shipToInfo: lastSelectedShipToInfo != ShipToInfo.empty()
-                      ? lastSelectedShipToInfo
+                  shipToInfo: state.shipToInfo != ShipToInfo.empty()
+                      ? state.shipToInfo
                       : finalCustomerCodeInfoList.isNotEmpty
                           ? finalCustomerCodeInfoList.first.shipToInfos.first
                           : ShipToInfo.empty(),
