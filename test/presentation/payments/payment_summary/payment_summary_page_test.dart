@@ -72,6 +72,7 @@ void main() {
     RouteDataScope getWUT() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => authBlocMock,

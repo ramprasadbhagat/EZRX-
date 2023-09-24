@@ -71,7 +71,7 @@ class _PaymentDetailsSection extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  '${'PA'.tr()} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
+                  '${context.tr('PA')} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium
@@ -88,8 +88,8 @@ class _PaymentDetailsSection extends StatelessWidget {
           Column(
             children: [
               BalanceTextRow(
-                keyText: 'Payment method'.tr(),
-                valueText: paymentSummaryDetails.paymentMethod.tr(),
+                keyText: context.tr('Payment method'),
+                valueText: context.tr(paymentSummaryDetails.paymentMethod),
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -98,8 +98,8 @@ class _PaymentDetailsSection extends StatelessWidget {
                     ),
               ),
               BalanceTextRow(
-                keyText: 'PA created date'.tr(),
-                valueText: paymentSummaryDetails.createdDate.dateString.tr(),
+                keyText: context.tr('PA created date'),
+                valueText: paymentSummaryDetails.createdDate.dateString,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),
@@ -108,7 +108,7 @@ class _PaymentDetailsSection extends StatelessWidget {
                     ),
               ),
               BalanceTextRow(
-                keyText: 'Advice expiry'.tr(),
+                keyText: context.tr('Advice expiry'),
                 valueText: paymentSummaryDetails.adviceExpiryText,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
@@ -119,7 +119,7 @@ class _PaymentDetailsSection extends StatelessWidget {
                     ),
               ),
               BalanceTextRow(
-                keyText: 'Payment date'.tr(),
+                keyText: context.tr('Payment date'),
                 valueText: paymentSummaryDetails.paymentDate,
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
@@ -147,7 +147,7 @@ class _PaymentInfoSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
           child: Text(
-            'Payment details'.tr(),
+            context.tr('Payment details'),
             style: Theme.of(context).textTheme.labelLarge,
           ),
         ),
@@ -177,7 +177,7 @@ class _InvoiceSummarySection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Payment summary'.tr(),
+            context.tr('Payment summary'),
             style: Theme.of(context).textTheme.labelLarge,
           ),
           const SizedBox(
@@ -192,7 +192,7 @@ class _InvoiceSummarySection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Credits applied:'.tr(),
+                context.tr('Credits applied:'),
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               PriceComponent(
@@ -235,7 +235,7 @@ class _PriceWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          title.tr(),
+          context.tr(title),
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         PriceComponent(

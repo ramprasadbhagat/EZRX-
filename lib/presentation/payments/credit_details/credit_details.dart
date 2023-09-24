@@ -21,7 +21,7 @@ class CreditDetailsPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: false,
         elevation: 0,
-        title: const Text('Credit Details').tr(),
+        title: Text(context.tr('Credit Details')),
       ),
       body: BlocBuilder<CreditAndInvoiceDetailsBloc,
           CreditAndInvoiceDetailsState>(

@@ -86,6 +86,7 @@ void main() {
     return tester.pumpWidget(
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<CreditAndInvoiceDetailsBloc>(
             create: (context) => creditAndInvoiceDetailsBlocMock,
@@ -123,6 +124,7 @@ void main() {
       );
 
       await getWidget(tester);
+      await tester.pump();
       final loaderImage = find.byKey(
         WidgetKeys.loaderImage,
       );

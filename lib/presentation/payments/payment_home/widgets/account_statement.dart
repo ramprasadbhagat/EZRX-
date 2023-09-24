@@ -1,6 +1,5 @@
 part of '../payment_page.dart';
 
-
 class _AccountStatement extends StatelessWidget {
   const _AccountStatement({Key? key}) : super(key: key);
 
@@ -20,7 +19,7 @@ class _AccountStatement extends StatelessWidget {
             },
             (_) {
               CustomSnackBar(
-                messageText: 'File downloaded successfully'.tr(),
+                messageText: 'File downloaded successfully',
               ).show(context);
             },
           ),
@@ -50,7 +49,7 @@ class _AccountStatement extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Text(
-                        'No statements available'.tr(),
+                        context.tr('No statements available'),
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium

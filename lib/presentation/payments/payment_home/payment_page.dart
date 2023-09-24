@@ -47,7 +47,7 @@ class PaymentPage extends StatelessWidget {
       key: WidgetKeys.paymentsTabPage,
       appBar: AppBar(
         key: WidgetKeys.paymentHomeAppBar,
-        title: const Text('Payments').tr(),
+        title: Text(context.tr('Payments')),
         centerTitle: false,
       ),
       bottomNavigationBar: const _NewPaymentButton(),
@@ -141,7 +141,7 @@ class _NewPaymentButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () => _toNewPayment(context),
           child: Text(
-            'New Payment'.tr(),
+            context.tr('New Payment'),
           ),
         ),
       ),
@@ -302,7 +302,7 @@ class _ItemCardState extends State<_ItemCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          e.value.key.tr(),
+                          context.tr(e.value.key),
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         const SizedBox(height: 2),

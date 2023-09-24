@@ -1,6 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -109,44 +107,34 @@ void main() {
       });
 
       Widget getWUT() {
-        return EasyLocalization(
-          supportedLocales: const [
-            Locale('en'),
+        return WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
+          routeName: ReturnRootRoute.name,
+          usingLocalization: true,
+          providers: [
+            BlocProvider<AuthBloc>(
+              create: (context) => mockAuthBloc,
+            ),
+            BlocProvider<AnnouncementBloc>(
+              create: (context) => mockAnnouncementBloc,
+            ),
+            BlocProvider<CustomerCodeBloc>(
+              create: (context) => mockCustomerCodeBloc,
+            ),
+            BlocProvider<SalesOrgBloc>(
+              create: (context) => mockSalesOrgBloc,
+            ),
+            BlocProvider<UserBloc>(
+              create: (context) => mockUserBloc,
+            ),
+            BlocProvider<ReturnListByRequestBloc>(
+              create: (context) => mockReturnListByRequestBloc,
+            ),
+            BlocProvider<ReturnListByItemBloc>(
+              create: (context) => mockReturnListByItemBloc,
+            ),
           ],
-          path: 'assets/langs/langs.csv',
-          startLocale: const Locale('en'),
-          fallbackLocale: const Locale('en'),
-          saveLocale: true,
-          useOnlyLangCode: true,
-          assetLoader: CsvAssetLoader(),
-          child: WidgetUtils.getScopedWidget(
-            autoRouterMock: autoRouterMock,
-            routeName: ReturnRootRoute.name,
-            providers: [
-              BlocProvider<AuthBloc>(
-                create: (context) => mockAuthBloc,
-              ),
-              BlocProvider<AnnouncementBloc>(
-                create: (context) => mockAnnouncementBloc,
-              ),
-              BlocProvider<CustomerCodeBloc>(
-                create: (context) => mockCustomerCodeBloc,
-              ),
-              BlocProvider<SalesOrgBloc>(
-                create: (context) => mockSalesOrgBloc,
-              ),
-              BlocProvider<UserBloc>(
-                create: (context) => mockUserBloc,
-              ),
-              BlocProvider<ReturnListByRequestBloc>(
-                create: (context) => mockReturnListByRequestBloc,
-              ),
-              BlocProvider<ReturnListByItemBloc>(
-                create: (context) => mockReturnListByItemBloc,
-              ),
-            ],
-            child: const ReturnRoot(),
-          ),
+          child: const ReturnRoot(),
         );
       }
 

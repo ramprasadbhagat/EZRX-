@@ -27,7 +27,7 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
           children: <Widget>[
             AppBar(
               title: Text(
-                'Filter'.tr(),
+                context.tr('Filter'),
               ),
               automaticallyImplyLeading: false,
               centerTitle: false,
@@ -60,7 +60,7 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12.0),
                       child: Text(
-                        'Document date'.tr(),
+                        context.tr('Document date'),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
@@ -80,7 +80,7 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12.0),
                       child: Text(
-                        'Due date'.tr(),
+                        context.tr('Due date'),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
@@ -100,7 +100,7 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12.0, top: 20.0),
                       child: Text(
-                        'Amount range'.tr(),
+                        context.tr('Amount range'),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
@@ -120,14 +120,14 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                     (state.showErrorMessages &&
                             !state.filter.isAmountValueRangeValid)
                         ? ValueRangeError(
-                            valueName: 'Amount'.tr(),
+                            valueName: context.tr('Amount'),
                             isValid: state.filter.isAmountValueRangeValid,
                           )
                         : const SizedBox.shrink(),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12.0, top: 20.0),
                       child: Text(
-                        'Status'.tr(),
+                        context.tr('Status'),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
@@ -214,11 +214,13 @@ class ValueRangeError extends StatelessWidget {
         top: 8.0,
       ),
       child: Text(
-        isValid ? '' : 'Invalid $valueName range!'.tr(),
+        isValid
+            ? ''
+            : '${context.tr('Invalid')} $valueName ${context.tr('range')}!',
         style: Theme.of(context).textTheme.titleSmall?.apply(
               color: ZPColors.error,
             ),
-      ).tr(),
+      ),
     );
   }
 }
@@ -251,7 +253,7 @@ class _AmountValueToFilter extends StatelessWidget {
               FilteringTextInputFormatter.allow(_decimalOnlyRegx),
             ],
             decoration: InputDecoration(
-              labelText: 'Amount to'.tr(),
+              labelText: context.tr('Amount to'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -291,7 +293,7 @@ class _AmountValueFromFilter extends StatelessWidget {
               FilteringTextInputFormatter.allow(_decimalOnlyRegx),
             ],
             decoration: InputDecoration(
-              hintText: 'Amount from'.tr(),
+              hintText: context.tr('Amount from'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -539,7 +541,7 @@ class _ResetButton extends StatelessWidget {
               context.router.popForced();
             },
             child: Text(
-              'Reset'.tr(),
+              context.tr('Reset'),
               style: const TextStyle(color: ZPColors.primary),
             ),
           ),
@@ -575,7 +577,7 @@ class _ApplyButton extends StatelessWidget {
           }
         },
         child: Text(
-          'Apply'.tr(),
+          context.tr('Apply'),
           style: const TextStyle(color: ZPColors.white),
         ),
       ),

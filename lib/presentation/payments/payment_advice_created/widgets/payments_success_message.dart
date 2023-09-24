@@ -15,7 +15,7 @@ class _PaymentSuccessMessage extends StatelessWidget {
             size: MediaQuery.of(context).size.width * 0.2,
           ),
           Text(
-            '${'Your payment advice'.tr()} #${context.read<NewPaymentBloc>().state.paymentInvoiceInfoPdf.zzAdvice} ${'has been created, and our payment processor is coordinating with the bank to process your payment request.'.tr()}',
+            '${context.tr('Your payment advice')} #${context.read<NewPaymentBloc>().state.paymentInvoiceInfoPdf.zzAdvice} ${context.tr('has been created, and our payment processor is coordinating with the bank to process your payment request.')}',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),
@@ -24,7 +24,7 @@ class _PaymentSuccessMessage extends StatelessWidget {
             height: 8.0,
           ),
           Text(
-            '${'We’ll send a payment advice copy to'.tr()} ${context.read<UserBloc>().state.user.email.getOrDefaultValue('')} ${'shortly'.tr()}.',
+            '${context.tr('We’ll send a payment advice copy to')} ${context.read<UserBloc>().state.user.email.getOrDefaultValue('')} ${context.tr('shortly')}.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),

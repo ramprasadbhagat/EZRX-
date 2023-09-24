@@ -44,7 +44,7 @@ class CreditDetailsSection extends StatelessWidget {
           subtitle: Column(
             children: [
               BalanceTextRow(
-                keyText: 'Document date'.tr(),
+                keyText: context.tr('Document date'),
                 valueText: creditItem.postingDate.dateString,
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -56,7 +56,7 @@ class CreditDetailsSection extends StatelessWidget {
                         ),
               ),
               BalanceTextRow(
-                keyText: 'Document type'.tr(),
+                keyText: context.tr('Document type'),
                 valueText: creditItem.postingKeyName,
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -68,7 +68,7 @@ class CreditDetailsSection extends StatelessWidget {
                         ),
               ),
               BalanceTextRow(
-                keyText: 'Return number'.tr(),
+                keyText: context.tr('Return number'),
                 valueText: creditItem.invoiceReference.getOrDefaultValue('NA'),
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -80,7 +80,7 @@ class CreditDetailsSection extends StatelessWidget {
                         ),
               ),
               BalanceTextRow(
-                keyText: 'Details'.tr(),
+                keyText: context.tr('Details'),
                 valueText: creditItem.postingKeyName,
                 valueFlex: 1,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -107,7 +107,7 @@ class CreditDetailsSection extends StatelessWidget {
         ListTile(
           minVerticalPadding: 20.0,
           title: Text(
-            'Credit summary'.tr(),
+            context.tr('Credit summary'),
             style: Theme.of(context).textTheme.labelMedium,
           ),
           subtitle: Padding(
@@ -118,7 +118,7 @@ class CreditDetailsSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Credit total:'.tr(),
+                  context.tr('Credit total:'),
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 PriceComponent(

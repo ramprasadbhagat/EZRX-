@@ -79,6 +79,7 @@ void main() {
     return tester.pumpWidget(
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<SalesOrgBloc>(
             create: (context) => salesOrgBlocMock,

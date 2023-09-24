@@ -1,29 +1,30 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
-import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-part 'widgets/search_bar.dart';
-part 'widgets/filter_tune_icon.dart';
-part 'widgets/export.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
+import 'package:ezrxmobile/application/payments/all_credits/filter/all_credits_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+
+part 'package:ezrxmobile/presentation/payments/account_summary/widgets/export.dart';
+part 'package:ezrxmobile/presentation/payments/account_summary/widgets/search_bar.dart';
+part 'package:ezrxmobile/presentation/payments/account_summary/widgets/filter_tune_icon.dart';
 
 class AccountSummary extends StatelessWidget {
   const AccountSummary({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class AccountSummary extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Account Summary'.tr(),
+          context.tr('Account Summary'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         centerTitle: false,
@@ -57,11 +58,11 @@ class AccountSummary extends StatelessWidget {
                     tabs: [
                       Tab(
                         key: WidgetKeys.invoiceTab,
-                        text: 'Invoices'.tr(),
+                        text: context.tr('Invoices'),
                       ),
                       Tab(
                         key: WidgetKeys.creditsTab,
-                        text: 'Credits'.tr(),
+                        text: context.tr('Credits'),
                       ),
                     ],
                   ),

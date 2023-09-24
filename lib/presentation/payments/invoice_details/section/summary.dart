@@ -1,10 +1,10 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 
 class InvoiceSummary extends StatelessWidget {
   final CreditAndInvoiceItem invoiceItem;
@@ -25,7 +25,7 @@ class InvoiceSummary extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Total summary'.tr(),
+            context.tr('Total summary'),
             style: Theme.of(context).textTheme.labelMedium,
           ),
           const SizedBox(
@@ -35,7 +35,7 @@ class InvoiceSummary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${'Subtotal with tax'.tr()}:',
+                '${context.tr('Subtotal with tax')}:',
               ),
               PriceComponent(
                 salesOrgConfig: salesOrgConfigs,
@@ -54,7 +54,7 @@ class InvoiceSummary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${'Grand total'.tr()}:',
+                '${context.tr('Grand total')}:',
               ),
               PriceComponent(
                 salesOrgConfig: salesOrgConfigs,

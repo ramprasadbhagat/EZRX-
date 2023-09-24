@@ -45,14 +45,14 @@ class StatementAccountsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Statement of accounts'.tr(),
+          context.tr('Statement of accounts'),
         ),
         centerTitle: false,
       ),
       floatingActionButton: ScaleButton(
         key: WidgetKeys.soaNewpaymentButtonKey,
         icon: Icons.add,
-        label: 'New payment'.tr(),
+        label: context.tr('New payment'),
         onPress: () => _toNewPayment(context),
         scrollController: _scrollController,
       ),

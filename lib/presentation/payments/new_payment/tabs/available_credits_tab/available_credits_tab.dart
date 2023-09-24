@@ -57,7 +57,7 @@ class AvailableCreditsTab extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                'Available credits: '.tr(),
+                context.tr('Available credits: '),
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: ZPColors.primary,
                       fontWeight: FontWeight.bold,
@@ -100,8 +100,8 @@ class AvailableCreditsTab extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: ScrollList<CustomerOpenItem>(
-                        noRecordFoundWidget: NoRecordFound(
-                          title: 'No record found'.tr(),
+                        noRecordFoundWidget: const NoRecordFound(
+                          title: 'No record found',
                         ),
                         controller: ScrollController(),
                         onRefresh: () {

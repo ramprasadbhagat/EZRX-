@@ -22,7 +22,7 @@ class _PaymentSummaryDownloadButton extends StatelessWidget {
             },
             (_) {
               CustomSnackBar(
-                messageText: 'File downloaded successfully'.tr(),
+                messageText: 'File downloaded successfully',
               ).show(context);
             },
           ),

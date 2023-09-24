@@ -1,6 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -175,54 +173,44 @@ void main() {
   });
 
   Widget getWidget() {
-    return EasyLocalization(
-      supportedLocales: const [
-        Locale('en'),
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      usingLocalization: true,
+      routeName: NewPaymentPageRoute.name,
+      providers: [
+        BlocProvider<SoaBloc>(
+          create: (context) => soaBloc,
+        ),
+        BlocProvider<SalesOrgBloc>(
+          create: (context) => salesOrgBlocMock,
+        ),
+        BlocProvider<NewPaymentBloc>(
+          create: (context) => newPaymentBlocMock,
+        ),
+        BlocProvider<AnnouncementBloc>(
+          create: (context) => announcementBlocMock,
+        ),
+        BlocProvider<CustomerCodeBloc>(
+          create: (context) => customerCodeBlocMock,
+        ),
+        BlocProvider<PaymentInProgressBloc>(
+          create: (context) => paymentInProgressBloc,
+        ),
+        BlocProvider<AccountSummaryBloc>(
+          create: (context) => accountSummaryBlocMock,
+        ),
+        BlocProvider<AvailableCreditsBloc>(
+          create: (context) => availableCreditsBlocMock,
+        ),
+        BlocProvider<OutstandingInvoicesBloc>(
+          create: (context) => outstandingInvoicesBlocMock,
+        ),
+        BlocProvider<DownloadPaymentAttachmentsBloc>(
+          create: (context) => downloadPaymentAttachmentsBloc,
+        ),
+        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
       ],
-      path: 'assets/langs/langs.csv',
-      startLocale: const Locale('en'),
-      fallbackLocale: const Locale('en'),
-      saveLocale: true,
-      useOnlyLangCode: true,
-      assetLoader: CsvAssetLoader(),
-      child: WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        routeName: NewPaymentPageRoute.name,
-        providers: [
-          BlocProvider<SoaBloc>(
-            create: (context) => soaBloc,
-          ),
-          BlocProvider<SalesOrgBloc>(
-            create: (context) => salesOrgBlocMock,
-          ),
-          BlocProvider<NewPaymentBloc>(
-            create: (context) => newPaymentBlocMock,
-          ),
-          BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-          ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<PaymentInProgressBloc>(
-            create: (context) => paymentInProgressBloc,
-          ),
-          BlocProvider<AccountSummaryBloc>(
-            create: (context) => accountSummaryBlocMock,
-          ),
-          BlocProvider<AvailableCreditsBloc>(
-            create: (context) => availableCreditsBlocMock,
-          ),
-          BlocProvider<OutstandingInvoicesBloc>(
-            create: (context) => outstandingInvoicesBlocMock,
-          ),
-          BlocProvider<DownloadPaymentAttachmentsBloc>(
-            create: (context) => downloadPaymentAttachmentsBloc,
-          ),
-          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-        ],
-        child: const PaymentPage(),
-      ),
+      child: const PaymentPage(),
     );
   }
 

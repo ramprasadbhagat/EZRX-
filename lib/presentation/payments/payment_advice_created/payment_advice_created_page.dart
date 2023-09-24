@@ -32,7 +32,7 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
         elevation: 16,
         automaticallyImplyLeading: false,
         backgroundColor: ZPColors.white,
-        title: Text('Payment advice created'.tr()),
+        title: Text(context.tr('Payment advice created')),
         leading: IconButton(
           key: WidgetKeys.paymentAdviceCreatedPageBack,
           onPressed: () => Navigator.pop(context),

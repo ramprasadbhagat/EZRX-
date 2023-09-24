@@ -59,7 +59,7 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
       appBar: AppBar(
         key: WidgetKeys.paymentSummaryAppBar,
         title: Text(
-          'Payment Summary'.tr(),
+          context.tr('Payment Summary'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         centerTitle: false,
@@ -67,7 +67,7 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
       ),
       floatingActionButton: ScaleButton(
         icon: Icons.add,
-        label: 'New payment'.tr(),
+        label: 'New payment',
         onPress: () => _toNewPayment(context),
         scrollController: _scrollController,
       ),

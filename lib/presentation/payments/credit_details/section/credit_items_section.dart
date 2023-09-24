@@ -34,7 +34,7 @@ class CreditItemsSection extends StatelessWidget {
                 vertical: 10.0,
               ),
               child: Text(
-                '${'Return items'.tr()} (${context.read<CreditAndInvoiceDetailsBloc>().state.details.itemCount})',
+                '${context.tr('Return items')} (${context.read<CreditAndInvoiceDetailsBloc>().state.details.itemCount})',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.black,
                     ),
@@ -54,7 +54,7 @@ class CreditItemsSection extends StatelessWidget {
                 (e) {
                   return CommonTileItem(
                     headerText:
-                        '${'Batch'.tr()} ${e.batchNumber.getOrDefaultValue('')} (EXP:${e.expiryDate.dateString})',
+                        '${context.tr('Batch')} ${e.batchNumber.getOrDefaultValue('')} (EXP:${e.expiryDate.dateString})',
                     materialNumber: e.materialNumber,
                     label: removeLeadingZero(
                       e.materialNumber.getOrDefaultValue(''),
@@ -75,7 +75,7 @@ class CreditItemsSection extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${'Qty'.tr()}: ${e.billingQuantity.getOrDefaultValue(0)}',
+                          '${context.tr('Qty')}: ${e.billingQuantity.getOrDefaultValue(0)}',
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.black,

@@ -25,7 +25,7 @@ class InvoiceItemCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Invoice #${customerOpenItem.accountingDocument}',
+                '${context.tr('Invoice')} #${customerOpenItem.accountingDocument}',
                 style: Theme.of(context).textTheme.labelSmall,
               ),
               StatusLabel(
@@ -41,11 +41,11 @@ class InvoiceItemCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${'Order'.tr()} #${customerOpenItem.documentReferenceID}',
+                  '${context.tr('Order')} #${customerOpenItem.documentReferenceID}',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 Text(
-                  'Due on ${StringUtils.getDueDateString(
+                  '${context.tr('Due on')} ${StringUtils.getDueDateString(
                     customerOpenItem.netDueDate.dateTimeOrNull,
                     context.read<SalesOrgBloc>().state.salesOrganisation,
                   )}',

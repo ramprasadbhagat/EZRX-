@@ -148,6 +148,7 @@ void main() {
     RouteDataScope getWUT() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => mockAuthBloc,
@@ -189,16 +190,11 @@ void main() {
     }
 
     testWidgets('Body Test - loading', (tester) async {
-      final expectedStates = [
+      when(() => mockSoaBloc.state).thenReturn(
         SoaState.initial().copyWith(
           isFetching: true,
         ),
-      ];
-      whenListen(
-        mockSoaBloc,
-        Stream.fromIterable(expectedStates),
       );
-
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
@@ -225,7 +221,7 @@ void main() {
       );
 
       await tester.pumpWidget(getWUT());
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(
         find.byKey(WidgetKeys.customSnackBar),
@@ -316,13 +312,11 @@ void main() {
         (tester) async {
       when(() => mockSoaBloc.state).thenReturn(
         SoaState.initial().copyWith(
-          isFetching: true,
           soaList: fakeSoaList,
           appliedFilter: applyFilter,
         ),
       );
-      final expectedStatesForDownloadPaymentAttachments = [
-        DownloadPaymentAttachmentsState.initial(),
+      when(() => mockDownloadPaymentAttachmentsBloc.state).thenReturn(
         DownloadPaymentAttachmentsState.initial().copyWith(
           isDownloadInProgress: true,
           fileUrl: const DownloadPaymentAttachment(
@@ -330,14 +324,9 @@ void main() {
                 'ezrx_prod/uploads/MY_QA/20010030082707_0723_20230705_155346.pdf',
           ),
         ),
-      ];
-      whenListen(
-        mockDownloadPaymentAttachmentsBloc,
-        Stream.fromIterable(expectedStatesForDownloadPaymentAttachments),
       );
-
       await tester.pumpWidget(getWUT());
-      await tester.pump(const Duration(seconds: 1));
+      await tester.pump(const Duration(seconds: 2));
       final findSoaItem = find.byKey(WidgetKeys.genericKey(key: 'SoaItem#0'));
       expect(findSoaItem, findsOneWidget);
       final soaLoadingAnimationWidgetKey = find.byKey(
@@ -451,7 +440,7 @@ void main() {
         );
 
         await tester.pumpWidget(getWUT());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final filterIcon = find.byIcon(Icons.tune);
         expect(
@@ -492,7 +481,7 @@ void main() {
         );
 
         await tester.pumpWidget(getWUT());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final filterIcon = find.byIcon(Icons.tune);
         expect(
@@ -536,7 +525,7 @@ void main() {
         );
 
         await tester.pumpWidget(getWUT());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final filterIcon = find.byIcon(Icons.tune);
         expect(
@@ -586,7 +575,7 @@ void main() {
         );
 
         await tester.pumpWidget(getWUT());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final filterIcon = find.byIcon(Icons.tune);
         expect(
@@ -628,7 +617,7 @@ void main() {
         );
 
         await tester.pumpWidget(getWUT());
-        await tester.pump();
+        await tester.pumpAndSettle();
         final filterIcon = find.byIcon(Icons.tune);
         expect(
           filterIcon,

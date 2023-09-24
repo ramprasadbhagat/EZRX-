@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +68,7 @@ class _ScaleButtonState extends State<ScaleButton> {
                       Icon(widget.icon),
                       Padding(
                         padding: const EdgeInsets.only(left: 8),
-                        child: Text(widget.label),
+                        child: Text(context.tr(widget.label)),
                       ),
                     ],
                   )

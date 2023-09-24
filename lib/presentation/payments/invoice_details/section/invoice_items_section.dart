@@ -1,11 +1,11 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 
 class InvoiceItemsSection extends StatelessWidget {
   const InvoiceItemsSection({Key? key, required this.customerDocumentDetail})
@@ -19,7 +19,7 @@ class InvoiceItemsSection extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'No files found'.tr(),
+                context.tr('No files found'),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontStyle: FontStyle.italic,
                     ),
@@ -79,7 +79,7 @@ class _InvoiceItemDetail extends StatelessWidget {
 
     return CommonTileItem(
       headerText:
-          'Batch ${customerDocumentDetail.batchNumber.getOrDefaultValue('')} (EXP:${customerDocumentDetail.expiryDate.dateString})',
+          '${context.tr('Batch')} ${customerDocumentDetail.batchNumber.getOrDefaultValue('')} (EXP:${customerDocumentDetail.expiryDate.dateString})',
       materialNumber: customerDocumentDetail.materialNumber,
       label: customerDocumentDetail.materialNumber.displayMatNo,
       subtitle: '',
@@ -93,7 +93,7 @@ class _InvoiceItemDetail extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Qty: ${customerDocumentDetail.billingQuantity.getOrDefaultValue(0)}',
+            '${context.tr('Qty')}: ${customerDocumentDetail.billingQuantity.getOrDefaultValue(0)}',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: ZPColors.black,
                 ),

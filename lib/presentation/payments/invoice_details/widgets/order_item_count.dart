@@ -6,10 +6,10 @@ class _OrderItemCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-          padding: const EdgeInsets.only(left: 16, top: 16),
-          child: Text(
-        '${'Order items'.tr()} (${context.read<CreditAndInvoiceDetailsBloc>().state.details.length})',
-            style: Theme.of(context).textTheme.labelMedium,
+      padding: const EdgeInsets.only(left: 16, top: 16),
+      child: Text(
+        '${context.tr('Order items')} (${context.read<CreditAndInvoiceDetailsBloc>().state.details.length})',
+        style: Theme.of(context).textTheme.labelMedium,
       ),
     );
   }

@@ -41,7 +41,7 @@ class _SoaTile extends StatelessWidget {
                                 ),
                               ),
                   label: Text(
-                    'Download'.tr(),
+                    context.tr('Download'),
                     style: Theme.of(context)
                         .textTheme
                         .labelSmall

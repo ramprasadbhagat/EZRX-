@@ -39,7 +39,7 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
                       searchKey: SearchKey.search(value),
                     ),
                   ),
-          hintText: 'Search by Document/order number'.tr(),
+          hintText: context.tr('Search by Document/order number'),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
             // Only digits

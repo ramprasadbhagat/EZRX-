@@ -23,7 +23,7 @@ class AvailableCreditPaymentFilterPage extends StatelessWidget {
         children: [
           AppBar(
             title: Text(
-              'Filter'.tr(),
+              context.tr('Filter'),
             ),
             automaticallyImplyLeading: false,
             centerTitle: false,
@@ -69,7 +69,7 @@ class _PaymentFilter extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Document date'.tr(),
+                context.tr('Document date'),
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.neutralsBlack,
                     ),
@@ -94,7 +94,7 @@ class _PaymentFilter extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                '${'Amount range'.tr()} (${salesOrgConfig.currency.code})',
+                '${context.tr('Amount range')} (${salesOrgConfig.currency.code})',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.neutralsBlack,
                     ),
@@ -117,7 +117,7 @@ class _PaymentFilter extends StatelessWidget {
               ),
               (!state.filter.isAvailableCreditAmountValueRangeValid)
                   ? ValueRangeError(
-                      label: 'Invalid Amount range!'.tr(),
+                      label: '${(context.tr('Invalid Amount range'))}!',
                       isValid:
                           state.filter.isAvailableCreditAmountValueRangeValid,
                     )
@@ -181,7 +181,7 @@ class _FromDateFilter extends StatelessWidget {
               text: state.filter.documentDateFrom.dateString,
             ),
             decoration: InputDecoration(
-              hintText: 'Date from'.tr(),
+              hintText: context.tr('Date from'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -239,7 +239,7 @@ class _ToDateFilter extends StatelessWidget {
               text: state.filter.documentDateTo.dateString,
             ),
             decoration: InputDecoration(
-              hintText: 'Date to'.tr(),
+              hintText: context.tr('Date to'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -288,7 +288,8 @@ class _AmountValueFromFilter extends StatelessWidget {
               FilteringTextInputFormatter.allow(_decimalOnlyRegx),
             ],
             decoration: InputDecoration(
-              labelText: '${'From'.tr()} (${salesOrgConfig.currency.code})',
+              labelText:
+                  '${context.tr('From')} (${salesOrgConfig.currency.code})',
               labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -327,7 +328,8 @@ class _AmountValueToFilter extends StatelessWidget {
               FilteringTextInputFormatter.allow(_decimalOnlyRegx),
             ],
             decoration: InputDecoration(
-              labelText: '${'To'.tr()} (${salesOrgConfig.currency.code})',
+              labelText:
+                  '${context.tr('To')} (${salesOrgConfig.currency.code})',
               labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -359,7 +361,7 @@ class _ResetButton extends StatelessWidget {
           );
         },
         child: Text(
-          'Reset'.tr(),
+          context.tr('Reset'),
           style: const TextStyle(color: ZPColors.primary),
         ),
       ),
@@ -385,7 +387,7 @@ class _ApplyButton extends StatelessWidget {
             key: WidgetKeys.filterApplyButton,
             onPressed: isEnable ? () => _onPressed(context: context) : null,
             child: Text(
-              'Apply'.tr(),
+              context.tr('Apply'),
               style: const TextStyle(color: ZPColors.white),
             ),
           ),

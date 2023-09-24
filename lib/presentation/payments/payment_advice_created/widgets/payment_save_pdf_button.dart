@@ -14,7 +14,7 @@ class PaymentSavePdfButton extends StatelessWidget {
           if (!state.isSavingInvoicePdf) {
             state.failureOrSuccessOption.fold(
               () => CustomSnackBar(
-                messageText: 'Download Successful'.tr(),
+                messageText: 'Download Successful',
               ).show(context),
               (option) => option.fold(
                 (failure) => ErrorUtils.handleApiFailure(context, failure),
@@ -67,7 +67,7 @@ class PaymentSavePdfButton extends StatelessWidget {
               child: LoadingShimmer.withChild(
                 enabled: state.isSavingInvoicePdf,
                 child: Text(
-                  'Download payment advice'.tr(),
+                  context.tr('Download payment advice'),
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                         color: ZPColors.primary,
                       ),

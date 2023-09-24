@@ -39,7 +39,7 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
                       searchKey: SearchKey.search(value),
                     ),
                   ),
-          hintText: 'Search by document number'.tr(),
+          hintText: context.tr('Search by document number'),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
             // Only digits

@@ -56,12 +56,12 @@ class _PaymentOption extends StatelessWidget {
                   horizontal: 10.0,
                 ),
                 child: Text(
-                  paymentOptionData.label,
+                  context.tr(paymentOptionData.label),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: ZPColors.darkTeal,
                       ),
                   textAlign: TextAlign.center,
-                ).tr(),
+                ),
               ),
             ),
             Container(

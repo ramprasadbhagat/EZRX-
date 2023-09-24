@@ -25,7 +25,7 @@ class _PaymentSummaryGroupItem extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 20, top: 16),
           child: Text(
-            '${'Created on'.tr()} ${paymentSummaryGroup.createdDate.dateString}',
+            '${context.tr('Created on')} ${paymentSummaryGroup.createdDate.dateString}',
             style: Theme.of(context)
                 .textTheme
                 .labelSmall
@@ -88,7 +88,7 @@ class _PaymentSummaryItem extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                '${'PA'.tr()} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
+                '${context.tr('PA')} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),

@@ -20,7 +20,7 @@ class _Filter extends StatelessWidget {
               return Row(
                 children: [
                   Text(
-                    'Search results'.tr(),
+                    context.tr('Search results'),
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   Container(
@@ -95,7 +95,7 @@ class _FilterButton extends StatelessWidget {
             },
           ),
           Text(
-            'Filter by month'.tr(),
+            context.tr('Filter by month'),
             style: Theme.of(context)
                 .textTheme
                 .titleMedium

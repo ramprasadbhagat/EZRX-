@@ -35,20 +35,20 @@ class NewPaymentPage extends StatelessWidget {
         var title = '';
         switch (step) {
           case 1:
-            title = 'Select invoice(s) for payment'.tr();
+            title = context.tr('Select invoice(s) for payment');
             break;
           case 2:
-            title = 'Select credit (Optional)'.tr();
+            title = context.tr('Select credit (Optional)');
             break;
           default:
-            title = 'Select payment method'.tr();
+            title = context.tr('Select payment method');
         }
 
         return Scaffold(
           key: WidgetKeys.newPaymentPage,
           appBar: AppBar(
             centerTitle: false,
-            title: const Text('New payment').tr(),
+            title: Text(context.tr('New payment')),
             leading: _PreviousButton(
               tabController: tabController,
               step: step,
@@ -190,7 +190,7 @@ class NewPaymentPage extends StatelessWidget {
                                   data: StringUtils.displayNumber(
                                     state.selectedInvoices.amountTotal,
                                   ),
-                                  title: 'Amount payable'.tr(),
+                                  title: 'Amount payable',
                                   salesOrgConfig: configs,
                                 ),
                                 Padding(
@@ -207,7 +207,7 @@ class NewPaymentPage extends StatelessWidget {
                                   data: '(${StringUtils.displayNumber(
                                     state.selectedCredits.amountTotal,
                                   )})',
-                                  title: 'Credit applied'.tr(),
+                                  title: 'Credit applied',
                                   salesOrgConfig: configs,
                                 ),
                               ],
@@ -215,7 +215,7 @@ class NewPaymentPage extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  'Total: '.tr(),
+                                  context.tr('Total: '),
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleSmall!
@@ -253,7 +253,7 @@ class NewPaymentPage extends StatelessWidget {
                                     child: LoadingShimmer.withChild(
                                       enabled: state.isLoading,
                                       child: Text(
-                                        'Pay now'.tr(),
+                                        context.tr('Pay now'),
                                         style: const TextStyle(
                                           color: ZPColors.white,
                                         ),
@@ -334,7 +334,7 @@ class _NextButton extends StatelessWidget {
             }
           : null,
       child: Text(
-        'Next'.tr(),
+        context.tr('Next'),
         style: const TextStyle(
           color: ZPColors.white,
         ),
@@ -414,7 +414,7 @@ class _CheckAllWidget extends StatelessWidget {
         CheckboxListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(
-            'All'.tr(),
+            context.tr('All'),
             style: Theme.of(context).textTheme.titleSmall,
           ),
           controlAffinity: ListTileControlAffinity.leading,
@@ -460,7 +460,7 @@ class _PriceText extends StatelessWidget {
                   ),
             ),
             Text(
-              '$title (${salesOrgConfig.currency.code})',
+              '${context.tr(title)} (${salesOrgConfig.currency.code})',
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: ZPColors.darkGray,
                     fontSize: 11,

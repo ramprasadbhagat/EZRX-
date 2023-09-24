@@ -1,16 +1,16 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/presentation/core/address_info_section.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/widgets/selectable_expansion_tile.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/address_info_section.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/payments/new_payment/widgets/selectable_expansion_tile.dart';
 
 part 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/widgets/item_tile.dart';
 
@@ -32,7 +32,7 @@ class PaymentMethodTab extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            'Payment Info'.tr(),
+            context.tr('Payment Info'),
             style: Theme.of(context).textTheme.labelMedium,
           ),
         ),
@@ -147,39 +147,34 @@ class _PaymentGateWayDescription extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'You have selected Payment Gateway'.tr(),
+            context.tr('You have selected Payment Gateway'),
             style: Theme.of(context)
                 .textTheme
                 .labelMedium
                 ?.copyWith(color: ZPColors.primary),
           ),
           const SizedBox(height: 5),
-          _BulletedText(
-            'Click “Next” to continue'.tr(),
+          const _BulletedText(
+            'Click “Next” to continue',
+          ),
+          const _BulletedText(
+            'It might take few seconds for the payment gateway to open the new tab',
           ),
           _BulletedText(
-            'It might take few seconds for the payment gateway to open the new tab'
-                .tr(),
-          ),
-          _BulletedText(
-            'Please do not click on the back button or refresh the page while the payment gateway is loading'
-                .tr(),
+            'Please do not click on the back button or refresh the page while the payment gateway is loading',
             style: Theme.of(context)
                 .textTheme
                 .titleSmall
                 ?.copyWith(color: ZPColors.skyBlueColor),
           ),
-          _BulletedText(
-            'Payment advice you can download after the payment process or from the payment summary page'
-                .tr(),
+          const _BulletedText(
+            'Payment advice you can download after the payment process or from the payment summary page',
           ),
-          _BulletedText(
-            'Payment advice you can download after the payment process or from the payment summary page'
-                .tr(),
+          const _BulletedText(
+            'Payment advice you can download after the payment process or from the payment summary page',
           ),
-          _BulletedText(
-            'The payment advice copy will be sent to the email associated with this account'
-                .tr(),
+          const _BulletedText(
+            'The payment advice copy will be sent to the email associated with this account',
           ),
           const SizedBox(height: 20),
           RichText(
@@ -190,7 +185,7 @@ class _PaymentGateWayDescription extends StatelessWidget {
                   ?.copyWith(color: ZPColors.extraLightGrey4),
               children: <TextSpan>[
                 TextSpan(
-                  text: 'Disclaimer'.tr(),
+                  text: context.tr('Disclaimer'),
                   style: Theme.of(context)
                       .textTheme
                       .labelSmall
@@ -200,7 +195,7 @@ class _PaymentGateWayDescription extends StatelessWidget {
                   text: ' : ',
                 ),
                 TextSpan(
-                  text: 'ezrx does not store your card information'.tr(),
+                  text: context.tr('ezrx does not store your card information'),
                 ),
               ],
             ),
@@ -242,7 +237,7 @@ class _BulletedText extends StatelessWidget {
         const SizedBox(width: 5),
         Expanded(
           child: Text(
-            text,
+            context.tr(text),
             textAlign: TextAlign.left,
             softWrap: true,
             style: textStyle,

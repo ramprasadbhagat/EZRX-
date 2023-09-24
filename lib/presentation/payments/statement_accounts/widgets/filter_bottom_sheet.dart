@@ -11,7 +11,7 @@ class _SOAFilterBottomSheet extends StatelessWidget {
         children: <Widget>[
           AppBar(
             title: Text(
-              'Filter by month'.tr(),
+              context.tr('Filter by month'),
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             backgroundColor: ZPColors.transparent,
@@ -186,7 +186,7 @@ class _ResetButton extends StatelessWidget {
           ),
         ),
         child: Text(
-          'Reset'.tr(),
+          context.tr('Reset'),
           style: const TextStyle(color: ZPColors.primary),
         ),
       ),
@@ -206,7 +206,7 @@ class _ApplyButton extends StatelessWidget {
           context.read<SoaFilterBloc>().state.filter,
         ),
         child: Text(
-          'Apply'.tr(),
+          context.tr('Apply'),
           style: const TextStyle(color: ZPColors.white),
         ),
       ),

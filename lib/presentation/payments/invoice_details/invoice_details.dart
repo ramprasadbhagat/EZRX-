@@ -27,7 +27,7 @@ class InvoiceDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: const Text('Invoice details').tr(),
+        title: Text(context.tr('Invoice details')),
       ),
       bottomNavigationBar: BlocBuilder<CreditAndInvoiceDetailsBloc,
           CreditAndInvoiceDetailsState>(
@@ -51,7 +51,7 @@ class InvoiceDetailsPage extends StatelessWidget {
                     ),
                     child: OutlinedButton(
                       onPressed: () {},
-                      child: const Text('Download e-invoice').tr(),
+                      child: Text(context.tr('Download e-invoice')),
                     ),
                   ),
                 );

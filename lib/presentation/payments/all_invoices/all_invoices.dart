@@ -1,37 +1,34 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
-import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/no_record.dart';
-import 'package:ezrxmobile/presentation/core/scale_button.dart';
-import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/presentation/core/price_component.dart';
-
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/core/scale_button.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 
 class AllInvoicesPage extends StatefulWidget {
   const AllInvoicesPage({Key? key}) : super(key: key);
@@ -83,8 +80,8 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
                           key: WidgetKeys.loaderImage,
                         )
                       : ScrollList<CreditAndInvoiceGroup>(
-                          noRecordFoundWidget: NoRecordFound(
-                            title: 'No invoice found'.tr(),
+                          noRecordFoundWidget: const NoRecordFound(
+                            title: 'No invoice found',
                           ),
                           controller: _controller,
                           onRefresh: () => context.read<AllInvoicesBloc>().add(
@@ -119,7 +116,7 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
       ),
       floatingActionButton: ScaleButton(
         icon: Icons.add,
-        label: 'New payment'.tr(),
+        label: context.tr('New payment'),
         onPress: () => _toNewPayment(context),
         scrollController: _controller,
       ),
@@ -188,7 +185,7 @@ class _InvoiceGroup extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
-                  '${'Created on'.tr()} ${data.dueDate.dateString}',
+                  '${context.tr('Created on')} ${data.dueDate.dateString}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkerGrey,
                       ),
@@ -243,7 +240,7 @@ class _InvoiceItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${'Invoice'.tr()} #${invoiceItem.searchKey}',
+                  '${context.tr('Invoice')} #${invoiceItem.searchKey}',
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
                 StatusLabel(
@@ -259,11 +256,11 @@ class _InvoiceItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${'Order'.tr()} #${invoiceItem.orderId.displayNAIfEmpty}',
+                    '${context.tr('Order')} #${invoiceItem.orderId.displayNAIfEmpty}',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(
-                    '${'Due on'.tr()} ${StringUtils.getDueDateString(
+                    '${context.tr('Due on')} ${StringUtils.getDueDateString(
                       invoiceItem.netDueDate.dateTimeOrNull,
                       context.read<SalesOrgBloc>().state.salesOrganisation,
                     )}',

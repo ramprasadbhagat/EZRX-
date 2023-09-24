@@ -58,7 +58,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                'Outstanding: '.tr(),
+                context.tr('Outstanding: '),
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: ZPColors.primary,
                       fontWeight: FontWeight.bold,
@@ -69,8 +69,9 @@ class OutstandingInvoicesTab extends StatelessWidget {
                 price: context
                     .read<AccountSummaryBloc>()
                     .state
-                    .outstandingBalance.amount.getOrDefaultValue('0')
-                    ,
+                    .outstandingBalance
+                    .amount
+                    .getOrDefaultValue('0'),
               ),
             ],
           ),
@@ -100,8 +101,8 @@ class OutstandingInvoicesTab extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: ScrollList<CustomerOpenItem>(
-                        noRecordFoundWidget: NoRecordFound(
-                          title: 'No record found'.tr(),
+                        noRecordFoundWidget: const NoRecordFound(
+                          title: 'No record found',
                         ),
                         controller: ScrollController(),
                         onRefresh: () {

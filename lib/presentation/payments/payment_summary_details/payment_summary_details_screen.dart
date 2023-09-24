@@ -35,7 +35,7 @@ class _PaymentSummaryDetailsPageState extends State<PaymentSummaryDetailsPage> {
       key: scaffoldKey,
       appBar: AppBar(
         title: Text(
-          'Payment details'.tr(),
+          context.tr('Payment details'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         centerTitle: false,
@@ -75,12 +75,12 @@ class _PaymentSummaryDetailsPageState extends State<PaymentSummaryDetailsPage> {
                               ),
                             ),
                             child: Text(
-                              'Delete advice'.tr(),
+                              context.tr('Delete advice'),
                               style: Theme.of(context)
                                   .textTheme
                                   .labelMedium
                                   ?.copyWith(color: ZPColors.red),
-                            ).tr(),
+                            ),
                             onPressed: () {},
                           ),
                         ),
@@ -98,7 +98,7 @@ class _PaymentSummaryDetailsPageState extends State<PaymentSummaryDetailsPage> {
                             ),
                           ),
                           child: Text(
-                            'Download advice'.tr(),
+                            context.tr('Download advice'),
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium
@@ -139,8 +139,8 @@ class _PaymentSummaryDetailsPageState extends State<PaymentSummaryDetailsPage> {
                     ),
                   )
                 : state.paymentItemList.isEmpty
-                    ? NoRecordFound(
-                        title: 'No Payment Details Found'.tr(),
+                    ? const NoRecordFound(
+                        title: 'No Payment Details Found',
                       )
                     : ListView(
                         children: [

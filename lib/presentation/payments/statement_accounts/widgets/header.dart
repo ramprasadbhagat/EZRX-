@@ -27,7 +27,7 @@ class _Header extends StatelessWidget {
               RichText(
                 key: WidgetKeys.soaHeaderCustomerCodeKey,
                 text: TextSpan(
-                  text: 'Customer Code : '.tr(),
+                  text: context.tr('Customer Code : '),
                   style: Theme.of(context)
                       .textTheme
                       .labelSmall
