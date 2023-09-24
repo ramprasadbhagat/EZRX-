@@ -11,7 +11,6 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/add_to_cart/add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price_detail/material_price_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
@@ -87,10 +86,6 @@ class AdditionalDetailsBlocMock
     extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
     implements AdditionalDetailsBloc {}
 
-class MockMaterialPriceDetailBloc
-    extends MockBloc<MaterialPriceDetailEvent, MaterialPriceDetailState>
-    implements MaterialPriceDetailBloc {}
-
 class MockDownloadAttachmentBloc
     extends MockBloc<PoAttachmentEvent, PoAttachmentState>
     implements PoAttachmentBloc {}
@@ -149,7 +144,6 @@ void main() {
 
   late OrderHistoryDetails orderHistoryDetails;
   late EligibilityBlocMock eligibilityBlocMock;
-  late MaterialPriceDetailBloc materialPriceDetailBlocMock;
   late PoAttachmentBloc downloadAttachmentBlocMock;
   late OrderHistory orderHistory;
   late MaterialPriceBlocMock materialPriceBlocMock;
@@ -201,7 +195,6 @@ void main() {
     setUp(() {
       customerCodeBlocMock = CustomerCodeBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
-      materialPriceDetailBlocMock = MockMaterialPriceDetailBloc();
       downloadAttachmentBlocMock = MockDownloadAttachmentBloc();
       materialPriceBlocMock = MaterialPriceBlocMock();
       addToCartBlocMock = AddToCartBlocMock();
@@ -245,8 +238,6 @@ void main() {
           ),
         ),
       );
-      when(() => materialPriceDetailBlocMock.state)
-          .thenReturn(MaterialPriceDetailState.initial());
       when(() => downloadAttachmentBlocMock.state)
           .thenReturn(PoAttachmentState.initial());
       when(() => materialPriceBlocMock.state)
@@ -285,9 +276,6 @@ void main() {
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<EligibilityBloc>(
             create: ((context) => eligibilityBlocMock),
-          ),
-          BlocProvider<MaterialPriceDetailBloc>(
-            create: (context) => materialPriceDetailBlocMock,
           ),
           BlocProvider<PoAttachmentBloc>(
             create: (context) => downloadAttachmentBlocMock,
@@ -630,11 +618,7 @@ void main() {
           isLoading: false,
         ),
       );
-      when(() => materialPriceDetailBlocMock.state).thenReturn(
-        MaterialPriceDetailState.initial().copyWith(
-          isFetching: false,
-        ),
-      );
+
       await tester.pumpWidget(getWUT());
       await tester.pump();
       final reorder = find.text('Reorder');
