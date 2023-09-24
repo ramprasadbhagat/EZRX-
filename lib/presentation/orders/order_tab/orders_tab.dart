@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
-import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
@@ -16,8 +15,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-part 'widgets/orders_tab_filter.dart';
-part 'widgets/orders_tab_search_bar.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/widgets/orders_tab_filter.dart';
+part 'package:ezrxmobile/presentation/orders/order_tab/widgets/orders_tab_search_bar.dart';
 
 class OrdersTab extends StatelessWidget {
   const OrdersTab({Key? key}) : super(key: key);

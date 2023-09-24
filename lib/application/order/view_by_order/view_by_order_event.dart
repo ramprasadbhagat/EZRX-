@@ -14,8 +14,5 @@ class ViewByOrderEvent with _$ViewByOrderEvent {
     required ViewByOrdersFilter filter,
     required SearchKey searchKey,
   }) = _Fetch;
-  const factory ViewByOrderEvent.autoSearchProduct({
-    required SearchKey searchKey,
-  }) = _AutoSearchProduct;
   const factory ViewByOrderEvent.loadMore() = _LoadMore;
 }

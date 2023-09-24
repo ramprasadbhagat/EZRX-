@@ -28,7 +28,6 @@ mixin _$ViewByOrderEvent {
         initialized,
     required TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)
         fetch,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function() loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,7 +42,6 @@ mixin _$ViewByOrderEvent {
             String sortDirection)?
         initialized,
     TResult? Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function()? loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -58,7 +56,6 @@ mixin _$ViewByOrderEvent {
             String sortDirection)?
         initialized,
     TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) =>
@@ -67,7 +64,6 @@ mixin _$ViewByOrderEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_LoadMore value) loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -75,7 +71,6 @@ mixin _$ViewByOrderEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_LoadMore value)? loadMore,
   }) =>
       throw _privateConstructorUsedError;
@@ -83,7 +78,6 @@ mixin _$ViewByOrderEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) =>
@@ -287,7 +281,6 @@ class _$_Initialized implements _Initialized {
         initialized,
     required TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)
         fetch,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function() loadMore,
   }) {
     return initialized(salesOrganisation, salesOrgConfigs, customerCodeInfo,
@@ -306,7 +299,6 @@ class _$_Initialized implements _Initialized {
             String sortDirection)?
         initialized,
     TResult? Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function()? loadMore,
   }) {
     return initialized?.call(salesOrganisation, salesOrgConfigs,
@@ -325,7 +317,6 @@ class _$_Initialized implements _Initialized {
             String sortDirection)?
         initialized,
     TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) {
@@ -341,7 +332,6 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_LoadMore value) loadMore,
   }) {
     return initialized(this);
@@ -352,7 +342,6 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_LoadMore value)? loadMore,
   }) {
     return initialized?.call(this);
@@ -363,7 +352,6 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) {
@@ -485,7 +473,6 @@ class _$_Fetch implements _Fetch {
         initialized,
     required TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)
         fetch,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function() loadMore,
   }) {
     return fetch(filter, searchKey);
@@ -503,7 +490,6 @@ class _$_Fetch implements _Fetch {
             String sortDirection)?
         initialized,
     TResult? Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function()? loadMore,
   }) {
     return fetch?.call(filter, searchKey);
@@ -521,7 +507,6 @@ class _$_Fetch implements _Fetch {
             String sortDirection)?
         initialized,
     TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) {
@@ -536,7 +521,6 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_LoadMore value) loadMore,
   }) {
     return fetch(this);
@@ -547,7 +531,6 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_LoadMore value)? loadMore,
   }) {
     return fetch?.call(this);
@@ -558,7 +541,6 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) {
@@ -578,176 +560,6 @@ abstract class _Fetch implements ViewByOrderEvent {
   SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_AutoSearchProductCopyWith<$Res> {
-  factory _$$_AutoSearchProductCopyWith(_$_AutoSearchProduct value,
-          $Res Function(_$_AutoSearchProduct) then) =
-      __$$_AutoSearchProductCopyWithImpl<$Res>;
-  @useResult
-  $Res call({SearchKey searchKey});
-}
-
-/// @nodoc
-class __$$_AutoSearchProductCopyWithImpl<$Res>
-    extends _$ViewByOrderEventCopyWithImpl<$Res, _$_AutoSearchProduct>
-    implements _$$_AutoSearchProductCopyWith<$Res> {
-  __$$_AutoSearchProductCopyWithImpl(
-      _$_AutoSearchProduct _value, $Res Function(_$_AutoSearchProduct) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? searchKey = null,
-  }) {
-    return _then(_$_AutoSearchProduct(
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_AutoSearchProduct implements _AutoSearchProduct {
-  const _$_AutoSearchProduct({required this.searchKey});
-
-  @override
-  final SearchKey searchKey;
-
-  @override
-  String toString() {
-    return 'ViewByOrderEvent.autoSearchProduct(searchKey: $searchKey)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_AutoSearchProduct &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, searchKey);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
-      __$$_AutoSearchProductCopyWithImpl<_$_AutoSearchProduct>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            String sortDirection)
-        initialized,
-    required TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)
-        fetch,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
-    required TResult Function() loadMore,
-  }) {
-    return autoSearchProduct(searchKey);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            String sortDirection)?
-        initialized,
-    TResult? Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
-    TResult? Function()? loadMore,
-  }) {
-    return autoSearchProduct?.call(searchKey);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            SalesOrganisationConfigs salesOrgConfigs,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user,
-            String sortDirection)?
-        initialized,
-    TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
-    TResult Function()? loadMore,
-    required TResult orElse(),
-  }) {
-    if (autoSearchProduct != null) {
-      return autoSearchProduct(searchKey);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
-    required TResult Function(_LoadMore value) loadMore,
-  }) {
-    return autoSearchProduct(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
-    TResult? Function(_LoadMore value)? loadMore,
-  }) {
-    return autoSearchProduct?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
-    TResult Function(_LoadMore value)? loadMore,
-    required TResult orElse(),
-  }) {
-    if (autoSearchProduct != null) {
-      return autoSearchProduct(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AutoSearchProduct implements ViewByOrderEvent {
-  const factory _AutoSearchProduct({required final SearchKey searchKey}) =
-      _$_AutoSearchProduct;
-
-  SearchKey get searchKey;
-  @JsonKey(ignore: true)
-  _$$_AutoSearchProductCopyWith<_$_AutoSearchProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -799,7 +611,6 @@ class _$_LoadMore implements _LoadMore {
         initialized,
     required TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)
         fetch,
-    required TResult Function(SearchKey searchKey) autoSearchProduct,
     required TResult Function() loadMore,
   }) {
     return loadMore();
@@ -817,7 +628,6 @@ class _$_LoadMore implements _LoadMore {
             String sortDirection)?
         initialized,
     TResult? Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
-    TResult? Function(SearchKey searchKey)? autoSearchProduct,
     TResult? Function()? loadMore,
   }) {
     return loadMore?.call();
@@ -835,7 +645,6 @@ class _$_LoadMore implements _LoadMore {
             String sortDirection)?
         initialized,
     TResult Function(ViewByOrdersFilter filter, SearchKey searchKey)? fetch,
-    TResult Function(SearchKey searchKey)? autoSearchProduct,
     TResult Function()? loadMore,
     required TResult orElse(),
   }) {
@@ -850,7 +659,6 @@ class _$_LoadMore implements _LoadMore {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AutoSearchProduct value) autoSearchProduct,
     required TResult Function(_LoadMore value) loadMore,
   }) {
     return loadMore(this);
@@ -861,7 +669,6 @@ class _$_LoadMore implements _LoadMore {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult? Function(_LoadMore value)? loadMore,
   }) {
     return loadMore?.call(this);
@@ -872,7 +679,6 @@ class _$_LoadMore implements _LoadMore {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_AutoSearchProduct value)? autoSearchProduct,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
   }) {

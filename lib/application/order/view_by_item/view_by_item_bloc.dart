@@ -49,27 +49,11 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
         );
       },
     );
-    on<_AutoSearchProduct>(
-      (e, emit) async {
-        if (e.searchKey == state.searchKey) return;
-        if (e.searchKey.validateNotEmpty) {
-          add(
-            _Fetch(
-              viewByItemFilter: state.appliedFilter,
-              searchKey: e.searchKey,
-            ),
-          );
-        } else {
-          if (emit.isDone) return;
-          emit(state.copyWith(searchKey: e.searchKey));
-        }
-      },
-    );
     on<_Fetch>(
       (e, emit) async {
-        if (e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) {
-          return;
-        }
+        if ((e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) ||
+            !e.searchKey.isValid()) return;
+
         emit(
           state.copyWith(
             isFetching: true,

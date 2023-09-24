@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
@@ -25,9 +23,6 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
   final IViewByOrderRepository viewByOrderRepository;
   final Config config;
 
-  // Define a Timer to manage the debounce
-  Timer? _debounceTimer;
-
   ViewByOrderBloc({required this.viewByOrderRepository, required this.config})
       : super(ViewByOrderState.initial()) {
     on<_Initialized>((event, emit) {
@@ -49,34 +44,10 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
         ),
       );
     });
-    on<_AutoSearchProduct>(
-      (e, emit) async {
-        // Cancel any existing timer (if it exists)
-        _debounceTimer?.cancel();
-
-        // Create a new timer for the debounce
-        _debounceTimer =
-            Timer(Duration(milliseconds: config.autoSearchTimeout), () {
-          // Call the actual search logic for auto search
-          if (e.searchKey == state.searchKey) return;
-          if (e.searchKey.validateNotEmpty) {
-            add(
-              _Fetch(
-                filter: state.appliedFilter,
-                searchKey: e.searchKey,
-              ),
-            );
-          } else {
-            if (emit.isDone) return;
-            emit(state.copyWith(searchKey: e.searchKey));
-          }
-        });
-      },
-    );
     on<_Fetch>(
       (e, emit) async {
-        // Cancel the debounce timer (if it exists)
-        _debounceTimer?.cancel();
+        if ((e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) ||
+            !e.searchKey.isValid()) return;
 
         emit(
           state.copyWith(
@@ -163,13 +134,5 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
         );
       },
     );
-  }
-
-  @override
-  Future<void> close() {
-    // Dispose of the timer when BLoC is closed
-    _debounceTimer?.cancel();
-
-    return super.close();
   }
 }
