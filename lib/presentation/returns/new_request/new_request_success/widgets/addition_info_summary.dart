@@ -22,11 +22,36 @@ class _AdditionInfoSummary extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    '${'Return'.tr()} #${state.returnRequestId}',
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: ZPColors.white,
+                  RichText(
+                    text: TextSpan(
+                      text: '${context.tr('Return')} ',
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                      children: [
+                        TextSpan(
+                          text: '#${state.returnRequestId}',
+                          style:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    color: ZPColors.white,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              context.read<ReturnSummaryDetailsBloc>().add(
+                                    ReturnSummaryDetailsEvent.fetch(
+                                      returnId: ReturnRequestsId(
+                                        requestId: state.returnRequestId,
+                                      ),
+                                    ),
+                                  );
+                              context.router.push(
+                                const ReturnRequestSummaryByItemDetailsRoute(),
+                              );
+                            },
                         ),
+                      ],
+                    ),
                   ),
                   StatusLabel(
                     status: StatusType('Pending review'),

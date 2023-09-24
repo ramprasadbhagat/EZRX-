@@ -57,10 +57,12 @@ class _ReturnRequestSuccessMessage extends StatelessWidget {
                     TextSpan(
                       text: 'Returns'.tr(),
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: ZPColors.black,
+                            color: ZPColors.extraDarkGreen,
                           ),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () {},
+                        ..onTap = () {
+                          context.router.pop();
+                        },
                     ),
                   ],
                 ),

@@ -25,7 +25,9 @@ class ReturnSummaryItemSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: ReturnItemSection(requestInformation: requestInformation),
+      child: requestInformation != ReturnRequestInformation.empty()
+          ? ReturnItemSection(requestInformation: requestInformation)
+          : const SizedBox.shrink(),
     );
   }
 }
