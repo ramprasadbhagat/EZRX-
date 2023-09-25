@@ -16,18 +16,15 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
-//import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../utils/widget_utils.dart';
-
-//import '../../../utils/widget_utils.dart';
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
@@ -70,7 +67,7 @@ void main() {
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-      locator.registerLazySingleton(() => AppRouter());
+      locator.registerLazySingleton(() => AutoRouterMock());
       locator.registerLazySingleton(
         () => MixpanelService(config: locator<Config>()),
       );
@@ -79,7 +76,7 @@ void main() {
   setUp(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      autoRouterMock = locator<AppRouter>();
+      autoRouterMock = locator<AutoRouterMock>();
       mockSalesOrgBloc = MockSalesOrgBloc();
       customerCodeBlocMock = CustomerCodeBlocMock();
       authBlocMock = AuthBlocMock();
@@ -103,6 +100,7 @@ void main() {
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial(),
       );
+      when(() => autoRouterMock.currentPath).thenReturn('fake-path');
     },
   );
 
@@ -159,6 +157,36 @@ void main() {
       final paymentTermWidget =
           find.byKey(WidgetKeys.balanceTextRow('Payment term', 'NA'));
       expect(paymentTermWidget, findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'Order History navigation check',
+    (tester) async {
+      when(() => autoRouterMock.navigateNamed('main/orders_tab'))
+          .thenAnswer((invocation) => Future(() => null));
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial().copyWith(
+          isConfirming: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            invoiceNumber: 'fake-number',
+            orderHistoryDetailsPaymentTerm:
+                OrderHistoryDetailsPaymentTerm.empty().copyWith(
+              paymentTermCode: PaymentTermCode(''),
+              paymentTermDescription: PaymentTermDescription(''),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      final finder = find.byWidgetPredicate(
+        (widget) => widget is RichText && tapTextSpan(widget, 'Orders'),
+      );
+      await tester.pumpAndSettle();
+      expect(finder, findsOneWidget);
+      verify(() => autoRouterMock.navigateNamed('main/orders_tab')).called(1);
+      await tester.pumpAndSettle();
     },
   );
 
@@ -234,4 +262,22 @@ void main() {
   // );
   // },
   //);
+}
+
+bool findTextAndTap(InlineSpan visitor, String text) {
+  if (visitor is TextSpan && visitor.text == text) {
+    (visitor.recognizer as TapGestureRecognizer).onTap!();
+
+    return false;
+  }
+
+  return true;
+}
+
+bool tapTextSpan(RichText richText, String text) {
+  final isTapped = !richText.text.visitChildren(
+    (visitor) => findTextAndTap(visitor, text),
+  );
+
+  return isTapped;
 }

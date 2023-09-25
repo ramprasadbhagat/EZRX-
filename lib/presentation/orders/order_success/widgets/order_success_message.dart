@@ -58,10 +58,8 @@ class _OrderSuccessMessage extends StatelessWidget {
                           color: ZPColors.black,
                         ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        context.router.popUntilRouteWithPath('main');
-                        context.router.pushNamed('main/orders_tab');
-                      },
+                      ..onTap =
+                          () => context.router.navigateNamed('main/orders_tab'),
                   ),
                 ],
               ),
