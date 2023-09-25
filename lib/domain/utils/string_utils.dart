@@ -83,10 +83,10 @@ class StringUtils {
   static String _getDueDateFormat(String country) {
     final dateTimeFormatMap = {
       'TH': DateTimeFormatString.displayDateFormat,
+      'SG': DateTimeFormatString.displayDateFormat,
       //TODO: uncomment when covering correspond market's due date
       // 'MY': DateTimeFormatString.displaySimpleDateFormat,
       // 'PH': DateTimeFormatString.displaySimpleDateFormat,
-      // 'SG': DateTimeFormatString.displaySimpleDateFormat,
       // 'ID': DateTimeFormatString.displaySimpleDateFormat,
       // 'KH': DateTimeFormatString.displaySimpleDateFormat,
       // 'KR': DateTimeFormatString.displaySimpleDateFormat,
