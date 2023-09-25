@@ -627,6 +627,11 @@ class PriceAggregate with _$PriceAggregate {
           .toList(),
     ];
   }
+
+  bool get invalidPrice =>
+      price.finalPrice.isEmpty ||
+      materialInfo.hidePrice ||
+      materialInfo.isFOCMaterial;
 }
 
 enum PriceType {

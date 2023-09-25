@@ -2447,6 +2447,173 @@ void main() {
           findsOneWidget,
         );
       });
+
+      testWidgets(
+        'Display cart page price message when material price is zero',
+        (tester) async {
+          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+            materialWithoutPrice: true,
+          );
+
+          final cartProducts = <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('123456789'),
+                quantity: MaterialQty(1),
+                taxClassification:
+                    MaterialTaxClassification('Product : Full Tax'),
+                type: MaterialInfoType('material'),
+              ),
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(0),
+              ),
+            ),
+          ];
+          final cartState = CartState.initial().copyWith(
+            cartProducts: cartProducts,
+          );
+
+          final orderEligibilityState =
+              OrderEligibilityState.initial().copyWith(
+            configs: salesOrgConfig,
+            cartItems: cartProducts,
+          );
+
+          when(() => cartBloc.state).thenReturn(
+            cartState,
+          );
+
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            orderEligibilityState,
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final checkoutButton =
+              find.widgetWithText(ElevatedButton, 'Check out');
+
+          final priceMessageWidgetFinder =
+              find.byKey(WidgetKeys.cartPagePriceMessageWidget);
+          final priceMessageFinder = find.text(
+            'Price is not available for at least one item. Grand total reflected may not be accurate.'
+                .tr(),
+          );
+          expect(priceMessageWidgetFinder, findsOneWidget);
+          expect(priceMessageFinder, findsOneWidget);
+          expect(checkoutButton, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Display cart page price message for hide price material',
+        (tester) async {
+          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+            materialWithoutPrice: true,
+          );
+          final cartProducts = <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('123456789'),
+                quantity: MaterialQty(1),
+                taxClassification:
+                    MaterialTaxClassification('Product : Full Tax'),
+                type: MaterialInfoType('material'),
+                hidePrice: true,
+              ),
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(354.60),
+              ),
+            ),
+          ];
+          final cartState = CartState.initial().copyWith(
+            cartProducts: cartProducts,
+          );
+
+          final orderEligibilityState =
+              OrderEligibilityState.initial().copyWith(
+            configs: salesOrgConfig,
+            cartItems: cartProducts,
+          );
+
+          when(() => cartBloc.state).thenReturn(
+            cartState,
+          );
+
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            orderEligibilityState,
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final checkoutButton =
+              find.widgetWithText(ElevatedButton, 'Check out');
+
+          final priceMessageWidgetFinder =
+              find.byKey(WidgetKeys.cartPagePriceMessageWidget);
+          final priceMessageFinder = find.text(
+            'Price is not available for at least one item. Grand total reflected may not be accurate.'
+                .tr(),
+          );
+          expect(priceMessageWidgetFinder, findsOneWidget);
+          expect(priceMessageFinder, findsOneWidget);
+          expect(checkoutButton, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Display cart page price message for isFoc material',
+        (tester) async {
+          final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
+            materialWithoutPrice: true,
+          );
+
+          final cartProducts = <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('123456789'),
+                quantity: MaterialQty(1),
+                type: MaterialInfoType('material'),
+                isFOCMaterial: true,
+              ),
+            ),
+          ];
+          final cartState = CartState.initial().copyWith(
+            cartProducts: cartProducts,
+          );
+
+          final orderEligibilityState =
+              OrderEligibilityState.initial().copyWith(
+            configs: salesOrgConfig,
+            cartItems: cartProducts,
+          );
+
+          when(() => cartBloc.state).thenReturn(
+            cartState,
+          );
+
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            orderEligibilityState,
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final checkoutButton =
+              find.widgetWithText(ElevatedButton, 'Check out');
+
+          final priceMessageWidgetFinder =
+              find.byKey(WidgetKeys.cartPagePriceMessageWidget);
+          final priceMessageFinder = find.text(
+            'Price is not available for at least one item. Grand total reflected may not be accurate.'
+                .tr(),
+          );
+          expect(priceMessageWidgetFinder, findsOneWidget);
+          expect(priceMessageFinder, findsOneWidget);
+          expect(checkoutButton, findsOneWidget);
+        },
+      );
     },
   );
 }

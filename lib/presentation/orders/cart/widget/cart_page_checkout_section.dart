@@ -33,6 +33,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
                 size: 20,
               ),
             ),
+            const _CartPagePriceMessage(),
             const _MovCheckMessage(),
             ListTile(
               dense: true,

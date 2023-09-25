@@ -37,6 +37,7 @@ part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_l
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list_item.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_checkout_section.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items_banner.dart';
+part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_price_message.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);

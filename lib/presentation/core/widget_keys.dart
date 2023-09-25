@@ -343,6 +343,8 @@ class WidgetKeys {
   static Key cartItemMaterialDetail(String materialNumber, int qty) =>
       Key('cartItemQuantityInput$materialNumber$qty');
   static Key cartClearButton = const Key('cartClearButton');
+  static const Key cartPagePriceMessageWidget =
+      Key('cartPagePriceMessageWidget');
   //============================================================
   //  Checkout Page Keys
   //============================================================
