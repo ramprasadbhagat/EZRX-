@@ -83,8 +83,7 @@ class _CartPageCartScrollList extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          context.router.popUntilRouteWithPath('main');
-                          context.router.pushNamed('main/products');
+                          context.router.navigateNamed('main/products');
                         },
                         child: const Text('Start browsing').tr(),
                       ),

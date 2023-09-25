@@ -529,6 +529,7 @@ void main() {
       when(() => productImageBloc.state).thenReturn(
         ProductImageState.initial(),
       );
+      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
     },
   );
   group(
@@ -762,6 +763,27 @@ void main() {
           find.byKey(const ValueKey('preOrderMaterialfake-material-1')),
           findsOneWidget,
         );
+      });
+      testWidgets('Test Start browsing onTap', (tester) async {
+        await tester.pumpWidget(getWidget());
+
+        await tester.pump();
+
+        final startBrowsingButton =
+            find.byKey(WidgetKeys.startBrowsingProducts);
+
+        when(() => autoRouterMock.navigateNamed('main/products'))
+            .thenAnswer((invocation) => Future(() => null));
+
+        expect(startBrowsingButton, findsOneWidget);
+
+        await tester.tap(
+          startBrowsingButton,
+        );
+
+        await tester.pumpAndSettle();
+
+        verify(() => autoRouterMock.navigateNamed('main/products')).called(1);
       });
 
       // testWidgets('Test have cart item list and Refresh', (tester) async {
