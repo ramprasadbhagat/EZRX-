@@ -5,6 +5,8 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/extension.dart';
+
 class ViewByItemsRobot {
   final WidgetTester tester;
 
@@ -185,12 +187,4 @@ class ViewByItemsRobot {
     await tester.tap(orderItems.first);
     await tester.pumpAndSettle();
   }
-}
-
-extension DateTimeExt on DateTime {
-  bool isDateBetween(DateTime from, DateTime to) =>
-      DateUtils.dateOnly(from).millisecondsSinceEpoch <=
-          DateUtils.dateOnly(this).millisecondsSinceEpoch &&
-      DateUtils.dateOnly(to).millisecondsSinceEpoch >=
-          DateUtils.dateOnly(this).millisecondsSinceEpoch;
 }

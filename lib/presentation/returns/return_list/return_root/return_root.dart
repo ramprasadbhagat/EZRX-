@@ -120,13 +120,21 @@ class _ReturnRootState extends State<ReturnRoot> {
                         Expanded(
                           child: context.tabsRouter.current.name ==
                                   ReturnByItemPageRoute.name
-                              ? const _ListByItemSearchBar()
-                              : const _ListByRequestSearchBar(),
+                              ? const _ListByItemSearchBar(
+                                  key: WidgetKeys.returnByItemsSearchBar,
+                                )
+                              : const _ListByRequestSearchBar(
+                                  key: WidgetKeys.returnByRequestSearchBar,
+                                ),
                         ),
                         context.tabsRouter.current.name ==
                                 ReturnByItemPageRoute.name
-                            ? const _FilterReturnByItem()
-                            : const _FilterReturnByRequest(),
+                            ? const _FilterReturnByItem(
+                                key: WidgetKeys.returnByItemsFilterButton,
+                              )
+                            : const _FilterReturnByRequest(
+                                key: WidgetKeys.returnByRequestFilterButton,
+                              ),
                       ],
                     ),
                   ),

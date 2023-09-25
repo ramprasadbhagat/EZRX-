@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,10 @@ class StatusTrackerSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.statusTracker(
+        status,
+        createDateTime.dateTimeWithTimeZone,
+      ),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(

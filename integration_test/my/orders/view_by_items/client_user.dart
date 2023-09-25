@@ -52,25 +52,13 @@ void main() {
     await commonRobot.goToOrderTab();
   }
 
-  Future<void> login() async {
-    //select market
-    loginRobot.findMarketSelector();
-    await loginRobot.tapToMarketSelector();
-    await loginRobot.selectMarket(marketMalaysia);
-    loginRobot.verifySelectedMarket(marketMalaysia);
-
-    //login
-    await loginRobot.login(username, password);
-    await loginRobot.tapGetStartedButton();
-  }
-
   testWidgets('EZRX-T69 | Verify display items in Orders tab', (tester) async {
     //initialize necessary robots
     initializeRobot(tester);
 
     //init app
     await runAppForTesting(tester);
-    await login();
+    await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
     await goToOrderTab();
 
     //verify

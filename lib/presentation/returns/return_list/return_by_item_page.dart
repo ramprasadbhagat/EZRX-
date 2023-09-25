@@ -95,7 +95,10 @@ class _ReturnByItemPageState extends State<ReturnByItemPage> {
           },
         ),
       ),
-      floatingActionButton: NewRequestButton(controller: _controller),
+      floatingActionButton: NewRequestButton(
+        key: WidgetKeys.returnByItemsNewRequestButton,
+        controller: _controller,
+      ),
     );
   }
 }
@@ -132,6 +135,7 @@ class _ReturnItem extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
                     '${'Requested on'.tr()} ${data.requestDate.dateString}',
+                    key: WidgetKeys.returnItemGroupDate,
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: ZPColors.darkerGrey,
                         ),
@@ -158,6 +162,7 @@ class _ReturnItem extends StatelessWidget {
                 quantity: data.itemQty.getOrDefaultValue('0'),
                 isQuantityBelowImage: true,
                 statusWidget: StatusLabel(
+                  key: WidgetKeys.returnItemTileStatus,
                   status: StatusType(
                     data.status.displayStatus,
                   ),

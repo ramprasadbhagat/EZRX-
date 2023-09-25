@@ -358,10 +358,14 @@ class _StatusesSelector extends StatelessWidget {
       ) {
         return Column(
           children: state.statusList.map((StatusType status) {
+            final name = status.displayStatus;
+            final value = state.filter.returnStatusList.contains(status);
+
             return CheckboxListTile(
+              key: WidgetKeys.returnStatusFilter(name, value),
               contentPadding: EdgeInsets.zero,
               title: Text(
-                status.displayStatus,
+                name,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               controlAffinity: ListTileControlAffinity.leading,
@@ -375,7 +379,7 @@ class _StatusesSelector extends StatelessWidget {
                       ),
                     );
               },
-              value: state.filter.returnStatusList.contains(status),
+              value: value,
             );
           }).toList(),
         );

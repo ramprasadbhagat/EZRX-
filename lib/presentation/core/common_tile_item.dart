@@ -152,6 +152,7 @@ class _Subtitle extends StatelessWidget {
               priceComponent,
               Text(
                 tileBody3,
+                key: WidgetKeys.commonTileItemSubTitle,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w400,
                       color: ZPColors.darkerGrey,
@@ -168,6 +169,7 @@ class _Subtitle extends StatelessWidget {
                     priceComponent,
                     Text(
                       tileBody3,
+                      key: WidgetKeys.commonTileItemSubTitle,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: ZPColors.darkGray,
                             fontSize: 10,
@@ -269,6 +271,7 @@ class _ImageBox extends StatelessWidget {
               ),
               Text(
                 'Qty: $quantity',
+                key: WidgetKeys.commonTileItemQty,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w400,
                     ),

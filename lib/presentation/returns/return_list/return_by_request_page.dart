@@ -113,7 +113,10 @@ class _ReturnByRequestPageState extends State<ReturnByRequestPage> {
           },
         ),
       ),
-      floatingActionButton: NewRequestButton(controller: _controller),
+      floatingActionButton: NewRequestButton(
+        key: WidgetKeys.returnByRequestNewRequestButton,
+        controller: _controller,
+      ),
     );
   }
 }

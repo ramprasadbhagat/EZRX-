@@ -23,6 +23,22 @@ class LoginRobot {
   final signUp = find.text('Sign up'.tr());
   final loginWithSSO = find.text('Sign up'.tr());
 
+  Future<void> loginToHomeScreen(
+    String username,
+    String password,
+    String market,
+  ) async {
+    //select market
+    findMarketSelector();
+    await tapToMarketSelector();
+    await selectMarket(market);
+    verifySelectedMarket(market);
+
+    //login
+    await login(username, password);
+    await tapGetStartedButton();
+  }
+
   Future<void> login(String username, String password) async {
     expect(loginUsernameField, findsOneWidget);
     expect(loginPasswordField, findsOneWidget);

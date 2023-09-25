@@ -23,13 +23,15 @@ class WidgetKeys {
   static const Key commonTileItemLabel = Key('commonTileItemLabel');
   static const Key commonTileItemStatusLabel = Key('commonTileItemStatusLabel');
   static const Key commonTileItemTitle = Key('commonTileItemTitle');
+  static const Key commonTileItemSubTitle = Key('commonTileItemSubTitle');
   static const Key addressInfoSectionActionLabel =
       Key('addressInfoSectionActionLabel');
   static const Key addressInfoSectionCustomerCodeLabel =
       Key('addressInfoSectionCustomerCodeLabel');
   static const Key addressInfoSectionDeliveryToLabel =
       Key('addressInfoSectionDeliveryToLabel');
-
+  static Key statusTracker(String status, String dateTime) =>
+      Key('statusTracker$status$dateTime');
   //============================================================
   //  PRE-ORDER-MODAL
   //============================================================
@@ -208,13 +210,60 @@ class WidgetKeys {
   static const Key clearCovidMaterialListSearchBar = Key('clearSearch');
   static const Key addBonusTextFieldClear = Key('addBonusTextFieldClear');
   static const Key clearShipToSearch = Key('clearShipToSearch');
+
   //============================================================
   //  Returns
   //============================================================
-
   static const Key returnRootPage = Key('returnRootPage');
+  static const Key returnByItemTab = Key('viewByItems');
+  static const Key returnByRequestTab = Key('viewByReturnRequest');
   static const Key returnByItemPage = Key('returnByItemPage');
   static const Key returnByRequestRootPage = Key('returnByRequestRootPage');
+  static const Key fromReturnDateField = Key('fromReturnDateField');
+  static const Key toReturnDateField = Key('toReturnDateField');
+  static Key returnStatusFilter(String name, bool value) =>
+      Key('returnStatusFilter$name$value');
+
+  //============================================================
+  //  Returns by items
+  //============================================================
+  static const Key returnByItemsSearchBar = Key('returnByItemsSearchBar');
+  static const Key returnByItemsFilterButton = Key('returnByItemsFilterButton');
+  static const Key returnByItemsNewRequestButton =
+      Key('returnByItemsNewRequestButton');
+  static Key returnItem(String index) => Key('returnItem$index');
+  static const Key returnItemTile = Key('returnItemTile');
+  static const Key returnItemGroupDate = Key('returnItemGroupDate');
+  static const Key returnItemTileStatus = Key('returnItemTileStatus');
+
+  //============================================================
+  //  Returns by items detail
+  //============================================================
+  static const Key returnItemDetailScrollList =
+      Key('returnItemDetailScrollList');
+  static const Key returnItemDetailReturnId = Key('returnItemDetailReturnId');
+  static const Key returnItemDetailCopyButton =
+      Key('returnItemDetailCopyButton');
+  static Key returnDetailMaterialItem(
+    String materialNumber,
+    String qty,
+    String price,
+  ) =>
+      Key('returnDetailMaterialItem$materialNumber$qty$price');
+  static const Key returnDetailShowDetailButton =
+      Key('returnDetailShowMaterialDetailButton');
+
+  //============================================================
+  //  Returns by request
+  //============================================================
+  static const Key returnByRequestSearchBar = Key('returnByRequestSearchBar');
+  static const Key returnByRequestFilterButton =
+      Key('returnByRequestFilterButton');
+  static const Key returnByRequestNewRequestButton =
+      Key('returnByRequestNewRequestButton');
+  static Key returnRequest(String index) => Key('returnRequest$index');
+  static const Key headsetMicOutlined = Key('headsetMicOutlined');
+  //============================================================
   //============================================================
   //  Reset Password
   //============================================================
@@ -426,15 +475,6 @@ class WidgetKeys {
   static const Key bundleDetailsCarousel = Key('bundleDetailsCarousel');
 
   //============================================================
-  //  Return
-  //============================================================
-
-  static const Key fromReturnDateField = Key('fromReturnDateField');
-  static const Key toReturnDateField = Key('toReturnDateField');
-  static const Key fromReturnAmountField = Key('fromReturnAmountField');
-  static const Key toReturnAmountField = Key('toReturnAmountField');
-
-  //============================================================
   //  Payment Summary
   //============================================================
   static const Key invoiceTab = Key('invoiceTab');
@@ -475,16 +515,6 @@ class WidgetKeys {
       Key('articleDetailsBottomBackButtonKey');
 
   //============================================================
-  //  Return By Item Page
-  //============================================================
-  static Key returnItem(String index) => Key('returnItem$index');
-  static const Key returnItemTile = Key('returnItemTile');
-//============================================================
-  //  Return By Request Page
-  //============================================================
-  static Key returnRequest(String index) => Key('returnRequest$index');
-  static const Key headsetMicOutlined = Key('headsetMicOutlined');
-
   //  Change Password
   //============================================================
   static const Key currentPasswordField = Key('currentPasswordField');

@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +12,16 @@ class CommonRobot {
   CommonRobot(this.tester);
 
   final ordersTab = find.byKey(WidgetKeys.ordersTab);
+  final moreTab = find.byKey(WidgetKeys.moreTab);
   final customerCodeSelector = find.byKey(WidgetKeys.customerCodeSelector);
-  final customerSearchBar = find.byType(CustomSearchBar);
+  final searchBar = find.byType(CustomSearchBar);
+  final invalidLengthSearchMessage =
+      find.text('Please enter at least 2 characters.'.tr());
+
+  Future<void> goToMoreTab() async {
+    await tester.tap(moreTab);
+    await tester.pumpAndSettle();
+  }
 
   Future<void> goToOrderTab() async {
     await tester.tap(ordersTab);
@@ -21,10 +31,7 @@ class CommonRobot {
   Future<void> changeDeliveryAddress(String shipToCode) async {
     await tester.tap(customerCodeSelector);
     await tester.pumpAndSettle();
-    await tester.tap(customerSearchBar);
-    await tester.enterText(customerSearchBar, shipToCode);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
+    await searchWithKeyboardAction(shipToCode);
     await tester
         .tap(find.byKey(WidgetKeys.shipToAddressOption(shipToCode)).first);
     await tester.pumpAndSettle();
@@ -60,5 +67,51 @@ class CommonRobot {
     );
     await tester.tap(buttons.last);
     await tester.pump();
+  }
+
+  void verifyLoadingNotVisible() {
+    expect(find.byKey(WidgetKeys.loaderImage), findsNothing);
+  }
+
+  //============================================================
+  //  Search bar
+  //============================================================
+  void verifyInvalidLengthSearchMessageVisible() {
+    expect(invalidLengthSearchMessage, findsOneWidget);
+  }
+
+  void verifyInvalidLengthSearchMessageNotVisible() {
+    expect(invalidLengthSearchMessage, findsNothing);
+  }
+
+  Future<void> searchWithKeyboardAction(String text) async {
+    await tester.tap(searchBar);
+    await tester.enterText(searchBar, text);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> autoSearch(String text) async {
+    await tester.enterText(searchBar, text);
+    await tester.pumpAndSettle(
+      Duration(milliseconds: locator<Config>().autoSearchTimeout),
+    );
+  }
+
+  Future<void> searchWithSearchIcon(String text) async {
+    await tester.tap(searchBar);
+    await tester.enterText(searchBar, text);
+    await tester.tap(find.byKey(WidgetKeys.searchIconKey));
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapClearSearch() async {
+    await tester.tap(find.byKey(WidgetKeys.clearIconKey));
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> waitAutoSearchDuration() async {
+    await tester
+        .pump(Duration(milliseconds: locator<Config>().autoSearchTimeout));
   }
 }

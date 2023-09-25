@@ -4,10 +4,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +48,17 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
   bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
+    final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+
     return CommonTileItem(
+      key: WidgetKeys.returnDetailMaterialItem(
+        widget.requestInformation.materialNumber.displayMatNo,
+        widget.requestInformation.returnQuantity,
+        StringUtils.displayPrice(
+          salesOrgConfig,
+          widget.requestInformation.totalPrice,
+        ),
+      ),
       materialNumber: widget.requestInformation.materialNumber,
       label: widget.requestInformation.materialNumber.displayMatNo,
       title: widget.requestInformation.materialDescription,
@@ -57,7 +69,7 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
       quantity: widget.requestInformation.returnQuantity.toString(),
       isQuantityBelowImage: false,
       priceComponent: PriceComponent(
-        salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+        salesOrgConfig: salesOrgConfig,
         price: widget.requestInformation.calculatedUnitPrice.toString(),
       ),
       statusWidget: StatusLabel(
@@ -78,7 +90,7 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
                     ),
               ),
               PriceComponent(
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                salesOrgConfig: salesOrgConfig,
                 price: widget.requestInformation.totalPrice.toString(),
                 priceLabelStyle: Theme.of(context)
                     .textTheme
@@ -88,6 +100,7 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
             ],
           ),
           InkWell(
+            key: WidgetKeys.returnDetailShowDetailButton,
             onTap: () {
               setState(() {
                 isExpanded = !isExpanded;

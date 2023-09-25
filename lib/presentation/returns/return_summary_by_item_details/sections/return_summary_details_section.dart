@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_request_information_he
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -74,6 +75,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
               Expanded(
                 child: Text(
                   '${'Return'.tr()} #${widget.requestInformationHeader.requestID}',
+                  key: WidgetKeys.returnItemDetailReturnId,
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium
@@ -96,6 +98,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
                 },
                 child: Text(
                   isCopied ? 'Copied'.tr() : 'Copy'.tr(),
+                  key: WidgetKeys.returnItemDetailCopyButton,
                   textAlign: TextAlign.start,
                   style: Theme.of(context)
                       .textTheme

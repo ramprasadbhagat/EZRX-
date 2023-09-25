@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -171,6 +172,11 @@ class HomeRobot {
 
   Future<void> tapLogout() async {
     await tester.tap(logout);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapReturnsQuickAccess() async {
+    await tester.tap(find.byKey(WidgetKeys.homeQuickAccessReturnsMenu));
     await tester.pumpAndSettle();
   }
 }
