@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'payment_summary_dto.dart';
+part of 'payment_summary_details_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

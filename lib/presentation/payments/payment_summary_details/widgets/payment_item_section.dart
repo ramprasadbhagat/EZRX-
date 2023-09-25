@@ -1,30 +1,29 @@
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 
-class PaymentItemSection extends StatelessWidget {
-  const PaymentItemSection({
+class _PaymentItemSection extends StatelessWidget {
+  const _PaymentItemSection({
     Key? key,
-    required this.paymentItemState,
-    required this.isSuccessful,
   }) : super(key: key);
-  final PaymentItemState paymentItemState;
-  final bool isSuccessful;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ...paymentItemState.paymentItemList.map(
-          (e) => _PaymentItem(
-            paymentItem: e,
-            showDivider: paymentItemState.paymentItemList.indexOf(e) != 0,
-          ),
-        ),
-      ],
+    return BlocBuilder<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
+      buildWhen: (previous, current) =>
+          previous.isListLoading != current.isListLoading ||
+          previous.isDetailFetching != current.isDetailFetching,
+      builder: (context, state) {
+        return state.isLoading
+            ? LoadingShimmer.tile()
+            : Column(
+                children: [
+                  ...state.paymentItemList.map(
+                    (e) => _PaymentItem(
+                      paymentItem: e,
+                      showDivider: state.paymentItemList.indexOf(e) != 0,
+                    ),
+                  ),
+                ],
+              );
+      },
     );
   }
 }

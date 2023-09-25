@@ -5,11 +5,12 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -38,8 +39,9 @@ class MockCustomerCodeBloc
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
-class MockPaymentItemBloc extends MockBloc<PaymentItemEvent, PaymentItemState>
-    implements PaymentItemBloc {}
+class MockPaymentSummaryDetailsBloc
+    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
+    implements PaymentSummaryDetailsBloc {}
 
 final locator = GetIt.instance;
 
@@ -49,7 +51,7 @@ void main() {
   late UserBloc mockUserBloc;
   late CustomerCodeBloc mockCustomerCodeBloc;
   late AnnouncementBloc mockAnnouncementBloc;
-  late PaymentItemBloc mockPaymentItemBloc;
+  late PaymentSummaryDetailsBloc mockPaymentSummaryDetailsBloc;
   late AuthBloc mockAuthBloc;
   late PaymentSummaryDetails fakePaymentDetails;
 
@@ -67,7 +69,7 @@ void main() {
     mockCustomerCodeBloc = MockCustomerCodeBloc();
     mockAuthBloc = MockAuthBloc();
     mockAnnouncementBloc = MockAnnouncementBloc();
-    mockPaymentItemBloc = MockPaymentItemBloc();
+    mockPaymentSummaryDetailsBloc = MockPaymentSummaryDetailsBloc();
     fakePaymentDetails = PaymentSummaryDetails.empty()
         .copyWith(status: StatusType('In Progress'));
   });
@@ -81,8 +83,8 @@ void main() {
           .thenReturn(CustomerCodeState.initial());
       when(() => mockAnnouncementBloc.state)
           .thenReturn(AnnouncementState.initial());
-      when(() => mockPaymentItemBloc.state)
-          .thenReturn(PaymentItemState.initial());
+      when(() => mockPaymentSummaryDetailsBloc.state)
+          .thenReturn(PaymentSummaryDetailsState.initial());
     });
 
     RouteDataScope getWUT() {
@@ -101,32 +103,30 @@ void main() {
           ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
-          BlocProvider<PaymentItemBloc>(
-            create: (context) => mockPaymentItemBloc,
+          BlocProvider<PaymentSummaryDetailsBloc>(
+            create: (context) => mockPaymentSummaryDetailsBloc,
           ),
         ],
-        child: Scaffold(
-          body: PaymentSummaryDetailsPage(
-            paymentSummaryDetails: fakePaymentDetails,
-          ),
+        child: const Scaffold(
+          body: PaymentSummaryDetailsPage(),
         ),
       );
     }
 
     testWidgets('Payment Summary Details Page Body Test - loading',
         (tester) async {
-      when(() => mockPaymentItemBloc.state).thenReturn(
-        PaymentItemState.initial().copyWith(
-          isFetching: true,
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDetailFetching: true,
         ),
       );
       final expectedStates = [
-        PaymentItemState.initial().copyWith(
-          isFetching: true,
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDetailFetching: true,
         ),
       ];
       whenListen(
-        mockPaymentItemBloc,
+        mockPaymentSummaryDetailsBloc,
         Stream.fromIterable(expectedStates),
       );
 
@@ -134,30 +134,30 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byKey(WidgetKeys.loaderImage),
-        findsOneWidget,
+        find.byType(LoadingShimmer),
+        findsNWidgets(7),
       );
     });
     testWidgets(
         'Payment Summary Details Page Body Test - fina two buttons respect to the Payment Summary Details status',
         (tester) async {
-      when(() => mockPaymentItemBloc.state).thenReturn(
-        PaymentItemState.initial().copyWith(
-          isFetching: true,
+      when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDetailFetching: true,
         ),
       );
       final expectedStates = [
-        PaymentItemState.initial().copyWith(
-          isFetching: false,
+        PaymentSummaryDetailsState.initial().copyWith(
+          isDetailFetching: false,
           paymentItemList: [
             PaymentItem.empty().copyWith(
               documentDate: DateTimeStringValue(''),
-            )
+            ),
           ],
         ),
       ];
       whenListen(
-        mockPaymentItemBloc,
+        mockPaymentSummaryDetailsBloc,
         Stream.fromIterable(expectedStates),
       );
 

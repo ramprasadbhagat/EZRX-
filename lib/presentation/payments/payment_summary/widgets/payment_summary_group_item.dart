@@ -59,23 +59,17 @@ class _PaymentSummaryItem extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
       child: ListTile(
         onTap: () {
-          context.read<PaymentItemBloc>().add(
-                PaymentItemEvent.fetchPaymentItemList(
+          context.read<PaymentSummaryDetailsBloc>().add(
+                PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
                   salesOrganization:
                       context.read<EligibilityBloc>().state.salesOrganisation,
                   customerCodeInfo:
                       context.read<EligibilityBloc>().state.customerCodeInfo,
-                  paymentID: paymentSummaryDetails.paymentID,
-                  paymentBatchAdditionalInfo:
-                      paymentSummaryDetails.paymentBatchAdditionalInfo,
-                  accountingDocExternalReference:
-                      paymentSummaryDetails.accountingDocExternalReference,
+                  paymentSummaryDetails: paymentSummaryDetails,
                 ),
               );
           context.router.push(
-            PaymentSummaryDetailsPageRoute(
-              paymentSummaryDetails: paymentSummaryDetails,
-            ),
+            const PaymentSummaryDetailsPageRoute(),
           );
         },
         contentPadding: const EdgeInsets.symmetric(

@@ -79,8 +79,8 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_item/payment_item_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -388,7 +388,7 @@ import 'package:ezrxmobile/infrastructure/payments/repository/all_credits_and_in
 import 'package:ezrxmobile/infrastructure/payments/repository/credit_and_invoice_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/download_payment_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_in_progress_repository.dart';
-import 'package:ezrxmobile/infrastructure/payments/repository/payment_item_repository.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/soa_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
@@ -2032,8 +2032,8 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(
-    () => PaymentItemBloc(
-      paymentItemRepository: locator<PaymentItedmRepository>(),
+    () => PaymentSummaryDetailsBloc(
+      paymentItemRepository: locator<PaymentSummaryDetailsRepository>(),
     ),
   );
 
@@ -2055,7 +2055,7 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => PaymentItedmRepository(
+    () => PaymentSummaryDetailsRepository(
       config: locator<Config>(),
       localDataSource: locator<PaymentItemLocalDataSource>(),
       remoteDataSource: locator<PaymentItemRemoteDataSource>(),

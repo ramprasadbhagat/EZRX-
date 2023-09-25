@@ -1,5 +1,6 @@
 {
-  "customerPayment": {
+  "data" : {
+    "customerPayment": {
     "total": 13,
     "showing": 13,
     "totalPaymentInProgress": 5342,
@@ -825,5 +826,6 @@
         "status": "Processed"
       }
     ]
+    }
   }
 }

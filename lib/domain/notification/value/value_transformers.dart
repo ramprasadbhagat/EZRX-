@@ -63,22 +63,11 @@ Color getIconColor(
   return titleMap[title] ?? ZPColors.primary;
 }
 
-String detailPageRoute(String val) {
-  switch (val) {
-    case 'ReturnRequestCreated':
-    case 'ReturnRequestReminder':
-    case 'ReturnRequestCreatedForApprover':
-      return 'returns/return_summary_details_v3';
-    case 'OrderCreated':
-      return 'orders/view_by_order_details_page';
-    default:
-      return '';
-  }
-}
-
 bool isReturnDetailPage(String val) =>
     val == 'ReturnRequestReminder' ||
     val == 'ReturnRequestCreatedForApprover' ||
     val == 'ReturnRequestCreated';
 
 bool isOrderDetailPage(String val) => val == 'OrderCreated';
+
+bool isPaymentDetailPage(String val) => val == 'PaymentAdviceCreated';

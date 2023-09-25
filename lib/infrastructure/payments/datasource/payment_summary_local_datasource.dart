@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:flutter/services.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_dto.dart';
 
 class PaymentSummaryLocalDataSource {
   PaymentSummaryLocalDataSource();
@@ -10,7 +10,7 @@ class PaymentSummaryLocalDataSource {
   Future<List<PaymentSummaryDetails>> getPaymentSummary() async {
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/paymentSummaryList.json',
+        'assets/json/paymentSummaryListResponse.json',
       ),
     );
 

@@ -4,8 +4,8 @@ import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart
 
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
-part 'payment_summary_dto.freezed.dart';
-part 'payment_summary_dto.g.dart';
+part 'payment_summary_details_dto.freezed.dart';
+part 'payment_summary_details_dto.g.dart';
 
 @freezed
 class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
@@ -72,15 +72,15 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       paymentCardNumber: paymentCardNumber,
       paymentCardTypeName: paymentCardTypeName,
       paymentDocument: paymentDocument,
-      paymentID: paymentID,
-      paymentMethod: paymentMethod,
+      paymentID: StringValue(paymentID),
+      paymentMethod: StringValue(paymentMethod),
       transactionCurrency: transactionCurrency,
       valueDate: DateTimeStringValue(valueDate),
       createdDate: DateTimeStringValue(createdDate),
       adviceExpiry: StringValue(adviceExpiry),
       zzAdvice: StringValue(zzAdvice),
       accountingDocExternalReference: accountingDocExternalReference,
-      paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
+      paymentBatchAdditionalInfo: StringValue(paymentBatchAdditionalInfo),
     );
   }
 

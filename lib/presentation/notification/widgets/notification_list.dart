@@ -68,14 +68,11 @@ class _NotificationList extends StatelessWidget {
   void _navigateToDetailPage(
     BuildContext context,
   ) {
-    final notificationType = notificationData.type;
-
     //No Navigation for incorrect data
-    if (notificationType.isValid() &&
-        notificationType.getDetailPageRoute.isEmpty) return;
+    if (!notificationData.type.isValid()) return;
     final eligibilityState = context.read<EligibilityBloc>().state;
     //Event call for Return Detail Page
-    if (notificationType.navigateToReturnDetailPage &&
+    if (notificationData.isReturnEligible &&
         eligibilityState.isReturnsEnable) {
       context.read<ReturnSummaryDetailsBloc>().add(
             ReturnSummaryDetailsEvent.fetch(
@@ -83,10 +80,10 @@ class _NotificationList extends StatelessWidget {
             ),
           );
       //Navigate to return Detail Page
-      context.router.pushNamed(notificationType.getDetailPageRoute);
+      context.router.push(const ReturnRequestSummaryByItemDetailsRoute());
     }
     //Event call for Order Detail Page
-    else if (notificationType.navigateToOrderDetailPage &&
+    else if (notificationData.isOrderEligible &&
         eligibilityState.user.userCanAccessOrderHistory) {
       context.read<ViewByOrderDetailsBloc>().add(
             ViewByOrderDetailsEvent.fetch(
@@ -96,8 +93,23 @@ class _NotificationList extends StatelessWidget {
               salesOrganisation: eligibilityState.salesOrganisation,
             ),
           );
-      //Navigate to respective Detail Page
-      context.router.pushNamed(notificationType.getDetailPageRoute);
+      //Navigate to Order Detail Page
+      context.router.push(const ViewByOrderDetailsPageRoute());
+    }
+    //Event call for Payment Detail Page
+    else if (notificationData.isPaymentEligible &&
+        !eligibilityState.salesOrgConfigs.disablePayment) {
+      context.read<PaymentSummaryDetailsBloc>().add(
+            PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+              salesOrganization: eligibilityState.salesOrganisation,
+              customerCodeInfo: eligibilityState.customerCodeInfo,
+              paymentSummaryDetails: PaymentSummaryDetails.empty().copyWith(
+                paymentID: notificationData.saleDocument,
+              ),
+            ),
+          );
+      //Navigate to Payment Detail Page
+      context.router.push(const PaymentSummaryDetailsPageRoute());
     }
   }
 }

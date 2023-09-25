@@ -36,6 +36,8 @@ mixin _$NotificationDataDto {
   String get returnRequestId => throw _privateConstructorUsedError;
   @JsonKey(name: 'orderNumber', defaultValue: '')
   String get orderNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'saleDocument', defaultValue: '')
+  String get saleDocument => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,15 +52,24 @@ abstract class $NotificationDataDtoCopyWith<$Res> {
       _$NotificationDataDtoCopyWithImpl<$Res, NotificationDataDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: 0) int id,
-      @JsonKey(name: 'type', defaultValue: '') String type,
-      @JsonKey(name: 'title', defaultValue: '') String title,
-      @JsonKey(name: 'description', defaultValue: '') String description,
-      @JsonKey(name: 'createdAt', defaultValue: '') String createdAt,
-      @JsonKey(name: 'isRead') bool isRead,
+      {@JsonKey(name: 'id', defaultValue: 0)
+          int id,
+      @JsonKey(name: 'type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'title', defaultValue: '')
+          String title,
+      @JsonKey(name: 'description', defaultValue: '')
+          String description,
+      @JsonKey(name: 'createdAt', defaultValue: '')
+          String createdAt,
+      @JsonKey(name: 'isRead')
+          bool isRead,
       @JsonKey(name: 'returnRequestNumber', defaultValue: '')
-      String returnRequestId,
-      @JsonKey(name: 'orderNumber', defaultValue: '') String orderNumber});
+          String returnRequestId,
+      @JsonKey(name: 'orderNumber', defaultValue: '')
+          String orderNumber,
+      @JsonKey(name: 'saleDocument', defaultValue: '')
+          String saleDocument});
 }
 
 /// @nodoc
@@ -82,6 +93,7 @@ class _$NotificationDataDtoCopyWithImpl<$Res, $Val extends NotificationDataDto>
     Object? isRead = null,
     Object? returnRequestId = null,
     Object? orderNumber = null,
+    Object? saleDocument = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -116,6 +128,10 @@ class _$NotificationDataDtoCopyWithImpl<$Res, $Val extends NotificationDataDto>
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      saleDocument: null == saleDocument
+          ? _value.saleDocument
+          : saleDocument // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -129,15 +145,24 @@ abstract class _$$_NotificationDataDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', defaultValue: 0) int id,
-      @JsonKey(name: 'type', defaultValue: '') String type,
-      @JsonKey(name: 'title', defaultValue: '') String title,
-      @JsonKey(name: 'description', defaultValue: '') String description,
-      @JsonKey(name: 'createdAt', defaultValue: '') String createdAt,
-      @JsonKey(name: 'isRead') bool isRead,
+      {@JsonKey(name: 'id', defaultValue: 0)
+          int id,
+      @JsonKey(name: 'type', defaultValue: '')
+          String type,
+      @JsonKey(name: 'title', defaultValue: '')
+          String title,
+      @JsonKey(name: 'description', defaultValue: '')
+          String description,
+      @JsonKey(name: 'createdAt', defaultValue: '')
+          String createdAt,
+      @JsonKey(name: 'isRead')
+          bool isRead,
       @JsonKey(name: 'returnRequestNumber', defaultValue: '')
-      String returnRequestId,
-      @JsonKey(name: 'orderNumber', defaultValue: '') String orderNumber});
+          String returnRequestId,
+      @JsonKey(name: 'orderNumber', defaultValue: '')
+          String orderNumber,
+      @JsonKey(name: 'saleDocument', defaultValue: '')
+          String saleDocument});
 }
 
 /// @nodoc
@@ -159,6 +184,7 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
     Object? isRead = null,
     Object? returnRequestId = null,
     Object? orderNumber = null,
+    Object? saleDocument = null,
   }) {
     return _then(_$_NotificationDataDto(
       id: null == id
@@ -193,6 +219,10 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      saleDocument: null == saleDocument
+          ? _value.saleDocument
+          : saleDocument // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -201,16 +231,24 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_NotificationDataDto extends _NotificationDataDto {
   const _$_NotificationDataDto(
-      {@JsonKey(name: 'id', defaultValue: 0) required this.id,
-      @JsonKey(name: 'type', defaultValue: '') required this.type,
-      @JsonKey(name: 'title', defaultValue: '') required this.title,
-      @JsonKey(name: 'description', defaultValue: '') required this.description,
-      @JsonKey(name: 'createdAt', defaultValue: '') required this.createdAt,
-      @JsonKey(name: 'isRead') required this.isRead,
+      {@JsonKey(name: 'id', defaultValue: 0)
+          required this.id,
+      @JsonKey(name: 'type', defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'title', defaultValue: '')
+          required this.title,
+      @JsonKey(name: 'description', defaultValue: '')
+          required this.description,
+      @JsonKey(name: 'createdAt', defaultValue: '')
+          required this.createdAt,
+      @JsonKey(name: 'isRead')
+          required this.isRead,
       @JsonKey(name: 'returnRequestNumber', defaultValue: '')
-      required this.returnRequestId,
+          required this.returnRequestId,
       @JsonKey(name: 'orderNumber', defaultValue: '')
-      required this.orderNumber})
+          required this.orderNumber,
+      @JsonKey(name: 'saleDocument', defaultValue: '')
+          required this.saleDocument})
       : super._();
 
   factory _$_NotificationDataDto.fromJson(Map<String, dynamic> json) =>
@@ -240,10 +278,13 @@ class _$_NotificationDataDto extends _NotificationDataDto {
   @override
   @JsonKey(name: 'orderNumber', defaultValue: '')
   final String orderNumber;
+  @override
+  @JsonKey(name: 'saleDocument', defaultValue: '')
+  final String saleDocument;
 
   @override
   String toString() {
-    return 'NotificationDataDto(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber)';
+    return 'NotificationDataDto(id: $id, type: $type, title: $title, description: $description, createdAt: $createdAt, isRead: $isRead, returnRequestId: $returnRequestId, orderNumber: $orderNumber, saleDocument: $saleDocument)';
   }
 
   @override
@@ -262,13 +303,15 @@ class _$_NotificationDataDto extends _NotificationDataDto {
             (identical(other.returnRequestId, returnRequestId) ||
                 other.returnRequestId == returnRequestId) &&
             (identical(other.orderNumber, orderNumber) ||
-                other.orderNumber == orderNumber));
+                other.orderNumber == orderNumber) &&
+            (identical(other.saleDocument, saleDocument) ||
+                other.saleDocument == saleDocument));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, type, title, description,
-      createdAt, isRead, returnRequestId, orderNumber);
+      createdAt, isRead, returnRequestId, orderNumber, saleDocument);
 
   @JsonKey(ignore: true)
   @override
@@ -287,18 +330,24 @@ class _$_NotificationDataDto extends _NotificationDataDto {
 
 abstract class _NotificationDataDto extends NotificationDataDto {
   const factory _NotificationDataDto(
-      {@JsonKey(name: 'id', defaultValue: 0) required final int id,
-      @JsonKey(name: 'type', defaultValue: '') required final String type,
-      @JsonKey(name: 'title', defaultValue: '') required final String title,
+      {@JsonKey(name: 'id', defaultValue: 0)
+          required final int id,
+      @JsonKey(name: 'type', defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'title', defaultValue: '')
+          required final String title,
       @JsonKey(name: 'description', defaultValue: '')
-      required final String description,
+          required final String description,
       @JsonKey(name: 'createdAt', defaultValue: '')
-      required final String createdAt,
-      @JsonKey(name: 'isRead') required final bool isRead,
+          required final String createdAt,
+      @JsonKey(name: 'isRead')
+          required final bool isRead,
       @JsonKey(name: 'returnRequestNumber', defaultValue: '')
-      required final String returnRequestId,
+          required final String returnRequestId,
       @JsonKey(name: 'orderNumber', defaultValue: '')
-      required final String orderNumber}) = _$_NotificationDataDto;
+          required final String orderNumber,
+      @JsonKey(name: 'saleDocument', defaultValue: '')
+          required final String saleDocument}) = _$_NotificationDataDto;
   const _NotificationDataDto._() : super._();
 
   factory _NotificationDataDto.fromJson(Map<String, dynamic> json) =
@@ -328,6 +377,9 @@ abstract class _NotificationDataDto extends NotificationDataDto {
   @override
   @JsonKey(name: 'orderNumber', defaultValue: '')
   String get orderNumber;
+  @override
+  @JsonKey(name: 'saleDocument', defaultValue: '')
+  String get saleDocument;
   @override
   @JsonKey(ignore: true)
   _$$_NotificationDataDtoCopyWith<_$_NotificationDataDto> get copyWith =>

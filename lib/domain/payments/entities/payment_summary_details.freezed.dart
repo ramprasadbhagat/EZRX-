@@ -16,13 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PaymentSummaryDetails {
-  String get paymentID => throw _privateConstructorUsedError;
+  StringValue get paymentID => throw _privateConstructorUsedError;
   DateTimeStringValue get valueDate => throw _privateConstructorUsedError;
   double get paymentAmount => throw _privateConstructorUsedError;
   String get transactionCurrency => throw _privateConstructorUsedError;
   String get paymentDocument => throw _privateConstructorUsedError;
   StatusType get status => throw _privateConstructorUsedError;
-  String get paymentMethod => throw _privateConstructorUsedError;
+  StringValue get paymentMethod => throw _privateConstructorUsedError;
   String get iban => throw _privateConstructorUsedError;
   String get bankIdentification => throw _privateConstructorUsedError;
   String get bankCountryKey => throw _privateConstructorUsedError;
@@ -38,7 +38,8 @@ mixin _$PaymentSummaryDetails {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   StringValue get zzAdvice => throw _privateConstructorUsedError;
   StringValue get adviceExpiry => throw _privateConstructorUsedError;
-  String get paymentBatchAdditionalInfo => throw _privateConstructorUsedError;
+  StringValue get paymentBatchAdditionalInfo =>
+      throw _privateConstructorUsedError;
   String get accountingDocExternalReference =>
       throw _privateConstructorUsedError;
 
@@ -54,13 +55,13 @@ abstract class $PaymentSummaryDetailsCopyWith<$Res> {
       _$PaymentSummaryDetailsCopyWithImpl<$Res, PaymentSummaryDetails>;
   @useResult
   $Res call(
-      {String paymentID,
+      {StringValue paymentID,
       DateTimeStringValue valueDate,
       double paymentAmount,
       String transactionCurrency,
       String paymentDocument,
       StatusType status,
-      String paymentMethod,
+      StringValue paymentMethod,
       String iban,
       String bankIdentification,
       String bankCountryKey,
@@ -76,7 +77,7 @@ abstract class $PaymentSummaryDetailsCopyWith<$Res> {
       DateTimeStringValue createdDate,
       StringValue zzAdvice,
       StringValue adviceExpiry,
-      String paymentBatchAdditionalInfo,
+      StringValue paymentBatchAdditionalInfo,
       String accountingDocExternalReference});
 }
 
@@ -123,7 +124,7 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
       paymentID: null == paymentID
           ? _value.paymentID
           : paymentID // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       valueDate: null == valueDate
           ? _value.valueDate
           : valueDate // ignore: cast_nullable_to_non_nullable
@@ -147,7 +148,7 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       iban: null == iban
           ? _value.iban
           : iban // ignore: cast_nullable_to_non_nullable
@@ -211,7 +212,7 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
       paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       accountingDocExternalReference: null == accountingDocExternalReference
           ? _value.accountingDocExternalReference
           : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
@@ -229,13 +230,13 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String paymentID,
+      {StringValue paymentID,
       DateTimeStringValue valueDate,
       double paymentAmount,
       String transactionCurrency,
       String paymentDocument,
       StatusType status,
-      String paymentMethod,
+      StringValue paymentMethod,
       String iban,
       String bankIdentification,
       String bankCountryKey,
@@ -251,7 +252,7 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
       DateTimeStringValue createdDate,
       StringValue zzAdvice,
       StringValue adviceExpiry,
-      String paymentBatchAdditionalInfo,
+      StringValue paymentBatchAdditionalInfo,
       String accountingDocExternalReference});
 }
 
@@ -295,7 +296,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
       paymentID: null == paymentID
           ? _value.paymentID
           : paymentID // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       valueDate: null == valueDate
           ? _value.valueDate
           : valueDate // ignore: cast_nullable_to_non_nullable
@@ -319,7 +320,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       iban: null == iban
           ? _value.iban
           : iban // ignore: cast_nullable_to_non_nullable
@@ -383,7 +384,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
       paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       accountingDocExternalReference: null == accountingDocExternalReference
           ? _value.accountingDocExternalReference
           : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
@@ -423,7 +424,7 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
       : super._();
 
   @override
-  final String paymentID;
+  final StringValue paymentID;
   @override
   final DateTimeStringValue valueDate;
   @override
@@ -435,7 +436,7 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   @override
   final StatusType status;
   @override
-  final String paymentMethod;
+  final StringValue paymentMethod;
   @override
   final String iban;
   @override
@@ -467,7 +468,7 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   @override
   final StringValue adviceExpiry;
   @override
-  final String paymentBatchAdditionalInfo;
+  final StringValue paymentBatchAdditionalInfo;
   @override
   final String accountingDocExternalReference;
 
@@ -572,13 +573,13 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
 
 abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   const factory _PaymentSummaryDetails(
-          {required final String paymentID,
+          {required final StringValue paymentID,
           required final DateTimeStringValue valueDate,
           required final double paymentAmount,
           required final String transactionCurrency,
           required final String paymentDocument,
           required final StatusType status,
-          required final String paymentMethod,
+          required final StringValue paymentMethod,
           required final String iban,
           required final String bankIdentification,
           required final String bankCountryKey,
@@ -594,13 +595,13 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
           required final DateTimeStringValue createdDate,
           required final StringValue zzAdvice,
           required final StringValue adviceExpiry,
-          required final String paymentBatchAdditionalInfo,
+          required final StringValue paymentBatchAdditionalInfo,
           required final String accountingDocExternalReference}) =
       _$_PaymentSummaryDetails;
   const _PaymentSummaryDetails._() : super._();
 
   @override
-  String get paymentID;
+  StringValue get paymentID;
   @override
   DateTimeStringValue get valueDate;
   @override
@@ -612,7 +613,7 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   @override
   StatusType get status;
   @override
-  String get paymentMethod;
+  StringValue get paymentMethod;
   @override
   String get iban;
   @override
@@ -644,7 +645,7 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   @override
   StringValue get adviceExpiry;
   @override
-  String get paymentBatchAdditionalInfo;
+  StringValue get paymentBatchAdditionalInfo;
   @override
   String get accountingDocExternalReference;
   @override

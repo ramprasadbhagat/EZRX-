@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_dto.dart';
 
 class PaymentSummaryRemoteDataSource {
   HttpService httpService;

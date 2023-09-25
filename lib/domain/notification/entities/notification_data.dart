@@ -19,6 +19,7 @@ class NotificationData with _$NotificationData {
     required bool isRead,
     required ReturnRequestsId returnRequestId,
     required OrderNumber orderNumber,
+    required StringValue saleDocument,
   }) = _NotificationData;
 
   factory NotificationData.empty() => NotificationData(
@@ -30,5 +31,15 @@ class NotificationData with _$NotificationData {
         isRead: false,
         returnRequestId: ReturnRequestsId.empty(),
         orderNumber: OrderNumber(''),
+        saleDocument: StringValue(''),
       );
+
+  bool get isReturnEligible =>
+      type.navigateToReturnDetailPage && returnRequestId.isValidRequestId;
+
+  bool get isOrderEligible =>
+      type.navigateToOrderDetailPage && orderNumber.isValid();
+
+  bool get isPaymentEligible =>
+      type.navigateToPaymentDetailPage && saleDocument.isValid();
 }

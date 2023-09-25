@@ -486,6 +486,7 @@ class WidgetKeys {
   static const Key creditsTab = Key('creditsTab');
   static const Key paymentSummaryPage = Key('paymentSummaryPage');
   static const Key paymentSummaryAppBar = Key('paymentSummaryAppBar');
+  static const Key paymentListLoading = Key('paymentListLoading');
 
   //============================================================
   //  New Payment

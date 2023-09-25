@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -39,6 +40,10 @@ class ReturnSummaryDetailsBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class PaymentSummaryDetailsBlocMock
+    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
+    implements PaymentSummaryDetailsBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 class MockNotificationBloc
@@ -57,6 +62,7 @@ void main() {
   late Notifications notifications;
   late List<CustomerCodeInfo> customerCodeListMock;
   late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
+  late PaymentSummaryDetailsBloc paymentSummaryDetailsBlockMock;
 
   setUpAll(() {
     locator.registerLazySingleton(() => AppRouter());
@@ -66,11 +72,15 @@ void main() {
       userBlocMock = UserBlocMock();
       autoRouterMock = locator<AppRouter>();
       customerCodeBlocMock = CustomerCodeBlocMock();
+      eligibilityBlocMock = EligibilityBlocMock();
+      paymentSummaryDetailsBlockMock = PaymentSummaryDetailsBlocMock();
       notificationBlocMock = MockNotificationBloc();
       returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
+      when(() => paymentSummaryDetailsBlockMock.state)
+          .thenReturn(PaymentSummaryDetailsState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());

@@ -12,13 +12,13 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
   const PaymentSummaryDetails._();
 
   const factory PaymentSummaryDetails({
-    required String paymentID,
+    required StringValue paymentID,
     required DateTimeStringValue valueDate,
     required double paymentAmount,
     required String transactionCurrency,
     required String paymentDocument,
     required StatusType status,
-    required String paymentMethod,
+    required StringValue paymentMethod,
     required String iban,
     required String bankIdentification,
     required String bankCountryKey,
@@ -34,7 +34,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
     required DateTimeStringValue createdDate,
     required StringValue zzAdvice,
     required StringValue adviceExpiry,
-    required String paymentBatchAdditionalInfo,
+    required StringValue paymentBatchAdditionalInfo,
     required String accountingDocExternalReference,
   }) = _PaymentSummaryDetails;
   factory PaymentSummaryDetails.empty() => PaymentSummaryDetails(
@@ -53,14 +53,14 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         paymentCardNumber: '',
         paymentCardTypeName: '',
         paymentDocument: '',
-        paymentID: '',
-        paymentMethod: '',
+        paymentID: StringValue(''),
+        paymentMethod: StringValue(''),
         transactionCurrency: '',
         valueDate: DateTimeStringValue(''),
         createdDate: DateTimeStringValue(''),
         adviceExpiry: StringValue(''),
         zzAdvice: StringValue(''),
-        paymentBatchAdditionalInfo: '',
+        paymentBatchAdditionalInfo: StringValue(''),
         accountingDocExternalReference: '',
       );
 

@@ -28,13 +28,14 @@ class NotificationType extends ValueObject<String> {
     return NotificationType._(validateStringNotEmpty(input));
   }
 
-  String get getDetailPageRoute => detailPageRoute(value.getOrElse(() => ''));
-
   bool get navigateToReturnDetailPage =>
       isReturnDetailPage(value.getOrElse(() => ''));
 
   bool get navigateToOrderDetailPage =>
       isOrderDetailPage(value.getOrElse(() => ''));
+
+  bool get navigateToPaymentDetailPage =>
+      isPaymentDetailPage(value.getOrElse(() => ''));
 
   const NotificationType._(this.value);
 }

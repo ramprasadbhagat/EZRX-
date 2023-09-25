@@ -17,6 +17,7 @@ _$_NotificationDataDto _$$_NotificationDataDtoFromJson(
       isRead: json['isRead'] as bool,
       returnRequestId: json['returnRequestNumber'] as String? ?? '',
       orderNumber: json['orderNumber'] as String? ?? '',
+      saleDocument: json['saleDocument'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_NotificationDataDtoToJson(
@@ -30,4 +31,5 @@ Map<String, dynamic> _$$_NotificationDataDtoToJson(
       'isRead': instance.isRead,
       'returnRequestNumber': instance.returnRequestId,
       'orderNumber': instance.orderNumber,
+      'saleDocument': instance.saleDocument,
     };
