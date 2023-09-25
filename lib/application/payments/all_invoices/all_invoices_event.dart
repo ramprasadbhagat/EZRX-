@@ -6,9 +6,6 @@ class AllInvoicesEvent with _$AllInvoicesEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   }) = _initialized;
-  const factory AllInvoicesEvent.autoSearchProduct({
-    required SearchKey searchKey,
-  }) = _AutoSearchProduct;
   const factory AllInvoicesEvent.fetch({
     required AllInvoicesFilter appliedFilter,
   }) = _Fetch;

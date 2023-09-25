@@ -1,6 +1,6 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
@@ -9,7 +9,6 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 import 'package:ezrxmobile/domain/payments/repository/i_all_credits_and_invoices_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rxdart/rxdart.dart';
 
 part 'all_credits_event.dart';
 part 'all_credits_state.dart';
@@ -31,31 +30,11 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
         ),
       ),
     );
-    on<_AutoSearchProduct>(
-      (e, emit) {
-        if (e.searchKey == state.appliedFilter.searchKey) return;
-        if (e.searchKey.isValid()) {
-          add(
-            _Fetch(
-              appliedFilter:
-                  state.appliedFilter.copyWith(searchKey: e.searchKey),
-            ),
-          );
-        } else {
-          emit(
-            state.copyWith(
-              appliedFilter:
-                  state.appliedFilter.copyWith(searchKey: e.searchKey),
-            ),
-          );
-        }
-      },
-      transformer: (events, mapper) => events
-          .debounceTime(Duration(milliseconds: config.autoSearchTimeout))
-          .asyncExpand(mapper),
-    );
     on<_Fetch>(
       (e, emit) async {
+        if (e.appliedFilter.searchKey == state.appliedFilter.searchKey &&
+            e.appliedFilter.searchKey.validateNotEmpty) return;
+        if (!e.appliedFilter.searchKey.isValid()) return;
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
@@ -95,6 +74,7 @@ class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
           },
         );
       },
+      transformer: restartable(),
     );
     on<_LoadMore>(
       (e, emit) async {

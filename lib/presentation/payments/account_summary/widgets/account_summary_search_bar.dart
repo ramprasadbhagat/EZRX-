@@ -1,8 +1,8 @@
 part of 'package:ezrxmobile/presentation/payments/account_summary/account_summary_page.dart';
 
-class _SearchBar extends StatelessWidget {
+class _AccountSummarySearchBar extends StatelessWidget {
   final bool isInvoiceTabActive;
-  const _SearchBar({
+  const _AccountSummarySearchBar({
     Key? key,
     required this.isInvoiceTabActive,
   }) : super(key: key);
@@ -53,7 +53,7 @@ class _SummarySearchBar extends StatelessWidget {
         key: WidgetKeys.genericKey(key: searchKey),
         initialValue: searchKey,
         enabled: isEnable,
-        onSearchChanged: (value) => _autoSearch(
+        onSearchChanged: (value) => _fetch(
           context: context,
           searchKey: value,
         ),
@@ -71,22 +71,6 @@ class _SummarySearchBar extends StatelessWidget {
       ),
     );
   }
-
-  void _autoSearch({
-    required BuildContext context,
-    required String searchKey,
-  }) =>
-      isInvoiceTabActive
-          ? context.read<AllInvoicesBloc>().add(
-                AllInvoicesEvent.autoSearchProduct(
-                  searchKey: SearchKey.searchFilter(searchKey),
-                ),
-              )
-          : context.read<AllCreditsBloc>().add(
-                AllCreditsEvent.autoSearchProduct(
-                  searchKey: SearchKey.searchFilter(searchKey),
-                ),
-              );
 
   void _fetch({
     required BuildContext context,
@@ -110,7 +94,7 @@ class _SummarySearchBar extends StatelessWidget {
               AllCreditsEvent.fetch(
                 appliedFilter:
                     context.read<AllCreditsBloc>().state.appliedFilter.copyWith(
-                          searchKey: SearchKey(searchKey),
+                          searchKey: SearchKey.searchFilter(searchKey),
                         ),
               ),
             );

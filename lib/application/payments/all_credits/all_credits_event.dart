@@ -6,9 +6,6 @@ class AllCreditsEvent with _$AllCreditsEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
   }) = _initialized;
-  const factory AllCreditsEvent.autoSearchProduct({
-    required SearchKey searchKey,
-  }) = _AutoSearchProduct;
   const factory AllCreditsEvent.fetch({
     required AllCreditsFilter appliedFilter,
   }) = _Fetch;
