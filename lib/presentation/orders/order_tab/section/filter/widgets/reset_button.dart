@@ -7,6 +7,7 @@ class _ResetButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: OutlinedButton(
+        key: WidgetKeys.filterResetButton,
         onPressed: () => Navigator.of(context).pop(
           ViewByOrdersFilter.empty(),
         ),

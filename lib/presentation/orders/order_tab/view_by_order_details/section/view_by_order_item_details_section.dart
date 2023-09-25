@@ -1,9 +1,11 @@
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,8 +21,10 @@ class OrderItemDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final displayGovernmentMaterialCOde =
         context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.isTW;
+    final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
 
     return Padding(
+      key: WidgetKeys.viewByOrderDetailItemsSection,
       padding: const EdgeInsets.symmetric(
         horizontal: 20.0,
       ),
@@ -44,6 +48,14 @@ class OrderItemDetailsSection extends StatelessWidget {
                     children: e.viewByOrderItem
                         .map(
                           (e) => CommonTileItem(
+                            key: WidgetKeys.viewByOrderDetailItem(
+                              e.materialNumber.displayMatNo,
+                              e.qty,
+                              StringUtils.displayPrice(
+                                salesOrgConfig,
+                                e.totalPrice.totalPrice,
+                              ),
+                            ),
                             label:
                                 '${e.materialNumber.displayMatNo}${displayGovernmentMaterialCOde ? '|${e.governmentMaterialCode}' : ''}',
                             title: e.materialDescription,
@@ -80,10 +92,7 @@ class OrderItemDetailsSection extends StatelessWidget {
                                       ),
                                 ),
                                 PriceComponent(
-                                  salesOrgConfig: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .configs,
+                                  salesOrgConfig: salesOrgConfig,
                                   price: e.totalPrice
                                       .totalPrice //TODO: It should be item subtotal, once design team confirm and getting data will enhance
                                       .toStringAsFixed(2),

@@ -106,6 +106,7 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                 return state.isOrderHistoryDetailsEmpty
                     ? const SizedBox.shrink()
                     : ElevatedButton(
+                        key: WidgetKeys.viewByOrderDetailBuyAgain,
                         onPressed: () => context.read<CartBloc>().add(
                               CartEvent.addHistoryItemsToCart(
                                 priceAggregate: state.productDetailAggregateList

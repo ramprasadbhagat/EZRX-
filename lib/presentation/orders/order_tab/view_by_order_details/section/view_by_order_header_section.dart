@@ -33,6 +33,7 @@ class OrderHeaderSection extends StatelessWidget {
             children: [
               Text(
                 '${context.tr('Order')} #${orderDetails.orderNumber.getOrDefaultValue('')}',
+                key: WidgetKeys.viewByOrderDetailOrderCode,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.white,
                     ),

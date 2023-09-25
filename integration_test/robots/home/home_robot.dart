@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -22,6 +23,7 @@ class HomeRobot {
       find.byKey(const Key('homeTabAnnouncementWidget'));
   final moreTab = find.text('More'.tr());
   final logout = find.text('Log out');
+  final miniCart = find.byType(CartButton);
 
   void verify() {
     final home = find.byKey(const Key('homeScreen'));
@@ -177,6 +179,11 @@ class HomeRobot {
 
   Future<void> tapReturnsQuickAccess() async {
     await tester.tap(find.byKey(WidgetKeys.homeQuickAccessReturnsMenu));
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapMiniCartIcon() async {
+    await tester.tap(miniCart);
     await tester.pumpAndSettle();
   }
 }

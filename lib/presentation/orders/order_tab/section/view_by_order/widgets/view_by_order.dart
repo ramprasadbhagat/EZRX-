@@ -16,6 +16,7 @@ class _ViewByOrder extends StatelessWidget {
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return CustomCard(
+      key: WidgetKeys.viewByOrdersItemKey,
       child: ListTile(
         onTap: () {
           context.read<ViewByOrderDetailsBloc>().add(
@@ -28,7 +29,9 @@ class _ViewByOrder extends StatelessWidget {
                       context.read<SalesOrgBloc>().state.salesOrganisation,
                 ),
               );
-          context.router.push(const ViewByOrderDetailsPageRoute(),);
+          context.router.push(
+            const ViewByOrderDetailsPageRoute(),
+          );
         },
         contentPadding: const EdgeInsets.all(10),
         title: Column(
@@ -36,6 +39,7 @@ class _ViewByOrder extends StatelessWidget {
           children: [
             Text(
               '${context.tr('Order')} #${viewByOrderHistoryItem.orderNumber.getOrDefaultValue('')}',
+              key: WidgetKeys.viewByOrdersCodeLabelKey,
               style: Theme.of(context).textTheme.labelSmall,
             ),
             Padding(
@@ -45,6 +49,7 @@ class _ViewByOrder extends StatelessWidget {
                 children: [
                   Text(
                     '${viewByOrderHistoryItem.itemCount} ${context.tr('items')}',
+                    key: WidgetKeys.viewByOrdersQtyLabelKey,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   PriceComponent(
@@ -69,8 +74,9 @@ class _ViewByOrder extends StatelessWidget {
                 ),
               ],
               child: _BuyAgainButton(
-                          viewByOrderHistoryItem: viewByOrderHistoryItem,
-                        ),
+                viewByOrderHistoryItem: viewByOrderHistoryItem,
+                key: WidgetKeys.viewByOrderBuyAgainButtonKey,
+              ),
             ),
           ],
         ),

@@ -30,7 +30,7 @@ void main() {
   const shipToCode = '0070149863';
   const invalidSearchKey = 'auto-test';
   const bonusOrderCode = '0200269435';
-  final fromDate = DateTime.now().subtract(const Duration(days: 7));
+  final fromDate = DateTime.now().subtract(const Duration(days: 150));
   final toDate = DateTime.now().subtract(const Duration(days: 2));
 
   void initializeRobot(WidgetTester tester) {
@@ -115,10 +115,10 @@ void main() {
     viewByItemsFilterRobot.verifyResetButtonVisible();
     viewByItemsFilterRobot.verifyDefaultFilterApplied();
     await viewByItemsFilterRobot.tapCloseIcon();
-    await ordersRobot.enterSearchText(invalidSearchKey);
+    await commonRobot.searchWithKeyboardAction(invalidSearchKey);
     viewByItemsRobot.verifyNoRecordFoundVisible();
     await viewByItemsRobot.pullToRefresh();
-    await ordersRobot.enterSearchText(invalidSearchKey);
+    await commonRobot.searchWithKeyboardAction(invalidSearchKey);
     viewByItemsRobot.verifyNoRecordFoundVisible();
   });
 
@@ -135,9 +135,9 @@ void main() {
 
     //verify
     ordersRobot.verifyViewByItemsPageVisible();
-    await ordersRobot.enterSearchText('1');
-    ordersRobot.verifyInvalidSearchTextMessageVisible();
-    await ordersRobot.enterSearchText(productName);
+    await commonRobot.searchWithKeyboardAction('1');
+    commonRobot.verifyInvalidLengthSearchMessageVisible();
+    await commonRobot.searchWithKeyboardAction(productName);
     viewByItemsRobot.verifyOrdersWithProductNameVisible(productName);
   });
 
@@ -154,7 +154,7 @@ void main() {
 
     //verify
     ordersRobot.verifyViewByItemsPageVisible();
-    await ordersRobot.enterSearchText(materialNumber);
+    await commonRobot.searchWithKeyboardAction(materialNumber);
     viewByItemsRobot.verifyOrdersWithProductCodeVisible(materialNumber);
   });
 
@@ -171,7 +171,14 @@ void main() {
 
     //verify
     ordersRobot.verifyViewByItemsPageVisible();
-    await ordersRobot.enterSearchText(orderCode);
+    await ordersRobot.tapFilterButton();
+    await viewByItemsFilterRobot.tapToDateField();
+    await commonRobot.setDateRangePickerValue(
+      fromDate: fromDate,
+      toDate: toDate,
+    );
+    await viewByItemsFilterRobot.tapApplyButton();
+    await commonRobot.searchWithKeyboardAction(orderCode);
     viewByItemsRobot.verifyOrdersWithOrderCodeVisible(orderCode);
   });
 
@@ -187,9 +194,9 @@ void main() {
 
     //verify
     ordersRobot.verifyViewByItemsPageVisible();
-    await ordersRobot.enterSearchText(invalidSearchKey);
+    await commonRobot.searchWithKeyboardAction(invalidSearchKey);
     viewByItemsRobot.verifyNoRecordFoundVisible();
-    await ordersRobot.tapClearSearch();
+    await commonRobot.tapClearSearch();
     viewByItemsRobot.verifyOrdersVisible();
   });
 
@@ -239,7 +246,7 @@ void main() {
     );
     await viewByItemsFilterRobot.tapApplyButton();
     ordersRobot.verifyFilterApplied(1);
-    await ordersRobot.enterSearchText(invalidSearchKey);
+    await commonRobot.searchWithKeyboardAction(invalidSearchKey);
     viewByItemsRobot.verifyNoRecordFoundVisible();
   });
 
@@ -303,7 +310,7 @@ void main() {
     viewByItemsFilterRobot.verifyStatusFilterValue(statusFilter, true);
     await viewByItemsFilterRobot.tapApplyButton();
     ordersRobot.verifyFilterApplied(2);
-    await ordersRobot.enterSearchText(invalidSearchKey);
+    await commonRobot.searchWithKeyboardAction(invalidSearchKey);
     viewByItemsRobot.verifyNoRecordFoundVisible();
     await viewByItemsRobot.pullToRefresh();
     ordersRobot.verifyFilterApplied(1);
@@ -344,12 +351,12 @@ void main() {
     await ordersRobot.tapFilterButton();
     await viewByItemsFilterRobot.tapToDateField();
     await commonRobot.setDateRangePickerValue(
-      fromDate: DateTime.now().subtract(const Duration(days: 360)),
-      toDate: DateTime.now(),
+      fromDate: fromDate,
+      toDate: toDate,
     );
     await viewByItemsFilterRobot.tapApplyButton();
     ordersRobot.verifyFilterApplied(1);
-    await ordersRobot.enterSearchText(bonusOrderCode);
+    await commonRobot.searchWithKeyboardAction(bonusOrderCode);
     viewByItemsRobot.verifyOrdersWithOrderCodeVisible(bonusOrderCode);
     viewByItemsRobot.verifyBonusLabelVisible();
     await viewByItemsRobot.tapFirstVisibleOrder();

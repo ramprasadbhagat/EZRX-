@@ -134,6 +134,10 @@ class _MaterialDetailsSection extends StatelessWidget {
           _MaterialDetails(
             cartItem: cartItem,
             isInvalidCartItem: isInvalidCartItem,
+            key: WidgetKeys.cartItemMaterialDetail(
+              cartItem.materialInfo.materialNumber.displayMatNo,
+              cartItem.quantity,
+            ),
           ),
         ],
       ),

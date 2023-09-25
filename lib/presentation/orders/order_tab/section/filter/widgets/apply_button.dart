@@ -7,6 +7,7 @@ class _ApplyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ElevatedButton(
+        key: WidgetKeys.filterApplyButton,
         onPressed: () => Navigator.of(context).pop(
           context.read<ViewByOrderFilterBloc>().state.filter,
         ),

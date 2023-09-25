@@ -160,6 +160,7 @@ class _CartPageState extends State<CartPage> {
                 centerTitle: false,
                 titleSpacing: 0,
                 leading: IconButton(
+                  key: WidgetKeys.closeButton,
                   icon: const Icon(
                     Icons.close,
                   ),
@@ -168,6 +169,7 @@ class _CartPageState extends State<CartPage> {
                 actions: state.cartProducts.isNotEmpty
                     ? [
                         IconButton(
+                          key: WidgetKeys.cartClearButton,
                           icon: const Icon(
                             Icons.delete_outlined,
                             color: ZPColors.red,

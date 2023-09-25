@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -6,6 +7,8 @@ class CartRobot {
   final WidgetTester tester;
 
   CartRobot(this.tester);
+
+  final cartPage = find.byKey(WidgetKeys.cartPage);
 
   final orderSummary = find.byKey(const ValueKey('orderSummaryButton'));
   final remarkTextField = find.byKey(const Key('remarkTextField'));
@@ -312,5 +315,32 @@ class CartRobot {
     final warningText =
         find.textContaining('You have exceeded the remaining quantity limit');
     expect(warningText, findsOneWidget);
+  }
+
+  void verifyPageVisible() {
+    expect(cartPage, findsOneWidget);
+  }
+
+  Future<void> tapCloseButton() async {
+    await tester.tap(find.byKey(WidgetKeys.closeButton));
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> clearCart() async {
+    final clearButton = find.byKey(WidgetKeys.cartClearButton);
+    if (clearButton.evaluate().isNotEmpty) {
+      await tester.tap(clearButton.first);
+      await tester.pumpAndSettle();
+    }
+  }
+
+  void verifyMaterialFromReorderVisible(
+    String materialNumber, {
+    required int qty,
+  }) {
+    expect(
+      find.byKey(WidgetKeys.cartItemMaterialDetail(materialNumber, qty)),
+      findsAtLeastNWidgets(1),
+    );
   }
 }

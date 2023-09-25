@@ -9,6 +9,7 @@ class _ToOrderDateFilter extends StatelessWidget {
       buildWhen: (previous, current) => previous.filter != current.filter,
       builder: (context, state) => Expanded(
         child: TextFormField(
+          key: WidgetKeys.viewByOrdersFilterToDateKey,
           autocorrect: false,
           onTap: () async {
             final viewByOrderFilterBloc = context.read<ViewByOrderFilterBloc>();

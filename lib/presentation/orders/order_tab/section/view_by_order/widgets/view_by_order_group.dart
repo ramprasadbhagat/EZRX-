@@ -18,6 +18,7 @@ class _ViewByOrderGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.viewByOrdersGroupKey,
       children: [
         if (showBanner)
           InfoLabel(
