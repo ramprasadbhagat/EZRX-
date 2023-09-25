@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.d
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_address.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
@@ -60,6 +62,9 @@ void main() {
   final locator = GetIt.instance;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  final thSalesOrganisation = SalesOrganisation.empty().copyWith(
+    salesOrg: SalesOrg('2900'),
+  );
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -124,24 +129,34 @@ void main() {
   }
 
   group('All Invoices Screen', () {
-    // testWidgets('=> AppBar Test', (tester) async {
-    //   when(() => allInvoicesBlocMock.state)
-    //       .thenReturn(AllInvoicesState.initial().copyWith(
-    //     isLoading: true,
-    //   ));
-    //   final expectedState = [
-    //     AllInvoicesFilterState.initial(),
-    //     AllInvoicesFilterState.initial(),
-    //     AllInvoicesFilterState.initial(),
-    //   ];
-    //   whenListen(allInvoicesFilterBlocMock, Stream.fromIterable(expectedState));
+    testWidgets('=> Invoice Due date formatting for TH market', (tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: thSalesOrganisation,
+        ),
+      );
 
-    //   await getWidget(tester);
+      when(() => allInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(
+          items: [
+            CreditAndInvoiceItem.empty().copyWith(
+              searchKey: '123456780',
+              netDueDate: DateTimeStringValue('20230919'),
+              postingDate: DateTimeStringValue('20230917'),
+              amountInTransactionCurrency: 15.72,
+              invoiceProcessingStatus: StatusType('Cleared'),
+            ),
+          ],
+        ),
+      );
 
-    //   await tester.pump(const Duration(milliseconds: 100));
-    //   final allInvoicesText = find.text('Invoices'.tr());
-    //   expect(allInvoicesText, findsOneWidget);
-    // });
+      await tester.pumpWidget(getWidget());
+
+      await tester.pumpAndSettle();
+      //Make sure due date display on format dd MMM yyyy for TH market
+      final dueDateText = find.textContaining('${'Due on'.tr()} 19 Sep 2023');
+      expect(dueDateText, findsOneWidget);
+    });
 
     testWidgets('=> Body Test when loading', (tester) async {
       when(() => customerCodeBlocMock.state).thenReturn(
