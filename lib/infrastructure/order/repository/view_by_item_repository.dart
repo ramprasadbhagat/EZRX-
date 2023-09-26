@@ -46,9 +46,7 @@ class ViewByItemRepository implements IViewByItemRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final result = user.role.type.isSalesRepRole
-            ? await localDataSource.getOrderHistoryForSalesRep()
-            : await localDataSource.getViewByItems();
+        final result = await localDataSource.getViewByItems();
 
         return Right(result);
       } catch (e) {
@@ -57,29 +55,17 @@ class ViewByItemRepository implements IViewByItemRepository {
     }
 
     try {
-      final orderHistoryItemList = user.role.type.isSalesRepRole
-          ? await orderHistoryRemoteDataSource.getOrderHistorySalesRep(
-              shipTo: shipTo.shipToCustomerCode,
-              soldTo: soldTo.customerCodeSoldTo,
-              pageSize: pageSize,
-              offset: offset,
-              language: user.preferredLanguage.languageCode,
-              userName: user.username.getOrCrash(),
-              filterQuery:
-                  ViewByItemFilterDto.fromDomain(viewByItemFilter).toJson(),
-              query: searchKey.getOrCrash(),
-            )
-          : await orderHistoryRemoteDataSource.getViewByItems(
-              shipTo: shipTo.shipToCustomerCode,
-              soldTo: soldTo.customerCodeSoldTo,
-              pageSize: pageSize,
-              offset: offset,
-              language: user.preferredLanguage.languageCode,
-              salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-              filterQuery:
-                  ViewByItemFilterDto.fromDomain(viewByItemFilter).toJson(),
-              searchKey: searchKey.getOrCrash(),
-            );
+      final orderHistoryItemList =
+          await orderHistoryRemoteDataSource.getViewByItems(
+        shipTo: shipTo.shipToCustomerCode,
+        soldTo: soldTo.customerCodeSoldTo,
+        pageSize: pageSize,
+        offset: offset,
+        language: user.preferredLanguage.languageCode,
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        filterQuery: ViewByItemFilterDto.fromDomain(viewByItemFilter).toJson(),
+        searchKey: searchKey.getOrCrash(),
+      );
 
       return Right(orderHistoryItemList);
     } catch (e) {

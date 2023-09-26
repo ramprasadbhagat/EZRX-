@@ -9,22 +9,12 @@ class ViewByItemLocalDataSource {
   ViewByItemLocalDataSource();
   Future<OrderHistory> getViewByItems() async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getorderHistoryFetchByItemsResponse.json'),
-    );
-
-    final finalData = data['data']['orderHistoryFetchByItems']['OrderHistory'][0];
-
-    return OrderHistoryDto.fromJson(finalData).toDomain();
-  }
-
-  Future<OrderHistory> getOrderHistoryForSalesRep() async {
-    final data = json.decode(
       await rootBundle
-          .loadString('assets/json/getorderHistoryForSalesRepV2Response.json'),
+          .loadString('assets/json/getorderHistoryFetchByItemsResponse.json'),
     );
 
     final finalData =
-        data['data']['orderHistoryForSalesRepV2']['OrderHistory'][0];
+        data['data']['orderHistoryFetchByItems']['OrderHistory'][0];
 
     return OrderHistoryDto.fromJson(finalData).toDomain();
   }

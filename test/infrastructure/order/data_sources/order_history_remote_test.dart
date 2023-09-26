@@ -83,56 +83,6 @@ void main() {
             ).toDomain());
       });
 
-      /* test('Get OrderHistory for salesrep', () async {
-        final variables = {
-          'soldTo': 'fake-soldto',
-          'shipTo': ['fake-shipto'],
-          'first': 10,
-          'after': 0,
-          'orderBy': 'fake-order',
-          'sort': 'ASC',
-          'userName': 'fake-userName',
-          'language': 'fake-language',
-        };
-        final res = json.decode(
-          await rootBundle.loadString(
-              'assets/json/getorderHistoryForSalesRepV2Response.json'),
-        );
-
-        dioAdapter.onPost(
-          '/api/order',
-          (server) => server.reply(
-            200,
-            res,
-            delay: const Duration(seconds: 1),
-          ),
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
-          data: jsonEncode({
-            'query': remoteDataSource.orderHistoryQueryMutation
-                .getOrderHistoryForSalesRep(),
-            'variables': variables
-          }),
-        );
-
-        final result = await remoteDataSource.getOrderHistorySalesRep(
-          userName: 'fake-userName',
-          language: 'fake-language',
-          offset: 0,
-          orderBy: 'fake-order',
-          pageSize: 10,
-          shipTo: 'fake-shipto',
-          soldTo: 'fake-soldto',
-          sort: 'ASC',
-          filterQuery: {},
-        );
-
-        expect(
-            result,
-            OrderHistoryDto.fromJson(
-              res['data']['orderHistoryForSalesRepV2']['OrderHistory'][0],
-            ).toDomain());
-      });*/
-
       test('statuscode not equal to 200', () async {
         final variables = {
           'soldTo': 'fake-soldto',

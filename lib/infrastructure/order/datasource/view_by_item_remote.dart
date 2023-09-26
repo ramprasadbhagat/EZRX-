@@ -71,52 +71,6 @@ class OrderHistoryRemoteDataSource {
     });
   }
 
-  Future<OrderHistory> getOrderHistorySalesRep({
-    required String soldTo,
-    required String shipTo,
-    required int pageSize,
-    required int offset,
-    required String userName,
-    required String language,
-    required Map<String, dynamic> filterQuery,
-    required String query,
-  }) async {
-    return await dataSourceExceptionHandler.handle(() async {
-      final queryData = viewByItemQueryMutation.getViewByItemForSalesRep();
-      final variables = {
-        'soldTo': soldTo,
-        'shipTo': [shipTo],
-        'first': pageSize,
-        'after': offset,
-        'userName': userName,
-        'language': language,
-        'query': query,
-        ...filterQuery,
-      };
-
-      final res = await httpService.request(
-        method: 'POST',
-        url: '${config.urlConstants}order',
-        data: jsonEncode({
-          'query': queryData,
-          'variables': variables,
-        }),
-        apiEndpoint: 'orderHistoryForSalesRepV2',
-      );
-
-      _orderHistoryExceptionChecker(res: res);
-
-      if (res
-          .data['data']['orderHistoryForSalesRepV2']['OrderHistory'].isEmpty) {
-        return OrderHistory.empty();
-      }
-
-      return OrderHistoryDto.fromJson(
-        res.data['data']['orderHistoryForSalesRepV2']['OrderHistory'][0],
-      ).toDomain();
-    });
-  }
-
   Future<ProductMetaData> getItemProductDetails({
     required List<String> materialIDs,
   }) async {
