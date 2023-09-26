@@ -152,7 +152,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 PriceComponent(
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartState.grandTotal.toString(),
                   title: 'Grand Total: '.tr(),
                   priceLabelStyle:
@@ -393,7 +394,8 @@ class _OrderSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final salesOrgState = context.read<SalesOrgBloc>().state;
+    final salesOrgConfig =
+        context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -409,20 +411,20 @@ class _OrderSummary extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Subtotal (${salesOrgState.configs.displaySubtotalTaxBreakdown ? "excl" : "incl"}.tax):'
+              'Subtotal (${salesOrgConfig.displaySubtotalTaxBreakdown ? "excl" : "incl"}.tax):'
                   .tr(),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
             ),
             PriceComponent(
-              salesOrgConfig: salesOrgState.configs,
+              salesOrgConfig: salesOrgConfig,
               price: cartState.subTotal.toString(),
               type: PriceStyle.summaryPrice,
             ),
           ],
         ),
-        if (salesOrgState.configs.displaySubtotalTaxBreakdown) ...[
+        if (salesOrgConfig.displaySubtotalTaxBreakdown) ...[
           const SizedBox(height: 8.0),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -437,7 +439,7 @@ class _OrderSummary extends StatelessWidget {
                         ),
                   ),
                   PriceComponent(
-                    salesOrgConfig: salesOrgState.configs,
+                    salesOrgConfig: salesOrgConfig,
                     price: cartState.totalTax.toString(),
                     type: PriceStyle.summaryPrice,
                   ),
@@ -464,7 +466,7 @@ class _OrderSummary extends StatelessWidget {
                   ),
             ),
             PriceComponent(
-              salesOrgConfig: salesOrgState.configs,
+              salesOrgConfig: salesOrgConfig,
               price: 0.toString(),
               type: PriceStyle.summaryPrice,
             ),
@@ -486,7 +488,7 @@ class _OrderSummary extends StatelessWidget {
 
                 ///ToDo: hard code
                 PriceComponent(
-                  salesOrgConfig: salesOrgState.configs,
+                  salesOrgConfig: salesOrgConfig,
                   price: 0.toString(),
                   type: PriceStyle.summaryPrice,
                 ),
@@ -519,7 +521,7 @@ class _OrderSummary extends StatelessWidget {
                   ),
             ),
             PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              salesOrgConfig: salesOrgConfig,
               price: cartState.grandTotal.toString(),
               type: PriceStyle.totalPrice,
             ),
@@ -536,7 +538,7 @@ class _OrderSummary extends StatelessWidget {
                   ),
             ),
             PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              salesOrgConfig: salesOrgConfig,
               price: 0.toString(),
               type: PriceStyle.summaryPrice,
             ),

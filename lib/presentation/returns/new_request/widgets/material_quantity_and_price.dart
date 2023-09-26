@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class MaterialQuantityAndPrice extends StatelessWidget {
               ),
         ),
         PriceComponent(
-          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+          salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
           price: (unitPrice * quantity).toString(),
         ),
       ],

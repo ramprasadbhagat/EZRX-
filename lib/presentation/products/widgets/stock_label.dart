@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,7 @@ class StockLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addOosMaterials =
-        context.read<SalesOrgBloc>().state.configs.addOosMaterials;
+        context.read<EligibilityBloc>().state.salesOrgConfigs.addOosMaterials;
 
     final validateOutOfStockValue =
         context.read<EligibilityBloc>().state.validateOutOfStockValue;

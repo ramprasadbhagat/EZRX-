@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
@@ -19,8 +17,6 @@ import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
@@ -193,12 +189,12 @@ class _ProductTile extends StatelessWidget {
   void _navigateToOrderDetails(BuildContext context) {
     context.read<ViewByItemDetailsBloc>().add(
           ViewByItemDetailsEvent.fetch(
-            user: context.read<UserBloc>().state.user,
-             orderNumber: product.orderNumber,
+            user: context.read<EligibilityBloc>().state.user,
+            orderNumber: product.orderNumber,
             salesOrganisation:
                 context.read<EligibilityBloc>().state.salesOrganisation,
             materialNumber: product.materialNumber,
-            soldTo: context.read<CustomerCodeBloc>().state.customerCodeInfo,
+            soldTo: context.read<EligibilityBloc>().state.customerCodeInfo,
             disableDeliveryDateForZyllemStatus: context
                 .read<EligibilityBloc>()
                 .state
@@ -227,7 +223,8 @@ class _PriceLabel extends StatelessWidget {
         if (itemPrice != null) {
           return PriceComponent(
             price: itemPrice.lastPrice.getOrDefaultValue(0).toString(),
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            salesOrgConfig:
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
           );
         }
 

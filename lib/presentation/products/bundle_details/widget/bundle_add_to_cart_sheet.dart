@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -88,7 +87,7 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
   @override
   Widget build(BuildContext context) {
     final addOosMaterials =
-        context.read<SalesOrgBloc>().state.configs.addOosMaterials;
+        context.read<EligibilityBloc>().state.salesOrgConfigs.addOosMaterials;
     final validateOutOfStockValue =
         context.read<EligibilityBloc>().state.validateOutOfStockValue;
 

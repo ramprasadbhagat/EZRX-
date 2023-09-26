@@ -1,5 +1,5 @@
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
@@ -28,7 +28,7 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     //BlocBuilder is required here as there is a delay in userbloc
     //due to delay UI is not updating according to accessright value
-    return BlocBuilder<UserBloc, UserState>(
+    return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
           //check user role and products as getter depends on both
           previous.user.accessRight.products !=
@@ -65,8 +65,11 @@ class HomeTab extends StatelessWidget {
           body: RefreshIndicator(
             onRefresh: () async => context.read<SalesOrgBloc>().add(
                   SalesOrgEvent.loadSavedOrganisation(
-                    salesOrganisations:
-                        context.read<UserBloc>().state.userSalesOrganisations,
+                    salesOrganisations: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .user
+                        .userSalesOrganisations,
                   ),
                 ),
             child: SingleChildScrollView(

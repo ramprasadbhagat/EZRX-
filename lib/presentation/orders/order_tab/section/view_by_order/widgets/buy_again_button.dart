@@ -27,11 +27,11 @@ class _BuyAgainButton extends StatelessWidget {
                         .orderHistoryDetails.orderHistoryDetailsOrderItem
                         .toList(),
                     salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                        context.read<EligibilityBloc>().state.salesOrganisation,
                     shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                        context.read<EligibilityBloc>().state.shipToInfo,
                     customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                        context.read<EligibilityBloc>().state.customerCodeInfo,
                   ),
                 );
             context.read<CartBloc>().add(
@@ -43,8 +43,10 @@ class _BuyAgainButton extends StatelessWidget {
                             price: materialPriceBlocState.materialPrice[
                                     e.materialInfo.materialNumber] ??
                                 Price.empty(),
-                            salesOrgConfig:
-                                context.read<SalesOrgBloc>().state.configs,
+                            salesOrgConfig: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .salesOrgConfigs,
                           ),
                         )
                         .toList(),
@@ -62,7 +64,7 @@ class _BuyAgainButton extends StatelessWidget {
                                   .qty,
                         )
                         .toList(),
-                    user: context.read<UserBloc>().state.user,
+                    user: context.read<EligibilityBloc>().state.user,
                     counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
@@ -82,7 +84,7 @@ class _BuyAgainButton extends StatelessWidget {
                   : () {
                       context.read<ViewByOrderDetailsBloc>().add(
                             ViewByOrderDetailsEvent.fetch(
-                              user: context.read<UserBloc>().state.user,
+                              user: context.read<EligibilityBloc>().state.user,
                               orderNumber: viewByOrderHistoryItem.orderNumber,
                               customerCodeInfo: context
                                   .read<CustomerCodeBloc>()

@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/faq/faq_bloc.dart';
@@ -40,6 +41,9 @@ class FaqBlocMock extends MockBloc<FaqEvent, FaqState> implements FaqBloc {}
 class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class ContactUsMockBloc extends MockBloc<ContactUsEvent, ContactUsState>
     implements ContactUsBloc {}
 
@@ -54,19 +58,10 @@ void main() {
   late AppRouter autoRouterMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late ContactUsBloc contactUsBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   final mockSalesOrgBloc = SalesOrgMockBloc();
   late FaqBloc faqBlocMock;
   late FAQInfo faqList;
-  final user = User.empty().copyWith(
-    username: Username('fake-name'),
-    role: Role(
-      description: 'fake-desc',
-      id: 'id',
-      name: 'fake-name',
-      type: RoleType('fake-type'),
-    ),
-    preferredLanguage: const Locale(ApiLanguageCode.english),
-  );
   final salesOrg = SalesOrg('2001');
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
@@ -79,6 +74,7 @@ void main() {
       autoRouterMock = locator<AppRouter>();
       faqBlocMock = FaqBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
+      eligibilityBlocMock = EligibilityBlockMock();
       contactUsBlocMock = ContactUsMockBloc();
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => faqBlocMock.state).thenReturn(FaqState.initial());
@@ -86,6 +82,8 @@ void main() {
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => contactUsBlocMock.state).thenReturn(ContactUsState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
     Widget getScopedWidget() {
       return EasyLocalization(
@@ -101,6 +99,9 @@ void main() {
         child: WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           providers: [
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock,
+            ),
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
             BlocProvider<FaqBloc>(create: (context) => faqBlocMock),
@@ -194,6 +195,23 @@ void main() {
           selectedCategory: FAQCategory('All'),
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: salesOrg,
+          ),
+          user: User.empty().copyWith(
+            username: Username('fake-name'),
+            role: Role(
+              description: 'fake-desc',
+              id: 'id',
+              name: 'fake-name',
+              type: RoleType('fake-type'),
+            ),
+            preferredLanguage: const Locale(ApiLanguageCode.english),
+          ),
+        ),
+      );
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
           user: User.empty().copyWith(
@@ -235,17 +253,24 @@ void main() {
         ),
       );
 
-      await tester.pump(const Duration(seconds: 1));
-      await tester.pump(const Duration(seconds: 1));
-      await tester.pump(const Duration(seconds: 1));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
       verify(
         () => faqBlocMock.add(
           FaqEvent.getFaq(
-            salesOrg: mockSalesOrgBloc.state.salesOrg,
-            user: user,
+            salesOrg: salesOrg,
+            user: User.empty().copyWith(
+              username: Username('fake-name'),
+              role: Role(
+                description: 'fake-desc',
+                id: 'id',
+                name: 'fake-name',
+                type: RoleType('fake-type'),
+              ),
+              preferredLanguage: const Locale(ApiLanguageCode.english),
+            ),
           ),
         ),
-      ).called(5);
+      ).called(2);
       handle.dispose();
     });
     testWidgets(
@@ -288,7 +313,23 @@ void main() {
             ),
           ),
         );
-
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: salesOrg,
+            ),
+            user: User.empty().copyWith(
+              username: Username('fake-name'),
+              role: Role(
+                description: 'fake-desc',
+                id: 'id',
+                name: 'fake-name',
+                type: RoleType('fake-type'),
+              ),
+              preferredLanguage: const Locale(ApiLanguageCode.english),
+            ),
+          ),
+        );
         await tester.pumpWidget(getScopedWidget());
         await tester.pump(const Duration(seconds: 3));
 
@@ -312,11 +353,20 @@ void main() {
         verify(
           () => faqBlocMock.add(
             FaqEvent.loadMoreAFaq(
-              salesOrg: mockSalesOrgBloc.state.salesOrg,
-              user: user,
+              salesOrg: salesOrg,
+              user: User.empty().copyWith(
+                username: Username('fake-name'),
+                role: Role(
+                  description: 'fake-desc',
+                  id: 'id',
+                  name: 'fake-name',
+                  type: RoleType('fake-type'),
+                ),
+                preferredLanguage: const Locale(ApiLanguageCode.english),
+              ),
             ),
           ),
-        ).called(2);
+        ).called(1);
       },
     );
 

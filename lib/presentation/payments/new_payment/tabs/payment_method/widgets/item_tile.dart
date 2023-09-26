@@ -31,7 +31,8 @@ class _InvoiceCreditItemTile extends StatelessWidget {
                       ),
                 ),
                 PriceComponent(
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price:
                       customerOpenItem.amountInTransactionCurrency.toString(),
                 ),

@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner_tile.dart';
@@ -22,10 +21,11 @@ class TopAdvertBoxBanner extends StatelessWidget {
                 BannerEvent.fetch(
                   isPreSalesOrg: false,
                   salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  country: context.read<SalesOrgBloc>().state.salesOrg.country,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
+                  country:
+                      context.read<EligibilityBloc>().state.salesOrg.country,
                   role: context
-                      .read<UserBloc>()
+                      .read<EligibilityBloc>()
                       .state
                       .user
                       .role

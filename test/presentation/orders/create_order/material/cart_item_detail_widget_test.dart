@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -30,6 +31,9 @@ class TenderContractBlocMock
 
 class MockFunctionHolder extends Mock implements FunctionHolder {}
 
+class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class FunctionHolder {
   void onFieldChange(int value) {}
 }
@@ -38,13 +42,16 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late SalesOrgBloc salesOrgBlocMock;
   late TenderContractBloc tenderContractBlocMock;
-
+  late EligibilityBloc eligibilityBlocMock;
   setUp(() {
     salesOrgBlocMock = SalesOrgMockBloc();
     tenderContractBlocMock = TenderContractBlocMock();
+    eligibilityBlocMock = MockEligibilityBloc();
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => tenderContractBlocMock.state)
         .thenReturn(TenderContractState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
   Widget testWidget({
@@ -57,6 +64,9 @@ void main() {
           BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgBlocMock)),
           BlocProvider<TenderContractBloc>(
             create: (context) => tenderContractBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
         ],
         child: Material(

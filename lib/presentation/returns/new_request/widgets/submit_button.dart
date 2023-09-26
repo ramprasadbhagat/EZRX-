@@ -31,7 +31,7 @@ class _SubmitButton extends StatelessWidget {
                   NewRequestEvent.submit(
                     customerCodeInfo:
                         context.read<EligibilityBloc>().state.customerCodeInfo,
-                    user: context.read<UserBloc>().state.user,
+                    user: context.read<EligibilityBloc>().state.user,
                   ),
                 ),
         child: LoadingShimmer.withChild(

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -42,7 +42,7 @@ class AddToCartButton extends StatelessWidget {
                   color: ZPColors.red,
                 ),
               ),
-            if (context.read<UserBloc>().state.user.userCanCreateOrder)
+            if (context.read<EligibilityBloc>().state.user.userCanCreateOrder)
               SafeArea(
                 child: ElevatedButton(
                   key: const Key('addMaterialToCart'),

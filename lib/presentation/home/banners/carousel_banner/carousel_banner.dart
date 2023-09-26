@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -43,10 +42,11 @@ class _CarouselBannerState extends State<CarouselBanner> {
                 BannerEvent.fetch(
                   isPreSalesOrg: false,
                   salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  country: context.read<SalesOrgBloc>().state.salesOrg.country,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
+                  country:
+                      context.read<EligibilityBloc>().state.salesOrg.country,
                   role: context
-                      .read<UserBloc>()
+                      .read<EligibilityBloc>()
                       .state
                       .user
                       .role

@@ -1,6 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -182,7 +180,8 @@ class _ItemSubTotalSection extends StatelessWidget {
               ),
               _LoadingShimmerWithChild(
                 child: PriceComponent(
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartProduct.finalPriceTotalForAllMaterial,
                 ),
               ),
@@ -277,7 +276,8 @@ class _MaterialDetails extends StatelessWidget {
             children: [
               if (cartItem.price.isCounterOfferRequested)
                 PriceComponent(
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price:
                       cartItem.price.lastPrice.getOrDefaultValue(0).toString(),
                   type: PriceStyle.counterOfferPrice,
@@ -286,7 +286,8 @@ class _MaterialDetails extends StatelessWidget {
                 enabled: cartState.priceUnderLoadingShimmer ||
                     context.read<MaterialPriceBloc>().state.isFetching,
                 child: PriceComponent(
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartItem.display(PriceType.finalPrice),
                 ),
               ),
@@ -440,10 +441,13 @@ class _BonusPriceCounterSection extends StatelessWidget {
                 context.read<BonusMaterialBloc>().add(
                       BonusMaterialEvent.fetch(
                         salesOrganisation: context
-                            .read<SalesOrgBloc>()
+                            .read<EligibilityBloc>()
                             .state
                             .salesOrganisation,
-                        configs: context.read<SalesOrgBloc>().state.configs,
+                        configs: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .salesOrgConfigs,
                         customerCodeInfo: context
                             .read<EligibilityBloc>()
                             .state
@@ -451,7 +455,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
                         shipToInfo:
                             context.read<EligibilityBloc>().state.shipToInfo,
                         principalData: cartItem.materialInfo.principalData,
-                        user: context.read<UserBloc>().state.user,
+                        user: context.read<EligibilityBloc>().state.user,
                         isGimmickMaterialEnabled: context
                             .read<EligibilityBloc>()
                             .state

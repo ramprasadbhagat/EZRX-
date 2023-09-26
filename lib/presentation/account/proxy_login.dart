@@ -45,7 +45,7 @@
 //                     FocusScope.of(context).unfocus();
 //                     context.read<ProxyLoginFormBloc>().add(
 //                           ProxyLoginFormEvent.loginWithADButtonPressed(
-//                             context.read<UserBloc>().state.user,
+//                             context.read<EligibilityBloc>().state.user,
 //                           ),
 //                         );
 //                   },

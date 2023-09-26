@@ -69,7 +69,8 @@ class _PaymentItem extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   PriceComponent(
-                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
                     price: paymentItem.paymentAmountInDisplayCrcy.toString(),
                   ),
                 ],

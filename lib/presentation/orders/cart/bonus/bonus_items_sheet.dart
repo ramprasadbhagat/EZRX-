@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -16,8 +15,6 @@ import 'package:ezrxmobile/presentation/core/no_record.dart';
 
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 
@@ -160,10 +157,13 @@ class _BodyContent extends StatelessWidget {
                   onRefresh: () => context.read<BonusMaterialBloc>().add(
                         BonusMaterialEvent.fetch(
                           salesOrganisation: context
-                              .read<SalesOrgBloc>()
+                              .read<EligibilityBloc>()
                               .state
                               .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
+                          configs: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrgConfigs,
                           customerCodeInfo: context
                               .read<EligibilityBloc>()
                               .state
@@ -171,7 +171,7 @@ class _BodyContent extends StatelessWidget {
                           shipToInfo:
                               context.read<EligibilityBloc>().state.shipToInfo,
                           principalData: cartProduct.materialInfo.principalData,
-                          user: context.read<UserBloc>().state.user,
+                          user: context.read<EligibilityBloc>().state.user,
                           isGimmickMaterialEnabled: context
                               .read<EligibilityBloc>()
                               .state
@@ -181,10 +181,13 @@ class _BodyContent extends StatelessWidget {
                   onLoadingMore: () => context.read<BonusMaterialBloc>().add(
                         BonusMaterialEvent.loadMoreBonusItem(
                           salesOrganisation: context
-                              .read<SalesOrgBloc>()
+                              .read<EligibilityBloc>()
                               .state
                               .salesOrganisation,
-                          configs: context.read<SalesOrgBloc>().state.configs,
+                          configs: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrgConfigs,
                           customerCodeInfo: context
                               .read<EligibilityBloc>()
                               .state
@@ -192,7 +195,7 @@ class _BodyContent extends StatelessWidget {
                           shipToInfo:
                               context.read<EligibilityBloc>().state.shipToInfo,
                           principalData: cartProduct.materialInfo.principalData,
-                          user: context.read<UserBloc>().state.user,
+                          user: context.read<EligibilityBloc>().state.user,
                           isGimmickMaterialEnabled: context
                               .read<EligibilityBloc>()
                               .state

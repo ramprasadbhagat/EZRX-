@@ -37,7 +37,8 @@ class _MaterialDetails extends StatelessWidget {
           ),
           if (cartItem.materialInfo.type.typeMaterial)
             PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              salesOrgConfig:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
               price: cartItem.finalPriceTotalForAllMaterial,
             ),
         ],

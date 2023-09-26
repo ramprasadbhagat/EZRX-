@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -52,6 +53,9 @@ class MockProductImageBloc
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class MockReturnDetailsByRequestBloc
     extends MockBloc<ReturnDetailsByRequestEvent, ReturnDetailsByRequestState>
     implements ReturnDetailsByRequestBloc {}
@@ -73,6 +77,7 @@ void main() {
   late ReturnDetailsByRequestBloc mockReturnDetailsByRequestBloc;
   late PoAttachmentBloc mockPoAttachmentBloc;
   late AuthBloc mockAuthBloc;
+  late EligibilityBloc eligibilityBlocMock;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -92,6 +97,7 @@ void main() {
     mockProductImageBloc = MockProductImageBloc();
     mockReturnListByRequestBloc = ReturnListByRequestBlocMock();
     mockPoAttachmentBloc = MockPoAttachmentBloc();
+    eligibilityBlocMock = MockEligibilityBloc();
   });
 
   group('Return By Item Page', () {
@@ -99,6 +105,8 @@ void main() {
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => mockUserBloc.state).thenReturn(UserState.initial());
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
       when(() => mockCustomerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial());
       when(() => mockReturnListByRequestBloc.state)
@@ -131,6 +139,9 @@ void main() {
             create: (context) => mockCustomerCodeBloc,
           ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
           BlocProvider<ReturnListByRequestBloc>(
             create: (context) => mockReturnListByRequestBloc,

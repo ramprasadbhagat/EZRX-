@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
@@ -73,8 +73,9 @@ class _CartItemDetailWidgetState extends State<CartItemDetailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
-    final enableVat = context.read<SalesOrgBloc>().state.configs.enableVat;
+    final taxCode = context.read<EligibilityBloc>().state.salesOrg.taxCode;
+    final enableVat =
+        context.read<EligibilityBloc>().state.salesOrgConfigs.enableVat;
 
     return Column(
       children: [

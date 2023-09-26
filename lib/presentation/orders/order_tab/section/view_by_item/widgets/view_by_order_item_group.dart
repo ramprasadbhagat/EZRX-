@@ -50,7 +50,7 @@ class _ViewByOrderItemGroup extends StatelessWidget {
                 return _ViewByOrderItem(
                   orderHistoryItem: e,
                   customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
                   orderHistoryBasicInfo: context
                       .read<ViewByItemsBloc>()
                       .state

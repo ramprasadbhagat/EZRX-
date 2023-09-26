@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -51,11 +52,14 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   late AllInvoicesBloc allInvoicesBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-
+  late EligibilityBloc eligibilityBlocMock;
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
@@ -78,6 +82,7 @@ void main() {
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
     allInvoicesBlocMock = AllInvoicesBlocMock();
+    eligibilityBlocMock = EligibilityBlockMock();
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
     userBlocMock = UserBlocMock();
@@ -94,6 +99,8 @@ void main() {
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
   });
@@ -106,6 +113,9 @@ void main() {
       providers: [
         BlocProvider<AllInvoicesBloc>(
           create: (context) => allInvoicesBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
         ),
         BlocProvider<AllInvoicesFilterBloc>(
           create: (context) => allInvoicesFilterBlocMock,
@@ -132,6 +142,11 @@ void main() {
     testWidgets('=> Invoice Due date formatting for TH market', (tester) async {
       when(() => salesOrgBlocMock.state).thenReturn(
         SalesOrgState.initial().copyWith(
+          salesOrganisation: thSalesOrganisation,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           salesOrganisation: thSalesOrganisation,
         ),
       );
@@ -198,6 +213,28 @@ void main() {
           .thenReturn(AllInvoicesState.initial());
       when(() => customerCodeBlocMock.state).thenReturn(
         CustomerCodeState.initial().copyWith(
+          shipToInfo: ShipToInfo(
+            defaultShipToAddress: true,
+            shipToCustomerCode: '',
+            shipToName: ShipToName.empty(),
+            shipToAddress: ShipToAddress.empty(),
+            status: Status(''),
+            building: '',
+            city1: '',
+            city2: '',
+            postalCode: '',
+            houseNumber1: '',
+            telephoneNumber: '',
+            region: '',
+            floor: '',
+            plant: '',
+            licenses: [],
+            country: '',
+          ),
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           shipToInfo: ShipToInfo(
             defaultShipToAddress: true,
             shipToCustomerCode: '',
@@ -316,7 +353,28 @@ void main() {
           ],
         ),
       );
-
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          shipToInfo: ShipToInfo(
+            defaultShipToAddress: true,
+            shipToCustomerCode: '',
+            shipToName: ShipToName.empty(),
+            shipToAddress: ShipToAddress.empty(),
+            status: Status(''),
+            building: '',
+            city1: '',
+            city2: '',
+            postalCode: '',
+            houseNumber1: '',
+            telephoneNumber: '',
+            region: '',
+            floor: '',
+            plant: '',
+            licenses: [],
+            country: '',
+          ),
+        ),
+      );
       await tester.pumpWidget(getWidget());
       // await tester.drag(
       //   find.textContaining('123456780').last,

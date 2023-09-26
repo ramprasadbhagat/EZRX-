@@ -6,8 +6,12 @@ class _EmailTextField extends StatelessWidget {
   String _initialValue({required BuildContext context}) {
     final existingEmail = context.read<ContactUsBloc>().state.contactUs.email;
     if (existingEmail.getOrDefaultValue('').isEmpty) {
-      final displayEmail =
-          context.read<UserBloc>().state.user.email.getOrDefaultValue('');
+      final displayEmail = context
+          .read<EligibilityBloc>()
+          .state
+          .user
+          .email
+          .getOrDefaultValue('');
       context.read<ContactUsBloc>().add(
             ContactUsEvent.onEmailChange(newValue: displayEmail),
           );

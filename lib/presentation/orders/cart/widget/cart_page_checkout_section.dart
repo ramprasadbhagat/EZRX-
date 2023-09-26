@@ -25,7 +25,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               title: Text(
-                '${"Order for".tr()} ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
+                '${"Order for".tr()} ${context.read<EligibilityBloc>().state.customerCodeInfo.customerName}',
                 style: Theme.of(context).textTheme.labelSmall,
               ),
               trailing: const Icon(
@@ -45,7 +45,8 @@ class _CartPageCheckoutSection extends StatelessWidget {
               ),
               trailing: PriceComponent(
                 key: WidgetKeys.grandTotalKey,
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: state.grandTotal.toString(),
                 title: 'Grand total: '.tr(),
                 priceLabelStyle:

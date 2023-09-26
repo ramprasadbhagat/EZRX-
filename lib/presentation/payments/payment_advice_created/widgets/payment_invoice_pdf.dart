@@ -57,10 +57,10 @@ class _PaymentInvoicePdfState extends State<_PaymentInvoicePdf> {
                   },
                   build: (_) => CreatePaymentInvoicePdf().createInvoicePdf(
                     shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                        context.read<EligibilityBloc>().state.shipToInfo,
                     paymentInvoiceInfoPdf: state.paymentInvoiceInfoPdf,
                     salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                        context.read<EligibilityBloc>().state.salesOrganisation,
                   ),
                 ),
               );

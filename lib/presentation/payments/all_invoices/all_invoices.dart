@@ -1,9 +1,21 @@
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
+import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
@@ -12,23 +24,9 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_group.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
-import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 
 class AllInvoicesPage extends StatefulWidget {
   const AllInvoicesPage({Key? key}) : super(key: key);
@@ -127,9 +125,9 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
     context.read<OutstandingInvoicesBloc>().add(
           OutstandingInvoicesEvent.fetch(
             salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
+                context.read<EligibilityBloc>().state.salesOrganisation,
             customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                context.read<EligibilityBloc>().state.customerCodeInfo,
             appliedFilter: OutstandingInvoiceFilter.empty(),
             searchKey: SearchKey.search(''),
           ),
@@ -137,20 +135,20 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
     context.read<AvailableCreditsBloc>().add(
           AvailableCreditsEvent.fetch(
             salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
+                context.read<EligibilityBloc>().state.salesOrganisation,
             customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                context.read<EligibilityBloc>().state.customerCodeInfo,
             appliedFilter: AvailableCreditFilter.empty(),
             searchKey: SearchKey.search(''),
           ),
         );
     context.read<NewPaymentBloc>().add(
           NewPaymentEvent.initialized(
-            user: context.read<UserBloc>().state.user,
+            user: context.read<EligibilityBloc>().state.user,
             customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                context.read<EligibilityBloc>().state.customerCodeInfo,
             salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
+                context.read<EligibilityBloc>().state.salesOrganisation,
           ),
         );
     context.router.pushNamed('payments/new_payment');
@@ -222,9 +220,9 @@ class _InvoiceItem extends StatelessWidget {
                 CreditAndInvoiceDetailsEvent.fetch(
                   creditAndInvoiceItem: invoiceItem,
                   salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
                   customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
                 ),
               );
           context.router.push(
@@ -262,7 +260,7 @@ class _InvoiceItem extends StatelessWidget {
                   Text(
                     '${context.tr('Due on')} ${StringUtils.getDueDateString(
                       invoiceItem.netDueDate.dateTimeOrNull,
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
                     )}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: invoiceItem
@@ -273,7 +271,8 @@ class _InvoiceItem extends StatelessWidget {
               ),
             ),
             PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              salesOrgConfig:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
               price: invoiceItem.amountInTransactionCurrency.toString(),
             ),
           ],

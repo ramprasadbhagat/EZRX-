@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -189,7 +189,7 @@ class _PriceWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.titleSmall,
         ),
         PriceComponent(
-          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+          salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
           price: price,
         ),
       ],

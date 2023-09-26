@@ -58,6 +58,9 @@ class AutoRouterMock extends Mock implements AppRouter {}
 class MockContactUsBloc extends MockBloc<ContactUsEvent, ContactUsState>
     implements ContactUsBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -69,6 +72,7 @@ void main() {
   late AnnouncementBloc mockAnnouncementBloc;
   late ContactUsBloc mockContactUsBloc;
   late AuthBloc mockAuthBloc;
+  late EligibilityBloc eligibilityBlocMock;
   final user = User.empty().copyWith(
     username: Username('fake-name'),
     role: Role(
@@ -105,6 +109,7 @@ void main() {
     mockCustomerCodeBloc = MockCustomerCodeBloc();
     mockEligibilityBloc = MockEligibilityBloc();
     mockAuthBloc = MockAuthBloc();
+    eligibilityBlocMock = EligibilityBlocMock();
     mockAnnouncementBloc = MockAnnouncementBloc();
     mockContactUsBloc = MockContactUsBloc();
   });
@@ -121,6 +126,8 @@ void main() {
       when(() => mockAnnouncementBloc.state)
           .thenReturn(AnnouncementState.initial());
       when(() => mockContactUsBloc.state).thenReturn(ContactUsState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
     Widget getScopedWidget() {
       return WidgetUtils.getScopedWidget(
@@ -136,6 +143,9 @@ void main() {
           ),
           BlocProvider<AnnouncementBloc>(
             create: (context) => mockAnnouncementBloc,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
           BlocProvider<ContactUsBloc>(
             create: (context) => mockContactUsBloc,
@@ -154,11 +164,17 @@ void main() {
           salesOrganisation: salesOrg.copyWith(salesOrg: SalesOrg('2500')),
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg.copyWith(salesOrg: SalesOrg('2500')),
+        ),
+      );
       when(() => mockContactUsBloc.state).thenReturn(
         ContactUsState.initial().copyWith(
           isSubmitting: false,
           showErrorMessage: true,
           contactUs: contactUs,
+          apiFailureOrSuccessOption: optionOf(const Right('')),
         ),
       );
       final expectedState = [
@@ -189,6 +205,11 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
       when(() => mockContactUsBloc.state).thenReturn(
         ContactUsState.initial().copyWith(
           isSubmitting: false,
@@ -216,6 +237,11 @@ void main() {
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           salesOrganisation: salesOrg,
         ),
       );
@@ -251,6 +277,11 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
       when(() => mockContactUsBloc.state).thenReturn(
         ContactUsState.initial().copyWith(
           isSubmitting: true,
@@ -279,6 +310,11 @@ void main() {
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           salesOrganisation: salesOrg,
         ),
       );
@@ -326,6 +362,11 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
       final expectedState = [
         ContactUsState.initial().copyWith(
           isSubmitting: true,
@@ -367,6 +408,11 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
       when(() => mockContactUsBloc.state).thenReturn(
         ContactUsState.initial().copyWith(
           isSubmitting: true,
@@ -402,6 +448,11 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
       final expectedState = [
         ContactUsState.initial().copyWith(
           isSubmitting: true,
@@ -432,6 +483,11 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
       final expectedState = [
         ContactUsState.initial().copyWith(
           isSubmitting: true,
@@ -459,6 +515,11 @@ void main() {
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           salesOrganisation: salesOrg,
         ),
       );
@@ -504,6 +565,11 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
       final expectedState = [
         ContactUsState.initial().copyWith(
           isSubmitting: true,
@@ -531,6 +597,11 @@ void main() {
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           salesOrganisation: salesOrg,
         ),
       );
@@ -574,6 +645,11 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
       final expectedState = [
         ContactUsState.initial().copyWith(
           isSubmitting: true,
@@ -601,6 +677,11 @@ void main() {
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           salesOrganisation: salesOrg,
         ),
       );
@@ -643,6 +724,11 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
       when(() => mockCustomerCodeBloc.state).thenReturn(
         CustomerCodeState.initial().copyWith(
           isFetching: false,
@@ -681,6 +767,11 @@ void main() {
           salesOrganisation: salesOrg,
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
+        ),
+      );
       when(() => mockCustomerCodeBloc.state).thenReturn(
         CustomerCodeState.initial().copyWith(
           isFetching: false,
@@ -716,6 +807,11 @@ void main() {
       when(() => mockUserBloc.state).thenReturn(
         UserState.initial().copyWith(
           user: user,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: salesOrg,
         ),
       );
       when(() => mockSalesOrgBloc.state).thenReturn(
@@ -772,6 +868,11 @@ void main() {
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           isLoading: false,
+          salesOrganisation: salesOrg,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           salesOrganisation: salesOrg,
         ),
       );

@@ -22,7 +22,7 @@ class _SaveClearChangesSection extends StatelessWidget {
                 height: 40,
               ),
               if (state.showNewPasswordPatternMismatchError(
-                context.read<UserBloc>().state.user,
+                context.read<EligibilityBloc>().state.user,
               ))
                 const _ValidationsFailedWarning(),
               Padding(
@@ -53,7 +53,10 @@ class _SaveClearChangesSection extends StatelessWidget {
                           FocusScope.of(context).unfocus();
                           context.read<ResetPasswordBloc>().add(
                                 ResetPasswordEvent.resetPasswordPressed(
-                                  user: context.read<UserBloc>().state.user,
+                                  user: context
+                                      .read<EligibilityBloc>()
+                                      .state
+                                      .user,
                                 ),
                               );
                         },

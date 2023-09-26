@@ -21,7 +21,7 @@ class _ViewByOrderItem extends StatelessWidget {
                 orderNumber: orderHistoryItem.orderNumber,
                 salesOrganisation:
                     context.read<EligibilityBloc>().state.salesOrganisation,
-                user: context.read<UserBloc>().state.user,
+                user: context.read<EligibilityBloc>().state.user,
                 materialNumber: orderHistoryItem.materialNumber,
                 soldTo: customerCodeInfo,
                 disableDeliveryDateForZyllemStatus: context

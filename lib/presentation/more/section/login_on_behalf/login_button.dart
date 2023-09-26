@@ -17,7 +17,7 @@ class _LoginButton extends StatelessWidget {
               FocusScope.of(context).unfocus();
               context.read<ProxyLoginFormBloc>().add(
                     ProxyLoginFormEvent.loginWithADButtonPressed(
-                      user: context.read<UserBloc>().state.user,
+                      user: context.read<EligibilityBloc>().state.user,
                       salesOrg: context
                           .read<SalesOrgBloc>()
                           .state

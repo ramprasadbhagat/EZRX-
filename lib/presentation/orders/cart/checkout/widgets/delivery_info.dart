@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
@@ -77,8 +77,10 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                   ? BlocBuilder<AdditionalDetailsBloc, AdditionalDetailsState>(
                       buildWhen: (previous, current) => previous != current,
                       builder: (context, state) {
-                        final config =
-                            context.read<SalesOrgBloc>().state.configs;
+                        final config = context
+                            .read<EligibilityBloc>()
+                            .state
+                            .salesOrgConfigs;
 
                         return Form(
                           key: WidgetKeys.additionalDetailsForm,
@@ -102,9 +104,9 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                 RequestDeliveryDate(
                                   deliveryInfoData: state.deliveryInfoData,
                                   futureDeliveryDay: context
-                                      .read<SalesOrgBloc>()
+                                      .read<EligibilityBloc>()
                                       .state
-                                      .configs
+                                      .salesOrgConfigs
                                       .futureDeliveryDay
                                       .validatedFutureDeliveryDate,
                                 ),
@@ -302,7 +304,7 @@ class _TextFormFieldState extends State<_TextFormField> {
     required DeliveryInfoLabel label,
     required BuildContext context,
   }) {
-    final config = context.read<SalesOrgBloc>().state.configs;
+    final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
     switch (label) {
       case DeliveryInfoLabel.poReference:
         return config.poNumberRequired.getOrDefaultValue(false)

@@ -17,7 +17,7 @@ class _ReturnRequestSuccessMessage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
-              '${'We’ll send a confirmation to'.tr()} ${context.read<UserBloc>().state.user.email.getOrDefaultValue('')} ${'once your return has been approved.'.tr()}',
+              '${'We’ll send a confirmation to'.tr()} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${'once your return has been approved.'.tr()}',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: ZPColors.darkerGrey,
                   ),

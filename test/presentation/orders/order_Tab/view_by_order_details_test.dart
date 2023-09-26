@@ -246,7 +246,13 @@ void main() {
           ),
         ),
       );
-
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            disablePaymentTermsDisplay: true,
+          ),
+        ),
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
 
@@ -324,7 +330,13 @@ void main() {
           ),
         ),
       );
-
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableSpecialInstructions: true,
+          ),
+        ),
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       final expectedDelivery = find.textContaining('Delivery instruction');

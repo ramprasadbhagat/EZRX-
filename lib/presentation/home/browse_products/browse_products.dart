@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
@@ -29,8 +28,9 @@ class BrowseProduct extends StatelessWidget {
           context.read<MaterialListBloc>().add(
                 MaterialListEvent.fetch(
                   salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  configs: context.read<SalesOrgBloc>().state.configs,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
+                  configs:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                   customerCodeInfo:
                       context.read<EligibilityBloc>().state.customerCodeInfo,
                   shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,

@@ -34,7 +34,9 @@ class _ContactNumberTextField extends StatelessWidget {
             ),
             InternationalPhoneNumberInput(
               key: WidgetKeys.internationalPhoneNumberInputKey,
-              countries: [context.read<SalesOrgBloc>().state.salesOrg.country],
+              countries: [
+                context.read<EligibilityBloc>().state.salesOrg.country,
+              ],
               onInputValidated: (bool value) {},
               autoValidateMode: state.showErrorMessage
                   ? AutovalidateMode.always

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -344,7 +345,7 @@ class _PaymentAdviceExpiryReminderSection extends StatelessWidget {
 
   bool _initialValue(BuildContext context) {
     final paymentNotification =
-        context.read<UserBloc>().state.user.settings.paymentNotification;
+        context.read<EligibilityBloc>().state.user.settings.paymentNotification;
     switch (type) {
       case PaymentAdviceType.day03:
         return paymentNotification.notificationConfigValue('3').disabled;
@@ -359,7 +360,7 @@ class _PaymentAdviceExpiryReminderSection extends StatelessWidget {
 
   void _onChanged(BuildContext context, bool value) {
     final paymentNotification =
-        context.read<UserBloc>().state.user.settings.paymentNotification;
+        context.read<EligibilityBloc>().state.user.settings.paymentNotification;
     switch (type) {
       case PaymentAdviceType.day03:
         context.read<PaymentNotificationBloc>().add(
@@ -395,7 +396,7 @@ class _PaymentAdviceExpiryReminderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
+    return BlocBuilder<EligibilityBloc, EligibilityState>(
       buildWhen: (previous, current) =>
           previous.user.settings.paymentNotification !=
           current.user.settings.paymentNotification,

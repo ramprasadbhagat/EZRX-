@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -30,11 +31,14 @@ class ReturnApproverFilterBlocMock
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   late AppRouter autoRouterMock;
   late ReturnApproverBloc returnApproverBlocMock;
   late ReturnApproverFilterBloc returnApproverFilterBlocMock;
-
+  late EligibilityBloc eligibilityBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   final mockReturnApproverFilter = ReturnApproverFilter.empty();
 
@@ -72,6 +76,9 @@ void main() {
         BlocProvider<SalesOrgBloc>(
           create: (context) => salesOrgBlocMock,
         ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
+        ),
       ],
       child: const ApproverReturnFilterDrawer(),
     );
@@ -83,12 +90,14 @@ void main() {
       returnApproverBlocMock = ReturnApproverBlocMock();
       returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
+      eligibilityBlocMock = EligibilityBlockMock();
       autoRouterMock = locator<AppRouter>();
       when(() => returnApproverBlocMock.state)
           .thenReturn(ReturnApproverState.initial());
       when(() => returnApproverFilterBlocMock.state)
           .thenReturn(ReturnApproverFilterState.initial());
-
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     },
   );

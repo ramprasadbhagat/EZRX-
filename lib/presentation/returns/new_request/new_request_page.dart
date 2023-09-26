@@ -1,9 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -131,7 +129,7 @@ class NewRequestPage extends StatelessWidget {
                                 dense: true,
                                 contentPadding: EdgeInsets.zero,
                                 title: Text(
-                                  '${'Return for'.tr()} ${context.read<CustomerCodeBloc>().state.customerCodeInfo.customerName}',
+                                  '${'Return for'.tr()} ${context.read<EligibilityBloc>().state.customerCodeInfo.customerName}',
                                   style: Theme.of(context).textTheme.labelSmall,
                                 ),
                                 trailing: const Icon(

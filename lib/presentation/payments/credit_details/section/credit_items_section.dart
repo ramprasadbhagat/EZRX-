@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
@@ -60,7 +60,7 @@ class CreditItemsSection extends StatelessWidget {
                       e.materialNumber.getOrDefaultValue(''),
                     ),
                     subtitle: StringUtils.displayPrice(
-                      context.read<SalesOrgBloc>().state.configs,
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                       double.parse(
                         (e.grossAmount / e.billingQuantity.getOrDefaultValue(1))
                             .toStringAsFixed(2),
@@ -82,8 +82,10 @@ class CreditItemsSection extends StatelessWidget {
                                   ),
                         ),
                         PriceComponent(
-                          salesOrgConfig:
-                              context.read<SalesOrgBloc>().state.configs,
+                          salesOrgConfig: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrgConfigs,
                           price: e.grossAmount.toStringAsFixed(2),
                         ),
                       ],

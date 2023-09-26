@@ -72,7 +72,7 @@ class OrderSummarySection extends StatelessWidget {
             keyText: context.tr('Grand total'),
             valueText: orderDetails.orderNumber.isValid()
                 ? StringUtils.displayPrice(
-                    context.read<SalesOrgBloc>().state.configs,
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
                     taxDisplayForOrderHistoryAndDetails
                         ? orderDetails.grandTotal
                         : orderDetails.orderValue,

@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,8 @@ class ReturnMaterialInfoSection extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           PriceComponent(
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            salesOrgConfig:
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
             price: returnMaterial.unitPrice.apiParameterValue,
             type: PriceStyle.bonusPrice,
           ),

@@ -22,7 +22,7 @@ class _QuantityAndPrice extends StatelessWidget {
               ),
         ),
         PriceComponent(
-          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+          salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
           price: unitPrice.toString(),
         ),
       ],

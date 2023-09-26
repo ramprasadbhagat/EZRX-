@@ -8,7 +8,7 @@ class _UsernameTextField extends StatelessWidget {
 
     if (existingName.getOrDefaultValue('').isEmpty) {
       final displayFullName =
-          context.read<UserBloc>().state.userFullName.displayFullName;
+          context.read<EligibilityBloc>().state.user.fullName.displayFullName;
       context.read<ContactUsBloc>().add(
             ContactUsEvent.onUsernameChange(newValue: displayFullName),
           );

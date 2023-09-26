@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
@@ -23,8 +24,6 @@ import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.d
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
 class CartProductTileBonus extends StatelessWidget {
   final PriceAggregate cartProduct;
@@ -52,7 +51,7 @@ class CartProductTileBonus extends StatelessWidget {
                         .getOrDefaultValue(''),
                     quantity: MaterialQty(0),
                   ),
-                  user: context.read<UserBloc>().state.user,
+                  user: context.read<EligibilityBloc>().state.user,
                   counterOfferDetails: RequestCounterOfferDetails.empty(),
                   bonusItemId: bonusItem.itemId,
                 ),
@@ -247,7 +246,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                   .getOrDefaultValue(''),
               quantity: MaterialQty(qty),
             ),
-            user: context.read<UserBloc>().state.user,
+            user: context.read<EligibilityBloc>().state.user,
             counterOfferDetails: RequestCounterOfferDetails.empty(),
             bonusItemId: widget.bonusItem.itemId,
           ),

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -319,7 +319,7 @@ class _InvoiceDateFilter extends StatelessWidget {
               lastDate: DateTime.now(),
               initialDateRange:
                   state.approverReturnFilter.getInvoiceFilterDateRange,
-              locale: context.read<SalesOrgBloc>().state.salesOrg.locale,
+              locale: context.read<EligibilityBloc>().state.salesOrg.locale,
             );
             if (invoiceDateRange == null) return;
             returnApproverFilterBloc.add(

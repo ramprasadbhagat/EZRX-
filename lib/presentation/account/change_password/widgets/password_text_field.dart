@@ -89,7 +89,7 @@ class _PasswordTextField extends StatelessWidget {
             ResetPasswordEvent.onTextChange(
               passwordFieldType,
               text,
-              context.read<UserBloc>().state.user,
+              context.read<EligibilityBloc>().state.user,
             ),
           ),
       obscureText: isPasswordVisible,

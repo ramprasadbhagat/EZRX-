@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/language/language_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/auth/entities/language.dart';
@@ -69,8 +68,10 @@ class ProfilePage extends StatelessWidget {
                           .read<EligibilityBloc>()
                           .state
                           .customerCodeInfo,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      salesOrganisation: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .salesOrganisation,
                       user: context.read<EligibilityBloc>().state.user,
                     ),
                   ),
@@ -80,8 +81,10 @@ class ProfilePage extends StatelessWidget {
                           .read<EligibilityBloc>()
                           .state
                           .customerCodeInfo,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
+                      salesOrganisation: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .salesOrganisation,
                       user: context.read<EligibilityBloc>().state.user,
                     ),
                   ),

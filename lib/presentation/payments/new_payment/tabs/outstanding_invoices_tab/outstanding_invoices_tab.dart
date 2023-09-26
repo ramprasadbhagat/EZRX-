@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
@@ -65,7 +66,8 @@ class OutstandingInvoicesTab extends StatelessWidget {
                     ),
               ),
               PriceComponent(
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: context
                     .read<AccountSummaryBloc>()
                     .state
@@ -232,9 +234,9 @@ class _FilterTune extends StatelessWidget {
           context.read<OutstandingInvoicesBloc>().add(
                 OutstandingInvoicesEvent.fetch(
                   salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
                   customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
                   appliedFilter: newFilter,
                   searchKey:
                       context.read<OutstandingInvoicesBloc>().state.searchKey,

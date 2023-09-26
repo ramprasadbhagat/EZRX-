@@ -3,8 +3,6 @@ import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/language/language_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -188,13 +186,13 @@ class MoreDetailsTile {
                   customerInfo:
                       context.read<EligibilityBloc>().state.customerCodeInfo,
                   salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
                   user: context.read<EligibilityBloc>().state.user,
                 ),
               );
           context.read<LanguageBloc>().add(
                 LanguageEvent.changeLanguage(
-                  context.read<UserBloc>().state.user.defaultLanguage,
+                  context.read<EligibilityBloc>().state.user.defaultLanguage,
                 ),
               );
           context.navigateTo(

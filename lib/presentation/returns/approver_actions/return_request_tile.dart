@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -44,7 +44,7 @@ class ApproverReturnRequestTile extends StatelessWidget {
             BalanceTextRow(
               keyText: 'Refund Total (w/o tax)'.tr(),
               valueText: StringUtils.displayPrice(
-                context.read<SalesOrgBloc>().state.configs,
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
                 approverReturnRequest.refundTotal,
               ),
               keyFlex: 1,

@@ -189,6 +189,16 @@ void main() {
             ),
           ),
         );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              poNumberRequired: PoNumberRequired(true),
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+          ),
+        );
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
@@ -269,6 +279,16 @@ void main() {
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
             configs: SalesOrganisationConfigs.empty().copyWith(
+              enablePaymentTerms: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
               enablePaymentTerms: true,
             ),
             salesOrganisation: SalesOrganisation.empty().copyWith(
@@ -366,6 +386,14 @@ void main() {
         when(() => cartBloc.state).thenReturn(
           cartState,
         );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('3700'),
+            ),
+            salesOrgConfigs: salesOrgConfig,
+          ),
+        );
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
@@ -433,7 +461,14 @@ void main() {
         when(() => salesOrgBlocMock.state).thenReturn(
           salesOrgState,
         );
-
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+            salesOrgConfigs: salesOrgConfig,
+          ),
+        );
         when(() => cartBloc.state).thenReturn(
           cartState,
         );
@@ -504,7 +539,14 @@ void main() {
         when(() => salesOrgBlocMock.state).thenReturn(
           salesOrgState,
         );
-
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('3700'),
+            ),
+            salesOrgConfigs: salesOrgConfig,
+          ),
+        );
         when(() => cartBloc.state).thenReturn(
           cartState,
         );
@@ -573,6 +615,14 @@ void main() {
             salesOrg: SalesOrg('3050'),
           ),
           configs: salesOrgConfig,
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('3050'),
+            ),
+            salesOrgConfigs: salesOrgConfig,
+          ),
         );
 
         when(() => salesOrgBlocMock.state).thenReturn(

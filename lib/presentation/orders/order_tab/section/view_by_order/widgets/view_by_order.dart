@@ -21,12 +21,12 @@ class _ViewByOrder extends StatelessWidget {
         onTap: () {
           context.read<ViewByOrderDetailsBloc>().add(
                 ViewByOrderDetailsEvent.fetch(
-                  user: context.read<UserBloc>().state.user,
+                  user: context.read<EligibilityBloc>().state.user,
                   orderNumber: viewByOrderHistoryItem.orderNumber,
                   customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
                   salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
                 ),
               );
           context.router.push(

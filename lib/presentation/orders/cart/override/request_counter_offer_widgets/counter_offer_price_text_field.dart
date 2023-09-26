@@ -44,7 +44,8 @@ class _CounterOfferPriceTextFieldState
             previous.showErrorMessages != current.showErrorMessages ||
             previous.isDiscountOverride != current.isDiscountOverride,
         builder: (context, state) {
-          final currency = context.read<SalesOrgBloc>().state.configs.currency;
+          final currency =
+              context.read<EligibilityBloc>().state.salesOrgConfigs.currency;
 
           return Form(
             autovalidateMode: widget.isDiscountOverrideEnable

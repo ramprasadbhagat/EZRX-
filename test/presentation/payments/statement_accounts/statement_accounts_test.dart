@@ -39,6 +39,9 @@ class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
@@ -81,6 +84,7 @@ void main() {
   late SalesOrgBloc mockSalesOrgBloc;
   late AppRouter autoRouterMock;
   late UserBloc mockUserBloc;
+  late EligibilityBloc eligibilityBlocMock;
   late CustomerCodeBloc mockCustomerCodeBloc;
   late EligibilityBloc mockEligibilityBloc;
   late AnnouncementBloc mockAnnouncementBloc;
@@ -109,6 +113,7 @@ void main() {
   setUp(() async {
     mockSalesOrgBloc = MockSalesOrgBloc();
     mockUserBloc = MockUserBloc();
+    eligibilityBlocMock = EligibilityBlockMock();
     autoRouterMock = locator<AppRouter>();
     mockCustomerCodeBloc = MockCustomerCodeBloc();
     mockEligibilityBloc = MockEligibilityBloc();
@@ -129,6 +134,8 @@ void main() {
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
       when(() => mockCustomerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
       when(() => mockEligibilityBloc.state)
           .thenReturn(EligibilityState.initial());
       when(() => mockAnnouncementBloc.state)
@@ -161,6 +168,9 @@ void main() {
           ),
           BlocProvider<EligibilityBloc>(
             create: (context) => mockEligibilityBloc,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
@@ -339,8 +349,7 @@ void main() {
       when(() => mockEligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
           isLoading: false,
-          customerCodeInfo: CustomerCodeInfo.empty()
-              .copyWith(customerCodeSoldTo: '0030082707'),
+          customerCodeInfo: CustomerCodeInfo.empty(),
         ),
       );
 
@@ -371,7 +380,7 @@ void main() {
       verify(
         () => mockSoaBloc.add(
           SoaEvent.fetch(
-            customerCodeInfo: mockEligibilityBloc.state.customerCodeInfo,
+            customerCodeInfo: CustomerCodeInfo.empty(),
           ),
         ),
       ).called(1);
@@ -391,6 +400,19 @@ void main() {
           ),
         ),
       );
+      when(
+        () => eligibilityBlocMock.state,
+      ).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: salesOrg,
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'mock-customerCodeSoldTo',
+          ),
+        ),
+      );
+
       when(() => mockCustomerCodeBloc.state).thenReturn(
         CustomerCodeState.initial().copyWith(
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(

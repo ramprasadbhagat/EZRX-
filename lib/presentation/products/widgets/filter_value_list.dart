@@ -57,8 +57,10 @@ class _FilterValueListState extends State<FilterValueList> {
                                     .read<SalesOrgBloc>()
                                     .state
                                     .salesOrganisation,
-                                configs:
-                                    context.read<SalesOrgBloc>().state.configs,
+                                configs: context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .salesOrgConfigs,
                                 customerCodeInfo: context
                                     .read<CustomerCodeBloc>()
                                     .state

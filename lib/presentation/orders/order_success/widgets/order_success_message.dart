@@ -15,7 +15,7 @@ class _OrderSuccessMessage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
-            '${'We’ll send a confirmation to'.tr()} ${context.read<UserBloc>().state.user.email.getOrDefaultValue('')} ${'once your order has been confirmed'.tr()}',
+            '${'We’ll send a confirmation to'.tr()} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${'once your order has been confirmed'.tr()}',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),

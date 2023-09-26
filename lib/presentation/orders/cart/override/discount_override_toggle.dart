@@ -3,6 +3,7 @@
 //ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -89,7 +90,7 @@ class DiscountOverrideToggle extends StatelessWidget {
                             ),
                           ),
                           shipToInfo:
-                              context.read<CustomerCodeBloc>().state.shipToInfo,
+                              context.read<EligibilityBloc>().state.shipToInfo,
                         ),
                       );
                 }
@@ -191,9 +192,9 @@ class DiscountOverrideDialog {
             context.read<DiscountOverrideBloc>().add(
                   DiscountOverrideEvent.fetch(
                     salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                        context.read<EligibilityBloc>().state.salesOrganisation,
                     customerCode:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                        context.read<EligibilityBloc>().state.customerCodeInfo,
                     material: cartItem.materialInfo,
                     materialNumber: cartItem.getMaterialNumber,
                     price: cartItem.price.copyWith(
@@ -202,7 +203,7 @@ class DiscountOverrideDialog {
                       ),
                     ),
                     shipToInfo:
-                        context.read<CustomerCodeBloc>().state.shipToInfo,
+                        context.read<EligibilityBloc>().state.shipToInfo,
                   ),
                 );
             context.router.pop();

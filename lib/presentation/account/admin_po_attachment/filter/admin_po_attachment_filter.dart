@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
@@ -317,7 +316,7 @@ class _AdminAttachmentDateFilter extends StatelessWidget {
               ),
               lastDate: DateTime.now(),
               initialDateRange: state.adminPoAttachmentFilter.filterDateRange,
-              locale: context.read<SalesOrgBloc>().state.salesOrg.locale,
+              locale: context.read<EligibilityBloc>().state.salesOrg.locale,
             );
             if (dateRange == null) return;
             adminPoAttachmentFilterBloc.add(

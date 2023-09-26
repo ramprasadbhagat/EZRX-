@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -62,6 +63,9 @@ class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
 
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 void main() {
@@ -71,6 +75,7 @@ void main() {
   late AvailableCreditsBloc availableCreditsBlocMock;
   late AvailableCreditFilterBloc availableCreditFilterBlocMock;
   late NewPaymentBloc newPaymentBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
@@ -253,6 +258,7 @@ void main() {
 
   setUp(() async {
     accountSummaryBlocMock = AccountSummaryBlocMock();
+    eligibilityBlocMock = EligibilityBlockMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
     outstandingInvoiceFilterBlocMock = OutstandingInvoiceFilterBlocMock();
     availableCreditsBlocMock = AvailableCreditsBlocMock();
@@ -287,6 +293,8 @@ void main() {
     when(() => availableCreditsBlocMock.state)
         .thenReturn(AvailableCreditsState.initial());
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
   Widget getWidget() {
@@ -309,6 +317,9 @@ void main() {
         ),
         BlocProvider<AvailableCreditFilterBloc>(
           create: (context) => availableCreditFilterBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
         ),
         BlocProvider<NewPaymentBloc>(
           create: (context) => newPaymentBlocMock,

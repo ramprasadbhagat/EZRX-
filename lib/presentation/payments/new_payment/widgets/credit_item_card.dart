@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -43,7 +43,8 @@ class CreditItemCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 PriceComponent(
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price:
                       customerOpenItem.amountInTransactionCurrency.toString(),
                 ),

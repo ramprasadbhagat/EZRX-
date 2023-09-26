@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/faq/faq_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/faq/entity/faq_item.dart';
@@ -24,8 +23,8 @@ class FAQPage extends StatelessWidget {
       create: (_) => locator<FaqBloc>()
         ..add(
           FaqEvent.getFaq(
-            salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
-            user: context.read<UserBloc>().state.user,
+            salesOrg: context.read<EligibilityBloc>().state.salesOrg,
+            user: context.read<EligibilityBloc>().state.user,
           ),
         ),
       child: Scaffold(

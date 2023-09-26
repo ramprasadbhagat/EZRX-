@@ -190,7 +190,7 @@ class _ApproverReturnRequestScrollList extends StatelessWidget {
       noRecordFoundWidget: const NoRecordFound(title: 'No Return found'),
       controller: ScrollController(),
       onRefresh: () {
-        if (!context.read<CustomerCodeBloc>().state.haveShipTo) {
+        if (!context.read<EligibilityBloc>().state.haveShipTo) {
           return;
         }
         final returnApproverFilterBloc =

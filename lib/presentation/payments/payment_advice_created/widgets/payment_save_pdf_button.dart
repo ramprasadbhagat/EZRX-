@@ -43,7 +43,7 @@ class PaymentSavePdfButton extends StatelessWidget {
                                   .state
                                   .shipToInfo,
                               salesOrganisation: context
-                                  .read<SalesOrgBloc>()
+                                  .read<EligibilityBloc>()
                                   .state
                                   .salesOrganisation,
                             ),

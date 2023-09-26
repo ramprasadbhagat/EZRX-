@@ -23,17 +23,19 @@ class _CartPageCartScrollList extends StatelessWidget {
                 context.read<MaterialPriceBloc>().add(
                       MaterialPriceEvent.fetchPriceCartProduct(
                         salesOrganisation: context
-                            .read<SalesOrgBloc>()
+                            .read<EligibilityBloc>()
                             .state
                             .salesOrganisation,
-                        salesConfigs:
-                            context.read<SalesOrgBloc>().state.configs,
+                        salesConfigs: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .salesOrgConfigs,
                         customerCodeInfo: context
                             .read<CustomerCodeBloc>()
                             .state
                             .customerCodeInfo,
                         shipToInfo:
-                            context.read<CustomerCodeBloc>().state.shipToInfo,
+                            context.read<EligibilityBloc>().state.shipToInfo,
                         comboDealEligible: context
                             .read<EligibilityBloc>()
                             .state

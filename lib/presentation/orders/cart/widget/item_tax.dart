@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -32,7 +32,8 @@ class ItemTax extends StatelessWidget {
               style: txtStyle,
             ),
             PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              salesOrgConfig:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
               price: cartItem.itemTax.toString(),
               type: PriceStyle.taxPrice,
             ),
@@ -49,7 +50,8 @@ class ItemTax extends StatelessWidget {
               style: txtStyle,
             ),
             PriceComponent(
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              salesOrgConfig:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
               price: cartItem.finalPriceTotalWithTax.toStringAsFixed(2),
               type: PriceStyle.taxPrice,
             ),

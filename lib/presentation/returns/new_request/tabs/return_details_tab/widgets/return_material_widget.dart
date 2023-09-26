@@ -79,7 +79,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
               NewRequestEvent.toggleReturnItem(
                 selected: false,
                 item: item,
-                salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
+                salesOrg: context.read<EligibilityBloc>().state.salesOrg,
               ),
             );
       }

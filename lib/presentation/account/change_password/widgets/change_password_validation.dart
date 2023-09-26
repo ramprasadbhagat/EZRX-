@@ -46,7 +46,7 @@ class _ResetPasswordValidation extends StatelessWidget {
             _ConditionText(
               enableGreenTick: state
                   .newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName(
-                user: context.read<UserBloc>().state.user,
+                user: context.read<EligibilityBloc>().state.user,
               ),
               msgText:
                   'New password cannot contain more than 2 consecutive characters from username and/or name of the user',

@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
@@ -31,6 +32,9 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
@@ -46,7 +50,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late AnnouncementInfoDetailsBloc announcementInfoDetailsBlocMock;
   late AuthBloc authBlocMock;
-  late SalesOrgBloc salesOrgBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
   late AnnouncementArticleInfo announcementInfo;
 
@@ -68,8 +72,8 @@ void main() {
         BlocProvider<AuthBloc>(
           create: (context) => authBlocMock,
         ),
-        BlocProvider<SalesOrgBloc>(
-          create: (context) => salesOrgBlocMock,
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
         ),
         BlocProvider<AnnouncementInfoDetailsBloc>(
           create: (context) => announcementInfoDetailsBlocMock,
@@ -98,7 +102,7 @@ void main() {
         autoRouterMock = locator<AppRouter>();
         announcementInfoBlocMock = AnnouncementInfoBlocMock();
         announcementBlocMock = AnnouncementBlocMock();
-        salesOrgBlocMock = SalesOrgBlocMock();
+        eligibilityBlocMock = EligibilityBlocMock();
         authBlocMock = AuthBlocMock();
         announcementInfoDetailsBlocMock = AnnouncementInfoDetailsBlocMock();
         when(() => announcementInfoBlocMock.state)
@@ -106,7 +110,8 @@ void main() {
         when(() => announcementBlocMock.state)
             .thenReturn(AnnouncementState.initial());
         when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-        when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+        when(() => eligibilityBlocMock.state)
+            .thenReturn(EligibilityState.initial());
         when(() => announcementInfoDetailsBlocMock.state)
             .thenReturn(AnnouncementInfoDetailsState.initial());
         announcementInfo =

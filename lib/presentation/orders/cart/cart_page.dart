@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
@@ -58,11 +57,12 @@ class _CartPageState extends State<CartPage> {
       context.read<MaterialPriceBloc>().add(
             MaterialPriceEvent.fetchPriceCartProduct(
               salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              salesConfigs: context.read<SalesOrgBloc>().state.configs,
+                  context.read<EligibilityBloc>().state.salesOrganisation,
+              salesConfigs:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
               customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                  context.read<EligibilityBloc>().state.customerCodeInfo,
+              shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
               comboDealEligible:
                   context.read<EligibilityBloc>().state.comboDealEligible,
               products: context
@@ -132,9 +132,10 @@ class _CartPageState extends State<CartPage> {
           if (state.cartProducts.isEmpty) {
             context.read<AdditionalDetailsBloc>().add(
                   AdditionalDetailsEvent.initialized(
-                    config: context.read<SalesOrgBloc>().state.configs,
+                    config:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
                     customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                        context.read<EligibilityBloc>().state.customerCodeInfo,
                   ),
                 );
           }
@@ -147,7 +148,8 @@ class _CartPageState extends State<CartPage> {
         },
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
-          final taxCode = context.read<SalesOrgBloc>().state.salesOrg.taxCode;
+          final taxCode =
+              context.read<EligibilityBloc>().state.salesOrg.taxCode;
 
           return GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),

@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -67,6 +68,9 @@ class SoaBlocMock extends MockBloc<SoaEvent, SoaState> implements SoaBloc {}
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   late SoaBloc soaBloc;
   late AuthBloc authBlocMock;
@@ -75,6 +79,7 @@ void main() {
   late SalesOrgBloc salesOrgBlocMock;
   late NewPaymentBloc newPaymentBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late AccountSummaryBloc accountSummaryBlocMock;
   late AccountSummaryState accountSummaryState;
@@ -137,6 +142,7 @@ void main() {
 
   setUp(() async {
     soaBloc = SoaBlocMock();
+    eligibilityBlocMock = EligibilityBlockMock();
     authBlocMock = AuthBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     newPaymentBlocMock = NewPaymentBlocMock();
@@ -165,6 +171,8 @@ void main() {
         .thenReturn(OutstandingInvoicesState.initial());
     when(() => downloadPaymentAttachmentsBloc.state)
         .thenReturn(DownloadPaymentAttachmentsState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
     when(() => soaBloc.state).thenReturn(SoaState.initial());
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -195,6 +203,9 @@ void main() {
         ),
         BlocProvider<PaymentInProgressBloc>(
           create: (context) => paymentInProgressBloc,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
         ),
         BlocProvider<AccountSummaryBloc>(
           create: (context) => accountSummaryBlocMock,
@@ -232,6 +243,12 @@ void main() {
         (WidgetTester tester) async {
       when(() => salesOrgBlocMock.state).thenReturn(
         SalesOrgState.initial().copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2501')),
         ),

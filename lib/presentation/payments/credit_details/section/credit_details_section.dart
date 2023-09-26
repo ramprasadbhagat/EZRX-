@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
@@ -122,7 +122,8 @@ class CreditDetailsSection extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 PriceComponent(
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price:
                       '${creditItem.convertIfAmountInTransactionCurrencyIsNegative}',
                 ),

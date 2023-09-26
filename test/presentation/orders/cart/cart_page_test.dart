@@ -1754,7 +1754,14 @@ void main() {
           when(() => salesOrgBloc.state).thenReturn(
             salesOrgState,
           );
-
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: salesOrgConfig,
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('3700'),
+              ),
+            ),
+          );
           when(() => cartBloc.state).thenReturn(
             cartState,
           );
@@ -1813,7 +1820,14 @@ void main() {
               ),
             ],
           );
-
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: salesOrgConfig,
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('2001'),
+              ),
+            ),
+          );
           when(() => salesOrgBloc.state).thenReturn(
             salesOrgState,
           );

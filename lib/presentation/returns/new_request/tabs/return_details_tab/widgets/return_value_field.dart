@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
@@ -29,7 +29,7 @@ class ReturnValueField extends StatelessWidget {
             '${data.uuid}${detail.returnQuantity.getIntValue}',
           ),
           labelText:
-              '${'Return value'.tr()} (${context.read<SalesOrgBloc>().state.configs.currency.code})',
+              '${'Return value'.tr()} (${context.read<EligibilityBloc>().state.salesOrgConfigs.currency.code})',
           onChanged: (value) {},
           initValue: detail.returnValueString(
             data.unitPrice.getOrDefaultValue(0),

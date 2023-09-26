@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -48,7 +48,8 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
   bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
-    final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+    final salesOrgConfig =
+        context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return CommonTileItem(
       key: WidgetKeys.returnDetailMaterialItem(

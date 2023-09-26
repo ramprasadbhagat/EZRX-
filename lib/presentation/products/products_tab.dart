@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -81,8 +80,7 @@ class ProductsTab extends StatelessWidget {
                               item.type.typeMaterial
                                   ? MaterialGridItem(
                                       materialInfo: item,
-                                      onTap: () =>
-                                          _productOnTap(context, item),
+                                      onTap: () => _productOnTap(context, item),
                                       onFavouriteTap: () =>
                                           onFavouriteTap(context, item),
                                     )
@@ -104,7 +102,7 @@ class ProductsTab extends StatelessWidget {
     context.read<MaterialListBloc>().add(
           MaterialListEvent.fetch(
             salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
+                context.read<EligibilityBloc>().state.salesOrganisation,
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,
@@ -119,7 +117,7 @@ class ProductsTab extends StatelessWidget {
     context.read<MaterialListBloc>().add(
           MaterialListEvent.loadMore(
             salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
+                context.read<EligibilityBloc>().state.salesOrganisation,
             configs: eligibilityBloc.state.salesOrgConfigs,
             customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
             shipToInfo: eligibilityBloc.state.shipToInfo,

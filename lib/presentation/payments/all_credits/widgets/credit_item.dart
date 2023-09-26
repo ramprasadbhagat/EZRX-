@@ -34,14 +34,18 @@ class _CreditsItem extends StatelessWidget {
           padding: const EdgeInsets.only(
             top: 8,
           ),
-          child: PriceComponent(
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-            price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
-                .toString(),
-            priceLabelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ZPColors.primary,
-                  fontWeight: FontWeight.bold,
-                ),
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: PriceComponent(
+              salesOrgConfig:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
+              price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
+                  .toString(),
+              priceLabelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: ZPColors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
           ),
         ),
       ),
@@ -53,9 +57,9 @@ class _CreditsItem extends StatelessWidget {
           CreditAndInvoiceDetailsEvent.fetch(
             creditAndInvoiceItem: creditItem,
             salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
+                context.read<EligibilityBloc>().state.salesOrganisation,
             customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                context.read<EligibilityBloc>().state.customerCodeInfo,
           ),
         );
     context.router.push(CreditDetailsPageRoute(creditItem: creditItem));

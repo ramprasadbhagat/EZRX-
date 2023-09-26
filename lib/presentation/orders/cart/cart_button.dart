@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as bd;
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -30,7 +29,7 @@ class CartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final disableCreateOrder =
-        !context.read<UserBloc>().state.user.userCanCreateOrder;
+        !context.read<EligibilityBloc>().state.user.userCanCreateOrder;
 
     return disableCreateOrder
         ? const SizedBox.shrink()

@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -41,7 +41,7 @@ class ContactUsPage extends StatelessWidget {
       ),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
-        child: BlocBuilder<SalesOrgBloc, SalesOrgState>(
+        child: BlocBuilder<EligibilityBloc, EligibilityState>(
           buildWhen: (previous, current) =>
               previous.salesOrg != current.salesOrg,
           builder: (context, state) {

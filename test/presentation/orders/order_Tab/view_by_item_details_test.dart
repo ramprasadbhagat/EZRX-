@@ -323,6 +323,12 @@ void main() {
               .copyWith(enableSpecialInstructions: true),
         ),
       );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(enableSpecialInstructions: true),
+        ),
+      );
       final expectedStates = [
         ViewByItemDetailsState.initial().copyWith(
           isLoading: true,

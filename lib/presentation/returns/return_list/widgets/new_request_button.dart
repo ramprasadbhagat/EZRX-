@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
@@ -26,17 +25,17 @@ class NewRequestButton extends StatelessWidget {
       onPress: () {
         context.read<UsageCodeBloc>().add(
               UsageCodeEvent.fetch(
-                salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
+                salesOrg: context.read<EligibilityBloc>().state.salesOrg,
               ),
             );
         context.read<ReturnItemsBloc>().add(
               ReturnItemsEvent.fetch(
                 appliedFilter: ReturnItemsFilter.empty(),
                 salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                    context.read<EligibilityBloc>().state.salesOrganisation,
                 customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                    context.read<EligibilityBloc>().state.customerCodeInfo,
+                shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
                 searchKey: SearchKey.search(''),
               ),
             );

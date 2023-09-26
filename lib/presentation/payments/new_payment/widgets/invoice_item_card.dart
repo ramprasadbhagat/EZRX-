@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -47,7 +47,7 @@ class InvoiceItemCard extends StatelessWidget {
                 Text(
                   '${context.tr('Due on')} ${StringUtils.getDueDateString(
                     customerOpenItem.netDueDate.dateTimeOrNull,
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                    context.read<EligibilityBloc>().state.salesOrganisation,
                   )}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: customerOpenItem.status.displayDueDateColor,
@@ -57,7 +57,8 @@ class InvoiceItemCard extends StatelessWidget {
             ),
           ),
           PriceComponent(
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            salesOrgConfig:
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
             price: customerOpenItem.openAmountInTransCrcy.toString(),
           ),
         ],

@@ -139,8 +139,6 @@ void main() {
             materialPrice: mockPriceList,
           ),
         );
-        when(() => eligibilityBloc.state)
-            .thenReturn(EligibilityState.initial());
         when(() => userBloc.state).thenReturn(UserState.initial());
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(),
@@ -169,7 +167,20 @@ void main() {
           UserState.initial()
               .copyWith(user: User.empty().copyWith(hasBonusOverride: false)),
         );
-
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              priceOverride: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: '1234',
+            ),
+            user: User.empty().copyWith(hasBonusOverride: false),
+          ),
+        );
         when(() => priceOverrideBloc.state)
             .thenReturn(PriceOverrideState.initial());
 
@@ -462,8 +473,16 @@ void main() {
     testWidgets('Submit Counter Offer Price', (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs:
-              SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            priceOverride: true,
+          ),
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2001'),
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: '1234',
+          ),
+          user: User.empty().copyWith(hasBonusOverride: false),
         ),
       );
 
@@ -597,14 +616,22 @@ void main() {
     testWidgets('Submit Counter Offer Discount', (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            priceOverride: true,
+            enableZDP8Override: true,
+          ),
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2001'),
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: '1234',
+          ),
           user: User.empty().copyWith(
             hasPriceOverride: true,
             role: Role.empty().copyWith(
               type: RoleType('internal_sales_rep'),
             ),
           ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
-              .copyWith(priceOverride: true, enableZDP8Override: true),
         ),
       );
 
@@ -942,14 +969,20 @@ void main() {
     testWidgets('Submit Counter Offer Error While Price Fail', (tester) async {
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty()
+              .copyWith(priceOverride: true, enableZDP8Override: true),
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2001'),
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: '1234',
+          ),
           user: User.empty().copyWith(
             hasPriceOverride: true,
             role: Role.empty().copyWith(
               type: RoleType('internal_sales_rep'),
             ),
           ),
-          salesOrgConfigs: SalesOrganisationConfigs.empty()
-              .copyWith(priceOverride: true, enableZDP8Override: true),
         ),
       );
 

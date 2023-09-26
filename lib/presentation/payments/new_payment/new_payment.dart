@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
@@ -90,7 +91,11 @@ class NewPaymentPage extends StatelessWidget {
                               /// * If on TH market: Back to the payment overview
                               /// page and navigate to the payment advice created page
                               /// * If on other market: Back to the payment overview page
-                              context.read<SalesOrgBloc>().state.salesOrg.isTH
+                              context
+                                      .read<EligibilityBloc>()
+                                      .state
+                                      .salesOrg
+                                      .isTH
                                   ? context.router.pushAndPopUntil(
                                       const PaymentAdviceCreatedPageRoute(),
                                       predicate: (Route route) =>
@@ -120,7 +125,8 @@ class NewPaymentPage extends StatelessWidget {
                   previous.selectedCredits != current.selectedCredits ||
                   previous.isLoading != current.isLoading,
               builder: (context, state) {
-                final configs = context.read<SalesOrgBloc>().state.configs;
+                final configs =
+                    context.read<EligibilityBloc>().state.salesOrgConfigs;
 
                 return Column(
                   children: [

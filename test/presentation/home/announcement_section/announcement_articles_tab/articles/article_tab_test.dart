@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
@@ -15,21 +14,18 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import '../../../../../utils/widget_utils.dart';
 
-class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
 class ArticlesInfoBlocMock
     extends MockBloc<ArticlesInfoEvent, ArticlesInfoState>
     implements ArticlesInfoBloc {}
 
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
 
 final locator = GetIt.instance;
 void main() {
   late GetIt locator;
   TestWidgetsFlutterBinding.ensureInitialized();
-  late UserBloc userBlocMock;
-  late SalesOrgBloc salesOrgBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late ArticlesInfoBloc articlesInfoBlocMock;
   late AppRouter autoRouterMock;
   late List<AnnouncementArticleItem> announcementListMock;
@@ -38,9 +34,8 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => articlesInfoBlocMock);
     autoRouterMock = locator<AppRouter>();
-    userBlocMock = UserBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     articlesInfoBlocMock = ArticlesInfoBlocMock();
-    salesOrgBlocMock = SalesOrgBlocMock();
     announcementListMock = [
       AnnouncementArticleItem.empty().copyWith(
         id: 'fakeID',
@@ -112,8 +107,8 @@ void main() {
     setUp(() {
       when(() => articlesInfoBlocMock.state)
           .thenReturn(ArticlesInfoState.initial());
-      when(() => userBlocMock.state).thenReturn(UserState.initial());
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
     Widget getWUT() {
       return WidgetUtils.getScopedWidget(
@@ -122,11 +117,8 @@ void main() {
           BlocProvider<ArticlesInfoBloc>(
             create: (context) => articlesInfoBlocMock,
           ),
-          BlocProvider<SalesOrgBloc>(
-            create: (context) => salesOrgBlocMock,
-          ),
-          BlocProvider<UserBloc>(
-            create: (context) => userBlocMock,
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
         ],
         child: const ArticlesTab(),
@@ -192,11 +184,11 @@ void main() {
       verify(
         () => articlesInfoBloc.add(
           ArticlesInfoEvent.getArticles(
-            salesOrg: salesOrgBlocMock.state.salesOrg,
-            user: userBlocMock.state.user,
+            salesOrg: eligibilityBlocMock.state.salesOrg,
+            user: eligibilityBlocMock.state.user,
           ),
         ),
-      ).called(1);
+      ).called(2);
     });
     testWidgets('should add loadMoreArticles again when pull down to load more',
         (tester) async {
@@ -227,11 +219,11 @@ void main() {
       verify(
         () => articlesInfoBloc.add(
           ArticlesInfoEvent.getArticles(
-            salesOrg: salesOrgBlocMock.state.salesOrg,
-            user: userBlocMock.state.user,
+            salesOrg: eligibilityBlocMock.state.salesOrg,
+            user: eligibilityBlocMock.state.user,
           ),
         ),
-      ).called(1);
+      ).called(2);
     });
     testWidgets('The first item should be visible when press scrollToTop',
         (tester) async {

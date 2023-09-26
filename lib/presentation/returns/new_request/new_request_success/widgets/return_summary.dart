@@ -33,10 +33,11 @@ class _ReturnSummary extends StatelessWidget {
                         ),
                   ),
                   PriceComponent(
-                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
                     price: state
                         .returnSubtotalWithTax(
-                          context.read<SalesOrgBloc>().state.configs,
+                          context.read<EligibilityBloc>().state.salesOrgConfigs,
                         )
                         .toString(),
                     type: PriceStyle.summaryPrice,
@@ -66,10 +67,11 @@ class _ReturnSummary extends StatelessWidget {
                         ),
                   ),
                   PriceComponent(
-                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
                     price: state
                         .returnSubtotalWithTax(
-                          context.read<SalesOrgBloc>().state.configs,
+                          context.read<EligibilityBloc>().state.salesOrgConfigs,
                         )
                         .toString(),
                     type: PriceStyle.grandTotalPrice,

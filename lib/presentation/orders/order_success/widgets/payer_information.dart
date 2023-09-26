@@ -13,13 +13,13 @@ class _PayerInformation extends StatelessWidget {
               horizontal: 20,
             ),
             title: Text(
-              '${'Payer'.tr()}: ${context.read<CustomerCodeBloc>().state.customerCodeInfo.getBillToInfo.billToCustomerCode}',
+              '${'Payer'.tr()}: ${context.read<EligibilityBloc>().state.customerCodeInfo.getBillToInfo.billToCustomerCode}',
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: ZPColors.black,
                   ),
             ),
             subtitle: Text(
-              '${context.read<CustomerCodeBloc>().state.customerCodeInfo.getBillToInfo.billToAddress}',
+              '${context.read<EligibilityBloc>().state.customerCodeInfo.getBillToInfo.billToAddress}',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: ZPColors.black,
                   ),
@@ -32,7 +32,7 @@ class _PayerInformation extends StatelessWidget {
                       color: ZPColors.black,
                     ),
                 valueText:
-                    '${context.read<CustomerCodeBloc>().state.customerCodeInfo.getBillToInfo.billToName}',
+                    '${context.read<EligibilityBloc>().state.customerCodeInfo.getBillToInfo.billToName}',
                 valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.black,
                     ),

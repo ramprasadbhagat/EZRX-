@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -20,8 +20,9 @@ class OrderItemDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final displayGovernmentMaterialCOde =
-        context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg.isTW;
-    final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+        context.read<EligibilityBloc>().state.salesOrganisation.salesOrg.isTW;
+    final salesOrgConfig =
+        context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return Padding(
       key: WidgetKeys.viewByOrderDetailItemsSection,
@@ -63,8 +64,10 @@ class OrderItemDetailsSection extends StatelessWidget {
                               price: e.totalPrice
                                   .totalPrice //TODO: It is list price offer price should also have annotation of "Discount applied" if it was an offer material , once design team confirm and getting data will enhance
                                   .toStringAsFixed(2),
-                              salesOrgConfig:
-                                  context.read<SalesOrgBloc>().state.configs,
+                              salesOrgConfig: context
+                                  .read<EligibilityBloc>()
+                                  .state
+                                  .salesOrgConfigs,
                             ),
                             statusWidget: StatusLabel(
                               status: StatusType(

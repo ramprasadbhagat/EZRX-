@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +9,6 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
@@ -77,9 +76,11 @@ class _ArticlesTabState extends State<ArticlesTab> {
                     onRefresh: () {
                       context.read<ArticlesInfoBloc>().add(
                             ArticlesInfoEvent.getArticles(
-                              salesOrg:
-                                  context.read<SalesOrgBloc>().state.salesOrg,
-                              user: context.read<UserBloc>().state.user,
+                              salesOrg: context
+                                  .read<EligibilityBloc>()
+                                  .state
+                                  .salesOrg,
+                              user: context.read<EligibilityBloc>().state.user,
                             ),
                           );
                     },
@@ -87,8 +88,8 @@ class _ArticlesTabState extends State<ArticlesTab> {
                     onLoadingMore: () => context.read<ArticlesInfoBloc>().add(
                           ArticlesInfoEvent.loadMoreArticles(
                             salesOrg:
-                                context.read<SalesOrgBloc>().state.salesOrg,
-                            user: context.read<UserBloc>().state.user,
+                                context.read<EligibilityBloc>().state.salesOrg,
+                            user: context.read<EligibilityBloc>().state.user,
                           ),
                         ),
                     itemBuilder: (context, index, item) => _ArticlesTile(

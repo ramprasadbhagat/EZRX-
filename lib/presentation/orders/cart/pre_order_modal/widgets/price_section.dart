@@ -10,7 +10,7 @@ class _PriceSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         PriceComponent(
-          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+          salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
           price: cartProduct.finalPriceTotalForAllMaterial,
         ),
         if (cartProduct.showTaxBreakDown &&

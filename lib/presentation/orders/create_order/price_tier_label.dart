@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -43,7 +43,7 @@ class PriceTierLabel extends StatelessWidget {
             ),
             TextSpan(
               text: StringUtils.displayPrice(
-                context.read<SalesOrgBloc>().state.configs,
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
                 priceTierItem.rate,
               ),
               style: const TextStyle(

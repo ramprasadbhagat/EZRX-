@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -339,7 +338,7 @@ class _OrderTag extends StatelessWidget {
           previous.isUpdatingStock != current.isUpdatingStock &&
           !current.isUpdatingStock,
       builder: (context, state) {
-        final configs = context.read<SalesOrgBloc>().state.configs;
+        final configs = context.read<EligibilityBloc>().state.salesOrgConfigs;
         final materialInfoList = state.cartProducts
             .where((element) => element.materialInfo.type.typeBundle)
             .map((e) => e.bundle.materials)
@@ -604,7 +603,8 @@ class _BundleSubTotalSection extends StatelessWidget {
                 ),
           ),
           PriceComponent(
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            salesOrgConfig:
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
             price: context
                 .read<CartBloc>()
                 .state

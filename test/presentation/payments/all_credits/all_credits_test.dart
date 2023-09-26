@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -43,6 +44,9 @@ class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
@@ -53,7 +57,7 @@ void main() {
   late AllCreditsBloc allCreditsBlocMock;
   late AllCreditsFilterBloc allCreditsFilterBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
-
+  late EligibilityBloc eligibilityBlocMock;
   late UserBloc userBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
@@ -73,6 +77,7 @@ void main() {
   setUp(() async {
     WidgetsFlutterBinding.ensureInitialized();
     allCreditsBlocMock = AllCreditsBlocMock();
+    eligibilityBlocMock = EligibilityBlockMock();
     allCreditsFilterBlocMock = AllCreditsFilterBlocMock();
     customerCodeBlocMock = CustomerCodeBlocMock();
     userBlocMock = UserBlocMock();
@@ -90,6 +95,9 @@ void main() {
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
+
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
   Widget getWidget() {
@@ -105,6 +113,9 @@ void main() {
         ),
         BlocProvider<CustomerCodeBloc>(
           create: (context) => customerCodeBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
         ),
         BlocProvider<UserBloc>(
           create: (context) => userBlocMock,

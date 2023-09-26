@@ -48,7 +48,10 @@ class _OrderItems extends StatelessWidget {
                                 e.materialNumber.getOrDefaultValue(''),
                               ),
                               subtitle: StringUtils.displayPriceByMaterialType(
-                                context.read<SalesOrgBloc>().state.configs,
+                                context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .salesOrgConfigs,
                                 e.unitPrice.zpPrice,
                                 e.type,
                               ),

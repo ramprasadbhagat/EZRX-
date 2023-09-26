@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -24,7 +25,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
@@ -267,7 +267,7 @@ class _CartIcon extends StatelessWidget {
               ),
               type: MaterialInfoType(''),
             ),
-            user: context.read<UserBloc>().state.user,
+            user: context.read<EligibilityBloc>().state.user,
             counterOfferDetails: RequestCounterOfferDetails.empty(),
             bonusItemId: bonusItemId,
           ),

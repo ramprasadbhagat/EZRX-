@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +9,6 @@ import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
@@ -99,15 +99,17 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
                       controller: _scrollController,
                       onRefresh: () => context.read<AnnouncementInfoBloc>().add(
                             AnnouncementInfoEvent.fetch(
-                              salesOrg:
-                                  context.read<SalesOrgBloc>().state.salesOrg,
+                              salesOrg: context
+                                  .read<EligibilityBloc>()
+                                  .state
+                                  .salesOrg,
                             ),
                           ),
                       onLoadingMore: () =>
                           context.read<AnnouncementInfoBloc>().add(
                                 AnnouncementInfoEvent.loadMore(
                                   salesOrg: context
-                                      .read<SalesOrgBloc>()
+                                      .read<EligibilityBloc>()
                                       .state
                                       .salesOrg,
                                 ),
@@ -120,7 +122,7 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
                                 AnnouncementInfoDetailsEvent.fetch(
                                   itemId: item.id,
                                   salesOrg: context
-                                      .read<SalesOrgBloc>()
+                                      .read<EligibilityBloc>()
                                       .state
                                       .salesOrg,
                                 ),

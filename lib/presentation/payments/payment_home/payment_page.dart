@@ -1,8 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
@@ -78,9 +77,9 @@ class PaymentPage extends StatelessWidget {
     context.read<PaymentInProgressBloc>().add(
           PaymentInProgressEvent.fetch(
             salesOrganization:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
+                context.read<EligibilityBloc>().state.salesOrganisation,
             customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                context.read<EligibilityBloc>().state.customerCodeInfo,
           ),
         );
     context.read<AccountSummaryBloc>().add(
@@ -90,8 +89,11 @@ class PaymentPage extends StatelessWidget {
                 .state
                 .customerCodeInfo
                 .customerCodeSoldTo,
-            salesOrg:
-                context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+            salesOrg: context
+                .read<EligibilityBloc>()
+                .state
+                .salesOrganisation
+                .salesOrg,
           ),
         );
 
@@ -102,14 +104,17 @@ class PaymentPage extends StatelessWidget {
                 .state
                 .customerCodeInfo
                 .customerCodeSoldTo,
-            salesOrg:
-                context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+            salesOrg: context
+                .read<EligibilityBloc>()
+                .state
+                .salesOrganisation
+                .salesOrg,
           ),
         );
     context.read<SoaBloc>().add(
           SoaEvent.fetch(
             customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                context.read<EligibilityBloc>().state.customerCodeInfo,
           ),
         );
   }
@@ -152,9 +157,9 @@ class _NewPaymentButton extends StatelessWidget {
     context.read<OutstandingInvoicesBloc>().add(
           OutstandingInvoicesEvent.fetch(
             salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
+                context.read<EligibilityBloc>().state.salesOrganisation,
             customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                context.read<EligibilityBloc>().state.customerCodeInfo,
             appliedFilter: OutstandingInvoiceFilter.empty(),
             searchKey: SearchKey.search(''),
           ),
@@ -162,20 +167,20 @@ class _NewPaymentButton extends StatelessWidget {
     context.read<AvailableCreditsBloc>().add(
           AvailableCreditsEvent.fetch(
             salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
+                context.read<EligibilityBloc>().state.salesOrganisation,
             customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                context.read<EligibilityBloc>().state.customerCodeInfo,
             appliedFilter: AvailableCreditFilter.empty(),
             searchKey: SearchKey.search(''),
           ),
         );
     context.read<NewPaymentBloc>().add(
           NewPaymentEvent.initialized(
-            user: context.read<UserBloc>().state.user,
+            user: context.read<EligibilityBloc>().state.user,
             customerCodeInfo:
-                context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                context.read<EligibilityBloc>().state.customerCodeInfo,
             salesOrganisation:
-                context.read<SalesOrgBloc>().state.salesOrganisation,
+                context.read<EligibilityBloc>().state.salesOrganisation,
           ),
         );
     context.router.pushNamed('payments/new_payment');
@@ -312,8 +317,10 @@ class _ItemCardState extends State<_ItemCard> {
                                 child: LoadingShimmer.tile(),
                               )
                             : PriceComponent(
-                                salesOrgConfig:
-                                    context.read<SalesOrgBloc>().state.configs,
+                                salesOrgConfig: context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .salesOrgConfigs,
                                 price: e.value.value,
                                 obscured: obscured,
                               ),

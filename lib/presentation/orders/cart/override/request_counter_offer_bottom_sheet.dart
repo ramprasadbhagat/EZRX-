@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -43,9 +41,9 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
             context.read<PriceOverrideBloc>().add(
                   PriceOverrideEvent.fetch(
                     salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                        context.read<EligibilityBloc>().state.salesOrganisation,
                     customerCodeInfo:
-                        context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                        context.read<EligibilityBloc>().state.customerCodeInfo,
                   ),
                 );
           },
@@ -86,7 +84,8 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.showErrorMessages != current.showErrorMessages,
         builder: (context, state) {
-          final currency = context.read<SalesOrgBloc>().state.configs.currency;
+          final currency =
+              context.read<EligibilityBloc>().state.salesOrgConfigs.currency;
           final isDiscountOverrideEnable =
               context.read<EligibilityBloc>().state.isZDP8Override;
           final isPriceOverrideEnable =

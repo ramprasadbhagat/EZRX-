@@ -24,7 +24,7 @@ class _PaymentSuccessMessage extends StatelessWidget {
             height: 8.0,
           ),
           Text(
-            '${context.tr('We’ll send a payment advice copy to')} ${context.read<UserBloc>().state.user.email.getOrDefaultValue('')} ${context.tr('shortly')}.',
+            '${context.tr('We’ll send a payment advice copy to')} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${context.tr('shortly')}.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),

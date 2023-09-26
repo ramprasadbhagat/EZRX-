@@ -29,14 +29,14 @@ class _ReturnItemsSearchBar extends StatelessWidget {
           ),
           onSearchChanged: (value) {},
           onSearchSubmitted: (value) {
-            final customerCodeState = context.read<CustomerCodeBloc>().state;
+            final eligibilityState = context.read<EligibilityBloc>().state;
             context.read<ReturnItemsBloc>().add(
                   ReturnItemsEvent.fetch(
                     appliedFilter: state.appliedFilter,
                     salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    customerCodeInfo: customerCodeState.customerCodeInfo,
-                    shipToInfo: customerCodeState.shipToInfo,
+                        context.read<EligibilityBloc>().state.salesOrganisation,
+                    customerCodeInfo: eligibilityState.customerCodeInfo,
+                    shipToInfo: eligibilityState.shipToInfo,
                     searchKey: SearchKey.search(value),
                   ),
                 );
@@ -44,14 +44,14 @@ class _ReturnItemsSearchBar extends StatelessWidget {
           customValidator: (value) => SearchKey.search(value).isValid(),
           enabled: !state.isLoading,
           onClear: () {
-            final customerCodeState = context.read<CustomerCodeBloc>().state;
+            final eligibilityState = context.read<EligibilityBloc>().state;
             context.read<ReturnItemsBloc>().add(
                   ReturnItemsEvent.fetch(
                     appliedFilter: state.appliedFilter,
                     salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
-                    customerCodeInfo: customerCodeState.customerCodeInfo,
-                    shipToInfo: customerCodeState.shipToInfo,
+                        context.read<EligibilityBloc>().state.salesOrganisation,
+                    customerCodeInfo: eligibilityState.customerCodeInfo,
+                    shipToInfo: eligibilityState.shipToInfo,
                     searchKey: SearchKey.search(''),
                   ),
                 );

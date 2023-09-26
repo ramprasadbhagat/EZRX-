@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
@@ -103,7 +102,7 @@ class _UserRestrictionScrollList extends StatelessWidget {
         controller: ScrollController(),
         isLoading: state.isFetching,
         onRefresh: () {
-          final salesOrg = context.read<SalesOrgBloc>().state.salesOrg;
+          final salesOrg = context.read<EligibilityBloc>().state.salesOrg;
           context.read<UserRestrictionListBloc>().add(
                 UserRestrictionListEvent.fetch(
                   salesOrg: salesOrg,

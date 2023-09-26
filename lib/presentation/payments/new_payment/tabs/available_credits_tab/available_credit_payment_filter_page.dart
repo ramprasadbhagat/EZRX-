@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/value_range_error.dart';
@@ -62,7 +62,8 @@ class _PaymentFilter extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.showErrorMessage != current.showErrorMessage,
       builder: (context, state) {
-        final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+        final salesOrgConfig =
+            context.read<EligibilityBloc>().state.salesOrgConfigs;
 
         return ListTile(
           title: Column(
@@ -272,7 +273,8 @@ class _AmountValueFromFilter extends StatelessWidget {
         context,
         state,
       ) {
-        final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+        final salesOrgConfig =
+            context.read<EligibilityBloc>().state.salesOrgConfigs;
 
         return Expanded(
           child: TextFormField(
@@ -312,7 +314,8 @@ class _AmountValueToFilter extends StatelessWidget {
         context,
         state,
       ) {
-        final salesOrgConfig = context.read<SalesOrgBloc>().state.configs;
+        final salesOrgConfig =
+            context.read<EligibilityBloc>().state.salesOrgConfigs;
 
         return Expanded(
           child: TextFormField(

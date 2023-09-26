@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -169,7 +168,7 @@ class _BodyContent extends StatelessWidget {
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         final materialInfo = state.productDetailAggregate.materialInfo;
-        final config = context.read<SalesOrgBloc>().state.configs;
+        final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
         final validateOutOfStockValue =
             context.read<EligibilityBloc>().state.validateOutOfStockValue;
         final level = !state.isFetching
@@ -345,10 +344,13 @@ class _FooterState extends State<_Footer> {
     required MaterialInfo materialInfo,
   }) {
     final disableCreateOrder =
-        !context.read<UserBloc>().state.user.userCanCreateOrder;
+        !context.read<EligibilityBloc>().state.user.userCanCreateOrder;
     if (disableCreateOrder) return false;
-    final materialWithoutPrice =
-        context.read<SalesOrgBloc>().state.configs.materialWithoutPrice;
+    final materialWithoutPrice = context
+        .read<EligibilityBloc>()
+        .state
+        .salesOrgConfigs
+        .materialWithoutPrice;
     final materialInStock = (!context
             .read<ProductDetailBloc>()
             .state

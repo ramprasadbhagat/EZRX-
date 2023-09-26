@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -37,6 +38,9 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   late PolicyConfigurationBloc policyConfigurationListBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
@@ -45,6 +49,7 @@ void main() {
   final locator = GetIt.instance;
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
 
   setUpAll(() async {
     locator.registerLazySingleton(
@@ -63,6 +68,7 @@ void main() {
     salesOrgBlocMock = MockSalesOrgBloc();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
     when(() => policyConfigurationListBlocMock.state)
         .thenReturn(PolicyConfigurationState.initial());
 
@@ -70,6 +76,8 @@ void main() {
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
   Future getWidget(tester) async {
@@ -79,6 +87,9 @@ void main() {
         providers: [
           BlocProvider<PolicyConfigurationBloc>(
             create: (context) => policyConfigurationListBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
           BlocProvider<SalesOrgBloc>(
             create: (context) => salesOrgBlocMock,

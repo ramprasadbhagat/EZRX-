@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -36,6 +37,9 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -47,6 +51,7 @@ void main() {
   late List<String> mockUserNamesList;
   late UserRestrictionListBloc userRestrictionListBlocMock;
   late AuthBloc authBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   late AnnouncementBloc announcementBlocMock;
 
   setUpAll(() async {
@@ -57,6 +62,7 @@ void main() {
     salesOrgBlocMock = SalesOrgBlocMock();
     userRestrictiondetailsBlocMock = UserRestrictionDetailsBlocMock();
     autoRouterMock = locator<AppRouter>();
+    eligibilityBlocMock = EligibilityBlockMock();
     userRestrictionListBlocMock = UserRestrictionListBlocMock();
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
@@ -71,6 +77,8 @@ void main() {
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
   Widget getScopedWidget(Widget child) {
@@ -83,6 +91,9 @@ void main() {
         BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
         BlocProvider<UserRestrictionDetailsBloc>(
           create: (context) => userRestrictiondetailsBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
         ),
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<AnnouncementBloc>(
@@ -179,7 +190,13 @@ void main() {
           ),
         ),
       );
-
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: mockSalesOrg,
+          ),
+        ),
+      );
       final handle = tester.ensureSemantics();
 
       await tester.pumpWidget(getScopedWidget(const UserRestrictionListPage()));

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -134,7 +134,7 @@ class _ReturnItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final config = context.read<SalesOrgBloc>().state.configs;
+    final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return Column(
       children: [

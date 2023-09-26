@@ -8,8 +8,10 @@ import 'package:ezrxmobile/application/account/language/language_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/language.dart';
@@ -238,9 +240,9 @@ void main() {
       verify(
         () => customerLicenseBloc.add(
           CustomerLicenseEvent.fetch(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-            customerInfo: eligibilityBlocMock.state.customerCodeInfo,
-            user: eligibilityBlocMock.state.user,
+            salesOrganisation: SalesOrganisation.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+            user: User.empty(),
           ),
         ),
       ).called(1);
@@ -272,9 +274,9 @@ void main() {
       verify(
         () => customerLicenseBloc.add(
           CustomerLicenseEvent.loadMore(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-            customerInfo: eligibilityBlocMock.state.customerCodeInfo,
-            user: eligibilityBlocMock.state.user,
+            salesOrganisation: SalesOrganisation.empty(),
+            customerInfo: CustomerCodeInfo.empty(),
+            user: User.empty(),
           ),
         ),
       ).called(1);

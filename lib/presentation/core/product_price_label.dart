@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
@@ -34,7 +34,8 @@ class ProductPriceLabel extends StatelessWidget {
             banner: EZReachBanner.empty(),
             price: itemPrice,
             materialInfo: materialInfo,
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            salesOrgConfig:
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
             quantity: 1,
             // TODO: will revisit and enhance this
             discountedMaterialCount: itemPrice.zmgDiscount
@@ -59,7 +60,8 @@ class ProductPriceLabel extends StatelessWidget {
             children: [
               PriceComponent(
                 price: priceAggregate.display(PriceType.unitPrice),
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
               ),
             ],
           );

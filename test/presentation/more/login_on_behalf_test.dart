@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/proxy_login/proxy_login_form_bloc.dart';
@@ -29,6 +30,9 @@ class ProxyLoginFormBlocMock
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -36,19 +40,22 @@ void main() {
   late ProxyLoginFormBloc proxyLoginFormBlocMock;
   late SalesOrgBlocMock salesOrgBlocMock;
   late AppRouter autoRouterMock;
-
+  late EligibilityBloc eligibilityBlocMock;
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     autoRouterMock = locator<AppRouter>();
     userBlocMock = UserBlocMock();
+    eligibilityBlocMock = EligibilityBlockMock();
     proxyLoginFormBlocMock = ProxyLoginFormBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => proxyLoginFormBlocMock.state)
         .thenReturn(ProxyLoginFormState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
   Widget getScopedWidget() {
@@ -63,6 +70,9 @@ void main() {
         ),
         BlocProvider<SalesOrgBloc>(
           create: (context) => salesOrgBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBlocMock,
         ),
       ],
       child: const LoginOnBehalf(),
@@ -139,6 +149,13 @@ void main() {
       (tester) async {
         when(() => userBlocMock.state).thenReturn(
           UserState.initial().copyWith(
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(type: RoleType('zp_admin')),
+            ),
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             user: User.empty().copyWith(
               role: Role.empty().copyWith(type: RoleType('zp_admin')),
             ),

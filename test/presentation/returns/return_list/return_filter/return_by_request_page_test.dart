@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -44,6 +45,9 @@ class MockCustomerCodeBloc
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -54,6 +58,7 @@ void main() {
   late ReturnListByRequestBloc mockReturnListByRequestBloc;
   late AnnouncementBloc mockAnnouncementBloc;
   late AuthBloc mockAuthBloc;
+  late EligibilityBloc eligibilityBlocMock;
   late List<ReturnItem> fakeReturnItemList;
 
   setUpAll(() async {
@@ -71,6 +76,7 @@ void main() {
     mockAuthBloc = MockAuthBloc();
     mockAnnouncementBloc = MockAnnouncementBloc();
     mockReturnListByRequestBloc = ReturnListByRequestBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
 
     fakeReturnItemList = [
       ReturnItem.empty().copyWith(
@@ -99,6 +105,8 @@ void main() {
           .thenReturn(ReturnListByRequestState.initial());
       when(() => mockAnnouncementBloc.state)
           .thenReturn(AnnouncementState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
     });
 
     RouteDataScope getWUT() {
@@ -120,6 +128,9 @@ void main() {
           ),
           BlocProvider<UserBloc>(
             create: (context) => mockUserBloc,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
           BlocProvider<ReturnListByRequestBloc>(
             create: (context) => mockReturnListByRequestBloc,

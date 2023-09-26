@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -38,6 +39,9 @@ class AnnouncementBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   EasyLocalization.logger.enableLevels = [];
@@ -48,6 +52,7 @@ void main() async {
   late PaymentNotificationBloc paymentNotificationBlocMock;
   late RemoteConfigService remoteConfigServiceMock;
   late AnnouncementBloc announcementBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
   setUpAll(() async {
     //setupLocator();
     locator.registerLazySingleton(
@@ -59,6 +64,7 @@ void main() async {
     locator.registerLazySingleton(() => AnnouncementBlocMock());
     locator.registerLazySingleton(() => AuthBlocMock());
     locator.registerLazySingleton(() => PaymentNotificationMockBloc());
+    locator.registerLazySingleton(() => EligibilityBlocMock());
     locator.registerLazySingleton(() => remoteConfigServiceMock);
   });
 
@@ -85,6 +91,9 @@ void main() async {
             BlocProvider<AnnouncementBloc>(
               create: (context) => announcementBlocMock,
             ),
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock,
+            ),
           ],
           child: const NotificationSettingsPage(),
         ),
@@ -95,6 +104,7 @@ void main() async {
       userBloc = UserBlocMock();
       paymentNotificationBlocMock = PaymentNotificationMockBloc();
       remoteConfigServiceMock = RemoteConfigServiceMock();
+      eligibilityBlocMock = EligibilityBlocMock();
       authBlocMock = AuthBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       when(() => userBloc.state).thenReturn(
@@ -130,6 +140,33 @@ void main() async {
       when(() => paymentNotificationBlocMock.state)
           .thenReturn(PaymentNotificationState.initial());
       when(() => remoteConfigServiceMock.getPaymentsConfig()).thenReturn(true);
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            settings: User.empty().settings.copyWith(
+                  languagePreference: const Locale(ApiLanguageCode.english),
+                  emailNotifications: false,
+                  paymentNotification: PaymentNotification.empty().copyWith(
+                    disablePaymentNotification: false,
+                    paymentAdviceExpiryNotificationList: [
+                      const PaymentAdviceExpiryNotification(
+                        day: '3',
+                        disabled: false,
+                      ),
+                      const PaymentAdviceExpiryNotification(
+                        day: '5',
+                        disabled: false,
+                      ),
+                      const PaymentAdviceExpiryNotification(
+                        day: '7',
+                        disabled: false,
+                      ),
+                    ],
+                  ),
+                ),
+          ),
+        ),
+      );
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
     });

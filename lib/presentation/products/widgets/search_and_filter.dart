@@ -1,5 +1,4 @@
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
@@ -114,11 +113,12 @@ class SearchAndFilter extends StatelessWidget {
           context.read<MaterialListBloc>().add(
                 MaterialListEvent.fetch(
                   salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
-                  configs: context.read<SalesOrgBloc>().state.configs,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
+                  configs:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                   customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                  shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
+                  shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
                   selectedMaterialFilter: value,
                 ),
               );

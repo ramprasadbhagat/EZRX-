@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
@@ -148,7 +148,8 @@ class ViewByOrderDetailsPage extends StatelessWidget {
                                               .qty,
                                     )
                                     .toList(),
-                                user: context.read<UserBloc>().state.user,
+                                user:
+                                    context.read<EligibilityBloc>().state.user,
                                 counterOfferDetails:
                                     RequestCounterOfferDetails.empty(),
                               ),

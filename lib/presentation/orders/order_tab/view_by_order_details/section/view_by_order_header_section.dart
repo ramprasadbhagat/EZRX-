@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -15,7 +15,7 @@ class OrderHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final config = context.read<SalesOrgBloc>().state.configs;
+    final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return BlocBuilder<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,

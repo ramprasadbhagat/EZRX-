@@ -517,6 +517,13 @@ void main() {
             ),
           ),
         );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            shipToInfo: ShipToInfo.empty().copyWith(
+              defaultShipToAddress: true,
+            ),
+          ),
+        );
         when(() => returnApproverBlocMock.state).thenReturn(
           ReturnApproverState.initial()
               .copyWith(approverReturnRequestList: approverReturnRequestList),

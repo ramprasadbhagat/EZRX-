@@ -224,4 +224,8 @@ class EligibilityState with _$EligibilityState {
 
   bool get isMYExternalSalesRepUser =>
       salesOrganisation.salesOrg.isMY && user.role.type.isExternalSalesRep;
+
+  SalesOrg get salesOrg => salesOrganisation.salesOrg;
+
+  bool get haveShipTo => shipToInfo != ShipToInfo.empty();
 }

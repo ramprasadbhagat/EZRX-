@@ -26,20 +26,19 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
             key: state.searchKey.searchValueOrEmpty,
           ),
           onSearchChanged: (value) {},
-          onSearchSubmitted: (value) =>
-              context.read<AvailableCreditsBloc>().add(
-                    AvailableCreditsEvent.fetch(
-                      appliedFilter: state.appliedFilter,
-                      salesOrganisation:
-                          context.read<SalesOrgBloc>().state.salesOrganisation,
-                      customerCodeInfo: context
-                          .read<CustomerCodeBloc>()
-                          .state
-                          .customerCodeInfo,
-                      searchKey: SearchKey.search(value),
-                    ),
-                  ),
-          hintText: context.tr('Search by document number'),
+          onSearchSubmitted: (value) => context
+              .read<AvailableCreditsBloc>()
+              .add(
+                AvailableCreditsEvent.fetch(
+                  appliedFilter: state.appliedFilter,
+                  salesOrganisation:
+                      context.read<EligibilityBloc>().state.salesOrganisation,
+                  customerCodeInfo:
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
+                  searchKey: SearchKey.search(value),
+                ),
+              ),
+          hintText: 'Search by document number'.tr(),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
             // Only digits
@@ -51,9 +50,9 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
                 AvailableCreditsEvent.fetch(
                   appliedFilter: state.appliedFilter,
                   salesOrganisation:
-                      context.read<SalesOrgBloc>().state.salesOrganisation,
+                      context.read<EligibilityBloc>().state.salesOrganisation,
                   customerCodeInfo:
-                      context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
                   searchKey: SearchKey.search(''),
                 ),
               ),

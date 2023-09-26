@@ -14,7 +14,8 @@ class _PriceLabel extends StatelessWidget {
         if (itemPrice != null) {
           return PriceComponent(
             price: itemPrice.lastPrice.getOrDefaultValue(0).toString(),
-            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+            salesOrgConfig:
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
           );
         }
 

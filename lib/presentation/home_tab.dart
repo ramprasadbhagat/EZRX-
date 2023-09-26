@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
@@ -34,7 +34,7 @@ class HomeNavigationTabbar extends StatelessWidget {
                       ? const IntroPage()
                       : WillPopScope(
                           onWillPop: () async => false,
-                          child: BlocBuilder<UserBloc, UserState>(
+                          child: BlocBuilder<EligibilityBloc, EligibilityState>(
                             buildWhen: (previous, current) =>
                                 previous != current,
                             builder: (context, state) {
@@ -163,9 +163,9 @@ class _TopIndicatorBox extends BoxPainter {
 List<RouteItem> _getTabs(BuildContext context) {
   return [
     homeTabRouteItem,
-    if (context.read<UserBloc>().state.user.userCanAccessProducts)
+    if (context.read<EligibilityBloc>().state.user.userCanAccessProducts)
       productTabRouteItem,
-    if (context.read<UserBloc>().state.user.userCanAccessOrderHistory)
+    if (context.read<EligibilityBloc>().state.user.userCanAccessOrderHistory)
       ordersTabRouteItem,
     notificationTabRouteItem,
     moreTabRouteItem,

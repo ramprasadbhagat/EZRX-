@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
@@ -19,7 +19,7 @@ class ItemDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final batchNumDisplay =
-        context.read<SalesOrgBloc>().state.configs.batchNumDisplay;
+        context.read<EligibilityBloc>().state.salesOrgConfigs.batchNumDisplay;
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -44,7 +44,8 @@ class ItemDetailsSection extends StatelessWidget {
             title: orderHistoryItem.materialDescription,
             priceComponent: PriceComponent(
               price: orderHistoryItem.totalPrice.totalPrice.toStringAsFixed(2),
-              salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+              salesOrgConfig:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
             ),
             statusWidget: StatusLabel(
               key: WidgetKeys.orderItemStatusKey,

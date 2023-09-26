@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
@@ -84,7 +84,7 @@ class _AnnouncementSectionItem extends StatelessWidget {
         context.read<AnnouncementInfoDetailsBloc>().add(
               AnnouncementInfoDetailsEvent.fetch(
                 itemId: announcementItem.id,
-                salesOrg: context.read<SalesOrgBloc>().state.salesOrg,
+                salesOrg: context.read<EligibilityBloc>().state.salesOrg,
               ),
             );
         context.router.pushNamed('announcement_info_details');

@@ -2,7 +2,7 @@
 //ignore_for_file: unused-class
 //ignore_for_file: unused-files
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/presentation/core/curved_rectangle_widget.dart';
@@ -96,7 +96,7 @@ class _TierItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         PriceComponent(
-          salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+          salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
           price: priceTier.rate.toStringAsFixed(2),
         ),
         Text(

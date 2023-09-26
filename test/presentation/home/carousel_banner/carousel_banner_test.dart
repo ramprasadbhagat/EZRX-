@@ -3,8 +3,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -33,7 +33,8 @@ class MockHTTPService extends Mock implements HttpService {}
 class MockBannerBloc extends MockBloc<BannerEvent, BannerState>
     implements BannerBloc {}
 
-class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
+class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
 
 class MockCustomerCodeBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -54,7 +55,7 @@ void main() {
   late MockHTTPService mockHTTPService;
   late SalesOrgBloc mockSalesOrgBloc;
   late AppRouter autoRouterMock;
-  late UserBloc mockUserBloc;
+  late EligibilityBloc mockEligibilityBloc;
   late CustomerCodeBloc mockCustomerCodeBloc;
 
   const mockUrl = 'mock-image-urls';
@@ -89,7 +90,7 @@ void main() {
 
     autoRouterMock = locator<AppRouter>();
     mockHTTPService = MockHTTPService();
-    mockUserBloc = MockUserBloc();
+    mockEligibilityBloc = MockEligibilityBloc();
     mockCustomerCodeBloc = MockCustomerCodeBloc();
     locator.registerLazySingleton<HttpService>(
       () => mockHTTPService,
@@ -128,7 +129,8 @@ void main() {
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => mockBannerBloc.state).thenReturn(BannerState.initial());
-      when(() => mockUserBloc.state).thenReturn(UserState.initial());
+      when(() => mockEligibilityBloc.state)
+          .thenReturn(EligibilityState.initial());
       when(() => mockCustomerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial());
     });
@@ -143,7 +145,9 @@ void main() {
           ),
           BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
           BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
-          BlocProvider<UserBloc>(create: (context) => mockUserBloc),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => mockEligibilityBloc,
+          ),
         ],
         child: const Scaffold(body: CarouselBanner()),
       );
@@ -152,8 +156,6 @@ void main() {
     testWidgets('CarouselBanner test - when customer code changed - Success',
         (tester) async {
       VisibilityDetectorController.instance.updateInterval = Duration.zero;
-      final bannerBloc = locator<BannerBloc>();
-
       final expectedCustomerCodeInfo = [
         CustomerCodeState.initial()
             .copyWith(customerCodeInfo: fakeCustomerCodeInfo, isFetching: true),
@@ -167,16 +169,16 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump(const Duration(seconds: 2));
       verify(
-        () => bannerBloc.add(
+        () => mockBannerBloc.add(
           BannerEvent.fetch(
-            salesOrganisation: mockSalesOrgBloc.state.salesOrganisation,
+            salesOrganisation: mockEligibilityBloc.state.salesOrganisation,
             bannerType: 'banner_carousel',
-            country: mockSalesOrgBloc.state.salesOrg.country,
+            country: mockEligibilityBloc.state.salesOrg.country,
             isPreSalesOrg: false,
-            role: mockUserBloc.state.user.role.type.getEZReachRoleType,
+            role: mockEligibilityBloc.state.user.role.type.getEZReachRoleType,
           ),
         ),
-      ).called(2);
+      ).called(3);
     });
 
     //commented test case reason:

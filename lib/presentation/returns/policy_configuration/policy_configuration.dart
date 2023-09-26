@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -90,7 +90,7 @@ class _PolicyConfigurationScrollList extends StatelessWidget {
         context.read<PolicyConfigurationBloc>().add(
               PolicyConfigurationEvent.fetch(
                 salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                    context.read<EligibilityBloc>().state.salesOrganisation,
                 searchKey: '',
               ),
             );
@@ -98,7 +98,7 @@ class _PolicyConfigurationScrollList extends StatelessWidget {
       onLoadingMore: () => context.read<PolicyConfigurationBloc>().add(
             PolicyConfigurationEvent.loadMorePolicyConfigurations(
               salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
+                  context.read<EligibilityBloc>().state.salesOrganisation,
             ),
           ),
       isLoading: policyConfigurationState.isLoading,
@@ -237,7 +237,7 @@ class _PolicyConfigurationSearchState
           ),
           onSearchChanged: (value) {
             final salesOrganisation =
-                context.read<SalesOrgBloc>().state.salesOrganisation;
+                context.read<EligibilityBloc>().state.salesOrganisation;
             context.read<PolicyConfigurationBloc>().add(
                   PolicyConfigurationEvent.search(
                     salesOrganisation: salesOrganisation,
@@ -249,7 +249,7 @@ class _PolicyConfigurationSearchState
             context.read<PolicyConfigurationBloc>().add(
                   PolicyConfigurationEvent.search(
                     salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                        context.read<EligibilityBloc>().state.salesOrganisation,
                     searchKey: value,
                   ),
                 );
@@ -260,7 +260,7 @@ class _PolicyConfigurationSearchState
             context.read<PolicyConfigurationBloc>().add(
                   PolicyConfigurationEvent.search(
                     salesOrganisation:
-                        context.read<SalesOrgBloc>().state.salesOrganisation,
+                        context.read<EligibilityBloc>().state.salesOrganisation,
                     searchKey: '',
                   ),
                 );

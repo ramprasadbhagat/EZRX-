@@ -34,7 +34,7 @@ class _PaymentOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: Responsive.isMobile(context)
-          ? context.read<SalesOrgBloc>().state.salesOrg.isPaymentClaimEnabled
+          ? context.read<EligibilityBloc>().state.salesOrg.isPaymentClaimEnabled
               ? MediaQuery.of(context).size.width * 0.45
               : MediaQuery.of(context).size.width * 0.28
           : MediaQuery.of(context).size.width * 0.22,
@@ -128,7 +128,7 @@ List<_PaymentOptionData> _getPaymentOptionItems(BuildContext context) {
     accountSummary,
     paymentSummary,
     accountStateMent,
-    if (context.read<SalesOrgBloc>().state.salesOrg.isPaymentClaimEnabled)
+    if (context.read<EligibilityBloc>().state.salesOrg.isPaymentClaimEnabled)
       claim,
   ];
 }

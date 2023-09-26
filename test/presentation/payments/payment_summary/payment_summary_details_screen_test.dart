@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
@@ -43,6 +44,9 @@ class MockPaymentSummaryDetailsBloc
     extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
     implements PaymentSummaryDetailsBloc {}
 
+class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -53,6 +57,7 @@ void main() {
   late AnnouncementBloc mockAnnouncementBloc;
   late PaymentSummaryDetailsBloc mockPaymentSummaryDetailsBloc;
   late AuthBloc mockAuthBloc;
+  late EligibilityBloc eligibilityBlocMock;
   late PaymentSummaryDetails fakePaymentDetails;
 
   setUpAll(() async {
@@ -67,6 +72,7 @@ void main() {
     mockUserBloc = MockUserBloc();
     autoRouterMock = locator<AppRouter>();
     mockCustomerCodeBloc = MockCustomerCodeBloc();
+    eligibilityBlocMock = EligibilityBlockMock();
     mockAuthBloc = MockAuthBloc();
     mockAnnouncementBloc = MockAnnouncementBloc();
     mockPaymentSummaryDetailsBloc = MockPaymentSummaryDetailsBloc();
@@ -81,6 +87,8 @@ void main() {
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
       when(() => mockCustomerCodeBloc.state)
           .thenReturn(CustomerCodeState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
       when(() => mockAnnouncementBloc.state)
           .thenReturn(AnnouncementState.initial());
       when(() => mockPaymentSummaryDetailsBloc.state)
@@ -105,6 +113,12 @@ void main() {
           BlocProvider<UserBloc>(create: (context) => mockUserBloc),
           BlocProvider<PaymentSummaryDetailsBloc>(
             create: (context) => mockPaymentSummaryDetailsBloc,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
         ],
         child: const Scaffold(

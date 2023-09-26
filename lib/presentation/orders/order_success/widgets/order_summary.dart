@@ -28,9 +28,9 @@ class _OrderSummaary extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price:
-                    '${orderHistoryDetails.orderValue}',
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                price: '${orderHistoryDetails.orderValue}',
               ),
             ],
           ),
@@ -48,9 +48,9 @@ class _OrderSummaary extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price:
-                    '${orderHistoryDetails.grandTotal}',
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                price: '${orderHistoryDetails.grandTotal}',
               ),
             ],
           ),

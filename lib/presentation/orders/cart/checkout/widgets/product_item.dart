@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
@@ -162,13 +161,15 @@ class _ProductDetails extends StatelessWidget {
             children: [
               if (cartItem.price.isCounterOfferRequested)
                 PriceComponent(
-                  salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price:
                       cartItem.price.lastPrice.getOrDefaultValue(0).toString(),
                   type: PriceStyle.counterOfferPrice,
                 ),
               PriceComponent(
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: cartItem.display(PriceType.finalPrice),
               ),
             ],
@@ -245,7 +246,8 @@ class _QuantityAndPrice extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               PriceComponent(
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price: cartItem.finalPriceTotalForAllMaterial,
               ),
               if (cartItem.showTaxBreakDown &&

@@ -415,7 +415,13 @@ void main() {
           user: fakeUser,
         ),
       );
-
+      when(
+        () => eligibilityMockBloc.state,
+      ).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeUser,
+        ),
+      );
       await tester.pumpWidget(
         getScopedWidget(
           AddToCart(isCovid19Tab: false, material: priceAggregate),
@@ -482,7 +488,13 @@ void main() {
           user: fakeUser,
         ),
       );
-
+      when(
+        () => eligibilityMockBloc.state,
+      ).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeUser,
+        ),
+      );
       await tester.pumpWidget(
         getScopedWidget(
           AddToCart(isCovid19Tab: false, material: priceAggregate),

@@ -240,6 +240,7 @@ void main() {
         CustomerCodeState.initial()
             .copyWith(customerCodeInfo: fakeCustomerCodeInfo),
       );
+
       when(() => materialListBlocMock.state).thenReturn(
         MaterialListState.initial(),
       );
@@ -251,6 +252,14 @@ void main() {
         EligibilityState.initial().copyWith(
           customerCodeInfo:
               CustomerCodeInfo.empty().copyWith(status: Status('EDI')),
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          customerCodeInfo:
+              CustomerCodeInfo.empty().copyWith(status: Status('EDI')),
+          user: fakeUser,
         ),
       );
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
@@ -334,8 +343,8 @@ void main() {
     testWidgets(
       ' -> Find HomeScreen',
       (WidgetTester tester) async {
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             user: User.empty().copyWith(
               accessRight: AccessRight.empty().copyWith(products: true),
               role: Role.empty().copyWith(
@@ -358,8 +367,8 @@ void main() {
     testWidgets(
       ' -> HomeScreen on refresh',
       (WidgetTester tester) async {
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
             user: User.empty().copyWith(
               accessRight: AccessRight.empty().copyWith(products: true),
               role: Role.empty().copyWith(
@@ -550,6 +559,20 @@ void main() {
             user: fakeUser,
           ),
         );
+        when(
+          () => eligibilityBlocMock.state,
+        ).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+        whenListen(
+          eligibilityBlocMock,
+          Stream.fromIterable([
+            EligibilityState.initial().copyWith(isLoading: true),
+            EligibilityState.initial().copyWith(isLoading: false),
+          ]),
+        );
       });
       testWidgets('Product SearchBar Visible when product accessright is true',
           (tester) async {
@@ -581,7 +604,7 @@ void main() {
           () => materialListBloc.add(
             MaterialListEvent.fetch(
               salesOrganisation: SalesOrganisation.empty(),
-              configs: eligibilityBlocMock.state.salesOrgConfigs,
+              configs: SalesOrganisationConfigs.empty(),
               customerCodeInfo: CustomerCodeInfo.empty(),
               shipToInfo: ShipToInfo.empty(),
               selectedMaterialFilter: MaterialFilter.empty().copyWith(
@@ -589,7 +612,7 @@ void main() {
               ),
             ),
           ),
-        ).called(10);
+        ).called(1);
       });
 
       testWidgets('BrowseProduct Visible when product accessright is true',
@@ -620,9 +643,9 @@ void main() {
           role: Role.empty().copyWith(type: RoleType('root_admin')),
         );
         when(
-          () => userBlocMock.state,
+          () => eligibilityBlocMock.state,
         ).thenReturn(
-          UserState.initial().copyWith(
+          EligibilityState.initial().copyWith(
             user: fakeUser,
           ),
         );

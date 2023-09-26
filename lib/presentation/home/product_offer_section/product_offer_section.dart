@@ -16,7 +16,6 @@ import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -77,11 +76,13 @@ class ProductsOnOffer extends StatelessWidget {
                     context.read<MaterialPriceBloc>().add(
                           MaterialPriceEvent.fetch(
                             salesOrganisation: context
-                                .read<SalesOrgBloc>()
+                                .read<EligibilityBloc>()
                                 .state
                                 .salesOrganisation,
-                            salesConfigs:
-                                context.read<SalesOrgBloc>().state.configs,
+                            salesConfigs: context
+                                .read<EligibilityBloc>()
+                                .state
+                                .salesOrgConfigs,
                             customerCodeInfo: context
                                 .read<CustomerCodeBloc>()
                                 .state
