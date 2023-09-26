@@ -328,5 +328,29 @@ void main() {
       ); // finish the indicator hide animation
       await tester.pump();
     });
+
+    testWidgets('Find Created on text', (tester) async {
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith(
+          isLoading: false,
+          canLoadMore: true,
+          items: [
+            CreditAndInvoiceItem.empty().copyWith(
+              searchKey: '123456780',
+              netDueDate: DateTimeStringValue('2023-12-25'),
+              documentDate: DateTimeStringValue('2023-12-25'),
+              amountInTransactionCurrency: 15.72,
+              invoiceProcessingStatus: StatusType('Cleared'),
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+
+      await tester.pump();
+      final createdOnText = find.textContaining('Created on');
+      expect(createdOnText, findsOneWidget);
+    });
   });
 }
