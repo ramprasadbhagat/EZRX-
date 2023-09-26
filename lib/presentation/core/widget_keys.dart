@@ -402,8 +402,13 @@ class WidgetKeys {
   static const Key toDueDateField = Key('toDueDateField');
   static const Key amountValueFrom = Key('amountValueFrom');
   static const Key amountValueTo = Key('amountValueTo');
+
+  //============================================================
+  //  Invoice Details
+  //============================================================
   static const Key invoiceDetailsPageListView =
       Key('invoiceDetailsPageListView');
+  static const Key downloadEInvoiceButton = Key('downloadEInvoiceButton');
 
   //============================================================
   //  BundleDetails Keys

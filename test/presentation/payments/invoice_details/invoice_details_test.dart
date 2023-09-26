@@ -1,4 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -6,9 +8,13 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
@@ -29,6 +35,10 @@ class CreditAndInvoiceDetailsBlocMock
 class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
     implements SalesOrgBloc {}
 
+class ProductImageBlocMock
+    extends MockBloc<ProductImageEvent, ProductImageState>
+    implements ProductImageBloc {}
+
 void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
@@ -40,7 +50,9 @@ void main() {
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
+  late ProductImageBlocMock productImageBlocMock;
   late CreditAndInvoiceItem fakeInvoice;
+  late CustomerDocumentDetail fakeInvoiceDetail;
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
@@ -60,6 +72,7 @@ void main() {
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
+    productImageBlocMock = ProductImageBlocMock();
 
     fakeInvoice = CreditAndInvoiceItem.empty().copyWith(
       bpCustomerNumber: '0030032223',
@@ -67,7 +80,27 @@ void main() {
       accountingDocumentItem: '001',
       invoiceProcessingStatus: StatusType('Cleared'),
     );
-
+    fakeInvoiceDetail = CustomerDocumentDetail.empty().copyWith(
+      salesDocumentItemType: StringValue('fake-salesDocumentItemType'),
+      billingDocumentItem: '000010',
+      materialNumber: MaterialNumber('000000000023046005'),
+      billingDocumentItemText: "COZAARTABS50MG30'S",
+      billingQuantity: IntegerValue('300'),
+      billingQuantityUnit: 'BOX',
+      salesMeasureISOUnit: 'BX',
+      referenceSDDocument: '0800055109',
+      referenceSDDocumentItem: '000010',
+      referenceSDDocumentCategory: 'J',
+      grossAmount: 1.2768e+06,
+      netAmount: 1.2768e+06,
+      taxAmount: 0,
+      batchNumber: BatchNumber('V3475'),
+      expiryDate: DateTimeStringValue('20500718'),
+      principalData: PrincipalData.empty().copyWith(
+        principalName: PrincipalName('fake-principalName'),
+        principalCode: PrincipalCode('fake-principleCode'),
+      ),
+    );
     when(() => creditAndInvoiceDetailsBlocMock.state)
         .thenReturn(CreditAndInvoiceDetailsState.initial());
     when(() => customerCodeBlocMock.state)
@@ -80,43 +113,86 @@ void main() {
         .thenReturn(AnnouncementState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    when(() => productImageBlocMock.state)
+        .thenReturn(ProductImageState.initial());
   });
 
   Future getWidget(tester) async {
     return tester.pumpWidget(
-      WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        usingLocalization: true,
-        providers: [
-          BlocProvider<CreditAndInvoiceDetailsBloc>(
-            create: (context) => creditAndInvoiceDetailsBlocMock,
-          ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<UserBloc>(
-            create: (context) => userBlocMock,
-          ),
-          BlocProvider<SalesOrgBloc>(
-            create: (context) => salesOrgBlocMock,
-          ),
-          BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-          BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-          ),
-          BlocProvider<EligibilityBloc>(
-            create: (context) => eligibilityBlocMock,
-          ),
+      EasyLocalization(
+        supportedLocales: const [
+          Locale('en'),
         ],
-        child: InvoiceDetailsPage(
-          invoiceItem: fakeInvoice,
+        path: 'assets/langs/langs.csv',
+        startLocale: const Locale('en'),
+        fallbackLocale: const Locale('en'),
+        saveLocale: true,
+        useOnlyLangCode: true,
+        assetLoader: CsvAssetLoader(),
+        child: WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
+          usingLocalization: true,
+          providers: [
+            BlocProvider<CreditAndInvoiceDetailsBloc>(
+              create: (context) => creditAndInvoiceDetailsBlocMock,
+            ),
+            BlocProvider<CustomerCodeBloc>(
+              create: (context) => customerCodeBlocMock,
+            ),
+            BlocProvider<UserBloc>(
+              create: (context) => userBlocMock,
+            ),
+            BlocProvider<SalesOrgBloc>(
+              create: (context) => salesOrgBlocMock,
+            ),
+            BlocProvider<AuthBloc>(create: (context) => authBlocMock),
+            BlocProvider<AnnouncementBloc>(
+              create: (context) => announcementBlocMock,
+            ),
+            BlocProvider<EligibilityBloc>(
+              create: (context) => eligibilityBlocMock,
+            ),
+            BlocProvider<ProductImageBloc>(
+              create: (context) => productImageBlocMock,
+            ),
+          ],
+          child: InvoiceDetailsPage(
+            invoiceItem: fakeInvoice,
+          ),
         ),
       ),
     );
   }
 
   group('Invoice Details Screen Test', () {
-    testWidgets('=> LoadingImage  Test', (tester) async {
+    group(' => Download e-invoice button test', () {
+      testWidgets(' => download e-invoice button visible', (tester) async {
+        when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+          CreditAndInvoiceDetailsState.initial().copyWith(
+            details: [
+              fakeInvoiceDetail,
+            ],
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+
+        final downloadEInvoiceButton =
+            find.byKey(WidgetKeys.downloadEInvoiceButton);
+        expect(downloadEInvoiceButton, findsOneWidget);
+        await tester.tap(downloadEInvoiceButton);
+        await tester.pumpAndSettle();
+      });
+      testWidgets(' => download e-invoice button invisible', (tester) async {
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+
+        expect(find.byKey(WidgetKeys.downloadEInvoiceButton), findsNothing);
+      });
+    });
+
+    testWidgets(' => LoadingImage Test', (tester) async {
       when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
         CreditAndInvoiceDetailsState.initial().copyWith(
           isLoading: true,
@@ -132,197 +208,39 @@ void main() {
       final viewByOrderDetailsPageListView =
           find.byKey(WidgetKeys.invoiceDetailsPageListView);
       expect(viewByOrderDetailsPageListView, findsNothing);
+    });
 
-      await tester.pump();
+    testWidgets(' => Detail page view Test', (tester) async {
+      final expectedState = [
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          isLoading: true,
+          details: [
+            fakeInvoiceDetail,
+          ],
+        ),
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          details: [
+            fakeInvoiceDetail,
+          ],
+        ),
+      ];
+
+      whenListen(
+        creditAndInvoiceDetailsBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+
+      final loaderImage = find.byKey(
+        WidgetKeys.loaderImage,
+      );
+      expect(loaderImage, findsNothing);
+
+      final viewByOrderDetailsPageListView =
+          find.byKey(WidgetKeys.invoiceDetailsPageListView);
+      expect(viewByOrderDetailsPageListView, findsOneWidget);
     });
   });
-
-  // testWidgets('=> BasicInformationSection test', (tester) async {
-  //   final expectedState = [
-  //     CreditAndInvoiceDetailsState.initial().copyWith(
-  //       failureOrSuccessOption: none(),
-  //       isLoading: true,
-  //     ),
-  //     CreditAndInvoiceDetailsState.initial().copyWith(
-  //       isLoading: false,
-  //       failureOrSuccessOption: optionOf(const Right('')),
-  //       details: fakeCreditAndInvoiceDetails,
-  //     ),
-  //   ];
-  //   whenListen(
-  //       creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
-
-  //   await getWidget(tester);
-
-  //   await tester.pump(const Duration(milliseconds: 100));
-
-  //   expect(find.byType(BasicInformationSection), findsOneWidget);
-
-  //   final findBasicInformationText = find.text('Basic Information'.tr());
-  //   expect(findBasicInformationText, findsOneWidget);
-
-  //   final findCustomerNameText = find.text('Customer Name'.tr());
-  //   expect(findCustomerNameText, findsOneWidget);
-
-  //   final findPayerText = find.text('Payer'.tr());
-  //   expect(findPayerText, findsOneWidget);
-
-  //   final findShipToText = find.text('Ship To'.tr());
-  //   expect(findShipToText, findsOneWidget);
-  // });
-
-  // testWidgets('=> CreditAndInvoiceDetailsSection test', (tester) async {
-  //   final expectedState = [
-  //     CreditAndInvoiceDetailsState.initial().copyWith(
-  //       failureOrSuccessOption: none(),
-  //       isLoading: true,
-  //     ),
-  //     CreditAndInvoiceDetailsState.initial().copyWith(
-  //       isLoading: false,
-  //       failureOrSuccessOption: optionOf(const Right('')),
-  //       details: fakeCreditAndInvoiceDetails,
-  //     ),
-  //   ];
-  //   whenListen(
-  //       creditAndInvoiceDetailsBlocMock, Stream.fromIterable(expectedState));
-
-  //   await getWidget(tester);
-
-  //   await tester.pump(const Duration(milliseconds: 100));
-
-  //   expect(find.byType(InvoiceDetailsSection), findsOneWidget);
-
-  //   final findBasicInformationText = find.text('Invoice Details'.tr());
-  //   expect(findBasicInformationText, findsOneWidget);
-
-  //   final findDueDateText = find.text('Due Date'.tr());
-  //   expect(findDueDateText, findsOneWidget);
-
-  //   final findInvoiceNumberText = find.text('Invoice Number'.tr());
-  //   expect(findInvoiceNumberText, findsOneWidget);
-
-  //   final findInvoiceDateText = find.text('Invoice Date'.tr());
-  //   expect(findInvoiceDateText, findsOneWidget);
-
-  //   final findInvoiceAmountText = find.text('Invoice Amount'.tr());
-  //   expect(findInvoiceAmountText, findsOneWidget);
-
-  //   final findOrderIDText = find.text('Order ID'.tr());
-  //   expect(findOrderIDText, findsOneWidget);
-
-  //   final findStatusText = find.text('Status'.tr());
-  //   expect(findStatusText, findsOneWidget);
-  // });
-
-  // group('=> InvoiceItemsSection test', () {
-  //   testWidgets('=> InvoiceItemsSection loading test', (tester) async {
-  //     final expectedState = [
-  //       CreditAndInvoiceDetailsState.initial().copyWith(
-  //         failureOrSuccessOption: none(),
-  //         isLoading: true,
-  //       ),
-  //     ];
-  //     whenListen(creditAndInvoiceDetailsBlocMock,
-  //         Stream.fromIterable(expectedState));
-
-  //     await getWidget(tester);
-
-  //     await tester.pump(const Duration(milliseconds: 100));
-
-  //     expect(find.byType(InvoiceItemsSection), findsOneWidget);
-
-  //     expect(find.byType(LoadingShimmer), findsOneWidget);
-  //   });
-  //   testWidgets('=> Invoice Items empty', (tester) async {
-  //     final expectedState = [
-  //       CreditAndInvoiceDetailsState.initial().copyWith(
-  //         failureOrSuccessOption: none(),
-  //         isLoading: true,
-  //       ),
-  //       CreditAndInvoiceDetailsState.initial().copyWith(
-  //         isLoading: false,
-  //         failureOrSuccessOption: optionOf(const Right('')),
-  //         details: <CustomerDocumentDetail>[],
-  //       ),
-  //     ];
-  //     whenListen(creditAndInvoiceDetailsBlocMock,
-  //         Stream.fromIterable(expectedState));
-
-  //     await getWidget(tester);
-  //     await tester.pumpAndSettle();
-
-  //     expect(find.byType(InvoiceItemsSection), findsOneWidget);
-
-  //     expect(find.text('No files found'.tr()), findsOneWidget);
-  //   });
-
-  //   testWidgets('=> Invoice Items not empty', (tester) async {
-  //     final expectedState = [
-  //       CreditAndInvoiceDetailsState.initial().copyWith(
-  //         failureOrSuccessOption: none(),
-  //         isLoading: true,
-  //       ),
-  //       CreditAndInvoiceDetailsState.initial().copyWith(
-  //         isLoading: false,
-  //         failureOrSuccessOption: optionOf(const Right('')),
-  //         details: fakeCreditAndInvoiceDetails,
-  //       ),
-  //     ];
-  //     whenListen(creditAndInvoiceDetailsBlocMock,
-  //         Stream.fromIterable(expectedState));
-
-  //     await getWidget(tester);
-  //     await tester.pumpAndSettle();
-
-  //     expect(find.byType(InvoiceItemsSection), findsOneWidget);
-
-  //     final findInvoiceItemDetailsText =
-  //         find.text('Invoice Item Details'.tr());
-  //     expect(findInvoiceItemDetailsText, findsOneWidget);
-
-  //     final findTypeText = find.text('Type'.tr());
-  //     expect(findTypeText, findsAtLeastNWidgets(1));
-
-  //     final findNumberText = find.text('Number'.tr());
-  //     expect(findNumberText, findsAtLeastNWidgets(1));
-
-  //     final findDescriptionText = find.text('Description'.tr());
-  //     expect(findDescriptionText, findsAtLeastNWidgets(1));
-
-  //     final findUnitOfMeasureText = find.text('Unit of Measure'.tr());
-  //     expect(findUnitOfMeasureText, findsAtLeastNWidgets(1));
-
-  //     final findQuantityText = find.text('Quantity'.tr());
-  //     expect(findQuantityText, findsAtLeastNWidgets(1));
-
-  //     final findUnitPriceText = find.text('Unit Price'.tr());
-  //     expect(findUnitPriceText, findsAtLeastNWidgets(1));
-
-  //     final findTotalPriceText = find.text('Total Price'.tr());
-  //     expect(findTotalPriceText, findsAtLeastNWidgets(1));
-
-  //     final findMaterialText = find.text('Material'.tr());
-  //     expect(findMaterialText, findsAtLeastNWidgets(1));
-
-  //     final findReferenceSDSDocumentText =
-  //         find.text('Reference SDS Document'.tr());
-  //     expect(findReferenceSDSDocumentText, findsAtLeastNWidgets(1));
-
-  //     final findReferenceSDSDocumentCategoryText =
-  //         find.text('Reference SDS Document Category'.tr());
-  //     expect(findReferenceSDSDocumentCategoryText, findsAtLeastNWidgets(1));
-
-  //     final findReferenceSDSDocumentItemText =
-  //         find.text('Reference SDS Document Item'.tr());
-  //     expect(findReferenceSDSDocumentItemText, findsAtLeastNWidgets(1));
-
-  //     final findSalesMeasureISOUnitText =
-  //         find.text('Sales Measure ISO Unit'.tr());
-  //     expect(findSalesMeasureISOUnitText, findsAtLeastNWidgets(1));
-
-  //     final findTaxAmountText = find.text('Tax Amount'.tr());
-  //     expect(findTaxAmountText, findsAtLeastNWidgets(1));
-  //   });
-  // });
-  // });
 }

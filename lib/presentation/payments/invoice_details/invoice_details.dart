@@ -50,6 +50,7 @@ class InvoiceDetailsPage extends StatelessWidget {
                       color: ZPColors.white,
                     ),
                     child: OutlinedButton(
+                      key: WidgetKeys.downloadEInvoiceButton,
                       onPressed: () {},
                       child: Text(context.tr('Download e-invoice')),
                     ),
