@@ -1,33 +1,33 @@
-import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
-import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/banner/banner_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
-import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/full_name.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/more/more_tab.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/auth/auth_bloc.dart';
+import 'package:ezrxmobile/presentation/more/more_tab.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/application/banner/banner_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/full_name.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 
 import '../../utils/widget_utils.dart';
 
@@ -173,6 +173,10 @@ void main() {
     );
   }
 
+  ///////////////////Finder/////////////////////////////////////////////////////
+  final returnsTile = find.byKey(WidgetKeys.returnsTile);
+  /////////////////////////////////////////////////////////////////////////////
+
   group('More Tab Test', () {
     testWidgets(
       ' -> Hide returnsTile when disableReturn true',
@@ -203,10 +207,154 @@ void main() {
 
         await getWidget(tester);
         await tester.pump();
-        final paymentsTile = find.byKey(WidgetKeys.returnsTile);
-        expect(paymentsTile, findsNothing);
+        expect(returnsTile, findsNothing);
       },
     );
+
+    testWidgets(
+      ' -> Hide returnsTile when salesOrgConfigs disableReturnsAccess true client user',
+      (WidgetTester tester) async {
+        final fakeUser = User.empty().copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('client_user'),
+          ),
+          fullName: const FullName(firstName: 'test', lastName: 'test'),
+        );
+
+        final expectedState = [
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+              disableReturnsAccess: true,
+            ),
+          ),
+        ];
+        whenListen(eligibilityBlocMock, Stream.fromIterable(expectedState));
+
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        expect(returnsTile, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Hide returnsTile when salesOrgConfigs disableReturnsAccess false client user',
+      (WidgetTester tester) async {
+        final fakeUser = User.empty().copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('client_user'),
+          ),
+          fullName: const FullName(firstName: 'test', lastName: 'test'),
+        );
+
+        final expectedState = [
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+              disableReturnsAccess: true,
+            ),
+          ),
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+          ),
+        ];
+        whenListen(eligibilityBlocMock, Stream.fromIterable(expectedState));
+
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        expect(returnsTile, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Hide returnsTile when salesOrgConfigs disableReturnsAccess true sales rep user',
+      (WidgetTester tester) async {
+        final fakeUser = User.empty().copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+          fullName: const FullName(firstName: 'test', lastName: 'test'),
+        );
+
+        final expectedState = [
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+              disableReturnsAccessSR: true,
+            ),
+          ),
+        ];
+        whenListen(eligibilityBlocMock, Stream.fromIterable(expectedState));
+
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        expect(returnsTile, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Hide returnsTile when salesOrgConfigs disableReturnsAccess false sales rep user',
+      (WidgetTester tester) async {
+        final fakeUser = User.empty().copyWith(
+          role: Role.empty().copyWith(
+            type: RoleType('external_sales_rep'),
+          ),
+          fullName: const FullName(firstName: 'test', lastName: 'test'),
+        );
+
+        final expectedState = [
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+              disableReturnsAccessSR: true,
+            ),
+          ),
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+          ),
+        ];
+        whenListen(eligibilityBlocMock, Stream.fromIterable(expectedState));
+
+        when(() => userBlocMock.state).thenReturn(
+          UserState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        expect(returnsTile, findsOneWidget);
+      },
+    );
+
     testWidgets(
       ' -> Hide paymentsTile when Enable Payment Configuration is off',
       (WidgetTester tester) async {

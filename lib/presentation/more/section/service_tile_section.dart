@@ -15,38 +15,44 @@ class ServiceTile extends StatelessWidget {
         'Services'.tr(),
         style: Theme.of(context).textTheme.labelMedium,
       ),
-      subtitle: GridView.count(
-        physics: const NeverScrollableScrollPhysics(),
-        crossAxisCount: 4,
-        childAspectRatio: 1.45,
-        padding: const EdgeInsets.only(
-          top: 18.0,
-        ),
-        shrinkWrap: true,
-        children: _getServiceTabs(context).map((item) {
-          return InkWell(
-            key: item.key,
-            onTap: item.onTap,
-            child: Column(
-              children: [
-                item.icon,
-                const SizedBox(height: 8),
-                Text(
-                  item.label.tr(),
-                  style: item.onTap == null
-                      ? item.labelStyle ??
-                          Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(color: ZPColors.lightGray)
-                      : item.labelStyle ??
-                          Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.center,
-                ),
-              ],
+      subtitle: BlocBuilder<EligibilityBloc, EligibilityState>(
+        buildWhen: (previous, current) =>
+            previous.isReturnsEnable != current.isReturnsEnable,
+        builder: (context, state) {
+          return GridView.count(
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 4,
+            childAspectRatio: 1.45,
+            padding: const EdgeInsets.only(
+              top: 18.0,
             ),
+            shrinkWrap: true,
+            children: _getServiceTabs(context).map((item) {
+              return InkWell(
+                key: item.key,
+                onTap: item.onTap,
+                child: Column(
+                  children: [
+                    item.icon,
+                    const SizedBox(height: 8),
+                    Text(
+                      item.label.tr(),
+                      style: item.onTap == null
+                          ? item.labelStyle ??
+                              Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(color: ZPColors.lightGray)
+                          : item.labelStyle ??
+                              Theme.of(context).textTheme.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           );
-        }).toList(),
+        },
       ),
     );
   }

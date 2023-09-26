@@ -89,6 +89,11 @@ jobs:
     displayName: Test presentation -> home
     steps:
       - bash: flutter375 test test/presentation/home
+  - job: TestPresentationMore
+    pool: devops-flutter
+    displayName: Test presentation -> more
+    steps:
+      - bash: flutter375 test test/presentation/more
   - job: TestPresentationOrderHistory
     pool: devops-flutter
     displayName: Test presentation -> order-history
