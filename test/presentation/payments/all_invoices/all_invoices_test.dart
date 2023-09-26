@@ -69,6 +69,9 @@ void main() {
   final thSalesOrganisation = SalesOrganisation.empty().copyWith(
     salesOrg: SalesOrg('2900'),
   );
+  final sgSalesOrganisation = SalesOrganisation.empty().copyWith(
+    salesOrg: SalesOrg('2601'),
+  );
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -170,6 +173,35 @@ void main() {
       await tester.pumpAndSettle();
       //Make sure due date display on format dd MMM yyyy for TH market
       final dueDateText = find.textContaining('${'Due on'.tr()} 19 Sep 2023');
+      expect(dueDateText, findsOneWidget);
+    });
+
+    testWidgets('=> Invoice Due date formatting for SG market', (tester) async {
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: sgSalesOrganisation,
+        ),
+      );
+
+      when(() => allInvoicesBlocMock.state).thenReturn(
+        AllInvoicesState.initial().copyWith(
+          items: [
+            CreditAndInvoiceItem.empty().copyWith(
+              searchKey: '123456781',
+              netDueDate: DateTimeStringValue('20230920'),
+              postingDate: DateTimeStringValue('20230917'),
+              amountInTransactionCurrency: 15.72,
+              invoiceProcessingStatus: StatusType('Cleared'),
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+
+      //Make sure due date display on format dd MMM yyyy for TH market
+      final dueDateText = find.textContaining('${'Due on'.tr()} 20 Sep 2023');
       expect(dueDateText, findsOneWidget);
     });
 
