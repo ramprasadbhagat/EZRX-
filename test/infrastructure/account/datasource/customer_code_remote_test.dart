@@ -220,7 +220,7 @@ void main() {
             request: CustomerCodeSearchDto(
               salesOrg: '2203',
               first: 24,
-              filterBlockCustomer: false,
+              filterBlockCustomer: hideCustomer,
               after: 0,
               searchKey: mockCustomerCode,
             ),

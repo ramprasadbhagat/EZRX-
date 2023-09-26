@@ -169,7 +169,7 @@ void main() {
           request: CustomerCodeSearchDto(
             salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
             first: pageSize,
-            filterBlockCustomer: false,
+            filterBlockCustomer: hideCustomer,
             after: offset,
             searchKey: mockCustomerCode,
           ),
@@ -186,7 +186,7 @@ void main() {
           request: CustomerCodeSearchDto(
             salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
             first: pageSize,
-            filterBlockCustomer: false,
+            filterBlockCustomer: hideCustomer,
             after: offset,
             searchKey: '${mockCustomerCode}1',
           ),
@@ -203,7 +203,7 @@ void main() {
           request: CustomerCodeSearchDto(
             salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
             first: pageSize,
-            filterBlockCustomer: false,
+            filterBlockCustomer: hideCustomer,
             after: offset,
             searchKey: '${mockCustomerCode}2',
           ),
@@ -241,7 +241,7 @@ void main() {
           request: CustomerCodeSearchDto(
             salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
             first: pageSize,
-            filterBlockCustomer: false,
+            filterBlockCustomer: hideCustomer,
             after: offset,
             searchKey: mockCustomerCode,
           ),
@@ -258,7 +258,7 @@ void main() {
           request: CustomerCodeSearchDto(
             salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
             first: pageSize,
-            filterBlockCustomer: false,
+            filterBlockCustomer: hideCustomer,
             after: offset,
             searchKey: '${mockCustomerCode}1',
           ),
@@ -270,7 +270,7 @@ void main() {
           request: CustomerCodeSearchDto(
             salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
             first: pageSize,
-            filterBlockCustomer: false,
+            filterBlockCustomer: hideCustomer,
             after: offset,
             searchKey: '${mockCustomerCode}2',
           ),
@@ -309,7 +309,7 @@ void main() {
           request: CustomerCodeSearchDto(
             salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
             first: pageSize,
-            filterBlockCustomer: false,
+            filterBlockCustomer: hideCustomer,
             after: offset,
             searchKey: mockCustomerCode,
           ),
@@ -321,7 +321,7 @@ void main() {
           request: CustomerCodeSearchDto(
             salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
             first: pageSize,
-            filterBlockCustomer: false,
+            filterBlockCustomer: hideCustomer,
             after: offset,
             searchKey: '${mockCustomerCode}1',
           ),
@@ -333,7 +333,7 @@ void main() {
           request: CustomerCodeSearchDto(
             salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
             first: pageSize,
-            filterBlockCustomer: false,
+            filterBlockCustomer: hideCustomer,
             after: offset,
             searchKey: '${mockCustomerCode}2',
           ),
@@ -554,7 +554,7 @@ void main() {
           request: CustomerCodeSearchDto(
             salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
             first: pageSize,
-            filterBlockCustomer: false,
+            filterBlockCustomer: hideCustomer,
             after: offset,
             searchKey: mockCustomerCode,
           ),

@@ -60,7 +60,7 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
                     request: CustomerCodeSearchDto(
                       salesOrg: salesOrg,
                       first: pageSize,
-                      filterBlockCustomer: false,
+                      filterBlockCustomer: hideCustomer,
                       after: offset,
                       searchKey: customerCode,
                     ),
