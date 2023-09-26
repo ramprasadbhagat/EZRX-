@@ -9,7 +9,7 @@ class _CounterOfferDiscountedPriceField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PriceOverrideBloc, PriceOverrideState>(
       buildWhen: (previous, current) =>
-          previous.newDiscountPrice != current.newDiscountPrice,
+          previous.finalCounterOfferPrice != current.finalCounterOfferPrice,
       builder: (context, state) {
         return Padding(
           key: WidgetKeys.counterOfferDiscountedPriceWidget,
@@ -27,7 +27,7 @@ class _CounterOfferDiscountedPriceField extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: state.newDiscountPrice.toString(),
+                price: state.finalCounterOfferPrice,
               ),
             ],
           ),

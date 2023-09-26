@@ -7,7 +7,6 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
@@ -84,8 +83,6 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.showErrorMessages != current.showErrorMessages,
         builder: (context, state) {
-          final currency =
-              context.read<EligibilityBloc>().state.salesOrgConfigs.currency;
           final isDiscountOverrideEnable =
               context.read<EligibilityBloc>().state.isZDP8Override;
           final isPriceOverrideEnable =
@@ -103,38 +100,34 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
               shrinkWrap: true,
               children: [
                 Text(
-                  'Request counter offer'.tr(),
+                  context.tr('Request counter offer'),
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 const SizedBox(
                   height: 5,
                 ),
-                BalanceTextRow(
-                  keyText: 'List price'.tr(),
-                  valueText:
-                      '${currency.code} ${cartItem.price.lastPrice.getOrDefaultValue(0).toString()}',
-                  keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.darkGray,
-                      ),
-                  valueTextStyle:
+                PriceComponent(
+                  key: WidgetKeys.counterOfferListPriceWidget,
+                  title: '${context.tr('List price')} : ',
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: cartItem.display(PriceType.listPrice),
+                  priceLabelStyle:
                       Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: ZPColors.darkGray,
-                            decoration: TextDecoration.lineThrough,
                           ),
-                  valueFlex: 5,
+                  type: PriceStyle.counterOfferPrice,
                 ),
-                BalanceTextRow(
-                  keyText: 'Offer price'.tr(),
-                  valueText:
-                      '${currency.code} ${cartItem.price.finalPrice.getOrDefaultValue(0).toString()}',
-                  keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.darkGray,
-                      ),
-                  valueTextStyle:
+                PriceComponent(
+                  key: WidgetKeys.counterOfferPriceWidget,
+                  title: '${context.tr('Offer price')} : ',
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: cartItem.display(PriceType.finalPrice),
+                  priceLabelStyle:
                       Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: ZPColors.darkGray,
                           ),
-                  valueFlex: 4,
                 ),
                 if (isPriceOverrideEnable)
                   _CounterOfferPriceTextField(
@@ -190,8 +183,9 @@ class _CounterOfferEmptyFieldsErrorMessage extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: Text(
-        'Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.'
-            .tr(),
+        context.tr(
+          'Please input value for Counter offer price (MYR) or Discount counter offer (%) to proceed.',
+        ),
         style: Theme.of(context).textTheme.bodyLarge,
       ),
     );

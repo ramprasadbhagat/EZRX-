@@ -22,6 +22,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -192,10 +193,10 @@ void main() {
       },
     );
 
-    Widget getWidget({required Widget child, required bool usingLocalization}) {
+    Widget getWidget({required Widget child}) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouter,
-        usingLocalization: usingLocalization,
+        usingLocalization: true,
         providers: [
           BlocProvider<UserBloc>(create: (context) => userBloc),
           BlocProvider<CartBloc>(create: (context) => cartBloc),
@@ -244,7 +245,6 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: const CartPage(),
-          usingLocalization: true,
         ),
       );
       await tester.pump();
@@ -279,7 +279,6 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: const CartPage(),
-          usingLocalization: true,
         ),
       );
       await tester.pump();
@@ -327,7 +326,6 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: const CartPage(),
-          usingLocalization: true,
         ),
       );
       await tester.pump();
@@ -410,7 +408,6 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: const CartPage(),
-          usingLocalization: true,
         ),
       );
       await tester.pump();
@@ -551,12 +548,10 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: Scaffold(
-            appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
-          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -701,12 +696,10 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: Scaffold(
-            appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
-          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -813,12 +806,10 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: Scaffold(
-            appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
-          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -923,15 +914,13 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: Scaffold(
-            appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
-          usingLocalization: false,
         ),
       );
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       final counterOfferBottomSheetFinder =
           find.byKey(WidgetKeys.counterOfferBottomSheet);
@@ -1045,15 +1034,13 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: Scaffold(
-            appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
-          usingLocalization: false,
         ),
       );
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       final counterOfferBottomSheetFinder =
           find.byKey(WidgetKeys.counterOfferBottomSheet);
@@ -1134,12 +1121,10 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: Scaffold(
-            appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
-          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -1201,12 +1186,10 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: Scaffold(
-            appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
-          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -1261,12 +1244,10 @@ void main() {
       await tester.pumpWidget(
         getWidget(
           child: Scaffold(
-            appBar: null,
             body: RequestCounterOfferBottomSheet(
               cartItem: cartItems.first,
             ),
           ),
-          usingLocalization: false,
         ),
       );
       await tester.pump();
@@ -1281,6 +1262,185 @@ void main() {
 
       await tester.tap(counterOfferCancelButton);
       expect(autoRouter.current.route.name, 'Root');
+    });
+
+    testWidgets('List Price Displayed Price Not Available for PnG material ',
+        (tester) async {
+      final cartItem = cartItems.first.copyWith(
+        materialInfo: cartItems.first.materialInfo.copyWith(
+          hidePrice: true,
+          principalData: PrincipalData.empty().copyWith(
+            principalName: PrincipalName('Procter And Gamble'),
+            principalCode: PrincipalCode('000000105307'),
+          ),
+        ),
+      );
+
+      when(() => priceOverrideBloc.state).thenReturn(
+        PriceOverrideState.initial().copyWith(
+          item: cartItem,
+        ),
+      );
+
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            hasPriceOverride: true,
+            role: Role.empty().copyWith(
+              type: RoleType('internal_sales_rep'),
+            ),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            priceOverride: true,
+            enableZDP8Override: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(
+        getWidget(
+          child: Scaffold(
+            body: RequestCounterOfferBottomSheet(
+              cartItem: cartItem,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final counterOfferBottomSheetFinder =
+          find.byKey(WidgetKeys.counterOfferBottomSheet);
+      expect(counterOfferBottomSheetFinder, findsOneWidget);
+
+      final counterOfferListPriceWidgetFinder =
+          find.byKey(WidgetKeys.counterOfferListPriceWidget);
+      expect(counterOfferListPriceWidgetFinder, findsOneWidget);
+
+      final listPriceTextFinder = find.text(
+        '${'List price'.tr()} : Price Not Available',
+        findRichText: true,
+      );
+      expect(listPriceTextFinder, findsOneWidget);
+    });
+
+    testWidgets(
+        'Offer Price Price Displayed Price Not Available for PnG material ',
+        (tester) async {
+      final cartItem = cartItems.first.copyWith(
+        materialInfo: cartItems.first.materialInfo.copyWith(
+          hidePrice: true,
+          principalData: PrincipalData.empty().copyWith(
+            principalName: PrincipalName('Procter And Gamble'),
+            principalCode: PrincipalCode('000000105307'),
+          ),
+        ),
+      );
+
+      when(() => priceOverrideBloc.state).thenReturn(
+        PriceOverrideState.initial().copyWith(
+          item: cartItem,
+        ),
+      );
+
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            hasPriceOverride: true,
+            role: Role.empty().copyWith(
+              type: RoleType('internal_sales_rep'),
+            ),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            priceOverride: true,
+            enableZDP8Override: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(
+        getWidget(
+          child: Scaffold(
+            body: RequestCounterOfferBottomSheet(
+              cartItem: cartItem,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final counterOfferBottomSheetFinder =
+          find.byKey(WidgetKeys.counterOfferBottomSheet);
+      expect(counterOfferBottomSheetFinder, findsOneWidget);
+
+      final counterOfferPriceWidgetFinder =
+          find.byKey(WidgetKeys.counterOfferPriceWidget);
+      expect(counterOfferPriceWidgetFinder, findsOneWidget);
+
+      final counterOfferPriceTextFinder = find.text(
+        '${'Offer price'.tr()} : Price Not Available',
+        findRichText: true,
+      );
+      expect(counterOfferPriceTextFinder, findsOneWidget);
+    });
+
+    testWidgets(
+        'Final counter offer price displayed Price Not Available for PnG material ',
+        (tester) async {
+      final cartItem = cartItems.first.copyWith(
+        materialInfo: cartItems.first.materialInfo.copyWith(
+          hidePrice: true,
+          principalData: PrincipalData.empty().copyWith(
+            principalName: PrincipalName('Procter And Gamble'),
+            principalCode: PrincipalCode('000000105307'),
+          ),
+        ),
+      );
+
+      when(() => priceOverrideBloc.state).thenReturn(
+        PriceOverrideState.initial().copyWith(
+          item: cartItem,
+        ),
+      );
+
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            hasPriceOverride: true,
+            role: Role.empty().copyWith(
+              type: RoleType('internal_sales_rep'),
+            ),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            priceOverride: true,
+            enableZDP8Override: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(
+        getWidget(
+          child: Scaffold(
+            body: RequestCounterOfferBottomSheet(
+              cartItem: cartItem,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final counterOfferBottomSheetFinder =
+          find.byKey(WidgetKeys.counterOfferBottomSheet);
+      expect(counterOfferBottomSheetFinder, findsOneWidget);
+
+      final counterOfferListPriceWidgetFinder =
+          find.byKey(WidgetKeys.counterOfferDiscountedPriceWidget);
+      expect(counterOfferListPriceWidgetFinder, findsOneWidget);
+
+      final priceNotAvailableFinder = find.textContaining(
+        'Price Not Available',
+        findRichText: true,
+      );
+      expect(priceNotAvailableFinder, findsNWidgets(3));
     });
   });
 }

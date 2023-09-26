@@ -274,12 +274,11 @@ class _MaterialDetails extends StatelessWidget {
           ),
           Row(
             children: [
-              if (cartItem.price.isCounterOfferRequested)
+              if (cartItem.displayCutOffListPrice)
                 PriceComponent(
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price:
-                      cartItem.price.lastPrice.getOrDefaultValue(0).toString(),
+                  price: cartItem.display(PriceType.listPrice),
                   type: PriceStyle.counterOfferPrice,
                 ),
               LoadingShimmer.withChild(
@@ -407,11 +406,10 @@ class _BonusPriceCounterSection extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final isMYPnGSalesRep = eligibilityState.isMYExternalSalesRepUser &&
         cartItem.materialInfo.isPnGPrinciple;
-    final isBonusOverrideEnable = (eligibilityState.isBonusSampleItemVisible &&
-            !cartItem.materialInfo.hidePrice) ||
-        isMYPnGSalesRep;
+    final isBonusOverrideEnable = eligibilityState.isBonusSampleItemVisible &&
+        (!cartItem.materialInfo.hidePrice || isMYPnGSalesRep);
     final isCounterOfferEnable = eligibilityState.isCounterOfferVisible &&
-        !cartItem.materialInfo.hidePrice;
+        (!cartItem.materialInfo.hidePrice || isMYPnGSalesRep);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),

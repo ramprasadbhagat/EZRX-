@@ -24,7 +24,7 @@ class PriceOverrideState with _$PriceOverrideState {
       item.materialInfo.counterOfferDetails.discountOverridePercentage
           .isValid();
 
-  double get newDiscountPrice {
+  double get discountedPrice {
     final priceValue = isPriceOverride
         ? item.materialInfo.counterOfferDetails.counterOfferPrice.doubleValue
         : item.price.priceValueForDiscountOverride;
@@ -37,6 +37,10 @@ class PriceOverrideState with _$PriceOverrideState {
             ? priceValue
             : item.price.priceValueForPriceOverride;
   }
+
+  String get finalCounterOfferPrice => !item.materialInfo.hidePrice
+      ? discountedPrice.toString()
+      : 'Price Not Available ';
 
   bool get isInputFieldValid => isPriceOverride || isDiscountOverride;
 }

@@ -442,6 +442,64 @@ void main() {
           ),
         ).called(1);
       });
+
+      testWidgets(
+          'Counter offer button visible for MY External sales rep having PnG material(Hide Price ----> true)',
+          (tester) async {
+        final pnGCartItem = cartItem.copyWith(
+          quantity: 2,
+          price: Price.empty().copyWith(
+            finalPrice: MaterialPrice(364.80),
+            lastPrice: MaterialPrice(364.80),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            principalData: PrincipalData.empty().copyWith(
+              principalName: PrincipalName('Procter And Gamble'),
+              principalCode: PrincipalCode('000000105307'),
+            ),
+            hidePrice: true,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isFetching: false,
+            apiFailureOrSuccessOption: none(),
+            cartProducts: [pnGCartItem],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              enableZDP8Override: true,
+            ),
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('external_sales_rep'),
+              ),
+              hasPriceOverride: true,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final counterOfferButton =
+            find.byKey(WidgetKeys.counterOfferPriceButtonKey);
+        expect(counterOfferButton, findsOneWidget);
+        await tester.tap(counterOfferButton);
+        verify(
+          () => priceOverrideBloc.add(
+            PriceOverrideEvent.setProduct(
+              item: pnGCartItem,
+            ),
+          ),
+        ).called(1);
+      });
     },
   );
 }

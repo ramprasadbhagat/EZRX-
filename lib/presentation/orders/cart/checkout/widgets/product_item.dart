@@ -159,12 +159,11 @@ class _ProductDetails extends StatelessWidget {
           ),
           Row(
             children: [
-              if (cartItem.price.isCounterOfferRequested)
+              if (cartItem.displayCutOffListPrice)
                 PriceComponent(
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price:
-                      cartItem.price.lastPrice.getOrDefaultValue(0).toString(),
+                  price: cartItem.display(PriceType.listPrice),
                   type: PriceStyle.counterOfferPrice,
                 ),
               PriceComponent(

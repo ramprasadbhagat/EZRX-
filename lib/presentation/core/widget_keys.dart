@@ -345,6 +345,9 @@ class WidgetKeys {
   static Key cartClearButton = const Key('cartClearButton');
   static const Key cartPagePriceMessageWidget =
       Key('cartPagePriceMessageWidget');
+  static const Key counterOfferListPriceWidget =
+      Key('counterOfferListPriceWidget');
+  static const Key counterOfferPriceWidget = Key('counterOfferPriceWidget');
   //============================================================
   //  Checkout Page Keys
   //============================================================

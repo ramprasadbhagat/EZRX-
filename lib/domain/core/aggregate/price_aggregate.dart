@@ -632,6 +632,9 @@ class PriceAggregate with _$PriceAggregate {
       price.finalPrice.isEmpty ||
       materialInfo.hidePrice ||
       materialInfo.isFOCMaterial;
+
+  bool get displayCutOffListPrice =>
+      price.isCounterOfferRequested && !materialInfo.hidePrice;
 }
 
 enum PriceType {

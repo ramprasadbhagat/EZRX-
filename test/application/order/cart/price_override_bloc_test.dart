@@ -470,7 +470,7 @@ void main() {
               ),
             ),
           );
-          final newDiscountPrice = priceOverrideState.newDiscountPrice;
+          final newDiscountPrice = priceOverrideState.discountedPrice;
           expect(
             newDiscountPrice,
             90,
