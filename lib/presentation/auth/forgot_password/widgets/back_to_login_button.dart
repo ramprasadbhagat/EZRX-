@@ -14,7 +14,7 @@ class BackToLogin extends StatelessWidget {
       onPressed: () =>
           context.router.popUntilRouteWithName(LoginPageRoute.name),
       child: Text(
-        'Back To login'.tr(),
+        context.tr('Back To login'),
         style: Theme.of(context).textTheme.labelSmall,
       ),
     );

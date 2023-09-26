@@ -177,8 +177,8 @@ void main() {
     });
 
     testWidgets('=> Invoice Due date formatting for SG market', (tester) async {
-      when(() => salesOrgBlocMock.state).thenReturn(
-        SalesOrgState.initial().copyWith(
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
           salesOrganisation: sgSalesOrganisation,
         ),
       );

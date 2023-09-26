@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Logo extends StatelessWidget {
-  const Logo({Key? key}) : super(key: key);
+  final String title;
+  const Logo({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +31,9 @@ class Logo extends StatelessWidget {
               endIndent: 8,
             ),
             Text(
-              'Log in'.tr(),
+              context.tr(title),
               style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
                   ),
             ),
           ],

@@ -12,13 +12,21 @@ class _UsernameField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
       listenWhen: (previous, current) =>
-          previous.isSubmitting != current.isSubmitting &&
-          !current.isSubmitting,
+          context.router.current.name == ForgetPasswordPageRoute.name &&
+          previous.resetPasswordFailureOrSuccessOption !=
+              current.resetPasswordFailureOrSuccessOption,
       listener: (context, state) {
         state.resetPasswordFailureOrSuccessOption.fold(
           () {},
           (either) => either.fold(
-            (failure) => {},
+            (failure) => CustomSnackBar(
+              icon: const Icon(
+                Icons.cancel,
+                color: ZPColors.error,
+              ),
+              backgroundColor: ZPColors.errorSnackBarColor,
+              messageText: failure.failureMessage,
+            ).show(context),
             (success) =>
                 context.router.pushNamed('forgot_password_confirmation'),
           ),
@@ -33,10 +41,10 @@ class _UsernameField extends StatelessWidget {
               : AutovalidateMode.disabled,
           child: TextFieldWithLabel(
             fieldKey: WidgetKeys.forgotUsernameField,
-            labelText: 'Username'.tr(),
+            labelText: context.tr('Username'),
             mandatory: true,
             decoration: InputDecoration(
-              hintText: 'Enter username'.tr(),
+              hintText: context.tr('Enter username'),
             ),
             inputFormatters: [
               TextInputFormatter.withFunction(
@@ -49,7 +57,7 @@ class _UsernameField extends StatelessWidget {
             controller: controller,
             validator: (text) => Username(text ?? '').value.fold(
                   (f) => f.mapOrNull(
-                    empty: (_) => 'Username cannot be empty.'.tr(),
+                    empty: (_) => context.tr('Username cannot be empty.'),
                   ),
                   (_) => null,
                 ),

@@ -224,6 +224,7 @@ void main() {
     Widget loginTestPage({bool? useMediaQuery}) => WidgetUtils.getScopedWidget(
           useMediaQuery: useMediaQuery ?? true,
           autoRouterMock: autoRouterMock,
+          usingLocalization: true,
           child: MultiBlocProvider(
             providers: [
               BlocProvider<LoginFormBloc>(
@@ -287,6 +288,7 @@ void main() {
 
     testWidgets("Test don't have credential", (tester) async {
       await tester.pumpWidget(loginTestPage());
+      await tester.pump();
       // Create the Finders.
       final userNameTextField = find.byKey(const Key('loginUsernameField'));
       final passwordTextField = find.byKey(const Key('loginPasswordField'));
@@ -315,6 +317,7 @@ void main() {
       whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
 
       await tester.pumpWidget(loginTestPage());
+      await tester.pump();
 
       final errorMessage = find.byKey(WidgetKeys.customSnackBar);
 
@@ -505,6 +508,7 @@ void main() {
       whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
 
       await tester.pumpWidget(loginTestPage());
+      await tester.pump();
       await tester.enterText(
         find.byKey(const Key('loginUsernameField')),
         '1\n2',
@@ -535,6 +539,7 @@ void main() {
       whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
 
       await tester.pumpWidget(loginTestPage());
+      await tester.pump();
       await tester.enterText(
         find.byKey(const Key('loginPasswordField')),
         'Staysafe01',
@@ -565,6 +570,7 @@ void main() {
       whenListen(loginBlocMock, Stream.fromIterable(expectedStates));
 
       await tester.pumpWidget(loginTestPage());
+      await tester.pump();
       await tester.enterText(
         find.byKey(const Key('loginPasswordField')),
         'St@ysafe01',

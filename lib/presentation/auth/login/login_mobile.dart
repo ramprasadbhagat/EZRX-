@@ -35,7 +35,9 @@ class LoginMobile extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Logo(),
+              const Logo(
+                title: 'Log in',
+              ),
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),

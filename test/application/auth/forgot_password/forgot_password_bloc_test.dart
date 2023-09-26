@@ -4,7 +4,7 @@ import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc
 import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/infrastructure/auth/repository/forget_password_repository.dart';
+import 'package:ezrxmobile/infrastructure/auth/repository/forgot_password_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

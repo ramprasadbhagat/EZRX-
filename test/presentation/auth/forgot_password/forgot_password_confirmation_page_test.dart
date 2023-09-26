@@ -1,13 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/widgets/back_to_login_button.dart';
-import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_passoword_confirmation_page.dart';
+import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_confirmation_page.dart';
 import 'package:ezrxmobile/presentation/core/logo.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -44,32 +42,22 @@ void main() {
     });
 
     Widget getWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        routeName: ForgetPasswordConfirmationPageRoute.name,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<ForgotPasswordBloc>(
+            create: (context) => forgotPasswordBlocMock,
+          ),
         ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          routeName: ForgetPasswordConfirmationPageRoute.name,
-          providers: [
-            BlocProvider<ForgotPasswordBloc>(
-              create: (context) => forgotPasswordBlocMock,
-            ),
-          ],
-          child: const ForgetPasswordConfirmationPage(),
-        ),
+        child: const ForgetPasswordConfirmationPage(),
       );
     }
 
     testWidgets(' -> renders UI elements', (WidgetTester tester) async {
       await tester.pumpWidget(getWidget());
-
+      await tester.pump();
       expect(find.byType(Logo), findsOneWidget);
       expect(find.byType(ListView), findsOneWidget);
       expect(find.text('Email sent to you!'), findsOneWidget);
@@ -89,7 +77,7 @@ void main() {
         ),
       );
       await tester.pumpWidget(getWidget());
-
+      await tester.pump();
       expect(
         find.textContaining(
           'fake.username@email.com',

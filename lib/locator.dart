@@ -194,7 +194,7 @@ import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_local.
 import 'package:ezrxmobile/infrastructure/auth/datasource/forgot_password_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
-import 'package:ezrxmobile/infrastructure/auth/repository/forget_password_repository.dart';
+import 'package:ezrxmobile/infrastructure/auth/repository/forgot_password_repository.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_local.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';

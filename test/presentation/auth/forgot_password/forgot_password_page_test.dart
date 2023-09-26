@@ -1,7 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
@@ -28,6 +27,17 @@ class AppRouterMock extends Mock implements AppRouter {}
 
 void main() {
   late AppRouter autoRouterMock;
+  final routeData = RouteData(
+    route: const RouteMatch(
+      name: 'ForgetPasswordPageRoute',
+      segments: [],
+      path: 'forgot_password',
+      stringMatch: 'forgot_password',
+      key: ValueKey('ForgetPasswordPageRoute'),
+    ),
+    router: MockAppRouter(),
+    pendingChildren: [],
+  );
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouterMock());
@@ -40,8 +50,7 @@ void main() {
       forgotPasswordBlocMock = ForgotPasswordBlocMock();
       when(() => forgotPasswordBlocMock.state)
           .thenReturn(ForgotPasswordState.initial());
-      when(() => autoRouterMock.currentPath).thenReturn('fake-path');
-      when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
+      when(() => autoRouterMock.current).thenReturn(routeData);
       when(() => autoRouterMock.pushNamed(any()))
           .thenAnswer((invocation) async => null);
     });
@@ -51,36 +60,25 @@ void main() {
     });
 
     Widget getWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        routeName: ForgetPasswordPageRoute.name,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<ForgotPasswordBloc>(
+            create: (context) => forgotPasswordBlocMock,
+          ),
         ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          routeName: ForgetPasswordPageRoute.name,
-          providers: [
-            BlocProvider<ForgotPasswordBloc>(
-              create: (context) => forgotPasswordBlocMock,
-            ),
-          ],
-          child: const ForgetPasswordPage(),
-        ),
+        child: const ForgetPasswordPage(),
       );
     }
 
     group(' -> renders UI', () {
       testWidgets(' -> renders UI elements', (WidgetTester tester) async {
         await tester.pumpWidget(getWidget());
-
+        await tester.pump();
         expect(find.byType(Logo), findsOneWidget);
         expect(find.byType(ListView), findsOneWidget);
-        expect(find.text('Forgot password?'), findsOneWidget);
         expect(
           find.text(
             'Let us know your Zuellig Pharma username and we`ll send you a verification email.',
@@ -94,8 +92,7 @@ void main() {
 
       testWidgets(' -> displays error message', (WidgetTester tester) async {
         final expectedStates = [
-          ForgotPasswordState.initial()
-              .copyWith(resetPasswordFailureOrSuccessOption: none()),
+          ForgotPasswordState.initial(),
           ForgotPasswordState.initial().copyWith(
             resetPasswordFailureOrSuccessOption: optionOf(
               const Left(
@@ -108,7 +105,8 @@ void main() {
         whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
         await tester.pump();
-        expect(find.text('Fake-Error'), findsOneWidget);
+        await tester.pump(const Duration(seconds: 1));
+        expect(find.text(('Fake-Error')), findsOneWidget);
       });
     });
 
@@ -131,7 +129,7 @@ void main() {
         );
         whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
-
+        await tester.pump();
         await tester.enterText(find.byKey(WidgetKeys.forgotUsernameField), '');
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pumpAndSettle();
@@ -149,7 +147,7 @@ void main() {
         whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
 
         await tester.pumpWidget(getWidget());
-
+        await tester.pump();
         await tester.enterText(
           find.byKey(WidgetKeys.forgotUsernameField),
           'fake.username',
@@ -211,7 +209,7 @@ void main() {
         whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
 
         await tester.pumpWidget(getWidget());
-
+        await tester.pump();
         await tester.tap(find.text('Next'));
         await tester.pumpAndSettle();
 
@@ -239,7 +237,7 @@ void main() {
         ];
         whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
-
+        await tester.pump();
         await tester.tap(find.text('Next'));
         await tester.pumpAndSettle();
 
@@ -278,7 +276,7 @@ void main() {
         ];
         whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
-
+        await tester.pump();
         await tester.tap(find.text('Next'));
         await tester.pumpAndSettle();
 
@@ -289,7 +287,7 @@ void main() {
         testWidgets(' -> navigates back to login page',
             (WidgetTester tester) async {
           await tester.pumpWidget(getWidget());
-
+          await tester.pump();
           await tester.tap(find.byKey(WidgetKeys.loginSubmitButton));
           await tester.pumpAndSettle();
 

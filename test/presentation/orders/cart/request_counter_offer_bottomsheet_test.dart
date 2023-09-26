@@ -485,7 +485,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        getWidget(child: const CartPage(), usingLocalization: true),
+        getWidget(child: const CartPage()),
       );
       await tester.pump();
 
@@ -538,7 +538,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        getWidget(child: const CartPage(), usingLocalization: true),
+        getWidget(child: const CartPage()),
       );
       await tester.pump();
 

@@ -63,7 +63,7 @@ import '../account/payment_configuration/sales_district/sales_district_page.dart
 import '../account/profile/profile_page.dart' as _i31;
 import '../account/sales_org_search.dart' as _i64;
 import '../aup_tc/aup_tc.dart' as _i25;
-import '../auth/forgot_password/forgot_passoword_confirmation_page.dart' as _i4;
+import '../auth/forgot_password/forgot_password_confirmation_page.dart' as _i4;
 import '../auth/forgot_password/forgot_password_page.dart' as _i3;
 import '../auth/login/login_page.dart' as _i2;
 import '../core/static_html_viewer.dart' as _i20;

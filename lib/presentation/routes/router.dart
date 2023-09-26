@@ -2,7 +2,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/presentation/account/sales_org_search.dart';
 import 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
-import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_passoword_confirmation_page.dart';
+import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_confirmation_page.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/bank_beneficiary_page.dart';
 import 'package:ezrxmobile/presentation/account/payment_configuration/bank_benificiary/add_beneficiary_page.dart';

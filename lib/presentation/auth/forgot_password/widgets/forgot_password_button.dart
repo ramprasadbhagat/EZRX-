@@ -22,7 +22,7 @@ class _ForgotPasswordButton extends StatelessWidget {
                 },
           child: LoadingShimmer.withChild(
             enabled: state.isSubmitting,
-            child: const Text('Next').tr(),
+            child: Text(context.tr('Next')),
           ),
         );
       },
