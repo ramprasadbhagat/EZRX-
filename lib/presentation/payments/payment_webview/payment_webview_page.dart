@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -12,14 +13,12 @@ class PaymentWebviewPage extends StatefulWidget {
 }
 
 class _PaymentWebviewPageState extends State<PaymentWebviewPage> {
-  final _key = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: InAppWebView(
-          key: _key,
+          key: WidgetKeys.paymentWebviewPage,
           initialOptions: InAppWebViewGroupOptions(
             crossPlatform: InAppWebViewOptions(
               useShouldOverrideUrlLoading: true,

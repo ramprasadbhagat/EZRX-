@@ -501,6 +501,7 @@ class WidgetKeys {
   //============================================================
   static const Key newPaymentPage = Key('newPaymentPage');
   static const Key payButton = Key('payButton');
+  static const Key paymentWebviewPage = Key('paymentWebviewPage');
 
   //============================================================
   //  Announcement

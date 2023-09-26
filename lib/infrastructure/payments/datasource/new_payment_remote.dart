@@ -124,7 +124,7 @@ class NewPaymentRemoteDataSource {
       ),
       apiEndpoint: 'updatePaymentGatewayMutation',
     );
-    _exceptionChecker(property: 'updatePaymentGatewayMutation', res: res);
+    _exceptionChecker(property: 'updatePaymentGateway', res: res);
   }
 
   Future<List<CustomerOpenItem>> getCustomerOpenItems({
