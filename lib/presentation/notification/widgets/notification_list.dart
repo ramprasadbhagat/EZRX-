@@ -72,8 +72,7 @@ class _NotificationList extends StatelessWidget {
     if (!notificationData.type.isValid()) return;
     final eligibilityState = context.read<EligibilityBloc>().state;
     //Event call for Return Detail Page
-    if (notificationData.isReturnEligible &&
-        eligibilityState.isReturnsEnable) {
+    if (notificationData.isReturnEligible && eligibilityState.isReturnsEnable) {
       context.read<ReturnSummaryDetailsBloc>().add(
             ReturnSummaryDetailsEvent.fetch(
               returnId: notificationData.returnRequestId,
@@ -110,6 +109,15 @@ class _NotificationList extends StatelessWidget {
           );
       //Navigate to Payment Detail Page
       context.router.push(const PaymentSummaryDetailsPageRoute());
+    } else {
+      CustomSnackBar(
+        icon: const Icon(
+          Icons.info,
+          color: ZPColors.error,
+        ),
+        backgroundColor: ZPColors.errorSnackBarColor,
+        messageText: context.tr("You don't have access"),
+      ).show(context);
     }
   }
 }

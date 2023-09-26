@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -90,41 +89,32 @@ void main() {
       customerCodeListMock =
           await CustomerCodeLocalDataSource().getCustomerCodeList();
     });
-    Widget getScopedWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
+    Widget getScopedWidget({bool usingLocalization = true}) {
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: usingLocalization,
+        providers: [
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<NotificationBloc>(
+            create: (context) => notificationBlocMock,
+          ),
+          BlocProvider<ReturnSummaryDetailsBloc>(
+            create: (context) => returnSummaryDetailsBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
         ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<NotificationBloc>(
-              create: (context) => notificationBlocMock,
-            ),
-            BlocProvider<ReturnSummaryDetailsBloc>(
-              create: (context) => returnSummaryDetailsBlocMock,
-            ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-          ],
-          child: const Material(child: NotificationTab()),
-        ),
+        child: const Material(child: NotificationTab()),
       );
     }
 
     testWidgets('Load notification_tab widget', (tester) async {
       await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
       final titleFinder = find.text('Notifications'.tr());
       expect(find.byType(Scaffold), findsOneWidget);
       expect(titleFinder, findsOneWidget);
@@ -224,7 +214,11 @@ void main() {
         ),
       ];
       whenListen(notificationBlocMock, Stream.fromIterable(expectedStates));
-      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpWidget(
+        getScopedWidget(
+          usingLocalization: false,
+        ),
+      );
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
       final msg = find.textContaining(
@@ -318,9 +312,15 @@ void main() {
             key: notifications.notificationData.first.description,
           ),
         );
+        final snackBarFinder = find.byKey(WidgetKeys.customSnackBar);
         expect(itemKey, findsOneWidget);
         await tester.tap(itemKey);
         await tester.pumpAndSettle();
+        expect(snackBarFinder, findsOneWidget);
+        final msg = find.textContaining(
+          "You don't have access".tr(),
+        );
+        expect(msg, findsOneWidget);
         expect(
           autoRouterMock.current.name ==
               'ReturnRequestSummaryByItemDetailsRoute',

@@ -119,3 +119,8 @@ jobs:
     displayName: Test presentation -> products
     steps:
       - bash: flutter375 test test/presentation/products
+  - job: TestPresentationNotification
+    pool: devops-flutter
+    displayName: Test presentation -> notification
+    steps:
+      - bash: flutter375 test test/presentation/notification
