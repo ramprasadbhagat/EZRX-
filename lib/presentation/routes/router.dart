@@ -31,7 +31,6 @@ import 'package:ezrxmobile/presentation/account/change_password/change_password_
 import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 import 'package:ezrxmobile/presentation/account/customer_search.dart';
 import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
-import 'package:ezrxmobile/presentation/account/settings_page.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/auth/login/login_page.dart';
 import 'package:ezrxmobile/presentation/core/webview_page.dart';
@@ -100,7 +99,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       path: 'forgot_password_confirmation',
       page: ForgetPasswordConfirmationPage,
     ),
-    AutoRoute(path: 'settings', page: SettingsPage),
     AutoRoute(path: 'payment_configuration', page: PaymentConfigurationPage),
     AutoRoute(path: 'payment_methods', page: PaymentMethodsPage),
     AutoRoute(path: 'edit_payment_methods', page: EditPaymentMethodsPage),
