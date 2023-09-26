@@ -98,6 +98,7 @@ void main() {
   late OrderSummaryBloc orderSummaryBlocMock;
   late List<PriceAggregate> cartItems;
   late OrderEligibilityBloc orderEligibilityBloc;
+  final cartPageFinder = find.byKey(WidgetKeys.cartPage);
 
   setUpAll(() async {
     locator.registerLazySingleton(
@@ -248,8 +249,6 @@ void main() {
         ),
       );
       await tester.pump();
-
-      final cartPageFinder = find.byKey(WidgetKeys.cartPage);
       final cartItemFinder = find.byKey(
         WidgetKeys.cartMaterialItemTile(
           cartItems.first.materialInfo.materialNumber.getValue(),
@@ -283,7 +282,6 @@ void main() {
       );
       await tester.pump();
 
-      final cartPageFinder = find.byKey(WidgetKeys.cartPage);
       final cartItemFinder = find.byKey(
         WidgetKeys.cartMaterialItemTile(
           cartItems.first.materialInfo.materialNumber.getValue(),
@@ -318,8 +316,9 @@ void main() {
 
       when(() => eligibilityBloc.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs:
-              SalesOrganisationConfigs.empty().copyWith(priceOverride: true),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            priceOverride: true,
+          ),
         ),
       );
 
@@ -330,7 +329,6 @@ void main() {
       );
       await tester.pump();
 
-      final cartPageFinder = find.byKey(WidgetKeys.cartPage);
       final cartItemFinder = find.byKey(
         WidgetKeys.cartMaterialItemTile(
           cartItems.first.materialInfo.materialNumber.getValue(),
@@ -363,7 +361,7 @@ void main() {
       expect(counterOfferBottomSheetFinder, findsOneWidget);
       expect(counterOfferPriceFieldFinder, findsOneWidget);
       expect(counterOfferDiscountFieldFinder, findsNothing);
-      expect(discountedPriceWidgetFinder, findsOneWidget);
+      expect(discountedPriceWidgetFinder, findsNothing);
       expect(counterOfferRemarksFieldFinder, findsOneWidget);
 
       await tester.enterText(counterOfferPriceFieldFinder, '100');
@@ -386,7 +384,6 @@ void main() {
     testWidgets('Find and Test Counter Offer Discount Field', (tester) async {
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(
-          isFetching: false,
           apiFailureOrSuccessOption: none(),
           cartProducts: cartItems,
         ),
@@ -412,7 +409,6 @@ void main() {
       );
       await tester.pump();
 
-      final cartPageFinder = find.byKey(WidgetKeys.cartPage);
       final cartItemFinder = find.byKey(
         WidgetKeys.cartMaterialItemTile(
           cartItems.first.materialInfo.materialNumber.getValue(),
@@ -465,6 +461,110 @@ void main() {
           const PriceOverrideEvent.onRemarksValueChange(newRemarks: 'Comments'),
         ),
       ).called(1);
+    });
+
+    testWidgets(
+        'Test Counter Offer Discount Field when enableZDP8Override is false',
+        (tester) async {
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          cartProducts: cartItems,
+        ),
+      );
+
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('internal_sales_rep'),
+            ),
+            hasPriceOverride: true,
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty(),
+        ),
+      );
+
+      await tester.pumpWidget(
+        getWidget(child: const CartPage(), usingLocalization: true),
+      );
+      await tester.pump();
+
+      final counterOfferPriceButtonFinder =
+          find.byKey(WidgetKeys.counterOfferPriceButtonKey);
+      final counterOfferBottomSheetFinder =
+          find.byKey(WidgetKeys.counterOfferBottomSheet);
+      expect(cartPageFinder, findsOneWidget);
+      expect(counterOfferPriceButtonFinder.first, findsOneWidget);
+
+      await tester.tap(counterOfferPriceButtonFinder.first);
+      await tester.pump();
+      verify(
+        () => priceOverrideBloc.add(
+          PriceOverrideEvent.setProduct(item: cartItems.first),
+        ),
+      ).called(1);
+
+      final counterOfferDiscountFieldFinder =
+          find.byKey(WidgetKeys.counterOfferDiscountField);
+      final discountedPriceWidgetFinder =
+          find.byKey(WidgetKeys.counterOfferDiscountedPriceWidget);
+
+      expect(counterOfferBottomSheetFinder, findsOneWidget);
+      expect(counterOfferDiscountFieldFinder, findsNothing);
+      expect(discountedPriceWidgetFinder, findsNothing);
+    });
+
+    testWidgets(
+        'Test Counter Offer Discount Field when enableZDP8Override is true but user role is not sales_rep',
+        (tester) async {
+      when(() => cartBloc.state).thenReturn(
+        CartState.initial().copyWith(
+          cartProducts: cartItems,
+        ),
+      );
+
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('root_admin'),
+            ),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enableZDP8Override: true,
+            priceOverride: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(
+        getWidget(child: const CartPage(), usingLocalization: true),
+      );
+      await tester.pump();
+
+      final counterOfferPriceButtonFinder =
+          find.byKey(WidgetKeys.counterOfferPriceButtonKey);
+      final counterOfferBottomSheetFinder =
+          find.byKey(WidgetKeys.counterOfferBottomSheet);
+      expect(cartPageFinder, findsOneWidget);
+      expect(counterOfferPriceButtonFinder.first, findsOneWidget);
+
+      await tester.tap(counterOfferPriceButtonFinder.first);
+      await tester.pump();
+      verify(
+        () => priceOverrideBloc.add(
+          PriceOverrideEvent.setProduct(item: cartItems.first),
+        ),
+      ).called(1);
+
+      final counterOfferDiscountFieldFinder =
+          find.byKey(WidgetKeys.counterOfferDiscountField);
+      final discountedPriceWidgetFinder =
+          find.byKey(WidgetKeys.counterOfferDiscountedPriceWidget);
+
+      expect(counterOfferBottomSheetFinder, findsOneWidget);
+      expect(counterOfferDiscountFieldFinder, findsNothing);
+      expect(discountedPriceWidgetFinder, findsNothing);
     });
 
     testWidgets('Submit Counter Offer Price', (tester) async {

@@ -134,17 +134,18 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
                     isDiscountOverrideEnable: isDiscountOverrideEnable,
                     cartItem: state.item,
                   ),
-                if (isDiscountOverrideEnable)
+                if (isDiscountOverrideEnable) ...[
                   _CounterOfferDiscountTextField(
                     cartItem: state.item,
                     isPriceOverrideEnable: isPriceOverrideEnable,
                   ),
-                const _CounterOfferDiscountedPriceField(),
-                const Divider(
-                  indent: 0,
-                  endIndent: 0,
-                  color: ZPColors.extraLightGrey3,
-                ),
+                  const _CounterOfferDiscountedPriceField(),
+                  const Divider(
+                    indent: 0,
+                    endIndent: 0,
+                    color: ZPColors.extraLightGrey3,
+                  ),
+                ],
                 _CounterOfferRemarksTextField(
                   remarks: state.item.materialInfo.counterOfferDetails.comment
                       .getOrDefaultValue(''),
