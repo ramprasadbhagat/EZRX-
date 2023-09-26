@@ -282,6 +282,8 @@ PODS:
   - PhoneNumberKit/UIKit (3.6.7):
     - PhoneNumberKit/PhoneNumberKitCore
   - PLCrashReporter (1.11.1)
+  - printing (1.0.0):
+    - Flutter
   - PromisesObjC (2.3.1)
   - PromisesSwift (2.3.1):
     - PromisesObjC (= 2.3.1)
@@ -345,6 +347,7 @@ DEPENDENCIES:
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - printing (from `.symlinks/plugins/printing/ios`)
   - scandit_flutter_datacapture_barcode (from `.symlinks/plugins/scandit_flutter_datacapture_barcode/ios`)
   - scandit_flutter_datacapture_core (from `.symlinks/plugins/scandit_flutter_datacapture_core/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
@@ -447,6 +450,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
+  printing:
+    :path: ".symlinks/plugins/printing/ios"
   scandit_flutter_datacapture_barcode:
     :path: ".symlinks/plugins/scandit_flutter_datacapture_barcode/ios"
   scandit_flutter_datacapture_core:
@@ -522,6 +527,7 @@ SPEC CHECKSUMS:
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
   PhoneNumberKit: 43b5169526cc417398c8f13f77c97552c1c6ed76
   PLCrashReporter: 5d2d3967afe0efad61b3048d617e2199a5d1b787
+  printing: 233e1b73bd1f4a05615548e9b5a324c98588640b
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
   scandit_flutter_datacapture_barcode: 6df1f0f9bb8a42307a041b8df2b42d53000d783b
