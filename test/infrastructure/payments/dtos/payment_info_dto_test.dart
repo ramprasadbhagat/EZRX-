@@ -10,6 +10,7 @@ void main() {
   late dynamic dataMY;
   late dynamic dataPH;
   late dynamic dataVN;
+  late dynamic dataTH;
 
   group('Payment Info dto ', () {
     setUp(() async {
@@ -26,6 +27,11 @@ void main() {
       dataVN = json.decode(
         await rootBundle.loadString(
           'assets/json/payResponseVN.json',
+        ),
+      );
+      dataTH = json.decode(
+        await rootBundle.loadString(
+          'assets/json/payResponseTH.json',
         ),
       );
     });
@@ -57,6 +63,17 @@ void main() {
       expect(
         paymentInfoDto.zzHtmcs,
         '''<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script><button type="button" onlick="butonClick" id="btn_submit">Open Payment Gateway</button><script language="javascript">\$(document).ready(function(){\$("#btn_submit").click(function (){var win=window.open("https://newsandbox.payoo.com.vn/v2/paynow/prepare?_token=1gh4Mg83167" ,"_self" );})})</script><script type="text/javascript">\$(document).ready(function(){\$("#btn_submit").click();});</script>''',
+      );
+    });
+
+    test('PaymentInfoDto fromJson and toDomain on TH market', () {
+      final paymentInfoDto =
+          PaymentInfoDto.fromJson(dataTH['data']['addCustomerPayment'])
+              .toDomain();
+
+      expect(
+        paymentInfoDto.zzHtmcs,
+        '''<html><head></head><body><script type="text/javascript" src="https://dev-kpaymentgateway.kasikornbank.com/ui/v2/kpayment.min.js" data-apikey="pkey_test_21102hvZyafqGFFzN0G3NjphkJZ2NPFbRBMRq" data-amount="1605.00" data-currency="THB" data-payment-methods="qr" data-order-id="order_test_21102ceb1295b54154623b77b762d7c391acb"></script></body></html>''',
       );
     });
   });

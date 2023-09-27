@@ -507,6 +507,36 @@ void main() {
           ).called(1);
         },
       );
+
+      blocTest(
+        'Update Payment Gateway not called on TH market',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        seed: () => NewPaymentState.initial().copyWith(
+          isLoading: false,
+          selectedInvoices: fakeCustomerOpenItemSelected,
+          paymentMethods: fakePaymentMethodValues,
+          selectedPaymentMethod: fakePaymentMethodValues.first,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2902')),
+        ),
+        act: (NewPaymentBloc bloc) => bloc.add(
+          NewPaymentEvent.updatePaymentGateway(
+            paymentUrl: Uri.parse('https://fake-uri'),
+          ),
+        ),
+        verify: (NewPaymentBloc newPaymentBloc) {
+          verifyNever(
+            () => newPaymentRepository.updatePaymentGateway(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2902')),
+              uri: Uri.parse('https://fake-uri'),
+            ),
+          );
+        },
+      );
     },
   );
 
