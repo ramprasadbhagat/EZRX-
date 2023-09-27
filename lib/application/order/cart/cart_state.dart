@@ -126,8 +126,9 @@ class CartState with _$CartState {
           )
           .fold<double>(
             0,
-            (sum, item) => sum + item.finalPriceTotalWithTax,
-          );
+            (sum, item) => sum + item.finalPriceTotal,
+          ) +
+      taxMaterial;
 
   double get subTotal =>
       totalBundlesPrice +
@@ -162,20 +163,23 @@ class CartState with _$CartState {
 
   double get totalMaterialPriceWithTax => totalMaterialsPrice + taxMaterial;
 
-  double get taxMaterial => cartProducts
-      .where(
-        (item) =>
-            !item.materialInfo.hidePrice && !item.materialInfo.type.typeBundle,
-      )
-      .fold<double>(
-        0,
-        (sum, item) =>
-            sum +
-            (item.price.finalPrice.getValue() *
-                item.quantity *
-                _totalTaxPercentInDouble /
-                100),
-      );
+  double get taxMaterial => config.displaySubtotalTaxBreakdown
+      ? cartProducts
+          .where(
+            (item) =>
+                !item.materialInfo.hidePrice &&
+                !item.materialInfo.type.typeBundle,
+          )
+          .fold<double>(
+            0,
+            (sum, item) =>
+                sum +
+                (item.price.finalPrice.getValue() *
+                    item.quantity *
+                    _totalTaxPercentInDouble /
+                    100),
+          )
+      : 0.0;
 
   double itemPrice({required int index}) {
     final cartProductsTemp = cartProducts.elementAt(index);

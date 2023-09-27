@@ -1720,6 +1720,39 @@ void main() {
       );
 
       testWidgets(
+        'Do not Show tax details on Subtotal level when displaySubtotalTaxBreakdown is enabled for tw',
+        (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: MaterialInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('123456789'),
+                    quantity: MaterialQty(1),
+                  ),
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(234.50),
+                  ),
+                ),
+              ],
+              config: SalesOrganisationConfigs.empty().copyWith(
+                displayItemTaxBreakdown: false,
+                displaySubtotalTaxBreakdown: true,
+                vatValue: 10,
+              ),
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+
+          final taxLevelFinder = find.text('Total with tax:');
+          expect(taxLevelFinder, findsNothing);
+          expect(cartBloc.state.grandTotal, 257.95);
+        },
+      );
+
+      testWidgets(
         'Show tax details on material level when displayItemTaxBreakdown is enabled for vn with material level tax',
         (tester) async {
           final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
