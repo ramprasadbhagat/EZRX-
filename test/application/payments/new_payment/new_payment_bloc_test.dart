@@ -6,9 +6,9 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
@@ -432,6 +432,36 @@ void main() {
               uri: Uri.parse('https://fake-uri'),
             ),
           ).called(1);
+        },
+      );
+
+      blocTest(
+        'Update Payment Gateway not called on PH market',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        seed: () => NewPaymentState.initial().copyWith(
+          isLoading: false,
+          selectedInvoices: fakeCustomerOpenItemSelected,
+          paymentMethods: fakePaymentMethodValues,
+          selectedPaymentMethod: fakePaymentMethodValues.first,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2500')),
+        ),
+        act: (NewPaymentBloc bloc) => bloc.add(
+          NewPaymentEvent.updatePaymentGateway(
+            paymentUrl: Uri.parse('https://fake-uri'),
+          ),
+        ),
+        verify: (NewPaymentBloc newPaymentBloc) {
+          verifyNever(
+            () => newPaymentRepository.updatePaymentGateway(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2500')),
+              uri: Uri.parse('https://fake-uri'),
+            ),
+          );
         },
       );
     },
