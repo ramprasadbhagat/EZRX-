@@ -13,8 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -97,41 +95,31 @@ void main() {
           .thenReturn(ProductImageState.initial());
     });
     Widget getScopedWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-            BlocProvider<NewRequestBloc>(
-              create: (context) => newRequestBlocMock,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<UsageCodeBloc>(create: (context) => usageCodeBlocMock),
-            BlocProvider<ReturnRequestAttachmentBloc>(
-              create: ((context) => returnRequestAttachmentBlocMock),
-            ),
-            BlocProvider<ProductImageBloc>(
-              create: ((context) => productImageBlocMock),
-            ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-          ],
-          child: const Scaffold(
-            body: ReturnDetailsTab(),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+          BlocProvider<NewRequestBloc>(
+            create: (context) => newRequestBlocMock,
           ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<UsageCodeBloc>(create: (context) => usageCodeBlocMock),
+          BlocProvider<ReturnRequestAttachmentBloc>(
+            create: ((context) => returnRequestAttachmentBlocMock),
+          ),
+          BlocProvider<ProductImageBloc>(
+            create: ((context) => productImageBlocMock),
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+        ],
+        child: const Scaffold(
+          body: ReturnDetailsTab(),
         ),
       );
     }
@@ -151,6 +139,7 @@ void main() {
         );
 
         await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
         final returnDetailsListView =
             find.byKey(WidgetKeys.returnDetailsListView);
         expect(returnDetailsListView, findsOneWidget);

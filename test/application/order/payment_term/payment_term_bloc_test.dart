@@ -99,6 +99,8 @@ void main() {
     enableGMN: false,
     displayItemTaxBreakdown: false,
     displaySubtotalTaxBreakdown: false,
+    disableOverrideFieldCustomer: false,
+    disableOverrideFieldSR: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

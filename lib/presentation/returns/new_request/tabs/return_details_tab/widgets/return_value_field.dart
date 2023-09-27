@@ -18,22 +18,27 @@ class ReturnValueField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewRequestBloc, NewRequestState>(
-      buildWhen: (previous, current) =>
-          previous.getReturnItemDetails(data.uuid).returnQuantity !=
-          current.getReturnItemDetails(data.uuid).returnQuantity,
+      buildWhen: (previous, current) {
+        final previousReturn = previous.getReturnItemDetails(data.uuid);
+        final currentReturn = current.getReturnItemDetails(data.uuid);
+
+        return previousReturn.returnQuantity != currentReturn.returnQuantity ||
+            previousReturn.priceOverride != currentReturn.priceOverride;
+      },
       builder: (context, state) {
         final detail = state.getReturnItemDetails(data.uuid);
+        final returnValue = detail.returnValueString(
+          data.unitPrice.getOrDefaultValue(0),
+        );
 
         return TextFieldWithLabel(
           fieldKey: WidgetKeys.returnValueField(
-            '${data.uuid}${detail.returnQuantity.getIntValue}',
+            '${data.uuid}$returnValue',
           ),
           labelText:
               '${'Return value'.tr()} (${context.read<EligibilityBloc>().state.salesOrgConfigs.currency.code})',
           onChanged: (value) {},
-          initValue: detail.returnValueString(
-            data.unitPrice.getOrDefaultValue(0),
-          ),
+          initValue: returnValue,
           isEnabled: false,
         );
       },

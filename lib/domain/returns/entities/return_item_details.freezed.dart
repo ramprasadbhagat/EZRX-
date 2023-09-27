@@ -26,7 +26,7 @@ mixin _$ReturnItemDetails {
       throw _privateConstructorUsedError;
   Remarks get remarks => throw _privateConstructorUsedError;
   bool get outsidePolicy => throw _privateConstructorUsedError;
-  PriceOverrideValue get priceOverride => throw _privateConstructorUsedError;
+  CounterOfferValue get priceOverride => throw _privateConstructorUsedError;
   String get returnReason => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -50,7 +50,7 @@ abstract class $ReturnItemDetailsCopyWith<$Res> {
       List<ReturnRequestAttachment> uploadedFiles,
       Remarks remarks,
       bool outsidePolicy,
-      PriceOverrideValue priceOverride,
+      CounterOfferValue priceOverride,
       String returnReason});
 
   $UsageCopyWith<$Res> get usage;
@@ -121,7 +121,7 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
       priceOverride: null == priceOverride
           ? _value.priceOverride
           : priceOverride // ignore: cast_nullable_to_non_nullable
-              as PriceOverrideValue,
+              as CounterOfferValue,
       returnReason: null == returnReason
           ? _value.returnReason
           : returnReason // ignore: cast_nullable_to_non_nullable
@@ -156,7 +156,7 @@ abstract class _$$_ReturnItemDetailsCopyWith<$Res>
       List<ReturnRequestAttachment> uploadedFiles,
       Remarks remarks,
       bool outsidePolicy,
-      PriceOverrideValue priceOverride,
+      CounterOfferValue priceOverride,
       String returnReason});
 
   @override
@@ -226,7 +226,7 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
       priceOverride: null == priceOverride
           ? _value.priceOverride
           : priceOverride // ignore: cast_nullable_to_non_nullable
-              as PriceOverrideValue,
+              as CounterOfferValue,
       returnReason: null == returnReason
           ? _value.returnReason
           : returnReason // ignore: cast_nullable_to_non_nullable
@@ -278,7 +278,7 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
   @override
   final bool outsidePolicy;
   @override
-  final PriceOverrideValue priceOverride;
+  final CounterOfferValue priceOverride;
   @override
   final String returnReason;
 
@@ -347,7 +347,7 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
       required final List<ReturnRequestAttachment> uploadedFiles,
       required final Remarks remarks,
       required final bool outsidePolicy,
-      required final PriceOverrideValue priceOverride,
+      required final CounterOfferValue priceOverride,
       required final String returnReason}) = _$_ReturnItemDetails;
   const _ReturnItemDetails._() : super._();
 
@@ -370,7 +370,7 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
   @override
   bool get outsidePolicy;
   @override
-  PriceOverrideValue get priceOverride;
+  CounterOfferValue get priceOverride;
   @override
   String get returnReason;
   @override

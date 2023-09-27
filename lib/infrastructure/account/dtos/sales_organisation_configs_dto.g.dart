@@ -64,6 +64,9 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       enableZDP8Override: json['enableZDP8Override'] as bool? ?? false,
       disableReturnsAccessSR: json['disableReturnsAccessSR'] as bool? ?? false,
       disableReturnsAccess: json['disableReturnsAccess'] as bool? ?? false,
+      disableOverrideFieldCustomer:
+          json['disableOverrideFieldCustomer'] as bool? ?? false,
+      disableOverrideFieldSR: json['disableOverrideFieldSR'] as bool? ?? false,
       enableGreenDelivery: json['enableGreenDelivery'] as bool? ?? false,
       greenDeliveryDelayInDays: json['greenDeliveryDelayInDays'] as int? ?? 2,
       enableComboDeals: json['enableComboDeals'] as bool? ?? false,
@@ -130,6 +133,8 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableZDP8Override': instance.enableZDP8Override,
       'disableReturnsAccessSR': instance.disableReturnsAccessSR,
       'disableReturnsAccess': instance.disableReturnsAccess,
+      'disableOverrideFieldCustomer': instance.disableOverrideFieldCustomer,
+      'disableOverrideFieldSR': instance.disableOverrideFieldSR,
       'enableGreenDelivery': instance.enableGreenDelivery,
       'greenDeliveryDelayInDays': instance.greenDeliveryDelayInDays,
       'enableComboDeals': instance.enableComboDeals,

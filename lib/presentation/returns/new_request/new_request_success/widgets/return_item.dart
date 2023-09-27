@@ -35,7 +35,9 @@ class _ReturnItem extends StatelessWidget {
           ),
           MaterialQuantityAndPrice(
             quantity: returnItemDetail.returnQuantity.getIntValue,
-            unitPrice: returnMaterial.unitPrice.getOrDefaultValue(0),
+            unitPrice: returnItemDetail.priceOverride.isValid()
+                ? returnItemDetail.priceOverride.doubleValue
+                : returnMaterial.unitPrice.getOrDefaultValue(0),
           ),
           _ReturnExpandableSection(
             children: [

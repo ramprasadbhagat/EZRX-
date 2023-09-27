@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/balance_quantity_field.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/reason_dropdown.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_counter_offer.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_quantity_field.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_value_field.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_info.dart';

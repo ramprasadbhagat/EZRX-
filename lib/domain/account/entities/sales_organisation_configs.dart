@@ -72,6 +72,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableGMN,
     required bool displayItemTaxBreakdown,
     required bool displaySubtotalTaxBreakdown,
+    required bool disableOverrideFieldCustomer,
+    required bool disableOverrideFieldSR,
   }) = _SalesOrganisationConfigs;
 
   factory SalesOrganisationConfigs.empty() => SalesOrganisationConfigs(
@@ -133,6 +135,8 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         enableGMN: false,
         displayItemTaxBreakdown: false,
         displaySubtotalTaxBreakdown: false,
+        disableOverrideFieldCustomer: false,
+        disableOverrideFieldSR: false,
       );
 
   String get getConfigLanguage {

@@ -21,7 +21,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
     required List<ReturnRequestAttachment> uploadedFiles,
     required Remarks remarks,
     required bool outsidePolicy,
-    required PriceOverrideValue priceOverride,
+    required CounterOfferValue priceOverride,
     required String returnReason,
   }) = _ReturnItemDetails;
 
@@ -35,7 +35,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
         uploadedFiles: <ReturnRequestAttachment>[],
         remarks: Remarks(''),
         outsidePolicy: false,
-        priceOverride: PriceOverrideValue(0),
+        priceOverride: CounterOfferValue(''),
         returnReason: '',
       );
 
@@ -43,9 +43,10 @@ class ReturnItemDetails with _$ReturnItemDetails {
 
   bool get isValid => returnQuantity.getIntValue > 0 && returnReason.isNotEmpty;
 
-  String returnValueString(double unitPrice) =>
-      returnValue(unitPrice).toStringAsFixed(2);
+  String returnValueString(double unitPrice) => returnValue(
+        unitPrice,
+      ).toStringAsFixed(2);
 
-  double returnValue(double unitPrice) =>
-      (returnQuantity.getIntValue * unitPrice);
+  double returnValue(double unitPrice) => (returnQuantity.getIntValue *
+      (priceOverride.isValid() ? priceOverride.doubleValue : unitPrice));
 }

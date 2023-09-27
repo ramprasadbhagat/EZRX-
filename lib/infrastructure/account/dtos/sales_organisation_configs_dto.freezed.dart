@@ -121,6 +121,10 @@ mixin _$SalesOrganisationConfigsDto {
   bool get disableReturnsAccessSR => throw _privateConstructorUsedError;
   @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
   bool get disableReturnsAccess => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disableOverrideFieldCustomer', defaultValue: false)
+  bool get disableOverrideFieldCustomer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disableOverrideFieldSR', defaultValue: false)
+  bool get disableOverrideFieldSR => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
   bool get enableGreenDelivery => throw _privateConstructorUsedError;
   @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
@@ -236,6 +240,10 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       bool disableReturnsAccessSR,
       @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
       bool disableReturnsAccess,
+      @JsonKey(name: 'disableOverrideFieldCustomer', defaultValue: false)
+      bool disableOverrideFieldCustomer,
+      @JsonKey(name: 'disableOverrideFieldSR', defaultValue: false)
+      bool disableOverrideFieldSR,
       @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
       bool enableGreenDelivery,
       @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
@@ -318,6 +326,8 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? enableZDP8Override = null,
     Object? disableReturnsAccessSR = null,
     Object? disableReturnsAccess = null,
+    Object? disableOverrideFieldCustomer = null,
+    Object? disableOverrideFieldSR = null,
     Object? enableGreenDelivery = null,
     Object? greenDeliveryDelayInDays = null,
     Object? enableComboDeals = null,
@@ -525,6 +535,14 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.disableReturnsAccess
           : disableReturnsAccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableOverrideFieldCustomer: null == disableOverrideFieldCustomer
+          ? _value.disableOverrideFieldCustomer
+          : disableOverrideFieldCustomer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableOverrideFieldSR: null == disableOverrideFieldSR
+          ? _value.disableOverrideFieldSR
+          : disableOverrideFieldSR // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableGreenDelivery: null == enableGreenDelivery
           ? _value.enableGreenDelivery
           : enableGreenDelivery // ignore: cast_nullable_to_non_nullable
@@ -656,6 +674,10 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       bool disableReturnsAccessSR,
       @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
       bool disableReturnsAccess,
+      @JsonKey(name: 'disableOverrideFieldCustomer', defaultValue: false)
+      bool disableOverrideFieldCustomer,
+      @JsonKey(name: 'disableOverrideFieldSR', defaultValue: false)
+      bool disableOverrideFieldSR,
       @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
       bool enableGreenDelivery,
       @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
@@ -737,6 +759,8 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableZDP8Override = null,
     Object? disableReturnsAccessSR = null,
     Object? disableReturnsAccess = null,
+    Object? disableOverrideFieldCustomer = null,
+    Object? disableOverrideFieldSR = null,
     Object? enableGreenDelivery = null,
     Object? greenDeliveryDelayInDays = null,
     Object? enableComboDeals = null,
@@ -944,6 +968,14 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.disableReturnsAccess
           : disableReturnsAccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      disableOverrideFieldCustomer: null == disableOverrideFieldCustomer
+          ? _value.disableOverrideFieldCustomer
+          : disableOverrideFieldCustomer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disableOverrideFieldSR: null == disableOverrideFieldSR
+          ? _value.disableOverrideFieldSR
+          : disableOverrideFieldSR // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableGreenDelivery: null == enableGreenDelivery
           ? _value.enableGreenDelivery
           : enableGreenDelivery // ignore: cast_nullable_to_non_nullable
@@ -1080,6 +1112,10 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       required this.disableReturnsAccessSR,
       @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
       required this.disableReturnsAccess,
+      @JsonKey(name: 'disableOverrideFieldCustomer', defaultValue: false)
+      required this.disableOverrideFieldCustomer,
+      @JsonKey(name: 'disableOverrideFieldSR', defaultValue: false)
+      required this.disableOverrideFieldSR,
       @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
       required this.enableGreenDelivery,
       @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
@@ -1258,6 +1294,12 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
   final bool disableReturnsAccess;
   @override
+  @JsonKey(name: 'disableOverrideFieldCustomer', defaultValue: false)
+  final bool disableOverrideFieldCustomer;
+  @override
+  @JsonKey(name: 'disableOverrideFieldSR', defaultValue: false)
+  final bool disableOverrideFieldSR;
+  @override
   @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
   final bool enableGreenDelivery;
   @override
@@ -1287,7 +1329,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment)';
   }
 
   @override
@@ -1373,6 +1415,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.enableZDP8Override, enableZDP8Override) || other.enableZDP8Override == enableZDP8Override) &&
             (identical(other.disableReturnsAccessSR, disableReturnsAccessSR) || other.disableReturnsAccessSR == disableReturnsAccessSR) &&
             (identical(other.disableReturnsAccess, disableReturnsAccess) || other.disableReturnsAccess == disableReturnsAccess) &&
+            (identical(other.disableOverrideFieldCustomer, disableOverrideFieldCustomer) || other.disableOverrideFieldCustomer == disableOverrideFieldCustomer) &&
+            (identical(other.disableOverrideFieldSR, disableOverrideFieldSR) || other.disableOverrideFieldSR == disableOverrideFieldSR) &&
             (identical(other.enableGreenDelivery, enableGreenDelivery) || other.enableGreenDelivery == enableGreenDelivery) &&
             (identical(other.greenDeliveryDelayInDays, greenDeliveryDelayInDays) || other.greenDeliveryDelayInDays == greenDeliveryDelayInDays) &&
             (identical(other.enableComboDeals, enableComboDeals) || other.enableComboDeals == enableComboDeals) &&
@@ -1437,6 +1481,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         enableZDP8Override,
         disableReturnsAccessSR,
         disableReturnsAccess,
+        disableOverrideFieldCustomer,
+        disableOverrideFieldSR,
         enableGreenDelivery,
         greenDeliveryDelayInDays,
         enableComboDeals,
@@ -1562,6 +1608,10 @@ abstract class _SalesOrganisationConfigsDto
       required final bool disableReturnsAccessSR,
       @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
       required final bool disableReturnsAccess,
+      @JsonKey(name: 'disableOverrideFieldCustomer', defaultValue: false)
+      required final bool disableOverrideFieldCustomer,
+      @JsonKey(name: 'disableOverrideFieldSR', defaultValue: false)
+      required final bool disableOverrideFieldSR,
       @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
       required final bool enableGreenDelivery,
       @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
@@ -1733,6 +1783,12 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
   bool get disableReturnsAccess;
+  @override
+  @JsonKey(name: 'disableOverrideFieldCustomer', defaultValue: false)
+  bool get disableOverrideFieldCustomer;
+  @override
+  @JsonKey(name: 'disableOverrideFieldSR', defaultValue: false)
+  bool get disableOverrideFieldSR;
   @override
   @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
   bool get enableGreenDelivery;

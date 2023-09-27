@@ -105,6 +105,10 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
         required bool disableReturnsAccessSR,
     @JsonKey(name: 'disableReturnsAccess', defaultValue: false)
         required bool disableReturnsAccess,
+    @JsonKey(name: 'disableOverrideFieldCustomer', defaultValue: false)
+        required bool disableOverrideFieldCustomer,
+    @JsonKey(name: 'disableOverrideFieldSR', defaultValue: false)
+        required bool disableOverrideFieldSR,
     @JsonKey(name: 'enableGreenDelivery', defaultValue: false)
         required bool enableGreenDelivery,
     @JsonKey(name: 'greenDeliveryDelayInDays', defaultValue: 2)
@@ -181,6 +185,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       minOrderAmount: configs.minOrderAmount,
       enableZDP8Override: configs.enableZDP8Override,
       disableReturnsAccessSR: configs.disableReturnsAccessSR,
+      disableOverrideFieldSR: configs.disableOverrideFieldSR,
+      disableOverrideFieldCustomer: configs.disableOverrideFieldCustomer,
       disableReturnsAccess: configs.disableReturnsAccess,
       enableComboDeals: configs.enableComboDeals,
       comboDealsUserRole: configs.comboDealsUserRole.getOrDefaultValue(0),
@@ -247,6 +253,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableZDP8Override: enableZDP8Override,
       disableReturnsAccessSR: disableReturnsAccessSR,
       disableReturnsAccess: disableReturnsAccess,
+      disableOverrideFieldCustomer: disableOverrideFieldCustomer,
+      disableOverrideFieldSR: disableOverrideFieldSR,
       enableComboDeals: enableComboDeals,
       comboDealsUserRole: ComboDealUserRole(comboDealsUserRole),
       enableGMN: enableGMN,

@@ -67,8 +67,7 @@ class ReturnItemDetailsDto with _$ReturnItemDetailsDto {
       returnType: '500',
       remarks: returnItemDetail.remarks.getOrDefaultValue(''),
       outsidePolicy: returnItemDetail.outsidePolicy,
-      priceOverride:
-          returnItemDetail.priceOverride.getOrDefaultValue(0).toString(),
+      priceOverride: returnItemDetail.priceOverride.getOrDefaultValue(''),
     );
   }
 

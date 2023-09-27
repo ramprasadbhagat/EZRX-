@@ -115,6 +115,8 @@ void main() {
     enableGMN: false,
     displayItemTaxBreakdown: false,
     displaySubtotalTaxBreakdown: false,
+    disableOverrideFieldCustomer: false,
+    disableOverrideFieldSR: false,
   );
   final chatBotRepositoryMock = ChatBotRepositoryMock();
   final mixpanelRepositoryMock = MixpanelRepoMock();

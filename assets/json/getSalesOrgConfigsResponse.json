@@ -43,9 +43,9 @@
             "principalList": {
                "value": [
                   {
-                    "date": 2023040722,
-                    "principal": "0000000000",
-                    "__typename": "Principal"
+                     "date": 2023040722,
+                     "principal": "0000000000",
+                     "__typename": "Principal"
                   }
                ]
             },
@@ -77,7 +77,9 @@
             "disableProcessingStatus": false,
             "enableIRN": true,
             "disableReturnsAccessSR": false,
-            "disableReturnsAccess": false
+            "disableReturnsAccess": false,
+            "disableOverrideFieldCustomer": false,
+            "disableOverrideFieldSR": false
          }
       ]
    }

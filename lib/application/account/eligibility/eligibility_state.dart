@@ -228,4 +228,18 @@ class EligibilityState with _$EligibilityState {
   SalesOrg get salesOrg => salesOrganisation.salesOrg;
 
   bool get haveShipTo => shipToInfo != ShipToInfo.empty();
+
+  bool get isReturnsOverrideEnable {
+    if (user.role.type.isSalesRepRole &&
+        salesOrgConfigs.disableOverrideFieldSR) {
+      return false;
+    }
+
+    if (user.role.type.isCustomer &&
+        salesOrgConfigs.disableOverrideFieldCustomer) {
+      return false;
+    }
+
+    return true;
+  }
 }

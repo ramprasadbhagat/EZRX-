@@ -48,6 +48,10 @@ class _MaterialReturnDetailsSection extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
+                ReturnCounterOfferField(
+                  uuid: detail.uuid,
+                ),
+                const SizedBox(height: 8),
                 ReasonDropdown(
                   uuid: item.uuid,
                 ),

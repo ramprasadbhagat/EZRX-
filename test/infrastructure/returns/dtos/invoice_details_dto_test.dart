@@ -44,7 +44,7 @@ void main() {
             'returnType': '500',
             'remarks': '',
             'outsidePolicy': false,
-            'priceOverride': '0.0'
+            'priceOverride': ''
           }
         ]
       };

@@ -19,7 +19,7 @@ void main() {
         batch: 'fakeBatch',
         returnQuantity: ReturnQuantity('1'),
         remarks: Remarks('fakeRemarks'),
-        priceOverride: PriceOverrideValue(2),
+        priceOverride: CounterOfferValue('2'),
         returnReason: 'fakeReturnReason',
       );
     });
