@@ -2,13 +2,15 @@ part of 'payment_summary_bloc.dart';
 
 @freezed
 class PaymentSummaryEvent with _$PaymentSummaryEvent {
-  const factory PaymentSummaryEvent.fetchPaymentSummaryList({
-    required SalesOrganisation salesOrganization,
+  const factory PaymentSummaryEvent.initialized({
     required CustomerCodeInfo customerCodeInfo,
-  }) = _FetchPaymentSummaryList;
+    required SalesOrganisation salesOrganization,
+  }) = _Initialized;
 
-  const factory PaymentSummaryEvent.loadMorePaymentSummary({
-    required SalesOrganisation salesOrganization,
-    required CustomerCodeInfo customerCodeInfo,
-  }) = _LoadMorePaymentSummary;
+  const factory PaymentSummaryEvent.fetch({
+    required PaymentSummaryFilter appliedFilter,
+    required SearchKey searchKey,
+  }) = _Fetch;
+
+  const factory PaymentSummaryEvent.loadMore() = _LoadMore;
 }

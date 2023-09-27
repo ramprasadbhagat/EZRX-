@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
+import 'package:ezrxmobile/presentation/core/custom_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
+import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
+import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -28,10 +31,22 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:flutter/services.dart';
 
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_download_button.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_group_item.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_group_list.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_filter_icon.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_filter_bottom_sheet.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_search_bar.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_statuses_selector.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_amount_value_range.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_created_date_range.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_reset_button.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_apply_button.dart';
 
 class PaymentSummaryPage extends StatefulWidget {
   const PaymentSummaryPage({Key? key}) : super(key: key);
@@ -75,22 +90,11 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
               child: Row(
-                children: [
+                children: const [
                   Expanded(
-                    child: CustomSearchBar(
-                      enabled: true,
-                      onSearchChanged: (String value) {},
-                      onClear: () {},
-                      hintText: 'Search by payment advice / voucher no.',
-                      customValidator: (text) => true,
-                      onSearchSubmitted: (text) {},
-                      initialValue: '',
-                    ),
+                    child: _PaymentSummarySearchBar(),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.tune),
-                  ),
+                  _PaymentSummaryFilterIcon(),
                 ],
               ),
             ),

@@ -44,6 +44,7 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
@@ -376,6 +377,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<PaymentSummaryBloc>(
           create: (context) => locator<PaymentSummaryBloc>(),
+        ),
+        BlocProvider<PaymentSummaryFilterBloc>(
+          create: (context) => locator<PaymentSummaryFilterBloc>(),
         ),
         BlocProvider<SoaBloc>(
           create: (context) => locator<SoaBloc>(),

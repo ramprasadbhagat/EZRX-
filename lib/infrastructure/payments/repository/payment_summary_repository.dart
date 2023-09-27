@@ -4,6 +4,8 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 
 import 'package:ezrxmobile/domain/payments/repository/i_payment_summary_repository.dart';
 
@@ -14,6 +16,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_local_datasource.dart';
 
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_remote_datasource.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_filter_dto.dart';
 
 class PaymentSummaryRepository extends IPaymentSummaryRepository {
   final Config config;
@@ -31,6 +34,8 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
       fetchPaymentSummaryList({
     required SalesOrganisation salesOrganization,
     required CustomerCodeInfo customerCodeInfo,
+    required PaymentSummaryFilter filter,
+    required SearchKey searchKey,
     required int offset,
     required int pageSize,
   }) async {
@@ -46,10 +51,19 @@ class PaymentSummaryRepository extends IPaymentSummaryRepository {
       }
     }
     try {
+      final filterList = PaymentSummaryFilterDto.fromDomain(filter).toMapList;
+
+      if (searchKey.validateNotEmpty) {
+        final searchMap = <String, String>{};
+        searchMap.putIfAbsent('field', () => 'zzAdvice');
+        searchMap.putIfAbsent('value', () => searchKey.searchValueOrEmpty);
+        filterList.add(searchMap);
+      }
       final paymentSummaryList = await remoteDataSource.getPaymentSummary(
         customerCode: customerCode,
         salesOrg: salesOrgCode,
         offset: offset,
+        filterList: filterList,
         pageSize: pageSize,
       );
 

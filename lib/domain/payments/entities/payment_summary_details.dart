@@ -79,7 +79,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
 }
 
 extension PaymentSummaryListExtension on List<PaymentSummaryDetails> {
-  List<PaymentSummaryGroup> get getPaymentSummaryGroupList {
+  List<PaymentSummaryGroup> get paymentSummaryGroupList {
     return List<PaymentSummaryDetails>.from(this)
         .groupListsBy((item) => item.createdDate)
         .entries

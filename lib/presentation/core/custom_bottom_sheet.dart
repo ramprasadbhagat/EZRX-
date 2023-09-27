@@ -24,7 +24,7 @@ class CustomBottomSheet extends StatelessWidget {
         children: <Widget>[
           AppBar(
             title: Text(
-              headerText.tr(),
+              context.tr(headerText),
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color: ZPColors.primary,
                   ),

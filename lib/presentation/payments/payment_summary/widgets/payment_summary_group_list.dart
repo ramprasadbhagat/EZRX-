@@ -31,27 +31,20 @@ class _PaymentSummaryGroupList extends StatelessWidget {
         ),
         controller: scrollController,
         onRefresh: () => context.read<PaymentSummaryBloc>().add(
-              PaymentSummaryEvent.fetchPaymentSummaryList(
-                salesOrganization:
-                    context.read<EligibilityBloc>().state.salesOrganisation,
-                customerCodeInfo:
-                    context.read<EligibilityBloc>().state.customerCodeInfo,
+              PaymentSummaryEvent.fetch(
+                appliedFilter: state.appliedFilter,
+                searchKey: state.searchKey,
               ),
             ),
         onLoadingMore: () => context.read<PaymentSummaryBloc>().add(
-              PaymentSummaryEvent.loadMorePaymentSummary(
-                salesOrganization:
-                    context.read<EligibilityBloc>().state.salesOrganisation,
-                customerCodeInfo:
-                    context.read<EligibilityBloc>().state.customerCodeInfo,
-              ),
+              const PaymentSummaryEvent.loadMore(),
             ),
         isLoading: state.isFetching,
         itemBuilder: (context, index, itemInfo) => _PaymentSummaryGroupItem(
           paymentSummaryGroup: itemInfo,
           showDivider: index != 0,
         ),
-        items: state.paymentSummaryList.getPaymentSummaryGroupList,
+        items: state.details.paymentSummaryGroupList,
       ),
     );
   }

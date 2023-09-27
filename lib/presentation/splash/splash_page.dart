@@ -38,6 +38,7 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/retur
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -1008,10 +1009,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           );
 
       context.read<PaymentSummaryBloc>().add(
-            PaymentSummaryEvent.fetchPaymentSummaryList(
+            PaymentSummaryEvent.initialized(
               salesOrganization:
                   context.read<SalesOrgBloc>().state.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
+            ),
+          );
+
+      context.read<PaymentSummaryBloc>().add(
+            PaymentSummaryEvent.fetch(
+              appliedFilter:
+                  context.read<PaymentSummaryBloc>().state.appliedFilter,
+              searchKey: SearchKey.searchFilter(''),
             ),
           );
 

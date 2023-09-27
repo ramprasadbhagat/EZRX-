@@ -24,6 +24,7 @@ class PaymentSummaryRemoteDataSource {
   Future<List<PaymentSummaryDetails>> getPaymentSummary({
     required String customerCode,
     required String salesOrg,
+    required List<Map<String, String>> filterList,
     required int offset,
     required int pageSize,
   }) async {
@@ -36,7 +37,7 @@ class PaymentSummaryRemoteDataSource {
       'orderBy': [
         {'order': 'desc', 'field': 'createdDate'},
       ],
-      'filterBy': [],
+      'filterBy': filterList,
     };
     final res = await httpService.request(
       method: 'POST',
