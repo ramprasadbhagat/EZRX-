@@ -143,6 +143,8 @@ class NewRequestPage extends StatelessWidget {
                                 visible: step == 1 && state.showErrorMessages,
                               ),
                               _AttentionWidget(
+                                widgetKey:
+                                    WidgetKeys.invalidSelectedReturnItemError,
                                 message:
                                     'Please ensure that the items selected for return are from the same Principal.'
                                         .tr(),

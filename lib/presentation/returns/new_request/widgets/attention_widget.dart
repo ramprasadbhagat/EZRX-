@@ -3,9 +3,11 @@ part of 'package:ezrxmobile/presentation/returns/new_request/new_request_page.da
 class _AttentionWidget extends StatelessWidget {
   const _AttentionWidget({
     Key? key,
+    this.widgetKey,
     required this.message,
     required this.visible,
   }) : super(key: key);
+  final Key? widgetKey;
   final String message;
   final bool visible;
 
@@ -13,6 +15,7 @@ class _AttentionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return visible
         ? Container(
+            key: widgetKey,
             width: double.infinity,
             margin: const EdgeInsets.only(
               bottom: 8,

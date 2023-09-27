@@ -570,6 +570,8 @@ class WidgetKeys {
   static const Key toInvoiceDateField = Key('toInvoiceDateField');
   static const Key returnDetailsListView = Key('returnDetailsListView');
   static const Key returnItemsFilter = Key('returnItemsFilter');
+  static const Key invalidSelectedReturnItemError =
+      Key('invalidSelectedReturnItemError');
 
   //============================================================
   //  Contact Us Page
