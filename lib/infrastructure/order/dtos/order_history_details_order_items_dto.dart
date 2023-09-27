@@ -45,6 +45,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required String lineReferenceNotes,
     @JsonKey(name: 'IsTenderContractMaterial', defaultValue: false, readValue: boolStringFormatCheck)
         required bool isTenderContractMaterial,
+    @JsonKey(name: 'ParentID', defaultValue: '')
+        required String parentId,
     @JsonKey(
       name: 'Details',
       defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[],
@@ -80,6 +82,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
           orderHistoryDetailsOrderItem.lineReferenceNotes.getValue(),
       isTenderContractMaterial:
           orderHistoryDetailsOrderItem.isTenderContractMaterial,
+      parentId: orderHistoryDetailsOrderItem.parentId,
       details: List.from(
         orderHistoryDetailsOrderItem.details,
       )
@@ -113,6 +116,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       expiryDate: DateTimeStringValue(expiryDate),
       lineReferenceNotes: Remarks(lineReferenceNotes),
       isTenderContractMaterial: isTenderContractMaterial,
+      parentId: parentId,
       details: details.map((e) => e.toDomain()).toList(),
       tenderContractDetails: OrderHistoryDetailsOrderItemTenderContractDetails(
         tenderContractNumber: tenderContractDetails.tenderContractNumber,

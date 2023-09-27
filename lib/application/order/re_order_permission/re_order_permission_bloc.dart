@@ -56,15 +56,18 @@ class ReOrderPermissionBloc
             ),
           ),
           (reOrderPermission) {
-            final validOrderHistoryDetailsOrderItems = e
-                .orderHistoryDetailsOrderItems
-                .where(
-                  (orderHistoryDetailsOrderItem) => reOrderPermission
-                      .validMaterials
-                      .map((e) => e.materialNumber)
-                      .contains(orderHistoryDetailsOrderItem.materialNumber),
-                )
-                .toList();
+            final validOrderHistoryDetailsOrderItems =
+                e.orderHistoryDetailsOrderItems
+                    .where(
+                      (orderHistoryDetailsOrderItem) =>
+                          reOrderPermission.validMaterials
+                              .map((e) => e.materialNumber)
+                              .contains(
+                                orderHistoryDetailsOrderItem.materialNumber,
+                              ) &&
+                          orderHistoryDetailsOrderItem.type.isMaterialTypeComm,
+                    )
+                    .toList();
 
             emit(
               state.copyWith(

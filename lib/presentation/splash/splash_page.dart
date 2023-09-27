@@ -613,10 +613,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           listener: (context, state) {
             _getAdminPoAttachment(state);
             context.read<CartBloc>().add(
-                  CartEvent.fetchProductsAddedToCart(
-                    comboDealEligible:
-                        context.read<EligibilityBloc>().state.comboDealEligible,
-                  ),
+                  const CartEvent.fetchProductsAddedToCart(),
                 );
             if (!state.isCounterOfferVisible &&
                 context.read<PriceOverrideBloc>().state.item.price !=
@@ -977,6 +974,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               salesOrganisation: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
               shipToInfo: state.shipToInfo,
+              comboDealEligible:
+                  context.read<EligibilityBloc>().state.comboDealEligible,
             ),
           );
 

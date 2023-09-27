@@ -657,13 +657,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
                 isUpserting: false,
-                cartProducts: _mappingPreviousInfo(
-                  previousCartProducts: state.cartProducts,
-                  currentCartProducts: cartProductList,
-                  salesOrganisationConfigs: state.config,
-                ),
+                cartProducts: cartProductList,
               ),
             );
+            add(const CartEvent.updateProductStock());
           },
         );
       },
@@ -740,6 +737,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 cartProducts: cartProductListTemp,
               ),
             );
+
+            add(const _UpdateProductStock());
           },
         );
       },
@@ -801,9 +800,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
 
             add(
-              _UpdateProductStock(
-                products: state.cartProducts,
-              ),
+              const _UpdateProductStock(),
             );
           },
         );
@@ -974,10 +971,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         orElse: () => PriceAggregate.empty(),
       );
 
+      final bundleMaterial = cartProduct.bundle.materials.expand((current) {
+        return priceAggregate.bundle.materials.where(
+          (previous) => current.materialNumber == previous.materialNumber,
+        );
+      }).toList();
+
       return cartProduct.copyWith(
         price: priceAggregate.price,
         addedBonusList: priceAggregate.addedBonusList,
-        bundle: priceAggregate.bundle,
+        bundle: cartProduct.bundle.copyWith(materials: bundleMaterial),
         salesOrgConfig: salesOrganisationConfigs,
         stockInfoList: priceAggregate.stockInfoList,
       );

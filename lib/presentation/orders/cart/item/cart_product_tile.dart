@@ -599,6 +599,7 @@ class _OrderTag extends StatelessWidget {
         );
 
         return finalCartItem.inStock ||
+                state.isUpdatingStock ||
                 state.isFetching ||
                 state.isFetchingCartProductDetail
             ? const SizedBox.shrink()

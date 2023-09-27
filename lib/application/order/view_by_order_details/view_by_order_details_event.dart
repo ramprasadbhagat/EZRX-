@@ -15,12 +15,4 @@ class ViewByOrderDetailsEvent with _$ViewByOrderDetailsEvent {
   }) = _UpdateMaterialTenderContract;
   const factory ViewByOrderDetailsEvent.expandAttachments() =
       _ExpandAttachments;
-  factory ViewByOrderDetailsEvent.fetchDetailItemList({
-    required List<OrderHistoryDetailsOrderItem>
-        validOrderHistoryDetailsOrderItems,
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required Locale locale,
-  }) = _FetchDetailItemList;
 }

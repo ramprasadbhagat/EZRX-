@@ -153,6 +153,22 @@ class CartState with _$CartState {
         0;
   }
 
+  int getQuantityOfBundle({
+    required String bundleCode,
+    required MaterialNumber materialNumber,
+  }) {
+    return cartProducts
+            .where((element) => element.bundle.bundleCode == bundleCode)
+            .elementAtOrNull(0)
+            ?.bundle
+            .materials
+            .where((element) => element.materialNumber == materialNumber)
+            .elementAtOrNull(0)
+            ?.quantity
+            .getOrDefaultValue(0) ??
+        0;
+  }
+
   double get totalMaterialsPrice => cartProducts.fold(
         0,
         (previousValue, element) => element.materialInfo.type.typeBundle

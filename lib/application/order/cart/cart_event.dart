@@ -7,6 +7,7 @@ class CartEvent with _$CartEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required bool comboDealEligible,
   }) = _Initialized;
 
   const factory CartEvent.addComboDealToCart({
@@ -51,7 +52,7 @@ class CartEvent with _$CartEvent {
 
   const factory CartEvent.replaceWithOrderItems({
     required List<CartItem> items,
-    required bool doNotallowOutOfStockMaterial,
+    required bool doNotAllowOutOfStockMaterial,
   }) = _ReplaceWithOrderItems;
 
   const factory CartEvent.updateBatchInCartItem({
@@ -59,9 +60,8 @@ class CartEvent with _$CartEvent {
     required StockInfo stockInfo,
   }) = _UpdateBatchInCartItem;
 
-  const factory CartEvent.fetchProductsAddedToCart({
-    required bool comboDealEligible,
-  }) = _FetchProductsAddedToCart;
+  const factory CartEvent.fetchProductsAddedToCart() =
+      _FetchProductsAddedToCart;
 
   const factory CartEvent.upsertCart({
     required PriceAggregate priceAggregate,
@@ -88,9 +88,7 @@ class CartEvent with _$CartEvent {
     required Price overriddenProductPrice,
   }) = _UpdatePriceProduct;
 
-  const factory CartEvent.updateProductStock({
-    required List<PriceAggregate> products,
-  }) = _UpdateProductStock;
+  const factory CartEvent.updateProductStock() = _UpdateProductStock;
 
   const factory CartEvent.removeInvalidProducts({
     required List<MaterialInfo> invalidCartItems,

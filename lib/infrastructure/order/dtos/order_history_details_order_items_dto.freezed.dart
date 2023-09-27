@@ -52,6 +52,8 @@ mixin _$OrderHistoryDetailsOrderItemDto {
       defaultValue: false,
       readValue: boolStringFormatCheck)
   bool get isTenderContractMaterial => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ParentID', defaultValue: '')
+  String get parentId => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
   List<OrderHistoryDetailsOrderItemDetailsDto> get details =>
@@ -104,6 +106,7 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
           defaultValue: false,
           readValue: boolStringFormatCheck)
       bool isTenderContractMaterial,
+      @JsonKey(name: 'ParentID', defaultValue: '') String parentId,
       @JsonKey(
           name: 'Details',
           defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
@@ -150,6 +153,7 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? expiryDate = null,
     Object? lineReferenceNotes = null,
     Object? isTenderContractMaterial = null,
+    Object? parentId = null,
     Object? details = null,
     Object? tenderContractDetails = null,
     Object? principalName = null,
@@ -213,6 +217,10 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
           ? _value.isTenderContractMaterial
           : isTenderContractMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as String,
       details: null == details
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
@@ -278,6 +286,7 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
           defaultValue: false,
           readValue: boolStringFormatCheck)
       bool isTenderContractMaterial,
+      @JsonKey(name: 'ParentID', defaultValue: '') String parentId,
       @JsonKey(
           name: 'Details',
           defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
@@ -324,6 +333,7 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
     Object? expiryDate = null,
     Object? lineReferenceNotes = null,
     Object? isTenderContractMaterial = null,
+    Object? parentId = null,
     Object? details = null,
     Object? tenderContractDetails = null,
     Object? principalName = null,
@@ -387,6 +397,10 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
           ? _value.isTenderContractMaterial
           : isTenderContractMaterial // ignore: cast_nullable_to_non_nullable
               as bool,
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as String,
       details: null == details
           ? _value._details
           : details // ignore: cast_nullable_to_non_nullable
@@ -438,6 +452,7 @@ class _$_OrderHistoryDetailsOrderItemDto
           defaultValue: false,
           readValue: boolStringFormatCheck)
       required this.isTenderContractMaterial,
+      @JsonKey(name: 'ParentID', defaultValue: '') required this.parentId,
       @JsonKey(
           name: 'Details',
           defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
@@ -504,6 +519,9 @@ class _$_OrderHistoryDetailsOrderItemDto
       defaultValue: false,
       readValue: boolStringFormatCheck)
   final bool isTenderContractMaterial;
+  @override
+  @JsonKey(name: 'ParentID', defaultValue: '')
+  final String parentId;
   final List<OrderHistoryDetailsOrderItemDetailsDto> _details;
   @override
   @JsonKey(
@@ -532,7 +550,7 @@ class _$_OrderHistoryDetailsOrderItemDto
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, governmentMaterialCode: $governmentMaterialCode, productType: $productType)';
+    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, governmentMaterialCode: $governmentMaterialCode, productType: $productType)';
   }
 
   @override
@@ -565,6 +583,8 @@ class _$_OrderHistoryDetailsOrderItemDto
             (identical(
                     other.isTenderContractMaterial, isTenderContractMaterial) ||
                 other.isTenderContractMaterial == isTenderContractMaterial) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
             const DeepCollectionEquality().equals(other._details, _details) &&
             (identical(other.tenderContractDetails, tenderContractDetails) ||
                 other.tenderContractDetails == tenderContractDetails) &&
@@ -594,6 +614,7 @@ class _$_OrderHistoryDetailsOrderItemDto
         expiryDate,
         lineReferenceNotes,
         isTenderContractMaterial,
+        parentId,
         const DeepCollectionEquality().hash(_details),
         tenderContractDetails,
         principalName,
@@ -646,6 +667,8 @@ abstract class _OrderHistoryDetailsOrderItemDto
           defaultValue: false,
           readValue: boolStringFormatCheck)
       required final bool isTenderContractMaterial,
+      @JsonKey(name: 'ParentID', defaultValue: '')
+      required final String parentId,
       @JsonKey(
           name: 'Details',
           defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])
@@ -711,6 +734,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
       defaultValue: false,
       readValue: boolStringFormatCheck)
   bool get isTenderContractMaterial;
+  @override
+  @JsonKey(name: 'ParentID', defaultValue: '')
+  String get parentId;
   @override
   @JsonKey(
       name: 'Details', defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[])

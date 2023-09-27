@@ -25,6 +25,7 @@ _$_OrderHistoryDetailsOrderItemDto _$$_OrderHistoryDetailsOrderItemDtoFromJson(
       isTenderContractMaterial:
           boolStringFormatCheck(json, 'IsTenderContractMaterial') as bool? ??
               false,
+      parentId: json['ParentID'] as String? ?? '',
       details: (json['Details'] as List<dynamic>?)
               ?.map((e) => OrderHistoryDetailsOrderItemDetailsDto.fromJson(
                   e as Map<String, dynamic>))
@@ -56,6 +57,7 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
       'ExpiryDate': instance.expiryDate,
       'LineReferenceNotes': instance.lineReferenceNotes,
       'IsTenderContractMaterial': instance.isTenderContractMaterial,
+      'ParentID': instance.parentId,
       'Details': instance.details.map((e) => e.toJson()).toList(),
       'TenderContractDetails': instance.tenderContractDetails.toJson(),
       'PrincipalName': instance.principalName,

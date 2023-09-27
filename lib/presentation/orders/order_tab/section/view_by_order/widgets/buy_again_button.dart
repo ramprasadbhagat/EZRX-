@@ -10,20 +10,16 @@ class _BuyAgainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CartBloc, CartState>(
       buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching ||
           previous.isUpserting != current.isUpserting,
       builder: (context, stateCart) {
-        return BlocConsumer<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
+        return BlocListener<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
           listenWhen: (previous, current) =>
-              previous.isFetchingList != current.isFetchingList &&
-              !current.isFetchingList,
-          listener: (context, state) {
-            final materialPriceBlocState =
-                context.read<MaterialPriceBloc>().state;
-            final cartBlocState = context.read<CartBloc>().state;
-
+              previous.isLoading != current.isLoading && !current.isLoading,
+          listener: (context, viewByOrderState) {
             context.read<ReOrderPermissionBloc>().add(
                   ReOrderPermissionEvent.fetch(
-                    orderHistoryDetailsOrderItems: state
+                    orderHistoryDetailsOrderItems: viewByOrderState
                         .orderHistoryDetails.orderHistoryDetailsOrderItem
                         .toList(),
                     salesOrganisation:
@@ -34,79 +30,88 @@ class _BuyAgainButton extends StatelessWidget {
                         context.read<EligibilityBloc>().state.customerCodeInfo,
                   ),
                 );
-            context.read<CartBloc>().add(
-                  CartEvent.addHistoryItemsToCart(
-                    priceAggregate: state.productDetailAggregateList
-                        .map(
-                          (e) => PriceAggregate.empty().copyWith(
-                            materialInfo: e.materialInfo,
-                            price: materialPriceBlocState.materialPrice[
-                                    e.materialInfo.materialNumber] ??
-                                Price.empty(),
-                            salesOrgConfig: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .salesOrgConfigs,
-                          ),
-                        )
-                        .toList(),
-                    quantity: state.productDetailAggregateList
-                        .map(
-                          (e) =>
-                              cartBlocState.getQuantityOfProduct(
-                                productNumber: e.materialInfo.materialNumber,
-                              ) +
-                              state.orderHistoryDetails
-                                  .getOrderHistoryDetailsOrderItem(
-                                    materialNumber:
-                                        e.materialInfo.materialNumber,
-                                  )
-                                  .qty,
-                        )
-                        .toList(),
-                    user: context.read<EligibilityBloc>().state.user,
-                    counterOfferDetails: RequestCounterOfferDetails.empty(),
-                  ),
-                );
           },
-          buildWhen: (previous, current) =>
-              previous.isLoading != current.isLoading ||
-              previous.isFetchingList != current.isFetchingList,
-          builder: (context, state) {
-            return OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size(double.maxFinite, 45),
-              ),
-              onPressed: state.isLoading ||
-                      state.isFetchingList ||
-                      stateCart.isUpserting
-                  ? null
-                  : () {
-                      context.read<ViewByOrderDetailsBloc>().add(
-                            ViewByOrderDetailsEvent.fetch(
-                              user: context.read<EligibilityBloc>().state.user,
-                              orderNumber: viewByOrderHistoryItem.orderNumber,
-                              customerCodeInfo: context
-                                  .read<CustomerCodeBloc>()
+          child: BlocConsumer<ReOrderPermissionBloc, ReOrderPermissionState>(
+            listenWhen: (previous, current) =>
+                previous.isFetching != current.isFetching &&
+                !current.isFetching,
+            listener: (context, reOrderState) {
+              final cartState = context.read<CartBloc>().state;
+              context.read<CartBloc>().add(
+                    CartEvent.addHistoryItemsToCart(
+                      priceAggregate: reOrderState
+                          .validOrderHistoryDetailsOrderItems
+                          .map(
+                            (e) => PriceAggregate.empty().copyWith(
+                              materialInfo: MaterialInfo.empty().copyWith(
+                                type: e.productType,
+                                materialNumber: e.materialNumber,
+                                parentID:
+                                    e.productType.typeBundle ? e.parentId : '',
+                              ),
+                              salesOrgConfig: context
+                                  .read<EligibilityBloc>()
                                   .state
-                                  .customerCodeInfo,
-                              salesOrganisation: context
-                                  .read<SalesOrgBloc>()
-                                  .state
-                                  .salesOrganisation,
+                                  .salesOrgConfigs,
                             ),
-                          );
-                    },
-              child: LoadingShimmer.withChild(
-                enabled: state.isLoading ||
-                    state.isFetchingList ||
-                    stateCart.isUpserting,
-                child: Text(
-                  context.tr('Buy again'),
+                          )
+                          .toList(),
+                      quantity: reOrderState.validOrderHistoryDetailsOrderItems
+                          .map(
+                            (e) =>
+                                (e.productType.typeMaterial
+                                    ? cartState.getQuantityOfProduct(
+                                        productNumber: e.materialNumber,
+                                      )
+                                    : cartState.getQuantityOfBundle(
+                                        bundleCode: e.parentId,
+                                        materialNumber: e.materialNumber,
+                                      )) +
+                                e.qty,
+                          )
+                          .toList(),
+                      user: context.read<EligibilityBloc>().state.user,
+                      counterOfferDetails: RequestCounterOfferDetails.empty(),
+                    ),
+                  );
+            },
+            buildWhen: (previous, current) =>
+                previous.isFetching != current.isFetching,
+            builder: (context, state) {
+              return OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size(double.maxFinite, 45),
                 ),
-              ),
-            );
-          },
+                onPressed: stateCart.isFetching || stateCart.isUpserting
+                    ? null
+                    : () {
+                        context.read<ViewByOrderDetailsBloc>().add(
+                              ViewByOrderDetailsEvent.fetch(
+                                user:
+                                    context.read<EligibilityBloc>().state.user,
+                                orderNumber: viewByOrderHistoryItem.orderNumber,
+                                customerCodeInfo: context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .customerCodeInfo,
+                                salesOrganisation: context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .salesOrganisation,
+                              ),
+                            );
+                      },
+                child: LoadingShimmer.withChild(
+                  enabled: state.isFetching ||
+                      stateCart.isUpserting ||
+                      stateCart.isFetching,
+                  child: Text(
+                    'Buy again'.tr(),
+                  ),
+                ),
+              );
+            },
+          ),
         );
       },
     );

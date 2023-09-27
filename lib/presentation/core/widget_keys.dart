@@ -690,12 +690,6 @@ class WidgetKeys {
       const Key('viewByOrderDetailOrderCode');
   static Key viewByOrderDetailItemsSection =
       const Key('viewByOrderDetailItems');
-  static Key viewByOrderDetailItem(
-    String materialNumber,
-    int qty,
-    String price,
-  ) =>
-      Key('viewByOrderDetailItem$materialNumber$qty$price');
   static Key viewByOrderDetailBuyAgain = const Key('viewByOrderDetailBuyAgain');
   //===========================================================
   //  Intro Page

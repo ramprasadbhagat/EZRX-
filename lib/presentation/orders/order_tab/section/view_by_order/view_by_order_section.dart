@@ -1,18 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
@@ -24,6 +21,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -46,12 +44,24 @@ class ViewByOrdersPage extends StatelessWidget {
     return BlocListener<CartBloc, CartState>(
       listenWhen: (previous, current) =>
           previous.isUpserting != current.isUpserting &&
-          !current.isUpserting &&
           context.router.current.path == 'main',
-      listener: (context, state) => state.apiFailureOrSuccessOption.fold(
-        () => context.router.pushNamed('orders/cart'),
-        (_) => {},
-      ),
+      listener: (context, state) {
+        state.apiFailureOrSuccessOption.fold(
+          () {
+            CustomSnackBar(
+              key: WidgetKeys.materialDetailsAddToCartSnackBar,
+              messageText: context.tr('Item has been added to cart'),
+            ).show(context);
+            if (!state.isUpserting) {
+              context.router.pushNamed('orders/cart');
+            }
+          },
+          (option) => option.fold(
+            (failure) => ErrorUtils.handleApiFailure(context, failure),
+            (_) {},
+          ),
+        );
+      },
       child: BlocConsumer<ViewByOrderBloc, ViewByOrderState>(
         listenWhen: (previous, current) =>
             previous.failureOrSuccessOption != current.failureOrSuccessOption,

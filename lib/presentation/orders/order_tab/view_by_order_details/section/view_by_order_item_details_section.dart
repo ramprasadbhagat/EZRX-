@@ -1,7 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -47,15 +47,10 @@ class OrderItemDetailsSection extends StatelessWidget {
                   ),
                   Column(
                     children: e.viewByOrderItem
-                        .map(
-                          (e) => CommonTileItem(
-                            key: WidgetKeys.viewByOrderDetailItem(
-                              e.materialNumber.displayMatNo,
-                              e.qty,
-                              StringUtils.displayPrice(
-                                salesOrgConfig,
-                                e.totalPrice.totalPrice,
-                              ),
+                        .mapIndexed(
+                          (index, e) => CommonTileItem(
+                            key: WidgetKeys.genericKey(
+                              key: '$index',
                             ),
                             label:
                                 '${e.materialNumber.displayMatNo}${displayGovernmentMaterialCOde ? '|${e.governmentMaterialCode}' : ''}',

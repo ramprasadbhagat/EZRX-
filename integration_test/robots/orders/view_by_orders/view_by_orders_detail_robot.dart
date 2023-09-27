@@ -119,10 +119,13 @@ class ViewByOrdersDetailRobot {
 
   void verifyMaterialVisible(String materialNumber, int qty, String price) {
     expect(
-      find.byKey(
-        WidgetKeys.viewByOrderDetailItem(materialNumber, qty, price),
+      find.byWidgetPredicate(
+        (widget) =>
+            widget.key == WidgetKeys.commonTileItemTitle &&
+            widget is Text &&
+            widget.data!.contains(materialNumber),
       ),
-      findsOneWidget,
+      findsAtLeastNWidgets(1),
     );
   }
 

@@ -93,12 +93,7 @@ class _CartPageCartScrollList extends StatelessWidget {
                     ),
                     controller: ScrollController(),
                     onRefresh: () => context.read<CartBloc>().add(
-                          CartEvent.fetchProductsAddedToCart(
-                            comboDealEligible: context
-                                .read<EligibilityBloc>()
-                                .state
-                                .comboDealEligible,
-                          ),
+                          const CartEvent.fetchProductsAddedToCart(),
                         ),
                     isLoading: state.isFetching && state.cartProducts.isEmpty ||
                         state.isClearing,

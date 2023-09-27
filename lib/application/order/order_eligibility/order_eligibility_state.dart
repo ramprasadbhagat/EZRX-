@@ -148,12 +148,14 @@ class OrderEligibilityState with _$OrderEligibilityState {
       isMWPNotAllowedAndPresentInCart ||
       !isOOSAllowedIfPresentInCart;
 
-  List<MaterialInfo> get invalidCartItems => cartItems
+  List<MaterialInfo> get invalidMaterialCartItems => cartItems
       .where(
         (item) =>
-            item.materialInfo.isSuspended ||
-            item.price.finalPrice.isEmpty && isMWPNotAllowedAndPresentInCart ||
-            !item.inStock && !isOOSAllowedIfPresentInCart,
+            item.materialInfo.type.typeMaterial &&
+            (item.materialInfo.isSuspended ||
+                item.price.finalPrice.isEmpty &&
+                    isMWPNotAllowedAndPresentInCart ||
+                !item.inStock && !isOOSAllowedIfPresentInCart),
       )
       .map((item) => item.materialInfo.copyWith(quantity: MaterialQty(0)))
       .toList();
@@ -163,4 +165,25 @@ class OrderEligibilityState with _$OrderEligibilityState {
       cartItems.any(
         (e) => e.materialInfo.type.typeMaterial && e.invalidPrice,
       );
+
+  List<MaterialInfo> get invalidBundleCartItems => cartItems
+      .where((element) => element.materialInfo.type.typeBundle)
+      .expand(
+        (element) => element.bundle.materials
+            .where(
+              (element) =>
+                  (!element.inStock && !isOOSAllowedIfPresentInCart) ||
+                  element.isSuspended,
+            )
+            .map(
+              (e) => e.copyWith(
+                quantity: MaterialQty(0),
+                parentID: element.bundle.bundleCode,
+              ),
+            ),
+      )
+      .toList();
+
+  List<MaterialInfo> get invalidCartItems =>
+      [...invalidMaterialCartItems, ...invalidBundleCartItems];
 }

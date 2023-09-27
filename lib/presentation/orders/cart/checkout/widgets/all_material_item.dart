@@ -108,7 +108,7 @@ class _MaterialDetails extends StatelessWidget {
             ),
           ),
           Text(
-            cartItem.principalData.principalName.getValue(),
+            cartItem.principalData.principalName.getOrDefaultValue(''),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontSize: 10.0,
                   color: ZPColors.extraLightGrey4,
@@ -117,7 +117,7 @@ class _MaterialDetails extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              'Qty: ${cartItem.quantity}',
+              'Qty: ${cartItem.quantity.getOrDefaultValue(0)}',
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
