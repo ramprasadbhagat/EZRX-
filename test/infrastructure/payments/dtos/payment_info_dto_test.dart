@@ -9,6 +9,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late dynamic dataMY;
   late dynamic dataPH;
+  late dynamic dataVN;
 
   group('Payment Info dto ', () {
     setUp(() async {
@@ -20,6 +21,11 @@ void main() {
       dataPH = json.decode(
         await rootBundle.loadString(
           'assets/json/payResponsePH.json',
+        ),
+      );
+      dataVN = json.decode(
+        await rootBundle.loadString(
+          'assets/json/payResponseVN.json',
         ),
       );
     });
@@ -41,6 +47,16 @@ void main() {
       expect(
         paymentInfoDto.zzHtmcs,
         '''<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script><button type="button" onlick="butonClick" id="btn_submit">Open Payment Gateway</button><script language="javascript">\$(document).ready(function(){\$("#btn_submit").click(function (){var win=window.open("https://ubotpsentry-tst1.outsystemsenterprise.com/UPAY/WhiteLabel/73352865-5C06-AB2A-16A0-7E63A173AD0B?s=BNQ3N4RFV1WQb57XEz6WEg%3D%3DcoiiQNXYbZg76khnGLFQNfmU%2BkiEm5ETXgwuOWLGheMweEwp5J5ht8S7nmFCPJdVfgliqPSdeB3M9nxi8QkAHX5CGwGDlxUBeLg10kzckMEm7nu0erQHh8dJCujc%2BviXxYcUsclxBZbRb%2BaKw6tNxbrGDLG7TW8jV%2BKKZxQhFuf8%2FBOMiMQ2hzlK21igkqliqrrzVMz01qeE%2Bfk%2FZiMQOJg%2FyboKvEZXHSaTcHedjxCLc6Ml6dThoL4CUcxKt3mQymqQnrFkCzyNTmO%2FBGDPJ2si8Jhj%2BPqk5tZ81gSwzoViTQeKZn0SU0sEEYIkvMg5pVUhOO88DhwbsryCtp%2BN10mg8Wk%2FiW1ArrmSs0k1H62iEWBwqxqU1CH2Uzjh7AMUBD5d1T0LwMDvXzbO9q5RVg9dlW4cxpaoz9rpklX%2F%2FGfl4PNPNjPTaaCyL5rCMEYQIciHnHMSJb04qkfbeu5g2cV02Oi%2B7SkMHW38Z4hLJ3GzM1buTKx4DiGVq3GWeokG" ,"_self" );})})</script><script type="text/javascript">\$(document).ready(function(){\$("#btn_submit").click();});</script>''',
+      );
+    });
+
+    test('PaymentInfoDto fromJson and toDomain on VN market', () {
+      final paymentInfoDto =
+          PaymentInfoDto.fromJson(dataVN['data']['addCustomerPayment'])
+              .toDomain();
+      expect(
+        paymentInfoDto.zzHtmcs,
+        '''<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script><button type="button" onlick="butonClick" id="btn_submit">Open Payment Gateway</button><script language="javascript">\$(document).ready(function(){\$("#btn_submit").click(function (){var win=window.open("https://newsandbox.payoo.com.vn/v2/paynow/prepare?_token=1gh4Mg83167" ,"_self" );})})</script><script type="text/javascript">\$(document).ready(function(){\$("#btn_submit").click();});</script>''',
       );
     });
   });
