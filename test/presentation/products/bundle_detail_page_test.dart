@@ -10,9 +10,12 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -108,6 +111,12 @@ void main() {
             materialNumber: MaterialNumber('bundle-material-2'),
           ),
         ],
+        bundleInformation: [
+          BundleInfo.empty().copyWith(
+            quantity: 1,
+            rate: 20,
+          ),
+        ],
       ),
     );
   });
@@ -142,9 +151,10 @@ void main() {
         when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
       });
 
-      RouteDataScope getScopedWidget() {
+      Widget getScopedWidget() {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
+          usingLocalization: true,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<CustomerCodeBloc>(
@@ -226,13 +236,38 @@ void main() {
         );
         whenListen(productDetailMockBloc, expectedStates);
         await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
         expect(bundleImage, findsOneWidget);
         expect(bundleDetailsCarousel, findsOneWidget);
         expect(materialDetailsImageCounterFinder, findsOneWidget);
         final selectedCarouselImageKeyFinder =
             find.byKey(const ValueKey('selectedbundle-material-1true'));
         expect(selectedCarouselImageKeyFinder, findsOneWidget);
+      });
+
+      testWidgets('Wrong currency visible in bundle details page',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              currency: Currency('SGD'),
+            ),
+          ),
+        );
+
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            isFetching: false,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: bundle,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final price = find.text('SGD 20.00 per item', findRichText: true);
+        expect(price, findsOneWidget);
       });
     },
   );

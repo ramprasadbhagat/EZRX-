@@ -22,6 +22,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+
 class BundlesAddToCartSheet extends StatelessWidget {
   const BundlesAddToCartSheet({Key? key}) : super(key: key);
 
@@ -207,12 +209,12 @@ class _BundleSheetFooter extends StatelessWidget {
                 'Total quantity: ${state.totalCount}',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              Text(
-                'MYR ${state.bundleOffer.rate} per item',
-                style: Theme.of(context)
-                    .textTheme
-                    .labelLarge
-                    ?.copyWith(color: ZPColors.skyBlueColor),
+              PriceComponent(
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                price: state.bundleOffer.rate.toString(),
+                type: PriceStyle.bundlePrice,
+                trailingText: context.tr('per item'),
               ),
               const SizedBox(height: 20),
               Row(

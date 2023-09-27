@@ -17,8 +17,14 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'widget/bundle_image_section.dart';
-part 'widget/outline_text.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
+
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+
+part 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_image_section.dart';
+part 'package:ezrxmobile/presentation/products/bundle_details/widget/outline_text.dart';
 
 class BundleDetailPage extends StatefulWidget {
   const BundleDetailPage({Key? key}) : super(key: key);
@@ -166,9 +172,13 @@ class _BundleDetails extends StatelessWidget {
               ),
               state.isFetching
                   ? SizedBox(width: 100, child: LoadingShimmer.tile())
-                  : Text(
-                      'MYR ${material.bundle.minimumQuantityBundleMaterial.rate} per item',
-                      style: Theme.of(context).textTheme.labelLarge,
+                  : PriceComponent(
+                      salesOrgConfig:
+                          context.read<EligibilityBloc>().state.salesOrgConfigs,
+                      price: material.bundle.minimumQuantityBundleMaterial.rate
+                          .toString(),
+                      type: PriceStyle.bundlePrice,
+                      trailingText: context.tr('per item'),
                     ),
             ],
           ),
@@ -231,7 +241,13 @@ class _BundleOfferDetails extends StatelessWidget {
                             .map(
                               (e) => BalanceTextRow(
                                 keyFlex: 3,
-                                keyText: 'MYR ${e.rate} per item',
+                                keyText: '${StringUtils.displayPrice(
+                                  context
+                                      .read<EligibilityBloc>()
+                                      .state
+                                      .salesOrgConfigs,
+                                  e.rate,
+                                )} ${context.tr('per item')}',
                                 keyTextStyle: Theme.of(context)
                                     .textTheme
                                     .bodySmall

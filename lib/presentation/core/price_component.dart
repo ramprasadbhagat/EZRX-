@@ -11,6 +11,7 @@ class PriceComponent extends StatelessWidget {
     required this.salesOrgConfig,
     required this.price,
     this.title = '',
+    this.trailingText = '',
     this.priceLabelStyle,
     this.obscured = false,
     this.type = PriceStyle.commonPrice,
@@ -19,6 +20,7 @@ class PriceComponent extends StatelessWidget {
   final SalesOrganisationConfigs salesOrgConfig;
   final String price;
   final String title;
+  final String trailingText;
   final TextStyle? priceLabelStyle;
   final bool obscured;
   final PriceStyle type;
@@ -26,14 +28,8 @@ class PriceComponent extends StatelessWidget {
   List<TextSpan> _getTextSpan(BuildContext context) {
     final textSpans = <TextSpan>[];
     final notPrice = price.contains(RegExp(r'[A-Za-z]'));
-    final priceTextStyle = _priceStyle(
-      context,
-      type,
-    );
-    final currencyCodeTextStyle = _currencyCodeTextStyle(
-      context,
-      type,
-    );
+    final priceTextStyle = _priceStyle(context, type);
+    final currencyCodeTextStyle = _currencyCodeTextStyle(context, type);
 
     final priceValue = notPrice
         ? price.tr()
@@ -85,6 +81,11 @@ class PriceComponent extends StatelessWidget {
       textSpans.add(TextSpan(text: ')', style: currencyCodeTextStyle));
     }
 
+    if (type == PriceStyle.bundlePrice) {
+      textSpans
+          .add(TextSpan(text: ' $trailingText', style: currencyCodeTextStyle));
+    }
+
     return textSpans;
   }
 
@@ -102,7 +103,7 @@ class PriceComponent extends StatelessWidget {
 
 enum PriceStyle {
   commonPrice,
-  bundlePice,
+  bundlePrice,
   counterOfferPrice,
   bonusPrice,
   taxPrice,
@@ -154,6 +155,10 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       return Theme.of(context).textTheme.labelMedium!.copyWith(
             color: ZPColors.neutralsBlack,
           );
+    case PriceStyle.bundlePrice:
+      return Theme.of(context).textTheme.labelLarge!.copyWith(
+            color: ZPColors.neutralsBlack,
+          );
     default:
       return Theme.of(context).textTheme.labelSmall!.copyWith(
             color: ZPColors.black,
@@ -192,6 +197,10 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
           );
     case PriceStyle.grandTotalPrice:
       return Theme.of(context).textTheme.titleMedium!.copyWith(
+            color: ZPColors.neutralsBlack,
+          );
+    case PriceStyle.bundlePrice:
+      return Theme.of(context).textTheme.labelLarge!.copyWith(
             color: ZPColors.neutralsBlack,
           );
     default:

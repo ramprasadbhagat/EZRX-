@@ -312,6 +312,43 @@ void main() {
           ),
         ).called(1);
       });
+
+      testWidgets('Wrong currency visible in bundle add to cart sheet',
+          (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              currency: Currency('SGD'),
+            ),
+          ),
+        );
+        when(() => bundleAddToCartBloc.state).thenReturn(
+          BundleAddToCartState.initial().copyWith(
+            bundle: MaterialInfo.empty().copyWith(
+              bundle: Bundle.empty().copyWith(
+                bundleInformation: <BundleInfo>[
+                  BundleInfo.empty()
+                      .copyWith(quantity: 10, sequence: 1, rate: 20),
+                ],
+              ),
+            ),
+            bundleMaterials: <MaterialInfo>[
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+              ),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final price = find.text('SGD 20.00 per item', findRichText: true);
+
+        expect(price, findsOneWidget);
+      });
     },
   );
 }
