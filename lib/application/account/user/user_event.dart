@@ -14,5 +14,6 @@ class UserEvent with _$UserEvent {
   const factory UserEvent.updatePaymentNotificationSettings({
     required PaymentNotification paymentNotification,
   }) = _UpdatePaymentNotificationSettings;
-  const factory UserEvent.updateLanguage(Language language) = _UpdateLanguage;
+  const factory UserEvent.updateLanguage(Locale language) = _UpdateLanguage;
+  const factory UserEvent.selectLanguage(Locale language) = _SelectLanguage;
 }

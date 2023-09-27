@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/language/language_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -52,7 +51,6 @@ import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
@@ -219,9 +217,6 @@ class NotificationMockBloc
     extends MockBloc<NotificationEvent, NotificationState>
     implements NotificationBloc {}
 
-class LanguageBlocMock extends MockBloc<LanguageEvent, LanguageState>
-    implements LanguageBloc {}
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -247,7 +242,6 @@ void main() {
   late IntroBloc introBlocMock;
   late ReturnListByItemBloc returnListByItemBlocMock;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
-  late LanguageBloc languageBloc;
   late MaterialFilterBloc materialFilterBlocMock;
   late RecentOrderBloc recentOrderBloc;
   late ProductDetailBloc productDetailBloc;
@@ -362,11 +356,8 @@ void main() {
       loginFormBloc = LoginFormMockBloc();
       mockNotificationBloc = NotificationMockBloc();
       mockPriceOverrideBloc = PriceOverrideBlocMock();
-
-      languageBloc = LanguageBlocMock();
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
-      when(() => languageBloc.state).thenReturn(LanguageState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
           selectedOrderType: OrderDocumentType.empty()
@@ -557,7 +548,6 @@ void main() {
               BlocProvider<PriceOverrideBloc>(
                 create: (context) => mockPriceOverrideBloc,
               ),
-              BlocProvider<LanguageBloc>(create: (context) => languageBloc),
             ],
             child: const SplashPage(),
           ),
@@ -943,16 +933,6 @@ void main() {
         () => aupTcBlocMock
             .add(AupTcEvent.show(fakeUser, salesOrgBlocMock.state.salesOrg)),
       ).called(2);
-      verify(
-        () => languageBloc.add(
-          LanguageEvent.setLanguages(
-            defaultLanguage: Language(
-              subTag: const Locale('EN'),
-            ),
-            languages: [],
-          ),
-        ),
-      ).called(1);
       await tester.pumpAndSettle();
       expect(
         EasyLocalization.of(tester.element(find.byType(Scaffold)))?.locale,

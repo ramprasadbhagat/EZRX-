@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/language/language_bloc.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -190,9 +190,9 @@ class MoreDetailsTile {
                   user: context.read<EligibilityBloc>().state.user,
                 ),
               );
-          context.read<LanguageBloc>().add(
-                LanguageEvent.changeLanguage(
-                  context.read<EligibilityBloc>().state.user.defaultLanguage,
+          context.read<UserBloc>().add(
+                UserEvent.selectLanguage(
+                  context.read<UserBloc>().state.user.preferredLanguage,
                 ),
               );
           context.navigateTo(

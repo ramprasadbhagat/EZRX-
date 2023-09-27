@@ -7,7 +7,6 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/settings.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -36,7 +35,7 @@ class User with _$User {
     required bool disableReturns,
     required bool hasPriceOverride,
     required Locale preferredLanguage,
-    required List<Language> supportedLanguages,
+    required List<Locale> supportedLanguages,
     required MobileNumber mobileNumber,
   }) = _User;
 
@@ -62,7 +61,7 @@ class User with _$User {
         disableReturns: false,
         hasPriceOverride: false,
         preferredLanguage: const Locale(ApiLanguageCode.english),
-        supportedLanguages: <Language>[],
+        supportedLanguages: <Locale>[],
         mobileNumber: MobileNumber(''),
       );
 
@@ -114,6 +113,4 @@ class User with _$User {
     // [accessRight.products]  should be true
     return accessRight.products;
   }
-
-  Language get defaultLanguage => Language(subTag: preferredLanguage);
 }

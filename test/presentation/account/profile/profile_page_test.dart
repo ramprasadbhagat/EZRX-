@@ -4,7 +4,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/language/language_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/access_right.dart';
@@ -14,7 +13,6 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -37,9 +35,6 @@ class CustomerLicenseBlocMock
     extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
     implements CustomerLicenseBloc {}
 
-class LanguageBlocMock extends MockBloc<LanguageEvent, LanguageState>
-    implements LanguageBloc {}
-
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
@@ -51,7 +46,6 @@ void main() {
   late CustomerLicenseBloc customerLicenseBlocMock;
   late UserBlocMock userBlockMock;
   late AppRouter autoRouterMock;
-  late LanguageBloc languageBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late List<CustomerLicense> customerLicensesListMock;
@@ -64,7 +58,6 @@ void main() {
     autoRouterMock = locator<AppRouter>();
     customerLicenseBlocMock = CustomerLicenseBlocMock();
     userBlockMock = UserBlocMock();
-    languageBlocMock = LanguageBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     userMock = User.empty().copyWith(
@@ -110,7 +103,6 @@ void main() {
       when(() => userBlockMock.state).thenReturn(
         UserState.initial().copyWith(user: userMock),
       );
-      when(() => languageBlocMock.state).thenReturn(LanguageState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -125,9 +117,6 @@ void main() {
           ),
           BlocProvider<UserBloc>(
             create: (context) => userBlockMock,
-          ),
-          BlocProvider<LanguageBloc>(
-            create: (context) => languageBlocMock,
           ),
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
@@ -283,22 +272,28 @@ void main() {
     });
 
     testWidgets('Language Dropdown test', (tester) async {
-      whenListen(userBlockMock, userStateMock);
-      when(() => languageBlocMock.state).thenReturn(
-        LanguageState.initial().copyWith(
-          languages: [
-            Language(subTag: const Locale('zh')),
-            Language(subTag: const Locale('en'))
-          ],
-          activeLanguage: Language(subTag: const Locale('zh')),
+      final expectedState = Stream.fromIterable([
+        UserState.initial().copyWith(
+          user: userMock.copyWith(
+            supportedLanguages: [const Locale('zh'), const Locale('en')],
+          ),
+          activeLanguage: const Locale('zh'),
         ),
-      );
+      ]);
+      whenListen(userBlockMock, expectedState);
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
       final profilePageLanguageDropdown =
           find.byKey(WidgetKeys.profilePageLanguageDropdown);
       expect(profilePageLanguageDropdown, findsOneWidget);
-      await tester.tap(profilePageLanguageDropdown);
+      await tester.drag(
+        profilePageLanguageDropdown,
+        const Offset(0, -1000),
+      );
+      await tester.pump();
+      await tester.tap(
+        profilePageLanguageDropdown,
+      );
       await tester.pumpAndSettle();
       final languageZH =
           find.byKey(Key('language_${const Locale('zh').languageString()}'));
@@ -306,14 +301,14 @@ void main() {
       final languageEN =
           find.byKey(Key('language_${const Locale('en').languageString()}'));
       expect(languageEN, findsWidgets);
-      await tester.tap(languageEN.last, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.tap(
+        languageEN.last,
+        warnIfMissed: false,
+      );
       verify(
-        () => languageBlocMock.add(
-          LanguageEvent.changeLanguage(
-            Language(
-              subTag: const Locale('en'),
-            ),
+        () => userBlockMock.add(
+          const UserEvent.selectLanguage(
+            Locale('en'),
           ),
         ),
       ).called(1);

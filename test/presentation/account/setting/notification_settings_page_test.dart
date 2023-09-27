@@ -110,6 +110,9 @@ void main() async {
       when(() => userBloc.state).thenReturn(
         UserState(
           isLoginOnBehalf: false,
+          activeLanguage: const Locale(
+            ApiLanguageCode.english,
+          ),
           user: User.empty().copyWith(
             settings: User.empty().settings.copyWith(
                   languagePreference: const Locale(ApiLanguageCode.english),

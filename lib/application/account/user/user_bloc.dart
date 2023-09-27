@@ -7,8 +7,8 @@ import 'package:ezrxmobile/domain/account/entities/payment_notification.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_user_repository.dart';
-import 'package:ezrxmobile/domain/auth/entities/language.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -123,13 +123,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               state.copyWith(
                 userFailureOrSuccessOption: none(),
                 user: state.user.copyWith(
-                  preferredLanguage: e.language.subTag,
+                  preferredLanguage: e.language,
                 ),
               ),
             );
           },
         );
       },
+      selectLanguage: (_SelectLanguage e) async => emit(
+        state.copyWith(
+          activeLanguage: e.language,
+        ),
+      ),
     );
   }
 

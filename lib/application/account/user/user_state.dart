@@ -8,12 +8,16 @@ class UserState with _$UserState {
     required User user,
     required bool isLoginOnBehalf,
     required Option<Either<ApiFailure, dynamic>> userFailureOrSuccessOption,
+    required Locale activeLanguage,
   }) = _UserState;
 
   factory UserState.initial() => UserState(
         user: User.empty(),
         isLoginOnBehalf: false,
         userFailureOrSuccessOption: none(),
+        activeLanguage: const Locale(
+          ApiLanguageCode.english,
+        ),
       );
 
   bool get haveSalesOrganisation => user.userSalesOrganisations.isNotEmpty;

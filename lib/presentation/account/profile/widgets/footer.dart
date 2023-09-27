@@ -26,42 +26,44 @@ class _Footer extends StatelessWidget {
             messageText: 'Language changed successfully',
           ).show(context),
           buildWhen: (previous, current) =>
-              previous.user.preferredLanguage != current.user.preferredLanguage,
+              previous.user.preferredLanguage !=
+                  current.user.preferredLanguage ||
+              previous.activeLanguage != current.activeLanguage,
           builder: (context, userState) {
-            return BlocBuilder<LanguageBloc, LanguageState>(
-              buildWhen: (previous, current) =>
-                  previous.activeLanguage != current.activeLanguage,
-              builder: (context, state) {
-                final defaultLanguage = userState.user.defaultLanguage;
-
-                return Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: defaultLanguage != state.activeLanguage
-                            ? () => context.read<LanguageBloc>().add(
-                                  LanguageEvent.changeLanguage(defaultLanguage),
-                                )
-                            : null,
-                        child: Text('Clear changes'.tr()),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: defaultLanguage != state.activeLanguage
-                            ? () => context.read<UserBloc>().add(
-                                  UserEvent.updateLanguage(
-                                    state.activeLanguage,
-                                  ),
-                                )
-                            : null,
-                        child: Text('Save'.tr()),
-                      ),
-                    ),
-                  ],
-                );
-              },
+            return Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: userState.user.preferredLanguage !=
+                            userState.activeLanguage
+                        ? () => context.read<UserBloc>().add(
+                              UserEvent.selectLanguage(
+                                context
+                                    .read<UserBloc>()
+                                    .state
+                                    .user
+                                    .preferredLanguage,
+                              ),
+                            )
+                        : null,
+                    child: Text('Clear changes'.tr()),
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: userState.user.preferredLanguage !=
+                            userState.activeLanguage
+                        ? () => context.read<UserBloc>().add(
+                              UserEvent.updateLanguage(
+                                userState.activeLanguage,
+                              ),
+                            )
+                        : null,
+                    child: Text('Save'.tr()),
+                  ),
+                ),
+              ],
             );
           },
         ),

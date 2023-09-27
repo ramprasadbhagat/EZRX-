@@ -45,8 +45,9 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
           [],
       preferredLanguage:
           handleEmptyLanguagePreference(json, 'preferredLanguage') as String,
-      supportedLanguages: (json['supportedLanguages'] as List<dynamic>?)
-              ?.map((e) => LanguageDto.fromJson(e as Map<String, dynamic>))
+      supportedLanguages: (handleSupportedLanguages(json, 'supportedLanguages')
+                  as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList() ??
           [],
       mobileNumber: json['MobileNumber'] as String? ?? '',
@@ -77,7 +78,6 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'paymentNotification':
           instance.paymentNotification.map((e) => e.toJson()).toList(),
       'preferredLanguage': instance.preferredLanguage,
-      'supportedLanguages':
-          instance.supportedLanguages.map((e) => e.toJson()).toList(),
+      'supportedLanguages': instance.supportedLanguages,
       'MobileNumber': instance.mobileNumber,
     };

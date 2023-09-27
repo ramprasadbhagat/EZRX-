@@ -3,7 +3,6 @@ import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/language/language_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/bank_beneficiary/manage_bank_beneficiary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
@@ -3218,15 +3217,6 @@ void setupLocator() {
       customerLicenseRepository: locator<CustomerLicenseRepository>(),
       config: locator<Config>(),
     ),
-  );
-
-  //============================================================
-  //  Language
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => LanguageBloc(),
   );
 
   //============================================================

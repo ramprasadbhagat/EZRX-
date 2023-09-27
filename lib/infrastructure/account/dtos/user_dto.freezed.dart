@@ -66,9 +66,11 @@ mixin _$UserDto {
       throw _privateConstructorUsedError;
   @JsonKey(name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
   String get preferredLanguage => throw _privateConstructorUsedError;
-  @JsonKey(name: 'supportedLanguages', defaultValue: <LanguageDto>[])
-  List<LanguageDto> get supportedLanguages =>
-      throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'supportedLanguages',
+      readValue: handleSupportedLanguages,
+      defaultValue: <String>[])
+  List<String> get supportedLanguages => throw _privateConstructorUsedError;
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   String get mobileNumber => throw _privateConstructorUsedError;
 
@@ -119,8 +121,11 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(
           name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
       String preferredLanguage,
-      @JsonKey(name: 'supportedLanguages', defaultValue: <LanguageDto>[])
-      List<LanguageDto> supportedLanguages,
+      @JsonKey(
+          name: 'supportedLanguages',
+          readValue: handleSupportedLanguages,
+          defaultValue: <String>[])
+      List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber});
 
   $RoleDtoCopyWith<$Res> get role;
@@ -252,7 +257,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
       supportedLanguages: null == supportedLanguages
           ? _value.supportedLanguages
           : supportedLanguages // ignore: cast_nullable_to_non_nullable
-              as List<LanguageDto>,
+              as List<String>,
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -321,8 +326,11 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(
           name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
       String preferredLanguage,
-      @JsonKey(name: 'supportedLanguages', defaultValue: <LanguageDto>[])
-      List<LanguageDto> supportedLanguages,
+      @JsonKey(
+          name: 'supportedLanguages',
+          readValue: handleSupportedLanguages,
+          defaultValue: <String>[])
+      List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber});
 
   @override
@@ -453,7 +461,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
       supportedLanguages: null == supportedLanguages
           ? _value._supportedLanguages
           : supportedLanguages // ignore: cast_nullable_to_non_nullable
-              as List<LanguageDto>,
+              as List<String>,
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -507,8 +515,11 @@ class _$_UserDto extends _UserDto {
       @JsonKey(
           name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
       required this.preferredLanguage,
-      @JsonKey(name: 'supportedLanguages', defaultValue: <LanguageDto>[])
-      required final List<LanguageDto> supportedLanguages,
+      @JsonKey(
+          name: 'supportedLanguages',
+          readValue: handleSupportedLanguages,
+          defaultValue: <String>[])
+      required final List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '')
       required this.mobileNumber})
       : _userSalesOrganisations = userSalesOrganisations,
@@ -598,10 +609,13 @@ class _$_UserDto extends _UserDto {
   @override
   @JsonKey(name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
   final String preferredLanguage;
-  final List<LanguageDto> _supportedLanguages;
+  final List<String> _supportedLanguages;
   @override
-  @JsonKey(name: 'supportedLanguages', defaultValue: <LanguageDto>[])
-  List<LanguageDto> get supportedLanguages {
+  @JsonKey(
+      name: 'supportedLanguages',
+      readValue: handleSupportedLanguages,
+      defaultValue: <String>[])
+  List<String> get supportedLanguages {
     if (_supportedLanguages is EqualUnmodifiableListView)
       return _supportedLanguages;
     // ignore: implicit_dynamic_type
@@ -757,8 +771,11 @@ abstract class _UserDto extends UserDto {
       @JsonKey(
           name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
       required final String preferredLanguage,
-      @JsonKey(name: 'supportedLanguages', defaultValue: <LanguageDto>[])
-      required final List<LanguageDto> supportedLanguages,
+      @JsonKey(
+          name: 'supportedLanguages',
+          readValue: handleSupportedLanguages,
+          defaultValue: <String>[])
+      required final List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '')
       required final String mobileNumber}) = _$_UserDto;
   const _UserDto._() : super._();
@@ -831,8 +848,11 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
   String get preferredLanguage;
   @override
-  @JsonKey(name: 'supportedLanguages', defaultValue: <LanguageDto>[])
-  List<LanguageDto> get supportedLanguages;
+  @JsonKey(
+      name: 'supportedLanguages',
+      readValue: handleSupportedLanguages,
+      defaultValue: <String>[])
+  List<String> get supportedLanguages;
   @override
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   String get mobileNumber;

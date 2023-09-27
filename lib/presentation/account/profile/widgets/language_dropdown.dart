@@ -21,11 +21,11 @@ class _LanguageDropDown extends StatelessWidget {
         const Text(':  '),
         Expanded(
           flex: 8,
-          child: BlocBuilder<LanguageBloc, LanguageState>(
+          child: BlocBuilder<UserBloc, UserState>(
             buildWhen: (previous, current) =>
                 current.activeLanguage != previous.activeLanguage,
             builder: (context, state) {
-              return DropdownButtonFormField2<Language>(
+              return DropdownButtonFormField2<Locale>(
                 key: WidgetKeys.profilePageLanguageDropdown,
                 decoration: const InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(0, 10, 12, 10),
@@ -36,24 +36,24 @@ class _LanguageDropDown extends StatelessWidget {
                     color: ZPColors.black,
                   ),
                 ),
-                items: state.languages
+                items: state.user.supportedLanguages
                     .map(
-                      (e) => DropdownMenuItem<Language>(
+                      (e) => DropdownMenuItem<Locale>(
                         key: WidgetKeys.genericKey(
-                          key: 'language_${e.subTag.languageString()}',
+                          key: 'language_${e.languageString()}',
                         ),
                         value: e,
-                        child: Text(e.subTag.languageString()),
+                        child: Text(e.languageString()),
                       ),
                     )
                     .toList(),
                 value: state.activeLanguage,
-                onChanged: (selectedLanguage) =>
-                    context.read<LanguageBloc>().add(
-                          LanguageEvent.changeLanguage(
-                            selectedLanguage ?? Language.english(),
-                          ),
-                        ),
+                onChanged: (selectedLanguage) => context.read<UserBloc>().add(
+                      UserEvent.selectLanguage(
+                        selectedLanguage ??
+                            const Locale(ApiLanguageCode.english),
+                      ),
+                    ),
               );
             },
           ),
