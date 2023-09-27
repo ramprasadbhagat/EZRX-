@@ -42,9 +42,16 @@ void main() {
       blocTest(
         ' => Initialize',
         build: () => NewRequestBloc(newRequestRepository: newRequestRepository),
-        act: (NewRequestBloc bloc) =>
-            bloc.add(const NewRequestEvent.initialized()),
-        expect: () => [NewRequestState.initial()],
+        act: (NewRequestBloc bloc) => bloc.add(
+          NewRequestEvent.initialized(
+            salesOrg: fakeSalesOrg,
+          ),
+        ),
+        expect: () => [
+          NewRequestState.initial().copyWith(
+            salesOrg: fakeSalesOrg,
+          )
+        ],
       );
 
       blocTest(
@@ -52,29 +59,36 @@ void main() {
         build: () => NewRequestBloc(newRequestRepository: newRequestRepository),
         seed: () => NewRequestState.initial().copyWith(
           selectedItems: [fakeReturnMaterial],
+          salesOrg: fakeSalesOrg,
         ),
         act: (NewRequestBloc bloc) => bloc.add(
           NewRequestEvent.toggleReturnItem(
             item: fakeReturnMaterial,
-            salesOrg: fakeSalesOrg,
             selected: false,
           ),
         ),
-        expect: () => [NewRequestState.initial()],
+        expect: () => [
+          NewRequestState.initial().copyWith(
+            salesOrg: fakeSalesOrg,
+          )
+        ],
       );
 
       blocTest(
         ' => toggleReturnItem select a return material item',
         build: () => NewRequestBloc(newRequestRepository: newRequestRepository),
+        seed: () => NewRequestState.initial().copyWith(
+          salesOrg: fakeSalesOrg,
+        ),
         act: (NewRequestBloc bloc) => bloc.add(
           NewRequestEvent.toggleReturnItem(
             item: fakeReturnMaterial,
-            salesOrg: fakeSalesOrg,
             selected: true,
           ),
         ),
         expect: () => [
           NewRequestState.initial().copyWith(
+            salesOrg: fakeSalesOrg,
             selectedItems: [fakeReturnMaterial],
             invoiceDetails: [
               InvoiceDetails.empty().copyWith(
@@ -82,7 +96,7 @@ void main() {
                 salesOrg: fakeSalesOrg,
                 returnItemDetailsList: [
                   ReturnItemDetails.empty().copyWith(
-                    //Make sure return item detals have 4 importance infomation:
+                    //Make sure return item details have 4 importance information:
                     //materialNumber, itemNumber, assignmentNumber, batch
                     materialNumber: fakeMaterialNumber,
                     itemNumber: fakeItemNumber,

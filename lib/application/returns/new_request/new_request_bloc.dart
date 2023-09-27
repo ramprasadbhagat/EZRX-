@@ -31,13 +31,17 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
     Emitter<NewRequestState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => emit(NewRequestState.initial()),
+      initialized: (_Initialized e) async => emit(
+        NewRequestState.initial().copyWith(
+          salesOrg: e.salesOrg,
+        ),
+      ),
       toggleReturnItem: (_ToggleReturnItem e) {
         final invoiceDetails = [...state.invoiceDetails];
         if (e.selected) {
           final invoiceDetail = InvoiceDetails.empty().copyWith(
             invoiceNumber: e.item.assignmentNumber,
-            salesOrg: e.salesOrg,
+            salesOrg: state.salesOrg,
             returnItemDetailsList: [
               e.item.validatedItemDetails,
               ...e.item.bonusItems.map(

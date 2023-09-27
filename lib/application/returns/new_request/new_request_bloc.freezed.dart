@@ -18,9 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NewRequestEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
         toggleReturnItem,
     required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
@@ -39,9 +38,8 @@ mixin _$NewRequestEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
@@ -55,9 +53,8 @@ mixin _$NewRequestEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
@@ -72,7 +69,7 @@ mixin _$NewRequestEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
@@ -87,7 +84,7 @@ mixin _$NewRequestEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -101,7 +98,7 @@ mixin _$NewRequestEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -135,46 +132,72 @@ class _$NewRequestEventCopyWithImpl<$Res, $Val extends NewRequestEvent>
 }
 
 /// @nodoc
-abstract class _$$_initializedCopyWith<$Res> {
-  factory _$$_initializedCopyWith(
-          _$_initialized value, $Res Function(_$_initialized) then) =
-      __$$_initializedCopyWithImpl<$Res>;
+abstract class _$$_InitializedCopyWith<$Res> {
+  factory _$$_InitializedCopyWith(
+          _$_Initialized value, $Res Function(_$_Initialized) then) =
+      __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_initializedCopyWithImpl<$Res>
-    extends _$NewRequestEventCopyWithImpl<$Res, _$_initialized>
-    implements _$$_initializedCopyWith<$Res> {
-  __$$_initializedCopyWithImpl(
-      _$_initialized _value, $Res Function(_$_initialized) _then)
+class __$$_InitializedCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$_Initialized>
+    implements _$$_InitializedCopyWith<$Res> {
+  __$$_InitializedCopyWithImpl(
+      _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrg = null,
+  }) {
+    return _then(_$_Initialized(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_initialized implements _initialized {
-  const _$_initialized();
+class _$_Initialized implements _Initialized {
+  const _$_Initialized({required this.salesOrg});
+
+  @override
+  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'NewRequestEvent.initialized()';
+    return 'NewRequestEvent.initialized(salesOrg: $salesOrg)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_initialized);
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, salesOrg);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
         toggleReturnItem,
     required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
@@ -190,15 +213,14 @@ class _$_initialized implements _initialized {
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
   }) {
-    return initialized();
+    return initialized(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
@@ -209,15 +231,14 @@ class _$_initialized implements _initialized {
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
   }) {
-    return initialized?.call();
+    return initialized?.call(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
@@ -230,7 +251,7 @@ class _$_initialized implements _initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized();
+      return initialized(salesOrg);
     }
     return orElse();
   }
@@ -238,7 +259,7 @@ class _$_initialized implements _initialized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
@@ -256,7 +277,7 @@ class _$_initialized implements _initialized {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -273,7 +294,7 @@ class _$_initialized implements _initialized {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -292,8 +313,14 @@ class _$_initialized implements _initialized {
   }
 }
 
-abstract class _initialized implements NewRequestEvent {
-  const factory _initialized() = _$_initialized;
+abstract class _Initialized implements NewRequestEvent {
+  const factory _Initialized({required final SalesOrg salesOrg}) =
+      _$_Initialized;
+
+  SalesOrg get salesOrg;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -302,7 +329,7 @@ abstract class _$$_ToggleReturnItemCopyWith<$Res> {
           _$_ToggleReturnItem value, $Res Function(_$_ToggleReturnItem) then) =
       __$$_ToggleReturnItemCopyWithImpl<$Res>;
   @useResult
-  $Res call({SalesOrg salesOrg, ReturnMaterial item, bool selected});
+  $Res call({ReturnMaterial item, bool selected});
 
   $ReturnMaterialCopyWith<$Res> get item;
 }
@@ -318,15 +345,10 @@ class __$$_ToggleReturnItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrg = null,
     Object? item = null,
     Object? selected = null,
   }) {
     return _then(_$_ToggleReturnItem(
-      salesOrg: null == salesOrg
-          ? _value.salesOrg
-          : salesOrg // ignore: cast_nullable_to_non_nullable
-              as SalesOrg,
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -350,11 +372,8 @@ class __$$_ToggleReturnItemCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ToggleReturnItem implements _ToggleReturnItem {
-  const _$_ToggleReturnItem(
-      {required this.salesOrg, required this.item, required this.selected});
+  const _$_ToggleReturnItem({required this.item, required this.selected});
 
-  @override
-  final SalesOrg salesOrg;
   @override
   final ReturnMaterial item;
   @override
@@ -362,7 +381,7 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
 
   @override
   String toString() {
-    return 'NewRequestEvent.toggleReturnItem(salesOrg: $salesOrg, item: $item, selected: $selected)';
+    return 'NewRequestEvent.toggleReturnItem(item: $item, selected: $selected)';
   }
 
   @override
@@ -370,15 +389,13 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ToggleReturnItem &&
-            (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg) &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.selected, selected) ||
                 other.selected == selected));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrg, item, selected);
+  int get hashCode => Object.hash(runtimeType, item, selected);
 
   @JsonKey(ignore: true)
   @override
@@ -389,9 +406,8 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
         toggleReturnItem,
     required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
@@ -407,15 +423,14 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
         submit,
   }) {
-    return toggleReturnItem(salesOrg, item, selected);
+    return toggleReturnItem(item, selected);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
@@ -426,15 +441,14 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     TResult? Function(String specialInstructions)? specialInstructionsChanged,
     TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
   }) {
-    return toggleReturnItem?.call(salesOrg, item, selected);
+    return toggleReturnItem?.call(item, selected);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
@@ -447,7 +461,7 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     required TResult orElse(),
   }) {
     if (toggleReturnItem != null) {
-      return toggleReturnItem(salesOrg, item, selected);
+      return toggleReturnItem(item, selected);
     }
     return orElse();
   }
@@ -455,7 +469,7 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
@@ -473,7 +487,7 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -490,7 +504,7 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -511,11 +525,9 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
 
 abstract class _ToggleReturnItem implements NewRequestEvent {
   const factory _ToggleReturnItem(
-      {required final SalesOrg salesOrg,
-      required final ReturnMaterial item,
+      {required final ReturnMaterial item,
       required final bool selected}) = _$_ToggleReturnItem;
 
-  SalesOrg get salesOrg;
   ReturnMaterial get item;
   bool get selected;
   @JsonKey(ignore: true)
@@ -606,9 +618,8 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
         toggleReturnItem,
     required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
@@ -630,9 +641,8 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
@@ -649,9 +659,8 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
@@ -672,7 +681,7 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
@@ -690,7 +699,7 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -707,7 +716,7 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -814,9 +823,8 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
         toggleReturnItem,
     required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
@@ -838,9 +846,8 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
@@ -857,9 +864,8 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
@@ -880,7 +886,7 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
@@ -898,7 +904,7 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -915,7 +921,7 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1036,9 +1042,8 @@ class _$_ToggleFiles implements _ToggleFiles {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
         toggleReturnItem,
     required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
@@ -1060,9 +1065,8 @@ class _$_ToggleFiles implements _ToggleFiles {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
@@ -1079,9 +1083,8 @@ class _$_ToggleFiles implements _ToggleFiles {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
@@ -1102,7 +1105,7 @@ class _$_ToggleFiles implements _ToggleFiles {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
@@ -1120,7 +1123,7 @@ class _$_ToggleFiles implements _ToggleFiles {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1137,7 +1140,7 @@ class _$_ToggleFiles implements _ToggleFiles {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1234,9 +1237,8 @@ class _$_ValidateStep implements _ValidateStep {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
         toggleReturnItem,
     required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
@@ -1258,9 +1260,8 @@ class _$_ValidateStep implements _ValidateStep {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
@@ -1277,9 +1278,8 @@ class _$_ValidateStep implements _ValidateStep {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
@@ -1300,7 +1300,7 @@ class _$_ValidateStep implements _ValidateStep {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
@@ -1318,7 +1318,7 @@ class _$_ValidateStep implements _ValidateStep {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1335,7 +1335,7 @@ class _$_ValidateStep implements _ValidateStep {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1429,9 +1429,8 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
         toggleReturnItem,
     required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
@@ -1453,9 +1452,8 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
@@ -1472,9 +1470,8 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
@@ -1495,7 +1492,7 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
@@ -1513,7 +1510,7 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1530,7 +1527,7 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1627,9 +1624,8 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
         toggleReturnItem,
     required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
@@ -1651,9 +1647,8 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
@@ -1670,9 +1665,8 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
@@ -1693,7 +1687,7 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
@@ -1711,7 +1705,7 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1728,7 +1722,7 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1847,9 +1841,8 @@ class _$_Submit implements _Submit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrg salesOrg, ReturnMaterial item, bool selected)
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
         toggleReturnItem,
     required TResult Function(ReturnMaterial item, bool included)
         toggleBonusItem,
@@ -1871,9 +1864,8 @@ class _$_Submit implements _Submit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult? Function(
@@ -1890,9 +1882,8 @@ class _$_Submit implements _Submit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(SalesOrg salesOrg, ReturnMaterial item, bool selected)?
-        toggleReturnItem,
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
     TResult Function(
@@ -1913,7 +1904,7 @@ class _$_Submit implements _Submit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
@@ -1931,7 +1922,7 @@ class _$_Submit implements _Submit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1948,7 +1939,7 @@ class _$_Submit implements _Submit {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
@@ -1990,6 +1981,7 @@ mixin _$NewRequestState {
   Option<Either<ApiFailure, String>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
   String get returnRequestId => throw _privateConstructorUsedError;
+  SalesOrg get salesOrg => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewRequestStateCopyWith<NewRequestState> get copyWith =>
@@ -2010,7 +2002,8 @@ abstract class $NewRequestStateCopyWith<$Res> {
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<ApiFailure, String>> failureOrSuccessOption,
-      String returnRequestId});
+      String returnRequestId,
+      SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -2034,6 +2027,7 @@ class _$NewRequestStateCopyWithImpl<$Res, $Val extends NewRequestState>
     Object? isSubmitting = null,
     Object? failureOrSuccessOption = null,
     Object? returnRequestId = null,
+    Object? salesOrg = null,
   }) {
     return _then(_value.copyWith(
       selectedItems: null == selectedItems
@@ -2068,6 +2062,10 @@ class _$NewRequestStateCopyWithImpl<$Res, $Val extends NewRequestState>
           ? _value.returnRequestId
           : returnRequestId // ignore: cast_nullable_to_non_nullable
               as String,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
     ) as $Val);
   }
 }
@@ -2088,7 +2086,8 @@ abstract class _$$_NewRequestStateCopyWith<$Res>
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<ApiFailure, String>> failureOrSuccessOption,
-      String returnRequestId});
+      String returnRequestId,
+      SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -2110,6 +2109,7 @@ class __$$_NewRequestStateCopyWithImpl<$Res>
     Object? isSubmitting = null,
     Object? failureOrSuccessOption = null,
     Object? returnRequestId = null,
+    Object? salesOrg = null,
   }) {
     return _then(_$_NewRequestState(
       selectedItems: null == selectedItems
@@ -2144,6 +2144,10 @@ class __$$_NewRequestStateCopyWithImpl<$Res>
           ? _value.returnRequestId
           : returnRequestId // ignore: cast_nullable_to_non_nullable
               as String,
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
     ));
   }
 }
@@ -2159,7 +2163,8 @@ class _$_NewRequestState extends _NewRequestState {
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.failureOrSuccessOption,
-      required this.returnRequestId})
+      required this.returnRequestId,
+      required this.salesOrg})
       : _selectedItems = selectedItems,
         _invoiceDetails = invoiceDetails,
         super._();
@@ -2192,10 +2197,12 @@ class _$_NewRequestState extends _NewRequestState {
   final Option<Either<ApiFailure, String>> failureOrSuccessOption;
   @override
   final String returnRequestId;
+  @override
+  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'NewRequestState(selectedItems: $selectedItems, invoiceDetails: $invoiceDetails, returnReference: $returnReference, specialInstructions: $specialInstructions, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, failureOrSuccessOption: $failureOrSuccessOption, returnRequestId: $returnRequestId)';
+    return 'NewRequestState(selectedItems: $selectedItems, invoiceDetails: $invoiceDetails, returnReference: $returnReference, specialInstructions: $specialInstructions, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, failureOrSuccessOption: $failureOrSuccessOption, returnRequestId: $returnRequestId, salesOrg: $salesOrg)';
   }
 
   @override
@@ -2218,7 +2225,9 @@ class _$_NewRequestState extends _NewRequestState {
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             (identical(other.returnRequestId, returnRequestId) ||
-                other.returnRequestId == returnRequestId));
+                other.returnRequestId == returnRequestId) &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
   }
 
   @override
@@ -2231,7 +2240,8 @@ class _$_NewRequestState extends _NewRequestState {
       showErrorMessages,
       isSubmitting,
       failureOrSuccessOption,
-      returnRequestId);
+      returnRequestId,
+      salesOrg);
 
   @JsonKey(ignore: true)
   @override
@@ -2249,7 +2259,8 @@ abstract class _NewRequestState extends NewRequestState {
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<ApiFailure, String>> failureOrSuccessOption,
-      required final String returnRequestId}) = _$_NewRequestState;
+      required final String returnRequestId,
+      required final SalesOrg salesOrg}) = _$_NewRequestState;
   const _NewRequestState._() : super._();
 
   @override
@@ -2268,6 +2279,8 @@ abstract class _NewRequestState extends NewRequestState {
   Option<Either<ApiFailure, String>> get failureOrSuccessOption;
   @override
   String get returnRequestId;
+  @override
+  SalesOrg get salesOrg;
   @override
   @JsonKey(ignore: true)
   _$$_NewRequestStateCopyWith<_$_NewRequestState> get copyWith =>

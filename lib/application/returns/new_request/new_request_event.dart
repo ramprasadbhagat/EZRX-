@@ -2,10 +2,11 @@ part of 'new_request_bloc.dart';
 
 @freezed
 class NewRequestEvent with _$NewRequestEvent {
-  const factory NewRequestEvent.initialized() = _initialized;
+  const factory NewRequestEvent.initialized({
+    required SalesOrg salesOrg,
+  }) = _Initialized;
 
   const factory NewRequestEvent.toggleReturnItem({
-    required SalesOrg salesOrg,
     required ReturnMaterial item,
     required bool selected,
   }) = _ToggleReturnItem;

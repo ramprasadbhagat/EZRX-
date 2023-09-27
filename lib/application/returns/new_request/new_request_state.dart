@@ -12,6 +12,7 @@ class NewRequestState with _$NewRequestState {
     required bool isSubmitting,
     required Option<Either<ApiFailure, String>> failureOrSuccessOption,
     required String returnRequestId,
+    required SalesOrg salesOrg,
   }) = _NewRequestState;
 
   factory NewRequestState.initial() => NewRequestState(
@@ -23,10 +24,14 @@ class NewRequestState with _$NewRequestState {
         specialInstructions: '',
         failureOrSuccessOption: none(),
         returnRequestId: '',
+        salesOrg: SalesOrg(''),
       );
 
-  bool get isSelectedItemsValid => selectedItems
-      .every((item) => selectedItems.first.principalCode == item.principalCode);
+  bool get isSelectedItemsValid =>
+      salesOrg.isSg ||
+      selectedItems.every(
+        (item) => selectedItems.first.principalCode == item.principalCode,
+      );
 
   bool get isAdditionInfoValid =>
       allItemDetails.isNotEmpty &&

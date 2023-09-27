@@ -23,24 +23,25 @@ class NewRequestButton extends StatelessWidget {
       icon: Icons.add,
       label: 'New request'.tr(),
       onPress: () {
+        final eligibilityState = context.read<EligibilityBloc>().state;
         context.read<UsageCodeBloc>().add(
               UsageCodeEvent.fetch(
-                salesOrg: context.read<EligibilityBloc>().state.salesOrg,
+                salesOrg: eligibilityState.salesOrg,
               ),
             );
         context.read<ReturnItemsBloc>().add(
               ReturnItemsEvent.fetch(
                 appliedFilter: ReturnItemsFilter.empty(),
-                salesOrganisation:
-                    context.read<EligibilityBloc>().state.salesOrganisation,
-                customerCodeInfo:
-                    context.read<EligibilityBloc>().state.customerCodeInfo,
-                shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
+                salesOrganisation: eligibilityState.salesOrganisation,
+                customerCodeInfo: eligibilityState.customerCodeInfo,
+                shipToInfo: eligibilityState.shipToInfo,
                 searchKey: SearchKey.search(''),
               ),
             );
         context.read<NewRequestBloc>().add(
-              const NewRequestEvent.initialized(),
+              NewRequestEvent.initialized(
+                salesOrg: eligibilityState.salesOrg,
+              ),
             );
         context.router.pushNamed('returns/new_request');
       },
