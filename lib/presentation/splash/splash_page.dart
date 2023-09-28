@@ -183,7 +183,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 context.read<LoginFormBloc>().add(
                       const LoginFormEvent.loadLastSavedCred(),
                     );
-                context.resetLocale();
+
                 context.router.replaceAll(
                   [
                     const SplashPageRoute(),
