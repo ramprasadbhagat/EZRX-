@@ -161,15 +161,11 @@ class AdditionalDetailsBloc
     final isPaymentTermValid = config.enablePaymentTerms
         ? state.deliveryInfoData.paymentTerm.isValid()
         : true;
-    final isDeliveryInstructionsValid = config.enableSpecialInstructions
-        ? state.deliveryInfoData.deliveryInstruction.isValid()
-        : true;
     final isFormValid = isCustomerPoReferenceValid &&
         isReferenceNoteValid &&
         isContactPersonValid &&
         isContactNumberValid &&
-        isPaymentTermValid &&
-        isDeliveryInstructionsValid;
+        isPaymentTermValid;
 
     emit(
       state.copyWith(
@@ -183,11 +179,9 @@ class AdditionalDetailsBloc
                     ? DeliveryInfoLabel.contactPerson
                     : !isContactNumberValid
                         ? DeliveryInfoLabel.mobileNumber
-                        : !isDeliveryInstructionsValid
-                            ? DeliveryInfoLabel.deliveryInstruction
-                            : !isPaymentTermValid
-                                ? DeliveryInfoLabel.paymentTerm
-                                : null,
+                        : !isPaymentTermValid
+                            ? DeliveryInfoLabel.paymentTerm
+                            : null,
       ),
     );
   }

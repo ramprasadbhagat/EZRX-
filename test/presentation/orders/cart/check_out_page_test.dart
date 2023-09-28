@@ -1,6 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -126,42 +124,32 @@ void main() {
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
     });
     Widget getScopedWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<PaymentTermBloc>(
-              create: (context) => paymentTermBlocMock,
-            ),
-            BlocProvider<AdditionalDetailsBloc>(
-              create: (context) => additionalDetailsBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<OrderSummaryBloc>(
-              create: (context) => orderSummaryBlocMock,
-            ),
-            BlocProvider<OrderDocumentTypeBloc>(
-              create: (context) => orderDocumentTypeBlocMock,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBloc,
-            ),
-            BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-            BlocProvider<CartBloc>(create: (context) => cartBloc),
-          ],
-          child: const Material(
-            child: CheckoutPage(),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<PaymentTermBloc>(
+            create: (context) => paymentTermBlocMock,
           ),
+          BlocProvider<AdditionalDetailsBloc>(
+            create: (context) => additionalDetailsBlocMock,
+          ),
+          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          BlocProvider<OrderSummaryBloc>(
+            create: (context) => orderSummaryBlocMock,
+          ),
+          BlocProvider<OrderDocumentTypeBloc>(
+            create: (context) => orderDocumentTypeBlocMock,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBloc,
+          ),
+          BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
+          BlocProvider<CartBloc>(create: (context) => cartBloc),
+        ],
+        child: const Material(
+          child: CheckoutPage(),
         ),
       );
     }

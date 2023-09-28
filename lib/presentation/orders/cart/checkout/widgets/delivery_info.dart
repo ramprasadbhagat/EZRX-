@@ -1,17 +1,17 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
-import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
-import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
-import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/request_delivery_date.dart';
-import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/request_delivery_date.dart';
+import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
 
 class DeliveryInfo extends StatefulWidget {
   final Map<DeliveryInfoLabel, FocusNode> focusNodes;
@@ -44,7 +44,7 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Delivery information'.tr(),
+                  context.tr('Delivery information'),
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge
@@ -149,7 +149,8 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                 _TextFormField(
                                   labelText: 'Delivery instructions',
                                   keyText: 'deliveryInstructionKey',
-                                  hintText: 'Enter delivery instructions',
+                                  hintText:
+                                      'Enter delivery instructions(Optional)',
                                   keyboardType: TextInputType.multiline,
                                   label: DeliveryInfoLabel.deliveryInstruction,
                                   deliveryInfoData: state.deliveryInfoData,
@@ -265,7 +266,7 @@ class _TextFormFieldState extends State<_TextFormField> {
           child: TextFieldWithLabel(
             focusNode: widget.focusNode,
             fieldKey: WidgetKeys.genericKey(key: widget.keyText),
-            labelText: widget.labelText.tr(),
+            labelText: context.tr(widget.labelText),
             controller: _controller,
             validator: (_) => _validateForm(
               label: widget.label,
@@ -282,7 +283,7 @@ class _TextFormFieldState extends State<_TextFormField> {
                   );
             },
             decoration: InputDecoration(
-              hintText: widget.hintText.tr(),
+              hintText: context.tr(widget.hintText),
               suffixIcon: state.isLoading
                   ? const Padding(
                       padding: EdgeInsetsDirectional.only(end: 10),
@@ -316,7 +317,8 @@ class _TextFormFieldState extends State<_TextFormField> {
                 .value
                 .fold(
                   (f) => f.maybeMap(
-                    empty: (_) => 'PO reference is a required field.'.tr(),
+                    empty: (_) =>
+                        context.tr('PO reference is a required field.'),
                     orElse: () => null,
                   ),
                   (_) => null,
@@ -331,21 +333,7 @@ class _TextFormFieldState extends State<_TextFormField> {
             .value
             .fold(
               (f) => f.maybeMap(
-                empty: (_) => 'Contact person is a required field'.tr(),
-                orElse: () => null,
-              ),
-              (_) => null,
-            );
-      case DeliveryInfoLabel.deliveryInstruction:
-        return context
-            .read<AdditionalDetailsBloc>()
-            .state
-            .deliveryInfoData
-            .deliveryInstruction
-            .value
-            .fold(
-              (f) => f.maybeMap(
-                empty: (_) => 'Delivery instructions is a required field'.tr(),
+                empty: (_) => context.tr('Contact person is a required field'),
                 orElse: () => null,
               ),
               (_) => null,
@@ -359,7 +347,7 @@ class _TextFormFieldState extends State<_TextFormField> {
             .value
             .fold(
               (f) => f.maybeMap(
-                empty: (_) => 'Reference note is a required field'.tr(),
+                empty: (_) => context.tr('Reference note is a required field'),
                 orElse: () => null,
               ),
               (_) => null,
@@ -399,7 +387,7 @@ class _PaymentTerm extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Payment term'.tr(),
+                    context.tr('Payment term'),
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                   const SizedBox(height: 8),
@@ -408,7 +396,7 @@ class _PaymentTerm extends StatelessWidget {
                     key: WidgetKeys.paymentTermDropdownKey,
                     isExpanded: true,
                     decoration: InputDecoration(
-                      hintText: 'Select one'.tr(),
+                      hintText: context.tr('Select one'),
                     ),
                     icon: isLoading
                         ? const SizedBox(
@@ -449,7 +437,8 @@ class _PaymentTerm extends StatelessWidget {
                           .value
                           .fold(
                             (f) => f.maybeMap(
-                              empty: (_) => 'Please Select Payment Term.'.tr(),
+                              empty: (_) =>
+                                  context.tr('Please Select Payment Term.'),
                               orElse: () => null,
                             ),
                             (_) => null,
@@ -486,7 +475,7 @@ class _MobileNumber extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Mobile number'.tr(),
+                context.tr('Mobile number'),
                 style: Theme.of(context).textTheme.labelSmall,
               ),
               const SizedBox(
@@ -528,7 +517,7 @@ class _MobileNumber extends StatelessWidget {
                   setSelectorButtonAsPrefixIcon: true,
                 ),
                 inputDecoration: InputDecoration(
-                  hintText: 'Enter contact person number'.tr(),
+                  hintText: context.tr('Enter contact person number'),
                 ),
                 validator: (_) {
                   return context
@@ -540,7 +529,7 @@ class _MobileNumber extends StatelessWidget {
                       .fold(
                         (f) => f.maybeMap(
                           empty: (_) =>
-                              'Mobile number is a required field'.tr(),
+                              context.tr('Mobile number is a required field'),
                           orElse: () => null,
                         ),
                         (_) => null,
