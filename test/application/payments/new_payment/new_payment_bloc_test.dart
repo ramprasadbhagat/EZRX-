@@ -537,6 +537,28 @@ void main() {
           );
         },
       );
+
+      blocTest(
+        'Update Payment Gateway not called on SG market',
+        build: () => NewPaymentBloc(
+          newPaymentRepository: newPaymentRepository,
+          deviceRepository: deviceRepository,
+        ),
+        act: (NewPaymentBloc bloc) => bloc.add(
+          NewPaymentEvent.updatePaymentGateway(
+            paymentUrl: Uri.parse('https://fake-uri'),
+          ),
+        ),
+        verify: (NewPaymentBloc newPaymentBloc) {
+          verifyNever(
+            () => newPaymentRepository.updatePaymentGateway(
+              salesOrganisation: SalesOrganisation.empty()
+                  .copyWith(salesOrg: SalesOrg('2601')),
+              uri: Uri.parse('https://fake-uri'),
+            ),
+          );
+        },
+      );
     },
   );
 

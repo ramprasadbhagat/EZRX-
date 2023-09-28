@@ -11,6 +11,7 @@ void main() {
   late dynamic dataPH;
   late dynamic dataVN;
   late dynamic dataTH;
+  late dynamic dataSG;
 
   group('Payment Info dto ', () {
     setUp(() async {
@@ -32,6 +33,11 @@ void main() {
       dataTH = json.decode(
         await rootBundle.loadString(
           'assets/json/payResponseTH.json',
+        ),
+      );
+      dataSG = json.decode(
+        await rootBundle.loadString(
+          'assets/json/payResponseSG.json',
         ),
       );
     });
@@ -70,10 +76,19 @@ void main() {
       final paymentInfoDto =
           PaymentInfoDto.fromJson(dataTH['data']['addCustomerPayment'])
               .toDomain();
-
       expect(
         paymentInfoDto.zzHtmcs,
         '''<html><head></head><body><script type="text/javascript" src="https://dev-kpaymentgateway.kasikornbank.com/ui/v2/kpayment.min.js" data-apikey="pkey_test_21102hvZyafqGFFzN0G3NjphkJZ2NPFbRBMRq" data-amount="1605.00" data-currency="THB" data-payment-methods="qr" data-order-id="order_test_21102ceb1295b54154623b77b762d7c391acb"></script></body></html>''',
+      );
+    });
+
+    test('PaymentInfoDto fromJson and toDomain on SG market', () {
+      final paymentInfoDto =
+          PaymentInfoDto.fromJson(dataSG['data']['addCustomerPayment'])
+              .toDomain();
+      expect(
+        paymentInfoDto.zzHtmcs,
+        '',
       );
     });
   });

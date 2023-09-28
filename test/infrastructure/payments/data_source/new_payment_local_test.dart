@@ -85,6 +85,17 @@ void main() {
       );
 
       test(
+        'pay on SG market',
+        () async {
+          final result = await localDataSource.pay(currentMarket: 'SG');
+          expect(
+            result.zzHtmcs,
+            '',
+          );
+        },
+      );
+
+      test(
         'payment invoice pdf',
         () async {
           final result = await localDataSource.getPaymentInvoiceInfoPdf();
