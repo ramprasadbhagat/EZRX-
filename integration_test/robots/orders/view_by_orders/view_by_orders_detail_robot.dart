@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_summary_section.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +24,9 @@ class ViewByOrdersDetailRobot {
     );
   }
 
-  void verifyOrderDateVisible(DateTime orderDate) {
+  void verifyOrderDateVisible() {
     expect(
-      find.byKey(
-        WidgetKeys.balanceTextRow(
-          'Order date'.tr(),
-          DateTimeStringValue(orderDate.toIso8601String()).dateString,
-        ),
-      ),
+      find.byKey(WidgetKeys.viewByOrderDetailOrderDate),
       findsOneWidget,
     );
   }

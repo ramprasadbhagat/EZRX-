@@ -4,7 +4,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../common/extensions.dart';
+import '../../common/extension.dart';
 
 class ViewByOrdersRobot {
   final WidgetTester tester;
@@ -63,11 +63,6 @@ class ViewByOrdersRobot {
       ),
       findsOneWidget,
     );
-  }
-
-  Future<void> pullToRefresh() async {
-    await tester.drag(find.byKey(WidgetKeys.scrollList), const Offset(0, 500));
-    await tester.pumpAndSettle();
   }
 
   void verifyOrdersWithOrderCodeVisible(String searchKey) {

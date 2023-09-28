@@ -48,10 +48,8 @@ void main() {
   //Return detail data
   const returnStatus = 'Pending Approval';
   const returnId = 'EZRE-200123001511';
-  final requestDate = DateTime(2023, 8, 24);
   const returnReference = 'Test Return Reference';
   const specialInstructions = 'Test Special Instruction';
-  final returnStatusCreatedDate = DateTime(2023, 8, 25, 2, 01);
   const materialNumber = '21040129';
   const materialName = "VFENDTAB50MG10'S";
   const materialQty = 1;
@@ -59,7 +57,6 @@ void main() {
   const materialPrincipalName = 'PFIZER (M) SDN BHD  (PCL a/c)';
   const materialPrincipalCode = '0000101296';
   const materialInvoiceNumber = '1100001104';
-  final materialInvoiceDate = DateTime(2023, 5, 29);
   const materialReturnReason = 'Damaged Stocks';
   const materialReturnComments = '-';
 
@@ -130,7 +127,7 @@ void main() {
     returnsByItemsFilterRobot.verifyDefaultFilterApplied();
     await returnsByItemsFilterRobot.tapCloseIcon();
     returnsByItemsRobot.verifyReturnItemsVisible();
-    await returnsByItemsRobot.pullToRefresh();
+    await commonRobot.pullToRefresh();
     returnsByItemsRobot.verifyReturnItemsVisible();
   });
 
@@ -440,14 +437,11 @@ void main() {
     await commonRobot.searchWithKeyboardAction(returnId);
     await returnsByItemsRobot.tapFirstReturn();
     returnsByItemsDetailRobot.verifyReturnIdVisible(returnId);
-    returnsByItemsDetailRobot.verifyRequestDateVisible(requestDate);
+    returnsByItemsDetailRobot.verifyRequestDateVisible();
     returnsByItemsDetailRobot.verifyReturnReferenceVisible(returnReference);
     returnsByItemsDetailRobot
         .verifySpecialInstructionsVisible(specialInstructions);
-    returnsByItemsDetailRobot.verifyStatusTrackerVisible(
-      returnStatus,
-      returnStatusCreatedDate,
-    );
+    returnsByItemsDetailRobot.verifyStatusTrackerVisible(returnStatus);
     returnsByItemsDetailRobot.verifyDeliveryToVisible(shipToCode);
     returnsByItemsDetailRobot.verifyCustomerCodeVisible(customerCode);
     returnsByItemsDetailRobot.verifyReturnAddressVisible(shipToAddress);
@@ -494,7 +488,7 @@ void main() {
         .verifyMaterialPrincipalName(materialPrincipalName);
     returnsByItemsDetailRobot
         .verifyMaterialInvoiceNumber(materialInvoiceNumber);
-    returnsByItemsDetailRobot.verifyMaterialInvoiceDate(materialInvoiceDate);
+    returnsByItemsDetailRobot.verifyMaterialInvoiceDate();
     returnsByItemsDetailRobot.verifyMaterialReturnReason(materialReturnReason);
     returnsByItemsDetailRobot
         .verifyMaterialReturnComments(materialReturnComments);

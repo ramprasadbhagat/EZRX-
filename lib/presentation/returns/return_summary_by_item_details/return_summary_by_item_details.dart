@@ -61,6 +61,7 @@ class _ReturnRequestSummaryByItemDetails
                     ),
                   )
                 : ListView(
+                    key: WidgetKeys.returnItemDetailScrollList,
                     children: [
                       ReturnSummaryDetailsSection(
                         requestInformation: state.requestInformation,

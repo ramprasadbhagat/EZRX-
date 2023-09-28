@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+final _priceFormatter = NumberFormat('###,###,###,###,###.00');
+
 extension DateTimeExt on DateTime {
   bool isDateBetween(DateTime from, DateTime to) =>
       DateUtils.dateOnly(from).millisecondsSinceEpoch <=
@@ -10,6 +12,15 @@ extension DateTimeExt on DateTime {
 }
 
 extension DoubleExt on double {
-  String get priceFormatted =>
-      NumberFormat('###,###,###,###,###.00').format(this);
+  String get priceFormatted => _priceFormatter.format(this);
+}
+
+extension StringExt on String {
+  double get priceValue {
+    try {
+      return _priceFormatter.parse(this).toDouble();
+    } catch (_) {
+      return 0;
+    }
+  }
 }

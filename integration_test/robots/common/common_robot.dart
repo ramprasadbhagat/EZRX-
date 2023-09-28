@@ -73,6 +73,11 @@ class CommonRobot {
     expect(find.byKey(WidgetKeys.loaderImage), findsNothing);
   }
 
+  Future<void> pullToRefresh() async {
+    await tester.drag(find.byKey(WidgetKeys.scrollList), const Offset(0, 500));
+    await tester.pumpAndSettle();
+  }
+
   //============================================================
   //  Search bar
   //============================================================

@@ -48,6 +48,7 @@ class _ScaleButtonState extends State<ScaleButton> {
       mainAxisSize: MainAxisSize.min,
       children: [
         FloatingActionButton.extended(
+          heroTag: UniqueKey(),
           extendedPadding: const EdgeInsets.only(left: 12, right: 12),
           onPressed: widget.onPress,
           label: AnimatedSwitcher(

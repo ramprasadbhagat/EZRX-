@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,6 +86,7 @@ class _ReturnDetailsSection extends StatelessWidget {
       subtitle: Column(
         children: [
           BalanceTextRow(
+            key: WidgetKeys.returnRequestDetailRequestDate,
             keyText: 'Request date'.tr(),
             keyFlex: 2,
             valueText: requestInformationHeader.createdDateTime.dateString,
@@ -146,6 +148,7 @@ class _InvoiceSummarySection extends StatelessWidget {
             height: 10,
           ),
           _PriceWidget(
+            key: WidgetKeys.returnRequestDetailSubTotal,
             title: 'Subtotal with tax:',
             price: requestInformationHeader.refundTotal.refundTotal.toString(),
           ),
@@ -156,6 +159,7 @@ class _InvoiceSummarySection extends StatelessWidget {
             color: ZPColors.lightGray2,
           ),
           _PriceWidget(
+            key: WidgetKeys.returnRequestDetailGrandTotal,
             title: 'Grand total:',
             price: requestInformationHeader.refundTotal.refundTotal.toString(),
             priceStyle: Theme.of(context)

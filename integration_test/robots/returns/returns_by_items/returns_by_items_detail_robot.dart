@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_request_summary_item_section.dart';
 import 'package:flutter/material.dart';
@@ -26,14 +25,9 @@ class ReturnsByItemsDetailRobot {
     );
   }
 
-  void verifyRequestDateVisible(DateTime requestDate) {
+  void verifyRequestDateVisible() {
     expect(
-      find.byKey(
-        WidgetKeys.balanceTextRow(
-          'Request date'.tr(),
-          DateTimeStringValue(requestDate.toIso8601String()).dateString,
-        ),
-      ),
+      find.byKey(WidgetKeys.returnItemDetailRequestDate),
       findsOneWidget,
     );
   }
@@ -64,14 +58,9 @@ class ReturnsByItemsDetailRobot {
     );
   }
 
-  void verifyStatusTrackerVisible(String status, DateTime dateTime) {
+  void verifyStatusTrackerVisible(String status) {
     expect(
-      find.byKey(
-        WidgetKeys.statusTracker(
-          status,
-          DateTimeStringValue(dateTime.toIso8601String()).dateTimeWithTimeZone,
-        ),
-      ),
+      find.byKey(WidgetKeys.statusTracker(status)),
       findsOneWidget,
     );
   }
@@ -111,7 +100,7 @@ class ReturnsByItemsDetailRobot {
   void verifyMaterialVisible(String materialNumber, int qty, String price) {
     expect(
       find.byKey(
-        WidgetKeys.returnDetailMaterialItem(
+        WidgetKeys.returnItemDetailMaterial(
           materialNumber,
           qty.toString(),
           price,
@@ -158,14 +147,9 @@ class ReturnsByItemsDetailRobot {
     );
   }
 
-  void verifyMaterialInvoiceDate(DateTime date) {
+  void verifyMaterialInvoiceDate() {
     expect(
-      find.byKey(
-        WidgetKeys.balanceTextRow(
-          'Invoice date'.tr(),
-          DateTimeStringValue(date.toIso8601String()).dateString,
-        ),
-      ),
+      find.byKey(WidgetKeys.returnItemDetailMaterialInvoiceDate),
       findsOneWidget,
     );
   }

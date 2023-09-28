@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -8,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,8 +39,9 @@ class RequestItemSection extends StatelessWidget {
               style: Theme.of(context).textTheme.labelMedium,
             ),
           ),
-          ...returnRequestinformationList.map(
-            (item) => _ReturnItemSection(
+          ...returnRequestinformationList.mapIndexed(
+            (index, item) => _ReturnItemSection(
+              key: WidgetKeys.returnRequestDetailMaterial(index),
               returnRequestinformation: item,
             ),
           ),
@@ -111,6 +114,7 @@ class _ReturnItemSectionState extends State<_ReturnItemSection> {
               });
             },
             child: Row(
+              key: WidgetKeys.returnDetailShowDetailButton,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(

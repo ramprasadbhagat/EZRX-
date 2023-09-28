@@ -42,6 +42,7 @@ class OrderHeaderSection extends StatelessWidget {
                 height: 10,
               ),
               BalanceTextRow(
+                key: WidgetKeys.viewByOrderDetailOrderDate,
                 keyText: context.tr('Order date'),
                 valueText: orderDetails.createdDate.dateString,
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(

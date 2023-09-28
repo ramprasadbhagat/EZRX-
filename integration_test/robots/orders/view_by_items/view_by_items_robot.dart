@@ -141,11 +141,6 @@ class ViewByItemsRobot {
     expect(find.byKey(WidgetKeys.startBrowsingViewByItem), findsOneWidget);
   }
 
-  Future<void> pullToRefresh() async {
-    await tester.drag(find.byKey(WidgetKeys.scrollList), const Offset(0, 500));
-    await tester.pumpAndSettle();
-  }
-
   void verifyOrderGroupInDateRangeVisible({
     required DateTime fromDate,
     required DateTime toDate,

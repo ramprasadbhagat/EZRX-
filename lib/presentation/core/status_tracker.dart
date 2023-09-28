@@ -18,10 +18,7 @@ class StatusTrackerSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: WidgetKeys.statusTracker(
-        status,
-        createDateTime.dateTimeWithTimeZone,
-      ),
+      key: WidgetKeys.statusTracker(status),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(

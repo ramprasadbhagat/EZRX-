@@ -52,7 +52,7 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return CommonTileItem(
-      key: WidgetKeys.returnDetailMaterialItem(
+      key: WidgetKeys.returnItemDetailMaterial(
         widget.requestInformation.materialNumber.displayMatNo,
         widget.requestInformation.returnQuantity,
         StringUtils.displayPrice(
@@ -218,6 +218,7 @@ class _MaterialDetailsSection extends StatelessWidget {
           valueText: requestInformation.invoiceNo,
         ),
         BalanceTextRow(
+          key: WidgetKeys.returnItemDetailMaterialInvoiceDate,
           keyText: 'Invoice date'.tr(),
           valueText: requestInformation.invoiceDate.dateString,
         ),

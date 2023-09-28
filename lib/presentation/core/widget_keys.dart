@@ -30,8 +30,7 @@ class WidgetKeys {
       Key('addressInfoSectionCustomerCodeLabel');
   static const Key addressInfoSectionDeliveryToLabel =
       Key('addressInfoSectionDeliveryToLabel');
-  static Key statusTracker(String status, String dateTime) =>
-      Key('statusTracker$status$dateTime');
+  static Key statusTracker(String status) => Key('statusTracker$status');
   //============================================================
   //  PRE-ORDER-MODAL
   //============================================================
@@ -216,7 +215,7 @@ class WidgetKeys {
   //============================================================
   static const Key returnRootPage = Key('returnRootPage');
   static const Key returnByItemTab = Key('viewByItems');
-  static const Key returnByRequestTab = Key('viewByReturnRequest');
+  static const Key returnByRequestTab = Key('viewByReturnRequests');
   static const Key returnByItemPage = Key('returnByItemPage');
   static const Key returnByRequestRootPage = Key('returnByRequestRootPage');
   static const Key fromReturnDateField = Key('fromReturnDateField');
@@ -245,14 +244,18 @@ class WidgetKeys {
   static const Key returnItemDetailReturnId = Key('returnItemDetailReturnId');
   static const Key returnItemDetailCopyButton =
       Key('returnItemDetailCopyButton');
-  static Key returnDetailMaterialItem(
+  static Key returnItemDetailMaterial(
     String materialNumber,
     String qty,
-    String price,
+    String totalPrice,
   ) =>
-      Key('returnDetailMaterialItem$materialNumber$qty$price');
+      Key('returnItemDetailMaterial$materialNumber$qty$totalPrice');
   static const Key returnDetailShowDetailButton =
       Key('returnDetailShowMaterialDetailButton');
+  static const Key returnItemDetailRequestDate =
+      Key('returnItemDetailRequestDate');
+  static const Key returnItemDetailMaterialInvoiceDate =
+      Key('returnItemDetailMaterialInvoiceDate');
 
   //============================================================
   //  Returns by request
@@ -264,6 +267,26 @@ class WidgetKeys {
       Key('returnByRequestNewRequestButton');
   static Key returnRequest(String index) => Key('returnRequest$index');
   static const Key headsetMicOutlined = Key('headsetMicOutlined');
+  static const Key returnRequestTile = Key('returnRequestTile');
+  static const Key returnRequestGroupDate = Key('returnRequestGroupDate');
+  static const Key returnRequestTileStatus = Key('returnRequestTileStatus');
+  static const Key returnRequestTileIdLabel = Key('returnRequestTileIdLabel');
+  static const Key returnRequestTileQtyLabel = Key('returnRequestTileQtyLabel');
+
+  //============================================================
+  //  Returns by request detail
+  //============================================================
+  static const Key returnRequestDetailScrollList =
+      Key('returnRequestDetailScrollList');
+  static const Key returnRequestDetailSubTotal =
+      Key('returnRequestDetailSubTotal');
+  static const Key returnRequestDetailGrandTotal =
+      Key('returnRequestDetailGrandTotal');
+  static const Key returnRequestDetailRequestDate =
+      Key('returnRequestDetailRequestDate');
+  static Key returnRequestDetailMaterial(int index) =>
+      Key('returnRequestDetailMaterial$index');
+
   //============================================================
   //============================================================
   //  Reset Password
@@ -694,6 +717,8 @@ class WidgetKeys {
       const Key('viewByOrderDetailOrderCode');
   static Key viewByOrderDetailItemsSection =
       const Key('viewByOrderDetailItems');
+  static Key viewByOrderDetailOrderDate =
+      const Key('viewByOrderDetailOrderDate');
   static Key viewByOrderDetailBuyAgain = const Key('viewByOrderDetailBuyAgain');
   //===========================================================
   //  Intro Page

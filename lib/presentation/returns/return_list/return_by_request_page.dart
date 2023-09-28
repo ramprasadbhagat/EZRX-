@@ -155,12 +155,14 @@ class _ReturnItem extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
                     '${context.tr('Requested on')} ${data.requestDate.dateString}',
+                    key: WidgetKeys.returnRequestGroupDate,
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: ZPColors.darkerGrey,
                         ),
                   ),
                 ),
               CustomCard(
+                key: WidgetKeys.returnRequestTile,
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ListTile(
                   onTap: () {
@@ -181,6 +183,7 @@ class _ReturnItem extends StatelessWidget {
                           Expanded(
                             child: Text(
                               '${context.tr('Return')} #${data.requestId}',
+                              key: WidgetKeys.returnRequestTileIdLabel,
                               style: Theme.of(context)
                                   .textTheme
                                   .labelSmall
@@ -190,6 +193,7 @@ class _ReturnItem extends StatelessWidget {
                             ),
                           ),
                           StatusLabel(
+                            key: WidgetKeys.returnRequestTileStatus,
                             status: StatusType(
                               data.status.displayStatusForViewByRequest,
                             ),
@@ -204,6 +208,7 @@ class _ReturnItem extends StatelessWidget {
                         children: [
                           Text(
                             '${data.itemQty.getOrDefaultValue('0')} ${data.itemQty.noun}',
+                            key: WidgetKeys.returnRequestTileQtyLabel,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                           PriceComponent(

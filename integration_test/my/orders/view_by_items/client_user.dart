@@ -94,7 +94,7 @@ void main() {
     viewByItemsFilterRobot.verifyDefaultFilterApplied();
     await viewByItemsFilterRobot.tapCloseIcon();
     viewByItemsRobot.verifyOrdersVisible();
-    await viewByItemsRobot.pullToRefresh();
+    await commonRobot.pullToRefresh();
     viewByItemsRobot.verifyOrdersVisible();
   });
 
@@ -117,7 +117,7 @@ void main() {
     await viewByItemsFilterRobot.tapCloseIcon();
     await commonRobot.searchWithKeyboardAction(invalidSearchKey);
     viewByItemsRobot.verifyNoRecordFoundVisible();
-    await viewByItemsRobot.pullToRefresh();
+    await commonRobot.pullToRefresh();
     await commonRobot.searchWithKeyboardAction(invalidSearchKey);
     viewByItemsRobot.verifyNoRecordFoundVisible();
   });
@@ -312,7 +312,7 @@ void main() {
     ordersRobot.verifyFilterApplied(2);
     await commonRobot.searchWithKeyboardAction(invalidSearchKey);
     viewByItemsRobot.verifyNoRecordFoundVisible();
-    await viewByItemsRobot.pullToRefresh();
+    await commonRobot.pullToRefresh();
     ordersRobot.verifyFilterApplied(1);
     viewByItemsRobot.verifyOrderGroupsVisible();
     viewByItemsRobot.verifyOrderItemsVisible();

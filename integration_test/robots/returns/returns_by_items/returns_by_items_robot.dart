@@ -15,7 +15,6 @@ class ReturnsByItemsRobot {
   final searchBar = find.byKey(WidgetKeys.returnByItemsSearchBar);
   final filterButton = find.byKey(WidgetKeys.returnByItemsFilterButton);
   final newRequestButton = find.byKey(WidgetKeys.returnByItemsNewRequestButton);
-  final scrollList = find.byKey(WidgetKeys.scrollList);
   final item = find.byKey(WidgetKeys.returnItemTile);
   final itemGroupDate = find.byKey(WidgetKeys.returnItemGroupDate);
   late final returnIdLabel = find.descendant(
@@ -117,11 +116,6 @@ class ReturnsByItemsRobot {
     expect(item, findsNothing);
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
     expect(find.text('No Return by Item found'.tr()), findsOneWidget);
-  }
-
-  Future<void> pullToRefresh() async {
-    await tester.drag(scrollList, const Offset(0, 500));
-    await tester.pumpAndSettle();
   }
 
   void verifyReturnsWithProductNameVisible(String searchKey) {

@@ -111,6 +111,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
           Column(
             children: [
               BalanceTextRow(
+                key: WidgetKeys.returnItemDetailRequestDate,
                 keyText: 'Request date'.tr(),
                 keyFlex: 2,
                 valueText: widget.requestInformation.createdDate.dateString,

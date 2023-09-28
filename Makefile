@@ -84,6 +84,7 @@ run_my_client_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/view_by_items/${CLIENT_TEST_FILE}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/view_by_orders/${CLIENT_TEST_FILE}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/returns_by_items/${CLIENT_TEST_FILE}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/returns_by_request/${CLIENT_TEST_FILE}
 run_my_external_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${EXTERNALSALESREP}
 run_ph_client_test:

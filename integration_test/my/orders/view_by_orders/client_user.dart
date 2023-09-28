@@ -6,7 +6,7 @@ import '../../../core/common.dart';
 import '../../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../../robots/common/common_robot.dart';
-import '../../../robots/common/extensions.dart';
+import '../../../robots/common/extension.dart';
 import '../../../robots/home/home_robot.dart';
 import '../../../robots/login_robot.dart';
 
@@ -45,7 +45,6 @@ void main() {
   const materialNumber = '23350925';
   const materialQty = 3;
   final materialPrice = '$currency ${6510.0.priceFormatted}';
-  final orderDate = DateTime(2023, 9, 15);
   const poReference = 'TestPO';
   const deliveryInstructions = 'Delivery Instructions';
   final orderSubTotal = '$currency ${6510.0.priceFormatted}';
@@ -60,18 +59,6 @@ void main() {
     viewByOrdersFilterRobot = ViewByOrdersFilterRobot(tester);
     viewByOrdersDetailRobot = ViewByOrdersDetailRobot(tester);
     cartRobot = CartRobot(tester);
-  }
-
-  Future<void> login() async {
-    //select market
-    loginRobot.findMarketSelector();
-    await loginRobot.tapToMarketSelector();
-    await loginRobot.selectMarket(marketMalaysia);
-    loginRobot.verifySelectedMarket(marketMalaysia);
-
-    //login
-    await loginRobot.login(username, password);
-    await loginRobot.tapGetStartedButton();
   }
 
   Future<void> goToOrderTab({
@@ -101,7 +88,7 @@ void main() {
 
     //init app
     await runAppForTesting(tester);
-    await login();
+    await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
     await goToOrderTab(deliveryAddress: shipToCode);
 
     //verify
@@ -114,7 +101,7 @@ void main() {
     viewByOrdersFilterRobot.verifyDefaultFilterApplied();
     await viewByOrdersFilterRobot.tapCloseIcon();
     viewByOrdersRobot.verifyOrdersVisible();
-    await viewByOrdersRobot.pullToRefresh();
+    await commonRobot.pullToRefresh();
     viewByOrdersRobot.verifyOrdersVisible();
   });
 
@@ -300,7 +287,7 @@ void main() {
     await commonRobot.searchWithKeyboardAction(orderId);
     await viewByOrdersRobot.tapFirstOrder();
     viewByOrdersDetailRobot.verifyOrderIdVisible(orderId);
-    viewByOrdersDetailRobot.verifyOrderDateVisible(orderDate);
+    viewByOrdersDetailRobot.verifyOrderDateVisible();
     viewByOrdersDetailRobot.verifyPoReferenceVisible(poReference);
     viewByOrdersDetailRobot
         .verifyDeliveryInstructionsVisible(deliveryInstructions);

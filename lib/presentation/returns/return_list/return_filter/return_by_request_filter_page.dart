@@ -366,7 +366,13 @@ class _StatusesSelector extends StatelessWidget {
       ) {
         return Column(
           children: state.statusList.map((StatusType status) {
+            final value = state.filter.returnStatusList.contains(status);
+
             return CheckboxListTile(
+              key: WidgetKeys.returnStatusFilter(
+                status.displayStatusForViewByRequest,
+                value,
+              ),
               contentPadding: EdgeInsets.zero,
               title: Text(
                 context.tr(status.displayStatusForViewByRequest),
@@ -383,7 +389,7 @@ class _StatusesSelector extends StatelessWidget {
                       ),
                     );
               },
-              value: state.filter.returnStatusList.contains(status),
+              value: value,
             );
           }).toList(),
         );
