@@ -17,6 +17,7 @@ class OrderSummaryState with _$OrderSummaryState {
     required SalesOrganisationConfigs salesOrgConfig,
     required SalesOrganisation salesOrganisation,
     required SalesOrg salesOrg,
+    required bool isExpanded,
   }) = _OrderSummaryState;
 
   factory OrderSummaryState.initial() => OrderSummaryState(
@@ -32,8 +33,16 @@ class OrderSummaryState with _$OrderSummaryState {
         salesOrgConfig: SalesOrganisationConfigs.empty(),
         salesOrganisation: SalesOrganisation.empty(),
         salesOrg: SalesOrg(''),
+        isExpanded: false,
       );
 
   bool get isOrderHistoryDetailsEmpty =>
       orderHistoryDetails == OrderHistoryDetails.empty();
+
+  List<PoDocuments> get poDocumentsList => isExpanded
+      ? orderHistoryDetails.orderHistoryDetailsPoDocuments
+      : [orderHistoryDetails.orderHistoryDetailsPoDocuments.first];
+
+  bool get displayShowMoreOrLess =>
+      orderHistoryDetails.orderHistoryDetailsPoDocuments.length > 1;
 }

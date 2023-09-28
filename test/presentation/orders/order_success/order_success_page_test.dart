@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -107,6 +108,7 @@ void main() {
   Widget getWidget() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       child: const OrderSuccessPage(),
       providers: [
         BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
@@ -137,6 +139,13 @@ void main() {
     'Payment Term',
     (tester) async {
       VisibilityDetectorController.instance.updateInterval = Duration.zero;
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enablePaymentTerms: true,
+          ),
+        ),
+      );
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial().copyWith(
           isConfirming: false,

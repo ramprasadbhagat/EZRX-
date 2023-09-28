@@ -28,9 +28,7 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
       downloadFile: (_DownloadFile e) async {
         emit(
           state.copyWith(
-            isFetching: true,
             failureOrSuccessOption: none(),
-            fileUrl: [],
             fileOperationMode: FileOperationMode.download,
           ),
         );
@@ -40,7 +38,6 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
           (failure) async => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-              isFetching: false,
             ),
           ),
           (_) async {
@@ -48,18 +45,9 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
               files: e.files,
               attachmentType: e.attachmentType,
             );
-            failureOrSuccess.fold(
-              (failure) => emit(
-                state.copyWith(
-                  failureOrSuccessOption: optionOf(failureOrSuccess),
-                  isFetching: false,
-                ),
-              ),
-              (_) => emit(
-                state.copyWith(
-                  failureOrSuccessOption: none(),
-                  isFetching: false,
-                ),
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
           },
@@ -185,13 +173,13 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
         );
         final deleteFilesFailureOrSuccess =
             await poAttachmentRepository.deleteFile(
-          filePath: e.file.path,
+          filePath: e.file.url,
         );
 
         final newFileList = List<PoDocuments>.of(state.fileUrl);
 
         newFileList.removeWhere(
-          (element) => element.path == e.file.path,
+          (element) => element.url == e.file.url,
         );
 
         deleteFilesFailureOrSuccess.fold(

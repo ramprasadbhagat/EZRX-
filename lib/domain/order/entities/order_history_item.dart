@@ -7,6 +7,8 @@ import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+
 part 'order_history_item.freezed.dart';
 
 @freezed
@@ -36,6 +38,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required SpecialInstructions specialInstructions,
     required List<OrderStatusTracker> orderStatusTracker,
     required double tax,
+    required List<PoDocuments> orderHistoryItemPoAttachments,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -62,6 +65,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         orderBy: '',
         orderType: DocumentType(''),
         orderStatusTracker: <OrderStatusTracker>[],
+        orderHistoryItemPoAttachments: <PoDocuments>[],
       );
 
   OrderHistoryItem copyWithTaxCal({

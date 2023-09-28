@@ -39,6 +39,7 @@ mixin _$OrderSummaryEvent {
     required TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)
         confirmedOrderStockInfo,
+    required TResult Function(bool isExpanded) updateIsExpanded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +61,7 @@ mixin _$OrderSummaryEvent {
     TResult? Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +83,7 @@ mixin _$OrderSummaryEvent {
     TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
+    TResult Function(bool isExpanded)? updateIsExpanded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -92,6 +95,7 @@ mixin _$OrderSummaryEvent {
         orderConfirmationDetail,
     required TResult Function(_ConfirmedOrderStockInfo value)
         confirmedOrderStockInfo,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -100,6 +104,7 @@ mixin _$OrderSummaryEvent {
     TResult? Function(_SubmitOrder value)? submitOrder,
     TResult? Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
     TResult? Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -108,6 +113,7 @@ mixin _$OrderSummaryEvent {
     TResult Function(_SubmitOrder value)? submitOrder,
     TResult Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
     TResult Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -348,6 +354,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)
         confirmedOrderStockInfo,
+    required TResult Function(bool isExpanded) updateIsExpanded,
   }) {
     return initialized(user, shipToInfo, customerCodeInfo, orderDocumentType,
         salesOrgConfig, salesOrganisation, salesOrg);
@@ -373,6 +380,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
   }) {
     return initialized?.call(user, shipToInfo, customerCodeInfo,
         orderDocumentType, salesOrgConfig, salesOrganisation, salesOrg);
@@ -398,6 +406,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
+    TResult Function(bool isExpanded)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -416,6 +425,7 @@ class _$_Initialized implements _Initialized {
         orderConfirmationDetail,
     required TResult Function(_ConfirmedOrderStockInfo value)
         confirmedOrderStockInfo,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
   }) {
     return initialized(this);
   }
@@ -427,6 +437,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_SubmitOrder value)? submitOrder,
     TResult? Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
     TResult? Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
   }) {
     return initialized?.call(this);
   }
@@ -438,6 +449,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_SubmitOrder value)? submitOrder,
     TResult Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
     TResult Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -623,6 +635,7 @@ class _$_SubmitOrder implements _SubmitOrder {
     required TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)
         confirmedOrderStockInfo,
+    required TResult Function(bool isExpanded) updateIsExpanded,
   }) {
     return submitOrder(cartProducts, grandTotal, orderValue, totalTax, data);
   }
@@ -647,6 +660,7 @@ class _$_SubmitOrder implements _SubmitOrder {
     TResult? Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
   }) {
     return submitOrder?.call(
         cartProducts, grandTotal, orderValue, totalTax, data);
@@ -672,6 +686,7 @@ class _$_SubmitOrder implements _SubmitOrder {
     TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
+    TResult Function(bool isExpanded)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (submitOrder != null) {
@@ -689,6 +704,7 @@ class _$_SubmitOrder implements _SubmitOrder {
         orderConfirmationDetail,
     required TResult Function(_ConfirmedOrderStockInfo value)
         confirmedOrderStockInfo,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
   }) {
     return submitOrder(this);
   }
@@ -700,6 +716,7 @@ class _$_SubmitOrder implements _SubmitOrder {
     TResult? Function(_SubmitOrder value)? submitOrder,
     TResult? Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
     TResult? Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
   }) {
     return submitOrder?.call(this);
   }
@@ -711,6 +728,7 @@ class _$_SubmitOrder implements _SubmitOrder {
     TResult Function(_SubmitOrder value)? submitOrder,
     TResult Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
     TResult Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (submitOrder != null) {
@@ -834,6 +852,7 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
     required TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)
         confirmedOrderStockInfo,
+    required TResult Function(bool isExpanded) updateIsExpanded,
   }) {
     return orderConfirmationDetail(priceAggregate);
   }
@@ -858,6 +877,7 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
     TResult? Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
   }) {
     return orderConfirmationDetail?.call(priceAggregate);
   }
@@ -882,6 +902,7 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
     TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
+    TResult Function(bool isExpanded)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (orderConfirmationDetail != null) {
@@ -899,6 +920,7 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
         orderConfirmationDetail,
     required TResult Function(_ConfirmedOrderStockInfo value)
         confirmedOrderStockInfo,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
   }) {
     return orderConfirmationDetail(this);
   }
@@ -910,6 +932,7 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
     TResult? Function(_SubmitOrder value)? submitOrder,
     TResult? Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
     TResult? Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
   }) {
     return orderConfirmationDetail?.call(this);
   }
@@ -921,6 +944,7 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
     TResult Function(_SubmitOrder value)? submitOrder,
     TResult Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
     TResult Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (orderConfirmationDetail != null) {
@@ -1060,6 +1084,7 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
     required TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)
         confirmedOrderStockInfo,
+    required TResult Function(bool isExpanded) updateIsExpanded,
   }) {
     return confirmedOrderStockInfo(orderHistoryDetails, priceAggregate);
   }
@@ -1084,6 +1109,7 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
     TResult? Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
   }) {
     return confirmedOrderStockInfo?.call(orderHistoryDetails, priceAggregate);
   }
@@ -1108,6 +1134,7 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
     TResult Function(OrderHistoryDetails orderHistoryDetails,
             List<PriceAggregate> priceAggregate)?
         confirmedOrderStockInfo,
+    TResult Function(bool isExpanded)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (confirmedOrderStockInfo != null) {
@@ -1125,6 +1152,7 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
         orderConfirmationDetail,
     required TResult Function(_ConfirmedOrderStockInfo value)
         confirmedOrderStockInfo,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
   }) {
     return confirmedOrderStockInfo(this);
   }
@@ -1136,6 +1164,7 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
     TResult? Function(_SubmitOrder value)? submitOrder,
     TResult? Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
     TResult? Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
   }) {
     return confirmedOrderStockInfo?.call(this);
   }
@@ -1147,6 +1176,7 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
     TResult Function(_SubmitOrder value)? submitOrder,
     TResult Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
     TResult Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (confirmedOrderStockInfo != null) {
@@ -1170,6 +1200,204 @@ abstract class _ConfirmedOrderStockInfo implements OrderSummaryEvent {
 }
 
 /// @nodoc
+abstract class _$$_updateIsExpandedCopyWith<$Res> {
+  factory _$$_updateIsExpandedCopyWith(
+          _$_updateIsExpanded value, $Res Function(_$_updateIsExpanded) then) =
+      __$$_updateIsExpandedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isExpanded});
+}
+
+/// @nodoc
+class __$$_updateIsExpandedCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_updateIsExpanded>
+    implements _$$_updateIsExpandedCopyWith<$Res> {
+  __$$_updateIsExpandedCopyWithImpl(
+      _$_updateIsExpanded _value, $Res Function(_$_updateIsExpanded) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isExpanded = null,
+  }) {
+    return _then(_$_updateIsExpanded(
+      isExpanded: null == isExpanded
+          ? _value.isExpanded
+          : isExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_updateIsExpanded implements _updateIsExpanded {
+  const _$_updateIsExpanded({required this.isExpanded});
+
+  @override
+  final bool isExpanded;
+
+  @override
+  String toString() {
+    return 'OrderSummaryEvent.updateIsExpanded(isExpanded: $isExpanded)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_updateIsExpanded &&
+            (identical(other.isExpanded, isExpanded) ||
+                other.isExpanded == isExpanded));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isExpanded);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_updateIsExpandedCopyWith<_$_updateIsExpanded> get copyWith =>
+      __$$_updateIsExpandedCopyWithImpl<_$_updateIsExpanded>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            User user,
+            ShipToInfo shipToInfo,
+            CustomerCodeInfo customerCodeInfo,
+            OrderDocumentType orderDocumentType,
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)
+        initialized,
+    required TResult Function(
+            List<PriceAggregate> cartProducts,
+            double grandTotal,
+            double orderValue,
+            double totalTax,
+            DeliveryInfoData data)
+        submitOrder,
+    required TResult Function(List<PriceAggregate> priceAggregate)
+        orderConfirmationDetail,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails,
+            List<PriceAggregate> priceAggregate)
+        confirmedOrderStockInfo,
+    required TResult Function(bool isExpanded) updateIsExpanded,
+  }) {
+    return updateIsExpanded(isExpanded);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            User user,
+            ShipToInfo shipToInfo,
+            CustomerCodeInfo customerCodeInfo,
+            OrderDocumentType orderDocumentType,
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult? Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, double totalTax, DeliveryInfoData data)?
+        submitOrder,
+    TResult? Function(List<PriceAggregate> priceAggregate)?
+        orderConfirmationDetail,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails,
+            List<PriceAggregate> priceAggregate)?
+        confirmedOrderStockInfo,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
+  }) {
+    return updateIsExpanded?.call(isExpanded);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            User user,
+            ShipToInfo shipToInfo,
+            CustomerCodeInfo customerCodeInfo,
+            OrderDocumentType orderDocumentType,
+            SalesOrganisationConfigs salesOrgConfig,
+            SalesOrganisation salesOrganisation,
+            SalesOrg salesOrg)?
+        initialized,
+    TResult Function(List<PriceAggregate> cartProducts, double grandTotal,
+            double orderValue, double totalTax, DeliveryInfoData data)?
+        submitOrder,
+    TResult Function(List<PriceAggregate> priceAggregate)?
+        orderConfirmationDetail,
+    TResult Function(OrderHistoryDetails orderHistoryDetails,
+            List<PriceAggregate> priceAggregate)?
+        confirmedOrderStockInfo,
+    TResult Function(bool isExpanded)? updateIsExpanded,
+    required TResult orElse(),
+  }) {
+    if (updateIsExpanded != null) {
+      return updateIsExpanded(isExpanded);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_SubmitOrder value) submitOrder,
+    required TResult Function(_OrderConfirmationDetail value)
+        orderConfirmationDetail,
+    required TResult Function(_ConfirmedOrderStockInfo value)
+        confirmedOrderStockInfo,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
+  }) {
+    return updateIsExpanded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_SubmitOrder value)? submitOrder,
+    TResult? Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
+    TResult? Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
+  }) {
+    return updateIsExpanded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_SubmitOrder value)? submitOrder,
+    TResult Function(_OrderConfirmationDetail value)? orderConfirmationDetail,
+    TResult Function(_ConfirmedOrderStockInfo value)? confirmedOrderStockInfo,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
+    required TResult orElse(),
+  }) {
+    if (updateIsExpanded != null) {
+      return updateIsExpanded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _updateIsExpanded implements OrderSummaryEvent {
+  const factory _updateIsExpanded({required final bool isExpanded}) =
+      _$_updateIsExpanded;
+
+  bool get isExpanded;
+  @JsonKey(ignore: true)
+  _$$_updateIsExpandedCopyWith<_$_updateIsExpanded> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$OrderSummaryState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -1187,6 +1415,7 @@ mixin _$OrderSummaryState {
       throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   SalesOrg get salesOrg => throw _privateConstructorUsedError;
+  bool get isExpanded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderSummaryStateCopyWith<OrderSummaryState> get copyWith =>
@@ -1211,7 +1440,8 @@ abstract class $OrderSummaryStateCopyWith<$Res> {
       OrderDocumentType orderDocumentType,
       SalesOrganisationConfigs salesOrgConfig,
       SalesOrganisation salesOrganisation,
-      SalesOrg salesOrg});
+      SalesOrg salesOrg,
+      bool isExpanded});
 
   $SubmitOrderResponseCopyWith<$Res> get submitOrderResponse;
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
@@ -1248,6 +1478,7 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
     Object? salesOrgConfig = null,
     Object? salesOrganisation = null,
     Object? salesOrg = null,
+    Object? isExpanded = null,
   }) {
     return _then(_value.copyWith(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
@@ -1298,6 +1529,10 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
+      isExpanded: null == isExpanded
+          ? _value.isExpanded
+          : isExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -1389,7 +1624,8 @@ abstract class _$$_OrderSummaryStateCopyWith<$Res>
       OrderDocumentType orderDocumentType,
       SalesOrganisationConfigs salesOrgConfig,
       SalesOrganisation salesOrganisation,
-      SalesOrg salesOrg});
+      SalesOrg salesOrg,
+      bool isExpanded});
 
   @override
   $SubmitOrderResponseCopyWith<$Res> get submitOrderResponse;
@@ -1432,6 +1668,7 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
     Object? salesOrgConfig = null,
     Object? salesOrganisation = null,
     Object? salesOrg = null,
+    Object? isExpanded = null,
   }) {
     return _then(_$_OrderSummaryState(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
@@ -1482,6 +1719,10 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
               as SalesOrg,
+      isExpanded: null == isExpanded
+          ? _value.isExpanded
+          : isExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1501,7 +1742,8 @@ class _$_OrderSummaryState extends _OrderSummaryState {
       required this.orderDocumentType,
       required this.salesOrgConfig,
       required this.salesOrganisation,
-      required this.salesOrg})
+      required this.salesOrg,
+      required this.isExpanded})
       : super._();
 
   @override
@@ -1528,10 +1770,12 @@ class _$_OrderSummaryState extends _OrderSummaryState {
   final SalesOrganisation salesOrganisation;
   @override
   final SalesOrg salesOrg;
+  @override
+  final bool isExpanded;
 
   @override
   String toString() {
-    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isSubmitting: $isSubmitting, isConfirming: $isConfirming, submitOrderResponse: $submitOrderResponse, orderHistoryDetails: $orderHistoryDetails, user: $user, shipToInfo: $shipToInfo, customerCodeInfo: $customerCodeInfo, orderDocumentType: $orderDocumentType, salesOrgConfig: $salesOrgConfig, salesOrganisation: $salesOrganisation, salesOrg: $salesOrg)';
+    return 'OrderSummaryState(apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isSubmitting: $isSubmitting, isConfirming: $isConfirming, submitOrderResponse: $submitOrderResponse, orderHistoryDetails: $orderHistoryDetails, user: $user, shipToInfo: $shipToInfo, customerCodeInfo: $customerCodeInfo, orderDocumentType: $orderDocumentType, salesOrgConfig: $salesOrgConfig, salesOrganisation: $salesOrganisation, salesOrg: $salesOrg, isExpanded: $isExpanded)';
   }
 
   @override
@@ -1562,7 +1806,9 @@ class _$_OrderSummaryState extends _OrderSummaryState {
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.salesOrg, salesOrg) ||
-                other.salesOrg == salesOrg));
+                other.salesOrg == salesOrg) &&
+            (identical(other.isExpanded, isExpanded) ||
+                other.isExpanded == isExpanded));
   }
 
   @override
@@ -1579,7 +1825,8 @@ class _$_OrderSummaryState extends _OrderSummaryState {
       orderDocumentType,
       salesOrgConfig,
       salesOrganisation,
-      salesOrg);
+      salesOrg,
+      isExpanded);
 
   @JsonKey(ignore: true)
   @override
@@ -1603,7 +1850,8 @@ abstract class _OrderSummaryState extends OrderSummaryState {
       required final OrderDocumentType orderDocumentType,
       required final SalesOrganisationConfigs salesOrgConfig,
       required final SalesOrganisation salesOrganisation,
-      required final SalesOrg salesOrg}) = _$_OrderSummaryState;
+      required final SalesOrg salesOrg,
+      required final bool isExpanded}) = _$_OrderSummaryState;
   const _OrderSummaryState._() : super._();
 
   @override
@@ -1630,6 +1878,8 @@ abstract class _OrderSummaryState extends OrderSummaryState {
   SalesOrganisation get salesOrganisation;
   @override
   SalesOrg get salesOrg;
+  @override
+  bool get isExpanded;
   @override
   @JsonKey(ignore: true)
   _$$_OrderSummaryStateCopyWith<_$_OrderSummaryState> get copyWith =>

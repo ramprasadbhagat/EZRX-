@@ -23,9 +23,10 @@ void main() {
     PoDocuments(
       name: 'fake-file-1',
       url: 'fake-url-1',
-      path: 'fake-path-1',
     )
   ];
+
+  final file = [File('')];
 
   group(
     'PoAttachmentBloc Bloc Download Test',
@@ -52,7 +53,6 @@ void main() {
         ),
         expect: () => [
           PoAttachmentState.initial().copyWith(
-            isFetching: true,
             fileOperationMode: FileOperationMode.download,
           ),
           PoAttachmentState.initial().copyWith(
@@ -94,11 +94,9 @@ void main() {
         expect: () => [
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.download,
-            isFetching: true,
           ),
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.download,
-            isFetching: false,
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake-error'))),
           ),
@@ -119,9 +117,7 @@ void main() {
               attachmentType: AttachmentType.downloadPOAttachment,
             ),
           ).thenAnswer(
-            (invocation) async => const Right(
-              [],
-            ),
+            (invocation) async => Right(file),
           );
         },
         build: () =>
@@ -134,11 +130,10 @@ void main() {
         expect: () => [
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.download,
-            isFetching: true,
           ),
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.download,
-            isFetching: false,
+            failureOrSuccessOption: optionOf(Right(file)),
           ),
         ],
       );

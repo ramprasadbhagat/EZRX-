@@ -7,6 +7,8 @@ class _OrderDetailHeader extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isConfirming != current.isConfirming,
       builder: (context, state) {
+        final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
+
         return ListTile(
           minVerticalPadding: 15.0,
           contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -44,83 +46,89 @@ class _OrderDetailHeader extends StatelessWidget {
                       color: ZPColors.white,
                     ),
               ),
-              BalanceTextRow(
-                keyFlex: 2,
-                valueFlex: 3,
-                keyText: 'Request delivery date'.tr(),
-                keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-                valueText:
-                    state.orderHistoryDetails.requestedDeliveryDate.dateString,
-                valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-              ),
-              BalanceTextRow(
-                keyFlex: 2,
-                valueFlex: 3,
-                keyText: 'Reference note'.tr(),
-                keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-                valueText: state.orderHistoryDetails.referenceNotes,
-                valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-              ),
-              BalanceTextRow(
-                keyFlex: 2,
-                valueFlex: 3,
-                keyText: 'Payment term'.tr(),
-                keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-                valueText: state.orderHistoryDetails
-                    .orderHistoryDetailsPaymentTerm.displayPaymentTerm,
-                valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-              ),
-              BalanceTextRow(
-                keyFlex: 2,
-                valueFlex: 3,
-                keyText: 'Contact person'.tr(),
-                keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-                valueText: context
-                    .read<AdditionalDetailsBloc>()
-                    .state
-                    .deliveryInfoData
-                    .contactPerson
-                    .getOrDefaultValue(''),
-                valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-              ),
-              BalanceTextRow(
-                keyFlex: 2,
-                valueFlex: 3,
-                keyText: 'Contact number'.tr(),
-                keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-                valueText: state
-                    .orderHistoryDetails.telephoneNumber.displayTelephoneNumber,
-                valueTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-              ),
-              if (context
-                  .read<SalesOrgBloc>()
-                  .state
-                  .configs
-                  .enableSpecialInstructions)
+              if (config.enableFutureDeliveryDay)
                 BalanceTextRow(
                   keyFlex: 2,
                   valueFlex: 3,
-                  keyText: 'Delivery instructions'.tr(),
+                  keyText: context.tr('Request delivery date'),
+                  keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.white,
+                      ),
+                  valueText: state
+                      .orderHistoryDetails.requestedDeliveryDate.dateString,
+                  valueTextStyle:
+                      Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                ),
+              if (config.enableReferenceNote)
+                BalanceTextRow(
+                  keyFlex: 2,
+                  valueFlex: 3,
+                  keyText: context.tr('Reference note'),
+                  keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.white,
+                      ),
+                  valueText: state.orderHistoryDetails.referenceNotes,
+                  valueTextStyle:
+                      Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                ),
+              if (config.enablePaymentTerms)
+                BalanceTextRow(
+                  keyFlex: 2,
+                  valueFlex: 3,
+                  keyText: context.tr('Payment term'),
+                  keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.white,
+                      ),
+                  valueText: state.orderHistoryDetails
+                      .orderHistoryDetailsPaymentTerm.displayPaymentTerm,
+                  valueTextStyle:
+                      Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                ),
+              if (config.enableMobileNumber)
+                BalanceTextRow(
+                  keyFlex: 2,
+                  valueFlex: 3,
+                  keyText: context.tr('Contact person'),
+                  keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.white,
+                      ),
+                  valueText: context
+                      .read<AdditionalDetailsBloc>()
+                      .state
+                      .deliveryInfoData
+                      .contactPerson
+                      .getOrDefaultValue(''),
+                  valueTextStyle:
+                      Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                ),
+              if (config.enableMobileNumber)
+                BalanceTextRow(
+                  keyFlex: 2,
+                  valueFlex: 3,
+                  keyText: context.tr('Contact number'),
+                  keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.white,
+                      ),
+                  valueText: state.orderHistoryDetails.telephoneNumber
+                      .displayTelephoneNumber,
+                  valueTextStyle:
+                      Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.white,
+                          ),
+                ),
+              if (config.enableSpecialInstructions)
+                BalanceTextRow(
+                  keyFlex: 2,
+                  valueFlex: 3,
+                  keyText: context.tr('Delivery instructions'),
                   keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ZPColors.white,
                       ),
@@ -133,15 +141,8 @@ class _OrderDetailHeader extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              BalanceTextRow(
-                keyFlex: 2,
-                valueFlex: 3,
-                keyText: 'Attachments'.tr(),
-                keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-                valueText: '',
-              ),
+              if (config.showPOAttachment)
+                const OrderSuccessAttachmentSection(),
             ],
           ),
         );

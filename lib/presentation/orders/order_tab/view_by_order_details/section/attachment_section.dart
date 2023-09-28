@@ -92,18 +92,14 @@ class _AttachmentsWithIcon extends StatelessWidget {
           previous != current && current.fileDownloading && !current.isFetching,
       listener: (context, state) {
         state.failureOrSuccessOption.fold(
-          () {
-            if (state.isDownloadOperation) {
-              CustomSnackBar(
-                messageText: 'The attachments downloaded successfully.',
-              ).show(context);
-            }
-          },
+          () {},
           (either) => either.fold(
             (failure) {
               ErrorUtils.handleApiFailure(context, failure);
             },
-            (_) {},
+            (_) => CustomSnackBar(
+              messageText: 'Attachments downloaded successfully.',
+            ).show(context),
           ),
         );
       },
@@ -119,14 +115,15 @@ class _AttachmentsWithIcon extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return (index < state.displayedPoDocumentCount)
                         ? InkWell(
-                            onTap: () {
-                              context.read<PoAttachmentBloc>().add(
-                                    PoAttachmentEvent.downloadFile(
-                                      files: state.orderHistoryDetails
-                                          .orderHistoryDetailsPoDocuments,
-                                    ),
-                                  );
-                            },
+                            onTap: () => context.read<PoAttachmentBloc>().add(
+                                  PoAttachmentEvent.downloadFile(
+                                    files: [
+                                      state.orderHistoryDetails
+                                              .orderHistoryDetailsPoDocuments[
+                                          index],
+                                    ],
+                                  ),
+                                ),
                             child: Padding(
                               padding: const EdgeInsets.only(bottom: 5.0),
                               child: Row(

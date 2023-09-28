@@ -5,6 +5,8 @@ import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
+
 part 'order_history_item_dto.freezed.dart';
 part 'order_history_item_dto.g.dart';
 
@@ -42,6 +44,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'SpecialInstructions', defaultValue: '')
         required String specialInstruction,
     @JsonKey(name: 'Tax', defaultValue: 0.0) required double tax,
+    @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
+        required List<PoDocumentsDto> orderHistoryItemPoAttachments,
   }) = _OrderHistoryItemDto;
   factory OrderHistoryItemDto.fromDomain(OrderHistoryItem orderHistoryItem) {
     return OrderHistoryItemDto(
@@ -67,6 +71,10 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       requestedDeliveryDate: orderHistoryItem.requestedDeliveryDate.dateString,
       specialInstruction:
           orderHistoryItem.specialInstructions.displaySpecialInstructions,
+      orderHistoryItemPoAttachments:
+          List.from(orderHistoryItem.orderHistoryItemPoAttachments)
+              .map((e) => PoDocumentsDto.fromDomain(e))
+              .toList(),
     );
   }
   OrderHistoryItem toDomain() {
@@ -94,6 +102,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       requestedDeliveryDate: DateTimeStringValue(requestedDeliveryDate),
       specialInstructions: SpecialInstructions(specialInstruction),
       orderStatusTracker: <OrderStatusTracker>[],
+      orderHistoryItemPoAttachments:
+          orderHistoryItemPoAttachments.map((e) => e.toDomain()).toList(),
     );
   }
 

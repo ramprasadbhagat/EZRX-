@@ -17,6 +17,8 @@ import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+
 part 'order_summary_event.dart';
 part 'order_summary_state.dart';
 part 'order_summary_bloc.freezed.dart';
@@ -162,6 +164,8 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           },
         );
       },
+      updateIsExpanded: (e) async =>
+          emit(state.copyWith(isExpanded: e.isExpanded)),
     );
   }
 }

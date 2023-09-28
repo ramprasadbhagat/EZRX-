@@ -72,7 +72,6 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
             final downloadedFile = await remoteDataSource.fileDownload(
               e.name,
               e.url,
-              attachmentType,
             );
 
             return await fileSystemHelper.getDownloadedFile(downloadedFile);
@@ -112,7 +111,6 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       final localFile = await remoteDataSource.fileDownload(
         files.name,
         files.url,
-        attachmentType,
       );
       final result = await fileSystemHelper.openFile(localFile);
 

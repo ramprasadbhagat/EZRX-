@@ -17,10 +17,6 @@ class PoDocumentRemoteDataSource {
   final Config config;
   PoDocumentQuery queryMutation;
 
-  static const _pODownloadUrl = '/api/downloadPOAttachment';
-  static const _returnSummaryAttachmentUrl = '/api/downloadAttachment';
-  static const _method = 'POST';
-
   PoDocumentRemoteDataSource({
     required this.httpService,
     required this.dataSourceExceptionHandler,
@@ -30,14 +26,12 @@ class PoDocumentRemoteDataSource {
   Future<AttachmentFileBuffer> fileDownload(
     String name,
     String imgUrl,
-    AttachmentType attachmentType,
   ) async {
     return await dataSourceExceptionHandler.handle(() async {
+      final poDownloadUrl = '/api/ereturn/downloads?encryptedURL=$imgUrl';
       final res = await httpService.request(
-        method: _method,
-        url: attachmentType == AttachmentType.downloadPOAttachment
-            ? _pODownloadUrl
-            : _returnSummaryAttachmentUrl,
+        method: 'GET',
+        url: poDownloadUrl,
         data: {'url': imgUrl},
         responseType: ResponseType.bytes,
       );

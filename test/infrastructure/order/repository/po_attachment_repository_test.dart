@@ -130,7 +130,6 @@ void main() {
         () => poDocumentRemoteDataSourceMock.fileDownload(
           'fake-name',
           'fake-url',
-          AttachmentType.downloadPOAttachment,
         ),
       ).thenAnswer(
         (invocation) async =>
@@ -209,7 +208,6 @@ void main() {
         () => poDocumentRemoteDataSourceMock.fileDownload(
           'fake-name',
           'fake-url',
-          AttachmentType.downloadAttachment,
         ),
       ).thenAnswer(
         (invocation) async =>
@@ -265,7 +263,6 @@ void main() {
         () => poDocumentRemoteDataSourceMock.fileDownload(
           'fake-name',
           'fake-url',
-          AttachmentType.downloadPOAttachment,
         ),
       ).thenThrow(MockException());
       when(
@@ -293,7 +290,6 @@ void main() {
         () => poDocumentRemoteDataSourceMock.fileDownload(
           'fake-name',
           'fake-url',
-          AttachmentType.downloadPOAttachment,
         ),
       ).thenAnswer(
         (invocation) async =>

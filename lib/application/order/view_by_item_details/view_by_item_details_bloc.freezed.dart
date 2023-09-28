@@ -28,6 +28,7 @@ mixin _$ViewByItemDetailsEvent {
             SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
+    required TResult Function(bool isExpanded) updateIsExpanded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +43,7 @@ mixin _$ViewByItemDetailsEvent {
             SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +58,7 @@ mixin _$ViewByItemDetailsEvent {
             SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
+    TResult Function(bool isExpanded)? updateIsExpanded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +67,7 @@ mixin _$ViewByItemDetailsEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +75,7 @@ mixin _$ViewByItemDetailsEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +83,7 @@ mixin _$ViewByItemDetailsEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -150,6 +156,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
+    required TResult Function(bool isExpanded) updateIsExpanded,
   }) {
     return initialized();
   }
@@ -167,6 +174,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
   }) {
     return initialized?.call();
   }
@@ -184,6 +192,7 @@ class _$_Initialized implements _Initialized {
             SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
+    TResult Function(bool isExpanded)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -198,6 +207,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
   }) {
     return initialized(this);
   }
@@ -208,6 +218,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
   }) {
     return initialized?.call(this);
   }
@@ -218,6 +229,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -397,6 +409,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
+    required TResult Function(bool isExpanded) updateIsExpanded,
   }) {
     return fetch(user, orderNumber, materialNumber, soldTo,
         disableDeliveryDateForZyllemStatus, salesOrganisation);
@@ -415,6 +428,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
   }) {
     return fetch?.call(user, orderNumber, materialNumber, soldTo,
         disableDeliveryDateForZyllemStatus, salesOrganisation);
@@ -433,6 +447,7 @@ class _$_Fetch implements _Fetch {
             SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
+    TResult Function(bool isExpanded)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -448,6 +463,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
   }) {
     return fetch(this);
   }
@@ -458,6 +474,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
   }) {
     return fetch?.call(this);
   }
@@ -468,6 +485,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -572,6 +590,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
             SalesOrganisation salesOrganisation)
         fetch,
     required TResult Function(StatusType status) fetchZyllemStatus,
+    required TResult Function(bool isExpanded) updateIsExpanded,
   }) {
     return fetchZyllemStatus(status);
   }
@@ -589,6 +608,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
             SalesOrganisation salesOrganisation)?
         fetch,
     TResult? Function(StatusType status)? fetchZyllemStatus,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
   }) {
     return fetchZyllemStatus?.call(status);
   }
@@ -606,6 +626,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
             SalesOrganisation salesOrganisation)?
         fetch,
     TResult Function(StatusType status)? fetchZyllemStatus,
+    TResult Function(bool isExpanded)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (fetchZyllemStatus != null) {
@@ -620,6 +641,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
   }) {
     return fetchZyllemStatus(this);
   }
@@ -630,6 +652,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
   }) {
     return fetchZyllemStatus?.call(this);
   }
@@ -640,6 +663,7 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
     required TResult orElse(),
   }) {
     if (fetchZyllemStatus != null) {
@@ -660,10 +684,179 @@ abstract class _FetchZyllemStatus implements ViewByItemDetailsEvent {
 }
 
 /// @nodoc
+abstract class _$$_updateIsExpandedCopyWith<$Res> {
+  factory _$$_updateIsExpandedCopyWith(
+          _$_updateIsExpanded value, $Res Function(_$_updateIsExpanded) then) =
+      __$$_updateIsExpandedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isExpanded});
+}
+
+/// @nodoc
+class __$$_updateIsExpandedCopyWithImpl<$Res>
+    extends _$ViewByItemDetailsEventCopyWithImpl<$Res, _$_updateIsExpanded>
+    implements _$$_updateIsExpandedCopyWith<$Res> {
+  __$$_updateIsExpandedCopyWithImpl(
+      _$_updateIsExpanded _value, $Res Function(_$_updateIsExpanded) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isExpanded = null,
+  }) {
+    return _then(_$_updateIsExpanded(
+      isExpanded: null == isExpanded
+          ? _value.isExpanded
+          : isExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_updateIsExpanded implements _updateIsExpanded {
+  const _$_updateIsExpanded({required this.isExpanded});
+
+  @override
+  final bool isExpanded;
+
+  @override
+  String toString() {
+    return 'ViewByItemDetailsEvent.updateIsExpanded(isExpanded: $isExpanded)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_updateIsExpanded &&
+            (identical(other.isExpanded, isExpanded) ||
+                other.isExpanded == isExpanded));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isExpanded);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_updateIsExpandedCopyWith<_$_updateIsExpanded> get copyWith =>
+      __$$_updateIsExpandedCopyWithImpl<_$_updateIsExpanded>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)
+        fetch,
+    required TResult Function(StatusType status) fetchZyllemStatus,
+    required TResult Function(bool isExpanded) updateIsExpanded,
+  }) {
+    return updateIsExpanded(isExpanded);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)?
+        fetch,
+    TResult? Function(StatusType status)? fetchZyllemStatus,
+    TResult? Function(bool isExpanded)? updateIsExpanded,
+  }) {
+    return updateIsExpanded?.call(isExpanded);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            OrderNumber orderNumber,
+            MaterialNumber materialNumber,
+            CustomerCodeInfo soldTo,
+            bool disableDeliveryDateForZyllemStatus,
+            SalesOrganisation salesOrganisation)?
+        fetch,
+    TResult Function(StatusType status)? fetchZyllemStatus,
+    TResult Function(bool isExpanded)? updateIsExpanded,
+    required TResult orElse(),
+  }) {
+    if (updateIsExpanded != null) {
+      return updateIsExpanded(isExpanded);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
+    required TResult Function(_updateIsExpanded value) updateIsExpanded,
+  }) {
+    return updateIsExpanded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
+  }) {
+    return updateIsExpanded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
+    TResult Function(_updateIsExpanded value)? updateIsExpanded,
+    required TResult orElse(),
+  }) {
+    if (updateIsExpanded != null) {
+      return updateIsExpanded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _updateIsExpanded implements ViewByItemDetailsEvent {
+  const factory _updateIsExpanded({required final bool isExpanded}) =
+      _$_updateIsExpanded;
+
+  bool get isExpanded;
+  @JsonKey(ignore: true)
+  _$$_updateIsExpandedCopyWith<_$_updateIsExpanded> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ViewByItemDetailsState {
   OrderHistory get viewByItemDetails => throw _privateConstructorUsedError;
   OrderHistoryItem get orderHistoryItem => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isExpanded => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -682,6 +875,7 @@ abstract class $ViewByItemDetailsStateCopyWith<$Res> {
       {OrderHistory viewByItemDetails,
       OrderHistoryItem orderHistoryItem,
       bool isLoading,
+      bool isExpanded,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   $OrderHistoryCopyWith<$Res> get viewByItemDetails;
@@ -705,6 +899,7 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
     Object? viewByItemDetails = null,
     Object? orderHistoryItem = null,
     Object? isLoading = null,
+    Object? isExpanded = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -719,6 +914,10 @@ class _$ViewByItemDetailsStateCopyWithImpl<$Res,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isExpanded: null == isExpanded
+          ? _value.isExpanded
+          : isExpanded // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
@@ -756,6 +955,7 @@ abstract class _$$_ViewByItemDetailsStateCopyWith<$Res>
       {OrderHistory viewByItemDetails,
       OrderHistoryItem orderHistoryItem,
       bool isLoading,
+      bool isExpanded,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   @override
@@ -779,6 +979,7 @@ class __$$_ViewByItemDetailsStateCopyWithImpl<$Res>
     Object? viewByItemDetails = null,
     Object? orderHistoryItem = null,
     Object? isLoading = null,
+    Object? isExpanded = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_ViewByItemDetailsState(
@@ -793,6 +994,10 @@ class __$$_ViewByItemDetailsStateCopyWithImpl<$Res>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isExpanded: null == isExpanded
+          ? _value.isExpanded
+          : isExpanded // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
@@ -809,6 +1014,7 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
       {required this.viewByItemDetails,
       required this.orderHistoryItem,
       required this.isLoading,
+      required this.isExpanded,
       required this.failureOrSuccessOption})
       : super._();
 
@@ -819,11 +1025,13 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
   @override
   final bool isLoading;
   @override
+  final bool isExpanded;
+  @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'ViewByItemDetailsState(viewByItemDetails: $viewByItemDetails, orderHistoryItem: $orderHistoryItem, isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByItemDetailsState(viewByItemDetails: $viewByItemDetails, orderHistoryItem: $orderHistoryItem, isLoading: $isLoading, isExpanded: $isExpanded, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -837,13 +1045,15 @@ class _$_ViewByItemDetailsState extends _ViewByItemDetailsState {
                 other.orderHistoryItem == orderHistoryItem) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isExpanded, isExpanded) ||
+                other.isExpanded == isExpanded) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, viewByItemDetails,
-      orderHistoryItem, isLoading, failureOrSuccessOption);
+      orderHistoryItem, isLoading, isExpanded, failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -858,6 +1068,7 @@ abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
       {required final OrderHistory viewByItemDetails,
       required final OrderHistoryItem orderHistoryItem,
       required final bool isLoading,
+      required final bool isExpanded,
       required final Option<Either<ApiFailure, dynamic>>
           failureOrSuccessOption}) = _$_ViewByItemDetailsState;
   const _ViewByItemDetailsState._() : super._();
@@ -868,6 +1079,8 @@ abstract class _ViewByItemDetailsState extends ViewByItemDetailsState {
   OrderHistoryItem get orderHistoryItem;
   @override
   bool get isLoading;
+  @override
+  bool get isExpanded;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override

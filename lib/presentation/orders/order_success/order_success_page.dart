@@ -19,6 +19,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

@@ -11,6 +11,8 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_status_tracker_repository.dart';
+
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 part 'view_by_item_details_event.dart';
 part 'view_by_item_details_state.dart';
 part 'view_by_item_details_bloc.freezed.dart';
@@ -118,6 +120,8 @@ class ViewByItemDetailsBloc
           },
         );
       },
+      updateIsExpanded: (e) async =>
+          emit(state.copyWith(isExpanded: e.isExpanded)),
     );
   }
 }

@@ -38,7 +38,7 @@ abstract class $ReOrderPermissionDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'materials', defaultValue: <ValidMaterial>[])
-          List<ValidMaterialDto> validMaterials});
+      List<ValidMaterialDto> validMaterials});
 }
 
 /// @nodoc
@@ -76,7 +76,7 @@ abstract class _$$_ReOrderPermissionDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'materials', defaultValue: <ValidMaterial>[])
-          List<ValidMaterialDto> validMaterials});
+      List<ValidMaterialDto> validMaterials});
 }
 
 /// @nodoc
@@ -106,7 +106,7 @@ class __$$_ReOrderPermissionDtoCopyWithImpl<$Res>
 class _$_ReOrderPermissionDto extends _ReOrderPermissionDto {
   _$_ReOrderPermissionDto(
       {@JsonKey(name: 'materials', defaultValue: <ValidMaterial>[])
-          required final List<ValidMaterialDto> validMaterials})
+      required final List<ValidMaterialDto> validMaterials})
       : _validMaterials = validMaterials,
         super._();
 
@@ -159,7 +159,7 @@ class _$_ReOrderPermissionDto extends _ReOrderPermissionDto {
 abstract class _ReOrderPermissionDto extends ReOrderPermissionDto {
   factory _ReOrderPermissionDto(
           {@JsonKey(name: 'materials', defaultValue: <ValidMaterial>[])
-              required final List<ValidMaterialDto> validMaterials}) =
+          required final List<ValidMaterialDto> validMaterials}) =
       _$_ReOrderPermissionDto;
   _ReOrderPermissionDto._() : super._();
 
@@ -199,10 +199,9 @@ abstract class $ValidMaterialDtoCopyWith<$Res> {
       _$ValidMaterialDtoCopyWithImpl<$Res, ValidMaterialDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'hidePrice', defaultValue: false)
-          bool hidePrice,
+      {@JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber});
+      String materialNumber});
 }
 
 /// @nodoc
@@ -243,10 +242,9 @@ abstract class _$$_ValidMaterialDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'hidePrice', defaultValue: false)
-          bool hidePrice,
+      {@JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          String materialNumber});
+      String materialNumber});
 }
 
 /// @nodoc
@@ -280,10 +278,9 @@ class __$$_ValidMaterialDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ValidMaterialDto extends _ValidMaterialDto {
   _$_ValidMaterialDto(
-      {@JsonKey(name: 'hidePrice', defaultValue: false)
-          required this.hidePrice,
+      {@JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber})
+      required this.materialNumber})
       : super._();
 
   factory _$_ValidMaterialDto.fromJson(Map<String, dynamic> json) =>
@@ -333,9 +330,9 @@ class _$_ValidMaterialDto extends _ValidMaterialDto {
 abstract class _ValidMaterialDto extends ValidMaterialDto {
   factory _ValidMaterialDto(
       {@JsonKey(name: 'hidePrice', defaultValue: false)
-          required final bool hidePrice,
+      required final bool hidePrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber}) = _$_ValidMaterialDto;
+      required final String materialNumber}) = _$_ValidMaterialDto;
   _ValidMaterialDto._() : super._();
 
   factory _ValidMaterialDto.fromJson(Map<String, dynamic> json) =

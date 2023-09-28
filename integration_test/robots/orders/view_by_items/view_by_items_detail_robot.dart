@@ -13,7 +13,7 @@ class ViewByItemsDetailRobot {
   ViewByItemsDetailRobot(this.tester);
 
   final scrollView = find.byKey(WidgetKeys.viewByItemsOrderDetailPage);
-  final headerSection = find.byType(ItemHeaderSection);
+  final headerSection = find.byType(ViewByItemDetailsHeaderSection);
   final statusTrackerSection = find.byType(StatusTrackerSection);
   final addressSection = find.byType(AddressInfoSection);
   final itemDetailSection = find.byType(ItemDetailsSection);

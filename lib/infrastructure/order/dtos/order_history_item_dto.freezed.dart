@@ -62,6 +62,9 @@ mixin _$OrderHistoryItemDto {
   String get specialInstruction => throw _privateConstructorUsedError;
   @JsonKey(name: 'Tax', defaultValue: 0.0)
   double get tax => throw _privateConstructorUsedError;
+  @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get orderHistoryItemPoAttachments =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -102,7 +105,9 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       String requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
       String specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax});
+      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
+      @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
+      List<PoDocumentsDto> orderHistoryItemPoAttachments});
 }
 
 /// @nodoc
@@ -139,6 +144,7 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? requestedDeliveryDate = null,
     Object? specialInstruction = null,
     Object? tax = null,
+    Object? orderHistoryItemPoAttachments = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -225,6 +231,10 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
               as double,
+      orderHistoryItemPoAttachments: null == orderHistoryItemPoAttachments
+          ? _value.orderHistoryItemPoAttachments
+          : orderHistoryItemPoAttachments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocumentsDto>,
     ) as $Val);
   }
 }
@@ -264,7 +274,9 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
       String requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
       String specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax});
+      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
+      @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
+      List<PoDocumentsDto> orderHistoryItemPoAttachments});
 }
 
 /// @nodoc
@@ -299,6 +311,7 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
     Object? requestedDeliveryDate = null,
     Object? specialInstruction = null,
     Object? tax = null,
+    Object? orderHistoryItemPoAttachments = null,
   }) {
     return _then(_$_OrderHistoryItemDto(
       materialNumber: null == materialNumber
@@ -385,6 +398,10 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
               as double,
+      orderHistoryItemPoAttachments: null == orderHistoryItemPoAttachments
+          ? _value._orderHistoryItemPoAttachments
+          : orderHistoryItemPoAttachments // ignore: cast_nullable_to_non_nullable
+              as List<PoDocumentsDto>,
     ));
   }
 }
@@ -422,8 +439,11 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       required this.requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
       required this.specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) required this.tax})
-      : super._();
+      @JsonKey(name: 'Tax', defaultValue: 0.0) required this.tax,
+      @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
+      required final List<PoDocumentsDto> orderHistoryItemPoAttachments})
+      : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
+        super._();
 
   factory _$_OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
       _$$_OrderHistoryItemDtoFromJson(json);
@@ -491,10 +511,19 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @override
   @JsonKey(name: 'Tax', defaultValue: 0.0)
   final double tax;
+  final List<PoDocumentsDto> _orderHistoryItemPoAttachments;
+  @override
+  @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get orderHistoryItemPoAttachments {
+    if (_orderHistoryItemPoAttachments is EqualUnmodifiableListView)
+      return _orderHistoryItemPoAttachments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_orderHistoryItemPoAttachments);
+  }
 
   @override
   String toString() {
-    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax)';
+    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments)';
   }
 
   @override
@@ -538,7 +567,10 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
                 other.requestedDeliveryDate == requestedDeliveryDate) &&
             (identical(other.specialInstruction, specialInstruction) ||
                 other.specialInstruction == specialInstruction) &&
-            (identical(other.tax, tax) || other.tax == tax));
+            (identical(other.tax, tax) || other.tax == tax) &&
+            const DeepCollectionEquality().equals(
+                other._orderHistoryItemPoAttachments,
+                _orderHistoryItemPoAttachments));
   }
 
   @JsonKey(ignore: true)
@@ -565,7 +597,8 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
         expiryDate,
         requestedDeliveryDate,
         specialInstruction,
-        tax
+        tax,
+        const DeepCollectionEquality().hash(_orderHistoryItemPoAttachments)
       ]);
 
   @JsonKey(ignore: true)
@@ -621,8 +654,10 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       required final String requestedDeliveryDate,
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
       required final String specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0)
-      required final double tax}) = _$_OrderHistoryItemDto;
+      @JsonKey(name: 'Tax', defaultValue: 0.0) required final double tax,
+      @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
+      required final List<PoDocumentsDto>
+          orderHistoryItemPoAttachments}) = _$_OrderHistoryItemDto;
   const _OrderHistoryItemDto._() : super._();
 
   factory _OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =
@@ -691,6 +726,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @override
   @JsonKey(name: 'Tax', defaultValue: 0.0)
   double get tax;
+  @override
+  @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
+  List<PoDocumentsDto> get orderHistoryItemPoAttachments;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>

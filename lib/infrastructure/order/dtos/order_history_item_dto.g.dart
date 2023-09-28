@@ -30,6 +30,10 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
       requestedDeliveryDate: json['RequestedDeliveryDate'] as String? ?? '',
       specialInstruction: json['SpecialInstructions'] as String? ?? '',
       tax: (json['Tax'] as num?)?.toDouble() ?? 0.0,
+      orderHistoryItemPoAttachments: (json['poAttachment'] as List<dynamic>?)
+              ?.map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
@@ -56,4 +60,7 @@ Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
       'RequestedDeliveryDate': instance.requestedDeliveryDate,
       'SpecialInstructions': instance.specialInstruction,
       'Tax': instance.tax,
+      'poAttachment': instance.orderHistoryItemPoAttachments
+          .map((e) => e.toJson())
+          .toList(),
     };

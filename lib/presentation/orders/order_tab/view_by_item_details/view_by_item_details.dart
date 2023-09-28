@@ -82,7 +82,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
                   child: ListView(
                     key: WidgetKeys.viewByItemsOrderDetailPage,
                     children: <Widget>[
-                      ItemHeaderSection(
+                      ViewByItemDetailsHeaderSection(
                         orderHistoryItem: state.orderHistoryItem,
                       ),
                       StatusTrackerSection(

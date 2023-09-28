@@ -14,4 +14,7 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
   const factory ViewByItemDetailsEvent.fetchZyllemStatus({
     required StatusType status,
   }) = _FetchZyllemStatus;
+  const factory ViewByItemDetailsEvent.updateIsExpanded({
+    required bool isExpanded,
+  }) = _updateIsExpanded;
 }

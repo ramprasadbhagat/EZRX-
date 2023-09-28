@@ -97,6 +97,10 @@ class ViewByItemQueryMutation {
         
       }
       OrderItems {
+        poAttachment {
+          Url
+          Name
+        }
         MaterialCode
         MaterialDescription
         DefaultMaterialDescription

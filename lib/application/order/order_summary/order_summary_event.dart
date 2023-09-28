@@ -28,4 +28,8 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
     required OrderHistoryDetails orderHistoryDetails,
     required List<PriceAggregate> priceAggregate,
   }) = _ConfirmedOrderStockInfo;
+
+  const factory OrderSummaryEvent.updateIsExpanded({
+    required bool isExpanded,
+  }) = _updateIsExpanded;
 }

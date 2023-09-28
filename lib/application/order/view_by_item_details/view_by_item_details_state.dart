@@ -7,6 +7,7 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
     required OrderHistory viewByItemDetails,
     required OrderHistoryItem orderHistoryItem,
     required bool isLoading,
+    required bool isExpanded,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _ViewByItemDetailsState;
 
@@ -15,5 +16,13 @@ class ViewByItemDetailsState with _$ViewByItemDetailsState {
         orderHistoryItem: OrderHistoryItem.empty(),
         failureOrSuccessOption: none(),
         isLoading: false,
+        isExpanded: false,
       );
+
+  List<PoDocuments> get poDocumentsList => isExpanded
+      ? orderHistoryItem.orderHistoryItemPoAttachments
+      : [orderHistoryItem.orderHistoryItemPoAttachments.first];
+
+  bool get displayShowMoreOrLess =>
+      orderHistoryItem.orderHistoryItemPoAttachments.length > 1;
 }

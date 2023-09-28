@@ -4,13 +4,14 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_attachment_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ItemHeaderSection extends StatelessWidget {
+class ViewByItemDetailsHeaderSection extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
-  const ItemHeaderSection({
+  const ViewByItemDetailsHeaderSection({
     Key? key,
     required this.orderHistoryItem,
   }) : super(key: key);
@@ -146,6 +147,7 @@ class ItemHeaderSection extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
+              if (config.showPOAttachment) const ViewByItemAttachmentSection(),
             ],
           ),
         );
