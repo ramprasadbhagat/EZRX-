@@ -249,6 +249,14 @@ void main() {
             find.byKey(WidgetKeys.returnItem('0')),
             findsOneWidget,
           );
+          expect(
+            find.byKey(WidgetKeys.returnInvoiceId),
+            findsOneWidget,
+          );
+          expect(
+            find.text('Invoice #1234567'),
+            findsOneWidget,
+          );
           final findReturnItemTile = find.byKey(WidgetKeys.returnItemTile);
           expect(
             findReturnItemTile,
@@ -261,7 +269,6 @@ void main() {
                 'ReturnRequestSummaryByItemDetailsRoute',
             true,
           );
-          await tester.pump();
         },
       );
     },

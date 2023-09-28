@@ -167,6 +167,24 @@ class _ReturnItem extends StatelessWidget {
                     data.status.displayStatus,
                   ),
                 ),
+                footerWidget: Column(
+                  key: WidgetKeys.returnInvoiceId,
+                  children: <Widget>[
+                    const Divider(
+                      indent: 0,
+                      endIndent: 0,
+                      height: 10,
+                      thickness: 0.8,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 10),
+                      child: Text(
+                        '${context.tr('Invoice')} #${data.invoiceID}',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -235,6 +235,7 @@ class WidgetKeys {
   static const Key returnItemTile = Key('returnItemTile');
   static const Key returnItemGroupDate = Key('returnItemGroupDate');
   static const Key returnItemTileStatus = Key('returnItemTileStatus');
+  static const Key returnInvoiceId = Key('returnInvoiceId');
 
   //============================================================
   //  Returns by items detail
