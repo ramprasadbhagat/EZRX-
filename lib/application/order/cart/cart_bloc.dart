@@ -38,14 +38,19 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   Future<void> _onEvent(CartEvent event, Emitter<CartState> emit) async {
     await event.map(
-      initialized: (e) async => emit(
-        CartState.initial().copyWith(
-          salesOrganisation: e.salesOrganisation,
-          config: e.salesOrganisationConfigs,
-          customerCodeInfo: e.customerCodeInfo,
-          shipToInfo: e.shipToInfo,
-        ),
-      ),
+      initialized: (e) {
+        emit(
+          CartState.initial().copyWith(
+            salesOrganisation: e.salesOrganisation,
+            config: e.salesOrganisationConfigs,
+            customerCodeInfo: e.customerCodeInfo,
+            shipToInfo: e.shipToInfo,
+          ),
+        );
+        add(
+          const CartEvent.fetchProductsAddedToCart(),
+        );
+      },
       verifyMaterialDealBonus: (e) async {
         final material = e.item;
         if (material != PriceAggregate.empty()) {

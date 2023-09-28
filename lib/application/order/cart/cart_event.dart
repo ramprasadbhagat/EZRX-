@@ -7,7 +7,6 @@ class CartEvent with _$CartEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
-    required bool comboDealEligible,
   }) = _Initialized;
 
   const factory CartEvent.addComboDealToCart({

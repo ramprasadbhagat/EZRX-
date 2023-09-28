@@ -974,8 +974,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               salesOrganisation: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
               shipToInfo: state.shipToInfo,
-              comboDealEligible:
-                  context.read<EligibilityBloc>().state.comboDealEligible,
             ),
           );
 
