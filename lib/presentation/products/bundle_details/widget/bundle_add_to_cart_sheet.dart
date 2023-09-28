@@ -41,12 +41,12 @@ class BundlesAddToCartSheet extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Add bundle to cart'.tr(),
+                context.tr('Add bundle to cart'),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               InfoLabel(
                 textValue:
-                    'Please note that the minimum total purchase quantity for this bundle offer is ${state.bundle.bundle.minimumQuantityBundleMaterial.quantity}.',
+                    '${context.tr('Please note that the minimum total purchase quantity for this bundle offer is')} ${state.bundle.bundle.minimumQuantityBundleMaterial.quantity}.',
               ),
               Expanded(
                 child: ListView.builder(
@@ -225,7 +225,7 @@ class _BundleSheetFooter extends StatelessWidget {
                       onPressed: () {
                         context.router.pop();
                       },
-                      child: Text('Cancel'.tr()),
+                      child: Text(context.tr('Cancel')),
                     ),
                   ),
                   const SizedBox(
@@ -242,7 +242,8 @@ class _BundleSheetFooter extends StatelessWidget {
                                 state.cartProducts.isNotEmpty) {
                               context.router.popForced();
                               CustomSnackBar(
-                                messageText: 'Item has been added to cart'.tr(),
+                                messageText:
+                                    context.tr('Item has been added to cart'),
                               ).show(context);
                             }
                           },
@@ -290,7 +291,9 @@ class _BundleSheetFooter extends StatelessWidget {
                           },
                           child: LoadingShimmer.withChild(
                             enabled: stateCart.isUpserting,
-                            child: const Text('Add to cart').tr(),
+                            child: Text(
+                              context.tr('Add to cart'),
+                            ),
                           ),
                         );
                       },

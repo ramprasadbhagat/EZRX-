@@ -132,6 +132,7 @@ void main() {
     Widget getScopedWidget() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => mockAuthBloc,

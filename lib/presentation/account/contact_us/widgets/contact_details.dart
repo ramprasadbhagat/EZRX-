@@ -17,7 +17,7 @@ class _ContactDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          contactText,
+          context.tr(contactText),
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: ZPColors.extraLightGrey4,
                 fontWeight: FontWeight.w400,

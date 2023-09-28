@@ -154,7 +154,7 @@ class _ReturnItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
-                    '${'Requested on'.tr()} ${data.requestDate.dateString}',
+                    '${context.tr('Requested on')} ${data.requestDate.dateString}',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: ZPColors.darkerGrey,
                         ),
@@ -180,7 +180,7 @@ class _ReturnItem extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              '${'Return'.tr()} #${data.requestId}',
+                              '${context.tr('Return')} #${data.requestId}',
                               style: Theme.of(context)
                                   .textTheme
                                   .labelSmall
@@ -207,7 +207,7 @@ class _ReturnItem extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                           PriceComponent(
-                            title: 'Return value: '.tr(),
+                            title: '${context.tr('Return value')}: ',
                             salesOrgConfig: config,
                             price: data.totalPrice.toStringAsFixed(2),
                             priceLabelStyle:

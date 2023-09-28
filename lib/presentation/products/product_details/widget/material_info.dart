@@ -141,7 +141,7 @@ class _MaterialInfoDialog extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.43,
               child: Text(
                 context.tr(
-                  'Expiry date displayed is for reference, actual product may very',
+                  'Expiry date displayed is for reference, actual product may vary',
                 ),
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontSize: 10,

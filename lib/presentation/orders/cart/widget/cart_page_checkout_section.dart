@@ -40,7 +40,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               title: Text(
-                '${state.cartProducts.length} items',
+                '${state.cartProducts.length} ${'items'.tr()}',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               trailing: PriceComponent(

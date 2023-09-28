@@ -450,7 +450,7 @@ class _StatusesSelector extends StatelessWidget {
             return CheckboxListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(
-                status.displayPaymentStatus,
+                context.tr(status.displayPaymentStatus),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               controlAffinity: ListTileControlAffinity.leading,

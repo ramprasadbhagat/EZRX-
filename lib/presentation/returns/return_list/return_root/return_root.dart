@@ -56,7 +56,9 @@ class _ReturnRootState extends State<ReturnRoot> {
     return Scaffold(
       key: WidgetKeys.returnRootPage,
       appBar: AppBar(
-        title: const Text('Returns').tr(),
+        title: Text(
+          context.tr('Returns'),
+        ),
         centerTitle: false,
         actions: [
           IconButton(
@@ -95,14 +97,14 @@ class _ReturnRootState extends State<ReturnRoot> {
                       controller: tabController,
                       tabs: [
                         'View by items',
-                        'View by return request',
+                        'View by return requests',
                       ]
                           .map(
                             (e) => Tab(
                               key: Key(
                                 StringUtils.changeToCamelCase(sentence: e),
                               ),
-                              text: e.tr(),
+                              text: context.tr(e),
                             ),
                           )
                           .toList(),

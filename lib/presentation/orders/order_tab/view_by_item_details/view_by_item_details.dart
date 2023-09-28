@@ -143,7 +143,7 @@ void _showDetailsPage({
             customStep: state.orderHistoryItem.status.displayOrderStatusDetails
                 .mapIndexed((index, e) {
               return CustomStep(
-                status: e.getOrDefaultValue(''),
+                status: e.getOrDefaultValue('').tr(),
                 subtitle: '10.00am MYR',
                 title: '16 Mar',
                 icon: e.displayOrderStatusIcon,

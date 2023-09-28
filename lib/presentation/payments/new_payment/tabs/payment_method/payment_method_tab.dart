@@ -171,9 +171,6 @@ class _PaymentGateWayDescription extends StatelessWidget {
             'Payment advice you can download after the payment process or from the payment summary page',
           ),
           const _BulletedText(
-            'Payment advice you can download after the payment process or from the payment summary page',
-          ),
-          const _BulletedText(
             'The payment advice copy will be sent to the email associated with this account',
           ),
           const SizedBox(height: 20),

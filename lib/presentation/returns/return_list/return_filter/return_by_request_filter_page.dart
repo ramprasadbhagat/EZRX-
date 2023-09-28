@@ -28,7 +28,7 @@ class ReturnByRequestFilterPage extends StatelessWidget {
         children: [
           AppBar(
             title: Text(
-              'Filter'.tr(),
+              context.tr('Filter'),
             ),
             automaticallyImplyLeading: false,
             centerTitle: false,
@@ -71,7 +71,7 @@ class _ReturnFilter extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Request date'.tr(),
+                context.tr('Request date'),
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.neutralsBlack,
                     ),
@@ -96,7 +96,7 @@ class _ReturnFilter extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                '${'Request amount'.tr()} (${salesOrgConfig.currency.code})',
+                '${context.tr('Request amount')} (${salesOrgConfig.currency.code})',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.neutralsBlack,
                     ),
@@ -119,7 +119,7 @@ class _ReturnFilter extends StatelessWidget {
               ),
               (!state.filter.isReturnAmountValueRangeValid)
                   ? ValueRangeError(
-                      label: 'Invalid Amount range!'.tr(),
+                      label: context.tr('Invalid Amount range!'),
                       isValid: state.filter.isReturnAmountValueRangeValid,
                     )
                   : const SizedBox.shrink(),
@@ -129,7 +129,7 @@ class _ReturnFilter extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
                 child: Text(
-                  'Status'.tr(),
+                  context.tr('Status'),
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
               ),
@@ -184,7 +184,7 @@ class _AmountValueToFilter extends StatelessWidget {
               FilteringTextInputFormatter.allow(_decimalOnlyRegx),
             ],
             decoration: InputDecoration(
-              labelText: 'Amount to'.tr(),
+              labelText: context.tr('Amount to'),
               labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -223,7 +223,7 @@ class _AmountValueFromFilter extends StatelessWidget {
               FilteringTextInputFormatter.allow(_decimalOnlyRegx),
             ],
             decoration: InputDecoration(
-              labelText: 'Amount from'.tr(),
+              labelText: context.tr('Amount from'),
               labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -270,7 +270,7 @@ class _FromRequestDateFilter extends StatelessWidget {
               text: state.filter.returnDateFrom.dateString,
             ),
             decoration: InputDecoration(
-              hintText: 'Date from'.tr(),
+              hintText: context.tr('Date from'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -327,7 +327,7 @@ class _ToRequestDateFilter extends StatelessWidget {
               text: state.filter.returnDateTo.dateString,
             ),
             decoration: InputDecoration(
-              hintText: 'Date to'.tr(),
+              hintText: context.tr('Date to'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -369,7 +369,7 @@ class _StatusesSelector extends StatelessWidget {
             return CheckboxListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(
-                status.displayStatusForViewByRequest,
+                context.tr(status.displayStatusForViewByRequest),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               controlAffinity: ListTileControlAffinity.leading,
@@ -409,7 +409,7 @@ class _ResetButton extends StatelessWidget {
           );
         },
         child: Text(
-          'Reset'.tr(),
+          context.tr('Reset'),
           style: const TextStyle(color: ZPColors.primary),
         ),
       ),
@@ -436,7 +436,7 @@ class _ApplyButton extends StatelessWidget {
             key: WidgetKeys.filterApplyButton,
             onPressed: isEnable ? () => _onPressed(context: context) : null,
             child: Text(
-              'Apply'.tr(),
+              context.tr('Apply'),
               style: const TextStyle(color: ZPColors.white),
             ),
           ),
