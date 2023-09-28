@@ -49,8 +49,7 @@ class AuthInterceptor extends Interceptor {
         final isTokenExpired = token.toDomain().isExpired;
         final isNotMockFlavor = config.appFlavor != Flavor.mock;
         if (isTokenExpired && isNotMockFlavor) {
-          await _refreshToken();
-          token = await tokenStorage.get();
+          token = await _refreshToken() ?? token;
         }
         if (options.baseUrl == config.getEZReachUrl) {
           options.headers['Authorization'] = config.eZReachToken;
