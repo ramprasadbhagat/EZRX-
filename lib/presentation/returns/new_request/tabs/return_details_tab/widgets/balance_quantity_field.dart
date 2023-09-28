@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class BalanceQuantityField extends StatelessWidget {
@@ -16,10 +17,13 @@ class BalanceQuantityField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldWithLabel(
       fieldKey: WidgetKeys.returnBalanceQuantityField(data.uuid),
-      labelText: 'Balance quantity'.tr(),
+      labelText: context.tr('Balance quantity'),
       onChanged: (value) {},
       initValue: data.balanceQuantity.apiParameterValue,
       isEnabled: false,
+      decoration: const InputDecoration(
+        fillColor: ZPColors.inputBorderColor,
+      ),
     );
   }
 }

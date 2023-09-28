@@ -2,8 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
-import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,15 +32,25 @@ class ReturnValueField extends StatelessWidget {
           data.unitPrice.getOrDefaultValue(0),
         );
 
-        return TextFieldWithLabel(
-          fieldKey: WidgetKeys.returnValueField(
+        return Row(
+          key: WidgetKeys.returnValueField(
             '${data.uuid}$returnValue',
           ),
-          labelText:
-              '${'Return value'.tr()} (${context.read<EligibilityBloc>().state.salesOrgConfigs.currency.code})',
-          onChanged: (value) {},
-          initValue: returnValue,
-          isEnabled: false,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              '${context.tr('Return value')}:',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: ZPColors.neutralsGrey1,
+                  ),
+            ),
+            PriceComponent(
+              salesOrgConfig:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
+              price: returnValue,
+              type: PriceStyle.grandTotalPrice,
+            ),
+          ],
         );
       },
     );

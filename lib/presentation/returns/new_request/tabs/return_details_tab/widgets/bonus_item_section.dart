@@ -31,13 +31,6 @@ class _BonusItemSection extends StatelessWidget {
                             item: item,
                             detail: detail,
                           ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        _ActiveBonusButton(
-                          data: item,
-                          included: detail.itemNumber.isNotEmpty,
-                        ),
                       ],
                     );
                   },
@@ -45,47 +38,5 @@ class _BonusItemSection extends StatelessWidget {
               );
             },
           );
-  }
-}
-
-class _ActiveBonusButton extends StatelessWidget {
-  const _ActiveBonusButton({
-    Key? key,
-    required this.data,
-    required this.included,
-  }) : super(key: key);
-
-  final ReturnMaterial data;
-  final bool included;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        key: WidgetKeys.returnActivateBonusButton(data.uuid),
-        onPressed: () {
-          context.read<NewRequestBloc>().add(
-                NewRequestEvent.toggleBonusItem(
-                  item: data,
-                  included: !included,
-                ),
-              );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: ZPColors.whiteBgCard,
-          foregroundColor: ZPColors.primary,
-          side: const BorderSide(color: ZPColors.primary),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-        ),
-        child: Text(
-          included
-              ? 'Exclude bonus from return request'.tr()
-              : 'Include bonus in return request'.tr(),
-        ),
-      ),
-    );
   }
 }

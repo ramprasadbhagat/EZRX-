@@ -3,7 +3,11 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/return_details_tab.dart';
@@ -63,10 +67,40 @@ void main() {
   late ReturnRequestAttachmentBloc returnRequestAttachmentBlocMock;
   late ProductImageBloc productImageBlocMock;
   late ReturnMaterial fakeReturnMaterial;
+  late MaterialNumber fakeMaterialNumber;
+  late String fakeItemNumber;
+  late String fakeAssignmentNumber;
+  late String fakeBatch;
+  late SalesOrg fakeSalesOrg;
 
   setUpAll(() async {
+    fakeSalesOrg = SalesOrg('fake-sales-org');
+    fakeMaterialNumber = MaterialNumber('fake-material-number');
+    fakeItemNumber = 'fake-item-number';
+    fakeAssignmentNumber = 'fake-assignment-number';
+    fakeBatch = 'fake-batch';
     fakeReturnMaterial = ReturnMaterial.empty().copyWith(
+      balanceQuantity: IntegerValue('100'),
       unitPrice: RangeValue('100'),
+      totalPrice: RangeValue('8500'),
+      materialNumber: fakeMaterialNumber,
+      materialDescription: 'fake-material-description',
+      itemNumber: fakeItemNumber,
+      batch: fakeBatch,
+      eligibleForReturn: true,
+      assignmentNumber: fakeAssignmentNumber,
+      bonusItems: [
+        ReturnMaterial.empty().copyWith(
+          balanceQuantity: IntegerValue('100'),
+          materialNumber: fakeMaterialNumber,
+          itemNumber: fakeItemNumber,
+          batch: fakeBatch,
+          eligibleForReturn: true,
+          assignmentNumber: fakeAssignmentNumber,
+          unitPrice: RangeValue('100'),
+          totalPrice: RangeValue('8500'),
+        )
+      ],
     );
     locator.registerLazySingleton(() => AppRouter());
   });
@@ -143,6 +177,50 @@ void main() {
         final returnDetailsListView =
             find.byKey(WidgetKeys.returnDetailsListView);
         expect(returnDetailsListView, findsOneWidget);
+      });
+
+      testWidgets('tap include bonus button', (WidgetTester tester) async {
+        when(() => newRequestBlocMock.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: [fakeReturnMaterial],
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                invoiceNumber: fakeAssignmentNumber,
+                salesOrg: fakeSalesOrg,
+                returnItemDetailsList: [
+                  ReturnItemDetails.empty().copyWith(
+                    materialNumber: fakeMaterialNumber,
+                    itemNumber: fakeItemNumber,
+                    assignmentNumber: fakeAssignmentNumber,
+                    batch: fakeBatch,
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final toggleIncludeBonusButton =
+            find.byKey(WidgetKeys.toggleIncludeBonusButton);
+        expect(toggleIncludeBonusButton, findsOneWidget);
+        await tester.dragUntilVisible(
+          toggleIncludeBonusButton,
+          find.byKey(WidgetKeys.returnDetailsListView),
+          const Offset(0, 100),
+        );
+        await tester.pumpAndSettle();
+        await tester.tap(toggleIncludeBonusButton);
+        await tester.pumpAndSettle();
+        verify(
+          () => newRequestBlocMock.add(
+            NewRequestEvent.toggleBonusItem(
+              item: fakeReturnMaterial.bonusItems.first,
+              included: false,
+            ),
+          ),
+        ).called(1);
       });
     });
   });

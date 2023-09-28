@@ -9,10 +9,12 @@ class MaterialQuantityAndPrice extends StatelessWidget {
   const MaterialQuantityAndPrice({
     Key? key,
     required this.quantity,
+    this.totalPrice = 0,
     required this.unitPrice,
   }) : super(key: key);
 
   final int quantity;
+  final double totalPrice;
   final double unitPrice;
 
   @override
@@ -21,14 +23,16 @@ class MaterialQuantityAndPrice extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          '${'Qty'.tr()}: $quantity',
+          '${context.tr('Qty')}: $quantity',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: ZPColors.black,
               ),
         ),
         PriceComponent(
           salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
-          price: (unitPrice * quantity).toString(),
+          price: totalPrice != 0
+              ? totalPrice.toString()
+              : (unitPrice * quantity).toString(),
         ),
       ],
     );

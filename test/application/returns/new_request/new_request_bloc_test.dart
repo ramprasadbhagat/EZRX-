@@ -111,4 +111,78 @@ void main() {
       );
     },
   );
+
+  group(
+    'New Request Bloc Fill return',
+    () {
+      blocTest(
+        ' => toggle state of include bonus button',
+        build: () => NewRequestBloc(newRequestRepository: newRequestRepository),
+        seed: () => NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              invoiceNumber: fakeAssignmentNumber,
+              salesOrg: fakeSalesOrg,
+              returnItemDetailsList: [
+                ReturnItemDetails.empty().copyWith(
+                  //Make sure return item detals have 4 importance infomation:
+                  //materialNumber, itemNumber, assignmentNumber, batch
+                  materialNumber: fakeMaterialNumber,
+                  itemNumber: fakeItemNumber,
+                  assignmentNumber: fakeAssignmentNumber,
+                  batch: fakeBatch,
+                )
+              ],
+            )
+          ],
+        ),
+        act: (NewRequestBloc bloc) => [
+          bloc.add(
+            NewRequestEvent.toggleBonusItem(
+              item: fakeReturnMaterial,
+              included: false,
+            ),
+          ),
+          bloc.add(
+            NewRequestEvent.toggleBonusItem(
+              item: fakeReturnMaterial,
+              included: true,
+            ),
+          ),
+        ],
+        expect: () => [
+          NewRequestState.initial().copyWith(
+            selectedItems: [fakeReturnMaterial],
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                invoiceNumber: fakeAssignmentNumber,
+                salesOrg: fakeSalesOrg,
+                returnItemDetailsList: [],
+              ),
+            ],
+          ),
+          NewRequestState.initial().copyWith(
+            selectedItems: [fakeReturnMaterial],
+            invoiceDetails: [
+              InvoiceDetails.empty().copyWith(
+                invoiceNumber: fakeAssignmentNumber,
+                salesOrg: fakeSalesOrg,
+                returnItemDetailsList: [
+                  ReturnItemDetails.empty().copyWith(
+                    //Make sure return item detals have 4 importance infomation:
+                    //materialNumber, itemNumber, assignmentNumber, batch
+                    materialNumber: fakeMaterialNumber,
+                    itemNumber: fakeItemNumber,
+                    assignmentNumber: fakeAssignmentNumber,
+                    batch: fakeBatch,
+                  ),
+                ],
+              )
+            ],
+          ),
+        ],
+      );
+    },
+  );
 }

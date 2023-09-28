@@ -12,7 +12,7 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpandableInfo(
-      labelText: 'Bonus return details'.tr(),
+      labelText: context.tr('Bonus return details'),
       child: BlocBuilder<NewRequestBloc, NewRequestState>(
         buildWhen: (previous, current) =>
             previous.showErrorMessages != current.showErrorMessages,
@@ -23,27 +23,19 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
                 : AutovalidateMode.disabled,
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: BalanceQuantityField(data: item),
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Expanded(
-                      child: ReturnValueField(
-                        data: item,
-                      ),
-                    ),
-                  ],
-                ),
+                BalanceQuantityField(data: item),
                 const SizedBox(
                   height: 8,
                 ),
                 ReturnQuantityField(
                   uuid: detail.uuid,
                   balanceQuantity: item.balanceQuantity,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                ReturnValueField(
+                  data: item,
                 ),
                 const SizedBox(
                   height: 8,

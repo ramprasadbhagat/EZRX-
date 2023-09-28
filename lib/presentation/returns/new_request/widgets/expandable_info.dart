@@ -7,10 +7,12 @@ class ExpandableInfo extends StatefulWidget {
     required this.labelText,
     required this.child,
     this.expandable = false,
+    this.toggle = const SizedBox.shrink(),
   }) : super(key: key);
   final Widget child;
   final String labelText;
   final bool expandable;
+  final Widget toggle;
 
   @override
   State<ExpandableInfo> createState() => _ExpandableInfoState();
@@ -36,9 +38,10 @@ class _ExpandableInfoState extends State<ExpandableInfo> {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
                 widget.labelText,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
+            widget.toggle,
             if (widget.expandable)
               IconButton(
                 visualDensity: const VisualDensity(vertical: -4),

@@ -54,6 +54,9 @@ class NewRequestState with _$NewRequestState {
         orElse: () => ReturnItemDetails.empty(),
       );
 
+  bool isIncludeBonus(String uuid) =>
+      getReturnItemDetails(uuid) != ReturnItemDetails.empty();
+
   InvoiceDetails getInvoiceDetail(String assignmentNumber) =>
       invoiceDetails.firstWhere(
         (element) => element.invoiceNumber == assignmentNumber,
