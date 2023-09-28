@@ -61,6 +61,7 @@ void main() {
   Widget getScopedWidget() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<UserBloc>(
           create: (context) => userBlocMock,
@@ -89,25 +90,23 @@ void main() {
         ),
       );
       await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
       expect(find.byKey(WidgetKeys.loginOnBehalfButtonKey), findsOneWidget);
       final loginOnBehalfTextFinder = find.text(
-        'Log in on behalf',
+        'Login on behalf',
       );
       expect(loginOnBehalfTextFinder, findsOneWidget);
     });
 
     testWidgets('Content Display When User Cannot Login Behalf',
         (tester) async {
-      final expectedStates = [
+      when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
           user: User.empty().copyWith(
-            role: Role.empty().copyWith(type: RoleType('root_admin')),
+            role: Role.empty().copyWith(type: RoleType('')),
           ),
         ),
-        UserState.initial(),
-      ];
-
-      whenListen(userBlocMock, Stream.fromIterable(expectedStates));
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
       expect(find.byKey(WidgetKeys.loginOnBehalfButtonKey), findsNothing);

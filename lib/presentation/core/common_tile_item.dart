@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
@@ -181,7 +182,7 @@ class _Subtitle extends StatelessWidget {
                 ),
               ),
               Text(
-                'Qty: $quantity',
+                '${context.tr('Qty')}: $quantity',
                 key: WidgetKeys.commonTileItemQty,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.black,

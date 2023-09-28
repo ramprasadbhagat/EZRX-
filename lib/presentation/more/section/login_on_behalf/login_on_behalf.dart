@@ -23,11 +23,13 @@ class LoginOnBehalf extends StatelessWidget {
                       MainAxisAlignment.start, // to align the icon to left
                   children: [
                     Text(
-                      'Log in on behalf',
+                      context.tr(
+                        'Login on behalf',
+                      ),
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                             color: ZPColors.gradient,
                           ),
-                    ).tr(),
+                    ),
                   ],
                 ),
                 onPressed: () {

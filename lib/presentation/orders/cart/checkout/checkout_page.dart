@@ -69,7 +69,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       key: WidgetKeys.checkoutPage,
       appBar: AppBar(
         title: Text(
-          'Checkout'.tr(),
+          context.tr('Checkout'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         centerTitle: false,
@@ -145,7 +145,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             visualDensity: VisualDensity.compact,
             contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
             title: Text(
-              '${cartState.totalItems} items',
+              '${cartState.totalItems} ${context.tr('items')}',
               style: Theme.of(context).textTheme.titleSmall,
             ),
             trailing: Row(
@@ -155,7 +155,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartState.grandTotal.toString(),
-                  title: 'Grand Total: '.tr(),
+                  title: context.tr('Grand Total: '),
                   priceLabelStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.extraLightGrey4,
@@ -261,7 +261,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           },
                     child: LoadingShimmer.withChild(
                       enabled: state.isSubmitting,
-                      child: const Text('Place order').tr(),
+                      child: Text(context.tr('Place order')),
                     ),
                   ),
                 ),
@@ -293,7 +293,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     child: ElevatedButton(
                       onPressed: () => context.router.pop(),
                       child: Text(
-                        'Close'.tr(),
+                        context.tr('Close'),
                         style:
                             Theme.of(context).textTheme.labelMedium?.copyWith(
                                   color: ZPColors.white,
@@ -401,7 +401,7 @@ class _OrderSummary extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Order summary'.tr(),
+          context.tr('Order summary'),
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
                 color: ZPColors.neutralsBlack,
               ),
@@ -411,8 +411,9 @@ class _OrderSummary extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Subtotal (${salesOrgConfig.displaySubtotalTaxBreakdown ? "excl" : "incl"}.tax):'
-                  .tr(),
+              context.tr(
+                'Subtotal (${salesOrgConfig.displaySubtotalTaxBreakdown ? "excl" : "incl"}.tax):',
+              ),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
@@ -433,7 +434,7 @@ class _OrderSummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${'Tax at '.tr()}${cartState.totalTaxPercent}%',
+                    '${context.tr('Tax at ')}${cartState.totalTaxPercent}%',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: ZPColors.neutralsBlack,
                         ),
@@ -446,7 +447,7 @@ class _OrderSummary extends StatelessWidget {
                 ],
               ),
               Text(
-                'Applies to materials with full tax'.tr(),
+                context.tr('Applies to materials with full tax'),
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.neutralsBlack,
                       fontSize: 10,
@@ -460,7 +461,7 @@ class _OrderSummary extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Stamp duty:'.tr(),
+              context.tr('Stamp duty:'),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
@@ -480,7 +481,7 @@ class _OrderSummary extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Small order fee'.tr(),
+                  context.tr('Small order fee'),
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: ZPColors.neutralsBlack,
                       ),
@@ -515,7 +516,7 @@ class _OrderSummary extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Grand Total: '.tr(),
+              context.tr('Grand Total: '),
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
@@ -532,7 +533,7 @@ class _OrderSummary extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Total savings:'.tr(),
+              context.tr('Total savings:'),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
@@ -557,7 +558,7 @@ class _TotalItems extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Text(
-        '${'Your items '.tr()}(${context.read<CartBloc>().state.totalItems})',
+        '${context.tr('Your items ')}(${context.read<CartBloc>().state.totalItems})',
         style: Theme.of(context)
             .textTheme
             .labelLarge

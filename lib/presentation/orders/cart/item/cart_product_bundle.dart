@@ -93,7 +93,7 @@ class _BundleOfferTag extends StatelessWidget {
             width: 8,
           ),
           Text(
-            'Bundle offer'.tr(),
+            context.tr('Bundle offer'),
             style: Theme.of(context)
                 .textTheme
                 .labelSmall
@@ -134,7 +134,7 @@ class _BundleDetailsSection extends StatelessWidget {
                     ),
               ),
               Text(
-                '${'Total quantity: '.tr()}${context.read<CartBloc>().state.getTotalQuantityOfProductBundle(bundleCode: cartItem.bundle.bundleCode)}',
+                '${context.tr('Total quantity: ')}${context.read<CartBloc>().state.getTotalQuantityOfProductBundle(bundleCode: cartItem.bundle.bundleCode)}',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -154,7 +154,7 @@ class _BundleDetailsSection extends StatelessWidget {
           RichText(
             text: TextSpan(
               text:
-                  '${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate} per item ',
+                  '${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate} ${context.tr('per item')}',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.neutralsBlack,
                     decoration: TextDecoration.none,
@@ -162,7 +162,7 @@ class _BundleDetailsSection extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   text:
-                      '${currentBundleOffer.type.getValue()} ${cartItem.bundle.bundleInformation.firstOrNull?.rate} per item',
+                      '${currentBundleOffer.type.getValue()} ${cartItem.bundle.bundleInformation.firstOrNull?.rate} ${context.tr('per item')}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ZPColors.darkGray,
                         decoration: TextDecoration.lineThrough,
@@ -172,7 +172,7 @@ class _BundleDetailsSection extends StatelessWidget {
             ),
           ),
           Text(
-            'Purchase ${currentBundleOffer.quantity} or more for ${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate} per item',
+            '${context.tr('Purchase')} ${currentBundleOffer.quantity} ${context.tr('or more for')} ${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate} ${context.tr('per item')}',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -470,7 +470,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
               child: Column(
                 children: [
                   Text(
-                    'Remove item from bundle?'.tr(),
+                    context.tr('Remove item from bundle?'),
                     style: Theme.of(context)
                         .textTheme
                         .labelLarge
@@ -480,8 +480,9 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
                     height: 8,
                   ),
                   Text(
-                    'Removing items from the bundle may result in price changes.'
-                        .tr(),
+                    context.tr(
+                      'Removing items from the bundle may result in price changes.',
+                    ),
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: ZPColors.extraLightGrey4,
                         ),
@@ -550,7 +551,7 @@ class _ConfirmButton extends StatelessWidget {
                   ),
                 ),
             child: Text(
-              'Cancel'.tr(),
+              context.tr('Cancel'),
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: ZPColors.primary,
                   ),
@@ -580,7 +581,7 @@ class _ConfirmButton extends StatelessWidget {
                   ),
                 ),
             child: Text(
-              'Remove'.tr(),
+              context.tr('Remove'),
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: ZPColors.white,
                   ),
@@ -607,7 +608,7 @@ class _BundleSubTotalSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Bundle subtotal:'.tr(),
+            context.tr('Bundle subtotal:'),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w400,
                   fontSize: 12,

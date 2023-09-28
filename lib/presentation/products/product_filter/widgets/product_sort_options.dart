@@ -9,7 +9,7 @@ class _ProductSortOptions extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Sort by'.tr(),
+          context.tr('Sort by'),
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: ZPColors.neutralsBlack,
               ),
@@ -23,7 +23,7 @@ class _ProductSortOptions extends StatelessWidget {
                 .map(
                   (e) => RadioListTile(
                     title: Text(
-                      e.title,
+                      context.tr(e.title),
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             color: ZPColors.neutralsBlack,
                           ),

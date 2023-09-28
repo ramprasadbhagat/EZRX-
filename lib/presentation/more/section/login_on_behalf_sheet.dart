@@ -77,7 +77,7 @@ class LoginOnBehalfSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Log in on behalf'.tr(),
+                  context.tr('Login on behalf'),
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge
@@ -89,7 +89,7 @@ class LoginOnBehalfSheet extends StatelessWidget {
                 TextFieldWithLabel(
                   fieldKey: WidgetKeys.proxyLoginUserNameField,
                   mandatory: true,
-                  labelText: 'Username'.tr(),
+                  labelText: context.tr('Username'),
                   isEnabled: !state.isSubmitting,
                   inputFormatters: [
                     TextInputFormatter.withFunction(
@@ -104,13 +104,13 @@ class LoginOnBehalfSheet extends StatelessWidget {
                       ),
                   validator: (value) => Username(value ?? '').value.fold(
                         (f) => f.maybeMap(
-                          empty: (_) => 'Username cannot be empty.'.tr(),
+                          empty: (_) => context.tr('Username cannot be empty.'),
                           orElse: () => null,
                         ),
                         (_) => null,
                       ),
                   decoration: InputDecoration(
-                    hintText: 'Enter username'.tr(),
+                    hintText: context.tr('Enter username'),
                   ),
                 ),
                 const SizedBox(

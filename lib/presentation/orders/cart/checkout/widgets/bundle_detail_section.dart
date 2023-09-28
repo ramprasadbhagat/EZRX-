@@ -36,7 +36,7 @@ class _BundleDetailsSection extends StatelessWidget {
           RichText(
             text: TextSpan(
               text:
-                  '${currentBundleOffer.type.getOrDefaultValue('')} ${currentBundleOffer.rate} per item ',
+                  '${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate}  ${context.tr('per item')}',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.neutralsBlack,
                     decoration: TextDecoration.none,
@@ -44,7 +44,7 @@ class _BundleDetailsSection extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   text:
-                      '${currentBundleOffer.type.getOrDefaultValue('')} ${cartItem.bundle.bundleInformation.firstOrNull?.rate} per item',
+                      '${currentBundleOffer.type.getOrDefaultValue('')} ${cartItem.bundle.bundleInformation.firstOrNull?.rate} ${context.tr('per item')}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ZPColors.darkGray,
                         decoration: TextDecoration.lineThrough,
@@ -54,7 +54,7 @@ class _BundleDetailsSection extends StatelessWidget {
             ),
           ),
           Text(
-            'Purchase ${currentBundleOffer.quantity} or more for ${currentBundleOffer.type.getOrDefaultValue('')} ${currentBundleOffer.rate} per item',
+            '${context.tr('Purchase')} ${currentBundleOffer.quantity} ${context.tr('or more for')} ${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate} ${context.tr('per item')}',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(

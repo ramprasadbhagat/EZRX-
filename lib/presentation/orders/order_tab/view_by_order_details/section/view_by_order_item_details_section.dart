@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
@@ -75,13 +76,13 @@ class OrderItemDetailsSection extends StatelessWidget {
                             isQuantityRequired: false,
                             statusTag: e.orderDetailBonusTag,
                             headerText:
-                                'Batch ${e.batch}\n(EXP: ${e.expiryDate.dateString})',
+                                '${context.tr('Batch')} ${e.batch}\n(${context.tr('EXP')}: ${e.expiryDate.dateString})',
                             subtitle: '',
                             footerWidget: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Qty: ${e.qty}',
+                                  '${context.tr('Qty')}: ${e.qty}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall

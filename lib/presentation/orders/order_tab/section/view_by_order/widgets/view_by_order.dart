@@ -55,7 +55,7 @@ class _ViewByOrder extends StatelessWidget {
                   PriceComponent(
                     salesOrgConfig: salesOrgConfigs,
                     price: viewByOrderHistoryItem.orderValue.toString(),
-                    title: 'Order total : ',
+                    title: context.tr('Order total : '),
                     priceLabelStyle:
                         Theme.of(context).textTheme.titleSmall?.copyWith(
                               color: ZPColors.darkGray,
