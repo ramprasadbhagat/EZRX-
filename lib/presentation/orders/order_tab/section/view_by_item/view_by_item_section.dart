@@ -66,7 +66,7 @@ class ViewByItemsPage extends StatelessWidget {
           onRefresh: () {
             context
                 .read<ViewByItemFilterBloc>()
-                .add(const ViewByItemFilterEvent.initializeOrReset());
+                .add(const ViewByItemFilterEvent.initialize());
             context.read<ViewByItemsBloc>().add(
                   ViewByItemsEvent.fetch(
                     viewByItemFilter: ViewByItemFilter.empty(),

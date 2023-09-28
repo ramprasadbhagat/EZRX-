@@ -2,8 +2,7 @@ part of 'outstanding_invoice_filter_bloc.dart';
 
 @freezed
 class OutstandingInvoiceFilterEvent with _$OutstandingInvoiceFilterEvent {
-  const factory OutstandingInvoiceFilterEvent.initializeOrResetFilters() =
-      _InitializeOrResetFilters;
+  const factory OutstandingInvoiceFilterEvent.initialize() = _Initialize;
   const factory OutstandingInvoiceFilterEvent.updateFilterToLastApplied({
     required OutstandingInvoiceFilter lastAppliedFilter,
   }) = _UpdateFiltersToLastApplied;
@@ -25,4 +24,5 @@ class OutstandingInvoiceFilterEvent with _$OutstandingInvoiceFilterEvent {
   }) = _SetOutstandingInvoiceStatus;
   const factory OutstandingInvoiceFilterEvent.setValidationFailure() =
       _SetValidationFailure;
+  const factory OutstandingInvoiceFilterEvent.resetFilters() = _ResetFilters;
 }

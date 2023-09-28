@@ -303,7 +303,7 @@ class _FromDocumentDateFilter extends StatelessWidget {
                 context.read<AllCreditsFilterBloc>();
             final documentDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime(1900),
               lastDate: DateTime.now(),
               initialDateRange: state.filter.getDocumentDateFilterDateRange,
             );
@@ -397,10 +397,10 @@ class _ResetButton extends StatelessWidget {
         key: WidgetKeys.filterResetButton,
         onPressed: () {
           if (context.read<AllCreditsFilterBloc>().state.filter.excludeSearch !=
-              AllCreditsFilter.empty()) {
+              AllCreditsFilter.dateRangeEmpty()) {
             context.read<AllCreditsBloc>().add(
                   AllCreditsEvent.fetch(
-                    appliedFilter: AllCreditsFilter.empty().copyWith(
+                    appliedFilter: AllCreditsFilter.dateRangeEmpty().copyWith(
                       searchKey: context
                           .read<AllCreditsBloc>()
                           .state

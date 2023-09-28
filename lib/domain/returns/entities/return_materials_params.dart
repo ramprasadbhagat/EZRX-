@@ -25,7 +25,7 @@ class ReturnMaterialsParams with _$ReturnMaterialsParams {
         soldToInfo: '',
         pageSize: 0,
         offset: 0,
-        filter: ReturnItemsFilter.empty(),
+        filter: ReturnItemsFilter.defaultDateRange(),
         searchKey: SearchKey(''),
       );
 }

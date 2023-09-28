@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
@@ -50,8 +51,14 @@ void main() {
     end: DateTime.parse('2023-07-14 18:34:09.177884'),
     start: DateTime.parse('2023-07-07 18:34:09.181722'),
   );
-  final viewByItemFilter =
-      ViewByItemFilter.empty().copyWith(dateRange: dateTimeRange);
+  final viewByItemFilter = ViewByItemFilter.empty().copyWith(
+    orderDateFrom: DateTimeStringValue(
+      getDateStringByDateTime(dateTimeRange.start),
+    ),
+    orderDateTo: DateTimeStringValue(
+      getDateStringByDateTime(dateTimeRange.end),
+    ),
+  );
 
   const offSet = 0;
   group('Orders View By Item', () {

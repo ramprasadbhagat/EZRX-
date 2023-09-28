@@ -12,11 +12,11 @@ class _ResetButton extends StatelessWidget {
             key: WidgetKeys.filterResetButton,
             onPressed: () {
               if (context.read<ReturnItemsFilterBloc>().state.filter !=
-                  ReturnItemsFilter.empty()) {
+                  ReturnItemsFilter.defaultDateRange()) {
                 final eligibilityState = context.read<EligibilityBloc>().state;
                 context.read<ReturnItemsBloc>().add(
                       ReturnItemsEvent.fetch(
-                        appliedFilter: ReturnItemsFilter.empty(),
+                        appliedFilter: ReturnItemsFilter.defaultDateRange(),
                         salesOrganisation: context
                             .read<SalesOrgBloc>()
                             .state

@@ -20,7 +20,7 @@ class AvailableCreditFilterBloc
     Emitter<AvailableCreditFilterState> emit,
   ) async {
     await event.map(
-      initializeOrResetFilters: (e) async => emit(
+      initialize: (e) async => emit(
         AvailableCreditFilterState.initial(),
       ),
       setDocumentDate: (e) async => emit(
@@ -59,6 +59,11 @@ class AvailableCreditFilterBloc
         state.copyWith(
           filter: e.lastAppliedFilter,
           showErrorMessage: false,
+        ),
+      ),
+      resetFilters: (e) async => emit(
+        AvailableCreditFilterState.initial().copyWith(
+          filter: AvailableCreditFilter.dateRangeEmpty(),
         ),
       ),
     );

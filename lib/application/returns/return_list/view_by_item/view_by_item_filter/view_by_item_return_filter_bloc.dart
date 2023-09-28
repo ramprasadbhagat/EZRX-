@@ -20,7 +20,7 @@ class ViewByItemReturnFilterBloc
     Emitter<ViewByItemReturnFilterState> emit,
   ) async {
     await event.map(
-      initializeOrResetFilters: (e) async => emit(
+      initialize: (e) async => emit(
         ViewByItemReturnFilterState.initial(),
       ),
       setReturnDate: (e) async => emit(
@@ -71,6 +71,11 @@ class ViewByItemReturnFilterBloc
         state.copyWith(
           filter: e.lastAppliedFilter,
           showErrorMessage: false,
+        ),
+      ),
+      resetFilters: (e) async => emit(
+        ViewByItemReturnFilterState.initial().copyWith(
+          filter: ReturnFilter.dateRangeEmpty(),
         ),
       ),
     );

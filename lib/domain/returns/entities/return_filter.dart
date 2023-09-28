@@ -35,6 +35,14 @@ class ReturnFilter with _$ReturnFilter {
         returnStatusList: <StatusType>[],
       );
 
+  factory ReturnFilter.dateRangeEmpty() => ReturnFilter(
+        returnDateFrom: DateTimeStringValue(''),
+        returnDateTo: DateTimeStringValue(''),
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
+        returnStatusList: <StatusType>[],
+      );
+
   DateTimeRange get getReturnDateFilterDateRange => DateTimeRange(
         start: returnDateFrom.dateTime,
         end: returnDateTo.dateTime,

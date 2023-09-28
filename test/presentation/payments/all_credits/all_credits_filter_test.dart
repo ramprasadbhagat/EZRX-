@@ -285,7 +285,7 @@ void main() {
         () {
           allCreditsBlocMock.add(
             AllCreditsEvent.fetch(
-              appliedFilter: AllCreditsFilter.empty(),
+              appliedFilter: AllCreditsFilter.dateRangeEmpty(),
             ),
           );
         },

@@ -49,11 +49,11 @@ void main() {
 
   group('ViewByItemReturnFilterBloc', () {
     blocTest(
-      ' -> initializeOrResetFilters',
+      ' -> initialize',
       build: () => ViewByItemReturnFilterBloc(),
       act: (ViewByItemReturnFilterBloc bloc) {
         bloc.add(
-          const ViewByItemReturnFilterEvent.initializeOrResetFilters(),
+          const ViewByItemReturnFilterEvent.initialize(),
         );
       },
       expect: () => [ViewByItemReturnFilterState.initial()],

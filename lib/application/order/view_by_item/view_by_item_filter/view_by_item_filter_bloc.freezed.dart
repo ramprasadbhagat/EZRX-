@@ -18,57 +18,63 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ViewByItemFilterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrReset,
+    required TResult Function() initialize,
     required TResult Function(ViewByItemFilter lastAppliedFilter)
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function() resetFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrReset,
+    TResult? Function()? initialize,
     TResult? Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function()? resetFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrReset,
+    TResult Function()? initialize,
     TResult Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function()? resetFilter,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initializeOrReset,
+    required TResult Function(_Initialized value) initialize,
     required TResult Function(_ResetFiltersToLastApplied value)
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_ResetFilter value) resetFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initializeOrReset,
+    TResult? Function(_Initialized value)? initialize,
     TResult? Function(_ResetFiltersToLastApplied value)?
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_ResetFilter value)? resetFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initializeOrReset,
+    TResult Function(_Initialized value)? initialize,
     TResult Function(_ResetFiltersToLastApplied value)?
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,7 +122,7 @@ class _$_Initialized implements _Initialized {
 
   @override
   String toString() {
-    return 'ViewByItemFilterEvent.initializeOrReset()';
+    return 'ViewByItemFilterEvent.initialize()';
   }
 
   @override
@@ -131,39 +137,42 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrReset,
+    required TResult Function() initialize,
     required TResult Function(ViewByItemFilter lastAppliedFilter)
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function() resetFilter,
   }) {
-    return initializeOrReset();
+    return initialize();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrReset,
+    TResult? Function()? initialize,
     TResult? Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function()? resetFilter,
   }) {
-    return initializeOrReset?.call();
+    return initialize?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrReset,
+    TResult Function()? initialize,
     TResult Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
-    if (initializeOrReset != null) {
-      return initializeOrReset();
+    if (initialize != null) {
+      return initialize();
     }
     return orElse();
   }
@@ -171,39 +180,42 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initializeOrReset,
+    required TResult Function(_Initialized value) initialize,
     required TResult Function(_ResetFiltersToLastApplied value)
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_ResetFilter value) resetFilter,
   }) {
-    return initializeOrReset(this);
+    return initialize(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initializeOrReset,
+    TResult? Function(_Initialized value)? initialize,
     TResult? Function(_ResetFiltersToLastApplied value)?
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_ResetFilter value)? resetFilter,
   }) {
-    return initializeOrReset?.call(this);
+    return initialize?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initializeOrReset,
+    TResult Function(_Initialized value)? initialize,
     TResult Function(_ResetFiltersToLastApplied value)?
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
-    if (initializeOrReset != null) {
-      return initializeOrReset(this);
+    if (initialize != null) {
+      return initialize(this);
     }
     return orElse();
   }
@@ -292,11 +304,12 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrReset,
+    required TResult Function() initialize,
     required TResult Function(ViewByItemFilter lastAppliedFilter)
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function() resetFilter,
   }) {
     return resetFiltersToLastApplied(lastAppliedFilter);
   }
@@ -304,11 +317,12 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrReset,
+    TResult? Function()? initialize,
     TResult? Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function()? resetFilter,
   }) {
     return resetFiltersToLastApplied?.call(lastAppliedFilter);
   }
@@ -316,11 +330,12 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrReset,
+    TResult Function()? initialize,
     TResult Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
     if (resetFiltersToLastApplied != null) {
@@ -332,11 +347,12 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initializeOrReset,
+    required TResult Function(_Initialized value) initialize,
     required TResult Function(_ResetFiltersToLastApplied value)
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_ResetFilter value) resetFilter,
   }) {
     return resetFiltersToLastApplied(this);
   }
@@ -344,11 +360,12 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initializeOrReset,
+    TResult? Function(_Initialized value)? initialize,
     TResult? Function(_ResetFiltersToLastApplied value)?
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_ResetFilter value)? resetFilter,
   }) {
     return resetFiltersToLastApplied?.call(this);
   }
@@ -356,11 +373,12 @@ class _$_ResetFiltersToLastApplied implements _ResetFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initializeOrReset,
+    TResult Function(_Initialized value)? initialize,
     TResult Function(_ResetFiltersToLastApplied value)?
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
     if (resetFiltersToLastApplied != null) {
@@ -446,11 +464,12 @@ class _$_SetOrderDate implements _SetOrderDate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrReset,
+    required TResult Function() initialize,
     required TResult Function(ViewByItemFilter lastAppliedFilter)
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function() resetFilter,
   }) {
     return setOrderDate(dateRange);
   }
@@ -458,11 +477,12 @@ class _$_SetOrderDate implements _SetOrderDate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrReset,
+    TResult? Function()? initialize,
     TResult? Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function()? resetFilter,
   }) {
     return setOrderDate?.call(dateRange);
   }
@@ -470,11 +490,12 @@ class _$_SetOrderDate implements _SetOrderDate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrReset,
+    TResult Function()? initialize,
     TResult Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
     if (setOrderDate != null) {
@@ -486,11 +507,12 @@ class _$_SetOrderDate implements _SetOrderDate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initializeOrReset,
+    required TResult Function(_Initialized value) initialize,
     required TResult Function(_ResetFiltersToLastApplied value)
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_ResetFilter value) resetFilter,
   }) {
     return setOrderDate(this);
   }
@@ -498,11 +520,12 @@ class _$_SetOrderDate implements _SetOrderDate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initializeOrReset,
+    TResult? Function(_Initialized value)? initialize,
     TResult? Function(_ResetFiltersToLastApplied value)?
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_ResetFilter value)? resetFilter,
   }) {
     return setOrderDate?.call(this);
   }
@@ -510,11 +533,12 @@ class _$_SetOrderDate implements _SetOrderDate {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initializeOrReset,
+    TResult Function(_Initialized value)? initialize,
     TResult Function(_ResetFiltersToLastApplied value)?
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
     if (setOrderDate != null) {
@@ -606,11 +630,12 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrReset,
+    required TResult Function() initialize,
     required TResult Function(ViewByItemFilter lastAppliedFilter)
         resetFiltersToLastApplied,
     required TResult Function(DateTimeRange dateRange) setOrderDate,
     required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function() resetFilter,
   }) {
     return setOrderStatus(status, value);
   }
@@ -618,11 +643,12 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrReset,
+    TResult? Function()? initialize,
     TResult? Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult? Function(DateTimeRange dateRange)? setOrderDate,
     TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function()? resetFilter,
   }) {
     return setOrderStatus?.call(status, value);
   }
@@ -630,11 +656,12 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrReset,
+    TResult Function()? initialize,
     TResult Function(ViewByItemFilter lastAppliedFilter)?
         resetFiltersToLastApplied,
     TResult Function(DateTimeRange dateRange)? setOrderDate,
     TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function()? resetFilter,
     required TResult orElse(),
   }) {
     if (setOrderStatus != null) {
@@ -646,11 +673,12 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initializeOrReset,
+    required TResult Function(_Initialized value) initialize,
     required TResult Function(_ResetFiltersToLastApplied value)
         resetFiltersToLastApplied,
     required TResult Function(_SetOrderDate value) setOrderDate,
     required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_ResetFilter value) resetFilter,
   }) {
     return setOrderStatus(this);
   }
@@ -658,11 +686,12 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initializeOrReset,
+    TResult? Function(_Initialized value)? initialize,
     TResult? Function(_ResetFiltersToLastApplied value)?
         resetFiltersToLastApplied,
     TResult? Function(_SetOrderDate value)? setOrderDate,
     TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_ResetFilter value)? resetFilter,
   }) {
     return setOrderStatus?.call(this);
   }
@@ -670,11 +699,12 @@ class _$_SetOrderStatus implements _SetOrderStatus {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initializeOrReset,
+    TResult Function(_Initialized value)? initialize,
     TResult Function(_ResetFiltersToLastApplied value)?
         resetFiltersToLastApplied,
     TResult Function(_SetOrderDate value)? setOrderDate,
     TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_ResetFilter value)? resetFilter,
     required TResult orElse(),
   }) {
     if (setOrderStatus != null) {
@@ -694,6 +724,132 @@ abstract class _SetOrderStatus implements ViewByItemFilterEvent {
   @JsonKey(ignore: true)
   _$$_SetOrderStatusCopyWith<_$_SetOrderStatus> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ResetFilterCopyWith<$Res> {
+  factory _$$_ResetFilterCopyWith(
+          _$_ResetFilter value, $Res Function(_$_ResetFilter) then) =
+      __$$_ResetFilterCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ResetFilterCopyWithImpl<$Res>
+    extends _$ViewByItemFilterEventCopyWithImpl<$Res, _$_ResetFilter>
+    implements _$$_ResetFilterCopyWith<$Res> {
+  __$$_ResetFilterCopyWithImpl(
+      _$_ResetFilter _value, $Res Function(_$_ResetFilter) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ResetFilter implements _ResetFilter {
+  const _$_ResetFilter();
+
+  @override
+  String toString() {
+    return 'ViewByItemFilterEvent.resetFilter()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ResetFilter);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(ViewByItemFilter lastAppliedFilter)
+        resetFiltersToLastApplied,
+    required TResult Function(DateTimeRange dateRange) setOrderDate,
+    required TResult Function(StatusType status, bool value) setOrderStatus,
+    required TResult Function() resetFilter,
+  }) {
+    return resetFilter();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(ViewByItemFilter lastAppliedFilter)?
+        resetFiltersToLastApplied,
+    TResult? Function(DateTimeRange dateRange)? setOrderDate,
+    TResult? Function(StatusType status, bool value)? setOrderStatus,
+    TResult? Function()? resetFilter,
+  }) {
+    return resetFilter?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(ViewByItemFilter lastAppliedFilter)?
+        resetFiltersToLastApplied,
+    TResult Function(DateTimeRange dateRange)? setOrderDate,
+    TResult Function(StatusType status, bool value)? setOrderStatus,
+    TResult Function()? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (resetFilter != null) {
+      return resetFilter();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialize,
+    required TResult Function(_ResetFiltersToLastApplied value)
+        resetFiltersToLastApplied,
+    required TResult Function(_SetOrderDate value) setOrderDate,
+    required TResult Function(_SetOrderStatus value) setOrderStatus,
+    required TResult Function(_ResetFilter value) resetFilter,
+  }) {
+    return resetFilter(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialize,
+    TResult? Function(_ResetFiltersToLastApplied value)?
+        resetFiltersToLastApplied,
+    TResult? Function(_SetOrderDate value)? setOrderDate,
+    TResult? Function(_SetOrderStatus value)? setOrderStatus,
+    TResult? Function(_ResetFilter value)? resetFilter,
+  }) {
+    return resetFilter?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialize,
+    TResult Function(_ResetFiltersToLastApplied value)?
+        resetFiltersToLastApplied,
+    TResult Function(_SetOrderDate value)? setOrderDate,
+    TResult Function(_SetOrderStatus value)? setOrderStatus,
+    TResult Function(_ResetFilter value)? resetFilter,
+    required TResult orElse(),
+  }) {
+    if (resetFilter != null) {
+      return resetFilter(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResetFilter implements ViewByItemFilterEvent {
+  const factory _ResetFilter() = _$_ResetFilter;
 }
 
 /// @nodoc

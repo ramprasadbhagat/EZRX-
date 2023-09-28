@@ -15,5 +15,5 @@ class AvailableCreditFilterState with _$AvailableCreditFilterState {
       );
 
   AvailableCreditFilter get emptyAvailableCreditFilter =>
-      AvailableCreditFilter.empty();
+      AvailableCreditFilter.dateRangeEmpty();
 }

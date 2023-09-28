@@ -13,11 +13,13 @@ class ReturnItemsFilter with _$ReturnItemsFilter {
     required DateTimeStringValue invoiceDateTo,
   }) = _ReturnItemsFilter;
 
-  factory ReturnItemsFilter.empty() => ReturnItemsFilter(
+  factory ReturnItemsFilter.defaultDateRange() => ReturnItemsFilter(
         invoiceDateFrom: DateTimeStringValue(
           getDateStringByDateTime(
-            DateTime.now().subtract(
-              const Duration(days: 30),
+            DateTime(
+              DateTime.now().year,
+              DateTime.now().month - 6,
+              DateTime.now().day,
             ),
           ),
         ),

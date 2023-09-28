@@ -356,7 +356,7 @@ void main() {
       verify(
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
-            appliedFilter: AllInvoicesFilter.empty(),
+            appliedFilter: AllInvoicesFilter.dateRangeEmpty(),
           ),
         ),
       ).called(1);

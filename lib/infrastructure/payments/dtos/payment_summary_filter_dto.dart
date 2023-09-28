@@ -51,13 +51,13 @@ class PaymentSummaryFilterDto with _$PaymentSummaryFilterDto {
       _$PaymentSummaryFilterDtoFromJson(json);
 
   List<Map<String, String>> get toMapList => <Map<String, String>>[
-        if (createdDateFrom.isNotEmpty)
+        if (createdDateFrom.isNotEmpty && createdDateFrom != '-')
           {
             'field': 'createdDate',
             'value': createdDateFrom,
             'type': 'ge',
           },
-        if (createdDateTo.isNotEmpty)
+        if (createdDateTo.isNotEmpty && createdDateTo != '-')
           {
             'field': 'createdDate',
             'value': createdDateTo,

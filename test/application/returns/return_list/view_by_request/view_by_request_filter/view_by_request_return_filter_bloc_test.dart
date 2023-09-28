@@ -45,10 +45,10 @@ void main() {
     'Return Summary Filter Bloc',
     () {
       blocTest(
-        'Initialize Or ResetFilters',
+        'Initialize',
         build: () => ViewByRequestReturnFilterBloc(),
         act: (ViewByRequestReturnFilterBloc bloc) => bloc.add(
-          const ViewByRequestReturnFilterEvent.initializeOrResetFilters(),
+          const ViewByRequestReturnFilterEvent.initialize(),
         ),
         expect: () => [
           ViewByRequestReturnFilterState.initial(),

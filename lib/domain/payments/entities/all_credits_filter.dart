@@ -36,6 +36,15 @@ class AllCreditsFilter with _$AllCreditsFilter {
         searchKey: SearchKey(''),
       );
 
+  factory AllCreditsFilter.dateRangeEmpty() => AllCreditsFilter(
+        documentDateFrom: DateTimeStringValue(''),
+        documentDateTo: DateTimeStringValue(''),
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
+        filterStatuses: <String>[],
+        searchKey: SearchKey(''),
+      );
+
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(
         start: documentDateFrom.dateTime,
         end: documentDateTo.dateTime,

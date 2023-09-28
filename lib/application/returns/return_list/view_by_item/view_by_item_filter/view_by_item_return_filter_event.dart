@@ -2,8 +2,7 @@ part of 'view_by_item_return_filter_bloc.dart';
 
 @freezed
 class ViewByItemReturnFilterEvent with _$ViewByItemReturnFilterEvent {
-  const factory ViewByItemReturnFilterEvent.initializeOrResetFilters() =
-      _InitializeOrResetFilters;
+  const factory ViewByItemReturnFilterEvent.initialize() = _Initialize;
   const factory ViewByItemReturnFilterEvent.updateFilterToLastApplied({
     required ReturnFilter lastAppliedFilter,
   }) = _UpdateFiltersToLastApplied;
@@ -22,4 +21,5 @@ class ViewByItemReturnFilterEvent with _$ViewByItemReturnFilterEvent {
   }) = _SetReturnStatus;
   const factory ViewByItemReturnFilterEvent.setValidationFailure() =
       _SetValidationFailure;
+  const factory ViewByItemReturnFilterEvent.resetFilters() = _ResetFilters;
 }

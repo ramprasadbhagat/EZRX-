@@ -17,19 +17,25 @@ class _ToOrderDateFilter extends StatelessWidget {
               context: context,
               firstDate: DateTime.now().subtract(const Duration(days: 180)),
               lastDate: DateTime.now(),
-              initialDateRange: state.filter.dateRange,
+              initialDateRange: state.filter.getOrderDateFilterDateRange,
             );
             if (documentDateRange == null) return;
             viewByOrderFilterBloc.add(
               ViewByOrderFilterEvent.setDateRange(
-                ViewByOrdersFilter.empty()
-                    .copyWith(dateRange: documentDateRange),
+                ViewByOrdersFilter.empty().copyWith(
+                  orderDateFrom: DateTimeStringValue(
+                    getDateStringByDateTime(documentDateRange.start),
+                  ),
+                  orderDateTo: DateTimeStringValue(
+                    getDateStringByDateTime(documentDateRange.end),
+                  ),
+                ),
               ),
             );
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.filter.toDate.dateString,
+            text: state.filter.orderDateTo.dateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(

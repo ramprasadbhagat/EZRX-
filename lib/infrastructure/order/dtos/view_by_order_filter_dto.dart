@@ -23,8 +23,8 @@ class ViewByOrdersFilterDto with _$ViewByOrdersFilterDto {
     ViewByOrdersFilter viewByOrdersFilter,
   ) {
     return ViewByOrdersFilterDto(
-      dateTo: viewByOrdersFilter.toDate.apiDateTimeString,
-      dateFrom: viewByOrdersFilter.fromDate.apiDateTimeString,
+      dateTo: viewByOrdersFilter.orderDateTo.apiDateTimeString,
+      dateFrom: viewByOrdersFilter.orderDateFrom.apiDateTimeString,
     );
   }
 

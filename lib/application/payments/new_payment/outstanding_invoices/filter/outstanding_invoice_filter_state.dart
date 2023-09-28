@@ -21,5 +21,5 @@ class OutstandingInvoiceFilterState with _$OutstandingInvoiceFilterState {
       );
 
   OutstandingInvoiceFilter get emptyOutstandingInvoiceFilter =>
-      OutstandingInvoiceFilter.empty();
+      OutstandingInvoiceFilter.dateRangeEmpty();
 }

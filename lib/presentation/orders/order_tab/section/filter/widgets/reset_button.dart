@@ -9,7 +9,7 @@ class _ResetButton extends StatelessWidget {
       child: OutlinedButton(
         key: WidgetKeys.filterResetButton,
         onPressed: () => Navigator.of(context).pop(
-          ViewByOrdersFilter.empty(),
+          ViewByOrdersFilter.dateRangeEmpty(),
         ),
         child: Text(
           context.tr('Reset'),

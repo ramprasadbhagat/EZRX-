@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ViewByOrdersFilter {
-  DateTimeRange get dateRange => throw _privateConstructorUsedError;
+  DateTimeStringValue get orderDateFrom => throw _privateConstructorUsedError;
+  DateTimeStringValue get orderDateTo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByOrdersFilterCopyWith<ViewByOrdersFilter> get copyWith =>
@@ -29,7 +30,8 @@ abstract class $ViewByOrdersFilterCopyWith<$Res> {
           ViewByOrdersFilter value, $Res Function(ViewByOrdersFilter) then) =
       _$ViewByOrdersFilterCopyWithImpl<$Res, ViewByOrdersFilter>;
   @useResult
-  $Res call({DateTimeRange dateRange});
+  $Res call(
+      {DateTimeStringValue orderDateFrom, DateTimeStringValue orderDateTo});
 }
 
 /// @nodoc
@@ -45,13 +47,18 @@ class _$ViewByOrdersFilterCopyWithImpl<$Res, $Val extends ViewByOrdersFilter>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dateRange = null,
+    Object? orderDateFrom = null,
+    Object? orderDateTo = null,
   }) {
     return _then(_value.copyWith(
-      dateRange: null == dateRange
-          ? _value.dateRange
-          : dateRange // ignore: cast_nullable_to_non_nullable
-              as DateTimeRange,
+      orderDateFrom: null == orderDateFrom
+          ? _value.orderDateFrom
+          : orderDateFrom // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      orderDateTo: null == orderDateTo
+          ? _value.orderDateTo
+          : orderDateTo // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
     ) as $Val);
   }
 }
@@ -65,7 +72,8 @@ abstract class _$$_ViewByOrderHistoryFilterCopyWith<$Res>
       __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({DateTimeRange dateRange});
+  $Res call(
+      {DateTimeStringValue orderDateFrom, DateTimeStringValue orderDateTo});
 }
 
 /// @nodoc
@@ -79,13 +87,18 @@ class __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dateRange = null,
+    Object? orderDateFrom = null,
+    Object? orderDateTo = null,
   }) {
     return _then(_$_ViewByOrderHistoryFilter(
-      dateRange: null == dateRange
-          ? _value.dateRange
-          : dateRange // ignore: cast_nullable_to_non_nullable
-              as DateTimeRange,
+      orderDateFrom: null == orderDateFrom
+          ? _value.orderDateFrom
+          : orderDateFrom // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
+      orderDateTo: null == orderDateTo
+          ? _value.orderDateTo
+          : orderDateTo // ignore: cast_nullable_to_non_nullable
+              as DateTimeStringValue,
     ));
   }
 }
@@ -93,14 +106,18 @@ class __$$_ViewByOrderHistoryFilterCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
-  _$_ViewByOrderHistoryFilter({required this.dateRange}) : super._();
+  _$_ViewByOrderHistoryFilter(
+      {required this.orderDateFrom, required this.orderDateTo})
+      : super._();
 
   @override
-  final DateTimeRange dateRange;
+  final DateTimeStringValue orderDateFrom;
+  @override
+  final DateTimeStringValue orderDateTo;
 
   @override
   String toString() {
-    return 'ViewByOrdersFilter(dateRange: $dateRange)';
+    return 'ViewByOrdersFilter(orderDateFrom: $orderDateFrom, orderDateTo: $orderDateTo)';
   }
 
   @override
@@ -108,12 +125,14 @@ class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ViewByOrderHistoryFilter &&
-            (identical(other.dateRange, dateRange) ||
-                other.dateRange == dateRange));
+            (identical(other.orderDateFrom, orderDateFrom) ||
+                other.orderDateFrom == orderDateFrom) &&
+            (identical(other.orderDateTo, orderDateTo) ||
+                other.orderDateTo == orderDateTo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, dateRange);
+  int get hashCode => Object.hash(runtimeType, orderDateFrom, orderDateTo);
 
   @JsonKey(ignore: true)
   @override
@@ -124,12 +143,16 @@ class _$_ViewByOrderHistoryFilter extends _ViewByOrderHistoryFilter {
 }
 
 abstract class _ViewByOrderHistoryFilter extends ViewByOrdersFilter {
-  factory _ViewByOrderHistoryFilter({required final DateTimeRange dateRange}) =
+  factory _ViewByOrderHistoryFilter(
+          {required final DateTimeStringValue orderDateFrom,
+          required final DateTimeStringValue orderDateTo}) =
       _$_ViewByOrderHistoryFilter;
   _ViewByOrderHistoryFilter._() : super._();
 
   @override
-  DateTimeRange get dateRange;
+  DateTimeStringValue get orderDateFrom;
+  @override
+  DateTimeStringValue get orderDateTo;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByOrderHistoryFilterCopyWith<_$_ViewByOrderHistoryFilter>

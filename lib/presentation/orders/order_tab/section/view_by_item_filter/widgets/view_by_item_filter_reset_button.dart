@@ -9,7 +9,7 @@ class _ViewByItemFilterResetButton extends StatelessWidget {
       key: WidgetKeys.filterResetButton,
       onPressed: () {
         context.read<ViewByItemFilterBloc>().add(
-              const ViewByItemFilterEvent.initializeOrReset(),
+              const ViewByItemFilterEvent.resetFilter(),
             );
         Navigator.of(context).pop(
           context.read<ViewByItemFilterBloc>().state.emptyViewByItemFilter,

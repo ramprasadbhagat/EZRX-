@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
@@ -51,12 +52,14 @@ void main() {
   final searchKey = SearchKey('fake-key');
   final fakeFromDate = DateTime.parse('2023-07-12 15:56:56.01');
   final fakeToDate = DateTime.parse('2023-07-19 15:56:56.02');
-  final dateTimeRange = DateTimeRange(
-    start: fakeFromDate,
-    end: fakeToDate,
+  final viewByOrdersFilter = ViewByOrdersFilter.empty().copyWith(
+    orderDateFrom: DateTimeStringValue(
+      getDateStringByDateTime(fakeFromDate),
+    ),
+    orderDateTo: DateTimeStringValue(
+      getDateStringByDateTime(fakeToDate),
+    ),
   );
-  final viewByOrdersFilter =
-      ViewByOrdersFilter.empty().copyWith(dateRange: dateTimeRange);
 
   const offSet = 0;
   group('Orders View By Order', () {

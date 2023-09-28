@@ -323,7 +323,7 @@ class _FromDocumentDateFilter extends StatelessWidget {
                 context.read<AllInvoicesFilterBloc>();
             final documentDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime(1900),
               lastDate: DateTime.now(),
               initialDateRange: state.filter.getDocumentDateFilterDateRange,
             );
@@ -425,7 +425,7 @@ class _FromDueDateFilter extends StatelessWidget {
                 context.read<AllInvoicesFilterBloc>();
             final dueDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime(1900),
               lastDate: DateTime.now(),
               initialDateRange: state.filter.getDueDateFilterDateRange,
             );
@@ -525,10 +525,11 @@ class _ResetButton extends StatelessWidget {
                       .state
                       .filter
                       .excludeSearch !=
-                  AllInvoicesFilter.empty()) {
+                  AllInvoicesFilter.dateRangeEmpty()) {
                 context.read<AllInvoicesBloc>().add(
                       AllInvoicesEvent.fetch(
-                        appliedFilter: AllInvoicesFilter.empty().copyWith(
+                        appliedFilter:
+                            AllInvoicesFilter.dateRangeEmpty().copyWith(
                           searchKey: context
                               .read<AllInvoicesBloc>()
                               .state

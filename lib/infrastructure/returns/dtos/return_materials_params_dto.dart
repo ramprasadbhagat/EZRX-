@@ -60,6 +60,8 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
   factory ReturnMaterialsParamsDto.fromJson(Map<String, dynamic> json) =>
       _$ReturnMaterialsParamsDtoFromJson(json);
 
-  Map<String, dynamic> toMap() => {...toJson(), ...filter.toJson()}
-    ..removeWhere((key, value) => value is String && value.isEmpty);
+  Map<String, dynamic> toMap() =>
+      {...toJson(), ...filter.toJson()}..removeWhere(
+          (key, value) => value is String && (value.isEmpty || value == '-'),
+        );
 }

@@ -39,6 +39,16 @@ class OutstandingInvoiceFilter with _$OutstandingInvoiceFilter {
         outstandingInvoiceStatus: StatusType(''),
       );
 
+  factory OutstandingInvoiceFilter.dateRangeEmpty() => OutstandingInvoiceFilter(
+        documentDateFrom: DateTimeStringValue(''),
+        documentDateTo: DateTimeStringValue(''),
+        dueDateFrom: DateTimeStringValue(''),
+        dueDateTo: DateTimeStringValue(''),
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
+        outstandingInvoiceStatus: StatusType(''),
+      );
+
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(
         start: documentDateFrom.dateTime,
         end: documentDateTo.dateTime,

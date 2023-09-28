@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ViewByItemReturnFilterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrResetFilters,
+    required TResult Function() initialize,
     required TResult Function(ReturnFilter lastAppliedFilter)
         updateFilterToLastApplied,
     required TResult Function(DateTimeRange returnDateRange) setReturnDate,
@@ -26,11 +26,12 @@ mixin _$ViewByItemReturnFilterEvent {
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
     required TResult Function() setValidationFailure,
+    required TResult Function() resetFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrResetFilters,
+    TResult? Function()? initialize,
     TResult? Function(ReturnFilter lastAppliedFilter)?
         updateFilterToLastApplied,
     TResult? Function(DateTimeRange returnDateRange)? setReturnDate,
@@ -38,24 +39,25 @@ mixin _$ViewByItemReturnFilterEvent {
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
     TResult? Function()? setValidationFailure,
+    TResult? Function()? resetFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrResetFilters,
+    TResult Function()? initialize,
     TResult Function(ReturnFilter lastAppliedFilter)? updateFilterToLastApplied,
     TResult Function(DateTimeRange returnDateRange)? setReturnDate,
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
     TResult Function()? setValidationFailure,
+    TResult Function()? resetFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeOrResetFilters value)
-        initializeOrResetFilters,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_UpdateFiltersToLastApplied value)
         updateFilterToLastApplied,
     required TResult Function(_SetReturnDate value) setReturnDate,
@@ -63,12 +65,12 @@ mixin _$ViewByItemReturnFilterEvent {
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeOrResetFilters value)?
-        initializeOrResetFilters,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult? Function(_SetReturnDate value)? setReturnDate,
@@ -76,11 +78,12 @@ mixin _$ViewByItemReturnFilterEvent {
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeOrResetFilters value)? initializeOrResetFilters,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult Function(_SetReturnDate value)? setReturnDate,
@@ -88,6 +91,7 @@ mixin _$ViewByItemReturnFilterEvent {
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -115,38 +119,35 @@ class _$ViewByItemReturnFilterEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializeOrResetFiltersCopyWith<$Res> {
-  factory _$$_InitializeOrResetFiltersCopyWith(
-          _$_InitializeOrResetFilters value,
-          $Res Function(_$_InitializeOrResetFilters) then) =
-      __$$_InitializeOrResetFiltersCopyWithImpl<$Res>;
+abstract class _$$_InitializeCopyWith<$Res> {
+  factory _$$_InitializeCopyWith(
+          _$_Initialize value, $Res Function(_$_Initialize) then) =
+      __$$_InitializeCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializeOrResetFiltersCopyWithImpl<$Res>
-    extends _$ViewByItemReturnFilterEventCopyWithImpl<$Res,
-        _$_InitializeOrResetFilters>
-    implements _$$_InitializeOrResetFiltersCopyWith<$Res> {
-  __$$_InitializeOrResetFiltersCopyWithImpl(_$_InitializeOrResetFilters _value,
-      $Res Function(_$_InitializeOrResetFilters) _then)
+class __$$_InitializeCopyWithImpl<$Res>
+    extends _$ViewByItemReturnFilterEventCopyWithImpl<$Res, _$_Initialize>
+    implements _$$_InitializeCopyWith<$Res> {
+  __$$_InitializeCopyWithImpl(
+      _$_Initialize _value, $Res Function(_$_Initialize) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_InitializeOrResetFilters implements _InitializeOrResetFilters {
-  const _$_InitializeOrResetFilters();
+class _$_Initialize implements _Initialize {
+  const _$_Initialize();
 
   @override
   String toString() {
-    return 'ViewByItemReturnFilterEvent.initializeOrResetFilters()';
+    return 'ViewByItemReturnFilterEvent.initialize()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_InitializeOrResetFilters);
+        (other.runtimeType == runtimeType && other is _$_Initialize);
   }
 
   @override
@@ -155,7 +156,7 @@ class _$_InitializeOrResetFilters implements _InitializeOrResetFilters {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrResetFilters,
+    required TResult Function() initialize,
     required TResult Function(ReturnFilter lastAppliedFilter)
         updateFilterToLastApplied,
     required TResult Function(DateTimeRange returnDateRange) setReturnDate,
@@ -163,14 +164,15 @@ class _$_InitializeOrResetFilters implements _InitializeOrResetFilters {
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
     required TResult Function() setValidationFailure,
+    required TResult Function() resetFilters,
   }) {
-    return initializeOrResetFilters();
+    return initialize();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrResetFilters,
+    TResult? Function()? initialize,
     TResult? Function(ReturnFilter lastAppliedFilter)?
         updateFilterToLastApplied,
     TResult? Function(DateTimeRange returnDateRange)? setReturnDate,
@@ -178,24 +180,26 @@ class _$_InitializeOrResetFilters implements _InitializeOrResetFilters {
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
     TResult? Function()? setValidationFailure,
+    TResult? Function()? resetFilters,
   }) {
-    return initializeOrResetFilters?.call();
+    return initialize?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrResetFilters,
+    TResult Function()? initialize,
     TResult Function(ReturnFilter lastAppliedFilter)? updateFilterToLastApplied,
     TResult Function(DateTimeRange returnDateRange)? setReturnDate,
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
     TResult Function()? setValidationFailure,
+    TResult Function()? resetFilters,
     required TResult orElse(),
   }) {
-    if (initializeOrResetFilters != null) {
-      return initializeOrResetFilters();
+    if (initialize != null) {
+      return initialize();
     }
     return orElse();
   }
@@ -203,8 +207,7 @@ class _$_InitializeOrResetFilters implements _InitializeOrResetFilters {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeOrResetFilters value)
-        initializeOrResetFilters,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_UpdateFiltersToLastApplied value)
         updateFilterToLastApplied,
     required TResult Function(_SetReturnDate value) setReturnDate,
@@ -212,15 +215,15 @@ class _$_InitializeOrResetFilters implements _InitializeOrResetFilters {
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
-    return initializeOrResetFilters(this);
+    return initialize(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeOrResetFilters value)?
-        initializeOrResetFilters,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult? Function(_SetReturnDate value)? setReturnDate,
@@ -228,14 +231,15 @@ class _$_InitializeOrResetFilters implements _InitializeOrResetFilters {
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
-    return initializeOrResetFilters?.call(this);
+    return initialize?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeOrResetFilters value)? initializeOrResetFilters,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult Function(_SetReturnDate value)? setReturnDate,
@@ -243,18 +247,18 @@ class _$_InitializeOrResetFilters implements _InitializeOrResetFilters {
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
-    if (initializeOrResetFilters != null) {
-      return initializeOrResetFilters(this);
+    if (initialize != null) {
+      return initialize(this);
     }
     return orElse();
   }
 }
 
-abstract class _InitializeOrResetFilters
-    implements ViewByItemReturnFilterEvent {
-  const factory _InitializeOrResetFilters() = _$_InitializeOrResetFilters;
+abstract class _Initialize implements ViewByItemReturnFilterEvent {
+  const factory _Initialize() = _$_Initialize;
 }
 
 /// @nodoc
@@ -336,7 +340,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrResetFilters,
+    required TResult Function() initialize,
     required TResult Function(ReturnFilter lastAppliedFilter)
         updateFilterToLastApplied,
     required TResult Function(DateTimeRange returnDateRange) setReturnDate,
@@ -344,6 +348,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
     required TResult Function() setValidationFailure,
+    required TResult Function() resetFilters,
   }) {
     return updateFilterToLastApplied(lastAppliedFilter);
   }
@@ -351,7 +356,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrResetFilters,
+    TResult? Function()? initialize,
     TResult? Function(ReturnFilter lastAppliedFilter)?
         updateFilterToLastApplied,
     TResult? Function(DateTimeRange returnDateRange)? setReturnDate,
@@ -359,6 +364,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
     TResult? Function()? setValidationFailure,
+    TResult? Function()? resetFilters,
   }) {
     return updateFilterToLastApplied?.call(lastAppliedFilter);
   }
@@ -366,13 +372,14 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrResetFilters,
+    TResult Function()? initialize,
     TResult Function(ReturnFilter lastAppliedFilter)? updateFilterToLastApplied,
     TResult Function(DateTimeRange returnDateRange)? setReturnDate,
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
     TResult Function()? setValidationFailure,
+    TResult Function()? resetFilters,
     required TResult orElse(),
   }) {
     if (updateFilterToLastApplied != null) {
@@ -384,8 +391,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeOrResetFilters value)
-        initializeOrResetFilters,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_UpdateFiltersToLastApplied value)
         updateFilterToLastApplied,
     required TResult Function(_SetReturnDate value) setReturnDate,
@@ -393,6 +399,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return updateFilterToLastApplied(this);
   }
@@ -400,8 +407,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeOrResetFilters value)?
-        initializeOrResetFilters,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult? Function(_SetReturnDate value)? setReturnDate,
@@ -409,6 +415,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return updateFilterToLastApplied?.call(this);
   }
@@ -416,7 +423,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeOrResetFilters value)? initializeOrResetFilters,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult Function(_SetReturnDate value)? setReturnDate,
@@ -424,6 +431,7 @@ class _$_UpdateFiltersToLastApplied implements _UpdateFiltersToLastApplied {
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (updateFilterToLastApplied != null) {
@@ -510,7 +518,7 @@ class _$_SetReturnDate implements _SetReturnDate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrResetFilters,
+    required TResult Function() initialize,
     required TResult Function(ReturnFilter lastAppliedFilter)
         updateFilterToLastApplied,
     required TResult Function(DateTimeRange returnDateRange) setReturnDate,
@@ -518,6 +526,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
     required TResult Function() setValidationFailure,
+    required TResult Function() resetFilters,
   }) {
     return setReturnDate(returnDateRange);
   }
@@ -525,7 +534,7 @@ class _$_SetReturnDate implements _SetReturnDate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrResetFilters,
+    TResult? Function()? initialize,
     TResult? Function(ReturnFilter lastAppliedFilter)?
         updateFilterToLastApplied,
     TResult? Function(DateTimeRange returnDateRange)? setReturnDate,
@@ -533,6 +542,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
     TResult? Function()? setValidationFailure,
+    TResult? Function()? resetFilters,
   }) {
     return setReturnDate?.call(returnDateRange);
   }
@@ -540,13 +550,14 @@ class _$_SetReturnDate implements _SetReturnDate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrResetFilters,
+    TResult Function()? initialize,
     TResult Function(ReturnFilter lastAppliedFilter)? updateFilterToLastApplied,
     TResult Function(DateTimeRange returnDateRange)? setReturnDate,
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
     TResult Function()? setValidationFailure,
+    TResult Function()? resetFilters,
     required TResult orElse(),
   }) {
     if (setReturnDate != null) {
@@ -558,8 +569,7 @@ class _$_SetReturnDate implements _SetReturnDate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeOrResetFilters value)
-        initializeOrResetFilters,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_UpdateFiltersToLastApplied value)
         updateFilterToLastApplied,
     required TResult Function(_SetReturnDate value) setReturnDate,
@@ -567,6 +577,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return setReturnDate(this);
   }
@@ -574,8 +585,7 @@ class _$_SetReturnDate implements _SetReturnDate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeOrResetFilters value)?
-        initializeOrResetFilters,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult? Function(_SetReturnDate value)? setReturnDate,
@@ -583,6 +593,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return setReturnDate?.call(this);
   }
@@ -590,7 +601,7 @@ class _$_SetReturnDate implements _SetReturnDate {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeOrResetFilters value)? initializeOrResetFilters,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult Function(_SetReturnDate value)? setReturnDate,
@@ -598,6 +609,7 @@ class _$_SetReturnDate implements _SetReturnDate {
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (setReturnDate != null) {
@@ -682,7 +694,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrResetFilters,
+    required TResult Function() initialize,
     required TResult Function(ReturnFilter lastAppliedFilter)
         updateFilterToLastApplied,
     required TResult Function(DateTimeRange returnDateRange) setReturnDate,
@@ -690,6 +702,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
     required TResult Function() setValidationFailure,
+    required TResult Function() resetFilters,
   }) {
     return setAmountFrom(amountFrom);
   }
@@ -697,7 +710,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrResetFilters,
+    TResult? Function()? initialize,
     TResult? Function(ReturnFilter lastAppliedFilter)?
         updateFilterToLastApplied,
     TResult? Function(DateTimeRange returnDateRange)? setReturnDate,
@@ -705,6 +718,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
     TResult? Function()? setValidationFailure,
+    TResult? Function()? resetFilters,
   }) {
     return setAmountFrom?.call(amountFrom);
   }
@@ -712,13 +726,14 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrResetFilters,
+    TResult Function()? initialize,
     TResult Function(ReturnFilter lastAppliedFilter)? updateFilterToLastApplied,
     TResult Function(DateTimeRange returnDateRange)? setReturnDate,
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
     TResult Function()? setValidationFailure,
+    TResult Function()? resetFilters,
     required TResult orElse(),
   }) {
     if (setAmountFrom != null) {
@@ -730,8 +745,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeOrResetFilters value)
-        initializeOrResetFilters,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_UpdateFiltersToLastApplied value)
         updateFilterToLastApplied,
     required TResult Function(_SetReturnDate value) setReturnDate,
@@ -739,6 +753,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return setAmountFrom(this);
   }
@@ -746,8 +761,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeOrResetFilters value)?
-        initializeOrResetFilters,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult? Function(_SetReturnDate value)? setReturnDate,
@@ -755,6 +769,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return setAmountFrom?.call(this);
   }
@@ -762,7 +777,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeOrResetFilters value)? initializeOrResetFilters,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult Function(_SetReturnDate value)? setReturnDate,
@@ -770,6 +785,7 @@ class _$_SetAmountFrom implements _SetAmountFrom {
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (setAmountFrom != null) {
@@ -854,7 +870,7 @@ class _$_SetAmountTo implements _SetAmountTo {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrResetFilters,
+    required TResult Function() initialize,
     required TResult Function(ReturnFilter lastAppliedFilter)
         updateFilterToLastApplied,
     required TResult Function(DateTimeRange returnDateRange) setReturnDate,
@@ -862,6 +878,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
     required TResult Function() setValidationFailure,
+    required TResult Function() resetFilters,
   }) {
     return setAmountTo(amountTo);
   }
@@ -869,7 +886,7 @@ class _$_SetAmountTo implements _SetAmountTo {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrResetFilters,
+    TResult? Function()? initialize,
     TResult? Function(ReturnFilter lastAppliedFilter)?
         updateFilterToLastApplied,
     TResult? Function(DateTimeRange returnDateRange)? setReturnDate,
@@ -877,6 +894,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
     TResult? Function()? setValidationFailure,
+    TResult? Function()? resetFilters,
   }) {
     return setAmountTo?.call(amountTo);
   }
@@ -884,13 +902,14 @@ class _$_SetAmountTo implements _SetAmountTo {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrResetFilters,
+    TResult Function()? initialize,
     TResult Function(ReturnFilter lastAppliedFilter)? updateFilterToLastApplied,
     TResult Function(DateTimeRange returnDateRange)? setReturnDate,
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
     TResult Function()? setValidationFailure,
+    TResult Function()? resetFilters,
     required TResult orElse(),
   }) {
     if (setAmountTo != null) {
@@ -902,8 +921,7 @@ class _$_SetAmountTo implements _SetAmountTo {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeOrResetFilters value)
-        initializeOrResetFilters,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_UpdateFiltersToLastApplied value)
         updateFilterToLastApplied,
     required TResult Function(_SetReturnDate value) setReturnDate,
@@ -911,6 +929,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return setAmountTo(this);
   }
@@ -918,8 +937,7 @@ class _$_SetAmountTo implements _SetAmountTo {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeOrResetFilters value)?
-        initializeOrResetFilters,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult? Function(_SetReturnDate value)? setReturnDate,
@@ -927,6 +945,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return setAmountTo?.call(this);
   }
@@ -934,7 +953,7 @@ class _$_SetAmountTo implements _SetAmountTo {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeOrResetFilters value)? initializeOrResetFilters,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult Function(_SetReturnDate value)? setReturnDate,
@@ -942,6 +961,7 @@ class _$_SetAmountTo implements _SetAmountTo {
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (setAmountTo != null) {
@@ -1032,7 +1052,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrResetFilters,
+    required TResult Function() initialize,
     required TResult Function(ReturnFilter lastAppliedFilter)
         updateFilterToLastApplied,
     required TResult Function(DateTimeRange returnDateRange) setReturnDate,
@@ -1040,6 +1060,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
     required TResult Function() setValidationFailure,
+    required TResult Function() resetFilters,
   }) {
     return setReturnStatus(status, value);
   }
@@ -1047,7 +1068,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrResetFilters,
+    TResult? Function()? initialize,
     TResult? Function(ReturnFilter lastAppliedFilter)?
         updateFilterToLastApplied,
     TResult? Function(DateTimeRange returnDateRange)? setReturnDate,
@@ -1055,6 +1076,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
     TResult? Function()? setValidationFailure,
+    TResult? Function()? resetFilters,
   }) {
     return setReturnStatus?.call(status, value);
   }
@@ -1062,13 +1084,14 @@ class _$_SetReturnStatus implements _SetReturnStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrResetFilters,
+    TResult Function()? initialize,
     TResult Function(ReturnFilter lastAppliedFilter)? updateFilterToLastApplied,
     TResult Function(DateTimeRange returnDateRange)? setReturnDate,
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
     TResult Function()? setValidationFailure,
+    TResult Function()? resetFilters,
     required TResult orElse(),
   }) {
     if (setReturnStatus != null) {
@@ -1080,8 +1103,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeOrResetFilters value)
-        initializeOrResetFilters,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_UpdateFiltersToLastApplied value)
         updateFilterToLastApplied,
     required TResult Function(_SetReturnDate value) setReturnDate,
@@ -1089,6 +1111,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return setReturnStatus(this);
   }
@@ -1096,8 +1119,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeOrResetFilters value)?
-        initializeOrResetFilters,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult? Function(_SetReturnDate value)? setReturnDate,
@@ -1105,6 +1127,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return setReturnStatus?.call(this);
   }
@@ -1112,7 +1135,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeOrResetFilters value)? initializeOrResetFilters,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult Function(_SetReturnDate value)? setReturnDate,
@@ -1120,6 +1143,7 @@ class _$_SetReturnStatus implements _SetReturnStatus {
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (setReturnStatus != null) {
@@ -1180,7 +1204,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initializeOrResetFilters,
+    required TResult Function() initialize,
     required TResult Function(ReturnFilter lastAppliedFilter)
         updateFilterToLastApplied,
     required TResult Function(DateTimeRange returnDateRange) setReturnDate,
@@ -1188,6 +1212,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     required TResult Function(String amountTo) setAmountTo,
     required TResult Function(StatusType status, bool value) setReturnStatus,
     required TResult Function() setValidationFailure,
+    required TResult Function() resetFilters,
   }) {
     return setValidationFailure();
   }
@@ -1195,7 +1220,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initializeOrResetFilters,
+    TResult? Function()? initialize,
     TResult? Function(ReturnFilter lastAppliedFilter)?
         updateFilterToLastApplied,
     TResult? Function(DateTimeRange returnDateRange)? setReturnDate,
@@ -1203,6 +1228,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     TResult? Function(String amountTo)? setAmountTo,
     TResult? Function(StatusType status, bool value)? setReturnStatus,
     TResult? Function()? setValidationFailure,
+    TResult? Function()? resetFilters,
   }) {
     return setValidationFailure?.call();
   }
@@ -1210,13 +1236,14 @@ class _$_SetValidationFailure implements _SetValidationFailure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initializeOrResetFilters,
+    TResult Function()? initialize,
     TResult Function(ReturnFilter lastAppliedFilter)? updateFilterToLastApplied,
     TResult Function(DateTimeRange returnDateRange)? setReturnDate,
     TResult Function(String amountFrom)? setAmountFrom,
     TResult Function(String amountTo)? setAmountTo,
     TResult Function(StatusType status, bool value)? setReturnStatus,
     TResult Function()? setValidationFailure,
+    TResult Function()? resetFilters,
     required TResult orElse(),
   }) {
     if (setValidationFailure != null) {
@@ -1228,8 +1255,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeOrResetFilters value)
-        initializeOrResetFilters,
+    required TResult Function(_Initialize value) initialize,
     required TResult Function(_UpdateFiltersToLastApplied value)
         updateFilterToLastApplied,
     required TResult Function(_SetReturnDate value) setReturnDate,
@@ -1237,6 +1263,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     required TResult Function(_SetAmountTo value) setAmountTo,
     required TResult Function(_SetReturnStatus value) setReturnStatus,
     required TResult Function(_SetValidationFailure value) setValidationFailure,
+    required TResult Function(_ResetFilters value) resetFilters,
   }) {
     return setValidationFailure(this);
   }
@@ -1244,8 +1271,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeOrResetFilters value)?
-        initializeOrResetFilters,
+    TResult? Function(_Initialize value)? initialize,
     TResult? Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult? Function(_SetReturnDate value)? setReturnDate,
@@ -1253,6 +1279,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     TResult? Function(_SetAmountTo value)? setAmountTo,
     TResult? Function(_SetReturnStatus value)? setReturnStatus,
     TResult? Function(_SetValidationFailure value)? setValidationFailure,
+    TResult? Function(_ResetFilters value)? resetFilters,
   }) {
     return setValidationFailure?.call(this);
   }
@@ -1260,7 +1287,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeOrResetFilters value)? initializeOrResetFilters,
+    TResult Function(_Initialize value)? initialize,
     TResult Function(_UpdateFiltersToLastApplied value)?
         updateFilterToLastApplied,
     TResult Function(_SetReturnDate value)? setReturnDate,
@@ -1268,6 +1295,7 @@ class _$_SetValidationFailure implements _SetValidationFailure {
     TResult Function(_SetAmountTo value)? setAmountTo,
     TResult Function(_SetReturnStatus value)? setReturnStatus,
     TResult Function(_SetValidationFailure value)? setValidationFailure,
+    TResult Function(_ResetFilters value)? resetFilters,
     required TResult orElse(),
   }) {
     if (setValidationFailure != null) {
@@ -1279,6 +1307,149 @@ class _$_SetValidationFailure implements _SetValidationFailure {
 
 abstract class _SetValidationFailure implements ViewByItemReturnFilterEvent {
   const factory _SetValidationFailure() = _$_SetValidationFailure;
+}
+
+/// @nodoc
+abstract class _$$_ResetFiltersCopyWith<$Res> {
+  factory _$$_ResetFiltersCopyWith(
+          _$_ResetFilters value, $Res Function(_$_ResetFilters) then) =
+      __$$_ResetFiltersCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ResetFiltersCopyWithImpl<$Res>
+    extends _$ViewByItemReturnFilterEventCopyWithImpl<$Res, _$_ResetFilters>
+    implements _$$_ResetFiltersCopyWith<$Res> {
+  __$$_ResetFiltersCopyWithImpl(
+      _$_ResetFilters _value, $Res Function(_$_ResetFilters) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ResetFilters implements _ResetFilters {
+  const _$_ResetFilters();
+
+  @override
+  String toString() {
+    return 'ViewByItemReturnFilterEvent.resetFilters()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ResetFilters);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(ReturnFilter lastAppliedFilter)
+        updateFilterToLastApplied,
+    required TResult Function(DateTimeRange returnDateRange) setReturnDate,
+    required TResult Function(String amountFrom) setAmountFrom,
+    required TResult Function(String amountTo) setAmountTo,
+    required TResult Function(StatusType status, bool value) setReturnStatus,
+    required TResult Function() setValidationFailure,
+    required TResult Function() resetFilters,
+  }) {
+    return resetFilters();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(ReturnFilter lastAppliedFilter)?
+        updateFilterToLastApplied,
+    TResult? Function(DateTimeRange returnDateRange)? setReturnDate,
+    TResult? Function(String amountFrom)? setAmountFrom,
+    TResult? Function(String amountTo)? setAmountTo,
+    TResult? Function(StatusType status, bool value)? setReturnStatus,
+    TResult? Function()? setValidationFailure,
+    TResult? Function()? resetFilters,
+  }) {
+    return resetFilters?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(ReturnFilter lastAppliedFilter)? updateFilterToLastApplied,
+    TResult Function(DateTimeRange returnDateRange)? setReturnDate,
+    TResult Function(String amountFrom)? setAmountFrom,
+    TResult Function(String amountTo)? setAmountTo,
+    TResult Function(StatusType status, bool value)? setReturnStatus,
+    TResult Function()? setValidationFailure,
+    TResult Function()? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (resetFilters != null) {
+      return resetFilters();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_UpdateFiltersToLastApplied value)
+        updateFilterToLastApplied,
+    required TResult Function(_SetReturnDate value) setReturnDate,
+    required TResult Function(_SetAmountFrom value) setAmountFrom,
+    required TResult Function(_SetAmountTo value) setAmountTo,
+    required TResult Function(_SetReturnStatus value) setReturnStatus,
+    required TResult Function(_SetValidationFailure value) setValidationFailure,
+    required TResult Function(_ResetFilters value) resetFilters,
+  }) {
+    return resetFilters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_UpdateFiltersToLastApplied value)?
+        updateFilterToLastApplied,
+    TResult? Function(_SetReturnDate value)? setReturnDate,
+    TResult? Function(_SetAmountFrom value)? setAmountFrom,
+    TResult? Function(_SetAmountTo value)? setAmountTo,
+    TResult? Function(_SetReturnStatus value)? setReturnStatus,
+    TResult? Function(_SetValidationFailure value)? setValidationFailure,
+    TResult? Function(_ResetFilters value)? resetFilters,
+  }) {
+    return resetFilters?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_UpdateFiltersToLastApplied value)?
+        updateFilterToLastApplied,
+    TResult Function(_SetReturnDate value)? setReturnDate,
+    TResult Function(_SetAmountFrom value)? setAmountFrom,
+    TResult Function(_SetAmountTo value)? setAmountTo,
+    TResult Function(_SetReturnStatus value)? setReturnStatus,
+    TResult Function(_SetValidationFailure value)? setValidationFailure,
+    TResult Function(_ResetFilters value)? resetFilters,
+    required TResult orElse(),
+  }) {
+    if (resetFilters != null) {
+      return resetFilters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResetFilters implements ViewByItemReturnFilterEvent {
+  const factory _ResetFilters() = _$_ResetFilters;
 }
 
 /// @nodoc

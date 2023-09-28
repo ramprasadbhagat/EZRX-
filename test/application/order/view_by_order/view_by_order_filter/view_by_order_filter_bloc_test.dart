@@ -1,6 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,7 +11,6 @@ void main() {
   late ViewByOrdersFilter viewByOrdersFilter;
   late DateTime fakeStartDate;
   late DateTime fakeEndDate;
-  late DateTimeRange dateTimeRange;
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
   });
@@ -27,10 +28,6 @@ void main() {
           const Duration(days: 60),
         ),
       ),
-    );
-    dateTimeRange = DateTimeRange(
-      start: fakeStartDate,
-      end: fakeEndDate,
     );
   });
   group('View By Order Filter Bloc', () {
@@ -53,7 +50,12 @@ void main() {
         bloc.add(
           ViewByOrderFilterEvent.setDateRange(
             viewByOrdersFilter.copyWith(
-              dateRange: dateTimeRange,
+              orderDateFrom: DateTimeStringValue(
+                getDateStringByDateTime(fakeStartDate),
+              ),
+              orderDateTo: DateTimeStringValue(
+                getDateStringByDateTime(fakeEndDate),
+              ),
             ),
           ),
         );
@@ -61,7 +63,12 @@ void main() {
       expect: () => [
         ViewByOrderFilterState.initial().copyWith(
           filter: viewByOrdersFilter.copyWith(
-            dateRange: dateTimeRange,
+            orderDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(fakeStartDate),
+            ),
+            orderDateTo: DateTimeStringValue(
+              getDateStringByDateTime(fakeEndDate),
+            ),
           ),
         ),
       ],

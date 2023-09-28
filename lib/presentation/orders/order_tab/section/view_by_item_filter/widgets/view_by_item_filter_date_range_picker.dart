@@ -9,11 +9,11 @@ class _ViewByItemFilterDateRangePicker extends StatelessWidget {
       children: [
         BlocBuilder<ViewByItemFilterBloc, ViewByItemFilterState>(
           buildWhen: (previous, current) =>
-              previous.filter.fromDate != current.filter.fromDate,
+              previous.filter.orderDateFrom != current.filter.orderDateFrom,
           builder: (context, state) => Expanded(
             child: _DateField(
               key: WidgetKeys.viewByItemsFilterFromDateKey,
-              displayDate: state.filter.fromDate.dateString,
+              displayDate: state.filter.orderDateFrom.dateString,
             ),
           ),
         ),
@@ -26,11 +26,11 @@ class _ViewByItemFilterDateRangePicker extends StatelessWidget {
         ),
         BlocBuilder<ViewByItemFilterBloc, ViewByItemFilterState>(
           buildWhen: (previous, current) =>
-              previous.filter.toDate != current.filter.toDate,
+              previous.filter.orderDateTo != current.filter.orderDateTo,
           builder: (context, state) => Expanded(
             child: _DateField(
               key: WidgetKeys.viewByItemsFilterToDateKey,
-              displayDate: state.filter.toDate.dateString,
+              displayDate: state.filter.orderDateTo.dateString,
             ),
           ),
         ),
@@ -55,9 +55,14 @@ class _DateField extends StatelessWidget {
         final orderHistoryFilterBloc = context.read<ViewByItemFilterBloc>();
         final orderDateRange = await showDateRangePicker(
           context: context,
-          firstDate: DateTime.now().subtract(const Duration(days: 180)),
+          firstDate: DateTime(
+            DateTime.now().year,
+            DateTime.now().month - 6,
+            DateTime.now().day,
+          ),
           lastDate: DateTime.now(),
-          initialDateRange: orderHistoryFilterBloc.state.filter.dateRange,
+          initialDateRange:
+              orderHistoryFilterBloc.state.filter.getOrderDateFilterDateRange,
         );
         if (orderDateRange == null) return;
         orderHistoryFilterBloc.add(

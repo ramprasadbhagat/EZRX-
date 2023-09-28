@@ -14,11 +14,12 @@ class _PaymentSummaryResetButton extends StatelessWidget {
           child: OutlinedButton(
             key: WidgetKeys.filterResetButton,
             onPressed: () {
-              if (state.appliedFilter != PaymentSummaryFilter.empty() ||
+              if (state.appliedFilter !=
+                      PaymentSummaryFilter.dateRangeEmpty() ||
                   state.searchKey != SearchKey.searchFilter('')) {
                 context.read<PaymentSummaryBloc>().add(
                       PaymentSummaryEvent.fetch(
-                        appliedFilter: PaymentSummaryFilter.empty(),
+                        appliedFilter: PaymentSummaryFilter.dateRangeEmpty(),
                         searchKey: SearchKey.searchFilter(''),
                       ),
                     );

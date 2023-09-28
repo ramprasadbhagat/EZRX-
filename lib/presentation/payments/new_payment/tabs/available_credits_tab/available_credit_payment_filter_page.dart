@@ -166,7 +166,7 @@ class _FromDateFilter extends StatelessWidget {
                   context.read<AvailableCreditFilterBloc>();
               final dateRange = await showDateRangePicker(
                 context: context,
-                firstDate: DateTime.now().subtract(const Duration(days: 365)),
+                firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
                 initialDateRange: state.filter.getDocumentDateFilterDateRange,
               );
@@ -354,7 +354,7 @@ class _ResetButton extends StatelessWidget {
         key: WidgetKeys.filterResetButton,
         onPressed: () {
           context.read<AvailableCreditFilterBloc>().add(
-                const AvailableCreditFilterEvent.initializeOrResetFilters(),
+                const AvailableCreditFilterEvent.resetFilters(),
               );
           Navigator.of(context).pop(
             context

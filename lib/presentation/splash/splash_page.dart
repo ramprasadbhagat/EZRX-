@@ -920,7 +920,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
     context
         .read<ViewByItemFilterBloc>()
-        .add(const ViewByItemFilterEvent.initializeOrReset());
+        .add(const ViewByItemFilterEvent.initialize());
     context.read<AccountSummaryBloc>().add(
           const AccountSummaryEvent.initialize(),
         );

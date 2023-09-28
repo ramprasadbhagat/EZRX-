@@ -220,7 +220,7 @@ class _FromDateFilter extends StatelessWidget {
                   context.read<OutstandingInvoiceFilterBloc>();
               final dateRange = await showDateRangePicker(
                 context: context,
-                firstDate: DateTime(DateTime.now().year - 10, 1, 1),
+                firstDate: DateTime(1900),
                 lastDate: isDue
                     ? DateTime.now().add(const Duration(days: 365))
                     : DateTime.now(),
@@ -483,7 +483,7 @@ class _ResetButton extends StatelessWidget {
         key: WidgetKeys.filterResetButton,
         onPressed: () {
           context.read<OutstandingInvoiceFilterBloc>().add(
-                const OutstandingInvoiceFilterEvent.initializeOrResetFilters(),
+                const OutstandingInvoiceFilterEvent.resetFilters(),
               );
           Navigator.of(context).pop(
             context

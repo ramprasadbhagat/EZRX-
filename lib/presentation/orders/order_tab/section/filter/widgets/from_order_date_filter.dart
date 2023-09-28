@@ -15,21 +15,31 @@ class _FromOrderDateFilter extends StatelessWidget {
             final viewByOrderFilterBloc = context.read<ViewByOrderFilterBloc>();
             final documentDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 180)),
+              firstDate: DateTime(
+                DateTime.now().year,
+                DateTime.now().month - 6,
+                DateTime.now().day,
+              ),
               lastDate: DateTime.now(),
-              initialDateRange: state.filter.dateRange,
+              initialDateRange: state.filter.getOrderDateFilterDateRange,
             );
             if (documentDateRange == null) return;
             viewByOrderFilterBloc.add(
               ViewByOrderFilterEvent.setDateRange(
-                ViewByOrdersFilter.empty()
-                    .copyWith(dateRange: documentDateRange),
+                ViewByOrdersFilter.empty().copyWith(
+                  orderDateFrom: DateTimeStringValue(
+                    getDateStringByDateTime(documentDateRange.start),
+                  ),
+                  orderDateTo: DateTimeStringValue(
+                    getDateStringByDateTime(documentDateRange.end),
+                  ),
+                ),
               ),
             );
           },
           readOnly: true,
           controller: TextEditingController(
-            text: state.filter.fromDate.dateString,
+            text: state.filter.orderDateFrom.dateString,
           ),
           decoration: InputDecoration(
             suffixIcon: const Padding(

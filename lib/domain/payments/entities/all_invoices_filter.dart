@@ -50,6 +50,17 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
         searchKey: SearchKey(''),
       );
 
+  factory AllInvoicesFilter.dateRangeEmpty() => AllInvoicesFilter(
+        dueDateFrom: DateTimeStringValue(''),
+        dueDateTo: DateTimeStringValue(''),
+        documentDateFrom: DateTimeStringValue(''),
+        documentDateTo: DateTimeStringValue(''),
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
+        filterStatuses: <String>[],
+        searchKey: SearchKey(''),
+      );
+
   AllInvoicesFilter get excludeSearch => copyWith(
         searchKey: SearchKey(''),
       );

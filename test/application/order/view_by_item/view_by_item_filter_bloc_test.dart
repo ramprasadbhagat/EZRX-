@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,7 +22,7 @@ void main() {
   );
 
   final statusList = <StatusType>[
-   StatusType('Order created'),
+    StatusType('Order created'),
     StatusType('Pending'),
     StatusType('Order packed and ready for delivery'),
     StatusType('Picking in-progress'),
@@ -34,10 +35,10 @@ void main() {
     'Order View By Item Filter Bloc',
     () {
       blocTest<ViewByItemFilterBloc, ViewByItemFilterState>(
-        'Test Initialized Or Reset',
+        'Test Initialized',
         build: () => ViewByItemFilterBloc(),
         act: (bloc) => bloc.add(
-          const ViewByItemFilterEvent.initializeOrReset(),
+          const ViewByItemFilterEvent.initialize(),
         ),
         expect: () => [
           ViewByItemFilterState.initial(),
@@ -58,9 +59,11 @@ void main() {
         expect: () => [
           ViewByItemFilterState.initial().copyWith(
             filter: ViewByItemFilter.empty().copyWith(
-              dateRange: DateTimeRange(
-                start: fakeStartDate,
-                end: fakeEndDate,
+              orderDateFrom: DateTimeStringValue(
+                getDateStringByDateTime(fakeStartDate),
+              ),
+              orderDateTo: DateTimeStringValue(
+                getDateStringByDateTime(fakeEndDate),
               ),
             ),
           ),
@@ -148,9 +151,11 @@ void main() {
                   StatusType('Order created'),
                   StatusType('Picking in-progress'),
                 ],
-                dateRange: DateTimeRange(
-                  start: fakeStartDate,
-                  end: fakeEndDate,
+                orderDateFrom: DateTimeStringValue(
+                  getDateStringByDateTime(fakeStartDate),
+                ),
+                orderDateTo: DateTimeStringValue(
+                  getDateStringByDateTime(fakeEndDate),
                 ),
               ),
             ),
@@ -163,9 +168,11 @@ void main() {
                 StatusType('Order created'),
                 StatusType('Picking in-progress'),
               ],
-              dateRange: DateTimeRange(
-                start: fakeStartDate,
-                end: fakeEndDate,
+              orderDateFrom: DateTimeStringValue(
+                getDateStringByDateTime(fakeStartDate),
+              ),
+              orderDateTo: DateTimeStringValue(
+                getDateStringByDateTime(fakeEndDate),
               ),
             ),
           ),
@@ -181,7 +188,7 @@ void main() {
               viewByItemFilterState.emptyViewByItemFilter;
           expect(
             getemptyViewByItemFilter,
-            ViewByItemFilter.empty(),
+            ViewByItemFilter.dateRangeEmpty(),
           );
         },
       );

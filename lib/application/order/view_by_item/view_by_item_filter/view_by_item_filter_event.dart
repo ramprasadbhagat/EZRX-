@@ -2,7 +2,7 @@ part of 'view_by_item_filter_bloc.dart';
 
 @freezed
 class ViewByItemFilterEvent with _$ViewByItemFilterEvent {
-  const factory ViewByItemFilterEvent.initializeOrReset() = _Initialized;
+  const factory ViewByItemFilterEvent.initialize() = _Initialized;
   const factory ViewByItemFilterEvent.resetFiltersToLastApplied({
     required ViewByItemFilter lastAppliedFilter,
   }) = _ResetFiltersToLastApplied;
@@ -13,4 +13,5 @@ class ViewByItemFilterEvent with _$ViewByItemFilterEvent {
     required StatusType status,
     required bool value,
   }) = _SetOrderStatus;
+  const factory ViewByItemFilterEvent.resetFilter() = _ResetFilter;
 }

@@ -21,7 +21,7 @@ class OutstandingInvoiceFilterBloc
     Emitter<OutstandingInvoiceFilterState> emit,
   ) async {
     await event.map(
-      initializeOrResetFilters: (e) async => emit(
+      initialize: (e) async => emit(
         OutstandingInvoiceFilterState.initial(),
       ),
       setDocumentDate: (e) async => emit(
@@ -81,6 +81,11 @@ class OutstandingInvoiceFilterBloc
         state.copyWith(
           filter: e.lastAppliedFilter,
           showErrorMessage: false,
+        ),
+      ),
+      resetFilters: (e) async => emit(
+        OutstandingInvoiceFilterState.initial().copyWith(
+          filter: OutstandingInvoiceFilter.dateRangeEmpty(),
         ),
       ),
     );

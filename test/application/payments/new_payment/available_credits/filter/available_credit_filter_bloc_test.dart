@@ -13,10 +13,9 @@ void main() {
     'Available_Credit_Filter_Bloc Test => ',
     () {
       blocTest<AvailableCreditFilterBloc, AvailableCreditFilterState>(
-        'For "initializeOrResetFilters" Event',
+        'For "initialize" Event',
         build: () => AvailableCreditFilterBloc(),
-        act: (bloc) => bloc
-            .add(const AvailableCreditFilterEvent.initializeOrResetFilters()),
+        act: (bloc) => bloc.add(const AvailableCreditFilterEvent.initialize()),
         expect: () => [AvailableCreditFilterState.initial()],
       );
 

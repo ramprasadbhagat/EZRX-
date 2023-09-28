@@ -72,31 +72,30 @@ class AllInvoicesFilterDto with _$AllInvoicesFilterDto {
           'field': 'accountingDocumentType',
           'value': 'Invoice',
         },
-        if (documentDateFrom.isNotEmpty)
+        if (documentDateFrom.isNotEmpty && documentDateFrom != '-')
           {
             'field': 'documentDate',
             'value': documentDateFrom,
             'type': 'ge',
           },
-        if (documentDateTo.isNotEmpty)
+        if (documentDateTo.isNotEmpty && documentDateTo != '-')
           {
             'field': 'documentDate',
             'value': documentDateTo,
             'type': 'le',
           },
-        if (dueDateFrom.isNotEmpty)
+        if (dueDateFrom.isNotEmpty && dueDateFrom != '-')
           {
             'field': 'netDueDate',
             'value': dueDateFrom,
             'type': 'ge',
           },
-        if (dueDateTo.isNotEmpty)
+        if (dueDateTo.isNotEmpty && dueDateTo != '-')
           {
             'field': 'netDueDate',
             'value': dueDateTo,
             'type': 'le',
           },
-          
         if (amountValueFrom.isNotEmpty)
           {
             'field': 'amountInTransactionCurrency',

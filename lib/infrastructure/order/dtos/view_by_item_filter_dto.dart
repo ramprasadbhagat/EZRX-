@@ -29,11 +29,10 @@ class ViewByItemFilterDto with _$ViewByItemFilterDto {
     ViewByItemFilter viewByItemFilter,
   ) {
     return ViewByItemFilterDto(
-      orderStatus: viewByItemFilter.orderStatusList
-          .map((e) => e.getOrCrash())
-          .toList(),
-      dateTo: viewByItemFilter.toDate.apiDateTimeString,
-      dateFrom: viewByItemFilter.fromDate.apiDateTimeString,
+      orderStatus:
+          viewByItemFilter.orderStatusList.map((e) => e.getOrCrash()).toList(),
+      dateTo: viewByItemFilter.orderDateTo.apiDateTimeString,
+      dateFrom: viewByItemFilter.orderDateFrom.apiDateTimeString,
     );
   }
 

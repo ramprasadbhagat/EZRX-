@@ -254,7 +254,7 @@ class _FromRequestDateFilter extends StatelessWidget {
                   context.read<ViewByRequestReturnFilterBloc>();
               final returnDateRange = await showDateRangePicker(
                 context: context,
-                firstDate: DateTime.now().subtract(const Duration(days: 365)),
+                firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
                 initialDateRange: state.filter.getReturnDateFilterDateRange,
               );
@@ -402,10 +402,10 @@ class _ResetButton extends StatelessWidget {
         key: WidgetKeys.filterResetButton,
         onPressed: () {
           context.read<ViewByRequestReturnFilterBloc>().add(
-                const ViewByRequestReturnFilterEvent.initializeOrResetFilters(),
+                const ViewByRequestReturnFilterEvent.resetFilters(),
               );
           Navigator.of(context).pop(
-            ReturnFilter.empty(),
+            ReturnFilter.dateRangeEmpty(),
           );
         },
         child: Text(

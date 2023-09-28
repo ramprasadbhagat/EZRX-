@@ -40,11 +40,11 @@ void main() {
   group('Outstanding Invoice Filter Bloc', () {
     ///TODO: The getter emptyOutstandingInvoiceFilter needs to be covered in the widget tests
     blocTest(
-      'Initialize Or Reset Filters',
+      'Initialize',
       build: () => OutstandingInvoiceFilterBloc(),
       act: (OutstandingInvoiceFilterBloc bloc) {
         bloc.add(
-          const OutstandingInvoiceFilterEvent.initializeOrResetFilters(),
+          const OutstandingInvoiceFilterEvent.initialize(),
         );
       },
       expect: () => [

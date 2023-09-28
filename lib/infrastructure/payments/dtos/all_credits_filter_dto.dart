@@ -60,13 +60,13 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
           'field': 'accountingDocumentType',
           'value': 'Credit Memo',
         },
-        if (documentDateFrom.isNotEmpty)
+        if (documentDateFrom.isNotEmpty && documentDateFrom != '-')
           {
             'field': 'documentDate',
             'value': documentDateFrom,
             'type': 'ge',
           },
-        if (documentDateTo.isNotEmpty)
+        if (documentDateTo.isNotEmpty && documentDateTo != '-')
           {
             'field': 'documentDate',
             'value': documentDateTo,

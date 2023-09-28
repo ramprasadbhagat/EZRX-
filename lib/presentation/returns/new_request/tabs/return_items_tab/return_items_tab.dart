@@ -112,7 +112,7 @@ class ReturnItemsTab extends StatelessWidget {
                                 .read<CustomerCodeBloc>()
                                 .state
                                 .shipToInfo,
-                            appliedFilter: ReturnItemsFilter.empty(),
+                            appliedFilter: ReturnItemsFilter.defaultDateRange(),
                             searchKey: state.searchKey,
                           ),
                         );

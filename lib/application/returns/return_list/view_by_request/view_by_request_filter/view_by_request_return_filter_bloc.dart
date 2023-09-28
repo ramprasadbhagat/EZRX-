@@ -21,7 +21,7 @@ class ViewByRequestReturnFilterBloc extends Bloc<ViewByRequestReturnFilterEvent,
     Emitter<ViewByRequestReturnFilterState> emit,
   ) async {
     await event.map(
-      initializeOrResetFilters: (e) async => emit(
+      initialize: (e) async => emit(
         ViewByRequestReturnFilterState.initial(),
       ),
       setReturnDate: (e) async => emit(
@@ -72,6 +72,11 @@ class ViewByRequestReturnFilterBloc extends Bloc<ViewByRequestReturnFilterEvent,
       setValidationFailure: (_) async => emit(
         state.copyWith(
           showErrorMessage: !state.filter.isReturnAmountValueRangeValid,
+        ),
+      ),
+      resetFilters: (e) async => emit(
+        ViewByRequestReturnFilterState.initial().copyWith(
+          filter: ReturnFilter.dateRangeEmpty(),
         ),
       ),
     );

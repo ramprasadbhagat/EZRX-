@@ -34,6 +34,14 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
         filterStatuses: <StatusType>[],
       );
 
+  factory PaymentSummaryFilter.dateRangeEmpty() => PaymentSummaryFilter(
+        createdDateFrom: DateTimeStringValue(''),
+        createdDateTo: DateTimeStringValue(''),
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
+        filterStatuses: <StatusType>[],
+      );
+
   DateTimeRange get getCreatedDateFilterDateRange => DateTimeRange(
         start: createdDateFrom.dateTime,
         end: createdDateTo.dateTime,

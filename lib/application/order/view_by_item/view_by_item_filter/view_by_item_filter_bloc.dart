@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,13 +22,18 @@ class ViewByItemFilterBloc
     Emitter<ViewByItemFilterState> emit,
   ) async {
     await event.map(
-      initializeOrReset: (e) async => emit(
+      initialize: (e) async => emit(
         ViewByItemFilterState.initial(),
       ),
       setOrderDate: (e) async => emit(
         state.copyWith(
           filter: state.filter.copyWith(
-            dateRange: e.dateRange,
+            orderDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(e.dateRange.start),
+            ),
+            orderDateTo: DateTimeStringValue(
+              getDateStringByDateTime(e.dateRange.end),
+            ),
           ),
         ),
       ),
@@ -47,6 +53,11 @@ class ViewByItemFilterBloc
       resetFiltersToLastApplied: (e) async => emit(
         state.copyWith(
           filter: e.lastAppliedFilter,
+        ),
+      ),
+      resetFilter: (e) async => emit(
+        ViewByItemFilterState.initial().copyWith(
+          filter: ViewByItemFilter.dateRangeEmpty(),
         ),
       ),
     );

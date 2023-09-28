@@ -2,8 +2,7 @@ part of 'available_credit_filter_bloc.dart';
 
 @freezed
 class AvailableCreditFilterEvent with _$AvailableCreditFilterEvent {
-  const factory AvailableCreditFilterEvent.initializeOrResetFilters() =
-      _InitializeOrResetFilters;
+  const factory AvailableCreditFilterEvent.initialize() = _Initialize;
   const factory AvailableCreditFilterEvent.updateFilterToLastApplied({
     required AvailableCreditFilter lastAppliedFilter,
   }) = _UpdateFiltersToLastApplied;
@@ -18,4 +17,5 @@ class AvailableCreditFilterEvent with _$AvailableCreditFilterEvent {
   }) = _SetAmountTo;
   const factory AvailableCreditFilterEvent.setValidationFailure() =
       _SetValidationFailure;
+  const factory AvailableCreditFilterEvent.resetFilters() = _ResetFilters;
 }

@@ -33,6 +33,13 @@ class AvailableCreditFilter with _$AvailableCreditFilter {
         amountValueTo: RangeValue(''),
       );
 
+  factory AvailableCreditFilter.dateRangeEmpty() => AvailableCreditFilter(
+        documentDateFrom: DateTimeStringValue(''),
+        documentDateTo: DateTimeStringValue(''),
+        amountValueFrom: RangeValue(''),
+        amountValueTo: RangeValue(''),
+      );
+
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(
         start: documentDateFrom.dateTime,
         end: documentDateTo.dateTime,
