@@ -446,6 +446,24 @@ void main() {
       ).called(1);
     });
     group('Filter test-', () {
+      testWidgets('Test filter section when data is empty ', (tester) async {
+        await tester.pumpWidget(getWUT());
+        await tester.pumpAndSettle();
+
+        final filterIcon = find.byIcon(Icons.tune);
+        expect(
+          filterIcon,
+          findsNothing,
+        );
+        final soaFilterbottomSheetFinder = find.byKey(
+          WidgetKeys.soaSearchResultsKey,
+        );
+        expect(
+          soaFilterbottomSheetFinder,
+          findsNothing,
+        );
+      });
+
       testWidgets('bottomSheet ', (tester) async {
         final expectedStates = [
           SoaState.initial().copyWith(

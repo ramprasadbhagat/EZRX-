@@ -5,47 +5,50 @@ class _Filter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        const _FilterButton(),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 6,
-          ),
-          child: BlocBuilder<SoaBloc, SoaState>(
-            buildWhen: (previous, current) =>
-                previous.filterList != current.filterList,
-            builder: (context, state) {
-              return Row(
-                children: [
-                  Text(
-                    context.tr('Search results'),
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 5,
-                    ),
+    return BlocBuilder<SoaBloc, SoaState>(
+      buildWhen: (previous, current) =>
+          previous.filterList != current.filterList,
+      builder: (context, state) {
+        return state.filterList.isNotEmpty
+            ? Column(
+                children: <Widget>[
+                  const _FilterButton(),
+                  Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 5,
-                      vertical: 2,
+                      horizontal: 20,
+                      vertical: 6,
                     ),
-                    decoration: BoxDecoration(
-                      color: ZPColors.paleBlueGray,
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Text(
-                      state.filterList.length.toString(),
-                      style: Theme.of(context).textTheme.labelMedium,
+                    child: Row(
+                      children: [
+                        Text(
+                          context.tr('Search results'),
+                          style: Theme.of(context).textTheme.labelMedium,
+                          key: WidgetKeys.soaSearchResultsKey,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: ZPColors.paleBlueGray,
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          child: Text(
+                            state.filterList.length.toString(),
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
-              );
-            },
-          ),
-        ),
-      ],
+              )
+            : const SizedBox.shrink();
+      },
     );
   }
 }

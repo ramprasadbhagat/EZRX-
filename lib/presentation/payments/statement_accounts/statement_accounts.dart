@@ -81,11 +81,16 @@ class StatementAccountsPage extends StatelessWidget {
                   _Filter(),
                 ],
               ),
-              noRecordFoundWidget: const NoRecordFound(
-                key: WidgetKeys.soaNotFoundRecordKey,
-                title: 'No statements available',
-                subTitle: '',
-                svgImage: SvgImage.emptyOrder,
+              noRecordFoundWidget: Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.06,
+                ),
+                child: const NoRecordFound(
+                  key: WidgetKeys.soaNotFoundRecordKey,
+                  title: 'No statements available',
+                  subTitle: '',
+                  svgImage: SvgImage.emptyOrder,
+                ),
               ),
               controller: _scrollController,
               onRefresh: () => context.read<SoaBloc>().add(
