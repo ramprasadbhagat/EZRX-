@@ -142,6 +142,8 @@ void main() {
           ),
         ),
       );
+      when(() => mockProductImageBloc.state)
+          .thenReturn(ProductImageState.initial());
       when(() => cartBlocMock.state).thenReturn(CartState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -409,6 +411,58 @@ void main() {
           find.byKey(WidgetKeys.balanceTextRow('Grand total', 'MYR .00'));
       expect(subTotalFinder, findsOneWidget);
       expect(grandTotalFinder, findsOneWidget);
+    });
+
+    testWidgets(
+        'test view by order detail item has price not available for PnG',
+        (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            invoiceNumber: StringValue(''),
+            orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+              OrderHistoryDetailsOrderItem.empty().copyWith(
+                principalData: PrincipalData.empty().copyWith(
+                  principalCode: PrincipalCode('0000101308'),
+                  principalName: PrincipalName('PROCTER AND GAMBLE'),
+                ),
+                materialNumber: MaterialNumber('000000000021247719'),
+                unitPrice: ZpPrice('17.2'),
+                totalPrice: TotalPrice('516'),
+                type: OrderItemType('Comm'),
+              )
+            ],
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2001'),
+          ),
+          user: User.empty().copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('external_sales_rep'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final viewByOrderDetailsItemFinder = find.byKey(
+        WidgetKeys.genericKey(
+          key: '0',
+        ),
+      );
+      final priceNotAvailableFinder = find.text(
+        'Price Not Available',
+        findRichText: true,
+      );
+      expect(viewByOrderDetailsItemFinder, findsOneWidget);
+      expect(priceNotAvailableFinder, findsNWidgets(2));
     });
   });
 }

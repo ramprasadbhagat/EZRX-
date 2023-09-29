@@ -42,22 +42,35 @@ class _OrderItems extends StatelessWidget {
                       Column(
                         children: item.viewByOrderItem.map(
                           (e) {
+                            final invoiceNumber = context
+                                .read<OrderSummaryBloc>()
+                                .state
+                                .orderHistoryDetails
+                                .invoiceNumber;
+                            final isMYExternalSalesRep = context
+                                .read<EligibilityBloc>()
+                                .state
+                                .isMYExternalSalesRepUser;
+
                             return CommonTileItem(
                               materialNumber: e.materialNumber,
                               label: removeLeadingZero(
                                 e.materialNumber.getOrDefaultValue(''),
                               ),
-                              subtitle: StringUtils.displayPriceByMaterialType(
-                                context
+                              subtitle: '',
+                              priceComponent: PriceComponent(
+                                price: e.itemUnitPrice(
+                                  invoiceNumber,
+                                  isMYExternalSalesRep,
+                                ),
+                                salesOrgConfig: context
                                     .read<EligibilityBloc>()
                                     .state
                                     .salesOrgConfigs,
-                                e.unitPrice.zpPrice,
-                                e.type,
                               ),
                               title: e.materialDescription,
                               quantity: '${e.qty}',
-                              isQuantityBelowImage: true,
+                              isQuantityBelowImage: false,
                               isQuantityRequired: false,
                               statusTag: e.productTag,
                               footerWidget: Row(
@@ -78,7 +91,10 @@ class _OrderItems extends StatelessWidget {
                                         .read<SalesOrgBloc>()
                                         .state
                                         .configs,
-                                    price: e.priceByMaterialType,
+                                    price: e.itemTotalPrice(
+                                      invoiceNumber,
+                                      isMYExternalSalesRep,
+                                    ),
                                   ),
                                 ],
                               ),

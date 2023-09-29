@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
@@ -24,6 +25,13 @@ class OrderItemDetailsSection extends StatelessWidget {
         context.read<EligibilityBloc>().state.salesOrganisation.salesOrg.isTW;
     final salesOrgConfig =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final invoiceNumber = context
+        .read<ViewByOrderDetailsBloc>()
+        .state
+        .orderHistoryDetails
+        .invoiceNumber;
+    final isMYExternalSalesRep =
+        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
 
     return Padding(
       key: WidgetKeys.viewByOrderDetailItemsSection,
@@ -57,9 +65,10 @@ class OrderItemDetailsSection extends StatelessWidget {
                                 '${e.materialNumber.displayMatNo}${displayGovernmentMaterialCOde ? '|${e.governmentMaterialCode}' : ''}',
                             title: e.materialDescription,
                             priceComponent: PriceComponent(
-                              price: e.totalPrice
-                                  .totalPrice //TODO: It is list price offer price should also have annotation of "Discount applied" if it was an offer material , once design team confirm and getting data will enhance
-                                  .toStringAsFixed(2),
+                              price: e.itemUnitPrice(
+                                invoiceNumber,
+                                isMYExternalSalesRep,
+                              ),
                               salesOrgConfig: context
                                   .read<EligibilityBloc>()
                                   .state
@@ -92,9 +101,10 @@ class OrderItemDetailsSection extends StatelessWidget {
                                 ),
                                 PriceComponent(
                                   salesOrgConfig: salesOrgConfig,
-                                  price: e.totalPrice
-                                      .totalPrice //TODO: It should be item subtotal, once design team confirm and getting data will enhance
-                                      .toStringAsFixed(2),
+                                  price: e.itemTotalPrice(
+                                    invoiceNumber,
+                                    isMYExternalSalesRep,
+                                  ),
                                 ),
                               ],
                             ),

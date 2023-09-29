@@ -123,8 +123,32 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     return StatusType('');
   }
 
-  String get priceByMaterialType =>
-      type.isMaterialTypeBonus ? 'FREE' : totalPrice.getValue();
+  String get unitPriceByMaterialType =>
+      type.isMaterialTypeBonus ? 'FREE' : unitPrice.getOrDefaultValue('');
+
+  String get totalPriceByMaterialType =>
+      type.isMaterialTypeBonus ? 'FREE' : totalPrice.getOrDefaultValue('');
+
+  bool get isPnGMaterial =>
+      type.isMaterialTypeComm && principalData.principalCode.isPnG;
+
+  String itemUnitPrice(StringValue invoiceNumber, bool isMYExternalSalesRep) {
+    final displayPriceNotAvailable =
+        isMYExternalSalesRep && isPnGMaterial && !invoiceNumber.isValid();
+
+    return displayPriceNotAvailable
+        ? 'Price Not Available'
+        : unitPriceByMaterialType;
+  }
+
+  String itemTotalPrice(StringValue invoiceNumber, bool isMYExternalSalesRep) {
+    final displayPriceNotAvailable =
+        isMYExternalSalesRep && isPnGMaterial && !invoiceNumber.isValid();
+
+    return displayPriceNotAvailable
+        ? 'Price Not Available'
+        : totalPriceByMaterialType;
+  }
 }
 
 extension ViewByOrderDetailsListExtension
