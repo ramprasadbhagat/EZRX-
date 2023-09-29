@@ -384,28 +384,15 @@ class _MaterialQuantitySection extends StatefulWidget {
 class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   final _controller = TextEditingController();
 
-  String get _qty => widget.cartItem.quantity.intValue.toString();
-
   @override
   void initState() {
     _controller.value = TextEditingValue(
-      text: _qty,
+      text: widget.cartItem.quantity.intValue.toString(),
       selection: TextSelection.collapsed(
         offset: _controller.selection.base.offset,
       ),
     );
     super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant _MaterialQuantitySection oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (_qty != _controller.text) {
-      _controller.text = _qty;
-      _controller.selection = TextSelection.collapsed(
-        offset: widget.cartItem.quantity.getOrDefaultValue(0).toString().length,
-      );
-    }
   }
 
   @override
@@ -437,7 +424,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
               addPressed: (k) => _callCartUpsertItemsEvent(quantity: k),
               onSubmit: (value) => _callCartUpsertItemsEvent(quantity: value),
               isLoading: context.read<CartBloc>().state.isUpserting &&
-                  _qty != _controller.text,
+                  widget.cartItem.quantity.intValue.toString() !=
+                      _controller.text,
               minimumQty: totalQuantityOfProductBundle >
                       (widget.bundle.bundleInformation.firstOrNull?.quantity ??
                           1)
