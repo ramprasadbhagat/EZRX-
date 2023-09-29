@@ -94,7 +94,7 @@ class _NotificationList extends StatelessWidget {
     }
     //Event call for Payment Detail Page
     else if (notificationData.isPaymentEligible &&
-        !eligibilityState.salesOrgConfigs.disablePayment) {
+        !eligibilityState.isPaymentEnabled) {
       context.read<PaymentSummaryDetailsBloc>().add(
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
               salesOrganization: eligibilityState.salesOrganisation,

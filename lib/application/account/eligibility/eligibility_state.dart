@@ -41,6 +41,9 @@ class EligibilityState with _$EligibilityState {
     return true;
   }
 
+  bool get isPaymentEnabled =>
+      !salesOrgConfigs.disablePayment && !user.disablePaymentAccess;
+
   bool get isCovidMaterialEnable {
     // 1. SG Covid tab
     return (customerCodeInfo.customerAttr7.isZEV &&

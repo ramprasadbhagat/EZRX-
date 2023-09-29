@@ -55,6 +55,8 @@ mixin _$UserDto {
   bool get disableCreateOrder => throw _privateConstructorUsedError;
   @JsonKey(name: 'disableReturns', defaultValue: false)
   bool get disableReturns => throw _privateConstructorUsedError;
+  @JsonKey(name: 'disablePaymentAccess', defaultValue: false)
+  bool get disablePaymentAccess => throw _privateConstructorUsedError;
   @JsonKey(name: 'hasPriceOverride', defaultValue: false)
   bool get hasPriceOverride => throw _privateConstructorUsedError;
   @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
@@ -110,6 +112,8 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
       bool disableCreateOrder,
       @JsonKey(name: 'disableReturns', defaultValue: false) bool disableReturns,
+      @JsonKey(name: 'disablePaymentAccess', defaultValue: false)
+      bool disablePaymentAccess,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
       bool hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
@@ -162,6 +166,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
+    Object? disablePaymentAccess = null,
     Object? hasPriceOverride = null,
     Object? disablePaymentNotification = null,
     Object? paymentNotification = null,
@@ -237,6 +242,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
       disableReturns: null == disableReturns
           ? _value.disableReturns
           : disableReturns // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disablePaymentAccess: null == disablePaymentAccess
+          ? _value.disablePaymentAccess
+          : disablePaymentAccess // ignore: cast_nullable_to_non_nullable
               as bool,
       hasPriceOverride: null == hasPriceOverride
           ? _value.hasPriceOverride
@@ -315,6 +324,8 @@ abstract class _$$_UserDtoCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'disableCreateOrder', defaultValue: false)
       bool disableCreateOrder,
       @JsonKey(name: 'disableReturns', defaultValue: false) bool disableReturns,
+      @JsonKey(name: 'disablePaymentAccess', defaultValue: false)
+      bool disablePaymentAccess,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
       bool hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
@@ -366,6 +377,7 @@ class __$$_UserDtoCopyWithImpl<$Res>
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
+    Object? disablePaymentAccess = null,
     Object? hasPriceOverride = null,
     Object? disablePaymentNotification = null,
     Object? paymentNotification = null,
@@ -442,6 +454,10 @@ class __$$_UserDtoCopyWithImpl<$Res>
           ? _value.disableReturns
           : disableReturns // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePaymentAccess: null == disablePaymentAccess
+          ? _value.disablePaymentAccess
+          : disablePaymentAccess // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasPriceOverride: null == hasPriceOverride
           ? _value.hasPriceOverride
           : hasPriceOverride // ignore: cast_nullable_to_non_nullable
@@ -503,6 +519,8 @@ class _$_UserDto extends _UserDto {
       required this.disableCreateOrder,
       @JsonKey(name: 'disableReturns', defaultValue: false)
       required this.disableReturns,
+      @JsonKey(name: 'disablePaymentAccess', defaultValue: false)
+      required this.disablePaymentAccess,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
       required this.hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
@@ -589,6 +607,9 @@ class _$_UserDto extends _UserDto {
   @JsonKey(name: 'disableReturns', defaultValue: false)
   final bool disableReturns;
   @override
+  @JsonKey(name: 'disablePaymentAccess', defaultValue: false)
+  final bool disablePaymentAccess;
+  @override
   @JsonKey(name: 'hasPriceOverride', defaultValue: false)
   final bool hasPriceOverride;
   @override
@@ -628,7 +649,7 @@ class _$_UserDto extends _UserDto {
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber)';
   }
 
   @override
@@ -667,6 +688,8 @@ class _$_UserDto extends _UserDto {
                 other.disableCreateOrder == disableCreateOrder) &&
             (identical(other.disableReturns, disableReturns) ||
                 other.disableReturns == disableReturns) &&
+            (identical(other.disablePaymentAccess, disablePaymentAccess) ||
+                other.disablePaymentAccess == disablePaymentAccess) &&
             (identical(other.hasPriceOverride, hasPriceOverride) ||
                 other.hasPriceOverride == hasPriceOverride) &&
             (identical(other.disablePaymentNotification,
@@ -704,6 +727,7 @@ class _$_UserDto extends _UserDto {
         hasBonusOverride,
         disableCreateOrder,
         disableReturns,
+        disablePaymentAccess,
         hasPriceOverride,
         disablePaymentNotification,
         const DeepCollectionEquality().hash(_paymentNotification),
@@ -759,6 +783,8 @@ abstract class _UserDto extends UserDto {
       required final bool disableCreateOrder,
       @JsonKey(name: 'disableReturns', defaultValue: false)
       required final bool disableReturns,
+      @JsonKey(name: 'disablePaymentAccess', defaultValue: false)
+      required final bool disablePaymentAccess,
       @JsonKey(name: 'hasPriceOverride', defaultValue: false)
       required final bool hasPriceOverride,
       @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
@@ -833,6 +859,9 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'disableReturns', defaultValue: false)
   bool get disableReturns;
+  @override
+  @JsonKey(name: 'disablePaymentAccess', defaultValue: false)
+  bool get disablePaymentAccess;
   @override
   @JsonKey(name: 'hasPriceOverride', defaultValue: false)
   bool get hasPriceOverride;

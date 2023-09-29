@@ -63,6 +63,8 @@ class UserDto with _$UserDto {
         required bool disableCreateOrder,
     @JsonKey(name: 'disableReturns', defaultValue: false)
         required bool disableReturns,
+    @JsonKey(name: 'disablePaymentAccess', defaultValue: false)
+        required bool disablePaymentAccess,
     @JsonKey(name: 'hasPriceOverride', defaultValue: false)
         required bool hasPriceOverride,
     @JsonKey(name: 'disablePaymentNotification', defaultValue: false)
@@ -103,6 +105,7 @@ class UserDto with _$UserDto {
       hasBonusOverride: user.hasBonusOverride,
       disableCreateOrder: user.disableCreateOrder,
       disableReturns: user.disableReturns,
+      disablePaymentAccess: user.disablePaymentAccess,
       hasPriceOverride: user.hasPriceOverride,
       disablePaymentNotification:
           user.settings.paymentNotification.disablePaymentNotification,
@@ -131,6 +134,7 @@ class UserDto with _$UserDto {
     userSalesOrganisations: [],
     disableCreateOrder: false,
     disableReturns: false,
+    disablePaymentAccess: false,
     hasPriceOverride: false,
     disablePaymentNotification: false,
     paymentNotification: <PaymentAdviceExpiryNotificationDto>[],
@@ -169,6 +173,7 @@ class UserDto with _$UserDto {
       enableOrderType: enableOrderType,
       hasBonusOverride: hasBonusOverride,
       disableCreateOrder: disableCreateOrder,
+      disablePaymentAccess: disablePaymentAccess,
       disableReturns: disableReturns,
       hasPriceOverride: hasPriceOverride,
       preferredLanguage: Locale(preferredLanguage),

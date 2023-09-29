@@ -163,10 +163,9 @@ class _$_UsageDto extends _UsageDto {
 
 abstract class _UsageDto extends UsageDto {
   const factory _UsageDto(
-      {@JsonKey(name: 'usageCode')
-          required final String usageCode,
+      {@JsonKey(name: 'usageCode') required final String usageCode,
       @JsonKey(name: 'usageDescription')
-          required final String usageDescription}) = _$_UsageDto;
+      required final String usageDescription}) = _$_UsageDto;
   const _UsageDto._() : super._();
 
   factory _UsageDto.fromJson(Map<String, dynamic> json) = _$_UsageDto.fromJson;

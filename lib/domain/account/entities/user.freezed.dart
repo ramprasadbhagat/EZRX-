@@ -31,6 +31,7 @@ mixin _$User {
   bool get hasBonusOverride => throw _privateConstructorUsedError;
   bool get disableCreateOrder => throw _privateConstructorUsedError;
   bool get disableReturns => throw _privateConstructorUsedError;
+  bool get disablePaymentAccess => throw _privateConstructorUsedError;
   bool get hasPriceOverride => throw _privateConstructorUsedError;
   Locale get preferredLanguage => throw _privateConstructorUsedError;
   List<Locale> get supportedLanguages => throw _privateConstructorUsedError;
@@ -60,6 +61,7 @@ abstract class $UserCopyWith<$Res> {
       bool hasBonusOverride,
       bool disableCreateOrder,
       bool disableReturns,
+      bool disablePaymentAccess,
       bool hasPriceOverride,
       Locale preferredLanguage,
       List<Locale> supportedLanguages,
@@ -98,6 +100,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
+    Object? disablePaymentAccess = null,
     Object? hasPriceOverride = null,
     Object? preferredLanguage = null,
     Object? supportedLanguages = null,
@@ -159,6 +162,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       disableReturns: null == disableReturns
           ? _value.disableReturns
           : disableReturns // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disablePaymentAccess: null == disablePaymentAccess
+          ? _value.disablePaymentAccess
+          : disablePaymentAccess // ignore: cast_nullable_to_non_nullable
               as bool,
       hasPriceOverride: null == hasPriceOverride
           ? _value.hasPriceOverride
@@ -233,6 +240,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       bool hasBonusOverride,
       bool disableCreateOrder,
       bool disableReturns,
+      bool disablePaymentAccess,
       bool hasPriceOverride,
       Locale preferredLanguage,
       List<Locale> supportedLanguages,
@@ -271,6 +279,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? hasBonusOverride = null,
     Object? disableCreateOrder = null,
     Object? disableReturns = null,
+    Object? disablePaymentAccess = null,
     Object? hasPriceOverride = null,
     Object? preferredLanguage = null,
     Object? supportedLanguages = null,
@@ -333,6 +342,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.disableReturns
           : disableReturns // ignore: cast_nullable_to_non_nullable
               as bool,
+      disablePaymentAccess: null == disablePaymentAccess
+          ? _value.disablePaymentAccess
+          : disablePaymentAccess // ignore: cast_nullable_to_non_nullable
+              as bool,
       hasPriceOverride: null == hasPriceOverride
           ? _value.hasPriceOverride
           : hasPriceOverride // ignore: cast_nullable_to_non_nullable
@@ -371,6 +384,7 @@ class _$_User extends _User {
       required this.hasBonusOverride,
       required this.disableCreateOrder,
       required this.disableReturns,
+      required this.disablePaymentAccess,
       required this.hasPriceOverride,
       required this.preferredLanguage,
       required final List<Locale> supportedLanguages,
@@ -415,6 +429,8 @@ class _$_User extends _User {
   @override
   final bool disableReturns;
   @override
+  final bool disablePaymentAccess;
+  @override
   final bool hasPriceOverride;
   @override
   final Locale preferredLanguage;
@@ -432,7 +448,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber)';
   }
 
   @override
@@ -465,6 +481,8 @@ class _$_User extends _User {
                 other.disableCreateOrder == disableCreateOrder) &&
             (identical(other.disableReturns, disableReturns) ||
                 other.disableReturns == disableReturns) &&
+            (identical(other.disablePaymentAccess, disablePaymentAccess) ||
+                other.disablePaymentAccess == disablePaymentAccess) &&
             (identical(other.hasPriceOverride, hasPriceOverride) ||
                 other.hasPriceOverride == hasPriceOverride) &&
             (identical(other.preferredLanguage, preferredLanguage) ||
@@ -476,26 +494,28 @@ class _$_User extends _User {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      username,
-      email,
-      fullName,
-      role,
-      customerCode,
-      const DeepCollectionEquality().hash(_userSalesOrganisations),
-      accessRight,
-      settings,
-      acceptPrivacyPolicy,
-      enableOrderType,
-      hasBonusOverride,
-      disableCreateOrder,
-      disableReturns,
-      hasPriceOverride,
-      preferredLanguage,
-      const DeepCollectionEquality().hash(_supportedLanguages),
-      mobileNumber);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        username,
+        email,
+        fullName,
+        role,
+        customerCode,
+        const DeepCollectionEquality().hash(_userSalesOrganisations),
+        accessRight,
+        settings,
+        acceptPrivacyPolicy,
+        enableOrderType,
+        hasBonusOverride,
+        disableCreateOrder,
+        disableReturns,
+        disablePaymentAccess,
+        hasPriceOverride,
+        preferredLanguage,
+        const DeepCollectionEquality().hash(_supportedLanguages),
+        mobileNumber
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -520,6 +540,7 @@ abstract class _User extends User {
       required final bool hasBonusOverride,
       required final bool disableCreateOrder,
       required final bool disableReturns,
+      required final bool disablePaymentAccess,
       required final bool hasPriceOverride,
       required final Locale preferredLanguage,
       required final List<Locale> supportedLanguages,
@@ -554,6 +575,8 @@ abstract class _User extends User {
   bool get disableCreateOrder;
   @override
   bool get disableReturns;
+  @override
+  bool get disablePaymentAccess;
   @override
   bool get hasPriceOverride;
   @override

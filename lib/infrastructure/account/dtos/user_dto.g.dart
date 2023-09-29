@@ -35,6 +35,7 @@ _$_UserDto _$$_UserDtoFromJson(Map<String, dynamic> json) => _$_UserDto(
       hasBonusOverride: json['hasBonusOverride'] as bool? ?? false,
       disableCreateOrder: json['disableCreateOrder'] as bool? ?? false,
       disableReturns: json['disableReturns'] as bool? ?? false,
+      disablePaymentAccess: json['disablePaymentAccess'] as bool? ?? false,
       hasPriceOverride: json['hasPriceOverride'] as bool? ?? false,
       disablePaymentNotification:
           json['disablePaymentNotification'] as bool? ?? false,
@@ -73,6 +74,7 @@ Map<String, dynamic> _$$_UserDtoToJson(_$_UserDto instance) =>
       'hasBonusOverride': instance.hasBonusOverride,
       'disableCreateOrder': instance.disableCreateOrder,
       'disableReturns': instance.disableReturns,
+      'disablePaymentAccess': instance.disablePaymentAccess,
       'hasPriceOverride': instance.hasPriceOverride,
       'disablePaymentNotification': instance.disablePaymentNotification,
       'paymentNotification':
