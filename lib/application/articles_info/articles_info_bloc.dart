@@ -107,11 +107,16 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
           },
         );
       },
-      setSearchKey: (e) async => emit(
-        state.copyWith(
-          searchKey: SearchKey(e.searchKey),
-        ),
-      ),
+      setSearchKey: (e) {
+        final eventSearchKey = SearchKey.searchFilter(e.searchKey);
+        if (eventSearchKey != state.searchKey && eventSearchKey.isValid()) {
+          emit(
+            state.copyWith(
+              searchKey: SearchKey(e.searchKey),
+            ),
+          );
+        }
+      },
     );
   }
 }

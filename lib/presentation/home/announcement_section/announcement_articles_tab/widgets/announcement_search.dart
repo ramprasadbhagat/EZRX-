@@ -18,6 +18,11 @@ class _SearchAnnouncement extends StatelessWidget {
           key: WidgetKeys.genericKey(key: state.searchKey.searchValueOrEmpty),
           initialValue: state.searchKey.searchValueOrEmpty,
           enabled: !state.isLoading,
+          onSearchChanged: (value) => context.read<AnnouncementInfoBloc>().add(
+                AnnouncementInfoEvent.updateSearchKey(
+                  searchKey: value,
+                ),
+              ),
           onSearchSubmitted: (value) =>
               context.read<AnnouncementInfoBloc>().add(
                     AnnouncementInfoEvent.updateSearchKey(

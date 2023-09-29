@@ -16,12 +16,12 @@ class _SearchArticle extends StatelessWidget {
           ),
           enabled: !state.isFetching,
           initialValue: state.searchKey.searchValueOrEmpty,
-          onSearchChanged: (value) {},
-          onSearchSubmitted: (value) {
-            context.read<ArticlesInfoBloc>().add(
-                  ArticlesInfoEvent.setSearchKey(searchKey: value),
-                );
-          },
+          onSearchChanged: (value) => context.read<ArticlesInfoBloc>().add(
+                ArticlesInfoEvent.setSearchKey(searchKey: value),
+              ),
+          onSearchSubmitted: (value) => context.read<ArticlesInfoBloc>().add(
+                ArticlesInfoEvent.setSearchKey(searchKey: value),
+              ),
           customValidator: (value) => SearchKey.searchFilter(value).isValid(),
           onClear: () => context.read<ArticlesInfoBloc>().add(
                 const ArticlesInfoEvent.setSearchKey(searchKey: ''),

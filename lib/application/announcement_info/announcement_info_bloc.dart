@@ -112,11 +112,16 @@ class AnnouncementInfoBloc
           },
         );
       },
-      updateSearchKey: (_UpdateSearchKey e) async => emit(
-        state.copyWith(
-          searchKey: SearchKey.searchFilter(e.searchKey),
-        ),
-      ),
+      updateSearchKey: (_UpdateSearchKey e) {
+        final eventSearchKey = SearchKey.searchFilter(e.searchKey);
+        if (eventSearchKey != state.searchKey && eventSearchKey.isValid()) {
+          emit(
+            state.copyWith(
+              searchKey: SearchKey.searchFilter(e.searchKey),
+            ),
+          );
+        }
+      },
     );
   }
 }
