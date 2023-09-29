@@ -937,18 +937,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           );
 
-      context.read<OrderSummaryBloc>().add(
-            OrderSummaryEvent.initialized(
-              shipToInfo: state.shipToInfo,
-              user: user,
-              orderDocumentType: orderDocumentTypeState.selectedOrderType,
-              customerCodeInfo: state.customerCodeInfo,
-              salesOrganisation: salesOrgState.salesOrganisation,
-              salesOrg: salesOrgState.salesOrg,
-              salesOrgConfig: salesOrgState.configs,
-            ),
-          );
-
       context.read<ProductSearchBloc>().add(
             ProductSearchEvent.initialized(
               configs: salesOrgState.configs,
@@ -1136,20 +1124,30 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     context.read<SalesOrgBloc>().state.salesOrganisation,
               ),
             );
-      }
 
-      context.read<ViewByOrderBloc>().add(
-            ViewByOrderEvent.initialized(
-              salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-              user: context.read<UserBloc>().state.user,
-              sortDirection: 'desc',
-            ),
-          );
+        context.read<ViewByOrderBloc>().add(
+              ViewByOrderEvent.initialized(
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+                shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+                user: context.read<UserBloc>().state.user,
+                sortDirection: 'desc',
+              ),
+            );
+
+        context.read<ViewByOrderDetailsBloc>().add(
+              ViewByOrderDetailsEvent.initialized(
+                customerCodeInfo:
+                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
+                user: context.read<UserBloc>().state.user,
+                salesOrganisation:
+                    context.read<SalesOrgBloc>().state.salesOrganisation,
+              ),
+            );
+      }
     }
   }
 

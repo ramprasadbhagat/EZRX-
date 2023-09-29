@@ -15,7 +15,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -184,8 +184,8 @@ void main() {
       when(() => mockViewByOrderBloc.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           isFetching: true,
-          viewByOrderList: viewByOrder
-              .copyWith(orderHeaders: <OrderHistoryDetailsOrderHeader>[]),
+          viewByOrderList:
+              viewByOrder.copyWith(orderHeaders: <OrderHistoryDetails>[]),
         ),
       );
 
@@ -202,9 +202,7 @@ void main() {
         ViewByOrderState.initial().copyWith(
           isFetching: false,
           viewByOrderList: viewByOrder.copyWith(
-            orderHeaders: [
-              OrderHistoryDetailsOrderHeader.empty().copyWith(itemCount: 2)
-            ],
+            orderHeaders: [OrderHistoryDetails.empty().copyWith(itemCount: 2)],
           ),
         ),
       );

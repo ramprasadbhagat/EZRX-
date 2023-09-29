@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ViewByOrdersGroup {
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   PrincipalName get principalName => throw _privateConstructorUsedError;
-  List<OrderHistoryDetailsOrderHeader> get orderHeaders =>
+  List<OrderHistoryDetails> get orderHeaders =>
       throw _privateConstructorUsedError;
   List<OrderHistoryDetailsOrderItem> get viewByOrderItem =>
       throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $ViewByOrdersGroupCopyWith<$Res> {
   $Res call(
       {DateTimeStringValue createdDate,
       PrincipalName principalName,
-      List<OrderHistoryDetailsOrderHeader> orderHeaders,
+      List<OrderHistoryDetails> orderHeaders,
       List<OrderHistoryDetailsOrderItem> viewByOrderItem});
 }
 
@@ -71,7 +71,7 @@ class _$ViewByOrdersGroupCopyWithImpl<$Res, $Val extends ViewByOrdersGroup>
       orderHeaders: null == orderHeaders
           ? _value.orderHeaders
           : orderHeaders // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsOrderHeader>,
+              as List<OrderHistoryDetails>,
       viewByOrderItem: null == viewByOrderItem
           ? _value.viewByOrderItem
           : viewByOrderItem // ignore: cast_nullable_to_non_nullable
@@ -91,7 +91,7 @@ abstract class _$$_ViewByOrdersGroupCopyWith<$Res>
   $Res call(
       {DateTimeStringValue createdDate,
       PrincipalName principalName,
-      List<OrderHistoryDetailsOrderHeader> orderHeaders,
+      List<OrderHistoryDetails> orderHeaders,
       List<OrderHistoryDetailsOrderItem> viewByOrderItem});
 }
 
@@ -123,7 +123,7 @@ class __$$_ViewByOrdersGroupCopyWithImpl<$Res>
       orderHeaders: null == orderHeaders
           ? _value._orderHeaders
           : orderHeaders // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsOrderHeader>,
+              as List<OrderHistoryDetails>,
       viewByOrderItem: null == viewByOrderItem
           ? _value._viewByOrderItem
           : viewByOrderItem // ignore: cast_nullable_to_non_nullable
@@ -138,7 +138,7 @@ class _$_ViewByOrdersGroup implements _ViewByOrdersGroup {
   _$_ViewByOrdersGroup(
       {required this.createdDate,
       required this.principalName,
-      required final List<OrderHistoryDetailsOrderHeader> orderHeaders,
+      required final List<OrderHistoryDetails> orderHeaders,
       required final List<OrderHistoryDetailsOrderItem> viewByOrderItem})
       : _orderHeaders = orderHeaders,
         _viewByOrderItem = viewByOrderItem;
@@ -147,9 +147,9 @@ class _$_ViewByOrdersGroup implements _ViewByOrdersGroup {
   final DateTimeStringValue createdDate;
   @override
   final PrincipalName principalName;
-  final List<OrderHistoryDetailsOrderHeader> _orderHeaders;
+  final List<OrderHistoryDetails> _orderHeaders;
   @override
-  List<OrderHistoryDetailsOrderHeader> get orderHeaders {
+  List<OrderHistoryDetails> get orderHeaders {
     if (_orderHeaders is EqualUnmodifiableListView) return _orderHeaders;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_orderHeaders);
@@ -203,7 +203,7 @@ abstract class _ViewByOrdersGroup implements ViewByOrdersGroup {
   factory _ViewByOrdersGroup(
           {required final DateTimeStringValue createdDate,
           required final PrincipalName principalName,
-          required final List<OrderHistoryDetailsOrderHeader> orderHeaders,
+          required final List<OrderHistoryDetails> orderHeaders,
           required final List<OrderHistoryDetailsOrderItem> viewByOrderItem}) =
       _$_ViewByOrdersGroup;
 
@@ -212,7 +212,7 @@ abstract class _ViewByOrdersGroup implements ViewByOrdersGroup {
   @override
   PrincipalName get principalName;
   @override
-  List<OrderHistoryDetailsOrderHeader> get orderHeaders;
+  List<OrderHistoryDetails> get orderHeaders;
   @override
   List<OrderHistoryDetailsOrderItem> get viewByOrderItem;
   @override

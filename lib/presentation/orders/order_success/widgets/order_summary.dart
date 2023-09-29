@@ -7,6 +7,9 @@ class _OrderSummaary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMYExternalSalesRep =
+        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
+
     return ListTile(
       minVerticalPadding: 25.0,
       title: Padding(
@@ -30,7 +33,8 @@ class _OrderSummaary extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: '${orderHistoryDetails.orderValue}',
+                price:
+                    '${orderHistoryDetails.orderedItemsValue(isMYExternalSalesRep)}',
               ),
             ],
           ),
@@ -50,7 +54,8 @@ class _OrderSummaary extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: '${orderHistoryDetails.grandTotal}',
+                price:
+                    '${orderHistoryDetails.grandTotal(isMYExternalSalesRep)}',
               ),
             ],
           ),

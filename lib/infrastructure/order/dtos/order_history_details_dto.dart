@@ -62,6 +62,8 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       readValue: poDocumentOverride,
     )
         required List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
+    @JsonKey(name: 'ItmCount', defaultValue: 0)
+        required int itemCount,
   }) = _OrderHistoryDetailsDto;
 
   factory OrderHistoryDetailsDto.fromDomain(
@@ -86,7 +88,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       soldTo: orderHistoryDetails.soldTo,
       shipToAddress: orderHistoryDetails.shipToAddress,
       soldToAddress: orderHistoryDetails.soldToAddress,
-      invoiceNumber: orderHistoryDetails.invoiceNumber,
+      invoiceNumber: orderHistoryDetails.invoiceNumber.getOrDefaultValue(''),
       orderReason: orderHistoryDetails.orderReason,
       orderHistoryDetailsOrderItem:
           List.from(orderHistoryDetails.orderHistoryDetailsOrderItem)
@@ -102,6 +104,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
           List.from(orderHistoryDetails.orderHistoryDetailsPoDocuments)
               .map((e) => PoDocumentsDto.fromDomain(e))
               .toList(),
+      itemCount: orderHistoryDetails.orderItemsCount,
     );
   }
 
@@ -123,7 +126,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
       soldTo: soldTo,
       shipToAddress: shipToAddress,
       soldToAddress: soldToAddress,
-      invoiceNumber: invoiceNumber,
+      invoiceNumber: StringValue(invoiceNumber),
       orderReason: orderReason,
       orderHistoryDetailsOrderItem:
           orderHistoryDetailsOrderItem.map((dto) => dto.toDomain()).toList(),
@@ -132,6 +135,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
           SpecialInstructions(orderHistoryDetailsSpecialInstructions),
       orderHistoryDetailsPoDocuments:
           orderHistoryDetailsPoDocuments.map((dto) => dto.toDomain()).toList(),
+      itemCount: itemCount,
     );
   }
 

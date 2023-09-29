@@ -1,13 +1,11 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/view_by_order_section.dart';
 
 class _ViewByOrder extends StatelessWidget {
-  final OrderHistoryDetailsOrderHeader viewByOrderHistoryItem;
-  final OrderHistoryItem orderHistoryItem;
+  final OrderHistoryDetails viewByOrderHistoryItem;
 
   const _ViewByOrder({
     Key? key,
     required this.viewByOrderHistoryItem,
-    required this.orderHistoryItem,
   }) : super(key: key);
 
   @override
@@ -20,13 +18,8 @@ class _ViewByOrder extends StatelessWidget {
       child: ListTile(
         onTap: () {
           context.read<ViewByOrderDetailsBloc>().add(
-                ViewByOrderDetailsEvent.fetch(
-                  user: context.read<EligibilityBloc>().state.user,
-                  orderNumber: viewByOrderHistoryItem.orderNumber,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
+                ViewByOrderDetailsEvent.setOrderDetails(
+                  orderHistoryDetails: viewByOrderHistoryItem,
                 ),
               );
           context.router.push(
@@ -54,7 +47,14 @@ class _ViewByOrder extends StatelessWidget {
                   ),
                   PriceComponent(
                     salesOrgConfig: salesOrgConfigs,
-                    price: viewByOrderHistoryItem.orderValue.toString(),
+                    price: viewByOrderHistoryItem
+                        .orderedItemsValue(
+                          context
+                              .read<EligibilityBloc>()
+                              .state
+                              .isMYExternalSalesRepUser,
+                        )
+                        .toString(),
                     title: context.tr('Order total : '),
                     priceLabelStyle:
                         Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -64,15 +64,8 @@ class _ViewByOrder extends StatelessWidget {
                 ],
               ),
             ),
-            MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => locator<ViewByOrderDetailsBloc>(),
-                ),
-                BlocProvider(
-                  create: (context) => locator<ReOrderPermissionBloc>(),
-                ),
-              ],
+            BlocProvider(
+              create: (context) => locator<ReOrderPermissionBloc>(),
               child: _BuyAgainButton(
                 viewByOrderHistoryItem: viewByOrderHistoryItem,
                 key: WidgetKeys.viewByOrderBuyAgainButtonKey,

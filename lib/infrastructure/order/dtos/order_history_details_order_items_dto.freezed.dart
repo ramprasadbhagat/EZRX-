@@ -65,6 +65,8 @@ mixin _$OrderHistoryDetailsOrderItemDto {
       get tenderContractDetails => throw _privateConstructorUsedError;
   @JsonKey(name: 'PrincipalName', defaultValue: '')
   String get principalName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  String get principalCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'ProductType', defaultValue: '')
@@ -117,6 +119,7 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       OrderHistoryDetailsOrderItemTenderContractDetailsDto
           tenderContractDetails,
       @JsonKey(name: 'PrincipalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
       @JsonKey(name: 'ProductType', defaultValue: '') String productType});
@@ -157,6 +160,7 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? details = null,
     Object? tenderContractDetails = null,
     Object? principalName = null,
+    Object? principalCode = null,
     Object? governmentMaterialCode = null,
     Object? productType = null,
   }) {
@@ -233,6 +237,10 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
+      principalCode: null == principalCode
+          ? _value.principalCode
+          : principalCode // ignore: cast_nullable_to_non_nullable
+              as String,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
@@ -297,6 +305,7 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
       OrderHistoryDetailsOrderItemTenderContractDetailsDto
           tenderContractDetails,
       @JsonKey(name: 'PrincipalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
       @JsonKey(name: 'ProductType', defaultValue: '') String productType});
@@ -337,6 +346,7 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
     Object? details = null,
     Object? tenderContractDetails = null,
     Object? principalName = null,
+    Object? principalCode = null,
     Object? governmentMaterialCode = null,
     Object? productType = null,
   }) {
@@ -413,6 +423,10 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
+      principalCode: null == principalCode
+          ? _value.principalCode
+          : principalCode // ignore: cast_nullable_to_non_nullable
+              as String,
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
@@ -463,6 +477,8 @@ class _$_OrderHistoryDetailsOrderItemDto
       required this.tenderContractDetails,
       @JsonKey(name: 'PrincipalName', defaultValue: '')
       required this.principalName,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      required this.principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       required this.governmentMaterialCode,
       @JsonKey(name: 'ProductType', defaultValue: '')
@@ -542,6 +558,9 @@ class _$_OrderHistoryDetailsOrderItemDto
   @JsonKey(name: 'PrincipalName', defaultValue: '')
   final String principalName;
   @override
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  final String principalCode;
+  @override
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   final String governmentMaterialCode;
   @override
@@ -550,7 +569,7 @@ class _$_OrderHistoryDetailsOrderItemDto
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, governmentMaterialCode: $governmentMaterialCode, productType: $productType)';
+    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, productType: $productType)';
   }
 
   @override
@@ -590,6 +609,8 @@ class _$_OrderHistoryDetailsOrderItemDto
                 other.tenderContractDetails == tenderContractDetails) &&
             (identical(other.principalName, principalName) ||
                 other.principalName == principalName) &&
+            (identical(other.principalCode, principalCode) ||
+                other.principalCode == principalCode) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode) &&
             (identical(other.productType, productType) ||
@@ -618,6 +639,7 @@ class _$_OrderHistoryDetailsOrderItemDto
         const DeepCollectionEquality().hash(_details),
         tenderContractDetails,
         principalName,
+        principalCode,
         governmentMaterialCode,
         productType
       ]);
@@ -680,6 +702,8 @@ abstract class _OrderHistoryDetailsOrderItemDto
           tenderContractDetails,
       @JsonKey(name: 'PrincipalName', defaultValue: '')
       required final String principalName,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      required final String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       required final String governmentMaterialCode,
       @JsonKey(name: 'ProductType', defaultValue: '')
@@ -750,6 +774,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'PrincipalName', defaultValue: '')
   String get principalName;
+  @override
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  String get principalCode;
   @override
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode;

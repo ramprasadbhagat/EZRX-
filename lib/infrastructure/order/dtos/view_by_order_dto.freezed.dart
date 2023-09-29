@@ -24,10 +24,8 @@ mixin _$ViewByOrderDto {
   int get orderCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
   List<String> get creatingOrderIds => throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'orderHeaders',
-      defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
-  List<OrderHistoryDetailsOrderHeadersDto> get orderHeaders =>
+  @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsDto>[])
+  List<OrderHistoryDetailsDto> get orderHeaders =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,10 +44,8 @@ abstract class $ViewByOrderDtoCopyWith<$Res> {
       {@JsonKey(name: 'orderCount', defaultValue: 0) int orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
       List<String> creatingOrderIds,
-      @JsonKey(
-          name: 'orderHeaders',
-          defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
-      List<OrderHistoryDetailsOrderHeadersDto> orderHeaders});
+      @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsDto>[])
+      List<OrderHistoryDetailsDto> orderHeaders});
 }
 
 /// @nodoc
@@ -81,7 +77,7 @@ class _$ViewByOrderDtoCopyWithImpl<$Res, $Val extends ViewByOrderDto>
       orderHeaders: null == orderHeaders
           ? _value.orderHeaders
           : orderHeaders // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsOrderHeadersDto>,
+              as List<OrderHistoryDetailsDto>,
     ) as $Val);
   }
 }
@@ -98,10 +94,8 @@ abstract class _$$_ViewByOrderDtoCopyWith<$Res>
       {@JsonKey(name: 'orderCount', defaultValue: 0) int orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
       List<String> creatingOrderIds,
-      @JsonKey(
-          name: 'orderHeaders',
-          defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
-      List<OrderHistoryDetailsOrderHeadersDto> orderHeaders});
+      @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsDto>[])
+      List<OrderHistoryDetailsDto> orderHeaders});
 }
 
 /// @nodoc
@@ -131,7 +125,7 @@ class __$$_ViewByOrderDtoCopyWithImpl<$Res>
       orderHeaders: null == orderHeaders
           ? _value._orderHeaders
           : orderHeaders // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsOrderHeadersDto>,
+              as List<OrderHistoryDetailsDto>,
     ));
   }
 }
@@ -143,10 +137,8 @@ class _$_ViewByOrderDto extends _ViewByOrderDto {
       {@JsonKey(name: 'orderCount', defaultValue: 0) required this.orderCount,
       @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
       required final List<String> creatingOrderIds,
-      @JsonKey(
-          name: 'orderHeaders',
-          defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
-      required final List<OrderHistoryDetailsOrderHeadersDto> orderHeaders})
+      @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsDto>[])
+      required final List<OrderHistoryDetailsDto> orderHeaders})
       : _creatingOrderIds = creatingOrderIds,
         _orderHeaders = orderHeaders,
         super._();
@@ -167,12 +159,10 @@ class _$_ViewByOrderDto extends _ViewByOrderDto {
     return EqualUnmodifiableListView(_creatingOrderIds);
   }
 
-  final List<OrderHistoryDetailsOrderHeadersDto> _orderHeaders;
+  final List<OrderHistoryDetailsDto> _orderHeaders;
   @override
-  @JsonKey(
-      name: 'orderHeaders',
-      defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
-  List<OrderHistoryDetailsOrderHeadersDto> get orderHeaders {
+  @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsDto>[])
+  List<OrderHistoryDetailsDto> get orderHeaders {
     if (_orderHeaders is EqualUnmodifiableListView) return _orderHeaders;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_orderHeaders);
@@ -220,15 +210,14 @@ class _$_ViewByOrderDto extends _ViewByOrderDto {
 
 abstract class _ViewByOrderDto extends ViewByOrderDto {
   const factory _ViewByOrderDto(
-      {@JsonKey(name: 'orderCount', defaultValue: 0)
-      required final int orderCount,
-      @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
-      required final List<String> creatingOrderIds,
-      @JsonKey(
-          name: 'orderHeaders',
-          defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
-      required final List<OrderHistoryDetailsOrderHeadersDto>
-          orderHeaders}) = _$_ViewByOrderDto;
+          {@JsonKey(name: 'orderCount', defaultValue: 0)
+          required final int orderCount,
+          @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
+          required final List<String> creatingOrderIds,
+          @JsonKey(
+              name: 'orderHeaders', defaultValue: <OrderHistoryDetailsDto>[])
+          required final List<OrderHistoryDetailsDto> orderHeaders}) =
+      _$_ViewByOrderDto;
   const _ViewByOrderDto._() : super._();
 
   factory _ViewByOrderDto.fromJson(Map<String, dynamic> json) =
@@ -241,10 +230,8 @@ abstract class _ViewByOrderDto extends ViewByOrderDto {
   @JsonKey(name: 'creatingOrderIds', defaultValue: <String>[])
   List<String> get creatingOrderIds;
   @override
-  @JsonKey(
-      name: 'orderHeaders',
-      defaultValue: <OrderHistoryDetailsOrderHeadersDto>[])
-  List<OrderHistoryDetailsOrderHeadersDto> get orderHeaders;
+  @JsonKey(name: 'orderHeaders', defaultValue: <OrderHistoryDetailsDto>[])
+  List<OrderHistoryDetailsDto> get orderHeaders;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByOrderDtoCopyWith<_$_ViewByOrderDto> get copyWith =>

@@ -35,20 +35,26 @@ class ViewByOrderDetailsBloc
     Emitter<ViewByOrderDetailsState> emit,
   ) async {
     await event.map(
-      initialized: (e) async => emit(ViewByOrderDetailsState.initial()),
+      initialized: (e) async => emit(
+        ViewByOrderDetailsState.initial().copyWith(
+          customerCodeInfo: e.customerCodeInfo,
+          salesOrganisation: e.salesOrganisation,
+          user: e.user,
+        ),
+      ),
       fetch: (e) async {
         emit(
-          ViewByOrderDetailsState.initial().copyWith(
+          state.copyWith(
             isLoading: true,
           ),
         );
 
         final failureOrSuccess =
             await viewByOrderDetailsRepository.getViewByOrderDetails(
-          user: e.user,
+          user: state.user,
           orderNumber: e.orderNumber,
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
         );
 
         failureOrSuccess.fold(
@@ -78,6 +84,22 @@ class ViewByOrderDetailsBloc
               ),
             );
           },
+        );
+      },
+      setOrderDetails: (e) {
+        emit(
+          state.copyWith(
+            orderHistoryDetails: e.orderHistoryDetails,
+            materials: {
+              for (final item in e.orderHistoryDetails.items)
+                item.orderItem.queryInfo: item.toPriceAggregate,
+            },
+            isLoadingTenderContract: {
+              for (final item in e.orderHistoryDetails.items)
+                if (item.orderItem.isTenderContractMaterial)
+                  item.orderItem.queryInfo: true,
+            },
+          ),
         );
       },
       updateMaterialTenderContract: (e) async {

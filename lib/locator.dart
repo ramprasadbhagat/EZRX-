@@ -273,7 +273,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_q
 import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
@@ -1228,7 +1227,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerFactory(
+  locator.registerLazySingleton(
     () => ViewByOrderDetailsBloc(
       viewByOrderDetailsRepository: locator<ViewByOrderDetailsRepository>(),
       productDetailRepository: locator<ProductDetailRepository>(),
@@ -2803,13 +2802,12 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(() => ViewByOrderLocalDataSource());
-  locator.registerLazySingleton(() => ViewByOrderQuery());
   locator.registerLazySingleton(
     () => ViewByOrderRemoteDataSource(
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
-      viewByOrderQuery: locator<ViewByOrderQuery>(),
+      viewByOrderQuery: locator<ViewByOrderDetailsQueryMutation>(),
     ),
   );
 

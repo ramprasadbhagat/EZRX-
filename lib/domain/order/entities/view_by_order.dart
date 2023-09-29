@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'view_by_order.freezed.dart';
@@ -9,12 +9,12 @@ class ViewByOrder with _$ViewByOrder {
   factory ViewByOrder({
     required int orderCount,
     required List<String> creatingOrderIds,
-    required List<OrderHistoryDetailsOrderHeader> orderHeaders,
+    required List<OrderHistoryDetails> orderHeaders,
   }) = _ViewByOrder;
 
   factory ViewByOrder.empty() => ViewByOrder(
         creatingOrderIds: [],
         orderCount: 0,
-        orderHeaders: <OrderHistoryDetailsOrderHeader>[],
+        orderHeaders: <OrderHistoryDetails>[],
       );
 }

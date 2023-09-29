@@ -69,7 +69,9 @@ class CartRemoteDataSource {
     required Map<String, dynamic> requestParams,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final query = cartQueryMutation.upsertCartItems();
+      final query = requestParams['Type'] == 'bundle'
+          ? cartQueryMutation.upsertCartItems()
+          : cartQueryMutation.upsertCart();
       final res = await httpService.request(
         method: 'POST',
         url: '${config.urlConstants}cart',
@@ -85,8 +87,10 @@ class CartRemoteDataSource {
 
       _exceptionChecker(res: res);
 
-      final productList =
-          res.data['data']['upsertCartItems']['EzRxItems'] ?? [];
+      final productList = res.data['data'][requestParams['Type'] == 'bundle'
+              ? 'upsertCartItems'
+              : 'upsertCart']['EzRxItems'] ??
+          [];
 
       return List.from(makeResponseCamelCase(jsonEncode(productList))).map((e) {
         return CartProductDto.fromJson(e).toDomain;

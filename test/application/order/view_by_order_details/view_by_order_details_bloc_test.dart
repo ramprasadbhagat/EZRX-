@@ -53,10 +53,18 @@ void main() {
           productDetailRepository: productDetailRepositoryMock,
         ),
         act: (bloc) => bloc.add(
-          const ViewByOrderDetailsEvent.initialized(),
+          ViewByOrderDetailsEvent.initialized(
+            user: User.empty(),
+            customerCodeInfo: customerCodeInfo,
+            salesOrganisation: salesOrganisation,
+          ),
         ),
         expect: () => [
-          ViewByOrderDetailsState.initial(),
+          ViewByOrderDetailsState.initial().copyWith(
+            user: User.empty(),
+            customerCodeInfo: customerCodeInfo,
+            salesOrganisation: salesOrganisation,
+          ),
         ],
       );
 
@@ -141,6 +149,11 @@ void main() {
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
         ),
+        seed: () => ViewByOrderDetailsState.initial().copyWith(
+          user: User.empty(),
+          customerCodeInfo: customerCodeInfo,
+          salesOrganisation: salesOrganisation,
+        ),
         setUp: () {
           when(
             () => viewByOrderDetailsRepositoryMock.getViewByOrderDetails(
@@ -156,17 +169,20 @@ void main() {
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.fetch(
             orderNumber: OrderNumber(''),
-            user: User.empty(),
-            customerCodeInfo: customerCodeInfo,
-            salesOrganisation: salesOrganisation,
           ),
         ),
         expect: () => [
           ViewByOrderDetailsState.initial().copyWith(
             isLoading: true,
+            user: User.empty(),
+            customerCodeInfo: customerCodeInfo,
+            salesOrganisation: salesOrganisation,
           ),
           ViewByOrderDetailsState.initial().copyWith(
             isLoading: false,
+            user: User.empty(),
+            customerCodeInfo: customerCodeInfo,
+            salesOrganisation: salesOrganisation,
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
           ),

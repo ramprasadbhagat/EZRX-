@@ -4,6 +4,9 @@ part of 'view_by_order_details_bloc.dart';
 class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
   const ViewByOrderDetailsState._();
   const factory ViewByOrderDetailsState({
+    required User user,
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
     required OrderHistoryDetails orderHistoryDetails,
     required bool isLoading,
     required Map<MaterialQueryInfo, bool> isLoadingTenderContract,
@@ -15,6 +18,9 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
   }) = _ViewByOrderDetailsState;
 
   factory ViewByOrderDetailsState.initial() => ViewByOrderDetailsState(
+        user: User.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        salesOrganisation: SalesOrganisation.empty(),
         orderHistoryDetails: OrderHistoryDetails.empty(),
         failureOrSuccessOption: none(),
         isLoading: false,

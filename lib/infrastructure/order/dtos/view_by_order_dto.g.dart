@@ -14,8 +14,8 @@ _$_ViewByOrderDto _$$_ViewByOrderDtoFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       orderHeaders: (json['orderHeaders'] as List<dynamic>?)
-              ?.map((e) => OrderHistoryDetailsOrderHeadersDto.fromJson(
-                  e as Map<String, dynamic>))
+              ?.map((e) =>
+                  OrderHistoryDetailsDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );

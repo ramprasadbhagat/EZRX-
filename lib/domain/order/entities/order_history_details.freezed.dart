@@ -34,8 +34,9 @@ mixin _$OrderHistoryDetails {
   POReference get pOReference => throw _privateConstructorUsedError;
   String get shipToAddress => throw _privateConstructorUsedError;
   String get soldToAddress => throw _privateConstructorUsedError;
-  String get invoiceNumber => throw _privateConstructorUsedError;
+  StringValue get invoiceNumber => throw _privateConstructorUsedError;
   String get orderReason => throw _privateConstructorUsedError;
+  int get itemCount => throw _privateConstructorUsedError;
   List<OrderHistoryDetailsOrderItem> get orderHistoryDetailsOrderItem =>
       throw _privateConstructorUsedError;
   OrderHistoryDetailsPaymentTerm get orderHistoryDetailsPaymentTerm =>
@@ -73,8 +74,9 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       POReference pOReference,
       String shipToAddress,
       String soldToAddress,
-      String invoiceNumber,
+      StringValue invoiceNumber,
       String orderReason,
+      int itemCount,
       List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
       OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
       SpecialInstructions orderHistoryDetailsSpecialInstructions,
@@ -115,6 +117,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
     Object? soldToAddress = null,
     Object? invoiceNumber = null,
     Object? orderReason = null,
+    Object? itemCount = null,
     Object? orderHistoryDetailsOrderItem = null,
     Object? orderHistoryDetailsPaymentTerm = null,
     Object? orderHistoryDetailsSpecialInstructions = null,
@@ -188,11 +191,15 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
       invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       orderReason: null == orderReason
           ? _value.orderReason
           : orderReason // ignore: cast_nullable_to_non_nullable
               as String,
+      itemCount: null == itemCount
+          ? _value.itemCount
+          : itemCount // ignore: cast_nullable_to_non_nullable
+              as int,
       orderHistoryDetailsOrderItem: null == orderHistoryDetailsOrderItem
           ? _value.orderHistoryDetailsOrderItem
           : orderHistoryDetailsOrderItem // ignore: cast_nullable_to_non_nullable
@@ -250,8 +257,9 @@ abstract class _$$_OrderHistoryDetailsCopyWith<$Res>
       POReference pOReference,
       String shipToAddress,
       String soldToAddress,
-      String invoiceNumber,
+      StringValue invoiceNumber,
       String orderReason,
+      int itemCount,
       List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
       OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
       SpecialInstructions orderHistoryDetailsSpecialInstructions,
@@ -291,6 +299,7 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
     Object? soldToAddress = null,
     Object? invoiceNumber = null,
     Object? orderReason = null,
+    Object? itemCount = null,
     Object? orderHistoryDetailsOrderItem = null,
     Object? orderHistoryDetailsPaymentTerm = null,
     Object? orderHistoryDetailsSpecialInstructions = null,
@@ -364,11 +373,15 @@ class __$$_OrderHistoryDetailsCopyWithImpl<$Res>
       invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       orderReason: null == orderReason
           ? _value.orderReason
           : orderReason // ignore: cast_nullable_to_non_nullable
               as String,
+      itemCount: null == itemCount
+          ? _value.itemCount
+          : itemCount // ignore: cast_nullable_to_non_nullable
+              as int,
       orderHistoryDetailsOrderItem: null == orderHistoryDetailsOrderItem
           ? _value._orderHistoryDetailsOrderItem
           : orderHistoryDetailsOrderItem // ignore: cast_nullable_to_non_nullable
@@ -412,6 +425,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
       required this.soldToAddress,
       required this.invoiceNumber,
       required this.orderReason,
+      required this.itemCount,
       required final List<OrderHistoryDetailsOrderItem>
           orderHistoryDetailsOrderItem,
       required this.orderHistoryDetailsPaymentTerm,
@@ -455,9 +469,11 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
   @override
   final String soldToAddress;
   @override
-  final String invoiceNumber;
+  final StringValue invoiceNumber;
   @override
   final String orderReason;
+  @override
+  final int itemCount;
   final List<OrderHistoryDetailsOrderItem> _orderHistoryDetailsOrderItem;
   @override
   List<OrderHistoryDetailsOrderItem> get orderHistoryDetailsOrderItem {
@@ -482,7 +498,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
 
   @override
   String toString() {
-    return 'OrderHistoryDetails(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, pOReference: $pOReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments)';
+    return 'OrderHistoryDetails(totalTax: $totalTax, requestedDeliveryDate: $requestedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, orderValue: $orderValue, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, pOReference: $pOReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, itemCount: $itemCount, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments)';
   }
 
   @override
@@ -522,6 +538,8 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
                 other.invoiceNumber == invoiceNumber) &&
             (identical(other.orderReason, orderReason) ||
                 other.orderReason == orderReason) &&
+            (identical(other.itemCount, itemCount) ||
+                other.itemCount == itemCount) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryDetailsOrderItem,
                 _orderHistoryDetailsOrderItem) &&
@@ -559,6 +577,7 @@ class _$_OrderHistoryDetails extends _OrderHistoryDetails {
         soldToAddress,
         invoiceNumber,
         orderReason,
+        itemCount,
         const DeepCollectionEquality().hash(_orderHistoryDetailsOrderItem),
         orderHistoryDetailsPaymentTerm,
         orderHistoryDetailsSpecialInstructions,
@@ -591,8 +610,9 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
       required final POReference pOReference,
       required final String shipToAddress,
       required final String soldToAddress,
-      required final String invoiceNumber,
+      required final StringValue invoiceNumber,
       required final String orderReason,
+      required final int itemCount,
       required final List<OrderHistoryDetailsOrderItem>
           orderHistoryDetailsOrderItem,
       required final OrderHistoryDetailsPaymentTerm
@@ -635,9 +655,11 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   @override
   String get soldToAddress;
   @override
-  String get invoiceNumber;
+  StringValue get invoiceNumber;
   @override
   String get orderReason;
+  @override
+  int get itemCount;
   @override
   List<OrderHistoryDetailsOrderItem> get orderHistoryDetailsOrderItem;
   @override

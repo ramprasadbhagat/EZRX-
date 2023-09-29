@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_order_repository.dart';
@@ -68,7 +68,7 @@ class ViewByOrderRepository implements IViewByOrderRepository {
         sort: sort,
       );
 
-      final newViewByOrderList = List<OrderHistoryDetailsOrderHeader>.from(
+      final newViewByOrderList = List<OrderHistoryDetails>.from(
         viewByOrder.orderHeaders,
       )..addAll(orderHistoryItemList.orderHeaders);
 

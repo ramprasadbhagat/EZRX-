@@ -25,6 +25,9 @@ class OrderSummarySection extends StatelessWidget {
     final orderDetails =
         context.read<ViewByOrderDetailsBloc>().state.orderHistoryDetails;
 
+    final isMYExternalSalesRep =
+        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20.0,
@@ -45,7 +48,7 @@ class OrderSummarySection extends StatelessWidget {
             valueText: orderDetails.orderNumber.isValid()
                 ? StringUtils.displayPrice(
                     salesOrgConfigs,
-                    orderDetails.orderValue,
+                    orderDetails.orderedItemsValue(isMYExternalSalesRep),
                   )
                 : context.tr('NA'),
           ),
@@ -74,8 +77,8 @@ class OrderSummarySection extends StatelessWidget {
                 ? StringUtils.displayPrice(
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                     taxDisplayForOrderHistoryAndDetails
-                        ? orderDetails.grandTotal
-                        : orderDetails.orderValue,
+                        ? orderDetails.grandTotal(isMYExternalSalesRep)
+                        : orderDetails.orderedItemsValue(isMYExternalSalesRep),
                   )
                 : context.tr('NA'),
           ),

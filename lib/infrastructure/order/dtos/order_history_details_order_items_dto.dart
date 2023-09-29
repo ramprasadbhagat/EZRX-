@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/product_images/entities/product_images.da
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_details_dto.dart';
@@ -56,6 +57,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required OrderHistoryDetailsOrderItemTenderContractDetailsDto tenderContractDetails,
     @JsonKey(name: 'PrincipalName', defaultValue: '')
         required String principalName,
+    @JsonKey(name: 'PrincipalCode', defaultValue: '')
+        required String principalCode,
     @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
         required String governmentMaterialCode,
     @JsonKey(name: 'ProductType', defaultValue: '')
@@ -92,8 +95,10 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
           OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromDomain(
         orderHistoryDetailsOrderItem.tenderContractDetails,
       ),
-      principalName:
-          orderHistoryDetailsOrderItem.principalName.getOrDefaultValue(''),
+      principalName: orderHistoryDetailsOrderItem.principalData.principalName
+          .getOrDefaultValue(''),
+      principalCode: orderHistoryDetailsOrderItem.principalData.principalCode
+          .getOrDefaultValue(''),
       governmentMaterialCode:
           orderHistoryDetailsOrderItem.governmentMaterialCode,
       productType: orderHistoryDetailsOrderItem.productType.getValue(),
@@ -122,7 +127,10 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         tenderContractNumber: tenderContractDetails.tenderContractNumber,
         tenderContractReference: tenderContractDetails.tenderContractReference,
       ),
-      principalName: PrincipalName(principalName),
+      principalData: PrincipalData.empty().copyWith(
+        principalName: PrincipalName(principalName),
+        principalCode: PrincipalCode(principalCode),
+      ),
       productImages: ProductImages.empty(),
       governmentMaterialCode: governmentMaterialCode,
       materialStockInfo: MaterialStockInfo.empty(),
@@ -141,4 +149,4 @@ Map<String, dynamic> orderHistoryDetailsOrderItemTenderContractDetailsOverride(
 ) =>
     json[key] ?? {};
 bool boolStringFormatCheck(Map json, String key) =>
-    json[key] == '' ? false : json[key];
+    json[key] == null || json[key] == '' ? false : json[key];

@@ -18,13 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ViewByOrderDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)
-        fetch,
+        initialized,
+    required TResult Function(OrderNumber orderNumber) fetch,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails)
+        setOrderDetails,
     required TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
         updateMaterialTenderContract,
@@ -33,13 +32,11 @@ mixin _$ViewByOrderDetailsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
-        fetch,
+        initialized,
+    TResult? Function(OrderNumber orderNumber)? fetch,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
     TResult? Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
@@ -48,13 +45,11 @@ mixin _$ViewByOrderDetailsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
-        fetch,
+        initialized,
+    TResult Function(OrderNumber orderNumber)? fetch,
+    TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
     TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
@@ -66,6 +61,7 @@ mixin _$ViewByOrderDetailsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetOrderDetails value) setOrderDetails,
     required TResult Function(_UpdateMaterialTenderContract value)
         updateMaterialTenderContract,
     required TResult Function(_ExpandAttachments value) expandAttachments,
@@ -75,6 +71,7 @@ mixin _$ViewByOrderDetailsEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetOrderDetails value)? setOrderDetails,
     TResult? Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult? Function(_ExpandAttachments value)? expandAttachments,
@@ -84,6 +81,7 @@ mixin _$ViewByOrderDetailsEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetOrderDetails value)? setOrderDetails,
     TResult Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult Function(_ExpandAttachments value)? expandAttachments,
@@ -116,147 +114,9 @@ abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ViewByOrderDetailsEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
-
-  @override
-  String toString() {
-    return 'ViewByOrderDetailsEvent.initialized()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)
-        fetch,
-    required TResult Function(
-            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
-        updateMaterialTenderContract,
-    required TResult Function() expandAttachments,
-  }) {
-    return initialized();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
-        fetch,
-    TResult? Function(
-            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
-        updateMaterialTenderContract,
-    TResult? Function()? expandAttachments,
-  }) {
-    return initialized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
-        fetch,
-    TResult Function(
-            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
-        updateMaterialTenderContract,
-    TResult Function()? expandAttachments,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_UpdateMaterialTenderContract value)
-        updateMaterialTenderContract,
-    required TResult Function(_ExpandAttachments value) expandAttachments,
-  }) {
-    return initialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_UpdateMaterialTenderContract value)?
-        updateMaterialTenderContract,
-    TResult? Function(_ExpandAttachments value)? expandAttachments,
-  }) {
-    return initialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_UpdateMaterialTenderContract value)?
-        updateMaterialTenderContract,
-    TResult Function(_ExpandAttachments value)? expandAttachments,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initialized implements ViewByOrderDetailsEvent {
-  const factory _Initialized() = _$_Initialized;
-}
-
-/// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {User user,
-      OrderNumber orderNumber,
       CustomerCodeInfo customerCodeInfo,
       SalesOrganisation salesOrganisation});
 
@@ -266,29 +126,25 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ViewByOrderDetailsEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$_InitializedCopyWithImpl<$Res>
+    extends _$ViewByOrderDetailsEventCopyWithImpl<$Res, _$_Initialized>
+    implements _$$_InitializedCopyWith<$Res> {
+  __$$_InitializedCopyWithImpl(
+      _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? user = null,
-    Object? orderNumber = null,
     Object? customerCodeInfo = null,
     Object? salesOrganisation = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$_Initialized(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      orderNumber: null == orderNumber
-          ? _value.orderNumber
-          : orderNumber // ignore: cast_nullable_to_non_nullable
-              as OrderNumber,
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -327,17 +183,14 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$_Initialized implements _Initialized {
+  const _$_Initialized(
       {required this.user,
-      required this.orderNumber,
       required this.customerCodeInfo,
       required this.salesOrganisation});
 
   @override
   final User user;
-  @override
-  final OrderNumber orderNumber;
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
@@ -345,17 +198,15 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'ViewByOrderDetailsEvent.fetch(user: $user, orderNumber: $orderNumber, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation)';
+    return 'ViewByOrderDetailsEvent.initialized(user: $user, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$_Initialized &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.orderNumber, orderNumber) ||
-                other.orderNumber == orderNumber) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -363,8 +214,179 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, user, orderNumber, customerCodeInfo, salesOrganisation);
+  int get hashCode =>
+      Object.hash(runtimeType, user, customerCodeInfo, salesOrganisation);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)
+        initialized,
+    required TResult Function(OrderNumber orderNumber) fetch,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails)
+        setOrderDetails,
+    required TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
+        updateMaterialTenderContract,
+    required TResult Function() expandAttachments,
+  }) {
+    return initialized(user, customerCodeInfo, salesOrganisation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult? Function(OrderNumber orderNumber)? fetch,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
+    TResult? Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
+    TResult? Function()? expandAttachments,
+  }) {
+    return initialized?.call(user, customerCodeInfo, salesOrganisation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult Function(OrderNumber orderNumber)? fetch,
+    TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
+    TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
+    TResult Function()? expandAttachments,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(user, customerCodeInfo, salesOrganisation);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetOrderDetails value) setOrderDetails,
+    required TResult Function(_UpdateMaterialTenderContract value)
+        updateMaterialTenderContract,
+    required TResult Function(_ExpandAttachments value) expandAttachments,
+  }) {
+    return initialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetOrderDetails value)? setOrderDetails,
+    TResult? Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
+    TResult? Function(_ExpandAttachments value)? expandAttachments,
+  }) {
+    return initialized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetOrderDetails value)? setOrderDetails,
+    TResult Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
+    TResult Function(_ExpandAttachments value)? expandAttachments,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initialized implements ViewByOrderDetailsEvent {
+  const factory _Initialized(
+      {required final User user,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final SalesOrganisation salesOrganisation}) = _$_Initialized;
+
+  User get user;
+  CustomerCodeInfo get customerCodeInfo;
+  SalesOrganisation get salesOrganisation;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchCopyWith<$Res> {
+  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
+      __$$_FetchCopyWithImpl<$Res>;
+  @useResult
+  $Res call({OrderNumber orderNumber});
+}
+
+/// @nodoc
+class __$$_FetchCopyWithImpl<$Res>
+    extends _$ViewByOrderDetailsEventCopyWithImpl<$Res, _$_Fetch>
+    implements _$$_FetchCopyWith<$Res> {
+  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? orderNumber = null,
+  }) {
+    return _then(_$_Fetch(
+      orderNumber: null == orderNumber
+          ? _value.orderNumber
+          : orderNumber // ignore: cast_nullable_to_non_nullable
+              as OrderNumber,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Fetch implements _Fetch {
+  const _$_Fetch({required this.orderNumber});
+
+  @override
+  final OrderNumber orderNumber;
+
+  @override
+  String toString() {
+    return 'ViewByOrderDetailsEvent.fetch(orderNumber: $orderNumber)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Fetch &&
+            (identical(other.orderNumber, orderNumber) ||
+                other.orderNumber == orderNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, orderNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -375,49 +397,44 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)
-        fetch,
+        initialized,
+    required TResult Function(OrderNumber orderNumber) fetch,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails)
+        setOrderDetails,
     required TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
   }) {
-    return fetch(user, orderNumber, customerCodeInfo, salesOrganisation);
+    return fetch(orderNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
-        fetch,
+        initialized,
+    TResult? Function(OrderNumber orderNumber)? fetch,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
     TResult? Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
   }) {
-    return fetch?.call(user, orderNumber, customerCodeInfo, salesOrganisation);
+    return fetch?.call(orderNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
-        fetch,
+        initialized,
+    TResult Function(OrderNumber orderNumber)? fetch,
+    TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
     TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
@@ -425,7 +442,7 @@ class _$_Fetch implements _Fetch {
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(user, orderNumber, customerCodeInfo, salesOrganisation);
+      return fetch(orderNumber);
     }
     return orElse();
   }
@@ -435,6 +452,7 @@ class _$_Fetch implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetOrderDetails value) setOrderDetails,
     required TResult Function(_UpdateMaterialTenderContract value)
         updateMaterialTenderContract,
     required TResult Function(_ExpandAttachments value) expandAttachments,
@@ -447,6 +465,7 @@ class _$_Fetch implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetOrderDetails value)? setOrderDetails,
     TResult? Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult? Function(_ExpandAttachments value)? expandAttachments,
@@ -459,6 +478,7 @@ class _$_Fetch implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetOrderDetails value)? setOrderDetails,
     TResult Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult Function(_ExpandAttachments value)? expandAttachments,
@@ -472,18 +492,192 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements ViewByOrderDetailsEvent {
-  const factory _Fetch(
-      {required final User user,
-      required final OrderNumber orderNumber,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final SalesOrganisation salesOrganisation}) = _$_Fetch;
+  const factory _Fetch({required final OrderNumber orderNumber}) = _$_Fetch;
 
-  User get user;
   OrderNumber get orderNumber;
-  CustomerCodeInfo get customerCodeInfo;
-  SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
   _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SetOrderDetailsCopyWith<$Res> {
+  factory _$$_SetOrderDetailsCopyWith(
+          _$_SetOrderDetails value, $Res Function(_$_SetOrderDetails) then) =
+      __$$_SetOrderDetailsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({OrderHistoryDetails orderHistoryDetails});
+
+  $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
+}
+
+/// @nodoc
+class __$$_SetOrderDetailsCopyWithImpl<$Res>
+    extends _$ViewByOrderDetailsEventCopyWithImpl<$Res, _$_SetOrderDetails>
+    implements _$$_SetOrderDetailsCopyWith<$Res> {
+  __$$_SetOrderDetailsCopyWithImpl(
+      _$_SetOrderDetails _value, $Res Function(_$_SetOrderDetails) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? orderHistoryDetails = null,
+  }) {
+    return _then(_$_SetOrderDetails(
+      orderHistoryDetails: null == orderHistoryDetails
+          ? _value.orderHistoryDetails
+          : orderHistoryDetails // ignore: cast_nullable_to_non_nullable
+              as OrderHistoryDetails,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails {
+    return $OrderHistoryDetailsCopyWith<$Res>(_value.orderHistoryDetails,
+        (value) {
+      return _then(_value.copyWith(orderHistoryDetails: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_SetOrderDetails implements _SetOrderDetails {
+  const _$_SetOrderDetails({required this.orderHistoryDetails});
+
+  @override
+  final OrderHistoryDetails orderHistoryDetails;
+
+  @override
+  String toString() {
+    return 'ViewByOrderDetailsEvent.setOrderDetails(orderHistoryDetails: $orderHistoryDetails)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetOrderDetails &&
+            (identical(other.orderHistoryDetails, orderHistoryDetails) ||
+                other.orderHistoryDetails == orderHistoryDetails));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, orderHistoryDetails);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetOrderDetailsCopyWith<_$_SetOrderDetails> get copyWith =>
+      __$$_SetOrderDetailsCopyWithImpl<_$_SetOrderDetails>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)
+        initialized,
+    required TResult Function(OrderNumber orderNumber) fetch,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails)
+        setOrderDetails,
+    required TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
+        updateMaterialTenderContract,
+    required TResult Function() expandAttachments,
+  }) {
+    return setOrderDetails(orderHistoryDetails);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult? Function(OrderNumber orderNumber)? fetch,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
+    TResult? Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
+    TResult? Function()? expandAttachments,
+  }) {
+    return setOrderDetails?.call(orderHistoryDetails);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation)?
+        initialized,
+    TResult Function(OrderNumber orderNumber)? fetch,
+    TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
+    TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
+    TResult Function()? expandAttachments,
+    required TResult orElse(),
+  }) {
+    if (setOrderDetails != null) {
+      return setOrderDetails(orderHistoryDetails);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetOrderDetails value) setOrderDetails,
+    required TResult Function(_UpdateMaterialTenderContract value)
+        updateMaterialTenderContract,
+    required TResult Function(_ExpandAttachments value) expandAttachments,
+  }) {
+    return setOrderDetails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetOrderDetails value)? setOrderDetails,
+    TResult? Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
+    TResult? Function(_ExpandAttachments value)? expandAttachments,
+  }) {
+    return setOrderDetails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetOrderDetails value)? setOrderDetails,
+    TResult Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
+    TResult Function(_ExpandAttachments value)? expandAttachments,
+    required TResult orElse(),
+  }) {
+    if (setOrderDetails != null) {
+      return setOrderDetails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetOrderDetails implements ViewByOrderDetailsEvent {
+  const factory _SetOrderDetails(
+          {required final OrderHistoryDetails orderHistoryDetails}) =
+      _$_SetOrderDetails;
+
+  OrderHistoryDetails get orderHistoryDetails;
+  @JsonKey(ignore: true)
+  _$$_SetOrderDetailsCopyWith<_$_SetOrderDetails> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -588,13 +782,12 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)
-        fetch,
+        initialized,
+    required TResult Function(OrderNumber orderNumber) fetch,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails)
+        setOrderDetails,
     required TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
         updateMaterialTenderContract,
@@ -606,13 +799,11 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
-        fetch,
+        initialized,
+    TResult? Function(OrderNumber orderNumber)? fetch,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
     TResult? Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
@@ -625,13 +816,11 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
-        fetch,
+        initialized,
+    TResult Function(OrderNumber orderNumber)? fetch,
+    TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
     TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
@@ -649,6 +838,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetOrderDetails value) setOrderDetails,
     required TResult Function(_UpdateMaterialTenderContract value)
         updateMaterialTenderContract,
     required TResult Function(_ExpandAttachments value) expandAttachments,
@@ -661,6 +851,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetOrderDetails value)? setOrderDetails,
     TResult? Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult? Function(_ExpandAttachments value)? expandAttachments,
@@ -673,6 +864,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetOrderDetails value)? setOrderDetails,
     TResult Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult Function(_ExpandAttachments value)? expandAttachments,
@@ -737,13 +929,12 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)
-        fetch,
+        initialized,
+    required TResult Function(OrderNumber orderNumber) fetch,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails)
+        setOrderDetails,
     required TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
         updateMaterialTenderContract,
@@ -755,13 +946,11 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
-        fetch,
+        initialized,
+    TResult? Function(OrderNumber orderNumber)? fetch,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
     TResult? Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
@@ -773,13 +962,11 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            User user,
-            OrderNumber orderNumber,
-            CustomerCodeInfo customerCodeInfo,
+    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
             SalesOrganisation salesOrganisation)?
-        fetch,
+        initialized,
+    TResult Function(OrderNumber orderNumber)? fetch,
+    TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
     TResult Function(
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
@@ -797,6 +984,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetOrderDetails value) setOrderDetails,
     required TResult Function(_UpdateMaterialTenderContract value)
         updateMaterialTenderContract,
     required TResult Function(_ExpandAttachments value) expandAttachments,
@@ -809,6 +997,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetOrderDetails value)? setOrderDetails,
     TResult? Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult? Function(_ExpandAttachments value)? expandAttachments,
@@ -821,6 +1010,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetOrderDetails value)? setOrderDetails,
     TResult Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult Function(_ExpandAttachments value)? expandAttachments,
@@ -839,6 +1029,9 @@ abstract class _ExpandAttachments implements ViewByOrderDetailsEvent {
 
 /// @nodoc
 mixin _$ViewByOrderDetailsState {
+  User get user => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   OrderHistoryDetails get orderHistoryDetails =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
@@ -865,7 +1058,10 @@ abstract class $ViewByOrderDetailsStateCopyWith<$Res> {
       _$ViewByOrderDetailsStateCopyWithImpl<$Res, ViewByOrderDetailsState>;
   @useResult
   $Res call(
-      {OrderHistoryDetails orderHistoryDetails,
+      {User user,
+      CustomerCodeInfo customerCodeInfo,
+      SalesOrganisation salesOrganisation,
+      OrderHistoryDetails orderHistoryDetails,
       bool isLoading,
       Map<MaterialQueryInfo, bool> isLoadingTenderContract,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -874,6 +1070,9 @@ abstract class $ViewByOrderDetailsStateCopyWith<$Res> {
       List<ProductDetailAggregate> productDetailAggregateList,
       bool isFetchingList});
 
+  $UserCopyWith<$Res> get user;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
 }
 
@@ -891,6 +1090,9 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
+    Object? customerCodeInfo = null,
+    Object? salesOrganisation = null,
     Object? orderHistoryDetails = null,
     Object? isLoading = null,
     Object? isLoadingTenderContract = null,
@@ -901,6 +1103,18 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
     Object? isFetchingList = null,
   }) {
     return _then(_value.copyWith(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
       orderHistoryDetails: null == orderHistoryDetails
           ? _value.orderHistoryDetails
           : orderHistoryDetails // ignore: cast_nullable_to_non_nullable
@@ -938,6 +1152,30 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails {
     return $OrderHistoryDetailsCopyWith<$Res>(_value.orderHistoryDetails,
         (value) {
@@ -955,7 +1193,10 @@ abstract class _$$_ViewByOrderDetailsStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {OrderHistoryDetails orderHistoryDetails,
+      {User user,
+      CustomerCodeInfo customerCodeInfo,
+      SalesOrganisation salesOrganisation,
+      OrderHistoryDetails orderHistoryDetails,
       bool isLoading,
       Map<MaterialQueryInfo, bool> isLoadingTenderContract,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -964,6 +1205,12 @@ abstract class _$$_ViewByOrderDetailsStateCopyWith<$Res>
       List<ProductDetailAggregate> productDetailAggregateList,
       bool isFetchingList});
 
+  @override
+  $UserCopyWith<$Res> get user;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
 }
@@ -980,6 +1227,9 @@ class __$$_ViewByOrderDetailsStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? user = null,
+    Object? customerCodeInfo = null,
+    Object? salesOrganisation = null,
     Object? orderHistoryDetails = null,
     Object? isLoading = null,
     Object? isLoadingTenderContract = null,
@@ -990,6 +1240,18 @@ class __$$_ViewByOrderDetailsStateCopyWithImpl<$Res>
     Object? isFetchingList = null,
   }) {
     return _then(_$_ViewByOrderDetailsState(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
       orderHistoryDetails: null == orderHistoryDetails
           ? _value.orderHistoryDetails
           : orderHistoryDetails // ignore: cast_nullable_to_non_nullable
@@ -1030,7 +1292,10 @@ class __$$_ViewByOrderDetailsStateCopyWithImpl<$Res>
 
 class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
   const _$_ViewByOrderDetailsState(
-      {required this.orderHistoryDetails,
+      {required this.user,
+      required this.customerCodeInfo,
+      required this.salesOrganisation,
+      required this.orderHistoryDetails,
       required this.isLoading,
       required final Map<MaterialQueryInfo, bool> isLoadingTenderContract,
       required this.failureOrSuccessOption,
@@ -1043,6 +1308,12 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
         _productDetailAggregateList = productDetailAggregateList,
         super._();
 
+  @override
+  final User user;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final SalesOrganisation salesOrganisation;
   @override
   final OrderHistoryDetails orderHistoryDetails;
   @override
@@ -1082,7 +1353,7 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
 
   @override
   String toString() {
-    return 'ViewByOrderDetailsState(orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, isLoadingTenderContract: $isLoadingTenderContract, failureOrSuccessOption: $failureOrSuccessOption, materials: $materials, isExpanded: $isExpanded, productDetailAggregateList: $productDetailAggregateList, isFetchingList: $isFetchingList)';
+    return 'ViewByOrderDetailsState(user: $user, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, isLoadingTenderContract: $isLoadingTenderContract, failureOrSuccessOption: $failureOrSuccessOption, materials: $materials, isExpanded: $isExpanded, productDetailAggregateList: $productDetailAggregateList, isFetchingList: $isFetchingList)';
   }
 
   @override
@@ -1090,6 +1361,11 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ViewByOrderDetailsState &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
             (identical(other.orderHistoryDetails, orderHistoryDetails) ||
                 other.orderHistoryDetails == orderHistoryDetails) &&
             (identical(other.isLoading, isLoading) ||
@@ -1112,6 +1388,9 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      user,
+      customerCodeInfo,
+      salesOrganisation,
       orderHistoryDetails,
       isLoading,
       const DeepCollectionEquality().hash(_isLoadingTenderContract),
@@ -1132,7 +1411,10 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
 
 abstract class _ViewByOrderDetailsState extends ViewByOrderDetailsState {
   const factory _ViewByOrderDetailsState(
-      {required final OrderHistoryDetails orderHistoryDetails,
+      {required final User user,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final SalesOrganisation salesOrganisation,
+      required final OrderHistoryDetails orderHistoryDetails,
       required final bool isLoading,
       required final Map<MaterialQueryInfo, bool> isLoadingTenderContract,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
@@ -1142,6 +1424,12 @@ abstract class _ViewByOrderDetailsState extends ViewByOrderDetailsState {
       required final bool isFetchingList}) = _$_ViewByOrderDetailsState;
   const _ViewByOrderDetailsState._() : super._();
 
+  @override
+  User get user;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
+  @override
+  SalesOrganisation get salesOrganisation;
   @override
   OrderHistoryDetails get orderHistoryDetails;
   @override

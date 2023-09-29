@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ViewByOrder {
   int get orderCount => throw _privateConstructorUsedError;
   List<String> get creatingOrderIds => throw _privateConstructorUsedError;
-  List<OrderHistoryDetailsOrderHeader> get orderHeaders =>
+  List<OrderHistoryDetails> get orderHeaders =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $ViewByOrderCopyWith<$Res> {
   $Res call(
       {int orderCount,
       List<String> creatingOrderIds,
-      List<OrderHistoryDetailsOrderHeader> orderHeaders});
+      List<OrderHistoryDetails> orderHeaders});
 }
 
 /// @nodoc
@@ -67,7 +67,7 @@ class _$ViewByOrderCopyWithImpl<$Res, $Val extends ViewByOrder>
       orderHeaders: null == orderHeaders
           ? _value.orderHeaders
           : orderHeaders // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsOrderHeader>,
+              as List<OrderHistoryDetails>,
     ) as $Val);
   }
 }
@@ -83,7 +83,7 @@ abstract class _$$_ViewByOrderCopyWith<$Res>
   $Res call(
       {int orderCount,
       List<String> creatingOrderIds,
-      List<OrderHistoryDetailsOrderHeader> orderHeaders});
+      List<OrderHistoryDetails> orderHeaders});
 }
 
 /// @nodoc
@@ -113,7 +113,7 @@ class __$$_ViewByOrderCopyWithImpl<$Res>
       orderHeaders: null == orderHeaders
           ? _value._orderHeaders
           : orderHeaders // ignore: cast_nullable_to_non_nullable
-              as List<OrderHistoryDetailsOrderHeader>,
+              as List<OrderHistoryDetails>,
     ));
   }
 }
@@ -124,7 +124,7 @@ class _$_ViewByOrder extends _ViewByOrder {
   _$_ViewByOrder(
       {required this.orderCount,
       required final List<String> creatingOrderIds,
-      required final List<OrderHistoryDetailsOrderHeader> orderHeaders})
+      required final List<OrderHistoryDetails> orderHeaders})
       : _creatingOrderIds = creatingOrderIds,
         _orderHeaders = orderHeaders,
         super._();
@@ -140,9 +140,9 @@ class _$_ViewByOrder extends _ViewByOrder {
     return EqualUnmodifiableListView(_creatingOrderIds);
   }
 
-  final List<OrderHistoryDetailsOrderHeader> _orderHeaders;
+  final List<OrderHistoryDetails> _orderHeaders;
   @override
-  List<OrderHistoryDetailsOrderHeader> get orderHeaders {
+  List<OrderHistoryDetails> get orderHeaders {
     if (_orderHeaders is EqualUnmodifiableListView) return _orderHeaders;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_orderHeaders);
@@ -182,10 +182,9 @@ class _$_ViewByOrder extends _ViewByOrder {
 
 abstract class _ViewByOrder extends ViewByOrder {
   factory _ViewByOrder(
-          {required final int orderCount,
-          required final List<String> creatingOrderIds,
-          required final List<OrderHistoryDetailsOrderHeader> orderHeaders}) =
-      _$_ViewByOrder;
+      {required final int orderCount,
+      required final List<String> creatingOrderIds,
+      required final List<OrderHistoryDetails> orderHeaders}) = _$_ViewByOrder;
   _ViewByOrder._() : super._();
 
   @override
@@ -193,7 +192,7 @@ abstract class _ViewByOrder extends ViewByOrder {
   @override
   List<String> get creatingOrderIds;
   @override
-  List<OrderHistoryDetailsOrderHeader> get orderHeaders;
+  List<OrderHistoryDetails> get orderHeaders;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByOrderCopyWith<_$_ViewByOrder> get copyWith =>

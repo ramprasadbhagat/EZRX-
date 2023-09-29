@@ -4,9 +4,10 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -35,7 +36,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required List<OrderHistoryDetailsOrderItemDetails> details,
     required OrderHistoryDetailsOrderItemTenderContractDetails
         tenderContractDetails,
-    required PrincipalName principalName,
+    required PrincipalData principalData,
     required ProductImages productImages,
     required String governmentMaterialCode,
     required MaterialStockInfo materialStockInfo,
@@ -62,7 +63,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         details: <OrderHistoryDetailsOrderItemDetails>[],
         tenderContractDetails:
             OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
-        principalName: PrincipalName(''),
+        principalData: PrincipalData.empty(),
         productImages: ProductImages.empty(),
         governmentMaterialCode: '',
         materialStockInfo: MaterialStockInfo.empty(),
@@ -130,14 +131,14 @@ extension ViewByOrderDetailsListExtension
     on List<OrderHistoryDetailsOrderItem> {
   List<ViewByOrdersGroup> get getViewByOrderItemDetailsList {
     return List<OrderHistoryDetailsOrderItem>.from(this)
-        .groupListsBy((item) => item.principalName)
+        .groupListsBy((item) => item.principalData.principalName)
         .entries
         .map(
           (entry) => ViewByOrdersGroup(
             createdDate: DateTimeStringValue(''),
             viewByOrderItem: entry.value,
             principalName: entry.key,
-            orderHeaders: <OrderHistoryDetailsOrderHeader>[],
+            orderHeaders: <OrderHistoryDetails>[],
           ),
         )
         .toList();

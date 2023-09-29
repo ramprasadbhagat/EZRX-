@@ -86,10 +86,7 @@ class _NotificationList extends StatelessWidget {
         eligibilityState.user.userCanAccessOrderHistory) {
       context.read<ViewByOrderDetailsBloc>().add(
             ViewByOrderDetailsEvent.fetch(
-              user: eligibilityState.user,
               orderNumber: notificationData.orderNumber,
-              customerCodeInfo: eligibilityState.customerCodeInfo,
-              salesOrganisation: eligibilityState.salesOrganisation,
             ),
           );
       //Navigate to Order Detail Page

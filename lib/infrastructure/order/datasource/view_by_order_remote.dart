@@ -7,12 +7,12 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_query.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/view_by_order_dto.dart';
 
 class ViewByOrderRemoteDataSource {
   HttpService httpService;
-  ViewByOrderQuery viewByOrderQuery;
+  ViewByOrderDetailsQueryMutation viewByOrderQuery;
   Config config;
   DataSourceExceptionHandler dataSourceExceptionHandler;
 
@@ -36,7 +36,7 @@ class ViewByOrderRemoteDataSource {
     required Map<String, dynamic> filterQuery,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = viewByOrderQuery.getOrderHistoryV3();
+      final queryData = viewByOrderQuery.getOrderHistoryDetails();
 
       final variables = {
         'soldTo': soldTo,

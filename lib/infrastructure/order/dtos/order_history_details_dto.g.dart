@@ -41,6 +41,7 @@ _$_OrderHistoryDetailsDto _$$_OrderHistoryDetailsDtoFromJson(
           (poDocumentOverride(json, 'PODocuments') as List<dynamic>)
               .map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
               .toList(),
+      itemCount: json['ItmCount'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(
@@ -71,4 +72,5 @@ Map<String, dynamic> _$$_OrderHistoryDetailsDtoToJson(
       'PODocuments': instance.orderHistoryDetailsPoDocuments
           .map((e) => e.toJson())
           .toList(),
+      'ItmCount': instance.itemCount,
     };

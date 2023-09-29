@@ -35,7 +35,7 @@ mixin _$OrderHistoryDetailsOrderItem {
       throw _privateConstructorUsedError;
   OrderHistoryDetailsOrderItemTenderContractDetails get tenderContractDetails =>
       throw _privateConstructorUsedError;
-  PrincipalName get principalName => throw _privateConstructorUsedError;
+  PrincipalData get principalData => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   MaterialStockInfo get materialStockInfo => throw _privateConstructorUsedError;
@@ -73,7 +73,7 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       bool isTenderContractMaterial,
       List<OrderHistoryDetailsOrderItemDetails> details,
       OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails,
-      PrincipalName principalName,
+      PrincipalData principalData,
       ProductImages productImages,
       String governmentMaterialCode,
       MaterialStockInfo materialStockInfo,
@@ -83,6 +83,7 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
 
   $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
       get tenderContractDetails;
+  $PrincipalDataCopyWith<$Res> get principalData;
   $ProductImagesCopyWith<$Res> get productImages;
   $MaterialStockInfoCopyWith<$Res> get materialStockInfo;
   $PriceAggregateCopyWith<$Res> get priceAggregate;
@@ -118,7 +119,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? isTenderContractMaterial = null,
     Object? details = null,
     Object? tenderContractDetails = null,
-    Object? principalName = null,
+    Object? principalData = null,
     Object? productImages = null,
     Object? governmentMaterialCode = null,
     Object? materialStockInfo = null,
@@ -191,10 +192,10 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
           ? _value.tenderContractDetails
           : tenderContractDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsOrderItemTenderContractDetails,
-      principalName: null == principalName
-          ? _value.principalName
-          : principalName // ignore: cast_nullable_to_non_nullable
-              as PrincipalName,
+      principalData: null == principalData
+          ? _value.principalData
+          : principalData // ignore: cast_nullable_to_non_nullable
+              as PrincipalData,
       productImages: null == productImages
           ? _value.productImages
           : productImages // ignore: cast_nullable_to_non_nullable
@@ -229,6 +230,14 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     return $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>(
         _value.tenderContractDetails, (value) {
       return _then(_value.copyWith(tenderContractDetails: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PrincipalDataCopyWith<$Res> get principalData {
+    return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
+      return _then(_value.copyWith(principalData: value) as $Val);
     });
   }
 
@@ -283,7 +292,7 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
       bool isTenderContractMaterial,
       List<OrderHistoryDetailsOrderItemDetails> details,
       OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails,
-      PrincipalName principalName,
+      PrincipalData principalData,
       ProductImages productImages,
       String governmentMaterialCode,
       MaterialStockInfo materialStockInfo,
@@ -294,6 +303,8 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
   @override
   $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
       get tenderContractDetails;
+  @override
+  $PrincipalDataCopyWith<$Res> get principalData;
   @override
   $ProductImagesCopyWith<$Res> get productImages;
   @override
@@ -331,7 +342,7 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
     Object? isTenderContractMaterial = null,
     Object? details = null,
     Object? tenderContractDetails = null,
-    Object? principalName = null,
+    Object? principalData = null,
     Object? productImages = null,
     Object? governmentMaterialCode = null,
     Object? materialStockInfo = null,
@@ -404,10 +415,10 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
           ? _value.tenderContractDetails
           : tenderContractDetails // ignore: cast_nullable_to_non_nullable
               as OrderHistoryDetailsOrderItemTenderContractDetails,
-      principalName: null == principalName
-          ? _value.principalName
-          : principalName // ignore: cast_nullable_to_non_nullable
-              as PrincipalName,
+      principalData: null == principalData
+          ? _value.principalData
+          : principalData // ignore: cast_nullable_to_non_nullable
+              as PrincipalData,
       productImages: null == productImages
           ? _value.productImages
           : productImages // ignore: cast_nullable_to_non_nullable
@@ -456,7 +467,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
       required this.isTenderContractMaterial,
       required final List<OrderHistoryDetailsOrderItemDetails> details,
       required this.tenderContractDetails,
-      required this.principalName,
+      required this.principalData,
       required this.productImages,
       required this.governmentMaterialCode,
       required this.materialStockInfo,
@@ -505,7 +516,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   @override
   final OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails;
   @override
-  final PrincipalName principalName;
+  final PrincipalData principalData;
   @override
   final ProductImages productImages;
   @override
@@ -521,7 +532,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId)';
+    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId)';
   }
 
   @override
@@ -557,8 +568,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
             const DeepCollectionEquality().equals(other._details, _details) &&
             (identical(other.tenderContractDetails, tenderContractDetails) ||
                 other.tenderContractDetails == tenderContractDetails) &&
-            (identical(other.principalName, principalName) ||
-                other.principalName == principalName) &&
+            (identical(other.principalData, principalData) ||
+                other.principalData == principalData) &&
             (identical(other.productImages, productImages) ||
                 other.productImages == productImages) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
@@ -592,7 +603,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
         isTenderContractMaterial,
         const DeepCollectionEquality().hash(_details),
         tenderContractDetails,
-        principalName,
+        principalData,
         productImages,
         governmentMaterialCode,
         materialStockInfo,
@@ -629,7 +640,7 @@ abstract class _OrderHistoryDetailsOrderItem
       required final List<OrderHistoryDetailsOrderItemDetails> details,
       required final OrderHistoryDetailsOrderItemTenderContractDetails
           tenderContractDetails,
-      required final PrincipalName principalName,
+      required final PrincipalData principalData,
       required final ProductImages productImages,
       required final String governmentMaterialCode,
       required final MaterialStockInfo materialStockInfo,
@@ -671,7 +682,7 @@ abstract class _OrderHistoryDetailsOrderItem
   @override
   OrderHistoryDetailsOrderItemTenderContractDetails get tenderContractDetails;
   @override
-  PrincipalName get principalName;
+  PrincipalData get principalData;
   @override
   ProductImages get productImages;
   @override

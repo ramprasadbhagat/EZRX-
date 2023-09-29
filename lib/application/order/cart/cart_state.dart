@@ -247,8 +247,11 @@ class CartState with _$CartState {
             itemBundlePrice(bundleCode: element.bundle.bundleCode),
       );
 
-  PriceAggregate updatedCartProduct(MaterialNumber matNumber) => cartProducts
-      .firstWhere((element) => element.getMaterialNumber == matNumber);
+  PriceAggregate updatedCartProduct(MaterialNumber matNumber) =>
+      cartProducts.firstWhere(
+        (element) => element.getMaterialNumber == matNumber,
+        orElse: () => PriceAggregate.empty(),
+      );
 
   double get taxBundle => cartProducts
       .where((element) => element.materialInfo.type.typeBundle)

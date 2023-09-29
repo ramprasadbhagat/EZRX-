@@ -22,8 +22,7 @@ class _ViewByOrderGroup extends StatelessWidget {
       children: [
         if (showBanner)
           InfoLabel(
-            textValue:
-                context
+            textValue: context
                 .tr('Order history is limited to the last 6 months from today'),
             mainColor: ZPColors.blueAccent,
             margin: const EdgeInsets.symmetric(horizontal: 20.0)
@@ -53,7 +52,6 @@ class _ViewByOrderGroup extends StatelessWidget {
               ...viewByOrdersItem.orderHeaders.map(
                 (e) => _ViewByOrder(
                   viewByOrderHistoryItem: e,
-                  orderHistoryItem: orderHistoryItem,
                 ),
               ),
             ],

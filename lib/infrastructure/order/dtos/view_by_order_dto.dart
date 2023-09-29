@@ -1,5 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_header_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'view_by_order_dto.freezed.dart';
@@ -15,9 +15,9 @@ class ViewByOrderDto with _$ViewByOrderDto {
         required List<String> creatingOrderIds,
     @JsonKey(
       name: 'orderHeaders',
-      defaultValue: <OrderHistoryDetailsOrderHeadersDto>[],
+      defaultValue: <OrderHistoryDetailsDto>[],
     )
-        required List<OrderHistoryDetailsOrderHeadersDto> orderHeaders,
+        required List<OrderHistoryDetailsDto> orderHeaders,
   }) = _ViewByOrderDto;
   factory ViewByOrderDto.fromDomain(
     ViewByOrder viewByOrder,
@@ -25,7 +25,7 @@ class ViewByOrderDto with _$ViewByOrderDto {
     return ViewByOrderDto(
       creatingOrderIds: viewByOrder.creatingOrderIds,
       orderHeaders: List.from(viewByOrder.orderHeaders)
-          .map((e) => OrderHistoryDetailsOrderHeadersDto.fromDomain(e))
+          .map((e) => OrderHistoryDetailsDto.fromDomain(e))
           .toList(),
       orderCount: viewByOrder.orderCount,
     );

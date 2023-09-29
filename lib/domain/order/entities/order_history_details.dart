@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -7,6 +8,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_t
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details.freezed.dart';
@@ -32,8 +34,9 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     required POReference pOReference,
     required String shipToAddress,
     required String soldToAddress,
-    required String invoiceNumber,
+    required StringValue invoiceNumber,
     required String orderReason,
+    required int itemCount,
     required List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItem,
     required OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
     required SpecialInstructions orderHistoryDetailsSpecialInstructions,
@@ -56,15 +59,16 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         soldTo: '',
         shipToAddress: '',
         soldToAddress: '',
-        invoiceNumber: '',
+        invoiceNumber: StringValue(''),
         orderReason: '',
         orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[],
         orderHistoryDetailsPaymentTerm: OrderHistoryDetailsPaymentTerm.empty(),
         orderHistoryDetailsSpecialInstructions: SpecialInstructions(''),
         orderHistoryDetailsPoDocuments: <PoDocuments>[],
+        itemCount: 0,
       );
 
-  double get grandTotal => orderValue + totalTax;
+  double get grandTotalWithTax => orderValue + totalTax;
 
   bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
 
@@ -141,5 +145,46 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     return orderHistoryDetailsOrderItem
         .where((element) => element.materialNumber == materialNumber)
         .first;
+  }
+
+  double grandTotal(bool isMYExternalSalesRep) =>
+      orderHistoryDetailsOrderItem.fold(
+        grandTotalWithTax,
+        (previousValue, element) => isMYExternalSalesRep &&
+                element.type.isMaterialTypeComm &&
+                element.principalData.principalCode.isPnG &&
+                !invoiceNumber.isValid() &&
+                orderValue > 0
+            ? grandTotalWithTax - element.totalPrice.totalPrice
+            : previousValue,
+      );
+
+  double orderedItemsValue(bool isMYExternalSalesRep) =>
+      orderHistoryDetailsOrderItem.fold(
+        orderValue,
+        (previousValue, element) => isMYExternalSalesRep &&
+                element.type.isMaterialTypeComm &&
+                element.principalData.principalCode.isPnG &&
+                !invoiceNumber.isValid() &&
+                orderValue > 0
+            ? orderValue - (element.qty * element.unitPrice.zpPrice)
+            : previousValue,
+      );
+}
+
+extension ViewByOrderListExtension on List<OrderHistoryDetails> {
+  List<ViewByOrdersGroup> get getViewByOrderGroupList {
+    return List<OrderHistoryDetails>.from(this)
+        .groupListsBy((item) => item.createdDate)
+        .entries
+        .map(
+          (entry) => ViewByOrdersGroup(
+            createdDate: entry.key,
+            orderHeaders: entry.value,
+            principalName: PrincipalName(''),
+            viewByOrderItem: <OrderHistoryDetailsOrderItem>[],
+          ),
+        )
+        .toList();
   }
 }

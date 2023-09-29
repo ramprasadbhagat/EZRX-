@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -150,7 +151,7 @@ void main() {
         OrderSummaryState.initial().copyWith(
           isConfirming: false,
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            invoiceNumber: 'fake-number',
+            invoiceNumber: StringValue('fake-number'),
             orderHistoryDetailsPaymentTerm:
                 OrderHistoryDetailsPaymentTerm.empty().copyWith(
               paymentTermCode: PaymentTermCode(''),
@@ -178,7 +179,7 @@ void main() {
         OrderSummaryState.initial().copyWith(
           isConfirming: false,
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
-            invoiceNumber: 'fake-number',
+            invoiceNumber: StringValue('fake-number'),
             orderHistoryDetailsPaymentTerm:
                 OrderHistoryDetailsPaymentTerm.empty().copyWith(
               paymentTermCode: PaymentTermCode(''),

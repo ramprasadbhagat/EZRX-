@@ -10,7 +10,6 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_header.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
@@ -40,7 +39,7 @@ void main() {
     preferredLanguage: const Locale(ApiLanguageCode.english),
   );
 
-  final mockOrderHistoryItem = OrderHistoryDetailsOrderHeader.empty();
+  final mockOrderHistoryItem = OrderHistoryDetails.empty();
 
   setUpAll(() {
     mockConfig = MockConfig();

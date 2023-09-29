@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -17,8 +18,11 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -67,6 +71,10 @@ class ReOrderPermissionBlocMock
     extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
     implements ReOrderPermissionBloc {}
 
+class MockProductImageBloc
+    extends MockBloc<ProductImageEvent, ProductImageState>
+    implements ProductImageBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -81,6 +89,7 @@ void main() {
   late AppRouter autoRouterMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late CartBlocMock cartBlocMock;
+  late ProductImageBloc mockProductImageBloc;
 
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -104,6 +113,7 @@ void main() {
       customerCodeBlocMock = CustomerCodeBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
+      mockProductImageBloc = MockProductImageBloc();
       mockAuthBloc = MockAuthBloc();
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
@@ -123,7 +133,8 @@ void main() {
           .thenReturn(ViewByOrderDetailsState.initial());
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
-
+      when(() => mockProductImageBloc.state)
+          .thenReturn(ProductImageState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(
         SalesOrgState.initial().copyWith(
           configs: SalesOrganisationConfigs.empty().copyWith(
@@ -183,6 +194,9 @@ void main() {
           ),
           BlocProvider<ReOrderPermissionBloc>(
             create: ((context) => reOrderPermissionBlocMock),
+          ),
+          BlocProvider<ProductImageBloc>(
+            create: (context) => mockProductImageBloc,
           ),
         ],
         child: const Material(
@@ -341,6 +355,60 @@ void main() {
       await tester.pump();
       final expectedDelivery = find.textContaining('Delivery instruction');
       expect(expectedDelivery, findsOneWidget);
+    });
+
+    testWidgets(
+        'test display order details sub total & grand total as 0 for PnG materials',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('2001'),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            currency: Currency('myr'),
+          ),
+          user: User.empty().copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('external_sales_rep'),
+            ),
+          ),
+        ),
+      );
+
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderNumber: OrderNumber('0200274167'),
+            orderValue: 516.00,
+            totalTax: 0.0,
+            invoiceNumber: StringValue(''),
+            orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
+              OrderHistoryDetailsOrderItem.empty().copyWith(
+                principalData: PrincipalData.empty().copyWith(
+                  principalCode: PrincipalCode('0000101308'),
+                  principalName: PrincipalName('PROCTER AND GAMBLE'),
+                ),
+                qty: 30,
+                materialNumber: MaterialNumber('000000000021247719'),
+                unitPrice: ZpPrice('17.2'),
+                totalPrice: TotalPrice('516'),
+                type: OrderItemType('Comm'),
+              )
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final subTotalFinder = find
+          .byKey(WidgetKeys.balanceTextRow('Subtotal (excl. tax)', 'MYR .00'));
+      final grandTotalFinder =
+          find.byKey(WidgetKeys.balanceTextRow('Grand total', 'MYR .00'));
+      expect(subTotalFinder, findsOneWidget);
+      expect(grandTotalFinder, findsOneWidget);
     });
   });
 }
