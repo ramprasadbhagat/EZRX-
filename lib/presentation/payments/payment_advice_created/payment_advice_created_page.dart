@@ -15,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
-
 part 'widgets/payment_invoice_pdf.dart';
 part 'widgets/payment_save_pdf_button.dart';
 part 'widgets/payment_success_please_note.dart';
