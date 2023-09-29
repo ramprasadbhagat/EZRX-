@@ -12,7 +12,7 @@ class _OrderSummaary extends StatelessWidget {
       title: Padding(
         padding: const EdgeInsets.only(bottom: 20.0),
         child: Text(
-          'Order summary'.tr(),
+          context.tr('Order summary'),
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: ZPColors.black,
               ),
@@ -24,7 +24,7 @@ class _OrderSummaary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Subtotal (incl. tax):'.tr(),
+                context.tr('Subtotal (incl. tax):'),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
@@ -44,7 +44,7 @@ class _OrderSummaary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Grand total:'.tr(),
+                '${context.tr('Grand Total')}:',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(

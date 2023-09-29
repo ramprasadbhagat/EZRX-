@@ -15,7 +15,7 @@ class _ReturnSummary extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Return summary'.tr(),
+                context.tr('Return summary'),
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: ZPColors.neutralsBlack,
                     ),
@@ -27,7 +27,7 @@ class _ReturnSummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Subtotal with tax:'.tr(),
+                    '${context.tr('Subtotal with tax')}:',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: ZPColors.neutralsBlack,
                         ),
@@ -61,7 +61,7 @@ class _ReturnSummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Grand total:'.tr(),
+                    '${context.tr('Grand total')}:',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: ZPColors.neutralsBlack,
                         ),
