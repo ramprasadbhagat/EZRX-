@@ -23,7 +23,7 @@ class _BundleGridItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const _BundleLabel(),
+                  ProductTag.bundleOffer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10.0,

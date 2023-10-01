@@ -1,6 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,23 +22,13 @@ class StockLabel extends StatelessWidget {
         ? const SizedBox.shrink()
         : Container(
             key: WidgetKeys.materialListStockLabel,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-            margin: const EdgeInsets.only(top: 10),
-            decoration: BoxDecoration(
-              color: addOosMaterials.productTagColor(validateOutOfStockValue),
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(20.0),
-                bottomRight: Radius.circular(20.0),
-              ),
+            child: ProductTag.preOrderTag(
+              label: addOosMaterials.productTag(validateOutOfStockValue),
+              backgroundColor:
+                  addOosMaterials.productTagColor(validateOutOfStockValue),
+              labelColor:
+                  addOosMaterials.productTagLabelColor(validateOutOfStockValue),
             ),
-            child: Text(
-              addOosMaterials.productTag(validateOutOfStockValue),
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: addOosMaterials
-                        .productTagLabelColor(validateOutOfStockValue),
-                  ),
-            ).tr(),
           );
   }
 }

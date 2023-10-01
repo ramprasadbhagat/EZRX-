@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
@@ -19,10 +20,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-part 'widgets/bundle_label.dart';
-part 'widgets/bundle_grid_item.dart';
+part 'package:ezrxmobile/presentation/products/widgets/bundle_grid_item.dart';
 
 class ProductsTab extends StatelessWidget {
   const ProductsTab({Key? key}) : super(key: key);

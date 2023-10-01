@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_add_to_cart_sheet.dart';
@@ -98,21 +99,21 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
           : const SizedBox.shrink(),
       body: ListView(
         controller: _scrollController,
-        children: const [
-          _BundleImageSection(),
+        children: [
+          const _BundleImageSection(),
           Align(
             alignment: Alignment.topLeft,
-            child: _BundleOfferTag(),
+            child: ProductTag.bundleOffer(),
           ),
-          _BundleDetails(),
-          SizedBox(height: 10),
-          Divider(
+          const _BundleDetails(),
+          const SizedBox(height: 10),
+          const Divider(
             indent: 0,
             endIndent: 0,
             height: 15,
             color: ZPColors.lightGray2,
           ),
-          _BundleOfferDetails(),
+          const _BundleOfferDetails(),
         ],
       ),
       bottomNavigationBar: const _AddToCartButton(),
@@ -293,46 +294,6 @@ class _BundleOfferDetails extends StatelessWidget {
       builder: (_) {
         return const BundleMaterialDescription();
       },
-    );
-  }
-}
-
-class _BundleOfferTag extends StatelessWidget {
-  const _BundleOfferTag({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: 20,
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: const BoxDecoration(
-        color: ZPColors.skyBlueColor,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20.0),
-          bottomRight: Radius.circular(20.0),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(
-            Icons.discount_outlined,
-            color: ZPColors.white,
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          Text(
-            'Bundle offer'.tr(),
-            style: Theme.of(context)
-                .textTheme
-                .labelMedium
-                ?.copyWith(color: ZPColors.white),
-          ),
-        ],
-      ),
     );
   }
 }

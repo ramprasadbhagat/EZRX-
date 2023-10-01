@@ -12,6 +12,7 @@ import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -45,7 +46,7 @@ class CartProductBundle extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const _BundleOfferTag(),
+            ProductTag.bundleOffer(),
             _BundleDetailsSection(
               cartItem: cartItem,
             ),
@@ -60,46 +61,6 @@ class CartProductBundle extends StatelessWidget {
             _BundleSubTotalSection(cartProduct: cartItem),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _BundleOfferTag extends StatelessWidget {
-  const _BundleOfferTag({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-      ),
-      margin: const EdgeInsets.only(top: 8.0),
-      decoration: const BoxDecoration(
-        color: ZPColors.skyBlueColor,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20.0),
-          bottomRight: Radius.circular(20.0),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(
-            Icons.local_offer_outlined,
-            color: ZPColors.white,
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(
-            context.tr('Bundle offer'),
-            style: Theme.of(context)
-                .textTheme
-                .labelSmall
-                ?.copyWith(fontSize: 12, color: ZPColors.white),
-          ),
-        ],
       ),
     );
   }

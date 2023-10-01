@@ -182,9 +182,6 @@ class _BodyContent extends StatelessWidget {
           children: [
             OfferLabel(
               materialInfo: state.productDetailAggregate.materialInfo,
-              textStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: ZPColors.white,
-                  ),
               iconSize: 20,
             ),
             Padding(
