@@ -11,14 +11,12 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
 class BannerRemoteDataSource {
   HttpService httpService;
-  HttpService eZReachHttpService;
   BannerQueryMutation bannerQueryMutation;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
   BannerRemoteDataSource({
     required this.config,
     required this.httpService,
-    required this.eZReachHttpService,
     required this.bannerQueryMutation,
     required this.dataSourceExceptionHandler,
   });
@@ -30,9 +28,9 @@ class BannerRemoteDataSource {
     required String bannerType,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final res = await eZReachHttpService.request(
+      final res = await httpService.request(
         method: 'POST',
-        url: config.getEZReachUrl,
+        url: config.getEZReachUrlConstant,
         data: jsonEncode({
           'query': bannerQueryMutation.getEZReachBannerQuery(),
           'variables': {
@@ -47,7 +45,6 @@ class BannerRemoteDataSource {
             },
           },
         }),
-        overrideBaseUrl: true,
       );
 
       _bannerExceptionChecker(res: res);

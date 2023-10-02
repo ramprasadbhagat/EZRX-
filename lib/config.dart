@@ -321,21 +321,20 @@ class Config {
   // https://zuelligpharma.atlassian.net/wiki/spaces/CONSUB/pages/78283852/eZReach+integration+with+eZRx
   String get targetProduct => 'EZRX+';
 
-  String get getEZReachUrl {
+  String get getEZReachUrlConstant => '/api/campaign';
+
+  String get eZReachToken {
     switch (appFlavor) {
       case Flavor.mock:
         return '';
       case Flavor.dev:
       case Flavor.uat:
-        return 'https://campaignengine-stg.ezreach.io/query';
+        return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FjdGl2ZSI6dHJ1ZSwiVXNlck5hbWUiOiJJbnRlZ3JhdGlvbiBVc2VyIiwiZW1haWwiOiJpbnRlZ3JhdGlvblVzZXJAZXpyeC5jb20iLCJleHAiOjE3NjQ2NDY3NDEsImlhdCI6MTY2OTk3Mzk0MSwicHJvdmlkZXIiOiJUZXN0IEFkbWluIiwicm9sZSI6ImN1c3RvbWVyIiwidXNlcklkIjoiNjM4NWE4NTc3MGQ5ZjFkZDU1MmFkZmFiIn0.xSjadOGP0XiC-9t2CoS0Yy6MEIbhIozi08i4vS0VQsA';
       case Flavor.prod:
       default:
-        return 'https://campaignengine.ezreach.io/query';
+        return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6IkVaUlgrIEludGVncmF0aW9uIFVzZXIiLCJleHAiOjE3ODE4MjU1NzIsImlhdCI6MTY4NzE1Mjc3Miwicm9sZSI6ImludGVncmF0aW9uX3VzZXIifQ.RDFaeTwfg8_UDoqw-krccnConYxJc1NS-LA0y7QFXx0';
     }
   }
-
-  String get eZReachToken =>
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0FjdGl2ZSI6dHJ1ZSwiVXNlck5hbWUiOiJJbnRlZ3JhdGlvbiBVc2VyIiwiZW1haWwiOiJpbnRlZ3JhdGlvblVzZXJAZXpyeC5jb20iLCJleHAiOjE3NjQ2NDY3NDEsImlhdCI6MTY2OTk3Mzk0MSwicHJvdmlkZXIiOiJUZXN0IEFkbWluIiwicm9sZSI6ImN1c3RvbWVyIiwidXNlcklkIjoiNjM4NWE4NTc3MGQ5ZjFkZDU1MmFkZmFiIn0.xSjadOGP0XiC-9t2CoS0Yy6MEIbhIozi08i4vS0VQsA';
 
   //============================================================
   //  ChatBot

@@ -703,8 +703,6 @@ void setupLocator() {
     () => BannerRemoteDataSource(
       config: locator<Config>(),
       httpService: locator<HttpService>(),
-      eZReachHttpService:
-          locator.get<HttpService>(instanceName: 'eZReachHttpService'),
       bannerQueryMutation: locator<BannerQueryMutation>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),

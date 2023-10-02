@@ -38,7 +38,6 @@ void main() {
     remoteDataSource = BannerRemoteDataSource(
       config: Config()..appFlavor = Flavor.uat,
       httpService: service,
-      eZReachHttpService: service,
       bannerQueryMutation: BannerQueryMutation(),
       dataSourceExceptionHandler: DataSourceExceptionHandler(),
     );
@@ -54,20 +53,19 @@ void main() {
       when(
         () => service.request(
           method: 'POST',
-          url: 'https://campaignengine-stg.ezreach.io/query',
+          url: '/api/campaign',
           data: jsonEncode({
             'query':
                 remoteDataSource.bannerQueryMutation.getEZReachBannerQuery(),
             'variables': variables,
           }),
-          overrideBaseUrl: true,
         ),
       ).thenAnswer(
         (invocation) async => Response(
           data: res,
           statusCode: 200,
           requestOptions: RequestOptions(
-            path: 'https://campaignengine-stg.ezreach.io/query',
+            path: '/api/campaign',
           ),
         ),
       );
@@ -89,20 +87,19 @@ void main() {
       when(
         () => service.request(
           method: 'POST',
-          url: 'https://campaignengine-stg.ezreach.io/query',
+          url: '/api/campaign',
           data: jsonEncode({
             'query':
                 remoteDataSource.bannerQueryMutation.getEZReachBannerQuery(),
             'variables': variables,
           }),
-          overrideBaseUrl: true,
         ),
       ).thenAnswer(
         (invocation) async => Response(
           data: [],
           statusCode: 204,
           requestOptions: RequestOptions(
-            path: 'https://campaignengine-stg.ezreach.io/query',
+            path: '/api/campaign',
           ),
         ),
       );

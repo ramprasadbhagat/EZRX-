@@ -36,13 +36,12 @@ class AuthInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    if (options.baseUrl != config.getEZReachUrl) {
-      options.baseUrl = config.baseUrl(
-        currentMarket: AppMarket(
-          deviceStorage.currentMarket(),
-        ),
-      );
-    }
+    options.baseUrl = config.baseUrl(
+      currentMarket: AppMarket(
+        deviceStorage.currentMarket(),
+      ),
+    );
+
     try {
       var token = await tokenStorage.get();
       if (token.access.isNotEmpty) {
@@ -51,7 +50,7 @@ class AuthInterceptor extends Interceptor {
         if (isTokenExpired && isNotMockFlavor) {
           token = await _refreshToken() ?? token;
         }
-        if (options.baseUrl == config.getEZReachUrl) {
+        if (options.uri.path == config.getEZReachUrlConstant) {
           options.headers['Authorization'] = config.eZReachToken;
         } else if (options.path == config.announcementApiUrlPath) {
           options.headers['X-GQL-Token'] = config.getAnnouncementApiKey;
