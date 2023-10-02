@@ -8,6 +8,7 @@ class _ProductFilterResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      key: WidgetKeys.filterResetButton,
       onPressed: () {
         context.read<MaterialFilterBloc>().add(
               const MaterialFilterEvent.resetFilter(),

@@ -6,6 +6,8 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'enum.dart';
+
 class CommonRobot {
   final WidgetTester tester;
 
@@ -22,6 +24,11 @@ class CommonRobot {
     await tester.tap(moreTab);
     await tester.pumpAndSettle();
   }
+
+  final homeTabBar = find.byKey(WidgetKeys.homeTabBar);
+  final homeTab = find.byKey(WidgetKeys.homeTab);
+  final productsTab = find.byKey(WidgetKeys.productsTab);
+  final notificationTab = find.byKey(WidgetKeys.notificationTab);
 
   Future<void> goToOrderTab() async {
     await tester.tap(ordersTab);
@@ -67,6 +74,27 @@ class CommonRobot {
     );
     await tester.tap(buttons.last);
     await tester.pump();
+  }
+
+  Future<void> navigateToScreen(NavigationTab navigationTab) async {
+    switch (navigationTab) {
+      case NavigationTab.home:
+        await tester.tap(homeTab);
+        break;
+      case NavigationTab.products:
+        await tester.tap(productsTab);
+        break;
+      case NavigationTab.orders:
+        await tester.tap(ordersTab);
+        break;
+      case NavigationTab.more:
+        await tester.tap(moreTab);
+        break;
+      case NavigationTab.notifications:
+        await tester.tap(notificationTab);
+        break;
+    }
+    await tester.pumpAndSettle();
   }
 
   void verifyLoadingNotVisible() {
@@ -127,5 +155,27 @@ class CommonRobot {
   Future<void> waitAutoSearchDuration() async {
     await tester
         .pump(Duration(milliseconds: locator<Config>().autoSearchTimeout));
+  }
+
+  void verifyAppTabBarVisible() {
+    expect(homeTabBar, findsOneWidget);
+  }
+
+  void verifyCustomerCodeSelectorVisible() {
+    expect(customerCodeSelector, findsOneWidget);
+  }
+
+  void verifyTextVisible(String value) {
+    expect(find.text(value), findsOneWidget);
+  }
+
+  void verifyTextNotVisible(String value) {
+    expect(find.text(value), findsNothing);
+  }
+
+  Future<void> tapToBackIcon() async {
+    final backButton = find.byKey(WidgetKeys.backButton).first;
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
   }
 }

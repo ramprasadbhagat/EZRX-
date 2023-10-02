@@ -130,7 +130,7 @@ class LoginRobot {
     //TODO : In maximum attempt we are facing loading banner on homtap,
     //Fow now it's better not to wait for api data/loader, used pump()
     //we can convert to pumpAndSettle once we get proper response on time in future.
-    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
   }
 
   void verifyDefaultValueSelector(String marketValue) {

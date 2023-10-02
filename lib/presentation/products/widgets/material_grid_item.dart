@@ -91,6 +91,7 @@ class MaterialGridItem extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           materialInfo.displayDescription,
+                          key: WidgetKeys.nameCart,
                           style: Theme.of(context).textTheme.labelSmall,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -105,6 +106,7 @@ class MaterialGridItem extends StatelessWidget {
                           ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
+                      key: WidgetKeys.manufacturerMaterials,
                     ),
                     const SizedBox(height: 5),
                     ProductPriceLabel(materialInfo: materialInfo),

@@ -71,6 +71,7 @@ class _MaterialDetailsToggleState extends State<MaterialDetailsToggle> {
                 children: [
                   Expanded(
                     child: TextButton.icon(
+                      key: WidgetKeys.expandIcon,
                       onPressed: () => setState(() => expanded = !expanded),
                       label: Icon(
                         expanded ? Icons.expand_less : Icons.expand_more,
@@ -116,18 +117,22 @@ class _MaterialDetails extends StatelessWidget {
           data: productDetailAggregate.materialInfo.productImages.description,
         ),
         _MaterialMetaData(
+          key: WidgetKeys.materialDosage,
           title: 'Dosage',
           content: productItemXp.dosage,
         ),
         _MaterialMetaData(
+           key: WidgetKeys.materialHowToUse,
           title: 'How to use',
           content: productItemXp.howToUse,
         ),
         _MaterialMetaData(
+          key: WidgetKeys.materialComposition,
           title: 'Composition',
           content: productItemXp.composition,
         ),
         _MaterialMetaData(
+           key: WidgetKeys.materialDeliveryInstructions,
           title: 'Delivery instructions',
           content: productItemXp.deliveryInstructions,
         ),

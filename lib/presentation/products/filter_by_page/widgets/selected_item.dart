@@ -1,4 +1,3 @@
-
 part of 'package:ezrxmobile/presentation/products/filter_by_page/filter_by_page.dart';
 
 class _SelectedItem extends StatelessWidget {
@@ -21,6 +20,7 @@ class _SelectedItem extends StatelessWidget {
                   .where((element) => element.value)
                   .map(
                     (e) => ChoiceChip(
+                      key: WidgetKeys.manufacturerFilterSelected,
                       label: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 4.0,

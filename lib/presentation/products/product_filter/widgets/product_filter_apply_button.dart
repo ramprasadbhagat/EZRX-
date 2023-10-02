@@ -8,6 +8,7 @@ class _ProductFilterApplyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      key: WidgetKeys.filterApplyButton,
       onPressed: () => Navigator.of(context).pop(
         context.read<MaterialFilterBloc>().state.materialFilter,
       ),

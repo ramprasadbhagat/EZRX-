@@ -1,4 +1,3 @@
-
 part of 'package:ezrxmobile/presentation/products/filter_by_page/filter_by_page.dart';
 
 class _Header extends StatelessWidget {
@@ -21,6 +20,7 @@ class _Header extends StatelessWidget {
             ),
       ),
       leading: IconButton(
+        key: WidgetKeys.backButton,
         onPressed: () {
           Navigator.pop(
             context,

@@ -38,6 +38,7 @@ class _ItemBuilder extends StatelessWidget {
                   )
                 : const SizedBox(),
             InkWell(
+              key: WidgetKeys.suggestedManufacturer,
               onTap: () {
                 context.read<MaterialFilterBloc>().add(
                       MaterialFilterEvent.updateSelectedMaterialFilter(
@@ -53,6 +54,7 @@ class _ItemBuilder extends StatelessWidget {
                   children: [
                     Text(
                       item.manufactureMapOptions.keys.elementAt(index),
+                      key: WidgetKeys.suggestedManufacturerText,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             color: ZPColors.extraLightGrey4,
                           ),
@@ -93,6 +95,7 @@ class _ItemBuilder extends StatelessWidget {
                   )
                 : const SizedBox(),
             InkWell(
+              key: WidgetKeys.suggestedCountry,
               onTap: () {
                 context.read<MaterialFilterBloc>().add(
                       MaterialFilterEvent.updateSelectedMaterialFilter(
@@ -108,6 +111,7 @@ class _ItemBuilder extends StatelessWidget {
                   children: [
                     Text(
                       item.countryMapOptions.keys.elementAt(index).name,
+                      key: WidgetKeys.suggestedCountryText,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             color: ZPColors.extraLightGrey4,
                           ),

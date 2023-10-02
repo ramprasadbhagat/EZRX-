@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_search_entry.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class SearchAndFilter extends StatelessWidget {
                 current.selectedMaterialFilter,
             builder: (context, state) {
               return IconButton(
+                key: WidgetKeys.filterProductIcon,
                 onPressed: () => _showFilterPage(context),
                 icon: state.selectedMaterialFilter == MaterialFilter.empty()
                     ? const Icon(

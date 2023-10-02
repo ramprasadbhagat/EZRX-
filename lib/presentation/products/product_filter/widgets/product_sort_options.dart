@@ -22,6 +22,7 @@ class _ProductSortOptions extends StatelessWidget {
             children: Sort.values
                 .map(
                   (e) => RadioListTile(
+                    key: WidgetKeys.sortByRadio(e.title),
                     title: Text(
                       context.tr(e.title),
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(

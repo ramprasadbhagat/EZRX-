@@ -22,6 +22,7 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
             ListTileTheme(
               horizontalTitleGap: 0,
               child: CheckboxListTile(
+                key: WidgetKeys.showProductCheckbox('Favourites'),
                 value: state.materialFilter.isFavourite,
                 onChanged: (value) => context.read<MaterialFilterBloc>().add(
                       MaterialFilterEvent.updateSelectedMaterialFilter(
@@ -45,6 +46,7 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
             ListTileTheme(
               horizontalTitleGap: 0,
               child: CheckboxListTile(
+                key: WidgetKeys.showProductCheckbox('Items with offers'),
                 value: state.materialFilter.isProductOffer,
                 onChanged: (value) {
                   if (state.materialFilter.bundleOffers) {
@@ -78,6 +80,7 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
             ListTileTheme(
               horizontalTitleGap: 0,
               child: CheckboxListTile(
+                key: WidgetKeys.showProductCheckbox('Bundle offers'),
                 value: state.materialFilter.bundleOffers,
                 onChanged: (value) {
                   if (!state.materialFilter.isProductOffer) {

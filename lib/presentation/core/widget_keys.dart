@@ -119,6 +119,7 @@ class WidgetKeys {
   //  CustomerCode Search Page
   //============================================================
   static const Key customerSearchPage = Key('customerSearchPage');
+  static const Key customerCodeList = Key('customerCodeList');
   static const Key customerCodeSelect = Key('customerCodeSelect');
   static const Key customerCodeSearch = Key('customerCodeSearchField');
   static const Key customerCodeSearchSuffixIcon =
@@ -161,8 +162,34 @@ class WidgetKeys {
   //============================================================
 
   static const Key materialFilterSearchField = Key('materialFilterSearchField');
+  static const Key filterProductIcon = Key('filterProductIcon');
+  static Key showProductCheckbox(String type) => Key('checkbox$type');
+  static Key sortByRadio(String type) => Key('radioSort$type');
+  static const Key clearSearchFilter = Key('clearSearchFilter');
+  static const Key searchProductField = Key('searchProductField');
+  static const Key txtSearchProductField = Key('txtSearchProductField');
+  static const Key favoritesIcon = Key('favoritesIcon');
+  static const Key suggestedProductsTile = Key('suggestedProductsTile');
+  static const Key suggestedManufacturer = Key('suggestedManufacturer');
+  static const Key suggestedManufacturerText = Key('suggestedManufacturerText');
+  static const Key suggestedCountry = Key('suggestedCountry');
+  static const Key suggestedCountryText = Key('suggestedCountryText');
   static const Key materialFilterPage = Key('materialFilterPage');
   static const Key applyMaterialFilter = Key('applyMaterialFilter');
+  static const Key searchManufacturerFilterField =
+      Key('searchManufacturerFilterField');
+  static const Key manufacturerFilterSelected =
+      Key('manufacturerFilterSelected');
+  static const Key manufacturerMaterials = Key('manufacturerMaterials');
+  static const Key expandIcon = Key('expandIcon');
+  static const Key materialDosage = Key('materialDosage');
+  static const Key materialHowToUse = Key('materialHowToUse');
+  static const Key materialComposition = Key('materialComposition');
+  static const Key countryListSelectedLength = Key('countryListSelectedLength');
+  static const Key manufactureListSelectedLength =
+      Key('manufactureListSelectedLength');
+  static const Key materialDeliveryInstructions =
+      Key('materialDeliveryInstructions');
 
   //============================================================
   //  Search Bonus page Keys
@@ -421,6 +448,7 @@ class WidgetKeys {
   static const Key materialListBundleCard = Key('bundleCard');
   static const Key materialListMaterialCard = Key('MaterialCard');
   static const Key priceLoading = Key('price-loading');
+  static const Key nameCart = Key('nameCart');
   static Key materialListBundleMaterial(String materialNumber) =>
       Key('bundleMaterialCard$materialNumber');
   //============================================================
@@ -428,12 +456,15 @@ class WidgetKeys {
   //============================================================
   static const Key productScanCameraKey = Key('productScanCameraKey');
   static const Key productSearchPage = Key('productSearchPage');
-  static const Key materialFavouriteButton = Key('materialFavouriteButton');
+  static const Key materialFavoriteButton = Key('materialFavoriteButton');
   static Key searchedProduct(String materialNumber) =>
       Key('searchedProduct$materialNumber');
   static const Key scanProductInfoDialog = Key('scanProductInfoDialog');
   static const Key scanFromGallery = Key('scanFromGallery');
   static const Key scanFromCamera = Key('scanFromCamera');
+  static const Key favoritesChoiceChip = Key('favoritesChoiceChip');
+  static Key statusFavoriteIcon(bool isFavorite) =>
+      Key('isFavorite$isFavorite');
 
   //============================================================
   //  ALL INVOICES
@@ -498,8 +529,8 @@ class WidgetKeys {
       Key('materialDetailsMaterialNumber');
   static const Key materialDetailsMaterialDescription =
       Key('materialDetailsMaterialDescription');
-  static const Key materialDetailsFavouriteIcon =
-      Key('materialDetailsMaterialFavouriteIcon');
+  static const Key materialDetailsFavoriteIcon =
+      Key('materialDetailsMaterialFavoriteIcon');
   static const Key materialDetailsStock = Key('materialDetailsStock');
   static const Key materialDetailsInfoTile = Key('materialDetailsInfoTile');
   static const Key materialDetailsPromoShort = Key('materialDetailsPromoShort');

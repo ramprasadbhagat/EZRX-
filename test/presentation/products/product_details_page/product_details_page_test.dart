@@ -479,7 +479,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final favouriteIcon =
-            find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
+            find.byKey(WidgetKeys.materialDetailsFavoriteIcon);
         final updatedFavouriteIcon = find.byIcon(Icons.favorite);
         expect(favouriteIcon, findsOneWidget);
         await tester.tap(favouriteIcon);
@@ -515,7 +515,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final favouriteIcon =
-            find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
+            find.byKey(WidgetKeys.materialDetailsFavoriteIcon);
         final updatedFavouriteIcon =
             find.byIcon(Icons.favorite_border_outlined);
         expect(favouriteIcon, findsOneWidget);
@@ -552,7 +552,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final favouriteIcon =
-            find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
+            find.byKey(WidgetKeys.materialDetailsFavoriteIcon);
         final favouriteMessage = find.text('Product added as favourite');
         expect(favouriteIcon, findsOneWidget);
         await tester.tap(favouriteIcon);
@@ -588,7 +588,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final favouriteIcon =
-            find.byKey(WidgetKeys.materialDetailsFavouriteIcon);
+            find.byKey(WidgetKeys.materialDetailsFavoriteIcon);
         final favouriteMessage = find.text('Product removed as favourite');
         expect(favouriteIcon, findsOneWidget);
         await tester.tap(favouriteIcon);

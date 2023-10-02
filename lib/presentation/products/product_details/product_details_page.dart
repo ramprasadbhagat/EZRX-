@@ -290,7 +290,7 @@ class _Description extends StatelessWidget {
           builder: (context, state) {
             return FavouriteIcon(
               enable: state.isFetching,
-              key: WidgetKeys.materialDetailsFavouriteIcon,
+              key: WidgetKeys.materialDetailsFavoriteIcon,
               isFavourite:
                   state.productDetailAggregate.materialInfo.isFavourite,
               constraints: const BoxConstraints(),

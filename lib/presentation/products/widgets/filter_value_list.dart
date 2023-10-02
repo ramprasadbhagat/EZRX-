@@ -8,6 +8,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class FilterValueList extends StatefulWidget {
   final bool isFetching;
 
@@ -31,6 +33,7 @@ class _FilterValueListState extends State<FilterValueList> {
                 current.selectedMaterialFilter.isFavourite,
             builder: (context, state) {
               return ChoiceChip(
+                key: WidgetKeys.favoritesChoiceChip,
                 label: Text(
                   'Favourites'.tr(),
                 ),

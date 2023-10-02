@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -24,9 +25,11 @@ class FavouriteIcon extends StatelessWidget {
       visualDensity: visualDensity,
       padding: EdgeInsets.zero,
       constraints: constraints,
+      key: WidgetKeys.favoritesIcon,
       icon: Icon(
         isFavourite ? Icons.favorite : Icons.favorite_border_outlined,
         color: ZPColors.darkYellow,
+        key: WidgetKeys.statusFavoriteIcon(isFavourite),
       ),
     );
   }

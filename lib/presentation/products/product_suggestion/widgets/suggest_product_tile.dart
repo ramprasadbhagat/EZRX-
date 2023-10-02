@@ -20,6 +20,7 @@ class _SuggestedProductTile extends StatelessWidget {
           title: Text(
             product.name,
             style: Theme.of(context).textTheme.titleSmall,
+            key: WidgetKeys.suggestedProductsTile,
           ),
         ),
         const Divider(
