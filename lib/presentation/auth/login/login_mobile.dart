@@ -79,42 +79,44 @@ class _SSOLoginButton extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
-        return FractionallySizedBox(
-          widthFactor: 0.5,
-          child: ElevatedButton.icon(
-            key: WidgetKeys.ssoLoginButton,
-            onPressed: state.isSubmitting
-                ? null
-                : () {
-                    FocusScope.of(context).unfocus();
-                    context
-                        .read<LoginFormBloc>()
-                        .add(const LoginFormEvent.loginWithOktaButtonPressed());
-                  },
-            style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                  backgroundColor: const MaterialStatePropertyAll(
-                    ZPColors.accentColor,
-                  ),
-                  shape: const MaterialStatePropertyAll(
-                    StadiumBorder(),
-                  ),
-                ),
-            icon: Icon(
-              Icons.lock_person_outlined,
-              size: 20,
-              color: Theme.of(context).primaryColor,
-            ),
-            label: LoadingShimmer.withChild(
-              enabled: state.isSubmitting,
-              child: Text(
-                'Log in with SSO'.tr(),
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: ZPColors.shadesBlack,
-                      fontWeight: FontWeight.w400,
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton.icon(
+              key: WidgetKeys.ssoLoginButton,
+              onPressed: state.isSubmitting
+                  ? null
+                  : () {
+                      FocusScope.of(context).unfocus();
+                      context.read<LoginFormBloc>().add(
+                            const LoginFormEvent.loginWithOktaButtonPressed(),
+                          );
+                    },
+              style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                    backgroundColor: const MaterialStatePropertyAll(
+                      ZPColors.accentColor,
                     ),
+                    shape: const MaterialStatePropertyAll(
+                      StadiumBorder(),
+                    ),
+                  ),
+              icon: Icon(
+                Icons.lock_person_outlined,
+                size: 20,
+                color: Theme.of(context).primaryColor,
+              ),
+              label: LoadingShimmer.withChild(
+                enabled: state.isSubmitting,
+                child: Text(
+                  'Log in with SSO'.tr(),
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: ZPColors.shadesBlack,
+                        fontWeight: FontWeight.w400,
+                      ),
+                ),
               ),
             ),
-          ),
+          ],
         );
       },
     );
