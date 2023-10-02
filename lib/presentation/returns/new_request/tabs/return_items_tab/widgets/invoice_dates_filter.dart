@@ -69,7 +69,7 @@ class _ToInvoiceDateFilter extends StatelessWidget {
                 context.read<ReturnItemsFilterBloc>();
             final invoiceDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime(1900),
               lastDate: DateTime.now(),
               initialDateRange: state.filter.getInvoiceDateFilterDateRange,
             );

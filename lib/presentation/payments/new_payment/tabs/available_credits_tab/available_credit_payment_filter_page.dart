@@ -224,7 +224,7 @@ class _ToDateFilter extends StatelessWidget {
                   context.read<AvailableCreditFilterBloc>();
               final dateRange = await showDateRangePicker(
                 context: context,
-                firstDate: DateTime.now().subtract(const Duration(days: 364)),
+                firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
                 initialDateRange: state.filter.getDocumentDateFilterDateRange,
               );

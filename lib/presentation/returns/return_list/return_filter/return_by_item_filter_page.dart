@@ -305,7 +305,7 @@ class _ToRequestDateFilter extends StatelessWidget {
                   context.read<ViewByItemReturnFilterBloc>();
               final returnDateRange = await showDateRangePicker(
                 context: context,
-                firstDate: DateTime.now().subtract(const Duration(days: 364)),
+                firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
                 initialDateRange: state.filter.getReturnDateFilterDateRange,
               );

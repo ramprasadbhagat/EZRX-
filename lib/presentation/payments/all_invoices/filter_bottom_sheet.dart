@@ -374,7 +374,7 @@ class _ToDocumentDateFilter extends StatelessWidget {
                 context.read<AllInvoicesFilterBloc>();
             final documentDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime(1900),
               lastDate: DateTime.now(),
               initialDateRange: state.filter.getDocumentDateFilterDateRange,
             );
@@ -476,7 +476,7 @@ class _ToDueDateFilter extends StatelessWidget {
                 context.read<AllInvoicesFilterBloc>();
             final dueDateRange = await showDateRangePicker(
               context: context,
-              firstDate: DateTime.now().subtract(const Duration(days: 365)),
+              firstDate: DateTime(1900),
               lastDate: DateTime.now(),
               initialDateRange: state.filter.getDueDateFilterDateRange,
             );
