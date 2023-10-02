@@ -45,10 +45,13 @@ class ReturnItemsTab extends StatelessWidget {
           child: Row(
             children: [
               const Expanded(
-                child: _ReturnItemsSearchBar(),
+                child: _ReturnItemsSearchBar(
+                  key: WidgetKeys.newRequestSearchItem,
+                ),
               ),
               CustomBadge(
                 Icons.tune,
+                key: WidgetKeys.newRequestFilterIcon,
                 count: 1,
                 badgeColor: ZPColors.orange,
                 onPressed: () {
@@ -93,6 +96,7 @@ class ReturnItemsTab extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: ScrollList<ReturnMaterial>(
+                  key: WidgetKeys.newRequestListItemAbleToReturn,
                   noRecordFoundWidget: const NoRecordFound(
                     title: 'No record found',
                   ),

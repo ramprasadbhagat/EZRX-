@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -96,6 +97,7 @@ class ConfirmBottomSheet extends StatelessWidget {
                                 ),
                               ),
                             ),
+                    key: WidgetKeys.confirmBottomSheetConfirmButton,
                     child: Text(
                       confirmButtonText.tr(),
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(

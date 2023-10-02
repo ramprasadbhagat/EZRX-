@@ -15,6 +15,8 @@ class WidgetKeys {
   static const Key filterApplyButton = Key('filterApplyButton');
   static const Key productImage = Key('productImage');
   static const Key customSnackBar = Key('customSnackBar');
+  static const Key customSnackBarMessage = Key('customSnackBarMessage');
+  static const Key snackBarDismissButton = Key('snackBarDismissButton');
   static const Key scrollToTopArrowIcon = Key('scrollToTopArrowIconKey');
   static const Key nextButton = Key('nextButton');
   static const Key backButton = Key('backButton');
@@ -24,6 +26,8 @@ class WidgetKeys {
   static const Key commonTileItemStatusLabel = Key('commonTileItemStatusLabel');
   static const Key commonTileItemTitle = Key('commonTileItemTitle');
   static const Key commonTileItemSubTitle = Key('commonTileItemSubTitle');
+  static const Key confirmBottomSheetConfirmButton =
+      Key('confirmBottomSheetConfirmButton');
   static const Key addressInfoSectionActionLabel =
       Key('addressInfoSectionActionLabel');
   static const Key addressInfoSectionCustomerCodeLabel =
@@ -223,6 +227,22 @@ class WidgetKeys {
   static Key returnStatusFilter(String name, bool value) =>
       Key('returnStatusFilter$name$value');
 
+  //============================================================
+  //  New Return Request
+  //============================================================
+  // step 1
+  static const Key newRequestSearchItem = Key('newRequestSearchItem');
+  static const Key newRequestFilterIcon = Key('newRequestFilterIcon');
+  static const Key newRequestListItemAbleToReturn = Key('listItemAbleToReturn');
+  static const Key newRequestReturnFor = Key('newRequestReturnFor');
+  static const Key newReturnItem = Key('newReturnItem');
+  static const Key closeSummaryInfoNewRequestPage =
+      Key('closeSummaryInfoNewRequestPage');
+  static const Key itemTitleKey = Key('itemTitleKey');
+  static const Key cannotMoveToNextStep = Key('cannotMoveToNextStep');
+
+  // step2
+  static const Key newRequestStep2Title = Key('newRequestStep2Title');
   //============================================================
   //  Returns by items
   //============================================================

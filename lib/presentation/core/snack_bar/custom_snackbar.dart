@@ -127,6 +127,7 @@ class _ActualSnackbar extends StatelessWidget {
                       ),
                       child: Text(
                         messageText.tr(),
+                        key: WidgetKeys.customSnackBarMessage,
                         style: textStyle ??
                             Theme.of(context).textTheme.titleMedium?.copyWith(
                                   color: ZPColors.primary,
@@ -142,6 +143,7 @@ class _ActualSnackbar extends StatelessWidget {
                   children: [
                     mainButton ?? const SizedBox.shrink(),
                     IconButton(
+                      key: WidgetKeys.snackBarDismissButton,
                       onPressed: () async {
                         await dismiss();
                       },

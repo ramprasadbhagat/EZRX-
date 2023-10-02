@@ -17,6 +17,8 @@ class ReturnsByItemsRobot {
   final newRequestButton = find.byKey(WidgetKeys.returnByItemsNewRequestButton);
   final item = find.byKey(WidgetKeys.returnItemTile);
   final itemGroupDate = find.byKey(WidgetKeys.returnItemGroupDate);
+  final newRequestFloatingButton =
+      find.byKey(WidgetKeys.returnByItemsNewRequestButton);
   late final returnIdLabel = find.descendant(
     of: item,
     matching: find.byKey(WidgetKeys.commonTileItemHeader),
@@ -31,6 +33,11 @@ class ReturnsByItemsRobot {
       find.text('Please enter at least 2 characters.'.tr()),
       findsOneWidget,
     );
+  }
+
+  Future<void> tapNewRequestFloatingButton() async {
+    await tester.tap(newRequestFloatingButton);
+    await tester.pumpAndSettle();
   }
 
   void verifyFilterButtonVisible() {

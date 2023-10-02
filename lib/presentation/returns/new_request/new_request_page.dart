@@ -91,6 +91,7 @@ class NewRequestPage extends StatelessWidget {
                                           color: ZPColors.primary,
                                           fontWeight: FontWeight.bold,
                                         ),
+                                    key: WidgetKeys.newRequestStep2Title,
                                   ),
                                 ),
                                 LinearProgressIndicator(
@@ -131,12 +132,14 @@ class NewRequestPage extends StatelessWidget {
                                 title: Text(
                                   '${'Return for'.tr()} ${context.read<EligibilityBloc>().state.customerCodeInfo.customerName}',
                                   style: Theme.of(context).textTheme.labelSmall,
+                                  key: WidgetKeys.newRequestReturnFor,
                                 ),
                                 trailing: const Icon(
                                   Icons.chevron_right,
                                 ),
                               ),
                               _AttentionWidget(
+                                key: WidgetKeys.cannotMoveToNextStep,
                                 message:
                                     'Please select at least one material to proceed.'
                                         .tr(),
@@ -235,6 +238,7 @@ class NewRequestPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  key: WidgetKeys.closeSummaryInfoNewRequestPage,
                   onPressed: () {
                     context.router.pop();
                   },

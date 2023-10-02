@@ -11,6 +11,7 @@ class _ReturnMaterialInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.newReturnItem,
       showBorder: true,
       showShadow: false,
       clipBehavior: Clip.antiAlias,

@@ -78,6 +78,15 @@ class CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> dismissSnackbar() async {
+    final dismissButton = find.byKey(WidgetKeys.snackBarDismissButton);
+    final isSnackbarVisible = dismissButton.evaluate().isNotEmpty;
+    if (isSnackbarVisible) {
+      await tester.tap(dismissButton.first);
+      await tester.pumpAndSettle();
+    }
+  }
+
   //============================================================
   //  Search bar
   //============================================================
