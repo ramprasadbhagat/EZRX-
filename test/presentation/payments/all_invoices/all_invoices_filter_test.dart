@@ -8,7 +8,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/all_invoices/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -280,8 +279,8 @@ void main() {
       await tester.pump();
       verify(
         () => allInvoicesFilterBlocMock.add(
-          AllInvoicesFilterEvent.amountValueToChanged(
-            StringUtils.formatter.format(double.parse('123456')),
+          const AllInvoicesFilterEvent.amountValueToChanged(
+            '123456',
           ),
         ),
       ).called(1);
@@ -308,8 +307,8 @@ void main() {
       await tester.pump();
       verify(
         () => allInvoicesFilterBlocMock.add(
-          AllInvoicesFilterEvent.amountValueFromChanged(
-            StringUtils.formatter.format(double.parse('12')),
+          const AllInvoicesFilterEvent.amountValueFromChanged(
+            '12',
           ),
         ),
       ).called(1);

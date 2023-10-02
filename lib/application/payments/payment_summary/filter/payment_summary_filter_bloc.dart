@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
@@ -26,7 +27,9 @@ class PaymentSummaryFilterBloc
   ) async {
     await event.map(
       initialized: (_Initialized e) async => emit(
-        PaymentSummaryFilterState.initial(),
+        PaymentSummaryFilterState.initial().copyWith(
+          salesOrg: e.salesOrg,
+        ),
       ),
       openFilterBottomSheet: (_OpenFilterBottomSheet value) {
         if (state.showErrorMessages || state.filter != value.appliedFilter) {

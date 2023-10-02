@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PaymentSummaryFilterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrg salesOrg) initialized,
     required TResult Function(PaymentSummaryFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
@@ -31,7 +31,7 @@ mixin _$PaymentSummaryFilterEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg)? initialized,
     TResult? Function(PaymentSummaryFilter appliedFilter)?
         openFilterBottomSheet,
     TResult? Function()? validateFilters,
@@ -43,7 +43,7 @@ mixin _$PaymentSummaryFilterEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg)? initialized,
     TResult Function(PaymentSummaryFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
@@ -115,6 +115,8 @@ abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
@@ -124,31 +126,56 @@ class __$$_InitializedCopyWithImpl<$Res>
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? salesOrg = null,
+  }) {
+    return _then(_$_Initialized(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+  const _$_Initialized({required this.salesOrg});
+
+  @override
+  final SalesOrg salesOrg;
 
   @override
   String toString() {
-    return 'PaymentSummaryFilterEvent.initialized()';
+    return 'PaymentSummaryFilterEvent.initialized(salesOrg: $salesOrg)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, salesOrg);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrg salesOrg) initialized,
     required TResult Function(PaymentSummaryFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
@@ -158,13 +185,13 @@ class _$_Initialized implements _Initialized {
         statusChanged,
     required TResult Function(DateTimeRange dateRange) setCreatedDate,
   }) {
-    return initialized();
+    return initialized(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg)? initialized,
     TResult? Function(PaymentSummaryFilter appliedFilter)?
         openFilterBottomSheet,
     TResult? Function()? validateFilters,
@@ -173,13 +200,13 @@ class _$_Initialized implements _Initialized {
     TResult? Function(StatusType filterStatus, bool selected)? statusChanged,
     TResult? Function(DateTimeRange dateRange)? setCreatedDate,
   }) {
-    return initialized?.call();
+    return initialized?.call(salesOrg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg)? initialized,
     TResult Function(PaymentSummaryFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
@@ -189,7 +216,7 @@ class _$_Initialized implements _Initialized {
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized();
+      return initialized(salesOrg);
     }
     return orElse();
   }
@@ -244,7 +271,13 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements PaymentSummaryFilterEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized({required final SalesOrg salesOrg}) =
+      _$_Initialized;
+
+  SalesOrg get salesOrg;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -324,7 +357,7 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrg salesOrg) initialized,
     required TResult Function(PaymentSummaryFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
@@ -340,7 +373,7 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg)? initialized,
     TResult? Function(PaymentSummaryFilter appliedFilter)?
         openFilterBottomSheet,
     TResult? Function()? validateFilters,
@@ -355,7 +388,7 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg)? initialized,
     TResult Function(PaymentSummaryFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
@@ -468,7 +501,7 @@ class _$_ValidateFilters implements _ValidateFilters {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrg salesOrg) initialized,
     required TResult Function(PaymentSummaryFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
@@ -484,7 +517,7 @@ class _$_ValidateFilters implements _ValidateFilters {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg)? initialized,
     TResult? Function(PaymentSummaryFilter appliedFilter)?
         openFilterBottomSheet,
     TResult? Function()? validateFilters,
@@ -499,7 +532,7 @@ class _$_ValidateFilters implements _ValidateFilters {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg)? initialized,
     TResult Function(PaymentSummaryFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
@@ -634,7 +667,7 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrg salesOrg) initialized,
     required TResult Function(PaymentSummaryFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
@@ -650,7 +683,7 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg)? initialized,
     TResult? Function(PaymentSummaryFilter appliedFilter)?
         openFilterBottomSheet,
     TResult? Function()? validateFilters,
@@ -665,7 +698,7 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg)? initialized,
     TResult Function(PaymentSummaryFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
@@ -806,7 +839,7 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrg salesOrg) initialized,
     required TResult Function(PaymentSummaryFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
@@ -822,7 +855,7 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg)? initialized,
     TResult? Function(PaymentSummaryFilter appliedFilter)?
         openFilterBottomSheet,
     TResult? Function()? validateFilters,
@@ -837,7 +870,7 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg)? initialized,
     TResult Function(PaymentSummaryFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
@@ -985,7 +1018,7 @@ class _$_StatusChanged implements _StatusChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrg salesOrg) initialized,
     required TResult Function(PaymentSummaryFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
@@ -1001,7 +1034,7 @@ class _$_StatusChanged implements _StatusChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg)? initialized,
     TResult? Function(PaymentSummaryFilter appliedFilter)?
         openFilterBottomSheet,
     TResult? Function()? validateFilters,
@@ -1016,7 +1049,7 @@ class _$_StatusChanged implements _StatusChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg)? initialized,
     TResult Function(PaymentSummaryFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
@@ -1156,7 +1189,7 @@ class _$_SetCreatedDate implements _SetCreatedDate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
+    required TResult Function(SalesOrg salesOrg) initialized,
     required TResult Function(PaymentSummaryFilter appliedFilter)
         openFilterBottomSheet,
     required TResult Function() validateFilters,
@@ -1172,7 +1205,7 @@ class _$_SetCreatedDate implements _SetCreatedDate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
+    TResult? Function(SalesOrg salesOrg)? initialized,
     TResult? Function(PaymentSummaryFilter appliedFilter)?
         openFilterBottomSheet,
     TResult? Function()? validateFilters,
@@ -1187,7 +1220,7 @@ class _$_SetCreatedDate implements _SetCreatedDate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
+    TResult Function(SalesOrg salesOrg)? initialized,
     TResult Function(PaymentSummaryFilter appliedFilter)? openFilterBottomSheet,
     TResult Function()? validateFilters,
     TResult Function(String amountValueFrom)? amountValueFromChanged,
@@ -1263,8 +1296,8 @@ abstract class _SetCreatedDate implements PaymentSummaryFilterEvent {
 
 /// @nodoc
 mixin _$PaymentSummaryFilterState {
+  SalesOrg get salesOrg => throw _privateConstructorUsedError;
   PaymentSummaryFilter get filter => throw _privateConstructorUsedError;
-  List<StatusType> get statuses => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1279,9 +1312,7 @@ abstract class $PaymentSummaryFilterStateCopyWith<$Res> {
       _$PaymentSummaryFilterStateCopyWithImpl<$Res, PaymentSummaryFilterState>;
   @useResult
   $Res call(
-      {PaymentSummaryFilter filter,
-      List<StatusType> statuses,
-      bool showErrorMessages});
+      {SalesOrg salesOrg, PaymentSummaryFilter filter, bool showErrorMessages});
 
   $PaymentSummaryFilterCopyWith<$Res> get filter;
 }
@@ -1300,19 +1331,19 @@ class _$PaymentSummaryFilterStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrg = null,
     Object? filter = null,
-    Object? statuses = null,
     Object? showErrorMessages = null,
   }) {
     return _then(_value.copyWith(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryFilter,
-      statuses: null == statuses
-          ? _value.statuses
-          : statuses // ignore: cast_nullable_to_non_nullable
-              as List<StatusType>,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -1339,9 +1370,7 @@ abstract class _$$_PaymentSummaryFilterStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {PaymentSummaryFilter filter,
-      List<StatusType> statuses,
-      bool showErrorMessages});
+      {SalesOrg salesOrg, PaymentSummaryFilter filter, bool showErrorMessages});
 
   @override
   $PaymentSummaryFilterCopyWith<$Res> get filter;
@@ -1360,19 +1389,19 @@ class __$$_PaymentSummaryFilterStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrg = null,
     Object? filter = null,
-    Object? statuses = null,
     Object? showErrorMessages = null,
   }) {
     return _then(_$_PaymentSummaryFilterState(
+      salesOrg: null == salesOrg
+          ? _value.salesOrg
+          : salesOrg // ignore: cast_nullable_to_non_nullable
+              as SalesOrg,
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryFilter,
-      statuses: null == statuses
-          ? _value._statuses
-          : statuses // ignore: cast_nullable_to_non_nullable
-              as List<StatusType>,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -1385,28 +1414,21 @@ class __$$_PaymentSummaryFilterStateCopyWithImpl<$Res>
 
 class _$_PaymentSummaryFilterState extends _PaymentSummaryFilterState {
   const _$_PaymentSummaryFilterState(
-      {required this.filter,
-      required final List<StatusType> statuses,
+      {required this.salesOrg,
+      required this.filter,
       required this.showErrorMessages})
-      : _statuses = statuses,
-        super._();
+      : super._();
 
+  @override
+  final SalesOrg salesOrg;
   @override
   final PaymentSummaryFilter filter;
-  final List<StatusType> _statuses;
-  @override
-  List<StatusType> get statuses {
-    if (_statuses is EqualUnmodifiableListView) return _statuses;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_statuses);
-  }
-
   @override
   final bool showErrorMessages;
 
   @override
   String toString() {
-    return 'PaymentSummaryFilterState(filter: $filter, statuses: $statuses, showErrorMessages: $showErrorMessages)';
+    return 'PaymentSummaryFilterState(salesOrg: $salesOrg, filter: $filter, showErrorMessages: $showErrorMessages)';
   }
 
   @override
@@ -1414,15 +1436,16 @@ class _$_PaymentSummaryFilterState extends _PaymentSummaryFilterState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PaymentSummaryFilterState &&
+            (identical(other.salesOrg, salesOrg) ||
+                other.salesOrg == salesOrg) &&
             (identical(other.filter, filter) || other.filter == filter) &&
-            const DeepCollectionEquality().equals(other._statuses, _statuses) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filter,
-      const DeepCollectionEquality().hash(_statuses), showErrorMessages);
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrg, filter, showErrorMessages);
 
   @JsonKey(ignore: true)
   @override
@@ -1434,15 +1457,15 @@ class _$_PaymentSummaryFilterState extends _PaymentSummaryFilterState {
 
 abstract class _PaymentSummaryFilterState extends PaymentSummaryFilterState {
   const factory _PaymentSummaryFilterState(
-      {required final PaymentSummaryFilter filter,
-      required final List<StatusType> statuses,
+      {required final SalesOrg salesOrg,
+      required final PaymentSummaryFilter filter,
       required final bool showErrorMessages}) = _$_PaymentSummaryFilterState;
   const _PaymentSummaryFilterState._() : super._();
 
   @override
-  PaymentSummaryFilter get filter;
+  SalesOrg get salesOrg;
   @override
-  List<StatusType> get statuses;
+  PaymentSummaryFilter get filter;
   @override
   bool get showErrorMessages;
   @override

@@ -2,7 +2,9 @@ part of 'payment_summary_filter_bloc.dart';
 
 @freezed
 class PaymentSummaryFilterEvent with _$PaymentSummaryFilterEvent {
-  const factory PaymentSummaryFilterEvent.initialized() = _Initialized;
+  const factory PaymentSummaryFilterEvent.initialized({
+    required SalesOrg salesOrg,
+  }) = _Initialized;
 
   const factory PaymentSummaryFilterEvent.openFilterBottomSheet({
     required PaymentSummaryFilter appliedFilter,

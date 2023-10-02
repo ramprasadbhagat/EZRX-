@@ -7,7 +7,6 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:flutter/services.dart';
 
 final _decimalOnlyRegx = RegExp(r'^\d+\.?\d{0,10}');
@@ -243,9 +242,7 @@ class _AmountValueToFilter extends StatelessWidget {
             initialValue: state.filter.amountValueTo.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
                   AllInvoicesFilterEvent.amountValueToChanged(
-                    value.isNotEmpty
-                        ? StringUtils.formatter.format(double.parse(value))
-                        : '',
+                    value,
                   ),
                 ),
             keyboardType: TextInputType.number,
@@ -283,9 +280,7 @@ class _AmountValueFromFilter extends StatelessWidget {
             initialValue: state.filter.amountValueFrom.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
                   AllInvoicesFilterEvent.amountValueFromChanged(
-                    value.isNotEmpty
-                        ? StringUtils.formatter.format(double.parse(value))
-                        : '',
+                    value,
                   ),
                 ),
             keyboardType: TextInputType.number,

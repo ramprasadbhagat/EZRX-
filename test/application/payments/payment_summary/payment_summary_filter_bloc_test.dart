@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
@@ -47,11 +48,12 @@ void main() {
           PaymentSummaryFilterBloc(paymentSummaryRepository: repository),
       act: (PaymentSummaryFilterBloc bloc) {
         bloc.add(
-          const PaymentSummaryFilterEvent.initialized(),
+          PaymentSummaryFilterEvent.initialized(salesOrg: SalesOrg('2001')),
         );
       },
       expect: () => [
-        isA<PaymentSummaryFilterState>(),
+        PaymentSummaryFilterState.initial()
+            .copyWith(salesOrg: SalesOrg('2001')),
       ],
     );
 

@@ -16,9 +16,7 @@ class _PaymentSummaryAmountValueToFilter extends StatelessWidget {
           initialValue: state.filter.amountValueTo.apiParameterValue,
           onChanged: (value) => context.read<PaymentSummaryFilterBloc>().add(
                 PaymentSummaryFilterEvent.amountValueToChanged(
-                  value.isNotEmpty
-                      ? StringUtils.formatter.format(double.parse(value))
-                      : '',
+                  value,
                 ),
               ),
           keyboardType: TextInputType.number,
@@ -55,9 +53,7 @@ class _PaymentSummaryAmountValueFromFilter extends StatelessWidget {
             initialValue: state.filter.amountValueFrom.apiParameterValue,
             onChanged: (value) => context.read<PaymentSummaryFilterBloc>().add(
                   PaymentSummaryFilterEvent.amountValueFromChanged(
-                    value.isNotEmpty
-                        ? StringUtils.formatter.format(double.parse(value))
-                        : '',
+                    value,
                   ),
                 ),
             keyboardType: TextInputType.number,

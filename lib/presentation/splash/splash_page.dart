@@ -27,6 +27,7 @@ import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.d
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
@@ -1148,6 +1149,25 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               ),
             );
       }
+
+      context.read<ViewByOrderBloc>().add(
+            ViewByOrderEvent.initialized(
+              salesOrganisation:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
+              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              user: context.read<UserBloc>().state.user,
+              sortDirection: 'desc',
+            ),
+          );
+
+      context.read<PaymentSummaryFilterBloc>().add(
+            PaymentSummaryFilterEvent.initialized(
+              salesOrg: salesOrgState.salesOrg,
+            ),
+          );
     }
   }
 

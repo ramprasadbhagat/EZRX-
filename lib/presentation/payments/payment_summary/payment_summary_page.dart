@@ -33,7 +33,6 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:flutter/services.dart';
 
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_download_button.dart';
