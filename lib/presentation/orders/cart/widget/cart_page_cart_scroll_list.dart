@@ -61,7 +61,8 @@ class _CartPageCartScrollList extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.cartProducts != current.cartProducts ||
           previous.isFetching != current.isFetching ||
-          previous.isUpserting != current.isUpserting,
+          previous.isUpserting != current.isUpserting ||
+          previous.isBuyAgain != current.isBuyAgain,
       builder: (context, state) {
         return Expanded(
           child: Padding(
@@ -96,7 +97,8 @@ class _CartPageCartScrollList extends StatelessWidget {
                           const CartEvent.fetchProductsAddedToCart(),
                         ),
                     isLoading: state.isFetching && state.cartProducts.isEmpty ||
-                        state.isClearing,
+                        state.isClearing ||
+                        state.isBuyAgain,
                     itemBuilder: (context, index, item) {
                       return _CartPageScrollListItem(
                         item: item,

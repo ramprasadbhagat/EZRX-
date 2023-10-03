@@ -30,6 +30,7 @@ import 'package:ezrxmobile/application/order/cart/price_override/price_override_
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 part 'package:ezrxmobile/presentation/orders/cart/widget/minimum_order_value_message.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_cart_scroll_list.dart';
@@ -122,6 +123,23 @@ class _CartPageState extends State<CartPage> {
                 );
           },
         ),
+        BlocListener<CartBloc, CartState>(
+          listenWhen: (previous, current) =>
+              previous.isBuyAgain != current.isBuyAgain && !current.isBuyAgain,
+          listener: (context, state) {
+            if (context.router.current.path == 'orders/cart') {
+              state.apiFailureOrSuccessOption.fold(
+                () {
+                  CustomSnackBar(
+                    key: WidgetKeys.materialDetailsAddToCartSnackBar,
+                    messageText: context.tr('Item has been added to cart'),
+                  ).show(context);
+                },
+                (_) {},
+              );
+            }
+          },
+        ),
       ],
       child: BlocConsumer<CartBloc, CartState>(
         listenWhen: (previous, current) =>
@@ -139,6 +157,7 @@ class _CartPageState extends State<CartPage> {
                   ),
                 );
           }
+
           if ((!state.isUpserting || !state.isClearing) &&
               context.router.current.path == 'orders/cart') {
             CustomSnackBar(
@@ -171,21 +190,31 @@ class _CartPageState extends State<CartPage> {
                 ),
                 actions: state.cartProducts.isNotEmpty
                     ? [
-                        IconButton(
-                          key: WidgetKeys.cartClearButton,
-                          icon: const Icon(
-                            Icons.delete_outlined,
-                            color: ZPColors.red,
-                          ),
-                          onPressed: () {
-                            context.read<CartBloc>().add(
-                                  const CartEvent.clearCart(),
-                                );
-                            context.read<PriceOverrideBloc>().add(
-                                  const PriceOverrideEvent.initialized(),
-                                );
-                          },
-                        ),
+                        state.isClearing
+                            ? Align(
+                                alignment: Alignment.center,
+                                child: LoadingAnimationWidget
+                                    .horizontalRotatingDots(
+                                  key: WidgetKeys.soaLoadingAnimationWidgetKey,
+                                  color: ZPColors.red,
+                                  size: 24,
+                                ),
+                              )
+                            : IconButton(
+                                key: WidgetKeys.cartClearButton,
+                                icon: const Icon(
+                                  Icons.delete_outlined,
+                                  color: ZPColors.red,
+                                ),
+                                onPressed: () {
+                                  context.read<CartBloc>().add(
+                                        const CartEvent.clearCart(),
+                                      );
+                                  context.read<PriceOverrideBloc>().add(
+                                        const PriceOverrideEvent.initialized(),
+                                      );
+                                },
+                              ),
                       ]
                     : null,
               ),

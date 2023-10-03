@@ -8,5 +8,9 @@ class ReOrderPermissionEvent with _$ReOrderPermissionEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required SalesOrganisation salesOrganisation,
+    required OrderNumber orderNumberWillUpsert,
   }) = _Fetch;
+  const factory ReOrderPermissionEvent.resetOrderNumberWillUpsert({
+    required OrderNumber orderNumberWillUpsert,
+  }) = _ResetOrderNumberWillUpsert;
 }

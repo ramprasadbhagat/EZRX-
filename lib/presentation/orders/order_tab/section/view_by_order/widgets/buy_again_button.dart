@@ -15,7 +15,10 @@ class _BuyAgainButton extends StatelessWidget {
       builder: (context, stateCart) {
         return BlocConsumer<ReOrderPermissionBloc, ReOrderPermissionState>(
           listenWhen: (previous, current) =>
-              previous.isFetching != current.isFetching && !current.isFetching,
+              previous.isFetching != current.isFetching &&
+              !current.isFetching &&
+              current.orderNumberWillUpsert ==
+                  viewByOrderHistoryItem.orderNumber,
           listener: (context, reOrderState) {
             final cartState = context.read<CartBloc>().state;
             context.read<CartBloc>().add(
@@ -55,15 +58,26 @@ class _BuyAgainButton extends StatelessWidget {
                     counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );
+            context.read<ReOrderPermissionBloc>().add(
+                  ReOrderPermissionEvent.resetOrderNumberWillUpsert(
+                    orderNumberWillUpsert: OrderNumber(''),
+                  ),
+                );
+            context.router.pushNamed('orders/cart');
+
           },
           buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching,
+              previous.isFetching != current.isFetching ||
+              previous.orderNumberWillUpsert != current.orderNumberWillUpsert,
           builder: (context, state) {
             return OutlinedButton(
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.maxFinite, 45),
               ),
-              onPressed: stateCart.isFetching || stateCart.isUpserting
+              onPressed: state.orderNumberWillUpsert != OrderNumber('') ||
+                      (state.orderNumberWillUpsert ==
+                              viewByOrderHistoryItem.orderNumber &&
+                          (stateCart.isUpserting || stateCart.isFetching))
                   ? null
                   : () {
                       context.read<ReOrderPermissionBloc>().add(
@@ -83,13 +97,15 @@ class _BuyAgainButton extends StatelessWidget {
                                   .read<EligibilityBloc>()
                                   .state
                                   .customerCodeInfo,
+                              orderNumberWillUpsert:
+                                  viewByOrderHistoryItem.orderNumber,
                             ),
                           );
                     },
               child: LoadingShimmer.withChild(
-                enabled: state.isFetching ||
-                    stateCart.isUpserting ||
-                    stateCart.isFetching,
+                enabled: state.orderNumberWillUpsert ==
+                        viewByOrderHistoryItem.orderNumber &&
+                    (stateCart.isUpserting || stateCart.isFetching),
                 child: Text(
                   'Buy again'.tr(),
                 ),

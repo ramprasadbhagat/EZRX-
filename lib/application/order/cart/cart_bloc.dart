@@ -632,7 +632,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(
           state.copyWith(
             apiFailureOrSuccessOption: none(),
-            isUpserting: true,
+            isBuyAgain: true,
           ),
         );
 
@@ -653,7 +653,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isUpserting: false,
+                isBuyAgain: false,
               ),
             );
           },
@@ -661,7 +661,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
-                isUpserting: false,
+                isBuyAgain: false,
                 cartProducts: cartProductList,
               ),
             );

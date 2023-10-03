@@ -6820,6 +6820,7 @@ mixin _$CartState {
   bool get isUpserting => throw _privateConstructorUsedError;
   bool get isMappingPrice => throw _privateConstructorUsedError;
   bool get isUpdatingStock => throw _privateConstructorUsedError;
+  bool get isBuyAgain => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
@@ -6849,6 +6850,7 @@ abstract class $CartStateCopyWith<$Res> {
       bool isUpserting,
       bool isMappingPrice,
       bool isUpdatingStock,
+      bool isBuyAgain,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
@@ -6884,6 +6886,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
     Object? isUpserting = null,
     Object? isMappingPrice = null,
     Object? isUpdatingStock = null,
+    Object? isBuyAgain = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
@@ -6927,6 +6930,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
       isUpdatingStock: null == isUpdatingStock
           ? _value.isUpdatingStock
           : isUpdatingStock // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBuyAgain: null == isBuyAgain
+          ? _value.isBuyAgain
+          : isBuyAgain // ignore: cast_nullable_to_non_nullable
               as bool,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
@@ -7006,6 +7013,7 @@ abstract class _$$_CartStateCopyWith<$Res> implements $CartStateCopyWith<$Res> {
       bool isUpserting,
       bool isMappingPrice,
       bool isUpdatingStock,
+      bool isBuyAgain,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
@@ -7043,6 +7051,7 @@ class __$$_CartStateCopyWithImpl<$Res>
     Object? isUpserting = null,
     Object? isMappingPrice = null,
     Object? isUpdatingStock = null,
+    Object? isBuyAgain = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
@@ -7087,6 +7096,10 @@ class __$$_CartStateCopyWithImpl<$Res>
           ? _value.isUpdatingStock
           : isUpdatingStock // ignore: cast_nullable_to_non_nullable
               as bool,
+      isBuyAgain: null == isBuyAgain
+          ? _value.isBuyAgain
+          : isBuyAgain // ignore: cast_nullable_to_non_nullable
+              as bool,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -7129,6 +7142,7 @@ class _$_CartState extends _CartState {
       required this.isUpserting,
       required this.isMappingPrice,
       required this.isUpdatingStock,
+      required this.isBuyAgain,
       required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
@@ -7165,6 +7179,8 @@ class _$_CartState extends _CartState {
   @override
   final bool isUpdatingStock;
   @override
+  final bool isBuyAgain;
+  @override
   final SalesOrganisation salesOrganisation;
   @override
   final CustomerCodeInfo customerCodeInfo;
@@ -7191,7 +7207,7 @@ class _$_CartState extends _CartState {
 
   @override
   String toString() {
-    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode)';
+    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, isBuyAgain: $isBuyAgain, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode)';
   }
 
   @override
@@ -7220,6 +7236,8 @@ class _$_CartState extends _CartState {
                 other.isMappingPrice == isMappingPrice) &&
             (identical(other.isUpdatingStock, isUpdatingStock) ||
                 other.isUpdatingStock == isUpdatingStock) &&
+            (identical(other.isBuyAgain, isBuyAgain) ||
+                other.isBuyAgain == isBuyAgain) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -7246,6 +7264,7 @@ class _$_CartState extends _CartState {
       isUpserting,
       isMappingPrice,
       isUpdatingStock,
+      isBuyAgain,
       salesOrganisation,
       customerCodeInfo,
       shipToInfo,
@@ -7272,6 +7291,7 @@ abstract class _CartState extends CartState {
           required final bool isUpserting,
           required final bool isMappingPrice,
           required final bool isUpdatingStock,
+          required final bool isBuyAgain,
           required final SalesOrganisation salesOrganisation,
           required final CustomerCodeInfo customerCodeInfo,
           required final ShipToInfo shipToInfo,
@@ -7299,6 +7319,8 @@ abstract class _CartState extends CartState {
   bool get isMappingPrice;
   @override
   bool get isUpdatingStock;
+  @override
+  bool get isBuyAgain;
   @override
   SalesOrganisation get salesOrganisation;
   @override

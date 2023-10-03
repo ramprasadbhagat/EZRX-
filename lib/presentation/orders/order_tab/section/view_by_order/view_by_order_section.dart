@@ -13,15 +13,14 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -41,73 +40,51 @@ class ViewByOrdersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CartBloc, CartState>(
+    return BlocConsumer<ViewByOrderBloc, ViewByOrderState>(
       listenWhen: (previous, current) =>
-          previous.isUpserting != current.isUpserting &&
-          context.router.current.path == 'main',
+          previous.failureOrSuccessOption != current.failureOrSuccessOption,
       listener: (context, state) {
-        state.apiFailureOrSuccessOption.fold(
-          () {
-            CustomSnackBar(
-              key: WidgetKeys.materialDetailsAddToCartSnackBar,
-              messageText: context.tr('Item has been added to cart'),
-            ).show(context);
-            if (!state.isUpserting) {
-              context.router.pushNamed('orders/cart');
-            }
-          },
-          (option) => option.fold(
+        state.failureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
             (failure) => ErrorUtils.handleApiFailure(context, failure),
             (_) {},
           ),
         );
       },
-      child: BlocConsumer<ViewByOrderBloc, ViewByOrderState>(
-        listenWhen: (previous, current) =>
-            previous.failureOrSuccessOption != current.failureOrSuccessOption,
-        listener: (context, state) {
-          state.failureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) => ErrorUtils.handleApiFailure(context, failure),
-              (_) {},
-            ),
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
+      builder: (context, state) {
+        if (state.isFetching && state.viewByOrderList.orderHeaders.isEmpty) {
+          return LoadingShimmer.logo(
+            key: WidgetKeys.loaderImage,
           );
-        },
-        buildWhen: (previous, current) =>
-            previous.isFetching != current.isFetching,
-        builder: (context, state) {
-          if (state.isFetching && state.viewByOrderList.orderHeaders.isEmpty) {
-            return LoadingShimmer.logo(
-              key: WidgetKeys.loaderImage,
-            );
-          }
+        }
 
-          return ScrollList<ViewByOrdersGroup>(
-            controller: ScrollController(),
-            noRecordFoundWidget: const NoRecordFound(title: 'No orders found'),
-            onRefresh: () {
-              context.read<ViewByOrderBloc>().add(
-                    ViewByOrderEvent.fetch(
-                      filter: ViewByOrdersFilter.empty(),
-                      searchKey: SearchKey.searchFilter(''),
-                    ),
-                  );
-            },
-            isLoading: state.isFetching,
-            onLoadingMore: () => context.read<ViewByOrderBloc>().add(
-                  const ViewByOrderEvent.loadMore(),
-                ),
-            itemBuilder: (context, index, item) => _ViewByOrderGroup(
-              viewByOrdersItem: item,
-              showDivider: index != 0,
-              showBanner: index == 0,
-              orderHistoryItem: orderHistoryItem,
-            ),
-            items: state.viewByOrderList.orderHeaders.getViewByOrderGroupList,
-          );
-        },
-      ),
+        return ScrollList<ViewByOrdersGroup>(
+          controller: ScrollController(),
+          noRecordFoundWidget: const NoRecordFound(title: 'No orders found'),
+          onRefresh: () {
+            context.read<ViewByOrderBloc>().add(
+                  ViewByOrderEvent.fetch(
+                    filter: ViewByOrdersFilter.empty(),
+                    searchKey: SearchKey.searchFilter(''),
+                  ),
+                );
+          },
+          isLoading: state.isFetching,
+          onLoadingMore: () => context.read<ViewByOrderBloc>().add(
+                const ViewByOrderEvent.loadMore(),
+              ),
+          itemBuilder: (context, index, item) => _ViewByOrderGroup(
+            viewByOrdersItem: item,
+            showDivider: index != 0,
+            showBanner: index == 0,
+            orderHistoryItem: orderHistoryItem,
+          ),
+          items: state.viewByOrderList.orderHeaders.getViewByOrderGroupList,
+        );
+      },
     );
   }
 }

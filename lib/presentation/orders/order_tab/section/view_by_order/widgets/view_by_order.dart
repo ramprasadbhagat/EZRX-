@@ -64,12 +64,9 @@ class _ViewByOrder extends StatelessWidget {
                 ],
               ),
             ),
-            BlocProvider(
-              create: (context) => locator<ReOrderPermissionBloc>(),
-              child: _BuyAgainButton(
-                viewByOrderHistoryItem: viewByOrderHistoryItem,
-                key: WidgetKeys.viewByOrderBuyAgainButtonKey,
-              ),
+            _BuyAgainButton(
+              viewByOrderHistoryItem: viewByOrderHistoryItem,
+              key: WidgetKeys.viewByOrderBuyAgainButtonKey,
             ),
           ],
         ),

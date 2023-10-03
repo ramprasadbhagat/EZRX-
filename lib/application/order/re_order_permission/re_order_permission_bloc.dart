@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/repository/i_re_order_permission_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -35,6 +36,7 @@ class ReOrderPermissionBloc
           state.copyWith(
             isFetching: true,
             failureOrSuccessOption: none(),
+            orderNumberWillUpsert: e.orderNumberWillUpsert,
           ),
         );
 
@@ -80,6 +82,11 @@ class ReOrderPermissionBloc
           },
         );
       },
+      resetOrderNumberWillUpsert: (_ResetOrderNumberWillUpsert e) async => emit(
+        state.copyWith(
+          orderNumberWillUpsert: e.orderNumberWillUpsert,
+        ),
+      ),
     );
   }
 }
