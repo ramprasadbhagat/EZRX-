@@ -708,6 +708,8 @@ class WidgetKeys {
   static const Key paymentHomeSoa = Key('paymentHomeSoa');
   static const Key paymentAdviceCreatedPageBack =
       Key('paymentAdviceCreatedPageBack');
+  static const Key creditDetailsPageListView =
+      Key('creditDetailsPageListView');    
   //===========================================================
   //  Intro Page
   //============================================================

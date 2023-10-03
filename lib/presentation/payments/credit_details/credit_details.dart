@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credi
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_details_section.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_items_section.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +30,12 @@ class CreditDetailsPage extends StatelessWidget {
         builder: (context, state) {
           if (state.isLoading) {
             return LoadingShimmer.logo(
-              key: const Key('LoaderImage'),
+              key: WidgetKeys.loaderImage,
             );
           }
 
           return ListView(
+            key: WidgetKeys.creditDetailsPageListView,
             children: [
               CreditDetailsSection(creditItem: creditItem),
               CreditItemsSection(creditItems: state.details.groupList),
