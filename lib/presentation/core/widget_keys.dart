@@ -28,6 +28,8 @@ class WidgetKeys {
   static const Key commonTileItemSubTitle = Key('commonTileItemSubTitle');
   static const Key confirmBottomSheetConfirmButton =
       Key('confirmBottomSheetConfirmButton');
+  static const Key addToCartErrorSection = Key('addToCartErrorSection');
+  static const Key productDetailList = Key('productDetailList');
   static const Key addressInfoSectionActionLabel =
       Key('addressInfoSectionActionLabel');
   static const Key addressInfoSectionCustomerCodeLabel =

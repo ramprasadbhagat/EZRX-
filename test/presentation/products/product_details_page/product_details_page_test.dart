@@ -11,13 +11,10 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
@@ -27,6 +24,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
@@ -37,6 +35,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -89,14 +89,8 @@ void main() {
   late CartBloc cartMockBloc;
   late AppRouter autoRouterMock;
   late MaterialInfo materialInfo;
+  late Price materialPrice;
   late List<MaterialInfo> similarProducts;
-
-  final fakeUser = User.empty().copyWith(
-    username: Username('fake-user'),
-    role: Role.empty().copyWith(
-      type: RoleType('root_admin'),
-    ),
-  );
 
   final routeData = RouteData(
     route: const RouteMatch(
@@ -134,6 +128,10 @@ void main() {
     );
     materialInfo = await ProductDetailLocalDataSource().getProductDetails();
     similarProducts = await ProductDetailLocalDataSource().getSimilarProduct();
+    materialPrice =
+        (await MaterialPriceLocalDataSource().getPriceList()).firstWhere(
+      (element) => element.materialNumber == materialInfo.materialNumber,
+    );
   });
 
   group(
@@ -148,16 +146,15 @@ void main() {
         when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
         when(() => userBlocMock.state).thenReturn(
           UserState.initial().copyWith(
-            user: fakeUser,
+            user: fakeRootAdminUser,
           ),
         );
         when(() => customerCodeBlocMock.state)
             .thenReturn(CustomerCodeState.initial());
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            user: fakeUser,
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('MY')),
+            user: fakeRootAdminUser,
+            salesOrganisation: fakeSalesOrganisation,
           ),
         );
         when(() => materialListMockBloc.state)
@@ -242,27 +239,304 @@ void main() {
         expect(itemAddedSnackBar, findsOneWidget);
       });
 
-      testWidgets('Add to Cart is disabled when materialWithoutPrice is false',
+      testWidgets(
+          'Find Add To Cart Error Section When Add To Cart Button Pressed',
           (tester) async {
-        when(() => materialPriceMockBloc.state).thenReturn(
-          MaterialPriceState.initial().copyWith(
-            materialPrice: {
-              MaterialNumber('00000111111'): Price.empty().copyWith(
-                finalPrice: MaterialPrice(0.0),
-              ),
-            },
+        when(() => mockSalesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: salesOrgConfigEnabledMaterialWithoutPrice,
           ),
         );
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('00000111111'),
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: true,
+              ),
+            ),
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {materialInfo.materialNumber: materialPrice},
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+              addOosMaterials: OosMaterial(true),
+              oosValue: OosValue(1),
+            ),
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: true,
+              ),
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('true'),
+              ),
+            ),
+          ),
+        );
+        when(() => cartMockBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isUpserting: false,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(isFOCMaterial: false),
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cartButtonFinder =
+            find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+        final addToCartButton = find.byType(ElevatedButton);
+        final addToCartErrorSection =
+            find.byKey(WidgetKeys.addToCartErrorSection);
+        expect(cartButtonFinder, findsOneWidget);
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        await tester.pump(const Duration(seconds: 2));
+        expect(addToCartErrorSection, findsOneWidget);
+      });
+
+      testWidgets('Should scroll to top when press FAB', (tester) async {
+        when(() => mockSalesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: salesOrgConfigEnabledMaterialWithoutPrice,
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: true,
+              ),
+            ),
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {materialInfo.materialNumber: materialPrice},
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+              addOosMaterials: OosMaterial(true),
+              oosValue: OosValue(1),
+            ),
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: true,
+              ),
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('true'),
+              ),
+            ),
+          ),
+        );
+        when(() => cartMockBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isUpserting: false,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(isFOCMaterial: false),
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.drag(
+          find.byKey(
+            WidgetKeys.materialDetailsMaterialDescription,
+          ),
+          const Offset(0.0, -1000),
+        );
+        await tester.pumpAndSettle();
+        final materialDetailsFloatingButton =
+            find.byKey(WidgetKeys.materialDetailsFloatingButton);
+        expect(
+          materialDetailsFloatingButton,
+          findsOneWidget,
+        );
+        await tester.tap(materialDetailsFloatingButton);
+        await tester.pumpAndSettle();
+        expect(
+          materialDetailsFloatingButton,
+          findsNothing,
+        );
+      });
+
+      testWidgets(
+          'Find Add To Cart Error Section When Add To Cart Button Pressed case 2',
+          (tester) async {
+        when(() => mockSalesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: salesOrgConfigEnabledMaterialWithoutPrice,
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: false,
+              ),
+            ),
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {materialInfo.materialNumber: materialPrice},
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+              addOosMaterials: OosMaterial(true),
+              oosValue: OosValue(1),
+            ),
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: false,
+              ),
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('true'),
+              ),
+            ),
+          ),
+        );
+        when(() => cartMockBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isUpserting: false,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(isFOCMaterial: true),
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cartButtonFinder =
+            find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+        final addToCartButton = find.byType(ElevatedButton);
+        final addToCartErrorSection =
+            find.byKey(WidgetKeys.addToCartErrorSection);
+        expect(cartButtonFinder, findsOneWidget);
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        await tester.pump(const Duration(seconds: 2));
+        expect(addToCartErrorSection, findsOneWidget);
+      });
+      testWidgets('Add to cart success when every condition is valid',
+          (tester) async {
+        when(() => mockSalesOrgBloc.state).thenReturn(
+          SalesOrgState.initial().copyWith(
+            configs: salesOrgConfigEnabledMaterialWithoutPrice,
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: true,
+              ),
+            ),
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {materialInfo.materialNumber: materialPrice},
+          ),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+              addOosMaterials: OosMaterial(true),
+              oosValue: OosValue(1),
+            ),
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+                isFOCMaterial: true,
+              ),
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('true'),
+              ),
+            ),
+          ),
+        );
+        when(() => cartMockBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isUpserting: false,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(isFOCMaterial: true),
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final cartButtonFinder =
+            find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+        final addToCartButton = find.byType(ElevatedButton);
+        final addToCartErrorSection =
+            find.byKey(WidgetKeys.addToCartErrorSection);
+        expect(cartButtonFinder, findsOneWidget);
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        await tester.pump(const Duration(seconds: 2));
+        expect(addToCartErrorSection, findsNothing);
+      });
+
+      testWidgets('Add to Cart is disabled when materialWithoutPrice is false',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
                 quantity: MaterialQty(2),
               ),
             ),
           ),
         );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {materialInfo.materialNumber: materialPrice},
+          ),
+        );
+
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         final cartButtonFinder =
@@ -279,18 +553,21 @@ void main() {
           (tester) async {
         when(() => mockSalesOrgBloc.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              materialWithoutPrice: true,
+            configs: salesOrgConfigEnabledMaterialWithoutPrice,
+          ),
+        );
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                quantity: MaterialQty(2),
+              ),
             ),
           ),
         );
         when(() => materialPriceMockBloc.state).thenReturn(
           MaterialPriceState.initial().copyWith(
-            materialPrice: {
-              MaterialNumber('00000111111'): Price.empty().copyWith(
-                finalPrice: MaterialPrice(0.0),
-              ),
-            },
+            materialPrice: {materialInfo.materialNumber: materialPrice},
           ),
         );
         when(() => eligibilityBlocMock.state).thenReturn(
@@ -305,8 +582,7 @@ void main() {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('00000111111'),
+              materialInfo: materialInfo.copyWith(
                 quantity: MaterialQty(2),
               ),
               stockInfo: StockInfo.empty().copyWith(
@@ -386,7 +662,7 @@ void main() {
         await tester.pump(const Duration(seconds: 1));
       });
 
-      testWidgets('Product Image  not available', (tester) async {
+      testWidgets('Product Image not available', (tester) async {
         final expectedStates = Stream.fromIterable(
           [
             ProductDetailState.initial().copyWith(
@@ -455,8 +731,7 @@ void main() {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('00000111111'),
+              materialInfo: materialInfo.copyWith(
                 isFavourite: false,
               ),
             ),
@@ -466,8 +741,7 @@ void main() {
           [
             ProductDetailState.initial().copyWith(
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                materialInfo: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('00000111111'),
+                materialInfo: materialInfo.copyWith(
                   isFavourite: true,
                 ),
               ),
@@ -491,8 +765,7 @@ void main() {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('00000111111'),
+              materialInfo: materialInfo.copyWith(
                 isFavourite: true,
               ),
             ),
@@ -502,8 +775,7 @@ void main() {
           [
             ProductDetailState.initial().copyWith(
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                materialInfo: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('00000111111'),
+                materialInfo: materialInfo.copyWith(
                   isFavourite: false,
                 ),
               ),
@@ -528,8 +800,7 @@ void main() {
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('00000111111'),
+              materialInfo: materialInfo.copyWith(
                 isFavourite: false,
               ),
             ),
@@ -539,8 +810,7 @@ void main() {
           [
             ProductDetailState.initial().copyWith(
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                materialInfo: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('00000111111'),
+                materialInfo: materialInfo.copyWith(
                   isFavourite: true,
                 ),
               ),
@@ -575,8 +845,7 @@ void main() {
           [
             ProductDetailState.initial().copyWith(
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-                materialInfo: MaterialInfo.empty().copyWith(
-                  materialNumber: MaterialNumber('00000111111'),
+                materialInfo: materialInfo.copyWith(
                   isFavourite: false,
                 ),
               ),

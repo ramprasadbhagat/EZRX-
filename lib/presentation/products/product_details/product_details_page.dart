@@ -130,6 +130,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             )
           : const SizedBox.shrink(),
       body: ListView(
+        key: WidgetKeys.productDetailList,
         controller: _scrollController,
         children: [
           const _ProductImageSection(),
