@@ -93,8 +93,8 @@ class _NotificationList extends StatelessWidget {
       context.router.push(const ViewByOrderDetailsPageRoute());
     }
     //Event call for Payment Detail Page
-    else if (notificationData.isPaymentEligible &&
-        !eligibilityState.isPaymentEnabled) {
+    else if ((notificationData.isPaymentEligible &&
+        !eligibilityState.isPaymentEnabled)) {
       context.read<PaymentSummaryDetailsBloc>().add(
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
               salesOrganization: eligibilityState.salesOrganisation,

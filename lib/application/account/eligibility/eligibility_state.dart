@@ -42,6 +42,7 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get isPaymentEnabled =>
+      user.role.type.hasAdminAccess ||
       !salesOrgConfigs.disablePayment && !user.disablePaymentAccess;
 
   bool get isCovidMaterialEnable {

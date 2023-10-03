@@ -69,7 +69,7 @@ class User with _$User {
 
   bool get userCanCreateOrder {
     // For Root / ZP admin the it will always return true
-    if (role.type.adminOrderAccess) {
+    if (role.type.hasAdminAccess) {
       return true;
     }
     // For Return admin/ requestor/ approver the it will always return false
@@ -88,7 +88,7 @@ class User with _$User {
 
   bool get userCanAccessOrderHistory {
     // For Root / ZP admin the it will always return true
-    if (role.type.adminOrderAccess) {
+    if (role.type.hasAdminAccess) {
       return true;
     }
     // For Return admin/ requestor/ approver it will always return false
@@ -103,7 +103,7 @@ class User with _$User {
 
   bool get userCanAccessProducts {
     // For Root / ZP admin the it will always return true
-    if (role.type.adminOrderAccess) {
+    if (role.type.hasAdminAccess) {
       return true;
     }
     // For Return admin/ requestor/ approver it will always return false

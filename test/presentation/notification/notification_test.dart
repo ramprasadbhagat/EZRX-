@@ -107,6 +107,9 @@ void main() {
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
           ),
+          BlocProvider<PaymentSummaryDetailsBloc>(
+            create: (context) => paymentSummaryDetailsBlockMock,
+          ),
         ],
         child: const Material(child: NotificationTab()),
       );

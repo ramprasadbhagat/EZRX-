@@ -147,7 +147,7 @@ class RoleType extends ValueObject<String> {
     return isAdmin(value.getOrElse(() => ''));
   }
 
-  bool get adminOrderAccess {
+  bool get hasAdminAccess {
     return isAdmin(value.getOrElse(() => ''));
   }
 
