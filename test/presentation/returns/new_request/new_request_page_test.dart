@@ -210,5 +210,44 @@ void main() {
           find.byKey(WidgetKeys.invalidSelectedReturnItemError);
       expect(invalidSelectedReturnItemError, findsNothing);
     });
+    testWidgets(' => rebuild widget when selectedItems is different',
+        (WidgetTester tester) async {
+      whenListen(
+        newRequestBlocMock,
+        Stream.fromIterable([
+          NewRequestState.initial(),
+          NewRequestState.initial().copyWith(
+            salesOrg: sgSalesOrganisation.salesOrg,
+            selectedItems: [
+              fakeReturnMaterial.copyWith(
+                itemNumber: '1',
+                principalCode: PrincipalCode('fake-PrincipalCode-1'),
+              ),
+              fakeReturnMaterial.copyWith(
+                itemNumber: '2',
+                principalCode: PrincipalCode('fake-PrincipalCode-2'),
+              ),
+            ],
+          ),
+        ]),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final invalidSelectedReturnItemError =
+          find.byKey(WidgetKeys.invalidSelectedReturnItemError);
+      expect(invalidSelectedReturnItemError, findsNothing);
+    });
+    testWidgets('=> show the SummaryInfo when press Return for',
+        (tester) async {
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(WidgetKeys.newRequestReturnFor));
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(WidgetKeys.addressInfoSectionActionLabel),
+        findsOneWidget,
+      );
+    });
   });
 }
