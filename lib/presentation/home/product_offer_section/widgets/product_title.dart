@@ -23,12 +23,7 @@ class _ProductTile extends StatelessWidget {
                     CustomCard(
                       showBorder: true,
                       showShadow: false,
-                      padding: const EdgeInsets.all(
-                        10,
-                      ),
                       child: ProductImage(
-                        width: MediaQuery.of(context).size.height * 0.06,
-                        height: 50,
                         materialNumber: materialInfo.materialNumber,
                         fit: BoxFit.fitHeight,
                       ),

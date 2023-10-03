@@ -531,8 +531,8 @@ class _MaterialImageSection extends StatelessWidget {
                         .thumbNail ??
                     '',
                 fit: BoxFit.fitHeight,
-                height: MediaQuery.of(context).size.height * 0.08,
-                width: MediaQuery.of(context).size.height * 0.08,
+                height: MediaQuery.of(context).size.height * 0.10,
+                width: MediaQuery.of(context).size.height * 0.10,
               ),
             );
           },

@@ -71,7 +71,6 @@ class _ProductImageSection extends StatelessWidget {
         CustomCard(
           showShadow: false,
           showBorder: true,
-          padding: const EdgeInsets.all(12),
           child: CustomImage(
             imageUrl: context
                     .read<CartBloc>()
@@ -82,8 +81,6 @@ class _ProductImageSection extends StatelessWidget {
                     .thumbNail ??
                 '',
             fit: BoxFit.fitHeight,
-            height: MediaQuery.of(context).size.height * 0.06,
-            width: MediaQuery.of(context).size.height * 0.06,
           ),
         ),
         cartProduct.price.isBonusDealEligible

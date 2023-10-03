@@ -254,8 +254,6 @@ class _ImageBox extends StatelessWidget {
                 child: Stack(
                   children: [
                     ProductImage(
-                      width: MediaQuery.of(context).size.height * 0.06,
-                      height: MediaQuery.of(context).size.height * 0.06,
                       fit: BoxFit.fitHeight,
                       materialNumber: materialNumber,
                     ),
@@ -287,8 +285,6 @@ class _ImageBox extends StatelessWidget {
             child: Stack(
               children: [
                 ProductImage(
-                  width: MediaQuery.of(context).size.height * 0.06,
-                  height: MediaQuery.of(context).size.height * 0.08,
                   materialNumber: materialNumber,
                   fit: BoxFit.fitHeight,
                 ),

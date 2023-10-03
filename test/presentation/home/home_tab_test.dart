@@ -297,6 +297,7 @@ void main() {
         WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           usingLocalization: true,
+          useMediaQuery: false,
           providers: [
             BlocProvider<AupTcBloc>(create: (context) => mockAupTcBloc),
             BlocProvider<IntroBloc>(create: (context) => mockIntroBloc),

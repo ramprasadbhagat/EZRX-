@@ -109,10 +109,7 @@ class _MaterialImageSection extends StatelessWidget {
         return CustomCard(
           showShadow: false,
           showBorder: true,
-          padding: const EdgeInsets.all(12),
           child: ProductImage(
-            width: MediaQuery.of(context).size.height * 0.06,
-            height: MediaQuery.of(context).size.height * 0.06,
             fit: BoxFit.fitHeight,
             materialNumber: bonusMaterial.materialNumber,
           ),

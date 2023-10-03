@@ -14,14 +14,11 @@ class _MaterialImageSection extends StatelessWidget {
         return CustomCard(
           showShadow: false,
           showBorder: true,
-          padding: const EdgeInsets.all(12),
           child: CustomImage(
             imageUrl: state.additionInfo[bonusItem.materialNumber]
                     ?.productImages.first.thumbNail ??
                 '',
             fit: BoxFit.fitHeight,
-            height: MediaQuery.of(context).size.height * 0.06,
-            width: MediaQuery.of(context).size.height * 0.06,
           ),
         );
       },

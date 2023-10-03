@@ -43,6 +43,7 @@ class MaterialGridItem extends StatelessWidget {
                         materialNumber: materialInfo.materialNumber,
                         fit: BoxFit.fill,
                         width: double.infinity,
+                        height: double.infinity,
                       ),
                     ),
                     Column(

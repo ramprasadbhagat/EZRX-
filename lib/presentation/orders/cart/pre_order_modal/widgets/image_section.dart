@@ -13,8 +13,6 @@ class _ImageSection extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           margin: const EdgeInsets.fromLTRB(0, 10, 8, 0),
           child: ProductImage(
-            width: MediaQuery.of(context).size.height * 0.06,
-            height: MediaQuery.of(context).size.height * 0.06,
             materialNumber: cartProduct.getMaterialNumber,
             fit: BoxFit.fitHeight,
           ),

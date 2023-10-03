@@ -7,8 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomImage extends StatelessWidget {
   final String imageUrl;
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   final BoxFit fit;
   final Widget? errorWidget;
   final Widget? placeholder;
@@ -16,8 +16,8 @@ class CustomImage extends StatelessWidget {
   const CustomImage({
     Key? key,
     required this.imageUrl,
-    this.height = 200,
-    this.width = 100,
+    this.height,
+    this.width,
     this.fit = BoxFit.cover,
     this.errorWidget,
     this.imageBuilder,
@@ -26,18 +26,21 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final defaultHeight = MediaQuery.of(context).size.height * 0.08;
+    final defaultWidth = MediaQuery.of(context).size.height * 0.08;
+
     if (imageUrl.isEmpty) {
       return _ErrorWidget(
-        height: height,
-        width: width,
+        height: height ?? defaultHeight,
+        width: width ?? defaultWidth,
       );
     }
-    
+
     return CachedNetworkImage(
       imageUrl: imageUrl,
       fit: fit,
-      height: height,
-      width: width,
+      height: height ?? defaultHeight,
+      width: width ?? defaultWidth,
       imageBuilder: imageBuilder,
       placeholder: (context, url) =>
           placeholder ??
@@ -50,15 +53,15 @@ class CustomImage extends StatelessWidget {
                 ),
                 color: ZPColors.white,
               ),
-              width: width,
-              height: height,
+              width: width ?? defaultWidth,
+              height: height ?? defaultHeight,
             ),
           ),
       errorWidget: (context, url, error) =>
           errorWidget ??
           _ErrorWidget(
-            height: height,
-            width: width,
+            height: height ?? defaultHeight,
+            width: width ?? defaultWidth,
           ),
     );
   }
@@ -76,11 +79,11 @@ class _ErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(8),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(8.0),
         ),
-        color: ZPColors.extraLightGrey3,
       ),
       width: width,
       height: height,

@@ -1,4 +1,3 @@
-
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/icon_label.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
@@ -29,8 +28,6 @@ class ProductImageWithLabel extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.1,
             fit: BoxFit.fitHeight,
             materialNumber: materialNumber,
-            errorWidgetColor: ZPColors.white,
-            errorWidgetPadding: const EdgeInsets.all(16),
           ),
         ),
         const IconLabel(
