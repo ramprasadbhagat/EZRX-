@@ -273,6 +273,7 @@ Color getStatusLabelColor(String statusType) {
     'Cancelled by Seller': ZPColors.lightRedStatusColor,
     'Overdue': ZPColors.lightRedStatusColor,
     'Expired': ZPColors.lightRedStatusColor,
+    'Rejected': ZPColors.lightRedStatusColor,
   };
 
   final lightYellow = {
