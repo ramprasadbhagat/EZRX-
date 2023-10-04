@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
@@ -18,8 +19,8 @@ class ItemDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final batchNumDisplay =
-        context.read<EligibilityBloc>().state.salesOrgConfigs.batchNumDisplay;
+    final salesOrgConfigs =
+        context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -44,8 +45,7 @@ class ItemDetailsSection extends StatelessWidget {
             title: orderHistoryItem.materialDescription,
             priceComponent: PriceComponent(
               price: orderHistoryItem.totalPrice.totalPrice.toStringAsFixed(2),
-              salesOrgConfig:
-                  context.read<EligibilityBloc>().state.salesOrgConfigs,
+              salesOrgConfig: salesOrgConfigs,
             ),
             statusWidget: StatusLabel(
               key: WidgetKeys.orderItemStatusKey,
@@ -57,8 +57,8 @@ class ItemDetailsSection extends StatelessWidget {
             materialNumber: orderHistoryItem.materialNumber,
             isQuantityBelowImage: false,
             statusTag: orderHistoryItem.productTag,
-            headerText: batchNumDisplay
-                ? 'Batch: ${orderHistoryItem.batch.displayNAIfEmpty}\n(EXP: ${orderHistoryItem.expiryDate.dateOrNaString})'
+            headerText: salesOrgConfigs.batchNumDisplay
+                ? '${'Batch'.tr()}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderHistoryItem.expiryDate.dateOrDashString})'
                 : null,
             isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
           ),

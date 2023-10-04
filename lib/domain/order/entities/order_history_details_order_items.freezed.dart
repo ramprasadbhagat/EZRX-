@@ -27,7 +27,7 @@ mixin _$OrderHistoryDetailsOrderItem {
   DateTimeStringValue get plannedDeliveryDate =>
       throw _privateConstructorUsedError;
   int get pickedQuantity => throw _privateConstructorUsedError;
-  String get batch => throw _privateConstructorUsedError;
+  StringValue get batch => throw _privateConstructorUsedError;
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   Remarks get lineReferenceNotes => throw _privateConstructorUsedError;
   bool get isTenderContractMaterial => throw _privateConstructorUsedError;
@@ -67,7 +67,7 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       SAPStatus sAPStatus,
       DateTimeStringValue plannedDeliveryDate,
       int pickedQuantity,
-      String batch,
+      StringValue batch,
       DateTimeStringValue expiryDate,
       Remarks lineReferenceNotes,
       bool isTenderContractMaterial,
@@ -171,7 +171,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
@@ -286,7 +286,7 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
       SAPStatus sAPStatus,
       DateTimeStringValue plannedDeliveryDate,
       int pickedQuantity,
-      String batch,
+      StringValue batch,
       DateTimeStringValue expiryDate,
       Remarks lineReferenceNotes,
       bool isTenderContractMaterial,
@@ -394,7 +394,7 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StringValue,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
@@ -498,7 +498,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   @override
   final int pickedQuantity;
   @override
-  final String batch;
+  final StringValue batch;
   @override
   final DateTimeStringValue expiryDate;
   @override
@@ -633,7 +633,7 @@ abstract class _OrderHistoryDetailsOrderItem
       required final SAPStatus sAPStatus,
       required final DateTimeStringValue plannedDeliveryDate,
       required final int pickedQuantity,
-      required final String batch,
+      required final StringValue batch,
       required final DateTimeStringValue expiryDate,
       required final Remarks lineReferenceNotes,
       required final bool isTenderContractMaterial,
@@ -670,7 +670,7 @@ abstract class _OrderHistoryDetailsOrderItem
   @override
   int get pickedQuantity;
   @override
-  String get batch;
+  StringValue get batch;
   @override
   DateTimeStringValue get expiryDate;
   @override

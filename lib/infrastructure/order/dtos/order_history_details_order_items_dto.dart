@@ -79,7 +79,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       plannedDeliveryDate:
           orderHistoryDetailsOrderItem.plannedDeliveryDate.dateString,
       pickedQuantity: orderHistoryDetailsOrderItem.pickedQuantity,
-      batch: orderHistoryDetailsOrderItem.batch,
+      batch: orderHistoryDetailsOrderItem.batch.getValue(),
       expiryDate: orderHistoryDetailsOrderItem.expiryDate.dateString,
       lineReferenceNotes:
           orderHistoryDetailsOrderItem.lineReferenceNotes.getValue(),
@@ -117,7 +117,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       sAPStatus: SAPStatus(sAPStatus),
       plannedDeliveryDate: DateTimeStringValue(plannedDeliveryDate),
       pickedQuantity: pickedQuantity,
-      batch: batch,
+      batch: StringValue(batch),
       expiryDate: DateTimeStringValue(expiryDate),
       lineReferenceNotes: Remarks(lineReferenceNotes),
       isTenderContractMaterial: isTenderContractMaterial,

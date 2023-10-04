@@ -21,17 +21,16 @@ class OrderItemDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
     final displayGovernmentMaterialCOde =
-        context.read<EligibilityBloc>().state.salesOrganisation.salesOrg.isTW;
-    final salesOrgConfig =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
+        eligibilityState.salesOrganisation.salesOrg.isTW;
+    final salesOrgConfig = eligibilityState.salesOrgConfigs;
     final invoiceNumber = context
         .read<ViewByOrderDetailsBloc>()
         .state
         .orderHistoryDetails
         .invoiceNumber;
-    final isMYExternalSalesRep =
-        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
+    final isMYExternalSalesRep = eligibilityState.isMYExternalSalesRepUser;
 
     return Padding(
       key: WidgetKeys.viewByOrderDetailItemsSection,
@@ -84,8 +83,9 @@ class OrderItemDetailsSection extends StatelessWidget {
                             isQuantityBelowImage: true,
                             isQuantityRequired: false,
                             statusTag: e.orderDetailBonusTag,
-                            headerText:
-                                '${context.tr('Batch')} ${e.batch}\n(${context.tr('EXP')}: ${e.expiryDate.dateString})',
+                            headerText: salesOrgConfig.batchNumDisplay
+                                ? '${'Batch'.tr()}: ${e.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${e.expiryDate.dateOrDashString})'
+                                : null,
                             subtitle: '',
                             footerWidget: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
