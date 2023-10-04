@@ -32,6 +32,7 @@ class CustomSlidable extends StatelessWidget {
               children: endActionPaneActions
                   .map(
                     (e) => SlidableAction(
+                      key: e.key,
                       onPressed: e.onPressed,
                       backgroundColor: e.backgroundColor,
                       foregroundColor: e.foregroundColor,
@@ -58,6 +59,7 @@ class CustomSlidableAction {
   final Function(BuildContext context) onPressed;
   final Color backgroundColor;
   final Color foregroundColor;
+  final Key? key;
 
   const CustomSlidableAction({
     required this.label,
@@ -65,5 +67,6 @@ class CustomSlidableAction {
     required this.onPressed,
     this.backgroundColor = ZPColors.red,
     this.foregroundColor = ZPColors.white,
+    this.key,
   });
 }

@@ -149,7 +149,7 @@ void main() {
     await commonRobot.autoSearch(invalidSearchKey);
     returnsByItemsRobot.verifyNoRecordFoundVisible();
     await commonRobot.autoSearch(invalidLengthSearchKey);
-    commonRobot.verifyInvalidLengthSearchMessageNotVisible();
+    commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
     returnsByItemsRobot.verifyNoRecordFoundVisible();
     await commonRobot.autoSearch(validSearchKey);
     returnsByItemsRobot.verifyReturnItemsVisible();
@@ -169,10 +169,10 @@ void main() {
     returnsRootRobot.verifyViewByItemsPageVisible();
     returnsByItemsRobot.verifyReturnItemsVisible();
     await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-    commonRobot.verifyInvalidLengthSearchMessageVisible();
+    commonRobot.verifyInvalidLengthSearchMessage();
     await commonRobot.searchWithSearchIcon(materialName);
     await commonRobot.waitAutoSearchDuration();
-    commonRobot.verifyLoadingNotVisible();
+    commonRobot.verifyLoadingImage(isVisible: false);
     returnsByItemsRobot.verifyReturnsWithProductNameVisible(materialName);
   });
 
@@ -197,14 +197,14 @@ void main() {
     );
     await returnsByItemsFilterRobot.tapApplyButton();
     await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-    commonRobot.verifyInvalidLengthSearchMessageVisible();
+    commonRobot.verifyInvalidLengthSearchMessage();
     await commonRobot.searchWithKeyboardAction(invalidSearchKey);
     returnsByItemsRobot.verifyNoRecordFoundVisible();
     await commonRobot.tapClearSearch();
     returnsByItemsRobot.verifyReturnItemsVisible();
     await commonRobot.searchWithKeyboardAction(materialNumber);
     await commonRobot.waitAutoSearchDuration();
-    commonRobot.verifyLoadingNotVisible();
+    commonRobot.verifyLoadingImage(isVisible: false);
     returnsByItemsRobot.verifyReturnsWithProductCodeVisible(materialNumber);
   });
 

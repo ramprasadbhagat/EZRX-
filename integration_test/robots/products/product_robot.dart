@@ -9,7 +9,6 @@ class ProductRobot extends CommonRobot {
   ProductRobot(WidgetTester tester) : super(tester);
 
   final materialCart = find.byKey(WidgetKeys.materialListMaterialCard);
-  final cartButton = find.byKey(WidgetKeys.cartButton);
   final nameCart = find.byKey(WidgetKeys.nameCart);
   final priceComponent = find.byKey(WidgetKeys.priceComponent);
   final labelFilterFavorites = find.byKey(WidgetKeys.favoritesChoiceChip);
@@ -18,6 +17,10 @@ class ProductRobot extends CommonRobot {
   // Search bar
   final searchProductField = find.byKey(WidgetKeys.searchProductField);
   final txtSearchProductField = find.byKey(WidgetKeys.txtSearchProductField);
+
+  void verifyPageVisible() {
+    expect(find.byKey(WidgetKeys.materialListPage), findsOneWidget);
+  }
 
   void verifyMaterialCartVisible() {
     expect(materialCart.first, findsOneWidget);

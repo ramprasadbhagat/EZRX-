@@ -52,14 +52,15 @@ class CartProductTile extends StatelessWidget {
     final isInvalidCartItem = isSuspended || isOOSNotAllowed || isMWPNotAllowed;
 
     return Padding(
-      key: WidgetKeys.cartMaterialItemTile(
-        cartItem.materialInfo.materialNumber.getValue(),
+      key: WidgetKeys.cartItemProductTile(
+        cartItem.materialInfo.materialNumber.displayMatNo,
       ),
       padding: const EdgeInsets.only(top: 25.0),
       child: CustomSlidable(
         extentRatio: 0.24,
         endActionPaneActions: [
           CustomSlidableAction(
+            key: WidgetKeys.cartItemSwipeDeleteButton,
             label: '',
             icon: Icons.delete_outline,
             onPressed: (v) {
@@ -132,10 +133,6 @@ class _MaterialDetailsSection extends StatelessWidget {
           _MaterialDetails(
             cartItem: cartItem,
             isInvalidCartItem: isInvalidCartItem,
-            key: WidgetKeys.cartItemMaterialDetail(
-              cartItem.materialInfo.materialNumber.displayMatNo,
-              cartItem.quantity,
-            ),
           ),
         ],
       ),
@@ -180,6 +177,7 @@ class _ItemSubTotalSection extends StatelessWidget {
               ),
               _LoadingShimmerWithChild(
                 child: PriceComponent(
+                  key: WidgetKeys.cartItemProductTotalPrice,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartProduct.finalPriceTotalForAllMaterial,
@@ -253,6 +251,7 @@ class _MaterialDetails extends StatelessWidget {
             children: [
               Text(
                 cartItem.materialInfo.materialNumber.displayMatNo,
+                key: WidgetKeys.cartItemProductMaterialNumber,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -269,6 +268,7 @@ class _MaterialDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
               cartItem.materialInfo.materialDescription,
+              key: WidgetKeys.cartItemProductMaterialDescription,
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
@@ -285,6 +285,7 @@ class _MaterialDetails extends StatelessWidget {
                 enabled: cartState.priceUnderLoadingShimmer ||
                     context.read<MaterialPriceBloc>().state.isFetching,
                 child: PriceComponent(
+                  key: WidgetKeys.cartItemProductUnitPrice,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartItem.display(PriceType.finalPrice),

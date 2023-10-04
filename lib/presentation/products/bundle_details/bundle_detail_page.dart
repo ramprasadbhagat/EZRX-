@@ -311,26 +311,37 @@ class _AddToCartButton extends StatelessWidget {
       builder: (context, state) {
         return SafeArea(
           minimum: const EdgeInsets.all(20),
-          child: ElevatedButton(
-            onPressed: state.isFetching
-                ? null
-                : () {
-                    final bundle = context
-                        .read<ProductDetailBloc>()
-                        .state
-                        .productDetailAggregate
-                        .materialInfo;
-                    context.read<BundleAddToCartBloc>().add(
-                          BundleAddToCartEvent.set(
-                            bundle: bundle,
-                            bundleMaterials: bundle.bundle.materials,
-                          ),
-                        );
-                    _showBundleAddToCartBottomSheet(
-                      context: context,
-                    );
-                  },
-            child: Text('Add to cart'.tr()),
+          child: Wrap(
+            children: [
+              LoadingShimmer.withChild(
+                enabled: state.isFetching,
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    key: WidgetKeys.materialDetailsAddToCartButton,
+                    onPressed: state.isFetching
+                        ? null
+                        : () {
+                            final bundle = context
+                                .read<ProductDetailBloc>()
+                                .state
+                                .productDetailAggregate
+                                .materialInfo;
+                            context.read<BundleAddToCartBloc>().add(
+                                  BundleAddToCartEvent.set(
+                                    bundle: bundle,
+                                    bundleMaterials: bundle.bundle.materials,
+                                  ),
+                                );
+                            _showBundleAddToCartBottomSheet(
+                              context: context,
+                            );
+                          },
+                    child: Text('Add to cart'.tr()),
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },

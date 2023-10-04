@@ -21,6 +21,7 @@ class _CartPageScrollListItem extends StatelessWidget {
       children: [
         if (showManufacturerName)
           _CartPageManufacturerName(
+            key: WidgetKeys.cartItemProductPrincipalName,
             cartProduct: item.materialInfo,
           ),
         item.materialInfo.type.typeBundle

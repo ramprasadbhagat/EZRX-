@@ -392,8 +392,6 @@ class WidgetKeys {
   static const Key orderSummaryButton = Key('orderSummaryButton');
   static const Key checkoutButton = Key('checkoutButton');
   static const Key selectAllButton = Key('selectAllButton');
-  static Key cartMaterialItemTile(String cartMaterialItemNo) =>
-      Key('cartItemTile$cartMaterialItemNo');
   static const Key cartButton = Key('cartButton');
   static const Key counterOfferPriceField = Key('counterOfferPriceField');
   static const Key counterOfferRemarksField = Key('counterOfferRemarksField');
@@ -414,14 +412,38 @@ class WidgetKeys {
       Key('counterOfferEmptyFieldErrorMessage');
   static const Key counterOfferDiscountedPriceWidget =
       Key('counterDiscountedPriceWidget');
-  static Key cartItemMaterialDetail(String materialNumber, int qty) =>
-      Key('cartItemQuantityInput$materialNumber$qty');
-  static Key cartClearButton = const Key('cartClearButton');
-  static const Key cartPagePriceMessageWidget =
-      Key('cartPagePriceMessageWidget');
   static const Key counterOfferListPriceWidget =
       Key('counterOfferListPriceWidget');
   static const Key counterOfferPriceWidget = Key('counterOfferPriceWidget');
+  static const Key cartPageAppBarTitle = Key('cartPageAppBarTitle');
+  static const Key cartPagePriceMessageWidget =
+      Key('cartPagePriceMessageWidget');
+  static const Key cartClearButton = Key('cartClearButton');
+  static const Key cartTotalQty = Key('cartTotalQty');
+  static const Key cartShipToAddress = Key('cartShipToAddress');
+  static const Key cartShipToAddressSheet = Key('cartShipToAddressSheet');
+  static const Key cartShipToAddressSheetCloseButton =
+      Key('cartShipToAddressSheetCloseButton');
+  static Key cartItemProductTile(String materialNumber) =>
+      Key('cartItemProductTile$materialNumber');
+  static const Key cartItemProductMaterialNumber =
+      Key('cartItemProductMaterialNumber');
+  static const Key cartItemProductMaterialDescription =
+      Key('cartItemProductMaterialDescription');
+  static const Key cartItemProductPrincipalName =
+      Key('cartItemProductPrincipalName');
+  static const Key cartItemProductUnitPrice = Key('cartItemProductUnitPrice');
+  static const Key cartItemProductTotalPrice = Key('cartItemProductTotalPrice');
+  static Key cartItemBundleTile(String bundleNumber) =>
+      Key('cartItemBundleTile$bundleNumber');
+  static const Key cartItemBundleNumber = Key('cartItemBundleNumber');
+  static const Key cartItemBundleName = Key('cartItemBundleName');
+  static const Key cartItemBundleQty = Key('cartItemBundleQty');
+  static const Key cartItemBundleRate = Key('cartItemBundleRate');
+  static const Key cartItemBundleTotalPrice = Key('cartItemBundleTotalPrice');
+  static const Key cartItemProductDeleteButton =
+      Key('cartItemProductDeleteButton');
+  static const Key cartItemSwipeDeleteButton = Key('cartItemSwipeDeleteButton');
   //============================================================
   //  Checkout Page Keys
   //============================================================
@@ -493,10 +515,13 @@ class WidgetKeys {
   //============================================================
   static const Key bundleDetailPage = Key('bundleDetailPage');
   static const Key bundleInputAddKey = Key('bundleInputAddKey');
-  static const Key bundleInputDeleteKey = Key('bundleInputAddKey');
-  static const Key bundleQuantityTextKey = Key('bundleInputAddKey');
+  static const Key bundleInputDeleteKey = Key('bundleInputDeleteKey');
+  static const Key bundleQuantityTextKey = Key('bundleQuantityTextKey');
   static const Key bundleAddToCartSheet = Key('bundleAddToCartSheet');
-  static const Key bundleMaterialListItem = Key('bundleMaterialListItem');
+  static const Key bundleAddToCartSheetSubmitButton =
+      Key('bundleAddToCartSheetSubmitButton');
+  static Key bundleMaterialItem(String materialNumber) =>
+      Key('bundleMaterialItem$materialNumber');
 
   //============================================================
   //  Orders

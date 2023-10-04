@@ -26,9 +26,11 @@ class CartProductBundle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomSlidable(
+      key: WidgetKeys.cartItemBundleTile(cartItem.bundle.bundleCode),
       extentRatio: 0.24,
       endActionPaneActions: [
         CustomSlidableAction(
+          key: WidgetKeys.cartItemSwipeDeleteButton,
           label: '',
           icon: Icons.delete_outline,
           onPressed: (v) {
@@ -88,6 +90,7 @@ class _BundleDetailsSection extends StatelessWidget {
             children: [
               Text(
                 cartItem.bundle.bundleCode,
+                key: WidgetKeys.cartItemBundleNumber,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -96,6 +99,7 @@ class _BundleDetailsSection extends StatelessWidget {
               ),
               Text(
                 '${context.tr('Total quantity: ')}${context.read<CartBloc>().state.getTotalQuantityOfProductBundle(bundleCode: cartItem.bundle.bundleCode)}',
+                key: WidgetKeys.cartItemBundleQty,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -106,6 +110,7 @@ class _BundleDetailsSection extends StatelessWidget {
           ),
           Text(
             cartItem.bundle.bundleName.getValue(),
+            key: WidgetKeys.cartItemBundleName,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -134,6 +139,7 @@ class _BundleDetailsSection extends StatelessWidget {
           ),
           Text(
             '${context.tr('Purchase')} ${currentBundleOffer.quantity} ${context.tr('or more for')} ${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate} ${context.tr('per item')}',
+            key: WidgetKeys.cartItemBundleRate,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -178,6 +184,9 @@ class _MaterialDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.cartItemProductTile(
+        cartItem.materialNumber.displayMatNo,
+      ),
       padding: const EdgeInsets.all(8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -245,6 +254,7 @@ class _MaterialDetails extends StatelessWidget {
             children: [
               Text(
                 cartItem.materialNumber.displayMatNo,
+                key: WidgetKeys.cartItemProductMaterialNumber,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -261,6 +271,7 @@ class _MaterialDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
               cartItem.materialDescription,
+              key: WidgetKeys.cartItemProductMaterialDescription,
               style: Theme.of(context)
                   .textTheme
                   .labelMedium
@@ -269,6 +280,7 @@ class _MaterialDetails extends StatelessWidget {
           ),
           Text(
             cartItem.principalData.principalName.getValue(),
+            key: WidgetKeys.cartItemProductPrincipalName,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontSize: 10.0,
                   color: ZPColors.extraLightGrey4,
@@ -406,6 +418,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
             ),
           ),
           IconButton(
+            key: WidgetKeys.cartItemProductDeleteButton,
             onPressed: () => _showConfirmRemove(context),
             icon: const Icon(Icons.delete_outlined),
           ),
@@ -576,6 +589,7 @@ class _BundleSubTotalSection extends StatelessWidget {
                 ),
           ),
           PriceComponent(
+            key: WidgetKeys.cartItemBundleTotalPrice,
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,
             price: context

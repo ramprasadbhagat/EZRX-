@@ -7,8 +7,10 @@ import '../common/common_robot.dart';
 
 class ProductDetailRobot extends CommonRobot {
   ProductDetailRobot(WidgetTester tester) : super(tester);
+
   final materialDetailsMaterialDescription =
       find.byKey(WidgetKeys.materialDetailsMaterialDescription);
+  final addToCartButton = find.byKey(WidgetKeys.materialDetailsAddToCartButton);
 
   String getMaterialDetailsMaterialDescription() {
     return tester
@@ -137,5 +139,15 @@ class ProductDetailRobot extends CommonRobot {
       find.byKey(WidgetKeys.balanceTextRow('Expiry'.tr(), value)),
       findsOneWidget,
     );
+  }
+
+  Future<void> tapAddToCart() async {
+    await tester.tap(addToCartButton);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapBackButton() async {
+    await tester.tap(find.byKey(WidgetKeys.materialDetailsPageBack));
+    await tester.pumpAndSettle();
   }
 }

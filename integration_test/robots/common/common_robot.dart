@@ -3,6 +3,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -29,6 +30,7 @@ class CommonRobot {
   final homeTab = find.byKey(WidgetKeys.homeTab);
   final productsTab = find.byKey(WidgetKeys.productsTab);
   final notificationTab = find.byKey(WidgetKeys.notificationTab);
+  final cartButton = find.byType(CartButton);
 
   Future<void> goToOrderTab() async {
     await tester.tap(ordersTab);
@@ -97,8 +99,11 @@ class CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyLoadingNotVisible() {
-    expect(find.byKey(WidgetKeys.loaderImage), findsNothing);
+  void verifyLoadingImage({bool isVisible = true}) {
+    expect(
+      find.byKey(WidgetKeys.loaderImage),
+      isVisible ? findsOneWidget : findsNothing,
+    );
   }
 
   Future<void> pullToRefresh() async {
@@ -118,12 +123,11 @@ class CommonRobot {
   //============================================================
   //  Search bar
   //============================================================
-  void verifyInvalidLengthSearchMessageVisible() {
-    expect(invalidLengthSearchMessage, findsOneWidget);
-  }
-
-  void verifyInvalidLengthSearchMessageNotVisible() {
-    expect(invalidLengthSearchMessage, findsNothing);
+  void verifyInvalidLengthSearchMessage({bool isVisible = true}) {
+    expect(
+      invalidLengthSearchMessage,
+      isVisible ? findsOneWidget : findsNothing,
+    );
   }
 
   Future<void> searchWithKeyboardAction(String text) async {
@@ -177,5 +181,21 @@ class CommonRobot {
     final backButton = find.byKey(WidgetKeys.backButton).first;
     await tester.tap(backButton);
     await tester.pumpAndSettle();
+  }
+
+  //============================================================
+  //  Cart button
+  //============================================================
+
+  Future<void> tapCartButton() async {
+    await tester.tap(cartButton);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyCartButtonQty(int qty) {
+    expect(
+      find.descendant(of: cartButton, matching: find.text(qty.toString())),
+      findsOneWidget,
+    );
   }
 }

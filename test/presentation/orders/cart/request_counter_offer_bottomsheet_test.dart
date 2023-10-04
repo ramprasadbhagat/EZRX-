@@ -250,8 +250,8 @@ void main() {
       );
       await tester.pump();
       final cartItemFinder = find.byKey(
-        WidgetKeys.cartMaterialItemTile(
-          cartItems.first.materialInfo.materialNumber.getValue(),
+        WidgetKeys.cartItemProductTile(
+          cartItems.first.materialInfo.materialNumber.displayMatNo,
         ),
       );
 
@@ -283,8 +283,8 @@ void main() {
       await tester.pump();
 
       final cartItemFinder = find.byKey(
-        WidgetKeys.cartMaterialItemTile(
-          cartItems.first.materialInfo.materialNumber.getValue(),
+        WidgetKeys.cartItemProductTile(
+          cartItems.first.materialInfo.materialNumber.displayMatNo,
         ),
       );
       final counterOfferPriceButtonFinder =
@@ -330,8 +330,8 @@ void main() {
       await tester.pump();
 
       final cartItemFinder = find.byKey(
-        WidgetKeys.cartMaterialItemTile(
-          cartItems.first.materialInfo.materialNumber.getValue(),
+        WidgetKeys.cartItemProductTile(
+          cartItems.first.materialInfo.materialNumber.displayMatNo,
         ),
       );
       final counterOfferPriceButtonFinder =
@@ -410,8 +410,8 @@ void main() {
       await tester.pump();
 
       final cartItemFinder = find.byKey(
-        WidgetKeys.cartMaterialItemTile(
-          cartItems.first.materialInfo.materialNumber.getValue(),
+        WidgetKeys.cartItemProductTile(
+          cartItems.first.materialInfo.materialNumber.displayMatNo,
         ),
       );
       final counterOfferPriceButtonFinder =

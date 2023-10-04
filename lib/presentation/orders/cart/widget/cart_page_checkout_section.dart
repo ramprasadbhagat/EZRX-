@@ -26,6 +26,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               title: Text(
                 '${"Order for".tr()} ${context.read<EligibilityBloc>().state.customerCodeInfo.customerName}',
+                key: WidgetKeys.cartShipToAddress,
                 style: Theme.of(context).textTheme.labelSmall,
               ),
               trailing: const Icon(
@@ -41,6 +42,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               title: Text(
                 '${state.cartProducts.length} ${'items'.tr()}',
+                key: WidgetKeys.cartTotalQty,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               trailing: PriceComponent(
@@ -68,6 +70,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
       isScrollControlled: true,
       enableDrag: false,
       builder: (_) => SafeArea(
+        key: WidgetKeys.cartShipToAddressSheet,
         child: Padding(
           padding: const EdgeInsets.all(
             20,
@@ -81,6 +84,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  key: WidgetKeys.cartShipToAddressSheetCloseButton,
                   onPressed: () {
                     context.router.pop();
                   },

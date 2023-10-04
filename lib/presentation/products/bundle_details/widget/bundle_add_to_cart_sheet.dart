@@ -94,7 +94,9 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
         context.read<EligibilityBloc>().state.validateOutOfStockValue;
 
     return Row(
-      key: WidgetKeys.bundleMaterialListItem,
+      key: WidgetKeys.bundleMaterialItem(
+        widget.materialInfo.materialNumber.displayMatNo,
+      ),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomCard(
@@ -266,6 +268,7 @@ class _BundleSheetFooter extends StatelessWidget {
                             PriceAggregate.empty();
 
                         return ElevatedButton(
+                          key: WidgetKeys.bundleAddToCartSheetSubmitButton,
                           onPressed: () {
                             if (state.isBundleCountSatisfied &&
                                 !stateCart.isUpserting) {

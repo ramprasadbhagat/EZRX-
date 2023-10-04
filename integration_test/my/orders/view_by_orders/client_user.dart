@@ -10,7 +10,7 @@ import '../../../robots/common/extension.dart';
 import '../../../robots/home/home_robot.dart';
 import '../../../robots/login_robot.dart';
 
-import '../../../robots/orders/cart_robot.dart';
+import '../../../robots/orders/cart/cart_robot.dart';
 import '../../../robots/orders/orders_root_robot.dart';
 import '../../../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
 import '../../../robots/orders/view_by_orders/view_by_orders_filter_robot.dart';
@@ -123,7 +123,7 @@ void main() {
     await commonRobot.autoSearch(invalidSearchKey);
     viewByOrdersRobot.verifyNoRecordFoundVisible();
     await commonRobot.autoSearch(invalidLengthSearchKey);
-    commonRobot.verifyInvalidLengthSearchMessageNotVisible();
+    commonRobot.verifyInvalidLengthSearchMessage(isVisible: false);
     viewByOrdersRobot.verifyNoRecordFoundVisible();
     await commonRobot.autoSearch(validSearchKey);
     viewByOrdersRobot.verifyOrdersVisible();
@@ -152,12 +152,12 @@ void main() {
     await commonRobot.searchWithKeyboardAction(invalidSearchKey);
     viewByOrdersRobot.verifyNoRecordFoundVisible();
     await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-    commonRobot.verifyInvalidLengthSearchMessageVisible();
+    commonRobot.verifyInvalidLengthSearchMessage();
     viewByOrdersRobot.verifyNoRecordFoundVisible();
     await commonRobot.searchWithKeyboardAction(orderId);
     viewByOrdersRobot.verifyOrdersWithOrderCodeVisible(orderId);
     await commonRobot.waitAutoSearchDuration();
-    commonRobot.verifyLoadingNotVisible();
+    commonRobot.verifyLoadingImage(isVisible: false);
   });
 
   testWidgets(
@@ -176,11 +176,11 @@ void main() {
     await commonRobot.searchWithSearchIcon(invalidSearchKey);
     viewByOrdersRobot.verifyNoRecordFoundVisible();
     await commonRobot.waitAutoSearchDuration();
-    commonRobot.verifyLoadingNotVisible();
+    commonRobot.verifyLoadingImage(isVisible: false);
     await commonRobot.tapClearSearch();
     viewByOrdersRobot.verifyOrdersVisible();
     await commonRobot.searchWithSearchIcon(invalidLengthSearchKey);
-    commonRobot.verifyInvalidLengthSearchMessageVisible();
+    commonRobot.verifyInvalidLengthSearchMessage();
   });
 
   testWidgets(
@@ -326,11 +326,9 @@ void main() {
     await viewByOrdersFilterRobot.tapApplyButton();
     await commonRobot.searchWithKeyboardAction(orderId);
     await viewByOrdersRobot.tapFirstBuyAgainButton();
-    cartRobot.verifyPageVisible();
-    cartRobot.verifyMaterialFromReorderVisible(
-      materialNumber,
-      qty: materialQty,
-    );
+    cartRobot.verifyPage();
+    await cartRobot.verifyMaterial(materialNumber);
+    cartRobot.verifyMaterialQty(materialNumber, materialQty);
   });
 
   testWidgets(
@@ -355,11 +353,9 @@ void main() {
     await commonRobot.searchWithKeyboardAction(orderId);
     await viewByOrdersRobot.tapFirstOrder();
     await viewByOrdersDetailRobot.tapBuyAgainButton();
-    cartRobot.verifyPageVisible();
-    cartRobot.verifyMaterialFromReorderVisible(
-      materialNumber,
-      qty: materialQty,
-    );
+    cartRobot.verifyPage();
+    await cartRobot.verifyMaterial(materialNumber);
+    cartRobot.verifyMaterialQty(materialNumber, materialQty);
     //TODO: Revist when popup 'Reoder for this delivery address? is added to add new test step
   });
 

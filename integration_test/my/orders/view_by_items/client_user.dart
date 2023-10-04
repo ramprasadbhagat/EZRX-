@@ -136,7 +136,7 @@ void main() {
     //verify
     ordersRobot.verifyViewByItemsPageVisible();
     await commonRobot.searchWithKeyboardAction('1');
-    commonRobot.verifyInvalidLengthSearchMessageVisible();
+    commonRobot.verifyInvalidLengthSearchMessage();
     await commonRobot.searchWithKeyboardAction(productName);
     viewByItemsRobot.verifyOrdersWithProductNameVisible(productName);
   });
