@@ -362,4 +362,10 @@ class CartState with _$CartState {
 
   List<MaterialInfo> get invalidSampleBonusList =>
       cartProducts.expand((item) => item.convertedSampleBonusList).toList();
+
+  bool get isCartDetailsFetching =>
+      isUpdatingStock ||
+      isUpserting ||
+      isFetchingCartProductDetail ||
+      isMappingPrice;
 }

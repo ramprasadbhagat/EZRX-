@@ -455,6 +455,7 @@ class _FooterState extends State<_Footer> {
                                   MediaQuery.of(context).size.height * 0.056,
                               child: ElevatedButton(
                                 onPressed: stateCart.isUpserting ||
+                                        state.isFetching ||
                                         !_isEligibleForAddToCart(
                                           context: context,
                                           price: price,

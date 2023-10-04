@@ -107,35 +107,34 @@ class _CartPageCheckoutSection extends StatelessWidget {
 class _CartPageCheckoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
+    return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
       buildWhen: (previous, current) =>
-          previous.isUpdatingStock != current.isUpdatingStock ||
-          previous.isUpserting != current.isUpserting ||
-          previous.isMappingPrice != current.isMappingPrice ||
-          previous.isFetchingCartProductDetail !=
-              current.isFetchingCartProductDetail,
-      builder: (context, state) {
-        final isFetching = context.read<MaterialPriceBloc>().state.isFetching;
-
-        return SafeArea(
-          child: LoadingShimmer.withChild(
-            enabled: state.isUpdatingStock ||
-                state.isUpserting ||
-                state.isFetchingCartProductDetail ||
-                isFetching ||
-                state.isMappingPrice,
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: ElevatedButton(
-                key: WidgetKeys.checkoutButton,
-                onPressed: () {
-                  _onCheckOutPressed(context);
-                },
-                child: const Text('Check out').tr(),
+          previous.isFetching != current.isFetching,
+      builder: (context, materialPriceState) {
+        return BlocBuilder<CartBloc, CartState>(
+          buildWhen: (previous, current) =>
+              previous.isCartDetailsFetching != current.isCartDetailsFetching,
+          builder: (context, state) {
+            return SafeArea(
+              child: LoadingShimmer.withChild(
+                enabled: state.isCartDetailsFetching ||
+                    materialPriceState.isFetching,
+                child: Container(
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: ElevatedButton(
+                    key: WidgetKeys.checkoutButton,
+                    onPressed: state.isCartDetailsFetching ||
+                            materialPriceState.isFetching
+                        ? null
+                        : () => _onCheckOutPressed(context),
+                    child: const Text('Check out').tr(),
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

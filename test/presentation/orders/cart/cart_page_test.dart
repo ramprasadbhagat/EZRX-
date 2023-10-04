@@ -2683,6 +2683,55 @@ void main() {
           expect(checkoutButton, findsOneWidget);
         },
       );
+
+      testWidgets('Checkout button on pressed when shimmer is visible',
+          (tester) async {
+        when(() => materialPriceBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            isFetching: true,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('1234'),
+                  materialGroup4: MaterialGroup.four('6A1'),
+                ),
+              )
+            ],
+            isUpserting: true,
+            isUpdatingStock: true,
+            isFetchingCartProductDetail: true,
+            isMappingPrice: true,
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('1234'),
+                  materialGroup4: MaterialGroup.four('6A1'),
+                ),
+              )
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWidget());
+
+        await tester.pump();
+
+        final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+        expect(checkoutButton, findsOneWidget);
+        await tester.tap(checkoutButton);
+        verifyNever(
+          () => orderEligibilityBlocMock.add(
+            const OrderEligibilityEvent.validateOrderEligibility(),
+          ),
+        );
+      });
     },
   );
 }

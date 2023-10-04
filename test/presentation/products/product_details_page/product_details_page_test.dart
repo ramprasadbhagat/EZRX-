@@ -14,7 +14,9 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
@@ -866,6 +868,61 @@ void main() {
         await tester.tap(favouriteIcon);
         await tester.pumpAndSettle();
         expect(favouriteMessage, findsOneWidget);
+      });
+
+      testWidgets('Add to cart button pressed test when isFetching is true',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('00000111111'),
+                isFavourite: true,
+                isSuspended: false,
+                isFOCMaterial: true,
+              ),
+              stockInfo: StockInfo.empty().copyWith(
+                inStock: MaterialInStock('Yes'),
+              ),
+            ),
+            isFetching: true,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: User.empty().copyWith(
+              username: Username('fake-user'),
+            ),
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('MY')),
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              materialWithoutPrice: true,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final addToCartButton =
+            find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+        expect(addToCartButton, findsOneWidget);
+        await tester.tap(addToCartButton);
+        verifyNever(
+          () => cartMockBloc.add(
+            CartEvent.upsertCart(
+              priceAggregate: PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('00000111111'),
+                  isFavourite: true,
+                  isSuspended: false,
+                  isFOCMaterial: true,
+                ),
+              ),
+              quantity: 1,
+            ),
+          ),
+        );
       });
     },
   );
