@@ -305,6 +305,7 @@ class WidgetKeys {
       Key('returnItemDetailRequestDate');
   static const Key returnItemDetailMaterialInvoiceDate =
       Key('returnItemDetailMaterialInvoiceDate');
+  static const Key returnDetailSummary = Key('returnDetailSummary');
 
   //============================================================
   //  Returns by request

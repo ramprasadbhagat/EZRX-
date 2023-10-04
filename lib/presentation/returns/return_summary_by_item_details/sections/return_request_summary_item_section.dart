@@ -155,6 +155,7 @@ class _ExtendedSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return isExtended
         ? Column(
+            key: WidgetKeys.returnDetailSummary,
             children: [
               const Divider(
                 indent: 0,
