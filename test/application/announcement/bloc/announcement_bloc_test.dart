@@ -107,5 +107,21 @@ void main() {
         announcementState.copyWith(isClosed: false),
       ],
     );
+
+    blocTest(
+      'Change prefer language',
+      build: () => AnnouncementBloc(announcementRepository: repository),
+      seed: () => announcementState.copyWith(preferSalesOrgLanguage: true),
+      act: (AnnouncementBloc bloc) => bloc.add(
+        const AnnouncementEvent.changePreferLanguage(
+          preferSalesOrgLanguage: false,
+        ),
+      ),
+      expect: () => [
+        announcementState.copyWith(
+          preferSalesOrgLanguage: false,
+        ),
+      ],
+    );
   });
 }
