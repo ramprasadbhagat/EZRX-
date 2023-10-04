@@ -15,7 +15,7 @@ class OrderHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final eligibityState = context.read<EligibilityBloc>().state;
 
     return BlocBuilder<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
@@ -64,7 +64,7 @@ class OrderHeaderSection extends StatelessWidget {
                           color: ZPColors.white,
                         ),
               ),
-              if (config.enableFutureDeliveryDay)
+              if (eligibityState.salesOrgConfigs.enableFutureDeliveryDay)
                 BalanceTextRow(
                   keyText: context.tr('Requested Delivery Date'),
                   valueText: orderDetails.requestedDeliveryDate.dateString,
@@ -77,7 +77,7 @@ class OrderHeaderSection extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.enableReferenceNote)
+              if (eligibityState.salesOrgConfigs.enableReferenceNote)
                 BalanceTextRow(
                   keyText: context.tr('Reference Note'),
                   valueText: orderDetails.referenceNotes,
@@ -90,7 +90,7 @@ class OrderHeaderSection extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (!config.disablePaymentTermsDisplay)
+              if (eligibityState.displayPaymentTerm)
                 BalanceTextRow(
                   key: WidgetKeys.paymentTermKey,
                   keyText: context.tr('Payment Term'),
@@ -105,7 +105,7 @@ class OrderHeaderSection extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.enableMobileNumber)
+              if (eligibityState.salesOrgConfigs.enableMobileNumber)
                 BalanceTextRow(
                   keyText: context.tr('Contact person'),
                   valueText: orderDetails.orderBy,
@@ -118,7 +118,7 @@ class OrderHeaderSection extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.enableMobileNumber)
+              if (eligibityState.salesOrgConfigs.enableMobileNumber)
                 BalanceTextRow(
                   keyText: context.tr('Contact number'),
                   valueText:
@@ -132,7 +132,7 @@ class OrderHeaderSection extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.enableSpecialInstructions)
+              if (eligibityState.salesOrgConfigs.enableSpecialInstructions)
                 BalanceTextRow(
                   keyText: context.tr('Delivery instructions'),
                   valueText: orderDetails.orderHistoryDetailsSpecialInstructions
@@ -146,7 +146,8 @@ class OrderHeaderSection extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.showPOAttachment) const AttachmentSection(),
+              if (eligibityState.salesOrgConfigs.showPOAttachment)
+                const AttachmentSection(),
             ],
           ),
         );

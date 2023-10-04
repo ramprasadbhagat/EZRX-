@@ -7,7 +7,7 @@ class _OrderDetailHeader extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isConfirming != current.isConfirming,
       builder: (context, state) {
-        final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
+        final eligibilityState = context.read<EligibilityBloc>().state;
 
         return ListTile(
           minVerticalPadding: 15.0,
@@ -46,7 +46,7 @@ class _OrderDetailHeader extends StatelessWidget {
                       color: ZPColors.white,
                     ),
               ),
-              if (config.enableFutureDeliveryDay)
+              if (eligibilityState.salesOrgConfigs.enableFutureDeliveryDay)
                 BalanceTextRow(
                   keyFlex: 2,
                   valueFlex: 3,
@@ -61,7 +61,7 @@ class _OrderDetailHeader extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.enableReferenceNote)
+              if (eligibilityState.salesOrgConfigs.enableReferenceNote)
                 BalanceTextRow(
                   keyFlex: 2,
                   valueFlex: 3,
@@ -75,7 +75,7 @@ class _OrderDetailHeader extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.enablePaymentTerms)
+              if (eligibilityState.displayPaymentTerm)
                 BalanceTextRow(
                   keyFlex: 2,
                   valueFlex: 3,
@@ -90,7 +90,7 @@ class _OrderDetailHeader extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.enableMobileNumber)
+              if (eligibilityState.salesOrgConfigs.enableMobileNumber)
                 BalanceTextRow(
                   keyFlex: 2,
                   valueFlex: 3,
@@ -109,7 +109,7 @@ class _OrderDetailHeader extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.enableMobileNumber)
+              if (eligibilityState.salesOrgConfigs.enableMobileNumber)
                 BalanceTextRow(
                   keyFlex: 2,
                   valueFlex: 3,
@@ -124,7 +124,7 @@ class _OrderDetailHeader extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.enableSpecialInstructions)
+              if (eligibilityState.salesOrgConfigs.enableSpecialInstructions)
                 BalanceTextRow(
                   keyFlex: 2,
                   valueFlex: 3,
@@ -141,7 +141,7 @@ class _OrderDetailHeader extends StatelessWidget {
                             color: ZPColors.white,
                           ),
                 ),
-              if (config.showPOAttachment)
+              if (eligibilityState.salesOrgConfigs.showPOAttachment)
                 const OrderSuccessAttachmentSection(),
             ],
           ),

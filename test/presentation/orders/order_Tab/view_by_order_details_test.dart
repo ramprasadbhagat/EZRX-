@@ -282,6 +282,50 @@ void main() {
       expect(paymentTermsSection, findsNothing);
     });
 
+    testWidgets('test PaymentTermsDisplay for rootadminUser', (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+        ),
+      );
+
+      when(() => mockSalesOrgBloc.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          configs: SalesOrganisationConfigs.empty().copyWith(
+            disablePaymentTermsDisplay: true,
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            role: Role.empty().copyWith(
+              type: RoleType('root_admin'),
+            ),
+          ),
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            disablePaymentTermsDisplay: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+
+      await tester.pump();
+
+      final viewByOrderDetailsPageListView =
+          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+
+      expect(viewByOrderDetailsPageListView, findsOneWidget);
+
+      final paymentTermsSection = find.byKey(
+        WidgetKeys.paymentTermKey,
+      );
+
+      expect(paymentTermsSection, findsOneWidget);
+    });
+
     testWidgets('test when disablePaymentTermsDisplay disabled',
         (tester) async {
       when(() => mockViewByOrderDetailsBloc.state).thenReturn(
