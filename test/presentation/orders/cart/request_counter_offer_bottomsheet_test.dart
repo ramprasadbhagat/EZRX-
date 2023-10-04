@@ -1237,12 +1237,8 @@ void main() {
           find.byKey(WidgetKeys.counterOfferPriceField);
       expect(counterOfferPriceTextFieldFinder, findsOneWidget);
 
-      await tester.enterText(counterOfferPriceTextFieldFinder, '0');
+      await tester.enterText(counterOfferPriceTextFieldFinder, '11');
       await tester.pump();
-
-      final invalidInputErrorTextFinder =
-          find.text('Counter offer price cannot be zero'.tr());
-      expect(invalidInputErrorTextFinder, findsOneWidget);
 
       await tester.enterText(counterOfferPriceTextFieldFinder, '');
       await tester.pump();
@@ -1301,13 +1297,6 @@ void main() {
       final counterOfferDiscountTextFieldFinder =
           find.byKey(WidgetKeys.counterOfferDiscountField);
       expect(counterOfferDiscountTextFieldFinder, findsOneWidget);
-
-      await tester.enterText(counterOfferDiscountTextFieldFinder, '0');
-      await tester.pump();
-
-      final zeroEnteredErrorTextFinder =
-          find.text('Discount offer price cannot be zero'.tr());
-      expect(zeroEnteredErrorTextFinder, findsOneWidget);
 
       await tester.enterText(counterOfferDiscountTextFieldFinder, '100');
       await tester.pump();

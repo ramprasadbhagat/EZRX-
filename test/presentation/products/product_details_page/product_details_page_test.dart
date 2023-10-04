@@ -176,7 +176,6 @@ void main() {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           usingLocalization: true,
-          useMediaQuery: false,
           providers: [
             BlocProvider<UserBloc>(create: (context) => userBlocMock),
             BlocProvider<CustomerCodeBloc>(
@@ -363,10 +362,14 @@ void main() {
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
+        await tester.pump();
+
+        final materialDetailsMaterialDescription = find.byKey(
+          WidgetKeys.materialDetailsMaterialDescription,
+        );
+        expect(materialDetailsMaterialDescription, findsOneWidget);
         await tester.drag(
-          find.byKey(
-            WidgetKeys.materialDetailsMaterialDescription,
-          ),
+          materialDetailsMaterialDescription,
           const Offset(0.0, -1000),
         );
         await tester.pumpAndSettle();

@@ -2,13 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
+import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-final _decimalOnlyRegex = RegExp(r'^\d+\.?\d{0,10}');
 
 class ReturnCounterOfferField extends StatelessWidget {
   const ReturnCounterOfferField({
@@ -33,17 +30,13 @@ class ReturnCounterOfferField extends StatelessWidget {
               previous.getReturnItemDetails(uuid).priceOverride !=
               current.getReturnItemDetails(uuid).priceOverride,
           builder: (context, state) {
-            return TextFieldWithLabel(
+            return CustomNumericTextField.wholeNumber(
               fieldKey: WidgetKeys.returnQuantityField(uuid),
               labelText:
                   '${context.tr('Request counter offer')} ${context.read<EligibilityBloc>().state.salesOrgConfigs.currency.code}',
               decoration: InputDecoration(
                 hintText: context.tr('Request return unit price'),
               ),
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.allow(_decimalOnlyRegex),
-              ],
               isEnabled: true,
               mandatory: false,
               initValue: context

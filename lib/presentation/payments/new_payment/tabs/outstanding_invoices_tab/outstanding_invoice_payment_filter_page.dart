@@ -4,14 +4,12 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-final _decimalOnlyRegx = RegExp(r'^\d+\.?\d{0,10}');
 
 class OutstandingInvoicePaymentFilterPage extends StatelessWidget {
   const OutstandingInvoicePaymentFilterPage({Key? key}) : super(key: key);
@@ -139,6 +137,7 @@ class _PaymentFilter extends StatelessWidget {
                 height: 12,
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const _AmountValueFromFilter(),
                   Padding(
@@ -359,19 +358,15 @@ class _AmountValueFromFilter extends StatelessWidget {
             context.read<EligibilityBloc>().state.salesOrgConfigs;
 
         return Expanded(
-          child: TextFormField(
-            key: WidgetKeys.amountValueFrom,
-            initialValue: state.filter.amountValueFrom.apiParameterValue,
+          child: CustomNumericTextField.decimalNumber(
+            fieldKey: WidgetKeys.amountValueFrom,
+            initValue: state.filter.amountValueFrom.apiParameterValue,
             onChanged: (value) =>
                 context.read<OutstandingInvoiceFilterBloc>().add(
                       OutstandingInvoiceFilterEvent.setAmountFrom(
                         amountFrom: value.isNotEmpty ? value : '',
                       ),
                     ),
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(_decimalOnlyRegx),
-            ],
             decoration: InputDecoration(
               labelText:
                   '${context.tr('From')} (${salesOrgConfig.currency.code})',
@@ -402,19 +397,15 @@ class _AmountValueToFilter extends StatelessWidget {
             context.read<EligibilityBloc>().state.salesOrgConfigs;
 
         return Expanded(
-          child: TextFormField(
-            key: WidgetKeys.amountValueTo,
-            initialValue: state.filter.amountValueTo.apiParameterValue,
+          child: CustomNumericTextField.decimalNumber(
+            fieldKey: WidgetKeys.amountValueTo,
+            initValue: state.filter.amountValueTo.apiParameterValue,
             onChanged: (value) =>
                 context.read<OutstandingInvoiceFilterBloc>().add(
                       OutstandingInvoiceFilterEvent.setAmountTo(
                         amountTo: value.isNotEmpty ? value : '',
                       ),
                     ),
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(_decimalOnlyRegx),
-            ],
             decoration: InputDecoration(
               labelText:
                   '${context.tr('To')} (${salesOrgConfig.currency.code})',

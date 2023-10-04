@@ -1,10 +1,14 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_input.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/locator.dart';
+
+import '../../../utils/widget_utils.dart';
 
 class TenderContractMockBloc
     extends MockBloc<TenderContractEvent, TenderContractState>
@@ -19,6 +23,11 @@ class FunctionHolder {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late TenderContractBloc tenderContractMockBloc;
+  late AppRouter autoRouterMock;
+  setUpAll(() async {
+    locator.registerLazySingleton(() => AppRouter());
+    autoRouterMock = locator<AppRouter>();
+  });
   setUp(
     () {
       tenderContractMockBloc = TenderContractMockBloc();
@@ -33,21 +42,25 @@ void main() {
         required Function(int) onFieldChanged,
         bool returnZeroOnFieldEmpty = false,
       }) {
-        return BlocProvider<TenderContractBloc>(
-          create: (context) => tenderContractMockBloc,
-          child: MaterialApp(
-            home: Scaffold(
-              body: QuantityInput(
-                minusPressed: (_) {},
-                addPressed: (_) {},
-                controller: TextEditingController(),
-                quantityTextKey: const Key('text'),
-                onFieldChange: onFieldChanged,
-                quantityAddKey: const Key('Add'),
-                quantityDeleteKey: const Key('Delete'),
-                isEnabled: true,
-                returnZeroOnFieldEmpty: returnZeroOnFieldEmpty,
-              ),
+        return WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
+          usingLocalization: true,
+          providers: [
+            BlocProvider<TenderContractBloc>(
+              create: (context) => tenderContractMockBloc,
+            ),
+          ],
+          child: Scaffold(
+            body: QuantityInput(
+              minusPressed: (_) {},
+              addPressed: (_) {},
+              controller: TextEditingController(),
+              onFieldChange: onFieldChanged,
+              quantityTextKey: const Key('text'),
+              quantityAddKey: const Key('Add'),
+              quantityDeleteKey: const Key('Delete'),
+              isEnabled: true,
+              returnZeroOnFieldEmpty: returnZeroOnFieldEmpty,
             ),
           ),
         );
@@ -58,10 +71,11 @@ void main() {
         await tester.pumpWidget(
           getTestWidget(onFieldChanged: functionHolder.onFieldChange),
         );
+        await tester.pump();
 
-        await tester.enterText(find.byType(TextField), '12');
+        await tester.enterText(find.byType(TextFormField), '12');
         verify(() => functionHolder.onFieldChange(12)).called(1);
-        await tester.enterText(find.byType(TextField), '');
+        await tester.enterText(find.byType(TextFormField), '');
         verifyNever(() => functionHolder.onFieldChange(0));
       });
 
@@ -74,10 +88,11 @@ void main() {
             returnZeroOnFieldEmpty: true,
           ),
         );
+        await tester.pump();
 
-        await tester.enterText(find.byType(TextField), '12');
+        await tester.enterText(find.byType(TextFormField), '12');
         verify(() => functionHolder.onFieldChange(12)).called(1);
-        await tester.enterText(find.byType(TextField), '');
+        await tester.enterText(find.byType(TextFormField), '');
         verify(() => functionHolder.onFieldChange(0)).called(1);
       });
     },

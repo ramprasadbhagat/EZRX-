@@ -1,7 +1,4 @@
-//TODO: To be removed once below class is in use
-//ignore_for_file: unused-code
-//ignore_for_file: unused-class
-//ignore_for_file: unused-files
+import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,7 +46,7 @@ class CartItemQuantityInput extends StatelessWidget {
         : SizedBox(
             width: double.infinity,
             height: height,
-            child: TextField(
+            child: CustomNumericTextField.wholeNumber(
               onTapOutside: (event) {
                 if (controller.text.isEmpty) {
                   controller.value = TextEditingValue(
@@ -60,16 +57,11 @@ class CartItemQuantityInput extends StatelessWidget {
                   );
                 }
               },
-              enabled: isEnabled,
-              key: quantityTextKey,
+              isEnabled: isEnabled,
+              fieldKey: quantityTextKey,
               controller: controller,
-              keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
               inputFormatters: <TextInputFormatter>[
-                // Only digits
-                FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                // Prevent leading zero
-                FilteringTextInputFormatter.deny(RegExp(r'^0+')),
                 // limit charcter length to 6
                 LengthLimitingTextInputFormatter(6),
               ],
@@ -83,7 +75,7 @@ class CartItemQuantityInput extends StatelessWidget {
                 }
                 onFieldChange(int.parse(text));
               },
-              onSubmitted: (String text) {
+              onDone: (String text) {
                 if (text.isEmpty) {
                   controller.value = TextEditingValue(
                     text: 1.toString(),
@@ -141,7 +133,6 @@ class CartItemQuantityInput extends StatelessWidget {
                 border:
                     isEnabled ? const UnderlineInputBorder() : InputBorder.none,
               ),
-              style: Theme.of(context).textTheme.titleMedium,
             ),
           );
   }

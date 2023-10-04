@@ -48,7 +48,7 @@ class _CounterOfferDiscountTextFieldState
                   : AutovalidateMode.disabled,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: TextFieldWithLabel(
+            child: CustomNumericTextField.wholeNumber(
               fieldKey: WidgetKeys.counterOfferDiscountField,
               labelText: 'Discount counter offer (%)'.tr(),
               decoration: InputDecoration(
@@ -56,7 +56,6 @@ class _CounterOfferDiscountTextFieldState
                 errorMaxLines: 2,
               ),
               controller: _discountController,
-              keyboardType: TextInputType.number,
               onChanged: (value) {
                 context.read<PriceOverrideBloc>().add(
                       PriceOverrideEvent.onDiscountValueChanged(
@@ -65,12 +64,7 @@ class _CounterOfferDiscountTextFieldState
                     );
               },
               inputFormatters: <TextInputFormatter>[
-                // Only digits
-                FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                //
-                FilteringTextInputFormatter.deny(
-                  RegExp(r'[~!@#$%^&*()_+`{}|<>?;:./,=\-[]]'),
-                ),
+                FilteringTextInputFormatter.deny(ZPRegexes.specialCharacters),
               ],
               validator: (value) =>
                   state.isPriceOverride && _discountController.text.isEmpty

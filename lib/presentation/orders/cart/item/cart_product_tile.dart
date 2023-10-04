@@ -353,6 +353,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
         children: [
           Focus(
             child: CartItemQuantityInput(
+              height: 48,
               isEnabled: !widget.isInvalidCartItem,
               quantityAddKey: WidgetKeys.cartItemAddKey,
               quantityDeleteKey: WidgetKeys.cartItemDeleteKey,

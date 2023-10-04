@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/presentation/core/custom_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
@@ -33,7 +34,6 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
-import 'package:flutter/services.dart';
 
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_download_button.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_group_item.dart';

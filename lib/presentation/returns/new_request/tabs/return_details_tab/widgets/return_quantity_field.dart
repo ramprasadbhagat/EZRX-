@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
+import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,18 +25,15 @@ class ReturnQuantityField extends StatelessWidget {
           previous.getReturnItemDetails(uuid).returnQuantity !=
           current.getReturnItemDetails(uuid).returnQuantity,
       builder: (context, state) {
-        return TextFieldWithLabel(
+        return CustomNumericTextField.wholeNumber(
           fieldKey: WidgetKeys.returnQuantityField(uuid),
           labelText: 'Return quantity'.tr(),
           decoration: InputDecoration(
             hintText: 'Enter Return quantity'.tr(),
           ),
-          keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
-            // Only digits
-            FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-            // Prevent leading zero
-            FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+            // limit charcter length to 6
+            LengthLimitingTextInputFormatter(6),
           ],
           isEnabled: true,
           mandatory: true,

@@ -405,6 +405,7 @@ class WidgetKeys {
   static const Key bonusOfferItemInputKey = Key('bonusOfferItemInputKey');
 
   static const Key counterOfferDiscountField = Key('counterOfferDiscountField');
+  static const Key discountOverrideField = Key('discountOverrideField');
   static const Key counterOfferBottomSheet = Key('counterOfferBottomSheet');
   static const Key counterOfferConfirmButton = Key('counterOfferConfirmButton');
   static const Key counterOfferCancelButton = Key('counterOfferCancelButton');

@@ -409,7 +409,7 @@ class _FooterState extends State<_Footer> {
                         quantityTextKey:
                             WidgetKeys.productDetailQuantityTextKey,
                         minusPressed: (value) {},
-                        height: MediaQuery.of(context).size.height * 0.055,
+                        height: MediaQuery.of(context).size.height * 0.056,
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -451,6 +451,8 @@ class _FooterState extends State<_Footer> {
                             enabled: stateCart.isUpserting || state.isFetching,
                             child: SizedBox(
                               width: double.infinity,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.056,
                               child: ElevatedButton(
                                 onPressed: stateCart.isUpserting ||
                                         !_isEligibleForAddToCart(
@@ -549,6 +551,9 @@ class _FooterState extends State<_Footer> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).viewInsets.bottom * 1.2,
                 ),
               ],
             );

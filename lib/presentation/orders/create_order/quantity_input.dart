@@ -1,6 +1,4 @@
-//ignore_for_file: unused-code
-//ignore_for_file: unused-class
-//ignore_for_file: unused-files
+import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/quantity_icon.dart';
 import 'package:flutter/material.dart';
@@ -44,17 +42,12 @@ class QuantityInput extends StatelessWidget {
       children: [
         SizedBox(
           width: width ?? 150,
-          child: TextField(
-            enabled: isEnabled,
-            key: quantityTextKey,
+          child: CustomNumericTextField.wholeNumber(
+            isEnabled: isEnabled,
+            fieldKey: quantityTextKey,
             controller: controller,
-            keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
             inputFormatters: <TextInputFormatter>[
-              // Only digits
-              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-              // Prevent leading zero
-              FilteringTextInputFormatter.deny(RegExp(r'^0+')),
               // limit charcter length to 6
               LengthLimitingTextInputFormatter(6),
             ],

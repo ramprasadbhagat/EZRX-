@@ -3,13 +3,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/services.dart';
-
-final _decimalOnlyRegx = RegExp(r'^\d+\.?\d{0,10}');
 
 class AllInvoicesFilterBottomSheet extends StatelessWidget {
   const AllInvoicesFilterBottomSheet({Key? key}) : super(key: key);
@@ -104,6 +102,7 @@ class AllInvoicesFilterBottomSheet extends StatelessWidget {
                       ),
                     ),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const _AmountValueFromFilter(),
                         Padding(
@@ -236,19 +235,15 @@ class _AmountValueToFilter extends StatelessWidget {
         state,
       ) {
         return Expanded(
-          child: TextFormField(
-            autocorrect: false,
-            key: WidgetKeys.amountValueTo,
-            initialValue: state.filter.amountValueTo.apiParameterValue,
+          child: CustomNumericTextField.decimalNumber(
+            autoCorrect: false,
+            fieldKey: WidgetKeys.amountValueTo,
+            initValue: state.filter.amountValueTo.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
                   AllInvoicesFilterEvent.amountValueToChanged(
                     value,
                   ),
                 ),
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(_decimalOnlyRegx),
-            ],
             decoration: InputDecoration(
               labelText: context.tr('Amount to'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -274,19 +269,15 @@ class _AmountValueFromFilter extends StatelessWidget {
         state,
       ) {
         return Expanded(
-          child: TextFormField(
-            autocorrect: false,
-            key: WidgetKeys.amountValueFrom,
-            initialValue: state.filter.amountValueFrom.apiParameterValue,
+          child: CustomNumericTextField.decimalNumber(
+            autoCorrect: false,
+            fieldKey: WidgetKeys.amountValueFrom,
+            initValue: state.filter.amountValueFrom.apiParameterValue,
             onChanged: (value) => context.read<AllInvoicesFilterBloc>().add(
                   AllInvoicesFilterEvent.amountValueFromChanged(
                     value,
                   ),
                 ),
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(_decimalOnlyRegx),
-            ],
             decoration: InputDecoration(
               hintText: context.tr('Amount from'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(

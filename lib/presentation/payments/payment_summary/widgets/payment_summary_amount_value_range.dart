@@ -1,7 +1,5 @@
 part of 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_page.dart';
 
-final _decimalOnlyRegx = RegExp(r'^\d+\.?\d{0,10}');
-
 class _PaymentSummaryAmountValueToFilter extends StatelessWidget {
   const _PaymentSummaryAmountValueToFilter({Key? key}) : super(key: key);
   @override
@@ -10,19 +8,15 @@ class _PaymentSummaryAmountValueToFilter extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.filter.amountValueTo != current.filter.amountValueTo,
       builder: (context, state) => Expanded(
-        child: TextFormField(
-          autocorrect: false,
-          key: WidgetKeys.amountValueTo,
-          initialValue: state.filter.amountValueTo.apiParameterValue,
+        child: CustomNumericTextField.decimalNumber(
+          autoCorrect: false,
+          fieldKey: WidgetKeys.amountValueTo,
+          initValue: state.filter.amountValueTo.apiParameterValue,
           onChanged: (value) => context.read<PaymentSummaryFilterBloc>().add(
                 PaymentSummaryFilterEvent.amountValueToChanged(
                   value,
                 ),
               ),
-          keyboardType: TextInputType.number,
-          inputFormatters: <TextInputFormatter>[
-            FilteringTextInputFormatter.allow(_decimalOnlyRegx),
-          ],
           decoration: InputDecoration(
             labelText: context.tr('Amount to'),
             hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -47,19 +41,15 @@ class _PaymentSummaryAmountValueFromFilter extends StatelessWidget {
         state,
       ) {
         return Expanded(
-          child: TextFormField(
-            autocorrect: false,
-            key: WidgetKeys.amountValueFrom,
-            initialValue: state.filter.amountValueFrom.apiParameterValue,
+          child: CustomNumericTextField.decimalNumber(
+            autoCorrect: false,
+            fieldKey: WidgetKeys.amountValueFrom,
+            initValue: state.filter.amountValueFrom.apiParameterValue,
             onChanged: (value) => context.read<PaymentSummaryFilterBloc>().add(
                   PaymentSummaryFilterEvent.amountValueFromChanged(
                     value,
                   ),
                 ),
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(_decimalOnlyRegx),
-            ],
             decoration: InputDecoration(
               hintText: context.tr('Amount from'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(

@@ -107,6 +107,7 @@ dependencies:
   html_editor_enhanced: ^2.5.1
   ymchat_flutter: ^2.7.1
   dropdown_button2: ^2.1.4
+  keyboard_actions: ^4.2.0
 
 dev_dependencies:
   flutter_test:

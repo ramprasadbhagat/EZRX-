@@ -53,22 +53,16 @@ class _CounterOfferPriceTextFieldState
                 : state.showErrorMessages
                     ? AutovalidateMode.always
                     : AutovalidateMode.disabled,
-            child: TextFieldWithLabel(
+            child: CustomNumericTextField.wholeNumber(
               fieldKey: WidgetKeys.counterOfferPriceField,
               labelText: '${'Counter offer price'.tr()} (${currency.code})',
               mandatory: !widget.isDiscountOverrideEnable,
               decoration: InputDecoration(
                 hintText: 'Enter counter offer price'.tr(),
               ),
-              keyboardType: TextInputType.number,
               controller: _priceController,
               inputFormatters: <TextInputFormatter>[
-                // Only digits
-                FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                //
-                FilteringTextInputFormatter.deny(
-                  RegExp(r'[~!@#$%^&*()_+`{}|<>?;:./,=\-[]]'),
-                ),
+                FilteringTextInputFormatter.deny(ZPRegexes.specialCharacters),
               ],
               onChanged: (value) {
                 context.read<PriceOverrideBloc>().add(
