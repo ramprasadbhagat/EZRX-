@@ -16,6 +16,7 @@ class CommonRobot {
 
   final ordersTab = find.byKey(WidgetKeys.ordersTab);
   final moreTab = find.byKey(WidgetKeys.moreTab);
+  final notificationTab = find.byKey(WidgetKeys.notificationTab);
   final customerCodeSelector = find.byKey(WidgetKeys.customerCodeSelector);
   final searchBar = find.byType(CustomSearchBar);
   final invalidLengthSearchMessage =
@@ -29,7 +30,6 @@ class CommonRobot {
   final homeTabBar = find.byKey(WidgetKeys.homeTabBar);
   final homeTab = find.byKey(WidgetKeys.homeTab);
   final productsTab = find.byKey(WidgetKeys.productsTab);
-  final notificationTab = find.byKey(WidgetKeys.notificationTab);
   final cartButton = find.byType(CartButton);
 
   Future<void> goToOrderTab() async {

@@ -706,7 +706,15 @@ class WidgetKeys {
   //============================================================
   static const Key notificationNotFoundRecordKey =
       Key('notificationNotFoundRecordKey');
-
+  static const Key notificationDeleteButton = Key('notificationDeleteButton');
+  static const Key notificationItem = Key('notificationItem');
+  static const Key notificationItemDifferenceTime =
+      Key('notificationItemDifferenceTime');
+  static const Key notificationItemIcon = Key('notificationItemIcon');
+  static const Key notificationItemTitle = Key('notificationItemTitle');
+  static const Key notificationItemDescription =
+      Key('notificationItemDescription');
+  static const Key notificationItemCreatedAt = Key('notificationItemCreatedAt');
   //============================================================
   // FAQ page
   //============================================================

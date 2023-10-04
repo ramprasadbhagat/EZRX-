@@ -8,6 +8,7 @@ class _NotificationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      key: WidgetKeys.notificationItem,
       onTap: () {
         context.read<NotificationBloc>().add(
               NotificationEvent.readNotifications(
@@ -21,8 +22,10 @@ class _NotificationList extends StatelessWidget {
       ///TODO: will revisit later
       trailing: Text(
         notificationData.createdAt.differenceTime,
+        key: WidgetKeys.notificationItemDifferenceTime,
       ),
       leading: Container(
+        key: WidgetKeys.notificationItemIcon,
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
           color: notificationData.title.iconBgColor,
@@ -42,10 +45,12 @@ class _NotificationList extends StatelessWidget {
         children: [
           Text(
             notificationData.title.getOrDefaultValue(''),
+            key: WidgetKeys.notificationItemTitle,
             style: Theme.of(context).textTheme.labelSmall,
           ),
           Text(
             notificationData.description,
+            key: WidgetKeys.notificationItemDescription,
             style: Theme.of(context).textTheme.titleSmall,
           ),
           context.read<UserBloc>().state.isSalesRep
@@ -55,6 +60,7 @@ class _NotificationList extends StatelessWidget {
           ///TODO: will revisit later
           Text(
             notificationData.createdAt.notificationDateTime,
+            key: WidgetKeys.notificationItemCreatedAt,
             style: Theme.of(context)
                 .textTheme
                 .titleSmall!

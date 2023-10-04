@@ -49,8 +49,8 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
                 notificationList: notificationList,
                 isFetching: false,
                 nextPageIndex: state.nextPageIndex + 1,
-                canLoadMore: notificationList.notificationData.length >=
-                    state.notificationList.pagination.totalItem,
+                canLoadMore: notificationList.notificationData.length <
+                    notificationList.pagination.totalItem,
                 notificationFailureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
@@ -150,8 +150,8 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
                 ),
                 notificationFailureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
-                canLoadMore: state.notificationList.notificationData.length >=
-                    state.notificationList.pagination.totalItem,
+                canLoadMore: newNotificationList.length <
+                    notificationList.pagination.totalItem,
                 nextPageIndex: state.nextPageIndex + 1,
               ),
             );

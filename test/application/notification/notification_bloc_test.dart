@@ -145,7 +145,7 @@ void main() {
           ),
           isFetching: false,
           nextPageIndex: 2,
-          canLoadMore: false,
+          canLoadMore: true,
           notificationList: notifications.copyWith(
             notificationData: [
               ...notifications.notificationData,

@@ -37,6 +37,7 @@ class NotificationTab extends StatelessWidget {
         backgroundColor: ZPColors.white,
         actions: [
           IconButton(
+            key: WidgetKeys.notificationDeleteButton,
             onPressed: () {
               context.read<NotificationBloc>().add(
                     const NotificationEvent.deleteAllNotifications(),

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/return_summary_by_item_details.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/sections/return_request_summary_item_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,6 +13,10 @@ class ReturnsByItemsDetailRobot {
   final scrollView = find.byKey(WidgetKeys.returnItemDetailScrollList);
   final copyButton = find.byKey(WidgetKeys.returnItemDetailCopyButton);
   final showDetailButton = find.byKey(WidgetKeys.returnDetailShowDetailButton);
+
+  void verifyPage() {
+    expect(find.byType(ReturnRequestSummaryByItemDetails), findsOneWidget);
+  }
 
   void verifyReturnIdVisible(String returnId) {
     expect(

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_summary_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,6 +12,10 @@ class ViewByOrdersDetailRobot {
 
   final scrollView = find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
   final buyAgainButton = find.byKey(WidgetKeys.viewByOrderDetailBuyAgain);
+
+  void verifyPage() {
+    expect(find.byType(ViewByOrderDetailsPage), findsOneWidget);
+  }
 
   void verifyOrderIdVisible(String orderId) {
     expect(
