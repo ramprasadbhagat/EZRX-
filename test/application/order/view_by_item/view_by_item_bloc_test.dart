@@ -13,8 +13,10 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,8 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late ViewByItemRepository viewByItemRepository;
   late OrderHistory orderHistoryMockData;
+  late List<OrderNumber> orderNumbers;
+
   final config = Config()..appFlavor = Flavor.mock;
   final salesOrgConfig = SalesOrganisationConfigs.empty()
       .copyWith(salesOrg: SalesOrg('fake-salesOrg'));
@@ -65,6 +69,9 @@ void main() {
     setUp(() async {
       viewByItemRepository = ViewByItemRepositoryMock();
       orderHistoryMockData = await ViewByItemLocalDataSource().getViewByItems();
+      orderNumbers = orderHistoryMockData.orderHistoryItems
+          .map((e) => e.orderNumber)
+          .toList();
       WidgetsFlutterBinding.ensureInitialized();
     });
 
@@ -175,6 +182,13 @@ void main() {
             orderHistoryMockData,
           ),
         );
+        when(
+          () => viewByItemRepository.getOrdersInvoiceData(
+            orderNumbers: orderNumbers,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(<OrderNumber, InvoiceData>{}),
+        );
       },
       act: (bloc) => bloc.add(
         ViewByItemsEvent.fetch(
@@ -212,6 +226,38 @@ void main() {
           ),
           appliedFilter: viewByItemFilter,
           isFetching: false,
+          nextPageIndex: 1,
+          canLoadMore: false,
+          orderHistoryList: orderHistoryMockData,
+          searchKey: searchKey,
+        ),
+        ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+          failureOrSuccessOption: none(),
+          appliedFilter: viewByItemFilter,
+          isFetching: false,
+          isFetchingInvoices: true,
+          nextPageIndex: 1,
+          canLoadMore: false,
+          orderHistoryList: orderHistoryMockData,
+          searchKey: searchKey,
+        ),
+        ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+          failureOrSuccessOption: none(),
+          appliedFilter: viewByItemFilter,
+          isFetching: false,
+          isFetchingInvoices: false,
           nextPageIndex: 1,
           canLoadMore: false,
           orderHistoryList: orderHistoryMockData,
@@ -256,10 +302,19 @@ void main() {
             orderHistoryMockData,
           ),
         );
+        when(
+          () => viewByItemRepository.getOrdersInvoiceData(
+            orderNumbers: orderNumbers,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(<OrderNumber, InvoiceData>{}),
+        );
       },
-      act: (bloc) => bloc.add(
-        const ViewByItemsEvent.loadMore(),
-      ),
+      act: (bloc) {
+        bloc.add(
+          const ViewByItemsEvent.loadMore(),
+        );
+      },
       expect: () => [
         ViewByItemsState.initial().copyWith(
           salesOrgConfigs: salesOrgConfig,
@@ -290,6 +345,48 @@ void main() {
           ),
           appliedFilter: viewByItemFilter,
           isFetching: false,
+          nextPageIndex: 1,
+          canLoadMore: false,
+          orderHistoryList: orderHistoryMockData.copyWith(
+            orderHistoryItems: [
+              ...orderHistoryMockData.orderHistoryItems,
+              ...orderHistoryMockData.orderHistoryItems
+            ],
+          ),
+          searchKey: searchKey,
+        ),
+        ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+          failureOrSuccessOption: none(),
+          appliedFilter: viewByItemFilter,
+          isFetching: false,
+          isFetchingInvoices: true,
+          nextPageIndex: 1,
+          canLoadMore: false,
+          orderHistoryList: orderHistoryMockData.copyWith(
+            orderHistoryItems: [
+              ...orderHistoryMockData.orderHistoryItems,
+              ...orderHistoryMockData.orderHistoryItems
+            ],
+          ),
+          searchKey: searchKey,
+        ),
+        ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfig,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          user: user,
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+          failureOrSuccessOption: none(),
+          appliedFilter: viewByItemFilter,
+          isFetching: false,
+          isFetchingInvoices: false,
           nextPageIndex: 1,
           canLoadMore: false,
           orderHistoryList: orderHistoryMockData.copyWith(

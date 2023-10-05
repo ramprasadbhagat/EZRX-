@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -14,21 +13,6 @@ class ViewByOrdersFilter with _$ViewByOrdersFilter {
   }) = _ViewByOrderHistoryFilter;
 
   factory ViewByOrdersFilter.empty() => ViewByOrdersFilter(
-        orderDateFrom: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime.now().subtract(
-              const Duration(days: 7),
-            ),
-          ),
-        ),
-        orderDateTo: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime.now(),
-          ),
-        ),
-      );
-
-  factory ViewByOrdersFilter.dateRangeEmpty() => ViewByOrdersFilter(
         orderDateFrom: DateTimeStringValue(''),
         orderDateTo: DateTimeStringValue(''),
       );

@@ -23,6 +23,5 @@ class ViewByItemFilterState with _$ViewByItemFilterState {
         ],
       );
 
-  ViewByItemFilter get emptyViewByItemFilter =>
-      ViewByItemFilter.dateRangeEmpty();
+  ViewByItemFilter get emptyViewByItemFilter => ViewByItemFilter.empty();
 }

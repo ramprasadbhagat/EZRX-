@@ -180,4 +180,16 @@ class ViewByItemQueryMutation {
       }
       ''';
   }
+
+  String getInvoiceIdForOrders() {
+    return '''
+     query getInvoiceIdForOrders(\$orderNumbers: [String!]!) {
+      getInvoiceIdForOrders(orderNumbers: \$orderNumbers) {
+        orderId
+        invoice
+        lineNumber
+      }
+    }
+  ''';
+  }
 }

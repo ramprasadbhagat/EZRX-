@@ -29,7 +29,8 @@ mixin _$ViewByItemsEvent {
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
-    required TResult Function() fetchProductImage,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,7 +45,8 @@ mixin _$ViewByItemsEvent {
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
     TResult? Function()? loadMore,
-    TResult? Function()? fetchProductImage,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,7 +61,8 @@ mixin _$ViewByItemsEvent {
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
     TResult Function()? loadMore,
-    TResult Function()? fetchProductImage,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -68,7 +71,8 @@ mixin _$ViewByItemsEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,7 +80,7 @@ mixin _$ViewByItemsEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -84,7 +88,7 @@ mixin _$ViewByItemsEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -277,7 +281,8 @@ class _$_Initialized implements _Initialized {
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
-    required TResult Function() fetchProductImage,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) {
     return initialized(
         salesOrgConfigs, customerCodeInfo, shipToInfo, user, salesOrganisation);
@@ -296,7 +301,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
     TResult? Function()? loadMore,
-    TResult? Function()? fetchProductImage,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) {
     return initialized?.call(
         salesOrgConfigs, customerCodeInfo, shipToInfo, user, salesOrganisation);
@@ -315,7 +321,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
     TResult Function()? loadMore,
-    TResult Function()? fetchProductImage,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -331,7 +338,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) {
     return initialized(this);
   }
@@ -342,7 +350,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) {
     return initialized?.call(this);
   }
@@ -353,7 +361,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -474,7 +482,8 @@ class _$_Fetch implements _Fetch {
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
-    required TResult Function() fetchProductImage,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) {
     return fetch(viewByItemFilter, searchKey);
   }
@@ -492,7 +501,8 @@ class _$_Fetch implements _Fetch {
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
     TResult? Function()? loadMore,
-    TResult? Function()? fetchProductImage,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) {
     return fetch?.call(viewByItemFilter, searchKey);
   }
@@ -510,7 +520,8 @@ class _$_Fetch implements _Fetch {
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
     TResult Function()? loadMore,
-    TResult Function()? fetchProductImage,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -525,7 +536,8 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) {
     return fetch(this);
   }
@@ -536,7 +548,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) {
     return fetch?.call(this);
   }
@@ -547,7 +559,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -618,7 +630,8 @@ class _$_LoadMore implements _LoadMore {
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
-    required TResult Function() fetchProductImage,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) {
     return loadMore();
   }
@@ -636,7 +649,8 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
     TResult? Function()? loadMore,
-    TResult? Function()? fetchProductImage,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) {
     return loadMore?.call();
   }
@@ -654,7 +668,8 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
     TResult Function()? loadMore,
-    TResult Function()? fetchProductImage,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -669,7 +684,8 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) {
     return loadMore(this);
   }
@@ -680,7 +696,7 @@ class _$_LoadMore implements _LoadMore {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) {
     return loadMore?.call(this);
   }
@@ -691,7 +707,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -706,39 +722,76 @@ abstract class _LoadMore implements ViewByItemsEvent {
 }
 
 /// @nodoc
-abstract class _$$_FetchProductImageCopyWith<$Res> {
-  factory _$$_FetchProductImageCopyWith(_$_FetchProductImage value,
-          $Res Function(_$_FetchProductImage) then) =
-      __$$_FetchProductImageCopyWithImpl<$Res>;
+abstract class _$$_FetchOrdersInvoiceDataCopyWith<$Res> {
+  factory _$$_FetchOrdersInvoiceDataCopyWith(_$_FetchOrdersInvoiceData value,
+          $Res Function(_$_FetchOrdersInvoiceData) then) =
+      __$$_FetchOrdersInvoiceDataCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<OrderHistoryItem> orderHistoryItems});
 }
 
 /// @nodoc
-class __$$_FetchProductImageCopyWithImpl<$Res>
-    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_FetchProductImage>
-    implements _$$_FetchProductImageCopyWith<$Res> {
-  __$$_FetchProductImageCopyWithImpl(
-      _$_FetchProductImage _value, $Res Function(_$_FetchProductImage) _then)
+class __$$_FetchOrdersInvoiceDataCopyWithImpl<$Res>
+    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_FetchOrdersInvoiceData>
+    implements _$$_FetchOrdersInvoiceDataCopyWith<$Res> {
+  __$$_FetchOrdersInvoiceDataCopyWithImpl(_$_FetchOrdersInvoiceData _value,
+      $Res Function(_$_FetchOrdersInvoiceData) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? orderHistoryItems = null,
+  }) {
+    return _then(_$_FetchOrdersInvoiceData(
+      orderHistoryItems: null == orderHistoryItems
+          ? _value._orderHistoryItems
+          : orderHistoryItems // ignore: cast_nullable_to_non_nullable
+              as List<OrderHistoryItem>,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_FetchProductImage implements _FetchProductImage {
-  const _$_FetchProductImage();
+class _$_FetchOrdersInvoiceData implements _FetchOrdersInvoiceData {
+  const _$_FetchOrdersInvoiceData(
+      {required final List<OrderHistoryItem> orderHistoryItems})
+      : _orderHistoryItems = orderHistoryItems;
+
+  final List<OrderHistoryItem> _orderHistoryItems;
+  @override
+  List<OrderHistoryItem> get orderHistoryItems {
+    if (_orderHistoryItems is EqualUnmodifiableListView)
+      return _orderHistoryItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_orderHistoryItems);
+  }
 
   @override
   String toString() {
-    return 'ViewByItemsEvent.fetchProductImage()';
+    return 'ViewByItemsEvent.fetchOrdersInvoiceData(orderHistoryItems: $orderHistoryItems)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_FetchProductImage);
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchOrdersInvoiceData &&
+            const DeepCollectionEquality()
+                .equals(other._orderHistoryItems, _orderHistoryItems));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_orderHistoryItems));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchOrdersInvoiceDataCopyWith<_$_FetchOrdersInvoiceData> get copyWith =>
+      __$$_FetchOrdersInvoiceDataCopyWithImpl<_$_FetchOrdersInvoiceData>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -754,9 +807,10 @@ class _$_FetchProductImage implements _FetchProductImage {
             ViewByItemFilter viewByItemFilter, SearchKey searchKey)
         fetch,
     required TResult Function() loadMore,
-    required TResult Function() fetchProductImage,
+    required TResult Function(List<OrderHistoryItem> orderHistoryItems)
+        fetchOrdersInvoiceData,
   }) {
-    return fetchProductImage();
+    return fetchOrdersInvoiceData(orderHistoryItems);
   }
 
   @override
@@ -772,9 +826,10 @@ class _$_FetchProductImage implements _FetchProductImage {
     TResult? Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
     TResult? Function()? loadMore,
-    TResult? Function()? fetchProductImage,
+    TResult? Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
   }) {
-    return fetchProductImage?.call();
+    return fetchOrdersInvoiceData?.call(orderHistoryItems);
   }
 
   @override
@@ -790,11 +845,12 @@ class _$_FetchProductImage implements _FetchProductImage {
     TResult Function(ViewByItemFilter viewByItemFilter, SearchKey searchKey)?
         fetch,
     TResult Function()? loadMore,
-    TResult Function()? fetchProductImage,
+    TResult Function(List<OrderHistoryItem> orderHistoryItems)?
+        fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
-    if (fetchProductImage != null) {
-      return fetchProductImage();
+    if (fetchOrdersInvoiceData != null) {
+      return fetchOrdersInvoiceData(orderHistoryItems);
     }
     return orElse();
   }
@@ -805,9 +861,10 @@ class _$_FetchProductImage implements _FetchProductImage {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchProductImage value) fetchProductImage,
+    required TResult Function(_FetchOrdersInvoiceData value)
+        fetchOrdersInvoiceData,
   }) {
-    return fetchProductImage(this);
+    return fetchOrdersInvoiceData(this);
   }
 
   @override
@@ -816,9 +873,9 @@ class _$_FetchProductImage implements _FetchProductImage {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchProductImage value)? fetchProductImage,
+    TResult? Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
   }) {
-    return fetchProductImage?.call(this);
+    return fetchOrdersInvoiceData?.call(this);
   }
 
   @override
@@ -827,18 +884,25 @@ class _$_FetchProductImage implements _FetchProductImage {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchProductImage value)? fetchProductImage,
+    TResult Function(_FetchOrdersInvoiceData value)? fetchOrdersInvoiceData,
     required TResult orElse(),
   }) {
-    if (fetchProductImage != null) {
-      return fetchProductImage(this);
+    if (fetchOrdersInvoiceData != null) {
+      return fetchOrdersInvoiceData(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchProductImage implements ViewByItemsEvent {
-  const factory _FetchProductImage() = _$_FetchProductImage;
+abstract class _FetchOrdersInvoiceData implements ViewByItemsEvent {
+  const factory _FetchOrdersInvoiceData(
+          {required final List<OrderHistoryItem> orderHistoryItems}) =
+      _$_FetchOrdersInvoiceData;
+
+  List<OrderHistoryItem> get orderHistoryItems;
+  @JsonKey(ignore: true)
+  _$$_FetchOrdersInvoiceDataCopyWith<_$_FetchOrdersInvoiceData> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -852,6 +916,7 @@ mixin _$ViewByItemsState {
   OrderHistory get orderHistoryList => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  bool get isFetchingInvoices => throw _privateConstructorUsedError;
   int get nextPageIndex => throw _privateConstructorUsedError;
   ViewByItemFilter get appliedFilter => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
@@ -878,6 +943,7 @@ abstract class $ViewByItemsStateCopyWith<$Res> {
       OrderHistory orderHistoryList,
       bool canLoadMore,
       bool isFetching,
+      bool isFetchingInvoices,
       int nextPageIndex,
       ViewByItemFilter appliedFilter,
       SearchKey searchKey,
@@ -913,6 +979,7 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
     Object? orderHistoryList = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
+    Object? isFetchingInvoices = null,
     Object? nextPageIndex = null,
     Object? appliedFilter = null,
     Object? searchKey = null,
@@ -950,6 +1017,10 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFetchingInvoices: null == isFetchingInvoices
+          ? _value.isFetchingInvoices
+          : isFetchingInvoices // ignore: cast_nullable_to_non_nullable
               as bool,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
@@ -1045,6 +1116,7 @@ abstract class _$$_ViewByItemsStateCopyWith<$Res>
       OrderHistory orderHistoryList,
       bool canLoadMore,
       bool isFetching,
+      bool isFetchingInvoices,
       int nextPageIndex,
       ViewByItemFilter appliedFilter,
       SearchKey searchKey,
@@ -1085,6 +1157,7 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
     Object? orderHistoryList = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
+    Object? isFetchingInvoices = null,
     Object? nextPageIndex = null,
     Object? appliedFilter = null,
     Object? searchKey = null,
@@ -1123,6 +1196,10 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFetchingInvoices: null == isFetchingInvoices
+          ? _value.isFetchingInvoices
+          : isFetchingInvoices // ignore: cast_nullable_to_non_nullable
+              as bool,
       nextPageIndex: null == nextPageIndex
           ? _value.nextPageIndex
           : nextPageIndex // ignore: cast_nullable_to_non_nullable
@@ -1155,6 +1232,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
       required this.orderHistoryList,
       required this.canLoadMore,
       required this.isFetching,
+      required this.isFetchingInvoices,
       required this.nextPageIndex,
       required this.appliedFilter,
       required this.searchKey,
@@ -1178,6 +1256,8 @@ class _$_ViewByItemsState extends _ViewByItemsState {
   @override
   final bool isFetching;
   @override
+  final bool isFetchingInvoices;
+  @override
   final int nextPageIndex;
   @override
   final ViewByItemFilter appliedFilter;
@@ -1188,7 +1268,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
 
   @override
   String toString() {
-    return 'ViewByItemsState(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrganisation: $salesOrganisation, orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, nextPageIndex: $nextPageIndex, appliedFilter: $appliedFilter, searchKey: $searchKey, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'ViewByItemsState(salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesOrganisation: $salesOrganisation, orderHistoryList: $orderHistoryList, canLoadMore: $canLoadMore, isFetching: $isFetching, isFetchingInvoices: $isFetchingInvoices, nextPageIndex: $nextPageIndex, appliedFilter: $appliedFilter, searchKey: $searchKey, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -1211,6 +1291,8 @@ class _$_ViewByItemsState extends _ViewByItemsState {
                 other.canLoadMore == canLoadMore) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
+            (identical(other.isFetchingInvoices, isFetchingInvoices) ||
+                other.isFetchingInvoices == isFetchingInvoices) &&
             (identical(other.nextPageIndex, nextPageIndex) ||
                 other.nextPageIndex == nextPageIndex) &&
             (identical(other.appliedFilter, appliedFilter) ||
@@ -1232,6 +1314,7 @@ class _$_ViewByItemsState extends _ViewByItemsState {
       orderHistoryList,
       canLoadMore,
       isFetching,
+      isFetchingInvoices,
       nextPageIndex,
       appliedFilter,
       searchKey,
@@ -1254,6 +1337,7 @@ abstract class _ViewByItemsState extends ViewByItemsState {
       required final OrderHistory orderHistoryList,
       required final bool canLoadMore,
       required final bool isFetching,
+      required final bool isFetchingInvoices,
       required final int nextPageIndex,
       required final ViewByItemFilter appliedFilter,
       required final SearchKey searchKey,
@@ -1277,6 +1361,8 @@ abstract class _ViewByItemsState extends ViewByItemsState {
   bool get canLoadMore;
   @override
   bool get isFetching;
+  @override
+  bool get isFetchingInvoices;
   @override
   int get nextPageIndex;
   @override

@@ -57,7 +57,8 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
               BalanceTextRow(
                 key: WidgetKeys.viewByItemsOrderDetailInvoiceNumber,
                 keyText: context.tr('Invoice number'),
-                valueText: orderHistoryItem.invoiceNumber,
+                valueText: orderHistoryItem.invoiceData.invoiceNumber
+                    .getOrDefaultValue(''),
                 keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
                     ),

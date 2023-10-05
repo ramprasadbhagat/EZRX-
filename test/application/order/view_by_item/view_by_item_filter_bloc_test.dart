@@ -188,7 +188,7 @@ void main() {
               viewByItemFilterState.emptyViewByItemFilter;
           expect(
             getemptyViewByItemFilter,
-            ViewByItemFilter.dateRangeEmpty(),
+            ViewByItemFilter.empty(),
           );
         },
       );

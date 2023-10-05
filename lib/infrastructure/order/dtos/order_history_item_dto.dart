@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
@@ -64,7 +65,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       orderType: orderHistoryItem.orderType.getOrCrash(),
       isBonusMaterial: orderHistoryItem.isBonusMaterial,
       telephoneNumber: orderHistoryItem.telephoneNumber.displayTelephoneNumber,
-      invoiceNumber: orderHistoryItem.invoiceNumber,
+      invoiceNumber:
+          orderHistoryItem.invoiceData.invoiceNumber.getOrDefaultValue(''),
       pOReference: orderHistoryItem.pOReference.displayPOReference,
       manufactureName: orderHistoryItem.manufactureName,
       expiryDate: orderHistoryItem.expiryDate.dateString,
@@ -93,7 +95,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       orderBy: orderBy,
       orderType: DocumentType(orderType),
       expiryDate: DateTimeStringValue(expiryDate),
-      invoiceNumber: invoiceNumber,
+      invoiceData: InvoiceData.empty()
+          .copyWith(invoiceNumber: StringValue(invoiceNumber)),
       isBonusMaterial: isBonusMaterial,
       manufactureName: manufactureName,
       pOReference: POReference(pOReference),

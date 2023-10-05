@@ -57,7 +57,7 @@ class ViewByItemFilterBloc
       ),
       resetFilter: (e) async => emit(
         ViewByItemFilterState.initial().copyWith(
-          filter: ViewByItemFilter.dateRangeEmpty(),
+          filter: ViewByItemFilter.empty(),
         ),
       ),
     );

@@ -6,8 +6,10 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class IViewByItemRepository {
   Future<Either<ApiFailure, OrderHistory>> getViewByItems({
@@ -20,5 +22,10 @@ abstract class IViewByItemRepository {
     required ViewByItemFilter viewByItemFilter,
     required SearchKey searchKey,
     required SalesOrganisation salesOrganisation,
+  });
+
+  Future<Either<ApiFailure, Map<OrderNumber, InvoiceData>>>
+      getOrdersInvoiceData({
+    required List<OrderNumber> orderNumbers,
   });
 }

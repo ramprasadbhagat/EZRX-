@@ -98,6 +98,11 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
                 appliedFilter: e.viewByItemFilter,
               ),
             );
+            add(
+              _FetchOrdersInvoiceData(
+                orderHistoryItems: orderHistoryList.orderHistoryItems,
+              ),
+            );
           },
         );
       },
@@ -144,6 +149,66 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
                 canLoadMore: orderHistoryList.orderHistoryItems.length >=
                     config.pageSize,
                 nextPageIndex: state.nextPageIndex + 1,
+              ),
+            );
+
+            add(
+              _FetchOrdersInvoiceData(
+                orderHistoryItems: orderHistoryList.orderHistoryItems,
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    on<_FetchOrdersInvoiceData>(
+      (e, emit) async {
+        final orderNumbers =
+            e.orderHistoryItems.map((e) => e.orderNumber).toList();
+
+        if (orderNumbers.isEmpty) return;
+
+        emit(
+          state.copyWith(
+            isFetchingInvoices: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+
+        final failureOrSuccess =
+            await viewByItemRepository.getOrdersInvoiceData(
+          orderNumbers: orderNumbers,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetchingInvoices: false,
+              ),
+            );
+          },
+          (invoiceDataMap) {
+            final orderHistoryItemsList = List<OrderHistoryItem>.from(
+              state.orderHistoryList.orderHistoryItems,
+            )
+                .map(
+                  (orderItem) => orderItem.copyWith(
+                    invoiceData: invoiceDataMap[orderItem.orderNumber] ??
+                        orderItem.invoiceData,
+                  ),
+                )
+                .toList();
+
+            emit(
+              state.copyWith(
+                orderHistoryList: state.orderHistoryList.copyWith(
+                  orderHistoryItems: orderHistoryItemsList,
+                ),
+                failureOrSuccessOption: none(),
+                isFetchingInvoices: false,
               ),
             );
           },

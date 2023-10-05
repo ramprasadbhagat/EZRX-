@@ -14,5 +14,7 @@ class ViewByItemsEvent with _$ViewByItemsEvent {
     required SearchKey searchKey,
   }) = _Fetch;
   const factory ViewByItemsEvent.loadMore() = _LoadMore;
-  const factory ViewByItemsEvent.fetchProductImage() = _FetchProductImage;
+  const factory ViewByItemsEvent.fetchOrdersInvoiceData({
+    required List<OrderHistoryItem> orderHistoryItems,
+  }) = _FetchOrdersInvoiceData;
 }

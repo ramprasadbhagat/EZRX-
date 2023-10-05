@@ -51,11 +51,9 @@ class _ViewByOrderItem extends StatelessWidget {
           ),
         ),
         quantity: orderHistoryItem.qty.toString(),
-        footerWidget: orderHistoryItem.invoiceNumber.isNotEmpty
-            ? _InvoiceNumber(
-                orderHistoryItem: orderHistoryItem,
-              )
-            : null,
+        footerWidget: _InvoiceNumber(
+          orderHistoryItem: orderHistoryItem,
+        ),
         materialNumber: orderHistoryItem.materialNumber,
         isQuantityBelowImage: false,
         isQuantityRequired: true,

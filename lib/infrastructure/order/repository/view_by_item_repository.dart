@@ -8,9 +8,11 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_local.dart';
 import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
@@ -46,9 +48,9 @@ class ViewByItemRepository implements IViewByItemRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final result = await localDataSource.getViewByItems();
+        final orderHistoryItemsList = await localDataSource.getViewByItems();
 
-        return Right(result);
+        return Right(orderHistoryItemsList);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }
@@ -71,5 +73,49 @@ class ViewByItemRepository implements IViewByItemRepository {
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  @override
+  Future<Either<ApiFailure, Map<OrderNumber, InvoiceData>>>
+      getOrdersInvoiceData({
+    required List<OrderNumber> orderNumbers,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final ordersInvoiceData =
+            await localDataSource.getInvoiceDataForOrders();
+
+        final invoiceDataMap =
+            _getInvoiceMapData(ordersInvoiceData: ordersInvoiceData);
+
+        return Right(invoiceDataMap);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+
+    try {
+      final queryOrderNumbers =
+          orderNumbers.map((e) => e.getOrCrash()).toList();
+
+      final ordersInvoiceData = await orderHistoryRemoteDataSource
+          .getInvoiceDataForOrders(orderNumbers: queryOrderNumbers);
+
+      final invoiceDataMap =
+          _getInvoiceMapData(ordersInvoiceData: ordersInvoiceData);
+
+      return Right(invoiceDataMap);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  Map<OrderNumber, InvoiceData> _getInvoiceMapData({
+    required List<InvoiceData> ordersInvoiceData,
+  }) {
+    return ordersInvoiceData.fold<Map<OrderNumber, InvoiceData>>(
+      <OrderNumber, InvoiceData>{},
+      (map, invoiceData) => map..[invoiceData.orderNumber] = invoiceData,
+    );
   }
 }

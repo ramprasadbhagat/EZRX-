@@ -36,7 +36,8 @@ class ViewByItemsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
       buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
+          previous.isFetching != current.isFetching ||
+          previous.isFetchingInvoices != current.isFetchingInvoices,
       builder: (context, state) {
         if (state.isFetching &&
             state.orderHistoryList.orderHistoryItems.isEmpty) {

@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -30,7 +31,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required DateTimeStringValue expiryDate,
     required POReference pOReference,
     required String manufactureName,
-    required String invoiceNumber,
+    required InvoiceData invoiceData,
     required bool isBonusMaterial,
     required PhoneNumber telephoneNumber,
     required ProductImages productImages,
@@ -53,7 +54,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         createdDate: DateTimeStringValue(''),
         batch: StringValue(''),
         expiryDate: DateTimeStringValue(''),
-        invoiceNumber: '',
+        invoiceData: InvoiceData.empty(),
         isBonusMaterial: false,
         manufactureName: '',
         pOReference: POReference(''),
