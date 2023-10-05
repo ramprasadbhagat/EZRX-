@@ -9,6 +9,8 @@ SalesOrg fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
 SalesOrganisation fakeSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg);
 
+final fakeEmptySalesConfigs = SalesOrganisationConfigs.empty();
+
 SalesOrganisationConfigs salesOrgConfigEnabledMaterialWithoutPrice =
     SalesOrganisationConfigs.empty().copyWith(
   materialWithoutPrice: true,

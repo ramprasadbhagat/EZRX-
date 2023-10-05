@@ -1,11 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -19,6 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class MaterialPriceRepositoryMock extends Mock
     implements MaterialPriceRepository {}
 
@@ -27,28 +26,27 @@ void main() {
 
   late final Map<MaterialNumber, Price> mockPriceMap;
 
-  final fakeSalesOrg = SalesOrganisation.empty().copyWith(
-    salesOrg: SalesOrg('fake-name'),
-  );
-  final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
-    customerCodeSoldTo: 'fake-code',
-  );
   final fakeShipToInfo = ShipToInfo.empty().copyWith(
     shipToCustomerCode: 'fake-code',
   );
 
-  final fakeSalesConfigs = SalesOrganisationConfigs.empty();
-
-  // final fakeFOCMaterialQuery = [
-  //   MaterialInfo.empty().copyWith(
-  //     materialNumber: MaterialNumber('1'),
-  //     materialGroup4: MaterialGroup.four('6A1'),
-  //   ),
-  //   MaterialInfo.empty().copyWith(
-  //     materialNumber: MaterialNumber('2'),
-  //     materialGroup4: MaterialGroup.four('6A1'),
-  //   ),
-  // ];
+  final fakeFOCMaterialQuery = [
+    MaterialInfo.empty().copyWith(
+      materialNumber: MaterialNumber('1'),
+      isFOCMaterial: true,
+    ),
+    MaterialInfo.empty().copyWith(
+      materialNumber: MaterialNumber('2'),
+      isFOCMaterial: true,
+    ),
+  ];
+  final materialPrice = {
+    for (final material in fakeFOCMaterialQuery)
+      material.materialNumber: Price.empty().copyWith(
+        materialNumber: material.materialNumber,
+        isValid: false,
+      )
+  };
 
   final fakeMaterialQuery = [
     MaterialInfo.empty().copyWith(materialNumber: MaterialNumber('1')),
@@ -69,7 +67,7 @@ void main() {
     };
   });
 
-  group('Material Price Bloc', () {
+  group('Material Price Bloc for materials', () {
     blocTest(
       'Initialize',
       build: () => MaterialPriceBloc(repository: repository),
@@ -96,8 +94,8 @@ void main() {
         MaterialPriceEvent.fetch(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrg,
-          salesConfigs: fakeSalesConfigs,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           materials: fakeMaterialQuery,
           comboDealEligible: false,
         ),
@@ -116,7 +114,6 @@ void main() {
             },
           ),
           MaterialPriceState.initial().copyWith(
-            isFetching: false,
             materialPrice: {
               for (var number in fakeMaterialQuery)
                 number.materialNumber: Price.empty().copyWith(
@@ -130,39 +127,32 @@ void main() {
       },
     );
 
-    // blocTest<MaterialPriceBloc, MaterialPriceState>(
-    //   'Fetch when all materials is FOC',
-    //   build: () => MaterialPriceBloc(repository: repository),
-    //   act: (MaterialPriceBloc bloc) => bloc.add(
-    //     MaterialPriceEvent.fetch(
-    //       customerCodeInfo: fakeCustomerCodeInfo,
-    //       shipToInfo: fakeShipToInfo,
-    //       salesOrganisation: fakeSalesOrg,
-    //       salesConfigs: fakeSalesConfigs,
-    //       materials: fakeFOCMaterialQuery,
-    //       comboDealEligible: false,
-    //     ),
-    //   ),
-    //   expect: () => [
-    //     MaterialPriceState.initial().copyWith(isFetching: true),
-    //     MaterialPriceState.initial().copyWith(
-    //       isFetching: true,
-    //       materialPrice: {
-    //         for (final material in fakeFOCMaterialQuery)
-    //           material.materialNumber: Price.empty()
-    //               .copyWith(materialNumber: material.materialNumber)
-    //       },
-    //     ),
-    //     MaterialPriceState.initial().copyWith(
-    //       isFetching: false,
-    //       materialPrice: {
-    //         for (final material in fakeFOCMaterialQuery)
-    //           material.materialNumber: Price.empty()
-    //               .copyWith(materialNumber: material.materialNumber)
-    //       },
-    //     ),
-    //   ],
-    // );
+    blocTest<MaterialPriceBloc, MaterialPriceState>(
+      'Fetch when all materials is FOC',
+      build: () => MaterialPriceBloc(repository: repository),
+      act: (MaterialPriceBloc bloc) => bloc.add(
+        MaterialPriceEvent.fetch(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          materials: fakeFOCMaterialQuery,
+          comboDealEligible: false,
+        ),
+      ),
+      expect: () => [
+        MaterialPriceState.initial().copyWith(
+          isFetching: true,
+        ),
+        MaterialPriceState.initial().copyWith(
+          isFetching: true,
+          materialPrice: materialPrice,
+        ),
+        MaterialPriceState.initial().copyWith(
+          materialPrice: materialPrice,
+        ),
+      ],
+    );
 
     blocTest<MaterialPriceBloc, MaterialPriceState>(
       'Fetch price success',
@@ -172,8 +162,8 @@ void main() {
           () => repository.getMaterialPrice(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrg,
-            salesConfigs: fakeSalesConfigs,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
             materialNumberList: fakeMaterialNumberQuery,
             comboDealEligible: false,
           ),
@@ -185,8 +175,8 @@ void main() {
         MaterialPriceEvent.fetch(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrg,
-          salesConfigs: fakeSalesConfigs,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           materials: fakeMaterialQuery,
           comboDealEligible: false,
         ),
@@ -196,7 +186,6 @@ void main() {
           isFetching: true,
         ),
         MaterialPriceState.initial().copyWith(
-          isFetching: false,
           materialPrice: mockPriceMap,
         ),
       ],
@@ -210,8 +199,8 @@ void main() {
           () => repository.getMaterialPrice(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeShipToInfo,
-            salesOrganisation: fakeSalesOrg,
-            salesConfigs: fakeSalesConfigs,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
             materialNumberList: fakeMaterialNumberQuery,
             comboDealEligible: false,
           ),
@@ -223,8 +212,8 @@ void main() {
         MaterialPriceEvent.fetch(
           customerCodeInfo: fakeCustomerCodeInfo,
           shipToInfo: fakeShipToInfo,
-          salesOrganisation: fakeSalesOrg,
-          salesConfigs: fakeSalesConfigs,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
           materials: fakeMaterialQuery,
           comboDealEligible: false,
         ),
@@ -233,8 +222,156 @@ void main() {
         MaterialPriceState.initial().copyWith(
           isFetching: true,
         ),
+        MaterialPriceState.initial(),
+      ],
+    );
+  });
+
+  group('Material Price Bloc for cart product', () {
+    blocTest<MaterialPriceBloc, MaterialPriceState>(
+      'Fetch when all materials query already have their price',
+      build: () => MaterialPriceBloc(repository: repository),
+      seed: () => MaterialPriceState.initial().copyWith(
+        materialPrice: {
+          for (var number in fakeMaterialQuery)
+            number.materialNumber: Price.empty().copyWith(
+              rules: [PriceRule.empty()],
+              tiers: [PriceTier.empty()],
+              bonuses: [PriceBonus.empty()],
+            ),
+        },
+      ),
+      act: (MaterialPriceBloc bloc) => bloc.add(
+        MaterialPriceEvent.fetchPriceCartProduct(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          products: fakeMaterialQuery,
+          comboDealEligible: false,
+        ),
+      ),
+      expect: () {
+        return [
+          MaterialPriceState.initial().copyWith(
+            isFetching: true,
+            materialPrice: {
+              for (var number in fakeMaterialQuery)
+                number.materialNumber: Price.empty().copyWith(
+                  rules: [PriceRule.empty()],
+                  tiers: [PriceTier.empty()],
+                  bonuses: [PriceBonus.empty()],
+                ),
+            },
+          ),
+          MaterialPriceState.initial().copyWith(
+            materialPrice: {
+              for (var number in fakeMaterialQuery)
+                number.materialNumber: Price.empty().copyWith(
+                  rules: [PriceRule.empty()],
+                  tiers: [PriceTier.empty()],
+                  bonuses: [PriceBonus.empty()],
+                ),
+            },
+          )
+        ];
+      },
+    );
+
+    blocTest<MaterialPriceBloc, MaterialPriceState>(
+      'Fetch when all materials is FOC',
+      build: () => MaterialPriceBloc(repository: repository),
+      act: (MaterialPriceBloc bloc) => bloc.add(
+        MaterialPriceEvent.fetchPriceCartProduct(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          products: fakeFOCMaterialQuery,
+          comboDealEligible: false,
+        ),
+      ),
+      expect: () => [
         MaterialPriceState.initial().copyWith(
-          isFetching: false,
+          isFetching: true,
+        ),
+        MaterialPriceState.initial().copyWith(
+          isFetching: true,
+          materialPrice: materialPrice,
+        ),
+        MaterialPriceState.initial().copyWith(
+          materialPrice: materialPrice,
+        ),
+      ],
+    );
+
+    blocTest<MaterialPriceBloc, MaterialPriceState>(
+      'Fetch price success',
+      build: () => MaterialPriceBloc(repository: repository),
+      setUp: () {
+        when(
+          () => repository.getMaterialPrice(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
+            materialNumberList: fakeMaterialNumberQuery,
+            comboDealEligible: false,
+          ),
+        ).thenAnswer(
+          (_) async => Right(mockPriceMap),
+        );
+      },
+      act: (MaterialPriceBloc bloc) => bloc.add(
+        MaterialPriceEvent.fetchPriceCartProduct(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          products: fakeMaterialQuery,
+          comboDealEligible: false,
+        ),
+      ),
+      expect: () => [
+        MaterialPriceState.initial().copyWith(
+          isFetching: true,
+        ),
+        MaterialPriceState.initial().copyWith(
+          materialPrice: mockPriceMap,
+        ),
+      ],
+    );
+
+    blocTest<MaterialPriceBloc, MaterialPriceState>(
+      'Fetch price failure',
+      build: () => MaterialPriceBloc(repository: repository),
+      setUp: () {
+        when(
+          () => repository.getMaterialPrice(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            salesConfigs: fakeEmptySalesConfigs,
+            materialNumberList: fakeMaterialNumberQuery,
+            comboDealEligible: false,
+          ),
+        ).thenAnswer(
+          (_) async => const Left(ApiFailure.other('fake-error')),
+        );
+      },
+      act: (MaterialPriceBloc bloc) => bloc.add(
+        MaterialPriceEvent.fetchPriceCartProduct(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          salesConfigs: fakeEmptySalesConfigs,
+          products: fakeMaterialQuery,
+          comboDealEligible: false,
+        ),
+      ),
+      expect: () => [
+        MaterialPriceState.initial().copyWith(
+          isFetching: true,
         ),
       ],
     );
