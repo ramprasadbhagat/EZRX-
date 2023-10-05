@@ -33,7 +33,9 @@ class FailureHandler {
           return ApiFailure.other((error as CacheException).message);
         case ServerException:
           final message = (error as ServerException).message;
-          if (message == 'authentication failed') {
+          if (message == 'authentication failed' ||
+              message ==
+                  'status: 401, message: token has either expired or its not valid') {
             return const ApiFailure.authenticationFailed();
           }
           return ApiFailure.serverError(message);
