@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_local.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_configuration.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -216,10 +217,10 @@ void main() {
 
       await tester.pump();
       await tester.enterText(
-        find.byKey(const Key('policyConfigurationSearch')),
+        find.byType(CustomSearchBar),
         '2001',
       );
-      await tester.pump(const Duration(seconds: 3));
+      await tester.pump(Duration(milliseconds: locator<Config>().autoSearchTimeout));
       verify(
         () => policyConfigurationListBlocMock.add(
           PolicyConfigurationEvent.search(

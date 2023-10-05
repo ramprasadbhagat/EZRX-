@@ -1,13 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/widgets/bonus_items_sheet_footer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
 
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 
@@ -82,11 +81,13 @@ class BonusItemsSheet extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 18, bottom: 8),
-              child: SearchBar(
-                clearIconKey: WidgetKeys.clearIconKey,
-                controller: TextEditingController(),
+              child: CustomSearchBar(
                 onClear: () {},
                 onSearchChanged: (v) => {},
+                enabled: true,
+                onSearchSubmitted: (v) => {},
+                initialValue: '',
+                customValidator: (v) => true,
               ),
             ),
             const _BonusQuantityEmptyWarning(),

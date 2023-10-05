@@ -2,14 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -164,63 +165,34 @@ class UserRestrictionListSearch extends StatefulWidget {
 }
 
 class _UserRestrictionListSearchState extends State<UserRestrictionListSearch> {
-  late TextEditingController _searchController;
   late UserRestrictionListBloc userRestrictionListBloc;
 
   @override
   void initState() {
     super.initState();
-    _searchController = TextEditingController();
     userRestrictionListBloc = context.read<UserRestrictionListBloc>();
     final searchText = userRestrictionListBloc.state.searchKey;
     if (searchText.isEmpty) return;
-    _searchController.value = TextEditingValue(
-      text: searchText,
-      selection: TextSelection.collapsed(
-        offset: _searchController.selection.base.offset,
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserRestrictionListBloc, UserRestrictionListState>(
-      listenWhen: (previous, current) =>
-          previous.searchKey != current.searchKey,
-      listener: (context, state) {
-        _searchController.value = TextEditingValue(
-          text: state.searchKey,
-          selection: TextSelection.collapsed(
-            offset: _searchController.selection.base.offset,
-          ),
-        );
-      },
+    return BlocBuilder<UserRestrictionListBloc, UserRestrictionListState>(
       buildWhen: (previous, current) => previous.searchKey != current.searchKey,
       builder: (context, snapshot) {
-        return SearchBar(
-          key: WidgetKeys.userRestrictionListSearchField,
-          clearIconKey: WidgetKeys.clearUserRestrictionListSearch,
-          controller: _searchController,
-          onClear: () {
-            if (_searchController.text.isEmpty) return;
-            _searchController.clear();
-            userRestrictionListBloc.add(
-              const UserRestrictionListEvent.updateSearchKey(''),
-            );
-          },
-          border: InputBorder.none,
-          onSearchChanged: (value) {
-            userRestrictionListBloc
-                .add(UserRestrictionListEvent.updateSearchKey(value));
-          },
-          isDense: true,
-          isAutoSearch: false,
+        return CustomSearchBar(
+          key: WidgetKeys.genericKey(
+            key: (SearchKey(snapshot.searchKey)).searchValueOrEmpty,
+          ),
+          enabled: !snapshot.isFetching,
+          initialValue: (SearchKey(snapshot.searchKey)).searchValueOrEmpty,
+          customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+          onSearchSubmitted: (value) {},
+          onClear: () => userRestrictionListBloc.add(
+            const UserRestrictionListEvent.updateSearchKey(''),
+          ),
+          onSearchChanged: (value) => userRestrictionListBloc
+              .add(UserRestrictionListEvent.updateSearchKey(value)),
         );
       },
     );

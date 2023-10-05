@@ -2,15 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/policy_configuration.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/search_bar.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -204,37 +205,21 @@ class PolicyConfigurationListItem extends StatelessWidget {
   }
 }
 
-class _PolicyConfigurationSearch extends StatefulWidget {
+class _PolicyConfigurationSearch extends StatelessWidget {
   const _PolicyConfigurationSearch({Key? key}) : super(key: key);
-  @override
-  State<_PolicyConfigurationSearch> createState() =>
-      _PolicyConfigurationSearchState();
-}
-
-class _PolicyConfigurationSearchState
-    extends State<_PolicyConfigurationSearch> {
-  final _policyConfigSearchController = TextEditingController();
-
-  @override
-  void dispose() {
-    _policyConfigSearchController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PolicyConfigurationBloc, PolicyConfigurationState>(
       key: WidgetKeys.policyConfigSearchBuilder,
       buildWhen: (previous, current) => previous.searchKey != current.searchKey,
       builder: (context, state) {
-        _policyConfigSearchController.text =
-            state.searchKey.getOrDefaultValue('');
-
-        return SearchBar(
-          controller: _policyConfigSearchController,
+        return CustomSearchBar(
           key: WidgetKeys.policyConfigurationSearch(
-            state.searchKey.getOrDefaultValue(''),
+            state.searchKey.searchValueOrEmpty,
           ),
+          customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+          initialValue: state.searchKey.searchValueOrEmpty,
+          enabled: !state.isLoading,
           onSearchChanged: (value) {
             final salesOrganisation =
                 context.read<EligibilityBloc>().state.salesOrganisation;
@@ -245,29 +230,23 @@ class _PolicyConfigurationSearchState
                   ),
                 );
           },
-          onSearchSubmitted: (value) {
-            context.read<PolicyConfigurationBloc>().add(
-                  PolicyConfigurationEvent.search(
-                    salesOrganisation:
-                        context.read<EligibilityBloc>().state.salesOrganisation,
-                    searchKey: value,
+          onSearchSubmitted: (value) =>
+              context.read<PolicyConfigurationBloc>().add(
+                    PolicyConfigurationEvent.search(
+                      salesOrganisation: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .salesOrganisation,
+                      searchKey: value,
+                    ),
                   ),
-                );
-          },
-          onClear: () {
-            if (_policyConfigSearchController.text.isEmpty) return;
-            _policyConfigSearchController.clear();
-            context.read<PolicyConfigurationBloc>().add(
-                  PolicyConfigurationEvent.search(
-                    salesOrganisation:
-                        context.read<EligibilityBloc>().state.salesOrganisation,
-                    searchKey: '',
-                  ),
-                );
-          },
-          isDense: true,
-          border: InputBorder.none,
-          clearIconKey: WidgetKeys.clearPolicyConfigurationSearch,
+          onClear: () => context.read<PolicyConfigurationBloc>().add(
+                PolicyConfigurationEvent.search(
+                  salesOrganisation:
+                      context.read<EligibilityBloc>().state.salesOrganisation,
+                  searchKey: '',
+                ),
+              ),
         );
       },
     );

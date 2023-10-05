@@ -6,10 +6,12 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -305,9 +307,9 @@ void main() {
       await tester.pumpWidget(getScopedWidget(const UserRestrictionListPage()));
       await tester.pump();
 
-      final textField = find.byKey(const Key('userRestrictionListSearchField'));
+      final textField = find.byType(CustomSearchBar);
       await tester.enterText(textField, mockSearchKey);
-      await tester.pump(const Duration(milliseconds: 3000));
+      await tester.pump(Duration(milliseconds: locator<Config>().autoSearchTimeout));
 
       verify(
         () => userRestrictionListBlocMock.add(

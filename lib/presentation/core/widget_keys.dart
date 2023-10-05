@@ -223,8 +223,6 @@ class WidgetKeys {
   static const Key userRestrictionListPage = Key('UserRestrictionListPage');
   static const Key userRestrictionListLoader = Key('LoaderImage');
   static const Key userRestrictionList = Key('userRestrictionList');
-  static const Key userRestrictionListSearchField =
-      Key('userRestrictionListSearchField');
   static Key userRestrictionTile(String userName) =>
       Key('userRestrictionTile-$userName');
 
