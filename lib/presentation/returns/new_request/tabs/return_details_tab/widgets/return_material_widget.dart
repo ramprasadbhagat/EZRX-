@@ -26,11 +26,15 @@ class _ReturnMaterialWidget extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProductImageWithLabel(materialNumber: item.materialNumber),
+                  ProductImageWithLabel(
+                    materialNumber: item.materialNumber,
+                    key: WidgetKeys.newRequestStep2ItemImage,
+                  ),
                   Expanded(
                     child: MaterialInfoWidget(data: item),
                   ),
                   IconButton(
+                    key: WidgetKeys.newRequestStep2RemoveIcon,
                     visualDensity: const VisualDensity(vertical: -4),
                     onPressed: () => _removeItem(
                       context,
@@ -47,16 +51,20 @@ class _ReturnMaterialWidget extends StatelessWidget {
                 quantity: item.balanceQuantity.getOrDefaultValue(0),
                 totalPrice: item.totalPrice.getOrDefaultValue(0),
                 unitPrice: item.unitPrice.getOrDefaultValue(0),
+                key: WidgetKeys.newRequestStep2QuantityAndPrice,
               ),
               MaterialDetailsSection(
+                key: WidgetKeys.newRequestStep2DetailsSection,
                 data: item,
                 expandable: true,
               ),
               _MaterialReturnDetailsSection(
+                key: WidgetKeys.materialReturnDetailsSection,
                 item: item,
                 detail: detail,
               ),
               _BonusItemSection(
+                key: WidgetKeys.bonusItemSection,
                 items: item.bonusItems,
               ),
             ],

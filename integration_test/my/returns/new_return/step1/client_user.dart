@@ -8,7 +8,7 @@ import '../../../../core/infrastructure/zephyr/repository/zephyr_repository.dart
 import '../../../../robots/common/common_robot.dart';
 import '../../../../robots/login_robot.dart';
 import '../../../../robots/more/more_robot.dart';
-import '../../../../robots/returns/new_return/step1/new_return_robot.dart';
+import '../../../../robots/returns/new_return/step1/new_return_step1_robot.dart';
 import '../../../../robots/returns/returns_by_items/returns_by_items_robot.dart';
 
 void main() {
@@ -16,7 +16,7 @@ void main() {
   late CommonRobot commonRobot;
   late MoreRobot moreRobot;
   late ReturnsByItemsRobot returnsByItemsRobot;
-  late NewReturnRobot newReturnRobot;
+  late NewReturnStep1Robot newReturnRobot;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -25,7 +25,7 @@ void main() {
     commonRobot = CommonRobot(tester);
     moreRobot = MoreRobot(tester);
     returnsByItemsRobot = ReturnsByItemsRobot(tester);
-    newReturnRobot = NewReturnRobot(tester);
+    newReturnRobot = NewReturnStep1Robot(tester);
   }
 
   Future<void> goToNewRequest() async {
@@ -55,14 +55,8 @@ void main() {
     await runAppForTesting(tester);
     await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
     await commonRobot.changeDeliveryAddress(shipToCode);
-
     await goToNewRequest();
-    newReturnRobot.verifySearchItemVisible();
-    newReturnRobot.verifyNextButtonVisible();
-    newReturnRobot.verifyFilterIconVisible();
-    newReturnRobot.verifyListAbleToReturnVisible();
-    newReturnRobot.verifyReturnForVisible(shipToAddress);
-    newReturnRobot.verifyNextButtonVisible();
+    newReturnRobot.verifyNewReturnStep1Display(shipToAddress);
   });
 
   testWidgets(

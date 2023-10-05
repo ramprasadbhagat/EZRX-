@@ -80,6 +80,7 @@ class ConfirmBottomSheet extends StatelessWidget {
                 ),
                 Expanded(
                   child: ElevatedButton(
+                    key: WidgetKeys.confirmBottomSheetConfirmButton,
                     onPressed: () {
                       Navigator.of(context).pop(true);
                     },
@@ -97,7 +98,6 @@ class ConfirmBottomSheet extends StatelessWidget {
                                 ),
                               ),
                             ),
-                    key: WidgetKeys.confirmBottomSheetConfirmButton,
                     child: Text(
                       confirmButtonText.tr(),
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(

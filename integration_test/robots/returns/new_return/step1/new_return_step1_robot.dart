@@ -6,10 +6,10 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common/extension.dart';
 
-class NewReturnRobot {
+class NewReturnStep1Robot {
   final WidgetTester tester;
 
-  NewReturnRobot(this.tester);
+  NewReturnStep1Robot(this.tester);
 
   final searchItem = find.byKey(WidgetKeys.newRequestSearchItem);
   final filterIcon = find.byKey(WidgetKeys.newRequestFilterIcon);
@@ -67,6 +67,15 @@ class NewReturnRobot {
       findsOneWidget,
     );
     expect(tester.widget<Text>(returnFor).data, contains(selectedAddress));
+  }
+
+  void verifyNewReturnStep1Display(String shipToAddress) {
+    verifySearchItemVisible();
+    verifyNextButtonVisible();
+    verifyFilterIconVisible();
+    verifyListAbleToReturnVisible();
+    verifyReturnForVisible(shipToAddress);
+    verifyNextButtonVisible();
   }
 
   Future<void> tapReturnFor() async {

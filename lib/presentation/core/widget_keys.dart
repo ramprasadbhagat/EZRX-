@@ -270,6 +270,24 @@ class WidgetKeys {
 
   // step2
   static const Key newRequestStep2Title = Key('newRequestStep2Title');
+  static const Key newRequestStep2ItemImage = Key('newRequestStep2ItemImage');
+  static const Key newRequestStep2QuantityAndPrice =
+      Key('newRequestStepsQuantityAndPrice');
+  static const Key newRequestStep2DetailsSection =
+      Key('newRequestStep2DetailsSection');
+  static const Key newRequestStep2RemoveIcon = Key('newRequestStep2RemoveIcon');
+  static const Key newRequestStep2ReasonDropdown =
+      Key('newRequestStep2ReasonDropdown');
+  static Key newRequestStepsDropdownItem(option) =>
+      Key('newRequestStep2ReasonDropdownItem_$option');
+  static Key materialQuantityField(String uuid) =>
+      Key('materialQuantityField_$uuid');
+  static Key bonusQuantityField(String uuid) => Key('bonusQuantityField$uuid');
+  static const Key newRequestStep3MaterialDetail =
+      Key('newRequestStep3MaterialDetail');
+  static const Key materialReturnDetailsSection =
+      Key('materialReturnDetailsSection');
+  static const Key bonusItemSection = Key('bonusItemSection');
   //============================================================
   //  Returns by items
   //============================================================
@@ -741,8 +759,7 @@ class WidgetKeys {
   static const Key paymentHomeSoa = Key('paymentHomeSoa');
   static const Key paymentAdviceCreatedPageBack =
       Key('paymentAdviceCreatedPageBack');
-  static const Key creditDetailsPageListView =
-      Key('creditDetailsPageListView');    
+  static const Key creditDetailsPageListView = Key('creditDetailsPageListView');
   //===========================================================
   //  Intro Page
   //============================================================

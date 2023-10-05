@@ -30,6 +30,7 @@ class _MaterialReturnDetailsSection extends StatelessWidget {
                 ReturnQuantityField(
                   balanceQuantity: item.balanceQuantity,
                   uuid: detail.uuid,
+                  key: WidgetKeys.materialQuantityField(detail.uuid),
                 ),
                 const SizedBox(
                   height: 8,

@@ -46,6 +46,9 @@ class ReasonDropdown extends StatelessWidget {
                 (val) => DropdownMenuItem(
                   value: val.usageCode,
                   alignment: AlignmentDirectional.centerStart,
+                  key: WidgetKeys.newRequestStepsDropdownItem(
+                    val.usageDescription,
+                  ),
                   child: Text(val.usageDescription),
                 ),
               )
@@ -53,6 +56,7 @@ class ReasonDropdown extends StatelessWidget {
           validator: (value) => (value ?? '').isEmpty
               ? 'Return reason is required field.'.tr()
               : null,
+          key: WidgetKeys.newRequestStep2ReasonDropdown,
         );
       },
     );

@@ -37,6 +37,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
                 expanded: true,
                 children: [
                   MaterialDetailsSection(
+                    key: WidgetKeys.newRequestStep3MaterialDetail,
                     data: item,
                   ),
                   _MaterialReturnDetailsSection(
