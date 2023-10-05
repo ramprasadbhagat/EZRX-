@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -32,6 +33,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockHTTPService extends Mock implements HttpService {}
@@ -104,6 +106,8 @@ void main() {
       status: StatusType('Picking in progress'),
       createdDate: DateTimeStringValue(fakeCreatedDate),
       orderStatusTracker: fakeOrderStatusTracker,
+      expiryDate: DateTimeStringValue('2023-10-04'),
+      batch: StringValue('fake-batch-number'),
     );
   });
   group('Order History Details By Item Page', () {
@@ -376,6 +380,76 @@ void main() {
       await tester.pump();
       final expectedDelivery = find.textContaining('Order Created');
       expect(expectedDelivery, findsWidgets);
+    });
+
+    testWidgets(
+        ' => Hide Batch and EXP info when salesOrgConfig BatchNumDisplay is false',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfigDisabledBatchNumDisplay,
+        ),
+      );
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
+      final expectedStates = [
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          viewByItemDetails: OrderHistory.empty().copyWith(
+            orderHistoryItems: [
+              fakeOrderHistoryItem,
+            ],
+          ),
+        ),
+      ];
+      whenListen(
+        mockViewByItemDetailsBloc,
+        Stream.fromIterable(expectedStates),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final expectedDelivery = find.textContaining(
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+      );
+      expect(expectedDelivery, findsNothing);
+    });
+
+    testWidgets(
+        ' => Display Batch and EXP info when salesOrgConfig BatchNumDisplay is true',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: salesOrgConfigEnabledBatchNumDisplay,
+        ),
+      );
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: true,
+        ),
+      );
+      final expectedStates = [
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          viewByItemDetails: OrderHistory.empty().copyWith(
+            orderHistoryItems: [
+              fakeOrderHistoryItem,
+            ],
+          ),
+        ),
+      ];
+      whenListen(
+        mockViewByItemDetailsBloc,
+        Stream.fromIterable(expectedStates),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final expectedDelivery = find.textContaining(
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+      );
+      expect(expectedDelivery, findsOneWidget);
     });
   });
 }

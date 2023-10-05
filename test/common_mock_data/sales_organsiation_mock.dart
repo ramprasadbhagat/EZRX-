@@ -18,3 +18,13 @@ SalesOrganisationConfigs salesOrgConfigDisabledMaterialWithoutPrice =
     SalesOrganisationConfigs.empty().copyWith(
   materialWithoutPrice: false,
 );
+
+SalesOrganisationConfigs salesOrgConfigEnabledBatchNumDisplay =
+    SalesOrganisationConfigs.empty().copyWith(
+  batchNumDisplay: true,
+);
+
+SalesOrganisationConfigs salesOrgConfigDisabledBatchNumDisplay =
+    SalesOrganisationConfigs.empty().copyWith(
+  batchNumDisplay: false,
+);
