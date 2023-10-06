@@ -388,10 +388,10 @@ class _ResetButton extends StatelessWidget {
         key: WidgetKeys.filterResetButton,
         onPressed: () {
           if (context.read<AllCreditsFilterBloc>().state.filter.excludeSearch !=
-              AllCreditsFilter.dateRangeEmpty()) {
+              AllCreditsFilter.empty()) {
             context.read<AllCreditsBloc>().add(
                   AllCreditsEvent.fetch(
-                    appliedFilter: AllCreditsFilter.dateRangeEmpty().copyWith(
+                    appliedFilter: AllCreditsFilter.empty().copyWith(
                       searchKey: context
                           .read<AllCreditsBloc>()
                           .state

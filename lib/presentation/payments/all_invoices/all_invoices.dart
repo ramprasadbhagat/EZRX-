@@ -84,21 +84,13 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
                           controller: _controller,
                           onRefresh: () => context.read<AllInvoicesBloc>().add(
                                 AllInvoicesEvent.fetch(
-                                  appliedFilter:
-                                      AllInvoicesFilter.empty().copyWith(
-                                    searchKey: context
-                                        .read<AllInvoicesBloc>()
-                                        .state
-                                        .appliedFilter
-                                        .searchKey,
-                                  ),
+                                  appliedFilter: AllInvoicesFilter.empty(),
                                 ),
                               ),
-                          onLoadingMore: () {
-                            context.read<AllInvoicesBloc>().add(
-                                  const AllInvoicesEvent.loadMore(),
-                                );
-                          },
+                          onLoadingMore: () =>
+                              context.read<AllInvoicesBloc>().add(
+                                    const AllInvoicesEvent.loadMore(),
+                                  ),
                           isLoading: state.isLoading,
                           itemBuilder: (context, index, item) => _InvoiceGroup(
                             data: item,

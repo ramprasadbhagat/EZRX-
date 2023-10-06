@@ -198,10 +198,10 @@ void main() {
       when(() => allInvoicesFilterBlocMock.state).thenReturn(
         AllInvoicesFilterState.initial().copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
-            documentDateFrom: DateTimeStringValue(
+            dueDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
-            documentDateTo: DateTimeStringValue(
+            dueDateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
             ),
           ),
@@ -211,10 +211,10 @@ void main() {
       final expectedState = [
         AllInvoicesFilterState.initial().copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
-            documentDateFrom: DateTimeStringValue(
+            dueDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
-            documentDateTo: DateTimeStringValue(
+            dueDateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
             ),
           ),
@@ -355,7 +355,7 @@ void main() {
       verify(
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
-            appliedFilter: AllInvoicesFilter.dateRangeEmpty(),
+            appliedFilter: AllInvoicesFilter.empty(),
           ),
         ),
       ).called(1);

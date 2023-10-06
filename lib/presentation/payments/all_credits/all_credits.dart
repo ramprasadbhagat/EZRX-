@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,18 +84,15 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
                             title: 'No credit found',
                           ),
                           controller: _controller,
-                          onRefresh: () {
-                            context.read<AllCreditsBloc>().add(
-                                  AllCreditsEvent.fetch(
-                                    appliedFilter: state.appliedFilter,
+                          onRefresh: () => context.read<AllCreditsBloc>().add(
+                                AllCreditsEvent.fetch(
+                                  appliedFilter: AllCreditsFilter.empty(),
+                                ),
+                              ),
+                          onLoadingMore: () =>
+                              context.read<AllCreditsBloc>().add(
+                                    const AllCreditsEvent.loadMore(),
                                   ),
-                                );
-                          },
-                          onLoadingMore: () {
-                            context.read<AllCreditsBloc>().add(
-                                  const AllCreditsEvent.loadMore(),
-                                );
-                          },
                           isLoading: state.isLoading,
                           itemBuilder: (context, index, item) => _CreditGroup(
                             data: item,
