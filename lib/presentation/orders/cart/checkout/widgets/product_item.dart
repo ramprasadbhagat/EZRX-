@@ -6,8 +6,8 @@ import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/order_tag.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -144,7 +144,7 @@ class _ProductDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              _OrderTag(cartItem: cartItem),
+              OrderTag(cartItem: cartItem),
             ],
           ),
           Padding(
@@ -180,42 +180,6 @@ class _ProductDetails extends StatelessWidget {
             ),
         ],
       ),
-    );
-  }
-}
-
-class _OrderTag extends StatelessWidget {
-  const _OrderTag({
-    Key? key,
-    required this.cartItem,
-  }) : super(key: key);
-  final PriceAggregate cartItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
-      buildWhen: (previous, current) =>
-          previous.isUpdatingStock != current.isUpdatingStock &&
-          !current.isUpdatingStock,
-      builder: (context, state) {
-        final finalCartItem = state.cartProducts.firstWhere(
-          (element) => element.getMaterialNumber == cartItem.getMaterialNumber,
-          orElse: () => PriceAggregate.empty(),
-        );
-        final statusType = finalCartItem.productTag(
-          context.read<EligibilityBloc>().state.validateOutOfStockValue,
-        );
-
-        return finalCartItem.inStock ||
-                finalCartItem.stockInfoList.isEmpty ||
-                state.isFetching ||
-                state.isFetchingCartProductDetail
-            ? const SizedBox.shrink()
-            : StatusLabel(
-                status: statusType,
-                valueColor: statusType.displayStatusTextColor,
-              );
-      },
     );
   }
 }

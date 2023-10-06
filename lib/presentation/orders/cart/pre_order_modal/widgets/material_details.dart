@@ -23,9 +23,14 @@ class _MaterialDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              StatusLabel(
-                status: StatusType('OOS-Preorder'),
-              ),
+              if (!context
+                  .read<EligibilityBloc>()
+                  .state
+                  .salesOrgConfigs
+                  .hideStockDisplay)
+                StatusLabel(
+                  status: StatusType('OOS-Preorder'),
+                ),
             ],
           ),
           Padding(

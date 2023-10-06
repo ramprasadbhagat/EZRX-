@@ -172,7 +172,7 @@ class _BodyContent extends StatelessWidget {
         final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
         final validateOutOfStockValue =
             context.read<EligibilityBloc>().state.validateOutOfStockValue;
-        final level = !state.isFetching
+        final level = !config.hideStockDisplay && !state.isFetching
             ? !state.productDetailAggregate.stockInfo.inStock.isMaterialInStock
                 ? config.addOosMaterials.productTag(validateOutOfStockValue)
                 : ''

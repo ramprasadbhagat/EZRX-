@@ -33,7 +33,8 @@ class _PreOrderScrollSection extends StatelessWidget {
                                 .getValue() !=
                             preOrderItems[index - 1]
                                 .materialInfo
-                                .principalData.principalName
+                                .principalData
+                                .principalName
                                 .getValue()
                     ? _ManufacturerName(
                         cartProduct: item.materialInfo,

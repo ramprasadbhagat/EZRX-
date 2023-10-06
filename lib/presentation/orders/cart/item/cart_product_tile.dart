@@ -11,10 +11,10 @@ import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/order_tag.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -261,7 +261,7 @@ class _MaterialDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              _OrderTag(cartItem: cartItem),
+              OrderTag(cartItem: cartItem),
             ],
           ),
           Padding(
@@ -573,43 +573,6 @@ class _OfferTag extends StatelessWidget {
         Icons.local_offer_outlined,
         color: ZPColors.white,
       ),
-    );
-  }
-}
-
-class _OrderTag extends StatelessWidget {
-  const _OrderTag({
-    Key? key,
-    required this.cartItem,
-  }) : super(key: key);
-  final PriceAggregate cartItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
-      buildWhen: (previous, current) =>
-          previous.isUpdatingStock != current.isUpdatingStock &&
-          !current.isUpdatingStock,
-      builder: (context, state) {
-        final finalCartItem = state.cartProducts.firstWhere(
-          (element) => element.getMaterialNumber == cartItem.getMaterialNumber,
-          orElse: () => PriceAggregate.empty(),
-        );
-
-        final statusType = finalCartItem.productTag(
-          context.read<EligibilityBloc>().state.validateOutOfStockValue,
-        );
-
-        return finalCartItem.inStock ||
-                state.isUpdatingStock ||
-                state.isFetching ||
-                state.isFetchingCartProductDetail
-            ? const SizedBox.shrink()
-            : StatusLabel(
-                status: statusType,
-                valueColor: statusType.displayStatusTextColor,
-              );
-      },
     );
   }
 }
