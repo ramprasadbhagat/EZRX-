@@ -8,7 +8,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/all_credits/filter_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -194,6 +193,7 @@ void main() {
       ).called(1);
     });
     testWidgets('=> _AmountValueToFilter Test', (tester) async {
+      const amountTo = '123456';
       when(() => allCreditsFilterBlocMock.state).thenReturn(
         AllCreditsFilterState.initial().copyWith(
           showErrorMessages: true,
@@ -210,18 +210,22 @@ void main() {
       expect(amountValueTo, findsOneWidget);
       await tester.tap(amountValueTo);
       await tester.pumpAndSettle();
-      await tester.enterText(amountValueTo, '123456');
+      await tester.enterText(
+        amountValueTo,
+        amountTo,
+      );
       await tester.pump();
       verify(
         () => allCreditsFilterBlocMock.add(
-          AllCreditsFilterEvent.amountValueToChanged(
-            StringUtils.formatter.format(double.parse('123456')),
+          const AllCreditsFilterEvent.amountValueToChanged(
+            amountTo,
           ),
         ),
       ).called(1);
     });
 
     testWidgets('=> _AmountValueFromFilter Test', (tester) async {
+      const amountFrom = '123456';
       when(() => allCreditsFilterBlocMock.state).thenReturn(
         AllCreditsFilterState.initial().copyWith(
           showErrorMessages: true,
@@ -238,18 +242,27 @@ void main() {
       expect(amountValueFrom, findsOneWidget);
       await tester.tap(amountValueFrom);
       await tester.pumpAndSettle();
-      await tester.enterText(amountValueFrom, '12');
+      await tester.enterText(amountValueFrom, amountFrom);
       await tester.pump();
       verify(
         () => allCreditsFilterBlocMock.add(
-          AllCreditsFilterEvent.amountValueFromChanged(
-            StringUtils.formatter.format(double.parse('12')),
+          const AllCreditsFilterEvent.amountValueFromChanged(
+            amountFrom,
           ),
         ),
       ).called(1);
     });
 
     testWidgets('=> _ApplyButton Button Click Test', (tester) async {
+      final appliedFilter = AllCreditsFilter.empty().copyWith(
+        amountValueFrom: RangeValue('100'),
+        amountValueTo: RangeValue('200'),
+      );
+      when(() => allCreditsFilterBlocMock.state).thenReturn(
+        AllCreditsFilterState.initial().copyWith(
+          filter: appliedFilter,
+        ),
+      );
       await getWidget(tester);
       await tester.pumpAndSettle();
 
@@ -262,6 +275,14 @@ void main() {
       verify(
         () => allCreditsFilterBlocMock.add(
           const AllCreditsFilterEvent.validateFilters(),
+        ),
+      ).called(1);
+
+      verify(
+        () => allCreditsBlocMock.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: appliedFilter,
+          ),
         ),
       ).called(1);
     });

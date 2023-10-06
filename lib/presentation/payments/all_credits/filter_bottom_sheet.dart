@@ -4,7 +4,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
@@ -222,9 +221,7 @@ class _AmountValueToFilter extends StatelessWidget {
             initValue: state.filter.amountValueTo.apiParameterValue,
             onChanged: (value) => context.read<AllCreditsFilterBloc>().add(
                   AllCreditsFilterEvent.amountValueToChanged(
-                    value.isNotEmpty
-                        ? StringUtils.formatter.format(double.parse(value))
-                        : '',
+                    value,
                   ),
                 ),
             decoration: InputDecoration(
@@ -257,11 +254,7 @@ class _AmountValueFromFilter extends StatelessWidget {
             fieldKey: WidgetKeys.amountValueFrom,
             initValue: state.filter.amountValueFrom.apiParameterValue,
             onChanged: (value) => context.read<AllCreditsFilterBloc>().add(
-                  AllCreditsFilterEvent.amountValueFromChanged(
-                    value.isNotEmpty
-                        ? StringUtils.formatter.format(double.parse(value))
-                        : '',
-                  ),
+                  AllCreditsFilterEvent.amountValueFromChanged(value),
                 ),
             decoration: InputDecoration(
               hintText: context.tr('Amount from'),

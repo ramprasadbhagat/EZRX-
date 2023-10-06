@@ -72,16 +72,16 @@ class AllCreditsFilterDto with _$AllCreditsFilterDto {
             'value': documentDateTo,
             'type': 'le',
           },
-        if (amountValueFrom.isNotEmpty)
-          {
-            'field': 'amountInTransactionCurrency',
-            'value': amountValueFrom,
-            'type': 'ge',
-          },
         if (amountValueTo.isNotEmpty)
           {
             'field': 'amountInTransactionCurrency',
-            'value': amountValueTo,
+            'value': '-$amountValueTo',
+            'type': 'ge',
+          },
+        if (amountValueFrom.isNotEmpty)
+          {
+            'field': 'amountInTransactionCurrency',
+            'value': '-$amountValueFrom',
             'type': 'le',
           },
         if (filterStatuses.isNotEmpty)
