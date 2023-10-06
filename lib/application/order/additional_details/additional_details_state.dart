@@ -8,6 +8,7 @@ class AdditionalDetailsState with _$AdditionalDetailsState {
     required DeliveryInfoData deliveryInfoData,
     required String orderId,
     required bool isValidated,
+    required bool isPoAttachmentValidated,
     required bool isLoading,
     required bool showErrorMessages,
     DeliveryInfoLabel? focusTo,
@@ -17,6 +18,7 @@ class AdditionalDetailsState with _$AdditionalDetailsState {
         deliveryInfoData: DeliveryInfoData.empty(),
         orderId: '',
         isValidated: false,
+        isPoAttachmentValidated: true,
         isLoading: false,
         showErrorMessages: false,
       );

@@ -101,6 +101,7 @@ void main() {
     displaySubtotalTaxBreakdown: false,
     disableOverrideFieldCustomer: false,
     disableOverrideFieldSR: false,
+    enablePOAttachmentRequired: false,
   );
 
   final fakeCustomerCode = CustomerCodeInfo.empty().copyWith(

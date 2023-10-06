@@ -37,8 +37,10 @@ class PoAttachmentUpload extends StatelessWidget {
           previous.fileUrl != current.fileUrl,
       builder: (context, state) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const _PoUploadButton(),
+            const _UploadErrorMessage(),
             _UploadedFileList(
               data: state.fileUrl,
             ),
@@ -73,6 +75,32 @@ class _PoUploadButton extends StatelessWidget {
         );
       },
       child: const Text('Upload attachment').tr(),
+    );
+  }
+}
+
+class _UploadErrorMessage extends StatelessWidget {
+  const _UploadErrorMessage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<AdditionalDetailsBloc, AdditionalDetailsState, bool>(
+      selector: (state) => state.isPoAttachmentValidated,
+      builder: (context, booleanState) {
+        return booleanState
+            ? const SizedBox.shrink()
+            : Padding(
+                padding: const EdgeInsets.only(top: 6.0, left: 16.0),
+                child: Text(
+                  context.tr('PO attachment is required'),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.red,
+                      ),
+                ),
+              );
+      },
     );
   }
 }

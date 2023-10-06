@@ -65,6 +65,8 @@ mixin _$SalesOrganisationConfigsDto {
   bool get enableMobileNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
   bool get enableFutureDeliveryDay => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enablePOAttachmentRequired', defaultValue: false)
+  bool get enablePOAttachmentRequired => throw _privateConstructorUsedError;
   @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
   bool get enablePaymentTerms => throw _privateConstructorUsedError;
   @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
@@ -194,6 +196,8 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       bool enableMobileNumber,
       @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
       bool enableFutureDeliveryDay,
+      @JsonKey(name: 'enablePOAttachmentRequired', defaultValue: false)
+      bool enablePOAttachmentRequired,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
       bool enablePaymentTerms,
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
@@ -298,6 +302,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? enableCollectiveNumber = null,
     Object? enableMobileNumber = null,
     Object? enableFutureDeliveryDay = null,
+    Object? enablePOAttachmentRequired = null,
     Object? enablePaymentTerms = null,
     Object? futureDeliveryDay = null,
     Object? enableGMC = null,
@@ -422,6 +427,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
       enableFutureDeliveryDay: null == enableFutureDeliveryDay
           ? _value.enableFutureDeliveryDay
           : enableFutureDeliveryDay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enablePOAttachmentRequired: null == enablePOAttachmentRequired
+          ? _value.enablePOAttachmentRequired
+          : enablePOAttachmentRequired // ignore: cast_nullable_to_non_nullable
               as bool,
       enablePaymentTerms: null == enablePaymentTerms
           ? _value.enablePaymentTerms
@@ -628,6 +637,8 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       bool enableMobileNumber,
       @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
       bool enableFutureDeliveryDay,
+      @JsonKey(name: 'enablePOAttachmentRequired', defaultValue: false)
+      bool enablePOAttachmentRequired,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
       bool enablePaymentTerms,
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
@@ -731,6 +742,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableCollectiveNumber = null,
     Object? enableMobileNumber = null,
     Object? enableFutureDeliveryDay = null,
+    Object? enablePOAttachmentRequired = null,
     Object? enablePaymentTerms = null,
     Object? futureDeliveryDay = null,
     Object? enableGMC = null,
@@ -855,6 +867,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
       enableFutureDeliveryDay: null == enableFutureDeliveryDay
           ? _value.enableFutureDeliveryDay
           : enableFutureDeliveryDay // ignore: cast_nullable_to_non_nullable
+              as bool,
+      enablePOAttachmentRequired: null == enablePOAttachmentRequired
+          ? _value.enablePOAttachmentRequired
+          : enablePOAttachmentRequired // ignore: cast_nullable_to_non_nullable
               as bool,
       enablePaymentTerms: null == enablePaymentTerms
           ? _value.enablePaymentTerms
@@ -1060,6 +1076,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       required this.enableMobileNumber,
       @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
       required this.enableFutureDeliveryDay,
+      @JsonKey(name: 'enablePOAttachmentRequired', defaultValue: false)
+      required this.enablePOAttachmentRequired,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
       required this.enablePaymentTerms,
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
@@ -1210,6 +1228,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
   final bool enableFutureDeliveryDay;
   @override
+  @JsonKey(name: 'enablePOAttachmentRequired', defaultValue: false)
+  final bool enablePOAttachmentRequired;
+  @override
   @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
   final bool enablePaymentTerms;
   @override
@@ -1329,7 +1350,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, languageFilter: $languageFilter, languageValue: $languageValue, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment)';
   }
 
   @override
@@ -1379,6 +1400,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
                 other.enableMobileNumber == enableMobileNumber) &&
             (identical(other.enableFutureDeliveryDay, enableFutureDeliveryDay) ||
                 other.enableFutureDeliveryDay == enableFutureDeliveryDay) &&
+            (identical(other.enablePOAttachmentRequired, enablePOAttachmentRequired) ||
+                other.enablePOAttachmentRequired ==
+                    enablePOAttachmentRequired) &&
             (identical(other.enablePaymentTerms, enablePaymentTerms) ||
                 other.enablePaymentTerms == enablePaymentTerms) &&
             (identical(other.futureDeliveryDay, futureDeliveryDay) ||
@@ -1391,9 +1415,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
                 other.enableDefaultMD == enableDefaultMD) &&
             (identical(other.priceOverride, priceOverride) ||
                 other.priceOverride == priceOverride) &&
-            (identical(other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) ||
-                other.disablePaymentTermsDisplay ==
-                    disablePaymentTermsDisplay) &&
+            (identical(other.disablePaymentTermsDisplay, disablePaymentTermsDisplay) || other.disablePaymentTermsDisplay == disablePaymentTermsDisplay) &&
             (identical(other.disableDeliveryDate, disableDeliveryDate) || other.disableDeliveryDate == disableDeliveryDate) &&
             (identical(other.enableBillTo, enableBillTo) || other.enableBillTo == enableBillTo) &&
             (identical(other.showPOAttachment, showPOAttachment) || other.showPOAttachment == showPOAttachment) &&
@@ -1453,6 +1475,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         enableCollectiveNumber,
         enableMobileNumber,
         enableFutureDeliveryDay,
+        enablePOAttachmentRequired,
         enablePaymentTerms,
         futureDeliveryDay,
         enableGMC,
@@ -1553,6 +1576,8 @@ abstract class _SalesOrganisationConfigsDto
       required final bool enableMobileNumber,
       @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
       required final bool enableFutureDeliveryDay,
+      @JsonKey(name: 'enablePOAttachmentRequired', defaultValue: false)
+      required final bool enablePOAttachmentRequired,
       @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
       required final bool enablePaymentTerms,
       @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
@@ -1699,6 +1724,9 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
   bool get enableFutureDeliveryDay;
+  @override
+  @JsonKey(name: 'enablePOAttachmentRequired', defaultValue: false)
+  bool get enablePOAttachmentRequired;
   @override
   @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
   bool get enablePaymentTerms;

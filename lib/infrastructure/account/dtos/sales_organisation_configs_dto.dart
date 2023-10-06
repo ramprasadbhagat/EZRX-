@@ -53,6 +53,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
         required bool enableMobileNumber,
     @JsonKey(name: 'enableFutureDeliveryDay', defaultValue: false)
         required bool enableFutureDeliveryDay,
+    @JsonKey(name: 'enablePOAttachmentRequired', defaultValue: false)
+        required bool enablePOAttachmentRequired,
     @JsonKey(name: 'enablePaymentTerms', defaultValue: false)
         required bool enablePaymentTerms,
     @JsonKey(name: 'futureDeliveryDay', defaultValue: '')
@@ -153,6 +155,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableTaxClassification: configs.enableTaxClassification,
       enableVat: configs.enableVat,
       enableTaxAtTotalLevelOnly: configs.enableTaxAtTotalLevelOnly,
+      enablePOAttachmentRequired: configs.enablePOAttachmentRequired,
       vatValue: configs.vatValue,
       materialWithoutPrice: configs.materialWithoutPrice,
       enableSpecialInstructions: configs.enableSpecialInstructions,
@@ -223,6 +226,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       materialWithoutPrice: materialWithoutPrice,
       enableSpecialInstructions: enableSpecialInstructions,
       enableReferenceNote: enableReferenceNote,
+      enablePOAttachmentRequired: enablePOAttachmentRequired,
       enableCollectiveNumber: enableCollectiveNumber,
       enableMobileNumber: enableMobileNumber,
       enableFutureDeliveryDay: enableFutureDeliveryDay,

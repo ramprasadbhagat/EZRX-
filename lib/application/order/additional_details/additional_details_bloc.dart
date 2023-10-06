@@ -161,15 +161,22 @@ class AdditionalDetailsBloc
     final isPaymentTermValid = config.enablePaymentTerms
         ? state.deliveryInfoData.paymentTerm.isValid()
         : true;
+    final isPoUploadAttachment =
+        config.enablePOAttachmentRequired && config.showPOAttachment
+            ? state.deliveryInfoData.poDocuments.isNotEmpty
+            : true;
+
     final isFormValid = isCustomerPoReferenceValid &&
         isReferenceNoteValid &&
         isContactPersonValid &&
         isContactNumberValid &&
+        isPoUploadAttachment &&
         isPaymentTermValid;
 
     emit(
       state.copyWith(
         isValidated: isFormValid,
+        isPoAttachmentValidated: isPoUploadAttachment,
         showErrorMessages: !isFormValid,
         focusTo: !isCustomerPoReferenceValid
             ? DeliveryInfoLabel.poReference

@@ -85,6 +85,7 @@ class SalesOrgQueryMutation {
     disableReturnsAccessSR
     hideStockDisplay
     showPOAttachment
+    enablePOAttachmentRequired
     created_at
     updated_at
     enableLoyaltyScheme

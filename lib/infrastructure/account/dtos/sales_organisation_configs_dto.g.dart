@@ -34,6 +34,8 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       enableMobileNumber: json['enableMobileNumber'] as bool? ?? false,
       enableFutureDeliveryDay:
           json['enableFutureDeliveryDay'] as bool? ?? false,
+      enablePOAttachmentRequired:
+          json['enablePOAttachmentRequired'] as bool? ?? false,
       enablePaymentTerms: json['enablePaymentTerms'] as bool? ?? false,
       futureDeliveryDay: json['futureDeliveryDay'] as String? ?? '',
       enableGMC: json['enableGMC'] as bool? ?? false,
@@ -105,6 +107,7 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'enableCollectiveNumber': instance.enableCollectiveNumber,
       'enableMobileNumber': instance.enableMobileNumber,
       'enableFutureDeliveryDay': instance.enableFutureDeliveryDay,
+      'enablePOAttachmentRequired': instance.enablePOAttachmentRequired,
       'enablePaymentTerms': instance.enablePaymentTerms,
       'futureDeliveryDay': instance.futureDeliveryDay,
       'enableGMC': instance.enableGMC,

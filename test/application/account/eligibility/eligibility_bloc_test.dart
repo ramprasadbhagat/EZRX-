@@ -117,6 +117,7 @@ void main() {
     displaySubtotalTaxBreakdown: false,
     disableOverrideFieldCustomer: false,
     disableOverrideFieldSR: false,
+    enablePOAttachmentRequired: false,
   );
   final chatBotRepositoryMock = ChatBotRepositoryMock();
   final mixpanelRepositoryMock = MixpanelRepoMock();

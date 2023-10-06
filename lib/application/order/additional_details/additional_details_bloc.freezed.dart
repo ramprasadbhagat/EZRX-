@@ -2448,6 +2448,7 @@ mixin _$AdditionalDetailsState {
   DeliveryInfoData get deliveryInfoData => throw _privateConstructorUsedError;
   String get orderId => throw _privateConstructorUsedError;
   bool get isValidated => throw _privateConstructorUsedError;
+  bool get isPoAttachmentValidated => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   DeliveryInfoLabel? get focusTo => throw _privateConstructorUsedError;
@@ -2467,6 +2468,7 @@ abstract class $AdditionalDetailsStateCopyWith<$Res> {
       {DeliveryInfoData deliveryInfoData,
       String orderId,
       bool isValidated,
+      bool isPoAttachmentValidated,
       bool isLoading,
       bool showErrorMessages,
       DeliveryInfoLabel? focusTo});
@@ -2491,6 +2493,7 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
     Object? deliveryInfoData = null,
     Object? orderId = null,
     Object? isValidated = null,
+    Object? isPoAttachmentValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
     Object? focusTo = freezed,
@@ -2507,6 +2510,10 @@ class _$AdditionalDetailsStateCopyWithImpl<$Res,
       isValidated: null == isValidated
           ? _value.isValidated
           : isValidated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPoAttachmentValidated: null == isPoAttachmentValidated
+          ? _value.isPoAttachmentValidated
+          : isPoAttachmentValidated // ignore: cast_nullable_to_non_nullable
               as bool,
       isLoading: null == isLoading
           ? _value.isLoading
@@ -2544,6 +2551,7 @@ abstract class _$$_AdditionalDetailsStateCopyWith<$Res>
       {DeliveryInfoData deliveryInfoData,
       String orderId,
       bool isValidated,
+      bool isPoAttachmentValidated,
       bool isLoading,
       bool showErrorMessages,
       DeliveryInfoLabel? focusTo});
@@ -2567,6 +2575,7 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
     Object? deliveryInfoData = null,
     Object? orderId = null,
     Object? isValidated = null,
+    Object? isPoAttachmentValidated = null,
     Object? isLoading = null,
     Object? showErrorMessages = null,
     Object? focusTo = freezed,
@@ -2583,6 +2592,10 @@ class __$$_AdditionalDetailsStateCopyWithImpl<$Res>
       isValidated: null == isValidated
           ? _value.isValidated
           : isValidated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPoAttachmentValidated: null == isPoAttachmentValidated
+          ? _value.isPoAttachmentValidated
+          : isPoAttachmentValidated // ignore: cast_nullable_to_non_nullable
               as bool,
       isLoading: null == isLoading
           ? _value.isLoading
@@ -2607,6 +2620,7 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
       {required this.deliveryInfoData,
       required this.orderId,
       required this.isValidated,
+      required this.isPoAttachmentValidated,
       required this.isLoading,
       required this.showErrorMessages,
       this.focusTo})
@@ -2619,6 +2633,8 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
   @override
   final bool isValidated;
   @override
+  final bool isPoAttachmentValidated;
+  @override
   final bool isLoading;
   @override
   final bool showErrorMessages;
@@ -2627,7 +2643,7 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
 
   @override
   String toString() {
-    return 'AdditionalDetailsState(deliveryInfoData: $deliveryInfoData, orderId: $orderId, isValidated: $isValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages, focusTo: $focusTo)';
+    return 'AdditionalDetailsState(deliveryInfoData: $deliveryInfoData, orderId: $orderId, isValidated: $isValidated, isPoAttachmentValidated: $isPoAttachmentValidated, isLoading: $isLoading, showErrorMessages: $showErrorMessages, focusTo: $focusTo)';
   }
 
   @override
@@ -2640,6 +2656,9 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
             (identical(other.isValidated, isValidated) ||
                 other.isValidated == isValidated) &&
+            (identical(
+                    other.isPoAttachmentValidated, isPoAttachmentValidated) ||
+                other.isPoAttachmentValidated == isPoAttachmentValidated) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
@@ -2648,8 +2667,15 @@ class _$_AdditionalDetailsState extends _AdditionalDetailsState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, deliveryInfoData, orderId,
-      isValidated, isLoading, showErrorMessages, focusTo);
+  int get hashCode => Object.hash(
+      runtimeType,
+      deliveryInfoData,
+      orderId,
+      isValidated,
+      isPoAttachmentValidated,
+      isLoading,
+      showErrorMessages,
+      focusTo);
 
   @JsonKey(ignore: true)
   @override
@@ -2664,6 +2690,7 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
       {required final DeliveryInfoData deliveryInfoData,
       required final String orderId,
       required final bool isValidated,
+      required final bool isPoAttachmentValidated,
       required final bool isLoading,
       required final bool showErrorMessages,
       final DeliveryInfoLabel? focusTo}) = _$_AdditionalDetailsState;
@@ -2675,6 +2702,8 @@ abstract class _AdditionalDetailsState extends AdditionalDetailsState {
   String get orderId;
   @override
   bool get isValidated;
+  @override
+  bool get isPoAttachmentValidated;
   @override
   bool get isLoading;
   @override

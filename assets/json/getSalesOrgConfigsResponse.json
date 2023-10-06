@@ -44,8 +44,7 @@
                "value": [
                   {
                      "date": 2023040722,
-                     "principal": "0000000000",
-                     "__typename": "Principal"
+                     "principal": "0000000000"
                   }
                ]
             },
@@ -79,7 +78,8 @@
             "disableReturnsAccessSR": false,
             "disableReturnsAccess": false,
             "disableOverrideFieldCustomer": false,
-            "disableOverrideFieldSR": false
+            "disableOverrideFieldSR": false,
+            "enablePOAttachmentRequired": false
          }
       ]
    }
