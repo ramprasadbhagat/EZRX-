@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -32,6 +33,7 @@ class AnnouncementSection extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: SectionTitle(
+                key: WidgetKeys.announcementIcon,
                 title: 'Announcements',
                 onTapIconButton: () =>
                     context.router.pushNamed('announcements_page'),

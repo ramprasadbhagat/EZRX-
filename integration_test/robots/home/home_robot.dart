@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner.dart';
+import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +15,7 @@ class HomeRobot {
   final accountTabbar = find.byKey(const Key('accountTabbar'));
   final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
   final shipToCodeSelector = find.byKey(const Key('shipToCodeSelect'));
-  final homeTabbar = find.byKey(const Key('homeTab'));
+  final homeTabbar = find.text('Home'.tr());
   final favoriteTabbar = find.byKey(const Key('favoritesTab'));
   final historyTabbar = find.byKey(const Key('historyTab'));
   final orderTemplate = find.text('Order Template');
@@ -23,11 +25,35 @@ class HomeRobot {
       find.byKey(const Key('homeTabAnnouncementWidget'));
   final moreTab = find.text('More'.tr());
   final logout = find.text('Log out');
+  final searchBar = find.byKey(WidgetKeys.homeProductSearchBar);
+  final customerSelector = find.byKey(WidgetKeys.customerCodeSelector);
   final miniCart = find.byType(CartButton);
+  final quickAccessMenu = find.byType(QuickAccessMenuPanel);
+  final banner = find.byType(CarouselBanner);
+  final browseProductIcon = find.byKey(WidgetKeys.browseProductIcon);
+  final announcementIcon = find.byKey(WidgetKeys.announcementIcon);
+  final productsTab = find.text('Products'.tr());
+  final searchByProductField = find.byKey(WidgetKeys.searchProductField);
 
   void verify() {
-    final home = find.byKey(const Key('homeScreen'));
+    final home = find.byKey(WidgetKeys.homeScreen);
     expect(home, findsOneWidget);
+  }
+
+  void findCustomerSelector() {
+    expect(customerSelector, findsOneWidget);
+  }
+
+  void findMiniCart() {
+    expect(miniCart, findsOneWidget);
+  }
+
+  void findQuickAccessMenu() {
+    expect(quickAccessMenu, findsOneWidget);
+  }
+
+  void findBannerInHomeScreen() {
+    expect(banner, findsOneWidget);
   }
 
   void verifyEdiCustomer() {
@@ -73,6 +99,25 @@ class HomeRobot {
     await tester.pumpAndSettle();
   }
 
+  void findBrowseProductIcon() {
+    expect(browseProductIcon, findsOneWidget);
+  }
+
+  void findMiniCartIcon() {
+    expect(miniCart, findsOneWidget);
+  }
+
+  Future<void> findAnnouncementsIcon() async {
+    final listView = find.byType(SingleChildScrollView).last;
+    await tester.dragUntilVisible(
+      announcementIcon,
+      listView,
+      const Offset(0, -250),
+      duration: const Duration(seconds: 1),
+    );
+    expect(announcementIcon, findsOneWidget);
+  }
+
   void findHomeTab() {
     expect(homeTabbar, findsOneWidget);
   }
@@ -87,10 +132,7 @@ class HomeRobot {
   }
 
   Future<void> tapCustomerCodeSelector() async {
-    final customerCodeSelector =
-        find.descendant(of: customerCodeSelect, matching: customerCodeSelect);
-    expect(customerCodeSelector, findsOneWidget);
-    await tester.tap(customerCodeSelector);
+    await tester.tap(customerCodeSelect);
     await tester.pumpAndSettle();
   }
 
@@ -174,6 +216,24 @@ class HomeRobot {
 
   Future<void> tapLogout() async {
     await tester.tap(logout);
+    await tester.pumpAndSettle();
+  }
+
+  void findProductsTab() {
+    expect(productsTab, findsOneWidget);
+  }
+
+  Future<void> tapProductsTab() async {
+    await tester.tap(productsTab);
+    await tester.pumpAndSettle();
+  }
+
+  void findSearchProductField() {
+    expect(searchByProductField, findsOneWidget);
+  }
+
+  Future<void> tapSearchProductField() async {
+    await tester.tap(searchByProductField);
     await tester.pumpAndSettle();
   }
 

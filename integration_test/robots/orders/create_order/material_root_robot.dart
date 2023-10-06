@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -20,8 +22,10 @@ class MaterialRootRobot {
   final material = find.byKey(const Key('material'));
   final covid = find.byKey(const Key('covid-19'));
   final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
+  final searchField = find.byKey(WidgetKeys.searchBar);
+
   void verify() {
-    expect(find.byKey(const Key('materialRootPage')), findsOneWidget);
+    expect(find.byKey(WidgetKeys.totalMaterialItemCount), findsOneWidget);
   }
 
   Future<void> findAndCloseAnnouncementIcon() async {
@@ -129,5 +133,15 @@ class MaterialRootRobot {
     final NavigatorState navigator = tester.state(find.byType(Navigator));
     navigator.pop();
     await tester.pumpAndSettle();
+  }
+
+  void verifySearchResults(String textSearch) {
+    final productList = find.textContaining(textSearch);
+    expect(productList, findsWidgets);
+  }
+
+  void verifySearchNotFound() {
+    final message = find.text('That didn’t match anything'.tr());
+    expect(message, findsWidgets);
   }
 }

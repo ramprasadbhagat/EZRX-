@@ -7,6 +7,7 @@ SALESORGCONFIG := 'reset_sales_org_config.sh'
 CLIENT_LOGIN := 'login/client_login_screen.dart'
 CLIENT_PRODUCT_TAB := 'product/client_user.dart'
 EXTERNAL_LOGIN := 'login/external_login_screen.dart'
+CLIENT_HOME := 'home/client_user_home_screen.dart'
 CLIENT_TEST_FILE := 'client_user.dart'
 
 clean_ios:
@@ -93,6 +94,7 @@ run_th_client_test:
 run_th_external_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${EXTERNALSALESREP}
 run_my_client_Integration_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_HOME}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_LOGIN}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_PRODUCT_TAB}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/view_by_items/${CLIENT_TEST_FILE}

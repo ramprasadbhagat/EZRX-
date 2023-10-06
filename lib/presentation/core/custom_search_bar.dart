@@ -54,6 +54,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
     var valueText = widget.initialValue;
 
     return TextFormField(
+      key: WidgetKeys.searchBar,
       autocorrect: false,
       autofocus: widget.autofocus,
       enabled: widget.enabled,

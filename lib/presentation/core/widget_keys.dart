@@ -95,6 +95,8 @@ class WidgetKeys {
       Key('homeQuickAccessChatSupportMenu');
   static const Key announcementsTab = Key('announcementsTab');
   static Key announcementsArticleTabItems(String tabItem) => Key(tabItem);
+  static const Key browseProductIcon = Key('browseProductIcon');
+  static const Key announcementIcon = Key('announcementIcon');
 
   //============================================================
   //  MORE TAB BAR
@@ -128,6 +130,7 @@ class WidgetKeys {
       Key('customerCodeSearchSuffixIcon');
   static Key customerDeliveryAddressOption(String shipToName) =>
       Key('customerDeliveryAddressOption$shipToName');
+  static const Key customerCode = Key('customerCode');
 
   //============================================================
   //  ShipToSearch page Keys
@@ -498,9 +501,11 @@ class WidgetKeys {
   //============================================================
   static const Key productScanCameraKey = Key('productScanCameraKey');
   static const Key productSearchPage = Key('productSearchPage');
+  static const Key materialFavouriteButton = Key('materialFavouriteButton');
   static const Key materialFavoriteButton = Key('materialFavoriteButton');
   static Key searchedProduct(String materialNumber) =>
       Key('searchedProduct$materialNumber');
+  static const Key searchBar = Key('searchBar');
   static const Key scanProductInfoDialog = Key('scanProductInfoDialog');
   static const Key scanFromGallery = Key('scanFromGallery');
   static const Key scanFromCamera = Key('scanFromCamera');
@@ -594,6 +599,7 @@ class WidgetKeys {
       Key('materialDetailsSimilarProductsSection');
   static const Key materialDetailsCarouselImage =
       Key('materialDetailsCarouselImage');
+  static const Key customSnackBarCloseIcon = Key('customSnackBarCloseIcon');
   static const Key productDetailQuantityAddKey =
       Key('productDetailQuantityAddKey');
   static const Key productDetailQuantityDeleteKey =

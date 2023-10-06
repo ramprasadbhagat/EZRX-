@@ -9,6 +9,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/material_loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,7 @@ class BrowseProduct extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 10, top: 5),
                         child: SectionTitle(
+                          key: WidgetKeys.browseProductIcon,
                           title: 'Browse products',
                           onTapIconButton: () => state.isFetching
                               ? null

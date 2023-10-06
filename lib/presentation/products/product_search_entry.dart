@@ -18,7 +18,7 @@ class ProductSearchEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: const Key('searchProductField'),
+      key: WidgetKeys.searchProductField,
       autocorrect: false,
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());

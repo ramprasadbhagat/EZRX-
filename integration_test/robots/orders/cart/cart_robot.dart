@@ -18,6 +18,7 @@ class CartRobot {
   final defaultSwipeOffset = const Offset(-100, 0);
   final swipeDeleteButton = find.byKey(WidgetKeys.cartItemSwipeDeleteButton);
   final shipToAddressSheet = find.byKey(WidgetKeys.cartShipToAddressSheet);
+  final cartIsEmpty = find.text('Your cart is empty'.tr());
 
   void verifyPage() {
     expect(cartPage, findsOneWidget);
@@ -513,4 +514,8 @@ class CartRobot {
 
   Finder _bundleItem(String bundleNumber) =>
       find.byKey(WidgetKeys.cartItemBundleTile(bundleNumber));
+
+  void verifyCartIsEmpty() {
+    expect(cartIsEmpty, findsOneWidget);
+  }
 }

@@ -18,6 +18,10 @@ class MaterialListRobot {
     expect(find.byKey(const Key('materialListPage')), findsOneWidget);
   }
 
+  void verifyMaterialPage() {
+    expect(find.text('All products'.tr()), findsOneWidget);
+  }
+
   void verifyDisableOrderTypeSelection() {
     final orderTypeSelector = find.byKey(const Key('orderTypeSelector'));
     expect(orderTypeSelector, findsNothing);
@@ -165,6 +169,13 @@ class MaterialListRobot {
 
   Future<void> clearCart() async {
     await tester.tap(change);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapToProductByIndex(int index) async {
+    final productIndex =
+        find.byKey(WidgetKeys.materialListMaterialCard).at(index);
+    await tester.tap(productIndex);
     await tester.pumpAndSettle();
   }
 }

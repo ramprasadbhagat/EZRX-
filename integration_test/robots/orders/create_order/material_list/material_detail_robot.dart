@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,6 +12,9 @@ class MaterialDetailRobot {
   final tenderContractHeading = find.byKey(const Key('selectContract'));
   final tenderOrderInvalidQuantityError =
       find.byKey(const Key('tenderOrderValidQuantityErrorText'));
+  final addToCartButton = find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+  final iconBackToProductTab = find.byKey(WidgetKeys.materialDetailsPageBack);
+  final closeMessageIcon = find.byKey(WidgetKeys.snackBarDismissButton);
 
   void verify() {
     final materialDetails = find.byKey(const Key('materialDetailsPage'));
@@ -120,5 +124,34 @@ class MaterialDetailRobot {
   Future<void> getKeyboardDown() async {
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle(const Duration(seconds: 4));
+  }
+
+  void findAddToCartButton() {
+    expect(addToCartButton, findsOneWidget);
+  }
+
+  Future<void> tapAddToCartButton() async {
+    await tester.tap(addToCartButton);
+    await tester.pumpAndSettle();
+  }
+
+  void findCloseMessageIcon() {
+    expect(addToCartButton, findsOneWidget);
+  }
+
+  Future<void> tapOnCloseMessageIcon() async {
+    if (closeMessageIcon.evaluate().isNotEmpty) {
+      await tester.tap(closeMessageIcon);
+      await tester.pump();
+    }
+  }
+
+  void findBackToProductTabIcon() {
+    expect(iconBackToProductTab, findsOneWidget);
+  }
+
+  Future<void> goBackToProductTab() async {
+    await tester.tap(iconBackToProductTab);
+    await tester.pump();
   }
 }
