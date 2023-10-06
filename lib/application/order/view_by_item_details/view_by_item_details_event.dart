@@ -5,16 +5,19 @@ class ViewByItemDetailsEvent with _$ViewByItemDetailsEvent {
   const factory ViewByItemDetailsEvent.initialized() = _Initialized;
   const factory ViewByItemDetailsEvent.fetch({
     required User user,
+    required CustomerCodeInfo soldTo,
+    required SalesOrganisation salesOrganisation,
     required OrderNumber orderNumber,
     required MaterialNumber materialNumber,
-    required CustomerCodeInfo soldTo,
     required bool disableDeliveryDateForZyllemStatus,
-    required SalesOrganisation salesOrganisation,
   }) = _Fetch;
-  const factory ViewByItemDetailsEvent.fetchZyllemStatus({
-    required StatusType status,
-  }) = _FetchZyllemStatus;
+  const factory ViewByItemDetailsEvent.fetchZyllemStatus() = _FetchZyllemStatus;
   const factory ViewByItemDetailsEvent.updateIsExpanded({
     required bool isExpanded,
   }) = _updateIsExpanded;
+  const factory ViewByItemDetailsEvent.setItemOrderDetails({
+    required OrderHistory viewByItems,
+    required OrderHistoryItem orderHistoryItem,
+    required bool disableDeliveryDateForZyllemStatus,
+  }) = _SetItemOrderDetails;
 }

@@ -17,13 +17,10 @@ class _ViewByOrderItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.read<ViewByItemDetailsBloc>().add(
-              ViewByItemDetailsEvent.fetch(
-                orderNumber: orderHistoryItem.orderNumber,
-                salesOrganisation:
-                    context.read<EligibilityBloc>().state.salesOrganisation,
-                user: context.read<EligibilityBloc>().state.user,
-                materialNumber: orderHistoryItem.materialNumber,
-                soldTo: customerCodeInfo,
+              ViewByItemDetailsEvent.setItemOrderDetails(
+                viewByItems:
+                    context.read<ViewByItemsBloc>().state.orderHistoryList,
+                orderHistoryItem: orderHistoryItem,
                 disableDeliveryDateForZyllemStatus: context
                     .read<EligibilityBloc>()
                     .state

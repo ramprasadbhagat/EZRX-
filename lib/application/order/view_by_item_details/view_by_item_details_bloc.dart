@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/repository/i_view_by_item_details_repository.dart';
@@ -84,13 +83,34 @@ class ViewByItemDetailsBloc
             if (!e.disableDeliveryDateForZyllemStatus &&
                 orderHistoryItem.status.getDisplayZyllemStatus) {
               add(
-                _FetchZyllemStatus(
-                  status: orderHistoryItem.status,
-                ),
+                const _FetchZyllemStatus(),
               );
             }
           },
         );
+      },
+      setItemOrderDetails: (e) {
+        final modifiedList = e.viewByItems.orderHistoryItems
+            .where(
+              (element) =>
+                  element.hashCode != e.orderHistoryItem.hashCode &&
+                  element.orderNumber == e.orderHistoryItem.orderNumber,
+            )
+            .toList();
+        emit(
+          state.copyWith(
+            viewByItemDetails: e.viewByItems.copyWith(
+              orderHistoryItems: modifiedList,
+            ),
+            orderHistoryItem: e.orderHistoryItem,
+          ),
+        );
+        if (!e.disableDeliveryDateForZyllemStatus &&
+            e.orderHistoryItem.status.getDisplayZyllemStatus) {
+          add(
+            const _FetchZyllemStatus(),
+          );
+        }
       },
       fetchZyllemStatus: (e) async {
         final failureOrSuccess =

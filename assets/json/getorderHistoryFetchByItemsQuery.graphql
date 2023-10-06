@@ -1,4 +1,4 @@
-query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $language: String, $orderStatus: [String!], $searchKey: String, $isGreen: Boolean) {
+query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: String, $shipTo: [String], $first: Int, $after: Int, $language: String, $orderStatus: [String!], $searchKey: String, $salesOrg: [String], $filterBlockCustomer: Boolean, $materialSearch: String) {
   orderHistoryFetchByItems(
     soldTo: $soldTo
     fromDate: $fromDate
@@ -10,6 +10,9 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
     orderStatus: $orderStatus
     searchKey: $searchKey
     isGreen: $isGreen
+    salesOrg: $salesOrg
+    materialSearch: $materialSearch
+    filterBlockedCustomer: $filterBlockCustomer
   ) {
     OrderCount
     OrderHistory {
@@ -17,9 +20,18 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
         SoldTo
         CompanyName
         ShipTo
-       
+        PaymentTerm {
+          PaymentTermCode
+          PaymentTermDescription
+          
+        }
+        
       }
       OrderItems {
+        poAttachment {
+          Url
+          Name
+        }
         MaterialCode
         MaterialDescription
         DefaultMaterialDescription
@@ -39,6 +51,7 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
         OrderBy
         PurchaseOrderType
         WarehouseStorageCondition
+        OrderNumber
         Available
         Batch
         ExpiryDate
@@ -46,6 +59,8 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
         Seller
         POReference
         ManufactureName
+        SpecialInstructions
+        RequestedDeliveryDate
         InvoiceNumber
         IsBonusMaterial
         GovernmentMaterialCode
@@ -59,7 +74,10 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
         TenderContractReference
         isGreen
         IsBundle
-       
+        InvoiceNumber
+        mrp
+        promotype
+        promoStatus
       }
      
     }
@@ -71,7 +89,7 @@ variables : {
   "shipTo": [
     "0070149863"
   ],
-  "first": 10,
+  "first": 24,
   "after": 0,
   "language": "EN",
   "fromDate": "20230805",

@@ -1,7 +1,7 @@
 class ViewByItemQueryMutation {
   String getViewByItem() {
     return '''
-     query orderHistoryFetchByItems(\$soldTo: String!, \$fromDate: String, \$toDate: String, \$shipTo: [String], \$first: Int, \$after: Int, \$language: String, \$orderStatus: [String!], \$searchKey: String, \$salesOrg: [String]) {
+     query orderHistoryFetchByItems(\$soldTo: String!, \$fromDate: String, \$toDate: String, \$shipTo: [String], \$first: Int, \$after: Int, \$language: String, \$orderStatus: [String!], \$searchKey: String, \$salesOrg: [String], \$filterBlockCustomer: Boolean, \$materialSearch: String) {
   orderHistoryFetchByItems(
     soldTo: \$soldTo
     fromDate: \$fromDate
@@ -13,77 +13,10 @@ class ViewByItemQueryMutation {
     orderStatus: \$orderStatus
     searchKey: \$searchKey
     salesOrg: \$salesOrg
-  ) {
-    OrderCount
-    OrderHistory {
-      OrderBasicInformation {
-        SoldTo
-        CompanyName
-        ShipTo
-        PaymentTerm {
-          PaymentTermCode
-          PaymentTermDescription
-          
-        }
-        
-      }
-      OrderItems {
-        MaterialCode
-        MaterialDescription
-        DefaultMaterialDescription
-        CreatedTime
-        CreatedDate
-        Qty
-        UnitPrice
-        TotalPrice
-        Status
-        LineNumber
-        Tax
-        DeliveryDate
-        DeliveryTime
-        OrderType
-        EZRXNumber
-        OrderNumber
-        OrderBy
-        PurchaseOrderType
-        WarehouseStorageCondition
-        OrderNumber
-        Available
-        Batch
-        ExpiryDate
-        IsMarketplace
-        Seller
-        POReference
-        ManufactureName
-        InvoiceNumber
-        IsBonusMaterial
-        GovernmentMaterialCode
-        ItemRegistrationNumber
-        TelephoneNumber
-        HidePrice
-       
-      }
-     
-    }
-   
-  }
-}
-      ''';
-  }
-
-  String getViewByItemDetails() {
-    return '''
-   query orderHistoryFetchByItems(\$soldTo: String!, \$language: String, \$materialSearch: String, \$searchKey: String, \$fromDate: String, \$toDate: String, \$salesOrg: [String], \$filterBlockCustomer: Boolean) {
-  orderHistoryFetchByItems(
-    soldTo: \$soldTo
-    language: \$language
     materialSearch: \$materialSearch
-    searchKey: \$searchKey
-    fromDate: \$fromDate
-    toDate: \$toDate
-    salesOrg: \$salesOrg
     filterBlockedCustomer: \$filterBlockCustomer
   ) {
+    OrderCount
     OrderHistory {
       OrderBasicInformation {
         SoldTo
@@ -120,6 +53,8 @@ class ViewByItemQueryMutation {
         OrderBy
         PurchaseOrderType
         WarehouseStorageCondition
+        OrderNumber
+        Available
         Batch
         ExpiryDate
         IsMarketplace
@@ -128,8 +63,8 @@ class ViewByItemQueryMutation {
         ManufactureName
         SpecialInstructions
         RequestedDeliveryDate
+        InvoiceNumber
         IsBonusMaterial
-        ParentID
         GovernmentMaterialCode
         ItemRegistrationNumber
         TelephoneNumber
@@ -139,15 +74,16 @@ class ViewByItemQueryMutation {
         TenderPrice
         TenderPriceUnit
         TenderContractReference
+        isGreen
+        IsBundle
         InvoiceNumber
         mrp
         promotype
         promoStatus
-        
       }
-      
+     
     }
-    
+   
   }
 }
       ''';

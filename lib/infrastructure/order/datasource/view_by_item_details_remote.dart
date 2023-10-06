@@ -26,10 +26,10 @@ class ViewByItemDetailsRemoteDataSource {
     required String soldTo,
     required String language,
     required String salesOrg,
-   required String orderNumber,
+    required String orderNumber,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = viewByItemDetailsQueryMutation.getViewByItemDetails();
+      final queryData = viewByItemDetailsQueryMutation.getViewByItem();
 
       final variables = {
         'soldTo': soldTo,
