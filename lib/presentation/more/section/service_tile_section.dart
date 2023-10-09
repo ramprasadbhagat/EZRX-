@@ -17,7 +17,8 @@ class ServiceTile extends StatelessWidget {
       ),
       subtitle: BlocBuilder<EligibilityBloc, EligibilityState>(
         buildWhen: (previous, current) =>
-            previous.isReturnsEnable != current.isReturnsEnable,
+            previous.isReturnsEnable != current.isReturnsEnable ||
+            previous.isPaymentEnabled != current.isPaymentEnabled,
         builder: (context, state) {
           return GridView.count(
             physics: const NeverScrollableScrollPhysics(),
