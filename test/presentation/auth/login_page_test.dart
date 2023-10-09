@@ -15,7 +15,6 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
-import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
@@ -101,9 +100,6 @@ class ReturnListByItemMockBloc
     extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>
     implements ReturnListByItemBloc {}
 
-class RecentOrderMockBloc extends MockBloc<RecentOrderEvent, RecentOrderState>
-    implements RecentOrderBloc {}
-
 class ViewByItemDetailsMockBloc
     extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
     implements ViewByItemDetailsBloc {}
@@ -145,7 +141,6 @@ void main() {
   late MaterialPriceBloc materialPriceBloc;
   late ViewByItemsBloc viewByItemsBloc;
   late ReturnListByItemBloc returnListByItemBloc;
-  late RecentOrderBloc recentOrderBloc;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   late ProductDetailBloc productDetailBloc;
@@ -176,7 +171,6 @@ void main() {
       materialPriceBloc = MaterialPriceMockBloc();
       viewByItemsBloc = ViewByItemsMockBloc();
       returnListByItemBloc = ReturnListByItemMockBloc();
-      recentOrderBloc = RecentOrderMockBloc();
       viewByItemDetailsBlocMock = ViewByItemDetailsMockBloc();
       viewByOrderDetailsBlocMock = ViewByOrderDetailsMockBloc();
       productDetailBloc = ProductDetailMockBloc();
@@ -209,12 +203,10 @@ void main() {
       when(() => viewByItemsBloc.state).thenReturn(ViewByItemsState.initial());
       when(() => returnListByItemBloc.state)
           .thenReturn(ReturnListByItemState.initial());
-      when(() => recentOrderBloc.state).thenReturn(RecentOrderState.initial());
       when(() => viewByItemDetailsBlocMock.state)
           .thenReturn(ViewByItemDetailsState.initial());
       when(() => viewByOrderDetailsBlocMock.state)
           .thenReturn(ViewByOrderDetailsState.initial());
-      when(() => recentOrderBloc.state).thenReturn(RecentOrderState.initial());
       when(() => productDetailBloc.state)
           .thenReturn(ProductDetailState.initial());
       when(() => creditAndInvoiceDetailsBloc.state)
@@ -265,9 +257,6 @@ void main() {
               ),
               BlocProvider<ReturnListByItemBloc>(
                 create: (context) => returnListByItemBloc,
-              ),
-              BlocProvider<RecentOrderBloc>(
-                create: (context) => recentOrderBloc,
               ),
               BlocProvider<ViewByItemDetailsBloc>(
                 create: (context) => viewByItemDetailsBlocMock,
@@ -405,9 +394,6 @@ void main() {
               ),
               BlocProvider<ReturnListByItemBloc>(
                 create: (context) => returnListByItemBloc,
-              ),
-              BlocProvider<RecentOrderBloc>(
-                create: (context) => recentOrderBloc,
               ),
               BlocProvider<ViewByItemDetailsBloc>(
                 create: (context) => viewByItemDetailsBlocMock,

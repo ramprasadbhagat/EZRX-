@@ -62,6 +62,8 @@ mixin _$OrderHistoryItemDto {
   String get specialInstruction => throw _privateConstructorUsedError;
   @JsonKey(name: 'Tax', defaultValue: 0.0)
   double get tax => throw _privateConstructorUsedError;
+  @JsonKey(name: 'EZRXNumber', defaultValue: '')
+  String get eZRXNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get orderHistoryItemPoAttachments =>
       throw _privateConstructorUsedError;
@@ -106,6 +108,7 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
       String specialInstruction,
       @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       List<PoDocumentsDto> orderHistoryItemPoAttachments});
 }
@@ -144,6 +147,7 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? requestedDeliveryDate = null,
     Object? specialInstruction = null,
     Object? tax = null,
+    Object? eZRXNumber = null,
     Object? orderHistoryItemPoAttachments = null,
   }) {
     return _then(_value.copyWith(
@@ -231,6 +235,10 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
               as double,
+      eZRXNumber: null == eZRXNumber
+          ? _value.eZRXNumber
+          : eZRXNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       orderHistoryItemPoAttachments: null == orderHistoryItemPoAttachments
           ? _value.orderHistoryItemPoAttachments
           : orderHistoryItemPoAttachments // ignore: cast_nullable_to_non_nullable
@@ -275,6 +283,7 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
       String specialInstruction,
       @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       List<PoDocumentsDto> orderHistoryItemPoAttachments});
 }
@@ -311,6 +320,7 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
     Object? requestedDeliveryDate = null,
     Object? specialInstruction = null,
     Object? tax = null,
+    Object? eZRXNumber = null,
     Object? orderHistoryItemPoAttachments = null,
   }) {
     return _then(_$_OrderHistoryItemDto(
@@ -398,6 +408,10 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
               as double,
+      eZRXNumber: null == eZRXNumber
+          ? _value.eZRXNumber
+          : eZRXNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       orderHistoryItemPoAttachments: null == orderHistoryItemPoAttachments
           ? _value._orderHistoryItemPoAttachments
           : orderHistoryItemPoAttachments // ignore: cast_nullable_to_non_nullable
@@ -440,6 +454,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
       required this.specialInstruction,
       @JsonKey(name: 'Tax', defaultValue: 0.0) required this.tax,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '') required this.eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       required final List<PoDocumentsDto> orderHistoryItemPoAttachments})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
@@ -511,6 +526,9 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @override
   @JsonKey(name: 'Tax', defaultValue: 0.0)
   final double tax;
+  @override
+  @JsonKey(name: 'EZRXNumber', defaultValue: '')
+  final String eZRXNumber;
   final List<PoDocumentsDto> _orderHistoryItemPoAttachments;
   @override
   @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
@@ -523,7 +541,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
 
   @override
   String toString() {
-    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments)';
+    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments)';
   }
 
   @override
@@ -568,6 +586,8 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
             (identical(other.specialInstruction, specialInstruction) ||
                 other.specialInstruction == specialInstruction) &&
             (identical(other.tax, tax) || other.tax == tax) &&
+            (identical(other.eZRXNumber, eZRXNumber) ||
+                other.eZRXNumber == eZRXNumber) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryItemPoAttachments,
                 _orderHistoryItemPoAttachments));
@@ -598,6 +618,7 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
         requestedDeliveryDate,
         specialInstruction,
         tax,
+        eZRXNumber,
         const DeepCollectionEquality().hash(_orderHistoryItemPoAttachments)
       ]);
 
@@ -655,6 +676,8 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       @JsonKey(name: 'SpecialInstructions', defaultValue: '')
       required final String specialInstruction,
       @JsonKey(name: 'Tax', defaultValue: 0.0) required final double tax,
+      @JsonKey(name: 'EZRXNumber', defaultValue: '')
+      required final String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       required final List<PoDocumentsDto>
           orderHistoryItemPoAttachments}) = _$_OrderHistoryItemDto;
@@ -726,6 +749,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @override
   @JsonKey(name: 'Tax', defaultValue: 0.0)
   double get tax;
+  @override
+  @JsonKey(name: 'EZRXNumber', defaultValue: '')
+  String get eZRXNumber;
   @override
   @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get orderHistoryItemPoAttachments;

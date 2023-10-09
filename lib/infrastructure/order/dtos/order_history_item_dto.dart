@@ -45,6 +45,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'SpecialInstructions', defaultValue: '')
         required String specialInstruction,
     @JsonKey(name: 'Tax', defaultValue: 0.0) required double tax,
+    @JsonKey(name: 'EZRXNumber', defaultValue: '') required String eZRXNumber,
     @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
         required List<PoDocumentsDto> orderHistoryItemPoAttachments,
   }) = _OrderHistoryItemDto;
@@ -77,6 +78,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
           List.from(orderHistoryItem.orderHistoryItemPoAttachments)
               .map((e) => PoDocumentsDto.fromDomain(e))
               .toList(),
+      eZRXNumber: orderHistoryItem.ezrxNumber.getOrDefaultValue(''),
     );
   }
   OrderHistoryItem toDomain() {
@@ -107,6 +109,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       orderStatusTracker: <OrderStatusTracker>[],
       orderHistoryItemPoAttachments:
           orderHistoryItemPoAttachments.map((e) => e.toDomain()).toList(),
+      ezrxNumber: StringValue(eZRXNumber),
     );
   }
 

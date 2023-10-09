@@ -40,6 +40,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required List<OrderStatusTracker> orderStatusTracker,
     required double tax,
     required List<PoDocuments> orderHistoryItemPoAttachments,
+    required StringValue ezrxNumber,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -67,6 +68,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         orderType: DocumentType(''),
         orderStatusTracker: <OrderStatusTracker>[],
         orderHistoryItemPoAttachments: <PoDocuments>[],
+        ezrxNumber: StringValue(''),
       );
 
   OrderHistoryItem copyWithTaxCal({

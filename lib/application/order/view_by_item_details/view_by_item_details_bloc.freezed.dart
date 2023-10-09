@@ -19,14 +19,6 @@ mixin _$ViewByItemDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)
-        fetch,
     required TResult Function() fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
     required TResult Function(
@@ -39,14 +31,6 @@ mixin _$ViewByItemDetailsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
     TResult? Function()? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
     TResult? Function(
@@ -59,14 +43,6 @@ mixin _$ViewByItemDetailsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
     TResult Function()? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
     TResult Function(
@@ -80,7 +56,6 @@ mixin _$ViewByItemDetailsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
@@ -89,7 +64,6 @@ mixin _$ViewByItemDetailsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
@@ -98,7 +72,6 @@ mixin _$ViewByItemDetailsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
@@ -165,14 +138,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)
-        fetch,
     required TResult Function() fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
     required TResult Function(
@@ -188,14 +153,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
     TResult? Function()? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
     TResult? Function(
@@ -211,14 +168,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
     TResult Function()? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
     TResult Function(
@@ -238,7 +187,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
@@ -250,7 +198,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
@@ -262,7 +209,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
@@ -277,290 +223,6 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements ViewByItemDetailsEvent {
   const factory _Initialized() = _$_Initialized;
-}
-
-/// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {User user,
-      CustomerCodeInfo soldTo,
-      SalesOrganisation salesOrganisation,
-      OrderNumber orderNumber,
-      MaterialNumber materialNumber,
-      bool disableDeliveryDateForZyllemStatus});
-
-  $UserCopyWith<$Res> get user;
-  $CustomerCodeInfoCopyWith<$Res> get soldTo;
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-}
-
-/// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ViewByItemDetailsEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-    Object? soldTo = null,
-    Object? salesOrganisation = null,
-    Object? orderNumber = null,
-    Object? materialNumber = null,
-    Object? disableDeliveryDateForZyllemStatus = null,
-  }) {
-    return _then(_$_Fetch(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
-      soldTo: null == soldTo
-          ? _value.soldTo
-          : soldTo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      orderNumber: null == orderNumber
-          ? _value.orderNumber
-          : orderNumber // ignore: cast_nullable_to_non_nullable
-              as OrderNumber,
-      materialNumber: null == materialNumber
-          ? _value.materialNumber
-          : materialNumber // ignore: cast_nullable_to_non_nullable
-              as MaterialNumber,
-      disableDeliveryDateForZyllemStatus: null ==
-              disableDeliveryDateForZyllemStatus
-          ? _value.disableDeliveryDateForZyllemStatus
-          : disableDeliveryDateForZyllemStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get soldTo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.soldTo, (value) {
-      return _then(_value.copyWith(soldTo: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
-      {required this.user,
-      required this.soldTo,
-      required this.salesOrganisation,
-      required this.orderNumber,
-      required this.materialNumber,
-      required this.disableDeliveryDateForZyllemStatus});
-
-  @override
-  final User user;
-  @override
-  final CustomerCodeInfo soldTo;
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final OrderNumber orderNumber;
-  @override
-  final MaterialNumber materialNumber;
-  @override
-  final bool disableDeliveryDateForZyllemStatus;
-
-  @override
-  String toString() {
-    return 'ViewByItemDetailsEvent.fetch(user: $user, soldTo: $soldTo, salesOrganisation: $salesOrganisation, orderNumber: $orderNumber, materialNumber: $materialNumber, disableDeliveryDateForZyllemStatus: $disableDeliveryDateForZyllemStatus)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.orderNumber, orderNumber) ||
-                other.orderNumber == orderNumber) &&
-            (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber) &&
-            (identical(other.disableDeliveryDateForZyllemStatus,
-                    disableDeliveryDateForZyllemStatus) ||
-                other.disableDeliveryDateForZyllemStatus ==
-                    disableDeliveryDateForZyllemStatus));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, user, soldTo, salesOrganisation,
-      orderNumber, materialNumber, disableDeliveryDateForZyllemStatus);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)
-        fetch,
-    required TResult Function() fetchZyllemStatus,
-    required TResult Function(bool isExpanded) updateIsExpanded,
-    required TResult Function(
-            OrderHistory viewByItems,
-            OrderHistoryItem orderHistoryItem,
-            bool disableDeliveryDateForZyllemStatus)
-        setItemOrderDetails,
-  }) {
-    return fetch(user, soldTo, salesOrganisation, orderNumber, materialNumber,
-        disableDeliveryDateForZyllemStatus);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
-    TResult? Function()? fetchZyllemStatus,
-    TResult? Function(bool isExpanded)? updateIsExpanded,
-    TResult? Function(
-            OrderHistory viewByItems,
-            OrderHistoryItem orderHistoryItem,
-            bool disableDeliveryDateForZyllemStatus)?
-        setItemOrderDetails,
-  }) {
-    return fetch?.call(user, soldTo, salesOrganisation, orderNumber,
-        materialNumber, disableDeliveryDateForZyllemStatus);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
-    TResult Function()? fetchZyllemStatus,
-    TResult Function(bool isExpanded)? updateIsExpanded,
-    TResult Function(
-            OrderHistory viewByItems,
-            OrderHistoryItem orderHistoryItem,
-            bool disableDeliveryDateForZyllemStatus)?
-        setItemOrderDetails,
-    required TResult orElse(),
-  }) {
-    if (fetch != null) {
-      return fetch(user, soldTo, salesOrganisation, orderNumber, materialNumber,
-          disableDeliveryDateForZyllemStatus);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
-    required TResult Function(_updateIsExpanded value) updateIsExpanded,
-    required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
-  }) {
-    return fetch(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
-    TResult? Function(_updateIsExpanded value)? updateIsExpanded,
-    TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
-  }) {
-    return fetch?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
-    TResult Function(_updateIsExpanded value)? updateIsExpanded,
-    TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
-    required TResult orElse(),
-  }) {
-    if (fetch != null) {
-      return fetch(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Fetch implements ViewByItemDetailsEvent {
-  const factory _Fetch(
-      {required final User user,
-      required final CustomerCodeInfo soldTo,
-      required final SalesOrganisation salesOrganisation,
-      required final OrderNumber orderNumber,
-      required final MaterialNumber materialNumber,
-      required final bool disableDeliveryDateForZyllemStatus}) = _$_Fetch;
-
-  User get user;
-  CustomerCodeInfo get soldTo;
-  SalesOrganisation get salesOrganisation;
-  OrderNumber get orderNumber;
-  MaterialNumber get materialNumber;
-  bool get disableDeliveryDateForZyllemStatus;
-  @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -602,14 +264,6 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)
-        fetch,
     required TResult Function() fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
     required TResult Function(
@@ -625,14 +279,6 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
     TResult? Function()? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
     TResult? Function(
@@ -648,14 +294,6 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
     TResult Function()? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
     TResult Function(
@@ -675,7 +313,6 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
@@ -687,7 +324,6 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
@@ -699,7 +335,6 @@ class _$_FetchZyllemStatus implements _FetchZyllemStatus {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
@@ -782,14 +417,6 @@ class _$_updateIsExpanded implements _updateIsExpanded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)
-        fetch,
     required TResult Function() fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
     required TResult Function(
@@ -805,14 +432,6 @@ class _$_updateIsExpanded implements _updateIsExpanded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
     TResult? Function()? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
     TResult? Function(
@@ -828,14 +447,6 @@ class _$_updateIsExpanded implements _updateIsExpanded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
     TResult Function()? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
     TResult Function(
@@ -855,7 +466,6 @@ class _$_updateIsExpanded implements _updateIsExpanded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
@@ -867,7 +477,6 @@ class _$_updateIsExpanded implements _updateIsExpanded {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
@@ -879,7 +488,6 @@ class _$_updateIsExpanded implements _updateIsExpanded {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,
@@ -1016,14 +624,6 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)
-        fetch,
     required TResult Function() fetchZyllemStatus,
     required TResult Function(bool isExpanded) updateIsExpanded,
     required TResult Function(
@@ -1040,14 +640,6 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
     TResult? Function()? fetchZyllemStatus,
     TResult? Function(bool isExpanded)? updateIsExpanded,
     TResult? Function(
@@ -1064,14 +656,6 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(
-            User user,
-            CustomerCodeInfo soldTo,
-            SalesOrganisation salesOrganisation,
-            OrderNumber orderNumber,
-            MaterialNumber materialNumber,
-            bool disableDeliveryDateForZyllemStatus)?
-        fetch,
     TResult Function()? fetchZyllemStatus,
     TResult Function(bool isExpanded)? updateIsExpanded,
     TResult Function(
@@ -1092,7 +676,6 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
     required TResult Function(_FetchZyllemStatus value) fetchZyllemStatus,
     required TResult Function(_updateIsExpanded value) updateIsExpanded,
     required TResult Function(_SetItemOrderDetails value) setItemOrderDetails,
@@ -1104,7 +687,6 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
     TResult? Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult? Function(_updateIsExpanded value)? updateIsExpanded,
     TResult? Function(_SetItemOrderDetails value)? setItemOrderDetails,
@@ -1116,7 +698,6 @@ class _$_SetItemOrderDetails implements _SetItemOrderDetails {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
     TResult Function(_FetchZyllemStatus value)? fetchZyllemStatus,
     TResult Function(_updateIsExpanded value)? updateIsExpanded,
     TResult Function(_SetItemOrderDetails value)? setItemOrderDetails,

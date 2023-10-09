@@ -14,7 +14,6 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
-import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -80,9 +79,6 @@ class CustomerCodeBlocMock
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
-class RecentOrderMockBloc extends MockBloc<RecentOrderEvent, RecentOrderState>
-    implements RecentOrderBloc {}
-
 class BannerBlocMock extends MockBloc<BannerEvent, BannerState>
     implements BannerBloc {}
 
@@ -117,8 +113,8 @@ void main() {
   EasyLocalization.logger.enableLevels = [];
   late CustomerCodeBlocMock mockCustomerCodeBloc;
   late SalesOrgBlocMock salesOrgBlocMock;
-  late RecentOrderMockBloc recentOrderMockBloc;
   late MaterialListBloc materialListBlocMock;
+  late ViewByItemsBloc viewByItemsBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late MaterialPriceBlocMock materialPriceBlocMock;
   late CartBlocMock cartBlocMock;
@@ -194,14 +190,15 @@ void main() {
     );
     locator.registerLazySingleton(() => remoteConfigServiceMock);
     locator.registerFactory(() => materialListBlocMock);
+    locator.registerFactory(() => viewByItemsBlocMock);
   });
 
   group('Home Tab Screen', () {
     setUp(() {
       mockCustomerCodeBloc = CustomerCodeBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
-      recentOrderMockBloc = RecentOrderMockBloc();
       materialListBlocMock = MaterialListBlocMock();
+      viewByItemsBlocMock = ViewByItemsBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
       mockBannerBloc = BannerBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
@@ -246,8 +243,8 @@ void main() {
       );
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
-      when(() => recentOrderMockBloc.state)
-          .thenReturn(RecentOrderState.initial());
+      when(() => viewByItemsBlocMock.state)
+          .thenReturn(ViewByItemsState.initial());
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           customerCodeInfo:
@@ -307,8 +304,8 @@ void main() {
             BlocProvider<CustomerCodeBloc>(
               create: (context) => mockCustomerCodeBloc,
             ),
-            BlocProvider<RecentOrderBloc>(
-              create: (context) => recentOrderMockBloc,
+            BlocProvider<ViewByItemsBloc>(
+              create: (context) => viewByItemsBlocMock,
             ),
             BlocProvider<MaterialListBloc>(
               create: (context) => materialListBlocMock,

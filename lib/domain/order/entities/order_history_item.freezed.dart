@@ -44,6 +44,7 @@ mixin _$OrderHistoryItem {
   double get tax => throw _privateConstructorUsedError;
   List<PoDocuments> get orderHistoryItemPoAttachments =>
       throw _privateConstructorUsedError;
+  StringValue get ezrxNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryItemCopyWith<OrderHistoryItem> get copyWith =>
@@ -80,7 +81,8 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       SpecialInstructions specialInstructions,
       List<OrderStatusTracker> orderStatusTracker,
       double tax,
-      List<PoDocuments> orderHistoryItemPoAttachments});
+      List<PoDocuments> orderHistoryItemPoAttachments,
+      StringValue ezrxNumber});
 
   $InvoiceDataCopyWith<$Res> get invoiceData;
   $ProductImagesCopyWith<$Res> get productImages;
@@ -123,6 +125,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
     Object? orderStatusTracker = null,
     Object? tax = null,
     Object? orderHistoryItemPoAttachments = null,
+    Object? ezrxNumber = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -221,6 +224,10 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.orderHistoryItemPoAttachments
           : orderHistoryItemPoAttachments // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
+      ezrxNumber: null == ezrxNumber
+          ? _value.ezrxNumber
+          : ezrxNumber // ignore: cast_nullable_to_non_nullable
+              as StringValue,
     ) as $Val);
   }
 
@@ -273,7 +280,8 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
       SpecialInstructions specialInstructions,
       List<OrderStatusTracker> orderStatusTracker,
       double tax,
-      List<PoDocuments> orderHistoryItemPoAttachments});
+      List<PoDocuments> orderHistoryItemPoAttachments,
+      StringValue ezrxNumber});
 
   @override
   $InvoiceDataCopyWith<$Res> get invoiceData;
@@ -316,6 +324,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
     Object? orderStatusTracker = null,
     Object? tax = null,
     Object? orderHistoryItemPoAttachments = null,
+    Object? ezrxNumber = null,
   }) {
     return _then(_$_OrderHistoryItem(
       materialNumber: null == materialNumber
@@ -414,6 +423,10 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
           ? _value._orderHistoryItemPoAttachments
           : orderHistoryItemPoAttachments // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
+      ezrxNumber: null == ezrxNumber
+          ? _value.ezrxNumber
+          : ezrxNumber // ignore: cast_nullable_to_non_nullable
+              as StringValue,
     ));
   }
 }
@@ -445,7 +458,8 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
       required this.specialInstructions,
       required final List<OrderStatusTracker> orderStatusTracker,
       required this.tax,
-      required final List<PoDocuments> orderHistoryItemPoAttachments})
+      required final List<PoDocuments> orderHistoryItemPoAttachments,
+      required this.ezrxNumber})
       : _orderStatusTracker = orderStatusTracker,
         _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
@@ -513,8 +527,11 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   }
 
   @override
+  final StringValue ezrxNumber;
+
+  @override
   String toString() {
-    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, manufactureName: $manufactureName, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderStatusTracker: $orderStatusTracker, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments)';
+    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, manufactureName: $manufactureName, invoiceData: $invoiceData, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderStatusTracker: $orderStatusTracker, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber)';
   }
 
   @override
@@ -565,7 +582,9 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
             (identical(other.tax, tax) || other.tax == tax) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryItemPoAttachments,
-                _orderHistoryItemPoAttachments));
+                _orderHistoryItemPoAttachments) &&
+            (identical(other.ezrxNumber, ezrxNumber) ||
+                other.ezrxNumber == ezrxNumber));
   }
 
   @override
@@ -594,7 +613,8 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
         specialInstructions,
         const DeepCollectionEquality().hash(_orderStatusTracker),
         tax,
-        const DeepCollectionEquality().hash(_orderHistoryItemPoAttachments)
+        const DeepCollectionEquality().hash(_orderHistoryItemPoAttachments),
+        ezrxNumber
       ]);
 
   @JsonKey(ignore: true)
@@ -606,31 +626,31 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
 
 abstract class _OrderHistoryItem extends OrderHistoryItem {
   factory _OrderHistoryItem(
-          {required final MaterialNumber materialNumber,
-          required final String materialDescription,
-          required final int qty,
-          required final ZpPrice unitPrice,
-          required final TotalPrice totalPrice,
-          required final StatusType status,
-          required final DateTimeStringValue deliveryDate,
-          required final OrderNumber orderNumber,
-          required final DateTimeStringValue createdDate,
-          required final StringValue batch,
-          required final String orderBy,
-          required final DocumentType orderType,
-          required final DateTimeStringValue expiryDate,
-          required final POReference pOReference,
-          required final String manufactureName,
-          required final InvoiceData invoiceData,
-          required final bool isBonusMaterial,
-          required final PhoneNumber telephoneNumber,
-          required final ProductImages productImages,
-          required final DateTimeStringValue requestedDeliveryDate,
-          required final SpecialInstructions specialInstructions,
-          required final List<OrderStatusTracker> orderStatusTracker,
-          required final double tax,
-          required final List<PoDocuments> orderHistoryItemPoAttachments}) =
-      _$_OrderHistoryItem;
+      {required final MaterialNumber materialNumber,
+      required final String materialDescription,
+      required final int qty,
+      required final ZpPrice unitPrice,
+      required final TotalPrice totalPrice,
+      required final StatusType status,
+      required final DateTimeStringValue deliveryDate,
+      required final OrderNumber orderNumber,
+      required final DateTimeStringValue createdDate,
+      required final StringValue batch,
+      required final String orderBy,
+      required final DocumentType orderType,
+      required final DateTimeStringValue expiryDate,
+      required final POReference pOReference,
+      required final String manufactureName,
+      required final InvoiceData invoiceData,
+      required final bool isBonusMaterial,
+      required final PhoneNumber telephoneNumber,
+      required final ProductImages productImages,
+      required final DateTimeStringValue requestedDeliveryDate,
+      required final SpecialInstructions specialInstructions,
+      required final List<OrderStatusTracker> orderStatusTracker,
+      required final double tax,
+      required final List<PoDocuments> orderHistoryItemPoAttachments,
+      required final StringValue ezrxNumber}) = _$_OrderHistoryItem;
   _OrderHistoryItem._() : super._();
 
   @override
@@ -681,6 +701,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   double get tax;
   @override
   List<PoDocuments> get orderHistoryItemPoAttachments;
+  @override
+  StringValue get ezrxNumber;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryItemCopyWith<_$_OrderHistoryItem> get copyWith =>

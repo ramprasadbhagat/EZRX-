@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -9,14 +11,9 @@ import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
-import 'package:ezrxmobile/domain/order/entities/recent_order_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
-
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
-
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
@@ -29,12 +26,24 @@ class RecentOrdersSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RecentOrderBloc, RecentOrderState>(
-      buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
-      builder: (context, state) {
-        return const _BodyContent();
-      },
+    return BlocProvider<ViewByItemsBloc>(
+      create: (context) => locator<ViewByItemsBloc>(),
+      child: BlocListener<EligibilityBloc, EligibilityState>(
+        listenWhen: (previous, current) =>
+            previous.isLoading != current.isLoading && !current.isLoading,
+        listener: (context, state) {
+          context.read<ViewByItemsBloc>().add(
+                ViewByItemsEvent.initialized(
+                  salesOrgConfigs: state.salesOrgConfigs,
+                  customerCodeInfo: state.customerCodeInfo,
+                  shipToInfo: state.shipToInfo,
+                  user: state.user,
+                  salesOrganisation: state.salesOrganisation,
+                ),
+              );
+        },
+        child: const _BodyContent(),
+      ),
     );
   }
 }
@@ -44,11 +53,13 @@ class _BodyContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RecentOrderBloc, RecentOrderState>(
+    return BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
       buildWhen: (previous, current) =>
-          previous.recentlyOrderedProducts != current.recentlyOrderedProducts,
+          previous.orderHistoryList.orderHistoryItems !=
+          current.orderHistoryList.orderHistoryItems,
       builder: (context, state) {
-        return state.isFetching || state.recentlyOrderedProducts.isNotEmpty
+        return state.isFetching ||
+                state.orderHistoryList.orderHistoryItems.isNotEmpty
             ? Column(
                 children: [
                   Padding(
@@ -68,7 +79,7 @@ class _BodyContent extends StatelessWidget {
                           )
                         : ListView(
                             scrollDirection: Axis.horizontal,
-                            children: state.recentlyOrderedProducts
+                            children: state.orderHistoryList.orderHistoryItems
                                 .map((e) => _ProductTile(product: e))
                                 .toList(),
                           ),
@@ -82,13 +93,13 @@ class _BodyContent extends StatelessWidget {
 }
 
 class _ProductTile extends StatelessWidget {
-  final RecentOrderItem product;
+  final OrderHistoryItem product;
   const _ProductTile({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _navigateToOrderDetails(context),
+      onTap: () => _navigateToOrderDetails(context, product),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         child: CustomCard(
@@ -138,37 +149,15 @@ class _ProductTile extends StatelessWidget {
                             ),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _PriceLabel(product: product),
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            visualDensity: const VisualDensity(
-                              horizontal: -4,
-                              vertical: -4,
-                            ),
-                            onPressed: () {
-                              product.isFavourite
-                                  ? context.read<RecentOrderBloc>().add(
-                                        RecentOrderEvent.deleteFavourite(
-                                          materialCode: product.materialNumber,
-                                        ),
-                                      )
-                                  : context.read<RecentOrderBloc>().add(
-                                        RecentOrderEvent.addFavourite(
-                                          materialCode: product.materialNumber,
-                                        ),
-                                      );
-                            },
-                            icon: Icon(
-                              product.isFavourite
-                                  ? Icons.favorite
-                                  : Icons.favorite_border_outlined,
-                              color: ZPColors.darkYellow,
-                            ),
-                          ),
-                        ],
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      PriceComponent(
+                        price: product.totalPrice.getOrDefaultValue(''),
+                        salesOrgConfig: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .salesOrgConfigs,
                       ),
                     ],
                   ),
@@ -181,15 +170,14 @@ class _ProductTile extends StatelessWidget {
     );
   }
 
-  void _navigateToOrderDetails(BuildContext context) {
+  void _navigateToOrderDetails(
+    BuildContext context,
+    OrderHistoryItem orderHistoryItem,
+  ) {
     context.read<ViewByItemDetailsBloc>().add(
-          ViewByItemDetailsEvent.fetch(
-            user: context.read<EligibilityBloc>().state.user,
-            orderNumber: product.orderNumber,
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            materialNumber: product.materialNumber,
-            soldTo: context.read<EligibilityBloc>().state.customerCodeInfo,
+          ViewByItemDetailsEvent.setItemOrderDetails(
+            viewByItems: context.read<ViewByItemsBloc>().state.orderHistoryList,
+            orderHistoryItem: orderHistoryItem,
             disableDeliveryDateForZyllemStatus: context
                 .read<EligibilityBloc>()
                 .state
@@ -200,44 +188,6 @@ class _ProductTile extends StatelessWidget {
 
     context.router.push(
       const ViewByItemDetailsPageRoute(),
-    );
-  }
-}
-
-class _PriceLabel extends StatelessWidget {
-  final RecentOrderItem product;
-  const _PriceLabel({Key? key, required this.product}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<MaterialPriceBloc, MaterialPriceState>(
-      buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
-      builder: (context, state) {
-        final itemPrice = state.materialPrice[product.materialNumber];
-        if (itemPrice != null) {
-          return PriceComponent(
-            price: itemPrice.lastPrice.getOrDefaultValue(0).toString(),
-            salesOrgConfig:
-                context.read<EligibilityBloc>().state.salesOrgConfigs,
-          );
-        }
-
-        if (state.isFetching) {
-          return SizedBox(
-            key: WidgetKeys.priceLoading,
-            width: 40,
-            child: LoadingShimmer.tile(),
-          );
-        }
-
-        return Text(
-          context.tr('Price Not Available'),
-          style: Theme.of(context).textTheme.labelMedium,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        );
-      },
     );
   }
 }

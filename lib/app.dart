@@ -133,7 +133,6 @@ import 'package:ezrxmobile/application/account/payment_notification/payment_noti
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
-import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
@@ -476,9 +475,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ViewByOrderBloc>(
           create: (context) => locator<ViewByOrderBloc>(),
-        ),
-        BlocProvider<RecentOrderBloc>(
-          create: (context) => locator<RecentOrderBloc>(),
         ),
         BlocProvider<ViewByOrderFilterBloc>(
           create: (context) => locator<ViewByOrderFilterBloc>(),

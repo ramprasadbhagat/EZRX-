@@ -22,7 +22,6 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -38,9 +37,6 @@ class MaterialListBlocMock
     implements MaterialListBloc {}
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class RecentOrderBlocMock extends MockBloc<RecentOrderEvent, RecentOrderState>
-    implements RecentOrderBloc {}
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
@@ -71,7 +67,6 @@ void main() {
   late AuthBloc authBlocMock;
   late MaterialListBlocMock materialListBlocMock;
   late UserBloc userBlocMock;
-  late RecentOrderBlocMock recentOrderBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
   late BannerBloc bannerBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
@@ -104,9 +99,6 @@ void main() {
         .thenReturn(MaterialListState.initial());
     userBlocMock = UserBlocMock();
     when(() => userBlocMock.state).thenReturn(UserState.initial());
-    recentOrderBlocMock = RecentOrderBlocMock();
-    when(() => recentOrderBlocMock.state)
-        .thenReturn(RecentOrderState.initial());
     eligibilityBlocMock = EligibilityBlocMock();
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
@@ -140,9 +132,6 @@ void main() {
             ),
             BlocProvider<AuthBloc>(
               create: (context) => authBlocMock,
-            ),
-            BlocProvider<RecentOrderBloc>(
-              create: (context) => recentOrderBlocMock,
             ),
             BlocProvider<EligibilityBloc>(
               create: (context) => eligibilityBlocMock,

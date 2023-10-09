@@ -55,7 +55,6 @@ import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.da
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
-import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
@@ -271,7 +270,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/product_details_remot
 import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
@@ -312,16 +310,12 @@ import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_
 import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_local_datasource.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/recent_orders_remote_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
@@ -348,10 +342,8 @@ import 'package:ezrxmobile/infrastructure/order/repository/price_override_reposi
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_search_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/re_order_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/recent_order_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/scan_material_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_repository.dart';
@@ -1192,7 +1184,7 @@ void setupLocator() {
       productImageRemoteDataSource: locator<ProductImageRemoteDataSource>(),
     ),
   );
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => ViewByItemsBloc(
       viewByItemRepository: locator<ViewByItemRepository>(),
       config: locator<Config>(),
@@ -2256,45 +2248,6 @@ void setupLocator() {
       returnPriceRepository: locator<ReturnPriceRepository>(),
     ),
   );
-
-  //============================================================
-  //  Fetch Recently Ordered Items
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => RecentOrdersQueryMutation(),
-  );
-
-  locator.registerLazySingleton(
-    () => RecentOrdersLocalDataSource(),
-  );
-
-  locator.registerLazySingleton(
-    () => RecentOrderRepository(
-      config: locator<Config>(),
-      localDataSource: locator<RecentOrdersLocalDataSource>(),
-      remoteDataSource: locator<RecentOrdersRemoteDataSource>(),
-      materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => RecentOrdersRemoteDataSource(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      recentOrdersQueryMutation: locator<RecentOrdersQueryMutation>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => RecentOrderBloc(
-      recentOrderRepository: locator<RecentOrderRepository>(),
-      favouriteRepository: locator<FavouriteRepository>(),
-    ),
-  );
-
   //============================================================
   //  Admin Po Attachment
   //============================================================
@@ -2912,7 +2865,6 @@ void setupLocator() {
   //
   //============================================================
 
-  locator.registerLazySingleton(() => ViewByItemDetailsLocalDataSource());
   locator.registerLazySingleton(() => ProductImageLocalDataSource());
   locator.registerLazySingleton(() => ProductImageQuery());
 
@@ -2926,27 +2878,8 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => ViewByItemDetailsRepository(
-      config: locator<Config>(),
-      localDataSource: locator<ViewByItemDetailsLocalDataSource>(),
-      orderHistoryRemoteDataSource:
-          locator<ViewByItemDetailsRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
     () => ViewByItemDetailsBloc(
-      viewByItemDetailsRepository: locator<ViewByItemDetailsRepository>(),
       orderStatusTrackerRepository: locator<OrderStatusTrackerRepository>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ViewByItemDetailsRemoteDataSource(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      viewByItemDetailsQueryMutation: locator<ViewByItemQueryMutation>(),
     ),
   );
 

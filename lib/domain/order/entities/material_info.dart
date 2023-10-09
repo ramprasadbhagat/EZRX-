@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/country_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
-import 'package:ezrxmobile/domain/order/entities/recent_order_item.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -115,11 +114,6 @@ class MaterialInfo with _$MaterialInfo {
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromBundles(
         materialInfo: this,
       );
-
-  factory MaterialInfo.fromRecentOrder(
-    RecentOrderItem recentOrder,
-  ) =>
-      MaterialInfo.empty().copyWith(materialNumber: recentOrder.materialNumber);
 
   String getTaxClassification(
     bool enableTaxDisplay,

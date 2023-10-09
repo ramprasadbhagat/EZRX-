@@ -83,8 +83,6 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 
-import 'package:ezrxmobile/application/order/recent_order/recent_order_bloc.dart';
-
 import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -329,26 +327,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               );
               _fetchMaterialListProductImage(state, context);
             }
-          },
-        ),
-        BlocListener<RecentOrderBloc, RecentOrderState>(
-          listenWhen: (previous, current) =>
-              previous.isFetching != current.isFetching,
-          listener: (context, state) {
-            state.apiFailureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {
-                  if (state.recentlyOrderedProducts.isNotEmpty) {
-                    _fetchMaterialPrice(context, state.toMaterialInfo);
-                    _fetchProductImage(context, state.recentlyOrderedProducts);
-                  }
-                },
-              ),
-            );
           },
         ),
         BlocListener<ScanMaterialInfoBloc, ScanMaterialInfoState>(
@@ -1040,13 +1018,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               custCode: state.customerCodeInfo.customerCodeSoldTo,
               salesOrg:
                   context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
-            ),
-          );
-      context.read<RecentOrderBloc>().add(
-            RecentOrderEvent.fetchRecentlyOrderedProducts(
-              configs: salesOrgState.configs,
-              customerCodeInfo: state.customerCodeInfo,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
             ),
           );
       context.read<AccountSummaryBloc>().add(
