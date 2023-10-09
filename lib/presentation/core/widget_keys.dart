@@ -244,6 +244,8 @@ class WidgetKeys {
   static const Key clearCovidMaterialListSearchBar = Key('clearSearch');
   static const Key addBonusTextFieldClear = Key('addBonusTextFieldClear');
   static const Key clearShipToSearch = Key('clearShipToSearch');
+  static const Key availableCreditTabSearchBarKey =
+      Key('availableCreditTabSearchBarKey');
 
   //============================================================
   //  Returns
@@ -656,6 +658,7 @@ class WidgetKeys {
   static const Key newPaymentPage = Key('newPaymentPage');
   static const Key payButton = Key('payButton');
   static const Key paymentWebviewPage = Key('paymentWebviewPage');
+  static const Key creditPaymentFilterPage = Key('creditPaymentFilterPage');
 
   //============================================================
   //  Announcement

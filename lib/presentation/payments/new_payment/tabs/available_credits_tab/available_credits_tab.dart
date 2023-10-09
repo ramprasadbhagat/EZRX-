@@ -40,6 +40,7 @@ class AvailableCreditsTab extends StatelessWidget {
           child: Row(
             children: [
               const Expanded(
+                key: WidgetKeys.availableCreditTabSearchBarKey,
                 child: _AvailableCreditsSearchBar(),
               ),
               _FilterTune(),
@@ -218,7 +219,9 @@ class _FilterTune extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (_) {
-        return const AvailableCreditPaymentFilterPage();
+        return const AvailableCreditPaymentFilterPage(
+          key: WidgetKeys.creditPaymentFilterPage,
+        );
       },
     ).then(
       (value) {
