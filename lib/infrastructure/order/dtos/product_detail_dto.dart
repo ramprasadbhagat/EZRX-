@@ -101,6 +101,7 @@ class ProductDetailDto with _$ProductDetailDto {
         promoType: promoType,
         sampleBonusItemId: '',
         isSuspended: isSuspended,
+        isPrincipalSuspended: false,
       );
 
   factory ProductDetailDto.fromJson(Map<String, dynamic> json) =>

@@ -9,6 +9,8 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.cartContainsSuspendedMaterials !=
               current.cartContainsSuspendedMaterials ||
+          previous.cartContainsSuspendedPrincipal !=
+              current.cartContainsSuspendedPrincipal ||
           previous.isMWPNotAllowedAndPresentInCart !=
               current.isMWPNotAllowedAndPresentInCart ||
           previous.isOOSAllowedIfPresentInCart !=
@@ -28,7 +30,9 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'The following items have been identified in your cart:'.tr(),
+                  context.tr(
+                    'The following items have been identified in your cart:',
+                  ),
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 5),
@@ -36,7 +40,7 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
                   BulletWidget(
                     padding: const EdgeInsets.only(bottom: 5),
                     content: Text(
-                      'Suspended material'.tr(),
+                      context.tr('Suspended material'),
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
@@ -44,7 +48,7 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
                   BulletWidget(
                     padding: const EdgeInsets.only(bottom: 5),
                     content: Text(
-                      'Out of stock material'.tr(),
+                      context.tr('Out of stock material'),
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
@@ -52,13 +56,22 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
                   BulletWidget(
                     padding: const EdgeInsets.only(bottom: 5),
                     content: Text(
-                      'Material without price'.tr(),
+                      context.tr('Material without price'),
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
+                if (state.cartContainsSuspendedPrincipal)
+                  BulletWidget(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    content: Text(
+                      context.tr('Principle suspended material'),
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
                 Text(
-                  'Please review and remove these items from cart to proceed to check out.'
-                      .tr(),
+                  context.tr(
+                    'Please review and remove these items from cart to proceed to check out.',
+                  ),
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 5),

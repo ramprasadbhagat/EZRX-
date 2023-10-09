@@ -61,6 +61,8 @@ class CartProductDto with _$CartProductDto {
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'suspensionStatus', defaultValue: false)
         required bool isSuspended,
+    @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
+        required bool isPrincipalSuspended,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -107,6 +109,7 @@ class CartProductDto with _$CartProductDto {
           .toList(),
       hidePrice: cartItemDetails.materialInfo.hidePrice,
       isSuspended: cartItemDetails.materialInfo.isSuspended,
+      isPrincipalSuspended: cartItemDetails.materialInfo.isPrincipalSuspended,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -136,6 +139,7 @@ class CartProductDto with _$CartProductDto {
       type: MaterialInfoType(type),
       remarks: remarks,
       isSuspended: isSuspended,
+      isPrincipalSuspended: isPrincipalSuspended,
     );
   }
 

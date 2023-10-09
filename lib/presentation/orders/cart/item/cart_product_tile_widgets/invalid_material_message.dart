@@ -13,7 +13,7 @@ class _InvalidMaterialMessage extends StatelessWidget {
       children: [
         if (cartItem.materialInfo.isSuspended)
           ErrorTextWithIcon(
-            valueText: 'Material Suspended'.tr(),
+            valueText: context.tr('Material Suspended'),
           ),
         if (!cartItem.inStock &&
             !context
@@ -21,7 +21,11 @@ class _InvalidMaterialMessage extends StatelessWidget {
                 .state
                 .isOOSOrderAllowedToSubmit)
           ErrorTextWithIcon(
-            valueText: 'Material out of stock'.tr(),
+            valueText: context.tr('Material out of stock'),
+          ),
+        if (cartItem.materialInfo.isPrincipalSuspended)
+          ErrorTextWithIcon(
+            valueText: context.tr('Temporarily suspended by principle'),
           ),
       ],
     );

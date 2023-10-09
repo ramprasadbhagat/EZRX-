@@ -192,6 +192,7 @@ class MaterialDto with _$MaterialDto {
       promoType: '',
       sampleBonusItemId: '',
       isSuspended: isSuspended,
+      isPrincipalSuspended: false,
     );
   }
 

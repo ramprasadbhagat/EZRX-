@@ -48,7 +48,8 @@ class CartProductTile extends StatelessWidget {
         !cartItem.inStock && !orderEligibilityState.isOOSAllowedIfPresentInCart;
     final isMWPNotAllowed = cartItem.price.finalPrice.isEmpty &&
         orderEligibilityState.isMWPNotAllowedAndPresentInCart;
-    final isSuspended = cartItem.materialInfo.isSuspended;
+    final isSuspended = cartItem.materialInfo.isSuspended ||
+        cartItem.materialInfo.isPrincipalSuspended;
     final isInvalidCartItem = isSuspended || isOOSNotAllowed || isMWPNotAllowed;
 
     return Padding(

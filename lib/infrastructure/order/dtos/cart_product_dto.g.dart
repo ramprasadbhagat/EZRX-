@@ -42,6 +42,7 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
       tax: (handleTax(json, 'taxes') as num).toDouble(),
       hidePrice: json['hidePrice'] as bool? ?? false,
       isSuspended: json['suspensionStatus'] as bool? ?? false,
+      isPrincipalSuspended: json['principalCutoffStatus'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
@@ -70,6 +71,7 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'taxes': instance.tax,
       'hidePrice': instance.hidePrice,
       'suspensionStatus': instance.isSuspended,
+      'principalCutoffStatus': instance.isPrincipalSuspended,
     };
 
 _$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>

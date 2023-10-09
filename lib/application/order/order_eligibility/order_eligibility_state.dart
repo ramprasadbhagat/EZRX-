@@ -49,7 +49,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
       !isMWPNotAllowedAndPresentInCart &&
       isOOSAllowedIfPresentInCart &&
       isBundleQuantitySatisfies &&
-      !cartContainsSuspendedMaterials;
+      !cartContainsSuspendedMaterials &&
+      !cartContainsSuspendedPrincipal;
 
   bool get isTotalGreaterThanMinOrderAmount {
     if (salesOrg.salesOrg.isTH) {
@@ -142,20 +143,24 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   bool get cartContainsSuspendedMaterials =>
       cartItems.any((product) => product.materialInfo.isSuspended);
+  bool get cartContainsSuspendedPrincipal =>
+      cartItems.any((product) => product.materialInfo.isPrincipalSuspended);
 
   bool get displayInvalidItemsBanner =>
       cartContainsSuspendedMaterials ||
       isMWPNotAllowedAndPresentInCart ||
-      !isOOSAllowedIfPresentInCart;
+      !isOOSAllowedIfPresentInCart ||
+      cartContainsSuspendedPrincipal;
 
   List<MaterialInfo> get invalidMaterialCartItems => cartItems
       .where(
         (item) =>
             item.materialInfo.type.typeMaterial &&
             (item.materialInfo.isSuspended ||
-                item.price.finalPrice.isEmpty &&
-                    isMWPNotAllowedAndPresentInCart ||
-                !item.inStock && !isOOSAllowedIfPresentInCart),
+                item.materialInfo.isPrincipalSuspended ||
+                (item.price.finalPrice.isEmpty &&
+                    isMWPNotAllowedAndPresentInCart) ||
+                (!item.inStock && !isOOSAllowedIfPresentInCart)),
       )
       .map((item) => item.materialInfo.copyWith(quantity: MaterialQty(0)))
       .toList();
