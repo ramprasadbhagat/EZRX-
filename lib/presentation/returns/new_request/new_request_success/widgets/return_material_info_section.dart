@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,6 +31,7 @@ class ReturnMaterialInfoSection extends StatelessWidget {
             style: Theme.of(context).textTheme.labelMedium,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
+            key: WidgetKeys.newRequestSuccessItemTitle,
           ),
           PriceComponent(
             salesOrgConfig:

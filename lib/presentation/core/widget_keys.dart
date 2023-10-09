@@ -291,8 +291,11 @@ class WidgetKeys {
   static Key bonusQuantityField(String uuid) => Key('bonusQuantityField$uuid');
   static const Key newRequestStep3MaterialDetail =
       Key('newRequestStep3MaterialDetail');
+  static const Key newRequestSuccessItemTitle =
+      Key('newRequestSuccessItemTitle');
   static const Key materialReturnDetailsSection =
       Key('materialReturnDetailsSection');
+  static const Key newRequestSuccessMessage = Key('newRequestSuccessMessage');
   static const Key bonusItemSection = Key('bonusItemSection');
   //============================================================
   //  Returns by items

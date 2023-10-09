@@ -6,6 +6,7 @@ class _ReturnRequestSuccessMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.newRequestSuccessMessage,
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Column(
         children: [

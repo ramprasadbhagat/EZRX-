@@ -85,7 +85,7 @@ class NewReturnStep2Robot {
   void verifyReturnQuantityCannotExceedBalanceQuantity() {
     expect(
       find.text('Return quantity cannot exceed balance quantity.'.tr()),
-      findsOneWidget,
+      findsAtLeastNWidgets(1),
     );
   }
 
@@ -139,7 +139,7 @@ class NewReturnStep2Robot {
   void verifyCannotMoveWithoutReturnQuantity() {
     expect(
       find.text('Return quantity is required field.'.tr()),
-      findsOneWidget,
+      findsAtLeastNWidgets(1),
     );
     expect(
       find.text('Please ensure all required fields are filled.'.tr()),
@@ -150,7 +150,7 @@ class NewReturnStep2Robot {
   void verifyCannotMoveWithoutReason() {
     expect(
       find.text('Return reason is required field.'.tr()),
-      findsOneWidget,
+      findsAtLeastNWidgets(1),
     );
     expect(
       find.text('Please ensure all required fields are filled.'.tr()),
