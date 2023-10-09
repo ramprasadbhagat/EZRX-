@@ -115,4 +115,6 @@ class User with _$User {
     // [accessRight.products]  should be true
     return accessRight.products;
   }
+
+  bool get supportMultipleLanguage => supportedLanguages.length > 1;
 }

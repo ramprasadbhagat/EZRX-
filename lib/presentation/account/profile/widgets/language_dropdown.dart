@@ -48,12 +48,14 @@ class _LanguageDropDown extends StatelessWidget {
                     )
                     .toList(),
                 value: state.activeLanguage,
-                onChanged: (selectedLanguage) => context.read<UserBloc>().add(
-                      UserEvent.selectLanguage(
-                        selectedLanguage ??
-                            const Locale(ApiLanguageCode.english),
-                      ),
-                    ),
+                onChanged: state.user.supportMultipleLanguage
+                    ? (selectedLanguage) => context.read<UserBloc>().add(
+                          UserEvent.selectLanguage(
+                            selectedLanguage ??
+                                const Locale(ApiLanguageCode.english),
+                          ),
+                        )
+                    : null,
               );
             },
           ),
