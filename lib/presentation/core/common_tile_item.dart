@@ -51,11 +51,10 @@ class CommonTileItem extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (headerText != null && statusWidget != null)
-              _HeaderItem(
-                header: headerText!,
-                statusWidget: statusWidget!,
-              ),
+            _HeaderItem(
+              header: headerText,
+              statusWidget: statusWidget,
+            ),
             Row(
               children: [
                 _ImageBox(
@@ -196,15 +195,20 @@ class _Subtitle extends StatelessWidget {
 class _HeaderItem extends StatelessWidget {
   const _HeaderItem({
     Key? key,
-    required this.header,
-    required this.statusWidget,
+    this.header,
+    this.statusWidget,
   }) : super(key: key);
 
-  final String header;
-  final Widget statusWidget;
+  final String? header;
+  final Widget? statusWidget;
 
   @override
   Widget build(BuildContext context) {
+    final headerText = header ?? '';
+    if (headerText.isEmpty && statusWidget == null) {
+      return const SizedBox.shrink();
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -213,7 +217,7 @@ class _HeaderItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                header,
+                headerText,
                 key: WidgetKeys.commonTileItemHeader,
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: ZPColors.darkerGrey,
@@ -222,7 +226,7 @@ class _HeaderItem extends StatelessWidget {
             ],
           ),
         ),
-        statusWidget,
+        statusWidget ?? const SizedBox.shrink(),
       ],
     );
   }

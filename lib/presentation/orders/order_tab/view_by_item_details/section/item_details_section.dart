@@ -59,7 +59,7 @@ class ItemDetailsSection extends StatelessWidget {
             statusTag: orderHistoryItem.productTag,
             headerText: salesOrgConfigs.batchNumDisplay
                 ? '${'Batch'.tr()}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderHistoryItem.expiryDate.dateOrDashString})'
-                : null,
+                : '',
             isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
           ),
         ],

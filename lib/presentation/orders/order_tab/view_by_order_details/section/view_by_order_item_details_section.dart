@@ -85,7 +85,7 @@ class OrderItemDetailsSection extends StatelessWidget {
                             statusTag: e.orderDetailBonusTag,
                             headerText: salesOrgConfig.batchNumDisplay
                                 ? '${'Batch'.tr()}: ${e.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${e.expiryDate.dateOrDashString})'
-                                : null,
+                                : '',
                             subtitle: '',
                             footerWidget: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
