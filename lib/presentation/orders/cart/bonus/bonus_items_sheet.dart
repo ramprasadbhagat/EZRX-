@@ -66,6 +66,7 @@ class BonusItemsSheet extends StatelessWidget {
         );
       },
       child: Padding(
+        key: WidgetKeys.bonusSampleSheet,
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,6 +229,7 @@ class _BonusQuantityEmptyWarning extends StatelessWidget {
       builder: (context, state) {
         return !state.isBonusQtyValidated
             ? Container(
+                key: WidgetKeys.bonusSampleSheetEmptyQtyWarning,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
                   vertical: 10,

@@ -11,7 +11,7 @@ extension DateTimeExt on DateTime {
           DateUtils.dateOnly(this).millisecondsSinceEpoch;
 }
 
-extension DoubleExt on double {
+extension NumExt on num {
   String get priceFormatted => _priceFormatter.format(this);
 }
 

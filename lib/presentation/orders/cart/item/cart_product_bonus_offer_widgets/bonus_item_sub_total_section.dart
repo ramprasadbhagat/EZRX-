@@ -16,6 +16,7 @@ class _ItemSubTotalSection extends StatelessWidget {
         alignment: Alignment.centerRight,
         child: Text(
           'FREE'.tr(),
+          key: WidgetKeys.cartItemBonusFreeLabel,
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: ZPColors.textButtonColor,
               ),

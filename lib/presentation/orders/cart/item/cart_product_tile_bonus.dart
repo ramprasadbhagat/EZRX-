@@ -38,6 +38,10 @@ class CartProductTileBonus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomSlidable(
+      key: WidgetKeys.cartItemBonusSample(
+        cartProduct.materialInfo.materialNumber.displayMatNo,
+        bonusItem.materialNumber.displayMatNo,
+      ),
       extentRatio: 0.24,
       endActionPaneActions: [
         CustomSlidableAction(
@@ -123,6 +127,7 @@ class _ItemSubTotalSection extends StatelessWidget {
         alignment: Alignment.centerRight,
         child: Text(
           'FREE'.tr(),
+          key: WidgetKeys.cartItemBonusSampleFreeLabel,
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: ZPColors.textButtonColor,
                 fontWeight: FontWeight.w700,
@@ -166,6 +171,7 @@ class _MaterialDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
               bonusItem.materialDescription,
+              key: WidgetKeys.cartItemBonusSampleMaterialDescription,
               maxLines: 2,
               style: Theme.of(context).textTheme.labelSmall,
             ),

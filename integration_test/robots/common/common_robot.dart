@@ -130,6 +130,10 @@ class CommonRobot {
     );
   }
 
+  void verifySearchBar() {
+    expect(searchBar, findsOneWidget);
+  }
+
   Future<void> searchWithKeyboardAction(String text) async {
     await tester.tap(searchBar);
     await tester.enterText(searchBar, text);

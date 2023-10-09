@@ -37,6 +37,7 @@ class _CartPageScrollListItem extends StatelessWidget {
                 .map(
                   (e) => CartProductOfferBonus(
                     bonusItem: e,
+                    cartProduct: item,
                   ),
                 )
                 .toList(),
@@ -46,6 +47,7 @@ class _CartPageScrollListItem extends StatelessWidget {
             children: item.bonusSampleItems
                 .map(
                   (e) => CartProductTileBonus(
+            
                     bonusItem: e,
                     cartProduct: item,
                   ),

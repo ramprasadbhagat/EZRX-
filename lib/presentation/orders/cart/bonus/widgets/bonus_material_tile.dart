@@ -43,6 +43,7 @@ class BonusMaterialTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.bonusSampleSheetItemTile,
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,12 +59,14 @@ class BonusMaterialTile extends StatelessWidget {
               children: [
                 Text(
                   bonusMaterial.materialNumber.displayMatNo,
+                  key: WidgetKeys.bonusSampleSheetItemMaterialNumber,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Text(
                     bonusMaterial.displayDescription,
+                    key: WidgetKeys.bonusSampleSheetItemMaterialDescription,
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ),

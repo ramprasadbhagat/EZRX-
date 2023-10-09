@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
@@ -17,16 +18,22 @@ part 'cart_product_bonus_offer_widgets/bonus_material_image_section.dart';
 part 'cart_product_bonus_offer_widgets/bonus_material_quantity_section.dart';
 
 class CartProductOfferBonus extends StatelessWidget {
+  final PriceAggregate cartProduct;
   final MaterialItemBonus bonusItem;
 
   const CartProductOfferBonus({
     Key? key,
     required this.bonusItem,
+    required this.cartProduct,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.cartItemBonus(
+        cartProduct.materialInfo.materialNumber.displayMatNo,
+        bonusItem.materialNumber.displayMatNo,
+      ),
       margin: const EdgeInsets.only(top: 25.0),
       child: Column(
         children: [

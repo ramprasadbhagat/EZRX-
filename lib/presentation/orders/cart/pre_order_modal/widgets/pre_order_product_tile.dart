@@ -7,8 +7,8 @@ class _PreOrderProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      key: WidgetKeys.genericKey(
-        key: 'preOrderMaterial${cartProduct.getMaterialNumber.displayMatNo}',
+      key: WidgetKeys.preOrderMaterial(
+        cartProduct.getMaterialNumber.displayMatNo,
       ),
       padding: const EdgeInsets.all(8.0),
       margin: const EdgeInsets.only(top: 25.0),
@@ -30,6 +30,7 @@ class _PreOrderProductTile extends StatelessWidget {
             children: [
               Text(
                 '${"Qty: ".tr()}${cartProduct.quantity.toString()}',
+                key: WidgetKeys.preOrderMaterialQty,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w400,
                     ),
@@ -38,7 +39,7 @@ class _PreOrderProductTile extends StatelessWidget {
                 width: 8,
               ),
               if (cartProduct.materialInfo.type.typeMaterial)
-              _PriceSection(cartProduct: cartProduct),
+                _PriceSection(cartProduct: cartProduct),
             ],
           ),
         ],

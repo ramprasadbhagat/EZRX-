@@ -135,7 +135,7 @@ void main() {
     materialListRobot.verifyMaterialPage();
     homeRobot.findMiniCartIcon();
     await homeRobot.tapMiniCartIcon();
-    cartRobot.verifyCartIsEmpty();
+    cartRobot.verifyNoRecordFound();
   });
 
   testWidgets('EZRX-T19 | Verify select other ShipTo in Homepage',

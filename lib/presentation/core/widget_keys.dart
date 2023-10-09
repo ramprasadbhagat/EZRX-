@@ -37,6 +37,7 @@ class WidgetKeys {
   static const Key addressInfoSectionDeliveryToLabel =
       Key('addressInfoSectionDeliveryToLabel');
   static Key statusTracker(String status) => Key('statusTracker$status');
+  static const Key offerTag = Key('offerTag');
   //============================================================
   //  PRE-ORDER-MODAL
   //============================================================
@@ -418,7 +419,9 @@ class WidgetKeys {
   static const Key counterOfferPriceButtonKey =
       Key('counterOfferPriceButtonKey');
   static const Key preOrderModel = Key('preOrderModel');
-
+  static Key preOrderMaterial(String materialNumber) =>
+      Key('preOrderMaterial$materialNumber');
+  static const Key preOrderMaterialQty = Key('preOrderMaterialQty');
   static const Key bonusOfferItemAddKey = Key('bonusOfferItemAddKey');
   static const Key bonusOfferItemDeleteKey = Key('bonusOfferItemDeleteKey');
   static const Key bonusOfferItemInputKey = Key('bonusOfferItemInputKey');
@@ -464,6 +467,31 @@ class WidgetKeys {
   static const Key cartItemProductDeleteButton =
       Key('cartItemProductDeleteButton');
   static const Key cartItemSwipeDeleteButton = Key('cartItemSwipeDeleteButton');
+  static Key cartItemBonus(String materialNumber, String bonusMaterialNumber) =>
+      Key('cartItemBonus$materialNumber$bonusMaterialNumber');
+  static const Key cartItemBonusMaterialDescription =
+      Key('cartItemBonusMaterialDescription');
+  static const Key cartItemBonusFreeLabel = Key('cartItemBonusFreeLabel');
+  static Key cartItemBonusSample(
+    String materialNumber,
+    String bonusSampleMaterialNumber,
+  ) =>
+      Key('cartItemBonus$materialNumber$bonusSampleMaterialNumber');
+  static const Key cartItemBonusSampleMaterialDescription =
+      Key('cartItemBonusSampleMaterialDescription');
+  static const Key cartItemBonusSampleFreeLabel =
+      Key('cartItemBonusSampleFreeLabel');
+  static const Key bonusSampleSheet = Key('bonusSampleBottomSheet');
+  static const Key bonusSampleSheetCloseButton =
+      Key('bonusSampleBottomSheetCloseButton');
+  static const Key bonusSampleSheetItemTile = Key('bonusSampleSheetItemTile');
+  static const Key bonusSampleSheetItemMaterialNumber =
+      Key('bonusSampleSheetItemMaterialNumber');
+  static const Key bonusSampleSheetItemMaterialDescription =
+      Key('bonusSampleSheetItemMaterialDescription');
+  static const Key bonusSampleSheetEmptyQtyWarning =
+      Key('bonusSampleSheetEmptyQtyWarning');
+
   //============================================================
   //  Checkout Page Keys
   //============================================================

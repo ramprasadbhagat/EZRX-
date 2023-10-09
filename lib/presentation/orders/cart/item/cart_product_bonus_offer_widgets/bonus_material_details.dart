@@ -32,6 +32,7 @@ class _MaterialDetails extends StatelessWidget {
           ),
           Text(
             bonusItem.materialDescription,
+            key: WidgetKeys.cartItemBonusMaterialDescription,
             maxLines: 2,
             style: Theme.of(context).textTheme.labelSmall,
           ),
