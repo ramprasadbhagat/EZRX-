@@ -17,6 +17,8 @@ import 'package:ezrxmobile/infrastructure/order/repository/material_price_detail
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class MaterialPriceDetailRepositoryMock extends Mock
     implements MaterialPriceDetailRepository {}
 
@@ -379,6 +381,116 @@ void main() {
                 addToCartQuantity,
           );
         },
+      );
+      blocTest<AddToCartBloc, AddToCartState>(
+        'UpdateQuantity AddToCartBloc for Material  with Zdp5Discount Material on cart and fetchMaterialPriceWithZdp5Discount failed',
+        setUp: () {
+          addToCartQuantity = 2;
+          onCartDiscountProductQuantity = 3;
+          when(
+            () => mockRepository.fetchMaterialPriceWithZdp5Discount(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              cartItem: mockCartItemList.first.copyWith(
+                quantity: addToCartQuantity,
+                price: mockCartItemList.first.price.copyWith(
+                  zmgDiscount: true,
+                ),
+                salesOrgConfig: salesOrgConfigEnabledZDP5,
+              ),
+            ),
+          ).thenAnswer(
+            (_) async => const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          );
+        },
+        build: () =>
+            AddToCartBloc(materialPriceDetailRepository: mockRepository),
+        seed: () => AddToCartState.initial().copyWith(
+          cartItem: mockCartItemList.first.copyWith(
+            price: mockCartItemList.first.price.copyWith(
+              zmgDiscount: true,
+            ),
+            salesOrgConfig: salesOrgConfigEnabledZDP5,
+          ),
+        ),
+        act: (bloc) => bloc.add(
+          AddToCartEvent.updateQuantity(
+            quantity: addToCartQuantity,
+            cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToCode: ShipToInfo.empty(),
+          ),
+        ),
+        expect: () => [
+          AddToCartState.initial().copyWith(
+            cartItem: mockCartItemList.first.copyWith(
+              quantity: addToCartQuantity,
+              discountedMaterialCount:
+                  addToCartQuantity + onCartDiscountProductQuantity,
+              price: mockCartItemList.first.price.copyWith(
+                zmgDiscount: true,
+              ),
+              salesOrgConfig: salesOrgConfigEnabledZDP5,
+            ),
+          )
+        ],
+      );
+      blocTest<AddToCartBloc, AddToCartState>(
+        'UpdateQuantity AddToCartBloc for Material  with Zdp5Discount Material on cart and fetchMaterialPriceWithZdp5Discount success',
+        setUp: () {
+          addToCartQuantity = 2;
+          onCartDiscountProductQuantity = 3;
+          when(
+            () => mockRepository.fetchMaterialPriceWithZdp5Discount(
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty(),
+              shipToInfo: ShipToInfo.empty(),
+              cartItem: mockCartItemList.first.copyWith(
+                quantity: addToCartQuantity,
+                price: mockCartItemList.first.price.copyWith(
+                  zmgDiscount: true,
+                ),
+                salesOrgConfig: salesOrgConfigEnabledZDP5,
+              ),
+            ),
+          ).thenAnswer(
+            (_) async => Right(
+              mockCartItemList.first,
+            ),
+          );
+        },
+        build: () =>
+            AddToCartBloc(materialPriceDetailRepository: mockRepository),
+        seed: () => AddToCartState.initial().copyWith(
+          cartItem: mockCartItemList.first.copyWith(
+            price: mockCartItemList.first.price.copyWith(
+              zmgDiscount: true,
+            ),
+            salesOrgConfig: salesOrgConfigEnabledZDP5,
+          ),
+        ),
+        act: (bloc) => bloc.add(
+          AddToCartEvent.updateQuantity(
+            quantity: addToCartQuantity,
+            cartZmgQtyExcludeCurrent: onCartDiscountProductQuantity,
+            customerCode: CustomerCodeInfo.empty(),
+            salesOrganisation: SalesOrganisation.empty(),
+            shipToCode: ShipToInfo.empty(),
+          ),
+        ),
+        skip: 1,
+        expect: () => [
+          AddToCartState.initial().copyWith(
+            cartItem: mockCartItemList.first.copyWith(
+              quantity: addToCartQuantity,
+              discountedMaterialCount: addToCartQuantity,
+            ),
+          )
+        ],
       );
 
       blocTest<AddToCartBloc, AddToCartState>(

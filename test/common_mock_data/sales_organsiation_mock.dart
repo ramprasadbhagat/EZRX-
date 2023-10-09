@@ -4,9 +4,12 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 
 const _fakeSaleOrgId = 'fake-sale-org-id-1234';
+const _fakeVNSalesOrgID = '3072';
 
-final fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
-final fakeSalesOrganisation =
+SalesOrg fakeVNSalesOrg = SalesOrg(_fakeVNSalesOrgID);
+SalesOrg fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
+
+SalesOrganisation fakeSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg);
 
 final fakeEmptySalesConfigs = SalesOrganisationConfigs.empty();
@@ -32,4 +35,10 @@ final salesOrgConfigEnabledBatchNumDisplay =
 final salesOrgConfigDisabledBatchNumDisplay =
     SalesOrganisationConfigs.empty().copyWith(
   batchNumDisplay: false,
+);
+
+SalesOrganisationConfigs salesOrgConfigEnabledZDP5 =
+    SalesOrganisationConfigs.empty().copyWith(
+  enableZDP5: true,
+  salesOrg: fakeVNSalesOrg,
 );
