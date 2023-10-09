@@ -3,18 +3,14 @@ part of 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 class _CartPageCartScrollList extends StatelessWidget {
   const _CartPageCartScrollList({
     Key? key,
-    required this.state,
-    required this.taxCode,
   }) : super(key: key);
-
-  final CartState state;
-  final String taxCode;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CartBloc, CartState>(
       listenWhen: (previous, current) =>
-          previous.cartProducts.length != current.cartProducts.length,
+          previous.cartProducts.length != current.cartProducts.length ||
+          previous.isBuyAgain != current.isBuyAgain,
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
           () {

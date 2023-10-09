@@ -84,7 +84,7 @@ void main() {
   final mockViewByOrderDetailsBloc = ViewByOrderDetailsBlockMock();
   final mockSalesOrgBloc = SalesOrgMockBloc();
   final userBlocMock = UserMockBloc();
-  final reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
+  late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late AuthBloc mockAuthBloc;
   late CustomerCodeBloc customerCodeBlocMock;
   late AnnouncementBloc announcementBlocMock;
@@ -107,6 +107,7 @@ void main() {
   );
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
+    reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
     locator.registerFactory(() => reOrderPermissionBlocMock);
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());

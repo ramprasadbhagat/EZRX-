@@ -17,14 +17,17 @@ class _ViewByOrder extends StatelessWidget {
       key: WidgetKeys.viewByOrdersItemKey,
       child: ListTile(
         onTap: () {
-          context.read<ViewByOrderDetailsBloc>().add(
-                ViewByOrderDetailsEvent.setOrderDetails(
-                  orderHistoryDetails: viewByOrderHistoryItem,
-                ),
-              );
-          context.router.push(
-            const ViewByOrderDetailsPageRoute(),
-          );
+          if (!context.read<ReOrderPermissionBloc>().state.isFetching &&
+              !context.read<CartBloc>().state.isBuyAgain) {
+            context.read<ViewByOrderDetailsBloc>().add(
+                  ViewByOrderDetailsEvent.setOrderDetails(
+                    orderHistoryDetails: viewByOrderHistoryItem,
+                  ),
+                );
+            context.router.push(
+              const ViewByOrderDetailsPageRoute(),
+            );
+          }
         },
         contentPadding: const EdgeInsets.all(10),
         title: Column(
@@ -64,9 +67,10 @@ class _ViewByOrder extends StatelessWidget {
                 ],
               ),
             ),
-            _BuyAgainButton(
+            BuyAgainButton(
               viewByOrderHistoryItem: viewByOrderHistoryItem,
               key: WidgetKeys.viewByOrderBuyAgainButtonKey,
+              currentPath: 'orders/view_by_orders',
             ),
           ],
         ),

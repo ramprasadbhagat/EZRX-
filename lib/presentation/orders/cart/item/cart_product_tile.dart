@@ -328,16 +328,27 @@ class _MaterialQuantitySection extends StatefulWidget {
 
 class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   final _controller = TextEditingController();
-
+  String get _qty => widget.cartItem.quantity.toString();
   @override
   void initState() {
     _controller.value = TextEditingValue(
-      text: widget.cartItem.quantity.toString(),
+      text: _qty,
       selection: TextSelection.collapsed(
         offset: _controller.selection.base.offset,
       ),
     );
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant _MaterialQuantitySection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_qty != _controller.text) {
+      _controller.text = _qty;
+      _controller.selection = TextSelection.collapsed(
+        offset: widget.cartItem.quantity.toString().length,
+      );
+    }
   }
 
   @override

@@ -132,7 +132,7 @@ class _CartPageState extends State<CartPage> {
                 () {
                   CustomSnackBar(
                     key: WidgetKeys.materialDetailsAddToCartSnackBar,
-                    messageText: context.tr('Item has been added to cart'),
+                    messageText: context.tr('Available item(s) added to cart'),
                   ).show(context);
                 },
                 (_) {},
@@ -167,9 +167,6 @@ class _CartPageState extends State<CartPage> {
         },
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
-          final taxCode =
-              context.read<EligibilityBloc>().state.salesOrg.taxCode;
-
           return GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: Scaffold(
@@ -227,7 +224,7 @@ class _CartPageState extends State<CartPage> {
                   const AccountSuspendedBanner(),
                   if (!state.priceUnderLoadingShimmer)
                     const _CartPageInvalidItemsBanner(),
-                  _CartPageCartScrollList(state: state, taxCode: taxCode),
+                  const _CartPageCartScrollList(),
                   if (state.cartProducts.isNotEmpty)
                     const _CartPageCheckoutSection(),
                 ],

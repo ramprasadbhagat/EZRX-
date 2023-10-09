@@ -1,14 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/view_by_order_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_header_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_item_details_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_summary_section.dart';
@@ -78,66 +76,11 @@ class ViewByOrderDetailsPage extends StatelessWidget {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: BlocBuilder<CartBloc, CartState>(
-          buildWhen: (previous, current) =>
-              previous.isUpserting != current.isUpserting,
-          builder: (context, stateCart) {
-            return ElevatedButton(
-              key: WidgetKeys.viewByOrderDetailBuyAgain,
-              onPressed: () => context.read<ReOrderPermissionBloc>().add(
-                    ReOrderPermissionEvent.fetch(
-                      orderHistoryDetailsOrderItems: context
-                          .read<ViewByOrderDetailsBloc>()
-                          .state
-                          .orderHistoryDetails
-                          .orderHistoryDetailsOrderItem
-                          .toList(),
-                      salesOrganisation: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrganisation,
-                      shipToInfo:
-                          context.read<EligibilityBloc>().state.shipToInfo,
-                      customerCodeInfo: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .customerCodeInfo,
-                      orderNumberWillUpsert: context
-                          .read<ViewByOrderDetailsBloc>()
-                          .state
-                          .orderHistoryDetails
-                          .orderNumber,
-                    ),
-                  ),
-              style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                    backgroundColor: const MaterialStatePropertyAll(
-                      ZPColors.white,
-                    ),
-                    shape: const MaterialStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(8),
-                        ),
-                        side: BorderSide(color: ZPColors.primary),
-                      ),
-                    ),
-                  ),
-              child: Wrap(
-                children: [
-                  LoadingShimmer.withChild(
-                    enabled: stateCart.isFetching || stateCart.isUpserting,
-                    child: Text(
-                      context.tr('Buy again'),
-                      style:
-                          Theme.of(context).textTheme.labelMedium?.copyWith(
-                                color: ZPColors.primary,
-                              ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
+        child: BuyAgainButton(
+          viewByOrderHistoryItem:
+              context.read<ViewByOrderDetailsBloc>().state.orderHistoryDetails,
+          key: WidgetKeys.viewByOrderBuyAgainButtonKey,
+          currentPath: 'orders/view_by_order_details_page',
         ),
       ),
     );

@@ -1,10 +1,13 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/view_by_order_section.dart';
 
-class _BuyAgainButton extends StatelessWidget {
+class BuyAgainButton extends StatelessWidget {
   final OrderHistoryDetails viewByOrderHistoryItem;
-
-  const _BuyAgainButton({Key? key, required this.viewByOrderHistoryItem})
-      : super(key: key);
+  final String currentPath;
+  const BuyAgainButton({
+    Key? key,
+    required this.viewByOrderHistoryItem,
+    required this.currentPath,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,8 @@ class _BuyAgainButton extends StatelessWidget {
               previous.isFetching != current.isFetching &&
               !current.isFetching &&
               current.orderNumberWillUpsert ==
-                  viewByOrderHistoryItem.orderNumber,
+                  viewByOrderHistoryItem.orderNumber &&
+              currentPath != context.router.currentPath,
           listener: (context, reOrderState) {
             final cartState = context.read<CartBloc>().state;
             context.read<CartBloc>().add(
@@ -64,7 +68,6 @@ class _BuyAgainButton extends StatelessWidget {
                   ),
                 );
             context.router.pushNamed('orders/cart');
-
           },
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching ||
@@ -72,7 +75,7 @@ class _BuyAgainButton extends StatelessWidget {
           builder: (context, state) {
             return OutlinedButton(
               style: OutlinedButton.styleFrom(
-                minimumSize: const Size(double.maxFinite, 45),
+                maximumSize: const Size(double.maxFinite, 45),
               ),
               onPressed: state.orderNumberWillUpsert != OrderNumber('') ||
                       (state.orderNumberWillUpsert ==
