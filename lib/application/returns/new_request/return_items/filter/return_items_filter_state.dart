@@ -8,6 +8,6 @@ class ReturnItemsFilterState with _$ReturnItemsFilterState {
   }) = _ReturnItemsFilterState;
 
   factory ReturnItemsFilterState.initial() => ReturnItemsFilterState(
-        filter: ReturnItemsFilter.defaultDateRange(),
+        filter: ReturnItemsFilter.empty(),
       );
 }

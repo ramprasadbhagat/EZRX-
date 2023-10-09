@@ -49,26 +49,29 @@ class ReturnItemsTab extends StatelessWidget {
                   key: WidgetKeys.newRequestSearchItem,
                 ),
               ),
-              CustomBadge(
-                Icons.tune,
-                key: WidgetKeys.newRequestFilterIcon,
-                count: 1,
-                badgeColor: ZPColors.orange,
-                onPressed: () {
-                  context.read<ReturnItemsFilterBloc>().add(
-                        ReturnItemsFilterEvent.openFilterBottomSheet(
-                          appliedFilter: context
-                              .read<ReturnItemsBloc>()
-                              .state
-                              .appliedFilter,
-                        ),
+              BlocBuilder<ReturnItemsBloc, ReturnItemsState>(
+                buildWhen: (previous, current) =>
+                    previous.appliedFilter != current.appliedFilter,
+                builder: (context, state) {
+                  return CustomBadge(
+                    Icons.tune,
+                    key: WidgetKeys.newRequestFilterIcon,
+                    count: state.appliedFilter.appliedFilterCount,
+                    badgeColor: ZPColors.orange,
+                    onPressed: () {
+                      context.read<ReturnItemsFilterBloc>().add(
+                            ReturnItemsFilterEvent.openFilterBottomSheet(
+                              appliedFilter: state.appliedFilter,
+                            ),
+                          );
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        enableDrag: false,
+                        isDismissible: false,
+                        builder: (_) => const ReturnItemsFilterBottomSheet(),
                       );
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    enableDrag: false,
-                    isDismissible: false,
-                    builder: (_) => const ReturnItemsFilterBottomSheet(),
+                    },
                   );
                 },
               ),
@@ -116,7 +119,7 @@ class ReturnItemsTab extends StatelessWidget {
                                 .read<CustomerCodeBloc>()
                                 .state
                                 .shipToInfo,
-                            appliedFilter: ReturnItemsFilter.defaultDateRange(),
+                            appliedFilter: ReturnItemsFilter.empty(),
                             searchKey: state.searchKey,
                           ),
                         );

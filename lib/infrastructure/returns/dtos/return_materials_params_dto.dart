@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_materials_params.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_items_filter_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -40,7 +41,11 @@ class ReturnMaterialsParamsDto with _$ReturnMaterialsParamsDto {
       shipTo: domain.shipToInfo,
       first: domain.pageSize,
       after: domain.offset,
-      filter: ReturnItemsFilterDto.fromDomain(domain.filter),
+      filter: ReturnItemsFilterDto.fromDomain(
+        domain.filter == ReturnItemsFilter.empty()
+            ? ReturnItemsFilter.defaultDateRange()
+            : domain.filter,
+      ),
       searchFilter: domain.searchKey.searchValueOrEmpty,
     );
   }

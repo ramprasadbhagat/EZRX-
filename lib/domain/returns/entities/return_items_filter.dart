@@ -30,8 +30,15 @@ class ReturnItemsFilter with _$ReturnItemsFilter {
         ),
       );
 
+  factory ReturnItemsFilter.empty() => ReturnItemsFilter(
+        invoiceDateFrom: DateTimeStringValue(''),
+        invoiceDateTo: DateTimeStringValue(''),
+      );
+
   DateTimeRange get getInvoiceDateFilterDateRange => DateTimeRange(
         start: invoiceDateFrom.dateTime,
         end: invoiceDateTo.dateTime,
       );
+
+  int get appliedFilterCount => invoiceDateFrom.isValid() ? 1 : 0;
 }

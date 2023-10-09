@@ -17,7 +17,7 @@ class ReturnItemsState with _$ReturnItemsState {
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
-        appliedFilter: ReturnItemsFilter.defaultDateRange(),
+        appliedFilter: ReturnItemsFilter.empty(),
         items: <ReturnMaterial>[],
         searchKey: SearchKey.search(''),
       );
