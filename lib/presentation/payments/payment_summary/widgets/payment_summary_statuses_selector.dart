@@ -16,7 +16,13 @@ class _PaymentSummaryStatusesSelector extends StatelessWidget {
       ) {
         return Column(
           children: state.statuses.map((StatusType status) {
+            final value = state.filter.filterStatuses.contains(status);
+
             return CheckboxListTile(
+              key: WidgetKeys.paymentSummaryFilterStatus(
+                status.getValue(),
+                value,
+              ),
               contentPadding: EdgeInsets.zero,
               title: Text(
                 status.getValue(),
@@ -36,7 +42,7 @@ class _PaymentSummaryStatusesSelector extends StatelessWidget {
                       ),
                     );
               },
-              value: state.filter.filterStatuses.contains(status),
+              value: value,
             );
           }).toList(),
         );
