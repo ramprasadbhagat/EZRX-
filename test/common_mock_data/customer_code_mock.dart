@@ -7,13 +7,13 @@ const _fakeBuilding = 'fakeBuilding';
 const _shipToCustomerCode = '123';
 const _fakeBillToCustomerCode = 'customer1234';
 const _fakeCustomerCodeSoldTo = 'customer123';
-final _fakeShipToInfo = ShipToInfo.empty()
+final fakeShipToInfo = ShipToInfo.empty()
     .copyWith(building: _fakeBuilding, shipToCustomerCode: _shipToCustomerCode);
 final _fakeBillToInfo =
     BillToInfo.empty().copyWith(billToCustomerCode: _fakeBillToCustomerCode);
 
 final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
-  shipToInfos: [_fakeShipToInfo],
+  shipToInfos: [fakeShipToInfo],
   billToInfos: [_fakeBillToInfo],
   customerCodeSoldTo: _fakeCustomerCodeSoldTo,
 );
