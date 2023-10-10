@@ -60,13 +60,19 @@ class CommonRobot {
   }) async {
     final fromDateString = '${fromDate.month}/${fromDate.day}/${fromDate.year}';
     final toDateString = '${toDate.month}/${toDate.day}/${toDate.year}';
-
-    await tester.tap(find.widgetWithIcon(IconButton, Icons.edit));
-    await tester.pump();
-    final dateRangeFields = find.descendant(
-      of: find.byType(DateRangePickerDialog),
-      matching: find.byType(TextField),
+    final dialog = find.byType(DateRangePickerDialog);
+    final editWidget = find.descendant(
+      of: dialog,
+      matching: find.widgetWithIcon(IconButton, Icons.edit),
     );
+    final dateRangeFields =
+        find.descendant(of: dialog, matching: find.byType(TextField));
+    final isInputMode = dateRangeFields.evaluate().length == 2;
+    if (!isInputMode) {
+      await tester.tap(editWidget);
+      await tester.pump();
+    }
+
     await tester.enterText(dateRangeFields.first, fromDateString);
     await tester.enterText(dateRangeFields.last, toDateString);
     await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -123,15 +129,23 @@ class CommonRobot {
   //============================================================
   //  Search bar
   //============================================================
+  void verifySearchBarText(String text) {
+    final editableText = find.descendant(
+      of: searchBar,
+      matching: find.byType(EditableText),
+    );
+    expect(tester.widget<EditableText>(editableText).controller.text, text);
+  }
+
+  void verifySearchBar() {
+    expect(searchBar, findsOneWidget);
+  }
+
   void verifyInvalidLengthSearchMessage({bool isVisible = true}) {
     expect(
       invalidLengthSearchMessage,
       isVisible ? findsOneWidget : findsNothing,
     );
-  }
-
-  void verifySearchBar() {
-    expect(searchBar, findsOneWidget);
   }
 
   Future<void> searchWithKeyboardAction(String text) async {

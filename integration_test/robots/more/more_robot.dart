@@ -9,6 +9,7 @@ class MoreRobot {
   final returnsTile = find.byKey(WidgetKeys.returnsTile);
   final newRequestFloatingButton =
       find.byKey(WidgetKeys.returnByItemsNewRequestButton);
+  final paymentTile = find.byKey(WidgetKeys.paymentsTile);
 
   Future<void> tapReturnsTile() async {
     await tester.tap(returnsTile);
@@ -17,6 +18,11 @@ class MoreRobot {
 
   Future<void> tapNewRequestFloatingButton() async {
     await tester.tap(newRequestFloatingButton);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapPaymentTile() async {
+    await tester.tap(paymentTile);
     await tester.pumpAndSettle();
   }
 }

@@ -169,7 +169,10 @@ class _StatusesSelector extends StatelessWidget {
       ) {
         return Column(
           children: state.statuses.map((String status) {
+            final value = state.filter.filterStatuses.contains(status);
+
             return CheckboxListTile(
+              key: WidgetKeys.statusFilter(status, value),
               contentPadding: EdgeInsets.zero,
               title: Text(
                 status,
@@ -186,7 +189,7 @@ class _StatusesSelector extends StatelessWidget {
                       ),
                     );
               },
-              value: state.filter.filterStatuses.contains(status),
+              value: value,
             );
           }).toList(),
         );

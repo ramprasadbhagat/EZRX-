@@ -547,25 +547,6 @@ class WidgetKeys {
       Key('isFavorite$isFavorite');
 
   //============================================================
-  //  ALL INVOICES
-  //============================================================
-
-  static const Key tempFilter = Key('tempFilter');
-  static const Key fromDocumentDateField = Key('fromDocumentDateField');
-  static const Key toDocumentDateField = Key('toDocumentDateField');
-  static const Key fromDueDateField = Key('fromDueDateField');
-  static const Key toDueDateField = Key('toDueDateField');
-  static const Key amountValueFrom = Key('amountValueFrom');
-  static const Key amountValueTo = Key('amountValueTo');
-
-  //============================================================
-  //  Invoice Details
-  //============================================================
-  static const Key invoiceDetailsPageListView =
-      Key('invoiceDetailsPageListView');
-  static const Key downloadEInvoiceButton = Key('downloadEInvoiceButton');
-
-  //============================================================
   //  BundleDetails Keys
   //============================================================
   static const Key bundleDetailPage = Key('bundleDetailPage');
@@ -803,6 +784,48 @@ class WidgetKeys {
   static const Key paymentAdviceCreatedPageBack =
       Key('paymentAdviceCreatedPageBack');
   static const Key creditDetailsPageListView = Key('creditDetailsPageListView');
+  //===========================================================
+  //  Account summary
+  //============================================================
+  static const Key accountSummaryFilterButton =
+      Key('accountSummaryFilterButton');
+  static const Key accountSummaryDownloadButton =
+      Key('accountSummaryDownloadButton');
+  //============================================================
+  //  ALL INVOICES
+  //============================================================
+
+  static const Key tempFilter = Key('tempFilter');
+  static const Key fromDocumentDateField = Key('fromDocumentDateField');
+  static const Key toDocumentDateField = Key('toDocumentDateField');
+  static const Key fromDueDateField = Key('fromDueDateField');
+  static const Key toDueDateField = Key('toDueDateField');
+  static const Key amountValueFrom = Key('amountValueFrom');
+  static const Key amountValueTo = Key('amountValueTo');
+  static Key statusFilter(String name, bool value) =>
+      Key('statusFilter$name$value');
+  static const Key invoiceItem = Key('invoiceItem');
+  static const Key invoiceItemCreatedDate = Key('invoiceItemCreatedDate');
+  static const Key invoiceItemDueDate = Key('invoiceItemDueDate');
+  static const Key invoiceItemStatus = Key('invoiceItemStatus');
+  static const Key invoiceItemId = Key('invoiceItemId');
+  static const Key invoiceItemOrderId = Key('invoiceItemOrderId');
+
+  //============================================================
+  //  Invoice Details
+  //============================================================
+  static const Key invoiceDetailsPageListView =
+      Key('invoiceDetailsPageListView');
+  static const Key downloadEInvoiceButton = Key('downloadEInvoiceButton');
+  static const Key invoiceDetailSubTotal = Key('invoiceDetailSubTotal');
+  static const Key invoiceDetailGrandTotal = Key('invoiceDetailGrandTotal');
+  static Key invoiceDetailMaterial(int groupIndex, int index) =>
+      Key('invoiceDetailMaterial$groupIndex$index');
+  static const Key invoiceDetailMaterialQty = Key('invoiceDetailMaterialQty');
+  static const Key invoiceDetailMaterialUnitPrice =
+      Key('invoiceDetailMaterialUnitPrice');
+  static const Key invoiceDetailMaterialTotalPrice =
+      Key('invoiceDetailMaterialTotalPrice');
   //===========================================================
   //  Intro Page
   //============================================================

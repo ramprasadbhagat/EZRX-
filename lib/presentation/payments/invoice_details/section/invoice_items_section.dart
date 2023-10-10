@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -51,8 +53,12 @@ class InvoiceItemsSection extends StatelessWidget {
                     children: customerDocumentDetail.groupList
                         .elementAt(index)
                         .items
-                        .map(
-                          (e) => _InvoiceItemDetail(
+                        .mapIndexed(
+                          (itemIndex, e) => _InvoiceItemDetail(
+                            key: WidgetKeys.invoiceDetailMaterial(
+                              index,
+                              itemIndex,
+                            ),
                             customerDocumentDetail: e,
                           ),
                         )
@@ -94,17 +100,20 @@ class _InvoiceItemDetail extends StatelessWidget {
         children: [
           Text(
             '${context.tr('Qty')}: ${customerDocumentDetail.billingQuantity.getOrDefaultValue(0)}',
+            key: WidgetKeys.invoiceDetailMaterialQty,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: ZPColors.black,
                 ),
           ),
           PriceComponent(
+            key: WidgetKeys.invoiceDetailMaterialTotalPrice,
             salesOrgConfig: salesOrgConfigs,
             price: customerDocumentDetail.grossAmount.toString(),
           ),
         ],
       ),
       priceComponent: PriceComponent(
+        key: WidgetKeys.invoiceDetailMaterialUnitPrice,
         salesOrgConfig: salesOrgConfigs,
         price: customerDocumentDetail.grossAmount.toString(),
       ),

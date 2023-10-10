@@ -176,6 +176,7 @@ class _InvoiceGroup extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
                   '${context.tr('Created on')} ${data.dueDate.dateString}',
+                  key: WidgetKeys.invoiceItemCreatedDate,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkerGrey,
                       ),
@@ -206,6 +207,7 @@ class _InvoiceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.invoiceItem,
       child: ListTile(
         onTap: () {
           context.read<CreditAndInvoiceDetailsBloc>().add(
@@ -231,9 +233,11 @@ class _InvoiceItem extends StatelessWidget {
               children: [
                 Text(
                   '${context.tr('Invoice')} #${invoiceItem.searchKey}',
+                  key: WidgetKeys.invoiceItemId,
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
                 StatusLabel(
+                  key: WidgetKeys.invoiceItemStatus,
                   status: StatusType(
                     invoiceItem.invoiceProcessingStatus.getOrDefaultValue(''),
                   ),
@@ -247,6 +251,7 @@ class _InvoiceItem extends StatelessWidget {
                 children: [
                   Text(
                     '${context.tr('Order')} #${invoiceItem.orderId.displayNAIfEmpty}',
+                    key: WidgetKeys.invoiceItemOrderId,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(
@@ -254,6 +259,7 @@ class _InvoiceItem extends StatelessWidget {
                       invoiceItem.netDueDate.dateTimeOrNull,
                       context.read<EligibilityBloc>().state.salesOrganisation,
                     )}',
+                    key: WidgetKeys.invoiceItemDueDate,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: invoiceItem
                               .invoiceProcessingStatus.displayDueDateColor,

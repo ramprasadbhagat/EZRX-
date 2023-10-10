@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:flutter/material.dart';
 
 final _priceFormatter = NumberFormat('###,###,###,###,###.00');
@@ -9,6 +10,8 @@ extension DateTimeExt on DateTime {
           DateUtils.dateOnly(this).millisecondsSinceEpoch &&
       DateUtils.dateOnly(to).millisecondsSinceEpoch >=
           DateUtils.dateOnly(this).millisecondsSinceEpoch;
+
+  String get displayDate => DateTimeStringValue(toIso8601String()).dateString;
 }
 
 extension NumExt on num {

@@ -80,10 +80,12 @@ class AccountSummary extends StatelessWidget {
                               AllInvoicesPageRoute.name,
                         ),
                         _FilterTuneIcon(
+                          key: WidgetKeys.accountSummaryFilterButton,
                           isInvoiceTabActive: context.tabsRouter.current.name ==
                               AllInvoicesPageRoute.name,
                         ),
                         _Export(
+                          key: WidgetKeys.accountSummaryDownloadButton,
                           isInvoiceTabActive: context.tabsRouter.current.name ==
                               AllInvoicesPageRoute.name,
                         ),
