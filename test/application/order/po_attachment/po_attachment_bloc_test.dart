@@ -19,13 +19,14 @@ class MockFile extends Mock implements File {}
 
 void main() {
   late PoAttachmentRepository poAttachmentRepository;
-  final poDocumentsList = <PoDocuments>[
-    PoDocuments(
-      name: 'fake-file-1',
-      url: 'fake-url-1',
-    )
-  ];
-
+  final fakePoDocument = PoDocuments(
+    name: 'fake-file',
+    url: 'fake-url',
+  );
+  final fakePoDocument1 = PoDocuments(
+    name: 'fake-file-1',
+    url: 'fake-url-1',
+  );
   final file = [File('')];
 
   group(
@@ -34,7 +35,17 @@ void main() {
       setUpAll(() {
         poAttachmentRepository = PoAttachmentRepositoryMock();
       });
-
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Initial',
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        act: (bloc) => bloc.add(
+          const PoAttachmentEvent.initialized(),
+        ),
+        expect: () => [
+          PoAttachmentState.initial(),
+        ],
+      );
       blocTest<PoAttachmentBloc, PoAttachmentState>(
         'PoAttachmentBloc Bloc Download Permission fail',
         setUp: () {
@@ -48,7 +59,7 @@ void main() {
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
           PoAttachmentEvent.downloadFile(
-            files: poDocumentsList,
+            files: [fakePoDocument1],
           ),
         ),
         expect: () => [
@@ -75,7 +86,7 @@ void main() {
           );
           when(
             () => poAttachmentRepository.downloadFiles(
-              files: poDocumentsList,
+              files: [fakePoDocument1],
               attachmentType: AttachmentType.downloadPOAttachment,
             ),
           ).thenAnswer(
@@ -88,7 +99,7 @@ void main() {
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
           PoAttachmentEvent.downloadFile(
-            files: poDocumentsList,
+            files: [fakePoDocument1],
           ),
         ),
         expect: () => [
@@ -113,7 +124,7 @@ void main() {
           );
           when(
             () => poAttachmentRepository.downloadFiles(
-              files: poDocumentsList,
+              files: [fakePoDocument1],
               attachmentType: AttachmentType.downloadPOAttachment,
             ),
           ).thenAnswer(
@@ -124,7 +135,7 @@ void main() {
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
           PoAttachmentEvent.downloadFile(
-            files: poDocumentsList,
+            files: [fakePoDocument1],
           ),
         ),
         expect: () => [
@@ -160,7 +171,7 @@ void main() {
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
           PoAttachmentEvent.openFile(
-            files: poDocumentsList.first,
+            files: fakePoDocument1,
           ),
         ),
         expect: () => [
@@ -188,7 +199,7 @@ void main() {
           );
           when(
             () => poAttachmentRepository.openFile(
-              files: poDocumentsList.first,
+              files: fakePoDocument1,
               attachmentType: AttachmentType.downloadPOAttachment,
             ),
           ).thenAnswer(
@@ -201,7 +212,7 @@ void main() {
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
           PoAttachmentEvent.openFile(
-            files: poDocumentsList.first,
+            files: fakePoDocument1,
           ),
         ),
         expect: () => [
@@ -211,7 +222,6 @@ void main() {
           ),
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.view,
-            isFetching: false,
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake-error'))),
           ),
@@ -228,7 +238,7 @@ void main() {
           );
           when(
             () => poAttachmentRepository.openFile(
-              files: poDocumentsList.first,
+              files: fakePoDocument1,
               attachmentType: AttachmentType.downloadPOAttachment,
             ),
           ).thenAnswer(
@@ -241,7 +251,7 @@ void main() {
             PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
         act: (bloc) => bloc.add(
           PoAttachmentEvent.openFile(
-            files: poDocumentsList.first,
+            files: fakePoDocument1,
           ),
         ),
         expect: () => [
@@ -251,7 +261,6 @@ void main() {
           ),
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.view,
-            isFetching: false,
           ),
         ],
       );
@@ -394,7 +403,7 @@ void main() {
             () => poAttachmentRepository.uploadFiles(
               files: [
                 PlatformFile(
-                  name: 'fake-file',
+                  name: fakePoDocument.name,
                   size: 0,
                 ),
               ],
@@ -412,7 +421,7 @@ void main() {
             (invocation) async => Right(
               [
                 PlatformFile(
-                  name: 'fake-file',
+                  name: fakePoDocument.name,
                   size: 0,
                 ),
               ],
@@ -459,19 +468,14 @@ void main() {
             () => poAttachmentRepository.uploadFiles(
               files: [
                 PlatformFile(
-                  name: 'fake-file',
+                  name: fakePoDocument.name,
                   size: 0,
                 ),
               ],
             ),
           ).thenAnswer(
             (invocation) async => Right(
-              [
-                PoDocuments.empty().copyWith(
-                  name: 'fake-file',
-                  url: 'fake-url',
-                ),
-              ],
+              [fakePoDocument],
             ),
           );
           when(
@@ -482,7 +486,7 @@ void main() {
             (invocation) async => Right(
               [
                 PlatformFile(
-                  name: 'fake-file',
+                  name: fakePoDocument.name,
                   size: 0,
                 ),
               ],
@@ -513,12 +517,162 @@ void main() {
           ),
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.upload,
-            fileUrl: [
-              PoDocuments.empty().copyWith(
-                name: 'fake-file',
-                url: 'fake-url',
+            fileUrl: [fakePoDocument],
+          ),
+        ],
+      );
+
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc delete file failed',
+        setUp: () {
+          when(
+            () => poAttachmentRepository.deleteFile(
+              filePath: fakePoDocument.url,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.other('Fake-error'),
+            ),
+          );
+        },
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.deleteFile(
+            file: fakePoDocument,
+          ),
+        ),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+            failureOrSuccessOption: none(),
+            fileOperationMode: FileOperationMode.none,
+          ),
+          PoAttachmentState.initial().copyWith(
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('Fake-error'),
               ),
-            ],
+            ),
+            fileUrl: [],
+          ),
+        ],
+      );
+
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc delete file success',
+        setUp: () {
+          when(
+            () => poAttachmentRepository.deleteFile(
+              filePath: fakePoDocument.url,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right(true),
+          );
+        },
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        seed: () => PoAttachmentState.initial().copyWith(
+          fileUrl: [fakePoDocument, fakePoDocument1],
+        ),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.deleteFile(
+            file: fakePoDocument,
+          ),
+        ),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+            failureOrSuccessOption: none(),
+            fileOperationMode: FileOperationMode.none,
+            fileUrl: [fakePoDocument, fakePoDocument1],
+          ),
+          PoAttachmentState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            fileUrl: [fakePoDocument1],
+            fileOperationMode: FileOperationMode.delete,
+          ),
+        ],
+      );
+    },
+  );
+
+  group(
+    'PoAttachmentBloc Bloc Delete file Test',
+    () {
+      setUpAll(() {
+        poAttachmentRepository = PoAttachmentRepositoryMock();
+      });
+
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc delete file failed',
+        setUp: () {
+          when(
+            () => poAttachmentRepository.deleteFile(
+              filePath: fakePoDocument.url,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(
+              ApiFailure.other('Fake-error'),
+            ),
+          );
+        },
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.deleteFile(
+            file: fakePoDocument,
+          ),
+        ),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+            failureOrSuccessOption: none(),
+            fileOperationMode: FileOperationMode.none,
+          ),
+          PoAttachmentState.initial().copyWith(
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('Fake-error'),
+              ),
+            ),
+            fileUrl: [],
+          ),
+        ],
+      );
+
+      blocTest<PoAttachmentBloc, PoAttachmentState>(
+        'PoAttachmentBloc Bloc delete file success',
+        setUp: () {
+          when(
+            () => poAttachmentRepository.deleteFile(
+              filePath: fakePoDocument.url,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right(true),
+          );
+        },
+        build: () =>
+            PoAttachmentBloc(poAttachmentRepository: poAttachmentRepository),
+        seed: () => PoAttachmentState.initial().copyWith(
+          fileUrl: [fakePoDocument, fakePoDocument1],
+        ),
+        act: (bloc) => bloc.add(
+          PoAttachmentEvent.deleteFile(
+            file: fakePoDocument,
+          ),
+        ),
+        expect: () => [
+          PoAttachmentState.initial().copyWith(
+            isFetching: true,
+            failureOrSuccessOption: none(),
+            fileOperationMode: FileOperationMode.none,
+            fileUrl: [fakePoDocument, fakePoDocument1],
+          ),
+          PoAttachmentState.initial().copyWith(
+            failureOrSuccessOption: none(),
+            fileUrl: [fakePoDocument1],
+            fileOperationMode: FileOperationMode.delete,
           ),
         ],
       );
