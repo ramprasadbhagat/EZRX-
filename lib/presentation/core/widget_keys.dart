@@ -907,7 +907,9 @@ class WidgetKeys {
   static const Key soaFilterbottomSheetKey = Key('soaFilterbottomSheet');
   static const Key soaFilterApplyButtonKey = Key('soaFilterApplyButton');
   static const Key soaFilterResetButtonKey = Key('soaFilterResetButton');
-  static const Key soaDownloadButtonKey = Key('soaDownloadButton');
+  static const Key soaItemTextKey = Key('soaItemText');
+  static const Key soaPage = Key('soaPage');
+  static const Key soaFilterButton = Key('soaFilterButton');
   static const Key soaSearchResultsKey = Key('soaSearchResults');
   //===========================================================
   //  Month Picker

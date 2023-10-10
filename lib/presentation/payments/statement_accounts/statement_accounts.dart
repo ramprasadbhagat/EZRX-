@@ -41,6 +41,7 @@ class StatementAccountsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: WidgetKeys.soaPage,
       appBar: AppBar(
         title: Text(
           context.tr('Statement of accounts'),

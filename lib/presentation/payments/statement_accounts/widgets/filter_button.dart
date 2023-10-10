@@ -69,6 +69,7 @@ class _FilterButton extends StatelessWidget {
               return Stack(
                 children: <Widget>[
                   IconButton(
+                    key: WidgetKeys.soaFilterButton,
                     onPressed: state.isFetching || state.filterList.isEmpty
                         ? null
                         : () => _showFilterBottomSheet(context),
@@ -90,6 +91,10 @@ class _FilterButton extends StatelessWidget {
                               fontSize: 10,
                               color: ZPColors.white,
                             ),
+                        key: WidgetKeys.genericKey(
+                          key:
+                              'soaFilterCount#${state.appliedFilter.appliedFilterCount.toString()}',
+                        ),
                       ),
                     ),
                   ),

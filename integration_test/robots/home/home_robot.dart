@@ -242,6 +242,11 @@ class HomeRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> tapPaymentQuickAccess() async {
+    await tester.tap(find.byKey(WidgetKeys.homeQuickAccessPaymentsMenu));
+    await tester.pumpAndSettle();
+  }
+
   Future<void> tapMiniCartIcon() async {
     await tester.tap(miniCart);
     await tester.pumpAndSettle();

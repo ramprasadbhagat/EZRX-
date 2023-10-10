@@ -29,9 +29,12 @@ class _SoaTile extends StatelessWidget {
                 Text(
                   soa.soaData.simpleDateString,
                   style: Theme.of(context).textTheme.labelSmall,
+                  key: WidgetKeys.soaItemTextKey,
                 ),
                 TextButton.icon(
-                  key: WidgetKeys.soaDownloadButtonKey,
+                  key: WidgetKeys.genericKey(
+                    key: 'soaDownloadButton#${soa.soaData.simpleDateString}',
+                  ),
                   onPressed: state.isDownloadInProgress
                       ? null
                       : () =>

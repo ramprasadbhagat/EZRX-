@@ -18,6 +18,7 @@ class CommonRobot {
   final moreTab = find.byKey(WidgetKeys.moreTab);
   final notificationTab = find.byKey(WidgetKeys.notificationTab);
   final customerCodeSelector = find.byKey(WidgetKeys.customerCodeSelector);
+  final customSnackBar = find.byKey(WidgetKeys.customSnackBar);
   final searchBar = find.byType(CustomSearchBar);
   final invalidLengthSearchMessage =
       find.text('Please enter at least 2 characters.'.tr());
@@ -38,19 +39,27 @@ class CommonRobot {
   }
 
   Future<void> changeDeliveryAddress(String shipToCode) async {
-    await tester.tap(customerCodeSelector);
-    await tester.pumpAndSettle();
-    await searchWithKeyboardAction(shipToCode);
-    await tester
-        .tap(find.byKey(WidgetKeys.shipToAddressOption(shipToCode)).first);
-    await tester.pumpAndSettle();
-    final changeAddressButton = find.descendant(
-      of: find.byKey(WidgetKeys.confirmButton),
-      matching: find.text('Change address'.tr()),
-    );
-    if (tester.widgetList(changeAddressButton).isNotEmpty) {
-      await tester.tap(changeAddressButton);
+    if ((tester
+                .widget<ListTile>(find.byKey(WidgetKeys.customerCodeSelect))
+                .title as Text)
+            .data ==
+        shipToCode) {
+      return;
+    } else {
+      await tester.tap(customerCodeSelector);
       await tester.pumpAndSettle();
+      await searchWithKeyboardAction(shipToCode);
+      await tester
+          .tap(find.byKey(WidgetKeys.shipToAddressOption(shipToCode)).first);
+      await tester.pumpAndSettle();
+      final changeAddressButton = find.descendant(
+        of: find.byKey(WidgetKeys.confirmButton),
+        matching: find.text('Change address'.tr()),
+      );
+      if (tester.widgetList(changeAddressButton).isNotEmpty) {
+        await tester.tap(changeAddressButton);
+        await tester.pumpAndSettle();
+      }
     }
   }
 
@@ -214,6 +223,15 @@ class CommonRobot {
     expect(
       find.descendant(of: cartButton, matching: find.text(qty.toString())),
       findsOneWidget,
+    );
+  }
+
+  void verifyCustomSnackBar({
+    required String message,
+  }) {
+    expect(
+      tester.widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage)).data,
+      message,
     );
   }
 }

@@ -312,7 +312,12 @@ void main() {
       await tester.pumpAndSettle();
       final findSoaItem = find.byKey(WidgetKeys.genericKey(key: 'SoaItem#0'));
       expect(findSoaItem, findsOneWidget);
-      final downloadButtonKey = find.byKey(WidgetKeys.soaDownloadButtonKey);
+      final downloadButtonKey = find.byKey(
+        WidgetKeys.genericKey(
+          key:
+              'soaDownloadButton#${fakeSoaList.first.soaData.simpleDateString}',
+        ),
+      );
       expect(downloadButtonKey, findsOneWidget);
       await tester.tap(downloadButtonKey);
     });

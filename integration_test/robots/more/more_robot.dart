@@ -18,6 +18,10 @@ class MoreRobot {
 
   Future<void> tapNewRequestFloatingButton() async {
     await tester.tap(newRequestFloatingButton);
+  }
+
+  Future<void> tapPaymentTile() async {
+    await tester.tap(paymentTile);
     await tester.pumpAndSettle();
   }
 
