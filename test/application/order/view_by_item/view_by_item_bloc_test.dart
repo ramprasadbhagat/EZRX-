@@ -1,20 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
@@ -24,84 +15,190 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
+
 class ViewByItemRepositoryMock extends Mock implements ViewByItemRepository {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  late ViewByItemRepository viewByItemRepository;
-  late OrderHistory orderHistoryMockData;
-  late List<OrderNumber> orderNumbers;
-
+  late ViewByItemRepository viewByItemRepositoryMock;
+  late OrderHistory orderHistoryMock;
+  late List<OrderNumber> orderNumbersMock;
+  late Map<OrderNumber, InvoiceData> invoiceMapDataMock;
+  late List<OrderHistoryItem> orderHistoryItemsListMock;
   final config = Config()..appFlavor = Flavor.mock;
-  final salesOrgConfig = SalesOrganisationConfigs.empty()
-      .copyWith(salesOrg: SalesOrg('fake-salesOrg'));
-  final customerCodeInfo = CustomerCodeInfo.empty()
-      .copyWith(customerCodeSoldTo: 'fake-customerCode');
-  final shipToInfo = ShipToInfo.empty().copyWith(
-    shipToCustomerCode: 'fake-shipto',
-  );
-  final user = User.empty().copyWith(
-    username: Username('fake-name'),
-    role: Role(
-      description: 'fake-desc',
-      id: 'id',
-      name: 'fake-name',
-      type: RoleType('fake-type'),
-    ),
-    preferredLanguage: const Locale(ApiLanguageCode.english),
-  );
-  final searchKey = SearchKey('search-key');
-  final dateTimeRange = DateTimeRange(
-    end: DateTime.parse('2023-07-14 18:34:09.177884'),
-    start: DateTime.parse('2023-07-07 18:34:09.181722'),
-  );
-  final viewByItemFilter = ViewByItemFilter.empty().copyWith(
-    orderDateFrom: DateTimeStringValue(
-      getDateStringByDateTime(dateTimeRange.start),
-    ),
-    orderDateTo: DateTimeStringValue(
-      getDateStringByDateTime(dateTimeRange.end),
-    ),
-  );
+  final fakeShipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
+  final searchKey = SearchKey.searchFilter('');
+  final viewByItemFilter = ViewByItemFilter.empty();
 
   const offSet = 0;
   group('Orders View By Item', () {
+    Map<OrderNumber, InvoiceData> getInvoiceMapData({
+      required List<InvoiceData> ordersInvoiceData,
+    }) {
+      return ordersInvoiceData.fold<Map<OrderNumber, InvoiceData>>(
+        <OrderNumber, InvoiceData>{},
+        (map, invoiceData) => map..[invoiceData.orderNumber] = invoiceData,
+      );
+    }
+
     setUp(() async {
-      viewByItemRepository = ViewByItemRepositoryMock();
-      orderHistoryMockData = await ViewByItemLocalDataSource().getViewByItems();
-      orderNumbers = orderHistoryMockData.orderHistoryItems
-          .map((e) => e.orderNumber)
+      viewByItemRepositoryMock = ViewByItemRepositoryMock();
+      orderHistoryMock = await ViewByItemLocalDataSource().getViewByItems();
+      orderNumbersMock =
+          orderHistoryMock.orderHistoryItems.map((e) => e.orderNumber).toList();
+      final invoiceDataMock =
+          await ViewByItemLocalDataSource().getInvoiceDataForOrders();
+      invoiceMapDataMock =
+          getInvoiceMapData(ordersInvoiceData: invoiceDataMock);
+      invoiceMapDataMock.remove(OrderNumber('0200261763'));
+      orderHistoryItemsListMock = List<OrderHistoryItem>.from(
+        orderHistoryMock.orderHistoryItems,
+      )
+          .map(
+            (orderItem) => orderItem.copyWith(
+              invoiceData: invoiceMapDataMock[orderItem.orderNumber] ??
+                  orderItem.invoiceData,
+            ),
+          )
           .toList();
       WidgetsFlutterBinding.ensureInitialized();
     });
 
     blocTest<ViewByItemsBloc, ViewByItemsState>(
-      'Orders view by item fetch fail',
+      'Orders view by item init happy case',
       build: () => ViewByItemsBloc(
-        viewByItemRepository: viewByItemRepository,
+        viewByItemRepository: viewByItemRepositoryMock,
         config: config,
-      ),
-      seed: () => ViewByItemsState.initial().copyWith(
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
       ),
       setUp: () {
         when(
-          () => viewByItemRepository.getViewByItems(
-            offset: offSet,
+          () => viewByItemRepositoryMock.getViewByItems(
+            salesOrgConfig: fakeEmptySalesConfigs,
+            soldTo: fakeCustomerCodeInfo,
+            shipTo: fakeShipToInfo,
+            user: fakeClient,
             pageSize: config.pageSize,
-            salesOrgConfig: salesOrgConfig,
+            offset: offSet,
             searchKey: searchKey,
-            shipTo: shipToInfo,
-            soldTo: customerCodeInfo,
-            user: user,
             viewByItemFilter: viewByItemFilter,
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+            salesOrganisation: fakeSalesOrganisation,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            orderHistoryMock,
+          ),
+        );
+        when(
+          () => viewByItemRepositoryMock.getOrdersInvoiceData(
+            orderNumbers: orderNumbersMock,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            invoiceMapDataMock,
+          ),
+        );
+      },
+      act: (ViewByItemsBloc bloc) => bloc.add(
+        ViewByItemsEvent.initialized(
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClient,
+          shipToInfo: fakeShipToInfo,
+          salesOrganisation: fakeSalesOrganisation,
+        ),
+      ),
+      expect: () => [
+        ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
+        ),
+        ViewByItemsState.initial().copyWith(
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
+          isFetching: true,
+          nextPageIndex: 0,
+          searchKey: searchKey,
+          appliedFilter: viewByItemFilter,
+        ),
+        ViewByItemsState.initial().copyWith(
+          orderHistoryList: orderHistoryMock,
+          failureOrSuccessOption: optionOf(
+            Right(orderHistoryMock),
+          ),
+          canLoadMore:
+              orderHistoryMock.orderHistoryItems.length >= config.pageSize,
+          nextPageIndex: 1,
+          appliedFilter: viewByItemFilter,
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
+        ),
+        ViewByItemsState.initial().copyWith(
+          isFetchingInvoices: true,
+          orderHistoryList: orderHistoryMock,
+          canLoadMore:
+              orderHistoryMock.orderHistoryItems.length >= config.pageSize,
+          nextPageIndex: 1,
+          appliedFilter: viewByItemFilter,
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
+        ),
+        ViewByItemsState.initial().copyWith(
+          orderHistoryList: orderHistoryMock.copyWith(
+            orderHistoryItems: orderHistoryItemsListMock,
+          ),
+          canLoadMore:
+              orderHistoryMock.orderHistoryItems.length >= config.pageSize,
+          nextPageIndex: 1,
+          appliedFilter: viewByItemFilter,
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
+        ),
+      ],
+    );
+
+    blocTest(
+      'Orders view by item fetch fail',
+      build: () => ViewByItemsBloc(
+        viewByItemRepository: viewByItemRepositoryMock,
+        config: config,
+      ),
+      seed: () => ViewByItemsState.initial().copyWith(
+        salesOrgConfigs: fakeEmptySalesConfigs,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        user: fakeClient,
+        salesOrganisation: fakeSalesOrganisation,
+      ),
+      setUp: () {
+        when(
+          () => viewByItemRepositoryMock.getViewByItems(
+            salesOrgConfig: fakeEmptySalesConfigs,
+            soldTo: fakeCustomerCodeInfo,
+            shipTo: fakeShipToInfo,
+            user: fakeClient,
+            pageSize: config.pageSize,
+            offset: offSet,
+            searchKey: searchKey,
+            viewByItemFilter: viewByItemFilter,
+            salesOrganisation: fakeSalesOrganisation,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -109,7 +206,7 @@ void main() {
           ),
         );
       },
-      act: (bloc) => bloc.add(
+      act: (ViewByItemsBloc bloc) => bloc.add(
         ViewByItemsEvent.fetch(
           viewByItemFilter: viewByItemFilter,
           searchKey: searchKey,
@@ -117,197 +214,270 @@ void main() {
       ),
       expect: () => [
         ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
           isFetching: true,
-          orderHistoryList: OrderHistory.empty(),
-          nextPageIndex: 0,
-          failureOrSuccessOption: none(),
-          appliedFilter: viewByItemFilter,
           searchKey: searchKey,
+          appliedFilter: viewByItemFilter,
         ),
         ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
             ),
           ),
-          appliedFilter: viewByItemFilter,
-          isFetching: false,
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
           searchKey: searchKey,
+          appliedFilter: viewByItemFilter,
+        )
+      ],
+    );
+
+    blocTest(
+      'Fetch order invoice data fail',
+      build: () => ViewByItemsBloc(
+        viewByItemRepository: viewByItemRepositoryMock,
+        config: config,
+      ),
+      seed: () => ViewByItemsState.initial().copyWith(
+        orderHistoryList: orderHistoryMock,
+        failureOrSuccessOption: optionOf(
+          Right(orderHistoryMock),
+        ),
+        canLoadMore:
+            orderHistoryMock.orderHistoryItems.length >= config.pageSize,
+        nextPageIndex: 1,
+        appliedFilter: viewByItemFilter,
+        salesOrgConfigs: fakeEmptySalesConfigs,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        user: fakeClient,
+        salesOrganisation: fakeSalesOrganisation,
+      ),
+      setUp: () {
+        when(
+          () => viewByItemRepositoryMock.getOrdersInvoiceData(
+            orderNumbers: orderNumbersMock,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (ViewByItemsBloc bloc) => bloc.add(
+        ViewByItemsEvent.fetchOrdersInvoiceData(
+          orderHistoryItems: orderHistoryItemsListMock,
+        ),
+      ),
+      expect: () => [
+        ViewByItemsState.initial().copyWith(
+          isFetchingInvoices: true,
+          orderHistoryList: orderHistoryMock,
+          canLoadMore:
+              orderHistoryMock.orderHistoryItems.length >= config.pageSize,
+          nextPageIndex: 1,
+          appliedFilter: viewByItemFilter,
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
+        ),
+        ViewByItemsState.initial().copyWith(
+          failureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+          orderHistoryList: orderHistoryMock,
+          canLoadMore:
+              orderHistoryMock.orderHistoryItems.length >= config.pageSize,
+          nextPageIndex: 1,
+          appliedFilter: viewByItemFilter,
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
         )
       ],
     );
 
     blocTest<ViewByItemsBloc, ViewByItemsState>(
-      'Orders view by item fetch Success',
+      'Orders view by item loadMore success',
       build: () => ViewByItemsBloc(
-        viewByItemRepository: viewByItemRepository,
+        viewByItemRepository: viewByItemRepositoryMock,
         config: config,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+        orderHistoryList: orderHistoryMock.copyWith(
+          orderHistoryItems: orderHistoryItemsListMock,
+        ),
+        canLoadMore: true,
+        nextPageIndex: 1,
+        appliedFilter: viewByItemFilter,
+        salesOrgConfigs: fakeEmptySalesConfigs,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        user: fakeClient,
+        salesOrganisation: fakeSalesOrganisation,
       ),
       setUp: () {
         when(
-          () => viewByItemRepository.getViewByItems(
-            offset: offSet,
+          () => viewByItemRepositoryMock.getViewByItems(
+            salesOrgConfig: fakeEmptySalesConfigs,
+            soldTo: fakeCustomerCodeInfo,
+            shipTo: fakeShipToInfo,
+            user: fakeClient,
             pageSize: config.pageSize,
-            salesOrgConfig: salesOrgConfig,
+            offset: orderHistoryItemsListMock.length,
             searchKey: searchKey,
-            shipTo: shipToInfo,
-            soldTo: customerCodeInfo,
-            user: user,
             viewByItemFilter: viewByItemFilter,
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+            salesOrganisation: fakeSalesOrganisation,
           ),
         ).thenAnswer(
           (invocation) async => Right(
-            orderHistoryMockData,
+            orderHistoryMock,
           ),
         );
         when(
-          () => viewByItemRepository.getOrdersInvoiceData(
-            orderNumbers: orderNumbers,
+          () => viewByItemRepositoryMock.getOrdersInvoiceData(
+            orderNumbers: orderNumbersMock,
           ),
         ).thenAnswer(
-          (invocation) async => const Right(<OrderNumber, InvoiceData>{}),
+          (invocation) async => Right(
+            invoiceMapDataMock,
+          ),
         );
       },
-      act: (bloc) => bloc.add(
-        ViewByItemsEvent.fetch(
-          viewByItemFilter: viewByItemFilter,
-          searchKey: searchKey,
-        ),
-      ),
-      expect: () => [
-        ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-          isFetching: true,
-          orderHistoryList: OrderHistory.empty(),
-          nextPageIndex: 0,
-          canLoadMore: true,
-          failureOrSuccessOption: none(),
-          appliedFilter: viewByItemFilter,
-          searchKey: searchKey,
-        ),
-        ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-          failureOrSuccessOption: optionOf(
-            Right(
-              orderHistoryMockData,
+      act: (bloc) {
+        bloc.add(
+          const ViewByItemsEvent.loadMore(),
+        );
+      },
+      expect: () {
+        final newOrderHistoryList = List<OrderHistoryItem>.from(
+          orderHistoryItemsListMock,
+        )..addAll(orderHistoryMock.orderHistoryItems);
+        final newOrderHistoryItemsListMock = List<OrderHistoryItem>.from(
+          newOrderHistoryList,
+        )
+            .map(
+              (orderItem) => orderItem.copyWith(
+                invoiceData: invoiceMapDataMock[orderItem.orderNumber] ??
+                    orderItem.invoiceData,
+              ),
+            )
+            .toList();
+        return [
+          ViewByItemsState.initial().copyWith(
+            isFetching: true,
+            failureOrSuccessOption: none(),
+            orderHistoryList: orderHistoryMock.copyWith(
+              orderHistoryItems: orderHistoryItemsListMock,
             ),
+            canLoadMore: true,
+            nextPageIndex: 1,
+            appliedFilter: viewByItemFilter,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            user: fakeClient,
+            salesOrganisation: fakeSalesOrganisation,
           ),
-          appliedFilter: viewByItemFilter,
-          isFetching: false,
-          nextPageIndex: 1,
-          canLoadMore: false,
-          orderHistoryList: orderHistoryMockData,
-          searchKey: searchKey,
-        ),
-        ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-          failureOrSuccessOption: none(),
-          appliedFilter: viewByItemFilter,
-          isFetching: false,
-          isFetchingInvoices: true,
-          nextPageIndex: 1,
-          canLoadMore: false,
-          orderHistoryList: orderHistoryMockData,
-          searchKey: searchKey,
-        ),
-        ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-          failureOrSuccessOption: none(),
-          appliedFilter: viewByItemFilter,
-          isFetching: false,
-          isFetchingInvoices: false,
-          nextPageIndex: 1,
-          canLoadMore: false,
-          orderHistoryList: orderHistoryMockData,
-          searchKey: searchKey,
-        ),
-      ],
+          ViewByItemsState.initial().copyWith(
+            orderHistoryList: orderHistoryMock.copyWith(
+              orderHistoryItems: newOrderHistoryList,
+            ),
+            failureOrSuccessOption: optionOf(
+              Right(
+                orderHistoryMock,
+              ),
+            ),
+            canLoadMore: orderHistoryItemsListMock.length >= config.pageSize,
+            nextPageIndex: 2,
+            appliedFilter: viewByItemFilter,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            user: fakeClient,
+            salesOrganisation: fakeSalesOrganisation,
+          ),
+          ViewByItemsState.initial().copyWith(
+            isFetchingInvoices: true,
+            orderHistoryList: orderHistoryMock.copyWith(
+              orderHistoryItems: newOrderHistoryList,
+            ),
+            canLoadMore: orderHistoryItemsListMock.length >= config.pageSize,
+            nextPageIndex: 2,
+            appliedFilter: viewByItemFilter,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            user: fakeClient,
+            salesOrganisation: fakeSalesOrganisation,
+          ),
+          ViewByItemsState.initial().copyWith(
+            orderHistoryList: orderHistoryMock.copyWith(
+              orderHistoryItems: newOrderHistoryItemsListMock,
+            ),
+            canLoadMore: orderHistoryItemsListMock.length >= config.pageSize,
+            nextPageIndex: 2,
+            appliedFilter: viewByItemFilter,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
+            user: fakeClient,
+            salesOrganisation: fakeSalesOrganisation,
+          ),
+        ];
+      },
     );
 
     blocTest<ViewByItemsBloc, ViewByItemsState>(
-      'Orders view by item loadMore',
+      'Orders view by item loadMore failure',
       build: () => ViewByItemsBloc(
-        viewByItemRepository: viewByItemRepository,
+        viewByItemRepository: viewByItemRepositoryMock,
         config: config,
       ),
       seed: () => ViewByItemsState.initial().copyWith(
+        orderHistoryList: orderHistoryMock.copyWith(
+          orderHistoryItems: orderHistoryItemsListMock,
+        ),
+        canLoadMore: true,
+        nextPageIndex: 1,
         appliedFilter: viewByItemFilter,
-        orderHistoryList: orderHistoryMockData,
-        searchKey: searchKey,
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+        salesOrgConfigs: fakeEmptySalesConfigs,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        user: fakeClient,
+        salesOrganisation: fakeSalesOrganisation,
       ),
       setUp: () {
         when(
-          () => viewByItemRepository.getViewByItems(
-            offset: orderHistoryMockData.orderHistoryItems.length,
+          () => viewByItemRepositoryMock.getViewByItems(
+            salesOrgConfig: fakeEmptySalesConfigs,
+            soldTo: fakeCustomerCodeInfo,
+            shipTo: fakeShipToInfo,
+            user: fakeClient,
             pageSize: config.pageSize,
-            salesOrgConfig: salesOrgConfig,
+            offset: orderHistoryItemsListMock.length,
             searchKey: searchKey,
-            shipTo: shipToInfo,
-            soldTo: customerCodeInfo,
-            user: user,
             viewByItemFilter: viewByItemFilter,
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
+            salesOrganisation: fakeSalesOrganisation,
           ),
         ).thenAnswer(
-          (invocation) async => Right(
-            orderHistoryMockData,
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
           ),
-        );
-        when(
-          () => viewByItemRepository.getOrdersInvoiceData(
-            orderNumbers: orderNumbers,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(<OrderNumber, InvoiceData>{}),
         );
       },
       act: (bloc) {
@@ -317,160 +487,38 @@ void main() {
       },
       expect: () => [
         ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           isFetching: true,
-          nextPageIndex: 0,
+          failureOrSuccessOption: none(),
+          orderHistoryList: orderHistoryMock.copyWith(
+            orderHistoryItems: orderHistoryItemsListMock,
+          ),
           canLoadMore: true,
-          orderHistoryList: orderHistoryMockData,
-          failureOrSuccessOption: none(),
-          appliedFilter: viewByItemFilter,
-          searchKey: searchKey,
-        ),
-        ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-          failureOrSuccessOption: optionOf(
-            Right(
-              orderHistoryMockData,
-            ),
-          ),
-          appliedFilter: viewByItemFilter,
-          isFetching: false,
           nextPageIndex: 1,
-          canLoadMore: false,
-          orderHistoryList: orderHistoryMockData.copyWith(
-            orderHistoryItems: [
-              ...orderHistoryMockData.orderHistoryItems,
-              ...orderHistoryMockData.orderHistoryItems
-            ],
-          ),
-          searchKey: searchKey,
-        ),
-        ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-          failureOrSuccessOption: none(),
           appliedFilter: viewByItemFilter,
-          isFetching: false,
-          isFetchingInvoices: true,
-          nextPageIndex: 1,
-          canLoadMore: false,
-          orderHistoryList: orderHistoryMockData.copyWith(
-            orderHistoryItems: [
-              ...orderHistoryMockData.orderHistoryItems,
-              ...orderHistoryMockData.orderHistoryItems
-            ],
-          ),
-          searchKey: searchKey,
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
         ),
         ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-          failureOrSuccessOption: none(),
-          appliedFilter: viewByItemFilter,
-          isFetching: false,
-          isFetchingInvoices: false,
-          nextPageIndex: 1,
-          canLoadMore: false,
-          orderHistoryList: orderHistoryMockData.copyWith(
-            orderHistoryItems: [
-              ...orderHistoryMockData.orderHistoryItems,
-              ...orderHistoryMockData.orderHistoryItems
-            ],
-          ),
-          searchKey: searchKey,
-        ),
-      ],
-    );
-
-    blocTest<ViewByItemsBloc, ViewByItemsState>(
-      'Orders view by item loadMore failure',
-      build: () => ViewByItemsBloc(
-        viewByItemRepository: viewByItemRepository,
-        config: config,
-      ),
-      seed: () => ViewByItemsState.initial().copyWith(
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        salesOrganisation:
-            SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-        appliedFilter: viewByItemFilter,
-        orderHistoryList: orderHistoryMockData,
-        searchKey: searchKey,
-      ),
-      setUp: () {
-        when(
-          () => viewByItemRepository.getViewByItems(
-            offset: orderHistoryMockData.orderHistoryItems.length,
-            pageSize: config.pageSize,
-            salesOrgConfig: salesOrgConfig,
-            searchKey: searchKey,
-            shipTo: shipToInfo,
-            soldTo: customerCodeInfo,
-            user: user,
-            viewByItemFilter: viewByItemFilter,
-            salesOrganisation:
-                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-          ),
-        ).thenAnswer(
-          (invocation) async => const Left(ApiFailure.other('fake-error')),
-        );
-      },
-      act: (bloc) => bloc.add(
-        const ViewByItemsEvent.loadMore(),
-      ),
-      expect: () => [
-        ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
-          isFetching: true,
-          nextPageIndex: 0,
-          canLoadMore: true,
-          orderHistoryList: orderHistoryMockData,
-          failureOrSuccessOption: none(),
-          appliedFilter: viewByItemFilter,
-          searchKey: searchKey,
-        ),
-        ViewByItemsState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100')),
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
             ),
           ),
-          orderHistoryList: orderHistoryMockData,
+          orderHistoryList: orderHistoryMock.copyWith(
+            orderHistoryItems: orderHistoryItemsListMock,
+          ),
+          canLoadMore: true,
+          nextPageIndex: 1,
           appliedFilter: viewByItemFilter,
-          isFetching: false,
-          searchKey: searchKey,
-        )
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClient,
+          salesOrganisation: fakeSalesOrganisation,
+        ),
       ],
     );
   });
