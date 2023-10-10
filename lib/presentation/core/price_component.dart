@@ -111,10 +111,12 @@ enum PriceStyle {
   summaryPrice,
   grandTotalPrice,
   credits,
+  paymentInProgressPrice
 }
 
 TextStyle _priceStyle(BuildContext context, PriceStyle type) {
   switch (type) {
+    case PriceStyle.paymentInProgressPrice:
     case PriceStyle.commonPrice:
       return Theme.of(context).textTheme.labelSmall!.copyWith(
             color: ZPColors.primary,
@@ -202,6 +204,10 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.bundlePrice:
       return Theme.of(context).textTheme.labelLarge!.copyWith(
             color: ZPColors.neutralsBlack,
+          );
+    case PriceStyle.paymentInProgressPrice:
+      return Theme.of(context).textTheme.labelSmall!.copyWith(
+            color: ZPColors.primary,
           );
     default:
       return Theme.of(context)

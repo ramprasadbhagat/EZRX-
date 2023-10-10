@@ -35,6 +35,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 
+import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
+
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_download_button.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_group_item.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_group_list.dart';
@@ -46,6 +48,7 @@ part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_s
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_created_date_range.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_reset_button.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_apply_button.dart';
+part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_in_progress_label.dart';
 
 class PaymentSummaryPage extends StatefulWidget {
   const PaymentSummaryPage({Key? key}) : super(key: key);
@@ -97,6 +100,7 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
                 ],
               ),
             ),
+            const _PaymentInProgressLabel(),
             Expanded(
               child: _PaymentSummaryGroupList(
                 scrollController: _scrollController,

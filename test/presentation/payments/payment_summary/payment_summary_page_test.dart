@@ -5,9 +5,13 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_page.dart';
@@ -25,6 +29,13 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class AnnouncementBlocMock
     extends MockBloc<AnnouncementEvent, AnnouncementState>
     implements AnnouncementBloc {}
+
+class PaymentInProgressBlocMock
+    extends MockBloc<PaymentInProgressEvent, PaymentInProgressState>
+    implements PaymentInProgressBloc {}
+
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
 
 class MockCustomerCodeBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -44,9 +55,6 @@ class PaymentSummaryFilterBlocMock
     extends MockBloc<PaymentSummaryFilterEvent, PaymentSummaryFilterState>
     implements PaymentSummaryFilterBloc {}
 
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
 final locator = GetIt.instance;
 
 void main() {
@@ -56,11 +64,19 @@ void main() {
   late PaymentSummaryBloc paymentSummaryBloc;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBloc;
   late PaymentSummaryFilterBloc paymentSummaryFilterBloc;
+  late PaymentInProgressBloc paymentInProgressBlocMock;
   late EligibilityBloc eligibilityBloc;
+  late List<PaymentSummaryDetails> paymentSummaryList;
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
+    paymentSummaryList = [
+      PaymentSummaryDetails.empty().copyWith(
+        paymentAmount: 200,
+        status: StatusType('In Progress'),
+      )
+    ];
   });
   setUp(() async {
     authBlocMock = AuthBlocMock();
@@ -68,6 +84,7 @@ void main() {
     announcementBlocMock = AnnouncementBlocMock();
     paymentSummaryBloc = PaymentSummaryBlocMock();
     downloadPaymentAttachmentsBloc = DownloadPaymentAttachmentsBlocMock();
+    paymentInProgressBlocMock = PaymentInProgressBlocMock();
     paymentSummaryFilterBloc = PaymentSummaryFilterBlocMock();
     eligibilityBloc = EligibilityBlocMock();
   });
@@ -84,6 +101,8 @@ void main() {
       when(() => paymentSummaryFilterBloc.state)
           .thenReturn(PaymentSummaryFilterState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
+      when(() => paymentInProgressBlocMock.state)
+          .thenReturn(PaymentInProgressState.initial());
     });
 
     RouteDataScope getWUT() {
@@ -108,6 +127,9 @@ void main() {
           ),
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBloc,
+          ),
+          BlocProvider<PaymentInProgressBloc>(
+            create: (context) => paymentInProgressBlocMock,
           ),
         ],
         child: const Scaffold(
@@ -204,6 +226,31 @@ void main() {
         find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending', false)),
         findsNothing,
       );
+    });
+
+    testWidgets('Payment summary in progress amount test', (tester) async {
+      when(() => paymentSummaryBloc.state).thenReturn(
+        PaymentSummaryState.initial().copyWith(
+          details: paymentSummaryList,
+        ),
+      );
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            currency: Currency('MYR'),
+          ),
+        ),
+      );
+      when(() => paymentInProgressBlocMock.state).thenReturn(
+        PaymentInProgressState.initial().copyWith(
+          amount: StringValue('200'),
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+      final paymentInProgress =
+          find.text('In-progress: MYR 200.00', findRichText: true);
+      expect(paymentInProgress, findsOneWidget);
     });
   });
 }
