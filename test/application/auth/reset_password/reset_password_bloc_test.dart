@@ -1,345 +1,281 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
+import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/change_password_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockResetPassword extends Mock implements ChangePasswordRepository {}
 
+class MockTokenStorage extends Mock implements TokenStorage {}
+
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
+  late MockResetPassword mockRepository;
+  final resetPasswordState = ResetPasswordState.initial();
+  late TokenStorage tokenStorage;
+  late User user;
+
+  const invalidPassword = 'rootadmin1234@';
+  const validPassword = 'New12345678@';
+  const oldPassword = 'old';
+
+  final invalidResetPasswordState = resetPasswordState.copyWith(
+    oldPassword: Password.login('old'),
+    newPassword: Password.resetV2(
+      invalidPassword,
+      'old',
+    ),
+    confirmPassword: Password.confirm(
+      invalidPassword,
+      invalidPassword,
+    ),
+  );
+  final validResetPasswordState = resetPasswordState.copyWith(
+    oldPassword: Password.login('old'),
+    newPassword: Password.resetV2(
+      validPassword,
+      oldPassword,
+    ),
+    confirmPassword: Password.confirm(
+      validPassword,
+      validPassword,
+    ),
+  );
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    mockRepository = MockResetPassword();
+    tokenStorage = MockTokenStorage();
+    when(() => tokenStorage.get())
+        .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));
+    user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
   });
 
   group('Reset Password Form Bloc', () {
-    // blocTest<ResetPasswordBloc, ResetPasswordState>(
-    //   'Init Reset Password Bloc',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   setUp: () {},
-    // );
+    blocTest(
+      'togglePasswordVisibility oldPassword test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        const ResetPasswordEvent.togglePasswordVisibility(
+          PasswordFieldType.oldPassword,
+          true,
+        ),
+      ),
+      expect: () => [
+        resetPasswordState.copyWith(
+          isOldPasswordObscure: true,
+        )
+      ],
+    );
 
-    // blocTest(
-    //   'Old password visiblity',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   act: (ResetPasswordBloc bloc) => bloc.add(
-    //     const ResetPasswordEvent.togglePasswordVisibility(
-    //       PasswordFieldType.oldPassword,
-    //       true,
-    //     ),
-    //   ),
-    //   expect: () => [
-    //     ResetPasswordState.initial().copyWith(
-    //       isOldPasswordObscure: true,
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     )
-    //   ],
-    // );
+    blocTest(
+      'togglePasswordVisibility newPassword test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        const ResetPasswordEvent.togglePasswordVisibility(
+          PasswordFieldType.newPassword,
+          true,
+        ),
+      ),
+      expect: () => [
+        resetPasswordState.copyWith(
+          isNewPasswordObscure: true,
+        )
+      ],
+    );
 
-    // blocTest(
-    //   'New password visiblity',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   act: (ResetPasswordBloc bloc) => bloc.add(
-    //     const ResetPasswordEvent.togglePasswordVisibility(
-    //       PasswordFieldType.newPassword,
-    //       false,
-    //     ),
-    //   ),
-    //   expect: () => [
-    //     ResetPasswordState.initial().copyWith(
-    //       isNewPasswordObscure: false,
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     )
-    //   ],
-    // );
+    blocTest(
+      'togglePasswordVisibility confirmPassword test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        const ResetPasswordEvent.togglePasswordVisibility(
+          PasswordFieldType.confirmPassword,
+          true,
+        ),
+      ),
+      expect: () => [
+        resetPasswordState.copyWith(
+          isConfirmPasswordObscure: true,
+        )
+      ],
+    );
 
-    // blocTest(
-    //   'Confirm password visiblity',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   act: (ResetPasswordBloc bloc) => bloc.add(
-    //     const ResetPasswordEvent.togglePasswordVisibility(
-    //       PasswordFieldType.confirmPassword,
-    //       true,
-    //     ),
-    //   ),
-    //   expect: () => [
-    //     ResetPasswordState.initial().copyWith(
-    //       isNewPasswordObscure: true,
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     )
-    //   ],
-    // );
+    blocTest(
+      'onTextChange oldPassword test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        ResetPasswordEvent.onTextChange(
+          PasswordFieldType.oldPassword,
+          oldPassword,
+          user,
+        ),
+      ),
+      expect: () => [
+        resetPasswordState.copyWith(
+          oldPassword: Password.login(oldPassword),
+        )
+      ],
+    );
 
-    // blocTest(
-    //   'old password text onChange',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   act: (ResetPasswordBloc bloc) => bloc.add(
-    //     ResetPasswordEvent.onTextChange(
-    //       PasswordFieldType.oldPassword,
-    //       'old',
-    //       user,
-    //     ),
-    //   ),
-    //   expect: () => [
-    //     ResetPasswordState.initial().copyWith(
-    //       oldPassword: Password.login('old'),
-    //       passwordResetFailureOrSuccessOption: none(),
-    //       newPassword: Password.resetV2(
-    //         ResetPasswordState.initial().newPassword.getValue(),
-    //         'old',
-    //         user,
-    //       ),
-    //     )
-    //   ],
-    // );
+    blocTest(
+      'onTextChange newPassword test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        ResetPasswordEvent.onTextChange(
+          PasswordFieldType.newPassword,
+          validPassword,
+          user,
+        ),
+      ),
+      expect: () => [
+        resetPasswordState.copyWith(
+          newPassword: Password.resetV2(
+            validPassword,
+            resetPasswordState.confirmPassword.getValue(),
+          ),
+        )
+      ],
+    );
 
-    // blocTest(
-    //   'new password text onChange',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   act: (ResetPasswordBloc bloc) => bloc.add(
-    //     ResetPasswordEvent.onTextChange(
-    //       PasswordFieldType.newPassword,
-    //       'Stays@fe2022!',
-    //       user,
-    //     ),
-    //   ),
-    //   expect: () => [
-    //     ResetPasswordState.initial().copyWith(
-    //       oldPassword: Password.login(''),
-    //       passwordResetFailureOrSuccessOption: none(),
-    //       newPassword: Password.resetV2(
-    //         'Stays@fe2022!',
-    //         ResetPasswordState.initial().oldPassword.getValue(),
-    //         user,
-    //       ),
-    //       confirmPassword: Password.confirm(
-    //         ResetPasswordState.initial().confirmPassword.getValue(),
-    //         'Stays@fe2022!',
-    //       ),
-    //     )
-    //   ],
-    // );
+    blocTest(
+      'onTextChange confirmPassword test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        ResetPasswordEvent.onTextChange(
+          PasswordFieldType.confirmPassword,
+          validPassword,
+          user,
+        ),
+      ),
+      expect: () => [
+        resetPasswordState.copyWith(
+          confirmPassword: Password.confirm(
+            validPassword,
+            resetPasswordState.newPassword.getValue(),
+          ),
+        )
+      ],
+    );
 
-    // blocTest(
-    //   'confrim password text onChange',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   act: (ResetPasswordBloc bloc) => bloc.add(
-    //     ResetPasswordEvent.onTextChange(
-    //       PasswordFieldType.confirmPassword,
-    //       'confirm',
-    //       user,
-    //     ),
-    //   ),
-    //   expect: () => [
-    //     ResetPasswordState.initial().copyWith(
-    //       confirmPassword: Password.confirm(
-    //         'confirm',
-    //         ResetPasswordState.initial().newPassword.getValue(),
-    //       ),
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     )
-    //   ],
-    // );
+    blocTest(
+      'invalid resetPasswordPressed test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      seed: () => invalidResetPasswordState,
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        ResetPasswordEvent.resetPasswordPressed(
+          user: user,
+        ),
+      ),
+      expect: () => [
+        invalidResetPasswordState.copyWith(showErrorMessages: true),
+      ],
+      verify: (ResetPasswordBloc bloc) {
+        expect(
+          bloc.state.showNewPasswordPatternMismatchError(user),
+          true,
+        );
+      },
+    );
 
-    // blocTest(
-    //   'Restart state',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   act: (ResetPasswordBloc bloc) =>
-    //       bloc.add(const ResetPasswordEvent.onRestart()),
-    //   expect: () => [ResetPasswordState.initial()],
-    // );
+    blocTest(
+      'resetPasswordPressed failed test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      seed: () => validResetPasswordState,
+      setUp: () {
+        when(
+          () => mockRepository.setPassword(
+            user: user,
+            oldPassword: validResetPasswordState.oldPassword,
+            newPassword: validResetPasswordState.newPassword,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        ResetPasswordEvent.resetPasswordPressed(
+          user: user,
+        ),
+      ),
+      expect: () => [
+        validResetPasswordState.copyWith(isSubmitting: true),
+        validResetPasswordState.copyWith(
+          passwordResetFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-error'))),
+        ),
+      ],
+    );
 
-    // blocTest(
-    //   'Reset Password fails',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   setUp: () {
-    //     when(
-    //       () => resetPasswordRepoMock.setPassword(
-    //         newPassword: Password.resetV2('Auron@2022!', 'Auron@2022', user),
-    //         oldPassword: Password.login('Auron@2022'),
-    //         user: user,
-    //       ),
-    //     ).thenAnswer(
-    //       (invocation) async => const Left(
-    //         ApiFailure.other('fake-error'),
-    //       ),
-    //     );
-    //   },
-    //   act: (ResetPasswordBloc bloc) {
-    //     bloc
-    //       ..add(
-    //         ResetPasswordEvent.onTextChange(
-    //           PasswordFieldType.oldPassword,
-    //           'Auron@2022',
-    //           user,
-    //         ),
-    //       )
-    //       ..add(
-    //         ResetPasswordEvent.onTextChange(
-    //           PasswordFieldType.newPassword,
-    //           'Auron@2022!',
-    //           user,
-    //         ),
-    //       )
-    //       ..add(
-    //         ResetPasswordEvent.onTextChange(
-    //           PasswordFieldType.confirmPassword,
-    //           'Auron@2022!',
-    //           user,
-    //         ),
-    //       )
-    //       ..add(ResetPasswordEvent.resetPasswordPressed(user: user));
-    //   },
-    //   expect: () => [
-    //     resetPasswordState = resetPasswordState.copyWith(
-    //       oldPassword: Password.login('Auron@2022'),
-    //       newPassword: Password.resetV2(
-    //         resetPasswordState.newPassword.getValue(),
-    //         'Auron@2022',
-    //         user,
-    //       ),
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     ),
-    //     resetPasswordState = resetPasswordState.copyWith(
-    //       newPassword: Password.resetV2('Auron@2022!', 'Auron@2022', user),
-    //       confirmPassword: Password.confirm(
-    //         resetPasswordState.confirmPassword.getValue(),
-    //         'Auron@2022!',
-    //       ),
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     ),
-    //     resetPasswordState = resetPasswordState.copyWith(
-    //       confirmPassword: Password.confirm(
-    //         'Auron@2022!',
-    //         resetPasswordState.newPassword.getValue(),
-    //       ),
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     ),
-    //     resetPasswordState.copyWith(
-    //       isSubmitting: true,
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     ),
-    //     resetPasswordState.copyWith(
-    //       isSubmitting: false,
-    //       showErrorMessages: true,
-    //       passwordResetFailureOrSuccessOption: optionOf(
-    //         const Left(
-    //           ApiFailure.other('fake-error'),
-    //         ),
-    //       ),
-    //     )
-    //   ],
-    // );
+    blocTest(
+      'resetPasswordPressed success test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      seed: () => validResetPasswordState,
+      setUp: () {
+        when(
+          () => mockRepository.setPassword(
+            user: user,
+            oldPassword: validResetPasswordState.oldPassword,
+            newPassword: validResetPasswordState.newPassword,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            ResetPassword.empty(),
+          ),
+        );
+      },
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        ResetPasswordEvent.resetPasswordPressed(
+          user: user,
+        ),
+      ),
+      expect: () => [
+        validResetPasswordState.copyWith(isSubmitting: true),
+        validResetPasswordState.copyWith(
+          passwordResetFailureOrSuccessOption:
+              optionOf(Right(ResetPassword.empty())),
+        ),
+        ResetPasswordState.initial()
+      ],
+    );
 
-    // blocTest(
-    //   'Reset Password Success',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   setUp: () {
-    //     resetPasswordState = ResetPasswordState.initial();
-    //     when(
-    //       () => resetPasswordRepoMock.setPassword(
-    //         newPassword: Password.resetV2('Auron@2022!', 'Auron@2022', user),
-    //         oldPassword: Password.login('Auron@2022'),
-    //         user: user,
-    //       ),
-    //     ).thenAnswer((invocation) async => Right(resetPasswordMockData));
-    //   },
-    //   act: (ResetPasswordBloc bloc) {
-    //     bloc
-    //       ..add(
-    //         ResetPasswordEvent.onTextChange(
-    //           PasswordFieldType.oldPassword,
-    //           'Auron@2022',
-    //           user,
-    //         ),
-    //       )
-    //       ..add(
-    //         ResetPasswordEvent.onTextChange(
-    //           PasswordFieldType.newPassword,
-    //           'Auron@2022!',
-    //           user,
-    //         ),
-    //       )
-    //       ..add(
-    //         ResetPasswordEvent.onTextChange(
-    //           PasswordFieldType.confirmPassword,
-    //           'Auron@2022!',
-    //           user,
-    //         ),
-    //       )
-    //       ..add(ResetPasswordEvent.resetPasswordPressed(user: user));
-    //   },
-    //   expect: () => [
-    //     resetPasswordState = resetPasswordState.copyWith(
-    //       oldPassword: Password.login('Auron@2022'),
-    //       newPassword: Password.resetV2(
-    //         resetPasswordState.newPassword.getValue(),
-    //         'Auron@2022',
-    //         user,
-    //       ),
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     ),
-    //     resetPasswordState = resetPasswordState.copyWith(
-    //       newPassword: Password.resetV2('Auron@2022!', 'Auron@2022', user),
-    //       confirmPassword: Password.confirm(
-    //         resetPasswordState.confirmPassword.getValue(),
-    //         'Auron@2022!',
-    //       ),
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     ),
-    //     resetPasswordState = resetPasswordState.copyWith(
-    //       confirmPassword: Password.confirm(
-    //         'Auron@2022!',
-    //         resetPasswordState.newPassword.getValue(),
-    //       ),
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     ),
-    //     resetPasswordState.copyWith(
-    //       isSubmitting: true,
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     ),
-    //     resetPasswordState.copyWith(
-    //       isSubmitting: false,
-    //       showErrorMessages: true,
-    //       passwordResetFailureOrSuccessOption: optionOf(
-    //         Right(resetPasswordMockData),
-    //       ),
-    //     )
-    //   ],
-    // );
-    // blocTest(
-    //   'Tab Reset Password with invalid old, new, confirm password',
-    //   build: () => ResetPasswordBloc(
-    //     changePasswordRepository: resetPasswordRepoMock,
-    //   ),
-    //   act: (ResetPasswordBloc bloc) =>
-    //       bloc.add(ResetPasswordEvent.resetPasswordPressed(user: user)),
-    //   expect: () => [
-    //     ResetPasswordState.initial().copyWith(
-    //       showErrorMessages: true,
-    //       passwordResetFailureOrSuccessOption: none(),
-    //     )
-    //   ],
-    // );
+    blocTest(
+      'clear test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      seed: () => validResetPasswordState,
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        const ResetPasswordEvent.clear(),
+      ),
+      expect: () => [ResetPasswordState.initial()],
+    );
   });
 }
