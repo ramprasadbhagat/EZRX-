@@ -159,6 +159,12 @@ class MaterialInfoType extends ValueObject<String> {
   factory MaterialInfoType(String input) {
     return MaterialInfoType._(validateStringNotEmpty(input));
   }
+  factory MaterialInfoType.material() {
+    return const MaterialInfoType._(Right('material'));
+  }
+  factory MaterialInfoType.bundle() {
+    return MaterialInfoType._(validateStringNotEmpty('bundle'));
+  }
 
   bool get typeBundle => isBundle(value.getOrElse(() => ''));
 
