@@ -32,6 +32,8 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+
 part 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/invalid_material_message.dart';
 
 class CartProductTile extends StatelessWidget {
@@ -437,6 +439,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
                 showModalBottomSheet(
                   context: context,
                   isScrollControlled: true,
+                  isDismissible: false,
                   constraints: BoxConstraints.loose(
                     Size(
                       MediaQuery.of(context).size.width,
@@ -472,6 +475,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
                             .read<EligibilityBloc>()
                             .state
                             .isGimmickMaterialEnabled,
+                        searchKey: SearchKey.searchFilter(''),
                       ),
                     );
               },

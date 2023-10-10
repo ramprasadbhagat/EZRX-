@@ -21,6 +21,8 @@ import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.da
 
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+
 class MaterialListRepository implements IMaterialListRepository {
   final Config config;
   final MaterialListLocalDataSource materialListLocalDataSource;
@@ -77,6 +79,7 @@ class MaterialListRepository implements IMaterialListRepository {
         countryListCode: selectedMaterialFilter.countryListSelected
             .map((e) => e.code)
             .toList(),
+        searchKey: '',
       );
       final stockInfoList = await getStockInfoList(
         materials: materialListData.products,
@@ -286,6 +289,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required PrincipalData principalData,
     required bool enableGimmickMaterial,
     required User user,
+    required SearchKey searchKey,
   }) async {
     final preferredLanguage = user.settings.languagePreference.languageCode;
     if (config.appFlavor == Flavor.mock) {
@@ -317,6 +321,7 @@ class MaterialListRepository implements IMaterialListRepository {
         offset: offset,
         orderByName: 'asc',
         principalCode: principalData.principalCode.getOrCrash(),
+        searchKey: searchKey.getOrCrash(),
       );
 
       return Right(materialListData);

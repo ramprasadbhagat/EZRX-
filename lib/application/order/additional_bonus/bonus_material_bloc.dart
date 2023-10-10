@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -31,17 +32,16 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
     required this.materialListRepository,
     required this.config,
   }) : super(BonusMaterialState.initial()) {
-    on<BonusMaterialEvent>(_onEvent);
-  }
+    on<_Fetch>(
+      (e, emit) async {
+        if ((e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) ||
+            !e.searchKey.isValid()) return;
 
-  Future<void> _onEvent(
-    BonusMaterialEvent event,
-    Emitter<BonusMaterialState> emit,
-  ) async {
-    await event.map(
-      fetch: (e) async {
         emit(
-          BonusMaterialState.initial().copyWith(isFetching: true),
+          BonusMaterialState.initial().copyWith(
+            isFetching: true,
+            searchKey: e.searchKey,
+          ),
         );
 
         final failureOrSuccess =
@@ -55,6 +55,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           principalData: e.principalData,
           user: e.user,
           enableGimmickMaterial: e.isGimmickMaterialEnabled,
+          searchKey: e.searchKey,
         );
         failureOrSuccess.fold(
           (failure) {
@@ -76,7 +77,11 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           },
         );
       },
-      loadMoreBonusItem: (e) async {
+      transformer: restartable(),
+    );
+
+    on<_LoadMoreBonusItem>(
+      (e, emit) async {
         if (state.isFetching || !state.canLoadMore) return;
         emit(
           state.copyWith(
@@ -94,6 +99,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           principalData: e.principalData,
           user: e.user,
           enableGimmickMaterial: e.isGimmickMaterialEnabled,
+          searchKey: state.searchKey,
         );
         failureOrSuccess.fold(
           (failure) => emit(
@@ -115,12 +121,20 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           },
         );
       },
-      validateBonusQuantity: (e) async => emit(
-        state.copyWith(
-          isBonusQtyValidated: e.bonusMaterial.quantity.intValue > 0,
-        ),
-      ),
-      updateBonusItemQuantity: (e) {
+    );
+
+    on<_ValidateBonusQuantity>(
+      (e, emit) {
+        emit(
+          state.copyWith(
+            isBonusQtyValidated: e.bonusMaterial.quantity.intValue > 0,
+          ),
+        );
+      },
+    );
+
+    on<_UpdateBonusItemQuantity>(
+      (e, emit) {
         final updatedBonusItemList = state.bonusItemList
             .map(
               (element) =>
@@ -135,14 +149,19 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           ),
         );
       },
-      updateAddedBonusItems: (e) async => emit(
-        state.copyWith(
-          addedBonusItemsList: [
-            ...state.addedBonusItemsList,
-            ...e.addedBonusItemList,
-          ],
-        ),
-      ),
+    );
+
+    on<_UpdateAddedBonusItems>(
+      (e, emit) {
+        emit(
+          state.copyWith(
+            addedBonusItemsList: [
+              ...state.addedBonusItemsList,
+              ...e.addedBonusItemList,
+            ],
+          ),
+        );
+      },
     );
   }
 }

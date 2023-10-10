@@ -13,6 +13,8 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+
 abstract class IMaterialListRepository {
   Future<Either<ApiFailure, MaterialResponse>> getMaterialList({
     required SalesOrganisation salesOrganisation,
@@ -65,5 +67,6 @@ abstract class IMaterialListRepository {
     required PrincipalData principalData,
     required User user,
     required bool enableGimmickMaterial,
+    required SearchKey searchKey,
   });
 }

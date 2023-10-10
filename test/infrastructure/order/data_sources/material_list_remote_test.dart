@@ -193,6 +193,7 @@ void main() {
         'SalesOrg': 'fake-sales-org',
         'ShipTo': 'fake-shipto-code',
         'isGimmick': false,
+        'SearchKey': ''
       },
     };
     final res = json.decode(
@@ -229,6 +230,7 @@ void main() {
       pageSize: 24,
       salesOrgCode: 'fake-sales-org',
       shipToCode: 'fake-shipto-code',
+      searchKey: '',
     );
 
     final finalData =

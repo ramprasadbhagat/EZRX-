@@ -39,6 +39,7 @@ class MaterialListRemoteDataSource {
     required List<String> manufactureList,
     required List<String> countryListCode,
     required String principalCode,
+    required String searchKey,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductQuery();
@@ -53,6 +54,7 @@ class MaterialListRemoteDataSource {
           'SalesOrg': salesOrgCode,
           'ShipTo': shipToCode,
           'isGimmick': gimmickMaterial,
+          'SearchKey': searchKey,
         },
       };
 

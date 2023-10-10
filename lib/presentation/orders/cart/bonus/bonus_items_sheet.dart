@@ -31,6 +31,10 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+
+part 'package:ezrxmobile/presentation/orders/cart/bonus/widgets/bonus_item_search_bar.dart';
+
 class BonusItemsSheet extends StatelessWidget {
   final PriceAggregate cartProduct;
   const BonusItemsSheet({
@@ -80,17 +84,7 @@ class BonusItemsSheet extends StatelessWidget {
                     ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 18, bottom: 8),
-              child: CustomSearchBar(
-                onClear: () {},
-                onSearchChanged: (v) => {},
-                enabled: true,
-                onSearchSubmitted: (v) => {},
-                initialValue: '',
-                customValidator: (v) => true,
-              ),
-            ),
+            _BonusItemSearchBar(cartItem: cartProduct),
             const _BonusQuantityEmptyWarning(),
             BlocBuilder<CartBloc, CartState>(
               buildWhen: (previous, current) =>
@@ -152,9 +146,8 @@ class _BodyContent extends StatelessWidget {
                   key: WidgetKeys.loaderImage,
                 )
               : ScrollList<MaterialInfo>(
-                  noRecordFoundWidget: const Expanded(
-                    child: NoRecordFound(title: 'No Bonus Items Found'),
-                  ),
+                  noRecordFoundWidget:
+                      const NoRecordFound(title: 'No Bonus Items Found'),
                   controller: ScrollController(),
                   onRefresh: () => context.read<BonusMaterialBloc>().add(
                         BonusMaterialEvent.fetch(
@@ -178,6 +171,7 @@ class _BodyContent extends StatelessWidget {
                               .read<EligibilityBloc>()
                               .state
                               .isGimmickMaterialEnabled,
+                          searchKey: SearchKey.searchFilter(''),
                         ),
                       ),
                   onLoadingMore: () => context.read<BonusMaterialBloc>().add(

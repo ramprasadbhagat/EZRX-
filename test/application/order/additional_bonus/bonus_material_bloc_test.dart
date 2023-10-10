@@ -67,6 +67,7 @@ void main() {
             principalData: fakePrincipalData,
             salesOrgConfig: fakeEmptySalesConfigs,
             user: fakeRootAdminUser,
+            searchKey: SearchKey(''),
           ),
         ).thenAnswer(
           (_) async => Right(fakeMaterialListData),
@@ -81,6 +82,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           user: fakeRootAdminUser,
+          searchKey: SearchKey(''),
         ),
       ),
       expect: () => [
@@ -112,6 +114,7 @@ void main() {
             principalData: fakePrincipalData,
             salesOrgConfig: fakeEmptySalesConfigs,
             user: fakeRootAdminUser,
+            searchKey: SearchKey(''),
           ),
         ).thenAnswer(
           (_) async => const Left(ApiFailure.other('fake-error')),
@@ -126,6 +129,7 @@ void main() {
           salesOrganisation: fakeSalesOrganisation,
           shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           user: fakeRootAdminUser,
+          searchKey: SearchKey(''),
         ),
       ),
       expect: () => [
@@ -161,6 +165,7 @@ void main() {
             principalData: fakePrincipalData,
             salesOrgConfig: fakeEmptySalesConfigs,
             user: fakeRootAdminUser,
+            searchKey: SearchKey(''),
           ),
         ).thenAnswer(
           (_) async => Right(fakeMaterialListData),
@@ -216,6 +221,7 @@ void main() {
             principalData: fakePrincipalData,
             salesOrgConfig: fakeEmptySalesConfigs,
             user: fakeRootAdminUser,
+            searchKey: SearchKey(''),
           ),
         ).thenAnswer(
           (_) async => const Left(ApiFailure.other('fake-error')),

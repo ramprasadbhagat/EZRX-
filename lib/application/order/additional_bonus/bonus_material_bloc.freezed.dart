@@ -24,6 +24,7 @@ mixin _$BonusMaterialEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)
         fetch,
@@ -51,6 +52,7 @@ mixin _$BonusMaterialEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -77,6 +79,7 @@ mixin _$BonusMaterialEvent {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -158,6 +161,7 @@ abstract class _$$_FetchCopyWith<$Res> {
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
       User user,
+      SearchKey searchKey,
       bool isGimmickMaterialEnabled,
       PrincipalData principalData});
 
@@ -184,6 +188,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
     Object? user = null,
+    Object? searchKey = null,
     Object? isGimmickMaterialEnabled = null,
     Object? principalData = null,
   }) {
@@ -208,6 +213,10 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
       isGimmickMaterialEnabled: null == isGimmickMaterialEnabled
           ? _value.isGimmickMaterialEnabled
           : isGimmickMaterialEnabled // ignore: cast_nullable_to_non_nullable
@@ -277,6 +286,7 @@ class _$_Fetch implements _Fetch {
       required this.customerCodeInfo,
       required this.shipToInfo,
       required this.user,
+      required this.searchKey,
       required this.isGimmickMaterialEnabled,
       required this.principalData});
 
@@ -291,13 +301,15 @@ class _$_Fetch implements _Fetch {
   @override
   final User user;
   @override
+  final SearchKey searchKey;
+  @override
   final bool isGimmickMaterialEnabled;
   @override
   final PrincipalData principalData;
 
   @override
   String toString() {
-    return 'BonusMaterialEvent.fetch(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, isGimmickMaterialEnabled: $isGimmickMaterialEnabled, principalData: $principalData)';
+    return 'BonusMaterialEvent.fetch(salesOrganisation: $salesOrganisation, configs: $configs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, searchKey: $searchKey, isGimmickMaterialEnabled: $isGimmickMaterialEnabled, principalData: $principalData)';
   }
 
   @override
@@ -313,6 +325,8 @@ class _$_Fetch implements _Fetch {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
             (identical(
                     other.isGimmickMaterialEnabled, isGimmickMaterialEnabled) ||
                 other.isGimmickMaterialEnabled == isGimmickMaterialEnabled) &&
@@ -328,6 +342,7 @@ class _$_Fetch implements _Fetch {
       customerCodeInfo,
       shipToInfo,
       user,
+      searchKey,
       isGimmickMaterialEnabled,
       principalData);
 
@@ -346,6 +361,7 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)
         fetch,
@@ -365,7 +381,7 @@ class _$_Fetch implements _Fetch {
         updateAddedBonusItems,
   }) {
     return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo, user,
-        isGimmickMaterialEnabled, principalData);
+        searchKey, isGimmickMaterialEnabled, principalData);
   }
 
   @override
@@ -377,6 +393,7 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -395,7 +412,7 @@ class _$_Fetch implements _Fetch {
         updateAddedBonusItems,
   }) {
     return fetch?.call(salesOrganisation, configs, customerCodeInfo, shipToInfo,
-        user, isGimmickMaterialEnabled, principalData);
+        user, searchKey, isGimmickMaterialEnabled, principalData);
   }
 
   @override
@@ -407,6 +424,7 @@ class _$_Fetch implements _Fetch {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -427,7 +445,7 @@ class _$_Fetch implements _Fetch {
   }) {
     if (fetch != null) {
       return fetch(salesOrganisation, configs, customerCodeInfo, shipToInfo,
-          user, isGimmickMaterialEnabled, principalData);
+          user, searchKey, isGimmickMaterialEnabled, principalData);
     }
     return orElse();
   }
@@ -483,6 +501,7 @@ abstract class _Fetch implements BonusMaterialEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final User user,
+      required final SearchKey searchKey,
       required final bool isGimmickMaterialEnabled,
       required final PrincipalData principalData}) = _$_Fetch;
 
@@ -491,6 +510,7 @@ abstract class _Fetch implements BonusMaterialEvent {
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   User get user;
+  SearchKey get searchKey;
   bool get isGimmickMaterialEnabled;
   PrincipalData get principalData;
   @JsonKey(ignore: true)
@@ -700,6 +720,7 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)
         fetch,
@@ -731,6 +752,7 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -761,6 +783,7 @@ class _$_LoadMoreBonusItem implements _LoadMoreBonusItem {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -934,6 +957,7 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)
         fetch,
@@ -964,6 +988,7 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -993,6 +1018,7 @@ class _$_ValidateBonusQuantity implements _ValidateBonusQuantity {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -1154,6 +1180,7 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)
         fetch,
@@ -1184,6 +1211,7 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -1213,6 +1241,7 @@ class _$_UpdateBonusItemQuantity implements _UpdateBonusItemQuantity {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -1373,6 +1402,7 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)
         fetch,
@@ -1403,6 +1433,7 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -1432,6 +1463,7 @@ class _$_UpdateAddedBonusItems implements _UpdateAddedBonusItems {
             CustomerCodeInfo customerCodeInfo,
             ShipToInfo shipToInfo,
             User user,
+            SearchKey searchKey,
             bool isGimmickMaterialEnabled,
             PrincipalData principalData)?
         fetch,
@@ -1519,6 +1551,7 @@ mixin _$BonusMaterialState {
   List<MaterialInfo> get bonusItemList => throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isBonusQtyValidated => throw _privateConstructorUsedError;
+  SearchKey get searchKey => throw _privateConstructorUsedError;
   List<BonusSampleItem> get addedBonusItemsList =>
       throw _privateConstructorUsedError;
 
@@ -1539,6 +1572,7 @@ abstract class $BonusMaterialStateCopyWith<$Res> {
       List<MaterialInfo> bonusItemList,
       bool canLoadMore,
       bool isBonusQtyValidated,
+      SearchKey searchKey,
       List<BonusSampleItem> addedBonusItemsList});
 }
 
@@ -1560,6 +1594,7 @@ class _$BonusMaterialStateCopyWithImpl<$Res, $Val extends BonusMaterialState>
     Object? bonusItemList = null,
     Object? canLoadMore = null,
     Object? isBonusQtyValidated = null,
+    Object? searchKey = null,
     Object? addedBonusItemsList = null,
   }) {
     return _then(_value.copyWith(
@@ -1583,6 +1618,10 @@ class _$BonusMaterialStateCopyWithImpl<$Res, $Val extends BonusMaterialState>
           ? _value.isBonusQtyValidated
           : isBonusQtyValidated // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
       addedBonusItemsList: null == addedBonusItemsList
           ? _value.addedBonusItemsList
           : addedBonusItemsList // ignore: cast_nullable_to_non_nullable
@@ -1605,6 +1644,7 @@ abstract class _$$_BonusMaterialStateCopyWith<$Res>
       List<MaterialInfo> bonusItemList,
       bool canLoadMore,
       bool isBonusQtyValidated,
+      SearchKey searchKey,
       List<BonusSampleItem> addedBonusItemsList});
 }
 
@@ -1624,6 +1664,7 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
     Object? bonusItemList = null,
     Object? canLoadMore = null,
     Object? isBonusQtyValidated = null,
+    Object? searchKey = null,
     Object? addedBonusItemsList = null,
   }) {
     return _then(_$_BonusMaterialState(
@@ -1647,6 +1688,10 @@ class __$$_BonusMaterialStateCopyWithImpl<$Res>
           ? _value.isBonusQtyValidated
           : isBonusQtyValidated // ignore: cast_nullable_to_non_nullable
               as bool,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
       addedBonusItemsList: null == addedBonusItemsList
           ? _value._addedBonusItemsList
           : addedBonusItemsList // ignore: cast_nullable_to_non_nullable
@@ -1664,6 +1709,7 @@ class _$_BonusMaterialState extends _BonusMaterialState {
       required final List<MaterialInfo> bonusItemList,
       required this.canLoadMore,
       required this.isBonusQtyValidated,
+      required this.searchKey,
       required final List<BonusSampleItem> addedBonusItemsList})
       : _bonusItemList = bonusItemList,
         _addedBonusItemsList = addedBonusItemsList,
@@ -1685,6 +1731,8 @@ class _$_BonusMaterialState extends _BonusMaterialState {
   final bool canLoadMore;
   @override
   final bool isBonusQtyValidated;
+  @override
+  final SearchKey searchKey;
   final List<BonusSampleItem> _addedBonusItemsList;
   @override
   List<BonusSampleItem> get addedBonusItemsList {
@@ -1696,7 +1744,7 @@ class _$_BonusMaterialState extends _BonusMaterialState {
 
   @override
   String toString() {
-    return 'BonusMaterialState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, bonusItemList: $bonusItemList, canLoadMore: $canLoadMore, isBonusQtyValidated: $isBonusQtyValidated, addedBonusItemsList: $addedBonusItemsList)';
+    return 'BonusMaterialState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, bonusItemList: $bonusItemList, canLoadMore: $canLoadMore, isBonusQtyValidated: $isBonusQtyValidated, searchKey: $searchKey, addedBonusItemsList: $addedBonusItemsList)';
   }
 
   @override
@@ -1714,6 +1762,8 @@ class _$_BonusMaterialState extends _BonusMaterialState {
                 other.canLoadMore == canLoadMore) &&
             (identical(other.isBonusQtyValidated, isBonusQtyValidated) ||
                 other.isBonusQtyValidated == isBonusQtyValidated) &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey) &&
             const DeepCollectionEquality()
                 .equals(other._addedBonusItemsList, _addedBonusItemsList));
   }
@@ -1726,6 +1776,7 @@ class _$_BonusMaterialState extends _BonusMaterialState {
       const DeepCollectionEquality().hash(_bonusItemList),
       canLoadMore,
       isBonusQtyValidated,
+      searchKey,
       const DeepCollectionEquality().hash(_addedBonusItemsList));
 
   @JsonKey(ignore: true)
@@ -1743,6 +1794,7 @@ abstract class _BonusMaterialState extends BonusMaterialState {
       required final List<MaterialInfo> bonusItemList,
       required final bool canLoadMore,
       required final bool isBonusQtyValidated,
+      required final SearchKey searchKey,
       required final List<BonusSampleItem>
           addedBonusItemsList}) = _$_BonusMaterialState;
   const _BonusMaterialState._() : super._();
@@ -1757,6 +1809,8 @@ abstract class _BonusMaterialState extends BonusMaterialState {
   bool get canLoadMore;
   @override
   bool get isBonusQtyValidated;
+  @override
+  SearchKey get searchKey;
   @override
   List<BonusSampleItem> get addedBonusItemsList;
   @override

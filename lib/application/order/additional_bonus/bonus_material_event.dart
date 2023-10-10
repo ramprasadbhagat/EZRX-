@@ -8,6 +8,7 @@ class BonusMaterialEvent with _$BonusMaterialEvent {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required User user,
+    required SearchKey searchKey,
     required bool isGimmickMaterialEnabled,
     required PrincipalData principalData,
   }) = _Fetch;

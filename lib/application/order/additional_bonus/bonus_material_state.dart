@@ -9,6 +9,7 @@ class BonusMaterialState with _$BonusMaterialState {
     required List<MaterialInfo> bonusItemList,
     required bool canLoadMore,
     required bool isBonusQtyValidated,
+    required SearchKey searchKey,
     required List<BonusSampleItem> addedBonusItemsList,
   }) = _BonusMaterialState;
 
@@ -18,6 +19,7 @@ class BonusMaterialState with _$BonusMaterialState {
         canLoadMore: true,
         isFetching: false,
         isBonusQtyValidated: true,
+        searchKey: SearchKey.searchFilter(''),
         addedBonusItemsList: <BonusSampleItem>[],
       );
 
