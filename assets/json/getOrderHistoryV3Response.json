@@ -5,7 +5,7 @@
       "creatingOrderIds": null,
       "orderHeaders": [
         {
-          "Type": "ZPOR",
+          "Type": "Comm",
           "OrderNumber": "0200251963",
           "EZRXNumber": "EZRX-7be74cd",
           "SoldTo": "0030082707",
@@ -25,7 +25,7 @@
           "IsGreen": false,
           "OrderItems": [
             {
-              "MaterialCode": "000000000021038302",
+              "MaterialCode": "000000000023063780",
               "MaterialDescription": "0.9% SODIUM CHLORIDEBP 96X50ML",
               "DefaultMaterialDescription": ""
             }

@@ -30,7 +30,7 @@ class ReOrderPermissionBloc
     Emitter<ReOrderPermissionState> emit,
   ) async {
     await event.map(
-      initialized: (_) async => ReOrderPermissionState.initial(),
+      initialized: (_) async => emit(ReOrderPermissionState.initial()),
       fetch: (_Fetch e) async {
         emit(
           state.copyWith(
