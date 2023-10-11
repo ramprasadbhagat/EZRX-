@@ -172,7 +172,7 @@ class _ReturnItem extends StatelessWidget {
                           ),
                         );
                     context.router.push(
-                      ReturnRequestDetailsRoute(returnItem: data),
+                      const ReturnRequestDetailsRoute(),
                     );
                   },
                   title: Column(

@@ -38,15 +38,13 @@ class _AdditionInfoSummary extends StatelessWidget {
                                   ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              context.read<ReturnSummaryDetailsBloc>().add(
-                                    ReturnSummaryDetailsEvent.fetch(
-                                      returnId: ReturnRequestsId(
-                                        requestId: state.returnRequestId,
-                                      ),
+                              context.read<ReturnDetailsByRequestBloc>().add(
+                                    ReturnDetailsByRequestEvent.fetch(
+                                      returnId: state.returnRequestId,
                                     ),
                                   );
                               context.router.push(
-                                const ReturnRequestSummaryByItemDetailsRoute(),
+                                const ReturnRequestDetailsRoute(),
                               );
                             },
                         ),

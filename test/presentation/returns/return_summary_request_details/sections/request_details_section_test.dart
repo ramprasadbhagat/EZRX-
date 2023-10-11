@@ -12,7 +12,6 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/detai
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
@@ -153,11 +152,8 @@ void main() {
             create: (context) => mockPoAttachmentBloc,
           )
         ],
-        child: Scaffold(
-          body: ReturnRequestDetails(
-            returnItem:
-                ReturnItem.empty().copyWith(status: StatusType('PENDING')),
-          ),
+        child: const Scaffold(
+          body: ReturnRequestDetails(),
         ),
       );
     }
@@ -192,6 +188,11 @@ void main() {
       when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
         ReturnDetailsByRequestState.initial().copyWith(
           isLoading: true,
+          requestInformationHeader:
+              ReturnRequestInformationHeader.empty().copyWith(
+            bapiStatus: StatusType('PENDING'),
+            requestID: 'fake-id',
+          ),
         ),
       );
       final expectedStates = [
@@ -201,7 +202,11 @@ void main() {
             ReturnRequestInformation.empty()
                 .copyWith(returnQuantity: '1', status: StatusType('PENDING'))
           ],
-          requestInformationHeader: ReturnRequestInformationHeader.empty(),
+          requestInformationHeader:
+              ReturnRequestInformationHeader.empty().copyWith(
+            bapiStatus: StatusType('PENDING'),
+            requestID: 'fake-id',
+          ),
         ),
       ];
       whenListen(

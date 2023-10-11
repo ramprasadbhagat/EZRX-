@@ -1,0 +1,143 @@
+import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/new_request_success/new_request_successful_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+
+import '../../../utils/widget_utils.dart';
+
+class AnnouncementBlocMock
+    extends MockBloc<AnnouncementEvent, AnnouncementState>
+    implements AnnouncementBloc {}
+
+class CustomerCodeBlocMock
+    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
+    implements CustomerCodeBloc {}
+
+class NewRequestMockBloc extends MockBloc<NewRequestEvent, NewRequestState>
+    implements NewRequestBloc {}
+
+class ReturnDetailsByRequestBlocMock
+    extends MockBloc<ReturnDetailsByRequestEvent, ReturnDetailsByRequestState>
+    implements ReturnDetailsByRequestBloc {}
+
+class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
+    implements SalesOrgBloc {}
+
+class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
+    implements EligibilityBloc {}
+
+class AutoRouterMock extends Mock implements AppRouter {}
+
+final locator = GetIt.instance;
+
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  late AnnouncementBloc announcementBlocMock;
+  late ReturnDetailsByRequestBloc returnDetailsByRequestBlocMock;
+
+  late AppRouter autoRouterMock;
+  late CustomerCodeBloc customerCodeBlocMock;
+  late SalesOrgBloc salesOrgBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
+  late NewRequestBloc newRequestBlocMock;
+
+  final fakeSalesOrganisation = SalesOrganisation.empty().copyWith(
+    salesOrg: SalesOrg('fake-SalesOrg'),
+  );
+
+  setUpAll(() async {
+    locator.registerLazySingleton(() => AppRouter());
+  });
+
+  group('New Request Successful page', () {
+    setUp(() {
+      autoRouterMock = locator<AppRouter>();
+      newRequestBlocMock = NewRequestMockBloc();
+      announcementBlocMock = AnnouncementBlocMock();
+      returnDetailsByRequestBlocMock = ReturnDetailsByRequestBlocMock();
+      salesOrgBlocMock = SalesOrgMockBloc();
+
+      customerCodeBlocMock = CustomerCodeBlocMock();
+
+      eligibilityBlocMock = EligibilityBlocMock();
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
+
+      when(() => announcementBlocMock.state)
+          .thenReturn(AnnouncementState.initial());
+      when(() => eligibilityBlocMock.state)
+          .thenReturn(EligibilityState.initial());
+      when(() => newRequestBlocMock.state)
+          .thenReturn(NewRequestState.initial());
+
+      when(() => customerCodeBlocMock.state)
+          .thenReturn(CustomerCodeState.initial());
+
+      when(() => returnDetailsByRequestBlocMock.state)
+          .thenReturn(ReturnDetailsByRequestState.initial());
+    });
+
+    Widget getScopedWidget() {
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock,
+          ),
+          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+          BlocProvider<NewRequestBloc>(
+            create: (context) => newRequestBlocMock,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+          BlocProvider<ReturnDetailsByRequestBloc>(
+            create: (context) => returnDetailsByRequestBlocMock,
+          ),
+        ],
+        child: const NewRequestSuccessfulPage(),
+      );
+    }
+
+    testWidgets(' => Test hyperlink navigation to return request details page',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          salesOrg: fakeSalesOrganisation.salesOrg,
+          returnRequestId: 'fake-Id',
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      final returnRequestID = find.text('Return #fake-Id', findRichText: true);
+      expect(returnRequestID, findsOneWidget);
+      await tester.tap(returnRequestID);
+      verify(
+        () => returnDetailsByRequestBlocMock.add(
+          const ReturnDetailsByRequestEvent.fetch(
+            returnId: 'fake-Id',
+          ),
+        ),
+      ).called(1);
+    });
+  });
+}

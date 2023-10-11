@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
@@ -15,10 +14,8 @@ class RequestDetailsSection extends StatelessWidget {
   const RequestDetailsSection({
     Key? key,
     required this.requestInformationHeader,
-    required this.returnItem,
   }) : super(key: key);
   final ReturnRequestInformationHeader requestInformationHeader;
-  final ReturnItem returnItem;
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +24,12 @@ class RequestDetailsSection extends StatelessWidget {
       children: [
         _ReturnDetailsSection(
           requestInformationHeader: requestInformationHeader,
-          returnItem: returnItem,
         ),
         StatusTrackerSection(
           createDateTime: requestInformationHeader.createdDateTime,
           onTap: () {},
-          status: returnItem.status.displayStatusForViewByRequest,
+          status:
+              requestInformationHeader.bapiStatus.displayStatusForViewByRequest,
           title: 'Return request status'.tr(),
         ),
         const Divider(
@@ -66,18 +63,19 @@ class _ReturnDetailsSection extends StatelessWidget {
   const _ReturnDetailsSection({
     Key? key,
     required this.requestInformationHeader,
-    required this.returnItem,
   }) : super(key: key);
   final ReturnRequestInformationHeader requestInformationHeader;
-  final ReturnItem returnItem;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
       tileColor: ZPColors.primary,
       minVerticalPadding: 20.0,
       title: BalanceTextRow(
-        keyText: '${'Return'.tr()} #${returnItem.requestId}',
-        valueText: returnItem.status.displayStatusForViewByRequest,
+        keyText:
+            '${context.tr('Return')} #${requestInformationHeader.requestID}',
+        valueText:
+            requestInformationHeader.bapiStatus.displayStatusForViewByRequest,
         keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
               color: ZPColors.white,
             ),

@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -16,9 +15,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 class ReturnRequestDetails extends StatelessWidget {
   const ReturnRequestDetails({
     Key? key,
-    required this.returnItem,
   }) : super(key: key);
-  final ReturnItem returnItem;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +57,6 @@ class ReturnRequestDetails extends StatelessWidget {
                       RequestDetailsSection(
                         requestInformationHeader:
                             state.requestInformationHeader,
-                        returnItem: returnItem,
                       ),
                       const Divider(
                         indent: 0,
