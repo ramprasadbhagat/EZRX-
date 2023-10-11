@@ -1,18 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
@@ -22,6 +12,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
+
 class ViewByOrderRepositoryMock extends Mock implements ViewByOrderRepository {}
 
 void main() {
@@ -29,337 +23,313 @@ void main() {
   late ViewByOrderRepository viewByOrderRepository;
   late ViewByOrder viewByOrderMockData;
   late Config config;
-  final mockSalesOrg =
-      SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2100'));
-  final salesOrgConfig = SalesOrganisationConfigs.empty()
-      .copyWith(salesOrg: SalesOrg('fake-salesOrg'));
-  final customerCodeInfo = CustomerCodeInfo.empty()
-      .copyWith(customerCodeSoldTo: 'fake-customerCode');
-  final shipToInfo = ShipToInfo.empty().copyWith(
-    shipToCustomerCode: 'fake-shipto',
-  );
-  final user = User.empty().copyWith(
-    username: Username('fake-name'),
-    role: Role(
-      description: 'fake-desc',
-      id: 'id',
-      name: 'fake-name',
-      type: RoleType('fake-type'),
-    ),
-    preferredLanguage: const Locale(ApiLanguageCode.english),
-    mobileNumber: MobileNumber(''),
-  );
-  final searchKey = SearchKey('fake-key');
-  final fakeFromDate = DateTime.parse('2023-07-12 15:56:56.01');
-  final fakeToDate = DateTime.parse('2023-07-19 15:56:56.02');
-  final viewByOrdersFilter = ViewByOrdersFilter.empty().copyWith(
-    orderDateFrom: DateTimeStringValue(
-      getDateStringByDateTime(fakeFromDate),
-    ),
-    orderDateTo: DateTimeStringValue(
-      getDateStringByDateTime(fakeToDate),
-    ),
-  );
-
+  final fakeShipTo = fakeCustomerCodeInfo.shipToInfos.first;
+  const fakeSort = 'desc';
+  const fakeOrderBy = 'datetime';
+  final searchKey = SearchKey('');
+  final viewByOrdersFilter = ViewByOrdersFilter.empty();
   const offSet = 0;
-  group('Orders View By Order', () {
-    setUp(() async {
-      viewByOrderRepository = ViewByOrderRepositoryMock();
-      viewByOrderMockData =
-          await ViewByOrderLocalDataSource().getViewByOrders();
-      config = Config()..appFlavor = Flavor.mock;
-      WidgetsFlutterBinding.ensureInitialized();
-    });
+  group(
+    'Orders View By Order',
+    () {
+      setUp(() async {
+        viewByOrderRepository = ViewByOrderRepositoryMock();
+        viewByOrderMockData =
+            await ViewByOrderLocalDataSource().getViewByOrders();
+        config = Config()..appFlavor = Flavor.mock;
+        WidgetsFlutterBinding.ensureInitialized();
+      });
 
-    blocTest<ViewByOrderBloc, ViewByOrderState>(
-      ' -> Orders view by order fetch fail',
-      build: () => ViewByOrderBloc(
-        viewByOrderRepository: viewByOrderRepository,
-        config: config,
-      ),
-      seed: () => ViewByOrderState.initial().copyWith(
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        sortDirection: 'desc',
-        salesOrganisation: mockSalesOrg,
-      ),
-      setUp: () {
-        when(
-          () => viewByOrderRepository.getViewByOrders(
-            orderBy: 'datetime',
-            salesOrgConfig: salesOrgConfig,
-            soldTo: customerCodeInfo,
-            shipTo: shipToInfo,
-            user: user,
-            pageSize: config.pageSize,
-            offset: offSet,
-            sort: 'desc',
+      blocTest<ViewByOrderBloc, ViewByOrderState>(
+        ' -> Orders view by order initialize success happy case',
+        build: () => ViewByOrderBloc(
+          viewByOrderRepository: viewByOrderRepository,
+          config: config,
+        ),
+        setUp: () {
+          when(
+            () => viewByOrderRepository.getViewByOrders(
+              salesOrganisation: fakeSalesOrganisation,
+              salesOrgConfig: fakeEmptySalesConfigs,
+              soldTo: fakeCustomerCodeInfo,
+              shipTo: fakeShipTo,
+              user: fakeClient,
+              pageSize: config.pageSize,
+              offset: offSet,
+              viewByOrdersFilter: viewByOrdersFilter,
+              orderBy: fakeOrderBy,
+              sort: fakeSort,
+              searchKey: searchKey,
+              viewByOrder: ViewByOrder.empty(),
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              viewByOrderMockData,
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByOrderEvent.initialized(
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipTo,
+            user: fakeClient,
+            sortDirection: fakeSort,
+          ),
+        ),
+        expect: () => [
+          ViewByOrderState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipTo,
+            user: fakeClient,
+            sortDirection: fakeSort,
+          ),
+          ViewByOrderState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipTo,
+            user: fakeClient,
+            sortDirection: fakeSort,
+            isFetching: true,
+            appliedFilter: viewByOrdersFilter,
             searchKey: searchKey,
-            viewByOrder: ViewByOrder.empty(),
-            viewByOrdersFilter: viewByOrdersFilter,
-            salesOrganisation: mockSalesOrg,
           ),
-        ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
+          ViewByOrderState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipTo,
+            user: fakeClient,
+            sortDirection: fakeSort,
+            appliedFilter: viewByOrdersFilter,
+            searchKey: searchKey,
+            viewByOrderList: viewByOrderMockData,
           ),
-        );
-      },
-      act: (bloc) => bloc.add(
-        ViewByOrderEvent.fetch(
-          filter: viewByOrdersFilter,
-          searchKey: SearchKey.searchFilter('fake-key'),
+        ],
+      );
+
+      blocTest<ViewByOrderBloc, ViewByOrderState>(
+        ' -> Orders view by order fetch fail',
+        build: () => ViewByOrderBloc(
+          viewByOrderRepository: viewByOrderRepository,
+          config: config,
         ),
-      ),
-      expect: () => [
-        ViewByOrderState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
-          isFetching: true,
-          searchKey: searchKey,
-          appliedFilter: viewByOrdersFilter,
-          salesOrganisation: mockSalesOrg,
+        seed: () => ViewByOrderState.initial().copyWith(
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipTo,
+          user: fakeClient,
+          sortDirection: fakeSort,
+          salesOrganisation: fakeSalesOrganisation,
         ),
-        ViewByOrderState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
-          failureOrSuccessOption: optionOf(
-            const Left(
+        setUp: () {
+          when(
+            () => viewByOrderRepository.getViewByOrders(
+              orderBy: fakeOrderBy,
+              salesOrgConfig: fakeEmptySalesConfigs,
+              soldTo: fakeCustomerCodeInfo,
+              shipTo: fakeShipTo,
+              user: fakeClient,
+              pageSize: config.pageSize,
+              offset: offSet,
+              sort: fakeSort,
+              searchKey: searchKey,
+              viewByOrder: ViewByOrder.empty(),
+              viewByOrdersFilter: viewByOrdersFilter,
+              salesOrganisation: fakeSalesOrganisation,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(
               ApiFailure.other('fake-error'),
             ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByOrderEvent.fetch(
+            filter: viewByOrdersFilter,
+            searchKey: searchKey,
           ),
-          appliedFilter: viewByOrdersFilter,
-          isFetching: false,
-          searchKey: searchKey,
-          salesOrganisation: mockSalesOrg,
-        )
-      ],
-    );
+        ),
+        expect: () => [
+          ViewByOrderState.initial().copyWith(
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipTo,
+            user: fakeClient,
+            sortDirection: fakeSort,
+            isFetching: true,
+            searchKey: searchKey,
+            appliedFilter: viewByOrdersFilter,
+            salesOrganisation: fakeSalesOrganisation,
+          ),
+          ViewByOrderState.initial().copyWith(
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipTo,
+            user: fakeClient,
+            sortDirection: fakeSort,
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
+              ),
+            ),
+            appliedFilter: viewByOrdersFilter,
+            isFetching: false,
+            searchKey: searchKey,
+            salesOrganisation: fakeSalesOrganisation,
+          )
+        ],
+      );
 
-    blocTest<ViewByOrderBloc, ViewByOrderState>(
-      ' -> Orders view by order fetch Success',
-      build: () => ViewByOrderBloc(
-        viewByOrderRepository: viewByOrderRepository,
-        config: config,
-      ),
-      seed: () => ViewByOrderState.initial().copyWith(
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        sortDirection: 'desc',
-        salesOrganisation: mockSalesOrg,
-      ),
-      setUp: () {
-        when(
-          () => viewByOrderRepository.getViewByOrders(
-            orderBy: 'datetime',
-            salesOrgConfig: salesOrgConfig,
-            soldTo: customerCodeInfo,
-            shipTo: shipToInfo,
-            user: user,
-            pageSize: config.pageSize,
-            offset: offSet,
-            sort: 'desc',
-            searchKey: searchKey,
-            viewByOrder: ViewByOrder.empty(),
-            viewByOrdersFilter: viewByOrdersFilter,
-            salesOrganisation: mockSalesOrg,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            viewByOrderMockData,
-          ),
-        );
-      },
-      act: (bloc) => bloc.add(
-        ViewByOrderEvent.fetch(
-          filter: viewByOrdersFilter,
-          searchKey: SearchKey.searchFilter('fake-key'),
+      blocTest<ViewByOrderBloc, ViewByOrderState>(
+        ' -> Orders view by order loadMore',
+        build: () => ViewByOrderBloc(
+          viewByOrderRepository: viewByOrderRepository,
+          config: config,
         ),
-      ),
-      expect: () => [
-        ViewByOrderState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
-          isFetching: true,
+        seed: () => ViewByOrderState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipTo,
+          user: fakeClient,
+          sortDirection: fakeSort,
           appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
-          salesOrganisation: mockSalesOrg,
-        ),
-        ViewByOrderState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
-          appliedFilter: viewByOrdersFilter,
-          isFetching: false,
-          nextPageIndex: 0,
           viewByOrderList: viewByOrderMockData,
-          searchKey: searchKey,
-          salesOrganisation: mockSalesOrg,
         ),
-      ],
-    );
-    blocTest<ViewByOrderBloc, ViewByOrderState>(
-      ' -> Orders view by order loadMore',
-      build: () => ViewByOrderBloc(
-        viewByOrderRepository: viewByOrderRepository,
-        config: config,
-      ),
-      seed: () => ViewByOrderState.initial().copyWith(
-        appliedFilter: viewByOrdersFilter,
-        viewByOrderList: viewByOrderMockData,
-        searchKey: searchKey,
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        sortDirection: 'desc',
-        salesOrganisation: mockSalesOrg,
-      ),
-      setUp: () {
-        when(
-          () => viewByOrderRepository.getViewByOrders(
-            salesOrgConfig: salesOrgConfig,
-            soldTo: customerCodeInfo,
-            shipTo: shipToInfo,
-            user: user,
-            pageSize: config.pageSize,
-            offset: viewByOrderMockData.orderHeaders.length,
-            viewByOrdersFilter: viewByOrdersFilter,
-            orderBy: 'datetime',
-            sort: 'desc',
+        setUp: () {
+          when(
+            () => viewByOrderRepository.getViewByOrders(
+              salesOrgConfig: fakeEmptySalesConfigs,
+              soldTo: fakeCustomerCodeInfo,
+              shipTo: fakeShipTo,
+              user: fakeClient,
+              pageSize: config.pageSize,
+              offset: viewByOrderMockData.orderHeaders.length,
+              viewByOrdersFilter: viewByOrdersFilter,
+              orderBy: fakeOrderBy,
+              sort: fakeSort,
+              searchKey: searchKey,
+              viewByOrder: viewByOrderMockData,
+              salesOrganisation: fakeSalesOrganisation,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              viewByOrderMockData,
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          const ViewByOrderEvent.loadMore(),
+        ),
+        expect: () => [
+          ViewByOrderState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipTo,
+            user: fakeClient,
+            sortDirection: fakeSort,
+            appliedFilter: viewByOrdersFilter,
             searchKey: searchKey,
-            viewByOrder: viewByOrderMockData,
-            salesOrganisation: mockSalesOrg,
+            viewByOrderList: viewByOrderMockData,
+            isFetching: true,
           ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            viewByOrderMockData,
-          ),
-        );
-      },
-      act: (bloc) => bloc.add(
-        const ViewByOrderEvent.loadMore(),
-      ),
-      expect: () => [
-        ViewByOrderState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
-          isFetching: true,
-          nextPageIndex: 0,
-          canLoadMore: true,
-          viewByOrderList: viewByOrderMockData,
-          appliedFilter: viewByOrdersFilter,
-          searchKey: searchKey,
-          salesOrganisation: mockSalesOrg,
-        ),
-        ViewByOrderState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
-          appliedFilter: viewByOrdersFilter,
-          nextPageIndex: 1,
-          canLoadMore: false,
-          salesOrganisation: mockSalesOrg,
-          viewByOrderList: viewByOrderMockData.copyWith(
-            orderHeaders: [
-              ...viewByOrderMockData.orderHeaders,
-            ],
-          ),
-          searchKey: searchKey,
-        ),
-      ],
-    );
-    blocTest<ViewByOrderBloc, ViewByOrderState>(
-      ' -> Orders view by order loadMore failure',
-      build: () => ViewByOrderBloc(
-        viewByOrderRepository: viewByOrderRepository,
-        config: config,
-      ),
-      seed: () => ViewByOrderState.initial().copyWith(
-        appliedFilter: viewByOrdersFilter,
-        viewByOrderList: viewByOrderMockData,
-        searchKey: searchKey,
-        salesOrgConfigs: salesOrgConfig,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        user: user,
-        sortDirection: 'desc',
-        salesOrganisation: mockSalesOrg,
-      ),
-      setUp: () {
-        when(
-          () => viewByOrderRepository.getViewByOrders(
-            orderBy: 'datetime',
-            salesOrgConfig: salesOrgConfig,
-            soldTo: customerCodeInfo,
-            shipTo: shipToInfo,
-            user: user,
-            pageSize: config.pageSize,
-            offset: viewByOrderMockData.orderHeaders.length,
-            sort: 'desc',
+          ViewByOrderState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipTo,
+            user: fakeClient,
+            sortDirection: fakeSort,
+            appliedFilter: viewByOrdersFilter,
             searchKey: searchKey,
-            viewByOrder: viewByOrderMockData,
-            viewByOrdersFilter: viewByOrdersFilter,
-            salesOrganisation: mockSalesOrg,
+            viewByOrderList: viewByOrderMockData.copyWith(
+              orderHeaders: [
+                ...viewByOrderMockData.orderHeaders,
+              ],
+            ),
+            canLoadMore: false,
+            nextPageIndex: 1,
           ),
-        ).thenAnswer(
-          (invocation) async => const Left(ApiFailure.other('fake-error')),
-        );
-      },
-      act: (bloc) => bloc.add(
-        const ViewByOrderEvent.loadMore(),
-      ),
-      expect: () => [
-        ViewByOrderState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
-          isFetching: true,
-          nextPageIndex: 0,
-          viewByOrderList: viewByOrderMockData,
+        ],
+      );
+      blocTest<ViewByOrderBloc, ViewByOrderState>(
+        ' -> Orders view by order loadMore failure',
+        build: () => ViewByOrderBloc(
+          viewByOrderRepository: viewByOrderRepository,
+          config: config,
+        ),
+        seed: () => ViewByOrderState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
+          salesOrgConfigs: fakeEmptySalesConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipTo,
+          user: fakeClient,
+          sortDirection: fakeSort,
           appliedFilter: viewByOrdersFilter,
           searchKey: searchKey,
-          salesOrganisation: mockSalesOrg,
+          viewByOrderList: viewByOrderMockData,
         ),
-        ViewByOrderState.initial().copyWith(
-          salesOrgConfigs: salesOrgConfig,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          user: user,
-          sortDirection: 'desc',
-          failureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.other('fake-error'),
+        setUp: () {
+          when(
+            () => viewByOrderRepository.getViewByOrders(
+              salesOrgConfig: fakeEmptySalesConfigs,
+              soldTo: fakeCustomerCodeInfo,
+              shipTo: fakeShipTo,
+              user: fakeClient,
+              pageSize: config.pageSize,
+              offset: viewByOrderMockData.orderHeaders.length,
+              viewByOrdersFilter: viewByOrdersFilter,
+              orderBy: fakeOrderBy,
+              sort: fakeSort,
+              searchKey: searchKey,
+              viewByOrder: viewByOrderMockData,
+              salesOrganisation: fakeSalesOrganisation,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('fake-error')),
+          );
+        },
+        act: (bloc) => bloc.add(
+          const ViewByOrderEvent.loadMore(),
+        ),
+        expect: () => [
+          ViewByOrderState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipTo,
+            user: fakeClient,
+            sortDirection: fakeSort,
+            appliedFilter: viewByOrdersFilter,
+            searchKey: searchKey,
+            viewByOrderList: viewByOrderMockData,
+            isFetching: true,
+          ),
+          ViewByOrderState.initial().copyWith(
+            salesOrganisation: fakeSalesOrganisation,
+            salesOrgConfigs: fakeEmptySalesConfigs,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipTo,
+            user: fakeClient,
+            sortDirection: fakeSort,
+            appliedFilter: viewByOrdersFilter,
+            searchKey: searchKey,
+            viewByOrderList: viewByOrderMockData,
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('fake-error'),
+              ),
             ),
           ),
-          viewByOrderList: viewByOrderMockData,
-          appliedFilter: viewByOrdersFilter,
-          searchKey: searchKey,
-          salesOrganisation: mockSalesOrg,
-        )
-      ],
-    );
-  });
+        ],
+      );
+    },
+  );
 }

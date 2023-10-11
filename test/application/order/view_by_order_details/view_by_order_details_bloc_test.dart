@@ -1,18 +1,23 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class ViewByOrderDetailsRepositoryMock extends Mock
     implements ViewByOrderDetailsRepository {}
@@ -22,28 +27,44 @@ class ProductDetailsRepositoryMock extends Mock
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  late CustomerCodeInfo customerCodeInfo;
-  late SalesOrganisation salesOrganisation;
   late ViewByOrderDetailsRepository viewByOrderDetailsRepositoryMock;
   late ProductDetailRepository productDetailRepositoryMock;
-  //late OrderHistoryDetails orderHistoryDetailsMock;
+  final fakeOrderNumber = OrderNumber('');
+  final fakeTenderContract = TenderContract.empty().copyWith(
+    isNearToExpire: true,
+  );
+  late OrderHistoryDetails orderHistoryDetailsMock;
+  late Map<MaterialQueryInfo, PriceAggregate> fakeMaterials;
+  late Map<MaterialQueryInfo, bool> fakeIsLoadingTenderContract;
+  late MaterialQueryInfo fakeQueryInfo;
   group(
     'ViewByOrderDetailsBloc Test',
     () {
-      setUpAll(() async {
-        //orderHistoryDetailsMock =
-        //  await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
-        customerCodeInfo = CustomerCodeInfo.empty().copyWith(
-          customerCodeSoldTo: 'fake-sold-to',
-          shipToInfos: [ShipToInfo.empty()],
-        );
-        salesOrganisation = SalesOrganisation.empty()
-            .copyWith(salesOrg: SalesOrg('fake-sales-org'));
-      });
-
-      setUp(() {
+      setUp(() async {
         viewByOrderDetailsRepositoryMock = ViewByOrderDetailsRepositoryMock();
         productDetailRepositoryMock = ProductDetailsRepositoryMock();
+        orderHistoryDetailsMock =
+            await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
+        orderHistoryDetailsMock = orderHistoryDetailsMock.copyWith(
+          orderHistoryDetailsOrderItem: [
+            orderHistoryDetailsMock.orderHistoryDetailsOrderItem.first,
+            orderHistoryDetailsMock.orderHistoryDetailsOrderItem[1].copyWith(
+              isTenderContractMaterial: true,
+            ),
+            orderHistoryDetailsMock.orderHistoryDetailsOrderItem.last,
+          ],
+        );
+
+        fakeMaterials = {
+          for (final item in orderHistoryDetailsMock.items)
+            item.orderItem.queryInfo: item.toPriceAggregate,
+        };
+        fakeIsLoadingTenderContract = {
+          for (final item in orderHistoryDetailsMock.items)
+            if (item.orderItem.isTenderContractMaterial)
+              item.orderItem.queryInfo: true,
+        };
+        fakeQueryInfo = fakeMaterials.keys.first;
       });
 
       blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
@@ -54,94 +75,64 @@ void main() {
         ),
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.initialized(
-            user: User.empty(),
-            customerCodeInfo: customerCodeInfo,
-            salesOrganisation: salesOrganisation,
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
           ),
         ),
         expect: () => [
           ViewByOrderDetailsState.initial().copyWith(
-            user: User.empty(),
-            customerCodeInfo: customerCodeInfo,
-            salesOrganisation: salesOrganisation,
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
           ),
         ],
       );
 
-      // blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
-      //   'For Fetch Event Success',
-      //   build: () => ViewByOrderDetailsBloc(
-      //     viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
-      //     productDetailRepository: productDetailRepositoryMock,
-      //   ),
-      //   setUp: () {
-      //     when(
-      //       () => viewByOrderDetailsRepositoryMock.getViewByOrderDetails(
-      //         user: User.empty(),
-      //         orderHeader: OrderHistoryDetailsOrderHeader.empty(),
-      //         customerCodeInfo: customerCodeInfo,
-      //         salesOrganisation: salesOrganisation,
-      //       ),
-      //     ).thenAnswer((invocation) async => Right(orderHistoryDetailsMock));
-      //   },
-      //   act: (bloc) => bloc.add(
-      //     ViewByOrderDetailsEvent.fetch(
-      //       orderHeader: OrderHistoryDetailsOrderHeader.empty(),
-      //       user: User.empty(),
-      //       customerCodeInfo: customerCodeInfo,
-      //       salesOrganisation: salesOrganisation,
-      //     ),
-      //   ),
-      //   expect: () => [
-      //     ViewByOrderDetailsState.initial().copyWith(
-      //       isLoading: true,
-      //     ),
-      //     ViewByOrderDetailsState.initial().copyWith(
-      //       isLoading: false,
-      //       isFetchingList: false,
-      //       orderHistoryDetails: orderHistoryDetailsMock,
-      //       failureOrSuccessOption: optionOf(Right(orderHistoryDetailsMock)),
-      //       productDetailAggregateList: [ProductDetailAggregate.empty()],
-      //       materials: {
-      //         for (final item in orderHistoryDetailsMock.items)
-      //           item.orderItem.queryInfo: item.toPriceAggregate,
-      //       },
-      //       isLoadingTenderContract: {
-      //         for (final item in orderHistoryDetailsMock.items)
-      //           if (item.orderItem.isTenderContractMaterial)
-      //             item.orderItem.queryInfo: true,
-      //       },
-      //     ),
-      // ViewByOrderDetailsState.initial().copyWith(
-      //   isLoading: false,
-      //   orderHistoryDetails: orderHistoryDetailsMock,
-      //   failureOrSuccessOption: none(),
-      //   materials: {
-      //     for (final item in orderHistoryDetailsMock.items)
-      //       item.orderItem.queryInfo: item.toPriceAggregate,
-      //   },
-      //   isLoadingTenderContract: {
-      //     for (final item in orderHistoryDetailsMock.items)
-      //       if (item.orderItem.isTenderContractMaterial)
-      //         item.orderItem.queryInfo: true,
-      //   },
-      // ),
-      // ViewByOrderDetailsState.initial().copyWith(
-      //   isLoading: false,
-      //   orderHistoryDetails: orderHistoryDetailsMock,
-      //   failureOrSuccessOption: none(),
-      //   materials: {
-      //     for (final item in orderHistoryDetailsMock.items)
-      //       item.orderItem.queryInfo: item.toPriceAggregate,
-      //   },
-      //   isLoadingTenderContract: {
-      //     for (final item in orderHistoryDetailsMock.items)
-      //       if (item.orderItem.isTenderContractMaterial)
-      //         item.orderItem.queryInfo: true,
-      //   },
-      // ),
-      //   ],
-      // );
+      blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
+        'For Fetch Event Success',
+        build: () => ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+        ),
+        seed: () => ViewByOrderDetailsState.initial().copyWith(
+          user: fakeClient,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+        ),
+        setUp: () {
+          when(
+            () => viewByOrderDetailsRepositoryMock.getViewByOrderDetails(
+              user: fakeClient,
+              orderNumber: fakeOrderNumber,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+            ),
+          ).thenAnswer((invocation) async => Right(orderHistoryDetailsMock));
+        },
+        act: (bloc) => bloc.add(
+          ViewByOrderDetailsEvent.fetch(
+            orderNumber: fakeOrderNumber,
+          ),
+        ),
+        expect: () => [
+          ViewByOrderDetailsState.initial().copyWith(
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            isLoading: true,
+          ),
+          ViewByOrderDetailsState.initial().copyWith(
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            orderHistoryDetails: orderHistoryDetailsMock,
+            failureOrSuccessOption: optionOf(Right(orderHistoryDetailsMock)),
+            materials: fakeMaterials,
+            isLoadingTenderContract: fakeIsLoadingTenderContract,
+          ),
+        ],
+      );
 
       blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
         'For Fetch Event Failure',
@@ -150,17 +141,17 @@ void main() {
           productDetailRepository: productDetailRepositoryMock,
         ),
         seed: () => ViewByOrderDetailsState.initial().copyWith(
-          user: User.empty(),
-          customerCodeInfo: customerCodeInfo,
-          salesOrganisation: salesOrganisation,
+          user: fakeClient,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
         ),
         setUp: () {
           when(
             () => viewByOrderDetailsRepositoryMock.getViewByOrderDetails(
-              user: User.empty(),
-              orderNumber: OrderNumber(''),
-              customerCodeInfo: customerCodeInfo,
-              salesOrganisation: salesOrganisation,
+              user: fakeClient,
+              orderNumber: fakeOrderNumber,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -168,57 +159,232 @@ void main() {
         },
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.fetch(
-            orderNumber: OrderNumber(''),
+            orderNumber: fakeOrderNumber,
           ),
         ),
         expect: () => [
           ViewByOrderDetailsState.initial().copyWith(
             isLoading: true,
-            user: User.empty(),
-            customerCodeInfo: customerCodeInfo,
-            salesOrganisation: salesOrganisation,
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
           ),
           ViewByOrderDetailsState.initial().copyWith(
             isLoading: false,
-            user: User.empty(),
-            customerCodeInfo: customerCodeInfo,
-            salesOrganisation: salesOrganisation,
-            failureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('Fake-Error'))),
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            failureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('Fake-Error'),
+              ),
+            ),
           ),
         ],
       );
 
-      //TODO:Need To Revisit when tender contract is implemented for V3
+      blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
+        'For Set Order Details',
+        build: () => ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+        ),
+        seed: () => ViewByOrderDetailsState.initial().copyWith(
+          user: fakeClient,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+        ),
+        act: (bloc) => bloc.add(
+          ViewByOrderDetailsEvent.setOrderDetails(
+            orderHistoryDetails: orderHistoryDetailsMock,
+          ),
+        ),
+        expect: () => [
+          ViewByOrderDetailsState.initial().copyWith(
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            orderHistoryDetails: orderHistoryDetailsMock,
+            materials: fakeMaterials,
+            isLoadingTenderContract: fakeIsLoadingTenderContract,
+          ),
+        ],
+      );
 
-      // blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
-      //   'For UpdateMaterialTenderContract Event',
-      //   build: () => ViewByOrderDetailsBloc(
-      //     viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
-      //     productImagesRepository: productImagesRepositoryMock,
-      //   ),
-      //   act: (bloc) => bloc.add(
-      //     ViewByOrderDetailsEvent.updateMaterialTenderContract(
-      //       queryInfo: MaterialQueryInfo.empty(),
-      //       selectedTenderContract: TenderContract.empty(),
-      //     ),
-      //   ),
-      //   seed: () => ViewByOrderDetailsState.initial().copyWith(
-      //     isLoading: false,
-      //     orderHistoryDetails: orderHistoryDetailsMock,
-      //     failureOrSuccessOption: none(),
-      //     materials: {
-      //       for (final item in orderHistoryDetailsMock.items)
-      //         item.orderItem.queryInfo: item.toPriceAggregate,
-      //     },
-      //     isLoadingTenderContract: {
-      //       for (final item in orderHistoryDetailsMock.items)
-      //         if (item.orderItem.isTenderContractMaterial)
-      //           item.orderItem.queryInfo: true,
-      //     },
-      //   ),
-      //   expect: () => [],
-      // );
+      blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
+        'For Update Material Tender Contract Event',
+        build: () => ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+        ),
+        act: (bloc) => bloc.add(
+          ViewByOrderDetailsEvent.updateMaterialTenderContract(
+            queryInfo: fakeQueryInfo,
+            selectedTenderContract: fakeTenderContract,
+          ),
+        ),
+        seed: () => ViewByOrderDetailsState.initial().copyWith(
+          user: fakeClient,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSalesOrganisation,
+          orderHistoryDetails: orderHistoryDetailsMock,
+          materials: fakeMaterials,
+          isLoadingTenderContract: fakeIsLoadingTenderContract,
+        ),
+        expect: () {
+          final materialsWithUpdatedTenderContract = fakeMaterials.map(
+            (queryInfo, material) {
+              if (queryInfo == fakeQueryInfo) {
+                return MapEntry(
+                  queryInfo,
+                  material.copyWith(
+                    tenderContract: fakeTenderContract,
+                  ),
+                );
+              }
+
+              return MapEntry(queryInfo, material);
+            },
+          );
+
+          final loadingTenderContractStatus = fakeIsLoadingTenderContract.map(
+            (queryInfo, isLoading) {
+              if (queryInfo == fakeQueryInfo) return MapEntry(queryInfo, false);
+
+              return MapEntry(queryInfo, isLoading);
+            },
+          );
+
+          return [
+            ViewByOrderDetailsState.initial().copyWith(
+              user: fakeClient,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              orderHistoryDetails: orderHistoryDetailsMock,
+              materials: materialsWithUpdatedTenderContract,
+              isLoadingTenderContract: loadingTenderContractStatus,
+            )
+          ];
+        },
+      );
+
+      blocTest<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
+        'For Expand Attachments',
+        build: () => ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+        ),
+        act: (bloc) => bloc.add(
+          const ViewByOrderDetailsEvent.expandAttachments(),
+        ),
+        expect: () => [
+          ViewByOrderDetailsState.initial().copyWith(
+            isExpanded: true,
+          ),
+        ],
+      );
+
+      test('Test poDocumentCount', () {
+        final bloc = ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+        );
+        bloc.emit(
+          ViewByOrderDetailsState.initial()
+              .copyWith(orderHistoryDetails: orderHistoryDetailsMock),
+        );
+        expect(
+          bloc.state.poDocumentCount,
+          orderHistoryDetailsMock.orderHistoryDetailsPoDocuments.length,
+        );
+      });
+      test('Test displayedPoDocumentCount', () {
+        final bloc = ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+        );
+        bloc.emit(
+          ViewByOrderDetailsState.initial().copyWith(
+            isExpanded: true,
+            orderHistoryDetails: orderHistoryDetailsMock,
+          ),
+        );
+        expect(
+          bloc.state.displayedPoDocumentCount,
+          bloc.state.poDocumentCount,
+        );
+        bloc.emit(
+          ViewByOrderDetailsState.initial().copyWith(
+            isExpanded: false,
+          ),
+        );
+        expect(
+          bloc.state.displayedPoDocumentCount,
+          1,
+        );
+      });
+      test('Test additionalItemCount', () {
+        final bloc = ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+        );
+        bloc.emit(
+          ViewByOrderDetailsState.initial().copyWith(
+            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsPoDocuments: <PoDocuments>[
+                PoDocuments.empty(),
+                PoDocuments.empty(),
+              ],
+            ),
+          ),
+        );
+        expect(
+          bloc.state.additionalItemCount,
+          1,
+        );
+        bloc.emit(
+          ViewByOrderDetailsState.initial().copyWith(
+            orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+              orderHistoryDetailsPoDocuments: <PoDocuments>[],
+            ),
+          ),
+        );
+        expect(
+          bloc.state.additionalItemCount,
+          0,
+        );
+      });
+      test('Test totalItemCount', () {
+        final bloc = ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+        );
+        bloc.emit(
+          ViewByOrderDetailsState.initial().copyWith(
+            isExpanded: true,
+            orderHistoryDetails: orderHistoryDetailsMock,
+          ),
+        );
+        expect(
+          bloc.state.totalItemCount,
+          bloc.state.displayedPoDocumentCount + bloc.state.additionalItemCount,
+        );
+      });
+      test('Test isOrderHistoryDetailsEmpty', () {
+        final bloc = ViewByOrderDetailsBloc(
+          viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
+          productDetailRepository: productDetailRepositoryMock,
+        );
+        bloc.emit(
+          ViewByOrderDetailsState.initial().copyWith(
+            orderHistoryDetails: orderHistoryDetailsMock,
+          ),
+        );
+        expect(
+          bloc.state.isOrderHistoryDetailsEmpty,
+          false,
+        );
+      });
     },
   );
 }
