@@ -32,6 +32,7 @@ class MoreTab extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: AnnouncementBanner(
+        key: WidgetKeys.moreScreen,
         currentPath: const MoreTabRoute().path,
         child: ListView(
           children: [

@@ -97,6 +97,7 @@ class _ValidationsFailedWarning extends StatelessWidget {
           'Please ensure all requirements are met for your new password.',
         ),
         style: Theme.of(context).textTheme.titleSmall,
+        key: WidgetKeys.errorRequirementsFillAllField,
       ),
     );
   }

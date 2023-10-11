@@ -202,6 +202,7 @@ class MoreDetailsTile {
       );
 
   factory MoreDetailsTile.security(BuildContext context) => MoreDetailsTile(
+        key: WidgetKeys.securityTile,
         icon: const Icon(
           Icons.https_outlined,
           color: ZPColors.greenIconColor,

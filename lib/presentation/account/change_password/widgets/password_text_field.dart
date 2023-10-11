@@ -100,6 +100,7 @@ class _PasswordTextField extends StatelessWidget {
           icon: Icon(
             isPasswordVisible ? Icons.visibility_off : Icons.visibility,
             color: ZPColors.primary,
+            key: WidgetKeys.obscureIcon(isPasswordVisible),
           ),
           onPressed: () => context.read<ResetPasswordBloc>().add(
                 ResetPasswordEvent.togglePasswordVisibility(

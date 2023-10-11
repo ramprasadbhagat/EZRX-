@@ -234,4 +234,9 @@ class CommonRobot {
       message,
     );
   }
+
+  Future<void> tapToBackScreen() async {
+    await tester.tap(find.byType(BackButton));
+    await tester.pumpAndSettle();
+  }
 }

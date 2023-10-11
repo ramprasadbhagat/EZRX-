@@ -28,6 +28,7 @@ class ChangePasswordPage extends StatelessWidget {
         title: Text(context.tr('Security')),
         centerTitle: false,
         leading: IconButton(
+          key: WidgetKeys.backButton,
           icon: const Icon(Icons.arrow_back_ios_sharp),
           onPressed: () {
             context

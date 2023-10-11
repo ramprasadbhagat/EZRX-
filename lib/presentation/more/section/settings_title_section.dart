@@ -23,6 +23,7 @@ class SettingsTile extends StatelessWidget {
         shrinkWrap: true,
         children: _moreSettingTiles(context).map((item) {
           return InkWell(
+            key: item.key,
             onTap: item.onTap,
             child: Column(
               children: [

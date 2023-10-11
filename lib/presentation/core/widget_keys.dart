@@ -102,9 +102,11 @@ class WidgetKeys {
   //============================================================
   //  MORE TAB BAR
   //============================================================
+  static const Key moreScreen = Key('moreScreen');
   static const Key profileTile = Key('profileTile');
   static const Key paymentsTile = Key('paymentsTile');
   static const Key returnsTile = Key('returnsTile');
+  static const Key securityTile = Key('securityTile');
   static const Key proxyLoginUserNameField = Key('proxyLoginUserNameField');
   static const Key proxyLoginButton = Key('proxyLoginButton');
   static const Key proxyLoginSheet = Key('proxyLoginSheet');
@@ -685,6 +687,8 @@ class WidgetKeys {
   //  Change Password
   //============================================================
   static const Key currentPasswordField = Key('currentPasswordField');
+  static const Key errorRequirementsFillAllField =
+      Key('errorRequirementsFillAllField');
   static const Key newPasswordTextField = Key('newPasswordTextField');
   static const Key confirmPasswordField = Key('confirmPasswordField');
   static const Key currentPasswordToggle = Key('currentPasswordToggle');
@@ -692,6 +696,7 @@ class WidgetKeys {
   static const Key confirmPasswordToggle = Key('confirmPasswordToggle');
   static const Key changePasswordButton = Key('changePasswordButton');
   static const Key changePasswordForm = Key('changePasswordForm');
+  static Key obscureIcon(bool isVisible) => Key('obscureIcon$isVisible');
 
   //============================================================
   //  New Return Request

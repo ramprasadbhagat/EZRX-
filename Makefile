@@ -6,6 +6,7 @@ EXTERNALSALESREP := 'order/external_sales_rep.dart'
 SALESORGCONFIG := 'reset_sales_org_config.sh'
 CLIENT_LOGIN := 'login/client_login_screen.dart'
 CLIENT_PRODUCT_TAB := 'product/client_user.dart'
+SECURITY_TAB := 'more/security/client_user.dart'
 EXTERNAL_LOGIN := 'login/external_login_screen.dart'
 CLIENT_HOME := 'home/client_user_home_screen.dart'
 CLIENT_TEST_FILE := 'client_user.dart'
@@ -97,6 +98,7 @@ run_my_client_Integration_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_HOME}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_LOGIN}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_PRODUCT_TAB}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${SECURITY_TAB}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/view_by_items/${CLIENT_TEST_FILE}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/view_by_orders/${CLIENT_TEST_FILE}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/cart/${CLIENT_TEST_FILE}
