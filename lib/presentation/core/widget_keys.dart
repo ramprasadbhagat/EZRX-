@@ -629,6 +629,7 @@ class WidgetKeys {
       Key('productDetailQuantityDeleteKey');
   static const Key productDetailQuantityTextKey =
       Key('productDetailQuantityTextKey');
+  static const Key availableOfferColumnKey = Key('availableOfferColumn');
 
   //============================================================
   //  bundle Details

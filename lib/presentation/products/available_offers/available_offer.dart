@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/available_offer_item.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/show_offer_dialog_widget.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,7 @@ class AvailableOffer extends StatelessWidget {
         }
 
         return Column(
+          key: WidgetKeys.availableOfferColumnKey,
           children: [
             _AvailableOfferLabel(
               bonusMaterialList: bonusMaterialList,

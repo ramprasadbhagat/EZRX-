@@ -1,11 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
@@ -15,12 +10,16 @@ import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 
 class ProductDetailRepositoryMock extends Mock
     implements ProductDetailRepository {}
@@ -36,25 +35,24 @@ void main() {
   late List<MaterialStockInfo> mockMaterialStockInfo;
   late ProductMetaData mockProductMetaData;
   late List<MaterialInfo> mockSimilarProducts;
+  late List<MaterialInfo> mockMaterialInfoWithBundleStockInfo;
+  late List<MaterialInfo> fakeMaterialInfoWithBundleStockInfo;
+  late MaterialResponse fakeMaterialInfoList;
+  late MaterialInfo fakeMaterialInfo;
+  late MaterialInfo fakeMaterialInfoWithBundleMaterial;
   const locale = Locale('en');
-  final salesOrg = SalesOrg('2001');
-  final mockCustomerCodeInfo = CustomerCodeInfo.empty();
-  final mockShipToInfo = ShipToInfo.empty();
-  final mockSalesOrganisation = SalesOrganisation(
-    salesOrg: salesOrg,
-    customerInfos: <SalesOrgCustomerInfo>[],
-  );
 
   final materialInfoType = MaterialInfoType('material');
+  final bundleInfoType = MaterialInfoType('bundle');
   final productImage = ProductImages.empty().copyWith(
     image: [
       'https://ezrxdev.blob.core.windows.net/assets/21041773/21041773.png'
     ],
   );
   final mockInitialState = ProductDetailState.initial().copyWith(
-    customerCodeInfo: mockCustomerCodeInfo,
-    salesOrganisation: mockSalesOrganisation,
-    shipToInfo: mockShipToInfo,
+    customerCodeInfo: fakeCustomerCodeInfo,
+    salesOrganisation: fakeSalesOrganisation,
+    shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
   );
 
   setUpAll(() async {
@@ -62,9 +60,40 @@ void main() {
     favouriteMockRepository = FavouriteRepositoryMock();
     mockMaterialInfo = await ProductDetailLocalDataSource().getProductDetails();
     mockStockInfo = await StockInfoLocalDataSource().getStockInfo();
-
+    fakeMaterialInfoList =
+        await ProductSearchLocalDataSource().getSearchedProductList();
+    fakeMaterialInfo = fakeMaterialInfoList.products
+        .where(
+          (element) => element.data.isNotEmpty,
+        )
+        .first;
+    fakeMaterialInfoWithBundleMaterial = fakeMaterialInfo.copyWith(
+      bundle: fakeMaterialInfo.bundle.copyWith(
+        materials: fakeMaterialInfo.data.map((e) => e.toMaterialInfo).toList(),
+      ),
+    );
     mockMaterialStockInfo =
         await StockInfoLocalDataSource().getMaterialStockInfoList();
+    mockMaterialInfoWithBundleStockInfo =
+        List<MaterialInfo>.from(mockMaterialInfo.bundle.materials)
+            .map((material) {
+      final stock = mockMaterialStockInfo.firstWhere(
+        (element) => element.materialNumber == material.materialNumber,
+        orElse: () => MaterialStockInfo.empty(),
+      );
+
+      return material.copyWithStock(stockInfos: stock.stockInfos);
+    }).toList();
+    fakeMaterialInfoWithBundleStockInfo = List<MaterialInfo>.from(
+      fakeMaterialInfoWithBundleMaterial.bundle.materials,
+    ).map((material) {
+      final stock = mockMaterialStockInfo.firstWhere(
+        (element) => element.materialNumber == material.materialNumber,
+        orElse: () => MaterialStockInfo.empty(),
+      );
+
+      return material.copyWithStock(stockInfos: stock.stockInfos);
+    }).toList();
     mockProductMetaData =
         await ProductDetailLocalDataSource().getItemProductMetaData();
     mockSimilarProducts =
@@ -82,22 +111,22 @@ void main() {
         ),
         act: (ProductDetailBloc bloc) => bloc.add(
           ProductDetailEvent.initialized(
-            customerCodeInfo: mockCustomerCodeInfo,
-            salesOrganisation: mockSalesOrganisation,
-            shipToInfo: mockShipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
         ),
         expect: () => [
           ProductDetailState.initial().copyWith(
-            customerCodeInfo: mockCustomerCodeInfo,
-            salesOrganisation: mockSalesOrganisation,
-            shipToInfo: mockShipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           ),
         ],
       );
 
       blocTest<ProductDetailBloc, ProductDetailState>(
-        'Fetch Product Detail Success',
+        'Fetch Product Detail Success for material type',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
@@ -105,9 +134,9 @@ void main() {
         setUp: () {
           when(
             () => productDetailMockRepository.getProductDetail(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               locale: locale,
               materialNumber: mockMaterialInfo.materialNumber,
               type: materialInfoType,
@@ -117,18 +146,11 @@ void main() {
           );
           when(
             () => productDetailMockRepository.getStockInfo(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
               materialNumber: mockMaterialInfo.materialNumber,
             ),
           ).thenAnswer((invocation) async => Right(mockStockInfo));
-          when(
-            () => productDetailMockRepository.getStockInfoList(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              materials: [mockMaterialInfo],
-            ),
-          ).thenAnswer((invocation) async => Right(mockMaterialStockInfo));
           when(
             () => productDetailMockRepository.getItemProductMetaData(
               productDetailAggregate: ProductDetailAggregate.empty().copyWith(
@@ -149,9 +171,9 @@ void main() {
           );
           when(
             () => productDetailMockRepository.getSimilarProduct(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               materialNumber: mockMaterialInfo.materialNumber,
               principalCode: mockMaterialInfo.principalData.principalCode,
               locale: locale,
@@ -172,17 +194,14 @@ void main() {
           mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
-            failureOrSuccessOption: none(),
           ),
           mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
             ),
-            failureOrSuccessOption: none(),
           ),
           mockInitialState.copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
               stockInfo: mockStockInfo,
@@ -194,10 +213,8 @@ void main() {
               materialInfo: mockMaterialInfo,
               stockInfo: mockStockInfo,
             ),
-            failureOrSuccessOption: none(),
           ),
           mockInitialState.copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(
@@ -215,10 +232,8 @@ void main() {
               ),
               productItem: mockProductMetaData.items.first,
             ),
-            failureOrSuccessOption: none(),
           ),
           mockInitialState.copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(
@@ -233,6 +248,106 @@ void main() {
       );
 
       blocTest<ProductDetailBloc, ProductDetailState>(
+        'Fetch Product Detail Success for bundle type',
+        build: () => ProductDetailBloc(
+          productDetailRepository: productDetailMockRepository,
+          favouriteRepository: favouriteMockRepository,
+        ),
+        setUp: () {
+          when(
+            () => productDetailMockRepository.getProductDetail(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+              locale: locale,
+              materialNumber: mockMaterialInfo.materialNumber,
+              type: bundleInfoType,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(mockMaterialInfo),
+          );
+          when(
+            () => productDetailMockRepository.getStockInfoList(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              materials: mockMaterialInfo.bundle.materials,
+            ),
+          ).thenAnswer((invocation) async => Right(mockMaterialStockInfo));
+          when(
+            () => productDetailMockRepository.getItemProductMetaData(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: mockMaterialInfo,
+              ),
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              ProductDetailAggregate.empty().copyWith(
+                materialInfo: mockMaterialInfo.copyWith(
+                  bundle: mockMaterialInfo.bundle.copyWith(
+                    materials: mockMaterialInfoWithBundleStockInfo,
+                  ),
+                  productImages: mockProductMetaData.productImages.first,
+                ),
+                productItem: mockProductMetaData.items.first,
+              ),
+            ),
+          );
+        },
+        act: (ProductDetailBloc bloc) {
+          bloc.add(
+            ProductDetailEvent.fetch(
+              locale: locale,
+              materialNumber: mockMaterialInfo.materialNumber,
+              type: bundleInfoType,
+            ),
+          );
+        },
+        seed: () => mockInitialState,
+        expect: () => [
+          mockInitialState.copyWith(
+            isFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty(),
+          ),
+          mockInitialState.copyWith(
+            isFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+            ),
+          ),
+          mockInitialState.copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo.copyWith(
+                bundle: mockMaterialInfo.bundle.copyWith(
+                  materials: mockMaterialInfoWithBundleStockInfo,
+                ),
+              ),
+            ),
+          ),
+          mockInitialState.copyWith(
+            isFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo.copyWith(
+                bundle: mockMaterialInfo.bundle.copyWith(
+                  materials: mockMaterialInfoWithBundleStockInfo,
+                ),
+              ),
+            ),
+          ),
+          mockInitialState.copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo.copyWith(
+                bundle: mockMaterialInfo.bundle.copyWith(
+                  materials: mockMaterialInfoWithBundleStockInfo,
+                ),
+                productImages: mockProductMetaData.productImages.first,
+              ),
+              productItem: mockProductMetaData.items.first,
+            ),
+          ),
+        ],
+      );
+
+      blocTest<ProductDetailBloc, ProductDetailState>(
         'Fetch Product Detail failure',
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
@@ -241,9 +356,9 @@ void main() {
         setUp: () {
           when(
             () => productDetailMockRepository.getProductDetail(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               locale: locale,
               materialNumber: mockMaterialInfo.materialNumber,
               type: materialInfoType,
@@ -266,10 +381,8 @@ void main() {
           mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty(),
-            failureOrSuccessOption: none(),
           ),
           mockInitialState.copyWith(
-            isFetching: false,
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
           ),
@@ -285,8 +398,8 @@ void main() {
         setUp: () {
           when(
             () => productDetailMockRepository.getStockInfo(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
               materialNumber: mockMaterialInfo.materialNumber,
             ),
           ).thenAnswer(
@@ -294,8 +407,8 @@ void main() {
           );
           when(
             () => productDetailMockRepository.getStockInfoList(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
               materials: [mockMaterialInfo],
             ),
           ).thenAnswer(
@@ -321,9 +434,9 @@ void main() {
           );
           when(
             () => productDetailMockRepository.getSimilarProduct(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               materialNumber: mockMaterialInfo.materialNumber,
               principalCode: mockMaterialInfo.principalData.principalCode,
               locale: locale,
@@ -339,7 +452,6 @@ void main() {
           );
         },
         seed: () => mockInitialState.copyWith(
-          isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             materialInfo: mockMaterialInfo,
           ),
@@ -350,10 +462,8 @@ void main() {
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
             ),
-            failureOrSuccessOption: none(),
           ),
           mockInitialState.copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
             ),
@@ -364,13 +474,10 @@ void main() {
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
-              stockInfo: StockInfo.empty(),
             ),
           ),
           mockInitialState.copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: StockInfo.empty(),
               materialInfo: mockMaterialInfo.copyWith(
                 productImages: mockProductMetaData.productImages.first,
               ),
@@ -380,18 +487,14 @@ void main() {
           mockInitialState.copyWith(
             isFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: StockInfo.empty(),
               materialInfo: mockMaterialInfo.copyWith(
                 productImages: mockProductMetaData.productImages.first,
               ),
               productItem: mockProductMetaData.items.first,
             ),
-            failureOrSuccessOption: none(),
           ),
           mockInitialState.copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              stockInfo: StockInfo.empty(),
               materialInfo: mockMaterialInfo.copyWith(
                 productImages: mockProductMetaData.productImages.first,
               ),
@@ -399,6 +502,169 @@ void main() {
               similarProduct: mockSimilarProducts,
             ),
             failureOrSuccessOption: optionOf(Right(mockSimilarProducts)),
+          ),
+        ],
+      );
+
+      blocTest<ProductDetailBloc, ProductDetailState>(
+        'Fetch Stock Info List for bundles success',
+        build: () => ProductDetailBloc(
+          productDetailRepository: productDetailMockRepository,
+          favouriteRepository: favouriteMockRepository,
+        ),
+        setUp: () {
+          when(
+            () => productDetailMockRepository.getStockInfoList(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              materials: fakeMaterialInfoWithBundleMaterial.bundle.materials,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(mockMaterialStockInfo),
+          );
+          when(
+            () => productDetailMockRepository.getItemProductMetaData(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: fakeMaterialInfoWithBundleMaterial,
+              ),
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              ProductDetailAggregate.empty().copyWith(
+                materialInfo: fakeMaterialInfoWithBundleMaterial.copyWith(
+                  productImages: mockProductMetaData.productImages.first,
+                ),
+                productItem: mockProductMetaData.items.first,
+              ),
+            ),
+          );
+        },
+        act: (ProductDetailBloc bloc) {
+          bloc.add(
+            ProductDetailEvent.fetchStockForBundle(
+              locale: locale,
+              materials: fakeMaterialInfoWithBundleMaterial.bundle.materials,
+            ),
+          );
+        },
+        seed: () => mockInitialState.copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: fakeMaterialInfoWithBundleMaterial,
+          ),
+        ),
+        expect: () => [
+          mockInitialState.copyWith(
+            isFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: fakeMaterialInfoWithBundleMaterial,
+            ),
+          ),
+          mockInitialState.copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: fakeMaterialInfoWithBundleMaterial.copyWith(
+                bundle: fakeMaterialInfoWithBundleMaterial.bundle.copyWith(
+                  materials: fakeMaterialInfoWithBundleStockInfo,
+                ),
+              ),
+            ),
+          ),
+          mockInitialState.copyWith(
+            isFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: fakeMaterialInfoWithBundleMaterial.copyWith(
+                bundle: fakeMaterialInfoWithBundleMaterial.bundle.copyWith(
+                  materials: fakeMaterialInfoWithBundleStockInfo,
+                ),
+              ),
+            ),
+          ),
+          mockInitialState.copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: fakeMaterialInfoWithBundleMaterial.copyWith(
+                bundle: fakeMaterialInfoWithBundleMaterial.bundle.copyWith(
+                  materials: fakeMaterialInfoWithBundleStockInfo,
+                ),
+                productImages: mockProductMetaData.productImages.first,
+              ),
+              productItem: mockProductMetaData.items.first,
+            ),
+          ),
+        ],
+      );
+
+      blocTest<ProductDetailBloc, ProductDetailState>(
+        'Failed To Fetch Stock Info List for bundles',
+        build: () => ProductDetailBloc(
+          productDetailRepository: productDetailMockRepository,
+          favouriteRepository: favouriteMockRepository,
+        ),
+        setUp: () {
+          when(
+            () => productDetailMockRepository.getStockInfoList(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              materials: mockMaterialInfo.bundle.materials,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Left(ApiFailure.other('Fake-Error')),
+          );
+          when(
+            () => productDetailMockRepository.getItemProductMetaData(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: mockMaterialInfo,
+              ),
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
+              ProductDetailAggregate.empty().copyWith(
+                materialInfo: mockMaterialInfo.copyWith(
+                  productImages: mockProductMetaData.productImages.first,
+                ),
+                productItem: mockProductMetaData.items.first,
+              ),
+            ),
+          );
+        },
+        act: (ProductDetailBloc bloc) {
+          bloc.add(
+            ProductDetailEvent.fetchStockForBundle(
+              locale: locale,
+              materials: mockMaterialInfo.bundle.materials,
+            ),
+          );
+        },
+        seed: () => mockInitialState.copyWith(
+          productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+            materialInfo: mockMaterialInfo,
+          ),
+        ),
+        expect: () => [
+          mockInitialState.copyWith(
+            isFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+            ),
+          ),
+          mockInitialState.copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+            ),
+            failureOrSuccessOption:
+                optionOf(const Left(ApiFailure.other('Fake-Error'))),
+          ),
+          mockInitialState.copyWith(
+            isFetching: true,
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo,
+            ),
+          ),
+          mockInitialState.copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: mockMaterialInfo.copyWith(
+                productImages: mockProductMetaData.productImages.first,
+              ),
+              productItem: mockProductMetaData.items.first,
+            ),
           ),
         ],
       );
@@ -422,9 +688,9 @@ void main() {
           );
           when(
             () => productDetailMockRepository.getSimilarProduct(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               materialNumber: mockMaterialInfo.materialNumber,
               principalCode: mockMaterialInfo.principalData.principalCode,
               locale: locale,
@@ -440,12 +706,10 @@ void main() {
           );
         },
         seed: () => mockInitialState.copyWith(
-          isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             materialInfo: mockMaterialInfo,
             stockInfo: mockStockInfo,
           ),
-          failureOrSuccessOption: none(),
         ),
         expect: () => [
           mockInitialState.copyWith(
@@ -454,10 +718,8 @@ void main() {
               materialInfo: mockMaterialInfo,
               stockInfo: mockStockInfo,
             ),
-            failureOrSuccessOption: none(),
           ),
           mockInitialState.copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo,
@@ -471,10 +733,8 @@ void main() {
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo,
             ),
-            failureOrSuccessOption: none(),
           ),
           mockInitialState.copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo,
@@ -494,9 +754,9 @@ void main() {
         setUp: () {
           when(
             () => productDetailMockRepository.getSimilarProduct(
-              salesOrganisation: mockSalesOrganisation,
-              customerCodeInfo: mockCustomerCodeInfo,
-              shipToInfo: mockShipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeSalesOrganisation,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
               materialNumber: mockMaterialInfo.materialNumber,
               principalCode: mockMaterialInfo.principalData.principalCode,
               locale: locale,
@@ -513,7 +773,6 @@ void main() {
           );
         },
         seed: () => mockInitialState.copyWith(
-          isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             stockInfo: mockStockInfo,
             materialInfo: mockMaterialInfo.copyWith(
@@ -532,10 +791,8 @@ void main() {
               ),
               productItem: mockProductMetaData.items.first,
             ),
-            failureOrSuccessOption: none(),
           ),
           mockInitialState.copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(
@@ -561,7 +818,6 @@ void main() {
           );
         },
         seed: () => ProductDetailState.initial().copyWith(
-          isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             stockInfo: mockStockInfo,
             materialInfo: mockMaterialInfo.copyWith(
@@ -573,7 +829,6 @@ void main() {
         ),
         expect: () => [
           ProductDetailState.initial().copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(
@@ -623,7 +878,6 @@ void main() {
           );
         },
         seed: () => ProductDetailState.initial().copyWith(
-          isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             stockInfo: mockStockInfo,
             materialInfo: mockMaterialInfo.copyWith(
@@ -635,7 +889,6 @@ void main() {
         ),
         expect: () => [
           ProductDetailState.initial().copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(
@@ -682,7 +935,6 @@ void main() {
           );
         },
         seed: () => ProductDetailState.initial().copyWith(
-          isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             stockInfo: mockStockInfo,
             materialInfo: mockMaterialInfo.copyWith(
@@ -694,7 +946,6 @@ void main() {
         ),
         expect: () => [
           ProductDetailState.initial().copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(
@@ -743,7 +994,6 @@ void main() {
           );
         },
         seed: () => ProductDetailState.initial().copyWith(
-          isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             stockInfo: mockStockInfo,
             materialInfo: mockMaterialInfo.copyWith(
@@ -807,7 +1057,6 @@ void main() {
           );
         },
         seed: () => ProductDetailState.initial().copyWith(
-          isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             stockInfo: mockStockInfo,
             materialInfo: mockMaterialInfo.copyWith(
@@ -820,7 +1069,6 @@ void main() {
         ),
         expect: () => [
           ProductDetailState.initial().copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(
@@ -873,7 +1121,6 @@ void main() {
           );
         },
         seed: () => ProductDetailState.initial().copyWith(
-          isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             stockInfo: mockStockInfo,
             materialInfo: mockMaterialInfo.copyWith(
@@ -891,7 +1138,6 @@ void main() {
         ),
         expect: () => [
           ProductDetailState.initial().copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(
@@ -941,7 +1187,6 @@ void main() {
           );
         },
         seed: () => ProductDetailState.initial().copyWith(
-          isFetching: false,
           productDetailAggregate: ProductDetailAggregate.empty().copyWith(
             stockInfo: mockStockInfo,
             materialInfo: mockMaterialInfo.copyWith(
@@ -954,7 +1199,6 @@ void main() {
         ),
         expect: () => [
           ProductDetailState.initial().copyWith(
-            isFetching: false,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               stockInfo: mockStockInfo,
               materialInfo: mockMaterialInfo.copyWith(
