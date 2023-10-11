@@ -39,6 +39,7 @@ class ReturnReviewTab extends StatelessWidget {
           previous.selectedItems != current.selectedItems,
       builder: (context, state) {
         return SingleChildScrollView(
+          key: WidgetKeys.returnReviewTabBodyKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 20.0,
@@ -54,6 +55,10 @@ class ReturnReviewTab extends StatelessWidget {
                 ...state.selectedItems
                     .map(
                       (item) => _ReturnMaterialWidget(
+                        key: WidgetKeys.genericKey(
+                          key:
+                              'selectedItem#${state.selectedItems.indexOf(item)}',
+                        ),
                         item: item,
                         detail: state.getReturnItemDetails(item.uuid),
                       ),

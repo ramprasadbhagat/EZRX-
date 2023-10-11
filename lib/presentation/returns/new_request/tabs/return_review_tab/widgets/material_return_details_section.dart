@@ -10,6 +10,7 @@ class _MaterialReturnDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpandableInfo(
+      key: WidgetKeys.returnDetailsSectionKey,
       labelText: 'Return details'.tr(),
       child: Column(
         children: [

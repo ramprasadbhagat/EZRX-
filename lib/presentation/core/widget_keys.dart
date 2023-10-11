@@ -737,6 +737,8 @@ class WidgetKeys {
   static const Key invalidSelectedReturnItemError =
       Key('invalidSelectedReturnItemError');
   static const Key toggleIncludeBonusButton = Key('toggleIncludeBonusButton');
+  static const Key returnDetailsSectionKey = Key('returnDetailsSection');
+  static const Key returnReviewTabBodyKey = Key('returnReviewTabBody');
 
   //============================================================
   //  Contact Us Page
