@@ -24,9 +24,4 @@ class MoreRobot {
     await tester.tap(paymentTile);
     await tester.pumpAndSettle();
   }
-
-  Future<void> tapPaymentTile() async {
-    await tester.tap(paymentTile);
-    await tester.pumpAndSettle();
-  }
 }
