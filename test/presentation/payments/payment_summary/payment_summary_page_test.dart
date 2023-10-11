@@ -228,6 +228,44 @@ void main() {
       );
     });
 
+    testWidgets('Payment Summary Filter Status Initial - For TH Market',
+        (tester) async {
+      when(() => paymentSummaryFilterBloc.state).thenReturn(
+        PaymentSummaryFilterState.initial().copyWith(
+          salesOrg: SalesOrg('2900'),
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryPage),
+        findsOneWidget,
+      );
+      await tester.tap(find.byKey(WidgetKeys.paymentSummaryFilterIcon));
+      await tester.pump();
+      expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('In Progress', false)),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Failed', false)),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Processed', false)),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Successful', false)),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(WidgetKeys.paymentSummaryFilterStatus('Pending', false)),
+        findsNothing,
+      );
+    });
+
     testWidgets('Payment summary in progress amount test', (tester) async {
       when(() => paymentSummaryBloc.state).thenReturn(
         PaymentSummaryState.initial().copyWith(
