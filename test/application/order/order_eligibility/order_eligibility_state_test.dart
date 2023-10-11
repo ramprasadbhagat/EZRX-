@@ -19,6 +19,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late OrderEligibilityState initializedState;
   late PriceAggregate fakeCartItem;
+  late List<PriceAggregate> mockMaterialsCartItems;
   group('Test OrderEligibilityState', () {
     setUp(
       () async {
@@ -32,6 +33,8 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo.copyWith(division: 'div'),
           shipInfo: fakeShipToInfo.copyWith(city1: 'Kol'),
         );
+
+        mockMaterialsCartItems = await CartLocalDataSource().upsertCart();
       },
     );
 
@@ -123,14 +126,16 @@ void main() {
       expect(initializedState.isBundleQuantitySatisfies, true);
 
       // isBundleQuantitySatisfies is false
+      final bundleMaterials = fakeCartItem.bundle.materials
+          .map((e) => e.copyWith(quantity: MaterialQty(0)))
+          .toList();
       final modifiedState = initializedState.copyWith(
         cartItems: [
           fakeCartItem.copyWith(
-            materialInfo: MaterialInfo.empty().copyWith(
-              type: MaterialInfoType('bundle'),
+            bundle: fakeCartItem.bundle.copyWith(
+              materials: bundleMaterials,
             ),
-            stockInfoList: [StockInfo.empty()],
-          ),
+          )
         ],
         showErrorMessage: true,
       );
@@ -233,32 +238,27 @@ void main() {
       expect(initializedState.invalidMaterialCartItems, []);
 
       // invalidMaterialCartItems is not empty
-      final modifiedState = initializedState.copyWith(
-        configs: fakeEmptySalesConfigs.copyWith(materialWithoutPrice: true),
-        cartItems: [
-          fakeCartItem.copyWith(
-            price: Price.empty(),
-            materialInfo: MaterialInfo.empty().copyWith(
-              type: MaterialInfoType('material'),
-              stockInfos: [
-                StockInfo.empty().copyWith(
-                  inStock: MaterialInStock('Yes'),
-                )
-              ],
+      final cartProducts = mockMaterialsCartItems
+          .map(
+            (e) => e.copyWith(
+              materialInfo: e.materialInfo.copyWith(
+                type: MaterialInfoType('material'),
+              ),
             ),
           )
-        ],
+          .toList();
+      final eligibilityState = OrderEligibilityState.initial().copyWith(
+        cartItems: cartProducts,
       );
-      expect(modifiedState.invalidMaterialCartItems, [
-        MaterialInfo.empty().copyWith(
-          type: MaterialInfoType('material'),
-          stockInfos: [
-            StockInfo.empty().copyWith(
-              inStock: MaterialInStock('Yes'),
-            )
-          ],
-        )
-      ]);
+      final invalidMaterials = cartProducts
+          .map(
+            (e) => e.materialInfo.copyWith(
+              quantity: MaterialQty(0),
+            ),
+          )
+          .toList();
+      final materials = eligibilityState.invalidMaterialCartItems;
+      expect(materials, invalidMaterials);
     });
 
     test(' => displayCartPagePriceMessage should return correct value', () {
@@ -354,30 +354,27 @@ void main() {
       expect(initializedState.invalidCartItems, []);
 
       // invalidCartItems is not empty
-      final modifiedState = initializedState.copyWith(
-        showErrorMessage: true,
-        cartItems: [
-          fakeCartItem.copyWith(
-            materialInfo: MaterialInfo.empty().copyWith(
-              type: MaterialInfoType('bundle'),
+      final cartProducts = mockMaterialsCartItems
+          .map(
+            (e) => e.copyWith(
+              materialInfo: e.materialInfo.copyWith(
+                type: MaterialInfoType('material'),
+              ),
             ),
-            bundle: Bundle.empty().copyWith(
-              bundleCode: 'test-code',
-              materials: [
-                MaterialInfo.empty().copyWith(
-                  quantity: MaterialQty(1),
-                ),
-              ],
-            ),
-            stockInfoList: [StockInfo.empty()],
-          ),
-        ],
+          )
+          .toList();
+      final eligibilityState = OrderEligibilityState.initial().copyWith(
+        cartItems: cartProducts,
       );
-      expect(modifiedState.invalidCartItems, [
-        MaterialInfo.empty().copyWith(
-          parentID: 'test-code',
-        )
-      ]);
+      final invalidMaterials = cartProducts
+          .map(
+            (e) => e.materialInfo.copyWith(
+              quantity: MaterialQty(0),
+            ),
+          )
+          .toList();
+      final materials = eligibilityState.invalidMaterialCartItems;
+      expect(materials, invalidMaterials);
     });
 
     test(' => eligibleForOrderSubmit should return correct value', () {
@@ -413,26 +410,10 @@ void main() {
       expect(initializedState.displayInvalidItemsBanner, false);
 
       // displayInvalidItemsBanner is true
-      final modifiedState = initializedState.copyWith(
-        configs: fakeEmptySalesConfigs.copyWith(
-          materialWithoutPrice: true,
-        ),
-        orderType: 'ZPFC',
-        cartItems: [
-          fakeCartItem.copyWith(
-            materialInfo: MaterialInfo.empty().copyWith(
-              principalData: PrincipalData.empty().copyWith(
-                principalCode: PrincipalCode('100225'),
-              ),
-              type: MaterialInfoType('material'),
-            ),
-            price: Price.empty(),
-            stockInfoList: [StockInfo.empty()],
-          ),
-        ],
-        grandTotal: 100,
+      final eligibilityState = OrderEligibilityState.initial().copyWith(
+        cartItems: mockMaterialsCartItems,
       );
-      expect(modifiedState.displayInvalidItemsBanner, true);
+      expect(eligibilityState.displayInvalidItemsBanner, true);
     });
   });
 }

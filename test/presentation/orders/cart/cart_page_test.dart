@@ -5,6 +5,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -163,6 +164,8 @@ void main() {
   late CartItem mockCartItemWithOutBatch;
   late CartItem mockCartItemWithBatch;
   late List<StockInfo> batchStockInfoMock;
+  late List<PriceAggregate> mockCartItems;
+  late List<PriceAggregate> mockCartBundleItems;
   final routeData = RouteData(
     route: const RouteMatch(
       name: 'CartsPageRoute',
@@ -188,6 +191,8 @@ void main() {
     locator.registerFactory<AddToCartBloc>(() => addToCartBlocMock);
     locator.registerFactory<TenderContractBloc>(() => tenderContractBlocMock);
     autoRouterMock = MockAppRouter();
+    mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
+    mockCartItems = await CartLocalDataSource().upsertCart();
   });
   setUp(
     () {
@@ -2731,6 +2736,217 @@ void main() {
             const OrderEligibilityEvent.validateOrderEligibility(),
           ),
         );
+      });
+
+      testWidgets('Test invalid banner when cart consist suspended material',
+          (tester) async {
+        final suspendedMaterial = mockCartItems[1].copyWith(
+          materialInfo: mockCartItems[1].materialInfo.copyWith(
+                type: MaterialInfoType('material'),
+              ),
+        );
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[suspendedMaterial],
+          isClearing: false,
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+        final expectedStates = [
+          OrderEligibilityState.initial(),
+          OrderEligibilityState.initial().copyWith(
+            cartItems: <PriceAggregate>[suspendedMaterial],
+          ),
+        ];
+
+        whenListen(
+          orderEligibilityBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
+
+        await tester.pumpWidget(getWidget());
+
+        await tester.pumpAndSettle();
+
+        final invalidItemBannerFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBanner);
+        final invalidMessageFinder = find.text('Suspended material');
+        final invalidItemBannerButtonFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBannerButton);
+        expect(invalidItemBannerFinder, findsOneWidget);
+        expect(invalidMessageFinder, findsOneWidget);
+        expect(invalidItemBannerButtonFinder, findsOneWidget);
+
+        await tester.tap(invalidItemBannerButtonFinder);
+        verify(
+          () => cartBloc.add(
+            CartEvent.removeInvalidProducts(
+              invalidCartItems: <MaterialInfo>[suspendedMaterial.materialInfo],
+            ),
+          ),
+        ).called(1);
+      });
+
+      testWidgets(
+          'Test invalid banner when cart consist material without price',
+          (tester) async {
+        final materialWithoutPrice = mockCartItems.first.copyWith(
+          materialInfo: mockCartItems.first.materialInfo.copyWith(
+            type: MaterialInfoType('material'),
+          ),
+          price: mockCartItems.first.price.copyWith(
+            finalPrice: MaterialPrice(0),
+            lastPrice: MaterialPrice(0),
+          ),
+        );
+
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[materialWithoutPrice],
+          isClearing: false,
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        final expectedStates = [
+          OrderEligibilityState.initial(),
+          OrderEligibilityState.initial().copyWith(
+            cartItems: <PriceAggregate>[materialWithoutPrice],
+          ),
+        ];
+
+        whenListen(
+          orderEligibilityBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
+
+        await tester.pumpWidget(getWidget());
+
+        await tester.pumpAndSettle();
+
+        final invalidItemBannerFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBanner);
+        final invalidMessageFinder = find.text('Material without price');
+        final invalidItemBannerButtonFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBannerButton);
+        expect(invalidItemBannerFinder, findsOneWidget);
+        await tester.tap(invalidItemBannerButtonFinder);
+        verify(
+          () => cartBloc.add(
+            CartEvent.removeInvalidProducts(
+              invalidCartItems: <MaterialInfo>[
+                materialWithoutPrice.materialInfo
+              ],
+            ),
+          ),
+        ).called(1);
+      });
+
+      testWidgets('Test invalid banner when cart consist out of stock material',
+          (tester) async {
+        final oosMaterial = mockCartItems.first.copyWith(
+          materialInfo: mockCartItems.first.materialInfo.copyWith(
+            type: MaterialInfoType('material'),
+          ),
+        );
+
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[oosMaterial],
+          isClearing: false,
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        final expectedStates = [
+          OrderEligibilityState.initial(),
+          OrderEligibilityState.initial().copyWith(
+            cartItems: <PriceAggregate>[oosMaterial],
+          ),
+        ];
+
+        whenListen(
+          orderEligibilityBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
+
+        await tester.pumpWidget(getWidget());
+
+        await tester.pumpAndSettle();
+
+        final invalidItemBannerFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBanner);
+        final invalidMessageFinder = find.text('Out of stock material');
+        final invalidItemBannerButtonFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBannerButton);
+        expect(invalidItemBannerFinder, findsOneWidget);
+        await tester.tap(invalidItemBannerButtonFinder);
+        verify(
+          () => cartBloc.add(
+            CartEvent.removeInvalidProducts(
+              invalidCartItems: <MaterialInfo>[oosMaterial.materialInfo],
+            ),
+          ),
+        ).called(1);
+      });
+
+      testWidgets(
+          'Test invalid banner when cart consist out of stock bundle materials',
+          (tester) async {
+        final cartState = CartState.initial().copyWith(
+          cartProducts: mockCartBundleItems,
+          isClearing: false,
+        );
+
+        final invalidBundleList = mockCartBundleItems.first.bundle.materials
+            .map(
+              (e) => e.copyWith(
+                quantity: MaterialQty(0),
+                parentID: mockCartBundleItems.first.bundle.bundleCode,
+              ),
+            )
+            .toList();
+
+        final expectedStates = [
+          OrderEligibilityState.initial(),
+          OrderEligibilityState.initial().copyWith(
+            cartItems: mockCartBundleItems,
+          ),
+        ];
+
+        whenListen(
+          orderEligibilityBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+
+        await tester.pumpWidget(getWidget());
+
+        await tester.pumpAndSettle();
+
+        final invalidItemBannerFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBanner);
+        final invalidOosMessageFinder = find.text('Out of stock material');
+
+        final invalidItemBannerButtonFinder =
+            find.byKey(WidgetKeys.cartPageInvalidItemsBannerButton);
+        expect(invalidItemBannerFinder, findsOneWidget);
+        expect(invalidOosMessageFinder, findsOneWidget);
+        expect(invalidItemBannerButtonFinder, findsOneWidget);
+        await tester.tap(invalidItemBannerButtonFinder);
+        verify(
+          () => cartBloc.add(
+            CartEvent.removeInvalidProducts(
+              invalidCartItems: invalidBundleList,
+            ),
+          ),
+        ).called(1);
       });
     },
   );

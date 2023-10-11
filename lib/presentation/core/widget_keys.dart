@@ -499,6 +499,11 @@ class WidgetKeys {
   static const Key bonusSampleSheetEmptyQtyWarning =
       Key('bonusSampleSheetEmptyQtyWarning');
 
+  static const Key cartPageInvalidItemsBanner =
+      Key('cartPageInvalidItemsBanner');
+  static const Key cartPageInvalidItemsBannerButton =
+      Key('cartPageInvalidItemsBannerButton');
+
   //============================================================
   //  Checkout Page Keys
   //============================================================

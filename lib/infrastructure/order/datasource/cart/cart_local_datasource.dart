@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:flutter/services.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
@@ -36,7 +37,7 @@ class CartLocalDataSource {
     );
     final products = data['data']['upsertCartItems']['EzRxItems'];
 
-    return List.from(products)
+    return List.from(makeResponseCamelCase(jsonEncode(products)))
         .map((e) => CartProductDto.fromJson(e).toDomain)
         .toList();
   }

@@ -23,6 +23,7 @@ class _CartPageInvalidItemsBanner extends StatelessWidget {
         }
 
         return ColoredBox(
+          key: WidgetKeys.cartPageInvalidItemsBanner,
           color: ZPColors.paleBlueGray,
           child: Padding(
             padding: const EdgeInsets.all(20),
@@ -101,6 +102,7 @@ class _InvalidItemRemoveButton extends StatelessWidget {
           previous.isClearing != current.isClearing,
       builder: (context, state) {
         return OutlinedButton(
+          key: WidgetKeys.cartPageInvalidItemsBannerButton,
           onPressed: () {
             if (!state.isClearing) {
               context.read<CartBloc>().add(
