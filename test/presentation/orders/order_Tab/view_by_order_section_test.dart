@@ -215,5 +215,62 @@ void main() {
       );
       expect(materials, findsOneWidget);
     });
+
+    testWidgets(
+        'Buy again button not visible when disable create order flag true',
+        (tester) async {
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          isFetching: false,
+          viewByOrderList: viewByOrder.copyWith(
+            orderHeaders: [OrderHistoryDetails.empty().copyWith(itemCount: 2)],
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            disableCreateOrder: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final buyAgainButton =
+          find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+
+      expect(buyAgainButton, findsNothing);
+    });
+
+    testWidgets('Buy again button visible when disable create order flag false',
+        (tester) async {
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          isFetching: false,
+          viewByOrderList: viewByOrder.copyWith(
+            orderHeaders: [OrderHistoryDetails.empty().copyWith(itemCount: 2)],
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            disableCreateOrder: false,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final buyAgainButton =
+          find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+
+      expect(buyAgainButton, findsOneWidget);
+    });
   });
 }

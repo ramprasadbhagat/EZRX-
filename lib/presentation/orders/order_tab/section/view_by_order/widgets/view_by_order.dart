@@ -10,8 +10,7 @@ class _ViewByOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final salesOrgConfigs =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
     return CustomCard(
       key: WidgetKeys.viewByOrdersItemKey,
@@ -49,7 +48,7 @@ class _ViewByOrder extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   PriceComponent(
-                    salesOrgConfig: salesOrgConfigs,
+                    salesOrgConfig: eligibilityState.salesOrgConfigs,
                     price: viewByOrderHistoryItem
                         .orderedItemsValue(
                           context
@@ -67,11 +66,12 @@ class _ViewByOrder extends StatelessWidget {
                 ],
               ),
             ),
-            BuyAgainButton(
-              viewByOrderHistoryItem: viewByOrderHistoryItem,
-              key: WidgetKeys.viewByOrderBuyAgainButtonKey,
-              currentPath: 'orders/view_by_orders',
-            ),
+            if (!eligibilityState.user.disableCreateOrder)
+              BuyAgainButton(
+                viewByOrderHistoryItem: viewByOrderHistoryItem,
+                key: WidgetKeys.viewByOrderBuyAgainButtonKey,
+                currentPath: 'orders/view_by_orders',
+              ),
           ],
         ),
       ),

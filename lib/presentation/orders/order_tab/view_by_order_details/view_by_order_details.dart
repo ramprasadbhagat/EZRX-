@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -74,15 +75,20 @@ class ViewByOrderDetailsPage extends StatelessWidget {
           },
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: BuyAgainButton(
-          viewByOrderHistoryItem:
-              context.read<ViewByOrderDetailsBloc>().state.orderHistoryDetails,
-          key: WidgetKeys.viewByOrderBuyAgainButtonKey,
-          currentPath: 'orders/view_by_order_details_page',
-        ),
-      ),
+      bottomNavigationBar:
+          context.read<EligibilityBloc>().state.user.disableCreateOrder
+              ? null
+              : Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: BuyAgainButton(
+                    viewByOrderHistoryItem: context
+                        .read<ViewByOrderDetailsBloc>()
+                        .state
+                        .orderHistoryDetails,
+                    key: WidgetKeys.viewByOrderBuyAgainButtonKey,
+                    currentPath: 'orders/view_by_order_details_page',
+                  ),
+                ),
     );
   }
 }

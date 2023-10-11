@@ -584,5 +584,60 @@ void main() {
       );
       expect(expectedDelivery, findsOneWidget);
     });
+
+    testWidgets(
+        'Buy again button not visible when disable create order flag is true',
+        (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            disableCreateOrder: true,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+
+      await tester.pump();
+
+      final buyAgainButton = find.byKey(
+        WidgetKeys.viewByOrderBuyAgainButtonKey,
+      );
+
+      expect(buyAgainButton, findsNothing);
+    });
+    testWidgets(
+        'Buy again button visible when disable create order flag is false',
+        (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            disableCreateOrder: false,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+
+      await tester.pump();
+
+      final buyAgainButton = find.byKey(
+        WidgetKeys.viewByOrderBuyAgainButtonKey,
+      );
+
+      expect(buyAgainButton, findsOneWidget);
+    });
   });
 }
