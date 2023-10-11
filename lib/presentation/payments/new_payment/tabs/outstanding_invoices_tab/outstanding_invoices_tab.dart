@@ -41,6 +41,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
           child: Row(
             children: [
               const Expanded(
+                key: WidgetKeys.outstandingInvoiceTabSearchBarKey,
                 child: _OutstandingInvoicesSearchBar(),
               ),
               _FilterTune(),
@@ -222,7 +223,9 @@ class _FilterTune extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (_) {
-        return const OutstandingInvoicePaymentFilterPage();
+        return const OutstandingInvoicePaymentFilterPage(
+          key: WidgetKeys.outstandingInvoiceFilterPage,
+        );
       },
     ).then(
       (value) {

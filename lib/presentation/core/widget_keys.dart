@@ -246,6 +246,8 @@ class WidgetKeys {
   static const Key clearShipToSearch = Key('clearShipToSearch');
   static const Key availableCreditTabSearchBarKey =
       Key('availableCreditTabSearchBarKey');
+  static const Key outstandingInvoiceTabSearchBarKey =
+      Key('outstandingInvoiceTabSearchBarKey');
 
   //============================================================
   //  Returns
@@ -646,6 +648,7 @@ class WidgetKeys {
   static const Key payButton = Key('payButton');
   static const Key paymentWebviewPage = Key('paymentWebviewPage');
   static const Key creditPaymentFilterPage = Key('creditPaymentFilterPage');
+  static const Key outstandingInvoiceFilterPage = Key('outstandingInvoiceFilterPage');
 
   //============================================================
   //  Announcement
