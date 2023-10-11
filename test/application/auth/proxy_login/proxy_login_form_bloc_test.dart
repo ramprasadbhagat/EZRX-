@@ -27,6 +27,13 @@ void main() {
 
   group('ProxyLogin Form Bloc', () {
     blocTest(
+      'Initialized',
+      build: () => ProxyLoginFormBloc(authRepository: authRepoMock),
+      act: (ProxyLoginFormBloc bloc) =>
+          bloc.add(const ProxyLoginFormEvent.initialized()),
+      expect: () => [proxyloginFormState],
+    );
+    blocTest(
       'Change username',
       build: () => ProxyLoginFormBloc(authRepository: authRepoMock),
       setUp: () {

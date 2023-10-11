@@ -38,9 +38,7 @@ void main() {
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     loginMockData = await AuthLocalDataSource().loginWithPassword();
-    // loginWithOktaMockData = await AuthLocalDataSource().loginWithOktaToken(
-    //   oktaAccessToken: fakeOktaToken,
-    // );
+    // loginWithOktaMockData = await AuthLocalDataSource().loginWithOktaToken();
     // proxyLoginWithUsername = await AuthLocalDataSource().proxyLoginWithUsername(
     //   username: fakeUser.getValue(),
     // );
@@ -254,95 +252,202 @@ void main() {
       ],
     );
 
-    // blocTest(
-    //   'Login with okta button success',
-    //   build: () => LoginFormBloc(authRepository: authRepoMock),
-    //   setUp: () {
-    //     when(() => authRepoMock.loadCredential()).thenAnswer(
-    //       (invocation) async => const Left(
-    //         ApiFailure.other('fake-error'),
-    //       ),
-    //     );
+    blocTest(
+      'Login with okta button success',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(() => authRepoMock.loginWithOkta()).thenAnswer(
+          (invocation) async => const Right(
+            unit,
+          ),
+        );
+        when(() => authRepoMock.getOktaAccessToken()).thenAnswer(
+          (invocation) async => Right(
+            fakeJWT,
+          ),
+        );
+        when(() => authRepoMock.getEZRXJWT(fakeJWT)).thenAnswer(
+          (invocation) async => Right(
+            loginMockData,
+          ),
+        );
+        when(
+          () => authRepoMock.storeJWT(
+            access: loginMockData.access,
+            refresh: loginMockData.refresh,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(
+            unit,
+          ),
+        );
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc.add(const LoginFormEvent.loginWithOktaButtonPressed()),
+      expect: () => [
+        loginFormState.copyWith(
+          isSubmitting: true,
+          showErrorMessages: false,
+          authFailureOrSuccessOption: none(),
+        ),
+        loginFormState.copyWith(
+          isSubmitting: false,
+          showErrorMessages: false,
+          authFailureOrSuccessOption: optionOf(
+            Right(
+              Login(
+                access: loginMockData.access,
+                refresh: loginMockData.refresh,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
 
-    //     when(
-    //       () => authRepoMock.loginWithOkta(),
-    //     ).thenAnswer(
-    //       (invocation) async => const Right(unit),
-    //     );
+    blocTest(
+      'refreshOktaToken failed',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(() => authRepoMock.getOktaAccessToken()).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc.add(const LoginFormEvent.refreshOktaToken()),
+      expect: () => [
+        loginFormState.copyWith(
+          isSubmitting: false,
+          showErrorMessages: true,
+          authFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+        ),
+      ],
+    );
+    blocTest(
+      'refreshOktaToken success',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(() => authRepoMock.getOktaAccessToken()).thenAnswer(
+          (invocation) async => Right(
+            fakeJWT,
+          ),
+        );
+        when(() => authRepoMock.getEZRXJWT(fakeJWT)).thenAnswer(
+          (invocation) async => Right(
+            loginMockData,
+          ),
+        );
+        when(
+          () => authRepoMock.storeJWT(
+            access: loginMockData.access,
+            refresh: loginMockData.refresh,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(
+            unit,
+          ),
+        );
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc.add(const LoginFormEvent.refreshOktaToken()),
+      expect: () => [
+        loginFormState.copyWith(
+          isSubmitting: false,
+          showErrorMessages: false,
+          authFailureOrSuccessOption: optionOf(
+            Right(
+              Login(
+                access: loginMockData.access,
+                refresh: loginMockData.refresh,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+    blocTest(
+      'exchanhgeEZRXToken success',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(() => authRepoMock.getEZRXJWT(fakeJWT)).thenAnswer(
+          (invocation) async => Right(
+            loginMockData,
+          ),
+        );
+        when(
+          () => authRepoMock.storeJWT(
+            access: loginMockData.access,
+            refresh: loginMockData.refresh,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Right(
+            unit,
+          ),
+        );
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc.add(LoginFormEvent.exchanhgeEZRXToken(fakeJWT)),
+      expect: () => [
+        loginFormState.copyWith(
+          isSubmitting: false,
+          showErrorMessages: false,
+          authFailureOrSuccessOption: optionOf(
+            Right(
+              Login(
+                access: loginMockData.access,
+                refresh: loginMockData.refresh,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
 
-    //     when(
-    //       () => authRepoMock.getOktaAccessToken(),
-    //     ).thenAnswer(
-    //       (invocation) async => Right(fakeJWT),
-    //     );
-
-    //     when(
-    //       () => authRepoMock.getEZRXJWT(fakeJWT),
-    //     ).thenAnswer(
-    //       (invocation) async => Right(loginWithOktaMockData),
-    //     );
-    //   },
-    //   act: (LoginFormBloc bloc) =>
-    //       bloc.add(const LoginFormEvent.loginWithOktaButtonPressed()),
-    //   expect: () => [
-    //     loginFormState.copyWith(
-    //       isSubmitting: true,
-    //       authFailureOrSuccessOption: none(),
-    //     ),
-    //     loginFormState.copyWith(
-    //       isSubmitting: false,
-    //       showErrorMessages: false,
-    //       authFailureOrSuccessOption: optionOf(
-    //         const Right(unit),
-    //       ),
-    //     ),
-    //   ],
-    // );
-
-    // blocTest(
-    //   'Login with okta button Local success',
-    //   build: () => LoginFormBloc(authRepository: authRepoMock),
-    //   setUp: () {
-    //     when(() => authRepoMock.loadCredential()).thenAnswer(
-    //       (invocation) async => const Left(
-    //         ApiFailure.other('fake-error'),
-    //       ),
-    //     );
-
-    //     when(
-    //       () => authRepoMock.loginWithOkta(),
-    //     ).thenAnswer(
-    //       (invocation) async => const Right(unit),
-    //     );
-
-    //     when(
-    //       () => authRepoMock.getOktaAccessToken(),
-    //     ).thenAnswer(
-    //       (invocation) async => Right(fakeJWT),
-    //     );
-
-    //     when(
-    //       () => authRepoMock.getEZRXJWT(fakeJWT),
-    //     ).thenAnswer(
-    //       (invocation) async => Right(loginWithOktaMockData),
-    //     );
-    //   },
-    //   act: (LoginFormBloc bloc) =>
-    //       bloc.add(const LoginFormEvent.loginWithOktaButtonPressed()),
-    //   expect: () => [
-    //     loginFormState.copyWith(
-    //       isSubmitting: true,
-    //       authFailureOrSuccessOption: none(),
-    //     ),
-    //     loginFormState.copyWith(
-    //       isSubmitting: false,
-    //       showErrorMessages: false,
-    //       authFailureOrSuccessOption: optionOf(
-    //         const Right(unit),
-    //       ),
-    //     ),
-    //   ],
-    // );
+    blocTest(
+      'exchanhgeEZRXToken failed',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(() => authRepoMock.getEZRXJWT(fakeJWT)).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc.add(LoginFormEvent.exchanhgeEZRXToken(fakeJWT)),
+      expect: () => [
+        loginFormState.copyWith(
+          isSubmitting: false,
+          showErrorMessages: true,
+          authFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+        ),
+      ],
+    );
 
     blocTest(
       'Login with email fail',
@@ -612,6 +717,122 @@ void main() {
           isSubmitting: false,
           showErrorMessages: true,
           authFailureOrSuccessOption: none(),
+        ),
+      ],
+    );
+    blocTest(
+      'fetchCurrentMarket failed test',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(() => authRepoMock.loadCredential()).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+
+        when(
+          () => deviceRepoMock.getCurrentMarket(),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc..add(const LoginFormEvent.fetchCurrentMarket()),
+      expect: () => [
+        loginFormState.copyWith(
+          authFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+        ),
+      ],
+    );
+    blocTest(
+      'fetchCurrentMarket success test',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(
+          () => deviceRepoMock.getCurrentMarket(),
+        ).thenAnswer(
+          (invocation) async => const Right(
+            'fake-market',
+          ),
+        );
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc..add(const LoginFormEvent.fetchCurrentMarket()),
+      expect: () => [
+        loginFormState.copyWith(
+          currentMarket: AppMarket('fake-market'),
+          authFailureOrSuccessOption: optionOf(
+            const Right(
+              'fake-market',
+            ),
+          ),
+        ),
+      ],
+    );
+    blocTest(
+      'setCurrentMarket failed test',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(
+          () => deviceRepoMock.setCurrentMarket(currentMarket: 'fake-market'),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc..add(const LoginFormEvent.setCurrentMarket('fake-market')),
+      expect: () => [
+        loginFormState.copyWith(
+          authFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+        ),
+      ],
+    );
+    blocTest(
+      'setCurrentMarket success test',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(
+          () => deviceRepoMock.setCurrentMarket(currentMarket: 'fake-market'),
+        ).thenAnswer(
+          (invocation) async => const Right(
+            unit,
+          ),
+        );
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc..add(const LoginFormEvent.setCurrentMarket('fake-market')),
+      expect: () => [
+        loginFormState.copyWith(
+          currentMarket: AppMarket('fake-market'),
+          authFailureOrSuccessOption: optionOf(
+            const Right(
+              unit,
+            ),
+          ),
         ),
       ],
     );
