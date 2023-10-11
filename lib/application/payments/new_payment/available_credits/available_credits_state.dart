@@ -5,6 +5,8 @@ class AvailableCreditsState with _$AvailableCreditsState {
   const AvailableCreditsState._();
   const factory AvailableCreditsState({
     required List<CustomerOpenItem> items,
+    required SalesOrganisation salesOrganization,
+    required CustomerCodeInfo customerCodeInfo,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
     required bool canLoadMore,
@@ -18,6 +20,8 @@ class AvailableCreditsState with _$AvailableCreditsState {
         canLoadMore: true,
         items: <CustomerOpenItem>[],
         appliedFilter: AvailableCreditFilter.empty(),
-        searchKey: SearchKey.search(''),
+        searchKey: SearchKey.searchFilter(''),
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        salesOrganization: SalesOrganisation.empty(),
       );
 }

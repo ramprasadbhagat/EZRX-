@@ -93,6 +93,8 @@ import 'package:ezrxmobile/application/order/scan_material_info/scan_material_in
 
 import 'package:ezrxmobile/presentation/orders/create_order/camera_files_permission_bottomsheet.dart';
 
+import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -1072,6 +1074,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
               user: user,
               customerCodeInfo: state.customerCodeInfo,
+            ),
+          );
+      context.read<AvailableCreditsBloc>().add(
+            AvailableCreditsEvent.initialized(
+              salesOrganization:
+                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              customerCodeInfo:
+                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
             ),
           );
 

@@ -126,12 +126,8 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
         );
     context.read<AvailableCreditsBloc>().add(
           AvailableCreditsEvent.fetch(
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
             appliedFilter: AvailableCreditFilter.empty(),
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.searchFilter(''),
           ),
         );
     context.read<NewPaymentBloc>().add(

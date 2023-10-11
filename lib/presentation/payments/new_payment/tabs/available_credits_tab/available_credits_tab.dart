@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
@@ -110,31 +108,14 @@ class AvailableCreditsTab extends StatelessWidget {
                         onRefresh: () {
                           context.read<AvailableCreditsBloc>().add(
                                 AvailableCreditsEvent.fetch(
-                                  salesOrganisation: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
                                   appliedFilter: AvailableCreditFilter.empty(),
-                                  searchKey: state.searchKey,
+                                  searchKey: SearchKey.searchFilter(''),
                                 ),
                               );
                         },
                         onLoadingMore: () {
                           context.read<AvailableCreditsBloc>().add(
-                                AvailableCreditsEvent.loadMore(
-                                  salesOrganisation: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
-                                ),
+                                const AvailableCreditsEvent.loadMore(),
                               );
                         },
                         isLoading: state.isLoading,
@@ -232,10 +213,6 @@ class _FilterTune extends StatelessWidget {
         if (newFilter != alreadyAppliedFilter) {
           context.read<AvailableCreditsBloc>().add(
                 AvailableCreditsEvent.fetch(
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
                   appliedFilter: newFilter,
                   searchKey:
                       context.read<AvailableCreditsBloc>().state.searchKey,

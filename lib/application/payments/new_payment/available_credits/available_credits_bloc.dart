@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -22,16 +23,19 @@ class AvailableCreditsBloc
     required this.newPaymentRepository,
     required this.config,
   }) : super(AvailableCreditsState.initial()) {
-    on(_onEvent);
-  }
-
-  Future<void> _onEvent(
-    AvailableCreditsEvent event,
-    Emitter<AvailableCreditsState> emit,
-  ) async {
-    await event.map(
-      initialized: (_) async => emit(AvailableCreditsState.initial()),
-      fetch: (value) async {
+    on<_initialized>(
+      (e, emit) => emit(
+        AvailableCreditsState.initial().copyWith(
+          salesOrganization: e.salesOrganization,
+          customerCodeInfo: e.customerCodeInfo,
+        ),
+      ),
+    );
+    on<_Fetch>(
+      (value, emit) async {
+        if ((value.searchKey == state.searchKey &&
+                value.searchKey.validateNotEmpty) ||
+            !value.searchKey.isValid()) return;
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
@@ -44,8 +48,8 @@ class AvailableCreditsBloc
 
         final failureOrSuccess =
             await newPaymentRepository.getAvailableCreditNotes(
-          salesOrganisation: value.salesOrganisation,
-          customerCodeInfo: value.customerCodeInfo,
+          salesOrganisation: state.salesOrganization,
+          customerCodeInfo: state.customerCodeInfo,
           pageSize: config.pageSize,
           offset: 0,
           appliedFilter: value.appliedFilter,
@@ -73,49 +77,51 @@ class AvailableCreditsBloc
           },
         );
       },
-      loadMore: (value) async {
-        if (state.isLoading || !state.canLoadMore) return;
-
-        emit(
-          state.copyWith(
-            isLoading: true,
-            failureOrSuccessOption: none(),
-          ),
-        );
-
-        final failureOrSuccess =
-            await newPaymentRepository.getAvailableCreditNotes(
-          salesOrganisation: value.salesOrganisation,
-          customerCodeInfo: value.customerCodeInfo,
-          pageSize: config.pageSize,
-          offset: state.items.length,
-          appliedFilter: state.appliedFilter,
-          searchKey: state.searchKey,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-                isLoading: false,
-              ),
-            );
-          },
-          (data) {
-            final updateItemList = List<CustomerOpenItem>.from(state.items)
-              ..addAll(data);
-            emit(
-              state.copyWith(
-                items: updateItemList,
-                canLoadMore: data.length >= config.pageSize,
-                failureOrSuccessOption: none(),
-                isLoading: false,
-              ),
-            );
-          },
-        );
-      },
+      transformer: restartable(),
     );
+
+    on<_LoadMore>((value, emit) async {
+      if (state.isLoading || !state.canLoadMore) return;
+
+      emit(
+        state.copyWith(
+          isLoading: true,
+          failureOrSuccessOption: none(),
+        ),
+      );
+
+      final failureOrSuccess =
+          await newPaymentRepository.getAvailableCreditNotes(
+        salesOrganisation: state.salesOrganization,
+        customerCodeInfo: state.customerCodeInfo,
+        pageSize: config.pageSize,
+        offset: state.items.length,
+        appliedFilter: state.appliedFilter,
+        searchKey: state.searchKey,
+      );
+
+      failureOrSuccess.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+              isLoading: false,
+            ),
+          );
+        },
+        (data) {
+          final updateItemList = List<CustomerOpenItem>.from(state.items)
+            ..addAll(data);
+          emit(
+            state.copyWith(
+              items: updateItemList,
+              canLoadMore: data.length >= config.pageSize,
+              failureOrSuccessOption: none(),
+              isLoading: false,
+            ),
+          );
+        },
+      );
+    });
   }
 }

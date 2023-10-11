@@ -118,8 +118,7 @@ class NewPaymentRepository extends INewPaymentRepository {
         customerCode: customerCodeInfo.customerCodeSoldTo,
         pageSize: pageSize,
         offset: offset,
-        filterList:
-            AvailableCreditFilterDto.fromDomain(appliedFilter).toMapList,
+        filterList: filterList,
       );
 
       return Right(response);

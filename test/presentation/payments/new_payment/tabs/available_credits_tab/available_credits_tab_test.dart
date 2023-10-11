@@ -180,8 +180,6 @@ void main() {
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: availableCreditsBlocMock.state.appliedFilter,
-            salesOrganisation: eligibilityBlocMock.state.salesOrganisation,
-            customerCodeInfo: eligibilityBlocMock.state.customerCodeInfo,
             searchKey: SearchKey.search('26'),
           ),
         ),
@@ -208,8 +206,6 @@ void main() {
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: availableCreditsBlocMock.state.appliedFilter,
-            salesOrganisation: eligibilityBlocMock.state.salesOrganisation,
-            customerCodeInfo: eligibilityBlocMock.state.customerCodeInfo,
             searchKey: SearchKey.search(''),
           ),
         ),
@@ -316,8 +312,6 @@ void main() {
       verify(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-            customerCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
             appliedFilter: AvailableCreditFilter.empty(),
             searchKey: availableCreditsBlocMock.state.searchKey,
           ),
@@ -352,10 +346,7 @@ void main() {
 
       verify(
         () => availableCreditsBlocMock.add(
-          AvailableCreditsEvent.loadMore(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-            customerCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
-          ),
+          const AvailableCreditsEvent.loadMore(),
         ),
       );
     });
@@ -433,8 +424,6 @@ void main() {
       verify(
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
-            salesOrganisation: eligibilityBlocMock.state.salesOrganisation,
-            customerCodeInfo: eligibilityBlocMock.state.customerCodeInfo,
             appliedFilter: creditFilter,
             searchKey: availableCreditsBlocMock.state.searchKey,
           ),

@@ -25,40 +25,48 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
           key: WidgetKeys.genericKey(
             key: state.searchKey.searchValueOrEmpty,
           ),
-          onSearchChanged: (value) {},
-          onSearchSubmitted: (value) => context
-              .read<AvailableCreditsBloc>()
-              .add(
-                AvailableCreditsEvent.fetch(
-                  appliedFilter: state.appliedFilter,
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
-                  searchKey: SearchKey.search(value),
-                ),
-              ),
+          onSearchChanged: (value) => _search(
+            appliedFilter: state.appliedFilter,
+            context: context,
+            searchKey: value,
+          ),
+          onSearchSubmitted: (value) => _search(
+            appliedFilter: state.appliedFilter,
+            context: context,
+            searchKey: value,
+          ),
           hintText: 'Search by document number'.tr(),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
             // Only digits
             FilteringTextInputFormatter.allow(RegExp('[0-9]')),
           ],
-          customValidator: (value) => SearchKey.search(value).isValid(),
+          customValidator: (value) => SearchKey.searchFilter(value).isValid(),
           enabled: !state.isLoading,
-          onClear: () => context.read<AvailableCreditsBloc>().add(
-                AvailableCreditsEvent.fetch(
-                  appliedFilter: state.appliedFilter,
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
-                  searchKey: SearchKey.search(''),
-                ),
-              ),
+          onClear: () => _search(
+            appliedFilter: state.appliedFilter,
+            context: context,
+            searchKey: '',
+            onClear: true,
+          ),
           initialValue: state.searchKey.searchValueOrEmpty,
         );
       },
     );
+  }
+
+  void _search({
+    required BuildContext context,
+    required String searchKey,
+    required AvailableCreditFilter appliedFilter,
+    bool onClear = false,
+  }) {
+    if (!onClear && searchKey.isEmpty) return;
+    context.read<AvailableCreditsBloc>().add(
+          AvailableCreditsEvent.fetch(
+            appliedFilter: appliedFilter,
+            searchKey: SearchKey.searchFilter(searchKey),
+          ),
+        );
   }
 }

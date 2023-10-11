@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
@@ -36,7 +37,12 @@ void main() {
           newPaymentRepository: newPaymentRepositoryMock,
           config: config,
         ),
-        act: (bloc) => bloc.add(const AvailableCreditsEvent.initialized()),
+        act: (bloc) => bloc.add(
+          AvailableCreditsEvent.initialized(
+            salesOrganization: SalesOrganisation.empty(),
+            customerCodeInfo: CustomerCodeInfo.empty(),
+          ),
+        ),
         expect: () => [AvailableCreditsState.initial()],
       );
 
@@ -49,12 +55,16 @@ void main() {
         setUp: () {
           when(
             () => newPaymentRepositoryMock.getAvailableCreditNotes(
-              salesOrganisation: SalesOrganisation.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('Fake-Sales-Org'),
+              ),
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                customerCodeSoldTo: 'Fake-CustomerCode',
+              ),
               pageSize: config.pageSize,
               offset: 0,
               appliedFilter: AvailableCreditFilter.empty(),
-              searchKey: SearchKey.search(''),
+              searchKey: SearchKey.searchFilter(''),
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -63,18 +73,38 @@ void main() {
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+        seed: () => AvailableCreditsState.initial().copyWith(
+          appliedFilter: AvailableCreditFilter.empty(),
+          items: openItems,
+          salesOrganization: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('Fake-Sales-Org'),
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'Fake-CustomerCode',
           ),
         ),
         expect: () => [
           AvailableCreditsState.initial().copyWith(
             isLoading: true,
+            salesOrganization: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('Fake-Sales-Org'),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'Fake-CustomerCode',
+            ),
           ),
           AvailableCreditsState.initial().copyWith(
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
+            salesOrganization: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('Fake-Sales-Org'),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'Fake-CustomerCode',
+            ),
           )
         ],
       );
@@ -88,30 +118,54 @@ void main() {
         setUp: () {
           when(
             () => newPaymentRepositoryMock.getAvailableCreditNotes(
-              salesOrganisation: SalesOrganisation.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('Fake-Sales-Org'),
+              ),
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                customerCodeSoldTo: 'Fake-CustomerCode',
+              ),
               pageSize: config.pageSize,
               offset: 0,
               appliedFilter: AvailableCreditFilter.empty(),
-              searchKey: SearchKey.search(''),
+              searchKey: SearchKey.searchFilter(''),
             ),
           ).thenAnswer((invocation) async => Right(openItems));
         },
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ),
+        seed: () => AvailableCreditsState.initial().copyWith(
+          appliedFilter: AvailableCreditFilter.empty(),
+          items: openItems,
+          salesOrganization: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('Fake-Sales-Org'),
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'Fake-CustomerCode',
           ),
         ),
         expect: () => [
           AvailableCreditsState.initial().copyWith(
             isLoading: true,
+            salesOrganization: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('Fake-Sales-Org'),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'Fake-CustomerCode',
+            ),
           ),
           AvailableCreditsState.initial().copyWith(
             items: openItems,
             canLoadMore: false,
+            salesOrganization: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('Fake-Sales-Org'),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'Fake-CustomerCode',
+            ),
           )
         ],
       );
@@ -125,36 +179,55 @@ void main() {
         seed: () => AvailableCreditsState.initial().copyWith(
           appliedFilter: AvailableCreditFilter.empty(),
           items: openItems,
+          salesOrganization: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('Fake-Sales-Org'),
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'Fake-CustomerCode',
+          ),
         ),
         setUp: () {
           when(
             () => newPaymentRepositoryMock.getAvailableCreditNotes(
-              salesOrganisation: SalesOrganisation.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('Fake-Sales-Org'),
+              ),
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                customerCodeSoldTo: 'Fake-CustomerCode',
+              ),
               pageSize: config.pageSize,
               offset: openItems.length,
               appliedFilter: AvailableCreditFilter.empty(),
-              searchKey: SearchKey.search(''),
+              searchKey: SearchKey.searchFilter(''),
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
           );
         },
         act: (bloc) => bloc.add(
-          AvailableCreditsEvent.loadMore(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-          ),
+          const AvailableCreditsEvent.loadMore(),
         ),
         expect: () => [
           AvailableCreditsState.initial().copyWith(
             items: openItems,
             isLoading: true,
+            salesOrganization: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('Fake-Sales-Org'),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'Fake-CustomerCode',
+            ),
           ),
           AvailableCreditsState.initial().copyWith(
             items: openItems,
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('Fake-Error'))),
+            salesOrganization: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('Fake-Sales-Org'),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'Fake-CustomerCode',
+            ),
           )
         ],
       );
@@ -168,33 +241,52 @@ void main() {
         seed: () => AvailableCreditsState.initial().copyWith(
           appliedFilter: AvailableCreditFilter.empty(),
           items: openItems,
+          salesOrganization: SalesOrganisation.empty().copyWith(
+            salesOrg: SalesOrg('Fake-Sales-Org'),
+          ),
+          customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+            customerCodeSoldTo: 'Fake-CustomerCode',
+          ),
         ),
         setUp: () {
           when(
             () => newPaymentRepositoryMock.getAvailableCreditNotes(
-              salesOrganisation: SalesOrganisation.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
+              salesOrganisation: SalesOrganisation.empty().copyWith(
+                salesOrg: SalesOrg('Fake-Sales-Org'),
+              ),
+              customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+                customerCodeSoldTo: 'Fake-CustomerCode',
+              ),
               pageSize: config.pageSize,
               offset: openItems.length,
               appliedFilter: AvailableCreditFilter.empty(),
-              searchKey: SearchKey.search(''),
+              searchKey: SearchKey.searchFilter(''),
             ),
           ).thenAnswer((invocation) async => Right(openItems));
         },
         act: (bloc) => bloc.add(
-          AvailableCreditsEvent.loadMore(
-            customerCodeInfo: CustomerCodeInfo.empty(),
-            salesOrganisation: SalesOrganisation.empty(),
-          ),
+          const AvailableCreditsEvent.loadMore(),
         ),
         expect: () => [
           AvailableCreditsState.initial().copyWith(
             items: openItems,
             isLoading: true,
+            salesOrganization: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('Fake-Sales-Org'),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'Fake-CustomerCode',
+            ),
           ),
           AvailableCreditsState.initial().copyWith(
             canLoadMore: false,
             items: List<CustomerOpenItem>.from(openItems)..addAll(openItems),
+            salesOrganization: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('Fake-Sales-Org'),
+            ),
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              customerCodeSoldTo: 'Fake-CustomerCode',
+            ),
           )
         ],
       );
