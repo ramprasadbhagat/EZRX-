@@ -33,6 +33,11 @@ class CommonRobot {
   final productsTab = find.byKey(WidgetKeys.productsTab);
   final cartButton = find.byType(CartButton);
 
+  Future<void> goToHomeTab() async {
+    await tester.tap(homeTab);
+    await tester.pumpAndSettle();
+  }
+
   Future<void> goToOrderTab() async {
     await tester.tap(ordersTab);
     await tester.pumpAndSettle();
@@ -91,6 +96,15 @@ class CommonRobot {
     );
     await tester.tap(buttons.last);
     await tester.pump();
+  }
+
+  Future<void> cancelDateRangePicker() async {
+    final buttons = find.descendant(
+      of: find.byType(DateRangePickerDialog),
+      matching: find.byType(TextButton),
+    );
+    await tester.tap(buttons.first);
+    await tester.pumpAndSettle();
   }
 
   Future<void> navigateToScreen(NavigationTab navigationTab) async {
@@ -202,6 +216,11 @@ class CommonRobot {
 
   void verifyTextNotVisible(String value) {
     expect(find.text(value), findsNothing);
+  }
+
+  Future<void> verifySnackbarVisible() async {
+    expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+    await tester.pumpAndSettle();
   }
 
   Future<void> tapToBackIcon() async {

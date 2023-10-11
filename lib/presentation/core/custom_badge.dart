@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as bd;
@@ -18,6 +19,7 @@ class CustomBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return bd.Badge(
+      key: WidgetKeys.customBadge,
       badgeContent: Text(
         count.toString(),
         style: Theme.of(context).textTheme.titleSmall?.copyWith(

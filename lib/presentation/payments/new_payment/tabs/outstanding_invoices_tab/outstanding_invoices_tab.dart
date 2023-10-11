@@ -65,6 +65,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
                       color: ZPColors.primary,
                       fontWeight: FontWeight.bold,
                     ),
+                key: WidgetKeys.textOutstanding,
               ),
               PriceComponent(
                 salesOrgConfig:
@@ -168,6 +169,7 @@ class _PaymentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.paymentItem,
       child: BlocBuilder<NewPaymentBloc, NewPaymentState>(
         builder: (context, state) {
           return EdgeCheckbox(

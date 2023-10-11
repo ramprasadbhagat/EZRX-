@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/more/more_details_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      key: WidgetKeys.settingTile,
       title: Text(
         'Settings'.tr(),
         style: Theme.of(context).textTheme.labelMedium,

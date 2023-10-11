@@ -8,6 +8,8 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class InvoiceItemCard extends StatelessWidget {
   const InvoiceItemCard({
     Key? key,
@@ -27,6 +29,7 @@ class InvoiceItemCard extends StatelessWidget {
               Text(
                 '${context.tr('Invoice')} #${customerOpenItem.accountingDocument}',
                 style: Theme.of(context).textTheme.labelSmall,
+                key: WidgetKeys.invoiceId,
               ),
               StatusLabel(
                 status: StatusType(
@@ -43,6 +46,7 @@ class InvoiceItemCard extends StatelessWidget {
                 Text(
                   '${context.tr('Order')} #${customerOpenItem.documentReferenceID}',
                   style: Theme.of(context).textTheme.titleSmall,
+                  key: WidgetKeys.orderId,
                 ),
                 Text(
                   '${context.tr('Due on')} ${StringUtils.getDueDateString(

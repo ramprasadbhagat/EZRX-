@@ -8,9 +8,15 @@ class PaymentRobot {
 
   final statementOfAccountsMenu =
       find.byKey(WidgetKeys.statementOfAccountsMenu);
+  final newPaymentButton = find.byKey(WidgetKeys.newPaymentButton);
 
   Future<void> tapStatementOfAccountTile() async {
     await tester.tap(statementOfAccountsMenu);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapNewPayment() async {
+    await tester.tap(newPaymentButton);
     await tester.pumpAndSettle();
   }
 }

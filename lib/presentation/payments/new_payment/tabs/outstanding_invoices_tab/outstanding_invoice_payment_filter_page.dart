@@ -439,6 +439,7 @@ class _StatusesSelector extends StatelessWidget {
         return Column(
           children: state.statusList.map((StatusType status) {
             return CheckboxListTile(
+              key: WidgetKeys.genericKey(key: status.displayPaymentStatus),
               contentPadding: EdgeInsets.zero,
               title: Text(
                 context.tr(status.displayPaymentStatus),

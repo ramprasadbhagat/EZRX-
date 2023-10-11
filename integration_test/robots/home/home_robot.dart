@@ -28,6 +28,8 @@ class HomeRobot {
   final searchBar = find.byKey(WidgetKeys.homeProductSearchBar);
   final customerSelector = find.byKey(WidgetKeys.customerCodeSelector);
   final miniCart = find.byType(CartButton);
+  final homeQuickAccessPaymentsMenu =
+      find.byKey(WidgetKeys.homeQuickAccessPaymentsMenu);
   final quickAccessMenu = find.byType(QuickAccessMenuPanel);
   final banner = find.byType(CarouselBanner);
   final browseProductIcon = find.byKey(WidgetKeys.browseProductIcon);
@@ -237,13 +239,13 @@ class HomeRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapReturnsQuickAccess() async {
-    await tester.tap(find.byKey(WidgetKeys.homeQuickAccessReturnsMenu));
+  Future<void> tapPaymentQuickAccess() async {
+    await tester.tap(homeQuickAccessPaymentsMenu);
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapPaymentQuickAccess() async {
-    await tester.tap(find.byKey(WidgetKeys.homeQuickAccessPaymentsMenu));
+  Future<void> tapReturnsQuickAccess() async {
+    await tester.tap(find.byKey(WidgetKeys.homeQuickAccessReturnsMenu));
     await tester.pumpAndSettle();
   }
 

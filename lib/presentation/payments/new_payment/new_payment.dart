@@ -418,6 +418,7 @@ class _CheckAllWidget extends StatelessWidget {
     return Column(
       children: [
         CheckboxListTile(
+          key: WidgetKeys.checkAllWidget,
           contentPadding: EdgeInsets.zero,
           title: Text(
             context.tr('All'),
@@ -454,6 +455,7 @@ class _PriceText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      key: WidgetKeys.priceText,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

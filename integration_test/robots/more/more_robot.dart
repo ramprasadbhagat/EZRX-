@@ -10,6 +10,8 @@ class MoreRobot extends CommonRobot {
   final newRequestFloatingButton =
       find.byKey(WidgetKeys.returnByItemsNewRequestButton);
   final paymentTile = find.byKey(WidgetKeys.paymentsTile);
+
+  final loginOnBehalf = find.byKey(WidgetKeys.loginOnBehalfButtonKey);
   final securityTile = find.byKey(WidgetKeys.securityTile);
 
   Future<void> tapReturnsTile() async {
@@ -17,13 +19,13 @@ class MoreRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapNewRequestFloatingButton() async {
-    await tester.tap(newRequestFloatingButton);
-  }
-
   Future<void> tapPaymentTile() async {
     await tester.tap(paymentTile);
     await tester.pumpAndSettle();
+  }
+
+  Future<void> tapNewRequestFloatingButton() async {
+    await tester.tap(newRequestFloatingButton);
   }
 
   Future<void> tapSecurityTile() async {
@@ -33,5 +35,26 @@ class MoreRobot extends CommonRobot {
 
   void verifyMoreScreenVisible() {
     expect(find.byKey(WidgetKeys.moreScreen), findsOneWidget);
+  }
+
+  Future<void> loginOnBehalfToMoreTab(String userName) async {
+    await tester.drag(
+      find.byKey(
+        WidgetKeys.settingTile,
+      ),
+      const Offset(0.0, -200),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(loginOnBehalf);
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(
+        WidgetKeys.proxyLoginUserNameField,
+      ),
+      userName,
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(WidgetKeys.loginOnBehalfLoginButtonKey));
+    await tester.pumpAndSettle();
   }
 }

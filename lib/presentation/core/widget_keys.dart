@@ -30,6 +30,9 @@ class WidgetKeys {
       Key('confirmBottomSheetConfirmButton');
   static const Key addToCartErrorSection = Key('addToCartErrorSection');
   static const Key productDetailList = Key('productDetailList');
+  static const Key moreTapListContent = Key('moreTapListContent');
+  static const Key settingTile = Key('settingTile');
+  static const Key customBadge = Key('customBadge');
   static const Key addressInfoSectionActionLabel =
       Key('addressInfoSectionActionLabel');
   static const Key addressInfoSectionCustomerCodeLabel =
@@ -655,8 +658,11 @@ class WidgetKeys {
   static const Key newPaymentPage = Key('newPaymentPage');
   static const Key payButton = Key('payButton');
   static const Key paymentWebviewPage = Key('paymentWebviewPage');
+  static const Key invoiceId = Key('invoiceId');
+  static const Key orderId = Key('orderId');
   static const Key creditPaymentFilterPage = Key('creditPaymentFilterPage');
-  static const Key outstandingInvoiceFilterPage = Key('outstandingInvoiceFilterPage');
+  static const Key outstandingInvoiceFilterPage =
+      Key('outstandingInvoiceFilterPage');
 
   //============================================================
   //  Announcement
@@ -798,6 +804,16 @@ class WidgetKeys {
   static const Key paymentAdviceCreatedPageBack =
       Key('paymentAdviceCreatedPageBack');
   static const Key creditDetailsPageListView = Key('creditDetailsPageListView');
+  static const Key newPaymentButton = Key('newPaymentButton');
+  //===========================================================
+  //  New Payment
+  //============================================================
+  static const Key priceText = Key('priceText');
+  static const Key checkAllWidget = Key('checkAllWidget');
+  //step 1
+  static const Key textOutstanding = Key('textOutstanding');
+  static const Key paymentItem = Key('paymentItem');
+  static const Key itemCheckBadge = Key('itemCheckBadge');
   //===========================================================
   //  Account summary
   //============================================================

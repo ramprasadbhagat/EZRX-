@@ -144,6 +144,7 @@ class _NewPaymentButton extends StatelessWidget {
           bottom: 30,
         ),
         child: ElevatedButton(
+          key: WidgetKeys.newPaymentButton,
           onPressed: () => _toNewPayment(context),
           child: Text(
             context.tr('New Payment'),

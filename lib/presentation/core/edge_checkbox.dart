@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -52,6 +53,7 @@ class _SelectedIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return visible
         ? Positioned(
+            key: WidgetKeys.itemCheckBadge,
             top: 0,
             right: 0,
             child: ClipPath(
