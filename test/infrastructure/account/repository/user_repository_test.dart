@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/auth/entities/update_language_response.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/language_remote.dart';
@@ -16,6 +17,7 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart'
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -66,8 +68,13 @@ void main() {
   late DatadogService datadogServiceMock;
   late LanguageLocalDataSource languageLocalDataSource;
   late LanguageRemoteDataSource languageRemoteDataSource;
+  late UpdateLanguageResponse updateLanguageResponseMock;
+  final error = Error();
+  final mockException = MockException(message: 'exception');
+  const locale = Locale('vn');
   setUpAll(
     () async {
+      WidgetsFlutterBinding.ensureInitialized();
       configMock = ConfigMock();
       mixpanelService = MixpanelServiceMock();
       localDataSourceMock = UserLocalDataSourceMock();
@@ -101,33 +108,20 @@ void main() {
         languageLocalDataSource: languageLocalDataSource,
         languageRemoteDataSource: languageRemoteDataSource,
       );
+      updateLanguageResponseMock =
+          await LanguageLocalDataSource().getCustomerLicense();
     },
   );
   group('User Repository should - ', () {
     test(
       'update notification from local datasource successfully with mock',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
-
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
 
         when(
           () =>
               localDataSourceMock.updateUserNotificationAndLanguagePreference(),
-        ).thenAnswer((invocation) async => User.empty());
+        ).thenAnswer((_) async => User.empty());
 
         final result =
             await repository.updateNotificationSettings(User.empty());
@@ -138,27 +132,12 @@ void main() {
     test(
       'update notification from local datasource throws error with mock',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
-
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
 
         when(
           () =>
               localDataSourceMock.updateUserNotificationAndLanguagePreference(),
-        ).thenThrow(MockException(message: 'mockException'));
+        ).thenThrow(mockException);
 
         final result =
             await repository.updateNotificationSettings(User.empty());
@@ -169,21 +148,7 @@ void main() {
     test(
       'update notification from remote datasource successfully with uat',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
-
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
 
         when(
           () =>
@@ -192,7 +157,7 @@ void main() {
             emailNotification: false,
             userId: '',
           ),
-        ).thenAnswer((invocation) async => User.empty());
+        ).thenAnswer((_) async => User.empty());
 
         final result =
             await repository.updateNotificationSettings(User.empty());
@@ -203,21 +168,7 @@ void main() {
     test(
       'update notification from remote datasource throws error with uat',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
-
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
 
         when(
           () =>
@@ -226,7 +177,7 @@ void main() {
             emailNotification: false,
             userId: '',
           ),
-        ).thenThrow(Error());
+        ).thenThrow(error);
 
         final result =
             await repository.updateNotificationSettings(User.empty());
@@ -247,10 +198,10 @@ void main() {
     //     );
 
     //     when(() => configMock.appFlavor)
-    //         .thenAnswer((invocation) => Flavor.mock);
+    //         .thenAnswer((_) => Flavor.mock);
 
     //     when(() => localDataSourceMock.updateUserAup())
-    //         .thenAnswer((invocation) async => User.empty().settingAup);
+    //         .thenAnswer((_) async => User.empty().settingAup);
 
     //     final result = await repository.updateUserAup(User.empty());
     //     expect(result.isRight(), true);
@@ -270,7 +221,7 @@ void main() {
     //     );
 
     //     when(() => configMock.appFlavor)
-    //         .thenAnswer((invocation) => Flavor.mock);
+    //         .thenAnswer((_) => Flavor.mock);
 
     //     when(() => localDataSourceMock.updateUserAup())
     //         .thenThrow(MockException(message: 'mockException'));
@@ -292,11 +243,11 @@ void main() {
     //       tokenStorage: tokenStorageMock,
     //     );
 
-    //     when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+    //     when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
 
     //     when(() => remoteDataSourceMock.updateUserAup(
     //           userId: User.empty().id,
-    //         )).thenAnswer((invocation) async => User.empty().settingAup);
+    //         )).thenAnswer((_) async => User.empty().settingAup);
 
     //     final result = await repository.updateUserAup(User.empty());
     //     expect(result.isRight(), true);
@@ -315,7 +266,7 @@ void main() {
     //       tokenStorage: tokenStorageMock,
     //     );
 
-    //     when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+    //     when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
 
     //     when(() => remoteDataSourceMock.updateUserAup(
     //           userId: User.empty().id,
@@ -329,25 +280,10 @@ void main() {
     test(
       'update user tc from local datasource successfully with mock',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
-
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
 
         when(() => localDataSourceMock.updateUserTC())
-            .thenAnswer((invocation) async => const SettingTc(acceptTC: true));
+            .thenAnswer((_) async => const SettingTc(acceptTC: true));
 
         final result = await repository.updateUserTc();
         expect(result.isRight(), true);
@@ -357,25 +293,9 @@ void main() {
     test(
       'update user tc from local datasource throws error with mock',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
 
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
-
-        when(() => localDataSourceMock.updateUserTC())
-            .thenThrow(MockException(message: 'mockException'));
+        when(() => localDataSourceMock.updateUserTC()).thenThrow(mockException);
 
         final result = await repository.updateUserTc();
         expect(result.isLeft(), true);
@@ -385,24 +305,10 @@ void main() {
     test(
       'update user tc from remote datasource successfully with uat',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
-
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
 
         when(() => remoteDataSourceMock.updateUserTC())
-            .thenAnswer((invocation) async => const SettingTc(acceptTC: true));
+            .thenAnswer((_) async => const SettingTc(acceptTC: true));
 
         final result = await repository.updateUserTc();
         expect(result.isRight(), true);
@@ -412,23 +318,9 @@ void main() {
     test(
       'update user tc from remote datasource throws error with uat',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
 
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
-
-        when(() => remoteDataSourceMock.updateUserTC()).thenThrow(Error());
+        when(() => remoteDataSourceMock.updateUserTC()).thenThrow(error);
 
         final result = await repository.updateUserTc();
         expect(result.isLeft(), true);
@@ -438,25 +330,10 @@ void main() {
     test(
       'get user from local datasource successfully with mock',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
-
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
 
         when(() => localDataSourceMock.getUser())
-            .thenAnswer((invocation) async => User.empty());
+            .thenAnswer((_) async => User.empty());
 
         final result = await repository.getUser();
         expect(result.isRight(), true);
@@ -466,25 +343,9 @@ void main() {
     test(
       'get user from local datasource throws error with mock',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
 
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
-
-        when(() => localDataSourceMock.getUser())
-            .thenThrow(MockException(message: 'mockException'));
+        when(() => localDataSourceMock.getUser()).thenThrow(mockException);
 
         final result = await repository.getUser();
         expect(result.isLeft(), true);
@@ -494,37 +355,22 @@ void main() {
     test(
       'get user from remote datasource successfully with uat',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
-
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
         when(() => tokenStorageMock.get()).thenAnswer(
-          (invocation) async =>
-              JWTDto(access: rootAdminToken, refresh: refreshToken),
+          (_) async => JWTDto(access: rootAdminToken, refresh: refreshToken),
         );
         when(() => remoteDataSourceMock.getUser(userId: '11461'))
-            .thenAnswer((invocation) async => User.empty());
+            .thenAnswer((_) async => User.empty());
 
         when(
           () => firebaseAnalyticsServiceMock.analytics
               .setUserId(id: User.empty().id),
-        ).thenAnswer((invocation) async => User.empty());
+        ).thenAnswer((_) async => User.empty());
 
         when(
           () => firebaseCrashlyticsServiceMock.crashlytics
               .setUserIdentifier(User.empty().id),
-        ).thenAnswer((invocation) async => User.empty());
+        ).thenAnswer((_) async => User.empty());
         final mockUser = User.empty();
         when(
           () => mockClevertapService.setUser(
@@ -533,7 +379,7 @@ void main() {
             email: mockUser.email.getOrDefaultValue(''),
             role: mockUser.role.name,
           ),
-        ).thenAnswer((invocation) => Future.value());
+        ).thenAnswer((_) => Future.value());
 
         final result = await repository.getUser();
         expect(result.isRight(), true);
@@ -543,26 +389,75 @@ void main() {
     test(
       'get user from remote datasource throws error with uat',
       () async {
-        repository = UserRepository(
-          clevertapService: mockClevertapService,
-          firebaseCrashlyticsService: firebaseCrashlyticsServiceMock,
-          firebaseAnalyticsService: firebaseAnalyticsServiceMock,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          mixpanelService: mixpanelService,
-          datadogService: datadogServiceMock,
-          languageLocalDataSource: languageLocalDataSource,
-          languageRemoteDataSource: languageRemoteDataSource,
-        );
         when(() => tokenStorageMock.get())
-            .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+            .thenAnswer((_) async => JWTDto(access: '', refresh: ''));
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
 
-        when(() => remoteDataSourceMock.getUser(userId: '')).thenThrow(Error());
+        when(() => remoteDataSourceMock.getUser(userId: '')).thenThrow(error);
 
         final result = await repository.getUser();
+        expect(result.isLeft(), true);
+      },
+    );
+
+    test(
+      'updateLanguage from local datasource successfully with mock',
+      () async {
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+
+        when(() => languageLocalDataSource.getCustomerLicense())
+            .thenAnswer((_) async => updateLanguageResponseMock);
+
+        final result = await repository.updateLanguage(
+          language: locale,
+        );
+        expect(result.isRight(), true);
+      },
+    );
+
+    test(
+      'updateLanguage from local datasource throws error with mock',
+      () async {
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+
+        when(() => languageLocalDataSource.getCustomerLicense())
+            .thenThrow((_) async => error);
+
+        final result = await repository.updateLanguage(
+          language: locale,
+        );
+        expect(result.isLeft(), true);
+      },
+    );
+
+    test(
+      'updateLanguage from remote datasource successfully with mock',
+      () async {
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+
+        when(
+          () => languageRemoteDataSource.changeLanguage(locale.languageCode),
+        ).thenAnswer((_) async => updateLanguageResponseMock);
+
+        final result = await repository.updateLanguage(
+          language: locale,
+        );
+        expect(result.isRight(), true);
+      },
+    );
+
+    test(
+      'updateLanguage from remove datasource throws error with mock',
+      () async {
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+
+        when(
+          () => languageRemoteDataSource.changeLanguage(locale.languageCode),
+        ).thenThrow((_) async => error);
+
+        final result = await repository.updateLanguage(
+          language: locale,
+        );
         expect(result.isLeft(), true);
       },
     );
