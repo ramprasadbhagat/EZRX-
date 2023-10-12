@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -23,6 +24,7 @@ class SectionTitle extends StatelessWidget {
               ),
         ),
         IconButton(
+          key: WidgetKeys.arrowButton,
           onPressed: onTapIconButton,
           visualDensity: VisualDensity.compact,
           icon: const CircleAvatar(

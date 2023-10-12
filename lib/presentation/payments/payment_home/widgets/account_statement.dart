@@ -71,6 +71,7 @@ class _SoaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: WidgetKeys.itemStatementAccounts,
       margin: const EdgeInsets.symmetric(vertical: 5),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
       decoration: const BoxDecoration(
@@ -97,6 +98,7 @@ class _SoaCard extends StatelessWidget {
                       size: 24,
                     )
                   : IconButton(
+                      key: WidgetKeys.downloadStatementAccountIcon,
                       padding: const EdgeInsets.all(0),
                       constraints: const BoxConstraints(),
                       alignment: Alignment.centerRight,

@@ -7,6 +7,7 @@ SALESORGCONFIG := 'reset_sales_org_config.sh'
 CLIENT_LOGIN := 'login/client_login_screen.dart'
 CLIENT_PRODUCT_TAB := 'product/client_user.dart'
 SECURITY_TAB := 'more/security/client_user.dart'
+CLIENT_PAYMENT_HOME := 'payments/payments_home/client_user.dart'
 EXTERNAL_LOGIN := 'login/external_login_screen.dart'
 CLIENT_HOME := 'home/client_user_home_screen.dart'
 CLIENT_TEST_FILE := 'client_user.dart'
@@ -107,6 +108,7 @@ run_my_client_Integration_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/new_return/step1/${CLIENT_TEST_FILE}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/notification/${CLIENT_TEST_FILE}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/account_summary/account_invoice/${CLIENT_TEST_FILE}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_PAYMENT_HOME}
 run_my_external_Integration_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${EXTERNAL_LOGIN}
 run_ph_client_Integration_test:

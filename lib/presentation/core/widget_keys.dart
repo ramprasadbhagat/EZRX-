@@ -20,6 +20,7 @@ class WidgetKeys {
   static const Key scrollToTopArrowIcon = Key('scrollToTopArrowIconKey');
   static const Key nextButton = Key('nextButton');
   static const Key backButton = Key('backButton');
+  static const Key arrowButton = Key('arrowButton');
   static const Key commonTileItemHeader = Key('commonTileItemHeader');
   static const Key commonTileItemQty = Key('commonTileItemQty');
   static const Key commonTileItemLabel = Key('commonTileItemLabel');
@@ -654,6 +655,11 @@ class WidgetKeys {
   static const Key paymentSummaryFilterIcon = Key('paymentSummaryFilterIcon');
 
   //============================================================
+  //  Statement of account
+  //============================================================
+   static const Key paymentStatementOfAccountPage = Key('paymentStatementOfAccountPage');
+
+  //============================================================
   //  New Payment
   //============================================================
   static const Key newPaymentPage = Key('newPaymentPage');
@@ -806,8 +812,6 @@ class WidgetKeys {
   static const Key paymentHomeSoa = Key('paymentHomeSoa');
   static const Key paymentAdviceCreatedPageBack =
       Key('paymentAdviceCreatedPageBack');
-  static const Key creditDetailsPageListView = Key('creditDetailsPageListView');
-  static const Key newPaymentButton = Key('newPaymentButton');
   //===========================================================
   //  New Payment
   //============================================================
@@ -817,6 +821,11 @@ class WidgetKeys {
   static const Key textOutstanding = Key('textOutstanding');
   static const Key paymentItem = Key('paymentItem');
   static const Key itemCheckBadge = Key('itemCheckBadge');
+  static const Key creditDetailsPageListView = Key('creditDetailsPageListView');   
+  static const Key newPaymentButton = Key('newPaymentButton');
+  static const Key itemStatementAccounts = Key('itemStatementAccounts');
+  static const Key downloadStatementAccountIcon =
+      Key('downloadStatementAccountIcon');
   //===========================================================
   //  Account summary
   //============================================================
