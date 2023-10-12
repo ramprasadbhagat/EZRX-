@@ -16,7 +16,6 @@ class _ListTileThemeWidget extends StatelessWidget {
     return ListTileTheme(
       horizontalTitleGap: 0,
       child: CheckboxListTile(
-        key: key,
         value: value,
         onChanged: onChanged,
         title: Text(
