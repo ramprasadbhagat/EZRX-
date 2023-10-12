@@ -11,6 +11,7 @@ class _LicenseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.profileLicenseTile,
       padding: const EdgeInsets.all(16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -20,6 +21,7 @@ class _LicenseTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               RichText(
+                key: WidgetKeys.profileLicenseName,
                 text: TextSpan(
                   text: customerLicense.licenseType.displayNAIfEmpty,
                   style: Theme.of(context).textTheme.labelSmall,
@@ -33,6 +35,7 @@ class _LicenseTile extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               RichText(
+                key: WidgetKeys.profileLicenseNo,
                 text: TextSpan(
                   text: 'License no:'.tr(),
                   style: Theme.of(context)
@@ -49,6 +52,7 @@ class _LicenseTile extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               RichText(
+                key: WidgetKeys.profileLicenseDateRange,
                 text: TextSpan(
                   text: 'From '.tr(),
                   style: Theme.of(context).textTheme.labelSmall,
@@ -88,7 +92,10 @@ class _LicenseTile extends StatelessWidget {
                   : const SizedBox.shrink(),
             ],
           ),
-          StatusLabel(status: customerLicense.licenseStatus),
+          StatusLabel(
+            key: WidgetKeys.profileLicenseStatus,
+            status: customerLicense.licenseStatus,
+          ),
         ],
       ),
     );

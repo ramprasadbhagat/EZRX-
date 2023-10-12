@@ -12,7 +12,9 @@ class _Header extends StatelessWidget {
           'Account & business details:'.tr(),
           style: Theme.of(context).textTheme.labelLarge,
         ),
-        const _UserDetails(),
+        const _UserDetails(
+          key: WidgetKeys.profileUserDetails,
+        ),
         const SizedBox(height: 15),
         Text(
           'License information:'.tr(),

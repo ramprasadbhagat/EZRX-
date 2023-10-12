@@ -7,6 +7,7 @@ class MoreRobot extends CommonRobot {
   MoreRobot(WidgetTester tester) : super(tester);
 
   final returnsTile = find.byKey(WidgetKeys.returnsTile);
+  final profileTile = find.byKey(WidgetKeys.profileTile);
   final newRequestFloatingButton =
       find.byKey(WidgetKeys.returnByItemsNewRequestButton);
   final paymentTile = find.byKey(WidgetKeys.paymentsTile);
@@ -21,6 +22,13 @@ class MoreRobot extends CommonRobot {
 
   Future<void> tapPaymentTile() async {
     await tester.tap(paymentTile);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapProfileTile() async {
+    final profileTile = find.byKey(WidgetKeys.profileTile);
+    expect(profileTile, findsOneWidget);
+    await tester.tap(profileTile);
     await tester.pumpAndSettle();
   }
 

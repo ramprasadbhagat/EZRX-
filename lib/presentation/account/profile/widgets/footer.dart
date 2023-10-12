@@ -34,6 +34,7 @@ class _Footer extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
+                    key: WidgetKeys.profileClearButton,
                     onPressed: userState.user.preferredLanguage !=
                             userState.activeLanguage
                         ? () => context.read<UserBloc>().add(
@@ -52,6 +53,7 @@ class _Footer extends StatelessWidget {
                 const SizedBox(width: 20),
                 Expanded(
                   child: ElevatedButton(
+                    key: WidgetKeys.profileSaveButton,
                     onPressed: userState.user.preferredLanguage !=
                             userState.activeLanguage
                         ? () => context.read<UserBloc>().add(

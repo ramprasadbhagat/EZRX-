@@ -83,7 +83,7 @@ void main() {
         whenListen(userBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final findProfileTileKey = find.byKey(WidgetKeys.profileTile);
+        final findProfileTileKey = find.byKey(WidgetKeys.profileTileSection);
         expect(findProfileTileKey, findsOneWidget);
       },
     );
@@ -99,7 +99,7 @@ void main() {
         ];
         whenListen(userBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getScopedWidget());
-        final findProfileTileKey = find.byKey(WidgetKeys.profileTile);
+        final findProfileTileKey = find.byKey(WidgetKeys.profileTileSection);
         expect(findProfileTileKey, findsOneWidget);
       },
     );

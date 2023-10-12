@@ -175,6 +175,7 @@ class MoreDetailsTile {
       );
 
   factory MoreDetailsTile.profile(BuildContext context) => MoreDetailsTile(
+        key: WidgetKeys.profileTile,
         icon: const Icon(
           Icons.perm_identity_outlined,
           color: ZPColors.greenIconColor,

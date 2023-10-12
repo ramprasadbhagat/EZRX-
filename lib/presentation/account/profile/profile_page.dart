@@ -30,6 +30,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: WidgetKeys.profilePage,
       appBar: AppBar(
         title: Text(context.tr('Profile')),
         centerTitle: false,
@@ -88,8 +89,9 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
               isLoading: state.isFetching,
-              itemBuilder: (context, index, item) =>
-                  _LicenseTile(customerLicense: item),
+              itemBuilder: (context, index, item) => _LicenseTile(
+                customerLicense: item,
+              ),
               items: state.customerLicenses,
             );
           },

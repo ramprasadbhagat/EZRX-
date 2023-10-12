@@ -34,7 +34,7 @@ class ProfileTile extends StatelessWidget {
       builder: (context, state) {
         return ListTile(
           contentPadding: const EdgeInsets.all(15),
-          key: WidgetKeys.profileTile,
+          key: WidgetKeys.profileTileSection,
           leading: CircleAvatar(
             radius: 30,
             backgroundColor: ZPColors.orange,

@@ -106,6 +106,7 @@ class WidgetKeys {
   //  MORE TAB BAR
   //============================================================
   static const Key moreScreen = Key('moreScreen');
+  static const Key profileTileSection = Key('profileTileSection');
   static const Key profileTile = Key('profileTile');
   static const Key paymentsTile = Key('paymentsTile');
   static const Key returnsTile = Key('returnsTile');
@@ -947,4 +948,18 @@ class WidgetKeys {
   //  Month Picker
   //============================================================
   static const Key monthPickerKey = Key('monthPicker');
+
+  //===========================================================
+  //  Account Profile Page
+  //============================================================
+  static const Key profilePage = Key('profilePage');
+  static const Key profileUserDetails = Key('profileUserDetails');
+  static const Key profile = Key('profileUserDetails');
+  static const Key profileClearButton = Key('profileClearButton');
+  static const Key profileSaveButton = Key('profileSaveButton');
+  static const Key profileLicenseTile = Key('profileLicenseTile');
+  static const Key profileLicenseName = Key('profileLicenseName');
+  static const Key profileLicenseNo = Key('profileLicenseNo');
+  static const Key profileLicenseStatus = Key('profileLicenseStatus');
+  static const Key profileLicenseDateRange = Key('profileLicenseDateRange');
 }
