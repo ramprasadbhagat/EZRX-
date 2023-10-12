@@ -51,6 +51,7 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                       ?.copyWith(color: ZPColors.neutralsBlack),
                 ),
                 IconButton(
+                  key: WidgetKeys.checkoutDeliveryArrowButton,
                   padding: EdgeInsets.zero,
                   onPressed: () {
                     _isDisplayDeliveryInfo.value =

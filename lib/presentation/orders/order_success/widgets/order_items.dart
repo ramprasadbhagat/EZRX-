@@ -10,12 +10,14 @@ class _OrderItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.orderSuccessItemsSection,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           child: Text(
             '${'Your items'.tr()}(${context.read<OrderSummaryBloc>().state.orderHistoryDetails.orderItemsCount})',
+            key: WidgetKeys.orderSuccessItemTotalQty,
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: ZPColors.black,
                 ),
@@ -40,8 +42,8 @@ class _OrderItems extends StatelessWidget {
                         ),
                       ),
                       Column(
-                        children: item.viewByOrderItem.map(
-                          (e) {
+                        children: item.viewByOrderItem.mapIndexed(
+                          (index, e) {
                             final invoiceNumber = context
                                 .read<OrderSummaryBloc>()
                                 .state
@@ -53,12 +55,14 @@ class _OrderItems extends StatelessWidget {
                                 .isMYExternalSalesRepUser;
 
                             return CommonTileItem(
+                              key: WidgetKeys.orderSuccessItem(index),
                               materialNumber: e.materialNumber,
                               label: removeLeadingZero(
                                 e.materialNumber.getOrDefaultValue(''),
                               ),
                               subtitle: '',
                               priceComponent: PriceComponent(
+                                key: WidgetKeys.orderSuccessItemUnitPrice,
                                 price: e.itemUnitPrice(
                                   invoiceNumber,
                                   isMYExternalSalesRep,
@@ -79,6 +83,7 @@ class _OrderItems extends StatelessWidget {
                                 children: [
                                   Text(
                                     '${'Qty'.tr()}: ${e.qty}',
+                                    key: WidgetKeys.orderSuccessItemQty,
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
@@ -87,6 +92,7 @@ class _OrderItems extends StatelessWidget {
                                         ),
                                   ),
                                   PriceComponent(
+                                    key: WidgetKeys.orderSuccessItemTotalPrice,
                                     salesOrgConfig: context
                                         .read<SalesOrgBloc>()
                                         .state

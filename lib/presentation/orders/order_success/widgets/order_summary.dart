@@ -11,6 +11,7 @@ class _OrderSummaary extends StatelessWidget {
         context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
 
     return ListTile(
+      key: WidgetKeys.orderSuccessOrderSummarySection,
       minVerticalPadding: 25.0,
       title: Padding(
         padding: const EdgeInsets.only(bottom: 20.0),
@@ -31,6 +32,7 @@ class _OrderSummaary extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
+                key: WidgetKeys.orderSuccessSubTotal,
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price:
@@ -52,6 +54,7 @@ class _OrderSummaary extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               PriceComponent(
+                key: WidgetKeys.orderSuccessGrandTotal,
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price:

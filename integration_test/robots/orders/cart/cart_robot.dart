@@ -93,7 +93,7 @@ class CartRobot {
   void verifyManufacturerName(String text) {
     expect(
       find.descendant(
-        of: find.byKey(WidgetKeys.cartItemProductPrincipalName),
+        of: find.byKey(WidgetKeys.cartPrincipalLabel),
         matching: find.text(text),
       ),
       findsOneWidget,

@@ -28,6 +28,9 @@ class _MaterialDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: WidgetKeys.cartItemProductTile(
+        cartItem.materialNumber.displayMatNo,
+      ),
       padding: const EdgeInsets.all(8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,6 +101,7 @@ class _MaterialDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
               cartItem.materialDescription,
+              key: WidgetKeys.cartItemProductMaterialDescription,
               style: Theme.of(context)
                   .textTheme
                   .labelMedium
@@ -106,6 +110,7 @@ class _MaterialDetails extends StatelessWidget {
           ),
           Text(
             cartItem.principalData.principalName.getOrDefaultValue(''),
+            key: WidgetKeys.cartItemProductPrincipalName,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontSize: 10.0,
                   color: ZPColors.extraLightGrey4,
@@ -115,6 +120,7 @@ class _MaterialDetails extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Text(
               'Qty: ${cartItem.quantity.getOrDefaultValue(0)}',
+              key: WidgetKeys.cartItemProductQty,
               style: Theme.of(context)
                   .textTheme
                   .bodySmall

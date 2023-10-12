@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -39,6 +40,7 @@ class OrderSuccessPage extends StatelessWidget {
       key: WidgetKeys.orderSuccess,
       appBar: AppBar(
         leading: IconButton(
+          key: WidgetKeys.closeButton,
           onPressed: () {
             context.router.popUntilRouteWithPath('main');
           },
@@ -80,6 +82,7 @@ class _BodyContent extends StatelessWidget {
                 key: WidgetKeys.loaderImage,
               )
             : ListView(
+                key: WidgetKeys.scrollList,
                 shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 children: [

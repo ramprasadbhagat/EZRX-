@@ -75,6 +75,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         centerTitle: false,
         titleSpacing: 0,
         leading: IconButton(
+          key: WidgetKeys.closeButton,
           icon: const Icon(
             Icons.close,
           ),
@@ -84,6 +85,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         ),
       ),
       body: CustomScrollView(
+        key: WidgetKeys.checkoutScrollList,
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
@@ -146,12 +148,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
             contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
             title: Text(
               '${cartState.totalItems} ${context.tr('items')}',
+              key: WidgetKeys.checkoutStickyTotalQty,
               style: Theme.of(context).textTheme.titleSmall,
             ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 PriceComponent(
+                  key: WidgetKeys.checkoutStickyGrandTotal,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartState.grandTotal.toString(),
@@ -281,6 +285,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       useSafeArea: true,
       builder: (_) {
         return Wrap(
+          key: WidgetKeys.orderPriceSummarySheet,
           children: [
             Padding(
               padding: const EdgeInsets.all(20),
@@ -291,6 +296,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
+                      key: WidgetKeys.closeButton,
                       onPressed: () => context.router.pop(),
                       child: Text(
                         context.tr('Close'),
@@ -321,6 +327,8 @@ class _ManufactureScrollList extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
+          final item = cartState.cartProducts[index];
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -332,17 +340,25 @@ class _ManufactureScrollList extends StatelessWidget {
                               .principalData.principalName
                               .getValue()
                   ? _TitleScrollList(
-                      cartProduct: cartState.cartProducts[index].materialInfo,
+                      cartProduct: item.materialInfo,
                     )
                   : const SizedBox.shrink(),
-              cartState.cartProducts[index].materialInfo.type.typeBundle
-                  ? CheckoutBundleItem(cartItem: cartState.cartProducts[index])
+              item.materialInfo.type.typeBundle
+                  ? CheckoutBundleItem(
+                      key: WidgetKeys.cartItemBundleTile(
+                        item.bundle.bundleCode,
+                      ),
+                      cartItem: item,
+                    )
                   : CheckoutProductItem(
-                      cartItem: cartState.cartProducts[index],
+                      key: WidgetKeys.cartItemProductTile(
+                        item.materialInfo.materialNumber.displayMatNo,
+                      ),
+                      cartItem: item,
                     ),
-              if (cartState.cartProducts[index].addedBonusList.isNotEmpty)
+              if (item.addedBonusList.isNotEmpty)
                 Column(
-                  children: cartState.cartProducts[index].addedBonusList
+                  children: item.addedBonusList
                       .map(
                         (e) => CheckoutOfferBonusItem(
                           bonusItem: e,
@@ -350,9 +366,9 @@ class _ManufactureScrollList extends StatelessWidget {
                       )
                       .toList(),
                 ),
-              if (cartState.cartProducts[index].bonusSampleItems.isNotEmpty)
+              if (item.bonusSampleItems.isNotEmpty)
                 Column(
-                  children: cartState.cartProducts[index].bonusSampleItems
+                  children: item.bonusSampleItems
                       .map(
                         (e) => CheckoutProductBonusItem(
                           bonusItem: e,
@@ -380,6 +396,7 @@ class _TitleScrollList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Text(
         cartProduct.principalData.principalName.getValue(),
+        key: WidgetKeys.cartPrincipalLabel,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
               color: ZPColors.neutralsBlack,
             ),
@@ -408,6 +425,7 @@ class _OrderSummary extends StatelessWidget {
         ),
         const SizedBox(height: 24.0),
         Row(
+          key: WidgetKeys.checkoutSummarySubTotal,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -458,6 +476,7 @@ class _OrderSummary extends StatelessWidget {
         ],
         const SizedBox(height: 8.0),
         Row(
+          key: WidgetKeys.checkoutSummaryStampDuty,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -475,6 +494,7 @@ class _OrderSummary extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         Column(
+          key: WidgetKeys.checkoutSummarySmallOrderFee,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
@@ -513,6 +533,7 @@ class _OrderSummary extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         Row(
+          key: WidgetKeys.checkoutSummaryGrandTotal,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -530,6 +551,7 @@ class _OrderSummary extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         Row(
+          key: WidgetKeys.checkoutSummaryTotalSaving,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -559,6 +581,7 @@ class _TotalItems extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Text(
         '${context.tr('Your items ')}(${context.read<CartBloc>().state.totalItems})',
+        key: WidgetKeys.checkoutItemsTotalQty,
         style: Theme.of(context)
             .textTheme
             .labelLarge

@@ -23,11 +23,13 @@ class _TotalQtySection extends StatelessWidget {
                       bundleCode: cartProduct.bundle.bundleCode,
                     )
                     .toString(),
+            key: WidgetKeys.cartItemBundleQty,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),
           ),
           PriceComponent(
+            key: WidgetKeys.cartItemBundleTotalPrice,
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,
             price: context

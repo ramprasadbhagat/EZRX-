@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/order_tag.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -151,10 +152,12 @@ class _ProductDetails extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
               cartItem.materialInfo.materialDescription,
+              key: WidgetKeys.cartItemProductMaterialDescription,
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
           Row(
+            key: WidgetKeys.cartItemProductUnitPrice,
             children: [
               if (cartItem.displayCutOffListPrice)
                 PriceComponent(
@@ -173,6 +176,7 @@ class _ProductDetails extends StatelessWidget {
           if (cartItem.price.isCounterOfferRequested)
             Text(
               'Requested counter offer'.tr(),
+              key: WidgetKeys.cartItemProductCounterOfferLabel,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontStyle: FontStyle.italic,
                     color: ZPColors.extraLightGrey4,
@@ -197,11 +201,13 @@ class _QuantityAndPrice extends StatelessWidget {
         children: [
           Text(
             'Qty: ${cartItem.quantity}',
+            key: WidgetKeys.cartItemProductQty,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),
           ),
           Column(
+            key: WidgetKeys.cartItemProductTotalPrice,
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [

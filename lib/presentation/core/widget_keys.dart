@@ -469,8 +469,12 @@ class WidgetKeys {
       Key('cartItemProductMaterialDescription');
   static const Key cartItemProductPrincipalName =
       Key('cartItemProductPrincipalName');
+  static const Key cartPrincipalLabel = Key('cartItemPrincipalLabel');
+  static const Key cartItemProductQty = Key('cartItemProductQty');
   static const Key cartItemProductUnitPrice = Key('cartItemProductUnitPrice');
   static const Key cartItemProductTotalPrice = Key('cartItemProductTotalPrice');
+  static const Key cartItemProductCounterOfferLabel =
+      Key('cartItemProductCounterOfferLabel');
   static Key cartItemBundleTile(String bundleNumber) =>
       Key('cartItemBundleTile$bundleNumber');
   static const Key cartItemBundleNumber = Key('cartItemBundleNumber');
@@ -528,6 +532,20 @@ class WidgetKeys {
   static const Key poAttachmentPhotoUploadButton =
       Key('poAttachmentPhotoUploadButton');
   static const Key poAttachmentUploadDialog = Key('poAttachmentUploadDialog');
+  static const Key checkoutScrollList = Key('checkoutScrollList');
+  static const Key checkoutDeliveryArrowButton =
+      Key('checkoutDeliveryArrowButton');
+  static const Key checkoutSummarySubTotal = Key('checkoutSummarySubTotal');
+  static const Key checkoutSummaryStampDuty = Key('checkoutSummaryStampDuty');
+  static const Key checkoutSummarySmallOrderFee =
+      Key('checkoutSummarySmallOrderFee');
+  static const Key checkoutSummaryGrandTotal = Key('checkoutSummaryGrandTotal');
+  static const Key checkoutSummaryTotalSaving =
+      Key('checkoutSummaryTotalSaving');
+  static const Key checkoutItemsTotalQty = Key('checkoutItemsTotalQty');
+  static const Key checkoutStickyGrandTotal = Key('checkoutStickyGrandTotal');
+  static const Key checkoutStickyTotalQty = Key('checkoutStickyTotalQty');
+  static const Key orderPriceSummarySheet = Key('orderPriceSummarySheet');
 
   //============================================================
   //  Material List
@@ -580,7 +598,24 @@ class WidgetKeys {
   static const Key materialDescription = Key('materialDescription');
   static const Key orderPriceLoading = Key('priceLoading');
   static const Key startBrowsingViewByItem = Key('startBrowsingViewByItem');
+
+  //============================================================
+  //  Order success
+  //============================================================
   static const Key orderSuccess = Key('orderSuccessKey');
+  static const Key orderSuccessMessage = Key('orderSuccessMessage');
+  static const Key orderSuccessOrderId = Key('orderSuccessOrderId');
+  static const Key orderSuccessOrderSummarySection =
+      Key('orderSuccessOrderSummarySection');
+  static const Key orderSuccessItemTotalQty = Key('orderSuccessItemTotalQty');
+  static const Key orderSuccessItemsSection = Key('orderSuccessItemsSection');
+  static const Key orderSuccessSubTotal = Key('orderSuccessSubTotal');
+  static const Key orderSuccessGrandTotal = Key('orderSuccessGrandTotal');
+  static Key orderSuccessItem(int index) => Key('orderSuccessItem$index');
+  static const Key orderSuccessItemQty = Key('orderSuccessItemQty');
+  static const Key orderSuccessItemUnitPrice = Key('orderSuccessItemUnitPrice');
+  static const Key orderSuccessItemTotalPrice =
+      Key('orderSuccessItemTotalPrice');
 
   //============================================================
   //  Order History

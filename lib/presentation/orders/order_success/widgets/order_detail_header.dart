@@ -15,6 +15,7 @@ class _OrderDetailHeader extends StatelessWidget {
           tileColor: ZPColors.primary,
           title: Text(
             '${'Order'.tr()} #${state.orderHistoryDetails.orderNumber.getOrDefaultValue('')}',
+            key: WidgetKeys.orderSuccessOrderId,
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: ZPColors.white,
                 ),

@@ -6,6 +6,7 @@ class _OrderSuccessMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.orderSuccessMessage,
       children: [
         Icon(
           Icons.check_circle,

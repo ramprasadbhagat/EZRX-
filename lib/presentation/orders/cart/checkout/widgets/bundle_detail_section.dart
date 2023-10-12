@@ -27,6 +27,7 @@ class _BundleDetailsSection extends StatelessWidget {
           ),
           Text(
             cartItem.bundle.bundleName.getOrDefaultValue(''),
+            key: WidgetKeys.cartItemBundleName,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -55,6 +56,7 @@ class _BundleDetailsSection extends StatelessWidget {
           ),
           Text(
             '${context.tr('Purchase')} ${currentBundleOffer.quantity} ${context.tr('or more for')} ${currentBundleOffer.type.getValue()} ${currentBundleOffer.rate} ${context.tr('per item')}',
+            key: WidgetKeys.cartItemBundleRate,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
