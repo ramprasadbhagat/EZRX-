@@ -16,6 +16,7 @@ class FailureHandler {
             const ApiFailure.invalidEmailAndPasswordCombination(),
         accountLocked: (_) => const ApiFailure.accountLocked(),
         accountExpired: (_) => const ApiFailure.accountExpired(),
+        invalidUserName: (_) => const ApiFailure.userNameNotFound(),
       );
     } else if (error is UserException) {
       return error.map(

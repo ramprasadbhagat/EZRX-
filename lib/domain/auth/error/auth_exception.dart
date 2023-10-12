@@ -8,4 +8,5 @@ class AuthException with _$AuthException {
       _InvalidEmailAndPasswordCombination;
   const factory AuthException.accountLocked() = _AccountLocked;
   const factory AuthException.accountExpired() = _AccountExpired;
+  const factory AuthException.invalidUserName() = _InvalidUserName;
 }

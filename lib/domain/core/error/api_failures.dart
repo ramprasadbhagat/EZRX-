@@ -57,6 +57,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.cameraPermissionFailed() = _CameraPermissionFailed;
 
   const factory ApiFailure.aboutUsFail() = _AboutUsFail;
+  const factory ApiFailure.userNameNotFound() = _UserNameNotFound;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -101,5 +102,6 @@ extension ApiFailureExt on ApiFailure {
             'Unable to fetch Material ${scannedProduct.productNumber}',
         cameraPermissionFailed: (_) => 'Camera Permission Denied',
         aboutUsFail: (_) => 'Unable to load About us',
+        userNameNotFound: (_) => 'Incorrect username',
       );
 }

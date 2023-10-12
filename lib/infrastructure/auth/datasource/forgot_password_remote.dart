@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/forgot_password.dart';
+import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
@@ -51,7 +52,9 @@ class ForgotPasswordRemoteDataSource {
 
   void _exceptionChecker({required Response<dynamic> res}) {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
-      throw ServerException(message: res.data['errors'][0]['message']);
+      res.data['errors'][0]['message'] == 'Invalid username or password'
+          ? throw const AuthException.invalidUserName()
+          : throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(
         code: res.statusCode ?? 0,

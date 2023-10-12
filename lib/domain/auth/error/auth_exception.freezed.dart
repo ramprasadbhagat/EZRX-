@@ -21,6 +21,7 @@ mixin _$AuthException {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$AuthException {
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$AuthException {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -44,6 +47,7 @@ mixin _$AuthException {
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,6 +56,7 @@ mixin _$AuthException {
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +65,7 @@ mixin _$AuthException {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,6 +135,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -139,6 +146,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -149,6 +157,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -164,6 +173,7 @@ class _$_InvalidEmailAndPasswordCombination
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -175,6 +185,7 @@ class _$_InvalidEmailAndPasswordCombination
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -186,6 +197,7 @@ class _$_InvalidEmailAndPasswordCombination
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -241,6 +253,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
   }) {
     return accountLocked();
   }
@@ -251,6 +264,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
   }) {
     return accountLocked?.call();
   }
@@ -261,6 +275,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -276,6 +291,7 @@ class _$_AccountLocked implements _AccountLocked {
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
   }) {
     return accountLocked(this);
   }
@@ -287,6 +303,7 @@ class _$_AccountLocked implements _AccountLocked {
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
   }) {
     return accountLocked?.call(this);
   }
@@ -298,6 +315,7 @@ class _$_AccountLocked implements _AccountLocked {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -352,6 +370,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
   }) {
     return accountExpired();
   }
@@ -362,6 +381,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? invalidEmailAndPasswordCombination,
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
   }) {
     return accountExpired?.call();
   }
@@ -372,6 +392,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -387,6 +408,7 @@ class _$_AccountExpired implements _AccountExpired {
         invalidEmailAndPasswordCombination,
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
   }) {
     return accountExpired(this);
   }
@@ -398,6 +420,7 @@ class _$_AccountExpired implements _AccountExpired {
         invalidEmailAndPasswordCombination,
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
   }) {
     return accountExpired?.call(this);
   }
@@ -409,6 +432,7 @@ class _$_AccountExpired implements _AccountExpired {
         invalidEmailAndPasswordCombination,
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -420,4 +444,121 @@ class _$_AccountExpired implements _AccountExpired {
 
 abstract class _AccountExpired implements AuthException {
   const factory _AccountExpired() = _$_AccountExpired;
+}
+
+/// @nodoc
+abstract class _$$_InvalidUserNameCopyWith<$Res> {
+  factory _$$_InvalidUserNameCopyWith(
+          _$_InvalidUserName value, $Res Function(_$_InvalidUserName) then) =
+      __$$_InvalidUserNameCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_InvalidUserNameCopyWithImpl<$Res>
+    extends _$AuthExceptionCopyWithImpl<$Res, _$_InvalidUserName>
+    implements _$$_InvalidUserNameCopyWith<$Res> {
+  __$$_InvalidUserNameCopyWithImpl(
+      _$_InvalidUserName _value, $Res Function(_$_InvalidUserName) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_InvalidUserName implements _InvalidUserName {
+  const _$_InvalidUserName();
+
+  @override
+  String toString() {
+    return 'AuthException.invalidUserName()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_InvalidUserName);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
+  }) {
+    return invalidUserName();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
+  }) {
+    return invalidUserName?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
+    required TResult orElse(),
+  }) {
+    if (invalidUserName != null) {
+      return invalidUserName();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
+  }) {
+    return invalidUserName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
+  }) {
+    return invalidUserName?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
+    required TResult orElse(),
+  }) {
+    if (invalidUserName != null) {
+      return invalidUserName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InvalidUserName implements AuthException {
+  const factory _InvalidUserName() = _$_InvalidUserName;
 }
