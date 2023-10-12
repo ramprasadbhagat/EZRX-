@@ -56,7 +56,8 @@ class _BodyContent extends StatelessWidget {
     return BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
       buildWhen: (previous, current) =>
           previous.orderHistoryList.orderHistoryItems !=
-          current.orderHistoryList.orderHistoryItems,
+              current.orderHistoryList.orderHistoryItems ||
+          previous.isFetching != current.isFetching,
       builder: (context, state) {
         return state.isFetching ||
                 state.orderHistoryList.orderHistoryItems.isNotEmpty
