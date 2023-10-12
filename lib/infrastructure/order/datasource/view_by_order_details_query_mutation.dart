@@ -56,7 +56,10 @@ class ViewByOrderDetailsQueryMutation {
       SpecialInstructions
       PaymentMethod
       InvoiceNumber
-      PaymentTerm
+      PaymentTerm {
+          PaymentTermCode
+          PaymentTermDescription
+        }
       ItmCount
       HasPOAttachment
       ItmDescription
