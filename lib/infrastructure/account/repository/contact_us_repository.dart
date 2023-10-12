@@ -3,7 +3,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/contact_us.dart';
 import 'package:ezrxmobile/domain/account/repository/i_contact_us_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/contact_us_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/contact_us_remote.dart';
@@ -32,8 +31,8 @@ class ContactUsRepository implements IContactUsRepository {
         final isSuccess = await localDataSource.submit();
 
         return Right(isSuccess);
-      } on MockException catch (e) {
-        return Left(ApiFailure.other(e.message));
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
       }
     }
     try {
