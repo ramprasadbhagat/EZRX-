@@ -415,5 +415,17 @@ void main() {
       );
       expect(eligibilityState.displayInvalidItemsBanner, true);
     });
+
+    test(' => cartContainsSuspendedPrincipal should return correct value', () {
+      // cartContainsSuspendedMaterials is false
+      expect(initializedState.cartContainsSuspendedPrincipal, false);
+
+      // cartContainsSuspendedMaterials is true
+      final modifiedState = initializedState.copyWith(
+        showErrorMessage: true,
+        cartItems: [mockMaterialsCartItems.last],
+      );
+      expect(modifiedState.cartContainsSuspendedPrincipal, true);
+    });
   });
 }
