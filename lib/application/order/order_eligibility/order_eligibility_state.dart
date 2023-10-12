@@ -88,7 +88,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
           ? containsRegularMaterials
           : true;
 
-  bool get displayMovWarning => !isMinOrderValuePassed && showErrorMessage;
+  bool get displayMovWarning =>
+      !isMinOrderValuePassed && showErrorMessage && !isAccountSuspended;
 
   bool get displayOOSWarning =>
       !isOOSAllowedIfPresentInCart && showErrorMessage;

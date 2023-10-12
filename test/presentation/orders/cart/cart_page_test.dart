@@ -2948,6 +2948,85 @@ void main() {
           ),
         ).called(1);
       });
+
+      testWidgets('Test MOV warning visibility when account is suspended',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('1234'),
+                ),
+              )
+            ],
+          ),
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('1234'),
+                ),
+              )
+            ],
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              status: Status('01'),
+            ),
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              currency: Currency('MYR'),
+              minOrderAmount: '100',
+            ),
+          ),
+        );
+
+        final expectedStates = [
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [
+              PriceAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('1234'),
+                ),
+              )
+            ],
+            customerCodeInfo: CustomerCodeInfo.empty().copyWith(
+              status: Status('01'),
+            ),
+            showErrorMessage: true,
+          ),
+        ];
+
+        whenListen(
+          orderEligibilityBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
+        await tester.pumpAndSettle();
+
+        await tester.pumpWidget(getWidget());
+
+        await tester.pump();
+
+        final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+        expect(checkoutButton, findsOneWidget);
+        await tester.tap(checkoutButton);
+        await tester.pump();
+        verify(
+          () => orderEligibilityBlocMock
+              .add(const OrderEligibilityEvent.validateOrderEligibility()),
+        ).called(1);
+
+        final movWarning = find.text(
+          'Please ensure that the order value satisfies the minimum order value of MYR 100.00',
+        );
+
+        expect(movWarning, findsNothing);
+      });
     },
   );
 }
