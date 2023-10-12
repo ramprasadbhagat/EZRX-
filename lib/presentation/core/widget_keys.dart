@@ -112,6 +112,7 @@ class WidgetKeys {
   static const Key paymentsTile = Key('paymentsTile');
   static const Key returnsTile = Key('returnsTile');
   static const Key securityTile = Key('securityTile');
+  static const Key contactUsTile = Key('contactUsTile');
   static const Key proxyLoginUserNameField = Key('proxyLoginUserNameField');
   static const Key proxyLoginButton = Key('proxyLoginButton');
   static const Key proxyLoginSheet = Key('proxyLoginSheet');
@@ -786,6 +787,7 @@ class WidgetKeys {
   //  Contact Us Page
   //============================================================
   static const Key userNameKey = Key('userNameKey');
+  static const Key timeSupport = Key('timeSupport');
   static const Key emailKey = Key('emailKey');
   static const Key phoneNumberKey = Key('phoneNumberKey');
   static const Key contactMessageKey = Key('contactMessageKey');

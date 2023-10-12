@@ -258,4 +258,12 @@ class CommonRobot {
     await tester.tap(find.byType(BackButton));
     await tester.pumpAndSettle();
   }
+
+  Future<void> scrollEnsureFinderVisible(Finder finder) async {
+    await tester.dragUntilVisible(
+      finder,
+      find.byKey(WidgetKeys.scrollList),
+      const Offset(0.0, -200),
+    );
+  }
 }

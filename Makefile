@@ -108,6 +108,7 @@ run_my_client_Integration_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/returns_by_request/${CLIENT_TEST_FILE}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/new_return/step1/${CLIENT_TEST_FILE}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/notification/${CLIENT_TEST_FILE}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/more/contact_us/${CLIENT_TEST_FILE}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/account_summary/account_invoice/${CLIENT_TEST_FILE}
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_PAYMENT_HOME}
 run_my_external_Integration_test:

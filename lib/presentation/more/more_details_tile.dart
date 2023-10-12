@@ -102,6 +102,7 @@ class MoreDetailsTile {
         icon: const Icon(
           Icons.mail_outline,
           color: ZPColors.greenIconColor,
+          key: WidgetKeys.contactUsTile,
         ),
         onTap: () {
           context.read<ContactUsBloc>().add(const ContactUsEvent.initialized());
