@@ -49,6 +49,7 @@ void main() {
         final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
+          'shipToCode': 'fake-ship-to-code',
           'request': [],
         };
         final res = json.decode(
@@ -74,6 +75,7 @@ void main() {
           customerCode: 'fake-customer-code',
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
+          shipToCode: 'fake-ship-to-code',
         );
         final priceData = res['data']['price'];
 
@@ -86,11 +88,13 @@ void main() {
       });
 
       test('Get Material Price test', () async {
-        final variables = {
+         final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
+          'shipToCode': 'fake-ship-to-code',
           'request': {
             'MaterialNumber': 'fake-number',
+            'salesDeal': [],
           },
         };
         final res = json.decode(
@@ -116,6 +120,8 @@ void main() {
           customerCode: 'fake-customer-code',
           materialNumber: 'fake-number',
           salesOrgCode: 'fake-sales-org',
+          shipToCode: 'fake-ship-to-code',
+          salesDeal: [],
         );
         final priceData = res['data']['price'][0];
 
@@ -126,9 +132,10 @@ void main() {
       });
 
       test('Statuscode not equal to 200', () async {
-        final variables = {
+         final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
+          'shipToCode': 'fake-ship-to-code',
           'request': [],
         };
 
@@ -151,6 +158,7 @@ void main() {
           customerCode: 'fake-customer-code',
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
+          shipToCode: 'fake-ship-to-code',
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -159,11 +167,11 @@ void main() {
       });
 
       test('response with errors', () async {
-        final variables = {
+          final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
-          'shipToCode': 'fake-ship-code',
-          'request': {
+          'shipToCode': 'fake-ship-to-code',
+           'request': {
             'MaterialNumber': 'fake-number',
             'salesDeal': [],
           },
@@ -193,6 +201,7 @@ void main() {
           customerCode: 'fake-customer-code',
           materialNumbers: [],
           salesOrgCode: 'fake-sales-org',
+          shipToCode: 'fake-ship-to-code',
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());

@@ -15,6 +15,7 @@ part 'package:ezrxmobile/presentation/products/product_filter/widgets/product_fi
 part 'package:ezrxmobile/presentation/products/product_filter/widgets/product_sort_options.dart';
 part 'package:ezrxmobile/presentation/products/product_filter/widgets/product_filter_apply_button.dart';
 part 'package:ezrxmobile/presentation/products/product_filter/widgets/product_filter_reset_button.dart';
+part 'package:ezrxmobile/presentation/products/product_filter/widgets/product_filter_list_tile_theme.dart';
 
 class ProductFilterPage extends StatefulWidget {
   const ProductFilterPage({

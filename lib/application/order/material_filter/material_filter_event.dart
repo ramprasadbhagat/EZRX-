@@ -33,4 +33,5 @@ enum MaterialFilterType {
   countryList,
   manufactured,
   brand,
+  comboOffers,
 }

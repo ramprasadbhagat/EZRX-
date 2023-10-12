@@ -24,6 +24,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dar
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_product_request_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 
@@ -571,29 +572,29 @@ class CartRepository implements ICartRepository {
         );
       }
     }
-    try {
-      final queryMaterialNumbers =
-          materialNumbers.map((e) => e.getOrCrash()).toList();
-      final additionInfoData = <MaterialNumber, ProductMetaData>{};
-      await Future.wait(
-        queryMaterialNumbers.map((e) async {
-          final products =
-              await orderHistoryRemoteDataSource.getItemProductDetails(
-            materialIDs: [e],
-          );
+    // try {
+    final queryMaterialNumbers =
+        materialNumbers.map((e) => e.getOrDefaultValue('')).toList();
+    final additionInfoData = <MaterialNumber, ProductMetaData>{};
+    await Future.wait(
+      queryMaterialNumbers.map((e) async {
+        final products =
+            await orderHistoryRemoteDataSource.getItemProductDetails(
+          materialIDs: [e],
+        );
 
-          for (final product in products.productImages) {
-            additionInfoData.addAll({product.materialNumber: products});
-          }
-        }),
-      );
+        for (final product in products.productImages) {
+          additionInfoData.addAll({product.materialNumber: products});
+        }
+      }),
+    );
 
-      return Right(additionInfoData);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
+    return Right(additionInfoData);
+    // } catch (e) {
+    //   return Left(
+    //     FailureHandler.handleFailure(e),
+    //   );
+    // }
   }
 
   @override
@@ -634,6 +635,45 @@ class CartRepository implements ICartRepository {
       return Left(
         FailureHandler.handleFailure(e),
       );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, List<PriceAggregate>>>
+      upsertCartItemsWithComboOffers({
+    required List<PriceAggregate> products,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final productList = await cartLocalDataSource.upsertCartItems();
+
+        return Right(productList);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final productList =
+          await cartRemoteDataSource.upsertCartItemsWithComboOffer(
+        requestParams: products.comboMaterialItemList
+            .map(
+              (productUpsertRequest) => ComboProductRequestDto.fromDomain(
+                comboProductRequest: productUpsertRequest,
+                salesOrg: salesOrganisation.salesOrg.getOrDefaultValue(''),
+                customerCode: customerCodeInfo.customerCodeSoldTo,
+                shipToId: shipToInfo.shipToCustomerCode,
+              ).toMap(),
+            )
+            .toList(),
+      );
+
+      return Right(productList);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

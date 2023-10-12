@@ -2091,7 +2091,7 @@ void setupLocator() {
   );
 
   locator.registerFactory(
-    () => ComboDealMaterialDetailBloc(),
+    () => ComboDealMaterialDetailBloc(locator<ProductDetailRepository>()),
   );
 
   locator.registerFactory(

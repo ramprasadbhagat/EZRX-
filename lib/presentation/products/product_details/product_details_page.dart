@@ -27,6 +27,7 @@ import 'package:ezrxmobile/presentation/products/product_details/widget/material
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/similar_product.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/stock_info.dart';
+import 'package:ezrxmobile/presentation/products/widgets/combo_offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
@@ -34,6 +35,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+
+import 'package:ezrxmobile/presentation/products/product_details/widget/combo_offers_product.dart';
 
 part 'widget/product_image_section.dart';
 
@@ -185,6 +188,10 @@ class _BodyContent extends StatelessWidget {
               materialInfo: state.productDetailAggregate.materialInfo,
               iconSize: 20,
             ),
+            ComboOfferLabel(
+              materialInfo: state.productDetailAggregate.materialInfo,
+              iconSize: 20,
+            ),
             Padding(
               padding: const EdgeInsets.only(
                 left: 16,
@@ -231,6 +238,7 @@ class _BodyContent extends StatelessWidget {
               indent: 0,
               thickness: 0.5,
             ),
+            ComboOffersProduct(materialNumber: materialInfo.materialNumber),
             AvailableOffer(materialNumber: materialInfo.materialNumber),
             const MaterialInformation(),
             const MaterialDetailsToggle(),

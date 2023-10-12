@@ -77,6 +77,7 @@ void main() {
         tenderContract: emptyTenderContract,
         comboDeal: emptyComboDeal,
         bonusSampleItems: [],
+        comboMaterials: [],
       );
 
       expect(priceAggregate.price, emptyPrice);

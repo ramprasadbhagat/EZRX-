@@ -80,7 +80,13 @@ class MaterialListRepository implements IMaterialListRepository {
             .map((e) => e.code)
             .toList(),
         searchKey: '',
+        salesDeal: selectedMaterialFilter.comboOffers
+            ? customerCodeInfo.salesDeals
+                .map((e) => e.getOrDefaultValue(''))
+                .toList()
+            : [],
       );
+
       final stockInfoList = await getStockInfoList(
         materials: materialListData.products,
         customerCodeInfo: customerCodeInfo,
@@ -92,30 +98,43 @@ class MaterialListRepository implements IMaterialListRepository {
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
       );
-      final materialListDataWithStock = materialListData.products.map(
-        (MaterialInfo materialInfo) {
-          final materialStockInfo = getMaterialStockInfo(
-            stockInfoList: stockInfoList,
-            materialInfo: materialInfo,
-          );
-          final upDatedMaterialInfo =
-              bundleData.getOrElse(() => {}).putIfAbsent(
-                    materialInfo.materialNumber,
-                    () => materialInfo,
-                  );
-
-          return upDatedMaterialInfo.copyWithStock(
-            stockInfos: materialStockInfo.stockInfos,
-          );
-        },
-      ).toList();
 
       return Right(
-        materialListData.copyWith(products: materialListDataWithStock),
+        materialListData.copyWith(
+          products: _mapMaterialListDataWithStock(
+            materialListData,
+            stockInfoList,
+            bundleData,
+          ),
+        ),
       );
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
+  }
+
+  List<MaterialInfo> _mapMaterialListDataWithStock(
+    MaterialResponse materialListData,
+    Either<ApiFailure, List<MaterialStockInfo>> stockInfoList,
+    Either<ApiFailure, Map<MaterialNumber, MaterialInfo>> bundleData,
+  ) {
+    
+    return materialListData.products.map(
+      (MaterialInfo materialInfo) {
+        final materialStockInfo = getMaterialStockInfo(
+          stockInfoList: stockInfoList,
+          materialInfo: materialInfo,
+        );
+        final upDatedMaterialInfo = bundleData.getOrElse(() => {}).putIfAbsent(
+              materialInfo.materialNumber,
+              () => materialInfo,
+            );
+
+        return upDatedMaterialInfo.copyWithStock(
+          stockInfos: materialStockInfo.stockInfos,
+        );
+      },
+    ).toList();
   }
 
   MaterialStockInfo getMaterialStockInfo({
@@ -322,6 +341,7 @@ class MaterialListRepository implements IMaterialListRepository {
         orderByName: 'asc',
         principalCode: principalData.principalCode.getOrCrash(),
         searchKey: searchKey.getOrCrash(),
+        salesDeal: [],
       );
 
       return Right(materialListData);

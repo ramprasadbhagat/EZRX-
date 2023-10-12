@@ -12,15 +12,21 @@ class ProductTag extends StatelessWidget {
   final TextStyle? labelStyle;
   final Color backgroundColor;
   final Color textColor;
+  final Color? iconColor;
+  final EdgeInsets? margin;
+  final IconData iconData;
   const ProductTag._({
     Key? key,
     required this.labelTag,
     this.hasIcon = false,
     this.assetIconSvg = '',
+    this.iconData = Icons.local_offer_outlined,
     this.isCovidTag = false,
     this.labelStyle,
     required this.backgroundColor,
     required this.textColor,
+    this.iconColor,
+    this.margin,
   }) : super(key: key);
 
   factory ProductTag.bundleOffer({TextStyle? labelStyle}) => ProductTag._(
@@ -59,7 +65,16 @@ class ProductTag extends StatelessWidget {
         hasIcon: true,
         labelStyle: labelStyle,
       );
-
+  factory ProductTag.comboOffer({TextStyle? labelStyle}) => ProductTag._(
+        labelTag: 'Combo offer',
+        backgroundColor: ZPColors.skyBlueColor,
+        iconData: Icons.discount_outlined,
+        hasIcon: true,
+        textColor: ZPColors.white,
+        labelStyle: labelStyle,
+        iconColor: ZPColors.white,
+        margin: EdgeInsets.zero,
+      );
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -71,7 +86,7 @@ class ProductTag extends StatelessWidget {
               right: 4.0,
             )
           : const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-      margin: const EdgeInsets.only(top: 8),
+      margin: margin ?? const EdgeInsets.only(top: 8),
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: isCovidTag
@@ -92,9 +107,10 @@ class ProductTag extends StatelessWidget {
                     assetIconSvg,
                     height: 18,
                     fit: BoxFit.fill,
+                    color: iconColor,
                   )
-                : const Icon(
-                    Icons.local_offer_outlined,
+                : Icon(
+                    iconData,
                     size: 20,
                     color: ZPColors.white,
                   ),

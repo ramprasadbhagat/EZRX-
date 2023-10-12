@@ -45,6 +45,65 @@ class CartQueryMutation {
     warehouseStorageCondition
     ParentID
   }
+  fragment ComboMaterialsFields on Item {
+  Type
+  ProductID
+  ItemSource
+  Quantity
+  CreatedAt
+  UpdatedAt
+  principalCode
+  principalName
+  materialNumber
+  materialDescription
+  therapeuticClass
+  itemBrand
+  governmentMaterialCode
+  defaultMaterialDescription
+  oldMaterialCode
+  materialGroup4
+  materialGroup2
+  taxClassification
+  unitOfMeasurement
+  itemRegistrationNumber
+  genericMaterialName
+  language
+  taxM1
+  taxes
+  isSampleMaterial
+  hidePrice
+  hasValidTenderContract
+  hasMandatoryTenderContract
+  isFOCMaterial
+  isFavourite
+  productCount
+  productAddedAt
+  productUpdatedAt
+  minimumQty
+  maximumQty
+  orderedQty
+  remainingQty
+  mov
+  materialType
+  suspensionStatus
+  principalCutoffStatus
+  warehouseStorageCondition
+  ParentID
+  Rate
+  ConditionNumber
+  Mandatory
+  Suffix
+  ListPrice
+  ItemCheck
+  Valid
+  SetNo
+  ComboDealType
+  IsComboEligible
+  FinalIndividualPrice
+  PrimaryMaterialNumber
+  __typename
+}
+
   query Cart(\$language: String) {
   cart(language: \$language) {
     ID
@@ -62,6 +121,18 @@ class CartQueryMutation {
       }
       BundleMaterials {
         ...BundleMaterialsFields
+      }
+      ComboMaterials {
+        ...ComboMaterialsFields
+      }
+      ComboDeals {
+        Eligible
+        FlexibleGroup
+        SalesDeal
+        Category {
+          Type
+          Value
+        }
       }
       CounterOfferPrice
       CounterOfferCurrency
@@ -1045,6 +1116,18 @@ fragment ezrxItemsFields on Item {
   BundleMaterials {
     ...BundleMaterialsFields
   }
+   ComboMaterials {
+        ...ComboMaterialsFields
+      }
+      ComboDeals {
+        Eligible
+        FlexibleGroup
+        SalesDeal
+        Category {
+          Type
+          Value
+        }
+      }
 }
 
 fragment shipToFields on ShipTo {
@@ -1153,6 +1236,64 @@ fragment BundleMaterialsFields on Item {
   principalCutoffStatus
   warehouseStorageCondition
   ParentID
+}
+
+fragment ComboMaterialsFields on Item {
+  Type
+  ProductID
+  ItemSource
+  Quantity
+  CreatedAt
+  UpdatedAt
+  principalCode
+  principalName
+  materialNumber
+  materialDescription
+  therapeuticClass
+  itemBrand
+  governmentMaterialCode
+  defaultMaterialDescription
+  oldMaterialCode
+  materialGroup4
+  materialGroup2
+  taxClassification
+  unitOfMeasurement
+  itemRegistrationNumber
+  genericMaterialName
+  language
+  taxM1
+  taxes
+  isSampleMaterial
+  hidePrice
+  hasValidTenderContract
+  hasMandatoryTenderContract
+  isFOCMaterial
+  isFavourite
+  productCount
+  productAddedAt
+  productUpdatedAt
+  minimumQty
+  maximumQty
+  orderedQty
+  remainingQty
+  mov
+  materialType
+  suspensionStatus
+  principalCutoffStatus
+  warehouseStorageCondition
+  ParentID
+  Rate
+  ConditionNumber
+  Mandatory
+  Suffix
+  ListPrice
+  ItemCheck
+  Valid
+  SetNo
+  ComboDealType
+  IsComboEligible
+  FinalIndividualPrice
+  PrimaryMaterialNumber
 }
 
 mutation UpsertCartItems(\$itemInput: [ItemInput!]) {

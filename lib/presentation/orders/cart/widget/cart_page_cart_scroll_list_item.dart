@@ -16,46 +16,47 @@ class _CartPageScrollListItem extends StatelessWidget {
         context.read<EligibilityBloc>().state.isMYExternalSalesRepUser &&
             item.materialInfo.isPnGPrinciple;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showManufacturerName)
-          _CartPageManufacturerName(
-            key: WidgetKeys.cartItemProductPrincipalName,
-            cartProduct: item.materialInfo,
-          ),
-        item.materialInfo.type.typeBundle
-            ? CartProductBundle(
-                cartItem: item,
-              )
-            : CartProductTile(
-                cartItem: item,
-              ),
-        if (item.displayOfferBonus || isMYPnGSalesRep)
-          Column(
-            children: item.addedBonusList
-                .map(
-                  (e) => CartProductOfferBonus(
-                    bonusItem: e,
-                    cartProduct: item,
-                  ),
-                )
-                .toList(),
-          ),
-        if (item.bonusSampleItems.isNotEmpty)
-          Column(
-            children: item.bonusSampleItems
-                .map(
-                  (e) => CartProductTileBonus(
-            
-                    bonusItem: e,
-                    cartProduct: item,
-                  ),
-                )
-                .toList(),
-          ),
-      ],
-    );
+    return item.materialInfo.type.typeCombo
+        ? CartProductCombo(cartItem: item)
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (showManufacturerName)
+                _CartPageManufacturerName(
+                  key: WidgetKeys.cartItemProductPrincipalName,
+                  cartProduct: item.materialInfo,
+                ),
+              item.materialInfo.type.typeBundle
+                  ? CartProductBundle(
+                      cartItem: item,
+                    )
+                  : CartProductTile(
+                      cartItem: item,
+                    ),
+              if (item.displayOfferBonus || isMYPnGSalesRep)
+                Column(
+                  children: item.addedBonusList
+                      .map(
+                        (e) => CartProductOfferBonus(
+                          bonusItem: e,
+                          cartProduct: item,
+                        ),
+                      )
+                      .toList(),
+                ),
+              if (item.bonusSampleItems.isNotEmpty)
+                Column(
+                  children: item.bonusSampleItems
+                      .map(
+                        (e) => CartProductTileBonus(
+                          bonusItem: e,
+                          cartProduct: item,
+                        ),
+                      )
+                      .toList(),
+                ),
+            ],
+          );
   }
 }
 

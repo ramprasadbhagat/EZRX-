@@ -441,7 +441,7 @@ class _OrderSummary extends StatelessWidget {
                   ),
                   PriceComponent(
                     salesOrgConfig: salesOrgConfig,
-                    price: cartState.totalTax.toString(),
+                    price: cartState.taxMaterial.toString(),
                     type: PriceStyle.summaryPrice,
                   ),
                 ],

@@ -9,7 +9,9 @@ import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.d
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/combo_material_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/bonus_sample_item_dto.dart';
@@ -63,6 +65,11 @@ class CartProductDto with _$CartProductDto {
         required bool isSuspended,
     @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
         required bool isPrincipalSuspended,
+    @Default(PriceComboDealDto.empty)
+    @JsonKey(name: 'comboDeals')
+        PriceComboDealDto comboDeal,
+    @JsonKey(name: 'comboMaterials', defaultValue: [])
+        required List<ComboMaterialItemDto> comboMaterials,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -110,6 +117,8 @@ class CartProductDto with _$CartProductDto {
       hidePrice: cartItemDetails.materialInfo.hidePrice,
       isSuspended: cartItemDetails.materialInfo.isSuspended,
       isPrincipalSuspended: cartItemDetails.materialInfo.isPrincipalSuspended,
+      comboMaterials: [],
+      comboDeal: PriceComboDealDto.empty,
     );
   }
   MaterialInfo get toMaterialInfo {
@@ -155,6 +164,7 @@ class CartProductDto with _$CartProductDto {
       ),
       quantity: quantity,
       bonusSampleItems: bonusMaterials.map((e) => e.toDomain()).toList(),
+      comboMaterials: comboMaterials.map((e) => e.toDomain()).toList(),
     );
   }
 

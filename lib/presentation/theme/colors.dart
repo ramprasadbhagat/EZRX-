@@ -95,6 +95,15 @@ abstract class ZPColors {
   static const Color paleBlueGray = Color.fromRGBO(230, 238, 239, 1);
   static const Color lightSilver = Color.fromRGBO(233, 236, 238, 1);
   static const Color blueAccent = Color.fromRGBO(197, 217, 244, 1);
+  static const Color comboOffersBorder = Color.fromRGBO(183, 233, 228, 1);
+  static const Color comboOffersBg = Color.fromRGBO(232, 248, 246, 1);
+  static const Color comboOffersTagColor = Color.fromRGBO(22, 185, 168, 1);
+  static const Color discountOfferBgColor = Color.fromRGBO(210, 150, 64, 1);
+  static const Color disableQuantityButton = Color.fromRGBO(182, 182, 182, 1);
+  static const Color comboRequirementBorder = Color.fromRGBO(148, 223, 215, 1);
+  static const Color comboRequirementSubTitle = Color.fromRGBO(15, 29, 36, 1);
+  static const Color comboRequirementTitle = Color.fromRGBO(19, 19, 19, 1);
+
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,
     <int, Color>{

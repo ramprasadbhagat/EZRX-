@@ -9,22 +9,11 @@ class CartEvent with _$CartEvent {
     required ShipToInfo shipToInfo,
   }) = _Initialized;
 
-  const factory CartEvent.addComboDealToCart({
-    required List<PriceAggregate> comboDealItems,
-    required bool doNotallowOutOfStockMaterial,
-    @Default(false) bool overrideQty,
-  }) = _AddComboDealToCart;
-
   const factory CartEvent.verifyMaterialDealBonus({
     ///Todo: consider to remove it
     required PriceAggregate item,
     required List<PriceAggregate> items,
   }) = _VerifyMaterialDealBonus;
-
-  const factory CartEvent.addRemarkToCartItem({
-    required CartItem item,
-    required String message,
-  }) = _AddRemarkToCartItem;
 
   const factory CartEvent.addBonusToCartItem({
     required MaterialInfo bonusMaterial,
@@ -36,23 +25,7 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.removeSampleBonusFromCartConfig() =
       _RemoveSampleBonusFromCartConfig;
 
-  const factory CartEvent.addRemarkToBonusItem({
-    required CartItem item,
-    required MaterialItemBonus bonusItem,
-    required String message,
-  }) = _AddRemarkToBonusItem;
-
-  const factory CartEvent.overrideCartItemPrice({
-    required List<Price> overridenPrice,
-    required CartItem cartItem,
-  }) = _OverrideCartItemPrice;
-
   const factory CartEvent.clearCart() = _ClearCart;
-
-  const factory CartEvent.replaceWithOrderItems({
-    required List<CartItem> items,
-    required bool doNotAllowOutOfStockMaterial,
-  }) = _ReplaceWithOrderItems;
 
   const factory CartEvent.updateBatchInCartItem({
     required CartItem item,
@@ -92,4 +65,8 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.removeInvalidProducts({
     required List<MaterialInfo> invalidCartItems,
   }) = _RemoveInvalidProducts;
+
+  const factory CartEvent.upsertCartItemsWithComboOffers({
+    required List<PriceAggregate> priceAggregates,
+  }) = _UpsertCartItemsWithComboOffers;
 }

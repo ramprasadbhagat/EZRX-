@@ -111,7 +111,11 @@ enum PriceStyle {
   summaryPrice,
   grandTotalPrice,
   credits,
-  paymentInProgressPrice
+  paymentInProgressPrice,
+  comboOfferPrice,
+  comboOfferPriceDiscounted,
+  comboSubTotalItemWithTax,
+  comboSubTotalExclTax,
 }
 
 TextStyle _priceStyle(BuildContext context, PriceStyle type) {
@@ -132,25 +136,17 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
           );
     case PriceStyle.taxPrice:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
-            fontWeight: FontWeight.w400,
             fontSize: 12,
             color: ZPColors.darkGray,
           );
     case PriceStyle.summaryPrice:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
-            fontSize: 14,
             color: ZPColors.neutralsBlack,
           );
     case PriceStyle.totalPrice:
-      return Theme.of(context).textTheme.titleSmall!.copyWith(
-            fontWeight: FontWeight.w900,
-            fontSize: 14,
-            color: ZPColors.neutralsBlack,
-          );
     case PriceStyle.credits:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             fontWeight: FontWeight.w900,
-            fontSize: 14,
             color: ZPColors.neutralsBlack,
           );
     case PriceStyle.grandTotalPrice:
@@ -160,6 +156,21 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.bundlePrice:
       return Theme.of(context).textTheme.labelLarge!.copyWith(
             color: ZPColors.neutralsBlack,
+          );
+    case PriceStyle.comboOfferPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: ZPColors.darkerGrey,
+            fontSize: 12,
+            decoration: TextDecoration.lineThrough,
+          );
+    case PriceStyle.comboSubTotalItemWithTax:
+      return Theme.of(context).textTheme.labelSmall!.copyWith(
+            color: ZPColors.darkGray,
+            fontSize: 12,
+          );
+    case PriceStyle.comboSubTotalExclTax:
+      return Theme.of(context).textTheme.titleMedium!.copyWith(
+            color: ZPColors.primary,
           );
     default:
       return Theme.of(context).textTheme.labelSmall!.copyWith(
@@ -185,17 +196,8 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
           );
     case PriceStyle.taxPrice:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
-            fontWeight: FontWeight.w400,
             fontSize: 12,
             color: ZPColors.darkGray,
-          );
-    case PriceStyle.totalPrice:
-      return Theme.of(context).textTheme.titleSmall!.copyWith(
-            color: ZPColors.black,
-          );
-    case PriceStyle.credits:
-      return Theme.of(context).textTheme.titleSmall!.copyWith(
-            color: ZPColors.black,
           );
     case PriceStyle.grandTotalPrice:
       return Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -206,7 +208,27 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
             color: ZPColors.neutralsBlack,
           );
     case PriceStyle.paymentInProgressPrice:
+      return Theme.of(context)
+          .textTheme
+          .labelSmall!
+          .copyWith(color: ZPColors.primary);
+    case PriceStyle.comboOfferPrice:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: ZPColors.darkerGrey,
+            fontSize: 12,
+            decoration: TextDecoration.lineThrough,
+          );
+    case PriceStyle.comboOfferPriceDiscounted:
+      return Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: ZPColors.darkerGrey,
+          );
+    case PriceStyle.comboSubTotalItemWithTax:
       return Theme.of(context).textTheme.labelSmall!.copyWith(
+            color: ZPColors.darkGray,
+            fontSize: 12,
+          );
+    case PriceStyle.comboSubTotalExclTax:
+      return Theme.of(context).textTheme.titleMedium!.copyWith(
             color: ZPColors.primary,
           );
     default:

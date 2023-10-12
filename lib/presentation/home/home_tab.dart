@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
+import 'package:ezrxmobile/presentation/home/combo_offers_section/combo_offers_section.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner.dart';
 import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner.dart';
@@ -84,6 +85,18 @@ class HomeTab extends StatelessWidget {
                   const AccountSuspendedBanner(),
                   const QuickAccessMenuPanel(),
                   const CarouselBanner(),
+                  BlocBuilder<EligibilityBloc, EligibilityState>(
+                    buildWhen: (previous, current) =>
+                        previous.salesOrgConfigs.enableComboDeals !=
+                        current.salesOrgConfigs.enableComboDeals,
+                    builder: (context, state) {
+                      if (state.salesOrgConfigs.enableComboDeals) {
+                        return const ComboOffersSection();
+                      }
+
+                      return const SizedBox.shrink();
+                    },
+                  ),
                   if (state.user.userCanAccessProducts) ...[
                     const ProductsOnOffer(),
                     const BundleSection(),

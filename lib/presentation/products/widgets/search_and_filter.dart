@@ -76,42 +76,7 @@ class SearchAndFilter extends StatelessWidget {
       builder: (_) => const ProductFilterPage(),
     ).then((value) {
       if (value is MaterialFilter) {
-        if (context
-                    .read<MaterialListBloc>()
-                    .state
-                    .selectedMaterialFilter
-                    .isFavourite !=
-                value.isFavourite ||
-            context
-                    .read<MaterialListBloc>()
-                    .state
-                    .selectedMaterialFilter
-                    .bundleOffers !=
-                value.bundleOffers ||
-            context
-                    .read<MaterialListBloc>()
-                    .state
-                    .selectedMaterialFilter
-                    .manufactureListSelected !=
-                value.manufactureListSelected ||
-            context
-                    .read<MaterialListBloc>()
-                    .state
-                    .selectedMaterialFilter
-                    .countryListSelected !=
-                value.countryListSelected ||
-            context
-                    .read<MaterialListBloc>()
-                    .state
-                    .selectedMaterialFilter
-                    .isProductOffer !=
-                value.isProductOffer ||
-            context
-                    .read<MaterialListBloc>()
-                    .state
-                    .selectedMaterialFilter
-                    .sortBy !=
-                value.sortBy) {
+        if (_haveDifferenceFilter(context, value)) {
           context.read<MaterialListBloc>().add(
                 MaterialListEvent.fetch(
                   salesOrganisation:
@@ -127,5 +92,46 @@ class SearchAndFilter extends StatelessWidget {
         }
       }
     });
+  }
+
+  bool _haveDifferenceFilter(BuildContext context, MaterialFilter value) {
+    return context
+                .read<MaterialListBloc>()
+                .state
+                .selectedMaterialFilter
+                .isFavourite !=
+            value.isFavourite ||
+        context
+                .read<MaterialListBloc>()
+                .state
+                .selectedMaterialFilter
+                .bundleOffers !=
+            value.bundleOffers ||
+        context
+                .read<MaterialListBloc>()
+                .state
+                .selectedMaterialFilter
+                .manufactureListSelected !=
+            value.manufactureListSelected ||
+        context
+                .read<MaterialListBloc>()
+                .state
+                .selectedMaterialFilter
+                .countryListSelected !=
+            value.countryListSelected ||
+        context
+                .read<MaterialListBloc>()
+                .state
+                .selectedMaterialFilter
+                .isProductOffer !=
+            value.isProductOffer ||
+        context.read<MaterialListBloc>().state.selectedMaterialFilter.sortBy !=
+            value.sortBy ||
+        context
+                .read<MaterialListBloc>()
+                .state
+                .selectedMaterialFilter
+                .comboOffers !=
+            value.comboOffers;
   }
 }

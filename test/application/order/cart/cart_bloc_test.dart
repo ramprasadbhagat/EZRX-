@@ -19,7 +19,6 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -917,7 +916,8 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: '',
-              language: 'EN',
+              language:
+                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
               materialInfo: priceAggregates.first.materialInfo,
               quantity: 2,
             ),
@@ -987,7 +987,8 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: '',
-              language: 'EN',
+              language:
+                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
               materialInfo: priceAggregates.first.materialInfo,
               quantity: 2,
             ),
@@ -1040,7 +1041,8 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               itemId: '',
-              language: 'EN',
+              language:
+                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
               materialInfo: priceAggregates.first.materialInfo,
               quantity: 2,
             ),
@@ -1094,7 +1096,8 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language: 'EN',
+              language:
+                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
               product: priceAggregates.elementAt(1),
             ),
           ).thenAnswer(
@@ -1142,7 +1145,8 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language: 'EN',
+              language:
+                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
               product: priceAggregates.elementAt(1),
             ),
           ).thenAnswer(
@@ -1180,7 +1184,8 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language: 'EN',
+              language:
+                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
               product: bundleItem.copyWith(
                 bundle: bundleItem.bundle.copyWith(
                   materials: bundleItem.bundle.materials
@@ -1307,7 +1312,8 @@ void main() {
               salesOrganisation: fakeSalesOrganisation,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
-              language: 'EN',
+              language:
+                  fakeSalesOrganisationConfigs.getConfigLanguageDefaultEnglish,
               product: bundleItem,
             ),
           ).thenAnswer(
@@ -2118,202 +2124,6 @@ void main() {
     },
   );
 
-  group(
-    'Testing CartBloc overrideCartItemPrice',
-    () {
-      blocTest<CartBloc, CartState>(
-        'Cart overrideCartItemPrice',
-        build: () => CartBloc(cartRepositoryMock),
-        seed: () => CartState.initial().copyWith(
-          cartProducts: priceAggregates,
-          salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
-          shipToInfo: shipToInfo,
-          customerCodeInfo: fakeCustomerCodeInfo,
-        ),
-        act: (bloc) => bloc.add(
-          CartEvent.overrideCartItemPrice(
-            cartItem: CartItem.material(PriceAggregate.empty()),
-            overridenPrice: [],
-          ),
-        ),
-        expect: () => [
-          CartState.initial().copyWith(
-            isFetching: true,
-            cartProducts: priceAggregates,
-            salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
-          ),
-        ],
-      );
-    },
-  );
-
-  group(
-    'Testing CartBloc overrideCartItemPrice',
-    () {
-      blocTest<CartBloc, CartState>(
-        'Cart overrideCartItemPrice',
-        build: () => CartBloc(cartRepositoryMock),
-        seed: () => CartState.initial().copyWith(
-          cartProducts: priceAggregates,
-          salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
-          shipToInfo: shipToInfo,
-          customerCodeInfo: fakeCustomerCodeInfo,
-        ),
-        act: (bloc) => bloc.add(
-          CartEvent.overrideCartItemPrice(
-            cartItem: CartItem.material(PriceAggregate.empty()),
-            overridenPrice: [],
-          ),
-        ),
-        expect: () => [
-          CartState.initial().copyWith(
-            isFetching: true,
-            cartProducts: priceAggregates,
-            salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
-          ),
-        ],
-      );
-    },
-  );
-
-  group(
-    'Testing CartBloc addRemarkToBonusItem',
-    () {
-      blocTest<CartBloc, CartState>(
-        'Cart addRemarkToBonusItem',
-        build: () => CartBloc(cartRepositoryMock),
-        seed: () => CartState.initial().copyWith(
-          cartProducts: priceAggregates,
-          salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
-          shipToInfo: shipToInfo,
-          customerCodeInfo: fakeCustomerCodeInfo,
-        ),
-        act: (bloc) => bloc.add(
-          CartEvent.addRemarkToBonusItem(
-            bonusItem: MaterialItemBonus.empty(),
-            item: CartItem.material(PriceAggregate.empty()),
-            message: '',
-          ),
-        ),
-        expect: () => [
-          CartState.initial().copyWith(
-            isFetching: true,
-            cartProducts: priceAggregates,
-            salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
-          ),
-        ],
-      );
-    },
-  );
-
-  group(
-    'Testing CartBloc overrideCartItemPrice',
-    () {
-      blocTest<CartBloc, CartState>(
-        'Cart overrideCartItemPrice',
-        build: () => CartBloc(cartRepositoryMock),
-        seed: () => CartState.initial().copyWith(
-          cartProducts: priceAggregates,
-          salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
-          shipToInfo: shipToInfo,
-          customerCodeInfo: fakeCustomerCodeInfo,
-        ),
-        act: (bloc) => bloc.add(
-          CartEvent.overrideCartItemPrice(
-            cartItem: CartItem.material(PriceAggregate.empty()),
-            overridenPrice: [],
-          ),
-        ),
-        expect: () => [
-          CartState.initial().copyWith(
-            isFetching: true,
-            cartProducts: priceAggregates,
-            salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
-          ),
-        ],
-      );
-    },
-  );
-  group(
-    'Testing CartBloc replaceWithOrderItems',
-    () {
-      blocTest<CartBloc, CartState>(
-        'Cart replaceWithOrderItems',
-        build: () => CartBloc(cartRepositoryMock),
-        seed: () => CartState.initial().copyWith(
-          cartProducts: priceAggregates,
-          salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
-          shipToInfo: shipToInfo,
-          customerCodeInfo: fakeCustomerCodeInfo,
-        ),
-        act: (bloc) => bloc.add(
-          const CartEvent.replaceWithOrderItems(
-            doNotAllowOutOfStockMaterial: false,
-            items: [],
-          ),
-        ),
-        expect: () => [
-          CartState.initial().copyWith(
-            isFetching: true,
-            cartProducts: priceAggregates,
-            salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
-          ),
-        ],
-      );
-    },
-  );
-  group(
-    'Testing CartBloc addRemarkToCartItem',
-    () {
-      blocTest<CartBloc, CartState>(
-        'Cart addRemarkToCartItem',
-        build: () => CartBloc(cartRepositoryMock),
-        seed: () => CartState.initial().copyWith(
-          cartProducts: priceAggregates,
-          salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
-          shipToInfo: shipToInfo,
-          customerCodeInfo: fakeCustomerCodeInfo,
-        ),
-        act: (bloc) => bloc.add(
-          CartEvent.addRemarkToCartItem(
-            item: CartItem.material(PriceAggregate.empty()),
-            message: '',
-          ),
-        ),
-        expect: () => [
-          CartState.initial().copyWith(
-            isFetching: true,
-            cartProducts: priceAggregates,
-            salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
-          ),
-        ],
-      );
-    },
-  );
   group(
     'CartBloc clearCart',
     () {
@@ -3251,31 +3061,6 @@ void main() {
       );
 
       test(
-        'Testing CartBloc state totalTax',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: [
-              priceAggregates.first.copyWith(
-                price: prices.first,
-                materialInfo: priceAggregates.first.materialInfo.copyWith(
-                  taxClassification:
-                      MaterialTaxClassification('Product : Full Tax'),
-                  tax: 1,
-                ),
-              )
-            ],
-            config: fakeSalesOrganisationConfigs.copyWith(
-              displaySubtotalTaxBreakdown: true,
-            ),
-          );
-          expect(
-            cartBlocState.totalTax,
-            0.0,
-          );
-        },
-      );
-
-      test(
         'Testing CartBloc state taxBundle',
         () {
           final cartBlocState = CartState.initial().copyWith(
@@ -3293,20 +3078,6 @@ void main() {
         },
       );
 
-      test(
-        'Testing CartBloc state showDialog totalPrice ',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: [
-              priceAggregates.first.copyWith(price: prices.elementAt(1)),
-            ],
-          );
-          expect(
-            cartBlocState.totalPrice,
-            364.8,
-          );
-        },
-      );
       test(
         'Testing CartBloc state showDialog totalPriceWithTax ',
         () {

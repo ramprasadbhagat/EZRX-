@@ -83,6 +83,7 @@ abstract class ICartRepository {
     required RequestCounterOfferDetails counterOfferDetails,
   });
 
+  //TODO: evaluate which methods can be removed with combo offers
   Future<Either<ApiFailure, List<PriceAggregate>>> upsertCartItems({
     required PriceAggregate product,
     required SalesOrganisation salesOrganisation,
@@ -100,5 +101,13 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
     required String language,
     required List<MaterialInfo> products,
+  });
+
+    Future<Either<ApiFailure, List<PriceAggregate>>> upsertCartItemsWithComboOffers({
+    required List<PriceAggregate> products,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required String language,
   });
 }

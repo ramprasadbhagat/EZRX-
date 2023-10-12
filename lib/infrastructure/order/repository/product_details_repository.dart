@@ -67,7 +67,7 @@ class ProductDetailRepository implements IProductDetailRepository {
             );
 
   @override
-  Future<List<MaterialInfo>> getProductListDetail({
+  Future<Either<ApiFailure, List<MaterialInfo>>> getProductListDetail({
     required List<MaterialNumber> materialNumber,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -75,21 +75,27 @@ class ProductDetailRepository implements IProductDetailRepository {
     required Locale locale,
     required List<MaterialInfoType> types,
   }) async {
-    final materialInfoList = <MaterialInfo>[];
-    for (var i = 0; i < types.length; i++) {
-      final productList = await getProductDetail(
-        materialNumber: materialNumber[i],
-        salesOrganisation: salesOrganisation,
-        customerCodeInfo: customerCodeInfo,
-        shipToInfo: shipToInfo,
-        locale: locale,
-        type: types[i],
+    try {
+      final materialInfoList = <MaterialInfo>[];
+      for (var i = 0; i < types.length; i++) {
+        final productList = await getProductDetail(
+          materialNumber: materialNumber[i],
+          salesOrganisation: salesOrganisation,
+          customerCodeInfo: customerCodeInfo,
+          shipToInfo: shipToInfo,
+          locale: locale,
+          type: types[i],
+        );
+
+        productList.fold((l) => {}, (r) => materialInfoList.add(r));
+      }
+
+      return Right(
+        materialInfoList,
       );
-
-      productList.fold((l) => {}, (r) => materialInfoList.add(r));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
-
-    return materialInfoList;
   }
 
   @override

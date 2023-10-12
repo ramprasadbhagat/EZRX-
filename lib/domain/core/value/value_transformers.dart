@@ -245,6 +245,8 @@ bool isBundle(String type) => type == 'bundle';
 
 bool isMaterial(String type) => type == 'material';
 
+bool isCombo(String type) => type == 'combo';
+
 bool notZero(int number) => number != 0;
 
 Color getStatusLabelColor(String statusType) {

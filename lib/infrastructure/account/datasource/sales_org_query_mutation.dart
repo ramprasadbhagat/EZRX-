@@ -100,7 +100,7 @@ class SalesOrgQueryMutation {
     enableTaxAtTotalLevelOnly
     displayItemTaxBreakdown
     displaySubtotalTaxBreakdown
-
+    enableComboDeals
   }
 }
 

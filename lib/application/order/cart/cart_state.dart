@@ -130,7 +130,8 @@ class CartState with _$CartState {
             0,
             (sum, item) => sum + item.finalPriceTotal,
           ) +
-      taxMaterial;
+      taxMaterial +
+      totalComboPriceWithTax;
 
   double get subTotal =>
       totalBundlesPrice +
@@ -178,8 +179,6 @@ class CartState with _$CartState {
             : previousValue +
                 (element.price.finalPrice.getValue() * element.quantity),
       );
-
-  double get totalMaterialPriceWithTax => totalMaterialsPrice + taxMaterial;
 
   double get taxMaterial => config.displaySubtotalTaxBreakdown
       ? cartProducts
@@ -249,6 +248,13 @@ class CartState with _$CartState {
             itemBundlePrice(bundleCode: element.bundle.bundleCode),
       );
 
+  double get totalComboPrice =>
+      cartProducts.where((element) => element.materialInfo.type.typeCombo).fold(
+            0,
+            (previousValue, element) =>
+                previousValue + element.comboSubTotalExclTax,
+          );
+
   PriceAggregate updatedCartProduct(MaterialNumber matNumber) =>
       cartProducts.firstWhere(
         (element) => element.getMaterialNumber == matNumber,
@@ -265,18 +271,21 @@ class CartState with _$CartState {
                 element.salesOrgConfig.vatValue /
                 100),
       );
-/*
+
+  double get totalComboPriceWithTax => totalComboPrice;
+
+  /*
     It's there just as a placeholder but for now we don't have much clarity 
     that we have any tax calculation for bundle materials
   */
   double get totalBundlePriceWithTax => totalBundlesPrice;
 
-  double get totalTax => taxMaterial;
-
-  double get totalPrice => totalMaterialsPrice + totalBundlesPrice;
+  double get totalMaterialPriceWithTax => totalMaterialsPrice + taxMaterial;
 
   double get totalPriceWithTax =>
-      totalMaterialPriceWithTax + totalBundlePriceWithTax;
+      totalMaterialPriceWithTax +
+      totalBundlePriceWithTax +
+      totalComboPriceWithTax;
 
   int get totalItems => cartProducts.fold(
         0,
@@ -332,11 +341,21 @@ class CartState with _$CartState {
       .toString()
       .replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '');
 
-  double get _totalTaxPercentInDouble => config
-          .isMarketEligibleForTaxClassification
-      ? materialLevelFinalPriceWithTaxForFullTax /
-          materialLevelEligibleTotalFinalPrice
-      : config.vatValue.toDouble();
+  double get _totalTaxPercentInDouble {
+    if (!config.isMarketEligibleForTaxClassification) {
+      return config.vatValue.toDouble();
+    }
+
+    final taxPercent = materialLevelFinalPriceWithTaxForFullTax /
+        materialLevelEligibleTotalFinalPrice;
+
+    if (taxPercent.isNaN) {
+      // Handle the case where the division results in NaN.
+      return 0.0; // or any other suitable value
+    }
+
+    return taxPercent;
+  }
 
   bool isEligibleForCheckout(bool isOOSOrderEligibleToProceed) =>
       ((isOOSOrderPresent && isOOSOrderEligibleToProceed) ||

@@ -39,6 +39,12 @@ class CartItemQuantityInput extends StatelessWidget {
     this.height = 35,
   }) : super(key: key);
 
+  bool get _isEnableMinusWithMinQty {
+    final value = (int.tryParse(controller.text) ?? 0) - 1;
+
+    return value >= minimumQty;
+  }
+
   @override
   Widget build(BuildContext context) {
     return isLoading
@@ -87,47 +93,83 @@ class CartItemQuantityInput extends StatelessWidget {
 
                   return;
                 }
-                onSubmit(int.parse(text));
+                final value = (int.tryParse(controller.text) ?? 0);
+                if (value < minimumQty) {
+                  final text = minimumQty.toString();
+                  controller.value = TextEditingValue(
+                    text: text,
+                    selection: TextSelection.collapsed(
+                      offset: controller.selection.base.offset,
+                    ),
+                  );
+                  onSubmit(int.parse(text));
+
+                  return;
+                }
+
+                if (value > maximumQty) {
+                  final text = maximumQty.toString();
+                  controller.value = TextEditingValue(
+                    text: text,
+                    selection: TextSelection.collapsed(
+                      offset: controller.selection.base.offset,
+                    ),
+                  );
+                  onSubmit(int.parse(text));
+
+                  return;
+                }
               },
               decoration: InputDecoration(
                 fillColor:
                     isEnabled ? ZPColors.white : ZPColors.extraLightGrey5,
                 isDense: true,
-                prefixIcon: IconButton(
-                  key: quantityDeleteKey,
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    final value = (int.tryParse(controller.text) ?? 0) - 1;
-                    if (value >= minimumQty) {
-                      final text = value.toString();
-                      controller.value = TextEditingValue(
-                        text: text,
-                        selection: TextSelection.collapsed(
-                          offset: controller.selection.base.offset,
-                        ),
-                      );
-                      minusPressed.call(value);
-                    }
-                  },
-                  icon: const Icon(Icons.remove),
+                prefixIcon: ValueListenableBuilder<TextEditingValue>(
+                  valueListenable: controller,
+                  builder: (_, __, ___) => IconButton(
+                    key: quantityDeleteKey,
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      final value = (int.tryParse(controller.text) ?? 0) - 1;
+                      if (value >= minimumQty) {
+                        final text = value.toString();
+                        controller.value = TextEditingValue(
+                          text: text,
+                          selection: TextSelection.collapsed(
+                            offset: controller.selection.base.offset,
+                          ),
+                        );
+                        minusPressed.call(value);
+                      }
+                    },
+                    icon: Icon(
+                      Icons.remove,
+                      color: _isEnableMinusWithMinQty
+                          ? ZPColors.primary
+                          : ZPColors.disableQuantityButton,
+                    ),
+                  ),
                 ),
-                suffixIcon: IconButton(
-                  key: quantityAddKey,
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    final value = (int.tryParse(controller.text) ?? 0) + 1;
-                    if (value <= maximumQty) {
-                      final text = value.toString();
-                      controller.value = TextEditingValue(
-                        text: text,
-                        selection: TextSelection.collapsed(
-                          offset: controller.selection.base.offset,
-                        ),
-                      );
-                      addPressed.call(value);
-                    }
-                  },
-                  icon: const Icon(Icons.add),
+                suffixIcon: ValueListenableBuilder<TextEditingValue>(
+                  valueListenable: controller,
+                  builder: (_, __, ___) => IconButton(
+                    key: quantityAddKey,
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      final value = (int.tryParse(controller.text) ?? 0) + 1;
+                      if (value <= maximumQty) {
+                        final text = value.toString();
+                        controller.value = TextEditingValue(
+                          text: text,
+                          selection: TextSelection.collapsed(
+                            offset: controller.selection.base.offset,
+                          ),
+                        );
+                        addPressed.call(value);
+                      }
+                    },
+                    icon: const Icon(Icons.add),
+                  ),
                 ),
                 contentPadding: EdgeInsets.zero,
                 border:

@@ -1,0 +1,176 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
+import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/total_combo_count.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_product_tile.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/material_details_section.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/material_quantity_selection.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/material_details.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/item_sub_total_section.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_requirement_section.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_searchbar.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_add_to_cart_section.dart';
+
+class ComboDetailPage extends StatelessWidget {
+  const ComboDetailPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: WidgetKeys.materialListPage,
+      appBar: AppBar(
+        //Todo: Will update title for other combos
+        title: Text(
+          context.tr('Combo K1'),
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        centerTitle: false,
+        titleSpacing: 0,
+        leading: IconButton(
+          key: WidgetKeys.backButton,
+          icon: const Icon(
+            Icons.arrow_back_ios,
+          ),
+          iconSize: 14,
+          onPressed: () async {
+            final confirmed = await _showConfirmBottomSheet(context);
+            if (confirmed ?? false) {
+              if (context.mounted) await context.router.pop();
+            }
+          },
+        ),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: CartButton(
+              cartColor: ZPColors.black,
+            ),
+          ),
+        ],
+      ),
+      body: BlocListener<MaterialPriceBloc, MaterialPriceState>(
+        listenWhen: (previous, current) =>
+            previous.isFetching != current.isFetching && !current.isFetching,
+        listener: (context, state) {
+          final materialsPrice = <MaterialNumber, MaterialPriceDetail>{};
+          final comboDealMaterialDetailState =
+              context.read<ComboDealMaterialDetailBloc>().state;
+          materialsPrice.addAll(
+            {
+              for (final materialPrice in state.materialPrice.entries)
+                materialPrice.key: MaterialPriceDetail(
+                  price: materialPrice.value,
+                  info: comboDealMaterialDetailState
+                          .items[materialPrice.key]?.materialInfo ??
+                      MaterialInfo.empty(),
+                  isValidMaterial: materialPrice.value.isValidMaterial,
+                ),
+            },
+          );
+
+          context.read<ComboDealMaterialDetailBloc>().add(
+                ComboDealMaterialDetailEvent.setPriceInfo(
+                  priceMap: materialsPrice,
+                ),
+              );
+        },
+        child: BlocConsumer<ComboDealMaterialDetailBloc,
+            ComboDealMaterialDetailState>(
+          listenWhen: (previous, current) =>
+              previous.isFetchingComboInfo != current.isFetchingComboInfo &&
+              !current.isFetchingComboInfo,
+          listener: (context, state) {
+            final eligibilityBlocState = context.read<EligibilityBloc>().state;
+            context.read<MaterialPriceBloc>().add(
+                  MaterialPriceEvent.fetchPriceCartProduct(
+                    salesOrganisation: eligibilityBlocState.salesOrganisation,
+                    salesConfigs: eligibilityBlocState.salesOrgConfigs,
+                    customerCodeInfo: eligibilityBlocState.customerCodeInfo,
+                    shipToInfo: eligibilityBlocState.shipToInfo,
+                    comboDealEligible: eligibilityBlocState.comboDealEligible,
+                    products: state.allMaterialsInfo,
+                  ),
+                );
+          },
+          buildWhen: (previous, current) =>
+              previous.isFetchingPrice != current.isFetchingPrice ||
+              previous.itemsWithSearch != current.itemsWithSearch,
+          builder: (context, state) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const _ComboRequirementSection(),
+                const _ComboDetailSearchBar(),
+                const _TotalComboCount(),
+                const Divider(
+                  endIndent: 0,
+                  indent: 0,
+                  thickness: 0.5,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0)
+                        .copyWith(top: 24),
+                    child: ScrollList<PriceAggregate>(
+                      noRecordFoundWidget: const SizedBox.shrink(),
+                      controller: ScrollController(),
+                      isLoading: false,
+                      itemBuilder: (_, __, item) {
+                        return LoadingShimmer.withChild(
+                          enabled: state.isFetchingPrice,
+                          child: _ComboProductTile(comboItem: item),
+                        );
+                      },
+                      items: state.itemsWithSearch.values.toList(),
+                    ),
+                  ),
+                ),
+                const _ComboDetailAddToCartSection(),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
+    return showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      builder: (_) => const ConfirmBottomSheet(
+        title: 'Leave page?',
+        content: 'Any existing items in your combo selection will be cleared.',
+        confirmButtonText: 'Leave',
+      ),
+    );
+  }
+}

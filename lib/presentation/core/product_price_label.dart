@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
@@ -53,6 +54,7 @@ class ProductPriceLabel extends StatelessWidget {
             tenderContract: TenderContract.empty(),
             comboDeal: ComboDeal.empty(),
             bonusSampleItems: <BonusSampleItem>[],
+            comboMaterials: <ComboMaterialItem>[],
           );
 
           return Column(

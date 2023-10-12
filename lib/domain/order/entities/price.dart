@@ -73,6 +73,8 @@ class Price with _$Price {
 
   bool get isBonusDealEligible => availableBonus.isNotEmpty;
 
+  bool get isComboDealEligible => comboDeal.isEligible;
+
   List<PriceBonusItem> get priceBonusItem => bonuses.isNotEmpty
       ? bonuses.first.sortedPriceBonusItem
       : <PriceBonusItem>[];

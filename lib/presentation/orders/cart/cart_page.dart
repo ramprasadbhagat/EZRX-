@@ -19,6 +19,7 @@ import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bonus_offer_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_bundle.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
@@ -70,7 +71,7 @@ class _CartPageState extends State<CartPage> {
                   .read<CartBloc>()
                   .state
                   .cartProducts
-                  .where((element) => !element.materialInfo.type.typeBundle)
+                  .where((element) => element.materialInfo.type.typeMaterial)
                   .map((e) => e.materialInfo)
                   .toList(),
             ),

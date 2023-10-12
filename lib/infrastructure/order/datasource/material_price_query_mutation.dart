@@ -6,11 +6,13 @@ class MaterialPriceQueryMutation {
         \$customer: String!
         \$salesOrganisation: String!
         \$request: [PriceRequest!]!
+        \$shipToCode: String!
         ) {
           price(
             customer: \$customer
             salesOrganisation: \$salesOrganisation
             request: \$request
+            shipToCode: \$shipToCode
           ) {
             MaterialNumber
             OldMaterialCode
@@ -104,6 +106,15 @@ class MaterialPriceQueryMutation {
               Conditions
               Tier
               Overrider
+            }
+            ComboDeals {
+              Eligible
+              FlexibleGroup
+              SalesDeal
+              Category {
+                Type
+                Value
+              }
             }
           }
         }

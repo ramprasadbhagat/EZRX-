@@ -42,7 +42,7 @@ class _CartPageCartScrollList extends StatelessWidget {
                             .cartProducts
                             .where(
                               (element) =>
-                                  !element.materialInfo.type.typeBundle,
+                                  element.materialInfo.type.typeMaterial,
                             )
                             .map((e) => e.materialInfo)
                             .toList(),

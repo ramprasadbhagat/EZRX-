@@ -12,7 +12,6 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
@@ -96,39 +95,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
         );
-      },
-      addRemarkToCartItem: (e) {
-        emit(
-          state.copyWith(
-            isFetching: true,
-            apiFailureOrSuccessOption: none(),
-          ),
-        );
-
-        /*final failureOrSuccess = await repository.addRemarkToCartItem(
-          remarkMessage: e.message,
-          item: e.item,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) {
-            emit(
-              state.copyWith(
-                cartItems: cartItemList,
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );*/
       },
       addBonusToCartItem: (e) async {
         emit(
@@ -250,73 +216,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
-      addRemarkToBonusItem: (e) {
-        emit(
-          state.copyWith(
-            isFetching: true,
-            apiFailureOrSuccessOption: none(),
-          ),
-        );
-
-        /*final failureOrSuccess = await repository.addRemarkToBonusItem(
-          remarkMessage: e.message,
-          item: e.item,
-          bonus: e.bonusItem,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) {
-            emit(
-              state.copyWith(
-                cartItems: cartItemList,
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );*/
-      },
-      overrideCartItemPrice: (e) {
-        emit(
-          state.copyWith(
-            isFetching: true,
-            apiFailureOrSuccessOption: none(),
-          ),
-        );
-
-        /*final failureOrSuccess = await repository.overrideCartItemPrice(
-          item: e.cartItem,
-          overridePriceList: e.overridenPrice,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) {
-            emit(
-              state.copyWith(
-                cartItems: cartItemList,
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );*/
-      },
       clearCart: (e) async {
         emit(
           state.copyWith(
@@ -344,125 +243,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             ),
           ),
         );
-      },
-      replaceWithOrderItems: (e) {
-        emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: none(),
-            isFetching: true,
-          ),
-        );
-
-        /*final failureOrSuccess = await repository.replaceCartWithItems(
-          items: e.items,
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
-          salesOrganisation: e.salesOrganisation,
-          shipToInfo: e.shipToInfo,
-          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-        );
-
-        await failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) async {
-            emit(
-              state.copyWith(
-                cartItems: repository.updateDiscountQty(items: cartItemList),
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-
-            if (state.isBonusRestricted) return;
-
-            for (final material in state.getCartItemMaterialList) {
-              final failureOrSuccess = await repository.updateMaterialDealBonus(
-                // material: material.materials.first,
-                materials: material.materials,
-                customerCodeInfo: e.customerCodeInfo,
-                salesOrganisationConfigs: e.salesOrganisationConfigs,
-                salesOrganisation: e.salesOrganisation,
-                shipToInfo: e.shipToInfo,
-              );
-
-              failureOrSuccess.fold(
-                (failure) {
-                  emit(
-                    state.copyWith(
-                      apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                      isFetching: false,
-                    ),
-                  );
-                },
-                (cartItemList) {
-                  if (material == state.getCartItemMaterialList.last) {
-                    emit(
-                      state.copyWith(
-                        cartProducts: cartItemList,
-                        apiFailureOrSuccessOption: none(),
-                        isFetching: false,
-                      ),
-                    );
-                  }
-                },
-              );
-            }
-          },
-        );*/
-      },
-      addComboDealToCart: (e) {
-        /*emit(
-          state.copyWith(
-            apiFailureOrSuccessOption: none(),
-            isFetching: true,
-          ),
-        );
-
-        final comboDealItems = e.comboDealItems.map((item) {
-          final currentMaterialInCart =
-              state.getMaterialCartItem(material: item);
-
-          return currentMaterialInCart == CartItem.materialEmpty()
-              ? item
-              : item.copyWithIncreasedQty(qty: currentMaterialInCart.totalQty);
-        }).toList();
-
-        final failureOrSuccess = await repository.addItemToCart(
-          cartItem: CartItem.comboDeal(comboDealItems),
-          override: e.overrideQty,
-          customerCodeInfo: e.customerCodeInfo,
-          salesOrganisation: e.salesOrganisation,
-          salesOrganisationConfigs: e.salesOrganisationConfigs,
-          shipToInfo: e.shipToInfo,
-          doNotAllowOutOfStockMaterials: e.doNotallowOutOfStockMaterial,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-                isFetching: false,
-              ),
-            );
-          },
-          (cartItemList) {
-            emit(
-              state.copyWith(
-                cartItems: cartItemList,
-                apiFailureOrSuccessOption: none(),
-                isFetching: false,
-              ),
-            );
-          },
-        );*/
       },
       updateBatchInCartItem: (e) {
         emit(
@@ -522,20 +302,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           (productAddedToCartList) {
             final priceAggregateAddedToCartList = productAddedToCartList
                 .map(
-                  (element) => !element.materialInfo.type.typeBundle
-                      ? PriceAggregate.empty().copyWith(
-                          materialInfo: element.materialInfo,
-                          quantity: element.materialInfo.quantity.intValue,
-                          salesOrgConfig: element.salesOrgConfig,
-                          bonusSampleItems: element.bonusSampleItems,
-                        )
-                      : PriceAggregate.empty().copyWith(
-                          materialInfo: element.materialInfo,
-                          bundle: element.bundle,
-                          salesOrgConfig: element.salesOrgConfig,
-                        ),
+                  (element) => element.toCartProduct,
                 )
                 .toList();
+
+            _sortComboToFirstPosition(priceAggregateAddedToCartList);
 
             emit(
               state.copyWith(
@@ -584,7 +355,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           shipToInfo: state.shipToInfo,
           materialInfo: e.priceAggregate.materialInfo,
           quantity: e.quantity,
-          language: 'EN',
+          language: state.config.getConfigLanguageDefaultEnglish,
           counterOfferDetails:
               e.priceAggregate.materialInfo.counterOfferDetails.copyWith(
             counterOfferCurrency: state.config.currency,
@@ -607,6 +378,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               currentCartProducts: cartProductList,
               salesOrganisationConfigs: state.config,
             );
+
+            _sortComboToFirstPosition(newCartProductList);
+
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
@@ -675,21 +449,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               element.materialInfo.materialNumber ==
               e.priceAggregate.materialInfo.materialNumber,
         );
+
         if (index != -1) {
-          final cartItem = state.cartProducts.elementAt(index);
-          var noDifference = true;
-          for (final bundleItem in cartItem.bundle.materials) {
-            final item = e.priceAggregate.bundle.materials
-                .where(
-                  (element) =>
-                      element.materialNumber == bundleItem.materialNumber,
-                )
-                .firstOrNull;
-            if (item != null) {
-              noDifference = item.quantity == bundleItem.quantity;
-            }
-            if (!noDifference) break;
-          }
+          final cartItem = state.cartProducts[index];
+
+          final noDifference = cartItem.bundle.materials.every((bundleItem) {
+            final item = e.priceAggregate.bundle.materials.firstWhereOrNull(
+              (element) => element.materialNumber == bundleItem.materialNumber,
+            );
+
+            return item?.quantity == bundleItem.quantity;
+          });
+
           if (noDifference) return;
         }
         emit(
@@ -704,7 +475,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisation: state.salesOrganisation,
           shipToInfo: state.shipToInfo,
           product: e.priceAggregate,
-          language: 'EN',
+          language: state.config.getConfigLanguageDefaultEnglish,
         );
 
         failureOrSuccess.fold(
@@ -717,24 +488,26 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (cartProductList) {
-            final cartProductListTemp =
-                List<PriceAggregate>.from(cartProductList);
-            for (var i = 0; i < cartProductListTemp.length; i++) {
+            final cartProductListTemp = cartProductList.map((cartProduct) {
               final priceAggregate = state.cartProducts
                       .where(
                         (element) =>
                             element.materialInfo.materialNumber ==
-                            cartProductList[i].materialInfo.materialNumber,
+                            cartProduct.materialInfo.materialNumber,
                       )
                       .toList()
                       .firstOrNull ??
                   PriceAggregate.empty();
-              cartProductListTemp[i] = cartProductListTemp[i].copyWith(
+
+              return cartProduct.copyWith(
                 price: priceAggregate.price,
                 addedBonusList: priceAggregate.addedBonusList,
                 salesOrgConfig: state.config,
               );
-            }
+            }).toList();
+
+            _sortComboToFirstPosition(cartProductListTemp);
+
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
@@ -758,24 +531,22 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final materialNumberList = <MaterialNumber>[
-          ...e.cartProducts
-              .where((element) => !element.materialInfo.type.typeBundle)
-              .map((e) => e.materialInfo.materialNumber)
-              .toList(),
-        ];
+        final materialNumberList = <MaterialNumber>[];
 
-        for (final element in e.cartProducts) {
-          materialNumberList
-              .addAll(element.bonusSampleItems.map((e) => e.materialNumber));
-        }
-
-        final bundleList = e.cartProducts
-            .where((element) => element.materialInfo.type.typeBundle)
-            .map((e) => e.bundle.materials)
-            .toList();
-        for (final element in bundleList) {
-          materialNumberList.addAll(element.map((e) => e.materialNumber));
+        for (final cartProduct in e.cartProducts) {
+          if (cartProduct.materialInfo.type.typeMaterial) {
+            materialNumberList.add(cartProduct.getMaterialNumber);
+          } else if (cartProduct.materialInfo.type.typeBundle) {
+            materialNumberList.addAll(
+              cartProduct.bundle.materials
+                  .map((material) => material.materialNumber),
+            );
+          } else if (cartProduct.materialInfo.type.typeCombo) {
+            materialNumberList.addAll(
+              cartProduct.comboMaterials
+                  .map((comboMaterial) => comboMaterial.productId),
+            );
+          }
         }
 
         final failureOrSuccess = await repository.getProducts(
@@ -861,9 +632,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         final failureOrSuccess = await repository.getStockInfoList(
           items: state.cartProducts
               .map(
-                (element) => !element.materialInfo.type.typeBundle
-                    ? [element.materialInfo]
-                    : element.bundle.materials,
+                (element) => element.toStockListMaterials,
               )
               .expand((element) => element)
               .toList(),
@@ -960,6 +729,51 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
+      upsertCartItemsWithComboOffers: (e) async {
+        emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+            isUpserting: true,
+          ),
+        );
+
+        final failureOrSuccess =
+            await repository.upsertCartItemsWithComboOffers(
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
+          products: e.priceAggregates,
+          language: state.config.getConfigLanguageDefaultEnglish,
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isUpserting: false,
+              ),
+            );
+          },
+          (cartProductList) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: none(),
+                isUpserting: false,
+                cartProducts: cartProductList,
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _sortComboToFirstPosition(
+    List<PriceAggregate> priceAggregateAddedToCartList,
+  ) {
+    priceAggregateAddedToCartList.sort(
+      (a, b) => b.materialInfo.type.typeCombo ? 1 : -1,
     );
   }
 

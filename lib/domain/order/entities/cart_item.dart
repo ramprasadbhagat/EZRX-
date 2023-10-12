@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_sku_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
@@ -88,6 +89,7 @@ class CartItem with _$CartItem {
               )
             : TenderContract.empty(),
         bonusSampleItems: <BonusSampleItem>[],
+        comboMaterials: <ComboMaterialItem>[],
       ),
     );
   }
@@ -133,6 +135,7 @@ class CartItem with _$CartItem {
             tenderContract: savedItem.tenderContract,
             comboDeal: ComboDeal.empty(),
             bonusSampleItems: <BonusSampleItem>[],
+            comboMaterials: <ComboMaterialItem>[],
           );
         },
       ).toList(),

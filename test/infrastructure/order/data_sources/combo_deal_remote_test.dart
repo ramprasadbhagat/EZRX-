@@ -49,7 +49,7 @@ void main() async {
         'customerCode': fakeCustomerCode,
         'salesDeal': fakeSalesDeal,
         'flexibleGroup': fakeFlexibleGroup,
-        'materialNumbers': fakeMaterialNumbers,
+        'validatedMatnrList': fakeMaterialNumbers,
       };
 
       setUpAll(() async {
@@ -65,7 +65,7 @@ void main() async {
           final finalData = fakeJson['data']['comboDealForMaterials'];
 
           dioAdapter.onPost(
-            '/api/pricing',
+            '/api/price',
             (server) => server.reply(
               200,
               fakeJson,
@@ -74,7 +74,7 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query':
-                  remoteDataSource.queryMutation.getComboDealListForMaterial(),
+                  remoteDataSource.queryMutation.getComboDealForMaterials(),
               'variables': fakeQueryVariables
             }),
           );
@@ -82,9 +82,10 @@ void main() async {
           final result = await remoteDataSource.getComboDealList(
             customerCode: fakeCustomerCode,
             salesOrgCode: fakeSalesOrgCode,
-            materialNumbers: fakeMaterialNumbers,
             salesDeal: fakeSalesDeal,
             flexibleGroup: fakeFlexibleGroup,
+            materialNumbers: fakeMaterialNumbers,
+
           );
 
           expect(
@@ -100,7 +101,7 @@ void main() async {
         'Get Combo Deal List with error response status code',
         () async {
           dioAdapter.onPost(
-            '/api/pricing',
+            '/api/price',
             (server) => server.reply(
               204,
               {},
@@ -109,7 +110,7 @@ void main() async {
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
               'query':
-                  remoteDataSource.queryMutation.getComboDealListForMaterial(),
+                  remoteDataSource.queryMutation.getComboDealForMaterials(),
               'variables': fakeQueryVariables
             }),
           );
@@ -118,9 +119,9 @@ void main() async {
               .getComboDealList(
             customerCode: fakeCustomerCode,
             salesOrgCode: fakeSalesOrgCode,
-            materialNumbers: fakeMaterialNumbers,
             salesDeal: fakeSalesDeal,
             flexibleGroup: fakeFlexibleGroup,
+            materialNumbers: fakeMaterialNumbers,
           )
               .onError((error, _) {
             expect(error, isA<ServerException>());

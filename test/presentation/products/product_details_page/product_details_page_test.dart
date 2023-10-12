@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -71,6 +72,10 @@ class MaterialPriceMockBloc
     extends MockBloc<MaterialPriceEvent, MaterialPriceState>
     implements MaterialPriceBloc {}
 
+class ComboDealListMockBloc
+    extends MockBloc<ComboDealListEvent, ComboDealListState>
+    implements ComboDealListBloc {}
+
 class MockAppRouter extends Mock implements AppRouter {}
 
 class MaterialPageXMock extends Mock implements MaterialPageX {}
@@ -86,6 +91,7 @@ void main() {
   final productDetailMockBloc = ProductDetailsMockBloc();
   final mockProductImageBloc = ProductImageMockBloc();
   final materialPriceMockBloc = MaterialPriceMockBloc();
+  final comboDealListMockBloc = ComboDealListMockBloc();
   late EligibilityBlocMock eligibilityBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late CartBloc cartMockBloc;
@@ -172,6 +178,8 @@ void main() {
             .thenReturn('orders/material_details');
         when(() => autoRouterMock.current).thenReturn(routeData);
         when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
+        when(() => comboDealListMockBloc.state)
+            .thenReturn(ComboDealListState.initial());
       });
 
       RouteDataScope getScopedWidget() {
@@ -202,6 +210,9 @@ void main() {
             BlocProvider<CartBloc>(
               create: ((context) => cartMockBloc),
             ),
+            BlocProvider<ComboDealListBloc>(
+              create: (context) => comboDealListMockBloc,
+            )
           ],
           child: const ProductDetailsPage(),
         );

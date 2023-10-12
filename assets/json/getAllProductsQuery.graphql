@@ -50,6 +50,7 @@ variables:{
         "After": 0,
         "isGimmick": false,
         "OrderByName": "asc",
-        "Language": "EN"
+        "Language": "EN",
+        "salesDeal":[],
     }
 }

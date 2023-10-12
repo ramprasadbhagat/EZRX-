@@ -79,6 +79,17 @@ class ComboDeal with _$ComboDeal {
         orElse: () => ComboDealMaterial.empty(),
       );
 
+  String getSetNo({
+    required MaterialNumber materialNumber,
+  }) =>
+      materialComboDeals
+          .firstWhere(
+            (comboSetDeal) => comboSetDeal.materialNumbers
+                .any((element) => element == materialNumber),
+            orElse: () => ComboDealMaterialSet.empty(),
+          )
+          .setNo;
+
   bool get _allMaterialWithSuffix =>
       materialComboDeals.isNotEmpty &&
       allMaterials.every((item) => item.suffix.isValid());
@@ -133,6 +144,27 @@ class ComboDeal with _$ComboDeal {
             eligibleComboDealQtyTier.suffix == element.suffix,
         orElse: () => ComboDealMaterial.empty(),
       );
+
+  String get comboDealType {
+    switch (scheme) {
+      case ComboDealScheme.k1:
+        return 'K1';
+      case ComboDealScheme.k2:
+        // TODO: Handle for K2.1 and K2.2.
+        return 'K2';
+
+      case ComboDealScheme.k3:
+        return 'K3';
+
+      case ComboDealScheme.k4:
+        return 'K4';
+
+      case ComboDealScheme.k5:
+        return 'K5';
+      case ComboDealScheme.kWithSuffix:
+        return '';
+    }
+  }
 }
 
 enum ComboDealScheme { k1, k2, k3, k4, k5, kWithSuffix }

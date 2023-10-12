@@ -147,6 +147,37 @@ class CartRemoteDataSource {
     });
   }
 
+  Future<List<PriceAggregate>> upsertCartItemsWithComboOffer({
+    required List<Map<String, dynamic>> requestParams,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final query = cartQueryMutation.upsertCartItems();
+      final variables = {
+        'itemInput': requestParams,
+      };
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}cart',
+        data: jsonEncode(
+          {
+            'query': query,
+            'variables': variables,
+          },
+        ),
+        apiEndpoint: 'UpsertCartItems',
+      );
+
+      _exceptionChecker(res: res);
+
+      final productList =
+          res.data['data']['upsertCartItems']['EzRxItems'] ?? [];
+
+      return List.from(makeResponseCamelCase(jsonEncode(productList)))
+          .map((e) => CartProductDto.fromJson(e).toDomain)
+          .toList();
+    });
+  }
+
   void _emptyCartExceptionChecker({required Response<dynamic> res}) {
     if (res.statusCode != 200) {
       throw ServerException(

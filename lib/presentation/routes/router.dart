@@ -57,6 +57,7 @@ import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment
 import 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 import 'package:ezrxmobile/presentation/payments/payment_webview/payment_webview_page.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/bundle_detail_page.dart';
+import 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/new_request_page.dart';
@@ -422,6 +423,10 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       page: AboutUsPage,
       path: 'about_us',
     ),
+     AutoRoute(
+          page: ComboDetailPage,
+          path: 'combo_detail',
+        ),
   ],
 )
 class $AppRouter {}

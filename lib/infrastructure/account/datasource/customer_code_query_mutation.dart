@@ -20,6 +20,7 @@ query customerInformationSearch(
   ) {
     SoldToInformation {
       customerCodeSoldTo
+      salesDeals
       customerGrp4
       name1
       name2

@@ -43,6 +43,15 @@ _$_CartProductDto _$$_CartProductDtoFromJson(Map<String, dynamic> json) =>
       hidePrice: json['hidePrice'] as bool? ?? false,
       isSuspended: json['suspensionStatus'] as bool? ?? false,
       isPrincipalSuspended: json['principalCutoffStatus'] as bool? ?? false,
+      comboDeal: json['comboDeals'] == null
+          ? PriceComboDealDto.empty
+          : PriceComboDealDto.fromJson(
+              json['comboDeals'] as Map<String, dynamic>),
+      comboMaterials: (json['comboMaterials'] as List<dynamic>?)
+              ?.map((e) =>
+                  ComboMaterialItemDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
 
 Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
@@ -72,6 +81,8 @@ Map<String, dynamic> _$$_CartProductDtoToJson(_$_CartProductDto instance) =>
       'hidePrice': instance.hidePrice,
       'suspensionStatus': instance.isSuspended,
       'principalCutoffStatus': instance.isPrincipalSuspended,
+      'comboDeals': instance.comboDeal.toJson(),
+      'comboMaterials': instance.comboMaterials.map((e) => e.toJson()).toList(),
     };
 
 _$_BundleDetailsDto _$$_BundleDetailsDtoFromJson(Map<String, dynamic> json) =>

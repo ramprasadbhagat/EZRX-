@@ -231,6 +231,7 @@ void main() {
       salesOrgCode: 'fake-sales-org',
       shipToCode: 'fake-shipto-code',
       searchKey: '',
+      salesDeal: [],
     );
 
     final finalData =

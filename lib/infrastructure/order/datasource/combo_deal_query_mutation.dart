@@ -1,64 +1,64 @@
 class ComboDealQueryMutation {
-  String getComboDealListForMaterial() {
+  String getComboDealForMaterials() {
     return '''
-      query comboDealListForMaterial(
-        \$salesOrg: String!
-        \$customerCode: String!
-        \$salesDeal: String!
-        \$flexibleGroup: String!
-        \$materialNumbers: [String!]!
+     query comboDealForMaterials(
+      \$customerCode: String!, 
+      \$salesOrg: String!, 
+      \$salesDeal: String!, 
+      \$flexibleGroup: String!, 
+      \$validatedMatnrList: [String!]!
       ) {
         comboDealForMaterials(
           salesOrg: \$salesOrg
           customerCode: \$customerCode
           salesDeal: \$salesDeal
           flexibleGroup: \$flexibleGroup
-          validatedMatnrList: \$materialNumbers
+          validatedMatnrList: \$validatedMatnrList
         ) {
-            groupDeal {
-              minTotalAmount
-              maxTotalAmount
-              minTotalQuantity
-              rate
-              type
-              conditionNumber
-            }
-            flexiSKUTier {
-              rate
-              conditionNumber
+          groupDeal {
+            minTotalAmount
+            maxTotalAmount
+            minTotalQuantity
+            rate
+            type
+            conditionNumber
+          }
+          flexiSKUTier {
+            rate
+            conditionNumber
+            minQty
+            type
+          }
+          flexiQtyTier {
+            rate
+            type
+            conditionNumber
+            minQty
+            suffix
+          }
+          flexiAmmountTier {
+            conditionNumber
+            minTotalAmount
+            minTotalCurrency
+            maxTotalAmount
+            maxTotalCurrency
+            rate
+            type
+          }
+          materialComboDeals {
+            setNo
+            materials {
               minQty
-              type
-            }
-            flexiQtyTier {
+              materialNumber
               rate
               type
               conditionNumber
-              minQty
+              mandatory
               suffix
             }
-            flexiAmmountTier {
-              conditionNumber
-              minTotalAmount
-              minTotalCurrency
-              maxTotalAmount
-              maxTotalCurrency
-              rate
-              type
-            }
-            materialComboDeals {
-              setNo
-              materials {
-                minQty
-                materialNumber
-                rate
-                type
-                conditionNumber
-                mandatory
-                suffix
-              }
-            }
           }
-       }
+        }
+      }
     ''';
   }
 

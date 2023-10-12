@@ -15,6 +15,11 @@ class ComboDealMaterialSet with _$ComboDealMaterialSet {
 
   List<MaterialNumber> get materialNumbers =>
       materials.map((e) => e.materialNumber).toList();
+
+  factory ComboDealMaterialSet.empty() => const ComboDealMaterialSet(
+        setNo: '',
+        materials: <ComboDealMaterial>[],
+      );
 }
 
 @freezed
@@ -45,4 +50,14 @@ class ComboDealMaterial with _$ComboDealMaterial {
         type: type,
         rate: rate,
       );
+
+  double get rateToAbs => rate.abs();
+
+  String get rateDisplay {
+    if (rateToAbs == rateToAbs.toInt()) {
+      return rateToAbs.toInt().toString();
+    }
+
+    return rateToAbs.toString();
+  }
 }

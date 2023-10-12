@@ -15,6 +15,7 @@ import 'package:ezrxmobile/application/intro/intro_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
@@ -1038,8 +1039,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           );
 
-      context.read<ProductDetailBloc>().add(
-            ProductDetailEvent.initialized(
+      context.read<ComboDealMaterialDetailBloc>().add(
+            ComboDealMaterialDetailEvent.initialize(
               salesOrganisation: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
               shipToInfo: state.shipToInfo,

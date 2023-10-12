@@ -30,18 +30,18 @@ class ComboDealRemoteDataSource {
     required List<String> materialNumbers,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
-      final queryData = queryMutation.getComboDealListForMaterial();
+      final queryData = queryMutation.getComboDealForMaterials();
 
       final variables = {
         'salesOrg': salesOrgCode,
         'customerCode': customerCode,
         'salesDeal': salesDeal,
         'flexibleGroup': flexibleGroup,
-        'materialNumbers': materialNumbers,
+        'validatedMatnrList': materialNumbers,
       };
       final res = await httpService.request(
         method: 'POST',
-        url: '${config.urlConstants}pricing',
+        url: '${config.urlConstants}price',
         data: jsonEncode({
           'query': queryData,
           'variables': variables,

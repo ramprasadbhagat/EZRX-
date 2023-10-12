@@ -170,6 +170,8 @@ class MaterialInfoType extends ValueObject<String> {
 
   bool get typeMaterial => isMaterial(value.getOrElse(() => ''));
 
+  bool get typeCombo => isCombo(value.getOrElse(() => ''));
+
   const MaterialInfoType._(this.value);
 }
 

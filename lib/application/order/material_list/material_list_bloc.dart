@@ -59,6 +59,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
               brandList: e.selectedMaterialFilter.brandList,
               manufactureListSelected:
                   e.selectedMaterialFilter.manufactureListSelected,
+              comboOffers: e.selectedMaterialFilter.comboOffers,
             ),
           ),
         );

@@ -9,6 +9,9 @@ class CustomCard extends StatelessWidget {
   final bool showBorder;
   final double? width;
   final Clip clipBehavior;
+  final Color backgroundColor;
+  final Color borderColor;
+
   const CustomCard({
     Key? key,
     required this.child,
@@ -18,6 +21,8 @@ class CustomCard extends StatelessWidget {
     this.showBorder = false,
     this.width,
     this.clipBehavior = Clip.none,
+    this.backgroundColor = ZPColors.whiteBgCard,
+    this.borderColor = ZPColors.boxShadowGray,
   }) : super(key: key);
 
   @override
@@ -29,19 +34,17 @@ class CustomCard extends StatelessWidget {
       clipBehavior: clipBehavior,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(8)),
-        border: showBorder
-            ? Border.all(color: ZPColors.boxShadowGray, width: 1.5)
-            : null,
+        border: showBorder ? Border.all(color: borderColor, width: 1.5) : null,
         boxShadow: showShadow
             ? [
-                const BoxShadow(
+                BoxShadow(
                   blurRadius: 5,
                   spreadRadius: 2,
-                  color: ZPColors.boxShadowGray,
+                  color: borderColor,
                 ),
               ]
             : null,
-        color: ZPColors.whiteBgCard,
+        color: backgroundColor,
       ),
       child: child,
     );

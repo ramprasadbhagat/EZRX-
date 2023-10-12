@@ -74,4 +74,34 @@ extension PriceAggregateExtension on List<PriceAggregate> {
               )
             : item,
       ).toList();
+
+  List<ComboMaterialItem> get comboMaterialItemList => map(
+        (product) {
+          final materialComboDeal = product.selfComboDeal;
+
+          return ComboMaterialItem(
+            comboDeals: product.price.comboDeal,
+            isComboEligible: product.price.comboDeal.isEligible,
+            valid: product.price.isValid,
+            quantity: product.quantity,
+            listPrice: product.listPrice,
+            finalIndividualPrice: product.comboOfferPrice,
+            productId: product.getMaterialNumber,
+            principalName: product.materialInfo.principalData.principalName,
+            principalCode: product.materialInfo.principalData.principalCode,
+            materialDescription: product.materialInfo.materialDescription,
+            minQty: materialComboDeal.minQty,
+            conditionNumber: materialComboDeal.conditionNumber,
+            mandatory: materialComboDeal.mandatory,
+            rate: materialComboDeal.rate,
+            suffix: materialComboDeal.suffix.stringValue,
+            setNo: product.comboDeal.getSetNo(
+              materialNumber: product.getMaterialNumber,
+            ),
+            comboDealType: product.comboDeal.comboDealType,
+            language: product.salesOrgConfig.getConfigLanguageDefaultEnglish,
+            parentId: product.materialInfo.parentID,
+          );
+        },
+      ).toList();
 }

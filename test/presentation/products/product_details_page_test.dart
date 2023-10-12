@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -50,6 +51,10 @@ class ProductImageMockBloc
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class ComboDealListMockBloc
+    extends MockBloc<ComboDealListEvent, ComboDealListState>
+    implements ComboDealListBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 final locator = GetIt.instance;
@@ -67,6 +72,7 @@ void main() {
   late MaterialPriceBloc materialPriceBlocMock;
   final mockProductImageBloc = ProductImageMockBloc();
   late Map<MaterialNumber, Price> mockPriceList;
+  final comboDealListMockBloc = ComboDealListMockBloc();
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
@@ -93,6 +99,8 @@ void main() {
           .thenReturn(MaterialPriceState.initial());
       when(() => mockProductImageBloc.state)
           .thenReturn(ProductImageState.initial());
+      when(() => comboDealListMockBloc.state)
+          .thenReturn(ComboDealListState.initial());
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -135,6 +143,9 @@ void main() {
             BlocProvider<EligibilityBloc>(
               create: (context) => eligibilityBlocMock,
             ),
+            BlocProvider<ComboDealListBloc>(
+              create: (context) => comboDealListMockBloc,
+            )
           ],
           child: const Scaffold(
             body: ProductDetailsPage(),

@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_item_bonus.dart';
@@ -48,6 +49,7 @@ class PriceAggregate with _$PriceAggregate {
     @Default(false) bool isSpecialOrderType,
     @Default(<StockInfo>[]) List<StockInfo> stockInfoList,
     required List<BonusSampleItem> bonusSampleItems,
+    required List<ComboMaterialItem> comboMaterials,
   }) = _PriceAggregate;
 
   factory PriceAggregate.empty() => PriceAggregate(
@@ -63,7 +65,55 @@ class PriceAggregate with _$PriceAggregate {
         tenderContract: TenderContract.empty(),
         comboDeal: ComboDeal.empty(),
         bonusSampleItems: <BonusSampleItem>[],
+        comboMaterials: <ComboMaterialItem>[],
       );
+
+  PriceAggregate get toCartProduct {
+    var cartProduct = PriceAggregate.empty();
+    if (materialInfo.type.typeBundle) {
+      cartProduct = cartProduct.copyWith(
+        materialInfo: materialInfo,
+        bundle: bundle,
+        salesOrgConfig: salesOrgConfig,
+      );
+    }
+    if (materialInfo.type.typeMaterial) {
+      cartProduct = cartProduct.copyWith(
+        materialInfo: materialInfo,
+        quantity: materialInfo.quantity.intValue,
+        salesOrgConfig: salesOrgConfig,
+        bonusSampleItems: bonusSampleItems,
+      );
+    }
+    if (materialInfo.type.typeCombo) {
+      cartProduct = cartProduct.copyWith(
+        materialInfo: materialInfo,
+        salesOrgConfig: salesOrgConfig,
+        comboMaterials: comboMaterials,
+      );
+    }
+
+    return cartProduct;
+  }
+
+  List<MaterialInfo> get toStockListMaterials {
+    final materialsInfo = <MaterialInfo>[];
+    if (materialInfo.type.typeBundle) {
+      materialsInfo.addAll(bundle.materials);
+    }
+    if (materialInfo.type.typeMaterial) {
+      materialsInfo.add(materialInfo);
+    }
+    if (materialInfo.type.typeCombo) {
+      materialsInfo.addAll(
+        comboMaterials.map(
+          (e) => MaterialInfo.empty().copyWith(materialNumber: e.productId),
+        ),
+      );
+    }
+
+    return materialsInfo;
+  }
 
   OrderTemplateMaterial toOrderTemplateMaterial() {
     return OrderTemplateMaterial(
@@ -197,8 +247,29 @@ class PriceAggregate with _$PriceAggregate {
     return NumUtils.roundToPlaces(finalPrice);
   }
 
+  double get comboOfferPrice {
+    var comboOfferPrice = 0.0;
+
+    comboOfferPrice = selfComboDeal != ComboDealMaterial.empty()
+        ? listPrice - (listPrice * selfComboDeal.rateToAbs / 100)
+        : listPrice;
+
+    return NumUtils.roundToPlaces(comboOfferPrice);
+  }
+
   double get unitPrice {
     return NumUtils.roundToPlaces(vatCalculation(finalPrice));
+  }
+
+  double get comboSubTotalExclTax {
+    var comboSubTotalExclTax = 0.0;
+
+    comboSubTotalExclTax = comboMaterials.fold(
+      0,
+      (previousValue, element) => previousValue + element.subTotal,
+    );
+
+    return NumUtils.roundToPlaces(comboSubTotalExclTax);
   }
 
   double get unitPriceForTotal {
@@ -235,6 +306,10 @@ class PriceAggregate with _$PriceAggregate {
 
   double get finalPriceTotal {
     return finalPrice * quantity;
+  }
+
+  double get comboOfferPriceTotal {
+    return comboOfferPrice * quantity;
   }
 
   String get finalPriceTotalForAllMaterial {
@@ -300,7 +375,9 @@ class PriceAggregate with _$PriceAggregate {
         result =
             salesOrgConfig.enableTaxAtTotalLevelOnly ? finalPrice : unitPrice;
         break;
-
+      case PriceType.priceWithComboOffer:
+        result = comboOfferPrice;
+        break;
       case PriceType.finalPriceTotal:
         result = finalPriceTotal;
         break;
@@ -308,6 +385,9 @@ class PriceAggregate with _$PriceAggregate {
         result = salesOrgConfig.enableTaxAtTotalLevelOnly
             ? finalPriceTotal
             : unitPriceTotal;
+        break;
+      case PriceType.priceWithComboOfferTotal:
+        result = comboOfferPriceTotal;
         break;
       case PriceType.listPrice:
       default:
@@ -643,4 +723,6 @@ enum PriceType {
   finalPrice,
   finalPriceTotal,
   unitPriceTotal,
+  priceWithComboOffer,
+  priceWithComboOfferTotal,
 }

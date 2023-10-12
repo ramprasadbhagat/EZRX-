@@ -11,6 +11,7 @@ class MaterialFilter with _$MaterialFilter {
     @Default(false) bool isFavourite,
     @Default(false) bool isFOCMaterial,
     @Default(false) bool bundleOffers,
+    @Default(false) bool comboOffers,
     @Default(false) bool isProductOffer,
     @Default(Sort.az) Sort sortBy,
     required Map<String, bool> manufactureMapOptions,
