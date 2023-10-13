@@ -71,6 +71,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
                   child: ScrollList<AnnouncementArticleItem>(
                     controller: _scrollController,
                     noRecordFoundWidget: const NoRecordFound(
+                      key: WidgetKeys.noArticleToShowKey,
                       title: 'No articles to show',
                     ),
                     onRefresh: () {
@@ -93,6 +94,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
                           ),
                         ),
                     itemBuilder: (context, index, item) => _ArticlesTile(
+                      key: WidgetKeys.genericKey(key: 'articleItem$index'),
                       article: item,
                     ),
                     items: state.filterAnnouncementListBySearchKey,
@@ -137,6 +139,7 @@ class _ArticlesTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _ArticleImageBox(
+              key: WidgetKeys.articleImageKey,
               imageUrl: article.thumbnail,
             ),
             Expanded(
@@ -148,6 +151,7 @@ class _ArticlesTile extends StatelessWidget {
                     Text(
                       article.title,
                       style: Theme.of(context).textTheme.labelSmall,
+                      key: WidgetKeys.articleTitleKey,
                     ),
                     const SizedBox(
                       height: 10,
@@ -158,6 +162,7 @@ class _ArticlesTile extends StatelessWidget {
                           .textTheme
                           .bodySmall
                           ?.copyWith(color: ZPColors.extraLightGrey4),
+                      key: WidgetKeys.articleTimeKey,
                     ),
                   ],
                 ),

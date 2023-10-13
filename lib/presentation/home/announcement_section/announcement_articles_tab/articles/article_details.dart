@@ -74,6 +74,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                 children: [
                   FlexibleSpaceBar(
                     background: CustomImage(
+                      key: WidgetKeys.articleDetailsImageKey,
                       width: MediaQuery.of(context).size.width,
                       imageUrl: widget.article.thumbnail,
                       errorWidget: const NoRecordFound(
@@ -137,6 +138,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Html(
+                          key: WidgetKeys.articleDetailsBodyKey,
                           style: {
                             'body': Style(
                               padding: const EdgeInsets.all(0),
@@ -201,6 +203,7 @@ class _TitleSection extends StatelessWidget {
                     color: ZPColors.neutralsGrey1,
                     fontSize: 10,
                   ),
+              key: WidgetKeys.articleDetailsTimeKey,
             ),
           ),
           FittedBox(
@@ -210,6 +213,7 @@ class _TitleSection extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
+              key: WidgetKeys.articleDetailsTitleKey,
             ),
           ),
           const SizedBox(

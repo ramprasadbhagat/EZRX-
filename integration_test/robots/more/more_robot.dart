@@ -12,6 +12,8 @@ class MoreRobot extends CommonRobot {
   final newRequestFloatingButton =
       find.byKey(WidgetKeys.returnByItemsNewRequestButton);
   final paymentTile = find.byKey(WidgetKeys.paymentsTile);
+  final announcementArticleTile =
+      find.byKey(WidgetKeys.announcementArticleTile);
 
   final loginOnBehalf = find.byKey(WidgetKeys.loginOnBehalfButtonKey);
   final securityTile = find.byKey(WidgetKeys.securityTile);
@@ -69,6 +71,10 @@ class MoreRobot extends CommonRobot {
     );
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(WidgetKeys.loginOnBehalfLoginButtonKey));
+  }
+
+  Future<void> tapAnnouncementArticleTile() async {
+    await tester.tap(announcementArticleTile);
     await tester.pumpAndSettle();
   }
 }

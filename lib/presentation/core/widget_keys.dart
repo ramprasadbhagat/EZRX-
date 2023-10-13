@@ -122,6 +122,7 @@ class WidgetKeys {
   static const Key loginOnBehalfCancelButtonKey =
       Key('loginOnBehalfCancelButtonKey');
   static const Key aboutUsFloatingButton = Key('aboutUsFloatingButton');
+  static const Key announcementArticleTile = Key('announcementArticleTile');
 
   //  Change Delivery Address BottomSheet
   //============================================================
@@ -732,6 +733,14 @@ class WidgetKeys {
       Key('articleDetailsBackButtonKey');
   static const Key articleDetailsBottomBackButtonKey =
       Key('articleDetailsBottomBackButtonKey');
+  static const Key noArticleToShowKey = Key('noArticleToShow');
+  static const Key articleImageKey = Key('articleImage');
+  static const Key articleTitleKey = Key('articleTitle');
+  static const Key articleTimeKey = Key('articleTime');
+  static const Key articleDetailsTitleKey = Key('articleDetailsTitle');
+  static const Key articleDetailsTimeKey = Key('articleDetailsTime');
+  static const Key articleDetailsBodyKey = Key('articleDetailsBody');
+  static const Key articleDetailsImageKey = Key('articleDetailsImage');
 
   //============================================================
   //  Change Password

@@ -157,6 +157,7 @@ class MoreDetailsTile {
 
   factory MoreDetailsTile.announcementAndArticleTab(BuildContext context) =>
       MoreDetailsTile(
+        key: WidgetKeys.announcementArticleTile,
         icon: const Icon(
           Icons.campaign_outlined,
           color: ZPColors.greenIconColor,
