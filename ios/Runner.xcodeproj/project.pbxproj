@@ -303,6 +303,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/${PRODUCT_NAME}.app/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
 			);
 			name = "[Crashlytics] Upload dSYM";
 			outputFileListPaths = (
@@ -311,7 +316,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sleep 1 \n\nGOOGLESERVICE_INFO_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n\nif [ -f \"$GOOGLESERVICE_INFO_FILE\" ]; then\n    # Get GOOGLE_APP_ID from GoogleService-Info.plist file\n    APP_ID=\"$(grep -A1 GOOGLE_APP_ID \"${GOOGLESERVICE_INFO_FILE}\" | tail -n1 | sed -e 's/.*\\<string\\>\\(.*\\)\\<\\/string\\>/\\1/')\"\n\n    # Run scripts to upload dSYMs to Firebase crashlytics\n    \"${PODS_ROOT}/FirebaseCrashlytics/run\" -ai \"${APP_ID}\"\n    \"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" --build-phase --validate -ai \"${APP_ID}\"\n    \"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" --build-phase -ai \"${APP_ID}\"\n    \"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${GOOGLESERVICE_INFO_FILE}\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n    \n    echo \"Successfully uploaded dSYMs to Firebase Crashlytics!\"\nelse\n    echo \"GoogleService-Info.plist not found in ${GOOGLESERVICE_INFO_FILE}\"\nfi\n";
+			shellScript = "sleep 1 \n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n\nGOOGLESERVICE_INFO_FILE=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n\nif [ -f \"$GOOGLESERVICE_INFO_FILE\" ]; then\n    # Get GOOGLE_APP_ID from GoogleService-Info.plist file\n    APP_ID=\"$(grep -A1 GOOGLE_APP_ID \"${GOOGLESERVICE_INFO_FILE}\" | tail -n1 | sed -e 's/.*\\<string\\>\\(.*\\)\\<\\/string\\>/\\1/')\"\n\n    # Run scripts to upload dSYMs to Firebase crashlytics\n    \"${PODS_ROOT}/FirebaseCrashlytics/run\" -ai \"${APP_ID}\"\n    \"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" --build-phase --validate -ai \"${APP_ID}\"\n    \"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" --build-phase -ai \"${APP_ID}\"\n    \"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${GOOGLESERVICE_INFO_FILE}\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n    \n    echo \"Successfully uploaded dSYMs to Firebase Crashlytics!\"\nelse\n    echo \"GoogleService-Info.plist not found in ${GOOGLESERVICE_INFO_FILE}\"\nfi\n";
 		};
 		9EBE05DD287DA8B700D968FB /* Copy GoogleServices-Info.plist to the default location in app package */ = {
 			isa = PBXShellScriptBuildPhase;
