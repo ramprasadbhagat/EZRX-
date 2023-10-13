@@ -176,6 +176,7 @@ class MaterialListRemoteDataSource {
     required String salesOrg,
     required String shipToCode,
     required String type,
+    required String language,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final queryData = materialListQuery.getProductDetailsQuery();
@@ -187,6 +188,7 @@ class MaterialListRemoteDataSource {
           'SalesOrg': salesOrg,
           'ShipTo': shipToCode,
           'Type': type,
+          'Language': language,
         },
       };
       final res = await httpService.request(

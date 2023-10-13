@@ -4,8 +4,10 @@ part of 'view_by_order_details_bloc.dart';
 class ViewByOrderDetailsEvent with _$ViewByOrderDetailsEvent {
   const factory ViewByOrderDetailsEvent.initialized({
     required User user,
+    required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
   }) = _Initialized;
   const factory ViewByOrderDetailsEvent.fetch({
     required OrderNumber orderNumber,
@@ -19,4 +21,5 @@ class ViewByOrderDetailsEvent with _$ViewByOrderDetailsEvent {
   }) = _UpdateMaterialTenderContract;
   const factory ViewByOrderDetailsEvent.expandAttachments() =
       _ExpandAttachments;
+  const factory ViewByOrderDetailsEvent.updateBundle() = _UpdateBundle;
 }

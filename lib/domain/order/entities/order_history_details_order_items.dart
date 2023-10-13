@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
@@ -43,6 +44,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required PriceAggregate priceAggregate,
     required MaterialInfoType productType,
     required String parentId,
+    required MaterialInfo material,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -70,6 +72,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         priceAggregate: PriceAggregate.empty(),
         productType: MaterialInfoType(''),
         parentId: '',
+        material: MaterialInfo.empty(),
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(
@@ -152,8 +155,9 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
 extension ViewByOrderDetailsListExtension
     on List<OrderHistoryDetailsOrderItem> {
-  List<ViewByOrdersGroup> get getViewByOrderItemDetailsList {
+  List<ViewByOrdersGroup> get materialItemDetailsList {
     return List<OrderHistoryDetailsOrderItem>.from(this)
+        .where((element) => element.productType.typeMaterial)
         .groupListsBy((item) => item.principalData.principalName)
         .entries
         .map(
@@ -161,6 +165,24 @@ extension ViewByOrderDetailsListExtension
             createdDate: DateTimeStringValue(''),
             viewByOrderItem: entry.value,
             principalName: entry.key,
+            parentId: MaterialNumber(''),
+            orderHeaders: <OrderHistoryDetails>[],
+          ),
+        )
+        .toList();
+  }
+
+  List<ViewByOrdersGroup> get bundleItemDetailsList {
+    return List<OrderHistoryDetailsOrderItem>.from(this)
+        .where((element) => element.productType.typeBundle)
+        .groupListsBy((item) => item.parentId)
+        .entries
+        .map(
+          (entry) => ViewByOrdersGroup(
+            createdDate: DateTimeStringValue(''),
+            viewByOrderItem: entry.value,
+            principalName: PrincipalName(''),
+            parentId: MaterialNumber(entry.key),
             orderHeaders: <OrderHistoryDetails>[],
           ),
         )

@@ -42,6 +42,7 @@ mixin _$OrderHistoryDetailsOrderItem {
   PriceAggregate get priceAggregate => throw _privateConstructorUsedError;
   MaterialInfoType get productType => throw _privateConstructorUsedError;
   String get parentId => throw _privateConstructorUsedError;
+  MaterialInfo get material => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsOrderItemCopyWith<OrderHistoryDetailsOrderItem>
@@ -79,7 +80,8 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       MaterialStockInfo materialStockInfo,
       PriceAggregate priceAggregate,
       MaterialInfoType productType,
-      String parentId});
+      String parentId,
+      MaterialInfo material});
 
   $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
       get tenderContractDetails;
@@ -87,6 +89,7 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
   $ProductImagesCopyWith<$Res> get productImages;
   $MaterialStockInfoCopyWith<$Res> get materialStockInfo;
   $PriceAggregateCopyWith<$Res> get priceAggregate;
+  $MaterialInfoCopyWith<$Res> get material;
 }
 
 /// @nodoc
@@ -126,6 +129,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? priceAggregate = null,
     Object? productType = null,
     Object? parentId = null,
+    Object? material = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -220,6 +224,10 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as String,
+      material: null == material
+          ? _value.material
+          : material // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
     ) as $Val);
   }
 
@@ -264,6 +272,14 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
       return _then(_value.copyWith(priceAggregate: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialInfoCopyWith<$Res> get material {
+    return $MaterialInfoCopyWith<$Res>(_value.material, (value) {
+      return _then(_value.copyWith(material: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -298,7 +314,8 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
       MaterialStockInfo materialStockInfo,
       PriceAggregate priceAggregate,
       MaterialInfoType productType,
-      String parentId});
+      String parentId,
+      MaterialInfo material});
 
   @override
   $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
@@ -311,6 +328,8 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
   $MaterialStockInfoCopyWith<$Res> get materialStockInfo;
   @override
   $PriceAggregateCopyWith<$Res> get priceAggregate;
+  @override
+  $MaterialInfoCopyWith<$Res> get material;
 }
 
 /// @nodoc
@@ -349,6 +368,7 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
     Object? priceAggregate = null,
     Object? productType = null,
     Object? parentId = null,
+    Object? material = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItem(
       type: null == type
@@ -443,6 +463,10 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as String,
+      material: null == material
+          ? _value.material
+          : material // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
     ));
   }
 }
@@ -473,7 +497,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
       required this.materialStockInfo,
       required this.priceAggregate,
       required this.productType,
-      required this.parentId})
+      required this.parentId,
+      required this.material})
       : _details = details,
         super._();
 
@@ -529,10 +554,12 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   final MaterialInfoType productType;
   @override
   final String parentId;
+  @override
+  final MaterialInfo material;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId)';
+    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material)';
   }
 
   @override
@@ -581,7 +608,9 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
             (identical(other.productType, productType) ||
                 other.productType == productType) &&
             (identical(other.parentId, parentId) ||
-                other.parentId == parentId));
+                other.parentId == parentId) &&
+            (identical(other.material, material) ||
+                other.material == material));
   }
 
   @override
@@ -609,7 +638,8 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
         materialStockInfo,
         priceAggregate,
         productType,
-        parentId
+        parentId,
+        material
       ]);
 
   @JsonKey(ignore: true)
@@ -646,7 +676,8 @@ abstract class _OrderHistoryDetailsOrderItem
       required final MaterialStockInfo materialStockInfo,
       required final PriceAggregate priceAggregate,
       required final MaterialInfoType productType,
-      required final String parentId}) = _$_OrderHistoryDetailsOrderItem;
+      required final String parentId,
+      required final MaterialInfo material}) = _$_OrderHistoryDetailsOrderItem;
   _OrderHistoryDetailsOrderItem._() : super._();
 
   @override
@@ -695,6 +726,8 @@ abstract class _OrderHistoryDetailsOrderItem
   MaterialInfoType get productType;
   @override
   String get parentId;
+  @override
+  MaterialInfo get material;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderItemCopyWith<_$_OrderHistoryDetailsOrderItem>

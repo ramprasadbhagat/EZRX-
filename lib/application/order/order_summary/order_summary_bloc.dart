@@ -105,6 +105,7 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
           user: state.user,
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
+          cartProducts: e.priceAggregate,
         );
         failureOrSuccess.fold(
           (failure) {

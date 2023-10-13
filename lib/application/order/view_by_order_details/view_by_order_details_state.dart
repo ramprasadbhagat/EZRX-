@@ -5,6 +5,7 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
   const ViewByOrderDetailsState._();
   const factory ViewByOrderDetailsState({
     required User user,
+    required SalesOrganisationConfigs configs,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required OrderHistoryDetails orderHistoryDetails,
@@ -14,7 +15,8 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
     required Map<MaterialQueryInfo, PriceAggregate> materials,
     required bool isExpanded,
     required List<ProductDetailAggregate> productDetailAggregateList,
-    required bool isFetchingList,
+    required ShipToInfo shipToInfo,
+    required bool isLoadingBundleDetail,
   }) = _ViewByOrderDetailsState;
 
   factory ViewByOrderDetailsState.initial() => ViewByOrderDetailsState(
@@ -28,7 +30,9 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
         materials: {},
         isExpanded: false,
         productDetailAggregateList: <ProductDetailAggregate>[],
-        isFetchingList: false,
+        shipToInfo: ShipToInfo.empty(),
+        isLoadingBundleDetail: false,
+        configs: SalesOrganisationConfigs.empty(),
       );
   int get poDocumentCount =>
       orderHistoryDetails.orderHistoryDetailsPoDocuments.length;
@@ -37,6 +41,11 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
   int get totalItemCount => displayedPoDocumentCount + additionalItemCount;
   bool get isOrderHistoryDetailsEmpty =>
       orderHistoryDetails == OrderHistoryDetails.empty();
+
+  List<MaterialNumber> get bundleCodes =>
+      orderHistoryDetails.orderHistoryDetailsOrderItem.bundleItemDetailsList
+          .map((e) => e.parentId)
+          .toList();
 
   //TODO:Need To Revisit when tender contract is implemented for V3
   // bool get loadingTenderContractSuccess => isLoadingTenderContract.values.every(

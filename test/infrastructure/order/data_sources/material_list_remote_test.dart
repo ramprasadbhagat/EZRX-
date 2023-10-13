@@ -275,6 +275,7 @@ void main() {
       shipToCode: 'fake-shipto-code',
       type: 'bundle',
       code: 'fake_code',
+      language: 'en',
     );
 
     final finalData =

@@ -55,7 +55,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
-import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/account_suspended_warning.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../utils/widget_utils.dart';

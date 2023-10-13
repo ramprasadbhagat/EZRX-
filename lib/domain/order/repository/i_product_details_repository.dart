@@ -28,6 +28,14 @@ abstract class IProductDetailRepository {
     required List<MaterialInfoType> types,
   });
 
+  Future<Map<MaterialNumber, MaterialInfo>> getBundleListDetail({
+    required List<MaterialNumber> bundleCodes,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Locale locale,
+  });
+
   Future<Either<ApiFailure, MaterialInfo>> getMaterialDetail({
     required MaterialNumber materialNumber,
     required SalesOrganisation salesOrganisation,

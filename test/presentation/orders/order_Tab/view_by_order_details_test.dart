@@ -483,6 +483,7 @@ void main() {
                 unitPrice: ZpPrice('17.2'),
                 totalPrice: TotalPrice('516'),
                 type: OrderItemType('Comm'),
+                productType: MaterialInfoType('material'),
               )
             ],
           ),
@@ -504,6 +505,8 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
+      await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
+      await tester.pumpAndSettle();
       final viewByOrderDetailsItemFinder = find.byKey(
         WidgetKeys.genericKey(
           key: '0',
@@ -545,6 +548,8 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
+      await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
+      await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
         '${'Batch'.tr()}: ${fakeOrderHistoryDetailsOrderItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryDetailsOrderItem.expiryDate.dateOrDashString})',
       );
@@ -568,7 +573,9 @@ void main() {
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderHistoryDetailsOrderItem: [
-              fakeOrderHistoryDetailsOrderItem,
+              fakeOrderHistoryDetailsOrderItem.copyWith(
+                productType: MaterialInfoType.material(),
+              ),
             ],
           ),
         ),
@@ -578,6 +585,8 @@ void main() {
         Stream.fromIterable(expectedStates),
       );
       await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
         '${'Batch'.tr()}: ${fakeOrderHistoryDetailsOrderItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryDetailsOrderItem.expiryDate.dateOrDashString})',

@@ -7,13 +7,11 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
-
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:flutter/material.dart';
 
 abstract class IMaterialListRepository {
   Future<Either<ApiFailure, MaterialResponse>> getMaterialList({
@@ -24,6 +22,7 @@ abstract class IMaterialListRepository {
     required int pageSize,
     required int offset,
     required MaterialFilter selectedMaterialFilter,
+    required Locale locale,
   });
 
   Future<Either<ApiFailure, List<MaterialInfo>>> getComboDealMaterials({
@@ -48,6 +47,7 @@ abstract class IMaterialListRepository {
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
     required String type,
+    required Locale locale,
   });
 
   Future<Either<ApiFailure, Map<MaterialNumber, MaterialInfo>>> getBundleData({
@@ -55,6 +55,7 @@ abstract class IMaterialListRepository {
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required ShipToInfo shipToInfo,
+    required Locale locale,
   });
 
   Future<Either<ApiFailure, MaterialResponse>> getMaterialBonusList({

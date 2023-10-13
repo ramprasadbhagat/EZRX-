@@ -1,23 +1,23 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:flutter/material.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
-import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 
+import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../common_mock_data/user_mock.dart';
 
 class ViewByOrderDetailsRepositoryMock extends Mock
     implements ViewByOrderDetailsRepository {}
@@ -78,6 +78,8 @@ void main() {
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            configs: fakeEmptySalesConfigs,
           ),
         ),
         expect: () => [
@@ -85,6 +87,8 @@ void main() {
             user: fakeClient,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            configs: fakeEmptySalesConfigs,
           ),
         ],
       );

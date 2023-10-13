@@ -239,6 +239,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               );
               context.setLocale(locale);
             }
+
             _initializePaymentConfiguration(state);
           },
         ),
@@ -1128,6 +1129,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 user: context.read<UserBloc>().state.user,
                 salesOrganisation:
                     context.read<SalesOrgBloc>().state.salesOrganisation,
+                shipToInfo: state.shipToInfo,
+                configs: context.read<SalesOrgBloc>().state.configs,
               ),
             );
       }

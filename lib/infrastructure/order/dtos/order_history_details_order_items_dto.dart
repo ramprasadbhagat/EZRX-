@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -136,6 +137,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       materialStockInfo: MaterialStockInfo.empty(),
       priceAggregate: PriceAggregate.empty(),
       productType: MaterialInfoType(productType),
+      material: MaterialInfo.empty(),
     );
   }
 

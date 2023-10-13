@@ -81,7 +81,10 @@ class PriceComponent extends StatelessWidget {
       textSpans.add(TextSpan(text: ')', style: currencyCodeTextStyle));
     }
 
-    if (type == PriceStyle.bundlePrice) {
+    if (type == PriceStyle.bundlePrice ||
+        type == PriceStyle.bundleListPriceStrikeThrough ||
+        type == PriceStyle.bundleActiveOfferPrice ||
+        type == PriceStyle.bundleFinalPrice) {
       textSpans
           .add(TextSpan(text: ' $trailingText', style: currencyCodeTextStyle));
     }
@@ -104,6 +107,9 @@ class PriceComponent extends StatelessWidget {
 enum PriceStyle {
   commonPrice,
   bundlePrice,
+  bundleActiveOfferPrice,
+  bundleFinalPrice,
+  bundleListPriceStrikeThrough,
   counterOfferPrice,
   bonusPrice,
   taxPrice,
@@ -122,11 +128,13 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
   switch (type) {
     case PriceStyle.paymentInProgressPrice:
     case PriceStyle.commonPrice:
+    case PriceStyle.bundleActiveOfferPrice:
       return Theme.of(context).textTheme.labelSmall!.copyWith(
             color: ZPColors.primary,
           );
+    case PriceStyle.bundleListPriceStrikeThrough:
     case PriceStyle.counterOfferPrice:
-      return Theme.of(context).textTheme.labelSmall!.copyWith(
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.darkGray,
             decoration: TextDecoration.lineThrough,
           );
@@ -172,6 +180,10 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       return Theme.of(context).textTheme.titleMedium!.copyWith(
             color: ZPColors.primary,
           );
+    case PriceStyle.bundleFinalPrice:
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
+            color: ZPColors.darkGray,
+          );
     default:
       return Theme.of(context).textTheme.labelSmall!.copyWith(
             color: ZPColors.black,
@@ -182,11 +194,13 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
 TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
   switch (type) {
     case PriceStyle.commonPrice:
+    case PriceStyle.bundleActiveOfferPrice:
       return Theme.of(context).textTheme.titleSmall!.copyWith(
             color: ZPColors.primary,
           );
+    case PriceStyle.bundleListPriceStrikeThrough:
     case PriceStyle.counterOfferPrice:
-      return Theme.of(context).textTheme.titleSmall!.copyWith(
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.darkGray,
             decoration: TextDecoration.lineThrough,
           );
@@ -230,6 +244,10 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.comboSubTotalExclTax:
       return Theme.of(context).textTheme.titleMedium!.copyWith(
             color: ZPColors.primary,
+          );
+    case PriceStyle.bundleFinalPrice:
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
+            color: ZPColors.darkGray,
           );
     default:
       return Theme.of(context)

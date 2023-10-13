@@ -191,6 +191,11 @@ void main() {
             customerCodeInfo: seedState.customerCodeInfo,
             salesOrganisation: seedState.salesOrganisation,
             orderResponse: submitOrderResponse,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                quantity: 2,
+              )
+            ],
           ),
         ).thenAnswer(
           (value) async => Right(orderHistoryDetails),
@@ -247,6 +252,11 @@ void main() {
             salesOrganisation:
                 fakeSalesOrganisation.copyWith(salesOrg: fakeSalesOrg),
             orderResponse: submitOrderResponse,
+            cartProducts: <PriceAggregate>[
+              PriceAggregate.empty().copyWith(
+                quantity: 2,
+              )
+            ],
           ),
         ).thenAnswer(
           (value) async => const Left(ApiFailure.other('Some Error')),

@@ -12,8 +12,8 @@ import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dar
 import 'package:ezrxmobile/presentation/home/selector/home_product_search_bar.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
-import 'package:ezrxmobile/presentation/orders/core/account_suspended_warning.dart';
-import 'package:ezrxmobile/presentation/orders/core/edi_user_banner.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/account_suspended_warning.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';

@@ -20,6 +20,7 @@ mixin _$ViewByOrdersGroup {
   PrincipalName get principalName => throw _privateConstructorUsedError;
   List<OrderHistoryDetails> get orderHeaders =>
       throw _privateConstructorUsedError;
+  MaterialNumber get parentId => throw _privateConstructorUsedError;
   List<OrderHistoryDetailsOrderItem> get viewByOrderItem =>
       throw _privateConstructorUsedError;
 
@@ -38,6 +39,7 @@ abstract class $ViewByOrdersGroupCopyWith<$Res> {
       {DateTimeStringValue createdDate,
       PrincipalName principalName,
       List<OrderHistoryDetails> orderHeaders,
+      MaterialNumber parentId,
       List<OrderHistoryDetailsOrderItem> viewByOrderItem});
 }
 
@@ -57,6 +59,7 @@ class _$ViewByOrdersGroupCopyWithImpl<$Res, $Val extends ViewByOrdersGroup>
     Object? createdDate = null,
     Object? principalName = null,
     Object? orderHeaders = null,
+    Object? parentId = null,
     Object? viewByOrderItem = null,
   }) {
     return _then(_value.copyWith(
@@ -72,6 +75,10 @@ class _$ViewByOrdersGroupCopyWithImpl<$Res, $Val extends ViewByOrdersGroup>
           ? _value.orderHeaders
           : orderHeaders // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetails>,
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
       viewByOrderItem: null == viewByOrderItem
           ? _value.viewByOrderItem
           : viewByOrderItem // ignore: cast_nullable_to_non_nullable
@@ -92,6 +99,7 @@ abstract class _$$_ViewByOrdersGroupCopyWith<$Res>
       {DateTimeStringValue createdDate,
       PrincipalName principalName,
       List<OrderHistoryDetails> orderHeaders,
+      MaterialNumber parentId,
       List<OrderHistoryDetailsOrderItem> viewByOrderItem});
 }
 
@@ -109,6 +117,7 @@ class __$$_ViewByOrdersGroupCopyWithImpl<$Res>
     Object? createdDate = null,
     Object? principalName = null,
     Object? orderHeaders = null,
+    Object? parentId = null,
     Object? viewByOrderItem = null,
   }) {
     return _then(_$_ViewByOrdersGroup(
@@ -124,6 +133,10 @@ class __$$_ViewByOrdersGroupCopyWithImpl<$Res>
           ? _value._orderHeaders
           : orderHeaders // ignore: cast_nullable_to_non_nullable
               as List<OrderHistoryDetails>,
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
       viewByOrderItem: null == viewByOrderItem
           ? _value._viewByOrderItem
           : viewByOrderItem // ignore: cast_nullable_to_non_nullable
@@ -134,14 +147,16 @@ class __$$_ViewByOrdersGroupCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByOrdersGroup implements _ViewByOrdersGroup {
+class _$_ViewByOrdersGroup extends _ViewByOrdersGroup {
   _$_ViewByOrdersGroup(
       {required this.createdDate,
       required this.principalName,
       required final List<OrderHistoryDetails> orderHeaders,
+      required this.parentId,
       required final List<OrderHistoryDetailsOrderItem> viewByOrderItem})
       : _orderHeaders = orderHeaders,
-        _viewByOrderItem = viewByOrderItem;
+        _viewByOrderItem = viewByOrderItem,
+        super._();
 
   @override
   final DateTimeStringValue createdDate;
@@ -155,6 +170,8 @@ class _$_ViewByOrdersGroup implements _ViewByOrdersGroup {
     return EqualUnmodifiableListView(_orderHeaders);
   }
 
+  @override
+  final MaterialNumber parentId;
   final List<OrderHistoryDetailsOrderItem> _viewByOrderItem;
   @override
   List<OrderHistoryDetailsOrderItem> get viewByOrderItem {
@@ -165,7 +182,7 @@ class _$_ViewByOrdersGroup implements _ViewByOrdersGroup {
 
   @override
   String toString() {
-    return 'ViewByOrdersGroup(createdDate: $createdDate, principalName: $principalName, orderHeaders: $orderHeaders, viewByOrderItem: $viewByOrderItem)';
+    return 'ViewByOrdersGroup(createdDate: $createdDate, principalName: $principalName, orderHeaders: $orderHeaders, parentId: $parentId, viewByOrderItem: $viewByOrderItem)';
   }
 
   @override
@@ -179,6 +196,8 @@ class _$_ViewByOrdersGroup implements _ViewByOrdersGroup {
                 other.principalName == principalName) &&
             const DeepCollectionEquality()
                 .equals(other._orderHeaders, _orderHeaders) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
             const DeepCollectionEquality()
                 .equals(other._viewByOrderItem, _viewByOrderItem));
   }
@@ -189,6 +208,7 @@ class _$_ViewByOrdersGroup implements _ViewByOrdersGroup {
       createdDate,
       principalName,
       const DeepCollectionEquality().hash(_orderHeaders),
+      parentId,
       const DeepCollectionEquality().hash(_viewByOrderItem));
 
   @JsonKey(ignore: true)
@@ -199,13 +219,15 @@ class _$_ViewByOrdersGroup implements _ViewByOrdersGroup {
           this, _$identity);
 }
 
-abstract class _ViewByOrdersGroup implements ViewByOrdersGroup {
+abstract class _ViewByOrdersGroup extends ViewByOrdersGroup {
   factory _ViewByOrdersGroup(
           {required final DateTimeStringValue createdDate,
           required final PrincipalName principalName,
           required final List<OrderHistoryDetails> orderHeaders,
+          required final MaterialNumber parentId,
           required final List<OrderHistoryDetailsOrderItem> viewByOrderItem}) =
       _$_ViewByOrdersGroup;
+  _ViewByOrdersGroup._() : super._();
 
   @override
   DateTimeStringValue get createdDate;
@@ -213,6 +235,8 @@ abstract class _ViewByOrdersGroup implements ViewByOrdersGroup {
   PrincipalName get principalName;
   @override
   List<OrderHistoryDetails> get orderHeaders;
+  @override
+  MaterialNumber get parentId;
   @override
   List<OrderHistoryDetailsOrderItem> get viewByOrderItem;
   @override

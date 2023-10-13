@@ -99,6 +99,37 @@ class ProductDetailRepository implements IProductDetailRepository {
   }
 
   @override
+  Future<Map<MaterialNumber, MaterialInfo>> getBundleListDetail({
+    required List<MaterialNumber> bundleCodes,
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Locale locale,
+  }) async {
+    final bundleInfoMap = <MaterialNumber, MaterialInfo>{};
+    await Future.wait(
+      bundleCodes.map(
+        (code) async {
+          final bundleProductDetail = await getBundleDetail(
+            locale: locale,
+            materialNumber: code,
+            shipToInfo: shipToInfo,
+            type: MaterialInfoType.bundle(),
+            customerCodeInfo: customerCodeInfo,
+            salesOrganisation: salesOrganisation,
+          );
+          bundleProductDetail.fold(
+            (l) {},
+            (r) => bundleInfoMap[code] = r,
+          );
+        },
+      ),
+    );
+
+    return bundleInfoMap;
+  }
+
+  @override
   Future<Either<ApiFailure, MaterialInfo>> getMaterialDetail({
     required MaterialNumber materialNumber,
     required SalesOrganisation salesOrganisation,
@@ -160,6 +191,7 @@ class ProductDetailRepository implements IProductDetailRepository {
           customerCode: customerCodeInfo.customerCodeSoldTo,
           shipToCode: shipToInfo.shipToCustomerCode,
           type: type.getValue(),
+          language: locale.languageCode,
         );
 
         return Right(

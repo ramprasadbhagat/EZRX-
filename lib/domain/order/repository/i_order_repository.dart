@@ -74,6 +74,7 @@ abstract class IOrderRepository {
     required User user,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
+    required List<PriceAggregate> cartProducts,
   });
 
   Future<Either<ApiFailure, List<MaterialStockInfo>>>

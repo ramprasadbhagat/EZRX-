@@ -1,8 +1,8 @@
 part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 
-class _OrderSummaary extends StatelessWidget {
+class _OrderSummary extends StatelessWidget {
   final OrderHistoryDetails orderHistoryDetails;
-  const _OrderSummaary({Key? key, required this.orderHistoryDetails})
+  const _OrderSummary({Key? key, required this.orderHistoryDetails})
       : super(key: key);
 
   @override

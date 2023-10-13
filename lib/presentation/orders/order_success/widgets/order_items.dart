@@ -9,6 +9,8 @@ class _OrderItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (orderItems.isEmpty) return const SizedBox.shrink();
+
     return Column(
       key: WidgetKeys.orderSuccessItemsSection,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +36,7 @@ class _OrderItems extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         child: Text(
-                          item.principalName.getOrDefaultValue(''),
+                          item.principalName.name,
                           style:
                               Theme.of(context).textTheme.labelSmall?.copyWith(
                                     color: ZPColors.black,

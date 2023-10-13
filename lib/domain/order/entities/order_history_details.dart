@@ -183,6 +183,7 @@ extension ViewByOrderListExtension on List<OrderHistoryDetails> {
             orderHeaders: entry.value,
             principalName: PrincipalName(''),
             viewByOrderItem: <OrderHistoryDetailsOrderItem>[],
+            parentId: MaterialNumber(''),
           ),
         )
         .toList();

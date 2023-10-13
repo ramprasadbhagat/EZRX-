@@ -1,16 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderItemDetailsSection extends StatelessWidget {
   const OrderItemDetailsSection({
@@ -21,6 +21,8 @@ class OrderItemDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (viewByOrderHistoryGroupList.isEmpty) return const SizedBox.shrink();
+
     final eligibilityState = context.read<EligibilityBloc>().state;
     final displayGovernmentMaterialCOde =
         eligibilityState.salesOrganisation.salesOrg.isTW;

@@ -18,8 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ViewByOrderDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(OrderNumber orderNumber) fetch,
     required TResult Function(OrderHistoryDetails orderHistoryDetails)
@@ -28,12 +32,17 @@ mixin _$ViewByOrderDetailsEvent {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
+    required TResult Function() updateBundle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(OrderNumber orderNumber)? fetch,
     TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -41,12 +50,17 @@ mixin _$ViewByOrderDetailsEvent {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
+    TResult? Function()? updateBundle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(OrderNumber orderNumber)? fetch,
     TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -54,6 +68,7 @@ mixin _$ViewByOrderDetailsEvent {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
+    TResult Function()? updateBundle,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,6 +80,7 @@ mixin _$ViewByOrderDetailsEvent {
     required TResult Function(_UpdateMaterialTenderContract value)
         updateMaterialTenderContract,
     required TResult Function(_ExpandAttachments value) expandAttachments,
+    required TResult Function(_UpdateBundle value) updateBundle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +91,7 @@ mixin _$ViewByOrderDetailsEvent {
     TResult? Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult? Function(_ExpandAttachments value)? expandAttachments,
+    TResult? Function(_UpdateBundle value)? updateBundle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +102,7 @@ mixin _$ViewByOrderDetailsEvent {
     TResult Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult Function(_ExpandAttachments value)? expandAttachments,
+    TResult Function(_UpdateBundle value)? updateBundle,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,12 +135,16 @@ abstract class _$$_InitializedCopyWith<$Res> {
   @useResult
   $Res call(
       {User user,
+      SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
-      SalesOrganisation salesOrganisation});
+      SalesOrganisation salesOrganisation,
+      ShipToInfo shipToInfo});
 
   $UserCopyWith<$Res> get user;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -137,14 +159,20 @@ class __$$_InitializedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
+    Object? configs = null,
     Object? customerCodeInfo = null,
     Object? salesOrganisation = null,
+    Object? shipToInfo = null,
   }) {
     return _then(_$_Initialized(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -153,6 +181,10 @@ class __$$_InitializedCopyWithImpl<$Res>
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
               as SalesOrganisation,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ));
   }
 
@@ -161,6 +193,14 @@ class __$$_InitializedCopyWithImpl<$Res>
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get configs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
+      return _then(_value.copyWith(configs: value));
     });
   }
 
@@ -179,6 +219,14 @@ class __$$_InitializedCopyWithImpl<$Res>
       return _then(_value.copyWith(salesOrganisation: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -186,19 +234,25 @@ class __$$_InitializedCopyWithImpl<$Res>
 class _$_Initialized implements _Initialized {
   const _$_Initialized(
       {required this.user,
+      required this.configs,
       required this.customerCodeInfo,
-      required this.salesOrganisation});
+      required this.salesOrganisation,
+      required this.shipToInfo});
 
   @override
   final User user;
   @override
+  final SalesOrganisationConfigs configs;
+  @override
   final CustomerCodeInfo customerCodeInfo;
   @override
   final SalesOrganisation salesOrganisation;
+  @override
+  final ShipToInfo shipToInfo;
 
   @override
   String toString() {
-    return 'ViewByOrderDetailsEvent.initialized(user: $user, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation)';
+    return 'ViewByOrderDetailsEvent.initialized(user: $user, configs: $configs, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, shipToInfo: $shipToInfo)';
   }
 
   @override
@@ -207,15 +261,18 @@ class _$_Initialized implements _Initialized {
         (other.runtimeType == runtimeType &&
             other is _$_Initialized &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.configs, configs) || other.configs == configs) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation));
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, user, customerCodeInfo, salesOrganisation);
+  int get hashCode => Object.hash(runtimeType, user, configs, customerCodeInfo,
+      salesOrganisation, shipToInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -226,8 +283,12 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(OrderNumber orderNumber) fetch,
     required TResult Function(OrderHistoryDetails orderHistoryDetails)
@@ -236,15 +297,21 @@ class _$_Initialized implements _Initialized {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
+    required TResult Function() updateBundle,
   }) {
-    return initialized(user, customerCodeInfo, salesOrganisation);
+    return initialized(
+        user, configs, customerCodeInfo, salesOrganisation, shipToInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(OrderNumber orderNumber)? fetch,
     TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -252,15 +319,21 @@ class _$_Initialized implements _Initialized {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
+    TResult? Function()? updateBundle,
   }) {
-    return initialized?.call(user, customerCodeInfo, salesOrganisation);
+    return initialized?.call(
+        user, configs, customerCodeInfo, salesOrganisation, shipToInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(OrderNumber orderNumber)? fetch,
     TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -268,10 +341,12 @@ class _$_Initialized implements _Initialized {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
+    TResult Function()? updateBundle,
     required TResult orElse(),
   }) {
     if (initialized != null) {
-      return initialized(user, customerCodeInfo, salesOrganisation);
+      return initialized(
+          user, configs, customerCodeInfo, salesOrganisation, shipToInfo);
     }
     return orElse();
   }
@@ -285,6 +360,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_UpdateMaterialTenderContract value)
         updateMaterialTenderContract,
     required TResult Function(_ExpandAttachments value) expandAttachments,
+    required TResult Function(_UpdateBundle value) updateBundle,
   }) {
     return initialized(this);
   }
@@ -298,6 +374,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult? Function(_ExpandAttachments value)? expandAttachments,
+    TResult? Function(_UpdateBundle value)? updateBundle,
   }) {
     return initialized?.call(this);
   }
@@ -311,6 +388,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult Function(_ExpandAttachments value)? expandAttachments,
+    TResult Function(_UpdateBundle value)? updateBundle,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -323,12 +401,16 @@ class _$_Initialized implements _Initialized {
 abstract class _Initialized implements ViewByOrderDetailsEvent {
   const factory _Initialized(
       {required final User user,
+      required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
-      required final SalesOrganisation salesOrganisation}) = _$_Initialized;
+      required final SalesOrganisation salesOrganisation,
+      required final ShipToInfo shipToInfo}) = _$_Initialized;
 
   User get user;
+  SalesOrganisationConfigs get configs;
   CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganisation;
+  ShipToInfo get shipToInfo;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
@@ -397,8 +479,12 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(OrderNumber orderNumber) fetch,
     required TResult Function(OrderHistoryDetails orderHistoryDetails)
@@ -407,6 +493,7 @@ class _$_Fetch implements _Fetch {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
+    required TResult Function() updateBundle,
   }) {
     return fetch(orderNumber);
   }
@@ -414,8 +501,12 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(OrderNumber orderNumber)? fetch,
     TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -423,6 +514,7 @@ class _$_Fetch implements _Fetch {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
+    TResult? Function()? updateBundle,
   }) {
     return fetch?.call(orderNumber);
   }
@@ -430,8 +522,12 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(OrderNumber orderNumber)? fetch,
     TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -439,6 +535,7 @@ class _$_Fetch implements _Fetch {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
+    TResult Function()? updateBundle,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -456,6 +553,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_UpdateMaterialTenderContract value)
         updateMaterialTenderContract,
     required TResult Function(_ExpandAttachments value) expandAttachments,
+    required TResult Function(_UpdateBundle value) updateBundle,
   }) {
     return fetch(this);
   }
@@ -469,6 +567,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult? Function(_ExpandAttachments value)? expandAttachments,
+    TResult? Function(_UpdateBundle value)? updateBundle,
   }) {
     return fetch?.call(this);
   }
@@ -482,6 +581,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult Function(_ExpandAttachments value)? expandAttachments,
+    TResult Function(_UpdateBundle value)? updateBundle,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -576,8 +676,12 @@ class _$_SetOrderDetails implements _SetOrderDetails {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(OrderNumber orderNumber) fetch,
     required TResult Function(OrderHistoryDetails orderHistoryDetails)
@@ -586,6 +690,7 @@ class _$_SetOrderDetails implements _SetOrderDetails {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
+    required TResult Function() updateBundle,
   }) {
     return setOrderDetails(orderHistoryDetails);
   }
@@ -593,8 +698,12 @@ class _$_SetOrderDetails implements _SetOrderDetails {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(OrderNumber orderNumber)? fetch,
     TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -602,6 +711,7 @@ class _$_SetOrderDetails implements _SetOrderDetails {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
+    TResult? Function()? updateBundle,
   }) {
     return setOrderDetails?.call(orderHistoryDetails);
   }
@@ -609,8 +719,12 @@ class _$_SetOrderDetails implements _SetOrderDetails {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(OrderNumber orderNumber)? fetch,
     TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -618,6 +732,7 @@ class _$_SetOrderDetails implements _SetOrderDetails {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
+    TResult Function()? updateBundle,
     required TResult orElse(),
   }) {
     if (setOrderDetails != null) {
@@ -635,6 +750,7 @@ class _$_SetOrderDetails implements _SetOrderDetails {
     required TResult Function(_UpdateMaterialTenderContract value)
         updateMaterialTenderContract,
     required TResult Function(_ExpandAttachments value) expandAttachments,
+    required TResult Function(_UpdateBundle value) updateBundle,
   }) {
     return setOrderDetails(this);
   }
@@ -648,6 +764,7 @@ class _$_SetOrderDetails implements _SetOrderDetails {
     TResult? Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult? Function(_ExpandAttachments value)? expandAttachments,
+    TResult? Function(_UpdateBundle value)? updateBundle,
   }) {
     return setOrderDetails?.call(this);
   }
@@ -661,6 +778,7 @@ class _$_SetOrderDetails implements _SetOrderDetails {
     TResult Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult Function(_ExpandAttachments value)? expandAttachments,
+    TResult Function(_UpdateBundle value)? updateBundle,
     required TResult orElse(),
   }) {
     if (setOrderDetails != null) {
@@ -782,8 +900,12 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(OrderNumber orderNumber) fetch,
     required TResult Function(OrderHistoryDetails orderHistoryDetails)
@@ -792,6 +914,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
+    required TResult Function() updateBundle,
   }) {
     return updateMaterialTenderContract(selectedTenderContract, queryInfo);
   }
@@ -799,8 +922,12 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(OrderNumber orderNumber)? fetch,
     TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -808,6 +935,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
+    TResult? Function()? updateBundle,
   }) {
     return updateMaterialTenderContract?.call(
         selectedTenderContract, queryInfo);
@@ -816,8 +944,12 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(OrderNumber orderNumber)? fetch,
     TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -825,6 +957,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
+    TResult Function()? updateBundle,
     required TResult orElse(),
   }) {
     if (updateMaterialTenderContract != null) {
@@ -842,6 +975,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
     required TResult Function(_UpdateMaterialTenderContract value)
         updateMaterialTenderContract,
     required TResult Function(_ExpandAttachments value) expandAttachments,
+    required TResult Function(_UpdateBundle value) updateBundle,
   }) {
     return updateMaterialTenderContract(this);
   }
@@ -855,6 +989,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
     TResult? Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult? Function(_ExpandAttachments value)? expandAttachments,
+    TResult? Function(_UpdateBundle value)? updateBundle,
   }) {
     return updateMaterialTenderContract?.call(this);
   }
@@ -868,6 +1003,7 @@ class _$_UpdateMaterialTenderContract implements _UpdateMaterialTenderContract {
     TResult Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult Function(_ExpandAttachments value)? expandAttachments,
+    TResult Function(_UpdateBundle value)? updateBundle,
     required TResult orElse(),
   }) {
     if (updateMaterialTenderContract != null) {
@@ -929,8 +1065,12 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
         initialized,
     required TResult Function(OrderNumber orderNumber) fetch,
     required TResult Function(OrderHistoryDetails orderHistoryDetails)
@@ -939,6 +1079,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
         updateMaterialTenderContract,
     required TResult Function() expandAttachments,
+    required TResult Function() updateBundle,
   }) {
     return expandAttachments();
   }
@@ -946,8 +1087,12 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult? Function(OrderNumber orderNumber)? fetch,
     TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -955,6 +1100,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult? Function()? expandAttachments,
+    TResult? Function()? updateBundle,
   }) {
     return expandAttachments?.call();
   }
@@ -962,8 +1108,12 @@ class _$_ExpandAttachments implements _ExpandAttachments {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User user, CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganisation)?
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
         initialized,
     TResult Function(OrderNumber orderNumber)? fetch,
     TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
@@ -971,6 +1121,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
             TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
         updateMaterialTenderContract,
     TResult Function()? expandAttachments,
+    TResult Function()? updateBundle,
     required TResult orElse(),
   }) {
     if (expandAttachments != null) {
@@ -988,6 +1139,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
     required TResult Function(_UpdateMaterialTenderContract value)
         updateMaterialTenderContract,
     required TResult Function(_ExpandAttachments value) expandAttachments,
+    required TResult Function(_UpdateBundle value) updateBundle,
   }) {
     return expandAttachments(this);
   }
@@ -1001,6 +1153,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
     TResult? Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult? Function(_ExpandAttachments value)? expandAttachments,
+    TResult? Function(_UpdateBundle value)? updateBundle,
   }) {
     return expandAttachments?.call(this);
   }
@@ -1014,6 +1167,7 @@ class _$_ExpandAttachments implements _ExpandAttachments {
     TResult Function(_UpdateMaterialTenderContract value)?
         updateMaterialTenderContract,
     TResult Function(_ExpandAttachments value)? expandAttachments,
+    TResult Function(_UpdateBundle value)? updateBundle,
     required TResult orElse(),
   }) {
     if (expandAttachments != null) {
@@ -1028,8 +1182,163 @@ abstract class _ExpandAttachments implements ViewByOrderDetailsEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdateBundleCopyWith<$Res> {
+  factory _$$_UpdateBundleCopyWith(
+          _$_UpdateBundle value, $Res Function(_$_UpdateBundle) then) =
+      __$$_UpdateBundleCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_UpdateBundleCopyWithImpl<$Res>
+    extends _$ViewByOrderDetailsEventCopyWithImpl<$Res, _$_UpdateBundle>
+    implements _$$_UpdateBundleCopyWith<$Res> {
+  __$$_UpdateBundleCopyWithImpl(
+      _$_UpdateBundle _value, $Res Function(_$_UpdateBundle) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_UpdateBundle implements _UpdateBundle {
+  const _$_UpdateBundle();
+
+  @override
+  String toString() {
+    return 'ViewByOrderDetailsEvent.updateBundle()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_UpdateBundle);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(OrderNumber orderNumber) fetch,
+    required TResult Function(OrderHistoryDetails orderHistoryDetails)
+        setOrderDetails,
+    required TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)
+        updateMaterialTenderContract,
+    required TResult Function() expandAttachments,
+    required TResult Function() updateBundle,
+  }) {
+    return updateBundle();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(OrderNumber orderNumber)? fetch,
+    TResult? Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
+    TResult? Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
+    TResult? Function()? expandAttachments,
+    TResult? Function()? updateBundle,
+  }) {
+    return updateBundle?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            User user,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            SalesOrganisation salesOrganisation,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(OrderNumber orderNumber)? fetch,
+    TResult Function(OrderHistoryDetails orderHistoryDetails)? setOrderDetails,
+    TResult Function(
+            TenderContract selectedTenderContract, MaterialQueryInfo queryInfo)?
+        updateMaterialTenderContract,
+    TResult Function()? expandAttachments,
+    TResult Function()? updateBundle,
+    required TResult orElse(),
+  }) {
+    if (updateBundle != null) {
+      return updateBundle();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_SetOrderDetails value) setOrderDetails,
+    required TResult Function(_UpdateMaterialTenderContract value)
+        updateMaterialTenderContract,
+    required TResult Function(_ExpandAttachments value) expandAttachments,
+    required TResult Function(_UpdateBundle value) updateBundle,
+  }) {
+    return updateBundle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_SetOrderDetails value)? setOrderDetails,
+    TResult? Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
+    TResult? Function(_ExpandAttachments value)? expandAttachments,
+    TResult? Function(_UpdateBundle value)? updateBundle,
+  }) {
+    return updateBundle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_SetOrderDetails value)? setOrderDetails,
+    TResult Function(_UpdateMaterialTenderContract value)?
+        updateMaterialTenderContract,
+    TResult Function(_ExpandAttachments value)? expandAttachments,
+    TResult Function(_UpdateBundle value)? updateBundle,
+    required TResult orElse(),
+  }) {
+    if (updateBundle != null) {
+      return updateBundle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateBundle implements ViewByOrderDetailsEvent {
+  const factory _UpdateBundle() = _$_UpdateBundle;
+}
+
+/// @nodoc
 mixin _$ViewByOrderDetailsState {
   User get user => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get configs => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   OrderHistoryDetails get orderHistoryDetails =>
@@ -1044,7 +1353,8 @@ mixin _$ViewByOrderDetailsState {
   bool get isExpanded => throw _privateConstructorUsedError;
   List<ProductDetailAggregate> get productDetailAggregateList =>
       throw _privateConstructorUsedError;
-  bool get isFetchingList => throw _privateConstructorUsedError;
+  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
+  bool get isLoadingBundleDetail => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewByOrderDetailsStateCopyWith<ViewByOrderDetailsState> get copyWith =>
@@ -1059,6 +1369,7 @@ abstract class $ViewByOrderDetailsStateCopyWith<$Res> {
   @useResult
   $Res call(
       {User user,
+      SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
       SalesOrganisation salesOrganisation,
       OrderHistoryDetails orderHistoryDetails,
@@ -1068,12 +1379,15 @@ abstract class $ViewByOrderDetailsStateCopyWith<$Res> {
       Map<MaterialQueryInfo, PriceAggregate> materials,
       bool isExpanded,
       List<ProductDetailAggregate> productDetailAggregateList,
-      bool isFetchingList});
+      ShipToInfo shipToInfo,
+      bool isLoadingBundleDetail});
 
   $UserCopyWith<$Res> get user;
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -1091,6 +1405,7 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? user = null,
+    Object? configs = null,
     Object? customerCodeInfo = null,
     Object? salesOrganisation = null,
     Object? orderHistoryDetails = null,
@@ -1100,13 +1415,18 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
     Object? materials = null,
     Object? isExpanded = null,
     Object? productDetailAggregateList = null,
-    Object? isFetchingList = null,
+    Object? shipToInfo = null,
+    Object? isLoadingBundleDetail = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -1143,9 +1463,13 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
           ? _value.productDetailAggregateList
           : productDetailAggregateList // ignore: cast_nullable_to_non_nullable
               as List<ProductDetailAggregate>,
-      isFetchingList: null == isFetchingList
-          ? _value.isFetchingList
-          : isFetchingList // ignore: cast_nullable_to_non_nullable
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      isLoadingBundleDetail: null == isLoadingBundleDetail
+          ? _value.isLoadingBundleDetail
+          : isLoadingBundleDetail // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -1155,6 +1479,14 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get configs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.configs, (value) {
+      return _then(_value.copyWith(configs: value) as $Val);
     });
   }
 
@@ -1182,6 +1514,14 @@ class _$ViewByOrderDetailsStateCopyWithImpl<$Res,
       return _then(_value.copyWith(orderHistoryDetails: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1194,6 +1534,7 @@ abstract class _$$_ViewByOrderDetailsStateCopyWith<$Res>
   @useResult
   $Res call(
       {User user,
+      SalesOrganisationConfigs configs,
       CustomerCodeInfo customerCodeInfo,
       SalesOrganisation salesOrganisation,
       OrderHistoryDetails orderHistoryDetails,
@@ -1203,16 +1544,21 @@ abstract class _$$_ViewByOrderDetailsStateCopyWith<$Res>
       Map<MaterialQueryInfo, PriceAggregate> materials,
       bool isExpanded,
       List<ProductDetailAggregate> productDetailAggregateList,
-      bool isFetchingList});
+      ShipToInfo shipToInfo,
+      bool isLoadingBundleDetail});
 
   @override
   $UserCopyWith<$Res> get user;
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get configs;
   @override
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   @override
   $OrderHistoryDetailsCopyWith<$Res> get orderHistoryDetails;
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -1228,6 +1574,7 @@ class __$$_ViewByOrderDetailsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
+    Object? configs = null,
     Object? customerCodeInfo = null,
     Object? salesOrganisation = null,
     Object? orderHistoryDetails = null,
@@ -1237,13 +1584,18 @@ class __$$_ViewByOrderDetailsStateCopyWithImpl<$Res>
     Object? materials = null,
     Object? isExpanded = null,
     Object? productDetailAggregateList = null,
-    Object? isFetchingList = null,
+    Object? shipToInfo = null,
+    Object? isLoadingBundleDetail = null,
   }) {
     return _then(_$_ViewByOrderDetailsState(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
+      configs: null == configs
+          ? _value.configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -1280,9 +1632,13 @@ class __$$_ViewByOrderDetailsStateCopyWithImpl<$Res>
           ? _value._productDetailAggregateList
           : productDetailAggregateList // ignore: cast_nullable_to_non_nullable
               as List<ProductDetailAggregate>,
-      isFetchingList: null == isFetchingList
-          ? _value.isFetchingList
-          : isFetchingList // ignore: cast_nullable_to_non_nullable
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      isLoadingBundleDetail: null == isLoadingBundleDetail
+          ? _value.isLoadingBundleDetail
+          : isLoadingBundleDetail // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -1293,6 +1649,7 @@ class __$$_ViewByOrderDetailsStateCopyWithImpl<$Res>
 class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
   const _$_ViewByOrderDetailsState(
       {required this.user,
+      required this.configs,
       required this.customerCodeInfo,
       required this.salesOrganisation,
       required this.orderHistoryDetails,
@@ -1302,7 +1659,8 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
       required final Map<MaterialQueryInfo, PriceAggregate> materials,
       required this.isExpanded,
       required final List<ProductDetailAggregate> productDetailAggregateList,
-      required this.isFetchingList})
+      required this.shipToInfo,
+      required this.isLoadingBundleDetail})
       : _isLoadingTenderContract = isLoadingTenderContract,
         _materials = materials,
         _productDetailAggregateList = productDetailAggregateList,
@@ -1310,6 +1668,8 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
 
   @override
   final User user;
+  @override
+  final SalesOrganisationConfigs configs;
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
@@ -1349,11 +1709,13 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
   }
 
   @override
-  final bool isFetchingList;
+  final ShipToInfo shipToInfo;
+  @override
+  final bool isLoadingBundleDetail;
 
   @override
   String toString() {
-    return 'ViewByOrderDetailsState(user: $user, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, isLoadingTenderContract: $isLoadingTenderContract, failureOrSuccessOption: $failureOrSuccessOption, materials: $materials, isExpanded: $isExpanded, productDetailAggregateList: $productDetailAggregateList, isFetchingList: $isFetchingList)';
+    return 'ViewByOrderDetailsState(user: $user, configs: $configs, customerCodeInfo: $customerCodeInfo, salesOrganisation: $salesOrganisation, orderHistoryDetails: $orderHistoryDetails, isLoading: $isLoading, isLoadingTenderContract: $isLoadingTenderContract, failureOrSuccessOption: $failureOrSuccessOption, materials: $materials, isExpanded: $isExpanded, productDetailAggregateList: $productDetailAggregateList, shipToInfo: $shipToInfo, isLoadingBundleDetail: $isLoadingBundleDetail)';
   }
 
   @override
@@ -1362,6 +1724,7 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
         (other.runtimeType == runtimeType &&
             other is _$_ViewByOrderDetailsState &&
             (identical(other.user, user) || other.user == user) &&
+            (identical(other.configs, configs) || other.configs == configs) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -1381,14 +1744,17 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
             const DeepCollectionEquality().equals(
                 other._productDetailAggregateList,
                 _productDetailAggregateList) &&
-            (identical(other.isFetchingList, isFetchingList) ||
-                other.isFetchingList == isFetchingList));
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.isLoadingBundleDetail, isLoadingBundleDetail) ||
+                other.isLoadingBundleDetail == isLoadingBundleDetail));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       user,
+      configs,
       customerCodeInfo,
       salesOrganisation,
       orderHistoryDetails,
@@ -1398,7 +1764,8 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
       const DeepCollectionEquality().hash(_materials),
       isExpanded,
       const DeepCollectionEquality().hash(_productDetailAggregateList),
-      isFetchingList);
+      shipToInfo,
+      isLoadingBundleDetail);
 
   @JsonKey(ignore: true)
   @override
@@ -1412,6 +1779,7 @@ class _$_ViewByOrderDetailsState extends _ViewByOrderDetailsState {
 abstract class _ViewByOrderDetailsState extends ViewByOrderDetailsState {
   const factory _ViewByOrderDetailsState(
       {required final User user,
+      required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
       required final SalesOrganisation salesOrganisation,
       required final OrderHistoryDetails orderHistoryDetails,
@@ -1421,11 +1789,14 @@ abstract class _ViewByOrderDetailsState extends ViewByOrderDetailsState {
       required final Map<MaterialQueryInfo, PriceAggregate> materials,
       required final bool isExpanded,
       required final List<ProductDetailAggregate> productDetailAggregateList,
-      required final bool isFetchingList}) = _$_ViewByOrderDetailsState;
+      required final ShipToInfo shipToInfo,
+      required final bool isLoadingBundleDetail}) = _$_ViewByOrderDetailsState;
   const _ViewByOrderDetailsState._() : super._();
 
   @override
   User get user;
+  @override
+  SalesOrganisationConfigs get configs;
   @override
   CustomerCodeInfo get customerCodeInfo;
   @override
@@ -1445,7 +1816,9 @@ abstract class _ViewByOrderDetailsState extends ViewByOrderDetailsState {
   @override
   List<ProductDetailAggregate> get productDetailAggregateList;
   @override
-  bool get isFetchingList;
+  ShipToInfo get shipToInfo;
+  @override
+  bool get isLoadingBundleDetail;
   @override
   @JsonKey(ignore: true)
   _$$_ViewByOrderDetailsStateCopyWith<_$_ViewByOrderDetailsState>

@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
@@ -341,6 +342,7 @@ class OrderRepository implements IOrderRepository {
     required User user,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
+    required List<PriceAggregate> cartProducts,
   }) async {
     const apiRetryCounter = 15;
 
@@ -365,8 +367,30 @@ class OrderRepository implements IOrderRepository {
           soldTo: customerCodeInfo.customerCodeSoldTo,
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         );
+        final orderHistoryDetailsWithMaterialInfo =
+            orderHistoryDetails.copyWith(
+          orderHistoryDetailsOrderItem:
+              orderHistoryDetails.orderHistoryDetailsOrderItem.map(
+            (e) {
+              final priceAggregate = cartProducts.firstWhere(
+                (element) {
+                  return element.getMaterialNumber ==
+                      MaterialNumber(e.parentId);
+                },
+                orElse: () => PriceAggregate.empty(),
+              );
 
-        return Right(orderHistoryDetails);
+              return e.copyWith(
+                material: MaterialInfo.empty().copyWith(
+                  materialNumber: priceAggregate.getMaterialNumber,
+                  bundle: priceAggregate.bundle,
+                ),
+              );
+            },
+          ).toList(),
+        );
+
+        return Right(orderHistoryDetailsWithMaterialInfo);
       } catch (e) {
         if (i == apiRetryCounter) {
           return Left(

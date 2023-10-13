@@ -17,6 +17,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/favourite_local.dart'
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -89,6 +90,7 @@ void main() {
             pageSize: config.pageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
+            locale: const Locale('EN'),
           ),
         ).thenAnswer(
           (invocation) async => Right(materialResponseMock),
@@ -158,6 +160,7 @@ void main() {
             pageSize: config.pageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
+            locale: const Locale('EN'),
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -243,6 +246,7 @@ void main() {
             pageSize: config.pageSize,
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
+            locale: const Locale('EN'),
           ),
         ).thenAnswer(
           (invocation) async => Right(materialResponseMock),
@@ -297,6 +301,7 @@ void main() {
             pageSize: config.pageSize,
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
+            locale: const Locale('EN'),
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
