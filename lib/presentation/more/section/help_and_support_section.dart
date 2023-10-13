@@ -8,6 +8,7 @@ class HelpAndSupportTile extends StatelessWidget {
   List<MoreDetailsTile> moreHelpAndSupportTiles(BuildContext context) =>
       <MoreDetailsTile>[
         MoreDetailsTile.faq(context),
+        MoreDetailsTile.announcementAndArticleTab(context),
         MoreDetailsTile.userGuide(),
         MoreDetailsTile.aboutUs(context),
         MoreDetailsTile.chatSupport(context),
@@ -23,31 +24,25 @@ class HelpAndSupportTile extends StatelessWidget {
         'Help & Support'.tr(),
         style: Theme.of(context).textTheme.labelMedium,
       ),
-      subtitle: GridView.count(
-        physics: const NeverScrollableScrollPhysics(),
-        crossAxisCount: 4,
-        childAspectRatio: 1.45,
-        padding: const EdgeInsets.only(
-          top: 18.0,
-        ),
-        shrinkWrap: true,
+      subtitle: Column(
         children: moreHelpAndSupportTiles(context).map((item) {
-          return GestureDetector(
+          return ListTile(
+            contentPadding: EdgeInsets.zero,
+            dense: true,
+            key: item.key,
             onTap: item.onTap,
-            child: Column(
-              children: [
-                item.icon,
-                const SizedBox(height: 8),
-                Text(
-                  item.label.tr(),
-                  style: item.onTap == null
-                      ? Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(color: ZPColors.lightGray)
-                      : Theme.of(context).textTheme.bodySmall,
-                ),
-              ],
+            trailing: Icon(
+              Icons.chevron_right_rounded,
+              color: item.onTap == null ? ZPColors.lightGray : ZPColors.black,
+            ),
+            title: Text(
+              item.label.tr(),
+              style: item.onTap == null
+                  ? Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(color: ZPColors.lightGray)
+                  : Theme.of(context).textTheme.bodySmall,
             ),
           );
         }).toList(),

@@ -15,32 +15,25 @@ class SettingsTile extends StatelessWidget {
         'Settings'.tr(),
         style: Theme.of(context).textTheme.labelMedium,
       ),
-      subtitle: GridView.count(
-        physics: const NeverScrollableScrollPhysics(),
-        crossAxisCount: 4,
-        childAspectRatio: 1.45,
-        padding: const EdgeInsets.only(
-          top: 18.0,
-        ),
-        shrinkWrap: true,
+      subtitle: Column(
         children: _moreSettingTiles(context).map((item) {
-          return InkWell(
+          return ListTile(
+            contentPadding: EdgeInsets.zero,
+            dense: true,
             key: item.key,
             onTap: item.onTap,
-            child: Column(
-              children: [
-                item.icon,
-                const SizedBox(height: 8),
-                Text(
-                  item.label.tr(),
-                  style: item.onTap == null
-                      ? Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .copyWith(color: ZPColors.lightGray)
-                      : Theme.of(context).textTheme.bodySmall,
-                ),
-              ],
+            trailing: Icon(
+              Icons.chevron_right_rounded,
+              color: item.onTap == null ? ZPColors.lightGray : ZPColors.black,
+            ),
+            title: Text(
+              item.label.tr(),
+              style: item.onTap == null
+                  ? Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(color: ZPColors.lightGray)
+                  : Theme.of(context).textTheme.bodySmall,
             ),
           );
         }).toList(),

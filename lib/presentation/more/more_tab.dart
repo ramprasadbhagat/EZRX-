@@ -38,9 +38,6 @@ class MoreTab extends StatelessWidget {
           key: WidgetKeys.moreTapListContent,
           children: [
             const ProfileTile(), // Adds Profile Tile
-            const SizedBox(
-              height: 15,
-            ),
             const ServiceTile(), // Adds Service Tile
             const Divider(
               color: ZPColors.accentColor,
@@ -50,10 +47,6 @@ class MoreTab extends StatelessWidget {
               height: 15,
             ),
             const SettingsTile(), // Adds Settings Tile
-            const Divider(
-              color: ZPColors.accentColor,
-              height: 15,
-            ),
             const SizedBox(
               height: 15,
             ),
@@ -62,6 +55,7 @@ class MoreTab extends StatelessWidget {
               color: ZPColors.accentColor,
               height: 15,
             ),
+            const VersionDisplay(),
             const SizedBox(
               height: 15,
             ),
@@ -90,7 +84,6 @@ class MoreTab extends StatelessWidget {
                     const AuthEvent.logout(),
                   ),
             ),
-            const VersionDisplay(),
           ],
         ),
       ),

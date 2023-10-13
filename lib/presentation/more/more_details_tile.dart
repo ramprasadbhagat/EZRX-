@@ -155,14 +155,6 @@ class MoreDetailsTile {
         label: 'Loyalty',
       );
 
-  factory MoreDetailsTile.webLoginTab() => const MoreDetailsTile(
-        icon: Icon(
-          Icons.qr_code_scanner,
-          color: ZPColors.lightGray,
-        ),
-        label: 'Web Login',
-      );
-
   factory MoreDetailsTile.announcementAndArticleTab(BuildContext context) =>
       MoreDetailsTile(
         icon: const Icon(

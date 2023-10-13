@@ -11,10 +11,7 @@ class ServiceTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(
-        'Services'.tr(),
-        style: Theme.of(context).textTheme.labelMedium,
-      ),
+      dense: true,
       subtitle: BlocBuilder<EligibilityBloc, EligibilityState>(
         buildWhen: (previous, current) =>
             previous.isReturnsEnable != current.isReturnsEnable ||
@@ -68,8 +65,6 @@ class ServiceTile extends StatelessWidget {
       if (eligibilityState.isPaymentEnabled)
         MoreDetailsTile.paymentsTab(context),
       MoreDetailsTile.loyaltyTab(),
-      MoreDetailsTile.webLoginTab(),
-      MoreDetailsTile.announcementAndArticleTab(context),
     ];
   }
 }
