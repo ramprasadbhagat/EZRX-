@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
@@ -112,14 +110,6 @@ class OutstandingInvoicesTab extends StatelessWidget {
                         onRefresh: () {
                           context.read<OutstandingInvoicesBloc>().add(
                                 OutstandingInvoicesEvent.fetch(
-                                  salesOrganisation: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
                                   appliedFilter:
                                       OutstandingInvoiceFilter.empty(),
                                   searchKey: state.searchKey,
@@ -128,16 +118,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
                         },
                         onLoadingMore: () {
                           context.read<OutstandingInvoicesBloc>().add(
-                                OutstandingInvoicesEvent.loadMore(
-                                  salesOrganisation: context
-                                      .read<SalesOrgBloc>()
-                                      .state
-                                      .salesOrganisation,
-                                  customerCodeInfo: context
-                                      .read<CustomerCodeBloc>()
-                                      .state
-                                      .customerCodeInfo,
-                                ),
+                                const OutstandingInvoicesEvent.loadMore(),
                               );
                         },
                         isLoading: state.isLoading,
@@ -238,10 +219,6 @@ class _FilterTune extends StatelessWidget {
         if (newFilter != alreadyAppliedFilter) {
           context.read<OutstandingInvoicesBloc>().add(
                 OutstandingInvoicesEvent.fetch(
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
                   appliedFilter: newFilter,
                   searchKey:
                       context.read<OutstandingInvoicesBloc>().state.searchKey,

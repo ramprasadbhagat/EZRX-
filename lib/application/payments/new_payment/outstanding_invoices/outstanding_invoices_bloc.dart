@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -22,34 +23,41 @@ class OutstandingInvoicesBloc
     required this.newPaymentRepository,
     required this.config,
   }) : super(OutstandingInvoicesState.initial()) {
-    on(_onEvent);
-  }
+    on<_Initialized>((event, emit) {
+      emit(
+        OutstandingInvoicesState.initial().copyWith(
+          salesOrganisation: event.salesOrganisation,
+          customerCodeInfo: event.customerCodeInfo,
+        ),
+      );
+    });
 
-  Future<void> _onEvent(
-    OutstandingInvoicesEvent event,
-    Emitter<OutstandingInvoicesState> emit,
-  ) async {
-    await event.map(
-      initialized: (_) async => emit(OutstandingInvoicesState.initial()),
-      fetch: (value) async {
+    on<_Fetch>(
+      (event, emit) async {
+        if (event.searchKey == state.searchKey &&
+            event.searchKey.isValid() &&
+            event.appliedFilter == state.appliedFilter) {
+          return;
+        }
+
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
             items: <CustomerOpenItem>[],
             isLoading: true,
-            appliedFilter: value.appliedFilter,
-            searchKey: value.searchKey,
+            appliedFilter: event.appliedFilter,
+            searchKey: event.searchKey,
           ),
         );
 
         final failureOrSuccess =
             await newPaymentRepository.getOutstandingInvoices(
-          salesOrganisation: value.salesOrganisation,
-          customerCodeInfo: value.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
           pageSize: config.pageSize,
           offset: 0,
-          appliedFilter: value.appliedFilter,
-          searchKey: value.searchKey,
+          appliedFilter: event.appliedFilter,
+          searchKey: event.searchKey,
         );
 
         failureOrSuccess.fold(
@@ -73,9 +81,12 @@ class OutstandingInvoicesBloc
           },
         );
       },
-      loadMore: (value) async {
-        if (state.isLoading || !state.canLoadMore) return;
+      transformer: restartable(),
+    );
 
+    on<_LoadMore>(
+      ((event, emit) async {
+        if (state.isLoading || !state.canLoadMore) return;
         emit(
           state.copyWith(
             isLoading: true,
@@ -85,8 +96,8 @@ class OutstandingInvoicesBloc
 
         final failureOrSuccess =
             await newPaymentRepository.getOutstandingInvoices(
-          salesOrganisation: value.salesOrganisation,
-          customerCodeInfo: value.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
           pageSize: config.pageSize,
           offset: state.items.length,
           appliedFilter: state.appliedFilter,
@@ -115,7 +126,7 @@ class OutstandingInvoicesBloc
             );
           },
         );
-      },
+      }),
     );
   }
 }

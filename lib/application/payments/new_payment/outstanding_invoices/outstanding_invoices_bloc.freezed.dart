@@ -18,64 +18,55 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OutstandingInvoicesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)
-        fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
-        loadMore,
+        initialized,
+    required TResult Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)
+        fetch,
+    required TResult Function() loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)?
-        fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult? Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
+        fetch,
+    TResult? Function()? loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)?
-        fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
+        fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
@@ -103,155 +94,24 @@ class _$OutstandingInvoicesEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_initializedCopyWith<$Res> {
-  factory _$$_initializedCopyWith(
-          _$_initialized value, $Res Function(_$_initialized) then) =
-      __$$_initializedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_initializedCopyWithImpl<$Res>
-    extends _$OutstandingInvoicesEventCopyWithImpl<$Res, _$_initialized>
-    implements _$$_initializedCopyWith<$Res> {
-  __$$_initializedCopyWithImpl(
-      _$_initialized _value, $Res Function(_$_initialized) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_initialized implements _initialized {
-  const _$_initialized();
-
-  @override
-  String toString() {
-    return 'OutstandingInvoicesEvent.initialized()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_initialized);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)
-        fetch,
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)
-        loadMore,
-  }) {
-    return initialized();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)?
-        fetch,
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        loadMore,
-  }) {
-    return initialized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)?
-        fetch,
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo)?
-        loadMore,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_LoadMore value) loadMore,
-  }) {
-    return initialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_LoadMore value)? loadMore,
-  }) {
-    return initialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_LoadMore value)? loadMore,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _initialized implements OutstandingInvoicesEvent {
-  const factory _initialized() = _$_initialized;
-}
-
-/// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$_InitializedCopyWith<$Res> {
+  factory _$$_InitializedCopyWith(
+          _$_Initialized value, $Res Function(_$_Initialized) then) =
+      __$$_InitializedCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {SalesOrganisation salesOrganisation,
-      CustomerCodeInfo customerCodeInfo,
-      OutstandingInvoiceFilter appliedFilter,
-      SearchKey searchKey});
+      {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $OutstandingInvoiceFilterCopyWith<$Res> get appliedFilter;
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$OutstandingInvoicesEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$_InitializedCopyWithImpl<$Res>
+    extends _$OutstandingInvoicesEventCopyWithImpl<$Res, _$_Initialized>
+    implements _$$_InitializedCopyWith<$Res> {
+  __$$_InitializedCopyWithImpl(
+      _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -259,10 +119,8 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
-    Object? appliedFilter = null,
-    Object? searchKey = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$_Initialized(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -271,14 +129,6 @@ class __$$_FetchCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      appliedFilter: null == appliedFilter
-          ? _value.appliedFilter
-          : appliedFilter // ignore: cast_nullable_to_non_nullable
-              as OutstandingInvoiceFilter,
-      searchKey: null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
     ));
   }
 
@@ -296,6 +146,172 @@ class __$$_FetchCopyWithImpl<$Res>
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
       return _then(_value.copyWith(customerCodeInfo: value));
     });
+  }
+}
+
+/// @nodoc
+
+class _$_Initialized implements _Initialized {
+  const _$_Initialized(
+      {required this.salesOrganisation, required this.customerCodeInfo});
+
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+
+  @override
+  String toString() {
+    return 'OutstandingInvoicesEvent.initialized(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, salesOrganisation, customerCodeInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)
+        initialized,
+    required TResult Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)
+        fetch,
+    required TResult Function() loadMore,
+  }) {
+    return initialized(salesOrganisation, customerCodeInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult? Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
+        fetch,
+    TResult? Function()? loadMore,
+  }) {
+    return initialized?.call(salesOrganisation, customerCodeInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo)?
+        initialized,
+    TResult Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
+        fetch,
+    TResult Function()? loadMore,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(salesOrganisation, customerCodeInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_LoadMore value) loadMore,
+  }) {
+    return initialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_LoadMore value)? loadMore,
+  }) {
+    return initialized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_LoadMore value)? loadMore,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initialized implements OutstandingInvoicesEvent {
+  const factory _Initialized(
+      {required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo}) = _$_Initialized;
+
+  SalesOrganisation get salesOrganisation;
+  CustomerCodeInfo get customerCodeInfo;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchCopyWith<$Res> {
+  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
+      __$$_FetchCopyWithImpl<$Res>;
+  @useResult
+  $Res call({OutstandingInvoiceFilter appliedFilter, SearchKey searchKey});
+
+  $OutstandingInvoiceFilterCopyWith<$Res> get appliedFilter;
+}
+
+/// @nodoc
+class __$$_FetchCopyWithImpl<$Res>
+    extends _$OutstandingInvoicesEventCopyWithImpl<$Res, _$_Fetch>
+    implements _$$_FetchCopyWith<$Res> {
+  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? appliedFilter = null,
+    Object? searchKey = null,
+  }) {
+    return _then(_$_Fetch(
+      appliedFilter: null == appliedFilter
+          ? _value.appliedFilter
+          : appliedFilter // ignore: cast_nullable_to_non_nullable
+              as OutstandingInvoiceFilter,
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
+    ));
   }
 
   @override
@@ -311,16 +327,8 @@ class __$$_FetchCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Fetch implements _Fetch {
-  const _$_Fetch(
-      {required this.salesOrganisation,
-      required this.customerCodeInfo,
-      required this.appliedFilter,
-      required this.searchKey});
+  const _$_Fetch({required this.appliedFilter, required this.searchKey});
 
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
   @override
   final OutstandingInvoiceFilter appliedFilter;
   @override
@@ -328,7 +336,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'OutstandingInvoicesEvent.fetch(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, appliedFilter: $appliedFilter, searchKey: $searchKey)';
+    return 'OutstandingInvoicesEvent.fetch(appliedFilter: $appliedFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -336,10 +344,6 @@ class _$_Fetch implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Fetch &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter) &&
             (identical(other.searchKey, searchKey) ||
@@ -347,8 +351,7 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, salesOrganisation,
-      customerCodeInfo, appliedFilter, searchKey);
+  int get hashCode => Object.hash(runtimeType, appliedFilter, searchKey);
 
   @JsonKey(ignore: true)
   @override
@@ -359,56 +362,45 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)
-        fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
-        loadMore,
+        initialized,
+    required TResult Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)
+        fetch,
+    required TResult Function() loadMore,
   }) {
-    return fetch(salesOrganisation, customerCodeInfo, appliedFilter, searchKey);
+    return fetch(appliedFilter, searchKey);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)?
-        fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult? Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
+        fetch,
+    TResult? Function()? loadMore,
   }) {
-    return fetch?.call(
-        salesOrganisation, customerCodeInfo, appliedFilter, searchKey);
+    return fetch?.call(appliedFilter, searchKey);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)?
-        fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
+        fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(
-          salesOrganisation, customerCodeInfo, appliedFilter, searchKey);
+      return fetch(appliedFilter, searchKey);
     }
     return orElse();
   }
@@ -416,7 +408,7 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
   }) {
@@ -426,7 +418,7 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
   }) {
@@ -436,7 +428,7 @@ class _$_Fetch implements _Fetch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
@@ -450,13 +442,9 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements OutstandingInvoicesEvent {
   const factory _Fetch(
-      {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final OutstandingInvoiceFilter appliedFilter,
+      {required final OutstandingInvoiceFilter appliedFilter,
       required final SearchKey searchKey}) = _$_Fetch;
 
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerCodeInfo;
   OutstandingInvoiceFilter get appliedFilter;
   SearchKey get searchKey;
   @JsonKey(ignore: true)
@@ -469,12 +457,6 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
   factory _$$_LoadMoreCopyWith(
           _$_LoadMore value, $Res Function(_$_LoadMore) then) =
       __$$_LoadMoreCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
 }
 
 /// @nodoc
@@ -484,130 +466,69 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   __$$_LoadMoreCopyWithImpl(
       _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? salesOrganisation = null,
-    Object? customerCodeInfo = null,
-  }) {
-    return _then(_$_LoadMore(
-      salesOrganisation: null == salesOrganisation
-          ? _value.salesOrganisation
-          : salesOrganisation // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
-      return _then(_value.copyWith(salesOrganisation: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore(
-      {required this.salesOrganisation, required this.customerCodeInfo});
-
-  @override
-  final SalesOrganisation salesOrganisation;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
+  const _$_LoadMore();
 
   @override
   String toString() {
-    return 'OutstandingInvoicesEvent.loadMore(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo)';
+    return 'OutstandingInvoicesEvent.loadMore()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_LoadMore &&
-            (identical(other.salesOrganisation, salesOrganisation) ||
-                other.salesOrganisation == salesOrganisation) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo));
+        (other.runtimeType == runtimeType && other is _$_LoadMore);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrganisation, customerCodeInfo);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)
-        fetch,
     required TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)
-        loadMore,
+        initialized,
+    required TResult Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)
+        fetch,
+    required TResult Function() loadMore,
   }) {
-    return loadMore(salesOrganisation, customerCodeInfo);
+    return loadMore();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)?
-        fetch,
     TResult? Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult? Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
+        fetch,
+    TResult? Function()? loadMore,
   }) {
-    return loadMore?.call(salesOrganisation, customerCodeInfo);
+    return loadMore?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            OutstandingInvoiceFilter appliedFilter,
-            SearchKey searchKey)?
-        fetch,
     TResult Function(SalesOrganisation salesOrganisation,
             CustomerCodeInfo customerCodeInfo)?
-        loadMore,
+        initialized,
+    TResult Function(
+            OutstandingInvoiceFilter appliedFilter, SearchKey searchKey)?
+        fetch,
+    TResult Function()? loadMore,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
-      return loadMore(salesOrganisation, customerCodeInfo);
+      return loadMore();
     }
     return orElse();
   }
@@ -615,7 +536,7 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_initialized value) initialized,
+    required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
     required TResult Function(_LoadMore value) loadMore,
   }) {
@@ -625,7 +546,7 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
     TResult? Function(_LoadMore value)? loadMore,
   }) {
@@ -635,7 +556,7 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initialized value)? initialized,
+    TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
     TResult Function(_LoadMore value)? loadMore,
     required TResult orElse(),
@@ -648,19 +569,13 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements OutstandingInvoicesEvent {
-  const factory _LoadMore(
-      {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_LoadMore;
-
-  SalesOrganisation get salesOrganisation;
-  CustomerCodeInfo get customerCodeInfo;
-  @JsonKey(ignore: true)
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _LoadMore() = _$_LoadMore;
 }
 
 /// @nodoc
 mixin _$OutstandingInvoicesState {
+  SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   List<CustomerOpenItem> get items => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -682,13 +597,17 @@ abstract class $OutstandingInvoicesStateCopyWith<$Res> {
       _$OutstandingInvoicesStateCopyWithImpl<$Res, OutstandingInvoicesState>;
   @useResult
   $Res call(
-      {List<CustomerOpenItem> items,
+      {SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo,
+      List<CustomerOpenItem> items,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore,
       OutstandingInvoiceFilter appliedFilter,
       SearchKey searchKey});
 
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $OutstandingInvoiceFilterCopyWith<$Res> get appliedFilter;
 }
 
@@ -706,6 +625,8 @@ class _$OutstandingInvoicesStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
     Object? items = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
@@ -714,6 +635,14 @@ class _$OutstandingInvoicesStateCopyWithImpl<$Res,
     Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
       items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
@@ -743,6 +672,22 @@ class _$OutstandingInvoicesStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $OutstandingInvoiceFilterCopyWith<$Res> get appliedFilter {
     return $OutstandingInvoiceFilterCopyWith<$Res>(_value.appliedFilter,
         (value) {
@@ -761,13 +706,19 @@ abstract class _$$_OutstandingInvoicesStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<CustomerOpenItem> items,
+      {SalesOrganisation salesOrganisation,
+      CustomerCodeInfo customerCodeInfo,
+      List<CustomerOpenItem> items,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoading,
       bool canLoadMore,
       OutstandingInvoiceFilter appliedFilter,
       SearchKey searchKey});
 
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   @override
   $OutstandingInvoiceFilterCopyWith<$Res> get appliedFilter;
 }
@@ -784,6 +735,8 @@ class __$$_OutstandingInvoicesStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? salesOrganisation = null,
+    Object? customerCodeInfo = null,
     Object? items = null,
     Object? failureOrSuccessOption = null,
     Object? isLoading = null,
@@ -792,6 +745,14 @@ class __$$_OutstandingInvoicesStateCopyWithImpl<$Res>
     Object? searchKey = null,
   }) {
     return _then(_$_OutstandingInvoicesState(
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -824,7 +785,9 @@ class __$$_OutstandingInvoicesStateCopyWithImpl<$Res>
 
 class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
   const _$_OutstandingInvoicesState(
-      {required final List<CustomerOpenItem> items,
+      {required this.salesOrganisation,
+      required this.customerCodeInfo,
+      required final List<CustomerOpenItem> items,
       required this.failureOrSuccessOption,
       required this.isLoading,
       required this.canLoadMore,
@@ -833,6 +796,10 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
       : _items = items,
         super._();
 
+  @override
+  final SalesOrganisation salesOrganisation;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
   final List<CustomerOpenItem> _items;
   @override
   List<CustomerOpenItem> get items {
@@ -854,7 +821,7 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
 
   @override
   String toString() {
-    return 'OutstandingInvoicesState(items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, searchKey: $searchKey)';
+    return 'OutstandingInvoicesState(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, items: $items, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, canLoadMore: $canLoadMore, appliedFilter: $appliedFilter, searchKey: $searchKey)';
   }
 
   @override
@@ -862,6 +829,10 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OutstandingInvoicesState &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
@@ -878,6 +849,8 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      salesOrganisation,
+      customerCodeInfo,
       const DeepCollectionEquality().hash(_items),
       failureOrSuccessOption,
       isLoading,
@@ -895,7 +868,9 @@ class _$_OutstandingInvoicesState extends _OutstandingInvoicesState {
 
 abstract class _OutstandingInvoicesState extends OutstandingInvoicesState {
   const factory _OutstandingInvoicesState(
-      {required final List<CustomerOpenItem> items,
+      {required final SalesOrganisation salesOrganisation,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final List<CustomerOpenItem> items,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
       required final bool canLoadMore,
@@ -903,6 +878,10 @@ abstract class _OutstandingInvoicesState extends OutstandingInvoicesState {
       required final SearchKey searchKey}) = _$_OutstandingInvoicesState;
   const _OutstandingInvoicesState._() : super._();
 
+  @override
+  SalesOrganisation get salesOrganisation;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
   @override
   List<CustomerOpenItem> get items;
   @override

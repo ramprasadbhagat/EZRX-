@@ -115,10 +115,6 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
   void _toNewPayment(BuildContext context) {
     context.read<OutstandingInvoicesBloc>().add(
           OutstandingInvoicesEvent.fetch(
-            salesOrganisation:
-                context.read<EligibilityBloc>().state.salesOrganisation,
-            customerCodeInfo:
-                context.read<EligibilityBloc>().state.customerCodeInfo,
             appliedFilter: OutstandingInvoiceFilter.empty(),
             searchKey: SearchKey.search(''),
           ),

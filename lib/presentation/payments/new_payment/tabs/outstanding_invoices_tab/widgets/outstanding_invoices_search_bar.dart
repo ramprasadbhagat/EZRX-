@@ -25,19 +25,10 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
           key: WidgetKeys.genericKey(
             key: state.searchKey.searchValueOrEmpty,
           ),
-          onSearchChanged: (value) {},
-          onSearchSubmitted: (value) => context
-              .read<OutstandingInvoicesBloc>()
-              .add(
-                OutstandingInvoicesEvent.fetch(
-                  appliedFilter: state.appliedFilter,
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
-                  searchKey: SearchKey.search(value),
-                ),
-              ),
+          onSearchChanged: (value) =>
+              _search(context: context, state: state, searchKey: value),
+          onSearchSubmitted: (value) =>
+              _search(context: context, state: state, searchKey: value),
           hintText: 'Search by Document/order number'.tr(),
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
@@ -46,19 +37,23 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
           ],
           customValidator: (value) => SearchKey.search(value).isValid(),
           enabled: !state.isLoading,
-          onClear: () => context.read<OutstandingInvoicesBloc>().add(
-                OutstandingInvoicesEvent.fetch(
-                  appliedFilter: state.appliedFilter,
-                  salesOrganisation:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
-                  searchKey: SearchKey.search(''),
-                ),
-              ),
+          onClear: () => _search(context: context, state: state, searchKey: ''),
           initialValue: state.searchKey.searchValueOrEmpty,
         );
       },
     );
+  }
+
+  void _search({
+    required BuildContext context,
+    required OutstandingInvoicesState state,
+    required String searchKey,
+  }) {
+    context.read<OutstandingInvoicesBloc>().add(
+          OutstandingInvoicesEvent.fetch(
+            appliedFilter: state.appliedFilter,
+            searchKey: SearchKey.searchFilter(searchKey),
+          ),
+        );
   }
 }

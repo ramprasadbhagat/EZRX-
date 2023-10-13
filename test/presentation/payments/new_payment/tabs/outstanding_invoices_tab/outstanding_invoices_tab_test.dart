@@ -181,8 +181,6 @@ void main() {
         () => outstandingInvoicesBlocMock.add(
           OutstandingInvoicesEvent.fetch(
             appliedFilter: outstandingInvoicesBlocMock.state.appliedFilter,
-            salesOrganisation: eligibilityBlocMock.state.salesOrganisation,
-            customerCodeInfo: eligibilityBlocMock.state.customerCodeInfo,
             searchKey: SearchKey.search('26'),
           ),
         ),
@@ -209,8 +207,6 @@ void main() {
         () => outstandingInvoicesBlocMock.add(
           OutstandingInvoicesEvent.fetch(
             appliedFilter: outstandingInvoicesBlocMock.state.appliedFilter,
-            salesOrganisation: eligibilityBlocMock.state.salesOrganisation,
-            customerCodeInfo: eligibilityBlocMock.state.customerCodeInfo,
             searchKey: SearchKey.search(''),
           ),
         ),
@@ -322,8 +318,6 @@ void main() {
       verify(
         () => outstandingInvoicesBlocMock.add(
           OutstandingInvoicesEvent.fetch(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-            customerCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
             appliedFilter: OutstandingInvoiceFilter.empty(),
             searchKey: outstandingInvoicesBlocMock.state.searchKey,
           ),
@@ -358,10 +352,7 @@ void main() {
 
       verify(
         () => outstandingInvoicesBlocMock.add(
-          OutstandingInvoicesEvent.loadMore(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
-            customerCodeInfo: customerCodeBlocMock.state.customerCodeInfo,
-          ),
+          const OutstandingInvoicesEvent.loadMore(),
         ),
       );
     });
@@ -443,8 +434,6 @@ void main() {
       verify(
         () => outstandingInvoicesBlocMock.add(
           OutstandingInvoicesEvent.fetch(
-            salesOrganisation: eligibilityBlocMock.state.salesOrganisation,
-            customerCodeInfo: eligibilityBlocMock.state.customerCodeInfo,
             appliedFilter: invoiceFilter,
             searchKey: outstandingInvoicesBlocMock.state.searchKey,
           ),

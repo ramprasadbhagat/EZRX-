@@ -4,6 +4,8 @@ part of 'outstanding_invoices_bloc.dart';
 class OutstandingInvoicesState with _$OutstandingInvoicesState {
   const OutstandingInvoicesState._();
   const factory OutstandingInvoicesState({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
     required List<CustomerOpenItem> items,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
@@ -13,11 +15,13 @@ class OutstandingInvoicesState with _$OutstandingInvoicesState {
   }) = _OutstandingInvoicesState;
 
   factory OutstandingInvoicesState.initial() => OutstandingInvoicesState(
+        salesOrganisation: SalesOrganisation.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,
         items: <CustomerOpenItem>[],
         appliedFilter: OutstandingInvoiceFilter.empty(),
-        searchKey: SearchKey.search(''),
+        searchKey: SearchKey.searchFilter(''),
       );
 }

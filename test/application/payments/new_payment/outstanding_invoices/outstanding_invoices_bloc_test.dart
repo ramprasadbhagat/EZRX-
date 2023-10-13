@@ -3,10 +3,14 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_local.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,16 +26,27 @@ void main() {
   late List<CustomerOpenItem> fakeCustomerOpenItem;
   late int pageSize;
   late Config config;
+  late CustomerCodeInfo mockCustomerCodeInfo;
+
+  late SalesOrg mockSalesOrg;
+  late SalesOrganisation mockSalesOrganisation;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     newPaymentRepository = NewPaymentRepositoryMock();
     config = Config()..appFlavor = Flavor.mock;
+
+    mockCustomerCodeInfo =
+        (await CustomerCodeLocalDataSource().getCustomerCodeList()).first;
+    fakeCustomerOpenItem =
+        await NewPaymentLocalDataSource().getCustomerOpenItems();
+    mockSalesOrg = (await SalesOrgLocalDataSource().getConfig()).salesOrg;
+    mockSalesOrganisation = SalesOrganisation.empty().copyWith(salesOrg: mockSalesOrg);
   });
+
   setUp(() {
     fakeOutstandingInvoiceFilter = OutstandingInvoiceFilter.empty();
-    fakeSearchKey = SearchKey.search('');
-    fakeCustomerOpenItem = <CustomerOpenItem>[];
+    fakeSearchKey = SearchKey.searchFilter('ab');
     pageSize = config.pageSize;
   });
 
@@ -44,9 +59,18 @@ void main() {
           newPaymentRepository: newPaymentRepository,
           config: config,
         ),
-        act: (OutstandingInvoicesBloc bloc) =>
-            bloc.add(const OutstandingInvoicesEvent.initialized()),
-        expect: () => [OutstandingInvoicesState.initial()],
+        act: (OutstandingInvoicesBloc bloc) => bloc.add(
+          OutstandingInvoicesEvent.initialized(
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
+          ),
+        ),
+        expect: () => [
+          OutstandingInvoicesState.initial().copyWith(
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
+          )
+        ],
       );
     },
   );
@@ -58,11 +82,15 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         config: config,
       ),
+      seed: () => OutstandingInvoicesState.initial().copyWith(
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+      ),
       setUp: () {
         when(
           () => newPaymentRepository.getOutstandingInvoices(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
             pageSize: pageSize,
             appliedFilter: fakeOutstandingInvoiceFilter,
             searchKey: fakeSearchKey,
@@ -76,17 +104,21 @@ void main() {
       },
       act: (OutstandingInvoicesBloc bloc) => bloc.add(
         OutstandingInvoicesEvent.fetch(
-          salesOrganisation: SalesOrganisation.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
           appliedFilter: fakeOutstandingInvoiceFilter,
           searchKey: fakeSearchKey,
         ),
       ),
       expect: () => [
         OutstandingInvoicesState.initial().copyWith(
+          salesOrganisation: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+          searchKey: fakeSearchKey,
           isLoading: true,
         ),
         OutstandingInvoicesState.initial().copyWith(
+          salesOrganisation: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+          searchKey: fakeSearchKey,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -101,11 +133,15 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         config: config,
       ),
+      seed: () => OutstandingInvoicesState.initial().copyWith(
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+      ),
       setUp: () {
         when(
           () => newPaymentRepository.getOutstandingInvoices(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
             pageSize: pageSize,
             appliedFilter: fakeOutstandingInvoiceFilter,
             searchKey: fakeSearchKey,
@@ -119,18 +155,22 @@ void main() {
       },
       act: (OutstandingInvoicesBloc bloc) => bloc.add(
         OutstandingInvoicesEvent.fetch(
-          salesOrganisation: SalesOrganisation.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
           appliedFilter: fakeOutstandingInvoiceFilter,
           searchKey: fakeSearchKey,
         ),
       ),
       expect: () => [
         OutstandingInvoicesState.initial().copyWith(
+          salesOrganisation: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+          searchKey: fakeSearchKey,
           isLoading: true,
         ),
         OutstandingInvoicesState.initial().copyWith(
+          salesOrganisation: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
           items: fakeCustomerOpenItem,
+          searchKey: fakeSearchKey,
           canLoadMore: fakeCustomerOpenItem.length >= pageSize,
         ),
       ],
@@ -144,15 +184,21 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         config: config,
       ),
+      seed: () => OutstandingInvoicesState.initial().copyWith(
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+        items: fakeCustomerOpenItem,
+        searchKey: fakeSearchKey,
+      ),
       setUp: () {
         when(
           () => newPaymentRepository.getOutstandingInvoices(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
             pageSize: pageSize,
             appliedFilter: fakeOutstandingInvoiceFilter,
             searchKey: fakeSearchKey,
-            offset: 0,
+            offset: fakeCustomerOpenItem.length,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -161,16 +207,21 @@ void main() {
         );
       },
       act: (OutstandingInvoicesBloc bloc) => bloc.add(
-        OutstandingInvoicesEvent.loadMore(
-          salesOrganisation: SalesOrganisation.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
-        ),
+        const OutstandingInvoicesEvent.loadMore(),
       ),
       expect: () => [
         OutstandingInvoicesState.initial().copyWith(
+          salesOrganisation: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+          searchKey: fakeSearchKey,
+          items: fakeCustomerOpenItem,
           isLoading: true,
         ),
         OutstandingInvoicesState.initial().copyWith(
+          salesOrganisation: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+          searchKey: fakeSearchKey,
+          items: fakeCustomerOpenItem,
           failureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -185,15 +236,21 @@ void main() {
         newPaymentRepository: newPaymentRepository,
         config: config,
       ),
+      seed: () => OutstandingInvoicesState.initial().copyWith(
+        salesOrganisation: mockSalesOrganisation,
+        customerCodeInfo: mockCustomerCodeInfo,
+        searchKey: fakeSearchKey,
+        items: fakeCustomerOpenItem,
+      ),
       setUp: () {
         when(
           () => newPaymentRepository.getOutstandingInvoices(
-            salesOrganisation: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganisation: mockSalesOrganisation,
+            customerCodeInfo: mockCustomerCodeInfo,
             pageSize: pageSize,
             appliedFilter: fakeOutstandingInvoiceFilter,
             searchKey: fakeSearchKey,
-            offset: 0,
+            offset: fakeCustomerOpenItem.length,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -202,17 +259,24 @@ void main() {
         );
       },
       act: (OutstandingInvoicesBloc bloc) => bloc.add(
-        OutstandingInvoicesEvent.loadMore(
-          salesOrganisation: SalesOrganisation.empty(),
-          customerCodeInfo: CustomerCodeInfo.empty(),
-        ),
+        const OutstandingInvoicesEvent.loadMore(),
       ),
       expect: () => [
         OutstandingInvoicesState.initial().copyWith(
+          salesOrganisation: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+          searchKey: fakeSearchKey,
+          items: fakeCustomerOpenItem,
           isLoading: true,
         ),
         OutstandingInvoicesState.initial().copyWith(
-          items: fakeCustomerOpenItem,
+          salesOrganisation: mockSalesOrganisation,
+          customerCodeInfo: mockCustomerCodeInfo,
+          items: [
+            ...fakeCustomerOpenItem,
+            ...fakeCustomerOpenItem,
+          ],
+          searchKey: fakeSearchKey,
           canLoadMore: fakeCustomerOpenItem.length >= pageSize,
         ),
       ],
