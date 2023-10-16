@@ -51,6 +51,7 @@ class _MaterialInfoDialog extends StatelessWidget {
     final materialInfo = productDetailAggregate.materialInfo;
 
     return Padding(
+      key: WidgetKeys.materialInfoDialog,
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
       child: Column(
         mainAxisSize: MainAxisSize.min,

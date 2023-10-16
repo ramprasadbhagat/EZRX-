@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_deta
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -105,6 +106,7 @@ class ComboOffersProduct extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     OutlinedButton(
+                      key: WidgetKeys.getComboDealButton,
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 24,

@@ -239,7 +239,7 @@ class WidgetKeys {
   //  Combo Deal Page Keys
   //============================================================
   static const Key comboDealDetailPage = Key('comboDealDetailPage');
-
+  static const Key getComboDealButton = Key('getComboDealButton');
   //============================================================
   //  PolicyConfiguration page Keys
   //============================================================
@@ -697,6 +697,7 @@ class WidgetKeys {
   static const Key productDetailQuantityTextKey =
       Key('productDetailQuantityTextKey');
   static const Key availableOfferColumnKey = Key('availableOfferColumn');
+  static const Key materialInfoDialog = Key('materialInfoDialog');
 
   //============================================================
   //  bundle Details

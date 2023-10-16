@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -22,13 +24,23 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_group_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
+import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/core/product_image/datasource/product_image_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -62,6 +74,10 @@ class ProductDetailsMockBloc
     extends MockBloc<ProductDetailEvent, ProductDetailState>
     implements ProductDetailBloc {}
 
+class ComboDealMaterialDetailBlocMock
+    extends MockBloc<ComboDealMaterialDetailEvent, ComboDealMaterialDetailState>
+    implements ComboDealMaterialDetailBloc {}
+
 class CartMockBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 class ProductImageMockBloc
@@ -80,6 +96,8 @@ class MockAppRouter extends Mock implements AppRouter {}
 
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
+class MockTokenStorage extends Mock implements TokenStorage {}
+
 final locator = GetIt.instance;
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -92,13 +110,45 @@ void main() {
   final mockProductImageBloc = ProductImageMockBloc();
   final materialPriceMockBloc = MaterialPriceMockBloc();
   final comboDealListMockBloc = ComboDealListMockBloc();
+  final comboDealMaterialDetailBlocMock = ComboDealMaterialDetailBlocMock();
   late EligibilityBlocMock eligibilityBlocMock;
   late CustomerCodeBloc customerCodeBlocMock;
   late CartBloc cartMockBloc;
   late AppRouter autoRouterMock;
   late MaterialInfo materialInfo;
+  late StockInfo stockInfo;
+  late StockInfo emptyStockInfo;
   late Price materialPrice;
+  late TokenStorage tokenStorage;
+  late User user;
+  final materialNumber = MaterialNumber('00000111111');
+  late ProductImages productImage;
   late List<MaterialInfo> similarProducts;
+  final price = Price.empty().copyWith(
+    comboDeal: PriceComboDeal.empty().copyWith(
+      isEligible: true,
+      flexibleGroup: FlexibleGroup('flex-group'),
+    ),
+  );
+  final comboDeal = ComboDeal.empty().copyWith(
+    groupDeal: ComboDealGroupDeal.empty().copyWith(
+      conditionNumber: 'conditionNumber',
+    ),
+    materialComboDeals: [
+      ComboDealMaterialSet.empty().copyWith(
+        materials: [
+          ComboDealMaterial.empty().copyWith(
+            materialNumber: materialNumber,
+          )
+        ],
+      ),
+    ],
+  );
+
+  final productItemWithProductItemXp = ProductItem.empty().copyWith(
+    productItemXp: ProductItemXp.empty()
+        .copyWith(howToUse: StringValue('fake-description')),
+  );
 
   final routeData = RouteData(
     route: const RouteMatch(
@@ -134,12 +184,25 @@ void main() {
     locator.registerLazySingleton(
       () => MixpanelService(config: locator<Config>()),
     );
+    tokenStorage = MockTokenStorage();
     materialInfo = await ProductDetailLocalDataSource().getProductDetails();
     similarProducts = await ProductDetailLocalDataSource().getSimilarProduct();
     materialPrice =
         (await MaterialPriceLocalDataSource().getPriceList()).firstWhere(
       (element) => element.materialNumber == materialInfo.materialNumber,
     );
+    when(() => tokenStorage.get())
+        .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));
+    user = await UserLocalDataSource(tokenStorage: tokenStorage).getUser();
+    stockInfo = (await StockInfoLocalDataSource().getStockInfo()).copyWith(
+      inStock: MaterialInStock('Yes'),
+    );
+    emptyStockInfo = StockInfo.empty().copyWith(
+      inStock: MaterialInStock('Yes'),
+    );
+    productImage =
+        (await ProductImageLocalDataSource().getItemProductDetails()).first;
+    registerFallbackValue(const ComboDetailPageRoute());
   });
 
   group(
@@ -178,8 +241,12 @@ void main() {
             .thenReturn('orders/material_details');
         when(() => autoRouterMock.current).thenReturn(routeData);
         when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
+        when(() => autoRouterMock.navigate(any()))
+            .thenAnswer((_) async => true);
         when(() => comboDealListMockBloc.state)
             .thenReturn(ComboDealListState.initial());
+        when(() => comboDealMaterialDetailBlocMock.state)
+            .thenReturn(ComboDealMaterialDetailState.initial());
       });
 
       RouteDataScope getScopedWidget() {
@@ -209,6 +276,9 @@ void main() {
             ),
             BlocProvider<CartBloc>(
               create: ((context) => cartMockBloc),
+            ),
+            BlocProvider<ComboDealMaterialDetailBloc>(
+              create: ((context) => comboDealMaterialDetailBlocMock),
             ),
             BlocProvider<ComboDealListBloc>(
               create: (context) => comboDealListMockBloc,
@@ -934,6 +1004,246 @@ void main() {
             ),
           ),
         );
+      });
+      testWidgets('MaterialDetailsToggle should be visible', (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+              productItem: productItemWithProductItemXp,
+            ),
+            isFetching: true,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            salesOrganisation: fakeSalesMYOrganisation,
+            salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(
+          find.byKey(WidgetKeys.materialDetailsPromoSeeMore),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('ComboOffersProduct should be visible', (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                materialNumber: materialNumber,
+                isSuspended: false,
+                isFOCMaterial: true,
+                productImages: productImage,
+              ),
+              stockInfo: emptyStockInfo,
+              productItem: productItemWithProductItemXp,
+            ),
+            isFetching: false,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            salesOrganisation: fakeSalesMYOrganisation,
+            salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPriceAndCombo,
+          ),
+        );
+        when(() => materialPriceMockBloc.state).thenReturn(
+          MaterialPriceState.initial().copyWith(
+            isFetching: false,
+            materialPrice: {materialNumber: price},
+          ),
+        );
+        when(() => comboDealListMockBloc.state).thenReturn(
+          ComboDealListState.initial().copyWith(
+            isFetching: false,
+            comboDeals: {
+              '${price.comboDeal.flexibleGroup.getValue()}-': [comboDeal],
+            },
+          ),
+        );
+        whenListen(
+          materialPriceMockBloc,
+          Stream.fromIterable([
+            MaterialPriceState.initial().copyWith(
+              isFetching: true,
+            ),
+            MaterialPriceState.initial().copyWith(
+              isFetching: false,
+              materialPrice: {materialNumber: price},
+            )
+          ]),
+        );
+        whenListen(
+          comboDealListMockBloc,
+          Stream.fromIterable([
+            ComboDealListState.initial().copyWith(
+              isFetching: true,
+            ),
+            ComboDealListState.initial().copyWith(
+              isFetching: false,
+              comboDeals: {
+                '${price.comboDeal.flexibleGroup.getValue()}-': [comboDeal],
+              },
+            )
+          ]),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        await tester.tap(
+          find.byKey(WidgetKeys.getComboDealButton),
+        );
+        await tester.pump();
+        expect(
+          find.text('Get combo deal'.tr()),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets('_MaterialInfoDialog should be shown when tap icon',
+          (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+              productItem: productItemWithProductItemXp,
+            ),
+            isFetching: false,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            salesOrganisation: fakeSalesMYOrganisation,
+            salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+          find.byKey(WidgetKeys.productDetailList),
+          const Offset(0, -200),
+        );
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.materialDetailsInfoTile), findsOneWidget);
+        await tester.tap(
+          find.byKey(WidgetKeys.materialDetailsInfoTile),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.byKey(WidgetKeys.materialInfoDialog),
+          findsOneWidget,
+        );
+      });
+      testWidgets('Similar product should be display', (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo.copyWith(
+                materialNumber: materialNumber,
+                isFavourite: true,
+                isSuspended: false,
+                isFOCMaterial: true,
+                productImages: productImage,
+              ),
+              productItem: productItemWithProductItemXp,
+              similarProduct: similarProducts,
+            ),
+            isFetching: false,
+          ),
+        );
+        whenListen(
+          productDetailMockBloc,
+          Stream.fromIterable([
+            ProductDetailState.initial().copyWith(isFetching: true),
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  materialNumber: materialNumber,
+                  isFavourite: true,
+                  isSuspended: false,
+                  isFOCMaterial: true,
+                  productImages: productImage,
+                ),
+                productItem: productItemWithProductItemXp,
+                similarProduct: similarProducts,
+              ),
+              isFetching: false,
+            ),
+          ]),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            salesOrganisation: fakeSalesMYOrganisation,
+            salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.favoritesIcon).last,
+          find.byKey(WidgetKeys.productDetailList),
+          const Offset(0, -200),
+        );
+        await tester.pumpAndSettle();
+        await tester.tap(
+          find.byKey(WidgetKeys.materialDetailsSimilarProductItem).first,
+        );
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.favoritesIcon), findsNWidgets(5));
+      });
+      testWidgets('Stock should be display', (tester) async {
+        when(() => productDetailMockBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: materialInfo,
+              stockInfo: stockInfo,
+              productItem: productItemWithProductItemXp,
+              similarProduct: similarProducts,
+            ),
+            isFetching: false,
+          ),
+        );
+        whenListen(
+          productDetailMockBloc,
+          Stream.fromIterable([
+            ProductDetailState.initial().copyWith(isFetching: true),
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo,
+                stockInfo: stockInfo,
+                productItem: productItemWithProductItemXp,
+                similarProduct: similarProducts,
+              ),
+              isFetching: false,
+            ),
+          ]),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: user,
+            salesOrganisation: fakeSalesMYOrganisation,
+            salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(find.byKey(WidgetKeys.materialDetailsStock), findsOneWidget);
       });
     },
   );
