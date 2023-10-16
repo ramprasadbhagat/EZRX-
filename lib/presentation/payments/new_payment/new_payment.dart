@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -211,13 +212,20 @@ class NewPaymentPage extends StatelessWidget {
                                 ),
                                 _PriceText(
                                   data: '(${StringUtils.displayNumber(
-                                    state.selectedCredits.amountTotal,
+                                    state.selectedCredits.amountTotal.abs(),
                                   )})',
                                   title: 'Credit applied',
                                   salesOrgConfig: configs,
+                                  isNegativeColorDisplay:
+                                      state.negativeAmountPayable,
                                 ),
                               ],
                             ),
+                            if (state.negativeAmountPayable)
+                              const InfoLabel(
+                                textValue:
+                                    'Total credit amount cannot exceed invoice amount.',
+                              ),
                             Row(
                               children: [
                                 Text(
@@ -234,7 +242,10 @@ class NewPaymentPage extends StatelessWidget {
                                       .read<SalesOrgBloc>()
                                       .state
                                       .configs,
-                                  price: state.amountTotal.toString(),
+                                  price: state.amountTotal.abs().toString(),
+                                  type: state.negativeAmountPayable
+                                      ? PriceStyle.negativePrice
+                                      : PriceStyle.commonPrice,
                                 ),
                                 const Spacer(),
                                 if (step == 1)
@@ -245,7 +256,7 @@ class NewPaymentPage extends StatelessWidget {
                                 if (step == 2)
                                   _NextButton(
                                     tabController: tabController,
-                                    enabled: true,
+                                    enabled: !state.negativeAmountPayable,
                                   ),
                                 if (step == 3)
                                   ElevatedButton(
@@ -444,12 +455,14 @@ class _PriceText extends StatelessWidget {
   final String data;
   final String title;
   final SalesOrganisationConfigs salesOrgConfig;
+  final bool isNegativeColorDisplay;
 
   const _PriceText({
     Key? key,
     required this.data,
     required this.title,
     required this.salesOrgConfig,
+    this.isNegativeColorDisplay = false,
   }) : super(key: key);
 
   @override
@@ -463,7 +476,9 @@ class _PriceText extends StatelessWidget {
             Text(
               data,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ZPColors.primary,
+                    color: isNegativeColorDisplay
+                        ? ZPColors.priceNegative
+                        : ZPColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
             ),

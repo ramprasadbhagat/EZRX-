@@ -91,6 +91,7 @@ abstract class ZPColors {
   static const Color errorSnackBarColor = Color.fromRGBO(250, 196, 196, 1);
   static const Color attachmentColor = Color.fromRGBO(187, 207, 48, 1);
   static const Color priceWarning = Color.fromRGBO(248, 227, 198, 1);
+  static const Color priceNegative = Color.fromRGBO(238, 66, 66, 1);
 
   static const Color paleBlueGray = Color.fromRGBO(230, 238, 239, 1);
   static const Color lightSilver = Color.fromRGBO(233, 236, 238, 1);

@@ -41,6 +41,8 @@ class NewPaymentState with _$NewPaymentState {
   double get amountTotal =>
       selectedInvoices.amountTotal + selectedCredits.amountTotal;
 
+  bool get negativeAmountPayable => amountTotal.isNegative;
+
   List<CustomerOpenItem> get allSelectedItems =>
       selectedInvoices + selectedCredits;
 }

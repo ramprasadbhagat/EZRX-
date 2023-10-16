@@ -1,6 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
@@ -13,7 +11,6 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credit_payment_filter_page.dart';
@@ -42,37 +39,6 @@ class AvailableCreditsTab extends StatelessWidget {
                 child: _AvailableCreditsSearchBar(),
               ),
               _FilterTune(),
-            ],
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(12),
-          margin: const EdgeInsets.all(20),
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(12),
-            ),
-            color: ZPColors.lightGreen,
-          ),
-          child: Row(
-            children: [
-              Text(
-                context.tr('Available credits: '),
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: ZPColors.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              PriceComponent(
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: context
-                    .read<AccountSummaryBloc>()
-                    .state
-                    .creditLimit
-                    .creditBalance
-                    .getOrDefaultValue('0'),
-              ),
             ],
           ),
         ),

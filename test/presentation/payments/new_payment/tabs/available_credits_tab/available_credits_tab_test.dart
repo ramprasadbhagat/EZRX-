@@ -212,17 +212,6 @@ void main() {
       );
     });
 
-    testWidgets('Available credit title', (tester) async {
-      when(() => availableCreditsBlocMock.state).thenReturn(
-        AvailableCreditsState.initial().copyWith(items: fakeCredits),
-      );
-
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      final availableText = find.text('Available credits: ');
-      expect(availableText, findsOneWidget);
-    });
-
     testWidgets('Loading view', (tester) async {
       when(() => availableCreditsBlocMock.state).thenReturn(
         AvailableCreditsState.initial().copyWith(isLoading: true, items: []),

@@ -39,7 +39,7 @@ class PaymentSummaryFilterDto with _$PaymentSummaryFilterDto {
   ) {
     return PaymentSummaryFilterDto(
       createdDateTo: tempFilter.createdDateTo.apiDateWithDashString,
-      createdDateFrom: tempFilter.createdDateTo.apiDateWithDashString,
+      createdDateFrom: tempFilter.createdDateFrom.apiDateWithDashString,
       amountValueFrom: tempFilter.amountValueFrom.apiParameterValue,
       amountValueTo: tempFilter.amountValueTo.apiParameterValue,
       filterStatuses:
