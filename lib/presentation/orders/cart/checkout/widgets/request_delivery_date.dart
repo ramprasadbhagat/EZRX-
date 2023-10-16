@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
+import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RequestDeliveryDate extends StatefulWidget {
   final DeliveryInfoData deliveryInfoData;
-  final String futureDeliveryDay;
+  final int nextDayNumber;
 
   const RequestDeliveryDate({
-    required this.futureDeliveryDay,
+    required this.nextDayNumber,
     required this.deliveryInfoData,
     Key? key,
   }) : super(key: key);
@@ -22,12 +23,14 @@ class RequestDeliveryDate extends StatefulWidget {
 
 class _RequestDeliveryDateState extends State<RequestDeliveryDate> {
   late TextEditingController _deliveryDateText;
+  late DateTime _currentDate;
 
   @override
   void initState() {
+    _currentDate = DateTime.now();
     _deliveryDateText = TextEditingController.fromValue(
       TextEditingValue(
-        text: widget.deliveryInfoData.deliveryDate.getValue(),
+        text: DateTimeUtils.getNearestDeliveryDateString(_currentDate),
       ),
     );
     super.initState();
@@ -87,17 +90,14 @@ class _RequestDeliveryDateState extends State<RequestDeliveryDate> {
                         state.isLoading
                     ? null
                     : ([bool mounted = true]) async {
-                        final dateTime = await getDateFromDatePicker(
-                          context,
-                        );
-                        _deliveryDateText.text =
-                            DateFormat('yyyy-MM-dd').format(dateTime);
+                        final dateTime = await pickDate(context);
                         if (!mounted) return;
+                        _deliveryDateText.text =
+                            DateTimeUtils.getDeliveryDateString(dateTime);
                         context.read<AdditionalDetailsBloc>().add(
                               AdditionalDetailsEvent.onTextChange(
                                 label: DeliveryInfoLabel.deliveryDate,
-                                newValue:
-                                    DateFormat('yyyy-MM-dd').format(dateTime),
+                                newValue: _deliveryDateText.text,
                               ),
                             );
                       },
@@ -109,17 +109,21 @@ class _RequestDeliveryDateState extends State<RequestDeliveryDate> {
     );
   }
 
-  Future<DateTime> getDateFromDatePicker(
+  Future<DateTime> pickDate(
     BuildContext context,
   ) async {
-    // final futureDeliveryDay = widget.futureDeliveryDay;
+    final nearestWorkingDate =
+        DateTimeUtils.getNearestWorkingDate(_currentDate);
     final orderDate = await showDatePicker(
       context: context,
-      firstDate: DateTime.now().add(const Duration(days: 1)),
-      lastDate: DateTime.utc(275760, 09, 13),
-      initialDate: DateTime.now().add(const Duration(days: 1)),
+      firstDate: nearestWorkingDate,
+      lastDate: nearestWorkingDate.add(
+        Duration(days: widget.nextDayNumber),
+      ),
+      initialDate: nearestWorkingDate,
+      selectableDayPredicate: (DateTime val) => !DateTimeUtils.isWeekend(val),
     );
 
-    return orderDate ?? widget.deliveryInfoData.deliveryDate.dateTime;
+    return orderDate ?? nearestWorkingDate;
   }
 }

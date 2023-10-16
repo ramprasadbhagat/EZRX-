@@ -371,8 +371,7 @@ class FutureDeliveryDay extends ValueObject<String> {
 
   const FutureDeliveryDay._(this.value);
 
-  String get validatedFutureDeliveryDate =>
-      removeDash(value.getOrElse(() => ''));
+  int get intValue => getIntValue(value.getOrElse(() => ''));
 }
 
 class SalesDealNumber extends ValueObject<String> {

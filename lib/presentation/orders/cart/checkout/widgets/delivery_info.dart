@@ -104,12 +104,8 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                               if (config.enableFutureDeliveryDay)
                                 RequestDeliveryDate(
                                   deliveryInfoData: state.deliveryInfoData,
-                                  futureDeliveryDay: context
-                                      .read<EligibilityBloc>()
-                                      .state
-                                      .salesOrgConfigs
-                                      .futureDeliveryDay
-                                      .validatedFutureDeliveryDate,
+                                  nextDayNumber:
+                                      config.futureDeliveryDay.intValue,
                                 ),
                               if (config.enableReferenceNote)
                                 _TextFormField(

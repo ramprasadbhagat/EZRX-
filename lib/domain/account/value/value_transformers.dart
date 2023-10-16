@@ -394,14 +394,7 @@ String checkAllOrDash(String value) {
   }
 }
 
-String removeDash(String value) {
-  switch (value) {
-    case '-':
-      return '';
-    default:
-      return value;
-  }
-}
+int getIntValue(String value) => int.tryParse(value) ?? 0;
 
 bool paymentAdviceEdit(String value) =>
     value.toLowerCase() == 'Data Updated Successfully'.toLowerCase();

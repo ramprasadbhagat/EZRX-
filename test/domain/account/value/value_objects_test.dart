@@ -1509,7 +1509,7 @@ void main() {
         final result = value.getOrCrash();
         expect(result, input);
         expect(value.isValid(), true);
-        expect(value.validatedFutureDeliveryDate, '5');
+        expect(value.intValue, 5);
       },
     );
 
@@ -1521,7 +1521,7 @@ void main() {
         final result = value.getOrDefaultValue('');
         expect(result, input);
         expect(value.isValid(), false);
-        expect(value.validatedFutureDeliveryDate, '');
+        expect(value.intValue, 0);
       },
     );
 
@@ -1533,7 +1533,7 @@ void main() {
         final result = value.getOrDefaultValue('');
         expect(result, input);
         expect(value.isValid(), true);
-        expect(value.validatedFutureDeliveryDate, '');
+        expect(value.intValue, 0);
       },
     );
   });
