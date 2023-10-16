@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EZReachBanner {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   int get serial => throw _privateConstructorUsedError;
   bool get isPreSalesOrg => throw _privateConstructorUsedError;
   bool get isCustomer => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $EZReachBannerCopyWith<$Res> {
       _$EZReachBannerCopyWithImpl<$Res, EZReachBanner>;
   @useResult
   $Res call(
-      {int id,
+      {String id,
       int serial,
       bool isPreSalesOrg,
       bool isCustomer,
@@ -91,7 +91,7 @@ class _$EZReachBannerCopyWithImpl<$Res, $Val extends EZReachBanner>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
@@ -157,7 +157,7 @@ abstract class _$$_EZReachBannerCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {String id,
       int serial,
       bool isPreSalesOrg,
       bool isCustomer,
@@ -203,7 +203,7 @@ class __$$_EZReachBannerCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
@@ -281,7 +281,7 @@ class _$_EZReachBanner extends _EZReachBanner {
       : super._();
 
   @override
-  final int id;
+  final String id;
   @override
   final int serial;
   @override
@@ -370,7 +370,7 @@ class _$_EZReachBanner extends _EZReachBanner {
 
 abstract class _EZReachBanner extends EZReachBanner {
   const factory _EZReachBanner(
-      {required final int id,
+      {required final String id,
       required final int serial,
       required final bool isPreSalesOrg,
       required final bool isCustomer,
@@ -387,7 +387,7 @@ abstract class _EZReachBanner extends EZReachBanner {
   const _EZReachBanner._() : super._();
 
   @override
-  int get id;
+  String get id;
   @override
   int get serial;
   @override

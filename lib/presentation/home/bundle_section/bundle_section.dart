@@ -1,3 +1,7 @@
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:auto_route/auto_route.dart';
@@ -208,6 +212,18 @@ class _BundleSectionItem extends StatelessWidget {
   }
 
   void _bundleOnTap(BuildContext context, MaterialInfo materialInfo) {
+    trackMixpanelEvent(
+      MixpanelEvents.productItemClicked,
+      props: {
+        MixpanelProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.router.currentPath),
+        MixpanelProps.isBundle: true,
+        MixpanelProps.productName: materialInfo.displayDescription,
+        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
+        MixpanelProps.productManufacturer: materialInfo.getManufactured,
+        MixpanelProps.section: 'Bundles',
+      },
+    );
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialNumber: materialInfo.materialNumber,

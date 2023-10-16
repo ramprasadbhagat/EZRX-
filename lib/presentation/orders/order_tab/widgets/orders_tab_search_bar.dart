@@ -77,6 +77,17 @@ class _SummarySearchBar extends StatelessWidget {
     bool onClear = false,
   }) {
     if (!onClear && searchKey.isEmpty) return;
+    trackMixpanelEvent(
+      MixpanelEvents.orderDetailSearched,
+      props: {
+        MixpanelProps.subTabFrom: RouterUtils.buildRouteTrackingName(
+          isFromViewByOrder
+              ? const ViewByOrdersPageRoute().path
+              : const ViewByItemsPageRoute().path,
+        ),
+        MixpanelProps.keyword: searchKey,
+      },
+    );
     isFromViewByOrder
         ? context.read<ViewByOrderBloc>().add(
               ViewByOrderEvent.fetch(

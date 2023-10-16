@@ -1,32 +1,40 @@
 class MixpanelEvents {
-  static String loginSuccess = 'Login Success';
-  static String loginFailure = 'Login Failure';
+  //===========================================================
+  //  Core
+  //============================================================
+  static String loginSuccess = 'Successful Login';
+  static String loginFailure = 'Login Failed';
+  static String salesOrgSave = 'Sales Org Selected';
+  static String customerCodeSave = 'Customer Code Selected';
+  static String shipToAddressSave = 'Ship to Address Selected';
   static String bannerClick = 'Banner Click';
   static String bannerImpression = 'Banner Impression';
-  static String shipToAddressSave = 'Ship To Address Save';
-  static String salesOrgSave = 'Sales Org Save';
-  static String customerCodeSave = 'Customer Code Save';
-  static String savedOrder = 'Saved Orders';
-  static String goToOrderSummary = 'Go To Order Summary';
-  static String viewLicenseInfo = 'View License Info';
-  static String uploadAttachment = 'Upload Attachment';
-  static String addToCartSuccess = 'Add To Cart Success';
-  static String addToCartFailed = 'Add To Cart Failed';
-  static String productSearch = 'Product Search';
-  static String clearCart = 'Clear Cart';
-  static String addFromFavorite = 'Add From Favourite';
-  static String addBonus = 'Add Bonus';
-  static String submitOrder = 'Submit Order';
-  static String orderSuccess = 'Order Success';
-  static String orderFailed = 'Order Failed';
-  static String saveOrder = 'Save Order';
-  static String reOrder = 'Reorder';
-  static String selectTemplate = 'Select Template';
-  static String createOrderFromTemplate = 'Create Order From Template';
   static String pageViewVisited = 'Pageview Visited';
-  static String thankYouToCreate = 'THANK YOU TO CREATE';
-  static String thankYouToHistory = 'THANK YOU TO HISTORY';
-  static String scannerClicked = 'Scanner Clicked';
-  static String productScannedSuccess = 'Product Scanned Success';
-  static String productScannedFailed = 'Product Scanned Failed';
+  static String quickAccessClicked = 'Quick Access Clicked';
+  static String bottomNavBarClicked = 'Bottom Nav Bar Clicked';
+  //===========================================================
+  //  Order
+  //============================================================
+  static String productSearch = 'Product Search';
+  static String scanClicked = 'Camera Scan Clicked';
+  static String scanSuccess = 'Successful Scan';
+  static String scanFailed = 'Scan Failed';
+  static String cartIconClicked = 'Header Cart Icon Clicked';
+  static String productItemClicked = 'Product Item Clicked';
+  static String addToCartSuccess = 'Add Product to Cart Success';
+  static String addToCartFailed = 'Add Product to Cart Failure';
+  static String productFilterClicked = 'Product Listing Quick Filter Clicked';
+  static String productFilterApplied = 'Product Listing Filter Applied';
+  static String productInfoViewed = 'Product Info Viewed';
+  static String productDescriptionViewed = 'Product Desc Viewed';
+  static String addProductToFavorite = 'Add Product to Favourite';
+  static String checkoutSuccess = 'Check Out Success - original';
+  static String checkoutFailure = 'Check Out Failure  - original';
+  static String placeOrderSuccess = 'Place Order Success - original';
+  static String placeOrderFailure = 'Place Order Failed - original';
+  static String successOrderItem = 'Successful Order Item';
+  static String orderDetailViewed = 'Order Detail Viewed';
+  static String orderDetailSearched = 'Order Detail Searched';
+  static String orderDetailFiltered = 'Order Detail Filter Used';
+  static String buyAgainClicked = 'Buy Again Clicked';
 }

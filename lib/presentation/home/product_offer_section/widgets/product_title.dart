@@ -74,6 +74,23 @@ class _ProductTile extends StatelessWidget {
                                   vertical: -4,
                                 ),
                                 onTap: () {
+                                  if (materialInfo.isFavourite) {
+                                    trackMixpanelEvent(
+                                      MixpanelEvents.addProductToFavorite,
+                                      props: {
+                                        MixpanelProps.productName:
+                                            materialInfo.displayDescription,
+                                        MixpanelProps.productCode: materialInfo
+                                            .materialNumber.displayMatNo,
+                                        MixpanelProps.productManufacturer:
+                                            materialInfo.getManufactured,
+                                        MixpanelProps.clickAt:
+                                            RouterUtils.buildRouteTrackingName(
+                                          context.router.currentPath,
+                                        ),
+                                      },
+                                    );
+                                  }
                                   materialInfo.isFavourite
                                       ? context.read<MaterialListBloc>().add(
                                             MaterialListEvent.deleteFavourite(
@@ -111,6 +128,18 @@ class _ProductTile extends StatelessWidget {
   }
 
   void _navigateToDetails(BuildContext context, MaterialInfo materialInfo) {
+    trackMixpanelEvent(
+      MixpanelEvents.productItemClicked,
+      props: {
+        MixpanelProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.router.currentPath),
+        MixpanelProps.isBundle: false,
+        MixpanelProps.productName: materialInfo.displayDescription,
+        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
+        MixpanelProps.productManufacturer: materialInfo.getManufactured,
+        MixpanelProps.section: 'Products on offer',
+      },
+    );
     final eligibilityBlocState = context.read<EligibilityBloc>().state;
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(

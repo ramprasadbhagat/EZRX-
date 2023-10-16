@@ -5,10 +5,14 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -19,6 +23,7 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -237,11 +242,12 @@ class _BundleSheetFooter extends StatelessWidget {
                     child: BlocConsumer<CartBloc, CartState>(
                       listenWhen: (previous, current) =>
                           previous.isUpserting != current.isUpserting,
-                      listener: (context, state) {
-                        state.apiFailureOrSuccessOption.fold(
+                      listener: (context, cartState) {
+                        cartState.apiFailureOrSuccessOption.fold(
                           () {
-                            if (!state.isUpserting &&
-                                state.cartProducts.isNotEmpty) {
+                            if (!cartState.isUpserting &&
+                                cartState.cartProducts.isNotEmpty) {
+                              _trackAddToCartSuccess(context, state);
                               context.router.popForced();
                               CustomSnackBar(
                                 messageText:
@@ -249,7 +255,14 @@ class _BundleSheetFooter extends StatelessWidget {
                               ).show(context);
                             }
                           },
-                          (either) => context.router.pop(),
+                          (either) {
+                            either.fold(
+                              (failure) =>
+                                  _trackAddToCartFailure(context, failure),
+                              (_) {},
+                            );
+                            context.router.pop();
+                          },
                         );
                       },
                       builder: (context, stateCart) {
@@ -310,4 +323,33 @@ class _BundleSheetFooter extends StatelessWidget {
       },
     );
   }
+
+  void _trackAddToCartSuccess(
+    BuildContext context,
+    BundleAddToCartState state,
+  ) {
+    final bundle = state.bundle;
+    final props = <String, dynamic>{
+      MixpanelProps.productName: bundle.name,
+      MixpanelProps.productCode: bundle.materialNumber.getOrDefaultValue(''),
+      MixpanelProps.productManufacturer: bundle.manufactured,
+      MixpanelProps.productTotalPrice:
+          state.bundleOffer.rate * state.totalCount,
+      MixpanelProps.productQty: state.totalCount,
+      MixpanelProps.clickAt:
+          RouterUtils.buildRouteTrackingName(context.router.currentPath),
+    };
+
+    trackMixpanelEvent(MixpanelEvents.addToCartSuccess, props: props);
+  }
+
+  void _trackAddToCartFailure(BuildContext context, ApiFailure failure) =>
+      trackMixpanelEvent(
+        MixpanelEvents.addToCartFailed,
+        props: {
+          MixpanelProps.errorMessage: failure.failureMessage,
+          MixpanelProps.viewFrom:
+              RouterUtils.buildRouteTrackingName(context.router.currentPath),
+        },
+      );
 }

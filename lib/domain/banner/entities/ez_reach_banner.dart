@@ -7,7 +7,7 @@ class EZReachBanner with _$EZReachBanner {
   const EZReachBanner._();
 
   const factory EZReachBanner({
-    required int id,
+    required String id,
     required int serial,
     required bool isPreSalesOrg,
     required bool isCustomer,
@@ -24,7 +24,7 @@ class EZReachBanner with _$EZReachBanner {
   }) = _EZReachBanner;
 
   factory EZReachBanner.empty() => const EZReachBanner(
-        id: 0,
+        id: '',
         serial: 0,
         isPreSalesOrg: false,
         isCustomer: false,

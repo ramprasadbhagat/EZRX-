@@ -7,10 +7,14 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
@@ -32,6 +36,7 @@ import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -303,17 +308,35 @@ class _Description extends StatelessWidget {
               isFavourite:
                   state.productDetailAggregate.materialInfo.isFavourite,
               constraints: const BoxConstraints(),
-              onTap: () => context.read<ProductDetailBloc>().add(
-                    state.productDetailAggregate.materialInfo.isFavourite
-                        ? ProductDetailEvent.deleteFavourite(
-                            isForSimilarProduct: false,
-                            materialNumber: materialInfo.materialNumber,
-                          )
-                        : ProductDetailEvent.addFavourite(
-                            isForSimilarProduct: false,
-                            materialNumber: materialInfo.materialNumber,
-                          ),
-                  ),
+              onTap: () {
+                if (materialInfo.isFavourite) {
+                  trackMixpanelEvent(
+                    MixpanelEvents.addProductToFavorite,
+                    props: {
+                      MixpanelProps.productName:
+                          materialInfo.displayDescription,
+                      MixpanelProps.productCode:
+                          materialInfo.materialNumber.displayMatNo,
+                      MixpanelProps.productManufacturer:
+                          materialInfo.getManufactured,
+                      MixpanelProps.clickAt: RouterUtils.buildRouteTrackingName(
+                        context.router.currentPath,
+                      ),
+                    },
+                  );
+                }
+                context.read<ProductDetailBloc>().add(
+                      state.productDetailAggregate.materialInfo.isFavourite
+                          ? ProductDetailEvent.deleteFavourite(
+                              isForSimilarProduct: false,
+                              materialNumber: materialInfo.materialNumber,
+                            )
+                          : ProductDetailEvent.addFavourite(
+                              isForSimilarProduct: false,
+                              materialNumber: materialInfo.materialNumber,
+                            ),
+                    );
+              },
             );
           },
         ),
@@ -343,6 +366,8 @@ class _FooterState extends State<_Footer> {
     _quantityEditingController.dispose();
     super.dispose();
   }
+
+  int get qty => int.tryParse(_quantityEditingController.text) ?? 0;
 
   bool _isEligibleForAddToCart({
     required BuildContext context,
@@ -433,6 +458,13 @@ class _FooterState extends State<_Footer> {
                               if (!state.isUpserting &&
                                   context.router.current.path ==
                                       'orders/material_details') {
+                                _trackAddToCartSuccess(
+                                  context,
+                                  state,
+                                  materialInfo,
+                                  qty,
+                                );
+
                                 CustomSnackBar(
                                   key: WidgetKeys
                                       .materialDetailsAddToCartSnackBar,
@@ -441,7 +473,11 @@ class _FooterState extends State<_Footer> {
                                 ).show(context);
                               }
                             },
-                            (either) => {},
+                            (either) => either.fold(
+                              (failure) =>
+                                  _trackAddToCartFailure(context, failure),
+                              (_) {},
+                            ),
                           );
                         },
                         buildWhen: (previous, current) =>
@@ -510,10 +546,7 @@ class _FooterState extends State<_Footer> {
                                                               .materialInfo
                                                               .materialNumber,
                                                         ) +
-                                                        int.parse(
-                                                          _quantityEditingController
-                                                              .text,
-                                                        ),
+                                                        qty,
                                                   ),
                                                 );
                                           }
@@ -539,10 +572,7 @@ class _FooterState extends State<_Footer> {
                                                             .materialInfo
                                                             .materialNumber,
                                                       ) +
-                                                      int.parse(
-                                                        _quantityEditingController
-                                                            .text,
-                                                      ),
+                                                      qty,
                                                 ),
                                               );
                                         }
@@ -572,6 +602,50 @@ class _FooterState extends State<_Footer> {
     );
   }
 }
+
+void _trackAddToCartSuccess(
+  BuildContext context,
+  CartState state,
+  MaterialInfo material,
+  int qty,
+) {
+  final price = context
+          .read<MaterialPriceBloc>()
+          .state
+          .materialPrice[material.materialNumber] ??
+      Price.empty();
+  final cartItem = state.cartProducts
+      .firstWhere(
+        (e) => e.getMaterialNumber == material.materialNumber,
+        orElse: () => PriceAggregate.empty(),
+      )
+      .copyWith(quantity: qty, price: price);
+
+  final props = <String, dynamic>{
+    MixpanelProps.productName: cartItem.materialInfo.displayDescription,
+    MixpanelProps.productCode:
+        cartItem.materialInfo.materialNumber.getOrDefaultValue(''),
+    MixpanelProps.productManufacturer: cartItem.materialInfo.getManufactured,
+    MixpanelProps.productTotalPrice: cartItem.finalPriceTotal,
+    MixpanelProps.productQty: qty,
+    MixpanelProps.clickAt:
+        RouterUtils.buildRouteTrackingName(context.router.currentPath),
+  };
+
+  //TODO: Revisit later to implement is_offer and tag for MixpanelProps when have a proper solution because current logic code for checking offer and tag of material is long and complicated, moving it here may cause the code become messy
+
+  trackMixpanelEvent(MixpanelEvents.addToCartSuccess, props: props);
+}
+
+void _trackAddToCartFailure(BuildContext context, ApiFailure failure) =>
+    trackMixpanelEvent(
+      MixpanelEvents.addToCartFailed,
+      props: {
+        MixpanelProps.errorMessage: failure.failureMessage,
+        MixpanelProps.viewFrom:
+            RouterUtils.buildRouteTrackingName(context.router.currentPath),
+      },
+    );
 
 void _showDEtailsPagePage({
   required BuildContext context,

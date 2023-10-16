@@ -56,6 +56,8 @@ class AdditionalDetailsBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class MockMixpanelService extends Mock implements MixpanelService {}
+
 void main() {
   late AppRouter autoRouterMock;
   late SalesOrgBloc mockSalesOrgBloc;
@@ -70,9 +72,8 @@ void main() {
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
       locator.registerLazySingleton(() => AutoRouterMock());
-      locator.registerLazySingleton(
-        () => MixpanelService(config: locator<Config>()),
-      );
+      locator
+          .registerLazySingleton<MixpanelService>(() => MockMixpanelService());
     },
   );
   setUp(

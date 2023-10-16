@@ -39,6 +39,7 @@ class EZReachBannerDto with _$EZReachBannerDto {
 
   EZReachBanner toDomain() {
     return EZReachBanner.empty().copyWith(
+      id: bannerId,
       url: mobileBannerImg.isEmpty ? bannerUrl : mobileBannerImg,
       title: bannerCampaignName,
       description: targetProduct,
@@ -52,7 +53,7 @@ class EZReachBannerDto with _$EZReachBannerDto {
 
   factory EZReachBannerDto.fromDomain(EZReachBanner banner) {
     return EZReachBannerDto(
-      bannerId: banner.id.toString(),
+      bannerId: banner.id,
       bannerUrl: banner.url,
       bannerCampaignName: banner.title,
       targetProduct: banner.description,
@@ -67,8 +68,8 @@ class EZReachBannerDto with _$EZReachBannerDto {
       salesRep: banner.isPreSalesOrg,
       status: '',
       companyName: '',
-      bannerCampaignLocations: [],
-      countryCode: [],
+      bannerCampaignLocations: <String>[],
+      countryCode: <String>[],
     );
   }
 }

@@ -97,7 +97,7 @@ void main() {
 
     Widget getWUT() {
       final banner = EZReachBanner.empty().copyWith(
-        id: 1,
+        id: '1',
         title: 'Test Banner',
         url: 'https://test.com/banner.jpg',
         urlLink: 'https://test.com',
@@ -126,7 +126,7 @@ void main() {
     testWidgets('BannerTile renders correctly with given banner item',
         (WidgetTester tester) async {
       final banner = EZReachBanner.empty().copyWith(
-        id: 1,
+        id: '1',
         title: 'Test Banner',
         url: 'https://example.com/banner.jpg',
         urlLink: 'https://example.com',

@@ -6,8 +6,12 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -233,6 +237,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       },
                       (either) => either.fold(
                         (failure) {
+                          trackMixpanelEvent(
+                            MixpanelEvents.placeOrderFailure,
+                            props: {
+                              MixpanelProps.errorMessage:
+                                  failure.failureMessage,
+                            },
+                          );
                           ErrorUtils.handleApiFailure(context, failure);
                         },
                         (_) {},

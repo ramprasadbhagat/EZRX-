@@ -1,3 +1,6 @@
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -53,7 +56,15 @@ class _QuickAccessMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       key: quickAccessMenuData.key,
-      onTap: quickAccessMenuData.onTap,
+      onTap: () {
+        quickAccessMenuData.onTap.call();
+        trackMixpanelEvent(
+          MixpanelEvents.quickAccessClicked,
+          props: {
+            MixpanelProps.quickAccess: quickAccessMenuData.label,
+          },
+        );
+      },
       child: Stack(
         alignment: AlignmentDirectional.topCenter,
         children: [

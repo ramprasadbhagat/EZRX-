@@ -52,6 +52,31 @@ class OrderEligibilityState with _$OrderEligibilityState {
       !cartContainsSuspendedMaterials &&
       !cartContainsSuspendedPrincipal;
 
+  String get orderEligibleTrackingErrorMessage {
+    const invalidItemErrorMessage =
+        'The following items have been identified in your cart:';
+    if (!isMinOrderValuePassed) {
+      return 'Please ensure that the order value satisfies the minimum order value of ${StringUtils.displayPrice(configs, double.tryParse(configs.minOrderAmount) ?? 0)}';
+    }
+    if (isMWPNotAllowedAndPresentInCart) {
+      return '$invalidItemErrorMessage Material without price';
+    }
+    if (!isOOSAllowedIfPresentInCart) {
+      return '$invalidItemErrorMessage Out of stock material';
+    }
+    if (cartContainsSuspendedMaterials) {
+      return '$invalidItemErrorMessage Principle suspended material';
+    }
+    if (cartContainsSuspendedMaterials) {
+      return '$invalidItemErrorMessage Suspended material';
+    }
+    if (!isBundleQuantitySatisfies) {
+      return '$invalidItemErrorMessage Unsatisfied qty bundle';
+    }
+
+    return '';
+  }
+
   bool get isTotalGreaterThanMinOrderAmount {
     if (salesOrg.salesOrg.isTH) {
       return subTotal >= double.parse(configs.minOrderAmount);

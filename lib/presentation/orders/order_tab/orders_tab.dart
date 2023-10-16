@@ -2,9 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -12,6 +14,7 @@ import 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_
 import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -52,11 +55,9 @@ class OrdersTab extends StatelessWidget {
           ),
           Expanded(
             child: AutoTabsRouter.tabBar(
-              routes: [
-                const ViewByItemsPageRoute(),
-                ViewByOrdersPageRoute(
-                  orderHistoryItem: OrderHistoryItem.empty(),
-                ),
+              routes: const [
+                ViewByItemsPageRoute(),
+                ViewByOrdersPageRoute(),
               ],
               builder: (context, child, tabController) => Column(
                 children: [

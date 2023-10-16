@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
-import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -16,7 +15,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 class CarouselBanner extends StatefulWidget {
   const CarouselBanner({Key? key}) : super(key: key);
@@ -28,7 +26,6 @@ class CarouselBanner extends StatefulWidget {
 class _CarouselBannerState extends State<CarouselBanner> {
   final _controller = PageController();
   Timer? bannerTimer;
-  bool isBannerVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +56,10 @@ class _CarouselBannerState extends State<CarouselBanner> {
         child: BlocConsumer<BannerBloc, BannerState>(
           listenWhen: (previous, current) => previous.banner != current.banner,
           listener: (context, state) {
+            if (state.banner.isNotEmpty) {
+              startBannerScrollTimer();
+              _trackBannerChangeEvent(context: context, index: 0);
+            }
             state.bannerFailureOrSuccessOption.fold(
               () {},
               (either) => either.fold(
@@ -73,12 +74,8 @@ class _CarouselBannerState extends State<CarouselBanner> {
               previous.banner != current.banner ||
               previous.isLoading != current.isLoading,
           builder: (context, state) {
-            bannerTimer?.cancel();
             if (state.banner.isEmpty) {
               return const SizedBox.shrink();
-            }
-            if (state.banner.length > 1) {
-              startBannerScrollTimer();
             }
             final bannerHeight = MediaQuery.of(context).size.width * 0.5;
 
@@ -86,46 +83,32 @@ class _CarouselBannerState extends State<CarouselBanner> {
               children: [
                 SizedBox(
                   height: bannerHeight,
-                  child: VisibilityDetector(
-                    key: WidgetKeys.visibilityDetector,
-                    onVisibilityChanged: (info) {
-                      final visiblePercentage = info.visibleFraction * 100;
-                      isBannerVisible = visiblePercentage >= 80;
-                    },
-                    child: state.isLoading
-                        ? const _CarouselBannerLoadingShimmer()
-                        : PageView.builder(
-                            key: WidgetKeys.homeBanner,
-                            controller: _controller,
-                            allowImplicitScrolling: true,
-                            itemBuilder: (_, index) {
-                              final banner =
-                                  state.banner[index % state.banner.length];
-                              if (isBannerVisible &&
-                                  banner != EZReachBanner.empty() &&
-                                  index > 1) {
-                                trackMixpanelEvent(
-                                  MixpanelEvents.bannerImpression,
-                                  props: {
-                                    MixpanelProps.bannerId:
-                                        banner.id.toString(),
-                                    MixpanelProps.bannerTitle: banner.title,
-                                  },
-                                );
-                              }
+                  child: state.isLoading
+                      ? const _CarouselBannerLoadingShimmer()
+                      : PageView.builder(
+                          key: WidgetKeys.homeBanner,
+                          onPageChanged: (index) {
+                            final bannerPosition = index % state.banner.length;
 
-                              return CarouselBannerTile(
-                                key: Key(
-                                  state.banner[index % state.banner.length].id
-                                      .toString(),
-                                ),
-                                bannerPosition: index % state.banner.length,
-                                banner:
-                                    state.banner[index % state.banner.length],
-                              );
-                            },
-                          ),
-                  ),
+                            _trackBannerChangeEvent(
+                              context: context,
+                              index: bannerPosition,
+                            );
+                          },
+                          controller: _controller,
+                          allowImplicitScrolling: true,
+                          itemBuilder: (_, index) {
+                            final bannerPosition = index % state.banner.length;
+
+                            return CarouselBannerTile(
+                              key: Key(
+                                state.banner[bannerPosition].id.toString(),
+                              ),
+                              bannerPosition: bannerPosition,
+                              banner: state.banner[bannerPosition],
+                            );
+                          },
+                        ),
                 ),
                 state.banner.isNotEmpty
                     ? Positioned(
@@ -193,6 +176,7 @@ class _CarouselBannerState extends State<CarouselBanner> {
     if (_controller.hasClients) {
       _controller.jumpToPage(0);
     }
+    bannerTimer?.cancel();
     bannerTimer = Timer.periodic(
       const Duration(seconds: 8),
       (timer) {
@@ -217,6 +201,21 @@ class _CarouselBannerState extends State<CarouselBanner> {
         curve: Curves.ease,
       );
     }
+  }
+
+  void _trackBannerChangeEvent({
+    required BuildContext context,
+    required int index,
+  }) {
+    final banner = context.read<BannerBloc>().state.banner[index];
+    trackMixpanelEvent(
+      MixpanelEvents.bannerImpression,
+      props: {
+        MixpanelProps.bannerId: banner.id,
+        MixpanelProps.bannerTitle: banner.title,
+        MixpanelProps.bannerOrder: index + 1,
+      },
+    );
   }
 }
 

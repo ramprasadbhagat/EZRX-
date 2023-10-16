@@ -3,6 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/aup_tc/aup_tc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
@@ -98,6 +101,12 @@ class _CustomTabBarState extends State<_CustomTabBar>
                   indicator: _TopIndicator(),
                   onTap: (index) {
                     tabsRouter.setActiveIndex(index);
+                    trackMixpanelEvent(
+                      MixpanelEvents.bottomNavBarClicked,
+                      props: {
+                        MixpanelProps.navTab: widget.routes[index].label,
+                      },
+                    );
                   },
                   labelStyle: Theme.of(context).textTheme.bodySmall,
                   padding: const EdgeInsets.symmetric(

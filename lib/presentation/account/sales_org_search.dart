@@ -3,6 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -113,6 +116,13 @@ class _SalesOrgItem extends StatelessWidget {
           ),
         ListTile(
           onTap: () {
+            trackMixpanelEvent(
+              MixpanelEvents.salesOrgSave,
+              props: {
+                MixpanelProps.salesOrg:
+                    salesOrganisation.salesOrg.getOrDefaultValue(''),
+              },
+            );
             context.read<SalesOrgBloc>().add(
                   SalesOrgEvent.selected(
                     salesOrganisation: salesOrganisation,

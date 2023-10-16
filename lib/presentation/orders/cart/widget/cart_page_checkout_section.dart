@@ -166,13 +166,34 @@ class _CartPageCheckoutButton extends StatelessWidget {
   }
 
   void _onCheckOutPressed(BuildContext context) {
-    if (context.read<OrderEligibilityBloc>().state.eligibleForOrderSubmit) {
-      FocusScope.of(context).requestFocus(FocusNode());
-      context.read<CartBloc>().state.allMaterial.preOrderItems.isNotEmpty
-          ? _showPreOrderModal(context: context)
-          : context.router.pushNamed('orders/cart/checkout');
+    final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
+    final cartState = context.read<CartBloc>().state;
 
-      return;
+    if (orderEligibilityState.eligibleForOrderSubmit) {
+      FocusScope.of(context).requestFocus(FocusNode());
+      trackMixpanelEvent(
+        MixpanelEvents.checkoutSuccess,
+        props: {
+          MixpanelProps.grandTotal: cartState.grandTotal,
+          MixpanelProps.totalQty: cartState.totalItems,
+        },
+      );
+      final preOrderItemExist = cartState.allMaterial.preOrderItems.isNotEmpty;
+      if (preOrderItemExist) {
+        _showPreOrderModal(context: context);
+      } else {
+        context.router.pushNamed('orders/cart/checkout');
+      }
+    } else {
+      trackMixpanelEvent(
+        MixpanelEvents.checkoutFailure,
+        props: {
+          MixpanelProps.grandTotal: cartState.grandTotal,
+          MixpanelProps.totalQty: cartState.totalItems,
+          MixpanelProps.errorMessage:
+              orderEligibilityState.orderEligibleTrackingErrorMessage,
+        },
+      );
     }
     context.read<OrderEligibilityBloc>().add(
           const OrderEligibilityEvent.validateOrderEligibility(),

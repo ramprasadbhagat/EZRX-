@@ -3,6 +3,7 @@ import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/presentation/routes/overlay_router.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class RouterObserver extends AutoRouterObserver {
 
   @override
   void didPush(Route route, Route? previousRoute) {
+    if (route is OverlayRouter || route is PopupRoute) return;
     firebaseAnalyticsService.analytics.logScreenView(
       screenClass: 'Route',
       screenName: route.settings.name,
@@ -25,9 +27,11 @@ class RouterObserver extends AutoRouterObserver {
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    _trackMixpanelEvent(
-      previousRoute?.navigator?.context.router.currentPath ?? '',
-    );
+    if (route is OverlayRouter || route is PopupRoute) return;
+    final routeSetting = previousRoute?.settings;
+    if (routeSetting is AutoRoutePage) {
+      _trackMixpanelEvent(routeSetting.routeData.path);
+    }
   }
 
   @override
@@ -44,26 +48,13 @@ class RouterObserver extends AutoRouterObserver {
       screenClass: 'TabPageRoute',
       screenName: route.name,
     );
-    _trackMixpanelEvent(route.path, rawPreviousRoute: previousRoute.path);
+    _trackMixpanelEvent(route.path);
   }
 
-  void _trackMixpanelEvent(
-    String rawRoute, {
-    String rawPreviousRoute = '',
-  }) {
+  void _trackMixpanelEvent(String rawRoute) {
     if (rawRoute.isNotEmpty) {
-      final routerUtils = RouterUtils();
-      final pageName = routerUtils.buildRouteTrackingName(rawRoute);
+      final pageName = RouterUtils.buildRouteTrackingName(rawRoute);
 
-      if (rawPreviousRoute.isNotEmpty) {
-        mixpanelService.activeNavBarRoute = pageName;
-        final previousRoute =
-            routerUtils.buildRouteTrackingName(rawPreviousRoute);
-        mixpanelService.trackNavBarEvent(
-          pageName,
-          previousRoute,
-        );
-      }
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.pageViewVisited,
         properties: {MixpanelProps.pageViewName: _getPageName(pageName)},
@@ -74,9 +65,7 @@ class RouterObserver extends AutoRouterObserver {
   String _getPageName(String pageName) {
     switch (pageName) {
       case 'Main Page':
-        return mixpanelService.activeNavBarRoute;
-      case 'Material Root Page':
-        return 'Material List Page';
+        return 'Home Page';
       default:
         return pageName;
     }

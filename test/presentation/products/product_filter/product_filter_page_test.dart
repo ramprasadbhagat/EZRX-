@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/order/material_filter/material_filter_blo
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/filter_by_page/filter_by_page.dart';
 import 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
@@ -25,6 +26,8 @@ class MockMaterialListBloc
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
+class MockMixpanelService extends Mock implements MixpanelService {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -34,6 +37,7 @@ void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
+    locator.registerSingleton<MixpanelService>(MockMixpanelService());
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockMaterialFilterBloc);
     locator.registerLazySingleton(() => mockMaterialListBloc);

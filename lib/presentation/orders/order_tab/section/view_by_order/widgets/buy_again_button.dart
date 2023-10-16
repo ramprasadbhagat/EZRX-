@@ -83,6 +83,10 @@ class BuyAgainButton extends StatelessWidget {
                           (stateCart.isUpserting || stateCart.isFetching))
                   ? null
                   : () {
+                      _trackBuyAgainEvent(
+                        context,
+                        viewByOrderHistoryItem.orderHistoryDetailsOrderItem,
+                      );
                       context.read<ReOrderPermissionBloc>().add(
                             ReOrderPermissionEvent.fetch(
                               orderHistoryDetailsOrderItems:
@@ -118,5 +122,25 @@ class BuyAgainButton extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _trackBuyAgainEvent(
+    BuildContext context,
+    List<OrderHistoryDetailsOrderItem> items,
+  ) {
+    final currentPage =
+        RouterUtils.buildRouteTrackingName(context.routeData.path);
+    for (final item in items) {
+      trackMixpanelEvent(
+        MixpanelEvents.buyAgainClicked,
+        props: {
+          MixpanelProps.productName: item.materialDescription,
+          MixpanelProps.productCode: item.materialNumber.displayMatNo,
+          MixpanelProps.productManufacturer:
+              item.principalData.principalName.name,
+          MixpanelProps.clickAt: currentPage,
+        },
+      );
+    }
   }
 }

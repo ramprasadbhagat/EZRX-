@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -22,7 +23,9 @@ class ProductSearchEntry extends StatelessWidget {
       autocorrect: false,
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
-        context.router.pushNamed('product_suggestion_page');
+        context.router.push(
+          ProductSuggestionPageRoute(parentRoute: context.routeData.path),
+        );
       },
       decoration: InputDecoration(
         hintText: context.tr('Search by product name or code'),
@@ -37,9 +40,7 @@ class ProductSearchEntry extends StatelessWidget {
             Icons.camera_alt_outlined,
           ),
           onPressed: () => {
-            trackMixpanelEvent(
-              MixpanelEvents.scannerClicked,
-            ),
+            trackMixpanelEvent(MixpanelEvents.scanClicked),
             context.router.pushNamed('orders/scan_material_info'),
             context.read<ScanMaterialInfoBloc>().add(
                   ScanMaterialInfoEvent.scanMaterialNumberFromCamera(

@@ -2,7 +2,6 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/
 
 class _ViewByOrderGroup extends StatelessWidget {
   final ViewByOrdersGroup viewByOrdersItem;
-  final OrderHistoryItem orderHistoryItem;
 
   final bool showDivider;
   final bool showBanner;
@@ -12,7 +11,6 @@ class _ViewByOrderGroup extends StatelessWidget {
     required this.viewByOrdersItem,
     required this.showDivider,
     required this.showBanner,
-    required this.orderHistoryItem,
   }) : super(key: key);
 
   @override

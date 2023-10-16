@@ -49,6 +49,8 @@ class MockUserRepo extends Mock implements UserRepository {}
 
 class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class MockMixpanelService extends Mock implements MixpanelService {}
+
 void main() {
   late BannerBloc mockBannerBloc;
   late AuthBloc mockAuthBloc;
@@ -84,10 +86,7 @@ void main() {
     locator.registerFactory(() => mockBannerBloc);
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
-
+    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
     autoRouterMock = locator<AppRouter>();
     mockHTTPService = MockHTTPService();
     mockEligibilityBloc = MockEligibilityBloc();
@@ -249,19 +248,17 @@ void main() {
 
     testWidgets('Banner test 2 - is Snackbar shown?', (tester) async {
       final bannerBloc = locator<BannerBloc>();
-
+      final mockState = BannerState.initial().copyWith(
+        banner: [
+          EZReachBanner.empty(),
+          EZReachBanner.empty(),
+        ],
+        bannerFailureOrSuccessOption:
+            optionOf(const Left(ApiFailure.other('Fake Error'))),
+      );
+      when(() => bannerBloc.state).thenReturn(mockState);
       when(() => bannerBloc.stream).thenAnswer((invocation) {
-        return Stream.fromIterable([
-          BannerState.initial(),
-          BannerState.initial().copyWith(
-            banner: [
-              EZReachBanner.empty(),
-              EZReachBanner.empty(),
-            ],
-            bannerFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('Fake Error'))),
-          ),
-        ]);
+        return Stream.fromIterable([BannerState.initial(), mockState]);
       });
 
       await tester.pumpWidget(getWUT());
@@ -276,20 +273,18 @@ void main() {
     testWidgets('Banner test 3 - is User getting logged out when Auth failed',
         (tester) async {
       final bannerBloc = locator<BannerBloc>();
-
+      final mockState = BannerState.initial().copyWith(
+        banner: [
+          EZReachBanner.empty(),
+          EZReachBanner.empty(),
+        ],
+        bannerFailureOrSuccessOption:
+            optionOf(const Left(ApiFailure.other('authentication failed'))),
+      );
       when(() => bannerBloc.stream).thenAnswer((invocation) {
-        return Stream.fromIterable([
-          BannerState.initial(),
-          BannerState.initial().copyWith(
-            banner: [
-              EZReachBanner.empty(),
-              EZReachBanner.empty(),
-            ],
-            bannerFailureOrSuccessOption:
-                optionOf(const Left(ApiFailure.other('authentication failed'))),
-          ),
-        ]);
+        return Stream.fromIterable([BannerState.initial(), mockState]);
       });
+      when(() => bannerBloc.state).thenReturn(mockState);
 
       await tester.pumpWidget(getWUT());
       await tester.pump();
@@ -302,19 +297,18 @@ void main() {
 
     testWidgets('Banner test 4 - No API error', (tester) async {
       final bannerBloc = locator<BannerBloc>();
+      final mockState = BannerState.initial().copyWith(
+        banner: [
+          EZReachBanner.empty(),
+          EZReachBanner.empty(),
+        ],
+        bannerFailureOrSuccessOption: optionOf(const Right('No API error')),
+      );
 
       when(() => bannerBloc.stream).thenAnswer((invocation) {
-        return Stream.fromIterable([
-          BannerState.initial(),
-          BannerState.initial().copyWith(
-            banner: [
-              EZReachBanner.empty(),
-              EZReachBanner.empty(),
-            ],
-            bannerFailureOrSuccessOption: optionOf(const Right('No API error')),
-          ),
-        ]);
+        return Stream.fromIterable([BannerState.initial(), mockState]);
       });
+      when(() => bannerBloc.state).thenReturn(mockState);
 
       await tester.pumpWidget(getWUT());
       await tester.pump();

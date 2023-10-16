@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
@@ -28,8 +27,6 @@ import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
 
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_remote.dart';
@@ -292,17 +289,9 @@ class OrderRepository implements IOrderRepository {
 
       final submitOrderResponse =
           await remoteDataSource.submitOrder(orderEncryption: encryptedData);
-      _trackOrderSuccessEvent(cartProducts, grandTotal);
 
       return Right(submitOrderResponse);
     } catch (e) {
-      mixpanelService.trackEvent(
-        eventName: MixpanelEvents.orderFailed,
-        properties: {
-          MixpanelProps.errorMessage: e.toString(),
-        },
-      );
-
       return Left(
         FailureHandler.handleFailure(e),
       );
@@ -527,61 +516,6 @@ class OrderRepository implements IOrderRepository {
         cartItems: cartProducts,
         customerCodeInfo: customerCodeInfo,
       ),
-    );
-  }
-
-  void _trackOrderSuccessEvent(
-    List<PriceAggregate> cartItems,
-    double grandTotal,
-  ) {
-    final isBannerClicked = cartItems
-        .map(
-          (e) => e.banner != EZReachBanner.empty(),
-        )
-        .toList();
-    final props = {
-      MixpanelProps.grandTotal: grandTotal,
-      MixpanelProps.productName:
-          cartItems.map((e) => e.materialInfo.materialDescription).toList(),
-      MixpanelProps.productNumber: cartItems
-          .map((e) => e.getMaterialNumber.getOrDefaultValue(''))
-          .toList(),
-      MixpanelProps.productManufacturer: cartItems
-          .map(
-            (e) => e.materialInfo.principalData.principalName
-                .getOrDefaultValue(''),
-          )
-          .toList(),
-      MixpanelProps.productCategory: cartItems
-          .map((e) => e.materialInfo.materialGroup4.getMaterialGroup4Type)
-          .toList(),
-      MixpanelProps.productQty: cartItems.map((e) => e.quantity).toList(),
-      MixpanelProps.bonusName: cartItems
-          .map(
-            (e) => e.addedBonusList.map((e) => e.materialDescription).toList(),
-          )
-          .toList(),
-      MixpanelProps.bonusManufacturer: cartItems
-          .map(
-            (e) => e.addedBonusList
-                .map(
-                  (e) => e.materialInfo.principalData.principalName
-                      .getOrDefaultValue(''),
-                )
-                .toList(),
-          )
-          .toList(),
-      MixpanelProps.bannerClicked: isBannerClicked,
-      MixpanelProps.bannerId:
-          cartItems.map((e) => e.banner.id.toString()).toList(),
-      MixpanelProps.bannerTitle: cartItems.map((e) => e.banner.title).toList(),
-      MixpanelProps.bannerType:
-          cartItems.map((e) => e.banner.category).toList(),
-    };
-
-    mixpanelService.trackEvent(
-      eventName: MixpanelEvents.orderSuccess,
-      properties: props,
     );
   }
 }

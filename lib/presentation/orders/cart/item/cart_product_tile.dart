@@ -28,10 +28,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dart';
 
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
-
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 part 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/invalid_material_message.dart';
@@ -449,9 +445,6 @@ class _BonusPriceCounterSection extends StatelessWidget {
                   builder: (_) {
                     return BonusItemsSheet(cartProduct: cartItem);
                   },
-                );
-                trackMixpanelEvent(
-                  MixpanelEvents.addBonus,
                 );
                 context.read<BonusMaterialBloc>().add(
                       BonusMaterialEvent.fetch(

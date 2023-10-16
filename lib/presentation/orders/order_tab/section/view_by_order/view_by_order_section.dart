@@ -9,12 +9,15 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -24,6 +27,7 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'widgets/buy_again_button.dart';
@@ -31,11 +35,8 @@ part 'widgets/view_by_order.dart';
 part 'widgets/view_by_order_group.dart';
 
 class ViewByOrdersPage extends StatelessWidget {
-  final OrderHistoryItem orderHistoryItem;
-
   const ViewByOrdersPage({
     Key? key,
-    required this.orderHistoryItem,
   }) : super(key: key);
 
   @override
@@ -80,7 +81,6 @@ class ViewByOrdersPage extends StatelessWidget {
             viewByOrdersItem: item,
             showDivider: index != 0,
             showBanner: index == 0,
-            orderHistoryItem: orderHistoryItem,
           ),
           items: state.viewByOrderList.orderHeaders.getViewByOrderGroupList,
         );

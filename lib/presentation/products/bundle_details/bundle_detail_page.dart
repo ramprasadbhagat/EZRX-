@@ -1,7 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/bundle/add_to_cart/bundle_add_to_cart_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/curved_rectangle_widget.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
@@ -15,6 +19,7 @@ import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_ad
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_material_descriptions_sheet.dart';
 import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -157,17 +162,35 @@ class _BundleDetails extends StatelessWidget {
                         ),
                   FavouriteIcon(
                     isFavourite: material.isFavourite,
-                    onTap: () => context.read<ProductDetailBloc>().add(
-                          material.isFavourite
-                              ? ProductDetailEvent.deleteFavourite(
-                                  isForSimilarProduct: false,
-                                  materialNumber: material.materialNumber,
-                                )
-                              : ProductDetailEvent.addFavourite(
-                                  isForSimilarProduct: false,
-                                  materialNumber: material.materialNumber,
-                                ),
-                        ),
+                    onTap: () {
+                      if (material.isFavourite) {
+                        trackMixpanelEvent(
+                          MixpanelEvents.addProductToFavorite,
+                          props: {
+                            MixpanelProps.productName: material.name,
+                            MixpanelProps.productCode:
+                                material.materialNumber.displayMatNo,
+                            MixpanelProps.productManufacturer:
+                                material.getManufactured,
+                            MixpanelProps.clickAt:
+                                RouterUtils.buildRouteTrackingName(
+                              context.router.currentPath,
+                            ),
+                          },
+                      );
+                      }
+                      context.read<ProductDetailBloc>().add(
+                            material.isFavourite
+                                ? ProductDetailEvent.deleteFavourite(
+                                    isForSimilarProduct: false,
+                                    materialNumber: material.materialNumber,
+                                  )
+                                : ProductDetailEvent.addFavourite(
+                                    isForSimilarProduct: false,
+                                    materialNumber: material.materialNumber,
+                                  ),
+                          );
+                    },
                   ),
                 ],
               ),
@@ -267,7 +290,10 @@ class _BundleOfferDetails extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               ListTile(
-                onTap: () => _showMaterialDescriptionSheet(context: context),
+                onTap: () {
+                  _trackShowProductInfo(context);
+                  _showMaterialDescriptionSheet(context: context);
+                },
                 contentPadding: const EdgeInsets.only(top: 10, bottom: 20),
                 title: Text(
                   'Material information'.tr(),
@@ -291,8 +317,23 @@ class _BundleOfferDetails extends StatelessWidget {
   }) {
     showModalBottomSheet(
       context: context,
-      builder: (_) {
-        return const BundleMaterialDescription();
+      builder: (_) => const BundleMaterialDescription(),
+    );
+  }
+
+  void _trackShowProductInfo(BuildContext context) {
+    final materialInfo = context
+        .read<ProductDetailBloc>()
+        .state
+        .productDetailAggregate
+        .materialInfo;
+
+    trackMixpanelEvent(
+      MixpanelEvents.productInfoViewed,
+      props: {
+        MixpanelProps.productName: materialInfo.name,
+        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
+        MixpanelProps.productManufacturer: materialInfo.getManufactured,
       },
     );
   }

@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
@@ -59,6 +60,8 @@ class ProductImageBlocMock
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class MixpanelServiceMock extends Mock implements MixpanelService {}
+
 void main() {
   late MaterialListBlocMock materialListBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
@@ -73,6 +76,7 @@ void main() {
 
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
     materialResponseMock = await MaterialListLocalDataSource().getProductList();
   });

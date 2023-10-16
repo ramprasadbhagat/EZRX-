@@ -135,7 +135,7 @@ void main() {
             create: (context) => scanMaterialInfoBlocMock,
           ),
         ],
-        child: const ProductSuggestionPage(),
+        child: const ProductSuggestionPage(parentRoute: ''),
       ),
     );
   }

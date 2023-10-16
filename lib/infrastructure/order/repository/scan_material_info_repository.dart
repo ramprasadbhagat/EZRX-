@@ -58,19 +58,20 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
       materialInfoScanner.barcodeCapture.isEnabled = true;
 
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.productScannedSuccess,
+        eventName: MixpanelEvents.scanSuccess,
         properties: {
-          MixpanelProps.scanFrom: 'camera',
+          MixpanelProps.scanMethod: 'camera',
         },
       );
 
       return const Right(true);
     } catch (e) {
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.productScannedFailed,
+        eventName: MixpanelEvents.scanFailed,
         properties: {
-          MixpanelProps.scanFrom: 'camera',
-          MixpanelProps.errorMessage: e.toString(),
+          MixpanelProps.scanMethod: 'camera',
+          MixpanelProps.errorMessage:
+              FailureHandler.handleFailure(e).failureMessage,
         },
       );
 
@@ -92,19 +93,20 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
       materialInfoScanner.barcodeCapture.isEnabled = true;
 
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.productScannedSuccess,
+        eventName: MixpanelEvents.scanSuccess,
         properties: {
-          MixpanelProps.scanFrom: 'gallery',
+          MixpanelProps.scanMethod: 'gallery',
         },
       );
 
       return const Right(true);
     } catch (e) {
       mixpanelService.trackEvent(
-        eventName: MixpanelEvents.productScannedFailed,
+        eventName: MixpanelEvents.scanFailed,
         properties: {
-          MixpanelProps.scanFrom: 'gallery',
-          MixpanelProps.errorMessage: e.toString(),
+          MixpanelProps.scanMethod: 'gallery',
+          MixpanelProps.errorMessage:
+              FailureHandler.handleFailure(e).failureMessage,
         },
       );
 

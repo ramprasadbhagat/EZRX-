@@ -9,9 +9,12 @@ class _ProductFilterApplyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       key: WidgetKeys.filterApplyButton,
-      onPressed: () => Navigator.of(context).pop(
-        context.read<MaterialFilterBloc>().state.materialFilter,
-      ),
+      onPressed: () {
+        final selectedFilter =
+            context.read<MaterialFilterBloc>().state.materialFilter;
+        _trackFilterAppliedEvent(selectedFilter);
+        Navigator.of(context).pop(selectedFilter);
+      },
       style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
             backgroundColor: const MaterialStatePropertyAll(
               ZPColors.primary,
@@ -29,6 +32,26 @@ class _ProductFilterApplyButton extends StatelessWidget {
               color: ZPColors.white,
             ),
       ),
+    );
+  }
+
+  void _trackFilterAppliedEvent(MaterialFilter filter) {
+    final showProductFilter = [];
+    if (filter.isFavourite) showProductFilter.add('Favourites');
+    if (filter.isProductOffer) showProductFilter.add('Items with offers');
+    if (filter.bundleOffers) showProductFilter.add('Bundle offers');
+
+    trackMixpanelEvent(
+      MixpanelEvents.productFilterApplied,
+      props: {
+        if (showProductFilter.isNotEmpty)
+          MixpanelProps.filterShowProduct: showProductFilter,
+        MixpanelProps.filterSortBy: filter.sortBy.title,
+        if (filter.manufactureListSelected.isNotEmpty)
+          MixpanelProps.filterManufacturer: filter.manufactureListSelected,
+        if (filter.countryListSelected.isNotEmpty)
+          MixpanelProps.filterCountryOfOrigin: filter.countryListSelected,
+      },
     );
   }
 }

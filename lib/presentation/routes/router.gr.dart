@@ -19,7 +19,6 @@ import '../../domain/account/value/value_objects.dart' as _i91;
 import '../../domain/announcement_info/entities/announcement_article_info.dart'
     as _i94;
 import '../../domain/core/aggregate/price_aggregate.dart' as _i93;
-import '../../domain/order/entities/order_history_item.dart' as _i96;
 import '../../domain/payments/entities/credit_and_invoice_item.dart' as _i92;
 import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i48;
 import '../account/change_password/change_password_page.dart' as _i21;
@@ -342,9 +341,13 @@ class AppRouter extends _i89.RootStackRouter {
       );
     },
     ProductSuggestionPageRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductSuggestionPageRouteArgs>();
       return _i89.CustomPage<dynamic>(
         routeData: routeData,
-        child: const _i29.ProductSuggestionPage(),
+        child: _i29.ProductSuggestionPage(
+          key: args.key,
+          parentRoute: args.parentRoute,
+        ),
         durationInMilliseconds: 0,
         reverseDurationInMilliseconds: 0,
         opaque: true,
@@ -686,13 +689,9 @@ class AppRouter extends _i89.RootStackRouter {
       );
     },
     ViewByOrdersPageRoute.name: (routeData) {
-      final args = routeData.argsAs<ViewByOrdersPageRouteArgs>();
       return _i89.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i78.ViewByOrdersPage(
-          key: args.key,
-          orderHistoryItem: args.orderHistoryItem,
-        ),
+        child: const _i78.ViewByOrdersPage(),
       );
     },
     ReturnByItemPageRoute.name: (routeData) {
@@ -1604,14 +1603,37 @@ class OrderSuccessPageRoute extends _i89.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i29.ProductSuggestionPage]
-class ProductSuggestionPageRoute extends _i89.PageRouteInfo<void> {
-  const ProductSuggestionPageRoute()
-      : super(
+class ProductSuggestionPageRoute
+    extends _i89.PageRouteInfo<ProductSuggestionPageRouteArgs> {
+  ProductSuggestionPageRoute({
+    _i90.Key? key,
+    required String parentRoute,
+  }) : super(
           ProductSuggestionPageRoute.name,
           path: 'product_suggestion_page',
+          args: ProductSuggestionPageRouteArgs(
+            key: key,
+            parentRoute: parentRoute,
+          ),
         );
 
   static const String name = 'ProductSuggestionPageRoute';
+}
+
+class ProductSuggestionPageRouteArgs {
+  const ProductSuggestionPageRouteArgs({
+    this.key,
+    required this.parentRoute,
+  });
+
+  final _i90.Key? key;
+
+  final String parentRoute;
+
+  @override
+  String toString() {
+    return 'ProductSuggestionPageRouteArgs{key: $key, parentRoute: $parentRoute}';
+  }
 }
 
 /// generated route for
@@ -2407,37 +2429,14 @@ class ViewByItemsPageRoute extends _i89.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i78.ViewByOrdersPage]
-class ViewByOrdersPageRoute
-    extends _i89.PageRouteInfo<ViewByOrdersPageRouteArgs> {
-  ViewByOrdersPageRoute({
-    _i90.Key? key,
-    required _i96.OrderHistoryItem orderHistoryItem,
-  }) : super(
+class ViewByOrdersPageRoute extends _i89.PageRouteInfo<void> {
+  const ViewByOrdersPageRoute()
+      : super(
           ViewByOrdersPageRoute.name,
           path: 'orders/view_by_orders',
-          args: ViewByOrdersPageRouteArgs(
-            key: key,
-            orderHistoryItem: orderHistoryItem,
-          ),
         );
 
   static const String name = 'ViewByOrdersPageRoute';
-}
-
-class ViewByOrdersPageRouteArgs {
-  const ViewByOrdersPageRouteArgs({
-    this.key,
-    required this.orderHistoryItem,
-  });
-
-  final _i90.Key? key;
-
-  final _i96.OrderHistoryItem orderHistoryItem;
-
-  @override
-  String toString() {
-    return 'ViewByOrdersPageRouteArgs{key: $key, orderHistoryItem: $orderHistoryItem}';
-  }
 }
 
 /// generated route for

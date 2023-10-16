@@ -29,7 +29,7 @@ class CarouselBannerTile extends StatelessWidget {
         trackMixpanelEvent(
           MixpanelEvents.bannerClick,
           props: {
-            MixpanelProps.bannerId: banner.id.toString(),
+            MixpanelProps.bannerId: banner.id,
             MixpanelProps.bannerTitle: banner.title,
             MixpanelProps.bannerOrder: bannerPosition,
             MixpanelProps.bannerRedirected:

@@ -4,6 +4,9 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,6 +51,10 @@ class _FilterValueListState extends State<FilterValueList> {
                 onSelected: widget.isFetching
                     ? null
                     : (value) {
+                        trackMixpanelEvent(
+                          MixpanelEvents.productFilterClicked,
+                          props: {MixpanelProps.filterClicked: 'Favourites'},
+                        );
                         context.read<MaterialFilterBloc>().add(
                               MaterialFilterEvent.updateSelectedMaterialFilter(
                                 MaterialFilterType.isFavourite,
@@ -107,6 +114,12 @@ class _FilterValueListState extends State<FilterValueList> {
                       onSelected: widget.isFetching
                           ? null
                           : (value) {
+                              trackMixpanelEvent(
+                                MixpanelEvents.productFilterClicked,
+                                props: {
+                                  MixpanelProps.filterClicked: 'Covid-19',
+                                },
+                              );
                               context.read<MaterialFilterBloc>().add(
                                     MaterialFilterEvent
                                         .updateSelectedMaterialFilter(

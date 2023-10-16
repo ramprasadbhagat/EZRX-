@@ -16,6 +16,13 @@ class _ViewByOrderItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        trackMixpanelEvent(
+          MixpanelEvents.orderDetailViewed,
+          props: {
+            MixpanelProps.subTabFrom:
+                RouterUtils.buildRouteTrackingName(context.routeData.path),
+          },
+        );
         context.read<ViewByItemDetailsBloc>().add(
               ViewByItemDetailsEvent.setItemOrderDetails(
                 viewByItems:

@@ -5,6 +5,9 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/material_loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
@@ -12,6 +15,7 @@ import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -117,6 +121,18 @@ class _BrowseProductCard extends StatelessWidget {
   }
 
   void _productOnTap(BuildContext context, MaterialInfo materialInfo) {
+    trackMixpanelEvent(
+      MixpanelEvents.productItemClicked,
+      props: {
+        MixpanelProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.router.currentPath),
+        MixpanelProps.isBundle: false,
+        MixpanelProps.productName: materialInfo.displayDescription,
+        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
+        MixpanelProps.productManufacturer: materialInfo.getManufactured,
+        MixpanelProps.section: 'Browse products',
+      },
+    );
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialNumber: materialInfo.materialNumber,

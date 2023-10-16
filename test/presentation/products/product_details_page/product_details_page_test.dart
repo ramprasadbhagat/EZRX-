@@ -94,6 +94,8 @@ class ComboDealListMockBloc
 
 class MockAppRouter extends Mock implements AppRouter {}
 
+class MockMixPanelService extends Mock implements MixpanelService {}
+
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
 class MockTokenStorage extends Mock implements TokenStorage {}
@@ -181,10 +183,8 @@ void main() {
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());
     registerFallbackValue(ShipToInfo.empty());
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
     tokenStorage = MockTokenStorage();
+    locator.registerLazySingleton<MixpanelService>(() => MockMixPanelService());
     materialInfo = await ProductDetailLocalDataSource().getProductDetails();
     similarProducts = await ProductDetailLocalDataSource().getSimilarProduct();
     materialPrice =

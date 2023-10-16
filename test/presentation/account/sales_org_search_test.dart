@@ -34,6 +34,8 @@ class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
 class MockAppRouter extends Mock implements AppRouter {}
 
+class MockMixpanelService extends Mock implements MixpanelService {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -60,9 +62,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   setUpAll(() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
+    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
     locator.registerLazySingleton(() => AppRouter());
   });
 
@@ -195,7 +195,6 @@ void main() {
           ),
         ),
       ).called(1);
-      await tester.pumpAndSettle();
     });
   });
 }

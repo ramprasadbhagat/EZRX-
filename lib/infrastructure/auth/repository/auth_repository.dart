@@ -9,7 +9,6 @@ import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/repository/i_auth_repository.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/account_selector_storage.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
@@ -93,16 +92,14 @@ class AuthRepository implements IAuthRepository {
 
       return Right(login);
     } catch (e) {
-      if (e.runtimeType == ServerException) {
-        final serverExceptionObject = e as ServerException;
-        mixpanelService.trackEvent(
-          eventName: MixpanelEvents.loginFailure,
-          properties: {
-            MixpanelProps.errorMessage: serverExceptionObject.message,
-            MixpanelProps.loginMethod: 'By username',
-          },
-        );
-      }
+      mixpanelService.trackEvent(
+        eventName: MixpanelEvents.loginFailure,
+        properties: {
+          MixpanelProps.errorMessage:
+              FailureHandler.handleFailure(e).failureMessage,
+          MixpanelProps.loginMethod: 'By username',
+        },
+      );
 
       return Left(FailureHandler.handleFailure(e));
     }
@@ -261,7 +258,7 @@ class AuthRepository implements IAuthRepository {
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.loginSuccess,
         properties: {
-          MixpanelProps.loginMethod: 'Okta',
+          MixpanelProps.loginMethod: 'sso',
         },
       );
 
@@ -270,8 +267,9 @@ class AuthRepository implements IAuthRepository {
       mixpanelService.trackEvent(
         eventName: MixpanelEvents.loginFailure,
         properties: {
-          MixpanelProps.loginMethod: 'Okta',
-          MixpanelProps.errorMessage: e.toString(),
+          MixpanelProps.errorMessage:
+              FailureHandler.handleFailure(e).failureMessage,
+          MixpanelProps.loginMethod: 'sso',
         },
       );
 

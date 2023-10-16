@@ -1,4 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
@@ -9,6 +13,7 @@ import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 
 class MaterialGridItem extends StatelessWidget {
@@ -72,7 +77,27 @@ class MaterialGridItem extends StatelessWidget {
                       child: FavouriteIcon(
                         key: WidgetKeys.favouriteIcon,
                         isFavourite: materialInfo.isFavourite,
-                        onTap: onFavouriteTap,
+                        onTap: () {
+                          if (!materialInfo.isFavourite) {
+                            trackMixpanelEvent(
+                              MixpanelEvents.addProductToFavorite,
+                              props: {
+                                MixpanelProps.productName:
+                                    materialInfo.displayDescription,
+                                MixpanelProps.productCode:
+                                    materialInfo.materialNumber.displayMatNo,
+                                MixpanelProps.productManufacturer:
+                                    materialInfo.getManufactured,
+                                MixpanelProps.clickAt:
+                                    RouterUtils.buildRouteTrackingName(
+                                  context.router.currentPath,
+                                ),
+                              },
+                            );
+                          }
+
+                          onFavouriteTap.call();
+                        },
                       ),
                     ),
                   ],

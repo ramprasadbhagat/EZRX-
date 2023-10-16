@@ -86,6 +86,18 @@ class _BundleGridItem extends StatelessWidget {
   }
 
   void _bundleOnTap(BuildContext context, MaterialInfo materialInfo) {
+    trackMixpanelEvent(
+      MixpanelEvents.productItemClicked,
+      props: {
+        MixpanelProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.router.currentPath),
+        MixpanelProps.isBundle: true,
+        MixpanelProps.productName: materialInfo.displayDescription,
+        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
+        MixpanelProps.productManufacturer: materialInfo.getManufactured,
+        MixpanelProps.section: 'All product',
+      },
+    );
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(
             materialNumber: materialInfo.materialNumber,

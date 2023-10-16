@@ -2,6 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +75,11 @@ class _MaterialDetailsToggleState extends State<MaterialDetailsToggle> {
                   Expanded(
                     child: TextButton.icon(
                       key: WidgetKeys.expandIcon,
-                      onPressed: () => setState(() => expanded = !expanded),
+                      onPressed: () {
+                        if (!expanded) _trackProductDescriptionExpand();
+
+                        setState(() => expanded = !expanded);
+                      },
                       label: Icon(
                         expanded ? Icons.expand_less : Icons.expand_more,
                       ),
@@ -93,6 +100,23 @@ class _MaterialDetailsToggleState extends State<MaterialDetailsToggle> {
             ],
           ),
         );
+      },
+    );
+  }
+
+  void _trackProductDescriptionExpand() {
+    final materialInfo = context
+        .read<ProductDetailBloc>()
+        .state
+        .productDetailAggregate
+        .materialInfo;
+
+    trackMixpanelEvent(
+      MixpanelEvents.productDescriptionViewed,
+      props: {
+        MixpanelProps.productName: materialInfo.displayDescription,
+        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
+        MixpanelProps.productManufacturer: materialInfo.getManufactured,
       },
     );
   }
@@ -122,7 +146,7 @@ class _MaterialDetails extends StatelessWidget {
           content: productItemXp.dosage,
         ),
         _MaterialMetaData(
-           key: WidgetKeys.materialHowToUse,
+          key: WidgetKeys.materialHowToUse,
           title: 'How to use',
           content: productItemXp.howToUse,
         ),
@@ -132,7 +156,7 @@ class _MaterialDetails extends StatelessWidget {
           content: productItemXp.composition,
         ),
         _MaterialMetaData(
-           key: WidgetKeys.materialDeliveryInstructions,
+          key: WidgetKeys.materialDeliveryInstructions,
           title: 'Delivery instructions',
           content: productItemXp.deliveryInstructions,
         ),

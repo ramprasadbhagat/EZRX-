@@ -6,6 +6,9 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
@@ -17,6 +20,7 @@ import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart'
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/search_and_filter.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -125,6 +129,18 @@ class ProductsTab extends StatelessWidget {
   }
 
   void _productOnTap(BuildContext context, MaterialInfo materialInfo) {
+    trackMixpanelEvent(
+      MixpanelEvents.productItemClicked,
+      props: {
+        MixpanelProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.router.currentPath),
+        MixpanelProps.isBundle: false,
+        MixpanelProps.productName: materialInfo.displayDescription,
+        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
+        MixpanelProps.productManufacturer: materialInfo.getManufactured,
+        MixpanelProps.section: 'All product',
+      },
+    );
     final eligibilityBlocState = context.read<EligibilityBloc>().state;
     context.read<ProductDetailBloc>().add(
           ProductDetailEvent.fetch(

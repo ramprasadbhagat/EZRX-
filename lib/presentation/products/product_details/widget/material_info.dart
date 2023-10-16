@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -30,13 +33,31 @@ class MaterialInformation extends StatelessWidget {
       trailing: const Icon(
         Icons.chevron_right,
       ),
-      onTap: () => showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (_) {
-          return const _MaterialInfoDialog();
-        },
-      ),
+      onTap: () {
+        _trackShowProductInfo(context);
+        showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          builder: (_) => const _MaterialInfoDialog(),
+        );
+      },
+    );
+  }
+
+  void _trackShowProductInfo(BuildContext context) {
+    final materialInfo = context
+        .read<ProductDetailBloc>()
+        .state
+        .productDetailAggregate
+        .materialInfo;
+
+    trackMixpanelEvent(
+      MixpanelEvents.productInfoViewed,
+      props: {
+        MixpanelProps.productName: materialInfo.displayDescription,
+        MixpanelProps.productCode: materialInfo.materialNumber.displayMatNo,
+        MixpanelProps.productManufacturer: materialInfo.getManufactured,
+      },
     );
   }
 }

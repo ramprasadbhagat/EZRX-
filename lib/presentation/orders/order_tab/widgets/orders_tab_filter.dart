@@ -138,6 +138,18 @@ class _FilterElement extends StatelessWidget {
     required ViewByItemFilter filter,
   }) {
     if (context.read<ViewByItemsBloc>().state.appliedFilter != filter) {
+      trackMixpanelEvent(
+        MixpanelEvents.orderDetailFiltered,
+        props: {
+          MixpanelProps.subTabFrom: RouterUtils.buildRouteTrackingName(
+            const ViewByItemsPageRoute().path,
+          ),
+          MixpanelProps.filterUsed: [
+            '${filter.orderDateFrom.dateString} - ${filter.orderDateTo.dateString}',
+            ...filter.orderStatusList.map((e) => e.getOrDefaultValue('')),
+          ],
+        },
+      );
       context.read<ViewByItemsBloc>().add(
             ViewByItemsEvent.fetch(
               viewByItemFilter: filter,
@@ -152,6 +164,17 @@ class _FilterElement extends StatelessWidget {
     required ViewByOrdersFilter filter,
   }) {
     if (context.read<ViewByOrderBloc>().state.appliedFilter != filter) {
+      trackMixpanelEvent(
+        MixpanelEvents.orderDetailFiltered,
+        props: {
+          MixpanelProps.subTabFrom: RouterUtils.buildRouteTrackingName(
+            const ViewByOrdersPageRoute().path,
+          ),
+          MixpanelProps.filterUsed: [
+            '${filter.orderDateFrom.dateString} - ${filter.orderDateTo.dateString}',
+          ],
+        },
+      );
       context.read<ViewByOrderBloc>().add(
             ViewByOrderEvent.fetch(
               filter: filter,

@@ -39,7 +39,6 @@ class CartRepository implements ICartRepository {
   final DiscountOverrideRemoteDataSource discountOverrideRemoteDataSource;
   final ViewByItemLocalDataSource viewByItemLocalDataSource;
   final OrderHistoryRemoteDataSource orderHistoryRemoteDataSource;
-
   final MixpanelService mixpanelService;
 
   CartRepository({

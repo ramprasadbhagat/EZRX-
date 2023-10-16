@@ -1,30 +1,33 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
+import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
-import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
-import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
-import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
 
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_items.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/bundle_items.dart';
@@ -57,6 +60,7 @@ class OrderSuccessPage extends StatelessWidget {
               previous.isConfirming != current.isConfirming,
           listener: (context, state) {
             if (!state.isConfirming) {
+              _trackOrderSuccess(context, state);
               CustomSnackBar(
                 messageText: 'Order submitted'.tr(),
               ).show(context);
@@ -67,6 +71,42 @@ class OrderSuccessPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _trackOrderSuccess(BuildContext context, OrderSummaryState state) {
+    final isMYExternalSalesRep =
+        context.read<EligibilityBloc>().state.isMYExternalSalesRepUser;
+    final orderDetail = state.orderHistoryDetails;
+    final orderNumber = orderDetail.orderNumber.getOrDefaultValue('');
+    final invoiceNumber = orderDetail.invoiceNumber;
+    trackMixpanelEvent(
+      MixpanelEvents.placeOrderSuccess,
+      props: {
+        MixpanelProps.orderNumber: orderNumber,
+        MixpanelProps.grandTotal: orderDetail.grandTotal(isMYExternalSalesRep),
+        MixpanelProps.totalQty: orderDetail.orderItemsCount,
+        MixpanelProps.requestDeliveryDate:
+            orderDetail.requestedDeliveryDate.dateOrNaString,
+      },
+    );
+
+    for (final item in orderDetail.orderHistoryDetailsOrderItem) {
+      trackMixpanelEvent(
+        MixpanelEvents.successOrderItem,
+        props: {
+          MixpanelProps.orderNumber: orderNumber,
+          MixpanelProps.productName: item.materialDescription,
+          MixpanelProps.productCode: item.materialNumber.displayMatNo,
+          MixpanelProps.productQty: item.qty,
+          MixpanelProps.grandTotal:
+              item.itemTotalPrice(invoiceNumber, isMYExternalSalesRep),
+          MixpanelProps.unitPrice:
+              item.itemUnitPrice(invoiceNumber, isMYExternalSalesRep),
+        },
+      );
+
+      //TODO: Revisit later to implement is_tender, is_reorder, tag and added_from for MixpanelProps here
+    }
   }
 }
 

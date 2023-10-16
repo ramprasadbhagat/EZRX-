@@ -130,6 +130,8 @@ class ProductImageBlocMock
 
 class MockAppRouter extends Mock implements AppRouter {}
 
+class MockMixpanelService extends Mock implements MixpanelService {}
+
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
 final locator = GetIt.instance;
@@ -179,10 +181,8 @@ void main() {
   );
 
   setUpAll(() async {
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
+    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
     locator.registerLazySingleton(() => DiscountOverrideRepositoryMock());
     locator.registerFactory(
       () => DiscountOverrideBloc(repository: DiscountOverrideRepositoryMock()),

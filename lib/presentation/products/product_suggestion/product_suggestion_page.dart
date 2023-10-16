@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -7,6 +8,7 @@ import 'package:ezrxmobile/application/order/product_detail/details/product_deta
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/products/clear_product_search_suggestion_history.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -25,8 +27,11 @@ part 'package:ezrxmobile/presentation/products/product_suggestion/widgets/produc
 part 'package:ezrxmobile/presentation/products/product_suggestion/widgets/product_search_section.dart';
 
 class ProductSuggestionPage extends StatelessWidget {
+  final String parentRoute;
+
   const ProductSuggestionPage({
     Key? key,
+    required this.parentRoute,
   }) : super(key: key);
 
   @override
@@ -34,7 +39,7 @@ class ProductSuggestionPage extends StatelessWidget {
     return Scaffold(
       key: WidgetKeys.productSearchPage,
       appBar: AppBar(
-        title: const _ProductSearchSection(),
+        title: _ProductSearchSection(parentRoute: parentRoute),
         elevation: 0,
         titleSpacing: 0,
       ),
