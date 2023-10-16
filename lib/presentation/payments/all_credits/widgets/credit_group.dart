@@ -29,6 +29,7 @@ class _CreditGroup extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
                   '${context.tr('Created on')} ${data.dueDate.dateString}',
+                  key: WidgetKeys.creditCreatedOn,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.darkerGrey,
                       ),

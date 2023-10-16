@@ -97,9 +97,9 @@ void main() {
     await goToInvoice();
 
     //verify
-    rootRobot.verifyRootPageVisible();
-    rootRobot.verifyTabBarVisible();
-    rootRobot.verifyInvoicesPageVisible();
+    rootRobot.verifyRootPage();
+    rootRobot.verifyTabBar();
+    rootRobot.verifyInvoicesPage();
     invoiceRobot.verifyFilterButton();
     invoiceRobot.verifySearchBar();
     invoiceRobot.verifyDownloadButton();

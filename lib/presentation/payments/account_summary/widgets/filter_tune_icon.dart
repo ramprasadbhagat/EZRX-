@@ -17,12 +17,8 @@ class _FilterTuneIcon extends StatelessWidget {
                 previous.isLoading != current.isLoading,
             builder: (context, state) {
               return _FilterElement(
-                isActive: !context.read<AllInvoicesBloc>().state.isLoading,
-                appliedFilterCount: context
-                    .read<AllInvoicesBloc>()
-                    .state
-                    .appliedFilter
-                    .appliedFilterCount,
+                isActive: !state.isLoading,
+                appliedFilterCount: state.appliedFilter.appliedFilterCount,
               );
             },
           )
@@ -33,12 +29,8 @@ class _FilterTuneIcon extends StatelessWidget {
                 previous.isLoading != current.isLoading,
             builder: (context, state) {
               return _FilterElement(
-                isActive: !context.read<AllCreditsBloc>().state.isLoading,
-                appliedFilterCount: context
-                    .read<AllCreditsBloc>()
-                    .state
-                    .appliedFilter
-                    .appliedFilterCount,
+                isActive: !state.isLoading,
+                appliedFilterCount: state.appliedFilter.appliedFilterCount,
               );
             },
           );
@@ -76,6 +68,7 @@ class _FilterElement extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               appliedFilterCount.toString(),
+              key: WidgetKeys.creditFilterApplied(appliedFilterCount),
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontSize: 10,
                     color: ZPColors.white,

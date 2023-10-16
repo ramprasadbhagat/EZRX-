@@ -10,7 +10,6 @@ extension DateTimeExt on DateTime {
           DateUtils.dateOnly(this).millisecondsSinceEpoch &&
       DateUtils.dateOnly(to).millisecondsSinceEpoch >=
           DateUtils.dateOnly(this).millisecondsSinceEpoch;
-
   String get displayDate => DateTimeStringValue(toIso8601String()).dateString;
 }
 

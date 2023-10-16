@@ -1,0 +1,142 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+class AccountCreditsFilterRobot {
+  final WidgetTester _tester;
+
+  AccountCreditsFilterRobot(this._tester);
+
+  //initialize Finder
+  final Finder _fromDocumentDate = find.byKey(WidgetKeys.fromDocumentDateField);
+  final Finder _toDocumentDate = find.byKey(WidgetKeys.toDocumentDateField);
+  final Finder _fromAmountValue = find.byKey(WidgetKeys.amountValueFrom);
+  final Finder _toAmountValue = find.byKey(WidgetKeys.amountValueTo);
+  final Finder _resetButton = find.byKey(WidgetKeys.filterResetButton);
+  final Finder _applyButton = find.byKey(WidgetKeys.filterApplyButton);
+  final Finder _filterPage = find.byKey(WidgetKeys.tempFilter);
+  final String _openStatus = 'Open';
+  final String _clearStatus = 'Cleared';
+
+  //Robot Functions
+  void verifyCreditsFilter({bool isVisible = true}) {
+    expect(_filterPage, isVisible ? findsOneWidget : findsNothing);
+  }
+
+  void verifyDefaultFilterApplied() {
+    verifyDateRangeFilterApplied(
+      fromDate: '',
+      toDate: '',
+    );
+    verifyAmountRangeFilterApplied(fromAmount: '', toAmount: '');
+    verifyStatusFilter(_openStatus, false);
+    verifyStatusFilter(_clearStatus, false);
+    _verifyResetButton();
+    _verifyApplyButton();
+  }
+
+  void verifyDateRangeFilterApplied({
+    required String fromDate,
+    required String toDate,
+  }) {
+    expect(
+      find.descendant(
+        of: _fromDocumentDate,
+        matching: find.text(fromDate),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: _toDocumentDate,
+        matching: find.text(toDate),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyAmountRangeFilterApplied({
+    required String fromAmount,
+    required String toAmount,
+  }) {
+    expect(
+      find.descendant(
+        of: _fromAmountValue,
+        matching: find.text(
+          fromAmount,
+        ),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: _toAmountValue,
+        matching: find.text(
+          toAmount,
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyStatusFilter(String name, bool value) {
+    expect(
+      find.byKey(WidgetKeys.accountCreditsItemStatus(name, value)),
+      findsOneWidget,
+    );
+  }
+
+  Future<void> tapToChangeStatusCheckbox(String name) async {
+    await _tester.tap(find.widgetWithText(CheckboxListTile, name));
+    await _tester.pump();
+  }
+
+  void _verifyResetButton() {
+    expect(_resetButton, findsOneWidget);
+  }
+
+  Future<void> tapResetButton() async {
+    await _tester.tap(_resetButton);
+    await _tester.pumpAndSettle();
+  }
+
+  void _verifyApplyButton() {
+    expect(_applyButton, findsOneWidget);
+  }
+
+  Future<void> tapApplyButton() async {
+    await _tester.tap(_applyButton);
+    await _tester.pumpAndSettle();
+  }
+
+  Future<void> tapCloseButton() async {
+    await _tester.tap(find.byKey(WidgetKeys.closeButton));
+    await _tester.pumpAndSettle();
+  }
+
+  Future<void> tapFromDateField() async {
+    await _tester.tap(_fromDocumentDate);
+    await _tester.pump();
+  }
+
+  void verifyInvalidDateRangeError() {
+    expect(find.text('Invalid range.'), findsOneWidget);
+  }
+
+  Future<void> enterFromAmount(String text) async {
+    await _tester.tap(_fromAmountValue);
+    await _tester.enterText(_fromAmountValue, text);
+    await _tester.testTextInput.receiveAction(TextInputAction.done);
+  }
+
+  Future<void> enterToAmount(String text) async {
+    await _tester.tap(_toAmountValue);
+    await _tester.enterText(_toAmountValue, text);
+    await _tester.testTextInput.receiveAction(TextInputAction.done);
+  }
+
+  void verifyInvalidAmountError() {
+    expect(find.text('Invalid Amount range!'.tr()), findsOneWidget);
+  }
+}

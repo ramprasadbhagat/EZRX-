@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +23,7 @@ class CreditDetailsSection extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          key: WidgetKeys.creditDetailsTile,
           tileColor: ZPColors.primary,
           minVerticalPadding: 20.0,
           title: Row(
@@ -29,6 +31,7 @@ class CreditDetailsSection extends StatelessWidget {
               Expanded(
                 child: Text(
                   '${creditItem.postingKeyName} #${creditItem.searchKey}',
+                  key: WidgetKeys.creditItemId(creditItem.searchKey),
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                         color: ZPColors.white,
                       ),
@@ -105,6 +108,7 @@ class CreditDetailsSection extends StatelessWidget {
           color: ZPColors.lightGray2,
         ),
         ListTile(
+          key: WidgetKeys.creditSummaryTile,
           minVerticalPadding: 20.0,
           title: Text(
             context.tr('Credit summary'),

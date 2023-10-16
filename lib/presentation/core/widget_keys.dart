@@ -180,7 +180,6 @@ class WidgetKeys {
   //  Payment TAB BAR
   //============================================================
   static const Key paymentsTabPage = Key('paymentsTabPage');
-  static const Key accountSummaryTab = Key('accountSummaryPage');
   static const Key paymentsSummaryTab = Key('paymentsSummaryPage');
 
   //============================================================
@@ -720,7 +719,8 @@ class WidgetKeys {
   //============================================================
   //  Statement of account
   //============================================================
-   static const Key paymentStatementOfAccountPage = Key('paymentStatementOfAccountPage');
+  static const Key paymentStatementOfAccountPage =
+      Key('paymentStatementOfAccountPage');
 
   //============================================================
   //  New Payment
@@ -893,7 +893,7 @@ class WidgetKeys {
   static const Key textOutstanding = Key('textOutstanding');
   static const Key paymentItem = Key('paymentItem');
   static const Key itemCheckBadge = Key('itemCheckBadge');
-  static const Key creditDetailsPageListView = Key('creditDetailsPageListView');   
+  static const Key creditDetailsPageListView = Key('creditDetailsPageListView');
   static const Key newPaymentButton = Key('newPaymentButton');
   static const Key itemStatementAccounts = Key('itemStatementAccounts');
   static const Key downloadStatementAccountIcon =
@@ -905,6 +905,8 @@ class WidgetKeys {
       Key('accountSummaryFilterButton');
   static const Key accountSummaryDownloadButton =
       Key('accountSummaryDownloadButton');
+  static const Key accountSummaryPage = Key('accountSummaryPage');
+  static const Key accountSummarySearchBar = Key('accountSummarySearchBar');
   //============================================================
   //  ALL INVOICES
   //============================================================
@@ -940,6 +942,23 @@ class WidgetKeys {
       Key('invoiceDetailMaterialUnitPrice');
   static const Key invoiceDetailMaterialTotalPrice =
       Key('invoiceDetailMaterialTotalPrice');
+  //============================================================
+  //  All Credits
+  //============================================================
+  static Key creditFilterApplied(int count) => Key('creditAppliedFilter$count');
+  //===========================================================
+  //  Account Summary Page - All credits
+  //============================================================
+  static Key accountCreditsItemStatus(String name, bool value) =>
+      Key('accountCreditsItemStatus$name$value');
+  static const Key allCreditsPage = Key('allCreditsPage');
+  static const Key creditsItemTile = Key('creditsItemTile');
+  static const Key creditCreatedOn = Key('creditCreatedOn');
+  static Key creditItemId(String id) => Key('creditItemById$id');
+  static const Key creditDetailsPage = Key('creditDetailsPage');
+  static const Key creditDetailsTile = Key('creditDetailsTile');
+  static const Key creditSummaryTile = Key('creditSummaryTile');
+
   //===========================================================
   //  Intro Page
   //============================================================

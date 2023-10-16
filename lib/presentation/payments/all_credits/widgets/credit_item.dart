@@ -15,12 +15,14 @@ class _CreditsItem extends StatelessWidget {
         vertical: 10,
       ),
       child: ListTile(
+        key: WidgetKeys.creditsItemTile,
         onTap: () => _onItemClick(context),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               '${creditItem.postingKeyName} #${creditItem.searchKey}',
+              key: WidgetKeys.creditItemId(creditItem.searchKey),
               style: Theme.of(context).textTheme.labelSmall,
             ),
             StatusLabel(

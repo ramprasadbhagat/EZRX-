@@ -32,6 +32,7 @@ class AccountSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: WidgetKeys.accountSummaryPage,
       appBar: AppBar(
         title: Text(
           context.tr('Account Summary'),
@@ -76,6 +77,7 @@ class AccountSummary extends StatelessWidget {
                     child: Row(
                       children: [
                         _AccountSummarySearchBar(
+                          key: WidgetKeys.accountSummarySearchBar,
                           isInvoiceTabActive: context.tabsRouter.current.name ==
                               AllInvoicesPageRoute.name,
                         ),

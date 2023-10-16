@@ -19,6 +19,7 @@ class CreditDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: WidgetKeys.creditDetailsPage,
       appBar: AppBar(
         centerTitle: false,
         elevation: 0,

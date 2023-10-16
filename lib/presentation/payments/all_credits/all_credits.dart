@@ -53,6 +53,7 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
     return Scaffold(
       key: _allCreditScaffold,
       body: AnnouncementBanner(
+        key: WidgetKeys.allCreditsPage,
         currentPath: context.router.currentPath,
         child: Column(
           children: [
@@ -107,6 +108,7 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
         ),
       ),
       floatingActionButton: ScaleButton(
+        key: WidgetKeys.newPaymentButton,
         icon: Icons.add,
         label: context.tr('New payment'),
         onPress: () => _toNewPayment(context),

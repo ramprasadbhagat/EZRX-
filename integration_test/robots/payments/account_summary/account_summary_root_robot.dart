@@ -9,36 +9,36 @@ class AccountSummaryRootRobot {
 
   AccountSummaryRootRobot(this.tester);
 
-  final invoicesTab = find.byKey(WidgetKeys.invoiceTab);
-  final creditTab = find.byKey(WidgetKeys.creditsTab);
-  final page = find.byType(AccountSummary);
-  final invoicesPage = find.byType(AllInvoicesPage);
-  final creditPage = find.byType(AllCreditsPage);
+  final _invoicesTab = find.byKey(WidgetKeys.invoiceTab);
+  final _creditTab = find.byKey(WidgetKeys.creditsTab);
+  final _page = find.byType(AccountSummary);
+  final _invoicesPage = find.byType(AllInvoicesPage);
+  final _creditPage = find.byType(AllCreditsPage);
 
-  void verifyTabBarVisible() {
-    expect(invoicesTab, findsOneWidget);
-    expect(creditTab, findsOneWidget);
+  void verifyTabBar() {
+    expect(_invoicesTab, findsOneWidget);
+    expect(_creditTab, findsOneWidget);
   }
 
-  void verifyRootPageVisible() {
-    expect(page, findsOneWidget);
+  void verifyRootPage() {
+    expect(_page, findsOneWidget);
   }
 
-  void verifyInvoicesPageVisible() {
-    expect(invoicesPage, findsOneWidget);
+  void verifyInvoicesPage() {
+    expect(_invoicesPage, findsOneWidget);
   }
 
-  void verifyCreditsPageVisible() {
-    expect(creditPage, findsOneWidget);
+  void verifyCreditsPage() {
+    expect(_creditPage, findsOneWidget);
   }
 
   Future<void> switchToInvoicesPage() async {
-    await tester.tap(invoicesTab);
+    await tester.tap(_invoicesTab);
     await tester.pumpAndSettle();
   }
 
   Future<void> switchToCreditPage() async {
-    await tester.tap(creditTab);
+    await tester.tap(_creditTab);
     await tester.pumpAndSettle();
   }
 }
