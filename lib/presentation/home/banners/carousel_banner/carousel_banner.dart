@@ -156,6 +156,7 @@ class _CarouselBannerState extends State<CarouselBanner> {
                     height: bannerHeight,
                     alignment: Alignment.center,
                     child: _CircleButton(
+                      key: WidgetKeys.previousBannerIcon,
                       iconData: Icons.chevron_left,
                       onTap: previousPage,
                     ),
@@ -167,6 +168,7 @@ class _CarouselBannerState extends State<CarouselBanner> {
                     height: bannerHeight,
                     alignment: Alignment.center,
                     child: _CircleButton(
+                      key: WidgetKeys.nextBannerIcon,
                       iconData: Icons.chevron_right,
                       onTap: nextPage,
                     ),

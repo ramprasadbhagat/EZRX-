@@ -108,6 +108,7 @@ class _BrowseProductCard extends StatelessWidget {
           ? MediaQuery.of(context).size.width * 0.25
           : MediaQuery.of(context).size.width * 0.5,
       child: MaterialGridItem(
+        key: WidgetKeys.browseProductsList,
         materialInfo: product,
         onTap: () => _productOnTap(context, product),
         onFavouriteTap: () {},

@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -138,10 +137,5 @@ class MaterialRootRobot {
   void verifySearchResults(String textSearch) {
     final productList = find.textContaining(textSearch);
     expect(productList, findsWidgets);
-  }
-
-  void verifySearchNotFound() {
-    final message = find.text('That didn’t match anything'.tr());
-    expect(message, findsWidgets);
   }
 }

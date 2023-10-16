@@ -24,7 +24,8 @@ class SectionTitle extends StatelessWidget {
               ),
         ),
         IconButton(
-          key: WidgetKeys.arrowButton,
+          // key: WidgetKeys.iconArrow,
+          key: WidgetKeys.sectionTileIcon(title.tr()),
           onPressed: onTapIconButton,
           visualDensity: VisualDensity.compact,
           icon: const CircleAvatar(

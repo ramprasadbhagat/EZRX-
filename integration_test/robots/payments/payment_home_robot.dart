@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,7 +18,6 @@ class PaymentHomeRobot extends CommonRobot {
   final creditLimitRemaining = find.byKey(WidgetKeys.creditLimitRemaining);
   final inProgressAmount = find.byKey(WidgetKeys.inProgressAmount);
   final itemStatementAccounts = find.byKey(WidgetKeys.itemStatementAccounts);
-  final arrowButton = find.byKey(WidgetKeys.arrowButton);
   final downloadStatementAccountIcon =
       find.byKey(WidgetKeys.downloadStatementAccountIcon);
   final paymentHomeObscuredAmount =
@@ -28,16 +28,20 @@ class PaymentHomeRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  void verifyPage() {
+    expect(find.byKey(WidgetKeys.paymentsTabPage), findsOneWidget);
+  }
+
   Future<void> navigateToPaymentSummaryScreen() async {
     await tester.tap(
-      arrowButton.first,
+      find.byKey(WidgetKeys.sectionTileIcon('Payment summary'.tr())),
     );
     await tester.pumpAndSettle();
   }
 
   Future<void> navigateToStatementOfAccountScreen() async {
     await tester.tap(
-      arrowButton.at(1),
+      find.byKey(WidgetKeys.sectionTileIcon('Statement of accounts'.tr())),
     );
     await tester.pumpAndSettle();
   }
@@ -134,5 +138,9 @@ class PaymentHomeRobot extends CommonRobot {
           ),
         )
         .toString();
+  }
+
+  void verifyPaymentPage() {
+    expect(find.byKey(WidgetKeys.paymentHomeAppBar), findsOneWidget);
   }
 }

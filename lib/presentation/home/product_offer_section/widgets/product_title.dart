@@ -17,6 +17,7 @@ class _ProductTile extends StatelessWidget {
             CustomCard(
               margin: const EdgeInsets.all(10.0),
               child: ListTile(
+                key: WidgetKeys.productOnOffer,
                 contentPadding: const EdgeInsets.all(8),
                 title: Row(
                   children: [
@@ -24,6 +25,7 @@ class _ProductTile extends StatelessWidget {
                       showBorder: true,
                       showShadow: false,
                       child: ProductImage(
+                        key: WidgetKeys.materialNumberInfo,
                         materialNumber: materialInfo.materialNumber,
                         fit: BoxFit.fitHeight,
                       ),
@@ -95,6 +97,7 @@ class _ProductTile extends StatelessWidget {
               ),
             ),
             const IconLabel(
+              key: WidgetKeys.iconLabelOffer,
               icon: Icons.local_offer_outlined,
               backgroundColor: ZPColors.darkYellow,
               iconSize: 23,

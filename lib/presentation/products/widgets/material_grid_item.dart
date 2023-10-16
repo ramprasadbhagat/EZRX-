@@ -70,6 +70,7 @@ class MaterialGridItem extends StatelessWidget {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: FavouriteIcon(
+                        key: WidgetKeys.favouriteIcon,
                         isFavourite: materialInfo.isFavourite,
                         onTap: onFavouriteTap,
                       ),
@@ -90,6 +91,7 @@ class MaterialGridItem extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: ZPColors.darkGray,
                           ),
+                      key: WidgetKeys.materialNumberText,
                     ),
                     Expanded(
                       child: Align(

@@ -102,11 +102,30 @@ class WidgetKeys {
   static Key announcementsArticleTabItems(String tabItem) => Key(tabItem);
   static const Key browseProductIcon = Key('browseProductIcon');
   static const Key announcementIcon = Key('announcementIcon');
+  static const Key iconArrow = Key('iconArrow');
+  static const Key productsOnOffer = Key('productsOnOffer');
+  static const Key bundles = Key('bundles');
+  static const Key productOnOffer = Key('productOnOffer');
+  static const Key iconLabelOffer = Key('iconLabelOffer');
+  static const Key materialNumberInfo = Key('materialNumberInfo');
+  static const Key bundlesLabel = Key('bundlesLabel');
+  static const Key bundlesNumber = Key('bundlesNumber');
+  static const Key bundlesDescription = Key('bundlesDescription');
+  static const Key bundlesManufactured = Key('bundlesManufactured');
+  static const Key bundlesList = Key('bundlesList');
+  static const Key listRecentlyOrdered = Key('listRecentlyOrdered');
+  static const Key materialDescriptionRecentlyOrdered =
+      Key('materialDescriptionRecentlyOrdered');
+  static const Key browseProductsList = Key('browseProductsList');
+  static const Key announcementsList = Key('announcementsList');
+  static const Key announcementTitle = Key('announcementTitle');
+  static Key sectionTileIcon(String title) => Key('sectionTitleIcon$title');
 
   //============================================================
   //  MORE TAB BAR
   //============================================================
   static const Key moreScreen = Key('moreScreen');
+  static const Key logOutTile = Key('logOutTile');
   static const Key profileTileSection = Key('profileTileSection');
   static const Key profileTile = Key('profileTile');
   static const Key paymentsTile = Key('paymentsTile');
@@ -387,6 +406,9 @@ class WidgetKeys {
   static const Key visibilityDetector = Key('visibilityDetector');
 
   static const Key homeBanner = Key('homeBanner');
+  static const Key nextBannerIcon = Key('nextBannerIcon');
+  static const Key previousBannerIcon = Key('previousBannerIcon');
+  static const Key imageBanner = Key('imageBanner');
 
   //============================================================
   //  Presentation/core Keys
@@ -563,6 +585,8 @@ class WidgetKeys {
   static const Key nameCart = Key('nameCart');
   static Key materialListBundleMaterial(String materialNumber) =>
       Key('bundleMaterialCard$materialNumber');
+  static const Key materialNumberText = Key('materialNumberText');
+  static const Key favouriteIcon = Key('favouriteIcon');
   //============================================================
   //  ProductSearch Keys
   //============================================================
@@ -605,6 +629,8 @@ class WidgetKeys {
   //  Order success
   //============================================================
   static const Key orderSuccess = Key('orderSuccessKey');
+  static const Key recentlyOrder = Key('recentlyOrder');
+  static const Key filterOrderIcon = Key('filterOrderIcon');
   static const Key orderSuccessMessage = Key('orderSuccessMessage');
   static const Key orderSuccessOrderId = Key('orderSuccessOrderId');
   static const Key orderSuccessOrderSummarySection =

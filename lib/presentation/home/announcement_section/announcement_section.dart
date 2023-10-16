@@ -121,6 +121,7 @@ class _ItemDescription extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
+        key: WidgetKeys.announcementsList,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -137,6 +138,7 @@ class _ItemDescription extends StatelessWidget {
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),
+            key: WidgetKeys.announcementTitle,
           ),
           Text(
             description,

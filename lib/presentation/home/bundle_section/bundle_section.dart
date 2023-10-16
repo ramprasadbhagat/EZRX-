@@ -56,6 +56,7 @@ class BundleSection extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 10, top: 5),
                         child: SectionTitle(
+                          key: WidgetKeys.bundles,
                           title: 'Bundles',
                           onTapIconButton: () => state.isFetching
                               ? null
@@ -69,6 +70,7 @@ class BundleSection extends StatelessWidget {
                                 key: WidgetKeys.bundleSectionLoaderImage,
                               )
                             : ListView(
+                                key: WidgetKeys.bundlesList,
                                 scrollDirection: Axis.horizontal,
                                 children: state.materialList
                                     .map(
@@ -122,6 +124,7 @@ class _BundleSectionItem extends StatelessWidget {
             ? MediaQuery.of(context).size.width * 0.85
             : MediaQuery.of(context).size.width * 0.4,
         child: Column(
+          key: const Key('bundlesList'),
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ColoredBox(
@@ -144,10 +147,12 @@ class _BundleSectionItem extends StatelessWidget {
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.darkerGrey,
                                   ),
+                          key: WidgetKeys.bundlesNumber,
                         ),
                         Text(
                           materialInfo.displayDescription,
                           style: Theme.of(context).textTheme.labelSmall,
+                          key: WidgetKeys.bundlesDescription,
                         ),
                         Text(
                           materialInfo.manufactured,
@@ -157,6 +162,7 @@ class _BundleSectionItem extends StatelessWidget {
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.darkerGrey,
                                   ),
+                          key: WidgetKeys.bundlesManufactured,
                         ),
                       ],
                     ),

@@ -17,6 +17,7 @@ class _ProductOfferBodyContent extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: SectionTitle(
+                      key: WidgetKeys.productsOnOffer,
                       title: 'Products on offer',
                       onTapIconButton: () => state.isFetching
                           ? null

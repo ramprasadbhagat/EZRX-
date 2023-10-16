@@ -5,6 +5,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/item_details_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_details_header_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_other_item_details_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class ViewByItemsDetailRobot {
@@ -18,6 +19,10 @@ class ViewByItemsDetailRobot {
   final addressSection = find.byType(AddressInfoSection);
   final itemDetailSection = find.byType(ItemDetailsSection);
   final otherItemDetailSection = find.byType(OtherItemDetailsSection);
+
+  void verifyPage() {
+    expect(find.byType(ViewByItemDetailsPage), findsOneWidget);
+  }
 
   Future<void> dragToEnsureHeaderVisible() async {
     await tester.dragUntilVisible(

@@ -66,6 +66,7 @@ class _BodyContent extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: SectionTitle(
+                      key: WidgetKeys.recentlyOrder,
                       title: 'Recently ordered',
                       onTapIconButton: () => state.isFetching
                           ? null
@@ -106,6 +107,7 @@ class _ProductTile extends StatelessWidget {
         child: CustomCard(
           margin: const EdgeInsets.all(10.0),
           child: ListTile(
+            key: WidgetKeys.listRecentlyOrdered,
             contentPadding: const EdgeInsets.all(8),
             title: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -140,6 +142,7 @@ class _ProductTile extends StatelessWidget {
                           style: Theme.of(context).textTheme.labelSmall,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
+                          key: WidgetKeys.materialDescriptionRecentlyOrdered,
                         ),
                       ),
                       Text(

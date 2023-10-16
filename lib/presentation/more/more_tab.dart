@@ -69,6 +69,7 @@ class MoreTab extends StatelessWidget {
                 ),
               ),
               label: Row(
+                key: WidgetKeys.logOutTile,
                 mainAxisAlignment:
                     MainAxisAlignment.start, // to align the icon to left
                 children: [

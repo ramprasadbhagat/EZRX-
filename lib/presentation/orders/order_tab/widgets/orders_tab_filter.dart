@@ -63,6 +63,7 @@ class _FilterElement extends StatelessWidget {
     return Stack(
       children: [
         IconButton(
+          key: WidgetKeys.filterOrderIcon,
           onPressed: () => isNotFetching
               ? _showFilterPage(
                   context: context,

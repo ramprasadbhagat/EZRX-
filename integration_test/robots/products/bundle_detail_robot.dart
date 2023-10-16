@@ -10,6 +10,11 @@ class BundleDetailRobot extends CommonRobot {
   final sheetAddToCartButton =
       find.byKey(WidgetKeys.bundleAddToCartSheetSubmitButton);
 
+  void verifyBundleDetailPage() {
+    final bundlesDetail = find.byKey(WidgetKeys.bundleDetailPage);
+    expect(bundlesDetail, findsOneWidget);
+  }
+
   Future<void> tapAddToCartButton() async {
     await tester.tap(addToCartButton);
     await tester.pumpAndSettle();

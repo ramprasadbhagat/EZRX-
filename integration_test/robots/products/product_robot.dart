@@ -144,4 +144,11 @@ class ProductRobot extends CommonRobot {
       expect(find.byKey(WidgetKeys.checkoutButton), findsOneWidget);
     }
   }
+
+  Future<void> tapToProductByIndex(int index) async {
+    final productIndex =
+        find.byKey(WidgetKeys.materialListMaterialCard).at(index);
+    await tester.tap(productIndex);
+    await tester.pumpAndSettle();
+  }
 }

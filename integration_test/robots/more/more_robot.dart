@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../common/common_robot.dart';
@@ -17,6 +18,7 @@ class MoreRobot extends CommonRobot {
 
   final loginOnBehalf = find.byKey(WidgetKeys.loginOnBehalfButtonKey);
   final securityTile = find.byKey(WidgetKeys.securityTile);
+  final logout = find.byKey(WidgetKeys.logOutTile);
 
   Future<void> tapReturnsTile() async {
     await tester.tap(returnsTile);
@@ -75,6 +77,21 @@ class MoreRobot extends CommonRobot {
 
   Future<void> tapAnnouncementArticleTile() async {
     await tester.tap(announcementArticleTile);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> findLogout() async {
+    final listMore = find.byType(ListView).last;
+    await tester.dragUntilVisible(
+      logout,
+      listMore,
+      const Offset(0, -250),
+    );
+    expect(logout, findsOneWidget);
+  }
+
+  Future<void> tapLogout() async {
+    await tester.tap(logout);
     await tester.pumpAndSettle();
   }
 }

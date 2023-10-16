@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,6 +12,10 @@ class ProductDetailRobot extends CommonRobot {
   final materialDetailsMaterialDescription =
       find.byKey(WidgetKeys.materialDetailsMaterialDescription);
   final addToCartButton = find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+
+  void verifyPage() {
+    expect(find.byType(ProductDetailsPage), findsOneWidget);
+  }
 
   String getMaterialDetailsMaterialDescription() {
     return tester

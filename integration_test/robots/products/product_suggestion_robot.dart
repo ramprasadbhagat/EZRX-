@@ -12,7 +12,7 @@ class ProductSuggestionRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-   void verifySearchResults(String textSearch) {
+  void verifySearchResults(String textSearch) {
     final productList = find.textContaining(textSearch);
     expect(productList, findsWidgets);
   }

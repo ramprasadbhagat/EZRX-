@@ -7,10 +7,12 @@ import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../core/test_locator.dart';
 import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
+import '../../robots/more/more_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
   late HomeRobot homeRobot;
+  late MoreRobot moreRobot;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -206,6 +208,7 @@ void main() {
       //initialize necessary robots
       loginRobot = LoginRobot(tester);
       homeRobot = HomeRobot(tester);
+      moreRobot = MoreRobot(tester);
 
       //init app
       await runAppForTesting(tester);
@@ -234,8 +237,8 @@ void main() {
       homeRobot.findMoreTab();
       await homeRobot.tapMoreTab();
 
-      await homeRobot.findLogout();
-      await homeRobot.tapLogout();
+      await moreRobot.findLogout();
+      await moreRobot.tapLogout();
     });
 
     testWidgets(
