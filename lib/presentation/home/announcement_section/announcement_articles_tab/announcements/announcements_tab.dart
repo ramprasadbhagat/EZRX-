@@ -188,7 +188,7 @@ class _AnnouncementItem extends StatelessWidget {
                     vertical: 2,
                   ),
                   decoration: const BoxDecoration(
-                    color: ZPColors.skyBlueColor,
+                    color: ZPColors.orange,
                     borderRadius: BorderRadius.all(
                       Radius.circular(15),
                     ),

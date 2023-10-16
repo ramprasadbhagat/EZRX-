@@ -31,12 +31,12 @@ class _AnnouncementInfoTitleSection extends StatelessWidget {
                       child: Text(
                         details.publishedDate.dateOrDashString,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: ZPColors.neutralsGrey1,
-                          fontSize: 10,
-                        ),
+                              color: ZPColors.neutralsGrey1,
+                              fontSize: 10,
+                            ),
                       ),
                     ),
-                    if(details.title.isNotEmpty)
+                    if (details.title.isNotEmpty)
                       FittedBox(
                         child: Text(
                           details.title,
@@ -46,18 +46,16 @@ class _AnnouncementInfoTitleSection extends StatelessWidget {
                           textAlign: TextAlign.left,
                         ),
                       ),
-                    if(details.sourceAndOrAuthorLabel.isNotEmpty)
+                    if (details.sourceAndOrAuthorLabel.isNotEmpty)
                       FittedBox(
                         child: Text(
                           details.sourceAndOrAuthorLabel,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(
-                            color: ZPColors.neutralsGrey1,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: ZPColors.neutralsGrey1,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                         ),
                       ),
                   ],
@@ -72,7 +70,7 @@ class _AnnouncementInfoTitleSection extends StatelessWidget {
                   vertical: 2,
                 ),
                 decoration: const BoxDecoration(
-                  color: ZPColors.skyBlueColor,
+                  color: ZPColors.orange,
                   borderRadius: BorderRadius.all(
                     Radius.circular(15),
                   ),
@@ -80,9 +78,9 @@ class _AnnouncementInfoTitleSection extends StatelessWidget {
                 child: Text(
                   'New'.tr(),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ZPColors.whiteBgCard,
-                    fontSize: 10,
-                  ),
+                        color: ZPColors.whiteBgCard,
+                        fontSize: 10,
+                      ),
                 ),
               ),
             ],
