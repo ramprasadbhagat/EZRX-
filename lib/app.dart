@@ -126,7 +126,6 @@ import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.da
 import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
-import 'package:ezrxmobile/application/returns/return_price/return_price_bloc.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
@@ -391,9 +390,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReturnSummaryDetailsBloc>(
           create: (context) => locator<ReturnSummaryDetailsBloc>(),
-        ),
-        BlocProvider<ReturnPriceBloc>(
-          create: (context) => locator<ReturnPriceBloc>(),
         ),
         BlocProvider<DeepLinkingBloc>(
           create: (context) => locator<DeepLinkingBloc>(),
