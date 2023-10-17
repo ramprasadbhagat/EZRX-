@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
@@ -124,12 +125,36 @@ class _ItemDescription extends StatelessWidget {
         key: WidgetKeys.announcementsList,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            publishedDate.dateTimeOrDashString,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall
-                ?.copyWith(color: ZPColors.extraLightGrey4, fontSize: 10),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  publishedDate.dateTimeOrDashString,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(color: ZPColors.extraLightGrey4, fontSize: 10),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 2,
+                ),
+                decoration: const BoxDecoration(
+                  color: ZPColors.orange,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
+                  ),
+                ),
+                child: Text(
+                  context.tr('New'),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.whiteBgCard,
+                      ),
+                ),
+              )
+            ],
           ),
           Text(
             title,
