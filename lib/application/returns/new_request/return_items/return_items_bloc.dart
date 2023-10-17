@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -21,36 +22,44 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
   final Config config;
   ReturnItemsBloc({required this.newRequestRepository, required this.config})
       : super(ReturnItemsState.initial()) {
-    on(_onEvent);
-  }
+    on<_Initialized>((event, emit) {
+      emit(
+        ReturnItemsState.initial().copyWith(
+          salesOrganisation: event.salesOrganisation,
+          shipToInfo: event.shipToInfo,
+          customerCodeInfo: event.customerCodeInfo,
+        ),
+      );
+    });
 
-  Future<void> _onEvent(
-    ReturnItemsEvent event,
-    Emitter<ReturnItemsState> emit,
-  ) async {
-    await event.map(
-      initialized: (_) async => emit(ReturnItemsState.initial()),
-      fetch: (value) async {
+    on<_Fetch>(
+      (event, emit) async {
+        if (event.searchKey == state.searchKey &&
+            event.searchKey.isValid() &&
+            event.appliedFilter == state.appliedFilter) {
+          return;
+        }
+
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),
             items: <ReturnMaterial>[],
             isLoading: true,
-            appliedFilter: value.appliedFilter,
-            searchKey: value.searchKey,
+            appliedFilter: event.appliedFilter,
+            searchKey: event.searchKey,
           ),
         );
 
         final failureOrSuccess =
             await newRequestRepository.searchReturnMaterials(
           requestParams: ReturnMaterialsParams(
-            salesOrg: value.salesOrganisation.salesOrg,
-            soldToInfo: value.customerCodeInfo.customerCodeSoldTo,
-            shipToInfo: value.shipToInfo.shipToCustomerCode,
+            salesOrg: state.salesOrganisation.salesOrg,
+            soldToInfo: state.customerCodeInfo.customerCodeSoldTo,
+            shipToInfo: state.shipToInfo.shipToCustomerCode,
             pageSize: config.pageSize,
             offset: 0,
-            filter: value.appliedFilter,
-            searchKey: value.searchKey,
+            filter: event.appliedFilter,
+            searchKey: event.searchKey,
           ),
         );
 
@@ -75,52 +84,53 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
           },
         );
       },
-      loadMore: (value) async {
-        if (state.isLoading || !state.canLoadMore) return;
-
-        emit(
-          state.copyWith(
-            isLoading: true,
-            failureOrSuccessOption: none(),
-          ),
-        );
-
-        final failureOrSuccess =
-            await newRequestRepository.searchReturnMaterials(
-          requestParams: ReturnMaterialsParams(
-            salesOrg: value.salesOrganisation.salesOrg,
-            soldToInfo: value.customerCodeInfo.customerCodeSoldTo,
-            shipToInfo: value.shipToInfo.shipToCustomerCode,
-            pageSize: config.pageSize,
-            offset: state.items.length,
-            filter: state.appliedFilter,
-            searchKey: state.searchKey,
-          ),
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-                isLoading: false,
-              ),
-            );
-          },
-          (data) {
-            final updateItemList = List<ReturnMaterial>.from(state.items)
-              ..addAll(data.items);
-            emit(
-              state.copyWith(
-                items: updateItemList,
-                canLoadMore: data.items.length >= config.pageSize,
-                failureOrSuccessOption: none(),
-                isLoading: false,
-              ),
-            );
-          },
-        );
-      },
+      transformer: restartable(),
     );
+
+    on<_LoadMore>((event, emit) async {
+      if (state.isLoading || !state.canLoadMore) return;
+
+      emit(
+        state.copyWith(
+          isLoading: true,
+          failureOrSuccessOption: none(),
+        ),
+      );
+
+      final failureOrSuccess = await newRequestRepository.searchReturnMaterials(
+        requestParams: ReturnMaterialsParams(
+          salesOrg: state.salesOrganisation.salesOrg,
+          soldToInfo: state.customerCodeInfo.customerCodeSoldTo,
+          shipToInfo: state.shipToInfo.shipToCustomerCode,
+          pageSize: config.pageSize,
+          offset: state.items.length,
+          filter: state.appliedFilter,
+          searchKey: state.searchKey,
+        ),
+      );
+
+      failureOrSuccess.fold(
+        (failure) {
+          emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+              isLoading: false,
+            ),
+          );
+        },
+        (data) {
+          final updateItemList = List<ReturnMaterial>.from(state.items)
+            ..addAll(data.items);
+          emit(
+            state.copyWith(
+              items: updateItemList,
+              canLoadMore: data.items.length >= config.pageSize,
+              failureOrSuccessOption: none(),
+              isLoading: false,
+            ),
+          );
+        },
+      );
+    });
   }
 }

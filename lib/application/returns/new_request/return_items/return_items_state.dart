@@ -4,6 +4,9 @@ part of 'return_items_bloc.dart';
 class ReturnItemsState with _$ReturnItemsState {
   const ReturnItemsState._();
   const factory ReturnItemsState({
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required CustomerCodeInfo customerCodeInfo,
     required ReturnItemsFilter appliedFilter,
     required SearchKey searchKey,
     required List<ReturnMaterial> items,
@@ -14,6 +17,9 @@ class ReturnItemsState with _$ReturnItemsState {
   }) = _ReturnItemsState;
 
   factory ReturnItemsState.initial() => ReturnItemsState(
+        salesOrganisation: SalesOrganisation.empty(),
+        shipToInfo: ShipToInfo.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
         failureOrSuccessOption: none(),
         isLoading: false,
         canLoadMore: true,

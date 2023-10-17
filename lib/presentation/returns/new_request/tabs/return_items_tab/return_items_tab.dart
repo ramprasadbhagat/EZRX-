@@ -1,7 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
@@ -104,42 +101,15 @@ class ReturnItemsTab extends StatelessWidget {
                     title: 'No record found',
                   ),
                   controller: ScrollController(),
-                  onRefresh: () {
-                    context.read<ReturnItemsBloc>().add(
-                          ReturnItemsEvent.fetch(
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .shipToInfo,
-                            appliedFilter: ReturnItemsFilter.empty(),
-                            searchKey: state.searchKey,
-                          ),
-                        );
-                  },
+                  onRefresh: () => context.read<ReturnItemsBloc>().add(
+                        ReturnItemsEvent.fetch(
+                          appliedFilter: ReturnItemsFilter.empty(),
+                          searchKey: SearchKey.searchFilter(''),
+                        ),
+                      ),
                   onLoadingMore: () {
                     context.read<ReturnItemsBloc>().add(
-                          ReturnItemsEvent.loadMore(
-                            salesOrganisation: context
-                                .read<SalesOrgBloc>()
-                                .state
-                                .salesOrganisation,
-                            customerCodeInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .customerCodeInfo,
-                            shipToInfo: context
-                                .read<CustomerCodeBloc>()
-                                .state
-                                .shipToInfo,
-                          ),
+                          const ReturnItemsEvent.loadMore(),
                         );
                   },
                   isLoading: state.isLoading,

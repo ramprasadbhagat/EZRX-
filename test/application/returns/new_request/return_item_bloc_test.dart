@@ -24,9 +24,16 @@ void main() {
   late ReturnRequestRepository repositoryMock;
   late Config config;
   late ReturnMaterialList fakeReturnMaterialList;
-
-  final fakeReturnItemsFilter = ReturnItemsFilter.empty();
+  late ReturnItemsFilter fakeReturnItemsFilter;
+  late ReturnItemsState initState;
   setUpAll(() async {
+    initState = ReturnItemsState.initial().copyWith(
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: fakeSalesOrganisation,
+      shipToInfo: fakeShipToInfo,
+    );
+    fakeReturnItemsFilter = ReturnItemsFilter.empty();
+
     fakeReturnMaterialList =
         await ReturnRequestLocalDataSource().searchReturnMaterials();
   });
@@ -43,15 +50,18 @@ void main() {
         config: config,
       ),
       act: (ReturnItemsBloc bloc) => bloc.add(
-        const ReturnItemsEvent.initialized(),
+        ReturnItemsEvent.initialized(
+          customerCodeInfo: initState.customerCodeInfo,
+          salesOrganisation: initState.salesOrganisation,
+          shipToInfo: initState.shipToInfo,
+        ),
       ),
-      expect: () => [
-        ReturnItemsState.initial(),
-      ],
+      expect: () => [initState],
     );
 
     blocTest<ReturnItemsBloc, ReturnItemsState>(
       'For "fetch" Event with success',
+      seed: () => initState,
       build: () => ReturnItemsBloc(
         newRequestRepository: repositoryMock,
         config: config,
@@ -60,10 +70,9 @@ void main() {
         when(
           () => repositoryMock.searchReturnMaterials(
             requestParams: ReturnMaterialsParams(
-              salesOrg: fakeSalesOrg,
-              soldToInfo: fakeCustomerCodeInfo.customerCodeSoldTo,
-              shipToInfo:
-                  fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+              salesOrg: initState.salesOrganisation.salesOrg,
+              soldToInfo: initState.customerCodeInfo.customerCodeSoldTo,
+              shipToInfo: initState.shipToInfo.shipToCustomerCode,
               pageSize: config.pageSize,
               offset: 0,
               filter: fakeReturnItemsFilter,
@@ -77,19 +86,16 @@ void main() {
       act: (bloc) => bloc.add(
         ReturnItemsEvent.fetch(
           appliedFilter: fakeReturnItemsFilter,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
           searchKey: SearchKey(''),
-          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
         ),
       ),
       expect: () => [
-        ReturnItemsState.initial().copyWith(
+        initState.copyWith(
           isLoading: true,
           appliedFilter: fakeReturnItemsFilter,
           searchKey: SearchKey(''),
         ),
-        ReturnItemsState.initial().copyWith(
+        initState.copyWith(
           canLoadMore: false,
           appliedFilter: fakeReturnItemsFilter,
           searchKey: SearchKey(''),
@@ -104,14 +110,14 @@ void main() {
         newRequestRepository: repositoryMock,
         config: config,
       ),
+      seed: () => initState,
       setUp: () {
         when(
           () => repositoryMock.searchReturnMaterials(
             requestParams: ReturnMaterialsParams(
-              salesOrg: fakeSalesOrg,
-              soldToInfo: fakeCustomerCodeInfo.customerCodeSoldTo,
-              shipToInfo:
-                  fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+              salesOrg: initState.salesOrganisation.salesOrg,
+              soldToInfo: initState.customerCodeInfo.customerCodeSoldTo,
+              shipToInfo: initState.shipToInfo.shipToCustomerCode,
               pageSize: config.pageSize,
               offset: 0,
               filter: fakeReturnItemsFilter,
@@ -125,19 +131,16 @@ void main() {
       act: (bloc) => bloc.add(
         ReturnItemsEvent.fetch(
           appliedFilter: fakeReturnItemsFilter,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
           searchKey: SearchKey(''),
-          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
         ),
       ),
       expect: () => [
-        ReturnItemsState.initial().copyWith(
+        initState.copyWith(
           isLoading: true,
           appliedFilter: fakeReturnItemsFilter,
           searchKey: SearchKey(''),
         ),
-        ReturnItemsState.initial().copyWith(
+        initState.copyWith(
           appliedFilter: fakeReturnItemsFilter,
           searchKey: SearchKey(''),
           failureOrSuccessOption:
@@ -152,7 +155,7 @@ void main() {
         newRequestRepository: repositoryMock,
         config: config,
       ),
-      seed: () => ReturnItemsState.initial().copyWith(
+      seed: () => initState.copyWith(
         appliedFilter: fakeReturnItemsFilter,
         searchKey: SearchKey(''),
         items: fakeReturnMaterialList.items,
@@ -161,10 +164,9 @@ void main() {
         when(
           () => repositoryMock.searchReturnMaterials(
             requestParams: ReturnMaterialsParams(
-              salesOrg: fakeSalesOrg,
-              soldToInfo: fakeCustomerCodeInfo.customerCodeSoldTo,
-              shipToInfo:
-                  fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+              salesOrg: initState.salesOrganisation.salesOrg,
+              soldToInfo: initState.customerCodeInfo.customerCodeSoldTo,
+              shipToInfo: initState.shipToInfo.shipToCustomerCode,
               pageSize: config.pageSize,
               offset: fakeReturnMaterialList.items.length,
               filter: fakeReturnItemsFilter,
@@ -176,20 +178,16 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        ReturnItemsEvent.loadMore(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-        ),
+        const ReturnItemsEvent.loadMore(),
       ),
       expect: () => [
-        ReturnItemsState.initial().copyWith(
+        initState.copyWith(
           appliedFilter: fakeReturnItemsFilter,
           searchKey: SearchKey(''),
           items: fakeReturnMaterialList.items,
           isLoading: true,
         ),
-        ReturnItemsState.initial().copyWith(
+        initState.copyWith(
           canLoadMore: false,
           appliedFilter: fakeReturnItemsFilter,
           searchKey: SearchKey(''),
@@ -206,7 +204,7 @@ void main() {
         newRequestRepository: repositoryMock,
         config: config,
       ),
-      seed: () => ReturnItemsState.initial().copyWith(
+      seed: () => initState.copyWith(
         appliedFilter: fakeReturnItemsFilter,
         searchKey: SearchKey(''),
         items: fakeReturnMaterialList.items,
@@ -215,10 +213,9 @@ void main() {
         when(
           () => repositoryMock.searchReturnMaterials(
             requestParams: ReturnMaterialsParams(
-              salesOrg: fakeSalesOrg,
-              soldToInfo: fakeCustomerCodeInfo.customerCodeSoldTo,
-              shipToInfo:
-                  fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+              salesOrg: initState.salesOrganisation.salesOrg,
+              soldToInfo: initState.customerCodeInfo.customerCodeSoldTo,
+              shipToInfo: initState.shipToInfo.shipToCustomerCode,
               pageSize: config.pageSize,
               offset: fakeReturnMaterialList.items.length,
               filter: fakeReturnItemsFilter,
@@ -230,20 +227,16 @@ void main() {
         );
       },
       act: (bloc) => bloc.add(
-        ReturnItemsEvent.loadMore(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-        ),
+        const ReturnItemsEvent.loadMore(),
       ),
       expect: () => [
-        ReturnItemsState.initial().copyWith(
+        initState.copyWith(
           appliedFilter: fakeReturnItemsFilter,
           searchKey: SearchKey(''),
           items: fakeReturnMaterialList.items,
           isLoading: true,
         ),
-        ReturnItemsState.initial().copyWith(
+        initState.copyWith(
           appliedFilter: fakeReturnItemsFilter,
           searchKey: SearchKey(''),
           items: fakeReturnMaterialList.items,

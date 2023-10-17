@@ -36,6 +36,7 @@ import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
@@ -932,8 +933,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context.read<ReturnListByRequestBloc>().add(
             ReturnListByRequestEvent.initialized(
-              salesOrg:
-                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+              salesOrg: salesOrgState.salesOrganisation.salesOrg,
               shipInfo: state.shipToInfo,
               user: user,
               customerCodeInfo: state.customerCodeInfo,
@@ -961,8 +961,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           );
       context.read<DownloadPaymentAttachmentsBloc>().add(
             DownloadPaymentAttachmentEvent.initialized(
-              salesOrganization:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              salesOrganization: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
             ),
           );
@@ -979,8 +978,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context.read<PaymentSummaryBloc>().add(
             PaymentSummaryEvent.initialized(
-              salesOrganization:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
+              salesOrganization: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
             ),
           );
@@ -1021,23 +1019,19 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       context.read<AccountSummaryBloc>().add(
             AccountSummaryEvent.fetchInvoiceSummary(
               custCode: state.customerCodeInfo.customerCodeSoldTo,
-              salesOrg:
-                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+              salesOrg: salesOrgState.salesOrganisation.salesOrg,
             ),
           );
       context.read<AccountSummaryBloc>().add(
             AccountSummaryEvent.fetchCreditSummary(
               custCode: state.customerCodeInfo.customerCodeSoldTo,
-              salesOrg:
-                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
+              salesOrg: salesOrgState.salesOrganisation.salesOrg,
             ),
           );
       context.read<PaymentInProgressBloc>().add(
             PaymentInProgressEvent.fetch(
-              salesOrganization:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrganization: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
             ),
           );
 
@@ -1072,27 +1066,23 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context.read<ReturnListByItemBloc>().add(
             ReturnListByItemEvent.initialized(
-              salesOrg:
-                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
-              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              salesOrg: salesOrgState.salesOrganisation.salesOrg,
+              shipInfo: state.shipToInfo,
               user: user,
               customerCodeInfo: state.customerCodeInfo,
             ),
           );
       context.read<AvailableCreditsBloc>().add(
             AvailableCreditsEvent.initialized(
-              salesOrganization:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
+              salesOrganization: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
             ),
           );
 
       context.read<ReturnListByRequestBloc>().add(
             ReturnListByRequestEvent.initialized(
-              salesOrg:
-                  context.read<SalesOrgBloc>().state.salesOrganisation.salesOrg,
-              shipInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
+              salesOrg: salesOrgState.salesOrganisation.salesOrg,
+              shipInfo: state.shipToInfo,
               user: user,
               customerCodeInfo: state.customerCodeInfo,
             ),
@@ -1107,28 +1097,32 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             ),
           );
 
+      context.read<ReturnItemsBloc>().add(
+            ReturnItemsEvent.initialized(
+              salesOrganisation: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              shipToInfo: state.shipToInfo,
+            ),
+          );
+
       if (user.userCanAccessOrderHistory) {
         context.read<ViewByItemsBloc>().add(
               ViewByItemsEvent.initialized(
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-                user: context.read<UserBloc>().state.user,
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
+                customerCodeInfo: state.customerCodeInfo,
+                salesOrgConfigs: salesOrgState.configs,
+                shipToInfo: state.shipToInfo,
+                user: user,
+                salesOrganisation: salesOrgState.salesOrganisation,
               ),
             );
 
         context.read<ViewByOrderBloc>().add(
               ViewByOrderEvent.initialized(
-                salesOrganisation:
-                    context.read<SalesOrgBloc>().state.salesOrganisation,
-                customerCodeInfo:
-                    context.read<CustomerCodeBloc>().state.customerCodeInfo,
-                salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-                shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-                user: context.read<UserBloc>().state.user,
+                salesOrganisation: salesOrgState.salesOrganisation,
+                customerCodeInfo: state.customerCodeInfo,
+                salesOrgConfigs: salesOrgState.configs,
+                shipToInfo: state.shipToInfo,
+                user: user,
                 sortDirection: 'desc',
               ),
             );
@@ -1148,13 +1142,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
       context.read<ViewByOrderBloc>().add(
             ViewByOrderEvent.initialized(
-              salesOrganisation:
-                  context.read<SalesOrgBloc>().state.salesOrganisation,
-              customerCodeInfo:
-                  context.read<CustomerCodeBloc>().state.customerCodeInfo,
-              salesOrgConfigs: context.read<SalesOrgBloc>().state.configs,
-              shipToInfo: context.read<CustomerCodeBloc>().state.shipToInfo,
-              user: context.read<UserBloc>().state.user,
+              salesOrganisation: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              salesOrgConfigs: salesOrgState.configs,
+              shipToInfo: state.shipToInfo,
+              user: user,
               sortDirection: 'desc',
             ),
           );

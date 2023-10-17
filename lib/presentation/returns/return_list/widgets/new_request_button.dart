@@ -43,10 +43,7 @@ class NewRequestButton extends StatelessWidget {
         context.read<ReturnItemsBloc>().add(
               ReturnItemsEvent.fetch(
                 appliedFilter: ReturnItemsFilter.empty(),
-                salesOrganisation: eligibilityState.salesOrganisation,
-                customerCodeInfo: eligibilityState.customerCodeInfo,
-                shipToInfo: eligibilityState.shipToInfo,
-                searchKey: SearchKey.search(''),
+                searchKey: SearchKey.searchFilter(''),
               ),
             );
         context.read<NewRequestBloc>().add(

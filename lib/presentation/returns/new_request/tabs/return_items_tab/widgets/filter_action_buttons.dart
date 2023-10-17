@@ -13,16 +13,9 @@ class _ResetButton extends StatelessWidget {
             onPressed: () {
               if (context.read<ReturnItemsFilterBloc>().state.filter !=
                   ReturnItemsFilter.empty()) {
-                final eligibilityState = context.read<EligibilityBloc>().state;
                 context.read<ReturnItemsBloc>().add(
                       ReturnItemsEvent.fetch(
-                        appliedFilter: ReturnItemsFilter.empty(),
-                        salesOrganisation: context
-                            .read<SalesOrgBloc>()
-                            .state
-                            .salesOrganisation,
-                        customerCodeInfo: eligibilityState.customerCodeInfo,
-                        shipToInfo: eligibilityState.shipToInfo,
+                        appliedFilter: ReturnItemsFilter.defaultDateRange(),
                         searchKey:
                             context.read<ReturnItemsBloc>().state.searchKey,
                       ),
@@ -53,14 +46,9 @@ class _ApplyButton extends StatelessWidget {
           final filterBloc = context.read<ReturnItemsFilterBloc>();
           final returnItemsState = context.read<ReturnItemsBloc>().state;
           if (filterBloc.state.filter != returnItemsState.appliedFilter) {
-            final eligibilityState = context.read<EligibilityBloc>().state;
             context.read<ReturnItemsBloc>().add(
                   ReturnItemsEvent.fetch(
                     appliedFilter: filterBloc.state.filter,
-                    salesOrganisation:
-                        context.read<EligibilityBloc>().state.salesOrganisation,
-                    customerCodeInfo: eligibilityState.customerCodeInfo,
-                    shipToInfo: eligibilityState.shipToInfo,
                     searchKey: returnItemsState.searchKey,
                   ),
                 );
