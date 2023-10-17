@@ -153,7 +153,7 @@ class _ItemDescription extends StatelessWidget {
                         color: ZPColors.whiteBgCard,
                       ),
                 ),
-              )
+              ),
             ],
           ),
           Text(
