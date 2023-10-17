@@ -70,12 +70,13 @@ class AnnouncementsPage extends StatelessWidget {
                               ? const _SearchAnnouncement()
                               : const _SearchArticle(),
                         ),
-                        IconButton(
-                          onPressed: () => {},
-                          icon: const Icon(
-                            Icons.tune,
-                          ),
-                        ),
+                        //TODO: Backend don't support filter yet, will revisit when filter option available from backend
+                        // IconButton(
+                        //   onPressed: () => {},
+                        //   icon: const Icon(
+                        //     Icons.tune,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
