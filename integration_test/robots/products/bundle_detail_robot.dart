@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -38,5 +39,24 @@ class BundleDetailRobot extends CommonRobot {
   Future<void> tapBackButton() async {
     await tester.pageBack();
     await tester.pumpAndSettle();
+  }
+
+  void verifyAllInformationBundleOfferDisplayed() {
+    expect(find.byKey(WidgetKeys.productImage), findsWidgets);
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.productTag),
+        matching: find.text('Bundle offer'.tr()),
+      ),
+      findsOneWidget,
+    );
+    expect(find.byKey(WidgetKeys.bundleOfferCode), findsOneWidget);
+    expect(find.byKey(WidgetKeys.bundleOfferName), findsOneWidget);
+    expect(find.byKey(WidgetKeys.bundleOfferPrice), findsOneWidget);
+    expect(find.byKey(WidgetKeys.favoritesIcon), findsOneWidget);
+    expect(find.byKey(WidgetKeys.bundleOfferSummary), findsOneWidget);
+    expect(find.byKey(WidgetKeys.bundleInformation), findsOneWidget);
+    expect(find.byKey(WidgetKeys.bundleOfferMaterialInfo), findsOneWidget);
+    expect(addToCartButton, findsOneWidget);
   }
 }

@@ -8,7 +8,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 class HomeRobot {
   final WidgetTester tester;
-
   HomeRobot(this.tester);
 
   final salesOrgSelector = find.byKey(const Key('salesOrgSelect'));
@@ -565,4 +564,13 @@ class HomeRobot {
     );
   }
 
+  Future<void> openDetailFirstViaHomeScreen(String productName) async {
+    final product = find.descendant(
+      of: find.byKey(WidgetKeys.browseProduct),
+      matching: find.text(productName).first,
+    );
+    await _scrollEnsureVisible(product);
+    await tester.tap(product);
+    await tester.pumpAndSettle();
+  }
 }

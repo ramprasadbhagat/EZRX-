@@ -203,6 +203,7 @@ class _AvailableOfferLabel extends StatelessWidget {
         Icons.chevron_right,
       ),
       onTap: () => _showOfferDialog(context),
+      key: WidgetKeys.availableOffersTile,
     );
   }
 

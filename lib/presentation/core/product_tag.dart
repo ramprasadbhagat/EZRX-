@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -100,6 +101,7 @@ class ProductTag extends StatelessWidget {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
+        key: WidgetKeys.productTag,
         children: [
           if (hasIcon) ...[
             assetIconSvg.isNotEmpty

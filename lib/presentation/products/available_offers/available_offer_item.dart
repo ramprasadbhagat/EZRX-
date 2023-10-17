@@ -11,6 +11,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class AvailableOfferItem extends StatelessWidget {
   const AvailableOfferItem({
     Key? key,
@@ -63,18 +65,21 @@ class _BonusItem extends StatelessWidget {
                 color: ZPColors.textButtonColor,
               ),
           overflow: TextOverflow.ellipsis,
+          key: WidgetKeys.lblNameProductOffers,
         ),
         Text(
           bonusMaterial.materialNumber.displayMatNo,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: ZPColors.extraLightGrey4,
               ),
+          key: WidgetKeys.lblCodeProductOffers,
         ),
         Text(
           '${context.tr('Purchase quantity')}: ${bonusMaterial.qualifyingQuantity}',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: ZPColors.black,
               ),
+          key: WidgetKeys.lblQuantityProductOffers,
         ),
       ],
     );

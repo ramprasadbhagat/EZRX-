@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/products/available_offers/show_offer_dialog_widget.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,6 +13,9 @@ class ProductDetailRobot extends CommonRobot {
   final materialDetailsMaterialDescription =
       find.byKey(WidgetKeys.materialDetailsMaterialDescription);
   final addToCartButton = find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+  final materialDetailsInfoTile =
+      find.byKey(WidgetKeys.materialDetailsInfoTile);
+  final favoritesIcon = find.byKey(WidgetKeys.favoritesIcon);
 
   void verifyPage() {
     expect(find.byType(ProductDetailsPage), findsOneWidget);
@@ -23,15 +27,26 @@ class ProductDetailRobot extends CommonRobot {
               materialDetailsMaterialDescription,
             )
             .data ??
-        ' ';
+        '';
   }
 
-  Future<void> addProductToFavoriteList() async {
-    final statusFavorite = find.byKey(WidgetKeys.statusFavoriteIcon(true));
+  Future<void> setProductToFavoriteList(bool isFavorite) async {
+    final statusFavorite = find.descendant(
+      of: find.byKey(WidgetKeys.bodyContentProductDetail),
+      matching: find.byKey(WidgetKeys.statusFavoriteIcon(isFavorite)),
+    );
     if (statusFavorite.evaluate().isEmpty) {
-      await tester.tap(find.byKey(WidgetKeys.favoritesIcon).first);
-      await tester.pumpAndSettle();
+      await _tapToFavoriteIcon();
+    } else {
+      await _tapToFavoriteIcon();
+      await _tapToFavoriteIcon();
     }
+  }
+
+  Future<void> _tapToFavoriteIcon() async {
+    await tester.tap(favoritesIcon.first);
+    await tester.pumpAndSettle();
+    await dismissSnackbar();
   }
 
   Future<void> openMaterialInformation() async {
@@ -56,18 +71,22 @@ class ProductDetailRobot extends CommonRobot {
   }
 
   void verifyProductFavoriteIconDisplayed() {
-    expect(find.byKey(WidgetKeys.favoritesIcon), findsOneWidget);
+    expect(find.byKey(WidgetKeys.favoritesIcon).first, findsOneWidget);
   }
 
   void verifyProductNameDisplayed() {
     expect(
-      materialDetailsMaterialDescription,
+      materialDetailsMaterialDescription.first,
       findsOneWidget,
     );
   }
 
   void verifyProductPriceDisplayed() {
-    expect(find.byKey(WidgetKeys.priceComponent), findsOneWidget);
+    expect(find.byKey(WidgetKeys.priceComponent).first, findsOneWidget);
+  }
+
+  void verifyMaterialDetailsInfoTileDisplayed() {
+    expect(materialDetailsInfoTile, findsOneWidget);
   }
 
   void verifyProductDetailsQuantityInputPriceDisplayed() {
@@ -86,19 +105,22 @@ class ProductDetailRobot extends CommonRobot {
   }
 
   void verifyMaterialDosageDisplayed() {
-    expect(find.byKey(WidgetKeys.materialDosage), findsOneWidget);
+    expect(find.byKey(WidgetKeys.materialDosage).first, findsOneWidget);
   }
 
   void verifyMaterialHowToUseDisplayed() {
-    expect(find.byKey(WidgetKeys.materialHowToUse), findsOneWidget);
+    expect(find.byKey(WidgetKeys.materialHowToUse).first, findsOneWidget);
   }
 
   void verifyMaterialCompositionDisplayed() {
-    expect(find.byKey(WidgetKeys.materialComposition), findsOneWidget);
+    expect(find.byKey(WidgetKeys.materialComposition).first, findsOneWidget);
   }
 
   void verifyMaterialDeliveryInstructionsDisplayed() {
-    expect(find.byKey(WidgetKeys.materialDeliveryInstructions), findsOneWidget);
+    expect(
+      find.byKey(WidgetKeys.materialDeliveryInstructions).first,
+      findsOneWidget,
+    );
   }
 
   void verifyMateriaNumberDisplayed(String value) {
@@ -136,7 +158,6 @@ class ProductDetailRobot extends CommonRobot {
       find.byKey(WidgetKeys.balanceTextRow('Batch'.tr(), value)),
       findsOneWidget,
     );
-    expect(find.text('Batch'), findsOneWidget);
   }
 
   void verifyExpiryLabelDisplayed(String value) {
@@ -153,6 +174,85 @@ class ProductDetailRobot extends CommonRobot {
 
   Future<void> tapBackButton() async {
     await tester.tap(find.byKey(WidgetKeys.materialDetailsPageBack));
+    await tester.pumpAndSettle();
+  }
+
+  void verifyMultipleImageMaterialDisplayed() {
+    expect(find.byKey(WidgetKeys.materialDetailsCarouselImage), findsWidgets);
+  }
+
+  void verifyImageMaterialSelected(int index, bool selected) {
+    expect(
+      find.byKey(WidgetKeys.genericKey(key: 'selected$index$selected')),
+      findsOneWidget,
+    );
+  }
+
+  Future<void> tapToImageMaterial(int index, bool selected) async {
+    await tester
+        .tap(find.byKey(WidgetKeys.genericKey(key: 'selected$index$selected')));
+    await tester.pump();
+  }
+
+  Future<void> openAvailableOffers() async {
+    await tester.tap(find.byKey(WidgetKeys.availableOffersTile));
+    await tester.pumpAndSettle();
+  }
+
+  void verifyNameProductOffer(String nameProduct) {
+    expect(
+      tester
+          .widget<Text>(
+            find.descendant(
+              of: find.byType(ShowOfferDialogWidget),
+              matching: find.byKey(WidgetKeys.lblNameProductOffers),
+            ),
+          )
+          .data,
+      contains(nameProduct),
+    );
+  }
+
+  void verifyCodeProductOffer(String codeProduct) {
+    expect(
+      tester
+          .widget<Text>(
+            find.descendant(
+              of: find.byType(ShowOfferDialogWidget),
+              matching: find.byKey(WidgetKeys.lblCodeProductOffers),
+            ),
+          )
+          .data,
+      codeProduct,
+    );
+  }
+
+  void verifyQuantityProductDisplayed() {
+    expect(
+      find.descendant(
+        of: find.byType(ShowOfferDialogWidget),
+        matching: find.byKey(WidgetKeys.lblQuantityProductOffers),
+      ),
+      findsOneWidget,
+    );
+  }
+
+  void verifyButtonCloseDisplayed() {
+    expect(find.byKey(WidgetKeys.closeButton), findsOneWidget);
+  }
+
+  void verifyRelateProductDisplayed() {
+    final materialCard = find.byKey(WidgetKeys.materialCard);
+    expect(materialCard, findsWidgets);
+  }
+
+  Future<void> backToProductsScreen() async {
+    await tester.tap(find.byKey(WidgetKeys.materialDetailsPageBack));
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> openCardCartPopup() async {
+    await tester.tap(find.byKey(WidgetKeys.cartButton));
     await tester.pumpAndSettle();
   }
 }

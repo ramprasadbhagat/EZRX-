@@ -7,6 +7,8 @@ import '../common/common_robot.dart';
 class ProductSuggestionRobot extends CommonRobot {
   ProductSuggestionRobot(WidgetTester tester) : super(tester);
 
+  final suggestedProductsTile = find.byKey(WidgetKeys.suggestedProductsTile);
+
   Future<void> tapSearchResult(String materialNumber) async {
     await tester.tap(find.byKey(WidgetKeys.searchedProduct(materialNumber)));
     await tester.pumpAndSettle();
@@ -20,5 +22,10 @@ class ProductSuggestionRobot extends CommonRobot {
   void verifySearchNotFound() {
     final message = find.text('That didn’t match anything'.tr());
     expect(message, findsWidgets);
+  }
+
+  Future<void> tapToFirstSuggestedProductsTile() async {
+    await tester.tap(suggestedProductsTile.first);
+    await tester.pumpAndSettle();
   }
 }

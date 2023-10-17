@@ -148,6 +148,7 @@ class _BundleDetails extends StatelessWidget {
               Text(
                 material.materialNumber.displayMatNo,
                 style: Theme.of(context).textTheme.bodySmall,
+                key: WidgetKeys.bundleOfferCode,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,6 +159,7 @@ class _BundleDetails extends StatelessWidget {
                           child: Text(
                             material.name,
                             style: Theme.of(context).textTheme.labelLarge,
+                            key: WidgetKeys.bundleOfferName,
                           ),
                         ),
                   FavouriteIcon(
@@ -177,7 +179,7 @@ class _BundleDetails extends StatelessWidget {
                               context.router.currentPath,
                             ),
                           },
-                      );
+                        );
                       }
                       context.read<ProductDetailBloc>().add(
                             material.isFavourite
@@ -203,6 +205,7 @@ class _BundleDetails extends StatelessWidget {
                           .toString(),
                       type: PriceStyle.bundlePrice,
                       trailingText: context.tr('per item'),
+                      key: WidgetKeys.bundleOfferPrice,
                     ),
             ],
           ),
@@ -233,6 +236,7 @@ class _BundleOfferDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
+                key: WidgetKeys.bundleOfferSummary,
                 contentPadding: EdgeInsets.zero,
                 minLeadingWidth: 5,
                 isThreeLine: true,
@@ -250,6 +254,7 @@ class _BundleOfferDetails extends StatelessWidget {
               ),
               bundleInformation.isNotEmpty
                   ? CurvedRectangleWidget(
+                      key: WidgetKeys.bundleInformation,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 10,
@@ -290,6 +295,7 @@ class _BundleOfferDetails extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
               ListTile(
+                key: WidgetKeys.bundleOfferMaterialInfo,
                 onTap: () {
                   _trackShowProductInfo(context);
                   _showMaterialDescriptionSheet(context: context);

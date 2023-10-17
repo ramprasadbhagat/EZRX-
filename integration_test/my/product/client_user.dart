@@ -5,6 +5,7 @@ import '../../core/common.dart';
 import '../../robots/common/common_robot.dart';
 import '../../robots/common/enum.dart';
 import '../../robots/login_robot.dart';
+import '../../robots/orders/cart/cart_robot.dart';
 import '../../robots/products/filter_sort_product_robot.dart';
 import '../../robots/products/product_detail_robot.dart';
 import '../../robots/products/product_robot.dart';
@@ -18,6 +19,7 @@ void main() {
   late CommonRobot commonRobot;
   late FilterSortProductRobot filterSortProductRobot;
   late ProductDetailRobot productDetailRobot;
+  late CartRobot cartRobot;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -200,11 +202,11 @@ void main() {
     await productRobot.navigateToScreen(NavigationTab.products);
     productRobot.verifyMaterialCartVisible();
     await productRobot.openDetailFirstProduct();
-    await productDetailRobot.addProductToFavoriteList();
+    await productDetailRobot.setProductToFavoriteList(true);
     final nameProduct =
         productDetailRobot.getMaterialDetailsMaterialDescription().toString();
 
-    await productRobot.backToProductsScreen();
+    await productDetailRobot.backToProductsScreen();
     await productRobot.filterFavoritesInProductsScreen();
 
     productRobot.verifyProductFilterMatched(nameProduct);
@@ -349,14 +351,16 @@ void main() {
     commonRobot = CommonRobot(tester);
     filterSortProductRobot = FilterSortProductRobot(tester);
     productDetailRobot = ProductDetailRobot(tester);
+    cartRobot = CartRobot(tester);
+
     //init app
     await runAppForTesting(tester);
 
     await commonRobot.changeDeliveryAddress(customerCode);
 
     await commonRobot.navigateToScreen(NavigationTab.products);
-    await productRobot.openCardCartPopup();
-    productRobot.verifyCartPopupDisplayed();
+    await productDetailRobot.openCardCartPopup();
+    cartRobot.verifyPage();
   });
 
   tearDown(() async {

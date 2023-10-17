@@ -95,7 +95,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         backgroundColor:
             _isScrollAtInitialPosition ? Colors.transparent : ZPColors.white,
         leading: IconButton(
-          key: WidgetKeys.materialDetailsPageBack,
           onPressed: () => Navigator.pop(context),
           icon: CircleAvatar(
             maxRadius: 16,
@@ -106,6 +105,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               Icons.chevron_left,
               color:
                   _isScrollAtInitialPosition ? ZPColors.white : ZPColors.black,
+              key: WidgetKeys.materialDetailsPageBack,
             ),
           ),
         ),
@@ -187,6 +187,7 @@ class _BodyContent extends StatelessWidget {
             : '';
 
         return Column(
+          key: WidgetKeys.bodyContentProductDetail,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             OfferLabel(

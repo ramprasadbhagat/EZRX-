@@ -101,6 +101,7 @@ class WidgetKeys {
   static const Key announcementsTab = Key('announcementsTab');
   static Key announcementsArticleTabItems(String tabItem) => Key(tabItem);
   static const Key browseProductIcon = Key('browseProductIcon');
+  static const Key browseProduct = Key('browseProduct');
   static const Key announcementIcon = Key('announcementIcon');
   static const Key iconArrow = Key('iconArrow');
   static const Key productsOnOffer = Key('productsOnOffer');
@@ -221,6 +222,10 @@ class WidgetKeys {
   static const Key countryListSelectedLength = Key('countryListSelectedLength');
   static const Key manufactureListSelectedLength =
       Key('manufactureListSelectedLength');
+  static const Key lblNameProductOffers = Key('lblNameProductOffers');
+  static const Key lblCodeProductOffers = Key('lblCodeProductOffers');
+  static const Key lblQuantityProductOffers = Key('lblQuantityProductOffers');
+  static const Key availableOffersTile = Key('availableOffersTile');
   static const Key materialDeliveryInstructions =
       Key('materialDeliveryInstructions');
 
@@ -602,6 +607,7 @@ class WidgetKeys {
   static const Key favoritesChoiceChip = Key('favoritesChoiceChip');
   static Key statusFavoriteIcon(bool isFavorite) =>
       Key('isFavorite$isFavorite');
+  static const Key materialCard = Key('MaterialCard');
 
   //============================================================
   //  BundleDetails Keys
@@ -615,6 +621,15 @@ class WidgetKeys {
       Key('bundleAddToCartSheetSubmitButton');
   static Key bundleMaterialItem(String materialNumber) =>
       Key('bundleMaterialItem$materialNumber');
+  static const Key bundleAddToCart = Key('bundleAddToCart');
+  static const Key bundleMaterialListItem = Key('bundleMaterialListItem');
+  static const Key bundleOfferCode = Key('bundleOfferCode');
+  static const Key bundleOfferName = Key('bundleOfferName');
+  static const Key productTag = Key('productTag');
+  static const Key bundleOfferMaterialInfo = Key('bundleOfferMaterialInfo');
+  static const Key bundleInformation = Key('bundleInformation');
+  static const Key bundleOfferSummary = Key('bundleOfferSummary');
+  static const Key bundleOfferPrice = Key('bundleOfferPrice');
 
   //============================================================
   //  Orders
@@ -698,6 +713,7 @@ class WidgetKeys {
       Key('productDetailQuantityTextKey');
   static const Key availableOfferColumnKey = Key('availableOfferColumn');
   static const Key materialInfoDialog = Key('materialInfoDialog');
+  static const Key bodyContentProductDetail = Key('bodyContentProductDetail');
 
   //============================================================
   //  bundle Details

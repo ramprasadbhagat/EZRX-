@@ -77,6 +77,12 @@ class ProductRobot extends CommonRobot {
     expect(listNameProduct.first, nameProduct);
   }
 
+  void verifyNotProductFilterMatched(String nameProduct) {
+    final listNameProduct =
+        tester.widgetList<Text>(nameCart).map((e) => e.data);
+    expect(listNameProduct.first != nameProduct, true);
+  }
+
   void verifyManufacturerMaterialFilterMatched(
     String manufacturerMaterial,
   ) {
@@ -107,11 +113,6 @@ class ProductRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> backToProductsScreen() async {
-    await tester.tap(find.byKey(WidgetKeys.materialDetailsPageBack));
-    await tester.pumpAndSettle();
-  }
-
   Future<void> pumDurationAutoSearch() async {
     await tester
         .pump(Duration(milliseconds: locator<Config>().autoSearchTimeout));
@@ -127,21 +128,6 @@ class ProductRobot extends CommonRobot {
 
     for (final e in listSuggestTile) {
       expect(e, contains(keyword));
-    }
-  }
-
-  Future<void> openCardCartPopup() async {
-    await tester.tap(find.byKey(WidgetKeys.cartButton));
-    await tester.pumpAndSettle();
-  }
-
-  void verifyCartPopupDisplayed() {
-    final startBrowsingProducts = find.byKey(WidgetKeys.startBrowsingProducts);
-    if (startBrowsingProducts.evaluate().isNotEmpty) {
-      expect(find.text('Your cart is empty'), findsOneWidget);
-      expect(startBrowsingProducts, findsOneWidget);
-    } else {
-      expect(find.byKey(WidgetKeys.checkoutButton), findsOneWidget);
     }
   }
 

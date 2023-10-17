@@ -11,6 +11,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+
 class ShowOfferDialogWidget extends StatelessWidget {
   const ShowOfferDialogWidget({
     Key? key,
@@ -56,6 +58,7 @@ class _CloseButton extends StatelessWidget {
         vertical: 10.0,
       ),
       child: ElevatedButton(
+        key: WidgetKeys.closeButton,
         onPressed: () => Navigator.pop(context),
         child: Text(context.tr('Close')),
       ),
