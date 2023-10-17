@@ -38,7 +38,7 @@ _$_BannerTemplateDto _$$_BannerTemplateDtoFromJson(Map<String, dynamic> json) =>
       media: MediaValueDto.fromJson(
           mediaReadValue(json, 'media') as Map<String, dynamic>),
       content: TemplateValueItemDto.fromJson(
-          json['content'] as Map<String, dynamic>),
+          readDynamicValueKey(json, 'content') as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_BannerTemplateDtoToJson(
@@ -50,8 +50,8 @@ Map<String, dynamic> _$$_BannerTemplateDtoToJson(
 
 _$_SliderTemplateDto _$$_SliderTemplateDtoFromJson(Map<String, dynamic> json) =>
     _$_SliderTemplateDto(
-      title:
-          TemplateValueItemDto.fromJson(json['title'] as Map<String, dynamic>),
+      title: TemplateValueItemDto.fromJson(
+          readDynamicValueKey(json, 'title') as Map<String, dynamic>),
       certificates: (readValueKey(json, 'certificates') as List<dynamic>)
           .map((e) => CertificationsDto.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -67,13 +67,16 @@ Map<String, dynamic> _$$_SliderTemplateDtoToJson(
 _$_CertificationsDto _$$_CertificationsDtoFromJson(Map<String, dynamic> json) =>
     _$_CertificationsDto(
       certificationType: TemplateValueItemDto.fromJson(
-          json['certificationType'] as Map<String, dynamic>),
+          readDynamicValueKey(json, 'certificationType')
+              as Map<String, dynamic>),
       certificationName: TemplateValueItemDto.fromJson(
-          json['certificationName'] as Map<String, dynamic>),
+          readDynamicValueKey(json, 'certificationName')
+              as Map<String, dynamic>),
       description: TemplateValueItemDto.fromJson(
-          json['description'] as Map<String, dynamic>),
+          readDynamicValueKey(json, 'description') as Map<String, dynamic>),
       certificationYear: TemplateValueItemDto.fromJson(
-          json['certificationYear'] as Map<String, dynamic>),
+          readDynamicValueKey(json, 'certificationYear')
+              as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_CertificationsDtoToJson(
@@ -88,10 +91,10 @@ Map<String, dynamic> _$$_CertificationsDtoToJson(
 _$_HorizontalListTemplateDto _$$_HorizontalListTemplateDtoFromJson(
         Map<String, dynamic> json) =>
     _$_HorizontalListTemplateDto(
-      title:
-          TemplateValueItemDto.fromJson(json['title'] as Map<String, dynamic>),
+      title: TemplateValueItemDto.fromJson(
+          readDynamicValueKey(json, 'title') as Map<String, dynamic>),
       description: TemplateValueItemDto.fromJson(
-          json['description'] as Map<String, dynamic>),
+          readDynamicValueKey(json, 'description') as Map<String, dynamic>),
       achievements: (readValueKey(json, 'list') as List<dynamic>)
           .map((e) =>
               HorizontalListTemplateItemDto.fromJson(e as Map<String, dynamic>))
@@ -110,10 +113,10 @@ _$_HorizontalListTemplateItemDto _$$_HorizontalListTemplateItemDtoFromJson(
         Map<String, dynamic> json) =>
     _$_HorizontalListTemplateItemDto(
       name: json['name'] as String,
-      title:
-          TemplateValueItemDto.fromJson(json['title'] as Map<String, dynamic>),
+      title: TemplateValueItemDto.fromJson(
+          readDynamicValueKey(json, 'title') as Map<String, dynamic>),
       subTitle: TemplateValueItemDto.fromJson(
-          json['subTitle'] as Map<String, dynamic>),
+          readDynamicValueKey(json, 'subTitle') as Map<String, dynamic>),
       description: TemplateValueItemDto.fromJson(
           json['description'] as Map<String, dynamic>),
     );
@@ -130,12 +133,12 @@ Map<String, dynamic> _$$_HorizontalListTemplateItemDtoToJson(
 _$_ContentSplitTemplateDto _$$_ContentSplitTemplateDtoFromJson(
         Map<String, dynamic> json) =>
     _$_ContentSplitTemplateDto(
-      title:
-          TemplateValueItemDto.fromJson(json['title'] as Map<String, dynamic>),
+      title: TemplateValueItemDto.fromJson(
+          readDynamicValueKey(json, 'title') as Map<String, dynamic>),
       subTitle: TemplateValueItemDto.fromJson(
-          json['subTitle'] as Map<String, dynamic>),
+          readDynamicValueKey(json, 'subTitle') as Map<String, dynamic>),
       description: TemplateValueItemDto.fromJson(
-          json['description'] as Map<String, dynamic>),
+          readDynamicValueKey(json, 'description') as Map<String, dynamic>),
       media: MediaValueDto.fromJson(
           mediaReadValue(json, 'media') as Map<String, dynamic>),
     );
@@ -152,10 +155,10 @@ Map<String, dynamic> _$$_ContentSplitTemplateDtoToJson(
 _$_MediaListTemplateDto _$$_MediaListTemplateDtoFromJson(
         Map<String, dynamic> json) =>
     _$_MediaListTemplateDto(
-      title:
-          TemplateValueItemDto.fromJson(json['title'] as Map<String, dynamic>),
+      title: TemplateValueItemDto.fromJson(
+          readDynamicValueKey(json, 'title') as Map<String, dynamic>),
       description: TemplateValueItemDto.fromJson(
-          json['description'] as Map<String, dynamic>),
+          readDynamicValueKey(json, 'description') as Map<String, dynamic>),
       mediaItems: (readValueKey(json, 'mediaItems') as List<dynamic>?)
               ?.map((e) => MediaItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??

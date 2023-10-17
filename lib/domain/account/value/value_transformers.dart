@@ -241,7 +241,7 @@ String salesOrgLanguageCode(String country) {
   return salesOrgCountryMap[country] ?? 'en';
 }
 
-String announcementLanguageCode(String country) {
+String helpAndSupportLanguageCode(String country) {
   switch (country) {
     case 'TW':
       return 'zh-TW';

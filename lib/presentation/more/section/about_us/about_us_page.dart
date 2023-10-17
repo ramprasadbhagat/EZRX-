@@ -117,6 +117,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           imageUrl: aboutUsInfo.banner.media.src,
                           errorWidget: const SizedBox.shrink(),
                           width: double.infinity,
+                          height: 200,
                         ),
                         _HeaderSection(
                           description: aboutUsInfo.banner.content,

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/about_us/entities/about_us.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_query_mutation.dart';
@@ -43,7 +42,7 @@ class AboutUsRemoteDataSource {
         as Map<String, dynamic>;
     final templateList = (finalData['value'] ?? []) as List;
     if (templateList.isEmpty) {
-      throw const ApiFailure.aboutUsFail();
+      throw ServerException(message: 'Unable to load About us');
     }
 
     return AboutUsDto.fromJson(finalData).toDomain();

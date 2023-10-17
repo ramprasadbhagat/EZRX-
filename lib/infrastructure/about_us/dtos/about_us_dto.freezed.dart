@@ -377,7 +377,7 @@ BannerTemplateDto _$BannerTemplateDtoFromJson(Map<String, dynamic> json) {
 mixin _$BannerTemplateDto {
   @JsonKey(name: 'media', readValue: mediaReadValue)
   MediaValueDto get media => throw _privateConstructorUsedError;
-  @JsonKey(name: 'content')
+  @JsonKey(name: 'content', readValue: readDynamicValueKey)
   TemplateValueItemDto get content => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -394,7 +394,8 @@ abstract class $BannerTemplateDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'media', readValue: mediaReadValue) MediaValueDto media,
-      @JsonKey(name: 'content') TemplateValueItemDto content});
+      @JsonKey(name: 'content', readValue: readDynamicValueKey)
+      TemplateValueItemDto content});
 
   $MediaValueDtoCopyWith<$Res> get media;
   $TemplateValueItemDtoCopyWith<$Res> get content;
@@ -455,7 +456,8 @@ abstract class _$$_BannerTemplateDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'media', readValue: mediaReadValue) MediaValueDto media,
-      @JsonKey(name: 'content') TemplateValueItemDto content});
+      @JsonKey(name: 'content', readValue: readDynamicValueKey)
+      TemplateValueItemDto content});
 
   @override
   $MediaValueDtoCopyWith<$Res> get media;
@@ -495,7 +497,8 @@ class __$$_BannerTemplateDtoCopyWithImpl<$Res>
 class _$_BannerTemplateDto extends _BannerTemplateDto {
   _$_BannerTemplateDto(
       {@JsonKey(name: 'media', readValue: mediaReadValue) required this.media,
-      @JsonKey(name: 'content') required this.content})
+      @JsonKey(name: 'content', readValue: readDynamicValueKey)
+      required this.content})
       : super._();
 
   factory _$_BannerTemplateDto.fromJson(Map<String, dynamic> json) =>
@@ -505,7 +508,7 @@ class _$_BannerTemplateDto extends _BannerTemplateDto {
   @JsonKey(name: 'media', readValue: mediaReadValue)
   final MediaValueDto media;
   @override
-  @JsonKey(name: 'content')
+  @JsonKey(name: 'content', readValue: readDynamicValueKey)
   final TemplateValueItemDto content;
 
   @override
@@ -545,7 +548,7 @@ abstract class _BannerTemplateDto extends BannerTemplateDto {
   factory _BannerTemplateDto(
       {@JsonKey(name: 'media', readValue: mediaReadValue)
       required final MediaValueDto media,
-      @JsonKey(name: 'content')
+      @JsonKey(name: 'content', readValue: readDynamicValueKey)
       required final TemplateValueItemDto content}) = _$_BannerTemplateDto;
   _BannerTemplateDto._() : super._();
 
@@ -556,7 +559,7 @@ abstract class _BannerTemplateDto extends BannerTemplateDto {
   @JsonKey(name: 'media', readValue: mediaReadValue)
   MediaValueDto get media;
   @override
-  @JsonKey(name: 'content')
+  @JsonKey(name: 'content', readValue: readDynamicValueKey)
   TemplateValueItemDto get content;
   @override
   @JsonKey(ignore: true)
@@ -570,7 +573,7 @@ SliderTemplateDto _$SliderTemplateDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SliderTemplateDto {
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   TemplateValueItemDto get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'certificates', readValue: readValueKey)
   List<CertificationsDto> get certificates =>
@@ -589,7 +592,8 @@ abstract class $SliderTemplateDtoCopyWith<$Res> {
       _$SliderTemplateDtoCopyWithImpl<$Res, SliderTemplateDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'title') TemplateValueItemDto title,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      TemplateValueItemDto title,
       @JsonKey(name: 'certificates', readValue: readValueKey)
       List<CertificationsDto> certificates});
 
@@ -642,7 +646,8 @@ abstract class _$$_SliderTemplateDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'title') TemplateValueItemDto title,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      TemplateValueItemDto title,
       @JsonKey(name: 'certificates', readValue: readValueKey)
       List<CertificationsDto> certificates});
 
@@ -681,7 +686,8 @@ class __$$_SliderTemplateDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SliderTemplateDto extends _SliderTemplateDto {
   _$_SliderTemplateDto(
-      {@JsonKey(name: 'title') required this.title,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      required this.title,
       @JsonKey(name: 'certificates', readValue: readValueKey)
       required final List<CertificationsDto> certificates})
       : _certificates = certificates,
@@ -691,7 +697,7 @@ class _$_SliderTemplateDto extends _SliderTemplateDto {
       _$$_SliderTemplateDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   final TemplateValueItemDto title;
   final List<CertificationsDto> _certificates;
   @override
@@ -739,7 +745,8 @@ class _$_SliderTemplateDto extends _SliderTemplateDto {
 
 abstract class _SliderTemplateDto extends SliderTemplateDto {
   factory _SliderTemplateDto(
-          {@JsonKey(name: 'title') required final TemplateValueItemDto title,
+          {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+          required final TemplateValueItemDto title,
           @JsonKey(name: 'certificates', readValue: readValueKey)
           required final List<CertificationsDto> certificates}) =
       _$_SliderTemplateDto;
@@ -749,7 +756,7 @@ abstract class _SliderTemplateDto extends SliderTemplateDto {
       _$_SliderTemplateDto.fromJson;
 
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   TemplateValueItemDto get title;
   @override
   @JsonKey(name: 'certificates', readValue: readValueKey)
@@ -766,15 +773,15 @@ CertificationsDto _$CertificationsDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CertificationsDto {
-  @JsonKey(name: 'certificationType')
+  @JsonKey(name: 'certificationType', readValue: readDynamicValueKey)
   TemplateValueItemDto get certificationType =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'certificationName')
+  @JsonKey(name: 'certificationName', readValue: readDynamicValueKey)
   TemplateValueItemDto get certificationName =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   TemplateValueItemDto get description => throw _privateConstructorUsedError;
-  @JsonKey(name: 'certificationYear')
+  @JsonKey(name: 'certificationYear', readValue: readDynamicValueKey)
   TemplateValueItemDto get certificationYear =>
       throw _privateConstructorUsedError;
 
@@ -791,12 +798,13 @@ abstract class $CertificationsDtoCopyWith<$Res> {
       _$CertificationsDtoCopyWithImpl<$Res, CertificationsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'certificationType')
+      {@JsonKey(name: 'certificationType', readValue: readDynamicValueKey)
       TemplateValueItemDto certificationType,
-      @JsonKey(name: 'certificationName')
+      @JsonKey(name: 'certificationName', readValue: readDynamicValueKey)
       TemplateValueItemDto certificationName,
-      @JsonKey(name: 'description') TemplateValueItemDto description,
-      @JsonKey(name: 'certificationYear')
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      TemplateValueItemDto description,
+      @JsonKey(name: 'certificationYear', readValue: readDynamicValueKey)
       TemplateValueItemDto certificationYear});
 
   $TemplateValueItemDtoCopyWith<$Res> get certificationType;
@@ -888,12 +896,13 @@ abstract class _$$_CertificationsDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'certificationType')
+      {@JsonKey(name: 'certificationType', readValue: readDynamicValueKey)
       TemplateValueItemDto certificationType,
-      @JsonKey(name: 'certificationName')
+      @JsonKey(name: 'certificationName', readValue: readDynamicValueKey)
       TemplateValueItemDto certificationName,
-      @JsonKey(name: 'description') TemplateValueItemDto description,
-      @JsonKey(name: 'certificationYear')
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      TemplateValueItemDto description,
+      @JsonKey(name: 'certificationYear', readValue: readDynamicValueKey)
       TemplateValueItemDto certificationYear});
 
   @override
@@ -947,26 +956,30 @@ class __$$_CertificationsDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CertificationsDto extends _CertificationsDto {
   _$_CertificationsDto(
-      {@JsonKey(name: 'certificationType') required this.certificationType,
-      @JsonKey(name: 'certificationName') required this.certificationName,
-      @JsonKey(name: 'description') required this.description,
-      @JsonKey(name: 'certificationYear') required this.certificationYear})
+      {@JsonKey(name: 'certificationType', readValue: readDynamicValueKey)
+      required this.certificationType,
+      @JsonKey(name: 'certificationName', readValue: readDynamicValueKey)
+      required this.certificationName,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      required this.description,
+      @JsonKey(name: 'certificationYear', readValue: readDynamicValueKey)
+      required this.certificationYear})
       : super._();
 
   factory _$_CertificationsDto.fromJson(Map<String, dynamic> json) =>
       _$$_CertificationsDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'certificationType')
+  @JsonKey(name: 'certificationType', readValue: readDynamicValueKey)
   final TemplateValueItemDto certificationType;
   @override
-  @JsonKey(name: 'certificationName')
+  @JsonKey(name: 'certificationName', readValue: readDynamicValueKey)
   final TemplateValueItemDto certificationName;
   @override
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   final TemplateValueItemDto description;
   @override
-  @JsonKey(name: 'certificationYear')
+  @JsonKey(name: 'certificationYear', readValue: readDynamicValueKey)
   final TemplateValueItemDto certificationYear;
 
   @override
@@ -1011,13 +1024,13 @@ class _$_CertificationsDto extends _CertificationsDto {
 
 abstract class _CertificationsDto extends CertificationsDto {
   factory _CertificationsDto(
-          {@JsonKey(name: 'certificationType')
+          {@JsonKey(name: 'certificationType', readValue: readDynamicValueKey)
           required final TemplateValueItemDto certificationType,
-          @JsonKey(name: 'certificationName')
+          @JsonKey(name: 'certificationName', readValue: readDynamicValueKey)
           required final TemplateValueItemDto certificationName,
-          @JsonKey(name: 'description')
+          @JsonKey(name: 'description', readValue: readDynamicValueKey)
           required final TemplateValueItemDto description,
-          @JsonKey(name: 'certificationYear')
+          @JsonKey(name: 'certificationYear', readValue: readDynamicValueKey)
           required final TemplateValueItemDto certificationYear}) =
       _$_CertificationsDto;
   _CertificationsDto._() : super._();
@@ -1026,16 +1039,16 @@ abstract class _CertificationsDto extends CertificationsDto {
       _$_CertificationsDto.fromJson;
 
   @override
-  @JsonKey(name: 'certificationType')
+  @JsonKey(name: 'certificationType', readValue: readDynamicValueKey)
   TemplateValueItemDto get certificationType;
   @override
-  @JsonKey(name: 'certificationName')
+  @JsonKey(name: 'certificationName', readValue: readDynamicValueKey)
   TemplateValueItemDto get certificationName;
   @override
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   TemplateValueItemDto get description;
   @override
-  @JsonKey(name: 'certificationYear')
+  @JsonKey(name: 'certificationYear', readValue: readDynamicValueKey)
   TemplateValueItemDto get certificationYear;
   @override
   @JsonKey(ignore: true)
@@ -1050,9 +1063,9 @@ HorizontalListTemplateDto _$HorizontalListTemplateDtoFromJson(
 
 /// @nodoc
 mixin _$HorizontalListTemplateDto {
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   TemplateValueItemDto get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   TemplateValueItemDto get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'list', readValue: readValueKey)
   List<HorizontalListTemplateItemDto> get achievements =>
@@ -1071,8 +1084,10 @@ abstract class $HorizontalListTemplateDtoCopyWith<$Res> {
       _$HorizontalListTemplateDtoCopyWithImpl<$Res, HorizontalListTemplateDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'title') TemplateValueItemDto title,
-      @JsonKey(name: 'description') TemplateValueItemDto description,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      TemplateValueItemDto title,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      TemplateValueItemDto description,
       @JsonKey(name: 'list', readValue: readValueKey)
       List<HorizontalListTemplateItemDto> achievements});
 
@@ -1141,8 +1156,10 @@ abstract class _$$_HorizontalListTemplateDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'title') TemplateValueItemDto title,
-      @JsonKey(name: 'description') TemplateValueItemDto description,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      TemplateValueItemDto title,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      TemplateValueItemDto description,
       @JsonKey(name: 'list', readValue: readValueKey)
       List<HorizontalListTemplateItemDto> achievements});
 
@@ -1190,8 +1207,10 @@ class __$$_HorizontalListTemplateDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_HorizontalListTemplateDto extends _HorizontalListTemplateDto {
   _$_HorizontalListTemplateDto(
-      {@JsonKey(name: 'title') required this.title,
-      @JsonKey(name: 'description') required this.description,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      required this.title,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      required this.description,
       @JsonKey(name: 'list', readValue: readValueKey)
       required final List<HorizontalListTemplateItemDto> achievements})
       : _achievements = achievements,
@@ -1201,10 +1220,10 @@ class _$_HorizontalListTemplateDto extends _HorizontalListTemplateDto {
       _$$_HorizontalListTemplateDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   final TemplateValueItemDto title;
   @override
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   final TemplateValueItemDto description;
   final List<HorizontalListTemplateItemDto> _achievements;
   @override
@@ -1254,8 +1273,9 @@ class _$_HorizontalListTemplateDto extends _HorizontalListTemplateDto {
 
 abstract class _HorizontalListTemplateDto extends HorizontalListTemplateDto {
   factory _HorizontalListTemplateDto(
-          {@JsonKey(name: 'title') required final TemplateValueItemDto title,
-          @JsonKey(name: 'description')
+          {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+          required final TemplateValueItemDto title,
+          @JsonKey(name: 'description', readValue: readDynamicValueKey)
           required final TemplateValueItemDto description,
           @JsonKey(name: 'list', readValue: readValueKey)
           required final List<HorizontalListTemplateItemDto> achievements}) =
@@ -1266,10 +1286,10 @@ abstract class _HorizontalListTemplateDto extends HorizontalListTemplateDto {
       _$_HorizontalListTemplateDto.fromJson;
 
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   TemplateValueItemDto get title;
   @override
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   TemplateValueItemDto get description;
   @override
   @JsonKey(name: 'list', readValue: readValueKey)
@@ -1289,9 +1309,9 @@ HorizontalListTemplateItemDto _$HorizontalListTemplateItemDtoFromJson(
 mixin _$HorizontalListTemplateItemDto {
   @JsonKey(name: 'name')
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   TemplateValueItemDto get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'subTitle')
+  @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
   TemplateValueItemDto get subTitle => throw _privateConstructorUsedError;
   @JsonKey(name: 'description')
   TemplateValueItemDto get description => throw _privateConstructorUsedError;
@@ -1312,8 +1332,10 @@ abstract class $HorizontalListTemplateItemDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'name') String name,
-      @JsonKey(name: 'title') TemplateValueItemDto title,
-      @JsonKey(name: 'subTitle') TemplateValueItemDto subTitle,
+      @JsonKey(name: 'title', readValue: readDynamicValueKey)
+      TemplateValueItemDto title,
+      @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
+      TemplateValueItemDto subTitle,
       @JsonKey(name: 'description') TemplateValueItemDto description});
 
   $TemplateValueItemDtoCopyWith<$Res> get title;
@@ -1396,8 +1418,10 @@ abstract class _$$_HorizontalListTemplateItemDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'name') String name,
-      @JsonKey(name: 'title') TemplateValueItemDto title,
-      @JsonKey(name: 'subTitle') TemplateValueItemDto subTitle,
+      @JsonKey(name: 'title', readValue: readDynamicValueKey)
+      TemplateValueItemDto title,
+      @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
+      TemplateValueItemDto subTitle,
       @JsonKey(name: 'description') TemplateValueItemDto description});
 
   @override
@@ -1452,8 +1476,10 @@ class __$$_HorizontalListTemplateItemDtoCopyWithImpl<$Res>
 class _$_HorizontalListTemplateItemDto extends _HorizontalListTemplateItemDto {
   _$_HorizontalListTemplateItemDto(
       {@JsonKey(name: 'name') required this.name,
-      @JsonKey(name: 'title') required this.title,
-      @JsonKey(name: 'subTitle') required this.subTitle,
+      @JsonKey(name: 'title', readValue: readDynamicValueKey)
+      required this.title,
+      @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
+      required this.subTitle,
       @JsonKey(name: 'description') required this.description})
       : super._();
 
@@ -1465,10 +1491,10 @@ class _$_HorizontalListTemplateItemDto extends _HorizontalListTemplateItemDto {
   @JsonKey(name: 'name')
   final String name;
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   final TemplateValueItemDto title;
   @override
-  @JsonKey(name: 'subTitle')
+  @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
   final TemplateValueItemDto subTitle;
   @override
   @JsonKey(name: 'description')
@@ -1515,12 +1541,14 @@ class _$_HorizontalListTemplateItemDto extends _HorizontalListTemplateItemDto {
 abstract class _HorizontalListTemplateItemDto
     extends HorizontalListTemplateItemDto {
   factory _HorizontalListTemplateItemDto(
-      {@JsonKey(name: 'name') required final String name,
-      @JsonKey(name: 'title') required final TemplateValueItemDto title,
-      @JsonKey(name: 'subTitle') required final TemplateValueItemDto subTitle,
-      @JsonKey(name: 'description')
-      required final TemplateValueItemDto
-          description}) = _$_HorizontalListTemplateItemDto;
+          {@JsonKey(name: 'name') required final String name,
+          @JsonKey(name: 'title', readValue: readDynamicValueKey)
+          required final TemplateValueItemDto title,
+          @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
+          required final TemplateValueItemDto subTitle,
+          @JsonKey(name: 'description')
+          required final TemplateValueItemDto description}) =
+      _$_HorizontalListTemplateItemDto;
   _HorizontalListTemplateItemDto._() : super._();
 
   factory _HorizontalListTemplateItemDto.fromJson(Map<String, dynamic> json) =
@@ -1530,10 +1558,10 @@ abstract class _HorizontalListTemplateItemDto
   @JsonKey(name: 'name')
   String get name;
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   TemplateValueItemDto get title;
   @override
-  @JsonKey(name: 'subTitle')
+  @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
   TemplateValueItemDto get subTitle;
   @override
   @JsonKey(name: 'description')
@@ -1551,11 +1579,11 @@ ContentSplitTemplateDto _$ContentSplitTemplateDtoFromJson(
 
 /// @nodoc
 mixin _$ContentSplitTemplateDto {
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   TemplateValueItemDto get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'subTitle')
+  @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
   TemplateValueItemDto get subTitle => throw _privateConstructorUsedError;
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   TemplateValueItemDto get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'media', readValue: mediaReadValue)
   MediaValueDto get media => throw _privateConstructorUsedError;
@@ -1573,9 +1601,12 @@ abstract class $ContentSplitTemplateDtoCopyWith<$Res> {
       _$ContentSplitTemplateDtoCopyWithImpl<$Res, ContentSplitTemplateDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'title') TemplateValueItemDto title,
-      @JsonKey(name: 'subTitle') TemplateValueItemDto subTitle,
-      @JsonKey(name: 'description') TemplateValueItemDto description,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      TemplateValueItemDto title,
+      @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
+      TemplateValueItemDto subTitle,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      TemplateValueItemDto description,
       @JsonKey(name: 'media', readValue: mediaReadValue) MediaValueDto media});
 
   $TemplateValueItemDtoCopyWith<$Res> get title;
@@ -1665,9 +1696,12 @@ abstract class _$$_ContentSplitTemplateDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'title') TemplateValueItemDto title,
-      @JsonKey(name: 'subTitle') TemplateValueItemDto subTitle,
-      @JsonKey(name: 'description') TemplateValueItemDto description,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      TemplateValueItemDto title,
+      @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
+      TemplateValueItemDto subTitle,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      TemplateValueItemDto description,
       @JsonKey(name: 'media', readValue: mediaReadValue) MediaValueDto media});
 
   @override
@@ -1722,9 +1756,12 @@ class __$$_ContentSplitTemplateDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ContentSplitTemplateDto extends _ContentSplitTemplateDto {
   const _$_ContentSplitTemplateDto(
-      {@JsonKey(name: 'title') required this.title,
-      @JsonKey(name: 'subTitle') required this.subTitle,
-      @JsonKey(name: 'description') required this.description,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      required this.title,
+      @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
+      required this.subTitle,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      required this.description,
       @JsonKey(name: 'media', readValue: mediaReadValue) required this.media})
       : super._();
 
@@ -1732,13 +1769,13 @@ class _$_ContentSplitTemplateDto extends _ContentSplitTemplateDto {
       _$$_ContentSplitTemplateDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   final TemplateValueItemDto title;
   @override
-  @JsonKey(name: 'subTitle')
+  @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
   final TemplateValueItemDto subTitle;
   @override
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   final TemplateValueItemDto description;
   @override
   @JsonKey(name: 'media', readValue: mediaReadValue)
@@ -1785,9 +1822,11 @@ class _$_ContentSplitTemplateDto extends _ContentSplitTemplateDto {
 
 abstract class _ContentSplitTemplateDto extends ContentSplitTemplateDto {
   const factory _ContentSplitTemplateDto(
-      {@JsonKey(name: 'title') required final TemplateValueItemDto title,
-      @JsonKey(name: 'subTitle') required final TemplateValueItemDto subTitle,
-      @JsonKey(name: 'description')
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      required final TemplateValueItemDto title,
+      @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
+      required final TemplateValueItemDto subTitle,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
       required final TemplateValueItemDto description,
       @JsonKey(name: 'media', readValue: mediaReadValue)
       required final MediaValueDto media}) = _$_ContentSplitTemplateDto;
@@ -1797,13 +1836,13 @@ abstract class _ContentSplitTemplateDto extends ContentSplitTemplateDto {
       _$_ContentSplitTemplateDto.fromJson;
 
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   TemplateValueItemDto get title;
   @override
-  @JsonKey(name: 'subTitle')
+  @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
   TemplateValueItemDto get subTitle;
   @override
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   TemplateValueItemDto get description;
   @override
   @JsonKey(name: 'media', readValue: mediaReadValue)
@@ -1820,9 +1859,9 @@ MediaListTemplateDto _$MediaListTemplateDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MediaListTemplateDto {
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   TemplateValueItemDto get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   TemplateValueItemDto get description => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'mediaItems',
@@ -1843,8 +1882,10 @@ abstract class $MediaListTemplateDtoCopyWith<$Res> {
       _$MediaListTemplateDtoCopyWithImpl<$Res, MediaListTemplateDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'title') TemplateValueItemDto title,
-      @JsonKey(name: 'description') TemplateValueItemDto description,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      TemplateValueItemDto title,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      TemplateValueItemDto description,
       @JsonKey(
           name: 'mediaItems',
           defaultValue: <MediaItemDto>[],
@@ -1915,8 +1956,10 @@ abstract class _$$_MediaListTemplateDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'title') TemplateValueItemDto title,
-      @JsonKey(name: 'description') TemplateValueItemDto description,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      TemplateValueItemDto title,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      TemplateValueItemDto description,
       @JsonKey(
           name: 'mediaItems',
           defaultValue: <MediaItemDto>[],
@@ -1965,8 +2008,10 @@ class __$$_MediaListTemplateDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MediaListTemplateDto extends _MediaListTemplateDto {
   const _$_MediaListTemplateDto(
-      {@JsonKey(name: 'title') required this.title,
-      @JsonKey(name: 'description') required this.description,
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      required this.title,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
+      required this.description,
       @JsonKey(
           name: 'mediaItems',
           defaultValue: <MediaItemDto>[],
@@ -1979,10 +2024,10 @@ class _$_MediaListTemplateDto extends _MediaListTemplateDto {
       _$$_MediaListTemplateDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   final TemplateValueItemDto title;
   @override
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   final TemplateValueItemDto description;
   final List<MediaItemDto> _mediaItems;
   @override
@@ -2035,8 +2080,9 @@ class _$_MediaListTemplateDto extends _MediaListTemplateDto {
 
 abstract class _MediaListTemplateDto extends MediaListTemplateDto {
   const factory _MediaListTemplateDto(
-      {@JsonKey(name: 'title') required final TemplateValueItemDto title,
-      @JsonKey(name: 'description')
+      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+      required final TemplateValueItemDto title,
+      @JsonKey(name: 'description', readValue: readDynamicValueKey)
       required final TemplateValueItemDto description,
       @JsonKey(
           name: 'mediaItems',
@@ -2049,10 +2095,10 @@ abstract class _MediaListTemplateDto extends MediaListTemplateDto {
       _$_MediaListTemplateDto.fromJson;
 
   @override
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', readValue: readDynamicValueKey)
   TemplateValueItemDto get title;
   @override
-  @JsonKey(name: 'description')
+  @JsonKey(name: 'description', readValue: readDynamicValueKey)
   TemplateValueItemDto get description;
   @override
   @JsonKey(

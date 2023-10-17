@@ -37,7 +37,7 @@ class AboutUsRepository extends IAboutUsRepository {
       final aboutUsInfo = await remoteDataSource.getAboutUsInfo(
         aboutUsUrlPath: config.announcementApiUrlPath,
         itemId: salesOrg.aboutUsVariablePath,
-        lang: salesOrg.locale.languageCode,
+        lang: salesOrg.languageCodeForHelpAndSupport,
       );
 
       return Right(aboutUsInfo);

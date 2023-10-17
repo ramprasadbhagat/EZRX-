@@ -47,7 +47,8 @@ class BannerTemplateDto with _$BannerTemplateDto {
   factory BannerTemplateDto({
     @JsonKey(name: 'media', readValue: mediaReadValue)
         required MediaValueDto media,
-    @JsonKey(name: 'content') required TemplateValueItemDto content,
+    @JsonKey(name: 'content', readValue: readDynamicValueKey)
+        required TemplateValueItemDto content,
   }) = _BannerTemplateDto;
 
   factory BannerTemplateDto.fromJson(Map<String, dynamic> json) =>
@@ -63,7 +64,8 @@ class BannerTemplateDto with _$BannerTemplateDto {
 class SliderTemplateDto with _$SliderTemplateDto {
   const SliderTemplateDto._();
   factory SliderTemplateDto({
-    @JsonKey(name: 'title') required TemplateValueItemDto title,
+    @JsonKey(name: 'title', readValue: readDynamicValueKey)
+        required TemplateValueItemDto title,
     @JsonKey(name: 'certificates', readValue: readValueKey)
         required List<CertificationsDto> certificates,
   }) = _SliderTemplateDto;
@@ -81,12 +83,16 @@ class SliderTemplateDto with _$SliderTemplateDto {
 class CertificationsDto with _$CertificationsDto {
   const CertificationsDto._();
   factory CertificationsDto({
-    @JsonKey(name: 'certificationType')
+    @JsonKey(
+      name: 'certificationType',
+      readValue: readDynamicValueKey,
+    )
         required TemplateValueItemDto certificationType,
-    @JsonKey(name: 'certificationName')
+    @JsonKey(name: 'certificationName', readValue: readDynamicValueKey)
         required TemplateValueItemDto certificationName,
-    @JsonKey(name: 'description') required TemplateValueItemDto description,
-    @JsonKey(name: 'certificationYear')
+    @JsonKey(name: 'description', readValue: readDynamicValueKey)
+        required TemplateValueItemDto description,
+    @JsonKey(name: 'certificationYear', readValue: readDynamicValueKey)
         required TemplateValueItemDto certificationYear,
   }) = _CertificationsDto;
 
@@ -105,9 +111,9 @@ class CertificationsDto with _$CertificationsDto {
 class HorizontalListTemplateDto with _$HorizontalListTemplateDto {
   const HorizontalListTemplateDto._();
   factory HorizontalListTemplateDto({
-    @JsonKey(name: 'title')
+    @JsonKey(name: 'title', readValue: readDynamicValueKey)
         required TemplateValueItemDto title,
-    @JsonKey(name: 'description')
+    @JsonKey(name: 'description', readValue: readDynamicValueKey)
         required TemplateValueItemDto description,
     @JsonKey(
       name: 'list',
@@ -130,10 +136,16 @@ class HorizontalListTemplateDto with _$HorizontalListTemplateDto {
 class HorizontalListTemplateItemDto with _$HorizontalListTemplateItemDto {
   const HorizontalListTemplateItemDto._();
   factory HorizontalListTemplateItemDto({
-    @JsonKey(name: 'name') required String name,
-    @JsonKey(name: 'title') required TemplateValueItemDto title,
-    @JsonKey(name: 'subTitle') required TemplateValueItemDto subTitle,
-    @JsonKey(name: 'description') required TemplateValueItemDto description,
+    @JsonKey(name: 'name')
+        required String name,
+    @JsonKey(name: 'title', readValue: readDynamicValueKey)
+        required TemplateValueItemDto title,
+    @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
+        required TemplateValueItemDto subTitle,
+    @JsonKey(
+      name: 'description',
+    )
+        required TemplateValueItemDto description,
   }) = _HorizontalListTemplateItemDto;
 
   factory HorizontalListTemplateItemDto.fromJson(Map<String, dynamic> json) =>
@@ -151,9 +163,12 @@ class ContentSplitTemplateDto with _$ContentSplitTemplateDto {
   const ContentSplitTemplateDto._();
 
   const factory ContentSplitTemplateDto({
-    @JsonKey(name: 'title') required TemplateValueItemDto title,
-    @JsonKey(name: 'subTitle') required TemplateValueItemDto subTitle,
-    @JsonKey(name: 'description') required TemplateValueItemDto description,
+    @JsonKey(name: 'title', readValue: readDynamicValueKey)
+        required TemplateValueItemDto title,
+    @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
+        required TemplateValueItemDto subTitle,
+    @JsonKey(name: 'description', readValue: readDynamicValueKey)
+        required TemplateValueItemDto description,
     @JsonKey(
       name: 'media',
       readValue: mediaReadValue,
@@ -176,9 +191,9 @@ class ContentSplitTemplateDto with _$ContentSplitTemplateDto {
 class MediaListTemplateDto with _$MediaListTemplateDto {
   const MediaListTemplateDto._();
   const factory MediaListTemplateDto({
-    @JsonKey(name: 'title')
+    @JsonKey(name: 'title', readValue: readDynamicValueKey)
         required TemplateValueItemDto title,
-    @JsonKey(name: 'description')
+    @JsonKey(name: 'description', readValue: readDynamicValueKey)
         required TemplateValueItemDto description,
     @JsonKey(
       name: 'mediaItems',
@@ -234,19 +249,22 @@ class TemplateValueItemDto with _$TemplateValueItemDto {
       _$TemplateValueItemDtoFromJson(json);
 }
 
-List<dynamic> readValueKey(Map json, String key) => json[key]['value'];
+Map<String, dynamic> readDynamicValueKey(Map json, String key) =>
+    json[key] ?? <String, dynamic>{};
 
-Map<dynamic, dynamic> mediaReadValue(Map json, String key) =>
-    json[key]?['jsonValue']?['value'] ?? {};
+List<dynamic> readValueKey(Map json, String key) =>
+    json[key]?['value'] ?? <dynamic>[];
 
+Map<String, dynamic> mediaReadValue(Map json, String key) =>
+    json[key]?['jsonValue']?['value'] ?? <String, dynamic>{};
 
-Map<dynamic, dynamic> whoWeAreReadValue(Map json, String _) {
+Map<String, dynamic> whoWeAreReadValue(Map json, String _) {
   final values = json['value'] as List;
 
   return values.firstWhere(
     (element) =>
         (element['name'] as String).toLowerCase().contains('who we are'),
-    orElse: () => {},
+    orElse: () => <String, dynamic>{},
   );
 }
 
@@ -259,45 +277,44 @@ Map<dynamic, dynamic> certificationReadValue(Map json, String _) {
   );
 }
 
-Map<dynamic, dynamic> bannerReadValue(Map json, String _) {
+Map<String, dynamic> bannerReadValue(Map json, String _) {
   final values = json['value'] as List;
 
   return values.firstWhere(
     (element) => (element['name'] as String).toLowerCase().contains('banner 1'),
-    orElse: () => {},
+    orElse: () => <String, dynamic>{},
   );
 }
 
-Map<dynamic, dynamic> whyUsReadValue(Map json, String _) {
+Map<String, dynamic> whyUsReadValue(Map json, String _) {
   final values = json['value'] as List;
 
   return values.firstWhere(
-    (element) =>
-        ((element['title']?['value'] ?? '') as String)
+    (element) => ((element['title']?['value'] ?? '') as String)
         .toLowerCase()
         .contains('why us'),
-    orElse: () => {},
+    orElse: () => <String, dynamic>{},
   );
 }
 
-Map<dynamic, dynamic> ourPartnerReadValue(Map json, String _) {
+Map<String, dynamic> ourPartnerReadValue(Map json, String _) {
   final values = json['value'] as List;
 
   return values.firstWhere(
     (element) => ((element['title']?['value'] ?? '') as String)
         .toLowerCase()
         .contains('our partners'),
-    orElse: () => {},
+    orElse: () => <String, dynamic>{},
   );
 }
 
-Map<dynamic, dynamic> reachUsReadValue(Map json, String _) {
+Map<String, dynamic> reachUsReadValue(Map json, String _) {
   final values = json['value'] as List;
 
   return values.firstWhere(
     (element) => ((element['title']?['value'] ?? '') as String)
         .toLowerCase()
         .contains('reaching us'),
-    orElse: () => {},
+    orElse: () => <String, dynamic>{},
   );
 }
