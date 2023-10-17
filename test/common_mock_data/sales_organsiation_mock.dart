@@ -1,16 +1,20 @@
 //Sales org
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_principal.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 const _fakeSaleOrgId = 'fake-sale-org-id-1234';
 const _fakeVNSalesOrgId = '3072';
 const _fakeMYSalesOrgId = '2001';
+const _fakeSaleOrgPhId = '2500';
 
 final fakeVNSalesOrg = SalesOrg(_fakeVNSalesOrgId);
 final fakeMYSalesOrg = SalesOrg(_fakeMYSalesOrgId);
 final fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
+SalesOrg fakePHSalesOrg = SalesOrg(_fakeSaleOrgPhId);
 
 final fakeSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg);
@@ -97,4 +101,21 @@ final fakeMYSalesOrgConfigFutureDeliveryDayEnabled =
   enableFutureDeliveryDay: true,
   futureDeliveryDay: FutureDeliveryDay('7'),
   salesOrg: fakeMYSalesOrg,
+);
+
+SalesOrganisationConfigs salesOrganisationPHConfigsWithEnablePrincipalList =
+    SalesOrganisationConfigs.empty().copyWith(
+  salesOrg: fakePHSalesOrg,
+  currency: Currency('PHP'),
+  disablePrincipals: true,
+  principalList: [
+    SalesOrganisationConfigsPrincipal.empty().copyWith(
+      date: DateTimeStringValue('2093041107'),
+      principalCode: PrincipalCode('0000140332'),
+    ),
+    SalesOrganisationConfigsPrincipal.empty().copyWith(
+      date: DateTimeStringValue('2023041107'),
+      principalCode: PrincipalCode('0000000000'),
+    )
+  ],
 );
