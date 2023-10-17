@@ -20,9 +20,32 @@
     			<action android:name="android.intent.action.VIEW" />
    				<category android:name="android.intent.category.DEFAULT" />
    				<category android:name="android.intent.category.BROWSABLE" />
-   				<data android:scheme="https" android:host="ezrx.com" />
-   			 	<data android:scheme="https" android:host="zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com"/>
-				<data android:scheme="ezrx" android:host="mobile.app" />
+   				<data android:scheme="http" />
+   				<data android:scheme="https" />
+   				<data android:host="*.ezrx.com" />
+				<data android:host="uat-my.ezrx.com" />
+				<data android:host="uat-sg.ezrx.com" />
+				<data android:host="uat-ph.ezrx.com" />
+				<data android:host="uat-th.ezrx.com" />
+				<data android:host="uat-kh.ezrx.com" />
+				<data android:host="uat-tw.ezrx.com" />
+				<data android:host="uat-mm.ezrx.com" />
+				<data android:host="uat-vn.ezrx.com" />
+				<data android:host="uat-id.ezrx.com" />
+				<data android:host="uat-kr.ezrx.com" />
+				<data android:host="uat-hk.ezrx.com" />
+   			 	<data android:host="*.ezrxplus.com"/>
+				<data android:host="my.ezrxplus.com" />
+				<data android:host="sg.ezrxplus.com" />
+				<data android:host="ph.ezrxplus.com" />
+				<data android:host="th.ezrxplus.com" />
+				<data android:host="kh.ezrxplus.com" />
+				<data android:host="tw.ezrxplus.com" />
+				<data android:host="mm.ezrxplus.com" />
+				<data android:host="vn.ezrxplus.com" />
+				<data android:host="id.ezrxplus.com" />
+				<data android:host="kr.ezrxplus.com" />
+				<data android:host="hk.ezrxplus.com" />
 			</intent-filter>
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

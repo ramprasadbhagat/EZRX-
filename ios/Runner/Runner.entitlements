@@ -6,8 +6,55 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:ezrx.com</string>
 		<string>applinks:$(DYNAMIC_LINK_URI_PREFIX)</string>
+		<string>applinks:*.ezrx.com</string>
+		<string>applinks:uat-my.ezrx.com</string>
+		<string>applinks:uat-sg.ezrx.com</string>
+		<string>applinks:uat-ph.ezrx.com</string>
+		<string>applinks:uat-th.ezrx.com</string>
+		<string>applinks:uat-kh.ezrx.com</string>
+		<string>applinks:uat-tw.ezrx.com</string>
+		<string>applinks:uat-mm.ezrx.com</string>
+		<string>applinks:uat-vn.ezrx.com</string>
+		<string>applinks:uat-id.ezrx.com</string>
+		<string>applinks:uat-kr.ezrx.com</string>
+		<string>applinks:uat-hk.ezrx.com</string>
+		<string>applinks:*.ezrxplus.com</string>
+		<string>applinks:my.ezrxplus.com</string>
+		<string>applinks:sg.ezrxplus.com</string>
+		<string>applinks:ph.ezrxplus.com</string>
+		<string>applinks:th.ezrxplus.com</string>
+		<string>applinks:kh.ezrxplus.com</string>
+		<string>applinks:tw.ezrxplus.com</string>
+		<string>applinks:mm.ezrxplus.com</string>
+		<string>applinks:vn.ezrxplus.com</string>
+		<string>applinks:id.ezrxplus.com</string>
+		<string>applinks:kr.ezrxplus.com</string>
+		<string>applinks:hk.ezrxplus.com</string>
+		<string>webcredentials:*.ezrx.com</string>
+		<string>webcredentials:uat-my.ezrx.com</string>
+		<string>webcredentials:uat-sg.ezrx.com</string>
+		<string>webcredentials:uat-ph.ezrx.com</string>
+		<string>webcredentials:uat-th.ezrx.com</string>
+		<string>webcredentials:uat-kh.ezrx.com</string>
+		<string>webcredentials:uat-tw.ezrx.com</string>
+		<string>webcredentials:uat-mm.ezrx.com</string>
+		<string>webcredentials:uat-vn.ezrx.com</string>
+		<string>webcredentials:uat-id.ezrx.com</string>
+		<string>webcredentials:uat-kr.ezrx.com</string>
+		<string>webcredentials:uat-hk.ezrx.com</string>
+		<string>webcredentials:*.ezrxplus.com</string>
+		<string>webcredentials:my.ezrxplus.com</string>
+		<string>webcredentials:sg.ezrxplus.com</string>
+		<string>webcredentials:ph.ezrxplus.com</string>
+		<string>webcredentials:th.ezrxplus.com</string>
+		<string>webcredentials:kh.ezrxplus.com</string>
+		<string>webcredentials:tw.ezrxplus.com</string>
+		<string>webcredentials:mm.ezrxplus.com</string>
+		<string>webcredentials:vn.ezrxplus.com</string>
+		<string>webcredentials:id.ezrxplus.com</string>
+		<string>webcredentials:kr.ezrxplus.com</string>
+		<string>webcredentials:hk.ezrxplus.com</string>
 	</array>
 </dict>
 </plist>
