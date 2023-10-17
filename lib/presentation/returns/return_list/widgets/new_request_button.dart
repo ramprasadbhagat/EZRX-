@@ -6,7 +6,11 @@ import 'package:ezrxmobile/application/returns/new_request/return_items/return_i
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,6 +27,13 @@ class NewRequestButton extends StatelessWidget {
       icon: Icons.add,
       label: 'New request'.tr(),
       onPress: () {
+        trackMixpanelEvent(
+          MixpanelEvents.newReturnRequestClicked,
+          props: {
+            MixpanelProps.clickAt:
+                RouterUtils.buildRouteTrackingName(context.routeData.path),
+          },
+        );
         final eligibilityState = context.read<EligibilityBloc>().state;
         context.read<UsageCodeBloc>().add(
               UsageCodeEvent.fetch(

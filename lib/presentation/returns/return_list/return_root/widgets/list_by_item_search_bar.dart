@@ -11,38 +11,44 @@ class _ListByItemSearchBar extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching ||
           current.searchKey.isValueEmpty,
-      builder: (context, state) {
-        final appliedFilter =
-            context.read<ReturnListByItemBloc>().state.appliedFilter;
+      builder: (context, state) => CustomSearchBar(
+        key: WidgetKeys.genericKey(
+          key: state.searchKey.searchValueOrEmpty,
+        ),
+        enabled: !state.isFetching,
+        initialValue: state.searchKey.searchValueOrEmpty,
+        onSearchChanged: (value) => _search(
+          keyword: value,
+          context: context,
+        ),
+        onSearchSubmitted: (value) => _search(
+          keyword: value,
+          context: context,
+        ),
+        customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+        onClear: () => _search(
+          keyword: '',
+          context: context,
+        ),
+      ),
+    );
+  }
 
-        return CustomSearchBar(
-          key: WidgetKeys.genericKey(
-            key: state.searchKey.searchValueOrEmpty,
-          ),
-          enabled: !state.isFetching,
-          initialValue: state.searchKey.searchValueOrEmpty,
-          onSearchChanged: (value) => context.read<ReturnListByItemBloc>().add(
-                ReturnListByItemEvent.fetch(
-                  appliedFilter: appliedFilter,
-                  searchKey: SearchKey.searchFilter(value),
-                ),
-              ),
-          onSearchSubmitted: (value) =>
-              context.read<ReturnListByItemBloc>().add(
-                    ReturnListByItemEvent.fetch(
-                      appliedFilter: appliedFilter,
-                      searchKey: SearchKey.searchFilter(value),
-                    ),
-                  ),
-          customValidator: (value) => SearchKey.searchFilter(value).isValid(),
-          onClear: () => context.read<ReturnListByItemBloc>().add(
-                ReturnListByItemEvent.fetch(
-                  appliedFilter: appliedFilter,
-                  searchKey: SearchKey.searchFilter(''),
-                ),
-              ),
-        );
+  void _search({required String keyword, required BuildContext context}) {
+    final bloc = context.read<ReturnListByItemBloc>();
+    final appliedFilter = bloc.state.appliedFilter;
+    trackMixpanelEvent(
+      MixpanelEvents.returnRequestSearched,
+      props: {
+        MixpanelProps.keyword: keyword,
+        MixpanelProps.subTabFrom: const ReturnByItemPageRoute().path,
       },
+    );
+    bloc.add(
+      ReturnListByItemEvent.fetch(
+        appliedFilter: appliedFilter,
+        searchKey: SearchKey.searchFilter(keyword),
+      ),
     );
   }
 }

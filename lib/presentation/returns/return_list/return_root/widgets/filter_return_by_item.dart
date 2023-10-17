@@ -52,6 +52,15 @@ class _FilterReturnByItem extends StatelessWidget {
       },
     ).then((value) {
       if (value != null && value as ReturnFilter != stateFilter) {
+        trackMixpanelEvent(
+          MixpanelEvents.returnRequestFiltered,
+          props: {
+            MixpanelProps.subTabFrom: RouterUtils.buildRouteTrackingName(
+              const ReturnByItemPageRoute().path,
+            ),
+            MixpanelProps.filterUsed: value.trackingInfo,
+          },
+        );
         context.read<ReturnListByItemBloc>().add(
               ReturnListByItemEvent.fetch(
                 appliedFilter: value,

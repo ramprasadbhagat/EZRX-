@@ -66,4 +66,12 @@ class ReturnFilter with _$ReturnFilter {
 
     return count;
   }
+
+  List<String> get trackingInfo => [
+        if (returnDateFrom.isValid() && returnDateTo.isValid())
+          'Request date from ${returnDateFrom.dateOrNaString} to ${returnDateTo.dateOrNaString}',
+        if (amountValueFrom.isValid() && amountValueTo.isValid())
+          'Request amount from ${amountValueFrom.apiParameterValue} to ${amountValueTo.apiParameterValue}',
+        ...returnStatusList.map((e) => e.getOrDefaultValue('')),
+      ];
 }

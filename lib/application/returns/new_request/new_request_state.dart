@@ -107,4 +107,44 @@ class NewRequestState with _$NewRequestState {
 
   double returnSubtotalWithTax(SalesOrganisationConfigs config) =>
       returnTotal + _returnTax(config);
+
+  Map<String, dynamic> mixpanelTrackingInfo({
+    required List<Usage> reasonList,
+  }) =>
+      {
+        MixpanelProps.returnId: returnRequestId,
+        MixpanelProps.totalQty: allItemDetails.fold<int>(
+          0,
+          (sum, e) => sum + e.returnQuantity.getIntValue,
+        ),
+        MixpanelProps.totalPrice: returnTotal,
+        MixpanelProps.isSingle: invoiceDetails.length == 1,
+        MixpanelProps.isBonusIncluded: selectedItems
+            .map((e) => e.bonusItems)
+            .flattened
+            .any((bonus) => isIncludeBonus(bonus.uuid)),
+        MixpanelProps.returnReason: allItemDetails
+            .map(
+              (e) =>
+                  reasonList
+                      .firstWhereOrNull(
+                        (reason) => reason.usageCode == e.returnReason,
+                      )
+                      ?.usageDescription ??
+                  e.returnReason,
+            )
+            .toList(),
+        MixpanelProps.productName: allItemDetails
+            .map(
+              (e) => getReturnMaterial(e.itemNumber).materialDescription,
+            )
+            .toList(),
+        MixpanelProps.productManufacturer: allItemDetails
+            .map(
+              (e) => getReturnMaterial(e.itemNumber).principalName.name,
+            )
+            .toList(),
+        MixpanelProps.unitPrice:
+            allItemDetails.map((e) => getUnitPrice(e.itemNumber)).toList(),
+      };
 }

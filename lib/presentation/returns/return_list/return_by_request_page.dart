@@ -6,6 +6,9 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/retur
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -17,6 +20,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/widgets/new_request_button.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -166,6 +170,15 @@ class _ReturnItem extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ListTile(
                   onTap: () {
+                    trackMixpanelEvent(
+                      MixpanelEvents.returnRequestViewed,
+                      props: {
+                        MixpanelProps.subTabFrom:
+                            RouterUtils.buildRouteTrackingName(
+                          context.routeData.path,
+                        ),
+                      },
+                    );
                     context.read<ReturnDetailsByRequestBloc>().add(
                           ReturnDetailsByRequestEvent.fetch(
                             returnId: data.requestId,

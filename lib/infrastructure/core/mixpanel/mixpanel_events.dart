@@ -37,4 +37,14 @@ class MixpanelEvents {
   static String orderDetailSearched = 'Order Detail Searched';
   static String orderDetailFiltered = 'Order Detail Filter Used';
   static String buyAgainClicked = 'Buy Again Clicked';
+  //===========================================================
+  //  Returns
+  //============================================================
+  static String returnRequestViewed = 'Return Request Viewed';
+  static String returnRequestSearched = 'Return Request Searched';
+  static String returnRequestFiltered = 'Return Request Filter Used';
+  static String newReturnRequestClicked = 'New Return Request Clicked';
+  static String newReturnRequestStep = 'New Return Request Step';
+  static String returnRequestFailure = 'Return Failed';
+  static String returnRequestSuccess = 'Return Success';
 }

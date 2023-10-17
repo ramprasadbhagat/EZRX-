@@ -13,10 +13,25 @@ class _SubmitButton extends StatelessWidget {
           !current.isSubmitting,
       listener: (context, state) {
         state.failureOrSuccessOption.fold(
-          () =>
-              context.router.popAndPush(const NewRequestSuccessfulPageRoute()),
+          () {
+            final reasonList = context.read<UsageCodeBloc>().state.usages;
+
+            trackMixpanelEvent(
+              MixpanelEvents.returnRequestSuccess,
+              props: state.mixpanelTrackingInfo(reasonList: reasonList),
+            );
+            context.router.popAndPush(const NewRequestSuccessfulPageRoute());
+          },
           (either) => either.fold(
-            (failure) => ErrorUtils.handleApiFailure(context, failure),
+            (failure) {
+              trackMixpanelEvent(
+                MixpanelEvents.returnRequestFailure,
+                props: {
+                  MixpanelProps.errorMessage: failure.failureMessage,
+                },
+              );
+              ErrorUtils.handleApiFailure(context, failure);
+            },
             (_) {},
           ),
         );
@@ -27,13 +42,24 @@ class _SubmitButton extends StatelessWidget {
         key: WidgetKeys.submitButton,
         onPressed: state.isSubmitting
             ? null
-            : () => context.read<NewRequestBloc>().add(
-                  NewRequestEvent.submit(
-                    customerCodeInfo:
-                        context.read<EligibilityBloc>().state.customerCodeInfo,
-                    user: context.read<EligibilityBloc>().state.user,
-                  ),
-                ),
+            : () {
+                trackMixpanelEvent(
+                  MixpanelEvents.newReturnRequestStep,
+                  props: <String, dynamic>{
+                    MixpanelProps.step: 3,
+                    MixpanelProps.stepName: 'Review return details',
+                  },
+                );
+                context.read<NewRequestBloc>().add(
+                      NewRequestEvent.submit(
+                        customerCodeInfo: context
+                            .read<EligibilityBloc>()
+                            .state
+                            .customerCodeInfo,
+                        user: context.read<EligibilityBloc>().state.user,
+                      ),
+                    );
+              },
         child: LoadingShimmer.withChild(
           enabled: state.isSubmitting,
           child: Text(

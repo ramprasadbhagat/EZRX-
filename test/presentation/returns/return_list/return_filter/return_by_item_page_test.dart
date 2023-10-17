@@ -12,6 +12,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_item_page.dart';
@@ -53,6 +54,8 @@ class MockReturnSummaryDetailsBloc
     extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
     implements ReturnSummaryDetailsBloc {}
 
+class MockMixpanelService extends Mock implements MixpanelService {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -73,6 +76,7 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
+    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
   });
   setUp(() async {
     mockSalesOrgBloc = MockSalesOrgBloc();

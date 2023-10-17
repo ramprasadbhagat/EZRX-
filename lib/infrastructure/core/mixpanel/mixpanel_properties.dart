@@ -45,4 +45,11 @@ class MixpanelProps {
   static String keyword = 'keyword';
   static String orderNumber = 'order_number';
   static String requestDeliveryDate = 'request_delivery_date';
+  static String step = 'step';
+  static String stepName = 'step_name';
+  static String isSingle = 'is_single?';
+  static String totalPrice = 'total_price';
+  static String returnReason = 'reason_for_return';
+  static String returnId = 'return_request_id';
+  static String isBonusIncluded = 'is_bonus_included';
 }
