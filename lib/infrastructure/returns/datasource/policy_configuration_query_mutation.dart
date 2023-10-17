@@ -1,15 +1,17 @@
 class PolicyConfigurationQueryMutation {
   String getPolicyConfiguration() {
     return '''query policies(\$request: policiesRequest!) {  
-    policies(request: \$request) {    
-    salesOrg    
-    principalCode    
-    monthsBeforeExpiry    
-    monthsAfterExpiry    
-    uuid   
-    returnsAllowed    
-    principalName
-     }
+    policies(request: \$request) { 
+      policies {   
+        salesOrg    
+        principalCode    
+        monthsBeforeExpiry    
+        monthsAfterExpiry    
+        uuid   
+        returnsAllowed    
+        principalName
+        }
+      }
     } ''';
   }
 
