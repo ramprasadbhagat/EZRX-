@@ -119,6 +119,8 @@ class CartItemQuantityInput extends StatelessWidget {
 
                   return;
                 }
+
+                onSubmit(int.parse(text));
               },
               decoration: InputDecoration(
                 fillColor:
