@@ -1020,7 +1020,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: user,
-            salesOrganisation: fakeSalesMYOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
           ),
         );
@@ -1053,7 +1053,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: user,
-            salesOrganisation: fakeSalesMYOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPriceAndCombo,
           ),
         );
@@ -1126,7 +1126,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: user,
-            salesOrganisation: fakeSalesMYOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
           ),
         );
@@ -1188,7 +1188,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: user,
-            salesOrganisation: fakeSalesMYOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
           ),
         );
@@ -1236,7 +1236,7 @@ void main() {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: user,
-            salesOrganisation: fakeSalesMYOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             salesOrgConfigs: salesOrgConfigEnabledMaterialWithoutPrice,
           ),
         );

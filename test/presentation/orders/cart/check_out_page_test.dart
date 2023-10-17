@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -8,17 +9,11 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
@@ -29,6 +24,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class AdditionalDetailsBlocMock
@@ -74,24 +71,17 @@ void main() {
   final userBlocMock = UserMockBloc();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
-  final fakeUser = User.empty().copyWith(
-    username: Username('fake-user'),
-    role: Role.empty().copyWith(
-      type: RoleType('client'),
-    ),
-    enableOrderType: true,
-  );
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
 
     autoRouterMock = locator<AppRouter>();
   });
-  group('DeliveryInfo Page', () {
+  group('Checkout Page Test', () {
     setUp(() {
       locator = GetIt.instance;
       when(() => userBlocMock.state).thenReturn(
         UserState.initial().copyWith(
-          user: fakeUser,
+          user: fakeClientOrderTypeEnabled,
         ),
       );
       eligibilityBloc = EligibilityBlocMock();
@@ -169,22 +159,14 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              poNumberRequired: PoNumberRequired(true),
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            configs: fakeSalesOrgConfigPoNumberRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              poNumberRequired: PoNumberRequired(true),
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            salesOrgConfigs: fakeSalesOrgConfigPoNumberRequired,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
 
@@ -222,12 +204,8 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              poNumberRequired: PoNumberRequired(false),
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            configs: fakeSalesOrganisationConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
 
@@ -266,22 +244,14 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              enablePaymentTerms: true,
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            configs: fakeSalesOrgConfigPaymentTermsEnabled,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
-              enablePaymentTerms: true,
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            salesOrgConfigs: fakeSalesOrgConfigPaymentTermsEnabled,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
 
@@ -312,12 +282,8 @@ void main() {
         );
         when(() => salesOrgBlocMock.state).thenReturn(
           SalesOrgState.initial().copyWith(
-            configs: SalesOrganisationConfigs.empty().copyWith(
-              enablePaymentTerms: false,
-            ),
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
+            configs: fakeSalesOrganisationConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
 
@@ -334,19 +300,11 @@ void main() {
     );
 
     testWidgets(
-      'Show tax details on material level when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for vn with material level tax',
+      '=> Show tax details on material level when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for vn with material level tax',
       (tester) async {
-        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-          displayItemTaxBreakdown: true,
-          displaySubtotalTaxBreakdown: true,
-          vatValue: 5,
-          currency: Currency('vnd'),
-        );
         final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('3700'),
-          ),
-          configs: salesOrgConfig,
+          salesOrganisation: fakeVNSalesOrganisation,
+          configs: fakeVNSalesOrgConfigTaxBreakdownEnabled,
         );
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[
@@ -361,10 +319,10 @@ void main() {
               price: Price.empty().copyWith(
                 finalPrice: MaterialPrice(234.50),
               ),
-              salesOrgConfig: salesOrgConfig,
+              salesOrgConfig: fakeVNSalesOrgConfigTaxBreakdownEnabled,
             ),
           ],
-          config: salesOrgConfig,
+          config: fakeVNSalesOrgConfigTaxBreakdownEnabled,
         );
 
         when(() => salesOrgBlocMock.state).thenReturn(
@@ -376,10 +334,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('3700'),
-            ),
-            salesOrgConfigs: salesOrgConfig,
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakeVNSalesOrgConfigTaxBreakdownEnabled,
           ),
         );
 
@@ -413,19 +369,11 @@ void main() {
     );
 
     testWidgets(
-      'Show tax details when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for my ',
+      '=> Show tax details when displaySubtotalTaxBreakdown && displayItemTaxBreakdown is enabled for my ',
       (tester) async {
-        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-          displayItemTaxBreakdown: true,
-          displaySubtotalTaxBreakdown: true,
-          vatValue: 5,
-          currency: Currency('myr'),
-        );
         final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('2001'),
-          ),
-          configs: salesOrgConfig,
+          salesOrganisation: fakeMYSalesOrganisation,
+          configs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
         );
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[
@@ -440,10 +388,10 @@ void main() {
               price: Price.empty().copyWith(
                 finalPrice: MaterialPrice(234.50),
               ),
-              salesOrgConfig: salesOrgConfig,
+              salesOrgConfig: fakeMYSalesOrgConfigTaxBreakdownEnabled,
             ),
           ],
-          config: salesOrgConfig,
+          config: fakeMYSalesOrgConfigTaxBreakdownEnabled,
         );
 
         when(() => salesOrgBlocMock.state).thenReturn(
@@ -451,10 +399,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('2001'),
-            ),
-            salesOrgConfigs: salesOrgConfig,
+            salesOrganisation: fakeMYSalesOrganisation,
+            salesOrgConfigs: fakeMYSalesOrgConfigTaxBreakdownEnabled,
           ),
         );
         when(() => cartBloc.state).thenReturn(
@@ -491,19 +437,11 @@ void main() {
     );
 
     testWidgets(
-      'Do not Show tax details on total when displaySubtotalTaxBreakdown is disabled for vn',
+      '=> Do not Show tax details on total when displaySubtotalTaxBreakdown is disabled for vn',
       (tester) async {
-        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-          displayItemTaxBreakdown: true,
-          displaySubtotalTaxBreakdown: false,
-          vatValue: 5,
-          currency: Currency('vnd'),
-        );
         final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('3700'),
-          ),
-          configs: salesOrgConfig,
+          salesOrganisation: fakeVNSalesOrganisation,
+          configs: fakeVNSalesOrgConfigItemTaxBreakdownEnabled,
         );
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[
@@ -518,10 +456,10 @@ void main() {
               price: Price.empty().copyWith(
                 finalPrice: MaterialPrice(234.50),
               ),
-              salesOrgConfig: salesOrgConfig,
+              salesOrgConfig: fakeVNSalesOrgConfigItemTaxBreakdownEnabled,
             ),
           ],
-          config: salesOrgConfig,
+          config: fakeVNSalesOrgConfigItemTaxBreakdownEnabled,
         );
 
         when(() => salesOrgBlocMock.state).thenReturn(
@@ -529,10 +467,8 @@ void main() {
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('3700'),
-            ),
-            salesOrgConfigs: salesOrgConfig,
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakeVNSalesOrgConfigItemTaxBreakdownEnabled,
           ),
         );
         when(() => cartBloc.state).thenReturn(
@@ -569,14 +505,11 @@ void main() {
     );
 
     testWidgets(
-      'Do not Show delivery Instruction textfield  when displaySubtotalTaxBreakdown is false',
+      '=> Do not Show delivery Instruction textfield  when displaySubtotalTaxBreakdown is false',
       (tester) async {
-        final salesOrgConfig = SalesOrganisationConfigs.empty();
         final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('3050'),
-          ),
-          configs: salesOrgConfig,
+          salesOrganisation: fakeVNSalesOrganisation,
+          configs: fakeEmptySalesConfigs,
         );
 
         when(() => salesOrgBlocMock.state).thenReturn(
@@ -593,23 +526,16 @@ void main() {
     );
 
     testWidgets(
-      'Do not Show delivery Instruction textfield  when displaySubtotalTaxBreakdown is true',
+      '=> Do not Show delivery Instruction textfield  when displaySubtotalTaxBreakdown is true',
       (tester) async {
-        final salesOrgConfig = SalesOrganisationConfigs.empty().copyWith(
-          enableSpecialInstructions: true,
-        );
         final salesOrgState = SalesOrgState.initial().copyWith(
-          salesOrganisation: SalesOrganisation.empty().copyWith(
-            salesOrg: SalesOrg('3050'),
-          ),
-          configs: salesOrgConfig,
+          salesOrganisation: fakeVNSalesOrganisation,
+          configs: fakeSalesOrgConfigSpecialInstructionsEnabled,
         );
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: SalesOrganisation.empty().copyWith(
-              salesOrg: SalesOrg('3050'),
-            ),
-            salesOrgConfigs: salesOrgConfig,
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakeSalesOrgConfigSpecialInstructionsEnabled,
           ),
         );
 
@@ -626,5 +552,99 @@ void main() {
         );
       },
     );
+
+    testWidgets('=> Hide Request Delivery Date', (WidgetTester tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeEmptySalesConfigs,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      // Verify that the initial delivery date is invisible
+      expect(
+        find.textContaining('Request delivery date'.tr(), findRichText: true),
+        findsNothing,
+      );
+      expect(
+        find.textContaining('Select date'.tr(), findRichText: true),
+        findsNothing,
+      );
+    });
+
+    testWidgets('=> Show Request Delivery Date', (WidgetTester tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeMYSalesOrgConfigFutureDeliveryDayEnabled,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      // Verify that the initial delivery date is displayed correctly
+      expect(
+        find.textContaining('Request delivery date'.tr(), findRichText: true),
+        findsOneWidget,
+      );
+      expect(
+        find.textContaining('Select date'.tr(), findRichText: true),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('=> Selecting a date updates the delivery date text',
+        (WidgetTester tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeMYSalesOrgConfigFutureDeliveryDayEnabled,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      // Verify that the initial delivery date is displayed correctly
+      expect(
+        find.textContaining('Request delivery date'.tr(), findRichText: true),
+        findsOneWidget,
+      );
+      expect(
+        find.textContaining('Select date'.tr(), findRichText: true),
+        findsOneWidget,
+      );
+
+      // Simulate tapping the select date button
+      await tester.tap(find.byKey(WidgetKeys.selectDate));
+      await tester.pumpAndSettle();
+
+      // Verify that the date picker is displayed
+      final okButton = find.text('OK');
+      expect(okButton, findsOneWidget);
+
+      // Select a date from the date picker
+      final selectedDate = DateTime.now().add(
+        Duration(
+          days: fakeMYSalesOrgConfigFutureDeliveryDayEnabled
+              .futureDeliveryDay.intValue,
+        ),
+      );
+      await tester.tap(find.text(selectedDate.day.toString()));
+      await tester.pumpAndSettle();
+
+      await tester.tap(okButton);
+      await tester.pumpAndSettle();
+
+      // Verify that the selected date is updated in the delivery date text field
+      expect(
+        find.text(DateTimeUtils.getDeliveryDateString(selectedDate)),
+        findsOneWidget,
+      );
+    });
   });
 }

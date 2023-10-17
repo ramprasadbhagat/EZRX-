@@ -17,7 +17,7 @@ const _fakeId = 'fake-id';
 const _fakeRoleDesc = 'fake-role-desc';
 const _fakeRoleId = 'fake-role-id';
 
-User fakeRootAdminUser = User.empty().copyWith(
+final fakeRootAdminUser = User.empty().copyWith(
   username: Username(_fakeUserName),
   id: _fakeId,
   role: Role.empty().copyWith(
@@ -27,7 +27,7 @@ User fakeRootAdminUser = User.empty().copyWith(
   ),
 );
 
-User fakeClientUser = User.empty().copyWith(
+final fakeClientUser = User.empty().copyWith(
   username: Username(_fakeUserName),
   id: _fakeId,
   role: Role.empty().copyWith(
@@ -37,7 +37,7 @@ User fakeClientUser = User.empty().copyWith(
   ),
 );
 
-User fakeClient = User.empty().copyWith(
+final fakeClient = User.empty().copyWith(
   username: Username(_fakeUserName),
   id: _fakeId,
   role: Role.empty().copyWith(
@@ -47,7 +47,11 @@ User fakeClient = User.empty().copyWith(
   ),
 );
 
-User fakeInternalSalesRepUser = User.empty().copyWith(
+final fakeClientOrderTypeEnabled = fakeClient.copyWith(
+  enableOrderType: true,
+);
+
+final fakeInternalSalesRepUser = User.empty().copyWith(
   username: Username(_fakeUserName),
   id: _fakeId,
   role: Role.empty().copyWith(
@@ -57,7 +61,7 @@ User fakeInternalSalesRepUser = User.empty().copyWith(
   ),
 );
 
-User fakeExternalSalesRepUser = User.empty().copyWith(
+final fakeExternalSalesRepUser = User.empty().copyWith(
   username: Username(_fakeUserName),
   id: _fakeId,
   role: Role.empty().copyWith(
@@ -67,7 +71,7 @@ User fakeExternalSalesRepUser = User.empty().copyWith(
   ),
 );
 
-User fakeSalesRepUser = User.empty().copyWith(
+final fakeSalesRepUser = User.empty().copyWith(
   username: Username(_fakeUserName),
   id: _fakeId,
   role: Role.empty().copyWith(
@@ -77,7 +81,7 @@ User fakeSalesRepUser = User.empty().copyWith(
   ),
 );
 
-User fakeReturnApproverUser = User.empty().copyWith(
+final fakeReturnApproverUser = User.empty().copyWith(
   username: Username(_fakeUserName),
   id: _fakeId,
   role: Role.empty().copyWith(
@@ -87,7 +91,7 @@ User fakeReturnApproverUser = User.empty().copyWith(
   ),
 );
 
-User fakeZPAdminUser = User.empty().copyWith(
+final fakeZPAdminUser = User.empty().copyWith(
   username: Username(_fakeUserName),
   id: _fakeId,
   role: Role.empty().copyWith(

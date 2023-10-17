@@ -2,20 +2,24 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 const _fakeSaleOrgId = 'fake-sale-org-id-1234';
-const _fakeVNSalesOrgID = '3072';
-const _fakeSaleOrgMyId = 'MY';
-SalesOrg fakeVNSalesOrg = SalesOrg(_fakeVNSalesOrgID);
-SalesOrg fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
-SalesOrg fakeMYSalesOrg = SalesOrg(_fakeSaleOrgMyId);
+const _fakeVNSalesOrgId = '3072';
+const _fakeMYSalesOrgId = '2001';
 
-SalesOrganisation fakeSalesOrganisation =
+final fakeVNSalesOrg = SalesOrg(_fakeVNSalesOrgId);
+final fakeMYSalesOrg = SalesOrg(_fakeMYSalesOrgId);
+final fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
+
+final fakeSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg);
 
-SalesOrganisation fakeSalesMYOrganisation = SalesOrganisation.empty().copyWith(
-  salesOrg: fakeMYSalesOrg,
-);
+final fakeMYSalesOrganisation =
+    SalesOrganisation.empty().copyWith(salesOrg: fakeMYSalesOrg);
+
+final fakeVNSalesOrganisation =
+    SalesOrganisation.empty().copyWith(salesOrg: fakeVNSalesOrg);
 
 final fakeEmptySalesConfigs = SalesOrganisationConfigs.empty();
 
@@ -48,8 +52,49 @@ final salesOrgConfigDisabledBatchNumDisplay =
   batchNumDisplay: false,
 );
 
-SalesOrganisationConfigs salesOrgConfigEnabledZDP5 =
-    SalesOrganisationConfigs.empty().copyWith(
+final salesOrgConfigEnabledZDP5 = SalesOrganisationConfigs.empty().copyWith(
   enableZDP5: true,
   salesOrg: fakeVNSalesOrg,
+);
+
+final fakeSalesOrgConfigSpecialInstructionsEnabled =
+    SalesOrganisationConfigs.empty().copyWith(
+  enableSpecialInstructions: true,
+);
+
+final fakeSalesOrgConfigPoNumberRequired =
+    SalesOrganisationConfigs.empty().copyWith(
+  poNumberRequired: PoNumberRequired(true),
+);
+
+final fakeSalesOrgConfigPaymentTermsEnabled =
+    SalesOrganisationConfigs.empty().copyWith(
+  enablePaymentTerms: true,
+);
+
+final fakeVNSalesOrgConfigItemTaxBreakdownEnabled =
+    SalesOrganisationConfigs.empty().copyWith(
+  displayItemTaxBreakdown: true,
+  vatValue: 5,
+  currency: Currency('vnd'),
+);
+
+final fakeVNSalesOrgConfigTaxBreakdownEnabled =
+    fakeVNSalesOrgConfigItemTaxBreakdownEnabled.copyWith(
+  displaySubtotalTaxBreakdown: true,
+);
+
+final fakeMYSalesOrgConfigTaxBreakdownEnabled =
+    SalesOrganisationConfigs.empty().copyWith(
+  displayItemTaxBreakdown: true,
+  displaySubtotalTaxBreakdown: true,
+  vatValue: 5,
+  currency: Currency('myr'),
+);
+
+final fakeMYSalesOrgConfigFutureDeliveryDayEnabled =
+    SalesOrganisationConfigs.empty().copyWith(
+  enableFutureDeliveryDay: true,
+  futureDeliveryDay: FutureDeliveryDay('7'),
+  salesOrg: fakeMYSalesOrg,
 );
