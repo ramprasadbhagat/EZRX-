@@ -16,16 +16,14 @@ class _PaymentSummaryStatusesSelector extends StatelessWidget {
       ) {
         return Column(
           children: state.statuses.map((StatusType status) {
+            final name = status.getValue();
             final value = state.filter.filterStatuses.contains(status);
 
             return CheckboxListTile(
-              key: WidgetKeys.paymentSummaryFilterStatus(
-                status.getValue(),
-                value,
-              ),
+              key: WidgetKeys.paymentSummaryFilterStatus(name, value),
               contentPadding: EdgeInsets.zero,
               title: Text(
-                status.getValue(),
+                name,
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall!

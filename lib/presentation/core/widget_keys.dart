@@ -732,6 +732,26 @@ class WidgetKeys {
   static Key paymentSummaryFilterStatus(String name, bool value) =>
       Key('paymentSummaryFilterStatus$name$value');
   static const Key paymentSummaryFilterIcon = Key('paymentSummaryFilterIcon');
+  static const Key paymentSummaryGroup = Key('paymentSummaryGroup');
+  static const Key paymentSummaryItem = Key('paymentSummaryItem');
+  static const Key paymentSummaryGroupDate = Key('paymentSummaryGroupDate');
+  static const Key paymentSummaryTile = Key('paymentSummaryTile');
+  static const Key paymentSummaryTileStatus = Key('paymentSummaryTileStatus');
+  static const Key paymentSummaryDateOrExpiry =
+      Key('paymentSummaryDateOrExpiry');
+  static const Key paymentSummaryAmountAndCurrency =
+      Key('paymentSummaryAmountAndCurrency');
+  static const Key paymentSummarySearchBar = Key('paymentSummarySearchBar');
+  static const Key paymentSummaryFilterButton =
+      Key('paymentSummaryFilterButton');
+  static const Key paymentSummaryDownloadButton =
+      Key('paymentSummaryDownloadButton');
+  static const Key paymentSummaryDownloadInProgress =
+      Key('paymentSummaryDownloadInProgress');
+  static const Key paymentSummaryDownloadSuccess =
+      Key('paymentSummaryDownloadSuccess');
+  static const Key paymentSummaryScrollToTopButton =
+      Key('paymentSummaryScrollToTopButton');
 
   //============================================================
   //  Statement of account
@@ -901,6 +921,9 @@ class WidgetKeys {
   static const Key paymentHomeSoa = Key('paymentHomeSoa');
   static const Key paymentAdviceCreatedPageBack =
       Key('paymentAdviceCreatedPageBack');
+  static const Key creditDetailsPageListView = Key('creditDetailsPageListView');
+  static const Key newPaymentButton = Key('newPaymentButton');
+
   //===========================================================
   //  New Payment
   //============================================================
@@ -910,11 +933,10 @@ class WidgetKeys {
   static const Key textOutstanding = Key('textOutstanding');
   static const Key paymentItem = Key('paymentItem');
   static const Key itemCheckBadge = Key('itemCheckBadge');
-  static const Key creditDetailsPageListView = Key('creditDetailsPageListView');
-  static const Key newPaymentButton = Key('newPaymentButton');
   static const Key itemStatementAccounts = Key('itemStatementAccounts');
   static const Key downloadStatementAccountIcon =
       Key('downloadStatementAccountIcon');
+
   //===========================================================
   //  Account summary
   //============================================================

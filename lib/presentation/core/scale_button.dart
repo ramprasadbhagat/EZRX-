@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -79,6 +80,7 @@ class _ScaleButtonState extends State<ScaleButton> {
         isExpanded
             ? const SizedBox.shrink()
             : FloatingActionButton.small(
+                key: WidgetKeys.paymentSummaryScrollToTopButton,
                 backgroundColor: ZPColors.lightYellow,
                 onPressed: () {
                   widget.scrollController.position.animateTo(

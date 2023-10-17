@@ -80,6 +80,7 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
         actions: const [_PaymentSummaryDownloadButton()],
       ),
       floatingActionButton: ScaleButton(
+        key: WidgetKeys.newPaymentButton,
         icon: Icons.add,
         label: 'New payment',
         onPress: () => _toNewPayment(context),
@@ -94,9 +95,13 @@ class _PaymentSummaryPageState extends State<PaymentSummaryPage> {
               child: Row(
                 children: const [
                   Expanded(
-                    child: _PaymentSummarySearchBar(),
+                    child: _PaymentSummarySearchBar(
+                      key: WidgetKeys.paymentSummarySearchBar,
+                    ),
                   ),
-                  _PaymentSummaryFilterIcon(),
+                  _PaymentSummaryFilterIcon(
+                    key: WidgetKeys.paymentSummaryFilterButton,
+                  ),
                 ],
               ),
             ),

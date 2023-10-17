@@ -41,6 +41,7 @@ class _PaymentSummaryGroupList extends StatelessWidget {
             ),
         isLoading: state.isFetching,
         itemBuilder: (context, index, itemInfo) => _PaymentSummaryGroupItem(
+          key: WidgetKeys.paymentSummaryItem,
           paymentSummaryGroup: itemInfo,
           showDivider: index != 0,
         ),

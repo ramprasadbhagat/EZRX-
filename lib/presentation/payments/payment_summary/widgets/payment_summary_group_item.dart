@@ -26,6 +26,7 @@ class _PaymentSummaryGroupItem extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20, top: 16),
           child: Text(
             '${context.tr('Created on')} ${paymentSummaryGroup.createdDate.dateString}',
+            key: WidgetKeys.paymentSummaryGroupDate,
             style: Theme.of(context)
                 .textTheme
                 .labelSmall
@@ -58,6 +59,7 @@ class _PaymentSummaryItem extends StatelessWidget {
     return CustomCard(
       margin: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
       child: ListTile(
+        key: WidgetKeys.paymentSummaryTile,
         onTap: () {
           context.read<PaymentSummaryDetailsBloc>().add(
                 PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
@@ -83,10 +85,12 @@ class _PaymentSummaryItem extends StatelessWidget {
               flex: 2,
               child: Text(
                 '${context.tr('PA')} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
+                key: WidgetKeys.commonTileItemLabel,
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
             StatusLabel(
+              key: WidgetKeys.paymentSummaryTileStatus,
               status:
                   StatusType(paymentSummaryDetails.status.displayStringValue),
             ),
@@ -99,6 +103,7 @@ class _PaymentSummaryItem extends StatelessWidget {
             children: [
               Text(
                 paymentSummaryDetails.dateOrExpiry,
+                key: WidgetKeys.paymentSummaryDateOrExpiry,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: paymentSummaryDetails
                           .status.getPaymentDisplayStatusTextColor,
@@ -106,6 +111,7 @@ class _PaymentSummaryItem extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               PriceComponent(
+                key: WidgetKeys.paymentSummaryAmountAndCurrency,
                 price: paymentSummaryDetails.paymentAmount.toString(),
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,

@@ -22,6 +22,7 @@ class _PaymentSummaryDownloadButton extends StatelessWidget {
             },
             (_) {
               CustomSnackBar(
+                key: WidgetKeys.paymentSummaryDownloadSuccess,
                 messageText: 'File downloaded successfully',
               ).show(context);
             },
@@ -32,6 +33,7 @@ class _PaymentSummaryDownloadButton extends StatelessWidget {
           ? Padding(
               padding: const EdgeInsets.all(16.0),
               child: LoadingAnimationWidget.discreteCircle(
+                key: WidgetKeys.paymentSummaryDownloadInProgress,
                 color: ZPColors.primary,
                 secondRingColor: ZPColors.secondary,
                 thirdRingColor: ZPColors.orange,
@@ -39,6 +41,7 @@ class _PaymentSummaryDownloadButton extends StatelessWidget {
               ),
             )
           : IconButton(
+              key: WidgetKeys.paymentSummaryDownloadButton,
               onPressed: () =>
                   context.read<DownloadPaymentAttachmentsBloc>().add(
                         const DownloadPaymentAttachmentEvent
