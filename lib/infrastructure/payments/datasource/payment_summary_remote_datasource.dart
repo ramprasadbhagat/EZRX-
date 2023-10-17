@@ -36,6 +36,7 @@ class PaymentSummaryRemoteDataSource {
       'after': offset,
       'orderBy': [
         {'order': 'desc', 'field': 'createdDate'},
+        {'order': 'desc', 'field': 'PaymentBatchAdditionalInfo'},
       ],
       'filterBy': filterList,
     };

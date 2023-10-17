@@ -9,9 +9,8 @@ query customerPayment(\$request: customerPaymentRequest!) {
             paymentMethod
             iban
             bankIdentification
-            bankCountryKey]
-            
-                            bankKey
+            bankCountryKey
+            bankKey
             bankAccountNumber
             bankName
             paymentCardID
@@ -55,7 +54,17 @@ variables:
     "salesOrg": "2601",
     "customerCode": "30031505",
     "first": 20,
-    "after": 0
+    "after": 0,
+    "orderBy":[
+    {
+        "order": "desc",
+        "field": "createdDate"
+    },
+    {
+        "order": "desc",
+        "field": "PaymentBatchAdditionalInfo"
+    }
+    ]
   }
 }
 
