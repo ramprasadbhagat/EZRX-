@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -9,6 +10,10 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_document_type/order_document_type_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -49,6 +54,10 @@ class CustomerCodeBlocMock
 
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
+class PoAttachmentBlocMock
+    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
+    implements PoAttachmentBloc {}
+
 class OrderSummaryBlocMock
     extends MockBloc<OrderSummaryEvent, OrderSummaryState>
     implements OrderSummaryBloc {}
@@ -68,6 +77,7 @@ void main() {
   late EligibilityBloc eligibilityBloc;
   late CustomerCodeBloc customerCodeBloc;
   late OrderSummaryBloc orderSummaryBlocMock;
+  late PoAttachmentBloc poAttachmentBloc;
   final userBlocMock = UserMockBloc();
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
@@ -93,6 +103,8 @@ void main() {
       autoRouterMock = locator<AppRouter>();
       orderSummaryBlocMock = OrderSummaryBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
+      poAttachmentBloc = PoAttachmentBlocMock();
+
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial(),
       );
@@ -102,7 +114,9 @@ void main() {
       when(() => customerCodeBloc.state).thenReturn(
         CustomerCodeState.initial(),
       );
-
+      when(() => poAttachmentBloc.state).thenReturn(
+        PoAttachmentState.initial(),
+      );
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(isFetching: false),
       );
@@ -114,32 +128,46 @@ void main() {
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
     });
     Widget getScopedWidget() {
-      return WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        usingLocalization: true,
-        providers: [
-          BlocProvider<PaymentTermBloc>(
-            create: (context) => paymentTermBlocMock,
-          ),
-          BlocProvider<AdditionalDetailsBloc>(
-            create: (context) => additionalDetailsBlocMock,
-          ),
-          BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
-          BlocProvider<UserBloc>(create: (context) => userBlocMock),
-          BlocProvider<OrderSummaryBloc>(
-            create: (context) => orderSummaryBlocMock,
-          ),
-          BlocProvider<OrderDocumentTypeBloc>(
-            create: (context) => orderDocumentTypeBlocMock,
-          ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBloc,
-          ),
-          BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
-          BlocProvider<CartBloc>(create: (context) => cartBloc),
+      return EasyLocalization(
+        supportedLocales: const [
+          Locale('en'),
         ],
-        child: const Material(
-          child: CheckoutPage(),
+        path: 'assets/langs/langs.csv',
+        startLocale: const Locale('en'),
+        fallbackLocale: const Locale('en'),
+        saveLocale: true,
+        useOnlyLangCode: true,
+        assetLoader: CsvAssetLoader(),
+        child: WidgetUtils.getScopedWidget(
+          autoRouterMock: autoRouterMock,
+          usingLocalization: true,
+          providers: [
+            BlocProvider<PaymentTermBloc>(
+              create: (context) => paymentTermBlocMock,
+            ),
+            BlocProvider<AdditionalDetailsBloc>(
+              create: (context) => additionalDetailsBlocMock,
+            ),
+            BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
+            BlocProvider<UserBloc>(create: (context) => userBlocMock),
+            BlocProvider<PoAttachmentBloc>(
+              create: (context) => poAttachmentBloc,
+            ),
+            BlocProvider<OrderSummaryBloc>(
+              create: (context) => orderSummaryBlocMock,
+            ),
+            BlocProvider<OrderDocumentTypeBloc>(
+              create: (context) => orderDocumentTypeBlocMock,
+            ),
+            BlocProvider<CustomerCodeBloc>(
+              create: (context) => customerCodeBloc,
+            ),
+            BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
+            BlocProvider<CartBloc>(create: (context) => cartBloc),
+          ],
+          child: const Material(
+            child: CheckoutPage(),
+          ),
         ),
       );
     }
@@ -225,6 +253,108 @@ void main() {
               .validator
               ?.call('PO reference is a required field.'),
           null,
+        );
+      },
+    );
+
+    testWidgets(
+      '=> test PO Attachment in place Order when poAttachmentRequired is true ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isPoAttachmentValidated: false,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              showPOAttachment: true,
+              enablePOAttachmentRequired: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        expect(
+          find.text(
+            'Upload attachment',
+          ),
+          findsOneWidget,
+        );
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        expect(
+          find.text(
+            'PO attachment is required',
+          ),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      '=> test PO Attachment in place Order when poAttachmentRequired is false ',
+      (tester) async {
+        when(() => additionalDetailsBlocMock.state).thenReturn(
+          AdditionalDetailsState.initial().copyWith(
+            isPoAttachmentValidated: true,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              showPOAttachment: true,
+            ),
+            salesOrganisation: SalesOrganisation.empty().copyWith(
+              salesOrg: SalesOrg('2001'),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        expect(
+          find.text(
+            'Upload attachment',
+          ),
+          findsOneWidget,
+        );
+
+        final placeOrder = find.text('Place order');
+        expect(placeOrder, findsOneWidget);
+        await tester.tap(placeOrder);
+        await tester.pump();
+
+        expect(
+          find.text(
+            'PO attachment is required',
+          ),
+          findsNothing,
+        );
+      },
+    );
+
+    testWidgets(
+      '=> test PO Attachment in place Order when showAttachment is false ',
+      (tester) async {
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        expect(
+          find.text(
+            'Upload attachment',
+          ),
+          findsNothing,
         );
       },
     );
