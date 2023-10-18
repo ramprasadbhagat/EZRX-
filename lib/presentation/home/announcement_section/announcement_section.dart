@@ -40,37 +40,12 @@ class AnnouncementSection extends StatelessWidget {
                     context.router.pushNamed('announcements_page'),
               ),
             ),
-            _AnnouncementSectionItemScrollList(
-              announcementItemList: state.announcementInfo.announcementList,
-            ),
+            ...state.announcementInfo.homePageAnnouncementList
+                .map((e) => _AnnouncementSectionItem(announcementItem: e))
+                .toList(),
           ],
         );
       },
-    );
-  }
-}
-
-class _AnnouncementSectionItemScrollList extends StatelessWidget {
-  final List<AnnouncementArticleItem> announcementItemList;
-  const _AnnouncementSectionItemScrollList({
-    Key? key,
-    required this.announcementItemList,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 140,
-      child: ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
-        scrollDirection: Axis.horizontal,
-        itemCount: announcementItemList.length,
-        itemBuilder: (context, index) {
-          return _AnnouncementSectionItem(
-            announcementItem: announcementItemList[index],
-          );
-        },
-      ),
     );
   }
 }
@@ -93,7 +68,6 @@ class _AnnouncementSectionItem extends StatelessWidget {
         context.router.pushNamed('announcement_info_details');
       },
       child: CustomCard(
-        width: MediaQuery.of(context).size.width * 0.5,
         margin: const EdgeInsets.all(8),
         clipBehavior: Clip.antiAlias,
         child: _ItemDescription(

@@ -37,6 +37,11 @@ class AnnouncementArticleInfo with _$AnnouncementArticleInfo {
             (element) => element.id != announcementInfoId,
           )
           .toList();
+
+  List<AnnouncementArticleItem> get homePageAnnouncementList =>
+      announcementList.length > 4
+          ? announcementList.sublist(0, 4)
+          : announcementList;
 }
 
 @freezed
