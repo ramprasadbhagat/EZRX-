@@ -20,12 +20,23 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   @override
   void initState() {
     _controller.value = TextEditingValue(
-      text: widget.comboItem.quantity.toString(),
+      text: _qty,
       selection: TextSelection.collapsed(
         offset: _controller.selection.base.offset,
       ),
     );
     super.initState();
+  }
+
+  String get _qty => widget.comboItem.quantity.toString();
+
+  @override
+  void didUpdateWidget(covariant _MaterialQuantitySection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_qty != _controller.text) {
+      _controller.text = _qty;
+      _controller.selection = TextSelection.collapsed(offset: _qty.length);
+    }
   }
 
   @override
@@ -48,7 +59,14 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
           quantityTextKey: WidgetKeys.quantityInputTextKey,
           minimumQty: widget.comboDealMaterial.minQty,
           controller: _controller,
-          onFieldChange: (value) {},
+          onFieldChange: (quantity) {
+            bloc.add(
+              ComboDealMaterialDetailEvent.updateItemQuantity(
+                item: widget.comboItem.getMaterialNumber,
+                qty: quantity,
+              ),
+            );
+          },
           minusPressed: (quantity) {
             bloc.add(
               ComboDealMaterialDetailEvent.updateItemQuantity(

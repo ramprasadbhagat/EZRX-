@@ -10,7 +10,7 @@ class PriceBonusDto with _$PriceBonusDto {
   const PriceBonusDto._();
 
   const factory PriceBonusDto({
-    @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
+    @JsonKey(name: 'bonusTiers', defaultValue: <PriceBonusItemDto>[])
         required List<PriceBonusItemDto> items,
   }) = _PriceBonusDto;
 
@@ -34,10 +34,10 @@ class PriceBonusItemDto with _$PriceBonusItemDto {
   const PriceBonusItemDto._();
 
   const factory PriceBonusItemDto({
-    @JsonKey(name: 'Calculation', defaultValue: '') required String calculation,
-    @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+    @JsonKey(name: 'calculation', defaultValue: '') required String calculation,
+    @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
         required int qualifyingQuantity,
-    @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+    @JsonKey(name: 'bonusMaterial', defaultValue: <BonusMaterialDto>[])
         required List<BonusMaterialDto> bonusMaterials,
   }) = _PriceBonusItemDto;
 
@@ -66,20 +66,20 @@ class BonusMaterialDto with _$BonusMaterialDto {
   const BonusMaterialDto._();
 
   const factory BonusMaterialDto({
-    @JsonKey(name: 'Id', defaultValue: 0) required int id,
-    @JsonKey(name: 'MaterialNumber', defaultValue: '')
+    @JsonKey(name: 'id', defaultValue: 0) required int id,
+    @JsonKey(name: 'materialNumber', defaultValue: '')
         required String materialNumber,
-    @JsonKey(name: 'MaterialDescription', defaultValue: '')
+    @JsonKey(name: 'materialDescription', defaultValue: '')
         required String materialDescription,
-    @JsonKey(name: 'Calculation', defaultValue: '') required String calculation,
-    @JsonKey(name: 'BonusRatio', defaultValue: 0) required int bonusRatio,
-    @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+    @JsonKey(name: 'calculation', defaultValue: '') required String calculation,
+    @JsonKey(name: 'bonusRatio', defaultValue: 0) required int bonusRatio,
+    @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
         required int qualifyingQuantity,
-    @JsonKey(name: 'BonusQuantity', defaultValue: 0) required int bonusQuantity,
-    @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+    @JsonKey(name: 'bonusQuantity', defaultValue: 0) required int bonusQuantity,
+    @JsonKey(name: 'limitPerTransaction', defaultValue: 0)
         required int limitPerTransaction,
-    @JsonKey(name: 'ConditionId', defaultValue: '') required String conditionId,
-    @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+    @JsonKey(name: 'conditionId', defaultValue: '') required String conditionId,
+    @JsonKey(name: 'oldMaterialCode', defaultValue: '')
         required String oldMaterialCode,
   }) = _BonusMaterialDto;
 

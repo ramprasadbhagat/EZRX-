@@ -12,51 +12,67 @@ class _CartPageScrollListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (item.materialInfo.type.typeCombo) {
+      return CartProductCombo(cartItem: item);
+    } else if (item.materialInfo.type.typeBundle) {
+      return CartProductBundle(
+        cartItem: item,
+      );
+    } else {
+      return _CartProductMaterial(
+        item: item,
+        showManufacturerName: showManufacturerName,
+      );
+    }
+  }
+}
+
+class _CartProductMaterial extends StatelessWidget {
+  final PriceAggregate item;
+  final bool showManufacturerName;
+
+  const _CartProductMaterial({
+    Key? key,
+    required this.item,
+    required this.showManufacturerName,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
     final isMYPnGSalesRep =
         context.read<EligibilityBloc>().state.isMYExternalSalesRepUser &&
             item.materialInfo.isPnGPrinciple;
 
-    return item.materialInfo.type.typeCombo
-        ? CartProductCombo(cartItem: item)
-        : Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (showManufacturerName)
-                _CartPageManufacturerName(
-                  key: WidgetKeys.cartPrincipalLabel,
-                  cartProduct: item.materialInfo,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (showManufacturerName)
+          _CartPageManufacturerName(
+            key: WidgetKeys.cartPrincipalLabel,
+            cartProduct: item.materialInfo,
+          ),
+        CartProductTile(
+          cartItem: item,
+        ),
+        if (item.displayOfferBonus || isMYPnGSalesRep)
+          ...item.addedBonusList
+              .map(
+                (e) => CartProductOfferBonus(
+                  bonusItem: e,
+                  cartProduct: item,
                 ),
-              item.materialInfo.type.typeBundle
-                  ? CartProductBundle(
-                      cartItem: item,
-                    )
-                  : CartProductTile(
-                      cartItem: item,
-                    ),
-              if (item.displayOfferBonus || isMYPnGSalesRep)
-                Column(
-                  children: item.addedBonusList
-                      .map(
-                        (e) => CartProductOfferBonus(
-                          bonusItem: e,
-                          cartProduct: item,
-                        ),
-                      )
-                      .toList(),
+              )
+              .toList(),
+        if (item.bonusSampleItems.isNotEmpty)
+          ...item.bonusSampleItems
+              .map(
+                (e) => CartProductTileBonus(
+                  bonusItem: e,
+                  cartProduct: item,
                 ),
-              if (item.bonusSampleItems.isNotEmpty)
-                Column(
-                  children: item.bonusSampleItems
-                      .map(
-                        (e) => CartProductTileBonus(
-                          bonusItem: e,
-                          cartProduct: item,
-                        ),
-                      )
-                      .toList(),
-                ),
-            ],
-          );
+              )
+              .toList(),
+      ],
+    );
   }
 }
 

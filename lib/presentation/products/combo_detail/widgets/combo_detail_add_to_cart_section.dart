@@ -77,7 +77,9 @@ class _CartPageCheckoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<CartBloc, CartState>(
       listenWhen: (previous, current) =>
-          previous.isUpserting != current.isUpserting && !current.isUpserting,
+          previous.isUpserting != current.isUpserting &&
+          !current.isUpserting &&
+          context.router.current.path == 'combo_detail',
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
           () {

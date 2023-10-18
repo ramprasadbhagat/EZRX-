@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/order_template.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_local.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -40,7 +41,7 @@ void main() {
 
           expect(
             result,
-            List.from(finalData)
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
                 .map((e) => PriceDto.fromJson(e).toDomain())
                 .toList(),
           );

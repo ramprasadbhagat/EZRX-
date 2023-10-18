@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_rule_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,16 +21,19 @@ void main() {
       };
     });
     test('Test fromDomain', () {
-      final configs =
-          PriceRuleDto.fromDomain(PriceRuleDto.fromJson(data).toDomain());
+      final configs = PriceRuleDto.fromDomain(
+        PriceRuleDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
+            .toDomain(),
+      );
       expect(configs.rate, 12);
     });
 
     test('Test tojson', () {
-      final configs =
-          PriceRuleDto.fromDomain(PriceRuleDto.fromJson(data).toDomain())
-              .toJson();
-      expect(configs['Rate'], 12);
+      final configs = PriceRuleDto.fromDomain(
+        PriceRuleDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
+            .toDomain(),
+      ).toJson();
+      expect(configs['rate'], 12);
     });
   });
 }

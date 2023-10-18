@@ -114,7 +114,15 @@ void main() {
     setUp(
       () {
         WidgetsFlutterBinding.ensureInitialized();
-
+        cartItems = cartItems
+            .map(
+              (e) => e.copyWith(
+                materialInfo: e.materialInfo.copyWith(
+                  type: MaterialInfoType('material'),
+                ),
+              ),
+            )
+            .toList();
         cartBloc = CartBlocMock();
         materialPriceBloc = MaterialPriceBlocMock();
         salesOrgBloc = SalesOrgBlocMock();

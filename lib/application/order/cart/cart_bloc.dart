@@ -86,9 +86,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (cartItemList) {
+            final cartProducts = _mappingPreviousInfo(
+              previousCartProducts: state.cartProducts,
+              currentCartProducts:
+                  cartItemList.priceAggregateWithDiscountedCount,
+              salesOrganisationConfigs: state.config,
+            );
+            _sortComboToFirstPosition(cartProducts);
             emit(
               state.copyWith(
-                cartProducts: cartItemList.priceAggregateWithDiscountedCount,
+                cartProducts: cartProducts,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
               ),
@@ -162,6 +169,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 items: cartProductListTemp,
               ),
             );
+
+            _sortComboToFirstPosition(cartProductListTemp);
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: none(),

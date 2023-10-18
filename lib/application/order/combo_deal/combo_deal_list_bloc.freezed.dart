@@ -647,6 +647,7 @@ abstract class _FetchPrincipleGroupDeal implements ComboDealListEvent {
 mixin _$ComboDealListState {
   Map<String, List<ComboDeal>> get comboDeals =>
       throw _privateConstructorUsedError;
+  PriceComboDeal get priceComboDeal => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -664,8 +665,11 @@ abstract class $ComboDealListStateCopyWith<$Res> {
   @useResult
   $Res call(
       {Map<String, List<ComboDeal>> comboDeals,
+      PriceComboDeal priceComboDeal,
       bool isFetching,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
+
+  $PriceComboDealCopyWith<$Res> get priceComboDeal;
 }
 
 /// @nodoc
@@ -682,6 +686,7 @@ class _$ComboDealListStateCopyWithImpl<$Res, $Val extends ComboDealListState>
   @override
   $Res call({
     Object? comboDeals = null,
+    Object? priceComboDeal = null,
     Object? isFetching = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
@@ -690,6 +695,10 @@ class _$ComboDealListStateCopyWithImpl<$Res, $Val extends ComboDealListState>
           ? _value.comboDeals
           : comboDeals // ignore: cast_nullable_to_non_nullable
               as Map<String, List<ComboDeal>>,
+      priceComboDeal: null == priceComboDeal
+          ? _value.priceComboDeal
+          : priceComboDeal // ignore: cast_nullable_to_non_nullable
+              as PriceComboDeal,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -699,6 +708,14 @@ class _$ComboDealListStateCopyWithImpl<$Res, $Val extends ComboDealListState>
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PriceComboDealCopyWith<$Res> get priceComboDeal {
+    return $PriceComboDealCopyWith<$Res>(_value.priceComboDeal, (value) {
+      return _then(_value.copyWith(priceComboDeal: value) as $Val);
+    });
   }
 }
 
@@ -712,8 +729,12 @@ abstract class _$$_ComboDealListStateCopyWith<$Res>
   @useResult
   $Res call(
       {Map<String, List<ComboDeal>> comboDeals,
+      PriceComboDeal priceComboDeal,
       bool isFetching,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption});
+
+  @override
+  $PriceComboDealCopyWith<$Res> get priceComboDeal;
 }
 
 /// @nodoc
@@ -728,6 +749,7 @@ class __$$_ComboDealListStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? comboDeals = null,
+    Object? priceComboDeal = null,
     Object? isFetching = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
@@ -736,6 +758,10 @@ class __$$_ComboDealListStateCopyWithImpl<$Res>
           ? _value._comboDeals
           : comboDeals // ignore: cast_nullable_to_non_nullable
               as Map<String, List<ComboDeal>>,
+      priceComboDeal: null == priceComboDeal
+          ? _value.priceComboDeal
+          : priceComboDeal // ignore: cast_nullable_to_non_nullable
+              as PriceComboDeal,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -753,6 +779,7 @@ class __$$_ComboDealListStateCopyWithImpl<$Res>
 class _$_ComboDealListState extends _ComboDealListState {
   const _$_ComboDealListState(
       {required final Map<String, List<ComboDeal>> comboDeals,
+      required this.priceComboDeal,
       required this.isFetching,
       required this.apiFailureOrSuccessOption})
       : _comboDeals = comboDeals,
@@ -767,13 +794,15 @@ class _$_ComboDealListState extends _ComboDealListState {
   }
 
   @override
+  final PriceComboDeal priceComboDeal;
+  @override
   final bool isFetching;
   @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'ComboDealListState(comboDeals: $comboDeals, isFetching: $isFetching, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
+    return 'ComboDealListState(comboDeals: $comboDeals, priceComboDeal: $priceComboDeal, isFetching: $isFetching, apiFailureOrSuccessOption: $apiFailureOrSuccessOption)';
   }
 
   @override
@@ -783,6 +812,8 @@ class _$_ComboDealListState extends _ComboDealListState {
             other is _$_ComboDealListState &&
             const DeepCollectionEquality()
                 .equals(other._comboDeals, _comboDeals) &&
+            (identical(other.priceComboDeal, priceComboDeal) ||
+                other.priceComboDeal == priceComboDeal) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.apiFailureOrSuccessOption,
@@ -794,6 +825,7 @@ class _$_ComboDealListState extends _ComboDealListState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_comboDeals),
+      priceComboDeal,
       isFetching,
       apiFailureOrSuccessOption);
 
@@ -808,6 +840,7 @@ class _$_ComboDealListState extends _ComboDealListState {
 abstract class _ComboDealListState extends ComboDealListState {
   const factory _ComboDealListState(
       {required final Map<String, List<ComboDeal>> comboDeals,
+      required final PriceComboDeal priceComboDeal,
       required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption}) = _$_ComboDealListState;
@@ -815,6 +848,8 @@ abstract class _ComboDealListState extends ComboDealListState {
 
   @override
   Map<String, List<ComboDeal>> get comboDeals;
+  @override
+  PriceComboDeal get priceComboDeal;
   @override
   bool get isFetching;
   @override

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/error/price_override_exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
@@ -50,7 +51,7 @@ class PriceOverrideRemoteDataSource {
       _priceOverrideExceptionChecker(res: priceList);
       final finalData = priceList.data['data']['price'];
 
-      return List.from(finalData)
+      return List.from(makeResponseCamelCase(jsonEncode(finalData)))
           .map((e) => PriceDto.fromJson(e).toDomain())
           .toList()
           .first;

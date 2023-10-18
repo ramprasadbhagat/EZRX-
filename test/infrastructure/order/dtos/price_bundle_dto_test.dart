@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bundle_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,18 +18,21 @@ void main() {
       };
     });
     test('Test fromDomain', () {
-      final configsDto =
-          PriceBundleDto.fromDomain(PriceBundleDto.fromJson(data).toDomain());
+      final configsDto = PriceBundleDto.fromDomain(
+        PriceBundleDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
+            .toDomain(),
+      );
 
       expect(configsDto.code, 'fake-code');
     });
 
     test('Test toJson', () {
-      final configsDto =
-          PriceBundleDto.fromDomain(PriceBundleDto.fromJson(data).toDomain())
-              .toJson();
+      final configsDto = PriceBundleDto.fromDomain(
+        PriceBundleDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
+            .toDomain(),
+      ).toJson();
 
-      expect(configsDto['BundleCode'], 'fake-code');
+      expect(configsDto['bundleCode'], 'fake-code');
     });
 
     test('Test PriceBundleItemDto fromdomain', () {
@@ -37,7 +43,8 @@ void main() {
         'Rate': 10,
       };
       final configsDtoMap = PriceBundleItemDto.fromDomain(
-        PriceBundleItemDto.fromJson(data).toDomain(),
+        PriceBundleItemDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
+            .toDomain(),
       );
       expect(configsDtoMap.sequence, 12);
     });
@@ -50,9 +57,10 @@ void main() {
         'Rate': 10,
       };
       final configsDtoMap = PriceBundleItemDto.fromDomain(
-        PriceBundleItemDto.fromJson(data).toDomain(),
+        PriceBundleItemDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
+            .toDomain(),
       ).toJson();
-      expect(configsDtoMap['Sequence'], 12);
+      expect(configsDtoMap['sequence'], 12);
     });
   });
 }

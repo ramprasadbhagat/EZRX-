@@ -20,9 +20,9 @@ PriceTierDto _$PriceTierDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PriceTierDto {
-  @JsonKey(name: 'Tier', defaultValue: '')
+  @JsonKey(name: 'tier', defaultValue: '')
   String get tier => throw _privateConstructorUsedError;
-  @JsonKey(name: 'PriceTier', defaultValue: <PriceTierItemDto>[])
+  @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
   List<PriceTierItemDto> get items => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,9 +38,10 @@ abstract class $PriceTierDtoCopyWith<$Res> {
       _$PriceTierDtoCopyWithImpl<$Res, PriceTierDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Tier', defaultValue: '') String tier,
-      @JsonKey(name: 'PriceTier', defaultValue: <PriceTierItemDto>[])
-      List<PriceTierItemDto> items});
+      {@JsonKey(name: 'tier', defaultValue: '')
+          String tier,
+      @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
+          List<PriceTierItemDto> items});
 }
 
 /// @nodoc
@@ -81,9 +82,10 @@ abstract class _$$_PriceTierDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Tier', defaultValue: '') String tier,
-      @JsonKey(name: 'PriceTier', defaultValue: <PriceTierItemDto>[])
-      List<PriceTierItemDto> items});
+      {@JsonKey(name: 'tier', defaultValue: '')
+          String tier,
+      @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
+          List<PriceTierItemDto> items});
 }
 
 /// @nodoc
@@ -117,9 +119,10 @@ class __$$_PriceTierDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PriceTierDto extends _PriceTierDto {
   const _$_PriceTierDto(
-      {@JsonKey(name: 'Tier', defaultValue: '') required this.tier,
-      @JsonKey(name: 'PriceTier', defaultValue: <PriceTierItemDto>[])
-      required final List<PriceTierItemDto> items})
+      {@JsonKey(name: 'tier', defaultValue: '')
+          required this.tier,
+      @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
+          required final List<PriceTierItemDto> items})
       : _items = items,
         super._();
 
@@ -127,11 +130,11 @@ class _$_PriceTierDto extends _PriceTierDto {
       _$$_PriceTierDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'Tier', defaultValue: '')
+  @JsonKey(name: 'tier', defaultValue: '')
   final String tier;
   final List<PriceTierItemDto> _items;
   @override
-  @JsonKey(name: 'PriceTier', defaultValue: <PriceTierItemDto>[])
+  @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
   List<PriceTierItemDto> get items {
     if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
@@ -173,19 +176,20 @@ class _$_PriceTierDto extends _PriceTierDto {
 
 abstract class _PriceTierDto extends PriceTierDto {
   const factory _PriceTierDto(
-      {@JsonKey(name: 'Tier', defaultValue: '') required final String tier,
-      @JsonKey(name: 'PriceTier', defaultValue: <PriceTierItemDto>[])
-      required final List<PriceTierItemDto> items}) = _$_PriceTierDto;
+      {@JsonKey(name: 'tier', defaultValue: '')
+          required final String tier,
+      @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
+          required final List<PriceTierItemDto> items}) = _$_PriceTierDto;
   const _PriceTierDto._() : super._();
 
   factory _PriceTierDto.fromJson(Map<String, dynamic> json) =
       _$_PriceTierDto.fromJson;
 
   @override
-  @JsonKey(name: 'Tier', defaultValue: '')
+  @JsonKey(name: 'tier', defaultValue: '')
   String get tier;
   @override
-  @JsonKey(name: 'PriceTier', defaultValue: <PriceTierItemDto>[])
+  @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
   List<PriceTierItemDto> get items;
   @override
   @JsonKey(ignore: true)
@@ -199,15 +203,15 @@ PriceTierItemDto _$PriceTierItemDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PriceTierItemDto {
-  @JsonKey(name: 'Type', defaultValue: '')
+  @JsonKey(name: 'type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ApplyBonus', defaultValue: false)
+  @JsonKey(name: 'applyBonus', defaultValue: false)
   bool get applyBonus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Sequence', defaultValue: 0)
+  @JsonKey(name: 'sequence', defaultValue: 0)
   int get sequence => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Quantity', defaultValue: 0)
+  @JsonKey(name: 'quantity', defaultValue: 0)
   int get quantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Rate', defaultValue: 0)
+  @JsonKey(name: 'rate', defaultValue: 0)
   double get rate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -223,11 +227,11 @@ abstract class $PriceTierItemDtoCopyWith<$Res> {
       _$PriceTierItemDtoCopyWithImpl<$Res, PriceTierItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Type', defaultValue: '') String type,
-      @JsonKey(name: 'ApplyBonus', defaultValue: false) bool applyBonus,
-      @JsonKey(name: 'Sequence', defaultValue: 0) int sequence,
-      @JsonKey(name: 'Quantity', defaultValue: 0) int quantity,
-      @JsonKey(name: 'Rate', defaultValue: 0) double rate});
+      {@JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'applyBonus', defaultValue: false) bool applyBonus,
+      @JsonKey(name: 'sequence', defaultValue: 0) int sequence,
+      @JsonKey(name: 'quantity', defaultValue: 0) int quantity,
+      @JsonKey(name: 'rate', defaultValue: 0) double rate});
 }
 
 /// @nodoc
@@ -283,11 +287,11 @@ abstract class _$$_PriceTierItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Type', defaultValue: '') String type,
-      @JsonKey(name: 'ApplyBonus', defaultValue: false) bool applyBonus,
-      @JsonKey(name: 'Sequence', defaultValue: 0) int sequence,
-      @JsonKey(name: 'Quantity', defaultValue: 0) int quantity,
-      @JsonKey(name: 'Rate', defaultValue: 0) double rate});
+      {@JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'applyBonus', defaultValue: false) bool applyBonus,
+      @JsonKey(name: 'sequence', defaultValue: 0) int sequence,
+      @JsonKey(name: 'quantity', defaultValue: 0) int quantity,
+      @JsonKey(name: 'rate', defaultValue: 0) double rate});
 }
 
 /// @nodoc
@@ -336,31 +340,35 @@ class __$$_PriceTierItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PriceTierItemDto extends _PriceTierItemDto {
   const _$_PriceTierItemDto(
-      {@JsonKey(name: 'Type', defaultValue: '') required this.type,
-      @JsonKey(name: 'ApplyBonus', defaultValue: false)
-      required this.applyBonus,
-      @JsonKey(name: 'Sequence', defaultValue: 0) required this.sequence,
-      @JsonKey(name: 'Quantity', defaultValue: 0) required this.quantity,
-      @JsonKey(name: 'Rate', defaultValue: 0) required this.rate})
+      {@JsonKey(name: 'type', defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'applyBonus', defaultValue: false)
+          required this.applyBonus,
+      @JsonKey(name: 'sequence', defaultValue: 0)
+          required this.sequence,
+      @JsonKey(name: 'quantity', defaultValue: 0)
+          required this.quantity,
+      @JsonKey(name: 'rate', defaultValue: 0)
+          required this.rate})
       : super._();
 
   factory _$_PriceTierItemDto.fromJson(Map<String, dynamic> json) =>
       _$$_PriceTierItemDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'Type', defaultValue: '')
+  @JsonKey(name: 'type', defaultValue: '')
   final String type;
   @override
-  @JsonKey(name: 'ApplyBonus', defaultValue: false)
+  @JsonKey(name: 'applyBonus', defaultValue: false)
   final bool applyBonus;
   @override
-  @JsonKey(name: 'Sequence', defaultValue: 0)
+  @JsonKey(name: 'sequence', defaultValue: 0)
   final int sequence;
   @override
-  @JsonKey(name: 'Quantity', defaultValue: 0)
+  @JsonKey(name: 'quantity', defaultValue: 0)
   final int quantity;
   @override
-  @JsonKey(name: 'Rate', defaultValue: 0)
+  @JsonKey(name: 'rate', defaultValue: 0)
   final double rate;
 
   @override
@@ -404,32 +412,35 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
 
 abstract class _PriceTierItemDto extends PriceTierItemDto {
   const factory _PriceTierItemDto(
-      {@JsonKey(name: 'Type', defaultValue: '') required final String type,
-      @JsonKey(name: 'ApplyBonus', defaultValue: false)
-      required final bool applyBonus,
-      @JsonKey(name: 'Sequence', defaultValue: 0) required final int sequence,
-      @JsonKey(name: 'Quantity', defaultValue: 0) required final int quantity,
-      @JsonKey(name: 'Rate', defaultValue: 0)
-      required final double rate}) = _$_PriceTierItemDto;
+      {@JsonKey(name: 'type', defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'applyBonus', defaultValue: false)
+          required final bool applyBonus,
+      @JsonKey(name: 'sequence', defaultValue: 0)
+          required final int sequence,
+      @JsonKey(name: 'quantity', defaultValue: 0)
+          required final int quantity,
+      @JsonKey(name: 'rate', defaultValue: 0)
+          required final double rate}) = _$_PriceTierItemDto;
   const _PriceTierItemDto._() : super._();
 
   factory _PriceTierItemDto.fromJson(Map<String, dynamic> json) =
       _$_PriceTierItemDto.fromJson;
 
   @override
-  @JsonKey(name: 'Type', defaultValue: '')
+  @JsonKey(name: 'type', defaultValue: '')
   String get type;
   @override
-  @JsonKey(name: 'ApplyBonus', defaultValue: false)
+  @JsonKey(name: 'applyBonus', defaultValue: false)
   bool get applyBonus;
   @override
-  @JsonKey(name: 'Sequence', defaultValue: 0)
+  @JsonKey(name: 'sequence', defaultValue: 0)
   int get sequence;
   @override
-  @JsonKey(name: 'Quantity', defaultValue: 0)
+  @JsonKey(name: 'quantity', defaultValue: 0)
   int get quantity;
   @override
-  @JsonKey(name: 'Rate', defaultValue: 0)
+  @JsonKey(name: 'rate', defaultValue: 0)
   double get rate;
   @override
   @JsonKey(ignore: true)

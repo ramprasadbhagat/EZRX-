@@ -1,6 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
-import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'combo_material_item_dto.freezed.dart';
 part 'combo_material_item_dto.g.dart';
@@ -41,12 +41,15 @@ class ComboMaterialItemDto with _$ComboMaterialItemDto {
     @JsonKey(name: 'materialNumber', defaultValue: 'EN')
         required String materialNumber,
     @JsonKey(name: 'taxM1', defaultValue: '') required String taxM1,
-    @JsonKey(name: 'taxes', defaultValue: []) required List<String> taxes,
+    @JsonKey(name: 'taxes', defaultValue: <String>[])
+        required List<String> taxes,
   }) = _ComboMaterialItemDto;
 
-  ComboMaterialItem toDomain() {
+  ComboMaterialItem toDomain(
+    PriceComboDealDto comboDeal,
+  ) {
     return ComboMaterialItem(
-      comboDeals: PriceComboDeal.empty(),
+      comboDeals: comboDeal.toDomain,
       isComboEligible: isComboEligible,
       valid: valid,
       quantity: quantity,

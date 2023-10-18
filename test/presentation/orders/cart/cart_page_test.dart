@@ -397,6 +397,7 @@ void main() {
         PriceAggregate.empty().copyWith(
           quantity: 2,
           materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
             materialNumber: MaterialNumber('000000000023168451'),
             materialDescription: ' Triglyceride Mosys D',
             principalData: PrincipalData.empty().copyWith(
@@ -1775,6 +1776,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
+                  type: MaterialInfoType('material'),
                   materialNumber: MaterialNumber('123456789'),
                   quantity: MaterialQty(1),
                   taxClassification:
@@ -1845,6 +1847,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
+                  type: MaterialInfoType('material'),
                   materialNumber: MaterialNumber('123456789'),
                   quantity: MaterialQty(1),
                   taxClassification:
@@ -1917,6 +1920,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
+                  type: MaterialInfoType('material'),
                   materialNumber: MaterialNumber('123456789'),
                   quantity: MaterialQty(1),
                   taxClassification:
@@ -1993,6 +1997,7 @@ void main() {
             cartProducts: <PriceAggregate>[
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
+                  type: MaterialInfoType('material'),
                   materialNumber: MaterialNumber('123456789'),
                   stockInfos: <StockInfo>[],
                   quantity: MaterialQty(1),

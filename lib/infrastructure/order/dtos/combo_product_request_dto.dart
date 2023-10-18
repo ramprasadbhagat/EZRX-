@@ -1,5 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_request_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'combo_product_request_dto.freezed.dart';
@@ -40,9 +40,9 @@ class ComboProductRequestDto with _$ComboProductRequestDto {
         required String comboDealType,
     @JsonKey(name: 'IsComboEligible', defaultValue: false)
         required bool isComboEligible,
-    @Default(PriceComboDealDto.empty)
+    @Default(PriceComboDealRequestDto.empty)
     @JsonKey(name: 'ComboDeals')
-        PriceComboDealDto comboDeal,
+        PriceComboDealRequestDto comboDeal,
     @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
         required double finalIndividualPrice,
     @JsonKey(name: 'Language', defaultValue: 'EN') required String language,
@@ -79,6 +79,8 @@ class ComboProductRequestDto with _$ComboProductRequestDto {
       type: 'combo',
       itemSource: 'EZRX',
       itemCheck: true,
+      comboDeal:
+          PriceComboDealRequestDto.fromDomain(comboProductRequest.comboDeals),
     );
   }
 

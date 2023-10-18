@@ -20,15 +20,15 @@ OverridenRuleTierDto _$OverridenRuleTierDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$OverridenRuleTierDto {
-  @JsonKey(name: 'Rate', defaultValue: 0)
+  @JsonKey(name: 'rate', defaultValue: 0)
   double get rate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Quantity', defaultValue: 0)
+  @JsonKey(name: 'quantity', defaultValue: 0)
   double get quantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Conditions', defaultValue: '')
+  @JsonKey(name: 'conditions', defaultValue: '')
   String get conditions => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Tier', defaultValue: '')
+  @JsonKey(name: 'tier', defaultValue: '')
   String get tier => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Overrider', defaultValue: '')
+  @JsonKey(name: 'overrider', defaultValue: '')
   String get overrider => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,11 +44,11 @@ abstract class $OverridenRuleTierDtoCopyWith<$Res> {
       _$OverridenRuleTierDtoCopyWithImpl<$Res, OverridenRuleTierDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Rate', defaultValue: 0) double rate,
-      @JsonKey(name: 'Quantity', defaultValue: 0) double quantity,
-      @JsonKey(name: 'Conditions', defaultValue: '') String conditions,
-      @JsonKey(name: 'Tier', defaultValue: '') String tier,
-      @JsonKey(name: 'Overrider', defaultValue: '') String overrider});
+      {@JsonKey(name: 'rate', defaultValue: 0) double rate,
+      @JsonKey(name: 'quantity', defaultValue: 0) double quantity,
+      @JsonKey(name: 'conditions', defaultValue: '') String conditions,
+      @JsonKey(name: 'tier', defaultValue: '') String tier,
+      @JsonKey(name: 'overrider', defaultValue: '') String overrider});
 }
 
 /// @nodoc
@@ -105,11 +105,11 @@ abstract class _$$_OverridenRuleTierDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Rate', defaultValue: 0) double rate,
-      @JsonKey(name: 'Quantity', defaultValue: 0) double quantity,
-      @JsonKey(name: 'Conditions', defaultValue: '') String conditions,
-      @JsonKey(name: 'Tier', defaultValue: '') String tier,
-      @JsonKey(name: 'Overrider', defaultValue: '') String overrider});
+      {@JsonKey(name: 'rate', defaultValue: 0) double rate,
+      @JsonKey(name: 'quantity', defaultValue: 0) double quantity,
+      @JsonKey(name: 'conditions', defaultValue: '') String conditions,
+      @JsonKey(name: 'tier', defaultValue: '') String tier,
+      @JsonKey(name: 'overrider', defaultValue: '') String overrider});
 }
 
 /// @nodoc
@@ -158,30 +158,30 @@ class __$$_OverridenRuleTierDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_OverridenRuleTierDto extends _OverridenRuleTierDto {
   const _$_OverridenRuleTierDto(
-      {@JsonKey(name: 'Rate', defaultValue: 0) required this.rate,
-      @JsonKey(name: 'Quantity', defaultValue: 0) required this.quantity,
-      @JsonKey(name: 'Conditions', defaultValue: '') required this.conditions,
-      @JsonKey(name: 'Tier', defaultValue: '') required this.tier,
-      @JsonKey(name: 'Overrider', defaultValue: '') required this.overrider})
+      {@JsonKey(name: 'rate', defaultValue: 0) required this.rate,
+      @JsonKey(name: 'quantity', defaultValue: 0) required this.quantity,
+      @JsonKey(name: 'conditions', defaultValue: '') required this.conditions,
+      @JsonKey(name: 'tier', defaultValue: '') required this.tier,
+      @JsonKey(name: 'overrider', defaultValue: '') required this.overrider})
       : super._();
 
   factory _$_OverridenRuleTierDto.fromJson(Map<String, dynamic> json) =>
       _$$_OverridenRuleTierDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'Rate', defaultValue: 0)
+  @JsonKey(name: 'rate', defaultValue: 0)
   final double rate;
   @override
-  @JsonKey(name: 'Quantity', defaultValue: 0)
+  @JsonKey(name: 'quantity', defaultValue: 0)
   final double quantity;
   @override
-  @JsonKey(name: 'Conditions', defaultValue: '')
+  @JsonKey(name: 'conditions', defaultValue: '')
   final String conditions;
   @override
-  @JsonKey(name: 'Tier', defaultValue: '')
+  @JsonKey(name: 'tier', defaultValue: '')
   final String tier;
   @override
-  @JsonKey(name: 'Overrider', defaultValue: '')
+  @JsonKey(name: 'overrider', defaultValue: '')
   final String overrider;
 
   @override
@@ -226,33 +226,35 @@ class _$_OverridenRuleTierDto extends _OverridenRuleTierDto {
 
 abstract class _OverridenRuleTierDto extends OverridenRuleTierDto {
   const factory _OverridenRuleTierDto(
-      {@JsonKey(name: 'Rate', defaultValue: 0) required final double rate,
-      @JsonKey(name: 'Quantity', defaultValue: 0)
-      required final double quantity,
-      @JsonKey(name: 'Conditions', defaultValue: '')
-      required final String conditions,
-      @JsonKey(name: 'Tier', defaultValue: '') required final String tier,
-      @JsonKey(name: 'Overrider', defaultValue: '')
-      required final String overrider}) = _$_OverridenRuleTierDto;
+      {@JsonKey(name: 'rate', defaultValue: 0)
+          required final double rate,
+      @JsonKey(name: 'quantity', defaultValue: 0)
+          required final double quantity,
+      @JsonKey(name: 'conditions', defaultValue: '')
+          required final String conditions,
+      @JsonKey(name: 'tier', defaultValue: '')
+          required final String tier,
+      @JsonKey(name: 'overrider', defaultValue: '')
+          required final String overrider}) = _$_OverridenRuleTierDto;
   const _OverridenRuleTierDto._() : super._();
 
   factory _OverridenRuleTierDto.fromJson(Map<String, dynamic> json) =
       _$_OverridenRuleTierDto.fromJson;
 
   @override
-  @JsonKey(name: 'Rate', defaultValue: 0)
+  @JsonKey(name: 'rate', defaultValue: 0)
   double get rate;
   @override
-  @JsonKey(name: 'Quantity', defaultValue: 0)
+  @JsonKey(name: 'quantity', defaultValue: 0)
   double get quantity;
   @override
-  @JsonKey(name: 'Conditions', defaultValue: '')
+  @JsonKey(name: 'conditions', defaultValue: '')
   String get conditions;
   @override
-  @JsonKey(name: 'Tier', defaultValue: '')
+  @JsonKey(name: 'tier', defaultValue: '')
   String get tier;
   @override
-  @JsonKey(name: 'Overrider', defaultValue: '')
+  @JsonKey(name: 'overrider', defaultValue: '')
   String get overrider;
   @override
   @JsonKey(ignore: true)

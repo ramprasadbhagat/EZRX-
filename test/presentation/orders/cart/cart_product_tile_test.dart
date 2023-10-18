@@ -137,6 +137,7 @@ void main() {
       cartItem = PriceAggregate.empty().copyWith(
         quantity: 2,
         materialInfo: MaterialInfo.empty().copyWith(
+          type: MaterialInfoType('material'),
           materialNumber: MaterialNumber('000000000023168451'),
           materialDescription: ' Triglyceride Mosys D',
           principalData: PrincipalData.empty().copyWith(
@@ -453,6 +454,7 @@ void main() {
             lastPrice: MaterialPrice(364.80),
           ),
           materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
             principalData: PrincipalData.empty().copyWith(
               principalName: PrincipalName('Procter And Gamble'),
               principalCode: PrincipalCode('000000105307'),

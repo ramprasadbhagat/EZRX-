@@ -16,38 +16,38 @@ class PriceDto with _$PriceDto {
   const PriceDto._();
 
   const factory PriceDto({
-    @JsonKey(name: 'MaterialNumber', defaultValue: '')
+    @JsonKey(name: 'materialNumber', defaultValue: '')
         required String materialNumber,
-    @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+    @JsonKey(name: 'oldMaterialCode', defaultValue: '')
         required String oldMaterialCode,
-    @JsonKey(name: 'ListPrice', defaultValue: 0) required double listPrice,
-    @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0)
+    @JsonKey(name: 'listPrice', defaultValue: 0) required double listPrice,
+    @JsonKey(name: 'finalIndividualPrice', defaultValue: 0)
         required double finalIndividualPrice,
-    @JsonKey(name: 'FinalTotalPrice', defaultValue: 0)
+    @JsonKey(name: 'finalTotalPrice', defaultValue: 0)
         required double finalTotalPrice,
-    @JsonKey(name: 'PriceRules', defaultValue: <PriceRuleDto>[])
+    @JsonKey(name: 'priceRules', defaultValue: <PriceRuleDto>[])
         required List<PriceRuleDto> rules,
-    @JsonKey(name: 'Bonuses', defaultValue: <PriceBonusDto>[])
+    @JsonKey(name: 'bonuses', defaultValue: <PriceBonusDto>[])
         required List<PriceBonusDto> bonuses,
-    @JsonKey(name: 'TieredPricing', defaultValue: <PriceTierDto>[])
+    @JsonKey(name: 'tieredPricing', defaultValue: <PriceTierDto>[])
         required List<PriceTierDto> tiers,
-    @JsonKey(name: 'Bundles', defaultValue: <PriceBundleDto>[])
+    @JsonKey(name: 'bundles', defaultValue: <PriceBundleDto>[])
         required List<PriceBundleDto> bundles,
-    @JsonKey(name: 'Valid', defaultValue: false) required bool isValid,
-    @JsonKey(name: 'AdditionalBonusEligible', defaultValue: false)
+    @JsonKey(name: 'valid', defaultValue: false) required bool isValid,
+    @JsonKey(name: 'additionalBonusEligible', defaultValue: false)
         required bool additionalBonusEligible,
-    @JsonKey(name: 'ZMGDiscount', defaultValue: false)
+    @JsonKey(name: 'zMGDiscount', defaultValue: false)
         required bool zmgDiscount,
-    @JsonKey(name: 'ZDP5MaxQuota', defaultValue: '')
+    @JsonKey(name: 'zDP5MaxQuota', defaultValue: '')
         required String zdp5MaxQuota,
-    @JsonKey(name: 'ZDP5RemainingQuota', defaultValue: '')
+    @JsonKey(name: 'zDP5RemainingQuota', defaultValue: '')
         required String zdp5RemainingQuota,
-    @JsonKey(name: 'ExceedQty', defaultValue: false) required bool exceedQty,
-    @JsonKey(name: 'OverridenRulePresent', defaultValue: false)
+    @JsonKey(name: 'exceedQty', defaultValue: false) required bool exceedQty,
+    @JsonKey(name: 'overridenRulePresent', defaultValue: false)
         required bool overrideRulePresent,
-    @JsonKey(name: 'OverridenRules', defaultValue: [])
+    @JsonKey(name: 'overridenRules', defaultValue: <PriceRuleDto>[])
         required List<PriceRuleDto> overridenRules,
-    @JsonKey(name: 'OverridenRuleTier', defaultValue: [])
+    @JsonKey(name: 'overridenRuleTier', defaultValue: <OverridenRuleTierDto>[])
         required List<OverridenRuleTierDto> overridenRuleTier,
     @JsonKey(name: 'isPriceOverride', defaultValue: false)
         required bool isPriceOverride,
@@ -56,7 +56,7 @@ class PriceDto with _$PriceDto {
     @JsonKey(name: 'priceOverride', defaultValue: 0)
         required double priceOverride,
     @Default(PriceComboDealDto.empty)
-    @JsonKey(name: 'ComboDeals')
+    @JsonKey(name: 'comboDeals')
         PriceComboDealDto comboDeal,
     @JsonKey(name: 'isDiscountOverride', defaultValue: false)
         required bool isDiscountOverride,

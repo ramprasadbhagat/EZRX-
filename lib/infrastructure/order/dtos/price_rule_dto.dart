@@ -9,20 +9,20 @@ class PriceRuleDto with _$PriceRuleDto {
   const PriceRuleDto._();
 
   const factory PriceRuleDto({
-    @JsonKey(name: 'Type', defaultValue: '') required String type,
-    @JsonKey(name: 'Rate', defaultValue: 0) required double rate,
-    @JsonKey(name: 'Conditions', defaultValue: '') required String condition,
+    @JsonKey(name: 'type', defaultValue: '') required String type,
+    @JsonKey(name: 'rate', defaultValue: 0) required double rate,
+    @JsonKey(name: 'conditions', defaultValue: '') required String condition,
     @Default(TieredRulesDto.empty)
-    @JsonKey(name: 'TieredRules')
+    @JsonKey(name: 'tieredRules')
         TieredRulesDto tieredRules,
-    @JsonKey(name: 'BonusEligible', defaultValue: false)
+    @JsonKey(name: 'bonusEligible', defaultValue: false)
         required bool bonusEligible,
-    @JsonKey(name: 'ConditionNumber', defaultValue: '')
+    @JsonKey(name: 'conditionNumber', defaultValue: '')
         required String conditionNumber,
-    @JsonKey(name: 'OverriddenBy', defaultValue: '')
+    @JsonKey(name: 'overriddenBy', defaultValue: '')
         required String overriddenBy,
-    @JsonKey(name: 'MaxQuota', defaultValue: '') required String maxQuota,
-    @JsonKey(name: 'RemainingQuota', defaultValue: '')
+    @JsonKey(name: 'maxQuota', defaultValue: '') required String maxQuota,
+    @JsonKey(name: 'remainingQuota', defaultValue: '')
         required String remainingQuota,
   }) = _PriceRuleDto;
 
@@ -61,8 +61,8 @@ class TieredRulesDto with _$TieredRulesDto {
   const TieredRulesDto._();
 
   const factory TieredRulesDto({
-    @JsonKey(name: 'Tier', defaultValue: '') required String tier,
-    @JsonKey(name: 'RuleTier', defaultValue: [])
+    @JsonKey(name: 'tier', defaultValue: '') required String tier,
+    @JsonKey(name: 'ruleTier', defaultValue: <RuleTierDto>[])
         required List<RuleTierDto> ruleTier,
   }) = _TieredRulesDto;
 
@@ -93,8 +93,8 @@ class RuleTierDto with _$RuleTierDto {
   const RuleTierDto._();
 
   const factory RuleTierDto({
-    @JsonKey(name: 'Rate', defaultValue: 0) required double rate,
-    @JsonKey(name: 'Quantity', defaultValue: 0) required double quantity,
+    @JsonKey(name: 'rate', defaultValue: 0) required double rate,
+    @JsonKey(name: 'quantity', defaultValue: 0) required double quantity,
   }) = _RuleTierDto;
 
   factory RuleTierDto.fromDomain(RuleTier ruleTier) {

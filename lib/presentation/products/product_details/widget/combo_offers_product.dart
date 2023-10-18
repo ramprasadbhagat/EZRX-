@@ -24,7 +24,9 @@ class ComboOffersProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<MaterialPriceBloc, MaterialPriceState>(
       listenWhen: (previous, current) =>
-          previous.isFetching != current.isFetching && !current.isFetching,
+          previous.isFetching != current.isFetching &&
+          !current.isFetching &&
+          context.router.current.path == 'orders/material_details',
       listener: (context, priceState) {
         final eligibilityBloc = context.read<EligibilityBloc>().state;
 
@@ -121,6 +123,8 @@ class ComboOffersProduct extends StatelessWidget {
                                 comboDeal: comboDeal,
                                 locale: context.locale,
                                 parentMaterialNumber: materialNumber,
+                                comboMaterialsCurrentQuantity: <MaterialNumber,
+                                    int>{},
                               ),
                             );
                         context.navigateTo(const ComboDetailPageRoute());

@@ -10,8 +10,8 @@ part 'material_price_detail_dto.g.dart';
 class MaterialPriceDetailDto with _$MaterialPriceDetailDto {
   const MaterialPriceDetailDto._();
   const factory MaterialPriceDetailDto({
-    @JsonKey(name: 'Price') required PriceDto price,
-    @JsonKey(name: 'ValidMaterial', defaultValue: false)
+    @JsonKey(name: 'price') required PriceDto price,
+    @JsonKey(name: 'validMaterial', defaultValue: false)
         required bool isValidMaterial,
   }) = _MaterialPriceDetailDto;
 

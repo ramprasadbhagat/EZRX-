@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote.dart';
@@ -81,14 +82,14 @@ void main() {
 
         expect(
           result,
-          List.from(priceData)
+          List.from(makeResponseCamelCase(jsonEncode(priceData)))
               .map((e) => PriceDto.fromJson(e).toDomain())
               .toList(),
         );
       });
 
       test('Get Material Price test', () async {
-         final variables = {
+        final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
           'shipToCode': 'fake-ship-to-code',
@@ -127,12 +128,13 @@ void main() {
 
         expect(
           result,
-          PriceDto.fromJson(priceData).toDomain(),
+          PriceDto.fromJson(makeResponseCamelCase(jsonEncode(priceData)))
+              .toDomain(),
         );
       });
 
       test('Statuscode not equal to 200', () async {
-         final variables = {
+        final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
           'shipToCode': 'fake-ship-to-code',
@@ -167,11 +169,11 @@ void main() {
       });
 
       test('response with errors', () async {
-          final variables = {
+        final variables = {
           'salesOrganisation': 'fake-sales-org',
           'customer': 'fake-customer-code',
           'shipToCode': 'fake-ship-to-code',
-           'request': {
+          'request': {
             'MaterialNumber': 'fake-number',
             'salesDeal': [],
           },

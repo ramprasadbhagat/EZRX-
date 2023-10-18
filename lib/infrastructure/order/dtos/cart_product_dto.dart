@@ -164,7 +164,7 @@ class CartProductDto with _$CartProductDto {
       ),
       quantity: quantity,
       bonusSampleItems: bonusMaterials.map((e) => e.toDomain()).toList(),
-      comboMaterials: comboMaterials.map((e) => e.toDomain()).toList(),
+      comboMaterials: comboMaterials.map((e) => e.toDomain(comboDeal)).toList(),
     );
   }
 

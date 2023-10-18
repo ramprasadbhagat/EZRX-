@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
@@ -48,7 +49,7 @@ class DiscountOverrideRemoteDataSource {
       _materialPriceExceptionChecker(res: res);
       final priceData = res.data['data']['price'];
 
-      return List.from(priceData)
+      return List.from(makeResponseCamelCase(jsonEncode(priceData)))
           .map((e) => PriceDto.fromJson(e).toDomain())
           .toList();
     });

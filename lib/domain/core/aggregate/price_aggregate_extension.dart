@@ -47,6 +47,36 @@ extension ComboDealExtension on PriceAggregate {
       comboDealUnitPrice(discount: discount) * quantity;
 
   bool get selfComboDealEligible => quantity >= selfComboDeal.minQty;
+
+  List<PriceAggregate> get convertComboItemToPriceAggregateList =>
+      comboMaterials
+          .map(
+            (item) => PriceAggregate.empty().copyWith(
+              price: price.copyWith(
+                comboDeal: item.comboDeals,
+                isValid: item.valid,
+                lastPrice: MaterialPrice(item.listPrice),
+              ),
+              quantity: item.quantity,
+              materialInfo: materialInfo.copyWith(
+                materialNumber: item.productId,
+                principalData: materialInfo.principalData.copyWith(
+                  principalCode: item.principalCode,
+                  principalName: item.principalName,
+                ),
+                materialDescription: item.materialDescription,
+                parentID: item.parentId,
+              ),
+            ),
+          )
+          .toList();
+
+  Map<MaterialNumber, int> get comboMaterialsCurrentQuantity => Map.fromEntries(
+        comboMaterials.map(
+          (comboMaterialItem) =>
+              MapEntry(comboMaterialItem.productId, comboMaterialItem.quantity),
+        ),
+      );
 }
 
 extension PriceAggregateExtension on List<PriceAggregate> {

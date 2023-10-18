@@ -11,12 +11,12 @@ class PriceComboDealDto with _$PriceComboDealDto {
   const PriceComboDealDto._();
 
   const factory PriceComboDealDto({
-    @JsonKey(name: 'Eligible', defaultValue: false) required bool isEligible,
-    @JsonKey(name: 'FlexibleGroup', defaultValue: '')
+    @JsonKey(name: 'eligible', defaultValue: false) required bool isEligible,
+    @JsonKey(name: 'flexibleGroup', defaultValue: '')
         required String flexibleGroup,
-    @JsonKey(name: 'SalesDeal', defaultValue: '') required String salesDeal,
+    @JsonKey(name: 'salesDeal', defaultValue: '') required String salesDeal,
     @Default(PriceComboDealCategoryDto.empty)
-    @JsonKey(name: 'Category')
+    @JsonKey(name: 'category')
         PriceComboDealCategoryDto category,
   }) = _PriceComboDealDto;
 
@@ -52,8 +52,9 @@ class PriceComboDealCategoryDto with _$PriceComboDealCategoryDto {
   const PriceComboDealCategoryDto._();
 
   const factory PriceComboDealCategoryDto({
-    @JsonKey(name: 'Type', defaultValue: '') required String type,
-    @JsonKey(name: 'Value', defaultValue: []) required List<String> value,
+    @JsonKey(name: 'type', defaultValue: '') required String type,
+    @JsonKey(name: 'value', defaultValue: <String>[])
+        required List<String> value,
   }) = _PriceComboDealCategoryDto;
 
   factory PriceComboDealCategoryDto.fromDomain(PriceComboDealCategory domain) =>
@@ -69,7 +70,7 @@ class PriceComboDealCategoryDto with _$PriceComboDealCategoryDto {
 
   static const empty = PriceComboDealCategoryDto(
     type: '',
-    value: [],
+    value: <String>[],
   );
 
   factory PriceComboDealCategoryDto.fromJson(Map<String, dynamic> json) =>

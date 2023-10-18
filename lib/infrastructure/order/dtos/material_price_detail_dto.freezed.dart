@@ -21,9 +21,9 @@ MaterialPriceDetailDto _$MaterialPriceDetailDtoFromJson(
 
 /// @nodoc
 mixin _$MaterialPriceDetailDto {
-  @JsonKey(name: 'Price')
+  @JsonKey(name: 'price')
   PriceDto get price => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ValidMaterial', defaultValue: false)
+  @JsonKey(name: 'validMaterial', defaultValue: false)
   bool get isValidMaterial => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,9 +39,9 @@ abstract class $MaterialPriceDetailDtoCopyWith<$Res> {
       _$MaterialPriceDetailDtoCopyWithImpl<$Res, MaterialPriceDetailDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Price')
+      {@JsonKey(name: 'price')
           PriceDto price,
-      @JsonKey(name: 'ValidMaterial', defaultValue: false)
+      @JsonKey(name: 'validMaterial', defaultValue: false)
           bool isValidMaterial});
 
   $PriceDtoCopyWith<$Res> get price;
@@ -94,9 +94,9 @@ abstract class _$$_MaterialPriceDetailDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Price')
+      {@JsonKey(name: 'price')
           PriceDto price,
-      @JsonKey(name: 'ValidMaterial', defaultValue: false)
+      @JsonKey(name: 'validMaterial', defaultValue: false)
           bool isValidMaterial});
 
   @override
@@ -135,9 +135,9 @@ class __$$_MaterialPriceDetailDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MaterialPriceDetailDto extends _MaterialPriceDetailDto {
   const _$_MaterialPriceDetailDto(
-      {@JsonKey(name: 'Price')
+      {@JsonKey(name: 'price')
           required this.price,
-      @JsonKey(name: 'ValidMaterial', defaultValue: false)
+      @JsonKey(name: 'validMaterial', defaultValue: false)
           required this.isValidMaterial})
       : super._();
 
@@ -145,10 +145,10 @@ class _$_MaterialPriceDetailDto extends _MaterialPriceDetailDto {
       _$$_MaterialPriceDetailDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'Price')
+  @JsonKey(name: 'price')
   final PriceDto price;
   @override
-  @JsonKey(name: 'ValidMaterial', defaultValue: false)
+  @JsonKey(name: 'validMaterial', defaultValue: false)
   final bool isValidMaterial;
 
   @override
@@ -187,9 +187,9 @@ class _$_MaterialPriceDetailDto extends _MaterialPriceDetailDto {
 
 abstract class _MaterialPriceDetailDto extends MaterialPriceDetailDto {
   const factory _MaterialPriceDetailDto(
-      {@JsonKey(name: 'Price')
+      {@JsonKey(name: 'price')
           required final PriceDto price,
-      @JsonKey(name: 'ValidMaterial', defaultValue: false)
+      @JsonKey(name: 'validMaterial', defaultValue: false)
           required final bool isValidMaterial}) = _$_MaterialPriceDetailDto;
   const _MaterialPriceDetailDto._() : super._();
 
@@ -197,10 +197,10 @@ abstract class _MaterialPriceDetailDto extends MaterialPriceDetailDto {
       _$_MaterialPriceDetailDto.fromJson;
 
   @override
-  @JsonKey(name: 'Price')
+  @JsonKey(name: 'price')
   PriceDto get price;
   @override
-  @JsonKey(name: 'ValidMaterial', defaultValue: false)
+  @JsonKey(name: 'validMaterial', defaultValue: false)
   bool get isValidMaterial;
   @override
   @JsonKey(ignore: true)

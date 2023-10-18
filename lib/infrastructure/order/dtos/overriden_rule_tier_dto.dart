@@ -9,11 +9,11 @@ class OverridenRuleTierDto with _$OverridenRuleTierDto {
   const OverridenRuleTierDto._();
 
   const factory OverridenRuleTierDto({
-    @JsonKey(name: 'Rate', defaultValue: 0) required double rate,
-    @JsonKey(name: 'Quantity', defaultValue: 0) required double quantity,
-    @JsonKey(name: 'Conditions', defaultValue: '') required String conditions,
-    @JsonKey(name: 'Tier', defaultValue: '') required String tier,
-    @JsonKey(name: 'Overrider', defaultValue: '') required String overrider,
+    @JsonKey(name: 'rate', defaultValue: 0) required double rate,
+    @JsonKey(name: 'quantity', defaultValue: 0) required double quantity,
+    @JsonKey(name: 'conditions', defaultValue: '') required String conditions,
+    @JsonKey(name: 'tier', defaultValue: '') required String tier,
+    @JsonKey(name: 'overrider', defaultValue: '') required String overrider,
   }) = _OverridenRuleTierDto;
 
   OverridenRuleTier toDomain() => OverridenRuleTier(

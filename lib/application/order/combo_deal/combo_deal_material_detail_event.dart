@@ -26,6 +26,7 @@ class ComboDealMaterialDetailEvent with _$ComboDealMaterialDetailEvent {
     required SalesOrganisationConfigs salesConfigs,
     required Locale locale,
     required MaterialNumber parentMaterialNumber,
+    required Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
   }) = _FetchComboDealDetail;
 
   const factory ComboDealMaterialDetailEvent.search({

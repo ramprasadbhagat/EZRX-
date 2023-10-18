@@ -64,7 +64,7 @@ mixin _$ComboMaterialItemDto {
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxM1', defaultValue: '')
   String get taxM1 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'taxes', defaultValue: [])
+  @JsonKey(name: 'taxes', defaultValue: <String>[])
   List<String> get taxes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -107,7 +107,7 @@ abstract class $ComboMaterialItemDtoCopyWith<$Res> {
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') String taxM1,
-      @JsonKey(name: 'taxes', defaultValue: []) List<String> taxes});
+      @JsonKey(name: 'taxes', defaultValue: <String>[]) List<String> taxes});
 }
 
 /// @nodoc
@@ -281,7 +281,7 @@ abstract class _$$_ComboMaterialItemDtoCopyWith<$Res>
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') String taxM1,
-      @JsonKey(name: 'taxes', defaultValue: []) List<String> taxes});
+      @JsonKey(name: 'taxes', defaultValue: <String>[]) List<String> taxes});
 }
 
 /// @nodoc
@@ -451,7 +451,7 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       required this.materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') required this.taxM1,
-      @JsonKey(name: 'taxes', defaultValue: [])
+      @JsonKey(name: 'taxes', defaultValue: <String>[])
       required final List<String> taxes})
       : _taxes = taxes,
         super._();
@@ -527,7 +527,7 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
   final String taxM1;
   final List<String> _taxes;
   @override
-  @JsonKey(name: 'taxes', defaultValue: [])
+  @JsonKey(name: 'taxes', defaultValue: <String>[])
   List<String> get taxes {
     if (_taxes is EqualUnmodifiableListView) return _taxes;
     // ignore: implicit_dynamic_type
@@ -668,7 +668,7 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       required final String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') required final String taxM1,
-      @JsonKey(name: 'taxes', defaultValue: [])
+      @JsonKey(name: 'taxes', defaultValue: <String>[])
       required final List<String> taxes}) = _$_ComboMaterialItemDto;
   const _ComboMaterialItemDto._() : super._();
 
@@ -742,7 +742,7 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
   @JsonKey(name: 'taxM1', defaultValue: '')
   String get taxM1;
   @override
-  @JsonKey(name: 'taxes', defaultValue: [])
+  @JsonKey(name: 'taxes', defaultValue: <String>[])
   List<String> get taxes;
   @override
   @JsonKey(ignore: true)

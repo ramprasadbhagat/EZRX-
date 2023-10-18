@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_bonus_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,7 +30,7 @@ void main() {
     test('Test toJson', () {
       final configsDto = data.toJson();
 
-      expect(configsDto['BonusTiers'][0]['QualifyingQuantity'], 10);
+      expect(configsDto['bonusTiers'][0]['qualifyingQuantity'], 10);
     });
 
     test('Test pricebonusitem from domain', () {
@@ -37,7 +40,8 @@ void main() {
         'BonusMaterial': []
       };
       final configsDtoMap = PriceBonusItemDto.fromDomain(
-        PriceBonusItemDto.fromJson(data).toDomain(),
+        PriceBonusItemDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
+            .toDomain(),
       );
       expect(configsDtoMap.qualifyingQuantity, 12);
     });
@@ -52,7 +56,8 @@ void main() {
         'BonusQuantity': 1
       };
       final configs = BonusMaterialDto.fromDomain(
-        BonusMaterialDto.fromJson(data).toDomain(),
+        BonusMaterialDto.fromJson(makeResponseCamelCase(jsonEncode(data)))
+            .toDomain(),
       );
       expect(configs.bonusQuantity, 1);
     });

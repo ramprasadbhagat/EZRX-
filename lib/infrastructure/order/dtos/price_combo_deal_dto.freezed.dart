@@ -20,13 +20,13 @@ PriceComboDealDto _$PriceComboDealDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PriceComboDealDto {
-  @JsonKey(name: 'Eligible', defaultValue: false)
+  @JsonKey(name: 'eligible', defaultValue: false)
   bool get isEligible => throw _privateConstructorUsedError;
-  @JsonKey(name: 'FlexibleGroup', defaultValue: '')
+  @JsonKey(name: 'flexibleGroup', defaultValue: '')
   String get flexibleGroup => throw _privateConstructorUsedError;
-  @JsonKey(name: 'SalesDeal', defaultValue: '')
+  @JsonKey(name: 'salesDeal', defaultValue: '')
   String get salesDeal => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Category')
+  @JsonKey(name: 'category')
   PriceComboDealCategoryDto get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,10 +42,10 @@ abstract class $PriceComboDealDtoCopyWith<$Res> {
       _$PriceComboDealDtoCopyWithImpl<$Res, PriceComboDealDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Eligible', defaultValue: false) bool isEligible,
-      @JsonKey(name: 'FlexibleGroup', defaultValue: '') String flexibleGroup,
-      @JsonKey(name: 'SalesDeal', defaultValue: '') String salesDeal,
-      @JsonKey(name: 'Category') PriceComboDealCategoryDto category});
+      {@JsonKey(name: 'eligible', defaultValue: false) bool isEligible,
+      @JsonKey(name: 'flexibleGroup', defaultValue: '') String flexibleGroup,
+      @JsonKey(name: 'salesDeal', defaultValue: '') String salesDeal,
+      @JsonKey(name: 'category') PriceComboDealCategoryDto category});
 
   $PriceComboDealCategoryDtoCopyWith<$Res> get category;
 }
@@ -106,10 +106,10 @@ abstract class _$$_PriceComboDealDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Eligible', defaultValue: false) bool isEligible,
-      @JsonKey(name: 'FlexibleGroup', defaultValue: '') String flexibleGroup,
-      @JsonKey(name: 'SalesDeal', defaultValue: '') String salesDeal,
-      @JsonKey(name: 'Category') PriceComboDealCategoryDto category});
+      {@JsonKey(name: 'eligible', defaultValue: false) bool isEligible,
+      @JsonKey(name: 'flexibleGroup', defaultValue: '') String flexibleGroup,
+      @JsonKey(name: 'salesDeal', defaultValue: '') String salesDeal,
+      @JsonKey(name: 'category') PriceComboDealCategoryDto category});
 
   @override
   $PriceComboDealCategoryDtoCopyWith<$Res> get category;
@@ -156,28 +156,30 @@ class __$$_PriceComboDealDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PriceComboDealDto extends _PriceComboDealDto {
   const _$_PriceComboDealDto(
-      {@JsonKey(name: 'Eligible', defaultValue: false) required this.isEligible,
-      @JsonKey(name: 'FlexibleGroup', defaultValue: '')
-      required this.flexibleGroup,
-      @JsonKey(name: 'SalesDeal', defaultValue: '') required this.salesDeal,
-      @JsonKey(name: 'Category')
-      this.category = PriceComboDealCategoryDto.empty})
+      {@JsonKey(name: 'eligible', defaultValue: false)
+          required this.isEligible,
+      @JsonKey(name: 'flexibleGroup', defaultValue: '')
+          required this.flexibleGroup,
+      @JsonKey(name: 'salesDeal', defaultValue: '')
+          required this.salesDeal,
+      @JsonKey(name: 'category')
+          this.category = PriceComboDealCategoryDto.empty})
       : super._();
 
   factory _$_PriceComboDealDto.fromJson(Map<String, dynamic> json) =>
       _$$_PriceComboDealDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'Eligible', defaultValue: false)
+  @JsonKey(name: 'eligible', defaultValue: false)
   final bool isEligible;
   @override
-  @JsonKey(name: 'FlexibleGroup', defaultValue: '')
+  @JsonKey(name: 'flexibleGroup', defaultValue: '')
   final String flexibleGroup;
   @override
-  @JsonKey(name: 'SalesDeal', defaultValue: '')
+  @JsonKey(name: 'salesDeal', defaultValue: '')
   final String salesDeal;
   @override
-  @JsonKey(name: 'Category')
+  @JsonKey(name: 'category')
   final PriceComboDealCategoryDto category;
 
   @override
@@ -222,30 +224,30 @@ class _$_PriceComboDealDto extends _PriceComboDealDto {
 
 abstract class _PriceComboDealDto extends PriceComboDealDto {
   const factory _PriceComboDealDto(
-      {@JsonKey(name: 'Eligible', defaultValue: false)
-      required final bool isEligible,
-      @JsonKey(name: 'FlexibleGroup', defaultValue: '')
-      required final String flexibleGroup,
-      @JsonKey(name: 'SalesDeal', defaultValue: '')
-      required final String salesDeal,
-      @JsonKey(name: 'Category')
-      final PriceComboDealCategoryDto category}) = _$_PriceComboDealDto;
+      {@JsonKey(name: 'eligible', defaultValue: false)
+          required final bool isEligible,
+      @JsonKey(name: 'flexibleGroup', defaultValue: '')
+          required final String flexibleGroup,
+      @JsonKey(name: 'salesDeal', defaultValue: '')
+          required final String salesDeal,
+      @JsonKey(name: 'category')
+          final PriceComboDealCategoryDto category}) = _$_PriceComboDealDto;
   const _PriceComboDealDto._() : super._();
 
   factory _PriceComboDealDto.fromJson(Map<String, dynamic> json) =
       _$_PriceComboDealDto.fromJson;
 
   @override
-  @JsonKey(name: 'Eligible', defaultValue: false)
+  @JsonKey(name: 'eligible', defaultValue: false)
   bool get isEligible;
   @override
-  @JsonKey(name: 'FlexibleGroup', defaultValue: '')
+  @JsonKey(name: 'flexibleGroup', defaultValue: '')
   String get flexibleGroup;
   @override
-  @JsonKey(name: 'SalesDeal', defaultValue: '')
+  @JsonKey(name: 'salesDeal', defaultValue: '')
   String get salesDeal;
   @override
-  @JsonKey(name: 'Category')
+  @JsonKey(name: 'category')
   PriceComboDealCategoryDto get category;
   @override
   @JsonKey(ignore: true)
@@ -260,9 +262,9 @@ PriceComboDealCategoryDto _$PriceComboDealCategoryDtoFromJson(
 
 /// @nodoc
 mixin _$PriceComboDealCategoryDto {
-  @JsonKey(name: 'Type', defaultValue: '')
+  @JsonKey(name: 'type', defaultValue: '')
   String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Value', defaultValue: [])
+  @JsonKey(name: 'value', defaultValue: <String>[])
   List<String> get value => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -278,8 +280,8 @@ abstract class $PriceComboDealCategoryDtoCopyWith<$Res> {
       _$PriceComboDealCategoryDtoCopyWithImpl<$Res, PriceComboDealCategoryDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Type', defaultValue: '') String type,
-      @JsonKey(name: 'Value', defaultValue: []) List<String> value});
+      {@JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'value', defaultValue: <String>[]) List<String> value});
 }
 
 /// @nodoc
@@ -322,8 +324,8 @@ abstract class _$$_PriceComboDealCategoryDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Type', defaultValue: '') String type,
-      @JsonKey(name: 'Value', defaultValue: []) List<String> value});
+      {@JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'value', defaultValue: <String>[]) List<String> value});
 }
 
 /// @nodoc
@@ -359,9 +361,10 @@ class __$$_PriceComboDealCategoryDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PriceComboDealCategoryDto extends _PriceComboDealCategoryDto {
   const _$_PriceComboDealCategoryDto(
-      {@JsonKey(name: 'Type', defaultValue: '') required this.type,
-      @JsonKey(name: 'Value', defaultValue: [])
-      required final List<String> value})
+      {@JsonKey(name: 'type', defaultValue: '')
+          required this.type,
+      @JsonKey(name: 'value', defaultValue: <String>[])
+          required final List<String> value})
       : _value = value,
         super._();
 
@@ -369,11 +372,11 @@ class _$_PriceComboDealCategoryDto extends _PriceComboDealCategoryDto {
       _$$_PriceComboDealCategoryDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'Type', defaultValue: '')
+  @JsonKey(name: 'type', defaultValue: '')
   final String type;
   final List<String> _value;
   @override
-  @JsonKey(name: 'Value', defaultValue: [])
+  @JsonKey(name: 'value', defaultValue: <String>[])
   List<String> get value {
     if (_value is EqualUnmodifiableListView) return _value;
     // ignore: implicit_dynamic_type
@@ -416,19 +419,20 @@ class _$_PriceComboDealCategoryDto extends _PriceComboDealCategoryDto {
 
 abstract class _PriceComboDealCategoryDto extends PriceComboDealCategoryDto {
   const factory _PriceComboDealCategoryDto(
-      {@JsonKey(name: 'Type', defaultValue: '') required final String type,
-      @JsonKey(name: 'Value', defaultValue: [])
-      required final List<String> value}) = _$_PriceComboDealCategoryDto;
+      {@JsonKey(name: 'type', defaultValue: '')
+          required final String type,
+      @JsonKey(name: 'value', defaultValue: <String>[])
+          required final List<String> value}) = _$_PriceComboDealCategoryDto;
   const _PriceComboDealCategoryDto._() : super._();
 
   factory _PriceComboDealCategoryDto.fromJson(Map<String, dynamic> json) =
       _$_PriceComboDealCategoryDto.fromJson;
 
   @override
-  @JsonKey(name: 'Type', defaultValue: '')
+  @JsonKey(name: 'type', defaultValue: '')
   String get type;
   @override
-  @JsonKey(name: 'Value', defaultValue: [])
+  @JsonKey(name: 'value', defaultValue: <String>[])
   List<String> get value;
   @override
   @JsonKey(ignore: true)

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_remote.dart';
@@ -86,7 +87,7 @@ void main() {
 
         expect(
           result,
-          List.from(materialDetailData)
+          List.from(makeResponseCamelCase(jsonEncode(materialDetailData)))
               .map((e) => MaterialPriceDetailDto.fromJson(e).toDomain())
               .toList(),
         );
@@ -131,7 +132,7 @@ void main() {
 
         expect(
           result,
-          List.from(materialDetailData)
+          List.from(makeResponseCamelCase(jsonEncode(materialDetailData)))
               .map((e) => MaterialPriceDetailDto.fromJson(e).toDomain())
               .toList(),
         );

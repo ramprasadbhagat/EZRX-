@@ -66,7 +66,7 @@ mixin _$ComboProductRequestDto {
   @JsonKey(name: 'IsComboEligible', defaultValue: false)
   bool get isComboEligible => throw _privateConstructorUsedError;
   @JsonKey(name: 'ComboDeals')
-  PriceComboDealDto get comboDeal => throw _privateConstructorUsedError;
+  PriceComboDealRequestDto get comboDeal => throw _privateConstructorUsedError;
   @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
   double get finalIndividualPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'Language', defaultValue: 'EN')
@@ -110,12 +110,12 @@ abstract class $ComboProductRequestDtoCopyWith<$Res> {
       @JsonKey(name: 'ComboDealType', defaultValue: '') String comboDealType,
       @JsonKey(name: 'IsComboEligible', defaultValue: false)
       bool isComboEligible,
-      @JsonKey(name: 'ComboDeals') PriceComboDealDto comboDeal,
+      @JsonKey(name: 'ComboDeals') PriceComboDealRequestDto comboDeal,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
       double finalIndividualPrice,
       @JsonKey(name: 'Language', defaultValue: 'EN') String language});
 
-  $PriceComboDealDtoCopyWith<$Res> get comboDeal;
+  $PriceComboDealRequestDtoCopyWith<$Res> get comboDeal;
 }
 
 /// @nodoc
@@ -250,7 +250,7 @@ class _$ComboProductRequestDtoCopyWithImpl<$Res,
       comboDeal: null == comboDeal
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
-              as PriceComboDealDto,
+              as PriceComboDealRequestDto,
       finalIndividualPrice: null == finalIndividualPrice
           ? _value.finalIndividualPrice
           : finalIndividualPrice // ignore: cast_nullable_to_non_nullable
@@ -264,8 +264,8 @@ class _$ComboProductRequestDtoCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $PriceComboDealDtoCopyWith<$Res> get comboDeal {
-    return $PriceComboDealDtoCopyWith<$Res>(_value.comboDeal, (value) {
+  $PriceComboDealRequestDtoCopyWith<$Res> get comboDeal {
+    return $PriceComboDealRequestDtoCopyWith<$Res>(_value.comboDeal, (value) {
       return _then(_value.copyWith(comboDeal: value) as $Val);
     });
   }
@@ -305,13 +305,13 @@ abstract class _$$_ComboProductRequestDtoCopyWith<$Res>
       @JsonKey(name: 'ComboDealType', defaultValue: '') String comboDealType,
       @JsonKey(name: 'IsComboEligible', defaultValue: false)
       bool isComboEligible,
-      @JsonKey(name: 'ComboDeals') PriceComboDealDto comboDeal,
+      @JsonKey(name: 'ComboDeals') PriceComboDealRequestDto comboDeal,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
       double finalIndividualPrice,
       @JsonKey(name: 'Language', defaultValue: 'EN') String language});
 
   @override
-  $PriceComboDealDtoCopyWith<$Res> get comboDeal;
+  $PriceComboDealRequestDtoCopyWith<$Res> get comboDeal;
 }
 
 /// @nodoc
@@ -444,7 +444,7 @@ class __$$_ComboProductRequestDtoCopyWithImpl<$Res>
       comboDeal: null == comboDeal
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
-              as PriceComboDealDto,
+              as PriceComboDealRequestDto,
       finalIndividualPrice: null == finalIndividualPrice
           ? _value.finalIndividualPrice
           : finalIndividualPrice // ignore: cast_nullable_to_non_nullable
@@ -491,7 +491,8 @@ class _$_ComboProductRequestDto extends _ComboProductRequestDto {
       required this.comboDealType,
       @JsonKey(name: 'IsComboEligible', defaultValue: false)
       required this.isComboEligible,
-      @JsonKey(name: 'ComboDeals') this.comboDeal = PriceComboDealDto.empty,
+      @JsonKey(name: 'ComboDeals')
+      this.comboDeal = PriceComboDealRequestDto.empty,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
       required this.finalIndividualPrice,
       @JsonKey(name: 'Language', defaultValue: 'EN') required this.language})
@@ -568,7 +569,7 @@ class _$_ComboProductRequestDto extends _ComboProductRequestDto {
   final bool isComboEligible;
   @override
   @JsonKey(name: 'ComboDeals')
-  final PriceComboDealDto comboDeal;
+  final PriceComboDealRequestDto comboDeal;
   @override
   @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
   final double finalIndividualPrice;
@@ -717,7 +718,7 @@ abstract class _ComboProductRequestDto extends ComboProductRequestDto {
       required final String comboDealType,
       @JsonKey(name: 'IsComboEligible', defaultValue: false)
       required final bool isComboEligible,
-      @JsonKey(name: 'ComboDeals') final PriceComboDealDto comboDeal,
+      @JsonKey(name: 'ComboDeals') final PriceComboDealRequestDto comboDeal,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
       required final double finalIndividualPrice,
       @JsonKey(name: 'Language', defaultValue: 'EN')
@@ -795,7 +796,7 @@ abstract class _ComboProductRequestDto extends ComboProductRequestDto {
   bool get isComboEligible;
   @override
   @JsonKey(name: 'ComboDeals')
-  PriceComboDealDto get comboDeal;
+  PriceComboDealRequestDto get comboDeal;
   @override
   @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
   double get finalIndividualPrice;

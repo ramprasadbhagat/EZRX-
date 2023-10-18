@@ -9,13 +9,13 @@ part of 'material_price_detail_dto.dart';
 _$_MaterialPriceDetailDto _$$_MaterialPriceDetailDtoFromJson(
         Map<String, dynamic> json) =>
     _$_MaterialPriceDetailDto(
-      price: PriceDto.fromJson(json['Price'] as Map<String, dynamic>),
-      isValidMaterial: json['ValidMaterial'] as bool? ?? false,
+      price: PriceDto.fromJson(json['price'] as Map<String, dynamic>),
+      isValidMaterial: json['validMaterial'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_MaterialPriceDetailDtoToJson(
         _$_MaterialPriceDetailDto instance) =>
     <String, dynamic>{
-      'Price': instance.price.toJson(),
-      'ValidMaterial': instance.isValidMaterial,
+      'price': instance.price.toJson(),
+      'validMaterial': instance.isValidMaterial,
     };

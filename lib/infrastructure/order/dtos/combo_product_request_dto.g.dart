@@ -32,8 +32,8 @@ _$_ComboProductRequestDto _$$_ComboProductRequestDtoFromJson(
       comboDealType: json['ComboDealType'] as String? ?? '',
       isComboEligible: json['IsComboEligible'] as bool? ?? false,
       comboDeal: json['ComboDeals'] == null
-          ? PriceComboDealDto.empty
-          : PriceComboDealDto.fromJson(
+          ? PriceComboDealRequestDto.empty
+          : PriceComboDealRequestDto.fromJson(
               json['ComboDeals'] as Map<String, dynamic>),
       finalIndividualPrice:
           (json['FinalIndividualPrice'] as num?)?.toDouble() ?? 0.0,

@@ -9,19 +9,19 @@ part of 'overriden_rule_tier_dto.dart';
 _$_OverridenRuleTierDto _$$_OverridenRuleTierDtoFromJson(
         Map<String, dynamic> json) =>
     _$_OverridenRuleTierDto(
-      rate: (json['Rate'] as num?)?.toDouble() ?? 0,
-      quantity: (json['Quantity'] as num?)?.toDouble() ?? 0,
-      conditions: json['Conditions'] as String? ?? '',
-      tier: json['Tier'] as String? ?? '',
-      overrider: json['Overrider'] as String? ?? '',
+      rate: (json['rate'] as num?)?.toDouble() ?? 0,
+      quantity: (json['quantity'] as num?)?.toDouble() ?? 0,
+      conditions: json['conditions'] as String? ?? '',
+      tier: json['tier'] as String? ?? '',
+      overrider: json['overrider'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_OverridenRuleTierDtoToJson(
         _$_OverridenRuleTierDto instance) =>
     <String, dynamic>{
-      'Rate': instance.rate,
-      'Quantity': instance.quantity,
-      'Conditions': instance.conditions,
-      'Tier': instance.tier,
-      'Overrider': instance.overrider,
+      'rate': instance.rate,
+      'quantity': instance.quantity,
+      'conditions': instance.conditions,
+      'tier': instance.tier,
+      'overrider': instance.overrider,
     };

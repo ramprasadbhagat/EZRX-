@@ -20,7 +20,7 @@ PriceBonusDto _$PriceBonusDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PriceBonusDto {
-  @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
+  @JsonKey(name: 'bonusTiers', defaultValue: <PriceBonusItemDto>[])
   List<PriceBonusItemDto> get items => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,8 +36,8 @@ abstract class $PriceBonusDtoCopyWith<$Res> {
       _$PriceBonusDtoCopyWithImpl<$Res, PriceBonusDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-      List<PriceBonusItemDto> items});
+      {@JsonKey(name: 'bonusTiers', defaultValue: <PriceBonusItemDto>[])
+          List<PriceBonusItemDto> items});
 }
 
 /// @nodoc
@@ -73,8 +73,8 @@ abstract class _$$_PriceBonusDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-      List<PriceBonusItemDto> items});
+      {@JsonKey(name: 'bonusTiers', defaultValue: <PriceBonusItemDto>[])
+          List<PriceBonusItemDto> items});
 }
 
 /// @nodoc
@@ -103,8 +103,8 @@ class __$$_PriceBonusDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PriceBonusDto extends _PriceBonusDto {
   const _$_PriceBonusDto(
-      {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-      required final List<PriceBonusItemDto> items})
+      {@JsonKey(name: 'bonusTiers', defaultValue: <PriceBonusItemDto>[])
+          required final List<PriceBonusItemDto> items})
       : _items = items,
         super._();
 
@@ -113,7 +113,7 @@ class _$_PriceBonusDto extends _PriceBonusDto {
 
   final List<PriceBonusItemDto> _items;
   @override
-  @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
+  @JsonKey(name: 'bonusTiers', defaultValue: <PriceBonusItemDto>[])
   List<PriceBonusItemDto> get items {
     if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
@@ -154,15 +154,15 @@ class _$_PriceBonusDto extends _PriceBonusDto {
 
 abstract class _PriceBonusDto extends PriceBonusDto {
   const factory _PriceBonusDto(
-      {@JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
-      required final List<PriceBonusItemDto> items}) = _$_PriceBonusDto;
+      {@JsonKey(name: 'bonusTiers', defaultValue: <PriceBonusItemDto>[])
+          required final List<PriceBonusItemDto> items}) = _$_PriceBonusDto;
   const _PriceBonusDto._() : super._();
 
   factory _PriceBonusDto.fromJson(Map<String, dynamic> json) =
       _$_PriceBonusDto.fromJson;
 
   @override
-  @JsonKey(name: 'BonusTiers', defaultValue: <PriceBonusItemDto>[])
+  @JsonKey(name: 'bonusTiers', defaultValue: <PriceBonusItemDto>[])
   List<PriceBonusItemDto> get items;
   @override
   @JsonKey(ignore: true)
@@ -176,11 +176,11 @@ PriceBonusItemDto _$PriceBonusItemDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PriceBonusItemDto {
-  @JsonKey(name: 'Calculation', defaultValue: '')
+  @JsonKey(name: 'calculation', defaultValue: '')
   String get calculation => throw _privateConstructorUsedError;
-  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+  @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
   int get qualifyingQuantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+  @JsonKey(name: 'bonusMaterial', defaultValue: <BonusMaterialDto>[])
   List<BonusMaterialDto> get bonusMaterials =>
       throw _privateConstructorUsedError;
 
@@ -197,11 +197,12 @@ abstract class $PriceBonusItemDtoCopyWith<$Res> {
       _$PriceBonusItemDtoCopyWithImpl<$Res, PriceBonusItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Calculation', defaultValue: '') String calculation,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      int qualifyingQuantity,
-      @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
-      List<BonusMaterialDto> bonusMaterials});
+      {@JsonKey(name: 'calculation', defaultValue: '')
+          String calculation,
+      @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
+          int qualifyingQuantity,
+      @JsonKey(name: 'bonusMaterial', defaultValue: <BonusMaterialDto>[])
+          List<BonusMaterialDto> bonusMaterials});
 }
 
 /// @nodoc
@@ -247,11 +248,12 @@ abstract class _$$_PriceBonusItemDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Calculation', defaultValue: '') String calculation,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      int qualifyingQuantity,
-      @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
-      List<BonusMaterialDto> bonusMaterials});
+      {@JsonKey(name: 'calculation', defaultValue: '')
+          String calculation,
+      @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
+          int qualifyingQuantity,
+      @JsonKey(name: 'bonusMaterial', defaultValue: <BonusMaterialDto>[])
+          List<BonusMaterialDto> bonusMaterials});
 }
 
 /// @nodoc
@@ -290,12 +292,12 @@ class __$$_PriceBonusItemDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PriceBonusItemDto extends _PriceBonusItemDto {
   const _$_PriceBonusItemDto(
-      {@JsonKey(name: 'Calculation', defaultValue: '')
-      required this.calculation,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      required this.qualifyingQuantity,
-      @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
-      required final List<BonusMaterialDto> bonusMaterials})
+      {@JsonKey(name: 'calculation', defaultValue: '')
+          required this.calculation,
+      @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
+          required this.qualifyingQuantity,
+      @JsonKey(name: 'bonusMaterial', defaultValue: <BonusMaterialDto>[])
+          required final List<BonusMaterialDto> bonusMaterials})
       : _bonusMaterials = bonusMaterials,
         super._();
 
@@ -303,14 +305,14 @@ class _$_PriceBonusItemDto extends _PriceBonusItemDto {
       _$$_PriceBonusItemDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'Calculation', defaultValue: '')
+  @JsonKey(name: 'calculation', defaultValue: '')
   final String calculation;
   @override
-  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+  @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
   final int qualifyingQuantity;
   final List<BonusMaterialDto> _bonusMaterials;
   @override
-  @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+  @JsonKey(name: 'bonusMaterial', defaultValue: <BonusMaterialDto>[])
   List<BonusMaterialDto> get bonusMaterials {
     if (_bonusMaterials is EqualUnmodifiableListView) return _bonusMaterials;
     // ignore: implicit_dynamic_type
@@ -357,12 +359,12 @@ class _$_PriceBonusItemDto extends _PriceBonusItemDto {
 
 abstract class _PriceBonusItemDto extends PriceBonusItemDto {
   const factory _PriceBonusItemDto(
-          {@JsonKey(name: 'Calculation', defaultValue: '')
-          required final String calculation,
-          @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-          required final int qualifyingQuantity,
-          @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
-          required final List<BonusMaterialDto> bonusMaterials}) =
+          {@JsonKey(name: 'calculation', defaultValue: '')
+              required final String calculation,
+          @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
+              required final int qualifyingQuantity,
+          @JsonKey(name: 'bonusMaterial', defaultValue: <BonusMaterialDto>[])
+              required final List<BonusMaterialDto> bonusMaterials}) =
       _$_PriceBonusItemDto;
   const _PriceBonusItemDto._() : super._();
 
@@ -370,13 +372,13 @@ abstract class _PriceBonusItemDto extends PriceBonusItemDto {
       _$_PriceBonusItemDto.fromJson;
 
   @override
-  @JsonKey(name: 'Calculation', defaultValue: '')
+  @JsonKey(name: 'calculation', defaultValue: '')
   String get calculation;
   @override
-  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+  @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
   int get qualifyingQuantity;
   @override
-  @JsonKey(name: 'BonusMaterial', defaultValue: <BonusMaterialDto>[])
+  @JsonKey(name: 'bonusMaterial', defaultValue: <BonusMaterialDto>[])
   List<BonusMaterialDto> get bonusMaterials;
   @override
   @JsonKey(ignore: true)
@@ -390,25 +392,25 @@ BonusMaterialDto _$BonusMaterialDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BonusMaterialDto {
-  @JsonKey(name: 'Id', defaultValue: 0)
+  @JsonKey(name: 'id', defaultValue: 0)
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Calculation', defaultValue: '')
+  @JsonKey(name: 'calculation', defaultValue: '')
   String get calculation => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BonusRatio', defaultValue: 0)
+  @JsonKey(name: 'bonusRatio', defaultValue: 0)
   int get bonusRatio => throw _privateConstructorUsedError;
-  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+  @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
   int get qualifyingQuantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'BonusQuantity', defaultValue: 0)
+  @JsonKey(name: 'bonusQuantity', defaultValue: 0)
   int get bonusQuantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+  @JsonKey(name: 'limitPerTransaction', defaultValue: 0)
   int get limitPerTransaction => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ConditionId', defaultValue: '')
+  @JsonKey(name: 'conditionId', defaultValue: '')
   String get conditionId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+  @JsonKey(name: 'oldMaterialCode', defaultValue: '')
   String get oldMaterialCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -424,20 +426,26 @@ abstract class $BonusMaterialDtoCopyWith<$Res> {
       _$BonusMaterialDtoCopyWithImpl<$Res, BonusMaterialDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Id', defaultValue: 0) int id,
-      @JsonKey(name: 'MaterialNumber', defaultValue: '') String materialNumber,
-      @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'Calculation', defaultValue: '') String calculation,
-      @JsonKey(name: 'BonusRatio', defaultValue: 0) int bonusRatio,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      int qualifyingQuantity,
-      @JsonKey(name: 'BonusQuantity', defaultValue: 0) int bonusQuantity,
-      @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
-      int limitPerTransaction,
-      @JsonKey(name: 'ConditionId', defaultValue: '') String conditionId,
-      @JsonKey(name: 'OldMaterialCode', defaultValue: '')
-      String oldMaterialCode});
+      {@JsonKey(name: 'id', defaultValue: 0)
+          int id,
+      @JsonKey(name: 'materialNumber', defaultValue: '')
+          String materialNumber,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
+          String materialDescription,
+      @JsonKey(name: 'calculation', defaultValue: '')
+          String calculation,
+      @JsonKey(name: 'bonusRatio', defaultValue: 0)
+          int bonusRatio,
+      @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
+          int qualifyingQuantity,
+      @JsonKey(name: 'bonusQuantity', defaultValue: 0)
+          int bonusQuantity,
+      @JsonKey(name: 'limitPerTransaction', defaultValue: 0)
+          int limitPerTransaction,
+      @JsonKey(name: 'conditionId', defaultValue: '')
+          String conditionId,
+      @JsonKey(name: 'oldMaterialCode', defaultValue: '')
+          String oldMaterialCode});
 }
 
 /// @nodoc
@@ -518,20 +526,26 @@ abstract class _$$_BonusMaterialDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Id', defaultValue: 0) int id,
-      @JsonKey(name: 'MaterialNumber', defaultValue: '') String materialNumber,
-      @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      String materialDescription,
-      @JsonKey(name: 'Calculation', defaultValue: '') String calculation,
-      @JsonKey(name: 'BonusRatio', defaultValue: 0) int bonusRatio,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      int qualifyingQuantity,
-      @JsonKey(name: 'BonusQuantity', defaultValue: 0) int bonusQuantity,
-      @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
-      int limitPerTransaction,
-      @JsonKey(name: 'ConditionId', defaultValue: '') String conditionId,
-      @JsonKey(name: 'OldMaterialCode', defaultValue: '')
-      String oldMaterialCode});
+      {@JsonKey(name: 'id', defaultValue: 0)
+          int id,
+      @JsonKey(name: 'materialNumber', defaultValue: '')
+          String materialNumber,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
+          String materialDescription,
+      @JsonKey(name: 'calculation', defaultValue: '')
+          String calculation,
+      @JsonKey(name: 'bonusRatio', defaultValue: 0)
+          int bonusRatio,
+      @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
+          int qualifyingQuantity,
+      @JsonKey(name: 'bonusQuantity', defaultValue: 0)
+          int bonusQuantity,
+      @JsonKey(name: 'limitPerTransaction', defaultValue: 0)
+          int limitPerTransaction,
+      @JsonKey(name: 'conditionId', defaultValue: '')
+          String conditionId,
+      @JsonKey(name: 'oldMaterialCode', defaultValue: '')
+          String oldMaterialCode});
 }
 
 /// @nodoc
@@ -605,56 +619,60 @@ class __$$_BonusMaterialDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BonusMaterialDto extends _BonusMaterialDto {
   const _$_BonusMaterialDto(
-      {@JsonKey(name: 'Id', defaultValue: 0) required this.id,
-      @JsonKey(name: 'MaterialNumber', defaultValue: '')
-      required this.materialNumber,
-      @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      required this.materialDescription,
-      @JsonKey(name: 'Calculation', defaultValue: '') required this.calculation,
-      @JsonKey(name: 'BonusRatio', defaultValue: 0) required this.bonusRatio,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      required this.qualifyingQuantity,
-      @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-      required this.bonusQuantity,
-      @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
-      required this.limitPerTransaction,
-      @JsonKey(name: 'ConditionId', defaultValue: '') required this.conditionId,
-      @JsonKey(name: 'OldMaterialCode', defaultValue: '')
-      required this.oldMaterialCode})
+      {@JsonKey(name: 'id', defaultValue: 0)
+          required this.id,
+      @JsonKey(name: 'materialNumber', defaultValue: '')
+          required this.materialNumber,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
+          required this.materialDescription,
+      @JsonKey(name: 'calculation', defaultValue: '')
+          required this.calculation,
+      @JsonKey(name: 'bonusRatio', defaultValue: 0)
+          required this.bonusRatio,
+      @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
+          required this.qualifyingQuantity,
+      @JsonKey(name: 'bonusQuantity', defaultValue: 0)
+          required this.bonusQuantity,
+      @JsonKey(name: 'limitPerTransaction', defaultValue: 0)
+          required this.limitPerTransaction,
+      @JsonKey(name: 'conditionId', defaultValue: '')
+          required this.conditionId,
+      @JsonKey(name: 'oldMaterialCode', defaultValue: '')
+          required this.oldMaterialCode})
       : super._();
 
   factory _$_BonusMaterialDto.fromJson(Map<String, dynamic> json) =>
       _$$_BonusMaterialDtoFromJson(json);
 
   @override
-  @JsonKey(name: 'Id', defaultValue: 0)
+  @JsonKey(name: 'id', defaultValue: 0)
   final int id;
   @override
-  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  @JsonKey(name: 'materialNumber', defaultValue: '')
   final String materialNumber;
   @override
-  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  @JsonKey(name: 'materialDescription', defaultValue: '')
   final String materialDescription;
   @override
-  @JsonKey(name: 'Calculation', defaultValue: '')
+  @JsonKey(name: 'calculation', defaultValue: '')
   final String calculation;
   @override
-  @JsonKey(name: 'BonusRatio', defaultValue: 0)
+  @JsonKey(name: 'bonusRatio', defaultValue: 0)
   final int bonusRatio;
   @override
-  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+  @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
   final int qualifyingQuantity;
   @override
-  @JsonKey(name: 'BonusQuantity', defaultValue: 0)
+  @JsonKey(name: 'bonusQuantity', defaultValue: 0)
   final int bonusQuantity;
   @override
-  @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+  @JsonKey(name: 'limitPerTransaction', defaultValue: 0)
   final int limitPerTransaction;
   @override
-  @JsonKey(name: 'ConditionId', defaultValue: '')
+  @JsonKey(name: 'conditionId', defaultValue: '')
   final String conditionId;
   @override
-  @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+  @JsonKey(name: 'oldMaterialCode', defaultValue: '')
   final String oldMaterialCode;
 
   @override
@@ -719,59 +737,60 @@ class _$_BonusMaterialDto extends _BonusMaterialDto {
 
 abstract class _BonusMaterialDto extends BonusMaterialDto {
   const factory _BonusMaterialDto(
-      {@JsonKey(name: 'Id', defaultValue: 0) required final int id,
-      @JsonKey(name: 'MaterialNumber', defaultValue: '')
-      required final String materialNumber,
-      @JsonKey(name: 'MaterialDescription', defaultValue: '')
-      required final String materialDescription,
-      @JsonKey(name: 'Calculation', defaultValue: '')
-      required final String calculation,
-      @JsonKey(name: 'BonusRatio', defaultValue: 0)
-      required final int bonusRatio,
-      @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
-      required final int qualifyingQuantity,
-      @JsonKey(name: 'BonusQuantity', defaultValue: 0)
-      required final int bonusQuantity,
-      @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
-      required final int limitPerTransaction,
-      @JsonKey(name: 'ConditionId', defaultValue: '')
-      required final String conditionId,
-      @JsonKey(name: 'OldMaterialCode', defaultValue: '')
-      required final String oldMaterialCode}) = _$_BonusMaterialDto;
+      {@JsonKey(name: 'id', defaultValue: 0)
+          required final int id,
+      @JsonKey(name: 'materialNumber', defaultValue: '')
+          required final String materialNumber,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
+          required final String materialDescription,
+      @JsonKey(name: 'calculation', defaultValue: '')
+          required final String calculation,
+      @JsonKey(name: 'bonusRatio', defaultValue: 0)
+          required final int bonusRatio,
+      @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
+          required final int qualifyingQuantity,
+      @JsonKey(name: 'bonusQuantity', defaultValue: 0)
+          required final int bonusQuantity,
+      @JsonKey(name: 'limitPerTransaction', defaultValue: 0)
+          required final int limitPerTransaction,
+      @JsonKey(name: 'conditionId', defaultValue: '')
+          required final String conditionId,
+      @JsonKey(name: 'oldMaterialCode', defaultValue: '')
+          required final String oldMaterialCode}) = _$_BonusMaterialDto;
   const _BonusMaterialDto._() : super._();
 
   factory _BonusMaterialDto.fromJson(Map<String, dynamic> json) =
       _$_BonusMaterialDto.fromJson;
 
   @override
-  @JsonKey(name: 'Id', defaultValue: 0)
+  @JsonKey(name: 'id', defaultValue: 0)
   int get id;
   @override
-  @JsonKey(name: 'MaterialNumber', defaultValue: '')
+  @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber;
   @override
-  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription;
   @override
-  @JsonKey(name: 'Calculation', defaultValue: '')
+  @JsonKey(name: 'calculation', defaultValue: '')
   String get calculation;
   @override
-  @JsonKey(name: 'BonusRatio', defaultValue: 0)
+  @JsonKey(name: 'bonusRatio', defaultValue: 0)
   int get bonusRatio;
   @override
-  @JsonKey(name: 'QualifyingQuantity', defaultValue: 0)
+  @JsonKey(name: 'qualifyingQuantity', defaultValue: 0)
   int get qualifyingQuantity;
   @override
-  @JsonKey(name: 'BonusQuantity', defaultValue: 0)
+  @JsonKey(name: 'bonusQuantity', defaultValue: 0)
   int get bonusQuantity;
   @override
-  @JsonKey(name: 'LimitPerTransaction', defaultValue: 0)
+  @JsonKey(name: 'limitPerTransaction', defaultValue: 0)
   int get limitPerTransaction;
   @override
-  @JsonKey(name: 'ConditionId', defaultValue: '')
+  @JsonKey(name: 'conditionId', defaultValue: '')
   String get conditionId;
   @override
-  @JsonKey(name: 'OldMaterialCode', defaultValue: '')
+  @JsonKey(name: 'oldMaterialCode', defaultValue: '')
   String get oldMaterialCode;
   @override
   @JsonKey(ignore: true)

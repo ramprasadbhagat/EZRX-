@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_detail_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_price_detail_dto.dart';
@@ -60,7 +61,7 @@ class MaterialPriceDetailRemoteDataSource {
       final materialDetailData =
           res.data['data']['customerMaterialPriceDetails'];
 
-      return List.from(materialDetailData)
+      return List.from(makeResponseCamelCase(jsonEncode(materialDetailData)))
           .map((e) => MaterialPriceDetailDto.fromJson(e).toDomain())
           .toList();
     });
@@ -105,7 +106,7 @@ class MaterialPriceDetailRemoteDataSource {
       final materialDetailData =
           res.data['data']['customerMaterialPriceDetails'];
 
-      return List.from(materialDetailData)
+      return List.from(makeResponseCamelCase(jsonEncode(materialDetailData)))
           .map((e) => MaterialPriceDetailDto.fromJson(e).toDomain())
           .toList();
     });
@@ -137,7 +138,7 @@ class MaterialPriceDetailRemoteDataSource {
       _materialPriceExceptionChecker(res: res);
       final priceData = res.data['data']['price'];
 
-      return List.from(priceData)
+      return List.from(makeResponseCamelCase(jsonEncode(priceData)))
           .map((e) => PriceDto.fromJson(e).toDomain())
           .toList();
     });

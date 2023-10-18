@@ -113,8 +113,16 @@ class ComboDealMaterialDetailBloc
       },
       updateItemQuantity: (e) {
         final items = Map<MaterialNumber, PriceAggregate>.from(state.items);
-        if (items[e.item] != null) {
+
+        if (items[e.item] == null) return;
+
+        final comboItem =
+            items[e.item]!.comboDeal.singleDeal(materialNumber: e.item);
+
+        if (e.qty > comboItem.minQty) {
           items[e.item] = items[e.item]!.copyWith(quantity: e.qty);
+        } else {
+          items[e.item] = items[e.item]!.copyWith(quantity: comboItem.minQty);
         }
 
         emit(
@@ -269,6 +277,14 @@ class ComboDealMaterialDetailBloc
               item.getMaterialNumber: item.selfComboDeal.mandatory,
           },
         );
+
+        final currentQuantityMap = e.comboMaterialsCurrentQuantity;
+        if (currentQuantityMap.isNotEmpty) {
+          currentQuantityMap.forEach((key, value) {
+            items[key] = items[key]!.copyWith(quantity: value);
+          });
+        }
+
         emit(
           state.copyWith(
             items: items,

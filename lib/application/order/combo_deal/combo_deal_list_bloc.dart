@@ -32,16 +32,16 @@ class ComboDealListBloc extends Bloc<ComboDealListEvent, ComboDealListState> {
             isFetching: true,
           ),
         );
+        // Todo : Need to revisit by hob
+        // if (state.comboDeals.containsKey(e.comboDeals.id)) {
+        //   emit(
+        //     state.copyWith(
+        //       isFetching: false,
+        //     ),
+        //   );
 
-        if (state.comboDeals.containsKey(e.comboDeals.id)) {
-          emit(
-            state.copyWith(
-              isFetching: false,
-            ),
-          );
-
-          return;
-        }
+        //   return;
+        // }
 
         final failureOrSuccess = await repository.getComboDealList(
           comboDealInfo: e.comboDeals,
@@ -66,7 +66,9 @@ class ComboDealListBloc extends Bloc<ComboDealListEvent, ComboDealListState> {
                       e.comboDeals.id: comboDeals,
                     },
                   ),
+                priceComboDeal: e.comboDeals,
                 isFetching: false,
+                apiFailureOrSuccessOption: none(),
               ),
             );
           },

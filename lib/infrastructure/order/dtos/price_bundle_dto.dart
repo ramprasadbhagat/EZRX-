@@ -9,12 +9,12 @@ class PriceBundleDto with _$PriceBundleDto {
   const PriceBundleDto._();
 
   const factory PriceBundleDto({
-    @JsonKey(name: 'BundleName', defaultValue: '') required String name,
-    @JsonKey(name: 'BundleCode', defaultValue: '') required String code,
-    @JsonKey(name: 'Conditions', defaultValue: '') required String conditions,
-    @JsonKey(name: 'BonusEligible', defaultValue: false)
+    @JsonKey(name: 'bundleName', defaultValue: '') required String name,
+    @JsonKey(name: 'bundleCode', defaultValue: '') required String code,
+    @JsonKey(name: 'conditions', defaultValue: '') required String conditions,
+    @JsonKey(name: 'bonusEligible', defaultValue: false)
         required bool bonusEligible,
-    @JsonKey(name: 'BundleInformation', defaultValue: <PriceBundleItemDto>[])
+    @JsonKey(name: 'bundleInformation', defaultValue: <PriceBundleItemDto>[])
         required List<PriceBundleItemDto> information,
   }) = _PriceBundleDto;
 
@@ -47,10 +47,10 @@ class PriceBundleItemDto with _$PriceBundleItemDto {
   const PriceBundleItemDto._();
 
   const factory PriceBundleItemDto({
-    @JsonKey(name: 'Type', defaultValue: '') required String type,
-    @JsonKey(name: 'Sequence', defaultValue: 0) required int sequence,
-    @JsonKey(name: 'Quantity', defaultValue: 0) required int quantity,
-    @JsonKey(name: 'Rate', defaultValue: 0) required double rate,
+    @JsonKey(name: 'type', defaultValue: '') required String type,
+    @JsonKey(name: 'sequence', defaultValue: 0) required int sequence,
+    @JsonKey(name: 'quantity', defaultValue: 0) required int quantity,
+    @JsonKey(name: 'rate', defaultValue: 0) required double rate,
   }) = _PriceBundleItemDto;
 
   factory PriceBundleItemDto.fromDomain(PriceBundleItem priceBundleItem) {

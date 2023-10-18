@@ -5,6 +5,7 @@ class ComboDealListState with _$ComboDealListState {
   const ComboDealListState._();
   const factory ComboDealListState({
     required Map<String, List<ComboDeal>> comboDeals,
+    required PriceComboDeal priceComboDeal,
     required bool isFetching,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
   }) = _ComboDealListState;
@@ -12,6 +13,7 @@ class ComboDealListState with _$ComboDealListState {
   factory ComboDealListState.initial() => ComboDealListState(
         comboDeals: {},
         isFetching: false,
+        priceComboDeal: PriceComboDeal.empty(),
         apiFailureOrSuccessOption: none(),
       );
 

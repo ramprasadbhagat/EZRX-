@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_price_detail_dto.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -19,7 +20,9 @@ void main() {
     });
     test('Test toDomain', () {
       final configs = MaterialPriceDetailDto.fromJson(
-        data['data']['customerMaterialPriceDetails'][0],
+        makeResponseCamelCase(
+          jsonEncode(data['data']['customerMaterialPriceDetails'][0]),
+        ),
       ).toDomain();
       expect(configs.price.materialNumber.getOrCrash(), '000000000021038305');
     });

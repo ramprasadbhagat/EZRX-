@@ -23,6 +23,7 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -1507,9 +1508,10 @@ void main() {
         await File('assets/json/getMaterialPriceResponse.json').readAsString(),
       );
       final finalData = data['data']['price'];
-      materialPriceListFromLocal = List.from(finalData)
-          .map((e) => PriceDto.fromJson(e).toDomain())
-          .toList();
+      materialPriceListFromLocal =
+          List.from(makeResponseCamelCase(jsonEncode(finalData)))
+              .map((e) => PriceDto.fromJson(e).toDomain())
+              .toList();
     });
     test('PriceAggregate single Bonus Deal', () {
       final price = materialPriceListFromLocal.firstWhere(

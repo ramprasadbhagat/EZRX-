@@ -9,8 +9,8 @@ class PriceTierDto with _$PriceTierDto {
   const PriceTierDto._();
 
   const factory PriceTierDto({
-    @JsonKey(name: 'Tier', defaultValue: '') required String tier,
-    @JsonKey(name: 'PriceTier', defaultValue: <PriceTierItemDto>[])
+    @JsonKey(name: 'tier', defaultValue: '') required String tier,
+    @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
         required List<PriceTierItemDto> items,
   }) = _PriceTierDto;
 
@@ -41,11 +41,11 @@ class PriceTierItemDto with _$PriceTierItemDto {
   const PriceTierItemDto._();
 
   const factory PriceTierItemDto({
-    @JsonKey(name: 'Type', defaultValue: '') required String type,
-    @JsonKey(name: 'ApplyBonus', defaultValue: false) required bool applyBonus,
-    @JsonKey(name: 'Sequence', defaultValue: 0) required int sequence,
-    @JsonKey(name: 'Quantity', defaultValue: 0) required int quantity,
-    @JsonKey(name: 'Rate', defaultValue: 0) required double rate,
+    @JsonKey(name: 'type', defaultValue: '') required String type,
+    @JsonKey(name: 'applyBonus', defaultValue: false) required bool applyBonus,
+    @JsonKey(name: 'sequence', defaultValue: 0) required int sequence,
+    @JsonKey(name: 'quantity', defaultValue: 0) required int quantity,
+    @JsonKey(name: 'rate', defaultValue: 0) required double rate,
   }) = _PriceTierItemDto;
 
   factory PriceTierItemDto.fromDomain(PriceTierItem priceTierItem) {
