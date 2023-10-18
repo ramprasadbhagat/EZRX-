@@ -271,6 +271,7 @@ void main() {
     await filterSortProductRobot.searchWithKeyboardAction(manufacturerMaterial);
     filterSortProductRobot.verifyListManufacturerMatched(manufacturerMaterial);
     await filterSortProductRobot.tapFirstSuggestedManufacturer();
+    filterSortProductRobot.verifyManufacturerSelected(manufacturerMaterial);
     await filterSortProductRobot.tapToBackIcon();
     filterSortProductRobot.verifyManufactureListSelectedVisible(1);
     await filterSortProductRobot.tapFilterApplyButton();
@@ -334,8 +335,8 @@ void main() {
     await filterSortProductRobot.openFilterManufacturerScreen();
     await filterSortProductRobot.searchWithKeyboardAction(manufacturerMaterial);
     await filterSortProductRobot.tapFirstSuggestedManufacturer();
+    filterSortProductRobot.verifyManufacturerSelected(manufacturerMaterial);
     await commonRobot.tapToBackIcon();
-
     await filterSortProductRobot.tapFilterApplyButton();
 
     productRobot.verifyMaterialCartVisible();

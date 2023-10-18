@@ -188,6 +188,69 @@ void main() {
       );
 
       testWidgets(
+        'Test Product Filter By Manufacturer Button',
+        (tester) async {
+          final manufactureList = ['BAXTER HEALTHCARE -M', 'AMO IRELAND'];
+          when(() => mockMaterialFilterBloc.state).thenReturn(
+            MaterialFilterState.initial().copyWith(
+              materialFilter: MaterialFilter.empty().copyWith(
+                manufactureMapOptions: {
+                  for (var e in manufactureList) e: false
+                },
+              ),
+            ),
+          );
+          final expectedState = [
+            MaterialFilterState.initial().copyWith(
+              materialFilter: MaterialFilter.empty().copyWith(
+                manufactureMapOptions: {for (var e in manufactureList) e: true},
+              ),
+            ),
+          ];
+          whenListen(
+            mockMaterialFilterBloc,
+            Stream.fromIterable(expectedState),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(find.text('Filter by'.tr()), findsOneWidget);
+
+          final showCountryButton =
+              find.widgetWithText(InkWell, 'Country of origin'.tr());
+          expect(showCountryButton, findsOneWidget);
+          final manufacturerLabel = find.text('Manufacturer'.tr());
+          await tester.tap(manufacturerLabel);
+          await tester.pumpAndSettle();
+          await tester.tap(find.byKey(WidgetKeys.suggestedManufacturer).first);
+          verify(
+            () => mockMaterialFilterBloc.add(
+              MaterialFilterEvent.updateSelectedMaterialFilter(
+                MaterialFilterType.manufactured,
+                manufactureList.first,
+              ),
+            ),
+          ).called(1);
+          await tester.pump(const Duration(seconds: 2));
+
+          await tester.tap(find.byKey(WidgetKeys.suggestedManufacturer).last);
+          verify(
+            () => mockMaterialFilterBloc.add(
+              MaterialFilterEvent.updateSelectedMaterialFilter(
+                MaterialFilterType.manufactured,
+                manufactureList.last,
+              ),
+            ),
+          ).called(1);
+          expect(
+            find.byKey(WidgetKeys.suggestedManufacturer),
+            findsNWidgets(2),
+          );
+          await tester.pump(const Duration(seconds: 2));
+          expect(find.byType(ChoiceChip), findsNWidgets(2));
+        },
+      );
+
+      testWidgets(
         'Test Product Filter By Category Options When Filter Selected',
         (tester) async {
           final expectedMaterialFilterStates = Stream.fromIterable(

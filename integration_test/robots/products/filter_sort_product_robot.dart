@@ -103,9 +103,9 @@ class FilterSortProductRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyManufacturerSelected() {
+  void verifyManufacturerSelected(String filterSelected) {
     expect(
-      find.byKey(WidgetKeys.manufacturerFilterSelected).first,
+      find.byKey(WidgetKeys.manufacturerFilterSelected(filterSelected)),
       findsOneWidget,
     );
   }

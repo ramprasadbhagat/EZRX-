@@ -215,8 +215,8 @@ class WidgetKeys {
   static const Key applyMaterialFilter = Key('applyMaterialFilter');
   static const Key searchManufacturerFilterField =
       Key('searchManufacturerFilterField');
-  static const Key manufacturerFilterSelected =
-      Key('manufacturerFilterSelected');
+  static Key manufacturerFilterSelected(String filter) =>
+      Key('manufacturerFilterSelected$filter');
   static const Key manufacturerMaterials = Key('manufacturerMaterials');
   static const Key expandIcon = Key('expandIcon');
   static const Key materialDosage = Key('materialDosage');

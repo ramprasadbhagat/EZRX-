@@ -20,7 +20,7 @@ class _SelectedItem extends StatelessWidget {
                   .where((element) => element.value)
                   .map(
                     (e) => ChoiceChip(
-                      key: WidgetKeys.manufacturerFilterSelected,
+                      key: WidgetKeys.manufacturerFilterSelected(e.key),
                       label: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 4.0,
