@@ -30,6 +30,7 @@ class _AnnouncementInfoTitleSection extends StatelessWidget {
                     FittedBox(
                       child: Text(
                         details.publishedDate.dateOrDashString,
+                        key: WidgetKeys.announcementDetailDateKey,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: ZPColors.neutralsGrey1,
                               fontSize: 10,

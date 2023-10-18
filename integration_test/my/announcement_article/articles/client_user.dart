@@ -5,9 +5,10 @@ import 'package:integration_test/integration_test.dart';
 import '../../../core/common.dart';
 import '../../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+import '../../../robots/announcement_article/announcement_article_root_robot.dart';
 import '../../../robots/common/common_robot.dart';
-import '../../../robots/home/articles_details_robot.dart';
-import '../../../robots/home/articles_robot.dart';
+import '../../../robots/announcement_article/articles/articles_details_robot.dart';
+import '../../../robots/announcement_article/articles/articles_robot.dart';
 import '../../../robots/login_robot.dart';
 import '../../../robots/more/more_robot.dart';
 
@@ -15,6 +16,7 @@ void main() {
   late LoginRobot loginRobot;
   late CommonRobot commonRobot;
   late MoreRobot moreRobot;
+  late AnnouncementArticleRootRobot announcementArticleRootRobot;
   late ArticleRobot articleRobot;
   late ArticleDetailsRobot articleDetailsRobot;
 
@@ -32,6 +34,7 @@ void main() {
     loginRobot = LoginRobot(tester);
     commonRobot = CommonRobot(tester);
     moreRobot = MoreRobot(tester);
+    announcementArticleRootRobot = AnnouncementArticleRootRobot(tester);
     articleRobot = ArticleRobot(tester);
     articleDetailsRobot = ArticleDetailsRobot(tester);
   }
@@ -46,8 +49,8 @@ void main() {
   }
 
   Future<void> goToArticlePage() async {
-    articleRobot.verifyAnnouncementsArticlePage();
-    await articleRobot.switchToArticleTabPage();
+    announcementArticleRootRobot.verifyAnnouncementPage();
+    await announcementArticleRootRobot.switchToArticleTab();
   }
 
   testWidgets('EZRX-T160 | Verify articles page', (tester) async {
@@ -59,8 +62,8 @@ void main() {
     await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
     await goToAnnouncementArticlePage();
 
-    articleRobot.verifyAnnouncementsArticlePage();
-    articleRobot.verifyTabBar();
+    announcementArticleRootRobot.verifyAnnouncementPage();
+    announcementArticleRootRobot.verifyTabBar();
     await goToArticlePage();
     articleRobot.verifySearchBar();
     articleRobot.verifyFilterIcon();
@@ -80,7 +83,7 @@ void main() {
     await articleRobot.tapArticleItem();
     articleDetailsRobot.verifyArticleDetailsPage();
     await articleDetailsRobot.tapArticleDetailsBackButton();
-    articleRobot.verifyAnnouncementsArticlePage();
+    announcementArticleRootRobot.verifyArticlesPage();
   });
 
   testWidgets('EZRX-T165 | Verify search articles invalid data',

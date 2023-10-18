@@ -113,6 +113,7 @@ class _AnnouncementInfoDetailsPageState
                         flexibleSpace: Stack(
                           children: [
                             FlexibleSpaceBar(
+                              key: WidgetKeys.announcementDetailImageKey,
                               background: CustomImage(
                                 width: MediaQuery.of(context).size.width,
                                 imageUrl:
@@ -194,6 +195,7 @@ class _AnnouncementInfoDetailsPageState
                               ),
                             ),
                             _AnnouncementInfoBottomSheet(
+                              key: WidgetKeys.announcementDetailOtherSection,
                               isLoading: state.isLoading,
                               changeState: _changeStateOnMovingToNewDetails,
                             ),

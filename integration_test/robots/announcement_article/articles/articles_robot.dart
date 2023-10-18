@@ -8,31 +8,10 @@ class ArticleRobot {
 
   ArticleRobot(this.tester);
 
-  final page = find.byKey(WidgetKeys.announcementsTab);
-  final announcementsTabKey = find.byKey(
-    WidgetKeys.announcementsArticleTabItems('announcements'),
-  );
-  final articleTabKey = find.byKey(
-    WidgetKeys.announcementsArticleTabItems('articles'),
-  );
   final firstArticleItemKey =
       find.byKey(WidgetKeys.genericKey(key: 'articleItem0'));
   final notFoundDataKey = find.byKey(WidgetKeys.noArticleToShowKey);
-
   final customSnackBar = find.byKey(WidgetKeys.customSnackBar);
-
-  void verifyAnnouncementsArticlePage() {
-    expect(page, findsOneWidget);
-  }
-
-  void verifyTabBar() {
-    expect(announcementsTabKey, findsOneWidget);
-    expect(articleTabKey, findsOneWidget);
-  }
-
-  void verifyAnnouncementsTabKey() {
-    expect(announcementsTabKey, findsOneWidget);
-  }
 
   void verifySearchBar() {
     expect(find.byType(CustomSearchBar), findsOneWidget);
@@ -109,10 +88,5 @@ class ArticleRobot {
       ),
       findsOneWidget,
     );
-  }
-
-  Future<void> switchToArticleTabPage() async {
-    await tester.tap(articleTabKey);
-    await tester.pumpAndSettle();
   }
 }

@@ -51,9 +51,7 @@ class AnnouncementsPage extends StatelessWidget {
                     ]
                         .map(
                           (e) => Tab(
-                            key: WidgetKeys.announcementsArticleTabItems(
-                              e.toLowerCase(),
-                            ),
+                            key: WidgetKeys.genericKey(key: e),
                             text: context.tr(e),
                           ),
                         )
@@ -72,6 +70,7 @@ class AnnouncementsPage extends StatelessWidget {
                         ),
                         //TODO: Backend don't support filter yet, will revisit when filter option available from backend
                         // IconButton(
+                        //  key: WidgetKeys.announcementFilterKey,
                         //   onPressed: () => {},
                         //   icon: const Icon(
                         //     Icons.tune,

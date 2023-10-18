@@ -175,6 +175,7 @@ class _AnnouncementItem extends StatelessWidget {
                 Expanded(
                   child: Text(
                     item.publishedDate.dateOrDashString,
+                    key: WidgetKeys.announcementItemDateKey,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: ZPColors.neutralsGrey1,
                           fontSize: 10,
@@ -195,6 +196,7 @@ class _AnnouncementItem extends StatelessWidget {
                   ),
                   child: Text(
                     context.tr('New'),
+                    key: WidgetKeys.announcementItemNewTagKey,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: ZPColors.whiteBgCard,
                         ),
@@ -204,6 +206,7 @@ class _AnnouncementItem extends StatelessWidget {
             ),
             Text(
               item.title,
+              key: WidgetKeys.announcementItemTitleKey,
               style: Theme.of(context).textTheme.labelSmall,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,

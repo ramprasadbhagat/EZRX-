@@ -56,6 +56,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: WidgetKeys.articlesTab,
       body: BlocBuilder<ArticlesInfoBloc, ArticlesInfoState>(
         buildWhen: (previous, current) =>
             previous.isFetching != current.isFetching ||

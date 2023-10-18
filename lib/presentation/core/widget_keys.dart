@@ -99,7 +99,9 @@ class WidgetKeys {
   static const Key homeQuickAccessChatSupportMenu =
       Key('homeQuickAccessChatSupportMenu');
   static const Key announcementsTab = Key('announcementsTab');
-  static Key announcementsArticleTabItems(String tabItem) => Key(tabItem);
+  static const Key articlesTab = Key('articlesTab');
+  static const Key announcementTabBar = Key('Announcements');
+  static const Key articleTabBar = Key('Articles');
   static const Key browseProductIcon = Key('browseProductIcon');
   static const Key browseProduct = Key('browseProduct');
   static const Key announcementIcon = Key('announcementIcon');
@@ -785,6 +787,15 @@ class WidgetKeys {
       Key('announcementDetailsItem$index');
   static const Key announcementDetailsBottomBackButtonKey =
       Key('announcementDetailsBottomBackButtonKey');
+  static const Key announcementItemDateKey = Key('announcementItemDateKey');
+  static const Key announcementItemTitleKey = Key('announcementItemTitleKey');
+  static const Key announcementItemNewTagKey = Key('announcementItemNewTagKey');
+  static const Key announcementFilterKey = Key('announcementFilterKey');
+  static const Key announcementDetailImageKey =
+      Key('announcementDetailImageKey');
+  static const Key announcementDetailDateKey = Key('announcementDetailDateKey');
+  static const Key announcementDetailOtherSection =
+      Key('announcementDetailOtherSection');
 
   //============================================================
   //  Article

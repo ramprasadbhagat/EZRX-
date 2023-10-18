@@ -1,5 +1,4 @@
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../common/common_robot.dart';
@@ -13,12 +12,11 @@ class MoreRobot extends CommonRobot {
   final newRequestFloatingButton =
       find.byKey(WidgetKeys.returnByItemsNewRequestButton);
   final paymentTile = find.byKey(WidgetKeys.paymentsTile);
-  final announcementArticleTile =
-      find.byKey(WidgetKeys.announcementArticleTile);
-
   final loginOnBehalf = find.byKey(WidgetKeys.loginOnBehalfButtonKey);
   final securityTile = find.byKey(WidgetKeys.securityTile);
   final logout = find.byKey(WidgetKeys.logOutTile);
+  final announcementArticleTile =
+      find.byKey(WidgetKeys.announcementArticleTile);
 
   Future<void> tapReturnsTile() async {
     await tester.tap(returnsTile);
@@ -56,42 +54,39 @@ class MoreRobot extends CommonRobot {
   }
 
   Future<void> loginOnBehalfToMoreTab(String userName) async {
-    await tester.drag(
-      find.byKey(
-        WidgetKeys.settingTile,
-      ),
-      const Offset(0.0, -200),
-    );
-    await tester.pumpAndSettle();
+    await _dragToVerify(loginOnBehalf);
     await tester.tap(loginOnBehalf);
     await tester.pumpAndSettle();
     await tester.enterText(
-      find.byKey(
-        WidgetKeys.proxyLoginUserNameField,
-      ),
+      find.byKey(WidgetKeys.proxyLoginUserNameField),
       userName,
     );
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(WidgetKeys.loginOnBehalfLoginButtonKey));
   }
 
+  Future<void> verifyAnnouncementArticleTile() =>
+      _dragToVerify(announcementArticleTile);
+
   Future<void> tapAnnouncementArticleTile() async {
     await tester.tap(announcementArticleTile);
     await tester.pumpAndSettle();
   }
 
-  Future<void> findLogout() async {
-    final listMore = find.byType(ListView).last;
-    await tester.dragUntilVisible(
-      logout,
-      listMore,
-      const Offset(0, -250),
-    );
-    expect(logout, findsOneWidget);
-  }
+  Future<void> findLogout() => _dragToVerify(logout);
 
   Future<void> tapLogout() async {
     await tester.tap(logout);
     await tester.pumpAndSettle();
+  }
+
+  Future<void> _dragToVerify(Finder finder) async {
+    await tester.dragUntilVisible(
+      finder,
+      find.byKey(WidgetKeys.moreTapListContent),
+      const Offset(0, -250),
+    );
+    await tester.pump();
+    expect(finder, findsOneWidget);
   }
 }
