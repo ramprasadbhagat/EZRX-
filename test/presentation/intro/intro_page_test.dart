@@ -33,6 +33,7 @@ void main() {
   Widget getIntroPage() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<IntroBloc>(
           create: (context) => introBlocMock,
