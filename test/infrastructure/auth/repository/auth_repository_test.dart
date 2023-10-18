@@ -1,7 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -16,22 +14,22 @@ import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:mocktail/mocktail.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
+import '../../order/repository/order_repository_test.dart';
 // ignore: depend_on_referenced_packages
 import 'package:local_auth_android/local_auth_android.dart';
 // ignore: depend_on_referenced_packages
 import 'package:local_auth_ios/local_auth_ios.dart';
-import 'package:mocktail/mocktail.dart';
-
-import '../../order/repository/order_repository_test.dart';
-// ignore: depend_on_referenced_packages
-// ignore: depend_on_referenced_packages
-// ignore: depend_on_referenced_packages
-// ignore: depend_on_referenced_packages
 
 class ConfigMock extends Mock implements Config {}
 
@@ -69,7 +67,6 @@ void main() {
   late OktaLoginServices oktaLoginServicesMock;
   late PushNotificationService pushNotificationServiceMock;
   late LocalAuthentication localAuthenticationMock;
-  late RoleName roleNameMock;
   late MixpanelService mixpanelService;
 
   late AuthRepository repository;
@@ -80,16 +77,51 @@ void main() {
   const refreshToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
   final fakeJWT = JWT(rootAdminToken);
-  final fakeUser = User.empty().copyWith(
-    username: Username('fake-user'),
-    role: Role.empty().copyWith(
-      type: RoleType('client'),
+  final fakeRefreshToken = JWT(refreshToken);
+  final fakeExtSalesrepToken = JWT(
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJadWVsbGlnIFBoYXJtYSIsInN1YiI6IkFjY2VzcyBUb2tlbiIsImV4cCI6MTY5NzQzMTU0MSwiaWF0IjoxNjk3NDI3OTQxLCJpZCI6MzY5Niwicm9sZSI6IkV4dGVybmFsIFNhbGVzIFJlcCIsInVzZXJuYW1lIjoidGVzdGV4dHNhbGVzcmVwIiwicmlnaHRzIjpbeyJ2YWx1ZSI6W3sic2hpcFRvQ29kZSI6WyIwMDcwMTQ5ODYzIiwiMDA3MDE0OTg2NSIsIjAwNzAxNDk4NjciLCIwMDcwMTQ5ODY5IiwiMDA3MDE0OTg3MCIsIjAwNzMzMDU3MDUiXSwiY3VzdG9tZXJDb2RlIjoiMDAzMDA4MjcwNyIsInNhbGVzT3JnIjoiMjAwMSJ9XX1dLCJzYWxlc09yZ3MiOlsiMjAwMSJdfQ.aGaMKeeeVCYkrnQoqNqVYHLBiPtJPyv9htE_kC--HRM',
+  );
+  final fakePassword = Password.login('fake-password');
+  final fakeUserName = Username('fake-username');
+  final fakeError = Exception('fake-error');
+  final fakePlatformException =
+      PlatformException(code: 'fake-platform-exception');
+
+  const fakeLocalizedReason = 'Complete the biometrics to continue';
+  final fakeAuthMessages = <AuthMessages>[
+    const AndroidAuthMessages(
+      signInTitle: 'Biometric authentication required!',
+      cancelButton: 'No thanks',
+      biometricNotRecognized: 'Failed Attempt',
+      biometricRequiredTitle: 'Supports Biometric, but not setup',
+      biometricSuccess: 'Recognised you',
+      goToSettingsButton: 'Let\'s set-up biometric',
+      goToSettingsDescription: 'You can set-up biometric on settings',
     ),
-    enableOrderType: true,
+    const IOSAuthMessages(
+      cancelButton: 'No thanks',
+      goToSettingsButton: 'Let\'s set-up biometric',
+      goToSettingsDescription: 'You can set-up biometric on settings',
+      lockOut: 'You have been locked out',
+      localizedFallbackTitle: 'Fallback',
+    ),
+  ];
+  const fakeOptions = AuthenticationOptions(
+    useErrorDialogs: true,
+    stickyAuth: true,
+    sensitiveTransaction: true,
   );
 
   setUpAll(
-    () async {
+    () {
+      registerFallbackValue(JWTDto.fromDomain(fakeJWT, fakeRefreshToken));
+      registerFallbackValue(
+        CredDto(
+          username: fakeUserName.getOrCrash(),
+          password: fakePassword.getOrCrash(),
+        ),
+      );
+
       configMock = ConfigMock();
       localDataSourceMock = AuthLocalDataSourceMock();
 
@@ -101,7 +133,6 @@ void main() {
       localAuthenticationMock = LocalAuthenticationMock();
       oktaLoginServicesMock = OktaLoginServicesMock();
       pushNotificationServiceMock = PushNotificationServiceMock();
-      roleNameMock = RoleNameMock();
       mixpanelService = MixpanelServiceMock();
 
       repository = AuthRepository(
@@ -117,760 +148,931 @@ void main() {
         pushNotificationService: pushNotificationServiceMock,
         settingStorage: settingStorageMock,
       );
-      when(() => credStorageMock.get()).thenAnswer(
-        (invocation) async =>
-            CredDto(username: 'username', password: 'password'),
-      );
-      when(
-        () => tokenStorageMock.clear(),
-      ).thenAnswer((invocation) async => null);
-      when(
-        () => tokenStorageMock
-            .set(JWTDto.fromDomain(JWT(rootAdminToken), JWT(refreshToken))),
-      ).thenAnswer((invocation) async => null);
-      when(
-        () => oktaLoginServicesMock.logout(),
-      ).thenAnswer((invocation) async => null);
-      when(
-        () => accountSelectorStorageMock.delete(),
-      ).thenAnswer((invocation) async => '');
-      when(
-        () async => repository.initTokenStorage(),
-      ).thenAnswer(
-        (invocation) async => const Right(unit),
-      );
-      when(
-        () => localAuthenticationMock.authenticate(
-          localizedReason: 'Complete the biometrics to continue',
-          authMessages: const <AuthMessages>[
-            AndroidAuthMessages(
-              signInTitle: 'Biometric authentication required!',
-              cancelButton: 'No thanks',
-              biometricNotRecognized: 'Failed Attempt',
-              biometricRequiredTitle: 'Supports Biometric, but not setup',
-              biometricSuccess: 'Recognised you',
-              goToSettingsButton: 'Let\'s set-up biometric',
-              goToSettingsDescription: 'You can set-up biometric on settings',
-            ),
-            IOSAuthMessages(
-              cancelButton: 'No thanks',
-              goToSettingsButton: 'Let\'s set-up biometric',
-              goToSettingsDescription: 'You can set-up biometric on settings',
-              lockOut: 'You have been locked out',
-              localizedFallbackTitle: 'Fallback',
-            ),
-          ],
-          options: const AuthenticationOptions(
-            useErrorDialogs: true,
-            stickyAuth: true,
-            sensitiveTransaction: true,
-          ),
-        ),
-      ).thenAnswer((invocation) async {
-        return true;
-      });
-
-      when(
-        () => localAuthenticationMock.canCheckBiometrics,
-      ).thenAnswer((invocation) async {
-        return true;
-      });
-
-      when(
-        () => localAuthenticationMock.isDeviceSupported(),
-      ).thenAnswer((invocation) async {
-        return true;
-      });
-
-      when(
-        () => localAuthenticationMock.getAvailableBiometrics(),
-      ).thenAnswer((invocation) async {
-        return [BiometricType.fingerprint];
-      });
-
-      when(
-        () => roleNameMock.isEligibleLoginRoleForZPAdmin,
-      ).thenAnswer((invocation) {
-        return true;
-      });
     },
   );
-  group('Auth Repository should - ', () {
-    test(
-      'User login using password with uat',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-          settingStorage: settingStorageMock,
-        );
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+  group(
+    'Auth Repository should - ',
+    () {
+      test(
+        'test login mock success',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
 
-        when(() => pushNotificationServiceMock.getFCMToken())
-            .thenAnswer((invocation) async => fakeJWT.getValue());
-        // final testMock = Future<dynamic>.delayed(const Duration(seconds: 1));
+          when(() => localDataSourceMock.loginWithPassword()).thenAnswer(
+            (_) async => Login(access: fakeJWT, refresh: fakeRefreshToken),
+          );
+          final result = await repository.login(
+            password: fakePassword,
+            username: fakeUserName,
+          );
+          expect(result.isRight(), true);
+        },
+      );
 
+      test(
+        'test login mock failure',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+
+          when(() => localDataSourceMock.loginWithPassword()).thenThrow(
+            (_) async => fakeError,
+          );
+          final result = await repository.login(
+            password: fakePassword,
+            username: fakeUserName,
+          );
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'test login uat success',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+
+          when(() => pushNotificationServiceMock.getFCMToken())
+              .thenAnswer((_) async => fakeJWT.getValue());
+
+          when(
+            () => remoteDataSourceMock.loginWithPassword(
+              password: fakePassword.getValidPassword,
+              username: fakeUserName.getValue(),
+              fcmToken: fakeJWT.getValue(),
+            ),
+          ).thenAnswer((_) async => Login.empty());
+          final result = await repository.login(
+            password: fakePassword,
+            username: fakeUserName,
+          );
+          expect(result.isRight(), true);
+          verify(
+            () => mixpanelService.trackEvent(
+              eventName: MixpanelEvents.loginSuccess,
+              properties: {
+                MixpanelProps.loginMethod: 'By username',
+              },
+            ),
+          ).called(1);
+        },
+      );
+
+      test(
+        'test login uat failure',
+        () async {
+          final serverException = ServerException();
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+
+          when(() => pushNotificationServiceMock.getFCMToken())
+              .thenAnswer((_) async => fakeJWT.getValue());
+
+          when(
+            () => remoteDataSourceMock.loginWithPassword(
+              password: fakePassword.getValidPassword,
+              username: fakeUserName.getValue(),
+              fcmToken: fakeJWT.getValue(),
+            ),
+          ).thenThrow(serverException);
+          final result = await repository.login(
+            password: fakePassword,
+            username: fakeUserName,
+          );
+
+          expect(result.isLeft(), true);
+          verify(
+            () => mixpanelService.trackEvent(
+              eventName: MixpanelEvents.loginFailure,
+              properties: {
+                MixpanelProps.errorMessage: serverException.message,
+                MixpanelProps.loginMethod: 'By username',
+              },
+            ),
+          ).called(1);
+        },
+      );
+
+      test(
+        'test proxyLogin mock success',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+          when(() => localDataSourceMock.proxyLoginWithUsername()).thenAnswer(
+            (_) async => Login(
+              access: fakeJWT,
+              refresh: fakeRefreshToken,
+            ),
+          );
+          final result = await repository.proxyLogin(
+            username: fakeUserName,
+            salesOrg: fakeSalesOrg,
+          );
+          expect(result.isRight(), true);
+        },
+      );
+
+      test(
+        'test proxyLogin mock failure',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+          when(() => localDataSourceMock.proxyLoginWithUsername()).thenThrow(
+            (_) async => fakeError,
+          );
+          final result = await repository.proxyLogin(
+            username: fakeUserName,
+            salesOrg: fakeSalesOrg,
+          );
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'test proxyLogin uat success',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+          when(
+            () => remoteDataSourceMock.proxyLoginWithUsername(
+              username: fakeUserName.getValue(),
+              salesOrg: fakeSalesOrg.getOrCrash(),
+            ),
+          ).thenAnswer(
+            (_) async => Login(
+              access: fakeJWT,
+              refresh: fakeRefreshToken,
+            ),
+          );
+          final result = await repository.proxyLogin(
+            username: fakeUserName,
+            salesOrg: fakeSalesOrg,
+          );
+          expect(result.isRight(), true);
+        },
+      );
+
+      test(
+        'test proxyLogin uat failure',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+          when(
+            () => remoteDataSourceMock.proxyLoginWithUsername(
+              username: fakeUserName.getValue(),
+              salesOrg: fakeSalesOrg.getOrCrash(),
+            ),
+          ).thenThrow((_) => fakeError);
+          final result = await repository.proxyLogin(
+            username: fakeUserName,
+            salesOrg: fakeSalesOrg,
+          );
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'test isEligibleProxyLogin root admin',
+        () async {
+          final result = await repository.isEligibleProxyLogin(
+            user: fakeRootAdminUser,
+            jwt: fakeJWT,
+          );
+          expect(result.isRight(), true);
+        },
+      );
+
+      test(
+        'test isEligibleProxyLogin is not ZP Admin',
+        () async {
+          final result = await repository.isEligibleProxyLogin(
+            user: fakeInternalSalesRepUser,
+            jwt: fakeJWT,
+          );
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'test isEligibleProxyLogin Is Not Eligible Login Role For ZPAdmin',
+        () async {
+          final result = await repository.isEligibleProxyLogin(
+            user: fakeZPAdminUser,
+            jwt: fakeJWT,
+          );
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'test isEligibleProxyLogin Sales Org Not Matches',
+        () async {
+          final result = await repository.isEligibleProxyLogin(
+            user: fakeZPAdminUser.copyWith(
+              userSalesOrganisations: [
+                fakeSalesOrganisation,
+              ],
+            ),
+            jwt: fakeExtSalesrepToken,
+          );
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'test isEligibleProxyLogin Sales Org Matches',
+        () async {
+          final result = await repository.isEligibleProxyLogin(
+            user: fakeZPAdminUser.copyWith(
+              userSalesOrganisations: [
+                SalesOrganisation.empty().copyWith(
+                  salesOrg: SalesOrg('2001'),
+                ),
+              ],
+            ),
+            jwt: fakeExtSalesrepToken,
+          );
+          expect(result.isRight(), true);
+        },
+      );
+
+      test(
+        'test getEZRXJWT mock success',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+          when(
+            () => localDataSourceMock.loginWithOktaToken(),
+          ).thenAnswer(
+            (_) async => Login(
+              access: fakeJWT,
+              refresh: fakeRefreshToken,
+            ),
+          );
+          final result = await repository.getEZRXJWT(fakeJWT);
+          expect(result.isRight(), true);
+        },
+      );
+
+      test(
+        'test getEZRXJWT mock failure',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+          when(
+            () => localDataSourceMock.loginWithOktaToken(),
+          ).thenThrow(
+            (_) => fakeError,
+          );
+          final result = await repository.getEZRXJWT(fakeJWT);
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test(
+        'test getEZRXJWT uat success',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+          when(
+            () => pushNotificationServiceMock.getFCMToken(),
+          ).thenAnswer(
+            (_) async => fakeJWT.getOrCrash(),
+          );
+          when(
+            () => remoteDataSourceMock.loginWithOktaToken(
+              oktaAccessToken: fakeJWT.getOrCrash(),
+              fcmToken: fakeJWT.getOrCrash(),
+            ),
+          ).thenAnswer(
+            (_) async => Login(
+              access: fakeJWT,
+              refresh: fakeRefreshToken,
+            ),
+          );
+          final result = await repository.getEZRXJWT(fakeJWT);
+          expect(result.isRight(), true);
+        },
+      );
+
+      test(
+        'test getEZRXJWT uat failure',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+          when(
+            () => pushNotificationServiceMock.getFCMToken(),
+          ).thenThrow(
+            (_) async => fakeError,
+          );
+
+          final result = await repository.getEZRXJWT(fakeJWT);
+          expect(result.isLeft(), true);
+        },
+      );
+
+      test('test storeJWT success', () async {
         when(
-          () => remoteDataSourceMock.loginWithPassword(
-            password: 'old',
-            username: 'old',
-            fcmToken: fakeJWT.getValue(),
-          ),
-        ).thenAnswer((invocation) async => Login.empty());
-        final pass = Password.login('old');
-        final userName = Username('old');
-
-        final result =
-            await repository.login(password: pass, username: userName);
-
-        expect(result.isRight(), true);
-      },
-    );
-
-    test(
-      'User failed to login using password with mock',
-      () async {
-        repository = AuthRepository(
-          settingStorage: settingStorageMock,
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
+          () => tokenStorageMock.set(any<JWTDto>()),
+        ).thenAnswer((invocation) => Future.value());
+        final result = await repository.storeJWT(
+          access: fakeJWT,
+          refresh: fakeRefreshToken,
         );
+        expect(result.isRight(), true);
+      });
 
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
-
-        when(() => localDataSourceMock.loginWithPassword())
-            .thenThrow((invocation) async => Exception('fake-error'));
-        final pass = Password.login('old');
-        final userName = Username('old');
-
+      test('test storeJWT failure', () async {
+        when(
+          () => tokenStorageMock.set(any<JWTDto>()),
+        ).thenThrow(
+          fakeError,
+        );
         final result =
-            await repository.login(password: pass, username: userName);
+            await repository.storeJWT(access: fakeJWT, refresh: fakeJWT);
         expect(result.isLeft(), true);
-      },
-    );
+      });
 
-    test(
-      'Allow user to login using password with mock',
-      () async {
-        repository = AuthRepository(
-          settingStorage: settingStorageMock,
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
-
-        when(() => localDataSourceMock.loginWithPassword())
-            .thenAnswer((invocation) async => Login.empty());
-        final pass = Password.login('old');
-        final userName = Username('old');
-        final result =
-            await repository.login(password: pass, username: userName);
-        expect(result.isRight(), true);
-      },
-    );
-
-    test(
-      'Allow user to proxy login with mock',
-      () async {
-        repository = AuthRepository(
-          settingStorage: settingStorageMock,
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
-
-        when(() => localDataSourceMock.proxyLoginWithUsername())
-            .thenAnswer((invocation) async => Login.empty());
-        final userName = Username('old');
-        final result = await repository.proxyLogin(
-          username: userName,
-          salesOrg: SalesOrg('2001'),
-        );
-        expect(result.isRight(), true);
-      },
-    );
-
-    test(
-      'User failed to proxy login with mock',
-      () async {
-        repository = AuthRepository(
-          settingStorage: settingStorageMock,
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
-
-        when(() => localDataSourceMock.proxyLoginWithUsername())
-            .thenThrow((invocation) async => Exception('fake-error'));
-        final userName = Username('old');
-        final result = await repository.proxyLogin(
-          username: userName,
-          salesOrg: SalesOrg('2001'),
-        );
-        expect(result.isRight(), false);
-      },
-    );
-    test(
-      'User failed to proxy login with uat',
-      () async {
-        repository = AuthRepository(
-          settingStorage: settingStorageMock,
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
-
+      test('test initTokenStorage success', () async {
         when(
-          () => remoteDataSourceMock.proxyLoginWithUsername(
-            username: 'old',
-            salesOrg: '2001',
-          ),
-        ).thenThrow((invocation) async => Exception('fake-error'));
-        final userName = Username('old');
-        final result = await repository.proxyLogin(
-          username: userName,
-          salesOrg: SalesOrg('2001'),
-        );
-        expect(result.isRight(), false);
-      },
-    );
-
-    test(
-      'Allow user to proxy login with uat',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
-
-        when(
-          () => remoteDataSourceMock.proxyLoginWithUsername(
-            username: 'old',
-            salesOrg: '2001',
-          ),
-        ).thenAnswer((invocation) async => Login.empty());
-        final userName = Username('old');
-        final result = await repository.proxyLogin(
-          username: userName,
-          salesOrg: SalesOrg('2001'),
-        );
-        expect(result.isRight(), true);
-      },
-    );
-    test(
-      'Allow user to get getEZRXJWT with mock',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
-
-        when(() => localDataSourceMock.loginWithOktaToken())
-            .thenAnswer((invocation) async => Login.empty());
-        final result = await repository.getEZRXJWT(fakeJWT);
-        expect(result.isRight(), true);
-      },
-    );
-
-    test(
-      'User failed to login using password with uat',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
-
-        when(() => pushNotificationServiceMock.getFCMToken())
-            .thenAnswer((invocation) async => fakeJWT.getValue());
-
-        when(
-          () => remoteDataSourceMock.loginWithPassword(
-            password: 'od',
-            username: 'old',
-            fcmToken: fakeJWT.getValue(),
-          ),
-        ).thenThrow((invocation) async => MockException(message: 'test'));
-        final pass = Password.login('old');
-        final userName = Username('old');
-
-        final result =
-            await repository.login(password: pass, username: userName);
-        expect(result.isRight(), true);
-      },
-    );
-    test(
-      'User failed to get getEZRXJWT with mock',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        when(() => configMock.appFlavor)
-            .thenAnswer((invocation) => Flavor.mock);
-
-        when(() => localDataSourceMock.loginWithOktaToken())
-            .thenThrow((invocation) async => Exception('fake-error'));
-        final result = await repository.getEZRXJWT(fakeJWT);
-        expect(result.isLeft(), true);
-      },
-    );
-    test(
-      'User failed to get getEZRXJWT with uat',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
-        when(() => pushNotificationServiceMock.getFCMToken())
-            .thenAnswer((invocation) async => fakeJWT.getValue());
-        when(
-          () => remoteDataSourceMock.loginWithOktaToken(
-            oktaAccessToken: fakeJWT.getOrCrash(),
-            fcmToken: fakeJWT.getOrCrash(),
-          ),
-        ).thenThrow((invocation) async => Exception('fake-error'));
-        final result = await repository.getEZRXJWT(fakeJWT);
-        expect(result.isLeft(), true);
-      },
-    );
-    test(
-      'Allow user to getEZRXJWT with uat',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          settingStorage: settingStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
-        when(() => pushNotificationServiceMock.getFCMToken())
-            .thenAnswer((invocation) async => fakeJWT.getValue());
-        when(
-          () => remoteDataSourceMock.loginWithOktaToken(
-            fcmToken: fakeJWT.getValue(),
-            oktaAccessToken: rootAdminToken,
-          ),
-        ).thenAnswer((invocation) async => Login.empty());
-        final result = await repository.getEZRXJWT(fakeJWT);
-        expect(result.isRight(), true);
-      },
-    );
-
-    test(
-      'Allow user to handle token storage',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-        when(() => tokenStorageMock.get())
-            .thenAnswer((invocation) async => JWTDto(access: '', refresh: ''));
-        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
-
-        when(() => tokenStorageMock.init());
-
-        await repository.initTokenStorage();
-
-        await repository.tokenValid();
-        verify(
           () => tokenStorageMock.init(),
-        ).called(1);
-        verify(
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+        final result = await repository.initTokenStorage();
+        expect(result.isRight(), true);
+      });
+
+      test('test initTokenStorage failure', () async {
+        when(
+          () => tokenStorageMock.init(),
+        ).thenThrow(
+          (_) async => fakeError,
+        );
+        final result = await repository.initTokenStorage();
+        expect(result.isLeft(), true);
+      });
+
+      test('test tokenValid mock success', () async {
+        when(() => configMock.appFlavor).thenAnswer(
+          (_) => Flavor.mock,
+        );
+        when(
           () => tokenStorageMock.get(),
+        ).thenAnswer(
+          (_) async => JWTDto(access: '', refresh: ''),
+        );
+        final result = await repository.tokenValid();
+        expect(result.isRight(), true);
+      });
+
+      test('test tokenValid expire', () async {
+        when(() => configMock.appFlavor).thenAnswer(
+          (_) => Flavor.uat,
+        );
+        when(
+          () => tokenStorageMock.get(),
+        ).thenAnswer(
+          (_) async => JWTDto(access: '', refresh: ''),
+        );
+        final result = await repository.tokenValid();
+        expect(result.isLeft(), true);
+      });
+
+      test('test tokenValid failure', () async {
+        when(
+          () => tokenStorageMock.get(),
+        ).thenThrow(
+          (_) async => fakeError,
+        );
+        final result = await repository.tokenValid();
+        expect(result.isLeft(), true);
+      });
+
+      test('test getRefreshToken success', () async {
+        when(
+          () => tokenStorageMock.get(),
+        ).thenAnswer(
+          (_) async => JWTDto(
+            access: '',
+            refresh: fakeRefreshToken.getOrCrash(),
+          ),
+        );
+        final result = await repository.getRefreshToken();
+        expect(result.isRight(), true);
+      });
+
+      test('test getRefreshToken Invalid Refresh Token', () async {
+        when(
+          () => tokenStorageMock.get(),
+        ).thenAnswer(
+          (_) async => JWTDto(access: '', refresh: ''),
+        );
+        final result = await repository.getRefreshToken();
+        expect(result.isLeft(), true);
+      });
+
+      test('test getRefreshToken failure', () async {
+        when(
+          () => tokenStorageMock.get(),
+        ).thenThrow(
+          (_) async => fakeError,
+        );
+        final result = await repository.getRefreshToken();
+        expect(result.isLeft(), true);
+      });
+
+      test('test initOkta success', () async {
+        when(
+          () => oktaLoginServicesMock.init(),
+        ).thenAnswer(
+          (_) async => true,
+        );
+        final result = await repository.initOkta();
+        expect(result.isRight(), true);
+      });
+
+      test('test initOkta failure', () async {
+        when(
+          () => oktaLoginServicesMock.init(),
+        ).thenThrow(
+          (_) async => fakeError,
+        );
+        final result = await repository.initOkta();
+        expect(result.isLeft(), true);
+      });
+
+      test('test loginWithOkta success', () async {
+        when(
+          () => oktaLoginServicesMock.login(),
+        ).thenAnswer(
+          (_) async => {},
+        );
+        final result = await repository.loginWithOkta();
+        verify(
+          () => mixpanelService.trackEvent(
+            eventName: MixpanelEvents.loginSuccess,
+            properties: {
+              MixpanelProps.loginMethod: 'sso',
+            },
+          ),
         ).called(1);
-      },
-    );
 
-    test(
-      'user failed validated token.',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
+        expect(result.isRight(), true);
+      });
+
+      test('test loginWithOkta failure', () async {
+        when(
+          () => oktaLoginServicesMock.login(),
+        ).thenThrow(
+          fakeError,
+        );
+        final result = await repository.loginWithOkta();
+        expect(result.isLeft(), true);
+        verify(
+          () => mixpanelService.trackEvent(
+            eventName: MixpanelEvents.loginFailure,
+            properties: {
+              MixpanelProps.loginMethod: 'sso',
+              MixpanelProps.errorMessage: fakeError.toString(),
+            },
+          ),
+        ).called(1);
+      });
+
+      test('test getOktaAccessToken success', () async {
+        when(
+          () => oktaLoginServicesMock.getAccessToken(),
+        ).thenAnswer(
+          (_) async => {'message': 'fake-jwt'},
+        );
+        final result = await repository.getOktaAccessToken();
+        expect(result.isRight(), true);
+      });
+
+      test('test getOktaAccessToken failure', () async {
+        when(
+          () => oktaLoginServicesMock.getAccessToken(),
+        ).thenThrow(fakePlatformException);
+        final result = await repository.getOktaAccessToken();
+        expect(result.isLeft(), true);
+      });
+
+      test('test logout success', () async {
+        when(
+          () => tokenStorageMock.clear(),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+        when(
+          () => oktaLoginServicesMock.logout(),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+        when(
+          () => accountSelectorStorageMock.delete(),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+        when(
+          () => settingStorageMock.clear(),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+        final result = await repository.logout();
+        expect(result.isRight(), true);
+      });
+
+      test('test logout failure', () async {
+        when(
+          () => tokenStorageMock.clear(),
+        ).thenThrow(
+          fakeError,
+        );
+        final result = await repository.logout();
+        expect(result.isLeft(), true);
+      });
+
+      test('test storeCredential success', () async {
+        when(
+          () => credStorageMock.set(
+            any<CredDto>(),
+          ),
+        ).thenAnswer(
+          (_) => Future.value(),
         );
 
-        await repository.tokenValid();
-        verify(() => tokenStorageMock.get()).called(1);
-      },
-    );
+        final result = await repository.storeCredential(
+          username: fakeUserName,
+          password: fakePassword,
+        );
+        expect(result.isRight(), true);
+      });
 
-    test(
-      'Allow user to handle cred storage',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
+      test('test storeCredential failure', () async {
+        when(
+          () => credStorageMock.set(
+            any<CredDto>(),
+          ),
+        ).thenThrow(
+          fakeError,
+        );
+        final result = await repository.storeCredential(
+          username: fakeUserName,
+          password: fakePassword,
+        );
+        expect(result.isLeft(), true);
+      });
+
+      test('test deleteCredential success', () async {
+        when(
+          () => credStorageMock.delete(),
+        ).thenAnswer(
+          (_) => Future.value(),
         );
 
-        await repository.initCredStorage();
+        final result = await repository.deleteCredential();
+        expect(result.isRight(), true);
+      });
+
+      test('test deleteCredential failure', () async {
+        when(
+          () => credStorageMock.delete(),
+        ).thenThrow(
+          (_) async => fakeError,
+        );
+        final result = await repository.deleteCredential();
+        expect(result.isLeft(), true);
+      });
+
+      test('test initCredStorage success', () async {
+        when(
+          () => credStorageMock.init(),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+
+        final result = await repository.initCredStorage();
+        expect(result.isRight(), true);
+      });
+
+      test('test initCredStorage failure', () async {
+        when(
+          () => credStorageMock.init(),
+        ).thenThrow(
+          (_) async => fakeError,
+        );
+        final result = await repository.initCredStorage();
+        expect(result.isLeft(), true);
+      });
+
+      test('test loadCredential success', () async {
+        when(
+          () => credStorageMock.get(),
+        ).thenAnswer(
+          (_) async => CredDto(
+            username: fakeUserName.getOrCrash(),
+            password: fakePassword.getOrCrash(),
+          ),
+        );
 
         final result = await repository.loadCredential();
         expect(result.isRight(), true);
-        final pass = Password.login('old');
-        final userName = Username('old');
-        await repository.storeCredential(password: pass, username: userName);
-        await repository.deleteCredential();
+      });
 
-        verify(() => credStorageMock.init()).called(1);
-
-        verify(
+      test('test loadCredential failure', () async {
+        when(
           () => credStorageMock.get(),
-        ).called(1);
-      },
-    );
-
-    test(
-      'Allow user to storeJWT',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
+        ).thenThrow(
+          (_) => fakeError,
         );
+        final result = await repository.loadCredential();
+        expect(result.isLeft(), true);
+      });
 
-        await repository.tokenValid();
-
-        await repository.storeJWT(
-          access: JWT(rootAdminToken),
-          refresh: JWT(refreshToken),
-        );
-        verify(
-          () => tokenStorageMock.get(),
-        ).called(1);
-      },
-    );
-
-    test(
-      'Allow user to logout',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        await repository.logout();
-        verify(
-          () => oktaLoginServicesMock.logout(),
-        ).called(1);
-        verify(
-          () => tokenStorageMock.clear(),
-        ).called(1);
-        verify(
-          () => accountSelectorStorageMock.delete(),
-        ).called(1);
-      },
-    );
-
-    test(
-      'Allow user to handle okta login',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        await repository.initOkta();
-        await repository.loginWithOkta();
-        await repository.getOktaAccessToken();
-
-        verify(
-          () => oktaLoginServicesMock.init(),
-        ).called(1);
-
-        verify(
-          () => oktaLoginServicesMock.getAccessToken(),
-        ).called(1);
-        verify(
-          () => oktaLoginServicesMock.login(),
-        ).called(1);
-      },
-    );
-
-    test(
-      'Biometric Check success',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
+      test('test doBiometricAuthentication success', () async {
+        when(
+          () => localAuthenticationMock.authenticate(
+            localizedReason: fakeLocalizedReason,
+            authMessages: fakeAuthMessages,
+            options: fakeOptions,
+          ),
+        ).thenAnswer(
+          (_) async => true,
         );
 
         final result = await repository.doBiometricAuthentication();
-
         expect(result.isRight(), true);
+      });
 
-        verify(
+      test('test doBiometricAuthentication failure', () async {
+        when(
           () => localAuthenticationMock.authenticate(
-            localizedReason: 'Complete the biometrics to continue',
-            authMessages: const <AuthMessages>[
-              AndroidAuthMessages(
-                signInTitle: 'Biometric authentication required!',
-                cancelButton: 'No thanks',
-                biometricNotRecognized: 'Failed Attempt',
-                biometricRequiredTitle: 'Supports Biometric, but not setup',
-                biometricSuccess: 'Recognised you',
-                goToSettingsButton: 'Let\'s set-up biometric',
-                goToSettingsDescription: 'You can set-up biometric on settings',
-              ),
-              IOSAuthMessages(
-                cancelButton: 'No thanks',
-                goToSettingsButton: 'Let\'s set-up biometric',
-                goToSettingsDescription: 'You can set-up biometric on settings',
-                lockOut: 'You have been locked out',
-                localizedFallbackTitle: 'Fallback',
-              ),
-            ],
-            options: const AuthenticationOptions(
-              useErrorDialogs: true,
-              stickyAuth: true,
-              sensitiveTransaction: true,
-            ),
+            localizedReason: fakeLocalizedReason,
+            authMessages: fakeAuthMessages,
+            options: fakeOptions,
           ),
-        ).called(1);
-      },
-    );
+        ).thenAnswer(
+          (_) async => false,
+        );
+        final result = await repository.doBiometricAuthentication();
+        expect(result.isLeft(), true);
+      });
 
-    test(
-      'Biometric canBeAuthenticated success',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          settingStorage: settingStorageMock,
-          credStorage: credStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
+      test('test doBiometricAuthentication Platform Error', () async {
+        when(
+          () => localAuthenticationMock.authenticate(
+            localizedReason: fakeLocalizedReason,
+            authMessages: fakeAuthMessages,
+            options: fakeOptions,
+          ),
+        ).thenThrow(
+          fakePlatformException,
+        );
+        final result = await repository.doBiometricAuthentication();
+        expect(result.isLeft(), true);
+      });
+
+      test('test canBeAuthenticatedAndBioAvailable device not support',
+          () async {
+        when(
+          () => localAuthenticationMock.isDeviceSupported(),
+        ).thenAnswer(
+          (_) async => false,
         );
 
         final result = await repository.canBeAuthenticatedAndBioAvailable();
-
-        expect(result.isRight(), true);
-
-        verify(
-          () => localAuthenticationMock.canCheckBiometrics,
-        ).called(1);
-        verify(
-          () => localAuthenticationMock.isDeviceSupported(),
-        ).called(1);
-        verify(
-          () => localAuthenticationMock.getAvailableBiometrics(),
-        ).called(1);
-      },
-    );
-
-    test(
-      'isEligibleProxyLogin failure',
-      () async {
-        repository = AuthRepository(
-          mixpanelService: mixpanelService,
-          remoteDataSource: remoteDataSourceMock,
-          config: configMock,
-          localDataSource: localDataSourceMock,
-          tokenStorage: tokenStorageMock,
-          accountSelectorStorage: accountSelectorStorageMock,
-          credStorage: credStorageMock,
-          settingStorage: settingStorageMock,
-          localAuthentication: localAuthenticationMock,
-          oktaLoginServices: oktaLoginServicesMock,
-          pushNotificationService: pushNotificationServiceMock,
-        );
-
-        final result = await repository.isEligibleProxyLogin(
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(
-              type: RoleType('zp_admin'),
-            ),
-          ),
-          jwt: fakeJWT,
-        );
-
         expect(result.isLeft(), true);
-      },
-    );
-  });
+      });
+
+      test('test canBeAuthenticatedAndBioAvailable Cannot Check Biometrics',
+          () async {
+        when(
+          () => localAuthenticationMock.isDeviceSupported(),
+        ).thenAnswer(
+          (_) async => true,
+        );
+        when(
+          () => localAuthenticationMock.canCheckBiometrics,
+        ).thenAnswer(
+          (_) async => false,
+        );
+        final result = await repository.canBeAuthenticatedAndBioAvailable();
+        expect(result.isLeft(), true);
+      });
+
+      test('test canBeAuthenticatedAndBioAvailable Cannot Check Biometrics',
+          () async {
+        when(
+          () => localAuthenticationMock.isDeviceSupported(),
+        ).thenAnswer(
+          (_) async => true,
+        );
+        when(
+          () => localAuthenticationMock.canCheckBiometrics,
+        ).thenAnswer(
+          (_) async => false,
+        );
+        final result = await repository.canBeAuthenticatedAndBioAvailable();
+        expect(result.isLeft(), true);
+      });
+
+      test('test canBeAuthenticatedAndBioAvailable Not Available Biometrics',
+          () async {
+        when(
+          () => localAuthenticationMock.isDeviceSupported(),
+        ).thenAnswer(
+          (_) async => true,
+        );
+        when(
+          () => localAuthenticationMock.canCheckBiometrics,
+        ).thenAnswer(
+          (_) async => true,
+        );
+        when(
+          () => localAuthenticationMock.getAvailableBiometrics(),
+        ).thenAnswer(
+          (_) async => <BiometricType>[],
+        );
+        final result = await repository.canBeAuthenticatedAndBioAvailable();
+        expect(result.isLeft(), true);
+      });
+
+      test('test canBeAuthenticatedAndBioAvailable Success', () async {
+        when(
+          () => localAuthenticationMock.isDeviceSupported(),
+        ).thenAnswer(
+          (_) async => true,
+        );
+        when(
+          () => localAuthenticationMock.canCheckBiometrics,
+        ).thenAnswer(
+          (_) async => true,
+        );
+        when(
+          () => localAuthenticationMock.getAvailableBiometrics(),
+        ).thenAnswer(
+          (_) async => [BiometricType.strong],
+        );
+        final result = await repository.canBeAuthenticatedAndBioAvailable();
+        expect(result.isRight(), true);
+      });
+
+      test('test canBeAuthenticatedAndBioAvailable Failure', () async {
+        when(
+          () => localAuthenticationMock.isDeviceSupported(),
+        ).thenThrow(fakePlatformException);
+
+        final result = await repository.canBeAuthenticatedAndBioAvailable();
+        expect(result.isLeft(), true);
+      });
+
+      test('test checkBiometricPermission Cannot Check Biometrics', () async {
+        when(
+          () => localAuthenticationMock.canCheckBiometrics,
+        ).thenAnswer(
+          (_) async => false,
+        );
+
+        final result = await repository.checkBiometricPermission();
+        expect(result.isLeft(), true);
+      });
+
+      test('test checkBiometricPermission Success', () async {
+        when(
+          () => localAuthenticationMock.canCheckBiometrics,
+        ).thenAnswer(
+          (_) async => true,
+        );
+
+        final result = await repository.checkBiometricPermission();
+        expect(result.isRight(), true);
+      });
+
+      test('test checkBiometricPermission Failure', () async {
+        when(
+          () => localAuthenticationMock.canCheckBiometrics,
+        ).thenThrow(fakePlatformException);
+
+        final result = await repository.checkBiometricPermission();
+        expect(result.isLeft(), true);
+      });
+
+      test('test canShowBiometricToggle device not supported', () async {
+        when(
+          () => localAuthenticationMock.isDeviceSupported(),
+        ).thenAnswer(
+          (_) async => false,
+        );
+
+        final result = await repository.canShowBiometricToggle();
+        expect(result.isLeft(), true);
+      });
+
+      test('test canShowBiometricToggle success', () async {
+        when(
+          () => localAuthenticationMock.isDeviceSupported(),
+        ).thenAnswer(
+          (_) async => true,
+        );
+        final result = await repository.canShowBiometricToggle();
+        expect(result.isRight(), true);
+      });
+
+      test('test canShowBiometricToggle failure', () async {
+        when(
+          () => localAuthenticationMock.isDeviceSupported(),
+        ).thenThrow(
+          fakePlatformException,
+        );
+        final result = await repository.canShowBiometricToggle();
+        expect(result.isLeft(), true);
+      });
+
+      test('test isBiometricEnabled success', () async {
+        when(
+          () => settingStorageMock.isBiometricEnabled(),
+        ).thenAnswer(
+          (_) => true,
+        );
+
+        final result = repository.isBiometricEnabled();
+        expect(result.isRight(), true);
+      });
+
+      test('test isBiometricEnabled failure', () async {
+        when(
+          () => settingStorageMock.isBiometricEnabled(),
+        ).thenThrow(
+          fakePlatformException,
+        );
+        final result = repository.isBiometricEnabled();
+        expect(result.isLeft(), true);
+      });
+
+      test('test putBiometricEnabledState success', () async {
+        when(
+          () => settingStorageMock.putBiometricStatus(isBiometricEnabled: true),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+
+        final result =
+            await repository.putBiometricEnabledState(isBiometricEnable: true);
+        expect(result.isRight(), true);
+      });
+
+      test('test putBiometricEnabledState failure', () async {
+        when(
+          () => settingStorageMock.putBiometricStatus(isBiometricEnabled: true),
+        ).thenThrow(
+          fakePlatformException,
+        );
+        final result =
+            await repository.putBiometricEnabledState(isBiometricEnable: true);
+        expect(result.isLeft(), true);
+      });
+
+      test('test getAccessToken mock success', () async {
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+        when(
+          () => localDataSourceMock.getAccessToken(),
+        ).thenAnswer(
+          (_) async => Login(
+            access: fakeJWT,
+            refresh: fakeRefreshToken,
+          ),
+        );
+
+        final result = await repository.getAccessToken(fakeJWT);
+        expect(result.isRight(), true);
+      });
+
+      test('test getAccessToken mock failure', () async {
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.mock);
+        when(
+          () => localDataSourceMock.getAccessToken(),
+        ).thenThrow((_) => fakeError);
+        final result = await repository.getAccessToken(fakeJWT);
+        expect(result.isLeft(), true);
+      });
+
+      test('test getAccessToken uat success', () async {
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+        when(
+          () => remoteDataSourceMock.getAccessToken(
+            refreshToken: fakeJWT.getOrCrash(),
+          ),
+        ).thenAnswer(
+          (_) async => Login(
+            access: fakeJWT,
+            refresh: fakeRefreshToken,
+          ),
+        );
+
+        final result = await repository.getAccessToken(fakeJWT);
+        expect(result.isRight(), true);
+      });
+
+      test('test getAccessToken uat failure', () async {
+        when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+        when(
+          () => remoteDataSourceMock.getAccessToken(
+            refreshToken: fakeJWT.getOrCrash(),
+          ),
+        ).thenThrow((_) => fakeError);
+        final result = await repository.getAccessToken(fakeJWT);
+        expect(result.isLeft(), true);
+      });
+    },
+  );
 }
