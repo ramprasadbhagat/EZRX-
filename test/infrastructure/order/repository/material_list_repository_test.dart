@@ -1,19 +1,26 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_list_repository.dart';
+import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class MockConfig extends Mock implements Config {}
 
@@ -30,52 +37,52 @@ class StockInfoRemoteDataSourceMock extends Mock
     implements StockInfoRemoteDataSource {}
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+
   late MaterialListRepository materialListRepository;
   late Config mockConfig;
   late MaterialListLocalDataSource materialListLocalDataSource;
   late MaterialListRemoteDataSource materialListRemoteDataSource;
   late StockInfoLocalDataSource stockInfoLocalDataSource;
   late StockInfoRemoteDataSource stockInfoRemoteDataSource;
-
-  final fakeSaleOrg =
-      SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
-  final fakeCustomerCodeInfo = CustomerCodeInfo.empty().copyWith(
-    customerCodeSoldTo: '100000345',
-    customerAttr7: CustomerAttr7('ZEV'),
-    customerGrp4: CustomerGrp4('VR'),
-    status: Status('fake_status'),
+  final fakeMaterialFilter = MaterialFilter.empty().copyWith(
+    countryListSelected: [
+      MaterialFilterCountry.empty().copyWith(name: 'Hong Kong', code: 'HK'),
+    ],
+    manufactureListSelected: [
+      'STRYKER CORPORATION (M) SDN BHD',
+    ],
   );
-  final fakeShipToInfo = ShipToInfo.empty()
-      .copyWith(shipToCustomerCode: '1234567', status: Status('fake_status'));
-  final mockUser = User.empty();
-  // final mockSalesOrganisationConfigs =
-  //     SalesOrganisationConfigs.empty().copyWith(
-  //         languageFilter: true,
-  //         languageValue: LanguageValue(ApiLanguageCode.english),
-  //         disablePrincipals: false,
-  //         enableGimmickMaterial: true,
-  //         principalList: [
-  //           SalesOrganisationConfigsPrincipal.empty()
-  //               .copyWith(principalCode: PrincipalCode('123')),
-  //           SalesOrganisationConfigsPrincipal.empty()
-  //               .copyWith(principalCode: PrincipalCode('234')),
-  //           SalesOrganisationConfigsPrincipal.empty()
-  //               .copyWith(principalCode: PrincipalCode('345')),
-  //         ],
-  //         currency: Currency('SG'),
-  //         salesOrg: SalesOrg('2601'));
-  // final mockOrderDocumentType = OrderDocumentType.empty().copyWith(
-  //     documentType: DocumentType('Sample (ZPFB)'), salesOrg: SalesOrg('2601'));
-  // final mockMaterialFilter = MaterialFilter.empty().copyWith(
-  //   countryListSelected: [
-  //     MaterialFilterCountry.empty().copyWith(name: 'Hong Kong', code: 'HK'),
-  //   ],
-  //   manufactureListSelected: [
-  //     'STRYKER CORPORATION (M) SDN BHD',
-  //   ],
-  // );
+  final fakeMaterialFilterWithComboOffers =
+      fakeMaterialFilter.copyWith(comboOffers: true);
+  const fakePrinciple = '1234';
+  final fakePrincipleData = PrincipalData.empty().copyWith(
+    principalCode: PrincipalCode(fakePrinciple),
+    principalName: PrincipalName('fake-principleName'),
+  );
+  const fakeValidPrinciple = '0000001234';
+  final fakeStockInfo1 = MaterialStockInfo.empty().copyWith(
+    materialNumber: MaterialNumber('123'),
+  );
+  final fakeStockInfo2 = MaterialStockInfo.empty().copyWith(
+    materialNumber: MaterialNumber('456'),
+  );
+  final fakeStockInfo3 = MaterialStockInfo.empty().copyWith(
+    materialNumber: MaterialNumber('789'),
+  );
+  final fakeMatchMaterialInfo = MaterialInfo.empty().copyWith(
+    materialNumber: MaterialNumber('123'),
+  );
+  final fakeBundle = MaterialInfo.empty().copyWith(
+    materialNumber: MaterialNumber('123'),
+    type: MaterialInfoType('bundle'),
+    dataTotalHidden: DataTotalHidden(1),
+  );
+  late MaterialResponse fakeMaterialResponse;
+  late List<MaterialInfo> fakeMaterialInfos;
 
-  setUpAll(() {
+  setUpAll(() async {
     mockConfig = MockConfig();
     materialListLocalDataSource = MaterialListLocalDataSourceMock();
     materialListRemoteDataSource = MaterialListRemoteDataSourceMock();
@@ -88,470 +95,737 @@ void main() {
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
     );
+    fakeMaterialResponse = await MaterialListLocalDataSource().getProductList();
+    fakeMaterialInfos =
+        await MaterialListLocalDataSource().getMaterialListSalesRep();
   });
 
-  group('materialListRepository should - ', () {
-    // test('get materialList successfully locally for salesrep', () async {
-    //   when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-    //   when(() => materialListLocalDataSource.getMaterialListSalesRep())
-    //       .thenAnswer((invocation) async => <MaterialInfo>[]);
+  group('Material List Repository Test', () {
+    group('=> get material List Test', () {
+      test('=> get locally fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => materialListLocalDataSource.getProductList())
+            .thenThrow((invocation) async => MockException());
 
-    //   final result = await materialListRepository.getMaterialList(
-    //     customerCodeInfo: fakeCustomerCodeInfo,
-    //     offset: 0,
-    //     orderBy: 'OrderDate',
-    //     orderDocumentType: OrderDocumentType.empty(),
-    //     pageSize: 10,
-    //     pickAndPack: '',
-    //     salesOrgConfig: mockSalesOrganisationConfigs,
-    //     salesOrganisation: fakeSaleOrg,
-    //     searchKey: '',
-    //     selectedMaterialFilter: MaterialFilter.empty(),
-    //     shipToInfo: fakeShipToInfo,
-    //     user: mockUser.copyWith(
-    //       role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-    //     ),
-    //     isForFoc: false,
-    //   );
-    //   expect(
-    //     result.isRight(),
-    //     true,
-    //   );
-    // });
-
-    // test('get materialList successfully locally', () async {
-    //   when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-    //   when(() => materialListLocalDataSource.getMaterialList())
-    //       .thenAnswer((invocation) async => <MaterialInfo>[]);
-
-    //   final result = await materialListRepository.getMaterialList(
-    //     customerCodeInfo: fakeCustomerCodeInfo,
-    //     offset: 0,
-    //     orderBy: 'OrderDate',
-    //     orderDocumentType: OrderDocumentType.empty(),
-    //     pageSize: 10,
-    //     pickAndPack: '',
-    //     salesOrgConfig: mockSalesOrganisationConfigs,
-    //     salesOrganisation: fakeSaleOrg,
-    //     searchKey: '',
-    //     selectedMaterialFilter: MaterialFilter.empty(),
-    //     shipToInfo: fakeShipToInfo,
-    //     user: mockUser,
-    //     isForFoc: false,
-    //   );
-    //   expect(
-    //     result.isRight(),
-    //     true,
-    //   );
-    // });
-    // test('get materialList fail locally for salesrep', () async {
-    //   when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-    //   when(() => materialListLocalDataSource.getMaterialListSalesRep())
-    //       .thenThrow((invocation) async => MockException());
-
-    //   final result = await materialListRepository.getMaterialList(
-    //     customerCodeInfo: fakeCustomerCodeInfo,
-    //     offset: 0,
-    //     orderBy: 'OrderDate',
-    //     orderDocumentType: OrderDocumentType.empty(),
-    //     pageSize: 10,
-    //     pickAndPack: '',
-    //     salesOrgConfig: mockSalesOrganisationConfigs,
-    //     salesOrganisation: fakeSaleOrg,
-    //     searchKey: '',
-    //     selectedMaterialFilter: MaterialFilter.empty(),
-    //     shipToInfo: fakeShipToInfo,
-    //     user: mockUser.copyWith(
-    //       role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-    //     ),
-    //     isForFoc: false,
-    //   );
-    //   expect(
-    //     result.isLeft(),
-    //     true,
-    //   );
-    // });
-    // test('get materialList fail locally', () async {
-    //   when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-    //   when(() => materialListLocalDataSource.getMaterialList())
-    //       .thenThrow((invocation) async => MockException());
-
-    //   final result = await materialListRepository.getMaterialList(
-    //     customerCodeInfo: fakeCustomerCodeInfo,
-    //     offset: 0,
-    //     orderBy: 'OrderDate',
-    //     orderDocumentType: OrderDocumentType.empty(),
-    //     pageSize: 10,
-    //     pickAndPack: '',
-    //     salesOrgConfig: mockSalesOrganisationConfigs,
-    //     salesOrganisation: fakeSaleOrg,
-    //     searchKey: '',
-    //     selectedMaterialFilter: MaterialFilter.empty(),
-    //     shipToInfo: fakeShipToInfo,
-    //     user: mockUser,
-    //     isForFoc: false,
-    //   );
-    //   expect(
-    //     result.isLeft(),
-    //     true,
-    //   );
-    // });
-    // test('get materialList successfully remote for salesrep', () async {
-    //   when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-    //   when(() =>
-    //       materialListRemoteDataSource.getMaterialListSalesRep(
-    //           userName: 'mock_user',
-    //           salesOrgCode: '2601',
-    //           customerCode: '100000345',
-    //           shipToCode: '1234567',
-    //           excludePrincipal:
-    //               mockSalesOrganisationConfigs.getPrincipalCodeList,
-    //           pageSize: 10,
-    //           offset: 0,
-    //           orderBy: 'materialDescription_asc',
-    //           searchKey: '1673',
-    //           language: ApiLanguageCode.english,
-    //           gimmickMaterial: true,
-    //           pickAndPack: 'include',
-    //           principalNameList: ['GSK Consumer Healthcare'],
-    //           therapeuticClassList: ['Other multivitamins with minerals'],
-    //           itemBrandList: ['Ribena RTD Blueberry'],
-    //           isSample: mockOrderDocumentType.documentType.isZPFB,
-    //           isForFOC: false)).thenAnswer((invocation) async => <MaterialInfo>[
-    //         MaterialInfo.empty().copyWith(
-    //           materialNumber: MaterialNumber('123456'),
-    //         )
-    //       ]);
-
-    //   final result = await materialListRepository.getMaterialList(
-    //     customerCodeInfo: fakeCustomerCodeInfo,
-    //     offset: 0,
-    //     orderBy: 'materialDescription_asc',
-    //     orderDocumentType: mockOrderDocumentType,
-    //     pageSize: 10,
-    //     pickAndPack: 'include',
-    //     salesOrgConfig: mockSalesOrganisationConfigs,
-    //     salesOrganisation: fakeSaleOrg,
-    //     searchKey: '1673',
-    //     selectedMaterialFilter: mockMaterialFilter,
-    //     shipToInfo: fakeShipToInfo,
-    //     user: mockUser.copyWith(
-    //         role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-    //         id: '1',
-    //         username: Username('mock_user'),
-    //         email: EmailAddress('user@gmail.com'),
-    //         customerCode: CustomerCode('100000345')),
-    //     isForFoc: false,
-    //   );
-
-    //   expect(
-    //     result.isRight(),
-    //     true,
-    //   );
-    // });
-    // test('get materialList successfully remote ', () async {
-    //   when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-    //   when(() => materialListRemoteDataSource.getMaterialList(
-    //       salesOrgCode: '2601',
-    //       customerCode: '100000345',
-    //       shipToCode: '1234567',
-    //       excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
-    //       pageSize: 10,
-    //       offset: 0,
-    //       orderBy: 'materialDescription_asc',
-    //       searchKey: '1673',
-    //       language: ApiLanguageCode.english,
-    //       principalNameList: ['GSK Consumer Healthcare'],
-    //       therapeuticClassList: ['Other multivitamins with minerals'],
-    //       itemBrandList: ['Ribena RTD Blueberry'],
-    //       isForFOC: false)).thenAnswer((invocation) async => <MaterialInfo>[]);
-
-    //   final result = await materialListRepository.getMaterialList(
-    //     customerCodeInfo: fakeCustomerCodeInfo,
-    //     offset: 0,
-    //     orderBy: 'materialDescription_asc',
-    //     orderDocumentType: mockOrderDocumentType,
-    //     pageSize: 10,
-    //     pickAndPack: 'include',
-    //     salesOrgConfig: mockSalesOrganisationConfigs,
-    //     salesOrganisation: fakeSaleOrg,
-    //     searchKey: '1673',
-    //     selectedMaterialFilter: mockMaterialFilter,
-    //     shipToInfo: fakeShipToInfo,
-    //     user: mockUser.copyWith(
-    //         role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-    //         id: '1',
-    //         username: Username('mock_user'),
-    //         email: EmailAddress('user@gmail.com'),
-    //         customerCode: CustomerCode('100000345')),
-    //     isForFoc: false,
-    //   );
-    //   expect(
-    //     result.isRight(),
-    //     true,
-    //   );
-    // });
-    // test('get materialList fail remote ', () async {
-    //   when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-    //   when(() => materialListRemoteDataSource.getMaterialList(
-    //       salesOrgCode: '2601',
-    //       customerCode: '100000345',
-    //       shipToCode: '1234567',
-    //       excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
-    //       pageSize: 10,
-    //       offset: 0,
-    //       orderBy: 'orderDate',
-    //       searchKey: '',
-    //       language: ApiLanguageCode.english,
-    //       principalNameList: [
-    //         'GSK Consumer Healthcare',
-    //         'Pfizer PFE Private Limited test'
-    //       ],
-    //       therapeuticClassList: [
-    //         'Other multivitamins with minerals',
-    //         'Plain vitamin C (including vit. C salts)',
-    //         'Throat preparations',
-    //         'Growth hormones',
-    //         'Specific antirheumatic agents',
-    //         'Emollients, protectives',
-    //         'All other stomatologicals',
-    //       ],
-    //       itemBrandList: [
-    //         'Ribena RTD Blueberry',
-    //         'Ribena Glucose 1L bw',
-    //         'Ribena Conc Apple 1L',
-    //         'Sensodyne Repair N P',
-    //         'Sensodyne Freshmint',
-    //       ],
-    //       isForFOC: mockOrderDocumentType.documentType
-    //           .isZPFC)).thenThrow((invocation) async => MockException());
-
-    //   final result = await materialListRepository.getMaterialList(
-    //     customerCodeInfo: fakeCustomerCodeInfo,
-    //     offset: 0,
-    //     orderBy: 'OrderDate',
-    //     orderDocumentType: mockOrderDocumentType,
-    //     pageSize: 10,
-    //     pickAndPack: '',
-    //     salesOrgConfig: mockSalesOrganisationConfigs,
-    //     salesOrganisation: fakeSaleOrg,
-    //     searchKey: '',
-    //     selectedMaterialFilter: mockMaterialFilter,
-    //     shipToInfo: fakeShipToInfo,
-    //     user: mockUser.copyWith(
-    //         id: '1',
-    //         username: Username('user'),
-    //         email: EmailAddress('user@gmail.com'),
-    //         customerCode: CustomerCode('100007654')),
-    //     isForFoc: mockOrderDocumentType.documentType.isZPFC,
-    //   );
-    //   expect(
-    //     result.isLeft(),
-    //     true,
-    //   );
-    // });
-    // test('get materialList fail remote for salesrep', () async {
-    //   when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-    //   when(() => materialListRemoteDataSource.getMaterialListSalesRep(
-    //       userName: 'user',
-    //       salesOrgCode: '2601',
-    //       customerCode: '100000345',
-    //       shipToCode: '1234567',
-    //       excludePrincipal: mockSalesOrganisationConfigs.getPrincipalCodeList,
-    //       pageSize: 10,
-    //       offset: 0,
-    //       orderBy: 'orderDate',
-    //       searchKey: '',
-    //       language: ApiLanguageCode.english,
-    //       gimmickMaterial: true,
-    //       pickAndPack: '',
-    //       principalNameList: [
-    //         'GSK Consumer Healthcare',
-    //         'Pfizer PFE Private Limited test'
-    //       ],
-    //       therapeuticClassList: [
-    //         'Other multivitamins with minerals',
-    //         'Plain vitamin C (including vit. C salts)',
-    //         'Throat preparations',
-    //         'Growth hormones',
-    //         'Specific antirheumatic agents',
-    //         'Emollients, protectives',
-    //         'All other stomatologicals',
-    //       ],
-    //       itemBrandList: [
-    //         'Ribena RTD Blueberry',
-    //         'Ribena Glucose 1L bw',
-    //         'Ribena Conc Apple 1L',
-    //         'Sensodyne Repair N P',
-    //         'Sensodyne Freshmint',
-    //       ],
-    //       isSample: mockOrderDocumentType.documentType.isZPFB,
-    //       isForFOC: true)).thenThrow((invocation) async => MockException());
-
-    //   final result = await materialListRepository.getMaterialList(
-    //     customerCodeInfo: fakeCustomerCodeInfo,
-    //     offset: 0,
-    //     orderBy: 'OrderDate',
-    //     orderDocumentType: mockOrderDocumentType,
-    //     pageSize: 10,
-    //     pickAndPack: '',
-    //     salesOrgConfig: mockSalesOrganisationConfigs,
-    //     salesOrganisation: fakeSaleOrg,
-    //     searchKey: '',
-    //     selectedMaterialFilter: MaterialFilter.empty(),
-    //     shipToInfo: fakeShipToInfo,
-    //     user: mockUser.copyWith(
-    //         role: Role.empty().copyWith(type: RoleType('external_sales_rep')),
-    //         id: '1',
-    //         username: Username('user'),
-    //         email: EmailAddress('user@gmail.com'),
-    //         customerCode: CustomerCode('100007654')),
-    //     isForFoc: true,
-    //   );
-    //   expect(
-    //     result.isLeft(),
-    //     true,
-    //   );
-    // });
-  });
-
-  group('Materials for combo deal', () {
-    test('get successfully local', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-      when(() => materialListLocalDataSource.getMaterialList())
-          .thenAnswer((invocation) async => <MaterialInfo>[]);
-
-      final result = await materialListRepository.getComboDealMaterials(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        pageSize: 10,
-        salesOrganisation: fakeSaleOrg,
-        shipToInfo: fakeShipToInfo,
-        user: mockUser,
-        principles: ['fake'],
-      );
-      expect(
-        result.isRight(),
-        true,
-      );
-    });
-
-    test('get success remote', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(
-        () => materialListRemoteDataSource.getComboDealMaterials(
+        final result = await materialListRepository.getMaterialList(
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 10,
-          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          principalNameList: ['000000fake'],
-          salesOrgCode: fakeSaleOrg.salesOrg.getOrDefaultValue(''),
-          shipToCode: fakeShipToInfo.shipToCustomerCode,
-        ),
-      ).thenAnswer((invocation) async => [MaterialInfo.empty()]);
+          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrganisation: fakeSGSalesOrganisation,
+          selectedMaterialFilter: fakeMaterialFilter,
+          shipToInfo: fakeShipToInfo,
+          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
 
-      final result = await materialListRepository.getComboDealMaterials(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        pageSize: 10,
-        salesOrganisation: fakeSaleOrg,
-        shipToInfo: fakeShipToInfo,
-        user: mockUser,
-        principles: ['fake'],
-      );
-      expect(
-        result.isRight(),
-        true,
-      );
-    });
-    test('get failure remote', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(
-        () => materialListRemoteDataSource.getComboDealMaterials(
+      test('=> get locally success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => materialListLocalDataSource.getProductList()).thenAnswer(
+          (invocation) async => fakeMaterialResponse,
+        );
+
+        final result = await materialListRepository.getMaterialList(
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 10,
-          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          principalNameList: ['000000fake'],
-          salesOrgCode: fakeSaleOrg.salesOrg.getOrDefaultValue(''),
-          shipToCode: fakeShipToInfo.shipToCustomerCode,
-        ),
-      ).thenThrow((invocation) async => MockException());
+          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrganisation: fakeSGSalesOrganisation,
+          selectedMaterialFilter: fakeMaterialFilter,
+          shipToInfo: fakeShipToInfo,
+          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
 
-      final result = await materialListRepository.getComboDealMaterials(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        pageSize: 10,
-        salesOrganisation: fakeSaleOrg,
-        shipToInfo: fakeShipToInfo,
-        user: mockUser,
-        principles: ['fake'],
-      );
-      expect(
-        result.isLeft(),
-        true,
-      );
-    });
-
-    test('get success remote SalesRep', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(
-        () => materialListRemoteDataSource.getComboDealMaterialsForSaleRep(
-          offset: 0,
-          pageSize: 10,
-          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          principalNameList: ['000000fake'],
-          salesOrgCode: fakeSaleOrg.salesOrg.getOrDefaultValue(''),
-          shipToCode: fakeShipToInfo.shipToCustomerCode,
-        ),
-      ).thenAnswer((invocation) async => [MaterialInfo.empty()]);
-
-      final result = await materialListRepository.getComboDealMaterials(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        pageSize: 10,
-        salesOrganisation: fakeSaleOrg,
-        shipToInfo: fakeShipToInfo,
-        user: mockUser.copyWith(
-          role: Role.empty().copyWith(
-            type: RoleType('external_sales_rep'),
+      test('=> get bundle data remotely fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRepository.getBundleData(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
+            locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+            materials: [fakeBundle],
           ),
-        ),
-        principles: ['fake'],
-      );
-      expect(
-        result.isRight(),
-        true,
-      );
-    });
-    test('get failure remote', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-      when(
-        () => materialListRemoteDataSource.getComboDealMaterialsForSaleRep(
+        ).thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getBundleData(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          materials: [fakeBundle],
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get remotely fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRemoteDataSource.getProductList(
+            salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            pageSize: 10,
+            language:
+                fakeSGSalesOrgConfigGimmickMaterialEnabled.getConfigLanguage,
+            gimmickMaterial: fakeSGSalesOrgConfigGimmickMaterialEnabled
+                .enableGimmickMaterial,
+            isFavourite: fakeMaterialFilter.isFavourite,
+            isFOCMaterial: fakeMaterialFilter.isFOCMaterial,
+            bundleOffers: fakeMaterialFilter.bundleOffers,
+            isProductOffer: fakeMaterialFilter.isProductOffer,
+            principalCode: '',
+            offset: 0,
+            orderByName: fakeMaterialFilter.sortBy.valueRequest,
+            manufactureList: fakeMaterialFilter.manufactureListSelected,
+            countryListCode: fakeMaterialFilter.countryListSelected
+                .map((e) => e.code)
+                .toList(),
+            searchKey: '',
+            salesDeal: [],
+          ),
+        ).thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getMaterialList(
+          customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
           pageSize: 10,
-          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          principalNameList: ['000000fake'],
-          salesOrgCode: fakeSaleOrg.salesOrg.getOrDefaultValue(''),
-          shipToCode: fakeShipToInfo.shipToCustomerCode,
-        ),
-      ).thenThrow((invocation) async => MockException());
+          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrganisation: fakeSGSalesOrganisation,
+          selectedMaterialFilter: fakeMaterialFilter,
+          shipToInfo: fakeShipToInfo,
+          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
 
-      final result = await materialListRepository.getComboDealMaterials(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        offset: 0,
-        pageSize: 10,
-        salesOrganisation: fakeSaleOrg,
-        shipToInfo: fakeShipToInfo,
-        user: mockUser.copyWith(
-          role: Role.empty().copyWith(
-            type: RoleType('external_sales_rep'),
+      test('=> get remotely success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRemoteDataSource.getProductList(
+            salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            pageSize: 10,
+            language:
+                fakeSGSalesOrgConfigGimmickMaterialEnabled.getConfigLanguage,
+            gimmickMaterial: fakeSGSalesOrgConfigGimmickMaterialEnabled
+                .enableGimmickMaterial,
+            isFavourite: fakeMaterialFilterWithComboOffers.isFavourite,
+            isFOCMaterial: fakeMaterialFilterWithComboOffers.isFOCMaterial,
+            bundleOffers: fakeMaterialFilterWithComboOffers.bundleOffers,
+            isProductOffer: fakeMaterialFilterWithComboOffers.isProductOffer,
+            principalCode: '',
+            offset: 0,
+            orderByName: fakeMaterialFilterWithComboOffers.sortBy.valueRequest,
+            manufactureList:
+                fakeMaterialFilterWithComboOffers.manufactureListSelected,
+            countryListCode: fakeMaterialFilterWithComboOffers
+                .countryListSelected
+                .map((e) => e.code)
+                .toList(),
+            searchKey: '',
+            salesDeal: [],
           ),
-        ),
-        principles: ['fake'],
-      );
-      expect(
-        result.isLeft(),
-        true,
-      );
+        ).thenAnswer(
+          (invocation) async => fakeMaterialResponse,
+        );
+
+        final result = await materialListRepository.getMaterialList(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: 0,
+          pageSize: 10,
+          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          salesOrganisation: fakeSGSalesOrganisation,
+          selectedMaterialFilter: fakeMaterialFilterWithComboOffers,
+          shipToInfo: fakeShipToInfo,
+          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+    });
+
+    group('=> get Material Stock Info', () {
+      test(
+          '=> returns MaterialStockInfo when stockInfoList has matching materialNumber',
+          () {
+        final result = materialListRepository.getMaterialStockInfo(
+          stockInfoList: Right([
+            fakeStockInfo1,
+            fakeStockInfo2,
+          ]),
+          materialInfo: fakeMatchMaterialInfo,
+        );
+
+        expect(result, fakeStockInfo1);
+      });
+
+      test('=> returns empty MaterialStockInfo when stockInfoList is Left', () {
+        final result = materialListRepository.getMaterialStockInfo(
+          stockInfoList: const Left(ApiFailure.other('fake-fail')),
+          materialInfo: fakeMatchMaterialInfo,
+        );
+
+        expect(result, MaterialStockInfo.empty());
+      });
+
+      test('=> returns empty MaterialStockInfo when stockInfoList is empty',
+          () {
+        // Act
+        final result = materialListRepository.getMaterialStockInfo(
+          stockInfoList: const Right([]),
+          materialInfo: fakeMatchMaterialInfo,
+        );
+
+        expect(result, MaterialStockInfo.empty());
+      });
+
+      test(
+          '=> returns empty MaterialStockInfo when no matching materialNumber is found',
+          () {
+        final result = materialListRepository.getMaterialStockInfo(
+          stockInfoList: Right([
+            fakeStockInfo2,
+            fakeStockInfo3,
+          ]),
+          materialInfo: fakeMatchMaterialInfo,
+        );
+        expect(result, MaterialStockInfo.empty());
+      });
+    });
+
+    group('=> get ComboDeal Materials test', () {
+      test('=> get locally for sales rep user fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () => materialListLocalDataSource.getMaterialListSalesRep(),
+        ).thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getComboDealMaterials(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: 0,
+          pageSize: 10,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeExternalSalesRepUser,
+          principles: [fakePrinciple],
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get locally for sales rep user success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () => materialListLocalDataSource.getMaterialListSalesRep(),
+        ).thenAnswer((invocation) async => fakeMaterialInfos);
+
+        final result = await materialListRepository.getComboDealMaterials(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: 0,
+          pageSize: 10,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeExternalSalesRepUser,
+          principles: [fakePrinciple],
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+      test('=> get remotely for sales rep user fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRemoteDataSource.getComboDealMaterialsForSaleRep(
+            salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            pageSize: 10,
+            offset: 0,
+            principalNameList: [fakeValidPrinciple],
+          ),
+        ).thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getComboDealMaterials(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: 0,
+          pageSize: 10,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeExternalSalesRepUser,
+          principles: [fakePrinciple],
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get remotely for sales rep user success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRemoteDataSource.getComboDealMaterialsForSaleRep(
+            salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            pageSize: 10,
+            offset: 0,
+            principalNameList: [fakeValidPrinciple],
+          ),
+        ).thenAnswer((invocation) async => fakeMaterialInfos);
+
+        final result = await materialListRepository.getComboDealMaterials(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: 0,
+          pageSize: 10,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeExternalSalesRepUser,
+          principles: [fakePrinciple],
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+
+      test('=> get locally for NOT sales rep user fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () => materialListLocalDataSource.getMaterialList(),
+        ).thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getComboDealMaterials(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: 0,
+          pageSize: 10,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClientUser,
+          principles: [fakePrinciple],
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get locally for NOT sales rep user success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(
+          () => materialListLocalDataSource.getMaterialList(),
+        ).thenAnswer((invocation) async => fakeMaterialInfos);
+
+        final result = await materialListRepository.getComboDealMaterials(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: 0,
+          pageSize: 10,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClientUser,
+          principles: [fakePrinciple],
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+      test('=> get remotely for NOT sales rep user fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRemoteDataSource.getComboDealMaterials(
+            salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            pageSize: 10,
+            offset: 0,
+            principalNameList: [fakeValidPrinciple],
+          ),
+        ).thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getComboDealMaterials(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: 0,
+          pageSize: 10,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClientUser,
+          principles: [fakePrinciple],
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get remotely for NOT sales rep user success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRemoteDataSource.getComboDealMaterials(
+            salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            pageSize: 10,
+            offset: 0,
+            principalNameList: [fakeValidPrinciple],
+          ),
+        ).thenAnswer((invocation) async => fakeMaterialInfos);
+
+        final result = await materialListRepository.getComboDealMaterials(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          offset: 0,
+          pageSize: 10,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClientUser,
+          principles: [fakePrinciple],
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+    });
+
+    group('=> get Stock Info List Test', () {
+      test('=> get locally fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => stockInfoLocalDataSource.getMaterialStockInfoList())
+            .thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getStockInfoList(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          materials: fakeMaterialInfos,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get locally success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => stockInfoLocalDataSource.getMaterialStockInfoList())
+            .thenAnswer(
+          (invocation) async => [fakeStockInfo1],
+        );
+
+        final result = await materialListRepository.getStockInfoList(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          materials: fakeMaterialInfos,
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+
+      test('=> get remotely fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+            materialNumbers: fakeMaterialInfos
+                .map((e) => e.materialNumber.getOrCrash())
+                .toList(),
+            salesOrg: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          ),
+        ).thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getStockInfoList(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          materials: fakeMaterialInfos,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get remotely success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
+            materialNumbers: fakeMaterialInfos
+                .map((e) => e.materialNumber.getOrCrash())
+                .toList(),
+            salesOrg: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          ),
+        ).thenAnswer(
+          (invocation) async => [fakeStockInfo1],
+        );
+
+        final result = await materialListRepository.getStockInfoList(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          materials: fakeMaterialInfos,
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+    });
+
+    group('=> get Material Data Test', () {
+      test('=> get locally fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => materialListLocalDataSource.getProductDetails())
+            .thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getMaterialData(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          material: fakeMatchMaterialInfo,
+          shipToInfo: fakeShipToInfo,
+          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          type: '',
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get locally success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => materialListLocalDataSource.getProductDetails()).thenAnswer(
+          (invocation) async => fakeMatchMaterialInfo,
+        );
+
+        final result = await materialListRepository.getMaterialData(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          material: fakeMatchMaterialInfo,
+          shipToInfo: fakeShipToInfo,
+          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          type: '',
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+
+      test('=> get remotely fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRemoteDataSource.getProductDetails(
+            code: fakeMatchMaterialInfo.materialNumber.getOrCrash(),
+            salesOrg: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            type: '',
+            language: fakeSGSalesOrgConfigGimmickMaterialEnabled
+                .languageValue.languageCode,
+          ),
+        ).thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getMaterialData(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          material: fakeMatchMaterialInfo,
+          shipToInfo: fakeShipToInfo,
+          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          type: '',
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get remotely success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRemoteDataSource.getProductDetails(
+            code: fakeMatchMaterialInfo.materialNumber.getOrCrash(),
+            salesOrg: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            type: '',
+            language: fakeSGSalesOrgConfigGimmickMaterialEnabled
+                .languageValue.languageCode,
+          ),
+        ).thenAnswer(
+          (invocation) async => fakeMatchMaterialInfo,
+        );
+
+        final result = await materialListRepository.getMaterialData(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          material: fakeMatchMaterialInfo,
+          shipToInfo: fakeShipToInfo,
+          locale: fakeSGSalesOrgConfigGimmickMaterialEnabled.languageValue,
+          type: '',
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+    });
+
+    group('=> get Material Bonus List Test', () {
+      test('=> get locally fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => materialListLocalDataSource.getProductList())
+            .thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getMaterialBonusList(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          principalData: fakePrincipleData,
+          user: fakeExternalSalesRepUser,
+          enableGimmickMaterial: false,
+          searchKey: SearchKey(''),
+          offset: 0,
+          pageSize: 10,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get locally success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => materialListLocalDataSource.getProductList()).thenAnswer(
+          (invocation) async => fakeMaterialResponse,
+        );
+
+        final result = await materialListRepository.getMaterialBonusList(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          principalData: fakePrincipleData,
+          user: fakeExternalSalesRepUser,
+          enableGimmickMaterial: false,
+          searchKey: SearchKey(''),
+          offset: 0,
+          pageSize: 10,
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
+
+      test('=> get remotely fail', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRemoteDataSource.getProductList(
+            salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            language: fakeExternalSalesRepUser
+                .settings.languagePreference.languageCode,
+            gimmickMaterial: false,
+            bundleOffers: false,
+            countryListCode: [],
+            isFavourite: false,
+            isFOCMaterial: false,
+            isProductOffer: false,
+            manufactureList: [fakePrincipleData.principalName.getOrCrash()],
+            orderByName: 'asc',
+            principalCode: fakePrincipleData.principalCode.getOrCrash(),
+            searchKey: '',
+            salesDeal: [],
+            offset: 0,
+            pageSize: 10,
+          ),
+        ).thenThrow((invocation) async => MockException());
+
+        final result = await materialListRepository.getMaterialBonusList(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          principalData: fakePrincipleData,
+          user: fakeExternalSalesRepUser,
+          enableGimmickMaterial: false,
+          searchKey: SearchKey(''),
+          offset: 0,
+          pageSize: 10,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+      });
+
+      test('=> get remotely success', () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+        when(
+          () => materialListRemoteDataSource.getProductList(
+            salesOrgCode: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode: fakeShipToInfo.shipToCustomerCode,
+            language: fakeExternalSalesRepUser
+                .settings.languagePreference.languageCode,
+            gimmickMaterial: false,
+            bundleOffers: false,
+            countryListCode: [],
+            isFavourite: false,
+            isFOCMaterial: false,
+            isProductOffer: false,
+            manufactureList: [fakePrincipleData.principalName.getOrCrash()],
+            orderByName: 'asc',
+            principalCode: fakePrincipleData.principalCode.getOrCrash(),
+            searchKey: '',
+            salesDeal: [],
+            offset: 0,
+            pageSize: 10,
+          ),
+        ).thenAnswer(
+          (invocation) async => fakeMaterialResponse,
+        );
+
+        final result = await materialListRepository.getMaterialBonusList(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeSGSalesOrganisation,
+          shipToInfo: fakeShipToInfo,
+          salesOrgConfig: fakeSGSalesOrgConfigGimmickMaterialEnabled,
+          principalData: fakePrincipleData,
+          user: fakeExternalSalesRepUser,
+          enableGimmickMaterial: false,
+          searchKey: SearchKey(''),
+          offset: 0,
+          pageSize: 10,
+        );
+        expect(
+          result.isRight(),
+          true,
+        );
+      });
     });
   });
 }

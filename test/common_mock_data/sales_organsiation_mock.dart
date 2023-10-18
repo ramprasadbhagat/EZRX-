@@ -5,16 +5,20 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs_pr
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:flutter/material.dart';
 
 const _fakeSaleOrgId = 'fake-sale-org-id-1234';
 const _fakeVNSalesOrgId = '3072';
 const _fakeMYSalesOrgId = '2001';
-const _fakeSaleOrgPhId = '2500';
+const _fakeSGSalesOrgId = '2601';
+const _fakePHSalesOrgId = '2500';
 
+final fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
+final fakePHSalesOrg = SalesOrg(_fakePHSalesOrgId);
+final fakeSGSalesOrg = SalesOrg(_fakeSGSalesOrgId);
 final fakeVNSalesOrg = SalesOrg(_fakeVNSalesOrgId);
 final fakeMYSalesOrg = SalesOrg(_fakeMYSalesOrgId);
-final fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
-SalesOrg fakePHSalesOrg = SalesOrg(_fakeSaleOrgPhId);
 
 final fakeSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg);
@@ -23,6 +27,9 @@ final fakeMYSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeMYSalesOrg);
 
 final fakeVNSalesOrganisation =
+    SalesOrganisation.empty().copyWith(salesOrg: fakeVNSalesOrg);
+
+final fakeSGSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeVNSalesOrg);
 
 final fakeEmptySalesConfigs = SalesOrganisationConfigs.empty();
@@ -103,7 +110,7 @@ final fakeMYSalesOrgConfigFutureDeliveryDayEnabled =
   salesOrg: fakeMYSalesOrg,
 );
 
-SalesOrganisationConfigs salesOrganisationPHConfigsWithEnablePrincipalList =
+final salesOrganisationPHConfigsWithEnablePrincipalList =
     SalesOrganisationConfigs.empty().copyWith(
   salesOrg: fakePHSalesOrg,
   currency: Currency('PHP'),
@@ -118,4 +125,24 @@ SalesOrganisationConfigs salesOrganisationPHConfigsWithEnablePrincipalList =
       principalCode: PrincipalCode('0000000000'),
     )
   ],
+);
+
+final fakeSGSalesOrgConfigGimmickMaterialEnabled =
+    SalesOrganisationConfigs.empty().copyWith(
+  languageFilter: true,
+  languageValue: const Locale(ApiLanguageCode.english),
+  enableGimmickMaterial: true,
+  principalList: [
+    SalesOrganisationConfigsPrincipal.empty().copyWith(
+      principalCode: PrincipalCode('123'),
+    ),
+    SalesOrganisationConfigsPrincipal.empty().copyWith(
+      principalCode: PrincipalCode('234'),
+    ),
+    SalesOrganisationConfigsPrincipal.empty().copyWith(
+      principalCode: PrincipalCode('345'),
+    ),
+  ],
+  currency: Currency('sgd'),
+  salesOrg: fakeSGSalesOrg,
 );
