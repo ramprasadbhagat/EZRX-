@@ -19,7 +19,11 @@ class _ReturnReferenceField extends StatelessWidget {
                 NewRequestEvent.returnReferenceChanged(value),
               ),
           decoration: InputDecoration(hintText: 'Enter return reference'.tr()),
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.deny(ZPRegexes.hyperlinkRegExp),
+          ],
           isEnabled: true,
+          maxLength: 150,
         );
       },
     );

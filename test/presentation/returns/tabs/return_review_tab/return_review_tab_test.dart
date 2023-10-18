@@ -72,6 +72,7 @@ class MockUsageCodeBloc extends MockBloc<UsageCodeEvent, UsageCodeState>
     implements UsageCodeBloc {}
 
 final locator = GetIt.instance;
+const link = 'https://www.google.com/';
 
 void main() {
   late SalesOrgBloc mockSalesOrgBloc;
@@ -90,6 +91,12 @@ void main() {
   late ReturnMaterialList fakeReturnMaterialList;
   late List<ReturnMaterial> selectedMaterials;
   late List<Usage> fakeUsageList;
+
+  ///////////////////////////Finder/////////////////////////////////////////
+  final specialInstructionsField =
+      find.byKey(WidgetKeys.specialInstructionsField);
+  final returnReferenceField = find.byKey(WidgetKeys.returnReferenceField);
+  /////////////////////////////////////////////////////////////////////////
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -223,6 +230,97 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    group('Return  Special Instruction', () {
+      testWidgets('check Special Instruction character limit',
+          (WidgetTester tester) async {
+        when(() => mockNewRequestBloc.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: selectedMaterials,
+          ),
+        );
+
+        when(() => mockUsageCodeBloc.state).thenReturn(
+          UsageCodeState.initial().copyWith(
+            usages: fakeUsageList,
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        expect(specialInstructionsField, findsOneWidget);
+        await tester.enterText(specialInstructionsField, 'a' * 200);
+        await tester.pump();
+        expect(find.text('a' * 150), findsOneWidget);
+      });
+
+      testWidgets('check Special Instruction link',
+          (WidgetTester tester) async {
+        when(() => mockNewRequestBloc.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: selectedMaterials,
+          ),
+        );
+
+        when(() => mockUsageCodeBloc.state).thenReturn(
+          UsageCodeState.initial().copyWith(
+            usages: fakeUsageList,
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        expect(specialInstructionsField, findsOneWidget);
+        await tester.enterText(specialInstructionsField, link);
+        await tester.pump();
+        expect(find.text(link), findsNothing);
+      });
+    });
+
+    group('Return reference Instruction', () {
+      testWidgets('check Return reference character limit',
+          (WidgetTester tester) async {
+        when(() => mockNewRequestBloc.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: selectedMaterials,
+          ),
+        );
+
+        when(() => mockUsageCodeBloc.state).thenReturn(
+          UsageCodeState.initial().copyWith(
+            usages: fakeUsageList,
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        expect(returnReferenceField, findsOneWidget);
+        await tester.enterText(returnReferenceField, 'a' * 200);
+        await tester.pump();
+        expect(find.text('a' * 150), findsOneWidget);
+      });
+
+      testWidgets('check Return reference link', (WidgetTester tester) async {
+        when(() => mockNewRequestBloc.state).thenReturn(
+          NewRequestState.initial().copyWith(
+            selectedItems: selectedMaterials,
+          ),
+        );
+
+        when(() => mockUsageCodeBloc.state).thenReturn(
+          UsageCodeState.initial().copyWith(
+            usages: fakeUsageList,
+          ),
+        );
+
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        expect(returnReferenceField, findsOneWidget);
+        await tester.enterText(returnReferenceField, link);
+        await tester.pump();
+        expect(find.text(link), findsNothing);
+      });
     });
   });
 }

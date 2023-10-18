@@ -18,9 +18,12 @@ class SpecialInstructionsField extends StatelessWidget {
           onChanged: (value) => context.read<NewRequestBloc>().add(
                 NewRequestEvent.specialInstructionsChanged(value),
               ),
-          decoration: InputDecoration(hintText: 'Max. 200 characters'.tr()),
+          decoration: InputDecoration(hintText: 'Max. 150 characters'.tr()),
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.deny(ZPRegexes.hyperlinkRegExp),
+          ],
           isEnabled: true,
-          maxLength: 200,
+          maxLength: 150,
         );
       },
     );
