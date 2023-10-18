@@ -135,6 +135,7 @@ void main() {
     Widget getWidget() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<ReturnApproverBloc>(
             create: (context) => returnApproverBlocMock,
@@ -177,7 +178,7 @@ void main() {
         ];
         whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
         expect(find.byKey(const Key('actionApproverAppBar')), findsOneWidget);
         expect(find.byKey(const Key('status')), findsOneWidget);
         expect(find.byIcon(Icons.arrow_drop_down_outlined), findsOneWidget);
@@ -239,7 +240,7 @@ void main() {
           ),
         );
         await tester.pumpWidget(getWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
         expect(find.byKey(const Key('actionApproverAppBar')), findsOneWidget);
 
         final statusFilterButton = find.byKey(const Key('statusFilterButton'));
@@ -318,7 +319,7 @@ void main() {
         ];
         whenListen(returnApproverBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final filterButton = find.byType(FilterCountButton);
         expect(filterButton, findsOneWidget);
@@ -357,7 +358,7 @@ void main() {
           Stream.fromIterable(expectedShipToCodeState),
         );
         await tester.pumpWidget(getWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final filterButton = find.byType(FilterCountButton);
         expect(filterButton, findsOneWidget);
@@ -500,7 +501,7 @@ void main() {
         ];
         whenListen(returnApproverBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
         expect(find.byKey(const Key('actionApproverAppBar')), findsOneWidget);
 
         expect(find.text('Fake-error'.tr()), findsOneWidget);

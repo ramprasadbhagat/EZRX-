@@ -91,6 +91,7 @@ void main() {
     RouteDataScope getScopedWidget() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
@@ -117,6 +118,7 @@ void main() {
       );
 
       await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
       final salesOrgSearchPage = find.byKey(const Key('salesOrgSearchPage'));
       expect(salesOrgSearchPage, findsOneWidget);
 

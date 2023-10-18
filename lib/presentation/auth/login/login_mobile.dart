@@ -108,7 +108,7 @@ class _SSOLoginButton extends StatelessWidget {
               label: LoadingShimmer.withChild(
                 enabled: state.isSubmitting,
                 child: Text(
-                  'Log in with SSO'.tr(),
+                  context.tr('Log in with SSO'),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: ZPColors.shadesBlack,
                         fontWeight: FontWeight.w400,
@@ -137,7 +137,7 @@ class _OrDivider extends StatelessWidget {
           ),
         ),
         Text(
-          'or',
+          context.tr('or'),
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: ZPColors.dividerColor,
               ),
@@ -162,7 +162,7 @@ class _CreateAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          'Don’t have an account yet?'.tr(),
+          context.tr('Don’t have an account yet?'),
           style: Theme.of(context).textTheme.titleSmall,
         ),
         TextButton(
@@ -174,7 +174,7 @@ class _CreateAccount extends StatelessWidget {
                 ),
               ),
           child: Text(
-            'Sign up'.tr(),
+            context.tr('Sign up'),
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: ZPColors.extraDarkGreen,
                 ),
@@ -183,7 +183,7 @@ class _CreateAccount extends StatelessWidget {
             context.router.push(
               WebViewPageRoute(
                 url: locator<Config>().createAccountUrl,
-                titleText: 'Sign Up',
+                titleText: context.tr('Sign Up'),
               ),
             );
           },

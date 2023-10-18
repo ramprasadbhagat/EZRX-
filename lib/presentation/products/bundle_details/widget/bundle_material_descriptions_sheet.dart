@@ -46,7 +46,7 @@ class BundleMaterialDescription extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () => context.router.pop(),
-                  child: Text('Close'.tr()),
+                  child: Text(context.tr('Close')),
                 ),
               ),
             ],

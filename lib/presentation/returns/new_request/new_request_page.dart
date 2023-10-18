@@ -248,7 +248,7 @@ class NewRequestPage extends StatelessWidget {
                     context.router.pop();
                   },
                   child: Text(
-                    'Close'.tr(),
+                    context.tr('Close'),
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
                           color: ZPColors.white,
                         ),

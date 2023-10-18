@@ -229,7 +229,7 @@ class _TermsOfUse extends StatelessWidget {
             text: 'By signing in, you agree to our '.tr(),
           ),
           TextSpan(
-            text: 'Terms of Use'.tr(),
+            text: context.tr('Terms of Use'),
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: ZPColors.primary,
@@ -258,7 +258,7 @@ class _CreateAccount extends StatelessWidget {
             child: TextButton(
               key: WidgetKeys.createAccountButton,
               child: Text(
-                'Sign Up'.tr(),
+                context.tr('Sign Up'),
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: ZPColors.primary,
@@ -269,7 +269,7 @@ class _CreateAccount extends StatelessWidget {
                 context.router.push(
                   WebViewPageRoute(
                     url: locator<Config>().createAccountUrl,
-                    titleText: 'Sign Up',
+                    titleText: context.tr('Sign Up'),
                   ),
                 );
               },
@@ -342,7 +342,7 @@ class _Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Welcome to eZRx+'.tr(),
+      context.tr('Welcome to eZRx+'),
       style: Theme.of(context).textTheme.titleLarge!.copyWith(
             fontWeight: FontWeight.w700,
             color: ZPColors.primary,

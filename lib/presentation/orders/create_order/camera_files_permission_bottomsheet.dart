@@ -92,7 +92,7 @@ class _OpenSettingsSection extends StatelessWidget {
                   ? context.router
                       .popUntilRouteWithName(HomeNavigationTabbarRoute.name)
                   : context.router.pop(),
-              child: Text('Cancel'.tr()),
+              child: Text(context.tr('Cancel')),
             ),
           ),
           const SizedBox(

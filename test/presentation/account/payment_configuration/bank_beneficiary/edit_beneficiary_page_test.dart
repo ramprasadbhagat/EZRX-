@@ -61,6 +61,7 @@ void main() {
   Widget getEditBeneficiaryPage() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<ManageBankBeneficiaryBloc>(
           create: (context) => manageBankBeneficiaryBlocMock,

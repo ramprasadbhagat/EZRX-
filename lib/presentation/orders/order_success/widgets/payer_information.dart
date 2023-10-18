@@ -13,7 +13,7 @@ class _PayerInformation extends StatelessWidget {
               horizontal: 20,
             ),
             title: Text(
-              '${'Payer'.tr()}: ${context.read<EligibilityBloc>().state.customerCodeInfo.getBillToInfo.billToCustomerCode}',
+              '${context.tr('Payer')}: ${context.read<EligibilityBloc>().state.customerCodeInfo.getBillToInfo.billToCustomerCode}',
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: ZPColors.black,
                   ),
@@ -54,7 +54,7 @@ class _PayerInformation extends StatelessWidget {
                     ),
               ),
               BalanceTextRow(
-                keyText: 'Tax number'.tr(),
+                keyText: context.tr('Tax number'),
                 keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.black,
                     ),
@@ -69,7 +69,7 @@ class _PayerInformation extends StatelessWidget {
                     ),
               ),
               BalanceTextRow(
-                keyText: 'Phone'.tr(),
+                keyText: context.tr('Phone'),
                 keyTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.black,
                     ),

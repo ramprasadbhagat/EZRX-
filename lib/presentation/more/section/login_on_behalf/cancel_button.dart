@@ -9,7 +9,7 @@ class _CancelButton extends StatelessWidget {
       child: OutlinedButton(
         key: WidgetKeys.loginOnBehalfCancelButtonKey,
         onPressed: () => context.router.pop(),
-        child: Text('Cancel'.tr()),
+        child: Text(context.tr('Cancel')),
       ),
     );
   }

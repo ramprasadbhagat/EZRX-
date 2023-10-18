@@ -81,6 +81,7 @@ void main() {
   Widget getAddBeneficiaryPage() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<UserBloc>(
           create: (context) => userBlocMock,
@@ -131,7 +132,7 @@ void main() {
           Stream.fromIterable(expectedStates),
         );
         await tester.pumpWidget(getAddBeneficiaryPage());
-        await tester.pump();
+        await tester.pumpAndSettle();
         verifyAppBarTitleAndScaffoldKey();
         //final addBeneficiaryButton =
         //  find.byKey(const Key('addBeneficiaryButton'), skipOffstage: false);

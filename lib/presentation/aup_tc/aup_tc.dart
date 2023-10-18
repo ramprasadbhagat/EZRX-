@@ -47,7 +47,7 @@ class AupTCDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Welcome to eZRx+',
+                    context.tr('Welcome to eZRx+'),
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,

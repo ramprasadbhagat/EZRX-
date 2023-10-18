@@ -34,7 +34,7 @@ class ServiceTile extends StatelessWidget {
                     item.icon,
                     const SizedBox(height: 8),
                     Text(
-                      item.label.tr(),
+                      context.tr(item.label),
                       style: item.onTap == null
                           ? item.labelStyle ??
                               Theme.of(context)

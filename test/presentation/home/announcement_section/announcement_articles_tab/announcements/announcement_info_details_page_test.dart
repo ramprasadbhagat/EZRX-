@@ -68,6 +68,7 @@ void main() {
   Widget getAnnouncementInfoDetailsPage() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<AnnouncementInfoBloc>(
           create: (context) => announcementInfoBlocMock,
@@ -92,6 +93,7 @@ void main() {
             AnnouncementInfoDetailsState.initial().copyWith(isLoading: true),
           );
           await tester.pumpWidget(getAnnouncementInfoDetailsPage());
+          await tester.pump();
           final announcementInfoDetailsPage =
               find.byKey(WidgetKeys.announcementDetailsPageKey);
           expect(announcementInfoDetailsPage, findsOneWidget);

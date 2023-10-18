@@ -26,7 +26,7 @@ class UsernameField extends StatelessWidget {
           labelText: 'Username'.tr(),
           mandatory: true,
           decoration: InputDecoration(
-            hintText: 'Enter username'.tr(),
+            hintText: context.tr('Enter username'),
           ),
           inputFormatters: [
             TextInputFormatter.withFunction(

@@ -16,7 +16,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -118,6 +117,7 @@ void main() {
       assetLoader: CsvAssetLoader(),
       child: WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<ProductSearchBloc>(
             create: (context) => productSearchBlocMock,
@@ -152,7 +152,7 @@ void main() {
       ];
       whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
       await tester.pumpWidget(getWidget());
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(searchHistoryText, findsOneWidget);
       expect(productSearchSuggestionSection, findsNothing);
     });
@@ -163,7 +163,7 @@ void main() {
       final expectedState = <ProductSearchState>[ProductSearchState.initial()];
       whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
       await tester.pumpWidget(getWidget());
-      await tester.pump();
+      await tester.pumpAndSettle();
       expect(searchHistoryText, findsNothing);
       expect(productSearchSuggestionSection, findsNothing);
     });
@@ -187,7 +187,7 @@ void main() {
         ];
         whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
         await tester.pumpWidget(getWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
         expect(searchHistoryText, findsNothing);
         expect(productSearchSuggestionSection, findsOneWidget);
         final productTile = find.byKey(
@@ -246,7 +246,7 @@ void main() {
           ];
           whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
           await tester.pumpWidget(getWidget());
-          await tester.pump();
+          await tester.pumpAndSettle();
           expect(searchHistoryText, findsNothing);
           expect(productSearchSuggestionSection, findsOneWidget);
           final productTile = find.byKey(
@@ -373,24 +373,12 @@ void main() {
       testWidgets(
         '=> Test Product Suggestion Section loading',
         (tester) async {
-          final expectedState = [
-            ProductSearchState.initial().copyWith(
-              suggestedProductList:
-                  List.generate(10, (index) => MaterialInfo.empty()),
-              searchKey: SearchKey.search(fakeSearchText),
-            ),
+          when(() => productSearchBlocMock.state).thenReturn(
             ProductSearchState.initial().copyWith(
               searchKey: SearchKey.search(fakeSearchText),
               isSearching: true,
             ),
-          ];
-
-          when(() => productSearchBlocMock.state).thenReturn(
-            ProductSearchState.initial().copyWith(
-              searchKey: SearchKey.search(fakeSearchText),
-            ),
           );
-          whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
           await tester.pumpWidget(getWidget());
           await tester.pump();
           expect(find.byType(LoadingShimmer), findsOneWidget);

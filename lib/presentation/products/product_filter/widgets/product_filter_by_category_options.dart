@@ -9,7 +9,7 @@ class _ProductFilterByCategoryOptions extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Filter by'.tr(),
+          context.tr('Filter by'),
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: ZPColors.neutralsBlack,
               ),
@@ -50,7 +50,7 @@ class _ProductFilterByCategoryOptions extends StatelessWidget {
                           vertical: 2.0,
                         ),
                         child: Text(
-                          '${state.materialFilter.manufactureListSelected.length} ${'selected'.tr()}',
+                          '${state.materialFilter.manufactureListSelected.length} ${context.tr('selected')}',
                           style:
                               Theme.of(context).textTheme.titleSmall?.copyWith(
                                     color: ZPColors.white,
@@ -91,7 +91,7 @@ class _ProductFilterByCategoryOptions extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    'Country of origin'.tr(),
+                    context.tr('Country of origin'),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: ZPColors.neutralsBlack,
                         ),
@@ -109,7 +109,7 @@ class _ProductFilterByCategoryOptions extends StatelessWidget {
                           vertical: 2.0,
                         ),
                         child: Text(
-                          '${state.materialFilter.countryListSelected.length} ${'selected'.tr()}',
+                          '${state.materialFilter.countryListSelected.length} ${context.tr('selected')}',
                           style:
                               Theme.of(context).textTheme.titleSmall?.copyWith(
                                     color: ZPColors.white,

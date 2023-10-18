@@ -9,7 +9,7 @@ class _Header extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Account & business details:'.tr(),
+          context.tr('Account & business details:'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const _UserDetails(
@@ -17,7 +17,7 @@ class _Header extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Text(
-          'License information:'.tr(),
+          context.tr('License information:'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(height: 20),

@@ -8,7 +8,7 @@ class _ProductFilterAppBar extends StatelessWidget {
     return ListTile(
       contentPadding: const EdgeInsets.only(left: 20.0, top: 10.0, right: 10.0),
       title: Text(
-        'Filter & Sort'.tr(),
+        context.tr('Filter & Sort'),
         style: Theme.of(context)
             .textTheme
             .labelLarge

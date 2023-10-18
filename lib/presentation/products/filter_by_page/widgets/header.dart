@@ -10,7 +10,7 @@ class _Header extends StatelessWidget {
       contentPadding: const EdgeInsets.only(top: 10.0, right: 10.0),
       title: Text(
         materialFilterType == MaterialFilterType.countryList
-            ? 'Country of origin'.tr()
+            ? context.tr('Country of origin')
             : materialFilterType == MaterialFilterType.manufactured
                 ? 'Manufacturer'.tr()
                 : '',

@@ -160,6 +160,7 @@ void main() {
   Widget getScopedWidget(Widget child) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<SalesOrgBloc>(create: ((context) => salesOrgBlocMock)),
         BlocProvider<MaterialPriceBloc>(
@@ -206,7 +207,7 @@ void main() {
           ),
         ),
       );
-
+      await tester.pump();
       verify(
         () => addToCartBloc.add(
           AddToCartEvent.fetch(
@@ -233,7 +234,7 @@ void main() {
           ),
         ),
       );
-
+      await tester.pump();
       verify(
         () => addToCartBloc.add(
           AddToCartEvent.setCartItem(priceAggregate),
@@ -269,7 +270,6 @@ void main() {
           ],
         ),
       );
-
       await tester.pumpWidget(
         getScopedWidget(
           AddToCart(
@@ -278,7 +278,7 @@ void main() {
           ),
         ),
       );
-
+      await tester.pump();
       verify(
         () => tenderContractBlocMock.add(
           TenderContractEvent.fetch(
@@ -317,7 +317,7 @@ void main() {
           ),
         ),
       );
-
+      await tester.pump();
       verifyNever(
         () => tenderContractBlocMock.add(
           TenderContractEvent.fetch(
@@ -340,7 +340,7 @@ void main() {
           ),
         ),
       );
-
+      await tester.pump();
       expect(find.byType(CartBottomSheetShimmer), findsOneWidget);
       expect(find.text('Material Detail'), findsOneWidget);
       expect(find.byType(CartItemDetailWidget), findsNothing);
@@ -361,7 +361,7 @@ void main() {
           ),
         ),
       );
-
+      await tester.pump();
       expect(find.byType(CartBottomSheetShimmer), findsNothing);
       expect(find.text('Material Detail'), findsOneWidget);
       expect(find.byType(CartItemDetailWidget), findsOneWidget);
@@ -379,7 +379,6 @@ void main() {
           ),
         ),
       );
-
       await tester.pumpWidget(
         getScopedWidget(
           AddToCart(
@@ -388,7 +387,7 @@ void main() {
           ),
         ),
       );
-
+      await tester.pump();
       expect(find.byType(SelectContract), findsOneWidget);
     });
   });
@@ -427,7 +426,7 @@ void main() {
           AddToCart(isCovid19Tab: false, material: priceAggregate),
         ),
       );
-
+      await tester.pump();
       final addToCartButton = find.byType(AddToCartButton);
       expect(addToCartButton, findsOneWidget);
       expect(find.byKey(const Key('addMaterialToCart')), findsNothing);
@@ -460,7 +459,7 @@ void main() {
           AddToCart(isCovid19Tab: false, material: priceAggregate),
         ),
       );
-
+      await tester.pump();
       final addToCartButton = find.byType(AddToCartButton);
       expect(addToCartButton, findsOneWidget);
       expect(find.byKey(const Key('addMaterialToCart')), findsOneWidget);
@@ -754,6 +753,7 @@ void main() {
           AddToCart(isCovid19Tab: false, material: priceAggregate),
         ),
       );
+      await tester.pumpAndSettle();
       final addToCartButton = find.text('Add to cart');
       expect(addToCartButton, findsOneWidget);
       await tester.tap(addToCartButton);

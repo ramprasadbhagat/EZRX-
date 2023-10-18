@@ -25,7 +25,7 @@ class MoreTab extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'More'.tr(),
+          context.tr('More'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         centerTitle: false,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class IntroStep extends StatelessWidget {
                       ),
                   onPressed: buttonOnTap,
                   child: Text(
-                    introObject.buttonText,
+                    context.tr(introObject.buttonText),
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium

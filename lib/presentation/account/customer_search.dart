@@ -45,7 +45,7 @@ class CustomerSearchPage extends StatelessWidget {
       key: WidgetKeys.customerSearchPage,
       appBar: AppBar(
         title: Text(
-          'Select delivery address'.tr(),
+          context.tr('Select delivery address'),
           style: Theme.of(context).textTheme.labelLarge,
         ),
         centerTitle: false,
@@ -348,7 +348,7 @@ class _ShowDefaultTag extends StatelessWidget {
       padding: const EdgeInsets.only(left: 5.0),
       child: Chip(
         label: Text(
-          'Default'.tr(),
+          context.tr('Default'),
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 fontSize: 10,
                 color: ZPColors.neutralsDarkBlack,

@@ -185,9 +185,9 @@ class _TotalMaterialCount extends StatelessWidget {
         key: WidgetKeys.totalMaterialItemCount,
         children: [
           Text(
-            'All products',
+            context.tr('All products'),
             style: Theme.of(context).textTheme.labelMedium,
-          ).tr(),
+          ),
           const SizedBox(
             width: 10,
           ),

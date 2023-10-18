@@ -21,7 +21,7 @@ class HelpAndSupportTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        'Help & Support'.tr(),
+        context.tr('Help & Support'),
         style: Theme.of(context).textTheme.labelMedium,
       ),
       subtitle: Column(
@@ -36,7 +36,7 @@ class HelpAndSupportTile extends StatelessWidget {
               color: item.onTap == null ? ZPColors.lightGray : ZPColors.black,
             ),
             title: Text(
-              item.label.tr(),
+              context.tr(item.label),
               style: item.onTap == null
                   ? Theme.of(context)
                       .textTheme

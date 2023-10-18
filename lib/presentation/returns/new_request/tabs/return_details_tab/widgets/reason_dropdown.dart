@@ -36,7 +36,7 @@ class ReasonDropdown extends StatelessWidget {
                       ),
                 ),
               ),
-          hintText: 'Select one'.tr(),
+          hintText: context.tr('Select one'),
           initialValue: state.getReturnItemDetails(uuid).returnReason,
           items: context
               .read<UsageCodeBloc>()

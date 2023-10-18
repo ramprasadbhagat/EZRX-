@@ -35,7 +35,7 @@ class MaterialDetailsSection extends StatelessWidget {
             valueText: data.principalName.name,
           ),
           BalanceTextRow(
-            keyText: 'Invoice number'.tr(),
+            keyText: context.tr('Invoice number'),
             keyTextStyle: Theme.of(context).textTheme.titleSmall,
             keyFlex: 2,
             valueFlex: 3,

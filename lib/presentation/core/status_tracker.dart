@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -50,7 +51,7 @@ class StatusTrackerSection extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    status,
+                    context.tr(status),
                     style: Theme.of(context)
                         .textTheme
                         .labelSmall

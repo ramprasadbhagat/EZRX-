@@ -77,7 +77,7 @@ class _AnnouncementInfoTitleSection extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'New'.tr(),
+                  context.tr('New'),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ZPColors.whiteBgCard,
                         fontSize: 10,

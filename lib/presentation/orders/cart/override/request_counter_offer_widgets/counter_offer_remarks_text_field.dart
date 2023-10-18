@@ -38,7 +38,7 @@ class __CounterOfferRemarksTextFieldState
       ),
       child: TextFieldWithLabel(
         fieldKey: WidgetKeys.counterOfferRemarksField,
-        labelText: 'Remarks'.tr(),
+        labelText: context.tr('Remarks'),
         decoration: InputDecoration(
           hintText: 'Enter remarks (Optional)'.tr(),
           helperText: 'Maximum: 132 characters'.tr(),

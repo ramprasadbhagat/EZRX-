@@ -44,7 +44,7 @@ class _NotificationList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            notificationData.title.getOrDefaultValue(''),
+            context.tr(notificationData.title.getOrDefaultValue('')),
             key: WidgetKeys.notificationItemTitle,
             style: Theme.of(context).textTheme.labelSmall,
           ),

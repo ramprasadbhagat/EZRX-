@@ -31,7 +31,7 @@ class CheckoutBundleItem extends StatelessWidget {
         children: [
           IconLabel(
             icon: Icons.local_offer_outlined,
-            labelText: 'Bundle offer'.tr(),
+            labelText: context.tr('Bundle offer'),
             iconSize: 24,
             labelStyle: Theme.of(context)
                 .textTheme

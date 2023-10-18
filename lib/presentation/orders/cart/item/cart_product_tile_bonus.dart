@@ -239,7 +239,8 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
           color: ZPColors.error,
         ),
         backgroundColor: ZPColors.errorSnackBarColor,
-        messageText: 'In cart quantity should not be greater than 999'.tr(),
+        messageText:
+            context.tr('In cart quantity should not be greater than 999'),
       ).show(context);
 
       return;

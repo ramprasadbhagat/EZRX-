@@ -97,7 +97,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 ),
                 onPressed: () => widget.onClear.call(),
               ),
-        hintText: widget.hintText.tr(),
+        hintText: context.tr(widget.hintText),
       ),
     );
   }

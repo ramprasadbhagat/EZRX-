@@ -244,12 +244,13 @@ class _BundleOfferDetails extends StatelessWidget {
                   Icons.discount_outlined,
                 ),
                 title: Text(
-                  'Bundle offer'.tr(),
+                  context.tr('Bundle offer'),
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 subtitle: Text(
-                  'Mix and match bundled products and buy more for better deals.'
-                      .tr(),
+                  context.tr(
+                    'Mix and match bundled products and buy more for better deals.',
+                  ),
                 ),
               ),
               bundleInformation.isNotEmpty

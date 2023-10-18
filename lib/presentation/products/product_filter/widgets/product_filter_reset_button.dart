@@ -29,7 +29,7 @@ class _ProductFilterResetButton extends StatelessWidget {
             ),
           ),
       child: Text(
-        'Reset'.tr(),
+        context.tr('Reset'),
         style: Theme.of(context).textTheme.labelMedium?.copyWith(
               color: ZPColors.primary,
             ),

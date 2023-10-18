@@ -40,7 +40,7 @@ class ChangeDeliveryAddress extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Change delivery address?'.tr(),
+            context.tr('Change delivery address?'),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: ZPColors.primary,
                 ),
@@ -49,7 +49,7 @@ class ChangeDeliveryAddress extends StatelessWidget {
             height: 8,
           ),
           Text(
-            'Any existing items in your cart will be cleared.'.tr(),
+            context.tr('Any existing items in your cart will be cleared.'),
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ZPColors.extraLightGrey4,
                 ),
@@ -126,7 +126,7 @@ class _ConfirmChangeDeliveryAddressSection extends StatelessWidget {
                 );
               },
               child: Text(
-                'Change address'.tr(),
+                context.tr('Change address'),
               ),
             ),
           ),

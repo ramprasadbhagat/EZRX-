@@ -52,7 +52,7 @@ class _CounterOfferDiscountTextFieldState
               fieldKey: WidgetKeys.counterOfferDiscountField,
               labelText: 'Discount counter offer (%)'.tr(),
               decoration: InputDecoration(
-                hintText: 'Enter counter offer percentage discount'.tr(),
+                hintText: context.tr('Enter counter offer percentage discount'),
                 errorMaxLines: 2,
               ),
               controller: _discountController,

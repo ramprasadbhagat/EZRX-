@@ -43,7 +43,7 @@ class _ReturnRequestSuccessMessage extends StatelessWidget {
                 size: 24,
               ),
               title: Text(
-                "What's next?".tr(),
+                context.tr("What's next?"),
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: ZPColors.black,
                     ),

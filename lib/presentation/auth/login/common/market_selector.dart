@@ -39,7 +39,7 @@ class _MarketSelectorState extends State<MarketSelector> {
       children: [
         RichText(
           text: TextSpan(
-            text: 'Market'.tr(),
+            text: context.tr('Market'),
             style: Theme.of(context).textTheme.labelSmall,
             children: <TextSpan>[
               TextSpan(
@@ -88,8 +88,7 @@ class _MarketSelectorState extends State<MarketSelector> {
                   );
                 }).toList();
               },
-              items:
-                  markets.map((marketType) {
+              items: markets.map((marketType) {
                 return DropdownMenuItem<AppMarket>(
                   value: marketType,
                   child: Row(

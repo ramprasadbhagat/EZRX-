@@ -85,6 +85,7 @@ void main() {
     return tester.pumpWidget(
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<PolicyConfigurationBloc>(
             create: (context) => policyConfigurationListBlocMock,
@@ -109,20 +110,11 @@ void main() {
     testWidgets('=> Test while state is fetching', (tester) async {
       when(() => policyConfigurationListBlocMock.state).thenReturn(
         PolicyConfigurationState.initial().copyWith(
-          isLoading: false,
-        ),
-      );
-      final expectedState = [
-        PolicyConfigurationState.initial().copyWith(
           isLoading: true,
         ),
-      ];
-      whenListen(
-        policyConfigurationListBlocMock,
-        Stream.fromIterable(expectedState),
       );
       await getWidget(tester);
-      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump();
       final loaderImage = find.byKey(const Key('LoaderImage'));
       final policyConfigurationListItem =
           find.byType(PolicyConfigurationListItem);
@@ -149,7 +141,7 @@ void main() {
         Stream.fromIterable(expectedState),
       );
       await getWidget(tester);
-      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pumpAndSettle();
       final orderTemplateItem = find.byType(PolicyConfigurationListItem);
       expect(orderTemplateItem, findsAtLeastNWidgets(1));
       final findFloatingActionButton = find.byType(FloatingActionButton);
@@ -172,6 +164,7 @@ void main() {
 
     testWidgets('Load policy Search Widget', (tester) async {
       await getWidget(tester);
+      await tester.pump();
       final customerSearchPage =
           find.byKey(const Key('policyConfigurationSearch'));
       expect(customerSearchPage, findsOneWidget);
@@ -220,7 +213,8 @@ void main() {
         find.byType(CustomSearchBar),
         '2001',
       );
-      await tester.pump(Duration(milliseconds: locator<Config>().autoSearchTimeout));
+      await tester
+          .pump(Duration(milliseconds: locator<Config>().autoSearchTimeout));
       verify(
         () => policyConfigurationListBlocMock.add(
           PolicyConfigurationEvent.search(
@@ -280,6 +274,7 @@ void main() {
       await tester.runAsync(() async {
         await getWidget(tester);
       });
+      await tester.pump();
       final noPolicyConfiguration = find.text('No Policy Configurations found');
       final policyConfigurationListItem =
           find.byType(PolicyConfigurationListItem);

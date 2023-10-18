@@ -125,7 +125,7 @@ class _InvalidItemRemoveButton extends StatelessWidget {
           child: LoadingShimmer.withChild(
             enabled: state.isClearing,
             child: Text(
-              'Remove items'.tr(),
+              context.tr('Remove items'),
               style: Theme.of(context)
                   .textTheme
                   .labelMedium

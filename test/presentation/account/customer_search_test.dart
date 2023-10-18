@@ -132,6 +132,7 @@ void main() {
     RouteDataScope getScopedWidget() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
@@ -185,6 +186,7 @@ void main() {
         ),
       );
       await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
       final customerSearchPage = find.byKey(const Key('customerSearchPage'));
       expect(customerSearchPage, findsOneWidget);
     });
@@ -306,7 +308,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
       });
 
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       final noCustomerFound = find.text('That didn’t match anything');
       final loadIndicator = find.byKey(const Key('loadIndicator'));
@@ -593,6 +595,7 @@ void main() {
     RouteDataScope getScopedWidget() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         providers: [
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),

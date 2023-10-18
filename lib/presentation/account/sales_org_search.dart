@@ -24,7 +24,7 @@ class SalesOrgSearch extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Select sales org'.tr(),
+          context.tr('Select sales org'),
         ),
         centerTitle: false,
       ),

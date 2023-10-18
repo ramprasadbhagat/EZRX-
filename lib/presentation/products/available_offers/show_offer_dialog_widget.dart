@@ -159,7 +159,7 @@ class _AvailableOfferHeader extends StatelessWidget {
             ),
       ),
       subtitle: Text(
-        context.tr('Offers are auto-applied based on quantity purchased.'),
+        '${context.tr('Offers are auto-applied based on quantity purchased')}.',
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: ZPColors.extraLightGrey4,
             ),

@@ -30,7 +30,7 @@ class FAQPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'FAQ'.tr(),
+            context.tr('FAQ'),
             style: Theme.of(context).textTheme.labelLarge,
           ),
           centerTitle: false,
@@ -59,7 +59,7 @@ class FAQPage extends StatelessWidget {
                     0.0,
                   ),
                   child: Text(
-                    'Have a question? We’re here to help'.tr(),
+                    context.tr('Have a question? We’re here to help'),
                     style: Theme.of(context)
                         .textTheme
                         .labelLarge
@@ -76,7 +76,7 @@ class FAQPage extends StatelessWidget {
                           horizontal: 16.0,
                         ),
                         child: Text(
-                          '${'Search results for:'.tr()} ${state.searchKey.getOrDefaultValue('')}',
+                          '${context.tr('Search results for:')} ${state.searchKey.getOrDefaultValue('')}',
                           style: Theme.of(context).textTheme.labelLarge,
                         ),
                       )

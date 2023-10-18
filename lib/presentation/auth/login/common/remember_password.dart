@@ -41,7 +41,7 @@ class RememberPassword extends StatelessWidget {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  'Remember me'.tr(),
+                  context.tr('Remember me'),
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
@@ -49,7 +49,7 @@ class RememberPassword extends StatelessWidget {
             TextButton(
               key: WidgetKeys.forgotPasswordButton,
               child: Text(
-                'Forgot password?'.tr(),
+                context.tr('Forgot password?'),
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: ZPColors.extraDarkGreen,
                     ),

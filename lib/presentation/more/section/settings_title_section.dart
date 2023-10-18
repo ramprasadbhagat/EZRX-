@@ -12,7 +12,7 @@ class SettingsTile extends StatelessWidget {
     return ListTile(
       key: WidgetKeys.settingTile,
       title: Text(
-        'Settings'.tr(),
+        context.tr('Settings'),
         style: Theme.of(context).textTheme.labelMedium,
       ),
       subtitle: Column(

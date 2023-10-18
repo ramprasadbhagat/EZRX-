@@ -51,7 +51,7 @@ class _ExpandableMaterialDetails extends StatelessWidget {
               ),
         ),
         BalanceTextRow(
-          keyText: 'Invoice number'.tr(),
+          keyText: context.tr('Invoice number'),
           keyFlex: 2,
           valueFlex: 3,
           valueText: materialDetail.assignmentNumber,

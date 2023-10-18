@@ -358,7 +358,7 @@ class _ClearButton extends StatelessWidget {
         context.router.popForced();
       },
       child: Text(
-        'Clear'.tr(),
+        context.tr('Clear'),
         style: const TextStyle(color: ZPColors.primary),
       ),
     );

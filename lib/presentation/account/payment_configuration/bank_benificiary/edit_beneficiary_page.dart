@@ -81,7 +81,7 @@ class _SalesOrgDropdown extends StatelessWidget {
       key: const Key('salesOrgDropdownKey'),
       isExpanded: true,
       decoration: InputDecoration(
-        labelText: 'Select Sales Org'.tr(),
+        labelText: context.tr('Select Sales Org'),
         enabled: false,
         contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
       ),

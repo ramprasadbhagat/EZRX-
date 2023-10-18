@@ -37,14 +37,13 @@ class FaqInfoPage extends StatelessWidget {
 
         return ScrollList<FAQCategoryGroup>(
           controller: ScrollController(),
-          noRecordFoundWidget: NoRecordFound(
+          noRecordFoundWidget: const NoRecordFound(
             key: WidgetKeys.faqNotFoundRecordKey,
-            title: "That didn't match anything".tr(),
+            title: "That didn't match anything",
             subTitle:
-                "Try adjusting your search to find what you're looking for or"
-                    .tr(),
+                "Try adjusting your search to find what you're looking for or",
             svgImage: SvgImage.faqSearch,
-            actionButton: const ContactUsButton(),
+            actionButton: ContactUsButton(),
           ),
           isLoading: state.isFetching,
           itemBuilder: (context, index, item) => Column(

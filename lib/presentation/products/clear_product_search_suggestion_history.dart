@@ -22,7 +22,7 @@ class ClearProductSearchSuggestionHistory extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Clear search history?'.tr(),
+            context.tr('Clear search history?'),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: ZPColors.primary,
                 ),
@@ -54,7 +54,7 @@ class _ClearDeliveryAddressSection extends StatelessWidget {
                 await context.router.pop();
               },
               child: Text(
-                'Cancel'.tr(),
+                context.tr('Cancel'),
               ),
             ),
           ),
@@ -72,7 +72,7 @@ class _ClearDeliveryAddressSection extends StatelessWidget {
                 context.router.pop();
               },
               child: Text(
-                'Clear'.tr(),
+                context.tr('Clear'),
               ),
             ),
           ),

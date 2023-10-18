@@ -106,7 +106,7 @@ class AddDeductionCodePage extends StatelessWidget {
                   children: [
                     GenericDropdown(
                       key: const Key('salesOrgDropdownKey'),
-                      labelText: 'Select Sales Org'.tr(),
+                      labelText: context.tr('Select Sales Org'),
                       validator: (_) => deductionCodeData.salesOrg.value.fold(
                         (f) => f.maybeMap(
                           empty: (_) => 'Please Select Sales Org.'.tr(),

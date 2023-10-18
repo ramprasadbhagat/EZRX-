@@ -215,7 +215,7 @@ class _MaterialDetailsSection extends StatelessWidget {
           valueText: requestInformation.principalName.name,
         ),
         BalanceTextRow(
-          keyText: 'Invoice number'.tr(),
+          keyText: context.tr('Invoice number'),
           valueText: requestInformation.invoiceNo,
         ),
         BalanceTextRow(

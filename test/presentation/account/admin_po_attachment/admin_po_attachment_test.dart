@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
@@ -67,31 +66,21 @@ void main() {
     });
 
     Widget getWUT() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<AdminPoAttachmentBloc>(
+            create: (context) => mockAdminPoAttachmentBloc,
+          ),
+          BlocProvider<AdminPoAttachmentFilterBloc>(
+            create: (context) => mockAdminPoAttachmentFilterBloc,
+          ),
+          BlocProvider<PoAttachmentBloc>(
+            create: (context) => mockPoAttachmentBloc,
+          ),
         ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<AdminPoAttachmentBloc>(
-              create: (context) => mockAdminPoAttachmentBloc,
-            ),
-            BlocProvider<AdminPoAttachmentFilterBloc>(
-              create: (context) => mockAdminPoAttachmentFilterBloc,
-            ),
-            BlocProvider<PoAttachmentBloc>(
-              create: (context) => mockPoAttachmentBloc,
-            ),
-          ],
-          child: Material(child: AdminPoAttachmentPage()),
-        ),
+        child: Material(child: AdminPoAttachmentPage()),
       );
     }
 

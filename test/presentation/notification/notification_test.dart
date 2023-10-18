@@ -89,10 +89,10 @@ void main() {
       customerCodeListMock =
           await CustomerCodeLocalDataSource().getCustomerCodeList();
     });
-    Widget getScopedWidget({bool usingLocalization = true}) {
+    Widget getScopedWidget() {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
-        usingLocalization: usingLocalization,
+        usingLocalization: true,
         providers: [
           BlocProvider<UserBloc>(create: (context) => userBlocMock),
           BlocProvider<CustomerCodeBloc>(
@@ -217,17 +217,15 @@ void main() {
         ),
       ];
       whenListen(notificationBlocMock, Stream.fromIterable(expectedStates));
-      await tester.pumpWidget(
-        getScopedWidget(
-          usingLocalization: false,
-        ),
+      await tester.pumpFrames(
+        getScopedWidget(),
+        const Duration(seconds: 1),
       );
-      await tester.pump();
-      await tester.pump(const Duration(seconds: 1));
       final msg = find.textContaining(
-        'Notification has been deleted'.tr(),
+        'Notification has been deleted',
       );
       expect(msg, findsOneWidget);
+      await tester.pump();
     });
     testWidgets(
       'Load notification list with data AND then loadMore',
@@ -244,7 +242,7 @@ void main() {
           ),
         );
         await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final itemKey = find.byKey(
           WidgetKeys.genericKey(

@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -90,18 +89,9 @@ void main() {
     });
 
     Widget getWUT() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
+      return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
+        usingLocalization: true,
           providers: [
             BlocProvider<CustomerCodeBloc>(
               create: (context) => mockCustomerCodeBloc,
@@ -115,8 +105,7 @@ void main() {
             BlocProvider<UserBloc>(create: (context) => mockUserBloc),
             BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
           ],
-          child: const Material(child: AdminPoAttachmentFilterDrawer()),
-        ),
+        child: const Material(child: AdminPoAttachmentFilterDrawer()),
       );
     }
 

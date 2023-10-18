@@ -175,7 +175,7 @@ class _ProductDetails extends StatelessWidget {
           ),
           if (cartItem.price.isCounterOfferRequested)
             Text(
-              'Requested counter offer'.tr(),
+              context.tr('Requested counter offer'),
               key: WidgetKeys.cartItemProductCounterOfferLabel,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontStyle: FontStyle.italic,

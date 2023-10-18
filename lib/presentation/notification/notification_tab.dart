@@ -58,7 +58,7 @@ class NotificationTab extends StatelessWidget {
             () {
               if (state.isDeletedAllSuccess) {
                 CustomSnackBar(
-                  messageText: 'Notification has been deleted'.tr(),
+                  messageText: context.tr('Notification has been deleted'),
                 ).show(context);
               }
             },

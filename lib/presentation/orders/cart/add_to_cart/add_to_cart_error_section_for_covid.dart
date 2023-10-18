@@ -31,7 +31,7 @@ class AddToCartErrorSection extends StatelessWidget {
               ),
             ),
             Text(
-              'Proceed to add to cart?'.tr(),
+              context.tr('Proceed to add to cart?'),
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
@@ -40,8 +40,9 @@ class AddToCartErrorSection extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 30),
               child: Text(
-                'Covid-19 vaccine cannot be added to cart with other commercial materials. By proceeding, your current cart will be cleared.'
-                    .tr(),
+                context.tr(
+                  'Covid-19 vaccine cannot be added to cart with other commercial materials. By proceeding, your current cart will be cleared.',
+                ),
                 maxLines: 3,
                 textAlign: TextAlign.start,
                 style: Theme.of(context)
@@ -55,7 +56,7 @@ class AddToCartErrorSection extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     child: Text(
-                      'Cancel'.tr(),
+                      context.tr('Cancel'),
                       style: Theme.of(context)
                           .textTheme
                           .labelMedium

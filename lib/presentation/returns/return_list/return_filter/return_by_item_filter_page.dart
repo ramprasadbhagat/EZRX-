@@ -25,7 +25,7 @@ class ReturnByItemFilterPage extends StatelessWidget {
         children: [
           AppBar(
             title: Text(
-              'Filter'.tr(),
+              context.tr('Filter'),
             ),
             automaticallyImplyLeading: false,
             centerTitle: false,
@@ -176,7 +176,7 @@ class _AmountValueToFilter extends StatelessWidget {
                       ),
                     ),
             decoration: InputDecoration(
-              labelText: 'Amount to'.tr(),
+              labelText: context.tr('Amount to'),
               labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -210,7 +210,7 @@ class _AmountValueFromFilter extends StatelessWidget {
                       ),
                     ),
             decoration: InputDecoration(
-              labelText: 'Amount from'.tr(),
+              labelText: context.tr('Amount from'),
               labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -256,7 +256,7 @@ class _FromRequestDateFilter extends StatelessWidget {
               text: state.filter.returnDateFrom.dateString,
             ),
             decoration: InputDecoration(
-              hintText: 'Date from'.tr(),
+              hintText: context.tr('Date from'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -312,7 +312,7 @@ class _ToRequestDateFilter extends StatelessWidget {
               text: state.filter.returnDateTo.dateString,
             ),
             decoration: InputDecoration(
-              hintText: 'Date to'.tr(),
+              hintText: context.tr('Date to'),
               hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: ZPColors.darkGray,
                   ),
@@ -397,7 +397,7 @@ class _ResetButton extends StatelessWidget {
           );
         },
         child: Text(
-          'Reset'.tr(),
+          context.tr('Reset'),
           style: const TextStyle(color: ZPColors.primary),
         ),
       ),

@@ -234,7 +234,7 @@ class _BonusQuantityEmptyWarning extends StatelessWidget {
                 ),
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                  'Please enter quantity to add bonus/sample.'.tr(),
+                  context.tr('Please enter quantity to add bonus/sample.'),
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               )

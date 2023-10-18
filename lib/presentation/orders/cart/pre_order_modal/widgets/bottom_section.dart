@@ -26,7 +26,7 @@ class _BottomSection extends StatelessWidget {
                   key: WidgetKeys.preOrderModalCancelButton,
                   onPressed: () => context.router.pop(),
                   child: Text(
-                    'Cancel'.tr(),
+                    context.tr('Cancel'),
                     style: const TextStyle(color: ZPColors.primary),
                   ),
                 ),

@@ -25,7 +25,7 @@ class _CounterOfferButtons extends StatelessWidget {
                 onPressed: () {
                   context.router.pop();
                 },
-                child: Text('Cancel'.tr()),
+                child: Text(context.tr('Cancel')),
               ),
             ),
             const SizedBox(

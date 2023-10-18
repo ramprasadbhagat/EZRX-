@@ -19,7 +19,7 @@ class FilterCountButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Text(
-            'Filter'.tr(),
+            context.tr('Filter'),
             style: Theme.of(context).textTheme.titleSmall?.apply(
                   color: ZPColors.kPrimaryColor,
                 ),

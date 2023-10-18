@@ -22,7 +22,7 @@ class ContactUsButton extends StatelessWidget {
         );
       },
       child: Text(
-        'Contact us'.tr(),
+        context.tr('Contact us'),
         style: const TextStyle(color: ZPColors.primary),
       ),
     );

@@ -74,7 +74,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'About Us'.tr(),
+            context.tr('About Us'),
           ),
           centerTitle: false,
         ),
@@ -179,7 +179,7 @@ class _HeaderSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'About us'.tr(),
+            context.tr('About us'),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: ZPColors.extraDarkGreen,
                 ),

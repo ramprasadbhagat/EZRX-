@@ -18,7 +18,7 @@ class _ProductSearchHistorySuggestionSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Search History'.tr(),
+                        context.tr('Search History'),
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                               color: ZPColors.extraLightGrey4,
                             ),

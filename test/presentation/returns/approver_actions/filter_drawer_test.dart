@@ -66,6 +66,7 @@ void main() {
   Widget getWidget() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<ReturnApproverBloc>(
           create: (context) => returnApproverBlocMock,

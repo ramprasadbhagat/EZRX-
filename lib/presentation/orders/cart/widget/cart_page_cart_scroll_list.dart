@@ -69,7 +69,7 @@ class _CartPageCartScrollList extends StatelessWidget {
                   )
                 : ScrollList<PriceAggregate>(
                     noRecordFoundWidget: NoRecordFound(
-                      title: 'Your cart is empty'.tr(),
+                      title: 'Your cart is empty',
                       subTitle:
                           'Looks like you haven’t added anything to your cart yet.'
                               .tr(),

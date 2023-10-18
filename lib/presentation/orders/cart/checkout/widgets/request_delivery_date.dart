@@ -55,7 +55,7 @@ class _RequestDeliveryDateState extends State<RequestDeliveryDate> {
           child: TextFieldWithLabel(
             readOnly: true,
             fieldKey: WidgetKeys.deliveryDate,
-            labelText: 'Request delivery date'.tr(),
+            labelText: context.tr('Request delivery date'),
             controller: _deliveryDateText,
             validator: (_) {
               return context
@@ -75,7 +75,7 @@ class _RequestDeliveryDateState extends State<RequestDeliveryDate> {
             },
             onChanged: (value) {},
             decoration: InputDecoration(
-              hintText: 'Select date'.tr(),
+              hintText: context.tr('Select date'),
               suffixIconConstraints:
                   const BoxConstraints(maxHeight: 22, minHeight: 22),
               suffixIcon: IconButton(

@@ -86,6 +86,7 @@ void main() {
   Widget getScopedWidget(Widget child) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<UserRestrictionListBloc>(
           create: (context) => userRestrictionListBlocMock,
@@ -108,19 +109,11 @@ void main() {
 
   group('User Restriction List Page Test', () {
     testWidgets('Loading', (tester) async {
-      final expectedState = [
+      when(() => userRestrictionListBlocMock.state).thenReturn(
         UserRestrictionListState.initial().copyWith(
           isFetching: true,
-          apiFailureOrSuccessOption: none(),
         ),
-      ];
-
-      whenListen(
-        userRestrictionListBlocMock,
-        Stream.fromIterable(expectedState),
-        initialState: UserRestrictionListState.initial(),
       );
-
       await tester.pumpWidget(getScopedWidget(const UserRestrictionListPage()));
       await tester.pump();
 
@@ -135,16 +128,19 @@ void main() {
               optionOf(const Left(ApiFailure.other('Fake-error'))),
         )
       ];
-
-      when(() => userRestrictionListBlocMock.state)
-          .thenReturn(UserRestrictionListState.initial());
       whenListen(
         userRestrictionListBlocMock,
         Stream.fromIterable(expectedState),
       );
+      when(() => userRestrictionListBlocMock.state).thenReturn(
+        UserRestrictionListState.initial().copyWith(
+          apiFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('Fake-error'))),
+        ),
+      );
 
       await tester.pumpWidget(getScopedWidget(const UserRestrictionListPage()));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       final snackBar = find.byKey(WidgetKeys.customSnackBar);
       expect(snackBar, findsOneWidget);
@@ -168,7 +164,7 @@ void main() {
       );
 
       await tester.pumpWidget(getScopedWidget(const UserRestrictionListPage()));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       final userRestrictionListPage =
           find.byKey(const Key('UserRestrictionListPage'));
@@ -202,7 +198,7 @@ void main() {
       final handle = tester.ensureSemantics();
 
       await tester.pumpWidget(getScopedWidget(const UserRestrictionListPage()));
-
+      await tester.pump();
       await tester.drag(
         find.byKey(Key('userRestrictionTile-${mockUserNamesList[0]}')),
         const Offset(0.0, 1000.0),
@@ -259,7 +255,7 @@ void main() {
 
         await tester
             .pumpWidget(getScopedWidget(const UserRestrictionListPage()));
-        await tester.pump();
+        await tester.pumpAndSettle();
 
         final removedWhileSearchingUserRestrictionItem =
             find.byKey(Key('userRestrictionTile-${mockUserNamesList[0]}'));
@@ -309,7 +305,8 @@ void main() {
 
       final textField = find.byType(CustomSearchBar);
       await tester.enterText(textField, mockSearchKey);
-      await tester.pump(Duration(milliseconds: locator<Config>().autoSearchTimeout));
+      await tester
+          .pump(Duration(milliseconds: locator<Config>().autoSearchTimeout));
 
       verify(
         () => userRestrictionListBlocMock.add(

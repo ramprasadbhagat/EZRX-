@@ -12,7 +12,6 @@ import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
-
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/order_tag.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -167,7 +166,7 @@ class _ItemSubTotalSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Item subtotal:'.tr(),
+                context.tr('Item subtotal:'),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
@@ -294,7 +293,7 @@ class _MaterialDetails extends StatelessWidget {
           ),
           if (cartItem.price.isCounterOfferRequested)
             Text(
-              'Requested counter offer'.tr(),
+              context.tr('Requested counter offer'),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     fontStyle: FontStyle.italic,
                     color: ZPColors.extraLightGrey4,
@@ -477,7 +476,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
                 color: ZPColors.extraDarkGreen,
               ),
               label: Text(
-                'Bonus/sample item'.tr(),
+                context.tr('Bonus/sample item'),
                 style: Theme.of(context)
                     .textTheme
                     .labelSmall
@@ -507,7 +506,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
                 color: ZPColors.extraDarkGreen,
               ),
               label: Text(
-                'Counter offer'.tr(),
+                context.tr('Counter offer'),
                 style: Theme.of(context)
                     .textTheme
                     .labelSmall

@@ -92,6 +92,7 @@ void main() {
   Widget getAddPaymentMethodPage() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      usingLocalization: true,
       providers: [
         BlocProvider<PaymentMethodsBloc>(
           create: (context) => paymentMethodsMock,

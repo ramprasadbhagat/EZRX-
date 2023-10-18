@@ -250,6 +250,7 @@ void main() {
       await tester.pumpWidget(
         WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
+          usingLocalization: true,
           child: MultiBlocProvider(
             providers: [
               BlocProvider<UserBloc>(create: (context) => userBlocMock),
@@ -292,6 +293,7 @@ void main() {
           ),
         ),
       );
+      await tester.pump();
       final aupTcWebView = find.byKey(WidgetKeys.aupTcWebView);
       expect(aupTcWebView, findsNWidgets(2));
       final staticHtmlViewerElement1 =
@@ -425,6 +427,7 @@ void main() {
     await tester.pumpWidget(
       WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        usingLocalization: true,
         child: MultiBlocProvider(
           providers: [
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
@@ -439,6 +442,7 @@ void main() {
         ),
       ),
     );
+    await tester.pump();
     //This is for setting the isLoading false
     final aupTcWebView = find.byKey(WidgetKeys.aupTcWebView);
     expect(aupTcWebView, findsNWidgets(2));

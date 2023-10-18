@@ -5,7 +5,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/presentation/more/more_tab.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -18,7 +17,6 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -114,50 +112,40 @@ void main() {
 
   Future getWidget(tester) async {
     return await tester.pumpWidget(
-      EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
+      WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<UserBloc>(
+            create: (context) => userBlocMock,
+          ),
+          BlocProvider<AuthBloc>(
+            create: (context) => authBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<BannerBloc>(
+            create: (context) => bannerBlocMock,
+          ),
+          BlocProvider<SalesOrgBloc>(
+            create: (context) => salesOrgBlocMock,
+          ),
+          BlocProvider<MaterialListBloc>(
+            create: (context) => materialListBlocMock,
+          ),
+          BlocProvider<CartBloc>(create: (context) => cartBlocMock),
+          BlocProvider<AnnouncementBloc>(
+            create: (context) => announcementBlocMock,
+          ),
+          BlocProvider<AnnouncementInfoBloc>(
+            create: (context) => announcementInfoBlocMock,
+          ),
         ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<UserBloc>(
-              create: (context) => userBlocMock,
-            ),
-            BlocProvider<AuthBloc>(
-              create: (context) => authBlocMock,
-            ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<BannerBloc>(
-              create: (context) => bannerBlocMock,
-            ),
-            BlocProvider<SalesOrgBloc>(
-              create: (context) => salesOrgBlocMock,
-            ),
-            BlocProvider<MaterialListBloc>(
-              create: (context) => materialListBlocMock,
-            ),
-            BlocProvider<CartBloc>(create: (context) => cartBlocMock),
-            BlocProvider<AnnouncementBloc>(
-              create: (context) => announcementBlocMock,
-            ),
-            BlocProvider<AnnouncementInfoBloc>(
-              create: (context) => announcementInfoBlocMock,
-            ),
-          ],
-          child: const MoreTab(),
-        ),
+        child: const MoreTab(),
       ),
     );
   }
@@ -228,7 +216,7 @@ void main() {
         );
 
         await getWidget(tester);
-        await tester.pump();
+        await tester.pumpAndSettle();
         expect(returnsTile, findsNothing);
       },
     );
@@ -300,7 +288,7 @@ void main() {
         );
 
         await getWidget(tester);
-        await tester.pump();
+        await tester.pumpAndSettle();
         expect(returnsTile, findsNothing);
       },
     );
