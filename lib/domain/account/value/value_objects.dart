@@ -114,6 +114,14 @@ class SalesOrg extends ValueObject<String> {
 
   String get countryFlag => getCountryFlag(country);
   String get faqVariablePath => countryFaqPath(country);
+
+  String get customerPaymentResponsePath =>
+      countryCustomerPaymentResponsePath(country);
+
+
+  String get paymentInfoResponsePath =>
+      countryPaymentInfoResponsePath(country);
+
   const SalesOrg._(this.value);
 }
 

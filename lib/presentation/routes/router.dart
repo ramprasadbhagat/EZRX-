@@ -52,6 +52,7 @@ import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_in
 import 'package:ezrxmobile/presentation/payments/new_payment/new_payment.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
+import 'package:ezrxmobile/presentation/payments/payment_completed/payment_completed_page.dart';
 import 'package:ezrxmobile/presentation/payments/payment_home/payment_page.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 import 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
@@ -308,6 +309,10 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
     AutoRoute(
       path: 'payments/payment_advice_created',
       page: PaymentAdviceCreatedPage,
+    ),
+     AutoRoute(
+      path: 'payments/payment_completed',
+      page: PaymentCompletedPage,
     ),
     CustomRoute(
       path: 'orders/add_to_cart',

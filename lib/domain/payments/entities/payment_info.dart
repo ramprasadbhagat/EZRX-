@@ -7,15 +7,11 @@ class PaymentInfo with _$PaymentInfo {
   const PaymentInfo._();
 
   const factory PaymentInfo({
-    required String zzHtmcs,
     required String paymentID,
     required String paymentBatchAdditionalInfo,
-    required String accountingDocExternalReference,
   }) = _PaymentInfo;
 
   factory PaymentInfo.empty() => const PaymentInfo(
-        zzHtmcs: '',
-        accountingDocExternalReference: '',
         paymentID: '',
         paymentBatchAdditionalInfo: '',
       );

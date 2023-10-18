@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -5,19 +7,21 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/price_text.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NewPaymentPage extends StatelessWidget {
   const NewPaymentPage({Key? key}) : super(key: key);
@@ -26,6 +30,23 @@ class NewPaymentPage extends StatelessWidget {
     AvailableCreditsTabRoute(),
     PaymentMethodTabRoute(),
   ];
+
+  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
+    return showModalBottomSheet<bool>(
+      context: context,
+      enableDrag: false,
+      builder: (_) => ConfirmBottomSheet(
+        key: WidgetKeys.confirmBottomSheet,
+        title: 'Error creating payment advice',
+        content:
+            'At least one of the selected invoices/credit notes have already been used to create another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.',
+        confirmButtonText: 'Payment summary',
+        iconWidget: SvgPicture.asset(
+          SvgImage.alert,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,57 +85,29 @@ class NewPaymentPage extends StatelessWidget {
               listener: (context, state) {
                 if (!state.isLoading) {
                   state.failureOrSuccessOption.fold(
-                    () async => state
-                            .salesOrganisation.salesOrg.isPaymentNeedOpenWebView
-                        ? await context.router
-                            .pushNamed('payments/payments_webview')
-                            .then((uri) {
-                            /// * Document: https://zuelligpharma.atlassian.net/wiki/spaces/EZRX/pages/293306636/MB+-+UPDATE+PAYMENT+GATEWAY+LOGIC
-                            /// If payment is successful (Received redirect url with
-                            /// path payment/thank-you): Update payment gateway,
-                            /// back to the payment overview page and navigate to
-                            /// the payment advice created page
-                            if (uri != null) {
-                              context.read<NewPaymentBloc>().add(
-                                    NewPaymentEvent.updatePaymentGateway(
-                                      paymentUrl: uri as Uri,
-                                    ),
-                                  );
-                              context.router.pushAndPopUntil(
-                                const PaymentAdviceCreatedPageRoute(),
-                                predicate: (Route route) =>
-                                    route.settings.name ==
-                                    PaymentPageRoute.name,
-                              );
-                            } else {
-                              /// If payment is fails (No received redirect url with
-                              /// path payment/thank-you):
-                              /// * If on TH market: Back to the payment overview
-                              /// page and navigate to the payment advice created page
-                              /// * If on other market: Back to the payment overview page
-                              context
-                                      .read<EligibilityBloc>()
-                                      .state
-                                      .salesOrg
-                                      .isTH
-                                  ? context.router.pushAndPopUntil(
-                                      const PaymentAdviceCreatedPageRoute(),
-                                      predicate: (Route route) =>
-                                          route.settings.name ==
-                                          PaymentPageRoute.name,
-                                    )
-                                  : context.router
-                                      .popUntilRouteWithPath('payments');
-                            }
-                          })
-                        : await context.router.pushAndPopUntil(
-                            const PaymentAdviceCreatedPageRoute(),
-                            predicate: (Route route) =>
-                                route.settings.name == PaymentPageRoute.name,
-                          ),
+                    () {
+                      context.read<NewPaymentBloc>().add(
+                            const NewPaymentEvent.fetchInvoiceInfoPdf(),
+                          );
+                      context.router.pushAndPopUntil(
+                        const PaymentAdviceCreatedPageRoute(),
+                        predicate: (Route route) =>
+                            route.settings.name == PaymentPageRoute.name,
+                      );
+                    },
                     (either) => either.fold(
-                      (failure) {
-                        ErrorUtils.handleApiFailure(context, failure);
+                      (failure) async {
+                        final confirmed =
+                            await _showConfirmBottomSheet(context);
+                        if ((confirmed ?? false) && context.mounted) {
+                          unawaited(
+                            context.router.pushAndPopUntil(
+                              const PaymentSummaryPageRoute(),
+                              predicate: (Route route) =>
+                                  route.settings.name == PaymentPageRoute.name,
+                            ),
+                          );
+                        }
                       },
                       (_) {},
                     ),
@@ -193,7 +186,7 @@ class NewPaymentPage extends StatelessWidget {
                               ),
                             Row(
                               children: [
-                                _PriceText(
+                                PriceText(
                                   data: StringUtils.displayNumber(
                                     state.selectedInvoices.amountTotal,
                                   ),
@@ -210,7 +203,7 @@ class NewPaymentPage extends StatelessWidget {
                                         Theme.of(context).textTheme.titleSmall,
                                   ),
                                 ),
-                                _PriceText(
+                                PriceText(
                                   data: '(${StringUtils.displayNumber(
                                     state.selectedCredits.amountTotal.abs(),
                                   )})',
@@ -258,27 +251,31 @@ class NewPaymentPage extends StatelessWidget {
                                     tabController: tabController,
                                     enabled: !state.negativeAmountPayable,
                                   ),
-                                if (step == 3)
-                                  ElevatedButton(
-                                    key: WidgetKeys.payButton,
-                                    onPressed: state.isLoading
-                                        ? null
-                                        : () =>
-                                            context.read<NewPaymentBloc>().add(
-                                                  const NewPaymentEvent.pay(),
-                                                ),
-                                    child: LoadingShimmer.withChild(
-                                      enabled: state.isLoading,
-                                      child: Text(
-                                        context.tr('Pay now'),
-                                        style: const TextStyle(
-                                          color: ZPColors.white,
-                                        ),
+                              ],
+                            ),
+                            if (step == 3)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: ElevatedButton(
+                                  key: WidgetKeys.generatePaymentAdvice,
+                                  onPressed: state.isLoading
+                                      ? null
+                                      : () =>
+                                          context.read<NewPaymentBloc>().add(
+                                                const NewPaymentEvent.pay(),
+                                              ),
+                                  child: LoadingShimmer.withChild(
+                                    enabled: state.isLoading,
+                                    child: Text(
+                                      context.tr('Generate payment advice'),
+                                      style: const TextStyle(
+                                        color: ZPColors.white,
                                       ),
                                     ),
                                   ),
-                              ],
-                            ),
+                                ),
+                              ),
                             const SizedBox(
                               height: 8,
                             ),
@@ -447,51 +444,6 @@ class _CheckAllWidget extends StatelessWidget {
           color: ZPColors.lightGray2,
         ),
       ],
-    );
-  }
-}
-
-class _PriceText extends StatelessWidget {
-  final String data;
-  final String title;
-  final SalesOrganisationConfigs salesOrgConfig;
-  final bool isNegativeColorDisplay;
-
-  const _PriceText({
-    Key? key,
-    required this.data,
-    required this.title,
-    required this.salesOrgConfig,
-    this.isNegativeColorDisplay = false,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      key: WidgetKeys.priceText,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Text(
-              data,
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: isNegativeColorDisplay
-                        ? ZPColors.priceNegative
-                        : ZPColors.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-            Text(
-              '${context.tr(title)} (${salesOrgConfig.currency.code})',
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ZPColors.darkGray,
-                    fontSize: 11,
-                  ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

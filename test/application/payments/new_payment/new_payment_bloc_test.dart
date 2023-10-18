@@ -9,9 +9,11 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
@@ -27,7 +29,7 @@ void main() {
   late NewPaymentRepository newPaymentRepository;
   late DeviceRepository deviceRepository;
   late CustomerOpenItem customerOpenItem;
-  late PaymentInfo fakePaymentInfo;
+  late CustomerPaymentInfo fakePaymentInfo;
   late List<CustomerOpenItem> fakeCustomerOpenItemSelected;
   late List<PaymentMethodValue> fakePaymentMethodValues;
 
@@ -39,7 +41,7 @@ void main() {
     );
   });
   setUp(() {
-    fakePaymentInfo = PaymentInfo.empty();
+    fakePaymentInfo = CustomerPaymentInfo.empty();
     fakeCustomerOpenItemSelected = <CustomerOpenItem>[
       CustomerOpenItem.empty().copyWith(
         status: StatusType('Overdue'),
@@ -366,6 +368,17 @@ void main() {
             ),
           ).thenAnswer(
             (invocation) async => Right(
+              PaymentInfo.empty(),
+            ),
+          );
+          when(
+            () => newPaymentRepository.getCustomerPayment(
+              salesOrganisation: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              filter: CustomerPaymentFilter.empty(),
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(
               fakePaymentInfo,
             ),
           );
@@ -379,7 +392,7 @@ void main() {
             selectedPaymentMethod: fakePaymentMethodValues.first,
           ),
           NewPaymentState.initial().copyWith(
-            paymentInfo: fakePaymentInfo,
+            customerPaymentInfo: fakePaymentInfo,
             selectedInvoices: fakeCustomerOpenItemSelected,
             paymentMethods: fakePaymentMethodValues,
             selectedPaymentMethod: fakePaymentMethodValues.first,
@@ -573,7 +586,7 @@ void main() {
         ),
         seed: () => NewPaymentState.initial().copyWith(
           isLoading: false,
-          paymentInfo: fakePaymentInfo,
+          customerPaymentInfo: fakePaymentInfo,
         ),
         setUp: () {
           when(
@@ -614,7 +627,7 @@ void main() {
         ),
         seed: () => NewPaymentState.initial().copyWith(
           isLoading: false,
-          paymentInfo: fakePaymentInfo,
+          customerPaymentInfo: fakePaymentInfo,
         ),
         setUp: () {
           when(

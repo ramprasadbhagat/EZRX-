@@ -5,7 +5,7 @@ class NewPaymentState with _$NewPaymentState {
   const NewPaymentState._();
 
   const factory NewPaymentState({
-    required PaymentInfo paymentInfo,
+    required CustomerPaymentInfo customerPaymentInfo,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoading,
     required List<CustomerOpenItem> selectedInvoices,
@@ -25,7 +25,7 @@ class NewPaymentState with _$NewPaymentState {
         selectedInvoices: <CustomerOpenItem>[],
         selectedCredits: <CustomerOpenItem>[],
         isLoading: false,
-        paymentInfo: PaymentInfo.empty(),
+        customerPaymentInfo: CustomerPaymentInfo.empty(),
         failureOrSuccessOption: none(),
         isFetchingInvoiceInfoPdf: false,
         paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),

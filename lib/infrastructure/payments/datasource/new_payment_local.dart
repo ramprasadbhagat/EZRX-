@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_method_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_invoice_info_pdf_dto.dart';
@@ -29,46 +32,12 @@ class NewPaymentLocalDataSource {
     return result;
   }
 
-  Future<PaymentInfo> pay({required String currentMarket}) async {
-    var data = {};
-    switch (currentMarket) {
-      case 'PH':
-        data = json.decode(
-          await rootBundle.loadString(
-            'assets/json/payResponsePH.json',
-          ),
-        );
-        break;
-      case 'TH':
-        data = json.decode(
-          await rootBundle.loadString(
-            'assets/json/payResponseTH.json',
-          ),
-        );
-        break;
-      case 'MY':
-        data = json.decode(
-          await rootBundle.loadString(
-            'assets/json/payResponseMY.json',
-          ),
-        );
-        break;
-      case 'SG':
-        data = json.decode(
-          await rootBundle.loadString(
-            'assets/json/payResponseSG.json',
-          ),
-        );
-        break;
-      case 'VN':
-      default:
-        data = json.decode(
-          await rootBundle.loadString(
-            'assets/json/payResponseVN.json',
-          ),
-        );
-        break;
-    }
+  Future<PaymentInfo> pay({required SalesOrg salesOrg}) async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        salesOrg.paymentInfoResponsePath,
+      ),
+    );
 
     return PaymentInfoDto.fromJson(data['data']['addCustomerPayment'])
         .toDomain();
@@ -105,5 +74,20 @@ class NewPaymentLocalDataSource {
     return List.from(finalData)
         .map((e) => PaymentMethodDto.fromJson(e).toDomain())
         .toList();
+  }
+
+  Future<CustomerPaymentInfo> getCustomerPayment({
+    required SalesOrg salesOrg,
+  }) async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        salesOrg.customerPaymentResponsePath,
+      ),
+    );
+
+    return CustomerPaymentDto.fromJson(data['data']['customerPayment'])
+        .customerPaymentResponse
+        .first
+        .toDomain();
   }
 }

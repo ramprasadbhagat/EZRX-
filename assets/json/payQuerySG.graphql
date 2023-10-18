@@ -1,40 +1,8 @@
 mutation addCustomerPayment($input: addCustomerPaymentInput!) {
     addCustomerPayment(input: $input) {
-        paymentID
-        valueDate
-        paymentAmount
-        transactionCurrency
-        paymentDocument
-        invoiceProcessingStatus
-        paymentMethod
-        iban
-        bankIdentification
-        bankCountryKey
-        bankKey
-        bankAccountNumber
-        bankName
-        paymentCardID
-        paymentCardNumber
-        paymentCardHolderName
-        paymentCardMaskedNumber
-        paymentCardTypeName
-        extensibilityCustomField
-        customId
-        tmpPaytByDigitalPaytService
-        payerByPaymentServiceProvider
-        paymentRefByPaytSrvcProvider
-        paymentServiceProvider
-        transactionStatus
-        customerInvoice
-        paymentCardData
-        paytCardVerificatDetResultText
-        disputeCaseInformationText
-        userName
-        paymentBatchAdditionalInfo
-        accountingDocExternalReference
-        zCcpPaymentQRCode
-        zzHtmcs
-    }
+      paymentID
+      paymentBatchAdditionalInfo
+   }
 }
 
 "variables": {

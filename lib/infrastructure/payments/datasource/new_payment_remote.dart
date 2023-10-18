@@ -5,12 +5,15 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_invoice_info_pdf_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_method_dto.dart';
@@ -88,6 +91,8 @@ class NewPaymentRemoteDataSource {
               'salesOrg': salesOrg,
               'transactionCurrency': transactionCurrency,
               'userName': userName,
+              'isV2':
+                  true, //TODO: Remove this field when BE deployed payment to UAT on all market
             },
           },
         },
@@ -98,6 +103,38 @@ class NewPaymentRemoteDataSource {
 
     return PaymentInfoDto.fromJson(res.data['data']['addCustomerPayment'])
         .toDomain();
+  }
+
+  Future<CustomerPaymentInfo> getCustomerPayment({
+    required String customerCode,
+    required String salesOrg,
+    required CustomerPaymentFilterDto filter,
+  }) async {
+    final res = await httpService.request(
+      method: 'POST',
+      url: '${config.urlConstants}ezpay',
+      data: jsonEncode(
+        {
+          'query': newPaymentQuery.getCustomerPaymentQuery(),
+          'variables': {
+            'request': {
+              'customerCode': customerCode,
+              'salesOrg': salesOrg,
+              'filterBy': filter.toMapList,
+              'orderBy': [],
+            },
+          },
+        },
+      ),
+    );
+    _exceptionChecker(property: 'customerPayment', res: res);
+
+    final customerPaymentDto =
+        CustomerPaymentDto.fromJson(res.data['data']['customerPayment']);
+
+    return customerPaymentDto.customerPaymentResponse.isNotEmpty
+        ? customerPaymentDto.customerPaymentResponse.first.toDomain()
+        : CustomerPaymentInfo.empty();
   }
 
   Future<void> updatePaymentGateway({

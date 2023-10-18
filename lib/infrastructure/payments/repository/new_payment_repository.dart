@@ -9,7 +9,9 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
@@ -21,6 +23,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/available_credit_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_invoice_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/outstanding_invoice_filter_dto.dart';
 import 'package:flutter/foundation.dart';
 
@@ -140,7 +143,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final response = await localDataSource.pay(
-          currentMarket: salesOrganisation.salesOrg.country,
+          salesOrg: salesOrganisation.salesOrg,
         );
 
         return Right(response);
@@ -217,7 +220,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required User user,
-    required PaymentInfo paymentInfo,
+    required CustomerPaymentInfo paymentInfo,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -292,6 +295,40 @@ class NewPaymentRepository extends INewPaymentRepository {
       return const Right(unit);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, CustomerPaymentInfo>> getCustomerPayment({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required CustomerPaymentFilter filter,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final response = await localDataSource.getCustomerPayment(
+          salesOrg: salesOrganisation.salesOrg,
+        );
+
+        return Right(response);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final response = await remoteDataSource.getCustomerPayment(
+        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        filter: CustomerPaymentFilterDto.fromDomain(filter),
+      );
+
+      return Right(response);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
     }
   }
 }

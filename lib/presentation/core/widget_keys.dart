@@ -772,6 +772,7 @@ class WidgetKeys {
   static const Key creditPaymentFilterPage = Key('creditPaymentFilterPage');
   static const Key outstandingInvoiceFilterPage =
       Key('outstandingInvoiceFilterPage');
+  static const Key generatePaymentAdvice = Key('generatePaymentAdvice');
 
   //============================================================
   //  Announcement
@@ -1112,4 +1113,9 @@ class WidgetKeys {
   static const Key profileLicenseNo = Key('profileLicenseNo');
   static const Key profileLicenseStatus = Key('profileLicenseStatus');
   static const Key profileLicenseDateRange = Key('profileLicenseDateRange');
+  //============================================================
+  // Confirm bottom sheet
+  //============================================================
+  static Key confirmBottomSheet = const Key('confirmBottomSheet');
+  //============================================================
 }

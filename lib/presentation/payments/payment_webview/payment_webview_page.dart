@@ -27,7 +27,7 @@ class _PaymentWebviewPageState extends State<PaymentWebviewPage> {
           ),
           initialUrlRequest: URLRequest(
             url: Uri.dataFromString(
-              context.read<NewPaymentBloc>().state.paymentInfo.zzHtmcs,
+              context.read<NewPaymentBloc>().state.customerPaymentInfo.zzHtmcs,
               mimeType: 'text/html',
             ),
           ),

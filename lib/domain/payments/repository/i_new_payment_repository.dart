@@ -8,7 +8,9 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
@@ -40,6 +42,12 @@ abstract class INewPaymentRepository {
     required User user,
   });
 
+  Future<Either<ApiFailure, CustomerPaymentInfo>> getCustomerPayment({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required CustomerPaymentFilter filter,
+  });
+
   Future<Either<ApiFailure, Unit>> updatePaymentGateway({
     required SalesOrganisation salesOrganisation,
     required Uri uri,
@@ -49,7 +57,7 @@ abstract class INewPaymentRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required User user,
-    required PaymentInfo paymentInfo,
+    required CustomerPaymentInfo paymentInfo,
   });
 
   Future<Either<ApiFailure, Unit>> saveFile({required Uint8List pdfData});

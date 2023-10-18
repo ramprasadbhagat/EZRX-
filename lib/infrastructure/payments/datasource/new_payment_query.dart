@@ -40,41 +40,46 @@ class NewPaymentQuery {
     mutation addCustomerPayment(\$input: addCustomerPaymentInput!) {
       addCustomerPayment(input: \$input) {
       paymentID
+      paymentBatchAdditionalInfo
+    }
+  }
+    ''';
+  }
+
+  String getCustomerPaymentQuery() {
+    return '''
+  query customerPayment(\$request: customerPaymentRequest!) {
+  customerPayment(request: \$request) {
+    total
+    showing
+    totalPaymentInProgress
+    resultPaymentInProgress
+    customerPaymentResponse {
+      paymentID
       valueDate
       paymentAmount
       transactionCurrency
       paymentDocument
       invoiceProcessingStatus
-      paymentMethod
-      iban
-      bankIdentification
-      bankCountryKey
-      bankKey
-      bankAccountNumber
-      bankName
-      paymentCardID
-      paymentCardNumber
-      paymentCardHolderName
-      paymentCardMaskedNumber
-      paymentCardTypeName
-      extensibilityCustomField
-      customId
-      tmpPaytByDigitalPaytService
-      payerByPaymentServiceProvider
-      paymentRefByPaytSrvcProvider
-      paymentServiceProvider
-      transactionStatus
-      customerInvoice
-      paymentCardData
-      paytCardVerificatDetResultText
-      disputeCaseInformationText
-      userName
-      paymentBatchAdditionalInfo
       accountingDocExternalReference
+      paymentMethod
+      extensibilityCustomField {
+        paymentBatchAdditionalInfo {
+          businessContext
+          label
+          technicalName
+        }
+      }
       zCcpPaymentQRCode
+      paymentBatchAdditionalInfo
+      zzAdvice
       zzHtmcs
+      adviceExpiry
+      createdDate
+      status
     }
   }
+}
     ''';
   }
 

@@ -466,3 +466,28 @@ String countryAboutUsPath(String country) {
 
   return salesOrgCountryMap[country] ?? '';
 }
+
+String countryCustomerPaymentResponsePath(String country) {
+  final salesOrgCountryMap = {
+    'MY': 'assets/json/customerPaymentMYResponse.json',
+    'PH': 'assets/json/customerPaymentPHResponse.json',
+    'SG': 'assets/json/customerPaymentSGResponse.json',
+    'TH': 'assets/json/customerPaymentTHResponse.json',
+    'VN': 'assets/json/customerPaymentVNResponse.json',
+  };
+
+  return salesOrgCountryMap[country] ??
+      'assets/json/customerPaymentMYResponse.json';
+}
+
+String countryPaymentInfoResponsePath(String country) {
+  final salesOrgCountryMap = {
+    'MY': 'assets/json/payResponseMY.json',
+    'PH': 'assets/json/payResponsePH.json',
+    'SG': 'assets/json/payResponseSG.json',
+    'TH': 'assets/json/payResponseTH.json',
+    'VN': 'assets/json/payResponseVN.json',
+  };
+
+  return salesOrgCountryMap[country] ?? 'assets/json/payResponseMY.json';
+}

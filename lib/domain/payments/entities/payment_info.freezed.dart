@@ -16,11 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PaymentInfo {
-  String get zzHtmcs => throw _privateConstructorUsedError;
   String get paymentID => throw _privateConstructorUsedError;
   String get paymentBatchAdditionalInfo => throw _privateConstructorUsedError;
-  String get accountingDocExternalReference =>
-      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentInfoCopyWith<PaymentInfo> get copyWith =>
@@ -33,11 +30,7 @@ abstract class $PaymentInfoCopyWith<$Res> {
           PaymentInfo value, $Res Function(PaymentInfo) then) =
       _$PaymentInfoCopyWithImpl<$Res, PaymentInfo>;
   @useResult
-  $Res call(
-      {String zzHtmcs,
-      String paymentID,
-      String paymentBatchAdditionalInfo,
-      String accountingDocExternalReference});
+  $Res call({String paymentID, String paymentBatchAdditionalInfo});
 }
 
 /// @nodoc
@@ -53,16 +46,10 @@ class _$PaymentInfoCopyWithImpl<$Res, $Val extends PaymentInfo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? zzHtmcs = null,
     Object? paymentID = null,
     Object? paymentBatchAdditionalInfo = null,
-    Object? accountingDocExternalReference = null,
   }) {
     return _then(_value.copyWith(
-      zzHtmcs: null == zzHtmcs
-          ? _value.zzHtmcs
-          : zzHtmcs // ignore: cast_nullable_to_non_nullable
-              as String,
       paymentID: null == paymentID
           ? _value.paymentID
           : paymentID // ignore: cast_nullable_to_non_nullable
@@ -70,10 +57,6 @@ class _$PaymentInfoCopyWithImpl<$Res, $Val extends PaymentInfo>
       paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountingDocExternalReference: null == accountingDocExternalReference
-          ? _value.accountingDocExternalReference
-          : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -87,11 +70,7 @@ abstract class _$$_PaymentInfoCopyWith<$Res>
       __$$_PaymentInfoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String zzHtmcs,
-      String paymentID,
-      String paymentBatchAdditionalInfo,
-      String accountingDocExternalReference});
+  $Res call({String paymentID, String paymentBatchAdditionalInfo});
 }
 
 /// @nodoc
@@ -105,16 +84,10 @@ class __$$_PaymentInfoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? zzHtmcs = null,
     Object? paymentID = null,
     Object? paymentBatchAdditionalInfo = null,
-    Object? accountingDocExternalReference = null,
   }) {
     return _then(_$_PaymentInfo(
-      zzHtmcs: null == zzHtmcs
-          ? _value.zzHtmcs
-          : zzHtmcs // ignore: cast_nullable_to_non_nullable
-              as String,
       paymentID: null == paymentID
           ? _value.paymentID
           : paymentID // ignore: cast_nullable_to_non_nullable
@@ -122,10 +95,6 @@ class __$$_PaymentInfoCopyWithImpl<$Res>
       paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountingDocExternalReference: null == accountingDocExternalReference
-          ? _value.accountingDocExternalReference
-          : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -135,24 +104,17 @@ class __$$_PaymentInfoCopyWithImpl<$Res>
 
 class _$_PaymentInfo extends _PaymentInfo {
   const _$_PaymentInfo(
-      {required this.zzHtmcs,
-      required this.paymentID,
-      required this.paymentBatchAdditionalInfo,
-      required this.accountingDocExternalReference})
+      {required this.paymentID, required this.paymentBatchAdditionalInfo})
       : super._();
 
-  @override
-  final String zzHtmcs;
   @override
   final String paymentID;
   @override
   final String paymentBatchAdditionalInfo;
-  @override
-  final String accountingDocExternalReference;
 
   @override
   String toString() {
-    return 'PaymentInfo(zzHtmcs: $zzHtmcs, paymentID: $paymentID, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo, accountingDocExternalReference: $accountingDocExternalReference)';
+    return 'PaymentInfo(paymentID: $paymentID, paymentBatchAdditionalInfo: $paymentBatchAdditionalInfo)';
   }
 
   @override
@@ -160,22 +122,17 @@ class _$_PaymentInfo extends _PaymentInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PaymentInfo &&
-            (identical(other.zzHtmcs, zzHtmcs) || other.zzHtmcs == zzHtmcs) &&
             (identical(other.paymentID, paymentID) ||
                 other.paymentID == paymentID) &&
             (identical(other.paymentBatchAdditionalInfo,
                     paymentBatchAdditionalInfo) ||
                 other.paymentBatchAdditionalInfo ==
-                    paymentBatchAdditionalInfo) &&
-            (identical(other.accountingDocExternalReference,
-                    accountingDocExternalReference) ||
-                other.accountingDocExternalReference ==
-                    accountingDocExternalReference));
+                    paymentBatchAdditionalInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, zzHtmcs, paymentID,
-      paymentBatchAdditionalInfo, accountingDocExternalReference);
+  int get hashCode =>
+      Object.hash(runtimeType, paymentID, paymentBatchAdditionalInfo);
 
   @JsonKey(ignore: true)
   @override
@@ -186,20 +143,14 @@ class _$_PaymentInfo extends _PaymentInfo {
 
 abstract class _PaymentInfo extends PaymentInfo {
   const factory _PaymentInfo(
-      {required final String zzHtmcs,
-      required final String paymentID,
-      required final String paymentBatchAdditionalInfo,
-      required final String accountingDocExternalReference}) = _$_PaymentInfo;
+      {required final String paymentID,
+      required final String paymentBatchAdditionalInfo}) = _$_PaymentInfo;
   const _PaymentInfo._() : super._();
 
-  @override
-  String get zzHtmcs;
   @override
   String get paymentID;
   @override
   String get paymentBatchAdditionalInfo;
-  @override
-  String get accountingDocExternalReference;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentInfoCopyWith<_$_PaymentInfo> get copyWith =>

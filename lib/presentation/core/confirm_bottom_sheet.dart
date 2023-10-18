@@ -8,10 +8,12 @@ class ConfirmBottomSheet extends StatelessWidget {
   final String content;
   final String cancelButtonText;
   final String confirmButtonText;
+  final Widget? iconWidget;
   const ConfirmBottomSheet({
     Key? key,
     required this.title,
     required this.content,
+    this.iconWidget,
     this.cancelButtonText = 'Cancel',
     this.confirmButtonText = 'Confirm',
   }) : super(key: key);
@@ -27,6 +29,11 @@ class ConfirmBottomSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (iconWidget != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Center(child: iconWidget!),
+              ),
             Text(
               title.tr(),
               style: Theme.of(context)
@@ -88,6 +95,9 @@ class ConfirmBottomSheet extends StatelessWidget {
                         Theme.of(context).elevatedButtonTheme.style!.copyWith(
                               backgroundColor: const MaterialStatePropertyAll(
                                 ZPColors.primary,
+                              ),
+                              padding: const MaterialStatePropertyAll(
+                                EdgeInsets.symmetric(horizontal: 9.5),
                               ),
                               shape: const MaterialStatePropertyAll(
                                 RoundedRectangleBorder(

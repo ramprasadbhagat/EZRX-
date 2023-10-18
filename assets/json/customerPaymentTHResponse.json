@@ -1,0 +1,28 @@
+{
+    "data": {
+      "customerPayment": {
+        "total": 1,
+        "showing": 1,
+        "totalPaymentInProgress": 0,
+        "resultPaymentInProgress": 0,
+        "customerPaymentResponse": [
+          {
+            "paymentID": "2        2",
+            "valueDate": "2023-10-16",
+            "paymentAmount": 1605,
+            "transactionCurrency": "THB",
+            "invoiceProcessingStatus": "In Progress",
+            "accountingDocExternalReference": "290220171160020232001SD 1160020232",
+            "paymentMethod": "Payment Gateway",
+            "zCcpPaymentQRCode": "",
+            "paymentBatchAdditionalInfo": "23C4E3B86901270",
+            "zzAdvice": "09EZ230001217201",
+            "zzHtmcs": "<html:button id=\"btn_submit\">Pay Now</html:button><html:script language=\"javascript\">$(\"#btn_submit\").click(function(){var win, doc;win = window.open(\"\",\"_blank\");doc = win.document;doc.write('<html><head></head><body><script type=\"text/javascript\" src=\"https://dev-kpaymentgateway.kasikornbank.com/ui/v2/kpayment.min.js\" data-apikey=\"pkey_test_21102hvZyafqGFFzN0G3NjphkJZ2NPFbRBMRq\" data-amount=\"1605.00\" data-currency=\"THB\" data-payment-methods=\"qr\" data-order-id=\"order_test_21102e9e04f465f8d4975a4f64d7de25b8c1b\"></script></body></html>');doc.close();})</html:script>",
+            "adviceExpiry": "30 Day(s)",
+            "createdDate": "2023-10-16",
+            "status": "In Progress"
+          }
+        ]
+      }
+    }
+  }

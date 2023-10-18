@@ -1,26 +1,20 @@
 part of 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 
-class _PaymentSuccessPleaseNote extends StatelessWidget {
-  const _PaymentSuccessPleaseNote({Key? key}) : super(key: key);
+class _PaymentAdvicePleaseNote extends StatelessWidget {
+  const _PaymentAdvicePleaseNote({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BulletWidget(
-            content: RichText(
-              text: TextSpan(
-                text: context.tr(
-                  'There may be situations where payments fail during the payment process, or it may take longer time. Please make sure to check the payment status of your payment request.',
-                ),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: ZPColors.extraLightGrey4,
-                    ),
-              ),
-            ),
+          Text(
+            context.tr('Please note'),
+            style: Theme.of(context).textTheme.labelLarge,
           ),
+          const SizedBox(height: 16),
           BulletWidget(
             content: RichText(
               text: TextSpan(
@@ -68,7 +62,7 @@ class _PaymentSuccessPleaseNote extends StatelessWidget {
                   'Please note that system-generated payment advice(s) will be automatically deleted if payment is not received within 30 days.',
                 ),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: ZPColors.extraLightGrey4,
+                      color: ZPColors.warningTextColor,
                     ),
               ),
             ),

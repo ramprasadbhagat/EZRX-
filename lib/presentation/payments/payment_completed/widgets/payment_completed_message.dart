@@ -1,0 +1,44 @@
+part of 'package:ezrxmobile/presentation/payments/payment_completed/payment_completed_page.dart';
+
+class _PaymentCompletedMessage extends StatelessWidget {
+  const _PaymentCompletedMessage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+      child: Column(
+        children: [
+          Icon(
+            Icons.check_circle,
+            color: ZPColors.green,
+            size: MediaQuery.of(context).size.width * 0.2,
+          ),
+          Text(
+            '${context.tr('Our payment processor is coordinating with the bank to process your payment request for payment advice ')} #${context.read<NewPaymentBloc>().state.paymentInvoiceInfoPdf.zzAdvice}.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: ZPColors.darkerGrey,
+                ),
+          ),
+          const SizedBox(
+            height: 8.0,
+          ),
+          Text(
+            '${context.tr('We’ll send a payment advice copy to')} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${context.tr('shortly')}.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: ZPColors.darkerGrey,
+                ),
+          ),
+          const SizedBox(height: 24.0),
+          const Divider(
+            indent: 0,
+            thickness: 1,
+            endIndent: 0,
+            height: 1,
+            color: ZPColors.extraLightGrey3,
+          ),
+        ],
+      ),
+    );
+  }
+}
