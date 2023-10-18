@@ -10,6 +10,7 @@ class _ForgotPasswordButton extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return ElevatedButton(
+          key: WidgetKeys.nextButton,
           onPressed: state.isSubmitting
               ? null
               : () {

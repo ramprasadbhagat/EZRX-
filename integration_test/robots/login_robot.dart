@@ -10,18 +10,15 @@ class LoginRobot {
 
   final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
   final rememberMeCheckbox =
-      find.byKey(const Key('loginRememberPasswordCheckbox'));
-  final forgotPasswordLink = find.text('Forgot password?'.tr());
-  final backToLoginButton = find.text('Back To login'.tr());
-  final nextButton = find.text('Next'.tr());
-  final forgotUsernameField = find.byKey(const Key('forgotUsernameField'));
+      find.byKey(WidgetKeys.loginRememberPasswordCheckbox);
+  final forgotPasswordLink = find.byKey(WidgetKeys.forgotPasswordButton);
   final marketSelector = find.byKey(WidgetKeys.appMarketSelector);
-  final loginUsernameField = find.byKey(const Key('loginUsernameField'));
-  final loginPasswordField = find.byKey(const Key('loginPasswordField'));
-  final loginSubmitButton = find.byKey(const Key('loginSubmitButton'));
-  final getStartedButton = find.byKey(const Key('getStarted'));
-  final signUp = find.text('Sign up'.tr());
-  final loginWithSSO = find.text('Sign up'.tr());
+  final loginUsernameField = find.byKey(WidgetKeys.loginUsernameField);
+  final loginPasswordField = find.byKey(WidgetKeys.loginPasswordField);
+  final loginSubmitButton = find.byKey(WidgetKeys.loginSubmitButton);
+  final getStartedButton = find.byKey(WidgetKeys.introGetStartedButton);
+  final signUp = find.byKey(WidgetKeys.createAccountButton);
+  final loginWithSSO = find.byKey(WidgetKeys.ssoLoginButton);
 
   Future<void> loginToHomeScreen(
     String username,
@@ -36,7 +33,7 @@ class LoginRobot {
 
     //login
     await login(username, password);
-    await tapGetStartedButton();
+    if (getStartedButton.evaluate().isNotEmpty) await tapGetStartedButton();
   }
 
   Future<void> login(String username, String password) async {
@@ -45,12 +42,7 @@ class LoginRobot {
     expect(loginSubmitButton, findsOneWidget);
 
     await tester.enterText(loginUsernameField, username);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pump(const Duration(seconds: 1));
-
     await tester.enterText(loginPasswordField, password);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pump(const Duration(seconds: 1));
 
     expect(loginSubmitButton, findsOneWidget);
     await tester.tap(loginSubmitButton);
@@ -99,24 +91,6 @@ class LoginRobot {
     await tester.pumpAndSettle();
   }
 
-  void findBackToLoginButton() {
-    expect(backToLoginButton, findsOneWidget);
-  }
-
-  Future<void> tapToBackToLogin() async {
-    await tester.tap(backToLoginButton);
-    await tester.pumpAndSettle();
-  }
-
-  void findNextButton() {
-    expect(nextButton, findsOneWidget);
-  }
-
-  Future<void> tapToNextButton() async {
-    await tester.tap(nextButton);
-    await tester.pumpAndSettle();
-  }
-
   void findMarketSelector() {
     expect(marketSelector, findsOneWidget);
   }
@@ -127,9 +101,6 @@ class LoginRobot {
 
   Future<void> tapGetStartedButton() async {
     await tester.tap(getStartedButton);
-    //TODO : In maximum attempt we are facing loading banner on homtap,
-    //Fow now it's better not to wait for api data/loader, used pump()
-    //we can convert to pumpAndSettle once we get proper response on time in future.
     await tester.pumpAndSettle();
   }
 
@@ -163,30 +134,9 @@ class LoginRobot {
     expect(find.text(market).last, findsOneWidget);
   }
 
-  void verifyErrorMessageWithoutUserName() {
-    final userNameCannotEmpty = find.text('Username cannot be empty.');
-    expect(userNameCannotEmpty, findsOneWidget);
-  }
-
   void verifyErrorMessageWithoutPassword() {
-    final userNameCannotEmpty = find.text('Password cannot be empty.');
+    final userNameCannotEmpty = find.text('Password cannot be empty.'.tr());
     expect(userNameCannotEmpty, findsOneWidget);
-  }
-
-  void verifyErrorMessageWithIncorrectUsernameAndPassword() {
-    final incorrectUsernameOrPassword =
-        find.text('Invalid username or password').last;
-    expect(incorrectUsernameOrPassword, findsOneWidget);
-  }
-
-  void findForgotUsernameField() {
-    expect(forgotUsernameField, findsOneWidget);
-  }
-
-  Future<void> enterTextToUsernameField(String username) async {
-    await tester.tap(forgotUsernameField);
-    await tester.enterText(forgotUsernameField, username);
-    await tester.pump();
   }
 
   void verifyErrorMessageWithoutUsername() {
@@ -194,14 +144,9 @@ class LoginRobot {
     expect(usernameCannotBeEmpty, findsOneWidget);
   }
 
-  void verifyErrorMessageWithInvalidUsername() {
-    final incorrectUsername = find.text('Invalid username or password').last;
+  void verifyErrorMessageWithInvalidUsernameOrPassword() {
+    final incorrectUsername = find.text('Invalid username or password'.tr());
     expect(incorrectUsername, findsOneWidget);
-  }
-
-  void verifyMessageSentEmail() {
-    final emailSendToYou = find.text('Email sent to you!');
-    expect(emailSendToYou, findsOneWidget);
   }
 
   void findSignUpLink() {

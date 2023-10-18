@@ -47,6 +47,7 @@ class RememberPassword extends StatelessWidget {
               ],
             ),
             TextButton(
+              key: WidgetKeys.forgotPasswordButton,
               child: Text(
                 'Forgot password?'.tr(),
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(

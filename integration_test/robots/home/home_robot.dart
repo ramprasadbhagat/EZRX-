@@ -12,7 +12,7 @@ class HomeRobot {
 
   final salesOrgSelector = find.byKey(const Key('salesOrgSelect'));
   final accountTabbar = find.byKey(const Key('accountTabbar'));
-  final customerCodeSelect = find.byKey(const Key('customerCodeSelect'));
+  final customerCodeSelect = find.byKey(WidgetKeys.customerCodeSelector);
   final shipToCodeSelector = find.byKey(const Key('shipToCodeSelect'));
   final homeTabbar = find.text('Home'.tr());
   final favoriteTabbar = find.byKey(const Key('favoritesTab'));
@@ -22,17 +22,15 @@ class HomeRobot {
   final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
   final homeTabAnnouncementWidget =
       find.byKey(const Key('homeTabAnnouncementWidget'));
-  final moreTab = find.text('More'.tr());
+  final moreTab = find.byKey(WidgetKeys.moreTab);
   final searchBar = find.byKey(WidgetKeys.homeProductSearchBar);
   final customerSelector = find.byKey(WidgetKeys.customerCodeSelector);
   final miniCart = find.byType(CartButton);
-  final homeQuickAccessPaymentsMenu =
-      find.byKey(WidgetKeys.homeQuickAccessPaymentsMenu);
   final quickAccessMenu = find.byType(QuickAccessMenuPanel);
   final banner = find.byType(CarouselBanner);
   final browseProductIcon = find.byKey(WidgetKeys.browseProductIcon);
   final announcementIcon = find.byKey(WidgetKeys.announcementIcon);
-  final productsTab = find.text('Products'.tr());
+  final productsTab = find.byKey(WidgetKeys.productsTab);
   final buttonNextBanner = find.byKey(WidgetKeys.nextBannerIcon);
   final buttonPreviousBanner = find.byKey(WidgetKeys.previousBannerIcon);
   final recentlyOrder = find.byKey(WidgetKeys.recentlyOrder);
@@ -328,39 +326,39 @@ class HomeRobot {
     expect(listPosition.controller.page, 0);
   }
 
-  void findHomeQuickAccessOrdersMenu() {
+  void findQuickAccessOrders() {
     expect(homeQuickAccessOrders, findsOneWidget);
   }
 
-  Future<void> tapHomeQuickAccessOrdersMenu() async {
+  Future<void> tapOrdersQuickAccess() async {
     await tester.tap(homeQuickAccessOrders);
     await tester.pumpAndSettle();
   }
 
-  void findHomeQuickAccessReturnsMenu() {
+  void findQuickAccessReturns() {
     expect(homeQuickAccessReturns, findsOneWidget);
   }
 
-  Future<void> tapHomeQuickAccessReturnsMenu() async {
+  void findQuickAccessPayments() {
+    expect(homeQuickAccessPayments, findsOneWidget);
+  }
+
+  void findQuickAccessChatSupport() {
+    expect(homeQuickAccessChatSupport, findsOneWidget);
+  }
+
+  Future<void> tapChatSupportQuickAccess() async {
+    await tester.tap(homeQuickAccessChatSupport);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapReturnsQuickAccess() async {
     await tester.tap(homeQuickAccessReturns);
     await tester.pumpAndSettle();
   }
 
-  void findHomeQuickAccessPaymentsMenu() {
-    expect(homeQuickAccessPayments, findsOneWidget);
-  }
-
-  Future<void> tapHomeQuickAccessPaymentsMenu() async {
+  Future<void> tapPaymentQuickAccess() async {
     await tester.tap(homeQuickAccessPayments);
-    await tester.pump();
-  }
-
-  void findHomeQuickAccessChatSupportMenu() {
-    expect(homeQuickAccessChatSupport, findsOneWidget);
-  }
-
-  Future<void> tapHomeQuickAccessChatSupportMenu() async {
-    await tester.tap(homeQuickAccessChatSupport);
     await tester.pumpAndSettle();
   }
 
@@ -528,15 +526,6 @@ class HomeRobot {
 
   void verifyProductNumber() {
     expect(productNumber, findsWidgets);
-  }
-
-  Future<void> tapReturnsQuickAccess() async {
-    await tester.tap(find.byKey(WidgetKeys.homeQuickAccessReturnsMenu));
-  }
-
-  Future<void> tapPaymentQuickAccess() async {
-    await tester.tap(homeQuickAccessPaymentsMenu);
-    await tester.pumpAndSettle();
   }
 
   Future<void> tapMiniCartIcon() async {

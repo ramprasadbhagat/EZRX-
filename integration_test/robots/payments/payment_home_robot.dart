@@ -139,8 +139,4 @@ class PaymentHomeRobot extends CommonRobot {
         )
         .toString();
   }
-
-  void verifyPaymentPage() {
-    expect(find.byKey(WidgetKeys.paymentHomeAppBar), findsOneWidget);
-  }
 }
