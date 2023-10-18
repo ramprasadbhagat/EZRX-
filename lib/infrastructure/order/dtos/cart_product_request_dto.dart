@@ -76,7 +76,10 @@ class CartProductRequestDto with _$CartProductRequestDto {
   Map<String, dynamic> toMap() => toJson()
     ..removeWhere(
       (key, value) =>
-          (key != 'ParentID' && key != 'ItemId') &&
+          (key != 'ParentID' &&
+              key != 'ItemId' &&
+              key != 'CounterOfferPrice' &&
+              key != 'DiscountOverridePercentage') &&
           ((value is String && (value.isEmpty || value == 'NA')) ||
               (value is double && value == 0.0)),
     );

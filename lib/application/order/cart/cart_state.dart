@@ -19,6 +19,7 @@ class CartState with _$CartState {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required SalesOrganisationConfigs config,
+    required User user,
     required Map<MaterialNumber, ProductMetaData> additionInfo,
     required List<int> upsertBonusItemInProgressHashCode,
   }) = _CartState;
@@ -35,6 +36,7 @@ class CartState with _$CartState {
         isUpdatingStock: false,
         isBuyAgain: false,
         config: SalesOrganisationConfigs.empty(),
+        user: User.empty(),
         additionInfo: <MaterialNumber, ProductMetaData>{},
         upsertBonusItemInProgressHashCode: [],
         shipToInfo: ShipToInfo.empty(),
@@ -387,4 +389,42 @@ class CartState with _$CartState {
       isUpserting ||
       isFetchingCartProductDetail ||
       isMappingPrice;
+
+  List<MaterialInfo> get productsWithCounterOfferPrice => cartProducts
+      .where(
+        (element) =>
+            isPriceOverrideDisabled &&
+            element.materialInfo.counterOfferDetails.counterOfferPrice
+                .isValid(),
+      )
+      .map(
+        (e) => e.materialInfo.copyWith(
+          counterOfferDetails: e.materialInfo.counterOfferDetails
+              .copyWith(counterOfferPrice: CounterOfferValue('0')),
+        ),
+      )
+      .toList();
+
+  List<MaterialInfo> get productsWithCounterOfferDiscount => cartProducts
+      .where(
+        (element) =>
+            !config.enableZDP8Override &&
+            element.materialInfo.counterOfferDetails.discountOverridePercentage
+                .isValid(),
+      )
+      .map(
+        (e) => e.materialInfo.copyWith(
+          counterOfferDetails: e.materialInfo.counterOfferDetails.copyWith(
+            discountOverridePercentage: CounterOfferDiscountValue('0'),
+          ),
+        ),
+      )
+      .toList();
+
+  bool get isPriceOverrideDisabled =>
+      !user.role.type.isSalesRepRole && !config.priceOverride;
+
+  bool get isCounterOfferProductResetRequired =>
+      productsWithCounterOfferPrice.isNotEmpty ||
+      productsWithCounterOfferDiscount.isNotEmpty;
 }

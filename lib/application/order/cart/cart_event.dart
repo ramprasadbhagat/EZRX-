@@ -7,6 +7,7 @@ class CartEvent with _$CartEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required User user,
   }) = _Initialized;
 
   const factory CartEvent.verifyMaterialDealBonus({
@@ -19,7 +20,6 @@ class CartEvent with _$CartEvent {
     required MaterialInfo bonusMaterial,
     required StringValue bonusItemId,
     required RequestCounterOfferDetails counterOfferDetails,
-    required User user,
   }) = _AddBonusToCartItem;
 
   const factory CartEvent.removeSampleBonusFromCartConfig() =
@@ -44,7 +44,6 @@ class CartEvent with _$CartEvent {
     required List<PriceAggregate> priceAggregate,
     required List<int> quantity,
     required RequestCounterOfferDetails counterOfferDetails,
-    required User user,
   }) = _addHistoryItemsToCart;
 
   const factory CartEvent.upsertCartItems({
@@ -57,7 +56,6 @@ class CartEvent with _$CartEvent {
 
   const factory CartEvent.updatePriceProduct({
     required Map<MaterialNumber, Price> priceProducts,
-    required Price overriddenProductPrice,
   }) = _UpdatePriceProduct;
 
   const factory CartEvent.updateProductStock() = _UpdateProductStock;
@@ -69,4 +67,8 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.upsertCartItemsWithComboOffers({
     required List<PriceAggregate> priceAggregates,
   }) = _UpsertCartItemsWithComboOffers;
+
+  const factory CartEvent.updateCartProductWithCounterOffer({
+    required Price overriddenProductPrice,
+  }) = _UpdateCartProductWithCounterOffer;
 }

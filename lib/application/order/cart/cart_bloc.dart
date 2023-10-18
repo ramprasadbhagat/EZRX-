@@ -44,6 +44,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             config: e.salesOrganisationConfigs,
             customerCodeInfo: e.customerCodeInfo,
             shipToInfo: e.shipToInfo,
+            user: e.user,
           ),
         );
         add(
@@ -121,7 +122,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           shipToInfo: state.shipToInfo,
           materialInfo: e.bonusMaterial,
           quantity: e.bonusMaterial.quantity.intValue,
-          language: e.user.settings.languagePreference.languageCode,
+          language: state.user.settings.languagePreference.languageCode,
           counterOfferDetails: e.counterOfferDetails,
           itemId: e.bonusItemId.getValue(),
         );
@@ -426,7 +427,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           shipToInfo: state.shipToInfo,
           materialInfo: e.priceAggregate.map((e) => e.materialInfo).toList(),
           quantity: e.quantity,
-          language: e.user.settings.languagePreference.languageCode,
+          language: state.user.settings.languagePreference.languageCode,
           counterOfferDetails: e.counterOfferDetails,
           itemId: '',
         );
@@ -590,31 +591,51 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
-      updatePriceProduct: (e) {
+      updatePriceProduct: (e) async {
         emit(
           state.copyWith(
             isMappingPrice: true,
           ),
         );
+        var newCartProducts = state.cartProducts;
 
-        final cartProductList = state.cartProducts.map((element) {
-          final updatedPrice = element.materialInfo.materialNumber ==
-                  e.overriddenProductPrice.materialNumber
-              ? e.overriddenProductPrice
-              : (e.priceProducts[element.materialInfo.materialNumber] ??
-                  Price.empty());
-
-          final productPrice = !element.price.isPriceOverride ||
-                  !element.price.isDiscountOverride
-              ? updatedPrice
-              : element.price;
-
-          element = element.copyWith(
-            salesOrgConfig: state.config,
-            price: productPrice,
+        if (state.isCounterOfferProductResetRequired) {
+          final failureOrSuccess =
+              await repository.removeSelectedProducts(
+            salesOrganisation: state.salesOrganisation,
+            salesOrganisationConfig: state.config,
+            customerCodeInfo: state.customerCodeInfo,
+            shipToInfo: state.shipToInfo,
+            language: state.config.languageValue.languageCode,
+            products: [
+              ...state.productsWithCounterOfferPrice,
+              ...state.productsWithCounterOfferDiscount,
+            ],
           );
+          failureOrSuccess.fold(
+            (failure) => emit(
+              state.copyWith(
+                isMappingPrice: false,
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            ),
+            (updatedCartProducts) => newCartProducts = updatedCartProducts,
+          );
+        }
 
-          return element;
+        final cartProductList = newCartProducts.map((element) {
+          final originalPrice =
+              e.priceProducts[element.materialInfo.materialNumber] ??
+                  Price.empty();
+          final counterOfferDetails = element.materialInfo.counterOfferDetails;
+          final updatedPrice = counterOfferDetails.hasCounterOffer
+              ? originalPrice.offerPriceWithDiscount(counterOfferDetails)
+              : originalPrice;
+
+          return element.copyWith(
+            salesOrgConfig: state.config,
+            price: updatedPrice,
+          );
         }).toList();
 
         emit(
@@ -628,6 +649,31 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           _VerifyMaterialDealBonus(
             item: PriceAggregate.empty(),
             items: cartProductList,
+          ),
+        );
+      },
+      updateCartProductWithCounterOffer: (e) {
+        emit(
+          state.copyWith(
+            isMappingPrice: true,
+          ),
+        );
+
+        final cartProductList = state.cartProducts.map((element) {
+          final updatedPrice = element.materialInfo.materialNumber ==
+                  e.overriddenProductPrice.materialNumber
+              ? e.overriddenProductPrice
+              : element.price;
+
+          return element.copyWith(
+            price: updatedPrice,
+          );
+        }).toList();
+
+        emit(
+          state.copyWith(
+            isMappingPrice: false,
+            cartProducts: cartProductList,
           ),
         );
       },

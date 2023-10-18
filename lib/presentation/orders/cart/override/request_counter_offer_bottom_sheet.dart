@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
-import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
@@ -69,11 +68,7 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
               },
               (_) {
                 context.read<CartBloc>().add(
-                      CartEvent.updatePriceProduct(
-                        priceProducts: context
-                            .read<MaterialPriceBloc>()
-                            .state
-                            .materialPrice,
+                      CartEvent.updateCartProductWithCounterOffer(
                         overriddenProductPrice: state.item.price,
                       ),
                     );

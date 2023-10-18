@@ -593,7 +593,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<EligibilityBloc, EligibilityState>(
           listenWhen: (previous, current) =>
-              previous.shipToInfo != current.shipToInfo &&
+              (previous.shipToInfo != current.shipToInfo ||
+                  previous.salesOrgConfigs != current.salesOrgConfigs) &&
               current != EligibilityState.initial(),
           listener: (context, state) {
             _getAdminPoAttachment(state);
@@ -946,6 +947,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               salesOrganisation: salesOrgState.salesOrganisation,
               customerCodeInfo: state.customerCodeInfo,
               shipToInfo: state.shipToInfo,
+              user: user,
             ),
           );
 

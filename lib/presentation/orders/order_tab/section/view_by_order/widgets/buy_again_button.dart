@@ -58,7 +58,6 @@ class BuyAgainButton extends StatelessWidget {
                               e.qty,
                         )
                         .toList(),
-                    user: context.read<EligibilityBloc>().state.user,
                     counterOfferDetails: RequestCounterOfferDetails.empty(),
                   ),
                 );

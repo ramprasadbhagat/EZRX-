@@ -22,4 +22,7 @@ class RequestCounterOfferDetails with _$RequestCounterOfferDetails {
         counterOfferCurrency: Currency(''),
         comment: StringValue(''),
       );
+
+  bool get hasCounterOffer =>
+      counterOfferPrice.isValid() || discountOverridePercentage.isValid();
 }

@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
@@ -268,7 +267,6 @@ class _CartIcon extends StatelessWidget {
               ),
               type: MaterialInfoType(''),
             ),
-            user: context.read<EligibilityBloc>().state.user,
             counterOfferDetails: RequestCounterOfferDetails.empty(),
             bonusItemId: bonusItemId,
           ),

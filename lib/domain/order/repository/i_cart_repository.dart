@@ -103,7 +103,8 @@ abstract class ICartRepository {
     required List<MaterialInfo> products,
   });
 
-    Future<Either<ApiFailure, List<PriceAggregate>>> upsertCartItemsWithComboOffers({
+  Future<Either<ApiFailure, List<PriceAggregate>>>
+      upsertCartItemsWithComboOffers({
     required List<PriceAggregate> products,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,

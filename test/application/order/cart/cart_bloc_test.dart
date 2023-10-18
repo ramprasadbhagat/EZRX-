@@ -34,7 +34,7 @@ class CartRepositoryMock extends Mock implements CartRepository {}
 
 void main() {
   late List<Price> prices;
-  late Price overridePrice;
+
   late ApiFailure fakeError;
   late ShipToInfo shipToInfo;
   late PriceAggregate bundleItem;
@@ -100,10 +100,6 @@ void main() {
     ];
 
     prices = await MaterialPriceLocalDataSource().getPriceList();
-    overridePrice = prices.elementAt(1).copyWith(
-          isPriceOverride: true,
-          priceOverride: PriceOverrideValue(50),
-        );
   });
   setUp(() {
     cartRepositoryMock = CartRepositoryMock();
@@ -140,6 +136,7 @@ void main() {
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            user: fakeClientUser,
           ),
         ),
         expect: () => [
@@ -148,6 +145,7 @@ void main() {
             config: fakeSalesOrganisationConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
           ),
           CartState.initial().copyWith(
             isFetching: true,
@@ -155,6 +153,7 @@ void main() {
             config: fakeSalesOrganisationConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
           ),
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
@@ -162,6 +161,7 @@ void main() {
             config: fakeSalesOrganisationConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
           ),
         ],
       );
@@ -183,6 +183,7 @@ void main() {
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            user: fakeClientUser,
           ),
         ),
         expect: () => [
@@ -191,6 +192,7 @@ void main() {
             config: fakeSalesOrganisationConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
           ),
           CartState.initial().copyWith(
             isFetching: true,
@@ -198,6 +200,7 @@ void main() {
             config: fakeSalesOrganisationConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
           ),
           CartState.initial().copyWith(
             cartProducts: [],
@@ -205,6 +208,7 @@ void main() {
             config: fakeSalesOrganisationConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+            user: fakeClientUser,
           ),
         ],
       );
@@ -234,6 +238,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               isFetching: true,
@@ -241,6 +246,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               cartProducts: updatedPriceAggregates,
@@ -248,6 +254,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               isFetchingCartProductDetail: true,
@@ -256,6 +263,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               apiFailureOrSuccessOption: optionOf(Left(fakeError)),
@@ -264,6 +272,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
           ];
           when(
@@ -294,6 +303,7 @@ void main() {
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            user: fakeClientUser,
           ),
         ),
         expect: () => expectedCartState,
@@ -330,6 +340,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               isFetching: true,
@@ -337,6 +348,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               cartProducts: updatedPriceAggregates,
@@ -344,6 +356,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               isFetchingCartProductDetail: true,
@@ -352,6 +365,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               additionInfo: allAdditionInfo,
@@ -360,6 +374,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               additionInfo: allAdditionInfo,
@@ -369,6 +384,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               additionInfo: allAdditionInfo,
@@ -378,6 +394,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
           ];
           when(
@@ -417,6 +434,7 @@ void main() {
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            user: fakeClientUser,
           ),
         ),
         expect: () => expectedCartState,
@@ -481,6 +499,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               isFetching: true,
@@ -488,6 +507,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               cartProducts: updatedPriceAggregates,
@@ -495,6 +515,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               isFetchingCartProductDetail: true,
@@ -503,6 +524,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               additionInfo: allAdditionInfo,
@@ -511,6 +533,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               additionInfo: allAdditionInfo,
@@ -520,6 +543,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
             CartState.initial().copyWith(
               additionInfo: allAdditionInfo,
@@ -528,6 +552,7 @@ void main() {
               config: fakeSalesOrganisationConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
+              user: fakeClientUser,
             ),
           ];
           when(
@@ -567,6 +592,7 @@ void main() {
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+            user: fakeClientUser,
           ),
         ),
         expect: () => expectedCartState,
@@ -764,7 +790,6 @@ void main() {
             bonusMaterial: priceAggregates.first.materialInfo
                 .copyWith(quantity: MaterialQty(1)),
             counterOfferDetails: RequestCounterOfferDetails.empty(),
-            user: fakeClientUser,
           ),
         ),
         expect: () => [
@@ -850,7 +875,6 @@ void main() {
               quantity: MaterialQty(1),
             ),
             counterOfferDetails: RequestCounterOfferDetails.empty(),
-            user: fakeClientUser,
           ),
         ),
         expect: () => [
@@ -1408,7 +1432,6 @@ void main() {
             priceAggregate: [priceAggregates.first],
             counterOfferDetails: RequestCounterOfferDetails.empty(),
             quantity: [2],
-            user: fakeClientUser,
           ),
         ),
         expect: () => [
@@ -1472,7 +1495,6 @@ void main() {
             priceAggregate: [priceAggregates.first],
             counterOfferDetails: RequestCounterOfferDetails.empty(),
             quantity: [2],
-            user: fakeClientUser,
           ),
         ),
         expect: () => [
@@ -1539,9 +1561,7 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               materials: [
                 priceAggregates.first.copyWith(
-                  price: overridePrice.copyWith(
-                    materialNumber: priceAggregates.first.getMaterialNumber,
-                  ),
+                  price: prices.first,
                 )
               ],
             ),
@@ -1553,9 +1573,6 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.updatePriceProduct(
-            overriddenProductPrice: overridePrice.copyWith(
-              materialNumber: priceAggregates.first.getMaterialNumber,
-            ),
             priceProducts: {
               priceAggregates.first.getMaterialNumber: prices.first
             },
@@ -1579,9 +1596,7 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [
               priceAggregates.first.copyWith(
-                price: overridePrice.copyWith(
-                  materialNumber: priceAggregates.first.getMaterialNumber,
-                ),
+                price: prices.first,
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
@@ -1593,9 +1608,7 @@ void main() {
             isFetching: true,
             cartProducts: [
               priceAggregates.first.copyWith(
-                price: overridePrice.copyWith(
-                  materialNumber: priceAggregates.first.getMaterialNumber,
-                ),
+                price: prices.first,
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
@@ -1607,9 +1620,7 @@ void main() {
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             cartProducts: [
               priceAggregates.first.copyWith(
-                price: overridePrice.copyWith(
-                  materialNumber: priceAggregates.first.getMaterialNumber,
-                ),
+                price: prices.first,
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
@@ -1626,9 +1637,7 @@ void main() {
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
-              price: overridePrice.copyWith(
-                materialNumber: priceAggregates.first.getMaterialNumber,
-              ),
+              price: prices.first,
             )
           ],
           salesOrganisation: fakeSalesOrganisation,
@@ -1645,9 +1654,7 @@ void main() {
               customerCodeInfo: fakeCustomerCodeInfo,
               materials: [
                 priceAggregates.first.copyWith(
-                  price: overridePrice.copyWith(
-                    materialNumber: priceAggregates.first.getMaterialNumber,
-                  ),
+                  price: prices.first,
                 )
               ],
             ),
@@ -1659,13 +1666,8 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.updatePriceProduct(
-            overriddenProductPrice: overridePrice.copyWith(
-              materialNumber: priceAggregates.first.getMaterialNumber,
-            ),
             priceProducts: {
-              priceAggregates.first.getMaterialNumber: prices.first.copyWith(
-                materialNumber: priceAggregates.first.getMaterialNumber,
-              )
+              priceAggregates.first.getMaterialNumber: prices.first
             },
           ),
         ),
@@ -1674,9 +1676,7 @@ void main() {
             isMappingPrice: true,
             cartProducts: [
               priceAggregates.first.copyWith(
-                price: overridePrice.copyWith(
-                  materialNumber: priceAggregates.first.getMaterialNumber,
-                ),
+                price: prices.first,
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
@@ -1687,9 +1687,7 @@ void main() {
           CartState.initial().copyWith(
             cartProducts: [
               priceAggregates.first.copyWith(
-                price: overridePrice.copyWith(
-                  materialNumber: priceAggregates.first.getMaterialNumber,
-                ),
+                price: prices.first,
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
@@ -1701,9 +1699,7 @@ void main() {
             isFetching: true,
             cartProducts: [
               priceAggregates.first.copyWith(
-                price: overridePrice.copyWith(
-                  materialNumber: priceAggregates.first.getMaterialNumber,
-                ),
+                price: prices.first,
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
@@ -1715,9 +1711,7 @@ void main() {
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             cartProducts: [
               priceAggregates.first.copyWith(
-                price: overridePrice.copyWith(
-                  materialNumber: priceAggregates.first.getMaterialNumber,
-                ),
+                price: prices.first,
               )
             ],
             salesOrganisation: fakeSalesOrganisation,
@@ -1758,9 +1752,6 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.updatePriceProduct(
-            overriddenProductPrice: prices.first.copyWith(
-              materialNumber: MaterialNumber('invalid-material-number'),
-            ),
             priceProducts: {
               priceAggregates.first.getMaterialNumber: prices.first
             },

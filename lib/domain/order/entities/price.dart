@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/order/entities/price_bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/price_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
+import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/order/entities/overriden_rule_tier.dart';
@@ -105,4 +106,23 @@ class Price with _$Price {
           : lastPrice.getOrDefaultValue(0);
 
   bool get isOverrideValid => priceOverride.isValid() || zdp8Override.isValid();
+
+  Price offerPriceWithDiscount(
+    RequestCounterOfferDetails counterOfferDetails,
+  ) {
+    final originalPrice = counterOfferDetails.counterOfferPrice.isValid()
+        ? counterOfferDetails.counterOfferPrice.doubleValue
+        : finalPrice.getOrDefaultValue(0);
+    final discountPercentage =
+        counterOfferDetails.discountOverridePercentage.doubleValue;
+    final discountedPrice =
+        originalPrice - (originalPrice * discountPercentage / 100);
+
+    return copyWith(
+      finalPrice: MaterialPrice(discountedPrice),
+      isPriceOverride: counterOfferDetails.counterOfferPrice.isValid(),
+      isDiscountOverride:
+          counterOfferDetails.discountOverridePercentage.isValid(),
+    );
+  }
 }

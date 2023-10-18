@@ -708,9 +708,8 @@ void main() {
 
       verify(
         () => cartBloc.add(
-          CartEvent.updatePriceProduct(
+          CartEvent.updateCartProductWithCounterOffer(
             overriddenProductPrice: item.price,
-            priceProducts: mockPriceList,
           ),
         ),
       ).called(1);
@@ -856,9 +855,8 @@ void main() {
 
       verify(
         () => cartBloc.add(
-          CartEvent.updatePriceProduct(
+          CartEvent.updateCartProductWithCounterOffer(
             overriddenProductPrice: item.price,
-            priceProducts: mockPriceList,
           ),
         ),
       ).called(1);
