@@ -28,16 +28,15 @@ class _ReturnItem extends StatelessWidget {
                 materialNumber: returnMaterial.materialNumber,
               ),
               Expanded(
-                child:
-                    ReturnMaterialInfoSection(returnMaterial: returnMaterial),
+                child: MaterialInfoWidget(
+                  data: returnMaterial,
+                ),
               ),
             ],
           ),
           MaterialQuantityAndPrice(
             quantity: returnItemDetail.returnQuantity.getIntValue,
-            unitPrice: returnItemDetail.priceOverride.isValid()
-                ? returnItemDetail.priceOverride.doubleValue
-                : returnMaterial.unitPrice.getOrDefaultValue(0),
+            totalPrice: returnItemDetail.returnValue,
           ),
           _ReturnExpandableSection(
             children: [

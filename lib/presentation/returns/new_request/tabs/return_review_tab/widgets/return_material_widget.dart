@@ -2,16 +2,19 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_
 
 class _ReturnMaterialWidget extends StatelessWidget {
   final ReturnMaterial item;
-  final ReturnItemDetails detail;
   const _ReturnMaterialWidget({
     Key? key,
     required this.item,
-    required this.detail,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewRequestBloc, NewRequestState>(
+      buildWhen: (previous, current) =>
+          previous.getReturnItemDetails(item.uuid) !=
+          current.getReturnItemDetails(item.uuid),
       builder: (context, state) {
+        final detail = state.getReturnItemDetails(item.uuid);
+
         return CustomCard(
           showBorder: true,
           showShadow: false,
@@ -25,13 +28,15 @@ class _ReturnMaterialWidget extends StatelessWidget {
                 children: [
                   ProductImageWithLabel(materialNumber: item.materialNumber),
                   Expanded(
-                    child: MaterialInfoWidget(data: item),
+                    child: MaterialInfoWidget(
+                      data: item,
+                    ),
                   ),
                 ],
               ),
-              _QuantityAndPrice(
+              MaterialQuantityAndPrice(
                 quantity: detail.returnQuantity.getIntValue,
-                unitPrice: state.returnItemTotal(item.assignmentNumber),
+                totalPrice: detail.returnValue,
               ),
               ExpandableSection(
                 expanded: true,

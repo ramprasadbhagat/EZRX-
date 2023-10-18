@@ -80,26 +80,15 @@ class NewRequestState with _$NewRequestState {
     return existedItem;
   }
 
-  double getUnitPrice(String itemNumber) =>
-      getReturnMaterial(itemNumber).unitPrice.getOrDefaultValue(0);
-
   double returnItemTotal(String assignmentNumber) =>
       getInvoiceDetail(assignmentNumber).returnItemDetailsList.fold<double>(
             0,
-            (sum, item) =>
-                sum +
-                item.returnValue(
-                  getUnitPrice(item.itemNumber),
-                ),
+            (sum, item) => sum + item.returnValue,
           );
 
   double get returnTotal => allItemDetails.fold<double>(
         0,
-        (sum, item) =>
-            sum +
-            item.returnValue(
-              getUnitPrice(item.itemNumber),
-            ),
+        (sum, item) => sum + item.returnValue,
       );
 
   double _returnTax(SalesOrganisationConfigs config) =>
@@ -145,6 +134,6 @@ class NewRequestState with _$NewRequestState {
             )
             .toList(),
         MixpanelProps.unitPrice:
-            allItemDetails.map((e) => getUnitPrice(e.itemNumber)).toList(),
+            allItemDetails.map((e) => e.unitPrice).toList(),
       };
 }

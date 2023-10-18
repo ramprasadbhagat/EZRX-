@@ -12,70 +12,9 @@ class _MaterialBonusInfoSection extends StatelessWidget {
     return ExpandableInfo(
       labelText: context.tr('Bonus details'),
       toggle: _ToggleActiveButton(item: data),
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 5),
-        padding: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          color: ZPColors.extraLightGrey3,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  data.materialNumber.displayMatNo,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                StatusLabel(
-                  status: StatusType('Bonus'),
-                  valueColor: ZPColors.white,
-                ),
-              ],
-            ),
-            Text(
-              data.materialDescription,
-              style: Theme.of(context).textTheme.labelMedium,
-            ),
-            Text(
-              '${context.tr('Batch')} ${data.batch} (${context.tr('Expires')} ${data.expiryDate.dateString})',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.darkGray,
-                    fontSize: 12,
-                  ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                PriceComponent(
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: data.unitPrice.apiParameterValue,
-                  type: PriceStyle.summaryPrice,
-                ),
-                Text(
-                  '${context.tr('Qty')}: ${data.balanceQuantity.apiParameterValue} ',
-                ),
-              ],
-            ),
-            Text(
-              context.tr(
-                'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).',
-              ),
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.changePasswordRecommendationColor,
-                    fontSize: 10,
-                  ),
-            ),
-          ],
-        ),
+      child: BonusMaterialInfo(
+        data: data,
+        noteLineVisible: true,
       ),
     );
   }

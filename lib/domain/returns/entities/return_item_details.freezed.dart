@@ -21,6 +21,7 @@ mixin _$ReturnItemDetails {
   String get assignmentNumber => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
   ReturnQuantity get returnQuantity => throw _privateConstructorUsedError;
+  RangeValue get unitPrice => throw _privateConstructorUsedError;
   Usage get usage => throw _privateConstructorUsedError;
   List<ReturnRequestAttachment> get uploadedFiles =>
       throw _privateConstructorUsedError;
@@ -46,6 +47,7 @@ abstract class $ReturnItemDetailsCopyWith<$Res> {
       String assignmentNumber,
       String batch,
       ReturnQuantity returnQuantity,
+      RangeValue unitPrice,
       Usage usage,
       List<ReturnRequestAttachment> uploadedFiles,
       Remarks remarks,
@@ -74,6 +76,7 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
     Object? assignmentNumber = null,
     Object? batch = null,
     Object? returnQuantity = null,
+    Object? unitPrice = null,
     Object? usage = null,
     Object? uploadedFiles = null,
     Object? remarks = null,
@@ -102,6 +105,10 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
           ? _value.returnQuantity
           : returnQuantity // ignore: cast_nullable_to_non_nullable
               as ReturnQuantity,
+      unitPrice: null == unitPrice
+          ? _value.unitPrice
+          : unitPrice // ignore: cast_nullable_to_non_nullable
+              as RangeValue,
       usage: null == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
@@ -152,6 +159,7 @@ abstract class _$$_ReturnItemDetailsCopyWith<$Res>
       String assignmentNumber,
       String batch,
       ReturnQuantity returnQuantity,
+      RangeValue unitPrice,
       Usage usage,
       List<ReturnRequestAttachment> uploadedFiles,
       Remarks remarks,
@@ -179,6 +187,7 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
     Object? assignmentNumber = null,
     Object? batch = null,
     Object? returnQuantity = null,
+    Object? unitPrice = null,
     Object? usage = null,
     Object? uploadedFiles = null,
     Object? remarks = null,
@@ -207,6 +216,10 @@ class __$$_ReturnItemDetailsCopyWithImpl<$Res>
           ? _value.returnQuantity
           : returnQuantity // ignore: cast_nullable_to_non_nullable
               as ReturnQuantity,
+      unitPrice: null == unitPrice
+          ? _value.unitPrice
+          : unitPrice // ignore: cast_nullable_to_non_nullable
+              as RangeValue,
       usage: null == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
@@ -244,6 +257,7 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
       required this.assignmentNumber,
       required this.batch,
       required this.returnQuantity,
+      required this.unitPrice,
       required this.usage,
       required final List<ReturnRequestAttachment> uploadedFiles,
       required this.remarks,
@@ -263,6 +277,8 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
   final String batch;
   @override
   final ReturnQuantity returnQuantity;
+  @override
+  final RangeValue unitPrice;
   @override
   final Usage usage;
   final List<ReturnRequestAttachment> _uploadedFiles;
@@ -284,7 +300,7 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
 
   @override
   String toString() {
-    return 'ReturnItemDetails(materialNumber: $materialNumber, itemNumber: $itemNumber, assignmentNumber: $assignmentNumber, batch: $batch, returnQuantity: $returnQuantity, usage: $usage, uploadedFiles: $uploadedFiles, remarks: $remarks, outsidePolicy: $outsidePolicy, priceOverride: $priceOverride, returnReason: $returnReason)';
+    return 'ReturnItemDetails(materialNumber: $materialNumber, itemNumber: $itemNumber, assignmentNumber: $assignmentNumber, batch: $batch, returnQuantity: $returnQuantity, unitPrice: $unitPrice, usage: $usage, uploadedFiles: $uploadedFiles, remarks: $remarks, outsidePolicy: $outsidePolicy, priceOverride: $priceOverride, returnReason: $returnReason)';
   }
 
   @override
@@ -301,6 +317,8 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
             (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.returnQuantity, returnQuantity) ||
                 other.returnQuantity == returnQuantity) &&
+            (identical(other.unitPrice, unitPrice) ||
+                other.unitPrice == unitPrice) &&
             (identical(other.usage, usage) || other.usage == usage) &&
             const DeepCollectionEquality()
                 .equals(other._uploadedFiles, _uploadedFiles) &&
@@ -321,6 +339,7 @@ class _$_ReturnItemDetails extends _ReturnItemDetails {
       assignmentNumber,
       batch,
       returnQuantity,
+      unitPrice,
       usage,
       const DeepCollectionEquality().hash(_uploadedFiles),
       remarks,
@@ -343,6 +362,7 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
       required final String assignmentNumber,
       required final String batch,
       required final ReturnQuantity returnQuantity,
+      required final RangeValue unitPrice,
       required final Usage usage,
       required final List<ReturnRequestAttachment> uploadedFiles,
       required final Remarks remarks,
@@ -361,6 +381,8 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
   String get batch;
   @override
   ReturnQuantity get returnQuantity;
+  @override
+  RangeValue get unitPrice;
   @override
   Usage get usage;
   @override

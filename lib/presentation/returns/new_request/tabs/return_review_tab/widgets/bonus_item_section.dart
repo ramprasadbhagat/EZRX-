@@ -14,19 +14,18 @@ class _BonusItemSection extends StatelessWidget {
         : BlocBuilder<NewRequestBloc, NewRequestState>(
             buildWhen: (previous, current) =>
                 previous.invoiceDetails != current.invoiceDetails,
-            builder: (context, state) {
-              return Column(
+            builder: (context, state) => ExpandableInfo(
+              labelText: 'Bonus details'.tr(),
+              child: Column(
                 children: items
                     .map(
-                      (item) => _MaterialBonusInfoSection(
+                      (item) => BonusMaterialInfo(
                         data: item,
-                        returnReason:
-                            state.getReturnItemDetails(item.uuid).returnReason,
                       ),
                     )
                     .toList(),
-              );
-            },
+              ),
+            ),
           );
   }
 }

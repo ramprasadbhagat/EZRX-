@@ -688,6 +688,9 @@ class CounterOfferValue extends ValueObject<String> {
   }
 
   double get doubleValue => getDoubleParsedValue(value.getOrElse(() => ''));
+
+  String get stringValue => doubleValue.toString();
+
   PriceOverrideValue get toPriceOverrideValue =>
       getPriceOverrideValue(doubleValue);
 

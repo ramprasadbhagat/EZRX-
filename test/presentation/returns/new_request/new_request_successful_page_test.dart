@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -14,6 +15,14 @@ import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 
 import '../../../utils/widget_utils.dart';
 
@@ -38,6 +47,10 @@ class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class ProductImageBlocMock
+    extends MockBloc<ProductImageEvent, ProductImageState>
+    implements ProductImageBloc {}
+
 class AutoRouterMock extends Mock implements AppRouter {}
 
 final locator = GetIt.instance;
@@ -54,12 +67,44 @@ void main() {
   late SalesOrgBloc salesOrgBlocMock;
   late EligibilityBloc eligibilityBlocMock;
   late NewRequestBloc newRequestBlocMock;
+  late ProductImageBloc productImageBlocMock;
+
+  late ReturnMaterial fakeReturnMaterial;
+  late ReturnItemDetails fakeReturnItemDetails;
+  late double fakeUnitPrice;
+  late String fakeUnitPriceString;
+  late double fakeOverridePrice;
+  late String fakeOverridePriceString;
+  late int fakeBalanceQuantity;
+  late int fakeReturnQuantity;
 
   final fakeSalesOrganisation = SalesOrganisation.empty().copyWith(
     salesOrg: SalesOrg('fake-SalesOrg'),
   );
 
   setUpAll(() async {
+    fakeUnitPrice = 8.77;
+    fakeUnitPriceString = '8.77';
+    fakeOverridePrice = 12;
+    fakeOverridePriceString = '12.00';
+    fakeBalanceQuantity = 5;
+    fakeReturnQuantity = 2;
+    fakeReturnMaterial =
+        (await ReturnRequestLocalDataSource().searchReturnMaterials())
+            .items
+            .first
+            .copyWith(
+      unitPrice: RangeValue(fakeUnitPrice.toString()),
+      balanceQuantity: IntegerValue(fakeBalanceQuantity.toString()),
+      bonusItems: [
+        (await ReturnRequestLocalDataSource().searchReturnMaterials())
+            .items
+            .first
+      ],
+    );
+    fakeReturnItemDetails = fakeReturnMaterial.validatedItemDetails.copyWith(
+      returnQuantity: ReturnQuantity(fakeReturnQuantity.toString()),
+    );
     locator.registerLazySingleton(() => AppRouter());
   });
 
@@ -70,24 +115,23 @@ void main() {
       announcementBlocMock = AnnouncementBlocMock();
       returnDetailsByRequestBlocMock = ReturnDetailsByRequestBlocMock();
       salesOrgBlocMock = SalesOrgMockBloc();
-
+      productImageBlocMock = ProductImageBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
-
       eligibilityBlocMock = EligibilityBlocMock();
-      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
 
+      when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
       when(() => newRequestBlocMock.state)
           .thenReturn(NewRequestState.initial());
-
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
-
       when(() => returnDetailsByRequestBlocMock.state)
           .thenReturn(ReturnDetailsByRequestState.initial());
+      when(() => productImageBlocMock.state)
+          .thenReturn(ProductImageState.initial());
     });
 
     Widget getScopedWidget() {
@@ -110,6 +154,9 @@ void main() {
           ),
           BlocProvider<ReturnDetailsByRequestBloc>(
             create: (context) => returnDetailsByRequestBlocMock,
+          ),
+          BlocProvider<ProductImageBloc>(
+            create: ((context) => productImageBlocMock),
           ),
         ],
         child: const NewRequestSuccessfulPage(),
@@ -138,6 +185,114 @@ void main() {
           ),
         ),
       ).called(1);
+    });
+
+    testWidgets(' => display Unit Price for return material item',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails,
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final unitPrice = find.textContaining(
+        fakeUnitPriceString,
+        findRichText: true,
+      );
+      expect(unitPrice, findsOneWidget);
+    });
+    testWidgets(' => display Override Price for return material item',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails.copyWith(
+                  priceOverride: CounterOfferValue(
+                    fakeOverridePrice.toString(),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final overridePrice = find.textContaining(
+        fakeOverridePriceString,
+        findRichText: true,
+      );
+      expect(overridePrice, findsOneWidget);
+      final overridePriceNote =
+          find.text('Requested return value counter offer'.tr());
+      expect(overridePriceNote, findsOneWidget);
+    });
+
+    testWidgets(
+        ' => display Total Price for 1 return material item with no override price',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails,
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final totalPrice = find.textContaining(
+        (fakeUnitPrice * fakeReturnQuantity).toString(),
+        findRichText: true,
+      );
+      expect(totalPrice, findsWidgets);
+    });
+
+    testWidgets(
+        ' => display Total Price for 1 return material item with override price',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails.copyWith(
+                  priceOverride: CounterOfferValue(
+                    fakeOverridePrice.toString(),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final totalPrice = find.textContaining(
+        (fakeOverridePrice * fakeReturnQuantity).toString(),
+        findRichText: true,
+      );
+      expect(totalPrice, findsWidgets);
     });
   });
 }

@@ -9,13 +9,11 @@ class MaterialQuantityAndPrice extends StatelessWidget {
   const MaterialQuantityAndPrice({
     Key? key,
     required this.quantity,
-    this.totalPrice = 0,
-    required this.unitPrice,
+    required this.totalPrice,
   }) : super(key: key);
 
   final int quantity;
   final double totalPrice;
-  final double unitPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +28,7 @@ class MaterialQuantityAndPrice extends StatelessWidget {
         ),
         PriceComponent(
           salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
-          price: totalPrice != 0
-              ? totalPrice.toString()
-              : (unitPrice * quantity).toString(),
+          price: totalPrice.toString(),
         ),
       ],
     );

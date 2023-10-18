@@ -28,13 +28,10 @@ class ReturnValueField extends StatelessWidget {
       },
       builder: (context, state) {
         final detail = state.getReturnItemDetails(data.uuid);
-        final returnValue = detail.returnValueString(
-          data.unitPrice.getOrDefaultValue(0),
-        );
 
         return Row(
           key: WidgetKeys.returnValueField(
-            '${data.uuid}$returnValue',
+            '${data.uuid}${detail.returnValue}',
           ),
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -47,7 +44,7 @@ class ReturnValueField extends StatelessWidget {
             PriceComponent(
               salesOrgConfig:
                   context.read<EligibilityBloc>().state.salesOrgConfigs,
-              price: returnValue,
+              price: detail.returnValue.toString(),
               type: PriceStyle.grandTotalPrice,
             ),
           ],

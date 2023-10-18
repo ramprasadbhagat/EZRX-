@@ -31,7 +31,9 @@ class _ReturnMaterialWidget extends StatelessWidget {
                     key: WidgetKeys.newRequestStep2ItemImage,
                   ),
                   Expanded(
-                    child: MaterialInfoWidget(data: item),
+                    child: MaterialInfoWidget(
+                      data: item,
+                    ),
                   ),
                   IconButton(
                     key: WidgetKeys.newRequestStep2RemoveIcon,
@@ -50,7 +52,6 @@ class _ReturnMaterialWidget extends StatelessWidget {
               MaterialQuantityAndPrice(
                 quantity: item.balanceQuantity.getOrDefaultValue(0),
                 totalPrice: item.totalPrice.getOrDefaultValue(0),
-                unitPrice: item.unitPrice.getOrDefaultValue(0),
                 key: WidgetKeys.newRequestStep2QuantityAndPrice,
               ),
               MaterialDetailsSection(

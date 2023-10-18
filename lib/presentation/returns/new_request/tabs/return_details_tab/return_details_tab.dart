@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -9,9 +8,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/balance_quantity_field.dart';
@@ -19,6 +16,7 @@ import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_counter_offer.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_quantity_field.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_value_field.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_info.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_info.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_details_section.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_info_widget.dart';

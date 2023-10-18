@@ -1,11 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_item_price.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialInfoWidget extends StatelessWidget {
   const MaterialInfoWidget({
@@ -54,12 +52,7 @@ class MaterialInfoWidget extends StatelessWidget {
               ),
             ],
           ),
-          PriceComponent(
-            salesOrgConfig:
-                context.read<EligibilityBloc>().state.salesOrgConfigs,
-            price: data.unitPrice.apiParameterValue,
-            type: PriceStyle.bonusPrice,
-          ),
+          ReturnItemPrice(data: data),
         ],
       ),
     );

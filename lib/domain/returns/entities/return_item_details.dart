@@ -17,6 +17,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
     required String assignmentNumber,
     required String batch,
     required ReturnQuantity returnQuantity,
+    required RangeValue unitPrice,
     required Usage usage,
     required List<ReturnRequestAttachment> uploadedFiles,
     required Remarks remarks,
@@ -31,6 +32,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
         assignmentNumber: '',
         batch: '',
         returnQuantity: ReturnQuantity(''),
+        unitPrice: RangeValue(''),
         usage: Usage.empty(),
         uploadedFiles: <ReturnRequestAttachment>[],
         remarks: Remarks(''),
@@ -43,10 +45,9 @@ class ReturnItemDetails with _$ReturnItemDetails {
 
   bool get isValid => returnQuantity.getIntValue > 0 && returnReason.isNotEmpty;
 
-  String returnValueString(double unitPrice) => returnValue(
-        unitPrice,
-      ).toStringAsFixed(2);
-
-  double returnValue(double unitPrice) => (returnQuantity.getIntValue *
-      (priceOverride.isValid() ? priceOverride.doubleValue : unitPrice));
+  double get returnValue =>
+      returnQuantity.getIntValue *
+      (priceOverride.isValid()
+          ? priceOverride.doubleValue
+          : unitPrice.getOrDefaultValue(0));
 }
