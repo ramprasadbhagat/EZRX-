@@ -14,7 +14,7 @@ class PaymentSummaryLocalDataSource {
       ),
     );
 
-    return List.from(data['customerPayment']['customerPaymentResponse'])
+    return List.from(data['data']['customerPayment']['customerPaymentResponse'])
         .map((e) => PaymentSummaryDetailsDto.fromJson(e).toDomain())
         .toList();
   }
