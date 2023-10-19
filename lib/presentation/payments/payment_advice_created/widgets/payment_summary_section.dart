@@ -81,6 +81,20 @@ class _PaymentSummarySection extends StatelessWidget {
                                       /// back to the payment overview page and navigate to
                                       /// the payment advice created page
                                       if (uri != null) {
+                                        trackMixpanelEvent(
+                                          MixpanelEvents.paymentSuccess,
+                                          props: {
+                                            MixpanelProps.paymentAmount:
+                                                state.amountTotal,
+                                            MixpanelProps.paymentMethod: state
+                                                .selectedPaymentMethod
+                                                .getOrDefaultValue(''),
+                                            MixpanelProps.paymentDocumentCount:
+                                                state.allSelectedItems.length,
+                                            MixpanelProps.paymentAdviseId: state
+                                                .paymentInvoiceInfoPdf.zzAdvice,
+                                          },
+                                        );
                                         context.read<NewPaymentBloc>().add(
                                               NewPaymentEvent
                                                   .updatePaymentGateway(
@@ -99,6 +113,20 @@ class _PaymentSummarySection extends StatelessWidget {
                                         /// * If on TH market: Back to the payment overview
                                         /// page and navigate to the payment advice created page
                                         /// * If on other market: Back to the payment overview page
+                                        trackMixpanelEvent(
+                                          MixpanelEvents.paymentFailure,
+                                          props: {
+                                            MixpanelProps.errorMessage:
+                                                'Payment failed in webview',
+                                            MixpanelProps.paymentMethod: state
+                                                .selectedPaymentMethod
+                                                .getOrDefaultValue(''),
+                                            MixpanelProps.paymentDocumentCount:
+                                                state.allSelectedItems.length,
+                                            MixpanelProps.paymentAdviseId: state
+                                                .paymentInvoiceInfoPdf.zzAdvice,
+                                          },
+                                        );
                                         context
                                                 .read<EligibilityBloc>()
                                                 .state

@@ -52,4 +52,8 @@ class MixpanelProps {
   static String returnReason = 'reason_for_return';
   static String returnId = 'return_request_id';
   static String isBonusIncluded = 'is_bonus_included';
+  static String paymentAmount = 'payment_amount';
+  static String paymentMethod = 'payment_method';
+  static String paymentAdviseId = 'payment_advice_id';
+  static String paymentDocumentCount = 'document_count';
 }

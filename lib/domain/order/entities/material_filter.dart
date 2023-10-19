@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -30,6 +31,24 @@ class MaterialFilter with _$MaterialFilter {
         manufactureListSelected: <String>[],
         countryListSelected: <MaterialFilterCountry>[],
       );
+
+  Map<String, dynamic> get trackingInfo {
+    final showProductFilter = <String>[];
+    if (isFavourite) showProductFilter.add('Favourites');
+    if (isProductOffer) showProductFilter.add('Items with offers');
+    if (bundleOffers) showProductFilter.add('Bundle offers');
+
+    return {
+      if (showProductFilter.isNotEmpty)
+        MixpanelProps.filterShowProduct: showProductFilter,
+      MixpanelProps.filterSortBy: sortBy.title,
+      if (manufactureListSelected.isNotEmpty)
+        MixpanelProps.filterManufacturer: manufactureListSelected,
+      if (countryListSelected.isNotEmpty)
+        MixpanelProps.filterCountryOfOrigin:
+            countryListSelected.map((e) => e.name).toList(),
+    };
+  }
 }
 
 @freezed

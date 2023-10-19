@@ -68,6 +68,8 @@ class EligibilityBlockMock extends MockBloc<EligibilityEvent, EligibilityState>
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class MixpanelServiceMock extends Mock implements MixpanelService {}
+
 void main() {
   late AccountSummaryBloc accountSummaryBlocMock;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
@@ -250,9 +252,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
   });
 
@@ -597,7 +597,8 @@ void main() {
         await tester.tap(nextButton2);
         await tester.pumpAndSettle();
 
-        final generatePaymentAdviceButton = find.byKey(WidgetKeys.generatePaymentAdvice);
+        final generatePaymentAdviceButton =
+            find.byKey(WidgetKeys.generatePaymentAdvice);
         expect(generatePaymentAdviceButton, findsOneWidget);
         await tester.tap(generatePaymentAdviceButton);
         verify(

@@ -37,12 +37,16 @@ class _SoaTile extends StatelessWidget {
                   ),
                   onPressed: state.isDownloadInProgress
                       ? null
-                      : () =>
+                      : () {
+                          trackMixpanelEvent(
+                            MixpanelEvents.paymentDocumentViewed,
+                          );
                           context.read<DownloadPaymentAttachmentsBloc>().add(
                                 DownloadPaymentAttachmentEvent.downloadSOA(
                                   soaData: soa.soaData,
                                 ),
-                              ),
+                              );
+                        },
                   label: Text(
                     context.tr('Download'),
                     style: Theme.of(context)

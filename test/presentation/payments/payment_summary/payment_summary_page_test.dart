@@ -25,6 +25,7 @@ import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -86,6 +87,8 @@ class AvailableCreditsBlocMock
     extends MockBloc<AvailableCreditsEvent, AvailableCreditsState>
     implements AvailableCreditsBloc {}
 
+class MixpanelServiceMock extends Mock implements MixpanelService {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -121,6 +124,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerLazySingleton(() => AppRouter());
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     paymentSummaryList = [
       PaymentSummaryDetails.empty().copyWith(
         paymentAmount: 200,

@@ -59,9 +59,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(
-      () => MixpanelService(config: locator<Config>()),
-    );
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
   });
 

@@ -6,6 +6,9 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
@@ -177,6 +180,10 @@ class _FilterTune extends StatelessWidget {
         final alreadyAppliedFilter =
             context.read<AvailableCreditsBloc>().state.appliedFilter;
         if (newFilter != alreadyAppliedFilter) {
+          trackMixpanelEvent(
+            MixpanelEvents.newPaymentFilterUsed,
+            props: {MixpanelProps.filterUsed: newFilter.trackingInfo},
+          );
           context.read<AvailableCreditsBloc>().add(
                 AvailableCreditsEvent.fetch(
                   appliedFilter: newFilter,

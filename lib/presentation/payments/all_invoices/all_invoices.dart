@@ -1,4 +1,8 @@
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -114,6 +118,13 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
   }
 
   void _toNewPayment(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.newPaymentClicked,
+      props: {
+        MixpanelProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.routeData.path),
+      },
+    );
     context.read<OutstandingInvoicesBloc>().add(
           OutstandingInvoicesEvent.fetch(
             appliedFilter: OutstandingInvoiceFilter.empty(),
@@ -202,6 +213,7 @@ class _InvoiceItem extends StatelessWidget {
       key: WidgetKeys.invoiceItem,
       child: ListTile(
         onTap: () {
+          trackMixpanelEvent(MixpanelEvents.paymentDocumentViewed);
           context.read<CreditAndInvoiceDetailsBloc>().add(
                 CreditAndInvoiceDetailsEvent.fetch(
                   creditAndInvoiceItem: invoiceItem,

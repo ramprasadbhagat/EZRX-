@@ -7,10 +7,14 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -28,6 +32,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
+
 part 'widgets/payment_invoice_pdf.dart';
 part 'widgets/payment_save_pdf_button.dart';
 part 'widgets/payment_advice_next_step.dart';
@@ -77,7 +82,20 @@ class _BodyContent extends StatelessWidget {
           state.failureOrSuccessOption.fold(
             () {},
             (option) => option.fold(
-              (failure) => ErrorUtils.handleApiFailure(context, failure),
+              (failure) {
+                trackMixpanelEvent(
+                  MixpanelEvents.paymentFailure,
+                  props: {
+                    MixpanelProps.errorMessage:
+                        'Generating payment advise failure with error message: ${failure.failureMessage}',
+                    MixpanelProps.paymentMethod:
+                        state.selectedPaymentMethod.getOrDefaultValue(''),
+                    MixpanelProps.paymentDocumentCount:
+                        state.allSelectedItems.length,
+                  },
+                );
+                ErrorUtils.handleApiFailure(context, failure);
+              },
               (r) {},
             ),
           );

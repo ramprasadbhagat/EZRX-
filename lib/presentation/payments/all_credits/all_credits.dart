@@ -1,4 +1,8 @@
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -118,6 +122,13 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
   }
 
   void _toNewPayment(BuildContext context) {
+    trackMixpanelEvent(
+      MixpanelEvents.newPaymentClicked,
+      props: {
+        MixpanelProps.clickAt:
+            RouterUtils.buildRouteTrackingName(context.routeData.path),
+      },
+    );
     context.read<OutstandingInvoicesBloc>().add(
           OutstandingInvoicesEvent.fetch(
             appliedFilter: OutstandingInvoiceFilter.empty(),

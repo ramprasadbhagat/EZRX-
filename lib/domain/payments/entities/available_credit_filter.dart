@@ -60,4 +60,11 @@ class AvailableCreditFilter with _$AvailableCreditFilter {
 
     return count;
   }
+
+  List<String> get trackingInfo => [
+        if (documentDateFrom.isValid() && documentDateTo.isValid())
+          'Document date from ${documentDateFrom.dateOrNaString} to ${documentDateTo.dateOrNaString}',
+        if (amountValueFrom.isValid() && amountValueTo.isValid())
+          'Amount range from ${amountValueFrom.apiParameterValue} to ${amountValueTo.apiParameterValue}',
+      ];
 }

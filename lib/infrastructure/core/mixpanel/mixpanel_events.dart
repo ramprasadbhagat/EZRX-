@@ -47,4 +47,15 @@ class MixpanelEvents {
   static String newReturnRequestStep = 'New Return Request Step';
   static String returnRequestFailure = 'Return Failed';
   static String returnRequestSuccess = 'Return Success';
+  //===========================================================
+  //  Payment
+  //============================================================
+  static String paymentQuickAccessClicked = 'Payment Quick Access Clicked';
+  static String newPaymentClicked = 'New Payment Clicked';
+  static String paymentDocumentViewed = 'Payment Document Viewed';
+  static String documentNumberSearched = 'Document Number Searched';
+  static String newPaymentFilterUsed = 'New Payment Filter Used';
+  static String paymentStep = 'Payment step';
+  static String paymentSuccess = 'Successful Payment';
+  static String paymentFailure = 'Payment Failed';
 }

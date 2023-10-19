@@ -80,4 +80,15 @@ class OutstandingInvoiceFilter with _$OutstandingInvoiceFilter {
 
     return count;
   }
+
+  List<String> get trackingInfo => [
+        if (documentDateFrom.isValid() && documentDateTo.isValid())
+          'Document date from ${documentDateFrom.dateOrNaString} to ${documentDateTo.dateOrNaString}',
+        if (dueDateFrom.isValid() && dueDateTo.isValid())
+          'Due date from ${dueDateFrom.dateOrNaString} to ${dueDateTo.dateOrNaString}',
+        if (amountValueFrom.isValid() && amountValueTo.isValid())
+          'Amount range from ${amountValueFrom.apiParameterValue} to ${amountValueTo.apiParameterValue}',
+        if (outstandingInvoiceStatus.isValid())
+          outstandingInvoiceStatus.getOrDefaultValue(''),
+      ];
 }

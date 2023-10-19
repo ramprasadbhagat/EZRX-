@@ -19,15 +19,52 @@ class _PaymentInvoicePdf extends StatelessWidget {
         pdfPreviewPageDecoration: const BoxDecoration(color: ZPColors.white),
         scrollViewDecoration: const BoxDecoration(color: ZPColors.white),
         onError: (_, error) {
+          final eligibilityState = context.read<EligibilityBloc>().state;
+          final newPaymentState = context.read<NewPaymentBloc>().state;
+          if (eligibilityState.salesOrganisation.salesOrg.isSg) {
+            trackMixpanelEvent(
+              MixpanelEvents.paymentFailure,
+              props: {
+                MixpanelProps.errorMessage: 'Generating QR failed',
+                MixpanelProps.paymentMethod:
+                    newPaymentState.selectedPaymentMethod.getOrDefaultValue(''),
+                MixpanelProps.paymentDocumentCount:
+                    newPaymentState.allSelectedItems.length,
+                MixpanelProps.paymentAdviseId:
+                    newPaymentState.paymentInvoiceInfoPdf.zzAdvice,
+              },
+            );
+          }
+
           return Text(error.toString());
         },
-        build: (_) => CreatePaymentInvoicePdf().createInvoicePdf(
-          shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
-          paymentInvoiceInfoPdf:
-              context.read<NewPaymentBloc>().state.paymentInvoiceInfoPdf,
-          salesOrganisation:
-              context.read<EligibilityBloc>().state.salesOrganisation,
-        ),
+        build: (_) async {
+          final eligibilityState = context.read<EligibilityBloc>().state;
+          final newPaymentState = context.read<NewPaymentBloc>().state;
+
+          final pdf = await CreatePaymentInvoicePdf().createInvoicePdf(
+            shipToInfo: eligibilityState.shipToInfo,
+            paymentInvoiceInfoPdf: newPaymentState.paymentInvoiceInfoPdf,
+            salesOrganisation: eligibilityState.salesOrganisation,
+          );
+
+          if (eligibilityState.salesOrganisation.salesOrg.isSg) {
+            trackMixpanelEvent(
+              MixpanelEvents.paymentSuccess,
+              props: {
+                MixpanelProps.paymentAmount: newPaymentState.amountTotal,
+                MixpanelProps.paymentMethod:
+                    newPaymentState.selectedPaymentMethod.getOrDefaultValue(''),
+                MixpanelProps.paymentDocumentCount:
+                    newPaymentState.allSelectedItems.length,
+                MixpanelProps.paymentAdviseId:
+                    newPaymentState.paymentInvoiceInfoPdf.zzAdvice,
+              },
+            );
+          }
+
+          return pdf;
+        },
       ),
     );
   }

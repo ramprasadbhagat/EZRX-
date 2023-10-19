@@ -23,6 +23,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/soa_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
@@ -78,6 +79,8 @@ class MockAvailableCreditsBloc
 class MockNewPaymentBloc extends MockBloc<NewPaymentEvent, NewPaymentState>
     implements NewPaymentBloc {}
 
+class MixpanelServiceMock extends Mock implements MixpanelService {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -108,6 +111,7 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     fakeSoaList = await SoaLocalDataSource().getSoa();
   });
   setUp(() async {

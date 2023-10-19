@@ -40,7 +40,15 @@ class _PaymentOption extends StatelessWidget {
           : MediaQuery.of(context).size.width * 0.22,
       child: GestureDetector(
         key: paymentOptionData.key,
-        onTap: paymentOptionData.onTap,
+        onTap: () {
+          trackMixpanelEvent(
+            MixpanelEvents.paymentQuickAccessClicked,
+            props: {
+              MixpanelProps.quickAccess: paymentOptionData.label,
+            },
+          );
+          paymentOptionData.onTap.call();
+        },
         child: Stack(
           alignment: AlignmentDirectional.bottomStart,
           children: [

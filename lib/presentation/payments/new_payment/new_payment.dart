@@ -9,6 +9,9 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
+import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
@@ -31,6 +34,9 @@ class NewPaymentPage extends StatelessWidget {
     PaymentMethodTabRoute(),
   ];
 
+  static const paymentErrorMessage =
+      'At least one of the selected invoices/credit notes have already been used to create another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.';
+
   Future<bool?> _showConfirmBottomSheet(BuildContext context) {
     return showModalBottomSheet<bool>(
       context: context,
@@ -38,8 +44,7 @@ class NewPaymentPage extends StatelessWidget {
       builder: (_) => ConfirmBottomSheet(
         key: WidgetKeys.confirmBottomSheet,
         title: 'Error creating payment advice',
-        content:
-            'At least one of the selected invoices/credit notes have already been used to create another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.',
+        content: paymentErrorMessage,
         confirmButtonText: 'Payment summary',
         iconWidget: SvgPicture.asset(
           SvgImage.alert,
@@ -55,17 +60,7 @@ class NewPaymentPage extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       builder: (context, child, tabController) {
         final step = tabController.index + 1;
-        var title = '';
-        switch (step) {
-          case 1:
-            title = context.tr('Select invoice(s) for payment');
-            break;
-          case 2:
-            title = context.tr('Select credit (Optional)');
-            break;
-          default:
-            title = context.tr('Select payment method');
-        }
+        final title = context.tr(_stepTitle(step));
 
         return Scaffold(
           key: WidgetKeys.newPaymentPage,
@@ -97,6 +92,17 @@ class NewPaymentPage extends StatelessWidget {
                     },
                     (either) => either.fold(
                       (failure) async {
+                        trackMixpanelEvent(
+                          MixpanelEvents.paymentFailure,
+                          props: {
+                            MixpanelProps.errorMessage: paymentErrorMessage,
+                            MixpanelProps.paymentMethod: state
+                                .selectedPaymentMethod
+                                .getOrDefaultValue(''),
+                            MixpanelProps.paymentDocumentCount:
+                                state.allSelectedItems.length,
+                          },
+                        );
                         final confirmed =
                             await _showConfirmBottomSheet(context);
                         if ((confirmed ?? false) && context.mounted) {
@@ -261,10 +267,12 @@ class NewPaymentPage extends StatelessWidget {
                                   key: WidgetKeys.generatePaymentAdvice,
                                   onPressed: state.isLoading
                                       ? null
-                                      : () =>
+                                      : () {
+                                          _trackProceedToNextStep(step);
                                           context.read<NewPaymentBloc>().add(
                                                 const NewPaymentEvent.pay(),
-                                              ),
+                                              );
+                                        },
                                   child: LoadingShimmer.withChild(
                                     enabled: state.isLoading,
                                     child: Text(
@@ -342,9 +350,9 @@ class _NextButton extends StatelessWidget {
       key: WidgetKeys.nextButton,
       onPressed: enabled
           ? () {
-              tabController.animateTo(
-                tabController.index + 1,
-              );
+              final step = tabController.index + 1;
+              _trackProceedToNextStep(step);
+              tabController.animateTo(step);
             }
           : null,
       child: Text(
@@ -445,5 +453,24 @@ class _CheckAllWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+void _trackProceedToNextStep(int step) => trackMixpanelEvent(
+      MixpanelEvents.paymentStep,
+      props: {
+        MixpanelProps.step: step,
+        MixpanelProps.stepName: _stepTitle(step),
+      },
+    );
+
+String _stepTitle(int step) {
+  switch (step) {
+    case 1:
+      return 'Select invoice(s) for payment';
+    case 2:
+      return 'Select credit (Optional)';
+    default:
+      return 'Select payment method';
   }
 }
