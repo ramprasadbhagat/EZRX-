@@ -55,10 +55,11 @@ class _PaymentSummaryFilterBottomSheet extends StatelessWidget {
                 ),
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const _PaymentSummaryAmountValueFromFilter(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.all(8),
                     child: Text(
                       '-',
                       style: Theme.of(context).textTheme.titleSmall,
