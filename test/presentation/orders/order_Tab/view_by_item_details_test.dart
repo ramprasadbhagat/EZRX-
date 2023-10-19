@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -45,6 +46,9 @@ class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class ViewByItemsBlocMock extends MockBloc<ViewByItemsEvent, ViewByItemsState>
     implements ViewByItemsBloc {}
 
+class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
+    implements ViewByOrderBloc {}
+
 class UserMockBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
@@ -78,6 +82,7 @@ void main() {
   final userBlocMock = UserMockBloc();
   late AuthBloc mockAuthBloc;
   late CustomerCodeBloc customerCodeBlocMock;
+  late ViewByOrderBloc viewByOrderBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
   late EligibilityBlocMock eligibilityBlocMock;
@@ -95,6 +100,7 @@ void main() {
   const fakeCreatedDate = '20230412';
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerFactory(() => viewByOrderBlocMock);
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());
     registerFallbackValue(ShipToInfo.empty());
@@ -113,6 +119,7 @@ void main() {
   group('Order History Details By Item Page', () {
     setUp(() {
       customerCodeBlocMock = CustomerCodeBlocMock();
+      viewByOrderBlocMock = ViewByOrderBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       productImageBlocMock = ProductImageBlocMock();
@@ -129,6 +136,8 @@ void main() {
 
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
+      when(() => viewByOrderBlocMock.state)
+          .thenReturn(ViewByOrderState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
       when(() => mockViewByItemDetailsBloc.state)
@@ -174,6 +183,9 @@ void main() {
           ),
           BlocProvider<CustomerCodeBloc>(
             create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<ViewByOrderBloc>(
+            create: (context) => viewByOrderBlocMock,
           ),
           BlocProvider<ViewByItemDetailsBloc>(
             create: (context) => mockViewByItemDetailsBloc,

@@ -76,7 +76,12 @@ class _SummarySearchBar extends StatelessWidget {
     required String searchKey,
     bool onClear = false,
   }) {
-    if (!onClear && searchKey.isEmpty) return;
+    //TODO: Will revisit this while enhancing the search implementation logic.
+    final previousSearchKey = isFromViewByOrder
+        ? context.read<ViewByOrderBloc>().state.searchKey
+        : context.read<ViewByItemsBloc>().state.searchKey;
+    if (!onClear && searchKey.isEmpty ||
+        searchKey == previousSearchKey.getOrDefaultValue('')) return;
     trackMixpanelEvent(
       MixpanelEvents.orderDetailSearched,
       props: {

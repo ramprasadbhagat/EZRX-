@@ -2404,7 +2404,7 @@ void setupLocator() {
           locator<AllCreditsAndInvoicesRepository>(),
     ),
   );
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => AllInvoicesBloc(
       allCreditsAndInvoicesRepository:
           locator<AllCreditsAndInvoicesRepository>(),
@@ -2729,7 +2729,7 @@ void setupLocator() {
       remoteDataSource: locator<ViewByOrderRemoteDataSource>(),
     ),
   );
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => ViewByOrderBloc(
       viewByOrderRepository: locator<ViewByOrderRepository>(),
       config: locator<Config>(),

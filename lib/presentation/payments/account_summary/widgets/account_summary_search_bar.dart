@@ -77,7 +77,12 @@ class _SummarySearchBar extends StatelessWidget {
     required String searchKey,
     bool onClear = false,
   }) {
-    if (!onClear && searchKey.isEmpty) return;
+    //TODO: Will revisit this while enhancing the search implementation logic.
+    final previousSearchKey = isInvoiceTabActive
+        ? context.read<AllInvoicesBloc>().state.appliedFilter.searchKey
+        : context.read<AllCreditsBloc>().state.appliedFilter.searchKey;
+    if (!onClear && searchKey.isEmpty ||
+        searchKey == previousSearchKey.getOrDefaultValue('')) return;
     isInvoiceTabActive
         ? context.read<AllInvoicesBloc>().add(
               AllInvoicesEvent.fetch(

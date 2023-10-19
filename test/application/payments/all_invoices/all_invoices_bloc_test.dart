@@ -131,7 +131,11 @@ void main() {
           ),
           AllInvoicesState.initial().copyWith(
             items: fakeResult,
-            failureOrSuccessOption: none(),
+            failureOrSuccessOption: optionOf(
+              Right(
+                fakeResult,
+              ),
+            ),
             canLoadMore: false,
           ),
         ],

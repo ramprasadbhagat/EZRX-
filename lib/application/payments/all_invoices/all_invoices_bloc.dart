@@ -32,8 +32,6 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
     );
     on<_Fetch>(
       (e, emit) async {
-        if (e.appliedFilter.searchKey == state.appliedFilter.searchKey &&
-            e.appliedFilter.searchKey.validateNotEmpty) return;
         if (!e.appliedFilter.searchKey.isValid()) return;
         emit(
           state.copyWith(
@@ -67,7 +65,7 @@ class AllInvoicesBloc extends Bloc<AllInvoicesEvent, AllInvoicesState> {
               state.copyWith(
                 items: responseData,
                 canLoadMore: responseData.length >= config.pageSize,
-                failureOrSuccessOption: none(),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
                 isLoading: false,
               ),
             );

@@ -4,7 +4,9 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_number_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/view_by_item_attachment_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/invoice_number_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,12 +34,8 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '${context.tr('Order')} #${orderHistoryItem.orderNumber.getOrDefaultValue('')}',
-                key: WidgetKeys.viewByItemsOrderDetailOrderCode,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.white,
-                    ),
+              OrderNumberSection(
+                orderHistoryItem: orderHistoryItem,
               ),
               const SizedBox(
                 height: 10,
@@ -54,19 +52,11 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                           color: ZPColors.white,
                         ),
               ),
-              BalanceTextRow(
-                key: WidgetKeys.viewByItemsOrderDetailInvoiceNumber,
-                keyText: context.tr('Invoice number'),
-                valueText: orderHistoryItem.invoiceData.invoiceNumber
+              InvoiceNumberSection(
+                invoiceNumber: orderHistoryItem.invoiceData.invoiceNumber
                     .getOrDefaultValue(''),
-                keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: ZPColors.white,
-                    ),
-                valueTextStyle:
-                    Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: ZPColors.white,
-                        ),
               ),
+
               BalanceTextRow(
                 key: WidgetKeys.viewByItemsOrderDetailPoReference,
                 keyText: context.tr('PO reference'),

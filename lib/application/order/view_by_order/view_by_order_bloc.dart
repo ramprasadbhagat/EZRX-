@@ -46,8 +46,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
     });
     on<_Fetch>(
       (e, emit) async {
-        if ((e.searchKey == state.searchKey && e.searchKey.validateNotEmpty) ||
-            !e.searchKey.isValid()) return;
+        if (!e.searchKey.isValid()) return;
 
         emit(
           state.copyWith(
@@ -86,7 +85,7 @@ class ViewByOrderBloc extends Bloc<ViewByOrderEvent, ViewByOrderState> {
           (viewByOrderList) => emit(
             state.copyWith(
               viewByOrderList: viewByOrderList,
-              failureOrSuccessOption: none(),
+              failureOrSuccessOption: optionOf(failureOrSuccess),
               appliedFilter: e.filter,
               isFetching: false,
             ),

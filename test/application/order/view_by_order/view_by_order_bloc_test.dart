@@ -108,6 +108,11 @@ void main() {
             appliedFilter: viewByOrdersFilter,
             searchKey: searchKey,
             viewByOrderList: viewByOrderMockData,
+            failureOrSuccessOption: optionOf(
+              Right(
+                viewByOrderMockData,
+              ),
+            ),
           ),
         ],
       );
