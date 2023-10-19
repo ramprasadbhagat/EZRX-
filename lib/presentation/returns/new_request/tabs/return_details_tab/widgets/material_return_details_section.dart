@@ -43,6 +43,7 @@ class _MaterialReturnDetailsSection extends StatelessWidget {
                 ),
                 ReturnCounterOfferField(
                   uuid: detail.uuid,
+                  enabled: true,
                 ),
                 const SizedBox(height: 8),
                 ReasonDropdown(

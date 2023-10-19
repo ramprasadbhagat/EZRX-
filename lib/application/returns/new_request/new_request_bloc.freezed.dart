@@ -25,6 +25,9 @@ mixin _$NewRequestEvent {
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
     required TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)
         toggleFiles,
@@ -42,6 +45,9 @@ mixin _$NewRequestEvent {
     TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -57,6 +63,9 @@ mixin _$NewRequestEvent {
     TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -73,6 +82,8 @@ mixin _$NewRequestEvent {
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
     required TResult Function(_ToggleFiles value) toggleFiles,
     required TResult Function(_ValidateStep value) validateStep,
     required TResult Function(_ReturnReferenceChanged value)
@@ -88,6 +99,8 @@ mixin _$NewRequestEvent {
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult? Function(_ToggleFiles value)? toggleFiles,
     TResult? Function(_ValidateStep value)? validateStep,
     TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -102,6 +115,8 @@ mixin _$NewRequestEvent {
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult Function(_ToggleFiles value)? toggleFiles,
     TResult Function(_ValidateStep value)? validateStep,
     TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -203,6 +218,9 @@ class _$_Initialized implements _Initialized {
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
     required TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)
         toggleFiles,
@@ -223,6 +241,9 @@ class _$_Initialized implements _Initialized {
     TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -241,6 +262,9 @@ class _$_Initialized implements _Initialized {
     TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -263,6 +287,8 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
     required TResult Function(_ToggleFiles value) toggleFiles,
     required TResult Function(_ValidateStep value) validateStep,
     required TResult Function(_ReturnReferenceChanged value)
@@ -281,6 +307,8 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult? Function(_ToggleFiles value)? toggleFiles,
     TResult? Function(_ValidateStep value)? validateStep,
     TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -298,6 +326,8 @@ class _$_Initialized implements _Initialized {
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult Function(_ToggleFiles value)? toggleFiles,
     TResult Function(_ValidateStep value)? validateStep,
     TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -413,6 +443,9 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
     required TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)
         toggleFiles,
@@ -433,6 +466,9 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -451,6 +487,9 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -473,6 +512,8 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
     required TResult Function(_ToggleFiles value) toggleFiles,
     required TResult Function(_ValidateStep value) validateStep,
     required TResult Function(_ReturnReferenceChanged value)
@@ -491,6 +532,8 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult? Function(_ToggleFiles value)? toggleFiles,
     TResult? Function(_ValidateStep value)? validateStep,
     TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -508,6 +551,8 @@ class _$_ToggleReturnItem implements _ToggleReturnItem {
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult Function(_ToggleFiles value)? toggleFiles,
     TResult Function(_ValidateStep value)? validateStep,
     TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -625,6 +670,9 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
     required TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)
         toggleFiles,
@@ -645,6 +693,9 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -663,6 +714,9 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -685,6 +739,8 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
     required TResult Function(_ToggleFiles value) toggleFiles,
     required TResult Function(_ValidateStep value) validateStep,
     required TResult Function(_ReturnReferenceChanged value)
@@ -703,6 +759,8 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult? Function(_ToggleFiles value)? toggleFiles,
     TResult? Function(_ValidateStep value)? validateStep,
     TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -720,6 +778,8 @@ class _$_ToggleBonusItem implements _ToggleBonusItem {
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult Function(_ToggleFiles value)? toggleFiles,
     TResult Function(_ValidateStep value)? validateStep,
     TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -830,6 +890,9 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
     required TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)
         toggleFiles,
@@ -850,6 +913,9 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
     TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -868,6 +934,9 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
     TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -890,6 +959,8 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
     required TResult Function(_ToggleFiles value) toggleFiles,
     required TResult Function(_ValidateStep value) validateStep,
     required TResult Function(_ReturnReferenceChanged value)
@@ -908,6 +979,8 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult? Function(_ToggleFiles value)? toggleFiles,
     TResult? Function(_ValidateStep value)? validateStep,
     TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -925,6 +998,8 @@ class _$_AdditionInfoChanged implements _AdditionInfoChanged {
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult Function(_ToggleFiles value)? toggleFiles,
     TResult Function(_ValidateStep value)? validateStep,
     TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -948,6 +1023,250 @@ abstract class _AdditionInfoChanged implements NewRequestEvent {
   @JsonKey(ignore: true)
   _$$_AdditionInfoChangedCopyWith<_$_AdditionInfoChanged> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateRequestCounterOfferCopyWith<$Res> {
+  factory _$$_UpdateRequestCounterOfferCopyWith(
+          _$_UpdateRequestCounterOffer value,
+          $Res Function(_$_UpdateRequestCounterOffer) then) =
+      __$$_UpdateRequestCounterOfferCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {CounterOfferValue counterOfferValue,
+      String uuid,
+      bool isChangeMaterialCounterOffer});
+}
+
+/// @nodoc
+class __$$_UpdateRequestCounterOfferCopyWithImpl<$Res>
+    extends _$NewRequestEventCopyWithImpl<$Res, _$_UpdateRequestCounterOffer>
+    implements _$$_UpdateRequestCounterOfferCopyWith<$Res> {
+  __$$_UpdateRequestCounterOfferCopyWithImpl(
+      _$_UpdateRequestCounterOffer _value,
+      $Res Function(_$_UpdateRequestCounterOffer) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? counterOfferValue = null,
+    Object? uuid = null,
+    Object? isChangeMaterialCounterOffer = null,
+  }) {
+    return _then(_$_UpdateRequestCounterOffer(
+      counterOfferValue: null == counterOfferValue
+          ? _value.counterOfferValue
+          : counterOfferValue // ignore: cast_nullable_to_non_nullable
+              as CounterOfferValue,
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      isChangeMaterialCounterOffer: null == isChangeMaterialCounterOffer
+          ? _value.isChangeMaterialCounterOffer
+          : isChangeMaterialCounterOffer // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateRequestCounterOffer implements _UpdateRequestCounterOffer {
+  const _$_UpdateRequestCounterOffer(
+      {required this.counterOfferValue,
+      required this.uuid,
+      required this.isChangeMaterialCounterOffer});
+
+  @override
+  final CounterOfferValue counterOfferValue;
+  @override
+  final String uuid;
+  @override
+  final bool isChangeMaterialCounterOffer;
+
+  @override
+  String toString() {
+    return 'NewRequestEvent.updateRequestCounterOffer(counterOfferValue: $counterOfferValue, uuid: $uuid, isChangeMaterialCounterOffer: $isChangeMaterialCounterOffer)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateRequestCounterOffer &&
+            (identical(other.counterOfferValue, counterOfferValue) ||
+                other.counterOfferValue == counterOfferValue) &&
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.isChangeMaterialCounterOffer,
+                    isChangeMaterialCounterOffer) ||
+                other.isChangeMaterialCounterOffer ==
+                    isChangeMaterialCounterOffer));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, counterOfferValue, uuid, isChangeMaterialCounterOffer);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateRequestCounterOfferCopyWith<_$_UpdateRequestCounterOffer>
+      get copyWith => __$$_UpdateRequestCounterOfferCopyWithImpl<
+          _$_UpdateRequestCounterOffer>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrg salesOrg) initialized,
+    required TResult Function(ReturnMaterial item, bool selected)
+        toggleReturnItem,
+    required TResult Function(ReturnMaterial item, bool included)
+        toggleBonusItem,
+    required TResult Function(ReturnItemDetails additionInfo)
+        additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
+    required TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)
+        toggleFiles,
+    required TResult Function(int step) validateStep,
+    required TResult Function(String returnReference) returnReferenceChanged,
+    required TResult Function(String specialInstructions)
+        specialInstructionsChanged,
+    required TResult Function(CustomerCodeInfo customerCodeInfo, User user)
+        submit,
+  }) {
+    return updateRequestCounterOffer(
+        counterOfferValue, uuid, isChangeMaterialCounterOffer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrg salesOrg)? initialized,
+    TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
+    TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
+    TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
+    TResult? Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult? Function(int step)? validateStep,
+    TResult? Function(String returnReference)? returnReferenceChanged,
+    TResult? Function(String specialInstructions)? specialInstructionsChanged,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+  }) {
+    return updateRequestCounterOffer?.call(
+        counterOfferValue, uuid, isChangeMaterialCounterOffer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrg salesOrg)? initialized,
+    TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
+    TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
+    TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
+    TResult Function(
+            String uuid, List<ReturnRequestAttachment> files, bool included)?
+        toggleFiles,
+    TResult Function(int step)? validateStep,
+    TResult Function(String returnReference)? returnReferenceChanged,
+    TResult Function(String specialInstructions)? specialInstructionsChanged,
+    TResult Function(CustomerCodeInfo customerCodeInfo, User user)? submit,
+    required TResult orElse(),
+  }) {
+    if (updateRequestCounterOffer != null) {
+      return updateRequestCounterOffer(
+          counterOfferValue, uuid, isChangeMaterialCounterOffer);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_ToggleReturnItem value) toggleReturnItem,
+    required TResult Function(_ToggleBonusItem value) toggleBonusItem,
+    required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
+    required TResult Function(_ToggleFiles value) toggleFiles,
+    required TResult Function(_ValidateStep value) validateStep,
+    required TResult Function(_ReturnReferenceChanged value)
+        returnReferenceChanged,
+    required TResult Function(_SpecialInstructionsChanged value)
+        specialInstructionsChanged,
+    required TResult Function(_Submit value) submit,
+  }) {
+    return updateRequestCounterOffer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
+    TResult? Function(_ToggleFiles value)? toggleFiles,
+    TResult? Function(_ValidateStep value)? validateStep,
+    TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
+    TResult? Function(_SpecialInstructionsChanged value)?
+        specialInstructionsChanged,
+    TResult? Function(_Submit value)? submit,
+  }) {
+    return updateRequestCounterOffer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_ToggleReturnItem value)? toggleReturnItem,
+    TResult Function(_ToggleBonusItem value)? toggleBonusItem,
+    TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
+    TResult Function(_ToggleFiles value)? toggleFiles,
+    TResult Function(_ValidateStep value)? validateStep,
+    TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
+    TResult Function(_SpecialInstructionsChanged value)?
+        specialInstructionsChanged,
+    TResult Function(_Submit value)? submit,
+    required TResult orElse(),
+  }) {
+    if (updateRequestCounterOffer != null) {
+      return updateRequestCounterOffer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateRequestCounterOffer implements NewRequestEvent {
+  const factory _UpdateRequestCounterOffer(
+          {required final CounterOfferValue counterOfferValue,
+          required final String uuid,
+          required final bool isChangeMaterialCounterOffer}) =
+      _$_UpdateRequestCounterOffer;
+
+  CounterOfferValue get counterOfferValue;
+  String get uuid;
+  bool get isChangeMaterialCounterOffer;
+  @JsonKey(ignore: true)
+  _$$_UpdateRequestCounterOfferCopyWith<_$_UpdateRequestCounterOffer>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1049,6 +1368,9 @@ class _$_ToggleFiles implements _ToggleFiles {
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
     required TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)
         toggleFiles,
@@ -1069,6 +1391,9 @@ class _$_ToggleFiles implements _ToggleFiles {
     TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -1087,6 +1412,9 @@ class _$_ToggleFiles implements _ToggleFiles {
     TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -1109,6 +1437,8 @@ class _$_ToggleFiles implements _ToggleFiles {
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
     required TResult Function(_ToggleFiles value) toggleFiles,
     required TResult Function(_ValidateStep value) validateStep,
     required TResult Function(_ReturnReferenceChanged value)
@@ -1127,6 +1457,8 @@ class _$_ToggleFiles implements _ToggleFiles {
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult? Function(_ToggleFiles value)? toggleFiles,
     TResult? Function(_ValidateStep value)? validateStep,
     TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -1144,6 +1476,8 @@ class _$_ToggleFiles implements _ToggleFiles {
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult Function(_ToggleFiles value)? toggleFiles,
     TResult Function(_ValidateStep value)? validateStep,
     TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -1244,6 +1578,9 @@ class _$_ValidateStep implements _ValidateStep {
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
     required TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)
         toggleFiles,
@@ -1264,6 +1601,9 @@ class _$_ValidateStep implements _ValidateStep {
     TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -1282,6 +1622,9 @@ class _$_ValidateStep implements _ValidateStep {
     TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -1304,6 +1647,8 @@ class _$_ValidateStep implements _ValidateStep {
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
     required TResult Function(_ToggleFiles value) toggleFiles,
     required TResult Function(_ValidateStep value) validateStep,
     required TResult Function(_ReturnReferenceChanged value)
@@ -1322,6 +1667,8 @@ class _$_ValidateStep implements _ValidateStep {
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult? Function(_ToggleFiles value)? toggleFiles,
     TResult? Function(_ValidateStep value)? validateStep,
     TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -1339,6 +1686,8 @@ class _$_ValidateStep implements _ValidateStep {
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult Function(_ToggleFiles value)? toggleFiles,
     TResult Function(_ValidateStep value)? validateStep,
     TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -1436,6 +1785,9 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
     required TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)
         toggleFiles,
@@ -1456,6 +1808,9 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
     TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -1474,6 +1829,9 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
     TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -1496,6 +1854,8 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
     required TResult Function(_ToggleFiles value) toggleFiles,
     required TResult Function(_ValidateStep value) validateStep,
     required TResult Function(_ReturnReferenceChanged value)
@@ -1514,6 +1874,8 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult? Function(_ToggleFiles value)? toggleFiles,
     TResult? Function(_ValidateStep value)? validateStep,
     TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -1531,6 +1893,8 @@ class _$_ReturnReferenceChanged implements _ReturnReferenceChanged {
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult Function(_ToggleFiles value)? toggleFiles,
     TResult Function(_ValidateStep value)? validateStep,
     TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -1631,6 +1995,9 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
     required TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)
         toggleFiles,
@@ -1651,6 +2018,9 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
     TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -1669,6 +2039,9 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
     TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -1691,6 +2064,8 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
     required TResult Function(_ToggleFiles value) toggleFiles,
     required TResult Function(_ValidateStep value) validateStep,
     required TResult Function(_ReturnReferenceChanged value)
@@ -1709,6 +2084,8 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult? Function(_ToggleFiles value)? toggleFiles,
     TResult? Function(_ValidateStep value)? validateStep,
     TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -1726,6 +2103,8 @@ class _$_SpecialInstructionsChanged implements _SpecialInstructionsChanged {
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult Function(_ToggleFiles value)? toggleFiles,
     TResult Function(_ValidateStep value)? validateStep,
     TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -1848,6 +2227,9 @@ class _$_Submit implements _Submit {
         toggleBonusItem,
     required TResult Function(ReturnItemDetails additionInfo)
         additionInfoChanged,
+    required TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)
+        updateRequestCounterOffer,
     required TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)
         toggleFiles,
@@ -1868,6 +2250,9 @@ class _$_Submit implements _Submit {
     TResult? Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult? Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult? Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult? Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult? Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -1886,6 +2271,9 @@ class _$_Submit implements _Submit {
     TResult Function(ReturnMaterial item, bool selected)? toggleReturnItem,
     TResult Function(ReturnMaterial item, bool included)? toggleBonusItem,
     TResult Function(ReturnItemDetails additionInfo)? additionInfoChanged,
+    TResult Function(CounterOfferValue counterOfferValue, String uuid,
+            bool isChangeMaterialCounterOffer)?
+        updateRequestCounterOffer,
     TResult Function(
             String uuid, List<ReturnRequestAttachment> files, bool included)?
         toggleFiles,
@@ -1908,6 +2296,8 @@ class _$_Submit implements _Submit {
     required TResult Function(_ToggleReturnItem value) toggleReturnItem,
     required TResult Function(_ToggleBonusItem value) toggleBonusItem,
     required TResult Function(_AdditionInfoChanged value) additionInfoChanged,
+    required TResult Function(_UpdateRequestCounterOffer value)
+        updateRequestCounterOffer,
     required TResult Function(_ToggleFiles value) toggleFiles,
     required TResult Function(_ValidateStep value) validateStep,
     required TResult Function(_ReturnReferenceChanged value)
@@ -1926,6 +2316,8 @@ class _$_Submit implements _Submit {
     TResult? Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult? Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult? Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult? Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult? Function(_ToggleFiles value)? toggleFiles,
     TResult? Function(_ValidateStep value)? validateStep,
     TResult? Function(_ReturnReferenceChanged value)? returnReferenceChanged,
@@ -1943,6 +2335,8 @@ class _$_Submit implements _Submit {
     TResult Function(_ToggleReturnItem value)? toggleReturnItem,
     TResult Function(_ToggleBonusItem value)? toggleBonusItem,
     TResult Function(_AdditionInfoChanged value)? additionInfoChanged,
+    TResult Function(_UpdateRequestCounterOffer value)?
+        updateRequestCounterOffer,
     TResult Function(_ToggleFiles value)? toggleFiles,
     TResult Function(_ValidateStep value)? validateStep,
     TResult Function(_ReturnReferenceChanged value)? returnReferenceChanged,

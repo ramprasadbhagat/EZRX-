@@ -41,6 +41,13 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
+                ReturnCounterOfferField(
+                  uuid: detail.uuid,
+                  enabled: false,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
                 ReasonDropdown(
                   uuid: detail.uuid,
                 ),

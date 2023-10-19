@@ -20,6 +20,12 @@ class NewRequestEvent with _$NewRequestEvent {
     required ReturnItemDetails additionInfo,
   }) = _AdditionInfoChanged;
 
+  const factory NewRequestEvent.updateRequestCounterOffer({
+    required CounterOfferValue counterOfferValue,
+    required String uuid,
+    required bool isChangeMaterialCounterOffer,
+  }) = _UpdateRequestCounterOffer;
+
   const factory NewRequestEvent.toggleFiles({
     required String uuid,
     required List<ReturnRequestAttachment> files,

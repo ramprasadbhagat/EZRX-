@@ -843,6 +843,10 @@ class WidgetKeys {
   static Key returnReasonDropdown(String uuid) => Key('reasonDropdown$uuid');
   static Key returnQuantityField(String uuid) =>
       Key('returnQuantityField$uuid');
+  static Key requestCounterOfferTextField(String value) =>
+      Key('requestCounterOfferTextField_$value');
+  static Key requestCounterOfferText(String value) =>
+      Key('requestCounterOfferText_$value');
   static Key returnValueField(String uuid) => Key('returnValueField$uuid');
   static const Key returnReferenceField = Key('returnReferenceField');
   static Key returnActivateBonusButton(String uuid) =>

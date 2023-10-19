@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
@@ -80,7 +81,13 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
 
             e.included
                 ? returnItemDetailsList.add(
-                    e.item.validatedItemDetails,
+                    e.item.validatedItemDetails.copyWith(
+                      priceOverride:
+                          invoiceDetail.returnItemDetailsList.isNotEmpty
+                              ? invoiceDetail
+                                  .returnItemDetailsList.first.priceOverride
+                              : CounterOfferValue(''),
+                    ),
                   )
                 : returnItemDetailsList.removeWhere(
                     (element) => element.itemNumber == e.item.itemNumber,
@@ -111,6 +118,45 @@ class NewRequestBloc extends Bloc<NewRequestEvent, NewRequestState> {
         }).toList();
 
         emit(state.copyWith(invoiceDetails: invoiceDetails));
+      },
+      updateRequestCounterOffer: (_UpdateRequestCounterOffer e) {
+        if (e.isChangeMaterialCounterOffer) {
+          final invoiceDetails = state.invoiceDetails.map((invoiceDetail) {
+            final containTheUUID = invoiceDetail.returnItemDetailsList.any(
+              (returnItemDetail) => e.uuid == returnItemDetail.uuid,
+            );
+            if (containTheUUID) {
+              final detailsList = invoiceDetail.returnItemDetailsList
+                  .map(
+                    (returnItemDetail) => returnItemDetail.copyWith(
+                      priceOverride: e.counterOfferValue,
+                    ),
+                  )
+                  .toList();
+
+              return invoiceDetail.copyWith(returnItemDetailsList: detailsList);
+            }
+
+            return invoiceDetail;
+          }).toList();
+          emit(state.copyWith(invoiceDetails: invoiceDetails));
+        } else {
+          final invoiceDetails = state.invoiceDetails.map((invoiceDetail) {
+            final detailsList = invoiceDetail.returnItemDetailsList
+                .map(
+                  (returnItemDetail) => e.uuid == returnItemDetail.uuid
+                      ? returnItemDetail.copyWith(
+                          priceOverride: e.counterOfferValue,
+                        )
+                      : returnItemDetail,
+                )
+                .toList();
+
+            return invoiceDetail.copyWith(returnItemDetailsList: detailsList);
+          }).toList();
+
+          emit(state.copyWith(invoiceDetails: invoiceDetails));
+        }
       },
       toggleFiles: (_ToggleFiles e) {
         var invoiceDetails = [...state.invoiceDetails];
