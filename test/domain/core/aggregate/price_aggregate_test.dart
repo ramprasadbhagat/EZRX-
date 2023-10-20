@@ -11,9 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
@@ -108,31 +106,6 @@ void main() {
       expect(priceAggregate.tenderContract, emptyTenderContract);
     });
 
-    test(
-      'toOrderTemplateMaterial from PriceAggregate',
-      () {
-        expect(
-          emptyPriceAggregate.toOrderTemplateMaterial(),
-          OrderTemplateMaterial(
-            materialNumber: emptyPriceAggregate.getMaterialNumber,
-            materialGroup4: emptyPriceAggregate.materialInfo.materialGroup4,
-            qty: emptyPriceAggregate.quantity,
-            principalName: emptyPriceAggregate
-                .materialInfo.principalData.principalName
-                .getOrDefaultValue(''),
-            materialDescription:
-                emptyPriceAggregate.materialInfo.materialDescription,
-            hidePrice: emptyPriceAggregate.materialInfo.hidePrice,
-            hasValidTenderContract:
-                emptyPriceAggregate.materialInfo.hasValidTenderContract,
-            taxClassification:
-                emptyPriceAggregate.materialInfo.taxClassification,
-            type: '',
-          ),
-        );
-      },
-    );
-
     test('toSubmitMaterialInfo from PriceAggregate', () {
       final submitMaterialInfo = emptyPriceAggregate.toSubmitMaterialInfo();
 
@@ -173,51 +146,6 @@ void main() {
             .toDomain(),
       );
     });
-
-    test(
-      'toSavedOrderMaterial from PriceAggregate',
-      () {
-        final expectedResult = MaterialItem(
-          banner: emptyPriceAggregate.banner,
-          materialNumber: emptyPriceAggregate.materialInfo.materialNumber,
-          qty: emptyPriceAggregate.quantity,
-          defaultMaterialDescription:
-              emptyPriceAggregate.materialInfo.materialDescription,
-          type: MaterialItemType('Comm'),
-          itemRegistrationNumber:
-              emptyPriceAggregate.materialInfo.itemRegistrationNumber,
-          unitOfMeasurement: emptyPriceAggregate.materialInfo.unitOfMeasurement
-              .getOrDefaultValue(''),
-          bonuses: emptyPriceAggregate.addedBonusList
-              .where((element) => element.additionalBonusFlag)
-              .toList(),
-          zdp8Override: emptyPriceAggregate.price.zdp8Override,
-          overridenPrice: emptyPriceAggregate.price.priceOverride,
-          hidePrice: emptyPriceAggregate.materialInfo.hidePrice,
-          materialGroup2: emptyPriceAggregate.materialInfo.materialGroup2,
-          materialGroup4: emptyPriceAggregate.materialInfo.materialGroup4,
-          tenderContract: emptyPriceAggregate.tenderContract,
-          bundleName: '',
-          bundleCode: '',
-          materials: <MaterialInfo>[],
-          comment: '',
-          batchNumber: '',
-          materialDescription: '',
-          remarks: '',
-          bundleInformation: [],
-          totalQuantity: 0,
-          hasValidTenderContract: emptyPriceAggregate.tenderContract !=
-                  TenderContract.empty() &&
-              emptyPriceAggregate.tenderContract != TenderContract.noContract(),
-          tenderOrderReason:
-              emptyPriceAggregate.tenderContract.tenderOrderReason,
-        );
-        expect(
-          emptyPriceAggregate.toSavedOrderMaterial(),
-          expectedResult,
-        );
-      },
-    );
 
     test(
       'vatCalculation from PriceAggregate',

@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
-import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,11 +13,7 @@ part 'additional_details_state.dart';
 
 class AdditionalDetailsBloc
     extends Bloc<AdditionalDetailsEvent, AdditionalDetailsState> {
-  final IOrderRepository savedOrderRepository;
-
-  AdditionalDetailsBloc({
-    required this.savedOrderRepository,
-  }) : super(AdditionalDetailsState.initial()) {
+  AdditionalDetailsBloc() : super(AdditionalDetailsState.initial()) {
     on<AdditionalDetailsEvent>(_onEvent);
   }
 
@@ -77,45 +72,6 @@ class AdditionalDetailsBloc
           ),
         );
       },
-      initFromSavedOrder: (value) async {
-        emit(
-          AdditionalDetailsState.initial().copyWith(
-            isLoading: true,
-            orderId: value.orderId,
-          ),
-        );
-
-        final failureOrSuccess = await savedOrderRepository.getSavedOrderDetail(
-          orderId: value.orderId,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                deliveryInfoData: DeliveryInfoData.empty().copyWith(
-                  mobileNumber: MobileNumber(
-                    value.customerCodeInfo.telephoneNumber
-                        .displayTelephoneNumber,
-                  ),
-                ),
-                isLoading: false,
-              ),
-            );
-          },
-          (orderDetail) {
-            emit(
-              state.copyWith(
-                deliveryInfoData: DeliveryInfoData.fromSavedOrder(
-                  orderDetail: orderDetail,
-                  customerCodeInfo: value.customerCodeInfo,
-                ),
-                isLoading: false,
-              ),
-            );
-          },
-        );
-      },
       initiateFromHistory: (value) {
         emit(
           AdditionalDetailsState.initial().copyWith(
@@ -125,11 +81,6 @@ class AdditionalDetailsBloc
               ),
             ),
           ),
-        );
-      },
-      clearSavedOrderId: (e) {
-        emit(
-          state.copyWith(orderId: ''),
         );
       },
     );

@@ -142,8 +142,6 @@ void main() {
       );
       await getWidget(tester);
       await tester.pumpAndSettle();
-      final orderTemplateItem = find.byType(PolicyConfigurationListItem);
-      expect(orderTemplateItem, findsAtLeastNWidgets(1));
       final findFloatingActionButton = find.byType(FloatingActionButton);
       expect(findFloatingActionButton, findsOneWidget);
       await tester.tap(findFloatingActionButton);

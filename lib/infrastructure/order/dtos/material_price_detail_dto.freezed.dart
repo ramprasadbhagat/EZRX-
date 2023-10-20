@@ -39,10 +39,9 @@ abstract class $MaterialPriceDetailDtoCopyWith<$Res> {
       _$MaterialPriceDetailDtoCopyWithImpl<$Res, MaterialPriceDetailDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'price')
-          PriceDto price,
+      {@JsonKey(name: 'price') PriceDto price,
       @JsonKey(name: 'validMaterial', defaultValue: false)
-          bool isValidMaterial});
+      bool isValidMaterial});
 
   $PriceDtoCopyWith<$Res> get price;
 }
@@ -94,10 +93,9 @@ abstract class _$$_MaterialPriceDetailDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'price')
-          PriceDto price,
+      {@JsonKey(name: 'price') PriceDto price,
       @JsonKey(name: 'validMaterial', defaultValue: false)
-          bool isValidMaterial});
+      bool isValidMaterial});
 
   @override
   $PriceDtoCopyWith<$Res> get price;
@@ -135,10 +133,9 @@ class __$$_MaterialPriceDetailDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MaterialPriceDetailDto extends _MaterialPriceDetailDto {
   const _$_MaterialPriceDetailDto(
-      {@JsonKey(name: 'price')
-          required this.price,
+      {@JsonKey(name: 'price') required this.price,
       @JsonKey(name: 'validMaterial', defaultValue: false)
-          required this.isValidMaterial})
+      required this.isValidMaterial})
       : super._();
 
   factory _$_MaterialPriceDetailDto.fromJson(Map<String, dynamic> json) =>
@@ -187,10 +184,9 @@ class _$_MaterialPriceDetailDto extends _MaterialPriceDetailDto {
 
 abstract class _MaterialPriceDetailDto extends MaterialPriceDetailDto {
   const factory _MaterialPriceDetailDto(
-      {@JsonKey(name: 'price')
-          required final PriceDto price,
+      {@JsonKey(name: 'price') required final PriceDto price,
       @JsonKey(name: 'validMaterial', defaultValue: false)
-          required final bool isValidMaterial}) = _$_MaterialPriceDetailDto;
+      required final bool isValidMaterial}) = _$_MaterialPriceDetailDto;
   const _MaterialPriceDetailDto._() : super._();
 
   factory _MaterialPriceDetailDto.fromJson(Map<String, dynamic> json) =

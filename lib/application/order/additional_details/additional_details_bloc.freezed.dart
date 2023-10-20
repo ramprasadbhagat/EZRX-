@@ -21,9 +21,6 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -31,7 +28,6 @@ mixin _$AdditionalDetailsEvent {
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
@@ -42,16 +38,12 @@ mixin _$AdditionalDetailsEvent {
     TResult? Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) =>
@@ -61,16 +53,12 @@ mixin _$AdditionalDetailsEvent {
     TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
     required TResult orElse(),
@@ -79,7 +67,6 @@ mixin _$AdditionalDetailsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -92,8 +79,6 @@ mixin _$AdditionalDetailsEvent {
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) =>
@@ -101,7 +86,6 @@ mixin _$AdditionalDetailsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -111,8 +95,6 @@ mixin _$AdditionalDetailsEvent {
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) =>
@@ -120,7 +102,6 @@ mixin _$AdditionalDetailsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -130,8 +111,6 @@ mixin _$AdditionalDetailsEvent {
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -254,9 +233,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -264,7 +240,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
@@ -278,16 +253,12 @@ class _$_Initialized implements _Initialized {
     TResult? Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) {
@@ -300,16 +271,12 @@ class _$_Initialized implements _Initialized {
     TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
     required TResult orElse(),
@@ -324,7 +291,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -337,8 +303,6 @@ class _$_Initialized implements _Initialized {
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -349,7 +313,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -359,8 +322,6 @@ class _$_Initialized implements _Initialized {
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -371,7 +332,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -381,8 +341,6 @@ class _$_Initialized implements _Initialized {
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -403,271 +361,6 @@ abstract class _Initialized implements AdditionalDetailsEvent {
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
   _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_InitFromSavedOrderCopyWith<$Res> {
-  factory _$$_InitFromSavedOrderCopyWith(_$_InitFromSavedOrder value,
-          $Res Function(_$_InitFromSavedOrder) then) =
-      __$$_InitFromSavedOrderCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisationConfigs config,
-      CustomerCodeInfo customerCodeInfo,
-      String orderId});
-
-  $SalesOrganisationConfigsCopyWith<$Res> get config;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-}
-
-/// @nodoc
-class __$$_InitFromSavedOrderCopyWithImpl<$Res>
-    extends _$AdditionalDetailsEventCopyWithImpl<$Res, _$_InitFromSavedOrder>
-    implements _$$_InitFromSavedOrderCopyWith<$Res> {
-  __$$_InitFromSavedOrderCopyWithImpl(
-      _$_InitFromSavedOrder _value, $Res Function(_$_InitFromSavedOrder) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? config = null,
-    Object? customerCodeInfo = null,
-    Object? orderId = null,
-  }) {
-    return _then(_$_InitFromSavedOrder(
-      config: null == config
-          ? _value.config
-          : config // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
-      orderId: null == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get config {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.config, (value) {
-      return _then(_value.copyWith(config: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_InitFromSavedOrder implements _InitFromSavedOrder {
-  const _$_InitFromSavedOrder(
-      {required this.config,
-      required this.customerCodeInfo,
-      required this.orderId});
-
-  @override
-  final SalesOrganisationConfigs config;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
-  @override
-  final String orderId;
-
-  @override
-  String toString() {
-    return 'AdditionalDetailsEvent.initFromSavedOrder(config: $config, customerCodeInfo: $customerCodeInfo, orderId: $orderId)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_InitFromSavedOrder &&
-            (identical(other.config, config) || other.config == config) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
-            (identical(other.orderId, orderId) || other.orderId == orderId));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, config, customerCodeInfo, orderId);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_InitFromSavedOrderCopyWith<_$_InitFromSavedOrder> get copyWith =>
-      __$$_InitFromSavedOrderCopyWithImpl<_$_InitFromSavedOrder>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
-        initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
-    required TResult Function(DeliveryInfoLabel label, String newValue)
-        onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
-    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
-    required TResult Function(PoDocuments poDocument) removePoDocument,
-    required TResult Function() removeAllPoDocument,
-    required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
-    required TResult Function(
-            DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
-        initiateFromHistory,
-  }) {
-    return initFromSavedOrder(config, customerCodeInfo, orderId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
-        initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
-    TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
-    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
-    TResult? Function(PoDocuments poDocument)? removePoDocument,
-    TResult? Function()? removeAllPoDocument,
-    TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
-    TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
-        initiateFromHistory,
-  }) {
-    return initFromSavedOrder?.call(config, customerCodeInfo, orderId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
-        initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
-    TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
-    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
-    TResult Function(PoDocuments poDocument)? removePoDocument,
-    TResult Function()? removeAllPoDocument,
-    TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
-    TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
-        initiateFromHistory,
-    required TResult orElse(),
-  }) {
-    if (initFromSavedOrder != null) {
-      return initFromSavedOrder(config, customerCodeInfo, orderId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
-    required TResult Function(_AdditionalDetailsTextOnChange value)
-        onTextChange,
-    required TResult Function(_AdditionalDetailsValidateForm value)
-        validateForm,
-    required TResult Function(_AdditionalDetailsAddPoDocument value)
-        addPoDocument,
-    required TResult Function(_AdditionalDetailsRemovePoDocument value)
-        removePoDocument,
-    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
-        removeAllPoDocument,
-    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
-        toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
-    required TResult Function(_AdditionalDetailsInitiateFromHistory value)
-        initiateFromHistory,
-  }) {
-    return initFromSavedOrder(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
-    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
-    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
-    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
-        removePoDocument,
-    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
-        removeAllPoDocument,
-    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
-        toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
-    TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
-        initiateFromHistory,
-  }) {
-    return initFromSavedOrder?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
-    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
-    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
-    TResult Function(_AdditionalDetailsRemovePoDocument value)?
-        removePoDocument,
-    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
-        removeAllPoDocument,
-    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
-        toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
-    TResult Function(_AdditionalDetailsInitiateFromHistory value)?
-        initiateFromHistory,
-    required TResult orElse(),
-  }) {
-    if (initFromSavedOrder != null) {
-      return initFromSavedOrder(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _InitFromSavedOrder implements AdditionalDetailsEvent {
-  const factory _InitFromSavedOrder(
-      {required final SalesOrganisationConfigs config,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final String orderId}) = _$_InitFromSavedOrder;
-
-  SalesOrganisationConfigs get config;
-  CustomerCodeInfo get customerCodeInfo;
-  String get orderId;
-  @JsonKey(ignore: true)
-  _$$_InitFromSavedOrderCopyWith<_$_InitFromSavedOrder> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -753,9 +446,6 @@ class _$_AdditionalDetailsTextOnChange
     required TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -763,7 +453,6 @@ class _$_AdditionalDetailsTextOnChange
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
@@ -777,16 +466,12 @@ class _$_AdditionalDetailsTextOnChange
     TResult? Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) {
@@ -799,16 +484,12 @@ class _$_AdditionalDetailsTextOnChange
     TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
     required TResult orElse(),
@@ -823,7 +504,6 @@ class _$_AdditionalDetailsTextOnChange
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -836,8 +516,6 @@ class _$_AdditionalDetailsTextOnChange
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -848,7 +526,6 @@ class _$_AdditionalDetailsTextOnChange
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -858,8 +535,6 @@ class _$_AdditionalDetailsTextOnChange
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -870,7 +545,6 @@ class _$_AdditionalDetailsTextOnChange
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -880,8 +554,6 @@ class _$_AdditionalDetailsTextOnChange
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -988,9 +660,6 @@ class _$_AdditionalDetailsValidateForm
     required TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -998,7 +667,6 @@ class _$_AdditionalDetailsValidateForm
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
@@ -1012,16 +680,12 @@ class _$_AdditionalDetailsValidateForm
     TResult? Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) {
@@ -1034,16 +698,12 @@ class _$_AdditionalDetailsValidateForm
     TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1058,7 +718,6 @@ class _$_AdditionalDetailsValidateForm
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -1071,8 +730,6 @@ class _$_AdditionalDetailsValidateForm
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -1083,7 +740,6 @@ class _$_AdditionalDetailsValidateForm
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1093,8 +749,6 @@ class _$_AdditionalDetailsValidateForm
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -1105,7 +759,6 @@ class _$_AdditionalDetailsValidateForm
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1115,8 +768,6 @@ class _$_AdditionalDetailsValidateForm
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1221,9 +872,6 @@ class _$_AdditionalDetailsAddPoDocument
     required TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -1231,7 +879,6 @@ class _$_AdditionalDetailsAddPoDocument
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
@@ -1245,16 +892,12 @@ class _$_AdditionalDetailsAddPoDocument
     TResult? Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) {
@@ -1267,16 +910,12 @@ class _$_AdditionalDetailsAddPoDocument
     TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1291,7 +930,6 @@ class _$_AdditionalDetailsAddPoDocument
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -1304,8 +942,6 @@ class _$_AdditionalDetailsAddPoDocument
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -1316,7 +952,6 @@ class _$_AdditionalDetailsAddPoDocument
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1326,8 +961,6 @@ class _$_AdditionalDetailsAddPoDocument
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -1338,7 +971,6 @@ class _$_AdditionalDetailsAddPoDocument
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1348,8 +980,6 @@ class _$_AdditionalDetailsAddPoDocument
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1457,9 +1087,6 @@ class _$_AdditionalDetailsRemovePoDocument
     required TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -1467,7 +1094,6 @@ class _$_AdditionalDetailsRemovePoDocument
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
@@ -1481,16 +1107,12 @@ class _$_AdditionalDetailsRemovePoDocument
     TResult? Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) {
@@ -1503,16 +1125,12 @@ class _$_AdditionalDetailsRemovePoDocument
     TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1527,7 +1145,6 @@ class _$_AdditionalDetailsRemovePoDocument
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -1540,8 +1157,6 @@ class _$_AdditionalDetailsRemovePoDocument
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -1552,7 +1167,6 @@ class _$_AdditionalDetailsRemovePoDocument
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1562,8 +1176,6 @@ class _$_AdditionalDetailsRemovePoDocument
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -1574,7 +1186,6 @@ class _$_AdditionalDetailsRemovePoDocument
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1584,8 +1195,6 @@ class _$_AdditionalDetailsRemovePoDocument
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1656,9 +1265,6 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     required TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -1666,7 +1272,6 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
@@ -1680,16 +1285,12 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     TResult? Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) {
@@ -1702,16 +1303,12 @@ class _$_AdditionalDetailsRemoveAllPoDocument
     TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1726,7 +1323,6 @@ class _$_AdditionalDetailsRemoveAllPoDocument
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -1739,8 +1335,6 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -1751,7 +1345,6 @@ class _$_AdditionalDetailsRemoveAllPoDocument
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1761,8 +1354,6 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -1773,7 +1364,6 @@ class _$_AdditionalDetailsRemoveAllPoDocument
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1783,8 +1373,6 @@ class _$_AdditionalDetailsRemoveAllPoDocument
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1848,9 +1436,6 @@ class _$_AdditionalDetailsToggleGreenDelivery
     required TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -1858,7 +1443,6 @@ class _$_AdditionalDetailsToggleGreenDelivery
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
@@ -1872,16 +1456,12 @@ class _$_AdditionalDetailsToggleGreenDelivery
     TResult? Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) {
@@ -1894,16 +1474,12 @@ class _$_AdditionalDetailsToggleGreenDelivery
     TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1918,7 +1494,6 @@ class _$_AdditionalDetailsToggleGreenDelivery
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -1931,8 +1506,6 @@ class _$_AdditionalDetailsToggleGreenDelivery
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -1943,7 +1516,6 @@ class _$_AdditionalDetailsToggleGreenDelivery
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1953,8 +1525,6 @@ class _$_AdditionalDetailsToggleGreenDelivery
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -1965,7 +1535,6 @@ class _$_AdditionalDetailsToggleGreenDelivery
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -1975,8 +1544,6 @@ class _$_AdditionalDetailsToggleGreenDelivery
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),
@@ -1992,198 +1559,6 @@ abstract class _AdditionalDetailsToggleGreenDelivery
     implements AdditionalDetailsEvent {
   const factory _AdditionalDetailsToggleGreenDelivery() =
       _$_AdditionalDetailsToggleGreenDelivery;
-}
-
-/// @nodoc
-abstract class _$$_AdditionalDetailsClearSavedOrderIdCopyWith<$Res> {
-  factory _$$_AdditionalDetailsClearSavedOrderIdCopyWith(
-          _$_AdditionalDetailsClearSavedOrderId value,
-          $Res Function(_$_AdditionalDetailsClearSavedOrderId) then) =
-      __$$_AdditionalDetailsClearSavedOrderIdCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_AdditionalDetailsClearSavedOrderIdCopyWithImpl<$Res>
-    extends _$AdditionalDetailsEventCopyWithImpl<$Res,
-        _$_AdditionalDetailsClearSavedOrderId>
-    implements _$$_AdditionalDetailsClearSavedOrderIdCopyWith<$Res> {
-  __$$_AdditionalDetailsClearSavedOrderIdCopyWithImpl(
-      _$_AdditionalDetailsClearSavedOrderId _value,
-      $Res Function(_$_AdditionalDetailsClearSavedOrderId) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_AdditionalDetailsClearSavedOrderId
-    implements _AdditionalDetailsClearSavedOrderId {
-  const _$_AdditionalDetailsClearSavedOrderId();
-
-  @override
-  String toString() {
-    return 'AdditionalDetailsEvent.clearSavedOrderId()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_AdditionalDetailsClearSavedOrderId);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
-        initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
-    required TResult Function(DeliveryInfoLabel label, String newValue)
-        onTextChange,
-    required TResult Function(SalesOrganisationConfigs config) validateForm,
-    required TResult Function(List<PoDocuments> poDocuments) addPoDocument,
-    required TResult Function(PoDocuments poDocument) removePoDocument,
-    required TResult Function() removeAllPoDocument,
-    required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
-    required TResult Function(
-            DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
-        initiateFromHistory,
-  }) {
-    return clearSavedOrderId();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
-        initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
-    TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult? Function(SalesOrganisationConfigs config)? validateForm,
-    TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
-    TResult? Function(PoDocuments poDocument)? removePoDocument,
-    TResult? Function()? removeAllPoDocument,
-    TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
-    TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
-        initiateFromHistory,
-  }) {
-    return clearSavedOrderId?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
-        initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
-    TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
-    TResult Function(SalesOrganisationConfigs config)? validateForm,
-    TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
-    TResult Function(PoDocuments poDocument)? removePoDocument,
-    TResult Function()? removeAllPoDocument,
-    TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
-    TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
-        initiateFromHistory,
-    required TResult orElse(),
-  }) {
-    if (clearSavedOrderId != null) {
-      return clearSavedOrderId();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
-    required TResult Function(_AdditionalDetailsTextOnChange value)
-        onTextChange,
-    required TResult Function(_AdditionalDetailsValidateForm value)
-        validateForm,
-    required TResult Function(_AdditionalDetailsAddPoDocument value)
-        addPoDocument,
-    required TResult Function(_AdditionalDetailsRemovePoDocument value)
-        removePoDocument,
-    required TResult Function(_AdditionalDetailsRemoveAllPoDocument value)
-        removeAllPoDocument,
-    required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
-        toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
-    required TResult Function(_AdditionalDetailsInitiateFromHistory value)
-        initiateFromHistory,
-  }) {
-    return clearSavedOrderId(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
-    TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
-    TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
-    TResult? Function(_AdditionalDetailsRemovePoDocument value)?
-        removePoDocument,
-    TResult? Function(_AdditionalDetailsRemoveAllPoDocument value)?
-        removeAllPoDocument,
-    TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
-        toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
-    TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
-        initiateFromHistory,
-  }) {
-    return clearSavedOrderId?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
-    TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
-    TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
-    TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
-    TResult Function(_AdditionalDetailsRemovePoDocument value)?
-        removePoDocument,
-    TResult Function(_AdditionalDetailsRemoveAllPoDocument value)?
-        removeAllPoDocument,
-    TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
-        toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
-    TResult Function(_AdditionalDetailsInitiateFromHistory value)?
-        initiateFromHistory,
-    required TResult orElse(),
-  }) {
-    if (clearSavedOrderId != null) {
-      return clearSavedOrderId(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AdditionalDetailsClearSavedOrderId
-    implements AdditionalDetailsEvent {
-  const factory _AdditionalDetailsClearSavedOrderId() =
-      _$_AdditionalDetailsClearSavedOrderId;
 }
 
 /// @nodoc
@@ -2288,9 +1663,6 @@ class _$_AdditionalDetailsInitiateFromHistory
     required TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)
         initialized,
-    required TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)
-        initFromSavedOrder,
     required TResult Function(DeliveryInfoLabel label, String newValue)
         onTextChange,
     required TResult Function(SalesOrganisationConfigs config) validateForm,
@@ -2298,7 +1670,6 @@ class _$_AdditionalDetailsInitiateFromHistory
     required TResult Function(PoDocuments poDocument) removePoDocument,
     required TResult Function() removeAllPoDocument,
     required TResult Function() toggleGreenDelivery,
-    required TResult Function() clearSavedOrderId,
     required TResult Function(
             DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)
         initiateFromHistory,
@@ -2312,16 +1683,12 @@ class _$_AdditionalDetailsInitiateFromHistory
     TResult? Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult? Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult? Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult? Function(SalesOrganisationConfigs config)? validateForm,
     TResult? Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult? Function(PoDocuments poDocument)? removePoDocument,
     TResult? Function()? removeAllPoDocument,
     TResult? Function()? toggleGreenDelivery,
-    TResult? Function()? clearSavedOrderId,
     TResult? Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
   }) {
@@ -2334,16 +1701,12 @@ class _$_AdditionalDetailsInitiateFromHistory
     TResult Function(
             SalesOrganisationConfigs config, CustomerCodeInfo customerCodeInfo)?
         initialized,
-    TResult Function(SalesOrganisationConfigs config,
-            CustomerCodeInfo customerCodeInfo, String orderId)?
-        initFromSavedOrder,
     TResult Function(DeliveryInfoLabel label, String newValue)? onTextChange,
     TResult Function(SalesOrganisationConfigs config)? validateForm,
     TResult Function(List<PoDocuments> poDocuments)? addPoDocument,
     TResult Function(PoDocuments poDocument)? removePoDocument,
     TResult Function()? removeAllPoDocument,
     TResult Function()? toggleGreenDelivery,
-    TResult Function()? clearSavedOrderId,
     TResult Function(DeliveryInfoData data, CustomerCodeInfo customerCodeInfo)?
         initiateFromHistory,
     required TResult orElse(),
@@ -2358,7 +1721,6 @@ class _$_AdditionalDetailsInitiateFromHistory
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_InitFromSavedOrder value) initFromSavedOrder,
     required TResult Function(_AdditionalDetailsTextOnChange value)
         onTextChange,
     required TResult Function(_AdditionalDetailsValidateForm value)
@@ -2371,8 +1733,6 @@ class _$_AdditionalDetailsInitiateFromHistory
         removeAllPoDocument,
     required TResult Function(_AdditionalDetailsToggleGreenDelivery value)
         toggleGreenDelivery,
-    required TResult Function(_AdditionalDetailsClearSavedOrderId value)
-        clearSavedOrderId,
     required TResult Function(_AdditionalDetailsInitiateFromHistory value)
         initiateFromHistory,
   }) {
@@ -2383,7 +1743,6 @@ class _$_AdditionalDetailsInitiateFromHistory
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult? Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult? Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult? Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -2393,8 +1752,6 @@ class _$_AdditionalDetailsInitiateFromHistory
         removeAllPoDocument,
     TResult? Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult? Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult? Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
   }) {
@@ -2405,7 +1762,6 @@ class _$_AdditionalDetailsInitiateFromHistory
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_InitFromSavedOrder value)? initFromSavedOrder,
     TResult Function(_AdditionalDetailsTextOnChange value)? onTextChange,
     TResult Function(_AdditionalDetailsValidateForm value)? validateForm,
     TResult Function(_AdditionalDetailsAddPoDocument value)? addPoDocument,
@@ -2415,8 +1771,6 @@ class _$_AdditionalDetailsInitiateFromHistory
         removeAllPoDocument,
     TResult Function(_AdditionalDetailsToggleGreenDelivery value)?
         toggleGreenDelivery,
-    TResult Function(_AdditionalDetailsClearSavedOrderId value)?
-        clearSavedOrderId,
     TResult Function(_AdditionalDetailsInitiateFromHistory value)?
         initiateFromHistory,
     required TResult orElse(),

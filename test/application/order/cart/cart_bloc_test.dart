@@ -5,7 +5,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -2082,38 +2081,40 @@ void main() {
     },
   );
 
-  group(
-    'Testing CartBloc updateBatchInCartItem',
-    () {
-      blocTest<CartBloc, CartState>(
-        'Cart updateBatchInCartItem',
-        build: () => CartBloc(cartRepositoryMock),
-        seed: () => CartState.initial().copyWith(
-          cartProducts: priceAggregates,
-          salesOrganisation: fakeSalesOrganisation,
-          config: fakeSalesOrganisationConfigs,
-          shipToInfo: shipToInfo,
-          customerCodeInfo: fakeCustomerCodeInfo,
-        ),
-        act: (bloc) => bloc.add(
-          CartEvent.updateBatchInCartItem(
-            item: CartItem.material(PriceAggregate.empty()),
-            stockInfo: StockInfo.empty(),
-          ),
-        ),
-        expect: () => [
-          CartState.initial().copyWith(
-            isFetching: true,
-            cartProducts: priceAggregates,
-            salesOrganisation: fakeSalesOrganisation,
-            config: fakeSalesOrganisationConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
-          ),
-        ],
-      );
-    },
-  );
+  ///TODO: will be used while implementing batch selection
+
+  // group(
+  //   'Testing CartBloc updateBatchInCartItem',
+  //   () {
+  //     blocTest<CartBloc, CartState>(
+  //       'Cart updateBatchInCartItem',
+  //       build: () => CartBloc(cartRepositoryMock),
+  //       seed: () => CartState.initial().copyWith(
+  //         cartProducts: priceAggregates,
+  //         salesOrganisation: fakeSalesOrganisation,
+  //         config: fakeSalesOrganisationConfigs,
+  //         shipToInfo: shipToInfo,
+  //         customerCodeInfo: fakeCustomerCodeInfo,
+  //       ),
+  //       act: (bloc) => bloc.add(
+  //         CartEvent.updateBatchInCartItem(
+  //           item: CartItem.material(PriceAggregate.empty()),
+  //           stockInfo: StockInfo.empty(),
+  //         ),
+  //       ),
+  //       expect: () => [
+  //         CartState.initial().copyWith(
+  //           isFetching: true,
+  //           cartProducts: priceAggregates,
+  //           salesOrganisation: fakeSalesOrganisation,
+  //           config: fakeSalesOrganisationConfigs,
+  //           shipToInfo: shipToInfo,
+  //           customerCodeInfo: fakeCustomerCodeInfo,
+  //         ),
+  //       ],
+  //     );
+  //   },
+  // );
 
   group(
     'CartBloc clearCart',

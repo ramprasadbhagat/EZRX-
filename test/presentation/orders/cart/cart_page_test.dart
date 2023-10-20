@@ -43,7 +43,6 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
@@ -163,8 +162,8 @@ void main() {
   late AppRouter autoRouterMock;
   late OrderSummaryBloc orderSummaryBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
-  late CartItem mockCartItemWithOutBatch;
-  late CartItem mockCartItemWithBatch;
+  // late CartItem mockCartItemWithOutBatch;
+  // late CartItem mockCartItemWithBatch;
   late List<StockInfo> batchStockInfoMock;
   late List<PriceAggregate> mockCartItems;
   late List<PriceAggregate> mockCartBundleItems;
@@ -427,17 +426,17 @@ void main() {
           ),
         ),
       ];
-      mockCartItemWithOutBatch = CartItem(
-        materials: [
-          PriceAggregate.empty().copyWith(
-            quantity: 1,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023168451'),
-            ),
-          ),
-        ],
-        itemType: CartItemType.material,
-      );
+      // mockCartItemWithOutBatch = CartItem(
+      //   materials: [
+      //     PriceAggregate.empty().copyWith(
+      //       quantity: 1,
+      //       materialInfo: MaterialInfo.empty().copyWith(
+      //         materialNumber: MaterialNumber('000000000023168451'),
+      //       ),
+      //     ),
+      //   ],
+      //   itemType: CartItemType.material,
+      // );
 
       batchStockInfoMock = [
         StockInfo.empty().copyWith(
@@ -448,19 +447,19 @@ void main() {
           batch: BatchNumber('fake-batch'),
         ),
       ];
-      mockCartItemWithBatch = CartItem(
-        materials: [
-          PriceAggregate.empty().copyWith(
-            quantity: 1,
-            materialInfo: MaterialInfo.empty().copyWith(
-              materialNumber: MaterialNumber('000000000023168451'),
-            ),
-            stockInfo: batchStockInfoMock.first,
-            stockInfoList: batchStockInfoMock,
-          ),
-        ],
-        itemType: CartItemType.material,
-      );
+      // mockCartItemWithBatch = CartItem(
+      //   materials: [
+      //     PriceAggregate.empty().copyWith(
+      //       quantity: 1,
+      //       materialInfo: MaterialInfo.empty().copyWith(
+      //         materialNumber: MaterialNumber('000000000023168451'),
+      //       ),
+      //       stockInfo: batchStockInfoMock.first,
+      //       stockInfoList: batchStockInfoMock,
+      //     ),
+      //   ],
+      //   itemType: CartItemType.material,
+      // );
       when(() => cartBloc.state).thenReturn(
         CartState.initial().copyWith(
           apiFailureOrSuccessOption: none(),

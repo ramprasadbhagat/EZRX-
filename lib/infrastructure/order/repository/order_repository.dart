@@ -12,12 +12,9 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
@@ -34,7 +31,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/saved_order_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 
 class OrderRepository implements IOrderRepository {
@@ -60,188 +56,6 @@ class OrderRepository implements IOrderRepository {
     required this.stockInfoRemoteDataSource,
     required this.stockInfoLocalDataSource,
   });
-
-  @override
-  Future<Either<ApiFailure, List<SavedOrder>>> getSavedOrder({
-    required User user,
-    required SalesOrganisation salesOrg,
-    required CustomerCodeInfo customerCode,
-    required ShipToInfo shipToCode,
-    required int pageSize,
-    required int offset,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final savedOrders = await localDataSource.getSavedOrders();
-
-        return Right(savedOrders);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    }
-    try {
-      final userId = user.id;
-      final salesOrgName = salesOrg.salesOrg.getOrCrash();
-      final customerCodeNumber = customerCode.customerCodeSoldTo;
-      final shipToCodeNumber = shipToCode.shipToCustomerCode;
-
-      final savedOrders = await remoteDataSource.getSavedOrder(
-        userId: userId,
-        saleOrgName: salesOrgName,
-        shipToCode: shipToCodeNumber,
-        customerCode: customerCodeNumber,
-        pageSize: pageSize,
-        offset: offset,
-      );
-
-      return Right(savedOrders);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<SavedOrder>>> deleteSavedOrder({
-    required SavedOrder orderItem,
-    required List<SavedOrder> ordersList,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final newOrdersList = List<SavedOrder>.from(ordersList)
-          ..removeWhere((element) => element.id == orderItem.id);
-
-        return Right(newOrdersList);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final deletedOrderItem =
-          await remoteDataSource.deleteSavedOrder(itemId: orderItem.id);
-      final newOrdersList = List<SavedOrder>.from(ordersList)
-        ..removeWhere((element) => element.id == deletedOrderItem.id);
-
-      return Right(newOrdersList);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, SavedOrder>> createDraftOrder({
-    required ShipToInfo shipToInfo,
-    required User user,
-    required List<CartItem> cartItems,
-    required double grandTotal,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisation salesOrganisation,
-    required DeliveryInfoData data,
-  }) async {
-    final draftOrder = _getCreateDraftOrderRequest(
-      shipToInfo: shipToInfo,
-      user: user,
-      cartItems: cartItems,
-      grandTotal: grandTotal,
-      customerCodeInfo: customerCodeInfo,
-      salesOrganisation: salesOrganisation,
-      data: data,
-    );
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final savedOrder = await localDataSource.createDraftOrder();
-        if (savedOrder.isDraftOrder) {
-          final newlyAddedDraftOrder = draftOrder.copyWith(id: savedOrder.id);
-
-          return Right(newlyAddedDraftOrder);
-        } else {
-          return Left(
-            FailureHandler.handleFailure('Order not saved'),
-          );
-        }
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final savedOrder = await remoteDataSource.createDraftOrder(
-        draftOrder: SavedOrderDto.fromDomain(draftOrder),
-      );
-
-      if (savedOrder.isDraftOrder) {
-        final newlyAddedDraftOrder = draftOrder.copyWith(id: savedOrder.id);
-
-        return Right(newlyAddedDraftOrder);
-      } else {
-        return Left(
-          FailureHandler.handleFailure('Order not saved'),
-        );
-      }
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, SavedOrder>> updateDraftOrder({
-    required List<CartItem> cartItems,
-    required DeliveryInfoData data,
-    required double grandTotal,
-    required String orderId,
-    required User user,
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-  }) async {
-    final draftOrder = _getCreateDraftOrderRequest(
-      shipToInfo: shipToInfo,
-      user: user,
-      cartItems: cartItems,
-      grandTotal: grandTotal,
-      customerCodeInfo: customerCodeInfo,
-      salesOrganisation: salesOrganisation,
-      data: data,
-    );
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final savedOrder = await localDataSource.updateDraftOrder();
-
-        return Right(savedOrder);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final savedOrder = await remoteDataSource.updateDraftOrder(
-        updatedOrder: SavedOrderDto.fromDomain(
-          draftOrder.copyWith(
-            id: orderId,
-          ),
-        ),
-      );
-
-      return Right(savedOrder);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
-  }
-
-  List<MaterialItem> _getItemList(List<CartItem> cartItemList) => cartItemList
-      .map((cartItem) => cartItem.toSavedOrderMaterial())
-      .toList()
-      .expand((element) => element)
-      .toList();
 
   @override
   Future<Either<ApiFailure, SubmitOrderResponse>> submitOrder({
@@ -291,33 +105,6 @@ class OrderRepository implements IOrderRepository {
           await remoteDataSource.submitOrder(orderEncryption: encryptedData);
 
       return Right(submitOrderResponse);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, SavedOrder>> getSavedOrderDetail({
-    required String orderId,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final savedOrder = await localDataSource.getSavedOrderDetail();
-
-        return Right(savedOrder);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final orderDetail =
-          await remoteDataSource.getSavedOrderDetail(orderId: orderId);
-
-      return Right(orderDetail);
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),
@@ -425,54 +212,6 @@ class OrderRepository implements IOrderRepository {
         FailureHandler.handleFailure(e),
       );
     }
-  }
-
-//TODO : Will revisit
-  SavedOrder _getCreateDraftOrderRequest({
-    required ShipToInfo shipToInfo,
-    required User user,
-    required List<CartItem> cartItems,
-    required double grandTotal,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisation salesOrganisation,
-    required DeliveryInfoData data,
-  }) {
-    //bonus calculation
-
-    return SavedOrder.empty().copyWith(
-      shippingCondition: data.greenDeliveryEnabled
-          ? ShippingCondition.greenDelivery()
-          : ShippingCondition(''),
-      requestedDeliveryDate: data.deliveryDate.getValue(),
-      deliveryDocument: shipToInfo.shipToName.name1,
-      billingDocument: customerCodeInfo.customerName.name1,
-      salesOrganization: salesOrganisation.salesOrg.getOrCrash(),
-      principal: '',
-      soldToParty: SoldToParty(customerCodeInfo.customerCodeSoldTo),
-      shipToParty: ShipToParty(shipToInfo.shipToCustomerCode),
-      processingStatus: 'Draft',
-      isDraftOrder: true,
-      companyName: CompanyName(shipToInfo.shipToName.toString()),
-      country: shipToInfo.country,
-      postCode1: shipToInfo.postalCode,
-      specialInstructions: data.deliveryInstruction.getValue(),
-      poReference: data.poReference.getValue(),
-      payTerm: data.paymentTerm.getValue(),
-      // collectiveNo: data.collectiveNumber.getValue(),
-      totalOrderValue: grandTotal,
-      draftorder: true,
-      address1: shipToInfo.shipToAddress.street,
-      address2: shipToInfo.shipToAddress.street2,
-      city: shipToInfo.city1,
-      phonenumber: data.mobileNumber.getValue(),
-      user: user.id,
-      contactPerson: data.contactPerson.getValue().isNotEmpty
-          ? data.contactPerson.getValue()
-          : user.fullName.toString(),
-      referenceNotes: data.referenceNote.getValue(),
-      items: _getItemList(cartItems),
-      poAttachent: data.poDocuments,
-    );
   }
 
   SubmitOrder _getSubmitOrderRequest({

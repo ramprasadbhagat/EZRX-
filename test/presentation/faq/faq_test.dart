@@ -1,6 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -86,35 +84,25 @@ void main() {
           .thenReturn(EligibilityState.initial());
     });
     Widget getScopedWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          providers: [
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
-            BlocProvider<FaqBloc>(create: (context) => faqBlocMock),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<ContactUsBloc>(
-              create: (context) => contactUsBlocMock,
-            ),
-          ],
-          child: const Scaffold(
-            body: FAQPage(),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
+          BlocProvider<UserBloc>(create: (context) => userBlocMock),
+          BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
+          BlocProvider<FaqBloc>(create: (context) => faqBlocMock),
+          BlocProvider<CustomerCodeBloc>(
+            create: (context) => customerCodeBlocMock,
+          ),
+          BlocProvider<ContactUsBloc>(
+            create: (context) => contactUsBlocMock,
+          ),
+        ],
+        child: const Scaffold(
+          body: FAQPage(),
         ),
       );
     }
@@ -155,7 +143,8 @@ void main() {
           ),
         );
         await tester.pumpWidget(getScopedWidget());
-        final titleFinder = find.text('FAQ'.tr());
+        await tester.pump();
+        final titleFinder = find.text('FAQ');
         expect(titleFinder, findsOneWidget);
         final iconFinder = find.byIcon(
           Icons.chevron_left,
@@ -168,7 +157,7 @@ void main() {
 
         await tester.pump();
         final result = find.text(
-          '${'Search results for:'.tr()} ${SearchKey('Order created').getOrDefaultValue('')}',
+          'Search results for: ${SearchKey('Order created').getOrDefaultValue('')}',
         );
         expect(result, findsOneWidget);
       },
@@ -524,7 +513,7 @@ void main() {
         ];
         whenListen(faqBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getScopedWidget());
-        await tester.pump(const Duration(seconds: 3));
+        await tester.pumpAndSettle();
 
         final itemKey = find.text('All');
 

@@ -6,11 +6,6 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
     required SalesOrganisationConfigs config,
     required CustomerCodeInfo customerCodeInfo,
   }) = _Initialized;
-  const factory AdditionalDetailsEvent.initFromSavedOrder({
-    required SalesOrganisationConfigs config,
-    required CustomerCodeInfo customerCodeInfo,
-    required String orderId,
-  }) = _InitFromSavedOrder;
   const factory AdditionalDetailsEvent.onTextChange({
     required DeliveryInfoLabel label,
     required String newValue,
@@ -28,8 +23,6 @@ class AdditionalDetailsEvent with _$AdditionalDetailsEvent {
       _AdditionalDetailsRemoveAllPoDocument;
   const factory AdditionalDetailsEvent.toggleGreenDelivery() =
       _AdditionalDetailsToggleGreenDelivery;
-  const factory AdditionalDetailsEvent.clearSavedOrderId() =
-      _AdditionalDetailsClearSavedOrderId;
   const factory AdditionalDetailsEvent.initiateFromHistory({
     required DeliveryInfoData data,
     required CustomerCodeInfo customerCodeInfo,

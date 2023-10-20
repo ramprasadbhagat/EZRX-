@@ -12,9 +12,7 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
-import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -115,21 +113,6 @@ class PriceAggregate with _$PriceAggregate {
     return materialsInfo;
   }
 
-  OrderTemplateMaterial toOrderTemplateMaterial() {
-    return OrderTemplateMaterial(
-      materialNumber: materialInfo.materialNumber,
-      materialGroup4: materialInfo.materialGroup4,
-      qty: quantity,
-      principalName:
-          materialInfo.principalData.principalName.getOrDefaultValue(''),
-      materialDescription: materialInfo.materialDescription,
-      hidePrice: materialInfo.hidePrice,
-      hasValidTenderContract: materialInfo.hasValidTenderContract,
-      taxClassification: materialInfo.taxClassification,
-      type: '',
-    );
-  }
-
   bool get additionalBonusOverride => addedBonusList.any(
         (element) => element.bonusOverrideFlag && element.additionalBonusFlag,
       );
@@ -174,29 +157,6 @@ class PriceAggregate with _$PriceAggregate {
       tax: itemTax,
       promoStatus: promoStatus,
       promoType: materialInfo.promoType,
-    );
-  }
-
-  MaterialItem toSavedOrderMaterial() {
-    return MaterialItem.empty().copyWith(
-      banner: banner,
-      materialNumber: materialInfo.materialNumber,
-      qty: quantity,
-      defaultMaterialDescription: materialInfo.materialDescription,
-      type: MaterialItemType('Comm'),
-      itemRegistrationNumber: materialInfo.itemRegistrationNumber,
-      unitOfMeasurement: materialInfo.unitOfMeasurement.getOrDefaultValue(''),
-      bonuses: addedBonusList
-          .where((element) => element.additionalBonusFlag)
-          .toList(),
-      zdp8Override: price.zdp8Override,
-      overridenPrice: price.priceOverride,
-      hidePrice: materialInfo.hidePrice,
-      materialGroup2: materialInfo.materialGroup2,
-      materialGroup4: materialInfo.materialGroup4,
-      tenderContract: tenderContract,
-      hasValidTenderContract: !notHavingContract,
-      tenderOrderReason: tenderContract.tenderOrderReason,
     );
   }
 

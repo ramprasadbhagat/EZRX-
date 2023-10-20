@@ -14,8 +14,6 @@ class OrderSummaryRobot {
       find.byKey(const Key('submitButtonKey'), skipOffstage: false).last;
   final saveButton = find.text('Save', skipOffstage: false).last;
   final updateButton = find.text('Update', skipOffstage: false).last;
-  final orderTemplate = find.byKey(const Key('orderSummarySaveTemplate'));
-  final saveTemplateButton = find.byKey(const Key('saveButton'));
   final specialInstructionField =
       find.byKey(const Key('specialInstructionKey'));
   final poReference = find.byKey(const Key('customerPOReferenceKey'));
@@ -333,19 +331,8 @@ class OrderSummaryRobot {
     await tester.pumpAndSettle();
   }
 
-  void findSave() {
-    expect(saveButton, findsOneWidget);
-  }
-
   void findUpdate() {
     expect(updateButton, findsOneWidget);
-  }
-
-  Future<void> tapSave() async {
-    await tester.ensureVisible(saveButton);
-    await tester.pumpAndSettle();
-    await tester.tap(saveButton);
-    await tester.pumpAndSettle();
   }
 
   void verifyPostalCode(String postalCode) {
@@ -361,36 +348,6 @@ class OrderSummaryRobot {
   Future<void> tapAddQuantity(String materialNumber) async {
     final cartAddButton = find.byKey(Key('cartAdd$materialNumber'));
     await tester.tap(cartAddButton);
-    await tester.pumpAndSettle();
-  }
-
-  void findOrderTemplate() {
-    expect(orderTemplate, findsOneWidget);
-  }
-
-  Future<void> tapOrderTemplate() async {
-    await tester.tap(orderTemplate);
-    await tester.pumpAndSettle();
-  }
-
-  void verifySaveTemplateDialog() {
-    final dialog = find.byKey(const Key('saveTemplateDialog'));
-    expect(dialog, findsOneWidget);
-  }
-
-  Future<void> enterTemplateName(String name) async {
-    final templateField = find.byKey(const Key('saveTemplateInputField'));
-    expect(templateField, findsOneWidget);
-    await tester.enterText(templateField, name);
-    await tester.pump();
-  }
-
-  void findTemplateSaveButton() {
-    expect(saveTemplateButton, findsOneWidget);
-  }
-
-  Future<void> tapTemplateSaveButton() async {
-    await tester.tap(saveTemplateButton);
     await tester.pumpAndSettle();
   }
 

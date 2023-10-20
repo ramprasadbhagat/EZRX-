@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_bundle_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
@@ -9,9 +8,6 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-
-class OrderTemplateMock extends Mock implements OrderTemplate {}
 
 void main() {
   late MaterialBundleListLocalDatasource localDataSource;

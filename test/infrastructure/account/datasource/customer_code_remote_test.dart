@@ -5,7 +5,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_search_dto.dart';
@@ -15,9 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
-import 'package:mocktail/mocktail.dart';
-
-class SavedOrderMock extends Mock implements SavedOrder {}
 
 void main() {
   late CustomerCodeRemoteDataSource remoteDataSource;

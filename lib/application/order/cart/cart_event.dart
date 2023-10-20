@@ -27,10 +27,12 @@ class CartEvent with _$CartEvent {
 
   const factory CartEvent.clearCart() = _ClearCart;
 
-  const factory CartEvent.updateBatchInCartItem({
-    required CartItem item,
-    required StockInfo stockInfo,
-  }) = _UpdateBatchInCartItem;
+  ///TODO: will be used while implementing batch selection
+
+  // const factory CartEvent.updateBatchInCartItem({
+  //   required CartItem item,
+  //   required StockInfo stockInfo,
+  // }) = _UpdateBatchInCartItem;
 
   const factory CartEvent.fetchProductsAddedToCart() =
       _FetchProductsAddedToCart;

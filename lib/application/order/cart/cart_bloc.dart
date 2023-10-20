@@ -10,7 +10,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -254,15 +253,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
       },
-      updateBatchInCartItem: (e) {
-        emit(
-          state.copyWith(
-            isFetching: true,
-            apiFailureOrSuccessOption: none(),
-          ),
-        );
 
-        /*final failureOrSuccess = await repository.updatedBatchInCartItem(
+      ///TODO: will be used while implementing batch selection
+
+      // updateBatchInCartItem: (e) {
+      //   emit(
+      //     state.copyWith(
+      //       isFetching: true,
+      //       apiFailureOrSuccessOption: none(),
+      //     ),
+      //   );
+
+      /*final failureOrSuccess = await repository.updatedBatchInCartItem(
           item: e.item,
           stockInfo: e.stockInfo,
         );
@@ -286,7 +288,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
         );*/
-      },
+      // },
       fetchProductsAddedToCart: (e) async {
         if (state.isFetching) return;
 
@@ -600,8 +602,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         var newCartProducts = state.cartProducts;
 
         if (state.isCounterOfferProductResetRequired) {
-          final failureOrSuccess =
-              await repository.removeSelectedProducts(
+          final failureOrSuccess = await repository.removeSelectedProducts(
             salesOrganisation: state.salesOrganisation,
             salesOrganisationConfig: state.config,
             customerCodeInfo: state.customerCodeInfo,

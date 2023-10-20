@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as bd;
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
@@ -95,9 +94,6 @@ class CartButton extends StatelessWidget {
                                   .shipToInfo,
                               user: context.read<EligibilityBloc>().state.user,
                             ),
-                          );
-                      context.read<AdditionalDetailsBloc>().add(
-                            const AdditionalDetailsEvent.clearSavedOrderId(),
                           );
                       context.router.pushNamed('orders/cart');
                     },

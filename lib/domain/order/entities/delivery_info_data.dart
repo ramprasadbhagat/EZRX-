@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -24,46 +22,18 @@ class DeliveryInfoData with _$DeliveryInfoData {
     required bool greenDeliveryEnabled,
   }) = _DeliveryInfoData;
 
-  factory DeliveryInfoData.fromSavedOrder({
-    required SavedOrder orderDetail,
-    required CustomerCodeInfo customerCodeInfo,
-  }) {
-    final orderDeliveryDate = orderDetail.requestedDeliveryDate;
-
-    return DeliveryInfoData.empty().copyWith(
-      contactPerson: ContactPerson(orderDetail.contactPerson),
-      mobileNumber: MobileNumber(
-        orderDetail.phonenumber.isEmpty
-            ? customerCodeInfo.telephoneNumber.displayTelephoneNumber
-            : orderDetail.phonenumber,
-      ),
-      poReference: PoReference(orderDetail.poReference),
-      deliveryInstruction: DeliveryInstruction(orderDetail.specialInstructions),
-      referenceNote: ReferenceNote(orderDetail.referenceNotes),
-      // collectiveNumber: CollectiveNumber(orderDetail.collectiveNo),
-      paymentTerm: PaymentTerm(orderDetail.payTerm),
-      poDocuments: orderDetail.poAttachent,
-      deliveryDate: orderDeliveryDate.isEmpty
-          ? defaultDeliveryDate
-          : DateTimeStringValue(orderDeliveryDate),
-      greenDeliveryEnabled: orderDetail.shippingCondition.isGreenDelivery,
-    );
-  }
-
   factory DeliveryInfoData.fromOrderHistory({
     required OrderHistoryDetails orderHistoryDetails,
   }) {
     return DeliveryInfoData.empty().copyWith(
       poReference: PoReference(
-        orderHistoryDetails.pOReference
-            .displayPOReference,
+        orderHistoryDetails.pOReference.displayPOReference,
       ),
       contactPerson: ContactPerson(
         orderHistoryDetails.orderBy,
       ),
       mobileNumber: MobileNumber(
-        orderHistoryDetails.telephoneNumber
-            .getOrDefaultValue(''),
+        orderHistoryDetails.telephoneNumber.getOrDefaultValue(''),
       ),
       deliveryInstruction: DeliveryInstruction(
         orderHistoryDetails.orderHistoryDetailsSpecialInstructions

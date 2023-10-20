@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
@@ -29,17 +28,11 @@ abstract class ICartRepository {
     required ShipToInfo shipToInfo,
   });
 
-  List<CartItem> updateDiscountQty({
-    required List<CartItem> items,
-  });
+  ///TODO: Might be used while developing ZMG Group discount
 
-  Future<Either<ApiFailure, List<CartItem>>> saveToCartWithUpdatedStockInfo({
-    required List<CartItem> cartItem,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  });
+  // List<CartItem> updateDiscountQty({
+  //   required List<CartItem> items,
+  // });
 
   Future<Either<ApiFailure, Map<MaterialNumber, List<StockInfo>>>>
       getStockInfoList({

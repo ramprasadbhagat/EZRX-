@@ -1,16 +1,12 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/order/entities/order_template.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-
-class OrderTemplateMock extends Mock implements OrderTemplate {}
 
 void main() {
   late StockInfoLocalDataSource localDataSource;

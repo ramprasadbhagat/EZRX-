@@ -5,7 +5,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/sales_org_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_configs_dto.dart';
@@ -15,9 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
-import 'package:mocktail/mocktail.dart';
-
-class SavedOrderMock extends Mock implements SavedOrder {}
 
 void main() {
   late SalesOrgRemoteDataSource remoteDataSource;

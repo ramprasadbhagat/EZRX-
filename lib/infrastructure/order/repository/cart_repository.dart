@@ -7,10 +7,8 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -25,8 +23,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.da
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_product_request_dto.dart';
-
-import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 
 import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 
@@ -155,72 +151,37 @@ class CartRepository implements ICartRepository {
     }
   }
 
-  @override
-  List<CartItem> updateDiscountQty({
-    required List<CartItem> items,
-  }) =>
-      items.map((item) {
-        switch (item.itemType) {
-          case CartItemType.material:
-            final material = item.materials.first;
-            var updatedMaterial = material.copyWith(discountedMaterialCount: 0);
-            if (material.price.zmgDiscount) {
-              updatedMaterial = material.copyWith(
-                discountedMaterialCount: items.zmgMaterialsQty(
-                  material.materialInfo.materialGroup2,
-                ),
-              );
-            } else if (material.price.isTireDiscountEligible) {
-              updatedMaterial = material.copyWith(
-                discountedMaterialCount: material.quantity,
-              );
-            }
-            return item.copyWith(
-              materials: [updatedMaterial],
-            );
+  ///TODO: Might be used while developing ZMG group discount
 
-          case CartItemType.bundle:
-          case CartItemType.comboDeal:
-            return item;
-        }
-      }).toList();
+  // @override
+  // List<CartItem> updateDiscountQty({
+  //   required List<CartItem> items,
+  // }) =>
+  //     items.map((item) {
+  //       switch (item.itemType) {
+  //         case CartItemType.material:
+  //           final material = item.materials.first;
+  //           var updatedMaterial = material.copyWith(discountedMaterialCount: 0);
+  //           if (material.price.zmgDiscount) {
+  //             updatedMaterial = material.copyWith(
+  //               discountedMaterialCount: items.zmgMaterialsQty(
+  //                 material.materialInfo.materialGroup2,
+  //               ),
+  //             );
+  //           } else if (material.price.isTireDiscountEligible) {
+  //             updatedMaterial = material.copyWith(
+  //               discountedMaterialCount: material.quantity,
+  //             );
+  //           }
+  //           return item.copyWith(
+  //             materials: [updatedMaterial],
+  //           );
 
-  @override
-  Future<Either<ApiFailure, List<CartItem>>> saveToCartWithUpdatedStockInfo({
-    required List<CartItem> cartItem,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  }) async {
-    try {
-      final stockInfoList = await getStockInfoList(
-        items: cartItem.allMaterials.map((e) => e.materialInfo).toList(),
-        customerCodeInfo: customerCodeInfo,
-        salesOrganisationConfigs: salesOrganisationConfigs,
-        salesOrganisation: salesOrganisation,
-        shipToInfo: shipToInfo,
-      );
-
-      return stockInfoList.fold(
-        (failure) => Left(failure),
-        (stockInfoMap) async {
-          final cartItemWithStockInfo = cartItem
-              .map(
-                (item) => item.copyWithStockInfo(
-                  stockInfoMap: stockInfoMap,
-                  salesOrganisationConfigs: salesOrganisationConfigs,
-                ),
-              )
-              .toList();
-
-          return Right(cartItemWithStockInfo);
-        },
-      );
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
+  //         case CartItemType.bundle:
+  //         case CartItemType.comboDeal:
+  //           return item;
+  //       }
+  //     }).toList();
 
   @override
   Future<Either<ApiFailure, Map<MaterialNumber, List<StockInfo>>>>
@@ -350,33 +311,35 @@ class CartRepository implements ICartRepository {
         orElse: () => StockInfo.empty(),
       );*/
 
-  Future<Either<ApiFailure, Price>> getMaterialPriceWithZdp5Discount({
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required ShipToInfo shipToInfo,
-    required CartItem item,
-  }) async {
-    try {
-      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
-      final customerCode = customerCodeInfo.customerCodeSoldTo;
-      final shipToCode = shipToInfo.shipToCustomerCode;
-      final price = item.materials.first.price;
-      final exceedQuantity = item.materials.first.hasZdp5Validation;
+  ///TODO: might be used while ZDP5 Discount implementation
 
-      final priceData =
-          await discountOverrideRemoteDataSource.getMaterialOverridePriceList(
-        salesOrgCode: salesOrgCode,
-        customerCode: customerCode,
-        shipToCode: shipToCode,
-        materialQuery: PriceDto.fromDomain(price)
-            .materialQueryWithExceedQty(exceedQuantity),
-      );
+  // Future<Either<ApiFailure, Price>> getMaterialPriceWithZdp5Discount({
+  //   required SalesOrganisation salesOrganisation,
+  //   required CustomerCodeInfo customerCodeInfo,
+  //   required ShipToInfo shipToInfo,
+  //   required CartItem item,
+  // }) async {
+  //   try {
+  //     final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
+  //     final customerCode = customerCodeInfo.customerCodeSoldTo;
+  //     final shipToCode = shipToInfo.shipToCustomerCode;
+  //     final price = item.materials.first.price;
+  //     final exceedQuantity = item.materials.first.hasZdp5Validation;
 
-      return Right(priceData.first);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
+  //     final priceData =
+  //         await discountOverrideRemoteDataSource.getMaterialOverridePriceList(
+  //       salesOrgCode: salesOrgCode,
+  //       customerCode: customerCode,
+  //       shipToCode: shipToCode,
+  //       materialQuery: PriceDto.fromDomain(price)
+  //           .materialQueryWithExceedQty(exceedQuantity),
+  //     );
+
+  //     return Right(priceData.first);
+  //   } catch (e) {
+  //     return Left(FailureHandler.handleFailure(e));
+  //   }
+  // }
 
   @override
   Future<Either<ApiFailure, List<PriceAggregate>>>

@@ -17,10 +17,6 @@ import '../../robots/orders/create_order/material_list/material_list_robot.dart'
 import '../../robots/orders/create_order/material_root_robot.dart';
 import '../../robots/orders/create_order/order_confirmation_robot.dart';
 import '../../robots/orders/create_order/order_summary_robot.dart';
-import '../../robots/orders/order_template/order_template_detail_robot.dart';
-import '../../robots/orders/order_template/order_template_list_robot.dart';
-import '../../robots/orders/saved_order/saved_order_detail_robot.dart';
-import '../../robots/orders/saved_order/saved_order_list_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
@@ -35,11 +31,7 @@ void main() {
   late OrderConfirmationRobot orderConfirmationRobot;
   late OrderHistoryRobot orderHistoryRobot;
   late OrderHistoryDetailsRobot orderHistoryDetailsRobot;
-  late SavedOrderListRobot savedOrderListRobot;
-  late SavedOrderDetailRobot savedOrderDetailRobot;
   late FavoriteRobot favoriteRobot;
-  late OrderTemplateListRobot orderTemplateListRobot;
-  late OrderTemplateDetailRobot orderTemplateDetailRobot;
   late MaterialRootRobot materialRootRobot;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -58,11 +50,7 @@ void main() {
     orderConfirmationRobot = OrderConfirmationRobot(tester);
     orderHistoryRobot = OrderHistoryRobot(tester);
     orderHistoryDetailsRobot = OrderHistoryDetailsRobot(tester);
-    savedOrderListRobot = SavedOrderListRobot(tester);
-    savedOrderDetailRobot = SavedOrderDetailRobot(tester);
     favoriteRobot = FavoriteRobot(tester);
-    orderTemplateListRobot = OrderTemplateListRobot(tester);
-    orderTemplateDetailRobot = OrderTemplateDetailRobot(tester);
     materialRootRobot = MaterialRootRobot(tester);
 
     //initialize variables
@@ -78,11 +66,8 @@ void main() {
     const material2 = '000000000021129643';
     const material4 = '000000000021130222';
     const material6 = '000000000021128917';
-    const templateMaterial = '21128991';
     const tenderContract = '0040022344';
     const phoneNumber = '0839525292';
-    const saveTemplateText = 'vn template 2';
-    const templateQty = '100';
     const currency = 'VND';
     const country = 'VN';
     const salesOrg = '3050';
@@ -240,7 +225,6 @@ void main() {
     orderSummaryRobot.verifyCustomerEmail('NA');
     orderSummaryRobot.verifySoldToID(customerCode);
 
-    //Save Order
     orderSummaryRobot.findContinueButton(0);
     await orderSummaryRobot.tapContinueButton(0);
     orderSummaryRobot.verifySoldToID(customerCode);
@@ -258,24 +242,6 @@ void main() {
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
 
-    orderSummaryRobot.findSave();
-    await orderSummaryRobot.tapSave();
-
-    savedOrderListRobot.verify();
-    await savedOrderListRobot.goBack();
-
-    //Place order from saved orders
-    homeRobot.findSavedOrders();
-    await homeRobot.tapSavedOrders();
-
-    savedOrderListRobot.findOrder();
-    savedOrderListRobot.verifySoldToID(customerCode);
-    savedOrderListRobot.verifyShipToID(shipTo);
-    await savedOrderListRobot.tapOrder();
-    savedOrderDetailRobot.verify();
-    savedOrderDetailRobot.findAddToCart();
-    await savedOrderDetailRobot.tapAddToCart();
-    cartRobot.verify();
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
 
@@ -305,7 +271,6 @@ void main() {
     orderConfirmationRobot.findCreateNewOrderButton();
     await orderConfirmationRobot.goBack();
 
-    //Save Order Template
     await homeRobot.goToCreateOrder();
     materialListRobot.verify();
     await materialListRobot.tapMaterial(material1);
@@ -320,27 +285,10 @@ void main() {
     cartRobot.findMaterialItem(material1, 100);
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
-    orderSummaryRobot.findOrderTemplate();
-    await orderSummaryRobot.tapOrderTemplate();
-    orderSummaryRobot.findOrderTemplate();
-    await orderSummaryRobot.enterTemplateName(saveTemplateText);
-    orderSummaryRobot.findTemplateSaveButton();
-    await orderSummaryRobot.tapTemplateSaveButton();
     await orderSummaryRobot.goBack();
     await cartRobot.goBack();
     await materialListRobot.goBack();
 
-    //Place Order From Saved Order Templates
-    homeRobot.verify();
-    homeRobot.findOrderTemplate();
-    await homeRobot.tapOrderTemplate();
-    orderTemplateListRobot.findTemplateItem(saveTemplateText);
-    await orderTemplateListRobot.tapTemplateItem(saveTemplateText);
-    orderTemplateDetailRobot.verifyMaterialNumber(templateMaterial);
-    orderTemplateDetailRobot.verifyMaterialQuantity(templateQty);
-    orderTemplateDetailRobot.findAddToCart();
-    await orderTemplateDetailRobot.tapAddToCart();
-    cartRobot.verify();
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
     orderSummaryRobot.verifyCustomerEmail('NA');
@@ -410,21 +358,6 @@ void main() {
     homeRobot.findHomeTab();
     await homeRobot.tapHomeTab();
 
-    //Add To Favorites
-    await homeRobot.goToCreateOrder();
-    materialListRobot.verify();
-    materialListRobot.findFavoriteIcon(templateMaterial);
-    await materialListRobot.tapFavoriteIcon(templateMaterial);
-    await materialListRobot.goBack();
-
-    homeRobot.verify();
-    homeRobot.findFavoriteTab();
-    await homeRobot.tapFavoriteTab();
-    favoriteRobot.verify();
-    await favoriteRobot.refreshFavoriteList();
-    favoriteRobot.findFavoriteItem();
-    favoriteRobot.verifyMaterialNumber(templateMaterial);
-
     favoriteRobot.findFavoriteIcon(material1);
     await favoriteRobot.tapFavoriteIcon(material1);
 
@@ -466,28 +399,6 @@ void main() {
     await orderSummaryRobot.goBack();
     await cartRobot.goBack();
     await materialListRobot.goBack();
-
-    //Delete Saved Order
-    homeRobot.findSavedOrders();
-    await homeRobot.tapSavedOrders();
-    savedOrderListRobot.findSavedOrderItemDelete();
-    await savedOrderListRobot.tapSavedOrderItemDelete();
-    savedOrderListRobot.verifyConfirmationDialog();
-    savedOrderListRobot.findConfirmButton();
-    await savedOrderListRobot.tapConfirmButton();
-    await savedOrderListRobot.goBack();
-    homeRobot.verify();
-
-    //Delete Order Template
-    homeRobot.findOrderTemplate();
-    await homeRobot.tapOrderTemplate();
-    orderTemplateListRobot.findTemplateItemDelete();
-    await orderTemplateListRobot.tapTemplateItemDelete();
-    orderTemplateListRobot.verifyConfirmationDialog();
-    orderTemplateListRobot.findConfirmButton();
-    await orderTemplateListRobot.tapConfirmButton();
-    await orderTemplateListRobot.goBack();
-    homeRobot.verify();
 
     //Find no login on behalf
     homeRobot.findAccountTab();

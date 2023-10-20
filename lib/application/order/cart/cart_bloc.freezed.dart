@@ -34,8 +34,6 @@ mixin _$CartEvent {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -72,8 +70,6 @@ mixin _$CartEvent {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -109,7 +105,6 @@ mixin _$CartEvent {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -139,8 +134,6 @@ mixin _$CartEvent {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -167,7 +160,6 @@ mixin _$CartEvent {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -192,7 +184,6 @@ mixin _$CartEvent {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -403,8 +394,6 @@ class _$_Initialized implements _Initialized {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -445,8 +434,6 @@ class _$_Initialized implements _Initialized {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -486,7 +473,6 @@ class _$_Initialized implements _Initialized {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -523,8 +509,6 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -554,7 +538,6 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -582,7 +565,6 @@ class _$_Initialized implements _Initialized {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -732,8 +714,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -773,8 +753,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -813,7 +791,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -849,8 +826,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -880,7 +855,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -908,7 +882,6 @@ class _$_VerifyMaterialDealBonus implements _VerifyMaterialDealBonus {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -1071,8 +1044,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -1112,8 +1083,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -1153,7 +1122,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -1190,8 +1158,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -1221,7 +1187,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -1249,7 +1214,6 @@ class _$_AddBonusToCartItem implements _AddBonusToCartItem {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -1345,8 +1309,6 @@ class _$_RemoveSampleBonusFromCartConfig
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -1386,8 +1348,6 @@ class _$_RemoveSampleBonusFromCartConfig
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -1426,7 +1386,6 @@ class _$_RemoveSampleBonusFromCartConfig
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -1462,8 +1421,6 @@ class _$_RemoveSampleBonusFromCartConfig
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -1493,7 +1450,6 @@ class _$_RemoveSampleBonusFromCartConfig
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -1521,7 +1477,6 @@ class _$_RemoveSampleBonusFromCartConfig
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -1603,8 +1558,6 @@ class _$_ClearCart implements _ClearCart {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -1644,8 +1597,6 @@ class _$_ClearCart implements _ClearCart {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -1684,7 +1635,6 @@ class _$_ClearCart implements _ClearCart {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -1720,8 +1670,6 @@ class _$_ClearCart implements _ClearCart {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -1751,7 +1699,6 @@ class _$_ClearCart implements _ClearCart {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -1779,7 +1726,6 @@ class _$_ClearCart implements _ClearCart {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -1804,326 +1750,6 @@ class _$_ClearCart implements _ClearCart {
 
 abstract class _ClearCart implements CartEvent {
   const factory _ClearCart() = _$_ClearCart;
-}
-
-/// @nodoc
-abstract class _$$_UpdateBatchInCartItemCopyWith<$Res> {
-  factory _$$_UpdateBatchInCartItemCopyWith(_$_UpdateBatchInCartItem value,
-          $Res Function(_$_UpdateBatchInCartItem) then) =
-      __$$_UpdateBatchInCartItemCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CartItem item, StockInfo stockInfo});
-
-  $CartItemCopyWith<$Res> get item;
-  $StockInfoCopyWith<$Res> get stockInfo;
-}
-
-/// @nodoc
-class __$$_UpdateBatchInCartItemCopyWithImpl<$Res>
-    extends _$CartEventCopyWithImpl<$Res, _$_UpdateBatchInCartItem>
-    implements _$$_UpdateBatchInCartItemCopyWith<$Res> {
-  __$$_UpdateBatchInCartItemCopyWithImpl(_$_UpdateBatchInCartItem _value,
-      $Res Function(_$_UpdateBatchInCartItem) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? item = null,
-    Object? stockInfo = null,
-  }) {
-    return _then(_$_UpdateBatchInCartItem(
-      item: null == item
-          ? _value.item
-          : item // ignore: cast_nullable_to_non_nullable
-              as CartItem,
-      stockInfo: null == stockInfo
-          ? _value.stockInfo
-          : stockInfo // ignore: cast_nullable_to_non_nullable
-              as StockInfo,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CartItemCopyWith<$Res> get item {
-    return $CartItemCopyWith<$Res>(_value.item, (value) {
-      return _then(_value.copyWith(item: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $StockInfoCopyWith<$Res> get stockInfo {
-    return $StockInfoCopyWith<$Res>(_value.stockInfo, (value) {
-      return _then(_value.copyWith(stockInfo: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_UpdateBatchInCartItem implements _UpdateBatchInCartItem {
-  const _$_UpdateBatchInCartItem({required this.item, required this.stockInfo});
-
-  @override
-  final CartItem item;
-  @override
-  final StockInfo stockInfo;
-
-  @override
-  String toString() {
-    return 'CartEvent.updateBatchInCartItem(item: $item, stockInfo: $stockInfo)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_UpdateBatchInCartItem &&
-            (identical(other.item, item) || other.item == item) &&
-            (identical(other.stockInfo, stockInfo) ||
-                other.stockInfo == stockInfo));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, item, stockInfo);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_UpdateBatchInCartItemCopyWith<_$_UpdateBatchInCartItem> get copyWith =>
-      __$$_UpdateBatchInCartItemCopyWithImpl<_$_UpdateBatchInCartItem>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)
-        initialized,
-    required TResult Function(PriceAggregate item, List<PriceAggregate> items)
-        verifyMaterialDealBonus,
-    required TResult Function(
-            MaterialInfo bonusMaterial,
-            StringValue bonusItemId,
-            RequestCounterOfferDetails counterOfferDetails)
-        addBonusToCartItem,
-    required TResult Function() removeSampleBonusFromCartConfig,
-    required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
-    required TResult Function() fetchProductsAddedToCart,
-    required TResult Function(PriceAggregate priceAggregate, int quantity)
-        upsertCart,
-    required TResult Function(List<PriceAggregate> priceAggregate,
-            List<int> quantity, RequestCounterOfferDetails counterOfferDetails)
-        addHistoryItemsToCart,
-    required TResult Function(PriceAggregate priceAggregate) upsertCartItems,
-    required TResult Function(List<PriceAggregate> cartProducts)
-        getDetailsProductsAddedToCart,
-    required TResult Function(Map<MaterialNumber, Price> priceProducts)
-        updatePriceProduct,
-    required TResult Function() updateProductStock,
-    required TResult Function(List<MaterialInfo> invalidCartItems)
-        removeInvalidProducts,
-    required TResult Function(List<PriceAggregate> priceAggregates)
-        upsertCartItemsWithComboOffers,
-    required TResult Function(Price overriddenProductPrice)
-        updateCartProductWithCounterOffer,
-  }) {
-    return updateBatchInCartItem(item, stockInfo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        initialized,
-    TResult? Function(PriceAggregate item, List<PriceAggregate> items)?
-        verifyMaterialDealBonus,
-    TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
-            RequestCounterOfferDetails counterOfferDetails)?
-        addBonusToCartItem,
-    TResult? Function()? removeSampleBonusFromCartConfig,
-    TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
-    TResult? Function()? fetchProductsAddedToCart,
-    TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
-    TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        addHistoryItemsToCart,
-    TResult? Function(PriceAggregate priceAggregate)? upsertCartItems,
-    TResult? Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(Map<MaterialNumber, Price> priceProducts)?
-        updatePriceProduct,
-    TResult? Function()? updateProductStock,
-    TResult? Function(List<MaterialInfo> invalidCartItems)?
-        removeInvalidProducts,
-    TResult? Function(List<PriceAggregate> priceAggregates)?
-        upsertCartItemsWithComboOffers,
-    TResult? Function(Price overriddenProductPrice)?
-        updateCartProductWithCounterOffer,
-  }) {
-    return updateBatchInCartItem?.call(item, stockInfo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            SalesOrganisationConfigs salesOrganisationConfigs,
-            SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo,
-            ShipToInfo shipToInfo,
-            User user)?
-        initialized,
-    TResult Function(PriceAggregate item, List<PriceAggregate> items)?
-        verifyMaterialDealBonus,
-    TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
-            RequestCounterOfferDetails counterOfferDetails)?
-        addBonusToCartItem,
-    TResult Function()? removeSampleBonusFromCartConfig,
-    TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
-    TResult Function()? fetchProductsAddedToCart,
-    TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
-    TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
-            RequestCounterOfferDetails counterOfferDetails)?
-        addHistoryItemsToCart,
-    TResult Function(PriceAggregate priceAggregate)? upsertCartItems,
-    TResult Function(List<PriceAggregate> cartProducts)?
-        getDetailsProductsAddedToCart,
-    TResult Function(Map<MaterialNumber, Price> priceProducts)?
-        updatePriceProduct,
-    TResult Function()? updateProductStock,
-    TResult Function(List<MaterialInfo> invalidCartItems)?
-        removeInvalidProducts,
-    TResult Function(List<PriceAggregate> priceAggregates)?
-        upsertCartItemsWithComboOffers,
-    TResult Function(Price overriddenProductPrice)?
-        updateCartProductWithCounterOffer,
-    required TResult orElse(),
-  }) {
-    if (updateBatchInCartItem != null) {
-      return updateBatchInCartItem(item, stockInfo);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_VerifyMaterialDealBonus value)
-        verifyMaterialDealBonus,
-    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
-    required TResult Function(_RemoveSampleBonusFromCartConfig value)
-        removeSampleBonusFromCartConfig,
-    required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
-    required TResult Function(_FetchProductsAddedToCart value)
-        fetchProductsAddedToCart,
-    required TResult Function(_UpsertCart value) upsertCart,
-    required TResult Function(_addHistoryItemsToCart value)
-        addHistoryItemsToCart,
-    required TResult Function(_UpsertCartItems value) upsertCartItems,
-    required TResult Function(_GetDetailsProductsAddedToCart value)
-        getDetailsProductsAddedToCart,
-    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
-    required TResult Function(_UpdateProductStock value) updateProductStock,
-    required TResult Function(_RemoveInvalidProducts value)
-        removeInvalidProducts,
-    required TResult Function(_UpsertCartItemsWithComboOffers value)
-        upsertCartItemsWithComboOffers,
-    required TResult Function(_UpdateCartProductWithCounterOffer value)
-        updateCartProductWithCounterOffer,
-  }) {
-    return updateBatchInCartItem(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
-        removeSampleBonusFromCartConfig,
-    TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult? Function(_FetchProductsAddedToCart value)?
-        fetchProductsAddedToCart,
-    TResult? Function(_UpsertCart value)? upsertCart,
-    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
-    TResult? Function(_UpsertCartItems value)? upsertCartItems,
-    TResult? Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult? Function(_UpdateProductStock value)? updateProductStock,
-    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
-    TResult? Function(_UpsertCartItemsWithComboOffers value)?
-        upsertCartItemsWithComboOffers,
-    TResult? Function(_UpdateCartProductWithCounterOffer value)?
-        updateCartProductWithCounterOffer,
-  }) {
-    return updateBatchInCartItem?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
-    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
-    TResult Function(_RemoveSampleBonusFromCartConfig value)?
-        removeSampleBonusFromCartConfig,
-    TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
-    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
-    TResult Function(_UpsertCart value)? upsertCart,
-    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
-    TResult Function(_UpsertCartItems value)? upsertCartItems,
-    TResult Function(_GetDetailsProductsAddedToCart value)?
-        getDetailsProductsAddedToCart,
-    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
-    TResult Function(_UpdateProductStock value)? updateProductStock,
-    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
-    TResult Function(_UpsertCartItemsWithComboOffers value)?
-        upsertCartItemsWithComboOffers,
-    TResult Function(_UpdateCartProductWithCounterOffer value)?
-        updateCartProductWithCounterOffer,
-    required TResult orElse(),
-  }) {
-    if (updateBatchInCartItem != null) {
-      return updateBatchInCartItem(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UpdateBatchInCartItem implements CartEvent {
-  const factory _UpdateBatchInCartItem(
-      {required final CartItem item,
-      required final StockInfo stockInfo}) = _$_UpdateBatchInCartItem;
-
-  CartItem get item;
-  StockInfo get stockInfo;
-  @JsonKey(ignore: true)
-  _$$_UpdateBatchInCartItemCopyWith<_$_UpdateBatchInCartItem> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2182,8 +1808,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -2223,8 +1847,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -2263,7 +1885,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -2299,8 +1920,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -2330,7 +1949,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -2358,7 +1976,6 @@ class _$_FetchProductsAddedToCart implements _FetchProductsAddedToCart {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -2485,8 +2102,6 @@ class _$_UpsertCart implements _UpsertCart {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -2526,8 +2141,6 @@ class _$_UpsertCart implements _UpsertCart {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -2566,7 +2179,6 @@ class _$_UpsertCart implements _UpsertCart {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -2602,8 +2214,6 @@ class _$_UpsertCart implements _UpsertCart {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -2633,7 +2243,6 @@ class _$_UpsertCart implements _UpsertCart {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -2661,7 +2270,6 @@ class _$_UpsertCart implements _UpsertCart {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -2830,8 +2438,6 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -2871,8 +2477,6 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -2912,7 +2516,6 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -2949,8 +2552,6 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -2980,7 +2581,6 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -3008,7 +2608,6 @@ class _$_addHistoryItemsToCart implements _addHistoryItemsToCart {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -3137,8 +2736,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -3178,8 +2775,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -3218,7 +2813,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -3254,8 +2848,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -3285,7 +2877,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -3313,7 +2904,6 @@ class _$_UpsertCartItems implements _UpsertCartItems {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -3439,8 +3029,6 @@ class _$_GetDetailsProductsAddedToCart
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -3480,8 +3068,6 @@ class _$_GetDetailsProductsAddedToCart
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -3520,7 +3106,6 @@ class _$_GetDetailsProductsAddedToCart
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -3556,8 +3141,6 @@ class _$_GetDetailsProductsAddedToCart
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -3587,7 +3170,6 @@ class _$_GetDetailsProductsAddedToCart
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -3615,7 +3197,6 @@ class _$_GetDetailsProductsAddedToCart
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -3739,8 +3320,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -3780,8 +3359,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -3820,7 +3397,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -3856,8 +3432,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -3887,7 +3461,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -3915,7 +3488,6 @@ class _$_UpdatePriceProduct implements _UpdatePriceProduct {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -4003,8 +3575,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -4044,8 +3614,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -4084,7 +3652,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -4120,8 +3687,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -4151,7 +3716,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -4179,7 +3743,6 @@ class _$_UpdateProductStock implements _UpdateProductStock {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -4297,8 +3860,6 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -4338,8 +3899,6 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -4378,7 +3937,6 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -4414,8 +3972,6 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -4445,7 +4001,6 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -4473,7 +4028,6 @@ class _$_RemoveInvalidProducts implements _RemoveInvalidProducts {
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -4600,8 +4154,6 @@ class _$_UpsertCartItemsWithComboOffers
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -4641,8 +4193,6 @@ class _$_UpsertCartItemsWithComboOffers
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -4681,7 +4231,6 @@ class _$_UpsertCartItemsWithComboOffers
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -4717,8 +4266,6 @@ class _$_UpsertCartItemsWithComboOffers
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -4748,7 +4295,6 @@ class _$_UpsertCartItemsWithComboOffers
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -4776,7 +4322,6 @@ class _$_UpsertCartItemsWithComboOffers
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
@@ -4907,8 +4452,6 @@ class _$_UpdateCartProductWithCounterOffer
         addBonusToCartItem,
     required TResult Function() removeSampleBonusFromCartConfig,
     required TResult Function() clearCart,
-    required TResult Function(CartItem item, StockInfo stockInfo)
-        updateBatchInCartItem,
     required TResult Function() fetchProductsAddedToCart,
     required TResult Function(PriceAggregate priceAggregate, int quantity)
         upsertCart,
@@ -4948,8 +4491,6 @@ class _$_UpdateCartProductWithCounterOffer
         addBonusToCartItem,
     TResult? Function()? removeSampleBonusFromCartConfig,
     TResult? Function()? clearCart,
-    TResult? Function(CartItem item, StockInfo stockInfo)?
-        updateBatchInCartItem,
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult? Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -4988,7 +4529,6 @@ class _$_UpdateCartProductWithCounterOffer
         addBonusToCartItem,
     TResult Function()? removeSampleBonusFromCartConfig,
     TResult Function()? clearCart,
-    TResult Function(CartItem item, StockInfo stockInfo)? updateBatchInCartItem,
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, int quantity)? upsertCart,
     TResult Function(List<PriceAggregate> priceAggregate, List<int> quantity,
@@ -5024,8 +4564,6 @@ class _$_UpdateCartProductWithCounterOffer
     required TResult Function(_RemoveSampleBonusFromCartConfig value)
         removeSampleBonusFromCartConfig,
     required TResult Function(_ClearCart value) clearCart,
-    required TResult Function(_UpdateBatchInCartItem value)
-        updateBatchInCartItem,
     required TResult Function(_FetchProductsAddedToCart value)
         fetchProductsAddedToCart,
     required TResult Function(_UpsertCart value) upsertCart,
@@ -5055,7 +4593,6 @@ class _$_UpdateCartProductWithCounterOffer
     TResult? Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult? Function(_ClearCart value)? clearCart,
-    TResult? Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult? Function(_FetchProductsAddedToCart value)?
         fetchProductsAddedToCart,
     TResult? Function(_UpsertCart value)? upsertCart,
@@ -5083,7 +4620,6 @@ class _$_UpdateCartProductWithCounterOffer
     TResult Function(_RemoveSampleBonusFromCartConfig value)?
         removeSampleBonusFromCartConfig,
     TResult Function(_ClearCart value)? clearCart,
-    TResult Function(_UpdateBatchInCartItem value)? updateBatchInCartItem,
     TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
     TResult Function(_UpsertCart value)? upsertCart,
     TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,

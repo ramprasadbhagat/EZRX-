@@ -15,12 +15,8 @@ import '../../robots/orders/create_order/material_list/material_list_robot.dart'
 import '../../robots/orders/create_order/material_root_robot.dart';
 import '../../robots/orders/create_order/order_confirmation_robot.dart';
 import '../../robots/orders/create_order/order_summary_robot.dart';
-import '../../robots/orders/order_template/order_template_detail_robot.dart';
-import '../../robots/orders/order_template/order_template_list_robot.dart';
-import '../../robots/orders/saved_order/saved_order_detail_robot.dart';
-import '../../robots/orders/saved_order/saved_order_list_robot.dart';
 
-enum Pages { materialList, savedOrder, orderTemplate }
+enum Pages { materialList }
 
 void main() {
   late LoginRobot loginRobot;
@@ -35,11 +31,7 @@ void main() {
   late OrderConfirmationRobot orderConfirmationRobot;
   late OrderHistoryRobot orderHistoryRobot;
   late OrderHistoryDetailsRobot orderHistoryDetailsRobot;
-  late SavedOrderListRobot savedOrderListRobot;
-  late SavedOrderDetailRobot savedOrderDetailRobot;
   late FavoriteRobot favoriteRobot;
-  late OrderTemplateListRobot orderTemplateListRobot;
-  late OrderTemplateDetailRobot orderTemplateDetailRobot;
   late MaterialRootRobot materialRootRobot;
 
   var quantity = 0;
@@ -69,7 +61,6 @@ void main() {
   const poReferenceText = 'PO Reference';
   const specialInstruction = 'Special Instruction';
   const orderType = 'ZPOR';
-  const templateName = 'demoTemplate';
   const materialType = 'Comm';
   const clientUserFullName = 'KH ClientUser';
   const clientUserRole = 'Client User';
@@ -129,14 +120,6 @@ void main() {
       case Pages.materialList:
         materialListRobot.findCartButton();
         await materialListRobot.tapCartButton();
-        break;
-      case Pages.savedOrder:
-        savedOrderDetailRobot.findAddToCart();
-        await savedOrderDetailRobot.tapAddToCart();
-        break;
-      case Pages.orderTemplate:
-        orderTemplateDetailRobot.findAddToCart();
-        await orderTemplateDetailRobot.tapAddToCart();
         break;
       default:
     }
@@ -227,10 +210,6 @@ void main() {
     );
   }
 
-  Future<void> orderSummarySaveOrder() async {
-    await orderSummaryRobot.tapSave();
-  }
-
   Future<void> orderSummarySubmitOrder() async {
     await orderSummaryRobot.tapSubmit();
     orderConfirmationRobot.verify();
@@ -240,20 +219,13 @@ void main() {
     orderConfirmationRobot.findGoToOrderHistoryButton();
   }
 
-  Future<void> handleOrderSummarySubmitOrSave({
-    required bool forSave,
-    required bool fromSave,
-  }) async {
+  Future<void> handleOrderSummarySubmit() async {
     orderSummaryRobot.verifyIfHideStockDisplayIsEnable(materialNumber);
-    fromSave ? orderSummaryRobot.findUpdate() : orderSummaryRobot.findSave();
     orderSummaryRobot.findSubmit();
-    forSave ? await orderSummarySaveOrder() : await orderSummarySubmitOrder();
+    await orderSummarySubmitOrder();
   }
 
-  Future<void> goToOrderSummary({
-    required bool forSave,
-    final bool fromSave = false,
-  }) async {
+  Future<void> goToOrderSummary() async {
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
     await verifyOrderSummaryCustomerDetailsAndProceed();
@@ -261,10 +233,7 @@ void main() {
     await verifyOrderSummaryShipToDetailsAndProceed();
     await fillOrderSummaryAdditionalDetailsAndProceed();
     await verifyOrderSummaryCartDetailsAndProceed();
-    await handleOrderSummarySubmitOrSave(
-      forSave: forSave,
-      fromSave: fromSave,
-    );
+    await handleOrderSummarySubmit();
   }
 
   Future<void> gotoOrderHistory({required bool withFilter}) async {
@@ -336,11 +305,7 @@ void main() {
     orderConfirmationRobot = OrderConfirmationRobot(tester);
     orderHistoryRobot = OrderHistoryRobot(tester);
     orderHistoryDetailsRobot = OrderHistoryDetailsRobot(tester);
-    savedOrderListRobot = SavedOrderListRobot(tester);
-    savedOrderDetailRobot = SavedOrderDetailRobot(tester);
     favoriteRobot = FavoriteRobot(tester);
-    orderTemplateListRobot = OrderTemplateListRobot(tester);
-    orderTemplateDetailRobot = OrderTemplateDetailRobot(tester);
     materialRootRobot = MaterialRootRobot(tester);
     //init app
     await runAppForTesting(tester);
@@ -425,9 +390,7 @@ void main() {
       materialNumber: materialNumber,
     );
     await goToCartPage(fromWhere: Pages.materialList);
-    await goToOrderSummary(
-      forSave: false,
-    );
+    await goToOrderSummary();
     //order history
     await gotoOrderHistory(
       withFilter: false,
@@ -453,59 +416,21 @@ void main() {
 
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
-    orderSummaryRobot.findOrderTemplate();
-    await orderSummaryRobot.tapOrderTemplate();
-    await orderSummaryRobot.enterTemplateName(templateName);
-    orderSummaryRobot.findTemplateSaveButton();
-    await orderSummaryRobot.tapTemplateSaveButton();
     await orderSummaryRobot.goBack();
     await tester.pumpAndSettle(const Duration(seconds: 3));
     await cartRobot.goBack();
     await tester.pumpAndSettle(const Duration(seconds: 3));
     await homeRobot.tapHomeTab();
     homeRobot.verify();
-    homeRobot.findOrderTemplate();
-    await homeRobot.tapOrderTemplate();
-    orderTemplateListRobot.findTemplateItemDelete();
-    await orderTemplateListRobot.tapTemplateItemDelete();
-    orderTemplateListRobot.verifyConfirmationDialog();
-    orderTemplateListRobot.findConfirmButton();
-    await orderTemplateListRobot.tapConfirmButton();
-    await orderTemplateListRobot.goBack();
-    homeRobot.verify();
     await tester.pumpAndSettle(const Duration(seconds: 2));
     await homeRobot.goToCreateOrder();
     materialListRobot.findCartButton();
     await materialListRobot.tapCartButton();
     cartRobot.verify();
-    await goToOrderSummary(forSave: true);
-    savedOrderListRobot.verify();
-    savedOrderListRobot.findOrder();
-    savedOrderListRobot.verifySoldToID(customerCode);
-    savedOrderListRobot.verifyShipToID(shipToCode);
-    await savedOrderListRobot.tapOrder();
-    savedOrderDetailRobot.verify();
-    savedOrderDetailRobot.verifyMaterialNumber(materialActualNumber);
-    savedOrderDetailRobot.verifyMaterialQuantity(quantity.toString());
-    await tester.pumpAndSettle(const Duration(seconds: 5));
-    await goToCartPage(fromWhere: Pages.savedOrder);
-    await goToOrderSummary(
-      forSave: false,
-      fromSave: true,
-    );
+    await goToOrderSummary();
     orderConfirmationRobot.findCreateNewOrderButton();
     await orderConfirmationRobot.tapCreateNewOrderButton();
     await materialListRobot.goBack();
-    homeRobot.findSavedOrders();
-    await homeRobot.tapSavedOrders();
-    savedOrderListRobot.findOrder();
-    savedOrderListRobot.findSavedOrderItemDelete();
-    await savedOrderListRobot.tapSavedOrderItemDelete();
-    savedOrderListRobot.verifyConfirmationDialog();
-    savedOrderListRobot.findConfirmButton();
-    await savedOrderListRobot.tapConfirmButton();
-    await savedOrderListRobot.goBack();
-    homeRobot.verify();
     await homeRobot.goToCreateOrder();
     materialListRobot.verify();
     await materialListRobot.clearSearchMaterial();

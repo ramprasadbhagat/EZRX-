@@ -1,23 +1,19 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
-import 'package:ezrxmobile/domain/order/entities/saved_order.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/order_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class SavedOrderRepositoryMock extends Mock implements OrderRepository {}
+class OrderRepositoryMock extends Mock implements OrderRepository {}
 
 class CartRepositoryMock extends Mock implements CartRepository {}
 
@@ -26,14 +22,9 @@ void main() {
   late SalesOrganisationConfigs config;
   late CustomerCodeInfo customerCodeInfo;
   late DeliveryInfoData data;
-  late OrderRepository repository;
-  late SavedOrder orderDetail;
   group(
     'Additional Details Bloc Test',
     () {
-      setUpAll(() async {
-        orderDetail = await OrderLocalDataSource().getSavedOrderDetail();
-      });
       setUp(
         () {
           config = SalesOrganisationConfigs.empty().copyWith(
@@ -45,15 +36,12 @@ void main() {
             enableReferenceNote: true,
           );
           customerCodeInfo = CustomerCodeInfo.empty();
-          repository = SavedOrderRepositoryMock();
           data = DeliveryInfoData.empty();
         },
       );
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Load Bloc with futureDeliveryDay',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         act: (bloc) => bloc.add(
           AdditionalDetailsEvent.initialized(
             config: config,
@@ -74,9 +62,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Load Bloc without futureDeliveryDay',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         act: (bloc) => bloc.add(
           AdditionalDetailsEvent.initialized(
             config: config.copyWith(
@@ -99,9 +85,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'initiateFromHistory test',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         act: (bloc) => bloc.add(
           AdditionalDetailsEvent.initiateFromHistory(
             data: data,
@@ -124,9 +108,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details AdditionalDetails Form OnTextChange',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         act: (AdditionalDetailsBloc bloc) {
           bloc
             ..add(
@@ -234,9 +216,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Validate AdditionalDetails Form Success',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poReference: PoReference('CO REF'),
@@ -272,9 +252,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Validate AdditionalDetails Form Failure',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poReference: PoReference('CO REF'),
@@ -311,9 +289,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details toggleGreenDelivery test enableGreenDelivery true',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poReference: PoReference('CO REF'),
@@ -341,9 +317,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details toggleGreenDelivery test enableGreenDelivery false',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poReference: PoReference('CO REF'),
@@ -371,9 +345,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Po Document Add',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         act: (AdditionalDetailsBloc bloc) {
           bloc.add(
             AdditionalDetailsEvent.addPoDocument(
@@ -392,9 +364,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Po Document Remove',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poDocuments: [PoDocuments.empty()],
@@ -414,9 +384,7 @@ void main() {
 
       blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
         'Additional Details Po Document Remove All',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
+        build: () => AdditionalDetailsBloc(),
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poDocuments: [
@@ -434,98 +402,6 @@ void main() {
         act: (AdditionalDetailsBloc bloc) {
           bloc.add(
             const AdditionalDetailsEvent.removeAllPoDocument(),
-          );
-        },
-        expect: () => [
-          AdditionalDetailsState.initial(),
-        ],
-      );
-
-      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
-        'Init from saved order when SavedOrderDetail API success',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
-        setUp: () {
-          when(() => repository.getSavedOrderDetail(orderId: orderDetail.id))
-              .thenAnswer(
-            (invocation) async => Right(orderDetail),
-          );
-        },
-        act: (AdditionalDetailsBloc bloc) {
-          bloc.add(
-            AdditionalDetailsEvent.initFromSavedOrder(
-              config: config,
-              customerCodeInfo: customerCodeInfo,
-              orderId: orderDetail.id,
-            ),
-          );
-        },
-        expect: () => [
-          AdditionalDetailsState.initial().copyWith(
-            isLoading: true,
-            orderId: orderDetail.id,
-          ),
-          AdditionalDetailsState.initial().copyWith(
-            isLoading: false,
-            orderId: orderDetail.id,
-            deliveryInfoData: DeliveryInfoData.fromSavedOrder(
-              orderDetail: orderDetail,
-              customerCodeInfo: customerCodeInfo,
-            ),
-          ),
-        ],
-      );
-
-      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
-        'Init from saved order when SavedOrderDetail API Failure',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
-        setUp: () {
-          when(() => repository.getSavedOrderDetail(orderId: orderDetail.id))
-              .thenAnswer(
-            (invocation) async => const Left(
-              ApiFailure.other('fake-error'),
-            ),
-          );
-        },
-        act: (AdditionalDetailsBloc bloc) {
-          bloc.add(
-            AdditionalDetailsEvent.initFromSavedOrder(
-              config: config,
-              customerCodeInfo: customerCodeInfo,
-              orderId: orderDetail.id,
-            ),
-          );
-        },
-        expect: () => [
-          AdditionalDetailsState.initial().copyWith(
-            isLoading: true,
-            orderId: orderDetail.id,
-          ),
-          AdditionalDetailsState.initial().copyWith(
-            isLoading: false,
-            orderId: orderDetail.id,
-            deliveryInfoData: DeliveryInfoData.empty().copyWith(
-              mobileNumber: MobileNumber(
-                customerCodeInfo.telephoneNumber.displayTelephoneNumber,
-              ),
-            ),
-          ),
-        ],
-      );
-
-      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
-        'Clear saved order id',
-        build: () => AdditionalDetailsBloc(
-          savedOrderRepository: repository,
-        ),
-        seed: () =>
-            AdditionalDetailsState.initial().copyWith(orderId: 'fake-id'),
-        act: (AdditionalDetailsBloc bloc) {
-          bloc.add(
-            const AdditionalDetailsEvent.clearSavedOrderId(),
           );
         },
         expect: () => [

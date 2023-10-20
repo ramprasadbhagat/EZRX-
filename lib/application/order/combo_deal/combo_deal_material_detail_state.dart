@@ -82,12 +82,4 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
       return materials;
     }).toList();
   }
-
-  bool get isEnableAddToCart {
-    if (isFetchingPrice || isFetchingComboInfo || allSelectedItems.isEmpty) {
-      return false;
-    }
-
-    return CartItem.comboDeal(allSelectedItems).isComboDealEligible;
-  }
 }

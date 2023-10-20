@@ -15,10 +15,6 @@ import '../../robots/orders/create_order/material_root_robot.dart';
 import '../../robots/orders/create_order/order_confirmation_robot.dart';
 import '../../robots/orders/create_order/order_summary_robot.dart';
 import '../../robots/orders/create_order/material_list/material_detail_robot.dart';
-import '../../robots/orders/order_template/order_template_detail_robot.dart';
-import '../../robots/orders/order_template/order_template_list_robot.dart';
-import '../../robots/orders/saved_order/saved_order_detail_robot.dart';
-import '../../robots/orders/saved_order/saved_order_list_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
@@ -34,11 +30,7 @@ void main() {
   late OrderConfirmationRobot orderConfirmationRobot;
   late OrderHistoryRobot orderHistoryRobot;
   late OrderHistoryDetailsRobot orderHistoryDetailsRobot;
-  late SavedOrderListRobot savedOrderListRobot;
-  late SavedOrderDetailRobot savedOrderDetailRobot;
   late FavoriteRobot favoriteRobot;
-  late OrderTemplateListRobot orderTemplateListRobot;
-  late OrderTemplateDetailRobot orderTemplateDetailRobot;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -55,11 +47,7 @@ void main() {
     orderConfirmationRobot = OrderConfirmationRobot(tester);
     orderHistoryRobot = OrderHistoryRobot(tester);
     orderHistoryDetailsRobot = OrderHistoryDetailsRobot(tester);
-    savedOrderListRobot = SavedOrderListRobot(tester);
-    savedOrderDetailRobot = SavedOrderDetailRobot(tester);
     favoriteRobot = FavoriteRobot(tester);
-    orderTemplateListRobot = OrderTemplateListRobot(tester);
-    orderTemplateDetailRobot = OrderTemplateDetailRobot(tester);
     materialRootRobot = MaterialRootRobot(tester);
     const username = 'khexternalsalesrep';
     const password = 'St@ysafe01';
@@ -76,7 +64,6 @@ void main() {
     const postalCode = '';
     const material = '000000000021223410';
     const materialAbsolute = '21223410';
-    const orderTemplateName = 'khExternalSalesRepTemplate';
     const orderType = 'ZPOR';
     const remark1 = 'Good';
     const remark2 = 'Nice';
@@ -208,7 +195,6 @@ void main() {
     orderSummaryRobot.verifyMaterialUnitPrice(true, currency, unitPrice);
     orderSummaryRobot.verifyMaterialTotalPrice(true, currency, totalPrice);
     orderSummaryRobot.verifyIfHideStockDisplayIsEnable(material);
-    orderSummaryRobot.findSave();
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
 
@@ -304,23 +290,10 @@ void main() {
     cartRobot.findMaterialItem(material, 20);
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
-    orderSummaryRobot.findOrderTemplate();
-    await orderSummaryRobot.tapOrderTemplate();
-    await orderSummaryRobot.enterTemplateName(orderTemplateName);
-    orderSummaryRobot.findTemplateSaveButton();
-    await orderSummaryRobot.tapTemplateSaveButton();
     await orderSummaryRobot.goBack();
     await cartRobot.goBack();
     await tester.pumpAndSettle(const Duration(seconds: 1));
     await materialListRobot.goBack();
-    homeRobot.findOrderTemplate();
-    await homeRobot.tapOrderTemplate();
-    orderTemplateListRobot.findTemplateItem(orderTemplateName);
-    await orderTemplateListRobot.tapTemplateItem(orderTemplateName);
-    orderTemplateDetailRobot.verifyMaterialNumber(materialAbsolute);
-    orderTemplateDetailRobot.verifyMaterialQuantity(materialQuantity);
-    orderTemplateDetailRobot.findAddToCart();
-    await orderTemplateDetailRobot.tapAddToCart();
     cartRobot.verify();
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
@@ -340,19 +313,6 @@ void main() {
     await orderSummaryRobot.getKeyboardDown();
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
-    orderSummaryRobot.findSave();
-    await orderSummaryRobot.tapSave();
-    savedOrderListRobot.verify();
-    savedOrderListRobot.findOrder();
-    savedOrderListRobot.verifySoldToID(customerCode);
-    savedOrderListRobot.verifyShipToID(shipToCode);
-    await savedOrderListRobot.tapOrder();
-    savedOrderDetailRobot.verify();
-    savedOrderDetailRobot.verifyMaterialNumber(materialAbsolute);
-    savedOrderDetailRobot.verifyMaterialQuantity(materialQuantity);
-    savedOrderDetailRobot.findAddToCart();
-    await savedOrderDetailRobot.tapAddToCart();
-    cartRobot.verify();
     await tester.pumpAndSettle(const Duration(seconds: 5));
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
@@ -438,25 +398,6 @@ void main() {
 
     orderHistoryRobot.findOrderItemByMaterialNumber(material);
     await homeRobot.tapHomeTab();
-    homeRobot.verify();
-    homeRobot.findOrderTemplate();
-    await homeRobot.tapOrderTemplate();
-    orderTemplateListRobot.findTemplateItemDelete();
-    await orderTemplateListRobot.tapTemplateItemDelete();
-    orderTemplateListRobot.verifyConfirmationDialog();
-    orderTemplateListRobot.findConfirmButton();
-    await orderTemplateListRobot.tapConfirmButton();
-    await orderTemplateListRobot.goBack();
-    homeRobot.verify();
-    homeRobot.findSavedOrders();
-    await homeRobot.tapSavedOrders();
-    savedOrderListRobot.findOrder();
-    savedOrderListRobot.findSavedOrderItemDelete();
-    await savedOrderListRobot.tapSavedOrderItemDelete();
-    savedOrderListRobot.verifyConfirmationDialog();
-    savedOrderListRobot.findConfirmButton();
-    await savedOrderListRobot.tapConfirmButton();
-    await savedOrderListRobot.goBack();
     homeRobot.verify();
     await homeRobot.goToCreateOrder();
     await materialListRobot.clearSearchMaterial();

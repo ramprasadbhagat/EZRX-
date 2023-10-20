@@ -1,8 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
-import 'package:ezrxmobile/domain/order/entities/order_template_material.dart';
-import 'package:ezrxmobile/domain/order/entities/material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -24,34 +22,6 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
     @Default(false) bool isComboDealMaterial,
     required TenderContract tenderContract,
   }) = _MaterialQueryInfo;
-
-  factory MaterialQueryInfo.fromSavedOrder({
-    required MaterialItem orderMaterial,
-  }) =>
-      MaterialQueryInfo(
-        qty: MaterialQty(orderMaterial.qty),
-        value: orderMaterial.materialNumber,
-        materialGroup2: orderMaterial.materialGroup2,
-        materialGroup4: orderMaterial.materialGroup4,
-        description: orderMaterial.displayDescription,
-        principalName: 'NA',
-        priceOverride: orderMaterial.overridenPrice.getOrDefaultValue(0),
-        zdp8Override: orderMaterial.zdp8Override.getOrDefaultValue(0),
-        tenderContract: orderMaterial.tenderContract,
-      );
-
-  factory MaterialQueryInfo.fromOrderTemplate({
-    required OrderTemplateMaterial orderMaterial,
-  }) =>
-      MaterialQueryInfo(
-        qty: MaterialQty(orderMaterial.qty),
-        value: orderMaterial.materialNumber,
-        materialGroup2: MaterialGroup.two(''),
-        materialGroup4: orderMaterial.materialGroup4,
-        description: orderMaterial.materialDescription,
-        principalName: orderMaterial.principalName,
-        tenderContract: TenderContract.empty(),
-      );
 
   // factory MaterialQueryInfo.fromFavorite({
   //   required Favourite material,

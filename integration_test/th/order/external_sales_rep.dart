@@ -15,10 +15,6 @@ import '../../robots/orders/create_order/material_root_robot.dart';
 import '../../robots/orders/create_order/order_confirmation_robot.dart';
 import '../../robots/history/order_history_details_robot.dart';
 import '../../robots/history/order_history_robot.dart';
-import '../../robots/orders/order_template/order_template_detail_robot.dart';
-import '../../robots/orders/order_template/order_template_list_robot.dart';
-import '../../robots/orders/saved_order/saved_order_detail_robot.dart';
-import '../../robots/orders/saved_order/saved_order_list_robot.dart';
 import '../../robots/home/ship_to_search_robot.dart';
 import '../../robots/orders/create_order/order_summary_robot.dart';
 
@@ -35,11 +31,7 @@ void main() {
   late OrderConfirmationRobot orderConfirmationRobot;
   late OrderHistoryRobot orderHistoryRobot;
   late OrderHistoryDetailsRobot orderHistoryDetailsRobot;
-  late SavedOrderListRobot savedOrderListRobot;
-  late SavedOrderDetailRobot savedOrderDetailRobot;
   late FavoriteRobot favoriteRobot;
-  late OrderTemplateListRobot orderTemplateListRobot;
-  late OrderTemplateDetailRobot orderTemplateDetailRobot;
   late MaterialRootRobot materialRootRobot;
 
   final zporMaterial = MaterialNumber('000000000023269154');
@@ -48,7 +40,6 @@ void main() {
   const salesOrg = '2902';
   const customerCode = '0000101502';
   const shipToCode = '0071057789';
-  const templateName = 'template_th';
   const orderTypeZPOR = 'ZPOR';
   const orderTypeZPFC = 'ZPFC';
   const orderTypeZPFB = 'ZPFB';
@@ -112,11 +103,7 @@ void main() {
     orderConfirmationRobot = OrderConfirmationRobot(tester);
     orderHistoryRobot = OrderHistoryRobot(tester);
     orderHistoryDetailsRobot = OrderHistoryDetailsRobot(tester);
-    savedOrderListRobot = SavedOrderListRobot(tester);
-    savedOrderDetailRobot = SavedOrderDetailRobot(tester);
     favoriteRobot = FavoriteRobot(tester);
-    orderTemplateListRobot = OrderTemplateListRobot(tester);
-    orderTemplateDetailRobot = OrderTemplateDetailRobot(tester);
     materialRootRobot = MaterialRootRobot(tester);
     //init app
     await runAppForTesting(tester);
@@ -245,7 +232,6 @@ void main() {
       currency,
       minimumOrderMaterialTotalPrice,
     );
-    orderSummaryRobot.findSave();
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     orderSummaryRobot.verify();
@@ -370,7 +356,6 @@ void main() {
       currency,
       bonusMaterialUnitPrice,
     );
-    orderSummaryRobot.findSave();
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.goBack();
     cartRobot.findMaterialItem(
@@ -422,7 +407,6 @@ void main() {
       currency,
       bonusMaterialTotalPrice,
     );
-    orderSummaryRobot.findSave();
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     orderConfirmationRobot.verify();
@@ -516,7 +500,6 @@ void main() {
     await orderSummaryRobot.scrollToContinueButton(3);
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
-    orderSummaryRobot.findSave();
     orderSummaryRobot.findSubmit();
     await orderSummaryRobot.tapSubmit();
     orderConfirmationRobot.verify();
@@ -576,7 +559,6 @@ void main() {
     materialListRobot.findOrderDocumentTypeSectorDialog();
     await materialListRobot.tapOrderType(orderTypeZPOR);
     await materialListRobot.clearSearchMaterial();
-    //save order
     await materialListRobot.search(zporMaterial.displayMatNo);
     await materialListRobot.tapMaterial(
       zporMaterial.getOrDefaultValue(''),
@@ -656,19 +638,6 @@ void main() {
       currency,
       regularMaterialTotalPrice,
     );
-    orderSummaryRobot.findSave();
-    await orderSummaryRobot.tapSave();
-    savedOrderListRobot.verify();
-    savedOrderListRobot.findOrder();
-    savedOrderListRobot.verifySoldToID(customerCode);
-    savedOrderListRobot.verifyShipToID(shipToCode);
-    await savedOrderListRobot.tapOrder();
-    savedOrderDetailRobot.verify();
-    savedOrderDetailRobot.verifyMaterialNumber(regularMaterial.displayMatNo);
-    savedOrderDetailRobot.verifyMaterialQuantity('1');
-    savedOrderDetailRobot.findAddToCart();
-    await savedOrderDetailRobot.tapAddToCart();
-    cartRobot.verify();
     cartRobot.findMaterialItem(
       regularMaterial.getOrDefaultValue(''),
       1,
@@ -738,25 +707,6 @@ void main() {
     );
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
-    orderSummaryRobot.findOrderTemplate();
-    await orderSummaryRobot.tapOrderTemplate();
-    orderSummaryRobot.findOrderTemplate();
-    await orderSummaryRobot.enterTemplateName(templateName);
-    orderSummaryRobot.findTemplateSaveButton();
-    await orderSummaryRobot.tapTemplateSaveButton();
-    await orderSummaryRobot.goBack();
-    await cartRobot.goBack();
-    await materialListRobot.goBack();
-    homeRobot.findOrderTemplate();
-    await homeRobot.tapOrderTemplate();
-    orderTemplateListRobot.findTemplateItem(templateName);
-    await orderTemplateListRobot.tapTemplateItem(templateName);
-    orderTemplateDetailRobot.verifyMaterialNumber(
-      regularMaterial.displayMatNo,
-    );
-    orderTemplateDetailRobot.findAddToCart();
-    await orderTemplateDetailRobot.tapAddToCart();
-    cartRobot.verify();
     cartRobot.findMaterialItem(
       regularMaterial.getOrDefaultValue(''),
       1,
@@ -787,25 +737,6 @@ void main() {
     orderHistoryRobot.verify();
     homeRobot.findHomeTab();
     await homeRobot.tapHomeTab();
-    homeRobot.findOrderTemplate();
-    await homeRobot.tapOrderTemplate();
-    //find and delete template order
-    await orderTemplateListRobot.tapTemplateItemDelete();
-    orderTemplateListRobot.verifyConfirmationDialog();
-    orderTemplateListRobot.findConfirmButton();
-    await orderTemplateListRobot.tapConfirmButton();
-    await orderTemplateListRobot.goBack();
-    homeRobot.verify();
-    homeRobot.findSavedOrders();
-    await homeRobot.tapSavedOrders();
-    //find and delete saved order
-    savedOrderListRobot.findOrder();
-    savedOrderListRobot.findSavedOrderItemDelete();
-    await savedOrderListRobot.tapSavedOrderItemDelete();
-    savedOrderListRobot.verifyConfirmationDialog();
-    savedOrderListRobot.findConfirmButton();
-    await savedOrderListRobot.tapConfirmButton();
-    await savedOrderListRobot.goBack();
     homeRobot.verify();
     await homeRobot.tapAccountTab();
     accountSettingsRobot.verify();

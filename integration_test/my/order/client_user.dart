@@ -19,10 +19,6 @@ import '../../robots/orders/create_order/material_list/material_list_robot.dart'
 import '../../robots/orders/create_order/material_root_robot.dart';
 import '../../robots/orders/create_order/order_confirmation_robot.dart';
 import '../../robots/orders/create_order/order_summary_robot.dart';
-import '../../robots/orders/order_template/order_template_detail_robot.dart';
-import '../../robots/orders/order_template/order_template_list_robot.dart';
-import '../../robots/orders/saved_order/saved_order_detail_robot.dart';
-import '../../robots/orders/saved_order/saved_order_list_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
@@ -37,11 +33,7 @@ void main() {
   late OrderConfirmationRobot orderConfirmationRobot;
   late OrderHistoryRobot orderHistoryRobot;
   late OrderHistoryDetailsRobot orderHistoryDetailsRobot;
-  late SavedOrderListRobot savedOrderListRobot;
-  late SavedOrderDetailRobot savedOrderDetailRobot;
   late FavoriteRobot favoriteRobot;
-  late OrderTemplateListRobot orderTemplateListRobot;
-  late OrderTemplateDetailRobot orderTemplateDetailRobot;
   late BonusListRobot bonusListRobot;
   late MaterialRootRobot materialRootRobot;
   late BundleListRobot bundleListRobot;
@@ -63,11 +55,7 @@ void main() {
     orderConfirmationRobot = OrderConfirmationRobot(tester);
     orderHistoryRobot = OrderHistoryRobot(tester);
     orderHistoryDetailsRobot = OrderHistoryDetailsRobot(tester);
-    savedOrderListRobot = SavedOrderListRobot(tester);
-    savedOrderDetailRobot = SavedOrderDetailRobot(tester);
     favoriteRobot = FavoriteRobot(tester);
-    orderTemplateListRobot = OrderTemplateListRobot(tester);
-    orderTemplateDetailRobot = OrderTemplateDetailRobot(tester);
     bonusListRobot = BonusListRobot(tester);
     materialRootRobot = MaterialRootRobot(tester);
     bundleListRobot = BundleListRobot(tester);
@@ -99,7 +87,6 @@ void main() {
     const tieredMaterial = '000000000021041454';
     const bundleCode = '0015999834';
     const bundleMaterial = '000000000023348769';
-    const orderTemplateName = 'myClientUserTemplate';
     const orderType = 'ZPOR';
     const principleFullText = 'AMO IRELAND';
     const principleSearchText = 'AMO';
@@ -342,13 +329,6 @@ void main() {
     //could not able to place an order as it does not cross
     //the minimum order amount
 
-    //save template
-    orderSummaryRobot.findOrderTemplate();
-    await orderSummaryRobot.tapOrderTemplate();
-    await orderSummaryRobot.enterTemplateName(orderTemplateName);
-    orderSummaryRobot.findTemplateSaveButton();
-    await orderSummaryRobot.tapTemplateSaveButton();
-    await orderSummaryRobot.goBack();
     await tester.pumpAndSettle(const Duration(seconds: 1));
     await cartRobot.goBack();
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -356,16 +336,6 @@ void main() {
     await materialListRobot.goBack();
     await homeRobot.tapHomeTab();
     homeRobot.verify();
-    homeRobot.findOrderTemplate();
-    //try to add save template to cart
-    await homeRobot.tapOrderTemplate();
-    orderTemplateListRobot.findTemplateItem(orderTemplateName);
-    await orderTemplateListRobot.tapTemplateItem(orderTemplateName);
-    orderTemplateDetailRobot.verifyMaterialNumber(materialAbsolute);
-    orderTemplateDetailRobot.verifyMaterialQuantity('2');
-    orderTemplateDetailRobot.findAddToCart();
-    await orderTemplateDetailRobot.tapAddToCart();
-    cartRobot.verify();
     cartRobot.findOrderSummary();
     await cartRobot.tapOrderSummary();
     orderSummaryRobot.findContinueButton(0);
@@ -379,20 +349,6 @@ void main() {
     await orderSummaryRobot.getKeyboardDown();
     orderSummaryRobot.findContinueButton(3);
     await orderSummaryRobot.tapContinueButton(3);
-    //save order
-    orderSummaryRobot.findSave();
-    await orderSummaryRobot.tapSave();
-    savedOrderListRobot.verify();
-    savedOrderListRobot.findOrder();
-    savedOrderListRobot.verifySoldToID(customerCode);
-    savedOrderListRobot.verifyShipToID(shipToCode);
-    await savedOrderListRobot.tapOrder();
-    savedOrderDetailRobot.verify();
-    savedOrderDetailRobot.verifyMaterialNumber(materialAbsolute);
-    savedOrderDetailRobot.verifyMaterialQuantity('2');
-    savedOrderDetailRobot.findAddToCart();
-    await savedOrderDetailRobot.tapAddToCart();
-    cartRobot.verify();
     await cartRobot.changeQuantity(material, 10);
     await cartRobot.getKeyboardDown();
     await cartRobot.deleteBonusMaterial();
@@ -503,27 +459,6 @@ void main() {
     await orderHistoryRobot.tapOrderHistoryFilterApplyButton();
     orderHistoryRobot.findOrderItemByMaterialNumber(material);
     await homeRobot.tapHomeTab();
-    //find and delete template order
-    homeRobot.verify();
-    homeRobot.findOrderTemplate();
-    await homeRobot.tapOrderTemplate();
-    orderTemplateListRobot.findTemplateItemDelete();
-    await orderTemplateListRobot.tapTemplateItemDelete();
-    orderTemplateListRobot.verifyConfirmationDialog();
-    orderTemplateListRobot.findConfirmButton();
-    await orderTemplateListRobot.tapConfirmButton();
-    await orderTemplateListRobot.goBack();
-    homeRobot.verify();
-    homeRobot.findSavedOrders();
-    await homeRobot.tapSavedOrders();
-    //find and delete saved order
-    savedOrderListRobot.findOrder();
-    savedOrderListRobot.findSavedOrderItemDelete();
-    await savedOrderListRobot.tapSavedOrderItemDelete();
-    savedOrderListRobot.verifyConfirmationDialog();
-    savedOrderListRobot.findConfirmButton();
-    await savedOrderListRobot.tapConfirmButton();
-    await savedOrderListRobot.goBack();
     homeRobot.verify();
     await homeRobot.goToCreateOrder();
     await materialListRobot.clearSearchMaterial();

@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/cart_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
@@ -166,28 +165,31 @@ final mockZmgCartItemList = <PriceAggregate>[
     ),
   ),
 ];
-final mockMaterialCartItemList = [
-  CartItem(materials: mockMaterialList, itemType: CartItemType.material),
-  //CartItem(materials: mockCartItemList, itemType: CartItemType.material)
-];
-final mockMaterialCartItemFirst = mockMaterialCartItemList.first;
-final mockCartBundleList = [
-  CartItem(materials: mockMaterialList, itemType: CartItemType.bundle),
-];
-final mockZmgMaterialCartItemList = [
-  CartItem(materials: mockZmgCartItemList, itemType: CartItemType.material),
-];
-final mockZmgMaterialCartItemFirst = mockZmgMaterialCartItemList.first;
-final mockCartItem = CartItem(
-  materials: [PriceAggregate.empty()],
-  itemType: CartItemType.material,
-);
-final mockCartItemWithRemarks =
-    CartItem(materials: [mockItemWithRemarks], itemType: CartItemType.material);
-final mockCartItemWithOutBatch =
-    CartItem(materials: mockItemWithOutBatch, itemType: CartItemType.material);
-final mockCartItemWithBatch =
-    CartItem(materials: mockItemWithBatch, itemType: CartItemType.material);
+
+///TODO: Need to revisit
+
+// final mockMaterialCartItemList = [
+//   CartItem(materials: mockMaterialList, itemType: CartItemType.material),
+//   //CartItem(materials: mockCartItemList, itemType: CartItemType.material)
+// ];
+// final mockMaterialCartItemFirst = mockMaterialCartItemList.first;
+// final mockCartBundleList = [
+//   CartItem(materials: mockMaterialList, itemType: CartItemType.bundle),
+// ];
+// final mockZmgMaterialCartItemList = [
+//   CartItem(materials: mockZmgCartItemList, itemType: CartItemType.material),
+// ];
+// final mockZmgMaterialCartItemFirst = mockZmgMaterialCartItemList.first;
+// final mockCartItem = CartItem(
+//   materials: [PriceAggregate.empty()],
+//   itemType: CartItemType.material,
+// );
+// final mockCartItemWithRemarks =
+//     CartItem(materials: [mockItemWithRemarks], itemType: CartItemType.material);
+// final mockCartItemWithOutBatch =
+//     CartItem(materials: mockItemWithOutBatch, itemType: CartItemType.material);
+// final mockCartItemWithBatch =
+//     CartItem(materials: mockItemWithBatch, itemType: CartItemType.material);
 
 //****************************************************************************************************** */
 //                                                                                                       //
@@ -269,9 +271,11 @@ final bonus913MockCartItem = PriceAggregate.empty().copyWith(
   ),
 );
 
-final bonus913mockMaterialList = [
-  CartItem(materials: [bonus913MockCartItem], itemType: CartItemType.material)
-];
+///TODO: Need to revisit
+
+// final bonus913mockMaterialList = [
+//   CartItem(materials: [bonus913MockCartItem], itemType: CartItemType.material)
+// ];
 
 final bonus911MockCartItem = PriceAggregate.empty().copyWith(
   quantity: 1,
@@ -343,9 +347,12 @@ final bonus911MockCartItem = PriceAggregate.empty().copyWith(
     ],
   ),
 );
-final bonus911mockMaterialList = [
-  CartItem(materials: [bonus911MockCartItem], itemType: CartItemType.material)
-];
+
+///TODO: Need to revisit
+
+// final bonus911mockMaterialList = [
+//   CartItem(materials: [bonus911MockCartItem], itemType: CartItemType.material)
+// ];
 
 final bonus914MockCartItem = PriceAggregate.empty().copyWith(
   quantity: 1,
@@ -417,9 +424,12 @@ final bonus914MockCartItem = PriceAggregate.empty().copyWith(
     ],
   ),
 );
-final bonus914mockMaterialList = [
-  CartItem(materials: [bonus914MockCartItem], itemType: CartItemType.material)
-];
+
+///TODO: Need to revisit
+
+// final bonus914mockMaterialList = [
+//   CartItem(materials: [bonus914MockCartItem], itemType: CartItemType.material)
+// ];
 
 final bonus915MockCartItem = PriceAggregate.empty().copyWith(
   quantity: 1,
@@ -492,70 +502,72 @@ final bonus915MockCartItem = PriceAggregate.empty().copyWith(
   ),
 );
 
-final cartItemListWithBonus = [
-  CartItem(
-    itemType: CartItemType.material,
-    materials: [
-      mockMaterialCartItemList.first.materials.first.copyWith(
-        price: Price.empty().copyWith(
-          materialNumber: bonusMaterialNumber,
-          finalPrice: MaterialPrice(540),
-          bonuses: [
-            PriceBonus(
-              items: [
-                PriceBonusItem.empty().copyWith(
-                  calculation: BonusMaterialCalculation('913'),
-                  qualifyingQuantity: 3,
-                  bonusMaterials: [
-                    BonusMaterial.empty().copyWith(
-                      materialNumber: bonusMaterialNumber,
-                      materialDescription: '(M) TEOSYAL PS RD I 1ML PRFS 2S',
-                      bonusQuantity: 1,
-                      bonusRatio: 1,
-                      qualifyingQuantity: 3,
-                      calculation: BonusMaterialCalculation('913'),
-                    )
-                  ],
-                ),
-                PriceBonusItem.empty().copyWith(
-                  calculation: BonusMaterialCalculation('913'),
-                  qualifyingQuantity: 5,
-                  bonusMaterials: [
-                    BonusMaterial.empty().copyWith(
-                      materialNumber: bonusMaterialNumber,
-                      materialDescription: '(M) TEOSYAL PS RD I 1ML PRFS 2S',
-                      bonusQuantity: 2,
-                      bonusRatio: 2,
-                      qualifyingQuantity: 5,
-                      calculation: BonusMaterialCalculation('913'),
-                    )
-                  ],
-                ),
-                PriceBonusItem.empty().copyWith(
-                  calculation: BonusMaterialCalculation('913'),
-                  qualifyingQuantity: 10,
-                  bonusMaterials: [
-                    BonusMaterial.empty().copyWith(
-                      materialNumber: bonusMaterialNumber,
-                      materialDescription: '(M) TEOSYAL PS RD I 1ML PRFS 2S',
-                      bonusQuantity: 3,
-                      bonusRatio: 3,
-                      qualifyingQuantity: 10,
-                      calculation: BonusMaterialCalculation('913'),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-      )
-    ],
-  )
-];
-final bonus915mockMaterialList = [
-  CartItem(materials: [bonus915MockCartItem], itemType: CartItemType.material)
-];
+///TODO: Need to revisit
+
+// final cartItemListWithBonus = [
+//   CartItem(
+//     itemType: CartItemType.material,
+//     materials: [
+//       mockMaterialCartItemList.first.materials.first.copyWith(
+//         price: Price.empty().copyWith(
+//           materialNumber: bonusMaterialNumber,
+//           finalPrice: MaterialPrice(540),
+//           bonuses: [
+//             PriceBonus(
+//               items: [
+//                 PriceBonusItem.empty().copyWith(
+//                   calculation: BonusMaterialCalculation('913'),
+//                   qualifyingQuantity: 3,
+//                   bonusMaterials: [
+//                     BonusMaterial.empty().copyWith(
+//                       materialNumber: bonusMaterialNumber,
+//                       materialDescription: '(M) TEOSYAL PS RD I 1ML PRFS 2S',
+//                       bonusQuantity: 1,
+//                       bonusRatio: 1,
+//                       qualifyingQuantity: 3,
+//                       calculation: BonusMaterialCalculation('913'),
+//                     )
+//                   ],
+//                 ),
+//                 PriceBonusItem.empty().copyWith(
+//                   calculation: BonusMaterialCalculation('913'),
+//                   qualifyingQuantity: 5,
+//                   bonusMaterials: [
+//                     BonusMaterial.empty().copyWith(
+//                       materialNumber: bonusMaterialNumber,
+//                       materialDescription: '(M) TEOSYAL PS RD I 1ML PRFS 2S',
+//                       bonusQuantity: 2,
+//                       bonusRatio: 2,
+//                       qualifyingQuantity: 5,
+//                       calculation: BonusMaterialCalculation('913'),
+//                     )
+//                   ],
+//                 ),
+//                 PriceBonusItem.empty().copyWith(
+//                   calculation: BonusMaterialCalculation('913'),
+//                   qualifyingQuantity: 10,
+//                   bonusMaterials: [
+//                     BonusMaterial.empty().copyWith(
+//                       materialNumber: bonusMaterialNumber,
+//                       materialDescription: '(M) TEOSYAL PS RD I 1ML PRFS 2S',
+//                       bonusQuantity: 3,
+//                       bonusRatio: 3,
+//                       qualifyingQuantity: 10,
+//                       calculation: BonusMaterialCalculation('913'),
+//                     )
+//                   ],
+//                 ),
+//               ],
+//             ),
+//           ],
+//         ),
+//       )
+//     ],
+//   )
+// ];
+// final bonus915mockMaterialList = [
+//   CartItem(materials: [bonus915MockCartItem], itemType: CartItemType.material)
+// ];
 
 final batchStockInfoMock = [
   StockInfo.empty().copyWith(
