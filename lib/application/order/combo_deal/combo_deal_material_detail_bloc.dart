@@ -306,6 +306,13 @@ class ComboDealMaterialDetailBloc
           ),
         );
       },
+      cartContainsCurrentCombo: (e) {
+        emit(
+          state.copyWith(
+            isUpdateCart: e.contain,
+          ),
+        );
+      },
     );
   }
 }

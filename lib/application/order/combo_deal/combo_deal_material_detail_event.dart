@@ -33,5 +33,9 @@ class ComboDealMaterialDetailEvent with _$ComboDealMaterialDetailEvent {
     required SearchKey searchKey,
   }) = _Search;
 
+  const factory ComboDealMaterialDetailEvent.cartContainsCurrentCombo({
+    required bool contain,
+  }) = _CartContainsCurrentCombo;
+
   const factory ComboDealMaterialDetailEvent.clearSearch() = _ClearSearch;
 }

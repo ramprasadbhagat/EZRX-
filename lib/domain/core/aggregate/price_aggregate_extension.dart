@@ -15,6 +15,14 @@ extension ComboDealExtension on PriceAggregate {
     );
   }
 
+  bool isComboAndMatchMaterialNumbers(List<String> materialNumbers) {
+    return materialInfo.type.typeCombo &&
+        comboMaterials.length == materialNumbers.length &&
+        comboMaterials.every(
+          (element) => materialNumbers.contains(element.productId.getValue()),
+        );
+  }
+
   ComboDealMaterial get selfComboDeal => comboDeal.singleDeal(
         materialNumber: getMaterialNumber,
       );

@@ -48,6 +48,13 @@ class CartProductCombo extends StatelessWidget {
               final comboDeal = state.getComboDeal(
                 comboDealId: cartItem.comboMaterials.first.comboDeals.id,
               );
+
+              context.read<ComboDealMaterialDetailBloc>().add(
+                    ComboDealMaterialDetailEvent.cartContainsCurrentCombo(
+                      contain:
+                          cartItem.comboMaterialsCurrentQuantity.isNotEmpty,
+                    ),
+                  );
               context.read<ComboDealMaterialDetailBloc>().add(
                     ComboDealMaterialDetailEvent.fetchComboDealDetail(
                       salesConfigs: eligibilityState.salesOrgConfigs,

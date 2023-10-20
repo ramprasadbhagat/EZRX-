@@ -2,7 +2,6 @@ part of 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page
 
 class _ComboDetailAddToCartSection extends StatelessWidget {
   const _ComboDetailAddToCartSection({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ComboDealMaterialDetailBloc,
@@ -21,7 +20,9 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
           ),
         );
       },
-      buildWhen: (previous, current) => previous.items != current.items,
+      buildWhen: (previous, current) =>
+          previous.items != current.items ||
+          previous.isUpdateCart != current.isUpdateCart,
       builder: (context, state) {
         return Column(
           children: [
@@ -64,7 +65,9 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                         ),
               ),
             ),
-            _CartPageCheckoutButton(),
+            _CartPageCheckoutButton(
+              isUpdateCart: state.isUpdateCart,
+            ),
           ],
         );
       },
@@ -73,19 +76,47 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
 }
 
 class _CartPageCheckoutButton extends StatelessWidget {
+  const _CartPageCheckoutButton({required this.isUpdateCart, Key? key})
+      : super(key: key);
+  final bool isUpdateCart;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CartBloc, CartState>(
       listenWhen: (previous, current) =>
-          previous.isUpserting != current.isUpserting &&
-          !current.isUpserting &&
-          context.router.current.path == 'combo_detail',
+          (previous.isUpserting != current.isUpserting &&
+                  !current.isUpserting ||
+              previous.isClearing != current.isClearing &&
+                  !current.isClearing) &&
+          (context.router.current.path == 'combo_detail' ||
+              (context.router.current.path == 'orders/cart' &&
+                  previous.cartProducts != current.cartProducts)),
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
           () {
-            CustomSnackBar(
-              messageText: context.tr('Combo K1 has been added to cart'),
-            ).show(context);
+            if (context.router.current.path == 'combo_detail') {
+              CustomSnackBar(
+                messageText: context.tr(
+                  isUpdateCart
+                      ? 'Combo K1 has been updated to cart'
+                      : 'Combo K1 has been added to cart',
+                ),
+              ).show(context);
+            }
+            final comboDealMaterialDetailBloc =
+                context.read<ComboDealMaterialDetailBloc>();
+            final overrideQuantity = state
+                .getCurrentComboItemByMaterialNumbers(
+                  comboDealMaterialDetailBloc.state.allMaterialsNumber
+                      .map((e) => e.getValue())
+                      .toList(),
+                )
+                .comboMaterialsCurrentQuantity;
+
+            comboDealMaterialDetailBloc.add(
+              ComboDealMaterialDetailEvent.cartContainsCurrentCombo(
+                contain: overrideQuantity.isNotEmpty,
+              ),
+            );
           },
           (_) {},
         );
@@ -112,7 +143,9 @@ class _CartPageCheckoutButton extends StatelessWidget {
                       );
                 },
                 child: Text(
-                  context.tr('Add to cart'),
+                  isUpdateCart
+                      ? context.tr('Update cart')
+                      : context.tr('Add to cart'),
                 ),
               ),
             ),

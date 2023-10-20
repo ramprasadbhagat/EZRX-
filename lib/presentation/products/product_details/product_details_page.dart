@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -15,6 +17,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
@@ -35,6 +38,7 @@ import 'package:ezrxmobile/presentation/products/widgets/combo_offer_label.dart'
 import 'package:ezrxmobile/presentation/products/widgets/covid_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
@@ -508,75 +512,14 @@ class _FooterState extends State<_Footer> {
                                         )
                                     ? null
                                     : () {
-                                        if (stateCart.cartProducts.isNotEmpty) {
-                                          if (state.productDetailAggregate
-                                                  .materialInfo.isFOCMaterial &&
-                                              !stateCart
-                                                  .containFocMaterialInCartProduct) {
-                                            _showDEtailsPagePage(
-                                              context: context,
-                                            );
-                                          } else if (!state
-                                                  .productDetailAggregate
-                                                  .materialInfo
-                                                  .isFOCMaterial &&
-                                              stateCart
-                                                  .containFocMaterialInCartProduct) {
-                                            _showDEtailsPagePage(
-                                              context: context,
-                                            );
-                                          } else {
-                                            context.read<CartBloc>().add(
-                                                  CartEvent.upsertCart(
-                                                    priceAggregate:
-                                                        PriceAggregate.empty()
-                                                            .copyWith(
-                                                      materialInfo: state
-                                                          .productDetailAggregate
-                                                          .materialInfo,
-                                                      price: price,
-                                                      salesOrgConfig: context
-                                                          .read<SalesOrgBloc>()
-                                                          .state
-                                                          .configs,
-                                                    ),
-                                                    quantity: stateCart
-                                                            .getQuantityOfProduct(
-                                                          productNumber: state
-                                                              .productDetailAggregate
-                                                              .materialInfo
-                                                              .materialNumber,
-                                                        ) +
-                                                        qty,
-                                                  ),
-                                                );
-                                          }
-                                        } else {
-                                          context.read<CartBloc>().add(
-                                                CartEvent.upsertCart(
-                                                  priceAggregate:
-                                                      PriceAggregate.empty()
-                                                          .copyWith(
-                                                    materialInfo: state
-                                                        .productDetailAggregate
-                                                        .materialInfo,
-                                                    price: price,
-                                                    salesOrgConfig: context
-                                                        .read<SalesOrgBloc>()
-                                                        .state
-                                                        .configs,
-                                                  ),
-                                                  quantity: stateCart
-                                                          .getQuantityOfProduct(
-                                                        productNumber: state
-                                                            .productDetailAggregate
-                                                            .materialInfo
-                                                            .materialNumber,
-                                                      ) +
-                                                      qty,
-                                                ),
-                                              );
-                                        }
+                                        _addToCart(
+                                          context: context,
+                                          state: state,
+                                          stateCart: stateCart,
+                                          price: price,
+                                          quantityText:
+                                              _quantityEditingController.text,
+                                        );
                                       },
                                 child: Text(
                                   context.tr('Add to cart'),
@@ -648,7 +591,140 @@ void _trackAddToCartFailure(BuildContext context, ApiFailure failure) =>
       },
     );
 
-void _showDEtailsPagePage({
+void _addToCart({
+  required BuildContext context,
+  required ProductDetailState state,
+  required CartState stateCart,
+  required Price price,
+  required String quantityText,
+}) {
+  if (stateCart.cartProducts.isNotEmpty) {
+    if (state.productDetailAggregate.materialInfo.isFOCMaterial &&
+        !stateCart.containFocMaterialInCartProduct) {
+      _showDetailsPagePage(
+        context: context,
+      );
+    } else if (!state.productDetailAggregate.materialInfo.isFOCMaterial &&
+        stateCart.containFocMaterialInCartProduct) {
+      _showDetailsPagePage(
+        context: context,
+      );
+    } else {
+      final materialNumber = context
+          .read<ProductDetailBloc>()
+          .state
+          .productDetailAggregate
+          .materialInfo
+          .materialNumber;
+      if (_checkIfTheCartContainsTheCurrentComboDeal(
+        cartState: stateCart,
+        price: price,
+      )) {
+        _initComboDealAndNavigate(
+          context: context,
+          cartState: stateCart,
+          materialNumber: materialNumber,
+          price: price,
+        );
+      } else {
+        upsertCart(
+          context: context,
+          price: price,
+          state: state,
+          stateCart: stateCart,
+          quantityText: quantityText,
+        );
+      }
+    }
+  } else {
+    upsertCart(
+      context: context,
+      price: price,
+      state: state,
+      stateCart: stateCart,
+      quantityText: quantityText,
+    );
+  }
+}
+
+void upsertCart({
+  required BuildContext context,
+  required Price price,
+  required ProductDetailState state,
+  required CartState stateCart,
+  required String quantityText,
+}) {
+  context.read<CartBloc>().add(
+        CartEvent.upsertCart(
+          priceAggregate: PriceAggregate.empty().copyWith(
+            materialInfo: state.productDetailAggregate.materialInfo,
+            price: price,
+            salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+          ),
+          quantity: stateCart.getQuantityOfProduct(
+                productNumber:
+                    state.productDetailAggregate.materialInfo.materialNumber,
+              ) +
+              int.parse(
+                quantityText,
+              ),
+        ),
+      );
+}
+
+bool _checkIfTheCartContainsTheCurrentComboDeal({
+  required CartState cartState,
+  required Price price,
+}) {
+  return _getCurrentComboItemInCartByMaterialNumber(
+        cartState: cartState,
+        price: price,
+      ) !=
+      PriceAggregate.empty();
+}
+
+PriceAggregate _getCurrentComboItemInCartByMaterialNumber({
+  required Price price,
+  required CartState cartState,
+}) {
+  final currentMaterialNumbers = price.comboDeal.category.values;
+
+  return cartState.getCurrentComboItemByMaterialNumbers(currentMaterialNumbers);
+}
+
+void _initComboDealAndNavigate({
+  required BuildContext context,
+  required CartState cartState,
+  required MaterialNumber materialNumber,
+  required Price price,
+}) {
+  final comboDeal = context
+      .read<ComboDealListBloc>()
+      .state
+      .getComboDeal(comboDealId: price.comboDeal.id);
+  final overrideQuantity = _getCurrentComboItemInCartByMaterialNumber(
+    cartState: cartState,
+    price: price,
+  ).comboMaterialsCurrentQuantity;
+
+  context.read<ComboDealMaterialDetailBloc>().add(
+        ComboDealMaterialDetailEvent.cartContainsCurrentCombo(
+          contain: overrideQuantity.isNotEmpty,
+        ),
+      );
+  context.read<ComboDealMaterialDetailBloc>().add(
+        ComboDealMaterialDetailEvent.fetchComboDealDetail(
+          salesConfigs: context.read<EligibilityBloc>().state.salesOrgConfigs,
+          comboDeal: comboDeal,
+          locale: context.locale,
+          parentMaterialNumber: materialNumber,
+          comboMaterialsCurrentQuantity: overrideQuantity,
+        ),
+      );
+  context.navigateTo(const ComboDetailPageRoute());
+}
+
+void _showDetailsPagePage({
   required BuildContext context,
 }) {
   showModalBottomSheet(

@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -64,8 +66,7 @@ class ComboOffersProduct extends StatelessWidget {
           final comboDealMaterial =
               comboDeal.singleDeal(materialNumber: materialNumber);
 
-          if (state.isFetching ||
-              !enableComboDeals ||
+          if (!enableComboDeals ||
               comboDealMaterial == ComboDealMaterial.empty()) {
             return const SizedBox.shrink();
           }
@@ -117,14 +118,27 @@ class ComboOffersProduct extends StatelessWidget {
                         backgroundColor: ZPColors.comboOffersBg,
                       ),
                       onPressed: () {
+                        final overrideQuantity = context
+                            .read<CartBloc>()
+                            .state
+                            .getCurrentComboItemByMaterialNumbers(
+                              priceComboDeal?.category.values ?? [],
+                            )
+                            .comboMaterialsCurrentQuantity;
+
+                        context.read<ComboDealMaterialDetailBloc>().add(
+                              ComboDealMaterialDetailEvent
+                                  .cartContainsCurrentCombo(
+                                contain: overrideQuantity.isNotEmpty,
+                              ),
+                            );
                         context.read<ComboDealMaterialDetailBloc>().add(
                               ComboDealMaterialDetailEvent.fetchComboDealDetail(
                                 salesConfigs: eligibilityState.salesOrgConfigs,
                                 comboDeal: comboDeal,
                                 locale: context.locale,
                                 parentMaterialNumber: materialNumber,
-                                comboMaterialsCurrentQuantity: <MaterialNumber,
-                                    int>{},
+                                comboMaterialsCurrentQuantity: overrideQuantity,
                               ),
                             );
                         context.navigateTo(const ComboDetailPageRoute());

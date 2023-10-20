@@ -427,4 +427,12 @@ class CartState with _$CartState {
   bool get isCounterOfferProductResetRequired =>
       productsWithCounterOfferPrice.isNotEmpty ||
       productsWithCounterOfferDiscount.isNotEmpty;
+
+  PriceAggregate getCurrentComboItemByMaterialNumbers(
+    List<String> materialNumbers,
+  ) =>
+      cartProducts.firstWhere(
+        (item) => (item.isComboAndMatchMaterialNumbers(materialNumbers)),
+        orElse: () => PriceAggregate.empty(),
+      );
 }
