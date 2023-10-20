@@ -39,7 +39,7 @@ class BundleItemMaterial extends StatelessWidget {
               children: <Widget>[
                 StatusLabel(
                   status: StatusType(
-                    orderItem.sAPStatus.displaySAPStatus,
+                    orderItem.sAPStatus.displayOrderStatus,
                   ),
                 ),
                 Text(

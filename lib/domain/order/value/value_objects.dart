@@ -759,23 +759,6 @@ class DocumentType extends ValueObject<String> {
   const DocumentType._(this.value);
 }
 
-class SAPStatus extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory SAPStatus(String input) {
-    return SAPStatus._(validateStringNotEmpty(input));
-  }
-
-  String get displaySAPStatus {
-    return value.getOrElse(() => '').isNotEmpty
-        ? value.getOrElse(() => '')
-        : 'Order Placed'.tr();
-  }
-
-  const SAPStatus._(this.value);
-}
-
 class ShippingCondition extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

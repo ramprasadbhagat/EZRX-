@@ -23,7 +23,7 @@ mixin _$OrderHistoryDetailsOrderItem {
   ZpPrice get unitPrice => throw _privateConstructorUsedError;
   TotalPrice get totalPrice => throw _privateConstructorUsedError;
   double get tax => throw _privateConstructorUsedError;
-  SAPStatus get sAPStatus => throw _privateConstructorUsedError;
+  StatusType get sAPStatus => throw _privateConstructorUsedError;
   DateTimeStringValue get plannedDeliveryDate =>
       throw _privateConstructorUsedError;
   int get pickedQuantity => throw _privateConstructorUsedError;
@@ -65,7 +65,7 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       ZpPrice unitPrice,
       TotalPrice totalPrice,
       double tax,
-      SAPStatus sAPStatus,
+      StatusType sAPStatus,
       DateTimeStringValue plannedDeliveryDate,
       int pickedQuantity,
       StringValue batch,
@@ -163,7 +163,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
       sAPStatus: null == sAPStatus
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
-              as SAPStatus,
+              as StatusType,
       plannedDeliveryDate: null == plannedDeliveryDate
           ? _value.plannedDeliveryDate
           : plannedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -299,7 +299,7 @@ abstract class _$$_OrderHistoryDetailsOrderItemCopyWith<$Res>
       ZpPrice unitPrice,
       TotalPrice totalPrice,
       double tax,
-      SAPStatus sAPStatus,
+      StatusType sAPStatus,
       DateTimeStringValue plannedDeliveryDate,
       int pickedQuantity,
       StringValue batch,
@@ -402,7 +402,7 @@ class __$$_OrderHistoryDetailsOrderItemCopyWithImpl<$Res>
       sAPStatus: null == sAPStatus
           ? _value.sAPStatus
           : sAPStatus // ignore: cast_nullable_to_non_nullable
-              as SAPStatus,
+              as StatusType,
       plannedDeliveryDate: null == plannedDeliveryDate
           ? _value.plannedDeliveryDate
           : plannedDeliveryDate // ignore: cast_nullable_to_non_nullable
@@ -517,7 +517,7 @@ class _$_OrderHistoryDetailsOrderItem extends _OrderHistoryDetailsOrderItem {
   @override
   final double tax;
   @override
-  final SAPStatus sAPStatus;
+  final StatusType sAPStatus;
   @override
   final DateTimeStringValue plannedDeliveryDate;
   @override
@@ -660,7 +660,7 @@ abstract class _OrderHistoryDetailsOrderItem
       required final ZpPrice unitPrice,
       required final TotalPrice totalPrice,
       required final double tax,
-      required final SAPStatus sAPStatus,
+      required final StatusType sAPStatus,
       required final DateTimeStringValue plannedDeliveryDate,
       required final int pickedQuantity,
       required final StringValue batch,
@@ -695,7 +695,7 @@ abstract class _OrderHistoryDetailsOrderItem
   @override
   double get tax;
   @override
-  SAPStatus get sAPStatus;
+  StatusType get sAPStatus;
   @override
   DateTimeStringValue get plannedDeliveryDate;
   @override

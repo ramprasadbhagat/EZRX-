@@ -76,7 +76,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       unitPrice: orderHistoryDetailsOrderItem.unitPrice.zpPrice,
       totalPrice: orderHistoryDetailsOrderItem.totalPrice.totalPrice,
       tax: orderHistoryDetailsOrderItem.tax,
-      sAPStatus: orderHistoryDetailsOrderItem.sAPStatus.displaySAPStatus,
+      sAPStatus: orderHistoryDetailsOrderItem.sAPStatus.displayOrderStatus,
       plannedDeliveryDate:
           orderHistoryDetailsOrderItem.plannedDeliveryDate.dateString,
       pickedQuantity: orderHistoryDetailsOrderItem.pickedQuantity,
@@ -115,7 +115,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       unitPrice: ZpPrice(unitPrice.toString()),
       totalPrice: TotalPrice(totalPrice.toString()),
       tax: tax,
-      sAPStatus: SAPStatus(sAPStatus),
+      sAPStatus: StatusType(sAPStatus),
       plannedDeliveryDate: DateTimeStringValue(plannedDeliveryDate),
       pickedQuantity: pickedQuantity,
       batch: StringValue(batch),

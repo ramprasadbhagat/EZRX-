@@ -648,5 +648,38 @@ void main() {
 
       expect(buyAgainButton, findsOneWidget);
     });
+
+    testWidgets('Find Order Created Status Label', (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryDetailsOrderItem.copyWith(
+                sAPStatus: StatusType('Order Creating'),
+                productType: MaterialInfoType('material'),
+              )
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final viewByOrderDetailsList =
+          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final orderItemsList = find.byKey(
+        WidgetKeys.viewByOrderDetailItemsSection,
+      );
+
+      await tester.dragUntilVisible(
+        orderItemsList,
+        viewByOrderDetailsList,
+        const Offset(0.0, -200.0),
+      );
+
+      await tester.pumpAndSettle();
+      final orderCreatedText = find.text('Order Created');
+      expect(orderCreatedText, findsOneWidget);
+    });
   });
 }
