@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -29,35 +30,38 @@ class InvoiceDetailsPage extends StatelessWidget {
         centerTitle: false,
         title: Text(context.tr('Invoice details')),
       ),
-      bottomNavigationBar: BlocBuilder<CreditAndInvoiceDetailsBloc,
-          CreditAndInvoiceDetailsState>(
-        buildWhen: (previous, current) =>
-            previous.isLoading != current.isLoading,
-        builder: (context, state) {
-          return state.isLoading || state.details.isEmpty
-              ? const SizedBox.shrink()
-              : SafeArea(
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: const BoxDecoration(
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                          color: ZPColors.boxShadowGray,
-                          blurRadius: 2.0,
-                          offset: Offset(0.1, -2.75),
-                        ),
-                      ],
-                      color: ZPColors.white,
-                    ),
-                    child: OutlinedButton(
-                      key: WidgetKeys.downloadEInvoiceButton,
-                      onPressed: () {},
-                      child: Text(context.tr('Download e-invoice')),
-                    ),
-                  ),
-                );
-        },
-      ),
+      bottomNavigationBar:
+          !context.read<EligibilityBloc>().state.salesOrganisation.salesOrg.isID
+              ? BlocBuilder<CreditAndInvoiceDetailsBloc,
+                  CreditAndInvoiceDetailsState>(
+                  buildWhen: (previous, current) =>
+                      previous.isLoading != current.isLoading,
+                  builder: (context, state) {
+                    return state.isLoading || state.details.isEmpty
+                        ? const SizedBox.shrink()
+                        : SafeArea(
+                            child: Container(
+                              padding: const EdgeInsets.all(20),
+                              decoration: const BoxDecoration(
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: ZPColors.boxShadowGray,
+                                    blurRadius: 2.0,
+                                    offset: Offset(0.1, -2.75),
+                                  ),
+                                ],
+                                color: ZPColors.white,
+                              ),
+                              child: OutlinedButton(
+                                key: WidgetKeys.downloadEInvoiceButton,
+                                onPressed: () {},
+                                child: Text(context.tr('Download e-invoice')),
+                              ),
+                            ),
+                          );
+                  },
+                )
+              : const SizedBox.shrink(),
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
         child: BlocBuilder<CreditAndInvoiceDetailsBloc,

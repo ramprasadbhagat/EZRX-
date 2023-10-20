@@ -90,6 +90,10 @@ class SalesOrg extends ValueObject<String> {
     return country == 'TW';
   }
 
+  bool get isID {
+    return country == 'ID';
+  }
+
   bool get needUpdatePaymentGateway => isMY || isVN;
 
   bool get isPaymentNeedOpenWebView => !isSg;
@@ -118,9 +122,7 @@ class SalesOrg extends ValueObject<String> {
   String get customerPaymentResponsePath =>
       countryCustomerPaymentResponsePath(country);
 
-
-  String get paymentInfoResponsePath =>
-      countryPaymentInfoResponsePath(country);
+  String get paymentInfoResponsePath => countryPaymentInfoResponsePath(country);
 
   const SalesOrg._(this.value);
 }
