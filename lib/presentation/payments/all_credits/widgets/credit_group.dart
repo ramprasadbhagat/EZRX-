@@ -21,7 +21,7 @@ class _CreditGroup extends StatelessWidget {
             color: ZPColors.lightGray2,
           ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

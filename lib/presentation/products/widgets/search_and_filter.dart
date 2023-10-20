@@ -14,14 +14,14 @@ class SearchAndFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 24.0),
+      padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 12.0),
       child: Row(
         children: [
           const Expanded(
             child: ProductSearchEntry(),
           ),
           const SizedBox(
-            width: 8,
+            width: 0,
           ),
           BlocBuilder<MaterialListBloc, MaterialListState>(
             buildWhen: (previous, current) =>
@@ -35,14 +35,12 @@ class SearchAndFilter extends StatelessWidget {
                     ? const Icon(
                         Icons.tune_outlined,
                         color: ZPColors.primary,
-                        size: 20,
                       )
                     : Stack(
                         children: [
                           const Icon(
                             Icons.tune_outlined,
                             color: ZPColors.primary,
-                            size: 20,
                           ),
                           Positioned(
                             right: 0,

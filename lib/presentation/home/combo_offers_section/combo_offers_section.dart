@@ -16,7 +16,7 @@ class ComboOffersSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 32),
+      margin: const EdgeInsets.symmetric(horizontal: 12).copyWith(top: 32),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: ZPColors.comboOffersBorder),

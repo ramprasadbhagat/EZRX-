@@ -18,7 +18,7 @@ class _ComboProductTile extends StatelessWidget {
       key: WidgetKeys.cartItemProductTile(
         comboItem.materialInfo.materialNumber.getValue(),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 12).copyWith(bottom: 24),
       child: BlocBuilder<ComboDealMaterialDetailBloc,
           ComboDealMaterialDetailState>(
         buildWhen: (previous, current) =>

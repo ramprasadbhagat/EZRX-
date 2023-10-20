@@ -405,7 +405,7 @@ SnackBarThemeData _snackBarTheme() {
 
 CardTheme _cardTheme() {
   return const CardTheme(
-    elevation: 1.5,
+    elevation: 1,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(

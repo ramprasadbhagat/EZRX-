@@ -42,7 +42,7 @@ class ProductsTab extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: const [
           Padding(
-            padding: EdgeInsets.only(right: 16.0),
+            padding: EdgeInsets.fromLTRB(0, 0, 16, 8),
             child: CartButton(),
           ),
         ],

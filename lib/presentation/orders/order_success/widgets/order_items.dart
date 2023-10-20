@@ -29,7 +29,7 @@ class _OrderItems extends StatelessWidget {
           children: orderItems
               .map(
                 (item) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -26,7 +26,7 @@ class _FilterValueListState extends State<FilterValueList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: Wrap(
         spacing: 8.0,
         children: [

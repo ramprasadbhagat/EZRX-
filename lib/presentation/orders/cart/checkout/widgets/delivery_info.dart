@@ -36,7 +36,7 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       sliver: SliverToBoxAdapter(
         child: Column(
           children: [

@@ -22,7 +22,7 @@ class NoRecordFound extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: ListView(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),

@@ -12,7 +12,7 @@ class _ComboDetailSearchBar extends StatelessWidget {
         final bloc = context.read<ComboDealMaterialDetailBloc>();
 
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: CustomSearchBar(
             key: WidgetKeys.genericKey(
               key: state.searchKey.searchValueOrEmpty,

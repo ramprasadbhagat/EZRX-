@@ -15,12 +15,12 @@ class _SoaTile extends StatelessWidget {
       builder: (context, state) {
         return Card(
           margin: const EdgeInsets.symmetric(
-            horizontal: 16.0,
+            horizontal: 12.0,
             vertical: 8.0,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
+              horizontal: 12.0,
               vertical: 5.0,
             ),
             child: Row(

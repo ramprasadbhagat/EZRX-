@@ -47,7 +47,6 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 16,
         automaticallyImplyLeading: false,
         centerTitle: false,
         backgroundColor: ZPColors.white,

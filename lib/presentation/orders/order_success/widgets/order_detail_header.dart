@@ -11,7 +11,7 @@ class _OrderDetailHeader extends StatelessWidget {
 
         return ListTile(
           minVerticalPadding: 15.0,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
           tileColor: ZPColors.primary,
           title: Text(
             '${'Order'.tr()} #${state.orderHistoryDetails.orderNumber.getOrDefaultValue('')}',

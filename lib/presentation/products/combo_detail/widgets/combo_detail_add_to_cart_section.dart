@@ -35,7 +35,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
             ListTile(
               dense: true,
               visualDensity: VisualDensity.compact,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12),
               title: Text(
                 '${"Order for".tr()} ${context.read<EligibilityBloc>().state.customerCodeInfo.customerName}',
                 style: Theme.of(context).textTheme.labelSmall,
@@ -48,7 +48,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
             ListTile(
               dense: true,
               visualDensity: VisualDensity.compact,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12),
               title: Text(
                 '${state.allSelectedItems.length} ${'items'.tr()}',
                 style: Theme.of(context).textTheme.titleSmall,

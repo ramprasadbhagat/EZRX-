@@ -717,11 +717,11 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byIcon(Icons.tune),
+        find.byIcon(Icons.tune_outlined),
         findsOneWidget,
       );
 
-      await tester.tap(find.byIcon(Icons.tune));
+      await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
       expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
@@ -741,11 +741,11 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byIcon(Icons.tune),
+        find.byIcon(Icons.tune_outlined),
         findsOneWidget,
       );
 
-      await tester.tap(find.byIcon(Icons.tune));
+      await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
       expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
@@ -768,11 +768,11 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byIcon(Icons.tune),
+        find.byIcon(Icons.tune_outlined),
         findsOneWidget,
       );
 
-      await tester.tap(find.byIcon(Icons.tune));
+      await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
       expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
@@ -796,11 +796,11 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byIcon(Icons.tune),
+        find.byIcon(Icons.tune_outlined),
         findsOneWidget,
       );
 
-      await tester.tap(find.byIcon(Icons.tune));
+      await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
       expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);
@@ -824,7 +824,7 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-      await tester.tap(find.byIcon(Icons.tune));
+      await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
       expect(find.byKey(WidgetKeys.toDocumentDateField), findsOneWidget);
@@ -849,7 +849,7 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-      await tester.tap(find.byIcon(Icons.tune));
+      await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
       expect(find.byKey(WidgetKeys.fromDocumentDateField), findsOneWidget);
@@ -873,7 +873,7 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-      await tester.tap(find.byIcon(Icons.tune));
+      await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
       expect(find.byKey(WidgetKeys.amountValueFrom), findsOneWidget);
@@ -894,7 +894,7 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pump();
 
-      await tester.tap(find.byIcon(Icons.tune));
+      await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
       expect(find.byKey(WidgetKeys.amountValueTo), findsOneWidget);
@@ -941,7 +941,7 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byIcon(Icons.tune));
+      await tester.tap(find.byIcon(Icons.tune_outlined));
       await tester.pumpAndSettle();
 
       expect(find.byKey(WidgetKeys.paymentSummaryFilter), findsOneWidget);

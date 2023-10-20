@@ -38,7 +38,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
           child: Row(
             children: [
               const Expanded(
@@ -51,7 +51,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.all(12),
-          margin: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(12),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(
               Radius.circular(12),
@@ -126,7 +126,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
                         },
                         isLoading: state.isLoading,
                         itemBuilder: (context, index, item) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
                           child: _PaymentItem(
                             data: item,
                           ),
@@ -180,7 +180,7 @@ class _FilterTune extends StatelessWidget {
     return BlocBuilder<OutstandingInvoicesBloc, OutstandingInvoicesState>(
       builder: (context, state) {
         return CustomBadge(
-          Icons.tune,
+          Icons.tune_outlined,
           count: state.appliedFilter.appliedFilterCount,
           badgeColor: ZPColors.orange,
           onPressed: () =>

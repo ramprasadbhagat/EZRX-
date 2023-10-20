@@ -171,7 +171,7 @@ class _InvoiceGroup extends StatelessWidget {
             color: ZPColors.lightGray2,
           ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -211,6 +211,9 @@ class _InvoiceItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       key: WidgetKeys.invoiceItem,
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+      ),
       child: ListTile(
         onTap: () {
           trackMixpanelEvent(MixpanelEvents.paymentDocumentViewed);

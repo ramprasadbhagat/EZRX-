@@ -12,7 +12,7 @@ class _FilterReturnByItem extends StatelessWidget {
           previous.isFetching != current.isFetching,
       builder: (context, state) {
         return CustomBadge(
-          Icons.tune,
+          Icons.tune_outlined,
           count: state.appliedFilter.appliedFilterCount,
           badgeColor: ZPColors.orange,
           onPressed: () => !state.isFetching

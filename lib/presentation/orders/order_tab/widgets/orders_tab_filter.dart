@@ -71,7 +71,7 @@ class _FilterElement extends StatelessWidget {
                 )
               : null,
           icon: const Icon(
-            Icons.tune,
+            Icons.tune_outlined,
           ),
         ),
         Positioned(

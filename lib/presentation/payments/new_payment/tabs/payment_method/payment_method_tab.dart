@@ -51,7 +51,7 @@ class PaymentMethodTab extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Text(
             context.tr('Select payment method'),
             style: Theme.of(context).textTheme.labelMedium,
@@ -66,7 +66,7 @@ class PaymentMethodTab extends StatelessWidget {
           thickness: 0.5,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Text(
             context.tr('Payment details'),
             style: Theme.of(context).textTheme.labelLarge,

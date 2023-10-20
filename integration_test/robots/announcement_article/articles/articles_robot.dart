@@ -84,7 +84,7 @@ class ArticleRobot {
   void verifyFilterIcon() {
     expect(
       find.byIcon(
-        Icons.tune,
+        Icons.tune_outlined,
       ),
       findsOneWidget,
     );

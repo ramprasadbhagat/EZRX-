@@ -109,8 +109,8 @@ class _CustomTabBarState extends State<_CustomTabBar>
                     );
                   },
                   labelStyle: Theme.of(context).textTheme.bodySmall,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
+                  padding: const EdgeInsets.only(
+                    top: 8.0,
                   ),
                   labelPadding: EdgeInsets.zero,
                   tabs: _getTabs(context)

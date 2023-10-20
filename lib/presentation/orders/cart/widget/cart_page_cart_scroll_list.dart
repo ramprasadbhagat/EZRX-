@@ -62,7 +62,7 @@ class _CartPageCartScrollList extends StatelessWidget {
       builder: (context, state) {
         return Expanded(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: state.isFetching && state.cartProducts.isEmpty
                 ? LoadingShimmer.logo(
                     key: WidgetKeys.loaderImage,

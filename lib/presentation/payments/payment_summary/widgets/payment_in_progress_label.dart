@@ -11,11 +11,13 @@ class _PaymentInProgressLabel extends StatelessWidget {
       builder: (context, state) {
         return Container(
           width: double.infinity,
-          margin: const EdgeInsets.only(left: 19, right: 19, top: 8),
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          padding: const EdgeInsets.all(12),
+          margin: const EdgeInsets.all(12),
           decoration: const BoxDecoration(
-            color: ZPColors.mustardColor,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+            color: ZPColors.lightBorderYellow,
           ),
           child: PriceComponent(
             price: state.amount.getOrDefaultValue('0'),

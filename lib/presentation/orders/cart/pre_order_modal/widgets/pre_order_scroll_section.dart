@@ -14,7 +14,7 @@ class _PreOrderScrollSection extends StatelessWidget {
 
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: ScrollList<PriceAggregate>(
           noRecordFoundWidget: const SizedBox.shrink(),
           controller: ScrollController(),

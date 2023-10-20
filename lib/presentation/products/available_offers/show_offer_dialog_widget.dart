@@ -151,7 +151,7 @@ class _AvailableOfferHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12),
       title: Text(
         context.tr('Available offers'),
         style: Theme.of(context).textTheme.labelLarge?.copyWith(

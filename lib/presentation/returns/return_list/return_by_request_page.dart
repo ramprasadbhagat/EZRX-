@@ -150,13 +150,13 @@ class _ReturnItem extends StatelessWidget {
             color: ZPColors.lightGray2,
           ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (showHeader)
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
                   child: Text(
                     '${context.tr('Requested on')} ${data.requestDate.dateString}',
                     key: WidgetKeys.returnRequestGroupDate,

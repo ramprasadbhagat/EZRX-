@@ -459,7 +459,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
 
-        final filterIcon = find.byIcon(Icons.tune);
+        final filterIcon = find.byIcon(Icons.tune_outlined);
         expect(
           filterIcon,
           findsNothing,
@@ -491,7 +491,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
 
-        final filterIcon = find.byIcon(Icons.tune);
+        final filterIcon = find.byIcon(Icons.tune_outlined);
         expect(
           filterIcon,
           findsOneWidget,
@@ -532,7 +532,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
 
-        final filterIcon = find.byIcon(Icons.tune);
+        final filterIcon = find.byIcon(Icons.tune_outlined);
         expect(
           filterIcon,
           findsOneWidget,
@@ -576,7 +576,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
 
-        final filterIcon = find.byIcon(Icons.tune);
+        final filterIcon = find.byIcon(Icons.tune_outlined);
         expect(
           filterIcon,
           findsOneWidget,
@@ -626,7 +626,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
 
-        final filterIcon = find.byIcon(Icons.tune);
+        final filterIcon = find.byIcon(Icons.tune_outlined);
         expect(
           filterIcon,
           findsOneWidget,
@@ -667,7 +667,7 @@ void main() {
 
         await tester.pumpWidget(getWUT());
         await tester.pumpAndSettle();
-        final filterIcon = find.byIcon(Icons.tune);
+        final filterIcon = find.byIcon(Icons.tune_outlined);
         expect(
           filterIcon,
           findsOneWidget,
@@ -713,7 +713,7 @@ void main() {
 
         await tester.pumpWidget(getWUT());
         await tester.pump();
-        final filterIcon = find.byIcon(Icons.tune);
+        final filterIcon = find.byIcon(Icons.tune_outlined);
         expect(
           filterIcon,
           findsOneWidget,

@@ -38,7 +38,7 @@ class ReturnItemsTab extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+          padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
           child: Row(
             children: [
               const Expanded(
@@ -51,7 +51,7 @@ class ReturnItemsTab extends StatelessWidget {
                     previous.appliedFilter != current.appliedFilter,
                 builder: (context, state) {
                   return CustomBadge(
-                    Icons.tune,
+                    Icons.tune_outlined,
                     key: WidgetKeys.newRequestFilterIcon,
                     count: state.appliedFilter.appliedFilterCount,
                     badgeColor: ZPColors.orange,

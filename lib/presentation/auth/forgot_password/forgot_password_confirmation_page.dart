@@ -61,7 +61,7 @@ class ForgetPasswordConfirmationPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: ListView(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         children: [
                           const _EmailSendToYou(),
                           SvgPicture.asset(

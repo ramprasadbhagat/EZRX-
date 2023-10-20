@@ -11,7 +11,7 @@ class _PaymentSummaryFilterIcon extends StatelessWidget {
               current.appliedFilter.appliedFilterCount ||
           previous.isFetching != current.isFetching,
       builder: (context, state) => CustomBadge(
-        Icons.tune,
+        Icons.tune_outlined,
         key: WidgetKeys.paymentSummaryFilterIcon,
         badgeColor: ZPColors.orange,
         count: state.appliedFilter.appliedFilterCount,

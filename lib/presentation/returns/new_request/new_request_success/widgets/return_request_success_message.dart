@@ -16,7 +16,7 @@ class _ReturnRequestSuccessMessage extends StatelessWidget {
             size: MediaQuery.of(context).size.width * 0.2,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Text(
               '${'We’ll send a confirmation to'.tr()} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${'once your return has been approved.'.tr()}',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -28,7 +28,7 @@ class _ReturnRequestSuccessMessage extends StatelessWidget {
             height: 10.0,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: ListTile(
               tileColor: ZPColors.lightBlueColor,
               shape: RoundedRectangleBorder(

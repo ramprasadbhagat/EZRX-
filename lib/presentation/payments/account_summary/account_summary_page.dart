@@ -45,7 +45,6 @@ class AccountSummary extends StatelessWidget {
           AnnouncementWidget(
             currentPath: context.router.currentPath,
           ),
-          const SizedBox(height: 20),
           Expanded(
             child: AutoTabsRouter.tabBar(
               routes: const [
@@ -69,9 +68,9 @@ class AccountSummary extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(
-                      20.0,
-                      20.0,
-                      20.0,
+                      12.0,
+                      12.0,
+                      12.0,
                       0.0,
                     ),
                     child: Row(

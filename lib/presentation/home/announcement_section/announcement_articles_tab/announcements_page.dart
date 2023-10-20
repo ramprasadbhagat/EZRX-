@@ -73,7 +73,7 @@ class AnnouncementsPage extends StatelessWidget {
                         //  key: WidgetKeys.announcementFilterKey,
                         //   onPressed: () => {},
                         //   icon: const Icon(
-                        //     Icons.tune,
+                        //     Icons.tune_outlined,
                         //   ),
                         // ),
                       ],

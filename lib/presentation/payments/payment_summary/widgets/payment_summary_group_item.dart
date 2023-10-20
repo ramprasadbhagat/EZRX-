@@ -57,7 +57,7 @@ class _PaymentSummaryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      margin: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0.0),
+      margin: const EdgeInsets.fromLTRB(12, 12, 12, 0),
       child: ListTile(
         key: WidgetKeys.paymentSummaryTile,
         onTap: () {

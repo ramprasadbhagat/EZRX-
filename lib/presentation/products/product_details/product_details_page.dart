@@ -94,7 +94,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        elevation: 16,
         automaticallyImplyLeading: false,
         backgroundColor:
             _isScrollAtInitialPosition ? Colors.transparent : ZPColors.white,

@@ -76,7 +76,7 @@ class _ExpandedBonusLabelState extends State<ExpandedBonusLabel> {
           alignment: Alignment.center,
           constraints: const BoxConstraints(minHeight: 30, maxWidth: 400),
           margin: const EdgeInsets.only(bottom: 5),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(

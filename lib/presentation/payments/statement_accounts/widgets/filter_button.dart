@@ -73,7 +73,7 @@ class _FilterButton extends StatelessWidget {
                     onPressed: state.isFetching || state.filterList.isEmpty
                         ? null
                         : () => _showFilterBottomSheet(context),
-                    icon: const Icon(Icons.tune),
+                    icon: const Icon(Icons.tune_outlined),
                   ),
                   Positioned(
                     right: 4,

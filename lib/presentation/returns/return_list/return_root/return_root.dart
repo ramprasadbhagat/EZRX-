@@ -87,38 +87,27 @@ class _ReturnRootState extends State<ReturnRoot> {
               ],
               builder: (context, child, tabController) => Column(
                 children: [
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.0),
-                      border: const Border(
-                        bottom: BorderSide(
-                          color: ZPColors.unselectedTabColor,
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                    child: TabBar(
-                      controller: tabController,
-                      tabs: [
-                        'View by items',
-                        'View by return requests',
-                      ]
-                          .map(
-                            (e) => Tab(
-                              key: Key(
-                                StringUtils.changeToCamelCase(sentence: e),
-                              ),
-                              text: context.tr(e),
+                  TabBar(
+                    controller: tabController,
+                    tabs: [
+                      'View by items',
+                      'View by return requests',
+                    ]
+                        .map(
+                          (e) => Tab(
+                            key: Key(
+                              StringUtils.changeToCamelCase(sentence: e),
                             ),
-                          )
-                          .toList(),
-                    ),
+                            text: context.tr(e),
+                          ),
+                        )
+                        .toList(),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(
-                      20.0,
-                      20.0,
-                      20.0,
+                      12.0,
+                      12.0,
+                      12.0,
                       0.0,
                     ),
                     child: Row(

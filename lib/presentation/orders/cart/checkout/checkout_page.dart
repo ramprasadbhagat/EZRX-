@@ -149,7 +149,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             onTap: () => _showOrderSumary(context, cartState),
             dense: true,
             visualDensity: VisualDensity.compact,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12),
             title: Text(
               '${cartState.totalItems} ${context.tr('items')}',
               key: WidgetKeys.checkoutStickyTotalQty,
@@ -404,7 +404,7 @@ class _TitleScrollList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Text(
         cartProduct.principalData.principalName.getValue(),
         key: WidgetKeys.cartPrincipalLabel,
@@ -589,7 +589,7 @@ class _TotalItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Text(
         '${context.tr('Your items ')}(${context.read<CartBloc>().state.totalItems})',
         key: WidgetKeys.checkoutItemsTotalQty,

@@ -23,7 +23,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
               onTap: () => _showSumaryInfo(context),
               dense: true,
               visualDensity: VisualDensity.compact,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12),
               title: Text(
                 '${"Order for".tr()} ${context.read<EligibilityBloc>().state.customerCodeInfo.customerName}',
                 key: WidgetKeys.cartShipToAddress,
@@ -39,7 +39,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
             ListTile(
               dense: true,
               visualDensity: VisualDensity.compact,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12),
               title: Text(
                 '${state.cartProducts.length} ${'items'.tr()}',
                 key: WidgetKeys.cartTotalQty,

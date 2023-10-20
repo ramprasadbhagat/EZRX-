@@ -229,7 +229,7 @@ class _ShipToAddressSection extends StatelessWidget {
           key: WidgetKeys.shipToAddressOption(shipToInfo.shipToCustomerCode),
           minLeadingWidth: 0,
           horizontalTitleGap: 9,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
           minVerticalPadding: 16,
           leading: Column(
             children: const [

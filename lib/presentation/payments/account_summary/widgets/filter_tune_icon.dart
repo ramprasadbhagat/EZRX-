@@ -53,7 +53,7 @@ class _FilterElement extends StatelessWidget {
         IconButton(
           onPressed: () => isActive ? _showFilterPage(context) : null,
           icon: const Icon(
-            Icons.tune,
+            Icons.tune_outlined,
           ),
         ),
         Positioned(

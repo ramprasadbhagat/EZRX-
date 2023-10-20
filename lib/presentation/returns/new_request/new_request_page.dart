@@ -119,7 +119,7 @@ class NewRequestPage extends StatelessWidget {
                       child: SafeArea(
                         top: false,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                           decoration: const BoxDecoration(
                             border: Border(
                               top: BorderSide(
