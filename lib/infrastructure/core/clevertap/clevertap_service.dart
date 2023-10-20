@@ -21,7 +21,6 @@ class ClevertapService {
     if (Platform.isIOS) {
       await CleverTapPlugin.registerForPush();
     }
-    await CleverTapPlugin.initializeInbox();
   }
 
   Future<void> createNotificationChannel() async {
