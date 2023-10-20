@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -26,6 +27,8 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 
+import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
@@ -59,6 +62,9 @@ class AnnouncementInfoBlocMock
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
+class EZPointBlocMock extends MockBloc<EZPointEvent, EZPointState>
+    implements EZPointBloc {}
+
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late CartBloc cartBlocMock;
@@ -70,6 +76,7 @@ void main() {
   late SalesOrgBloc salesOrgBlocMock;
   late AnnouncementInfoBloc announcementInfoBlocMock;
   late AnnouncementBlocMock announcementBlocMock;
+  late EZPointBlocMock eZPointBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
 
@@ -78,6 +85,8 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerFactory<BannerBloc>(() => bannerBlocMock);
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
+    locator.registerFactory<EZPointBlocMock>(() => eZPointBlocMock);
+
     autoRouterMock = locator<AppRouter>();
   });
 
@@ -108,6 +117,8 @@ void main() {
     announcementInfoBlocMock = AnnouncementInfoBlocMock();
     when(() => announcementInfoBlocMock.state)
         .thenReturn(AnnouncementInfoState.initial());
+    eZPointBlocMock = EZPointBlocMock();
+    when(() => eZPointBlocMock.state).thenReturn(EZPointState.initial());
   });
 
   Future getWidget(tester) async {
@@ -143,6 +154,9 @@ void main() {
           ),
           BlocProvider<AnnouncementInfoBloc>(
             create: (context) => announcementInfoBlocMock,
+          ),
+          BlocProvider<EZPointBloc>(
+            create: (context) => eZPointBlocMock,
           ),
         ],
         child: const MoreTab(),
@@ -397,6 +411,31 @@ void main() {
         await tester.pump();
         final paymentsTile = find.byKey(WidgetKeys.paymentsTile);
         expect(paymentsTile, findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      ' -> Show eZPoint tile for ID Market',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        final eZPointTileFinder = find.byKey(WidgetKeys.eZPointTile);
+        expect(eZPointTileFinder, findsOneWidget);
+        await tester.tap(eZPointTileFinder);
+        verify(
+          () => eZPointBlocMock.add(
+            EZPointEvent.fetch(
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ),
+        ).called(1);
+        expect(autoRouterMock.current.path, 'eZPoint');
       },
     );
   });

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
+import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/deduction_code/manage_deduction_code_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_advice_footer/manage_payment_advice_footer_bloc.dart';
 import 'package:ezrxmobile/application/account/payment_configuration/payment_methods/add_payment_method/add_payment_method_bloc.dart';
@@ -534,6 +535,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<ReOrderPermissionBloc>(
           create: (context) => locator<ReOrderPermissionBloc>(),
+        ),
+        BlocProvider<EZPointBloc>(
+          create: (context) => locator<EZPointBloc>(),
         ),
       ],
       child: MaterialApp.router(

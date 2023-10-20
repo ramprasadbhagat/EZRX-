@@ -1,5 +1,6 @@
 //ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/presentation/account/ez_point/ez_point_webview_page.dart';
 import 'package:ezrxmobile/presentation/account/sales_org_search.dart';
 import 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_confirmation_page.dart';
@@ -183,6 +184,10 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       path: 'profile',
     ),
     AutoRoute(
+      page: EZPointWebviewPage,
+      path: 'eZPoint',
+    ),
+    AutoRoute(
       path: 'payments/payment_summary',
       page: PaymentSummaryPage,
     ),
@@ -310,7 +315,7 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       path: 'payments/payment_advice_created',
       page: PaymentAdviceCreatedPage,
     ),
-     AutoRoute(
+    AutoRoute(
       path: 'payments/payment_completed',
       page: PaymentCompletedPage,
     ),
@@ -428,10 +433,10 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       page: AboutUsPage,
       path: 'about_us',
     ),
-     AutoRoute(
-          page: ComboDetailPage,
-          path: 'combo_detail',
-        ),
+    AutoRoute(
+      page: ComboDetailPage,
+      path: 'combo_detail',
+    ),
   ],
 )
 class $AppRouter {}

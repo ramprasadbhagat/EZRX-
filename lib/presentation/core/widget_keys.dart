@@ -133,6 +133,7 @@ class WidgetKeys {
   static const Key profileTileSection = Key('profileTileSection');
   static const Key profileTile = Key('profileTile');
   static const Key paymentsTile = Key('paymentsTile');
+  static const Key eZPointTile = Key('eZPointTile');
   static const Key returnsTile = Key('returnsTile');
   static const Key securityTile = Key('securityTile');
   static const Key contactUsTile = Key('contactUsTile');
@@ -1122,5 +1123,11 @@ class WidgetKeys {
   // Confirm bottom sheet
   //============================================================
   static Key confirmBottomSheet = const Key('confirmBottomSheet');
+
+  //============================================================
+  // EZPoint Page
+  //============================================================
+  static Key ezPointWebviewPage = const Key('ezPointWebviewPage');
+  static Key ezPointErrorPage = const Key('ezPointErrorPage');
   //============================================================
 }

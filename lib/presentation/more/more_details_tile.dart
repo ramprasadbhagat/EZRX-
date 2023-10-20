@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/contact_us/contact_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -153,6 +154,26 @@ class MoreDetailsTile {
           color: ZPColors.lightGray,
         ),
         label: 'Loyalty',
+      );
+
+  factory MoreDetailsTile.eZPointTab(BuildContext context) => MoreDetailsTile(
+        key: WidgetKeys.eZPointTile,
+        icon: const Icon(
+          Icons.emoji_events_outlined,
+          color: ZPColors.greenIconColor,
+        ),
+        label: 'eZPoint',
+        onTap: () {
+          context.read<EZPointBloc>().add(
+                EZPointEvent.fetch(
+                  customerCodeInfo:
+                      context.read<EligibilityBloc>().state.customerCodeInfo,
+                ),
+              );
+          context.router.push(
+            const EZPointWebviewPageRoute(),
+          );
+        },
       );
 
   factory MoreDetailsTile.announcementAndArticleTab(BuildContext context) =>

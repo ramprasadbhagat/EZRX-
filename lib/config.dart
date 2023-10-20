@@ -384,4 +384,21 @@ class Config {
 
   String get announcementImageBaseUrl =>
       'https://edge.sitecorecloud.io/zuelligphar400f-zpcms-uat-ce0f/';
+
+  //============================================================
+  //  EZPoint
+  //============================================================
+
+  String get getEZPointIframe {
+    switch (appFlavor) {
+      case Flavor.dev:
+      case Flavor.uat:
+        return 'https://apq-fe.ezrx.id/voucher-regional';
+      case Flavor.prod:
+        return 'https://ezrx.id/voucher-regional';
+      case Flavor.mock:
+      default:
+        return '';
+    }
+  }
 }
