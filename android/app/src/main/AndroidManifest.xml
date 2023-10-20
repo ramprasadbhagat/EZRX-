@@ -57,10 +57,15 @@
 			</intent-filter>
 		</activity>
 
-		<service android:name="com.clevertap.android.sdk.pushnotification.fcm.FcmMessageListenerService" 
-         android:exported="true">
+		<service android:name="com.clevertap.android.sdk.pushnotification.fcm.FcmMessageListenerService" android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+		<service android:name="com.clevertap.android.sdk.pushnotification.CTNotificationIntentService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.clevertap.PUSH_EVENT" />
             </intent-filter>
         </service>
 		<!--
@@ -68,25 +73,13 @@
 		This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
 		-->
 		<meta-data android:name="flutterEmbedding" android:value="2" />
-		<meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@mipmap/ic_notification" />
+		<!-- <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@mipmap/ic_notification" /> -->
 		<meta-data android:name="google_analytics_adid_collection_enabled" android:value="false" />
 		<!-- <meta-data android:name="firebase_performance_logcat_enabled" android:value="true" /> -->
-		<meta-data
-			android:name="CLEVERTAP_ACCOUNT_ID"
-			android:value="@string/clevertap_account_id"/>
-		<meta-data
-			android:name="CLEVERTAP_TOKEN"
-			android:value="@string/clevertap_token"/>
-		<!-- IMPORTANT: To force use Google AD ID to uniquely identify  users, use the following meta tag. GDPR mandates that if you are using this tag, there is prominent disclousure to your end customer in their application. Read more about GDPR here - https://clevertap.com/blog/in-preparation-of-gdpr-compliance/ -->
-		<meta-data
-			android:name="CLEVERTAP_USE_GOOGLE_AD_ID"
-			android:value="1"/>
-		<meta-data 
-		android:name="CLEVERTAP_REGION" 
-		android:value="sg1"/>
-		<meta-data
-		android:name="CLEVERTAP_NOTIFICATION_ICON"
-		android:value="ic_notification"/>
+		<meta-data android:name="CLEVERTAP_ACCOUNT_ID" android:value="@string/clevertap_account_id"/>
+		<meta-data android:name="CLEVERTAP_TOKEN" android:value="@string/clevertap_token"/>
+		<meta-data android:name="CLEVERTAP_REGION" android:value="sg1"/>
+		<meta-data android:name="CLEVERTAP_NOTIFICATION_ICON" android:value="ic_notification"/>
 	</application>
 
 	<uses-permission android:name="android.permission.INTERNET" />

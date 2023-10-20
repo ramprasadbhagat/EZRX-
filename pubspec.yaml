@@ -94,7 +94,7 @@ dependencies:
   universal_io: ^2.0.4
   mixpanel_flutter: ^2.0.0
   visibility_detector: ^0.3.3
-  clevertap_plugin: ^1.6.1
+  clevertap_plugin: ^1.9.0
   flutter_html: ^2.2.1
   loading_animation_widget: ^1.2.0+4
   datadog_flutter_plugin: ^1.5.1

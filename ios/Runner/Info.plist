@@ -8,6 +8,8 @@
 		<string>$(CLEVERTAP_TOKEN)</string>
 		<key>CleverTapRegion</key>
 		<string>sg1</string>
+		<key>CleverTapUseIFA</key>
+		<false/>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
 		<key>CFBundleDevelopmentRegion</key>

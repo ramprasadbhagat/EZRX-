@@ -114,7 +114,6 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -136,16 +135,6 @@ import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
-Future<void> _firebaseMessagingBackgroundHandler(
-  RemoteMessage message,
-) async {
-  final config = locator<Config>();
-  await Firebase.initializeApp(options: kIsWeb ? config.firebaseOptions : null);
-  debugPrint(
-    'AppPushs background: ${message.notification?.title} ${message.notification?.body} ${message.data}',
-  );
-}
-
 Future<void> initialSetup({required Flavor flavor}) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -156,7 +145,6 @@ Future<void> initialSetup({required Flavor flavor}) async {
   config.appFlavor = flavor;
 
   await Firebase.initializeApp(options: kIsWeb ? config.firebaseOptions : null);
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   if (kDebugMode) {
     await Upgrader.clearSavedSettings();
