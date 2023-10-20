@@ -19,6 +19,8 @@ class AppMarket extends ValueObject<String> {
 
   String get countryFlag => getCountryFlag(value.getOrElse(() => ''));
 
+  String get marketDomain => getMarketDomain(value.getOrElse(() => ''));
+
   const AppMarket._(this.value);
 
   bool get isVN => value.getOrElse(() => 'my') == 'vn';

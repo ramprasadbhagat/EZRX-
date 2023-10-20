@@ -522,6 +522,42 @@ bool isEligibleStatusForZyllem(String status) {
       getOrderStatus(status).toLowerCase() == 'Delivered'.toLowerCase();
 }
 
+String getMarketName(String country) {
+  final marketNameMap = {
+    'hk': 'Hong Kong',
+    'kh': 'Cambodia',
+    'kr': 'Korea',
+    'mm': 'Myanmar',
+    'ph': 'Philippines',
+    'sg': 'Singapore',
+    'th': 'Thailand',
+    'tw': 'Taiwan',
+    'vn': 'Vietnam',
+    'my': 'Malaysia',
+    'id': 'Indonesia',
+  };
+
+  return marketNameMap[country] ?? 'Malaysia';
+}
+
+String getMarketDomain(String country) {
+  final marketDomainMap = {
+    'hk': 'hk',
+    'kh': 'kh',
+    'kr': 'kr2',
+    'mm': 'mm',
+    'ph': 'ph',
+    'sg': 'sg',
+    'th': 'th',
+    'tw': 'tw',
+    'vn': 'vn',
+    'my': 'my',
+    'id': 'id',
+  };
+
+  return marketDomainMap[country] ?? 'my';
+}
+
 String getCountryFlag(String country) {
   return 'assets/svg/flags/${country.toLowerCase()}.svg';
 }

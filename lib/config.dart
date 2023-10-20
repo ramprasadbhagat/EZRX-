@@ -14,7 +14,7 @@ class Config {
   int autoSearchTimeout = 1500;
 
   String baseUrl({AppMarket? currentMarket}) {
-    final marketDomain = currentMarket?.getOrDefaultValue('my');
+    final marketDomain = currentMarket?.marketDomain;
     switch (appFlavor) {
       // https://my.ezrxplus.com/
       case Flavor.prod:
