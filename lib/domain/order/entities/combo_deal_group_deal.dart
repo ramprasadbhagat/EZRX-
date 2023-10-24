@@ -30,4 +30,6 @@ class ComboDealGroupDeal with _$ComboDealGroupDeal {
         type: type,
         rate: rate,
       );
+
+  double get rateToAbs => rate.abs();
 }

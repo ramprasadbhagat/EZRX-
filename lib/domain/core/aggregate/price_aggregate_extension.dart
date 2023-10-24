@@ -23,6 +23,13 @@ extension ComboDealExtension on PriceAggregate {
         );
   }
 
+  bool iscomboDealIdMatchComboMaterials(String comboDealId) {
+    return materialInfo.type.typeCombo &&
+        comboMaterials.any(
+          (comboMaterial) => comboMaterial.comboDeals.id == comboDealId,
+        );
+  }
+
   ComboDealMaterial get selfComboDeal => comboDeal.singleDeal(
         materialNumber: getMaterialNumber,
       );
@@ -116,6 +123,8 @@ extension PriceAggregateExtension on List<PriceAggregate> {
   List<ComboMaterialItem> get comboMaterialItemList => map(
         (product) {
           final materialComboDeal = product.selfComboDeal;
+          final comboMaterialItemRate = product.comboDeal
+              .getMaterialComboRate(materialNumber: product.getMaterialNumber);
 
           return ComboMaterialItem(
             comboDeals: product.price.comboDeal,
@@ -123,7 +132,9 @@ extension PriceAggregateExtension on List<PriceAggregate> {
             valid: product.price.isValid,
             quantity: product.quantity,
             listPrice: product.listPrice,
-            finalIndividualPrice: product.comboOfferPrice,
+            finalIndividualPrice: product.getComboOfferPriceWithDiscount(
+              comboDealRate: comboMaterialItemRate,
+            ),
             productId: product.getMaterialNumber,
             principalName: product.materialInfo.principalData.principalName,
             principalCode: product.materialInfo.principalData.principalCode,
@@ -131,14 +142,14 @@ extension PriceAggregateExtension on List<PriceAggregate> {
             minQty: materialComboDeal.minQty,
             conditionNumber: materialComboDeal.conditionNumber,
             mandatory: materialComboDeal.mandatory,
-            rate: materialComboDeal.rate,
             suffix: materialComboDeal.suffix.stringValue,
             setNo: product.comboDeal.getSetNo(
               materialNumber: product.getMaterialNumber,
             ),
-            comboDealType: product.comboDeal.comboDealType,
+            comboDealType: product.comboDeal.scheme.comboDealType,
             language: product.salesOrgConfig.getConfigLanguageDefaultEnglish,
             parentId: product.materialInfo.parentID,
+            rate: comboMaterialItemRate,
           );
         },
       ).toList();

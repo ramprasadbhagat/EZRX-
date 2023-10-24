@@ -52,12 +52,4 @@ class ComboDealMaterial with _$ComboDealMaterial {
       );
 
   double get rateToAbs => rate.abs();
-
-  String get rateDisplay {
-    if (rateToAbs == rateToAbs.toInt()) {
-      return rateToAbs.toInt().toString();
-    }
-
-    return rateToAbs.toString();
-  }
 }

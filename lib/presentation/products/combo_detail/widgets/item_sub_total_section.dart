@@ -7,6 +7,11 @@ class _ItemSubTotalSection extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  String get _materialComboRateDisplay =>
+      comboItem.comboDeal.materialComboRateDisplay(
+        materialNumber: comboItem.getMaterialNumber,
+      );
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,6 +20,7 @@ class _ItemSubTotalSection extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
             context.tr('Item subtotal:'),
@@ -26,14 +32,46 @@ class _ItemSubTotalSection extends StatelessWidget {
           ),
           BlocBuilder<ComboDealMaterialDetailBloc,
               ComboDealMaterialDetailState>(
-            buildWhen: (previous, current) => previous.items != current.items,
+            buildWhen: (previous, current) =>
+                previous.items != current.items ||
+                previous.selectedItems != current.selectedItems,
             builder: (_, state) {
-              return PriceComponent(
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: (state.items[comboItem.getMaterialNumber] ??
-                        PriceAggregate.empty())
-                    .display(PriceType.priceWithComboOfferTotal),
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  if (state.isMaterialSelected(comboItem.getMaterialNumber) &&
+                      state.currentDeal.scheme.displayDiscountedSubTotal)
+                    Row(
+                      children: [
+                        DiscountTagWidget(
+                          rateDisplay: _materialComboRateDisplay,
+                        ),
+                        const SizedBox(width: 4),
+                        PriceComponent(
+                          salesOrgConfig: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrgConfigs,
+                          type: PriceStyle.comboOfferPrice,
+                          price: comboItem.display(PriceType.listPriceTotal),
+                        ),
+                      ],
+                    ),
+                  PriceComponent(
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                    price: state.currentDeal.scheme.displayOriginalPrice
+                        ? comboItem.display(PriceType.listPriceTotal)
+                        : comboItem
+                            .getComboOfferPriceWithDiscount(
+                              comboDealRate:
+                                  comboItem.comboDeal.getMaterialComboRate(
+                                materialNumber: comboItem.getMaterialNumber,
+                              ),
+                            )
+                            .toString(),
+                  ),
+                ],
               );
             },
           ),

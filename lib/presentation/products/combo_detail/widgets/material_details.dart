@@ -11,6 +11,14 @@ class _MaterialDetails extends StatelessWidget {
     required this.onTapName,
   }) : super(key: key);
 
+  String get _materialComboRateDisplay =>
+      comboItem.comboDeal.materialComboRateDisplay(
+        materialNumber: comboItem.getMaterialNumber,
+      );
+
+  bool get _canDisplayDiscountTag =>
+      comboItem.comboDeal.scheme.displayDiscountedPrice;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -30,29 +38,8 @@ class _MaterialDetails extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
-                ),
-                decoration: const BoxDecoration(
-                  color: ZPColors.discountOfferBgColor,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                child: Text(
-                  context.tr(
-                    '{percent}% Discount',
-                    namedArgs: {'percent': comboDealMaterial.rateDisplay},
-                  ),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600,
-                        color: ZPColors.lightBgYellow,
-                      ),
-                ),
-              ),
+              if (_canDisplayDiscountTag)
+                DiscountTagWidget(rateDisplay: _materialComboRateDisplay),
             ],
           ),
           const SizedBox(height: 4),
@@ -82,7 +69,27 @@ class _MaterialDetails extends StatelessWidget {
                   color: ZPColors.neutralsGrey1,
                 ),
           ),
-          Row(
+          _MaterialPriceSection(comboItem: comboItem),
+          _MaterialQuantitySection(
+            comboItem: comboItem,
+            comboDealMaterial: comboDealMaterial,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MaterialPriceSection extends StatelessWidget {
+  final PriceAggregate comboItem;
+
+  const _MaterialPriceSection({required this.comboItem, Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return comboItem.comboDeal.scheme.displayDiscountedPrice
+        ? Row(
             children: [
               PriceComponent(
                 salesOrgConfig:
@@ -94,17 +101,22 @@ class _MaterialDetails extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: comboItem.display(PriceType.priceWithComboOffer),
+                price: comboItem
+                    .getComboOfferPriceWithDiscount(
+                      comboDealRate: comboItem.comboDeal.getMaterialComboRate(
+                        materialNumber: comboItem.getMaterialNumber,
+                      ),
+                    )
+                    .toString(),
                 type: PriceStyle.comboOfferPriceDiscounted,
               ),
             ],
-          ),
-          _MaterialQuantitySection(
-            comboItem: comboItem,
-            comboDealMaterial: comboDealMaterial,
-          ),
-        ],
-      ),
-    );
+          )
+        : PriceComponent(
+            salesOrgConfig:
+                context.read<EligibilityBloc>().state.salesOrgConfigs,
+            price: comboItem.display(PriceType.listPrice),
+            type: PriceStyle.comboOfferPriceDiscounted,
+          );
   }
 }

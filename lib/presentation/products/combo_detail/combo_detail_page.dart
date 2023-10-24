@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
@@ -19,11 +20,11 @@ import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
+import 'package:ezrxmobile/presentation/products/combo_detail/widgets/discount_tag_widget.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,10 +47,25 @@ class ComboDetailPage extends StatelessWidget {
     return Scaffold(
       key: WidgetKeys.materialListPage,
       appBar: AppBar(
-        //Todo: Will update title for other combos
-        title: Text(
-          context.tr('Combo K1'),
-          style: Theme.of(context).textTheme.labelLarge,
+        title: BlocBuilder<ComboDealMaterialDetailBloc,
+            ComboDealMaterialDetailState>(
+          buildWhen: (previous, current) =>
+              previous.isFetchingComboInfo != current.isFetchingComboInfo,
+          builder: (context, state) {
+            if (state.isFetchingComboInfo) {
+              return SizedBox(
+                key: WidgetKeys.comboTitleLoading,
+                width: 100,
+                height: 20,
+                child: LoadingShimmer.tile(),
+              );
+            }
+
+            return Text(
+              context.tr(state.currentDeal.scheme.comboDealTitleAppbar),
+              style: Theme.of(context).textTheme.labelLarge,
+            );
+          },
         ),
         centerTitle: false,
         titleSpacing: 0,
@@ -101,61 +117,96 @@ class ComboDetailPage extends StatelessWidget {
                 ),
               );
         },
-        child: BlocConsumer<ComboDealMaterialDetailBloc,
-            ComboDealMaterialDetailState>(
-          listenWhen: (previous, current) =>
-              previous.isFetchingComboInfo != current.isFetchingComboInfo &&
-              !current.isFetchingComboInfo,
-          listener: (context, state) {
-            final eligibilityBlocState = context.read<EligibilityBloc>().state;
-            context.read<MaterialPriceBloc>().add(
-                  MaterialPriceEvent.fetchPriceCartProduct(
-                    salesOrganisation: eligibilityBlocState.salesOrganisation,
-                    salesConfigs: eligibilityBlocState.salesOrgConfigs,
-                    customerCodeInfo: eligibilityBlocState.customerCodeInfo,
-                    shipToInfo: eligibilityBlocState.shipToInfo,
-                    comboDealEligible: eligibilityBlocState.comboDealEligible,
-                    products: state.allMaterialsInfo,
+        child: Column(
+          children: [
+            const _ComboRequirementSection(),
+            Expanded(
+              child: ListView(
+                children: [
+                  BlocBuilder<ComboDealMaterialDetailBloc,
+                      ComboDealMaterialDetailState>(
+                    buildWhen: (previous, current) =>
+                        previous.isFetchingPrice != current.isFetchingPrice ||
+                        previous.mandatoryMaterials !=
+                            current.mandatoryMaterials,
+                    builder: (context, state) {
+                      return state.mandatoryMaterials.isEmpty
+                          ? const SizedBox.shrink()
+                          : Column(
+                              children: state.mandatoryMaterials.values
+                                  .map(
+                                    (item) => LoadingShimmer.withChild(
+                                      enabled: state.isFetchingPrice,
+                                      child: _ComboProductTile(
+                                        comboItem: item,
+                                        isMandatory: true,
+                                        isFixed: true,
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            );
+                    },
                   ),
-                );
-          },
-          buildWhen: (previous, current) =>
-              previous.isFetchingPrice != current.isFetchingPrice ||
-              previous.itemsWithSearch != current.itemsWithSearch,
-          builder: (context, state) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const _ComboRequirementSection(),
-                const _ComboDetailSearchBar(),
-                const _TotalComboCount(),
-                const Divider(
-                  endIndent: 0,
-                  indent: 0,
-                  thickness: 0.5,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0)
-                        .copyWith(top: 24),
-                    child: ScrollList<PriceAggregate>(
-                      noRecordFoundWidget: const SizedBox.shrink(),
-                      controller: ScrollController(),
-                      isLoading: false,
-                      itemBuilder: (_, __, item) {
-                        return LoadingShimmer.withChild(
-                          enabled: state.isFetchingPrice,
-                          child: _ComboProductTile(comboItem: item),
-                        );
-                      },
-                      items: state.itemsWithSearch.values.toList(),
-                    ),
+                  const _ComboDetailSearchBar(),
+                  const _TotalComboCount(),
+                  const Divider(
+                    endIndent: 0,
+                    indent: 0,
+                    thickness: 0.5,
                   ),
-                ),
-                const _ComboDetailAddToCartSection(),
-              ],
-            );
-          },
+                  BlocConsumer<ComboDealMaterialDetailBloc,
+                      ComboDealMaterialDetailState>(
+                    listenWhen: (previous, current) =>
+                        previous.isFetchingComboInfo !=
+                            current.isFetchingComboInfo &&
+                        !current.isFetchingComboInfo,
+                    listener: (context, state) {
+                      final eligibilityBlocState =
+                          context.read<EligibilityBloc>().state;
+                      context.read<MaterialPriceBloc>().add(
+                            MaterialPriceEvent.fetchPriceCartProduct(
+                              salesOrganisation:
+                                  eligibilityBlocState.salesOrganisation,
+                              salesConfigs:
+                                  eligibilityBlocState.salesOrgConfigs,
+                              customerCodeInfo:
+                                  eligibilityBlocState.customerCodeInfo,
+                              shipToInfo: eligibilityBlocState.shipToInfo,
+                              comboDealEligible:
+                                  eligibilityBlocState.comboDealEligible,
+                              products: state.allMaterialsInfo,
+                            ),
+                          );
+                    },
+                    buildWhen: (previous, current) =>
+                        previous.isFetchingPrice != current.isFetchingPrice ||
+                        previous.searchableList != current.searchableList,
+                    builder: (context, state) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0)
+                            .copyWith(top: 24),
+                        child: Column(
+                          children: state.searchableList.values
+                              .map(
+                                (item) => LoadingShimmer.withChild(
+                                  enabled: state.isFetchingPrice,
+                                  child: _ComboProductTile(
+                                    comboItem: item,
+                                    isMandatory: item.selfComboDeal.mandatory,
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const _ComboDetailAddToCartSection(),
+          ],
         ),
       ),
     );

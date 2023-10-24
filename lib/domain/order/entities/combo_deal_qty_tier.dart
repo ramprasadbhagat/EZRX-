@@ -28,4 +28,6 @@ class ComboDealQtyTier with _$ComboDealQtyTier {
         type: type,
         rate: rate,
       );
+
+  double get rateToAbs => rate.abs();
 }

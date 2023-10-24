@@ -166,7 +166,8 @@ class ComboDealMaterialDetailBloc
               );
             }
             break;
-          case ComboDealScheme.k2:
+          case ComboDealScheme.k21:
+          case ComboDealScheme.k22:
           case ComboDealScheme.k3:
           case ComboDealScheme.k4:
           case ComboDealScheme.k5:
@@ -268,21 +269,24 @@ class ComboDealMaterialDetailBloc
           },
         );
 
-        final selectedItems = <MaterialNumber, bool>{};
-
-        selectedItems.addAll(
-          {
-            for (final item in items.values)
-              item.getMaterialNumber: item.selfComboDeal.mandatory,
-          },
-        );
-
         final currentQuantityMap = e.comboMaterialsCurrentQuantity;
         if (currentQuantityMap.isNotEmpty) {
           currentQuantityMap.forEach((key, value) {
             items[key] = items[key]!.copyWith(quantity: value);
           });
         }
+
+        final selectedItems = <MaterialNumber, bool>{};
+
+        selectedItems.addAll(
+          {
+            for (final item in items.values)
+              item.getMaterialNumber: _isMaterialSelected(
+                cartComboMaterialsSelected: currentQuantityMap,
+                item: item,
+              ),
+          },
+        );
 
         emit(
           state.copyWith(
@@ -314,5 +318,14 @@ class ComboDealMaterialDetailBloc
         );
       },
     );
+  }
+
+  bool _isMaterialSelected({
+    required Map<MaterialNumber, int> cartComboMaterialsSelected,
+    required PriceAggregate item,
+  }) {
+    return cartComboMaterialsSelected.containsKey(item.getMaterialNumber)
+        ? true
+        : item.selfComboDeal.mandatory;
   }
 }

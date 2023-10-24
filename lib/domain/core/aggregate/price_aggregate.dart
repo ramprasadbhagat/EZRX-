@@ -207,11 +207,11 @@ class PriceAggregate with _$PriceAggregate {
     return NumUtils.roundToPlaces(finalPrice);
   }
 
-  double get comboOfferPrice {
+  double getComboOfferPriceWithDiscount({double comboDealRate = 0}) {
     var comboOfferPrice = 0.0;
 
-    comboOfferPrice = selfComboDeal != ComboDealMaterial.empty()
-        ? listPrice - (listPrice * selfComboDeal.rateToAbs / 100)
+    comboOfferPrice = comboDealRate != 0
+        ? listPrice - (listPrice * comboDealRate / 100)
         : listPrice;
 
     return NumUtils.roundToPlaces(comboOfferPrice);
@@ -221,12 +221,23 @@ class PriceAggregate with _$PriceAggregate {
     return NumUtils.roundToPlaces(vatCalculation(finalPrice));
   }
 
+  double get comboOriginalSubTotal {
+    var comboOriginalTotal = 0.0;
+
+    comboOriginalTotal = comboMaterials.fold(
+      0,
+      (previousValue, element) => previousValue + element.originalSubTotal,
+    );
+
+    return NumUtils.roundToPlaces(comboOriginalTotal);
+  }
+
   double get comboSubTotalExclTax {
     var comboSubTotalExclTax = 0.0;
 
     comboSubTotalExclTax = comboMaterials.fold(
       0,
-      (previousValue, element) => previousValue + element.subTotal,
+      (previousValue, element) => previousValue + element.discountedSubTotal,
     );
 
     return NumUtils.roundToPlaces(comboSubTotalExclTax);
@@ -264,12 +275,17 @@ class PriceAggregate with _$PriceAggregate {
     return value;
   }
 
+  double get listPriceTotal {
+    return listPrice * quantity;
+  }
+
   double get finalPriceTotal {
     return finalPrice * quantity;
   }
 
-  double get comboOfferPriceTotal {
-    return comboOfferPrice * quantity;
+  double getComboOfferPriceSubTotal(double comboDealRate) {
+    return getComboOfferPriceWithDiscount(comboDealRate: comboDealRate) *
+        quantity;
   }
 
   String get finalPriceTotalForAllMaterial {
@@ -335,9 +351,6 @@ class PriceAggregate with _$PriceAggregate {
         result =
             salesOrgConfig.enableTaxAtTotalLevelOnly ? finalPrice : unitPrice;
         break;
-      case PriceType.priceWithComboOffer:
-        result = comboOfferPrice;
-        break;
       case PriceType.finalPriceTotal:
         result = finalPriceTotal;
         break;
@@ -346,8 +359,8 @@ class PriceAggregate with _$PriceAggregate {
             ? finalPriceTotal
             : unitPriceTotal;
         break;
-      case PriceType.priceWithComboOfferTotal:
-        result = comboOfferPriceTotal;
+      case PriceType.listPriceTotal:
+        result = listPriceTotal;
         break;
       case PriceType.listPrice:
       default:
@@ -683,6 +696,5 @@ enum PriceType {
   finalPrice,
   finalPriceTotal,
   unitPriceTotal,
-  priceWithComboOffer,
-  priceWithComboOfferTotal,
+  listPriceTotal,
 }

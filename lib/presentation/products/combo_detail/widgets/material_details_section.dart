@@ -3,11 +3,13 @@ part of 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page
 class _MaterialDetailsSection extends StatelessWidget {
   final PriceAggregate comboItem;
   final ComboDealMaterial comboDealMaterial;
+  final bool isFixed;
 
   const _MaterialDetailsSection({
     Key? key,
     required this.comboItem,
     required this.comboDealMaterial,
+    this.isFixed = false,
   }) : super(key: key);
 
   void _navigateToDetails(BuildContext context, MaterialInfo materialInfo) {
@@ -41,7 +43,10 @@ class _MaterialDetailsSection extends StatelessWidget {
         children: [
           InkWell(
             onTap: () => _navigateToDetails(context, comboItem.materialInfo),
-            child: _MaterialImageSection(comboItem: comboItem),
+            child: _MaterialImageSection(
+              comboItem: comboItem,
+              isFixed: isFixed,
+            ),
           ),
           const SizedBox(
             width: 8,
@@ -63,20 +68,51 @@ class _MaterialDetailsSection extends StatelessWidget {
 
 class _MaterialImageSection extends StatelessWidget {
   final PriceAggregate comboItem;
-  const _MaterialImageSection({required this.comboItem, Key? key})
-      : super(key: key);
+  final bool isFixed;
+
+  const _MaterialImageSection({
+    required this.comboItem,
+    this.isFixed = false,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      showShadow: false,
-      showBorder: true,
-      child: CustomImage(
-        imageUrl: '',
-        fit: BoxFit.fitHeight,
-        height: MediaQuery.of(context).size.height * 0.08,
-        width: MediaQuery.of(context).size.height * 0.08,
-      ),
+    return Stack(
+      children: [
+        CustomCard(
+          showShadow: false,
+          showBorder: true,
+          child: CustomImage(
+            imageUrl: '',
+            fit: BoxFit.fitHeight,
+            height: MediaQuery.of(context).size.height * 0.08,
+            width: MediaQuery.of(context).size.height * 0.08,
+          ),
+        ),
+        if (isFixed)
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8,
+              vertical: 2,
+            ),
+            decoration: BoxDecoration(
+              color: ZPColors.warning,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(8),
+              ).copyWith(
+                bottomLeft: const Radius.circular(0),
+              ),
+            ),
+            child: Text(
+              context.tr('Fixed'),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: ZPColors.fixedLabel,
+                    fontWeight: FontWeight.w700,
+                  ),
+            ),
+          ),
+      ],
     );
   }
 }

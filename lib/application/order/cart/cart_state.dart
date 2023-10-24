@@ -435,4 +435,12 @@ class CartState with _$CartState {
         (item) => (item.isComboAndMatchMaterialNumbers(materialNumbers)),
         orElse: () => PriceAggregate.empty(),
       );
+
+  PriceAggregate getCurrentComboItemByComboDealId(
+    String comboDealId,
+  ) =>
+      cartProducts.firstWhere(
+        (item) => (item.iscomboDealIdMatchComboMaterials(comboDealId)),
+        orElse: () => PriceAggregate.empty(),
+      );
 }

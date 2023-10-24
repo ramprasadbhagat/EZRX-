@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
@@ -59,9 +60,45 @@ class ComboMaterialItem with _$ComboMaterialItem {
   String get discountedPriceDisplay =>
       NumUtils.roundToPlaces(finalIndividualPrice).toString();
 
-  double get subTotal =>
+  double get originalSubTotal => NumUtils.roundToPlaces(listPrice * quantity);
+
+  double get discountedSubTotal =>
       NumUtils.roundToPlaces(finalIndividualPrice * quantity);
 
   //TODO: calculate total with tax here
-  double get subTotalWithTax => subTotal;
+  double get discountedSubTotalWithTax => discountedSubTotal;
+
+  //TODO: calculate total with tax here
+  double get originalTotalWithTax => originalSubTotal;
+
+  ComboDealScheme getScheme(List<ComboMaterialItem> comboMaterials) {
+    switch (comboDealType) {
+      case 'K1':
+        return ComboDealScheme.k1;
+      case 'K2':
+        final haveMandatoryMaterial =
+            comboMaterials.any((comboMaterial) => comboMaterial.mandatory);
+
+        return haveMandatoryMaterial
+            ? ComboDealScheme.k21
+            : ComboDealScheme.k22;
+      case 'K3':
+        return ComboDealScheme.k3;
+      case 'K4':
+        return ComboDealScheme.k4;
+      case 'K5':
+        return ComboDealScheme.k5;
+      default:
+        return ComboDealScheme.k1;
+    }
+  }
+
+  String get comboRateDisplay {
+    final comboRate = rate.abs();
+    if (comboRate == comboRate.toInt()) {
+      return comboRate.toInt().toString();
+    }
+
+    return comboRate.toString();
+  }
 }

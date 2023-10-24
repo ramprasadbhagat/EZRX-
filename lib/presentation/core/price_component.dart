@@ -146,6 +146,7 @@ Color _priceTextColor(PriceStyle type) {
       return ZPColors.neutralsBlack;
 
     case PriceStyle.comboOfferPrice:
+    case PriceStyle.comboOfferPriceDiscounted:
       return ZPColors.darkerGrey;
 
     case PriceStyle.bundleListPriceStrikeThrough:
@@ -189,6 +190,7 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       break;
     case PriceStyle.bonusPrice:
     case PriceStyle.summaryPrice:
+    case PriceStyle.comboOfferPriceDiscounted:
       priceTextStyle = Theme.of(context).textTheme.titleSmall!;
       break;
     case PriceStyle.taxPrice:
@@ -207,7 +209,7 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       priceTextStyle = Theme.of(context).textTheme.labelMedium;
       break;
     case PriceStyle.comboSubTotalExclTax:
-      priceTextStyle = Theme.of(context).textTheme.titleMedium;
+      priceTextStyle = Theme.of(context).textTheme.labelMedium;
       break;
     case PriceStyle.bundlePrice:
       priceTextStyle = Theme.of(context).textTheme.labelLarge;

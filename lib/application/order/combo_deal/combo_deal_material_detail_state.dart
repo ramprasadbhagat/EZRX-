@@ -30,11 +30,40 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
         searchKey: SearchKey.search(''),
       );
 
-  Map<MaterialNumber, PriceAggregate> get itemsWithSearch {
-    if (searchKey.searchValueOrEmpty.isEmpty) return items;
+  Map<MaterialNumber, PriceAggregate> get searchableList {
+    final searchableList = <MaterialNumber, PriceAggregate>{};
+
+    if (currentDeal.scheme == ComboDealScheme.k21) {
+      final optionalComboMaterials = <MaterialNumber>{};
+
+      final optionalComboDeals = currentDeal.materialComboDeals
+          .where(
+            (materialComboDeal) => materialComboDeal.materials
+                .every((material) => !material.mandatory),
+          )
+          .toList();
+
+      for (final comboDeal in optionalComboDeals) {
+        optionalComboMaterials.addAll(
+          comboDeal.materials
+              .where((material) => !material.mandatory)
+              .map((material) => material.materialNumber),
+        );
+      }
+
+      for (final entry in items.entries) {
+        if (optionalComboMaterials.contains(entry.key)) {
+          searchableList[entry.key] = entry.value;
+        }
+      }
+    } else {
+      searchableList.addAll(items);
+    }
+
+    if (searchKey.searchValueOrEmpty.isEmpty) return searchableList;
 
     return Map<MaterialNumber, PriceAggregate>.fromEntries(
-      items.entries.where(
+      searchableList.entries.where(
         (entry) =>
             entry.value.getMaterialNumber.displayMatNo
                 .contains(searchKey.searchValueOrEmpty) ||
@@ -43,6 +72,46 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
                 .contains(searchKey.searchValueOrEmpty),
       ),
     );
+  }
+
+  Map<MaterialNumber, PriceAggregate> get mandatoryMaterials {
+    final mandatoryItemsSet = <MaterialNumber, PriceAggregate>{};
+
+    if (currentDeal.scheme == ComboDealScheme.k21) {
+      final mandatoryComboDeals = currentDeal.materialComboDeals
+          .where(
+            (materialComboDeal) => materialComboDeal.materials
+                .every((material) => material.mandatory),
+          )
+          .toList();
+
+      for (final comboDeal in mandatoryComboDeals) {
+        for (final comboDealMaterial in comboDeal.materials) {
+          if (items[comboDealMaterial.materialNumber] != null) {
+            mandatoryItemsSet.putIfAbsent(
+              comboDealMaterial.materialNumber,
+              () => items[comboDealMaterial.materialNumber]!,
+            );
+          }
+        }
+      }
+    }
+
+    return mandatoryItemsSet;
+  }
+
+  int get totalQuantityUnit {
+    switch (currentDeal.scheme) {
+      case ComboDealScheme.k1:
+      case ComboDealScheme.k21:
+      case ComboDealScheme.k3:
+      case ComboDealScheme.k5:
+      case ComboDealScheme.kWithSuffix:
+        return allSelectedItems.length;
+      case ComboDealScheme.k22:
+      case ComboDealScheme.k4:
+        return totalSelectedQuantity;
+    }
   }
 
   List<PriceAggregate> get allSelectedItems {
@@ -54,34 +123,46 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
     return selectedMaterials.values.toList();
   }
 
+  bool isMaterialSelected(MaterialNumber materialNumber) =>
+      (selectedItems[materialNumber] ?? false);
+
   double get totalPriceSelectedItems => allSelectedItems.fold<double>(
         0,
         (previousValue, element) =>
-            previousValue + element.comboOfferPriceTotal,
+            previousValue +
+            element.getComboOfferPriceSubTotal(
+              currentDeal.getMaterialComboRate(
+                materialNumber: element.getMaterialNumber,
+              ),
+            ),
       );
 
+  double get originalPriceSelectedItems => allSelectedItems.fold<double>(
+        0,
+        (previousValue, element) => previousValue + element.listPriceTotal,
+      );
+
+  double get totalPriceDisplay =>
+      isEnableAddToCart ? totalPriceSelectedItems : originalPriceSelectedItems;
+
   List<MaterialNumber> get allMaterialsNumber =>
-      itemsWithSearch.entries.map((e) => e.key).toList();
+      items.entries.map((e) => e.key).toList();
 
   List<MaterialInfo> get allMaterialsInfo =>
-      itemsWithSearch.entries.map((e) => e.value.materialInfo).toList();
+      items.entries.map((e) => e.value.materialInfo).toList();
 
   int get totalSelectedQuantity => allSelectedItems.fold<int>(
         0,
         (previousValue, element) => previousValue + element.quantity,
       );
 
-  ComboDeal get currentDeal => itemsWithSearch.values.toList().firstComboDeal;
+  ComboDeal get currentDeal => items.values.toList().firstComboDeal;
 
-  List<List<PriceAggregate>> get itemBySets {
-    return currentDeal.materialComboDeals.map((itemSet) {
-      final materials = <PriceAggregate>[];
-      for (final materialNumber in itemSet.materialNumbers) {
-        final material = itemsWithSearch[materialNumber];
-        if (material != null) materials.add(material);
-      }
+  bool get isEnableAddToCart {
+    if (isFetchingPrice || isFetchingComboInfo || allSelectedItems.isEmpty) {
+      return false;
+    }
 
-      return materials;
-    }).toList();
+    return currentDeal.scheme.isComboDealEligible(allSelectedItems);
   }
 }

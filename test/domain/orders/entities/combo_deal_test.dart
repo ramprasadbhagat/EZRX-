@@ -52,7 +52,7 @@ void main() {
         ],
       );
 
-      expect(comboDeal.scheme, ComboDealScheme.k2);
+      expect(comboDeal.scheme, ComboDealScheme.k21);
     });
 
     test('K2.2 case', () {
@@ -68,7 +68,7 @@ void main() {
         ],
       );
 
-      expect(comboDeal.scheme, ComboDealScheme.k2);
+      expect(comboDeal.scheme, ComboDealScheme.k22);
     });
 
     test('Sort QtyTiers with minQty descending', () {

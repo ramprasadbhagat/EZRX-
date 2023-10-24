@@ -43,9 +43,11 @@ class CartRemoteDataSource {
 
       final productList = res.data['data']['cart']?['EzRxItems'] ?? [];
 
-      return List.from(makeResponseCamelCase(jsonEncode(productList)))
-          .map((e) => CartProductDto.fromJson(e).toDomain)
-          .toList();
+      return List.from(
+        makeResponseCamelCase(
+          jsonEncode(productList),
+        ),
+      ).map((e) => CartProductDto.fromJson(e).toDomain).toList();
     });
   }
 

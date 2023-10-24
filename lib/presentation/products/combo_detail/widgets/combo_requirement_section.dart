@@ -23,13 +23,27 @@ class _ComboRequirementSection extends StatelessWidget {
                   color: ZPColors.comboRequirementSubTitle,
                 ),
           ),
-          //TODO: Change title base on combo type
-          Text(
-            context.tr('Purchase all items with min. of its quantity.'),
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: ZPColors.comboRequirementTitle,
-                ),
+          BlocBuilder<ComboDealMaterialDetailBloc,
+              ComboDealMaterialDetailState>(
+            buildWhen: (previous, current) =>
+                previous.isFetchingComboInfo != current.isFetchingComboInfo,
+            builder: (context, state) {
+              if (state.isFetchingComboInfo) {
+                return SizedBox(
+                  width: 100,
+                  height: 20,
+                  child: LoadingShimmer.tile(),
+                );
+              }
+
+              return Text(
+                state.currentDeal.scheme.getRequirementMessage(context),
+                maxLines: 3,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: ZPColors.comboRequirementTitle,
+                    ),
+              );
+            },
           ),
           const SizedBox(height: 8),
           Text(
@@ -39,13 +53,27 @@ class _ComboRequirementSection extends StatelessWidget {
                   color: ZPColors.comboRequirementSubTitle,
                 ),
           ),
-          //TODO: Change title base on combo type
-          Text(
-            context.tr('Per item'),
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: ZPColors.comboRequirementTitle,
-                ),
+          BlocBuilder<ComboDealMaterialDetailBloc,
+              ComboDealMaterialDetailState>(
+            buildWhen: (previous, current) =>
+                previous.isFetchingComboInfo != current.isFetchingComboInfo,
+            builder: (context, state) {
+              if (state.isFetchingComboInfo) {
+                return SizedBox(
+                  width: 100,
+                  height: 20,
+                  child: LoadingShimmer.tile(),
+                );
+              }
+
+              return Text(
+                state.currentDeal.scheme.getDiscountOnMessage(context),
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: ZPColors.comboRequirementTitle,
+                    ),
+              );
+            },
           ),
         ],
       ),

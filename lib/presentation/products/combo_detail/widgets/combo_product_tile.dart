@@ -2,9 +2,13 @@ part of 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page
 
 class _ComboProductTile extends StatelessWidget {
   final PriceAggregate comboItem;
+  final bool isMandatory;
+  final bool isFixed;
   const _ComboProductTile({
     Key? key,
     required this.comboItem,
+    this.isMandatory = true,
+    this.isFixed = false,
   }) : super(key: key);
 
   ComboDealMaterial get _comboDealMaterial => comboItem.comboDeal
@@ -25,11 +29,13 @@ class _ComboProductTile extends StatelessWidget {
             previous.selectedItems != current.selectedItems,
         builder: (_, state) {
           return EdgeCheckbox(
-            onChanged: (value) => bloc.add(
-              ComboDealMaterialDetailEvent.updateItemSelection(
-                item: comboItem.getMaterialNumber,
-              ),
-            ),
+            onChanged: isMandatory
+                ? (_) {}
+                : (value) => bloc.add(
+                      ComboDealMaterialDetailEvent.updateItemSelection(
+                        item: comboItem.getMaterialNumber,
+                      ),
+                    ),
             value: state.selectedItems[comboItem.getMaterialNumber] ?? false,
             body: CustomCard(
               showShadow: true,
@@ -39,6 +45,7 @@ class _ComboProductTile extends StatelessWidget {
                   _MaterialDetailsSection(
                     comboItem: comboItem,
                     comboDealMaterial: _comboDealMaterial,
+                    isFixed: isFixed,
                   ),
                   const Divider(
                     indent: 0,

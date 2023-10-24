@@ -1376,3 +1376,17 @@ Requested return value counter offer,Requested return value counter offer,Reques
 Delete combo,Delete combo,Delete combo,Delete combo,Delete combo,Delete combo,Delete combo,
 This action cannot be undone.,This action cannot be undone.,This action cannot be undone.,This action cannot be undone.,This action cannot be undone.,This action cannot be undone.,This action cannot be undone.,
 eZPoint,eZPoint,eZPoint,eZPoint,eZPoint,eZPoint,eZPoint,
+Purchase all items with min. of its quantity.,Purchase all items with min. of its quantity.,Purchase all items with min. of its quantity.,Purchase all items with min. of its quantity.,Purchase all items with min. of its quantity.,Purchase all items with min. of its quantity.,Purchase all items with min. of its quantity.
+Purchase FIXED product with min. of its quantity and any product in the list.,Purchase FIXED product with min. of its quantity and any product in the list.,Purchase FIXED product with min. of its quantity and any product in the list.,Purchase FIXED product with min. of its quantity and any product in the list.,Purchase FIXED product with min. of its quantity and any product in the list.,Purchase FIXED product with min. of its quantity and any product in the list.,Purchase FIXED product with min. of its quantity and any product in the list.
+Purchase any products with min. <n> of total quantity.,Purchase any products with min. <n> of total quantity.,Purchase any products with min. <n> of total quantity.,Purchase any products with min. <n> of total quantity.,Purchase any products with min. <n> of total quantity.,Purchase any products with min. <n> of total quantity.,Purchase any products with min. <n> of total quantity.
+Per item,Per item,Per item,Per item,Per item,Per item,Per item
+Total Quantity,Total Quantity,Total Quantity,Total Quantity,Total Quantity,Total Quantity,Total Quantity
+Total SKUs,Total SKUs,Total SKUs,Total SKUs,Total SKUs,Total SKUs,Total SKUs
+Total Order Amount,Total Order Amount,Total Order Amount,Total Order Amount,Total Order Amount,Total Order Amount,Total Order Amount
+Combo K1,Combo K1,Combo K1,Combo K1,Combo K1,Combo K1,Combo K1
+Combo K2.1,Combo K2.1,Combo K2.1,Combo K2.1,Combo K2.1,Combo K2.1,Combo K2.1
+Combo K2.2,Combo K2.2,Combo K2.2,Combo K2.2,Combo K2.2,Combo K2.2,Combo K2.2
+Combo K3,Combo K3,Combo K3,Combo K3,Combo K3,Combo K3,Combo K3
+Combo K4,Combo K4,Combo K4,Combo K4,Combo K4,Combo K4,Combo K4
+Combo K5,Combo K5,Combo K5,Combo K5,Combo K5,Combo K5,Combo K5
+Fixed,Fixed,Fixed,Fixed,Fixed,Fixed,Fixed

@@ -21,7 +21,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
         );
       },
       buildWhen: (previous, current) =>
-          previous.items != current.items ||
+          previous.allSelectedItems != current.allSelectedItems ||
           previous.isUpdateCart != current.isUpdateCart,
       builder: (context, state) {
         return Column(
@@ -34,8 +34,8 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
             ),
             ListTile(
               dense: true,
-              visualDensity: VisualDensity.compact,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+              visualDensity: const VisualDensity(vertical: -4, horizontal: -2),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               title: Text(
                 '${"Order for".tr()} ${context.read<EligibilityBloc>().state.customerCodeInfo.customerName}',
                 style: Theme.of(context).textTheme.labelSmall,
@@ -47,17 +47,20 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
             ),
             ListTile(
               dense: true,
-              visualDensity: VisualDensity.compact,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+              visualDensity: const VisualDensity(vertical: -4, horizontal: -2),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
               title: Text(
-                '${state.allSelectedItems.length} ${'items'.tr()}',
+                state.currentDeal.scheme.getTotalUnitMessage(
+                  context,
+                  totalUnit: state.totalQuantityUnit,
+                ),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               trailing: PriceComponent(
                 key: WidgetKeys.grandTotalKey,
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: state.totalPriceSelectedItems.toString(),
+                price: state.totalPriceDisplay.toString(),
                 title: 'Total: '.tr(),
                 priceLabelStyle:
                     Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -65,9 +68,40 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                         ),
               ),
             ),
-            _CartPageCheckoutButton(
-              isUpdateCart: state.isUpdateCart,
-            ),
+            if (state.currentDeal.scheme.displayOriginalPrice &&
+                state.isEnableAddToCart)
+              ListTile(
+                dense: true,
+                visualDensity:
+                    const VisualDensity(vertical: -4, horizontal: -2),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+                title: Text(
+                  context.tr(
+                    '{percent}% Discount',
+                    namedArgs: {
+                      'percent': state.currentDeal.materialComboRateDisplay(
+                        materialNumber: state.allMaterialsNumber.first,
+                      ),
+                    },
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: ZPColors.discountedTotalTitle,
+                      ),
+                ),
+                trailing: PriceComponent(
+                  key: WidgetKeys.grandTotalKey,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: state.originalPriceSelectedItems.toString(),
+                  type: PriceStyle.comboOfferPrice,
+                  priceLabelStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.darkerGrey,
+                          ),
+                ),
+              ),
+            _CartPageCheckoutButton(isUpdateCart: state.isUpdateCart),
           ],
         );
       },
@@ -96,9 +130,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
             if (context.router.current.path == 'combo_detail') {
               CustomSnackBar(
                 messageText: context.tr(
-                  isUpdateCart
-                      ? 'Combo K1 has been updated to cart'
-                      : 'Combo K1 has been added to cart',
+                  '${context.read<ComboDealMaterialDetailBloc>().state.currentDeal.scheme.comboDealTitleAppbar} has been added to cart',
                 ),
               ).show(context);
             }
@@ -130,23 +162,32 @@ class _CartPageCheckoutButton extends StatelessWidget {
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: ElevatedButton(
-                key: WidgetKeys.checkoutButton,
-                onPressed: () {
-                  context.read<CartBloc>().add(
-                        CartEvent.upsertCartItemsWithComboOffers(
-                          priceAggregates: context
-                              .read<ComboDealMaterialDetailBloc>()
-                              .state
-                              .allSelectedItems,
-                        ),
-                      );
+              child: BlocBuilder<ComboDealMaterialDetailBloc,
+                  ComboDealMaterialDetailState>(
+                buildWhen: (previous, current) =>
+                    previous.isEnableAddToCart != current.isEnableAddToCart,
+                builder: (context, state) {
+                  return ElevatedButton(
+                    key: WidgetKeys.checkoutButton,
+                    onPressed: state.isEnableAddToCart
+                        ? () {
+                            context.read<CartBloc>().add(
+                                  CartEvent.upsertCartItemsWithComboOffers(
+                                    priceAggregates: context
+                                        .read<ComboDealMaterialDetailBloc>()
+                                        .state
+                                        .allSelectedItems,
+                                  ),
+                                );
+                          }
+                        : null,
+                    child: Text(
+                      isUpdateCart
+                          ? context.tr('Update cart')
+                          : context.tr('Add to cart'),
+                    ),
+                  );
                 },
-                child: Text(
-                  isUpdateCart
-                      ? context.tr('Update cart')
-                      : context.tr('Add to cart'),
-                ),
               ),
             ),
           ),

@@ -6,7 +6,7 @@ import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dar
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -63,11 +63,9 @@ class ComboOffersProduct extends StatelessWidget {
             comboDealId: priceComboDeal?.id ?? '',
           );
 
-          final comboDealMaterial =
-              comboDeal.singleDeal(materialNumber: materialNumber);
-
-          if (!enableComboDeals ||
-              comboDealMaterial == ComboDealMaterial.empty()) {
+          if (state.isFetching ||
+              !enableComboDeals ||
+              comboDeal == ComboDeal.empty()) {
             return const SizedBox.shrink();
           }
 
@@ -100,7 +98,9 @@ class ComboOffersProduct extends StatelessWidget {
                       context.tr(
                         'Discount up to {percent}% on selected materials',
                         namedArgs: {
-                          'percent': comboDealMaterial.rate.abs().toString(),
+                          'percent': comboDeal.materialComboRateDisplay(
+                            materialNumber: materialNumber,
+                          ),
                         },
                       ),
                       style: Theme.of(context).textTheme.bodySmall,
@@ -121,8 +121,8 @@ class ComboOffersProduct extends StatelessWidget {
                         final overrideQuantity = context
                             .read<CartBloc>()
                             .state
-                            .getCurrentComboItemByMaterialNumbers(
-                              priceComboDeal?.category.values ?? [],
+                            .getCurrentComboItemByComboDealId(
+                              priceComboDeal?.id ?? '',
                             )
                             .comboMaterialsCurrentQuantity;
 

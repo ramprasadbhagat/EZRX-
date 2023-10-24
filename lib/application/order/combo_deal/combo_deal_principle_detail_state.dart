@@ -37,6 +37,14 @@ class ComboDealPrincipleDetailState with _$ComboDealPrincipleDetailState {
 
   ComboDeal get currentDeal => items.values.toList().firstComboDeal;
 
+  bool get isEnableAddToCart {
+    if (isFetching || allSelectedItems.isEmpty) {
+      return false;
+    }
+
+    return currentDeal.scheme.isComboDealEligible(allSelectedItems);
+  }
+
   bool get isFetching =>
       isFetchingMaterials || isFetchingComboInfo || isFetchingPrice;
 }

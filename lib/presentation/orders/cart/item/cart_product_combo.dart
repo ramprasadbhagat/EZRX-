@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
@@ -29,6 +31,10 @@ class CartProductCombo extends StatelessWidget {
     Key? key,
     required this.cartItem,
   }) : super(key: key);
+
+  ComboDealScheme get _comboScheme =>
+      cartItem.comboMaterials.firstOrNull?.getScheme(cartItem.comboMaterials) ??
+      ComboDealScheme.k1;
 
   @override
   Widget build(BuildContext context) {
@@ -150,18 +156,19 @@ class CartProductCombo extends StatelessWidget {
                     ),
                   ],
                 ),
-                //TODO: Change for other's cases
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Combo K1',
+                        context.tr(
+                          _comboScheme.comboDealTitleAppbar,
+                        ),
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                       Text(
-                        'Purchase all items with min. of its quantity.',
+                        _comboScheme.getRequirementMessage(context),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: ZPColors.darkGray,
                             ),
@@ -169,7 +176,10 @@ class CartProductCombo extends StatelessWidget {
                       const SizedBox(height: 8),
                       ...cartItem.comboMaterials
                           .map(
-                            (e) => CartProductComboItem(comboMaterialItem: e),
+                            (e) => CartProductComboItem(
+                              comboMaterialItem: e,
+                              comboScheme: _comboScheme,
+                            ),
                           )
                           .toList(),
                     ],
@@ -182,6 +192,7 @@ class CartProductCombo extends StatelessWidget {
                 ),
                 _ComboSubTotalSection(
                   cartProduct: cartItem,
+                  comboScheme: _comboScheme,
                 ),
               ],
             ),
@@ -209,8 +220,11 @@ class CartProductCombo extends StatelessWidget {
 
 class _ComboSubTotalSection extends StatelessWidget {
   final PriceAggregate cartProduct;
+  final ComboDealScheme comboScheme;
+
   const _ComboSubTotalSection({
     required this.cartProduct,
+    required this.comboScheme,
     Key? key,
   }) : super(key: key);
 
@@ -218,23 +232,58 @@ class _ComboSubTotalSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Text(
-            context.tr('Combo subtotal (excl. tax):'),
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                  color: ZPColors.darkGray,
+          if (comboScheme.displayOriginalPrice)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  context.tr(
+                    '{percent}% Discount',
+                    namedArgs: {
+                      'percent': cartProduct
+                              .comboMaterials.firstOrNull?.comboRateDisplay ??
+                          '',
+                    },
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: ZPColors.discountedTotalTitle,
+                      ),
                 ),
-          ),
-          PriceComponent(
-            key: WidgetKeys.cartItemProductTotalPrice,
-            salesOrgConfig:
-                context.read<EligibilityBloc>().state.salesOrgConfigs,
-            price: cartProduct.comboSubTotalExclTax.toString(),
-            type: PriceStyle.comboSubTotalExclTax,
+                PriceComponent(
+                  key: WidgetKeys.grandTotalKey,
+                  salesOrgConfig:
+                      context.read<EligibilityBloc>().state.salesOrgConfigs,
+                  price: cartProduct.comboOriginalSubTotal.toString(),
+                  type: PriceStyle.comboOfferPrice,
+                  priceLabelStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: ZPColors.darkerGrey,
+                          ),
+                ),
+              ],
+            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                context.tr('Combo subtotal (excl. tax):'),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: ZPColors.darkGray,
+                    ),
+              ),
+              PriceComponent(
+                key: WidgetKeys.cartItemProductTotalPrice,
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                price: cartProduct.comboSubTotalExclTax.toString(),
+                type: PriceStyle.comboSubTotalExclTax,
+              ),
+            ],
           ),
         ],
       ),
