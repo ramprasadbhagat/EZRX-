@@ -1066,6 +1066,8 @@ class WidgetKeys {
   static Key viewByOrdersQtyLabelKey = const Key('viewByOrdersItemQtyLabelKey');
   static Key viewByOrderBuyAgainButtonKey =
       const Key('viewByOrderBuyAgainButtonKey');
+  static Key viewByOrderSubtotalKey = const Key('viewByOrderSubtotalKey');
+  static Key viewByOrderGrandTotalKey = const Key('viewByOrderGrandTotalKey');
   //============================================================
   // View By Orders filter bottom sheet
   //============================================================

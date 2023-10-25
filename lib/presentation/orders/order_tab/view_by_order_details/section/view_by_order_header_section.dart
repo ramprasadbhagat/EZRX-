@@ -15,7 +15,7 @@ class OrderHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eligibityState = context.read<EligibilityBloc>().state;
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
     return BlocBuilder<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
       buildWhen: (previous, current) => previous.isLoading != current.isLoading,
@@ -38,9 +38,7 @@ class OrderHeaderSection extends StatelessWidget {
                       color: ZPColors.white,
                     ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               BalanceTextRow(
                 key: WidgetKeys.viewByOrderDetailOrderDate,
                 keyText: context.tr('Order date'),
@@ -52,6 +50,8 @@ class OrderHeaderSection extends StatelessWidget {
                     Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: ZPColors.white,
                         ),
+                keyFlex: 8,
+                valueFlex: 7,
               ),
               BalanceTextRow(
                 keyText: context.tr('PO reference'),
@@ -63,8 +63,10 @@ class OrderHeaderSection extends StatelessWidget {
                     Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: ZPColors.white,
                         ),
+                keyFlex: 8,
+                valueFlex: 7,
               ),
-              if (eligibityState.salesOrgConfigs.enableFutureDeliveryDay)
+              if (eligibilityState.salesOrgConfigs.enableFutureDeliveryDay)
                 BalanceTextRow(
                   keyText: context.tr('Requested Delivery Date'),
                   valueText: orderDetails.requestedDeliveryDate.dateString,
@@ -76,8 +78,10 @@ class OrderHeaderSection extends StatelessWidget {
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.white,
                           ),
+                  keyFlex: 8,
+                  valueFlex: 7,
                 ),
-              if (eligibityState.salesOrgConfigs.enableReferenceNote)
+              if (eligibilityState.salesOrgConfigs.enableReferenceNote)
                 BalanceTextRow(
                   keyText: context.tr('Reference Note'),
                   valueText: orderDetails.referenceNotes,
@@ -89,8 +93,10 @@ class OrderHeaderSection extends StatelessWidget {
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.white,
                           ),
+                  keyFlex: 8,
+                  valueFlex: 7,
                 ),
-              if (eligibityState.displayPaymentTerm)
+              if (eligibilityState.displayPaymentTerm)
                 BalanceTextRow(
                   key: WidgetKeys.paymentTermKey,
                   keyText: context.tr('Payment Term'),
@@ -104,8 +110,10 @@ class OrderHeaderSection extends StatelessWidget {
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.white,
                           ),
+                  keyFlex: 8,
+                  valueFlex: 7,
                 ),
-              if (eligibityState.salesOrgConfigs.enableMobileNumber)
+              if (eligibilityState.salesOrgConfigs.enableMobileNumber)
                 BalanceTextRow(
                   keyText: context.tr('Contact person'),
                   valueText: orderDetails.orderBy,
@@ -117,8 +125,10 @@ class OrderHeaderSection extends StatelessWidget {
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.white,
                           ),
+                  keyFlex: 8,
+                  valueFlex: 7,
                 ),
-              if (eligibityState.salesOrgConfigs.enableMobileNumber)
+              if (eligibilityState.salesOrgConfigs.enableMobileNumber)
                 BalanceTextRow(
                   keyText: context.tr('Contact number'),
                   valueText:
@@ -131,8 +141,10 @@ class OrderHeaderSection extends StatelessWidget {
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.white,
                           ),
+                  keyFlex: 8,
+                  valueFlex: 7,
                 ),
-              if (eligibityState.salesOrgConfigs.enableSpecialInstructions)
+              if (eligibilityState.salesOrgConfigs.enableSpecialInstructions)
                 BalanceTextRow(
                   keyText: context.tr('Delivery instructions'),
                   valueText: orderDetails.orderHistoryDetailsSpecialInstructions
@@ -145,8 +157,10 @@ class OrderHeaderSection extends StatelessWidget {
                       Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.white,
                           ),
+                  keyFlex: 8,
+                  valueFlex: 7,
                 ),
-              if (eligibityState.salesOrgConfigs.showPOAttachment)
+              if (eligibilityState.salesOrgConfigs.showPOAttachment)
                 const AttachmentSection(),
             ],
           ),

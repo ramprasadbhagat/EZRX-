@@ -21,6 +21,8 @@ class AttachmentSection extends StatelessWidget {
       builder: (context, state) {
         if (!state.orderHistoryDetails.poDocumentsAvailable) {
           return BalanceTextRow(
+            keyFlex: 8,
+            valueFlex: 7,
             keyText: context.tr('Attachments'),
             keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: ZPColors.white,
@@ -36,22 +38,16 @@ class AttachmentSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 1,
+              flex: 8,
               child: Text(
-                context.tr('Attachments'),
+                '${context.tr('Attachments')}:',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.white,
                     ),
               ),
             ),
-            Text(
-              ': ',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
             const Expanded(
-              flex: 2,
+              flex: 7,
               child: _AttachmentsWithIcon(),
             ),
           ],
@@ -128,22 +124,17 @@ class _AttachmentsWithIcon extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 5.0),
                               child: Row(
                                 children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: _AttachmentWidget(
-                                      poDocuments: state.orderHistoryDetails
-                                              .orderHistoryDetailsPoDocuments[
-                                          index],
-                                    ),
+                                  _AttachmentWidget(
+                                    poDocuments: state.orderHistoryDetails
+                                        .orderHistoryDetailsPoDocuments[index],
                                   ),
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.topLeft,
-                                      child: SvgPicture.asset(
-                                        SvgImage.downloadIcon,
-                                        height: 20,
-                                        width: 20,
-                                      ),
+                                  const SizedBox(width: 5),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: SvgPicture.asset(
+                                      SvgImage.downloadIcon,
+                                      height: 20,
+                                      width: 20,
                                     ),
                                   ),
                                 ],

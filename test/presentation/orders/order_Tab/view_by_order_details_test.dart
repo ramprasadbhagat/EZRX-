@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
@@ -23,6 +24,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -77,6 +79,10 @@ class MockProductImageBloc
     extends MockBloc<ProductImageEvent, ProductImageState>
     implements ProductImageBloc {}
 
+class MockPoAttachmentBloc
+    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
+    implements PoAttachmentBloc {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -92,6 +98,7 @@ void main() {
   late EligibilityBlocMock eligibilityBlocMock;
   late CartBlocMock cartBlocMock;
   late ProductImageBloc mockProductImageBloc;
+  late PoAttachmentBloc mockPoAttachmentBloc;
   final fakeOrderHistoryDetailsOrderItem =
       OrderHistoryDetailsOrderItem.empty().copyWith(
     expiryDate: DateTimeStringValue('2023-10-04'),
@@ -123,6 +130,7 @@ void main() {
       announcementBlocMock = AnnouncementBlocMock();
       mockProductImageBloc = MockProductImageBloc();
       mockAuthBloc = MockAuthBloc();
+      mockPoAttachmentBloc = MockPoAttachmentBloc();
       when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
 
       when(() => userBlocMock.state).thenReturn(
@@ -172,6 +180,8 @@ void main() {
           ),
         ),
       );
+      when(() => mockPoAttachmentBloc.state)
+          .thenReturn(PoAttachmentState.initial());
     });
 
     Widget getScopedWidget() {
@@ -208,6 +218,9 @@ void main() {
           BlocProvider<ProductImageBloc>(
             create: (context) => mockProductImageBloc,
           ),
+          BlocProvider<PoAttachmentBloc>(
+            create: (context) => mockPoAttachmentBloc,
+          )
         ],
         child: const Material(
           child: ViewByOrderDetailsPage(),
@@ -384,6 +397,31 @@ void main() {
       expect(expectedDelivery, findsNothing);
     });
 
+    testWidgets('test Attachments', (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsPoDocuments: [PoDocuments.empty()],
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            showPOAttachment: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final expectedDelivery = find.text(
+        'Attachments:',
+      );
+      expect(expectedDelivery, findsOneWidget);
+    });
+
     testWidgets('test when enableSpecialInstructions is true', (tester) async {
       when(() => mockViewByOrderDetailsBloc.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
@@ -457,10 +495,8 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      final subTotalFinder = find
-          .byKey(WidgetKeys.balanceTextRow('Subtotal (excl. tax)', 'MYR .00'));
-      final grandTotalFinder =
-          find.byKey(WidgetKeys.balanceTextRow('Grand total', 'MYR .00'));
+      final subTotalFinder = find.byKey(WidgetKeys.viewByOrderSubtotalKey);
+      final grandTotalFinder = find.byKey(WidgetKeys.viewByOrderGrandTotalKey);
       expect(subTotalFinder, findsOneWidget);
       expect(grandTotalFinder, findsOneWidget);
     });

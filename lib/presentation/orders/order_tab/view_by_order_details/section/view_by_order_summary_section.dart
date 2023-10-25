@@ -3,7 +3,8 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,16 +42,25 @@ class OrderSummarySection extends StatelessWidget {
             style: Theme.of(context).textTheme.labelMedium,
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
-          BalanceTextRow(
-            keyText: context.tr('Subtotal (excl. tax)'),
-            valueText: orderDetails.orderNumber.isValid()
-                ? StringUtils.displayPrice(
-                    salesOrgConfigs,
-                    orderDetails.orderedItemsValue(isMYExternalSalesRep),
-                  )
-                : context.tr('NA'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text('${context.tr('Subtotal (excl. tax)')}:'),
+              PriceComponent(
+                key: WidgetKeys.viewByOrderSubtotalKey,
+                type: PriceStyle.summaryPrice,
+                price: orderDetails.orderNumber.isValid()
+                    ? StringUtils.displayPrice(
+                        salesOrgConfigs,
+                        orderDetails.orderedItemsValue(isMYExternalSalesRep),
+                      )
+                    : context.tr('NA'),
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+              ),
+            ],
           ),
           /* BalanceTextRow(   //TODO:It will be applicable only for SG market so once get all details will enhance and allign with web
           keyText: 'Tax at x%',
@@ -66,21 +76,31 @@ class OrderSummarySection extends StatelessWidget {
         ),*/
           const Divider(
             indent: 0,
-            height: 20,
+            height: 15,
             endIndent: 0,
             thickness: 1,
             color: ZPColors.lightGray2,
           ),
-          BalanceTextRow(
-            keyText: context.tr('Grand total'),
-            valueText: orderDetails.orderNumber.isValid()
-                ? StringUtils.displayPrice(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text('${context.tr('Grand total')}:'),
+              PriceComponent(
+                key: WidgetKeys.viewByOrderGrandTotalKey,
+                type: PriceStyle.grandTotalPrice,
+                price: orderDetails.orderNumber.isValid()
+                    ? StringUtils.displayPrice(
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                        taxDisplayForOrderHistoryAndDetails
+                            ? orderDetails.grandTotal(isMYExternalSalesRep)
+                            : orderDetails
+                                .orderedItemsValue(isMYExternalSalesRep),
+                      )
+                    : context.tr('NA'),
+                salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
-                    taxDisplayForOrderHistoryAndDetails
-                        ? orderDetails.grandTotal(isMYExternalSalesRep)
-                        : orderDetails.orderedItemsValue(isMYExternalSalesRep),
-                  )
-                : context.tr('NA'),
+              ),
+            ],
           ),
           // const BalanceTextRow(
           //   keyText: 'Total savings', // TODO: after getting information will enhance and allign with web
