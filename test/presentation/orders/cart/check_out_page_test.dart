@@ -764,9 +764,13 @@ void main() {
               .futureDeliveryDay.intValue,
         ),
       );
-      await tester.tap(find.text(selectedDate.day.toString()));
-      await tester.pumpAndSettle();
-
+      await tester.tap(find.widgetWithIcon(IconButton, Icons.edit));
+      await tester.pump();
+      await tester.enterText(
+        find.byType(InputDatePickerFormField),
+        '${selectedDate.month}/${selectedDate.day}/${selectedDate.year}',
+      );
+      await tester.pump();
       await tester.tap(okButton);
       await tester.pumpAndSettle();
 
