@@ -38,9 +38,6 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
                 ReturnValueField(
                   data: item,
                 ),
-                const SizedBox(
-                  height: 8,
-                ),
                 ReturnCounterOfferField(
                   uuid: detail.uuid,
                   enabled: false,

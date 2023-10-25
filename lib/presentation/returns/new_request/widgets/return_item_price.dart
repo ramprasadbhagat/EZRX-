@@ -18,29 +18,31 @@ class ReturnItemPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final configs = context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final eligibilityState = context.read<EligibilityBloc>().state;
     var details =
         context.read<NewRequestBloc>().state.getReturnItemDetails(data.uuid);
     if (details == ReturnItemDetails.empty()) {
       details = data.validatedItemDetails;
     }
+    final isPriceOverrideValid = eligibilityState.isReturnsOverrideEnable &&
+        details.priceOverride.isValid();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            if (details.priceOverride.isValid())
+            if (isPriceOverrideValid)
               Padding(
                 padding: const EdgeInsets.only(right: 4.0),
                 child: PriceComponent(
-                  salesOrgConfig: configs,
+                  salesOrgConfig: eligibilityState.salesOrgConfigs,
                   price: details.unitPrice.apiParameterValue,
                   type: PriceStyle.counterOfferPrice,
                 ),
               ),
             PriceComponent(
-              salesOrgConfig: configs,
+              salesOrgConfig: eligibilityState.salesOrgConfigs,
               price: details.priceOverride.isValid()
                   ? details.priceOverride.stringValue
                   : details.unitPrice.apiParameterValue,
@@ -48,7 +50,7 @@ class ReturnItemPrice extends StatelessWidget {
             ),
           ],
         ),
-        if (details.priceOverride.isValid())
+        if (isPriceOverrideValid)
           Text(
             context.tr('Requested return value counter offer'),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(

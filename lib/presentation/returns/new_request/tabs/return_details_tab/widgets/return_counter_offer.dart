@@ -19,53 +19,54 @@ class ReturnCounterOfferField extends StatelessWidget {
   final bool enabled;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<EligibilityBloc, EligibilityState>(
-      buildWhen: (previous, current) =>
-          previous.isReturnsOverrideEnable != current.isReturnsOverrideEnable,
-      builder: (_, eligibilityState) {
-        if (!eligibilityState.isReturnsOverrideEnable) {
-          return const SizedBox.shrink();
-        }
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
-        return BlocBuilder<NewRequestBloc, NewRequestState>(
-          buildWhen: (previous, current) =>
-              previous.getReturnItemDetails(uuid).priceOverride !=
-              current.getReturnItemDetails(uuid).priceOverride,
-          builder: (context, state) {
-            final labelText =
-                '${context.tr('Request counter offer')} ${context.read<EligibilityBloc>().state.salesOrgConfigs.currency.code}';
-            final initValue = state
-                .getReturnItemDetails(uuid)
-                .priceOverride
-                .getOrDefaultValue('');
+    return !eligibilityState.isReturnsOverrideEnable
+        ? const SizedBox.shrink()
+        : Column(
+            children: [
+              const SizedBox(
+                height: 8,
+              ),
+              BlocBuilder<NewRequestBloc, NewRequestState>(
+                buildWhen: (previous, current) =>
+                    previous.getReturnItemDetails(uuid).priceOverride !=
+                    current.getReturnItemDetails(uuid).priceOverride,
+                builder: (context, state) {
+                  final labelText =
+                      '${context.tr('Request counter offer')} ${eligibilityState.salesOrgConfigs.currency.code}';
+                  final initValue = state
+                      .getReturnItemDetails(uuid)
+                      .priceOverride
+                      .getOrDefaultValue('');
 
-            return CustomNumericTextField.wholeNumber(
-              fieldKey: enabled
-                  ? WidgetKeys.requestCounterOfferTextField(uuid)
-                  : WidgetKeys.requestCounterOfferTextField(initValue),
-              labelText: labelText,
-              decoration: enabled
-                  ? InputDecoration(
-                      hintText: context.tr('Request return unit price'),
-                    )
-                  : const InputDecoration(
-                      fillColor: ZPColors.inputBorderColor,
-                      hintText: '0.00',
-                    ),
-              isEnabled: enabled,
-              mandatory: false,
-              initValue: initValue,
-              onChanged: (value) => context.read<NewRequestBloc>().add(
-                    NewRequestEvent.updateRequestCounterOffer(
-                      uuid: uuid,
-                      isChangeMaterialCounterOffer: enabled,
-                      counterOfferValue: CounterOfferValue(value),
-                    ),
-                  ),
-            );
-          },
-        );
-      },
-    );
+                  return CustomNumericTextField.wholeNumber(
+                    fieldKey: enabled
+                        ? WidgetKeys.requestCounterOfferTextField(uuid)
+                        : WidgetKeys.requestCounterOfferTextField(initValue),
+                    labelText: labelText,
+                    decoration: enabled
+                        ? InputDecoration(
+                            hintText: context.tr('Request return unit price'),
+                          )
+                        : const InputDecoration(
+                            fillColor: ZPColors.inputBorderColor,
+                            hintText: '0.00',
+                          ),
+                    isEnabled: enabled,
+                    mandatory: false,
+                    initValue: initValue,
+                    onChanged: (value) => context.read<NewRequestBloc>().add(
+                          NewRequestEvent.updateRequestCounterOffer(
+                            uuid: uuid,
+                            isChangeMaterialCounterOffer: enabled,
+                            counterOfferValue: CounterOfferValue(value),
+                          ),
+                        ),
+                  );
+                },
+              ),
+            ],
+          );
   }
 }
