@@ -6,7 +6,6 @@ import 'package:ezrxmobile/application/account/payment_configuration/sales_distr
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
-import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
@@ -155,9 +154,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               initial: (_) => _showLoadingDialog(context),
               loading: (_) => _showLoadingDialog(context),
               authenticated: (authState) {
-                context.read<AnnouncementBloc>().add(
-                      const AnnouncementEvent.getAnnouncement(),
-                    );
+                //TODO: Revisit to uncomment this after change the endpoint for Announcement API
+                // context.read<AnnouncementBloc>().add(
+                //       const AnnouncementEvent.getAnnouncement(),
+                //     );
                 context.read<UserBloc>().add(const UserEvent.fetch());
 
                 context.read<IntroBloc>().add(
@@ -173,9 +173,9 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               unauthenticated: (unauthState) {
                 locator<MixpanelService>().onLogout();
-                context.read<AnnouncementBloc>().add(
-                      const AnnouncementEvent.getAnnouncement(),
-                    );
+                // context.read<AnnouncementBloc>().add(
+                //       const AnnouncementEvent.getAnnouncement(),
+                //     );
                 context.read<UserBloc>().add(const UserEvent.initialized());
                 context
                     .read<ChatBotBloc>()
