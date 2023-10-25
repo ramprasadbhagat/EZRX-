@@ -69,7 +69,7 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   String get principalCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ProductType', defaultValue: '')
+  @JsonKey(name: 'ProductType', readValue: _getProductType)
   String get productType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -122,7 +122,8 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
-      @JsonKey(name: 'ProductType', defaultValue: '') String productType});
+      @JsonKey(name: 'ProductType', readValue: _getProductType)
+      String productType});
 
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
       get tenderContractDetails;
@@ -308,7 +309,8 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
       @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
-      @JsonKey(name: 'ProductType', defaultValue: '') String productType});
+      @JsonKey(name: 'ProductType', readValue: _getProductType)
+      String productType});
 
   @override
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
@@ -481,7 +483,7 @@ class _$_OrderHistoryDetailsOrderItemDto
       required this.principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       required this.governmentMaterialCode,
-      @JsonKey(name: 'ProductType', defaultValue: '')
+      @JsonKey(name: 'ProductType', readValue: _getProductType)
       required this.productType})
       : _details = details,
         super._();
@@ -564,7 +566,7 @@ class _$_OrderHistoryDetailsOrderItemDto
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   final String governmentMaterialCode;
   @override
-  @JsonKey(name: 'ProductType', defaultValue: '')
+  @JsonKey(name: 'ProductType', readValue: _getProductType)
   final String productType;
 
   @override
@@ -706,7 +708,7 @@ abstract class _OrderHistoryDetailsOrderItemDto
       required final String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       required final String governmentMaterialCode,
-      @JsonKey(name: 'ProductType', defaultValue: '')
+      @JsonKey(name: 'ProductType', readValue: _getProductType)
       required final String productType}) = _$_OrderHistoryDetailsOrderItemDto;
   const _OrderHistoryDetailsOrderItemDto._() : super._();
 
@@ -781,7 +783,7 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode;
   @override
-  @JsonKey(name: 'ProductType', defaultValue: '')
+  @JsonKey(name: 'ProductType', readValue: _getProductType)
   String get productType;
   @override
   @JsonKey(ignore: true)

@@ -62,7 +62,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required String principalCode,
     @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
         required String governmentMaterialCode,
-    @JsonKey(name: 'ProductType', defaultValue: '')
+    @JsonKey(name: 'ProductType', readValue: _getProductType)
         required String productType,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
@@ -152,3 +152,6 @@ Map<String, dynamic> orderHistoryDetailsOrderItemTenderContractDetailsOverride(
     json[key] ?? {};
 bool boolStringFormatCheck(Map json, String key) =>
     json[key] == null || json[key] == '' ? false : json[key];
+
+String _getProductType(Map json, String key) =>
+    json[key] == null || json[key] == '' ? 'material' : json[key];

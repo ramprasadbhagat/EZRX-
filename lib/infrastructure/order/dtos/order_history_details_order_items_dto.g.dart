@@ -38,7 +38,7 @@ _$_OrderHistoryDetailsOrderItemDto _$$_OrderHistoryDetailsOrderItemDtoFromJson(
       principalName: json['PrincipalName'] as String? ?? '',
       principalCode: json['PrincipalCode'] as String? ?? '',
       governmentMaterialCode: json['GovernmentMaterialCode'] as String? ?? '',
-      productType: json['ProductType'] as String? ?? '',
+      productType: _getProductType(json, 'ProductType') as String,
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(

@@ -717,5 +717,34 @@ void main() {
       final orderCreatedText = find.text('Order Created');
       expect(orderCreatedText, findsOneWidget);
     });
+
+    testWidgets('Find ordered items list when product type is empty',
+        (tester) async {
+      when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryDetailsOrderItem.copyWith(
+                productType: MaterialInfoType('material'),
+              )
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final viewByOrderDetailsList =
+          find.byKey(WidgetKeys.viewByOrderDetailsPageListView);
+      final orderItemsList = find.byKey(
+        WidgetKeys.viewByOrderDetailItemsSection,
+      );
+
+      await tester.dragUntilVisible(
+        orderItemsList,
+        viewByOrderDetailsList,
+        const Offset(0.0, -200.0),
+      );
+    });
   });
 }
