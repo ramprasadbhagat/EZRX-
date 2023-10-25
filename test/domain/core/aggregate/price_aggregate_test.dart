@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
@@ -592,7 +593,10 @@ void main() {
     test(
       'display from PriceAggregate for PriceType.finalPrice',
       () {
-        expect(emptyPriceAggregate.display(PriceType.finalPrice), '0.0');
+        expect(
+          emptyPriceAggregate.display(PriceType.finalPrice),
+          'Price Not Available'.tr(),
+        );
       },
     );
 
@@ -604,21 +608,30 @@ void main() {
             enableTaxAtTotalLevelOnly: true,
           ),
         );
-        expect(customPriceAggregate.display(PriceType.unitPrice), '0.0');
+        expect(
+          customPriceAggregate.display(PriceType.unitPrice),
+          'Price Not Available'.tr(),
+        );
       },
     );
 
     test(
       'display from PriceAggregate for PriceType.unitPrice',
       () async {
-        expect(emptyPriceAggregate.display(PriceType.unitPrice), '0.0');
+        expect(
+          emptyPriceAggregate.display(PriceType.unitPrice),
+          'Price Not Available'.tr(),
+        );
       },
     );
 
     test(
       'display from PriceAggregate for PriceType.finalPriceTotal',
       () {
-        expect(emptyPriceAggregate.display(PriceType.finalPriceTotal), '0.0');
+        expect(
+          emptyPriceAggregate.display(PriceType.finalPriceTotal),
+          'Price Not Available'.tr(),
+        );
       },
     );
 
@@ -630,21 +643,30 @@ void main() {
             enableTaxAtTotalLevelOnly: true,
           ),
         );
-        expect(customPriceAggregate.display(PriceType.unitPriceTotal), '0.0');
+        expect(
+          customPriceAggregate.display(PriceType.unitPriceTotal),
+          'Price Not Available'.tr(),
+        );
       },
     );
 
     test(
       'display from PriceAggregate for PriceType.unitPriceTotal',
       () {
-        expect(emptyPriceAggregate.display(PriceType.unitPriceTotal), '0.0');
+        expect(
+          emptyPriceAggregate.display(PriceType.unitPriceTotal),
+          'Price Not Available'.tr(),
+        );
       },
     );
 
     test(
       'display from PriceAggregate for PriceType.listPrice',
       () {
-        expect(emptyPriceAggregate.display(PriceType.listPrice), '0.0');
+        expect(
+          emptyPriceAggregate.display(PriceType.listPrice),
+          'Price Not Available'.tr(),
+        );
       },
     );
 

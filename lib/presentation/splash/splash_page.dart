@@ -324,7 +324,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         ),
         BlocListener<MaterialListBloc, MaterialListState>(
           listenWhen: (previous, current) =>
-              previous.nextPageIndex != current.nextPageIndex,
+              previous.materialList != current.materialList,
           listener: (context, state) {
             if (state.materialList.isNotEmpty) {
               _fetchMaterialPrice(

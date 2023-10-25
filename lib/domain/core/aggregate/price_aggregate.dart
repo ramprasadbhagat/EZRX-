@@ -336,9 +336,12 @@ class PriceAggregate with _$PriceAggregate {
                   : 0)));
 
   String display(PriceType priceType) {
+    /**
+     * TODO: Need to revisit while implementing special Order case if needed or else will remove it was for displaying FOC tag for FOC materials
+    / */
     if (price.isFOC) return 'FOC';
-    if (price.finalPrice.isUnavailable ||
-        materialInfo.hidePrice ||
+    if (invalidPrice ||
+        price.finalPrice.isUnavailable ||
         !price.isValid ||
         !price.isValidMaterial) return 'Price Not Available';
 
