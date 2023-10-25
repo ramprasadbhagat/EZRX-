@@ -40,8 +40,8 @@ void main() {
   final toDate = DateTime.now();
   final invalidFromDate = DateTime(2099, 1, 1);
   final invalidToDate = DateTime.now();
-  const invoiceNumberSearchKeyword = '1040005665';
-  const priceWithoutCredit = 4804.98;
+  const invoiceNumberSearchKeyword = '1040002361';
+  const priceWithoutCredit = 7084.66;
   Future<void> loginToHomeTab() async {
     await loginRobot.loginToHomeScreen(rootUser, password, marketMalaysia);
     await commonRobot.changeDeliveryAddress(shipToCode);

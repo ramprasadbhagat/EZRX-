@@ -116,6 +116,7 @@ class _PaymentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      key: WidgetKeys.creditPaymentItem,
       child: BlocBuilder<NewPaymentBloc, NewPaymentState>(
         builder: (context, state) {
           return EdgeCheckbox(

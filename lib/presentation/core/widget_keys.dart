@@ -955,6 +955,10 @@ class WidgetKeys {
   static const Key textOutstanding = Key('textOutstanding');
   static const Key paymentItem = Key('paymentItem');
   static const Key itemCheckBadge = Key('itemCheckBadge');
+  //step 2
+  static const Key creditPaymentItem = Key('creditPaymentItem');
+  static const Key documentReferenceID = Key('documentReferenceID');
+  static const Key accountingDocument = Key('accountingDocument');
   static const Key itemStatementAccounts = Key('itemStatementAccounts');
   static const Key downloadStatementAccountIcon =
       Key('downloadStatementAccountIcon');

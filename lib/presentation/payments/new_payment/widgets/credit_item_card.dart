@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,7 @@ class CreditItemCard extends StatelessWidget {
               Text(
                 '${customerOpenItem.postingKeyName} #${customerOpenItem.accountingDocument}',
                 style: Theme.of(context).textTheme.labelSmall,
+                key: WidgetKeys.accountingDocument,
               ),
               Text(
                 customerOpenItem.netDueDate.dateString,
@@ -41,6 +43,7 @@ class CreditItemCard extends StatelessWidget {
                 Text(
                   customerOpenItem.documentReferenceID,
                   style: Theme.of(context).textTheme.titleSmall,
+                  key: WidgetKeys.documentReferenceID,
                 ),
                 PriceComponent(
                   salesOrgConfig:
