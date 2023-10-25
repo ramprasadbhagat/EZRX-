@@ -19,6 +19,7 @@ class _ReturnExpandableSectionState extends State<_ReturnExpandableSection> {
     return Column(
       children: [
         InkWell(
+          key: WidgetKeys.returnExpandableSection,
           onTap: () {
             setState(() {
               _isExpanded = !_isExpanded;

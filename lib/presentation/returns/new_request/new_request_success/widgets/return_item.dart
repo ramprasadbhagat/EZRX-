@@ -42,6 +42,12 @@ class _ReturnItem extends StatelessWidget {
             children: [
               _ExpandableMaterialDetails(materialDetail: returnMaterial),
               _ExpandableReturnDetail(returnItemDetail: returnItemDetail),
+              _ExpandableBonusItems(
+                bonusItems: context
+                    .read<NewRequestBloc>()
+                    .state
+                    .getReturnBonusItemsOfMainItem(returnMaterial),
+              ),
             ],
           ),
         ],

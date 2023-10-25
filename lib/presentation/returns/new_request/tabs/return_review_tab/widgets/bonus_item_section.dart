@@ -19,8 +19,9 @@ class _BonusItemSection extends StatelessWidget {
               child: Column(
                 children: items
                     .map(
-                      (item) => BonusMaterialInfo(
-                        data: item,
+                      (item) => BonusMaterialReturnInfo(
+                        returnMaterial: item,
+                        returnItemDetail: state.getReturnItemDetails(item.uuid),
                       ),
                     )
                     .toList(),

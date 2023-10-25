@@ -1,23 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
-import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_return_info.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_info_widget.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_quantity_and_price.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/product_image_with_label.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/upload_file_list.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/gestures.dart';
@@ -34,6 +33,7 @@ part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/wi
 part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/return_material_exp_and_status.dart';
 part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/expandable_material_details.dart';
 part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/expandable_return_details.dart';
+part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/expandable_bonus_items.dart';
 
 class NewRequestSuccessfulPage extends StatelessWidget {
   const NewRequestSuccessfulPage({Key? key}) : super(key: key);

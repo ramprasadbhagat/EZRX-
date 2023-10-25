@@ -874,6 +874,8 @@ class WidgetKeys {
   static const Key toggleIncludeBonusButton = Key('toggleIncludeBonusButton');
   static const Key returnDetailsSectionKey = Key('returnDetailsSection');
   static const Key returnReviewTabBodyKey = Key('returnReviewTabBody');
+  static const Key returnBonusItemSection = Key('returnBonusItemSection');
+  static const Key returnExpandableSection = Key('returnExpandableSection');
 
   //============================================================
   //  Contact Us Page

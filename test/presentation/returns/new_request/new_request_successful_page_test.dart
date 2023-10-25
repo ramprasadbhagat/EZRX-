@@ -3,8 +3,10 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
+import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/new_request_success/new_request_successful_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +55,9 @@ class ProductImageBlocMock
 
 class AutoRouterMock extends Mock implements AppRouter {}
 
+class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState>
+    implements UsageCodeBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
@@ -68,9 +73,11 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late NewRequestBloc newRequestBlocMock;
   late ProductImageBloc productImageBlocMock;
+  late UsageCodeBloc usageCodeBlocMock;
 
   late ReturnMaterial fakeReturnMaterial;
   late ReturnItemDetails fakeReturnItemDetails;
+  late ReturnItemDetails fakeReturnBonusItemDetails;
   late double fakeUnitPrice;
   late String fakeUnitPriceString;
   late double fakeOverridePrice;
@@ -89,20 +96,18 @@ void main() {
     fakeOverridePriceString = '12.00';
     fakeBalanceQuantity = 5;
     fakeReturnQuantity = 2;
-    fakeReturnMaterial =
-        (await ReturnRequestLocalDataSource().searchReturnMaterials())
-            .items
-            .first
-            .copyWith(
+    final fakeListMaterial =
+        await ReturnRequestLocalDataSource().searchReturnMaterials();
+    fakeReturnMaterial = fakeListMaterial.items.first.copyWith(
       unitPrice: RangeValue(fakeUnitPrice.toString()),
       balanceQuantity: IntegerValue(fakeBalanceQuantity.toString()),
-      bonusItems: [
-        (await ReturnRequestLocalDataSource().searchReturnMaterials())
-            .items
-            .first
-      ],
+      bonusItems: [fakeListMaterial.items[1]],
     );
     fakeReturnItemDetails = fakeReturnMaterial.validatedItemDetails.copyWith(
+      returnQuantity: ReturnQuantity(fakeReturnQuantity.toString()),
+    );
+    fakeReturnBonusItemDetails =
+        fakeListMaterial.items[1].validatedItemDetails.copyWith(
       returnQuantity: ReturnQuantity(fakeReturnQuantity.toString()),
     );
     locator.registerLazySingleton(() => AppRouter());
@@ -118,6 +123,7 @@ void main() {
       productImageBlocMock = ProductImageBlocMock();
       customerCodeBlocMock = CustomerCodeBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      usageCodeBlocMock = UsageCodeBlocMock();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => announcementBlocMock.state)
@@ -132,6 +138,7 @@ void main() {
           .thenReturn(ReturnDetailsByRequestState.initial());
       when(() => productImageBlocMock.state)
           .thenReturn(ProductImageState.initial());
+      when(() => usageCodeBlocMock.state).thenReturn(UsageCodeState.initial());
     });
 
     Widget getScopedWidget() {
@@ -157,6 +164,9 @@ void main() {
           ),
           BlocProvider<ProductImageBloc>(
             create: ((context) => productImageBlocMock),
+          ),
+          BlocProvider<UsageCodeBloc>(
+            create: ((context) => usageCodeBlocMock),
           ),
         ],
         child: const NewRequestSuccessfulPage(),
@@ -293,6 +303,43 @@ void main() {
         findRichText: true,
       );
       expect(totalPrice, findsWidgets);
+    });
+
+    testWidgets(
+        ' => display bonus item if return both bonus and commercial item ',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [fakeReturnMaterial],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                fakeReturnItemDetails.copyWith(
+                  priceOverride: CounterOfferValue(
+                    fakeOverridePrice.toString(),
+                  ),
+                ),
+                fakeReturnBonusItemDetails.copyWith(
+                  priceOverride: CounterOfferValue(
+                    fakeOverridePrice.toString(),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final expandableSectionFinder =
+          find.byKey(WidgetKeys.returnExpandableSection);
+      expect(expandableSectionFinder, findsOneWidget);
+      await tester.scrollUntilVisible(expandableSectionFinder, -500);
+      await tester.pump();
+      await tester.tap(expandableSectionFinder);
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.returnBonusItemSection), findsOneWidget);
     });
   });
 }

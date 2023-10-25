@@ -1,17 +1,29 @@
-part of 'package:ezrxmobile/presentation/returns/new_request/new_request_success/new_request_successful_page.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
+import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_info.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/upload_file_list.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class _ExpandableReturnDetail extends StatelessWidget {
-  final ReturnItemDetails returnItemDetail;
-  const _ExpandableReturnDetail({
+class BonusMaterialReturnInfo extends StatelessWidget {
+  const BonusMaterialReturnInfo({
     Key? key,
+    required this.returnMaterial,
     required this.returnItemDetail,
   }) : super(key: key);
+  final ReturnMaterial returnMaterial;
+  final ReturnItemDetails returnItemDetail;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        BonusMaterialInfo(data: returnMaterial),
         const SizedBox(height: 8.0),
         const Divider(
           indent: 0,
@@ -22,14 +34,14 @@ class _ExpandableReturnDetail extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         Text(
-          'Return details'.tr(),
+          context.tr('Bonus return details'),
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
                 color: ZPColors.neutralsBlack,
               ),
         ),
         const SizedBox(height: 8.0),
         BalanceTextRow(
-          keyText: 'Reason'.tr(),
+          keyText: context.tr('Reason'),
           keyFlex: 2,
           valueFlex: 3,
           valueText: context
@@ -46,17 +58,14 @@ class _ExpandableReturnDetail extends StatelessWidget {
         ),
         BalanceTextRow(
           keyText: 'Comments'.tr(),
+          keyTextStyle: Theme.of(context).textTheme.titleSmall,
           keyFlex: 2,
           valueFlex: 3,
           valueText: returnItemDetail.remarks.displayText,
-          keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
-          valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
         ),
-        UploadedFileList(uuid: returnItemDetail.uuid),
+        UploadedFileList(
+          uuid: returnItemDetail.uuid,
+        ),
       ],
     );
   }

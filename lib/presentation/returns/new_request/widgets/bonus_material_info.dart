@@ -5,6 +5,8 @@ import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_item_price.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 
 class BonusMaterialInfo extends StatelessWidget {
   const BonusMaterialInfo({
@@ -15,6 +17,15 @@ class BonusMaterialInfo extends StatelessWidget {
 
   final ReturnMaterial data;
   final bool noteLineVisible;
+
+  String getQuantity(BuildContext context) {
+    final details =
+        context.read<NewRequestBloc>().state.getReturnItemDetails(data.uuid);
+
+    return details.returnQuantity.getIntValue > 0
+        ? details.returnQuantity.getIntValue.toString()
+        : data.balanceQuantity.apiParameterValue;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +73,7 @@ class BonusMaterialInfo extends StatelessWidget {
             children: [
               ReturnItemPrice(data: data),
               Text(
-                '${context.tr('Qty')}: ${data.balanceQuantity.apiParameterValue} ',
+                '${context.tr('Qty')}: ${getQuantity(context)} ',
               ),
             ],
           ),

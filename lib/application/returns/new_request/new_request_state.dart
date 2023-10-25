@@ -53,6 +53,12 @@ class NewRequestState with _$NewRequestState {
         (element) => element.uuid == uuid,
         orElse: () => ReturnItemDetails.empty(),
       );
+  List<ReturnMaterial> getReturnBonusItemsOfMainItem(ReturnMaterial item) =>
+      item.bonusItems
+          .where(
+            (item) => allItemDetails.any((detail) => detail.uuid == item.uuid),
+          )
+          .toList();
 
   bool isIncludeBonus(String uuid) =>
       getReturnItemDetails(uuid) != ReturnItemDetails.empty();

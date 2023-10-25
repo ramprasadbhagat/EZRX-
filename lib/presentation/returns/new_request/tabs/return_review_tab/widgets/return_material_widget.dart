@@ -14,6 +14,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
           current.getReturnItemDetails(item.uuid),
       builder: (context, state) {
         final detail = state.getReturnItemDetails(item.uuid);
+        final returnBonusItems = state.getReturnBonusItemsOfMainItem(item);
 
         return CustomCard(
           showBorder: true,
@@ -49,7 +50,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
                     detail: detail,
                   ),
                   _BonusItemSection(
-                    items: item.bonusItems,
+                    items: returnBonusItems,
                   ),
                 ],
               ),

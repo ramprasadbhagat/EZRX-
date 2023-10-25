@@ -51,6 +51,16 @@ class _MaterialBonusDetailsSection extends StatelessWidget {
                 ReasonDropdown(
                   uuid: detail.uuid,
                 ),
+                const SizedBox(
+                  height: 8,
+                ),
+                _CommentsField(
+                  uuid: item.uuid,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                _UploadAttachmentSection(data: item),
               ],
             ),
           );
