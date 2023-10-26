@@ -45,62 +45,84 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                 size: 20,
               ),
             ),
+            if (!state.isEnableAddToCart)
+              InfoLabel(
+                key: WidgetKeys.cartPagePriceMessageWidget,
+                margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                mainColor: ZPColors.lightRedStatusColor,
+                textValue: context.tr(
+                  'You must select at least {unit} more product.',
+                  namedArgs: {
+                    'unit': state.currentDeal.minPurchaseQty.toString(),
+                  },
+                ),
+              ),
             ListTile(
               dense: true,
               visualDensity: const VisualDensity(vertical: -4, horizontal: -2),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
-              title: Text(
-                state.currentDeal.scheme.getTotalUnitMessage(
-                  context,
-                  totalUnit: state.totalQuantityUnit,
-                ),
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              trailing: PriceComponent(
-                key: WidgetKeys.grandTotalKey,
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: state.totalPriceDisplay.toString(),
-                title: 'Total: '.tr(),
-                priceLabelStyle:
-                    Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: ZPColors.extraLightGrey4,
-                        ),
-              ),
-            ),
-            if (state.currentDeal.scheme.displayOriginalPrice &&
-                state.isEnableAddToCart)
-              ListTile(
-                dense: true,
-                visualDensity:
-                    const VisualDensity(vertical: -4, horizontal: -2),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
-                title: Text(
-                  context.tr(
-                    '{percent}% Discount',
-                    namedArgs: {
-                      'percent': state.currentDeal.materialComboRateDisplay(
-                        materialNumber: state.allMaterialsNumber.first,
-                      ),
-                    },
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    state.currentDeal.scheme.getTotalUnitMessage(
+                      context,
+                      totalUnit: state.totalQuantityUnit,
+                    ),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: ZPColors.discountedTotalTitle,
-                      ),
-                ),
-                trailing: PriceComponent(
-                  key: WidgetKeys.grandTotalKey,
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: state.originalPriceSelectedItems.toString(),
-                  type: PriceStyle.comboOfferPrice,
-                  priceLabelStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: ZPColors.darkerGrey,
-                          ),
-                ),
+                  PriceComponent(
+                    key: WidgetKeys.grandTotalKey,
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                    price: state.totalPriceDisplay.toString(),
+                    title: 'Total: '.tr(),
+                    priceLabelStyle:
+                        Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: ZPColors.extraLightGrey4,
+                            ),
+                  )
+                ],
               ),
+              subtitle: (state.currentDeal.scheme.displayOriginalPrice &&
+                      state.isEnableAddToCart)
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          context.tr(
+                            '{percent}% Discount',
+                            namedArgs: {
+                              'percent':
+                                  state.currentDeal.materialComboRateDisplay(
+                                materialNumber: state.allMaterialsNumber.first,
+                              ),
+                            },
+                          ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: ZPColors.discountedTotalTitle,
+                                    height: 1.5,
+                                  ),
+                        ),
+                        PriceComponent(
+                          key: WidgetKeys.grandTotalKey,
+                          salesOrgConfig: context
+                              .read<EligibilityBloc>()
+                              .state
+                              .salesOrgConfigs,
+                          price: state.originalPriceSelectedItems.toString(),
+                          type: PriceStyle.comboOfferPrice,
+                          priceLabelStyle:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    color: ZPColors.darkerGrey,
+                                  ),
+                        )
+                      ],
+                    )
+                  : const SizedBox.shrink(),
+            ),
             _CartPageCheckoutButton(isUpdateCart: state.isUpdateCart),
           ],
         );

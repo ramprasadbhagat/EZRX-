@@ -168,6 +168,23 @@ class ComboDeal with _$ComboDeal {
     }
   }
 
+  int get minPurchaseQty {
+    switch (scheme) {
+      case ComboDealScheme.k22:
+        return descendingSortedQtyTiers.firstOrNull?.minQty ?? 0;
+      case ComboDealScheme.k3:
+        return descendingSortedSKUTier.last.minQty;
+      case ComboDealScheme.k4:
+        return descendingSortedQtyTiers.last.minQty;
+      case ComboDealScheme.k5:
+      case ComboDealScheme.kWithSuffix:
+        //TODO: Implement later for K3, K4, K5
+        return groupDeal.minTotalQuantity;
+      default:
+        return 0;
+    }
+  }
+
   String materialComboRateDisplay({
     required MaterialNumber materialNumber,
   }) {
