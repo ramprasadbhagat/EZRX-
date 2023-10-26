@@ -60,9 +60,9 @@ extension LocaleExtension on Locale {
         return '繁體中文';
       case 'my':
         return 'ဗမာဘာသာစကား';
-      case 'vi':
+      case 'vn':
         return 'Tiếng Việt';
-      case 'km':
+      case 'kh':
         return 'ភាសាខ្មែរ';
       default:
         return '';
@@ -88,4 +88,22 @@ extension LocaleExtension on Locale {
   }
 
   Locale get languageValue => Locale(apiLanguageCode());
+
+  Locale get fromApiLanguageCode {
+    switch (languageCode) {
+      case ApiLanguageCode.thai:
+        return const Locale(LanguageCode.thai);
+      case ApiLanguageCode.mandarin:
+        return const Locale(LanguageCode.mandarin);
+      case ApiLanguageCode.burmese:
+        return const Locale(LanguageCode.burmese);
+      case ApiLanguageCode.vietnamese:
+        return const Locale(LanguageCode.vietnamese);
+      case ApiLanguageCode.khmer:
+        return const Locale(LanguageCode.khmer);
+      case ApiLanguageCode.english:
+      default:
+        return const Locale(LanguageCode.english);
+    }
+  }
 }

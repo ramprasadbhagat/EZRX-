@@ -49,6 +49,7 @@ import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/dialogs/custom_dialogs.dart';
+import 'package:ezrxmobile/presentation/core/language_picker.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:universal_io/io.dart';
@@ -236,10 +237,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       context.read<SalesOrgBloc>().state.salesOrg,
                     ),
                   );
-              final locale = Locale(
-                state.user.preferredLanguage.languageCode.toLowerCase(),
-              );
-              context.setLocale(locale);
+              context
+                  .setLocale(state.user.preferredLanguage.fromApiLanguageCode);
             }
 
             _initializePaymentConfiguration(state);

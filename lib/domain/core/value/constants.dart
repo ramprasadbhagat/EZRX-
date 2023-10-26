@@ -17,3 +17,13 @@ class ApiLanguageCode {
   static const String vietnamese = 'VN';
   static const String khmer = 'KH';
 }
+
+class LanguageCode {
+  static const String shortEnglish = 'en';
+  static const String english = 'en';
+  static const String thai = 'th';
+  static const String mandarin = 'zh';
+  static const String burmese = 'mm';
+  static const String vietnamese = 'vi';
+  static const String khmer = 'km';
+}

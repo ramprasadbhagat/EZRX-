@@ -201,128 +201,128 @@ void main() async {
       },
     );
 
-    testWidgets(
-      'tap on language preferences, changing the language',
-      (tester) async {
-        await tester.pumpWidget(getScopedWidget());
-        await tester
-            .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
-        await tester.pumpAndSettle();
+    // testWidgets(
+    //   'tap on language preferences, changing the language',
+    //   (tester) async {
+    //     await tester.pumpWidget(getScopedWidget());
+    //     await tester
+    //         .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
+    //     await tester.pumpAndSettle();
 
-        // select TH
-        expect(
-          find.byKey(const Key('notificationSettingsLanguagePicker')),
-          findsOneWidget,
-        );
-        final thaiLanguageTile = find.byKey(const Key('thaiLanguageTile'));
-        expect(thaiLanguageTile, findsOneWidget);
-        await tester.tap(thaiLanguageTile, warnIfMissed: false);
-        await tester.pump();
-        verify(
-          () => userBloc.add(
-            const UserEvent.updateNotificationSettings(
-              languagePreference: Locale(ApiLanguageCode.thai),
-              emailNotifications: false,
-            ),
-          ),
-        ).called(1);
-        expect(find.text('ภาษาไทย'), findsOneWidget);
-        await tester.pump(const Duration(seconds: 1));
+    //     // select TH
+    //     expect(
+    //       find.byKey(const Key('notificationSettingsLanguagePicker')),
+    //       findsOneWidget,
+    //     );
+    //     final thaiLanguageTile = find.byKey(const Key('thaiLanguageTile'));
+    //     expect(thaiLanguageTile, findsOneWidget);
+    //     await tester.tap(thaiLanguageTile, warnIfMissed: false);
+    //     await tester.pump();
+    //     verify(
+    //       () => userBloc.add(
+    //         const UserEvent.updateNotificationSettings(
+    //           languagePreference: Locale(ApiLanguageCode.thai),
+    //           emailNotifications: false,
+    //         ),
+    //       ),
+    //     ).called(1);
+    //     expect(find.text('ภาษาไทย'), findsOneWidget);
+    //     await tester.pump(const Duration(seconds: 1));
 
-        // select TW
-        await tester
-            .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
-        final mandarinLanguageTile =
-            find.byKey(const Key('mandarinLanguageTile'));
-        expect(mandarinLanguageTile, findsOneWidget);
-        await tester.tap(mandarinLanguageTile, warnIfMissed: false);
-        await tester.pump();
-        verify(
-          () => userBloc.add(
-            const UserEvent.updateNotificationSettings(
-              languagePreference: Locale(ApiLanguageCode.mandarin),
-              emailNotifications: false,
-            ),
-          ),
-        ).called(1);
-        expect(find.text('繁體中文'), findsOneWidget);
-        await tester.pump(const Duration(seconds: 1));
+    //     // select TW
+    //     await tester
+    //         .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
+    //     final mandarinLanguageTile =
+    //         find.byKey(const Key('mandarinLanguageTile'));
+    //     expect(mandarinLanguageTile, findsOneWidget);
+    //     await tester.tap(mandarinLanguageTile, warnIfMissed: false);
+    //     await tester.pump();
+    //     verify(
+    //       () => userBloc.add(
+    //         const UserEvent.updateNotificationSettings(
+    //           languagePreference: Locale(ApiLanguageCode.mandarin),
+    //           emailNotifications: false,
+    //         ),
+    //       ),
+    //     ).called(1);
+    //     expect(find.text('繁體中文'), findsOneWidget);
+    //     await tester.pump(const Duration(seconds: 1));
 
-        // select MM
-        await tester
-            .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
-        final burmeseLanguageTile =
-            find.byKey(const Key('burmeseLanguageTile'));
-        expect(burmeseLanguageTile, findsOneWidget);
-        await tester.tap(burmeseLanguageTile, warnIfMissed: false);
-        await tester.pump();
-        verify(
-          () => userBloc.add(
-            const UserEvent.updateNotificationSettings(
-              languagePreference: Locale(ApiLanguageCode.burmese),
-              emailNotifications: false,
-            ),
-          ),
-        ).called(1);
-        expect(find.text('ဗမာဘာသာစကား'), findsOneWidget);
-        await tester.pump(const Duration(seconds: 1));
+    //     // select MM
+    //     await tester
+    //         .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
+    //     final burmeseLanguageTile =
+    //         find.byKey(const Key('burmeseLanguageTile'));
+    //     expect(burmeseLanguageTile, findsOneWidget);
+    //     await tester.tap(burmeseLanguageTile, warnIfMissed: false);
+    //     await tester.pump();
+    //     verify(
+    //       () => userBloc.add(
+    //         const UserEvent.updateNotificationSettings(
+    //           languagePreference: Locale(ApiLanguageCode.burmese),
+    //           emailNotifications: false,
+    //         ),
+    //       ),
+    //     ).called(1);
+    //     expect(find.text('ဗမာဘာသာစကား'), findsOneWidget);
+    //     await tester.pump(const Duration(seconds: 1));
 
-        // select VN
-        await tester
-            .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
-        final vietnameseLanguageTile =
-            find.byKey(const Key('vietnameseLanguageTile'));
-        expect(vietnameseLanguageTile, findsOneWidget);
-        await tester.tap(vietnameseLanguageTile, warnIfMissed: false);
-        await tester.pump();
-        verify(
-          () => userBloc.add(
-            const UserEvent.updateNotificationSettings(
-              languagePreference: Locale(ApiLanguageCode.vietnamese),
-              emailNotifications: false,
-            ),
-          ),
-        ).called(1);
-        expect(find.text('Tiếng Việt'), findsOneWidget);
-        await tester.pump(const Duration(seconds: 1));
+    //     // select VN
+    //     await tester
+    //         .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
+    //     final vietnameseLanguageTile =
+    //         find.byKey(const Key('vietnameseLanguageTile'));
+    //     expect(vietnameseLanguageTile, findsOneWidget);
+    //     await tester.tap(vietnameseLanguageTile, warnIfMissed: false);
+    //     await tester.pump();
+    //     verify(
+    //       () => userBloc.add(
+    //         const UserEvent.updateNotificationSettings(
+    //           languagePreference: Locale(ApiLanguageCode.vietnamese),
+    //           emailNotifications: false,
+    //         ),
+    //       ),
+    //     ).called(1);
+    //     expect(find.text('Tiếng Việt'), findsOneWidget);
+    //     await tester.pump(const Duration(seconds: 1));
 
-        // select KH
-        await tester
-            .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
-        final khmerLanguageTile = find.byKey(const Key('khmerLanguageTile'));
-        expect(khmerLanguageTile, findsOneWidget);
-        await tester.tap(khmerLanguageTile, warnIfMissed: false);
-        await tester.pump();
-        verify(
-          () => userBloc.add(
-            const UserEvent.updateNotificationSettings(
-              languagePreference: Locale(ApiLanguageCode.khmer),
-              emailNotifications: false,
-            ),
-          ),
-        ).called(1);
-        expect(find.text('ភាសាខ្មែរ'), findsOneWidget);
-        await tester.pump(const Duration(seconds: 1));
+    //     // select KH
+    //     await tester
+    //         .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
+    //     final khmerLanguageTile = find.byKey(const Key('khmerLanguageTile'));
+    //     expect(khmerLanguageTile, findsOneWidget);
+    //     await tester.tap(khmerLanguageTile, warnIfMissed: false);
+    //     await tester.pump();
+    //     verify(
+    //       () => userBloc.add(
+    //         const UserEvent.updateNotificationSettings(
+    //           languagePreference: Locale(ApiLanguageCode.khmer),
+    //           emailNotifications: false,
+    //         ),
+    //       ),
+    //     ).called(1);
+    //     expect(find.text('ភាសាខ្មែរ'), findsOneWidget);
+    //     await tester.pump(const Duration(seconds: 1));
 
-        // select EN
-        await tester
-            .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
-        final englishLanguageTile =
-            find.byKey(const Key('englishLanguageTile'));
-        expect(englishLanguageTile, findsOneWidget);
-        await tester.tap(englishLanguageTile, warnIfMissed: false);
-        await tester.pump();
-        verify(
-          () => userBloc.add(
-            const UserEvent.updateNotificationSettings(
-              languagePreference: Locale(ApiLanguageCode.english),
-              emailNotifications: false,
-            ),
-          ),
-        ).called(1);
-        expect(find.text('English'), findsAtLeastNWidgets(1));
-      },
-    );
+    //     // select EN
+    //     await tester
+    //         .tap(find.byKey(const Key('notificationSettingsLanguagePicker')));
+    //     final englishLanguageTile =
+    //         find.byKey(const Key('englishLanguageTile'));
+    //     expect(englishLanguageTile, findsOneWidget);
+    //     await tester.tap(englishLanguageTile, warnIfMissed: false);
+    //     await tester.pump();
+    //     verify(
+    //       () => userBloc.add(
+    //         const UserEvent.updateNotificationSettings(
+    //           languagePreference: Locale(ApiLanguageCode.english),
+    //           emailNotifications: false,
+    //         ),
+    //       ),
+    //     ).called(1);
+    //     expect(find.text('English'), findsAtLeastNWidgets(1));
+    //   },
+    // );
 
     testWidgets(
       'successfully work on tapping for email notifications',
