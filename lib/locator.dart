@@ -578,6 +578,7 @@ void setupLocator() {
       pushNotificationService: locator<PushNotificationService>(),
       localAuthentication: locator<LocalAuthentication>(),
       mixpanelService: locator<MixpanelService>(),
+      clevertapService: locator<ClevertapService>(),
     ),
   );
 

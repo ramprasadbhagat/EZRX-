@@ -50,7 +50,14 @@ class ClevertapService {
         'Identity': username,
         'Email': email,
         'Role': role,
+        'MSG-push': true,
       },
+    );
+  }
+
+  Future<void> logout() async {
+    await CleverTapPlugin.profileSet(
+      {'MSG-push': false},
     );
   }
 }

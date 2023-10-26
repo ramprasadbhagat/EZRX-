@@ -15,6 +15,7 @@ import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
@@ -43,6 +44,7 @@ class AuthRepository implements IAuthRepository {
   final OktaLoginServices oktaLoginServices;
   final PushNotificationService pushNotificationService;
   final LocalAuthentication localAuthentication;
+  final ClevertapService clevertapService;
 
   final MixpanelService mixpanelService;
 
@@ -58,6 +60,7 @@ class AuthRepository implements IAuthRepository {
     required this.localAuthentication,
     required this.accountSelectorStorage,
     required this.mixpanelService,
+    required this.clevertapService,
   });
 
   @override
@@ -295,6 +298,7 @@ class AuthRepository implements IAuthRepository {
       await oktaLoginServices.logout();
       await accountSelectorStorage.delete();
       await settingStorage.clear();
+      await clevertapService.logout();
 
       return const Right(unit);
     } catch (e) {

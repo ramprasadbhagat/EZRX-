@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/cred_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/jwt_dto.dart';
 import 'package:ezrxmobile/infrastructure/auth/repository/auth_repository.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/cred_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
@@ -55,6 +56,8 @@ class PushNotificationServiceMock extends Mock
 
 class LocalAuthenticationMock extends Mock implements LocalAuthentication {}
 
+class ClevertapServiceMock extends Mock implements ClevertapService {}
+
 class RoleNameMock extends Mock implements RoleName {}
 
 void main() {
@@ -68,6 +71,7 @@ void main() {
   late PushNotificationService pushNotificationServiceMock;
   late LocalAuthentication localAuthenticationMock;
   late MixpanelService mixpanelService;
+  late ClevertapService clevertapServiceMock;
 
   late AuthRepository repository;
   late Config configMock;
@@ -134,6 +138,7 @@ void main() {
       oktaLoginServicesMock = OktaLoginServicesMock();
       pushNotificationServiceMock = PushNotificationServiceMock();
       mixpanelService = MixpanelServiceMock();
+      clevertapServiceMock = ClevertapServiceMock();
 
       repository = AuthRepository(
         mixpanelService: mixpanelService,
@@ -147,6 +152,7 @@ void main() {
         oktaLoginServices: oktaLoginServicesMock,
         pushNotificationService: pushNotificationServiceMock,
         settingStorage: settingStorageMock,
+        clevertapService: clevertapServiceMock,
       );
     },
   );
@@ -665,6 +671,11 @@ void main() {
         );
         when(
           () => settingStorageMock.clear(),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+        when(
+          () => clevertapServiceMock.logout(),
         ).thenAnswer(
           (_) => Future.value(),
         );
