@@ -76,9 +76,11 @@ class NewRequestPage extends StatelessWidget {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0,
-                              vertical: 8.0,
+                            padding: const EdgeInsets.fromLTRB(
+                              12.0,
+                              12.0,
+                              12.0,
+                              0.0,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

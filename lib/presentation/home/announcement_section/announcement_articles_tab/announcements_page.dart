@@ -32,9 +32,6 @@ class AnnouncementsPage extends StatelessWidget {
           AnnouncementWidget(
             currentPath: context.router.currentPath,
           ),
-          const SizedBox(
-            height: 20,
-          ),
           Expanded(
             child: AutoTabsRouter.tabBar(
               routes: const [
@@ -58,8 +55,12 @@ class AnnouncementsPage extends StatelessWidget {
                         .toList(),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.only(left: 15, right: 15, top: 10),
+                    padding: const EdgeInsets.fromLTRB(
+                      12.0,
+                      12.0,
+                      12.0,
+                      0.0,
+                    ),
                     child: Row(
                       children: [
                         Flexible(
