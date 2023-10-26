@@ -1,44 +1,56 @@
-import 'package:ezrxmobile/infrastructure/core/firebase/remote_config_constants.dart';
+import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 
 class RemoteConfigService {
-  final remoteConfig = FirebaseRemoteConfig.instance;
+  final _remoteConfig = FirebaseRemoteConfig.instance;
+
+  final Config config;
+  final FirebaseCrashlyticsService firebaseCrashlyticsService;
+
+  RemoteConfigService({
+    required this.config,
+    required this.firebaseCrashlyticsService,
+  });
 
   Future<void> init() async {
-    await setConfigForDevelopment();
-    await setInAppDefaultValues();
-    await remoteConfig.fetchAndActivate();
+    try {
+      await _setConfig();
+      await _setInAppDefaultValues();
+      await _remoteConfig.fetchAndActivate();
+    } catch (exception, stacktrace) {
+      await firebaseCrashlyticsService.crashlytics.recordError(
+        exception,
+        stacktrace,
+      );
+    } finally {
+      await _updateConfigs(RemoteConfigUpdate({}));
+    }
   }
 
-  bool getTncConfig() {
-    return getBool(RemoteConfigConstants.enableTnc);
-  }
-
-  bool getPaymentsConfig() {
-    return getBool(RemoteConfigConstants.enablePayments);
-  }
-
-  bool getScanToOrderConfig() {
-    return getBool(RemoteConfigConstants.enableScanToOrder);
-  }
+  // keep this as example
+  // bool getScanToOrderConfig() {
+  //   return _remoteConfig.getBool(RemoteConfigConstants.enableScanToOrder);
+  // }
 
   /// Setting in-app default parameter values to make app behave as intended
   /// before it connects or if no values are set in the Remote Config backend
-  Future<void> setInAppDefaultValues() async {
-    await remoteConfig.setDefaults(
+  Future<void> _setInAppDefaultValues() async {
+    await _remoteConfig.setDefaults(
       const {
-        RemoteConfigConstants.enableTnc: false,
-        RemoteConfigConstants.enablePayments: false,
-        RemoteConfigConstants.enableScanToOrder: false,
+        //RemoteConfigConstants.enableScanToOrder: false,
       },
     );
   }
 
   /// Setting minimum fetch interval to allow for frequent refreshes
-  Future<void> setConfigForDevelopment() async {
+  Future<void> _setConfig() async {
+    if (!kIsWeb) {
+      _remoteConfig.onConfigUpdated.listen(_updateConfigs, onError: (_) {});
+    }
     if (kDebugMode) {
-      await remoteConfig.setConfigSettings(
+      await _remoteConfig.setConfigSettings(
         RemoteConfigSettings(
           fetchTimeout: const Duration(
             minutes: 1,
@@ -51,7 +63,6 @@ class RemoteConfigService {
     }
   }
 
-  bool getBool(String remoteConfigKey) {
-    return remoteConfig.getBool(remoteConfigKey);
-  }
+  Future<void> _updateConfigs(RemoteConfigUpdate remoteConfigUpdate) =>
+      _remoteConfig.activate();
 }

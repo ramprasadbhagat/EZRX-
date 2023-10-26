@@ -7,18 +7,15 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_local.dart';
 import 'package:ezrxmobile/infrastructure/aup_tc/datasource/tncdate_remote.dart';
-import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 
 class AupTcRepository implements IAupTcRepository {
   final Config config;
   final AcceptanceDateLocalDataSource localDataSource;
   final AcceptanceDateRemoteDataSource remoteDataSource;
-  final RemoteConfigService remoteConfigService;
   AupTcRepository({
     required this.config,
     required this.localDataSource,
     required this.remoteDataSource,
-    required this.remoteConfigService,
   });
 
   @override
@@ -39,18 +36,6 @@ class AupTcRepository implements IAupTcRepository {
       return Right(acceptanceDate);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  bool getTncConfig() {
-    if (config.appFlavor == Flavor.mock) {
-      return true;
-    }
-    try {
-      return remoteConfigService.getTncConfig();
-    } catch (e) {
-      return false;
     }
   }
 }

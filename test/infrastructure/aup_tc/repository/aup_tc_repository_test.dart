@@ -25,18 +25,15 @@ void main() {
     late AcceptanceDateLocalDataSource aupLocal;
     late AcceptanceDateRemoteDataSource aupRemote;
     late Config config;
-    late RemoteConfigService remoteConfigService;
 
     setUpAll(() {
       WidgetsFlutterBinding.ensureInitialized();
       aupLocal = MockAcceptanceDateLocalDataSource();
       aupRemote = MockAcceptanceDateRemoteDataSource();
       config = MockConfig();
-      remoteConfigService = MockRemoteConfigService();
       aupRepo = AupTcRepository(
         config: config,
         localDataSource: aupLocal,
-        remoteConfigService: remoteConfigService,
         remoteDataSource: aupRemote,
       );
     });
@@ -78,33 +75,6 @@ void main() {
       final apiFailureOrSuccess = await aupRepo.getTncDate();
 
       expect(apiFailureOrSuccess.isLeft(), true);
-    });
-
-    test('get tncConfig local successfully', () {
-      when(() => config.appFlavor).thenAnswer((_) => Flavor.mock);
-
-      final tncEnabled = aupRepo.getTncConfig();
-
-      expect(tncEnabled, true);
-    });
-
-    test('get tncConfig remote successfully', () {
-      when(() => config.appFlavor).thenAnswer((_) => Flavor.uat);
-      when(() => remoteConfigService.getTncConfig())
-          .thenAnswer((invocation) => true);
-
-      final tncEnabled = aupRepo.getTncConfig();
-
-      expect(tncEnabled, true);
-    });
-
-    test('get tncConfig local failure', () {
-      when(() => config.appFlavor).thenAnswer((_) => Flavor.uat);
-      when(() => remoteConfigService.getTncConfig()).thenThrow(Error());
-
-      final tncEnabled = aupRepo.getTncConfig();
-
-      expect(tncEnabled, false);
     });
   });
 }

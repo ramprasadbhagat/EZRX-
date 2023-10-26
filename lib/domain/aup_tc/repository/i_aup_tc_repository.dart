@@ -4,5 +4,4 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 abstract class IAupTcRepository {
   Future<Either<ApiFailure, TncDate>> getTncDate();
-  bool getTncConfig();
 }

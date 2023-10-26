@@ -456,13 +456,18 @@ void setupLocator() {
           FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
     ),
   );
+
   locator.registerLazySingleton(
     () => FirebaseCrashlyticsService(
       crashlytics: FirebaseCrashlytics.instance,
     ),
   );
+
   locator.registerLazySingleton(
-    () => RemoteConfigService(),
+    () => RemoteConfigService(
+      config: locator<Config>(),
+      firebaseCrashlyticsService: locator<FirebaseCrashlyticsService>(),
+    ),
   );
 
   locator.registerLazySingleton(
@@ -1259,7 +1264,6 @@ void setupLocator() {
       config: locator<Config>(),
       localDataSource: locator<AcceptanceDateLocalDataSource>(),
       remoteDataSource: locator<AcceptanceDateRemoteDataSource>(),
-      remoteConfigService: locator<RemoteConfigService>(),
     ),
   );
 

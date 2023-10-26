@@ -285,7 +285,6 @@ void main() {
   setUpAll(() async {
     remoteConfigServiceMock = RemoteConfigServiceMock();
     pushNotificationServiceMock = PushNotificationServiceMock();
-    when(() => remoteConfigServiceMock.getScanToOrderConfig()).thenReturn(true);
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(

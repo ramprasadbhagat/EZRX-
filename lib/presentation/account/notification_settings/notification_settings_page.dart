@@ -12,10 +12,6 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'package:ezrxmobile/application/account/payment_notification/payment_notification_bloc.dart';
 
-import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
-
-import 'package:ezrxmobile/locator.dart';
-
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -100,9 +96,7 @@ class NotificationSettingsPage extends StatelessWidget {
                 ),
               ),
               const _OrderNotificationSection(),
-              locator<RemoteConfigService>().getPaymentsConfig()
-                  ? const _PaymentNotificationSection()
-                  : const SizedBox.shrink(),
+              const _PaymentNotificationSection()
             ],
           ).toList(),
         ),

@@ -174,10 +174,8 @@ Future<void> initialSetup({required Flavor flavor}) async {
     await Wakelock.enable();
     await locator<ClevertapService>().init();
     await locator<ChatBotService>().init();
-    if (locator<RemoteConfigService>().getScanToOrderConfig()) {
-      await ScanditFlutterDataCaptureBarcode.initialize();
-      await locator<MaterialInfoScanner>().init();
-    }
+    await ScanditFlutterDataCaptureBarcode.initialize();
+    await locator<MaterialInfoScanner>().init();
   }
 }
 
@@ -350,14 +348,7 @@ class App extends StatelessWidget {
           create: (context) => locator<PaymentNotificationBloc>(),
         ),
         BlocProvider<ScanMaterialInfoBloc>(
-          create: (context) {
-            final bloc = locator<ScanMaterialInfoBloc>();
-            if (locator<RemoteConfigService>().getScanToOrderConfig()) {
-              bloc.add(const ScanMaterialInfoEvent.initialized());
-            }
-
-            return bloc;
-          },
+          create: (context) => locator<ScanMaterialInfoBloc>(),
         ),
         BlocProvider<TenderContractListBloc>(
           create: (context) => locator<TenderContractListBloc>(),

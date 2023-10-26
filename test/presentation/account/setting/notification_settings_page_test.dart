@@ -142,7 +142,6 @@ void main() async {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => paymentNotificationBlocMock.state)
           .thenReturn(PaymentNotificationState.initial());
-      when(() => remoteConfigServiceMock.getPaymentsConfig()).thenReturn(true);
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           user: User.empty().copyWith(
@@ -192,8 +191,6 @@ void main() async {
       'successfully work on tapping for language preferences',
       (tester) async {
         await tester.pumpWidget(getScopedWidget());
-        when(() => remoteConfigServiceMock.getPaymentsConfig())
-            .thenReturn(true);
         await tester
             .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
         await tester.pumpAndSettle();
@@ -211,8 +208,6 @@ void main() async {
         await tester
             .tap(find.byKey(const Key('gestureDetectorForLanguagePicker')));
         await tester.pumpAndSettle();
-        when(() => remoteConfigServiceMock.getPaymentsConfig())
-            .thenReturn(true);
 
         // select TH
         expect(
@@ -333,8 +328,6 @@ void main() async {
       'successfully work on tapping for email notifications',
       (tester) async {
         await tester.pumpWidget(getScopedWidget());
-        when(() => remoteConfigServiceMock.getPaymentsConfig())
-            .thenReturn(false);
         final switchFinder = find.byKey(const Key('flutterSwitch'));
         await tester.tap(switchFinder);
         await tester.pumpAndSettle();
