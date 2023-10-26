@@ -81,7 +81,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                         Theme.of(context).textTheme.titleSmall?.copyWith(
                               color: ZPColors.extraLightGrey4,
                             ),
-                  )
+                  ),
                 ],
               ),
               subtitle: (state.currentDeal.scheme.displayOriginalPrice &&
@@ -118,7 +118,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                               Theme.of(context).textTheme.titleSmall?.copyWith(
                                     color: ZPColors.darkerGrey,
                                   ),
-                        )
+                        ),
                       ],
                     )
                   : const SizedBox.shrink(),
