@@ -127,20 +127,22 @@ class _CartPageCheckoutButton extends StatelessWidget {
       listener: (context, state) {
         state.apiFailureOrSuccessOption.fold(
           () {
+            final comboDealMaterialDetailBloc =
+                context.read<ComboDealMaterialDetailBloc>();
             if (context.router.current.path == 'combo_detail') {
               CustomSnackBar(
                 messageText: context.tr(
-                  '${context.read<ComboDealMaterialDetailBloc>().state.currentDeal.scheme.comboDealTitleAppbar} has been added to cart',
+                  isUpdateCart
+                      ? '${comboDealMaterialDetailBloc.state.currentDeal.scheme.comboDealTitleAppbar} has been updated to cart'
+                      : '${comboDealMaterialDetailBloc.state.currentDeal.scheme.comboDealTitleAppbar} has been added to cart',
                 ),
               ).show(context);
             }
-            final comboDealMaterialDetailBloc =
-                context.read<ComboDealMaterialDetailBloc>();
+
             final overrideQuantity = state
-                .getCurrentComboItemByMaterialNumbers(
-                  comboDealMaterialDetailBloc.state.allMaterialsNumber
-                      .map((e) => e.getValue())
-                      .toList(),
+                .getCurrentComboItemByComboDealId(
+                  comboDealMaterialDetailBloc
+                      .state.allSelectedItems.firstPriceComboDeal.id,
                 )
                 .comboMaterialsCurrentQuantity;
 

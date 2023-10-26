@@ -14,8 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'bundle_detail_section.dart';
-part 'all_material_item.dart';
 part 'total_qty_section.dart';
+part 'all_material_item.dart';
 
 class CheckoutBundleItem extends StatelessWidget {
   final PriceAggregate cartItem;

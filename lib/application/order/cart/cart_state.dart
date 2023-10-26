@@ -120,8 +120,9 @@ class CartState with _$CartState {
                 : false;
   }
 
-  double get grandTotal =>
+  double get displayGrandTotal =>
       totalBundlePriceWithTax +
+      totalComboPriceWithTax +
       cartProducts
           .where(
             (item) =>
@@ -132,11 +133,11 @@ class CartState with _$CartState {
             0,
             (sum, item) => sum + item.finalPriceTotal,
           ) +
-      taxMaterial +
-      totalComboPriceWithTax;
+      displayTaxMaterial;
 
-  double get subTotal =>
+  double get displaySubTotal =>
       totalBundlesPrice +
+      totalComboPrice +
       cartProducts
           .where(
             (item) =>
@@ -174,20 +175,14 @@ class CartState with _$CartState {
         0;
   }
 
-  double get totalMaterialsPrice => cartProducts.fold(
-        0,
-        (previousValue, element) => element.materialInfo.type.typeBundle
-            ? previousValue
-            : previousValue +
-                (element.price.finalPrice.getValue() * element.quantity),
-      );
-
-  double get taxMaterial => config.displaySubtotalTaxBreakdown
+  //For display product tax
+  double get displayTaxMaterial => config.displaySubtotalTaxBreakdown
       ? cartProducts
           .where(
             (item) =>
                 !item.materialInfo.hidePrice &&
-                !item.materialInfo.type.typeBundle,
+                !item.materialInfo.type.typeBundle &&
+                !item.materialInfo.type.typeCombo,
           )
           .fold<double>(
             0,
@@ -199,6 +194,64 @@ class CartState with _$CartState {
                     100),
           )
       : 0.0;
+
+  //For calculating Product tax
+  double get taxMaterial => config.displaySubtotalTaxBreakdown
+      ? cartProducts
+          .where(
+            (item) =>
+                !item.materialInfo.type.typeBundle &&
+                !item.materialInfo.type.typeCombo,
+          )
+          .fold<double>(
+            0,
+            (sum, item) =>
+                sum +
+                (item.price.finalPrice.getValue() *
+                    item.quantity *
+                    _totalTaxPercentInDouble /
+                    100),
+          )
+      : 0.0;
+
+  /*
+    It's there just as a placeholder but for now we don't have much clarity 
+    that we have any tax calculation for bundle materials
+  */
+
+  double get taxBundle => cartProducts
+      .where((element) => element.materialInfo.type.typeBundle)
+      .fold(
+        0,
+        (previousValue, element) =>
+            previousValue +
+            (itemBundlePrice(bundleCode: element.bundle.bundleCode) *
+                element.salesOrgConfig.vatValue /
+                100),
+      );
+
+  double get taxCombo => config.displaySubtotalTaxBreakdown
+      ? cartProducts
+          .where(
+            (item) => item.materialInfo.type.typeCombo,
+          )
+          .fold<double>(
+            0,
+            (sum, item) =>
+                sum +
+                item.comboMaterials
+                    .where(
+                      (item) => !item.materialInfo.hidePrice,
+                    )
+                    .fold<double>(
+                      0,
+                      (sum, comboMaterial) => sum + comboMaterial.itemTax,
+                    ),
+          )
+      : 0.0;
+
+  double get displayTotalTax => displayTaxMaterial + taxCombo;
+  double get totalTax => taxMaterial + taxCombo;
 
   double itemPrice({required int index}) {
     final cartProductsTemp = cartProducts.elementAt(index);
@@ -241,6 +294,18 @@ class CartState with _$CartState {
       currentBundleOffer(bundleCode: bundleCode).rate *
       getTotalQuantityOfProductBundle(bundleCode: bundleCode);
 
+  //Total product price without tax
+  double get totalMaterialsPrice => cartProducts
+      .where(
+        (item) =>
+            !item.materialInfo.type.typeBundle &&
+            !item.materialInfo.type.typeCombo,
+      )
+      .fold<double>(
+        0,
+        (sum, item) => sum + item.finalPriceTotal,
+      );
+
   double get totalBundlesPrice => cartProducts
       .where((element) => element.materialInfo.type.typeBundle)
       .fold(
@@ -257,36 +322,25 @@ class CartState with _$CartState {
                 previousValue + element.comboSubTotalExclTax,
           );
 
+  double get subTotal =>
+      totalBundlesPrice + totalMaterialsPrice + totalComboPrice;
+
   PriceAggregate updatedCartProduct(MaterialNumber matNumber) =>
       cartProducts.firstWhere(
         (element) => element.getMaterialNumber == matNumber,
         orElse: () => PriceAggregate.empty(),
       );
 
-  double get taxBundle => cartProducts
-      .where((element) => element.materialInfo.type.typeBundle)
-      .fold(
-        0,
-        (previousValue, element) =>
-            previousValue +
-            (itemBundlePrice(bundleCode: element.bundle.bundleCode) *
-                element.salesOrgConfig.vatValue /
-                100),
-      );
-
-  double get totalComboPriceWithTax => totalComboPrice;
-
-  /*
-    It's there just as a placeholder but for now we don't have much clarity 
-    that we have any tax calculation for bundle materials
-  */
+  //Total product price with tax
   double get totalBundlePriceWithTax => totalBundlesPrice;
 
-  double get totalMaterialPriceWithTax => totalMaterialsPrice + taxMaterial;
+  double get totalMaterialsPriceWithTax => totalMaterialsPrice + taxMaterial;
 
-  double get totalPriceWithTax =>
-      totalMaterialPriceWithTax +
+  double get totalComboPriceWithTax => totalComboPrice + taxCombo;
+
+  double get grandTotal =>
       totalBundlePriceWithTax +
+      totalMaterialsPriceWithTax +
       totalComboPriceWithTax;
 
   int get totalItems => cartProducts.fold(
@@ -428,19 +482,11 @@ class CartState with _$CartState {
       productsWithCounterOfferPrice.isNotEmpty ||
       productsWithCounterOfferDiscount.isNotEmpty;
 
-  PriceAggregate getCurrentComboItemByMaterialNumbers(
-    List<String> materialNumbers,
-  ) =>
-      cartProducts.firstWhere(
-        (item) => (item.isComboAndMatchMaterialNumbers(materialNumbers)),
-        orElse: () => PriceAggregate.empty(),
-      );
-
   PriceAggregate getCurrentComboItemByComboDealId(
     String comboDealId,
   ) =>
       cartProducts.firstWhere(
-        (item) => (item.iscomboDealIdMatchComboMaterials(comboDealId)),
+        (item) => (item.containComboDealInCart(comboDealId)),
         orElse: () => PriceAggregate.empty(),
       );
 }

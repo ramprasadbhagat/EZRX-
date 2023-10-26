@@ -582,6 +582,7 @@ void main() {
                 taxClassification:
                     MaterialTaxClassification('Product : Full Tax'),
                 tax: 10,
+                type: MaterialInfoType.material(),
               ),
               price: Price.empty().copyWith(
                 finalPrice: MaterialPrice(234.50),

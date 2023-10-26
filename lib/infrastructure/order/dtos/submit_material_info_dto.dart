@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
@@ -30,6 +31,10 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
     @JsonKey(name: 'PromoStatus', defaultValue: false)
         required bool promoStatus,
     @JsonKey(name: 'PromoType', defaultValue: '') required String promoType,
+    @JsonKey(name: 'PrincipalCode', defaultValue: '')
+        required String principalCode,
+    @JsonKey(name: 'PrincipalName', defaultValue: '')
+        required String principalName,
 
     ///Todo: consider to delete it
     @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
@@ -51,6 +56,10 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
       mrp: mrp,
       promoStatus: promoStatus,
       promoType: promoType,
+      principalData: PrincipalData.empty().copyWith(
+        principalName: PrincipalName(principalName),
+        principalCode: PrincipalCode(principalCode),
+      ),
     );
   }
 
@@ -77,6 +86,10 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
       mrp: submitMaterialInfo.mrp,
       promoStatus: submitMaterialInfo.promoStatus,
       promoType: submitMaterialInfo.promoType,
+      principalCode:
+          submitMaterialInfo.principalData.principalCode.getOrDefaultValue(''),
+      principalName:
+          submitMaterialInfo.principalData.principalName.getOrDefaultValue(''),
     );
   }
 

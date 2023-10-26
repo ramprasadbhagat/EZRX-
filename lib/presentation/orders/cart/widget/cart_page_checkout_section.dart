@@ -49,7 +49,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
                 key: WidgetKeys.grandTotalKey,
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: state.grandTotal.toString(),
+                price: state.displayGrandTotal.toString(),
                 title: 'Grand total: '.tr(),
                 priceLabelStyle:
                     Theme.of(context).textTheme.titleSmall?.copyWith(

@@ -51,6 +51,10 @@ mixin _$SubmitMaterialInfoDto {
   bool get promoStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'PromoType', defaultValue: '')
   String get promoType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  String get principalCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'PrincipalName', defaultValue: '')
+  String get principalName => throw _privateConstructorUsedError;
 
   ///Todo: consider to delete it
   @JsonKey(
@@ -91,6 +95,8 @@ abstract class $SubmitMaterialInfoDtoCopyWith<$Res> {
       @JsonKey(name: 'Mrp', defaultValue: 0) double mrp,
       @JsonKey(name: 'PromoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'PromoType', defaultValue: '') String promoType,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
+      @JsonKey(name: 'PrincipalName', defaultValue: '') String principalName,
       @JsonKey(
           name: 'batch',
           defaultValue: '',
@@ -127,6 +133,8 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
     Object? mrp = null,
     Object? promoStatus = null,
     Object? promoType = null,
+    Object? principalCode = null,
+    Object? principalName = null,
     Object? batch = null,
   }) {
     return _then(_value.copyWith(
@@ -178,6 +186,14 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
           ? _value.promoType
           : promoType // ignore: cast_nullable_to_non_nullable
               as String,
+      principalCode: null == principalCode
+          ? _value.principalCode
+          : principalCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      principalName: null == principalName
+          ? _value.principalName
+          : principalName // ignore: cast_nullable_to_non_nullable
+              as String,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -222,6 +238,8 @@ abstract class _$$_SubmitMaterialInfoDtoCopyWith<$Res>
       @JsonKey(name: 'Mrp', defaultValue: 0) double mrp,
       @JsonKey(name: 'PromoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'PromoType', defaultValue: '') String promoType,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
+      @JsonKey(name: 'PrincipalName', defaultValue: '') String principalName,
       @JsonKey(
           name: 'batch',
           defaultValue: '',
@@ -256,6 +274,8 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
     Object? mrp = null,
     Object? promoStatus = null,
     Object? promoType = null,
+    Object? principalCode = null,
+    Object? principalName = null,
     Object? batch = null,
   }) {
     return _then(_$_SubmitMaterialInfoDto(
@@ -307,6 +327,14 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
           ? _value.promoType
           : promoType // ignore: cast_nullable_to_non_nullable
               as String,
+      principalCode: null == principalCode
+          ? _value.principalCode
+          : principalCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      principalName: null == principalName
+          ? _value.principalName
+          : principalName // ignore: cast_nullable_to_non_nullable
+              as String,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -339,6 +367,10 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
       @JsonKey(name: 'PromoStatus', defaultValue: false)
       required this.promoStatus,
       @JsonKey(name: 'PromoType', defaultValue: '') required this.promoType,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      required this.principalCode,
+      @JsonKey(name: 'PrincipalName', defaultValue: '')
+      required this.principalName,
       @JsonKey(
           name: 'batch',
           defaultValue: '',
@@ -397,6 +429,12 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
   @override
   @JsonKey(name: 'PromoType', defaultValue: '')
   final String promoType;
+  @override
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  final String principalCode;
+  @override
+  @JsonKey(name: 'PrincipalName', defaultValue: '')
+  final String principalName;
 
   ///Todo: consider to delete it
   @override
@@ -409,7 +447,7 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
 
   @override
   String toString() {
-    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, parentId: $parentId, materialItemOverride: $materialItemOverride, productType: $productType, price: $price, tax: $tax, mrp: $mrp, promoStatus: $promoStatus, promoType: $promoType, batch: $batch)';
+    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, parentId: $parentId, materialItemOverride: $materialItemOverride, productType: $productType, price: $price, tax: $tax, mrp: $mrp, promoStatus: $promoStatus, promoType: $promoType, principalCode: $principalCode, principalName: $principalName, batch: $batch)';
   }
 
   @override
@@ -435,6 +473,10 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
                 other.promoStatus == promoStatus) &&
             (identical(other.promoType, promoType) ||
                 other.promoType == promoType) &&
+            (identical(other.principalCode, principalCode) ||
+                other.principalCode == principalCode) &&
+            (identical(other.principalName, principalName) ||
+                other.principalName == principalName) &&
             (identical(other.batch, batch) || other.batch == batch));
   }
 
@@ -454,6 +496,8 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
       mrp,
       promoStatus,
       promoType,
+      principalCode,
+      principalName,
       batch);
 
   @JsonKey(ignore: true)
@@ -496,6 +540,10 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
       required final bool promoStatus,
       @JsonKey(name: 'PromoType', defaultValue: '')
       required final String promoType,
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      required final String principalCode,
+      @JsonKey(name: 'PrincipalName', defaultValue: '')
+      required final String principalName,
       @JsonKey(
           name: 'batch',
           defaultValue: '',
@@ -547,6 +595,12 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
   @override
   @JsonKey(name: 'PromoType', defaultValue: '')
   String get promoType;
+  @override
+  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  String get principalCode;
+  @override
+  @JsonKey(name: 'PrincipalName', defaultValue: '')
+  String get principalName;
   @override
 
   ///Todo: consider to delete it

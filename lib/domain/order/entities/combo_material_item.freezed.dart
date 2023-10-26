@@ -26,15 +26,17 @@ mixin _$ComboMaterialItem {
   bool get mandatory => throw _privateConstructorUsedError;
   String get suffix => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
-  PrincipalName get principalName => throw _privateConstructorUsedError;
+  PrincipalData get principalData => throw _privateConstructorUsedError;
   double get listPrice => throw _privateConstructorUsedError;
-  PrincipalCode get principalCode => throw _privateConstructorUsedError;
   bool get valid => throw _privateConstructorUsedError;
   String get comboDealType => throw _privateConstructorUsedError;
   bool get isComboEligible => throw _privateConstructorUsedError;
   PriceComboDeal get comboDeals => throw _privateConstructorUsedError;
   double get finalIndividualPrice => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get salesOrgConfig =>
+      throw _privateConstructorUsedError;
+  MaterialInfo get materialInfo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ComboMaterialItemCopyWith<ComboMaterialItem> get copyWith =>
@@ -58,17 +60,21 @@ abstract class $ComboMaterialItemCopyWith<$Res> {
       bool mandatory,
       String suffix,
       String materialDescription,
-      PrincipalName principalName,
+      PrincipalData principalData,
       double listPrice,
-      PrincipalCode principalCode,
       bool valid,
       String comboDealType,
       bool isComboEligible,
       PriceComboDeal comboDeals,
       double finalIndividualPrice,
-      String language});
+      String language,
+      SalesOrganisationConfigs salesOrgConfig,
+      MaterialInfo materialInfo});
 
+  $PrincipalDataCopyWith<$Res> get principalData;
   $PriceComboDealCopyWith<$Res> get comboDeals;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
+  $MaterialInfoCopyWith<$Res> get materialInfo;
 }
 
 /// @nodoc
@@ -94,15 +100,16 @@ class _$ComboMaterialItemCopyWithImpl<$Res, $Val extends ComboMaterialItem>
     Object? mandatory = null,
     Object? suffix = null,
     Object? materialDescription = null,
-    Object? principalName = null,
+    Object? principalData = null,
     Object? listPrice = null,
-    Object? principalCode = null,
     Object? valid = null,
     Object? comboDealType = null,
     Object? isComboEligible = null,
     Object? comboDeals = null,
     Object? finalIndividualPrice = null,
     Object? language = null,
+    Object? salesOrgConfig = null,
+    Object? materialInfo = null,
   }) {
     return _then(_value.copyWith(
       productId: null == productId
@@ -145,18 +152,14 @@ class _$ComboMaterialItemCopyWithImpl<$Res, $Val extends ComboMaterialItem>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      principalName: null == principalName
-          ? _value.principalName
-          : principalName // ignore: cast_nullable_to_non_nullable
-              as PrincipalName,
+      principalData: null == principalData
+          ? _value.principalData
+          : principalData // ignore: cast_nullable_to_non_nullable
+              as PrincipalData,
       listPrice: null == listPrice
           ? _value.listPrice
           : listPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      principalCode: null == principalCode
-          ? _value.principalCode
-          : principalCode // ignore: cast_nullable_to_non_nullable
-              as PrincipalCode,
       valid: null == valid
           ? _value.valid
           : valid // ignore: cast_nullable_to_non_nullable
@@ -181,7 +184,23 @@ class _$ComboMaterialItemCopyWithImpl<$Res, $Val extends ComboMaterialItem>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      salesOrgConfig: null == salesOrgConfig
+          ? _value.salesOrgConfig
+          : salesOrgConfig // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      materialInfo: null == materialInfo
+          ? _value.materialInfo
+          : materialInfo // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PrincipalDataCopyWith<$Res> get principalData {
+    return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
+      return _then(_value.copyWith(principalData: value) as $Val);
+    });
   }
 
   @override
@@ -189,6 +208,23 @@ class _$ComboMaterialItemCopyWithImpl<$Res, $Val extends ComboMaterialItem>
   $PriceComboDealCopyWith<$Res> get comboDeals {
     return $PriceComboDealCopyWith<$Res>(_value.comboDeals, (value) {
       return _then(_value.copyWith(comboDeals: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesOrgConfig,
+        (value) {
+      return _then(_value.copyWith(salesOrgConfig: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MaterialInfoCopyWith<$Res> get materialInfo {
+    return $MaterialInfoCopyWith<$Res>(_value.materialInfo, (value) {
+      return _then(_value.copyWith(materialInfo: value) as $Val);
     });
   }
 }
@@ -212,18 +248,25 @@ abstract class _$$_ComboMaterialItemCopyWith<$Res>
       bool mandatory,
       String suffix,
       String materialDescription,
-      PrincipalName principalName,
+      PrincipalData principalData,
       double listPrice,
-      PrincipalCode principalCode,
       bool valid,
       String comboDealType,
       bool isComboEligible,
       PriceComboDeal comboDeals,
       double finalIndividualPrice,
-      String language});
+      String language,
+      SalesOrganisationConfigs salesOrgConfig,
+      MaterialInfo materialInfo});
 
   @override
+  $PrincipalDataCopyWith<$Res> get principalData;
+  @override
   $PriceComboDealCopyWith<$Res> get comboDeals;
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesOrgConfig;
+  @override
+  $MaterialInfoCopyWith<$Res> get materialInfo;
 }
 
 /// @nodoc
@@ -247,15 +290,16 @@ class __$$_ComboMaterialItemCopyWithImpl<$Res>
     Object? mandatory = null,
     Object? suffix = null,
     Object? materialDescription = null,
-    Object? principalName = null,
+    Object? principalData = null,
     Object? listPrice = null,
-    Object? principalCode = null,
     Object? valid = null,
     Object? comboDealType = null,
     Object? isComboEligible = null,
     Object? comboDeals = null,
     Object? finalIndividualPrice = null,
     Object? language = null,
+    Object? salesOrgConfig = null,
+    Object? materialInfo = null,
   }) {
     return _then(_$_ComboMaterialItem(
       productId: null == productId
@@ -298,18 +342,14 @@ class __$$_ComboMaterialItemCopyWithImpl<$Res>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      principalName: null == principalName
-          ? _value.principalName
-          : principalName // ignore: cast_nullable_to_non_nullable
-              as PrincipalName,
+      principalData: null == principalData
+          ? _value.principalData
+          : principalData // ignore: cast_nullable_to_non_nullable
+              as PrincipalData,
       listPrice: null == listPrice
           ? _value.listPrice
           : listPrice // ignore: cast_nullable_to_non_nullable
               as double,
-      principalCode: null == principalCode
-          ? _value.principalCode
-          : principalCode // ignore: cast_nullable_to_non_nullable
-              as PrincipalCode,
       valid: null == valid
           ? _value.valid
           : valid // ignore: cast_nullable_to_non_nullable
@@ -334,6 +374,14 @@ class __$$_ComboMaterialItemCopyWithImpl<$Res>
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
+      salesOrgConfig: null == salesOrgConfig
+          ? _value.salesOrgConfig
+          : salesOrgConfig // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
+      materialInfo: null == materialInfo
+          ? _value.materialInfo
+          : materialInfo // ignore: cast_nullable_to_non_nullable
+              as MaterialInfo,
     ));
   }
 }
@@ -352,15 +400,16 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
       required this.mandatory,
       required this.suffix,
       required this.materialDescription,
-      required this.principalName,
+      required this.principalData,
       required this.listPrice,
-      required this.principalCode,
       required this.valid,
       required this.comboDealType,
       required this.isComboEligible,
       required this.comboDeals,
       required this.finalIndividualPrice,
-      required this.language})
+      required this.language,
+      required this.salesOrgConfig,
+      required this.materialInfo})
       : super._();
 
   @override
@@ -384,11 +433,9 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
   @override
   final String materialDescription;
   @override
-  final PrincipalName principalName;
+  final PrincipalData principalData;
   @override
   final double listPrice;
-  @override
-  final PrincipalCode principalCode;
   @override
   final bool valid;
   @override
@@ -401,10 +448,14 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
   final double finalIndividualPrice;
   @override
   final String language;
+  @override
+  final SalesOrganisationConfigs salesOrgConfig;
+  @override
+  final MaterialInfo materialInfo;
 
   @override
   String toString() {
-    return 'ComboMaterialItem(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, minQty: $minQty, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principalName: $principalName, listPrice: $listPrice, principalCode: $principalCode, valid: $valid, comboDealType: $comboDealType, isComboEligible: $isComboEligible, comboDeals: $comboDeals, finalIndividualPrice: $finalIndividualPrice, language: $language)';
+    return 'ComboMaterialItem(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, minQty: $minQty, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principalData: $principalData, listPrice: $listPrice, valid: $valid, comboDealType: $comboDealType, isComboEligible: $isComboEligible, comboDeals: $comboDeals, finalIndividualPrice: $finalIndividualPrice, language: $language, salesOrgConfig: $salesOrgConfig, materialInfo: $materialInfo)';
   }
 
   @override
@@ -428,12 +479,10 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
             (identical(other.suffix, suffix) || other.suffix == suffix) &&
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
-            (identical(other.principalName, principalName) ||
-                other.principalName == principalName) &&
+            (identical(other.principalData, principalData) ||
+                other.principalData == principalData) &&
             (identical(other.listPrice, listPrice) ||
                 other.listPrice == listPrice) &&
-            (identical(other.principalCode, principalCode) ||
-                other.principalCode == principalCode) &&
             (identical(other.valid, valid) || other.valid == valid) &&
             (identical(other.comboDealType, comboDealType) ||
                 other.comboDealType == comboDealType) &&
@@ -444,7 +493,11 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
             (identical(other.finalIndividualPrice, finalIndividualPrice) ||
                 other.finalIndividualPrice == finalIndividualPrice) &&
             (identical(other.language, language) ||
-                other.language == language));
+                other.language == language) &&
+            (identical(other.salesOrgConfig, salesOrgConfig) ||
+                other.salesOrgConfig == salesOrgConfig) &&
+            (identical(other.materialInfo, materialInfo) ||
+                other.materialInfo == materialInfo));
   }
 
   @override
@@ -460,15 +513,16 @@ class _$_ComboMaterialItem extends _ComboMaterialItem {
         mandatory,
         suffix,
         materialDescription,
-        principalName,
+        principalData,
         listPrice,
-        principalCode,
         valid,
         comboDealType,
         isComboEligible,
         comboDeals,
         finalIndividualPrice,
-        language
+        language,
+        salesOrgConfig,
+        materialInfo
       ]);
 
   @JsonKey(ignore: true)
@@ -491,15 +545,16 @@ abstract class _ComboMaterialItem extends ComboMaterialItem {
       required final bool mandatory,
       required final String suffix,
       required final String materialDescription,
-      required final PrincipalName principalName,
+      required final PrincipalData principalData,
       required final double listPrice,
-      required final PrincipalCode principalCode,
       required final bool valid,
       required final String comboDealType,
       required final bool isComboEligible,
       required final PriceComboDeal comboDeals,
       required final double finalIndividualPrice,
-      required final String language}) = _$_ComboMaterialItem;
+      required final String language,
+      required final SalesOrganisationConfigs salesOrgConfig,
+      required final MaterialInfo materialInfo}) = _$_ComboMaterialItem;
   const _ComboMaterialItem._() : super._();
 
   @override
@@ -523,11 +578,9 @@ abstract class _ComboMaterialItem extends ComboMaterialItem {
   @override
   String get materialDescription;
   @override
-  PrincipalName get principalName;
+  PrincipalData get principalData;
   @override
   double get listPrice;
-  @override
-  PrincipalCode get principalCode;
   @override
   bool get valid;
   @override
@@ -540,6 +593,10 @@ abstract class _ComboMaterialItem extends ComboMaterialItem {
   double get finalIndividualPrice;
   @override
   String get language;
+  @override
+  SalesOrganisationConfigs get salesOrgConfig;
+  @override
+  MaterialInfo get materialInfo;
   @override
   @JsonKey(ignore: true)
   _$$_ComboMaterialItemCopyWith<_$_ComboMaterialItem> get copyWith =>

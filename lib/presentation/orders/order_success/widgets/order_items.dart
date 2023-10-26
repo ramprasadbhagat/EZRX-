@@ -15,16 +15,6 @@ class _OrderItems extends StatelessWidget {
       key: WidgetKeys.orderSuccessItemsSection,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-          child: Text(
-            '${'Your items'.tr()}(${context.read<OrderSummaryBloc>().state.orderHistoryDetails.orderItemsCount})',
-            key: WidgetKeys.orderSuccessItemTotalQty,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: ZPColors.black,
-                ),
-          ),
-        ),
         Column(
           children: orderItems
               .map(

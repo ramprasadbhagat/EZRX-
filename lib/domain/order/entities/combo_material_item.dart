@@ -1,5 +1,10 @@
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,15 +26,16 @@ class ComboMaterialItem with _$ComboMaterialItem {
     required bool mandatory,
     required String suffix,
     required String materialDescription,
-    required PrincipalName principalName,
+    required PrincipalData principalData,
     required double listPrice,
-    required PrincipalCode principalCode,
     required bool valid,
     required String comboDealType,
     required bool isComboEligible,
     required PriceComboDeal comboDeals,
     required double finalIndividualPrice,
     required String language,
+    required SalesOrganisationConfigs salesOrgConfig,
+    required MaterialInfo materialInfo,
   }) = _ComboMaterialItem;
 
   factory ComboMaterialItem.empty() => ComboMaterialItem(
@@ -44,32 +50,47 @@ class ComboMaterialItem with _$ComboMaterialItem {
         mandatory: false,
         suffix: '',
         materialDescription: '',
-        principalName: PrincipalName(''),
         listPrice: 0,
-        principalCode: PrincipalCode(''),
         valid: false,
         comboDealType: '',
         isComboEligible: false,
         comboDeals: PriceComboDeal.empty(),
         finalIndividualPrice: 0,
+        salesOrgConfig: SalesOrganisationConfigs.empty(),
+        materialInfo: MaterialInfo.empty(),
+        principalData: PrincipalData.empty(),
       );
+
+  bool get showTaxBreakDown =>
+      salesOrgConfig.displayItemTaxBreakdown && !materialInfo.hidePrice;
+
+  double get itemTaxPercent => salesOrgConfig.displayItemTaxBreakdown
+      ? materialInfo.taxClassification.isFullTax
+          ? salesOrgConfig.isMarketEligibleForTaxClassification
+              ? materialInfo.tax
+              : salesOrgConfig.vatValue.toDouble()
+          : 0.0
+      : 0.0;
+
+  String get itemTaxPercentPadded =>
+      itemTaxPercent.toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '');
+
+  double get itemTax => (discountedSubTotal * itemTaxPercent) / 100;
 
   String get originalPriceDisplay =>
       NumUtils.roundToPlaces(listPrice).toString();
 
+  double get originalSubTotal => NumUtils.roundToPlaces(listPrice * quantity);
+
+  double get originalTotalWithTax => originalSubTotal + itemTax;
+
   String get discountedPriceDisplay =>
       NumUtils.roundToPlaces(finalIndividualPrice).toString();
-
-  double get originalSubTotal => NumUtils.roundToPlaces(listPrice * quantity);
 
   double get discountedSubTotal =>
       NumUtils.roundToPlaces(finalIndividualPrice * quantity);
 
-  //TODO: calculate total with tax here
-  double get discountedSubTotalWithTax => discountedSubTotal;
-
-  //TODO: calculate total with tax here
-  double get originalTotalWithTax => originalSubTotal;
+  double get discountedSubTotalWithTax => discountedSubTotal + itemTax;
 
   ComboDealScheme getScheme(List<ComboMaterialItem> comboMaterials) {
     switch (comboDealType) {
@@ -100,5 +121,24 @@ class ComboMaterialItem with _$ComboMaterialItem {
     }
 
     return comboRate.toString();
+  }
+
+  SubmitMaterialInfo toSubmitMaterialInfo() {
+    return SubmitMaterialInfo(
+      batch: BatchNumber(''),
+      bonuses: [],
+      comment: materialInfo.remarks,
+      materialNumber: materialInfo.materialNumber,
+      quantity: quantity,
+      materialItemOverride: MaterialItemOverride.empty(),
+      price: finalIndividualPrice,
+      productType: MaterialInfoType.material().getValue().toUpperCase(),
+      parentID: materialInfo.parentID,
+      mrp: listPrice + itemTax,
+      tax: itemTax,
+      promoStatus: false,
+      promoType: materialInfo.promoType,
+      principalData: materialInfo.principalData,
+    );
   }
 }

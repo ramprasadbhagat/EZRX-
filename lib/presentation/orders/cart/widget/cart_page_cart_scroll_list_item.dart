@@ -13,7 +13,13 @@ class _CartPageScrollListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (item.materialInfo.type.typeCombo) {
-      return CartProductCombo(cartItem: item);
+      return Padding(
+        padding: const EdgeInsets.only(top: 25),
+        child: CartProductCombo(
+          cartItem: item,
+          canEditable: true,
+        ),
+      );
     } else if (item.materialInfo.type.typeBundle) {
       return CartProductBundle(
         cartItem: item,

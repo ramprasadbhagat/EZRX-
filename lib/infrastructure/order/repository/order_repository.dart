@@ -143,6 +143,7 @@ class OrderRepository implements IOrderRepository {
           soldTo: customerCodeInfo.customerCodeSoldTo,
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         );
+        
         final orderHistoryDetailsWithMaterialInfo =
             orderHistoryDetails.copyWith(
           orderHistoryDetailsOrderItem:
@@ -275,22 +276,32 @@ SubmitOrderCustomer _getSubmitOrderCustomer({
 List<SubmitMaterialInfo> _getMaterialInfoList({
   required List<PriceAggregate> cartProducts,
 }) =>
-    cartProducts
-        .expand(
-          (element) => !element.materialInfo.type.typeBundle
-              ? [element.toSubmitMaterialInfo()]
-              : element.bundle.materials.map(
-                  (el) => PriceAggregate.empty()
-                      .copyWith(
-                        materialInfo: el,
-                        quantity: el.quantity.intValue,
-                        salesOrgConfig: element.salesOrgConfig,
-                        bundle: element.bundle,
-                      )
-                      .toSubmitMaterialInfo(),
-                ),
-        )
-        .toList();
+    cartProducts.expand<SubmitMaterialInfo>(
+      (element) {
+        if (element.materialInfo.type.typeMaterial) {
+          return [element.toSubmitMaterialInfo()];
+        }
+        if (element.materialInfo.type.typeBundle) {
+          return element.bundle.materials.map(
+            (el) => PriceAggregate.empty()
+                .copyWith(
+                  materialInfo: el,
+                  quantity: el.quantity.intValue,
+                  salesOrgConfig: element.salesOrgConfig,
+                  bundle: element.bundle,
+                )
+                .toSubmitMaterialInfo(),
+          );
+        }
+        if (element.materialInfo.type.typeCombo) {
+          return element.comboMaterials.map(
+            (comboMaterial) => comboMaterial.toSubmitMaterialInfo(),
+          );
+        }
+
+        return <SubmitMaterialInfo>[];
+      },
+    ).toList();
 
 String getOrderType({
   required List<PriceAggregate> cartItems,

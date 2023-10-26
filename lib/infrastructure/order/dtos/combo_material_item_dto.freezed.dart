@@ -41,7 +41,7 @@ mixin _$ComboMaterialItemDto {
   @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'principalName', defaultValue: '')
-  String get principleName => throw _privateConstructorUsedError;
+  String get principalName => throw _privateConstructorUsedError;
   @JsonKey(name: 'listPrice', defaultValue: 0.0)
   double get listPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'ttemCheck', defaultValue: false)
@@ -64,8 +64,14 @@ mixin _$ComboMaterialItemDto {
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxM1', defaultValue: '')
   String get taxM1 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'taxes', defaultValue: <String>[])
-  List<String> get taxes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'taxes', readValue: handleTax)
+  double get tax => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+  bool get isFOCMaterial => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hidePrice', defaultValue: false)
+  bool get hidePrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'taxClassification', defaultValue: '')
+  String get taxClassification => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -92,7 +98,7 @@ abstract class $ComboMaterialItemDtoCopyWith<$Res> {
       @JsonKey(name: 'suffix', defaultValue: '') String suffix,
       @JsonKey(name: 'materialDescription', defaultValue: '')
       String materialDescription,
-      @JsonKey(name: 'principalName', defaultValue: '') String principleName,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
       @JsonKey(name: 'listPrice', defaultValue: 0.0) double listPrice,
       @JsonKey(name: 'ttemCheck', defaultValue: false) bool itemCheck,
       @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
@@ -107,7 +113,11 @@ abstract class $ComboMaterialItemDtoCopyWith<$Res> {
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') String taxM1,
-      @JsonKey(name: 'taxes', defaultValue: <String>[]) List<String> taxes});
+      @JsonKey(name: 'taxes', readValue: handleTax) double tax,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
+      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
+      @JsonKey(name: 'taxClassification', defaultValue: '')
+      String taxClassification});
 }
 
 /// @nodoc
@@ -134,7 +144,7 @@ class _$ComboMaterialItemDtoCopyWithImpl<$Res,
     Object? mandatory = null,
     Object? suffix = null,
     Object? materialDescription = null,
-    Object? principleName = null,
+    Object? principalName = null,
     Object? listPrice = null,
     Object? itemCheck = null,
     Object? principalCode = null,
@@ -146,7 +156,10 @@ class _$ComboMaterialItemDtoCopyWithImpl<$Res,
     Object? language = null,
     Object? materialNumber = null,
     Object? taxM1 = null,
-    Object? taxes = null,
+    Object? tax = null,
+    Object? isFOCMaterial = null,
+    Object? hidePrice = null,
+    Object? taxClassification = null,
   }) {
     return _then(_value.copyWith(
       productId: null == productId
@@ -189,9 +202,9 @@ class _$ComboMaterialItemDtoCopyWithImpl<$Res,
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      principleName: null == principleName
-          ? _value.principleName
-          : principleName // ignore: cast_nullable_to_non_nullable
+      principalName: null == principalName
+          ? _value.principalName
+          : principalName // ignore: cast_nullable_to_non_nullable
               as String,
       listPrice: null == listPrice
           ? _value.listPrice
@@ -237,10 +250,22 @@ class _$ComboMaterialItemDtoCopyWithImpl<$Res,
           ? _value.taxM1
           : taxM1 // ignore: cast_nullable_to_non_nullable
               as String,
-      taxes: null == taxes
-          ? _value.taxes
-          : taxes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
+      isFOCMaterial: null == isFOCMaterial
+          ? _value.isFOCMaterial
+          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hidePrice: null == hidePrice
+          ? _value.hidePrice
+          : hidePrice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      taxClassification: null == taxClassification
+          ? _value.taxClassification
+          : taxClassification // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -266,7 +291,7 @@ abstract class _$$_ComboMaterialItemDtoCopyWith<$Res>
       @JsonKey(name: 'suffix', defaultValue: '') String suffix,
       @JsonKey(name: 'materialDescription', defaultValue: '')
       String materialDescription,
-      @JsonKey(name: 'principalName', defaultValue: '') String principleName,
+      @JsonKey(name: 'principalName', defaultValue: '') String principalName,
       @JsonKey(name: 'listPrice', defaultValue: 0.0) double listPrice,
       @JsonKey(name: 'ttemCheck', defaultValue: false) bool itemCheck,
       @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
@@ -281,7 +306,11 @@ abstract class _$$_ComboMaterialItemDtoCopyWith<$Res>
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') String taxM1,
-      @JsonKey(name: 'taxes', defaultValue: <String>[]) List<String> taxes});
+      @JsonKey(name: 'taxes', readValue: handleTax) double tax,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
+      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
+      @JsonKey(name: 'taxClassification', defaultValue: '')
+      String taxClassification});
 }
 
 /// @nodoc
@@ -305,7 +334,7 @@ class __$$_ComboMaterialItemDtoCopyWithImpl<$Res>
     Object? mandatory = null,
     Object? suffix = null,
     Object? materialDescription = null,
-    Object? principleName = null,
+    Object? principalName = null,
     Object? listPrice = null,
     Object? itemCheck = null,
     Object? principalCode = null,
@@ -317,7 +346,10 @@ class __$$_ComboMaterialItemDtoCopyWithImpl<$Res>
     Object? language = null,
     Object? materialNumber = null,
     Object? taxM1 = null,
-    Object? taxes = null,
+    Object? tax = null,
+    Object? isFOCMaterial = null,
+    Object? hidePrice = null,
+    Object? taxClassification = null,
   }) {
     return _then(_$_ComboMaterialItemDto(
       productId: null == productId
@@ -360,9 +392,9 @@ class __$$_ComboMaterialItemDtoCopyWithImpl<$Res>
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      principleName: null == principleName
-          ? _value.principleName
-          : principleName // ignore: cast_nullable_to_non_nullable
+      principalName: null == principalName
+          ? _value.principalName
+          : principalName // ignore: cast_nullable_to_non_nullable
               as String,
       listPrice: null == listPrice
           ? _value.listPrice
@@ -408,10 +440,22 @@ class __$$_ComboMaterialItemDtoCopyWithImpl<$Res>
           ? _value.taxM1
           : taxM1 // ignore: cast_nullable_to_non_nullable
               as String,
-      taxes: null == taxes
-          ? _value._taxes
-          : taxes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      tax: null == tax
+          ? _value.tax
+          : tax // ignore: cast_nullable_to_non_nullable
+              as double,
+      isFOCMaterial: null == isFOCMaterial
+          ? _value.isFOCMaterial
+          : isFOCMaterial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hidePrice: null == hidePrice
+          ? _value.hidePrice
+          : hidePrice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      taxClassification: null == taxClassification
+          ? _value.taxClassification
+          : taxClassification // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -434,7 +478,7 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
       @JsonKey(name: 'materialDescription', defaultValue: '')
       required this.materialDescription,
       @JsonKey(name: 'principalName', defaultValue: '')
-      required this.principleName,
+      required this.principalName,
       @JsonKey(name: 'listPrice', defaultValue: 0.0) required this.listPrice,
       @JsonKey(name: 'ttemCheck', defaultValue: false) required this.itemCheck,
       @JsonKey(name: 'principalCode', defaultValue: '')
@@ -451,10 +495,13 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       required this.materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') required this.taxM1,
-      @JsonKey(name: 'taxes', defaultValue: <String>[])
-      required final List<String> taxes})
-      : _taxes = taxes,
-        super._();
+      @JsonKey(name: 'taxes', readValue: handleTax) required this.tax,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+      required this.isFOCMaterial,
+      @JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
+      @JsonKey(name: 'taxClassification', defaultValue: '')
+      required this.taxClassification})
+      : super._();
 
   factory _$_ComboMaterialItemDto.fromJson(Map<String, dynamic> json) =>
       _$$_ComboMaterialItemDtoFromJson(json);
@@ -491,7 +538,7 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
   final String materialDescription;
   @override
   @JsonKey(name: 'principalName', defaultValue: '')
-  final String principleName;
+  final String principalName;
   @override
   @JsonKey(name: 'listPrice', defaultValue: 0.0)
   final double listPrice;
@@ -525,18 +572,22 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
   @override
   @JsonKey(name: 'taxM1', defaultValue: '')
   final String taxM1;
-  final List<String> _taxes;
   @override
-  @JsonKey(name: 'taxes', defaultValue: <String>[])
-  List<String> get taxes {
-    if (_taxes is EqualUnmodifiableListView) return _taxes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_taxes);
-  }
+  @JsonKey(name: 'taxes', readValue: handleTax)
+  final double tax;
+  @override
+  @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+  final bool isFOCMaterial;
+  @override
+  @JsonKey(name: 'hidePrice', defaultValue: false)
+  final bool hidePrice;
+  @override
+  @JsonKey(name: 'taxClassification', defaultValue: '')
+  final String taxClassification;
 
   @override
   String toString() {
-    return 'ComboMaterialItemDto(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, itemSource: $itemSource, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principleName: $principleName, listPrice: $listPrice, itemCheck: $itemCheck, principalCode: $principalCode, valid: $valid, type: $type, comboDealType: $comboDealType, isComboEligible: $isComboEligible, finalIndividualPrice: $finalIndividualPrice, language: $language, materialNumber: $materialNumber, taxM1: $taxM1, taxes: $taxes)';
+    return 'ComboMaterialItemDto(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, itemSource: $itemSource, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principalName: $principalName, listPrice: $listPrice, itemCheck: $itemCheck, principalCode: $principalCode, valid: $valid, type: $type, comboDealType: $comboDealType, isComboEligible: $isComboEligible, finalIndividualPrice: $finalIndividualPrice, language: $language, materialNumber: $materialNumber, taxM1: $taxM1, tax: $tax, isFOCMaterial: $isFOCMaterial, hidePrice: $hidePrice, taxClassification: $taxClassification)';
   }
 
   @override
@@ -561,8 +612,8 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
             (identical(other.suffix, suffix) || other.suffix == suffix) &&
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
-            (identical(other.principleName, principleName) ||
-                other.principleName == principleName) &&
+            (identical(other.principalName, principalName) ||
+                other.principalName == principalName) &&
             (identical(other.listPrice, listPrice) ||
                 other.listPrice == listPrice) &&
             (identical(other.itemCheck, itemCheck) ||
@@ -582,7 +633,13 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.taxM1, taxM1) || other.taxM1 == taxM1) &&
-            const DeepCollectionEquality().equals(other._taxes, _taxes));
+            (identical(other.tax, tax) || other.tax == tax) &&
+            (identical(other.isFOCMaterial, isFOCMaterial) ||
+                other.isFOCMaterial == isFOCMaterial) &&
+            (identical(other.hidePrice, hidePrice) ||
+                other.hidePrice == hidePrice) &&
+            (identical(other.taxClassification, taxClassification) ||
+                other.taxClassification == taxClassification));
   }
 
   @JsonKey(ignore: true)
@@ -599,7 +656,7 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
         mandatory,
         suffix,
         materialDescription,
-        principleName,
+        principalName,
         listPrice,
         itemCheck,
         principalCode,
@@ -611,7 +668,10 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
         language,
         materialNumber,
         taxM1,
-        const DeepCollectionEquality().hash(_taxes)
+        tax,
+        isFOCMaterial,
+        hidePrice,
+        taxClassification
       ]);
 
   @JsonKey(ignore: true)
@@ -648,7 +708,7 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
       @JsonKey(name: 'materialDescription', defaultValue: '')
       required final String materialDescription,
       @JsonKey(name: 'principalName', defaultValue: '')
-      required final String principleName,
+      required final String principalName,
       @JsonKey(name: 'listPrice', defaultValue: 0.0)
       required final double listPrice,
       @JsonKey(name: 'ttemCheck', defaultValue: false)
@@ -668,8 +728,13 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       required final String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') required final String taxM1,
-      @JsonKey(name: 'taxes', defaultValue: <String>[])
-      required final List<String> taxes}) = _$_ComboMaterialItemDto;
+      @JsonKey(name: 'taxes', readValue: handleTax) required final double tax,
+      @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+      required final bool isFOCMaterial,
+      @JsonKey(name: 'hidePrice', defaultValue: false)
+      required final bool hidePrice,
+      @JsonKey(name: 'taxClassification', defaultValue: '')
+      required final String taxClassification}) = _$_ComboMaterialItemDto;
   const _ComboMaterialItemDto._() : super._();
 
   factory _ComboMaterialItemDto.fromJson(Map<String, dynamic> json) =
@@ -707,7 +772,7 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
   String get materialDescription;
   @override
   @JsonKey(name: 'principalName', defaultValue: '')
-  String get principleName;
+  String get principalName;
   @override
   @JsonKey(name: 'listPrice', defaultValue: 0.0)
   double get listPrice;
@@ -742,8 +807,17 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
   @JsonKey(name: 'taxM1', defaultValue: '')
   String get taxM1;
   @override
-  @JsonKey(name: 'taxes', defaultValue: <String>[])
-  List<String> get taxes;
+  @JsonKey(name: 'taxes', readValue: handleTax)
+  double get tax;
+  @override
+  @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+  bool get isFOCMaterial;
+  @override
+  @JsonKey(name: 'hidePrice', defaultValue: false)
+  bool get hidePrice;
+  @override
+  @JsonKey(name: 'taxClassification', defaultValue: '')
+  String get taxClassification;
   @override
   @JsonKey(ignore: true)
   _$$_ComboMaterialItemDtoCopyWith<_$_ComboMaterialItemDto> get copyWith =>

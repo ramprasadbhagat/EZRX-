@@ -15,15 +15,7 @@ extension ComboDealExtension on PriceAggregate {
     );
   }
 
-  bool isComboAndMatchMaterialNumbers(List<String> materialNumbers) {
-    return materialInfo.type.typeCombo &&
-        comboMaterials.length == materialNumbers.length &&
-        comboMaterials.every(
-          (element) => materialNumbers.contains(element.productId.getValue()),
-        );
-  }
-
-  bool iscomboDealIdMatchComboMaterials(String comboDealId) {
+  bool containComboDealInCart(String comboDealId) {
     return materialInfo.type.typeCombo &&
         comboMaterials.any(
           (comboMaterial) => comboMaterial.comboDeals.id == comboDealId,
@@ -75,10 +67,7 @@ extension ComboDealExtension on PriceAggregate {
               quantity: item.quantity,
               materialInfo: materialInfo.copyWith(
                 materialNumber: item.productId,
-                principalData: materialInfo.principalData.copyWith(
-                  principalCode: item.principalCode,
-                  principalName: item.principalName,
-                ),
+                principalData: item.principalData,
                 materialDescription: item.materialDescription,
                 parentID: item.parentId,
               ),
@@ -109,7 +98,8 @@ extension PriceAggregateExtension on List<PriceAggregate> {
       isEmpty ? PriceComboDeal.empty() : first.price.comboDeal;
 
   List<PriceAggregate> get preOrderItems => where(
-        (element) => element.isPreOrder,
+        (element) =>
+            element.isPreOrder && (!element.materialInfo.type.typeCombo),
       ).toList();
 
   List<PriceAggregate> get priceAggregateWithDiscountedCount => map(
@@ -136,8 +126,7 @@ extension PriceAggregateExtension on List<PriceAggregate> {
               comboDealRate: comboMaterialItemRate,
             ),
             productId: product.getMaterialNumber,
-            principalName: product.materialInfo.principalData.principalName,
-            principalCode: product.materialInfo.principalData.principalCode,
+            principalData: product.materialInfo.principalData,
             materialDescription: product.materialInfo.materialDescription,
             minQty: materialComboDeal.minQty,
             conditionNumber: materialComboDeal.conditionNumber,
@@ -150,6 +139,8 @@ extension PriceAggregateExtension on List<PriceAggregate> {
             language: product.salesOrgConfig.getConfigLanguageDefaultEnglish,
             parentId: product.materialInfo.parentID,
             rate: comboMaterialItemRate,
+            materialInfo: product.materialInfo,
+            salesOrgConfig: product.salesOrgConfig,
           );
         },
       ).toList();

@@ -157,6 +157,7 @@ class PriceAggregate with _$PriceAggregate {
       tax: itemTax,
       promoStatus: promoStatus,
       promoType: materialInfo.promoType,
+      principalData: materialInfo.principalData,
     );
   }
 

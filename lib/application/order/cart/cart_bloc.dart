@@ -709,14 +709,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
           (newStockFetched) {
             final updatedCartStockList = state.cartProducts.map((cartProduct) {
-              if (!cartProduct.materialInfo.type.typeBundle) {
+              if (cartProduct.materialInfo.type.typeMaterial) {
                 return cartProduct.copyWith(
                   stockInfoList: newStockFetched[
                           cartProduct.materialInfo.materialNumber] ??
                       <StockInfo>[],
                   salesOrgConfig: state.config,
                 );
-              } else {
+              } else if (cartProduct.materialInfo.type.typeBundle) {
                 final materialInfoList =
                     List<MaterialInfo>.from(cartProduct.bundle.materials);
                 final updatedMaterialInfoList = materialInfoList.map((info) {
@@ -731,6 +731,21 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                     materials: updatedMaterialInfoList,
                   ),
                 );
+              } else if (cartProduct.materialInfo.type.typeCombo) {
+                return cartProduct.copyWith(
+                  stockInfoList: newStockFetched[
+                          cartProduct.materialInfo.materialNumber] ??
+                      <StockInfo>[],
+                  comboMaterials: cartProduct.comboMaterials
+                      .map(
+                        (comboMaterial) => comboMaterial.copyWith(
+                          salesOrgConfig: state.config,
+                        ),
+                      )
+                      .toList(),
+                );
+              } else {
+                return cartProduct;
               }
             }).toList();
             emit(

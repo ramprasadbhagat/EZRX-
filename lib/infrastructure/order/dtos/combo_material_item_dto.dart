@@ -1,5 +1,8 @@
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'combo_material_item_dto.freezed.dart';
@@ -24,7 +27,7 @@ class ComboMaterialItemDto with _$ComboMaterialItemDto {
     @JsonKey(name: 'materialDescription', defaultValue: '')
         required String materialDescription,
     @JsonKey(name: 'principalName', defaultValue: '')
-        required String principleName,
+        required String principalName,
     @JsonKey(name: 'listPrice', defaultValue: 0.0) required double listPrice,
     @JsonKey(name: 'ttemCheck', defaultValue: false) required bool itemCheck,
     @JsonKey(name: 'principalCode', defaultValue: '')
@@ -41,14 +44,35 @@ class ComboMaterialItemDto with _$ComboMaterialItemDto {
     @JsonKey(name: 'materialNumber', defaultValue: 'EN')
         required String materialNumber,
     @JsonKey(name: 'taxM1', defaultValue: '') required String taxM1,
-    @JsonKey(name: 'taxes', defaultValue: <String>[])
-        required List<String> taxes,
+    @JsonKey(name: 'taxes', readValue: handleTax) required double tax,
+    @JsonKey(name: 'isFOCMaterial', defaultValue: false)
+        required bool isFOCMaterial,
+    @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
+    @JsonKey(name: 'taxClassification', defaultValue: '')
+        required String taxClassification,
   }) = _ComboMaterialItemDto;
+
+  MaterialInfo get toMaterialInfo {
+    return MaterialInfo.empty().copyWith(
+      materialDescription: materialDescription,
+      materialNumber: MaterialNumber(productId),
+      parentID: parentId,
+      taxClassification: MaterialTaxClassification(taxClassification),
+      isFOCMaterial: isFOCMaterial,
+      tax: tax,
+      hidePrice: hidePrice,
+      principalData: PrincipalData.empty().copyWith(
+        principalName: PrincipalName(principalName),
+        principalCode: PrincipalCode(principalCode),
+      ),
+      type: MaterialInfoType(type),
+    );
+  }
 
   ComboMaterialItem toDomain(
     PriceComboDealDto comboDeal,
   ) {
-    return ComboMaterialItem(
+    return ComboMaterialItem.empty().copyWith(
       comboDeals: comboDeal.toDomain,
       isComboEligible: isComboEligible,
       valid: valid,
@@ -56,8 +80,10 @@ class ComboMaterialItemDto with _$ComboMaterialItemDto {
       listPrice: listPrice,
       finalIndividualPrice: finalIndividualPrice,
       productId: MaterialNumber(productId),
-      principalName: PrincipalName(principleName),
-      principalCode: PrincipalCode(principalCode),
+      principalData: PrincipalData(
+        principalName: PrincipalName(principalName),
+        principalCode: PrincipalCode(principalCode),
+      ),
       materialDescription: materialDescription,
       minQty: 0,
       conditionNumber: conditionNumber,
@@ -68,6 +94,7 @@ class ComboMaterialItemDto with _$ComboMaterialItemDto {
       comboDealType: comboDealType,
       language: language,
       parentId: parentId,
+      materialInfo: toMaterialInfo,
     );
   }
 

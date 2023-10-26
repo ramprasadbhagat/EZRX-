@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,6 +22,7 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
     required double mrp,
     required String promoType,
     required bool promoStatus,
+    required PrincipalData principalData,
 
     ///Todo: consider to delete it
     required BatchNumber batch,
@@ -40,5 +42,6 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
         mrp: 0,
         promoStatus: false,
         promoType: '',
+        principalData: PrincipalData.empty(),
       );
 }

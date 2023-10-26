@@ -13,9 +13,9 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CheckoutProductItem extends StatelessWidget {
+class CheckoutMaterialItem extends StatelessWidget {
   final PriceAggregate cartItem;
-  const CheckoutProductItem({required this.cartItem, Key? key})
+  const CheckoutMaterialItem({required this.cartItem, Key? key})
       : super(key: key);
 
   @override

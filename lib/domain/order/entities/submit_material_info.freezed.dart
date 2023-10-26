@@ -30,6 +30,7 @@ mixin _$SubmitMaterialInfo {
   double get mrp => throw _privateConstructorUsedError;
   String get promoType => throw _privateConstructorUsedError;
   bool get promoStatus => throw _privateConstructorUsedError;
+  PrincipalData get principalData => throw _privateConstructorUsedError;
 
   ///Todo: consider to delete it
   BatchNumber get batch => throw _privateConstructorUsedError;
@@ -58,9 +59,11 @@ abstract class $SubmitMaterialInfoCopyWith<$Res> {
       double mrp,
       String promoType,
       bool promoStatus,
+      PrincipalData principalData,
       BatchNumber batch});
 
   $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
+  $PrincipalDataCopyWith<$Res> get principalData;
 }
 
 /// @nodoc
@@ -88,6 +91,7 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
     Object? mrp = null,
     Object? promoType = null,
     Object? promoStatus = null,
+    Object? principalData = null,
     Object? batch = null,
   }) {
     return _then(_value.copyWith(
@@ -139,6 +143,10 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
           ? _value.promoStatus
           : promoStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      principalData: null == principalData
+          ? _value.principalData
+          : principalData // ignore: cast_nullable_to_non_nullable
+              as PrincipalData,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -152,6 +160,14 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
     return $MaterialItemOverrideCopyWith<$Res>(_value.materialItemOverride,
         (value) {
       return _then(_value.copyWith(materialItemOverride: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PrincipalDataCopyWith<$Res> get principalData {
+    return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
+      return _then(_value.copyWith(principalData: value) as $Val);
     });
   }
 }
@@ -177,10 +193,13 @@ abstract class _$$_SubmitMaterialInfoCopyWith<$Res>
       double mrp,
       String promoType,
       bool promoStatus,
+      PrincipalData principalData,
       BatchNumber batch});
 
   @override
   $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
+  @override
+  $PrincipalDataCopyWith<$Res> get principalData;
 }
 
 /// @nodoc
@@ -206,6 +225,7 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
     Object? mrp = null,
     Object? promoType = null,
     Object? promoStatus = null,
+    Object? principalData = null,
     Object? batch = null,
   }) {
     return _then(_$_SubmitMaterialInfo(
@@ -257,6 +277,10 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
           ? _value.promoStatus
           : promoStatus // ignore: cast_nullable_to_non_nullable
               as bool,
+      principalData: null == principalData
+          ? _value.principalData
+          : principalData // ignore: cast_nullable_to_non_nullable
+              as PrincipalData,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -281,6 +305,7 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
       required this.mrp,
       required this.promoType,
       required this.promoStatus,
+      required this.principalData,
       required this.batch})
       : _bonuses = bonuses,
         super._();
@@ -315,6 +340,8 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   final String promoType;
   @override
   final bool promoStatus;
+  @override
+  final PrincipalData principalData;
 
   ///Todo: consider to delete it
   @override
@@ -322,7 +349,7 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
 
   @override
   String toString() {
-    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, productType: $productType, parentID: $parentID, comment: $comment, materialItemOverride: $materialItemOverride, price: $price, tax: $tax, mrp: $mrp, promoType: $promoType, promoStatus: $promoStatus, batch: $batch)';
+    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, productType: $productType, parentID: $parentID, comment: $comment, materialItemOverride: $materialItemOverride, price: $price, tax: $tax, mrp: $mrp, promoType: $promoType, promoStatus: $promoStatus, principalData: $principalData, batch: $batch)';
   }
 
   @override
@@ -349,6 +376,8 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
                 other.promoType == promoType) &&
             (identical(other.promoStatus, promoStatus) ||
                 other.promoStatus == promoStatus) &&
+            (identical(other.principalData, principalData) ||
+                other.principalData == principalData) &&
             (identical(other.batch, batch) || other.batch == batch));
   }
 
@@ -367,6 +396,7 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
       mrp,
       promoType,
       promoStatus,
+      principalData,
       batch);
 
   @JsonKey(ignore: true)
@@ -391,6 +421,7 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
       required final double mrp,
       required final String promoType,
       required final bool promoStatus,
+      required final PrincipalData principalData,
       required final BatchNumber batch}) = _$_SubmitMaterialInfo;
   const _SubmitMaterialInfo._() : super._();
 
@@ -418,6 +449,8 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   String get promoType;
   @override
   bool get promoStatus;
+  @override
+  PrincipalData get principalData;
   @override
 
   ///Todo: consider to delete it

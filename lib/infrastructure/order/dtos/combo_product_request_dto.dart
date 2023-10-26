@@ -64,8 +64,9 @@ class ComboProductRequestDto with _$ComboProductRequestDto {
       listPrice: comboProductRequest.listPrice,
       finalIndividualPrice: comboProductRequest.finalIndividualPrice,
       productId: comboProductRequest.productId.getOrDefaultValue(''),
-      principleName: comboProductRequest.principalName.name,
-      principalCode: comboProductRequest.principalCode.getOrDefaultValue(''),
+      principleName: comboProductRequest.principalData.principalName.name,
+      principalCode:
+          comboProductRequest.principalData.principalCode.getOrDefaultValue(''),
       materialDescription: comboProductRequest.materialDescription,
       minQty: comboProductRequest.minQty,
       conditionNumber: comboProductRequest.conditionNumber,

@@ -1,30 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
-import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
-import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/request_delivery_date.dart';
-import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
+part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 
-class DeliveryInfo extends StatefulWidget {
+class _DeliveryInfo extends StatefulWidget {
   final Map<DeliveryInfoLabel, FocusNode> focusNodes;
-  const DeliveryInfo({
+  const _DeliveryInfo({
     Key? key,
     required this.focusNodes,
   }) : super(key: key);
 
   @override
-  State<DeliveryInfo> createState() => _DeliveryInfoState();
+  State<_DeliveryInfo> createState() => _DeliveryInfoState();
 }
 
-class _DeliveryInfoState extends State<DeliveryInfo> {
+class _DeliveryInfoState extends State<_DeliveryInfo> {
   final ValueNotifier<bool> _isDisplayDeliveryInfo = ValueNotifier<bool>(true);
 
   @override
@@ -102,7 +89,7 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                     FocusNode(),
                               ),
                               if (config.enableFutureDeliveryDay)
-                                RequestDeliveryDate(
+                                _RequestDeliveryDate(
                                   deliveryInfoData: state.deliveryInfoData,
                                   nextDayNumber:
                                       config.futureDeliveryDay.intValue,

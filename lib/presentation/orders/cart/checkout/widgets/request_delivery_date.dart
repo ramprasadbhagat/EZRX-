@@ -1,27 +1,20 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
-import 'package:ezrxmobile/domain/utils/date_time_utils.dart';
-import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 
-class RequestDeliveryDate extends StatefulWidget {
+class _RequestDeliveryDate extends StatefulWidget {
   final DeliveryInfoData deliveryInfoData;
   final int nextDayNumber;
 
-  const RequestDeliveryDate({
+  const _RequestDeliveryDate({
     required this.nextDayNumber,
     required this.deliveryInfoData,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<RequestDeliveryDate> createState() => _RequestDeliveryDateState();
+  State<_RequestDeliveryDate> createState() => _RequestDeliveryDateState();
 }
 
-class _RequestDeliveryDateState extends State<RequestDeliveryDate> {
+class _RequestDeliveryDateState extends State<_RequestDeliveryDate> {
   late TextEditingController _deliveryDateText;
   late DateTime _currentDate;
 

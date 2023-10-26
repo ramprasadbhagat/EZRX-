@@ -615,10 +615,8 @@ void _addToCart({
           .productDetailAggregate
           .materialInfo
           .materialNumber;
-      if (_checkIfTheCartContainsTheCurrentComboDeal(
-        cartState: stateCart,
-        price: price,
-      )) {
+      if (stateCart.getCurrentComboItemByComboDealId(price.comboDeal.id) !=
+          PriceAggregate.empty()) {
         _initComboDealAndNavigate(
           context: context,
           cartState: stateCart,
@@ -671,26 +669,6 @@ void upsertCart({
       );
 }
 
-bool _checkIfTheCartContainsTheCurrentComboDeal({
-  required CartState cartState,
-  required Price price,
-}) {
-  return _getCurrentComboItemInCartByMaterialNumber(
-        cartState: cartState,
-        price: price,
-      ) !=
-      PriceAggregate.empty();
-}
-
-PriceAggregate _getCurrentComboItemInCartByMaterialNumber({
-  required Price price,
-  required CartState cartState,
-}) {
-  final currentMaterialNumbers = price.comboDeal.category.values;
-
-  return cartState.getCurrentComboItemByMaterialNumbers(currentMaterialNumbers);
-}
-
 void _initComboDealAndNavigate({
   required BuildContext context,
   required CartState cartState,
@@ -701,10 +679,9 @@ void _initComboDealAndNavigate({
       .read<ComboDealListBloc>()
       .state
       .getComboDeal(comboDealId: price.comboDeal.id);
-  final overrideQuantity = _getCurrentComboItemInCartByMaterialNumber(
-    cartState: cartState,
-    price: price,
-  ).comboMaterialsCurrentQuantity;
+  final overrideQuantity = cartState
+      .getCurrentComboItemByComboDealId(price.comboDeal.id)
+      .comboMaterialsCurrentQuantity;
 
   context.read<ComboDealMaterialDetailBloc>().add(
         ComboDealMaterialDetailEvent.cartContainsCurrentCombo(

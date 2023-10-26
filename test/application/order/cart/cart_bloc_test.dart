@@ -2557,7 +2557,7 @@ void main() {
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
           );
           expect(
-            cartBlocState.totalMaterialPriceWithTax,
+            cartBlocState.totalMaterialsPriceWithTax,
             273.6,
           );
         },
@@ -3079,7 +3079,7 @@ void main() {
             ],
           );
           expect(
-            cartBlocState.totalPriceWithTax,
+            cartBlocState.grandTotal,
             273.6,
           );
         },

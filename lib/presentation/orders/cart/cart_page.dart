@@ -102,7 +102,7 @@ class _CartPageState extends State<CartPage> {
         ),
         BlocListener<CartBloc, CartState>(
           listenWhen: (previous, current) =>
-              previous.totalPriceWithTax != current.totalPriceWithTax &&
+              previous.grandTotal != current.grandTotal &&
                   !current.isFetchingCartProductDetail ||
               previous.isMappingPrice != current.isMappingPrice &&
                   !current.isMappingPrice ||
@@ -113,7 +113,7 @@ class _CartPageState extends State<CartPage> {
             context.read<OrderEligibilityBloc>().add(
                   OrderEligibilityEvent.update(
                     cartItems: state.cartProducts,
-                    grandTotal: state.totalPriceWithTax,
+                    grandTotal: state.grandTotal,
                     orderType: context
                         .read<EligibilityBloc>()
                         .state

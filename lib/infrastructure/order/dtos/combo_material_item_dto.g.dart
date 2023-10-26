@@ -19,7 +19,7 @@ _$_ComboMaterialItemDto _$$_ComboMaterialItemDtoFromJson(
       mandatory: json['mandatory'] as bool? ?? false,
       suffix: json['suffix'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
-      principleName: json['principalName'] as String? ?? '',
+      principalName: json['principalName'] as String? ?? '',
       listPrice: (json['listPrice'] as num?)?.toDouble() ?? 0.0,
       itemCheck: json['ttemCheck'] as bool? ?? false,
       principalCode: json['principalCode'] as String? ?? '',
@@ -32,9 +32,10 @@ _$_ComboMaterialItemDto _$$_ComboMaterialItemDtoFromJson(
       language: json['language'] as String? ?? '',
       materialNumber: json['materialNumber'] as String? ?? 'EN',
       taxM1: json['taxM1'] as String? ?? '',
-      taxes:
-          (json['taxes'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
+      tax: (handleTax(json, 'taxes') as num).toDouble(),
+      isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,
+      hidePrice: json['hidePrice'] as bool? ?? false,
+      taxClassification: json['taxClassification'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_ComboMaterialItemDtoToJson(
@@ -50,7 +51,7 @@ Map<String, dynamic> _$$_ComboMaterialItemDtoToJson(
       'mandatory': instance.mandatory,
       'suffix': instance.suffix,
       'materialDescription': instance.materialDescription,
-      'principalName': instance.principleName,
+      'principalName': instance.principalName,
       'listPrice': instance.listPrice,
       'ttemCheck': instance.itemCheck,
       'principalCode': instance.principalCode,
@@ -62,5 +63,8 @@ Map<String, dynamic> _$$_ComboMaterialItemDtoToJson(
       'language': instance.language,
       'materialNumber': instance.materialNumber,
       'taxM1': instance.taxM1,
-      'taxes': instance.taxes,
+      'taxes': instance.tax,
+      'isFOCMaterial': instance.isFOCMaterial,
+      'hidePrice': instance.hidePrice,
+      'taxClassification': instance.taxClassification,
     };

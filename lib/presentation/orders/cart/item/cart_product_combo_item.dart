@@ -87,7 +87,6 @@ class _ComboSubTotalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: Handle tax display later in here
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -137,6 +136,28 @@ class _ComboSubTotalSection extends StatelessWidget {
             ),
           ],
         ),
+        if (comboMaterialItem.showTaxBreakDown &&
+            !comboMaterialItem.materialInfo.isFOCMaterial)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              PriceComponent(
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                price: comboMaterialItem.itemTax.toString(),
+                title: '+ ',
+                type: PriceStyle.taxPrice,
+              ),
+              Text(
+                ' (${comboMaterialItem.itemTaxPercentPadded}% tax)',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: ZPColors.darkGray,
+                    ),
+              ),
+            ],
+          ),
         PriceComponent(
           key: WidgetKeys.cartItemProductTotalPrice,
           salesOrgConfig: context.read<EligibilityBloc>().state.salesOrgConfigs,
@@ -194,7 +215,7 @@ class _MaterialDetails extends StatelessWidget {
             style: Theme.of(context).textTheme.labelMedium,
           ),
           Text(
-            comboMaterialItem.principalName.name,
+            comboMaterialItem.principalData.principalName.name,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontSize: 10,
                   color: ZPColors.neutralsGrey1,

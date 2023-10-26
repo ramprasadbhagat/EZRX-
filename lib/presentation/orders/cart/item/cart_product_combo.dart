@@ -27,14 +27,17 @@ part 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets
 
 class CartProductCombo extends StatelessWidget {
   final PriceAggregate cartItem;
+  final bool canEditable;
   const CartProductCombo({
     Key? key,
     required this.cartItem,
+    this.canEditable = false,
   }) : super(key: key);
 
   ComboDealScheme get _comboScheme =>
       cartItem.comboMaterials.firstOrNull?.getScheme(cartItem.comboMaterials) ??
       ComboDealScheme.k1;
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,31 +87,32 @@ class CartProductCombo extends StatelessWidget {
           ),
         );
       },
-      child: Padding(
-        padding: const EdgeInsets.only(top: 25.0),
-        child: CustomSlidable(
-          extentRatio: 0.24,
-          endActionPaneActions: [
-            CustomSlidableAction(
-              key: WidgetKeys.cartItemSwipeDeleteButton,
-              label: '',
-              icon: Icons.delete_outline,
-              onPressed: (v) => _showDeleteComboBottomSheet(
-                context,
-                cartItem: cartItem,
-              ),
-            ),
-          ],
-          child: CustomCard(
-            margin: EdgeInsets.zero,
-            padding: const EdgeInsets.only(bottom: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    ProductTag.comboOffer(),
-                    const Spacer(),
+      child: CustomSlidable(
+        extentRatio: 0.24,
+        endActionPaneActions: canEditable
+            ? [
+                CustomSlidableAction(
+                  key: WidgetKeys.cartItemSwipeDeleteButton,
+                  label: '',
+                  icon: Icons.delete_outline,
+                  onPressed: (v) => _showDeleteComboBottomSheet(
+                    context,
+                    cartItem: cartItem,
+                  ),
+                ),
+              ]
+            : [],
+        child: CustomCard(
+          margin: EdgeInsets.zero,
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  ProductTag.comboOffer(),
+                  const Spacer(),
+                  if (canEditable) ...[
                     TextButton.icon(
                       onPressed: () {
                         context.read<ComboDealListBloc>().add(
@@ -155,47 +159,47 @@ class CartProductCombo extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        context.tr(
-                          _comboScheme.comboDealTitleAppbar,
-                        ),
-                        style: Theme.of(context).textTheme.labelSmall,
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      context.tr(
+                        _comboScheme.comboDealTitleAppbar,
                       ),
-                      Text(
-                        _comboScheme.getRequirementMessage(context),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: ZPColors.darkGray,
-                            ),
-                      ),
-                      const SizedBox(height: 8),
-                      ...cartItem.comboMaterials
-                          .map(
-                            (e) => CartProductComboItem(
-                              comboMaterialItem: e,
-                              comboScheme: _comboScheme,
-                            ),
-                          )
-                          .toList(),
-                    ],
-                  ),
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                    Text(
+                      _comboScheme.getRequirementMessage(context),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: ZPColors.darkGray,
+                          ),
+                    ),
+                    const SizedBox(height: 8),
+                    ...cartItem.comboMaterials
+                        .map(
+                          (e) => CartProductComboItem(
+                            comboMaterialItem: e,
+                            comboScheme: _comboScheme,
+                          ),
+                        )
+                        .toList(),
+                  ],
                 ),
-                const Divider(
-                  indent: 0,
-                  endIndent: 0,
-                  color: ZPColors.accentColor,
-                ),
-                _ComboSubTotalSection(
-                  cartProduct: cartItem,
-                  comboScheme: _comboScheme,
-                ),
-              ],
-            ),
+              ),
+              const Divider(
+                indent: 0,
+                endIndent: 0,
+                color: ZPColors.accentColor,
+              ),
+              _ComboSubTotalSection(
+                cartProduct: cartItem,
+                comboScheme: _comboScheme,
+              ),
+            ],
           ),
         ),
       ),
