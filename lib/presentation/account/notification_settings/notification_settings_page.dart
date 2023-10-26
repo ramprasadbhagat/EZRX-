@@ -96,7 +96,7 @@ class NotificationSettingsPage extends StatelessWidget {
                 ),
               ),
               const _OrderNotificationSection(),
-              const _PaymentNotificationSection()
+              const _PaymentNotificationSection(),
             ],
           ).toList(),
         ),

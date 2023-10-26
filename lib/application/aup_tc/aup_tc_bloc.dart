@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -21,9 +19,9 @@ class AupTcBloc extends Bloc<AupTcEvent, AupTcState> {
   }) : super(AupTcState.initial()) {
     on<AupTcEvent>(_onEvent);
   }
-  Future<void> _onEvent(AupTcEvent event, Emitter<AupTcState> emit) async {
+  void _onEvent(AupTcEvent event, Emitter<AupTcState> emit) {
     event.map(
-      show: (e) async {
+      show: (e) {
         emit(
           state.copyWith(
             showTermsAndCondition: !e.user.acceptPrivacyPolicy,

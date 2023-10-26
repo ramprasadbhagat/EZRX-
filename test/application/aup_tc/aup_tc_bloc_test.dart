@@ -12,7 +12,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAupTcRepository extends Mock implements AupTcRepository {
-  @override
   bool getTncConfig() {
     return true;
   }
