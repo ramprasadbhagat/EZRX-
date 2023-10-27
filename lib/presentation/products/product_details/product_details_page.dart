@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -48,6 +49,7 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/combo_offers_product.dart';
 
 part 'widget/product_image_section.dart';
+part 'widget/stock_quantity.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({Key? key}) : super(key: key);
@@ -358,10 +360,14 @@ class _Footer extends StatefulWidget {
 
 class _FooterState extends State<_Footer> {
   late TextEditingController _quantityEditingController;
-
   @override
   void initState() {
     _quantityEditingController = TextEditingController(text: '1');
+    _quantityEditingController.addListener(() {
+      context
+          .read<ProductDetailBloc>()
+          .add(ProductDetailEvent.updateQty(qty: qty));
+    });
     super.initState();
   }
 
@@ -373,19 +379,22 @@ class _FooterState extends State<_Footer> {
 
   int get qty => int.tryParse(_quantityEditingController.text) ?? 0;
 
-  bool _isEligibleForAddToCart({
+  bool isEligibleForAddToCart({
     required BuildContext context,
-    required Price price,
-    required MaterialInfo materialInfo,
+    required int inputQty,
+    required ProductDetailAggregate productDetailAggregate,
   }) {
-    final disableCreateOrder =
-        !context.read<EligibilityBloc>().state.user.userCanCreateOrder;
+    final materialInfo = productDetailAggregate.materialInfo;
+    final price = context
+            .read<MaterialPriceBloc>()
+            .state
+            .materialPrice[materialInfo.materialNumber] ??
+        Price.empty();
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final disableCreateOrder = !eligibilityState.user.userCanCreateOrder;
     if (disableCreateOrder) return false;
-    final materialWithoutPrice = context
-        .read<EligibilityBloc>()
-        .state
-        .salesOrgConfigs
-        .materialWithoutPrice;
+    final materialWithoutPrice =
+        eligibilityState.salesOrgConfigs.materialWithoutPrice;
     final materialInStock = (!context
             .read<ProductDetailBloc>()
             .state
@@ -393,14 +402,18 @@ class _FooterState extends State<_Footer> {
             .stockInfo
             .inStock
             .isMaterialInStock
-        ? !context.read<EligibilityBloc>().state.doNotAllowOutOfStockMaterials
+        ? !eligibilityState.doNotAllowOutOfStockMaterials
         : true);
+    final validQty = !eligibilityState.salesOrg.isID ||
+        (eligibilityState.salesOrg.isID &&
+            inputQty <= productDetailAggregate.stockInfo.stockQuantity);
 
     return !materialInfo.isSuspended &&
         (materialInfo.isFOCMaterial
             ? (materialWithoutPrice && materialInStock)
             : !(price.finalPrice.isEmpty && !materialWithoutPrice) &&
-                materialInStock);
+                materialInStock) &&
+        validQty;
   }
 
   @override
@@ -410,9 +423,11 @@ class _FooterState extends State<_Footer> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
           buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching,
+              previous.isFetching != current.isFetching ||
+              previous.inputQty != current.inputQty,
           builder: (context, state) {
             final materialInfo = state.productDetailAggregate.materialInfo;
+            final productDetailAggregate = state.productDetailAggregate;
 
             return Column(
               mainAxisSize: MainAxisSize.min,
@@ -504,10 +519,11 @@ class _FooterState extends State<_Footer> {
                               child: ElevatedButton(
                                 onPressed: stateCart.isUpserting ||
                                         state.isFetching ||
-                                        !_isEligibleForAddToCart(
+                                        !isEligibleForAddToCart(
                                           context: context,
-                                          price: price,
-                                          materialInfo: materialInfo,
+                                          inputQty: qty,
+                                          productDetailAggregate:
+                                              productDetailAggregate,
                                         )
                                     ? null
                                     : () {
@@ -534,6 +550,8 @@ class _FooterState extends State<_Footer> {
                     ),
                   ],
                 ),
+                if (context.read<EligibilityBloc>().state.salesOrg.isID)
+                  _StockQuantity(state: state),
                 SizedBox(
                   height: MediaQuery.of(context).viewInsets.bottom * 1.2,
                 ),

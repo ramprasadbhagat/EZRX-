@@ -346,5 +346,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         );
       },
     );
+    on<_UpdateQty>((e, emit) {
+      emit(state.copyWith(inputQty: e.qty));
+    });
   }
 }

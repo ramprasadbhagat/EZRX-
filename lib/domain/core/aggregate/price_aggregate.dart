@@ -94,6 +94,11 @@ class PriceAggregate with _$PriceAggregate {
     return cartProduct;
   }
 
+  bool get isIDMarketAndShowStockError =>
+      salesOrgConfig.salesOrg.isID &&
+      stockQuantity < quantity &&
+      stockQuantity != 0;
+
   List<MaterialInfo> get toStockListMaterials {
     final materialsInfo = <MaterialInfo>[];
     if (materialInfo.type.typeBundle) {
@@ -692,6 +697,13 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get displayCutOffListPrice =>
       price.isCounterOfferRequested && !materialInfo.hidePrice;
+
+  int get stockQuantity => stockInfoList
+      .firstWhere(
+        (element) => element.materialNumber == materialInfo.materialNumber,
+        orElse: () => StockInfo.empty(),
+      )
+      .stockQuantity;
 }
 
 enum PriceType {

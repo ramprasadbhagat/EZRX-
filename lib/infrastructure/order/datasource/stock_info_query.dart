@@ -15,7 +15,8 @@ class StockInfoQueryMutation {
               Batch,
               ExpiryDate,
               InStock,
-              SalesDistrict
+              SalesDistrict,
+              StockQuantity
             }
         }
     ''';

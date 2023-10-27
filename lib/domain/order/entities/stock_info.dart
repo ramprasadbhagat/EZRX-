@@ -29,6 +29,7 @@ class StockInfo with _$StockInfo {
     required BatchNumber batch,
     required MaterialInStock inStock,
     required String salesDistrict,
+    required int stockQuantity,
   }) = _StockInfo;
 
   factory StockInfo.empty() => StockInfo(
@@ -37,6 +38,7 @@ class StockInfo with _$StockInfo {
         batch: BatchNumber(''),
         inStock: MaterialInStock(''),
         salesDistrict: '',
+        stockQuantity: 0,
       );
 
   bool get batchExpiryDateAvailable => batch.isValid() || expiryDate.isValid();

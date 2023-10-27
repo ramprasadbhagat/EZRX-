@@ -36,4 +36,5 @@ class ProductDetailEvent with _$ProductDetailEvent {
     required bool isForSimilarProduct,
     required MaterialNumber materialNumber,
   }) = _DeleteFavourite;
+  factory ProductDetailEvent.updateQty({required int qty}) = _UpdateQty;
 }

@@ -303,6 +303,41 @@ class _MaterialDetails extends StatelessWidget {
             cartItem: cartItem,
             isInvalidCartItem: isInvalidCartItem,
           ),
+          if (cartItem.isIDMarketAndShowStockError)
+            _StockError(
+              stockQuantity: cartItem.stockQuantity,
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StockError extends StatelessWidget {
+  const _StockError({required this.stockQuantity, Key? key}) : super(key: key);
+  final int stockQuantity;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 5),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.error,
+            size: 20,
+            color: ZPColors.red,
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          Text(
+            '${'Stock available'.tr()}: $stockQuantity',
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: ZPColors.red),
+          ),
         ],
       ),
     );

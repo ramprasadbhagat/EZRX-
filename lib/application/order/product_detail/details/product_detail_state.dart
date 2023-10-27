@@ -10,6 +10,7 @@ class ProductDetailState with _$ProductDetailState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required ProductDetailAggregate productDetailAggregate,
     required bool isFetching,
+    required int inputQty,
     @Default(0) int selectedImageIndex,
   }) = _ProductDetailState;
 
@@ -20,6 +21,7 @@ class ProductDetailState with _$ProductDetailState {
         isFetching: false,
         failureOrSuccessOption: none(),
         productDetailAggregate: ProductDetailAggregate.empty(),
+        inputQty: 1,
       );
 
   StringValue get selectedImage {

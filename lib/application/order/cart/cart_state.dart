@@ -489,4 +489,12 @@ class CartState with _$CartState {
         (item) => (item.containComboDealInCart(comboDealId)),
         orElse: () => PriceAggregate.empty(),
       );
+
+  bool get isNotAvailableToCheckoutForID =>
+      config.salesOrg.isID &&
+      cartProducts.any(
+        (element) =>
+            element.stockQuantity != 0 &&
+            element.stockQuantity < element.quantity,
+      );
 }

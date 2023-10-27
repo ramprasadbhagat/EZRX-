@@ -215,6 +215,8 @@ mixin _$StockInfoDto {
   String get batch => throw _privateConstructorUsedError;
   @JsonKey(name: 'InStock', defaultValue: '')
   String get inStock => throw _privateConstructorUsedError;
+  @JsonKey(name: 'StockQuantity', defaultValue: 0)
+  int get stockQuantity => throw _privateConstructorUsedError;
   @JsonKey(name: 'SalesDistrict', defaultValue: '')
   String get salesDistrict => throw _privateConstructorUsedError;
 
@@ -235,6 +237,7 @@ abstract class $StockInfoDtoCopyWith<$Res> {
       @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'Batch', defaultValue: '') String batch,
       @JsonKey(name: 'InStock', defaultValue: '') String inStock,
+      @JsonKey(name: 'StockQuantity', defaultValue: 0) int stockQuantity,
       @JsonKey(name: 'SalesDistrict', defaultValue: '') String salesDistrict});
 }
 
@@ -255,6 +258,7 @@ class _$StockInfoDtoCopyWithImpl<$Res, $Val extends StockInfoDto>
     Object? expiryDate = null,
     Object? batch = null,
     Object? inStock = null,
+    Object? stockQuantity = null,
     Object? salesDistrict = null,
   }) {
     return _then(_value.copyWith(
@@ -274,6 +278,10 @@ class _$StockInfoDtoCopyWithImpl<$Res, $Val extends StockInfoDto>
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
               as String,
+      stockQuantity: null == stockQuantity
+          ? _value.stockQuantity
+          : stockQuantity // ignore: cast_nullable_to_non_nullable
+              as int,
       salesDistrict: null == salesDistrict
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
@@ -295,6 +303,7 @@ abstract class _$$_StockInfoDtoCopyWith<$Res>
       @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'Batch', defaultValue: '') String batch,
       @JsonKey(name: 'InStock', defaultValue: '') String inStock,
+      @JsonKey(name: 'StockQuantity', defaultValue: 0) int stockQuantity,
       @JsonKey(name: 'SalesDistrict', defaultValue: '') String salesDistrict});
 }
 
@@ -313,6 +322,7 @@ class __$$_StockInfoDtoCopyWithImpl<$Res>
     Object? expiryDate = null,
     Object? batch = null,
     Object? inStock = null,
+    Object? stockQuantity = null,
     Object? salesDistrict = null,
   }) {
     return _then(_$_StockInfoDto(
@@ -332,6 +342,10 @@ class __$$_StockInfoDtoCopyWithImpl<$Res>
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
               as String,
+      stockQuantity: null == stockQuantity
+          ? _value.stockQuantity
+          : stockQuantity // ignore: cast_nullable_to_non_nullable
+              as int,
       salesDistrict: null == salesDistrict
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
@@ -349,6 +363,8 @@ class _$_StockInfoDto extends _StockInfoDto {
       @JsonKey(name: 'ExpiryDate', defaultValue: '') required this.expiryDate,
       @JsonKey(name: 'Batch', defaultValue: '') required this.batch,
       @JsonKey(name: 'InStock', defaultValue: '') required this.inStock,
+      @JsonKey(name: 'StockQuantity', defaultValue: 0)
+      required this.stockQuantity,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
       required this.salesDistrict})
       : super._();
@@ -369,12 +385,15 @@ class _$_StockInfoDto extends _StockInfoDto {
   @JsonKey(name: 'InStock', defaultValue: '')
   final String inStock;
   @override
+  @JsonKey(name: 'StockQuantity', defaultValue: 0)
+  final int stockQuantity;
+  @override
   @JsonKey(name: 'SalesDistrict', defaultValue: '')
   final String salesDistrict;
 
   @override
   String toString() {
-    return 'StockInfoDto(materialNumber: $materialNumber, expiryDate: $expiryDate, batch: $batch, inStock: $inStock, salesDistrict: $salesDistrict)';
+    return 'StockInfoDto(materialNumber: $materialNumber, expiryDate: $expiryDate, batch: $batch, inStock: $inStock, stockQuantity: $stockQuantity, salesDistrict: $salesDistrict)';
   }
 
   @override
@@ -388,14 +407,16 @@ class _$_StockInfoDto extends _StockInfoDto {
                 other.expiryDate == expiryDate) &&
             (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.inStock, inStock) || other.inStock == inStock) &&
+            (identical(other.stockQuantity, stockQuantity) ||
+                other.stockQuantity == stockQuantity) &&
             (identical(other.salesDistrict, salesDistrict) ||
                 other.salesDistrict == salesDistrict));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, materialNumber, expiryDate, batch, inStock, salesDistrict);
+  int get hashCode => Object.hash(runtimeType, materialNumber, expiryDate,
+      batch, inStock, stockQuantity, salesDistrict);
 
   @JsonKey(ignore: true)
   @override
@@ -419,6 +440,8 @@ abstract class _StockInfoDto extends StockInfoDto {
       required final String expiryDate,
       @JsonKey(name: 'Batch', defaultValue: '') required final String batch,
       @JsonKey(name: 'InStock', defaultValue: '') required final String inStock,
+      @JsonKey(name: 'StockQuantity', defaultValue: 0)
+      required final int stockQuantity,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
       required final String salesDistrict}) = _$_StockInfoDto;
   const _StockInfoDto._() : super._();
@@ -438,6 +461,9 @@ abstract class _StockInfoDto extends StockInfoDto {
   @override
   @JsonKey(name: 'InStock', defaultValue: '')
   String get inStock;
+  @override
+  @JsonKey(name: 'StockQuantity', defaultValue: 0)
+  int get stockQuantity;
   @override
   @JsonKey(name: 'SalesDistrict', defaultValue: '')
   String get salesDistrict;

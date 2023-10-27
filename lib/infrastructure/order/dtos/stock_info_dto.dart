@@ -36,6 +36,7 @@ class StockInfoDto with _$StockInfoDto {
     @JsonKey(name: 'ExpiryDate', defaultValue: '') required String expiryDate,
     @JsonKey(name: 'Batch', defaultValue: '') required String batch,
     @JsonKey(name: 'InStock', defaultValue: '') required String inStock,
+    @JsonKey(name: 'StockQuantity', defaultValue: 0) required int stockQuantity,
     @JsonKey(name: 'SalesDistrict', defaultValue: '')
         required String salesDistrict,
   }) = _StockInfoDto;
@@ -47,6 +48,7 @@ class StockInfoDto with _$StockInfoDto {
       batch: stockInfo.batch.getOrDefaultValue(''),
       inStock: stockInfo.inStock.getOrDefaultValue(''),
       salesDistrict: stockInfo.salesDistrict,
+      stockQuantity: stockInfo.stockQuantity,
     );
   }
 
@@ -57,6 +59,7 @@ class StockInfoDto with _$StockInfoDto {
       expiryDate: DateTimeStringValue(expiryDate),
       inStock: MaterialInStock(inStock),
       salesDistrict: salesDistrict,
+      stockQuantity: stockQuantity,
     );
   }
 

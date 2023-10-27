@@ -36,6 +36,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
             ),
             const _CartPagePriceMessage(),
             const _MovCheckMessage(),
+            const _StockInvalidIDMarketMessage(),
             ListTile(
               dense: true,
               visualDensity: VisualDensity.compact,
@@ -126,7 +127,8 @@ class _CartPageCheckoutButton extends StatelessWidget {
                   child: ElevatedButton(
                     key: WidgetKeys.checkoutButton,
                     onPressed: state.isCartDetailsFetching ||
-                            materialPriceState.isFetching
+                            materialPriceState.isFetching ||
+                            state.isNotAvailableToCheckoutForID
                         ? null
                         : () => _onCheckOutPressed(context),
                     child: const Text('Check out').tr(),

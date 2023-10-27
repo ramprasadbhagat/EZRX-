@@ -37,6 +37,7 @@ mixin _$ProductDetailEvent {
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
+    required TResult Function(int qty) updateQty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +58,7 @@ mixin _$ProductDetailEvent {
         addFavourite,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult? Function(int qty)? updateQty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +79,7 @@ mixin _$ProductDetailEvent {
         addFavourite,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult Function(int qty)? updateQty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -91,6 +94,7 @@ mixin _$ProductDetailEvent {
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -104,6 +108,7 @@ mixin _$ProductDetailEvent {
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -117,6 +122,7 @@ mixin _$ProductDetailEvent {
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -277,6 +283,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
+    required TResult Function(int qty) updateQty,
   }) {
     return initialized(salesOrganisation, customerCodeInfo, shipToInfo);
   }
@@ -300,6 +307,7 @@ class _$_Initialized implements _Initialized {
         addFavourite,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult? Function(int qty)? updateQty,
   }) {
     return initialized?.call(salesOrganisation, customerCodeInfo, shipToInfo);
   }
@@ -323,6 +331,7 @@ class _$_Initialized implements _Initialized {
         addFavourite,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult Function(int qty)? updateQty,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -343,6 +352,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
   }) {
     return initialized(this);
   }
@@ -359,6 +369,7 @@ class _$_Initialized implements _Initialized {
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
   }) {
     return initialized?.call(this);
   }
@@ -375,6 +386,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -498,6 +510,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
+    required TResult Function(int qty) updateQty,
   }) {
     return fetch(materialNumber, locale, type);
   }
@@ -521,6 +534,7 @@ class _$_Fetch implements _Fetch {
         addFavourite,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult? Function(int qty)? updateQty,
   }) {
     return fetch?.call(materialNumber, locale, type);
   }
@@ -544,6 +558,7 @@ class _$_Fetch implements _Fetch {
         addFavourite,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult Function(int qty)? updateQty,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -564,6 +579,7 @@ class _$_Fetch implements _Fetch {
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
   }) {
     return fetch(this);
   }
@@ -580,6 +596,7 @@ class _$_Fetch implements _Fetch {
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
   }) {
     return fetch?.call(this);
   }
@@ -596,6 +613,7 @@ class _$_Fetch implements _Fetch {
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -703,6 +721,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
+    required TResult Function(int qty) updateQty,
   }) {
     return fetchSimilarProduct(locale);
   }
@@ -726,6 +745,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
         addFavourite,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult? Function(int qty)? updateQty,
   }) {
     return fetchSimilarProduct?.call(locale);
   }
@@ -749,6 +769,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
         addFavourite,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult Function(int qty)? updateQty,
     required TResult orElse(),
   }) {
     if (fetchSimilarProduct != null) {
@@ -769,6 +790,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
   }) {
     return fetchSimilarProduct(this);
   }
@@ -785,6 +807,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
   }) {
     return fetchSimilarProduct?.call(this);
   }
@@ -801,6 +824,7 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
     required TResult orElse(),
   }) {
     if (fetchSimilarProduct != null) {
@@ -912,6 +936,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
+    required TResult Function(int qty) updateQty,
   }) {
     return fetchMetaData(locale, isForBundle);
   }
@@ -935,6 +960,7 @@ class _$_FetchMetaData implements _FetchMetaData {
         addFavourite,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult? Function(int qty)? updateQty,
   }) {
     return fetchMetaData?.call(locale, isForBundle);
   }
@@ -958,6 +984,7 @@ class _$_FetchMetaData implements _FetchMetaData {
         addFavourite,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult Function(int qty)? updateQty,
     required TResult orElse(),
   }) {
     if (fetchMetaData != null) {
@@ -978,6 +1005,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
   }) {
     return fetchMetaData(this);
   }
@@ -994,6 +1022,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
   }) {
     return fetchMetaData?.call(this);
   }
@@ -1010,6 +1039,7 @@ class _$_FetchMetaData implements _FetchMetaData {
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
     required TResult orElse(),
   }) {
     if (fetchMetaData != null) {
@@ -1123,6 +1153,7 @@ class _$_FetchStock implements _FetchStock {
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
+    required TResult Function(int qty) updateQty,
   }) {
     return fetchStock(materialNumber, locale);
   }
@@ -1146,6 +1177,7 @@ class _$_FetchStock implements _FetchStock {
         addFavourite,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult? Function(int qty)? updateQty,
   }) {
     return fetchStock?.call(materialNumber, locale);
   }
@@ -1169,6 +1201,7 @@ class _$_FetchStock implements _FetchStock {
         addFavourite,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult Function(int qty)? updateQty,
     required TResult orElse(),
   }) {
     if (fetchStock != null) {
@@ -1189,6 +1222,7 @@ class _$_FetchStock implements _FetchStock {
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
   }) {
     return fetchStock(this);
   }
@@ -1205,6 +1239,7 @@ class _$_FetchStock implements _FetchStock {
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
   }) {
     return fetchStock?.call(this);
   }
@@ -1221,6 +1256,7 @@ class _$_FetchStock implements _FetchStock {
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
     required TResult orElse(),
   }) {
     if (fetchStock != null) {
@@ -1344,6 +1380,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
+    required TResult Function(int qty) updateQty,
   }) {
     return fetchStockForBundle(materials, locale);
   }
@@ -1367,6 +1404,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
         addFavourite,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult? Function(int qty)? updateQty,
   }) {
     return fetchStockForBundle?.call(materials, locale);
   }
@@ -1390,6 +1428,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
         addFavourite,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult Function(int qty)? updateQty,
     required TResult orElse(),
   }) {
     if (fetchStockForBundle != null) {
@@ -1410,6 +1449,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
   }) {
     return fetchStockForBundle(this);
   }
@@ -1426,6 +1466,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
   }) {
     return fetchStockForBundle?.call(this);
   }
@@ -1442,6 +1483,7 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
     required TResult orElse(),
   }) {
     if (fetchStockForBundle != null) {
@@ -1546,6 +1588,7 @@ class _$_ChangeImage implements _ChangeImage {
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
+    required TResult Function(int qty) updateQty,
   }) {
     return changeImage(index);
   }
@@ -1569,6 +1612,7 @@ class _$_ChangeImage implements _ChangeImage {
         addFavourite,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult? Function(int qty)? updateQty,
   }) {
     return changeImage?.call(index);
   }
@@ -1592,6 +1636,7 @@ class _$_ChangeImage implements _ChangeImage {
         addFavourite,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult Function(int qty)? updateQty,
     required TResult orElse(),
   }) {
     if (changeImage != null) {
@@ -1612,6 +1657,7 @@ class _$_ChangeImage implements _ChangeImage {
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
   }) {
     return changeImage(this);
   }
@@ -1628,6 +1674,7 @@ class _$_ChangeImage implements _ChangeImage {
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
   }) {
     return changeImage?.call(this);
   }
@@ -1644,6 +1691,7 @@ class _$_ChangeImage implements _ChangeImage {
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
     required TResult orElse(),
   }) {
     if (changeImage != null) {
@@ -1757,6 +1805,7 @@ class _$_AddFavourite implements _AddFavourite {
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
+    required TResult Function(int qty) updateQty,
   }) {
     return addFavourite(isForSimilarProduct, materialNumber);
   }
@@ -1780,6 +1829,7 @@ class _$_AddFavourite implements _AddFavourite {
         addFavourite,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult? Function(int qty)? updateQty,
   }) {
     return addFavourite?.call(isForSimilarProduct, materialNumber);
   }
@@ -1803,6 +1853,7 @@ class _$_AddFavourite implements _AddFavourite {
         addFavourite,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult Function(int qty)? updateQty,
     required TResult orElse(),
   }) {
     if (addFavourite != null) {
@@ -1823,6 +1874,7 @@ class _$_AddFavourite implements _AddFavourite {
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
   }) {
     return addFavourite(this);
   }
@@ -1839,6 +1891,7 @@ class _$_AddFavourite implements _AddFavourite {
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
   }) {
     return addFavourite?.call(this);
   }
@@ -1855,6 +1908,7 @@ class _$_AddFavourite implements _AddFavourite {
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
     required TResult orElse(),
   }) {
     if (addFavourite != null) {
@@ -1971,6 +2025,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     required TResult Function(
             bool isForSimilarProduct, MaterialNumber materialNumber)
         deleteFavourite,
+    required TResult Function(int qty) updateQty,
   }) {
     return deleteFavourite(isForSimilarProduct, materialNumber);
   }
@@ -1994,6 +2049,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         addFavourite,
     TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult? Function(int qty)? updateQty,
   }) {
     return deleteFavourite?.call(isForSimilarProduct, materialNumber);
   }
@@ -2017,6 +2073,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
         addFavourite,
     TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
         deleteFavourite,
+    TResult Function(int qty)? updateQty,
     required TResult orElse(),
   }) {
     if (deleteFavourite != null) {
@@ -2037,6 +2094,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     required TResult Function(_ChangeImage value) changeImage,
     required TResult Function(_AddFavourite value) addFavourite,
     required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
   }) {
     return deleteFavourite(this);
   }
@@ -2053,6 +2111,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult? Function(_ChangeImage value)? changeImage,
     TResult? Function(_AddFavourite value)? addFavourite,
     TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
   }) {
     return deleteFavourite?.call(this);
   }
@@ -2069,6 +2128,7 @@ class _$_DeleteFavourite implements _DeleteFavourite {
     TResult Function(_ChangeImage value)? changeImage,
     TResult Function(_AddFavourite value)? addFavourite,
     TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
     required TResult orElse(),
   }) {
     if (deleteFavourite != null) {
@@ -2091,6 +2151,211 @@ abstract class _DeleteFavourite implements ProductDetailEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdateQtyCopyWith<$Res> {
+  factory _$$_UpdateQtyCopyWith(
+          _$_UpdateQty value, $Res Function(_$_UpdateQty) then) =
+      __$$_UpdateQtyCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int qty});
+}
+
+/// @nodoc
+class __$$_UpdateQtyCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$_UpdateQty>
+    implements _$$_UpdateQtyCopyWith<$Res> {
+  __$$_UpdateQtyCopyWithImpl(
+      _$_UpdateQty _value, $Res Function(_$_UpdateQty) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? qty = null,
+  }) {
+    return _then(_$_UpdateQty(
+      qty: null == qty
+          ? _value.qty
+          : qty // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateQty implements _UpdateQty {
+  _$_UpdateQty({required this.qty});
+
+  @override
+  final int qty;
+
+  @override
+  String toString() {
+    return 'ProductDetailEvent.updateQty(qty: $qty)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateQty &&
+            (identical(other.qty, qty) || other.qty == qty));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, qty);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateQtyCopyWith<_$_UpdateQty> get copyWith =>
+      __$$_UpdateQtyCopyWithImpl<_$_UpdateQty>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(
+            MaterialNumber materialNumber, Locale locale, MaterialInfoType type)
+        fetch,
+    required TResult Function(Locale locale) fetchSimilarProduct,
+    required TResult Function(Locale locale, bool isForBundle) fetchMetaData,
+    required TResult Function(MaterialNumber materialNumber, Locale locale)
+        fetchStock,
+    required TResult Function(List<MaterialInfo> materials, Locale locale)
+        fetchStockForBundle,
+    required TResult Function(int index) changeImage,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        addFavourite,
+    required TResult Function(
+            bool isForSimilarProduct, MaterialNumber materialNumber)
+        deleteFavourite,
+    required TResult Function(int qty) updateQty,
+  }) {
+    return updateQty(qty);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(MaterialNumber materialNumber, Locale locale,
+            MaterialInfoType type)?
+        fetch,
+    TResult? Function(Locale locale)? fetchSimilarProduct,
+    TResult? Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult? Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
+    TResult? Function(List<MaterialInfo> materials, Locale locale)?
+        fetchStockForBundle,
+    TResult? Function(int index)? changeImage,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult? Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+    TResult? Function(int qty)? updateQty,
+  }) {
+    return updateQty?.call(qty);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(MaterialNumber materialNumber, Locale locale,
+            MaterialInfoType type)?
+        fetch,
+    TResult Function(Locale locale)? fetchSimilarProduct,
+    TResult Function(Locale locale, bool isForBundle)? fetchMetaData,
+    TResult Function(MaterialNumber materialNumber, Locale locale)? fetchStock,
+    TResult Function(List<MaterialInfo> materials, Locale locale)?
+        fetchStockForBundle,
+    TResult Function(int index)? changeImage,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        addFavourite,
+    TResult Function(bool isForSimilarProduct, MaterialNumber materialNumber)?
+        deleteFavourite,
+    TResult Function(int qty)? updateQty,
+    required TResult orElse(),
+  }) {
+    if (updateQty != null) {
+      return updateQty(qty);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchSimilarProduct value) fetchSimilarProduct,
+    required TResult Function(_FetchMetaData value) fetchMetaData,
+    required TResult Function(_FetchStock value) fetchStock,
+    required TResult Function(_FetchStockForBundle value) fetchStockForBundle,
+    required TResult Function(_ChangeImage value) changeImage,
+    required TResult Function(_AddFavourite value) addFavourite,
+    required TResult Function(_DeleteFavourite value) deleteFavourite,
+    required TResult Function(_UpdateQty value) updateQty,
+  }) {
+    return updateQty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult? Function(_FetchMetaData value)? fetchMetaData,
+    TResult? Function(_FetchStock value)? fetchStock,
+    TResult? Function(_FetchStockForBundle value)? fetchStockForBundle,
+    TResult? Function(_ChangeImage value)? changeImage,
+    TResult? Function(_AddFavourite value)? addFavourite,
+    TResult? Function(_DeleteFavourite value)? deleteFavourite,
+    TResult? Function(_UpdateQty value)? updateQty,
+  }) {
+    return updateQty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchSimilarProduct value)? fetchSimilarProduct,
+    TResult Function(_FetchMetaData value)? fetchMetaData,
+    TResult Function(_FetchStock value)? fetchStock,
+    TResult Function(_FetchStockForBundle value)? fetchStockForBundle,
+    TResult Function(_ChangeImage value)? changeImage,
+    TResult Function(_AddFavourite value)? addFavourite,
+    TResult Function(_DeleteFavourite value)? deleteFavourite,
+    TResult Function(_UpdateQty value)? updateQty,
+    required TResult orElse(),
+  }) {
+    if (updateQty != null) {
+      return updateQty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateQty implements ProductDetailEvent {
+  factory _UpdateQty({required final int qty}) = _$_UpdateQty;
+
+  int get qty;
+  @JsonKey(ignore: true)
+  _$$_UpdateQtyCopyWith<_$_UpdateQty> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ProductDetailState {
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
@@ -2100,6 +2365,7 @@ mixin _$ProductDetailState {
   ProductDetailAggregate get productDetailAggregate =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
+  int get inputQty => throw _privateConstructorUsedError;
   int get selectedImageIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -2120,6 +2386,7 @@ abstract class $ProductDetailStateCopyWith<$Res> {
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       ProductDetailAggregate productDetailAggregate,
       bool isFetching,
+      int inputQty,
       int selectedImageIndex});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -2147,6 +2414,7 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
     Object? failureOrSuccessOption = null,
     Object? productDetailAggregate = null,
     Object? isFetching = null,
+    Object? inputQty = null,
     Object? selectedImageIndex = null,
   }) {
     return _then(_value.copyWith(
@@ -2174,6 +2442,10 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      inputQty: null == inputQty
+          ? _value.inputQty
+          : inputQty // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedImageIndex: null == selectedImageIndex
           ? _value.selectedImageIndex
           : selectedImageIndex // ignore: cast_nullable_to_non_nullable
@@ -2230,6 +2502,7 @@ abstract class _$$_ProductDetailStateCopyWith<$Res>
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       ProductDetailAggregate productDetailAggregate,
       bool isFetching,
+      int inputQty,
       int selectedImageIndex});
 
   @override
@@ -2259,6 +2532,7 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
     Object? failureOrSuccessOption = null,
     Object? productDetailAggregate = null,
     Object? isFetching = null,
+    Object? inputQty = null,
     Object? selectedImageIndex = null,
   }) {
     return _then(_$_ProductDetailState(
@@ -2286,6 +2560,10 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      inputQty: null == inputQty
+          ? _value.inputQty
+          : inputQty // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedImageIndex: null == selectedImageIndex
           ? _value.selectedImageIndex
           : selectedImageIndex // ignore: cast_nullable_to_non_nullable
@@ -2304,6 +2582,7 @@ class _$_ProductDetailState extends _ProductDetailState {
       required this.failureOrSuccessOption,
       required this.productDetailAggregate,
       required this.isFetching,
+      required this.inputQty,
       this.selectedImageIndex = 0})
       : super._();
 
@@ -2320,12 +2599,14 @@ class _$_ProductDetailState extends _ProductDetailState {
   @override
   final bool isFetching;
   @override
+  final int inputQty;
+  @override
   @JsonKey()
   final int selectedImageIndex;
 
   @override
   String toString() {
-    return 'ProductDetailState(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, failureOrSuccessOption: $failureOrSuccessOption, productDetailAggregate: $productDetailAggregate, isFetching: $isFetching, selectedImageIndex: $selectedImageIndex)';
+    return 'ProductDetailState(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, failureOrSuccessOption: $failureOrSuccessOption, productDetailAggregate: $productDetailAggregate, isFetching: $isFetching, inputQty: $inputQty, selectedImageIndex: $selectedImageIndex)';
   }
 
   @override
@@ -2345,6 +2626,8 @@ class _$_ProductDetailState extends _ProductDetailState {
                 other.productDetailAggregate == productDetailAggregate) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
+            (identical(other.inputQty, inputQty) ||
+                other.inputQty == inputQty) &&
             (identical(other.selectedImageIndex, selectedImageIndex) ||
                 other.selectedImageIndex == selectedImageIndex));
   }
@@ -2358,6 +2641,7 @@ class _$_ProductDetailState extends _ProductDetailState {
       failureOrSuccessOption,
       productDetailAggregate,
       isFetching,
+      inputQty,
       selectedImageIndex);
 
   @JsonKey(ignore: true)
@@ -2376,6 +2660,7 @@ abstract class _ProductDetailState extends ProductDetailState {
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final ProductDetailAggregate productDetailAggregate,
       required final bool isFetching,
+      required final int inputQty,
       final int selectedImageIndex}) = _$_ProductDetailState;
   const _ProductDetailState._() : super._();
 
@@ -2391,6 +2676,8 @@ abstract class _ProductDetailState extends ProductDetailState {
   ProductDetailAggregate get productDetailAggregate;
   @override
   bool get isFetching;
+  @override
+  int get inputQty;
   @override
   int get selectedImageIndex;
   @override

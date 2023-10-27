@@ -169,6 +169,7 @@ mixin _$StockInfo {
   BatchNumber get batch => throw _privateConstructorUsedError;
   MaterialInStock get inStock => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
+  int get stockQuantity => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $StockInfoCopyWith<StockInfo> get copyWith =>
@@ -185,7 +186,8 @@ abstract class $StockInfoCopyWith<$Res> {
       DateTimeStringValue expiryDate,
       BatchNumber batch,
       MaterialInStock inStock,
-      String salesDistrict});
+      String salesDistrict,
+      int stockQuantity});
 }
 
 /// @nodoc
@@ -206,6 +208,7 @@ class _$StockInfoCopyWithImpl<$Res, $Val extends StockInfo>
     Object? batch = null,
     Object? inStock = null,
     Object? salesDistrict = null,
+    Object? stockQuantity = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -228,6 +231,10 @@ class _$StockInfoCopyWithImpl<$Res, $Val extends StockInfo>
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
+      stockQuantity: null == stockQuantity
+          ? _value.stockQuantity
+          : stockQuantity // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -244,7 +251,8 @@ abstract class _$$_StockInfoCopyWith<$Res> implements $StockInfoCopyWith<$Res> {
       DateTimeStringValue expiryDate,
       BatchNumber batch,
       MaterialInStock inStock,
-      String salesDistrict});
+      String salesDistrict,
+      int stockQuantity});
 }
 
 /// @nodoc
@@ -263,6 +271,7 @@ class __$$_StockInfoCopyWithImpl<$Res>
     Object? batch = null,
     Object? inStock = null,
     Object? salesDistrict = null,
+    Object? stockQuantity = null,
   }) {
     return _then(_$_StockInfo(
       materialNumber: null == materialNumber
@@ -285,6 +294,10 @@ class __$$_StockInfoCopyWithImpl<$Res>
           ? _value.salesDistrict
           : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
+      stockQuantity: null == stockQuantity
+          ? _value.stockQuantity
+          : stockQuantity // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -297,7 +310,8 @@ class _$_StockInfo extends _StockInfo {
       required this.expiryDate,
       required this.batch,
       required this.inStock,
-      required this.salesDistrict})
+      required this.salesDistrict,
+      required this.stockQuantity})
       : super._();
 
   @override
@@ -310,10 +324,12 @@ class _$_StockInfo extends _StockInfo {
   final MaterialInStock inStock;
   @override
   final String salesDistrict;
+  @override
+  final int stockQuantity;
 
   @override
   String toString() {
-    return 'StockInfo(materialNumber: $materialNumber, expiryDate: $expiryDate, batch: $batch, inStock: $inStock, salesDistrict: $salesDistrict)';
+    return 'StockInfo(materialNumber: $materialNumber, expiryDate: $expiryDate, batch: $batch, inStock: $inStock, salesDistrict: $salesDistrict, stockQuantity: $stockQuantity)';
   }
 
   @override
@@ -328,12 +344,14 @@ class _$_StockInfo extends _StockInfo {
             (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.inStock, inStock) || other.inStock == inStock) &&
             (identical(other.salesDistrict, salesDistrict) ||
-                other.salesDistrict == salesDistrict));
+                other.salesDistrict == salesDistrict) &&
+            (identical(other.stockQuantity, stockQuantity) ||
+                other.stockQuantity == stockQuantity));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, materialNumber, expiryDate, batch, inStock, salesDistrict);
+  int get hashCode => Object.hash(runtimeType, materialNumber, expiryDate,
+      batch, inStock, salesDistrict, stockQuantity);
 
   @JsonKey(ignore: true)
   @override
@@ -348,7 +366,8 @@ abstract class _StockInfo extends StockInfo {
       required final DateTimeStringValue expiryDate,
       required final BatchNumber batch,
       required final MaterialInStock inStock,
-      required final String salesDistrict}) = _$_StockInfo;
+      required final String salesDistrict,
+      required final int stockQuantity}) = _$_StockInfo;
   const _StockInfo._() : super._();
 
   @override
@@ -361,6 +380,8 @@ abstract class _StockInfo extends StockInfo {
   MaterialInStock get inStock;
   @override
   String get salesDistrict;
+  @override
+  int get stockQuantity;
   @override
   @JsonKey(ignore: true)
   _$$_StockInfoCopyWith<_$_StockInfo> get copyWith =>

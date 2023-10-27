@@ -30,6 +30,7 @@ _$_StockInfoDto _$$_StockInfoDtoFromJson(Map<String, dynamic> json) =>
       expiryDate: json['ExpiryDate'] as String? ?? '',
       batch: json['Batch'] as String? ?? '',
       inStock: json['InStock'] as String? ?? '',
+      stockQuantity: json['StockQuantity'] as int? ?? 0,
       salesDistrict: json['SalesDistrict'] as String? ?? '',
     );
 
@@ -39,5 +40,6 @@ Map<String, dynamic> _$$_StockInfoDtoToJson(_$_StockInfoDto instance) =>
       'ExpiryDate': instance.expiryDate,
       'Batch': instance.batch,
       'InStock': instance.inStock,
+      'StockQuantity': instance.stockQuantity,
       'SalesDistrict': instance.salesDistrict,
     };
