@@ -9,8 +9,10 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -200,6 +202,85 @@ void main() {
       await tester.pumpAndSettle();
     },
   );
+
+  testWidgets(
+    'Order summary price check - subTotal & grandTotal price',
+    (tester) async {
+      const finalPrice = 88.0;
+      const vatValue = 9;
+      const quantity = 2;
+      const subTotalValueWithoutTax = finalPrice * quantity;
+      const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
+      const grandTotalValue = subTotalValueWithoutTax + totalTax;
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            enablePaymentTerms: true,
+            vatValue: vatValue,
+            displayItemTaxBreakdown: true,
+            salesOrg: SalesOrg('2601'),
+          ),
+        ),
+      );
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial().copyWith(
+          isConfirming: false,
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              OrderHistoryDetailsOrderItem.empty().copyWith(
+                qty: quantity,
+              )
+            ],
+            orderValue: subTotalValueWithoutTax,
+            totalTax: totalTax,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      final orderSummarySection =
+          find.byKey(WidgetKeys.orderSuccessOrderSummarySection);
+      //sub total (excl. tax)
+      expect(
+        find.descendant(
+          of: orderSummarySection,
+          matching: find.text('Subtotal (excl. tax):'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text
+                  .toPlainText()
+                  .contains(subTotalValueWithoutTax.toStringAsFixed(2)),
+        ),
+        findsOneWidget,
+      );
+      //grand total
+      expect(
+        find.descendant(
+          of: orderSummarySection,
+          matching: find.text('Grand Total:'),
+        ),
+        findsOneWidget,
+      );
+      expect(
+        find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text
+                  .toPlainText()
+                  .contains(grandTotalValue.toStringAsFixed(2)),
+        ),
+        findsOneWidget,
+      );
+    },
+  );
+
 
   // group(
   //   'Test Order Success Page',

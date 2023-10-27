@@ -148,6 +148,34 @@ void main() {
       );
     });
 
+    test('toSubmitMaterialInfo from PriceAggregate should return price', () {
+      const finalPrice = 88.0;
+      const vatValue = 9;
+
+      final customPriceAggregate = emptyPriceAggregate.copyWith(
+        price: Price.empty().copyWith(finalPrice: MaterialPrice(finalPrice)),
+        materialInfo: MaterialInfo.empty().copyWith(
+          materialNumber: MaterialNumber('fake-material'),
+          taxClassification: MaterialTaxClassification('Product : Full Tax'),
+        ),
+        salesOrgConfig: emptySalesOrganisationConfigs.copyWith(
+          enableBatchNumber: false,
+          vatValue: vatValue,
+          displayItemTaxBreakdown: true,
+        ),
+      );
+      final submitMaterialInfo = customPriceAggregate.toSubmitMaterialInfo();
+
+      expect(
+        submitMaterialInfo.mrp,
+        finalPrice + (finalPrice * vatValue) / 100,
+      );
+      expect(
+        submitMaterialInfo.tax,
+        (finalPrice * vatValue) / 100,
+      );
+    });
+
     test(
       'vatCalculation from PriceAggregate',
       () {

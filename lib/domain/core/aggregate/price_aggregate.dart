@@ -158,8 +158,8 @@ class PriceAggregate with _$PriceAggregate {
       parentID: materialInfo.type.typeBundle
           ? bundle.bundleCode
           : materialInfo.parentID,
-      mrp: price.lastPrice.getValue(),
-      tax: itemTax,
+      mrp: price.finalPrice.getValue() + individualItemTax,
+      tax: individualItemTax,
       promoStatus: promoStatus,
       promoType: materialInfo.promoType,
       principalData: materialInfo.principalData,
@@ -316,6 +316,8 @@ class PriceAggregate with _$PriceAggregate {
   double get itemTax {
     return (finalPriceTotal * itemTaxPercent) / 100;
   }
+
+  double get individualItemTax => (finalPrice * itemTaxPercent) / 100;
 
   double get totalVatForBundle =>
       salesOrgConfig.shouldShowTax ? salesOrgConfig.vatValue / 100 : 0.0;
