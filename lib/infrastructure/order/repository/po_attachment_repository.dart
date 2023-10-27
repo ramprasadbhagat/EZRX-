@@ -279,8 +279,13 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       if (defaultTargetPlatform == TargetPlatform.iOS) {
         return const Right(PermissionStatus.granted);
       }
-      if (await deviceInfo.checkIfDeviceIsAndroidWithSDK33()) {
-        return const Right(PermissionStatus.granted);
+      if (await deviceInfo.checkIfDeviceIsAndroidWithSDK30()) {
+        final permissionStatus =
+            await permissionService.requestExternalStoragePermission();
+
+        return permissionStatus == PermissionStatus.granted
+            ? Right(permissionStatus)
+            : const Left(ApiFailure.storagePermissionFailed());
       }
 
       final permissionStatus =
