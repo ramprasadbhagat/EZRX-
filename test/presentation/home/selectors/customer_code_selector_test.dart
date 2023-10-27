@@ -249,7 +249,7 @@ void main() {
       await tester.pump();
 
       final deliveryAddress = find.text(
-        'test-name-1 test-name-2 test-name-3 test-name-4test-street test-street-2 test-street-3 test-street-4 test-street-5, test-city-2, test-city-1 test-postal-code',
+        'test-name-1 test-name-2 test-name-3 test-name-4test-street test-street-2 test-street-3 test-street-4 test-street-5 test-postal-code',
       );
 
       expect(deliveryAddress, findsOneWidget);

@@ -27,6 +27,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_t
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -99,6 +100,7 @@ void main() {
   late CartBlocMock cartBlocMock;
   late ProductImageBloc mockProductImageBloc;
   late PoAttachmentBloc mockPoAttachmentBloc;
+  late List<CustomerCodeInfo> customerCodeInfoList;
   final fakeOrderHistoryDetailsOrderItem =
       OrderHistoryDetailsOrderItem.empty().copyWith(
     expiryDate: DateTimeStringValue('2023-10-04'),
@@ -122,6 +124,8 @@ void main() {
     cartBlocMock = CartBlocMock();
 
     autoRouterMock = locator<AppRouter>();
+    customerCodeInfoList =
+        await CustomerCodeLocalDataSource().getCustomerCodeList();
   });
   group('Order History Details Page', () {
     setUp(() {
@@ -794,6 +798,40 @@ void main() {
         );
         expect(find.byKey(WidgetKeys.offerTag), findsNothing);
       });
+    });
+
+    testWidgets('Test display full customer address', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          customerCodeInfo: customerCodeInfoList.last,
+          shipToInfo: customerCodeInfoList.last.shipToInfos.first,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      const fullCustomerAddress =
+          'RSD HOSPITALS SDN BHD (SJMC)   t/a SUBANG JAYA MEDICAL CENTRE NO 1 JALAN SS 12/1A 47500 SUBANG JAYA SELANGOR 47500';
+      final customerAddressFinder = find.textContaining(fullCustomerAddress);
+
+      expect(customerAddressFinder, findsOneWidget);
+    });
+
+    testWidgets('Test display full ship-to address', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          customerCodeInfo: customerCodeInfoList.last,
+          shipToInfo: customerCodeInfoList.last.shipToInfos.first,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      const fullShipToAddress =
+          'RSD HOSPITALS SDN BHD (SJMC)   t/a SUBANG JAYA MEDICAL CENTRE NO 1 JALAN SS 12/1A 47500 SUBANG JAYA 47500';
+      final shipToAddressFinder = find.textContaining(fullShipToAddress);
+      expect(shipToAddressFinder, findsOneWidget);
     });
   });
 }

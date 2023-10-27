@@ -64,5 +64,5 @@ class ShipToInfo with _$ShipToInfo {
   String get deliveryAddress => '${shipToAddress.toAddress()} $postalCode';
 
   String get fullDeliveryAddress =>
-      '${shipToName.toString()}${shipToAddress.toAddress()} $postalCode';
+      '${shipToName.toString()}${shipToAddress.toString()} $postalCode';
 }

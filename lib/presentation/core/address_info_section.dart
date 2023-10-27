@@ -75,7 +75,7 @@ class AddressInfoSection extends StatelessWidget {
               height: 10,
             ),
             Text(
-              state.shipToInfo.deliveryAddress,
+              state.shipToInfo.fullDeliveryAddress,
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ],

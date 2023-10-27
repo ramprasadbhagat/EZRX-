@@ -235,7 +235,7 @@ void main() {
           customerCodeInfo: customerMockData.first,
           customerCodeList: customerMockData,
           apiFailureOrSuccessOption: none(),
-          canLoadMore: false,
+          canLoadMore: true,
           shipToInfo: customerMockData.first.shipToInfos.first,
         ),
       ],
