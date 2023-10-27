@@ -45,6 +45,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required MaterialInfoType productType,
     required String parentId,
     required MaterialInfo material,
+    required bool promoStatus,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -73,6 +74,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         productType: MaterialInfoType(''),
         parentId: '',
         material: MaterialInfo.empty(),
+        promoStatus: false,
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(
@@ -96,9 +98,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
   /*ProductTag is used for displaying tag in OrderSuccess detail page */
   StatusType get productTag {
-    if (type.isMaterialTypeBonus && unitPrice.isZPPriceZero) {
-      return StatusType('Bonus');
-    }
+    if (isBonus) return StatusType('Bonus');
     if (!priceAggregate.salesOrgConfig.hideStockDisplay &&
         (materialStockInfo.stockInfos.isEmpty ||
             !materialStockInfo.stockInfos
@@ -117,13 +117,11 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   }
 
   /*For ViewByOrderDetails only bonus tag is displayed align with web */
-  StatusType get orderDetailBonusTag {
-    if (type.isMaterialTypeBonus && unitPrice.isZPPriceZero) {
-      return StatusType('Bonus');
-    }
+  StatusType get orderDetailBonusTag => StatusType(isBonus ? 'Bonus' : '');
 
-    return StatusType('');
-  }
+  bool get showOfferTag => !isBonus && promoStatus;
+
+  bool get isBonus => type.isMaterialTypeBonus && unitPrice.isZPPriceZero;
 
   String get unitPriceByMaterialType =>
       type.isMaterialTypeBonus ? 'FREE' : unitPrice.getOrDefaultValue('');

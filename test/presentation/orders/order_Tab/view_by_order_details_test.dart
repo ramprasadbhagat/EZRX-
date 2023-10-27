@@ -746,5 +746,54 @@ void main() {
         const Offset(0.0, -200.0),
       );
     });
+
+    group('Offer tag -', () {
+      testWidgets('Visible when material have offer', (tester) async {
+        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+          ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryDetailsOrderItem.copyWith(
+                productType: MaterialInfoType.material(),
+                promoStatus: true,
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+          find.byKey(WidgetKeys.viewByOrderDetailsPageListView),
+          const Offset(0.0, -200.0),
+        );
+        expect(find.byKey(WidgetKeys.offerTag), findsOneWidget);
+      });
+
+      testWidgets('Invisible when material is bonus', (tester) async {
+        when(() => mockViewByOrderDetailsBloc.state).thenReturn(
+          ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryDetailsOrderItem.copyWith(
+                productType: MaterialInfoType.material(),
+                type: OrderItemType('Bonus'),
+                promoStatus: true,
+              )
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.viewByOrderDetailItemsSection),
+          find.byKey(WidgetKeys.viewByOrderDetailsPageListView),
+          const Offset(0.0, -200.0),
+        );
+        expect(find.byKey(WidgetKeys.offerTag), findsNothing);
+      });
+    });
   });
 }

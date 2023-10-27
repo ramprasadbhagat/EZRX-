@@ -71,6 +71,8 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'ProductType', readValue: _getProductType)
   String get productType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'promoStatus', defaultValue: false)
+  bool get promosStatus => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -123,7 +125,8 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
-      String productType});
+      String productType,
+      @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus});
 
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
       get tenderContractDetails;
@@ -164,6 +167,7 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? principalCode = null,
     Object? governmentMaterialCode = null,
     Object? productType = null,
+    Object? promosStatus = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -250,6 +254,10 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
           ? _value.productType
           : productType // ignore: cast_nullable_to_non_nullable
               as String,
+      promosStatus: null == promosStatus
+          ? _value.promosStatus
+          : promosStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -310,7 +318,8 @@ abstract class _$$_OrderHistoryDetailsOrderItemDtoCopyWith<$Res>
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
-      String productType});
+      String productType,
+      @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus});
 
   @override
   $OrderHistoryDetailsOrderItemTenderContractDetailsDtoCopyWith<$Res>
@@ -351,6 +360,7 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
     Object? principalCode = null,
     Object? governmentMaterialCode = null,
     Object? productType = null,
+    Object? promosStatus = null,
   }) {
     return _then(_$_OrderHistoryDetailsOrderItemDto(
       type: null == type
@@ -437,6 +447,10 @@ class __$$_OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res>
           ? _value.productType
           : productType // ignore: cast_nullable_to_non_nullable
               as String,
+      promosStatus: null == promosStatus
+          ? _value.promosStatus
+          : promosStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -479,12 +493,15 @@ class _$_OrderHistoryDetailsOrderItemDto
       required this.tenderContractDetails,
       @JsonKey(name: 'PrincipalName', defaultValue: '')
       required this.principalName,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @JsonKey(
+          name: 'PrincipalCode', defaultValue: '')
       required this.principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       required this.governmentMaterialCode,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
-      required this.productType})
+      required this.productType,
+      @JsonKey(name: 'promoStatus', defaultValue: false)
+      required this.promosStatus})
       : _details = details,
         super._();
 
@@ -568,10 +585,13 @@ class _$_OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'ProductType', readValue: _getProductType)
   final String productType;
+  @override
+  @JsonKey(name: 'promoStatus', defaultValue: false)
+  final bool promosStatus;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, productType: $productType)';
+    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, productType: $productType, promosStatus: $promosStatus)';
   }
 
   @override
@@ -616,7 +636,9 @@ class _$_OrderHistoryDetailsOrderItemDto
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode) &&
             (identical(other.productType, productType) ||
-                other.productType == productType));
+                other.productType == productType) &&
+            (identical(other.promosStatus, promosStatus) ||
+                other.promosStatus == promosStatus));
   }
 
   @JsonKey(ignore: true)
@@ -643,7 +665,8 @@ class _$_OrderHistoryDetailsOrderItemDto
         principalName,
         principalCode,
         governmentMaterialCode,
-        productType
+        productType,
+        promosStatus
       ]);
 
   @JsonKey(ignore: true)
@@ -709,7 +732,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       required final String governmentMaterialCode,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
-      required final String productType}) = _$_OrderHistoryDetailsOrderItemDto;
+      required final String productType,
+      @JsonKey(name: 'promoStatus', defaultValue: false)
+      required final bool promosStatus}) = _$_OrderHistoryDetailsOrderItemDto;
   const _OrderHistoryDetailsOrderItemDto._() : super._();
 
   factory _OrderHistoryDetailsOrderItemDto.fromJson(Map<String, dynamic> json) =
@@ -785,6 +810,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'ProductType', readValue: _getProductType)
   String get productType;
+  @override
+  @JsonKey(name: 'promoStatus', defaultValue: false)
+  bool get promosStatus;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryDetailsOrderItemDtoCopyWith<

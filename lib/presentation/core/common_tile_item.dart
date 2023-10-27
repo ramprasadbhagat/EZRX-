@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -26,6 +27,7 @@ class CommonTileItem extends StatelessWidget {
     this.isQuantityRequired = true,
     this.onTap,
     this.isCovidItem = false,
+    this.showOfferTag = false,
   }) : super(key: key);
 
   final String label;
@@ -41,6 +43,7 @@ class CommonTileItem extends StatelessWidget {
   final Widget? footerWidget;
   final bool isQuantityRequired;
   final bool isCovidItem;
+  final bool showOfferTag;
   final VoidCallback? onTap;
 
   @override
@@ -63,6 +66,7 @@ class CommonTileItem extends StatelessWidget {
                   quantity: quantity,
                   materialNumber: materialNumber,
                   isCovidItem: isCovidItem,
+                  showOfferTag: showOfferTag,
                 ),
                 Expanded(
                   child: Padding(
@@ -238,9 +242,11 @@ class _ImageBox extends StatelessWidget {
     required this.quantity,
     required this.materialNumber,
     required this.isCovidItem,
+    required this.showOfferTag,
   });
   final bool isQuantityBelowImage;
   final bool isCovidItem;
+  final bool showOfferTag;
   final String quantity;
   final MaterialNumber materialNumber;
 
@@ -261,6 +267,7 @@ class _ImageBox extends StatelessWidget {
                       fit: BoxFit.fitHeight,
                       materialNumber: materialNumber,
                     ),
+                    if (showOfferTag) ProductTag.onOfferIcon(),
                     if (isCovidItem)
                       const Positioned(
                         bottom: 20,
@@ -292,6 +299,7 @@ class _ImageBox extends StatelessWidget {
                   materialNumber: materialNumber,
                   fit: BoxFit.fitHeight,
                 ),
+                if (showOfferTag) ProductTag.onOfferIcon(),
                 if (isCovidItem)
                   Positioned(
                     top: MediaQuery.of(context).size.height * 0.055,

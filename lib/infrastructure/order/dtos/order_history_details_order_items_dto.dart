@@ -64,6 +64,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         required String governmentMaterialCode,
     @JsonKey(name: 'ProductType', readValue: _getProductType)
         required String productType,
+    @JsonKey(name: 'promoStatus', defaultValue: false)
+        required bool promosStatus,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
     OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
@@ -103,6 +105,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       governmentMaterialCode:
           orderHistoryDetailsOrderItem.governmentMaterialCode,
       productType: orderHistoryDetailsOrderItem.productType.getValue(),
+      promosStatus: orderHistoryDetailsOrderItem.promoStatus,
     );
   }
 
@@ -138,6 +141,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       priceAggregate: PriceAggregate.empty(),
       productType: MaterialInfoType(productType),
       material: MaterialInfo.empty(),
+      promoStatus: promosStatus,
     );
   }
 

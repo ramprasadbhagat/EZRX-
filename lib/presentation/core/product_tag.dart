@@ -15,6 +15,7 @@ class ProductTag extends StatelessWidget {
   final Color textColor;
   final Color? iconColor;
   final EdgeInsets? margin;
+  final EdgeInsets? padding;
   final IconData iconData;
   const ProductTag._({
     Key? key,
@@ -28,6 +29,7 @@ class ProductTag extends StatelessWidget {
     required this.textColor,
     this.iconColor,
     this.margin,
+    this.padding,
   }) : super(key: key);
 
   factory ProductTag.bundleOffer({TextStyle? labelStyle}) => ProductTag._(
@@ -59,6 +61,15 @@ class ProductTag extends StatelessWidget {
         isCovidTag: true,
         labelStyle: labelStyle,
       );
+  factory ProductTag.onOfferIcon() => const ProductTag._(
+        key: WidgetKeys.offerTag,
+        labelTag: '',
+        backgroundColor: ZPColors.orange,
+        textColor: ZPColors.white,
+        hasIcon: true,
+        margin: EdgeInsets.zero,
+        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      );
   factory ProductTag.onOfferTag({TextStyle? labelStyle}) => ProductTag._(
         labelTag: 'On offer',
         backgroundColor: ZPColors.orange,
@@ -79,14 +90,13 @@ class ProductTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: isCovidTag
-          ? const EdgeInsets.symmetric(
-              vertical: 4.0,
-            ).copyWith(
-              left: 8.0,
-              right: 4.0,
-            )
-          : const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      padding: padding ??
+          (isCovidTag
+              ? const EdgeInsets.symmetric(vertical: 4.0).copyWith(
+                  left: 8.0,
+                  right: 4.0,
+                )
+              : const EdgeInsets.symmetric(horizontal: 12, vertical: 4)),
       margin: margin ?? const EdgeInsets.only(top: 8),
       decoration: BoxDecoration(
         color: backgroundColor,
@@ -116,9 +126,7 @@ class ProductTag extends StatelessWidget {
                     size: 20,
                     color: ZPColors.white,
                   ),
-            const SizedBox(
-              width: 8,
-            ),
+            if (labelTag.isNotEmpty) const SizedBox(width: 8),
           ],
           Text(
             context.tr(labelTag),

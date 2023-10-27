@@ -39,6 +39,7 @@ _$_OrderHistoryDetailsOrderItemDto _$$_OrderHistoryDetailsOrderItemDtoFromJson(
       principalCode: json['PrincipalCode'] as String? ?? '',
       governmentMaterialCode: json['GovernmentMaterialCode'] as String? ?? '',
       productType: _getProductType(json, 'ProductType') as String,
+      promosStatus: json['promoStatus'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
@@ -65,4 +66,5 @@ Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDtoToJson(
       'PrincipalCode': instance.principalCode,
       'GovernmentMaterialCode': instance.governmentMaterialCode,
       'ProductType': instance.productType,
+      'promoStatus': instance.promosStatus,
     };
