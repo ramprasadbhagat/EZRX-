@@ -8,54 +8,64 @@ class _ProductSearchHistorySuggestionSection extends StatelessWidget {
     return BlocBuilder<ProductSearchBloc, ProductSearchState>(
       buildWhen: (previous, current) =>
           previous.productSuggestionHistory != current.productSuggestionHistory,
-      builder: (context, state) => state
-              .productSuggestionHistory.searchKeyList.isNotEmpty
-          ? Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        context.tr('Search History'),
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: ZPColors.extraLightGrey4,
-                            ),
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.delete_outlined,
+      builder: (context, state) {
+        final searchKeyList = state.productSuggestionHistory.searchKeyList;
+
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    context.tr('Search History'),
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: ZPColors.extraLightGrey4,
                         ),
-                        onPressed: () => {
-                          showModalBottomSheet(
-                            isScrollControlled: true,
-                            context: context,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(16),
-                                topRight: Radius.circular(16),
-                              ),
-                            ),
-                            builder: (_) =>
-                                const ClearProductSearchSuggestionHistory(),
-                          ),
-                        },
-                      ),
-                    ],
                   ),
-                ),
-                ...state.productSuggestionHistory.searchKeyList.reversed
-                    .map(
-                      (e) => _HistoryTile(
-                        searchKey: e,
-                      ),
-                    )
-                    .toList(),
-              ],
-            )
-          : const SizedBox.shrink(),
+                  IconButton(
+                    icon: Icon(
+                      Icons.delete_outlined,
+                      color: searchKeyList.isNotEmpty
+                          ? ZPColors.extraLightGrey4
+                          : ZPColors.extraLightGrey2,
+                    ),
+                    onPressed: searchKeyList.isNotEmpty
+                        ? () => showModalBottomSheet(
+                              isScrollControlled: true,
+                              context: context,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(16),
+                                  topRight: Radius.circular(16),
+                                ),
+                              ),
+                              builder: (_) =>
+                                  const ClearProductSearchSuggestionHistory(),
+                            )
+                        : null,
+                  ),
+                ],
+              ),
+            ),
+            searchKeyList.isNotEmpty
+                ? Column(
+                    children: searchKeyList.reversed
+                        .map(
+                          (e) => _HistoryTile(
+                            searchKey: e,
+                          ),
+                        )
+                        .toList(),
+                  )
+                : Text(
+                    context.tr('No search history available'),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+          ],
+        );
+      },
     );
   }
 }

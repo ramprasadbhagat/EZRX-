@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -105,38 +104,27 @@ void main() {
   });
 
   Widget getWidget() {
-    return EasyLocalization(
-      supportedLocales: const <Locale>[
-        Locale('en'),
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      usingLocalization: true,
+      providers: [
+        BlocProvider<ProductSearchBloc>(
+          create: (context) => productSearchBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: (context) => eligibilityBloc,
+        ),
+        BlocProvider<ProductDetailBloc>(
+          create: (context) => productDetailBloc,
+        ),
+        BlocProvider<MaterialPriceBloc>(
+          create: (context) => materialPriceBloc,
+        ),
+        BlocProvider<ScanMaterialInfoBloc>(
+          create: (context) => scanMaterialInfoBlocMock,
+        ),
       ],
-      path: 'assets/langs/langs.csv',
-      startLocale: const Locale('en'),
-      fallbackLocale: const Locale('en'),
-      saveLocale: true,
-      useOnlyLangCode: true,
-      assetLoader: CsvAssetLoader(),
-      child: WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        usingLocalization: true,
-        providers: [
-          BlocProvider<ProductSearchBloc>(
-            create: (context) => productSearchBlocMock,
-          ),
-          BlocProvider<EligibilityBloc>(
-            create: (context) => eligibilityBloc,
-          ),
-          BlocProvider<ProductDetailBloc>(
-            create: (context) => productDetailBloc,
-          ),
-          BlocProvider<MaterialPriceBloc>(
-            create: (context) => materialPriceBloc,
-          ),
-          BlocProvider<ScanMaterialInfoBloc>(
-            create: (context) => scanMaterialInfoBlocMock,
-          ),
-        ],
-        child: const ProductSuggestionPage(parentRoute: ''),
-      ),
+      child: const ProductSuggestionPage(parentRoute: ''),
     );
   }
 
@@ -160,12 +148,16 @@ void main() {
     testWidgets(
         '=> Test to check search history when search field is empty but search history list is also empty',
         (tester) async {
-      final expectedState = <ProductSearchState>[ProductSearchState.initial()];
-      whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
+      when(() => productSearchBlocMock.state)
+          .thenReturn(ProductSearchState.initial());
       await tester.pumpWidget(getWidget());
-      await tester.pumpAndSettle();
-      expect(searchHistoryText, findsNothing);
+      await tester.pump();
+      expect(searchHistoryText, findsOneWidget);
       expect(productSearchSuggestionSection, findsNothing);
+      expect(
+        find.text('No search history available'.tr()),
+        findsOneWidget,
+      );
     });
   });
 
