@@ -77,7 +77,7 @@ void main() {
     mockAnnouncementBloc = MockAnnouncementBloc();
     mockPaymentSummaryDetailsBloc = MockPaymentSummaryDetailsBloc();
     fakePaymentDetails = PaymentSummaryDetails.empty()
-        .copyWith(status: StatusType('In Progress'));
+        .copyWith(status: FilterStatus('In Progress'));
   });
 
   group('Payment Summary Details Page', () {

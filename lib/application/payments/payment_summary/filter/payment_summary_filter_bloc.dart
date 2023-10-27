@@ -49,14 +49,12 @@ class PaymentSummaryFilterBloc
         );
       },
       statusChanged: (_StatusChanged e) {
-        final statuses = List<StatusType>.from(state.filter.filterStatuses);
-        e.selected
-            ? statuses.add(e.filterStatus)
-            : statuses.remove(e.filterStatus);
         emit(
           state.copyWith(
             filter: state.filter.copyWith(
-              filterStatuses: statuses,
+              filterStatuses: <FilterStatus>[
+                if (e.selected) e.filterStatus,
+              ],
             ),
           ),
         );

@@ -89,22 +89,6 @@ class RefundTotal extends ValueObject<String> {
   const RefundTotal._(this.value);
 }
 
-class FilterStatus extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory FilterStatus(String input) =>
-      FilterStatus._(validateStringNotEmpty(input));
-
-  String get label => filterLabel(value.getOrElse(() => ''));
-
-  String get apiSortValueOrEmpty => covertSortToApiDateString(
-        value.getOrElse(() => ''),
-      );
-
-  const FilterStatus._(this.value);
-}
-
 class ReturnQuantity extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

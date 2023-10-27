@@ -296,6 +296,7 @@ Color getStatusLabelColor(String statusType) {
     'order pending': ZPColors.lightYellow,
     'Order packed and ready for delivery': ZPColors.lightYellow,
     'Expiring': ZPColors.lightYellow,
+    'In progress': ZPColors.lightYellow,
   };
 
   final secondary = {
@@ -403,23 +404,6 @@ String getReturnSummaryStatusInList(String statusType) {
     default:
       return statusType;
   }
-}
-
-bool isSuccessfulOrProcessed(String status) =>
-    status == 'Successful' || status == 'Processed';
-
-bool isFailed(String status) => status == 'Failed';
-
-Color getDisplayStatusTextColor(String status) {
-  return isSuccessfulOrProcessed(status) ? ZPColors.black : ZPColors.red;
-}
-
-Color getAdviceExpiryColor(String status) {
-  return isSuccessfulOrProcessed(status) ? ZPColors.white : ZPColors.red;
-}
-
-Color getAdviceExpiryColorFailed(String status) {
-  return isFailed(status) ? ZPColors.red : ZPColors.white;
 }
 
 bool differenceNGTWeek(DateTime date) {
@@ -576,3 +560,81 @@ String getOptionalText(bool value) => value ? '' : '(Optional)';
 String getOosTag() => 'Out of stock';
 
 Color getOosTagLabelColor() => ZPColors.black;
+
+bool getIsInProgress(String status) => status == 'In Progress';
+
+bool isSuccessfulOrProcessed(String status) =>
+    status == 'Successful' || status == 'Processed';
+
+Color getDisplayStatusTextColor(String status) =>
+    isSuccessfulOrProcessed(status) ? ZPColors.black : ZPColors.red;
+
+Color getAdviceExpiryColor(String status) =>
+    isSuccessfulOrProcessed(status) ? ZPColors.white : ZPColors.red;
+
+bool isFailed(String status) => status == 'Failed';
+
+Color getAdviceExpiryColorFailed(String status) {
+  return isFailed(status) ? ZPColors.red : ZPColors.white;
+}
+
+String getSortLabel(String sort) {
+  switch (sort) {
+    case 'COMPLETED':
+      return 'Completed';
+    case 'ALL':
+      return 'All';
+
+    default:
+      return 'Pending Review';
+  }
+}
+
+String covertApiSortValue(String value) =>
+    value.isNotEmpty && value != 'ALL' ? value : '';
+
+List<String> getApiSatuses(String statusText) {
+  switch (statusText) {
+    case 'In progress':
+      return <String>[
+        'waiting',
+        'creating',
+        'processing',
+      ];
+    case 'Expired':
+      return <String>[
+        'expired',
+      ];
+    case 'Successful':
+      return <String>[
+        'success',
+        'failed',
+      ];
+    case 'Cancelled':
+      return <String>[
+        'canceled',
+      ];
+    default:
+      return <String>[
+        statusText,
+      ];
+  }
+}
+
+String getStatusText(String apiStatus) {
+  switch (apiStatus) {
+    case 'canceled':
+      return 'Cancelled';
+    case 'success':
+    case 'failed':
+      return 'Successful';
+    case 'expired':
+      return 'Expired';
+    case 'waiting':
+    case 'creating':
+    case 'processing':
+      return 'In progress';
+    default:
+      return apiStatus;
+  }
+}

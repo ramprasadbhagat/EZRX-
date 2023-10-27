@@ -69,7 +69,7 @@ class ApproverActions extends StatelessWidget {
                                 return Row(
                                   children: <Widget>[
                                     Text(
-                                      "${'Status'.tr()} : ${state.activeSort.label.tr()}",
+                                      "${context.tr('Status')} : ${state.activeSort.sortLabel.tr()}",
                                       key: const ValueKey('status'),
                                       style: Theme.of(context)
                                           .textTheme

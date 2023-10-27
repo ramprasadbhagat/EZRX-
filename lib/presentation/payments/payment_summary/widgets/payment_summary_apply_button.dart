@@ -14,16 +14,15 @@ class _PaymentSummaryApplyButton extends StatelessWidget {
             context.read<PaymentSummaryFilterBloc>().add(
                   const PaymentSummaryFilterEvent.validateFilters(),
                 );
+            final paymentSummaryBloc = context.read<PaymentSummaryBloc>();
             if (state.filter.isValid) {
-              final paymentSummaryBlocState =
-                  context.read<PaymentSummaryBloc>().state;
-              if (state.filter != paymentSummaryBlocState.appliedFilter) {
-                context.read<PaymentSummaryBloc>().add(
-                      PaymentSummaryEvent.fetch(
-                        appliedFilter: state.filter,
-                        searchKey: paymentSummaryBlocState.searchKey,
-                      ),
-                    );
+              if (state.filter != paymentSummaryBloc.state.appliedFilter) {
+                paymentSummaryBloc.add(
+                  PaymentSummaryEvent.fetch(
+                    appliedFilter: state.filter,
+                    searchKey: paymentSummaryBloc.state.searchKey,
+                  ),
+                );
               }
               context.router.popForced();
             }

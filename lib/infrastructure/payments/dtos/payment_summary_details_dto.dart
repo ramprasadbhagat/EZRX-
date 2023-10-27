@@ -64,7 +64,7 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
       bankName: bankName,
       customId: customId,
       iban: iban,
-      status: StatusType(status),
+      status: FilterStatus(status),
       paymentAmount: paymentAmount,
       paymentCardHolderName: paymentCardHolderName,
       paymentCardID: paymentCardID,

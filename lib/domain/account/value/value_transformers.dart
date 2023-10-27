@@ -492,3 +492,19 @@ String countryPaymentInfoResponsePath(String country) {
 
   return salesOrgCountryMap[country] ?? 'assets/json/payResponseMY.json';
 }
+
+String getPaymentIdPretext(String country) {
+  final salesOrgCountryMap = {
+    'ID': 'PR',
+  };
+
+  return salesOrgCountryMap[country] ?? 'PA';
+}
+
+String getPaymentDateLabelText(String country) {
+  final salesOrgCountryMap = {
+    'ID': 'Created on',
+  };
+
+  return salesOrgCountryMap[country] ?? 'Payment date';
+}

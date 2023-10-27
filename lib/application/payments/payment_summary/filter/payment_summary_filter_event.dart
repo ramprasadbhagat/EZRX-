@@ -21,7 +21,7 @@ class PaymentSummaryFilterEvent with _$PaymentSummaryFilterEvent {
   ) = _AmountValueToChanged;
 
   const factory PaymentSummaryFilterEvent.statusChanged(
-    StatusType filterStatus,
+    FilterStatus filterStatus,
     bool selected,
   ) = _StatusChanged;
 

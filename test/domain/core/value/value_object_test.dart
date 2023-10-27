@@ -183,13 +183,13 @@ void main() {
     });
   });
 
-  group('StatusType Value Object', () {
+  group('FilterStatus Value Object', () {
     test(
-      'StatusType display dash If Empty',
+      'FilterStatus display dash If Empty',
       () {
-        final valObj = StatusType('');
+        final valObj = FilterStatus('');
         expect(
-          valObj.displayStringValue,
+          valObj.stringValue,
           '-',
         );
       },
@@ -197,12 +197,12 @@ void main() {
     test(
       'check true false if status is processed or successful',
       () {
-        final valObjForSuccess = StatusType('Successful');
+        final valObjForSuccess = FilterStatus('Successful');
         expect(
           valObjForSuccess.getIsSuccessfulOrProcessed,
           true,
         );
-        final valObjForProcessed = StatusType('Processed');
+        final valObjForProcessed = FilterStatus('Processed');
         expect(
           valObjForProcessed.getIsSuccessfulOrProcessed,
           true,
@@ -239,15 +239,63 @@ void main() {
     );
   });
 
-  group('StatusType OOS-Preorder test', () {
+  group('FilterStatus OOS-Preorder test', () {
     test(
-      'StatusType OOS-Preorder ',
+      'FilterStatus OOS-Preorder ',
       () {
-        final statusType = StatusType('OOS-Preorder');
+        final statusType = FilterStatus('OOS-Preorder');
         expect(statusType.getValue(), 'OOS-Preorder');
         expect(statusType.getValue(), 'OOS-Preorder');
         expect(statusType.displayStatusTextColor, ZPColors.black);
         expect(statusType.displayStatusLabelColor, ZPColors.lightYellow);
+      },
+    );
+  });
+
+  group('FilterStatus value object', () {
+    test(
+      'FilterStatus All lable test',
+      () async {
+        final filterStatus = FilterStatus('ALL');
+        expect(filterStatus.sortLabel, 'All');
+      },
+    );
+    test(
+      'FilterStatus pending lable test',
+      () async {
+        final filterStatus = FilterStatus('PENDING');
+        expect(filterStatus.sortLabel, 'Pending Review');
+      },
+    );
+    test(
+      'FilterStatus All lable test',
+      () async {
+        final filterStatus = FilterStatus('COMPLETED');
+        expect(filterStatus.sortLabel, 'Completed');
+      },
+    );
+
+    test(
+      'FilterStatus All apiSortValue test',
+      () async {
+        final filterStatus = FilterStatus('ALL');
+        expect(filterStatus.apiSortValueOrEmpty, '');
+      },
+    );
+    test(
+      'FilterStatus pending apiSortValue test',
+      () async {
+        const input = 'PENDING';
+        final filterStatus = FilterStatus(input);
+        expect(filterStatus.apiSortValueOrEmpty, input);
+      },
+    );
+    test(
+      'FilterStatus complete apiSortValue test',
+      () async {
+        const input = 'COMPLETED';
+        final filterStatus = FilterStatus(input);
+        expect(filterStatus.apiSortValueOrEmpty, input);
       },
     );
   });

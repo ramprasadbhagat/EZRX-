@@ -18,21 +18,6 @@ double refundTotalStringAsFixed(String value) {
   return double.tryParse(value) ?? 0;
 }
 
-String filterLabel(String sort) {
-  switch (sort) {
-    case 'COMPLETED':
-      return 'Completed';
-    case 'ALL':
-      return 'All';
-
-    default:
-      return 'Pending Review';
-  }
-}
-
-String covertSortToApiDateString(String value) =>
-    value.isNotEmpty && value != 'ALL' ? value : '';
-
 String getFileSizeString(int sizeInBytes) {
   final df = NumberFormat('0.00');
 

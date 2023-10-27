@@ -20,7 +20,7 @@ mixin _$PaymentSummaryFilter {
   DateTimeStringValue get createdDateTo => throw _privateConstructorUsedError;
   RangeValue get amountValueFrom => throw _privateConstructorUsedError;
   RangeValue get amountValueTo => throw _privateConstructorUsedError;
-  List<StatusType> get filterStatuses => throw _privateConstructorUsedError;
+  List<FilterStatus> get filterStatuses => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentSummaryFilterCopyWith<PaymentSummaryFilter> get copyWith =>
@@ -38,7 +38,7 @@ abstract class $PaymentSummaryFilterCopyWith<$Res> {
       DateTimeStringValue createdDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      List<StatusType> filterStatuses});
+      List<FilterStatus> filterStatuses});
 }
 
 /// @nodoc
@@ -81,7 +81,7 @@ class _$PaymentSummaryFilterCopyWithImpl<$Res,
       filterStatuses: null == filterStatuses
           ? _value.filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
-              as List<StatusType>,
+              as List<FilterStatus>,
     ) as $Val);
   }
 }
@@ -99,7 +99,7 @@ abstract class _$$_PaymentSummaryFilterCopyWith<$Res>
       DateTimeStringValue createdDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      List<StatusType> filterStatuses});
+      List<FilterStatus> filterStatuses});
 }
 
 /// @nodoc
@@ -139,7 +139,7 @@ class __$$_PaymentSummaryFilterCopyWithImpl<$Res>
       filterStatuses: null == filterStatuses
           ? _value._filterStatuses
           : filterStatuses // ignore: cast_nullable_to_non_nullable
-              as List<StatusType>,
+              as List<FilterStatus>,
     ));
   }
 }
@@ -152,7 +152,7 @@ class _$_PaymentSummaryFilter extends _PaymentSummaryFilter {
       required this.createdDateTo,
       required this.amountValueFrom,
       required this.amountValueTo,
-      required final List<StatusType> filterStatuses})
+      required final List<FilterStatus> filterStatuses})
       : _filterStatuses = filterStatuses,
         super._();
 
@@ -164,9 +164,9 @@ class _$_PaymentSummaryFilter extends _PaymentSummaryFilter {
   final RangeValue amountValueFrom;
   @override
   final RangeValue amountValueTo;
-  final List<StatusType> _filterStatuses;
+  final List<FilterStatus> _filterStatuses;
   @override
-  List<StatusType> get filterStatuses {
+  List<FilterStatus> get filterStatuses {
     if (_filterStatuses is EqualUnmodifiableListView) return _filterStatuses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_filterStatuses);
@@ -217,7 +217,7 @@ abstract class _PaymentSummaryFilter extends PaymentSummaryFilter {
           required final DateTimeStringValue createdDateTo,
           required final RangeValue amountValueFrom,
           required final RangeValue amountValueTo,
-          required final List<StatusType> filterStatuses}) =
+          required final List<FilterStatus> filterStatuses}) =
       _$_PaymentSummaryFilter;
   _PaymentSummaryFilter._() : super._();
 
@@ -230,7 +230,7 @@ abstract class _PaymentSummaryFilter extends PaymentSummaryFilter {
   @override
   RangeValue get amountValueTo;
   @override
-  List<StatusType> get filterStatuses;
+  List<FilterStatus> get filterStatuses;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentSummaryFilterCopyWith<_$_PaymentSummaryFilter> get copyWith =>

@@ -184,6 +184,8 @@ class RangeValue extends ValueObject<double> {
   String get apiParameterValue =>
       value.isLeft() ? '' : value.getOrElse(() => 0).toString();
 
+  int get intValue => value.getOrElse(() => 0).toInt();
+
   String get apiParameterValueIfNegative =>
       value.isLeft() ? '' : (-1 * value.getOrElse(() => 0)).toString();
 
@@ -218,6 +220,8 @@ class StatusType extends ValueObject<String> {
   factory StatusType(String input) =>
       StatusType._(validateStringNotEmpty(input));
 
+  String get displayStatusText => getStatusText(value.getOrElse(() => ''));
+
   String get displayStatusInList =>
       getReturnSummaryStatusInList(value.getOrElse(() => ''));
 
@@ -240,21 +244,7 @@ class StatusType extends ValueObject<String> {
   String get displayStatusForViewByRequest =>
       getReturnByRequestStatus(value.getOrElse(() => ''));
 
-  Color get displayStatusTextColor =>
-      getStatusTextColor(value.getOrElse(() => ''));
-
-  Color get getPaymentDisplayStatusTextColor =>
-      getDisplayStatusTextColor(value.getOrElse(() => ''));
-  Color get getAdviceExpiryTextColor =>
-      getAdviceExpiryColor(value.getOrElse(() => ''));
-  Color get getAdviceExpiryTextColorForFailed =>
-      getAdviceExpiryColorFailed(value.getOrElse(() => ''));
-
   bool get isApprovedStatus => isApproved(value.getOrElse(() => ''));
-
-  bool get getIsSuccessfulOrProcessed =>
-      isSuccessfulOrProcessed(value.getOrElse(() => ''));
-  bool get getIsFailed => isFailed(value.getOrElse(() => ''));
   bool get getIsBapiStatusFailed =>
       isBapiStatusFailed(value.getOrElse(() => ''));
 
@@ -273,6 +263,9 @@ class StatusType extends ValueObject<String> {
 
   List<StatusType> get displayOrderStatusDetails =>
       getOrderStatusDetails(value.getOrElse(() => ''));
+
+  Color get displayStatusTextColor =>
+      getStatusTextColor(value.getOrElse(() => ''));
 
   const StatusType._(this.value);
 }
@@ -349,4 +342,50 @@ class Remarks extends ValueObject<String> {
   String get displayText => value.getOrElse(() => '-');
 
   const Remarks._(this.value);
+}
+
+class FilterStatus extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory FilterStatus(String input) =>
+      FilterStatus._(validateStringNotEmpty(input));
+
+  String get _valueOrEmpty => value.getOrElse(() => '');
+
+  String get stringValue => dashIfEmpty(_valueOrEmpty);
+
+  String get sortLabel => getSortLabel(_valueOrEmpty);
+
+  List<String> get apiStatuses => getApiSatuses(_valueOrEmpty);
+
+  String get apiSortValueOrEmpty => covertApiSortValue(
+        value.getOrElse(() => ''),
+      );
+
+  String get displayStatusText => getStatusText(value.getOrElse(() => ''));
+
+  Color get displayStatusTextColor =>
+      getStatusTextColor(value.getOrElse(() => ''));
+
+  Color get displayStatusLabelColor =>
+      getStatusLabelColor(value.getOrElse(() => ''));
+
+  bool get getIsSuccessfulOrProcessed =>
+      isSuccessfulOrProcessed(value.getOrElse(() => ''));
+
+  Color get getPaymentDisplayStatusTextColor =>
+      getDisplayStatusTextColor(value.getOrElse(() => ''));
+
+  Color get getAdviceExpiryTextColor =>
+      getAdviceExpiryColor(value.getOrElse(() => ''));
+
+  bool get getIsFailed => isFailed(value.getOrElse(() => ''));
+
+  bool get isInProgress => getIsInProgress(value.getOrElse(() => ''));
+
+  Color get getAdviceExpiryTextColorForFailed =>
+      getAdviceExpiryColorFailed(value.getOrElse(() => ''));
+
+  const FilterStatus._(this.value);
 }

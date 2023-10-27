@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
-import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +43,7 @@ class ApproverReturnStatusFilterBottomSheet extends StatelessWidget {
               child: Column(
                 children: state.sortParameters.map((FilterStatus status) {
                   return RadioListTile<FilterStatus>(
-                    title: Text(status.label),
+                    title: Text(status.sortLabel),
                     groupValue: state.approverReturnFilter.sortBy,
                     controlAffinity: ListTileControlAffinity.trailing,
                     onChanged: (FilterStatus? value) {

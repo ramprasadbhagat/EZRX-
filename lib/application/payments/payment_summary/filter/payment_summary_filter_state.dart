@@ -15,15 +15,28 @@ class PaymentSummaryFilterState with _$PaymentSummaryFilterState {
         showErrorMessages: false,
       );
 
-  List<StatusType> get statuses => salesOrg.isSg
-      ? <StatusType>[
-          StatusType('Pending'),
-          StatusType('Processed'),
-        ]
-      : <StatusType>[
-          StatusType('In Progress'),
-          StatusType('Failed'),
-          StatusType('Processed'),
-          StatusType('Successful'),
-        ];
+  List<FilterStatus> get statuses {
+    var statusList = <FilterStatus>[
+      FilterStatus('In Progress'),
+      FilterStatus('Failed'),
+      FilterStatus('Processed'),
+      FilterStatus('Successful'),
+    ];
+    if (salesOrg.isSg) {
+      statusList = <FilterStatus>[
+        FilterStatus('Pending'),
+        FilterStatus('Processed'),
+      ];
+    }
+    if (salesOrg.isID) {
+      statusList = <FilterStatus>[
+        FilterStatus('In progress'),
+        FilterStatus('Expired'),
+        FilterStatus('Successful'),
+        FilterStatus('Cancelled'),
+      ];
+    }
+
+    return statusList;
+  }
 }

@@ -15,7 +15,7 @@ class _PaymentSummaryStatusesSelector extends StatelessWidget {
         state,
       ) {
         return Column(
-          children: state.statuses.map((StatusType status) {
+          children: state.statuses.map((FilterStatus status) {
             final name = status.getValue();
             final value = state.filter.filterStatuses.contains(status);
 

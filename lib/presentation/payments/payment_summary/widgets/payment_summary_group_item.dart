@@ -56,6 +56,8 @@ class _PaymentSummaryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final salesOrg = context.read<EligibilityBloc>().state.salesOrg;
+
     return CustomCard(
       margin: const EdgeInsets.fromLTRB(12, 12, 12, 0),
       child: ListTile(
@@ -85,7 +87,7 @@ class _PaymentSummaryItem extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                '${context.tr('PA')} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
+                '${salesOrg.paymentIdPretext} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
                 key: WidgetKeys.commonTileItemLabel,
                 style: Theme.of(context).textTheme.labelMedium,
               ),
@@ -93,7 +95,7 @@ class _PaymentSummaryItem extends StatelessWidget {
             StatusLabel(
               key: WidgetKeys.paymentSummaryTileStatus,
               status:
-                  StatusType(paymentSummaryDetails.status.displayStringValue),
+                  StatusType(paymentSummaryDetails.status.displayStatusText),
             ),
           ],
         ),
@@ -103,7 +105,9 @@ class _PaymentSummaryItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                paymentSummaryDetails.dateOrExpiry,
+                paymentSummaryDetails.status.isInProgress
+                    ? '${context.tr('Expires in')} ${paymentSummaryDetails.adviceExpiry.displayDashIfEmpty}'
+                    : '${context.tr(salesOrg.paymentDateLabelText)}: ${paymentSummaryDetails.createdDate.dateString}',
                 key: WidgetKeys.paymentSummaryDateOrExpiry,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: paymentSummaryDetails

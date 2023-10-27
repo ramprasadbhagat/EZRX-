@@ -8,6 +8,7 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_dto.dart';
+import 'package:ezrxmobile/infrastructure/payments/dtos/transaction_item_dto.dart';
 
 class PaymentSummaryRemoteDataSource {
   HttpService httpService;
@@ -52,7 +53,7 @@ class PaymentSummaryRemoteDataSource {
         },
       ),
     );
-    _approverReturnRequestInformationExceptionChecker(res: res);
+    _exceptionChecker(response: res);
     final data = res.data['data']['customerPayment']['customerPaymentResponse'];
 
     return List.from(data)
@@ -60,16 +61,48 @@ class PaymentSummaryRemoteDataSource {
         .toList();
   }
 
-  void _approverReturnRequestInformationExceptionChecker({
-    required Response<dynamic> res,
-  }) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
+  Future<List<PaymentSummaryDetails>> getTransactions({
+    required Map<String, dynamic> requestParams,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = paymentSummaryQuery.getTransactions();
+
+      final response = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}ezpay',
+        data: jsonEncode(
+          {
+            'query': queryData,
+            'variables': {
+              'request': requestParams,
+            },
+          },
+        ),
+        apiEndpoint: 'listTransactions',
       );
+      _exceptionChecker(response: response, property: 'listTransactions');
+
+      return List<Map<String, dynamic>>.from(
+        response.data['data']['listTransactions']['TxnSummary'],
+      ).map((e) => TransactionItemDto.fromJson(e).toDomain()).toList();
+    });
+  }
+
+  void _exceptionChecker({
+    required Response<dynamic> response,
+    String? property,
+  }) {
+    final data = response.data;
+    if (data['errors'] != null && data['errors'].isNotEmpty) {
+      throw ServerException(message: data['errors'][0]['message']);
+    } else if (response.statusCode != 200) {
+      throw ServerException(
+        code: response.statusCode ?? 0,
+        message: response.statusMessage ?? '',
+      );
+    } else if (data['data'] == null ||
+        (property != null && data['data'][property] == null)) {
+      throw ServerException(message: 'Some thing went wrong');
     }
   }
 }

@@ -21,7 +21,7 @@ mixin _$PaymentSummaryDetails {
   double get paymentAmount => throw _privateConstructorUsedError;
   String get transactionCurrency => throw _privateConstructorUsedError;
   String get paymentDocument => throw _privateConstructorUsedError;
-  StatusType get status => throw _privateConstructorUsedError;
+  FilterStatus get status => throw _privateConstructorUsedError;
   StringValue get paymentMethod => throw _privateConstructorUsedError;
   String get iban => throw _privateConstructorUsedError;
   String get bankIdentification => throw _privateConstructorUsedError;
@@ -60,7 +60,7 @@ abstract class $PaymentSummaryDetailsCopyWith<$Res> {
       double paymentAmount,
       String transactionCurrency,
       String paymentDocument,
-      StatusType status,
+      FilterStatus status,
       StringValue paymentMethod,
       String iban,
       String bankIdentification,
@@ -144,7 +144,7 @@ class _$PaymentSummaryDetailsCopyWithImpl<$Res,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as StatusType,
+              as FilterStatus,
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
@@ -235,7 +235,7 @@ abstract class _$$_PaymentSummaryDetailsCopyWith<$Res>
       double paymentAmount,
       String transactionCurrency,
       String paymentDocument,
-      StatusType status,
+      FilterStatus status,
       StringValue paymentMethod,
       String iban,
       String bankIdentification,
@@ -316,7 +316,7 @@ class __$$_PaymentSummaryDetailsCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as StatusType,
+              as FilterStatus,
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
@@ -434,7 +434,7 @@ class _$_PaymentSummaryDetails extends _PaymentSummaryDetails {
   @override
   final String paymentDocument;
   @override
-  final StatusType status;
+  final FilterStatus status;
   @override
   final StringValue paymentMethod;
   @override
@@ -578,7 +578,7 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
           required final double paymentAmount,
           required final String transactionCurrency,
           required final String paymentDocument,
-          required final StatusType status,
+          required final FilterStatus status,
           required final StringValue paymentMethod,
           required final String iban,
           required final String bankIdentification,
@@ -611,7 +611,7 @@ abstract class _PaymentSummaryDetails extends PaymentSummaryDetails {
   @override
   String get paymentDocument;
   @override
-  StatusType get status;
+  FilterStatus get status;
   @override
   StringValue get paymentMethod;
   @override

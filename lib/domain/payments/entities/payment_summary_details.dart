@@ -17,7 +17,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
     required double paymentAmount,
     required String transactionCurrency,
     required String paymentDocument,
-    required StatusType status,
+    required FilterStatus status,
     required StringValue paymentMethod,
     required String iban,
     required String bankIdentification,
@@ -45,7 +45,7 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         bankName: '',
         customId: '',
         iban: '',
-        status: StatusType(''),
+        status: FilterStatus(''),
         paymentAmount: 0.0,
         paymentCardHolderName: '',
         paymentCardID: '',
@@ -72,10 +72,6 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
 
   String get paymentDate =>
       status.getIsSuccessfulOrProcessed ? valueDate.dateString.tr() : '-'.tr();
-
-  String get dateOrExpiry => status.getIsSuccessfulOrProcessed
-      ? 'Payment date: ${createdDate.dateString}'
-      : 'Expires in ${adviceExpiry.displayDashIfEmpty}';
 }
 
 extension PaymentSummaryListExtension on List<PaymentSummaryDetails> {

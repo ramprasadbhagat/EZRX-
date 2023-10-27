@@ -128,7 +128,7 @@ void main() {
     paymentSummaryList = [
       PaymentSummaryDetails.empty().copyWith(
         paymentAmount: 200,
-        status: StatusType('In Progress'),
+        status: FilterStatus('In Progress'),
       )
     ];
   });
@@ -521,7 +521,7 @@ void main() {
           customerCodeInfo: CustomerCodeInfo.empty(),
           details: [
             PaymentSummaryDetails.empty().copyWith(
-              status: StatusType('In Progress'),
+              status: FilterStatus('In Progress'),
             )
           ],
         ),
@@ -539,12 +539,12 @@ void main() {
           appliedFilter: PaymentSummaryFilter.empty().copyWith(
             amountValueFrom: RangeValue('100'),
             amountValueTo: RangeValue('300'),
-            filterStatuses: [StatusType('In Progress')],
+            filterStatuses: [FilterStatus('In Progress')],
           ),
           details: [
             PaymentSummaryDetails.empty().copyWith(
               paymentAmount: 250,
-              status: StatusType('In Progress'),
+              status: FilterStatus('In Progress'),
             )
           ],
         ),
@@ -582,7 +582,7 @@ void main() {
           details: [
             PaymentSummaryDetails.empty().copyWith(
               paymentAmount: 250,
-              status: StatusType('In Progress'),
+              status: FilterStatus('In Progress'),
             )
           ],
         ),
@@ -605,7 +605,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty(),
             paymentSummaryDetails: PaymentSummaryDetails.empty().copyWith(
               paymentAmount: 250,
-              status: StatusType('In Progress'),
+              status: FilterStatus('In Progress'),
             ),
           ),
         ),
@@ -733,7 +733,7 @@ void main() {
         Stream.fromIterable([
           PaymentSummaryFilterState.initial().copyWith(
             filter: PaymentSummaryFilter.empty()
-                .copyWith(filterStatuses: [StatusType('In Progress')]),
+                .copyWith(filterStatuses: [FilterStatus('In Progress')]),
           )
         ]),
       );
@@ -757,7 +757,7 @@ void main() {
       verify(
         () => paymentSummaryFilterBloc.add(
           PaymentSummaryFilterEvent.statusChanged(
-            StatusType('In Progress'),
+            FilterStatus('In Progress'),
             false,
           ),
         ),
@@ -788,7 +788,7 @@ void main() {
         Stream.fromIterable([
           PaymentSummaryFilterState.initial().copyWith(
             filter: PaymentSummaryFilter.empty()
-                .copyWith(filterStatuses: [StatusType('In Progress')]),
+                .copyWith(filterStatuses: [FilterStatus('In Progress')]),
           )
         ]),
       );

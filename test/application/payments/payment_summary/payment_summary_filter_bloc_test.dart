@@ -136,7 +136,7 @@ void main() {
       act: (PaymentSummaryFilterBloc bloc) {
         bloc.add(
           PaymentSummaryFilterEvent.statusChanged(
-            StatusType('In Progress'),
+            FilterStatus('In Progress'),
             true,
           ),
         );
@@ -150,7 +150,7 @@ void main() {
             createdDateFrom: DateTimeStringValue(
               getDateStringByDateTime(fakeFromDate),
             ),
-            filterStatuses: [StatusType('In Progress')],
+            filterStatuses: [FilterStatus('In Progress')],
           ),
         ),
       ],
@@ -162,13 +162,13 @@ void main() {
           PaymentSummaryFilterBloc(paymentSummaryRepository: repository),
       seed: () => PaymentSummaryFilterState.initial().copyWith(
         filter: paymentSummaryFilter.copyWith(
-          filterStatuses: [StatusType('In Progress')],
+          filterStatuses: [FilterStatus('In Progress')],
         ),
       ),
       act: (PaymentSummaryFilterBloc bloc) {
         bloc.add(
           PaymentSummaryFilterEvent.statusChanged(
-            StatusType('In Progress'),
+            FilterStatus('In Progress'),
             false,
           ),
         );
@@ -176,7 +176,7 @@ void main() {
       expect: () => [
         PaymentSummaryFilterState.initial().copyWith(
           filter: paymentSummaryFilter.copyWith(
-            filterStatuses: <StatusType>[],
+            filterStatuses: <FilterStatus>[],
           ),
         ),
       ],
@@ -196,7 +196,7 @@ void main() {
           ),
           amountValueFrom: RangeValue('1'),
           amountValueTo: RangeValue('10'),
-          filterStatuses: [StatusType('In Progress')],
+          filterStatuses: [FilterStatus('In Progress')],
         ),
       ),
       act: (PaymentSummaryFilterBloc bloc) {
@@ -221,7 +221,7 @@ void main() {
           ),
           amountValueFrom: RangeValue('100'),
           amountValueTo: RangeValue('10'),
-          filterStatuses: [StatusType('In Progress')],
+          filterStatuses: [FilterStatus('In Progress')],
         ),
       ),
       act: (PaymentSummaryFilterBloc bloc) {
@@ -241,7 +241,7 @@ void main() {
             ),
             amountValueFrom: RangeValue('100'),
             amountValueTo: RangeValue('10'),
-            filterStatuses: [StatusType('In Progress')],
+            filterStatuses: [FilterStatus('In Progress')],
           ),
         ),
       ],
@@ -250,20 +250,20 @@ void main() {
       'open Filter BottomSheet validation',
       build: () =>
           PaymentSummaryFilterBloc(paymentSummaryRepository: repository),
-
       act: (PaymentSummaryFilterBloc bloc) {
         bloc.add(
-          PaymentSummaryFilterEvent.openFilterBottomSheet(appliedFilter: paymentSummaryFilter.copyWith(
-                createdDateTo: DateTimeStringValue(
-                  getDateStringByDateTime(fakeToDate),
-                ),
-                createdDateFrom: DateTimeStringValue(
-                  getDateStringByDateTime(fakeFromDate),
-                ),
-                amountValueFrom: RangeValue('1'),
-                amountValueTo: RangeValue('10'),
-                filterStatuses: [StatusType('In Progress')],
+          PaymentSummaryFilterEvent.openFilterBottomSheet(
+            appliedFilter: paymentSummaryFilter.copyWith(
+              createdDateTo: DateTimeStringValue(
+                getDateStringByDateTime(fakeToDate),
               ),
+              createdDateFrom: DateTimeStringValue(
+                getDateStringByDateTime(fakeFromDate),
+              ),
+              amountValueFrom: RangeValue('1'),
+              amountValueTo: RangeValue('10'),
+              filterStatuses: [FilterStatus('In Progress')],
+            ),
           ),
         );
       },
@@ -271,16 +271,16 @@ void main() {
         PaymentSummaryFilterState.initial().copyWith(
           showErrorMessages: false,
           filter: paymentSummaryFilter.copyWith(
-          createdDateTo: DateTimeStringValue(
-            getDateStringByDateTime(fakeToDate),
+            createdDateTo: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
+            ),
+            createdDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
+            ),
+            amountValueFrom: RangeValue('1'),
+            amountValueTo: RangeValue('10'),
+            filterStatuses: [FilterStatus('In Progress')],
           ),
-          createdDateFrom: DateTimeStringValue(
-            getDateStringByDateTime(fakeFromDate),
-          ),
-          amountValueFrom: RangeValue('1'),
-          amountValueTo: RangeValue('10'),
-          filterStatuses: [StatusType('In Progress')],
-        ),
         ),
       ],
     );

@@ -47,7 +47,7 @@ class _PaymentDetailsSection extends StatelessWidget {
                   state.isDetailFetching
                       ? SizedBox(width: 150, child: LoadingShimmer.tile())
                       : Text(
-                          '${'PA'.tr()} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
+                          '${context.read<EligibilityBloc>().state.salesOrg.paymentIdPretext} #${paymentSummaryDetails.zzAdvice.displayDashIfEmpty}',
                           style: Theme.of(context)
                               .textTheme
                               .labelMedium
@@ -57,7 +57,7 @@ class _PaymentDetailsSection extends StatelessWidget {
                     enabled: state.isDetailFetching,
                     child: StatusLabel(
                       status: StatusType(
-                        paymentSummaryDetails.status.displayStringValue,
+                        paymentSummaryDetails.status.stringValue,
                       ),
                     ),
                   ),

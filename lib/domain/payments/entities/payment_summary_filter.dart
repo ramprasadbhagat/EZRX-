@@ -13,7 +13,7 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
     required DateTimeStringValue createdDateTo,
     required RangeValue amountValueFrom,
     required RangeValue amountValueTo,
-    required List<StatusType> filterStatuses,
+    required List<FilterStatus> filterStatuses,
   }) = _PaymentSummaryFilter;
 
   factory PaymentSummaryFilter.empty() => PaymentSummaryFilter(
@@ -31,7 +31,7 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
         ),
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
-        filterStatuses: <StatusType>[],
+        filterStatuses: <FilterStatus>[],
       );
 
   factory PaymentSummaryFilter.dateRangeEmpty() => PaymentSummaryFilter(
@@ -39,7 +39,7 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
         createdDateTo: DateTimeStringValue(''),
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
-        filterStatuses: <StatusType>[],
+        filterStatuses: <FilterStatus>[],
       );
 
   DateTimeRange get getCreatedDateFilterDateRange => DateTimeRange(
@@ -62,7 +62,7 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
     return count;
   }
 
-  bool get isValid => anyFilterApplied && isAmountValueRangeValid;
+  bool get isValid => isAmountValueRangeValid;
 
   bool get isAmountValueRangeValid =>
       !RangeValue.checkIfAnyIsEmpty(amountValueFrom, amountValueTo) &&

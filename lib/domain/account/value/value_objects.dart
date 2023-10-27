@@ -124,6 +124,10 @@ class SalesOrg extends ValueObject<String> {
 
   String get paymentInfoResponsePath => countryPaymentInfoResponsePath(country);
 
+  String get paymentIdPretext => getPaymentIdPretext(country);
+
+  String get paymentDateLabelText => getPaymentDateLabelText(country);
+
   const SalesOrg._(this.value);
 }
 

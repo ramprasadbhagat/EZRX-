@@ -27,7 +27,7 @@ class StatusLabel extends StatelessWidget {
         ),
       ),
       child: Text(
-        context.tr(status.getOrDefaultValue('')),
+        context.tr(status.displayStatusText),
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: valueColor,
             ),
