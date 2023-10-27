@@ -208,7 +208,7 @@ ComboDealMaterialDto _$ComboDealMaterialDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ComboDealMaterialDto {
   @StringToIntConverter()
-  @JsonKey(name: 'minQty', defaultValue: 0)
+  @JsonKey(name: 'minQty', defaultValue: 0, readValue: _readValue)
   int get minQty => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
@@ -238,7 +238,7 @@ abstract class $ComboDealMaterialDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@StringToIntConverter()
-      @JsonKey(name: 'minQty', defaultValue: 0)
+      @JsonKey(name: 'minQty', defaultValue: 0, readValue: _readValue)
       int minQty,
       @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
       @StringToDoubleConverter()
@@ -316,7 +316,7 @@ abstract class _$$_ComboDealMaterialDtoCopyWith<$Res>
   @useResult
   $Res call(
       {@StringToIntConverter()
-      @JsonKey(name: 'minQty', defaultValue: 0)
+      @JsonKey(name: 'minQty', defaultValue: 0, readValue: _readValue)
       int minQty,
       @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
       @StringToDoubleConverter()
@@ -386,7 +386,7 @@ class __$$_ComboDealMaterialDtoCopyWithImpl<$Res>
 class _$_ComboDealMaterialDto extends _ComboDealMaterialDto {
   const _$_ComboDealMaterialDto(
       {@StringToIntConverter()
-      @JsonKey(name: 'minQty', defaultValue: 0)
+      @JsonKey(name: 'minQty', defaultValue: 0, readValue: _readValue)
       required this.minQty,
       @JsonKey(name: 'materialNumber', defaultValue: '')
       required this.materialNumber,
@@ -405,7 +405,7 @@ class _$_ComboDealMaterialDto extends _ComboDealMaterialDto {
 
   @override
   @StringToIntConverter()
-  @JsonKey(name: 'minQty', defaultValue: 0)
+  @JsonKey(name: 'minQty', defaultValue: 0, readValue: _readValue)
   final int minQty;
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -472,7 +472,7 @@ class _$_ComboDealMaterialDto extends _ComboDealMaterialDto {
 abstract class _ComboDealMaterialDto extends ComboDealMaterialDto {
   const factory _ComboDealMaterialDto(
       {@StringToIntConverter()
-      @JsonKey(name: 'minQty', defaultValue: 0)
+      @JsonKey(name: 'minQty', defaultValue: 0, readValue: _readValue)
       required final int minQty,
       @JsonKey(name: 'materialNumber', defaultValue: '')
       required final String materialNumber,
@@ -493,7 +493,7 @@ abstract class _ComboDealMaterialDto extends ComboDealMaterialDto {
 
   @override
   @StringToIntConverter()
-  @JsonKey(name: 'minQty', defaultValue: 0)
+  @JsonKey(name: 'minQty', defaultValue: 0, readValue: _readValue)
   int get minQty;
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')

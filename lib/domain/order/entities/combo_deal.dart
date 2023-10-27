@@ -171,6 +171,12 @@ class ComboDeal with _$ComboDeal {
             )
             .rateToAbs;
       case ComboDealScheme.k4:
+        return descendingSortedQtyTiers
+            .firstWhere(
+              (tier) => tier.minQty <= totalQuantityUnit,
+              orElse: () => ComboDealQtyTier.empty(),
+            )
+            .rateToAbs;
       case ComboDealScheme.k5:
       case ComboDealScheme.kWithSuffix:
         //TODO: Implement later for K3, K4, K5
@@ -226,6 +232,7 @@ class ComboDeal with _$ComboDeal {
       case ComboDealScheme.k3:
         return k3MaximumDiscount;
       case ComboDealScheme.k4:
+        return k4MaximumDiscount;
       case ComboDealScheme.k5:
       case ComboDealScheme.kWithSuffix:
         //TODO: Implement later for K4, K5
@@ -236,8 +243,17 @@ class ComboDeal with _$ComboDeal {
   String get k3MaximumDiscount => flexiSKUTier
       .fold<double>(
         0,
-        (previousValue, element) => element.rate.abs() > previousValue
-            ? element.rate.abs()
+        (previousValue, element) => element.rateToAbs > previousValue
+            ? element.rateToAbs
+            : previousValue,
+      )
+      .toString();
+
+  String get k4MaximumDiscount => flexiQtyTier
+      .fold<double>(
+        0,
+        (previousValue, element) => element.rateToAbs > previousValue
+            ? element.rateToAbs
             : previousValue,
       )
       .toString();
@@ -317,6 +333,17 @@ class ComboDeal with _$ComboDeal {
         return true;
     }
   }
+
+  String get schemeMinimumQtyRequirement {
+    if (scheme == ComboDealScheme.k22) {
+      return descendingSortedQtyTiers.firstOrNull?.minQty.toString() ?? '';
+    }
+    if (scheme == ComboDealScheme.k4) {
+      return descendingSortedQtyTiers.last.minQty.toString();
+    }
+
+    return '';
+  }
 }
 
 enum ComboDealScheme { k1, k21, k22, k3, k4, k5, kWithSuffix }
@@ -357,7 +384,10 @@ extension ComboDealSchemeExt on ComboDealScheme {
     }
   }
 
-  String getRequirementMessage(BuildContext context) {
+  String getRequirementMessage(
+    BuildContext context, {
+    required String minQty,
+  }) {
     switch (this) {
       case ComboDealScheme.k1:
         return context.tr('Purchase all items with min. of its quantity.');
@@ -367,13 +397,22 @@ extension ComboDealSchemeExt on ComboDealScheme {
         );
       case ComboDealScheme.k22:
         return context.tr(
-          'Purchase any products with min. <n> of total quantity.',
+          'Purchase any products with min. {minQty} of total quantity.',
+          namedArgs: {
+            'minQty': minQty,
+          },
         );
       case ComboDealScheme.k3:
         return context.tr(
           'Purchase different products with min. of its quantity. Buy more save more.',
         );
       case ComboDealScheme.k4:
+        return context.tr(
+          'Purchase min. {minQty} items from any of these products. Buy more save more.',
+          namedArgs: {
+            'minQty': minQty,
+          },
+        );
       case ComboDealScheme.k5:
       case ComboDealScheme.kWithSuffix:
         //TODO: Implement later for K3, K4, K5

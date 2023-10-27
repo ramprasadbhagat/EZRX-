@@ -37,7 +37,10 @@ class _ComboRequirementSection extends StatelessWidget {
               }
 
               return Text(
-                state.currentDeal.scheme.getRequirementMessage(context),
+                state.currentDeal.scheme.getRequirementMessage(
+                  context,
+                  minQty: state.currentDeal.schemeMinimumQtyRequirement,
+                ),
                 maxLines: 3,
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: ZPColors.comboRequirementTitle,

@@ -38,7 +38,6 @@ class CartProductCombo extends StatelessWidget {
       cartItem.comboMaterials.firstOrNull?.getScheme(cartItem.comboMaterials) ??
       ComboDealScheme.k1;
 
-
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
@@ -171,12 +170,6 @@ class CartProductCombo extends StatelessWidget {
                         _comboScheme.comboDealTitleAppbar,
                       ),
                       style: Theme.of(context).textTheme.labelSmall,
-                    ),
-                    Text(
-                      _comboScheme.getRequirementMessage(context),
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: ZPColors.darkGray,
-                          ),
                     ),
                     const SizedBox(height: 8),
                     ...cartItem.comboMaterials

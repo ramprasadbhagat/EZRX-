@@ -41,7 +41,7 @@ class ComboDealMaterialDto with _$ComboDealMaterialDto {
 
   const factory ComboDealMaterialDto({
     @StringToIntConverter()
-    @JsonKey(name: 'minQty', defaultValue: 0)
+    @JsonKey(name: 'minQty', defaultValue: 0, readValue: _readValue)
         required int minQty,
     @JsonKey(name: 'materialNumber', defaultValue: '')
         required String materialNumber,
@@ -78,4 +78,10 @@ class ComboDealMaterialDto with _$ComboDealMaterialDto {
         mandatory: domain.mandatory,
         suffix: domain.suffix.stringValue,
       );
+}
+
+String _readValue(Map json, String key) {
+  final value = double.tryParse(json[key]) ?? 0.0;
+
+  return value > 0.0 ? json[key] : '1.0';
 }
