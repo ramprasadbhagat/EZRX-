@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -264,6 +265,34 @@ void main() {
           find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
 
       expect(buyAgainButton, findsOneWidget);
+    });
+
+    testWidgets('Test order total price visibility with tax', (tester) async {
+      when(() => mockViewByOrderBloc.state).thenReturn(
+        ViewByOrderState.initial().copyWith(
+          viewByOrderList: viewByOrder.copyWith(
+            orderHeaders: [
+              viewByOrder.orderHeaders.first.copyWith(totalTax: 20)
+            ],
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+            currency: Currency('SGD'),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final totalOrderValue =
+          find.text('Order total : SGD 384.80', findRichText: true);
+
+      expect(totalOrderValue, findsOneWidget);
     });
   });
 }

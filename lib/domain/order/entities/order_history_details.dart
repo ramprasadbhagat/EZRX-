@@ -161,7 +161,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
 
   double orderedItemsValue(bool isMYExternalSalesRep) =>
       orderHistoryDetailsOrderItem.fold(
-        orderValue,
+        grandTotalWithTax,
         (previousValue, element) => isMYExternalSalesRep &&
                 element.type.isMaterialTypeComm &&
                 element.principalData.principalCode.isPnG &&
