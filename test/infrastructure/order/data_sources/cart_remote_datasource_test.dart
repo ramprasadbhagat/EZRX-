@@ -80,8 +80,6 @@ void main() async {
       test(
         'Cart Remote data source success fail status 200 and error in response',
         () async {
-          final finalData =
-              getAddedToCartProductListJson['data']['cart']['EzRxItems'];
           dioAdapter.onPost(
             '/api/cart',
             (server) => server.reply(
@@ -101,13 +99,46 @@ void main() async {
               'variables': {}
             }),
           );
+          await remoteDataSource
+              .getAddedToCartProductList()
+              .onError((error, _) {
+            expect(
+              error,
+              isA<ServerException>(),
+            );
+            return Future.value(<PriceAggregate>[]);
+          });
+        },
+      );
+
+      test(
+        'Cart Remote data source success fail status 200 and error as no cart found',
+        () async {
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              {
+                'data': {
+                  'upsertCartItems': {'EzRxItems': []}
+                },
+                'errors': [
+                  {'message': 'no cart found'}
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation.cart(),
+              'variables': {}
+            }),
+          );
           final result = await remoteDataSource.getAddedToCartProductList();
 
           expect(
             result,
-            List.from(makeResponseCamelCase(jsonEncode(finalData)))
-                .map((e) => CartProductDto.fromJson(e).toDomain)
-                .toList(),
+            <PriceAggregate>[],
           );
         },
       );

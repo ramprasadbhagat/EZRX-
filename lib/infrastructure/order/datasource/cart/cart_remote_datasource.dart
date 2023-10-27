@@ -39,7 +39,7 @@ class CartRemoteDataSource {
         ),
       );
 
-      _emptyCartExceptionChecker(res: res);
+      _exceptionChecker(res: res);
 
       final productList = res.data['data']['cart']?['EzRxItems'] ?? [];
 
@@ -180,17 +180,12 @@ class CartRemoteDataSource {
     });
   }
 
-  void _emptyCartExceptionChecker({required Response<dynamic> res}) {
-    if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
-  }
-
+  //Note* 'no cart found' error message is received when the cart is empty hence
+  //we do not show any error message to the user.
   void _exceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+    if (res.data['errors'] != null &&
+        res.data['errors'].isNotEmpty &&
+        res.data['errors'][0]['message'] != 'no cart found') {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(
