@@ -48,6 +48,9 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'EZRXNumber', defaultValue: '') required String eZRXNumber,
     @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
         required List<PoDocumentsDto> orderHistoryItemPoAttachments,
+    @JsonKey(name: 'promoStatus', defaultValue: false)
+        required bool promoStatus,
+    @JsonKey(name: 'IsBundle', defaultValue: false) required bool isBundle,
   }) = _OrderHistoryItemDto;
   factory OrderHistoryItemDto.fromDomain(OrderHistoryItem orderHistoryItem) {
     return OrderHistoryItemDto(
@@ -79,6 +82,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
               .map((e) => PoDocumentsDto.fromDomain(e))
               .toList(),
       eZRXNumber: orderHistoryItem.ezrxNumber.getOrDefaultValue(''),
+      isBundle: orderHistoryItem.isBundle,
+      promoStatus: orderHistoryItem.promoStatus,
     );
   }
   OrderHistoryItem toDomain() {
@@ -110,6 +115,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       orderHistoryItemPoAttachments:
           orderHistoryItemPoAttachments.map((e) => e.toDomain()).toList(),
       ezrxNumber: StringValue(eZRXNumber),
+      isBundle: isBundle,
+      promoStatus: promoStatus,
     );
   }
 

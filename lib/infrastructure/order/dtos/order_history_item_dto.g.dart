@@ -35,6 +35,8 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
               ?.map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      promoStatus: json['promoStatus'] as bool? ?? false,
+      isBundle: json['IsBundle'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
@@ -65,4 +67,6 @@ Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
       'poAttachment': instance.orderHistoryItemPoAttachments
           .map((e) => e.toJson())
           .toList(),
+      'promoStatus': instance.promoStatus,
+      'IsBundle': instance.isBundle,
     };

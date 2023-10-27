@@ -67,6 +67,10 @@ mixin _$OrderHistoryItemDto {
   @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get orderHistoryItemPoAttachments =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'promoStatus', defaultValue: false)
+  bool get promoStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'IsBundle', defaultValue: false)
+  bool get isBundle => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -110,7 +114,9 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
-      List<PoDocumentsDto> orderHistoryItemPoAttachments});
+      List<PoDocumentsDto> orderHistoryItemPoAttachments,
+      @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
+      @JsonKey(name: 'IsBundle', defaultValue: false) bool isBundle});
 }
 
 /// @nodoc
@@ -149,6 +155,8 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? tax = null,
     Object? eZRXNumber = null,
     Object? orderHistoryItemPoAttachments = null,
+    Object? promoStatus = null,
+    Object? isBundle = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -243,6 +251,14 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
           ? _value.orderHistoryItemPoAttachments
           : orderHistoryItemPoAttachments // ignore: cast_nullable_to_non_nullable
               as List<PoDocumentsDto>,
+      promoStatus: null == promoStatus
+          ? _value.promoStatus
+          : promoStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBundle: null == isBundle
+          ? _value.isBundle
+          : isBundle // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -285,7 +301,9 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
       @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
-      List<PoDocumentsDto> orderHistoryItemPoAttachments});
+      List<PoDocumentsDto> orderHistoryItemPoAttachments,
+      @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
+      @JsonKey(name: 'IsBundle', defaultValue: false) bool isBundle});
 }
 
 /// @nodoc
@@ -322,6 +340,8 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
     Object? tax = null,
     Object? eZRXNumber = null,
     Object? orderHistoryItemPoAttachments = null,
+    Object? promoStatus = null,
+    Object? isBundle = null,
   }) {
     return _then(_$_OrderHistoryItemDto(
       materialNumber: null == materialNumber
@@ -416,6 +436,14 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
           ? _value._orderHistoryItemPoAttachments
           : orderHistoryItemPoAttachments // ignore: cast_nullable_to_non_nullable
               as List<PoDocumentsDto>,
+      promoStatus: null == promoStatus
+          ? _value.promoStatus
+          : promoStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBundle: null == isBundle
+          ? _value.isBundle
+          : isBundle // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -456,7 +484,10 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       @JsonKey(name: 'Tax', defaultValue: 0.0) required this.tax,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') required this.eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
-      required final List<PoDocumentsDto> orderHistoryItemPoAttachments})
+      required final List<PoDocumentsDto> orderHistoryItemPoAttachments,
+      @JsonKey(name: 'promoStatus', defaultValue: false)
+      required this.promoStatus,
+      @JsonKey(name: 'IsBundle', defaultValue: false) required this.isBundle})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
 
@@ -540,8 +571,15 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   }
 
   @override
+  @JsonKey(name: 'promoStatus', defaultValue: false)
+  final bool promoStatus;
+  @override
+  @JsonKey(name: 'IsBundle', defaultValue: false)
+  final bool isBundle;
+
+  @override
   String toString() {
-    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments)';
+    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isBundle: $isBundle)';
   }
 
   @override
@@ -590,7 +628,11 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
                 other.eZRXNumber == eZRXNumber) &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryItemPoAttachments,
-                _orderHistoryItemPoAttachments));
+                _orderHistoryItemPoAttachments) &&
+            (identical(other.promoStatus, promoStatus) ||
+                other.promoStatus == promoStatus) &&
+            (identical(other.isBundle, isBundle) ||
+                other.isBundle == isBundle));
   }
 
   @JsonKey(ignore: true)
@@ -619,7 +661,9 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
         specialInstruction,
         tax,
         eZRXNumber,
-        const DeepCollectionEquality().hash(_orderHistoryItemPoAttachments)
+        const DeepCollectionEquality().hash(_orderHistoryItemPoAttachments),
+        promoStatus,
+        isBundle
       ]);
 
   @JsonKey(ignore: true)
@@ -679,8 +723,11 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       @JsonKey(name: 'EZRXNumber', defaultValue: '')
       required final String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
-      required final List<PoDocumentsDto>
-          orderHistoryItemPoAttachments}) = _$_OrderHistoryItemDto;
+      required final List<PoDocumentsDto> orderHistoryItemPoAttachments,
+      @JsonKey(name: 'promoStatus', defaultValue: false)
+      required final bool promoStatus,
+      @JsonKey(name: 'IsBundle', defaultValue: false)
+      required final bool isBundle}) = _$_OrderHistoryItemDto;
   const _OrderHistoryItemDto._() : super._();
 
   factory _OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =
@@ -755,6 +802,12 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @override
   @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get orderHistoryItemPoAttachments;
+  @override
+  @JsonKey(name: 'promoStatus', defaultValue: false)
+  bool get promoStatus;
+  @override
+  @JsonKey(name: 'IsBundle', defaultValue: false)
+  bool get isBundle;
   @override
   @JsonKey(ignore: true)
   _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>

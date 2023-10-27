@@ -28,6 +28,7 @@ class CommonTileItem extends StatelessWidget {
     this.onTap,
     this.isCovidItem = false,
     this.showOfferTag = false,
+    this.showBundleTag = false,
   }) : super(key: key);
 
   final String label;
@@ -44,6 +45,7 @@ class CommonTileItem extends StatelessWidget {
   final bool isQuantityRequired;
   final bool isCovidItem;
   final bool showOfferTag;
+  final bool showBundleTag;
   final VoidCallback? onTap;
 
   @override
@@ -67,6 +69,7 @@ class CommonTileItem extends StatelessWidget {
                   materialNumber: materialNumber,
                   isCovidItem: isCovidItem,
                   showOfferTag: showOfferTag,
+                  showBundleTag: showBundleTag,
                 ),
                 Expanded(
                   child: Padding(
@@ -243,10 +246,12 @@ class _ImageBox extends StatelessWidget {
     required this.materialNumber,
     required this.isCovidItem,
     required this.showOfferTag,
+    required this.showBundleTag,
   });
   final bool isQuantityBelowImage;
   final bool isCovidItem;
   final bool showOfferTag;
+  final bool showBundleTag;
   final String quantity;
   final MaterialNumber materialNumber;
 
@@ -300,6 +305,7 @@ class _ImageBox extends StatelessWidget {
                   fit: BoxFit.fitHeight,
                 ),
                 if (showOfferTag) ProductTag.onOfferIcon(),
+                if (showBundleTag) ProductTag.bundleOfferIcon(),
                 if (isCovidItem)
                   Positioned(
                     top: MediaQuery.of(context).size.height * 0.055,

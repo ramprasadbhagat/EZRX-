@@ -40,6 +40,15 @@ class ProductTag extends StatelessWidget {
         textColor: ZPColors.white,
         labelStyle: labelStyle,
       );
+  factory ProductTag.bundleOfferIcon() => const ProductTag._(
+        labelTag: '',
+        backgroundColor: ZPColors.skyBlueColor,
+        assetIconSvg: SvgImage.bonusOffer,
+        hasIcon: true,
+        textColor: ZPColors.white,
+        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+        margin: EdgeInsets.zero,
+      );
   factory ProductTag.preOrderTag({
     TextStyle? labelStyle,
     required String label,

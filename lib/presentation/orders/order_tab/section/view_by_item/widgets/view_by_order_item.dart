@@ -62,6 +62,8 @@ class _ViewByOrderItem extends StatelessWidget {
         isQuantityBelowImage: false,
         isQuantityRequired: true,
         statusTag: orderHistoryItem.productTag,
+        showOfferTag: orderHistoryItem.isOfferItem,
+        showBundleTag: orderHistoryItem.isBundle,
       ),
     );
   }

@@ -41,6 +41,8 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required double tax,
     required List<PoDocuments> orderHistoryItemPoAttachments,
     required StringValue ezrxNumber,
+    required bool isBundle,
+    required bool promoStatus,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -69,7 +71,11 @@ class OrderHistoryItem with _$OrderHistoryItem {
         orderStatusTracker: <OrderStatusTracker>[],
         orderHistoryItemPoAttachments: <PoDocuments>[],
         ezrxNumber: StringValue(''),
+        isBundle: false,
+        promoStatus: false,
       );
+
+  bool get isOfferItem => !isBundle && !isBonusMaterial && promoStatus;
 
   OrderHistoryItem copyWithTaxCal({
     required SalesOrganisationConfigs salesOrganisationConfigs,
