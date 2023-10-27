@@ -157,20 +157,21 @@ class _MaterialInfoDialog extends StatelessWidget {
                   color: ZPColors.darkGray,
                 ),
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.43,
-              child: Text(
-                context.tr(
-                  'Expiry date displayed is for reference, actual product may vary',
+          Row(
+            children: [
+              const Spacer(),
+              Expanded(
+                child: Text(
+                  context.tr(
+                    'Expiry date displayed is for reference, actual product may vary',
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontSize: 10,
+                        color: ZPColors.darkGray,
+                      ),
                 ),
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontSize: 10,
-                      color: ZPColors.darkGray,
-                    ),
               ),
-            ),
+            ],
           ),
           const SizedBox(height: 20),
           Row(
