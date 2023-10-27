@@ -105,7 +105,7 @@ class _ProductTile extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         child: CustomCard(
-          margin: const EdgeInsets.all(10.0),
+          margin: const EdgeInsets.all(8.0),
           child: ListTile(
             key: WidgetKeys.listRecentlyOrdered,
             contentPadding: const EdgeInsets.all(8),

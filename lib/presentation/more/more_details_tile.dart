@@ -18,7 +18,6 @@ class MoreDetailsTile {
   final Key? key;
   final Widget icon;
   final String label;
-  final TextStyle? labelStyle;
   //TODO: remove nullable once all methods implemented
   final void Function()? onTap;
 
@@ -26,7 +25,6 @@ class MoreDetailsTile {
     this.key,
     required this.icon,
     required this.label,
-    this.labelStyle,
     this.onTap,
   });
 
@@ -185,8 +183,6 @@ class MoreDetailsTile {
         ),
         label: 'Announcements & articles',
         onTap: () => context.navigateTo(const AnnouncementsPageRoute()),
-        labelStyle:
-            Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10),
       );
 
   factory MoreDetailsTile.profile(BuildContext context) => MoreDetailsTile(

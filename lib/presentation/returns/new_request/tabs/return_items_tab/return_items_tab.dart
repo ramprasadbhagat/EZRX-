@@ -113,11 +113,8 @@ class ReturnItemsTab extends StatelessWidget {
                         );
                   },
                   isLoading: state.isLoading,
-                  itemBuilder: (context, index, item) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: _ReturnMaterialWidget(
-                      data: item,
-                    ),
+                  itemBuilder: (context, index, item) => _ReturnMaterialWidget(
+                    data: item,
                   ),
                   items: state.items,
                 ),

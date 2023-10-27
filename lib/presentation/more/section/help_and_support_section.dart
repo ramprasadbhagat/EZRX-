@@ -9,7 +9,7 @@ class HelpAndSupportTile extends StatelessWidget {
       <MoreDetailsTile>[
         MoreDetailsTile.faq(context),
         MoreDetailsTile.announcementAndArticleTab(context),
-        MoreDetailsTile.userGuide(),
+        // MoreDetailsTile.userGuide(), // implement yet
         MoreDetailsTile.aboutUs(context),
         MoreDetailsTile.chatSupport(context),
         MoreDetailsTile.termsOfUse(context),
@@ -31,18 +31,13 @@ class HelpAndSupportTile extends StatelessWidget {
             dense: true,
             key: item.key,
             onTap: item.onTap,
-            trailing: Icon(
+            trailing: const Icon(
               Icons.chevron_right_rounded,
-              color: item.onTap == null ? ZPColors.lightGray : ZPColors.black,
+              color: ZPColors.black,
             ),
             title: Text(
               context.tr(item.label),
-              style: item.onTap == null
-                  ? Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(color: ZPColors.lightGray)
-                  : Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           );
         }).toList(),

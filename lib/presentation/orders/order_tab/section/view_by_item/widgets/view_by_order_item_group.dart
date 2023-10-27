@@ -18,11 +18,14 @@ class _ViewByOrderItemGroup extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (showBanner)
-          InfoLabel(
-            textValue: context
-                .tr('Order history is limited to the last 6 months from today'),
-            mainColor: ZPColors.blueAccent,
-            margin: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: InfoLabel(
+              textValue: context.tr(
+                'Order history is limited to the last 6 months from today',
+              ),
+              mainColor: ZPColors.blueAccent,
+            ),
           ),
         if (showDivider)
           const Divider(

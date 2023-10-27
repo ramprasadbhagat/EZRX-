@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
+import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -86,6 +87,7 @@ void main() {
     locator.registerFactory<BannerBloc>(() => bannerBlocMock);
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
     locator.registerFactory<EZPointBlocMock>(() => eZPointBlocMock);
+    locator.registerLazySingleton(() => PackageInfoService());
 
     autoRouterMock = locator<AppRouter>();
   });

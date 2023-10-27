@@ -35,7 +35,7 @@ class MaterialGridItem extends StatelessWidget {
       child: CustomCard(
         clipBehavior: Clip.antiAlias,
         key: WidgetKeys.materialListMaterialCard,
-        margin: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 3),
+        margin: const EdgeInsets.all(8),
         child: Column(
           children: [
             Expanded(

@@ -123,7 +123,7 @@ class _BundleSectionItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => _bundleOnTap(context, materialInfo),
       child: CustomCard(
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(8),
         width: Responsive.isMobile(context)
             ? MediaQuery.of(context).size.width * 0.85
             : MediaQuery.of(context).size.width * 0.4,

@@ -22,18 +22,13 @@ class SettingsTile extends StatelessWidget {
             dense: true,
             key: item.key,
             onTap: item.onTap,
-            trailing: Icon(
+            trailing: const Icon(
               Icons.chevron_right_rounded,
-              color: item.onTap == null ? ZPColors.lightGray : ZPColors.black,
+              color: ZPColors.black,
             ),
             title: Text(
               item.label.tr(),
-              style: item.onTap == null
-                  ? Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .copyWith(color: ZPColors.lightGray)
-                  : Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           );
         }).toList(),
@@ -44,7 +39,7 @@ class SettingsTile extends StatelessWidget {
   List<MoreDetailsTile> _moreSettingTiles(BuildContext context) => [
         MoreDetailsTile.profile(context),
         MoreDetailsTile.security(context),
-        MoreDetailsTile.notifications(context),
-        MoreDetailsTile.privacy(),
+        // MoreDetailsTile.notifications(context), //  implement yet
+        // MoreDetailsTile.privacy(), //  implement yet
       ];
 }

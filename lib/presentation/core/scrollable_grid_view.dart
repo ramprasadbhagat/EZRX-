@@ -28,8 +28,8 @@ class ScrollableGridView<T> extends StatefulWidget {
     this.onRefresh,
     this.onLoadingMore,
     this.header,
-    this.crossAxisSpacing = 15.0,
-    this.mainAxisSpacing = 15.0,
+    this.crossAxisSpacing = 12.0,
+    this.mainAxisSpacing = 12.0,
   }) : super(key: key);
 
   @override

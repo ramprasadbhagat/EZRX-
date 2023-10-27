@@ -15,7 +15,7 @@ class _ProductTile extends StatelessWidget {
         child: Stack(
           children: [
             CustomCard(
-              margin: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(8.0),
               child: ListTile(
                 key: WidgetKeys.productOnOffer,
                 contentPadding: const EdgeInsets.all(8),

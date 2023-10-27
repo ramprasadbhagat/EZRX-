@@ -27,8 +27,10 @@ class OtherItemDetailsSection extends StatelessWidget {
       builder: (context, state) {
         return state.viewByItemDetails.isOthersOrderItemsSectionVisible
             ? Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
+                padding: const EdgeInsets.only(
+                  top: 12.0,
+                  left: 12.0,
+                  right: 12.0,
                 ),
                 child: custom.ExpansionTile(
                   initiallyExpanded: true,

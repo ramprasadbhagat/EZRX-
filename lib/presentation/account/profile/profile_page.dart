@@ -36,7 +36,7 @@ class ProfilePage extends StatelessWidget {
         centerTitle: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 16.0, right: 16, top: 16),
+        padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
         child: BlocConsumer<CustomerLicenseBloc, CustomerLicenseState>(
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching,
