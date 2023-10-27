@@ -64,7 +64,7 @@ class ServiceTile extends StatelessWidget {
       if (eligibilityState.isReturnsEnable) MoreDetailsTile.returnsTab(context),
       if (eligibilityState.isPaymentEnabled)
         MoreDetailsTile.paymentsTab(context),
-      if (eligibilityState.isEZPointEnable)
+      if (eligibilityState.isIDMarket)
         MoreDetailsTile.eZPointTab(context)
       else
         MoreDetailsTile.loyaltyTab(),

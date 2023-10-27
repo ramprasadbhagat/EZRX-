@@ -24,7 +24,8 @@ class _MaterialDetails extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              const BonusTag(),
+              if (!context.read<EligibilityBloc>().state.isIDMarket)
+                const BonusTag(),
             ],
           ),
           const SizedBox(

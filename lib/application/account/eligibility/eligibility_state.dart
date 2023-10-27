@@ -252,5 +252,5 @@ class EligibilityState with _$EligibilityState {
     return true;
   }
 
-  bool get isEZPointEnable => salesOrg.isID;
+  bool get isIDMarket => salesOrg.isID;
 }

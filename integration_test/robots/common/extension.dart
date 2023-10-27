@@ -1,8 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:flutter/material.dart';
 
-final _priceFormatter = NumberFormat('###,###,###,###,###.00');
+final _priceFormatter = StringUtils.priceFormatter;
 
 extension DateTimeExt on DateTime {
   bool isDateBetween(DateTime from, DateTime to) =>

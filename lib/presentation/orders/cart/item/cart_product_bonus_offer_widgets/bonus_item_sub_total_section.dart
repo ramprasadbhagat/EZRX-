@@ -7,6 +7,8 @@ class _ItemSubTotalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return Padding(
       padding: const EdgeInsets.only(
         right: 8,
@@ -14,13 +16,18 @@ class _ItemSubTotalSection extends StatelessWidget {
       ),
       child: Align(
         alignment: Alignment.centerRight,
-        child: Text(
-          'FREE'.tr(),
-          key: WidgetKeys.cartItemBonusFreeLabel,
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: ZPColors.textButtonColor,
+        child: eligibilityState.isIDMarket
+            ? PriceComponent(
+                salesOrgConfig: eligibilityState.salesOrgConfigs,
+                price: '0',
+              )
+            : Text(
+                'FREE'.tr(),
+                key: WidgetKeys.cartItemBonusFreeLabel,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ZPColors.textButtonColor,
+                    ),
               ),
-        ),
       ),
     );
   }

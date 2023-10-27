@@ -86,16 +86,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (cartItemList) {
-            final cartProducts = _mappingPreviousInfo(
-              previousCartProducts: state.cartProducts,
-              currentCartProducts:
-                  cartItemList.priceAggregateWithDiscountedCount,
-              salesOrganisationConfigs: state.config,
-            );
-            _sortComboToFirstPosition(cartProducts);
+            _sortComboToFirstPosition(cartItemList);
             emit(
               state.copyWith(
-                cartProducts: cartProducts,
+                cartProducts: cartItemList,
                 apiFailureOrSuccessOption: none(),
                 isFetching: false,
               ),

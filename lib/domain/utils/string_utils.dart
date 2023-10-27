@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StringUtils {
-  static final formatter = NumberFormat('###,###,###,###,###.00');
+  static final priceFormatter = NumberFormat('###,###,###,###,##0.00');
 
   static String displayPrice(
     SalesOrganisationConfigs salesOrgConfig,
@@ -14,10 +14,10 @@ class StringUtils {
     // Format the price, if price is negative applicable place a '-' sign leading sales org,
     // used where need to display price value on positive manner.
     if (price.isNegative) {
-      return '- ${salesOrgConfig.currency.code} ${formatter.format(price * -1)}';
+      return '- ${salesOrgConfig.currency.code} ${priceFormatter.format(price * -1)}';
     }
 
-    return '${salesOrgConfig.currency.code} ${formatter.format(price)}';
+    return '${salesOrgConfig.currency.code} ${priceFormatter.format(price)}';
   }
 
   static String priceComponentDisplayPrice(
@@ -28,10 +28,10 @@ class StringUtils {
     // Format the price, format the price base on signed parameter,
     // only use for PriceComponent.
     if (signedPositive && price.isNegative) {
-      return '${salesOrgConfig.currency.code} ${formatter.format(price * -1)}';
+      return '${salesOrgConfig.currency.code} ${priceFormatter.format(price * -1)}';
     }
 
-    return '${salesOrgConfig.currency.code} ${formatter.format(price)}';
+    return '${salesOrgConfig.currency.code} ${priceFormatter.format(price)}';
   }
 
   static String displayNaIfPriceIsZero(
@@ -49,7 +49,7 @@ class StringUtils {
   static String displayNumber(
     double price,
   ) {
-    return formatter.format(price);
+    return priceFormatter.format(price);
   }
 
   static String changeToCamelCase({required String sentence}) {
