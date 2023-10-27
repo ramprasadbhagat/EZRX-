@@ -5,7 +5,33 @@ class LoginOnBehalf extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
+    return BlocConsumer<UserBloc, UserState>(
+      listenWhen: (previous, current) =>
+          previous.userFailureOrSuccessOption !=
+          current.userFailureOrSuccessOption,
+      listener: (context, state) => {
+        state.userFailureOrSuccessOption.fold(
+          () {},
+          (either) => either.fold(
+            (failure) async {
+              await CustomSnackBar(
+                icon: const Icon(
+                  Icons.info,
+                  color: ZPColors.error,
+                ),
+                backgroundColor: ZPColors.errorSnackBarColor,
+                messageText: failure.failureMessage,
+              ).show(context);
+              if (context.mounted) {
+                context.read<AuthBloc>().add(
+                      const AuthEvent.logout(),
+                    );
+              }
+            },
+            (_) {},
+          ),
+        ),
+      },
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
         return state.userCanLoginOnBehalf
