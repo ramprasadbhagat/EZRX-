@@ -133,6 +133,7 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
             element.getComboOfferPriceSubTotal(
               currentDeal.getMaterialComboRate(
                 materialNumber: element.getMaterialNumber,
+                totalQuantityUnit: totalQuantityUnit,
               ),
             ),
       );
@@ -165,4 +166,10 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
 
     return currentDeal.scheme.isComboDealEligible(allSelectedItems);
   }
+
+  bool get displayNextComboDealMessage =>
+      !isFetchingComboInfo && isEnableAddToCart;
+
+  bool get displayMinPurchaseQtyMessage =>
+      !isFetchingComboInfo && !isEnableAddToCart;
 }

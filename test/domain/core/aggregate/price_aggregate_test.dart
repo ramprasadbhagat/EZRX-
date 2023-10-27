@@ -1288,13 +1288,15 @@ void main() {
       test('percent discount type', () {
         expect(
           priceAggregate.comboDealUnitPrice(
-            discount: DiscountInfo(type: DiscountType('%'), rate: -20),
+            discount:
+                DiscountInfo(type: DiscountType('%'), rate: -20, minQty: 2),
           ),
           80,
         );
         expect(
           priceAggregate.comboDealTotalUnitPrice(
-            discount: DiscountInfo(type: DiscountType('%'), rate: -20),
+            discount:
+                DiscountInfo(type: DiscountType('%'), rate: -20, minQty: 2),
           ),
           320,
         );
@@ -1302,13 +1304,15 @@ void main() {
       test('amount discount type', () {
         expect(
           priceAggregate.comboDealUnitPrice(
-            discount: DiscountInfo(type: DiscountType('USD'), rate: -20),
+            discount:
+                DiscountInfo(type: DiscountType('USD'), rate: -20, minQty: 2),
           ),
           -20,
         );
         expect(
           priceAggregate.comboDealTotalUnitPrice(
-            discount: DiscountInfo(type: DiscountType('USD'), rate: -20),
+            discount:
+                DiscountInfo(type: DiscountType('USD'), rate: -20, minQty: 2),
           ),
           -80,
         );
@@ -1317,13 +1321,15 @@ void main() {
       test('empty discount type', () {
         expect(
           priceAggregate.comboDealUnitPrice(
-            discount: DiscountInfo(type: DiscountType(''), rate: 100),
+            discount:
+                DiscountInfo(type: DiscountType(''), rate: 100, minQty: 2),
           ),
           100,
         );
         expect(
           priceAggregate.comboDealTotalUnitPrice(
-            discount: DiscountInfo(type: DiscountType(''), rate: 100),
+            discount:
+                DiscountInfo(type: DiscountType(''), rate: 100, minQty: 2),
           ),
           400,
         );

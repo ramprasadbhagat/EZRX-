@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DiscountInfo {
   DiscountType get type => throw _privateConstructorUsedError;
+  int get minQty => throw _privateConstructorUsedError;
   double get rate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,7 @@ abstract class $DiscountInfoCopyWith<$Res> {
           DiscountInfo value, $Res Function(DiscountInfo) then) =
       _$DiscountInfoCopyWithImpl<$Res, DiscountInfo>;
   @useResult
-  $Res call({DiscountType type, double rate});
+  $Res call({DiscountType type, int minQty, double rate});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$DiscountInfoCopyWithImpl<$Res, $Val extends DiscountInfo>
   @override
   $Res call({
     Object? type = null,
+    Object? minQty = null,
     Object? rate = null,
   }) {
     return _then(_value.copyWith(
@@ -54,6 +56,10 @@ class _$DiscountInfoCopyWithImpl<$Res, $Val extends DiscountInfo>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as DiscountType,
+      minQty: null == minQty
+          ? _value.minQty
+          : minQty // ignore: cast_nullable_to_non_nullable
+              as int,
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -70,7 +76,7 @@ abstract class _$$_DiscountInfoCopyWith<$Res>
       __$$_DiscountInfoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({DiscountType type, double rate});
+  $Res call({DiscountType type, int minQty, double rate});
 }
 
 /// @nodoc
@@ -85,6 +91,7 @@ class __$$_DiscountInfoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? type = null,
+    Object? minQty = null,
     Object? rate = null,
   }) {
     return _then(_$_DiscountInfo(
@@ -92,6 +99,10 @@ class __$$_DiscountInfoCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as DiscountType,
+      minQty: null == minQty
+          ? _value.minQty
+          : minQty // ignore: cast_nullable_to_non_nullable
+              as int,
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -103,16 +114,20 @@ class __$$_DiscountInfoCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_DiscountInfo extends _DiscountInfo {
-  const _$_DiscountInfo({required this.type, required this.rate}) : super._();
+  const _$_DiscountInfo(
+      {required this.type, required this.minQty, required this.rate})
+      : super._();
 
   @override
   final DiscountType type;
+  @override
+  final int minQty;
   @override
   final double rate;
 
   @override
   String toString() {
-    return 'DiscountInfo(type: $type, rate: $rate)';
+    return 'DiscountInfo(type: $type, minQty: $minQty, rate: $rate)';
   }
 
   @override
@@ -121,11 +136,12 @@ class _$_DiscountInfo extends _DiscountInfo {
         (other.runtimeType == runtimeType &&
             other is _$_DiscountInfo &&
             (identical(other.type, type) || other.type == type) &&
+            (identical(other.minQty, minQty) || other.minQty == minQty) &&
             (identical(other.rate, rate) || other.rate == rate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, type, rate);
+  int get hashCode => Object.hash(runtimeType, type, minQty, rate);
 
   @JsonKey(ignore: true)
   @override
@@ -137,11 +153,14 @@ class _$_DiscountInfo extends _DiscountInfo {
 abstract class _DiscountInfo extends DiscountInfo {
   const factory _DiscountInfo(
       {required final DiscountType type,
+      required final int minQty,
       required final double rate}) = _$_DiscountInfo;
   const _DiscountInfo._() : super._();
 
   @override
   DiscountType get type;
+  @override
+  int get minQty;
   @override
   double get rate;
   @override

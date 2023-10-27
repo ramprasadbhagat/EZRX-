@@ -107,6 +107,10 @@ abstract class ZPColors {
   static const Color comboRequirementTitle = Color.fromRGBO(19, 19, 19, 1);
   static const Color fixedLabel = Color.fromRGBO(107, 83, 0, 1);
   static const Color discountedTotalTitle = Color.fromRGBO(95, 139, 53, 1);
+  static const Color bestDiscountTextBg = Color.fromRGBO(104, 153, 58, 1);
+  static const Color bestDiscountBG = Color.fromRGBO(240, 245, 235, 1);
+  static const Color nextTextBg = Color.fromRGBO(62, 119, 199, 1);
+  static const Color nextDiscountBG = Color.fromRGBO(236, 243, 251, 1);
 
   static const MaterialColor kPrimaryColor = MaterialColor(
     0xFF005d62,

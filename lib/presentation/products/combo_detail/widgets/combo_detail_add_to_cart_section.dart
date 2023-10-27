@@ -22,9 +22,11 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
       },
       buildWhen: (previous, current) =>
           previous.allSelectedItems != current.allSelectedItems ||
-          previous.isUpdateCart != current.isUpdateCart,
+          previous.isUpdateCart != current.isUpdateCart ||
+          previous.totalQuantityUnit != current.totalQuantityUnit,
       builder: (context, state) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Divider(
               color: ZPColors.lightGray2,
@@ -45,13 +47,13 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                 size: 20,
               ),
             ),
-            if (!state.isEnableAddToCart)
+            if (state.displayMinPurchaseQtyMessage)
               InfoLabel(
                 key: WidgetKeys.cartPagePriceMessageWidget,
                 margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                 mainColor: ZPColors.lightRedStatusColor,
                 textValue: context.tr(
-                  'You must select at least {unit} more product.',
+                  'You must select at least {unit} product.',
                   namedArgs: {
                     'unit': state.currentDeal.minPurchaseQty.toString(),
                   },
@@ -96,6 +98,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                               'percent':
                                   state.currentDeal.materialComboRateDisplay(
                                 materialNumber: state.allMaterialsNumber.first,
+                                totalQuantityUnit: state.totalQuantityUnit,
                               ),
                             },
                           ),
@@ -123,6 +126,11 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                     )
                   : const SizedBox.shrink(),
             ),
+            if (state.displayNextComboDealMessage)
+              ComboDetailNextDealInfo(
+                totalQty: state.totalQuantityUnit,
+                comboDeal: state.currentDeal,
+              ),
             _CartPageCheckoutButton(isUpdateCart: state.isUpdateCart),
           ],
         );

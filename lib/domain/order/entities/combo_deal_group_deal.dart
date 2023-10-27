@@ -29,6 +29,7 @@ class ComboDealGroupDeal with _$ComboDealGroupDeal {
   DiscountInfo get discountInfo => DiscountInfo(
         type: type,
         rate: rate,
+        minQty: minTotalQuantity,
       );
 
   double get rateToAbs => rate.abs();

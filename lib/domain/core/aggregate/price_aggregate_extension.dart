@@ -110,11 +110,24 @@ extension PriceAggregateExtension on List<PriceAggregate> {
             : item,
       ).toList();
 
+  int get totalComboQuantity => fold<int>(
+        0,
+        (previousValue, element) => previousValue + element.quantity,
+      );
+
   List<ComboMaterialItem> get comboMaterialItemList => map(
         (product) {
           final materialComboDeal = product.selfComboDeal;
-          final comboMaterialItemRate = product.comboDeal
-              .getMaterialComboRate(materialNumber: product.getMaterialNumber);
+
+          final totalQuantityUnit =
+              product.comboDeal.scheme == ComboDealScheme.k3
+                  ? length
+                  : totalComboQuantity;
+
+          final comboMaterialItemRate = product.comboDeal.getMaterialComboRate(
+            materialNumber: product.getMaterialNumber,
+            totalQuantityUnit: totalQuantityUnit,
+          );
 
           return ComboMaterialItem(
             comboDeals: product.price.comboDeal,

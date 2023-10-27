@@ -7,11 +7,6 @@ class _ItemSubTotalSection extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  String get _materialComboRateDisplay =>
-      comboItem.comboDeal.materialComboRateDisplay(
-        materialNumber: comboItem.getMaterialNumber,
-      );
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,8 +29,15 @@ class _ItemSubTotalSection extends StatelessWidget {
               ComboDealMaterialDetailState>(
             buildWhen: (previous, current) =>
                 previous.items != current.items ||
-                previous.selectedItems != current.selectedItems,
+                previous.selectedItems != current.selectedItems ||
+                previous.totalQuantityUnit != current.totalQuantityUnit,
             builder: (_, state) {
+              final materialComboRateDisplay =
+                  comboItem.comboDeal.materialComboRateDisplay(
+                materialNumber: comboItem.getMaterialNumber,
+                totalQuantityUnit: state.totalQuantityUnit,
+              );
+
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -44,7 +46,7 @@ class _ItemSubTotalSection extends StatelessWidget {
                     Row(
                       children: [
                         DiscountTagWidget(
-                          rateDisplay: _materialComboRateDisplay,
+                          rateDisplay: materialComboRateDisplay,
                         ),
                         const SizedBox(width: 4),
                         PriceComponent(
@@ -67,6 +69,7 @@ class _ItemSubTotalSection extends StatelessWidget {
                               comboDealRate:
                                   comboItem.comboDeal.getMaterialComboRate(
                                 materialNumber: comboItem.getMaterialNumber,
+                                totalQuantityUnit: state.totalQuantityUnit,
                               ),
                             )
                             .toString(),

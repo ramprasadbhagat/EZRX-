@@ -25,5 +25,8 @@ class ComboDealSKUTier with _$ComboDealSKUTier {
   DiscountInfo get discountInfo => DiscountInfo(
         type: type,
         rate: rate,
+        minQty: minQty,
       );
+
+  double get rateToAbs => rate.abs();
 }

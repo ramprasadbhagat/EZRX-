@@ -33,5 +33,6 @@ class ComboDealTierRule with _$ComboDealTierRule {
   DiscountInfo get discountInfo => DiscountInfo(
         type: type,
         rate: rate,
+        minQty: minQty,
       );
 }

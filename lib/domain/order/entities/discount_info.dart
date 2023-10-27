@@ -9,11 +9,13 @@ class DiscountInfo with _$DiscountInfo {
 
   const factory DiscountInfo({
     required DiscountType type,
+    required int minQty,
     required double rate,
   }) = _DiscountInfo;
 
   factory DiscountInfo.empty() => DiscountInfo(
         type: DiscountType(''),
+        minQty: 0,
         rate: 0,
       );
 
