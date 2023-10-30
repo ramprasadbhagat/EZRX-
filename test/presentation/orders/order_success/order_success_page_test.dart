@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -58,6 +59,10 @@ class AdditionalDetailsBlocMock
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class ViewByOrderDetailsBlocMock
+    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
+    implements ViewByOrderDetailsBloc {}
+
 class MockMixpanelService extends Mock implements MixpanelService {}
 
 void main() {
@@ -70,6 +75,7 @@ void main() {
   late UserBloc userBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late EligibilityBloc eligibilityBlocMock;
+  late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   setUpAll(
     () {
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
@@ -90,6 +96,7 @@ void main() {
       userBlocMock = UserBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
+      viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
 
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
@@ -104,6 +111,9 @@ void main() {
           .thenReturn(AdditionalDetailsState.initial());
       when(() => orderSummaryBlocMock.state).thenReturn(
         OrderSummaryState.initial(),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial(),
       );
       when(() => autoRouterMock.currentPath).thenReturn('fake-path');
     },
@@ -134,6 +144,9 @@ void main() {
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
+        ),
+        BlocProvider<ViewByOrderDetailsBloc>(
+          create: (context) => viewByOrderDetailsBlocMock,
         ),
       ],
     );
@@ -278,6 +291,39 @@ void main() {
         ),
         findsOneWidget,
       );
+    },
+  );
+
+  testWidgets(
+    'Tap on order number',
+    (tester) async {
+      final fakeOrderNumber = OrderNumber('fake-order-number');
+      when(
+        () => autoRouterMock.push(const ViewByOrderDetailsPageRoute()),
+      ).thenAnswer((invocation) => Future(() => null));
+      when(() => orderSummaryBlocMock.state).thenReturn(
+        OrderSummaryState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderNumber: fakeOrderNumber,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final orderIdFinder = find.byKey(WidgetKeys.orderSuccessOrderId);
+      expect(orderIdFinder, findsOneWidget);
+      await tester.tap(orderIdFinder);
+      await tester.pumpAndSettle();
+      verify(
+        () => viewByOrderDetailsBlocMock.add(
+          ViewByOrderDetailsEvent.fetch(
+            orderNumber: fakeOrderNumber,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => autoRouterMock.push(const ViewByOrderDetailsPageRoute()),
+      ).called(1);
     },
   );
 
