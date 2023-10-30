@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ChangeDeliveryAddress extends StatelessWidget {
   final ShipToInfo shipToInfo;
@@ -39,6 +41,16 @@ class ChangeDeliveryAddress extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Align(
+            alignment: Alignment.center,
+            child: SvgPicture.asset(
+              SvgImage.alert,
+              alignment: Alignment.center,
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
           Text(
             context.tr('Change delivery address?'),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
