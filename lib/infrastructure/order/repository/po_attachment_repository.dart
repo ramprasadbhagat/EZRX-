@@ -150,11 +150,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
             element.size > (_fileSizeLimitMB * pow(1024, 2)),
       );
       if (biggerFile.isNotEmpty) {
-        return Left(
-          ApiFailure.other(
-            'The file ${biggerFile.first.name} uploaded is greater than $_fileSizeLimitMB  MB',
-          ),
-        );
+        return const Left(ApiFailure.uploadedFileSizeExceed());
       }
 
       final upLoadedFiles = Future.wait(

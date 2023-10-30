@@ -56,6 +56,7 @@ class ApiFailure with _$ApiFailure {
       _ScannedProductNotFound;
   const factory ApiFailure.cameraPermissionFailed() = _CameraPermissionFailed;
   const factory ApiFailure.userNameNotFound() = _UserNameNotFound;
+  const factory ApiFailure.uploadedFileSizeExceed() = _UploadedFileSizeExceed;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -100,5 +101,7 @@ extension ApiFailureExt on ApiFailure {
             'Unable to fetch Material ${scannedProduct.productNumber}',
         cameraPermissionFailed: (_) => 'Camera Permission Denied',
         userNameNotFound: (_) => 'Incorrect username',
+        uploadedFileSizeExceed: (_) =>
+            'Can’t upload.This file is larger than 20 MB',
       );
 }

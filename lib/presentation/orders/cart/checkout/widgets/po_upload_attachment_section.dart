@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -18,19 +19,34 @@ class PoAttachmentUpload extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<PoAttachmentBloc, PoAttachmentState>(
       listenWhen: (previous, current) =>
-          previous.isFetching != current.isFetching,
+          previous.failureOrSuccessOption != current.failureOrSuccessOption,
       listener: (context, state) {
-        context.read<AdditionalDetailsBloc>().add(
-              AdditionalDetailsEvent.addPoDocument(
-                poDocuments: state.fileUrl,
+        state.failureOrSuccessOption.fold(
+          () => {},
+          (either) => either.fold(
+            (failure) => CustomSnackBar(
+              icon: const Icon(
+                Icons.info,
+                color: ZPColors.error,
               ),
-            );
-        if (state.fileOperationMode == FileOperationMode.upload) {
-          CustomSnackBar(
-            messageText:
-                '${state.fileUrl.length} ${'files uploaded successfully'.tr()}',
-          ).show(context);
-        }
+              backgroundColor: ZPColors.errorSnackBarColor,
+              messageText: failure.failureMessage,
+            ).show(context),
+            (_) {
+              context.read<AdditionalDetailsBloc>().add(
+                    AdditionalDetailsEvent.addPoDocument(
+                      poDocuments: state.fileUrl,
+                    ),
+                  );
+              if (state.fileOperationMode == FileOperationMode.upload) {
+                CustomSnackBar(
+                  messageText:
+                      '${state.fileUrl.length} files uploaded successfully',
+                ).show(context);
+              }
+            },
+          ),
+        );
       },
       buildWhen: (previous, current) =>
           previous.isFetching != current.isFetching ||

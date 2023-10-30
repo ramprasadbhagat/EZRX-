@@ -28,6 +28,7 @@ void main() {
     url: 'fake-url-1',
   );
   final file = [File('')];
+  final uploadedFiles = [fakePoDocument];
 
   group(
     'PoAttachmentBloc Bloc Download Test',
@@ -475,7 +476,7 @@ void main() {
             ),
           ).thenAnswer(
             (invocation) async => Right(
-              [fakePoDocument],
+              uploadedFiles,
             ),
           );
           when(
@@ -517,7 +518,8 @@ void main() {
           ),
           PoAttachmentState.initial().copyWith(
             fileOperationMode: FileOperationMode.upload,
-            fileUrl: [fakePoDocument],
+            fileUrl: uploadedFiles,
+            failureOrSuccessOption: optionOf(Right(uploadedFiles)),
           ),
         ],
       );

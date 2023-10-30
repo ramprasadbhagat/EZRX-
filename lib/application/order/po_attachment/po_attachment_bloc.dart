@@ -151,7 +151,8 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
                   ),
                   (r) => emit(
                     state.copyWith(
-                      failureOrSuccessOption: none(),
+                      failureOrSuccessOption:
+                          optionOf(uploadFilesFailureOrSuccess),
                       fileUrl: r,
                       isFetching: false,
                       fileOperationMode: FileOperationMode.upload,
