@@ -11,13 +11,15 @@ class NoRecordFound extends StatelessWidget {
     this.title = '',
     this.subTitle =
         'Try adjusting your search or filter selection to find what you’re looking for.',
-    this.svgImage = SvgImage.searchLogo,
+    this.svgImage,
     this.actionButton = const SizedBox.shrink(),
+    this.subTitleWidget,
   }) : super(key: key);
   final String title;
   final String subTitle;
-  final String svgImage;
+  final String? svgImage;
   final Widget actionButton;
+  final Widget? subTitleWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class NoRecordFound extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 25),
             child: SvgPicture.asset(
-              svgImage,
+              svgImage ?? SvgImage.searchLogo,
               key: WidgetKeys.noRecordsFoundSearchIcon,
               height: 150,
             ),
@@ -45,13 +47,14 @@ class NoRecordFound extends StatelessWidget {
             ),
           Padding(
             padding: const EdgeInsets.only(top: 10, bottom: 30),
-            child: Text(
-              subTitle.tr(),
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: ZPColors.neutralsDarkBlack,
-                  ),
-            ),
+            child: subTitleWidget ??
+                Text(
+                  subTitle.tr(),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: ZPColors.neutralsDarkBlack,
+                      ),
+                ),
           ),
           actionButton,
         ],

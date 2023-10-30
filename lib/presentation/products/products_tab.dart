@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
@@ -52,6 +53,12 @@ class ProductsTab extends StatelessWidget {
             previous.materialList != current.materialList ||
             previous.isFetching != current.isFetching,
         builder: (context, state) {
+          final isFavourite = context
+              .read<MaterialFilterBloc>()
+              .state
+              .materialFilter
+              .isFavourite;
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -67,7 +74,12 @@ class ProductsTab extends StatelessWidget {
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: ScrollableGridView<MaterialInfo>(
-                          emptyMessage: 'No material found'.tr(),
+                          emptyImage:
+                              isFavourite ? SvgImage.emptyFavourite : null,
+                          emptyMessage: 'No material found',
+                          emptyTitle: isFavourite ? 'No favourites yet' : null,
+                          emptyMessageWidget:
+                              isFavourite ? const _EmptyMessageWidget() : null,
                           header: const _TotalMaterialCount(),
                           isLoading: state.isFetching,
                           items: state.materialList,
@@ -172,6 +184,46 @@ class ProductsTab extends StatelessWidget {
                     item: materialInfo,
                   ),
           );
+}
+
+class _EmptyMessageWidget extends StatelessWidget {
+  const _EmptyMessageWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: RichText(
+        text: TextSpan(
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: ZPColors.neutralsDarkBlack,
+              ),
+          children: [
+            TextSpan(
+              text: context.tr(
+                'Tap on',
+              ),
+            ),
+            const WidgetSpan(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 4,
+                ),
+                child: Icon(
+                  Icons.favorite_border_outlined,
+                  color: ZPColors.darkYellow,
+                ),
+              ),
+            ),
+            TextSpan(
+              text: context.tr(
+                'to add an item to your favourites',
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class _TotalMaterialCount extends StatelessWidget {

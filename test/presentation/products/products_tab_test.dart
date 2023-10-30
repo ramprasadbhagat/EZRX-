@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -357,6 +358,55 @@ void main() {
             ),
           ).called(1);
           expect(autoRouterMock.current.path, 'orders/bundle_detail_page');
+        },
+      );
+
+      testWidgets(
+        '=> Test material not found',
+        (tester) async {
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.text(
+              'No material found'.tr(),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        '=> Test favourite material not found',
+        (tester) async {
+          when(() => materialFilterBlocMock.state).thenReturn(
+            MaterialFilterState.initial().copyWith.materialFilter(
+                  isFavourite: true,
+                ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.text('No favourites yet'.tr()),
+            findsOneWidget,
+          );
+          expect(
+            find.byIcon(Icons.favorite_border_outlined),
+            findsOneWidget,
+          );
+          expect(
+            find.textContaining(
+              'Tap on'.tr(),
+              findRichText: true,
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.textContaining(
+              'to add an item to your favourites'.tr(),
+              findRichText: true,
+            ),
+            findsOneWidget,
+          );
         },
       );
     },

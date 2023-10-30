@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -14,6 +13,9 @@ class ScrollableGridView<T> extends StatefulWidget {
   final bool isLoading;
   final List<T> items;
   final String emptyMessage;
+  final String? emptyTitle;
+  final Widget? emptyMessageWidget;
+  final String? emptyImage;
   final Widget Function(BuildContext context, int index, T item) itemBuilder;
   final Widget? header;
   final double crossAxisSpacing;
@@ -30,6 +32,9 @@ class ScrollableGridView<T> extends StatefulWidget {
     this.header,
     this.crossAxisSpacing = 12.0,
     this.mainAxisSpacing = 12.0,
+    this.emptyTitle,
+    this.emptyMessageWidget,
+    this.emptyImage,
   }) : super(key: key);
 
   @override
@@ -76,7 +81,10 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
           widget.items.isEmpty && !widget.isLoading
               ? SliverFillRemaining(
                   child: NoRecordFound(
-                    subTitle: widget.emptyMessage.tr(),
+                    subTitle: widget.emptyMessage,
+                    title: widget.emptyTitle ?? '',
+                    svgImage: widget.emptyImage,
+                    subTitleWidget: widget.emptyMessageWidget,
                   ),
                 )
               : SliverGrid(
