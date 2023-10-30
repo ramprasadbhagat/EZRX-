@@ -16,6 +16,7 @@ class ReturnRequestQuery {
           principalName
           expiryDate
           itemNumber
+          outsidePolicy
           bonusItem {
             assignmentNumber
             material
@@ -30,6 +31,7 @@ class ReturnRequestQuery {
             principalName
             expiryDate
             itemNumber
+            outsidePolicy
           }
         }
       }

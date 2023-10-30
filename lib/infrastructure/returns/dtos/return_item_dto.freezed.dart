@@ -44,6 +44,8 @@ mixin _$ReturnItemDto {
   String get customerName => throw _privateConstructorUsedError;
   @JsonKey(name: 'batch', defaultValue: '')
   String get batch => throw _privateConstructorUsedError;
+  @JsonKey(name: 'outsidePolicy', defaultValue: false)
+  bool get outsidePolicy => throw _privateConstructorUsedError;
   @JsonKey(name: 'expiry', defaultValue: '')
   String get expiry => throw _privateConstructorUsedError;
 
@@ -84,6 +86,8 @@ abstract class $ReturnItemDtoCopyWith<$Res> {
           String customerName,
       @JsonKey(name: 'batch', defaultValue: '')
           String batch,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false)
+          bool outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '')
           String expiry});
 }
@@ -113,6 +117,7 @@ class _$ReturnItemDtoCopyWithImpl<$Res, $Val extends ReturnItemDto>
     Object? invoiceID = null,
     Object? customerName = null,
     Object? batch = null,
+    Object? outsidePolicy = null,
     Object? expiry = null,
   }) {
     return _then(_value.copyWith(
@@ -164,6 +169,10 @@ class _$ReturnItemDtoCopyWithImpl<$Res, $Val extends ReturnItemDto>
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
+      outsidePolicy: null == outsidePolicy
+          ? _value.outsidePolicy
+          : outsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
       expiry: null == expiry
           ? _value.expiry
           : expiry // ignore: cast_nullable_to_non_nullable
@@ -205,6 +214,8 @@ abstract class _$$_ReturnItemDtoCopyWith<$Res>
           String customerName,
       @JsonKey(name: 'batch', defaultValue: '')
           String batch,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false)
+          bool outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '')
           String expiry});
 }
@@ -232,6 +243,7 @@ class __$$_ReturnItemDtoCopyWithImpl<$Res>
     Object? invoiceID = null,
     Object? customerName = null,
     Object? batch = null,
+    Object? outsidePolicy = null,
     Object? expiry = null,
   }) {
     return _then(_$_ReturnItemDto(
@@ -283,6 +295,10 @@ class __$$_ReturnItemDtoCopyWithImpl<$Res>
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
+      outsidePolicy: null == outsidePolicy
+          ? _value.outsidePolicy
+          : outsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
       expiry: null == expiry
           ? _value.expiry
           : expiry // ignore: cast_nullable_to_non_nullable
@@ -319,6 +335,8 @@ class _$_ReturnItemDto extends _ReturnItemDto {
           required this.customerName,
       @JsonKey(name: 'batch', defaultValue: '')
           required this.batch,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false)
+          required this.outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '')
           required this.expiry})
       : super._();
@@ -363,12 +381,15 @@ class _$_ReturnItemDto extends _ReturnItemDto {
   @JsonKey(name: 'batch', defaultValue: '')
   final String batch;
   @override
+  @JsonKey(name: 'outsidePolicy', defaultValue: false)
+  final bool outsidePolicy;
+  @override
   @JsonKey(name: 'expiry', defaultValue: '')
   final String expiry;
 
   @override
   String toString() {
-    return 'ReturnItemDto(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, expiry: $expiry)';
+    return 'ReturnItemDto(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry)';
   }
 
   @override
@@ -399,6 +420,8 @@ class _$_ReturnItemDto extends _ReturnItemDto {
             (identical(other.customerName, customerName) ||
                 other.customerName == customerName) &&
             (identical(other.batch, batch) || other.batch == batch) &&
+            (identical(other.outsidePolicy, outsidePolicy) ||
+                other.outsidePolicy == outsidePolicy) &&
             (identical(other.expiry, expiry) || other.expiry == expiry));
   }
 
@@ -418,6 +441,7 @@ class _$_ReturnItemDto extends _ReturnItemDto {
       invoiceID,
       customerName,
       batch,
+      outsidePolicy,
       expiry);
 
   @JsonKey(ignore: true)
@@ -460,6 +484,8 @@ abstract class _ReturnItemDto extends ReturnItemDto {
           required final String customerName,
       @JsonKey(name: 'batch', defaultValue: '')
           required final String batch,
+      @JsonKey(name: 'outsidePolicy', defaultValue: false)
+          required final bool outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '')
           required final String expiry}) = _$_ReturnItemDto;
   const _ReturnItemDto._() : super._();
@@ -503,6 +529,9 @@ abstract class _ReturnItemDto extends ReturnItemDto {
   @override
   @JsonKey(name: 'batch', defaultValue: '')
   String get batch;
+  @override
+  @JsonKey(name: 'outsidePolicy', defaultValue: false)
+  bool get outsidePolicy;
   @override
   @JsonKey(name: 'expiry', defaultValue: '')
   String get expiry;

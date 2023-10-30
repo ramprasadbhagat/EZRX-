@@ -32,6 +32,8 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
     @JsonKey(name: 'priceDate', defaultValue: '') required String priceDate,
     @JsonKey(name: 'bonusItem', defaultValue: <ReturnMaterialDto>[])
         required List<ReturnMaterialDto> bonusItems,
+    @JsonKey(name: 'outsidePolicy', defaultValue: false)
+        required bool outsidePolicy,
   }) = _ReturnMaterialDto;
 
   factory ReturnMaterialDto.fromDomain(
@@ -51,6 +53,7 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
       principalName: data.principalName.getOrCrash(),
       expiryDate: data.expiryDate.getOrCrash(),
       priceDate: data.priceDate.getOrCrash(),
+      outsidePolicy: data.outsidePolicy,
       bonusItems: data.bonusItems
           .map((item) => ReturnMaterialDto.fromDomain(item))
           .toList(),
@@ -72,6 +75,7 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
       principalName: PrincipalName(principalName),
       expiryDate: DateTimeStringValue(expiryDate),
       priceDate: DateTimeStringValue(priceDate),
+      outsidePolicy: outsidePolicy,
       bonusItems: bonusItems.map((item) => item.toDomain()).toList(),
     );
   }

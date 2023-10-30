@@ -21,6 +21,7 @@ _$_ReturnItemDto _$$_ReturnItemDtoFromJson(Map<String, dynamic> json) =>
       invoiceID: json['invoiceID'] as String? ?? '',
       customerName: json['customerName'] as String? ?? '',
       batch: json['batch'] as String? ?? '',
+      outsidePolicy: json['outsidePolicy'] as bool? ?? false,
       expiry: json['expiry'] as String? ?? '',
     );
 
@@ -38,5 +39,6 @@ Map<String, dynamic> _$$_ReturnItemDtoToJson(_$_ReturnItemDto instance) =>
       'invoiceID': instance.invoiceID,
       'customerName': instance.customerName,
       'batch': instance.batch,
+      'outsidePolicy': instance.outsidePolicy,
       'expiry': instance.expiry,
     };

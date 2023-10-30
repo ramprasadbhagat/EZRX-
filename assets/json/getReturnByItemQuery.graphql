@@ -15,6 +15,7 @@ query requestsByItems($request: requestsByItems!) {
         invoiceID
         customerName
         batch
+        outsidePolicy
         expiry
       }
     }

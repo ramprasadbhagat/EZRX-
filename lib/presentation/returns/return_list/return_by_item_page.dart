@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -198,6 +199,8 @@ class _ReturnItem extends StatelessWidget {
                     ),
                   ],
                 ),
+                topHeaderWidget:
+                    data.outsidePolicy ? const OutsideReturnPolicyTag() : null,
               ),
             ],
           ),

@@ -19,6 +19,7 @@ class _ReturnMaterialInfo extends StatelessWidget {
       margin: const EdgeInsets.all(0),
       child: Column(
         children: [
+          if (data.outsidePolicy) const OutsideReturnPolicyTag(),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

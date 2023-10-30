@@ -29,6 +29,7 @@ mixin _$ReturnMaterial {
   PrincipalName get principalName => throw _privateConstructorUsedError;
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   DateTimeStringValue get priceDate => throw _privateConstructorUsedError;
+  bool get outsidePolicy => throw _privateConstructorUsedError;
   List<ReturnMaterial> get bonusItems => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -56,6 +57,7 @@ abstract class $ReturnMaterialCopyWith<$Res> {
       PrincipalName principalName,
       DateTimeStringValue expiryDate,
       DateTimeStringValue priceDate,
+      bool outsidePolicy,
       List<ReturnMaterial> bonusItems});
 }
 
@@ -85,6 +87,7 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
     Object? principalName = null,
     Object? expiryDate = null,
     Object? priceDate = null,
+    Object? outsidePolicy = null,
     Object? bonusItems = null,
   }) {
     return _then(_value.copyWith(
@@ -140,6 +143,10 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
           ? _value.priceDate
           : priceDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      outsidePolicy: null == outsidePolicy
+          ? _value.outsidePolicy
+          : outsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
       bonusItems: null == bonusItems
           ? _value.bonusItems
           : bonusItems // ignore: cast_nullable_to_non_nullable
@@ -170,6 +177,7 @@ abstract class _$$_ReturnMaterialCopyWith<$Res>
       PrincipalName principalName,
       DateTimeStringValue expiryDate,
       DateTimeStringValue priceDate,
+      bool outsidePolicy,
       List<ReturnMaterial> bonusItems});
 }
 
@@ -197,6 +205,7 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
     Object? principalName = null,
     Object? expiryDate = null,
     Object? priceDate = null,
+    Object? outsidePolicy = null,
     Object? bonusItems = null,
   }) {
     return _then(_$_ReturnMaterial(
@@ -252,6 +261,10 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
           ? _value.priceDate
           : priceDate // ignore: cast_nullable_to_non_nullable
               as DateTimeStringValue,
+      outsidePolicy: null == outsidePolicy
+          ? _value.outsidePolicy
+          : outsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
       bonusItems: null == bonusItems
           ? _value._bonusItems
           : bonusItems // ignore: cast_nullable_to_non_nullable
@@ -277,6 +290,7 @@ class _$_ReturnMaterial extends _ReturnMaterial {
       required this.principalName,
       required this.expiryDate,
       required this.priceDate,
+      required this.outsidePolicy,
       required final List<ReturnMaterial> bonusItems})
       : _bonusItems = bonusItems,
         super._();
@@ -307,6 +321,8 @@ class _$_ReturnMaterial extends _ReturnMaterial {
   final DateTimeStringValue expiryDate;
   @override
   final DateTimeStringValue priceDate;
+  @override
+  final bool outsidePolicy;
   final List<ReturnMaterial> _bonusItems;
   @override
   List<ReturnMaterial> get bonusItems {
@@ -317,7 +333,7 @@ class _$_ReturnMaterial extends _ReturnMaterial {
 
   @override
   String toString() {
-    return 'ReturnMaterial(balanceQuantity: $balanceQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, bonusItems: $bonusItems)';
+    return 'ReturnMaterial(balanceQuantity: $balanceQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, outsidePolicy: $outsidePolicy, bonusItems: $bonusItems)';
   }
 
   @override
@@ -350,6 +366,8 @@ class _$_ReturnMaterial extends _ReturnMaterial {
                 other.expiryDate == expiryDate) &&
             (identical(other.priceDate, priceDate) ||
                 other.priceDate == priceDate) &&
+            (identical(other.outsidePolicy, outsidePolicy) ||
+                other.outsidePolicy == outsidePolicy) &&
             const DeepCollectionEquality()
                 .equals(other._bonusItems, _bonusItems));
   }
@@ -370,6 +388,7 @@ class _$_ReturnMaterial extends _ReturnMaterial {
       principalName,
       expiryDate,
       priceDate,
+      outsidePolicy,
       const DeepCollectionEquality().hash(_bonusItems));
 
   @JsonKey(ignore: true)
@@ -394,6 +413,7 @@ abstract class _ReturnMaterial extends ReturnMaterial {
       required final PrincipalName principalName,
       required final DateTimeStringValue expiryDate,
       required final DateTimeStringValue priceDate,
+      required final bool outsidePolicy,
       required final List<ReturnMaterial> bonusItems}) = _$_ReturnMaterial;
   const _ReturnMaterial._() : super._();
 
@@ -423,6 +443,8 @@ abstract class _ReturnMaterial extends ReturnMaterial {
   DateTimeStringValue get expiryDate;
   @override
   DateTimeStringValue get priceDate;
+  @override
+  bool get outsidePolicy;
   @override
   List<ReturnMaterial> get bonusItems;
   @override

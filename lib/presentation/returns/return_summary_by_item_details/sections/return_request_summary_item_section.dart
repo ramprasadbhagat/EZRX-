@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_request_information.da
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
+import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -138,6 +139,9 @@ class _ReturnItemSectionState extends State<ReturnItemSection> {
           ),
         ],
       ),
+      topHeaderWidget: widget.requestInformation.outsidePolicy
+          ? const OutsideReturnPolicyTag()
+          : null,
     );
   }
 }

@@ -1,4 +1,3 @@
-
 {
   "data": {
     "searchReturnMaterialsV2": {
@@ -23,7 +22,7 @@
             "materialDescription": "VFENDTAB50MG10'S",
             "balanceQuantity": "50",
             "batch": "C10527042",
-            "eligibleForReturn":true,
+            "eligibleForReturn": true,
             "priceDate": "20230529",
             "unitPrice": "402.80",
             "totalPrice": "20140",
@@ -31,7 +30,8 @@
             "principalName": "PFIZER (M) SDN BHD  (PCL a/c)",
             "expiryDate": "20251101",
             "itemNumber": "20251101",
-            "bonusItem": []
+            "bonusItem": [],
+            "outsidePolicy": true
           }
         },
         {
@@ -41,7 +41,7 @@
             "materialDescription": "VFENDTAB50MG10'S",
             "balanceQuantity": "2",
             "batch": "C10527042",
-            "eligibleForReturn":true,
+            "eligibleForReturn": true,
             "priceDate": "20230530",
             "unitPrice": "268.53",
             "totalPrice": "805.5899999999999",
@@ -55,7 +55,7 @@
                 "material": "000000000021040129",
                 "materialDescription": "VFENDTAB50MG10'S",
                 "balanceQuantity": "1",
-                "eligibleForReturn":true,
+                "eligibleForReturn": true,
                 "batch": "C10527042",
                 "priceDate": "20230530",
                 "unitPrice": "268.53",
@@ -63,9 +63,11 @@
                 "principalCode": "0000101296",
                 "principalName": "PFIZER (M) SDN BHD  (PCL a/c)",
                 "expiryDate": "20251101",
-                "itemNumber": "20251101"
+                "itemNumber": "20251101",
+                "outsidePolicy": false
               }
-            ]
+            ],
+            "outsidePolicy": false
           }
         }
       ]

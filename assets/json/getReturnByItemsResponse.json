@@ -18,6 +18,7 @@
                             "invoiceID": "1100001109",
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
+                            "outsidePolicy": true,
                             "expiry": "20170531"
                         },
                         {
@@ -33,6 +34,7 @@
                             "invoiceID": "1100001109",
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
+                            "outsidePolicy": false,
                             "expiry": "20170531"
                         },
                         {
@@ -48,6 +50,7 @@
                             "invoiceID": "1100001104",
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "C10527042",
+                            "outsidePolicy": false,
                             "expiry": "20251101"
                         },
                         {
@@ -63,6 +66,7 @@
                             "invoiceID": "1100001109",
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
+                            "outsidePolicy": false,
                             "expiry": "20170531"
                         },
                         {
@@ -78,6 +82,7 @@
                             "invoiceID": "1100001109",
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
+                            "outsidePolicy": false,
                             "expiry": "20170531"
                         }
                     ]
@@ -98,6 +103,7 @@
                             "invoiceID": "1100001109",
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
+                            "outsidePolicy": false,
                             "expiry": "20170531"
                         },
                         {
@@ -113,6 +119,7 @@
                             "invoiceID": "1100001109",
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
+                            "outsidePolicy": false,
                             "expiry": "20170531"
                         }
                     ]
@@ -133,6 +140,7 @@
                             "invoiceID": "1100001109",
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
+                            "outsidePolicy": false,
                             "expiry": "20170531"
                         },
                         {
@@ -148,6 +156,7 @@
                             "invoiceID": "1100001109",
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
+                            "outsidePolicy": false,
                             "expiry": "20170531"
                         }
                     ]
@@ -168,6 +177,7 @@
                             "invoiceID": "1100001104",
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "C10527042",
+                            "outsidePolicy": false,
                             "expiry": "20251101"
                         }
                     ]

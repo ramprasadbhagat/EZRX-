@@ -24,6 +24,7 @@ class ReturnItem with _$ReturnItem {
     required String invoiceID,
     required String customerName,
     required String batch,
+    required bool outsidePolicy,
     required DateTimeStringValue expiry,
     required ProductImages productImages,
   }) = _ReturnItem;
@@ -42,6 +43,7 @@ class ReturnItem with _$ReturnItem {
         customerName: '',
         batch: '',
         expiry: DateTimeStringValue(''),
+        outsidePolicy: false,
         productImages: ProductImages.empty(),
       );
 }

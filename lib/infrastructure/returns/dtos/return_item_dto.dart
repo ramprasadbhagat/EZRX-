@@ -30,6 +30,8 @@ class ReturnItemDto with _$ReturnItemDto {
     @JsonKey(name: 'customerName', defaultValue: '')
         required String customerName,
     @JsonKey(name: 'batch', defaultValue: '') required String batch,
+    @JsonKey(name: 'outsidePolicy', defaultValue: false)
+        required bool outsidePolicy,
     @JsonKey(name: 'expiry', defaultValue: '') required String expiry,
   }) = _ReturnItemDto;
 
@@ -49,6 +51,7 @@ class ReturnItemDto with _$ReturnItemDto {
       invoiceID: returnItem.invoiceID,
       customerName: returnItem.customerName,
       batch: returnItem.batch,
+      outsidePolicy: returnItem.outsidePolicy,
       expiry: returnItem.expiry.getOrCrash(),
     );
   }
@@ -67,6 +70,7 @@ class ReturnItemDto with _$ReturnItemDto {
       invoiceID: invoiceID,
       customerName: customerName,
       batch: batch,
+      outsidePolicy: outsidePolicy,
       expiry: DateTimeStringValue(expiry),
       productImages: ProductImages.empty(),
     );

@@ -23,6 +23,7 @@ class ReturnMaterial with _$ReturnMaterial {
     required PrincipalName principalName,
     required DateTimeStringValue expiryDate,
     required DateTimeStringValue priceDate,
+    required bool outsidePolicy,
     required List<ReturnMaterial> bonusItems,
   }) = _ReturnMaterial;
 
@@ -41,6 +42,7 @@ class ReturnMaterial with _$ReturnMaterial {
         expiryDate: DateTimeStringValue(''),
         priceDate: DateTimeStringValue(''),
         bonusItems: <ReturnMaterial>[],
+        outsidePolicy: false,
       );
 
   String get uuid => '$assignmentNumber$itemNumber';

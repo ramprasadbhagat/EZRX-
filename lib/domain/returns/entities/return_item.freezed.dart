@@ -28,6 +28,7 @@ mixin _$ReturnItem {
   String get invoiceID => throw _privateConstructorUsedError;
   String get customerName => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
+  bool get outsidePolicy => throw _privateConstructorUsedError;
   DateTimeStringValue get expiry => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
 
@@ -55,6 +56,7 @@ abstract class $ReturnItemCopyWith<$Res> {
       String invoiceID,
       String customerName,
       String batch,
+      bool outsidePolicy,
       DateTimeStringValue expiry,
       ProductImages productImages});
 
@@ -86,6 +88,7 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
     Object? invoiceID = null,
     Object? customerName = null,
     Object? batch = null,
+    Object? outsidePolicy = null,
     Object? expiry = null,
     Object? productImages = null,
   }) {
@@ -138,6 +141,10 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
+      outsidePolicy: null == outsidePolicy
+          ? _value.outsidePolicy
+          : outsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
       expiry: null == expiry
           ? _value.expiry
           : expiry // ignore: cast_nullable_to_non_nullable
@@ -179,6 +186,7 @@ abstract class _$$_ReturnItemCopyWith<$Res>
       String invoiceID,
       String customerName,
       String batch,
+      bool outsidePolicy,
       DateTimeStringValue expiry,
       ProductImages productImages});
 
@@ -209,6 +217,7 @@ class __$$_ReturnItemCopyWithImpl<$Res>
     Object? invoiceID = null,
     Object? customerName = null,
     Object? batch = null,
+    Object? outsidePolicy = null,
     Object? expiry = null,
     Object? productImages = null,
   }) {
@@ -261,6 +270,10 @@ class __$$_ReturnItemCopyWithImpl<$Res>
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
               as String,
+      outsidePolicy: null == outsidePolicy
+          ? _value.outsidePolicy
+          : outsidePolicy // ignore: cast_nullable_to_non_nullable
+              as bool,
       expiry: null == expiry
           ? _value.expiry
           : expiry // ignore: cast_nullable_to_non_nullable
@@ -289,6 +302,7 @@ class _$_ReturnItem extends _ReturnItem {
       required this.invoiceID,
       required this.customerName,
       required this.batch,
+      required this.outsidePolicy,
       required this.expiry,
       required this.productImages})
       : super._();
@@ -318,13 +332,15 @@ class _$_ReturnItem extends _ReturnItem {
   @override
   final String batch;
   @override
+  final bool outsidePolicy;
+  @override
   final DateTimeStringValue expiry;
   @override
   final ProductImages productImages;
 
   @override
   String toString() {
-    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, expiry: $expiry, productImages: $productImages)';
+    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, productImages: $productImages)';
   }
 
   @override
@@ -355,6 +371,8 @@ class _$_ReturnItem extends _ReturnItem {
             (identical(other.customerName, customerName) ||
                 other.customerName == customerName) &&
             (identical(other.batch, batch) || other.batch == batch) &&
+            (identical(other.outsidePolicy, outsidePolicy) ||
+                other.outsidePolicy == outsidePolicy) &&
             (identical(other.expiry, expiry) || other.expiry == expiry) &&
             (identical(other.productImages, productImages) ||
                 other.productImages == productImages));
@@ -375,6 +393,7 @@ class _$_ReturnItem extends _ReturnItem {
       invoiceID,
       customerName,
       batch,
+      outsidePolicy,
       expiry,
       productImages);
 
@@ -399,6 +418,7 @@ abstract class _ReturnItem extends ReturnItem {
       required final String invoiceID,
       required final String customerName,
       required final String batch,
+      required final bool outsidePolicy,
       required final DateTimeStringValue expiry,
       required final ProductImages productImages}) = _$_ReturnItem;
   const _ReturnItem._() : super._();
@@ -427,6 +447,8 @@ abstract class _ReturnItem extends ReturnItem {
   String get customerName;
   @override
   String get batch;
+  @override
+  bool get outsidePolicy;
   @override
   DateTimeStringValue get expiry;
   @override

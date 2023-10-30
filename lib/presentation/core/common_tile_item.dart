@@ -29,6 +29,7 @@ class CommonTileItem extends StatelessWidget {
     this.isCovidItem = false,
     this.showOfferTag = false,
     this.showBundleTag = false,
+    this.topHeaderWidget,
   }) : super(key: key);
 
   final String label;
@@ -47,6 +48,7 @@ class CommonTileItem extends StatelessWidget {
   final bool showOfferTag;
   final bool showBundleTag;
   final VoidCallback? onTap;
+  final Widget? topHeaderWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,7 @@ class CommonTileItem extends StatelessWidget {
             _HeaderItem(
               header: headerText,
               statusWidget: statusWidget,
+              topHeaderWidget: topHeaderWidget,
             ),
             Row(
               children: [
@@ -204,10 +207,12 @@ class _HeaderItem extends StatelessWidget {
     Key? key,
     this.header,
     this.statusWidget,
+    this.topHeaderWidget,
   }) : super(key: key);
 
   final String? header;
   final Widget? statusWidget;
+  final Widget? topHeaderWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -216,24 +221,29 @@ class _HeaderItem extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
       children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                headerText,
-                key: WidgetKeys.commonTileItemHeader,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: ZPColors.darkerGrey,
-                    ),
+        topHeaderWidget ?? const SizedBox.shrink(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    headerText,
+                    key: WidgetKeys.commonTileItemHeader,
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: ZPColors.darkerGrey,
+                        ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            statusWidget ?? const SizedBox.shrink(),
+          ],
         ),
-        statusWidget ?? const SizedBox.shrink(),
       ],
     );
   }

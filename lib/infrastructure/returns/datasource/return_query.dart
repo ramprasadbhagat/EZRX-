@@ -19,6 +19,7 @@ class ReturnQuery {
               customerName
               batch
               expiry
+              outsidePolicy
             }
           }
           totalCount
