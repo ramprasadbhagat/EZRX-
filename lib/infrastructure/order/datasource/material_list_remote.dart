@@ -36,6 +36,7 @@ class MaterialListRemoteDataSource {
     required bool bundleOffers,
     required bool isProductOffer,
     required String orderByName,
+    required String orderByPrice,
     required List<String> manufactureList,
     required List<String> countryListCode,
     required String principalCode,
@@ -51,14 +52,18 @@ class MaterialListRemoteDataSource {
           'Customer': customerCode,
           'First': pageSize,
           'Language': language,
-          'OrderByName': orderByName,
           'SalesOrg': salesOrgCode,
           'ShipTo': shipToCode,
           'isGimmick': gimmickMaterial,
           'SearchKey': searchKey,
         },
       };
-
+      if (orderByName.isNotEmpty) {
+        variables['request']!['OrderByName'] = orderByName;
+      }
+      if (orderByPrice.isNotEmpty) {
+        variables['request']!['OrderByPrice'] = orderByPrice;
+      }
       if (isFavourite) variables['request']!['IsFavourite'] = isFavourite;
       if (isFOCMaterial) variables['request']!['isFOCMaterial'] = isFOCMaterial;
       if (bundleOffers) variables['request']!['Type'] = 'bundle';

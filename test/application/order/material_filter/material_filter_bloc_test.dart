@@ -111,10 +111,12 @@ void main() {
       ),
       expect: () => [
         MaterialFilterState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
           apiFailureOrSuccessOption: none(),
           isFetching: true,
         ),
         MaterialFilterState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
           materialFilter: materialFilterMockData,
           apiFailureOrSuccessOption: none(),
           isFetching: false,
@@ -157,8 +159,10 @@ void main() {
       expect: () => [
         MaterialFilterState.initial().copyWith(
           isFetching: true,
+          salesOrganisation: fakeSalesOrganisation,
         ),
         MaterialFilterState.initial().copyWith(
+          salesOrganisation: fakeSalesOrganisation,
           isFetching: false,
           apiFailureOrSuccessOption: optionOf(
             const Left(
@@ -507,6 +511,19 @@ void main() {
         materialFilterBloc.state.emptyMaterialFilter,
         MaterialFilter.empty(),
       );
+    });
+
+    test('Get sort filter list by default', () {
+      expect(
+        MaterialFilterState.initial().displaySortFilter,
+        [Sort.az, Sort.za],
+      );
+    });
+
+    test('Get sort filter in ID market', () {
+      final state = MaterialFilterState.initial()
+          .copyWith(salesOrganisation: fakeIDSalesOrganisation);
+      expect(state.displaySortFilter, Sort.values);
     });
   });
 }

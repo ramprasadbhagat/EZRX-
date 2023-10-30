@@ -35,12 +35,13 @@ class MaterialFilterBloc
           state.copyWith(
             apiFailureOrSuccessOption: none(),
             isFetching: true,
+            salesOrganisation: e.salesOrganisation,
           ),
         );
         final failureOrSuccess =
             await materialFilterRepository.getMaterialFilterList(
           salesOrgConfig: e.salesOrgConfig,
-          salesOrganisation: e.salesOrganisation,
+          salesOrganisation: state.salesOrganisation,
           customerCodeInfo: e.customerCodeInfo,
           shipToInfo: e.shipToInfo,
           user: e.user,

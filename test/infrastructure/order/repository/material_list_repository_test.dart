@@ -188,7 +188,12 @@ void main() {
             isProductOffer: fakeMaterialFilter.isProductOffer,
             principalCode: '',
             offset: 0,
-            orderByName: fakeMaterialFilter.sortBy.valueRequest,
+            orderByName: fakeMaterialFilter.sortBy.isAlphabetSort
+                ? fakeMaterialFilter.sortBy.valueRequest
+                : '',
+            orderByPrice: fakeMaterialFilter.sortBy.isPriceSort
+                ? fakeMaterialFilter.sortBy.valueRequest
+                : '',
             manufactureList: fakeMaterialFilter.manufactureListSelected,
             countryListCode: fakeMaterialFilter.countryListSelected
                 .map((e) => e.code)
@@ -232,7 +237,12 @@ void main() {
             isProductOffer: fakeMaterialFilterWithComboOffers.isProductOffer,
             principalCode: '',
             offset: 0,
-            orderByName: fakeMaterialFilterWithComboOffers.sortBy.valueRequest,
+            orderByName: fakeMaterialFilterWithComboOffers.sortBy.isAlphabetSort
+                ? fakeMaterialFilterWithComboOffers.sortBy.valueRequest
+                : '',
+            orderByPrice: fakeMaterialFilterWithComboOffers.sortBy.isPriceSort
+                ? fakeMaterialFilterWithComboOffers.sortBy.valueRequest
+                : '',
             manufactureList:
                 fakeMaterialFilterWithComboOffers.manufactureListSelected,
             countryListCode: fakeMaterialFilterWithComboOffers
@@ -756,6 +766,7 @@ void main() {
             isProductOffer: false,
             manufactureList: [fakePrincipleData.principalName.getOrCrash()],
             orderByName: 'asc',
+            orderByPrice: '',
             principalCode: fakePrincipleData.principalCode.getOrCrash(),
             searchKey: '',
             salesDeal: [],
@@ -799,6 +810,7 @@ void main() {
             isProductOffer: false,
             manufactureList: [fakePrincipleData.principalName.getOrCrash()],
             orderByName: 'asc',
+            orderByPrice: '',
             principalCode: fakePrincipleData.principalCode.getOrCrash(),
             searchKey: '',
             salesDeal: [],

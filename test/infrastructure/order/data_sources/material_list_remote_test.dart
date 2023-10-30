@@ -221,6 +221,7 @@ void main() {
       isProductOffer: false,
       isFOCMaterial: false,
       orderByName: '',
+      orderByPrice: '',
       manufactureList: <String>[],
       countryListCode: <String>[],
       principalCode: '',

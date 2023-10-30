@@ -59,6 +59,7 @@ class MaterialListRepository implements IMaterialListRepository {
     }
 
     try {
+      final sortValue = selectedMaterialFilter.sortBy;
       final materialListData =
           await materialListRemoteDataSource.getProductList(
         salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
@@ -73,7 +74,8 @@ class MaterialListRepository implements IMaterialListRepository {
         isProductOffer: selectedMaterialFilter.isProductOffer,
         principalCode: '',
         offset: offset,
-        orderByName: selectedMaterialFilter.sortBy.valueRequest,
+        orderByName: sortValue.isAlphabetSort ? sortValue.valueRequest : '',
+        orderByPrice: sortValue.isPriceSort ? sortValue.valueRequest : '',
         manufactureList: selectedMaterialFilter.manufactureListSelected,
         countryListCode: selectedMaterialFilter.countryListSelected
             .map((e) => e.code)
@@ -118,7 +120,6 @@ class MaterialListRepository implements IMaterialListRepository {
     Either<ApiFailure, List<MaterialStockInfo>> stockInfoList,
     Either<ApiFailure, Map<MaterialNumber, MaterialInfo>> bundleData,
   ) {
-    
     return materialListData.products.map(
       (MaterialInfo materialInfo) {
         final materialStockInfo = getMaterialStockInfo(
@@ -343,6 +344,7 @@ class MaterialListRepository implements IMaterialListRepository {
         manufactureList: [principalData.principalName.getOrCrash()],
         offset: offset,
         orderByName: 'asc',
+        orderByPrice: '',
         principalCode: principalData.principalCode.getOrCrash(),
         searchKey: searchKey.getOrCrash(),
         salesDeal: [],

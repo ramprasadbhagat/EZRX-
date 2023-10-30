@@ -17,9 +17,10 @@ class _ProductSortOptions extends StatelessWidget {
         const SizedBox(height: 16.0),
         BlocBuilder<MaterialFilterBloc, MaterialFilterState>(
           buildWhen: (previous, current) =>
-              previous.materialFilter.sortBy != current.materialFilter.sortBy,
+              previous.materialFilter.sortBy != current.materialFilter.sortBy &&
+              previous.displaySortFilter != current.displaySortFilter,
           builder: (context, state) => Column(
-            children: Sort.values
+            children: state.displaySortFilter
                 .map(
                   (e) => RadioListTile(
                     key: WidgetKeys.sortByRadio(e.title),

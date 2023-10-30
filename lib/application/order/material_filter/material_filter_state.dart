@@ -6,11 +6,13 @@ class MaterialFilterState with _$MaterialFilterState {
   const factory MaterialFilterState({
     required MaterialFilter materialFilter,
     required SearchKey searchKey,
+    required SalesOrganisation salesOrganisation,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required bool isFetching,
   }) = _MaterialFilterState;
 
   factory MaterialFilterState.initial() => MaterialFilterState(
+        salesOrganisation: SalesOrganisation.empty(),
         isFetching: false,
         materialFilter: const MaterialFilter(
           countryMapOptions: <MaterialFilterCountry, bool>{},
@@ -20,6 +22,16 @@ class MaterialFilterState with _$MaterialFilterState {
         searchKey: SearchKey.searchFilter(''),
         apiFailureOrSuccessOption: none(),
       );
+
+  List<Sort> get displaySortFilter {
+    final sortList = List<Sort>.from(Sort.values);
+
+    if (!salesOrganisation.salesOrg.isID) {
+      sortList.removeWhere((e) => e.isPriceSort);
+    }
+
+    return sortList;
+  }
 
   MaterialFilter get displayMaterialFilter => MaterialFilter(
         manufactureMapOptions: Map<String, bool>.fromEntries(

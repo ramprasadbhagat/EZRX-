@@ -1568,6 +1568,7 @@ abstract class _resetFilter implements MaterialFilterEvent {
 mixin _$MaterialFilterState {
   MaterialFilter get materialFilter => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
@@ -1586,10 +1587,12 @@ abstract class $MaterialFilterStateCopyWith<$Res> {
   $Res call(
       {MaterialFilter materialFilter,
       SearchKey searchKey,
+      SalesOrganisation salesOrganisation,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching});
 
   $MaterialFilterCopyWith<$Res> get materialFilter;
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -1607,6 +1610,7 @@ class _$MaterialFilterStateCopyWithImpl<$Res, $Val extends MaterialFilterState>
   $Res call({
     Object? materialFilter = null,
     Object? searchKey = null,
+    Object? salesOrganisation = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
   }) {
@@ -1619,6 +1623,10 @@ class _$MaterialFilterStateCopyWithImpl<$Res, $Val extends MaterialFilterState>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1637,6 +1645,14 @@ class _$MaterialFilterStateCopyWithImpl<$Res, $Val extends MaterialFilterState>
       return _then(_value.copyWith(materialFilter: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganisation, (value) {
+      return _then(_value.copyWith(salesOrganisation: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1650,11 +1666,14 @@ abstract class _$$_MaterialFilterStateCopyWith<$Res>
   $Res call(
       {MaterialFilter materialFilter,
       SearchKey searchKey,
+      SalesOrganisation salesOrganisation,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
       bool isFetching});
 
   @override
   $MaterialFilterCopyWith<$Res> get materialFilter;
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganisation;
 }
 
 /// @nodoc
@@ -1670,6 +1689,7 @@ class __$$_MaterialFilterStateCopyWithImpl<$Res>
   $Res call({
     Object? materialFilter = null,
     Object? searchKey = null,
+    Object? salesOrganisation = null,
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
   }) {
@@ -1682,6 +1702,10 @@ class __$$_MaterialFilterStateCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      salesOrganisation: null == salesOrganisation
+          ? _value.salesOrganisation
+          : salesOrganisation // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1700,6 +1724,7 @@ class _$_MaterialFilterState extends _MaterialFilterState {
   const _$_MaterialFilterState(
       {required this.materialFilter,
       required this.searchKey,
+      required this.salesOrganisation,
       required this.apiFailureOrSuccessOption,
       required this.isFetching})
       : super._();
@@ -1709,13 +1734,15 @@ class _$_MaterialFilterState extends _MaterialFilterState {
   @override
   final SearchKey searchKey;
   @override
+  final SalesOrganisation salesOrganisation;
+  @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
   final bool isFetching;
 
   @override
   String toString() {
-    return 'MaterialFilterState(materialFilter: $materialFilter, searchKey: $searchKey, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching)';
+    return 'MaterialFilterState(materialFilter: $materialFilter, searchKey: $searchKey, salesOrganisation: $salesOrganisation, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, isFetching: $isFetching)';
   }
 
   @override
@@ -1727,6 +1754,8 @@ class _$_MaterialFilterState extends _MaterialFilterState {
                 other.materialFilter == materialFilter) &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey) &&
+            (identical(other.salesOrganisation, salesOrganisation) ||
+                other.salesOrganisation == salesOrganisation) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
@@ -1736,7 +1765,7 @@ class _$_MaterialFilterState extends _MaterialFilterState {
 
   @override
   int get hashCode => Object.hash(runtimeType, materialFilter, searchKey,
-      apiFailureOrSuccessOption, isFetching);
+      salesOrganisation, apiFailureOrSuccessOption, isFetching);
 
   @JsonKey(ignore: true)
   @override
@@ -1750,6 +1779,7 @@ abstract class _MaterialFilterState extends MaterialFilterState {
   const factory _MaterialFilterState(
       {required final MaterialFilter materialFilter,
       required final SearchKey searchKey,
+      required final SalesOrganisation salesOrganisation,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
       required final bool isFetching}) = _$_MaterialFilterState;
@@ -1759,6 +1789,8 @@ abstract class _MaterialFilterState extends MaterialFilterState {
   MaterialFilter get materialFilter;
   @override
   SearchKey get searchKey;
+  @override
+  SalesOrganisation get salesOrganisation;
   @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
