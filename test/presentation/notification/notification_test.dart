@@ -8,13 +8,16 @@ import 'package:ezrxmobile/application/payments/payment_summary_details/payment_
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -63,8 +66,11 @@ void main() {
   late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
   late PaymentSummaryDetailsBloc paymentSummaryDetailsBlockMock;
 
-  setUpAll(() {
+  setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
+    notifications = await NotificationLocalDataSource().getNotificationList();
+    customerCodeListMock =
+        await CustomerCodeLocalDataSource().getCustomerCodeList();
   });
   group('Notification Screen', () {
     setUp(() async {
@@ -85,9 +91,6 @@ void main() {
           .thenReturn(CustomerCodeState.initial());
       when(() => notificationBlocMock.state)
           .thenReturn(NotificationState.initial());
-      notifications = await NotificationLocalDataSource().getNotificationList();
-      customerCodeListMock =
-          await CustomerCodeLocalDataSource().getCustomerCodeList();
     });
     Widget getScopedWidget() {
       return WidgetUtils.getScopedWidget(
@@ -159,9 +162,8 @@ void main() {
       );
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
-      final noRecordFoundWidget = find.byType(
-        NoRecordFound,
-      );
+      final noRecordFoundWidget = find.byType(NoRecordFound);
+
       expect(noRecordFoundWidget, findsOneWidget);
     });
     testWidgets('=> Body Test onRefresh', (tester) async {
@@ -235,7 +237,7 @@ void main() {
             notificationList: Notifications.empty().copyWith(
               notificationData: [
                 ...notifications.notificationData,
-                ...notifications.notificationData
+                ...notifications.notificationData,
               ],
             ),
             canLoadMore: true,
@@ -250,19 +252,8 @@ void main() {
           ),
         );
         expect(itemKey, findsWidgets);
-
-        final itemKey2 = find.byKey(
-          WidgetKeys.genericKey(
-            key: notifications.notificationData[4].description,
-          ),
-        );
-        expect(itemKey2, findsOneWidget);
-        await tester.drag(
-          itemKey2,
-          const Offset(0, -10000),
-        );
-
-        await tester.pumpAndSettle();
+        await tester.drag(itemKey.first, const Offset(0, -500));
+        await tester.pump();
 
         verify(
           () => notificationBlocMock.add(
@@ -289,17 +280,7 @@ void main() {
             isReadNotification: true,
           ),
         );
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeUser,
-          ),
-        );
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-            customerCodeInfo: customerCodeListMock.first,
-            userInfo: fakeUser,
-          ),
-        );
+
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             user: fakeUser,
@@ -345,16 +326,6 @@ void main() {
             notificationList: notifications,
             isFetching: false,
             isReadNotification: true,
-          ),
-        );
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeUser,
-          ),
-        );
-        when(() => customerCodeBlocMock.state).thenReturn(
-          CustomerCodeState.initial().copyWith(
-            customerCodeInfo: customerCodeListMock.first,
           ),
         );
         when(() => eligibilityBlocMock.state).thenReturn(
@@ -408,7 +379,10 @@ void main() {
         final customerDetails = find.text(
           '${customerCodeListMock.first.customerName}(${customerCodeListMock.first.customerCodeSoldTo})',
         );
-        expect(customerDetails, findsNWidgets(5));
+        expect(
+          customerDetails,
+          findsNWidgets(notifications.notificationData.length),
+        );
         final itemKey = find.byKey(
           WidgetKeys.genericKey(
             key: notifications.notificationData.first.description,
@@ -424,6 +398,85 @@ void main() {
             ),
           ),
         ).called(1);
+      },
+    );
+
+    testWidgets(
+      'Should navigate to payment detail when eligible',
+      (tester) async {
+        final fakeUser =
+            User.empty().copyWith.role(type: RoleType('root_admin'));
+        final notificationList = notifications.notificationData
+            .where((e) => e.isPaymentEligible)
+            .toList();
+        when(() => notificationBlocMock.state).thenReturn(
+          NotificationState.initial().copyWith(
+            notificationList:
+                notifications.copyWith(notificationData: notificationList),
+            isFetching: false,
+            isReadNotification: true,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(user: fakeUser),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final itemKey = find.byKey(
+          WidgetKeys.genericKey(key: notificationList.first.description),
+        );
+
+        expect(itemKey, findsOneWidget);
+        await tester.tap(itemKey);
+        await tester.pumpAndSettle();
+        verify(
+          () => paymentSummaryDetailsBlockMock.add(
+            PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
+              salesOrganization: SalesOrganisation.empty(),
+              customerCodeInfo: CustomerCodeInfo.empty(),
+              paymentSummaryDetails: PaymentSummaryDetails.empty().copyWith(
+                paymentID: notificationList.first.saleDocument,
+              ),
+            ),
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      'Should show snackbar when tap on payment notification when not eligible',
+      (tester) async {
+        final notificationList = notifications.notificationData
+            .where((e) => e.isPaymentEligible)
+            .toList();
+        when(() => notificationBlocMock.state).thenReturn(
+          NotificationState.initial().copyWith(
+            notificationList:
+                notifications.copyWith(notificationData: notificationList),
+            isFetching: false,
+            isReadNotification: true,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial()
+              .copyWith
+              .salesOrgConfigs(disablePayment: true),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final itemKey = find.byKey(
+          WidgetKeys.genericKey(key: notificationList.first.description),
+        );
+
+        expect(itemKey, findsOneWidget);
+        await tester.tap(itemKey);
+        await tester.pumpAndSettle();
+        expect(find.byType(CustomSnackBar), findsOneWidget);
+        expect(find.text("You don't have access"), findsOneWidget);
       },
     );
   });
