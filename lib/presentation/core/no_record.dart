@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,6 +22,23 @@ class NoRecordFound extends StatelessWidget {
   final String? svgImage;
   final Widget actionButton;
   final Widget? subTitleWidget;
+
+  factory NoRecordFound.ordersHistory(BuildContext context) => NoRecordFound(
+        title: 'No past orders to show',
+        subTitle: 'Items ordered on eZRx+ will be shown here',
+        svgImage: SvgImage.emptyOrder,
+        actionButton: ElevatedButton(
+          key: WidgetKeys.startBrowsingViewByItem,
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size(
+              double.maxFinite,
+              50,
+            ),
+          ),
+          onPressed: () => context.navigateTo(const ProductsTabRoute()),
+          child: Text(context.tr('Start browsing')),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {

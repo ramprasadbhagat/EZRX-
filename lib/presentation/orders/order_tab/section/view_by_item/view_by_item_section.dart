@@ -19,7 +19,6 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -52,22 +51,7 @@ class ViewByItemsPage extends StatelessWidget {
 
         return ScrollList<ViewByItemGroup>(
           controller: ScrollController(),
-          noRecordFoundWidget: NoRecordFound(
-            title: 'No past orders to show',
-            subTitle: 'Items ordered on eZRx+ will be shown here',
-            svgImage: SvgImage.emptyOrder,
-            actionButton: ElevatedButton(
-              key: WidgetKeys.startBrowsingViewByItem,
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(
-                  double.maxFinite,
-                  50,
-                ),
-              ),
-              onPressed: () => context.navigateTo(const ProductsTabRoute()),
-              child: Text(context.tr('Start browsing')),
-            ),
-          ),
+          noRecordFoundWidget: NoRecordFound.ordersHistory(context),
           onRefresh: () {
             context
                 .read<ViewByItemFilterBloc>()
