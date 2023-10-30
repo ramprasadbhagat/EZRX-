@@ -13,8 +13,11 @@ class Notifications with _$Notifications {
     required Pagination pagination,
   }) = _Notifications;
 
-  factory Notifications.empty() =>  Notifications(
+  factory Notifications.empty() => Notifications(
         pagination: Pagination.empty(),
         notificationData: <NotificationData>[],
       );
+
+  bool get hasUnreadNotification =>
+      notificationData.any((element) => !element.isRead);
 }

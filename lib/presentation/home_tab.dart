@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -208,11 +209,36 @@ RouteItem ordersTabRouteItem = const RouteItem(
   label: 'Orders',
 );
 
-RouteItem notificationTabRouteItem = const RouteItem(
-  route: NotificationTabRoute(),
-  icon: Icon(
-    Icons.notifications_none_outlined,
-    key: WidgetKeys.notificationTab,
+RouteItem notificationTabRouteItem = RouteItem(
+  route: const NotificationTabRoute(),
+  icon: BlocBuilder<NotificationBloc, NotificationState>(
+    buildWhen: (previous, current) =>
+        previous.notificationList.hasUnreadNotification !=
+        current.notificationList.hasUnreadNotification,
+    builder: (context, state) {
+      return Stack(
+        children: [
+          const Icon(
+            Icons.notifications_none_outlined,
+            key: WidgetKeys.notificationTab,
+          ),
+          if (state.notificationList.hasUnreadNotification)
+            Positioned(
+              right: 3,
+              top: 3,
+              key: WidgetKeys.notificationBadge,
+              child: Container(
+                width: 8,
+                height: 8,
+                decoration: const BoxDecoration(
+                  color: ZPColors.orange,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+        ],
+      );
+    },
   ),
   label: 'Notifications',
 );
@@ -228,7 +254,7 @@ RouteItem moreTabRouteItem = const RouteItem(
 
 class RouteItem {
   final PageRouteInfo<dynamic> route;
-  final Icon icon;
+  final Widget icon;
   final String label;
 
   const RouteItem({

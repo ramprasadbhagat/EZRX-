@@ -80,6 +80,7 @@ class WidgetKeys {
   static const Key productsTab = Key('productsTab');
   static const Key ordersTab = Key('ordersTab');
   static const Key notificationTab = Key('notificationTab');
+  static const Key notificationBadge = Key('notificationBadge');
   static const Key moreTab = Key('moreTab');
   static const Key aupTcScreen = Key('aupTcScreen');
   static const Key customerCodeSelector = Key('customerCodeSelector');
@@ -249,7 +250,7 @@ class WidgetKeys {
   //============================================================
   static const Key comboDealDetailPage = Key('comboDealDetailPage');
   static const Key getComboDealButton = Key('getComboDealButton');
-    static const Key comboTitleLoading = Key('comboTitleLoading');
+  static const Key comboTitleLoading = Key('comboTitleLoading');
 
   //============================================================
   //  PolicyConfiguration page Keys

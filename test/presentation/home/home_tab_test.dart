@@ -10,6 +10,7 @@ import 'package:ezrxmobile/application/aup_tc/aup_tc_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -27,10 +28,12 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
+import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
@@ -82,6 +85,10 @@ class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 class BannerBlocMock extends MockBloc<BannerEvent, BannerState>
     implements BannerBloc {}
 
+class NotificationBlocMock
+    extends MockBloc<NotificationEvent, NotificationState>
+    implements NotificationBloc {}
+
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
@@ -113,6 +120,7 @@ void main() {
   EasyLocalization.logger.enableLevels = [];
   late CustomerCodeBlocMock mockCustomerCodeBloc;
   late SalesOrgBlocMock salesOrgBlocMock;
+  late NotificationBloc notificationBlocMock;
   late MaterialListBloc materialListBlocMock;
   late ViewByItemsBloc viewByItemsBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
@@ -130,6 +138,7 @@ void main() {
   late ProductSearchBloc productSearchBlocMock;
   late AnnouncementInfoBlocMock announcementInfoBlocMock;
   late ProductImageBlocMock productImageBlocMock;
+  late Notifications notifications;
 
   final fakeUser = User.empty().copyWith(
     username: Username('fake-user'),
@@ -191,6 +200,8 @@ void main() {
     locator.registerLazySingleton(() => remoteConfigServiceMock);
     locator.registerFactory(() => materialListBlocMock);
     locator.registerFactory(() => viewByItemsBlocMock);
+    locator.registerFactory(() => notificationBlocMock);
+    notifications = await NotificationLocalDataSource().getNotificationList();
   });
 
   group('Home Tab Screen', () {
@@ -213,6 +224,7 @@ void main() {
       announcementInfoBlocMock = AnnouncementInfoBlocMock();
       productImageBlocMock = ProductImageBlocMock();
       mockIntroBloc = MockIntroBloc();
+      notificationBlocMock = NotificationBlocMock();
 
       VisibilityDetectorController.instance.updateInterval = Duration.zero;
 
@@ -240,6 +252,9 @@ void main() {
 
       when(() => materialListBlocMock.state).thenReturn(
         MaterialListState.initial(),
+      );
+      when(() => notificationBlocMock.state).thenReturn(
+        NotificationState.initial(),
       );
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
@@ -299,6 +314,9 @@ void main() {
             BlocProvider<IntroBloc>(create: (context) => mockIntroBloc),
             BlocProvider<SalesOrgBloc>(
               create: (context) => salesOrgBlocMock,
+            ),
+            BlocProvider<NotificationBloc>(
+              create: (context) => notificationBlocMock,
             ),
             BlocProvider<CustomerCodeBloc>(
               create: (context) => mockCustomerCodeBloc,
@@ -760,6 +778,46 @@ void main() {
 
         final productTab = find.byKey(WidgetKeys.productsTab);
         expect(productTab, findsNothing);
+      });
+
+      testWidgets(
+          'Find notification with badge icon when there is unread notification present',
+          (tester) async {
+        when(() => notificationBlocMock.state).thenReturn(
+          NotificationState.initial().copyWith(
+            notificationList: notifications,
+          ),
+        );
+        await tester.pumpWidget(getWidget(widget: HomeNavigationTabbar()));
+        await tester.pump();
+
+        final notificationWithBadgeIcon =
+            find.byKey(WidgetKeys.notificationBadge);
+
+        expect(notificationWithBadgeIcon, findsOneWidget);
+      });
+
+      testWidgets(
+          'notification with badge icon not visible when there is no unread notification present',
+          (tester) async {
+        when(() => notificationBlocMock.state).thenReturn(
+          NotificationState.initial().copyWith(
+            notificationList: notifications.copyWith(
+              notificationData: [
+                notifications.notificationData.first.copyWith(
+                  isRead: true,
+                )
+              ],
+            ),
+          ),
+        );
+        await tester.pumpWidget(getWidget(widget: HomeNavigationTabbar()));
+        await tester.pump();
+
+        final notificationWithBadgeIcon =
+            find.byKey(WidgetKeys.notificationBadge);
+
+        expect(notificationWithBadgeIcon, findsNothing);
       });
     });
 
