@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -304,6 +305,66 @@ void main() {
         final bonusSampleItemButton =
             find.byKey(WidgetKeys.bonusSampleItemButtonKey);
         expect(bonusSampleItemButton, findsNothing);
+      });
+
+      testWidgets(
+          'Bonus sample item with 0.00 price value and no bonus tag when material is bonus deal for ID Market',
+          (tester) async {
+        const materialNumber = '23168451';
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            isFetching: false,
+            apiFailureOrSuccessOption: none(),
+            cartProducts: [
+              cartItem.copyWith(
+                addedBonusList: [
+                  MaterialItemBonus.empty().copyWith(
+                    materialInfo: MaterialInfo.empty().copyWith(
+                      materialNumber: MaterialNumber(materialNumber),
+                    ),
+                    qty: 1,
+                  )
+                ],
+              )
+            ],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation:
+                SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('1900')),
+            salesOrgConfigs: SalesOrganisationConfigs.empty().copyWith(
+              priceOverride: false,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final bonusSampleItem = find.byKey(
+          WidgetKeys.cartItemBonus(materialNumber, materialNumber),
+        );
+        expect(bonusSampleItem, findsOneWidget);
+        expect(
+          find.descendant(of: bonusSampleItem, matching: find.text('Bonus')),
+          findsNothing,
+        );
+        expect(
+          find.descendant(of: bonusSampleItem, matching: find.text('FREE')),
+          findsNothing,
+        );
+        final price = find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              widget.key == WidgetKeys.priceComponent &&
+              widget.text.toPlainText().contains('0'),
+        );
+        expect(
+          find.descendant(of: bonusSampleItem, matching: price),
+          findsOneWidget,
+        );
       });
 
       testWidgets(

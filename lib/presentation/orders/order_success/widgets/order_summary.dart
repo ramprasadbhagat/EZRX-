@@ -36,7 +36,7 @@ class _OrderSummary extends StatelessWidget {
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
                 price:
-                    '${orderHistoryDetails.orderedItemsValue(isMYExternalSalesRep)}',
+                    '${orderHistoryDetails.subTotalExcludeTax(isMYExternalSalesRep)}',
               ),
             ],
           ),

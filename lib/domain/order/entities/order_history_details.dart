@@ -159,6 +159,18 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
             : previousValue,
       );
 
+  double subTotalExcludeTax(bool isMYExternalSalesRep) =>
+      orderHistoryDetailsOrderItem.fold(
+        orderValue,
+        (previousValue, element) => isMYExternalSalesRep &&
+                element.type.isMaterialTypeComm &&
+                element.principalData.principalCode.isPnG &&
+                !invoiceNumber.isValid() &&
+                orderValue > 0
+            ? orderValue - (element.qty * element.unitPrice.zpPrice)
+            : previousValue,
+      );
+
   double orderedItemsValue(bool isMYExternalSalesRep) =>
       orderHistoryDetailsOrderItem.fold(
         grandTotalWithTax,
