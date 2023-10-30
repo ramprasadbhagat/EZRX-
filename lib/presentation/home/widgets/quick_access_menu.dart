@@ -118,12 +118,6 @@ class _QuickAccessMenuData {
 }
 
 List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
-  // final homeQuickAccessWebLoginMenu = _QuickAccessMenuData(
-  //   key: WidgetKeys.homeQuickAccessWebLoginMenu,
-  //   icon: 'web_login_menu.svg',
-  //   label: 'Web login',
-  //   onTap: () {},
-  // );
   final homeQuickAccessOrdersMenu = _QuickAccessMenuData(
     key: WidgetKeys.homeQuickAccessOrdersMenu,
     icon: 'order_menu.svg',
@@ -144,13 +138,6 @@ List<_QuickAccessMenuData> _getQuickAccessItems(BuildContext context) {
     label: 'Payments',
     onTap: () => context.navigateTo(const PaymentPageRoute()),
   );
-
-  // final homeQuickAccessLoyaltyMenu = _QuickAccessMenuData(
-  //   key: WidgetKeys.homeQuickAccessLoyaltyMenu,
-  //   icon: 'loyalty_menu.svg',
-  //   label: 'Loyalty',
-  //   onTap: () => {},
-  // );
 
   final homeQuickAccessChatSupportMenu = _QuickAccessMenuData(
     key: WidgetKeys.homeQuickAccessChatSupportMenu,

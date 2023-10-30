@@ -18,14 +18,13 @@ class MoreDetailsTile {
   final Key? key;
   final Widget icon;
   final String label;
-  //TODO: remove nullable once all methods implemented
-  final void Function()? onTap;
+  final void Function() onTap;
 
   const MoreDetailsTile({
     this.key,
     required this.icon,
     required this.label,
-    this.onTap,
+    required this.onTap,
   });
 
   factory MoreDetailsTile.faq(BuildContext context) => MoreDetailsTile(
@@ -37,14 +36,6 @@ class MoreDetailsTile {
         onTap: () => context.navigateTo(
           const FAQPageRoute(),
         ),
-      );
-
-  factory MoreDetailsTile.userGuide() => const MoreDetailsTile(
-        icon: Icon(
-          Icons.chrome_reader_mode_outlined,
-          color: ZPColors.lightGray,
-        ),
-        label: 'User guide',
       );
 
   factory MoreDetailsTile.aboutUs(BuildContext context) => MoreDetailsTile(
@@ -146,14 +137,6 @@ class MoreDetailsTile {
         onTap: () => context.navigateTo(const PaymentPageRoute()),
       );
 
-  factory MoreDetailsTile.loyaltyTab() => const MoreDetailsTile(
-        icon: Icon(
-          Icons.loyalty_outlined,
-          color: ZPColors.lightGray,
-        ),
-        label: 'Loyalty',
-      );
-
   factory MoreDetailsTile.eZPointTab(BuildContext context) => MoreDetailsTile(
         key: WidgetKeys.eZPointTile,
         icon: const Icon(
@@ -231,13 +214,5 @@ class MoreDetailsTile {
         ),
         label: 'Notifications',
         onTap: () => context.navigateTo(const NotificationTabRoute()),
-      );
-
-  factory MoreDetailsTile.privacy() => const MoreDetailsTile(
-        icon: Icon(
-          Icons.security_outlined,
-          color: ZPColors.lightGray,
-        ),
-        label: 'Privacy',
       );
 }
