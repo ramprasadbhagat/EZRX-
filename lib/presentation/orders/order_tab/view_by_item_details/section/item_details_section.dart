@@ -61,6 +61,8 @@ class ItemDetailsSection extends StatelessWidget {
                 ? '${'Batch'.tr()}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${orderHistoryItem.expiryDate.dateOrDashString})'
                 : '',
             isCovidItem: orderHistoryItem.orderType.isCovidOrderType,
+            showOfferTag: orderHistoryItem.isOfferItem,
+            showBundleTag: orderHistoryItem.isBundle,
           ),
         ],
       ),

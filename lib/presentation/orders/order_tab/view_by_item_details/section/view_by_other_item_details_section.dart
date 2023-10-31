@@ -92,6 +92,8 @@ class OtherItemDetailsSection extends StatelessWidget {
                                                 headerText:
                                                     '${context.tr('Order')} #${e.orderNumber.getOrDefaultValue('')}',
                                                 subtitle: '',
+                                                showOfferTag: e.isOfferItem,
+                                                showBundleTag: e.isBundle,
                                               ),
                                             )
                                             .toList(),

@@ -25,6 +25,7 @@ import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
@@ -462,6 +463,42 @@ void main() {
         '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'EXP'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
       );
       expect(expectedDelivery, findsOneWidget);
+    });
+
+    testWidgets('on Offer material', (tester) async {
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          viewByItemDetails: OrderHistory.empty().copyWith(
+            orderHistoryItems: [
+              fakeOrderHistoryItem.copyWith(
+                promoStatus: true,
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(find.byWidget(ProductTag.onOfferIcon()), findsOneWidget);
+    });
+
+    testWidgets('bundle material', (tester) async {
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem,
+          viewByItemDetails: OrderHistory.empty().copyWith(
+            orderHistoryItems: [
+              fakeOrderHistoryItem.copyWith(
+                isBundle: true,
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      expect(find.byWidget(ProductTag.bundleOfferIcon()), findsOneWidget);
     });
   });
 }
