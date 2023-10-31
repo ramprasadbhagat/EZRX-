@@ -31,6 +31,7 @@ import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_p
 import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
@@ -914,6 +915,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
      * inside state.haveShipTo
      */
     if (state.haveShipTo) {
+      context.read<PaymentSummaryDetailsBloc>().add(
+            PaymentSummaryDetailsEvent.initialized(
+              salesOrganization: salesOrgState.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+              user: user,
+              shipToInfo: state.shipToInfo,
+            ),
+          );
+
       context.read<ProductDetailBloc>().add(
             ProductDetailEvent.initialized(
               salesOrganisation: salesOrgState.salesOrganisation,

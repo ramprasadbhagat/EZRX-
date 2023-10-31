@@ -7,12 +7,32 @@ class _PaymentAdviceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
+    return BlocConsumer<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
+      listenWhen: (previous, current) =>
+          previous.isSavingAdvice != current.isSavingAdvice,
+      listener: (context, state) {
+        if (!state.isSavingAdvice) {
+          state.failureOrSuccessOption.fold(
+            () => CustomSnackBar(
+              messageText: 'Download Successful',
+            ).show(context),
+            (option) => option.fold(
+              (failure) => ErrorUtils.handleApiFailure(context, failure),
+              (r) {},
+            ),
+          );
+        }
+      },
       buildWhen: (previous, current) =>
           previous.isListLoading != current.isListLoading ||
-          previous.isDetailFetching != current.isDetailFetching,
+          previous.isDetailFetching != current.isDetailFetching ||
+          previous.isSavingAdvice != current.isSavingAdvice ||
+          previous.isFetchingAdvice != current.isFetchingAdvice,
       builder: (context, state) {
-        return state.isLoading || state.paymentItemList.isEmpty
+        return state.isLoading ||
+                state.paymentItemList.isEmpty ||
+                state.isFetchingAdvice ||
+                state.paymentInvoiceInfoPdf == PaymentInvoiceInfoPdf.empty()
             ? const SizedBox.shrink()
             : Container(
                 decoration: const BoxDecoration(
@@ -67,14 +87,26 @@ class _PaymentAdviceButton extends StatelessWidget {
                             color: ZPColors.primary,
                           ),
                         ),
-                        child: Text(
-                          'Download advice'.tr(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium
-                              ?.copyWith(color: ZPColors.primary),
+                        child: SizedBox(
+                          height: 20,
+                          child: LoadingShimmer.withChild(
+                            enabled: state.isSavingAdvice,
+                            child: Text(
+                              context.tr('Download advice'),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(
+                                    color: ZPColors.primary,
+                                  ),
+                            ),
+                          ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<PaymentSummaryDetailsBloc>().add(
+                                const PaymentSummaryDetailsEvent.saveAdvice(),
+                              );
+                        },
                       ),
                     ),
                   ],

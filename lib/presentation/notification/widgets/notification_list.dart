@@ -103,8 +103,6 @@ class _NotificationList extends StatelessWidget {
         eligibilityState.isPaymentEnabled)) {
       context.read<PaymentSummaryDetailsBloc>().add(
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-              salesOrganization: eligibilityState.salesOrganisation,
-              customerCodeInfo: eligibilityState.customerCodeInfo,
               paymentSummaryDetails: PaymentSummaryDetails.empty().copyWith(
                 paymentID: notificationData.saleDocument,
               ),

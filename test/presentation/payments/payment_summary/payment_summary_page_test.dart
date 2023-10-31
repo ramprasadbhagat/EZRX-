@@ -601,8 +601,6 @@ void main() {
       verify(
         () => paymentSummaryDetailBlocMock.add(
           PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-            salesOrganization: SalesOrganisation.empty(),
-            customerCodeInfo: CustomerCodeInfo.empty(),
             paymentSummaryDetails: PaymentSummaryDetails.empty().copyWith(
               paymentAmount: 250,
               status: FilterStatus('In Progress'),

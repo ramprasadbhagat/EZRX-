@@ -2000,6 +2000,8 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => PaymentSummaryDetailsBloc(
       paymentItemRepository: locator<PaymentSummaryDetailsRepository>(),
+      newPaymentRepository: locator<NewPaymentRepository>(),
+      deviceRepository: locator<DeviceRepository>(),
     ),
   );
 

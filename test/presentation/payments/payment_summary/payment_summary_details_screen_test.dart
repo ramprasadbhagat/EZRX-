@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -158,16 +159,20 @@ void main() {
       when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
         PaymentSummaryDetailsState.initial().copyWith(
           isDetailFetching: true,
+          isFetchingAdvice: true,
         ),
       );
       final expectedStates = [
         PaymentSummaryDetailsState.initial().copyWith(
           isDetailFetching: false,
+          isFetchingAdvice: false,
           paymentItemList: [
             PaymentItem.empty().copyWith(
               documentDate: DateTimeStringValue(''),
             ),
           ],
+          paymentInvoiceInfoPdf:
+              PaymentInvoiceInfoPdf.empty().copyWith(paymentID: 'paymentID'),
         ),
       ];
       whenListen(

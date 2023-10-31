@@ -18,47 +18,47 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PaymentSummaryDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
         fetchPaymentSummaryDetailsInfo,
-    required TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
         fetchPaymentSummaryList,
+    required TResult Function() fetchAdvice,
+    required TResult Function() saveAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
             SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryDetailsInfo,
-    TResult? Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryList,
+    TResult? Function()? fetchAdvice,
+    TResult? Function()? saveAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryDetailsInfo,
-    TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryList,
+    TResult Function()? fetchAdvice,
+    TResult Function()? saveAdvice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,6 +69,8 @@ mixin _$PaymentSummaryDetailsEvent {
         fetchPaymentSummaryDetailsInfo,
     required TResult Function(_FetchPaymentSummaryListEvent value)
         fetchPaymentSummaryList,
+    required TResult Function(_FetchAdvice value) fetchAdvice,
+    required TResult Function(_SaveAdvice value) saveAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +80,8 @@ mixin _$PaymentSummaryDetailsEvent {
         fetchPaymentSummaryDetailsInfo,
     TResult? Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult? Function(_FetchAdvice value)? fetchAdvice,
+    TResult? Function(_SaveAdvice value)? saveAdvice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +91,8 @@ mixin _$PaymentSummaryDetailsEvent {
         fetchPaymentSummaryDetailsInfo,
     TResult Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult Function(_FetchAdvice value)? fetchAdvice,
+    TResult Function(_SaveAdvice value)? saveAdvice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,6 +123,17 @@ abstract class _$$_InitializedCopyWith<$Res> {
   factory _$$_InitializedCopyWith(
           _$_Initialized value, $Res Function(_$_Initialized) then) =
       __$$_InitializedCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {SalesOrganisation salesOrganization,
+      CustomerCodeInfo customerCodeInfo,
+      User user,
+      ShipToInfo shipToInfo});
+
+  $SalesOrganisationCopyWith<$Res> get salesOrganization;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $UserCopyWith<$Res> get user;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
 }
 
 /// @nodoc
@@ -126,165 +143,16 @@ class __$$_InitializedCopyWithImpl<$Res>
   __$$_InitializedCopyWithImpl(
       _$_Initialized _value, $Res Function(_$_Initialized) _then)
       : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
-
-  @override
-  String toString() {
-    return 'PaymentSummaryDetailsEvent.initialized()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)
-        fetchPaymentSummaryDetailsInfo,
-    required TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)
-        fetchPaymentSummaryList,
-  }) {
-    return initialized();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
-    TResult? Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
-        fetchPaymentSummaryDetailsInfo,
-    TResult? Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
-        fetchPaymentSummaryList,
-  }) {
-    return initialized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
-    TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
-        fetchPaymentSummaryDetailsInfo,
-    TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
-        fetchPaymentSummaryList,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FetchPaymentSummaryDetailsEvent value)
-        fetchPaymentSummaryDetailsInfo,
-    required TResult Function(_FetchPaymentSummaryListEvent value)
-        fetchPaymentSummaryList,
-  }) {
-    return initialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FetchPaymentSummaryDetailsEvent value)?
-        fetchPaymentSummaryDetailsInfo,
-    TResult? Function(_FetchPaymentSummaryListEvent value)?
-        fetchPaymentSummaryList,
-  }) {
-    return initialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchPaymentSummaryDetailsEvent value)?
-        fetchPaymentSummaryDetailsInfo,
-    TResult Function(_FetchPaymentSummaryListEvent value)?
-        fetchPaymentSummaryList,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initialized implements PaymentSummaryDetailsEvent {
-  const factory _Initialized() = _$_Initialized;
-}
-
-/// @nodoc
-abstract class _$$_FetchPaymentSummaryDetailsEventCopyWith<$Res> {
-  factory _$$_FetchPaymentSummaryDetailsEventCopyWith(
-          _$_FetchPaymentSummaryDetailsEvent value,
-          $Res Function(_$_FetchPaymentSummaryDetailsEvent) then) =
-      __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {SalesOrganisation salesOrganization,
-      CustomerCodeInfo customerCodeInfo,
-      PaymentSummaryDetails paymentSummaryDetails});
-
-  $SalesOrganisationCopyWith<$Res> get salesOrganization;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
-  $PaymentSummaryDetailsCopyWith<$Res> get paymentSummaryDetails;
-}
-
-/// @nodoc
-class __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>
-    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res,
-        _$_FetchPaymentSummaryDetailsEvent>
-    implements _$$_FetchPaymentSummaryDetailsEventCopyWith<$Res> {
-  __$$_FetchPaymentSummaryDetailsEventCopyWithImpl(
-      _$_FetchPaymentSummaryDetailsEvent _value,
-      $Res Function(_$_FetchPaymentSummaryDetailsEvent) _then)
-      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? salesOrganization = null,
     Object? customerCodeInfo = null,
-    Object? paymentSummaryDetails = null,
+    Object? user = null,
+    Object? shipToInfo = null,
   }) {
-    return _then(_$_FetchPaymentSummaryDetailsEvent(
+    return _then(_$_Initialized(
       salesOrganization: null == salesOrganization
           ? _value.salesOrganization
           : salesOrganization // ignore: cast_nullable_to_non_nullable
@@ -293,10 +161,14 @@ class __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
               as CustomerCodeInfo,
-      paymentSummaryDetails: null == paymentSummaryDetails
-          ? _value.paymentSummaryDetails
-          : paymentSummaryDetails // ignore: cast_nullable_to_non_nullable
-              as PaymentSummaryDetails,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
     ));
   }
 
@@ -314,6 +186,227 @@ class __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>
     return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
       return _then(_value.copyWith(customerCodeInfo: value));
     });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_Initialized implements _Initialized {
+  const _$_Initialized(
+      {required this.salesOrganization,
+      required this.customerCodeInfo,
+      required this.user,
+      required this.shipToInfo});
+
+  @override
+  final SalesOrganisation salesOrganization;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final User user;
+  @override
+  final ShipToInfo shipToInfo;
+
+  @override
+  String toString() {
+    return 'PaymentSummaryDetailsEvent.initialized(salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, user: $user, shipToInfo: $shipToInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Initialized &&
+            (identical(other.salesOrganization, salesOrganization) ||
+                other.salesOrganization == salesOrganization) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, salesOrganization, customerCodeInfo, user, shipToInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+        fetchPaymentSummaryList,
+    required TResult Function() fetchAdvice,
+    required TResult Function() saveAdvice,
+  }) {
+    return initialized(salesOrganization, customerCodeInfo, user, shipToInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryList,
+    TResult? Function()? fetchAdvice,
+    TResult? Function()? saveAdvice,
+  }) {
+    return initialized?.call(
+        salesOrganization, customerCodeInfo, user, shipToInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryList,
+    TResult Function()? fetchAdvice,
+    TResult Function()? saveAdvice,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(salesOrganization, customerCodeInfo, user, shipToInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchPaymentSummaryDetailsEvent value)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function(_FetchPaymentSummaryListEvent value)
+        fetchPaymentSummaryList,
+    required TResult Function(_FetchAdvice value) fetchAdvice,
+    required TResult Function(_SaveAdvice value) saveAdvice,
+  }) {
+    return initialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult? Function(_FetchAdvice value)? fetchAdvice,
+    TResult? Function(_SaveAdvice value)? saveAdvice,
+  }) {
+    return initialized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult Function(_FetchAdvice value)? fetchAdvice,
+    TResult Function(_SaveAdvice value)? saveAdvice,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initialized implements PaymentSummaryDetailsEvent {
+  const factory _Initialized(
+      {required final SalesOrganisation salesOrganization,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final User user,
+      required final ShipToInfo shipToInfo}) = _$_Initialized;
+
+  SalesOrganisation get salesOrganization;
+  CustomerCodeInfo get customerCodeInfo;
+  User get user;
+  ShipToInfo get shipToInfo;
+  @JsonKey(ignore: true)
+  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_FetchPaymentSummaryDetailsEventCopyWith<$Res> {
+  factory _$$_FetchPaymentSummaryDetailsEventCopyWith(
+          _$_FetchPaymentSummaryDetailsEvent value,
+          $Res Function(_$_FetchPaymentSummaryDetailsEvent) then) =
+      __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PaymentSummaryDetails paymentSummaryDetails});
+
+  $PaymentSummaryDetailsCopyWith<$Res> get paymentSummaryDetails;
+}
+
+/// @nodoc
+class __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res,
+        _$_FetchPaymentSummaryDetailsEvent>
+    implements _$$_FetchPaymentSummaryDetailsEventCopyWith<$Res> {
+  __$$_FetchPaymentSummaryDetailsEventCopyWithImpl(
+      _$_FetchPaymentSummaryDetailsEvent _value,
+      $Res Function(_$_FetchPaymentSummaryDetailsEvent) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? paymentSummaryDetails = null,
+  }) {
+    return _then(_$_FetchPaymentSummaryDetailsEvent(
+      paymentSummaryDetails: null == paymentSummaryDetails
+          ? _value.paymentSummaryDetails
+          : paymentSummaryDetails // ignore: cast_nullable_to_non_nullable
+              as PaymentSummaryDetails,
+    ));
   }
 
   @override
@@ -331,20 +424,14 @@ class __$$_FetchPaymentSummaryDetailsEventCopyWithImpl<$Res>
 class _$_FetchPaymentSummaryDetailsEvent
     implements _FetchPaymentSummaryDetailsEvent {
   const _$_FetchPaymentSummaryDetailsEvent(
-      {required this.salesOrganization,
-      required this.customerCodeInfo,
-      required this.paymentSummaryDetails});
+      {required this.paymentSummaryDetails});
 
-  @override
-  final SalesOrganisation salesOrganization;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
   @override
   final PaymentSummaryDetails paymentSummaryDetails;
 
   @override
   String toString() {
-    return 'PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, paymentSummaryDetails: $paymentSummaryDetails)';
+    return 'PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(paymentSummaryDetails: $paymentSummaryDetails)';
   }
 
   @override
@@ -352,17 +439,12 @@ class _$_FetchPaymentSummaryDetailsEvent
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FetchPaymentSummaryDetailsEvent &&
-            (identical(other.salesOrganization, salesOrganization) ||
-                other.salesOrganization == salesOrganization) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.paymentSummaryDetails, paymentSummaryDetails) ||
                 other.paymentSummaryDetails == paymentSummaryDetails));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganization, customerCodeInfo, paymentSummaryDetails);
+  int get hashCode => Object.hash(runtimeType, paymentSummaryDetails);
 
   @JsonKey(ignore: true)
   @override
@@ -375,60 +457,57 @@ class _$_FetchPaymentSummaryDetailsEvent
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
         fetchPaymentSummaryDetailsInfo,
-    required TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
         fetchPaymentSummaryList,
+    required TResult Function() fetchAdvice,
+    required TResult Function() saveAdvice,
   }) {
-    return fetchPaymentSummaryDetailsInfo(
-        salesOrganization, customerCodeInfo, paymentSummaryDetails);
+    return fetchPaymentSummaryDetailsInfo(paymentSummaryDetails);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
             SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryDetailsInfo,
-    TResult? Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryList,
+    TResult? Function()? fetchAdvice,
+    TResult? Function()? saveAdvice,
   }) {
-    return fetchPaymentSummaryDetailsInfo?.call(
-        salesOrganization, customerCodeInfo, paymentSummaryDetails);
+    return fetchPaymentSummaryDetailsInfo?.call(paymentSummaryDetails);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryDetailsInfo,
-    TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryList,
+    TResult Function()? fetchAdvice,
+    TResult Function()? saveAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryDetailsInfo != null) {
-      return fetchPaymentSummaryDetailsInfo(
-          salesOrganization, customerCodeInfo, paymentSummaryDetails);
+      return fetchPaymentSummaryDetailsInfo(paymentSummaryDetails);
     }
     return orElse();
   }
@@ -441,6 +520,8 @@ class _$_FetchPaymentSummaryDetailsEvent
         fetchPaymentSummaryDetailsInfo,
     required TResult Function(_FetchPaymentSummaryListEvent value)
         fetchPaymentSummaryList,
+    required TResult Function(_FetchAdvice value) fetchAdvice,
+    required TResult Function(_SaveAdvice value) saveAdvice,
   }) {
     return fetchPaymentSummaryDetailsInfo(this);
   }
@@ -453,6 +534,8 @@ class _$_FetchPaymentSummaryDetailsEvent
         fetchPaymentSummaryDetailsInfo,
     TResult? Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult? Function(_FetchAdvice value)? fetchAdvice,
+    TResult? Function(_SaveAdvice value)? saveAdvice,
   }) {
     return fetchPaymentSummaryDetailsInfo?.call(this);
   }
@@ -465,6 +548,8 @@ class _$_FetchPaymentSummaryDetailsEvent
         fetchPaymentSummaryDetailsInfo,
     TResult Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult Function(_FetchAdvice value)? fetchAdvice,
+    TResult Function(_SaveAdvice value)? saveAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryDetailsInfo != null) {
@@ -477,13 +562,9 @@ class _$_FetchPaymentSummaryDetailsEvent
 abstract class _FetchPaymentSummaryDetailsEvent
     implements PaymentSummaryDetailsEvent {
   const factory _FetchPaymentSummaryDetailsEvent(
-          {required final SalesOrganisation salesOrganization,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final PaymentSummaryDetails paymentSummaryDetails}) =
+          {required final PaymentSummaryDetails paymentSummaryDetails}) =
       _$_FetchPaymentSummaryDetailsEvent;
 
-  SalesOrganisation get salesOrganization;
-  CustomerCodeInfo get customerCodeInfo;
   PaymentSummaryDetails get paymentSummaryDetails;
   @JsonKey(ignore: true)
   _$$_FetchPaymentSummaryDetailsEventCopyWith<
@@ -498,13 +579,8 @@ abstract class _$$_FetchPaymentSummaryListEventCopyWith<$Res> {
           $Res Function(_$_FetchPaymentSummaryListEvent) then) =
       __$$_FetchPaymentSummaryListEventCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {SalesOrganisation salesOrganization,
-      CustomerCodeInfo customerCodeInfo,
-      PaymentSummaryDetails paymentSummaryDetails});
+  $Res call({PaymentSummaryDetails paymentSummaryDetails});
 
-  $SalesOrganisationCopyWith<$Res> get salesOrganization;
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $PaymentSummaryDetailsCopyWith<$Res> get paymentSummaryDetails;
 }
 
@@ -521,40 +597,14 @@ class __$$_FetchPaymentSummaryListEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? salesOrganization = null,
-    Object? customerCodeInfo = null,
     Object? paymentSummaryDetails = null,
   }) {
     return _then(_$_FetchPaymentSummaryListEvent(
-      salesOrganization: null == salesOrganization
-          ? _value.salesOrganization
-          : salesOrganization // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisation,
-      customerCodeInfo: null == customerCodeInfo
-          ? _value.customerCodeInfo
-          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
-              as CustomerCodeInfo,
       paymentSummaryDetails: null == paymentSummaryDetails
           ? _value.paymentSummaryDetails
           : paymentSummaryDetails // ignore: cast_nullable_to_non_nullable
               as PaymentSummaryDetails,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationCopyWith<$Res> get salesOrganization {
-    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganization, (value) {
-      return _then(_value.copyWith(salesOrganization: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
-    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
-      return _then(_value.copyWith(customerCodeInfo: value));
-    });
   }
 
   @override
@@ -570,21 +620,14 @@ class __$$_FetchPaymentSummaryListEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
-  const _$_FetchPaymentSummaryListEvent(
-      {required this.salesOrganization,
-      required this.customerCodeInfo,
-      required this.paymentSummaryDetails});
+  const _$_FetchPaymentSummaryListEvent({required this.paymentSummaryDetails});
 
-  @override
-  final SalesOrganisation salesOrganization;
-  @override
-  final CustomerCodeInfo customerCodeInfo;
   @override
   final PaymentSummaryDetails paymentSummaryDetails;
 
   @override
   String toString() {
-    return 'PaymentSummaryDetailsEvent.fetchPaymentSummaryList(salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, paymentSummaryDetails: $paymentSummaryDetails)';
+    return 'PaymentSummaryDetailsEvent.fetchPaymentSummaryList(paymentSummaryDetails: $paymentSummaryDetails)';
   }
 
   @override
@@ -592,17 +635,12 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FetchPaymentSummaryListEvent &&
-            (identical(other.salesOrganization, salesOrganization) ||
-                other.salesOrganization == salesOrganization) &&
-            (identical(other.customerCodeInfo, customerCodeInfo) ||
-                other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.paymentSummaryDetails, paymentSummaryDetails) ||
                 other.paymentSummaryDetails == paymentSummaryDetails));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, salesOrganization, customerCodeInfo, paymentSummaryDetails);
+  int get hashCode => Object.hash(runtimeType, paymentSummaryDetails);
 
   @JsonKey(ignore: true)
   @override
@@ -614,60 +652,57 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialized,
-    required TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
         fetchPaymentSummaryDetailsInfo,
-    required TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
         fetchPaymentSummaryList,
+    required TResult Function() fetchAdvice,
+    required TResult Function() saveAdvice,
   }) {
-    return fetchPaymentSummaryList(
-        salesOrganization, customerCodeInfo, paymentSummaryDetails);
+    return fetchPaymentSummaryList(paymentSummaryDetails);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialized,
     TResult? Function(
             SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryDetailsInfo,
-    TResult? Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryList,
+    TResult? Function()? fetchAdvice,
+    TResult? Function()? saveAdvice,
   }) {
-    return fetchPaymentSummaryList?.call(
-        salesOrganization, customerCodeInfo, paymentSummaryDetails);
+    return fetchPaymentSummaryList?.call(paymentSummaryDetails);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialized,
     TResult Function(
             SalesOrganisation salesOrganization,
             CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryDetailsInfo,
-    TResult Function(
-            SalesOrganisation salesOrganization,
-            CustomerCodeInfo customerCodeInfo,
-            PaymentSummaryDetails paymentSummaryDetails)?
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
         fetchPaymentSummaryList,
+    TResult Function()? fetchAdvice,
+    TResult Function()? saveAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryList != null) {
-      return fetchPaymentSummaryList(
-          salesOrganization, customerCodeInfo, paymentSummaryDetails);
+      return fetchPaymentSummaryList(paymentSummaryDetails);
     }
     return orElse();
   }
@@ -680,6 +715,8 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
         fetchPaymentSummaryDetailsInfo,
     required TResult Function(_FetchPaymentSummaryListEvent value)
         fetchPaymentSummaryList,
+    required TResult Function(_FetchAdvice value) fetchAdvice,
+    required TResult Function(_SaveAdvice value) saveAdvice,
   }) {
     return fetchPaymentSummaryList(this);
   }
@@ -692,6 +729,8 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
         fetchPaymentSummaryDetailsInfo,
     TResult? Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult? Function(_FetchAdvice value)? fetchAdvice,
+    TResult? Function(_SaveAdvice value)? saveAdvice,
   }) {
     return fetchPaymentSummaryList?.call(this);
   }
@@ -704,6 +743,8 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
         fetchPaymentSummaryDetailsInfo,
     TResult Function(_FetchPaymentSummaryListEvent value)?
         fetchPaymentSummaryList,
+    TResult Function(_FetchAdvice value)? fetchAdvice,
+    TResult Function(_SaveAdvice value)? saveAdvice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryList != null) {
@@ -716,13 +757,9 @@ class _$_FetchPaymentSummaryListEvent implements _FetchPaymentSummaryListEvent {
 abstract class _FetchPaymentSummaryListEvent
     implements PaymentSummaryDetailsEvent {
   const factory _FetchPaymentSummaryListEvent(
-          {required final SalesOrganisation salesOrganization,
-          required final CustomerCodeInfo customerCodeInfo,
-          required final PaymentSummaryDetails paymentSummaryDetails}) =
+          {required final PaymentSummaryDetails paymentSummaryDetails}) =
       _$_FetchPaymentSummaryListEvent;
 
-  SalesOrganisation get salesOrganization;
-  CustomerCodeInfo get customerCodeInfo;
   PaymentSummaryDetails get paymentSummaryDetails;
   @JsonKey(ignore: true)
   _$$_FetchPaymentSummaryListEventCopyWith<_$_FetchPaymentSummaryListEvent>
@@ -730,12 +767,308 @@ abstract class _FetchPaymentSummaryListEvent
 }
 
 /// @nodoc
+abstract class _$$_FetchAdviceCopyWith<$Res> {
+  factory _$$_FetchAdviceCopyWith(
+          _$_FetchAdvice value, $Res Function(_$_FetchAdvice) then) =
+      __$$_FetchAdviceCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FetchAdviceCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$_FetchAdvice>
+    implements _$$_FetchAdviceCopyWith<$Res> {
+  __$$_FetchAdviceCopyWithImpl(
+      _$_FetchAdvice _value, $Res Function(_$_FetchAdvice) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FetchAdvice implements _FetchAdvice {
+  const _$_FetchAdvice();
+
+  @override
+  String toString() {
+    return 'PaymentSummaryDetailsEvent.fetchAdvice()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_FetchAdvice);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+        fetchPaymentSummaryList,
+    required TResult Function() fetchAdvice,
+    required TResult Function() saveAdvice,
+  }) {
+    return fetchAdvice();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryList,
+    TResult? Function()? fetchAdvice,
+    TResult? Function()? saveAdvice,
+  }) {
+    return fetchAdvice?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryList,
+    TResult Function()? fetchAdvice,
+    TResult Function()? saveAdvice,
+    required TResult orElse(),
+  }) {
+    if (fetchAdvice != null) {
+      return fetchAdvice();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchPaymentSummaryDetailsEvent value)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function(_FetchPaymentSummaryListEvent value)
+        fetchPaymentSummaryList,
+    required TResult Function(_FetchAdvice value) fetchAdvice,
+    required TResult Function(_SaveAdvice value) saveAdvice,
+  }) {
+    return fetchAdvice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult? Function(_FetchAdvice value)? fetchAdvice,
+    TResult? Function(_SaveAdvice value)? saveAdvice,
+  }) {
+    return fetchAdvice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult Function(_FetchAdvice value)? fetchAdvice,
+    TResult Function(_SaveAdvice value)? saveAdvice,
+    required TResult orElse(),
+  }) {
+    if (fetchAdvice != null) {
+      return fetchAdvice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchAdvice implements PaymentSummaryDetailsEvent {
+  const factory _FetchAdvice() = _$_FetchAdvice;
+}
+
+/// @nodoc
+abstract class _$$_SaveAdviceCopyWith<$Res> {
+  factory _$$_SaveAdviceCopyWith(
+          _$_SaveAdvice value, $Res Function(_$_SaveAdvice) then) =
+      __$$_SaveAdviceCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SaveAdviceCopyWithImpl<$Res>
+    extends _$PaymentSummaryDetailsEventCopyWithImpl<$Res, _$_SaveAdvice>
+    implements _$$_SaveAdviceCopyWith<$Res> {
+  __$$_SaveAdviceCopyWithImpl(
+      _$_SaveAdvice _value, $Res Function(_$_SaveAdvice) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SaveAdvice implements _SaveAdvice {
+  const _$_SaveAdvice();
+
+  @override
+  String toString() {
+    return 'PaymentSummaryDetailsEvent.saveAdvice()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_SaveAdvice);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo, User user, ShipToInfo shipToInfo)
+        initialized,
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function(PaymentSummaryDetails paymentSummaryDetails)
+        fetchPaymentSummaryList,
+    required TResult Function() fetchAdvice,
+    required TResult Function() saveAdvice,
+  }) {
+    return saveAdvice();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryList,
+    TResult? Function()? fetchAdvice,
+    TResult? Function()? saveAdvice,
+  }) {
+    return saveAdvice?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            CustomerCodeInfo customerCodeInfo,
+            User user,
+            ShipToInfo shipToInfo)?
+        initialized,
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function(PaymentSummaryDetails paymentSummaryDetails)?
+        fetchPaymentSummaryList,
+    TResult Function()? fetchAdvice,
+    TResult Function()? saveAdvice,
+    required TResult orElse(),
+  }) {
+    if (saveAdvice != null) {
+      return saveAdvice();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchPaymentSummaryDetailsEvent value)
+        fetchPaymentSummaryDetailsInfo,
+    required TResult Function(_FetchPaymentSummaryListEvent value)
+        fetchPaymentSummaryList,
+    required TResult Function(_FetchAdvice value) fetchAdvice,
+    required TResult Function(_SaveAdvice value) saveAdvice,
+  }) {
+    return saveAdvice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult? Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult? Function(_FetchAdvice value)? fetchAdvice,
+    TResult? Function(_SaveAdvice value)? saveAdvice,
+  }) {
+    return saveAdvice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchPaymentSummaryDetailsEvent value)?
+        fetchPaymentSummaryDetailsInfo,
+    TResult Function(_FetchPaymentSummaryListEvent value)?
+        fetchPaymentSummaryList,
+    TResult Function(_FetchAdvice value)? fetchAdvice,
+    TResult Function(_SaveAdvice value)? saveAdvice,
+    required TResult orElse(),
+  }) {
+    if (saveAdvice != null) {
+      return saveAdvice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SaveAdvice implements PaymentSummaryDetailsEvent {
+  const factory _SaveAdvice() = _$_SaveAdvice;
+}
+
+/// @nodoc
 mixin _$PaymentSummaryDetailsState {
   PaymentSummaryDetails get paymentSummaryDetails =>
       throw _privateConstructorUsedError;
   List<PaymentItem> get paymentItemList => throw _privateConstructorUsedError;
+  SalesOrganisation get salesOrganization => throw _privateConstructorUsedError;
+  CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
   bool get isDetailFetching => throw _privateConstructorUsedError;
   bool get isListLoading => throw _privateConstructorUsedError;
+  bool get isFetchingAdvice => throw _privateConstructorUsedError;
+  bool get isSavingAdvice => throw _privateConstructorUsedError;
+  ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
+  PaymentInvoiceInfoPdf get paymentInvoiceInfoPdf =>
+      throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -754,11 +1087,23 @@ abstract class $PaymentSummaryDetailsStateCopyWith<$Res> {
   $Res call(
       {PaymentSummaryDetails paymentSummaryDetails,
       List<PaymentItem> paymentItemList,
+      SalesOrganisation salesOrganization,
+      CustomerCodeInfo customerCodeInfo,
+      User user,
       bool isDetailFetching,
       bool isListLoading,
+      bool isFetchingAdvice,
+      bool isSavingAdvice,
+      ShipToInfo shipToInfo,
+      PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   $PaymentSummaryDetailsCopyWith<$Res> get paymentSummaryDetails;
+  $SalesOrganisationCopyWith<$Res> get salesOrganization;
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  $UserCopyWith<$Res> get user;
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
 }
 
 /// @nodoc
@@ -777,8 +1122,15 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
   $Res call({
     Object? paymentSummaryDetails = null,
     Object? paymentItemList = null,
+    Object? salesOrganization = null,
+    Object? customerCodeInfo = null,
+    Object? user = null,
     Object? isDetailFetching = null,
     Object? isListLoading = null,
+    Object? isFetchingAdvice = null,
+    Object? isSavingAdvice = null,
+    Object? shipToInfo = null,
+    Object? paymentInvoiceInfoPdf = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -790,6 +1142,18 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
           ? _value.paymentItemList
           : paymentItemList // ignore: cast_nullable_to_non_nullable
               as List<PaymentItem>,
+      salesOrganization: null == salesOrganization
+          ? _value.salesOrganization
+          : salesOrganization // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       isDetailFetching: null == isDetailFetching
           ? _value.isDetailFetching
           : isDetailFetching // ignore: cast_nullable_to_non_nullable
@@ -798,6 +1162,22 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
           ? _value.isListLoading
           : isListLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFetchingAdvice: null == isFetchingAdvice
+          ? _value.isFetchingAdvice
+          : isFetchingAdvice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSavingAdvice: null == isSavingAdvice
+          ? _value.isSavingAdvice
+          : isSavingAdvice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      paymentInvoiceInfoPdf: null == paymentInvoiceInfoPdf
+          ? _value.paymentInvoiceInfoPdf
+          : paymentInvoiceInfoPdf // ignore: cast_nullable_to_non_nullable
+              as PaymentInvoiceInfoPdf,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -811,6 +1191,47 @@ class _$PaymentSummaryDetailsStateCopyWithImpl<$Res,
     return $PaymentSummaryDetailsCopyWith<$Res>(_value.paymentSummaryDetails,
         (value) {
       return _then(_value.copyWith(paymentSummaryDetails: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationCopyWith<$Res> get salesOrganization {
+    return $SalesOrganisationCopyWith<$Res>(_value.salesOrganization, (value) {
+      return _then(_value.copyWith(salesOrganization: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo {
+    return $CustomerCodeInfoCopyWith<$Res>(_value.customerCodeInfo, (value) {
+      return _then(_value.copyWith(customerCodeInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShipToInfoCopyWith<$Res> get shipToInfo {
+    return $ShipToInfoCopyWith<$Res>(_value.shipToInfo, (value) {
+      return _then(_value.copyWith(shipToInfo: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf {
+    return $PaymentInvoiceInfoPdfCopyWith<$Res>(_value.paymentInvoiceInfoPdf,
+        (value) {
+      return _then(_value.copyWith(paymentInvoiceInfoPdf: value) as $Val);
     });
   }
 }
@@ -827,12 +1248,29 @@ abstract class _$$_PaymentSummaryDetailsStateCopyWith<$Res>
   $Res call(
       {PaymentSummaryDetails paymentSummaryDetails,
       List<PaymentItem> paymentItemList,
+      SalesOrganisation salesOrganization,
+      CustomerCodeInfo customerCodeInfo,
+      User user,
       bool isDetailFetching,
       bool isListLoading,
+      bool isFetchingAdvice,
+      bool isSavingAdvice,
+      ShipToInfo shipToInfo,
+      PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 
   @override
   $PaymentSummaryDetailsCopyWith<$Res> get paymentSummaryDetails;
+  @override
+  $SalesOrganisationCopyWith<$Res> get salesOrganization;
+  @override
+  $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
+  @override
+  $UserCopyWith<$Res> get user;
+  @override
+  $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
+  $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
 }
 
 /// @nodoc
@@ -850,8 +1288,15 @@ class __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>
   $Res call({
     Object? paymentSummaryDetails = null,
     Object? paymentItemList = null,
+    Object? salesOrganization = null,
+    Object? customerCodeInfo = null,
+    Object? user = null,
     Object? isDetailFetching = null,
     Object? isListLoading = null,
+    Object? isFetchingAdvice = null,
+    Object? isSavingAdvice = null,
+    Object? shipToInfo = null,
+    Object? paymentInvoiceInfoPdf = null,
     Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_PaymentSummaryDetailsState(
@@ -863,6 +1308,18 @@ class __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>
           ? _value._paymentItemList
           : paymentItemList // ignore: cast_nullable_to_non_nullable
               as List<PaymentItem>,
+      salesOrganization: null == salesOrganization
+          ? _value.salesOrganization
+          : salesOrganization // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisation,
+      customerCodeInfo: null == customerCodeInfo
+          ? _value.customerCodeInfo
+          : customerCodeInfo // ignore: cast_nullable_to_non_nullable
+              as CustomerCodeInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       isDetailFetching: null == isDetailFetching
           ? _value.isDetailFetching
           : isDetailFetching // ignore: cast_nullable_to_non_nullable
@@ -871,6 +1328,22 @@ class __$$_PaymentSummaryDetailsStateCopyWithImpl<$Res>
           ? _value.isListLoading
           : isListLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isFetchingAdvice: null == isFetchingAdvice
+          ? _value.isFetchingAdvice
+          : isFetchingAdvice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSavingAdvice: null == isSavingAdvice
+          ? _value.isSavingAdvice
+          : isSavingAdvice // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shipToInfo: null == shipToInfo
+          ? _value.shipToInfo
+          : shipToInfo // ignore: cast_nullable_to_non_nullable
+              as ShipToInfo,
+      paymentInvoiceInfoPdf: null == paymentInvoiceInfoPdf
+          ? _value.paymentInvoiceInfoPdf
+          : paymentInvoiceInfoPdf // ignore: cast_nullable_to_non_nullable
+              as PaymentInvoiceInfoPdf,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -885,8 +1358,15 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
   const _$_PaymentSummaryDetailsState(
       {required this.paymentSummaryDetails,
       required final List<PaymentItem> paymentItemList,
+      required this.salesOrganization,
+      required this.customerCodeInfo,
+      required this.user,
       required this.isDetailFetching,
       required this.isListLoading,
+      required this.isFetchingAdvice,
+      required this.isSavingAdvice,
+      required this.shipToInfo,
+      required this.paymentInvoiceInfoPdf,
       required this.failureOrSuccessOption})
       : _paymentItemList = paymentItemList,
         super._();
@@ -902,15 +1382,29 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
   }
 
   @override
+  final SalesOrganisation salesOrganization;
+  @override
+  final CustomerCodeInfo customerCodeInfo;
+  @override
+  final User user;
+  @override
   final bool isDetailFetching;
   @override
   final bool isListLoading;
+  @override
+  final bool isFetchingAdvice;
+  @override
+  final bool isSavingAdvice;
+  @override
+  final ShipToInfo shipToInfo;
+  @override
+  final PaymentInvoiceInfoPdf paymentInvoiceInfoPdf;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'PaymentSummaryDetailsState(paymentSummaryDetails: $paymentSummaryDetails, paymentItemList: $paymentItemList, isDetailFetching: $isDetailFetching, isListLoading: $isListLoading, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'PaymentSummaryDetailsState(paymentSummaryDetails: $paymentSummaryDetails, paymentItemList: $paymentItemList, salesOrganization: $salesOrganization, customerCodeInfo: $customerCodeInfo, user: $user, isDetailFetching: $isDetailFetching, isListLoading: $isListLoading, isFetchingAdvice: $isFetchingAdvice, isSavingAdvice: $isSavingAdvice, shipToInfo: $shipToInfo, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -922,10 +1416,23 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
                 other.paymentSummaryDetails == paymentSummaryDetails) &&
             const DeepCollectionEquality()
                 .equals(other._paymentItemList, _paymentItemList) &&
+            (identical(other.salesOrganization, salesOrganization) ||
+                other.salesOrganization == salesOrganization) &&
+            (identical(other.customerCodeInfo, customerCodeInfo) ||
+                other.customerCodeInfo == customerCodeInfo) &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.isDetailFetching, isDetailFetching) ||
                 other.isDetailFetching == isDetailFetching) &&
             (identical(other.isListLoading, isListLoading) ||
                 other.isListLoading == isListLoading) &&
+            (identical(other.isFetchingAdvice, isFetchingAdvice) ||
+                other.isFetchingAdvice == isFetchingAdvice) &&
+            (identical(other.isSavingAdvice, isSavingAdvice) ||
+                other.isSavingAdvice == isSavingAdvice) &&
+            (identical(other.shipToInfo, shipToInfo) ||
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.paymentInvoiceInfoPdf, paymentInvoiceInfoPdf) ||
+                other.paymentInvoiceInfoPdf == paymentInvoiceInfoPdf) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption));
   }
@@ -935,8 +1442,15 @@ class _$_PaymentSummaryDetailsState extends _PaymentSummaryDetailsState {
       runtimeType,
       paymentSummaryDetails,
       const DeepCollectionEquality().hash(_paymentItemList),
+      salesOrganization,
+      customerCodeInfo,
+      user,
       isDetailFetching,
       isListLoading,
+      isFetchingAdvice,
+      isSavingAdvice,
+      shipToInfo,
+      paymentInvoiceInfoPdf,
       failureOrSuccessOption);
 
   @JsonKey(ignore: true)
@@ -951,8 +1465,15 @@ abstract class _PaymentSummaryDetailsState extends PaymentSummaryDetailsState {
   const factory _PaymentSummaryDetailsState(
       {required final PaymentSummaryDetails paymentSummaryDetails,
       required final List<PaymentItem> paymentItemList,
+      required final SalesOrganisation salesOrganization,
+      required final CustomerCodeInfo customerCodeInfo,
+      required final User user,
       required final bool isDetailFetching,
       required final bool isListLoading,
+      required final bool isFetchingAdvice,
+      required final bool isSavingAdvice,
+      required final ShipToInfo shipToInfo,
+      required final PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
       required final Option<Either<ApiFailure, dynamic>>
           failureOrSuccessOption}) = _$_PaymentSummaryDetailsState;
   const _PaymentSummaryDetailsState._() : super._();
@@ -962,9 +1483,23 @@ abstract class _PaymentSummaryDetailsState extends PaymentSummaryDetailsState {
   @override
   List<PaymentItem> get paymentItemList;
   @override
+  SalesOrganisation get salesOrganization;
+  @override
+  CustomerCodeInfo get customerCodeInfo;
+  @override
+  User get user;
+  @override
   bool get isDetailFetching;
   @override
   bool get isListLoading;
+  @override
+  bool get isFetchingAdvice;
+  @override
+  bool get isSavingAdvice;
+  @override
+  ShipToInfo get shipToInfo;
+  @override
+  PaymentInvoiceInfoPdf get paymentInvoiceInfoPdf;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override

@@ -110,16 +110,9 @@ class _PaymentAdviceNextStep extends StatelessWidget {
                             await _showConfirmBottomSheet(context);
                         if (confirmed ?? false) {
                           if (context.mounted) {
-                            final eligibilityState =
-                                context.read<EligibilityBloc>().state;
-
                             context.read<PaymentSummaryDetailsBloc>().add(
                                   PaymentSummaryDetailsEvent
                                       .fetchPaymentSummaryDetailsInfo(
-                                    salesOrganization:
-                                        eligibilityState.salesOrganisation,
-                                    customerCodeInfo:
-                                        eligibilityState.customerCodeInfo,
                                     paymentSummaryDetails:
                                         PaymentSummaryDetails.empty().copyWith(
                                       paymentID: StringValue(

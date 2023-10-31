@@ -6,8 +6,15 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
   const factory PaymentSummaryDetailsState({
     required PaymentSummaryDetails paymentSummaryDetails,
     required List<PaymentItem> paymentItemList,
+    required SalesOrganisation salesOrganization,
+    required CustomerCodeInfo customerCodeInfo,
+    required User user,
     required bool isDetailFetching,
     required bool isListLoading,
+    required bool isFetchingAdvice,
+    required bool isSavingAdvice,
+    required ShipToInfo shipToInfo,
+    required PaymentInvoiceInfoPdf paymentInvoiceInfoPdf,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _PaymentSummaryDetailsState;
   factory PaymentSummaryDetailsState.initial() => PaymentSummaryDetailsState(
@@ -16,6 +23,13 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
         failureOrSuccessOption: none(),
         paymentItemList: <PaymentItem>[],
         isListLoading: false,
+        salesOrganization: SalesOrganisation.empty(),
+        customerCodeInfo: CustomerCodeInfo.empty(),
+        user: User.empty(),
+        isFetchingAdvice: false,
+        isSavingAdvice: false,
+        shipToInfo: ShipToInfo.empty(),
+        paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty(),
       );
 
   bool get isLoading => isDetailFetching || isListLoading;

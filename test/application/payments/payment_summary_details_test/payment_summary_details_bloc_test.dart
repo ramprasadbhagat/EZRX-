@@ -3,9 +3,13 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
+import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
+import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_details_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,17 +17,26 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class PaymentSummaryDetailsRepositoryMock extends Mock
     implements PaymentSummaryDetailsRepository {}
 
+class NewPaymentRepositoryMock extends Mock implements NewPaymentRepository {}
+
+class DeviceRepositoryMock extends Mock implements DeviceRepository {}
+
 void main() {
   late PaymentSummaryDetailsRepository paymentSummaryDetailsMockRepository;
+  late NewPaymentRepository newPaymentRepository;
+  late DeviceRepository deviceRepository;
   late PaymentSummaryDetails details;
   late List<PaymentItem> paymentList;
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     paymentSummaryDetailsMockRepository = PaymentSummaryDetailsRepositoryMock();
+    newPaymentRepository = NewPaymentRepositoryMock();
+    deviceRepository = DeviceRepositoryMock();
     details = await PaymentItemLocalDataSource().getPaymentSummaryDetails();
     paymentList = await PaymentItemLocalDataSource().getPaymentItems();
   });
@@ -32,12 +45,24 @@ void main() {
       'initialized',
       build: () => PaymentSummaryDetailsBloc(
         paymentItemRepository: paymentSummaryDetailsMockRepository,
+        newPaymentRepository: newPaymentRepository,
+        deviceRepository: deviceRepository,
       ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
-        const PaymentSummaryDetailsEvent.initialized(),
+        PaymentSummaryDetailsEvent.initialized(
+          salesOrganization: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          shipToInfo: fakeShipToInfo,
+        ),
       ),
       expect: () => [
-        PaymentSummaryDetailsState.initial(),
+        PaymentSummaryDetailsState.initial().copyWith(
+          salesOrganization: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          shipToInfo: fakeShipToInfo,
+        ),
       ],
     );
 
@@ -45,8 +70,27 @@ void main() {
       'fetchPaymentSummaryDetailsInfo Event Success when payment batch aditional info is valid',
       build: () => PaymentSummaryDetailsBloc(
         paymentItemRepository: paymentSummaryDetailsMockRepository,
+        newPaymentRepository: newPaymentRepository,
+        deviceRepository: deviceRepository,
       ),
       setUp: () {
+        final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
+          paymentBatchAdditionalInfo:
+              details.paymentBatchAdditionalInfo.getValue(),
+          paymentID: details.paymentID.getValue(),
+          accountingDocExternalReference:
+              details.accountingDocExternalReference,
+        );
+        when(
+          () => newPaymentRepository.getPaymentInvoiceInfoPdf(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            user: fakeClientUser,
+            paymentInfo: customerPaymentInfo,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
+        );
         when(
           () => paymentSummaryDetailsMockRepository
               .fetchPaymentSummaryDetailsInfo(
@@ -66,25 +110,34 @@ void main() {
         ).thenAnswer(
           (invocation) async => Right(paymentList),
         );
+        when(
+          () => paymentSummaryDetailsMockRepository.fetchPaymentList(
+            salesOrganization: fakeSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            paymentSummaryDetails: details,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(paymentList),
+        );
       },
+      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+        salesOrganization: fakeSalesOrganisation,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        user: fakeClientUser,
+      ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-          salesOrganization: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
           paymentSummaryDetails: details,
         ),
       ),
+      skip: 4,
       expect: () => [
         PaymentSummaryDetailsState.initial().copyWith(
           paymentSummaryDetails: details,
-        ),
-        PaymentSummaryDetailsState.initial().copyWith(
-          isListLoading: true,
-          paymentSummaryDetails: details,
-        ),
-        PaymentSummaryDetailsState.initial().copyWith(
-          paymentSummaryDetails: details,
           paymentItemList: paymentList,
+          salesOrganization: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
         ),
       ],
     );
@@ -93,8 +146,27 @@ void main() {
       'fetchPaymentSummaryDetailsInfo Event Success when payment batch aditional info is invalid',
       build: () => PaymentSummaryDetailsBloc(
         paymentItemRepository: paymentSummaryDetailsMockRepository,
+        newPaymentRepository: newPaymentRepository,
+        deviceRepository: deviceRepository,
       ),
       setUp: () {
+        final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
+          paymentBatchAdditionalInfo:
+              details.paymentBatchAdditionalInfo.getValue(),
+          paymentID: details.paymentID.getValue(),
+          accountingDocExternalReference:
+              details.accountingDocExternalReference,
+        );
+        when(
+          () => newPaymentRepository.getPaymentInvoiceInfoPdf(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            user: fakeClientUser,
+            paymentInfo: customerPaymentInfo,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
+        );
         when(
           () => paymentSummaryDetailsMockRepository
               .fetchPaymentSummaryDetailsInfo(
@@ -115,28 +187,25 @@ void main() {
           (invocation) async => Right(paymentList),
         );
       },
+      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+        salesOrganization: fakeSalesOrganisation,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        user: fakeClientUser,
+      ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-          salesOrganization: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
           paymentSummaryDetails:
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
         ),
       ),
+      skip: 5,
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
-          isDetailFetching: true,
-        ),
-        PaymentSummaryDetailsState.initial().copyWith(
-          paymentSummaryDetails: details,
-        ),
-        PaymentSummaryDetailsState.initial().copyWith(
-          isListLoading: true,
-          paymentSummaryDetails: details,
-        ),
         PaymentSummaryDetailsState.initial().copyWith(
           paymentSummaryDetails: details,
           paymentItemList: paymentList,
+          salesOrganization: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
         ),
       ],
     );
@@ -145,6 +214,8 @@ void main() {
       'fetchPaymentSummaryList Event Success',
       build: () => PaymentSummaryDetailsBloc(
         paymentItemRepository: paymentSummaryDetailsMockRepository,
+        newPaymentRepository: newPaymentRepository,
+        deviceRepository: deviceRepository,
       ),
       setUp: () {
         when(
@@ -156,20 +227,43 @@ void main() {
         ).thenAnswer(
           (invocation) async => Right(paymentList),
         );
+        final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
+          paymentBatchAdditionalInfo:
+              details.paymentBatchAdditionalInfo.getValue(),
+          paymentID: details.paymentID.getValue(),
+          accountingDocExternalReference:
+              details.accountingDocExternalReference,
+        );
+        when(
+          () => newPaymentRepository.getPaymentInvoiceInfoPdf(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            user: fakeClientUser,
+            paymentInfo: customerPaymentInfo,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
+        );
       },
+      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+        salesOrganization: fakeSalesOrganisation,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        user: fakeClientUser,
+        paymentSummaryDetails: details,
+      ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryList(
-          salesOrganization: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
           paymentSummaryDetails: details,
         ),
       ),
+      skip: 3,
       expect: () => [
         PaymentSummaryDetailsState.initial().copyWith(
-          isListLoading: true,
-        ),
-        PaymentSummaryDetailsState.initial().copyWith(
           paymentItemList: paymentList,
+          salesOrganization: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
+          paymentSummaryDetails: details,
         ),
       ],
     );
@@ -178,6 +272,8 @@ void main() {
       'fetchPaymentSummaryDetailsInfo Event failed when payment batch aditional info is invalid',
       build: () => PaymentSummaryDetailsBloc(
         paymentItemRepository: paymentSummaryDetailsMockRepository,
+        newPaymentRepository: newPaymentRepository,
+        deviceRepository: deviceRepository,
       ),
       setUp: () {
         when(
@@ -190,22 +286,36 @@ void main() {
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),
         );
+        when(
+          () => newPaymentRepository.getPaymentInvoiceInfoPdf(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+            user: fakeClientUser,
+            paymentInfo: CustomerPaymentInfo.empty(),
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(PaymentInvoiceInfoPdf.empty()),
+        );
       },
+      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+        salesOrganization: fakeSalesOrganisation,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        user: fakeClientUser,
+      ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-          salesOrganization: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
           paymentSummaryDetails:
               details.copyWith(paymentBatchAdditionalInfo: StringValue('')),
         ),
       ),
+      skip: 1,
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
-          isDetailFetching: true,
-        ),
         PaymentSummaryDetailsState.initial().copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
+          salesOrganization: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
         ),
       ],
     );
@@ -214,6 +324,8 @@ void main() {
       'fetchPaymentSummaryList Event failed ',
       build: () => PaymentSummaryDetailsBloc(
         paymentItemRepository: paymentSummaryDetailsMockRepository,
+        newPaymentRepository: newPaymentRepository,
+        deviceRepository: deviceRepository,
       ),
       setUp: () {
         when(
@@ -226,20 +338,24 @@ void main() {
           (invocation) async => const Left(ApiFailure.other('mock-error')),
         );
       },
+      seed: () => PaymentSummaryDetailsState.initial().copyWith(
+        salesOrganization: fakeSalesOrganisation,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        user: fakeClientUser,
+      ),
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
         PaymentSummaryDetailsEvent.fetchPaymentSummaryList(
-          salesOrganization: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
           paymentSummaryDetails: details,
         ),
       ),
+      skip: 1,
       expect: () => [
-        PaymentSummaryDetailsState.initial().copyWith(
-          isListLoading: true,
-        ),
         PaymentSummaryDetailsState.initial().copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('mock-error'))),
+          salesOrganization: fakeSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          user: fakeClientUser,
         ),
       ],
     );

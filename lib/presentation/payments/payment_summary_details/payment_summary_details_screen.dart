@@ -3,12 +3,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -49,12 +51,7 @@ class PaymentSummaryDetailsPage extends StatelessWidget {
           centerTitle: false,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_sharp),
-            onPressed: () async {
-              context
-                  .read<PaymentSummaryDetailsBloc>()
-                  .add(const PaymentSummaryDetailsEvent.initialized());
-              await context.router.pop();
-            },
+            onPressed: () => context.router.pop(),
           ),
         ),
         bottomNavigationBar: const _PaymentAdviceButton(),

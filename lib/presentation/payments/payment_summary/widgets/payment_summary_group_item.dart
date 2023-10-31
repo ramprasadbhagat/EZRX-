@@ -66,10 +66,6 @@ class _PaymentSummaryItem extends StatelessWidget {
           trackMixpanelEvent(MixpanelEvents.paymentDocumentViewed);
           context.read<PaymentSummaryDetailsBloc>().add(
                 PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-                  salesOrganization:
-                      context.read<EligibilityBloc>().state.salesOrganisation,
-                  customerCodeInfo:
-                      context.read<EligibilityBloc>().state.customerCodeInfo,
                   paymentSummaryDetails: paymentSummaryDetails,
                 ),
               );

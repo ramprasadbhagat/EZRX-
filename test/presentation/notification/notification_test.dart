@@ -8,7 +8,6 @@ import 'package:ezrxmobile/application/payments/payment_summary_details/payment_
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
@@ -434,8 +433,6 @@ void main() {
         verify(
           () => paymentSummaryDetailsBlockMock.add(
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-              salesOrganization: SalesOrganisation.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
               paymentSummaryDetails: PaymentSummaryDetails.empty().copyWith(
                 paymentID: notificationList.first.saleDocument,
               ),
