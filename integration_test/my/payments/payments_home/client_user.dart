@@ -8,16 +8,16 @@ import '../../../robots/home/home_robot.dart';
 import '../../../robots/login_robot.dart';
 import '../../../robots/payments/new_payment/new_payment_robot.dart';
 import '../../../robots/payments/payment_home_robot.dart';
-import '../../../robots/payments/payments_summary_robot.dart';
-import '../../../robots/payments/statement_account_robot.dart';
+import '../../../robots/payments/payment_summary/payment_summary_robot.dart';
 import '../../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+import '../../../robots/payments/soa/statement_of_account_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
   late PaymentHomeRobot paymentHomeRobot;
-  late PaymentsSummaryRobot paymentsSummaryRobot;
-  late StatementAccountRobot statementAccountRobot;
+  late PaymentSummaryRobot paymentSummaryRobot;
+  late StatementOfAccountRobot statementAccountRobot;
   late NewPaymentRobot newPaymentRobot;
   late CommonRobot commonRobot;
   late HomeRobot homeRobot;
@@ -29,8 +29,8 @@ void main() {
     loginRobot = LoginRobot(tester);
     commonRobot = CommonRobot(tester);
     paymentHomeRobot = PaymentHomeRobot(tester);
-    paymentsSummaryRobot = PaymentsSummaryRobot(tester);
-    statementAccountRobot = StatementAccountRobot(tester);
+    paymentSummaryRobot = PaymentSummaryRobot(tester);
+    statementAccountRobot = StatementOfAccountRobot(tester);
     newPaymentRobot = NewPaymentRobot(tester);
     homeRobot = HomeRobot(tester);
   }
@@ -102,14 +102,14 @@ void main() {
     paymentHomeRobot.verifyPaymentHomeInProgressCard();
 
     await paymentHomeRobot.navigateToPaymentSummaryScreen();
-    paymentsSummaryRobot.verifyPage();
-    await paymentsSummaryRobot.tapToBackScreen();
+    paymentSummaryRobot.verifyPageVisible();
+    await commonRobot.tapToBackScreen();
 
     await paymentHomeRobot.navigateToStatementOfAccountScreen();
-    statementAccountRobot.verifyPage();
-    await statementAccountRobot.tapToBackScreen();
+    statementAccountRobot.verifySOAPage();
+    await commonRobot.tapToBackScreen();
 
-    await paymentHomeRobot.tapToNewPaymentButton();
+    await paymentHomeRobot.tapNewPayment();
     newPaymentRobot.verifyPage();
   });
 

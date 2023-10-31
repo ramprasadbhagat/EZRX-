@@ -8,7 +8,10 @@ import '../common/common_robot.dart';
 class PaymentHomeRobot extends CommonRobot {
   PaymentHomeRobot(WidgetTester tester) : super(tester);
 
-  final accountSummaryIcon = find.byKey(WidgetKeys.accountSummaryMenu);
+  final accountSummaryMenu = find.byKey(WidgetKeys.accountSummaryMenu);
+  final paymentSummaryMenu = find.byKey(WidgetKeys.paymentSummaryMenu);
+  final statementOfAccountsMenu =
+      find.byKey(WidgetKeys.statementOfAccountsMenu);
   final totalOutstanding = find.byKey(WidgetKeys.totalOutstanding);
   final newPaymentButton = find.byKey(WidgetKeys.newPaymentButton);
   final paymentHomeSoa = find.byKey(WidgetKeys.paymentHomeSoa);
@@ -23,13 +26,23 @@ class PaymentHomeRobot extends CommonRobot {
   final paymentHomeObscuredAmount =
       find.byKey(WidgetKeys.paymentHomeObscuredAmount);
 
-  Future<void> tapAccountSummaryIcon() async {
-    await tester.tap(accountSummaryIcon);
+  void verifyPage() {
+    expect(find.byKey(WidgetKeys.paymentsTabPage), findsOneWidget);
+  }
+
+  Future<void> tapAccountSummaryMenu() async {
+    await tester.tap(accountSummaryMenu);
     await tester.pumpAndSettle();
   }
 
-  void verifyPage() {
-    expect(find.byKey(WidgetKeys.paymentsTabPage), findsOneWidget);
+  Future<void> tapPaymentSummaryMenu() async {
+    await tester.tap(paymentSummaryMenu);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapStatementOfAccountTile() async {
+    await tester.tap(statementOfAccountsMenu);
+    await tester.pumpAndSettle();
   }
 
   Future<void> navigateToPaymentSummaryScreen() async {
@@ -66,7 +79,7 @@ class PaymentHomeRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> tapToNewPaymentButton() async {
+  Future<void> tapNewPayment() async {
     await tester.tap(newPaymentButton);
     await tester.pumpAndSettle();
   }

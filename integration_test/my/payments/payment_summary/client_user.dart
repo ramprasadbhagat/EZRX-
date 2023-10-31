@@ -8,7 +8,7 @@ import '../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../../robots/common/common_robot.dart';
 import '../../../robots/login_robot.dart';
 import '../../../robots/more/more_robot.dart';
-import '../../../robots/payments/payment_home/payment_home_robot.dart';
+import '../../../robots/payments/payment_home_robot.dart';
 import '../../../robots/payments/payment_summary/payment_summary_filter_robot.dart';
 import '../../../robots/payments/payment_summary/payment_summary_robot.dart';
 

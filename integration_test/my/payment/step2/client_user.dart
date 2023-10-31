@@ -8,16 +8,16 @@ import '../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../../robots/common/common_robot.dart';
 import '../../../robots/login_robot.dart';
 import '../../../robots/more/more_robot.dart';
-import '../../../robots/payment/payment_robot.dart';
-import '../../../robots/payment/step1/new_payment_step1_robot.dart';
-import '../../../robots/payment/step2/new_payment_step2_robot.dart';
-import '../../../robots/payment/step3/new_payment_step3_robot.dart';
+import '../../../robots/payments/new_payment/new_payment_step1_robot.dart';
+import '../../../robots/payments/new_payment/new_payment_step2_robot.dart';
+import '../../../robots/payments/new_payment/new_payment_step3_robot.dart';
+import '../../../robots/payments/payment_home_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
   late CommonRobot commonRobot;
   late MoreRobot moreRobot;
-  late PaymentRobot paymentRobot;
+  late PaymentHomeRobot paymentRobot;
   late NewPaymentStep1Robot newPaymentStep1Robot;
   late NewPaymentStep2Robot newPaymentStep2Robot;
   late NewPaymentStep3Robot newPaymentStep3Robot;
@@ -27,7 +27,7 @@ void main() {
     loginRobot = LoginRobot(tester);
     commonRobot = CommonRobot(tester);
     moreRobot = MoreRobot(tester);
-    paymentRobot = PaymentRobot(tester);
+    paymentRobot = PaymentHomeRobot(tester);
     newPaymentStep1Robot = NewPaymentStep1Robot(tester);
     newPaymentStep2Robot = NewPaymentStep2Robot(tester);
     newPaymentStep3Robot = NewPaymentStep3Robot(tester);

@@ -1,16 +1,9 @@
 STR := $$(perl -MYAML -le 'print YAML::LoadFile(shift)->{version}' ./pubspec.yaml)
 VERSION := $$( echo $(STR) | cut -d '+' -f 1 )
 BUILD := $$( echo $(STR) | cut -d '+' -f 2 )
-CLIENTUSER := 'order/client_user.dart'
-EXTERNALSALESREP := 'order/external_sales_rep.dart'
+CLIENTUSER := 'client_user.dart'
+EXTERNALSALESREP := 'external_sales_rep.dart'
 SALESORGCONFIG := 'reset_sales_org_config.sh'
-CLIENT_LOGIN := 'login/client_login_screen.dart'
-CLIENT_PRODUCT_TAB := 'product/client_user.dart'
-SECURITY_TAB := 'more/security/client_user.dart'
-CLIENT_PAYMENT_HOME := 'payments/payments_home/client_user.dart'
-EXTERNAL_LOGIN := 'login/external_login_screen.dart'
-CLIENT_HOME := 'home/client_user_home_screen.dart'
-CLIENT_TEST_FILE := 'client_user.dart'
 
 clean_ios:
 	@cd ios && rm -rf Pods && rm Podfile.lock && fvm flutter pub get && pod install && cd ..
@@ -96,66 +89,20 @@ run_th_client_test:
 run_th_external_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${EXTERNALSALESREP}
 run_my_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_HOME}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_LOGIN}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_PRODUCT_TAB}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${SECURITY_TAB}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/view_by_items/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/view_by_orders/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/cart/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/checkout/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/returns_by_items/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/returns_by_request/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/new_return/step1/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/notification/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/more/contact_us/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/account_summary/account_invoice/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${CLIENT_PAYMENT_HOME}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/home/articles/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/soa/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/account_summary/account_credits/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/payment_summary/${CLIENT_TEST_FILE}
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/announcement_article/announcement/${CLIENT_TEST_FILE}
-run_my_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${EXTERNAL_LOGIN}
-run_ph_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/ph/${CLIENT_LOGIN}
-run_ph_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/ph/${CLIENT_LOGIN}
-run_tw_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/tw/${CLIENT_LOGIN}
-run_tw_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/tw/${CLIENT_LOGIN}
-run_th_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${CLIENT_LOGIN}
-run_th_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/th/${CLIENT_LOGIN}
-run_vn_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/vn/${CLIENT_LOGIN}
-run_vn_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/vn/${CLIENT_LOGIN}
-run_sg_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/sg/${CLIENT_LOGIN}
-run_sg_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/sg/${CLIENT_LOGIN}
-run_kh_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${CLIENT_LOGIN}
-run_kh_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kh/${CLIENT_LOGIN}
-run_mm_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/mm/${CLIENT_LOGIN}
-run_mm_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/mm/${CLIENT_LOGIN}
-run_id_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENT_LOGIN}
-run_id_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/id/${CLIENT_LOGIN}
-run_kr_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kr/${CLIENT_LOGIN}
-run_kr_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/kr/${CLIENT_LOGIN}
-run_hk_client_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/hk/${CLIENT_LOGIN}
-run_hk_external_Integration_test:
-	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/hk/${CLIENT_LOGIN}
-
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/product${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/more/security/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/view_by_items/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/view_by_orders/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/cart/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/orders/checkout/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/returns_by_items/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/returns_by_request/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/returns/new_return/step1/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/more/contact_us/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/account_summary/account_invoice/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/payments_home/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/home/articles/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/soa/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/account_summary/account_credits/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/payments/payment_summary/${CLIENTUSER}
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/announcement_article/announcement/${CLIENTUSER}

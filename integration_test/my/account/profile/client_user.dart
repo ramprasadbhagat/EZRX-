@@ -5,7 +5,7 @@ import 'package:integration_test/integration_test.dart';
 import '../../../core/common.dart';
 import '../../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
-import '../../../robots/account/profile/profile_robot.dart';
+import '../../../robots/more/profile_robot.dart';
 import '../../../robots/common/common_robot.dart';
 import '../../../robots/login_robot.dart';
 import '../../../robots/more/more_robot.dart';
@@ -81,7 +81,7 @@ void main() {
     //verify
     profileRobot.verifyPageVisible();
     verifyAllCommponentsVisible();
-    await profileRobot.pullToRefresh();
+    await commonRobot.pullToRefresh();
     verifyAllCommponentsVisible();
   });
 

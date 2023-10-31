@@ -9,4 +9,9 @@ class NewPaymentRobot {
   void verifyPage() {
     expect(find.byKey(WidgetKeys.newPaymentPage), findsOneWidget);
   }
+
+  Future<void> tapCloseButton() async {
+    await tester.tap(find.byKey(WidgetKeys.closeButton));
+    await tester.pumpAndSettle();
+  }
 }

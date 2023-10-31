@@ -15,11 +15,6 @@ class ProfileRobot {
     _verifyTextVisible('Profile');
   }
 
-  Future<void> pullToRefresh() async {
-    await tester.drag(find.byKey(WidgetKeys.scrollList), const Offset(0, 500));
-    await tester.pumpAndSettle();
-  }
-
   void _verifyTextVisible(String text) {
     final textWidget = find.textContaining(text.tr());
     expect(textWidget, findsOneWidget);

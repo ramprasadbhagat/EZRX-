@@ -8,7 +8,6 @@ class LoginRobot {
 
   LoginRobot(this.tester);
 
-  final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
   final rememberMeCheckbox =
       find.byKey(WidgetKeys.loginRememberPasswordCheckbox);
   final forgotPasswordLink = find.byKey(WidgetKeys.forgotPasswordButton);
@@ -47,13 +46,6 @@ class LoginRobot {
     expect(loginSubmitButton, findsOneWidget);
     await tester.tap(loginSubmitButton);
     await tester.pumpAndSettle();
-  }
-
-  Future<void> findAndCloseAnnouncementIcon() async {
-    if (announcementCloseIcon.evaluate().isNotEmpty) {
-      await tester.tap(announcementCloseIcon.first);
-      await tester.pumpAndSettle();
-    }
   }
 
   void findUsernameField() {

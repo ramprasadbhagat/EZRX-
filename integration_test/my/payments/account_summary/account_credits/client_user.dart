@@ -11,14 +11,14 @@ import '../../../../robots/payments/account_summary/account_credits/account_cred
 import '../../../../robots/payments/account_summary/account_credits/account_credits_filter_robot.dart';
 import '../../../../robots/payments/account_summary/account_credits/account_credits_robot.dart';
 import '../../../../robots/payments/account_summary/account_summary_root_robot.dart';
-import '../../../../robots/payments/new_payment_robot.dart';
-import '../../../../robots/payments/payment_robot.dart';
+import '../../../../robots/payments/new_payment/new_payment_robot.dart';
+import '../../../../robots/payments/payment_home_robot.dart';
 
 void main() {
   late LoginRobot loginRobot;
   late CommonRobot commonRobot;
   late HomeRobot homeRobot;
-  late PaymentRobot paymentRobot;
+  late PaymentHomeRobot paymentHomeRobot;
   late AccountSummaryRootRobot accountSummaryRootRobot;
   late AccountCreditsRobot accountCreditsRobot;
   late AccountCreditDetailsRobot accountCreditDetailsRobot;
@@ -50,7 +50,7 @@ void main() {
     loginRobot = LoginRobot(tester);
     commonRobot = CommonRobot(tester);
     homeRobot = HomeRobot(tester);
-    paymentRobot = PaymentRobot(tester);
+    paymentHomeRobot = PaymentHomeRobot(tester);
     accountSummaryRootRobot = AccountSummaryRootRobot(tester);
     accountCreditsRobot = AccountCreditsRobot(tester);
     accountCreditsFilterRobot = AccountCreditsFilterRobot(tester);
@@ -64,8 +64,8 @@ void main() {
     }
 
     await homeRobot.tapPaymentQuickAccess();
-    paymentRobot.verify();
-    await paymentRobot.tapAccountSummaryMenu();
+    paymentHomeRobot.verifyPage();
+    await paymentHomeRobot.tapAccountSummaryMenu();
     accountSummaryRootRobot.verifyRootPage();
     accountSummaryRootRobot.verifyTabBar();
     accountSummaryRootRobot.verifyInvoicesPage();
@@ -269,7 +269,7 @@ void main() {
     await accountCreditsRobot.tapPaymentButton();
 
     //verify new payment page
-    newPaymentRobot.verify();
+    newPaymentRobot.verifyPage();
 
     //close
     await newPaymentRobot.tapCloseButton();

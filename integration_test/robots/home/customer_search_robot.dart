@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class CustomerSearchRobot {
@@ -41,22 +40,6 @@ class CustomerSearchRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> changeAddress(String shipToCode) async {
-    final shipToCodeWidget =
-        find.byKey(WidgetKeys.shipToAddressOption(shipToCode)).first;
-    expect(
-      shipToCodeWidget,
-      findsOneWidget,
-    );
-    await tester.tap(shipToCodeWidget);
-    await tester.pumpAndSettle();
-
-    if (confirmChangeAddress.evaluate().isNotEmpty) {
-      findConfirmChangeAddressButton();
-      await tapOnConfirmChangeAddressButton();
-    }
-  }
-
   void findCancelChangeAddressButton() {
     expect(cancelChangeAddress, findsOneWidget);
   }
@@ -88,19 +71,5 @@ class CustomerSearchRobot {
   void verifySearchNotFound() {
     final message = find.text('That didn’t match anything'.tr());
     expect(message, findsWidgets);
-  }
-
-  Future<void> tapCustomerCode(String customerCode) async {
-    final customerCodeOptionNew =
-        find.byKey(Key('customerCodeOption$customerCode'));
-    expect(customerCodeOptionNew, findsOneWidget);
-    await tester.tap(customerCodeOptionNew);
-    await tester.pumpAndSettle();
-    final customerCodeDialogChange =
-        find.byKey(const Key('customerCodeDialogChange'));
-    if (customerCodeDialogChange.evaluate().isNotEmpty) {
-      await tester.tap(find.byKey(const Key('Change')));
-      await tester.pumpAndSettle();
-    }
   }
 }

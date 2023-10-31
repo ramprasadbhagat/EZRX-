@@ -83,7 +83,7 @@ void main() {
     await commonRobot.dismissSnackbar();
     await commonRobot.goToMoreTab();
     await moreRobot.tapPaymentTile();
-    await paymentHomeRobot.tapAccountSummaryIcon();
+    await paymentHomeRobot.tapAccountSummaryMenu();
   }
 
   testWidgets('EZRX-T265 | Verify Invoice Page - all initial Fields',

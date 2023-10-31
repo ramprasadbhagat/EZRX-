@@ -6,8 +6,8 @@ import 'package:integration_test/integration_test.dart';
 import '../core/common.dart';
 import '../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
 import '../core/infrastructure/zephyr/repository/zephyr_repository.dart';
-import '../robots/announcements/announcement_detail_robot.dart';
-import '../robots/announcements/announcements_robot.dart';
+import '../robots/announcement_article/announcement/announcement_detail_robot.dart';
+import '../robots/announcement_article/announcement_article_root_robot.dart';
 import '../robots/auth/forgot_password_robot.dart';
 import '../robots/common/common_robot.dart';
 import '../robots/common/enum.dart';
@@ -20,7 +20,7 @@ import '../robots/orders/cart/cart_robot.dart';
 import '../robots/orders/orders_root_robot.dart';
 import '../robots/orders/view_by_items/view_by_items_detail_robot.dart';
 import '../robots/orders/view_by_orders/view_by_orders_detail_robot.dart';
-import '../robots/payments/payment_detail_robot.dart';
+import '../robots/payments/payment_summary/payment_detail_robot.dart';
 import '../robots/payments/payment_home_robot.dart';
 import '../robots/products/bundle_detail_robot.dart';
 import '../robots/products/product_detail_robot.dart';
@@ -49,7 +49,7 @@ void main() {
   late BundleDetailRobot bundleDetailRobot;
   late ReturnsRootRobot returnsRootRobot;
   late PaymentHomeRobot paymentHomeRobot;
-  late AnnouncementsRobot announcementsRobot;
+  late AnnouncementArticleRootRobot announcementArticleRootRobot;
   late AnnouncementDetailRobot announcementDetailRobot;
   late OrdersRootRobot ordersRootRobot;
   late ViewByItemsDetailRobot viewByItemsDetailRobot;
@@ -72,7 +72,7 @@ void main() {
     bundleDetailRobot = BundleDetailRobot(tester);
     returnsRootRobot = ReturnsRootRobot(tester);
     paymentHomeRobot = PaymentHomeRobot(tester);
-    announcementsRobot = AnnouncementsRobot(tester);
+    announcementArticleRootRobot = AnnouncementArticleRootRobot(tester);
     announcementDetailRobot = AnnouncementDetailRobot(tester);
     ordersRootRobot = OrdersRootRobot(tester);
     viewByItemsDetailRobot = ViewByItemsDetailRobot(tester);
@@ -271,8 +271,7 @@ void main() {
       homeRobot.verify();
 
       //logout
-      homeRobot.findMoreTab();
-      await homeRobot.tapMoreTab();
+      await commonRobot.navigateToScreen(NavigationTab.more);
       await moreRobot.findLogout();
       await moreRobot.tapLogout();
     });
@@ -381,11 +380,11 @@ void main() {
 
       //verify homepage
       homeRobot.verify();
-      homeRobot.findCustomerSelector();
-      homeRobot.findMiniCart();
+      homeRobot.findCustomerCodeSelector();
+      homeRobot.findMiniCartIcon();
       homeRobot.findQuickAccessMenu();
       homeRobot.findBannerInHomeScreen();
-      await homeRobot.findBrowseProductIcon();
+      await homeRobot.findBrowseProductsIcon();
       await homeRobot.findAnnouncementsIcon();
     });
 
@@ -400,13 +399,10 @@ void main() {
       await pumpAppWithHomeScreen(tester);
 
       //home page
-      homeRobot.findHomeTab();
-      await homeRobot.tapHomeTab();
       homeRobot.verify();
 
       // add to cart
-      homeRobot.findProductsTab();
-      await homeRobot.tapProductsTab();
+      await commonRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyPageVisible();
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
@@ -437,8 +433,7 @@ void main() {
       await customerSearchRobot.tapOnConfirmChangeAddressButton();
 
       // verify cart empty
-      homeRobot.findProductsTab();
-      await homeRobot.tapProductsTab();
+      await commonRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyPageVisible();
       productRobot.verifyCartButtonVisible();
       await productRobot.tapCartButton();
@@ -674,7 +669,7 @@ void main() {
       await homeRobot.tapAnnouncementsIcon();
 
       //verify go to announcements page
-      announcementsRobot.verifyGoToAnnouncementsPage();
+      announcementArticleRootRobot.verifyAnnouncementPage();
     });
 
     testWidgets('EZRX-T46 | Verify display Recently ordered in Homepage',
@@ -850,7 +845,7 @@ void main() {
       await homeRobot.tapOnFirstAnnouncement();
 
       //verify announcement detail page
-      announcementDetailRobot.verifyPageVisible();
+      announcementDetailRobot.verifyPage();
     });
   });
 

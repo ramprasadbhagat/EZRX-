@@ -10,16 +10,7 @@ class HomeRobot {
   final WidgetTester tester;
   HomeRobot(this.tester);
 
-  final salesOrgSelector = find.byKey(const Key('salesOrgSelect'));
-  final accountTabbar = find.byKey(const Key('accountTabbar'));
   final customerCodeSelect = find.byKey(WidgetKeys.customerCodeSelector);
-  final shipToCodeSelector = find.byKey(const Key('shipToCodeSelect'));
-  final homeTabbar = find.text('Home'.tr());
-  final favoriteTabbar = find.byKey(const Key('favoritesTab'));
-  final historyTabbar = find.byKey(const Key('historyTab'));
-  final announcementCloseIcon = find.byKey(const Key('announcementCloseIcon'));
-  final homeTabAnnouncementWidget =
-      find.byKey(const Key('homeTabAnnouncementWidget'));
   final moreTab = find.byKey(WidgetKeys.moreTab);
   final searchBar = find.byKey(WidgetKeys.homeProductSearchBar);
   final customerSelector = find.byKey(WidgetKeys.customerCodeSelector);
@@ -69,14 +60,6 @@ class HomeRobot {
     expect(home, findsOneWidget);
   }
 
-  void findCustomerSelector() {
-    expect(customerSelector, findsOneWidget);
-  }
-
-  void findMiniCart() {
-    expect(miniCart, findsOneWidget);
-  }
-
   void findQuickAccessMenu() {
     expect(quickAccessMenu, findsOneWidget);
   }
@@ -85,52 +68,16 @@ class HomeRobot {
     expect(banner, findsOneWidget);
   }
 
-  void verifyEdiCustomer() {
-    expect(find.byKey(const Key('ediCustomerOrderDisable')), findsOneWidget);
-  }
-
-  void verifySuspendedCustomer() {
-    expect(find.byKey(const Key('suspendedCustomer')), findsWidgets);
-  }
-
-  void findSalesOrgSelector() {
-    expect(salesOrgSelector, findsWidgets);
-  }
-
-  Future<void> tapSalesOrgSelector() async {
-    final salesOrgSelectOne =
-        find.descendant(of: salesOrgSelector, matching: salesOrgSelector);
-    await tester.tap(salesOrgSelectOne);
-    await tester.pumpAndSettle();
-  }
-
-  Future<void> selectSalesOrg(String salesOrg) async {
-    final salesOrgOption = find.byKey(Key('salesOrgOption$salesOrg'));
-    expect(salesOrgOption, findsOneWidget);
-    await tester.tap(salesOrgOption);
-    await tester.pumpAndSettle();
-  }
-
-  Future<void> findAndCloseAnnouncementIcon() async {
-    if (announcementCloseIcon.evaluate().isNotEmpty &&
-        homeTabAnnouncementWidget.evaluate().isNotEmpty) {
-      await tester.tap(announcementCloseIcon.first);
-      await tester.pumpAndSettle();
-    }
-  }
-
-  void findAccountTab() {
-    expect(accountTabbar, findsOneWidget);
-  }
-
-  Future<void> tapAccountTab() async {
-    await tester.tap(accountTabbar);
-    await tester.pumpAndSettle();
-  }
-
-  Future<void> findBrowseProductIcon() async {
+  Future<void> findBrowseProductsIcon() async {
     await _scrollEnsureVisible(browseProductIcon);
     expect(browseProductIcon, findsOneWidget);
+  }
+
+  Future<void> tapBrowseProductsIcon() async {
+    final iconArrow =
+        find.byKey(WidgetKeys.sectionTileIcon('Browse products'.tr()));
+    await tester.tap(iconArrow);
+    await tester.pumpAndSettle();
   }
 
   void findMiniCartIcon() {
@@ -149,78 +96,12 @@ class HomeRobot {
     await tester.pumpAndSettle();
   }
 
-  void findHomeTab() {
-    expect(homeTabbar, findsOneWidget);
-  }
-
-  Future<void> tapHomeTab() async {
-    await tester.tap(homeTabbar);
-    await tester.pumpAndSettle();
-  }
-
   void findCustomerCodeSelector() {
     expect(customerCodeSelect, findsWidgets);
   }
 
   Future<void> tapCustomerCodeSelector() async {
     await tester.tap(customerCodeSelect);
-    await tester.pumpAndSettle();
-  }
-
-  void findShipToSelector() {
-    expect(shipToCodeSelector, findsWidgets);
-  }
-
-  Future<void> tapShipToSelector() async {
-    final shipToCodeSelectOne =
-        find.descendant(of: shipToCodeSelector, matching: shipToCodeSelector);
-    expect(shipToCodeSelectOne, findsOneWidget);
-    await tester.tap(shipToCodeSelectOne);
-    await tester.pumpAndSettle();
-  }
-
-  Future<void> goToCreateOrder() async {
-    final createOrder = find.text('Create Order');
-    expect(createOrder, findsOneWidget);
-    await tester.tap(createOrder);
-    await tester.pumpAndSettle();
-  }
-
-  void findFavoriteTab() {
-    expect(favoriteTabbar, findsOneWidget);
-  }
-
-  Future<void> tapFavoriteTab() async {
-    await tester.pumpAndSettle();
-    await tester.tap(favoriteTabbar);
-    await tester.pumpAndSettle();
-  }
-
-  void findHistoryTab() {
-    expect(historyTabbar, findsOneWidget);
-  }
-
-  Future<void> tapHistoryTab() async {
-    await tester.pumpAndSettle();
-    await tester.tap(historyTabbar);
-    await tester.pumpAndSettle();
-  }
-
-  void findMoreTab() {
-    expect(moreTab, findsOneWidget);
-  }
-
-  Future<void> tapMoreTab() async {
-    await tester.tap(moreTab);
-    await tester.pump(const Duration(milliseconds: 300));
-  }
-
-  void findProductsTab() {
-    expect(productsTab, findsOneWidget);
-  }
-
-  Future<void> tapProductsTab() async {
-    await tester.tap(productsTab);
     await tester.pumpAndSettle();
   }
 
@@ -250,18 +131,6 @@ class HomeRobot {
   Future<void> tapRecentlyOrderIcon() async {
     final iconArrow =
         find.byKey(WidgetKeys.sectionTileIcon('Recently ordered'.tr()));
-    await tester.tap(iconArrow);
-    await tester.pumpAndSettle();
-  }
-
-  Future<void> findBrowseProductsIcon() async {
-    await _scrollEnsureVisible(browseProductIcon);
-    expect(browseProductIcon, findsOneWidget);
-  }
-
-  Future<void> tapBrowseProductsIcon() async {
-    final iconArrow =
-        find.byKey(WidgetKeys.sectionTileIcon('Browse products'.tr()));
     await tester.tap(iconArrow);
     await tester.pumpAndSettle();
   }
