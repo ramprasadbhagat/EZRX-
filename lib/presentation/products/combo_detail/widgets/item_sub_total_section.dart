@@ -66,9 +66,8 @@ class _ItemSubTotalSection extends StatelessWidget {
                     price: state.currentDeal.scheme.displayOriginalPrice
                         ? comboItem.display(PriceType.listPriceTotal)
                         : comboItem
-                            .getComboOfferPriceWithDiscount(
-                              comboDealRate:
-                                  comboItem.comboDeal.getMaterialComboRate(
+                            .getComboOfferPriceSubTotal(
+                              comboItem.comboDeal.getMaterialComboRate(
                                 materialNumber: comboItem.getMaterialNumber,
                                 totalQuantityUnit: state.totalQuantityUnit,
                               ),
