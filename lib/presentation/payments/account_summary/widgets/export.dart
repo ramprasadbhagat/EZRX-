@@ -32,12 +32,14 @@ class _Export extends StatelessWidget {
         onPressed: () => isInvoiceTabActive
             ? context.read<DownloadPaymentAttachmentsBloc>().add(
                   DownloadPaymentAttachmentEvent.fetchAllInvoiceUrl(
-                    queryObject: AllInvoicesFilter.empty(),
+                    queryObject:
+                        context.read<AllInvoicesBloc>().state.appliedFilter,
                   ),
                 )
             : context.read<DownloadPaymentAttachmentsBloc>().add(
                   DownloadPaymentAttachmentEvent.fetchAllCreditUrl(
-                    queryObject: AllCreditsFilter.empty(),
+                    queryObject:
+                        context.read<AllCreditsBloc>().state.appliedFilter,
                   ),
                 ),
         color: ZPColors.primary,
