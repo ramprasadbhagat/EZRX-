@@ -706,15 +706,33 @@ void _initComboDealAndNavigate({
           contain: overrideQuantity.isNotEmpty,
         ),
       );
-  context.read<ComboDealMaterialDetailBloc>().add(
-        ComboDealMaterialDetailEvent.fetchComboDealDetail(
-          salesConfigs: context.read<EligibilityBloc>().state.salesOrgConfigs,
-          comboDeal: comboDeal,
-          locale: context.locale,
-          parentMaterialNumber: materialNumber,
-          comboMaterialsCurrentQuantity: overrideQuantity,
-        ),
-      );
+
+  if (price.comboDeal.category.type.isMaterialNumber) {
+    context.read<ComboDealMaterialDetailBloc>().add(
+          ComboDealMaterialDetailEvent.fetchComboDealDetail(
+            comboDeal: comboDeal,
+            locale: context.locale,
+            parentMaterialNumber: materialNumber,
+            comboMaterialsCurrentQuantity: overrideQuantity,
+          ),
+        );
+  } else {
+    final productDetailAggregate =
+        context.read<ProductDetailBloc>().state.productDetailAggregate;
+
+    final principalCode = productDetailAggregate
+        .materialInfo.principalData.principalCode
+        .getOrDefaultValue('');
+
+    context.read<ComboDealMaterialDetailBloc>().add(
+          ComboDealMaterialDetailEvent.fetchComboDealPrincipal(
+            comboDeal: comboDeal,
+            principles: [principalCode],
+            comboMaterialsCurrentQuantity: overrideQuantity,
+            locale: context.locale,
+          ),
+        );
+  }
   context.navigateTo(const ComboDetailPageRoute());
 }
 

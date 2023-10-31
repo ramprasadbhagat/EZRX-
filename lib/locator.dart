@@ -43,7 +43,6 @@ import 'package:ezrxmobile/application/order/cart/discount_override/discount_ove
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
-import 'package:ezrxmobile/application/order/combo_deal/combo_deal_principle_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -2064,12 +2063,9 @@ void setupLocator() {
   );
 
   locator.registerFactory(
-    () => ComboDealMaterialDetailBloc(locator<ProductDetailRepository>()),
-  );
-
-  locator.registerFactory(
-    () => ComboDealPrincipleDetailBloc(
-      repository: locator<MaterialListRepository>(),
+    () => ComboDealMaterialDetailBloc(
+      productDetailRepository: locator<ProductDetailRepository>(),
+      materialListRepository: locator<MaterialListRepository>(),
       config: locator<Config>(),
     ),
   );

@@ -150,7 +150,7 @@ class MaterialListRepository implements IMaterialListRepository {
   }
 
   @override
-  Future<Either<ApiFailure, List<MaterialInfo>>> getComboDealMaterials({
+  Future<Either<ApiFailure, MaterialResponse>> getComboDealMaterials({
     required User user,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -158,41 +158,35 @@ class MaterialListRepository implements IMaterialListRepository {
     required int pageSize,
     required int offset,
     required List<String> principles,
+    required SalesOrganisationConfigs salesOrgConfig,
   }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final materialListData = user.role.type.isSalesRepRole
-            ? await materialListLocalDataSource.getMaterialListSalesRep()
-            : await materialListLocalDataSource.getMaterialList();
+    // if (config.appFlavor == Flavor.mock) {
+    //   try {
+    //     final materialListData = user.role.type.isSalesRepRole
+    //         ? await materialListLocalDataSource.getMaterialListSalesRep()
+    //         : await materialListLocalDataSource.getMaterialList();
 
-        return Right(materialListData);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    }
+    //     return Right(materialListData);
+    //   } catch (e) {
+    //     return Left(FailureHandler.handleFailure(e));
+    //   }
+    // }
 
-    // Because principle code from response is something like 140132
-    // We need to transform it to valid one (0000140132)
-    final validPrinciples = principles.map((e) => e.padLeft(10, '0')).toList();
+    // // Because principle code from response is something like 140132
+    // // We need to transform it to valid one (0000140132)
+    // final validPrinciples = principles.map((e) => e.padLeft(10, '0')).toList();
 
     try {
-      final materialListData = user.role.type.isSalesRepRole
-          ? await materialListRemoteDataSource.getComboDealMaterialsForSaleRep(
-              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
-              customerCode: customerCodeInfo.customerCodeSoldTo,
-              shipToCode: shipToInfo.shipToCustomerCode,
-              pageSize: pageSize,
-              offset: offset,
-              principalNameList: validPrinciples,
-            )
-          : await materialListRemoteDataSource.getComboDealMaterials(
-              salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
-              customerCode: customerCodeInfo.customerCodeSoldTo,
-              shipToCode: shipToInfo.shipToCustomerCode,
-              pageSize: pageSize,
-              offset: offset,
-              principalNameList: validPrinciples,
-            );
+      final materialListData =
+          await materialListRemoteDataSource.getComboDealMaterialsPrincipalCode(
+        salesOrgCode: salesOrganisation.salesOrg.getOrCrash(),
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        shipToCode: shipToInfo.shipToCustomerCode,
+        pageSize: pageSize,
+        offset: offset,
+        principalNameList: principles,
+        language: salesOrgConfig.getConfigLanguage,
+      );
 
       return Right(materialListData);
     } catch (e) {

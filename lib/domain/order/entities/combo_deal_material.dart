@@ -51,6 +51,4 @@ class ComboDealMaterial with _$ComboDealMaterial {
         rate: rate,
         minQty: minQty,
       );
-
-  double get rateToAbs => rate.abs();
 }

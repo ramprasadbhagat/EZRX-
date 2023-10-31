@@ -29,6 +29,4 @@ class ComboDealQtyTier with _$ComboDealQtyTier {
         rate: rate,
         minQty: minQty,
       );
-
-  double get rateToAbs => rate.abs();
 }

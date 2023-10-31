@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_events.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_properties.dart';
@@ -54,32 +57,53 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   void initState() {
-    if (context.read<CartBloc>().state.cartProducts.isNotEmpty) {
+    final cartProducts = context.read<CartBloc>().state.cartProducts;
+    if (cartProducts.isNotEmpty) {
+      final eligibilityState = context.read<EligibilityBloc>().state;
       context.read<CartBloc>().add(
             CartEvent.getDetailsProductsAddedToCart(
-              cartProducts: context.read<CartBloc>().state.cartProducts,
+              cartProducts: cartProducts,
             ),
           );
       context.read<MaterialPriceBloc>().add(
             MaterialPriceEvent.fetchPriceCartProduct(
-              salesOrganisation:
-                  context.read<EligibilityBloc>().state.salesOrganisation,
-              salesConfigs:
-                  context.read<EligibilityBloc>().state.salesOrgConfigs,
-              customerCodeInfo:
-                  context.read<EligibilityBloc>().state.customerCodeInfo,
-              shipToInfo: context.read<EligibilityBloc>().state.shipToInfo,
-              comboDealEligible:
-                  context.read<EligibilityBloc>().state.comboDealEligible,
-              products: context
-                  .read<CartBloc>()
-                  .state
-                  .cartProducts
+              salesOrganisation: eligibilityState.salesOrganisation,
+              salesConfigs: eligibilityState.salesOrgConfigs,
+              customerCodeInfo: eligibilityState.customerCodeInfo,
+              shipToInfo: eligibilityState.shipToInfo,
+              comboDealEligible: eligibilityState.comboDealEligible,
+              products: cartProducts
                   .where((element) => element.materialInfo.type.typeMaterial)
                   .map((e) => e.materialInfo)
                   .toList(),
             ),
           );
+
+      for (final cartProduct in cartProducts) {
+        if (cartProduct.materialInfo.type.typeCombo) {
+          final priceComboDeal =
+              cartProduct.comboMaterials.firstOrNull?.comboDeals ??
+                  PriceComboDeal.empty();
+
+          if (priceComboDeal.category.type.isMaterialNumber) {
+            context.read<ComboDealListBloc>().add(
+                  ComboDealListEvent.fetchMaterialDeal(
+                    salesOrganisation: eligibilityState.salesOrganisation,
+                    customerCodeInfo: eligibilityState.customerCodeInfo,
+                    priceComboDeal: priceComboDeal,
+                  ),
+                );
+          } else {
+            context.read<ComboDealListBloc>().add(
+                  ComboDealListEvent.fetchPrincipleGroupDeal(
+                    salesOrganisation: eligibilityState.salesOrganisation,
+                    customerCodeInfo: eligibilityState.customerCodeInfo,
+                    priceComboDeal: priceComboDeal,
+                  ),
+                );
+          }
+        }
+      }
     }
     super.initState();
   }
@@ -103,7 +127,7 @@ class _CartPageState extends State<CartPage> {
         ),
         BlocListener<CartBloc, CartState>(
           listenWhen: (previous, current) =>
-              previous.grandTotal != current.grandTotal &&
+              previous.subTotalHidePriceMaterial != current.subTotalHidePriceMaterial &&
                   !current.isFetchingCartProductDetail ||
               previous.isMappingPrice != current.isMappingPrice &&
                   !current.isMappingPrice ||
@@ -114,14 +138,14 @@ class _CartPageState extends State<CartPage> {
             context.read<OrderEligibilityBloc>().add(
                   OrderEligibilityEvent.update(
                     cartItems: state.cartProducts,
-                    grandTotal: state.grandTotal,
+                    grandTotal: state.grandTotalSubmit,
                     orderType: context
                         .read<EligibilityBloc>()
                         .state
                         .selectedOrderType
                         .documentType
                         .getOrDefaultValue(''),
-                    subTotal: state.subTotal,
+                    subTotal: state.subTotalSubmit,
                   ),
                 );
           },

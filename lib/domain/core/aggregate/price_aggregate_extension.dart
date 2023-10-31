@@ -110,6 +110,11 @@ extension PriceAggregateExtension on List<PriceAggregate> {
             : item,
       ).toList();
 
+  double get originalTotalAmount => fold<double>(
+        0,
+        (previousValue, element) => previousValue + element.listPriceTotal,
+      );
+
   int get totalComboQuantity => fold<int>(
         0,
         (previousValue, element) => previousValue + element.quantity,
@@ -126,6 +131,7 @@ extension PriceAggregateExtension on List<PriceAggregate> {
 
           final comboMaterialItemRate = product.comboDeal.getMaterialComboRate(
             materialNumber: product.getMaterialNumber,
+            currentTotalAmount: originalTotalAmount,
             totalQuantityUnit: totalQuantityUnit,
           );
 

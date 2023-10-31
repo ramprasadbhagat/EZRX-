@@ -31,6 +31,4 @@ class ComboDealGroupDeal with _$ComboDealGroupDeal {
         rate: rate,
         minQty: minTotalQuantity,
       );
-
-  double get rateToAbs => rate.abs();
 }

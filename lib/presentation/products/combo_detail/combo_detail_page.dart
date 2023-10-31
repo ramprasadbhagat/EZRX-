@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
@@ -20,8 +21,11 @@ import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
+import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
@@ -40,6 +44,7 @@ part 'package:ezrxmobile/presentation/products/combo_detail/widgets/item_sub_tot
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_requirement_section.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_searchbar.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_add_to_cart_section.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_body_content.dart';
 
 class ComboDetailPage extends StatelessWidget {
   const ComboDetailPage({Key? key}) : super(key: key);
@@ -123,88 +128,18 @@ class ComboDetailPage extends StatelessWidget {
           children: [
             const _ComboRequirementSection(),
             Expanded(
-              child: ListView(
-                children: [
-                  BlocBuilder<ComboDealMaterialDetailBloc,
-                      ComboDealMaterialDetailState>(
-                    buildWhen: (previous, current) =>
-                        previous.isFetchingPrice != current.isFetchingPrice ||
-                        previous.mandatoryMaterials !=
-                            current.mandatoryMaterials,
-                    builder: (context, state) {
-                      return state.mandatoryMaterials.isEmpty
-                          ? const SizedBox.shrink()
-                          : Column(
-                              children: state.mandatoryMaterials.values
-                                  .map(
-                                    (item) => LoadingShimmer.withChild(
-                                      enabled: state.isFetchingPrice,
-                                      child: _ComboProductTile(
-                                        comboItem: item,
-                                        isMandatory: true,
-                                        isFixed: true,
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                            );
-                    },
-                  ),
-                  const _ComboDetailSearchBar(),
-                  const _TotalComboCount(),
-                  const Divider(
-                    endIndent: 0,
-                    indent: 0,
-                    thickness: 0.5,
-                  ),
-                  BlocConsumer<ComboDealMaterialDetailBloc,
-                      ComboDealMaterialDetailState>(
-                    listenWhen: (previous, current) =>
-                        previous.isFetchingComboInfo !=
-                            current.isFetchingComboInfo &&
-                        !current.isFetchingComboInfo,
-                    listener: (context, state) {
-                      final eligibilityBlocState =
-                          context.read<EligibilityBloc>().state;
-                      context.read<MaterialPriceBloc>().add(
-                            MaterialPriceEvent.fetchPriceCartProduct(
-                              salesOrganisation:
-                                  eligibilityBlocState.salesOrganisation,
-                              salesConfigs:
-                                  eligibilityBlocState.salesOrgConfigs,
-                              customerCodeInfo:
-                                  eligibilityBlocState.customerCodeInfo,
-                              shipToInfo: eligibilityBlocState.shipToInfo,
-                              comboDealEligible:
-                                  eligibilityBlocState.comboDealEligible,
-                              products: state.allMaterialsInfo,
-                            ),
-                          );
-                    },
-                    buildWhen: (previous, current) =>
-                        previous.isFetchingPrice != current.isFetchingPrice ||
-                        previous.searchableList != current.searchableList,
-                    builder: (context, state) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0)
-                            .copyWith(top: 24),
-                        child: Column(
-                          children: state.searchableList.values
-                              .map(
-                                (item) => LoadingShimmer.withChild(
-                                  enabled: state.isFetchingPrice,
-                                  child: _ComboProductTile(
-                                    comboItem: item,
-                                    isMandatory: item.selfComboDeal.mandatory,
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+              child: BlocBuilder<ComboDealMaterialDetailBloc,
+                  ComboDealMaterialDetailState>(
+                buildWhen: (previous, current) =>
+                    previous.isFetchingComboInfo !=
+                        current.isFetchingComboInfo &&
+                    !current.isFetchingComboInfo,
+                builder: (context, state) {
+                  return _ComboDetailBodyContent(
+                    haveFixedMaterials:
+                        state.currentDeal.scheme.haveFixedMaterials,
+                  );
+                },
               ),
             ),
             const _ComboDetailAddToCartSection(),

@@ -71,7 +71,7 @@ void main() {
           ComboDealListEvent.fetchMaterialDeal(
             salesOrganisation: fakeSalesOrg,
             customerCodeInfo: fakeCustomerCode,
-            comboDeals: fakeComboDealQuery,
+            priceComboDeal: fakeComboDealQuery,
           ),
         ),
         expect: () => [
@@ -112,7 +112,7 @@ void main() {
           ComboDealListEvent.fetchMaterialDeal(
             salesOrganisation: fakeSalesOrg,
             customerCodeInfo: fakeCustomerCode,
-            comboDeals: fakeComboDealQuery,
+            priceComboDeal: fakeComboDealQuery,
           ),
         ),
         expect: () => [
@@ -187,7 +187,7 @@ void main() {
         ComboDealListEvent.fetchPrincipleGroupDeal(
           salesOrganisation: fakeSalesOrg,
           customerCodeInfo: fakeCustomerCode,
-          comboDeals: fakeComboDealQuery,
+          priceComboDeal: fakeComboDealQuery,
         ),
       ),
       expect: () => [
@@ -197,6 +197,7 @@ void main() {
           comboDeals: {
             fakeComboDealQuery.id: [principleComboDeal],
           },
+          priceComboDeal: fakeComboDealQuery,
         ),
       ],
       verify: (bloc) {
@@ -227,7 +228,7 @@ void main() {
         ComboDealListEvent.fetchPrincipleGroupDeal(
           salesOrganisation: fakeSalesOrg,
           customerCodeInfo: fakeCustomerCode,
-          comboDeals: fakeComboDealQuery,
+          priceComboDeal: fakeComboDealQuery,
         ),
       ),
       expect: () => [
@@ -261,7 +262,7 @@ void main() {
         ComboDealListEvent.fetchPrincipleGroupDeal(
           salesOrganisation: fakeSalesOrg,
           customerCodeInfo: fakeCustomerCode,
-          comboDeals: fakeComboDealQuery,
+          priceComboDeal: fakeComboDealQuery,
         ),
       ),
       expect: () => [

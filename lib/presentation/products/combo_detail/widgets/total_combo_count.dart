@@ -12,10 +12,11 @@ class _TotalComboCount extends StatelessWidget {
         children: [
           BlocBuilder<ComboDealMaterialDetailBloc,
               ComboDealMaterialDetailState>(
-            buildWhen: (previous, current) => previous.searchableList != current.searchableList,
+            buildWhen: (previous, current) =>
+                previous.searchableList != current.searchableList,
             builder: (context, state) {
               return Text(
-                '${state.searchableList.length} ',
+                '${state.materialCount != 0 ? state.materialCount : state.searchableList.length} ',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: ZPColors.darkGray,
                     ),

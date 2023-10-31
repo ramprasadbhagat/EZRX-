@@ -2583,7 +2583,7 @@ void main() {
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
           );
           expect(
-            cartBlocState.grandTotal,
+            cartBlocState.grandTotalHidePriceMaterial,
             273.6,
           );
         },
@@ -2596,7 +2596,7 @@ void main() {
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
           );
           expect(
-            cartBlocState.subTotal,
+            cartBlocState.subTotalHidePriceMaterial,
             273.6,
           );
         },
@@ -3079,7 +3079,7 @@ void main() {
             ],
           );
           expect(
-            cartBlocState.grandTotal,
+            cartBlocState.grandTotalHidePriceMaterial,
             273.6,
           );
         },

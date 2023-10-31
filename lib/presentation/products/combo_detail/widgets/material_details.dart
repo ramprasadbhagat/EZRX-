@@ -25,6 +25,7 @@ class _MaterialDetails extends StatelessWidget {
             comboItem.comboDeal.materialComboRateDisplay(
           materialNumber: comboItem.getMaterialNumber,
           totalQuantityUnit: state.totalQuantityUnit,
+          currentTotalAmount: state.originalPriceSelectedItems,
         );
 
         return Expanded(
@@ -52,12 +53,12 @@ class _MaterialDetails extends StatelessWidget {
               InkWell(
                 onTap: onTapName,
                 child: Text(
-                  comboItem.materialInfo.materialDescription,
+                  comboItem.materialInfo.displayDescription,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
               Text(
-                comboItem.materialInfo.principalData.principalName.name,
+                comboItem.materialInfo.getManufactured,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontSize: 10,
                       color: ZPColors.neutralsGrey1,

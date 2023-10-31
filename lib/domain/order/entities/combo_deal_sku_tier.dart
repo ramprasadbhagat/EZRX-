@@ -27,6 +27,4 @@ class ComboDealSKUTier with _$ComboDealSKUTier {
         rate: rate,
         minQty: minQty,
       );
-
-  double get rateToAbs => rate.abs();
 }

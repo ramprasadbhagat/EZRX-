@@ -18,8 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ComboDealMaterialDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
         initialize,
     required TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
@@ -30,7 +34,6 @@ mixin _$ComboDealMaterialDetailEvent {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
@@ -38,12 +41,24 @@ mixin _$ComboDealMaterialDetailEvent {
     required TResult Function(SearchKey searchKey) search,
     required TResult Function(bool contain) cartContainsCurrentCombo,
     required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult? Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -54,7 +69,6 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult? Function(MaterialNumber item)? updateItemSelection,
     TResult? Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -62,12 +76,24 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult? Function(SearchKey searchKey)? search,
     TResult? Function(bool contain)? cartContainsCurrentCombo,
     TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -78,7 +104,6 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult Function(MaterialNumber item)? updateItemSelection,
     TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -86,6 +111,14 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult Function(SearchKey searchKey)? search,
     TResult Function(bool contain)? cartContainsCurrentCombo,
     TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -102,6 +135,10 @@ mixin _$ComboDealMaterialDetailEvent {
     required TResult Function(_CartContainsCurrentCombo value)
         cartContainsCurrentCombo,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -117,6 +154,9 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult? Function(_CartContainsCurrentCombo value)?
         cartContainsCurrentCombo,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -131,6 +171,9 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult Function(_Search value)? search,
     TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -166,11 +209,15 @@ abstract class _$$_InitializeCopyWith<$Res> {
   $Res call(
       {SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
-      ShipToInfo shipToInfo});
+      ShipToInfo shipToInfo,
+      User user,
+      SalesOrganisationConfigs salesConfigs});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs;
 }
 
 /// @nodoc
@@ -187,6 +234,8 @@ class __$$_InitializeCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? user = null,
+    Object? salesConfigs = null,
   }) {
     return _then(_$_Initialize(
       salesOrganisation: null == salesOrganisation
@@ -201,6 +250,14 @@ class __$$_InitializeCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesConfigs: null == salesConfigs
+          ? _value.salesConfigs
+          : salesConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
     ));
   }
 
@@ -227,6 +284,23 @@ class __$$_InitializeCopyWithImpl<$Res>
       return _then(_value.copyWith(shipToInfo: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesConfigs,
+        (value) {
+      return _then(_value.copyWith(salesConfigs: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -235,7 +309,9 @@ class _$_Initialize implements _Initialize {
   const _$_Initialize(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
-      required this.shipToInfo});
+      required this.shipToInfo,
+      required this.user,
+      required this.salesConfigs});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -243,10 +319,14 @@ class _$_Initialize implements _Initialize {
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
+  @override
+  final User user;
+  @override
+  final SalesOrganisationConfigs salesConfigs;
 
   @override
   String toString() {
-    return 'ComboDealMaterialDetailEvent.initialize(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo)';
+    return 'ComboDealMaterialDetailEvent.initialize(salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesConfigs: $salesConfigs)';
   }
 
   @override
@@ -259,12 +339,15 @@ class _$_Initialize implements _Initialize {
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
-                other.shipToInfo == shipToInfo));
+                other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.salesConfigs, salesConfigs) ||
+                other.salesConfigs == salesConfigs));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, salesOrganisation, customerCodeInfo, shipToInfo);
+  int get hashCode => Object.hash(runtimeType, salesOrganisation,
+      customerCodeInfo, shipToInfo, user, salesConfigs);
 
   @JsonKey(ignore: true)
   @override
@@ -275,8 +358,12 @@ class _$_Initialize implements _Initialize {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
         initialize,
     required TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
@@ -287,7 +374,6 @@ class _$_Initialize implements _Initialize {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
@@ -295,15 +381,28 @@ class _$_Initialize implements _Initialize {
     required TResult Function(SearchKey searchKey) search,
     required TResult Function(bool contain) cartContainsCurrentCombo,
     required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
   }) {
-    return initialize(salesOrganisation, customerCodeInfo, shipToInfo);
+    return initialize(
+        salesOrganisation, customerCodeInfo, shipToInfo, user, salesConfigs);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult? Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -314,7 +413,6 @@ class _$_Initialize implements _Initialize {
     TResult? Function(MaterialNumber item)? updateItemSelection,
     TResult? Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -322,15 +420,28 @@ class _$_Initialize implements _Initialize {
     TResult? Function(SearchKey searchKey)? search,
     TResult? Function(bool contain)? cartContainsCurrentCombo,
     TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
   }) {
-    return initialize?.call(salesOrganisation, customerCodeInfo, shipToInfo);
+    return initialize?.call(
+        salesOrganisation, customerCodeInfo, shipToInfo, user, salesConfigs);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -341,7 +452,6 @@ class _$_Initialize implements _Initialize {
     TResult Function(MaterialNumber item)? updateItemSelection,
     TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -349,10 +459,19 @@ class _$_Initialize implements _Initialize {
     TResult Function(SearchKey searchKey)? search,
     TResult Function(bool contain)? cartContainsCurrentCombo,
     TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (initialize != null) {
-      return initialize(salesOrganisation, customerCodeInfo, shipToInfo);
+      return initialize(
+          salesOrganisation, customerCodeInfo, shipToInfo, user, salesConfigs);
     }
     return orElse();
   }
@@ -371,6 +490,10 @@ class _$_Initialize implements _Initialize {
     required TResult Function(_CartContainsCurrentCombo value)
         cartContainsCurrentCombo,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
   }) {
     return initialize(this);
   }
@@ -389,6 +512,9 @@ class _$_Initialize implements _Initialize {
     TResult? Function(_CartContainsCurrentCombo value)?
         cartContainsCurrentCombo,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
   }) {
     return initialize?.call(this);
   }
@@ -406,6 +532,9 @@ class _$_Initialize implements _Initialize {
     TResult Function(_Search value)? search,
     TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -419,11 +548,15 @@ abstract class _Initialize implements ComboDealMaterialDetailEvent {
   const factory _Initialize(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final ShipToInfo shipToInfo}) = _$_Initialize;
+      required final ShipToInfo shipToInfo,
+      required final User user,
+      required final SalesOrganisationConfigs salesConfigs}) = _$_Initialize;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
+  User get user;
+  SalesOrganisationConfigs get salesConfigs;
   @JsonKey(ignore: true)
   _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
       throw _privateConstructorUsedError;
@@ -527,8 +660,12 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
         initialize,
     required TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
@@ -539,7 +676,6 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
@@ -547,6 +683,14 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     required TResult Function(SearchKey searchKey) search,
     required TResult Function(bool contain) cartContainsCurrentCombo,
     required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
   }) {
     return initFromCartComboDealItems(items, salesConfigs);
   }
@@ -554,8 +698,12 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult? Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -566,7 +714,6 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     TResult? Function(MaterialNumber item)? updateItemSelection,
     TResult? Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -574,6 +721,14 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     TResult? Function(SearchKey searchKey)? search,
     TResult? Function(bool contain)? cartContainsCurrentCombo,
     TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
   }) {
     return initFromCartComboDealItems?.call(items, salesConfigs);
   }
@@ -581,8 +736,12 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -593,7 +752,6 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     TResult Function(MaterialNumber item)? updateItemSelection,
     TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -601,6 +759,14 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     TResult Function(SearchKey searchKey)? search,
     TResult Function(bool contain)? cartContainsCurrentCombo,
     TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (initFromCartComboDealItems != null) {
@@ -623,6 +789,10 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     required TResult Function(_CartContainsCurrentCombo value)
         cartContainsCurrentCombo,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
   }) {
     return initFromCartComboDealItems(this);
   }
@@ -641,6 +811,9 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     TResult? Function(_CartContainsCurrentCombo value)?
         cartContainsCurrentCombo,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
   }) {
     return initFromCartComboDealItems?.call(this);
   }
@@ -658,6 +831,9 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
     TResult Function(_Search value)? search,
     TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (initFromCartComboDealItems != null) {
@@ -753,8 +929,12 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
         initialize,
     required TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
@@ -765,7 +945,6 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
@@ -773,6 +952,14 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     required TResult Function(SearchKey searchKey) search,
     required TResult Function(bool contain) cartContainsCurrentCombo,
     required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
   }) {
     return setPriceInfo(priceMap);
   }
@@ -780,8 +967,12 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult? Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -792,7 +983,6 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     TResult? Function(MaterialNumber item)? updateItemSelection,
     TResult? Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -800,6 +990,14 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     TResult? Function(SearchKey searchKey)? search,
     TResult? Function(bool contain)? cartContainsCurrentCombo,
     TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
   }) {
     return setPriceInfo?.call(priceMap);
   }
@@ -807,8 +1005,12 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -819,7 +1021,6 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     TResult Function(MaterialNumber item)? updateItemSelection,
     TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -827,6 +1028,14 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     TResult Function(SearchKey searchKey)? search,
     TResult Function(bool contain)? cartContainsCurrentCombo,
     TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (setPriceInfo != null) {
@@ -849,6 +1058,10 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     required TResult Function(_CartContainsCurrentCombo value)
         cartContainsCurrentCombo,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
   }) {
     return setPriceInfo(this);
   }
@@ -867,6 +1080,9 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     TResult? Function(_CartContainsCurrentCombo value)?
         cartContainsCurrentCombo,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
   }) {
     return setPriceInfo?.call(this);
   }
@@ -884,6 +1100,9 @@ class _$_SetPriceInfo implements _SetPriceInfo {
     TResult Function(_Search value)? search,
     TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (setPriceInfo != null) {
@@ -977,8 +1196,12 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
         initialize,
     required TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
@@ -989,7 +1212,6 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
@@ -997,6 +1219,14 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     required TResult Function(SearchKey searchKey) search,
     required TResult Function(bool contain) cartContainsCurrentCombo,
     required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
   }) {
     return updateItemQuantity(item, qty);
   }
@@ -1004,8 +1234,12 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult? Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -1016,7 +1250,6 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     TResult? Function(MaterialNumber item)? updateItemSelection,
     TResult? Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -1024,6 +1257,14 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     TResult? Function(SearchKey searchKey)? search,
     TResult? Function(bool contain)? cartContainsCurrentCombo,
     TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
   }) {
     return updateItemQuantity?.call(item, qty);
   }
@@ -1031,8 +1272,12 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -1043,7 +1288,6 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     TResult Function(MaterialNumber item)? updateItemSelection,
     TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -1051,6 +1295,14 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     TResult Function(SearchKey searchKey)? search,
     TResult Function(bool contain)? cartContainsCurrentCombo,
     TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (updateItemQuantity != null) {
@@ -1073,6 +1325,10 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     required TResult Function(_CartContainsCurrentCombo value)
         cartContainsCurrentCombo,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
   }) {
     return updateItemQuantity(this);
   }
@@ -1091,6 +1347,9 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     TResult? Function(_CartContainsCurrentCombo value)?
         cartContainsCurrentCombo,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
   }) {
     return updateItemQuantity?.call(this);
   }
@@ -1108,6 +1367,9 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
     TResult Function(_Search value)? search,
     TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (updateItemQuantity != null) {
@@ -1195,8 +1457,12 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
         initialize,
     required TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
@@ -1207,7 +1473,6 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
@@ -1215,6 +1480,14 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     required TResult Function(SearchKey searchKey) search,
     required TResult Function(bool contain) cartContainsCurrentCombo,
     required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
   }) {
     return updateItemSelection(item);
   }
@@ -1222,8 +1495,12 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult? Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -1234,7 +1511,6 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     TResult? Function(MaterialNumber item)? updateItemSelection,
     TResult? Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -1242,6 +1518,14 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     TResult? Function(SearchKey searchKey)? search,
     TResult? Function(bool contain)? cartContainsCurrentCombo,
     TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
   }) {
     return updateItemSelection?.call(item);
   }
@@ -1249,8 +1533,12 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -1261,7 +1549,6 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     TResult Function(MaterialNumber item)? updateItemSelection,
     TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -1269,6 +1556,14 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     TResult Function(SearchKey searchKey)? search,
     TResult Function(bool contain)? cartContainsCurrentCombo,
     TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (updateItemSelection != null) {
@@ -1291,6 +1586,10 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     required TResult Function(_CartContainsCurrentCombo value)
         cartContainsCurrentCombo,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
   }) {
     return updateItemSelection(this);
   }
@@ -1309,6 +1608,9 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     TResult? Function(_CartContainsCurrentCombo value)?
         cartContainsCurrentCombo,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
   }) {
     return updateItemSelection?.call(this);
   }
@@ -1326,6 +1628,9 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
     TResult Function(_Search value)? search,
     TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (updateItemSelection != null) {
@@ -1353,13 +1658,11 @@ abstract class _$$_FetchComboDealDetailCopyWith<$Res> {
   @useResult
   $Res call(
       {ComboDeal comboDeal,
-      SalesOrganisationConfigs salesConfigs,
       Locale locale,
       MaterialNumber parentMaterialNumber,
       Map<MaterialNumber, int> comboMaterialsCurrentQuantity});
 
   $ComboDealCopyWith<$Res> get comboDeal;
-  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs;
 }
 
 /// @nodoc
@@ -1375,7 +1678,6 @@ class __$$_FetchComboDealDetailCopyWithImpl<$Res>
   @override
   $Res call({
     Object? comboDeal = null,
-    Object? salesConfigs = null,
     Object? locale = null,
     Object? parentMaterialNumber = null,
     Object? comboMaterialsCurrentQuantity = null,
@@ -1385,10 +1687,6 @@ class __$$_FetchComboDealDetailCopyWithImpl<$Res>
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
               as ComboDeal,
-      salesConfigs: null == salesConfigs
-          ? _value.salesConfigs
-          : salesConfigs // ignore: cast_nullable_to_non_nullable
-              as SalesOrganisationConfigs,
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -1411,15 +1709,6 @@ class __$$_FetchComboDealDetailCopyWithImpl<$Res>
       return _then(_value.copyWith(comboDeal: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs {
-    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesConfigs,
-        (value) {
-      return _then(_value.copyWith(salesConfigs: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -1427,7 +1716,6 @@ class __$$_FetchComboDealDetailCopyWithImpl<$Res>
 class _$_FetchComboDealDetail implements _FetchComboDealDetail {
   const _$_FetchComboDealDetail(
       {required this.comboDeal,
-      required this.salesConfigs,
       required this.locale,
       required this.parentMaterialNumber,
       required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity})
@@ -1435,8 +1723,6 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
 
   @override
   final ComboDeal comboDeal;
-  @override
-  final SalesOrganisationConfigs salesConfigs;
   @override
   final Locale locale;
   @override
@@ -1452,7 +1738,7 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
 
   @override
   String toString() {
-    return 'ComboDealMaterialDetailEvent.fetchComboDealDetail(comboDeal: $comboDeal, salesConfigs: $salesConfigs, locale: $locale, parentMaterialNumber: $parentMaterialNumber, comboMaterialsCurrentQuantity: $comboMaterialsCurrentQuantity)';
+    return 'ComboDealMaterialDetailEvent.fetchComboDealDetail(comboDeal: $comboDeal, locale: $locale, parentMaterialNumber: $parentMaterialNumber, comboMaterialsCurrentQuantity: $comboMaterialsCurrentQuantity)';
   }
 
   @override
@@ -1462,8 +1748,6 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
             other is _$_FetchComboDealDetail &&
             (identical(other.comboDeal, comboDeal) ||
                 other.comboDeal == comboDeal) &&
-            (identical(other.salesConfigs, salesConfigs) ||
-                other.salesConfigs == salesConfigs) &&
             (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.parentMaterialNumber, parentMaterialNumber) ||
                 other.parentMaterialNumber == parentMaterialNumber) &&
@@ -1476,7 +1760,6 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
   int get hashCode => Object.hash(
       runtimeType,
       comboDeal,
-      salesConfigs,
       locale,
       parentMaterialNumber,
       const DeepCollectionEquality().hash(_comboMaterialsCurrentQuantity));
@@ -1491,8 +1774,12 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
         initialize,
     required TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
@@ -1503,7 +1790,6 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
@@ -1511,16 +1797,28 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     required TResult Function(SearchKey searchKey) search,
     required TResult Function(bool contain) cartContainsCurrentCombo,
     required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
   }) {
-    return fetchComboDealDetail(comboDeal, salesConfigs, locale,
-        parentMaterialNumber, comboMaterialsCurrentQuantity);
+    return fetchComboDealDetail(
+        comboDeal, locale, parentMaterialNumber, comboMaterialsCurrentQuantity);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult? Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -1531,7 +1829,6 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     TResult? Function(MaterialNumber item)? updateItemSelection,
     TResult? Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -1539,16 +1836,28 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     TResult? Function(SearchKey searchKey)? search,
     TResult? Function(bool contain)? cartContainsCurrentCombo,
     TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
   }) {
-    return fetchComboDealDetail?.call(comboDeal, salesConfigs, locale,
-        parentMaterialNumber, comboMaterialsCurrentQuantity);
+    return fetchComboDealDetail?.call(
+        comboDeal, locale, parentMaterialNumber, comboMaterialsCurrentQuantity);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -1559,7 +1868,6 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     TResult Function(MaterialNumber item)? updateItemSelection,
     TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -1567,11 +1875,19 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     TResult Function(SearchKey searchKey)? search,
     TResult Function(bool contain)? cartContainsCurrentCombo,
     TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (fetchComboDealDetail != null) {
-      return fetchComboDealDetail(comboDeal, salesConfigs, locale,
-          parentMaterialNumber, comboMaterialsCurrentQuantity);
+      return fetchComboDealDetail(comboDeal, locale, parentMaterialNumber,
+          comboMaterialsCurrentQuantity);
     }
     return orElse();
   }
@@ -1590,6 +1906,10 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     required TResult Function(_CartContainsCurrentCombo value)
         cartContainsCurrentCombo,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
   }) {
     return fetchComboDealDetail(this);
   }
@@ -1608,6 +1928,9 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     TResult? Function(_CartContainsCurrentCombo value)?
         cartContainsCurrentCombo,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
   }) {
     return fetchComboDealDetail?.call(this);
   }
@@ -1625,6 +1948,9 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
     TResult Function(_Search value)? search,
     TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (fetchComboDealDetail != null) {
@@ -1637,14 +1963,12 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
 abstract class _FetchComboDealDetail implements ComboDealMaterialDetailEvent {
   const factory _FetchComboDealDetail(
       {required final ComboDeal comboDeal,
-      required final SalesOrganisationConfigs salesConfigs,
       required final Locale locale,
       required final MaterialNumber parentMaterialNumber,
       required final Map<MaterialNumber, int>
           comboMaterialsCurrentQuantity}) = _$_FetchComboDealDetail;
 
   ComboDeal get comboDeal;
-  SalesOrganisationConfigs get salesConfigs;
   Locale get locale;
   MaterialNumber get parentMaterialNumber;
   Map<MaterialNumber, int> get comboMaterialsCurrentQuantity;
@@ -1716,8 +2040,12 @@ class _$_Search implements _Search {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
         initialize,
     required TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
@@ -1728,7 +2056,6 @@ class _$_Search implements _Search {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
@@ -1736,6 +2063,14 @@ class _$_Search implements _Search {
     required TResult Function(SearchKey searchKey) search,
     required TResult Function(bool contain) cartContainsCurrentCombo,
     required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
   }) {
     return search(searchKey);
   }
@@ -1743,8 +2078,12 @@ class _$_Search implements _Search {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult? Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -1755,7 +2094,6 @@ class _$_Search implements _Search {
     TResult? Function(MaterialNumber item)? updateItemSelection,
     TResult? Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -1763,6 +2101,14 @@ class _$_Search implements _Search {
     TResult? Function(SearchKey searchKey)? search,
     TResult? Function(bool contain)? cartContainsCurrentCombo,
     TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
   }) {
     return search?.call(searchKey);
   }
@@ -1770,8 +2116,12 @@ class _$_Search implements _Search {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -1782,7 +2132,6 @@ class _$_Search implements _Search {
     TResult Function(MaterialNumber item)? updateItemSelection,
     TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -1790,6 +2139,14 @@ class _$_Search implements _Search {
     TResult Function(SearchKey searchKey)? search,
     TResult Function(bool contain)? cartContainsCurrentCombo,
     TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -1812,6 +2169,10 @@ class _$_Search implements _Search {
     required TResult Function(_CartContainsCurrentCombo value)
         cartContainsCurrentCombo,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
   }) {
     return search(this);
   }
@@ -1830,6 +2191,9 @@ class _$_Search implements _Search {
     TResult? Function(_CartContainsCurrentCombo value)?
         cartContainsCurrentCombo,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
   }) {
     return search?.call(this);
   }
@@ -1847,6 +2211,9 @@ class _$_Search implements _Search {
     TResult Function(_Search value)? search,
     TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -1932,8 +2299,12 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
         initialize,
     required TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
@@ -1944,7 +2315,6 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
@@ -1952,6 +2322,14 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     required TResult Function(SearchKey searchKey) search,
     required TResult Function(bool contain) cartContainsCurrentCombo,
     required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
   }) {
     return cartContainsCurrentCombo(contain);
   }
@@ -1959,8 +2337,12 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult? Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -1971,7 +2353,6 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     TResult? Function(MaterialNumber item)? updateItemSelection,
     TResult? Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -1979,6 +2360,14 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     TResult? Function(SearchKey searchKey)? search,
     TResult? Function(bool contain)? cartContainsCurrentCombo,
     TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
   }) {
     return cartContainsCurrentCombo?.call(contain);
   }
@@ -1986,8 +2375,12 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -1998,7 +2391,6 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     TResult Function(MaterialNumber item)? updateItemSelection,
     TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -2006,6 +2398,14 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     TResult Function(SearchKey searchKey)? search,
     TResult Function(bool contain)? cartContainsCurrentCombo,
     TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (cartContainsCurrentCombo != null) {
@@ -2028,6 +2428,10 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     required TResult Function(_CartContainsCurrentCombo value)
         cartContainsCurrentCombo,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
   }) {
     return cartContainsCurrentCombo(this);
   }
@@ -2046,6 +2450,9 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     TResult? Function(_CartContainsCurrentCombo value)?
         cartContainsCurrentCombo,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
   }) {
     return cartContainsCurrentCombo?.call(this);
   }
@@ -2063,6 +2470,9 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
     TResult Function(_Search value)? search,
     TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (cartContainsCurrentCombo != null) {
@@ -2121,8 +2531,12 @@ class _$_ClearSearch implements _ClearSearch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
         initialize,
     required TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
@@ -2133,7 +2547,6 @@ class _$_ClearSearch implements _ClearSearch {
     required TResult Function(MaterialNumber item) updateItemSelection,
     required TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
@@ -2141,6 +2554,14 @@ class _$_ClearSearch implements _ClearSearch {
     required TResult Function(SearchKey searchKey) search,
     required TResult Function(bool contain) cartContainsCurrentCombo,
     required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
   }) {
     return clearSearch();
   }
@@ -2148,8 +2569,12 @@ class _$_ClearSearch implements _ClearSearch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult? Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -2160,7 +2585,6 @@ class _$_ClearSearch implements _ClearSearch {
     TResult? Function(MaterialNumber item)? updateItemSelection,
     TResult? Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -2168,6 +2592,14 @@ class _$_ClearSearch implements _ClearSearch {
     TResult? Function(SearchKey searchKey)? search,
     TResult? Function(bool contain)? cartContainsCurrentCombo,
     TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
   }) {
     return clearSearch?.call();
   }
@@ -2175,8 +2607,12 @@ class _$_ClearSearch implements _ClearSearch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(SalesOrganisation salesOrganisation,
-            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
         initialize,
     TResult Function(
             List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
@@ -2187,7 +2623,6 @@ class _$_ClearSearch implements _ClearSearch {
     TResult Function(MaterialNumber item)? updateItemSelection,
     TResult Function(
             ComboDeal comboDeal,
-            SalesOrganisationConfigs salesConfigs,
             Locale locale,
             MaterialNumber parentMaterialNumber,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
@@ -2195,6 +2630,14 @@ class _$_ClearSearch implements _ClearSearch {
     TResult Function(SearchKey searchKey)? search,
     TResult Function(bool contain)? cartContainsCurrentCombo,
     TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (clearSearch != null) {
@@ -2217,6 +2660,10 @@ class _$_ClearSearch implements _ClearSearch {
     required TResult Function(_CartContainsCurrentCombo value)
         cartContainsCurrentCombo,
     required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
   }) {
     return clearSearch(this);
   }
@@ -2235,6 +2682,9 @@ class _$_ClearSearch implements _ClearSearch {
     TResult? Function(_CartContainsCurrentCombo value)?
         cartContainsCurrentCombo,
     TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
   }) {
     return clearSearch?.call(this);
   }
@@ -2252,6 +2702,9 @@ class _$_ClearSearch implements _ClearSearch {
     TResult Function(_Search value)? search,
     TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
     TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
     required TResult orElse(),
   }) {
     if (clearSearch != null) {
@@ -2266,6 +2719,634 @@ abstract class _ClearSearch implements ComboDealMaterialDetailEvent {
 }
 
 /// @nodoc
+abstract class _$$_FetchComboDealPrincipalCopyWith<$Res> {
+  factory _$$_FetchComboDealPrincipalCopyWith(_$_FetchComboDealPrincipal value,
+          $Res Function(_$_FetchComboDealPrincipal) then) =
+      __$$_FetchComboDealPrincipalCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {ComboDeal comboDeal,
+      Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+      List<String> principles,
+      Locale locale});
+
+  $ComboDealCopyWith<$Res> get comboDeal;
+}
+
+/// @nodoc
+class __$$_FetchComboDealPrincipalCopyWithImpl<$Res>
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
+        _$_FetchComboDealPrincipal>
+    implements _$$_FetchComboDealPrincipalCopyWith<$Res> {
+  __$$_FetchComboDealPrincipalCopyWithImpl(_$_FetchComboDealPrincipal _value,
+      $Res Function(_$_FetchComboDealPrincipal) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? comboDeal = null,
+    Object? comboMaterialsCurrentQuantity = null,
+    Object? principles = null,
+    Object? locale = null,
+  }) {
+    return _then(_$_FetchComboDealPrincipal(
+      comboDeal: null == comboDeal
+          ? _value.comboDeal
+          : comboDeal // ignore: cast_nullable_to_non_nullable
+              as ComboDeal,
+      comboMaterialsCurrentQuantity: null == comboMaterialsCurrentQuantity
+          ? _value._comboMaterialsCurrentQuantity
+          : comboMaterialsCurrentQuantity // ignore: cast_nullable_to_non_nullable
+              as Map<MaterialNumber, int>,
+      principles: null == principles
+          ? _value._principles
+          : principles // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      locale: null == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as Locale,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ComboDealCopyWith<$Res> get comboDeal {
+    return $ComboDealCopyWith<$Res>(_value.comboDeal, (value) {
+      return _then(_value.copyWith(comboDeal: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
+  const _$_FetchComboDealPrincipal(
+      {required this.comboDeal,
+      required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+      required final List<String> principles,
+      required this.locale})
+      : _comboMaterialsCurrentQuantity = comboMaterialsCurrentQuantity,
+        _principles = principles;
+
+  @override
+  final ComboDeal comboDeal;
+  final Map<MaterialNumber, int> _comboMaterialsCurrentQuantity;
+  @override
+  Map<MaterialNumber, int> get comboMaterialsCurrentQuantity {
+    if (_comboMaterialsCurrentQuantity is EqualUnmodifiableMapView)
+      return _comboMaterialsCurrentQuantity;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_comboMaterialsCurrentQuantity);
+  }
+
+  final List<String> _principles;
+  @override
+  List<String> get principles {
+    if (_principles is EqualUnmodifiableListView) return _principles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_principles);
+  }
+
+  @override
+  final Locale locale;
+
+  @override
+  String toString() {
+    return 'ComboDealMaterialDetailEvent.fetchComboDealPrincipal(comboDeal: $comboDeal, comboMaterialsCurrentQuantity: $comboMaterialsCurrentQuantity, principles: $principles, locale: $locale)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FetchComboDealPrincipal &&
+            (identical(other.comboDeal, comboDeal) ||
+                other.comboDeal == comboDeal) &&
+            const DeepCollectionEquality().equals(
+                other._comboMaterialsCurrentQuantity,
+                _comboMaterialsCurrentQuantity) &&
+            const DeepCollectionEquality()
+                .equals(other._principles, _principles) &&
+            (identical(other.locale, locale) || other.locale == locale));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      comboDeal,
+      const DeepCollectionEquality().hash(_comboMaterialsCurrentQuantity),
+      const DeepCollectionEquality().hash(_principles),
+      locale);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FetchComboDealPrincipalCopyWith<_$_FetchComboDealPrincipal>
+      get copyWith =>
+          __$$_FetchComboDealPrincipalCopyWithImpl<_$_FetchComboDealPrincipal>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
+        initialize,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
+    required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap)
+        setPriceInfo,
+    required TResult Function(MaterialNumber item, int qty) updateItemQuantity,
+    required TResult Function(MaterialNumber item) updateItemSelection,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Locale locale,
+            MaterialNumber parentMaterialNumber,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
+        fetchComboDealDetail,
+    required TResult Function(SearchKey searchKey) search,
+    required TResult Function(bool contain) cartContainsCurrentCombo,
+    required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
+  }) {
+    return fetchComboDealPrincipal(
+        comboDeal, comboMaterialsCurrentQuantity, principles, locale);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
+        initialize,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
+    TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap)?
+        setPriceInfo,
+    TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult? Function(MaterialNumber item)? updateItemSelection,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Locale locale,
+            MaterialNumber parentMaterialNumber,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
+        fetchComboDealDetail,
+    TResult? Function(SearchKey searchKey)? search,
+    TResult? Function(bool contain)? cartContainsCurrentCombo,
+    TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
+  }) {
+    return fetchComboDealPrincipal?.call(
+        comboDeal, comboMaterialsCurrentQuantity, principles, locale);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
+        initialize,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
+    TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap)?
+        setPriceInfo,
+    TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult Function(MaterialNumber item)? updateItemSelection,
+    TResult Function(
+            ComboDeal comboDeal,
+            Locale locale,
+            MaterialNumber parentMaterialNumber,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
+        fetchComboDealDetail,
+    TResult Function(SearchKey searchKey)? search,
+    TResult Function(bool contain)? cartContainsCurrentCombo,
+    TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
+    required TResult orElse(),
+  }) {
+    if (fetchComboDealPrincipal != null) {
+      return fetchComboDealPrincipal(
+          comboDeal, comboMaterialsCurrentQuantity, principles, locale);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
+    required TResult Function(_SetPriceInfo value) setPriceInfo,
+    required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
+    required TResult Function(_UpdateItemSelection value) updateItemSelection,
+    required TResult Function(_FetchComboDealDetail value) fetchComboDealDetail,
+    required TResult Function(_Search value) search,
+    required TResult Function(_CartContainsCurrentCombo value)
+        cartContainsCurrentCombo,
+    required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
+  }) {
+    return fetchComboDealPrincipal(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
+    TResult? Function(_SetPriceInfo value)? setPriceInfo,
+    TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult? Function(_UpdateItemSelection value)? updateItemSelection,
+    TResult? Function(_FetchComboDealDetail value)? fetchComboDealDetail,
+    TResult? Function(_Search value)? search,
+    TResult? Function(_CartContainsCurrentCombo value)?
+        cartContainsCurrentCombo,
+    TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
+  }) {
+    return fetchComboDealPrincipal?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
+    TResult Function(_SetPriceInfo value)? setPriceInfo,
+    TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult Function(_UpdateItemSelection value)? updateItemSelection,
+    TResult Function(_FetchComboDealDetail value)? fetchComboDealDetail,
+    TResult Function(_Search value)? search,
+    TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
+    TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
+    required TResult orElse(),
+  }) {
+    if (fetchComboDealPrincipal != null) {
+      return fetchComboDealPrincipal(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchComboDealPrincipal
+    implements ComboDealMaterialDetailEvent {
+  const factory _FetchComboDealPrincipal(
+      {required final ComboDeal comboDeal,
+      required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+      required final List<String> principles,
+      required final Locale locale}) = _$_FetchComboDealPrincipal;
+
+  ComboDeal get comboDeal;
+  Map<MaterialNumber, int> get comboMaterialsCurrentQuantity;
+  List<String> get principles;
+  Locale get locale;
+  @JsonKey(ignore: true)
+  _$$_FetchComboDealPrincipalCopyWith<_$_FetchComboDealPrincipal>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LoadMoreComboDealPrincipalCopyWith<$Res> {
+  factory _$$_LoadMoreComboDealPrincipalCopyWith(
+          _$_LoadMoreComboDealPrincipal value,
+          $Res Function(_$_LoadMoreComboDealPrincipal) then) =
+      __$$_LoadMoreComboDealPrincipalCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ComboDeal comboDeal, List<String> principles});
+
+  $ComboDealCopyWith<$Res> get comboDeal;
+}
+
+/// @nodoc
+class __$$_LoadMoreComboDealPrincipalCopyWithImpl<$Res>
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
+        _$_LoadMoreComboDealPrincipal>
+    implements _$$_LoadMoreComboDealPrincipalCopyWith<$Res> {
+  __$$_LoadMoreComboDealPrincipalCopyWithImpl(
+      _$_LoadMoreComboDealPrincipal _value,
+      $Res Function(_$_LoadMoreComboDealPrincipal) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? comboDeal = null,
+    Object? principles = null,
+  }) {
+    return _then(_$_LoadMoreComboDealPrincipal(
+      comboDeal: null == comboDeal
+          ? _value.comboDeal
+          : comboDeal // ignore: cast_nullable_to_non_nullable
+              as ComboDeal,
+      principles: null == principles
+          ? _value._principles
+          : principles // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ComboDealCopyWith<$Res> get comboDeal {
+    return $ComboDealCopyWith<$Res>(_value.comboDeal, (value) {
+      return _then(_value.copyWith(comboDeal: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
+  const _$_LoadMoreComboDealPrincipal(
+      {required this.comboDeal, required final List<String> principles})
+      : _principles = principles;
+
+  @override
+  final ComboDeal comboDeal;
+  final List<String> _principles;
+  @override
+  List<String> get principles {
+    if (_principles is EqualUnmodifiableListView) return _principles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_principles);
+  }
+
+  @override
+  String toString() {
+    return 'ComboDealMaterialDetailEvent.loadMoreComboDealPrincipal(comboDeal: $comboDeal, principles: $principles)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadMoreComboDealPrincipal &&
+            (identical(other.comboDeal, comboDeal) ||
+                other.comboDeal == comboDeal) &&
+            const DeepCollectionEquality()
+                .equals(other._principles, _principles));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, comboDeal, const DeepCollectionEquality().hash(_principles));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoadMoreComboDealPrincipalCopyWith<_$_LoadMoreComboDealPrincipal>
+      get copyWith => __$$_LoadMoreComboDealPrincipalCopyWithImpl<
+          _$_LoadMoreComboDealPrincipal>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)
+        initialize,
+    required TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)
+        initFromCartComboDealItems,
+    required TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap)
+        setPriceInfo,
+    required TResult Function(MaterialNumber item, int qty) updateItemQuantity,
+    required TResult Function(MaterialNumber item) updateItemSelection,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Locale locale,
+            MaterialNumber parentMaterialNumber,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity)
+        fetchComboDealDetail,
+    required TResult Function(SearchKey searchKey) search,
+    required TResult Function(bool contain) cartContainsCurrentCombo,
+    required TResult Function() clearSearch,
+    required TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)
+        fetchComboDealPrincipal,
+    required TResult Function(ComboDeal comboDeal, List<String> principles)
+        loadMoreComboDealPrincipal,
+  }) {
+    return loadMoreComboDealPrincipal(comboDeal, principles);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
+        initialize,
+    TResult? Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
+    TResult? Function(Map<MaterialNumber, MaterialPriceDetail> priceMap)?
+        setPriceInfo,
+    TResult? Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult? Function(MaterialNumber item)? updateItemSelection,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Locale locale,
+            MaterialNumber parentMaterialNumber,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
+        fetchComboDealDetail,
+    TResult? Function(SearchKey searchKey)? search,
+    TResult? Function(bool contain)? cartContainsCurrentCombo,
+    TResult? Function()? clearSearch,
+    TResult? Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult? Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
+  }) {
+    return loadMoreComboDealPrincipal?.call(comboDeal, principles);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user,
+            SalesOrganisationConfigs salesConfigs)?
+        initialize,
+    TResult Function(
+            List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs)?
+        initFromCartComboDealItems,
+    TResult Function(Map<MaterialNumber, MaterialPriceDetail> priceMap)?
+        setPriceInfo,
+    TResult Function(MaterialNumber item, int qty)? updateItemQuantity,
+    TResult Function(MaterialNumber item)? updateItemSelection,
+    TResult Function(
+            ComboDeal comboDeal,
+            Locale locale,
+            MaterialNumber parentMaterialNumber,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity)?
+        fetchComboDealDetail,
+    TResult Function(SearchKey searchKey)? search,
+    TResult Function(bool contain)? cartContainsCurrentCombo,
+    TResult Function()? clearSearch,
+    TResult Function(
+            ComboDeal comboDeal,
+            Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+            List<String> principles,
+            Locale locale)?
+        fetchComboDealPrincipal,
+    TResult Function(ComboDeal comboDeal, List<String> principles)?
+        loadMoreComboDealPrincipal,
+    required TResult orElse(),
+  }) {
+    if (loadMoreComboDealPrincipal != null) {
+      return loadMoreComboDealPrincipal(comboDeal, principles);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_InitFromCartComboDealItems value)
+        initFromCartComboDealItems,
+    required TResult Function(_SetPriceInfo value) setPriceInfo,
+    required TResult Function(_UpdateItemQuantity value) updateItemQuantity,
+    required TResult Function(_UpdateItemSelection value) updateItemSelection,
+    required TResult Function(_FetchComboDealDetail value) fetchComboDealDetail,
+    required TResult Function(_Search value) search,
+    required TResult Function(_CartContainsCurrentCombo value)
+        cartContainsCurrentCombo,
+    required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_FetchComboDealPrincipal value)
+        fetchComboDealPrincipal,
+    required TResult Function(_LoadMoreComboDealPrincipal value)
+        loadMoreComboDealPrincipal,
+  }) {
+    return loadMoreComboDealPrincipal(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
+    TResult? Function(_SetPriceInfo value)? setPriceInfo,
+    TResult? Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult? Function(_UpdateItemSelection value)? updateItemSelection,
+    TResult? Function(_FetchComboDealDetail value)? fetchComboDealDetail,
+    TResult? Function(_Search value)? search,
+    TResult? Function(_CartContainsCurrentCombo value)?
+        cartContainsCurrentCombo,
+    TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult? Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
+  }) {
+    return loadMoreComboDealPrincipal?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_InitFromCartComboDealItems value)?
+        initFromCartComboDealItems,
+    TResult Function(_SetPriceInfo value)? setPriceInfo,
+    TResult Function(_UpdateItemQuantity value)? updateItemQuantity,
+    TResult Function(_UpdateItemSelection value)? updateItemSelection,
+    TResult Function(_FetchComboDealDetail value)? fetchComboDealDetail,
+    TResult Function(_Search value)? search,
+    TResult Function(_CartContainsCurrentCombo value)? cartContainsCurrentCombo,
+    TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_FetchComboDealPrincipal value)? fetchComboDealPrincipal,
+    TResult Function(_LoadMoreComboDealPrincipal value)?
+        loadMoreComboDealPrincipal,
+    required TResult orElse(),
+  }) {
+    if (loadMoreComboDealPrincipal != null) {
+      return loadMoreComboDealPrincipal(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadMoreComboDealPrincipal
+    implements ComboDealMaterialDetailEvent {
+  const factory _LoadMoreComboDealPrincipal(
+      {required final ComboDeal comboDeal,
+      required final List<String> principles}) = _$_LoadMoreComboDealPrincipal;
+
+  ComboDeal get comboDeal;
+  List<String> get principles;
+  @JsonKey(ignore: true)
+  _$$_LoadMoreComboDealPrincipalCopyWith<_$_LoadMoreComboDealPrincipal>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ComboDealMaterialDetailState {
   Map<MaterialNumber, PriceAggregate> get items =>
       throw _privateConstructorUsedError;
@@ -2274,12 +3355,19 @@ mixin _$ComboDealMaterialDetailState {
   bool get isFetchingPrice => throw _privateConstructorUsedError;
   bool get isFetchingComboInfo => throw _privateConstructorUsedError;
   bool get isUpdateCart => throw _privateConstructorUsedError;
+  bool get isLoadMore => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   ShipToInfo get shipToInfo => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
+  SalesOrganisationConfigs get salesConfigs =>
+      throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
+  bool get canLoadMore => throw _privateConstructorUsedError;
+  int get nextPageIndex => throw _privateConstructorUsedError;
+  int get materialCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ComboDealMaterialDetailStateCopyWith<ComboDealMaterialDetailState>
@@ -2300,15 +3388,23 @@ abstract class $ComboDealMaterialDetailStateCopyWith<$Res> {
       bool isFetchingPrice,
       bool isFetchingComboInfo,
       bool isUpdateCart,
+      bool isLoadMore,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
+      User user,
+      SalesOrganisationConfigs salesConfigs,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      bool canLoadMore,
+      int nextPageIndex,
+      int materialCount});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  $UserCopyWith<$Res> get user;
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs;
 }
 
 /// @nodoc
@@ -2330,11 +3426,17 @@ class _$ComboDealMaterialDetailStateCopyWithImpl<$Res,
     Object? isFetchingPrice = null,
     Object? isFetchingComboInfo = null,
     Object? isUpdateCart = null,
+    Object? isLoadMore = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? user = null,
+    Object? salesConfigs = null,
     Object? apiFailureOrSuccessOption = null,
     Object? searchKey = null,
+    Object? canLoadMore = null,
+    Object? nextPageIndex = null,
+    Object? materialCount = null,
   }) {
     return _then(_value.copyWith(
       items: null == items
@@ -2357,6 +3459,10 @@ class _$ComboDealMaterialDetailStateCopyWithImpl<$Res,
           ? _value.isUpdateCart
           : isUpdateCart // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadMore: null == isLoadMore
+          ? _value.isLoadMore
+          : isLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -2369,6 +3475,14 @@ class _$ComboDealMaterialDetailStateCopyWithImpl<$Res,
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesConfigs: null == salesConfigs
+          ? _value.salesConfigs
+          : salesConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -2377,6 +3491,18 @@ class _$ComboDealMaterialDetailStateCopyWithImpl<$Res,
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      canLoadMore: null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextPageIndex: null == nextPageIndex
+          ? _value.nextPageIndex
+          : nextPageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      materialCount: null == materialCount
+          ? _value.materialCount
+          : materialCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -2403,6 +3529,23 @@ class _$ComboDealMaterialDetailStateCopyWithImpl<$Res,
       return _then(_value.copyWith(shipToInfo: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs {
+    return $SalesOrganisationConfigsCopyWith<$Res>(_value.salesConfigs,
+        (value) {
+      return _then(_value.copyWith(salesConfigs: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -2419,11 +3562,17 @@ abstract class _$$_ComboDealDetailStateCopyWith<$Res>
       bool isFetchingPrice,
       bool isFetchingComboInfo,
       bool isUpdateCart,
+      bool isLoadMore,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipToInfo,
+      User user,
+      SalesOrganisationConfigs salesConfigs,
       Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      bool canLoadMore,
+      int nextPageIndex,
+      int materialCount});
 
   @override
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -2431,6 +3580,10 @@ abstract class _$$_ComboDealDetailStateCopyWith<$Res>
   $CustomerCodeInfoCopyWith<$Res> get customerCodeInfo;
   @override
   $ShipToInfoCopyWith<$Res> get shipToInfo;
+  @override
+  $UserCopyWith<$Res> get user;
+  @override
+  $SalesOrganisationConfigsCopyWith<$Res> get salesConfigs;
 }
 
 /// @nodoc
@@ -2450,11 +3603,17 @@ class __$$_ComboDealDetailStateCopyWithImpl<$Res>
     Object? isFetchingPrice = null,
     Object? isFetchingComboInfo = null,
     Object? isUpdateCart = null,
+    Object? isLoadMore = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
     Object? shipToInfo = null,
+    Object? user = null,
+    Object? salesConfigs = null,
     Object? apiFailureOrSuccessOption = null,
     Object? searchKey = null,
+    Object? canLoadMore = null,
+    Object? nextPageIndex = null,
+    Object? materialCount = null,
   }) {
     return _then(_$_ComboDealDetailState(
       items: null == items
@@ -2477,6 +3636,10 @@ class __$$_ComboDealDetailStateCopyWithImpl<$Res>
           ? _value.isUpdateCart
           : isUpdateCart // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadMore: null == isLoadMore
+          ? _value.isLoadMore
+          : isLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -2489,6 +3652,14 @@ class __$$_ComboDealDetailStateCopyWithImpl<$Res>
           ? _value.shipToInfo
           : shipToInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      salesConfigs: null == salesConfigs
+          ? _value.salesConfigs
+          : salesConfigs // ignore: cast_nullable_to_non_nullable
+              as SalesOrganisationConfigs,
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -2497,6 +3668,18 @@ class __$$_ComboDealDetailStateCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      canLoadMore: null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextPageIndex: null == nextPageIndex
+          ? _value.nextPageIndex
+          : nextPageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      materialCount: null == materialCount
+          ? _value.materialCount
+          : materialCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -2510,11 +3693,17 @@ class _$_ComboDealDetailState extends _ComboDealDetailState {
       required this.isFetchingPrice,
       required this.isFetchingComboInfo,
       required this.isUpdateCart,
+      required this.isLoadMore,
       required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
+      required this.user,
+      required this.salesConfigs,
       required this.apiFailureOrSuccessOption,
-      required this.searchKey})
+      required this.searchKey,
+      required this.canLoadMore,
+      required this.nextPageIndex,
+      required this.materialCount})
       : _items = items,
         _selectedItems = selectedItems,
         super._();
@@ -2542,19 +3731,31 @@ class _$_ComboDealDetailState extends _ComboDealDetailState {
   @override
   final bool isUpdateCart;
   @override
+  final bool isLoadMore;
+  @override
   final SalesOrganisation salesOrganisation;
   @override
   final CustomerCodeInfo customerCodeInfo;
   @override
   final ShipToInfo shipToInfo;
   @override
+  final User user;
+  @override
+  final SalesOrganisationConfigs salesConfigs;
+  @override
   final Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption;
   @override
   final SearchKey searchKey;
+  @override
+  final bool canLoadMore;
+  @override
+  final int nextPageIndex;
+  @override
+  final int materialCount;
 
   @override
   String toString() {
-    return 'ComboDealMaterialDetailState(items: $items, selectedItems: $selectedItems, isFetchingPrice: $isFetchingPrice, isFetchingComboInfo: $isFetchingComboInfo, isUpdateCart: $isUpdateCart, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, searchKey: $searchKey)';
+    return 'ComboDealMaterialDetailState(items: $items, selectedItems: $selectedItems, isFetchingPrice: $isFetchingPrice, isFetchingComboInfo: $isFetchingComboInfo, isUpdateCart: $isUpdateCart, isLoadMore: $isLoadMore, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, salesConfigs: $salesConfigs, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, searchKey: $searchKey, canLoadMore: $canLoadMore, nextPageIndex: $nextPageIndex, materialCount: $materialCount)';
   }
 
   @override
@@ -2571,17 +3772,28 @@ class _$_ComboDealDetailState extends _ComboDealDetailState {
                 other.isFetchingComboInfo == isFetchingComboInfo) &&
             (identical(other.isUpdateCart, isUpdateCart) ||
                 other.isUpdateCart == isUpdateCart) &&
+            (identical(other.isLoadMore, isLoadMore) ||
+                other.isLoadMore == isLoadMore) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.salesConfigs, salesConfigs) ||
+                other.salesConfigs == salesConfigs) &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.canLoadMore, canLoadMore) ||
+                other.canLoadMore == canLoadMore) &&
+            (identical(other.nextPageIndex, nextPageIndex) ||
+                other.nextPageIndex == nextPageIndex) &&
+            (identical(other.materialCount, materialCount) ||
+                other.materialCount == materialCount));
   }
 
   @override
@@ -2592,11 +3804,17 @@ class _$_ComboDealDetailState extends _ComboDealDetailState {
       isFetchingPrice,
       isFetchingComboInfo,
       isUpdateCart,
+      isLoadMore,
       salesOrganisation,
       customerCodeInfo,
       shipToInfo,
+      user,
+      salesConfigs,
       apiFailureOrSuccessOption,
-      searchKey);
+      searchKey,
+      canLoadMore,
+      nextPageIndex,
+      materialCount);
 
   @JsonKey(ignore: true)
   @override
@@ -2613,12 +3831,18 @@ abstract class _ComboDealDetailState extends ComboDealMaterialDetailState {
       required final bool isFetchingPrice,
       required final bool isFetchingComboInfo,
       required final bool isUpdateCart,
+      required final bool isLoadMore,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
+      required final User user,
+      required final SalesOrganisationConfigs salesConfigs,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
-      required final SearchKey searchKey}) = _$_ComboDealDetailState;
+      required final SearchKey searchKey,
+      required final bool canLoadMore,
+      required final int nextPageIndex,
+      required final int materialCount}) = _$_ComboDealDetailState;
   const _ComboDealDetailState._() : super._();
 
   @override
@@ -2632,15 +3856,27 @@ abstract class _ComboDealDetailState extends ComboDealMaterialDetailState {
   @override
   bool get isUpdateCart;
   @override
+  bool get isLoadMore;
+  @override
   SalesOrganisation get salesOrganisation;
   @override
   CustomerCodeInfo get customerCodeInfo;
   @override
   ShipToInfo get shipToInfo;
   @override
+  User get user;
+  @override
+  SalesOrganisationConfigs get salesConfigs;
+  @override
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   SearchKey get searchKey;
+  @override
+  bool get canLoadMore;
+  @override
+  int get nextPageIndex;
+  @override
+  int get materialCount;
   @override
   @JsonKey(ignore: true)
   _$$_ComboDealDetailStateCopyWith<_$_ComboDealDetailState> get copyWith =>

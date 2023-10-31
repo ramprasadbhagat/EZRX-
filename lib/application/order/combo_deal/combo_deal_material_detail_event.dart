@@ -6,6 +6,8 @@ class ComboDealMaterialDetailEvent with _$ComboDealMaterialDetailEvent {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required User user,
+    required SalesOrganisationConfigs salesConfigs,
   }) = _Initialize;
   const factory ComboDealMaterialDetailEvent.initFromCartComboDealItems({
     required List<PriceAggregate> items,
@@ -23,7 +25,6 @@ class ComboDealMaterialDetailEvent with _$ComboDealMaterialDetailEvent {
   }) = _UpdateItemSelection;
   const factory ComboDealMaterialDetailEvent.fetchComboDealDetail({
     required ComboDeal comboDeal,
-    required SalesOrganisationConfigs salesConfigs,
     required Locale locale,
     required MaterialNumber parentMaterialNumber,
     required Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
@@ -38,4 +39,16 @@ class ComboDealMaterialDetailEvent with _$ComboDealMaterialDetailEvent {
   }) = _CartContainsCurrentCombo;
 
   const factory ComboDealMaterialDetailEvent.clearSearch() = _ClearSearch;
+
+  const factory ComboDealMaterialDetailEvent.fetchComboDealPrincipal({
+    required ComboDeal comboDeal,
+    required Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+    required List<String> principles,
+    required Locale locale,
+  }) = _FetchComboDealPrincipal;
+
+  const factory ComboDealMaterialDetailEvent.loadMoreComboDealPrincipal({
+    required ComboDeal comboDeal,
+    required List<String> principles,
+  }) = _LoadMoreComboDealPrincipal;
 }

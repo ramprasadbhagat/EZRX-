@@ -40,6 +40,10 @@ class _ComboRequirementSection extends StatelessWidget {
                 state.currentDeal.scheme.getRequirementMessage(
                   context,
                   minQty: state.currentDeal.schemeMinimumQtyRequirement,
+                  minAmountK5: (state.currentDeal.sortedMinTotalAmountTiers
+                              .firstOrNull?.minTotalAmount ??
+                          0)
+                      .toString(),
                 ),
                 maxLines: 3,
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(

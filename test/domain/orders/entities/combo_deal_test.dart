@@ -108,7 +108,7 @@ void main() {
       );
 
       expect(
-        comboDeal.descendingSortedMinAmountTiers,
+        comboDeal.descendingSortedMinTotalAmountTiers,
         [
           ComboDealTierRule.empty().copyWith(minTotalAmount: 100),
           ComboDealTierRule.empty().copyWith(minTotalAmount: 40),

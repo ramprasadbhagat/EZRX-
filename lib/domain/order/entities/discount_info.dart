@@ -22,4 +22,14 @@ class DiscountInfo with _$DiscountInfo {
   String get text => type.isPercent
       ? '$rate ${type.getOrDefaultValue('')}'
       : '${type.getOrDefaultValue('')} $rate';
+
+  double get rateToAbs => rate.abs();
+
+  String get rateDisplay {
+    if (rateToAbs == rateToAbs.toInt()) {
+      return rateToAbs.toInt().toString();
+    }
+    
+    return rateToAbs.toString();
+  }
 }

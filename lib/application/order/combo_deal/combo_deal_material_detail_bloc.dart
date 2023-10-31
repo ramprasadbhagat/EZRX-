@@ -1,13 +1,18 @@
+import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,9 +27,14 @@ part 'combo_deal_material_detail_bloc.freezed.dart';
 class ComboDealMaterialDetailBloc
     extends Bloc<ComboDealMaterialDetailEvent, ComboDealMaterialDetailState> {
   final IProductDetailRepository productDetailRepository;
+  final IMaterialListRepository materialListRepository;
+  final Config config;
 
-  ComboDealMaterialDetailBloc(this.productDetailRepository)
-      : super(ComboDealMaterialDetailState.initial()) {
+  ComboDealMaterialDetailBloc({
+    required this.productDetailRepository,
+    required this.materialListRepository,
+    required this.config,
+  }) : super(ComboDealMaterialDetailState.initial()) {
     on<ComboDealMaterialDetailEvent>(_onEvent);
   }
 
@@ -187,8 +197,8 @@ class ComboDealMaterialDetailBloc
             Map<MaterialNumber, PriceAggregate> map,
             MaterialNumber materialNumber,
           ) {
-            map[materialNumber] =
-                PriceAggregate.empty().copyWith(salesOrgConfig: e.salesConfigs);
+            map[materialNumber] = PriceAggregate.empty()
+                .copyWith(salesOrgConfig: state.salesConfigs);
 
             return map;
           },
@@ -203,71 +213,42 @@ class ComboDealMaterialDetailBloc
           ),
         );
 
-        final failureOrSuccess =
-            await productDetailRepository.getProductListDetail(
-          customerCodeInfo: state.customerCodeInfo,
-          locale: e.locale,
-          materialNumber: e.comboDeal.allMaterialNumbers,
-          salesOrganisation: state.salesOrganisation,
-          shipToInfo: state.shipToInfo,
-          types: e.comboDeal.allMaterials
-              .map((e) => MaterialInfoType('material'))
-              .toList(),
+        final materialsInfo = await _getMaterialsInfo(
+          e.comboDeal.allMaterialNumbers,
+          e.locale,
         );
 
-        await failureOrSuccess.fold(
-          (failure) async => emit(
-            state.copyWith(
-              isFetchingComboInfo: false,
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          ),
-          (materialsInfo) {
-            for (final materialInfo in materialsInfo) {
-              if (items[materialInfo.materialNumber] != null) {
-                items[materialInfo.materialNumber] =
-                    items[materialInfo.materialNumber]!
-                        .copyWith(
-                          materialInfo: materialInfo.copyWith(
-                            parentID:
-                                e.parentMaterialNumber.getOrDefaultValue(''),
-                          ),
-                        )
-                        .copyWithComboDealMinQty(e.comboDeal);
-              }
+        if (materialsInfo.isNotEmpty) {
+          for (final materialInfo in materialsInfo) {
+            if (items[materialInfo.materialNumber] != null) {
+              items[materialInfo.materialNumber] =
+                  items[materialInfo.materialNumber]!
+                      .copyWith(
+                        materialInfo: materialInfo.copyWith(
+                          parentID:
+                              e.parentMaterialNumber.getOrDefaultValue(''),
+                        ),
+                      )
+                      .copyWithComboDealMinQty(e.comboDeal);
             }
-          },
-        );
+          }
+        }
 
-        final failureOrSuccessStockList =
-            await productDetailRepository.getStockInfoList(
-          customerCodeInfo: state.customerCodeInfo,
-          salesOrganisation: state.salesOrganisation,
-          materials: state.allMaterialsInfo,
-        );
+        final stockInfoList = await _getStockInfoList(state.allMaterialsInfo);
+        if (stockInfoList.isNotEmpty) {
+          for (final materialStockInfo in stockInfoList) {
+            final material = items[materialStockInfo.materialNumber];
 
-        await failureOrSuccessStockList.fold(
-          (failure) async => emit(
-            state.copyWith(
-              isFetchingComboInfo: false,
-              apiFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          ),
-          (materialsInfo) {
-            for (final materialInfo in materialsInfo) {
-              final material = items[materialInfo.materialNumber];
-
-              if (material != null && materialInfo.stockInfos.isNotEmpty) {
-                items[materialInfo.materialNumber] = material
-                    .copyWith(
-                      stockInfo: materialInfo.stockInfos.first,
-                      stockInfoList: materialInfo.stockInfos,
-                    )
-                    .copyWithComboDealMinQty(e.comboDeal);
-              }
+            if (material != null && materialStockInfo.stockInfos.isNotEmpty) {
+              items[materialStockInfo.materialNumber] = material
+                  .copyWith(
+                    stockInfo: materialStockInfo.stockInfos.first,
+                    stockInfoList: materialStockInfo.stockInfos,
+                  )
+                  .copyWithComboDealMinQty(e.comboDeal);
             }
-          },
-        );
+          }
+        }
 
         final currentQuantityMap = e.comboMaterialsCurrentQuantity;
         if (currentQuantityMap.isNotEmpty) {
@@ -317,6 +298,264 @@ class ComboDealMaterialDetailBloc
           ),
         );
       },
+      fetchComboDealPrincipal: (e) async {
+        emit(
+          state.copyWith(
+            items: {},
+            isFetchingComboInfo: true,
+            isFetchingPrice: true,
+            searchKey: SearchKey.search(''),
+            nextPageIndex: 0,
+            canLoadMore: true,
+            materialCount: 0,
+          ),
+        );
+
+        final items = <MaterialNumber, PriceAggregate>{};
+        final selectedItems = <MaterialNumber, bool>{};
+        final currentQuantityMap = e.comboMaterialsCurrentQuantity;
+
+        final materialsNextPage = currentQuantityMap.keys.toList();
+
+        if (materialsNextPage.isNotEmpty) {
+          items.addAll({
+            for (final material in materialsNextPage)
+              material: PriceAggregate.empty(),
+          });
+          selectedItems.addAll({
+            for (final material in materialsNextPage) material: true,
+          });
+
+          final materialsInfo = await _getMaterialsInfo(
+            materialsNextPage,
+            e.locale,
+          );
+
+          if (materialsInfo.isNotEmpty) {
+            for (final materialInfo in materialsInfo) {
+              if (items[materialInfo.materialNumber] != null) {
+                items[materialInfo.materialNumber] =
+                    items[materialInfo.materialNumber]!.copyWith(
+                  materialInfo: materialInfo,
+                  comboDeal: e.comboDeal,
+                  salesOrgConfig: state.salesConfigs,
+                );
+              }
+            }
+          }
+        }
+
+        final failureOrSuccess =
+            await materialListRepository.getComboDealMaterials(
+          user: state.user,
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          pageSize: config.pageSize,
+          offset: 0,
+          principles: e.principles,
+          salesOrgConfig: state.salesConfigs,
+        );
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetchingComboInfo: false,
+                isFetchingPrice: false,
+              ),
+            );
+          },
+          (materialResponse) async {
+            items.addAll(
+              materialResponse.products
+                  .map(
+                    (material) => PriceAggregate.empty().copyWith(
+                      materialInfo: material,
+                      salesOrgConfig: state.salesConfigs,
+                      comboDeal: e.comboDeal,
+                    ),
+                  )
+                  .toList()
+                  .mapByMaterialNumber,
+            );
+
+            emit(
+              state.copyWith(
+                items: items,
+                materialCount: materialResponse.count,
+                canLoadMore:
+                    materialResponse.products.length >= config.pageSize,
+                nextPageIndex: 1,
+              ),
+            );
+
+            final stockInfoList =
+                await _getStockInfoList(state.allMaterialsInfo);
+            if (stockInfoList.isNotEmpty) {
+              for (final materialStockInfo in stockInfoList) {
+                final material = items[materialStockInfo.materialNumber];
+
+                if (material != null &&
+                    materialStockInfo.stockInfos.isNotEmpty) {
+                  items[materialStockInfo.materialNumber] = material.copyWith(
+                    stockInfo: materialStockInfo.stockInfos.first,
+                    stockInfoList: materialStockInfo.stockInfos,
+                  );
+                }
+              }
+            }
+
+            if (currentQuantityMap.isNotEmpty) {
+              currentQuantityMap.forEach((key, value) {
+                if (items.containsKey(key)) {
+                  items[key] = items[key]!.copyWith(quantity: value);
+                }
+              });
+            }
+
+            selectedItems.addAll(
+              {
+                for (final item in items.values)
+                  item.getMaterialNumber: _isMaterialSelected(
+                    cartComboMaterialsSelected: currentQuantityMap,
+                    item: item,
+                  ),
+              },
+            );
+
+            emit(
+              state.copyWith(
+                items: items,
+                selectedItems: selectedItems,
+                isFetchingComboInfo: false,
+              ),
+            );
+          },
+        );
+      },
+      loadMoreComboDealPrincipal: (e) async {
+        if (state.isLoadMore || !state.canLoadMore) return;
+        emit(
+          state.copyWith(
+            isLoadMore: true,
+          ),
+        );
+        final failureOrSuccess =
+            await materialListRepository.getComboDealMaterials(
+          user: state.user,
+          salesOrganisation: state.salesOrganisation,
+          customerCodeInfo: state.customerCodeInfo,
+          shipToInfo: state.shipToInfo,
+          pageSize: config.pageSize,
+          offset: state.nextPageIndex * config.pageSize,
+          principles: e.principles,
+          salesOrgConfig: state.salesConfigs,
+        );
+        await failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isLoadMore: false,
+              ),
+            );
+          },
+          (materialResponse) async {
+            final newItems = materialResponse.products
+                .map(
+                  (material) => PriceAggregate.empty().copyWith(
+                    materialInfo: material,
+                    salesOrgConfig: state.salesConfigs,
+                    comboDeal: e.comboDeal,
+                  ),
+                )
+                .toList()
+                .mapByMaterialNumber;
+
+            final items = Map<MaterialNumber, PriceAggregate>.from(state.items);
+
+            final selectedItems =
+                Map<MaterialNumber, bool>.from(state.selectedItems);
+
+            for (final item in newItems.values) {
+              if (!items.containsKey(item.getMaterialNumber)) {
+                items.putIfAbsent(item.getMaterialNumber, () => item);
+                selectedItems.putIfAbsent(
+                  item.getMaterialNumber,
+                  () => _isMaterialSelected(
+                    cartComboMaterialsSelected: {},
+                    item: item,
+                  ),
+                );
+              }
+            }
+
+            final stockInfoList = await _getStockInfoList(
+              newItems.entries.map((e) => e.value.materialInfo).toList(),
+            );
+            if (stockInfoList.isNotEmpty) {
+              for (final materialStockInfo in stockInfoList) {
+                final material = items[materialStockInfo.materialNumber];
+
+                if (material != null &&
+                    materialStockInfo.stockInfos.isNotEmpty) {
+                  items[materialStockInfo.materialNumber] = material.copyWith(
+                    stockInfo: materialStockInfo.stockInfos.first,
+                    stockInfoList: materialStockInfo.stockInfos,
+                  );
+                }
+              }
+            }
+
+            emit(
+              state.copyWith(
+                items: items,
+                selectedItems: selectedItems,
+                isLoadMore: false,
+                canLoadMore: newItems.length >= config.pageSize,
+                nextPageIndex: state.nextPageIndex + 1,
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Future<List<MaterialStockInfo>> _getStockInfoList(
+    List<MaterialInfo> materialsInfo,
+  ) async {
+    final failureOrSuccessStockList =
+        await productDetailRepository.getStockInfoList(
+      customerCodeInfo: state.customerCodeInfo,
+      salesOrganisation: state.salesOrganisation,
+      materials: materialsInfo,
+    );
+
+    return failureOrSuccessStockList.fold(
+      (failure) async => [],
+      (materialsStockInfo) => materialsStockInfo,
+    );
+  }
+
+  Future<List<MaterialInfo>> _getMaterialsInfo(
+    List<MaterialNumber> items,
+    Locale locale,
+  ) async {
+    final failureOrSuccessProductDetails =
+        await productDetailRepository.getProductListDetail(
+      customerCodeInfo: state.customerCodeInfo,
+      locale: locale,
+      materialNumber: items,
+      salesOrganisation: state.salesOrganisation,
+      shipToInfo: state.shipToInfo,
+      types: items.map((e) => MaterialInfoType('material')).toList(),
+    );
+
+    return failureOrSuccessProductDetails.fold(
+      (failure) => [],
+      (materialsInfo) => materialsInfo,
     );
   }
 

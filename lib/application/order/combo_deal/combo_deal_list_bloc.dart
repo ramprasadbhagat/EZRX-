@@ -32,19 +32,18 @@ class ComboDealListBloc extends Bloc<ComboDealListEvent, ComboDealListState> {
             isFetching: true,
           ),
         );
-        // Todo : Need to revisit by hob
-        // if (state.comboDeals.containsKey(e.comboDeals.id)) {
-        //   emit(
-        //     state.copyWith(
-        //       isFetching: false,
-        //     ),
-        //   );
+        if (state.comboDeals.containsKey(e.priceComboDeal.id)) {
+          emit(
+            state.copyWith(
+              isFetching: false,
+            ),
+          );
 
-        //   return;
-        // }
+          return;
+        }
 
         final failureOrSuccess = await repository.getComboDealList(
-          comboDealInfo: e.comboDeals,
+          comboDealInfo: e.priceComboDeal,
           customerCode: e.customerCodeInfo,
           salesOrg: e.salesOrganisation.salesOrg,
         );
@@ -63,10 +62,10 @@ class ComboDealListBloc extends Bloc<ComboDealListEvent, ComboDealListState> {
                 comboDeals: Map.from(state.comboDeals)
                   ..addAll(
                     {
-                      e.comboDeals.id: comboDeals,
+                      e.priceComboDeal.id: comboDeals,
                     },
                   ),
-                priceComboDeal: e.comboDeals,
+                priceComboDeal: e.priceComboDeal,
                 isFetching: false,
                 apiFailureOrSuccessOption: none(),
               ),
@@ -81,7 +80,7 @@ class ComboDealListBloc extends Bloc<ComboDealListEvent, ComboDealListState> {
           ),
         );
 
-        if (state.comboDeals.containsKey(e.comboDeals.id)) {
+        if (state.comboDeals.containsKey(e.priceComboDeal.id)) {
           emit(
             state.copyWith(
               isFetching: false,
@@ -92,7 +91,7 @@ class ComboDealListBloc extends Bloc<ComboDealListEvent, ComboDealListState> {
         }
 
         final failureOrSuccess = await repository.getComboDeal(
-          comboDealInfo: e.comboDeals,
+          comboDealInfo: e.priceComboDeal,
           customerCode: e.customerCodeInfo,
           salesOrg: e.salesOrganisation.salesOrg,
         );
@@ -111,10 +110,11 @@ class ComboDealListBloc extends Bloc<ComboDealListEvent, ComboDealListState> {
                 comboDeals: Map.from(state.comboDeals)
                   ..addAll(
                     {
-                      e.comboDeals.id: [comboDeal],
+                      e.priceComboDeal.id: [comboDeal],
                     },
                   ),
                 isFetching: false,
+                priceComboDeal: e.priceComboDeal,
               ),
             );
           },

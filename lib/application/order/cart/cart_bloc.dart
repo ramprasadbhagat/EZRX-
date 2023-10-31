@@ -86,7 +86,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             );
           },
           (cartItemList) {
-            _sortComboToFirstPosition(cartItemList);
             emit(
               state.copyWith(
                 cartProducts: cartItemList,
@@ -164,7 +163,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               ),
             );
 
-            _sortComboToFirstPosition(cartProductListTemp);
             emit(
               state.copyWith(
                 apiFailureOrSuccessOption: none(),
@@ -312,8 +310,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 )
                 .toList();
 
-            _sortComboToFirstPosition(priceAggregateAddedToCartList);
-
             emit(
               state.copyWith(
                 cartProducts: priceAggregateAddedToCartList,
@@ -384,8 +380,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               currentCartProducts: cartProductList,
               salesOrganisationConfigs: state.config,
             );
-
-            _sortComboToFirstPosition(newCartProductList);
 
             emit(
               state.copyWith(
@@ -511,8 +505,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 salesOrgConfig: state.config,
               );
             }).toList();
-
-            _sortComboToFirstPosition(cartProductListTemp);
 
             emit(
               state.copyWith(
@@ -831,14 +823,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
-    );
-  }
-
-  void _sortComboToFirstPosition(
-    List<PriceAggregate> priceAggregateAddedToCartList,
-  ) {
-    priceAggregateAddedToCartList.sort(
-      (a, b) => b.materialInfo.type.typeCombo ? 1 : -1,
     );
   }
 

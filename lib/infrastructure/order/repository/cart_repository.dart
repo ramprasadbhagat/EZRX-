@@ -534,29 +534,29 @@ class CartRepository implements ICartRepository {
         );
       }
     }
-    // try {
-    final queryMaterialNumbers =
-        materialNumbers.map((e) => e.getOrDefaultValue('')).toList();
-    final additionInfoData = <MaterialNumber, ProductMetaData>{};
-    await Future.wait(
-      queryMaterialNumbers.map((e) async {
-        final products =
-            await orderHistoryRemoteDataSource.getItemProductDetails(
-          materialIDs: [e],
-        );
+    try {
+      final queryMaterialNumbers =
+          materialNumbers.map((e) => e.getOrDefaultValue('')).toList();
+      final additionInfoData = <MaterialNumber, ProductMetaData>{};
+      await Future.wait(
+        queryMaterialNumbers.map((e) async {
+          final products =
+              await orderHistoryRemoteDataSource.getItemProductDetails(
+            materialIDs: [e],
+          );
 
-        for (final product in products.productImages) {
-          additionInfoData.addAll({product.materialNumber: products});
-        }
-      }),
-    );
+          for (final product in products.productImages) {
+            additionInfoData.addAll({product.materialNumber: products});
+          }
+        }),
+      );
 
-    return Right(additionInfoData);
-    // } catch (e) {
-    //   return Left(
-    //     FailureHandler.handleFailure(e),
-    //   );
-    // }
+      return Right(additionInfoData);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
   }
 
   @override

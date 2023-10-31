@@ -52,12 +52,8 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                 key: WidgetKeys.cartPagePriceMessageWidget,
                 margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                 mainColor: ZPColors.lightRedStatusColor,
-                textValue: context.tr(
-                  'You must select at least {unit} product.',
-                  namedArgs: {
-                    'unit': state.currentDeal.minPurchaseQty.toString(),
-                  },
-                ),
+                textValue:
+                    state.currentDeal.getcomboDealNotEligibleMessage(context),
               ),
             ListTile(
               dense: true,
@@ -99,6 +95,8 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                                   state.currentDeal.materialComboRateDisplay(
                                 materialNumber: state.allMaterialsNumber.first,
                                 totalQuantityUnit: state.totalQuantityUnit,
+                                currentTotalAmount:
+                                    state.originalPriceSelectedItems,
                               ),
                             },
                           ),
@@ -130,6 +128,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
               ComboDetailNextDealInfo(
                 totalQty: state.totalQuantityUnit,
                 comboDeal: state.currentDeal,
+                totalAmount: state.originalPriceSelectedItems,
               ),
             _CartPageCheckoutButton(isUpdateCart: state.isUpdateCart),
           ],

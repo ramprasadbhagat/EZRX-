@@ -36,6 +36,7 @@ class _ItemSubTotalSection extends StatelessWidget {
                   comboItem.comboDeal.materialComboRateDisplay(
                 materialNumber: comboItem.getMaterialNumber,
                 totalQuantityUnit: state.totalQuantityUnit,
+                currentTotalAmount: state.originalPriceSelectedItems,
               );
 
               return Column(

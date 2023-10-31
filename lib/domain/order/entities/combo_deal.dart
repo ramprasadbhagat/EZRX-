@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal_sku_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_tier_rule.dart';
 import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -42,11 +43,25 @@ class ComboDeal with _$ComboDeal {
           (first, second) => second.minQty.compareTo(first.minQty),
         );
 
-  List<ComboDealTierRule> get descendingSortedMinAmountTiers =>
+  List<ComboDealTierRule> get descendingSortedRateToAbsTiers =>
+      List<ComboDealTierRule>.from(flexiTierRule)
+        ..sort(
+          (first, second) => second.discountInfo.rateToAbs
+              .compareTo(first.discountInfo.rateToAbs),
+        );
+
+  List<ComboDealTierRule> get descendingSortedMinTotalAmountTiers =>
       List<ComboDealTierRule>.from(flexiTierRule)
         ..sort(
           (first, second) =>
               second.minTotalAmount.compareTo(first.minTotalAmount),
+        );
+
+  List<ComboDealTierRule> get sortedMinTotalAmountTiers =>
+      List<ComboDealTierRule>.from(flexiTierRule)
+        ..sort(
+          (first, second) =>
+              first.minTotalAmount.compareTo(second.minTotalAmount),
         );
 
   List<ComboDealSKUTier> get descendingSortedSKUTier =>
@@ -154,21 +169,24 @@ class ComboDeal with _$ComboDeal {
   double getMaterialComboRate({
     required MaterialNumber materialNumber,
     required int totalQuantityUnit,
+    double? currentTotalAmount,
   }) {
     final materialSingleDeal = singleDeal(materialNumber: materialNumber);
     switch (scheme) {
       case ComboDealScheme.k1:
-        return materialSingleDeal.rateToAbs;
+        return materialSingleDeal.discountInfo.rateToAbs;
       case ComboDealScheme.k21:
-        return groupDeal.rateToAbs;
+        return groupDeal.discountInfo.rateToAbs;
       case ComboDealScheme.k22:
-        return descendingSortedQtyTiers.firstOrNull?.rateToAbs ?? 0;
+        return descendingSortedQtyTiers.firstOrNull?.discountInfo.rateToAbs ??
+            0;
       case ComboDealScheme.k3:
         return descendingSortedSKUTier
             .firstWhere(
               (tier) => tier.minQty == totalQuantityUnit,
               orElse: () => ComboDealSKUTier.empty(),
             )
+            .discountInfo
             .rateToAbs;
       case ComboDealScheme.k4:
         return descendingSortedQtyTiers
@@ -176,87 +194,54 @@ class ComboDeal with _$ComboDeal {
               (tier) => tier.minQty <= totalQuantityUnit,
               orElse: () => ComboDealQtyTier.empty(),
             )
+            .discountInfo
             .rateToAbs;
       case ComboDealScheme.k5:
+        if (currentTotalAmount == null) {
+          return descendingSortedRateToAbsTiers
+                  .firstOrNull?.discountInfo.rateToAbs ??
+              0;
+        }
+
+        return descendingSortedMinTotalAmountTiers
+                .firstWhereOrNull(
+                  (minAmountTier) =>
+                      minAmountTier.minTotalAmount <= currentTotalAmount,
+                )
+                ?.discountInfo
+                .rateToAbs ??
+            0;
       case ComboDealScheme.kWithSuffix:
-        //TODO: Implement later for K3, K4, K5
-        return groupDeal.rateToAbs;
+        //TODO: Implement later for K4
+        return groupDeal.discountInfo.rateToAbs;
     }
   }
 
   int get minPurchaseQty {
+    const minPurchaseOptional = 1;
+
     switch (scheme) {
+      case ComboDealScheme.k21:
+        return minPurchaseOptional;
       case ComboDealScheme.k22:
         return descendingSortedQtyTiers.firstOrNull?.minQty ?? 0;
       case ComboDealScheme.k3:
         return descendingSortedSKUTier.last.minQty;
       case ComboDealScheme.k4:
         return descendingSortedQtyTiers.last.minQty;
-      case ComboDealScheme.k5:
       case ComboDealScheme.kWithSuffix:
-        //TODO: Implement later for K3, K4, K5
+        //TODO: Implement later for K4
         return groupDeal.minTotalQuantity;
       default:
         return 0;
     }
   }
 
-  String materialComboRateDisplay({
-    required MaterialNumber materialNumber,
-    required int totalQuantityUnit,
-  }) {
-    final comboRate = getMaterialComboRate(
-      materialNumber: materialNumber,
-      totalQuantityUnit: totalQuantityUnit,
-    );
-
-    if (comboRate == comboRate.toInt()) {
-      return comboRate.toInt().toString();
-    }
-
-    return comboRate.toString();
-  }
-
-  String displayCombosMaximumDiscount({
-    required MaterialNumber materialNumber,
-  }) {
-    final materialSingleDeal = singleDeal(materialNumber: materialNumber);
-    switch (scheme) {
-      case ComboDealScheme.k1:
-        return materialSingleDeal.rateToAbs.toString();
-      case ComboDealScheme.k21:
-        return groupDeal.rateToAbs.toString();
-      case ComboDealScheme.k22:
-        return (descendingSortedQtyTiers.firstOrNull?.rateToAbs ?? 0)
-            .toString();
-      case ComboDealScheme.k3:
-        return k3MaximumDiscount;
-      case ComboDealScheme.k4:
-        return k4MaximumDiscount;
-      case ComboDealScheme.k5:
-      case ComboDealScheme.kWithSuffix:
-        //TODO: Implement later for K4, K5
-        return groupDeal.rateToAbs.toString();
-    }
-  }
-
-  String get k3MaximumDiscount => flexiSKUTier
-      .fold<double>(
-        0,
-        (previousValue, element) => element.rateToAbs > previousValue
-            ? element.rateToAbs
-            : previousValue,
-      )
-      .toString();
-
-  String get k4MaximumDiscount => flexiQtyTier
-      .fold<double>(
-        0,
-        (previousValue, element) => element.rateToAbs > previousValue
-            ? element.rateToAbs
-            : previousValue,
-      )
-      .toString();
+  ComboDealTierRule nextK5Discount(double currentTotalAmount) =>
+      sortedMinTotalAmountTiers.firstWhere(
+        (tierRule) => currentTotalAmount < tierRule.minTotalAmount,
+        orElse: () => ComboDealTierRule.empty(),
+      );
 
   String get buyMoreInfoKey {
     switch (scheme) {
@@ -274,7 +259,142 @@ class ComboDeal with _$ComboDeal {
     }
   }
 
-  DiscountInfo getNextEligibleComboDiscount(int totalQty) {
+  String buyMoreInfoUnit({
+    required double totalAmount,
+    required int totalQty,
+  }) {
+    switch (scheme) {
+      case ComboDealScheme.k1:
+      case ComboDealScheme.k21:
+      case ComboDealScheme.k22:
+      case ComboDealScheme.kWithSuffix:
+        return '';
+      case ComboDealScheme.k3:
+      case ComboDealScheme.k4:
+        final discountInfo = getNextEligibleComboDiscount(
+          totalQty: totalQty,
+          totalAmount: totalAmount,
+        );
+
+        return (discountInfo.minQty - totalQty).toString();
+      case ComboDealScheme.k5:
+        return NumUtils.roundToPlaces(
+          nextK5Discount(totalAmount).minTotalAmount - totalAmount,
+        ).toString();
+    }
+  }
+
+  String getcomboDealNotEligibleMessage(
+    BuildContext context,
+  ) {
+    switch (scheme) {
+      case ComboDealScheme.k1:
+      case ComboDealScheme.k22:
+      case ComboDealScheme.k4:
+        return context.tr(
+          'You must select at least {unit} items.',
+          namedArgs: {
+            'unit': minPurchaseQty.toString(),
+          },
+        );
+      case ComboDealScheme.k3:
+      case ComboDealScheme.k21:
+        return context.tr(
+          'You must select at least {unit} more product.',
+          namedArgs: {
+            'unit': minPurchaseQty.toString(),
+          },
+        );
+      case ComboDealScheme.k5:
+        final firstDiscount = sortedMinTotalAmountTiers.firstOrNull;
+
+        return context.tr(
+          'Buy within \${minTotalAmount} and \${maxTotalAmount} to get {percent}% Discount',
+          namedArgs: {
+            'minTotalAmount':
+                NumUtils.roundToPlaces(firstDiscount?.minTotalAmount ?? 0)
+                    .toString(),
+            'maxTotalAmount':
+                NumUtils.roundToPlaces(firstDiscount?.maxTotalAmount ?? 0)
+                    .toString(),
+            'percent': firstDiscount?.discountInfo.rateDisplay ?? '',
+          },
+        );
+      case ComboDealScheme.kWithSuffix:
+        return '';
+    }
+  }
+
+  String materialComboRateDisplay({
+    required MaterialNumber materialNumber,
+    required int totalQuantityUnit,
+    required double currentTotalAmount,
+  }) {
+    final comboRate = getMaterialComboRate(
+      materialNumber: materialNumber,
+      currentTotalAmount: currentTotalAmount,
+      totalQuantityUnit: totalQuantityUnit,
+    );
+
+    if (comboRate == comboRate.toInt()) {
+      return comboRate.toInt().toString();
+    }
+
+    return comboRate.toString();
+  }
+
+  String displayCombosMaximumDiscount({
+    required MaterialNumber materialNumber,
+  }) {
+    final materialSingleDeal = singleDeal(materialNumber: materialNumber);
+    switch (scheme) {
+      case ComboDealScheme.k1:
+        return materialSingleDeal.discountInfo.rateDisplay;
+      case ComboDealScheme.k21:
+        return groupDeal.discountInfo.rateDisplay;
+      case ComboDealScheme.k22:
+        return descendingSortedQtyTiers.firstOrNull?.discountInfo.rateDisplay ??
+            '';
+      case ComboDealScheme.k3:
+        return k3MaximumDiscount;
+      case ComboDealScheme.k4:
+        return k4MaximumDiscount;
+      case ComboDealScheme.k5:
+        return k5MaximumDiscountRate;
+      case ComboDealScheme.kWithSuffix:
+        //TODO: Implement later for K4
+        return groupDeal.discountInfo.rateDisplay;
+    }
+  }
+
+  String get k3MaximumDiscount => flexiSKUTier
+      .fold<double>(
+        0,
+        (previousValue, element) =>
+            element.discountInfo.rateToAbs > previousValue
+                ? element.discountInfo.rateToAbs
+                : previousValue,
+      )
+      .toString();
+
+  String get k4MaximumDiscount => flexiQtyTier
+      .fold<double>(
+        0,
+        (previousValue, element) =>
+            element.discountInfo.rateToAbs > previousValue
+                ? element.discountInfo.rateToAbs
+                : previousValue,
+      )
+      .toString();
+
+  String get k5MaximumDiscountRate =>
+      (descendingSortedRateToAbsTiers.firstOrNull?.discountInfo.rateDisplay ??
+          '');
+
+  DiscountInfo getNextEligibleComboDiscount({
+    required int totalQty,
+    required double totalAmount,
+  }) {
     switch (scheme) {
       case ComboDealScheme.k1:
         return DiscountInfo.empty();
@@ -302,22 +422,22 @@ class ComboDeal with _$ComboDeal {
             )
             .discountInfo;
       case ComboDealScheme.k5:
+        return nextK5Discount(totalAmount).discountInfo;
       case ComboDealScheme.kWithSuffix:
-        //TODO: Implement later for K5
         return groupDeal.discountInfo;
     }
   }
 
-  String getNextEligibleComboQty(int totalQty) {
-    final discountInfo = getNextEligibleComboDiscount(totalQty);
+  bool isBestDealAvailableOnCombo({
+    required int totalQty,
+    required double totalAmount,
+  }) {
+    final discountInfo = getNextEligibleComboDiscount(
+      totalQty: totalQty,
+      totalAmount: totalAmount,
+    );
 
-    return (discountInfo.minQty - totalQty).toString();
-  }
-
-  bool isBestDealAvailableOnCombo({required int totalQty}) {
-    final discountInfo = getNextEligibleComboDiscount(totalQty);
-
-    return discountInfo != DiscountInfo.empty();
+    return discountInfo == DiscountInfo.empty();
   }
 
   bool get isNextComboDealVisible {
@@ -349,6 +469,10 @@ class ComboDeal with _$ComboDeal {
 enum ComboDealScheme { k1, k21, k22, k3, k4, k5, kWithSuffix }
 
 extension ComboDealSchemeExt on ComboDealScheme {
+  bool get comboDealCanLoadmore => this == ComboDealScheme.k5;
+
+  bool get haveFixedMaterials => this == ComboDealScheme.k21;
+
   String getTotalUnitMessage(
     BuildContext context, {
     required int totalUnit,
@@ -387,6 +511,7 @@ extension ComboDealSchemeExt on ComboDealScheme {
   String getRequirementMessage(
     BuildContext context, {
     required String minQty,
+    required String minAmountK5,
   }) {
     switch (this) {
       case ComboDealScheme.k1:
@@ -414,8 +539,14 @@ extension ComboDealSchemeExt on ComboDealScheme {
           },
         );
       case ComboDealScheme.k5:
+        return context.tr(
+          'Purchase min. \${amount} from these products. Buy more save more.',
+          namedArgs: {
+            'amount': minAmountK5,
+          },
+        );
       case ComboDealScheme.kWithSuffix:
-        //TODO: Implement later for K3, K4, K5
+        //TODO: Implement later for K4
         return '';
     }
   }
@@ -491,7 +622,15 @@ extension ComboDealSchemeExt on ComboDealScheme {
                   .every((material) => material.mandatory),
             )
             .toList();
-        return mandatoryComboDeal.every(
+
+        final optionalComboDeal = comboDeal.materialComboDeals
+            .where(
+              (materialComboDeal) => materialComboDeal.materials
+                  .every((material) => !material.mandatory),
+            )
+            .toList();
+
+        final selectAllMandatory = mandatoryComboDeal.every(
           (setItem) {
             final totalSetQty = materials
                 .where(
@@ -503,6 +642,21 @@ extension ComboDealSchemeExt on ComboDealScheme {
             return totalSetQty != 0;
           },
         );
+
+        final selectAtLeastOneOptional = optionalComboDeal.any(
+          (setItem) {
+            final totalSetQty = materials
+                .where(
+                  (material) => setItem.materialNumbers
+                      .contains(material.getMaterialNumber),
+                )
+                .fold<int>(0, (sum, item) => sum + item.quantity);
+
+            return totalSetQty != 0;
+          },
+        );
+
+        return selectAllMandatory && selectAtLeastOneOptional;
       case ComboDealScheme.k22:
         return getEligibleComboDealQtyTier(materials) !=
             ComboDealQtyTier.empty();
@@ -542,7 +696,7 @@ extension ComboDealSchemeExt on ComboDealScheme {
       (sum, item) => sum + item.comboDealTotalListPrice,
     );
 
-    return comboDeal.descendingSortedMinAmountTiers.firstWhere(
+    return comboDeal.descendingSortedMinTotalAmountTiers.firstWhere(
       (tier) => tier.minTotalAmount <= comboDealTotal,
       orElse: () => ComboDealTierRule.empty(),
     );

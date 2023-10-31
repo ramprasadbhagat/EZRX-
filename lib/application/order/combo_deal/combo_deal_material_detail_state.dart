@@ -9,11 +9,17 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
     required bool isFetchingPrice,
     required bool isFetchingComboInfo,
     required bool isUpdateCart,
+    required bool isLoadMore,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
+    required User user,
+    required SalesOrganisationConfigs salesConfigs,
     required Option<Either<ApiFailure, dynamic>> apiFailureOrSuccessOption,
     required SearchKey searchKey,
+    required bool canLoadMore,
+    required int nextPageIndex,
+    required int materialCount,
   }) = _ComboDealDetailState;
 
   factory ComboDealMaterialDetailState.initial() =>
@@ -23,11 +29,17 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
         isFetchingPrice: false,
         isUpdateCart: false,
         isFetchingComboInfo: false,
+        isLoadMore: false,
         salesOrganisation: SalesOrganisation.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         shipToInfo: ShipToInfo.empty(),
         apiFailureOrSuccessOption: none(),
         searchKey: SearchKey.search(''),
+        user: User.empty(),
+        salesConfigs: SalesOrganisationConfigs.empty(),
+        canLoadMore: true,
+        materialCount: 0,
+        nextPageIndex: 0,
       );
 
   Map<MaterialNumber, PriceAggregate> get searchableList {
@@ -134,6 +146,7 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
               currentDeal.getMaterialComboRate(
                 materialNumber: element.getMaterialNumber,
                 totalQuantityUnit: totalQuantityUnit,
+                currentTotalAmount: originalPriceSelectedItems,
               ),
             ),
       );
@@ -158,6 +171,17 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
       );
 
   ComboDeal get currentDeal => items.values.toList().firstComboDeal;
+
+  String get currentPrincipalCode =>
+      items.values
+          .toList()
+          .comboMaterialItemList
+          .firstOrNull
+          ?.materialInfo
+          .principalData
+          .principalCode
+          .getOrDefaultValue('') ??
+      '';
 
   bool get isEnableAddToCart {
     if (isFetchingPrice || isFetchingComboInfo || allSelectedItems.isEmpty) {

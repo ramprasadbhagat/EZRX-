@@ -50,7 +50,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
                 key: WidgetKeys.grandTotalKey,
                 salesOrgConfig:
                     context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: state.displayGrandTotal.toString(),
+                price: state.grandTotalHidePriceMaterial.toString(),
                 title: 'Grand total: '.tr(),
                 priceLabelStyle:
                     Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -176,7 +176,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
       trackMixpanelEvent(
         MixpanelEvents.checkoutSuccess,
         props: {
-          MixpanelProps.grandTotal: cartState.grandTotal,
+          MixpanelProps.grandTotal: cartState.grandTotalSubmit,
           MixpanelProps.totalQty: cartState.totalItems,
         },
       );
@@ -190,7 +190,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
       trackMixpanelEvent(
         MixpanelEvents.checkoutFailure,
         props: {
-          MixpanelProps.grandTotal: cartState.grandTotal,
+          MixpanelProps.grandTotal: cartState.grandTotalSubmit,
           MixpanelProps.totalQty: cartState.totalItems,
           MixpanelProps.errorMessage:
               orderEligibilityState.orderEligibleTrackingErrorMessage,

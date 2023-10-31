@@ -25,7 +25,7 @@ abstract class IMaterialListRepository {
     required Locale locale,
   });
 
-  Future<Either<ApiFailure, List<MaterialInfo>>> getComboDealMaterials({
+  Future<Either<ApiFailure, MaterialResponse>> getComboDealMaterials({
     required User user,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -33,6 +33,7 @@ abstract class IMaterialListRepository {
     required int pageSize,
     required int offset,
     required List<String> principles,
+    required SalesOrganisationConfigs salesOrgConfig,
   });
 
   Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfoList({

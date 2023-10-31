@@ -156,7 +156,7 @@ void main() async {
         final finalData = fakeJson['data']['comboDealForPrincMatGrp'];
 
         dioAdapter.onPost(
-          '/api/pricing',
+          '/api/price',
           (server) => server.reply(
             200,
             fakeJson,
@@ -188,7 +188,7 @@ void main() async {
       'Get Combo Deal Principle with error response status code',
       () async {
         dioAdapter.onPost(
-          '/api/pricing',
+          '/api/price',
           (server) => server.reply(
             204,
             {},

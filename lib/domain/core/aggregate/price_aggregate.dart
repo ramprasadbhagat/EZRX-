@@ -217,7 +217,7 @@ class PriceAggregate with _$PriceAggregate {
     var comboOfferPrice = 0.0;
 
     comboOfferPrice = comboDealRate != 0
-        ? listPrice - (listPrice * comboDealRate / 100)
+        ? listPrice - NumUtils.roundToPlaces((listPrice * comboDealRate / 100))
         : listPrice;
 
     return NumUtils.roundToPlaces(comboOfferPrice);
@@ -226,6 +226,11 @@ class PriceAggregate with _$PriceAggregate {
   double get unitPrice {
     return NumUtils.roundToPlaces(vatCalculation(finalPrice));
   }
+
+  int get totalComboQuantity => comboMaterials.fold(
+      0,
+      (previousValue, element) => previousValue + element.quantity,
+    );
 
   double get comboOriginalSubTotal {
     var comboOriginalTotal = 0.0;

@@ -120,35 +120,6 @@ class CartState with _$CartState {
                 : false;
   }
 
-  double get displayGrandTotal =>
-      totalBundlePriceWithTax +
-      totalComboPriceWithTax +
-      cartProducts
-          .where(
-            (item) =>
-                !item.materialInfo.hidePrice &&
-                !item.materialInfo.type.typeBundle,
-          )
-          .fold<double>(
-            0,
-            (sum, item) => sum + item.finalPriceTotal,
-          ) +
-      displayTaxMaterial;
-
-  double get displaySubTotal =>
-      totalBundlesPrice +
-      totalComboPrice +
-      cartProducts
-          .where(
-            (item) =>
-                !item.materialInfo.hidePrice &&
-                !item.materialInfo.type.typeBundle,
-          )
-          .fold<double>(
-            0,
-            (sum, item) => sum + item.finalPriceTotal,
-          );
-
   int getQuantityOfProduct({required MaterialNumber productNumber}) {
     return cartProducts
             .where(
@@ -175,31 +146,12 @@ class CartState with _$CartState {
         0;
   }
 
-  //For display product tax
-  double get displayTaxMaterial => config.displaySubtotalTaxBreakdown
-      ? cartProducts
-          .where(
-            (item) =>
-                !item.materialInfo.hidePrice &&
-                !item.materialInfo.type.typeBundle &&
-                !item.materialInfo.type.typeCombo,
-          )
-          .fold<double>(
-            0,
-            (sum, item) =>
-                sum +
-                (item.price.finalPrice.getValue() *
-                    item.quantity *
-                    _totalTaxPercentInDouble /
-                    100),
-          )
-      : 0.0;
-
-  //For calculating Product tax
+  //Product tax
   double get taxMaterial => config.displaySubtotalTaxBreakdown
       ? cartProducts
           .where(
             (item) =>
+                !item.materialInfo.hidePrice &&
                 !item.materialInfo.type.typeBundle &&
                 !item.materialInfo.type.typeCombo,
           )
@@ -250,7 +202,6 @@ class CartState with _$CartState {
           )
       : 0.0;
 
-  double get displayTotalTax => displayTaxMaterial + taxCombo;
   double get totalTax => taxMaterial + taxCombo;
 
   double itemPrice({required int index}) {
@@ -322,7 +273,19 @@ class CartState with _$CartState {
                 previousValue + element.comboSubTotalExclTax,
           );
 
-  double get subTotal =>
+  double get totalMaterialsPriceHidePrice => cartProducts
+      .where(
+        (item) =>
+            !item.materialInfo.type.typeBundle &&
+            !item.materialInfo.type.typeCombo &&
+            !item.materialInfo.hidePrice,
+      )
+      .fold<double>(
+        0,
+        (sum, item) => sum + item.finalPriceTotal,
+      );
+
+  double get subTotalSubmit =>
       totalBundlesPrice + totalMaterialsPrice + totalComboPrice;
 
   PriceAggregate updatedCartProduct(MaterialNumber matNumber) =>
@@ -336,9 +299,12 @@ class CartState with _$CartState {
 
   double get totalMaterialsPriceWithTax => totalMaterialsPrice + taxMaterial;
 
+  double get totalMaterialsPriceHidePriceWithTax =>
+      totalMaterialsPriceHidePrice + taxMaterial;
+
   double get totalComboPriceWithTax => totalComboPrice + taxCombo;
 
-  double get grandTotal =>
+  double get grandTotalSubmit =>
       totalBundlePriceWithTax +
       totalMaterialsPriceWithTax +
       totalComboPriceWithTax;
@@ -349,6 +315,15 @@ class CartState with _$CartState {
             ? previousValue + 1
             : previousValue + element.bundle.materials.length,
       );
+
+  //Subtotal and total display with hidePrice for display on
+  double get grandTotalHidePriceMaterial =>
+      totalBundlePriceWithTax +
+      totalComboPriceWithTax +
+      totalMaterialsPriceHidePriceWithTax;
+
+  double get subTotalHidePriceMaterial =>
+      totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice;
 
   bool get isOOSOrderPresent =>
       cartProducts.any((element) => element.isAnyOOSItemPresentInCart);
@@ -497,4 +472,9 @@ class CartState with _$CartState {
             element.stockQuantity != 0 &&
             element.stockQuantity < element.quantity,
       );
+
+  List<PriceAggregate> get cartProductsComboSorted => List.from(cartProducts)
+    ..sort(
+      (a, b) => b.materialInfo.type.typeCombo ? 1 : -1,
+    );
 }

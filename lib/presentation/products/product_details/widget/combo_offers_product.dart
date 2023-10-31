@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -37,13 +38,23 @@ class ComboOffersProduct extends StatelessWidget {
 
         if (eligibilityBloc.salesOrgConfigs.enableComboDeals &&
             priceComboDeal != null) {
-          context.read<ComboDealListBloc>().add(
-                ComboDealListEvent.fetchMaterialDeal(
-                  salesOrganisation: eligibilityBloc.salesOrganisation,
-                  customerCodeInfo: eligibilityBloc.customerCodeInfo,
-                  comboDeals: priceComboDeal,
-                ),
-              );
+          if (priceComboDeal.category.type.isMaterialNumber) {
+            context.read<ComboDealListBloc>().add(
+                  ComboDealListEvent.fetchMaterialDeal(
+                    salesOrganisation: eligibilityBloc.salesOrganisation,
+                    customerCodeInfo: eligibilityBloc.customerCodeInfo,
+                    priceComboDeal: priceComboDeal,
+                  ),
+                );
+          } else {
+            context.read<ComboDealListBloc>().add(
+                  ComboDealListEvent.fetchPrincipleGroupDeal(
+                    salesOrganisation: eligibilityBloc.salesOrganisation,
+                    customerCodeInfo: eligibilityBloc.customerCodeInfo,
+                    priceComboDeal: priceComboDeal,
+                  ),
+                );
+          }
         }
       },
       child: BlocBuilder<ComboDealListBloc, ComboDealListState>(
@@ -132,15 +143,41 @@ class ComboOffersProduct extends StatelessWidget {
                                 contain: overrideQuantity.isNotEmpty,
                               ),
                             );
-                        context.read<ComboDealMaterialDetailBloc>().add(
-                              ComboDealMaterialDetailEvent.fetchComboDealDetail(
-                                salesConfigs: eligibilityState.salesOrgConfigs,
-                                comboDeal: comboDeal,
-                                locale: context.locale,
-                                parentMaterialNumber: materialNumber,
-                                comboMaterialsCurrentQuantity: overrideQuantity,
-                              ),
-                            );
+
+                        if (priceComboDeal?.category.type.isMaterialNumber ??
+                            false) {
+                          context.read<ComboDealMaterialDetailBloc>().add(
+                                ComboDealMaterialDetailEvent
+                                    .fetchComboDealDetail(
+                                  comboDeal: comboDeal,
+                                  locale: context.locale,
+                                  parentMaterialNumber: materialNumber,
+                                  comboMaterialsCurrentQuantity:
+                                      overrideQuantity,
+                                ),
+                              );
+                        } else {
+                          final productDetailAggregate = context
+                              .read<ProductDetailBloc>()
+                              .state
+                              .productDetailAggregate;
+
+                          final principalCode = productDetailAggregate
+                              .materialInfo.principalData.principalCode
+                              .getOrDefaultValue('');
+
+                          context.read<ComboDealMaterialDetailBloc>().add(
+                                ComboDealMaterialDetailEvent
+                                    .fetchComboDealPrincipal(
+                                  comboDeal: comboDeal,
+                                  principles: [principalCode],
+                                  comboMaterialsCurrentQuantity:
+                                      overrideQuantity,
+                                  locale: context.locale,
+                                ),
+                              );
+                        }
+
                         context.navigateTo(const ComboDetailPageRoute());
                       },
                       child: Text(

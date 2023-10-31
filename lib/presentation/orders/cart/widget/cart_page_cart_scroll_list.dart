@@ -101,7 +101,7 @@ class _CartPageCartScrollList extends StatelessWidget {
                         showManufacturerName: state.showManufacturerName(index),
                       );
                     },
-                    items: state.cartProducts,
+                    items: state.cartProductsComboSorted,
                   ),
           ),
         );

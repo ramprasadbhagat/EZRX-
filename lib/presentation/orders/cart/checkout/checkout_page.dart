@@ -180,7 +180,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   key: WidgetKeys.checkoutStickyGrandTotal,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: cartState.displayGrandTotal.toString(),
+                  price: cartState.grandTotalHidePriceMaterial.toString(),
                   title: context.tr('Grand Total: '),
                   priceLabelStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -212,8 +212,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             cartProducts:
                                 context.read<CartBloc>().state.cartProducts,
                             grandTotal:
-                                context.read<CartBloc>().state.grandTotal,
-                            orderValue: context.read<CartBloc>().state.subTotal,
+                                context.read<CartBloc>().state.grandTotalSubmit,
+                            orderValue:
+                                context.read<CartBloc>().state.subTotalSubmit,
                             totalTax: context.read<CartBloc>().state.totalTax,
                             data: context
                                 .read<AdditionalDetailsBloc>()

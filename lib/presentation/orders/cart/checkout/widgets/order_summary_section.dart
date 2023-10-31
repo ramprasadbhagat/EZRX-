@@ -34,7 +34,7 @@ class _OrderSummarySection extends StatelessWidget {
             ),
             PriceComponent(
               salesOrgConfig: salesOrgConfig,
-              price: cartState.displaySubTotal.toString(),
+              price: cartState.subTotalHidePriceMaterial.toString(),
               type: PriceStyle.summaryPrice,
             ),
           ],
@@ -55,7 +55,7 @@ class _OrderSummarySection extends StatelessWidget {
                   ),
                   PriceComponent(
                     salesOrgConfig: salesOrgConfig,
-                    price: cartState.displayTotalTax.toString(),
+                    price: cartState.totalTax.toString(),
                     type: PriceStyle.summaryPrice,
                   ),
                 ],
@@ -140,7 +140,7 @@ class _OrderSummarySection extends StatelessWidget {
             ),
             PriceComponent(
               salesOrgConfig: salesOrgConfig,
-              price: cartState.displayGrandTotal.toString(),
+              price: cartState.grandTotalHidePriceMaterial.toString(),
               type: PriceStyle.totalPrice,
             ),
           ],

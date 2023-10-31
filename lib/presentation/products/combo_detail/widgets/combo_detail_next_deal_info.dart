@@ -9,16 +9,21 @@ class ComboDetailNextDealInfo extends StatelessWidget {
     Key? key,
     required this.totalQty,
     required this.comboDeal,
+    required this.totalAmount,
   }) : super(key: key);
   final int totalQty;
+  final double totalAmount;
   final ComboDeal comboDeal;
 
   bool get _isBestDealAvailable => comboDeal.isBestDealAvailableOnCombo(
         totalQty: totalQty,
+        totalAmount: totalAmount,
       );
 
-  DiscountInfo get _buyMoreInfo =>
-      comboDeal.getNextEligibleComboDiscount(totalQty);
+  DiscountInfo get _buyMoreInfo => comboDeal.getNextEligibleComboDiscount(
+        totalQty: totalQty,
+        totalAmount: totalAmount,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +37,8 @@ class ComboDetailNextDealInfo extends StatelessWidget {
       margin: const EdgeInsets.only(left: 14, top: 8),
       decoration: BoxDecoration(
         color: _isBestDealAvailable
-            ? ZPColors.nextDiscountBG
-            : ZPColors.bestDiscountBG,
+            ? ZPColors.bestDiscountBG
+            : ZPColors.nextDiscountBG,
         borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),
@@ -43,31 +48,34 @@ class ComboDetailNextDealInfo extends StatelessWidget {
         children: [
           _isBestDealAvailable
               ? const Icon(
-                  Icons.bolt,
-                  color: ZPColors.nextTextBg,
+                  Icons.thumb_up_alt_outlined,
+                  color: ZPColors.bestDiscountTextBg,
                   size: 18,
                 )
               : const Icon(
-                  Icons.thumb_up_alt_outlined,
-                  color: ZPColors.bestDiscountTextBg,
+                  Icons.bolt,
+                  color: ZPColors.nextTextBg,
                   size: 18,
                 ),
           const SizedBox(width: 4),
           Text(
             _isBestDealAvailable
-                ? context.tr(
+                ? context.tr('Yay! You’ve got the best deal.')
+                : context.tr(
                     comboDeal.buyMoreInfoKey,
                     namedArgs: {
-                      'unit': comboDeal.getNextEligibleComboQty(totalQty),
-                      'discount': _buyMoreInfo.rate.abs().toString(),
+                      'unit': comboDeal.buyMoreInfoUnit(
+                        totalQty: totalQty,
+                        totalAmount: totalAmount,
+                      ),
+                      'discount': _buyMoreInfo.rateDisplay,
                     },
-                  )
-                : context.tr('Yay! You’ve got the best deal.'),
+                  ),
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   fontSize: 10,
                   color: _isBestDealAvailable
-                      ? ZPColors.nextTextBg
-                      : ZPColors.bestDiscountTextBg,
+                      ? ZPColors.bestDiscountTextBg
+                      : ZPColors.nextTextBg,
                 ),
           ),
         ],
