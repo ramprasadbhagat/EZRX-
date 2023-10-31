@@ -124,11 +124,13 @@ class _AttachmentsWithIcon extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 5.0),
                               child: Row(
                                 children: [
-                                  _AttachmentWidget(
-                                    poDocuments: state.orderHistoryDetails
-                                        .orderHistoryDetailsPoDocuments[index],
+                                  Expanded(
+                                    child: _AttachmentWidget(
+                                      poDocuments: state.orderHistoryDetails
+                                              .orderHistoryDetailsPoDocuments[
+                                          index],
+                                    ),
                                   ),
-                                  const SizedBox(width: 5),
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child: SvgPicture.asset(
