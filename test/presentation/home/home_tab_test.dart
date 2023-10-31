@@ -642,7 +642,7 @@ void main() {
       testWidgets('ProductTab Visible when product accessright is true',
           (tester) async {
         await tester.pumpWidget(
-          getWidget(widget: HomeNavigationTabbar()),
+          getWidget(widget: const HomeNavigationTabbar()),
         );
         await tester.pump();
 
@@ -706,7 +706,7 @@ void main() {
       testWidgets('ProductTab Visible when user role has AdminOrderAccess',
           (tester) async {
         await tester.pumpWidget(
-          getWidget(widget: HomeNavigationTabbar()),
+          getWidget(widget: const HomeNavigationTabbar()),
         );
         await tester.pump();
 
@@ -788,7 +788,8 @@ void main() {
             notificationList: notifications,
           ),
         );
-        await tester.pumpWidget(getWidget(widget: HomeNavigationTabbar()));
+        await tester
+            .pumpWidget(getWidget(widget: const HomeNavigationTabbar()));
         await tester.pump();
 
         final notificationWithBadgeIcon =
@@ -811,7 +812,8 @@ void main() {
             ),
           ),
         );
-        await tester.pumpWidget(getWidget(widget: HomeNavigationTabbar()));
+        await tester
+            .pumpWidget(getWidget(widget: const HomeNavigationTabbar()));
         await tester.pump();
 
         final notificationWithBadgeIcon =

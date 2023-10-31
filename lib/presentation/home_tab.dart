@@ -12,13 +12,12 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeNavigationTabbar extends StatelessWidget {
-  HomeNavigationTabbar({Key? key}) : super(key: key);
-
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  const HomeNavigationTabbar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +39,10 @@ class HomeNavigationTabbar extends StatelessWidget {
                           onWillPop: () async => false,
                           child: BlocBuilder<EligibilityBloc, EligibilityState>(
                             buildWhen: (previous, current) =>
-                                previous != current,
+                                previous.user != current.user,
                             builder: (context, state) {
                               return _CustomTabBar(
-                                routes: _getTabs(context),
+                                routes: _getTabs(state),
                               );
                             },
                           ),
@@ -71,21 +70,39 @@ class _CustomTabBarState extends State<_CustomTabBar>
     with TickerProviderStateMixin {
   TabController? tabController;
 
-  List<PageRouteInfo> _getRouteList(List<RouteItem> routes) =>
-      routes.map((e) => e.route).toList();
-
   @override
-  Widget build(BuildContext context) {
-    final routerList = _getRouteList(widget.routes);
+  void initState() {
+    super.initState();
     tabController = TabController(
       length: widget.routes.length,
       vsync: this,
     );
+  }
 
+  @override
+  void didUpdateWidget(covariant _CustomTabBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!listEquals(oldWidget.routes.routeList, widget.routes.routeList)) {
+      tabController?.dispose();
+      tabController = TabController(
+        length: widget.routes.length,
+        vsync: this,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    tabController?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Material(
       color: ZPColors.white,
       child: AutoTabsRouter.pageView(
-        routes: routerList,
+        routes: widget.routes.routeList,
         builder: (context, child, _) {
           final tabsRouter = AutoTabsRouter.of(context);
           tabController?.animateTo(tabsRouter.activeIndex);
@@ -110,11 +127,9 @@ class _CustomTabBarState extends State<_CustomTabBar>
                     );
                   },
                   labelStyle: Theme.of(context).textTheme.bodySmall,
-                  padding: const EdgeInsets.only(
-                    top: 8.0,
-                  ),
+                  padding: const EdgeInsets.only(top: 8.0),
                   labelPadding: EdgeInsets.zero,
-                  tabs: _getTabs(context)
+                  tabs: widget.routes
                       .map(
                         (item) => Tab(
                           icon: item.icon,
@@ -170,13 +185,11 @@ class _TopIndicatorBox extends BoxPainter {
   }
 }
 
-List<RouteItem> _getTabs(BuildContext context) {
+List<RouteItem> _getTabs(EligibilityState state) {
   return [
     homeTabRouteItem,
-    if (context.read<EligibilityBloc>().state.user.userCanAccessProducts)
-      productTabRouteItem,
-    if (context.read<EligibilityBloc>().state.user.userCanAccessOrderHistory)
-      ordersTabRouteItem,
+    if (state.user.userCanAccessProducts) productTabRouteItem,
+    if (state.user.userCanAccessOrderHistory) ordersTabRouteItem,
     notificationTabRouteItem,
     moreTabRouteItem,
   ];
@@ -262,4 +275,8 @@ class RouteItem {
     required this.icon,
     required this.label,
   });
+}
+
+extension RouteItemListExtension on List<RouteItem> {
+  List<PageRouteInfo> get routeList => map((e) => e.route).toList();
 }

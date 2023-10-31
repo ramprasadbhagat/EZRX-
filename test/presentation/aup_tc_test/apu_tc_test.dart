@@ -289,7 +289,7 @@ void main() {
                 create: (context) => creditAndInvoiceDetailsBloc,
               ),
             ],
-            child: HomeNavigationTabbar(),
+            child: const HomeNavigationTabbar(),
           ),
         ),
       );
@@ -438,7 +438,7 @@ void main() {
               create: (context) => mockAupTcBloc,
             ),
           ],
-          child: HomeNavigationTabbar(),
+          child: const HomeNavigationTabbar(),
         ),
       ),
     );
