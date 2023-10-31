@@ -107,14 +107,14 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
         documentDateTo != '-') {
       filterMap.add(
         _mapData(
-          field: 'documentDate',
+          field: 'postingDate',
           date: documentDateFrom,
           type: 'ge',
         ),
       );
       filterMap.add(
         _mapData(
-          field: 'documentDate',
+          field: 'postingDate',
           date: documentDateTo,
           type: 'le',
         ),
@@ -124,14 +124,14 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
         amountInTransactionCurrencyTo.isNotEmpty) {
       filterMap.add(
         _mapData(
-          field: 'amountInTransactionCurrency',
+          field: 'openAmountInTransCrcy',
           date: amountInTransactionCurrencyFrom,
           type: 'ge',
         ),
       );
       filterMap.add(
         _mapData(
-          field: 'amountInTransactionCurrency',
+          field: 'openAmountInTransCrcy',
           date: amountInTransactionCurrencyTo,
           type: 'le',
         ),

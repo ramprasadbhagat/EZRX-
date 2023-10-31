@@ -86,14 +86,14 @@ class AvailableCreditFilterDto with _$AvailableCreditFilterDto {
         amountInTransactionCurrencyTo.isNotEmpty) {
       filterMap.add(
         _mapData(
-          field: 'amountInTransactionCurrency',
+          field: 'openAmountInTransCrcy',
           date: amountInTransactionCurrencyFrom,
           type: 'ge',
         ),
       );
       filterMap.add(
         _mapData(
-          field: 'amountInTransactionCurrency',
+          field: 'openAmountInTransCrcy',
           date: amountInTransactionCurrencyTo,
           type: 'le',
         ),
